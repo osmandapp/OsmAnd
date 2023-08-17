@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
@@ -218,6 +220,11 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
 		}
+	}
+
+	protected void setTurnArrowPaintsColor(@ColorInt int color) {
+		attrs.paint3.setColor(color);
+		paintIconAction.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
 	}
 
 	protected void drawTurnArrow(Canvas canvas, Matrix matrix, float x, float y, float px, float py) {

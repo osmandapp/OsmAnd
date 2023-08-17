@@ -15,6 +15,23 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ColorUtilities {
 
+	public static float getColorsSquareDistance(@ColorInt int color1, @ColorInt int color2) {
+		int redDiff = Color.red(color1) - Color.red(color2);
+		int greenDiff = Color.green(color1) - Color.green(color2);
+		int blueDiff = Color.blue(color1) - Color.blue(color2);
+		float redmean = (Color.red(color1) + Color.red(color2)) / 2f;
+
+		float redCoeff = 2.0f + redmean / 255.0f;
+		float greenCoeff = 4.0f;
+		float blueCoeff = 2.0f + (255.0f - redmean) / 255.0f;
+
+		float redDelta = redCoeff * redDiff * redDiff;
+		float greenDelta = greenCoeff * greenDiff * greenDiff;
+		float blueDelta = blueCoeff * blueDiff * blueDiff;
+
+		return redDelta + greenDelta + blueDelta;
+	}
+
 	@ColorInt
 	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
 		// Counting the perceptive luminance - human eye favors green color...
@@ -343,5 +360,15 @@ public class ColorUtilities {
 	@ColorRes
 	public static int getLinksColorId(boolean nightMode) {
 		return nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
+	}
+
+	@ColorInt
+	public static int getOsmandIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getOsmandIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getOsmandIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 	}
 }

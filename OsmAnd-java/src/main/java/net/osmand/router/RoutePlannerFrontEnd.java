@@ -369,7 +369,7 @@ public class RoutePlannerFrontEnd {
 	                                                GpxPoint start, GpxPoint next) throws IOException {
 		// step back to find to be sure 
 		// 1) route point is behind GpxPoint - minPointApproximation (end route point could slightly ahead)
-		// 2) we don't miss correct turn i.e. points could be attached to muliple routes
+		// 2) we don't miss correct turn i.e. points could be attached to multiple routes
 		// 3) to make sure that we perfectly connect to RoadDataObject points
 		double STEP_BACK_DIST = Math.max(gctx.ctx.config.minPointApproximation, gctx.ctx.config.minStepApproximation);
 		double d = 0;
@@ -527,6 +527,10 @@ public class RoutePlannerFrontEnd {
 		}
 		if (!gctx.ctx.calculationProgress.isCancelled) {
 			preparation.prepareTurnResults(gctx.ctx, gctx.result);
+		}
+		for (RouteSegmentResult r : gctx.result) {
+			r.clearAttachedRoutes();
+			r.clearPreattachedRoutes();
 		}
 	}
 

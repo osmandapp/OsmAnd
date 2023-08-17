@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.osmedit;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
@@ -470,7 +471,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			RenderingRuleProperty property = iterator.next();
 			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
 				iterator.remove();
-				String id = OPEN_STREET_MAP + property.getAttrName();
+				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
 				adapter.addItem(ConfigureMapMenu.createRenderingProperty(adapter, mapActivity, INVALID_ID, property, id, nightMode));
 			}
 		}
@@ -626,11 +627,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public Drawable getAssetResourceImage() {
 		return app.getUIUtilities().getIcon(R.drawable.osm_editing);
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/osm-editing-plugin.html";
 	}
 
 	public static String getEditName(OsmPoint point) {

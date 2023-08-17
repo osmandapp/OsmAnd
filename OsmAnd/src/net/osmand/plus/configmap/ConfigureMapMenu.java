@@ -18,6 +18,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
@@ -262,7 +263,7 @@ public class ConfigureMapMenu {
 			} else if (ALPINE_HIKING_ATTR.equals(attrName)) {
 				adapter.addItem(createAlpineHikingItem(activity, attrName, nightMode));
 			} else {
-				String id = ROUTES_ID + attrName;
+				String id = ROUTES_ITEMS_ID_SCHEME + attrName;
 				int drawableId = getIconIdForAttr(attrName);
 				String name = AndroidUtils.getRenderingStringPropertyName(activity, attrName, property != null ? property.getName() : attrName);
 				CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
@@ -289,7 +290,7 @@ public class ConfigureMapMenu {
 		RenderingRuleProperty property = app.getRendererRegistry().getCustomRenderingRuleProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 		String defaultName = property != null ? property.getName() : attrName;
 
-		return new ContextMenuItem(ROUTES_ID + attrName)
+		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, defaultName))
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -325,7 +326,7 @@ public class ConfigureMapMenu {
 	                                            @Nullable RenderingRuleProperty property, boolean nightMode) {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 
-		return new ContextMenuItem(ROUTES_ID + attrName)
+		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, property != null ? property.getName() : attrName))
 				.setIcon(getIconIdForAttr(attrName))
 				.setSelected(pref.get())
@@ -343,7 +344,7 @@ public class ConfigureMapMenu {
 	                                              @Nullable RenderingRuleProperty property, boolean nightMode) {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 
-		return new ContextMenuItem(ROUTES_ID + attrName)
+		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, property != null ? property.getName() : attrName))
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -391,7 +392,7 @@ public class ConfigureMapMenu {
 		String previousValue = enabled || property == null ? pref.get() : property.getPossibleValues()[0];
 		String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, attrName, property != null ? property.getName() : attrName);
 
-		return new ContextMenuItem(ROUTES_ID + attrName)
+		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(propertyName)
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -426,7 +427,7 @@ public class ConfigureMapMenu {
 
 	private ContextMenuItem createTravelRoutesItem(@NonNull MapActivity activity, boolean nightMode) {
 		boolean selected = settings.SHOW_TRAVEL.get();
-		return new ContextMenuItem(ROUTES_ID + TRAVEL_ROUTES)
+		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + TRAVEL_ROUTES)
 				.setTitle(activity.getString(R.string.travel_routes))
 				.setIcon(getIconIdForAttr(TRAVEL_ROUTES))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)

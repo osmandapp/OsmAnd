@@ -18,7 +18,7 @@
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical|start"
             android:layout_marginStart="@dimen/card_padding"
             android:layout_marginLeft="@dimen/card_padding"
             android:background="@null"
@@ -34,23 +34,16 @@
                 osmand:srcCompat="@drawable/ic_action_close" />
         </FrameLayout>
 
-        <net.osmand.plus.widgets.TextViewEx
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/card_content_padding_large"
-            android:layout_marginLeft="@dimen/card_content_padding_large"
-            android:layout_weight="1"
-            android:text="@string/context_menu_edit_descr"
-            android:textColor="?attr/searchbar_text"
-            android:textSize="@dimen/dialog_header_text_size"
-            osmand:typeface="@string/font_roboto_medium" />
+		<androidx.legacy.widget.Space
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/btn_save_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="@dimen/content_padding_half"
             android:layout_marginRight="@dimen/content_padding_half">
 
@@ -76,10 +69,23 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/divider_color" />
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/property_name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/card_content_padding_large"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:text="@string/context_menu_edit_descr"
+		android:textColor="?attr/searchbar_text"
+		android:textSize="@dimen/dialog_header_text_size"
+		osmand:typeface="@string/font_roboto_medium" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding_minimal"
+		android:background="?attr/divider_color" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -91,15 +97,31 @@
         android:layout_marginRight="@dimen/content_padding"
         android:layout_marginBottom="@dimen/content_padding_half">
 
-        <net.osmand.plus.widgets.EditTextEx
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/card_and_list_background_basic"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_regular"
-            tools:text="Amsterdam is the Netherlands' capital and financial, cultural and creative centre with more than 850,000 inhabitants. Amsterdam is known for the canals that criss-cross the city, its impressive architecture and more than 1,500 bridges. The city has a heritage dating back to the Dutch Golden Age in the 17th century as well as a diverse art scene and a bustling nightlife." />
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/property_value"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/list_content_padding"
+			android:focusable="true"
+			android:focusableInTouchMode="true"
+			osmand:primaryColor="@color/active_color_primary_dark"
+			osmand:secondaryColor="?android:textColorSecondary"
+			osmand:hasClearButton="true"
+			android:layout_gravity="start"
+			>
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="numberDecimal"
+				android:scrollHorizontally="false"
+				android:maxLines="4"
+				android:gravity="start|center_vertical"
+				osmand:suffixTextColor="?android:textColorSecondary"
+				/>
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
     </ScrollView>
 

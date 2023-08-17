@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TrackFolder implements TracksGroup {
 
-	private final File dirFile;
+	private File dirFile;
 	private final TrackFolder parentFolder;
 	private final List<TrackItem> trackItems = new ArrayList<>();
 	private final List<TrackFolder> subFolders = new ArrayList<>();
@@ -43,6 +43,10 @@ public class TrackFolder implements TracksGroup {
 		return dirFile;
 	}
 
+	public void setDirFile(@NonNull File dirFile) {
+		this.dirFile = dirFile;
+	}
+
 	@NonNull
 	public String getDirName() {
 		return dirFile.getName();
@@ -64,28 +68,12 @@ public class TrackFolder implements TracksGroup {
 		return trackItems;
 	}
 
-	public void addSubFolder(@NonNull TrackFolder folder, boolean reloadCache) {
+	public void addSubFolder(@NonNull TrackFolder folder) {
 		subFolders.add(folder);
-
-		if (reloadCache) {
-			resetCashedData();
-		}
 	}
 
-	public void removeSubFolder(@NonNull TrackFolder folder, boolean reloadCache) {
-		subFolders.remove(folder);
-
-		if (reloadCache) {
-			resetCashedData();
-		}
-	}
-
-	public void addTrackItem(@NonNull TrackItem trackItem, boolean reloadCache) {
+	public void addTrackItem(@NonNull TrackItem trackItem) {
 		trackItems.add(trackItem);
-
-		if (reloadCache) {
-			resetCashedData();
-		}
 	}
 
 	@ColorInt

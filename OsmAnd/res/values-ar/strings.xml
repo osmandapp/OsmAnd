@@ -45,12 +45,12 @@
     <string name="recording_default_name">تسجيل</string>
     <string name="shared_string_control_stop">إيقاف</string>
     <string name="shared_string_control_start">بدء</string>
-    <string name="osmand_srtm_short_description_80_chars">ملحق الخطوط الكنتورية دون اتصال</string>
+    <string name="osmand_srtm_short_description_80_chars">ملحق أوسماند الإضافي لميزات توبو غير المتصلة بالإنترنت مثل خطوط الكنتور والتضاريس والانحدار</string>
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="map_widget_audionotes">الملاحظة صوتية</string>
     <string name="index_srtm_parts">أجزاء</string>
     <string name="index_srtm_ele">الخطوط الكنتورية</string>
-    <string name="srtm_plugin_name">الخطوط الكنتورية</string>
+    <string name="srtm_plugin_name">طوبوغرافيا</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
     <string name="download_srtm_maps">خرائط الخطوط الكنتورية</string>
@@ -496,14 +496,14 @@
 \n  * اضغط لفترة طويلة على نقطة لعرض وإرفاق الوصف. 
 \n  * اضغط على أداة القياس لمعرفة المزيد من الإجراءات.</string>
     <string name="layer_hillshade">طبقة التضاريس</string>
-    <string name="download_hillshade_maps">طبقة التضاريس</string>
+    <string name="download_hillshade_maps">التضاريس</string>
     <string name="local_indexes_cat_srtm">بيانات الخطوط الكنتورية</string>
-    <string name="srtm_paid_version_msg">من فضلك فكر في شراء ملحق الخطوط الكنتورية من Google Play لدعم المزيد من التطوير.</string>
-    <string name="srtm_paid_version_title">الخطوط الكنتورية</string>
+    <string name="srtm_paid_version_msg">من فضلك قم بشراء ملحق الطبوغرافيا من Google Play لدعم المزيد من التطوير.</string>
+    <string name="srtm_paid_version_title">ملحق الطبوغرافيا</string>
     <string name="recording_playing">جار تشغيل صوت من التّسجيل المحدد. 
 \n%1$s</string>
     <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. بحث في السّوق ؟</string>
-    <string name="rendering_attr_contourLines_description">مستوى تكبير الخطوط الكنتورية:</string>
+    <string name="rendering_attr_contourLines_description">العرض من مستوى التكبير (يتطلب بيانات خط الكنتور):</string>
     <string name="back_left">الأيسر الخلفي</string>
     <string name="left">إلى اليسار</string>
     <string name="front_left">الأيسر الأمامي</string>
@@ -551,7 +551,7 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح.
+    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ،وقابلية الملاحة ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح.
 \n
 \nالبيانات الأساسية تنشأ من SRTM و ASTER.
 \n
@@ -564,7 +564,7 @@
 \n - تشغيل كامل دون إنترنت( خزن خرائط التوجيه أو الخرائط الجانبيةالمنزلة في ذاكرة الجهاز)
 \n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
 \n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق
-\n - تراكب العديد من طبقات الخريطة ممكن ، مثل GPX أو مسارات التنقل ، النقاط المثيرة للاهتمام ، المفضلة ، خطوط الكنتور ، محطات النقل العام ، خرائط إضافية مع شفافية قابلة للتخصيص
+\n - تراكب العديد من طبقات الخريطة ممكن ، مثل GPX أو مسارات التنقل ، النقاط المثيرة للاهتمام ، المفضلة ، الطبوغرافيا ، محطات النقل العام ، خرائط إضافية مع شفافية قابلة للتخصيص
 \n - البحث دون اتصال عن العناوين والأماكن (النقاط المهمة)
 \n - التوجيه دون اتصال للمسافات متوسطة المدى
 \n - أوضاع السيارات والدراجات والمشاة مع اختياري:
@@ -596,7 +596,7 @@
 \n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
 \n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق
 \n - ميزة ويكيبيديا المحلية ( قم بتحميل نقاط الاهتمام لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية
-\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام ، الأماكن المفضلة، الخطوط المحيطية ، أماكن توقف النقل العمومي
+\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام ، الأماكن المفضلة،الطبوغرافيا، أماكن توقف النقل العمومي
 \n خرائط إضافية بشفافية قابلة للتعديل
 \n - البحث عن العناوين وأماكن الاهتمام دون إنترنت
 \n - تحديد الطريق لمسافات متوسطة المدى
@@ -685,7 +685,7 @@
     <string name="vector_data_missing">البيانات المحلية (التي لا تحتاج إلى ربط بالإنترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تحميلها بغرض استخدام الخرائط من دون اتصال.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nاضغط مطولا لعرض الخيارات"</string>
+\nاضغط مطولا للخيارات"</string>
     <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
@@ -1547,7 +1547,7 @@
     <string name="techical_articles_item">مقالات تقنية</string>
     <string name="versions_item">الإصدارات</string>
     <string name="feedback">الأصداء</string>
-    <string name="contact_us">اتصل بنا</string>
+    <string name="shared_string_contact">اتصل بنا</string>
     <string name="poi_context_menu_modify_osm_change">تعديل OSM</string>
     <string name="dashboard_or_drawer_title">لوحة التحكم أو شريط المراقبة</string>
     <string name="only_download_over_wifi">Wi-Fi فقط</string>
@@ -1923,7 +1923,7 @@
     <string name="route_stops_before">%1$s محطة توقف قبل</string>
     <string name="map_legend">مفتاح الخريطة</string>
     <string name="confirm_download_roadmaps">هل حقا تريد تحميل خريطة الطرق فقط، على الرغم من أنه لديك الخريطة (كاملة)؟</string>
-    <string name="activate_srtm_plugin">يجب تفعيل ملحق الخطوط الكنتورية</string>
+    <string name="activate_srtm_plugin">يجب تفعيل ملحق الطبوغرافيا</string>
     <string name="transport_search_before">مسار رحلة مسبق</string>
     <string name="transport_to_go_after">مسافة مسبقة</string>
     <string name="transport_to_go_before">المسافة اللاحقة</string>
@@ -2257,18 +2257,18 @@
     <string name="private_access_routing_req">تقع وجهتك في منطقة ذات وصول خاص. السماح باستخدام الطرق الخاصة لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
-    <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط الكنتورية لهذه المنطقة لعرضها.</string>
+    <string name="srtm_menu_download_descr">قم بتنزيل خريطة \"خطوط الكنتور\" لهذه المنطقة.</string>
     <string name="show_from_zoom_level">يبدأ العرض عند مستوى التكبير/التصغير</string>
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
-    <string name="srtm_purchase_header">لمشاهدة خطوط التضاريس على الخريطة، يجب تحميل الملحق أولاً.</string>
+    <string name="srtm_purchase_header">قم بشراء وتثبيت الملحق المساعد \"الطبوغرافيا\" لإظهار المناطق المرتفعة المتدرجة.</string>
     <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقاً لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقا تصبح الوجهة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقا (إن وجدت).</string>
     <string name="improve_coverage_install_mapillary_desc">يمكنك التقاط صور خاصة بك أو سلسلة من الصور وإرفاقها إلى هذا الموقع من الخريطة. للقيام بذلك تحتاج إلى تثبيت تطبيق مابيلاري من Google play.</string>
     <string name="hillshade_menu_download_descr">تحتاج إلى تحميل خريطة تراكب التلال لهذه المنطقة.</string>
-    <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط الكنتورية المساعد.</string>
+    <string name="hillshade_purchase_header">قم بتثبيت المكون الإضافي \"الطبوغرافيا\" لإظهار المناطق المرتفعة المتدرجة.</string>
     <string name="quick_action_add_first_intermediate_desc">زر لجعل مركز الشاشة أول وجهة وسيطة.</string>
     <string name="no_overlay">بدون طبقة</string>
     <string name="no_underlay">بدون طبقة</string>
@@ -2291,9 +2291,9 @@
     <string name="auto_split_recording_descr">بدء مقطع جديدة بعد فارق 6 دقائق، مسار جديد بعد فارق 2 ساعة، أو ملف جديد بعد فارق أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>
     <string name="route_is_too_long_v2">للمسافات الطويلة: يرجى إضافة وجهات اضافية وسطية إذا لم يتم العثور على مسار في غضون 10 دقائق.</string>
-    <string name="osmand_extended_description_part1">أوسماند(الملاحة والتوجيه الآلي عبر خرائط OSM) تطبيق خرائط وملاحة مجاني وعالمي عبر بيانات (OSM) عالية الجودة، وبجودة عالية.
+    <string name="osmand_extended_description_part1">أوسماند (اتجاهات التنقل التلقائية OSM) هو تطبيق خرائط وملاحة مع إمكانية الوصول إلى بيانات OSM المجانية والعالمية وعالية الجودة.
 \n
-\n استمتع بالملاحة بالصوت والصورة، وعرض (نقاط الاهتمام)، وإنشاء وتسجيل وإدارة مسارات GPX، واستخدام وتمثيل بيانات الخطوط الكنتورية وبيانات الارتفاعات (عن طريق الملحق)، كما يمكنك التنقل بأوضاع مختلفة مثل وضع القيادة، وركوب الدراجات والمشي، والتعديل على المواقع التي على الخريطة وغيرها.</string>
+\n استمتع بالملاحة الصوتية والبصرية ، وعرض النقاط المهمة (نقاط الاهتمام) ، وإنشاء وإدارة مسارات GPX ، باستخدام تصور خطوط الكنتور والمعلومات الطبوغرافية (من خلال الملحق المساعد) ، والاختيار بين القيادة وركوب الدراجات وأوضاع المشاة وتحرير OSM وغير ذلك الكثير.</string>
     <string name="osmand_extended_description_part2">التنقل عبر GPS 
 \n• يمكنك أن تختار بين وضع دون اتصال (لا رسوم تجوال عندما تكون في الخارج) أو بالإنترنت (أسرع) 
 \n• التوجيه الصوتي بالتفصيل يوجهك طوال الطريق (مسجل أو مدرج) 
@@ -2317,12 +2317,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">التزلج 
 \nملحق خرائط أوسماند للتزلج يمكنك من مشاهدة مسارات التزلج مع مستوى من التعقيد وبعض المعلومات الإضافية، كمواقع المصاعد والمرافق الأخرى.</string>
-    <string name="osmand_extended_description_part5">ركوب الدراجات الهوائية 
-\n• العثورعلى مسار دراجات على الخريطة 
-\n• التنقل في وضع ركوب الدراجات تقترح لك مسار دراجات 
-\n• يمكنك مشاهدة سرعتك وارتفاعك 
-\n• خيار تسجيل GPX يتيح لك تسجيل رحلتك ومشاركتها 
-\n• عبر ملحق إضافي يمكنك عرض الخطوط الكنتورية والتضاريس</string>
+    <string name="osmand_extended_description_part5">ركوب الدراجات الهوائية
+\n• العثورعلى مسار دراجات على الخريطة
+\n• التنقل في وضع ركوب الدراجات تقترح لك مسار دراجات
+\n• يمكنك مشاهدة سرعتك وارتفاعك
+\n• خيار تسجيل GPX يتيح لك تسجيل رحلتك ومشاركتها
+\n• عبر ملحق إضافي يمكنك عرض التضاريس والخطوط الكنتورية</string>
     <string name="osmand_extended_description_part6">المشي، التنزه، جولة في المدينة 
 \n• الخريطة تظهر لك ممرات المشي والتنزه 
 \n• ويكيبيديا سيخبرك الكثير اثناء جولتك وبلغتك المفضلة 
@@ -2344,11 +2344,11 @@
 \n• أنتاركتيكا: * 
 \nمعظم البلدان في جميع أنحاء العالم متاحة للتحميل! 
 \nاحصل على برنامج تنقل موثوق به في بلدك - سواءاً في فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، هولندا، الولايات المتحدة الأمريكية، روسيا، البرازيل أو أي دولة أخرى.</string>
-    <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية. 
-\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط الكنتورية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير. 
-\n 
-\nأوسماند بلس هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، بتمويل لتطوير الميزات الجديدة والحصول على آخر التحديثات. 
-\n 
+    <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية.
+\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور الطبوغرافيا، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير.
+\n
+\nأوسماند بلس هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، بتمويل لتطوير الميزات الجديدة والحصول على آخر التحديثات.
+\n
 \n بعض الميزات الرئيسية:</string>
     <string name="osmand_plus_extended_description_part2">الملاحة
 \n • يعمل على الإنترنت (سريع) أو في وضع غير متصل (لا رسوم تجوال خارج الوطن) 
@@ -2998,7 +2998,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
     <string name="shared_string_calculate">حساب</string>
     <string name="shared_string_osmand_usage">المستخدم</string>
-    <string name="shared_sting_tiles">الطبقات</string>
+    <string name="shared_string_tiles">الطبقات</string>
     <string name="shared_string_maps">الخرائط</string>
     <string name="shared_string_memory_tb_desc">تيرا بايت %1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3041,7 +3041,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة عند التوجيه.</string>
     <string name="layer_osm_edits">تحرير خرائط OSM</string>
     <string name="quick_action_contour_lines_descr">زر إظهار أو إخفاء الخطوط المحيطية على الخريطة.</string>
-    <string name="quick_action_hillshade_descr">زر لإظهار أو إخفاء التلال على الخريطة.</string>
+    <string name="quick_action_hillshade_descr">زر لإظهار وإخفاء التلال على الخريطة.</string>
     <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام.</string>
     <string name="export_profile">تصدير الوضع</string>
     <string name="exported_osmand_profile">وضع أوسماند: %1$s</string>
@@ -3519,7 +3519,7 @@
     <string name="add_description">إضافة وصف</string>
     <string name="delete_description">حذف الوصف</string>
     <string name="quick_action_terrain_descr">زر لإظهار طبقة التضاريس أو إخفائها على الخريطة.</string>
-    <string name="download_slope_maps">المنحدرات</string>
+    <string name="download_slope_maps">المنحدر</string>
     <string name="shared_string_hillshade">التضاريس</string>
     <string name="terrain_empty_state_text">إظهار التلال أو المنحدرات على الخريطة. اقرأ المزيد عن أنواع هذه الخرائط على موقعنا.</string>
     <string name="shared_string_legend">عنوان تفسيري</string>
@@ -3845,7 +3845,7 @@
     <string name="sort_name_descending">الاسم: أ – ي</string>
     <string name="sort_name_ascending">الاسم: أ – ي</string>
     <string name="start_finish_icons">أيقونات البدء والانتهاء</string>
-    <string name="contour_lines_thanks">شكرا لشرائك \"خطوط الكنتور\"</string>
+    <string name="contour_lines_thanks">شكرا لشرائك \"طبوغرافيا\"</string>
     <string name="osm_live_payment_desc_hw">يتم احتساب الاشتراك للفترة المحددة. قم بإلغائه في AppGallery في أي وقت تريد.</string>
     <string name="osm_live_payment_subscription_management_hw">يتم الخصم من حساب AppGallery الخاص بك عند تأكيد الشراء.
 \n
@@ -4128,7 +4128,7 @@
     <string name="user_points">نقاط المستخدم</string>
     <string name="output">الإخراج</string>
     <string name="srtm_unit_format">متغير وحدة خطوط الكفاف (الكنتور)</string>
-    <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
+    <string name="srtm_download_list_help_message">أوسماند يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="srtm_download_single_help_message">الرجاء تحديد المتغير. ستحتاج إلى إعادة تنزيل الملف لتغيير الشكل.</string>
     <string name="shared_string_feet">قدم</string>
     <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
@@ -4181,7 +4181,7 @@
     <string name="backup_now">النسخ الاحتياطي الآن</string>
     <string name="make_backup">إجراء نسخة احتياطية</string>
     <string name="make_backup_descr">هناك العديد من التغييرات على هذا الجهاز، يرجى إجراء نسخة احتياطية من هذه البيانات حتى لا تفقدها.</string>
-    <string name="backup_conflicts">المشاكل</string>
+    <string name="backup_conflicts">التعارض</string>
     <string name="backup_confilcts_descr">تعذر تحميل بعض الملفات إلى الخادم لأنه تم تخزين إصدار أحدث على الخادم.</string>
     <string name="backup_view_conflicts">عرض التعارضات</string>
     <string name="backup_no_internet_descr">تحقق من اتصالك بالإنترنت وقم بالتنزيل مرة أخرى.</string>
@@ -4220,14 +4220,14 @@
     <string name="send_logcat_log">إرسال سجل السجلات</string>
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="purchases_feature_desc_nautical">الحصول على معلومات العمق البحري</string>
-    <string name="purchases_feature_desc_terrain">خطوط محيطية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
+    <string name="purchases_feature_desc_terrain">خطوط كنتورية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
     <string name="purchases_feature_desc_wikivoyage">استكشف ويكي الرحلات دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_wikipedia">يوفر جميع مقالات ويكيبيديا المتعلقة بالأماكن في وضع عدم الاتصال ، مما يساعدك على التعرف على الأماكن التي تزورها في رحلتك من خلال نقرات بسيطة على الخريطة. لا بد من تنزيل ملفات خرائط ويكيبيديا للمناطق المعنية مسبقا.</string>
     <string name="purchases_feature_desc_combined_wiki">استكشف مقالات ويكيبيديا أثناء التنقل ، بدون اتصال بالإنترنت. البيانات غير المتصلة بالإنترنت مقسمة على البلدان ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_monthly_map_updates">احصل على التحديثات الشهرية المنتظمة للخرائط غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_hourly_map_updates">احصل على إمكانية الوصول إلى تحديث الخرائط بشكل متكرر، اختر بين: تحديثات كل ساعة أو يومية أو أسبوعية. يتم تحميل التحديثات بشكل متزايد، فقط للمنطقة التي تم تغييرها.</string>
-    <string name="purchases_feature_desc_osmand_cloud">احصل على أوسماند كلاود لتخزين جميع بيانات أوسماند عبر الإنترنت. لن تفقد بياناتك بعد إعادة التثبيت. نسخ الاحتياطي واستعادة جميع المعلومات بسهولة.</string>
+    <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بيانات أوسماند عبر الإنترنت. لن تفقد بياناتك بعد إعادة التثبيت. نسخ الاحتياطي واستعادة جميع المعلومات بسهولة.</string>
     <string name="unlimited_map_downloads">تنزيلات خرائط غير محدودة</string>
     <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
@@ -4250,7 +4250,7 @@
     <string name="complete_purchase">الشراء الكامل</string>
     <string name="regular_price">السعر العادي</string>
     <string name="from_with_param">من %1$s</string>
-    <string name="backup_delete_types_descr">حذف كافة البيانات لأنواع البيانات المهملة من سحابة OsmAnd؟</string>
+    <string name="backup_delete_types_descr">حذف كافة البيانات لأنواع البيانات المهملة من سحابة أوسماند؟</string>
     <string name="backup_delete_types">حذف بيانات الأنواع المعطلة</string>
     <string name="shared_string_discussion">مناقشة</string>
     <string name="shared_string_view_all">عرض الكل</string>
@@ -4966,7 +4966,7 @@
     <string name="map_rendering_engine_v2">عرض 3D</string>
     <string name="map_rendering_engine">طريقة عرض الخريطة</string>
     <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات الاداة الخاصة بالطقس.</string>
-    <string name="weather_plugin_description">يوفر البرنامج الطقس المساعد
+    <string name="weather_plugin_description">يوفر الملحق المساعد الطقس
 \n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
 \n- ويدجت يعتمد على الموقع
 \n- خطوط متساوية لدرجة الحرارة / الضغط
@@ -5057,14 +5057,14 @@
     <string name="cloud_changes_will_be_dismissed">سيتم رفض التغييرات السحابية</string>
     <string name="local_file_will_be_restored">ستتم استعادة الملف المحلي</string>
     <string name="local_changes_will_be_dismissed">سيتم رفض التغييرات المحلية</string>
-    <string name="cloud_conflicts">المشاكل</string>
+    <string name="cloud_conflicts">التعارض</string>
     <string name="cloud_conflict">نزاع</string>
     <string name="upload_all">رفع الكل</string>
     <string name="cloud_recent_changes">التغييرات</string>
     <string name="cloud_all_changes_uploaded">جميع التغييرات المحملة</string>
     <string name="cloud_all_changes_downloaded">جميع التغييرات المحملة</string>
-    <string name="cloud_all_changes_uploaded_descr">تتم مزامنة جميع التغييرات التي تم إجراؤها على هذا الجهاز مع أوسماند كلاود.</string>
-    <string name="cloud_no_conflicts">لا يوجد نزاع.</string>
+    <string name="cloud_all_changes_uploaded_descr">تتم مزامنة جميع التغييرات التي تم إجراؤها على هذا الجهاز مع سحابة أوسماند.</string>
+    <string name="cloud_no_conflicts">لا يوجد تعارض.</string>
     <string name="download_cloud_version">تنزيل الإصدار السحابي</string>
     <string name="shared_string_do_not_exist">غير موجود</string>
     <string name="choose_what_to_sync">اختيار ما تريد مزامنته</string>
@@ -5296,12 +5296,12 @@
     <string name="save_track_external_sensors_data">بيانات</string>
     <string name="there_are_no_connected_sensors_of_this_type">لا توجد أجهزة استشعار متصلة من هذا النوع</string>
     <string name="error_calculate">نتيجة الحساب فارغة</string>
-    <string name="calculate_offline_altitude_descr">احسب الارتفاع في وضع دون اتصال ، بناءًا على بيانات خريطة الارتفاع. يمكن استخدام الاختلافات مقابل الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
+    <string name="calculate_offline_altitude_descr">حساب الارتفاع في وضع عدم الاتصال ، بناء على بيانات خريطة التضاريس (ثلاثية الأبعاد). يمكن مقارنة الاختلافات مع الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
     <string name="calculate_offline">حساب دون اتصال بالنت</string>
     <string name="power_watts_unit">واتس</string>
     <string name="revolutions_per_minute_unit">.RPM</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
-    <string name="terrain_map">خريطة التضاريس</string>
+    <string name="terrain_map">خريطة التضاريس (3D)</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
     <string name="relief_3d">تضاريس 3D</string>
     <string name="osmand_cloud_deleted_account_descr">تم حذف الحساب وجميع البيانات من OsmAnd Cloud.</string>
@@ -5316,9 +5316,9 @@
     <string name="folder_export_empty_error">لا شيء للتصدير ، المجلد فارغ</string>
     <string name="delete_account">حذف الحساب</string>
     <string name="verify_account">تحقق من حسابك</string>
-    <string name="free_favorites_backup_description">سجل في OsmAnd Cloud للحصول على نسخة احتياطية مجانية للمفضلة والإعدادات.</string>
+    <string name="free_favorites_backup_description">سجل في سحابة أوسماند للحصول على نسخة احتياطية مجانية للمفضلة والإعدادات.</string>
     <string name="free_favorites_backup">نسخ احتياطي مجاني للمفضلة</string>
-    <string name="get_osmand_cloud">احصل على OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">احصل على سحابة أوسماند</string>
     <string name="free_account">حساب مجاني</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">لن يؤدي هذا إلى إلغاء اشتراكك في OsmAnd Pro.</string>
     <string name="manage_subscriptions">إدارة الاشتراكات.</string>
@@ -5329,7 +5329,7 @@
     <string name="deleting_complete">اكتمل الحذف</string>
     <string name="osmand_cloud_deletion_account_warning">سيكون حسابك وجميع تفاصيله %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">جميع البيانات من OsmAnd Cloud ستكون %1$s. ستظل البيانات الموجودة على الجهاز كما هي.</string>
-    <string name="terrain_category_description">الخطوط الكنتورية للتضاريس وخريطة التلال الكاملة مع الظلال الداكنة وخرائط المنحدرات بالألوان لإظهار القمم والأراضي المنخفضة.</string>
+    <string name="terrain_category_description">الخطوط الكنتورية وخريطة التضاريس الكاملة مع الظلال الداكنة وخرائط المنحدرات بالألوان لإظهار القمم والأراضي المنخفضة.</string>
     <string name="verify_account_deletion_descr">نحن بحاجة للتحقق من حسابك قبل حذفه. 
 \n
 \nالرجاء إدخال عنوان البريد الإلكتروني الذي قمت بالتسجيل به. سيتم إرسال كلمة مرور لمرة واحدة للخطوة التالية.</string>
@@ -5400,14 +5400,28 @@
     <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
     <string name="routing_attr_hazmat_category_usa_2_name">غازات</string>
     <string name="dangerous_goods_description">في بعض الطرق والأنفاق يحظر نقل المواد الخطرة.</string>
-    <string name="rendering_attr_alpineHiking_name">تصنيف الصعوبة</string>
+    <string name="rendering_attr_alpineHiking_name">تصنيف الصعوبات</string>
     <string name="write_heading">كتابة العنوان</string>
     <string name="rendering_value_caiScale_description">نادي ألبينو الإيطالي (نادي ألبين الإيطالي)</string>
     <string name="rendering_value_sacScale_description">نادي الألب السويسري</string>
-    <string name="rendering_attr_alpineHiking_description">أنواع تصنيف الصعوبة للطرق.</string>
+    <string name="rendering_attr_alpineHiking_description">أنواع تصنيف صعوبة المسارات.</string>
     <string name="write_heading_description">حفظ العنوان لكل نقطة مسار أثناء التسجيل</string>
-    <string name="rendering_value_sacScale_name">SAC</string>
-    <string name="feature_available_as_part_of_plan">%1$s متاح كجزء من خطة %2$s</string>
+    <string name="rendering_value_sacScale_name">مقياس SAC</string>
+    <string name="feature_available_as_part_of_plan">%1$s متوفر كجزء من %2$s خطة</string>
     <string name="shared_string_included">متضمن</string>
     <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="write_bearing_description">حفظ الوجهة لكل نقطة متابعة خلال التسجيل</string>
+    <string name="write_bearing">كتابة الاتجاه</string>
+    <string name="local_indexes_category_terrain">خرائط التضاريس (3D)</string>
+    <string name="hillshade_slope">التضاريس، الانحدار</string>
+    <string name="glide_ratio_to_target">نسبة الاندار إلى الهدف</string>
+    <string name="map_widget_group_glide_ratio">نسبة الانحدار</string>
+    <string name="map_widget_group_glide_desc">ويدجت عرض نسبة الانحدار أو متوسطه إلى الهدف للرحلة الحالية.</string>
+    <string name="map_widget_glide_average_desc">يعرض متوسط معدل الانحدار للفترة المحددة.</string>
+    <string name="map_widget_glide_target_desc">يعرض نسبة الانحدار المطلوبة للوصول إلى النقطة المستهدفة.</string>
+    <string name="average_glide_time_interval_desc">حدد الفاصل الزمني لحساب متوسط الانحدار.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">متوسط نسبة الانحدار</string>
+    <string name="wheel_circumference">محيط العجلة</string>
+    <string name="external_sensor_name_property_description">اسم المستشعر</string>
 </resources>

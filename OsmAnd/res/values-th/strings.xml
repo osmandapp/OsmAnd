@@ -119,7 +119,7 @@
     <string name="delete_folder">ลบโฟลเดอร์</string>
     <string name="show_all_tracks_on_the_map">แสดงแทรกทั้งหมดบนแผนที่</string>
     <string name="rssi_widget_desc">แสดงระดับ RSSI ของอุปกรณ์ายนอกของคุณ</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">โฟลเดอร์นี้ยังไม่เส้นทาง</string>
     <string name="tracks_empty_folder">โฟลเดอร์เปล่า</string>
     <string name="track_not_recorded">ไม่ได้บันทึก</string>

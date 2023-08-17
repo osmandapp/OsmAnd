@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.NAV_ADD_FIRST_INTERMEDIATE_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavAddFirstIntermediateAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(22,
+	public static final QuickActionType TYPE = new QuickActionType(NAV_ADD_FIRST_INTERMEDIATE_ACTION_ID,
 			"nav.intermediate.add", NavAddFirstIntermediateAction.class).
 			nameRes(R.string.quick_action_add_first_intermediate).iconRes(R.drawable.ic_action_intermediate).nonEditable().
 			category(QuickActionType.NAVIGATION);

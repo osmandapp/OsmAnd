@@ -140,6 +140,19 @@ public class FileUtils {
 		}
 	}
 
+	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
+	                                  @NonNull File srcDir, @NonNull File destDir) {
+		for (File srcFile : files) {
+			String path = srcFile.getAbsolutePath();
+			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
+
+			File destFile = new File(newPath);
+			if (destFile.exists()) {
+				updateRenamedGpx(app, srcFile, destFile);
+			}
+		}
+	}
+
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
 		if (file.exists()) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();

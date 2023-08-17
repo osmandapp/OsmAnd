@@ -1,5 +1,7 @@
 package net.osmand.util;
 
+import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -10,8 +12,6 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
 
 
 /**
@@ -31,6 +31,7 @@ public class MapUtils {
 	public static final double MIN_LONGITUDE = -180.0;
 	public static final double MAX_LONGITUDE = 180.0;
 	public static final double LONGITUDE_TURN = 360.0;
+	public static final double DEFAULT_LATLON_PRECISION = 0.00001;
 
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
@@ -178,7 +179,7 @@ public class MapUtils {
 		        Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		//return R * c * 1000;
-		// simplyfy haversine:
+		// simplify haversine:
 		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
 	}
 
@@ -255,7 +256,7 @@ public class MapUtils {
 
 
 	/**
-	 * Theses methods operate with degrees (evaluating tiles & vice versa)
+	 * These methods operate with degrees (evaluating tiles & vice versa)
 	 * degree longitude measurements (-180, 180) [27.56 Minsk]
 	 * // degree latitude measurements (90, -90) [53.9]
 	 */
@@ -735,9 +736,19 @@ public class MapUtils {
 	}
 
 	public static boolean areLatLonEqual(Location l, double lat, double lon) {
-		return l != null
-				&& Math.abs(l.getLatitude() - lat) < 0.00001
-				&& Math.abs(l.getLongitude() - lon) < 0.00001;
+		return l != null && areLatLonEqual(l.getLatitude(), l.getLongitude(), lat, lon);
+	}
+
+	public static boolean areLatLonEqual(LatLon l1, LatLon l2) {
+		return l1 == null && l2 == null || (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));
+	}
+
+	public static boolean areLatLonEqual(LatLon l, double lat, double lon) {
+		return l != null && areLatLonEqual(l.getLatitude(), l.getLongitude(), lat, lon);
+	}
+
+	public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
+		return Math.abs(lat1 - lat2) < DEFAULT_LATLON_PRECISION && Math.abs(lon1 - lon2) < DEFAULT_LATLON_PRECISION;
 	}
 
 	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {
@@ -745,8 +756,8 @@ public class MapUtils {
 				&& Math.abs(l.getLatitude() - lat) < 0.0000001
 				&& Math.abs(l.getLongitude() - lon) < 0.0000001;
 	}
-	
-	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing){
+
+	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing) {
 		double radius = EARTH_RADIUS_A;
 
 		double d = distance / radius; // angular distance in radians
@@ -820,5 +831,18 @@ public class MapUtils {
 			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return dist;
+	}
+
+	public static float calculateGlideRatio(LatLon l1, LatLon l2, double altitude1, double altitude2) {
+		double distance = getDistance(l1, l2);
+		double difference = altitude1 - altitude2;
+		return calculateGlideRatio(distance, difference);
+	}
+
+	public static float calculateGlideRatio(double distance, double difference) {
+		if (distance > 0 && difference != 0) {
+			return (float) (distance / difference);
+		}
+		return 0;
 	}
 }

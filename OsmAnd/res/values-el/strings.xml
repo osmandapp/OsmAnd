@@ -2551,7 +2551,7 @@
     <string name="techical_articles_item">Τεχνικά άρθρα</string>
     <string name="versions_item">Εκδόσεις</string>
     <string name="feedback">Ανατροφοδότηση</string>
-    <string name="contact_us">Επαφή</string>
+    <string name="shared_string_contact">Επαφή</string>
     <string name="map_legend">Υπόμνημα χάρτη</string>
     <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Συνέχεια;</string>
     <string name="save_poi_without_poi_type_message">Αποθήκευση ΣΕ χωρίς τύπο;</string>
@@ -3200,7 +3200,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Σύνδεση</string>
     <string name="shared_string_calculate">Υπολογισμός</string>
     <string name="shared_string_osmand_usage">Χρήση OsmAnd</string>
-    <string name="shared_sting_tiles">Πλακίδια</string>
+    <string name="shared_string_tiles">Πλακίδια</string>
     <string name="shared_string_maps">Χάρτες</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

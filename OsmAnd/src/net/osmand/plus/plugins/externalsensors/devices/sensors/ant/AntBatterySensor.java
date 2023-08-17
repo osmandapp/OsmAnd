@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pccbase.AntPlusCommonPcc;
+import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntCommonDevice;
@@ -103,13 +104,16 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeBatteryStatusEvent((estTimestamp,
-		                                                     eventFlags, cumulativeOperatingTime,
-		                                                     batteryVoltage, batteryStatus,
-		                                                     cumulativeOperatingTimeResolution, numberOfBatteries,
-		                                                     batteryIdentifier) -> {
-			batteryData = new BatteryData(estTimestamp, cumulativeOperatingTime);
-		});
+		AntPlusCommonPcc pcc = getAntDevice().getPcc();
+		if(pcc != null) {
+			pcc.subscribeBatteryStatusEvent((estTimestamp,
+			                                 eventFlags, cumulativeOperatingTime,
+			                                 batteryVoltage, batteryStatus,
+			                                 cumulativeOperatingTimeResolution, numberOfBatteries,
+			                                 batteryIdentifier) -> {
+				batteryData = new BatteryData(estTimestamp, cumulativeOperatingTime);
+			});
+		}
 	}
 
 	@Override

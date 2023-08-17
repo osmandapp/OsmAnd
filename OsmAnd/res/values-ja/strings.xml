@@ -1773,7 +1773,7 @@ POIの更新は利用できません</string>
     <string name="techical_articles_item">技術的項目</string>
     <string name="versions_item">バージョン履歴</string>
     <string name="feedback">フィードバック</string>
-    <string name="contact_us">問い合わせ先</string>
+    <string name="shared_string_contact">問い合わせ先</string>
     <string name="map_legend">マップの簡易説明</string>
     <string name="save_poi_without_poi_type_message">種類を指定せずにPOIを保存しますか？</string>
     <string name="poi_context_menu_modify_osm_change">修正をOSMに反映</string>
@@ -3159,7 +3159,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
     <string name="shared_string_calculate">計算する</string>
     <string name="shared_string_osmand_usage">OsmAndの合計使用容量</string>
-    <string name="shared_sting_tiles">タイル</string>
+    <string name="shared_string_tiles">タイル</string>
     <string name="shared_string_maps">マップ</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

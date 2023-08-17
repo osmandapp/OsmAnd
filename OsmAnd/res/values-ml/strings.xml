@@ -1149,7 +1149,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="new_version">"പുതിയ പതിപ്പ് "</string>
     <string name="map_viewing_item">ഭൂപടം കാണിക്കുക</string>
-    <string name="contact_us">"സമ്പര്‍ക്കം "</string>
+    <string name="shared_string_contact">"സമ്പര്‍ക്കം "</string>
     <string name="dashboard_or_drawer_title">"മെനുവോ  ഡാഷ് ബോര്‍ഡോ  തീരുമാനം"</string>
     <string name="daily">ദിവസവും</string>
     <string name="shared_string_filters">അരിപ്പകള്‍</string>

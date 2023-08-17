@@ -939,7 +939,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Ühendus</string>
     <string name="shared_string_calculate">Arvuta</string>
     <string name="shared_string_osmand_usage">OsmJa kasutamine</string>
-    <string name="shared_sting_tiles">Paanid</string>
+    <string name="shared_string_tiles">Paanid</string>
     <string name="shared_string_maps">Kaardid</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3043,7 +3043,7 @@
     <string name="instalation_troubleshooting_item">Paigaldamine ja tõrkeotsing</string>
     <string name="techical_articles_item">Tehnilised artiklid</string>
     <string name="versions_item">Versioonid</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="planning_trip_item">Reisi planeerimine</string>
     <string name="map_legend">Kaardi legend</string>
     <string name="feedback">Tagasiside</string>

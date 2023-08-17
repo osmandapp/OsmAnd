@@ -44,7 +44,7 @@ public class NativeCoreContext {
 	}
 
 	public static void init(@NonNull OsmandApplication app) {
-		if (!init && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		if (!init && Version.isOpenGlAvailable(app)) {
 			if (!NativeCore.isLoaded()) {
 				CoreResourcesFromAndroidAssets assets = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app);
 				File fontDir = app.getAppPath(IndexConstants.FONT_INDEX_DIR);
@@ -70,15 +70,18 @@ public class NativeCoreContext {
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.LIVE_INDEX_DIR).getAbsolutePath(), false);
+				if (app.getSettings().SHOW_TRAVEL.get()) {
+					obfsCollection.addDirectory(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getAbsolutePath(), false);
+				}
 				obfsCollectionsByProviderType.put(ProviderType.MAIN, obfsCollection);
 
 				ObfsCollection contourLinesObfsCollection = null;
 
-				if (PluginsHelper.isActive(NauticalMapsPlugin.class) ||	InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+				if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseHelper.isDepthContoursPurchased(app)) {
 					File nauticalIndexDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 					if (!nauticalIndexDir.exists()) {
 						nauticalIndexDir.mkdir();
-					}			
+					}
 					obfsCollection.addDirectory(nauticalIndexDir.getAbsolutePath(), false);
 				}
 				if (PluginsHelper.isActive(SRTMPlugin.class) ||	InAppPurchaseHelper.isContourLinesPurchased(app)) {

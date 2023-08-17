@@ -255,7 +255,7 @@ public class SelectedTracksHelper {
 	}
 
 	public void loadTabsSortModes() {
-		Map<String, String> tabsSortModes = settings.getTrackTabsSortModes();
+		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		if (!Algorithms.isEmpty(tabsSortModes)) {
 			for (Entry<String, String> entry : tabsSortModes.entrySet()) {
 				TrackTab trackTab = trackTabs.get(entry.getKey());

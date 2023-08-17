@@ -319,16 +319,16 @@ public class OpeningHoursParser {
 			// make exception for overlapping times i.e.
 			// (1) Mo 14:00-16:00; Tu off
 			// (2) Mo 14:00-02:00; Tu off
-			// in (2) we need to check first rule even though it is against specification
+			// in (2) we need to check first rule even though it is against specification but many OSM still treat it
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-			boolean overlap = hasOverlappingRules(rules);
+			boolean overlap = hasRulesOverlapDayBackwardCompatible(rules);
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0 ; i--) {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
-					boolean checkNext = isCheckNextNeeded(cal, rules, i, rule);
+					boolean checkNextNotNeeded = overlap || !isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && checkNext)) {
+					if (open || !checkNextNotNeeded) {
 						return open;
 					}
 				}
@@ -503,14 +503,14 @@ public class OpeningHoursParser {
 			// in (2) we need to check first rule even though it is against specification
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			String ruleClosed = null;
-			boolean overlap = hasOverlappingRules(rules);
+			boolean overlap = hasRulesOverlapDayBackwardCompatible(rules);
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0; i--) {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
-					boolean checkNext = isCheckNextNeeded(cal, rules, i, rule);
+					boolean checkNextNotNeeded = overlap || !isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && checkNext)) {
+					if (open || !checkNextNotNeeded) {
 						return rule.toLocalRuleString();
 					} else {
 						ruleClosed = rule.toLocalRuleString();
@@ -533,11 +533,11 @@ public class OpeningHoursParser {
 			return checkNext;
 		}
 
-		private boolean hasOverlappingRules(ArrayList<OpeningHoursRule> rules) {
+		private boolean hasRulesOverlapDayBackwardCompatible(ArrayList<OpeningHoursRule> rules) {
 			boolean overlap = false;
 			for (int i = rules.size() - 1; i >= 0; i--) {
 				OpeningHoursRule r = rules.get(i);
-				if (r.hasOverlapTimes()) {
+				if (r.hasOverlapTimesOverDay()) {
 					overlap = true;
 					break;
 				}
@@ -667,7 +667,7 @@ public class OpeningHoursParser {
 		/**
 		 * @return true if the rule overlap to the next day
 		 */
-		public boolean hasOverlapTimes();
+		public boolean hasOverlapTimesOverDay();
 
 		/**
 		 * Check if r rule times overlap with this rule times at "cal" date.
@@ -1475,11 +1475,11 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes() {
+		public boolean hasOverlapTimesOverDay() {
 			for (int i = 0; i < this.startTimes.size(); i++) {
 				int startTime = this.startTimes.get(i);
 				int endTime = this.endTimes.get(i);
-				if (startTime >= endTime && endTime != -1) {
+				if (startTime >= endTime && endTime > 0) {
 					return true;
 				}
 			}
@@ -1632,7 +1632,7 @@ public class OpeningHoursParser {
 		}
 		
 		@Override
-		public boolean hasOverlapTimes() {
+		public boolean hasOverlapTimesOverDay() {
 			return false;
 		}
 

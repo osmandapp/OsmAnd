@@ -800,10 +800,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		private String getMapDescription(LocalIndexInfo child) {
 			String fileName = child.getFileName();
 			if (child.getType() == LocalIndexType.TILES_DATA) {
-				boolean isHeightmap = fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
+				boolean isTerrainMap = fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
 						|| fileName.endsWith(IndexConstants.TIF_EXT);
-				return isHeightmap
-						? ctx.getString(R.string.download_heightmap_maps)
+				return isTerrainMap
+						? ctx.getString(R.string.terrain_map)
 						: ctx.getString(R.string.online_map);
 			} else if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);

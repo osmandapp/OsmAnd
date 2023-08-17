@@ -1318,7 +1318,7 @@
     <string name="app_mode_motorboat">მოტორიანი ნავი</string>
     <string name="shared_preference">გაზიარებული</string>
     <string name="shared_string_maps">რუკები</string>
-    <string name="shared_sting_tiles">ფილები</string>
+    <string name="shared_string_tiles">ფილები</string>
     <string name="shared_string_calculate">გამოთვლა</string>
     <string name="rendering_attr_piste_difficulty_connection_name">კავშირი</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">საჰაერო</string>
@@ -1556,7 +1556,7 @@
     <string name="shared_string_update">განახლება</string>
     <string name="shared_string_upload">ატვირთვა</string>
     <string name="feedback">უკუკავშირი</string>
-    <string name="contact_us">კონტაქტი</string>
+    <string name="shared_string_contact">კონტაქტი</string>
     <string name="versions_item">ვერსიები</string>
     <string name="faq_item">კითხვაპასუხი</string>
     <string name="other_menu_group">სხვა</string>

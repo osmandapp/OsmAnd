@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">На экране</string>
+    <string name="shared_string_visible">Visible</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -1070,7 +1070,7 @@
     <string name="map_widget_config">Настройки экрана</string>
     <string name="map_widget_back_to_loc">Где я</string>
     <string name="map_widget_lock_screen">Заблокировать</string>
-    <string name="map_widget_compass">Компас / режим ориентации</string>
+    <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Сбросить настройки</string>
     <string name="map_widget_parking">Парковка</string>
     <string name="map_widget_time">Время до прибытия</string>
@@ -1897,7 +1897,7 @@
 \nи навигация</string>
     <string name="building_number">Номер дома</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
-    <string name="download_live_updates">Автообновления</string>
+    <string name="download_live_updates">Live обновления</string>
     <string name="dahboard_options_dialog_title">Настройки панели управления</string>
     <string name="shared_string_card_was_hidden">Карточка скрыта</string>
     <string name="commit_poi">Зафиксировать POI</string>
@@ -1981,7 +1981,7 @@
     <string name="simulate_initial_startup">Имитировать первый запуск</string>
     <string name="simulate_initial_startup_descr">Устанавливает признак первого запуска приложения, не изменяет других настроек.</string>
     <string name="feedback">Опрос</string>
-    <string name="contact_us">Связаться с нами</string>
+    <string name="shared_string_contact">Связаться с нами</string>
     <string name="versions_item">Версии</string>
     <string name="techical_articles_item">Технические статьи</string>
     <string name="instalation_troubleshooting_item">Установка и решение проблем</string>
@@ -1992,7 +1992,7 @@
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, задать основные настройки.</string>
     <string name="navigation_item_description">Настройки навигации.</string>
-    <string name="planning_trip_item">Ручное составление маршрута</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="enter_country_name">Страна</string>
     <string name="new_version">Новая версия</string>
     <string name="begin_with_osmand_menu_group">Первые шаги с OsmAnd</string>
@@ -2096,7 +2096,7 @@
     <string name="shared_string_read_more">Подробнее</string>
     <string name="item_removed">Запись удалена</string>
     <string name="n_items_removed">элементы удалены</string>
-    <string name="live_updates">Автообновления</string>
+    <string name="live_updates">Live обновления</string>
     <string name="select_voice_provider_descr">Выберите или скачайте голосовое сопровождение для вашего языка.</string>
     <string name="full_report">Полный отчёт</string>
     <string name="recalculate_route">Пересчёт маршрута</string>
@@ -2113,7 +2113,7 @@
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать панель управления</string>
     <string name="dashboard_or_drawer_title">Панель управления или меню</string>
-    <string name="live_update">Автообновление</string>
+    <string name="live_update">Live обновление</string>
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчёт для</string>
     <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
@@ -2345,7 +2345,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Составление маршрута</string>
+    <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -2454,10 +2454,10 @@
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
-    <string name="import_gpx_file_description">возможен импорт в избранные точки или как трек файл.</string>
+    <string name="import_gpx_file_description">возможен импорт в избранные точки или в GPX-файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
-    <string name="import_as_favorites">Импортировать в Мои места</string>
+    <string name="import_as_favorites">Импортировать в избранные</string>
     <string name="import_file">Импорт файла</string>
     <string name="wrong_input">Неправильный ввод</string>
     <string name="shared_string_view">Просмотр</string>
@@ -2784,7 +2784,7 @@
     <string name="send_search_query">Отправить поисковый запрос?</string>
     <string name="test_voice_desrc">Нажмите кнопку и прослушайте подсказку для проверки наличия и корректности.</string>
     <string name="thank_you_for_feedback">Спасибо за ваш отзыв</string>
-    <string name="poi_cannot_be_found">Не удалось найти точку или путь.</string>
+    <string name="poi_cannot_be_found">Не удалось найти точку (node) или линию (way).</string>
     <string name="search_no_results_feedback">Нет результатов поиска\? 
 \nОставьте отзыв</string>
     <string name="increase_search_radius_to">Расширить радиус поиска до %1$s</string>
@@ -3139,7 +3139,7 @@
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
-    <string name="vehicle_parameters">Физические параметры</string>
+    <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Настройка голосовых оповещений (работают только при навигации).</string>
     <string name="voice_announces_descr">Навигационные инструкции и оповещения</string>
     <string name="voice_announces">Голосовая навигация</string>
@@ -3177,7 +3177,7 @@
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
     <string name="shared_string_osmand_usage">Использовано OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Карты</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
@@ -3893,7 +3893,7 @@
     <string name="routing_attr_allow_intermittent_name">Разрешить пересыхающие водные пути</string>
     <string name="release_3_9">• Добавлена возможность экспорта и импорта всех данных, включая настройки, ресурсы, мои места.
 \n
-\n• Составление маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
+\n• Планирование маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
 \n
 \n• Добавлен OAuth метод аутентификации для OpenStreetMap, улучшен интерфейс диалоговых OSM.
 \n
@@ -4044,7 +4044,7 @@
     <string name="annual_subscription">Годовая подписка</string>
     <string name="release_4_0_beta">• Добавлена возможность загрузить контурные линии в футах.
 \n
-\n• Составление маршрута: добавлены вкладки для переключения между точками и графиками.
+\n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
 \n
 \n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
 \n
@@ -4225,7 +4225,7 @@
 \n
 \n• Расстояние по нажатию перемещено из радиус-линейки в отдельный параметр
 \n
-\n• Составление маршрута: добавлена возможность изменения параметров навигации, доступ к настройке карты и поиску, не покидая конструктор маршрутов
+\n• Планирование маршрута: добавлена возможность изменения параметров навигации, доступ к настройке карты и поиску, не покидая конструктор маршрутов
 \n
 \n• Новый экран «Покупка» с подробной информацией о планах
 \n
@@ -4354,7 +4354,7 @@
 \n
 \n• Избранные: добавлена возможность просмотра недавно использованных значков
 \n
-\n• Составление маршрута: после запуска будет использоваться выбранный профиль
+\n• Планирование маршрута: после запуска будет использоваться выбранный профиль
 \n
 \n• Исправлен слой Mapillary, плагин теперь отключен по умолчанию
 \n
@@ -4750,10 +4750,10 @@
     <string name="av_notes_photo_widget_desc">Нажатие на виджет позволяет сделать снимок.</string>
     <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
-    <string name="compass_visible_if_map_rotated_desc">Скрыт, когда север сверху</string>
-    <string name="compass_visible_if_map_rotated">На экране, если карта повернута</string>
+    <string name="compass_visible_if_map_rotated_desc">Скрывать, когда север сверху</string>
+    <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Всегда скрыто</string>
-    <string name="compass_always_visible">Всегда на экране</string>
+    <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
@@ -4837,7 +4837,7 @@
     <string name="restart_now">Перезапустить сейчас</string>
     <string name="map_rendering_engine_v2">Версия 2 (OpenGL)</string>
     <string name="external_sensors_plugin_description">Доступ к внешним датчикам для считывания, например, частоты сердцебиения, скорости велосипеда, мощности велосипедиста или каденса. Требуется подключение устройства к соответствующим датчикам по протоколу беспроводной персональной сети ANT+.</string>
-    <string name="map_widget_ant_bicycle_power">Мощность</string>
+    <string name="map_widget_ant_bicycle_power">Bicycle Power</string>
     <string name="map_widget_rendering_fps">FPS отрисовки карты</string>
     <string name="rendering_engine_failed">Произошел сбой отрисовки карт OsmAnd.</string>
     <string name="map_rendering_engine_descr">Версия 2 (OpenGL) - это более быстрый механизм отрисовки карт, поддерживающий 2,5D вид. Версия 1 использовалась по умолчанию до выхода OsmAnd 4.3 и по-прежнему предпочтительна для старых устройств.</string>
@@ -5116,7 +5116,7 @@
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
     <string name="clear_online_cache_description">Это очистит весь кеш онлайн-тайлов погоды.</string>
     <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
-    <string name="speak_route_deviation">Отклонение от маршрута</string>
+    <string name="speak_route_deviation">Оповещать об отклонении от маршрута</string>
     <string name="select_layer">Выбрать слой</string>
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
     <string name="shutter_sound">Звук затвора</string>
@@ -5184,7 +5184,7 @@
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
     <string name="no_poi_for_category">POI не найдена</string>
-    <string name="map_3d_mode_action">3D-режим</string>
+    <string name="map_3d_mode_action">Режим 3D</string>
     <string name="map_2d_mode_action">Режим 2D</string>
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="shared_string_finger">Палец</string>
@@ -5236,7 +5236,7 @@
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
     <string name="relief_3d">3D-рельеф</string>
     <string name="terrain_map">Карта рельефа</string>
-    <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud для подключения бесплатного резервного копирования избранных точек и настроек</string>
+    <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud, чтобы получить возможность бесплатного резервного копирования избранных и настроек.</string>
     <string name="free_favorites_backup">Резервное копирование избранных</string>
     <string name="folder_export_empty_error">Экспорт невозможен, так как папка пуста.</string>
     <string name="osmand_cloud_delete_account_confirmation">Удалить аккаунт\?</string>
@@ -5293,7 +5293,7 @@
 \n • Переработано определение изменения высоты и оценка уклона
 \n
 \n</string>
-    <string name="get_osmand_cloud">Подключить OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">Получить OsmAnd Cloud</string>
     <string name="free_account">Бесплатный аккаунт</string>
     <string name="osmand_cloud_deleting_account_descr">Вскоре все ваши данные и аккаунт будут удалены из OsmAnd Cloud.
 \n
@@ -5335,10 +5335,13 @@
     <string name="routing_attr_allow_via_ferrata_description">Горный маршрут, оборудованный стационарными тросами, скобами, лестницами и мостами.</string>
     <string name="terrain_category_description">Линии контуров рельефа, карты затенения рельефа (отмывки) и карты уклонов с цветами для отображения вершин и низменностей.</string>
     <string name="slope_legend_description">Уклон использует цвета для визуализации крутизны рельефа. Подробнее об уклоне можно прочитать на сайте %1$s.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Виа феррата)</string>
+    <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Via ferrata)</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках плана %2$s</string>
     <string name="write_bearing_description">Сохранять азимут для каждой точки трека при записи.</string>
     <string name="write_bearing">Записывать азимут</string>
     <string name="write_heading_description">Сохранять значение курса для каждой точки трека при записи.</string>
     <string name="write_heading">Записывать курс</string>
+    <string name="local_indexes_category_terrain">Карты рельефа (3D)</string>
+    <string name="hillshade_slope">Отмывка, уклон</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

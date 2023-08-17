@@ -1187,14 +1187,14 @@
     <string name="lang_ga">Gwyddeleg</string>
     <string name="shared_string_select">Dewis</string>
     <string name="day">Dydd</string>
-    <string name="shared_sting_tiles">Teils</string>
+    <string name="shared_string_tiles">Teils</string>
     <string name="shared_string_maps">Mapiau</string>
     <string name="lang_la">Lladin</string>
     <string name="shared_string_undo">Dad-wneud</string>
     <string name="tab_title_basic">Sylfaenol</string>
     <string name="other_menu_group">Eraill</string>
     <string name="versions_item">Fersiynau</string>
-    <string name="contact_us">Cysylltu</string>
+    <string name="shared_string_contact">Cysylltu</string>
     <string name="shared_string_skip">Neidio</string>
     <string name="plugin_settings">Ategolion</string>
     <string name="shared_string_navigation">Llywio</string>

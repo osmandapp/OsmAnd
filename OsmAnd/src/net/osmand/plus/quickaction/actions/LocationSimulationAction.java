@@ -2,6 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.CreateEditActionDialog.FileSelected;
 import static net.osmand.plus.quickaction.CreateEditActionDialog.TAG;
+import static net.osmand.plus.quickaction.QuickActionIds.LOCATION_SIMULATION_ACTION_ID;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ import java.io.File;
 
 public class LocationSimulationAction extends QuickAction implements FileSelected {
 
-	public static final QuickActionType TYPE = new QuickActionType(45, "location.simulation", LocationSimulationAction.class)
+	public static final QuickActionType TYPE = new QuickActionType(LOCATION_SIMULATION_ACTION_ID, "location.simulation", LocationSimulationAction.class)
 			.nameRes(R.string.simulate_location_by_gpx)
 			.iconRes(R.drawable.ic_action_start_navigation).nonEditable()
 			.category(QuickActionType.NAVIGATION);

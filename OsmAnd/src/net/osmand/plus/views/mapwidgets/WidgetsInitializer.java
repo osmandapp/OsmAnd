@@ -10,6 +10,8 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_TARGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
@@ -117,6 +119,8 @@ public class WidgetsInitializer {
 		addWidgetInfo(SIDE_MARKER_2);
 		addWidgetInfo(SUNRISE);
 		addWidgetInfo(SUNSET);
+		addWidgetInfo(GLIDE_TARGET);
+		addWidgetInfo(GLIDE_AVERAGE);
 	}
 
 	private void addWidgetInfo(@NonNull WidgetType widgetType) {

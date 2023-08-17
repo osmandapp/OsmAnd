@@ -40,6 +40,8 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
+	private static final BackgroundType BACKGROUND_TYPE = BackgroundType.COMMENT;
+
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
@@ -91,10 +93,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 					iconId = R.drawable.mx_special_symbol_check_mark;
 					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				BackgroundType backgroundType = BackgroundType.COMMENT;
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
-						backgroundType);
+						BACKGROUND_TYPE);
 				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 			} else {
 				int backgroundColorRes;
@@ -105,7 +106,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				}
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true,
-						false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
+						false, DEFAULT_UI_ICON_ID, BACKGROUND_TYPE);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
 			}
 			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
@@ -127,7 +128,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		this.textScale = textScale;
 		this.showClosed = showClosed;
 		this.minZoom = minZoom;
-		this.offset = new PointI(0, 0);
+		this.offset = new PointI(0, -BACKGROUND_TYPE.getOffsetY(context, textScale));
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -270,7 +271,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
-		return MapMarker.PinIconVerticalAlignment.Top;
+		return MapMarker.PinIconVerticalAlignment.CenterVertical;
 	}
 
 	@Override

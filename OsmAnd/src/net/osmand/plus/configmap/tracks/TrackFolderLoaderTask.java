@@ -52,12 +52,12 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 		for (File file : files) {
 			if (file.isDirectory()) {
 				TrackFolder folder = new TrackFolder(file, trackFolder);
-				trackFolder.addSubFolder(folder, false);
+				trackFolder.addSubFolder(folder);
 				loadGPXFolder(folder, getSubfolderTitle(file, subfolder));
 			} else if (isGpxFile(file)) {
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
-				trackFolder.addTrackItem(trackItem, false);
+				trackFolder.addTrackItem(trackItem);
 			}
 		}
 	}

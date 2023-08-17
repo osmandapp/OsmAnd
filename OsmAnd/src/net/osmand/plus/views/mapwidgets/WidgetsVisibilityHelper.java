@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 
 import android.view.View;
 
@@ -23,6 +22,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -75,17 +75,7 @@ public class WidgetsVisibilityHelper {
 				&& !isSelectingTilesZone();
 	}
 
-	public boolean shouldShowTopMapCenterCoordinatesWidget() {
-		return (settings.SHOW_MAP_CENTER_COORDINATES_WIDGET.get())
-				&& shouldShowTopCoordinatesWidget();
-	}
-
-	public boolean shouldShowTopCurrentLocationCoordinatesWidget() {
-		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get()
-				&& shouldShowTopCoordinatesWidget();
-	}
-
-	private boolean shouldShowTopCoordinatesWidget() {
+	public boolean shouldShowTopCoordinatesWidget() {
 		return !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
@@ -113,16 +103,16 @@ public class WidgetsVisibilityHelper {
 				|| isInConfigureMapOptionMode();
 	}
 
-	public static boolean isMapMarkerBarWidgetEnabled(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
+	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
+		OsmandApplication app = activity.getMyApplication();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<WidgetsPanel> panels = WidgetsPanel.TOP.getMergedPanels();
+		List<WidgetsPanel> panels = panel.getMergedPanels();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, panels);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, panels);
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
-			if (widgetInfo.key.contains(MARKERS_TOP_BAR.id)) {
+			if (Algorithms.containsAny(widgetInfo.key, widgetsIds)) {
 				return true;
 			}
 		}

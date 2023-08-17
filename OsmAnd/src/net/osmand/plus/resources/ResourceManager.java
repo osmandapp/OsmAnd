@@ -1277,7 +1277,7 @@ public class ResourceManager {
 			}
 		}
 
-		// Not using boundares results in very slow initial search if user has many maps installed
+		// Not using boundaries results in very slow initial search if user has many maps installed
 //		int left = 0;
 //		int top = 0;
 //		int right = Integer.MAX_VALUE;

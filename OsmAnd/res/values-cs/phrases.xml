@@ -1559,9 +1559,9 @@
     <string name="poi_date_yes">Zobrazení data</string>
     <string name="poi_date_no">Zobrazení data: ne</string>
     <string name="poi_cocktails_yes">Ano;Koktejly</string>
-    <string name="poi_second_hand_yes">Zboží z druhé ruky</string>
+    <string name="poi_second_hand_yes">Ano</string>
     <string name="poi_second_hand_no">Žádné zboží z druhé ruky</string>
-    <string name="poi_second_hand_only">Pouze zboží z druhé ruky</string>
+    <string name="poi_second_hand_only">Pouze</string>
     <string name="poi_service_parts">Díly</string>
     <string name="poi_service_dealer">Prodejce</string>
     <string name="poi_service_repair">Opravy</string>
@@ -4586,4 +4586,18 @@
     <string name="poi_vending_machine_fuel">Ano</string>
     <string name="poi_tunnel_name">Název tunelu</string>
     <string name="poi_bridge_name">Název mostu</string>
+    <string name="poi_vending_machine_fuel_filter">Automatické dávkovače paliva;Automat na palivo</string>
+    <string name="poi_motorcar_designated">Určeno pro osobní automobily</string>
+    <string name="poi_vehicle_designated">Určeno pro vozidla</string>
+    <string name="poi_motor_vehicle_designated">Určeno pro motorová vozidla</string>
+    <string name="poi_second_hand_filter">Zboží z druhé ruky</string>
+    <string name="poi_surface_rubber">Povrch: guma</string>
+    <string name="poi_surface_acrylic">Povrch: akrylát</string>
+    <string name="poi_surface_carpet">Povrch: koberec</string>
+    <string name="poi_surface_plastic">Povrch: plast</string>
+    <string name="poi_bicycle_designated">Určeno pro jízdní kola</string>
+    <string name="poi_horse_designated">Určeno pro koně</string>
+    <string name="poi_foot_designated">Určeno pro chodce</string>
+    <string name="poi_assembly_point">Místo setkání</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Vše kromě přístřešků veřejné dopravy</string>
 </resources>

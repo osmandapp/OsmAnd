@@ -86,7 +86,8 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -364,6 +365,7 @@ public class AppInitializer implements IProgress {
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
+		app.averageGlideComputer = startupInit(new AverageGlideComputer(app), AverageGlideComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 
@@ -639,9 +641,14 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
+
+		if (!settings.USE_OPENGL_RENDER.get()) {
+			return;
+		}
+
+		if (!Version.isOpenGlAvailable(app)) {
 			settings.USE_OPENGL_RENDER.set(false);
-		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		} else {
 			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
 			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
 				settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
@@ -661,8 +668,8 @@ public class AppInitializer implements IProgress {
 				}
 			}
 
+			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 		}
-		notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 	}
 
 	private void initNativeCore() {

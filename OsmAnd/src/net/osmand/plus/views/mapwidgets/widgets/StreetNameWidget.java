@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,6 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -45,15 +54,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -281,7 +281,7 @@ public class StreetNameWidget extends MapWidget {
 		float xSize = shield.getIntrinsicWidth();
 		float ySize = shield.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
-		//setting view propotions (height is fixed by toolbar size - 48dp);
+		//setting view proportions (height is fixed by toolbar size - 48dp);
 		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
 
@@ -369,10 +369,9 @@ public class StreetNameWidget extends MapWidget {
 		if (useSpecialPosition) {
 			specialContainer.removeAllViews();
 
-			boolean currentLocationVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
-			boolean mapCenterVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopMapCenterCoordinatesWidget();
+			boolean showTopCoordinates = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesBaseWidget && (currentLocationVisible || mapCenterVisible)) {
+				if (widget instanceof CoordinatesBaseWidget && showTopCoordinates) {
 					useSpecialPosition = false;
 					break;
 				}

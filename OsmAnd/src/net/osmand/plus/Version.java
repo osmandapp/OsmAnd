@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
@@ -8,6 +11,7 @@ import androidx.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -104,6 +108,15 @@ public class Version {
 		return version.appVersion;
 	}
 
+	public static String getFullVersionWithReleaseDate(@NonNull OsmandApplication app) {
+		String appEdition = getBuildAppEdition(app);
+		if (!Algorithms.isEmpty(appEdition)) {
+			String release = app.getString(R.string.shared_string_release).toLowerCase();
+			return Version.getFullVersion(app) + ", " + release + ": " + appEdition;
+		}
+		return Version.getFullVersion(app);
+	}
+
 	public static String getBuildAppEdition(@NonNull OsmandApplication app) {
 		return app.getString(R.string.app_edition);
 	}
@@ -163,13 +176,20 @@ public class Version {
 	}
 
 	public static boolean isOpenGlAvailable(@NonNull OsmandApplication app) {
-		if (!NativeCore.isAvailable() || isQnxOperatingSystem()) {
+		if (!NativeCore.isAvailable() || isQnxOperatingSystem() || !isOpenGlEsVersionSupported(app)) {
 			return false;
 		}
 		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
 		if (checkOpenGlExists(nativeLibraryDir)) return true;
 		// check opengl doesn't work correctly on some devices when native libs are not unpacked
 		return true;
+	}
+
+	public static boolean isOpenGlEsVersionSupported(@NonNull OsmandApplication app) {
+		ActivityManager activityManager = (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
+		ConfigurationInfo deviceConfigurationInfo = activityManager.getDeviceConfigurationInfo();
+		int majorVersion = (deviceConfigurationInfo.reqGlEsVersion & 0xffff0000) >> 16;
+		return majorVersion >= 3;
 	}
 
 	public static boolean isQnxOperatingSystem() {

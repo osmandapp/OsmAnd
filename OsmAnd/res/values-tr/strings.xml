@@ -1304,7 +1304,7 @@
     <string name="techical_articles_item">Teknik makaleler</string>
     <string name="versions_item">Sürümler</string>
     <string name="feedback">Görüşleriniz</string>
-    <string name="contact_us">İletişim</string>
+    <string name="shared_string_contact">İletişim</string>
     <string name="map_legend">Harita lejandı</string>
     <string name="save_poi_without_poi_type_message">POI tür olmadan kaydedilsin mi\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>
@@ -3190,7 +3190,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
     <string name="shared_string_calculate">Hesapla</string>
     <string name="shared_string_osmand_usage">OsmAnd kullanımı</string>
-    <string name="shared_sting_tiles">Döşemeler</string>
+    <string name="shared_string_tiles">Döşemeler</string>
     <string name="shared_string_maps">Haritalar</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

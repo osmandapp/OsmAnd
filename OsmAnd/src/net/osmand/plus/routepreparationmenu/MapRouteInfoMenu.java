@@ -1653,7 +1653,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					GPXRouteParamsBuilder routeParams1 = mapActivity1.getRoutingHelper().getCurrentGPXRoute();
 					if (routeParams1 != null) {
 						hide();
-						selectTrack();
+						showFollowTrack();
 					}
 				}
 			});
@@ -2038,7 +2038,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack() {
+	public void showFollowTrack() {
 		selectFromTracks = true;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

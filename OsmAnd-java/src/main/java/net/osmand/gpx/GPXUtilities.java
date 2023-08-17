@@ -1245,7 +1245,7 @@ public class GPXUtilities {
 		return text == null ? null : text.toString();
 	}
 
-	private static Map<String, String> readTextMap(XmlPullParser parser, String key)
+	public static Map<String, String> readTextMap(XmlPullParser parser, String key)
 			throws XmlPullParserException, IOException {
 		int tok;
 		StringBuilder text = null;
@@ -1417,7 +1417,11 @@ public class GPXUtilities {
 										for (Entry<String, String> entry : values.entrySet()) {
 											String t = entry.getKey().toLowerCase();
 											String value = entry.getValue();
+											if (t.equals("heartrate")) {
+												t = "hr";
+											}
 											parse.getExtensionsToWrite().put(t, value);
+
 											if (tag.equals(POINT_SPEED) && parse instanceof WptPt) {
 												try {
 													((WptPt) parse).speed = Float.parseFloat(value);

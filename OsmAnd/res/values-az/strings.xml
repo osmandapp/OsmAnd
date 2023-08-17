@@ -721,7 +721,7 @@
     <string name="first_usage_item">İlk istifadə</string>
     <string name="faq_item_description">Tez-tez verilən suallar.</string>
     <string name="versions_item">Versiyalar</string>
-    <string name="contact_us">Əlaqə</string>
+    <string name="shared_string_contact">Əlaqə</string>
     <string name="use_drawer_btn">Menyu istifadə et</string>
     <string name="only_download_over_wifi">Yalnız Wi-Fi ilə endir</string>
     <string name="update_now">İndi yenilə</string>

@@ -8,7 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AbstractComputer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,21 +19,21 @@ import java.util.Map.Entry;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-public class AverageSpeedIntervalCard extends BaseCard {
+public class TimeIntervalCard extends BaseCard {
 
 	private final Map<Long, String> availableIntervals;
 
 	private long selectedIntervalMillis;
 
-	public AverageSpeedIntervalCard(@NonNull FragmentActivity activity, long initialIntervalMillis) {
+	public TimeIntervalCard(@NonNull FragmentActivity activity, long initialIntervalMillis) {
 		super(activity);
 		selectedIntervalMillis = initialIntervalMillis;
-		availableIntervals = getAvailableIntervals();
+		availableIntervals = collectAvailableIntervals();
 	}
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.average_speed_interval_card;
+		return R.layout.card_select_time_interval;
 	}
 
 	public long getSelectedIntervalMillis() {
@@ -78,7 +78,6 @@ public class AverageSpeedIntervalCard extends BaseCard {
 				return i;
 			}
 		}
-
 		return 0;
 	}
 
@@ -95,9 +94,9 @@ public class AverageSpeedIntervalCard extends BaseCard {
 	}
 
 	@NonNull
-	private Map<Long, String> getAvailableIntervals() {
+	private Map<Long, String> collectAvailableIntervals() {
 		Map<Long, String> intervals = new LinkedHashMap<>();
-		for (long interval : AverageSpeedComputer.MEASURED_INTERVALS) {
+		for (long interval : AbstractComputer.MEASURED_INTERVALS) {
 			boolean seconds = interval < 60 * 1000;
 			String timeInterval = seconds
 					? String.valueOf(interval / 1000)

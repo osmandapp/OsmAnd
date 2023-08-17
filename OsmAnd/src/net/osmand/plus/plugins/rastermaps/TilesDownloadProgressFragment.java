@@ -222,7 +222,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	}
 
 	private void updateTilesNumber() {
-		String tilesString = getString(R.string.shared_sting_tiles);
+		String tilesString = getString(R.string.shared_string_tiles);
 		String downloadedNumber = formatNumber(downloadedTilesNumber, 0);
 
 		TextView tvDownloaded = view.findViewById(R.id.downloaded_number);
