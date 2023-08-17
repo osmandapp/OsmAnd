@@ -1680,7 +1680,7 @@
     <string name="save_poi_without_poi_type_message">Guardar POI sem especificar o tipo\?</string>
     <string name="versions_item">Versões</string>
     <string name="feedback">Comentar</string>
-    <string name="contact_us">Email</string>
+    <string name="shared_string_contact">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="faq_item_description">Perguntas mais frequentes.</string>

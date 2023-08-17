@@ -1669,7 +1669,7 @@
     <string name="planning_trip_item">Kelionės planavimas</string>
     <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
     <string name="versions_item">Versijos</string>
-    <string name="contact_us">Susisiekti</string>
+    <string name="shared_string_contact">Susisiekti</string>
     <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti kad galėtumėte matyti pasaulinę apžvalgą.</string>
     <string name="share_geo">geo:</string>
     <string name="nm">jm</string>

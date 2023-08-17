@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -105,6 +106,15 @@ public class Version {
 	public static String getAppVersion(@NonNull OsmandApplication app) {
 		Version version = getVersion(app);
 		return version.appVersion;
+	}
+
+	public static String getFullVersionWithReleaseDate(@NonNull OsmandApplication app) {
+		String appEdition = getBuildAppEdition(app);
+		if (!Algorithms.isEmpty(appEdition)) {
+			String release = app.getString(R.string.shared_string_release).toLowerCase();
+			return Version.getFullVersion(app) + ", " + release + ": " + appEdition;
+		}
+		return Version.getFullVersion(app);
 	}
 
 	public static String getBuildAppEdition(@NonNull OsmandApplication app) {

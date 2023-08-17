@@ -1859,7 +1859,7 @@
     <string name="techical_articles_item">Artikulu teknikoak</string>
     <string name="instalation_troubleshooting_item">Instalazioa eta arazoen konponketa</string>
     <string name="feedback">Iruzkinak</string>
-    <string name="contact_us">Kontaktua</string>
+    <string name="shared_string_contact">Kontaktua</string>
     <string name="search_on_the_map_item">Mapan bilatzen</string>
     <string name="map_viewing_item">Ikusi mapa</string>
     <string name="first_usage_item">Lehen erabilera</string>
@@ -5380,4 +5380,6 @@
     <string name="map_widget_glide_target_desc">Helmugara heltzeko behar den planeatze-erlazioa erakusten du.</string>
     <string name="average_glide_time_interval_desc">Zehaztu planeatzearen batez bestekoa egiteko behar den denbora-tartea.</string>
     <string name="average_glide_ratio">Batez besteko planeatze-erlazioa</string>
+    <string name="wheel_circumference">Gurpilen zirkunferentzia</string>
+    <string name="external_sensor_name_property_description">Sentsorearen izena</string>
 </resources>

@@ -577,7 +577,7 @@
 
 		</activity>
 
-		<activity android:name="net.osmand.plus.activities.HelpActivity" />
+		<activity android:name="net.osmand.plus.help.HelpActivity" />
 		<activity android:name="net.osmand.plus.myplaces.MyPlacesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 

@@ -1718,7 +1718,7 @@
     <string name="techical_articles_item">Technische artikelen</string>
     <string name="versions_item">Versies</string>
     <string name="feedback">Commentaar</string>
-    <string name="contact_us">Neem contact op</string>
+    <string name="shared_string_contact">Neem contact op</string>
     <string name="map_legend">Legenda</string>
     <string name="read_more">Meer lezen</string>
     <string name="whats_new">Wat is er nieuw in</string>
@@ -2332,7 +2332,7 @@
     <string name="improve_coverage_mapillary">Verbeter de fotocollectie van Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installeer Mapillary om foto\'s aan deze kaartlocatie toe te voegen.</string>
     <string name="mapillary_action_descr">Deel je weergave op straatniveau via Mapillary.</string>
-    <string name="mapillary_widget_descr">Snel bijdragen aan Mapillary.</string>
+    <string name="mapillary_widget_descr">Maakt snelle bijdragen aan Mapillary mogelijk.</string>
     <string name="mapillary_descr">Online foto\'s op straatniveau voor iedereen. Ontdek plaatsen, werk samen, leg de wereld vast.</string>
     <string name="plugin_mapillary_descr">Foto\'s op straatniveau voor iedereen. Ontdek plaatsen, werk samen, leg de wereld vast.</string>
     <string name="shared_string_permissions">Rechten</string>
@@ -4466,7 +4466,7 @@
     <string name="lanes_widgets_desc">Toont de rijstrokenindeling van de huidige weg en wijst de juiste rijstroken aan tijdens navigatie.</string>
     <string name="map_widget_trip_recording_uphill">Bergopwaarts</string>
     <string name="map_widget_trip_recording_downhill">Bergafwaarts</string>
-    <string name="parking_widget_desc">Toont afstand van midden van je scherm tot de parkeerplaats.</string>
+    <string name="parking_widget_desc">Toont de afstand van het midden van het scherm tot je parkeerplaats.</string>
     <string name="av_notes_choose_action_widget_desc">Kies actie.</string>
     <string name="av_def_action_choose">Op aanvraag</string>
     <string name="widget_secondary_desc_part_of">Deel van de %1$s plugin.</string>
@@ -4474,14 +4474,14 @@
     <string name="coordinates_widget_secondary_desc">De opmaak van de coördinaten kan veranderd worden in %1$s - %2$s - %3$s.</string>
     <string name="elevation_profile_widget_desc">Toont het hoogte- en hellingprofiel van de huidige route.</string>
     <string name="mapillary_widget_desc">Biedt toegang tot Mapillary app om straatbeelden bij te dragen.</string>
-    <string name="gps_info_widget_desc">Toont het aantal satellieten dat je toestel momenteel detecteert en gebruikt.</string>
+    <string name="gps_info_widget_desc">Toont het aantal satellieten dat momenteel zichtbaar en gebruikt wordt.</string>
     <string name="current_speed_widget_desc">Toont je huidige snelheid gemeten door de GPS-sensor.</string>
-    <string name="max_speed_widget_desc">Toont de snelheidsbeperking van de huidige bereden weg.</string>
+    <string name="max_speed_widget_desc">Toont de maximale snelheid voor de huidige bereden weg.</string>
     <string name="bearing_desc">Toont de absolute of relatieve richting tot een doel in een hoekeenheid (180 graden, 360 graden, milliradialen).</string>
-    <string name="battery_widget_desc">Toont het batterijniveau van je toestel.</string>
-    <string name="current_time_widget_desc">Toont de huidige tijd van je toestel.</string>
+    <string name="battery_widget_desc">Toont het batterijniveau van je apparaat.</string>
+    <string name="current_time_widget_desc">Toont de huidige tijd zoals overgenomen van je apparaat.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Raak de widget om van modus te wisselen.</string>
-    <string name="street_name_widget_desc">Straatnamenwidget toont de huidige straatnaam met rechte pijl, of de volgende straatnaam met pijl voor een naderende afslag.</string>
+    <string name="street_name_widget_desc">De straatnaamwidget toont de huidige straatnaam met een rechte pijl, of de volgende straatnaam met een pijl die een komende afslag aangeeft.</string>
     <string name="magnetic_bearing_widget_desc">Hoek tussen het magnetische noorden en het doelpunt gezien vanaf jouw locatie.</string>
     <string name="time_to_go_desc">Tijd (in minuten of uren) benodigd om je bestemming te bereiken.</string>
     <string name="arrival_time_widget_desc">Tijdstip van aankomst op je bestemming.</string>
@@ -4631,8 +4631,8 @@
     <string name="auto_25_chars_route_tr_kl">Sla rechtsaf en houd links aan</string>
     <string name="auto_25_chars_route_tr_kr">Sla rechtsaf en houd rechts aan</string>
     <string name="auto_25_chars_route_roundabout_kr">Afslag %1$d nemen en rechts aanhouden</string>
-    <string name="trip_recording_duration_widget_desc">Toont de tijdsduur van deze opgenomen tocht.</string>
-    <string name="trip_recording_distance_widget_desc">Toont de afgelegde afstand van deze opgenomen tocht.</string>
+    <string name="trip_recording_duration_widget_desc">Toont de tijdsduur van deze opgenomen rit.</string>
+    <string name="trip_recording_distance_widget_desc">Toont de afgelegde afstand van deze opgenomen rit.</string>
     <string name="nautical_depth_points">Dieptepunten van de zee</string>
     <string name="map_marker_interval_dialog_desc">Vermeld het tijdsinterval waarin de gemiddelde snelheid zal worden berekend, voor de verwachte aankomsttijd.</string>
     <string name="compass_desc">Toont richting naar het noorden.</string>
@@ -4657,7 +4657,7 @@
     <string name="developer_widgets">Widgets voor ontwikkelaars</string>
     <string name="attach_roads_descr">Benader uw pad naar toegestane wegen, om tussen punten te navigeren en precieze aanwijzingen en routekenmerken op te stellen.</string>
     <string name="connect_with_straight_line">Verbind met een rechte lijn</string>
-    <string name="av_notes_photo_widget_desc">Op de widget drukken laat u een foto nemen.</string>
+    <string name="av_notes_photo_widget_desc">Door te tikken op de widget kun je een foto maken.</string>
     <string name="change_default_appearance">Standaard uiterlijk veranderen</string>
     <string name="routeInfo_horse_scale_name">Begaanbaarheid van ruiterpaden</string>
     <string name="rendering_attr_horse_scale_demanding_name">Moeilijk</string>
@@ -4698,7 +4698,7 @@
     <string name="weather_precip_in">inch</string>
     <string name="map_widget_ant_bicycle_speed">Fiets snelheid</string>
     <string name="radius_rules_widget_desc">De radius liniaal geeft afstandscirkels weer rond een gekozen punt op de kaart.</string>
-    <string name="route_maneuvers_desc">Navigatie widgets worden ingeschakeld tijdens navigatie om informatie te tonen, zoals afstand, aankomst- of resterende tijd, volgende afslagen, peiling, huidige/volgende straatnaam, rijstrook informatie, maximale snelheid, naderende waarschuwingen, bezienswaardigheden, opgeslagen tussenstops.</string>
+    <string name="route_maneuvers_desc">Navigatie widgets worden ingeschakeld tijdens navigatie om informatie te tonen, zoals afstand, aankomst- of resterende tijd, volgende afslagen, richting, huidige straatnaam, rijstrook informatie, maximale snelheid, naderende waarschuwingen, bezienswaardigheden, opgeslagen tussenstops.</string>
     <string name="calculate_altitude">Hoogte berekenen</string>
     <string name="calculating_altitude">Hoogte berekenen</string>
     <string name="track_attach_to_the_roads_descr">Het pad zal worden gekoppeld aan de wegen op de offline kaarten, de loop van het pad zal worden aangepast.</string>
@@ -4712,8 +4712,8 @@
     <string name="external_sensor_widgets">Externe sensors</string>
     <string name="map_widget_target_distance_desc">Toont de afstand van camera tot doelwit.</string>
     <string name="coordinates_widget_current_location_desc">Toont geografische coördinaten van de huidige locatie</string>
-    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen van deze opgenomen tocht.</string>
-    <string name="time_to_intermediate_widget_desc">De widget toon \"Aankomsttijd\" of \"Tijd nog te gaan\" tot het eerstvolgende punt halverwege. Tijdsduur wordt voortdurend bijgewerkt tijdens navigatie. Zodra een halverwege punt wordt gepasseerd, wordt de tijdsduur bijgewerkt naar het volgende halverwege punt.</string>
+    <string name="trip_recording_downhill_widget_desc">Toont de som van alle afdalingen van deze opgenomen rit.</string>
+    <string name="time_to_intermediate_widget_desc">De widget toon \"Aankomsttijd\" of \"Tijd nog te gaan\" tot het eerstvolgende punt halverwege. Tijdsduur wordt voortdurend bijgewerkt tijdens navigatie. Zodra tussenliggend punt is gepasseerd, wordt de tijd bijgewerkt tot het volgende tussenliggende punt.</string>
     <string name="next_turn_widget_desc">De widget toont informatie over uw volgende afslag met afbeelding van de beweging en afstand ertoe.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Kleurschema van dieptelijnen</string>
     <string name="rendering_attr_depthContourWidth_description">Dikte van dieptelijnen</string>
@@ -4741,7 +4741,7 @@
     <string name="waypoint_appearance">Tussenstop uiterlijk</string>
     <string name="rendering_attr_seabedDetail_name">Zeebodem informatie</string>
     <string name="routing_attr_motor_type_petrol_name">Benzine</string>
-    <string name="av_notes_audio_widget_desc">Op de widget drukken laat u een geluidsopname maken.</string>
+    <string name="av_notes_audio_widget_desc">Door te tikken op de widget kun je een audio-opname maken.</string>
     <string name="get_altitude_information">Hoogte informatie ophalen</string>
     <string name="shared_string_item">Deel</string>
     <string name="selected_waypoints_descr">Gekozen tussenstops worden toegevoegd aan het \"%1$s\" pad</string>
@@ -4860,12 +4860,12 @@
     <string name="auto_25_chars_route_roundabout_kl">Afslag %1$d namen en links aanhouden</string>
     <string name="auto_backup_preference_desc">Android maakt standaard een reservekopie van favorieten, kaart tekens en OsmAnd instellingen, om het te herstellen op nieuwe toestellen of na herinstallatie. De kopie kan tot 25 MB groot zijn.
 \nAls u ook OsmAnd Cloud gebruikt, kan dat tot tegenstrijdheden leiden na herinstallatie.</string>
-    <string name="av_notes_video_widget_desc">Op de widget drukken laat u een filmpje opnemen.</string>
-    <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen van deze opgenomen tocht.</string>
+    <string name="av_notes_video_widget_desc">Door te tikken op de widget kun je een video opnemen.</string>
+    <string name="trip_recording_uphill_widget_desc">Toont de som van alle beklimmingen van deze opgenomen rit.</string>
     <string name="true_bearing_wdiget_desc">Hoek tussen het ware noorden en het doelpunt gezien van uw locatie.</string>
     <string name="relative_bearing_widget_desc">Toont de hoek tussen de richting van uw voorwaartse beweging en het doelpunt.</string>
-    <string name="first_marker_widget_desc">U kunt de widget zo instellen om de afstand of verwachte aankomsttijd te tonen tot de eerste markering.</string>
-    <string name="time_to_destination_widget_desc">De widget toon \"Aankomsttijd\" of \"Tijd nog te gaan\" tot het laatste bestemmingspunt. Tijdsduur wordt voortdurend bijgewerkt tijdens navigatie en is gelijk aan de reistijd vanaf huidige locatie.</string>
+    <string name="first_marker_widget_desc">U kunt de widget instellen om de afstand of de verwachte aankomsttijd te tonen, tot de eerste markering.</string>
+    <string name="time_to_destination_widget_desc">De widget toon \"Aankomsttijd\" of \"Tijd nog te gaan\" tot het laatste bestemmingspunt. Tijdsduur wordt voortdurend bijgewerkt tijdens navigatie en is gelijk aan de reistijd vanaf de huidige locatie.</string>
     <string name="distance_to_destination_widget_desc">De widget toont de afstand tot het laatste bestemmingspunt.</string>
     <string name="second_next_turn_widget_desc">De widget toont informatie over uw tweede afslag, die ingeschakeld wordt zodra uw eerste afslag benaderd wordt.</string>
     <string name="compass_visible_if_map_rotated_desc">Verborgen wanneer het noorden boven is</string>
@@ -4942,12 +4942,12 @@
     <string name="map_rendering_engine_v1">Versie 1</string>
     <string name="duplacate_widget_added_snackbar">Een dubbele widget wordt aan de lijst toegevoegd.</string>
     <string name="second_marker_widget_desc">U kunt de widget instellen om de afstand of de verwachte aankomsttijd te tonen, tot de tweede markering.</string>
-    <string name="distance_to_intermediate_widget_desc">De widget toont de afstand tot het eerstvolgende punt halverwege. Zodra een halverwege punt wordt gepasseerd, wordt de afstand bijgewerkt naar het volgende halverwege punt.</string>
+    <string name="distance_to_intermediate_widget_desc">De widget toont de afstand tot het eerste tussenliggende punt. Zodra een tussenliggend punt is gepasseerd, wordt de afstand bijgewerkt tot het volgende tussenliggende punt.</string>
     <string name="map_marker_average_speed_desc">Bepaal het tijdsinterval voor berekenen van gemiddelde snelheid (voor berekenen van aankomsttijd).</string>
     <string name="goods_delivery_desc_3">Geldt alleen voor vrachtwagens van maximaal 3,5 ton.</string>
     <string name="live_update_frequency_hour_variant">Nieuwe kaarten worden elk uur gecontroleerd.</string>
     <string name="radius_ruler_mode_desc">Op de widget drukken verandert de modus naar Radius liniaal.</string>
-    <string name="navigation_points_desc">Navigatie widgets worden ingeschakeld tijdens navigatie om informatie te tonen, zoals afstand, aankomst- of resterende tijd, volgende afslagen, peiling, huidige/volgende straatnaam, rijstrook informatie, maximale snelheid, naderende waarschuwingen, bezienswaardigheden, opgeslagen tussenstops.</string>
+    <string name="navigation_points_desc">Navigatie widgets worden ingeschakeld tijdens navigatie om informatie te tonen, zoals afstand, aankomst- of resterende tijd, volgende afslagen, richting, huidige/volgende straatnaam, rijstrook informatie, maximale snelheid, naderende waarschuwingen, bezienswaardigheden, opgeslagen tussenstops.</string>
     <string name="routeInfo_horse_scale_description">Paden laden volgens begaanbaarheid van ruiterpaden</string>
     <string name="simulation_constant_mode_desc">De simulatie zal worden uitgevoerd met een vaste snelheid.</string>
     <string name="approx_safe_mode">Veilige GPX benadering</string>
@@ -5254,4 +5254,9 @@
     <string name="external_sensors_source_of_data">Gegevensbron</string>
     <string name="rendering_value_sacScale_name">SAC schaal</string>
     <string name="rendering_value_caiScale_name">CAI schaal</string>
+    <string name="external_sensor_name_property_description">Sensor naam</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="number_of_tracks">%1$s track</string>
+    <string name="external_device_blood_pressure">Bloeddruk</string>
+    <string name="no_bt_permission">Bluetooth toestemming is niet verleend</string>
 </resources>

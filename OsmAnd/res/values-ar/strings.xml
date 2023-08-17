@@ -1547,7 +1547,7 @@
     <string name="techical_articles_item">مقالات تقنية</string>
     <string name="versions_item">الإصدارات</string>
     <string name="feedback">الأصداء</string>
-    <string name="contact_us">اتصل بنا</string>
+    <string name="shared_string_contact">اتصل بنا</string>
     <string name="poi_context_menu_modify_osm_change">تعديل OSM</string>
     <string name="dashboard_or_drawer_title">لوحة التحكم أو شريط المراقبة</string>
     <string name="only_download_over_wifi">Wi-Fi فقط</string>

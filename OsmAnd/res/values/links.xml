@@ -48,22 +48,15 @@
     <string name="docs_external_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/external-sensors</string>
     <string name="docs_external_sensors_unknown_type" translatable="false">https://docs.osmand.net/docs/intro</string>
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
+    <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>
 
     <string name="community_twitter" translatable="false">https://twitter.com/osmandapp</string>
     <string name="community_reddit" translatable="false">https://www.reddit.com/r/OsmAnd</string>
     <string name="community_facebook" translatable="false">https://www.facebook.com/osmandapp</string>
     <string name="community_vk" translatable="false">https://vk.com/osmandapp</string>
-    
+
+	<string name="issues_github" translatable="false">https://github.com/osmandapp/OsmAnd/issues</string>
     <string name="discussion_github" translatable="false">https://github.com/osmandapp/OsmAnd/discussions</string>
-    <string name="discussion_telegram_english" translatable="false">https://t.me/OsmAndMaps</string>
-    <string name="discussion_telegram_russian" translatable="false">https://t.me/ruosmand</string>
-    <string name="discussion_telegram_german" translatable="false">https://t.me/deosmand</string>
-    <string name="discussion_telegram_italian" translatable="false">https://t.me/itosmand</string>
-    <string name="discussion_telegram_french" translatable="false">https://t.me/frosmand</string>
-    <string name="discussion_telegram_polish" translatable="false">https://t.me/osmand_pl</string>
-    <string name="discussion_telegram_portuguese_brazil" translatable="false">https://t.me/brosmand</string>
-    <string name="discussion_telegram_spanish" translatable="false">https://t.me/osmand_es</string>
-    <string name="discussion_telegram_ukrainian" translatable="false">https://t.me/uaosmand</string>
 
     <string name="url_osm_live_info" translatable="false">https://osmand.net/osm_live</string>
     <string name="url_osm_wiki_map_features" translatable="false">https://wiki.openstreetmap.org/wiki/Map_features</string>
@@ -75,5 +68,6 @@
     <string name="osmand_features" translatable="false">https://osmand.net/docs/user/plugins</string>
     <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="osmand_privacy_policy" translatable="false">https://osmand.net/help-online/privacy-policy</string>
+    <string name="osmand_about" translatable="false">https://docs.osmand.net/help-online/about</string>
 
 </resources>
