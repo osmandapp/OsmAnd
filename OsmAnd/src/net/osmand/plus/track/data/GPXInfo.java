@@ -19,8 +19,6 @@ public class GPXInfo {
 	private GPXFile gpxFile;
 	private boolean selected;
 
-	public String subfolder;
-
 	public GPXInfo(@NonNull String fileName, @Nullable File file) {
 		this.file = file;
 		this.fileName = fileName;
@@ -47,22 +45,10 @@ public class GPXInfo {
 		return fileSize;
 	}
 
-	/**
-	 * @return a file size increased by 512 bytes,
-	 * which allows for proper rounding of small files less than 1KB in size.
-	 * Without this rounding, the file size may be displayed as 0KB, which is inaccurate.
-	 */
-	public long getIncreasedFileSize() {
-		return fileSize > 0 ? fileSize + 512 : 0;
-	}
 
 	@Nullable
 	public File getFile() {
 		return file;
-	}
-
-	public boolean isCurrentRecordingTrack() {
-		return gpxFile != null && gpxFile.showCurrentTrack;
 	}
 
 	@Nullable
