@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
@@ -53,6 +54,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		FragmentActivity activity = requireActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
@@ -66,7 +68,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		setHasOptionsMenu(true);
 		if (view != null) {
 			setupProgressBar(view);
 			setupSwipeRefresh(view);
@@ -95,6 +96,36 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		});
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.action_folder_search) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
+				return true;
+			}
+		}
+		if (itemId == R.id.action_folder_menu) {
+			FragmentActivity activity = getActivity();
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null && activity != null) {
+				View view = activity.findViewById(R.id.action_folder_menu);
+				foldersHelper.showFolderOptionsMenu(selectedFolder, view, this);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		menu.clear();
+		inflater.inflate(R.menu.myplaces_tracks_folder_menu, menu);
+		requireMyActivity().setToolbarVisibility(false);
+	}
+
 	private void onBackPressed() {
 		if (rootFolder.equals(selectedFolder)) {
 			dismiss();
@@ -107,41 +138,11 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void updateContent() {
 		super.updateContent();
-		ActionBar actionBar = requireMyActivity().getSupportActionBar();
+
+		MyPlacesActivity activity = getMyActivity();
+		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
 			actionBar.setTitle(selectedFolder.getName(app));
-		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		if (itemId == R.id.action_search) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				FragmentManager manager = activity.getSupportFragmentManager();
-				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
-				return true;
-			}
-		}
-		if (itemId == R.id.action_menu) {
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null) {
-				View view = requireMyActivity().findViewById(R.id.action_menu);
-				foldersHelper.showFolderOptionsMenu(selectedFolder, view, this);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		menu.clear();
-		inflater.inflate(R.menu.myplaces_tracks_menu, menu);
-		requireMyActivity().setToolbarVisibility(false);
-		for (int i = 0; i < menu.size(); i++) {
-			menu.getItem(i).setOnMenuItemClickListener(this::onOptionsItemSelected);
 		}
 	}
 
@@ -155,9 +156,10 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof AvailableTracksFragment) {
-			((AvailableTracksFragment) targetFragment).updateToolbarTittle();
+
+		MyPlacesActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.updateToolbar();
 		}
 	}
 
