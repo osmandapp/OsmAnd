@@ -5348,4 +5348,5 @@
     <string name="map_widget_glide_target_desc">Affiche la dérive à compenser pour atteindre la destination.</string>
     <string name="wheel_circumference">Circonférence de la roue</string>
     <string name="external_sensor_name_property_description">Nom du capteur</string>
+    <string name="help_article_map_interact_with_map_name">Interagir avec la carte</string>
 </resources>
