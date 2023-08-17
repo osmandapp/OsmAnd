@@ -5,6 +5,7 @@ import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYN
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_CONFLICTS;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
+import static net.osmand.plus.backup.ui.status.BackupStorageCard.TRASH_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CLOUD_CHANGES_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CONFLICTS_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.LOCAL_CHANGES_BUTTON_INDEX;
@@ -37,6 +38,7 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.status.BackupStatus;
+import net.osmand.plus.backup.ui.status.BackupStorageCard;
 import net.osmand.plus.backup.ui.status.CloudSyncCard;
 import net.osmand.plus.backup.ui.status.IntroductionCard;
 import net.osmand.plus.backup.ui.status.WarningStatusCard;
@@ -182,6 +184,10 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			syncCard = new CloudSyncCard(requireActivity(), this);
 			syncCard.setListener(this);
 			container.addView(syncCard.build(view.getContext()));
+
+			BackupStorageCard storageCard = new BackupStorageCard(requireMyActivity());
+			storageCard.setListener(this);
+			container.addView(storageCard.build(view.getContext()));
 		}
 	}
 
@@ -291,6 +297,10 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 				ChangesFragment.showInstance(manager, RECENT_CHANGES_REMOTE);
 			} else if (CONFLICTS_BUTTON_INDEX == buttonIndex) {
 				ChangesFragment.showInstance(manager, RECENT_CHANGES_CONFLICTS);
+			}
+		} else if (card instanceof BackupStorageCard) {
+			if (TRASH_BUTTON_INDEX == buttonIndex) {
+				// Show history trash screen from here
 			}
 		}
 	}
