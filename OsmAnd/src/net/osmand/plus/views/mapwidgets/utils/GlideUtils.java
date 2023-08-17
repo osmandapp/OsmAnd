@@ -63,7 +63,7 @@ public class GlideUtils {
 		}
 	}
 
-	public static boolean areAltitudeEqual(@Nullable Double a1, @Nullable Double a2) {
+	public static boolean areAltitudesEqual(@Nullable Double a1, @Nullable Double a2) {
 		return a1 == null && a2 == null
 				|| a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
 	}

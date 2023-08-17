@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.areAltitudeEqual;
+import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.areAltitudesEqual;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,8 +55,8 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	}
 
 	private void updateTargetAltitude() {
-		LatLon newTargetLocation = getTargetLocation();
-		boolean locationChanged = !MapUtils.areLatLonEqual(newTargetLocation, cachedTargetLocation);
+		LatLon targetLocation = getTargetLocation();
+		boolean locationChanged = !MapUtils.areLatLonEqual(targetLocation, cachedTargetLocation);
 
 		boolean metricSystemChanged = isUpdateNeeded();
 		boolean updateNeeded = locationChanged || metricSystemChanged;
@@ -66,12 +66,12 @@ public class GlideTargetWidget extends GlideBaseWidget {
 			return;
 		}
 
-		cachedTargetLocation = newTargetLocation;
+		cachedTargetLocation = targetLocation;
 
-		calculateAltitude(newTargetLocation, newTargetAltitude -> {
+		calculateAltitude(targetLocation, targetAltitude -> {
 			markUpdated();
-			if (forceUpdate || metricSystemChanged || !areAltitudeEqual(cachedTargetAltitude, newTargetAltitude)) {
-				cachedTargetAltitude = newTargetAltitude;
+			if (forceUpdate || metricSystemChanged || !areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
+				cachedTargetAltitude = targetAltitude;
 				if (cachedTargetAltitude == null) {
 					setText(NO_VALUE, null);
 				} else {
@@ -94,7 +94,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		Double currentAltitude = currentLocation != null && currentLocation.hasAltitude()
 				? currentLocation.getAltitude()
 				: null;
-		boolean currentAltitudeChanged = !areAltitudeEqual(currentAltitude, cachedCurrentAltitude);
+		boolean currentAltitudeChanged = !areAltitudesEqual(currentAltitude, cachedCurrentAltitude);
 
 		LatLon targetLocation = getTargetLocation();
 		boolean targetLocationChanged = !MapUtils.areLatLonEqual(targetLocation, cachedTargetLocation);
@@ -112,7 +112,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 		calculateAltitude(targetLocation, targetAltitude -> {
 			markUpdated();
-			if (forceUpdate || anyChanged || !areAltitudeEqual(cachedTargetAltitude, targetAltitude)) {
+			if (forceUpdate || anyChanged || !areAltitudesEqual(cachedTargetAltitude, targetAltitude)) {
 				cachedTargetAltitude = targetAltitude;
 				String ratio = calculateFormattedRatio(currentLocation, currentAltitude, targetLocation, targetAltitude);
 				if (forceUpdate || !Objects.equals(cachedFormattedRatio, ratio)) {
