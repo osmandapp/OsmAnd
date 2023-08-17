@@ -5357,4 +5357,25 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="wheel_circumference">Окружність колеса</string>
     <string name="external_sensor_name_property_description">Назва датчика</string>
+    <string name="help_article_map_legend_nautical_map_name">Стиль морської мапи</string>
+    <string name="help_article_map_legend_osmand_name">Стиль мапи OsmAnd</string>
+    <string name="help_article_map_legend_ski_map_name">Стиль гірськолижної мапи</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_map_interact_with_map_name">Взаємодія з мапою</string>
+    <string name="help_article_map_point_layers_on_map_name">Точки на мапі</string>
+    <string name="help_article_map_raster_maps_name">Растрові мапи (онлайн / офлайн)</string>
+    <string name="help_article_map_vector_maps_name">Векторні мапи (стилі мапи)</string>
+    <string name="help_article_navigation_guidance_name">Вказівки</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Голосові вказівки / сповіщення</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Автомаршрутизація (вантажівки, мотоцикли)</string>
+    <string name="help_article_navigation_routing_online_routing_name">Онлайн-маршрутизація</string>
+    <string name="help_article_map_map_context_menu_name">Контекстне меню мапи</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Екран мапи під час навігації</string>
+    <string name="help_article_navigation_routing_name">Параметри маршруту</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Про маршрутизацію OsmAnd</string>
+    <string name="help_article_map_track_context_menu_name">Контекстне меню треків</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Веломаршрутизація (MTB)</string>
+    <string name="help_article_map_tracks_on_map_name">Треки та маршрути</string>
 </resources>
