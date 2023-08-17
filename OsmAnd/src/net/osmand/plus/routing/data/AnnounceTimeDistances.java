@@ -111,7 +111,7 @@ public class AnnounceTimeDistances {
 		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
-		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
+		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * (2.0f - arrivalDistanceFactor); // 20 seconds
 
 		// assume for backward compatibility speed - 10 m/s
 		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * arrivalDistanceFactor); // 70 m
