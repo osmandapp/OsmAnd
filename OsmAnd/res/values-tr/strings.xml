@@ -1378,7 +1378,7 @@
     <string name="av_camera_focus_hiperfocal">Hiperodak odak</string>
     <string name="av_camera_pic_size">Kamera resim boyutu</string>
     <string name="av_camera_pic_size_descr">Kamera resim boyutunu ayarlayın</string>
-    <string name="navigation_intent_invalid">Geçersiz biçim:%s</string>
+    <string name="navigation_intent_invalid">Geçersiz biçim: %s</string>
     <string name="plugin_install_needs_network">Bu eklentiyi yüklemek için çevrim içi olmanız gerekmektedir.</string>
     <string name="shared_string_get">Al</string>
     <string name="use_fast_recalculation">Akıllı rota yeniden hesaplama</string>
@@ -1441,7 +1441,7 @@
     <string name="fav_imported_sucessfully">Sık Kullanılanlar içe aktarıldı</string>
     <string name="import_file_favourites">Verileri GPX dosyası olarak kaydedin ya da ara noktaları \'Sık Kullanılanlar\'a aktarın\?</string>
     <string name="fav_file_to_load_not_found">{0} konumunda Sık Kullanılanlar içeren GPX dosyası bulunamadı</string>
-    <string name="share_fav_subject">Sık Osmand üzerinden paylaşılan</string>
+    <string name="share_fav_subject">OsmAnd aracılığıyla paylaşılan Favoriler</string>
     <string name="layer_osm_bugs">OSM notları (çevrim içi)</string>
     <string name="use_trackball_descr">Haritayı hareket ettirmek için bir izleme topu aygıtı kullanın.</string>
     <string name="use_trackball">İzleme topu kullan</string>
@@ -1495,15 +1495,15 @@
     <string name="shared_string_release">Çıkış</string>
     <string name="local_index_action_do">Siz %1$s %2$s kalem (ler) üzeresiniz. Devam?</string>
     <string name="index_name_netherlands">Avrupa - Hollanda</string>
-    <string name="share_route_as_gpx">Rotayı GPX dosyası olarak paylaşın</string>
-    <string name="share_route_subject">Rotayı Osmand üzerinden paylaşın</string>
+    <string name="share_route_as_gpx">Rotayı GPX dosyası olarak paylaş</string>
+    <string name="share_route_subject">OsmAnd aracılığıyla paylaşılan rota</string>
     <string name="local_index_description">Daha fazla ayrıntı görmek için mevcut ögelere dokunun, devre dışı bırakmak ya da silmek için uzun dokunun. Cihazdaki güncel veriler (%1$s boş):</string>
     <string name="arrival_distance_factor_early">Erken</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Geç</string>
     <string name="arrival_distance_factor_at_last">Son metrelerde</string>
     <string name="arrival_distance">Varış duyurusu</string>
-    <string name="arrival_distance_descr">Varış duyurusunu ne yakınlıkta istiyorsunuz\?</string>
+    <string name="arrival_distance_descr">Varış duyurusunu ne kadar kala istiyorsunuz\?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş rotaları</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
@@ -1584,7 +1584,7 @@
     <string name="use_points_as_intermediates">Noktalar arasındaki rotayı hesapla</string>
     <string name="always_center_position_on_map">Konumu sürekli ortada tut</string>
     <string name="voice_pref_title">Ses</string>
-    <string name="misc_pref_title">Çeşitli</string>
+    <string name="misc_pref_title">Diğer</string>
     <string name="localization_pref_title">Yerelleştirme</string>
     <string name="index_item_nation_addresses">Ülke adresleri</string>
     <string name="index_item_world_altitude_correction">Dünya rakım düzeltme</string>
@@ -4865,4 +4865,5 @@
     <string name="show_borders_of_downloaded_maps">İndirilen haritaların sınırlarını göster</string>
     <string name="show_map_symbols">Harita sembollerini göster</string>
     <string name="show_map_symbols_desc">Metin, yol işaretleri ve diğerleri.</string>
+    <string name="glide_ratio_to_target">Hedefe kalan süzülme oranı</string>
 </resources>
