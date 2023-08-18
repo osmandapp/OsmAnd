@@ -798,7 +798,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		if (gpxFile.modifiedTime != modifiedTime) {
 			modifiedTime = gpxFile.modifiedTime;
-			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile);
+			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile, true);
 			if (selectedGpxFile.getDisplayGroups(app) != null) {
 				displayGroups = selectedGpxFile.getDisplayGroups(app);
 			}

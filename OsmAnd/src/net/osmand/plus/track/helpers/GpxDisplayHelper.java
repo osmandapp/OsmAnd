@@ -63,7 +63,7 @@ public class GpxDisplayHelper {
 		}
 		group.setDescription(description);
 		group.setGeneralTrack(t.generalTrack);
-		SplitTrackAsyncTask.processGroupTrack(app, group);
+
 		return group;
 	}
 
@@ -119,13 +119,17 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	public List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile) {
+	public List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile, boolean processTrack) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.tracks.size() > 0) {
 			for (int i = 0; i < gpxFile.tracks.size(); i++) {
 				GpxDisplayGroup group = buildGpxDisplayGroup(gpxFile, i, name);
-				if (!Algorithms.isEmpty(group.getDisplayItems())) {
+
+				if (processTrack) {
+					SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
+				}
+				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
 					dg.add(group);
 				}
 			}
@@ -181,7 +185,7 @@ public class GpxDisplayHelper {
 	@NonNull
 	public List<GpxDisplayGroup> processSplitSync(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
 		GpxSplitParams params = new GpxSplitParams(dataItem);
-		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile);
+		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
 			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
@@ -196,7 +200,7 @@ public class GpxDisplayHelper {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
 		if (!isSplittingTrack(selectedGpxFile) && dataItem != null) {
 			GpxSplitParams params = new GpxSplitParams(dataItem);
-			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile);
+			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, callback);
 
 			splitTrackAsync(selectedGpxFile, groups, params, listener);
