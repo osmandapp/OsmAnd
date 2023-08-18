@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="trash_is_empty_banner_desc">Files removed from OsmAnd Cloud will be available here for 30 days after.</string>
+    <string name="trash_is_empty">Trash is empty</string>
     <string name="shared_string_trash">Trash</string>
     <string name="shared_string_storage">Storage</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>

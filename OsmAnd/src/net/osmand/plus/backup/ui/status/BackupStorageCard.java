@@ -17,7 +17,7 @@ public class BackupStorageCard extends BaseCard {
 	public static final int TRASH_BUTTON_INDEX = 1;
 
 	public BackupStorageCard(@NonNull FragmentActivity activity) {
-		super(activity);
+		super(activity, false);
 	}
 
 	@Override

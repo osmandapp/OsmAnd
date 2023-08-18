@@ -24,6 +24,8 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
 
+	public ViewGroup container;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,9 +37,10 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_trash, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		this.container = view.findViewById(R.id.container);
 
 		setupToolbar(view);
-
+		updateViewContent();
 		return view;
 	}
 
@@ -58,6 +61,24 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		});
 	}
 
+	private void updateViewContent() {
+		container.removeAllViews();
+
+		if (hasTrashHistory()) {
+			setupNormalView();
+		} else {
+			setupEmptyView();
+		}
+	}
+
+	private void setupEmptyView() {
+		themedInflater.inflate(R.layout.card_cloud_trash_empty_banner, container);
+	}
+
+	private void setupNormalView() {
+
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -74,6 +95,10 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+	}
+
+	public boolean hasTrashHistory() {
+		return false;
 	}
 
 	@Nullable
