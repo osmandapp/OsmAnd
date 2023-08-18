@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/active_buttons_and_links_bg_pressed_dark" android:state_pressed="true"/>
-    <item android:drawable="@color/keyboard_item_control_dark_bg"/>
+    <item android:drawable="@color/card_and_list_background_dark"/>
 </selector>
