@@ -67,7 +67,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		updateBackground(false);
 		cancelRowBgView.setBackgroundResource(getCancelRowBgResId());
 		mainView.findViewById(R.id.divider).setBackgroundResource(nightMode
-				? R.color.route_info_bottom_view_bg_dark : R.color.ctx_menu_buttons_divider_light);
+				? R.color.card_and_list_background_dark : R.color.divider_color_light);
 
 		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
 			@Override
@@ -177,7 +177,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 
 	private int getCancelRowBgResId() {
 		if (portrait) {
-			return nightMode ? R.color.list_background_color_dark : R.color.route_info_bottom_view_bg_light;
+			return nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		}
 		return nightMode ? R.drawable.bg_additional_menu_sides_dark : R.drawable.bg_additional_menu_sides_light;
 	}
@@ -190,7 +190,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialo
 		int bgResId;
 		if (portrait) {
 			bgResId = expanded && expandedToFullScreen()
-					? (nightMode ? R.color.list_background_color_dark : R.color.route_info_bottom_view_bg_light)
+					? (nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light)
 					: (nightMode ? R.drawable.bg_additional_menu_dark : R.drawable.bg_additional_menu_light);
 		} else {
 			bgResId = expanded && expandedToFullScreen()

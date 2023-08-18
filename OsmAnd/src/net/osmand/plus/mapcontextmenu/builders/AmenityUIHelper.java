@@ -716,7 +716,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.text_color_secondary_light));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
@@ -731,7 +731,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
-		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
 		if (isPhoneNumber || isUrl) {
 			textView.setTextColor(linkTextColor);
@@ -903,7 +903,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, topMargin, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.text_color_secondary_light));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);

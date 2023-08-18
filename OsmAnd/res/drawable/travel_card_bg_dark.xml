@@ -5,7 +5,7 @@
 	</item>
 	<item>
 		<shape>
-			<solid android:color="@color/wikivoyage_card_bg_dark"/>
+			<solid android:color="@color/card_and_list_background_dark"/>
 			<corners android:radius="3dp"/>
 		</shape>
 	</item>

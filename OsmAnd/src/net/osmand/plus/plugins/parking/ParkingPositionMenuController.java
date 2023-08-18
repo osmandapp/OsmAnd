@@ -84,7 +84,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : R.color.icon_color_default_light;
+		return plugin.getParkingType() ? R.color.text_color_negative : R.color.icon_color_default_light;
 	}
 
 	@NonNull

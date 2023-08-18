@@ -121,12 +121,12 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 	@Override
 	protected int getDividerColorId() {
-		return nightMode ? R.color.route_info_bottom_view_bg_dark : -1;
+		return nightMode ? R.color.card_and_list_background_dark : -1;
 	}
 
 	@Override
 	protected Drawable getActiveIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_direction_color_dark : R.color.map_widget_blue);
+		return getIcon(id, nightMode ? R.color.icon_color_active_dark : R.color.map_widget_blue);
 	}
 
 	private Drawable getBackgroundIcon(@DrawableRes int resId) {

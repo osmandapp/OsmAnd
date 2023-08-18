@@ -170,8 +170,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	private void setLanguageListEnable(boolean enable) {
 		int textColorPrimaryId = ColorUtilities.getPrimaryTextColorId(nightMode);
 		int disableColorId = nightMode ?
-				R.color.active_buttons_and_links_text_disabled_dark :
-				R.color.active_buttons_and_links_text_disabled_light;
+				R.color.text_color_secondary_dark :
+				R.color.text_color_secondary_light;
 		int profileColor = appMode.getProfileColor(nightMode);
 		int disableColor = ContextCompat.getColor(app, disableColorId);
 		for (BottomSheetItemWithCompoundButton item : languageItems) {

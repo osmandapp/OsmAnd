@@ -231,7 +231,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (window != null) {
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 			if (!lightTheme) {
-				window.setStatusBarColor(getResolvedColor(R.color.status_bar_coordinate_input_dark));
+				window.setStatusBarColor(getResolvedColor(R.color.status_bar_main_dark));
 			}
 		}
 		return dialog;
@@ -272,7 +272,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			TextView toolbar = mainView.findViewById(R.id.toolbar_text);
 			toolbar.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), !lightTheme));
 			toolbar.setText(R.string.coord_input_add_point);
-			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.card_and_list_background_light : R.color.card_and_list_background_dark);
 			setBackgroundColor(mainView, ColorUtilities.getActivityBgColorId(!lightTheme));
 		} else {
 			int resId = AndroidUtils.getNavigationIconResId(getContext());
@@ -283,7 +283,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			TextView toolbar = mainView.findViewById(R.id.toolbar_text);
 			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
-			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_color_light : R.color.route_info_bottom_view_bg_dark);
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_main_light : R.color.card_and_list_background_dark);
 		}
 
 		optionsButton.setOnClickListener(view -> {
@@ -327,7 +327,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			View dataAreaView = View.inflate(ctx, R.layout.coordinate_input_land_data_area, null);
 			View keyboardAndListView = View.inflate(ctx, R.layout.coordinate_input_land_keyboard_and_list, null);
-			setBackgroundColor(dataAreaView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
+			setBackgroundColor(dataAreaView, lightTheme ? R.color.card_and_list_background_light : R.color.card_and_list_background_dark);
 			setBackgroundColor(keyboardAndListView, ColorUtilities.getActivityBgColorId(!lightTheme));
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
@@ -347,8 +347,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		setupSideOfTheWorldBtns(R.id.lat_side_of_the_world_btn, R.id.lon_side_of_the_world_btn);
 
-		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.ctx_menu_buttons_divider_light : R.color.ctx_menu_buttons_divider_dark);
-		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
+		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.divider_color_light : R.color.divider_color_dark);
+		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.activity_background_color_light : R.color.card_and_list_background_dark);
 
 		ImageView pointNameKeyboardBtn = mainView.findViewById(R.id.point_name_keyboard_btn);
 		pointNameKeyboardBtn.setImageDrawable(getColoredIcon(R.drawable.ic_action_keyboard, R.color.icon_color_default_light));
@@ -414,9 +414,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		setBackgroundColor(R.id.bottom_controls_container, lightTheme
-				? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg);
+				? R.color.activity_background_color_light : R.color.card_and_list_background_dark);
 		TextView addButton = mainView.findViewById(R.id.add_marker_button);
-		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_add, colorId), null);
 		addButton.setText(R.string.shared_string_add);
 		addButton.setOnClickListener(new View.OnClickListener() {
@@ -442,7 +442,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		View keyboardView = mainView.findViewById(R.id.keyboard_view);
 
-		int dividersColorResId = lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark;
+		int dividersColorResId = lightTheme ? R.color.divider_color_light : R.color.divider_color_dark;
 		setBackgroundColor(keyboardView, dividersColorResId);
 		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
 
@@ -578,7 +578,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		Context ctx = requireContext();
 		ColorStateList clearItemTextColorStateList = AndroidUtils.createPressedColorStateList(ctx,
-				R.color.keyboard_item_divider_control_color_light, R.color.keyboard_item_divider_control_color_light_pressed);
+				R.color.icon_color_default_light, R.color.keyboard_item_divider_control_color_light_pressed);
 		ColorStateList numberColorStateList = AndroidUtils.createPressedColorStateList(ctx,
 				R.color.keyboard_item_text_color_light, R.color.keyboard_item_text_color_light_pressed);
 
@@ -610,7 +610,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (lightTheme) {
 					itemTv.setTextColor(clearItem ? clearItemTextColorStateList : numberColorStateList);
 				} else {
-					itemTv.setTextColor(clearItem ? getResolvedColor(R.color.keyboard_item_divider_control_color_dark) : textColorDark);
+					itemTv.setTextColor(clearItem ? getResolvedColor(R.color.icon_color_default_dark) : textColorDark);
 				}
 				itemTopSpace.setVisibility(View.VISIBLE);
 				itemTv.setVisibility(View.VISIBLE);
@@ -626,7 +626,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (lightTheme) {
 					DrawableCompat.setTintList(icon, numberColorStateList);
 				} else {
-					int color = ContextCompat.getColor(ctx, R.color.keyboard_item_divider_control_color_dark);
+					int color = ContextCompat.getColor(ctx, R.color.icon_color_default_dark);
 					DrawableCompat.setTint(icon, color);
 				}
 				itemIv.setImageDrawable(icon);
@@ -1170,7 +1170,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		selectedWpt = null;
 		TextView addButton = mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_add);
-		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_add, colorId), null);
 		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_add_point);
 	}
@@ -1204,7 +1204,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_edit_point);
 		TextView addButton = mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_apply);
-		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_apply, colorId), null);
 		showKeyboard();
 	}

@@ -51,7 +51,7 @@
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				osmand:srcCompat="@drawable/ic_action_home_dark"
-				android:tint="@color/description_font_and_bottom_sheet_icons" />
+				android:tint="@color/icon_color_default_light" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -80,7 +80,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/home_button"
-					android:textColor="@color/description_font_and_bottom_sheet_icons"
+					android:textColor="@color/text_color_secondary_light"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:ignore="UnusedAttribute"
 					tools:text="Amsterdam" />
@@ -117,7 +117,7 @@
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				osmand:srcCompat="@drawable/ic_action_work"
-				android:tint="@color/description_font_and_bottom_sheet_icons" />
+				android:tint="@color/icon_color_default_light" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -146,7 +146,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/work_button"
-					android:textColor="@color/description_font_and_bottom_sheet_icons"
+					android:textColor="@color/text_color_secondary_light"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:ignore="UnusedAttribute"
 					tools:text="Business centre" />

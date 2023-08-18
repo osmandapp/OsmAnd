@@ -190,7 +190,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 		if (portrait) {
 			mainView.findViewById(R.id.toolbar_divider).setBackgroundColor(ContextCompat.getColor(mapActivity,
-					nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+					nightMode ? R.color.app_bar_main_dark : R.color.divider_color_light));
 
 			Drawable arrow = getContentIcon(fullScreen ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(arrow);
@@ -369,7 +369,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	@Override
 	public int getStatusBarColorId() {
 		if (fullScreen || !portrait) {
-			return nightMode ? R.color.app_bar_color_dark : R.color.status_bar_route_light;
+			return nightMode ? R.color.app_bar_main_dark : R.color.status_bar_main_light;
 		}
 		return R.color.status_bar_transparent_gradient;
 	}

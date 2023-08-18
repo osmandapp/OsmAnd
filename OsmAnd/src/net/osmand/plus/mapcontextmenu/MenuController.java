@@ -566,7 +566,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					break;
 				}
 			}
-			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+			return open ? R.color.text_color_positive : R.color.text_color_negative;
 		} else if (shouldShowMapSize()) {
 			return R.color.icon_color_default_light;
 		}
@@ -577,8 +577,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (openingHoursInfo != null) {
-				int colorOpen = mapActivity.getColor(R.color.ctx_menu_amenity_opened_text_color);
-				int colorClosed = mapActivity.getColor(R.color.ctx_menu_amenity_closed_text_color);
+				int colorOpen = mapActivity.getColor(R.color.text_color_positive);
+				int colorClosed = mapActivity.getColor(R.color.text_color_negative);
 				return getSpannableOpeningHours(openingHoursInfo, colorOpen, colorClosed);
 			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
@@ -868,8 +868,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
-			setBgIds(R.color.app_bar_color_light, R.color.app_bar_color_dark,
-					R.color.app_bar_color_light, R.color.app_bar_color_dark);
+			setBgIds(R.color.app_bar_main_light, R.color.app_bar_main_dark,
+					R.color.app_bar_main_light, R.color.app_bar_main_dark);
 			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setTitleTextClrIds(R.color.color_white, R.color.color_white);

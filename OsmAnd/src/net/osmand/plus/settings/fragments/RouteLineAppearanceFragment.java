@@ -262,7 +262,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		if (!isNightMode() && view != null) {
 			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 		}
-		return isNightMode() ? R.color.status_bar_color_dark : R.color.divider_color_light;
+		return isNightMode() ? R.color.status_bar_main_dark : R.color.divider_color_light;
 	}
 
 	@Override

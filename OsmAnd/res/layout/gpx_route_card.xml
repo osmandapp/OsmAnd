@@ -44,7 +44,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
-				android:textColor="@color/description_font_and_bottom_sheet_icons"
+				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="Tracks on the map - 10" />
 
