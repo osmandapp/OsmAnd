@@ -43,7 +43,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	private final Map<File, GpxDataItem> readingItemsMap;
 	private final GpxDbReaderCallback listener;
 
-	private File gpxFile;
+	private File file;
 	private SearchSettings searchSettings;
 
 
@@ -59,12 +59,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	@Nullable
-	public File getGpxFile() {
-		return gpxFile;
+	public File getFile() {
+		return file;
 	}
 
 	public boolean isReading() {
-		return !Algorithms.isEmpty(readingItems) || gpxFile != null;
+		return !Algorithms.isEmpty(readingItems) || file != null;
 	}
 
 	@Override
@@ -72,17 +72,17 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		SQLiteConnection conn = database.openConnection(false);
 		if (conn != null) {
 			try {
-				gpxFile = readingItems.poll();
-				while (gpxFile != null && !isCancelled()) {
-					GpxDataItem item = readingItemsMap.remove(gpxFile);
+				file = readingItems.poll();
+				while (file != null && !isCancelled()) {
+					GpxDataItem item = readingItemsMap.remove(file);
 					if (item != null && item.getFile() == null) {
-						item = database.getItem(gpxFile, conn);
+						item = database.getItem(file, conn);
 					}
-					if (GpxDbHelper.isAnalyseNeeded(gpxFile, item)) {
-						GPXFile file = GPXUtilities.loadGPXFile(gpxFile);
-						GPXTrackAnalysis analysis = file.getAnalysis(gpxFile.lastModified());
+					if (GpxDbHelper.isAnalyseNeeded(file, item)) {
+						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
 						if (item == null || item.getFile() == null) {
-							item = new GpxDataItem(gpxFile, analysis);
+							item = new GpxDataItem(file, analysis);
 							database.insert(item, conn);
 						} else {
 							database.updateAnalysis(item, analysis, conn);
@@ -97,7 +97,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 					if (!isCancelled()) {
 						publishProgress(item);
 					}
-					gpxFile = readingItems.poll();
+					file = readingItems.poll();
 				}
 			} finally {
 				conn.close();

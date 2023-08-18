@@ -47,24 +47,7 @@ public class GpxDisplayHelper {
 		return app.getString(resId, formatArgs);
 	}
 
-	public GpxDisplayGroup buildGeneralGpxDisplayGroup(GPXFile gpxFile, Track track) {
-		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
-		String name = getGroupName(gpxFile);
-		group.setGpxName(name);
-		group.setColor(track.getColor(gpxFile.getColor(0)));
-		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
-		group.setTrack(track);
-		group.setName(getString(R.string.gpx_selection_track, name, ""));
-		String description = "";
-		if (track.name != null && !track.name.isEmpty()) {
-			description = track.name + " " + description;
-		}
-		group.setDescription(description);
-		group.setGeneralTrack(true);
-		SplitTrackAsyncTask.processGroupTrack(app, group);
-		return group;
-	}
-
+	@NonNull
 	public GpxDisplayGroup buildGpxDisplayGroup(@NonNull GPXFile gpxFile, int trackIndex, String name) {
 		Track t = gpxFile.tracks.get(trackIndex);
 		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
@@ -111,12 +94,13 @@ public class GpxDisplayHelper {
 		return group;
 	}
 
-	public String getGroupName(GPXFile g) {
-		String name = g.path;
-		if (g.showCurrentTrack) {
-			name = getString(R.string.shared_string_currently_recording_track);
+	@NonNull
+	public static String getGroupName(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+		String name = gpxFile.path;
+		if (gpxFile.showCurrentTrack) {
+			name = app.getString(R.string.shared_string_currently_recording_track);
 		} else if (Algorithms.isEmpty(name)) {
-			name = getString(R.string.current_route);
+			name = app.getString(R.string.current_route);
 		} else {
 			int i = name.lastIndexOf('/');
 			if (i >= 0) {
@@ -137,7 +121,7 @@ public class GpxDisplayHelper {
 	@NonNull
 	public List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
-		String name = getGroupName(gpxFile);
+		String name = getGroupName(app, gpxFile);
 		if (gpxFile.tracks.size() > 0) {
 			for (int i = 0; i < gpxFile.tracks.size(); i++) {
 				GpxDisplayGroup group = buildGpxDisplayGroup(gpxFile, i, name);

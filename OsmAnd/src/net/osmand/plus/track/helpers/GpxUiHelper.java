@@ -105,16 +105,6 @@ public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
 
-
-	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
-		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
-		return getDescription(app, analysis, html);
-	}
-
-	public static String getDescription(OsmandApplication app, TrkSegment t, boolean html) {
-		return getDescription(app, GPXTrackAnalysis.prepareInformation(0, null, t), html);
-	}
-
 	public static String getColorValue(String clr, String value, boolean html) {
 		if (!html) {
 			return value;
@@ -958,6 +948,7 @@ public class GpxUiHelper {
 		return gpx;
 	}
 
+	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;

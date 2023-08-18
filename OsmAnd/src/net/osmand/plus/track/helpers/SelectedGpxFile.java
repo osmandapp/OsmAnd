@@ -82,6 +82,15 @@ public class SelectedGpxFile {
 				: getTrackAnalysis(app);
 	}
 
+	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
+		this.trackAnalysis = trackAnalysis;
+	}
+
+	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
+		this.displayGroups = displayGroups;
+		this.splitProcessed = true;
+	}
+
 	protected void update(@NonNull OsmandApplication app) {
 		modifiedTime = gpxFile.modifiedTime;
 		pointsModifiedTime = gpxFile.pointsModifiedTime;

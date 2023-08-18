@@ -71,7 +71,8 @@ public class TrackDisplayHelper {
 	public QuadRect getRect() {
 		if (filteredGpxFile != null) {
 			return filteredGpxFile.getRect();
-		} if (gpxFile != null) {
+		}
+		if (gpxFile != null) {
 			return gpxFile.getRect();
 		} else {
 			return new QuadRect(0, 0, 0, 0);
