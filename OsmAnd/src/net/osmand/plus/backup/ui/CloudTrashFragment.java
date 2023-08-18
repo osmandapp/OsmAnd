@@ -16,19 +16,30 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.trash.TrashItem;
+import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CloudTrashFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
 
-	public ViewGroup container;
+	private ViewGroup container;
+
+	private TrashUtils trashUtils;
+	private List<TrashItem> trashItems = new ArrayList<>();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		trashUtils = new TrashUtils(app);
+		updateData();
 	}
 
 	@Nullable
@@ -42,6 +53,10 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		setupToolbar(view);
 		updateViewContent();
 		return view;
+	}
+
+	private void updateData() {
+		trashItems = trashUtils.collectTrashItems();
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -98,7 +113,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 	}
 
 	public boolean hasTrashHistory() {
-		return false;
+		return !Algorithms.isEmpty(trashItems);
 	}
 
 	@Nullable
