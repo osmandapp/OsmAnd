@@ -4866,4 +4866,6 @@
     <string name="show_map_symbols">Harita sembollerini göster</string>
     <string name="show_map_symbols_desc">Metin, yol işaretleri ve diğerleri.</string>
     <string name="glide_ratio_to_target">Hedefe kalan süzülme oranı</string>
+    <string name="map_widget_glide_average_desc">Ayarlanan ara için ortalama süzülme oranını gösterir.</string>
+    <string name="map_widget_group_glide_desc">Widget\'lar, hedefe kalan süzülme oranını veya şu anki yolculuğun ortalama süzülme oranını gösterir.</string>
 </resources>
