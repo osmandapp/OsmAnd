@@ -5361,4 +5361,11 @@
     <string name="wheel_circumference">Radumfang</string>
     <string name="external_sensor_name_property_description">Sensorname</string>
     <string name="help_article_map_legend_nautical_map_name">Seekartenstil</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd Kartenstil</string>
+    <string name="help_article_map_legend_ski_map_name">Ski Kartenstil</string>
+    <string name="help_article_map_interact_with_map_name">Mit Karte interagieren</string>
+    <string name="help_article_map_map_context_menu_name">Kontextmenü der Karte</string>
+    <string name="help_article_map_point_layers_on_map_name">Punkte auf der Karte</string>
+    <string name="help_article_map_raster_maps_name">Rasterkarten (Online / Offline)</string>
+    <string name="help_article_map_track_context_menu_name">Kontextmenü der Tracks</string>
 </resources>
