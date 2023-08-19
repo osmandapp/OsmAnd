@@ -2610,11 +2610,11 @@
 \n</string>
     <string name="osmand_extended_description_part4">Narciarska:
 \n Wtyczka map tras narciarskich OsmAnd umożliwia oglądanie tras narciarskich o różnym stopniu trudności oraz dodatkowe informacje, takie jak lokalizacje wyciągów i innych obiektów.</string>
-    <string name="osmand_extended_description_part5">Rowerowa 
-\n • Znajdź ścieżki rowerowe na mapie 
-\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych 
-\n • Zobacz prędkość i wysokość 
-\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią 
+    <string name="osmand_extended_description_part5">Rowerowa
+\n • Znajdź ścieżki rowerowe na mapie
+\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych
+\n • Zobacz prędkość i wysokość
+\n • Opcja nagrywania GPX umożliwia nagranie podróży i udostępnianie jej
 \n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
     <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast 
 \n • Mapa pokazuje ci trasy piesze 
