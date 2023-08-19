@@ -5365,4 +5365,9 @@
     <string name="help_article_personal_name">Mes données</string>
     <string name="help_article_map_legend_ski_map_name">Style de carte Ski</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>
+    <string name="help_article_map_map_context_menu_name">Menu contextuel de la carte</string>
+    <string name="help_article_map_track_context_menu_name">Menu contextuel des traces</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Carte pendant la navigation</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Calcul de l\'itinéraire vélo (VTT)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Calcul de l\'itinéraire en bateau</string>
 </resources>
