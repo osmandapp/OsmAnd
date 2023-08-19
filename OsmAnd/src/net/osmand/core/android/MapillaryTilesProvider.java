@@ -63,6 +63,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
+	private static final int MIN_ZOOM = TileSourceManager.getMapillaryVectorSource().getMinimumZoomSupported();
+	private static final int MAX_ZOOM = TileSourceManager.getMapillaryVectorSource().getMaximumZoomSupported();
+
 	private static final int TILE_LOAD_TIMEOUT = 30000;
 	private static final int MAX_GEOMETRY_SIZE = 32000;
 
@@ -121,22 +124,24 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.swigToEnum(tileSource.getMinimumZoomSupported());
+		return ZoomLevel.swigToEnum(MIN_ZOOM);
 	}
 
 	@Override
 	public ZoomLevel getMaxZoom() {
-		return ZoomLevel.swigToEnum(tileSource.getMaximumZoomSupported());
+		return ZoomLevel.swigToEnum(MAX_ZOOM);
 	}
 
 	@Override
 	public ZoomLevel getMinVisibleZoom() {
-		return getMinZoom();
+		int minVisibleZoom = Math.max(MIN_ZOOM, tileSource.getMinimumZoomSupported());
+		return ZoomLevel.swigToEnum(minVisibleZoom);
 	}
 
 	@Override
 	public ZoomLevel getMaxVisibleZoom() {
-		return getMaxZoom();
+		int maxVisibleZoom = Math.min(MAX_ZOOM, tileSource.getMaximumZoomSupported());
+		return ZoomLevel.swigToEnum(maxVisibleZoom);
 	}
 
 	@Override
