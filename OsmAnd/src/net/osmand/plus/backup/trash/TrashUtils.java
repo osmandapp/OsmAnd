@@ -4,6 +4,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.formatChangesPassedTime;
 import static java.util.Collections.sort;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,9 +26,18 @@ public class TrashUtils {
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("LLLL yyyy", Locale.getDefault());
 
 	private final OsmandApplication app;
+	private TrashDataUpdatedListener listener;
+
+	// Fake data only for testing
+	private static List<TrashItem> fakeTrashData = null;
+	private static boolean isFakeDataInitialized = false;
 
 	public TrashUtils(@NonNull OsmandApplication app) {
 		this.app = app;
+	}
+
+	public void setListener(@Nullable TrashDataUpdatedListener listener) {
+		this.listener = listener;
 	}
 
 	public List<TrashGroup> collectSortedTrashData() {
@@ -56,7 +66,19 @@ public class TrashUtils {
 
 	@NonNull
 	public List<TrashItem> collectTrashItems() {
-		return collectTestTrashItems(app);
+		if (!isFakeDataInitialized) {
+			fakeTrashData = collectTestTrashItems(app);
+			isFakeDataInitialized = true;
+		}
+		return fakeTrashData;
+	}
+
+	public void emptyTrash() {
+		fakeTrashData.clear();
+		app.showShortToastMessage(R.string.trash_is_empty);
+		if (listener != null) {
+			listener.onTrashDataUpdated();
+		}
 	}
 
 	private static String formatDate(long dateTimeMillis) {
@@ -172,4 +194,7 @@ public class TrashUtils {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, deleted, formattedDate);
 	}
 
+	public interface TrashDataUpdatedListener {
+		void onTrashDataUpdated();
+	}
 }

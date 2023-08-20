@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="are_you_sure_empty_trash_q">Are you sure you want to permanently delete all items in the Trash? This action can\'t be undone.</string>
+    <string name="delete_all_items">Delete all items</string>
     <string name="shared_string_empty_trash">Empty trash</string>
     <string name="trash_alert_card_desc">Items in trash will be erased after 30 days.</string>
     <string name="trash_is_empty_banner_desc">Files removed from OsmAnd Cloud will be available here for 30 days after.</string>

@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.showResetSettingsDialog;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 
 public class ConfigureScreenActionsCard extends MapBaseCard {
@@ -63,7 +66,7 @@ public class ConfigureScreenActionsCard extends MapBaseCard {
 	private void showResetToDefaultConfirmationDialog() {
 		FragmentManager fragmentManager = target.getFragmentManager();
 		if (fragmentManager != null) {
-			ConfirmResetToDefaultBottomSheetDialog.showInstance(fragmentManager, target, screenTitleId);
+			showResetSettingsDialog(fragmentManager, target, screenTitleId);
 		}
 	}
 

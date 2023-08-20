@@ -1,14 +1,20 @@
 package net.osmand.plus.backup.trash.controller;
 
 import static net.osmand.plus.backup.trash.ScreenItemType.*;
+import static net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.showConfirmDeleteDialog;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.backup.trash.ScreenItem;
 import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.backup.trash.data.TrashGroup;
 import net.osmand.plus.backup.trash.data.TrashItem;
+import net.osmand.plus.backup.ui.CloudTrashFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -18,10 +24,14 @@ public class TrashScreenController {
 
 	public final OsmandApplication app;
 	public final TrashUtils trashUtils;
+	public final CloudTrashFragment fragment;
 
-	public TrashScreenController(@NonNull OsmandApplication app, @NonNull TrashUtils trashUtils) {
+	public TrashScreenController(@NonNull OsmandApplication app,
+	                             @NonNull CloudTrashFragment fragment) {
 		this.app = app;
-		this.trashUtils = trashUtils;
+		this.fragment = fragment;
+		this.trashUtils = new TrashUtils(app);
+		trashUtils.setListener(fragment);
 	}
 
 	@NonNull
@@ -51,11 +61,25 @@ public class TrashScreenController {
 	}
 
 	public void askEmptyTrash() {
-		app.showShortToastMessage("Show 'Empty trash' confirmation dialog");
+		FragmentActivity activity = fragment.getActivity();
+		if (activity != null) {
+			String dialogTitle = getString(R.string.delete_all_items);
+			String dialogDescription = getString(R.string.are_you_sure_empty_trash_q);
+			FragmentManager fm = activity.getSupportFragmentManager();
+			showConfirmDeleteDialog(fm, fragment, dialogTitle, dialogDescription);
+		}
+	}
+
+	public void onEmptyTrashConfirmed() {
+		trashUtils.emptyTrash();
 	}
 
 	public void onTrashItemClicked(@NonNull TrashItem trashItem) {
 		app.showShortToastMessage("Show dialog for '" + trashItem.getName() + "'");
 	}
 
+	@NonNull
+	private String getString(@StringRes int stringResId) {
+		return app.getString(stringResId);
+	}
 }

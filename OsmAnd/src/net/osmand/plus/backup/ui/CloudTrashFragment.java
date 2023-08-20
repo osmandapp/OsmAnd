@@ -19,13 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.trash.TrashScreenAdapter;
+import net.osmand.plus.backup.trash.TrashUtils.TrashDataUpdatedListener;
 import net.osmand.plus.backup.trash.controller.TrashScreenController;
-import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class CloudTrashFragment extends BaseOsmAndFragment {
+public class CloudTrashFragment extends BaseOsmAndFragment implements ConfirmationDialogListener, TrashDataUpdatedListener {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
 
@@ -35,8 +36,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		TrashUtils trashUtils = new TrashUtils(app);
-		controller = new TrashScreenController(app, trashUtils);
+		controller = new TrashScreenController(app, this);
 	}
 
 	@Nullable
@@ -77,6 +77,16 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 
 	private void updateViewContent() {
 		adapter.setScreenItems(controller.populateScreenItems());
+	}
+
+	@Override
+	public void onActionConfirmed() {
+		controller.onEmptyTrashConfirmed();
+	}
+
+	@Override
+	public void onTrashDataUpdated() {
+		updateViewContent();
 	}
 
 	@Override
