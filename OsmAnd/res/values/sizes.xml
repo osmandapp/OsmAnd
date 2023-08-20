@@ -98,6 +98,7 @@
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
 	<dimen name="big_icon_size">36dp</dimen>
+	<dimen name="small_icon_size">16dp</dimen>
 	<dimen name="icon_size_double">48dp</dimen>
 	<dimen name="icon_background_size">56dp</dimen>
 	<dimen name="poi_icon_size">16dp</dimen>

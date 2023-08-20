@@ -1,18 +1,28 @@
 package net.osmand.plus.backup.trash;
 
-import android.graphics.drawable.Drawable;
+import static net.osmand.plus.utils.OsmAndFormatter.formatChangesPassedTime;
+import static java.util.Collections.sort;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.backup.trash.data.TrashGroup;
+import net.osmand.plus.backup.trash.data.TrashItem;
+import net.osmand.util.Algorithms;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class TrashUtils {
+
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("LLLL yyyy", Locale.getDefault());
 
 	private final OsmandApplication app;
 
@@ -20,9 +30,46 @@ public class TrashUtils {
 		this.app = app;
 	}
 
-	@Nullable
+	public List<TrashGroup> collectSortedTrashData() {
+		List<TrashGroup> result = new ArrayList<>();
+		Map<String, TrashGroup> quickCache = new HashMap<>();
+
+		List<TrashItem> trashItems = collectTrashItems();
+		// Sort trash items descending by deleting time
+		sort(trashItems, (i1, i2) -> Long.compare(i2.getDeleteTime(), i1.getDeleteTime()));
+
+		for (TrashItem trashItem : trashItems) {
+			long deleteTime = trashItem.getDeleteTime();
+			String formattedDate = Algorithms.capitalizeFirstLetter(formatDate(deleteTime));
+			// Add new group if needed
+			TrashGroup trashGroup = quickCache.get(formattedDate);
+			if (trashGroup == null) {
+				deleteTime = parseDateTime(formattedDate);
+				trashGroup = new TrashGroup(formattedDate, deleteTime);
+				quickCache.put(formattedDate, trashGroup);
+				result.add(trashGroup);
+			}
+			trashGroup.addTrashItem(trashItem);
+		}
+		return result;
+	}
+
+	@NonNull
 	public List<TrashItem> collectTrashItems() {
 		return collectTestTrashItems(app);
+	}
+
+	private static String formatDate(long dateTimeMillis) {
+		return DATE_FORMAT.format(dateTimeMillis);
+	}
+
+	private static long parseDateTime(String formattedDate) {
+		try {
+			Date date = DATE_FORMAT.parse(formattedDate);
+			return date != null ? date.getTime() : 0;
+		} catch (ParseException e) {
+			return 0;
+		}
 	}
 
 	@NonNull
@@ -39,28 +86,28 @@ public class TrashUtils {
 		List<TrashItem> trashItems = new ArrayList<>();
 		trashItems.add(new TrashItem()
 				.setName("Driving")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_car_dark))
+				.setIconId(R.drawable.ic_action_car_dark)
 				.setDeleteTime(deleteTime)
 		);
 
 		deleteTime -= ONE_DAY * 2;
 		trashItems.add(new TrashItem()
 				.setName("AmsterdamTrip")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_polygom_dark))
+				.setIconId(R.drawable.ic_action_polygom_dark)
 				.setDeleteTime(deleteTime)
 		);
 
 		deleteTime -= ONE_WEEK - ONE_DAY * 4;
 		trashItems.add(new TrashItem()
 				.setName("2022-10-04_12-47_Tue")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_polygom_dark))
+				.setIconId(R.drawable.ic_action_polygom_dark)
 				.setDeleteTime(deleteTime)
 		);
 
-		deleteTime -= ONE_HOUR;
+		deleteTime -= 3 * ONE_WEEK + ONE_HOUR;
 		trashItems.add(new TrashItem()
 				.setName("Microsoft Earth")
-				.setIcon(getContentIcon(app, R.drawable.ic_layer_top))
+				.setIconId(R.drawable.ic_layer_top)
 				.setDeleteTime(deleteTime)
 				.setLocalItem(false)
 		);
@@ -68,21 +115,21 @@ public class TrashUtils {
 		deleteTime += ONE_HOUR * 7;
 		trashItems.add(new TrashItem()
 				.setName("Favorites")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_folder_favorites))
+				.setIconId(R.drawable.ic_action_folder_favorites)
 				.setDeleteTime(deleteTime)
 		);
 
-		deleteTime -= ONE_WEEK * 2;
+		deleteTime -= ONE_WEEK * 12;
 		trashItems.add(new TrashItem()
 				.setName("Favorites Restaurant")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_favorite))
+				.setIconId(R.drawable.ic_action_favorite)
 				.setDeleteTime(deleteTime)
 		);
 
 		deleteTime -= ONE_HOUR * 1.5;
 		trashItems.add(new TrashItem()
 				.setName("Favorites SOTM")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_favorite))
+				.setIconId(R.drawable.ic_action_favorite)
 				.setDeleteTime(deleteTime)
 				.setLocalItem(false)
 		);
@@ -90,7 +137,7 @@ public class TrashUtils {
 		deleteTime -= ONE_MINUTE * 2;
 		trashItems.add(new TrashItem()
 				.setName("Favorites Flowers")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_favorite))
+				.setIconId(R.drawable.ic_action_favorite)
 				.setDeleteTime(deleteTime)
 				.setLocalItem(false)
 		);
@@ -98,7 +145,7 @@ public class TrashUtils {
 		deleteTime -= 500;
 		trashItems.add(new TrashItem()
 				.setName("Favorites TestOfflinePOI")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_favorite))
+				.setIconId(R.drawable.ic_action_favorite)
 				.setDeleteTime(deleteTime)
 				.setLocalItem(false)
 		);
@@ -106,18 +153,23 @@ public class TrashUtils {
 		deleteTime -= ONE_DAY * 2;
 		trashItems.add(new TrashItem()
 				.setName("Germany Baden-Wurttemberg Regierungsbezirk Stuttgart")
-				.setIcon(getContentIcon(app, R.drawable.ic_action_map_download))
+				.setIconId(R.drawable.ic_action_map_download)
 				.setDeleteTime(deleteTime)
 				.setLocalItem(false)
 		);
 
+		// Setup description
+		for (TrashItem trashItem : trashItems) {
+			trashItem.setDescription(formatDeleteTimeDescription(app, trashItem.getDeleteTime()));
+		}
+
 		return trashItems;
 	}
 
-	@NonNull
-	private static Drawable getContentIcon(@NonNull OsmandApplication app, int iconResId) {
-		UiUtilities iconsCache = app.getUIUtilities();
-		return iconsCache.getThemedIcon(iconResId);
+	public static String formatDeleteTimeDescription(@NonNull OsmandApplication app, long time) {
+		String deleted = app.getString(R.string.shared_string_deleted);
+		String formattedDate = formatChangesPassedTime(app, time, "", "MMM d, HH:mm", "HH:mm");
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, deleted, formattedDate);
 	}
 
 }

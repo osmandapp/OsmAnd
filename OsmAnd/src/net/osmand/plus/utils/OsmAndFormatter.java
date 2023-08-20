@@ -142,19 +142,25 @@ public class OsmAndFormatter {
 		return def;
 	}
 
-	public static String getChangesFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
-		if (lastUploadedTimems > 0) {
-			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
+
+	public static String formatChangesPassedTime(@NonNull OsmandApplication app, long lastUploadedTimeMs, String def) {
+		return formatChangesPassedTime(app, lastUploadedTimeMs, def, "d MMM yyyy, HH:mm:ss", "HH:mm:ss");
+	}
+
+	public static String formatChangesPassedTime(@NonNull OsmandApplication app, long updateTimeMs, String def,
+	                                             String longDatePattern, String shortDatePattern) {
+		if (updateTimeMs > 0) {
+			long duration = (System.currentTimeMillis() - updateTimeMs) / 1000;
 
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy, HH:mm:ss");
+				DateFormat dateFormat = new SimpleDateFormat(longDatePattern);
 				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(lastUploadedTimems);
+				calendar.setTimeInMillis(updateTimeMs);
 				return dateFormat.format(calendar.getTime());
 			} else if (duration > MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+				DateFormat dateFormat = new SimpleDateFormat(shortDatePattern);
 				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(lastUploadedTimems);
+				calendar.setTimeInMillis(updateTimeMs);
 				return app.getString(R.string.yesterday) + ", " + dateFormat.format(calendar.getTime());
 			} else {
 				String formattedDuration = getFormattedDuration((int) duration, app);

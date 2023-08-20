@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
 	android:clickable="true"
 	android:focusable="true"
 	android:orientation="vertical">
@@ -15,18 +16,12 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-		android:id="@+id/swipe_refresh"
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-
-		<LinearLayout
-			android:id="@+id/container"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:background="?attr/activity_background_color"
-			android:orientation="vertical" />
-
-	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+		android:layout_height="match_parent"
+		android:clipToPadding="false"
+		android:orientation="vertical"
+		android:scrollbars="none" />
 
 </LinearLayout>

@@ -13,33 +13,30 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.trash.TrashItem;
+import net.osmand.plus.backup.trash.TrashScreenAdapter;
+import net.osmand.plus.backup.trash.controller.TrashScreenController;
 import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CloudTrashFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
 
-	private ViewGroup container;
-
-	private TrashUtils trashUtils;
-	private List<TrashItem> trashItems = new ArrayList<>();
+	private TrashScreenAdapter adapter;
+	private TrashScreenController controller;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		trashUtils = new TrashUtils(app);
-		updateData();
+		TrashUtils trashUtils = new TrashUtils(app);
+		controller = new TrashScreenController(app, trashUtils);
 	}
 
 	@Nullable
@@ -48,15 +45,17 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_trash, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-		this.container = view.findViewById(R.id.container);
+
+		adapter = new TrashScreenAdapter(app, controller, isUsedOnMap());
+		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+		recyclerView.setAdapter(adapter);
+		recyclerView.setItemAnimator(null);
+		recyclerView.setLayoutAnimation(null);
+		updateViewContent();
 
 		setupToolbar(view);
-		updateViewContent();
 		return view;
-	}
-
-	private void updateData() {
-		trashItems = trashUtils.collectTrashItems();
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -77,21 +76,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateViewContent() {
-		container.removeAllViews();
-
-		if (hasTrashHistory()) {
-			setupNormalView();
-		} else {
-			setupEmptyView();
-		}
-	}
-
-	private void setupEmptyView() {
-		themedInflater.inflate(R.layout.card_cloud_trash_empty_banner, container);
-	}
-
-	private void setupNormalView() {
-
+		adapter.setScreenItems(controller.populateScreenItems());
 	}
 
 	@Override
@@ -110,10 +95,6 @@ public class CloudTrashFragment extends BaseOsmAndFragment {
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-	}
-
-	public boolean hasTrashHistory() {
-		return !Algorithms.isEmpty(trashItems);
 	}
 
 	@Nullable

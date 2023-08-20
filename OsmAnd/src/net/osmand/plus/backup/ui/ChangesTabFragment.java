@@ -160,7 +160,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	public static String getTimeString(OsmandApplication app, long time) {
 		String never = app.getString(R.string.shared_string_never);
 		if (time != -1) {
-			return OsmAndFormatter.getChangesFormattedPassedTime(app, time, never);
+			return OsmAndFormatter.formatChangesPassedTime(app, time, never);
 		} else {
 			return app.getString(R.string.shared_string_never);
 		}

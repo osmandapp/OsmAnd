@@ -1,12 +1,14 @@
-package net.osmand.plus.backup.trash;
+package net.osmand.plus.backup.trash.data;
 
-import android.graphics.drawable.Drawable;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 public class TrashItem {
 
 	private String name;
-	private Drawable icon;
+	private int iconId;
 	private long deleteTime;
+	private String description;
 	private boolean isLocalItem = true;
 
 	public String getName() {
@@ -18,12 +20,23 @@ public class TrashItem {
 		return this;
 	}
 
-	public Drawable getIcon() {
-		return icon;
+	@NonNull
+	public String getDescription() {
+		return description;
 	}
 
-	public TrashItem setIcon(Drawable icon) {
-		this.icon = icon;
+	public TrashItem setDescription(@NonNull String description) {
+		this.description = description;
+		return this;
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		return iconId;
+	}
+
+	public TrashItem setIconId(@DrawableRes int iconId) {
+		this.iconId = iconId;
 		return this;
 	}
 
