@@ -57,4 +57,24 @@ public class TrashItem {
 		isLocalItem = localItem;
 		return this;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TrashItem)) return false;
+
+		TrashItem trashItem = (TrashItem) o;
+
+		if (getDeleteTime() != trashItem.getDeleteTime()) return false;
+		if (isLocalItem() != trashItem.isLocalItem()) return false;
+		return getName().equals(trashItem.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getName().hashCode();
+		result = 31 * result + (int) (getDeleteTime() ^ (getDeleteTime() >>> 32));
+		result = 31 * result + (isLocalItem() ? 1 : 0);
+		return result;
+	}
 }

@@ -15,6 +15,8 @@ import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.backup.trash.data.TrashGroup;
 import net.osmand.plus.backup.trash.data.TrashItem;
 import net.osmand.plus.backup.ui.CloudTrashFragment;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class TrashScreenController {
 		this.fragment = fragment;
 		this.trashUtils = new TrashUtils(app);
 		trashUtils.setListener(fragment);
+		updateNestedControllers();
 	}
 
 	@NonNull
@@ -80,6 +83,14 @@ public class TrashScreenController {
 		FragmentActivity activity = fragment.getActivity();
 		if (activity != null) {
 			TrashItemMenuController.showDialog(activity, trashUtils, trashItem);
+		}
+	}
+
+	private void updateNestedControllers() {
+		DialogManager dialogManager = app.getDialogManager();
+		IDialogController controller = dialogManager.findController(TrashItemMenuController.PROCESS_ID);
+		if (controller instanceof TrashItemMenuController) {
+			((TrashItemMenuController) controller).setTrashUtils(trashUtils);
 		}
 	}
 

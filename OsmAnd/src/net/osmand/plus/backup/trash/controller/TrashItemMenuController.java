@@ -36,12 +36,12 @@ public class TrashItemMenuController extends BaseDialogController implements IDi
 	private static final int ACTION_RESTORE_ID = 0;
 	private static final int ACTION_DELETE_ID = 1;
 
-	private final TrashUtils trashUtils;
 	private final TrashItem trashItem;
+	private TrashUtils trashUtils;
 
 	public TrashItemMenuController(@NonNull TrashUtils trashUtils, @NonNull TrashItem trashItem) {
 		super(trashUtils.getApp());
-		this.trashUtils = trashUtils;
+		setTrashUtils(trashUtils);
 		this.trashItem = trashItem;
 	}
 
@@ -49,6 +49,10 @@ public class TrashItemMenuController extends BaseDialogController implements IDi
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
+	}
+
+	public void setTrashUtils(@NonNull TrashUtils trashUtils) {
+		this.trashUtils = trashUtils;
 	}
 
 	@Nullable
