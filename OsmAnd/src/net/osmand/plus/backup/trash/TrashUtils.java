@@ -76,6 +76,25 @@ public class TrashUtils {
 	public void emptyTrash() {
 		fakeTrashData.clear();
 		app.showShortToastMessage(R.string.trash_is_empty);
+		notifyTrashDataUpdated();
+	}
+
+	public void restoreFromTrash(@NonNull TrashItem trashItem) {
+		fakeTrashData.remove(trashItem);
+		notifyTrashDataUpdated();
+	}
+
+	public void deleteImmediately(@NonNull TrashItem trashItem) {
+		fakeTrashData.remove(trashItem);
+		notifyTrashDataUpdated();
+	}
+
+	@NonNull
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	private void notifyTrashDataUpdated() {
 		if (listener != null) {
 			listener.onTrashDataUpdated();
 		}

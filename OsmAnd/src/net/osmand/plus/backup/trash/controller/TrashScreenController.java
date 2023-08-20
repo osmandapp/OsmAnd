@@ -77,7 +77,10 @@ public class TrashScreenController {
 	}
 
 	public void onTrashItemClicked(@NonNull TrashItem trashItem) {
-		app.showShortToastMessage("Show dialog for '" + trashItem.getName() + "'");
+		FragmentActivity activity = fragment.getActivity();
+		if (activity != null) {
+			TrashItemMenuController.showDialog(activity, trashUtils, trashItem);
+		}
 	}
 
 	@NonNull

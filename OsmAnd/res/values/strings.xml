@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_delete_item">Delete item</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" will be deleted permanently. Are you sure?\n\nThis action can\'t be undone.</string>
+    <string name="shared_string_delete_immediately">Delete immediately</string>
+    <string name="restore_from_trash">Restore from trash</string>
     <string name="are_you_sure_empty_trash_q">Are you sure you want to permanently delete all items in the Trash? This action can\'t be undone.</string>
     <string name="delete_all_items">Delete all items</string>
     <string name="shared_string_empty_trash">Empty trash</string>
