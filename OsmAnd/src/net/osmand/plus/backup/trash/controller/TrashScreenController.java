@@ -22,9 +22,11 @@ import java.util.List;
 
 public class TrashScreenController {
 
-	public final OsmandApplication app;
-	public final TrashUtils trashUtils;
-	public final CloudTrashFragment fragment;
+	public static final int CONFIRM_EMPTY_TRASH_ID = 1;
+
+	private final OsmandApplication app;
+	private final TrashUtils trashUtils;
+	private final CloudTrashFragment fragment;
 
 	public TrashScreenController(@NonNull OsmandApplication app,
 	                             @NonNull CloudTrashFragment fragment) {
@@ -66,7 +68,7 @@ public class TrashScreenController {
 			String dialogTitle = getString(R.string.delete_all_items);
 			String dialogDescription = getString(R.string.are_you_sure_empty_trash_q);
 			FragmentManager fm = activity.getSupportFragmentManager();
-			showConfirmDeleteDialog(fm, fragment, dialogTitle, dialogDescription);
+			showConfirmDeleteDialog(fm, fragment, dialogTitle, dialogDescription, CONFIRM_EMPTY_TRASH_ID);
 		}
 	}
 

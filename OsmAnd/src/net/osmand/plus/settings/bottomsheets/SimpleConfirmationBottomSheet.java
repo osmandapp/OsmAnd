@@ -24,6 +24,7 @@ public class SimpleConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	@StringRes
 	private int actionButtonTitleId;
 	private DialogButtonType actionButtonType;
+	private int confirmActionId;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class SimpleConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	protected void onRightBottomButtonClick() {
 		Fragment target = getTargetFragment();
 		if (target instanceof ConfirmationDialogListener) {
-			((ConfirmationDialogListener) target).onActionConfirmed();
+			((ConfirmationDialogListener) target).onActionConfirmed(confirmActionId);
 		}
 		dismiss();
 	}
@@ -91,24 +92,26 @@ public class SimpleConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 		fragment.actionButtonTitleId = R.string.shared_string_reset;
 		fragment.actionButtonType = DialogButtonType.SECONDARY;
 		fragment.setTargetFragment(target, 0);
-		showInstance(fragment, fragmentManager, target);
+		showInstance(fragment, fragmentManager, target, -1);
 	}
 
 	public static void showConfirmDeleteDialog(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
-	                                           @NonNull String dialogTitle, @NonNull String dialogDescription) {
+	                                           @NonNull String dialogTitle, @NonNull String dialogDescription,
+	                                           int confirmActionId) {
 		SimpleConfirmationBottomSheet fragment = new SimpleConfirmationBottomSheet();
 		fragment.usedOnMap = false;
 		fragment.dialogTitle = dialogTitle;
 		fragment.dialogDescription = dialogDescription;
 		fragment.actionButtonTitleId = R.string.shared_string_delete;
 		fragment.actionButtonType = DialogButtonType.SECONDARY_HARMFUL;
-		showInstance(fragment, fragmentManager, target);
+		showInstance(fragment, fragmentManager, target, confirmActionId);
 	}
 
 	private static void showInstance(@NonNull SimpleConfirmationBottomSheet fragment,
 	                                 @NonNull FragmentManager fragmentManager,
-	                                 @NonNull Fragment target) {
+	                                 @NonNull Fragment target, int confirmActionId) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragment.confirmActionId = confirmActionId;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
@@ -116,6 +119,9 @@ public class SimpleConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	public interface ConfirmationDialogListener {
-		void onActionConfirmed();
+		/**
+		 * @param confirmActionId indicates about action which has been confirmed
+		 */
+		void onActionConfirmed(int confirmActionId);
 	}
 }

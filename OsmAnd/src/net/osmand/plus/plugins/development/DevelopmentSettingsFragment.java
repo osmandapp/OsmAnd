@@ -327,7 +327,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public void onActionConfirmed() {
+	public void onActionConfirmed(int confirmActionId) {
 		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
 		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.trash.controller.TrashScreenController.CONFIRM_EMPTY_TRASH_ID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,8 +82,10 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 	}
 
 	@Override
-	public void onActionConfirmed() {
-		controller.onEmptyTrashConfirmed();
+	public void onActionConfirmed(int confirmActionId) {
+		if (confirmActionId == CONFIRM_EMPTY_TRASH_ID) {
+			controller.onEmptyTrashConfirmed();
+		}
 	}
 
 	@Override
