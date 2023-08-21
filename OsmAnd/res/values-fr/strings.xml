@@ -5400,7 +5400,7 @@
     <string name="free_versions">Versions gratuites</string>
     <string name="about_osmand">À propos d\'OsmAnd</string>
     <string name="send_logcat_log_descr">Fichier d\'historique détaillé</string>
-    <string name="send_crash_log_descr">Contient seulement les informations à propos des plantages</string>
+    <string name="send_crash_log_descr">Contient uniquement les information concernant les plantages</string>
     <string name="report_an_issues">Reporter un problème</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Naviguer par marqueurs</string>
     <string name="help_article_plan_route_coordinate_input_name">Saisie de coordonnées</string>
