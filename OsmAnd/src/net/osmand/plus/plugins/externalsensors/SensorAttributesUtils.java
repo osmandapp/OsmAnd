@@ -93,8 +93,8 @@ public class SensorAttributesUtils {
 		return analysis.getAttributesData(SENSOR_TAG_TEMPERATURE);
 	}
 
-	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key) {
-		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), Float.NaN);
+	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key, float defaultValue) {
+		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), defaultValue);
 	}
 
 	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
@@ -116,9 +116,10 @@ public class SensorAttributesUtils {
 	}
 
 	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, float distance,
-	                                  int timeDiff, boolean firstPoint, boolean lastPoint, int pointIndex) {
+	                                  int timeDiff, boolean firstPoint, boolean lastPoint) {
 		for (String tag : SENSOR_GPX_TAGS) {
-			float value = getPointAttribute(point, tag);
+			float defaultValue = SENSOR_TAG_TEMPERATURE.equals(tag) ? Float.NaN : 0;
+			float value = getPointAttribute(point, tag, defaultValue);
 			PointsAttributesData<PointAttribute<?>> data = analysis.getAttributesData(tag);
 
 			addPointAttribute(data, value, distance, timeDiff, firstPoint, lastPoint);
