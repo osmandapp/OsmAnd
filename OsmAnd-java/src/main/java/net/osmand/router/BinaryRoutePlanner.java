@@ -32,7 +32,7 @@ public class BinaryRoutePlanner {
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
 	private static final int TEST_ID = 46837690;
-	private static final boolean TEST_SPECIFIC = true;
+	private static final boolean TEST_SPECIFIC = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -111,7 +111,7 @@ public class BinaryRoutePlanner {
 				}
 				finalSegment = (FinalRouteSegment) segment;
 				if (TRACE_ROUTING) {
-					printRoad(" FINAL segment: ", segment, !forwardSearch);
+					println(" >>FINAL segment: " + segment);
 				}
 				if (ctx.calculationProgress != null) {
 					ctx.calculationProgress.finalSegmentsFound++;
@@ -484,6 +484,9 @@ public class BinaryRoutePlanner {
  			if (alreadyVisited) {
  				// TODO STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
+				if (TRACE_ROUTING) {
+					println("  " + currentSegment.segEnd + ">> Already visited");
+				}
 				break;
 			}
  			
@@ -497,7 +500,7 @@ public class BinaryRoutePlanner {
 					directionAllowed = false;
 					
 					if (TRACE_ROUTING) {
-						println("  >> Already visited");
+						println("  " + currentSegment.segEnd + ">> Already visited");
 					}
 					break;
 				} else {
@@ -596,7 +599,7 @@ public class BinaryRoutePlanner {
 				frs.opposite = opposite;
 				graphSegments.add(frs);
 				if (TRACE_ROUTING) {
-					printRoad("  >> Final segment : ", frs, reverseWaySearch);
+					printRoad("  " + currentSegment.segEnd + ">> Final segment : ", frs, reverseWaySearch);
 				}
 				return true;
 			}
@@ -786,7 +789,7 @@ public class BinaryRoutePlanner {
 		if (thereAreRestrictions) {
 			nextIterator = ctx.segmentsToVisitPrescripted.iterator();
 			if (TRACE_ROUTING) {
-				println("  >> There are restrictions");
+				println("  " + currentSegment.segEnd + ">> There are restrictions");
 			}
 		}
 		
@@ -857,7 +860,7 @@ public class BinaryRoutePlanner {
 			boolean toAdd = true;
 			if (visIt != null) {
 				if (TRACE_ROUTING) {
-					printRoad("  >?", visitedSegments.get(calculateRoutePointId(next)), null);
+					printRoad("  " + segment.segEnd + ">?", visitedSegments.get(calculateRoutePointId(next)), null);
 				}
 				toAdd = false;
 				// The segment was already visited! We can try to follow new route if it's shorter.
@@ -898,7 +901,7 @@ public class BinaryRoutePlanner {
 				next.distanceFromStart = distFromStart;
 				next.distanceToEnd = segment.distanceToEnd;
 				if (TRACE_ROUTING) {
-					printRoad(" " + segment.getSegmentEnd() + ">>", next, null);
+					printRoad("  " + segment.getSegmentEnd() + ">>", next, null);
 				}
 				// put additional information to recover whole route after
 				next.setParentRoute(segment);
