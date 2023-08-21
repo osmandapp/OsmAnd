@@ -82,6 +82,15 @@ public class SelectedGpxFile {
 				: getTrackAnalysis(app);
 	}
 
+	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
+		this.trackAnalysis = trackAnalysis;
+	}
+
+	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
+		this.displayGroups = displayGroups;
+		this.splitProcessed = true;
+	}
+
 	protected void update(@NonNull OsmandApplication app) {
 		modifiedTime = gpxFile.modifiedTime;
 		pointsModifiedTime = gpxFile.pointsModifiedTime;
@@ -111,7 +120,9 @@ public class SelectedGpxFile {
 	}
 
 	public void processPoints(OsmandApplication app) {
-		update(app);
+		if (modifiedTime != gpxFile.modifiedTime) {
+			update(app);
+		}
 
 		processedPointsToDisplay = gpxFile.proccessPoints();
 		routePoints = false;

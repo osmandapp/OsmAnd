@@ -35,5 +35,9 @@ public class PointsAttributesData<T extends PointAttribute<?>> {
 
 	public void addPointAttribute(T attribute) {
 		attributes.add(attribute);
+
+		if (!hasData() && attribute.hasValidValue()) {
+			setHasData(true);
+		}
 	}
 }

@@ -608,18 +608,20 @@ public class ChartUtils {
 				if (!(calcWithoutGaps && attribute.firstPoint)) {
 					currentX += stepX / divX;
 				}
-				float value = attribute.value.floatValue();
-				float currentY = Float.isNaN(divY) ? value * mulY : divY / value;
-				if (currentY < 0 || Float.isInfinite(currentY)) {
-					currentY = 0;
-				}
+				if (attribute.hasValidValue()) {
+					float value = attribute.value.floatValue();
+					float currentY = Float.isNaN(divY) ? value * mulY : divY / value;
+					if (currentY < 0 || Float.isInfinite(currentY)) {
+						currentY = 0;
+					}
 
-				if (attribute.firstPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
-				}
-				values.add(new Entry(currentX, currentY));
-				if (attribute.lastPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
+					if (attribute.firstPoint && currentY != 0) {
+						values.add(new Entry(currentX, 0));
+					}
+					values.add(new Entry(currentX, currentY));
+					if (attribute.lastPoint && currentY != 0) {
+						values.add(new Entry(currentX, 0));
+					}
 				}
 			}
 		}
