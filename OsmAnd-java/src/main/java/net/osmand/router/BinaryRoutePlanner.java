@@ -31,7 +31,7 @@ public class BinaryRoutePlanner {
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
-	private static final int TEST_ID = 50725;
+	private static final int TEST_ID = 46837690;
 	private static final boolean TEST_SPECIFIC = true;
 
 
@@ -69,7 +69,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
+			RouteSegment recalculationEnd, TLongObjectHashMap<RouteSegment> boundaries) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
 
@@ -80,7 +80,7 @@ public class BinaryRoutePlanner {
 
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
-		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
+		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = boundaries == null ? new TLongObjectHashMap<RouteSegment>() : boundaries;
 
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
@@ -88,11 +88,12 @@ public class BinaryRoutePlanner {
 
 
 		FinalRouteSegment finalSegment = null;
+		boolean dijkstraMode = end == null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
 		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
-		PriorityQueue<RouteSegment> graphSegments = onlyForward ? graphReverseSegments : graphDirectSegments;
-		boolean forwardSearch = !onlyForward;
+		boolean forwardSearch = !onlyForward || dijkstraMode; // special case for Dijkstra
+		PriorityQueue<RouteSegment> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			// use accumulative approach
@@ -110,9 +111,16 @@ public class BinaryRoutePlanner {
 				}
 				finalSegment = (FinalRouteSegment) segment;
 				if (TRACE_ROUTING) {
-					println("Final segment found");
+					printRoad(" FINAL segment: ", segment, !forwardSearch);
 				}
-				break;
+				if (ctx.calculationProgress != null) {
+					ctx.calculationProgress.finalSegmentsFound++;
+				}
+				if (dijkstraMode) {
+					continue;
+				} else {
+					break;
+				}
 			}
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95 && RoutingContext.SHOW_GC_SIZE) {
 				printMemoryConsumption("Memory occupied before exception : ");
@@ -145,13 +153,8 @@ public class BinaryRoutePlanner {
 				} else {
 					forwardSearch = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) <= 0;
 				}
-//				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
-//					forwardSearch = false;
-//				} else if (graphDirectSegments.size() < 2 * graphReverseSegments.size()) {
-//					forwardSearch = true;
-//				}
 			} else {
-				// different strategy : use onedirectional graph
+				// different strategy : use one directional graph
 				forwardSearch = onlyForward;
 				if (onlyBackward && !graphDirectSegments.isEmpty()) {
 					forwardSearch = true;
@@ -222,6 +225,9 @@ public class BinaryRoutePlanner {
 	}
 
 	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection, boolean reverseSearchWay) {
+		if (segment == null) {
+			return null;
+		}
 		if (segment.getSegmentStart() == 0 && !positiveDirection && segment.getRoad().getPointsLength() > 0) {
 			segment = loadSameSegment(ctx, segment, 1, reverseSearchWay);
 //		} else if (segment.getSegmentStart() == segment.getRoad().getPointsLength() - 1 && positiveDirection && segment.getSegmentStart() > 0) {
@@ -476,9 +482,9 @@ public class BinaryRoutePlanner {
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment,
 					oppositeSegments);
  			if (alreadyVisited) {
- 				// we don't stop here in order to allow improve found *potential* final segment - test case on short route
-				// directionAllowed = false;
-				// break;
+ 				// TODO STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
+				directionAllowed = false;
+				break;
 			}
  			
 			// 3. upload segment itself to visited segments

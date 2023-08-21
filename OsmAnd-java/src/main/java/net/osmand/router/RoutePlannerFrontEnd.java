@@ -950,7 +950,7 @@ public class RoutePlannerFrontEnd {
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
-			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
+			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd, null);
 			// 4. Route is found : collect all segments and prepare result
 			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
 		}
