@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 
 import androidx.annotation.NonNull;
@@ -31,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GpxDisplayHelper {
 
@@ -182,13 +183,15 @@ public class GpxDisplayHelper {
 		}
 	}
 
+	private final ExecutorService splitTrackSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
 	@NonNull
 	public List<GpxDisplayGroup> processSplitSync(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
 		GpxSplitParams params = new GpxSplitParams(dataItem);
 		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
-			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
@@ -228,7 +231,7 @@ public class GpxDisplayHelper {
 		if (paramsChanged || !splittingTrack) {
 			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, listener);
 			splitTrackTasks.put(selectedGpxFile.getGpxFile().path, splitTask);
-			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
 		}
 	}
 

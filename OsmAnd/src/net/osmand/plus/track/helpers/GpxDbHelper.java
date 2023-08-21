@@ -222,7 +222,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
-		if (isAnalyseNeeded(file, item) && !isGpxReading(file)) {
+		if ((isAnalyseNeeded(file, item) || GpxDbHelper.isCitySearchNeeded(item)) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
@@ -316,8 +316,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
-				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| isCitySearchNeeded(item);
+				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
