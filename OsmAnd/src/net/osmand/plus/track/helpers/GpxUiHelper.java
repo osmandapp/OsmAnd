@@ -71,6 +71,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -104,16 +105,6 @@ public class GpxUiHelper {
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-
-
-	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
-		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
-		return getDescription(app, analysis, html);
-	}
-
-	public static String getDescription(OsmandApplication app, TrkSegment t, boolean html) {
-		return getDescription(app, GPXTrackAnalysis.prepareInformation(0, null, t), html);
-	}
 
 	public static String getColorValue(String clr, String value, boolean html) {
 		if (!html) {
@@ -958,13 +949,14 @@ public class GpxUiHelper {
 		return gpx;
 	}
 
+	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			GpxDisplayHelper helper = app.getGpxDisplayHelper();
-			String groupName = helper.getGroupName(gpxFile);
-			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
+			String groupName = GpxDisplayHelper.getGroupName(app, gpxFile);
+			group = app.getGpxDisplayHelper().buildGpxDisplayGroup(gpxFile, 0, groupName);
+			SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 		}
 		if (group != null && group.getDisplayItems().size() > 0) {
 			GpxDisplayItem gpxItem = group.getDisplayItems().get(0);

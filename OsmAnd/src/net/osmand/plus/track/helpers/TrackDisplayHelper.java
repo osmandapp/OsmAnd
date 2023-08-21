@@ -71,7 +71,8 @@ public class TrackDisplayHelper {
 	public QuadRect getRect() {
 		if (filteredGpxFile != null) {
 			return filteredGpxFile.getRect();
-		} if (gpxFile != null) {
+		}
+		if (gpxFile != null) {
 			return gpxFile.getRect();
 		} else {
 			return new QuadRect(0, 0, 0, 0);
@@ -111,10 +112,8 @@ public class TrackDisplayHelper {
 
 	public void updateDisplayGroups() {
 		modifiedTime = gpxFile.modifiedTime;
-		GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
-		displayGroups = filteredGpxFile != null
-				? displayHelper.collectDisplayGroups(filteredGpxFile)
-				: displayHelper.collectDisplayGroups(gpxFile);
+		GPXFile gpx = filteredGpxFile != null ? filteredGpxFile : gpxFile;
+		displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpx, true);
 		originalGroups.clear();
 		for (GpxDisplayGroup group : displayGroups) {
 			originalGroups.add(new GpxDisplayGroup(group));
