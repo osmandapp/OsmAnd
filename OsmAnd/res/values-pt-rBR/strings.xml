@@ -5327,4 +5327,11 @@
     <string name="action_cannot_be_undone">Essa ação não pode ser desfeita.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Os aparelhos secundários serão desconectados do OsmAnd Cloud e perderão o acesso aos recursos pagos.</string>
     <string name="free_ride">Passeio gratuito</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substâncias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamáveis</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes e peróxidos orgânicos</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
+    <string name="help_article_personal_profiles_name">Perfis (Configurações)</string>
+    <string name="help_article_personal_storage_name">Armazenamento</string>
 </resources>

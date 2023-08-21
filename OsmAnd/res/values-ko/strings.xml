@@ -1373,7 +1373,7 @@
     <string name="shared_string_disabled">비활성화됨</string>
     <string name="shared_string_selected">선택한 것</string>
     <string name="shared_string_selected_lowercase">선택한 것</string>
-    <string name="shared_string_never">결코</string>
+    <string name="shared_string_never">않음</string>
     <string name="shared_string_none">없음</string>
     <string name="shared_string_and">그리고</string>
     <string name="shared_string_or">또는</string>
@@ -2954,4 +2954,145 @@
     <string name="skip_download">다음에 다운로드</string>
     <string name="restart_now">지금 다시 시작</string>
     <string name="shared_string_other">기타</string>
+    <string name="last_sync">마지막 동기화</string>
+    <string name="delete_account">계정 삭제</string>
+    <string name="verify_account_deletion_descr">삭제하기 전에 계정을 확인해야 합니다.
+\n
+\n등록하신 이메일 주소를 입력해주세요. 다음 단계를 위한 일회용 비밀번호가 전송됩니다.</string>
+    <string name="verify_account">계정 확인</string>
+    <string name="rendering_attr_showRunningRoutes_description">달리는 경로 표시</string>
+    <string name="map_3d_mode_action">3D 모드</string>
+    <string name="last_synchronized">마지막 동기화 동기화됨</string>
+    <string name="cloud_no_conflicts">충돌이 없습니다.</string>
+    <string name="weather_plugin_description">제공
+\n- 5개의 레이어로 구성된 24시간 및 7일 일기 예보
+\n- 위치 기반 위젯
+\n- 온도/압력 등치선
+\n
+\n날씨 데이터는 Global Forecast System(GFS, %1$s)에서 제공합니다.</string>
+    <string name="select_base_profile_dialog_message">사용자 지정 프로필은 기본 앱 프로필 중 하나를 기반으로 합니다. 이는 위젯의 기본 가시성과 속도 및 거리 단위와 같은 기본 설정을 정의합니다. 다음은 확장할 수 있는 사용자 지정 프로필의 예와 함께 기본 앱 프로필:</string>
+    <string name="map_widget_glide_average_desc">설정된 간격에 대한 평균 활주 비율을 표시합니다.</string>
+    <string name="average_glide_time_interval_desc">글라이드 평균화를 위한 시간 간격을 지정합니다.</string>
+    <string name="average_glide_ratio">평균 활공 비율</string>
+    <string name="glide_ratio_to_target">표적에 대한 활공 비율</string>
+    <string name="upload_all">모두 업로드하기</string>
+    <string name="cloud_recent_changes">변경 사항</string>
+    <string name="rendering_attr_whiteWaterSports_name">급류 스포츠</string>
+    <string name="rendering_attr_alpineHiking_name">난이도 등급</string>
+    <string name="cloud_conflicts">충돌</string>
+    <string name="cloud_all_changes_uploaded">모든 변경사항이 업로드됨</string>
+    <string name="sync_now">지금 동기화</string>
+    <string name="local_changes">로컬 변경</string>
+    <string name="rendering_attr_alpineHiking_description">경로의 난이도 분류 유형입니다.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud 계정을 삭제하시겠습니까\?
+\n
+\n이 작업은 취소할 수 없습니다.</string>
+    <string name="osmand_cloud_delete_account_confirmation">계정 탈퇴\?</string>
+    <string name="rendering_attr_showFitnessTrails_name">피트니스 트레일</string>
+    <string name="quick_action_contour_lines_descr">지도에서 등고선을 표시하거나 숨기는 버튼입니다.</string>
+    <string name="quick_action_hillshade_descr">지도에서 음영기복도를 표시하거나 숨기는 버튼입니다.</string>
+    <string name="local_changes_will_be_dismissed">로컬 변경사항이 취소됨</string>
+    <string name="help_article_map_legend_nautical_map_name">해상 지도 스타일</string>
+    <string name="help_article_map_track_context_menu_name">트랙 상황에 맞는 메뉴</string>
+    <string name="help_article_map_tracks_on_map_name">트랙 및 경로</string>
+    <string name="help_article_navigation_auto_car_name">안드로이드 오토</string>
+    <string name="help_article_navigation_car_play_name">애플 카플레이</string>
+    <string name="help_article_navigation_guidance_name">안내</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">내비게이션 중 지도 화면</string>
+    <string name="help_article_navigation_routing_horse_routing_name">승마 경로</string>
+    <string name="release_4_5">• BLE/ANT+ 센서: 재작업된 연결, 수신된 데이터를 GPX에 쓰기 및 보기
+\n
+\n • \"OsmAnd Cloud\"에 즐겨찾기 및 설정 무료 백업
+\n
+\n • 3D 릴리프를 지원하는 새로운 지형 지도 형식
+\n
+\n • 트랙 관리: UI 업데이트, 정렬 추가, 중첩 폴더 지원
+\n
+\n • Android Auto: 즐겨찾기, 트랙 및 POI 카테고리에 액세스할 수 있는 새로운 시작 메뉴
+\n
+\n • Top/Bottom 패널용 위젯 목록 1개
+\n
+\n • 새로운 \"기차\" 프로필을 통해 철도 경로를 계산할 수 있습니다.
+\n
+\n • 등고선은 모든 \"지도 소스\"에서 작동합니다.
+\n
+\n • 외부 키보드의 기본 작업 목록 확장
+\n
+\n • 사용자 지정 라우팅 파일, 삭제 또는 덮어쓰기 옵션 추가
+\n
+\n • \"경로 이탈 알림\"에 옵션 추가
+\n
+\n • 시작 화면: 파일에서 OsmAnd 상태 복원 옵션 추가
+\n
+\n • 북미에서 \"유해 물질\" 등급 추가 트럭 내비게이션
+\n
+\n • 보행자 경로를 위한 \'Via ferrata\' 지원 추가
+\n
+\n • 경로의 난이도 분류를 위해 \"CAI\" 척도 추가
+\n
+\n • 고정 앱별 언어 선택
+\n
+\n • 테마 아이콘 지원 추가
+\n
+\n • OsmAnd Cloud: 계정 삭제 옵션 추가
+\n
+\n • 접근성: 버튼의 터치 대상 크기가 48dp로 변경되었습니다. 스크린 리더에 지도 UI가 표시되는 문제가 수정되었습니다.
+\n
+\n • 일본어 음성 안내 재작업
+\n
+\n • 표고 변경 및 경사 평가 재작업
+\n
+\n</string>
+    <string name="calculate_offline_altitude_descr">지형 지도(3D) 데이터를 기반으로 고도를 오프라인으로 계산합니다. 기기에 기록된 고도와 차이를 고도 보정으로 사용할 수 있습니다.</string>
+    <string name="map_2d_mode_action">2D 모드</string>
+    <string name="ant_plus_nothing_found_description">확실하게 하다:
+\n– 블루투스가 켜져 있습니다.
+\n– 센서가 활성화됨
+\n– 이 장치는 센서 근처에 있습니다.</string>
+    <string name="cloud_all_changes_uploaded_descr">이 장치의 모든 변경 사항은 OsmAnd Cloud와 동기화됩니다.</string>
+    <string name="rendering_attr_showRunningRoutes_name">달리기 루트</string>
+    <string name="upload_photo">업로드 중</string>
+    <string name="shared_string_overview">개요</string>
+    <string name="cloud_changes_will_be_dismissed">클라우드 변경 사항이 해제됨</string>
+    <string name="map_widget_glide_target_desc">목표 지점에 도달하는 데 필요한 활공 비율을 보여줍니다.</string>
+    <string name="help_article_map_map_context_menu_name">지도 상황에 맞는 메뉴</string>
+    <string name="mapillary_widget_desc">거리 수준의 이미지를 추가하기 위해 Mapillary 앱에 빠르게 액세스할 수 있습니다.</string>
+    <string name="release_3_5">• 업데이트된 앱 및 프로필 설정: 이제 설정이 유형별로 정렬됩니다. 각 프로필은 개별적으로 사용자 지정할 수 있습니다.
+\n
+\n • 탐색하는 동안 다운로드할 지도를 제안하는 새로운 지도 다운로드 대화상자
+\n
+\n • 어두운 테마 수정
+\n
+\n • 전 세계의 여러 라우팅 문제 수정
+\n
+\n • 더 자세한 도로망으로 베이스맵 업데이트
+\n
+\n • 전 세계 침수 지역 수정
+\n
+\n • 스키 경로: 경로 세부정보에 고도 프로필 및 경로 복잡성 추가
+\n
+\n • 기타 버그 수정
+\n
+\n</string>
+    <string name="release_3_4">• 앱 프로필: 사용자 정의 아이콘과 색상을 사용하여 자신의 필요에 맞는 사용자 정의 프로필을 만듭니다.
+\n
+\n • 이제 프로필의 기본 속도와 최소/최대 속도를 맞춤설정하세요.
+\n
+\n • 현재 좌표에 대한 위젯 추가
+\n
+\n • 지도에 나침반과 반지름 눈금자를 표시하는 옵션 추가
+\n
+\n • 백그라운드 추적 로깅 수정
+\n
+\n • 개선된 배경 지도 다운로드
+\n
+\n • \'화면 켜기\' 옵션 반환
+\n
+\n • Wikipedia 언어 선택 수정
+\n
+\n • 탐색 중 나침반 버튼 동작 수정
+\n
+\n • 기타 버그 수정
+\n
+\n</string>
 </resources>

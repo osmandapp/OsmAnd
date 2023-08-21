@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nToque largo para opciones"</string>
+\nToque prolongado para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -1205,7 +1205,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nToque largo para ver en el mapa"</string>
+\nPulsación larga para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -4767,7 +4767,7 @@
     <string name="click_on_widget">Haz clic en el widget</string>
     <string name="shared_string_shows">Mostrar</string>
     <string name="map_widget_target_distance_desc">Muestra la distancia entre la cámara y la ubicación del objetivo.</string>
-    <string name="map_widget_zoom_level_desc">Muestra el nivel de zum actual del mapa.</string>
+    <string name="map_widget_zoom_level_desc">Muestra el nivel actual de zoom del mapa.</string>
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
@@ -4776,7 +4776,7 @@
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
-    <string name="map_widget_camera_tilt_desc">Muestra el ángulo de inclinación de la cámara en modo perspectiva. El valor predefinido es 90° (sin inclinación).</string>
+    <string name="map_widget_camera_tilt_desc">Muestra el ángulo de inclinación de la cámara en modo perspectiva. Por defecto es 90° (sin inclinación).</string>
     <string name="developer_widgets">Widgets para desarrolladores</string>
     <string name="coordinates_widget_map_center_desc">Muestra las coordenadas geográficas del centro del mapa actual</string>
     <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la geolocalización actual</string>
@@ -4817,7 +4817,7 @@
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
     <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
-    <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos , expresada en fotogramas por segundo (FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Muestra la rapidez a la que se muestra y actualiza el mapa y los elementos del mapa, expresada en fotogramas por segundo (FPS).</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir los patrones del tráfico y generar informes anónimos de mapas mensuales.</string>
     <string name="current_location_widget">Coordenadas: ubicación actual</string>
@@ -5413,4 +5413,24 @@
     <string name="help_article_widgets_name">Complementos de los mapas</string>
     <string name="help_article_widgets_map_buttons_name">Botones del mapa</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / Notificaciones</string>
+    <string name="contact_us">Contacta con nosotros</string>
+    <string name="help_article_widgets_info_widgets_name">Complementos de información</string>
+    <string name="help_article_widgets_markers_name">Complementos de marcadores</string>
+    <string name="help_article_widgets_nav_widgets_name">Complementos de navegación</string>
+    <string name="shared_string_setup">Configurar</string>
+    <string name="user_guide">Manual del usuario</string>
+    <string name="telegram_chats_descr">Únete a uno de nuestros chats en telegram.</string>
+    <string name="telegram_chats">Chats en Telegram</string>
+    <string name="github_discussion">Debates en GitHub</string>
+    <string name="free_versions_descr">Descargar e instalar la versión gratuita de OsmAnd</string>
+    <string name="send_logcat_log_descr">Archivo de registro detallado</string>
+    <string name="open_issue_on_github">Abre un problema en github</string>
+    <string name="report_an_issues">Informar de un problema</string>
+    <string name="copy_build_version">Copiar la versión de la compilación</string>
+    <string name="help_article_widgets_radius_ruler_name">Regla radial y regla</string>
+    <string name="free_versions">Versiones gratuitas</string>
+    <string name="about_osmand">Acerca de OsmAnd</string>
+    <string name="send_crash_log_descr">Contiene sólo información de los fallos</string>
+    <string name="open_issue_on_github_descr">Pregunta, propón nuevas funciones</string>
+    <string name="most_viewed">Lo más visto</string>
 </resources>

@@ -4844,19 +4844,19 @@
     <string name="shared_string_large">كبير</string>
     <string name="shared_string_normal">عادي</string>
     <string name="map_widget_camera_tilt">تحريك الكاميرا</string>
-    <string name="map_widget_zoom_level_desc">تعرض الأداة مستوى تكبير/تصغير الخريطة الحالي.</string>
+    <string name="map_widget_zoom_level_desc">يظهر مستوى تكبير/تصغير الخريطة الحالي.</string>
     <string name="map_widget_zoom_level">مستويات التكبير</string>
-    <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى الحامل.</string>
+    <string name="map_widget_camera_distance_desc">يظهر ارتفاع الكاميرا فوق المستوى السطحي.</string>
     <string name="developer_widgets">أدوات المطور</string>
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
-    <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
+    <string name="coordinates_widget_map_center_desc">يبين الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
-    <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
+    <string name="map_widget_target_distance_desc">تظهر المسافة بين الكاميرا والموقع المستهدف.</string>
     <string name="rotate_map_manual_opt">تدوير يدوي</string>
-    <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
+    <string name="map_widget_camera_tilt_desc">تعرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
@@ -4889,7 +4889,7 @@
     <string name="map_widget_target_distance">المسافة من الكاميرا إلى الهدف</string>
     <string name="simulate_location_by_gpx">محاكاة الموقع بواسطة GPX</string>
     <string name="location_simulation_cutoff">محاكاة تخطي الأمتار الأولى</string>
-    <string name="map_widget_rendering_fps_desc">يوضح مدى سرعة إظهار الخريطة وعناصر الخريطة وتحديثها (معبرًا عنها في الإطارات في الثانية أو FPS).</string>
+    <string name="map_widget_rendering_fps_desc">ويبين مدى سرعة عرض الخريطة وعناصرها وتجديدها، معبرا عنها في إطارات في الثانية (FPS).</string>
     <string name="favorites_backup">النسخ الاحتياطي للمفضلة</string>
     <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
     <string name="map_center_widget">الإحداثيات: مركز الخرائط</string>
