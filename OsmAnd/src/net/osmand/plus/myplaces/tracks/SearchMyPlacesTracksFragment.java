@@ -97,7 +97,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 			foldersHelper.moveTracks(trackItemsToMove, tracksGroups, dest, result -> {
 				reloadTracks();
-				dismissImmediately();
+				dismiss(true);
 				return false;
 			});
 		}
@@ -112,6 +112,14 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 	@Override
 	public void dismiss() {
+		dismiss(false);
+	}
+
+	public void dismiss(boolean dismissImmediately) {
+		if (dismissImmediately) {
+			super.dismiss();
+			return;
+		}
 		if (selectionMode) {
 			selectionMode = false;
 			adapter.setSelectionMode(false);
@@ -120,10 +128,6 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		} else {
 			super.dismiss();
 		}
-	}
-
-	public void dismissImmediately() {
-		super.dismiss();
 	}
 
 	public void updateTargetFragment() {
@@ -152,7 +156,10 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(actionButton, trackItems, new HashSet<>(), SearchMyPlacesTracksFragment.this);
+				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
+				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
+						currentFragment, currentFragment,
+						currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 
@@ -229,19 +236,6 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		};
 	}
 
-
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
-									boolean selectionMode, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
-			fragment.usedOnMap = usedOnMap;
-			fragment.selectionMode = selectionMode;
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
-		}
-	}
-
 	@Override
 	public Bundle storeState() {
 		return null;
@@ -255,5 +249,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
 		return selectionHelper;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
+									boolean selectionMode, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
+			fragment.usedOnMap = usedOnMap;
+			fragment.selectionMode = selectionMode;
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 }
