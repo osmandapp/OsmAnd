@@ -9,7 +9,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
+import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
@@ -281,18 +281,18 @@ public class NativeUtilities {
 	}
 
 	public static void getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon,
-	                                        @NonNull CallbackWithObject<Double> callback) {
+	                                        @NonNull OnResultCallback<Double> callback) {
 		if (latLon != null) {
 			Double altitude = getAltitudeForLatLon(mapRenderer, latLon);
 			if (altitude != null) {
-				callback.processResult(altitude);
+				callback.onResult(altitude);
 			} else {
-				HeightsResolverCallback heightsCallback = heights -> callback.processResult(heights != null && heights.length > 0 ? (double) heights[0] : null);
+				HeightsResolverCallback heightsCallback = heights -> callback.onResult(heights != null && heights.length > 0 ? (double) heights[0] : null);
 				HeightsResolverTask task = new HeightsResolverTask(Collections.singletonList(latLon), heightsCallback);
 				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		} else {
-			callback.processResult(null);
+			callback.onResult(null);
 		}
 	}
 
