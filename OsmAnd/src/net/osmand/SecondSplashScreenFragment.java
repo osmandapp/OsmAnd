@@ -169,7 +169,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ?
-				R.color.status_bar_color_dark :
+				R.color.status_bar_main_dark :
 				R.color.status_bar_transparent_light;
 	}
 

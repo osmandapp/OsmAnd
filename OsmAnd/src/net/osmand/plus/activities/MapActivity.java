@@ -630,7 +630,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		int progressColor = useRouteLineColor
 				? getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
-				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
+				: ContextCompat.getColor(this, R.color.active_color_primary_light);
 
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 		pb.setIndeterminate(indeterminate);

@@ -100,13 +100,13 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		setupToolbar(mainView.findViewById(R.id.toolbar));
 
-		int appBarTextColor = nightMode ? R.color.wikivoyage_app_bar_text_dark : R.color.wikivoyage_app_bar_text_light;
+		int appBarTextColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		articleToolbarText = mainView.findViewById(R.id.article_toolbar_text);
 		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_dark, R.color.wikivoyage_active_dark
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_dark, R.color.active_color_primary_dark
 		);
 
 		selectedLangTv = mainView.findViewById(R.id.select_language_text_view);
@@ -182,7 +182,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		FragmentManager fragmentManager = requireFragmentManager();
 		webViewClient = new WikivoyageWebViewClient(activity, fragmentManager, nightMode);
 		contentWebView.setWebViewClient(webViewClient);
-		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
+		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 
 		return mainView;
 	}

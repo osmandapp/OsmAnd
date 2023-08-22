@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
 
-    <solid android:color="@color/ctx_menu_controller_button_bg_color_dark_n" />
+    <solid android:color="@color/card_and_list_background_dark" />
 
     <corners android:radius="3dp" />
 

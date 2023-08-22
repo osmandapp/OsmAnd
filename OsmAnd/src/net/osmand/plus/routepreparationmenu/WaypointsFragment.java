@@ -420,7 +420,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		ProgressBar progressBar = view.findViewById(R.id.progress_bar_button);
 		startButtonText.setText(getText(R.string.shared_string_apply));
 
-		int progressTextColor = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
+		int progressTextColor = nightMode ? R.color.text_color_secondary_dark : R.color.active_buttons_and_links_text_light;
 		setupRouteCalculationButtonProgressBar(progressBar, startButtonText, progressTextColor);
 	}
 
@@ -539,11 +539,11 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor) {
-			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_dark : R.color.activity_background_light);
+			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 			int progressColor = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, ContextCompat.getColor(app, progressTextColor)));
 			textProgress.paint.setColor(progressColor);
-			textProgress.setTextColor(ContextCompat.getColor(app, R.color.active_buttons_and_links_text_disabled_dark));
+			textProgress.setTextColor(ContextCompat.getColor(app, R.color.text_color_secondary_dark));
 	}
 
 	private void setDynamicListItems(DynamicListView listView, StableArrayAdapter listAdapter) {
@@ -722,7 +722,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);
 			if (notFlatTargets) {
-				move.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_item_move, R.color.description_font_and_bottom_sheet_icons));
+				move.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_item_move, R.color.icon_color_default_light));
 				move.setTag((DragIcon) () -> {
 					// do nothing
 				});
@@ -773,8 +773,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = R.color.description_font_and_bottom_sheet_icons;
-					textDeviation.setTextColor(ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons));
+					int colorId = R.color.icon_color_default_light;
+					textDeviation.setTextColor(ContextCompat.getColor(app, R.color.icon_color_default_light));
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
 								app.getUIUtilities().getIcon(R.drawable.ic_small_turn_right, colorId),
@@ -808,7 +808,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		String pointDescription = "";
 		TextView descText = localView.findViewById(R.id.waypoint_desc_text);
 		if (descText != null) {
-			descText.setTextColor(ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons));
+			descText.setTextColor(ContextCompat.getColor(app, R.color.text_color_secondary_light));
 			switch (ps.type) {
 				case WaypointHelper.TARGETS:
 					TargetPoint targetPoint = (TargetPoint) ps.point;

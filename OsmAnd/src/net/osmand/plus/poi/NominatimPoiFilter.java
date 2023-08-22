@@ -79,9 +79,9 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
 		String NOMINATIM_API;
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			NOMINATIM_API = "https://nominatim.openstreetmap.org/search/";
+			NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 		} else {
-			NOMINATIM_API = "http://nominatim.openstreetmap.org/search/";
+			NOMINATIM_API = "http://nominatim.openstreetmap.org/search";
 		}
 		currentSearchResult = new ArrayList<>();
 		if (Algorithms.isEmpty(getFilterByName())) {

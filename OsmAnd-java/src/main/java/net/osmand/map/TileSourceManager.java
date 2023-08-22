@@ -56,14 +56,17 @@ public class TileSourceManager {
 					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
-					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
+					MAPILLARY_VECTOR_TILE_EXT, 22, 13, 256, 16, 3200);
 	private static final TileSourceTemplate MAPILLARY_CACHE_SOURCE =
-			new TileSourceTemplate("Mapillary (raster tiles)", "", ".png", 21, 13,
-					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
+			new TileSourceTemplate("Mapillary (raster tiles)", "", ".png", 22, 13,
+					256, 32, 18000);
 
 	static {
-		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
+		int oneDayMinutes = 60 * 24;
+		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(oneDayMinutes);
 		MAPILLARY_VECTOR_SOURCE.setHidden(true);
+		MAPILLARY_CACHE_SOURCE.setExpirationTimeMinutes(oneDayMinutes);		
+		MAPILLARY_CACHE_SOURCE.setHidden(true);
 	}
 
 	private static final String PARAM_BING_QUAD_KEY = "{q}";

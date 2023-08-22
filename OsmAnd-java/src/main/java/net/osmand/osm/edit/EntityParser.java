@@ -131,42 +131,32 @@ public class EntityParser {
 		}
 	}
 
-	private static void setNameFromOperator(MapObject mo, Map<String, String> tags) {
-		String op = tags.get(OSMTagKey.OPERATOR.getValue());
-		if (op == null)
-			return;
-		String ref = tags.get(OSMTagKey.REF.getValue());
-		if (ref != null)
-			op += " [" + ref + "]";
-		mo.setName(op);
+	
+	private static String getWikipediaUrl(Map<String, String> tagValues) {
+		String siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
+		if (siteUrl != null) {
+			if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
+				int i = siteUrl.indexOf(':');
+				if (i == -1) {
+					siteUrl = "http://en.wikipedia.org/wiki/" + siteUrl; //$NON-NLS-1$
+				} else {
+					siteUrl = "http://" + siteUrl.substring(0, i) + ".wikipedia.org/wiki/" + siteUrl.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+		}
+		return siteUrl;
 	}
-
-
-	private static String getWebSiteURL(Map<String, String> tagValues, boolean checkWikipedia) {
-		String siteUrl = null;
-		if (checkWikipedia) {
-			siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
-			if (siteUrl != null) {
-				if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
-					int i = siteUrl.indexOf(':');
-					if (i == -1) {
-						siteUrl = "http://en.wikipedia.org/wiki/" + siteUrl; //$NON-NLS-1$
-					} else {
-						siteUrl = "http://" + siteUrl.substring(0, i) + ".wikipedia.org/wiki/" + siteUrl.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
-					}
-				}
-			}
-		} else {
-			siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
+	
+	private static String getWebSiteURL(Map<String, String> tagValues) {
+		String siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
+		if (siteUrl == null) {
+			siteUrl = tagValues.get(OSMTagKey.URL.getValue());
 			if (siteUrl == null) {
-				siteUrl = tagValues.get(OSMTagKey.URL.getValue());
-				if (siteUrl == null) {
-					siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
-				}
+				siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
 			}
-			if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
-				siteUrl = "http://" + siteUrl;
-			}
+		}
+		if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
+			siteUrl = "http://" + siteUrl;
 		}
 		return siteUrl;
 	}
@@ -203,11 +193,11 @@ public class EntityParser {
 	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
 		if (am != null) {
 			parseMapObject(am, entity, ts);
-			String wbs = getWebSiteURL(ts, false);
+			String wbs = getWebSiteURL(ts);
 			if (wbs != null) {
 				am.setAdditionalInfo("website", wbs);
 			}
-			wbs = getWebSiteURL(ts, true);
+			wbs = getWikipediaUrl(ts);
 			if (wbs != null) {
 				am.setAdditionalInfo("wikipedia", wbs);
 			}

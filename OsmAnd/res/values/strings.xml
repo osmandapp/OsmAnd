@@ -4556,7 +4556,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Late</string>
-    <string name="arrival_distance_factor_at_last">In the last meters</string>
+    <string name="arrival_distance_factor_at_last">Very late</string>
     <string name="arrival_distance">Arrival announcement</string>
     <string name="arrival_distance_descr">How soon do you want the arrival announcement?</string>
     <string name="rendering_out_of_memory">Not enough process memory to display selected area</string>

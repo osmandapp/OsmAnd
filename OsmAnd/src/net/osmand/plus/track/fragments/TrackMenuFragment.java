@@ -1017,7 +1017,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public int getStatusBarColorId() {
 		if (getView() != null && getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
-			return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			return isNightMode() ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 		}
 		return -1;
 	}

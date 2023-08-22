@@ -218,8 +218,8 @@ public class AndroidUtils {
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return createCheckedColorStateList(ctx, nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark);
 	}
 
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {

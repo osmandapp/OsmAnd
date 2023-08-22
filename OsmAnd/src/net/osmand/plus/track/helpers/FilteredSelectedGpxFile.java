@@ -86,15 +86,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
 	}
 
-	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
-		this.trackAnalysis = trackAnalysis;
-	}
-
-	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
-		this.displayGroups = displayGroups;
-		this.splitProcessed = true;
-	}
-
 	@Override
 	public void processPoints(OsmandApplication app) {
 		processedPointsToDisplay = gpxFile.proccessPoints();

@@ -5,7 +5,7 @@
     </item>
     <item>
         <shape>
-            <solid android:color="@color/wikivoyage_active_light"/>
+            <solid android:color="@color/active_color_primary_light"/>
             <corners android:radius="3dp"/>
         </shape>
     </item>

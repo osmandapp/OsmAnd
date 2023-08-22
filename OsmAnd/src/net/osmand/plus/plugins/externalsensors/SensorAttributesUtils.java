@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttribute;
 import net.osmand.gpx.PointsAttributesData;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
@@ -38,6 +39,14 @@ public class SensorAttributesUtils {
 	public static final String SENSOR_TAG_BIKE_POWER = "power";
 	public static final String SENSOR_TAG_TEMPERATURE = "temp";
 	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
+
+	private static final String[] SENSOR_GPX_TAGS = {
+			SENSOR_TAG_HEART_RATE,
+			SENSOR_TAG_SPEED,
+			SENSOR_TAG_CADENCE,
+			SENSOR_TAG_BIKE_POWER,
+			SENSOR_TAG_TEMPERATURE
+	};
 
 	public static boolean hasHeartRateData(@NonNull GPXTrackAnalysis analysis) {
 		return getHeartRateData(analysis).hasData();
@@ -84,8 +93,8 @@ public class SensorAttributesUtils {
 		return analysis.getAttributesData(SENSOR_TAG_TEMPERATURE);
 	}
 
-	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key) {
-		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), 0);
+	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key, float defaultValue) {
+		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), defaultValue);
 	}
 
 	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
@@ -106,19 +115,37 @@ public class SensorAttributesUtils {
 		}
 	}
 
-	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
-	                                  float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
-		int heartRate = (int) getPointAttribute(point, SENSOR_TAG_HEART_RATE);
-		float speed = getPointAttribute(point, SENSOR_TAG_SPEED);
-		float cadence = getPointAttribute(point, SENSOR_TAG_CADENCE);
-		float bikePower = getPointAttribute(point, SENSOR_TAG_BIKE_POWER);
-		float temperature = getPointAttribute(point, SENSOR_TAG_TEMPERATURE);
+	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, float distance,
+	                                  int timeDiff, boolean firstPoint, boolean lastPoint) {
+		for (String tag : SENSOR_GPX_TAGS) {
+			float defaultValue = SENSOR_TAG_TEMPERATURE.equals(tag) ? Float.NaN : 0;
+			float value = getPointAttribute(point, tag, defaultValue);
+			PointsAttributesData<PointAttribute<?>> data = analysis.getAttributesData(tag);
 
-		analysis.addPointAttribute(new HeartRate(heartRate, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new SensorSpeed(speed, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new BikePower(cadence, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new BikeCadence(bikePower, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new Temperature(temperature, distance, timeDiff, firstPoint, lastPoint));
+			addPointAttribute(data, value, distance, timeDiff, firstPoint, lastPoint);
+		}
+	}
+
+	private static void addPointAttribute(@NonNull PointsAttributesData<PointAttribute<?>> data, float value,
+	                                      float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+		switch (data.getKey()) {
+			case SENSOR_TAG_HEART_RATE:
+				int heartRate = value > 0 ? (int) value : 0;
+				data.addPointAttribute(new HeartRate(heartRate, distance, timeDiff, firstPoint, lastPoint));
+				break;
+			case SENSOR_TAG_SPEED:
+				data.addPointAttribute(new SensorSpeed(value, distance, timeDiff, firstPoint, lastPoint));
+				break;
+			case SENSOR_TAG_CADENCE:
+				data.addPointAttribute(new BikeCadence(value, distance, timeDiff, firstPoint, lastPoint));
+				break;
+			case SENSOR_TAG_BIKE_POWER:
+				data.addPointAttribute(new BikePower(value, distance, timeDiff, firstPoint, lastPoint));
+				break;
+			case SENSOR_TAG_TEMPERATURE:
+				data.addPointAttribute(new Temperature(value, distance, timeDiff, firstPoint, lastPoint));
+				break;
+		}
 	}
 
 	@Nullable

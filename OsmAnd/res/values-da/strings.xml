@@ -4790,9 +4790,9 @@
     <string name="coordinates_widget_current_location_desc">Viser de geografiske koordinater for den aktuelle geografiske placering</string>
     <string name="map_widget_camera_distance_desc">Viser kameraets højde over overfladeniveauet.</string>
     <string name="map_widget_zoom_level">Zoom-niveau</string>
-    <string name="map_widget_target_distance_desc">Viser afstanden mellem kameraet til målstedet.</string>
-    <string name="map_widget_zoom_level_desc">Viser kortets aktuelle zoomniveau.</string>
-    <string name="map_widget_camera_tilt_desc">Viser kameraets hældningsvinkel i perspektivtilstand. Standardværdien er 90° (ingen hældning).</string>
+    <string name="map_widget_target_distance_desc">Viser afstanden mellem kameraet og målpositionen.</string>
+    <string name="map_widget_zoom_level_desc">Viser det aktuelle zoomniveau på kortet.</string>
+    <string name="map_widget_camera_tilt_desc">Viser kameraets hældningsvinkel i perspektivtilstand. Standard er 90° (ingen hældning).</string>
     <string name="map_widget_camera_distance">Kamerahøjde</string>
     <string name="map_widget_camera_tilt">Kamerahældning</string>
     <string name="developer_widgets">Moduler til udviklere</string>
@@ -4832,7 +4832,7 @@
     <string name="map_widget_altitude_map_center">Højde: kortcentrum</string>
     <string name="map_widget_altitude_map_center_desc">Viser højden over havniveau for det aktuelle kortcentrum.</string>
     <string name="map_widget_rendering_fps">Kortgengivelse FPS</string>
-    <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kortet og kortelementer vises og opdateres, udtrykt i billeder pr. sekund (FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kortet og kortelementerne vises og opdateres, udtrykt i billeder pr. sekund (BPS).</string>
     <string name="simulate_location_by_gpx">Simuler placering med GPX</string>
     <string name="location_simulation_cutoff">Simulering springer de første meter over</string>
     <string name="location_simulation_speedup">Simuleringshastighed</string>
@@ -5437,4 +5437,5 @@
     <string name="open_issue_on_github">Åbn en problem-forespørgsel på GitHub</string>
     <string name="copy_build_version">Kopiér build-version</string>
     <string name="most_viewed">Mest sete</string>
+    <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
 </resources>

@@ -494,7 +494,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				spannedName.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannedName.length(), SPANNED_FLAG);
 			} else {
 				int nameColor = AndroidUtils.getColorFromAttr(context, R.attr.wikivoyage_primary_text_color);
-				int countColor = ContextCompat.getColor(context, R.color.wikivoyage_secondary_text);
+				int countColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
 
 				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, displayName.length(), SPANNED_FLAG);
 				spannedName.setSpan(new ForegroundColorSpan(countColor), displayName.length() + 1,

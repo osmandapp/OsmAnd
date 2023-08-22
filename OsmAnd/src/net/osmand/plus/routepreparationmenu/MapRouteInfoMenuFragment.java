@@ -427,9 +427,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
 		AndroidUtils.setBackground(ctx, getBottomScrollView(), isNightMode(),
-				R.color.activity_background_light, R.color.activity_background_dark);
+				R.color.activity_background_color_light, R.color.activity_background_color_dark);
 		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
-				R.color.activity_background_light, R.color.activity_background_dark);
+				R.color.activity_background_color_light, R.color.activity_background_color_dark);
 
 		if (getTopView() != null) {
 			View topView = getTopView();
@@ -448,7 +448,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
 
-		int descriptionColor = ContextCompat.getColor(ctx, R.color.description_font_and_bottom_sheet_icons);
+		int descriptionColor = ContextCompat.getColor(ctx, R.color.text_color_secondary_light);
 		((TextView) mainView.findViewById(R.id.fromTitle)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);

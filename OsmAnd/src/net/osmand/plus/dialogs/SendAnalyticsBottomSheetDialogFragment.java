@@ -125,7 +125,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				ds.setUnderlineText(false);
 			}
 		}, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		int linkTextColor = ContextCompat.getColor(context, !nightMode ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(context, !nightMode ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 		spannable.setSpan(new ForegroundColorSpan(linkTextColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		LongDescriptionItem descriptionItem = new LongDescriptionItem(spannable);

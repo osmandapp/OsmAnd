@@ -430,7 +430,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		toolbar = view.findViewById(R.id.toolbar);
 		if (!app.getSettings().isLightContent()) {
-			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.app_bar_color_dark));
+			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.app_bar_main_dark));
 		}
 		Drawable icBack = iconsCache.getThemedIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationIcon(icBack);

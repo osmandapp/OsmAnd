@@ -132,7 +132,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		if (view != null && !nightMode) {
 			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 		}
-		return nightMode ? R.color.activity_background_dark : R.color.activity_background_light;
+		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
