@@ -1234,7 +1234,7 @@
     <string name="arrival_distance_factor_early">Tidligt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sent</string>
-    <string name="arrival_distance_factor_at_last">Ved de sidste meter</string>
+    <string name="arrival_distance_factor_at_last">Meget sent</string>
     <string name="rendering_attr_coloredBuildings_name">Farvekod bygninger efter type</string>
     <string name="av_camera_pic_size">Kamera billedstørrelse</string>
     <string name="av_camera_pic_size_descr">Angiv kamerabilledstørrelse</string>
