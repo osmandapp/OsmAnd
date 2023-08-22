@@ -1277,7 +1277,7 @@
     <string name="arrival_distance_factor_early">Tôt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
-    <string name="arrival_distance_factor_at_last">Dans les derniers mètres</string>
+    <string name="arrival_distance_factor_at_last">Très tard</string>
     <string name="av_camera_pic_size">Dimensions de la photo</string>
     <string name="av_camera_pic_size_descr">Définir les dimensions de la photo</string>
     <string name="rendering_value_browse_map_name">Parcourir la carte</string>
