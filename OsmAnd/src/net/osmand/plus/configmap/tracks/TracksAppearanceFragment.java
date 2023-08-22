@@ -33,6 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -376,6 +377,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			((TracksFragment) fragment).updateTabsContent();
 		} else if (fragment instanceof TracksSelectionFragment) {
 			((TracksSelectionFragment) fragment).dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
+			searchTracksFragment.updateTargetFragment();
+			searchTracksFragment.dismiss();
 		}
 		dismiss();
 	}
