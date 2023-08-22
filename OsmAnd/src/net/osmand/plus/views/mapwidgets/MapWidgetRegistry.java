@@ -75,7 +75,8 @@ public class MapWidgetRegistry {
 			List<MapWidget> followingWidgets = i + 1 == widgetsToShow.size()
 					? new ArrayList<>()
 					: widgetsToShow.subList(i + 1, widgetsToShow.size());
-			widget.attachView(container, widgetPanel, i, followingWidgets);
+			int order = Math.min(container.getChildCount(), i); // Avoid IndexOutOfBoundsException
+			widget.attachView(container, widgetPanel, order, followingWidgets);
 		}
 	}
 

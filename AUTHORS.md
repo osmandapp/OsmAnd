@@ -1,5 +1,5 @@
 ### Credits to all major contributors / developers:
-Major contributors / developers listed here https://github.com/osmandapp/osmandapp.github.io/blob/master/website/help/about.html#L8
+Major contributors / developers listed [here](https://github.com/osmandapp/web/blob/main/main/src/components/content/About.mdx#L5).
 
 ### Other Pull requests
 Copyright © All authors of translations and pull requests can be found in the commit history:

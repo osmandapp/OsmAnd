@@ -2507,7 +2507,7 @@
     <string name="calculate_online_altitude_descr">위성 이미지 및 디지털 고도 모델을 기반으로 OsmAnd 서버에서 온라인으로 고도를 계산합니다. 장치에 기록된 고도와 다를 수 있으며 고도 보정으로 사용할 수 있습니다.</string>
     <string name="online_routing_engines">온라인 라우팅 엔진</string>
     <string name="open_wikipedia_link_online">온라인 위키백과 링크 열기</string>
-    <string name="contact_us">연락하기</string>
+    <string name="shared_string_contact">연락하기</string>
     <string name="average_speed_skip_stops_desc">%1$s 미만의 속도는 계산되지 않으며 평균 속도에 영향을 미칩니다.</string>
     <string name="average_speed_widget_desc">현재 주행차의 평균 속도를 표시합니다.</string>
     <string name="map_widget_average_speed">평균 속도</string>
@@ -2951,4 +2951,7 @@
     <string name="app_mode_moped">퍼스널 모빌리티</string>
     <string name="sort_duration_ascending">짧은 기간 먼저</string>
     <string name="sort_duration_descending">가장 긴 기간이 먼저</string>
+    <string name="skip_download">다음에 다운로드</string>
+    <string name="restart_now">지금 다시 시작</string>
+    <string name="shared_string_other">기타</string>
 </resources>

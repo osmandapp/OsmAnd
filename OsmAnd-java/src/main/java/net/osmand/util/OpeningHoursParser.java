@@ -510,7 +510,7 @@ public class OpeningHoursParser {
 				if (rule.contains(cal)) {
 					boolean checkNextNotNeeded = overlap || !isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || checkNextNotNeeded) {
+					if (open || !checkNextNotNeeded) {
 						return rule.toLocalRuleString();
 					} else {
 						ruleClosed = rule.toLocalRuleString();

@@ -1844,7 +1844,7 @@
     <string name="address">Адреса</string>
     <string name="techical_articles_item">Технички чланци</string>
     <string name="versions_item">Издања</string>
-    <string name="contact_us">Веза са нама</string>
+    <string name="shared_string_contact">Веза са нама</string>
     <string name="quick_action_btn_tutorial_title">Помери дугме</string>
     <string name="quick_action_btn_tutorial_descr">Дуго држање и превлачење дугмета га помера по заслону.</string>
     <string name="shared_string_action_name">Име радње</string>
@@ -2411,9 +2411,9 @@
     <string name="start_editing_card_image_text">Бесплатни светски туристички водич који свако може да уређује.</string>
     <string name="wikivoyage_travel_guide">Туристички водичи</string>
     <string name="wikivoyage_travel_guide_descr">Водичи за најзанимљивија места на планети, унутар ОсмАнд-а, без потребе за везом са интернетом.</string>
-    <string name="record_plugin_description">Овај додатак укључује могућност снимања и чувања Ваших путања када се притисне справица ГПИкс-а за бележење на карти, а може и самостално да бележи све Ваше путеве којима сте навођени у датотеку ГПИкс-а.
+    <string name="record_plugin_description">Снимите своја путовања или вежбање, и рашчланите податке по брзини, сакупљеном спуштању и пењању, просеку разлике висине, итд. Снимљени трагови могу бити похрањени, подељени са пријатељима, уређени и обрађени.
 \n
-\nСнимљене путање се могу делити са пријатељима или слати на ОСМ. Спортисти могу да користе снимљене путање да прате своја вежбања. Директно у ОсмАнд-у може да се ради основно проучавање путања, као што су рачунање брзине круга, просечна брзина итд. Наравно, путање се даље могу проучавати у другим нарочитим алатима за проучавање.</string>
+\nДаље читање на %1$s.</string>
     <string name="rendering_attr_pisteGrooming_name">Равнање стазе</string>
     <string name="osmand_plus_extended_description_part8">Приближна покривеност карте и каквоћа:
 \n • Западна Европа: ****
@@ -5223,4 +5223,8 @@
     <string name="calculate_offline">Израчунај ван мреже</string>
     <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
     <string name="shared_string_included">обухваћено</string>
+    <string name="rendering_attr_alpineHiking_name">Разврставање по тежини</string>
+    <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
+    <string name="rendering_value_sacScale_name">САК</string>
+    <string name="rendering_value_caiScale_name">КАИ</string>
 </resources>

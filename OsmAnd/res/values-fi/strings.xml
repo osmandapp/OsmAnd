@@ -1276,7 +1276,7 @@
     <string name="techical_articles_item">Tekniset artikkelit</string>
     <string name="versions_item">Versiot</string>
     <string name="feedback">Palaute</string>
-    <string name="contact_us">Ota yhteyttä</string>
+    <string name="shared_string_contact">Ota yhteyttä</string>
     <string name="map_legend">Karttaselite</string>
     <string name="save_poi_without_poi_type_message">Haluatko todella tallentaa KP:n ilman tyyppiä\?</string>
     <string name="poi_context_menu_modify_osm_change">Muokkaa OSM muutosta</string>

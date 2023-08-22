@@ -297,10 +297,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.stopNavigation();
-			if (navigationScreen != null) {
-				navigationScreen.stopTrip();
-				navigationScreen = null;
-			}
+			clearNavigationScreen();
+		}
+	}
+
+	private void clearNavigationScreen() {
+		if (navigationScreen != null) {
+			navigationScreen.stopTrip();
+			navigationScreen = null;
 		}
 	}
 
@@ -315,6 +319,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void routeWasCancelled() {
+		clearNavigationScreen();
 	}
 
 	@Override

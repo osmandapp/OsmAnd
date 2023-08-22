@@ -1720,7 +1720,7 @@
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>
     <string name="feedback">Encuesta</string>
-    <string name="contact_us">Contacto</string>
+    <string name="shared_string_contact">Contacto</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>

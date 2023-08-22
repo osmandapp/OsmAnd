@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.DAY_NIGHT_MODE_ACTION_ID;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class DayNightModeAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(27,
+	public static final QuickActionType TYPE = new QuickActionType(DAY_NIGHT_MODE_ACTION_ID,
 			"daynight.switch", DayNightModeAction.class).
 			nameRes(R.string.quick_action_day_night_switch_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
 			category(QuickActionType.NAVIGATION);

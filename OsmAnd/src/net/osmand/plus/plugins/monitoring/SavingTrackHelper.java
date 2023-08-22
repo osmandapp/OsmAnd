@@ -39,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -52,6 +53,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -388,7 +390,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.heading = query.isNull(6) ? Float.NaN : query.getFloat(6);
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
-				pt.getExtensionsToWrite().putAll(extensions);
+				if (!Algorithms.isEmpty(extensions)) {
+					assignExtensionWriter(pt, extensions);
+				}
 
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 				long currentInterval = Math.abs(pt.time - previousTime);
@@ -428,6 +432,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		query.close();
 		dropEmptyTracks(dataTracks);
+	}
+
+	private void assignExtensionWriter(@NonNull WptPt wptPt, @NonNull Map<String, String> pluginsExtensions) {
+		if (wptPt.getExtensionsWriter() == null) {
+			wptPt.setExtensionsWriter(serializer -> {
+				for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+					try {
+						GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
+					} catch (IOException e) {
+						log.error(e);
+					}
+				}
+			});
+		}
 	}
 
 	@NonNull
@@ -499,7 +517,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 			String pluginsInfo = getPluginsInfo(location);
 			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
-			wptPt.getExtensionsToWrite().putAll(extensions);
+			if (!Algorithms.isEmpty(extensions)) {
+				assignExtensionWriter(wptPt, extensions);
+			}
 
 			insertData(wptPt, pluginsInfo);
 			app.getNotificationHelper().refreshNotification(NotificationType.GPX);

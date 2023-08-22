@@ -56,11 +56,7 @@ public class MyPlacesActivity extends TabActivity {
 
 		app.logEvent("myplaces_open");
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setTitle(R.string.shared_string_my_places);
-			actionBar.setElevation(0);
-		}
+		updateToolbar();
 		setContentView(R.layout.my_places);
 		viewPager = findViewById(R.id.pager);
 
@@ -81,6 +77,14 @@ public class MyPlacesActivity extends TabActivity {
 				}
 				viewPager.setCurrentItem(pagerItem, false);
 			}
+		}
+	}
+
+	public void updateToolbar() {
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(R.string.shared_string_my_places);
+			actionBar.setElevation(0);
 		}
 	}
 
@@ -153,7 +157,7 @@ public class MyPlacesActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == android.R.id.home) {
-			finish();
+			onBackPressed();
 			return true;
 		}
 		return false;

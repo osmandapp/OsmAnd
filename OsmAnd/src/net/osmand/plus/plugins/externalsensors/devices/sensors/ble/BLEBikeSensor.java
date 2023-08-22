@@ -47,9 +47,9 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 
 		private final long timestamp;
 		private final float gearRatio;
-		private final float cadence;
+		private final int cadence;
 
-		BikeCadenceData(long timestamp, float gearRatio, float cadence) {
+		BikeCadenceData(long timestamp, float gearRatio, int cadence) {
 			this.timestamp = timestamp;
 			this.gearRatio = gearRatio;
 			this.cadence = cadence;
@@ -63,7 +63,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 			return gearRatio;
 		}
 
-		public float getCadence() {
+		public int getCadence() {
 			return cadence;
 		}
 
@@ -271,7 +271,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				float crankCadence = (crankRevolutions - lastCrankRevolutions) * 60.0f / timeDifference;
 				if (crankCadence > 0) {
 					float gearRatio = wheelCadence / crankCadence;
-					getDevice().fireSensorDataEvent(this, createBikeCadenceData(gearRatio, crankCadence));
+					getDevice().fireSensorDataEvent(this, createBikeCadenceData(gearRatio, Math.round(crankCadence)));
 				}
 			}
 			lastCrankRevolutions = crankRevolutions;
@@ -288,7 +288,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	}
 
 	@NonNull
-	private SensorData createBikeCadenceData(float gearRatio, float crankCadence) {
+	private SensorData createBikeCadenceData(float gearRatio, int crankCadence) {
 		BikeCadenceData data = new BikeCadenceData(System.currentTimeMillis(), gearRatio, crankCadence);
 		lastBikeCadenceData = data;
 		return data;

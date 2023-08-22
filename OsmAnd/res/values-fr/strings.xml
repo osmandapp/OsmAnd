@@ -1721,7 +1721,7 @@
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
     <string name="feedback">Sondage</string>
-    <string name="contact_us">Nous contacter</string>
+    <string name="shared_string_contact">Nous contacter</string>
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
     <string name="map_legend">Légende de la carte</string>
     <string name="shared_string_upload">Téléverser</string>
@@ -5195,7 +5195,7 @@
     <string name="shared_string_finger">Doigt</string>
     <string name="shared_string_hand">Main</string>
     <string name="rendering_value_name_only_name">Nom uniquement</string>
-    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (light character.group.period), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type. signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
     <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
     <string name="poi_categories">Catégories de PI</string>
     <string name="map_2d_mode_action">Mode 2D</string>
@@ -5346,4 +5346,23 @@
     <string name="average_glide_time_interval_desc">Définir la fréquence de calcul de la dérive moyenne.</string>
     <string name="map_widget_group_glide_desc">Les Widgets affichent la dérive par rapport à la destination ou la dérive moyenne pour l\'itinéraire en cours.</string>
     <string name="map_widget_glide_target_desc">Affiche la dérive à compenser pour atteindre la destination.</string>
+    <string name="wheel_circumference">Circonférence de la roue</string>
+    <string name="external_sensor_name_property_description">Nom du capteur</string>
+    <string name="help_article_map_interact_with_map_name">Interagir avec la carte</string>
+    <string name="help_article_map_tracks_on_map_name">Traces et itinéraires</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_map_legend_nautical_map_name">Style Carte nautique</string>
+    <string name="help_article_map_legend_osmand_name">Style de carte OsmAnd</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_routing_name">Paramètres de l\'itinéraire</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Ligne droite (à vol d\'oiseau)</string>
+    <string name="help_article_navigation_guidance_name">Guidage</string>
+    <string name="help_article_map_point_layers_on_map_name">Points sur la carte</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Annonces vocales / Notifications</string>
+    <string name="help_article_navigation_setup_route_details_name">Détails de l\'itinéraire</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Préparation de l\'itinéraire</string>
+    <string name="help_article_personal_name">Mes données</string>
+    <string name="help_article_map_legend_ski_map_name">Style de carte Ski</string>
+    <string name="help_article_personal_import_export_name">Import / Export</string>
 </resources>

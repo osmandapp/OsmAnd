@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -33,7 +35,10 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -884,6 +889,18 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 	}
 
+	protected void startDownload(MapActivity mapActivity, IndexItem indexItem) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (!Version.isPaidVersion(app)
+				&& DownloadActivityType.isCountedInDownloads(indexItem)
+				&& app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
+			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+		} else {
+			new DownloadValidationManager(mapActivity.getMyApplication())
+					.startDownload(mapActivity, indexItem);
+		}
+	}
+
 	public void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -909,8 +926,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 						MapActivity mapActivity = getMapActivity();
 						if (indexItem != null && mapActivity != null) {
 							if (indexItem.getType() == DownloadActivityType.NORMAL_FILE) {
-								new DownloadValidationManager(mapActivity.getMyApplication())
-										.startDownload(mapActivity, indexItem);
+								startDownload(mapActivity, indexItem);
 							}
 						}
 					}

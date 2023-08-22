@@ -1722,7 +1722,7 @@
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>
     <string name="feedback">Encuesta</string>
-    <string name="contact_us">Contacto</string>
+    <string name="shared_string_contact">Contacto</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
@@ -5350,4 +5350,11 @@
     <string name="map_widget_glide_average_desc">Muestra la tasa de planeo media para el intervalo establecido.</string>
     <string name="map_widget_glide_target_desc">Muestra la tasa de planeo necesaria para alcanzar el objetivo.</string>
     <string name="map_widget_group_glide_desc">Los widgets muestran la tasa de planeo respecto al objetivo o la tasa de planeo media del trayecto actual.</string>
+    <string name="external_sensor_name_property_description">Nombre del sensor</string>
+    <string name="wheel_circumference">Circunferencia de la rueda</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="map_widget_group_glide_ratio">Coeficiente de planeo</string>
+    <string name="average_glide_time_interval_desc">Determinar el período de tiempo requerido para el promedio deslizante.</string>
+    <string name="average_glide_ratio">Tasa media de planeo</string>
+    <string name="glide_ratio_to_target">Tasa de planeo hasta el objetivo</string>
 </resources>

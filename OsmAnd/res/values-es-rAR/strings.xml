@@ -1720,7 +1720,7 @@
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>
     <string name="feedback">Encuesta</string>
-    <string name="contact_us">Contacto</string>
+    <string name="shared_string_contact">Contacto</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
@@ -5370,4 +5370,6 @@
     <string name="map_widget_glide_target_desc">Muestra la relación de planeo necesaria para alcanzar el punto de destino.</string>
     <string name="hillshade_slope">Sombreado, Pendientes</string>
     <string name="map_widget_group_glide_desc">Los widgets muestran la relación de planeo hacia el objetivo o la relación de planeo promedio para el viaje actual.</string>
+    <string name="wheel_circumference">Circunferencia de la rueda</string>
+    <string name="external_sensor_name_property_description">Nombre del sensor</string>
 </resources>

@@ -1227,7 +1227,7 @@
     <string name="osmand_parking_plugin_name">停车位置</string>
     <string name="plugin_ski_name">滑雪地图浏览</string>
     <string name="help_us_to_improve_menu_group">帮助我们改进 OsmAnd</string>
-    <string name="contact_us">联系</string>
+    <string name="shared_string_contact">联系</string>
     <string name="follow_us">跟随我们</string>
     <string name="instalation_troubleshooting_item">安装和疑难解答</string>
     <string name="techical_articles_item">技术文章</string>
@@ -4367,7 +4367,7 @@
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">从 %1$d 出口离开并靠左</string>
     <string name="auto_25_chars_route_roundabout_kr">从 %1$d 出口离开并靠右</string>
-    <string name="attach_roads_descr">借助离线地图的路线近似你的轨迹。这将提供的校正的海拔值、道路细节，以及在导航过程中使用的转弯。</string>
+    <string name="attach_roads_descr">借将您的轨迹趋近为允许在点之间进行路线规划的道路，并与精确的转弯指令和路线属性相关联。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
@@ -5092,4 +5092,7 @@
     <string name="is_imported">%1$s 已导入。</string>
     <string name="file_already_exists">文件已存在</string>
     <string name="nav_profile_confirm_delete">您确定要删除“%1$s”吗？</string>
+    <string name="map_widget_glide_average_desc">显示给定时间间隔内的平均滑行比。</string>
+    <string name="map_widget_glide_target_desc">显示到达目标点所需的滑行比。</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

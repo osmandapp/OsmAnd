@@ -53,14 +53,14 @@
 \n OsmAnd este o aplicație de navigație software open source cu acces la o mare varietate de date OSM globale. Toate datele hărților (hărți vectoriale sau hărți de tip tile) pot fi stocate pe cardul de memorie al telefonului pentru utilizare offline. Se oferă, de asemenea, funcționalitate de rutare offline și online, inclusiv ghidare vocală pas cu pas.
 \n
 \n Câteva dintre caracteristicile principale:
-\n - Funcționalitate offline completă (stocarea hărților vectoriale sau tile descărcate în memoria dispozitivului)
+\n - Funcționalitate offline completă (stocați hărțile vectoriale sau tile descărcate în memoria dispozitivului)
 \n - Hărți vectoriale offline compacte disponibile pentru întreaga lume
-\n - Descărcarea hărților de țară sau de regiune direct din aplicație
-\n - Posibilitate de suprapunere a mai multor straturi de hărți, cum ar fi GPX sau trasee de navigație, puncte de interes, Favorite, curbe de nivel, stații de transport public, hărți suplimentare cu transparență personalizabilă
+\n - Descărcați hărți de țară sau de regiune direct din aplicație
+\n - Posibilitate de suprapunere a mai multor straturi de hărți, cum ar fi GPX sau trasee de navigație, puncte de interes, favorite, stații de transport public, hărți suplimentare cu transparență personalizabilă, caracteristici topografice cum ar fi curbe de nivel / dealuri / pante
 \n - Căutare offline a adreselor și a locurilor (POI)
 \n - Rutare offline pentru distanțe medii
-\n - Moduri de deplasare auto, cu bicicleta și pietonală cu opțional:
-\n - Comutare automată a vederii pe timp de zi/noapte
+\n - Moduri de deplasare auto, cu bicicleta și pietonală, cu opțional:
+\n - Comutare automată a vederii de zi/noapte
 \n - Zoom pe hartă în funcție de viteză
 \n - Alinierea hărții în funcție de busolă sau de direcția de deplasare
 \n - Ghidare pe bandă, afișare a limitelor de viteză, voci înregistrate și text-to-speech
@@ -71,26 +71,26 @@
 \n
 \n OsmAnd este dezvoltat în mod activ, iar proiectul nostru și progresul său continuu se bazează pe contribuții financiare pentru dezvoltarea și testarea de noi funcționalități. Vă rugăm să vă gândiți să cumpărați OsmAnd+, sau să finanțați noi caracteristici specifice sau să faceți o donație generală pe https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd+ este o aplicație open source pentru navigare cu hărți offline și online</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Indicații automate de navigație OSM)
 \n
-\nOsmAnd+ este o aplicație open source cu acces la o gamă variată de date de la OpenStreetMap (OSM). Harta în format vectorial sau raster se poate stoca în memoria telefonului (pe card) pentru uz offline. OsmAnd poate calcula ruta atât offline cât și online și oferă ghidare vocală. 
+\n OsmAnd+ este o aplicație de navigație software open source cu acces la o mare varietate de date OSM globale. Toate datele hărților (hărți vectoriale sau hărți de tip tile) pot fi stocate pe cardul de memorie al telefonului pentru utilizare offline. Se oferă, de asemenea, funcționalitate de rutare offline și online, inclusiv ghidare vocală pas cu pas.
 \n
-\nOsmAnd+ este versiunea comercială, prin achiziționarea ei susțineți proiectul, finanțați dezvoltarea de noi funcționalități și primiți cele mai recente versiuni.
+\n OsmAnd+ este versiunea cu plată a aplicației, prin cumpărarea acesteia sprijiniți proiectul, finanțați dezvoltarea de noi funcții și primiți cele mai recente actualizări.
 \n
-\nCâteva dintre funcții:
-\n - poate funcționa offline
-\n - se pot stoca hărți vectoriale sau raster într-un director la alegere
-\n - sunt disponibile hărți vectoriale în format compact
-\n - se pot descărca hărți ale țării sau regiunii direct din aplicație
-\n - se pot folosi diverse straturi ale hărților precum rute si trasee GPX, POI, favorite, linii de contur, stații ale transportului public, hărți suplimentare cu grad de transparență selectabil
+\n Câteva dintre caracteristicile de bază:
+\n - Funcționalitate offline completă (stocarea hărților vectoriale sau a hărților în plăci descărcate în memoria dispozitivului)
+\n - Hărți vectoriale offline compacte disponibile pentru întreaga lume
+\n - Descărcare nelimitată de hărți de țară sau regiune direct din aplicație
+\n - Funcționalitate Wikipedia offline (descărcare de POI-uri Wikipedia), excelentă pentru vizitarea obiectivelor turistice
+\n - Posibilitate de suprapunere a mai multor straturi de hărți, cum ar fi GPX sau trasee de navigație, puncte de interes, Favorite, stații de transport public, hărți suplimentare cu transparență personalizabilă, caracteristici topografice cum ar fi curbe de nivel/coline/podețe
 \n
-\n - căutare offline de adrese și POI
-\n - rutare offline pe distanțe scurte (experimental)
-\n - mod de deplasare cu mașina, bicicleta sau pieton opțional cu:
-\n - comutare automată zi/noapte
-\n - zoom dependent de viteză
-\n - aliniere hartă în funcție de busolă și de direcția de deplasare
-\n - orientare pe benzile de circulație, afișare viteză, voce înregistrată sau Text To Speech
+\n - Căutare offline a adreselor și a locurilor (POI)
+\n - Rutare offline pentru distanțe medii
+\n - Moduri de deplasare auto, cu bicicleta și pietonală cu opțional:
+\n - Comutare automată a vederii de zi/noapte
+\n - Zoom pe hartă în funcție de viteză
+\n - Alinierea hărții în funcție de busolă sau de direcția de deplasare
+\n - Ghidare pe bandă, afișare a limitelor de viteză, voci înregistrate și text-to-speech
 \n</string>
     <string name="filterpoi_activity">Creează filtru POI</string>
     <string name="recalculate_route_to_your_location">Mod de transport:</string>
@@ -179,7 +179,7 @@
     <string name="rendering_attr_noPolygons_name">Poligoane</string>
     <string name="rendering_attr_appMode_name">Mod de randare</string>
     <string name="rendering_attr_appMode_description">Optimizează harta pentru</string>
-    <string name="rendering_attr_contourLines_description">Afișează începând de la nivelul de zoom (necesită date curbe de nivel):</string>
+    <string name="rendering_attr_contourLines_description">Afișare de la nivelul de zoom (necesită date privind linia de contur):</string>
     <string name="rendering_attr_contourLines_name">Afișează curbele (Izolinii)</string>
     <string name="rendering_attr_hmRendered_description">Creșteți cantitatea de detalii afișate pe hartă.</string>
     <string name="rendering_attr_hmRendered_name">Mai multe detalii pe hartă</string>
@@ -876,7 +876,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Suprimarea afișării limitelor regionale (niveluri de administrare 5-9).</string>
     <string name="index_srtm_ele">Curbe de nivel</string>
     <string name="index_srtm_parts">părți</string>
-    <string name="srtm_plugin_name">Izolinii</string>
+    <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Alte hărți</string>
     <string name="download_srtm_maps">Curbe (izolinii)</string>
     <string name="audionotes_plugin_name">Plugin note audio</string>
@@ -898,11 +898,11 @@
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Note audio</string>
-    <string name="osmand_srtm_short_description_80_chars">Extensia OsmAnd pentru izolinii offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd pentru funcții topo offline, cum ar fi linii de contur, deal, pantă</string>
     <string name="map_widget_distancemeasurement">Măsurarea distanței</string>
     <string name="recording_context_menu_play">Redă</string>
-    <string name="srtm_paid_version_msg">Vă rugăm să luați în considerare posibilitatea de a plăti pentru extensia „Izolinii” pentru a sprijini dezvoltarea ulterioară.</string>
-    <string name="srtm_paid_version_title">Extensia izolinii</string>
+    <string name="srtm_paid_version_msg">Vă rugăm să luați în considerare posibilitatea de a plăti pentru extensia \'Topography\' pentru a sprijini dezvoltarea ulterioară.</string>
+    <string name="srtm_paid_version_title">Plugin de topografie</string>
     <string name="av_def_action_video">Înregistrare video</string>
     <string name="av_def_action_audio">Înregistrare audio</string>
     <string name="av_widget_action_descr">Acțiune implicită a iconiței:</string>
@@ -1842,7 +1842,7 @@
     <string name="sorted_by_distance">Sortat după distanță</string>
     <string name="search_favorites">Căutare în favorite</string>
     <string name="hillshade_menu_download_descr">Descărcați harta de suprapunere \"Hillshade\" pentru a arăta umbrirea verticală.</string>
-    <string name="hillshade_purchase_header">Instalați extensia „Izolinii” pentru a vedea relieful pe hartă.</string>
+    <string name="hillshade_purchase_header">Instalați pluginul \'Topography\' pentru a afișa zonele verticale cu denivelări.</string>
     <string name="hide_from_zoom_level">Ascundeți începând cu nivelul de zoom</string>
     <string name="shared_string_plugin">Extensie</string>
     <string name="srtm_color_scheme">Schemă culori</string>
@@ -2148,7 +2148,7 @@
     <string name="techical_articles_item">Articole tehnice</string>
     <string name="versions_item">Versiuni</string>
     <string name="feedback">Părere</string>
-    <string name="contact_us">Contact</string>
+    <string name="shared_string_contact">Contact</string>
     <string name="map_legend">Legendă hartă</string>
     <string name="only_download_over_wifi">Descărcare doar pe Wi-Fi</string>
     <string name="live_update">Actualizări in timp real</string>
@@ -2410,7 +2410,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferați drumurile neasfaltate în locul celor asfaltate pentru traseu.</string>
     <string name="layer_osm_edits">editare OSM</string>
     <string name="quick_action_contour_lines_descr">Butonul afișează sau ascunde curbele pe hartă.</string>
-    <string name="quick_action_hillshade_descr">Un buton ca să afișeze sau ascundă nuanțele de dealuri pe hartă.</string>
+    <string name="quick_action_hillshade_descr">Un buton ca să afișeze sau ascundă nuanțele de deal pe hartă.</string>
     <string name="tts_initialization_error">Motorul text-to-speech nu porneste.</string>
     <string name="export_profile">Exportă profilul</string>
     <string name="exported_osmand_profile">Profil osmand exportat %1$s</string>
@@ -2693,7 +2693,7 @@
     <string name="selected_profile">Profil selectat</string>
     <string name="nautical_render_descr">Pentru navigare nautică. Afișează geamanduri, faruri, râuri, șenile navigabile și marcaje maritime, porturi, servicii maritime, și curbe de adâncime.</string>
     <string name="ski_map_render_descr">Pentru schi. Dispune de pârtii, teleschiuri, piste de fond, etc.</string>
-    <string name="light_rs_render_descr">Stil de conducere simplu. Mod de noapte, curbe de nivel, drumuri cu contrast portocaliu, întunecarea elementelelor secundare.</string>
+    <string name="light_rs_render_descr">Stil de conducere simplu. Modul de noapte blând, drumuri contrastante de culoare portocalie, întunecă obiectele secundare de pe hartă, caracteristici topografice precum curbele de nivel.</string>
     <string name="topo_render_descr">Pentru drumeții, trekking și ciclism în natură. Lizibil chiar și în lumină puterniocă. Drumuri contrastante și obiecte naturale, diferite tipuri de trasee, opțiuni avansate ale curbelor de nivel, detalii suplimentare. opțiune pentru afișarea suprafeței și calității drumului. Fără mod nocturn.</string>
     <string name="touring_view_render_descr">Stil turistic cu contrast ridicat și detalii maxime. Include toate opțiunile stilului implicit OsmAnd, afișând în același timp cât mai multe detalii posibile, în special drumuri, căi și alte modalități de călătorie. Distincția clară \"atlas turistic\" între tipurile de drum. Potrivit pentru zi, noapte și în aer liber.</string>
     <string name="off_road_render_descr">Pentru conducere off-road bazată pe stilul „Topo” și pentru utilizarea cu imagini de satelit verzi, ca strat subaltern. Grosimea drumului principal redus, grosimea crescută a pistelor, cărărilor, bicicletelor și altor rute.</string>
@@ -3183,7 +3183,7 @@
     <string name="sort_name_descending">Nume: Z – A</string>
     <string name="sort_name_ascending">Nume: A – Z</string>
     <string name="start_finish_icons">Pictograme de început și de sfârșit</string>
-    <string name="contour_lines_thanks">Vă mulțumim că ați cumpărat „Izolinii”</string>
+    <string name="contour_lines_thanks">Vă mulțumim că ați cumpărat \'Topography\'</string>
     <string name="osm_live_payment_desc_hw">Abonamentul se percepe pentru perioada selectată. Anulați-l în AppGallery în orice moment.</string>
     <string name="osm_live_payment_subscription_management_hw">Plata este debitată din contul dumneavoastră AppGallery la confirmarea achiziției.
 \n
@@ -3490,11 +3490,11 @@
 \n • Căutați locuri după adresă, după tip (de exemplu: restaurant, hotel, benzinărie, muzeu) sau după coordonate geografice
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) este o aplicație de hărți și navigație cu acces la datele OSM gratuite, de înaltă calitate și la nivel mondial.
-\n Bucurați-vă de navigație vocală și optică, de vizualizarea POI (puncte de interes), de crearea și gestionarea de trasee GPX, de utilizarea vizualizării curbelor de nivel și a informațiilor despre altitudine, de posibilitatea de a alege între modurile de condus, ciclism, pietonal, de editare OSM și multe altele.
+\n Bucurați-vă de navigație vocală și optică, de vizualizarea POI (puncte de interes), de crearea și gestionarea de trasee GPX, de utilizarea vizualizării curbelor de nivel și a informațiilor topografice, de posibilitatea de a alege între modurile de condus, ciclism, pietonal, editare OSM și multe altele.
 \n
 \n OsmAnd+ este versiunea cu plată a aplicației. Cumpărând-o, sprijiniți proiectul, finanțați dezvoltarea de noi funcții și primiți cele mai recente actualizări.
 \n
-\n Câteva dintre caracteristicile principale:</string>
+\n Câteva dintre principalele caracteristici:</string>
     <string name="osmand_extended_description_part8">OsmAnd este un software open source dezvoltat în mod activ. Toată lumea poate contribui la aplicație prin raportarea de erori, îmbunătățirea traducerilor sau programarea de noi caracteristici. În plus, proiectul se bazează pe contribuții financiare pentru a finanța codificarea și testarea noilor funcționalități.
 \n Acoperirea și calitatea aproximativă a hărților:
 \n • Europa de Vest: ****
@@ -3546,12 +3546,12 @@
 \n</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) este o aplicație de hărți și navigație cu acces la datele OSM gratuite, de înaltă calitate și la nivel mondial.
 \n
-\n Bucurați-vă de navigator vocal și optic, vizualizarea POI (puncte de interes), crearea și gestionarea de trasee GPX, utilizarea vizualizării curbelor de nivel și a informațiilor despre altitudine (prin intermediul unui plugin), posibilitatea de a alege între modurile de condus, ciclism, pietonal, editare OSM și multe altele.</string>
+\n Bucurați-vă de navigator vocal și optic, de vizualizarea POI (puncte de interes), de crearea și gestionarea de trasee GPX, de utilizarea vizualizării curbelor de nivel și a informațiilor topografice (prin intermediul unui plugin), de posibilitatea de a alege între modurile de condus, ciclism, pietonal, editare OSM și multe altele.</string>
     <string name="interrupt_music_descr">Indicațiile vocale pun pe pauză redarea muzicii.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Redă traseele în funcție de urmele OSMC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rute de drumeție</string>
     <string name="precise_routing_mode_descr">Calculați rute precise fără erori. În continuare limitat la distanță și lent.</string>
-    <string name="download_hillshade_maps">Nuanțe de deal</string>
+    <string name="download_hillshade_maps">Nuanță de deal</string>
     <string name="layer_hillshade">Strat Hillshade</string>
     <string name="sett_parrot_ext_input">Papagal</string>
     <string name="sett_wunderlinq_ext_input">MiracolLINQ</string>
@@ -3632,7 +3632,7 @@
 \n
 \nAceastă vizualizare poate fi revenită fie prin dezactivarea ei din nou aici, fie prin modificarea \'Stilului hărții\' în \'Configurați harta\', după cum doriți.</string>
     <string name="plugin_touringview_name">Vizualizare hartă turistică</string>
-    <string name="srtm_plugin_description">Informațiile privind terenul, cum ar fi curbele de nivel, umbrirea relifului și pantele, vă ajută să evaluați vizual forma terenului și relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin umbrirea pantelor, curbe de nivel și/sau colorarea abruptului.
+    <string name="srtm_plugin_description">Informațiile privind terenul, cum ar fi curbele de nivel, nuanțele, pantele, vă ajută să evaluați vizual poziția terenului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei.
 \n
 \nDatele de bază provin din SRTM și ASTER.
 \n
@@ -3756,8 +3756,8 @@
     <string name="animate_my_location_desc">Activați panoramarea animată a hărții \"Poziția mea\" în timpul navigării.</string>
     <string name="replace_all_desc">Elementele curente vor fi înlocuite cu elemente din fișierul</string>
     <string name="show_from_zoom_level">Afișarea începe la nivelul de zoom</string>
-    <string name="srtm_purchase_header">Cumpărați și instalați extensia „Izolinii” pentru a afișa zonele verticale gradate.</string>
-    <string name="srtm_menu_download_descr">Descărcați harta „Izolinii” pentru utilizare în această regiune.</string>
+    <string name="srtm_purchase_header">Cumpărați și instalați pluginul \'Topography\' pentru a afișa zonele verticale gradate.</string>
+    <string name="srtm_menu_download_descr">Descărcați harta \'Linii de contur\' a acestei regiuni.</string>
     <string name="plugin_mapillary_descr">Imagini de la nivelul străzii. Puteți contribui și dumneavoastră. Pentru a vedea datele existente sub forma unui strat de hartă, activați \"Imagini la nivel de stradă\" în meniul \"Configurare hartă\".</string>
     <string name="mapillary_menu_title_pano">Afișați numai imagini la 360°</string>
     <string name="mapillary_menu_descr_tile_cache">Reîncărcați dalele pentru a vedea date actualizate.</string>
@@ -3770,16 +3770,16 @@
     <string name="map_import_error">Eroare de import al hărții</string>
     <string name="import_rendering_file">Importați fișierul de randare</string>
     <string name="shared_string_terrain">Teren</string>
-    <string name="hillshade_description">Harta Hillshade utilizează nuanțe întunecate pentru a arăta pantele, vârfurile și zonele joase.</string>
+    <string name="hillshade_description">Harta Hillshade utilizează nuanțe întunecate pentru a arăta panta, vârfurile și zonele joase.</string>
     <string name="slope_description">Slope folosește culori pentru a vizualiza abruptul terenului.</string>
     <string name="terrain_slider_description">Setați nivelurile de zoom minim și maxim la care va fi afișat stratul.</string>
     <string name="hillshade_download_description">Sunt necesare hărți suplimentare pentru a vizualiza colinele de pe hartă.</string>
-    <string name="slope_download_description">Sunt necesare hărți suplimentare pentru a vizualiza pantele pe hartă.</string>
-    <string name="slope_read_more">Citiți mai multe despre pante în %1$s.</string>
+    <string name="slope_download_description">Sunt necesare hărți suplimentare pentru a vizualiza panta pe hartă.</string>
+    <string name="slope_read_more">Citiți mai multe despre pantă în %1$s.</string>
     <string name="shared_string_transparency">Transparență</string>
     <string name="shared_string_zoom_levels">Niveluri de zoom</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Afișează pe hartă pantele sau dealurile. Citiți mai multe despre aceste tipuri de hărți pe site-ul nostru.</string>
+    <string name="terrain_empty_state_text">Afișează umbra dealurilor sau panta pe hartă. Citiți mai multe despre aceste tipuri de hărți pe site-ul nostru.</string>
     <string name="shared_string_hillshade">Umbra dealului</string>
     <string name="import_complete_description">Ați importat toate datele din %1$s. Utilizați butoanele de mai jos pentru a deschide orice parte a aplicației pentru a o gestiona.</string>
     <string name="checking_for_duplicate_description">OsmAnd verifică %1$s pentru duplicate cu elemente existente în aplicație.
@@ -3791,7 +3791,7 @@
     <string name="select_distance_route_will_recalc">Selectați distanța după care traseul va fi recalculat.</string>
     <string name="recalculate_route_distance_promo">Traseul va fi recalculat dacă distanța de la traseu până la locația curentă este mai mare decât valoarea selectată.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
-    <string name="download_slope_maps">Pante</string>
+    <string name="download_slope_maps">Pantă</string>
     <string name="quick_action_terrain_descr">Un buton pentru a afișa sau ascunde stratul de teren pe hartă.</string>
     <string name="delete_description">Ștergeți descrierea</string>
     <string name="add_description">Adăugați o descriere</string>
@@ -3938,7 +3938,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="confirm_download_roadmaps">Harta doar pentru drumuri nu este necesară, deoarece aveți harta standard (completă). O descărcați totuși\?</string>
-    <string name="activate_srtm_plugin">Vă rugăm să activați plugin-ul „Izolinii”</string>
+    <string name="activate_srtm_plugin">Vă rugăm să activați plugin-ul \'Topography\'</string>
     <string name="activate_seamarks_plugin">Vă rugăm să activați plugin-ul \"Nautical map view\"</string>
     <string name="show_free_version_banner_description">Afișați bannerul versiunii gratuite chiar și în versiunea cu plată.</string>
     <string name="show_free_version_banner">Afișați bannerul versiunii gratuite</string>
@@ -4013,7 +4013,7 @@
     <string name="purchase_cancelled_dialog_descr">Reînnoiți abonamentul pentru a continua să utilizați toate funcțiile:</string>
     <string name="how_to_open_link">Cum se deschide link-ul\?</string>
     <string name="read_wikipedia_offline_description">Obțineți abonamentul OsmAnd Live pentru a citi articolele Wikipedia și Wikivoyage offline.</string>
-    <string name="default_render_descr">Stil de uz general. Orașele dense sunt reprezentate curate. Prezintă curbe de nivel, trasee, calitatea suprafeței, restricții de acces, scuturi rutiere, redarea traseelor conform scării SAC/CAI, elemente de sporturi de apă albă.</string>
+    <string name="default_render_descr">Stil de uz general. Orașele dense sunt reprezentate curate. Caracteristici rute, calitatea suprafeței, restricții de acces, scuturi rutiere, drumuri redate conform scării SAC/CAI, elemente de sporturi de apă albă, caracteristici topografice precum curbele de nivel.</string>
     <string name="snowmobile_render_descr">Pentru conducerea snowmobilelor cu drumuri și piste dedicate.</string>
     <string name="turn_screen_on_router">Trezirea la întoarcere</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
@@ -4239,7 +4239,7 @@
 \n - Navigația GPS în modul ciclism vă construiește traseul folosind pistele de biciclete
 \n - Vezi viteza și altitudinea ta
 \n - Opțiunea de înregistrare GPX vă permite să vă înregistrați călătoria și să o partajați
-\n - Prin intermediul unui plugin suplimentar, puteți activa liniile de contur și umbrirea dealurilor</string>
+\n - Printr-un plugin suplimentar puteți activa liniile de contur și hillshade</string>
     <string name="option_available_only_in_osmand_pro">Disponibil ca parte a abonamentului OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obțineți acces la caracteristicile OsmAnd Pro: Colorarea traseelor și multe altele.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorați planurile OsmAnd pentru a găsi unul potrivit pentru dumneavoastră.</string>
@@ -5266,7 +5266,7 @@
 \n
 \nVă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
     <string name="free_favorites_backup_description">Înregistrează-te în OsmAnd Cloud pentru a obține gratuit o copie de rezervă pentru favorite și setări.</string>
-    <string name="get_osmand_cloud">Obțineți OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">Descărcați OsmAnd Cloud</string>
     <string name="free_account">Cont gratuit</string>
     <string name="folder_export_empty_error">Nimic de exportat, dosarul este gol</string>
     <string name="free_favorites_backup">Backup gratuit pentru favorite</string>
@@ -5355,4 +5355,9 @@
     <string name="glide_ratio_to_target">Raportul de planeitate la țintă</string>
     <string name="map_widget_group_glide_ratio">Raportul de alunecare</string>
     <string name="feature_available_as_part_of_plan">%1$s disponibil ca parte a planului %2$s</string>
+    <string name="external_sensor_name_property_description">Numele senzorului</string>
+    <string name="wheel_circumference">Circumferința roții</string>
+    <string name="average_glide_time_interval_desc">Specificați intervalul de timp pentru calcularea mediei de alunecare.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Rata medie de planare</string>
 </resources>

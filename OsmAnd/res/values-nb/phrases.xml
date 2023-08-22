@@ -1774,7 +1774,7 @@
     <string name="poi_club_fishing">Fiskeklubb</string>
     <string name="poi_denomination_evangelical">Evangelisk</string>
     <string name="poi_religion_multifaith">Multireligiøs</string>
-    <string name="poi_chalet">Feriehus</string>
+    <string name="poi_chalet">Feriehus;Husly</string>
     <string name="poi_fuel_wood">Brensel: tre</string>
     <string name="poi_fuel_lpg">Flytende petroleumsgass (LPG)</string>
     <string name="poi_fuel_gtl_diesel">GTL-diesel</string>
@@ -1812,7 +1812,7 @@
     <string name="poi_fridge_filter">Kjøleskap</string>
     <string name="poi_museum_type">Museum-emne</string>
     <string name="poi_post_office_type">Type</string>
-    <string name="poi_lean_to">Gapahuk</string>
+    <string name="poi_lean_to">Gapahuk;Ly</string>
     <string name="poi_departures_board">Avgangstavle</string>
     <string name="poi_power_generator">Elgenerator</string>
     <string name="poi_craft_beekeeper">Birøkter</string>
@@ -1909,4 +1909,23 @@
     <string name="poi_fuel_coal">Brensel: kull</string>
     <string name="poi_recycling_styrofoam">Ekstrudert polystyrenskum</string>
     <string name="poi_occupational_therapist">Ergoterapeut</string>
+    <string name="poi_second_hand_yes">Ja</string>
+    <string name="poi_water_filter">Vann;Drikkevann</string>
+    <string name="poi_vending_public_transport_tickets">Kollektivtransportbilletter</string>
+    <string name="poi_second_hand_no">Ingen bruktvarer</string>
+    <string name="poi_second_hand_only">Kun</string>
+    <string name="poi_shelter_type_basic_hut">Enkel hytte</string>
+    <string name="poi_shelter_type_building">Bygning</string>
+    <string name="poi_sac_scale">SAC-skala</string>
+    <string name="poi_cai_scale">CAI-skala</string>
+    <string name="poi_tunnel_name">Tunnelnavn</string>
+    <string name="poi_bridge_name">Brunavn</string>
+    <string name="poi_vending_machine_fuel">Ja</string>
+    <string name="poi_bicycle_designated">Beregnet for sykler</string>
+    <string name="poi_motor_vehicle_designated">Beregnet for motorkjøretøyer</string>
+    <string name="poi_motorcar_designated">Beregnet for biler</string>
+    <string name="poi_vehicle_designated">Beregnet for kjøretøy</string>
+    <string name="poi_horse_designated">Beregnet for hester</string>
+    <string name="poi_foot_designated">Beregnet for fotgjengere</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Alle unntatt kollektivtransportskur</string>
 </resources>

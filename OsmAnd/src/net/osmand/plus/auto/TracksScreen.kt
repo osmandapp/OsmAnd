@@ -142,7 +142,7 @@ class TracksScreen(
 			var dist = 0f
 			track.dataItem?.let { dataItem ->
 				description = dataItem.nearestCityName ?: ""
-				dist = if (dataItem.analysis == null) {
+				dist = if (dataItem.analysis == null || dataItem.analysis?.latLonStart == null) {
 					0f
 				} else {
 					MapUtils.getDistance(latLon, dataItem.analysis?.latLonStart).toFloat()

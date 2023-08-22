@@ -297,6 +297,22 @@ public class MapRendererContext {
 		return convertedStyleSettings;
 	}
 
+	public void removeDirectory(String dirPath) {
+		ObfsCollection obfsCollection = obfsCollections.get(ProviderType.MAIN);
+		if (obfsCollection != null) {
+			obfsCollection.removeDirectory(dirPath);
+		}
+		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+	}
+
+	public void addDirectory(String dirPath) {
+		ObfsCollection obfsCollection = obfsCollections.get(ProviderType.MAIN);
+		if (obfsCollection != null && !obfsCollection.hasDirectory(dirPath)) {
+			obfsCollection.addDirectory(dirPath);
+		}
+		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+	}
+
 	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
 		IObfsCollection obfsCollection = obfsCollections.get(providerType);
 		if (obfsCollection == null) {
