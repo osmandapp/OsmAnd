@@ -4,6 +4,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -109,16 +110,19 @@ public class BinaryRoutePlanner {
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1 << 20)) + " mb");
 					printMemoryConsumption("Memory occupied after calculation : ");
 				}
-				finalSegment = (FinalRouteSegment) segment;
 				if (TRACE_ROUTING) {
 					println(" >>FINAL segment: " + segment);
 				}
-				if (ctx.calculationProgress != null) {
-					ctx.calculationProgress.finalSegmentsFound++;
-				}
+				
 				if (dijkstraMode) {
+					if (finalSegment == null) {
+						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
+					} else {
+						((MultiFinalRouteSegment) finalSegment).others.add((FinalRouteSegment) segment);
+					}
 					continue;
 				} else {
+					finalSegment = (FinalRouteSegment) segment;
 					break;
 				}
 			}
@@ -479,7 +483,7 @@ public class BinaryRoutePlanner {
 			// 2. check if segment was already visited in opposite direction
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment,
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment,
 					oppositeSegments);
  			if (alreadyVisited) {
  				// TODO STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
@@ -578,7 +582,7 @@ public class BinaryRoutePlanner {
 		return s.getParentRoute();
 	}
 
-	private boolean checkIfOppositeSegmentWasVisited(boolean reverseWaySearch,
+	private boolean checkIfOppositeSegmentWasVisited(RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments) {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
@@ -600,6 +604,9 @@ public class BinaryRoutePlanner {
 				graphSegments.add(frs);
 				if (TRACE_ROUTING) {
 					printRoad("  " + currentSegment.segEnd + ">> Final segment : ", frs, reverseWaySearch);
+				}
+				if (ctx.calculationProgress != null) {
+					ctx.calculationProgress.finalSegmentsFound++;
 				}
 				return true;
 			}
@@ -1123,6 +1130,19 @@ public class BinaryRoutePlanner {
 
 		public FinalRouteSegment(RouteDataObject road, int segmentStart, int segmentEnd) {
 			super(road, segmentStart, segmentEnd);
+		}
+
+	}
+	
+	
+	static class MultiFinalRouteSegment extends FinalRouteSegment {
+
+		boolean reverseWaySearch;
+		RouteSegment opposite;
+		List<FinalRouteSegment> others = new ArrayList<>();
+
+		public MultiFinalRouteSegment(FinalRouteSegment f) {
+			super(f.getRoad(), f.getSegmentStart(), f.getSegmentEnd());
 		}
 
 	}
