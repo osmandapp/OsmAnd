@@ -754,7 +754,7 @@
     <string name="arrival_distance_factor_early">Tidlig</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sen</string>
-    <string name="arrival_distance_factor_at_last">De siste meterne</string>
+    <string name="arrival_distance_factor_at_last">Veldig sen</string>
     <string name="arrival_distance">Ankomstmelding</string>
     <string name="arrival_distance_descr">Hvor raskt vil du ha ankomstmeldingen\?</string>
     <string name="keep_informing_descr">Gjenta navigeringsinstruksjoner med jevne mellomrom.</string>
@@ -4701,7 +4701,7 @@
     <string name="routing_attr_motor_type_name">Motor-drivstoff</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Bensin</string>
-    <string name="routing_attr_motor_type_description">Velg drivstofftype brukt at din motor, for å regne ut CO2-utslipp.</string>
+    <string name="routing_attr_motor_type_description">Velg din motors drivstofftype, dette trengs for å beregne CO2-utslipp.</string>
     <string name="map_marker_average_speed_desc">Angi tidsintervall der gjennomsnittshastigheten vil bli målt for utregning av ankomsttid.</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="transport_hazmat_yes_desc">Du må velge rett kategori.</string>
