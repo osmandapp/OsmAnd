@@ -26,7 +26,6 @@ import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;

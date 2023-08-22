@@ -15,17 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
-import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.SelectGpxTask;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
@@ -33,8 +32,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implements SelectGpxTask.SelectGpxTaskListener, FragmentStateHolder,
-		ItemsSelectionHelper.SelectionHelperProvider, MoveGpxFileBottomSheet.OnTrackFileMoveListener {
+public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implements SelectGpxTaskListener,
+		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener {
 
 	public static final String TAG = SearchMyPlacesTracksFragment.class.getSimpleName();
 
@@ -79,11 +78,8 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 			Set<TrackItem> trackItemsToMove = new HashSet<>();
-			Set<TracksGroup> tracksGroups = new HashSet<>();
-
-			for (TrackItem trackItem : trackItems) {
+			for (TrackItem trackItem : selectionHelper.getSelectedItems()) {
 				File itemFile = trackItem.getFile();
 				if (itemFile != null) {
 					File destFile = new File(dest, itemFile.getName());
@@ -94,8 +90,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 					trackItemsToMove.add(trackItem);
 				}
 			}
-
-			foldersHelper.moveTracks(trackItemsToMove, tracksGroups, dest, result -> {
+			foldersHelper.moveTracks(trackItemsToMove, Collections.emptySet(), dest, result -> {
 				reloadTracks();
 				dismiss(true);
 				return false;
@@ -116,17 +111,13 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	public void dismiss(boolean dismissImmediately) {
-		if (dismissImmediately) {
+		if (dismissImmediately || !selectionMode) {
 			super.dismiss();
-			return;
-		}
-		if (selectionMode) {
+		} else {
 			selectionMode = false;
 			adapter.setSelectionMode(false);
 			adapter.notifyDataSetChanged();
 			updateButtonsState();
-		} else {
-			super.dismiss();
 		}
 	}
 
@@ -166,6 +157,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		updateButtonsState();
 	}
 
+	@Nullable
 	private TrackFoldersHelper getTrackFoldersHelper() {
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseTrackFolderFragment) {
@@ -176,8 +168,8 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 	@Override
 	@NonNull
-	protected TrackViewHolder.TrackSelectionListener getTrackSelectionListener() {
-		return new TrackViewHolder.TrackSelectionListener() {
+	protected TrackSelectionListener getTrackSelectionListener() {
+		return new TrackSelectionListener() {
 			@Override
 			public boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
 				return selectionHelper.isItemSelected(trackItem);
@@ -252,7 +244,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
-									boolean selectionMode, boolean usedOnMap) {
+	                                boolean selectionMode, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
 			fragment.usedOnMap = usedOnMap;

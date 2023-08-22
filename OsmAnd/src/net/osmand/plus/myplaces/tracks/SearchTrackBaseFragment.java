@@ -22,17 +22,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
-import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
-import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -42,24 +44,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment implements OsmAndLocationProvider.OsmAndCompassListener,
-		OsmAndLocationProvider.OsmAndLocationListener, TrackItemsContainer, SortTracksViewHolder.SortTracksListener {
-
-	public static final String TAG = SearchTrackItemsFragment.class.getSimpleName();
+public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, TrackItemsContainer, SortTracksListener {
 
 	protected final ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 
-	public SearchTracksAdapter adapter;
+	protected SearchTracksAdapter adapter;
 	protected View clearSearchQuery;
 	protected EditText searchEditText;
+
+	protected boolean usedOnMap;
+	protected boolean selectionMode;
 
 	private Location location;
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-
-	protected boolean usedOnMap;
-	protected boolean selectionMode;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -96,8 +96,8 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 			updateButtonsState();
 			return true;
 		});
-		if (fragment instanceof EmptyTracksViewHolder.EmptyTracksListener) {
-			adapter.setImportTracksListener((EmptyTracksViewHolder.EmptyTracksListener) fragment);
+		if (fragment instanceof EmptyTracksListener) {
+			adapter.setImportTracksListener((EmptyTracksListener) fragment);
 		}
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -131,7 +131,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	public void setupSelectionHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof ItemsSelectionHelper.SelectionHelperProvider) {
-			ItemsSelectionHelper.SelectionHelperProvider<TrackItem> helperProvider = (ItemsSelectionHelper.SelectionHelperProvider<TrackItem>) fragment;
+			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
 			ItemsSelectionHelper<TrackItem> helper = helperProvider.getSelectionHelper();
 
 			selectionHelper.setAllItems(helper.getAllItems());

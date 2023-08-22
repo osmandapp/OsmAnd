@@ -377,10 +377,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			((TracksFragment) fragment).updateTabsContent();
 		} else if (fragment instanceof TracksSelectionFragment) {
 			((TracksSelectionFragment) fragment).dismiss();
-		} else if(fragment instanceof SearchMyPlacesTracksFragment){
-			SearchMyPlacesTracksFragment searchMyPlacesTracksFragment = (SearchMyPlacesTracksFragment) fragment;
-			searchMyPlacesTracksFragment.updateTargetFragment();
-			searchMyPlacesTracksFragment.dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
+			searchTracksFragment.updateTargetFragment();
+			searchTracksFragment.dismiss();
 		}
 		dismiss();
 	}

@@ -226,9 +226,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void showItemsOptionsMenu(@NonNull View view, @Nullable TrackFolder trackFolder,
-									 @NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
-									 @NonNull Fragment fragment, @NonNull SelectGpxTaskListener gpxTaskListener,
-									 @NonNull FragmentStateHolder fragmentStateHolder, boolean nightMode) {
+	                                 @NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
+	                                 @NonNull Fragment fragment, @NonNull SelectGpxTaskListener gpxTaskListener,
+	                                 @NonNull FragmentStateHolder fragmentStateHolder, boolean nightMode) {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(items, groups);
 
@@ -237,11 +237,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
 					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, gpxTaskListener);
-					if (fragment instanceof BaseTrackFolderFragment) {
-						((BaseTrackFolderFragment) fragment).dismiss();
-					} else if (fragment instanceof SearchMyPlacesTracksFragment) {
-						((SearchMyPlacesTracksFragment) fragment).dismiss();
-					}
+					dismissFragment(fragment, false);
 				})
 				.create()
 		);
@@ -250,11 +246,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> {
 					showExportDialog(selectedTrackItems, fragmentStateHolder);
-					if (fragment instanceof BaseTrackFolderFragment) {
-						((BaseTrackFolderFragment) fragment).dismiss();
-					} else if (fragment instanceof SearchMyPlacesTracksFragment) {
-						((SearchMyPlacesTracksFragment) fragment).dismiss();
-					}
+					dismissFragment(fragment, false);
 				})
 				.create()
 		);
@@ -327,7 +319,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment,
-									@Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups) {
+	                                @Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		TracksSelectionFragment.showInstance(manager, trackFolder, fragment, trackItems, tracksGroups);
 	}
@@ -352,22 +344,26 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems,
-											  @NonNull Set<TracksGroup> tracksGroups,
-											  @NonNull Fragment fragment) {
+	                                          @NonNull Set<TracksGroup> tracksGroups,
+	                                          @NonNull Fragment fragment) {
 		String size = String.valueOf(trackItems.size() + tracksGroups.size());
 		String delete = app.getString(R.string.shared_string_delete);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setMessage(app.getString(R.string.local_index_action_do, delete.toLowerCase(), size));
 		builder.setPositiveButton(delete, (dialog, which) -> {
 			deleteTracks(trackItems, tracksGroups);
-			if (fragment instanceof BaseTrackFolderFragment) {
-				((BaseTrackFolderFragment) fragment).dismiss();
-			} else if (fragment instanceof SearchMyPlacesTracksFragment) {
-				((SearchMyPlacesTracksFragment) fragment).dismiss(true);
-			}
+			dismissFragment(fragment, true);
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
+	}
+
+	private void dismissFragment(@NonNull Fragment fragment, boolean dismissImmediately) {
+		if (fragment instanceof BaseTrackFolderFragment) {
+			((BaseTrackFolderFragment) fragment).dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			((SearchMyPlacesTracksFragment) fragment).dismiss(dismissImmediately);
+		}
 	}
 
 	private void importTracks(@NonNull BaseTrackFolderFragment fragment) {
@@ -487,7 +483,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void moveTracks(@NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
-						   @NonNull File destDir, @Nullable CallbackWithObject<Void> callback) {
+	                       @NonNull File destDir, @Nullable CallbackWithObject<Void> callback) {
 		MoveTrackFoldersTask task = new MoveTrackFoldersTask(activity, destDir, items, groups, trackItems -> {
 			for (TrackItem item : trackItems) {
 				File src = item.getFile();
