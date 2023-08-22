@@ -4590,4 +4590,10 @@
     <string name="poi_draft">Profondeur du chenal</string>
     <string name="poi_assembly_point">Point d\'assemblage</string>
     <string name="poi_osmand_not_pt_shelter_yes">Tout sauf abris de transports en commun</string>
+    <string name="poi_motor_vehicle_designated">Désigné pour les véhicules motorisés</string>
+    <string name="poi_motorcar_designated">Désigné pour les voitures</string>
+    <string name="poi_bicycle_designated">Désigné pour les vélos</string>
+    <string name="poi_horse_designated">Désigné pour les chevaux</string>
+    <string name="poi_foot_designated">Désigné pour les piétons</string>
+    <string name="poi_vehicle_designated">Désigné pour les véhicules</string>
 </resources>

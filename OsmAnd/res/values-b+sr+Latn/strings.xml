@@ -896,7 +896,7 @@
     <string name="save_poi_without_poi_type_message">Sačuvati tačku od interesa bez tipa\?</string>
     <string name="save_poi_too_many_uppercase">Ime sadrži previše velikih slova. Ipak nastaviti\?</string>
     <string name="map_legend">Legenda na karti</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="feedback">Povratne informacije</string>
     <string name="versions_item">Verzije</string>
     <string name="techical_articles_item">Tehnički članci</string>

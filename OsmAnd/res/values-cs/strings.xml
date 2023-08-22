@@ -1720,7 +1720,7 @@
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verze</string>
     <string name="feedback">Anketa</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="osm_edit_created_poi">Vytvořen OSM POI</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="shared_string_update">Aktualizovat</string>
@@ -5344,4 +5344,7 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
+    <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
+    <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
+    <string name="map_widget_group_glide_desc">Widgety zobrazují poměr klouzavosti k cíli nebo průměrný poměr klouzavosti pro aktuální let.</string>
 </resources>

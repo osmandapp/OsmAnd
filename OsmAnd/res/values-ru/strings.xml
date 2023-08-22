@@ -1981,7 +1981,7 @@
     <string name="simulate_initial_startup">Имитировать первый запуск</string>
     <string name="simulate_initial_startup_descr">Устанавливает признак первого запуска приложения, не изменяет других настроек.</string>
     <string name="feedback">Опрос</string>
-    <string name="contact_us">Связаться с нами</string>
+    <string name="shared_string_contact">Связаться с нами</string>
     <string name="versions_item">Версии</string>
     <string name="techical_articles_item">Технические статьи</string>
     <string name="instalation_troubleshooting_item">Установка и решение проблем</string>
@@ -1992,7 +1992,7 @@
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, задать основные настройки.</string>
     <string name="navigation_item_description">Настройки навигации.</string>
-    <string name="planning_trip_item">Ручное планирование маршрута</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="enter_country_name">Страна</string>
     <string name="new_version">Новая версия</string>
     <string name="begin_with_osmand_menu_group">Первые шаги с OsmAnd</string>

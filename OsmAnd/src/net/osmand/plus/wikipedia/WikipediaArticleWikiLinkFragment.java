@@ -51,7 +51,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 		Drawable osmandLiveIcon = getIcon(R.drawable.ic_action_subscription_osmand_live, 0);
 
 		Drawable viewOnlineIcon = getIcon(R.drawable.ic_world_globe_dark, nightMode
-				? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
+				? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 
 		BaseBottomSheetItem wikiArticleOnlineItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.open_wikipedia_link_online_description))

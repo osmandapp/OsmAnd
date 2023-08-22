@@ -140,7 +140,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	private void updateSliderView(View container) {
-		TextView summary = container.findViewById(android.R.id.summary);
+		TextView summary = container.findViewById(R.id.summary);
 		summary.setText(getFormattedMb(currentValue));
 
 		Slider slider = container.findViewById(R.id.slider);

@@ -63,6 +63,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
+	private static final int MIN_ZOOM = TileSourceManager.getMapillaryVectorSource().getMinimumZoomSupported();
+	private static final int MAX_ZOOM = TileSourceManager.getMapillaryVectorSource().getMaximumZoomSupported();
+
 	private static final int TILE_LOAD_TIMEOUT = 30000;
 	private static final int MAX_GEOMETRY_SIZE = 32000;
 
@@ -121,22 +124,24 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.swigToEnum(tileSource.getMinimumZoomSupported());
+		return ZoomLevel.swigToEnum(MIN_ZOOM);
 	}
 
 	@Override
 	public ZoomLevel getMaxZoom() {
-		return ZoomLevel.swigToEnum(tileSource.getMaximumZoomSupported());
+		return ZoomLevel.swigToEnum(MAX_ZOOM);
 	}
 
 	@Override
 	public ZoomLevel getMinVisibleZoom() {
-		return getMinZoom();
+		int minVisibleZoom = Math.max(MIN_ZOOM, tileSource.getMinimumZoomSupported());
+		return ZoomLevel.swigToEnum(minVisibleZoom);
 	}
 
 	@Override
 	public ZoomLevel getMaxVisibleZoom() {
-		return getMaxZoom();
+		int maxVisibleZoom = Math.min(MAX_ZOOM, tileSource.getMaximumZoomSupported());
+		return ZoomLevel.swigToEnum(maxVisibleZoom);
 	}
 
 	@Override
@@ -220,16 +225,15 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				int zoomShift = ZoomLevel.MaxZoomLevel.swigValue() - requestZoom;
 				AreaI tileBBox31 = Utilities.tileBoundingBox31(swigTileId, swigZoom);
 				double px31Size = (double)tileSize31 / (double)tileSize;
-				double bitmapHalfSize = (double)tileSize / 10d;
-				AreaI tileBBox31Enlarged = Utilities.tileBoundingBox31(swigTileId,
-						swigZoom).getEnlargedBy((int)(bitmapHalfSize * px31Size));
 				if (requestZoom < MIN_POINTS_ZOOM || geometries.size() < MAX_GEOMETRY_SIZE) {
-					isDrawLines = drawLines(canvas, shiftedTile, queryController, geometries, tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
+					int strokeHalfWidth31 = (int) Math.ceil(paintLine.getStrokeWidth() * px31Size / 2.0);
+					AreaI enlargedBBox31 = tileBBox31.getEnlargedBy(strokeHalfWidth31);
+					isDrawLines = drawLines(canvas, shiftedTile, queryController, geometries, tileBBox31, enlargedBBox31, mult, zoomShift, tileSize, tileSize31);
 				}
 				if (requestZoom >= MIN_POINTS_ZOOM) {
-					bitmapHalfSize = bitmapPoint.getWidth() / 2.0d;
-					tileBBox31Enlarged = Utilities.tileBoundingBox31(swigTileId, swigZoom).getEnlargedBy((int)(bitmapHalfSize * px31Size));
-					isDrawPoints = drawPoints(canvas, shiftedTile, queryController, geometries, tileBBox31, tileBBox31Enlarged, mult, zoomShift, tileSize, tileSize31);
+					int pointHalfSize31 = (int) Math.ceil(bitmapPoint.getWidth() * px31Size / 2.0);
+					AreaI enlargedBBox31 = tileBBox31.getEnlargedBy(pointHalfSize31);
+					isDrawPoints = drawPoints(canvas, shiftedTile, queryController, geometries, tileBBox31, enlargedBBox31, mult, zoomShift, tileSize, tileSize31);
 				}
 				if (isDrawLines || isDrawPoints) {
 					mapillaryBitmapTileCache.saveTile(resultTileBitmap, swigTileId, requestZoom);
@@ -376,21 +380,28 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				|| (queryController != null && queryController.isAborted())) {
 			return false;
 		}
+
+		PointI start31 = tileBBox31.getTopLeft();
+		int start31X = start31.getX();
+		int start31Y = start31.getY();
+
+		PointI topLeft = tileBBox31Enlarged.getTopLeft();
+		int left31 = topLeft.getX();
+		int top31 = topLeft.getY();
+		int right31 = left31 + tileBBox31Enlarged.width();
+		int bottom31 = top31 + tileBBox31Enlarged.height();
+
 		Coordinate[] coordinates = line.getCoordinateSequence().toCoordinateArray();
 
 		boolean draw = false;
 		float x1, y1, x2, y2;
-		float lastTileX, lastTileY;
 		Coordinate firstPnt = coordinates[0];
 		double px = firstPnt.x / EXTENT;
 		double py = firstPnt.y / EXTENT;
-		lastTileX = (float)((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
-		lastTileY = (float) ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
-		PointI topLeft = tileBBox31.getTopLeft();
-		int tileBBox31Left = topLeft.getX();
-		int tileBBox31Top = topLeft.getY();
-		x1 = (float) (((lastTileX - tileBBox31Left) / tileSize31) * tileSize);
-		y1 = (float) (((lastTileY - tileBBox31Top) / tileSize31) * tileSize);
+		double previousTileX = ((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
+		double previousTileY = ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
+		x1 = (float) (((previousTileX - start31X) / tileSize31) * tileSize);
+		y1 = (float) (((previousTileY - start31Y) / tileSize31) * tileSize);
 
 		boolean recalculateLastXY = false;
 		int size = coordinates.length;
@@ -405,16 +416,20 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			px = point.x / EXTENT;
 			py = point.y / EXTENT;
 
-			float tileX = (float)((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
-			float tileY = (float)((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
+			double tileX = ((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
+			double tileY = ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
 
-			if (tileBBox31Enlarged.contains((int)tileX, (int)tileY)) {
-				x2 = (float) (((tileX - tileBBox31Left) / tileSize31) * tileSize);
-				y2 = (float) (((tileY - tileBBox31Top) / tileSize31) * tileSize);
+			boolean intersectsTile = Math.min(previousTileX, tileX) < right31
+					&& Math.min(previousTileY, tileY) < bottom31
+					&& Math.max(previousTileX, tileX) > left31
+					&& Math.max(previousTileY, tileY) > top31;
+			if (intersectsTile) {
+				x2 = (float) (((tileX - start31X) / tileSize31) * tileSize);
+				y2 = (float) (((tileY - start31Y) / tileSize31) * tileSize);
 				if (recalculateLastXY)
 				{
-					x1 = (float) (((lastTileX - tileBBox31Left) / tileSize31) * tileSize);
-					y1 = (float) (((lastTileY - tileBBox31Top) / tileSize31) * tileSize);
+					x1 = (float) (((previousTileX - start31X) / tileSize31) * tileSize);
+					y1 = (float) (((previousTileY - start31Y) / tileSize31) * tileSize);
 					recalculateLastXY = false;
 				}
 				canvas.drawLine(x1, y1, x2, y2, paintLine);
@@ -426,8 +441,8 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			{
 				recalculateLastXY = true;
 			}
-			lastTileX = tileX;
-			lastTileY = tileY;
+			previousTileX = tileX;
+			previousTileY = tileY;
 		}
 		return draw;
 	}

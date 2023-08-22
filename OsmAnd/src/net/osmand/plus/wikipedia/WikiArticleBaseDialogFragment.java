@@ -145,7 +145,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 	@Override
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 	}
 
 	protected abstract void showPopupLangMenu(View view, String langSelected);

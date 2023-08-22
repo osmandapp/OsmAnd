@@ -99,10 +99,6 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		}
 	}
 
-	public static void processGroupTrack(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group) {
-		processGroupTrack(app, group, null, false);
-	}
-
 	public static void processGroupTrack(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group,
 	                                     @Nullable IProgress progress, boolean joinSegments) {
 		if (group.getTrack() == null) {

@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.base;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,8 +40,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public abstract class BaseRouteLayer extends OsmandMapLayer {
 
@@ -177,11 +177,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(getAppMode());
 		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		Float width = widthKey != null ? getWidthByKey(tileBox, widthKey) : null;
+		return width != null ? width : attrs.paint.getStrokeWidth();
 	}
 
 	@Nullable
-	protected Float getWidthByKey(RotatedTileBox tileBox, String widthKey) {
+	protected Float getWidthByKey(@NonNull RotatedTileBox tileBox, @NonNull String widthKey) {
 		Float resultValue = cachedRouteLineWidth.get(widthKey);
 		if (resultValue != null) {
 			return resultValue;

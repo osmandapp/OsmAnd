@@ -52,11 +52,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getHelpFileName() {
-		return "feature_articles/ski-plugin.html";
-	}
-
-	@Override
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.singletonList(ApplicationMode.SKI);
 	}

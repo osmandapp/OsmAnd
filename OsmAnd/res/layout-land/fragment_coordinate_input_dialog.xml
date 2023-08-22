@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:background="@color/route_info_bottom_view_bg_dark">
+        tools:background="@color/card_and_list_background_dark">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/coordinate_input_toolbar"

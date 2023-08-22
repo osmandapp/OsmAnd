@@ -331,9 +331,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.iconDirection.setVisibility(View.VISIBLE);
 
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
+
 				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
 				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_main_dark : R.color.divider_color_light));
 				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, nightMode ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, actionIconColor));
 				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, nightMode));
@@ -553,7 +554,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
 						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
-								nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
+								nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light), null);
 				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
 				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);
 			}

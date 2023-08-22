@@ -131,17 +131,6 @@ public class EntityParser {
 		}
 	}
 
-	private static void setNameFromOperator(MapObject mo, Map<String, String> tags) {
-		String op = tags.get(OSMTagKey.OPERATOR.getValue());
-		if (op == null)
-			return;
-		String ref = tags.get(OSMTagKey.REF.getValue());
-		if (ref != null)
-			op += " [" + ref + "]";
-		mo.setName(op);
-	}
-
-
 	private static String getWebSiteURL(Map<String, String> tagValues) {
 		String siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
 		String url = tagValues.get(OSMTagKey.URL.getValue());

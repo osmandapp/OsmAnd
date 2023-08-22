@@ -88,7 +88,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 			// Text line 2
 			TextView line2 = convertView.findViewById(R.id.context_menu_line2);
-			line2.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
+			line2.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color_secondary_light));
 			line2.setText(getSecondLineText(item));
 			Drawable slIcon = item.getTypeIcon();
 			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);

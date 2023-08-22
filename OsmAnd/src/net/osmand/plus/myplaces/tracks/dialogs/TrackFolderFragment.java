@@ -2,19 +2,18 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -24,12 +23,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -39,7 +38,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
 
-	private TextView toolbarTitle;
 	private ProgressBar progressBar;
 
 	@Override
@@ -56,6 +54,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		FragmentActivity activity = requireActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
@@ -70,7 +69,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			setupToolbar(view);
 			setupProgressBar(view);
 			setupSwipeRefresh(view);
 		}
@@ -98,48 +96,34 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		});
 	}
 
-	private void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbarTitle = view.findViewById(R.id.toolbar_title);
-		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
-
-		ImageView closeButton = toolbar.findViewById(R.id.close_button);
-		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
-		closeButton.setOnClickListener(v -> onBackPressed());
-
-		ViewGroup container = view.findViewById(R.id.actions_container);
-		container.removeAllViews();
-
-		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		setupSearchButton(inflater, container);
-		setupMenuButton(inflater, container);
-	}
-
-	private void setupSearchButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
-		button.setImageDrawable(getIcon(R.drawable.ic_action_search_dark));
-		button.setOnClickListener(v -> {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.action_folder_search) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
 				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
+				return true;
 			}
-		});
-		button.setContentDescription(getString(R.string.shared_string_search));
-		container.addView(button);
+		}
+		if (itemId == R.id.action_folder_menu) {
+			FragmentActivity activity = getActivity();
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null && activity != null) {
+				View view = activity.findViewById(R.id.action_folder_menu);
+				foldersHelper.showFolderOptionsMenu(selectedFolder, view, this);
+				return true;
+			}
+		}
+		return false;
 	}
 
-	private void setupMenuButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
-		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
-		button.setOnClickListener(v -> {
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null) {
-				foldersHelper.showFolderOptionsMenu(selectedFolder, v, this);
-			}
-		});
-		button.setContentDescription(getString(R.string.shared_string_more));
-		container.addView(button);
+	@Override
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		menu.clear();
+		inflater.inflate(R.menu.myplaces_tracks_folder_menu, menu);
+		requireMyActivity().setToolbarVisibility(false);
 	}
 
 	private void onBackPressed() {
@@ -154,21 +138,29 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void updateContent() {
 		super.updateContent();
-		toolbarTitle.setText(selectedFolder.getName(app));
+
+		MyPlacesActivity activity = getMyActivity();
+		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
+		if (actionBar != null) {
+			actionBar.setTitle(selectedFolder.getName(app));
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		updateProgress();
-		updateActionBar(false);
 		restoreState(getArguments());
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		updateActionBar(true);
+
+		MyPlacesActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.updateToolbar();
+		}
 	}
 
 	@Override

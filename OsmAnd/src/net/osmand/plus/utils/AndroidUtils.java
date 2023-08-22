@@ -218,8 +218,8 @@ public class AndroidUtils {
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return createCheckedColorStateList(ctx, nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark);
 	}
 
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
@@ -237,11 +237,12 @@ public class AndroidUtils {
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-					Bitmap scaledBitmap = scaleBitmap(srcBitmap, width, height, true);
-					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-					if (scaledBitmap != srcBitmap) {
-						scaledBitmap.recycle();
-					}
+					Rect srcRect = new Rect(0, 0, srcBitmap.getWidth(), srcBitmap.getHeight());
+					Rect dstRect = new Rect(locationX - width / 2,
+							locationY - height / 2,
+							locationX + width / 2,
+							locationY + height / 2);
+					canvas.drawBitmap(srcBitmap, srcRect, dstRect, bitmapPaint);
 				}
 			}
 		}

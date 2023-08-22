@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.weather.widgets;
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_std__shared_ptrT_Metric_t;
+import net.osmand.core.jni.Metric;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
@@ -70,7 +70,7 @@ public class WeatherWidget extends TextInfoWidget {
 		this.weatherBand = weatherHelper.getWeatherBand(band);
 		this.callback = new IObtainValueAsyncCallback() {
 			@Override
-			public void method(boolean succeeded, PointI point31, long requestedTime, double value, SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
+			public void method(boolean succeeded, PointI point31, long requestedTime, double value, Metric metric) {
 				app.runInUIThread(() -> onValueObtained(succeeded, point31, requestedTime, value));
 			}
 		};

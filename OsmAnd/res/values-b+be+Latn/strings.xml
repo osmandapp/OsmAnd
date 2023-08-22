@@ -1917,7 +1917,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="techical_articles_item">Technіčnyja artykuły</string>
     <string name="versions_item">Versіі</string>
     <string name="feedback">hałasavańnie</string>
-    <string name="contact_us">Kantakty</string>
+    <string name="shared_string_contact">Kantakty</string>
     <string name="map_legend">Lehienda mapy</string>
     <string name="save_poi_without_poi_type_message">Vy sapraŭdy chočacie zachavać POI biez typu?</string>
     <string name="poi_context_menu_modify_osm_change">Redahavać POI</string>

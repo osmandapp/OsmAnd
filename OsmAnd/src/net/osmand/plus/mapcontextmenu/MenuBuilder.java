@@ -553,7 +553,7 @@ public class MenuBuilder {
 	}
 
 	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
-		if (description.contains("</")) {
+		if (Algorithms.isHtmlText(description)) {
 			POIMapLayer.showHtmlDescriptionDialog(ctx, app, description, title);
 		} else {
 			POIMapLayer.showPlainDescriptionDialog(ctx, app, description, title);
@@ -672,7 +672,7 @@ public class MenuBuilder {
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
 
-		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
 		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
@@ -797,7 +797,9 @@ public class MenuBuilder {
 
 	public View buildDescriptionRow(View view, String description) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		View.OnClickListener onClickListener = v -> {
+			showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		};
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -856,7 +858,7 @@ public class MenuBuilder {
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
 			int linkTextColor = ContextCompat.getColor(view.getContext(), light ?
-					R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+					R.color.active_color_primary_light : R.color.active_color_primary_dark);
 			textView.setLinkTextColor(linkTextColor);
 			textView.setOnTouchListener(new ClickableSpanTouchListener());
 			AndroidUtils.removeLinkUnderline(textView);
@@ -1051,7 +1053,7 @@ public class MenuBuilder {
 
 	public Drawable getRowIcon(int iconId) {
 		UiUtilities iconsCache = app.getUIUtilities();
-		return iconsCache.getIcon(iconId, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark);
+		return iconsCache.getIcon(iconId, light ? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
 	}
 
 	public Drawable getThemedIcon(int iconId) {
@@ -1064,7 +1066,7 @@ public class MenuBuilder {
 			d = DrawableCompat.wrap(d);
 			d.mutate();
 			d.setColorFilter(getColor(light
-					? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark), PorterDuff.Mode.SRC_IN);
+					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark), PorterDuff.Mode.SRC_IN);
 			return d;
 		} else {
 			return null;
@@ -1077,7 +1079,7 @@ public class MenuBuilder {
 
 	public Drawable getCollapseIcon(boolean collapsed) {
 		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up,
-				light ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
+				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
@@ -1124,7 +1126,7 @@ public class MenuBuilder {
 		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		titleView.setTextColor(textColor);
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
-		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
+		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 
 		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));

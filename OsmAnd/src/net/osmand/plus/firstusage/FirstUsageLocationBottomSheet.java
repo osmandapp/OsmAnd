@@ -1,5 +1,8 @@
 package net.osmand.plus.firstusage;
 
+import static net.osmand.plus.firstusage.FirstUsageAction.DETERMINE_LOCATION;
+import static net.osmand.plus.firstusage.FirstUsageAction.SELECT_COUNTRY;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -17,12 +20,12 @@ public class FirstUsageLocationBottomSheet extends BaseFirstUsageBottomSheet {
 	@Override
 	protected void setupItems(@NonNull ViewGroup container, @NonNull LayoutInflater inflater) {
 		container.addView(createItemView(inflater, getString(R.string.search_another_country), R.drawable.ic_show_on_map, view -> {
-			listener.onSelectCountry();
+			processActionClick(SELECT_COUNTRY);
 			dismiss();
 		}));
 
 		container.addView(createItemView(inflater, getString(R.string.determine_location), R.drawable.ic_action_marker_dark, view -> {
-			listener.onDetermineLocation();
+			processActionClick(DETERMINE_LOCATION);
 			dismiss();
 		}));
 	}

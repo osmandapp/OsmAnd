@@ -1,5 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:color="@color/active_buttons_and_links_text_dark" android:state_pressed="true" />
-	<item android:color="@color/active_buttons_and_links_text_disabled_dark" android:state_enabled="false" />
+	<item android:color="@color/text_color_secondary_dark" android:state_enabled="false" />
 	<item android:color="@color/active_color_primary_dark" />
 </selector>

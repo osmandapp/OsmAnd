@@ -146,7 +146,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@NonNull

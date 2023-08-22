@@ -310,7 +310,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Progress bar
 		ImageView progressButton = view.findViewById(R.id.progressButton);
-		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.ctx_menu_buttons_icon_color));
+		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.icon_color_default_light));
 		progressButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -505,10 +505,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
-			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.ctx_menu_subtitle_color));
+			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
 		}
 		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
+				nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light));
 
 		AndroidUtils.setTextSecondaryColor(mapActivity,
 				view.findViewById(R.id.progressTitle), nightMode);
@@ -547,7 +547,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
 		int buttonsBorderColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light);
+				nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
 		buttonsBottomBorder.setBackgroundColor(buttonsBorderColor);
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
 		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity,
@@ -591,9 +591,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		LockableScrollView bottomScrollView = view.findViewById(R.id.context_menu_bottom_scroll);
 		bottomScrollView.setScrollingEnabled(false);
 		bottomScrollView.setBackgroundColor(getColor(
-				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+				nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getColor(
-				nightMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+				nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
@@ -845,7 +845,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public int getStatusBarColorId() {
 		if (menu != null && (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout())) {
-			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_route_light;
+			return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 		}
 		return -1;
 	}

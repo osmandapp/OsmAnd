@@ -17,6 +17,6 @@ public class Temperature extends PointAttribute<Float> {
 
 	@Override
 	public boolean hasValidValue() {
-		return value > 0;
+		return !Float.isNaN(value);
 	}
 }

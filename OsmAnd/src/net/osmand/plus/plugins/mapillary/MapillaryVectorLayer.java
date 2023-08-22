@@ -27,6 +27,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -234,18 +236,23 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	@Override
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		TileSourceTemplate mapillaryTemplate = TileSourceManager.getMapillaryVectorSource();
 		ITileSource map = this.map;
 		if (map == null) {
 			return;
 		}
+
+		int currentZoom = tileBox.getZoom();
+		if (currentZoom < Math.max(mapillaryTemplate.getMinimumZoomSupported(), map.getMinimumZoomSupported())
+				|| currentZoom > Math.min(mapillaryTemplate.getMaximumZoomSupported(), map.getMaximumZoomSupported())) {
+			return;
+		}
+
 		ResourceManager mgr = resourceManager;
 		GeometryTilesCache tilesCache = mgr.getMapillaryVectorTilesCache();
 
-		int currentZoom = tileBox.getZoom();
 		int tileZoom;
-		if (currentZoom < map.getMinimumZoomSupported()) {
-			return;
-		} else if (currentZoom < MIN_POINTS_ZOOM) {
+		if (currentZoom < MIN_POINTS_ZOOM) {
 			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
 			tilesCache.useForMapillarySequenceLayer();
 		} else {

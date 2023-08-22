@@ -198,7 +198,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_color_light;
+		return R.color.status_bar_main_light;
 	}
 
 	@Override
