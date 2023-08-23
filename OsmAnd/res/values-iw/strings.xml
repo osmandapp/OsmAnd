@@ -4960,4 +4960,9 @@
     <string name="help_article_navigation_routing_boat_navigation_name">מסלול לספינה</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">מסלול לאופניים (אופני הרים)</string>
     <string name="help_article_start_with_main_menu_name">תפריט ראשי</string>
+    <string name="user_guide">מדריך למשתמש</string>
+    <string name="free_versions">גרסה חינמית</string>
+    <string name="contact_us">צור קשר</string>
+    <string name="about_osmand">אודות OsmAnd</string>
+    <string name="help_article_troubleshooting_maps_data_name">מפות ונתונים</string>
 </resources>
