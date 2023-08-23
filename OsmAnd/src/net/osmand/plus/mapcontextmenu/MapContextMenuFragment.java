@@ -198,6 +198,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		updateNightMode();
+		menu.updateNightMode();
 		processScreenHeight(container);
 
 		MapActivity mapActivity = requireMapActivity();
@@ -211,7 +212,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
 
-		view = inflater.inflate(R.layout.fragment_map_context_menu, container, false);
+		view = themedInflater.inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		mainView = view.findViewById(R.id.context_menu_main);
 
