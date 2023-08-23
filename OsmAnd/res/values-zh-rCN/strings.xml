@@ -4172,7 +4172,6 @@
     <string name="import_profile">导入配置文件</string>
     <string name="reorder_profiles">编辑配置文件列表</string>
     <string name="live_monitoring_time_buffer">时间缓冲</string>
-    <string name="live_monitoring_adress_descr">指定位置的 Web 地址参数语法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}。</string>
     <string name="reset_plugin_to_default">重置插件设置为默认值</string>
     <string name="multimedia_rec_split_title">拆分录制</string>
     <string name="import_routing_file">导入路径规划文件</string>

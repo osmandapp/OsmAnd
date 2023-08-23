@@ -4027,7 +4027,6 @@
     <string name="import_routing_file">Importul fișierului de rutare</string>
     <string name="multimedia_rec_split_title">Înregistrator divizat</string>
     <string name="reset_plugin_to_default">Resetați setările plugin-ului la setările implicite</string>
-    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_time_buffer">Amortizor de timp</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomandare: Setați o deplasare de 5 metri dacă nu doriți să înregistrați detalii minore ale traseului dumneavoastră și nu aveți nevoie de date suplimentare despre perioada de odihnă.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efecte secundare: Perioadele de repaus nu sunt înregistrate deloc sau doar câte un punct fiecare. Mișcările minore (de exemplu, pe marginea drumului pentru a marca o posibilă cotitură în timpul călătoriei) pot fi filtrate. Rețineți că fișierul dumneavoastră va conține mai puține informații pentru postprocesare și, în același timp, poate salva potențial artefactele GPS cauzate de recepția proastă sau de efectele chipsetului.</string>

@@ -3399,7 +3399,6 @@
     <string name="monitoring_min_distance_descr_recommendation">Zalecenie: Ustaw przemieszczenie o 5 metrów, jeśli nie chcesz rejestrować drobnych szczegółów trasy i nie potrzebujesz dodatkowych danych o czasie odpoczynku.</string>
     <string name="live_monitoring_time_buffer">Bufor czasu</string>
     <string name="live_monitoring_tracking_interval">Częstość rejestrowania</string>
-    <string name="live_monitoring_adress_descr">Określa adres internetowy z zachowaniem składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Powiadomienie</string>
     <string name="profile_type_custom_string">Dostosowany profil</string>
     <string name="shared_string_angle_param">Kąt: %s°</string>

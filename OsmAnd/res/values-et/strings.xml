@@ -3339,7 +3339,6 @@
     <string name="live_monitoring_time_buffer">Aja puhver</string>
     <string name="live_monitoring_tracking_interval">Jälgimisintervall</string>
     <string name="live_monitoring_adress">Veebiaadress</string>
-    <string name="live_monitoring_adress_descr">Täpsustage veebiaadress parameetri süntaksiga: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Teade</string>
     <string name="monitoring_min_speed">Vähim kiirus</string>
     <string name="monitoring_min_accuracy">Vähim täpsus</string>

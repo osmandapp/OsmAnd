@@ -3634,7 +3634,6 @@
     <string name="add_new_custom_category_button_promo">Tambahkan kategori kustom baru dengan memilih satu atau beberapa kategori.</string>
     <string name="live_monitoring_time_buffer">Penyangga waktu</string>
     <string name="live_monitoring_tracking_interval">Interval pelacakan</string>
-    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempelwaktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode istirahat tidak dicatat sama sekali atau hanya sebagai masing-masing satu titik. Pergerakan kecil (misalnya, ke sisi jalan untuk menandai kemungkinan belokan dalam perjalanan Anda) dapat disaring. Perhatikan, bahwa file Anda akan berisi lebih sedikit informasi untuk pasca-pemrosesan, dan pada saat yang sama berpotensi menyimpan artefak GPS yang disebabkan oleh penerimaan yang buruk atau efek chipset.</string>
     <string name="import_routing_file">Impor berkas perutean</string>
     <string name="import_profile">Impor profil</string>

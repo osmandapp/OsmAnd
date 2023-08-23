@@ -3326,7 +3326,6 @@
     <string name="live_monitoring_time_buffer">緩衝時間</string>
     <string name="live_monitoring_tracking_interval">軌跡間隔</string>
     <string name="live_monitoring_adress">網址</string>
-    <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat = {0}，lon = {1}，timestamp = {2}，hdop = {3}，altitude= {4}，speed = {5}，bearing = {6}。</string>
     <string name="monitoring_notification">通知</string>
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最低精密度</string>

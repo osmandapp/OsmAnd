@@ -889,7 +889,6 @@
     <string name="live_monitoring_time_buffer">Vremenski odbojmik</string>
     <string name="live_monitoring_tracking_interval">Interval na sledenje</string>
     <string name="live_monitoring_adress">Web addresa</string>
-    <string name="live_monitoring_adress_descr">Navedete ja veb-adresata so sintaksa na parametarot: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notifikacija</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_min_accuracy">Minimalna točnost</string>

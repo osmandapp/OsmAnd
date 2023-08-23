@@ -3321,7 +3321,6 @@
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
     <string name="live_monitoring_tracking_interval">Interval stopovania</string>
     <string name="live_monitoring_adress">Webová adresa</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Oznámenie</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>

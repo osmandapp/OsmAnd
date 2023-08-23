@@ -3318,7 +3318,6 @@ POIの更新は利用できません</string>
     <string name="live_monitoring_time_buffer">タイムバッファ</string>
     <string name="live_monitoring_tracking_interval">追跡間隔</string>
     <string name="live_monitoring_adress">ウェブアドレス</string>
-    <string name="live_monitoring_adress_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
     <string name="monitoring_notification">通知</string>
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最小精度</string>

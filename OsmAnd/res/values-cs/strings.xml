@@ -3777,7 +3777,6 @@
     <string name="monitoring_min_accuracy">Minimální přesnost</string>
     <string name="monitoring_min_speed">Minimální rychlost</string>
     <string name="monitoring_notification">Oznámení</string>
-    <string name="live_monitoring_adress_descr">Zadejte webovou adresu se syntaxí parametrů: zeměpisná šířka={0}, zeměpisná délka={1}, časové razítko={2}, přesnost={3}, výška={4}, rychlost={5}, směr={6}.</string>
     <string name="live_monitoring_adress">Webová adresa</string>
     <string name="live_monitoring_tracking_interval">Interval záznamu</string>
     <string name="live_monitoring_time_buffer">Časový zásobník</string>

@@ -3428,7 +3428,6 @@
     <string name="monitoring_min_accuracy">Precisão mínima</string>
     <string name="monitoring_min_speed">Velocidade mínima</string>
     <string name="monitoring_notification">Notificação</string>
-    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_adress">Endereço da web</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_time_buffer">Memória intermédia</string>

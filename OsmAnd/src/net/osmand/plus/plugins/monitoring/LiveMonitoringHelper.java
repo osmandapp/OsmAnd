@@ -2,11 +2,14 @@ package net.osmand.plus.plugins.monitoring;
 
 import android.os.AsyncTask;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.SimulationProvider;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
@@ -77,16 +80,45 @@ public class LiveMonitoringHelper {
 		} else {
 			started = false;
 		}
+		long eta = 0, etfa = 0;
+		int eda = 0, edfa = 0;
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRouteCalculated()) {
+			eta = (routingHelper.getLeftTime() * 1000L) + locationTime;
+			eda = routingHelper.getLeftDistance();
+
+			int leftTimeNextIntermediate = routingHelper.getLeftTimeNextIntermediate();
+			if (leftTimeNextIntermediate == 0) {
+				etfa = eta;
+			} else {
+				etfa = (leftTimeNextIntermediate * 1000L) + locationTime;
+			}
+			edfa = routingHelper.getLeftDistanceNextIntermediate();
+			if (edfa == 0) {
+				edfa = eda;
+			}
+		} else {
+			MapMarker firstMarker = app.getMapMarkersHelper().getFirstMapMarker();
+
+			if (firstMarker != null && location != null) {
+				float[] distInfo = new float[2];
+				Location.distanceBetween(firstMarker.getLatitude(), firstMarker.getLongitude(),
+						location.getLatitude(), location.getLongitude(), distInfo);
+				eda = (int) distInfo[0];
+			}
+		}
+
 		if(record) {
 			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
-					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime,
+					eta, etfa, eda, edfa);
 			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
 		}
 	}
-	
-	
+
+
 	private static class LiveMonitoringData {
 
 		private final float lat;
@@ -94,10 +126,14 @@ public class LiveMonitoringHelper {
 		private final float alt;
 		private final float speed;
 		private final float bearing;
+		private final long eta;
+		private final long etfa;
+		private final int eda;
+		private final int edfa;
 		private final float hdop;
 		private final long time;
 
-		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time) {
+		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time, long eta, long etfa, int eda, int edfa) {
 			this.lat = lat;
 			this.lon = lon;
 			this.alt = alt;
@@ -105,10 +141,14 @@ public class LiveMonitoringHelper {
 			this.hdop = hdop;
 			this.time = time;
 			this.bearing = bearing;
+			this.eta = eta;
+			this.etfa = etfa;
+			this.eda = eda;
+			this.edfa = edfa;
 		}
-		
+
 	}
-	
+
 	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
 
 		@Override
@@ -182,7 +222,7 @@ public class LiveMonitoringHelper {
 	private String getLiveUrl(String baseUrl, LiveMonitoringData data) {
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 11; i++) {
 			boolean b = baseUrl.contains("{"+i+"}");
 			if(b) {
 				maxLen = i;
@@ -211,7 +251,18 @@ public class LiveMonitoringHelper {
 			case 6:
 				prm.add(data.bearing + "");
 				break;
-
+			case 7:
+				prm.add(data.eta + "");
+				break;
+			case 8:
+				prm.add(data.etfa + "");
+				break;
+			case 9:
+				prm.add(data.eda + "");
+				break;
+			case 10:
+				prm.add(data.edfa + "");
+				break;
 			default:
 				break;
 			}
