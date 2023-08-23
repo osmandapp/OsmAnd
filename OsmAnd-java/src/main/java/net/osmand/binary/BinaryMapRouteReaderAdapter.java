@@ -1114,9 +1114,15 @@ public class BinaryMapRouteReaderAdapter {
 				if (ro != null) {
 					matcher.publish(ro);
 				}
+				if (matcher.isCancelled()) {
+					break;
+				}
 			}
 			// free objects
 			rs.dataObjects = null;
+			if (matcher.isCancelled()) {
+				break;
+			}
 		}
 	}
 
