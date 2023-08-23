@@ -1273,7 +1273,7 @@
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
     <string name="arrival_distance_factor_late">Közel</string>
-    <string name="arrival_distance_factor_at_last">Az utolsó métereken</string>
+    <string name="arrival_distance_factor_at_last">Nagyon közel</string>
     <string name="av_camera_pic_size">Kamera képmérete</string>
     <string name="av_camera_pic_size_descr">Kamera képméretének beállítása</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Jelzett turistautak megjelenítése (OSMC).</string>

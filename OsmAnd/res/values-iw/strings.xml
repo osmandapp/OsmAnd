@@ -4942,4 +4942,22 @@
     <string name="developer_widgets">וידג׳טים למפתחים</string>
     <string name="quick_action_air_pressure_layer">מתג כדי להציג או להסתיר את שכבת לחץ האוויר במפה.</string>
     <string name="map_widget_glide_average_desc">מציג את יחס הגלישה הממוצע לטווח שהוגדר.</string>
+    <string name="help_article_map_legend_ski_map_name">סגנון מפה סקי</string>
+    <string name="help_article_map_legend_osmand_name">סגנון מפה OsmAnd</string>
+    <string name="help_article_navigation_routing_ski_routing_name">מסלול לסקי</string>
+    <string name="help_article_map_point_layers_on_map_name">נקודות על המפה</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">מסלול להולכי רגל</string>
+    <string name="help_article_navigation_guidance_name">הדרכה</string>
+    <string name="help_article_navigation_setup_route_details_name">פרטי מסלול</string>
+    <string name="help_article_personal_import_export_name">יבוא/יצוא</string>
+    <string name="help_article_personal_name">הנתונים שלי</string>
+    <string name="help_article_personal_storage_name">אחסון</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">מסלול לתחבורה ציבורית</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">מסלול קו ישיר (מטוסים)</string>
+    <string name="help_article_navigation_routing_train_routing_name">מסלול לרכבת</string>
+    <string name="help_article_navigation_routing_moped_routing_name">מסלול לקטנוע</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">מסלול לרכב (משאית, אופנוע)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">מסלול לספינה</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">מסלול לאופניים (אופני הרים)</string>
+    <string name="help_article_start_with_main_menu_name">תפריט ראשי</string>
 </resources>

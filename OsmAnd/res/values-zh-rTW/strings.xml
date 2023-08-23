@@ -1235,7 +1235,7 @@
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
     <string name="arrival_distance_factor_late">稍遲</string>
-    <string name="arrival_distance_factor_at_last">在最後幾公尺</string>
+    <string name="arrival_distance_factor_at_last">非常晚</string>
     <string name="rendering_attr_coloredBuildings_name">按類型用色碼區分建築物</string>
     <string name="av_camera_pic_size">相機照片的大小</string>
     <string name="av_camera_pic_size_descr">設定相機照片大小</string>

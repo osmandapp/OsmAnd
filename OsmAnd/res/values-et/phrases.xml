@@ -4519,4 +4519,6 @@
     <string name="poi_waste_accepted">Vastuvõetavad jäätmed</string>
     <string name="poi_recycling_plastic_bottle_tops">Plastpudelite korgid</string>
     <string name="poi_waste_dog_excrement">Koera väljaheited</string>
+    <string name="poi_self_checkout_no">Iseteenindus: puudub</string>
+    <string name="poi_self_checkout">Iseteeninduskassa</string>
 </resources>
