@@ -276,8 +276,10 @@ public class MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	public void addMenuPlugin(OsmandPlugin plugin) {
-		menuPlugins.add(plugin);
+	public void addMenuPlugin(@NonNull OsmandPlugin plugin) {
+		if (!menuPlugins.contains(plugin)) {
+			menuPlugins.add(plugin);
+		}
 	}
 
 	public void setLight(boolean light) {

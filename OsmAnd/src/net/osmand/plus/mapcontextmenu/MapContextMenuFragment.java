@@ -198,6 +198,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		updateNightMode();
+		menu.updateNightMode();
 		processScreenHeight(container);
 
 		MapActivity mapActivity = requireMapActivity();
@@ -211,7 +212,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
 
-		view = inflater.inflate(R.layout.fragment_map_context_menu, container, false);
+		view = themedInflater.inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		mainView = view.findViewById(R.id.context_menu_main);
 
@@ -250,74 +251,56 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Left title button
 		View leftTitleButtonView = view.findViewById(R.id.title_button_view);
-		leftTitleButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
-				if (leftTitleButtonController != null) {
-					leftTitleButtonController.buttonPressed();
-				}
+		leftTitleButtonView.setOnClickListener(v -> {
+			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
+			if (leftTitleButtonController != null) {
+				leftTitleButtonController.buttonPressed();
 			}
 		});
 
 		// Right title button
 		View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
-		rightTitleButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
-				if (rightTitleButtonController != null) {
-					rightTitleButtonController.buttonPressed();
-				}
+		rightTitleButtonView.setOnClickListener(v -> {
+			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
+			if (rightTitleButtonController != null) {
+				rightTitleButtonController.buttonPressed();
 			}
 		});
 
 		// Left download button
 		View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
-		leftDownloadButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
-				if (leftDownloadButtonController != null) {
-					leftDownloadButtonController.buttonPressed();
-				}
+		leftDownloadButtonView.setOnClickListener(v -> {
+			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
+			if (leftDownloadButtonController != null) {
+				leftDownloadButtonController.buttonPressed();
 			}
 		});
 
 		// Right download button
 		View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
-		rightDownloadButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
-				if (rightDownloadButtonController != null) {
-					rightDownloadButtonController.buttonPressed();
-				}
+		rightDownloadButtonView.setOnClickListener(v -> {
+			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
+			if (rightDownloadButtonController != null) {
+				rightDownloadButtonController.buttonPressed();
 			}
 		});
 
 		// Bottom title button
 		View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
-		bottomTitleButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
-				if (bottomTitleButtonController != null) {
-					bottomTitleButtonController.buttonPressed();
-				}
+		bottomTitleButtonView.setOnClickListener(v -> {
+			TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
+			if (bottomTitleButtonController != null) {
+				bottomTitleButtonController.buttonPressed();
 			}
 		});
 
 		// Progress bar
 		ImageView progressButton = view.findViewById(R.id.progressButton);
 		progressButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark, R.color.icon_color_default_light));
-		progressButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TitleProgressController titleProgressController = menu.getTitleProgressController();
-				if (titleProgressController != null) {
-					titleProgressController.buttonPressed();
-				}
+		progressButton.setOnClickListener(v -> {
+			TitleProgressController titleProgressController = menu.getTitleProgressController();
+			if (titleProgressController != null) {
+				titleProgressController.buttonPressed();
 			}
 		});
 
@@ -562,12 +545,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				openMenuHalfScreen();
-			}
-		});
+		detailsButton.setOnClickListener(view -> openMenuHalfScreen());
 		TextView directionsButton = view.findViewById(R.id.context_menu_directions_button);
 		int iconResId = R.drawable.ic_action_gdirections_dark;
 		if (menu.navigateInPedestrianMode()) {
@@ -579,12 +557,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				directionsButton, null, null, drawable, null);
 		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
 		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
-		directionsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				menu.navigateButtonPressed();
-			}
-		});
+		directionsButton.setOnClickListener(view -> menu.navigateButtonPressed());
 
 		buildBottomView();
 
@@ -597,18 +570,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
-		containerLayoutListener = new OnLayoutChangeListener() {
-			@Override
-			public void onLayoutChange(View view, int left, int top, int right, int bottom,
-			                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
-				if (!transportBadgesCreated) {
-					createTransportBadges();
-				}
-				if (forceUpdateLayout || bottom != oldBottom) {
-					forceUpdateLayout = false;
-					processScreenHeight(view.getParent());
-					runLayoutListener();
-				}
+		containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+			if (!transportBadgesCreated) {
+				createTransportBadges();
+			}
+			if (forceUpdateLayout || bottom != oldBottom) {
+				forceUpdateLayout = false;
+				processScreenHeight(view.getParent());
+				runLayoutListener();
 			}
 		};
 
@@ -830,14 +799,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
 		TextView detailsButton = view.findViewById(R.id.context_menu_details_button);
 		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.rendering_category_details);
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (showShowHideButton) {
-					openMenuHeaderOnly();
-				} else {
-					openMenuHalfScreen();
-				}
+		detailsButton.setOnClickListener(view -> {
+			if (showShowHideButton) {
+				openMenuHeaderOnly();
+			} else {
+				openMenuHalfScreen();
 			}
 		});
 	}

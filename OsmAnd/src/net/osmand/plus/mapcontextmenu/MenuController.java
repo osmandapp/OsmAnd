@@ -179,6 +179,14 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.build(rootView, getObject());
 	}
 
+	@Override
+	protected void updateNightMode() {
+		super.updateNightMode();
+		if (builder != null) {
+			builder.setLight(!nightMode);
+		}
+	}
+
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
 	                                               @NonNull LatLon latLon,
 	                                               @NonNull PointDescription pointDescription,
