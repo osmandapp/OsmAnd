@@ -96,7 +96,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		File fileDir = srcFile != null ? srcFile.getParentFile() : null;
 
 		collectDirs(rootDir, dirs, excludedDir);
-		if (showAllFolders || !Algorithms.objectEquals(fileDir, rootDir)) {
+		if (showAllFolders || fileDir != null && !Algorithms.objectEquals(fileDir, rootDir)) {
 			dirs.add(0, rootDir);
 		}
 		String gpxDir = rootDir.getPath();
