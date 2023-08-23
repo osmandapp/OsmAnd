@@ -4959,5 +4959,5 @@
     <string name="help_article_navigation_routing_car_based_routing_name">מסלול לרכב (משאית, אופנוע)</string>
     <string name="help_article_navigation_routing_boat_navigation_name">מסלול לספינה</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">מסלול לאופניים (אופני הרים)</string>
-    <string name="help_article_start_with_main_menu_name">תפריט שלי</string>
+    <string name="help_article_start_with_main_menu_name">תפריט ראשי</string>
 </resources>
