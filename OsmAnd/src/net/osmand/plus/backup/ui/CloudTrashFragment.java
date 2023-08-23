@@ -52,8 +52,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
-		recyclerView.setItemAnimator(null);
-		recyclerView.setLayoutAnimation(null);
+
 		updateViewContent();
 
 		setupToolbar(view);

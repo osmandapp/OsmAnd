@@ -52,7 +52,7 @@ public class TrashScreenController {
 				for (TrashItem trashItem : trashGroup.getTrashItems()) {
 					screenItems.add(new ScreenItem(TRASH_ITEM, trashItem));
 				}
-				screenItems.add(new ScreenItem(DIVIDER));
+				screenItems.add(new ScreenItem(DIVIDER, trashGroup));
 			}
 			// Replace last divider with card bottom shadow and extra space
 			screenItems.remove(screenItems.size() - 1);
@@ -60,7 +60,6 @@ public class TrashScreenController {
 			screenItems.add(new ScreenItem(SPACE));
 		} else {
 			screenItems.add(new ScreenItem(EMPTY_TRASH_BANNER));
-			screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
 		}
 		return screenItems;
 	}

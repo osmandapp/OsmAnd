@@ -50,6 +50,7 @@ public class TrashScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 	public TrashScreenAdapter(@NonNull OsmandApplication app,
 	                          @NonNull TrashScreenController controller, boolean usedOnMap) {
+		setHasStableIds(true);
 		this.app = app;
 		this.controller = controller;
 		this.usedOnMap = usedOnMap;
@@ -131,6 +132,19 @@ public class TrashScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	@Override
 	public int getItemViewType(int position) {
 		return screenItems.get(position).type.ordinal();
+	}
+
+	@Override
+	public long getItemId(int position) {
+		ScreenItem item = screenItems.get(position);
+		ScreenItemType type = item.type;
+		Object value = item.value;
+		if (value instanceof TrashItem) {
+			return type.hashCode() + value.hashCode();
+		} else if (value instanceof TrashGroup) {
+			return type.hashCode() + ((TrashGroup) value).getFormattedDate().hashCode();
+		}
+		return type.hashCode();
 	}
 
 	private View inflate(@LayoutRes int layoutResId) {
