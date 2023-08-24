@@ -184,15 +184,15 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment {
 	protected List<Object> getAdapterItems() {
 		List<Object> items = new ArrayList<>();
 		boolean osmMonitoringEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
-		boolean hasTracks = rootFolder.getFlattenedTrackItems().size() != 0;
-		boolean hasFolders = rootFolder.getFlattenedSubFolders().size() != 0;
+		boolean isTracksEmpty = rootFolder.getFlattenedTrackItems().size() != 0;
+		boolean isSubFoldersEmpty = rootFolder.getFlattenedSubFolders().size() != 0;
 
 		items.add(TYPE_SORT_TRACKS);
 		if (osmMonitoringEnabled) {
 			items.add(recordingTrackItem);
 		}
 
-		if (hasTracks || hasFolders || osmMonitoringEnabled) {
+		if (isTracksEmpty || isSubFoldersEmpty || osmMonitoringEnabled) {
 			items.add(visibleTracksGroup);
 			items.addAll(rootFolder.getSubFolders());
 			items.addAll(rootFolder.getTrackItems());
@@ -200,12 +200,11 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment {
 			items.add(TYPE_EMPTY_TRACKS);
 		}
 
-		if (hasTracks) {
+		if (isTracksEmpty) {
 			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;
 	}
-
 
 	private void updateRecordingTrack() {
 		adapter.updateItem(recordingTrackItem);
