@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 
 import android.os.Bundle;
@@ -182,19 +183,29 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment {
 	@NonNull
 	protected List<Object> getAdapterItems() {
 		List<Object> items = new ArrayList<>();
+		boolean osmMonitoringEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+		boolean hasTracks = rootFolder.getFlattenedTrackItems().size() != 0;
+		boolean hasFolders = rootFolder.getFlattenedSubFolders().size() != 0;
+
 		items.add(TYPE_SORT_TRACKS);
-		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
+		if (osmMonitoringEnabled) {
 			items.add(recordingTrackItem);
 		}
-		items.add(visibleTracksGroup);
-		items.addAll(rootFolder.getSubFolders());
-		items.addAll(rootFolder.getTrackItems());
 
-		if (rootFolder.getFlattenedTrackItems().size() != 0) {
+		if (hasTracks || hasFolders || osmMonitoringEnabled) {
+			items.add(visibleTracksGroup);
+			items.addAll(rootFolder.getSubFolders());
+			items.addAll(rootFolder.getTrackItems());
+		} else {
+			items.add(TYPE_EMPTY_TRACKS);
+		}
+
+		if (hasTracks) {
 			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;
 	}
+
 
 	private void updateRecordingTrack() {
 		adapter.updateItem(recordingTrackItem);

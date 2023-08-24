@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
@@ -51,6 +52,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_TRACK = 4;
 	public static final int TYPE_EMPTY_FOLDER = 5;
 	public static final int TYPE_FOLDER_STATS = 6;
+	public static final int TYPE_EMPTY_TRACKS = 7;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -152,6 +154,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
 				return new FolderStatsViewHolder(app, view);
+			case TYPE_EMPTY_TRACKS:
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new EmptyTracksViewHolder(view, emptyTracksListener);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -174,6 +179,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_SORT_TRACKS;
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
+			} else if (TYPE_EMPTY_TRACKS == item) {
+				return TYPE_EMPTY_TRACKS;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
@@ -221,6 +228,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 			FolderStatsViewHolder viewHolder = (FolderStatsViewHolder) holder;
 			viewHolder.bindView(folderAnalysis);
+		} else if (holder instanceof EmptyTracksViewHolder) {
+			EmptyTracksViewHolder viewHolder = (EmptyTracksViewHolder) holder;
+			viewHolder.bindView();
 		}
 	}
 
