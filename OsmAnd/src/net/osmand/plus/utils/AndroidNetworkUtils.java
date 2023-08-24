@@ -60,11 +60,14 @@ public class AndroidNetworkUtils {
 	}
 
 	public interface OnFileUploadCallback {
-		void onFileUploadStarted();
+		default void onFileUploadStarted() {
+		}
 
-		void onFileUploadProgress(int percent);
+		default void onFileUploadProgress(int percent) {
+		}
 
-		void onFileUploadDone(@NonNull NetworkResult networkResult);
+		default void onFileUploadDone(@NonNull NetworkResult networkResult) {
+		}
 	}
 
 	public interface OnFilesUploadCallback {
