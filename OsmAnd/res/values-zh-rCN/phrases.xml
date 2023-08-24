@@ -906,7 +906,7 @@
     <string name="poi_access_caravan">大篷车通行</string>
     <string name="poi_socket">插座</string>
     <string name="poi_water_place_access">水源地通行</string>
-    <string name="poi_dish">盘子</string>
+    <string name="poi_dish">菜品</string>
     <string name="poi_operational_status">运行状况</string>
     <string name="poi_climbing_crag_filter">攀岩峭壁</string>
     <string name="poi_rtsa_scale_filter">难度类别</string>
