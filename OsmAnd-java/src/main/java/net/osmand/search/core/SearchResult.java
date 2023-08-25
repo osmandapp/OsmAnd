@@ -39,6 +39,7 @@ public class SearchResult {
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
+	public boolean acceptPrivate = false;
 
 	public double priority;
 	public double priorityDistance;

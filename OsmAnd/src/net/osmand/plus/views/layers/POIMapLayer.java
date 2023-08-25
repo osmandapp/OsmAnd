@@ -163,7 +163,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 								@Override
 								public boolean publish(Amenity object) {
-									return true;
+									return !object.isPrivateEntertainment() || (object.isPrivateEntertainment() && filter.isShowPrivateNeeded());
 								}
 
 								@Override

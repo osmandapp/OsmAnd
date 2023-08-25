@@ -6,7 +6,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FR
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 
 import net.osmand.CollatorStringMatcher;
@@ -1052,7 +1051,9 @@ public class SearchCoreFactory {
 			String nameFilter = null;
 			int countExtraWords = 0;
 			Set<String> poiAdditionals = new LinkedHashSet<>();
+			boolean acceptPrivate = false;
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
+				acceptPrivate = phrase.getLastSelectedWord().getResult().acceptPrivate;
 				Object obj = phrase.getLastSelectedWord().getResult().object;
 				if (obj instanceof AbstractPoiType) {
 					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
@@ -1112,7 +1113,7 @@ public class SearchCoreFactory {
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
 					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r,
-							searchedPois, poiAdditionals, countExtraWords);
+							searchedPois, poiAdditionals, countExtraWords, acceptPrivate);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
@@ -1127,9 +1128,10 @@ public class SearchCoreFactory {
 
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter,
-														final SearchResultMatcher resultMatcher, final String nameFilter,
-														final BinaryMapIndexReader selected, final Set<String> searchedPois,
-														final Collection<String> poiAdditionals, final int countExtraWords) {
+		                                                final SearchResultMatcher resultMatcher, final String nameFilter,
+		                                                final BinaryMapIndexReader selected, final Set<String> searchedPois,
+		                                                final Collection<String> poiAdditionals, final int countExtraWords,
+		                                                final boolean acceptPrivate) {
 
 
 			final NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, CHECK_STARTS_FROM_SPACE);
@@ -1146,6 +1148,9 @@ public class SearchCoreFactory {
 						return false;
 					}
 					if (object.isClosed()) {
+						return false;
+					}
+					if (!acceptPrivate && object.isPrivateEntertainment()) {
 						return false;
 					}
 					if (!poiAdditionals.isEmpty()) {

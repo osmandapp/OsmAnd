@@ -427,6 +427,10 @@ public class Amenity extends MapObject {
 		return OSM_DELETE_VALUE.equals(getAdditionalInfo(OSM_DELETE_TAG));
 	}
 
+	public boolean isPrivateEntertainment() {
+		return type.getKeyName().equals("entertainment") && "private".equals(getTagContent("access_private"));
+	}
+
 	public JSONObject toJSON() {
 		JSONObject json = super.toJSON();
 		json.put("subType", subType);
