@@ -1276,7 +1276,7 @@
     <string name="arrival_distance_factor_early">Lejos</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Cerca</string>
-    <string name="arrival_distance_factor_at_last">En los últimos metros</string>
+    <string name="arrival_distance_factor_at_last">Muy tarde</string>
     <string name="rendering_attr_coloredBuildings_name">Colorear edificios según el tipo</string>
     <string name="av_camera_pic_size">Tamaño de fotografía</string>
     <string name="av_camera_pic_size_descr">Define el tamaño de la fotografía</string>

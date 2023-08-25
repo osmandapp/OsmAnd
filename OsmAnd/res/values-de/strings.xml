@@ -59,7 +59,7 @@
     <string name="arrival_distance_factor_early">Früh</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Spät</string>
-    <string name="arrival_distance_factor_at_last">Auf den letzten Metern</string>
+    <string name="arrival_distance_factor_at_last">Sehr spät</string>
     <string name="auto_zoom_none">Keine automatische Vergrößerung</string>
     <string name="auto_zoom_close">Auf Nahbereich</string>
     <string name="auto_zoom_far">Auf Mittelbereich</string>
