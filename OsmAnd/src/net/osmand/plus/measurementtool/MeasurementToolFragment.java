@@ -888,18 +888,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void calculateSrtmTrack() {
 		if (isCalculateSrtmMode() && calculateSrtmTask == null) {
 			try {
-				GpxData gpxData = editingCtx.getGpxData();
-				if (gpxData != null) {
-					GPXFile gpxFile = gpxData.getGpxFile();
-					File file = new File(gpxFile.path);
-					calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, file,
-							file.getName(), false, Collections.emptyMap(), null, this);
-				} else {
-					GPXFile gpxFile = generateGpxFile();
-					InputStream inputStream = new ByteArrayInputStream(GPXUtilities.asString(gpxFile).getBytes("UTF-8"));
-					calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, inputStream,
-							getSuggestedFileName(), false, Collections.emptyMap(), null, this);
-				}
+				GPXFile gpxFile = generateGpxFile();
+				InputStream inputStream = new ByteArrayInputStream(GPXUtilities.asString(gpxFile).getBytes("UTF-8"));
+				calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, inputStream,
+						getSuggestedFileName(), false, Collections.emptyMap(), null, this);
 			} catch (IOException e) {
 				app.showToastMessage(e.getMessage());
 			}
