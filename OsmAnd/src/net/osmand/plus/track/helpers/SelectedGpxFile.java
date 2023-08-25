@@ -119,10 +119,8 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public void processPoints(OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime) {
-			update(app);
-		}
+	public void processPoints(@NonNull OsmandApplication app) {
+		update(app);
 
 		processedPointsToDisplay = gpxFile.proccessPoints();
 		routePoints = false;
