@@ -3397,7 +3397,6 @@
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
     <string name="live_monitoring_adress">عنوان صفحة انترنت</string>
-    <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعلمة: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="monitoring_notification">إعلام</string>
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>

@@ -3353,8 +3353,6 @@
     <string name="live_monitoring_time_buffer">مدت حافظهٔ تأخیری</string>
     <string name="live_monitoring_tracking_interval">تناوب ردیابی</string>
     <string name="live_monitoring_adress">نشانی وب</string>
-    <string name="live_monitoring_adress_descr">نشانی اینترنتی را با این پارامترها تعریف کنید: 
-\nlat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
     <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>

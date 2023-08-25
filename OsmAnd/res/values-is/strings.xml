@@ -3325,7 +3325,6 @@
     <string name="live_monitoring_time_buffer">Tímabiðminni</string>
     <string name="live_monitoring_tracking_interval">Millibil rakningar</string>
     <string name="live_monitoring_adress">Veffang</string>
-    <string name="live_monitoring_adress_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Tilkynning</string>
     <string name="monitoring_min_speed">Lágmarkshraði</string>
     <string name="monitoring_min_accuracy">Lágmarksnákvæmni</string>

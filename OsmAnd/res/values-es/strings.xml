@@ -3607,7 +3607,6 @@
     <string name="shared_string_night_map">Mapa nocturno</string>
     <string name="search_offline_geo_error">No se puede analizar la geointención «%s».</string>
     <string name="multimedia_rec_split_title">División de grabación</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendación: Define un desplazamiento de 5 metros si no deseas registrar detalles menores de la ruta y no necesitas datos adicionales sobre el período de descanso.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Pueden filtrarse los pequeños movimientos (por ejemplo, hacia los lados del camino para marcar un posible desvío en el viaje). Nótese que el archivo contendrá menos información para el post-procesamiento y, al mismo tiempo, podría guardar errores del GPS causados por una mala recepción o por efectos del chipset.</string>
     <string name="monitoring_min_distance_descr">Activar este filtro, permite evitar grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>

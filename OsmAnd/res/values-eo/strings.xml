@@ -3321,7 +3321,6 @@
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo ebligas al vi ne preterpasi aldoni datumojn al registrata spuro, kiam preskaŭ neniu movo registriĝas. Tio ĉi ankaŭ plibonigas aspekton de spuro sen aldona pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekzemple al moviĝo alia vojflanko, kiu estus registrita kiel turniĝo) povos esti forfiltritaj. Rimarku, ke via spur-dosiero enhavos malpliajn datumojn por posttrakti kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevoj aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
-    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}.</string>
     <string name="monitoring_notification">Sciigo</string>
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>

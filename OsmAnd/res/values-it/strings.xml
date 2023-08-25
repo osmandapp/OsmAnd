@@ -3338,7 +3338,6 @@
     <string name="live_monitoring_time_buffer">Buffer temporale</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
-    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con i parametri della sintassi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notifiche</string>
     <string name="monitoring_min_speed">Velocità minima</string>
     <string name="monitoring_min_accuracy">Accuratezza minima</string>

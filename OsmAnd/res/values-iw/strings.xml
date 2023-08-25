@@ -3451,7 +3451,6 @@
     <string name="live_monitoring_adress">כתובת</string>
     <string name="live_monitoring_time_buffer">מאגר זמן</string>
     <string name="monitoring_notification">התראה</string>
-    <string name="live_monitoring_adress_descr">נא לציין את הכתובת עם תחביר משתנים: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_speed">מהירות מזערית</string>
     <string name="monitoring_min_accuracy">דיוק מזערי</string>
     <string name="monitoring_min_distance">תזוזה מזערית</string>

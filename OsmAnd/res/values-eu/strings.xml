@@ -3397,7 +3397,6 @@
     <string name="live_monitoring_time_buffer">Denbora-bufferra</string>
     <string name="live_monitoring_tracking_interval">Jarraipen-tartea</string>
     <string name="live_monitoring_adress">Web helbidea</string>
-    <string name="live_monitoring_adress_descr">Zehaztu web helbidea parametro sintaxiarekin: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={{4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Jakinarazpena</string>
     <string name="monitoring_min_speed">Gutxieneko abiadura</string>
     <string name="monitoring_min_accuracy">Gutxieneko zehaztasuna</string>

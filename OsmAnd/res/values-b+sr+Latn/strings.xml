@@ -3788,7 +3788,6 @@
     <string name="monitoring_min_accuracy">Minimalna preciznost</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_notification">Obaveštenje</string>
-    <string name="live_monitoring_adress_descr">Odaberite veb adreus sa sintaksom za parametre: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="metric_ton">t</string>
     <string name="cubic_m">m³</string>
