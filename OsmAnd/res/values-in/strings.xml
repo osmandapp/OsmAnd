@@ -5437,4 +5437,5 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
+    <string name="live_monitoring_adress_descr">Tentukan</string>
 </resources>
