@@ -22,6 +22,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 
 
@@ -99,19 +100,13 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			spannableBuilder.append(" ");
 			spannableBuilder.append(getString(R.string.shared_string_read_more));
 
-			ClickableSpan clickableSpan = new ClickableSpan() {
+			ClickableSpan clickableSpan = new CustomClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
 						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_utm_format, isNightMode());
 					}
-				}
-
-				@Override
-				public void updateDrawState(@NonNull TextPaint ds) {
-					super.updateDrawState(ds);
-					ds.setUnderlineText(false);
 				}
 			};
 			spannableBuilder.setSpan(clickableSpan, start, spannableBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -129,19 +124,13 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			spannableBuilder.append(" ");
 			spannableBuilder.append(getString(R.string.shared_string_read_more));
 
-			ClickableSpan clickableSpan = new ClickableSpan() {
+			ClickableSpan clickableSpan = new CustomClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
 					Context ctx = getContext();
 					if (ctx != null) {
 						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_mgrs_format, isNightMode());
 					}
-				}
-
-				@Override
-				public void updateDrawState(@NonNull TextPaint ds) {
-					super.updateDrawState(ds);
-					ds.setUnderlineText(false);
 				}
 			};
 			spannableBuilder.setSpan(clickableSpan, start, spannableBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
