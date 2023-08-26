@@ -2810,7 +2810,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
     <string name="animate_my_location">Animate own position</string>
-    <string name="animate_my_location_desc">Turn on animated map panning of \'My position\' during navigation.</string>
+    <string name="animate_my_location_desc">Smooth map panning when in motion. Introduces slight delay.</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>
