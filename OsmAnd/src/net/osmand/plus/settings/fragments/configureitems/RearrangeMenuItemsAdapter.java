@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.settings.fragments.configureitems;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
@@ -33,7 +33,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
+import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.MAIN_BUTTONS_QUANTITY;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
@@ -42,24 +42,19 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.fragments.configureitems.ScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
@@ -67,8 +62,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
+public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<ViewHolder> implements OnItemMoveCallback {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -79,8 +73,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	private final int textColorRes;
 
 
-	public RearrangeMenuItemsAdapter(OsmandApplication app,
-									 List<RearrangeMenuAdapterItem> items, boolean nightMode) {
+	public RearrangeMenuItemsAdapter(@NonNull OsmandApplication app, @NonNull List<RearrangeMenuAdapterItem> items, boolean nightMode) {
 		this.app = app;
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
@@ -92,7 +85,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	@Override
 	public int getItemViewType(int position) {
 		RearrangeMenuAdapterItem item = items.get(position);
-		return item.type.ordinal();
+		return item.itemType.ordinal();
 	}
 
 	@NonNull
@@ -104,19 +97,19 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		switch (type) {
 			case DESCRIPTION:
 				view = inflater.inflate(R.layout.list_item_description_with_image, parent, false);
-				return new DescriptionHolder(view);
+				return new RearrangeDescriptionHolder(view);
 			case MENU_ITEM:
 				view = inflater.inflate(R.layout.profile_edit_list_item, parent, false);
-				return new ItemHolder(view);
+				return new RearrangeItemHolder(view);
 			case DIVIDER:
 				view = inflater.inflate(R.layout.divider, parent, false);
-				return new DividerHolder(view);
+				return new RearrangeDividerHolder(view);
 			case HEADER:
 				view = inflater.inflate(R.layout.list_item_move_header, parent, false);
-				return new HeaderHolder(view);
+				return new RearrangeHeaderHolder(view);
 			case BUTTON:
 				view = inflater.inflate(R.layout.preference_button, parent, false);
-				return new ButtonHolder(view);
+				return new RearrangeButtonHolder(view);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -126,8 +119,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		RearrangeMenuAdapterItem item = items.get(position);
-		if (holder instanceof DescriptionHolder) {
-			DescriptionHolder h = (DescriptionHolder) holder;
+		if (holder instanceof RearrangeDescriptionHolder) {
+			RearrangeDescriptionHolder h = (RearrangeDescriptionHolder) holder;
 			ScreenType screenType = (ScreenType) item.value;
 			int paddingStart = (int) app.getResources().getDimension(R.dimen.dashboard_map_toolbar);
 			int paddingTop = (int) app.getResources().getDimension(R.dimen.content_padding);
@@ -144,8 +137,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 						: R.drawable.img_settings_device_top_light);
 				h.imageContainer.setPadding(paddingStart, paddingTop, paddingStart, 0);
 			}
-		} else if (holder instanceof ItemHolder) {
-			ItemHolder h = (ItemHolder) holder;
+		} else if (holder instanceof RearrangeItemHolder) {
+			RearrangeItemHolder h = (RearrangeItemHolder) holder;
 			ContextMenuItem menuItem = (ContextMenuItem) item.value;
 			String id = menuItem.getId();
 			if (DRAWER_DIVIDER_ID.equals(id)) {
@@ -186,23 +179,17 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.divider.setVisibility(View.GONE);
 				h.moveButton.setVisibility(View.VISIBLE);
 			}
-			h.actionIcon.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					int pos = holder.getAdapterPosition();
-					if (listener != null && pos != RecyclerView.NO_POSITION) {
-						listener.onButtonClicked(pos);
-					}
+			h.actionIcon.setOnClickListener(view -> {
+				int pos = holder.getAdapterPosition();
+				if (listener != null && pos != RecyclerView.NO_POSITION) {
+					listener.onButtonClicked(pos);
 				}
 			});
-			h.moveButton.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View view, MotionEvent event) {
-					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-						listener.onDragStarted(holder);
-					}
-					return false;
+			h.moveButton.setOnTouchListener((view, event) -> {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+					listener.onDragStarted(holder);
 				}
+				return false;
 			});
 			if (!menuItem.isHidden()
 					&& !id.equals(SHOW_CATEGORY_ID)
@@ -228,25 +215,25 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			if (id.equals(MAP_CONTEXT_MENU_ADD_ID)) {
 				h.title.setText(R.string.add_edit_favorite);
 			}
-		} else if (holder instanceof HeaderHolder) {
-			HeaderHolder h = (HeaderHolder) holder;
-			HeaderItem header = (HeaderItem) item.value;
+		} else if (holder instanceof RearrangeHeaderHolder) {
+			RearrangeHeaderHolder h = (RearrangeHeaderHolder) holder;
+			RearrangeHeaderItem header = (RearrangeHeaderItem) item.value;
 			h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 			h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
-			h.title.setText(header.titleRes);
-			if (header.descrRes == R.string.additional_actions_descr) {
-				h.description.setText(String.format(app.getString(header.descrRes), app.getString(R.string.shared_string_actions)));
+			h.title.setText(header.titleId);
+			if (header.descriptionId == R.string.additional_actions_descr) {
+				h.description.setText(String.format(app.getString(header.descriptionId), app.getString(R.string.shared_string_actions)));
 			} else {
-				h.description.setText(header.descrRes);
+				h.description.setText(header.descriptionId);
 			}
 			h.moveIcon.setVisibility(View.GONE);
-			h.movable = header.titleRes == R.string.additional_actions;
-		} else if (holder instanceof ButtonHolder) {
-			ButtonHolder h = (ButtonHolder) holder;
-			ButtonItem button = (ButtonItem) item.value;
-			h.title.setText(app.getString(button.titleRes));
-			h.icon.setImageDrawable(uiUtilities.getIcon(button.iconRes, activeColorRes));
-			h.button.setOnClickListener(button.listener);
+			h.movable = header.titleId == R.string.additional_actions;
+		} else if (holder instanceof RearrangeButtonHolder) {
+			RearrangeButtonHolder h = (RearrangeButtonHolder) holder;
+			RearrangeButtonItem button = (RearrangeButtonItem) item.value;
+			h.title.setText(app.getString(button.titleId));
+			h.icon.setImageDrawable(uiUtilities.getIcon(button.iconId, activeColorRes));
+			h.itemView.setOnClickListener(button.listener);
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, ContextCompat.getColor(app, activeColorRes), 0.3f);
 			AndroidUtils.setBackground(h.itemView, drawable);
 		}
@@ -264,8 +251,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 		if (itemFrom instanceof ContextMenuItem
 				&& ((ContextMenuItem) itemFrom).getId().startsWith(MAP_CONTEXT_MENU_ACTIONS)
-				&& itemTo instanceof HeaderItem
-				&& ((HeaderItem) itemTo).titleRes == R.string.additional_actions) {
+				&& itemTo instanceof RearrangeHeaderItem
+				&& ((RearrangeHeaderItem) itemTo).titleId == R.string.additional_actions) {
 			ContextMenuItem menuItemFrom = (ContextMenuItem) itemFrom;
 			int headerMaxIndex = MAIN_BUTTONS_QUANTITY + 2;
 			if (to >= headerMaxIndex || menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
@@ -292,8 +279,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			if (menuItemFrom.getId().equals(MAP_CONTEXT_MENU_MORE_ID) || menuItemTo.getId().equals(MAP_CONTEXT_MENU_MORE_ID)) {
 				int additionalHeaderIndex = 0;
 				for (int i = 0; i < items.size(); i++) {
-					Object value = items.get(i).getValue();
-					if (value instanceof HeaderItem && ((HeaderItem) value).titleRes == R.string.additional_actions) {
+					Object value = items.get(i).value;
+					if (value instanceof RearrangeHeaderItem && ((RearrangeHeaderItem) value).titleId == R.string.additional_actions) {
 						additionalHeaderIndex = i;
 						break;
 					}
@@ -319,174 +306,6 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	@Override
 	public void onItemDismiss(RecyclerView.ViewHolder holder) {
 		listener.onDragOrSwipeEnded(holder);
-	}
-
-	private static class DescriptionHolder extends RecyclerView.ViewHolder
-			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private final ImageView image;
-		private final ImageView deviceImage;
-		private final TextView description;
-		private final FrameLayout imageContainer;
-
-		DescriptionHolder(@NonNull View itemView) {
-			super(itemView);
-			image = itemView.findViewById(R.id.image);
-			deviceImage = itemView.findViewById(R.id.device_image);
-			description = itemView.findViewById(R.id.description);
-			imageContainer = itemView.findViewById(R.id.image_container);
-		}
-
-		@Override
-		public boolean isMovingDisabled() {
-			return true;
-		}
-	}
-
-	private static class ItemHolder extends RecyclerView.ViewHolder
-			implements ReorderItemTouchHelperCallback.UnmovableItem {
-
-		private final TextView title;
-		private final TextView description;
-		private final ImageView icon;
-		private final ImageView actionIcon;
-		private final ImageView moveIcon;
-		private final FrameLayout moveButton;
-		private final View divider;
-		private boolean movable = true;
-
-		ItemHolder(@NonNull View itemView) {
-			super(itemView);
-			title = itemView.findViewById(R.id.title);
-			description = itemView.findViewById(R.id.description);
-			actionIcon = itemView.findViewById(R.id.action_icon);
-			icon = itemView.findViewById(R.id.icon);
-			moveIcon = itemView.findViewById(R.id.move_icon);
-			moveButton = itemView.findViewById(R.id.move_button);
-			divider = itemView.findViewById(R.id.divider);
-		}
-
-		@Override
-		public boolean isMovingDisabled() {
-			return !movable;
-		}
-	}
-
-	private static class DividerHolder extends RecyclerView.ViewHolder
-			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		View divider;
-
-		DividerHolder(View itemView) {
-			super(itemView);
-			divider = itemView.findViewById(R.id.divider);
-		}
-
-		@Override
-		public boolean isMovingDisabled() {
-			return true;
-		}
-	}
-
-	private static class HeaderHolder extends RecyclerView.ViewHolder
-			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private final ImageView moveIcon;
-		private final TextView title;
-		private final TextView description;
-		private boolean movable = true;
-
-		HeaderHolder(@NonNull View itemView) {
-			super(itemView);
-			moveIcon = itemView.findViewById(R.id.move_icon);
-			title = itemView.findViewById(R.id.title);
-			description = itemView.findViewById(R.id.summary);
-		}
-
-		@Override
-		public boolean isMovingDisabled() {
-			return !movable;
-		}
-	}
-
-	private static class ButtonHolder extends RecyclerView.ViewHolder
-			implements ReorderItemTouchHelperCallback.UnmovableItem {
-		private final View button;
-		private final ImageView icon;
-		private final TextView title;
-
-		ButtonHolder(@NonNull View itemView) {
-			super(itemView);
-			button = itemView;
-			icon = itemView.findViewById(android.R.id.icon);
-			title = itemView.findViewById(android.R.id.title);
-		}
-
-		@Override
-		public boolean isMovingDisabled() {
-			return true;
-		}
-	}
-
-	public static class RearrangeMenuAdapterItem {
-		private final AdapterItemType type;
-		private final Object value;
-
-		public RearrangeMenuAdapterItem(AdapterItemType type, Object value) {
-			this.type = type;
-			this.value = value;
-		}
-
-		public AdapterItemType getType() {
-			return type;
-		}
-
-		public Object getValue() {
-			return value;
-		}
-	}
-
-
-	public static class ButtonItem {
-		@StringRes
-		private final int titleRes;
-		@DrawableRes
-		private final int iconRes;
-		private final View.OnClickListener listener;
-
-		public ButtonItem(int titleRes, int iconRes, View.OnClickListener listener) {
-			this.titleRes = titleRes;
-			this.iconRes = iconRes;
-			this.listener = listener;
-		}
-	}
-
-	public static class HeaderItem {
-		@StringRes
-		private final int titleRes;
-		@StringRes
-		private final int descrRes;
-
-		public HeaderItem(int titleRes, int descrRes) {
-			this.titleRes = titleRes;
-			this.descrRes = descrRes;
-		}
-	}
-
-	public enum AdapterItemType {
-		DESCRIPTION,
-		MENU_ITEM,
-		DIVIDER,
-		HEADER,
-		BUTTON
-	}
-
-	public interface MenuItemsAdapterListener {
-
-		void onDragStarted(RecyclerView.ViewHolder holder);
-
-		void onDragOrSwipeEnded(RecyclerView.ViewHolder holder);
-
-		void onButtonClicked(int view);
-
-		void onItemMoved(String id, int position);
 	}
 
 	public void setListener(MenuItemsAdapterListener listener) {
@@ -545,15 +364,23 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 	public List<String> getMainActionsIds() {
 		List<String> ids = new ArrayList<>();
 		for (RearrangeMenuAdapterItem adapterItem : items) {
-			Object value = adapterItem.getValue();
+			Object value = adapterItem.value;
 			if (value instanceof ContextMenuItem) {
 				ids.add(((ContextMenuItem) value).getId());
-			} else if (value instanceof HeaderItem
-					&& (((HeaderItem) value).titleRes == R.string.additional_actions
-					|| ((HeaderItem) value).titleRes == R.string.shared_string_hidden)) {
+			} else if (value instanceof RearrangeHeaderItem
+					&& (((RearrangeHeaderItem) value).titleId == R.string.additional_actions
+					|| ((RearrangeHeaderItem) value).titleId == R.string.shared_string_hidden)) {
 				break;
 			}
 		}
 		return ids;
+	}
+
+	public enum AdapterItemType {
+		DESCRIPTION,
+		MENU_ITEM,
+		DIVIDER,
+		HEADER,
+		BUTTON
 	}
 }
