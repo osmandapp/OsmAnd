@@ -18,7 +18,6 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -147,4 +146,18 @@ public class ContextMenuUtils {
 		return idScheme;
 	}
 
+	@NonNull
+	public static ContextMenuItemsPreference getSettingForScreen(@NonNull OsmandApplication app, @NonNull ScreenType screenType) throws IllegalArgumentException {
+		OsmandSettings settings = app.getSettings();
+		switch (screenType) {
+			case DRAWER:
+				return settings.DRAWER_ITEMS;
+			case CONFIGURE_MAP:
+				return settings.CONFIGURE_MAP_ITEMS;
+			case CONTEXT_MENU_ACTIONS:
+				return settings.CONTEXT_MENU_ACTIONS_ITEMS;
+			default:
+				throw new IllegalArgumentException("Unsupported screen type");
+		}
+	}
 }

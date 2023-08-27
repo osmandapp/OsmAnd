@@ -55,7 +55,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
+import net.osmand.plus.settings.fragments.configureitems.ScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -131,8 +131,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			ScreenType screenType = (ScreenType) item.value;
 			int paddingStart = (int) app.getResources().getDimension(R.dimen.dashboard_map_toolbar);
 			int paddingTop = (int) app.getResources().getDimension(R.dimen.content_padding);
-			h.description.setText(String.format(app.getString(R.string.reorder_or_hide_from), app.getString(screenType.titleRes)));
-			h.image.setImageResource(nightMode ? screenType.imageNightRes : screenType.imageDayRes);
+			h.description.setText(String.format(app.getString(R.string.reorder_or_hide_from), app.getString(screenType.titleId)));
+			h.image.setImageResource(nightMode ? screenType.imageNightId : screenType.imageDayId);
 			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 				h.deviceImage.setImageResource(nightMode
 						? R.drawable.img_settings_device_bottom_dark
