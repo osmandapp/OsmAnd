@@ -2243,4 +2243,11 @@
     <string name="poi_parking_fee_filter">停车费用</string>
     <string name="poi_bus_no">公交车通行：否</string>
     <string name="poi_agricultural_no">农用车辆通行：否</string>
+    <string name="poi_volcano_status_extinct">死火山</string>
+    <string name="poi_volcano_status_dormant">休眠火山</string>
+    <string name="poi_volcano_status_active">活火山</string>
+    <string name="poi_volcano_number_of_eruptions">爆发次数</string>
+    <string name="poi_memorial_ghost_bike">幽灵单车</string>
+    <string name="poi_volcano_status_inactive">不活跃火山</string>
+    <string name="poi_paintball">彩弹射击</string>
 </resources>
