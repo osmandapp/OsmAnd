@@ -97,12 +97,13 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.ScrollHelper;
-import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
+import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.MapScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.keyevent.KeyEventListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -214,7 +215,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private LockHelper lockHelper;
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
-	private ScrollHelper mapScrollHelper;
+	private MapScrollHelper mapScrollHelper;
 	private RestoreNavigationHelper restoreNavigationHelper;
 
 	private boolean landscapeLayout;
@@ -252,7 +253,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
-	private MapActivityKeyListener mapActivityKeyListener;
+	private KeyEventListener keyEventListener;
 	private RouteCalculationProgressListener routeCalculationProgressCallback;
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
 	private LoadSimulatedLocationsListener simulatedLocationsListener;
@@ -264,7 +265,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app = getMyApplication();
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
-		mapScrollHelper = new ScrollHelper(app);
+		mapScrollHelper = new MapScrollHelper(app);
 		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -354,7 +355,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		lockHelper.setLockUIAdapter(this);
-		mapActivityKeyListener = new MapActivityKeyListener(this);
+		keyEventListener = new KeyEventListener(this);
 		mIsDestroyed = false;
 		if (mapViewWithLayers != null) {
 			mapViewWithLayers.onCreate(savedInstanceState);
@@ -1402,14 +1403,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public ScrollHelper getMapScrollHelper() {
+	public MapScrollHelper getMapScrollHelper() {
 		return mapScrollHelper;
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (mapActivityKeyListener != null) {
-			if (mapActivityKeyListener.onKeyDown(keyCode, event)) {
+		if (keyEventListener != null) {
+			if (keyEventListener.onKeyDown(keyCode, event)) {
 				return true;
 			}
 		}
@@ -1418,8 +1419,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (mapActivityKeyListener != null) {
-			if (mapActivityKeyListener.onKeyUp(keyCode, event)) {
+		if (keyEventListener != null) {
+			if (keyEventListener.onKeyUp(keyCode, event)) {
 				return true;
 			}
 		}

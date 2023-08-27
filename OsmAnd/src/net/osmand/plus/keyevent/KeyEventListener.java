@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.keyevent;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.helpers.ScrollHelper;
+import net.osmand.plus.helpers.MapScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.utils.AndroidUtils;
@@ -20,7 +20,7 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
 
-public class MapActivityKeyListener implements KeyEvent.Callback {
+public class KeyEventListener implements KeyEvent.Callback {
 
 	public static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	public static final int LONG_KEYPRESS_DELAY = 500;
@@ -31,9 +31,9 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 	private final OsmandSettings settings;
 	// handler to show/hide trackball position and to link map with delay
 	private final Handler uiHandler = new Handler();
-	private final ScrollHelper mapScrollHelper;
+	private final MapScrollHelper mapScrollHelper;
 
-	public MapActivityKeyListener(MapActivity mapActivity) {
+	public KeyEventListener(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
 		mapActions = mapActivity.getMapActions();

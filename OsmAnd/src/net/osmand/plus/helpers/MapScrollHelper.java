@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ScrollHelper {
+public class MapScrollHelper {
 
 	private static final int LONG_PRESS_TIME_MS = 250;
 	private static final int MAX_KEY_UP_TIME_MS = 10;
@@ -50,7 +50,7 @@ public class ScrollHelper {
 		isInContinuousScrolling = false;
 	};
 
-	public ScrollHelper(OsmandApplication app) {
+	public MapScrollHelper(OsmandApplication app) {
 		this.app = app;
 		
 		availableDirections = new HashMap<Integer, Direction>() {
