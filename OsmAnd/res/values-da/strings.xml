@@ -2358,7 +2358,7 @@
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver animeret panorering af \'Min position\' under navigation.</string>
+    <string name="animate_my_location_desc">Jævn kortpanorering, når du er i bevægelse. Medfører en lille forsinkelse.</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
