@@ -5418,4 +5418,5 @@
     <string name="help_article_navigation_routing_moped_routing_name">Moped-Routenführung</string>
     <string name="help_article_navigation_routing_online_routing_name">Online-Routenführung</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Über OsmAnd-Routenführung</string>
+    <string name="live_monitoring_adress_descr">Webadresse angeben mit der Parametersyntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>
