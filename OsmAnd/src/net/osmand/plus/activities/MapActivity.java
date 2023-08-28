@@ -892,6 +892,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.addListener(useSystemScreenTimeoutListener);
 
 		extendedMapActivity.onResume(this);
+
+		getMapView().getAnimatedDraggingThread().allowAnimations();
 	}
 
 	@Override
@@ -1297,7 +1299,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		getMapView().getAnimatedDraggingThread().stopAnimatingSync();
+		getMapView().getAnimatedDraggingThread().blockAnimations();
 
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
