@@ -2242,7 +2242,7 @@
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
     <string name="animate_my_location">Saját pozíció animált mozgatása</string>
-    <string name="animate_my_location_desc">A saját pozíció animált térképcsúsztatásának bekapcsolása navigáció közben.</string>
+    <string name="animate_my_location_desc">Sima térképcsúsztatás mozgás közben. Enyhe késleltetést vezet be.</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Hosszú távolságoknál: ha 10 percen belül nem kap eredményt, adjon hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OSM adatokhoz.
