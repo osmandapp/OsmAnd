@@ -8,7 +8,7 @@ android {
 	// compileNdkVersion "android-ndk-r17b"
 
 	defaultConfig {
-		targetSdkVersion 31
+		targetSdkVersion 33
 		multiDexEnabled true
 		vectorDrawables.useSupportLibrary = true
 	}
@@ -373,8 +373,8 @@ dependencies {
 	implementation 'com.android.billingclient:billing:5.0.0'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
-	implementation 'com.squareup.picasso:picasso:2.71828'
-	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+	implementation 'com.squareup.picasso:picasso:2.8'
+	implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'

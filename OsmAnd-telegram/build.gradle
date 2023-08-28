@@ -23,7 +23,7 @@ android {
 	defaultConfig {
 		applicationId "net.osmand.telegram"
 		minSdkVersion 15
-		targetSdkVersion 31
+		targetSdkVersion 33
 		multiDexEnabled true
 		versionCode 1
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
