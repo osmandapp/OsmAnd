@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.favorites;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.gpx.GPXUtilities.PointsGroup;
 import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
@@ -352,6 +353,10 @@ public class FavouritesHelper {
 	}
 
 	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync) {
+		return addFavourite(point, lookupAddress, sortAndSave, saveAsync, null);
+	}
+
+	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync, @Nullable PointsGroup pointsGroup) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
@@ -363,7 +368,7 @@ public class FavouritesHelper {
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 
-		FavoriteGroup group = getOrCreateGroup(point);
+		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
@@ -756,10 +761,19 @@ public class FavouritesHelper {
 	}
 
 	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point) {
+		return getOrCreateGroup(point, null);
+	}
+
+	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point, @Nullable PointsGroup pointsGroup) {
 		if (flatGroups.containsKey(point.getCategory())) {
 			return flatGroups.get(point.getCategory());
 		}
 		FavoriteGroup group = new FavoriteGroup(point);
+		if (pointsGroup != null) {
+			group.setColor(pointsGroup.color);
+			group.setIconName(pointsGroup.iconName);
+			group.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, BackgroundType.CIRCLE));
+		}
 
 		flatGroups.put(group.getName(), group);
 		favoriteGroups.add(group);

@@ -4,12 +4,14 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
+import static net.osmand.gpx.GPXUtilities.PointsGroup;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.BackgroundType;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.data.FavouritePoint;
@@ -173,9 +175,11 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					}
 				}
 			}
-			List<FavouritePoint> favourites = FavouritesHelper.getPointsFromGroups(appliedItems);
-			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false, false, false);
+			for (FavoriteGroup group : appliedItems) {
+				for (FavouritePoint point : group.getPoints()) {
+					favoritesHelper.addFavourite(point, false, false, false,
+							new PointsGroup(group.getName(), group.getIconName(), group.getBackgroundType().getTypeName(), group.getColor()));
+				}
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile(false);
@@ -245,6 +249,12 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
 							group = new FavoriteGroup(point);
+							PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
+							if (pointsGroup != null) {
+								group.setColor(pointsGroup.color);
+								group.setIconName(pointsGroup.iconName);
+								group.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, BackgroundType.CIRCLE));
+							}
 							flatGroups.put(group.getName(), group);
 							items.add(group);
 						}
