@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.util.Algorithms.objectEquals;
 
 import android.graphics.Rect;
@@ -49,8 +50,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		HeaderUiAdapter, MapThemeProvider {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
-
-	private static final String APP_MODE_KEY = "app_mode";
 
 	private PreviewRouteLineInfo previewRouteLineInfo;
 

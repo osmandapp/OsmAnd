@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -637,7 +638,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		}
 
 		@Override
-		public void onItemDismiss(RecyclerView.ViewHolder holder) {
+		public void onItemDismiss(@NonNull ViewHolder holder) {
 			saveQuickActions();
 		}
 

@@ -6,6 +6,7 @@ import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
@@ -91,7 +92,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	public static final String TAG = RouteOptionsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(RouteOptionsBottomSheet.class);
-	public static final String APP_MODE_KEY = "APP_MODE_KEY";
 	public static final String DIALOG_MODE_KEY = "DIALOG_MODE_KEY";
 
 	private OsmandApplication app;

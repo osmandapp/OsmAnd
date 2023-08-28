@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,6 +53,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
+import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
