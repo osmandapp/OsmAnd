@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
+import static net.osmand.plus.myplaces.MyPlacesActivity.CLOSE_ALL_FRAGMENTS_INTENT_KEY;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -462,6 +463,10 @@ public class IntentHelper {
 						clearIntent(intent);
 					}
 				}
+			}
+
+			if (intent.hasExtra(CLOSE_ALL_FRAGMENTS_INTENT_KEY) && intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS_INTENT_KEY, false)) {
+				closeAllFragments();
 			}
 
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
