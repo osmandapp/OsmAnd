@@ -248,7 +248,7 @@
     <string name="change_color">Ubah warna</string>
     <string name="edit_name">Sunting nama</string>
     <string name="animate_my_location">Animasikan posisi sendiri</string>
-    <string name="animate_my_location_desc">Nyalakan animasi pergerakan peta \'Posisi saya\' saat navigasi.</string>
+    <string name="animate_my_location_desc">Panning peta yang mulus saat bergerak. Menimbulkan sedikit penundaan.</string>
     <string name="shared_string_overview">Ikhtisar</string>
     <string name="select_street">Pilih jalan</string>
     <string name="shared_string_in_name">di %1$s</string>
