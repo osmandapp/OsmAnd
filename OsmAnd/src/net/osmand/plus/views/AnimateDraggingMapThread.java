@@ -76,7 +76,7 @@ public class AnimateDraggingMapThread {
 	private volatile boolean targetChanged;
 	private volatile int targetPixelX;
 	private volatile int targetPixelY;
-	private volatile boolean disableAnimations;
+	private volatile boolean animationsDisabled;
 
 	private float interpolation;
 
@@ -156,14 +156,14 @@ public class AnimateDraggingMapThread {
 	 */
 	public void blockAnimations() {
 		stopAnimatingSync();
-		disableAnimations = true;
+		animationsDisabled = true;
 	}
 
 	/**
 	 * Allow animations
 	 */
 	public void allowAnimations() {
-		disableAnimations = false;
+		animationsDisabled = false;
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class AnimateDraggingMapThread {
 	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
 	                        boolean pendingRotation, Float finalRotation, long movingTime,
 	                        boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		stopAnimatingSync();
@@ -381,7 +381,7 @@ public class AnimateDraggingMapThread {
 	public void startMoving(double finalLat, double finalLon, int endZoom, float endZoomFloatPart,
 	                        boolean notifyListener, boolean allowAnimationJoin,
 	                        @Nullable Runnable startAnimationCallback, @Nullable Runnable finishAnimationCallback) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		boolean wasAnimating = isAnimating();
@@ -716,7 +716,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startZooming(int zoomEnd, double zoomPart, @Nullable LatLon zoomingLatLon, boolean notifyListener) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
@@ -804,7 +804,7 @@ public class AnimateDraggingMapThread {
 	public void startDragging(float velocityX, float velocityY,
 	                          float startX, float startY, float endX, float endY,
 	                          boolean notifyListener) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		clearTargetValues();
@@ -879,7 +879,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startTilting(float elevationAngle) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		stopAnimatingSync();
@@ -981,7 +981,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(float rotate) {
-		if (disableAnimations)
+		if (animationsDisabled)
 			return;
 
 		resetMapTarget();
