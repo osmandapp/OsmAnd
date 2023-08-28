@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.configureitems.viewholders.CustomizationDescriptionViewHolder;
+import net.osmand.plus.settings.fragments.configureitems.viewholders.CustomizationItemViewHolder;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;

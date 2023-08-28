@@ -114,7 +114,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setPadding(0, 0, 0, (int) getResources().getDimension(R.dimen.dialog_button_ex_min_width));
 
-		adapter = new RearrangeMenuItemsAdapter(app, itemsHelper.getAdapterItems(), nightMode);
+		adapter = new RearrangeMenuItemsAdapter(itemsHelper.getAdapterItems(), nightMode);
 		adapter.setListener(getMenuItemsAdapterListener(recyclerView));
 		recyclerView.setAdapter(adapter);
 	}
@@ -124,7 +124,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment implements Co
 		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 
-		return new ConfigureItemsAdapterListener(touchHelper, itemsHelper, adapter);
+		return new RearrangeItemsAdapterListener(touchHelper, itemsHelper, adapter);
 	}
 
 	private void setupBottomButtons(@NonNull View view) {

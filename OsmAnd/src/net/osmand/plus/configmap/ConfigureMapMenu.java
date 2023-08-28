@@ -17,7 +17,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
@@ -247,7 +247,7 @@ public class ConfigureMapMenu {
 	                                       @NonNull ContextMenuAdapter adapter,
 	                                       @NonNull MapActivity activity,
 	                                       boolean nightMode) {
-		adapter.addItem(new ContextMenuItem(ROUTES_ID)
+		adapter.addItem(new ContextMenuItem(ROUTES_CATEGORY_ID)
 				.setCategory(true)
 				.setTitleId(R.string.rendering_category_routes, activity)
 				.setLayout(R.layout.list_group_title_with_switch));

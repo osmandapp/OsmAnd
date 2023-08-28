@@ -323,7 +323,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	}
 
 	@Override
-	public void onItemDismiss(ViewHolder holder) {
+	public void onItemDismiss(@NonNull ViewHolder holder) {
 		dragListener.onDragOrSwipeEnded(holder);
 	}
 

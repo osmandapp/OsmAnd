@@ -1,11 +1,5 @@
-package net.osmand.plus.settings.fragments.configureitems;
+package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 import static net.osmand.plus.settings.fragments.configureitems.ScreenType.CONFIGURE_MAP;
 import static net.osmand.plus.settings.fragments.configureitems.ScreenType.DRAWER;
 
@@ -27,17 +21,17 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.configureitems.ScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
 import java.util.List;
 
-class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
+public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -48,7 +42,7 @@ class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 	private final TextView title;
 	private final TextView subTitle;
 
-	CustomizationItemViewHolder(@NonNull View itemView, @Nullable CallbackWithObject<ScreenType> callback, boolean nightMode) {
+	public CustomizationItemViewHolder(@NonNull View itemView, @Nullable CallbackWithObject<ScreenType> callback, boolean nightMode) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
@@ -87,8 +81,7 @@ class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 			Iterator<ContextMenuItem> iterator = items.iterator();
 			while (iterator.hasNext()) {
 				String id = iterator.next().getId();
-				if (Algorithms.equalsToAny(id, DRAWER_DIVIDER_ID, SHOW_CATEGORY_ID, TERRAIN_CATEGORY_ID,
-						OPEN_STREET_MAP, ROUTES_ID, MAP_RENDERING_CATEGORY_ID)) {
+				if (ContextMenuUtils.isCategoryItem(id)) {
 					iterator.remove();
 				}
 			}

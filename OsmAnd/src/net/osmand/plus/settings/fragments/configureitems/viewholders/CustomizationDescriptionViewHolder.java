@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments.configureitems;
+package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -16,12 +16,12 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
-class CustomizationDescriptionViewHolder extends RecyclerView.ViewHolder {
+public class CustomizationDescriptionViewHolder extends RecyclerView.ViewHolder {
 
 	private final FragmentActivity activity;
 	private final TextView description;
 
-	CustomizationDescriptionViewHolder(@NonNull View itemView, @NonNull FragmentActivity activity) {
+	public CustomizationDescriptionViewHolder(@NonNull View itemView, @NonNull FragmentActivity activity) {
 		super(itemView);
 		this.activity = activity;
 

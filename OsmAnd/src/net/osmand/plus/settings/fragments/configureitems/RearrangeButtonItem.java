@@ -9,11 +9,11 @@ import androidx.annotation.StringRes;
 public class RearrangeButtonItem {
 
 	@StringRes
-	protected final int titleId;
+	public final int titleId;
 	@DrawableRes
-	protected final int iconId;
+	public final int iconId;
 	@Nullable
-	protected final View.OnClickListener listener;
+	public final View.OnClickListener listener;
 
 	public RearrangeButtonItem(@StringRes int titleId, @DrawableRes int iconId, @Nullable View.OnClickListener listener) {
 		this.titleId = titleId;

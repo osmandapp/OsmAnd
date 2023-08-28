@@ -3,6 +3,11 @@ package net.osmand.plus.widgets.ctxmenu;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 
 import android.text.TextUtils;
 
@@ -159,5 +164,10 @@ public class ContextMenuUtils {
 			default:
 				throw new IllegalArgumentException("Unsupported screen type");
 		}
+	}
+
+	public static boolean isCategoryItem(@Nullable String id) {
+		return Algorithms.equalsToAny(id, SHOW_CATEGORY_ID, TERRAIN_CATEGORY_ID,
+				OPEN_STREET_MAP_CATEGORY_ID, ROUTES_CATEGORY_ID, MAP_RENDERING_CATEGORY_ID);
 	}
 }

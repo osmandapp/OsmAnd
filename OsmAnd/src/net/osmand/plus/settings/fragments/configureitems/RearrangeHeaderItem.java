@@ -1,16 +1,16 @@
 package net.osmand.plus.settings.fragments.configureitems;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 public class RearrangeHeaderItem {
 
 	@StringRes
-	protected final int titleId;
-	@StringRes
-	protected final int descriptionId;
+	public final int titleId;
+	public final String description;
 
-	public RearrangeHeaderItem(@StringRes int titleId, @StringRes int descriptionId) {
+	public RearrangeHeaderItem(@StringRes int titleId, @Nullable String description) {
 		this.titleId = titleId;
-		this.descriptionId = descriptionId;
+		this.description = description;
 	}
 }

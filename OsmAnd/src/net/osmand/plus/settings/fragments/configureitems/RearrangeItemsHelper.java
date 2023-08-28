@@ -2,11 +2,7 @@ package net.osmand.plus.settings.fragments.configureitems;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
+import static net.osmand.plus.settings.fragments.configureitems.RearrangeMenuItemsAdapter.DIVIDER_TYPE;
 import static net.osmand.plus.settings.fragments.configureitems.ScreenType.CONFIGURE_MAP;
 import static net.osmand.plus.settings.fragments.configureitems.ScreenType.CONTEXT_MENU_ACTIONS;
 import static net.osmand.plus.settings.fragments.configureitems.ScreenType.DRAWER;
@@ -239,7 +235,7 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 		isChanged = true;
 	}
 
-	public void onItemMoved(@NonNull String id, int position) {
+	public void onItemMoved(@Nullable String id, int position) {
 		itemsOrder.put(id, position);
 		isChanged = true;
 	}
@@ -266,38 +262,39 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 	}
 
 	@NonNull
-	public List<RearrangeMenuAdapterItem> getAdapterItems() {
-		List<RearrangeMenuAdapterItem> items = new ArrayList<>();
-		items.add(new RearrangeMenuAdapterItem(DESCRIPTION, screenType));
+	public List<Object> getAdapterItems() {
+		List<Object> items = new ArrayList<>();
+		items.add(screenType);
 
-		List<RearrangeMenuAdapterItem> visible = getItemsForRearrangeAdapter(hiddenMenuItems, itemsOrder, false);
-		List<RearrangeMenuAdapterItem> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, itemsOrder, true);
+		List<Object> visible = getItemsForRearrangeAdapter(hiddenMenuItems, itemsOrder, false);
+		List<Object> hiddenItems = getItemsForRearrangeAdapter(hiddenMenuItems, itemsOrder, true);
 		if (screenType == CONTEXT_MENU_ACTIONS) {
 			int buttonMoreIndex = MAIN_BUTTONS_QUANTITY - 1;
 			for (int i = 0; i < visible.size(); i++) {
-				ContextMenuItem value = (ContextMenuItem) visible.get(i).value;
+				ContextMenuItem value = (ContextMenuItem) visible.get(i);
 				if (value.getId() != null && value.getId().equals(MAP_CONTEXT_MENU_MORE_ID) && i > buttonMoreIndex) {
-					RearrangeMenuAdapterItem third = visible.get(buttonMoreIndex);
+					Object third = visible.get(buttonMoreIndex);
 					visible.set(buttonMoreIndex, visible.get(i));
 					visible.set(i, third);
 					value.setOrder(buttonMoreIndex);
-					((ContextMenuItem) third.value).setOrder(i);
+					((ContextMenuItem) third).setOrder(i);
 					break;
 				}
 			}
 
-			List<RearrangeMenuAdapterItem> main = new ArrayList<>();
-			List<RearrangeMenuAdapterItem> additional = new ArrayList<>();
-			for (RearrangeMenuAdapterItem adapterItem : visible) {
-				if (mainActionItems.contains(((ContextMenuItem) adapterItem.value).getId())) {
+			List<Object> main = new ArrayList<>();
+			List<Object> additional = new ArrayList<>();
+			for (Object adapterItem : visible) {
+				if (mainActionItems.contains(((ContextMenuItem) adapterItem).getId())) {
 					main.add(adapterItem);
 				} else {
 					additional.add(adapterItem);
 				}
 			}
-			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeHeaderItem(R.string.main_actions, R.string.main_actions_descr)));
+			items.add(new RearrangeHeaderItem(R.string.main_actions, app.getString(R.string.main_actions_descr)));
 			items.addAll(main);
-			items.add(new RearrangeMenuAdapterItem(HEADER, new RearrangeHeaderItem(R.string.additional_actions, R.string.additional_actions_descr)));
+			items.add(new RearrangeHeaderItem(R.string.additional_actions,
+					app.getString(R.string.additional_actions_descr, app.getString(R.string.shared_string_actions))));
 			if (!additional.isEmpty()) {
 				items.addAll(additional);
 			}
@@ -305,39 +302,38 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 			items.addAll(visible);
 		}
 		if (!hiddenItems.isEmpty()) {
-			items.add(new RearrangeMenuAdapterItem(HEADER,
-					new RearrangeHeaderItem(R.string.shared_string_hidden,
-							screenType == CONFIGURE_MAP ? R.string.reset_items_descr : R.string.hidden_items_descr)));
+			items.add(new RearrangeHeaderItem(R.string.shared_string_hidden,
+					app.getString(screenType == CONFIGURE_MAP ? R.string.reset_items_descr : R.string.hidden_items_descr)));
 			items.addAll(hiddenItems);
 		}
-		items.add(new RearrangeMenuAdapterItem(DIVIDER, 1));
-		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeButtonItem(
+		items.add(DIVIDER_TYPE);
+		items.add(new RearrangeButtonItem(
 				R.string.reset_to_default,
 				R.drawable.ic_action_reset_to_default_dark,
-				view -> fragment.resetToDefault())));
-		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeButtonItem(
+				view -> fragment.resetToDefault()));
+		items.add(new RearrangeButtonItem(
 				R.string.copy_from_other_profile,
 				R.drawable.ic_action_copy,
-				view -> showCopyAppModeDialog())));
+				view -> showCopyAppModeDialog()));
 		return items;
 	}
 
 	@NonNull
-	public List<RearrangeMenuAdapterItem> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @NonNull Map<String, Integer> itemsOrderIds, boolean hidden) {
+	public List<Object> getItemsForRearrangeAdapter(@Nullable List<String> hiddenItemsIds, @NonNull Map<String, Integer> itemsOrderIds, boolean hidden) {
 		List<ContextMenuItem> defItems = ContextMenuUtils.getCustomizableItems(menuAdapter);
 		if (!itemsOrderIds.isEmpty()) {
 			sortByCustomOrder(defItems, itemsOrderIds);
 		}
-		List<RearrangeMenuAdapterItem> visibleItems = new ArrayList<>();
-		List<RearrangeMenuAdapterItem> hiddenItems = new ArrayList<>();
+		List<Object> visibleItems = new ArrayList<>();
+		List<Object> hiddenItems = new ArrayList<>();
 		for (ContextMenuItem item : defItems) {
 			String id = item.getId();
 			if (hiddenItemsIds != null && hiddenItemsIds.contains(id)) {
 				item.setHidden(true);
-				hiddenItems.add(new RearrangeMenuAdapterItem(MENU_ITEM, item));
+				hiddenItems.add(item);
 			} else {
 				item.setHidden(false);
-				visibleItems.add(new RearrangeMenuAdapterItem(MENU_ITEM, item));
+				visibleItems.add(item);
 			}
 		}
 		return hidden ? hiddenItems : visibleItems;

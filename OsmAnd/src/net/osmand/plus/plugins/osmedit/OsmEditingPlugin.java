@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.osmedit;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
@@ -408,7 +408,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
 	                                                   @NonNull MapActivity mapActivity,
 	                                                   @NonNull List<RenderingRuleProperty> customRules) {
-		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP)
+		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP_CATEGORY_ID)
 				.setCategory(true)
 				.setTitleId(R.string.shared_string_open_street_map, mapActivity)
 				.setLayout(R.layout.list_group_title_with_switch));

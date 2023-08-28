@@ -5,9 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.plus.R;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-public class ConfigureItemsAdapterListener implements MenuItemsAdapterListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class RearrangeItemsAdapterListener implements MenuItemsAdapterListener {
 
 	private final ItemTouchHelper touchHelper;
 	private final RearrangeItemsHelper itemsHelper;
@@ -16,7 +20,9 @@ public class ConfigureItemsAdapterListener implements MenuItemsAdapterListener {
 	private int fromPosition;
 	private int toPosition;
 
-	public ConfigureItemsAdapterListener(@NonNull ItemTouchHelper touchHelper, @NonNull RearrangeItemsHelper itemsHelper, @NonNull RearrangeMenuItemsAdapter adapter) {
+	public RearrangeItemsAdapterListener(@NonNull ItemTouchHelper touchHelper,
+	                                     @NonNull RearrangeItemsHelper itemsHelper,
+	                                     @NonNull RearrangeMenuItemsAdapter adapter) {
 		this.touchHelper = touchHelper;
 		this.itemsHelper = itemsHelper;
 		this.adapter = adapter;
@@ -31,7 +37,7 @@ public class ConfigureItemsAdapterListener implements MenuItemsAdapterListener {
 	@Override
 	public void onDragOrSwipeEnded(@NonNull ViewHolder holder) {
 		if (itemsHelper.getScreenType() == ScreenType.CONTEXT_MENU_ACTIONS) {
-			itemsHelper.setMainActionItems(adapter.getMainActionsIds());
+			itemsHelper.setMainActionItems(getMainActionsIds());
 		}
 		toPosition = holder.getAdapterPosition();
 		if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
@@ -41,8 +47,7 @@ public class ConfigureItemsAdapterListener implements MenuItemsAdapterListener {
 
 	@Override
 	public void onButtonClicked(int position) {
-		RearrangeMenuAdapterItem rearrangeItem = adapter.getItem(position);
-		Object value = rearrangeItem.value;
+		Object value = adapter.getItem(position);
 		if (value instanceof ContextMenuItem) {
 			itemsHelper.toggleItemVisibility((ContextMenuItem) value);
 			adapter.updateItems(itemsHelper.getAdapterItems());
@@ -52,5 +57,20 @@ public class ConfigureItemsAdapterListener implements MenuItemsAdapterListener {
 	@Override
 	public void onItemMoved(@Nullable String id, int position) {
 		itemsHelper.onItemMoved(id, position);
+	}
+
+	@NonNull
+	private List<String> getMainActionsIds() {
+		List<String> ids = new ArrayList<>();
+		for (Object item : adapter.getItems()) {
+			if (item instanceof ContextMenuItem) {
+				ids.add(((ContextMenuItem) item).getId());
+			} else if (item instanceof RearrangeHeaderItem
+					&& (((RearrangeHeaderItem) item).titleId == R.string.additional_actions
+					|| ((RearrangeHeaderItem) item).titleId == R.string.shared_string_hidden)) {
+				break;
+			}
+		}
+		return ids;
 	}
 }
