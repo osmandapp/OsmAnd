@@ -177,8 +177,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 			for (FavoriteGroup group : appliedItems) {
 				for (FavouritePoint point : group.getPoints()) {
-					favoritesHelper.addFavourite(point, false, false, false,
-							new PointsGroup(group.getName(), group.getIconName(), group.getBackgroundType().getTypeName(), group.getColor()));
+					favoritesHelper.addFavourite(point, false, false, false, group);
 				}
 			}
 			favoritesHelper.sortAll();

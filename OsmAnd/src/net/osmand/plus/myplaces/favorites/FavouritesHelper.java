@@ -356,7 +356,7 @@ public class FavouritesHelper {
 		return addFavourite(point, lookupAddress, sortAndSave, saveAsync, null);
 	}
 
-	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync, @Nullable PointsGroup pointsGroup) {
+	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync, @Nullable FavoriteGroup favoriteGroup) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
@@ -368,7 +368,7 @@ public class FavouritesHelper {
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 
-		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
+		FavoriteGroup group = getOrCreateGroup(point, favoriteGroup);
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
@@ -764,21 +764,27 @@ public class FavouritesHelper {
 		return getOrCreateGroup(point, null);
 	}
 
-	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point, @Nullable PointsGroup pointsGroup) {
+	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point, @Nullable FavoriteGroup appearanceFavoriteGroup) {
 		if (flatGroups.containsKey(point.getCategory())) {
-			return flatGroups.get(point.getCategory());
+			FavoriteGroup group = flatGroups.get(point.getCategory());
+			changeFavoriteGroupAppearance(group, appearanceFavoriteGroup);
+			return group;
 		}
 		FavoriteGroup group = new FavoriteGroup(point);
-		if (pointsGroup != null) {
-			group.setColor(pointsGroup.color);
-			group.setIconName(pointsGroup.iconName);
-			group.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, BackgroundType.CIRCLE));
-		}
+		changeFavoriteGroupAppearance(group, appearanceFavoriteGroup);
 
 		flatGroups.put(group.getName(), group);
 		favoriteGroups.add(group);
 
 		return group;
+	}
+
+	private void changeFavoriteGroupAppearance(@Nullable FavoriteGroup group, @Nullable FavoriteGroup appearanceFavoriteGroup) {
+		if (group != null && appearanceFavoriteGroup != null) {
+			group.setColor(appearanceFavoriteGroup.getColor());
+			group.setIconName(appearanceFavoriteGroup.getIconName());
+			group.setBackgroundType(appearanceFavoriteGroup.getBackgroundType());
+		}
 	}
 
 	private void onFavouritePropertiesUpdated() {
