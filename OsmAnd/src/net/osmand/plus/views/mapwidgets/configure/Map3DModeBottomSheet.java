@@ -1,7 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -34,8 +32,6 @@ import net.osmand.plus.utils.UiUtilities;
 public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = Map3DModeBottomSheet.class.getSimpleName();
-
-	private static final String APP_MODE_KEY = "app_mode";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -72,7 +68,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 		View view = inflater.inflate(R.layout.fragment_map_3d_mode_bottom_sheet, null);
 		LinearLayout itemsContainer = view.findViewById(R.id.items_container);
 
-		for(Map3DModeVisibility visibility : Map3DModeVisibility.values()){
+		for (Map3DModeVisibility visibility : Map3DModeVisibility.values()) {
 			itemsContainer.addView(createVisibilityItem(visibility, inflater));
 		}
 

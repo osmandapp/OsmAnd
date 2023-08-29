@@ -84,7 +84,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -373,7 +373,7 @@ public class GpxUiHelper {
 		final int layout = R.layout.gpx_track_item;
 		DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
-		List<String> modifiableGpxFileNames = CtxMenuUtils.getNames(adapter.getItems());
+		List<String> modifiableGpxFileNames = ContextMenuUtils.getNames(adapter.getItems());
 		ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title, modifiableGpxFileNames) {
 
 			@Override
@@ -709,7 +709,7 @@ public class GpxUiHelper {
 		adapter.clear();
 		fillGpxContextMenuAdapter(adapter, allGpxFiles, true);
 		dialogAdapter.clear();
-		dialogAdapter.addAll(CtxMenuUtils.getNames(adapter.getItems()));
+		dialogAdapter.addAll(ContextMenuUtils.getNames(adapter.getItems()));
 		dialogAdapter.notifyDataSetInvalidated();
 	}
 

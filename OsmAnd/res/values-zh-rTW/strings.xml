@@ -2344,7 +2344,7 @@
     <string name="quick_action_add_destination_desc">將路徑目的地在畫面上置中的按鈕，先前選取的目的地將會變成最後的中轉目的地。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">以動畫顯示自己的位置</string>
-    <string name="animate_my_location_desc">在導航時將「我的位置」開啟動畫平移。</string>
+    <string name="animate_my_location_desc">運動時平滑的地圖平移。引入輕微的延遲。</string>
     <string name="favorite_group_name">群組名稱</string>
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
@@ -5423,4 +5423,5 @@
     <string name="help_article_navigation_routing_ski_routing_name">滑雪路線</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">直線路線規劃（飛機）</string>
     <string name="help_article_navigation_routing_train_routing_name">火車路線</string>
+    <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
 </resources>

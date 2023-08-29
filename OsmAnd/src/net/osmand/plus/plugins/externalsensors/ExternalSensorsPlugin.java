@@ -8,6 +8,7 @@ import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidg
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -246,6 +247,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
+
+		MapWidget temperatureWidget = new SensorTextWidget(mapActivity, appMode, TEMPERATURE);
+		widgetsInfos.add(creator.createWidgetInfo(temperatureWidget));
 	}
 
 	@Override
@@ -262,6 +266,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId);
 			case BICYCLE_DISTANCE:
 				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId);
+			case TEMPERATURE:
+				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId);
 		}
 		return null;
 	}

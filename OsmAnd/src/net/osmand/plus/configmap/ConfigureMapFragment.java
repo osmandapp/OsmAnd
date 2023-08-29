@@ -26,7 +26,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -131,9 +131,9 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private void updateItemsData() {
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity);
-		CtxMenuUtils.removeHiddenItems(adapter);
-		CtxMenuUtils.hideExtraDividers(adapter);
-		items = CtxMenuUtils.collectItemsByCategories(adapter.getItems());
+		ContextMenuUtils.removeHiddenItems(adapter);
+		ContextMenuUtils.hideExtraDividers(adapter);
+		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
 		ContextMenuItem bottomShadow = new ContextMenuItem(null);
 		bottomShadow.setLayout(R.layout.card_bottom_divider);
 		items.put(bottomShadow, null);
@@ -154,7 +154,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	                              @NonNull List<ContextMenuItem> nestedItems) {
 		// Use the same layout for all categories views
 		category.setLayout(R.layout.list_item_expandable_category);
-		category.setDescription(CtxMenuUtils.getCategoryDescription(nestedItems));
+		category.setDescription(ContextMenuUtils.getCategoryDescription(nestedItems));
 
 		String id = category.getId();
 		int standardId = category.getTitleId();

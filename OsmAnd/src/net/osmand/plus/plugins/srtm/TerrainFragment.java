@@ -59,6 +59,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
+import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -305,7 +306,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	                                String url,
 	                                boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
-		ClickableSpan clickableSpan = new ClickableSpan() {
+		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override
 			public void onClick(@NonNull View view) {
 				FragmentActivity activity = getActivity();
@@ -314,12 +315,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					intent.setData(Uri.parse(url));
 					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
-			}
-
-			@Override
-			public void updateDrawState(@NonNull TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
 			}
 		};
 		try {

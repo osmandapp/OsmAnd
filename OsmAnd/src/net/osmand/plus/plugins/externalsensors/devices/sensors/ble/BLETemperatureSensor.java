@@ -49,7 +49,7 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.external_device_characteristic_temperature, -1, temperature));
+					new SensorDataField(R.string.external_device_characteristic_temperature, R.string.degree_celsius, temperature));
 		}
 
 		@NonNull
