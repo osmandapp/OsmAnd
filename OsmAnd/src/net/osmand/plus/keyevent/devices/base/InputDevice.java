@@ -1,6 +1,9 @@
-package net.osmand.plus.keyevent.devices;
+package net.osmand.plus.keyevent.devices.base;
 
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
+import net.osmand.plus.keyevent.devices.NoneDeviceProfile;
+import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
+import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 
 public class InputDevice {
 

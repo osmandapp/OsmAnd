@@ -36,6 +36,9 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.base.DefaultInputDeviceProfile;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -736,12 +739,21 @@ public class PluginsHelper {
 		return installed;
 	}
 
-	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
-			if (p.mapActivityKeyUp(mapActivity, keyCode))
-				return true;
+	public static void bindCommonKeyEventCommands(@NonNull InputDeviceProfile deviceProfile) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.bindCommonKeyEventCommands(deviceProfile);
 		}
-		return false;
+	}
+
+	@Nullable
+	public static KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			KeyEventCommand command = plugin.createKeyEventCommand(commandId);
+			if (command != null) {
+				return command;
+			}
+		}
+		return null;
 	}
 
 	public static boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {

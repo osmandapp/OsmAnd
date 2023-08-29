@@ -56,6 +56,12 @@ public abstract class InputDeviceProfile {
 		mappedCommands.clear();
 	}
 
+	public void requestBindCommand(int keyCode, @NonNull String commandId) {
+		if (!mappedCommands.containsKey(keyCode)) {
+			bindCommand(keyCode, commandId);
+		}
+	}
+
 	protected void bindCommand(int keyCode, @NonNull String commandId) {
 		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
 		if (command != null) {

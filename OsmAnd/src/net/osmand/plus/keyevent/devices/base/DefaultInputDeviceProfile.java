@@ -15,7 +15,7 @@ import net.osmand.plus.keyevent.commands.OpenQuickSearchDialogCommand;
 import net.osmand.plus.keyevent.commands.OpenNavigationDialogCommand;
 import net.osmand.plus.keyevent.commands.SwitchAppModeCommand;
 import net.osmand.plus.keyevent.commands.SwitchCompassCommand;
-import net.osmand.plus.keyevent.commands.TakeMediaNoteCommand;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
 
 public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
@@ -66,6 +66,7 @@ public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
 		// Other default keycodes
 		bindCommand(KeyEvent.KEYCODE_DPAD_CENTER, EmitNavigationHintCommand.ID);
 		bindCommand(KeyEvent.KEYCODE_MENU, ToggleDrawerCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_CAMERA, TakeMediaNoteCommand.ID);
+
+		PluginsHelper.bindCommonKeyEventCommands(this);
 	}
 }

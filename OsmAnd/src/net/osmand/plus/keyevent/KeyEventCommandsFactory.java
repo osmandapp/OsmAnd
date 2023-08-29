@@ -13,7 +13,7 @@ import net.osmand.plus.keyevent.commands.OpenNavigationDialogCommand;
 import net.osmand.plus.keyevent.commands.OpenQuickSearchDialogCommand;
 import net.osmand.plus.keyevent.commands.SwitchAppModeCommand;
 import net.osmand.plus.keyevent.commands.SwitchCompassCommand;
-import net.osmand.plus.keyevent.commands.TakeMediaNoteCommand;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * Factory to create new commands.
- * Use the same factory instance to speed up creation of new commands.
+ * Use the same factory instance to speed up new commands creation.
  */
 public class KeyEventCommandsFactory {
 
@@ -84,12 +84,10 @@ public class KeyEventCommandsFactory {
 				return new SwitchCompassCommand();
 			case EmitNavigationHintCommand.ID:
 				return new EmitNavigationHintCommand();
-			case TakeMediaNoteCommand.ID:
-				return new TakeMediaNoteCommand();
 			case OpenWunderLINQDatagridCommand.ID:
 				return new OpenWunderLINQDatagridCommand();
 		}
-		return null;
+		return PluginsHelper.createKeyEventCommand(commandId);
 	}
 
 }
