@@ -8,12 +8,9 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.InputDevice;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
-import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
-import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
-import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.InputDevice;
 
 import java.util.Objects;
 
@@ -27,7 +24,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	 * Use the same Commands factory to speed up new commands creation
 	 */
 	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
-	private InputDeviceProfile deviceProfile;
+	private InputDeviceProfile deviceProfile = InputDevice.NONE;
 
 	public KeyEventHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -75,32 +72,16 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			return null;
 		}
 		InputDeviceProfile inputDevice = getInputDeviceProfile();
-		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
+		return inputDevice.findCommand(keyCode);
 	}
 
-	@Nullable
+	@NonNull
 	private InputDeviceProfile getInputDeviceProfile() {
-		InputDevice inputDevice = settings.getSelectedInputDevice();
-		if (deviceProfile == null || !Objects.equals(deviceProfile.getId(), inputDevice.name())) {
-			deviceProfile = createPredefinedDeviceProfile(inputDevice);
-			if (deviceProfile != null) {
-				deviceProfile.initialize(app);
-			}
+		InputDeviceProfile selectedDevice = settings.getSelectedInputDevice();
+		if (!Objects.equals(deviceProfile, selectedDevice)) {
+			deviceProfile = selectedDevice.newInstance(app);
 		}
 		return deviceProfile;
-	}
-
-	private InputDeviceProfile createPredefinedDeviceProfile(@NonNull InputDevice inputDevice) {
-		switch (inputDevice) {
-			case KEYBOARD:
-				return new KeyboardDeviceProfile();
-			case PARROT:
-				return new ParrotDeviceProfile();
-			case WUNDER_LINQ:
-				return new WunderLINQDeviceProfile();
-			default:
-				return null;
-		}
 	}
 
 	@NonNull

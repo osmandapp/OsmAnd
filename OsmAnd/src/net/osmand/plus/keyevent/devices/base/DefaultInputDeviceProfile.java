@@ -3,6 +3,7 @@ package net.osmand.plus.keyevent.devices.base;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
@@ -21,6 +22,10 @@ public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
 
 	private StateChangedListener<Boolean> volumeButtonsPrefListener;
 
+	public DefaultInputDeviceProfile(int id, @StringRes int titleId) {
+		super(id, titleId);
+	}
+
 	@Override
 	public void initialize(@NonNull OsmandApplication app) {
 		super.initialize(app);
@@ -29,6 +34,10 @@ public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
 		settings.USE_VOLUME_BUTTONS_AS_ZOOM.addListener(volumeButtonsPrefListener);
 	}
 
+	/**
+	 * Collects default bindings, which are common for all device profiles.
+	 * Some types of devices may not support some of the keycodes.
+	 */
 	@Override
 	protected void collectCommands() {
 		// Default map zoom keycodes

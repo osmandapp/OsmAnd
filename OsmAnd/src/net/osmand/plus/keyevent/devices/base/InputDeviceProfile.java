@@ -1,7 +1,10 @@
 package net.osmand.plus.keyevent.devices.base;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyEventCommandsFactory;
@@ -17,7 +20,19 @@ public abstract class InputDeviceProfile {
 	protected OsmandSettings settings;
 	private KeyEventCommandsFactory commandsFactory;
 
+	private final int id;
+	private final int titleId;
+
 	private final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
+
+	public InputDeviceProfile(int id, @StringRes int titleId) {
+		this.id = id;
+		this.titleId = titleId;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public void initialize(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -54,5 +69,17 @@ public abstract class InputDeviceProfile {
 		return mappedCommands.get(keyCode);
 	}
 
-	public abstract String getId();
+	@NonNull
+	public String getTitle(@NonNull Context context) {
+		return context.getString(titleId);
+	}
+
+	public final InputDeviceProfile newInstance(@NonNull OsmandApplication app) {
+		InputDeviceProfile newInstance = newInstance();
+		newInstance.initialize(app);
+		return newInstance;
+	}
+
+	protected abstract InputDeviceProfile newInstance();
+
 }
