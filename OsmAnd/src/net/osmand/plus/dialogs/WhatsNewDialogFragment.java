@@ -35,7 +35,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		String appVersion = Version.getAppVersion(app);
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
-				.setMessage(getString(R.string.release_4_5))
+				.setMessage(getString(R.string.release_4_6))
 				.setNegativeButton(R.string.shared_string_close, (dialog, which) -> showSharedStorageWarningIfRequired());
 		builder.setPositiveButton(R.string.read_more, (dialog, which) -> {
 			showArticle();
