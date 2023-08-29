@@ -32,6 +32,7 @@ public class BinaryRoutePlanner {
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
+	private static final float INITIAL_PENALTY_FOR_REVERSE_DIRECTION = 500;
 	private static int TEST_ID = 46837690;
 	private static boolean TEST_SPECIFIC = false;
 
@@ -243,9 +244,10 @@ public class BinaryRoutePlanner {
 		if (segment != null) {
 			initSegment = segment.initRouteSegment(positiveDirection);
 		}
-		if (initSegment != null) {
+		if (initSegment != null && (ctx.targetX != 0 || ctx.targetY != 0)) {
 			initSegment.setParentRoute(RouteSegment.NULL);
 			// compensate first segment difference
+			// TODO is this fix correct at all?  https://github.com/osmandapp/OsmAnd/issues/14148
 			initSegment.distanceFromStart += initDistFromStart(ctx, initSegment, reverseSearchWay);
 		}
 		return initSegment;
@@ -303,11 +305,11 @@ public class BinaryRoutePlanner {
 			double diff = plusDir - ctx.config.initialDirection;
 			if (Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
 				if (startNeg != null) {
-					startNeg.distanceFromStart += 500;
+					startNeg.distanceFromStart += INITIAL_PENALTY_FOR_REVERSE_DIRECTION;
 				}
 			} else if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
 				if (startPos != null) {
-					startPos.distanceFromStart += 500;
+					startPos.distanceFromStart += INITIAL_PENALTY_FOR_REVERSE_DIRECTION;
 				}
 			}
 		}
@@ -484,7 +486,7 @@ public class BinaryRoutePlanner {
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment,
-					oppositeSegments);
+					oppositeSegments, distFromStartPlusSegmentTime);
  			if (alreadyVisited) {
  				// TODO STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
@@ -583,7 +585,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean checkIfOppositeSegmentWasVisited(RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments) {
+			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments, float distFromStart) {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
@@ -598,7 +600,7 @@ public class BinaryRoutePlanner {
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
 				frs.reverseWaySearch = reverseWaySearch;
-				frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
+				frs.distanceFromStart = opposite.distanceFromStart + distFromStart;
 				frs.distanceToEnd = 0;
 				frs.opposite = opposite;
 				graphSegments.add(frs);
@@ -623,7 +625,7 @@ public class BinaryRoutePlanner {
 		}
 		return (road.getId() << ROUTE_POINTS) + (pntId << 1) + (positive > 0 ? 1 : 0);
 	}
-
+	
 	private long calculateRoutePointId(RouteSegment segm) {
 		return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), 
 				segm.isPositive() ? segm.getSegmentStart() + 1 : segm.getSegmentStart() - 1);
