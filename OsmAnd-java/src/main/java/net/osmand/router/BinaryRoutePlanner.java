@@ -244,7 +244,7 @@ public class BinaryRoutePlanner {
 		if (segment != null) {
 			initSegment = segment.initRouteSegment(positiveDirection);
 		}
-		if (initSegment != null && (ctx.targetX != 0 || ctx.targetY != 0)) {
+		if (initSegment != null) {
 			initSegment.setParentRoute(RouteSegment.NULL);
 			// compensate first segment difference
 			// TODO is this fix correct at all?  https://github.com/osmandapp/OsmAnd/issues/14148
