@@ -99,6 +99,7 @@ public class SQLiteTileSource implements ITileSource {
 		for (TileSourceTemplate is : toFindUrl) {
 			if (is.getName().equalsIgnoreCase(sourceName)) {
 				base = is;
+				title = is.getName();
 				urlTemplate = is.getUrlTemplate();
 				expirationTimeMillis = is.getExpirationTimeMillis();
 				minZoom = is.getMinimumZoomSupported();

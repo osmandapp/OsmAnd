@@ -16,7 +16,7 @@
 		android:minHeight="@dimen/favorites_list_item_height"
 		osmand:labelText="Email"
 		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
-		osmand:secondaryColor="@color/additional_description_light">
+		osmand:secondaryColor="@color/text_color_tertiary_light">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/edit_text"
@@ -40,7 +40,7 @@
 		android:minHeight="@dimen/favorites_list_item_height"
 		osmand:labelText="@string/backup_promocode"
 		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
-		osmand:secondaryColor="@color/additional_description_light">
+		osmand:secondaryColor="@color/text_color_tertiary_light">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/promocode_edit_text"

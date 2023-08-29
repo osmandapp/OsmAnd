@@ -40,9 +40,9 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	public static class RunningCadenceData implements SensorData {
 
 		private final long timestamp;
-		private final float cadence;
+		private final int cadence;
 
-		RunningCadenceData(long timestamp, float cadence) {
+		RunningCadenceData(long timestamp, int cadence) {
 			this.timestamp = timestamp;
 			this.cadence = cadence;
 		}
@@ -51,7 +51,7 @@ public class BLERunningSensor extends BLEAbstractSensor {
 			return timestamp;
 		}
 
-		public float getCadence() {
+		public int getCadence() {
 			return cadence;
 		}
 

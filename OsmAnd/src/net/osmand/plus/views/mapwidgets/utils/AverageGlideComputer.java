@@ -1,6 +1,9 @@
 package net.osmand.plus.views.mapwidgets.utils;
 
+import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.calculateFormattedRatio;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
@@ -48,16 +51,17 @@ public class AverageGlideComputer extends AbstractComputer {
 		}
 	}
 
-	public float getAverageGlideRatio(long measuredInterval) {
+	@Nullable
+	public String getFormattedAverageGlideRatio(long measuredInterval) {
 		List<Location> locationsToUse = new ArrayList<>(locations);
 		clearExpiredLocations(locationsToUse, measuredInterval);
 
 		if (!Algorithms.isEmpty(locationsToUse)) {
 			double distance = calculateTotalDistance(locationsToUse);
 			double difference = calculateAltitudeDifference(locationsToUse);
-			return MapUtils.calculateGlideRatio(distance, difference);
+			return calculateFormattedRatio(app, distance, difference);
 		}
-		return Float.NaN;
+		return null;
 	}
 
 	private double calculateTotalDistance(@NonNull List<Location> locations) {

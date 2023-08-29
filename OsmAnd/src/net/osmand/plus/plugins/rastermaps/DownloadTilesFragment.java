@@ -488,7 +488,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
-		outState.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
+		outState.putSerializable(KEY_DOWNLOAD_TYPE, downloadType);
 	}
 
 	@Override

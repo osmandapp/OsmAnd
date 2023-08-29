@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_GPX_TRACKS_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class ShowHideGpxTracksAction extends QuickAction {
 
-
-	public static final QuickActionType TYPE = new QuickActionType(28,
+	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_GPX_TRACKS_ACTION_ID,
 			"gpx.showhide", ShowHideGpxTracksAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.show_gpx).iconRes(R.drawable.ic_action_polygom_dark).nonEditable()

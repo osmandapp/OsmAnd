@@ -889,7 +889,6 @@
     <string name="live_monitoring_time_buffer">Vremenski odbojmik</string>
     <string name="live_monitoring_tracking_interval">Interval na sledenje</string>
     <string name="live_monitoring_adress">Web addresa</string>
-    <string name="live_monitoring_adress_descr">Navedete ja veb-adresata so sintaksa na parametarot: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notifikacija</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_min_accuracy">Minimalna točnost</string>
@@ -4684,7 +4683,7 @@
     <string name="voice_prompts_timetable">Vreminja na glasovni izvestuvanja</string>
     <string name="routing_attr_freeride_policy_description">„Freeride“ i „Off-piste“ se neoficijalni pravci i premini. Tipično neguvani, neodržuvani i ne provereni navečer. Vlezete na vaš sopstven rizik.</string>
     <string name="amenity_type_shop">Prodavnica</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="quick_action_map_underlay_title">Podlogi na kartata</string>
     <string name="quick_action_map_underlay_action">Dodadete podloga</string>
     <string name="quick_action_map_source">Promenete go izvorot na kartata</string>

@@ -1,15 +1,19 @@
 package net.osmand.plus.views.controls;
 
+import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 
 public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-	private final OnItemMoveCallback itemMoveCallback;
+	private final OnItemMoveCallback moveCallback;
 
-	public ReorderItemTouchHelperCallback(OnItemMoveCallback itemMoveCallback) {
-		this.itemMoveCallback = itemMoveCallback;
+	public ReorderItemTouchHelperCallback(@NonNull OnItemMoveCallback moveCallback) {
+		this.moveCallback = moveCallback;
 	}
 
 	@Override
@@ -23,7 +27,7 @@ public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	}
 
 	@Override
-	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+	public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull ViewHolder viewHolder) {
 		if (isMovingDisabled(viewHolder)) {
 			return 0;
 		}
@@ -33,36 +37,35 @@ public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
+	public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull ViewHolder source, @NonNull ViewHolder target) {
 		int from = source.getAdapterPosition();
 		int to = target.getAdapterPosition();
-		if (from == RecyclerView.NO_POSITION || to == RecyclerView.NO_POSITION
-				|| isMovingDisabled(source) || isMovingDisabled(target)) {
+		if (from == NO_POSITION || to == NO_POSITION || isMovingDisabled(source) || isMovingDisabled(target)) {
 			return false;
 		}
-		return itemMoveCallback.onItemMove(from, to);
+		return moveCallback.onItemMove(from, to);
 	}
 
-	private boolean isMovingDisabled(RecyclerView.ViewHolder viewHolder) {
+	private boolean isMovingDisabled(@NonNull ViewHolder viewHolder) {
 		return viewHolder instanceof UnmovableItem && ((UnmovableItem) viewHolder).isMovingDisabled();
 	}
 
 	@Override
-	public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+	public void onSwiped(@NonNull ViewHolder viewHolder, int direction) {
 
 	}
 
 	@Override
-	public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+	public void clearView(@NonNull RecyclerView recyclerView, @NonNull ViewHolder viewHolder) {
 		super.clearView(recyclerView, viewHolder);
-		itemMoveCallback.onItemDismiss(viewHolder);
+		moveCallback.onItemDismiss(viewHolder);
 	}
 
 	public interface OnItemMoveCallback {
 
 		boolean onItemMove(int from, int to);
 
-		void onItemDismiss(RecyclerView.ViewHolder holder);
+		void onItemDismiss(@NonNull ViewHolder holder);
 	}
 
 	public interface UnmovableItem {

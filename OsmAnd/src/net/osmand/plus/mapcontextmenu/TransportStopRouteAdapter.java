@@ -50,7 +50,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 				bgColor = transportStopRoute.getColor(app, nightMode);
 			} else if (object instanceof String) {
 				routeRef = (String) object;
-				bgColor = ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
+				bgColor = ContextCompat.getColor(app, R.color.icon_color_default_light);
 			}
 			TextView transportStopRouteTextView = convertView.findViewById(R.id.transport_stop_route_text);
 			transportStopRouteTextView.setText(routeRef);

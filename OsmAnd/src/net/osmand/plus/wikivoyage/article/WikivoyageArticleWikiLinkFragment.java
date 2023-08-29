@@ -53,7 +53,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 		BaseBottomSheetItem wikiLinkitem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(articleUrl)
 				.setDescriptionColorId(nightMode
-						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light)
+						? R.color.icon_color_active_dark : R.color.icon_color_active_light)
 				.setTitle(getString(R.string.how_to_open_wiki_title))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
 				.create();
@@ -61,10 +61,10 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 		items.add(new TitleDividerItem(getContext()));
 
 		Drawable downloadIcon = getIcon(R.drawable.ic_action_import, nightMode
-				? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
+				? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 
 		Drawable viewOnlineIcon = getIcon(R.drawable.ic_world_globe_dark, nightMode
-				? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
+				? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 
 		BaseBottomSheetItem wikiDownloadItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.download_wikipedia_description, wikiRegion.isEmpty() ?

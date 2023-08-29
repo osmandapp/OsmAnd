@@ -1623,7 +1623,7 @@
     <string name="poi_outdoor_seating_garden">Istekohad õues: aias</string>
     <string name="poi_outdoor_seating_patio">Istekohad õues: siseõues</string>
     <string name="poi_cocktails_yes">Jah;Kokteilid</string>
-    <string name="poi_second_hand_yes">Kasutatud kaup</string>
+    <string name="poi_second_hand_yes">Jah</string>
     <string name="poi_second_hand_no">Kasutatud kaup puuduvad</string>
     <string name="poi_second_hand_only">Ainult kasutatud kaup</string>
     <string name="poi_service_parts">Varuosad</string>
@@ -4152,7 +4152,7 @@
     <string name="poi_agrarian_feed">Loomasööt</string>
     <string name="poi_generator_source_biogas">Energiaallikas: biogaas</string>
     <string name="poi_generator_type_stellarator">Generaatori tüüp: stellaraator</string>
-    <string name="poi_mattress_yes">Jah</string>
+    <string name="poi_mattress_yes">Jah;Madrats</string>
     <string name="poi_mattress_no">Ei</string>
     <string name="poi_generator_source_wave">Energiaallikas: lained</string>
     <string name="poi_furniture_office">Kontorimööbel</string>
@@ -4510,4 +4510,15 @@
     <string name="poi_waste_oil">Jääkõlid</string>
     <string name="poi_waste_drugs">Ravimid</string>
     <string name="poi_bridge_name">Silla nimi</string>
+    <string name="poi_water_filter">Vesi;Joogivesi</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_recycling_pens">Pliiatsid</string>
+    <string name="poi_recycling_marine_waste">Laevanduse jäätmed</string>
+    <string name="poi_waste_cigarettes">Sigaretid</string>
+    <string name="poi_wicket_gate">Külgvärav</string>
+    <string name="poi_waste_accepted">Vastuvõetavad jäätmed</string>
+    <string name="poi_recycling_plastic_bottle_tops">Plastpudelite korgid</string>
+    <string name="poi_waste_dog_excrement">Koera väljaheited</string>
+    <string name="poi_self_checkout_no">Iseteenindus: puudub</string>
+    <string name="poi_self_checkout">Iseteeninduskassa</string>
 </resources>

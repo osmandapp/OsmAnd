@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:background="@color/keyboard_divider_dark">
+    tools:background="@color/divider_color_dark">
 	
 	<View
 		android:layout_width="match_parent"

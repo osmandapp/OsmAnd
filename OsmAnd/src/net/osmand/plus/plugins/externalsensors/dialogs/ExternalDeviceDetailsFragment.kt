@@ -373,7 +373,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     @ColorRes
     override fun getStatusBarColorId(): Int {
         AndroidUiHelper.setStatusBarContentColor(view, nightMode)
-        return if (nightMode) R.color.status_bar_color_dark else R.color.activity_background_color_light
+        return if (nightMode) R.color.status_bar_main_dark else R.color.activity_background_color_light
     }
 
     override fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>) {

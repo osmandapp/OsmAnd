@@ -5,8 +5,8 @@
 	</item>
 	<item>
 		<shape>
-			<stroke android:color="@color/wikivoyage_active_light" android:width="1dp"/>
-			<solid android:color="@color/wikivoyage_card_bg_light"/>
+			<stroke android:color="@color/active_color_primary_light" android:width="1dp"/>
+			<solid android:color="@color/card_and_list_background_light"/>
 			<corners android:radius="3dp"/>
 		</shape>
 	</item>

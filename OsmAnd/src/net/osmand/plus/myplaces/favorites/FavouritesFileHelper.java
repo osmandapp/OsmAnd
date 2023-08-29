@@ -89,7 +89,10 @@ public class FavouritesFileHelper {
 	@NonNull
 	public Map<String, FavoriteGroup> loadInternalGroups() {
 		Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
-		loadFileGroups(getInternalFile(), groups, false);
+		File file = getInternalFile();
+		if (file.exists()) {
+			loadFileGroups(file, groups, false);
+		}
 		return groups;
 	}
 
@@ -99,7 +102,9 @@ public class FavouritesFileHelper {
 		File[] files = getFavoritesFiles();
 		if (!Algorithms.isEmpty(files)) {
 			for (File file : files) {
-				loadFileGroups(file, groups, false);
+				if (file.exists()) {
+					loadFileGroups(file, groups, false);
+				}
 			}
 		}
 		return groups;

@@ -1,5 +1,7 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.wikipedia.WikiArticleHelper.getPartialContent;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -492,7 +494,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				spannedName.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannedName.length(), SPANNED_FLAG);
 			} else {
 				int nameColor = AndroidUtils.getColorFromAttr(context, R.attr.wikivoyage_primary_text_color);
-				int countColor = ContextCompat.getColor(context, R.color.wikivoyage_secondary_text);
+				int countColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
 
 				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, displayName.length(), SPANNED_FLAG);
 				spannedName.setSpan(new ForegroundColorSpan(countColor), displayName.length() + 1,
@@ -539,7 +541,9 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			TextView description = row.findViewById(R.id.waypoint_description);
 			if (!Algorithms.isEmpty(gpxItem.description)) {
-				description.setText(gpxItem.description.replace("\n", " "));
+				String content = getPartialContent(gpxItem.description);
+				content = content != null ? content.replace("\n", " ") : null;
+				description.setText(content);
 				AndroidUiHelper.updateVisibility(description, true);
 			} else {
 				AndroidUiHelper.updateVisibility(description, false);

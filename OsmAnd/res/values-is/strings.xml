@@ -688,7 +688,7 @@
     <string name="faq_item_description">Algengar spurningar.</string>
     <string name="versions_item">Útgáfur</string>
     <string name="feedback">Umsagnir</string>
-    <string name="contact_us">Hafa samband</string>
+    <string name="shared_string_contact">Hafa samband</string>
     <string name="use_dashboard_btn">Nota stjórnborð</string>
     <string name="use_drawer_btn">Nota valmynd</string>
     <string name="live_update">Síuppfærsla</string>
@@ -3325,7 +3325,6 @@
     <string name="live_monitoring_time_buffer">Tímabiðminni</string>
     <string name="live_monitoring_tracking_interval">Millibil rakningar</string>
     <string name="live_monitoring_adress">Veffang</string>
-    <string name="live_monitoring_adress_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Tilkynning</string>
     <string name="monitoring_min_speed">Lágmarkshraði</string>
     <string name="monitoring_min_accuracy">Lágmarksnákvæmni</string>

@@ -24,7 +24,6 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 	protected OsmandApplication app;
 
 	protected WizardType wizardType;
-	protected FirstUsageActionsListener listener;
 
 	private boolean nightMode;
 
@@ -36,7 +35,6 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof FirstUsageWizardFragment) {
 			FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) targetFragment;
-			listener = fragment.getFirstUsageActionsListener();
 			wizardType = fragment.wizardType;
 			nightMode = fragment.deviceNightMode;
 		}
@@ -70,5 +68,12 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 		iconView.setImageDrawable(app.getUIUtilities().getThemedIcon(iconId));
 		item.findViewById(R.id.button).setOnClickListener(listener);
 		return item;
+	}
+
+	protected void processActionClick(@NonNull FirstUsageAction action) {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof FirstUsageActionsListener) {
+			((FirstUsageActionsListener) fragment).processActionClick(action);
+		}
 	}
 }

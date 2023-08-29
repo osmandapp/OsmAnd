@@ -160,10 +160,10 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			headers = new ArrayList<>(navigationMap.keySet());
 
 			itemGroupIcon = getIcon(R.drawable.ic_action_list_header, nightMode
-					? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light);
+					? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 			itemChildIcon = getIcon(R.drawable.ic_action_list_bullet, nightMode
-					? R.color.wikivoyage_contents_child_icon_dark
-					: R.color.wikivoyage_contents_child_icon_light);
+					? R.color.icon_color_default_dark
+					: R.color.icon_color_default_light);
 		}
 
 		private List<WikivoyageSearchResult> getArticleItems(int groupPosition) {
@@ -219,7 +219,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			txtListChild.setText(childTitle);
 			if (selected) {
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
+						? R.color.icon_color_active_dark : R.color.icon_color_active_light));
 			} else {
 				txtListChild.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
@@ -244,7 +244,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			lblListHeader.setText(groupTitle);
 			if (selected) {
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
+						? R.color.icon_color_active_dark : R.color.icon_color_active_light));
 			} else {
 				lblListHeader.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}

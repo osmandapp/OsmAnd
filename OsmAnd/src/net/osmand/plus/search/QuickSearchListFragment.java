@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -24,16 +25,19 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
+import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -45,6 +49,7 @@ import java.util.List;
 
 public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
+	protected OsmandApplication app;
 	private QuickSearchDialogFragment dialogFragment;
 	private QuickSearchListAdapter listAdapter;
 	private boolean touching;
@@ -66,27 +71,25 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		ListView listView = getListView();
-		if (listView != null) {
-			listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				}
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			}
 
-				public void onScrollStateChanged(AbsListView view, int scrollState) {
-					scrolling = (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE);
-					if (scrolling) {
-						dialogFragment.hideKeyboard();
-					}
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				scrolling = (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE);
+				if (scrolling) {
+					dialogFragment.hideKeyboard();
 				}
-			});
-		}
+			}
+		});
 	}
 
 	@Override
-	public void onListItemClick(ListView l, View view, int position, long id) {
-		int index = position - l.getHeaderViewsCount();
+	public void onListItemClick(@NonNull ListView listView, @NonNull View view, int position, long id) {
+		int index = position - listView.getHeaderViewsCount();
 		if (index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
@@ -121,31 +124,28 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		OsmandApplication app = getMyApplication();
+		app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
-		listAdapter = new QuickSearchListAdapter(getMyApplication(), getActivity());
+		listAdapter = new QuickSearchListAdapter(app, requireMapActivity());
 		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());
 		listAdapter.setUseMapCenter(dialogFragment.isUseMapCenter());
 		setListAdapter(listAdapter);
 		ListView listView = getListView();
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
-		listView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-					case MotionEvent.ACTION_POINTER_DOWN:
-						touching = true;
-						break;
-					case MotionEvent.ACTION_UP:
-					case MotionEvent.ACTION_POINTER_UP:
-					case MotionEvent.ACTION_CANCEL:
-						touching = false;
-						break;
-				}
-				return false;
+		listView.setOnTouchListener((v, event) -> {
+			switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_POINTER_DOWN:
+					touching = true;
+					break;
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_POINTER_UP:
+				case MotionEvent.ACTION_CANCEL:
+					touching = false;
+					break;
 			}
+			return false;
 		});
 	}
 
@@ -175,23 +175,51 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
-			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+			GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+			if (dialogFragment.getSearchType().isTargetPoint()) {
+				File file = gpxInfo.getFile();
+				if (file != null) {
+					selectFollowTrack(file);
+				}
+			} else {
+				showTrackMenuFragment(gpxInfo);
+			}
 		} else if (searchResult.location != null) {
-			Pair<PointDescription, Object> pointDescriptionObject =
-					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);
+			Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
 
 			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pointDescriptionObject.first, pointDescriptionObject.second);
+					searchResult.preferredZoom, pair.first, pair.second);
 		}
 	}
 
+	private void selectFollowTrack(@NonNull File file) {
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			selectFollowTrack(selectedGpxFile.getGpxFile());
+		} else {
+			GpxFileLoaderTask.loadGpxFile(file, getMapActivity(), gpxFile -> {
+				selectFollowTrack(gpxFile);
+				return true;
+			});
+		}
+	}
+
+	private void selectFollowTrack(@NonNull GPXFile gpxFile) {
+		MapRouteInfoMenu routeInfoMenu = requireMapActivity().getMapRouteInfoMenu();
+		routeInfoMenu.selectTrack(gpxFile, true);
+		routeInfoMenu.hide();
+		routeInfoMenu.showFollowTrack();
+
+		dialogFragment.dismiss();
+	}
+
 	public static void showOnMap(MapActivity mapActivity, QuickSearchDialogFragment dialogFragment,
-								 double latitude, double longitude, int zoom,
-								 @Nullable PointDescription pointDescription, Object object) {
+	                             double latitude, double longitude, int zoom,
+	                             @Nullable PointDescription pointDescription, Object object) {
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			QuickSearchType searchType = dialogFragment.getSearchType();
@@ -217,9 +245,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 	}
 
-	private void showTrackMenuFragment(GPXInfo gpxInfo) {
-		OsmandApplication app = getMyApplication();
-		MapActivity mapActivity = getMapActivity();
+	private void showTrackMenuFragment(@NonNull GPXInfo gpxInfo) {
+		MapActivity mapActivity = requireMapActivity();
 		SearchHistoryHelper.getInstance(app).addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		File file = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 		String path = file.getAbsolutePath();
@@ -228,8 +255,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	private void processIndexItemClick(@NonNull IndexItem indexItem) {
-		OsmandApplication app = getMyApplication();
-		FragmentActivity activity = getMapActivity();
+		FragmentActivity activity = requireActivity();
 		DownloadIndexesThread thread = app.getDownloadThread();
 
 		DownloadValidationManager manager = new DownloadValidationManager(app);
@@ -238,10 +264,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		} else {
 			manager.startDownload(activity, indexItem);
 		}
-	}
-
-	public MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public void updateLocation(Float heading) {
@@ -258,8 +280,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 								listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location,
 								heading.floatValue());
 					}
-				} catch (Exception e) {
-					return;
+				} catch (Exception ignored) {
 				}
 			}
 		}
@@ -275,8 +296,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			if (list.size() > 0) {
 				showResult = false;
 				if (addShadows) {
-					list.add(0, new QuickSearchTopShadowListItem(getMyApplication()));
-					list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+					list.add(0, new QuickSearchTopShadowListItem(app));
+					list.add(new QuickSearchBottomShadowListItem(app));
 				}
 			}
 			listAdapter.setListItems(list);
@@ -290,9 +311,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (listItem != null) {
 			if (listAdapter.getCount() == 0) {
 				List<QuickSearchListItem> list = new ArrayList<>();
-				list.add(new QuickSearchTopShadowListItem(getMyApplication()));
+				list.add(new QuickSearchTopShadowListItem(app));
 				list.add(listItem);
-				list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+				list.add(new QuickSearchBottomShadowListItem(app));
 				listAdapter.setListItems(list);
 			} else {
 				QuickSearchListItem lastItem = listAdapter.getItem(listAdapter.getCount() - 1);
@@ -303,5 +324,15 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				}
 			}
 		}
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 }

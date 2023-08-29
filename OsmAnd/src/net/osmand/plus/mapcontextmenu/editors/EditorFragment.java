@@ -178,7 +178,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 		int navigationIconColorId = nightMode
 				? R.color.active_buttons_and_links_text_dark
-				: R.color.description_font_and_bottom_sheet_icons;
+				: R.color.icon_color_default_light;
 		Drawable navigationIcon = getIcon(getToolbarNavigationIconId(), navigationIconColorId);
 		toolbar.setNavigationIcon(navigationIcon);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);

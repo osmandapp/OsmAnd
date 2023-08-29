@@ -1680,7 +1680,7 @@
     <string name="save_poi_without_poi_type_message">Guardar POI sem especificar o tipo\?</string>
     <string name="versions_item">Versões</string>
     <string name="feedback">Comentar</string>
-    <string name="contact_us">Email</string>
+    <string name="shared_string_contact">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="faq_item_description">Perguntas mais frequentes.</string>
@@ -3428,7 +3428,6 @@
     <string name="monitoring_min_accuracy">Precisão mínima</string>
     <string name="monitoring_min_speed">Velocidade mínima</string>
     <string name="monitoring_notification">Notificação</string>
-    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_adress">Endereço da web</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_time_buffer">Memória intermédia</string>

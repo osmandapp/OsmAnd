@@ -22,9 +22,8 @@
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
 		android:maxLines="1"
-		android:textColor="@color/ctx_menu_buttons_text_color"
+		android:textColor="@color/text_color_secondary_light"
 		android:textSize="@dimen/default_desc_text_size"
 		osmand:typeface="@string/font_roboto_regular" />
 
 </LinearLayout>
-

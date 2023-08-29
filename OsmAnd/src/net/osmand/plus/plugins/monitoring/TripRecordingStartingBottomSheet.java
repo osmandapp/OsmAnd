@@ -16,6 +16,7 @@ import com.google.android.material.slider.RangeSlider;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
@@ -56,7 +57,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 	private boolean infoExpanded;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 			TripRecordingStartingBottomSheet fragment = new TripRecordingStartingBottomSheet();
 			fragment.show(fragmentManager, TAG);
 		}

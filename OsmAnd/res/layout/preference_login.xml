@@ -72,7 +72,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
-			android:tint="@color/active_buttons_and_links_text_disabled_light"
+			android:tint="@color/text_color_secondary_light"
 			osmand:srcCompat="@drawable/ic_action_logout" />
 
 	</LinearLayout>

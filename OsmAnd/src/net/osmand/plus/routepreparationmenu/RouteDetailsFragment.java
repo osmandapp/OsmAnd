@@ -400,7 +400,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
-		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.description_font_and_bottom_sheet_icons);
+		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.icon_color_default_light);
 	}
 
 	private void buildSegmentItem(View view, TransportRouteResultSegment segment,
@@ -756,7 +756,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	@ColorInt
 	protected int getSecondaryColor() {
-		return ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
+		return ContextCompat.getColor(app, R.color.icon_color_default_light);
 	}
 
 	public void buildCollapsableRow(@NonNull View view, Spannable title, Spannable secondaryText, boolean collapsable,

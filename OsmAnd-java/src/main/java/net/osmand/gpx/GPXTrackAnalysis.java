@@ -14,7 +14,6 @@ import net.osmand.router.RouteColorize.ColorizationType;
 import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -119,7 +118,6 @@ public class GPXTrackAnalysis {
 		return getSpeedData().hasData();
 	}
 
-	
 	public PointsAttributesData<Elevation> getElevationData() {
 		return getAttributesData(POINT_ELEVATION);
 	}
@@ -140,19 +138,15 @@ public class GPXTrackAnalysis {
 
 	public <T extends PointAttribute<? extends Number>> void addPointAttribute(T attribute) {
 		String key = attribute.getKey();
-		PointsAttributesData<T> data = getAttributesData(key);
-		data.addPointAttribute(attribute);
-
-		if (!data.hasData() && attribute.hasValidValue() && totalDistance > 0) {
-			data.setHasData(true);
-		}
+		PointsAttributesData<T> attributesData = getAttributesData(key);
+		attributesData.addPointAttribute(attribute);
 	}
 
-	public static GPXTrackAnalysis prepareInformation(long filetimestamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {
-		return new GPXTrackAnalysis().prepareInformation(filetimestamp, pointsAnalyzer, new SplitSegment(segment));
+	public static GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {
+		return new GPXTrackAnalysis().prepareInformation(fileTimeStamp, pointsAnalyzer, new SplitSegment(segment));
 	}
 
-	public GPXTrackAnalysis prepareInformation(long filestamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) {
+	public GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) {
 		float[] calculations = new float[1];
 
 		long startTimeOfSingleSegment = 0;
@@ -206,33 +200,13 @@ public class GPXTrackAnalysis {
 					startTime = Math.min(startTime, time);
 					endTime = Math.max(endTime, time);
 				}
-
-				if (left == 0 && right == 0) {
-					left = point.getLongitude();
-					right = point.getLongitude();
-					top = point.getLatitude();
-					bottom = point.getLatitude();
-				} else {
-					left = Math.min(left, point.getLongitude());
-					right = Math.max(right, point.getLongitude());
-					top = Math.max(top, point.getLatitude());
-					bottom = Math.min(bottom, point.getLatitude());
-				}
+				updateBounds(point);
 
 				float speed = (float) point.speed;
 				if (speed > 0) {
 					hasSpeedInTrack = true;
 				}
-
-				double hdop = point.hdop;
-				if (hdop > 0) {
-					if (Double.isNaN(minHdop) || hdop < minHdop) {
-						minHdop = hdop;
-					}
-					if (Double.isNaN(maxHdop) || hdop > maxHdop) {
-						maxHdop = hdop;
-					}
-				}
+				updateHdop(point);
 
 				if (j > 0) {
 					WptPt prev = s.get(j - 1);
@@ -324,78 +298,60 @@ public class GPXTrackAnalysis {
 					pointsAnalyser.onAnalysePoint(this, point, distance, timeDiff, firstPoint, lastPoint);
 				}
 			}
+			processElevationDiff(s);
+		}
+		checkUnspecifiedValues(fileTimeStamp);
+		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount);
 
-			ElevationApproximator approximator = new ElevationApproximator() {
-				@Override
-				public double getPointLatitude(int index) {
-					return s.get(index).lat;
-				}
+		return this;
+	}
 
-				@Override
-				public double getPointLongitude(int index) {
-					return s.get(index).lon;
-				}
+	private void updateBounds(WptPt point) {
+		if (left == 0 && right == 0) {
+			left = point.getLongitude();
+			right = point.getLongitude();
+			top = point.getLatitude();
+			bottom = point.getLatitude();
+		} else {
+			left = Math.min(left, point.getLongitude());
+			right = Math.max(right, point.getLongitude());
+			top = Math.max(top, point.getLatitude());
+			bottom = Math.min(bottom, point.getLatitude());
+		}
+	}
 
-				@Override
-				public double getPointElevation(int index) {
-					return s.get(index).ele;
-				}
-
-				@Override
-				public int getPointsCount() {
-					return s.getNumberOfPoints();
-				}
-			};
-			approximator.approximate();
-			final double[] distances = approximator.getDistances();
-			final double[] elevations = approximator.getElevations();
-			if (distances != null && elevations != null) {
-				ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
-					@Override
-					public double getPointDistance(int index) {
-						return distances[index];
-					}
-
-					@Override
-					public double getPointElevation(int index) {
-						return elevations[index];
-					}
-
-					@Override
-					public int getPointsCount() {
-						return distances.length;
-					}
-				};
-				elevationDiffsCalc.calculateElevationDiffs();
-				diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
-				diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+	private void updateHdop(WptPt point) {
+		double hdop = point.hdop;
+		if (hdop > 0) {
+			if (Double.isNaN(minHdop) || hdop < minHdop) {
+				minHdop = hdop;
+			}
+			if (Double.isNaN(maxHdop) || hdop > maxHdop) {
+				maxHdop = hdop;
 			}
 		}
+	}
 
+	private void checkUnspecifiedValues(long fileTimeStamp) {
 		if (totalDistance < 0) {
-			getSpeedData().setHasData(false);
-			getElevationData().setHasData(false);
+			for (PointsAttributesData attributesData : pointsAttributesData.values()) {
+				attributesData.setHasData(false);
+			}
 		}
 		if (!isTimeSpecified()) {
-			startTime = filestamp;
-			endTime = filestamp;
+			startTime = fileTimeStamp;
+			endTime = fileTimeStamp;
 		}
-
-		// OUTPUT:
-		// 1. Total distance, Start time, End time
-		// 2. Time span
 		if (timeSpan == 0) {
 			timeSpan = endTime - startTime;
 		}
+	}
 
-		// 3. Time moving, if any
-		// 4. Elevation, eleUp, eleDown, if recorded
+	private void processAverageValues(float totalElevation, int elevationPoints, double totalSpeedSum, int speedCount) {
 		if (elevationPoints > 0) {
 			avgElevation = totalElevation / elevationPoints;
 		}
-
-
-		// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
+		//    Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 		//    Averaging speed values is less precise than totalDistanceMoving/timeMoving
 		if (speedCount > 0) {
 			if (timeMoving > 0) {
@@ -406,7 +362,62 @@ public class GPXTrackAnalysis {
 		} else {
 			avgSpeed = -1;
 		}
-		return this;
+	}
+
+	private void processElevationDiff(SplitSegment segment) {
+		ElevationApproximator approximator = getElevationApproximator(segment);
+		approximator.approximate();
+		final double[] distances = approximator.getDistances();
+		final double[] elevations = approximator.getElevations();
+		if (distances != null && elevations != null) {
+			ElevationDiffsCalculator elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations);
+			elevationDiffsCalc.calculateElevationDiffs();
+			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
+			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+		}
+	}
+
+	private ElevationApproximator getElevationApproximator(final SplitSegment segment) {
+		return new ElevationApproximator() {
+			@Override
+			public double getPointLatitude(int index) {
+				return segment.get(index).lat;
+			}
+
+			@Override
+			public double getPointLongitude(int index) {
+				return segment.get(index).lon;
+			}
+
+			@Override
+			public double getPointElevation(int index) {
+				return segment.get(index).ele;
+			}
+
+			@Override
+			public int getPointsCount() {
+				return segment.getNumberOfPoints();
+			}
+		};
+	}
+
+	private ElevationDiffsCalculator getElevationDiffsCalculator(final double[] distances, final double[] elevations) {
+		return new ElevationDiffsCalculator() {
+			@Override
+			public double getPointDistance(int index) {
+				return distances[index];
+			}
+
+			@Override
+			public double getPointElevation(int index) {
+				return elevations[index];
+			}
+
+			@Override
+			public int getPointsCount() {
+				return distances.length;
+			}
+		};
 	}
 
 	public interface TrackPointsAnalyser {

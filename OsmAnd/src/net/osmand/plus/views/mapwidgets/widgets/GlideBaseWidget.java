@@ -2,34 +2,31 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public abstract class GlideBaseWidget extends TextInfoWidget {
 
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
-	private static final NumberFormat FORMATTER = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	protected static final int LONG_UPDATE_INTERVAL_MILLIS = 10_000;
 
-	protected long lastUpdateTime;
+	private long lastUpdateTime;
 
 	public GlideBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		super(mapActivity, widgetType);
+		setText(NO_VALUE, null);
 		setIcons(widgetType);
 	}
 
-	protected boolean isTimeToUpdate() {
-		return System.currentTimeMillis() - lastUpdateTime > UPDATE_INTERVAL_MILLIS;
+	protected void markUpdated() {
+		lastUpdateTime = System.currentTimeMillis();
 	}
 
-	@NonNull
-	public String format(float value) {
-		String formattedValue = FORMATTER.format(value);
-		return app.getString(R.string.ltr_or_rtl_combine_via_colon_with_space, formattedValue, "1");
+	protected boolean isTimeToUpdate() {
+		return isTimeToUpdate(UPDATE_INTERVAL_MILLIS);
+	}
+
+	protected boolean isTimeToUpdate(long interval) {
+		return System.currentTimeMillis() - lastUpdateTime > interval;
 	}
 }

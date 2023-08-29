@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
+import androidx.car.app.ScreenManager;
 import androidx.car.app.navigation.NavigationManager;
 import androidx.car.app.navigation.NavigationManagerCallback;
 import androidx.car.app.navigation.model.Destination;
@@ -270,17 +271,20 @@ public class NavigationService extends Service {
 
 	/** Stops navigation. */
 	public void stopCarNavigation() {
-		if (navigationManager != null) {
-			NavigationSession carNavigationSession = getApp().getCarNavigationSession();
-			if (carNavigationSession != null) {
-				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
-				if (navigationScreen != null) {
-					navigationScreen.stopTrip();
+		getApp().runInUIThread(() -> {
+					if (navigationManager != null) {
+						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
+						if (carNavigationSession != null) {
+							NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+							if (navigationScreen != null) {
+								navigationScreen.stopTrip();
+							}
+						}
+						carNavigationActive = false;
+						navigationManager.navigationEnded();
+					}
 				}
-			}
-			carNavigationActive = false;
-			navigationManager.navigationEnded();
-		}
+		);
 	}
 
 	public void updateCarNavigation(Location currentLocation) {
@@ -292,7 +296,7 @@ public class NavigationService extends Service {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
 				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
-				if(navigationScreen == null){
+				if (navigationScreen == null) {
 					carNavigationSession.startNavigation();
 					navigationScreen = carNavigationSession.getNavigationScreen();
 				}

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -33,7 +35,10 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -172,6 +177,14 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 		}
 		builder.build(rootView, getObject());
+	}
+
+	@Override
+	protected void updateNightMode() {
+		super.updateNightMode();
+		if (builder != null) {
+			builder.setLight(!nightMode);
+		}
 	}
 
 	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
@@ -561,7 +574,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					break;
 				}
 			}
-			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
+			return open ? R.color.text_color_positive : R.color.text_color_negative;
 		} else if (shouldShowMapSize()) {
 			return R.color.icon_color_default_light;
 		}
@@ -572,8 +585,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (openingHoursInfo != null) {
-				int colorOpen = mapActivity.getColor(R.color.ctx_menu_amenity_opened_text_color);
-				int colorClosed = mapActivity.getColor(R.color.ctx_menu_amenity_closed_text_color);
+				int colorOpen = mapActivity.getColor(R.color.text_color_positive);
+				int colorClosed = mapActivity.getColor(R.color.text_color_negative);
 				return getSpannableOpeningHours(openingHoursInfo, colorOpen, colorClosed);
 			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
@@ -863,8 +876,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
-			setBgIds(R.color.app_bar_color_light, R.color.app_bar_color_dark,
-					R.color.app_bar_color_light, R.color.app_bar_color_dark);
+			setBgIds(R.color.app_bar_main_light, R.color.app_bar_main_dark,
+					R.color.app_bar_main_light, R.color.app_bar_main_dark);
 			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setTitleTextClrIds(R.color.color_white, R.color.color_white);
@@ -881,6 +894,18 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		if (mapView != null) {
 			int zoom = mapView.getCurrentRotatedTileBox().getZoom();
 			new SearchOsmandRegionTask(this, latLon, zoom).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	protected void startDownload(MapActivity mapActivity, IndexItem indexItem) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (!Version.isPaidVersion(app)
+				&& DownloadActivityType.isCountedInDownloads(indexItem)
+				&& app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
+			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+		} else {
+			new DownloadValidationManager(mapActivity.getMyApplication())
+					.startDownload(mapActivity, indexItem);
 		}
 	}
 
@@ -909,8 +934,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 						MapActivity mapActivity = getMapActivity();
 						if (indexItem != null && mapActivity != null) {
 							if (indexItem.getType() == DownloadActivityType.NORMAL_FILE) {
-								new DownloadValidationManager(mapActivity.getMyApplication())
-										.startDownload(mapActivity, indexItem);
+								startDownload(mapActivity, indexItem);
 							}
 						}
 					}

@@ -37,6 +37,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -54,6 +56,8 @@ public class Algorithms {
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
+
+	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
 
 	public static final int ZIP_FILE_SIGNATURE = 0x504b0304;
 	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;
@@ -464,7 +468,9 @@ public class Algorithms {
 	}
 
 	public static boolean isHtmlText(String text) {
-		return text.contains("</");
+		Pattern pattern = Pattern.compile(HTML_PATTERN);
+		Matcher matcher = pattern.matcher(text);
+		return matcher.find();
 	}
 
 	/**
@@ -585,6 +591,17 @@ public class Algorithms {
 		if (o != null && args != null) {
 			for (Object o1 : args) {
 				if (o.equals(o1)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean anyIsNull(Object ... args) {
+		if (args != null) {
+			for (Object o : args) {
+				if (o == null) {
 					return true;
 				}
 			}

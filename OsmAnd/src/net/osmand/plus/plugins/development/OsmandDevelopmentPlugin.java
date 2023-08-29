@@ -101,11 +101,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getHelpFileName() {
-		return "feature_articles/development_plugin.html";
-	}
-
-	@Override
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
 			Class<?> contributionVersionActivityClass = null;

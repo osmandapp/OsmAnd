@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
-import static net.osmand.plus.charts.GPXDataSetType.SENSOR_HEART_RATE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -32,8 +31,9 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
@@ -46,9 +46,8 @@ import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -370,11 +369,11 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void updateData() {
 		chartTypes.clear();
-		GPXFile gpxFile = getGpxFile();
-		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
-		gpxItem = gpxFile != null
-				? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.MEASUREMENT_TOOL)
-				: null;
+
+		GPXFile gpxFile = fragment.generateGpxFile();
+		analysis = gpxFile.getAnalysis(0);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.MEASUREMENT_TOOL);
+
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);
 		}
@@ -426,15 +425,6 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 					break;
 				}
 			}
-		}
-	}
-
-	private GPXFile getGpxFile() {
-		if (fragment.isTrackReadyToCalculate()) {
-			return editingCtx.exportGpx(GRAPH_DATA_GPX_FILE_NAME);
-		} else {
-			GpxData gpxData = editingCtx.getGpxData();
-			return gpxData != null ? gpxData.getGpxFile() : null;
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -32,7 +34,7 @@ import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 public class FavoriteAction extends QuickAction {
 
 
-	public static final QuickActionType TYPE = new QuickActionType(3,
+	public static final QuickActionType TYPE = new QuickActionType(FAVORITE_ACTION_ID,
 			"fav.add", FavoriteAction.class).
 			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_favorite).
 			category(QuickActionType.CREATE_CATEGORY);

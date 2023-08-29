@@ -59,12 +59,12 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {
-		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+		return getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 	}
 
 	@ColorInt

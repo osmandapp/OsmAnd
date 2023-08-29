@@ -3,15 +3,15 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.graphics.Color;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ColorUtilities {
 
@@ -257,7 +257,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getAppBarColorId(boolean nightMode) {
-		return nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light;
+		return nightMode ? R.color.app_bar_main_dark : R.color.app_bar_main_light;
 	}
 
 	@ColorInt
@@ -344,12 +344,12 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getStatusBarColorId(boolean nightMode) {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 	}
 
 	@ColorRes
 	public static int getStatusBarActiveColorId(boolean nightMode) {
-		return nightMode ? R.color.status_bar_active_color_dark : R.color.status_bar_active_color_light;
+		return nightMode ? R.color.status_bar_selection_color_dark : R.color.status_bar_selection_color_light;
 	}
 
 	@ColorInt
@@ -359,6 +359,16 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getLinksColorId(boolean nightMode) {
-		return nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
+		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorInt
+	public static int getOsmandIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getOsmandIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getOsmandIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 	}
 }

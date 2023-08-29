@@ -11,6 +11,7 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -357,6 +358,12 @@ public class GpxSelectionHelper {
 			}
 			if (dataItem != null) {
 				selectedFile.setJoinSegments(dataItem.isJoinSegments());
+
+				GPXTrackAnalysis analysis = dataItem.getAnalysis();
+				if (analysis != null) {
+					selectedFile.setTrackAnalysis(analysis);
+					selectedFile.modifiedTime = dataItem.getFileLastModifiedTime();
+				}
 			}
 			selectedFile.setGpxFile(gpx, app);
 		}

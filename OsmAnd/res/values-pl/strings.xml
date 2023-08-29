@@ -933,7 +933,7 @@
     <string name="precise_routing_mode_descr">Obliczanie precyzyjnych tras w nawigacji. Funkcja nadal jest dość powolna i ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny.</string>
-    <string name="download_hillshade_maps">Mapy cieniowane</string>
+    <string name="download_hillshade_maps">Mapa cieniowana</string>
     <string name="av_use_external_camera_descr">Robi zdjęcia przy użyciu aplikacji systemowej.</string>
     <string name="av_use_external_camera">Używanie aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1727,7 +1727,7 @@
     <string name="techical_articles_item">Artykuły techniczne</string>
     <string name="versions_item">Wersje</string>
     <string name="feedback">Opinie</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać POI bez podawania typu\?</string>
     <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu</string>
@@ -2610,11 +2610,11 @@
 \n</string>
     <string name="osmand_extended_description_part4">Narciarska:
 \n Wtyczka map tras narciarskich OsmAnd umożliwia oglądanie tras narciarskich o różnym stopniu trudności oraz dodatkowe informacje, takie jak lokalizacje wyciągów i innych obiektów.</string>
-    <string name="osmand_extended_description_part5">Rowerowa 
-\n • Znajdź ścieżki rowerowe na mapie 
-\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych 
-\n • Zobacz prędkość i wysokość 
-\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią 
+    <string name="osmand_extended_description_part5">Rowerowa
+\n • Znajdź ścieżki rowerowe na mapie
+\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych
+\n • Zobacz prędkość i wysokość
+\n • Opcja nagrywania GPX umożliwia nagranie podróży i udostępnianie jej
 \n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
     <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast 
 \n • Mapa pokazuje ci trasy piesze 
@@ -3399,7 +3399,6 @@
     <string name="monitoring_min_distance_descr_recommendation">Zalecenie: Ustaw przemieszczenie o 5 metrów, jeśli nie chcesz rejestrować drobnych szczegółów trasy i nie potrzebujesz dodatkowych danych o czasie odpoczynku.</string>
     <string name="live_monitoring_time_buffer">Bufor czasu</string>
     <string name="live_monitoring_tracking_interval">Częstość rejestrowania</string>
-    <string name="live_monitoring_adress_descr">Określa adres internetowy z zachowaniem składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Powiadomienie</string>
     <string name="profile_type_custom_string">Dostosowany profil</string>
     <string name="shared_string_angle_param">Kąt: %s°</string>
@@ -5257,9 +5256,9 @@
     <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
     <string name="free_favorites_backup">Darmowa kopia zapasowa ulubionych</string>
     <string name="get_osmand_cloud">Pozyskaj OsmAnd Cloud</string>
-    <string name="write_bearing_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania.</string>
+    <string name="write_bearing_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania</string>
     <string name="write_bearing">Rzeźby</string>
-    <string name="write_heading_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania.</string>
+    <string name="write_heading_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania</string>
     <string name="osmand_cloud_deleting_account_descr">W ciągu kilku chwil wszystkie dane i konto zostaną usunięte z OsmAnd Cloud.
 \n
 \nWszystkie dane na urządzeniu pozostaną nietknięte.</string>
@@ -5295,4 +5294,26 @@
     <string name="routing_attr_allow_via_ferrata_name">Trasa górska (Via ferrata)</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Urządzenia dodatkowe zostaną wylogowane z OsmAnd Cloud i utracą dostęp do płatnych funkcji.</string>
     <string name="osmand_cloud_deletion_account_warning">Twoje konto i wszystkie dane konta będą %1$s</string>
+    <string name="wheel_circumference">Obwód koła</string>
+    <string name="external_sensor_name_property_description">Nazwa czujnika</string>
+    <string name="shared_string_not_checked">Nie sprawdzono</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="local_indexes_category_terrain">Mapy terenu (3D)</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="rendering_value_caiScale_description">Włoski Klub Alpejski (Italian Alpine Club)</string>
+    <string name="shared_string_checked">Sprawdzano</string>
+    <string name="write_heading">Napisz nagłówek</string>
+    <string name="map_widget_group_glide_desc">Widżety pokazują współczynnik poślizgu do docelowego lub średni współczynnik poślizgu dla bieżącej podróży.</string>
+    <string name="map_widget_glide_average_desc">Pokazuje średni współczynnik poślizgu dla ustawionego interwału.</string>
+    <string name="average_glide_time_interval_desc">Określa interwał czasowy dla uśredniania poślizgu.</string>
+    <string name="average_glide_ratio">Średni współczynnik poślizgu</string>
+    <string name="glide_ratio_to_target">Współczynnik poślizgu do celu</string>
+    <string name="map_widget_group_glide_ratio">Współczynnik poślizgu</string>
+    <string name="help_article_map_interact_with_map_name">Współdziałanie z mapą</string>
+    <string name="help_article_map_point_layers_on_map_name">Punkty na mapie</string>
+    <string name="help_article_map_raster_maps_name">Mapy rastrowe (Online / Offline)</string>
+    <string name="map_widget_glide_target_desc">Pokazuje współczynnik poślizgu potrzebny do osiągnięcia punktu docelowego.</string>
+    <string name="help_article_map_legend_nautical_map_name">Styl mapy morskiej</string>
+    <string name="help_article_map_legend_osmand_name">Styl mapy OsmAnd</string>
+    <string name="help_article_map_track_context_menu_name">Menu kontekstowe ścieżek</string>
 </resources>

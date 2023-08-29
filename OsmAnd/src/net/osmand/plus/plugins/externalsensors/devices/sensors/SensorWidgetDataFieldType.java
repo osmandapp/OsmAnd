@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public enum SensorWidgetDataFieldType {
-	TEMPERATURE(WidgetType.WEATHER_TEMPERATURE_WIDGET),
+	TEMPERATURE(WidgetType.TEMPERATURE),
 	HEART_RATE(WidgetType.HEART_RATE),
 	BATTERY(WidgetType.BATTERY),
 	RSSI(WidgetType.RSSI),

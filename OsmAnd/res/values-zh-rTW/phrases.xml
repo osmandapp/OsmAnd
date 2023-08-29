@@ -87,7 +87,7 @@
     <string name="poi_furniture">傢俱店</string>
     <string name="poi_garden_centre">園藝中心</string>
     <string name="poi_gas">瓦斯行</string>
-    <string name="poi_shop_yes">雜貨店</string>
+    <string name="poi_shop_yes">商店</string>
     <string name="poi_gift">禮品店</string>
     <string name="poi_glaziery">玻璃行</string>
     <string name="poi_hardware">五金店</string>
@@ -4002,7 +4002,7 @@
     <string name="poi_shelter_yes">是;避難所</string>
     <string name="poi_shelter_no">避難所：否</string>
     <string name="poi_lounger">躺椅</string>
-    <string name="poi_direction_southwest">西北向</string>
+    <string name="poi_direction_southwest">西南向</string>
     <string name="poi_direction_southeast">東南向</string>
     <string name="poi_direction_northwest">西北向</string>
     <string name="poi_direction_northeast">東北向</string>

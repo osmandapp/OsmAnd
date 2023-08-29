@@ -1773,7 +1773,7 @@ POIの更新は利用できません</string>
     <string name="techical_articles_item">技術的項目</string>
     <string name="versions_item">バージョン履歴</string>
     <string name="feedback">フィードバック</string>
-    <string name="contact_us">問い合わせ先</string>
+    <string name="shared_string_contact">問い合わせ先</string>
     <string name="map_legend">マップの簡易説明</string>
     <string name="save_poi_without_poi_type_message">種類を指定せずにPOIを保存しますか？</string>
     <string name="poi_context_menu_modify_osm_change">修正をOSMに反映</string>
@@ -3318,7 +3318,6 @@ POIの更新は利用できません</string>
     <string name="live_monitoring_time_buffer">タイムバッファ</string>
     <string name="live_monitoring_tracking_interval">追跡間隔</string>
     <string name="live_monitoring_adress">ウェブアドレス</string>
-    <string name="live_monitoring_adress_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
     <string name="monitoring_notification">通知</string>
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最小精度</string>

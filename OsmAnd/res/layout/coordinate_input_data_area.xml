@@ -334,7 +334,7 @@
 		android:id="@+id/point_name_et_container"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_list_item_height"
-		tools:background="@color/route_info_bottom_view_bg_dark">
+		tools:background="@color/card_and_list_background_dark">
 
 		<net.osmand.plus.widgets.EditTextEx
 			android:id="@+id/point_name_et"

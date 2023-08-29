@@ -75,7 +75,8 @@ public class MapWidgetRegistry {
 			List<MapWidget> followingWidgets = i + 1 == widgetsToShow.size()
 					? new ArrayList<>()
 					: widgetsToShow.subList(i + 1, widgetsToShow.size());
-			widget.attachView(container, widgetPanel, i, followingWidgets);
+			int order = Math.min(container.getChildCount(), i); // Avoid IndexOutOfBoundsException
+			widget.attachView(container, widgetPanel, order, followingWidgets);
 		}
 	}
 
@@ -311,9 +312,9 @@ public class MapWidgetRegistry {
 			if (widget instanceof CoordinatesBaseWidget) {
 				return R.color.status_bar_main_dark;
 			} else if (widget instanceof StreetNameWidget) {
-				return night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
+				return night ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 			} else if (widget instanceof MapMarkersBarWidget) {
-				return R.color.status_bar_color_dark;
+				return R.color.status_bar_main_dark;
 			} else {
 				return -1;
 			}

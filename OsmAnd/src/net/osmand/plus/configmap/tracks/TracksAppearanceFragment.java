@@ -33,6 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -78,7 +79,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -138,7 +139,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = appbar.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
@@ -376,6 +377,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			((TracksFragment) fragment).updateTabsContent();
 		} else if (fragment instanceof TracksSelectionFragment) {
 			((TracksSelectionFragment) fragment).dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
+			searchTracksFragment.updateTargetFragment();
+			searchTracksFragment.dismiss();
 		}
 		dismiss();
 	}

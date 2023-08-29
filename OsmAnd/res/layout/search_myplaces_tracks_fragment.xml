@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					osmand:srcCompat="@drawable/ic_arrow_back" />
+
+				<FrameLayout
+					android:layout_width="0dp"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_weight="1">
+
+					<TextView
+						android:id="@+id/selected_count"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:text="asdasd"
+						android:textSize="@dimen/dialog_header_text_size"
+						osmand:typeface="@string/font_roboto_medium" />
+
+					<include
+						layout="@layout/search_text_layout"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent" />
+
+				</FrameLayout>
+
+				<ImageButton
+					android:id="@+id/select_all_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					osmand:srcCompat="@drawable/ic_action_select_all" />
+
+				<ImageButton
+					android:id="@+id/action_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		android:scrollbars="vertical"
+		tools:listitem="@layout/track_list_item" />
+
+</LinearLayout>

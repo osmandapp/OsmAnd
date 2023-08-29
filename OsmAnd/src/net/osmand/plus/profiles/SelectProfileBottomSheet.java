@@ -283,8 +283,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	@ColorRes
 	protected int getRouteInfoColorId() {
 		return nightMode ?
-				R.color.route_info_control_icon_color_dark :
-				R.color.route_info_control_icon_color_light;
+				R.color.icon_color_default_dark :
+				R.color.icon_color_default_light;
 	}
 
 	@Nullable

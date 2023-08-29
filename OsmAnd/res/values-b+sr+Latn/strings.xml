@@ -896,7 +896,7 @@
     <string name="save_poi_without_poi_type_message">Sačuvati tačku od interesa bez tipa\?</string>
     <string name="save_poi_too_many_uppercase">Ime sadrži previše velikih slova. Ipak nastaviti\?</string>
     <string name="map_legend">Legenda na karti</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="feedback">Povratne informacije</string>
     <string name="versions_item">Verzije</string>
     <string name="techical_articles_item">Tehnički članci</string>
@@ -3788,7 +3788,6 @@
     <string name="monitoring_min_accuracy">Minimalna preciznost</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_notification">Obaveštenje</string>
-    <string name="live_monitoring_adress_descr">Odaberite veb adreus sa sintaksom za parametre: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="metric_ton">t</string>
     <string name="cubic_m">m³</string>

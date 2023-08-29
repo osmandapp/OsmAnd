@@ -1276,7 +1276,7 @@
     <string name="techical_articles_item">Tekniset artikkelit</string>
     <string name="versions_item">Versiot</string>
     <string name="feedback">Palaute</string>
-    <string name="contact_us">Ota yhteyttä</string>
+    <string name="shared_string_contact">Ota yhteyttä</string>
     <string name="map_legend">Karttaselite</string>
     <string name="save_poi_without_poi_type_message">Haluatko todella tallentaa KP:n ilman tyyppiä\?</string>
     <string name="poi_context_menu_modify_osm_change">Muokkaa OSM muutosta</string>
@@ -3184,7 +3184,6 @@
     <string name="monitoring_min_accuracy">Vähimmäistarkkuus</string>
     <string name="monitoring_min_speed">Vähimmäisnopeus</string>
     <string name="monitoring_notification">Ilmoitus</string>
-    <string name="live_monitoring_adress_descr">Määritä verkko-osoite parametrisyntaksilla: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_adress">Web-osoite</string>
     <string name="live_monitoring_tracking_interval">Seurantaväli</string>
     <string name="live_monitoring_time_buffer">Aikapuskuri</string>

@@ -1718,7 +1718,7 @@
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verzie</string>
     <string name="feedback">Anketa</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="map_legend">Vysvetlivky k mape</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
@@ -3321,7 +3321,6 @@
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
     <string name="live_monitoring_tracking_interval">Interval stopovania</string>
     <string name="live_monitoring_adress">Webová adresa</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Oznámenie</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>

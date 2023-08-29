@@ -117,8 +117,8 @@ public class ContextMenuAdapter {
 
 	public ContextMenuListAdapter toListAdapter(@NonNull Activity activity,
 	                                            @NonNull ViewCreator viewCreator) {
-		CtxMenuUtils.removeHiddenItems(this);
-		CtxMenuUtils.hideExtraDividers(this);
+		ContextMenuUtils.removeHiddenItems(this);
+		ContextMenuUtils.hideExtraDividers(this);
 		return new ContextMenuListAdapter(activity, viewCreator, items);
 	}
 

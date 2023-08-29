@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.osmedit.quickactions;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
+import static net.osmand.plus.quickaction.QuickActionIds.ADD_POI_ACTION_ID;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -72,7 +73,7 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class AddPOIAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(13,
+	public static final QuickActionType TYPE = new QuickActionType(ADD_POI_ACTION_ID,
 			"osmpoi.add", AddPOIAction.class).
 			nameRes(R.string.quick_action_add_poi).iconRes(R.drawable.ic_action_plus_dark).
 			category(QuickActionType.CREATE_CATEGORY);

@@ -1,8 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanUtils;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -27,8 +24,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,15 +48,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private View.OnClickListener getListener(@NonNull OsmandPlugin plugin) {
 		return view -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				if (plugin instanceof SRTMPlugin) {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
-				} else {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-					AndroidUtils.startActivityIfSafe(activity, intent);
-				}
-			}
+			ChoosePlanUtils.onGetPlugin(getActivity(), plugin);
 			closeDashboard();
 		};
 	}
