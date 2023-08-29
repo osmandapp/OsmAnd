@@ -35,8 +35,6 @@ public class MyPlacesActivity extends TabActivity {
 
 
 	public static final String TAB_ID = "selected_tab_id";
-	public static final String CLOSE_ALL_FRAGMENTS_INTENT_KEY = "close_all_fragments";
-
 
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
@@ -169,10 +167,7 @@ public class MyPlacesActivity extends TabActivity {
 	                      int zoom, PointDescription pointDescription, boolean addToHistory, Object toShow) {
 		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
-
-		Bundle newBundle = new Bundle();
-		newBundle.putBoolean(CLOSE_ALL_FRAGMENTS_INTENT_KEY, true);
-		MapActivity.launchMapActivityMoveToTop(this, bundle, null, newBundle);
+		MapActivity.launchMapActivityMoveToTop(this, bundle);
 	}
 
 	public void showOsmAndCloud(@Nullable FragmentStateHolder fragment) {
