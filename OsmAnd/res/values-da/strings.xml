@@ -4198,7 +4198,7 @@
     <string name="use_native_pt">Indbygget udvikling af offentlig trafik</string>
     <string name="send_logcat_log">Send logcat-log</string>
     <string name="attribute">Egenskab</string>
-    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af tur\" på kortet).</string>
+    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af spor\" på kortet).</string>
     <string name="release_4_0">• Sikkerhedskopiering til skyen
 \n
 \n • Tilføjet nattilstand for \"Topo\" kortstil
