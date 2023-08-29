@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_temperature">Temperature</string>
+    <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
     <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
     <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>
