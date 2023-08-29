@@ -23,11 +23,7 @@ public class MapScrollCommand extends KeyEventCommand {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		MapScrollHelper scrollHelper = requireMapActivity().getMapScrollHelper();
-		if (scrollHelper.isContinuousScrolling()) {
-			scrollHelper.addDirection(direction);
-		} else {
-			scrollHelper.startScrolling(direction);
-		}
+		scrollHelper.startScrolling(direction);
 		return true;
 	}
 

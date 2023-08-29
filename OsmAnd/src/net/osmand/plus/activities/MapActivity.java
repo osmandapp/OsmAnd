@@ -261,7 +261,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app = getMyApplication();
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
-		mapScrollHelper = new MapScrollHelper(this);
+		mapScrollHelper = new MapScrollHelper(app);
 		keyEventHelper = app.getKeyEventHelper();
 		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
