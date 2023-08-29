@@ -42,6 +42,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
@@ -1140,6 +1141,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext, PLAN_ROUTE_MODE, true);
 				} else {
+					closeAllFragments();
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
 				if (editToShow) {
@@ -2245,6 +2247,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				dashboard.refreshContent(true);
 			}
 		});
+	}
+
+	public void closeAllFragments() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		for (Fragment fragment : fragmentManager.getFragments()) {
+			if (fragment instanceof DialogFragment) {
+				((DialogFragment) fragment).dismiss();
+			}
+		}
+		for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+			fragmentManager.popBackStack();
+		}
 	}
 
 	@Override
