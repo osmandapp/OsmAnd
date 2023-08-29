@@ -7,6 +7,8 @@
 	<color name="card_and_list_background_dark">#222526</color>3
 	<color name="list_background_color_light">#ffffff</color>
 	<color name="list_background_color_dark">#1E1F20</color>
+	<color name="widget_background_color_light">#FFFFFF</color>
+	<color name="widget_background_color_dark">#000000</color>
 
 	<!-- Text -->
 	<color name="text_color_primary_light">#212121</color>
