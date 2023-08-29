@@ -1,10 +1,11 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.gpx.GPXUtilities.PointsGroup;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
-import static net.osmand.gpx.GPXUtilities.PointsGroup;
 
 import android.content.Context;
 
@@ -12,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -176,8 +177,9 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				}
 			}
 			for (FavoriteGroup group : appliedItems) {
+				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
-					favoritesHelper.addFavourite(point, false, false, false, group);
+					favoritesHelper.addFavourite(point, false, false, false, pointsGroup);
 				}
 			}
 			favoritesHelper.sortAll();
@@ -247,19 +249,26 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
-							group = new FavoriteGroup(point);
-							PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
-							if (pointsGroup != null) {
-								group.setColor(pointsGroup.color);
-								group.setIconName(pointsGroup.iconName);
-								group.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, BackgroundType.CIRCLE));
-							}
+							group = createFavoriteGroup(gpxFile, point);
 							flatGroups.put(group.getName(), group);
 							items.add(group);
 						}
 						group.getPoints().add(point);
 					}
 				}
+			}
+
+			@NonNull
+			private FavoriteGroup createFavoriteGroup(@NonNull GPXFile gpxFile, @NonNull FavouritePoint point) {
+				FavoriteGroup favoriteGroup = new FavoriteGroup(point);
+
+				PointsGroup pointsGroup = gpxFile.getPointsGroups().get(favoriteGroup.getName());
+				if (pointsGroup != null) {
+					favoriteGroup.setColor(pointsGroup.color);
+					favoriteGroup.setIconName(pointsGroup.iconName);
+					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE));
+				}
+				return favoriteGroup;
 			}
 		};
 	}
