@@ -32,8 +32,8 @@ public class BinaryRoutePlanner {
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
-	private static final int TEST_ID = 46837690;
-	private static final boolean TEST_SPECIFIC = false;
+	private static int TEST_ID = 46837690;
+	private static boolean TEST_SPECIFIC = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -118,7 +118,7 @@ public class BinaryRoutePlanner {
 					if (finalSegment == null) {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} else {
-						((MultiFinalRouteSegment) finalSegment).others.add((FinalRouteSegment) segment);
+						((MultiFinalRouteSegment) finalSegment).all.add((FinalRouteSegment) segment);
 					}
 					continue;
 				} else {
@@ -1139,10 +1139,13 @@ public class BinaryRoutePlanner {
 
 		boolean reverseWaySearch;
 		RouteSegment opposite;
-		List<FinalRouteSegment> others = new ArrayList<>();
+		List<FinalRouteSegment> all = new ArrayList<>();
 
 		public MultiFinalRouteSegment(FinalRouteSegment f) {
 			super(f.getRoad(), f.getSegmentStart(), f.getSegmentEnd());
+			this.distanceFromStart = f.distanceFromStart;
+			this.distanceToEnd = f.distanceToEnd;
+			all.add(f);
 		}
 
 	}
