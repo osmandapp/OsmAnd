@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.util.Algorithms;
 
 public abstract class WarningCard extends MapBaseCard {
@@ -72,13 +73,7 @@ public abstract class WarningCard extends MapBaseCard {
 		if (!Algorithms.isEmpty(linkText)) {
 			String text = linkText;
 			SpannableString spannable = new SpannableString(text);
-			ClickableSpan clickableSpan = new ClickableSpan() {
-				@Override
-				public void updateDrawState(@NonNull TextPaint ds) {
-					ds.setColor(getActiveColor());
-					ds.setUnderlineText(false);
-				}
-
+			ClickableSpan clickableSpan = new CustomClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
 					if (getListener() != null) {
@@ -86,6 +81,12 @@ public abstract class WarningCard extends MapBaseCard {
 					} else {
 						onLinkClicked();
 					}
+				}
+
+				@Override
+				public void updateDrawState(@NonNull TextPaint ds) {
+					super.updateDrawState(ds);
+					ds.setColor(getActiveColor());
 				}
 			};
 			int startLinkIndex = this.startLinkIndex;

@@ -76,6 +76,7 @@ public class AnimateDraggingMapThread {
 	private volatile boolean targetChanged;
 	private volatile int targetPixelX;
 	private volatile int targetPixelY;
+	private volatile boolean animationsDisabled;
 
 	private float interpolation;
 
@@ -151,6 +152,21 @@ public class AnimateDraggingMapThread {
 	}
 
 	/**
+	 * Block animations
+	 */
+	public void blockAnimations() {
+		stopAnimatingSync();
+		animationsDisabled = true;
+	}
+
+	/**
+	 * Allow animations
+	 */
+	public void allowAnimations() {
+		animationsDisabled = false;
+	}
+
+	/**
 	 * Stop dragging async
 	 */
 	public void stopAnimating() {
@@ -201,6 +217,9 @@ public class AnimateDraggingMapThread {
 	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
 	                        boolean pendingRotation, Float finalRotation, long movingTime,
 	                        boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
+		if (animationsDisabled)
+			return;
+
 		stopAnimatingSync();
 
 		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -362,6 +381,9 @@ public class AnimateDraggingMapThread {
 	public void startMoving(double finalLat, double finalLon, int endZoom, float endZoomFloatPart,
 	                        boolean notifyListener, boolean allowAnimationJoin,
 	                        @Nullable Runnable startAnimationCallback, @Nullable Runnable finishAnimationCallback) {
+		if (animationsDisabled)
+			return;
+
 		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
 
@@ -694,6 +716,9 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startZooming(int zoomEnd, double zoomPart, @Nullable LatLon zoomingLatLon, boolean notifyListener) {
+		if (animationsDisabled)
+			return;
+
 		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
 		float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
 		double targetLat = tileView.getLatitude();
@@ -779,6 +804,9 @@ public class AnimateDraggingMapThread {
 	public void startDragging(float velocityX, float velocityY,
 	                          float startX, float startY, float endX, float endY,
 	                          boolean notifyListener) {
+		if (animationsDisabled)
+			return;
+
 		clearTargetValues();
 
 		MapRendererView mapRenderer = getMapRenderer();
@@ -851,6 +879,9 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startTilting(float elevationAngle) {
+		if (animationsDisabled)
+			return;
+
 		stopAnimatingSync();
 
 		float initialElevationAngle = tileView.getElevationAngle();
@@ -950,6 +981,9 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(float rotate) {
+		if (animationsDisabled)
+			return;
+
 		resetMapTarget();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {

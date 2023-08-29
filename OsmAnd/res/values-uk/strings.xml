@@ -2189,7 +2189,7 @@
     <string name="routing_attr_driving_style_safety_name">Надавати перевагу побічним шляхам</string>
     <string name="routing_attr_driving_style_speed_name">Коротші маршрути</string>
     <string name="animate_my_location">Анімувати моє положення</string>
-    <string name="animate_my_location_desc">Увімкнути пересування мапи за моїм місцем розташування під час навігації.</string>
+    <string name="animate_my_location_desc">Згладжування мап під час руху. Присутня незначна затримка.</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення під час запуску</string>
     <string name="subscribe_email_desc">Підпишіться на нашу email-розсилку про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
     <string name="do_not_show_startup_messages_desc">Не показувати відомості про знижки на застосунок та спеціальні повідомлення про місцеві події.</string>

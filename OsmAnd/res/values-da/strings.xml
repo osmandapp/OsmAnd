@@ -2358,7 +2358,7 @@
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver animeret panorering af \'Min position\' under navigation.</string>
+    <string name="animate_my_location_desc">Jævn kortpanorering, når du er i bevægelse. Medfører en lille forsinkelse.</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
@@ -4198,7 +4198,7 @@
     <string name="use_native_pt">Indbygget udvikling af offentlig trafik</string>
     <string name="send_logcat_log">Send logcat-log</string>
     <string name="attribute">Egenskab</string>
-    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af tur\" på kortet).</string>
+    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af spor\" på kortet).</string>
     <string name="release_4_0">• Sikkerhedskopiering til skyen
 \n
 \n • Tilføjet nattilstand for \"Topo\" kortstil

@@ -1,5 +1,7 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +24,6 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 
 	public static final String TAG = "SelectAppModesBottomSheetDialogFragment";
 
-	private static final String APP_MODE_KEY = "app_mode_key";
 	private static final String APP_MODE_CHANGEABLE_KEY = "app_mode_changeable_key";
 
 	private static final Log LOG = PlatformUtil.getLog(SelectAppModesBottomSheetDialogFragment.class);
