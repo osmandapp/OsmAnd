@@ -2420,7 +2420,7 @@
     <string name="poi_bathing_no">Böð: nei</string>
     <string name="poi_hackerspace">Hakkaraathvarf</string>
     <string name="poi_health_specialty_gynaecology_yes">Kvensjúkdómar</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Lyflækningar</string>
+    <string name="poi_health_specialty_internal_yes">Lyflækningar</string>
     <string name="poi_health_specialty_orthopaedics_yes">Bæklunarlækningar</string>
     <string name="poi_health_specialty_otolaryngology_yes">Háls-, nef og eyrnalækningar</string>
     <string name="poi_health_specialty_paediatrics_no">Heilsutengt sérsvið: barnasjúkdómar: nei</string>

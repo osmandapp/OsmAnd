@@ -2764,7 +2764,7 @@
     <string name="poi_counselling_type_sexual_no">Svetovanje (spolno): ne</string>
     <string name="poi_nuclear_explosion_yield">Moč eksplozije</string>
     <string name="poi_hackerspace">Heklab</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interna medicina</string>
+    <string name="poi_health_specialty_internal_yes">Interna medicina</string>
     <string name="poi_health_specialty_paediatrics_no">Zdravstvena specializacija: pediatrija: ne</string>
     <string name="poi_health_specialty_trauma_yes">Travmatologija</string>
     <string name="poi_health_specialty_osteopathy_yes">Osteopatija</string>

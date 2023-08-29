@@ -2954,7 +2954,7 @@
     <string name="poi_health_specialty_general_yes">Médico xeral</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
     <string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringoloxía</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatría</string>

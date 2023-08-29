@@ -2392,7 +2392,7 @@
     <string name="poi_health_specialty_general_yes">Allmänläkare</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologi</string>
     <string name="poi_health_specialty_gynaecology_yes">Gynekologi</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Invärtesmedicin</string>
+    <string name="poi_health_specialty_internal_yes">Invärtesmedicin</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedi</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngologi</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatrik</string>

@@ -2534,7 +2534,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Pediatri</string>
     <string name="poi_health_specialty_otolaryngology_yes">Kulak burun boğaz</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedi</string>
-    <string name="poi_health_specialty_internal_medicine_yes">İç hastalıkları</string>
+    <string name="poi_health_specialty_internal_yes">İç hastalıkları</string>
     <string name="poi_health_specialty_gynaecology_yes">Jinekoloji</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloji</string>
     <string name="poi_health_specialty_general_yes">Pratisyen doktor</string>

@@ -2498,7 +2498,7 @@
     <string name="poi_cafeteria">Cafeteria</string>
     <string name="poi_aerialway_length">Llargària</string>
     <string name="poi_health_specialty_general_yes">Metge de capçalera</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringologia</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestesiologia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatria</string>

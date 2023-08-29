@@ -2714,7 +2714,7 @@
     <string name="poi_fortification_type_hill_fort">Fortificatie type: heuvelfort</string>
     <string name="poi_fortification_type_limes">Fortificatie type: limes</string>
     <string name="poi_fitness_station">Fitness accomodatie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interne geneeskunde</string>
+    <string name="poi_health_specialty_internal_yes">Interne geneeskunde</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radiotherapie</string>
     <string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereologie</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anesthesie</string>

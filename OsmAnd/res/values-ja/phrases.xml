@@ -1471,7 +1471,7 @@
     <string name="poi_health_specialty_general_yes">総合診療医</string>
     <string name="poi_health_specialty_ophthalmology_yes">眼科</string>
     <string name="poi_health_specialty_gynaecology_yes">婦人科</string>
-    <string name="poi_health_specialty_internal_medicine_yes">内科</string>
+    <string name="poi_health_specialty_internal_yes">内科</string>
     <string name="poi_health_specialty_orthopaedics_yes">整形外科</string>
     <string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科</string>
     <string name="poi_health_specialty_paediatrics_yes">小児科</string>

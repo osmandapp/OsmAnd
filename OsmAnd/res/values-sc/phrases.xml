@@ -1694,7 +1694,7 @@
     <string name="poi_health_specialty_general_yes">Dutore generale</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Meighina interna</string>
+    <string name="poi_health_specialty_internal_yes">Meighina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringoiatria</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>

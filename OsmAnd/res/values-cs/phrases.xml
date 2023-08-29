@@ -2243,7 +2243,7 @@
     <string name="poi_health_specialty_general_yes">Praktický lékař</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
     <string name="poi_health_specialty_gynaecology_yes">Gynekologie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interní lékařství</string>
+    <string name="poi_health_specialty_internal_yes">Interní lékařství</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngologie</string>
     <string name="poi_health_specialty_paediatrics_yes">Dětské lékařství</string>

@@ -1719,7 +1719,7 @@
     <string name="poi_health_specialty_gynaecology_yes">Гінекологія</string>
     <string name="poi_health_facility_type_dispensary">Вид медустанови: видача лікарських засобів</string>
     <string name="poi_payment_american_express_no">Картки American Express (AMEX) не приймаються</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Внутрішні хвороби</string>
+    <string name="poi_health_specialty_internal_yes">Внутрішні хвороби</string>
     <string name="poi_health_facility_type_first_aid">Вид медустанови: станція першої допомоги</string>
     <string name="poi_payment_diners_club_yes">Diners Club</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ортопедія</string>

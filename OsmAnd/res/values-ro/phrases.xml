@@ -2402,7 +2402,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Pediatrie</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringologie</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicină internă</string>
+    <string name="poi_health_specialty_internal_yes">Medicină internă</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologie</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
     <string name="poi_health_specialty_general_yes">Medic generalist</string>

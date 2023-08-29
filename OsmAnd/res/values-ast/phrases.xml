@@ -2023,7 +2023,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Paediatrics</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngology</string>
     <string name="poi_health_specialty_orthopaedics_yes">Orthopaedics</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Internal medicine</string>
+    <string name="poi_health_specialty_internal_yes">Internal medicine</string>
     <string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
     <string name="poi_health_specialty_general_yes">General practitioner</string>

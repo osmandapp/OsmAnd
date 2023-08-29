@@ -2428,7 +2428,7 @@
     <string name="poi_health_specialty_general_yes">Háziorvos</string>
     <string name="poi_health_specialty_ophthalmology_yes">Szemészet</string>
     <string name="poi_health_specialty_gynaecology_yes">Nőgyógyászat</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Belgyógyászat</string>
+    <string name="poi_health_specialty_internal_yes">Belgyógyászat</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopédia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Fül-orr-gégészet</string>
     <string name="poi_health_specialty_paediatrics_yes">Gyermekgyógyászat</string>

@@ -2628,7 +2628,7 @@
     <string name="poi_health_specialty_general_yes">Општа пракса</string>
     <string name="poi_health_specialty_ophthalmology_yes">Офтамологија</string>
     <string name="poi_health_specialty_gynaecology_yes">Гинекологија</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Интерно</string>
+    <string name="poi_health_specialty_internal_yes">Интерно</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ортопедија</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оториноларингологија</string>
     <string name="poi_health_specialty_paediatrics_yes">Педијатрија</string>

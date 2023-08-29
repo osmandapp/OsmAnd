@@ -2249,7 +2249,7 @@
     <string name="poi_health_specialty_general_yes">Сямейная медыцына</string>
     <string name="poi_health_specialty_ophthalmology_yes">Афтальмалогія</string>
     <string name="poi_health_specialty_gynaecology_yes">Гінэкалогія</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Унутраныя хваробы</string>
+    <string name="poi_health_specialty_internal_yes">Унутраныя хваробы</string>
     <string name="poi_health_specialty_orthopaedics_yes">Артапедыя</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оталарынгалогія</string>
     <string name="poi_health_specialty_paediatrics_yes">Педыятрыя</string>
