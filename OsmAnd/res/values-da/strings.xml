@@ -2358,7 +2358,7 @@
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver animeret panorering af \'Min position\' under navigation.</string>
+    <string name="animate_my_location_desc">Jævn kortpanorering, når du er i bevægelse. Medfører en lille forsinkelse.</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
@@ -3414,7 +3414,6 @@
 \nVed aktivering vil OsmAnd bruge systemets indstilling for timeout.</string>
     <string name="shared_string_octagon">Oktagon</string>
     <string name="multimedia_photo_play_sound">Kameraets lukkelyd</string>
-    <string name="live_monitoring_adress_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Indstil 5 meters forskydning, hvis du ikke ønsker at registrere mindre detaljer om din rute og ikke har brug for yderligere data om din hvileperiode.</string>
     <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Hvileperioder registreres slet ikke eller kun som et point hver. Mindre bevægelser (f.eks. til vejsiden for at markere et muligt sving på din tur) kan blive filtreret fra. Bemærk, at din fil vil indeholde færre oplysninger til efterbehandling og samtidig muligvis gemme GPS-artefakter forårsaget af dårlig modtagelse eller chipset-effekter.</string>
     <string name="monitoring_min_distance_descr">Hvis du slår dette filter til, kan du undgå yderligere dataregistrering, når der næsten ikke registreres bevægelse. Det forbedrer også den rumlige fremtoning af spor uden yderligere behandling.</string>
@@ -4199,7 +4198,7 @@
     <string name="use_native_pt">Indbygget udvikling af offentlig trafik</string>
     <string name="send_logcat_log">Send logcat-log</string>
     <string name="attribute">Egenskab</string>
-    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af tur\" på kortet).</string>
+    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af spor\" på kortet).</string>
     <string name="release_4_0">• Sikkerhedskopiering til skyen
 \n
 \n • Tilføjet nattilstand for \"Topo\" kortstil
@@ -5438,4 +5437,5 @@
     <string name="copy_build_version">Kopiér build-version</string>
     <string name="most_viewed">Mest sete</string>
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
+    <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

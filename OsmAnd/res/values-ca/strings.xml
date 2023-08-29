@@ -3674,7 +3674,6 @@
     <string name="monitoring_min_accuracy">Precisió mínima</string>
     <string name="monitoring_min_speed">Velocitat mínima</string>
     <string name="monitoring_notification">Notificació</string>
-    <string name="live_monitoring_adress_descr">Especifiqueu l\'adreça web amb la sintaxi de paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitud={4}, velocitat={5}, càrrega={6}.</string>
     <string name="live_monitoring_adress">Adreça web</string>
     <string name="sort_last_modified">Darrera modificació</string>
     <string name="sort_name_descending">Nom: Z - A</string>

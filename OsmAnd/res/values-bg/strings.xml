@@ -271,7 +271,8 @@
     <string name="map_widget_view_direction">Посока на погледа</string>
     <string name="map_widget_transparent">Прозрачни приспособления</string>
     <string name="bg_service_sleep_mode_off">Работа\n във фонов режим</string>
-    <string name="bg_service_sleep_mode_on">Изключване на\n фоновия режим</string>
+    <string name="bg_service_sleep_mode_on">Изключване на
+\nфоновия режим</string>
     <string name="int_continuosly">Без прекъсване</string>
     <string name="screen_is_locked">За да отключите екрана натиснете закл. икона</string>
     <string name="map_widget_top_text">Име на улица</string>
@@ -1120,7 +1121,7 @@
     <string name="pause_navigation">Пауза на навигацията</string>
     <string name="rendering_attr_subwayMode_name">Подземен транспорт</string>
     <string name="keep_navigation_service">Запази</string>
-    <string name="stop_navigation_service">Изключване</string>
+    <string name="stop_navigation_service">Спиране</string>
     <string name="local_map_names">Местни имена</string>
     <string name="lang_sw">Суахили</string>
     <string name="lang_he">Иврит</string>
@@ -2626,7 +2627,6 @@
     <string name="subscription_expired_title">Абонаментът за OsmAnd Live е изтекъл</string>
     <string name="subscription_paused_title">Абонаментът за OsmAnd Live е временно спрян</string>
     <string name="app_mode_public_transport">Обществен транспорт</string>
-    <string name="live_monitoring_adress_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, направление={6}.</string>
     <string name="shared_string_options">Настройки</string>
     <string name="shared_string_overview">Преглед</string>
     <string name="live_monitoring_max_interval_to_send">Временен буфер за проследяване в реално време</string>

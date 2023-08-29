@@ -3777,7 +3777,6 @@
     <string name="monitoring_min_accuracy">Minimální přesnost</string>
     <string name="monitoring_min_speed">Minimální rychlost</string>
     <string name="monitoring_notification">Oznámení</string>
-    <string name="live_monitoring_adress_descr">Zadejte webovou adresu se syntaxí parametrů: zeměpisná šířka={0}, zeměpisná délka={1}, časové razítko={2}, přesnost={3}, výška={4}, rychlost={5}, směr={6}.</string>
     <string name="live_monitoring_adress">Webová adresa</string>
     <string name="live_monitoring_tracking_interval">Interval záznamu</string>
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
@@ -5347,4 +5346,15 @@
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
     <string name="map_widget_group_glide_desc">Widgety zobrazují poměr klouzavosti k cíli nebo průměrný poměr klouzavosti pro aktuální let.</string>
+    <string name="average_glide_time_interval_desc">Zadejte časový interval pro průměrování klouzání.</string>
+    <string name="average_glide_ratio">Průměrný klouzavý poměr</string>
+    <string name="live_monitoring_adress_descr">Zadejte webovou adresu pomocí syntaxe parametrů: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="glide_ratio_to_target">Klouzavý poměr k cíli</string>
+    <string name="map_widget_group_glide_ratio">Klouzavý poměr</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd styl mapy</string>
+    <string name="help_article_map_legend_ski_map_name">Lyžařský styl mapy</string>
+    <string name="help_article_map_interact_with_map_name">Interakce s mapou</string>
+    <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
+    <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
+    <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
 </resources>

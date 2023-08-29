@@ -3325,7 +3325,6 @@
     <string name="select_nav_icon_descr">Εμφανιζόμενο εικονίδιο κατά την πλοήγηση ή τη μετακίνηση.</string>
     <string name="select_map_icon_descr">Εμφανιζόμενο εικονίδιο σε ακινησία.</string>
     <string name="live_monitoring_adress">Ηλ. διεύθυνση</string>
-    <string name="live_monitoring_adress_descr">Καθορίστε την ηλ. διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Ειδοποίηση</string>
     <string name="monitoring_min_speed">Ελάχιστη ταχύτητα</string>
     <string name="monitoring_min_accuracy">Ελάχιστη ακρίβεια</string>

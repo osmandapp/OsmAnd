@@ -353,7 +353,7 @@
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
-    <string name="routing_attr_avoid_toll_name">Sin cabinas de peajes</string>
+    <string name="routing_attr_avoid_toll_name">Sin peajes</string>
     <string name="routing_attr_avoid_toll_description">Evitar caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Sólo caminos pavimentados</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
@@ -2174,7 +2174,7 @@
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
-    <string name="shared_string_slope">Pendiente</string>
+    <string name="shared_string_slope">Pendientes</string>
     <string name="lang_ber">Bereber (amazig)</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
@@ -2350,7 +2350,7 @@
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="animate_my_location">Ubicación propia animada</string>
-    <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
+    <string name="animate_my_location_desc">Desplazamiento suave del mapa al moverse con la navegación. Añade un ligero retraso.</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
@@ -3139,7 +3139,7 @@
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
     <string name="map_during_navigation_info">Mapa al navegar</string>
-    <string name="map_during_navigation">Mapa durante la navegación</string>
+    <string name="map_during_navigation">Mapa al navegar</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
@@ -3333,7 +3333,6 @@
     <string name="live_monitoring_time_buffer">Memoria intermedia</string>
     <string name="live_monitoring_tracking_interval">Intervalo de seguimiento</string>
     <string name="live_monitoring_adress">Dirección web</string>
-    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notificación</string>
     <string name="monitoring_min_speed">Velocidad mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
@@ -5422,7 +5421,7 @@
     <string name="help_article_widgets_nav_widgets_name">Widgets de navegación</string>
     <string name="shared_string_setup">Configuración</string>
     <string name="user_guide">Guía del usuario</string>
-    <string name="help_article_widgets_radius_ruler_name">Regla radial y regla</string>
+    <string name="help_article_widgets_radius_ruler_name">Regla radial y brújula</string>
     <string name="telegram_chats_descr">Únete a uno de nuestros chats locales de Telegram.</string>
     <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Discusiones de GitHub</string>
@@ -5448,4 +5447,5 @@
     <string name="help_article_widgets_map_buttons_name">Botones del mapa</string>
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

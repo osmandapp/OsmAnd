@@ -4511,7 +4511,6 @@
     <string name="monitoring_min_speed_descr_remark">Opomba: preverjanje hitrosti &gt; 0: večina GPS čipov oddaja vrednosti hitrosti samo, če algoritem ugotovi, da se gibaš, drugače pa ne oddaja vrednosti hitrosti. Zato uporaba nastavitve &gt; 0 v tem filtru v nekem smislu uporablja zaznavanje gibanja nabora čipov GPS. Toda tudi če ni filtrirana tukaj pri snemanju, še vedno uporabljamo to funkcijo v naši analizi GPX za določitev popravljene razdalje, to pomeni, da je vrednost, prikazana v tem polju, razdalja, zabeležena med gibanjem.</string>
     <string name="shared_preference">V skupni rabi</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Stranski učinek: zaradi filtriranja po natančnosti, lahko točke popolnoma manjkajo, npr. pod mostovi, pod drevesi, med visokimi zgradbami ali ob določenih vremenskih razmerah.</string>
-    <string name="live_monitoring_adress_descr">Za navajanje spletnih naslovov je treba uporabiti določeno skladnjo za parametre: ZŠ (β)={0}, ZD (λ)={1}, čas={2}, hdop={3}, nadmorska višina={4}, hitrost={5}, usmeritev={6}.</string>
     <string name="quick_action_terrain_descr">Gumb za prikaz ali skrivanje sloja terena na zemljevidu.</string>
     <string name="download_slope_maps">Nakloni</string>
     <string name="n_items_of_z">%1$s od %2$s</string>

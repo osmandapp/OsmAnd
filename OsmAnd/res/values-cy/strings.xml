@@ -3252,7 +3252,6 @@
     <string name="monitoring_min_accuracy_descr">Bydd hyn yn cofnodi pwyntiau a fesurir gyda\'r isafswm cywirdeb yn unig (mewn metrau / troedfeddi, fel yr adroddwyd gan Android ar gyfer eich chipset). Cywirdeb yw agosrwydd mesuriadau i\'r gwir sefyllfa, ac nid yw\'n uniongyrchol gysylltiedig â manwl gywirdeb, sef gwasgariad mesuriadau dro ar ôl tro.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Argymhelliad: Mae\'n anodd rhagweld beth fydd yn cael ei gofnodi a beth na fydd, efallai mai\'r peth gorau fyddai diffodd yr hidlydd hwn.</string>
     <string name="monitoring_min_accuracy_descr_remark">Sylw: Pe bai GPS wedi bod i ffwrdd yn union cyn recordiad, efallai y bydd cywirdeb y pwynt cyntaf a fesurwyd yn llai, felly yn ein cod efallai y byddwn am aros eiliad neu ddwy cyn cofnodi pwynt (neu gofnodi\'r gorau o 3 phwynt yn olynol, ac ati .), ond nid yw hyn wedi ei weithredu eto.</string>
-    <string name="live_monitoring_adress_descr">Nodwch y cyfeiriad gwe gyda chystrawen y paramedr: lat={0}, lon={1}, timestamp={2}, hdop={3}, height={4}, speed={5}, bearing={6}.</string>
     <string name="multimedia_photo_play_sound">Sain caead camera</string>
     <string name="monitoring_min_distance_descr_recommendation">Argymhelliad: Gall gosodiad o 5 metr weithio’n dda i chi os nad oes angen i chi gasglu manylion yn fanylach na hynny, ac nad ydych am gipio data’n benodol tra byddwch yn gorffwys.</string>
     <string name="osm_authorization_success">Mae\'r awdurdodiad yn llwyddiannus</string>

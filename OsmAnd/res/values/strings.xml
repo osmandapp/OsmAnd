@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperature</string>
     <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
@@ -1916,7 +1916,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_adress">Web address</string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notification</string>
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
@@ -2813,7 +2812,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
     <string name="animate_my_location">Animate own position</string>
-    <string name="animate_my_location_desc">Turn on animated map panning of \'My position\' during navigation.</string>
+    <string name="animate_my_location_desc">Smooth map panning when in motion. Introduces slight delay.</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>

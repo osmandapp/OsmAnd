@@ -2269,7 +2269,7 @@
     <string name="select_street">Sélectionner la rue</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Aperçu</string>
-    <string name="animate_my_location_desc">Activer le suivi progressif de \'Ma position\' sur la carte pendant le guidage.</string>
+    <string name="animate_my_location_desc">Défilement progressif de la carte lors du déplacement (introduit un petit délai d\'actualisation de l\'affichage).</string>
     <string name="animate_my_location">Animer ma position</string>
     <string name="osmand_plus_extended_description_part6">Fonctions adaptées aux cyclistes et piétons
 \n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables ; idéal pour les activités de plein air
@@ -3331,7 +3331,6 @@
     <string name="search_offline_geo_error">Impossible d\'analyser le geo intent \'%s\'.</string>
     <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaine vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
     <string name="live_monitoring_time_buffer">Durée de la mémoire tampon</string>
-    <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe suivante pour les paramètres : lat = {0}, lon = {1}, horodatage = {2}, hdop = {3}, altitude = {4}, vitesse = {5}, direction = {6}.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommandation : il est difficile de prédire ce qui sera enregistré et ce qui ne le sera pas, il peut être préférable de désactiver ce filtre.</string>
     <string name="monitoring_min_distance_descr">Activer ce filtre limite l\'enregistrement de points en double lorsque les déplacements sont très lents, donnant une apparence plus régulière aux traces.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : paramétrez 5 mètres si vous ne souhaitez pas enregistrer les petits détails de votre itinéraire et que vous ne souhaitez pas non plus d\'informations supplémentaires sur vos pauses.</string>
@@ -5424,4 +5423,5 @@
     <string name="help_article_widgets_name">Gadgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Gadgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
+    <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

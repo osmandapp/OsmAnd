@@ -3181,7 +3181,6 @@
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_speed">Velocidá mínima</string>
     <string name="monitoring_notification">Avisu</string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_adress">Direición web</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>

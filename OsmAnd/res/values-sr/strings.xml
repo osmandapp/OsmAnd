@@ -3331,7 +3331,6 @@
     <string name="live_monitoring_time_buffer">Временско међускладиште</string>
     <string name="live_monitoring_tracking_interval">Међувреме праћења</string>
     <string name="live_monitoring_adress">Веб адреса</string>
-    <string name="live_monitoring_adress_descr">Одаберите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Обавештење</string>
     <string name="monitoring_min_speed">Најмања брзина</string>
     <string name="monitoring_min_accuracy">Најмања прецизност</string>
@@ -5227,4 +5226,5 @@
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>
+    <string name="live_monitoring_adress_descr">Одредите адресу веба са правилима израза за одреднице: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

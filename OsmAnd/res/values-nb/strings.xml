@@ -3643,7 +3643,6 @@
     <string name="monitoring_min_distance_descr">Ved å slå på dette filteret kan du unngå ytterligere dataopptak når bevegelse nesten ikke oppdages. Det forbedrer også det romlige utseendet til spor uten ytterligere behandling.</string>
     <string name="monitoring_min_distance_descr_side_effect">Bivirkning: Pauseperioder tas ikke opp i det hele tatt eller kun som ett punkt. Mindre bevegelser (f.eks. til siden av veien for å markere en mulig avkjøring i turen din) kan bli filtrert ut. Merk at filen din vil inneholde mindre informasjon for etterbehandling, og kan samtidig potensielt lagre GPS-artefakter forårsaket av dårlig mottak eller brikkesetteffekter.</string>
     <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Still inn 5 meters forskyvning hvis du ikke vil ta opp mindre detaljer om ruten din, og ikke trenger ytterligere data om pauseperioden.</string>
-    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="multimedia_rec_split_title">Opptaksoppdeling</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-intensjon «%s».</string>
     <string name="osm_authorization_success">Autorisert</string>
@@ -5371,4 +5370,5 @@
     <string name="free_versions">Gratisversjoner</string>
     <string name="about_osmand">Om OsmAnd</string>
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
+    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

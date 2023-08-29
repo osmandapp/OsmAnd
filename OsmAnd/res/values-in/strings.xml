@@ -248,7 +248,7 @@
     <string name="change_color">Ubah warna</string>
     <string name="edit_name">Sunting nama</string>
     <string name="animate_my_location">Animasikan posisi sendiri</string>
-    <string name="animate_my_location_desc">Nyalakan animasi pergerakan peta \'Posisi saya\' saat navigasi.</string>
+    <string name="animate_my_location_desc">Panning peta yang mulus saat bergerak. Menimbulkan sedikit penundaan.</string>
     <string name="shared_string_overview">Ikhtisar</string>
     <string name="select_street">Pilih jalan</string>
     <string name="shared_string_in_name">di %1$s</string>
@@ -3634,7 +3634,6 @@
     <string name="add_new_custom_category_button_promo">Tambahkan kategori kustom baru dengan memilih satu atau beberapa kategori.</string>
     <string name="live_monitoring_time_buffer">Penyangga waktu</string>
     <string name="live_monitoring_tracking_interval">Interval pelacakan</string>
-    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempelwaktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode istirahat tidak dicatat sama sekali atau hanya sebagai masing-masing satu titik. Pergerakan kecil (misalnya, ke sisi jalan untuk menandai kemungkinan belokan dalam perjalanan Anda) dapat disaring. Perhatikan, bahwa file Anda akan berisi lebih sedikit informasi untuk pasca-pemrosesan, dan pada saat yang sama berpotensi menyimpan artefak GPS yang disebabkan oleh penerimaan yang buruk atau efek chipset.</string>
     <string name="import_routing_file">Impor berkas perutean</string>
     <string name="import_profile">Impor profil</string>
@@ -5438,4 +5437,5 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
+    <string name="live_monitoring_adress_descr">Tentukan</string>
 </resources>

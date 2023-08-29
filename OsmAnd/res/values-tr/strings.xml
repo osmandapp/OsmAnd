@@ -3335,7 +3335,6 @@
     <string name="live_monitoring_time_buffer">Zaman tamponu</string>
     <string name="live_monitoring_tracking_interval">İzleme aralığı</string>
     <string name="live_monitoring_adress">Web adresi</string>
-    <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, bearing={6}.</string>
     <string name="monitoring_notification">Bildirim</string>
     <string name="monitoring_min_speed">En düşük hız</string>
     <string name="monitoring_min_accuracy">Asgari doğruluk</string>

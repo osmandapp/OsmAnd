@@ -59,7 +59,7 @@
     <string name="arrival_distance_factor_early">Früh</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Spät</string>
-    <string name="arrival_distance_factor_at_last">Auf den letzten Metern</string>
+    <string name="arrival_distance_factor_at_last">Sehr spät</string>
     <string name="auto_zoom_none">Keine automatische Vergrößerung</string>
     <string name="auto_zoom_close">Auf Nahbereich</string>
     <string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -3328,7 +3328,6 @@
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
     <string name="live_monitoring_adress">Webadresse</string>
-    <string name="live_monitoring_adress_descr">Webadresse angeben mit der Parametersyntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Benachrichtigung</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
     <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
@@ -5419,4 +5418,5 @@
     <string name="help_article_navigation_routing_moped_routing_name">Moped-Routenführung</string>
     <string name="help_article_navigation_routing_online_routing_name">Online-Routenführung</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Über OsmAnd-Routenführung</string>
+    <string name="live_monitoring_adress_descr">Webadresse angeben mit der Parametersyntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>
