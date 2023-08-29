@@ -1,195 +1,148 @@
 package net.osmand.plus.helpers;
 
-import android.view.KeyEvent;
+import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.InputDevice;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MapScrollHelper {
 
 	private static final int LONG_PRESS_TIME_MS = 250;
 	private static final int MAX_KEY_UP_TIME_MS = 10;
 	private static final int REFRESHING_DELAY_MS = 3;
-	private static final int INVALID_VALUE = -1;
+	private static final int SMALL_SCROLLING_UNIT = 1;
+	private static final int BIG_SCROLLING_UNIT = 200;
 
-	private final OsmandApplication app;
-	private OnScrollEventListener onScrollEventListener;
-	
-	private final Direction UP = new Direction(KeyEvent.KEYCODE_DPAD_UP);
-	private final Direction DOWN = new Direction(KeyEvent.KEYCODE_DPAD_DOWN);
-	private final Direction LEFT = new Direction(KeyEvent.KEYCODE_DPAD_LEFT);
-	private final Direction RIGHT = new Direction(KeyEvent.KEYCODE_DPAD_RIGHT);
+	private final Set<ScrollDirection> activeDirections = new HashSet<>();
+	private final Map<ScrollDirection, Long> cancelDirectionTime = new HashMap<>();
+	private final MapActivity mapActivity;
 
-	private final Map<Integer, Direction> availableDirections;
-	private volatile boolean isInContinuousScrolling;
-	private volatile long startContinuousScrollingTime = INVALID_VALUE;
+	private volatile boolean isContinuousScrolling;
+	private volatile long continuousScrollingStartTime;
+
+	public enum ScrollDirection {
+		UP, DOWN, LEFT, RIGHT
+	}
+
+	public MapScrollHelper(@NonNull MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
 
 	private final Runnable scrollingRunnable = () -> {
-		isInContinuousScrolling = true;
+		isContinuousScrolling = true;
 		while (hasActiveDirections()) {
-			notifyListener(true, false);
+			moveMap(true, false);
 			try {
 				Thread.sleep(REFRESHING_DELAY_MS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		if (System.currentTimeMillis() - startContinuousScrollingTime < LONG_PRESS_TIME_MS) {
-			List<Direction> lastDirections = getLastDirections();
+		if (System.currentTimeMillis() - continuousScrollingStartTime < LONG_PRESS_TIME_MS) {
+			List<ScrollDirection> lastDirections = getLastDirections();
 			addDirections(lastDirections);
-			notifyListener(false, false);
+			moveMap(false, false);
 			removeDirections(lastDirections);
 		}
-		notifyListener(false, true);
-		isInContinuousScrolling = false;
+		moveMap(false, true);
+		isContinuousScrolling = false;
 	};
 
-	public MapScrollHelper(OsmandApplication app) {
-		this.app = app;
-		
-		availableDirections = new HashMap<Integer, Direction>() {
-			{
-				put(UP.keyCode, UP);
-				put(DOWN.keyCode, DOWN);
-				put(LEFT.keyCode, LEFT);
-				put(RIGHT.keyCode, RIGHT);
-			}
-		};
+	public boolean isContinuousScrolling() {
+		return isContinuousScrolling;
 	}
 
-	public boolean onKeyDown(int keyCode) {
-		if (isInContinuousScrolling) {
-			addDirection(keyCode);
-		} else {
-			startScrolling(keyCode);
-			return true;
-		}
-		return true;
-	}
-
-	public boolean onKeyUp(int keyCode) {
-		removeDirection(keyCode);
-		return true;
-	}
-
-	public void startScrolling(int keyCode) {
-		startContinuousScrollingTime = System.currentTimeMillis(); 
-		addDirection(keyCode);
-		if (!isInContinuousScrolling) {
+	public void startScrolling(@NonNull ScrollDirection direction) {
+		continuousScrollingStartTime = System.currentTimeMillis();
+		addDirection(direction);
+		if (!isContinuousScrolling) {
 			new Thread(scrollingRunnable).start();
 		}
 	}
 	
-	public void addDirections(List<Direction> directions) {
-		for (Direction direction : directions) {
-			direction.setActive(true);
+	public void addDirections(List<ScrollDirection> directions) {
+		activeDirections.addAll(directions);
+	}
+
+	public void removeDirections(List<ScrollDirection> directions) {
+		for (ScrollDirection direction : directions) {
+			cancelDirectionTime.remove(direction);
+			activeDirections.remove(direction);
 		}
 	}
 
-	public void removeDirections(List<Direction> directions) {
-		for (Direction direction : directions) {
-			direction.setActive(false);
-			direction.setTimeUp(INVALID_VALUE);
-		}
+	public void addDirection(@NonNull ScrollDirection direction) {
+		activeDirections.add(direction);
 	}
 
-	public void addDirection(int keyCode) {
-		if (availableDirections.containsKey(keyCode)) {
-			availableDirections.get(keyCode).setActive(true);
+	public void removeDirection(@NonNull ScrollDirection direction) {
+		if (activeDirections.contains(direction)) {
+			cancelDirectionTime.put(direction, System.currentTimeMillis());
 		}
-	}
-
-	public void removeDirection(int keyCode) {
-		if (availableDirections.containsKey(keyCode)) {
-			long keyUpTime = System.currentTimeMillis();
-			Direction direction = availableDirections.get(keyCode);
-			if (direction.isActive()) {
-				direction.setTimeUp(keyUpTime);
-			}
-			direction.setActive(false);
-		}
+		activeDirections.remove(direction);
 	}
 	
 	private boolean hasActiveDirections() {
-		for (Direction direction : availableDirections.values()) {
-			if (direction.isActive()) {
-				return true;
+		return !Algorithms.isEmpty(activeDirections);
+	}
+
+	private void moveMap(boolean continuousScroll, boolean stop) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+		QuadPoint cp = tileBox.getCenterPixelPoint();
+		MapRendererView renderer = mapView.getMapRenderer();
+		if (stop) {
+			if (renderer != null) {
+				PointI target31 = new PointI();
+				renderer.getLocationFromElevatedPoint(renderer.getState().getFixedPixel(), target31);
+				app.getOsmandMap().setMapLocation(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
+			}
+			return;
+		}
+		int scrollUnit = continuousScroll ? SMALL_SCROLLING_UNIT : BIG_SCROLLING_UNIT;
+		boolean left = activeDirections.contains(ScrollDirection.LEFT);
+		boolean right = activeDirections.contains(ScrollDirection.RIGHT);
+		boolean up = activeDirections.contains(ScrollDirection.UP);
+		boolean down = activeDirections.contains(ScrollDirection.DOWN);
+		int dx = (left ? -scrollUnit : 0) + (right ? scrollUnit : 0);
+		int dy = (up ? -scrollUnit : 0) + (down ? scrollUnit : 0);
+		if (renderer != null) {
+			PointI point31 = new PointI();
+			PointI center = renderer.getState().getFixedPixel();
+			if (renderer.getLocationFromScreenPoint(new PointI((int) (center.getX() + dx), (int) (center.getY() + dy)), point31)) {
+				renderer.setTarget(point31, false, false);
+			}
+		} else {
+			LatLon l = NativeUtilities.getLatLonFromPixel(renderer, tileBox, cp.x + dx, cp.y + dy);
+			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
+		}
+	}
+
+	public List<ScrollDirection> getLastDirections() {
+		List<ScrollDirection> result = new ArrayList<>();
+		for (ScrollDirection direction : ScrollDirection.values()) {
+			Long timeUp = cancelDirectionTime.get(direction);
+			if (timeUp != null && System.currentTimeMillis() - timeUp <= MAX_KEY_UP_TIME_MS) {
+				result.add(direction);
 			}
 		}
-		return false;
+		return result;
 	}
-
-	private void notifyListener(boolean continuousScrolling, boolean stop) {
-		if (onScrollEventListener != null) {
-			onScrollEventListener.onScrollEvent(continuousScrolling, stop,
-					UP.isActive(), DOWN.isActive(), LEFT.isActive(), RIGHT.isActive());
-		}
-	}
-
-	public void setListener(OnScrollEventListener onScrollEventListener) {
-		this.onScrollEventListener = onScrollEventListener;
-	}
-
-	public boolean isAvailableKeyCode(int keyCode) {
-		return availableDirections.containsKey(keyCode)
-				&& !isOverrideBySelectedExternalDevice(keyCode);
-	}
-
-	public boolean isOverrideBySelectedExternalDevice(int keyCode) {
-		OsmandSettings settings = app.getSettings();
-		InputDevice selected = settings.getSelectedInputDevice();
-		if (selected == InputDevice.PARROT) {
-			return keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
-		} else if (selected == InputDevice.WUNDER_LINQ) {
-			return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN;
-		}
-		return false;
-	}
-
-	public List<Direction> getLastDirections() {
-		List<Direction> directions = new ArrayList<>();
-		for (Direction direction : availableDirections.values()) {
-			if (System.currentTimeMillis() - direction.getTimeUp() <= MAX_KEY_UP_TIME_MS) {
-				directions.add(direction);
-			}
-		}
-		return directions;
-	}
-
-	private static class Direction {
-		private final int keyCode;
-		private volatile long timeUp = INVALID_VALUE;
-		private volatile boolean isActive;
-		
-		public Direction(int keyCode) {
-			this.keyCode = keyCode;
-		}
-
-		public long getTimeUp() {
-			return timeUp;
-		}
-
-		public void setTimeUp(long timeUp) {
-			this.timeUp = timeUp;
-		}
-
-		public boolean isActive() {
-			return isActive;
-		}
-
-		public void setActive(boolean active) {
-			isActive = active;
-		}
-	}
-	
-	public interface OnScrollEventListener {
-		void onScrollEvent(boolean continuousScrolling, boolean stop, boolean up, boolean down, boolean left, boolean right);
-	}
-	
 }

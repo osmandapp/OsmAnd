@@ -98,12 +98,11 @@ import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.helpers.MapScrollHelper;
-import net.osmand.plus.helpers.MapScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
-import net.osmand.plus.keyevent.KeyEventListener;
+import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -176,10 +175,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
-		IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDrawMapListener,
-		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
-		OnScrollEventListener {
+		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
+		OnDrawMapListener, OsmAndAppCustomizationListener, LockUIAdapter,
+		OnPreferenceStartFragmentCallback {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
@@ -187,9 +185,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final int ZOOM_LABEL_DISPLAY = 16;
 	private static final int MAX_ZOOM_OUT_STEPS = 2;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
-
-	private static final int SMALL_SCROLLING_UNIT = 1;
-	private static final int BIG_SCROLLING_UNIT = 200;
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
@@ -253,7 +248,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
-	private KeyEventListener keyEventListener;
+	private KeyEventHelper keyEventHelper;
 	private RouteCalculationProgressListener routeCalculationProgressCallback;
 	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
 	private LoadSimulatedLocationsListener simulatedLocationsListener;
@@ -265,7 +260,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app = getMyApplication();
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
-		mapScrollHelper = new MapScrollHelper(app);
+		mapScrollHelper = new MapScrollHelper(this);
+		keyEventHelper = app.getKeyEventHelper();
 		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -355,7 +351,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		lockHelper.setLockUIAdapter(this);
-		keyEventListener = new KeyEventListener(this);
+		keyEventHelper.setMapActivity(this);
 		mIsDestroyed = false;
 		if (mapViewWithLayers != null) {
 			mapViewWithLayers.onCreate(savedInstanceState);
@@ -1208,7 +1204,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStart();
 		stopped = false;
 		lockHelper.onStart();
-		mapScrollHelper.setListener(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
 	}
@@ -1221,7 +1216,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		stopped = true;
 		lockHelper.onStop(this);
-		mapScrollHelper.setListener(null);
 		extendedMapActivity.onStop(this);
 		super.onStop();
 	}
@@ -1248,6 +1242,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onDestroy();
 		}
 		lockHelper.setLockUIAdapter(null);
+		keyEventHelper.setMapActivity(null);
 		extendedMapActivity.onDestroy(this);
 
 		mIsDestroyed = true;
@@ -1409,20 +1404,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyEventListener != null) {
-			if (keyEventListener.onKeyDown(keyCode, event)) {
-				return true;
-			}
+		if (keyEventHelper != null && keyEventHelper.onKeyDown(keyCode, event)) {
+			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyEventListener != null) {
-			if (keyEventListener.onKeyUp(keyCode, event)) {
-				return true;
-			}
+		if (keyEventHelper != null && keyEventHelper.onKeyUp(keyCode, event)) {
+			return true;
 		}
 		return super.onKeyUp(keyCode, event);
 	}
@@ -1827,34 +1818,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	@Override
-	public void onScrollEvent(boolean continuousScrolling, boolean stop, boolean up, boolean down, boolean left, boolean right) {
-		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
-		QuadPoint cp = tb.getCenterPixelPoint();
-		MapRendererView renderer = getMapView().getMapRenderer();
-		if (stop) {
-			if (renderer != null) {
-				PointI target31 = new PointI();
-				renderer.getLocationFromElevatedPoint(renderer.getState().getFixedPixel(), target31);
-				app.getOsmandMap().setMapLocation(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
-			}
-			return;
-		}
-		int scrollingUnit = continuousScrolling ? SMALL_SCROLLING_UNIT : BIG_SCROLLING_UNIT;
-		int dx = (left ? -scrollingUnit : 0) + (right ? scrollingUnit : 0);
-		int dy = (up ? -scrollingUnit : 0) + (down ? scrollingUnit : 0);
-		if (renderer != null) {
-			PointI point31 = new PointI();
-			PointI center = renderer.getState().getFixedPixel();
-			if (renderer.getLocationFromScreenPoint(new PointI((int) (center.getX() + dx), (int) (center.getY() + dy)), point31)) {
-				renderer.setTarget(point31, false, false);
-			}
-		} else {
-			LatLon l = NativeUtilities.getLatLonFromPixel(renderer, tb, cp.x + dx, cp.y + dy);
-			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 		}
 	}
 

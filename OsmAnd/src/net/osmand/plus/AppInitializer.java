@@ -29,7 +29,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.core.android.NativeCore;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
@@ -50,6 +49,7 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
+import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -355,6 +355,7 @@ public class AppInitializer implements IProgress {
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
+		app.keyEventHelper = startupInit(new KeyEventHelper(app), KeyEventHelper.class);
 		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
 		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);

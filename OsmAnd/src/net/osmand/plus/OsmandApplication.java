@@ -70,6 +70,7 @@ import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -190,6 +191,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
+	KeyEventHelper keyEventHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
@@ -448,6 +450,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public LockHelper getLockHelper() {
 		return lockHelper;
+	}
+
+	public KeyEventHelper getKeyEventHelper() {
+		return keyEventHelper;
 	}
 
 	public FileSettingsHelper getFileSettingsHelper() {
