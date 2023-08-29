@@ -4002,7 +4002,7 @@
     <string name="poi_shelter_yes">是;避難所</string>
     <string name="poi_shelter_no">避難所：否</string>
     <string name="poi_lounger">躺椅</string>
-    <string name="poi_direction_southwest">西北向</string>
+    <string name="poi_direction_southwest">西南向</string>
     <string name="poi_direction_southeast">東南向</string>
     <string name="poi_direction_northwest">西北向</string>
     <string name="poi_direction_northeast">東北向</string>

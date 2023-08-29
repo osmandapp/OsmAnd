@@ -2296,7 +2296,7 @@
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
     <string name="animate_my_location">Ubicación propia animada</string>
-    <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
+    <string name="animate_my_location_desc">Desplazamiento suave del mapa cuando se mueve. Introduce un ligero retraso.</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">Navegación GPS
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
