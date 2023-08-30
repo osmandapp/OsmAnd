@@ -126,7 +126,7 @@ task validateTranslate {
 						line.contains("%1s") || line.contains(" 1\$s") ||
 						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") ||
 								line.contains("% 3") || line.contains("% s"))) {
-					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
+					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line)
 				}
 			}
 		}
@@ -301,7 +301,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 task buildOsmAndCore(type: Exec) {
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
-	String flavour = "";
+	String flavour = ""
 	if(!tskReqStr.contains("fat")) {
 		if(tskReqStr.contains("arm64")) {
 			flavour = flavour.length() == 0 ? "ARM64_ONLY" : ""
@@ -357,8 +357,8 @@ dependencies {
 	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
-	implementation 'androidx.appcompat:appcompat:1.2.0'
-	implementation 'com.google.android.material:material:1.4.0'
+	implementation 'androidx.appcompat:appcompat:1.6.1'
+	implementation 'com.google.android.material:material:1.9.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation fileTree(include: ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
