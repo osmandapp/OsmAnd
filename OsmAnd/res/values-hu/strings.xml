@@ -5431,4 +5431,13 @@
     <string name="copy_build_version">Build verzió másolása</string>
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Hőmérséklet</string>
+    <string name="release_4_6">• Siklási arány widget
+\n
+\n • ANT+ hőmérséklet widget hozzáadva
+\n
+\n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n
+\n</string>
+    <string name="sensor_temperature_desc">Mutatja az érzékelő által mért hőmérsékletet</string>
 </resources>
