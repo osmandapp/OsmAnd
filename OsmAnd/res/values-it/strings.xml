@@ -747,23 +747,23 @@
     <string name="osmand_short_description_80_chars">Visualizzazione e navigazione in mobilità di mappe mondiali OSM</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)
 \n
-\nOsmAnd è un\'applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida svolta per svolta.↵ 
-\n↵ 
-\n Alcune delle caratteristiche principali:↵ 
-\n - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵ 
-\n - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵ 
-\n - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ 
-\n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, Preferiti, curve isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵ 
-\n - Ricerca offline per indirizzi e luoghi (PDI)↵ 
-\n - Calcolo del percorso per distanze a medio raggio↵ 
-\n - Modalità automobile, bicicletta e pedonale con:↵ 
-\n - Commutazione automatica della vista giorno/notte↵ 
-\n - Zoom automatico in base alla velocità↵ 
-\n - Allineamento della mappa in base alla direzione o alla bussola↵ 
-\n- Indicazioni di corsia, visualizzazione del limite di velocità, voci registrate e dal testo-alla-voce 
+\nOsmAnd è un\'applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario sia online che offline compreso la voce guida.↵
+\n↵
+\n Alcune delle caratteristiche principali:↵
+\n - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵
+\n - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵
+\n - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
+\n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵
+\n - Ricerca offline per indirizzi e luoghi (PDI)↵
+\n - Calcolo del percorso per distanze a medio raggio↵
+\n - Modalità automobile, bicicletta e pedonale con:↵
+\n - Commutazione automatica della vista giorno/notte↵
+\n - Zoom automatico in base alla velocità↵
+\n - Allineamento della mappa in base alla direzione o alla bussola↵
+\n - Indicazioni di corsia, visualizzazione del limite di velocità, voci registrate e text-to-speech
 \n
-\n - Limitazioni di questa versione gratuita di OsmAnd:↵ 
-\n - Numero di mappe scaricabili limitato↵ 
+\n - Limitazioni di questa versione gratuita di OsmAnd:↵
+\n - Numero di mappe scaricabili limitato↵
 \n - Non funziona l\'accesso ai PDI offline di Wikipedia
 \n
 \n OsmAnd è continuamente in sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su https://osmand.net.</string>
@@ -1223,7 +1223,7 @@
     <string name="arrival_distance_factor_early">Presto</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardi</string>
-    <string name="arrival_distance_factor_at_last">Negli ultimi metri</string>
+    <string name="arrival_distance_factor_at_last">Molto tardi</string>
     <string name="av_camera_pic_size">Dimensioni foto</string>
     <string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto</string>
     <string name="rendering_value_browse_map_name">Esplorazione mappa</string>
@@ -2222,7 +2222,7 @@
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
     <string name="animate_my_location">Simula la mia posizione</string>
-    <string name="animate_my_location_desc">Attiva la panoramica animata della mappa di \"La mia posizione\" durante la navigazione.</string>
+    <string name="animate_my_location_desc">Panoramica fluida della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
     <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
@@ -2444,9 +2444,9 @@
     <string name="osmand_extended_description_part5">Bicicletta
 \n • Trova sulla mappa i percorsi ciclabili
 \n • La navigazione GPS nella modalità bicicletta crea percorsi utilizzando i percorsi ciclabili
-\n • Vedi al tua velocità e altitudine
+\n • Vedi la tua velocità e altitudine
 \n • L\'opzione registrazione GPX ti permette di registrare il tuo percorso e di condividerlo
-\n • Con un componente aggiuntivo puoi abilitare la visualizzazione delle isoipse e dell\'ombreggiatura dei rilievi</string>
+\n • Con un componente aggiuntivo puoi abilitare la visualizzazione delle linee isoipse e dell\'ombreggiatura dei rilievi</string>
     <string name="empty_state_favourites">Aggiungi Preferiti</string>
     <string name="empty_state_favourites_desc">Importa i Preferiti o aggiungili come marcatori sulla mappa.</string>
     <string name="import_track">Importa il file GPX</string>
@@ -3224,7 +3224,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferisci le strade non pavimentate a quelle che lo sono per il calcolo del percorso.</string>
     <string name="layer_osm_edits">Modifiche OSM</string>
     <string name="quick_action_contour_lines_descr">Pulsante per mostrare o nascondere nella mappa le linee isoipse.</string>
-    <string name="quick_action_hillshade_descr">Un controllo per mostrare o nascondere nella mappa le ombreggiature dei rilievi.</string>
+    <string name="quick_action_hillshade_descr">Un controllo per mostrare o nascondere nella mappa l\'ombreggiatura dei rilievi.</string>
     <string name="tts_initialization_error">Impossibile avviare il motore dal-testo-alla-voce.</string>
     <string name="simulate_your_location_gpx_descr">Simula la mia posizione utilizzando una traccia GPX registrata.</string>
     <string name="default_speed_dialog_msg">Stima l\'ora di arrivo per i tipi di strada sconosciuti e limita la velocità per tutte le strade (può influire sul calcolo del percorso)</string>
@@ -5216,7 +5216,7 @@
     <string name="external_device_characteristic_total_distance">Distanza totale</string>
     <string name="external_device_characteristic_battery_level">Batteria</string>
     <string name="external_device_characteristic_gear_ratio">Rapporto del cambio</string>
-    <string name="calculate_offline_altitude_descr">Calcola l\'elevazione offline, in base ai dati della mappa di altezza. Le differenze rispetto all\'altitudine registrata dal dispositivo possono essere utilizzate come correzione dell\'elevazione.</string>
+    <string name="calculate_offline_altitude_descr">Calcola l\'elevazione offline, in base ai dati della mappa del terreno (3D). Le differenze rispetto all\'altitudine registrata dal dispositivo possono essere utilizzate come correzione dell\'elevazione.</string>
     <string name="calculate_offline">Calcola offline</string>
     <string name="error_calculate">Il risultato del calcolo è vuoto</string>
     <string name="external_device_forget_sensor">Dimentica il sensore</string>
@@ -5420,4 +5420,15 @@
     <string name="map_widget_group_glide_ratio">Rapporto di planata</string>
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
+    <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
+    <string name="release_4_6">• Widget Rapporto di planata
+\n
+\n• Aggiunto widget temperatura ANT+
+\n
+\n• Migliore gestione della memoria per tracce GPX di grandi dimensioni
+\n
+\n</string>
+    <string name="shared_string_temperature">Tempertura</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Informazioni sulla navigazione di OsmAnd</string>
+    <string name="hillshade_slope">Ombreggiatura dei rilievi, Pendenza</string>
 </resources>
