@@ -388,9 +388,17 @@ public class RouteDataObject {
 	public int getPoint31XTile(int i) {
 		return pointsX[i];
 	}
+	
+	public int getPoint31XTile(int s, int e) {
+		return pointsX[s] / 2 + pointsX[e] / 2;
+	}
 
 	public int getPoint31YTile(int i) {
 		return pointsY[i];
+	}
+	
+	public int getPoint31YTile(int s, int e) {
+		return pointsY[s] / 2 + pointsY[e] / 2;
 	}
 
 	public int getPointsLength() {
