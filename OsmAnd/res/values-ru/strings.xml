@@ -326,7 +326,7 @@
     <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
-    <string name="srtm_plugin_name">Контурные линии</string>
+    <string name="srtm_plugin_name">Ландшафт</string>
     <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9).</string>
     <string name="no_buildings_found">Здания не найдены.</string>
@@ -1187,7 +1187,7 @@
     <string name="incomplete_locale">неполный</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
     <string name="download_select_map_types">Прочие карты</string>
-    <string name="download_srtm_maps">Карты SRTM</string>
+    <string name="download_srtm_maps">Контурные линии</string>
     <string name="av_settings">Настройки аудио и видео </string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
     <string name="recording_context_menu_show">Просмотр</string>
@@ -3957,7 +3957,7 @@
     <string name="uploading_count">Отправка %1$d из %2$d</string>
     <string name="uploaded_count">Отправлено %1$d из %2$d</string>
     <string name="toast_select_edits_for_upload">Выберите правки для отправки</string>
-    <string name="hillshade_slope_contour_lines">Рельеф / Уклон/ Контурные линии</string>
+    <string name="hillshade_slope_contour_lines">Контурные линии/Затенение рельефа/ Уклон</string>
     <string name="shared_string_vehicle">Транспортное средство</string>
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Электрический велосипед</string>

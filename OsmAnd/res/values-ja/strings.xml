@@ -5126,4 +5126,5 @@ POIの更新は利用できません</string>
     <string name="offline_weather_forecast_desc">7日分の天気予報をダウンロードすることができます。</string>
     <string name="nautical_depth_points">水深点(最高深度)</string>
     <string name="inch">インチ</string>
+    <string name="shared_string_visible_on_map">地図で表示</string>
 </resources>
