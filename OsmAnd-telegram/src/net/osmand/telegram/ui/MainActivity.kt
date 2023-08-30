@@ -484,6 +484,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.PHONE_NUMBER, text)
 			LoginDialogType.ENTER_CODE -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.CODE, text)
 			LoginDialogType.ENTER_PASSWORD -> telegramAuthorizationRequestHandler?.applyAuthParam(TelegramAuthParamType.PASSWORD, text)
+			else -> {}
 		}
 	}
 

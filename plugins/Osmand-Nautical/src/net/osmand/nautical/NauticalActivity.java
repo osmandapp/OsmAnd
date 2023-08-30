@@ -9,18 +9,17 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.nauticalPlugin.R;
 
 public class NauticalActivity extends Activity {
-	private static final String OSMAND_COMPONENT = "net.osmand"; //$NON-NLS-1$
-	private static final String OSMAND_COMPONENT_PLUS = "net.osmand.plus"; //$NON-NLS-1$
-	private static final String OSMAND_ACTIVITY = "net.osmand.plus.activities.MapActivity"; //$NON-NLS-1$
-	
-    /** Called when the activity is first created. */
-    @Override
+
+	private static final String OSMAND_COMPONENT = "net.osmand";
+	private static final String OSMAND_COMPONENT_PLUS = "net.osmand.plus";
+	private static final String OSMAND_ACTIVITY = "net.osmand.plus.activities.MapActivity";
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -32,7 +31,7 @@ public class NauticalActivity extends Activity {
 		intentPlus.setComponent(new ComponentName(OSMAND_COMPONENT_PLUS, OSMAND_ACTIVITY));
 		intentPlus.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		ResolveInfo resolved = getPackageManager().resolveActivity(intentPlus, PackageManager.MATCH_DEFAULT_ONLY);
-		if(resolved != null) {
+		if (resolved != null) {
 			logEvent(this, "open_osmand_plus");
 			stopService(intentPlus);
 			startActivity(intentPlus);
@@ -49,19 +48,16 @@ public class NauticalActivity extends Activity {
 				finish();
 			} else {
 				logEvent(this, "open_dialog");
-				findViewById(R.id.buyButton).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						String appName = OSMAND_COMPONENT;
-						logEvent(NauticalActivity.this, "open_play_store_" + appName);
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName));
-						try {
-							//stopService(intent);
-							startActivity(intent);
-							finish();
-						} catch (ActivityNotFoundException e) {
-							// ignore
-						}
+				findViewById(R.id.buyButton).setOnClickListener(v -> {
+					String appName = OSMAND_COMPONENT;
+					logEvent(NauticalActivity.this, "open_play_store_" + appName);
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName));
+					try {
+						//stopService(intent);
+						startActivity(intent);
+						finish();
+					} catch (ActivityNotFoundException e) {
+						// ignore
 					}
 				});
 			}
