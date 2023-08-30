@@ -642,7 +642,7 @@
     <string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
     <string name="internet_connection_required_for_online_route">Çevrim içi navigasyon çevrim dışı çalışmamaktadır.</string>
     <string name="layer_hillshade">Tepe gölgesi katmanı</string>
-    <string name="driving_region_descr">Sürüş bölgesini seçin: ABD, Avrupa, İngiltere, Asya ve diğerleri.</string>
+    <string name="driving_region_descr">Sürüş bölgesini seçin: ABD, Avrupa, Birleşik Krallık, Asya ve diğerleri.</string>
     <string name="driving_region">Sürüş bölgesi</string>
     <string name="driving_region_japan">Japonya</string>
     <string name="driving_region_us">Birleşik Devletler</string>
@@ -1953,7 +1953,7 @@
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Waypointler, ilgi çekici noktalar, adlandırılmış özellikler</string>
-    <string name="max_speed">En yüksek hız</string>
+    <string name="max_speed">Maksimum hız</string>
     <string name="average_speed">Ortalama hız</string>
     <string name="shared_string_max">Azami</string>
     <string name="shared_string_start_time">Başlangıç zamanı</string>
