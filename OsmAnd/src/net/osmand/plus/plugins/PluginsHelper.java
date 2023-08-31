@@ -21,6 +21,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -786,10 +787,9 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
-	                                  float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+			plugin.onAnalysePoint(analysis, point, attribute);
 		}
 	}
 
