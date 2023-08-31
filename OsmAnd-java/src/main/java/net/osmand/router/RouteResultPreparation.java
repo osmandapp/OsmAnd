@@ -666,8 +666,7 @@ public class RouteResultPreparation {
 			if (res.getRoutingTime() > 0) {
 //					additional.append("rspeed = \"")
 //							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
-				additional.append("rtime = \"")
-					.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
+				additional.append(String.format("rtime = \"%.1f\" ", res.getRoutingTime()));
 			}
 			
 //				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
@@ -799,12 +798,12 @@ public class RouteResultPreparation {
 
 	private static void printAdditionalPointInfo(RouteSegmentResult res) {
 		boolean plus = res.getStartPointIndex() < res.getEndPointIndex();
-		for(int k = res.getStartPointIndex(); k != res.getEndPointIndex(); ) {
+		StringBuilder bld = new StringBuilder();
+		for (int k = res.getStartPointIndex(); k != res.getEndPointIndex();) {
 			int[] tp = res.getObject().getPointTypes(k);
 			String[] pointNames = res.getObject().getPointNames(k);
 			int[] pointNameTypes = res.getObject().getPointNameTypes(k);
 			if (tp != null || pointNameTypes != null) {
-				StringBuilder bld = new StringBuilder();
 				bld.append("<point " + (k));
 				if (tp != null) {
 					for (int t = 0; t < tp.length; t++) {
@@ -818,14 +817,16 @@ public class RouteResultPreparation {
 						bld.append(" " + rr.getTag() + "=\"" + pointNames[t] + "\"");
 					}
 				}
-				bld.append("/>");
-				println("\t"+bld.toString());
+				bld.append("/> ");
 			}
-			if(plus) {
+			if (plus) {
 				k++;
 			} else {
 				k--;
 			}
+		}
+		if (bld.length() > 0) {
+			println("\t" + bld.toString());
 		}
 	}
 

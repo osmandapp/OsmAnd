@@ -33,13 +33,17 @@ public class BinaryRoutePlanner {
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
 	private static final float INITIAL_PENALTY_FOR_REVERSE_DIRECTION = 500;
-	private static int TEST_ID = 46837690;
+	private static int TEST_ID = 194349150;
 	private static boolean TEST_SPECIFIC = false;
+	// TODO default false bug > 10% difference ? 
+	public static boolean PRECISE_DIST_MEASUREMENT = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
+		if (PRECISE_DIST_MEASUREMENT) {
+			return MapUtils.measuredDist31(x1, y1, x2, y2);
+		}
 		return MapUtils.squareRootDist31(x1, y1, x2, y2);
-//		return MapUtils.measuredDist31(x1, y1, x2, y2);
 	}
 
 
@@ -231,7 +235,7 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection, boolean reverseSearchWay) {
+	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection, boolean reverseSearchWay) {
 		if (segment == null) {
 			return null;
 		}
@@ -297,10 +301,10 @@ public class BinaryRoutePlanner {
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		RouteSegment startPos = initRouteSegment(ctx, start, true, false);
-		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
-		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
-		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
+		RouteSegment startPos = initEdgeSegment(ctx, start, true, false);
+		RouteSegment startNeg = initEdgeSegment(ctx, start, false, false);
+		RouteSegment endPos = initEdgeSegment(ctx, end, true, true);
+		RouteSegment endNeg = initEdgeSegment(ctx, end, false, true);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -477,6 +481,7 @@ public class BinaryRoutePlanner {
 			currentSegment = nextCurrentSegment;
 			nextCurrentSegment = null;
 			
+			
 			// 1. calculate obstacle for passing this segment 
 			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
 			if (segmentAndObstaclesTime < 0) {
@@ -485,11 +490,13 @@ public class BinaryRoutePlanner {
 			}
 			// calculate new start segment time as we're going to assign to put to visited segments
 			float distFromStartPlusSegmentTime = currentSegment.distanceFromStart + segmentAndObstaclesTime;
+			
 			// 2. check if segment was already visited in opposite direction
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
  			if (alreadyVisited) {
+ 				// TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
  				// Create tests STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
@@ -526,9 +533,18 @@ public class BinaryRoutePlanner {
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
 			
-			// 4. load road connections at the end of segment    
+			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
+
+			// TODO test that routing time is different with on & off!
+			// Theoretically we should process each step separately but we don't have any issues with it. 
+			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
+//			if(nextCurrentSegment != null) { // currentSegment.distanceFromStart - startSegment.distanceFromStart > 100
+//				graphSegments.add(nextCurrentSegment);
+//				break;
+//			}
 		}
+		
 		if (ctx.visitor != null) {
 			ctx.visitor.visitSegment(startSegment, currentSegment.getSegmentEnd(), true);
 		}
@@ -602,7 +618,9 @@ public class BinaryRoutePlanner {
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
 				frs.reverseWaySearch = reverseWaySearch;
-				frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
+				// parent is correct distanceFromStart
+				frs.distanceFromStart = (currentSegment.parentRoute == null ? currentSegment.distanceFromStart : currentSegment.parentRoute.distanceFromStart) + 
+						opposite.distanceFromStart;
 				frs.distanceToEnd = 0;
 				frs.opposite = opposite;
 				graphSegments.add(frs);
@@ -800,7 +818,7 @@ public class BinaryRoutePlanner {
 		if (thereAreRestrictions) {
 			nextIterator = ctx.segmentsToVisitPrescripted.iterator();
 			if (TRACE_ROUTING) {
-				println("  " + currentSegment.segEnd + ">> There are restrictions");
+				println("  " + currentSegment.segEnd + ">> There are restrictions ");
 			}
 		}
 		
