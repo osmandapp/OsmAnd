@@ -88,7 +88,7 @@
     <string name="poi_zoo_type">类型</string>
     <string name="poi_shop">商店</string>
     <string name="poi_emergency">紧急救助</string>
-    <string name="poi_man_made">人造</string>
+    <string name="poi_man_made">人造设施</string>
     <string name="poi_landuse">土地利用</string>
     <string name="poi_administrative">行政</string>
     <string name="poi_healthcare">医疗保健</string>
@@ -912,7 +912,7 @@
     <string name="poi_rtsa_scale_filter">难度类别</string>
     <string name="poi_bulk_purchase">批量采购</string>
     <string name="poi_glacier_type">冰川类型</string>
-    <string name="poi_socket_type3_output_filter">Type 3 型输出连接器</string>
+    <string name="poi_socket_type3_output_filter">Type 3 型连接器输出</string>
     <string name="poi_socket_type2_output_filter">Type 2 型输出连接器</string>
     <string name="poi_home_visit">家访</string>
     <string name="poi_service_car">汽车服务</string>
@@ -1018,8 +1018,8 @@
     <string name="poi_faculty_filter">学院</string>
     <string name="poi_hiking_routes">远足路线</string>
     <string name="poi_node_networks">徒步/骑行网络节点</string>
-    <string name="poi_traffic_enforcement">交通强制执行</string>
-    <string name="poi_personal_transport">个人运输工具</string>
+    <string name="poi_traffic_enforcement">交通执法</string>
+    <string name="poi_personal_transport">个人交通工具</string>
     <string name="poi_shelter_filter">庇护所</string>
     <string name="poi_museum_type">博物馆主题</string>
     <string name="poi_post_office_type">类型</string>
@@ -1045,7 +1045,7 @@
     <string name="poi_water_transport">水上运输</string>
     <string name="poi_bicycle_transport">自行车交通</string>
     <string name="poi_aerialway_transport">索道运输</string>
-    <string name="poi_transport_construction">交通建设</string>
+    <string name="poi_transport_construction">交通施工</string>
     <string name="poi_power">电力</string>
     <string name="poi_communication">通信</string>
     <string name="poi_trash_disposal">垃圾处理</string>
@@ -1313,7 +1313,7 @@
     <string name="poi_bird_hide">观鸟地点</string>
     <string name="poi_tactile_paving_no">没有盲道</string>
     <string name="poi_australian_football">澳式橄榄球</string>
-    <string name="poi_socket_chademo_output_filter">CHAdeMO 输出连接器</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO 连接器输出</string>
     <string name="poi_beachvolleyball">沙滩排球</string>
     <string name="poi_bmx">小轮车</string>
     <string name="poi_laundry_service_no">无</string>
@@ -2668,4 +2668,19 @@
     <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_service">互联网接入类型：服务</string>
     <string name="poi_architecture_brutalism">建筑风格：粗野主义</string>
+    <string name="poi_climbing_bolts_filter">攀岩耳片（螺钉）</string>
+    <string name="poi_dog">狗</string>
+    <string name="poi_socket_type2_combo_voltage_filter">Type 2 混合连接器电压</string>
+    <string name="poi_socket_type2_cable_voltage_filter">Type 2 电缆连接器电压</string>
+    <string name="poi_socket_type3a_voltage_filter">Type 3a 连接器电压</string>
+    <string name="poi_socket_type3c_voltage_filter">Type 3c 连接器电压</string>
+    <string name="poi_socket_type3c_output_filter">Type 3c 连接器输出</string>
+    <string name="poi_socket_schuko_voltage_filter">Schuko 连接器电压</string>
+    <string name="poi_socket_type3a_output_filter">Type 3a 连接器输出</string>
+    <string name="poi_climbing_grade_filter">攀登等级</string>
+    <string name="poi_climbing_bolt">攀岩耳片（螺钉）</string>
+    <string name="poi_socket_chademo_voltage_filter">CHAdeMO 连接器电压</string>
+    <string name="poi_socket_type2_voltage_filter">Type 2 连接器电压</string>
+    <string name="poi_socket_type2_cable_output_filter">Type 2 电缆输出连接器</string>
+    <string name="poi_socket_cee_blue_voltage_filter">CEE blue 连接器电压</string>
 </resources>
