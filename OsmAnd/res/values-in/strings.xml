@@ -5438,4 +5438,13 @@
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
     <string name="live_monitoring_adress_descr">Tentukan</string>
+    <string name="release_4_6">• Widget Rasio Glide
+\n
+\n• Ditambahkan widget suhu ANT+
+\n
+\n• Pengelolaan memori lebih baik untuk trek GPX besar.
+\n
+\n</string>
+    <string name="shared_string_temperature">Suhu</string>
+    <string name="sensor_temperature_desc">Menampilkan suhu dari sensor</string>
 </resources>
