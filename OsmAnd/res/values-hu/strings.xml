@@ -5439,5 +5439,5 @@
 \n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
 \n
 \n</string>
-    <string name="sensor_temperature_desc">Mutatja az érzékelő által mért hőmérsékletet</string>
+    <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
 </resources>
