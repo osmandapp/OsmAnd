@@ -937,7 +937,7 @@
     <string name="poi_animal_shelter_wildlife">野生动物</string>
     <string name="poi_shelter_type_wildlife_hide">野生动物隐匿处</string>
     <string name="poi_wildlife_hide">观察野生动物的场所</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">事故和急救医学</string>
+    <string name="poi_health_specialty_emergency_yes">事故和急救医学</string>
     <string name="poi_emergency_yes">紧急情况：是</string>
     <string name="poi_animal_keeping">动物饲养</string>
     <string name="poi_animal_keeping_horse">动物饲养：马匹</string>

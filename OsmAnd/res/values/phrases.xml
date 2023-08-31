@@ -2702,7 +2702,7 @@
 	<string name="poi_health_specialty_pulmonology_yes">Respiratory medicine</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dental, oral and maxillo-facial surgery</string>
 	<string name="poi_health_specialty_maternity_yes">Maternity</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Accident and emergency medicine</string>
+	<string name="poi_health_specialty_emergency_yes">Accident and emergency medicine</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Health specialty: accident and emergency medicine: no</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Plastic surgery</string>
 	<string name="poi_health_specialty_orthodontics_yes">Orthodontics</string>
@@ -2714,7 +2714,7 @@
 	<string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-facial surgery</string>
 	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostic radiology</string>
 	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterology</string>
-	<string name="poi_health_specialty_dentistry_yes">Dentistry</string>
+	<string name="poi_health_specialty_stomatology_yes">Dentistry</string>
 	<string name="poi_health_specialty_nephrology_yes">Nephrology (renal diseases)</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Neurological surgery</string>
 	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatry</string>
@@ -2738,7 +2738,7 @@
 	<string name="poi_health_specialty_speech_therapy_yes">Speech therapy</string>
 	<string name="poi_health_specialty_manual_therapy_yes">Manual therapy</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Sports medicine</string>
-	<string name="poi_health_specialty_podology_yes">Podology</string>
+	<string name="poi_health_specialty_podiatry_yes">Podiatry</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Adult psychiatry</string>
 	<string name="poi_health_specialty_acupuncture_yes">Acupuncture</string>
 	<string name="poi_health_specialty_homeopathy_yes">Homeopathy</string>
@@ -5166,5 +5166,27 @@
 	<string name="poi_motor_vehicle_designated">Designated for motor vehicles</string>
 	<string name="poi_motorcar_designated">Designated for motorcars</string>
 	<string name="poi_vehicle_designated">Designated for vehicles</string>
+
+	<string name="poi_health_specialty_allergology_yes">Allergology</string>
+	<string name="poi_health_specialty_cardiac_surgery_yes">Cardiac surgery</string>
+	<string name="poi_health_specialty_endodontics_yes">Endodontics</string>
+	<string name="poi_health_specialty_geriatrics_yes">Geriatrics</string>
+	<string name="poi_health_specialty_haematology_yes">Haematology</string>
+	<string name="poi_health_specialty_infectious_diseases_yes">Infectious diseases</string>
+	<string name="poi_health_specialty_paediatric_dentistry_yes">Paediatric dentistry</string>
+	<string name="poi_health_specialty_paediatric_surgery_yes">Paediatric surgery</string>
+	<string name="poi_health_specialty_periodontics_yes">Periodontics</string>
+	<string name="poi_health_specialty_rheumatology_yes">Rheumatology</string>
+	<string name="poi_health_specialty_community_yes">Community</string>
+	<string name="poi_health_specialty_dialysis_yes">Dialysis</string>
+	<string name="poi_health_specialty_covid19_yes">COVID19</string>
+	<string name="poi_health_specialty_weight_loss_yes">Weight loss</string>
+	<string name="poi_health_specialty_blood_check_yes">Blood check</string>
+	<string name="poi_health_specialty_intensive_yes">Intensive</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Oral and maxillofacial surgery</string>
+	<string name="poi_health_specialty_fertility_yes">Fertility</string>
+	<string name="poi_health_specialty_massage_therapy_yes">Massage therapy</string>
+	<string name="poi_health_specialty_vascular_surgery_yes">Vascular surgery</string>
+	<string name="poi_health_specialty_stomatology_yes">Stomatology</string>
 
 </resources>

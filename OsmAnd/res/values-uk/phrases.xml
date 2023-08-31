@@ -1775,7 +1775,7 @@
     <string name="poi_payment_litecoin_yes">Litecoin</string>
     <string name="poi_health_specialty_maternity_yes">Материнство</string>
     <string name="poi_health_person_type_physician_assitant">Роль медпрацавніка: помічник лікаря</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Швидка та невідкладна допомога</string>
+    <string name="poi_health_specialty_emergency_yes">Швидка та невідкладна допомога</string>
     <string name="poi_health_person_type_technician">Роль медпрацівника: технік</string>
     <string name="poi_payment_litecoin_no">Litecoins не приймаються</string>
     <string name="poi_health_specialty_emergency_medicine_no">Спеціалізація: швидка і невідкладна допомога: відсутня</string>
@@ -2098,7 +2098,7 @@
     <string name="poi_pump_type_india_mk_2_3">Вид насосу: India Mk II або III</string>
     <string name="poi_support_pole">Опора: стовп</string>
     <string name="poi_bridge_structure_floating">Будівництво моста: понтон</string>
-    <string name="poi_health_specialty_dentistry_yes">Стоматологія</string>
+    <string name="poi_health_specialty_stomatology_yes">Стоматологія</string>
     <string name="poi_pump_type_gravity">Вид насоса: гравітаційний</string>
     <string name="poi_support_wall_mounted">Опора: стіна</string>
     <string name="poi_payment_roadrunner_no">Картки Roadrunner не приймаються</string>
@@ -2836,7 +2836,7 @@
     <string name="poi_resource_gold">Золото</string>
     <string name="poi_surface_grass_paver">Поверхня: нещільна кам\'яна бруківка</string>
     <string name="poi_crop_wheat">Вирощується культура: пшениця</string>
-    <string name="poi_health_specialty_podology_yes">Подологія</string>
+    <string name="poi_health_specialty_podiatry_yes">Подологія</string>
     <string name="poi_provided_for_senior_no">Послуги надаються людям похилого віку: немає</string>
     <string name="poi_public_bookcase_type_phone_box">Вид: телефонна будка</string>
     <string name="poi_cuisine_brunch">Другий сніданок (бранч)</string>

@@ -822,12 +822,12 @@
     <string name="poi_health_specialty_herbalism_yes">Vaistažolininkystė</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatija</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktūra</string>
-    <string name="poi_health_specialty_podology_yes">Podologija</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologija</string>
     <string name="poi_health_specialty_optometry_yes">Optometrija</string>
     <string name="poi_health_specialty_oncology_yes">Onkologija</string>
     <string name="poi_health_specialty_endocrinology_yes">Endokrinologija</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsichiatrija</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontologija</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontologija</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologija</string>
     <string name="poi_health_specialty_physiotherapy_yes">Fizioterapija</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontija</string>

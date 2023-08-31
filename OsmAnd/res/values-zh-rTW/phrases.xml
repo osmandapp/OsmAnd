@@ -2420,7 +2420,7 @@
     <string name="poi_health_specialty_pulmonology_yes">呼吸醫學</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">牙科、口腔和頜面外科</string>
     <string name="poi_health_specialty_maternity_yes">產科</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">急診醫學</string>
+    <string name="poi_health_specialty_emergency_yes">急診醫學</string>
     <string name="poi_health_specialty_emergency_medicine_no">醫療專業：意外事故和急救醫學：無</string>
     <string name="poi_health_specialty_orthodontics_yes">齒顎矯正科</string>
     <string name="poi_health_specialty_physiotherapy_yes">物理治療</string>
@@ -2431,7 +2431,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">頜面外科</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">放射診療科</string>
     <string name="poi_health_specialty_gastroenterology_yes">胃腸科</string>
-    <string name="poi_health_specialty_dentistry_yes">牙科</string>
+    <string name="poi_health_specialty_stomatology_yes">牙科</string>
     <string name="poi_health_service_support_yes">醫療服務︰支援︰是的</string>
     <string name="poi_health_service_support_no">醫療服務︰支援︰沒有</string>
     <string name="poi_health_service_test_yes">醫療服務︰檢驗︰是的</string>
@@ -2470,7 +2470,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">語言治療</string>
     <string name="poi_health_specialty_manual_therapy_yes">操作治療學</string>
     <string name="poi_health_specialty_sports_medicine_yes">運動醫學</string>
-    <string name="poi_health_specialty_podology_yes">足醫術</string>
+    <string name="poi_health_specialty_podiatry_yes">足醫術</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">成人精神科</string>
     <string name="poi_health_specialty_acupuncture_yes">針灸</string>
     <string name="poi_health_specialty_homeopathy_yes">順勢療法</string>

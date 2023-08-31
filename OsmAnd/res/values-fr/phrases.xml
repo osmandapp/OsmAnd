@@ -2424,7 +2424,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologie</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgie dentaire, orale et maxillo-faciale</string>
     <string name="poi_health_specialty_maternity_yes">Maternité</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Médecine d\'urgence</string>
+    <string name="poi_health_specialty_emergency_yes">Médecine d\'urgence</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgie plastique</string>
     <string name="poi_health_specialty_orthodontics_yes">Orthodontie</string>
     <string name="poi_health_specialty_physiotherapy_yes">Physiothérapie</string>
@@ -2435,7 +2435,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgie maxillo-faciale</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiodiagnostic</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastro-entérologie</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontologie</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontologie</string>
     <string name="poi_health_specialty_nephrology_yes">Néphropathie (maladies des reins)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgie</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
@@ -2451,7 +2451,7 @@
     <string name="poi_health_specialty_optometry_yes">Optométrie</string>
     <string name="poi_health_specialty_clinical_pathology_yes">Pathologie clinique</string>
     <string name="poi_health_specialty_sports_medicine_yes">Médecine du sport</string>
-    <string name="poi_health_specialty_podology_yes">Podologie</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologie</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psychiatrie adulte</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupuncture</string>
     <string name="poi_health_specialty_homeopathy_yes">Homéopathie</string>

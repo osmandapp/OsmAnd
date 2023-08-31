@@ -913,7 +913,7 @@
     <string name="poi_health_specialty_biology_yes">Kliniška biologija</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestezisti</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiološko dijagnosticiranje</string>
-    <string name="poi_health_specialty_dentistry_yes">Zubar</string>
+    <string name="poi_health_specialty_stomatology_yes">Zubar</string>
     <string name="poi_health_specialty_nuclear_medicine_yes">Nuklearna medicina</string>
     <string name="poi_health_specialty_oncology_yes">Onkologija</string>
     <string name="poi_health_specialty_optometry_yes">Optometrija</string>
