@@ -5440,4 +5440,5 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
+    <string name="app_mode_baby_transport">Babakocsi</string>
 </resources>
