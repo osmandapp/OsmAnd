@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
@@ -26,6 +27,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
 import net.osmand.plus.plugins.development.widget.CameraTiltWidget;
 import net.osmand.plus.plugins.development.widget.FPSTextInfoWidget;
+import net.osmand.plus.plugins.development.widget.MemoryInfoWidget;
 import net.osmand.plus.plugins.development.widget.TargetDistanceWidget;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
@@ -60,6 +62,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		ApplicationMode[] noAppMode = {};
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_FPS, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_MEMORY, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_CAMERA_TILT, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_CAMERA_DISTANCE, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
@@ -143,6 +146,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		MapWidget targetDistanceWidget = createMapWidgetForParams(mapActivity, DEV_TARGET_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(targetDistanceWidget));
+
+		MapWidget memoryWidget = createMapWidgetForParams(mapActivity, DEV_MEMORY);
+		widgetsInfos.add(creator.createWidgetInfo(memoryWidget));
 	}
 
 	@Override
@@ -158,6 +164,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				return new ZoomLevelWidget(mapActivity);
 			case DEV_TARGET_DISTANCE:
 				return new TargetDistanceWidget(mapActivity);
+			case DEV_MEMORY:
+				return new MemoryInfoWidget(mapActivity);
 		}
 		return null;
 	}
