@@ -170,7 +170,7 @@ public class RoutePlannerFrontEnd {
 					if (road == null || currentsDistSquare < road.distSquare) {
 						RouteDataObject ro = new RouteDataObject(r);
 						
-						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
+						road = new RouteSegmentPoint(ro, j - 1, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
