@@ -35,7 +35,6 @@ public class BinaryRoutePlanner {
 	private static final float INITIAL_PENALTY_FOR_REVERSE_DIRECTION = 500;
 	private static int TEST_ID = 194349150;
 	private static boolean TEST_SPECIFIC = false;
-	// TODO default false bug > 10% difference ? 
 	public static boolean PRECISE_DIST_MEASUREMENT = false;
 
 
@@ -258,7 +257,7 @@ public class BinaryRoutePlanner {
 		if (initSegment != null) {
 			initSegment.setParentRoute(RouteSegment.NULL);
 			// compensate first segment difference (length)
-			// TODO double checkfix correct at all?  https://github.com/osmandapp/OsmAnd/issues/14148
+			// 1.5 TODO double checkfix correct at all?  https://github.com/osmandapp/OsmAnd/issues/14148
 			initSegment.distanceFromStart += calcRemainderDistFromStart(ctx, initSegment, 
 					!reverseSearchWay ? ctx.startX : ctx.targetX, !reverseSearchWay ? ctx.startY : ctx.targetY);
 		}
@@ -496,7 +495,7 @@ public class BinaryRoutePlanner {
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
  			if (alreadyVisited) {
- 				// TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
+ 				// 1.6 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
  				// Create tests STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
@@ -536,7 +535,7 @@ public class BinaryRoutePlanner {
 			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 
-			// TODO test that routing time is different with on & off!
+			// 1.7 TODO test that routing time is different with on & off!
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
 //			if(nextCurrentSegment != null) { // currentSegment.distanceFromStart - startSegment.distanceFromStart > 100
