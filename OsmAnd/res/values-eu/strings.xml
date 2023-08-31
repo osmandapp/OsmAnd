@@ -5407,4 +5407,22 @@
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Maparen pantaila nabigazioan zehar</string>
     <string name="live_monitoring_adress_descr">Zehaztu web helbidea parametro sintaxiarekin: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Lerro zuzeneko ibilbidea (hegazkina)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Tren ibilbideak</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Nabigatu pistatik</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Nabigatu markatzaileen arabera</string>
+    <string name="help_article_navigation_setup_route_details_name">Ibilbidearen xehetasunak</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Bizikleta ibilbideak (MTB)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Itsasontzi ibilbideak</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Autoen ibilbideak (kamioia, motozikleta)</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Punturako zuzeneko ibilbidea (itsasontzia)</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Zaldi ibilbideak</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Ziklomotor ibilbideak</string>
+    <string name="help_article_navigation_routing_online_routing_name">Lineako ibilbideak</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd ibilbidei buruz</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Oinezko ibilbideak</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Garraio publikoko ibilbideak</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Eski ibilbideak</string>
+    <string name="app_mode_baby_transport">Haurren garraioa</string>
 </resources>
