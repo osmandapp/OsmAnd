@@ -433,7 +433,7 @@
     <string name="poi_bicycle_parking">自行车停车</string>
     <string name="poi_turning_circle">回转圈</string>
     <string name="poi_junction">交叉点</string>
-    <string name="poi_dam">坝</string>
+    <string name="poi_dam">水坝</string>
     <string name="poi_breakwater">防波堤</string>
     <string name="poi_power_substation">变电站</string>
     <string name="poi_observation_tower">观测塔</string>
@@ -1024,7 +1024,7 @@
     <string name="poi_museum_type">博物馆主题</string>
     <string name="poi_post_office_type">类型</string>
     <string name="poi_butcher_type">主要肉类</string>
-    <string name="poi_agrarian_type">农业投入品</string>
+    <string name="poi_agrarian_type">农业投入（品）</string>
     <string name="poi_service_fleurop_filter">Fleurop 服务</string>
     <string name="poi_furniture_filter">家具</string>
     <string name="poi_fridge_filter">冰箱</string>
@@ -2683,4 +2683,11 @@
     <string name="poi_socket_type2_voltage_filter">Type 2 连接器电压</string>
     <string name="poi_socket_type2_cable_output_filter">Type 2 电缆输出连接器</string>
     <string name="poi_socket_cee_blue_voltage_filter">CEE blue 连接器电压</string>
+    <string name="poi_vending_machine_fuel_filter">自动加油机；自动售油机</string>
+    <string name="poi_hiking_filter">适合远足</string>
+    <string name="poi_self_checkout">自助结帐</string>
+    <string name="poi_climbing_quality">攀登品质</string>
+    <string name="poi_second_hand_filter">二手商品</string>
+    <string name="poi_bath_open_air_no">否</string>
+    <string name="poi_post_office_opening_hours">邮局营业时间</string>
 </resources>
