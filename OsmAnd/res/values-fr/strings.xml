@@ -5424,4 +5424,13 @@
     <string name="help_article_widgets_info_widgets_name">Gadgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Température</string>
+    <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
+    <string name="release_4_6">• Gadget de finesse de l\'aile
+\n
+\n• Ajout du gadget ANT+ de température
+\n
+\n• Meilleure gestion de la mémoire pour les grosses traces GPX
+\n
+\n</string>
 </resources>

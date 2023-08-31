@@ -5381,4 +5381,30 @@
     <string name="average_glide_ratio">Batez besteko planeatze-erlazioa</string>
     <string name="wheel_circumference">Gurpilen zirkunferentzia</string>
     <string name="external_sensor_name_property_description">Sentsorearen izena</string>
+    <string name="shared_string_temperature">Tenperatura</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd mapa estiloa</string>
+    <string name="help_article_map_legend_ski_map_name">Eski mapa estiloa</string>
+    <string name="help_article_navigation_guidance_name">Gida</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Ahots-abisuak / Jakinarazpenak</string>
+    <string name="help_article_navigation_routing_name">Ibilbidearen parametroak</string>
+    <string name="release_4_6">• Glide Ratio Widget
+\n
+\n • ANT+ tenperatura trepeta gehitu da
+\n
+\n • Memoria-kudeaketa hobea GPX ibilbide handietarako
+\n
+\n</string>
+    <string name="sensor_temperature_desc">Sentsorearen tenperatura erakusten du</string>
+    <string name="help_article_map_interact_with_map_name">Maparekin elkarreragin</string>
+    <string name="help_article_map_legend_nautical_map_name">Mapa nautikoen estiloa</string>
+    <string name="help_article_map_point_layers_on_map_name">Mapako puntuak</string>
+    <string name="help_article_map_map_context_menu_name">Maparen testuinguruko menua</string>
+    <string name="help_article_map_raster_maps_name">Raster Mapak (Lineakoak / Lineaz kanpoak)</string>
+    <string name="help_article_map_tracks_on_map_name">Arrastoak eta ibilbideak</string>
+    <string name="help_article_map_track_context_menu_name">Arrastoen testuinguru-menua</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_map_vector_maps_name">Mapa bektorialak (Mapen estiloak)</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Maparen pantaila nabigazioan zehar</string>
+    <string name="live_monitoring_adress_descr">Zehaztu web helbidea parametro sintaxiarekin: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

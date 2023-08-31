@@ -5438,4 +5438,13 @@
     <string name="most_viewed">Mest sete</string>
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Temperatur</string>
+    <string name="release_4_6">• Glidetal-modul
+\n
+\n • Tilføjet ANT+ temperatur-modul
+\n
+\n • Bedre hukommelseshåndtering for store GPX-spor
+\n
+\n</string>
+    <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
 </resources>
