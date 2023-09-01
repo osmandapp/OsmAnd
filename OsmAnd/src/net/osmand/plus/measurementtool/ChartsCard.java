@@ -3,6 +3,7 @@ package net.osmand.plus.measurementtool;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.MEASUREMENT_TOOL;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 import android.annotation.SuppressLint;
@@ -35,7 +36,6 @@ import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.graph.ChartAdapterHelper;
 import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallback;
@@ -372,7 +372,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		GPXFile gpxFile = fragment.generateGpxFile();
 		analysis = gpxFile.getAnalysis(0);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.MEASUREMENT_TOOL);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, MEASUREMENT_TOOL, analysis);
 
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);

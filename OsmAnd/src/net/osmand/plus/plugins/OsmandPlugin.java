@@ -25,6 +25,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -492,7 +493,7 @@ public abstract class OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 	}
 
-	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
 	}
 
 	@Nullable

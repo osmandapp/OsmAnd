@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -43,7 +44,6 @@ import net.osmand.plus.charts.GPXHighlight;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -223,7 +223,7 @@ public class ElevationProfileWidget extends MapWidget {
 		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ROUTE, analysis);
 		firstVisiblePointIndex = -1;
 		lastVisiblePointIndex = -1;
 		slopeDataSet = null;
@@ -502,7 +502,7 @@ public class ElevationProfileWidget extends MapWidget {
 			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}
-			if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+			if (gpxItem.chartPointLayer == ROUTE) {
 				mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
 			}
 			if (location != null) {

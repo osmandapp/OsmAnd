@@ -7,14 +7,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttribute.Elevation;
-import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import org.apache.commons.logging.Log;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
@@ -68,7 +67,8 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public Map<String, PointsAttributesData<?>> pointsAttributesData;
+	public List<PointAttributes> pointAttributes;
+	public Set<String> availableAttributes;
 
 	public boolean hasSpeedInTrack = false;
 
@@ -110,36 +110,24 @@ public class GPXTrackAnalysis {
 		}
 	}
 
-	public boolean hasElevationData() {
-		return getElevationData().hasData();
-	}
-
 	public boolean hasSpeedData() {
-		return getSpeedData().hasData();
+		return hasData(POINT_SPEED);
 	}
 
-	public PointsAttributesData<Elevation> getElevationData() {
-		return getAttributesData(POINT_ELEVATION);
+	public boolean hasElevationData() {
+		return hasData(POINT_ELEVATION);
 	}
 
-	public PointsAttributesData<Speed> getSpeedData() {
-		return getAttributesData(POINT_SPEED);
+	public boolean hasData(String tag) {
+		return availableAttributes.contains(tag);
 	}
 
-	public <T extends PointAttribute<? extends Number>> PointsAttributesData<T> getAttributesData(String key) {
-		@SuppressWarnings("unchecked")
-		PointsAttributesData<T> data = (PointsAttributesData<T>) pointsAttributesData.get(key);
-		if (data == null) {
-			data = new PointsAttributesData<T>(key);
-			pointsAttributesData.put(key, data);
+	public void setHasData(String tag, boolean hasData) {
+		if (hasData) {
+			availableAttributes.add(tag);
+		} else {
+			availableAttributes.remove(tag);
 		}
-		return data;
-	}
-
-	public <T extends PointAttribute<? extends Number>> void addPointAttribute(T attribute) {
-		String key = attribute.getKey();
-		PointsAttributesData<T> attributesData = getAttributesData(key);
-		attributesData.addPointAttribute(attribute);
 	}
 
 	public static GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {
@@ -164,7 +152,8 @@ public class GPXTrackAnalysis {
 		double totalSpeedSum = 0;
 		points = 0;
 
-		pointsAttributesData = new HashMap<>();
+		pointAttributes = new ArrayList<>();
+		availableAttributes = new HashSet<>();
 
 		for (final SplitSegment s : splitSegments) {
 			final int numberOfPoints = s.getNumberOfPoints();
@@ -290,13 +279,10 @@ public class GPXTrackAnalysis {
 					}
 				}
 				float distance = (j > 0) ? calculations[0] : 0;
-
-				addPointAttribute(new Elevation(elevation, distance, timeDiff, firstPoint, lastPoint));
-				addPointAttribute(new Speed(speed, distance, timeDiff, firstPoint, lastPoint));
-
-				if (pointsAnalyser != null) {
-					pointsAnalyser.onAnalysePoint(this, point, distance, timeDiff, firstPoint, lastPoint);
-				}
+				PointAttributes attribute = new PointAttributes(distance, timeDiff, firstPoint, lastPoint);
+				attribute.speed = speed;
+				attribute.elevation = elevation;
+				addWptAttribute(point, attribute, pointsAnalyser);
 			}
 			processElevationDiff(s);
 		}
@@ -304,6 +290,19 @@ public class GPXTrackAnalysis {
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount);
 
 		return this;
+	}
+
+	private void addWptAttribute(WptPt point, PointAttributes attribute, TrackPointsAnalyser pointsAnalyser) {
+		if (!hasSpeedData() && attribute.speed > 0 && totalDistance > 0) {
+			setHasData(POINT_SPEED, true);
+		}
+		if (!hasElevationData() && !Float.isNaN(attribute.elevation) && totalDistance > 0) {
+			setHasData(POINT_ELEVATION, true);
+		}
+		if (pointsAnalyser != null) {
+			pointsAnalyser.onAnalysePoint(this, point, attribute);
+		}
+		pointAttributes.add(attribute);
 	}
 
 	private void updateBounds(WptPt point) {
@@ -334,9 +333,7 @@ public class GPXTrackAnalysis {
 
 	private void checkUnspecifiedValues(long fileTimeStamp) {
 		if (totalDistance < 0) {
-			for (PointsAttributesData attributesData : pointsAttributesData.values()) {
-				attributesData.setHasData(false);
-			}
+			availableAttributes.clear();
 		}
 		if (!isTimeSpecified()) {
 			startTime = fileTimeStamp;
@@ -421,6 +418,6 @@ public class GPXTrackAnalysis {
 	}
 
 	public interface TrackPointsAnalyser {
-		void onAnalysePoint(GPXTrackAnalysis analysis, WptPt point, float distance, int timeDiff, boolean firstPoint, boolean lastPoint);
+		void onAnalysePoint(GPXTrackAnalysis analysis, WptPt point, PointAttributes attribute);
 	}
 }
