@@ -3,8 +3,8 @@ apply plugin: 'ivy-publish'
 
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
+    compileSdk 33
+    buildToolsVersion = "33.0.2"
 
     defaultConfig {
         minSdkVersion 14
