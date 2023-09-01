@@ -5240,7 +5240,7 @@
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort (3D)</string>
-    <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
+    <string name="relief_3d_description">Ej og se skalamodellen af dit nabolag eller hele kontinentet.</string>
     <string name="terrain_category_description">Terrænkonturlinjer, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældning i %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
@@ -5447,4 +5447,5 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
+    <string name="app_mode_baby_transport">Baby-transport</string>
 </resources>
