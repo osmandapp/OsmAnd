@@ -287,7 +287,7 @@
     <string name="rendering_attr_roadStyle_name">Тип пута</string>
     <string name="avoid_roads_msg">Изаберете заменске путање избором путева за избегавање</string>
     <string name="navigation_over_track">Да започнем навођење дуж путање?</string>
-    <string name="rendering_value_orange_name">Поморанџаста</string>
+    <string name="rendering_value_orange_name">Наранџаста</string>
     <string name="traffic_warning_railways">Пружни прелаз</string>
     <string name="show_railway_warnings">Пружни прелази</string>
     <string name="rendering_attr_streetLighting_name">Осветљење улице</string>
@@ -419,7 +419,7 @@
     <string name="rendering_attr_currentTrackWidth_description">Ширина трага ГПИкс-а</string>
     <string name="rendering_value_red_name">Црвена</string>
     <string name="rendering_value_translucent_red_name">Прозирна црвена</string>
-    <string name="rendering_value_translucent_orange_name">Прозирна поморанџаста</string>
+    <string name="rendering_value_translucent_orange_name">Прозирна наранџаста</string>
     <string name="rendering_value_yellow_name">Жута</string>
     <string name="rendering_value_translucent_yellow_name">Прозирна жута</string>
     <string name="rendering_value_lightgreen_name">Светла зелена</string>
