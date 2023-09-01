@@ -34,8 +34,6 @@
     <string name="map_widget_audionotes">Lydnoter</string>
     <string name="audionotes_plugin_description">Tag lyd-/foto-/videnotater under en tur ved hjælp af enten en kortknap eller kontekstmenuen for stedet.</string>
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
-    <string name="index_srtm_parts">dele</string>
-    <string name="index_srtm_ele">Højdekurver</string>
     <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed, relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af konturlinjer, terrænskygger og/eller farvelægning af stejlhed.
 \n
 \nDe underliggende data stammer fra SRTM og ASTER.
@@ -1673,7 +1671,6 @@
     <string name="default_speed_system_descr">Vælg enhed for hastighed.</string>
     <string name="favorite_category_add_new">Tilføj ny</string>
     <string name="favorite_category_select">Vælg kategori</string>
-    <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
     <string name="show_free_version_banner">Vis banner for gratis version</string>
     <string name="show_free_version_banner_description">Vis banneret for den gratis version selv i den betalte version.</string>
     <string name="downloading_number_of_files">Henter - %1$d fil…</string>
@@ -3211,7 +3208,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB brugt</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB brugt</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB brugt</string>
-    <string name="contour_lines_and_hillshade">Højdekurver og terrænskygge</string>
     <string name="routing_attr_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
     <string name="routing_attr_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
     <string name="update_all_maps">Opdater alle kort</string>
@@ -3951,10 +3947,8 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Farvelæg ruterne efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og symbolet for vandreskjoldet.</string>
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: højdekurver, terrænskygger, hældning</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="terrain_maps">Terrænkort</string>
     <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
     <string name="continue_with">Fortsæt med %1$s</string>
@@ -5101,7 +5095,6 @@
     <string name="generate_slope_from_3d_maps">Generér hældningsrasterkort fra 3D-kort</string>
     <string name="disable_vertex_hillshade_3d">Deaktiver vertex-terrænskygge i 3D</string>
     <string name="enable_3d_maps">Aktivér 3D-kort</string>
-    <string name="test_heightmap">Test højdekort</string>
     <string name="generate_hillshade_from_3d_maps">Generér terrænskygge-rasterkort fra 3D-kort</string>
     <string name="clear_online_cache">Ryd online cache</string>
     <string name="offline_cache">Offline cache</string>

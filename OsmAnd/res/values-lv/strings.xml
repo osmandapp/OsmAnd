@@ -976,8 +976,6 @@
     <string name="map_widget_audionotes">Audio ieraksti</string>
     <string name="audionotes_plugin_description">Ceļojuma laikā veikt audio/video vai foto ierakstus ar pogas palīdzību uz kartes vai caur konteksta izvēlni no jebkuras vietas kartē.</string>
     <string name="audionotes_plugin_name">Audio/video ieraksti</string>
-    <string name="index_srtm_parts">daļas</string>
-    <string name="index_srtm_ele">Kontūrlīnijas</string>
     <string name="srtm_plugin_name">Kontūrlīniju spraudnis</string>
     <string name="download_select_map_types">Pārējās kartes</string>
     <string name="download_roads_only_item">Tikai ceļi</string>
@@ -1631,7 +1629,6 @@
     <string name="region_maps">Apgabala kartes</string>
     <string name="world_maps">Pasaules kartes</string>
     <string name="hillshade_layer_disabled">Kalnu reljefs izslēgts</string>
-    <string name="srtm_plugin_disabled">Kontūrlīnijas ir deaktivizētas</string>
     <string name="favorite_category_add_new">Izveidot jaunu</string>
     <string name="favorite_category_select">Izvēlieties kategoriju</string>
     <string name="default_speed_system_descr">Izvēlieties ātruma mērvienību.</string>

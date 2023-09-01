@@ -882,8 +882,6 @@
 \nDane bazowe pochodzą z SRTM i ASTER.
 \n
 \nWięcej informacji na stronie %1$s.</string>
-    <string name="index_srtm_ele">Poziomice</string>
-    <string name="index_srtm_parts">części</string>
     <string name="audionotes_plugin_description">Rób notatki audio/zdjęcia/wideo podczas podróży, używając przycisku mapy lub menu kontekstowego lokalizacji.</string>
     <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
     <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, aby dodać uwagę do lokalizacji.</string>
@@ -1670,7 +1668,6 @@
     <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
     <string name="hillshade_layer_disabled">Wyłączona warstwa mapy cieniowanej</string>
-    <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
     <string name="favourites_edit_dialog_title">Informacje ulubione</string>
     <string name="downloading_number_of_files">Pobieranie %1$d plik…</string>
     <string name="show_free_version_banner">Baner darmowej wersji</string>
@@ -3206,7 +3203,6 @@
     <string name="shared_string_memory_used_gb_desc">Wykorzystuje %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Wykorzystuje %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Wykorzystuje %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Poziomice i mapa cieniowana</string>
     <string name="routing_attr_prefer_unpaved_name">Preferuj drogi nieutwardzone</string>
     <string name="routing_attr_prefer_unpaved_description">Preferuj drogi nieutwardzone.</string>
     <string name="update_all_maps">Zaktualizuj wszystkie mapy</string>
@@ -4177,8 +4173,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
     <string name="offline_wikipeadia">Wikipedia w trybie offline</string>
     <string name="offline_wikivoyage">Wikipodróże w trybie offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terenu: poziomice, mapy cieniowane, nachylenie</string>
-    <string name="terrain_maps">Mapy terenu</string>
     <string name="nautical_depth">Głębokość morska</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
     <string name="backup_delete_types">Usuń wyłączone typy danych</string>
@@ -5039,7 +5033,6 @@
     <string name="clear_online_cache_description">Spowoduje to wyczyszczenie pamięci podręcznej kafelków online pogody.</string>
     <string name="free_maps_updates">Bezpłatne aktualizacje (awaryjne)</string>
     <string name="app_mode_climbing">Wspinaczka</string>
-    <string name="test_heightmap">Przetestuj mapę wysokości</string>
     <string name="approximate_bearing">Przybliżony namiar</string>
     <string name="approximate_bearing_descr">Uzyskaj namiar na podstawie realizowanej trasy nawigacyjnej.</string>
     <string name="sort_date_ascending">Najpierw najnowsza data</string>

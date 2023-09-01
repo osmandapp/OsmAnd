@@ -3307,7 +3307,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="region_maps">Regionwide maps</string>
     <string name="world_maps">World maps</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
-    <!-- string name="srtm_plugin_disabled">Topogaphy disabled</string -->
     <string name="favorite_category_add_new">Add new</string>
     <string name="favorite_category_select">Choose category</string>
     <string name="default_speed_system_descr">Define unit of speed.</string>
@@ -4117,8 +4116,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Tap \'Use location…\' to add a note to the location.</string>
     <string name="map_widget_audionotes">Audio notes</string>
-    <!-- string name="index_srtm_parts">parts</string -->
-    <!-- string name="index_srtm_ele">Contour lines</string -->
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
     <string name="download_srtm_maps">Contour lines</string>

@@ -215,8 +215,6 @@
     <string name="map_widget_audionotes">Lydnotat</string>
     <string name="audionotes_plugin_description">Ta lyd- eller videonotat under turen</string>
     <string name="audionotes_plugin_name">Lyd-/videonotat</string>
-    <string name="index_srtm_parts">delar</string>
-    <string name="index_srtm_ele">Høgdkurver</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="srtm_plugin_name">Høgdekurve-tillegg</string>
     <string name="download_roads_only_item">Berre vegar</string>

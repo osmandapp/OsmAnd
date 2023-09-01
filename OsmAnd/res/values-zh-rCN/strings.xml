@@ -12,7 +12,6 @@
     <string name="recording_context_menu_play">播放</string>
     <string name="recording_default_name">录制中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="index_srtm_parts">部分</string>
     <string name="download_select_map_types">其它地图</string>
     <string name="map_widget_max_speed">速度限制</string>
     <string name="safe_mode">“安全模式”</string>
@@ -440,7 +439,6 @@
     <string name="recording_open_external_player">打开外部播放器</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 的离线等高线插件</string>
     <string name="map_widget_distancemeasurement">距离测量</string>
-    <string name="index_srtm_ele">等高线</string>
     <string name="srtm_plugin_name">等高线</string>
     <string name="download_roads_only_maps">仅包含道路的地图</string>
     <string name="rendering_attr_noAdminboundaries_description">不显示区域(行政区划级别5-9)的边界。</string>
@@ -936,7 +934,6 @@
     <string name="region_maps">区域地图</string>
     <string name="world_maps">世界地图</string>
     <string name="hillshade_layer_disabled">地形层已禁用</string>
-    <string name="srtm_plugin_disabled">等高线已禁用</string>
     <string name="favorite_category_add_new">添加新的</string>
     <string name="favorite_category_select">选择分类</string>
     <string name="default_speed_system_descr">定义速度单位。</string>
@@ -2807,7 +2804,6 @@
     <string name="shared_string_memory_used_gb_desc">已使用 %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">已使用 %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">已使用 %1$s kB</string>
-    <string name="contour_lines_and_hillshade">轮廓线和山体阴影</string>
     <string name="routing_attr_prefer_unpaved_name">偏好未铺设道路</string>
     <string name="routing_attr_prefer_unpaved_description">偏好未铺设道路。</string>
     <string name="update_all_maps">更新所有地图</string>
@@ -3956,9 +3952,7 @@
     <string name="make_backup_descr">这台设备上有很多更改，请将这些数据备份以免丢失。</string>
     <string name="verification_code_missing">我没有收到验证码</string>
     <string name="shared_string_not_included">不包括</string>
-    <string name="terrain_maps">地形图</string>
     <string name="offline_wikivoyage">离线维基导游</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">地形图：等高线、山体阴影、斜坡</string>
     <string name="wikipedia_and_wikivoyage_offline">离线维基百科和维基导游</string>
     <string name="osmand_pro_tagline">获得最多功能</string>
     <string name="restore_complete">已恢复</string>

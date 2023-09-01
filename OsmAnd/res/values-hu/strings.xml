@@ -873,8 +873,6 @@
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Topográfia</string>
-    <string name="index_srtm_ele">Szintvonalak</string>
-    <string name="index_srtm_parts">részek</string>
     <string name="download_select_map_types">Egyéb térképek</string>
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
@@ -1634,7 +1632,6 @@
     <string name="region_maps">Régiószintű térképek</string>
     <string name="world_maps">Világtérképek</string>
     <string name="hillshade_layer_disabled">Domborzatárnyékolás letiltva</string>
-    <string name="srtm_plugin_disabled">Szintvonalak letiltva</string>
     <string name="favorite_category_add_new">Új hozzáadása</string>
     <string name="favorite_category_select">Kategória kiválasztása</string>
     <string name="default_speed_system_descr">Sebesség mértékegységének megadása.</string>
@@ -3043,7 +3040,6 @@
     <string name="shared_string_memory_used_gb_desc">Felhasznált %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Felhasznált %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Felhasznált %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Szintvonalak és domborzatárnyékolás</string>
     <string name="routing_attr_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
     <string name="apply_preference_to_all_profiles">A módosítás alkalmazása az összes profilra vagy a kiválasztottra.</string>
@@ -4170,9 +4166,7 @@
     <string name="continue_with">Folytatás ezzel: %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s vagy %2$s</string>
     <string name="nautical_depth">Tengermélységek</string>
-    <string name="terrain_maps">Domborzati térképek</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
     <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
     <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
@@ -5094,7 +5088,6 @@
     <string name="disable_vertex_hillshade_3d">Vertex domborzatárnyékolás letiltása 3D-ben</string>
     <string name="generate_slope_from_3d_maps">Raszteres lejtéstérképek generálása 3D térképekből</string>
     <string name="enable_3d_maps">3D térképek engedélyezése</string>
-    <string name="test_heightmap">Magassági térkép tesztelése</string>
     <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
     <string name="app_mode_climbing">Mászás</string>
     <string name="shared_string_alt_name">Alternatív név</string>

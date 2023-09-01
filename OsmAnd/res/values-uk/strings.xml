@@ -816,8 +816,6 @@
     <string name="map_widget_audionotes">Аудіопримітки</string>
     <string name="audionotes_plugin_description">Робіть аудіо/фото/відео примітки під час подорожі використовуючи кнопку на мапі або контекстне меню.</string>
     <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
-    <string name="index_srtm_parts">частин</string>
-    <string name="index_srtm_ele">Ізолінії</string>
     <string name="srtm_plugin_description">Дані про рельєф місцевості, такі як ізолінії, рельєф, схили, допомагають візуально оцінити рельєф місцевості, можливості судноплавства тощо. Топографічні відомості можуть бути представлені на мапі ізолініями, рельєфом місцевості та/або розфарбовуванням крутості схилів.
 \n
 \nВихідні дані походять від SRTM та ASTER.
@@ -1658,7 +1656,6 @@
     <string name="region_maps">Регіональні мапи</string>
     <string name="world_maps">Мапи світу</string>
     <string name="hillshade_layer_disabled">Шар рельєфу місцевості вимкнено</string>
-    <string name="srtm_plugin_disabled">Ізолінії вимкнено</string>
     <string name="favorite_category_add_new">Додати нову</string>
     <string name="favorite_category_select">Оберіть категорію</string>
     <string name="default_speed_system_descr">Вкажіть одиниці вимірювання швидкості.</string>
@@ -3216,7 +3213,6 @@
     <string name="shared_string_memory_used_gb_desc">Використано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Використано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Використано %1$s КБ</string>
-    <string name="contour_lines_and_hillshade">Ізолінії та рельєф</string>
     <string name="routing_attr_prefer_unpaved_name">Надавати перевагу дорогам без покриття</string>
     <string name="routing_attr_prefer_unpaved_description">Надавати перевагу дорогам без покриття.</string>
     <string name="update_all_maps">Оновити всі мапи</string>
@@ -4169,10 +4165,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd онлайн. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри офлайн</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Мапи рельєфу: ізолінії, рельєф, схили</string>
     <string name="offline_wikipeadia">Вікіпедія офлайн</string>
     <string name="offline_wikivoyage">Вікімандри офлайн</string>
-    <string name="terrain_maps">Мапи рельєфу</string>
     <string name="nautical_depth">Морські глибини</string>
     <string name="you_can_get_feature_as_part_of_pattern">«%1$s» входить до тарифного плану %2$s. Порівняння:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s або %2$s</string>
@@ -5104,7 +5098,6 @@
     <string name="enable_3d_maps">Увімкнути 3D-мапи</string>
     <string name="generate_hillshade_from_3d_maps">Генерувати растрові мапи із відтіненням рельєфу з 3D-мап</string>
     <string name="generate_slope_from_3d_maps">Генерувати растрові мапи схилів з 3D-мап</string>
-    <string name="test_heightmap">Спробувати мапу висот</string>
     <string name="app_mode_climbing">Скелелазіння</string>
     <string name="clear_online_cache">Очистити онлайн-кеш</string>
     <string name="offline_cache">Офлайн-кеш</string>

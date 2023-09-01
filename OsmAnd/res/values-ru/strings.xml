@@ -324,8 +324,6 @@
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте в пути аудио-, видео- и фотозаметки, используя виджет или контекстное меню.</string>
     <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
-    <string name="index_srtm_parts">частей</string>
-    <string name="index_srtm_ele">Линии высот</string>
     <string name="srtm_plugin_name">Ландшафт</string>
     <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9).</string>
@@ -1952,7 +1950,6 @@
     <string name="favorite_category_name">Название категории</string>
     <string name="favorite_category_add_new_title">Добавить категорию</string>
     <string name="hillshade_layer_disabled">Слой рельефа местности выключен</string>
-    <string name="srtm_plugin_disabled">Контурные линии выключены</string>
     <string name="roads">Дороги</string>
     <string name="buy">Купить</string>
     <string name="activate_seamarks_plugin">Активируйте плагин «Морские карты»</string>
@@ -3206,7 +3203,6 @@
 \n • Другие исправления ошибок
 \n
 \n</string>
-    <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
     <string name="routing_attr_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги и тропы.</string>
     <string name="update_all_maps_q">Обновить все карты (%1$d)\?</string>
@@ -4179,8 +4175,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
     <string name="offline_wikivoyage">Локальный Викигид</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
-    <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
     <string name="you_can_get_feature_as_part_of_pattern">«%1$s» входит в тарифный план %2$s. Сравнение:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
@@ -5098,7 +5092,6 @@
     <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
     <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D-карт</string>
     <string name="disable_vertex_hillshade_3d">Отключить отмывку вершин в 3D</string>
-    <string name="test_heightmap">Тестировать карты высот</string>
     <string name="enable_3d_maps">Включить 3D-карты</string>
     <string name="app_mode_climbing">Альпинизм</string>
     <string name="offline_cache">Офлайн-кеш</string>

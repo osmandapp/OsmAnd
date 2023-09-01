@@ -900,7 +900,6 @@
     <string name="shared_string_my_location">Իմ դիրքը</string>
     <string name="shared_string_my_places">Իմ վայրերը</string>
     <string name="shared_string_my_favorites">Սիրածները</string>
-    <string name="srtm_plugin_disabled">Եզրագծերը(բարձունքների) անջատված են</string>
     <string name="favourites_edit_dialog_title">Տեղեկատվություն ընտրված կետի մասին</string>
     <string name="lang_pms">Պյեմոնտերեն</string>
     <string name="shared_string_tracks">Տրեկները</string>
@@ -1356,8 +1355,6 @@
     <string name="map_widget_distancemeasurement">Հեռավորության չափում</string>
     <string name="audionotes_location_not_defined">Դիրքը դեռ հայտնի չէ, որպեսզի կապել նշումի հետ:«Օգտագործեք դիրղը...» նշումը նշված դիրքին նշանակելու համար։</string>
     <string name="map_widget_audionotes">Աուդիո նշումներ</string>
-    <string name="index_srtm_parts">մասեր</string>
-    <string name="index_srtm_ele">Բարձունքների գծեր</string>
     <string name="download_select_map_types">Այլ քարտեզներ</string>
     <string name="download_roads_only_item">Միայն ճանապարհները</string>
     <string name="download_srtm_maps">Քարտեզ SRTM (բարձունքների գծեր)</string>
