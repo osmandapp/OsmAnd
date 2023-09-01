@@ -1060,7 +1060,7 @@
     <string name="shared_string_and">és</string>
     <string name="shared_string_or">vagy</string>
     <string name="amenity_type_seamark">Hajózási jelzés</string>
-    <string name="app_modes_choose_descr">Megjelenített profilok kijelölése.</string>
+    <string name="app_modes_choose_descr">Megjelenő profilok kijelölése.</string>
     <string name="app_modes_choose">Alkalmazásprofilok</string>
     <string name="map_widget_map_rendering">Térkép kirajzolás</string>
     <string name="app_mode_hiking">Túrázás</string>
@@ -5433,4 +5433,5 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
+    <string name="app_mode_baby_transport">Babakocsi</string>
 </resources>
