@@ -590,6 +590,16 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return tracks;
 	}
 
+	public List<TrkSegment> getSegments(boolean includeGeneralTrack) {
+		List<TrkSegment> segments = new ArrayList<>();
+		for (Track track : tracks) {
+			if (includeGeneralTrack || !track.generalTrack) {
+				segments.addAll(track.segments);
+			}
+		}
+		return segments;
+	}
+
 	public int getTracksCount() {
 		int count = 0;
 		for (GPXUtilities.Track track : tracks) {

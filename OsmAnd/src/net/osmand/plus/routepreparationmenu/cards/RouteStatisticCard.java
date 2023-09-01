@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
+
 import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -21,16 +23,15 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
 
-	private final GPXFile gpx;
+	private final GPXFile gpxFile;
 	private final GpxDisplayItem gpxItem;
 	@Nullable
 	private OrderedLineDataSet slopeDataSet;
@@ -50,17 +51,16 @@ public class RouteStatisticCard extends MapBaseCard {
 	private final OnClickListener onAnalyseClickListener;
 	private CommonChartAdapter graphAdapter;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
-	                          OnClickListener onAnalyseClickListener) {
+	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpxFile, OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
-		this.gpx = gpx;
+		this.gpxFile = gpxFile;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ROUTE, null);
 	}
 
 	@Nullable
-	public GPXFile getGpx() {
-		return gpx;
+	public GPXFile getGpxFile() {
+		return gpxFile;
 	}
 
 	@Nullable
@@ -141,7 +141,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildSlopeInfo() {
-		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		buildHeader(analysis);
 		boolean hasElevationData = analysis.hasElevationData();
