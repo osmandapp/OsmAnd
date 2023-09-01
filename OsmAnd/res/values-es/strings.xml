@@ -5434,4 +5434,5 @@
 \n - Mejor gestión de la memoria para pistas GPX de gran tamaño
 \n
 \n</string>
+    <string name="app_mode_baby_transport">Cochecito</string>
 </resources>

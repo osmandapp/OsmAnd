@@ -5429,7 +5429,7 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
-    <string name="live_monitoring_adress_descr">Tentukan</string>
+    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="release_4_6">• Widget Rasio Glide
 \n
 \n• Ditambahkan widget suhu ANT+
@@ -5439,4 +5439,5 @@
 \n</string>
     <string name="shared_string_temperature">Suhu</string>
     <string name="sensor_temperature_desc">Menampilkan suhu dari sensor</string>
+    <string name="app_mode_baby_transport">Transportasi bayi</string>
 </resources>
