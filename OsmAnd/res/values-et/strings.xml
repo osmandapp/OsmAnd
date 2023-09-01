@@ -527,7 +527,6 @@
     <string name="travel_card_download_descr">Laadi alla Wikivoyage reisijuhid, et vaadata artikleid kohtadest üle maailma ilma internetiühenduseta.</string>
     <string name="start_editing_card_image_text">Tasuta ülemaailmne kõigi poolt täiendatav reisijuht.</string>
     <string name="welcome_to_open_beta">Tere tulemast avatud beetasse</string>
-    <string name="contour_lines_hillshade_maps">Kõrgusjooned ja künkavarjutusega kaardid</string>
     <string name="maps_you_need_descr">Sinu järjehoidjatesse lisatud artiklite alusel on soovitame alla laadida järgmised kaardid:</string>
     <string name="purchase_cancelled_dialog_title">Oled tühistanud oma OsmAnd Live tellimuse</string>
     <string name="purchase_cancelled_dialog_descr">Uuenda tellimust kõigi funktsioonide kasutamise jätkamiseks:</string>

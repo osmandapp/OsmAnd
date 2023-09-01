@@ -2696,7 +2696,6 @@
     <string name="welcome_to_open_beta">Καλώς ήλθατε, στην ανοικτή βήτα</string>
     <string name="wikivoyage_travel_guide">Ταξιδιωτικοί Οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
-    <string name="contour_lines_hillshade_maps">Χάρτες ισοϋψών γραμμών &amp; σκίασης αναγλύφου</string>
     <string name="download_wikipedia_description">Λήψη των άρθρων της βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
     <string name="download_wikipedia_label">Λήψη δεδομένων βικιπαίδειας</string>
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου μέσω δεδομένων</string>

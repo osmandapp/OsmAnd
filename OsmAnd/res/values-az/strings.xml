@@ -3174,7 +3174,6 @@
     <string name="record_plugin_description">Bu qoşma xəritədə GPX qeydetmə vidcetinə əl ilə toxunmaqla izlərinizi qeyd etmək və saxlamaq, həmçinin bütün naviqasiya marşrutlarınızı avtomatik olaraq GPX faylına qeyd etmək funksiyasını aktivləşdirir.
 \n
 \nQeyd edilmiş izlər dostlarınızla paylaşıla və ya OSM töhfələri üçün istifadə edilə bilər. İdmançılar məşqlərinə nəzarət etmək üçün qeyd edilmiş izlərdən istifadə edə bilərlər. Dövrə vaxtları, orta sürət və s. kimi bəzi əsas iz analizləri birbaşa OsmAnd-da həyata keçirilə bilər və əlbəttə ki, daha sonra izlər xüsusi 3-cü tərəf analiz alətlərində də təhlil edilə bilər.</string>
-    <string name="contour_lines_hillshade_maps">Kontur xətləri və təpə kölgəsi xəritələri</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>

@@ -2353,7 +2353,6 @@
     <string name="daily_map_updates">Сатна освежавања карата</string>
     <string name="wikivoyage_offline">Викивојаж ван мреже</string>
     <string name="wikipedia_offline">Википедија ван мреже</string>
-    <string name="contour_lines_hillshade_maps">Карте изохипси и изгледа предела</string>
     <string name="purchase_dialog_travel_description">Купите једно од следећег ради читања туристичких чланака ван мреже:</string>
     <string name="use_two_digits_longitude">Користи две цифре за земљописну дужину</string>
     <string name="waypoints_removed_from_map_markers">Пролазне тачке су уклоњене са ознака карте</string>

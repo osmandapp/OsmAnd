@@ -2713,7 +2713,6 @@
     <string name="purchase_cancelled_dialog_descr">Прадоўжыць падпіску, каб і далей карыстацца ўсімі функцыямі:</string>
     <string name="maps_you_need_descr">На падставе закладзеных вамі артыкулаў рэкамендуецца спампаваць наступныя мапы:</string>
     <string name="maps_you_need">Патрэбныя вам мапы</string>
-    <string name="contour_lines_hillshade_maps">Контурныя лініі і зацяненне рэльефу</string>
     <string name="hide_full_description">Схаваць поўнае апісанне</string>
     <string name="show_full_description">Паказаць поўнае апісанне</string>
     <string name="nautical_render_descr">Для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>

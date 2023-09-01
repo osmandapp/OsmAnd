@@ -991,7 +991,6 @@
     <string name="change_default_settings">Modificar la configuracion</string>
     <string name="general_settings_profile_descr">Tema de l\'aplicacion, unitats, país</string>
     <string name="keep_passed_markers_descr">Lei marcadors ajustats a un grop de Preferits ò coma ponch GPX marcats per passats demoraràn sus la mapa. Si lo grop es pas actiu, lei marcadors pareisseràn pus sus la mapa.</string>
-    <string name="contour_lines_hillshade_maps">Mapas amb corbas de nivèu e ombra de relèu</string>
     <string name="remove_from_map_markers">Levar dei \'Marcadors de mapa\'</string>
     <string name="all_markers_moved_to_history">Totei lei marcadors de mapa son estats arquivats dins l\'istoric</string>
     <string name="marker_moved_to_history">Lo marcador de mapa es estat arquivat dins l\'istoric</string>

@@ -2531,7 +2531,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <!-- string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string -->
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">Purchase one of the following to receive the offline travel guide functionality:</string>

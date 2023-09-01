@@ -3353,7 +3353,6 @@
 \nНамерете инструкции за това как да допринесете на адрес %1$s.</string>
     <string name="add_to_opr">Добавяне в OpenPlaceReviews</string>
     <string name="angular_measeurement">Ъглови единици</string>
-    <string name="contour_lines_hillshade_maps">Контурни линии и карти за засенчване на релефа</string>
     <string name="display_zoom_level">Увеличение: %1$s</string>
     <string name="simulate_location_by_gpx">Симулиране на местоположението чрез GPX</string>
     <string name="srtm_color_scheme">Цветова схема</string>

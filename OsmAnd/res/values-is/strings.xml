@@ -2692,7 +2692,6 @@
     <string name="start_editing">Hefja breytingar</string>
     <string name="get_unlimited_access">Fáðu ótakmarkaðan aðgang</string>
     <string name="welcome_to_open_beta">Velkomin í opnu beta-þróunarútgáfuna</string>
-    <string name="contour_lines_hillshade_maps">Hæðarlínur og hæðaskyggð kort</string>
     <string name="download_wikipedia_description">Sækja Wikipedia greinar fyrir %1$s til að lesa þær án nettengingar.</string>
     <string name="download_wikipedia_label">Sækja Wikipedia-gögn</string>
     <string name="open_in_browser_wiki">Opna greinina á netinu</string>

@@ -2694,7 +2694,6 @@
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
     <string name="welcome_to_open_beta">Velkommen til den åbne beta</string>
-    <string name="contour_lines_hillshade_maps">Højdekurver &amp; terrænskyggekort</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
     <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>

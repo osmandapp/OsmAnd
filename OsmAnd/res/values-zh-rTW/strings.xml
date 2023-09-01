@@ -2679,7 +2679,6 @@
     <string name="start_editing">開始編輯</string>
     <string name="get_unlimited_access">取得無限制的存取</string>
     <string name="welcome_to_open_beta">歡迎來到公開測試版</string>
-    <string name="contour_lines_hillshade_maps">等高線與丘陵陰影地圖</string>
     <string name="download_wikipedia_description">下載 %1$s 的維基百科文章以供離線閱讀。</string>
     <string name="download_wikipedia_label">下載維基百科資料</string>
     <string name="open_in_browser_wiki">線上開啟文章</string>

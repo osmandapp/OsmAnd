@@ -2729,7 +2729,6 @@
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
-    <string name="contour_lines_hillshade_maps">Карты горизонталей и затенение рельефа</string>
     <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их без интернета.</string>
     <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в интернете</string>

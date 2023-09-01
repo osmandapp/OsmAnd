@@ -3570,7 +3570,6 @@
     <string name="purchase_dialog_subtitle">选择合适的项目</string>
     <string name="purchase_dialog_travel_description">购买以下其中一项，即可获得离线旅游指南功能：</string>
     <string name="unlock_all_features">解锁所有 OsmAnd 功能</string>
-    <string name="contour_lines_hillshade_maps">等高线和山体阴影地图</string>
     <string name="daily_map_updates">每小时更新地图</string>
     <string name="monthly_map_updates">每月更新地图</string>
     <string name="welcome_to_open_beta">欢迎使用公开测试版</string>

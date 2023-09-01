@@ -2782,7 +2782,6 @@
     <string name="depth_contour_descr">Meren syvyyskäyrät ja merimerkit.</string>
     <string name="srtm_purchase_header">Osta ja asenna Korkeuskäyrät-lisäosa näyttämään porrastettuja pystysuuntaisia alueita.</string>
     <string name="hillshade_purchase_header">Asenna Korkeuskäyrät-lisäosa näyttämään porrastettuja pystysuuntaisia alueita.</string>
-    <string name="contour_lines_hillshade_maps">Korkeuskäyrä- &amp; mäkivarjostuskartat</string>
     <string name="default_render_descr">Yleiskäyttöinen tyyli. Tiheät kaupungit näkyvät siististi. Sisältää korkeuskäyrät, reitit, pinnan laadun, kulkurajoitukset, tiekilvet, polkujen piirron SAC-mittakaavan mukaan, koskiurheilukohteet.</string>
     <string name="topo_render_descr">Patikointiin, vaellukseen ja luontopyöräilyyn. Luettavissa ulkona. Korkeakontrastiset tiet ja luontokohteet, eri reittityypit, kehittyneet korkeuskäyrävaihtoehdot, lisää yksityiskohtia. Pinnan eheyden säätäminen erottelee tien laadun. Ei yötilaa.</string>
     <string name="light_rs_render_descr">Yksinkertainen ajotyyli. Hellävarainen yötila, korkeuskäyrät, oranssinsävyiset korkeakontrastiset tiet, himmentää toissijaiset karttakohteet.</string>
