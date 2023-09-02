@@ -4600,4 +4600,8 @@
     <string name="poi_foot_designated">مخصصة للمشاة</string>
     <string name="poi_motorcar_designated">مصممة للسيارات</string>
     <string name="poi_motor_vehicle_designated">مصممة للمركبات ذات محرك</string>
+    <string name="poi_socket_typee_voltage_filter">وصلة جهد كهربائي من نوع E</string>
+    <string name="poi_socket_typee">المقبس: نوع E</string>
+    <string name="poi_socket_typee_output_filter">مخرج توصيل نوع E</string>
+    <string name="poi_socket_typee_current">مأخذ التوصيل: النوع E: تيار</string>
 </resources>
