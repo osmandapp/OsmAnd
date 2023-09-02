@@ -483,7 +483,7 @@ public class RoutingContext {
 				log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB "
 						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb);
 				long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-				log.warn("Used memory before " + us1 / mb + "after " + us1 / mb );
+				log.warn("Used memory before " + us1 / mb + " after " + us1 / mb );
 			}
 		}
 		if (!indexedSubregions.containsKey(tileId)) {
