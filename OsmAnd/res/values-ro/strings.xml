@@ -5360,4 +5360,6 @@
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
+    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Temperatură</string>
 </resources>
