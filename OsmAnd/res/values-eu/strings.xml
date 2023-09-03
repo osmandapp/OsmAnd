@@ -5044,59 +5044,31 @@
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
     <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
 \n
-\n
-\n
 \n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
-\n
-\n
 \n
 \n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
 \n
-\n
-\n
 \n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
-\n
-\n
 \n
 \n • Maparen orientazioak modu finko berria gehitu du
 \n
-\n
-\n
 \n • Hasierako pantaila sinplifikatua
-\n
-\n
 \n
 \n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
 \n
-\n
-\n
 \n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
-\n
-\n
 \n
 \n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
 \n
-\n
-\n
 \n • Leku beganoak bistaratzeko arazoak konpondu dira
 \n
+\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da
 \n
-\n
-\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da 
-\n
-\n
-\n
-\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\" 
-\n
-\n
+\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"
 \n
 \n • Ziklomotor profil berria
 \n
-\n
-\n
-\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\" 
-\n
-\n
+\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"
 \n
 \n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
 \n
@@ -5248,7 +5220,7 @@
     <string name="external_sensors_source_of_data">Datuen iturria</string>
     <string name="show_all_tracks_on_the_map">Erakutsi arrasto guztiak mapan</string>
     <string name="shared_string_close_the_dialog">Itxi elkarrizketa-koadroa</string>
-    <string name="power_watts_unit">Watts</string>
+    <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="osmand_cloud_deleted_account_descr">Kontua eta datu guztiak OsmAnd Cloud-etik ezabatu dira.</string>
     <string name="osmand_cloud_deleting_account_descr">Une gutxi barru zure datu eta kontu guztiak OsmAnd Cloud-etik ezabatuko dira.
@@ -5417,4 +5389,47 @@
     <string name="help_article_navigation_routing_public_transport_navigation_name">Garraio publikoko ibilbideak</string>
     <string name="help_article_navigation_routing_ski_routing_name">Eski ibilbideak</string>
     <string name="app_mode_baby_transport">Haurren garraioa</string>
+    <string name="help_article_personal_name">Nire datuak</string>
+    <string name="help_article_personal_import_export_name">Inportatu / Esportatu</string>
+    <string name="help_article_personal_profiles_name">Profilak (Ezarpenak)</string>
+    <string name="help_article_personal_storage_name">Biltegiratzea</string>
+    <string name="help_article_plan_route_name">Planifikatu ibilbidea</string>
+    <string name="help_article_plan_route_coordinate_input_name">Sartu koordenatuak</string>
+    <string name="help_article_plan_route_web_name">Ibilbideak planifikatzeko web orria</string>
+    <string name="help_article_purchases_android_name">Android erosketak</string>
+    <string name="help_article_purchases_giveaway_name">Oparia</string>
+    <string name="help_article_start_with_first_steps_name">Lehen urratsak</string>
+    <string name="help_article_start_with_main_menu_name">Menu nagusia</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Erroreen erregistroa</string>
+    <string name="help_article_troubleshooting_general_name">Orokorra</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapak eta datuak</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Arrastoen grabazioa</string>
+    <string name="help_article_widgets_name">Mapen trepetak</string>
+    <string name="shared_string_setup">Konfigurazioa</string>
+    <string name="help_article_search_search_poi_name">Bilatu interesguneak</string>
+    <string name="help_article_start_with_name">Hasi OsmAnd-ekin</string>
+    <string name="report_an_issues">Arazo baten berri eman</string>
+    <string name="copy_build_version">Kopiatu eraikitze bertsioa</string>
+    <string name="most_viewed">Gehien ikusiak</string>
+    <string name="contact_us">Jarri gurekin harremanetan</string>
+    <string name="free_versions">Doako bertsioak</string>
+    <string name="telegram_chats">Telegram txatak</string>
+    <string name="about_osmand">OsmAnd-i buruz</string>
+    <string name="github_discussion">GitHub-eko eztabaida</string>
+    <string name="free_versions_descr">Deskargatu eta instalatu doako OsmAnd bertsioa</string>
+    <string name="send_logcat_log_descr">Erregistro fitxategi zehatza</string>
+    <string name="send_crash_log_descr">Erroreei buruzko informazioa bakarrik dauka</string>
+    <string name="help_article_purchases_ios_name">iOS erosketak</string>
+    <string name="help_article_search_search_all_name">Bilatu guztiak</string>
+    <string name="help_article_search_search_coordinates_name">Bilatu koordenatuak</string>
+    <string name="help_article_widgets_info_widgets_name">Trepeta informatiboak</string>
+    <string name="help_article_widgets_map_buttons_name">Maparen botoiak</string>
+    <string name="help_article_widgets_markers_name">Markatzaileen trepetak</string>
+    <string name="help_article_widgets_nav_widgets_name">Nabigazio trepetak</string>
+    <string name="help_article_widgets_radius_ruler_name">Erradio-erregela eta erregela</string>
+    <string name="user_guide">Erabiltzailearen gida</string>
+    <string name="telegram_chats_descr">Sartu gure Telegram txatetako batera.</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Ibilbidea prestatzea</string>
+    <string name="open_issue_on_github_descr">Galdetu, funtzioak proposatu</string>
+    <string name="open_issue_on_github">Ireki arazoa GitHub-en</string>
 </resources>
