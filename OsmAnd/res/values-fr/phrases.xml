@@ -4596,4 +4596,20 @@
     <string name="poi_horse_designated">Désigné pour les chevaux</string>
     <string name="poi_foot_designated">Désigné pour les piétons</string>
     <string name="poi_vehicle_designated">Désigné pour les véhicules</string>
+    <string name="poi_health_specialty_allergology_yes">Allergologie</string>
+    <string name="poi_health_specialty_cardiac_surgery_yes">Chirurgie cardiaque</string>
+    <string name="poi_health_specialty_geriatrics_yes">Gériatrie</string>
+    <string name="poi_health_specialty_haematology_yes">Hématologie</string>
+    <string name="poi_health_specialty_paediatric_dentistry_yes">Dentiste pédiatrique</string>
+    <string name="poi_health_specialty_paediatric_surgery_yes">Chirurgie pédiatrique</string>
+    <string name="poi_health_specialty_fertility_yes">Fertilité</string>
+    <string name="poi_health_specialty_vascular_surgery_yes">Chirurgie vasculaire</string>
+    <string name="poi_health_specialty_periodontics_yes">Parodontie</string>
+    <string name="poi_health_specialty_covid19_yes">Covid-19</string>
+    <string name="poi_health_specialty_endodontics_yes">Endodontie</string>
+    <string name="poi_health_specialty_rheumatology_yes">Rhumatologie</string>
+    <string name="poi_health_specialty_weight_loss_yes">Perte de poids</string>
+    <string name="poi_health_specialty_infectious_diseases_yes">Maladie infectieuses</string>
+    <string name="poi_health_specialty_dialysis_yes">Dialyse</string>
+    <string name="poi_health_specialty_blood_check_yes">Analyse sanguine</string>
 </resources>
