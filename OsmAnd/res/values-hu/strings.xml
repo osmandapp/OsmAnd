@@ -1062,7 +1062,7 @@
     <string name="amenity_type_seamark">Hajózási jelzés</string>
     <string name="app_modes_choose_descr">Megjelenő profilok kijelölése.</string>
     <string name="app_modes_choose">Alkalmazásprofilok</string>
-    <string name="map_widget_map_rendering">Térkép kirajzolás</string>
+    <string name="map_widget_map_rendering">Térkép megjelenítés</string>
     <string name="app_mode_hiking">Túrázás</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
     <string name="app_mode_boat">Hajó</string>
@@ -2868,7 +2868,7 @@
     <string name="send_log">Napló küldése</string>
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordináta-widget</string>
-    <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
+    <string name="keep_passed_markers_descr">A Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
     <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
@@ -5265,7 +5265,7 @@
 \n
 \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez
 \n
-\n • Közös widgetlista az alsó/felső panelhez
+\n • Egyforma widgetlista az alsó/felső panelhez
 \n
 \n • Új \"Vonat\" profil, vasúti útvonalak megtervezéséhez
 \n
