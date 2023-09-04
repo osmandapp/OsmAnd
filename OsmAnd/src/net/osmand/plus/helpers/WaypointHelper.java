@@ -464,6 +464,8 @@ public class WaypointHelper {
 										if (atd.isTurnStateActive(atdSpeed, dist, STATE_SHORT_ALARM_ANNOUNCE)) {
 											locationPointsStates.put(point, ANNOUNCED_DONE);
 											proceed = false;
+											//update lastAlarm location for avoid series of same types alarms
+											lastAlarm.setLatLon(point.getLatitude(), point.getLongitude());
 										}
 									}
 								}
