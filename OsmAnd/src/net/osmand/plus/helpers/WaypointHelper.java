@@ -4,7 +4,6 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALAR
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
-import static net.osmand.plus.settings.backend.ApplicationMode.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -86,10 +85,11 @@ public class WaypointHelper {
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
+	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
-	private long announcedAlarmTime;
 	private ApplicationMode appMode;
 
 
@@ -357,8 +357,9 @@ public class WaypointHelper {
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
 							long ms = System.currentTimeMillis();
-							if (ms - announcedAlarmTime > 50 * 1000) {
-								announcedAlarmTime = ms;
+							Long timeLastAlarm = lastAnnouncedAlarmsTime.get(info.getType());
+							if (timeLastAlarm == null || ms - timeLastAlarm > 50 * 1000) {
+								lastAnnouncedAlarmsTime.put(info.getType(), ms);
 								getVoiceRouter().announceAlarm(info, loc.getSpeed());
 							}
 							return info;
@@ -464,8 +465,14 @@ public class WaypointHelper {
 										if (atd.isTurnStateActive(atdSpeed, dist, STATE_SHORT_ALARM_ANNOUNCE)) {
 											locationPointsStates.put(point, ANNOUNCED_DONE);
 											proceed = false;
-											//update lastAlarm location for avoid series of same types alarms
-											lastAlarm.setLatLon(point.getLatitude(), point.getLongitude());
+										}
+									}
+									Long timeLastAlarm = lastAnnouncedAlarmsTime.get(t);
+									if (timeLastAlarm != null && proceed) {
+										long ms = System.currentTimeMillis();
+										if (ms - timeLastAlarm < SAME_ALARM_INTERVAL * 1000) {
+											locationPointsStates.put(point, ANNOUNCED_DONE);
+											proceed = false;
 										}
 									}
 								}
@@ -504,6 +511,7 @@ public class WaypointHelper {
 								AlarmInfo alarm = (AlarmInfo) pw.point;
 								voiceRouter.announceAlarm(new AlarmInfo(alarm.getType(), -1), lastKnownLocation.getSpeed());
 								lastAnnouncedAlarms.put(alarm.getType(), alarm);
+								lastAnnouncedAlarmsTime.put(alarm.getType(), System.currentTimeMillis());
 							}
 						} else if (type == FAVORITES) {
 							voiceRouter.approachFavorite(lastKnownLocation, approachPoints);
@@ -559,6 +567,7 @@ public class WaypointHelper {
 	public void clearAllVisiblePoints() {
 		this.locationPointsStates.clear();
 		this.lastAnnouncedAlarms.clear();
+		this.lastAnnouncedAlarmsTime.clear();
 		this.locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	}
 
@@ -649,6 +658,7 @@ public class WaypointHelper {
 		this.locationPoints = locationPoints;
 		this.locationPointsStates.clear();
 		this.lastAnnouncedAlarms.clear();
+		this.lastAnnouncedAlarmsTime.clear();
 		TIntArrayList list = new TIntArrayList(locationPoints.size());
 		list.fill(0, locationPoints.size(), 0);
 		this.pointsProgress = list;
