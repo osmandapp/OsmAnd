@@ -56,17 +56,18 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AnalyticsHelper;
+import net.osmand.plus.feedback.AnalyticsHelper;
+import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.feedback.RateUsHelper;
+import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -331,7 +332,7 @@ public class OsmandApplication extends MultiDexApplication {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
 		if (RateUsHelper.shouldShowRateDialog(this)) {
-			settings.RATE_US_STATE.set(RateUsHelper.RateUsState.IGNORED);
+			settings.RATE_US_STATE.set(RateUsState.IGNORED);
 		}
 		getNotificationHelper().removeNotifications(false);
 	}

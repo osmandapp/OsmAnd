@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.feedback;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

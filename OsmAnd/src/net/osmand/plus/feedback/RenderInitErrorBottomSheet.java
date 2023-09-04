@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.feedback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RENDER_INIT_ERROR_ID;
 

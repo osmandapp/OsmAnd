@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.feedback;
 
 import android.database.Cursor;
 import android.database.DatabaseUtils;

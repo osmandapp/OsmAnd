@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.feedback;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,20 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.helpers.RateUsHelper;
-import net.osmand.plus.helpers.RateUsHelper.RateUsState;
+import net.osmand.plus.dialogs.DislikeOsmAndBottomSheetDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
 public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-	public static final String TAG = "RateUsBottomSheetDialogFragment";
+
+	public static final String TAG = RateUsBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
 
 	private RateUsHelper rateUsHelper;

@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.feedback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_SEND_ANALYTICS_ID;
 
@@ -72,14 +72,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setChecked(sendAnonymousMapDownloadsData)
 				.setTitle(getString(R.string.downloaded_maps))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean checked = !downloadedMapsItem[0].isChecked();
-						downloadedMapsItem[0].setChecked(checked);
-						sendAnonymousMapDownloadsData = checked;
-						updateBottomButtons();
-					}
+				.setOnClickListener(v -> {
+					boolean checked = !downloadedMapsItem[0].isChecked();
+					downloadedMapsItem[0].setChecked(checked);
+					sendAnonymousMapDownloadsData = checked;
+					updateBottomButtons();
 				})
 				.setTag("downloaded_maps")
 				.create();
@@ -94,14 +91,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setChecked(sendAnonymousAppUsageData)
 				.setTitle(getString(R.string.visited_screens))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean checked = !visitedScreensItem[0].isChecked();
-						visitedScreensItem[0].setChecked(checked);
-						sendAnonymousAppUsageData = checked;
-						updateBottomButtons();
-					}
+				.setOnClickListener(v -> {
+					boolean checked = !visitedScreensItem[0].isChecked();
+					visitedScreensItem[0].setChecked(checked);
+					sendAnonymousAppUsageData = checked;
+					updateBottomButtons();
 				})
 				.setTag("visited_screens")
 				.create();
