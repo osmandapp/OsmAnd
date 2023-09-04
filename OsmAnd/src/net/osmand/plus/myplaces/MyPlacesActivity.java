@@ -164,7 +164,8 @@ public class MyPlacesActivity extends TabActivity {
 		return false;
 	}
 
-	protected List<Fragment> getActiveTalkbackFragments() {
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
 		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
 			boolean isTabFragment = false;
@@ -181,7 +182,8 @@ public class MyPlacesActivity extends TabActivity {
 		return fragmentsWithoutTabs;
 	}
 
-	protected void setActivityAccessibility(boolean hideActivity) {
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
 		View pagerContent = findViewById(R.id.pager_content);
 		View slidingTabs = findViewById(R.id.sliding_tabs);
 		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;

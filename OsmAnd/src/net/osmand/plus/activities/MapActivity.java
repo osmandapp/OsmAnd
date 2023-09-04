@@ -2215,7 +2215,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return views;
 	}
 
-	protected List<Fragment> getActiveTalkbackFragments() {
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
 		List<Fragment> allFragments = getSupportFragmentManager().getFragments();
 		List<Fragment> fragmentForTalkBack = new ArrayList<>();
 		for(Fragment fragment : allFragments){

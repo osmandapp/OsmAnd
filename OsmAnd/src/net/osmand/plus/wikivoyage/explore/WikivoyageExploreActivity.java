@@ -340,7 +340,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		}
 	}
 
-	protected List<Fragment> getActiveTalkbackFragments() {
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
 		List<Fragment> tabFragments = new ArrayList<>();
 		if (pagerAdapter != null) {
@@ -365,7 +366,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		return fragmentsWithoutTabs;
 	}
 
-	protected void setActivityAccessibility(boolean hideActivity) {
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
 		View pagerContent = findViewById(R.id.view_pager);
 		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
 		pagerContent.setImportantForAccessibility(accessibility);
