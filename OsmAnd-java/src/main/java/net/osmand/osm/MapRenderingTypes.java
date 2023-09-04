@@ -284,6 +284,8 @@ public abstract class MapRenderingTypes {
 				"yes".equals(parser.getAttributeValue("", "map")) || parser.getAttributeValue("", "map") == null;
 		rtype.poi = "true".equals(parser.getAttributeValue("", "poi")) || 
 				"yes".equals(parser.getAttributeValue("", "poi")) || parser.getAttributeValue("", "poi") == null;
+		rtype.propagateToNodes = "true".equals(parser.getAttributeValue("", "propagateToNodes")) ||
+				"true".equals(parser.getAttributeValue("", "propagateToNodes"));
 		
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
@@ -534,6 +536,7 @@ public abstract class MapRenderingTypes {
 		protected String relationGroupPrefix;
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
+		protected boolean propagateToNodes = false;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -719,7 +722,10 @@ public abstract class MapRenderingTypes {
 			return true;
 		}
 		
-		
+		public boolean isPropagateToNodes() {
+			return propagateToNodes;
+		}
+
 	}
 
 	public static String getRestrictionValue(int i) {
