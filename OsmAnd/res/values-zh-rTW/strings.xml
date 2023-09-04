@@ -5425,4 +5425,5 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
+    <string name="app_mode_baby_transport">嬰兒運輸</string>
 </resources>
