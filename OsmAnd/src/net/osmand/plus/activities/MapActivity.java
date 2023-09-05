@@ -2169,6 +2169,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	@Nullable
+	protected List<View> getHidingViews(){
+		List<View> views = new ArrayList<>();
+		View mainContainer = findViewById(R.id.MapHudButtonsOverlay);
+		if(mainContainer != null){
+			views.add(mainContainer);
+		}
+		return views;
+	}
+
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		List<Fragment> allFragments = getSupportFragmentManager().getFragments();
+		List<Fragment> fragmentForTalkBack = new ArrayList<>();
+		for(Fragment fragment : allFragments){
+			if(!(fragment instanceof DashBaseFragment)){
+				fragmentForTalkBack.add(fragment);
+			}
+		}
+		return fragmentForTalkBack;
+	}
+
 	public void registerActivityResultListener(ActivityResultListener listener) {
 		activityResultListeners.add(listener);
 	}
