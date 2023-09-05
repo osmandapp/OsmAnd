@@ -225,6 +225,14 @@ public class GPXDatabase {
 			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
 			GPX_COL_MAX_FILTER_HDOP + " = ? ";
 
+	private static final String GPX_NEAREST_CITY_LIST = "SELECT DISTINCT " +
+			GPX_COL_NEAREST_CITY_NAME + " FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL";
+
+	private static final String GPX_MIN_DATE = "SELECT " +
+			"MAX(" + GPX_COL_FILE_LAST_MODIFIED_TIME + ") " +
+			" FROM " + GPX_TABLE_NAME;
+
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
 			GPX_TABLE_NAME + " SET " +
 			GPX_COL_COLOR + " = ?, " +
@@ -1169,6 +1177,52 @@ public class GPXDatabase {
 		item.maxFilterHdop = maxFilterHdop;
 
 		return item;
+	}
+
+	public long getTracksMinDate() {
+		long minDate = 0;
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GPX_MIN_DATE, null);
+				if (query != null) {
+					try {
+						if (query.moveToFirst()) {
+							minDate = query.getLong(0);
+						}
+					} finally {
+						query.close();
+					}
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return minDate;
+	}
+
+	public ArrayList<String> getNearestCityList() {
+		ArrayList<String> nearestCities = new ArrayList<>();
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GPX_NEAREST_CITY_LIST, null);
+				if (query != null) {
+					try {
+						if (query.moveToFirst()) {
+							do {
+								nearestCities.add(query.getString(0));
+							} while (query.moveToNext());
+						}
+					} finally {
+						query.close();
+					}
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return nearestCities;
 	}
 
 	@NonNull

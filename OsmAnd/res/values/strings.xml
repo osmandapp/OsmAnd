@@ -19,6 +19,15 @@
     <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperature</string>
     <string name="sensor_temperature_desc">Shows temperature from sensor</string>
+
+    <string name="with_waypoints">With waypoints</string>
+    <string name="shared_string_reset_all">Reset all</string>
+    <string name="date_of_creation">Date of creation</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="track_filter_range_selected_format">%d - %d, %s</string>
+    <string name="filter_by_name">Filter by name</string>
+    <string name="filter_screen_title">Filter</string>
+    <string name="filter_tracks_count">Filter: %d</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
     <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
     <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>

@@ -355,6 +355,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	@Override
+	public void showFiltersDialog() {
+
+	}
+
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {

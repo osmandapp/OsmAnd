@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.viewholders.*
+import net.osmand.plus.configmap.tracks.viewholders.EmptySearchResultViewHolder
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener
+import net.osmand.plus.configmap.tracks.viewholders.NoVisibleTracksViewHolder
+import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.settings.enums.TracksSortMode
@@ -29,7 +34,7 @@ class SearchTracksAdapter(
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private val locationViewCache: UpdateLocationViewCache
-    private val filter: TracksSearchFilter = TracksSearchFilter(trackItems)
+    private val filter: TracksSearchFilter = TracksSearchFilter(app, trackItems)
 
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
@@ -150,7 +155,7 @@ class SearchTracksAdapter(
             holder.bindView()
         } else if (holder is SortTracksViewHolder) {
             val enabled = !Algorithms.isEmpty(trackItems)
-            holder.bindView(enabled)
+            holder.bindView(enabled, filter)
         }
     }
 
@@ -162,12 +167,21 @@ class SearchTracksAdapter(
         return filter
     }
 
-    fun updateItem(item: Any) {
-        val index = items.indexOf(item)
-        if (index != -1) {
-            notifyItemChanged(index)
-        }
-    }
+	fun filter(constraint: CharSequence?) {
+		var query = constraint
+		if (query == null) {
+			query = "";
+		}
+		filter.nameFilter.value = query.toString()
+		filter.filter(query)
+	}
+
+	fun updateItem(item: Any) {
+		val index = items.indexOf(item)
+		if (index != -1) {
+			notifyItemChanged(index)
+		}
+	}
 
     fun onItemsSelected(items: Set<Any>) {
         for (item in items) {
@@ -175,7 +189,11 @@ class SearchTracksAdapter(
         }
     }
 
-    companion object {
-        const val TYPE_NO_FOUND_TRACKS = 5
-    }
+	fun getCurrentSearchQuery(): String {
+		return filter.nameFilter.value
+	}
+
+	companion object {
+		const val TYPE_NO_FOUND_TRACKS = 5
+	}
 }
