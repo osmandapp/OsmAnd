@@ -1303,24 +1303,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void setRotateImpl(float rotate, int centerX, int centerY) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			int centerX31 = 0;
-			int centerY31 = 0;
 			PointI center31 = new PointI();
 			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
-				centerX31 = center31.getX();
-				centerY31 = center31.getY();
+				int centerX31 = center31.getX();
+				int centerY31 = center31.getY();
+				PointI target31 = mapRenderer.getTarget();
+				float azimuth = mapRenderer.getAzimuth();
+				int targetX = target31.getX() - centerX31;
+				int targetY = target31.getY() - centerY31;
+				double angleR = Math.toRadians(-azimuth - rotate);
+				double cosAngle = Math.cos(angleR);
+				double sinAngle = Math.sin(angleR);
+				int newTargetX = (int) (targetX * cosAngle - targetY * sinAngle + centerX31);
+				int newTargetY = (int) (targetX * sinAngle + targetY * cosAngle + centerY31);
+				mapRenderer.setTarget(new PointI(newTargetX, newTargetY));
+				mapRenderer.setAzimuth(-rotate);
 			}
-			PointI target31 = mapRenderer.getTarget();
-			float azimuth = mapRenderer.getAzimuth();
-			int targetX = target31.getX() - centerX31;
-			int targetY = target31.getY() - centerY31;
-			double angleR = Math.toRadians(-azimuth - rotate);
-			double cosAngle = Math.cos(angleR);
-			double sinAngle = Math.sin(angleR);
-			int newTargetX = (int) (targetX * cosAngle - targetY * sinAngle + centerX31);
-			int newTargetY = (int) (targetX * sinAngle + targetY * cosAngle + centerY31);
-			mapRenderer.setTarget(new PointI(newTargetX, newTargetY));
-			mapRenderer.setAzimuth(-rotate);
 		}
 		currentViewport.setRotate(rotate);
 	}
