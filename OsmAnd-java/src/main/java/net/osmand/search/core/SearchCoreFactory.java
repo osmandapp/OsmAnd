@@ -1147,7 +1147,7 @@ public class SearchCoreFactory {
 					if (object.isClosed()) {
 						return false;
 					}
-					if (!phrase.isAcceptPrivate() && object.isPrivateEntertainment()) {
+					if (!phrase.isAcceptPrivate() && object.isPrivateAccess()) {
 						return false;
 					}
 					if (!poiAdditionals.isEmpty()) {
