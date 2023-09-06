@@ -2628,7 +2628,7 @@
     <string name="poi_health_specialty_general_yes">Општа пракса</string>
     <string name="poi_health_specialty_ophthalmology_yes">Офтамологија</string>
     <string name="poi_health_specialty_gynaecology_yes">Гинекологија</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Интерно</string>
+    <string name="poi_health_specialty_internal_yes">Интерно</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ортопедија</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оториноларингологија</string>
     <string name="poi_health_specialty_paediatrics_yes">Педијатрија</string>
@@ -2647,7 +2647,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Пулмологија</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Зубна, орална и максилофацијална хирургија</string>
     <string name="poi_health_specialty_maternity_yes">Породиљско</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Ургентна медицина</string>
+    <string name="poi_health_specialty_emergency_yes">Ургентна медицина</string>
     <string name="poi_health_specialty_emergency_medicine_no">Медицинска специјализација: ургентна медицина: не</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Пластична хирургија</string>
     <string name="poi_health_specialty_physiotherapy_yes">Физиотерапија</string>
@@ -2657,7 +2657,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Максилофацијална хирургија</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Медицинско снимање</string>
     <string name="poi_health_specialty_gastroenterology_yes">Гастроентерологија</string>
-    <string name="poi_health_specialty_dentistry_yes">Стоматологија</string>
+    <string name="poi_health_specialty_stomatology_yes">Стоматологија</string>
     <string name="poi_health_specialty_nephrology_yes">Нефрологија (реналне болести)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Неурохирургија</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Неуропсихијатрија</string>
@@ -2801,7 +2801,7 @@
     <string name="poi_forestry_compartment">Показивач: шумарско одељење</string>
     <string name="poi_disc_golf">Диск голф</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Психијатрија за одрасле</string>
-    <string name="poi_health_specialty_podology_yes">Подологија</string>
+    <string name="poi_health_specialty_podiatry_yes">Подологија</string>
     <string name="poi_health_specialty_orthodontics_yes">Ортодонија</string>
     <string name="poi_health_specialty_dermatovenereology_yes">Дермато-венереологија</string>
     <string name="poi_traffic_signals_arrow">Стрелица</string>

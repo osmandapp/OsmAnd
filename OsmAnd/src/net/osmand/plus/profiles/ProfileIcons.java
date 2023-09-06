@@ -37,6 +37,7 @@ public enum ProfileIcons {
 	WHEELCHAIR(R.drawable.ic_action_wheelchair, R.string.app_mode_wheelchair, "ic_action_wheelchair"),
 	WHEELCHAIR_FORWARD(R.drawable.ic_action_wheelchair_forward, R.string.app_mode_wheelchair_forward, "ic_action_wheelchair_forward"),
 	UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo"),
+	BABY_TRANSPORT(R.drawable.ic_action_baby_transport, R.string.app_mode_baby_transport, "ic_action_baby_transport"),
 	OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad"),
 	CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan"),
 	CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper"),

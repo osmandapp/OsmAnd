@@ -1633,7 +1633,7 @@
     <string name="poi_health_specialty_general_yes">רפואה כללית</string>
     <string name="poi_health_specialty_ophthalmology_yes">רפואת עיניים</string>
     <string name="poi_health_specialty_gynaecology_yes">רפואת נשים</string>
-    <string name="poi_health_specialty_internal_medicine_yes">רפואה פנימית</string>
+    <string name="poi_health_specialty_internal_yes">רפואה פנימית</string>
     <string name="poi_health_specialty_orthopaedics_yes">אורתופדיה</string>
     <string name="poi_health_specialty_otolaryngology_yes">אף אוזן גרון</string>
     <string name="poi_health_specialty_paediatrics_yes">רפואת ילדים</string>
@@ -1651,7 +1651,7 @@
     <string name="poi_health_specialty_anaesthetics_yes">תרופות הרדמה</string>
     <string name="poi_health_specialty_pulmonology_yes">רפואת דרכי הנשימה</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">כירורגיית פה, לסת ושיניים</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">רפואת חירום</string>
+    <string name="poi_health_specialty_emergency_yes">רפואת חירום</string>
     <string name="poi_health_specialty_emergency_medicine_no">התמחות רפואית: רפואת חירום: לא</string>
     <string name="poi_health_specialty_plastic_surgery_yes">נתיחה פלסטית</string>
     <string name="poi_health_specialty_orthodontics_yes">אורתודנטיה</string>

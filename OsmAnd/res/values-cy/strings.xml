@@ -556,10 +556,8 @@
     <string name="shared_string_not_included">Dim yn cynnwys</string>
     <string name="cancel_anytime_in_gplay">Cansla unrhyw bryd ar Google Play.</string>
     <string name="osmand_maps_plus_tagline">Cael nodweddion estynedig</string>
-    <string name="terrain_maps">Mapiau tirwedd</string>
     <string name="offline_wikivoyage">Wikivoyage All-lein</string>
     <string name="offline_wikipeadia">Wikipedia All-lein</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapiau tirwedd: cyfuchliniau, cysgodion bryniau, llethrau</string>
     <string name="backup_conflicts">Gwrthdrawiadau</string>
     <string name="restore_complete">Adferwyd</string>
     <string name="shared_string_offline">All-lein</string>
@@ -980,7 +978,6 @@
     <string name="map_widget_av_notes">Nodiadau sain/fideo</string>
     <string name="map_widget_distancemeasurement">Mesuriad pellter</string>
     <string name="audionotes_location_not_defined">Tapia \'Defnyddio lleoliad...\' i ychwanegu nodyn i\'r lleoliad.</string>
-    <string name="index_srtm_ele">Cyfuchliniau</string>
     <string name="download_regular_maps">Map safonol</string>
     <string name="download_roads_only_maps">Map ffyrdd yn unig</string>
     <string name="enable_plugin_monitoring_services">Galluogwch yr ategyn \"Trip recording\" i ddefnyddio gwasanaethau logio lleoliad (logio GPX, tracio arlein)</string>
@@ -1057,7 +1054,6 @@
     <string name="clear_dest_confirm">Tynnu dy gyrchfan (a mannau ar hyd y ffordd)\?</string>
     <string name="av_use_external_recorder">Defnyddio recordydd y system</string>
     <string name="recording_description">Yn recordio %1$s %3$s %2$s</string>
-    <string name="index_srtm_parts">rhannau</string>
     <string name="rendering_attr_roadColors_name">Cynllun lliwiau ffyrdd</string>
     <string name="map_widget_show_destination_arrow">Dangos cyfeiriad y gyrchfan</string>
     <string name="target_point">Cyrchfan %1$s</string>
@@ -3293,7 +3289,6 @@
     <string name="files_present">Mae %1$d ffeil (%2$s) yn bresennol yn y lleoliad blaenorol \'%3$s\'.</string>
     <string name="routing_attr_avoid_footways_name">Osgoi llwybrau troed</string>
     <string name="use_live_public_transport">Data OsmAnd Live</string>
-    <string name="contour_lines_and_hillshade">Cyfuchliniau a chysgod bryniau</string>
     <string name="magnetic_bearing_widget_desc">Yr ongl rhwng gogledd magnetig a\'r pwynt targed a welwyd o dy leoliad.</string>
     <string name="navigation_points">Pwyntiau llywio</string>
     <string name="calculate_online">Cyfrifo ar-lein</string>
@@ -3826,7 +3821,6 @@
     <string name="simulate_initial_startup_descr">Yn gosod y faner sy\'n nodi cychwyn cyntaf yr ap, yn cadw\'r holl leoliadau eraill heb eu newid.</string>
     <string name="simulate_initial_startup">Efelychu cychwyn cyntaf ap</string>
     <string name="favorite_category_dublicate_message">Defnyddia enw categori nad yw\'n bodoli eisoes.</string>
-    <string name="srtm_plugin_disabled">Llinellau cyfuchlin wedi\'u hanalluogi</string>
     <string name="simulate_your_location_stop_descr">Peidio efelychu dy safle.</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Rhagosodedig (cyan tryloyw)</string>
     <string name="rendering_value_translucent_lightblue_name">Glas golau tryloyw</string>
@@ -3970,7 +3964,6 @@
     <string name="copying_osmand_file_failed">Methodd symud ffeiliau</string>
     <string name="avoid_roads_msg">Cychwyn lwybr amgen trwy ddewis ffyrdd i\'w hosgoi</string>
     <string name="maps_you_need">Mapiau sydd eu hangen arnat</string>
-    <string name="contour_lines_hillshade_maps">Llinellau cyfuchlin a mapiau cysgodion bryniau</string>
     <string name="pick_up_till">Codi tan</string>
     <string name="hide_passed">Cuddfan wedi\'i basio</string>
     <string name="show_direction">Arwydd pellter</string>

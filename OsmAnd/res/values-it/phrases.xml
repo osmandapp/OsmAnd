@@ -2521,7 +2521,7 @@
     <string name="poi_cargo_passengers">Passeggeri</string>
     <string name="poi_cargo_hgv">Mezzi pesanti</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringoiatria</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
@@ -3138,11 +3138,11 @@
     <string name="poi_coffee_yes">Sì;Caffè</string>
     <string name="poi_heating_gas">Gas</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontoiatria</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontoiatria</string>
     <string name="poi_health_specialty_physiotherapy_yes">Fisioterapia</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodonzia</string>
     <string name="poi_health_specialty_nuclear_medicine_yes">Medicina nucleare</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_naturopathy_yes">Naturopatia</string>
     <string name="poi_health_specialty_chiropractic_yes">Chiropratica</string>
     <string name="poi_hill">Collina</string>
@@ -3480,7 +3480,7 @@
     <string name="poi_hackerspace">Hackerspace</string>
     <string name="poi_fireworks">Negozio di fuochi d\'artificio</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgia dentale, orale e maxillo-facciale</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Medicina d\'urgenza e d\'emergenza</string>
+    <string name="poi_health_specialty_emergency_yes">Medicina d\'urgenza e d\'emergenza</string>
     <string name="poi_health_specialty_biochemistry_yes">Chimica biologica</string>
     <string name="poi_health_specialty_occupational_yes">Terapia occupazionale</string>
     <string name="poi_health_specialty_child_psychiatry_yes">Psichiatria infantile</string>

@@ -52,7 +52,6 @@
     <string name="av_video_format">Video format</string>
     <string name="av_use_external_recorder_descr">Koristite sistemsku aplikaciju za video snimanje</string>
     <string name="av_use_external_recorder">Koristite sistemsku aplikaciju za snimanje</string>
-    <string name="index_srtm_parts">dijelovi</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
     <string name="download_roads_only_maps">Samo cestovne karte</string>

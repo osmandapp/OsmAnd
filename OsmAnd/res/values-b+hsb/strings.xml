@@ -111,7 +111,6 @@
     <string name="region_maps">Karty za cyłe regiony</string>
     <string name="world_maps">Swětowe karty</string>
     <string name="hillshade_layer_disabled">Relief wupinjeny</string>
-    <string name="srtm_plugin_disabled">Wysokostne linije wupinjene</string>
     <string name="favorite_category_add_new">Nowu přidać</string>
     <string name="favorite_category_select">Kategoriju wubrać</string>
     <string name="default_speed_system_descr">Měrjensku jednotku spěšnosće postajić.</string>
@@ -1006,7 +1005,6 @@
     <string name="context_menu_item_directions_from">Nawigacija wottud</string>
     <string name="layer_hillshade">Reliefowa runina</string>
     <string name="local_indexes_cat_srtm">Wysokostne linije</string>
-    <string name="index_srtm_ele">Wysokostne linije</string>
     <string name="download_srtm_maps">Wysokostne linije</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranicy</string>
     <string name="rendering_attr_noPolygons_name">Polygony</string>
@@ -1509,7 +1507,6 @@
     <string name="unlimited_downloads">Njewobmjezowane sćehnjenja</string>
     <string name="wikipedia_offline">Wikipedija offline</string>
     <string name="get_unlimited_access">Wobstaraj sej njewobmjezowany přistup</string>
-    <string name="contour_lines_hillshade_maps">Wysokostne linije &amp; reliefowe karty</string>
     <string name="osm_live_payment_renews_monthly">So měsačnje wobnowja</string>
     <string name="osm_live_payment_renews_quarterly">So kwartalnje wobnowja</string>
     <string name="osm_live_payment_renews_annually">So kóždolětnje wobnowja</string>
@@ -1564,7 +1561,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB wužiwane</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB wužiwane</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB wužiwane</string>
-    <string name="contour_lines_and_hillshade">Wysokostne linije a relief</string>
     <string name="update_all_maps">Wšě karty aktualizować</string>
     <string name="update_all_maps_q">Chceš woprawdźe wšě (%1$d) karty aktualizować\?</string>
     <string name="layer_osm_edits">Změny na OSM</string>

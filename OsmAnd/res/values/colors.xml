@@ -7,6 +7,8 @@
 	<color name="card_and_list_background_dark">#222526</color>3
 	<color name="list_background_color_light">#ffffff</color>
 	<color name="list_background_color_dark">#1E1F20</color>
+	<color name="widget_background_color_light">#FFFFFF</color>
+	<color name="widget_background_color_dark">#000000</color>
 
 	<!-- Text -->
 	<color name="text_color_primary_light">#212121</color>
@@ -39,6 +41,8 @@
 	<color name="app_bar_main_dark">#252727</color>
 	<color name="app_bar_secondary_light">#FFFFFF</color>
 	<color name="app_bar_secondary_dark">#252727</color>
+	<color name="app_bar_active_light">#237BFF</color>
+	<color name="app_bar_active_dark">#0E3A7C</color>
 
 	<color name="navigation_bar_bg_light">#000000</color>
 	<color name="navigation_bar_bg_dark">#000000</color>
@@ -94,8 +98,6 @@
 
 	<color name="activity_background_transparent_color_light">#eaf0f0f0</color>
 	<color name="activity_background_transparent_color_dark">#ea17181a</color>
-	<color name="toolbar_active_color_light">#237BFF</color>
-	<color name="toolbar_active_color_dark">#0E3A7C</color>
 	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>

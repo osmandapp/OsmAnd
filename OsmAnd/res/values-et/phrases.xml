@@ -2378,7 +2378,7 @@
     <string name="poi_health_specialty_general_yes">Perearst</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloogia</string>
     <string name="poi_health_specialty_gynaecology_yes">Günekoloogia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Sisemeditsiin</string>
+    <string name="poi_health_specialty_internal_yes">Sisemeditsiin</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopeedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolarüngoloogia</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediaatria</string>
@@ -2398,7 +2398,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Hingamisteede meditsiin</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Hamba-, suu- ja näo-lõualuukirurgia</string>
     <string name="poi_health_specialty_maternity_yes">Rasedus</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Õnnetusjuhtumi- ja erakorraline meditsiin</string>
+    <string name="poi_health_specialty_emergency_yes">Õnnetusjuhtumi- ja erakorraline meditsiin</string>
     <string name="poi_health_specialty_emergency_medicine_no">Tervise eriala: õnnetusjuhtumi- ja erakorraline meditsiin: ei</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Ilukirurgia</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontia</string>
@@ -2410,7 +2410,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Näo-lõualuu kirurgia</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostiline radioloogia</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloogia</string>
-    <string name="poi_health_specialty_dentistry_yes">Hambaravi</string>
+    <string name="poi_health_specialty_stomatology_yes">Hambaravi</string>
     <string name="poi_health_specialty_nephrology_yes">Nefroloogia (neeruhaigused)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurokirurgia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsühhiaatria</string>
@@ -2434,7 +2434,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopeed</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuaalteraapia</string>
     <string name="poi_health_specialty_sports_medicine_yes">Spordimeditsiin</string>
-    <string name="poi_health_specialty_podology_yes">Podoloogia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloogia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Täiskasvanute psühhiaatria</string>
     <string name="poi_health_specialty_acupuncture_yes">Nõelravi</string>
     <string name="poi_health_specialty_homeopathy_yes">Homöopaatia</string>

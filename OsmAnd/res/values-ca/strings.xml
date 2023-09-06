@@ -849,8 +849,6 @@
     <string name="audionotes_location_not_defined">Premeu «Usa localització…» per afegir una nota a la localització.</string>
     <string name="audionotes_plugin_description">Feu notes d\'àudio/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament al menú de localització contextual.</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
-    <string name="index_srtm_parts">peces</string>
-    <string name="index_srtm_ele">Línies de nivell</string>
     <string name="srtm_plugin_name">Corbes de nivell</string>
     <string name="download_roads_only_item">Carreteres</string>
     <string name="download_regular_maps">Mapes estàndards</string>
@@ -1661,7 +1659,6 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Corbes de nivell desactivades</string>
     <string name="show_free_version_banner">Mostra bàner de la versió gratuïta</string>
     <string name="show_free_version_banner_description">Mostra el bàner de la versió gratuïta encara que sigui la versió de pagament.</string>
     <string name="downloading_number_of_files">Baixada - %1$d fitxer…</string>
@@ -2695,7 +2692,6 @@
     <string name="wikivoyage_offline">Viquiviatges sense connexió</string>
     <string name="unlimited_downloads">Baixades il·limitades</string>
     <string name="wikipedia_offline">Viquipèdia sense connexió</string>
-    <string name="contour_lines_hillshade_maps">Mapes amb corbes de nivell i ombrejat de relleu</string>
     <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
     <string name="shared_string_wikivoyage">Viquiviatges</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
@@ -3171,7 +3167,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB utilitzats</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB utilitzats</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB utilitzats</string>
-    <string name="contour_lines_and_hillshade">Corbes de nivell i ombrejat de relleu</string>
     <string name="routing_attr_prefer_unpaved_name">Prefereix carreteres sense asfaltar</string>
     <string name="routing_attr_prefer_unpaved_description">Prefereix carreteres sense asfaltar.</string>
     <string name="update_all_maps">Actualitza tots els mapes</string>

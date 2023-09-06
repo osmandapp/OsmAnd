@@ -872,7 +872,6 @@
     <string name="map_widget_max_speed">Omejitve hitrosti</string>
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
-    <string name="index_srtm_ele">Izris izohips</string>
     <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego terena in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine.
 \n
 \nOsnovni podatki izvirajo iz SRTM in ASTER.
@@ -890,7 +889,6 @@
     <string name="map_widget_audionotes">Zvočni zaznamek</string>
     <string name="audionotes_plugin_description">Med potovanjem lahko z gumbom na zemljevidu ali v kontekstnem meniju lokacije ustvarjaš zvočne/fotografske/video opombe.</string>
     <string name="audionotes_plugin_name">Zvočni in video zaznamki</string>
-    <string name="index_srtm_parts">deli</string>
     <string name="download_srtm_maps">Podatki izohips</string>
     <string name="recording_playing">Predvajanje zvoka iz izbranega posnetka.\n%1$s</string>
     <string name="recording_open_external_player">Odpri zunanji predvajalnik</string>
@@ -1665,7 +1663,6 @@
     <string name="m_s">m/s</string>
     <string name="downloading_number_of_files">Prejemanje datotek: %1$d…</string>
     <string name="show_free_version_banner">Pokaži pasico brezplačne različice</string>
-    <string name="srtm_plugin_disabled">Izris izohips je onemogočen</string>
     <string name="show_free_version_banner_description">Četudi imate plačljivo različico, še vedno lahko prikažete pasico brezplačne različice.</string>
     <string name="hillshade_layer_disabled">Senčenje terena je onemogočeno</string>
     <string name="buy">Nakup</string>
@@ -2757,7 +2754,6 @@
     <string name="start_editing_card_description">Vsakdo lahko (in tudi zaželeno je da) ureja prispevke na WikiVoyage. Skupno znanje, izkušnje in mnenja povečajo kakovost vsebine.</string>
     <string name="welcome_to_open_beta">Dobrodošli v različici Open beta</string>
     <string name="wikivoyage_travel_guide_descr">Krajevno shranjeni vodniki po najbolj zanimivih krajih sveta, prikazani v programu OsmAnd, tudi na mestih, kjer ni povezave z internetom.</string>
-    <string name="contour_lines_hillshade_maps">Izohipse in senčenje terena</string>
     <string name="unlock_all_features">Odkleni vse zmožnosti programa OsmAnd</string>
     <string name="purchase_dialog_travel_description">Kupite katerokoli od naslednjih možnosti za popotniški vodnik brez povezave:</string>
     <string name="shared_string_dont">Ne objavi</string>
@@ -3693,7 +3689,6 @@
     <string name="backup_deleting_all_data">Brisanje vseh podatkov …</string>
     <string name="shared_string_view_all">Poglej vse</string>
     <string name="backup_delete_types_descr">Želiš izbrisati vse podatke za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
-    <string name="terrain_maps">Zemljevidi terena</string>
     <string name="provided_by">Priskrbljeno od %1$s</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Izogibaj se območjem z nizkimi emisijami</string>
     <string name="route_line_use_map_style_color">Uporabi privzeto barvo sloga zemljevida (%1$s).</string>
@@ -3854,7 +3849,6 @@
     <string name="redeem_promo_code">Unovči promocijsko kodo</string>
     <string name="not_available_with">Ni na voljo z %1$s</string>
     <string name="offline_wikipeadia">Wikipedija brez povezave</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Zemljevidi terena: izohipse, senčenje terena, naklon</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedija in Wikivoyage brez povezave</string>
     <string name="unlimited_map_downloads">Neomejen prenos zemljevidov</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dostopaj do pogostejših posodobitev zemljevidov. Urne, dnevne ali tedenske posodobitve. Posodobitve se prenašajo postopno, samo za spremenjeno območje.</string>
@@ -4553,7 +4547,6 @@
     <string name="rendering_attr_piste_type_skitour_name">Turno smučanje</string>
     <string name="shared_string_memory_used_tb_desc">Uporabljeno %1$s TB</string>
     <string name="rendering_attr_piste_type_sleigh_name">Vprežne sani</string>
-    <string name="contour_lines_and_hillshade">Izohipse in senčenje terena</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="shared_string_select_folder">Mapa …</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Za strokovnjake</string>
@@ -5097,7 +5090,6 @@
     <string name="shared_string_alt_name">Alternativno ime</string>
     <string name="generate_hillshade_from_3d_maps">Ustvarjanje rastrskih zemljevidov senčenja terena iz 3D-zemljevidov</string>
     <string name="enable_3d_maps">Omogoči 3D zemljevide</string>
-    <string name="test_heightmap">Preizkusi zemljevid višin</string>
     <string name="common_weight_limit_error">Najmanjša vrednost je »%1$s« %2$s. Če je masa vozila manjša od najmanjše vrednosti, uporabi profil »%3$s«.</string>
     <string name="weather_forecast_is_outdated">Napoved je zastarela.</string>
     <string name="weather_forecast">Vremenska napoved</string>

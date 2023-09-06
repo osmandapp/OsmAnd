@@ -2655,7 +2655,7 @@
     <string name="poi_health_specialty_general_yes">ĝenerala (familia kuracado)</string>
     <string name="poi_health_specialty_ophthalmology_yes">okul-medicino (oftalmologio)</string>
     <string name="poi_health_specialty_gynaecology_yes">inseksorgan-scienco (ginekologio)</string>
-    <string name="poi_health_specialty_internal_medicine_yes">interna medicino</string>
+    <string name="poi_health_specialty_internal_yes">interna medicino</string>
     <string name="poi_health_specialty_orthopaedics_yes">ortopedio</string>
     <string name="poi_health_specialty_otolaryngology_yes">orel-naz-gorĝ-medicino (otorinolaringologio)</string>
     <string name="poi_health_specialty_paediatrics_yes">infan-medicino (pediatrio)</string>
@@ -2684,7 +2684,7 @@
     <string name="poi_health_specialty_pulmonology_yes">pulm-scienco (pneŭmonologio)</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">makzelvizaĝa ĥirurgio</string>
     <string name="poi_health_specialty_maternity_yes">gravedec-medicino</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">post-akcidenta kaj vivsava medicino</string>
+    <string name="poi_health_specialty_emergency_yes">post-akcidenta kaj vivsava medicino</string>
     <string name="poi_health_specialty_emergency_medicine_no">Neniu specialisto de post-akcidenta kaj vivsava medicino</string>
     <string name="poi_health_specialty_plastic_surgery_yes">plastia ĥirurgio</string>
     <string name="poi_health_specialty_orthodontics_yes">dent-ĝustig-medicino (ortodencio)</string>
@@ -2696,7 +2696,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">makzelvizaĝa ĥirurgio</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">medicina bildigado (diagnoza radiologio)</string>
     <string name="poi_health_specialty_gastroenterology_yes">digest-sistem-scienco (gastroenterologio)</string>
-    <string name="poi_health_specialty_dentistry_yes">dent-kuracado</string>
+    <string name="poi_health_specialty_stomatology_yes">dent-kuracado</string>
     <string name="poi_health_specialty_nephrology_yes">ren-kuracado (nefrologio)</string>
     <string name="poi_health_specialty_neurosurgery_yes">nerv-ĥirurgio</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">nerv-psiĥiatrio (neŭropsiĥiatrio)</string>
@@ -2720,7 +2720,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">ortofonio (logopedio)</string>
     <string name="poi_health_specialty_manual_therapy_yes">per-man-terapio</string>
     <string name="poi_health_specialty_sports_medicine_yes">sporta medicino</string>
-    <string name="poi_health_specialty_podology_yes">pied-kuracado</string>
+    <string name="poi_health_specialty_podiatry_yes">pied-kuracado</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">psiĥiatrio de plenkreskuloj</string>
     <string name="poi_health_specialty_acupuncture_yes">akupunkturo</string>
     <string name="poi_health_specialty_homeopathy_yes">homeopatio</string>

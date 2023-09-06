@@ -22,7 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.FeedbackHelper;
+import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;

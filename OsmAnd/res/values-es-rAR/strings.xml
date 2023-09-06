@@ -353,7 +353,7 @@
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
-    <string name="routing_attr_avoid_toll_name">Sin cabinas de peajes</string>
+    <string name="routing_attr_avoid_toll_name">Sin peajes</string>
     <string name="routing_attr_avoid_toll_description">Evitar caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Sólo caminos pavimentados</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
@@ -668,8 +668,6 @@
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -1666,7 +1664,6 @@
     <string name="m_s">m/s</string>
     <string name="favorite_category_add_new">Añadir nuevo</string>
     <string name="favorite_category_select">Elegir categoría</string>
-    <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
     <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="downloading_number_of_files">Descargando %1$d archivo(s)…</string>
@@ -2174,7 +2171,7 @@
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
-    <string name="shared_string_slope">Pendiente</string>
+    <string name="shared_string_slope">Pendientes</string>
     <string name="lang_ber">Bereber (amazig)</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
@@ -2350,7 +2347,7 @@
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="animate_my_location">Ubicación propia animada</string>
-    <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
+    <string name="animate_my_location_desc">Desplazamiento suave del mapa al moverse con la navegación. Añade un ligero retraso.</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
@@ -2687,7 +2684,6 @@
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
-    <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
     <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
@@ -3139,7 +3135,7 @@
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
     <string name="map_during_navigation_info">Mapa al navegar</string>
-    <string name="map_during_navigation">Mapa durante la navegación</string>
+    <string name="map_during_navigation">Mapa al navegar</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
@@ -3205,7 +3201,6 @@
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreado</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
     <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
@@ -4161,10 +4156,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas topográficos: curvas de nivel, sombreados, pendiente</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
-    <string name="terrain_maps">Mapas topográficos</string>
     <string name="nautical_depth">Profundidad náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Consigue «%1$s» como parte del plan %2$s. Comparación:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
@@ -5112,7 +5105,6 @@
     <string name="generate_slope_from_3d_maps">Generar mapas ráster de pendientes a partir de mapas 3D</string>
     <string name="disable_vertex_hillshade_3d">Desactivar el sombreado de vértices en 3D</string>
     <string name="enable_3d_maps">Activar mapas en 3D</string>
-    <string name="test_heightmap">Probar mapas de altura</string>
     <string name="app_mode_climbing">Escalada</string>
     <string name="clear_online_cache_description">Esto vaciará la memoria caché de las teselas meteorológicas en línea.</string>
     <string name="offline_weather_forecast_desc">Puedes descargar la previsión meteorológica para 7 días.</string>
@@ -5421,7 +5413,7 @@
     <string name="help_article_widgets_nav_widgets_name">Widgets de navegación</string>
     <string name="shared_string_setup">Configuración</string>
     <string name="user_guide">Guía del usuario</string>
-    <string name="help_article_widgets_radius_ruler_name">Regla radial y regla</string>
+    <string name="help_article_widgets_radius_ruler_name">Regla radial y brújula</string>
     <string name="telegram_chats_descr">Únete a uno de nuestros chats locales de Telegram.</string>
     <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Discusiones de GitHub</string>
@@ -5447,4 +5439,15 @@
     <string name="help_article_widgets_map_buttons_name">Botones del mapa</string>
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="release_4_6">• Se ha añadido el widget de proporción del deslizamiento.
+\n
+\n• Se ha añadido el widget de temperatura en ANT+
+\n
+\n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n
+\n</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
+    <string name="app_mode_baby_transport">Transporte de bebés</string>
 </resources>

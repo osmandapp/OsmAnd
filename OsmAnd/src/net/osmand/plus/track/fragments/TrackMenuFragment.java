@@ -365,6 +365,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
 		}
+		if (analysis == null) {
+			analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		}
 	}
 
 	private void updateGpxTitle() {

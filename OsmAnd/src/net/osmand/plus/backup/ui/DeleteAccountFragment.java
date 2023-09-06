@@ -7,6 +7,7 @@ import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.TERTIARY_HARMFUL;
 
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -233,14 +234,15 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		String warning = getString(R.string.osmand_cloud_deletion_subscriptions_warning);
 		String text = getString(R.string.ltr_or_rtl_combine_via_space, warning, subscriptions);
 
-		TextView textView = view.findViewById(R.id.manage_subscriptions);
-		UiUtilities.setupClickableText(app, textView, text, subscriptions, nightMode, unused -> {
+		SpannableString spannable = UiUtilities.createClickableSpannable(text, subscriptions, unused -> {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				PurchasesFragment.showInstance(manager);
 			}
 			return true;
 		});
+		TextView textView = view.findViewById(R.id.manage_subscriptions);
+		UiUtilities.setupClickableText(textView, spannable, nightMode);
 	}
 
 	private void setupButtons(@NonNull View view) {

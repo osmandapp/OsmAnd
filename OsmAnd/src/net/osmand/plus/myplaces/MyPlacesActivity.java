@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -161,6 +162,33 @@ public class MyPlacesActivity extends TabActivity {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			boolean isTabFragment = false;
+			for (TabItem tabItem : getTabItems()) {
+				if (fragment.getClass() == tabItem.fragment) {
+					isTabFragment = true;
+					break;
+				}
+			}
+			if (!isTabFragment) {
+				fragmentsWithoutTabs.add(fragment);
+			}
+		}
+		return fragmentsWithoutTabs;
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		View pagerContent = findViewById(R.id.pager_content);
+		View slidingTabs = findViewById(R.id.sliding_tabs);
+		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+		pagerContent.setImportantForAccessibility(accessibility);
+		slidingTabs.setImportantForAccessibility(accessibility);
 	}
 
 	public void showOnMap(@Nullable FragmentStateHolder fragment, double latitude, double longitude,

@@ -18,13 +18,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.helpers.RateUsHelper;
-import net.osmand.plus.helpers.RateUsHelper.RateUsState;
+import net.osmand.plus.feedback.RateUsHelper;
+import net.osmand.plus.feedback.RateUsState;
 
 import org.apache.commons.logging.Log;
 
 public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-	public static final String TAG = "DislikeOsmAndBottomSheetDialogFragment";
+
+	public static final String TAG = DislikeOsmAndBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(DislikeOsmAndBottomSheetDialogFragment.class);
 
 	private RateUsHelper rateUsHelper;

@@ -48,8 +48,6 @@
     <string name="osmand_srtm_short_description_80_chars">ملحق أوسماند الإضافي لميزات توبو غير المتصلة بالإنترنت مثل خطوط الكنتور والتضاريس والانحدار</string>
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="map_widget_audionotes">الملاحظة صوتية</string>
-    <string name="index_srtm_parts">أجزاء</string>
-    <string name="index_srtm_ele">الخطوط الكنتورية</string>
     <string name="srtm_plugin_name">طوبوغرافيا</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
@@ -1841,7 +1839,6 @@
     <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، أبق جميع الإعدادات الأخرى دون تغيير.</string>
     <string name="region_maps">خرائط على مستوى المنطقة</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
-    <string name="srtm_plugin_disabled">الخطوط الكنتورية معطلة</string>
     <string name="nm">ميل بحري</string>
     <string name="nm_h">عقدة بحرية</string>
     <string name="simulate_your_location_descr">إجراء محاكاة تخيلية باستخدام توجيه نشط أو مسار مسجل.</string>
@@ -2644,7 +2641,6 @@
     <string name="wikivoyage_offline">ويكي الرحلات دون اتصال</string>
     <string name="unlimited_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_offline">ويكيبيديا دون اتصال</string>
-    <string name="contour_lines_hillshade_maps">الخطوط الكنتورية والتضاريس</string>
     <string name="shared_string_only_with_wifi">على الواي فاي فقط</string>
     <string name="wikivoyage_download_pics">تنزيل الصور</string>
     <string name="shared_string_wifi_only">فقط على شبكة Wi-Fi</string>
@@ -3013,7 +3009,6 @@
     <string name="shared_string_memory_used_gb_desc">المستخدم %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">تم استخدام %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">تم استخدام %1$s kB</string>
-    <string name="contour_lines_and_hillshade">الخطوط الكنتورية والتضاريس</string>
     <string name="routing_attr_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
@@ -4229,10 +4224,8 @@
     <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بيانات أوسماند عبر الإنترنت. لن تفقد بياناتك بعد إعادة التثبيت. نسخ الاحتياطي واستعادة جميع المعلومات بسهولة.</string>
     <string name="unlimited_map_downloads">تنزيلات خرائط غير محدودة</string>
     <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
     <string name="offline_wikipeadia">ويكيبيديا غير متصل</string>
     <string name="offline_wikivoyage">ويكي الرحلات (بدون اتصال)</string>
-    <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
     <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s من %2$s</string>
@@ -5162,7 +5155,6 @@
     <string name="app_mode_moped">الدراجة</string>
     <string name="generate_slope_from_3d_maps">إنشاء خرائط الانحدار من خرائط ثلاثية الأبعاد</string>
     <string name="enable_3d_maps">تمكين خريطة ثلاثية الأبعاد</string>
-    <string name="test_heightmap">اختبار خريطة الارتفاع</string>
     <string name="disable_vertex_hillshade_3d">تعطيل قمة الارتفاع في عرض الثلاثي الأبعاد</string>
     <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
     <string name="offline_cache">ذاكرة التخزين المؤقت دون اتصال</string>

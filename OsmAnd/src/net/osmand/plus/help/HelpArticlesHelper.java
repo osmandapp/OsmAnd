@@ -1,7 +1,7 @@
 package net.osmand.plus.help;
 
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
-import static net.osmand.plus.helpers.FeedbackHelper.EXCEPTION_PATH;
+import static net.osmand.plus.feedback.FeedbackHelper.EXCEPTION_PATH;
 
 import android.content.Intent;
 import android.net.Uri;

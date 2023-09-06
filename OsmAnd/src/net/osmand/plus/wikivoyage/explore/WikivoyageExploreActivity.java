@@ -341,6 +341,39 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
+		List<Fragment> tabFragments = new ArrayList<>();
+		if (pagerAdapter != null) {
+			for (int i = 0; i < pagerAdapter.getCount(); i++) {
+				tabFragments.add(pagerAdapter.getItem(i));
+			}
+		}
+
+		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			boolean isTabFragment = false;
+			for (Fragment tabFragment : tabFragments) {
+				if (fragment.getClass() == tabFragment.getClass()) {
+					isTabFragment = true;
+					break;
+				}
+			}
+			if (!isTabFragment) {
+				fragmentsWithoutTabs.add(fragment);
+			}
+		}
+		return fragmentsWithoutTabs;
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		View pagerContent = findViewById(R.id.view_pager);
+		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+		pagerContent.setImportantForAccessibility(accessibility);
+	}
+
+	@Override
 	public void savedArticlesUpdated() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();

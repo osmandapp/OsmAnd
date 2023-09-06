@@ -2395,7 +2395,7 @@
     <string name="poi_health_specialty_general_yes">Γενικός γιατρός</string>
     <string name="poi_health_specialty_ophthalmology_yes">Οφθαλμολογία</string>
     <string name="poi_health_specialty_gynaecology_yes">Γυναικολογία</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Εσωτερική παθολογία</string>
+    <string name="poi_health_specialty_internal_yes">Εσωτερική παθολογία</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ορθοπαιδική</string>
     <string name="poi_health_specialty_otolaryngology_yes">Ωτορινολαρυλογία</string>
     <string name="poi_health_specialty_paediatrics_yes">Παιδιατρική</string>
@@ -2415,7 +2415,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Πνευμονολογία</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Οδοντική, στοματική και γναθοπροσωπική χειρουργική</string>
     <string name="poi_health_specialty_maternity_yes">Μαιευτική</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Ιατρική ατυχημάτων και επειγόντων</string>
+    <string name="poi_health_specialty_emergency_yes">Ιατρική ατυχημάτων και επειγόντων</string>
     <string name="poi_health_specialty_emergency_medicine_no">Ειδικότητα ιατρικής: ιατρική ατυχημάτων και επειγόντων: όχι</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Πλαστική χειρουργική</string>
     <string name="poi_health_specialty_orthodontics_yes">Ορθοδοντική</string>
@@ -2427,7 +2427,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Γναθοπροσωπική χειρουργική</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Διαγνωστική ραδιολογία</string>
     <string name="poi_health_specialty_gastroenterology_yes">Γαστροεντερολογία</string>
-    <string name="poi_health_specialty_dentistry_yes">Οδοντιατρική</string>
+    <string name="poi_health_specialty_stomatology_yes">Οδοντιατρική</string>
     <string name="poi_health_specialty_nephrology_yes">Νεφρολογία (νεφρικές νόσοι)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Νευρολογική χειρουργική</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Νευροψυχιατρική</string>
@@ -2451,7 +2451,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Λογοθεραπεία</string>
     <string name="poi_health_specialty_manual_therapy_yes">Χειροθεραπεία</string>
     <string name="poi_health_specialty_sports_medicine_yes">Αθλητική ιατρική</string>
-    <string name="poi_health_specialty_podology_yes">Ποδολογία</string>
+    <string name="poi_health_specialty_podiatry_yes">Ποδολογία</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Ψυχιατρική ενηλίκων</string>
     <string name="poi_health_specialty_acupuncture_yes">Βελονισμός</string>
     <string name="poi_health_specialty_homeopathy_yes">Ομοιοπαθητική</string>

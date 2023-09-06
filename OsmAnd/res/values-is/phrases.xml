@@ -2351,7 +2351,7 @@
     <string name="poi_health_specialty_cardiology_yes">Hjartalækningar</string>
     <string name="poi_health_specialty_trauma_yes">Áfallalækningar</string>
     <string name="poi_health_specialty_anaesthetics_yes">Svæfingalækningar</string>
-    <string name="poi_health_specialty_dentistry_yes">Tannlækningar</string>
+    <string name="poi_health_specialty_stomatology_yes">Tannlækningar</string>
     <string name="poi_health_specialty_reiki_yes">Reiki</string>
     <string name="poi_animal_shelter_type">Gæludýr fá aðgang</string>
     <string name="poi_animal_shelter_purpose">Tilgangur</string>
@@ -2420,7 +2420,7 @@
     <string name="poi_bathing_no">Böð: nei</string>
     <string name="poi_hackerspace">Hakkaraathvarf</string>
     <string name="poi_health_specialty_gynaecology_yes">Kvensjúkdómar</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Lyflækningar</string>
+    <string name="poi_health_specialty_internal_yes">Lyflækningar</string>
     <string name="poi_health_specialty_orthopaedics_yes">Bæklunarlækningar</string>
     <string name="poi_health_specialty_otolaryngology_yes">Háls-, nef og eyrnalækningar</string>
     <string name="poi_health_specialty_paediatrics_no">Heilsutengt sérsvið: barnasjúkdómar: nei</string>
@@ -2476,7 +2476,7 @@
     <string name="poi_water_supply_bottled_water">Flöskuvatn</string>
     <string name="poi_charging_station">Hleðslustöð</string>
     <string name="poi_depot">Lager</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Slysa- og bráðalækningar</string>
+    <string name="poi_health_specialty_emergency_yes">Slysa- og bráðalækningar</string>
     <string name="poi_health_specialty_emergency_medicine_no">Heilsutengt sérsvið: slysa- og bráðalækningar: nei</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Kjálkaskurðlækningar</string>
     <string name="poi_health_specialty_acupuncture_yes">Nálastunga</string>
@@ -3362,7 +3362,7 @@
     <string name="poi_outpost">Afhendingarstaður verslunar</string>
     <string name="poi_barbecue_grill">Steikingargrill: já</string>
     <string name="poi_denomination_congregational">Safnaðar (congregational)</string>
-    <string name="poi_health_specialty_podology_yes">Fótaheilsa</string>
+    <string name="poi_health_specialty_podiatry_yes">Fótaheilsa</string>
     <string name="poi_shuffleboard">Shuffleboard-skífuþeyting</string>
     <string name="poi_counselling_type_child_guidance_yes">Ráðgjafarþjónusta (barnavernd): já</string>
     <string name="poi_counselling_type_child_guidance_no">Ráðgjafarþjónusta (barnavernd): nei</string>

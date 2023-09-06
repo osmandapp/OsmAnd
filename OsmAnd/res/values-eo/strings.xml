@@ -213,7 +213,6 @@
     <string name="welcome_header">Saluton</string>
     <string name="shared_string_and">kaj</string>
     <string name="shared_string_or">aŭ</string>
-    <string name="srtm_plugin_disabled">Nivelkurboj kaŝitaj</string>
     <string name="hillshade_layer_disabled">Tavolo de nivelombrumo kaŝita</string>
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
@@ -984,8 +983,6 @@
     <string name="audionotes_plugin_description">Fari bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
-    <string name="index_srtm_parts">partoj</string>
-    <string name="index_srtm_ele">Nivelkurboj</string>
     <string name="audionotes_location_not_defined">Frepetu “uzi pozicion…” por aldoni noton al la loko.</string>
     <string name="download_select_map_types">Aliaj mapoj</string>
     <string name="download_roads_only_item">Nur vojoj</string>
@@ -2688,7 +2685,6 @@
     <string name="start_editing">Komenci redakti</string>
     <string name="get_unlimited_access">Akiri senliman atingon</string>
     <string name="welcome_to_open_beta">Bonvenon al malfermita beta-testado!</string>
-    <string name="contour_lines_hillshade_maps">Nivelkurbaj kaj nivelombrumaj mapoj</string>
     <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin malkonekte.</string>
     <string name="download_wikipedia_label">Elŝuti datumojn de Vikipedio</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
@@ -3202,7 +3198,6 @@
     <string name="shared_string_memory_used_gb_desc">Uzita %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Uzita %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Uzita %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Nivelkurboj kaj nivelombrumo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
@@ -4175,10 +4170,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstali. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
     <string name="offline_wikipeadia">Vikipedio malkonekte</string>
     <string name="offline_wikivoyage">Vikivojaĝo malkonekte</string>
-    <string name="terrain_maps">Terenaj mapoj</string>
     <string name="nautical_depth">Maraj profundec-kurboj</string>
     <string name="backup_error_user_is_already_registered">Tiu ĉi retpoŝta adreso estas uzata de alia konto</string>
     <string name="backup_error_subscription_was_expired">Abono senvalidiĝis</string>
@@ -5092,7 +5085,6 @@
     <string name="generate_slope_from_3d_maps">Generi deklivecan kahelan mapon uzante 3-dimensiajn mapojn</string>
     <string name="disable_vertex_hillshade_3d">Malaktivigi vertican nivelombrumon en 3D</string>
     <string name="enable_3d_maps">Aktivigi 3-dimensiajn mapojn</string>
-    <string name="test_heightmap">Testi altmapon</string>
     <string name="app_mode_climbing">Grimpado</string>
     <string name="offline_cache">Kaŝmemoro</string>
     <string name="shared_string_alt_name">Alternativa nomo</string>

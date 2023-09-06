@@ -20,6 +20,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
+        android:id="@+id/pager_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

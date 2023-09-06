@@ -5,6 +5,7 @@ import static net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet.NETW
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -66,7 +67,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private static final String ENGINE_TYPE_KEY = "engine_type";
 	private static final String ENGINE_CUSTOM_VEHICLE_KEY = "engine_custom_vehicle";
 	private static final String EXAMPLE_LOCATION_KEY = "example_location";
-	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
 
 	private ApplicationMode appMode;
@@ -122,8 +122,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-							 @Nullable ViewGroup container,
-							 @Nullable Bundle savedInstanceState) {
+	                         @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		view = themedInflater.inflate(
 				R.layout.online_routing_engine_fragment, container, false);
@@ -490,7 +490,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			try {
 				String method = engine.getHTTPMethod();
 				List<LatLon> path = Arrays.asList(location.getCityAirportLatLon(),
-												  location.getCityCenterLatLon());
+						location.getCityCenterLatLon());
 				String body = engine.getRequestBody(path, null);
 				Map<String, String> headers = engine.getRequestHeaders();
 				String response = helper.makeRequest(exampleCard.getEditedText(), method, body, headers);
@@ -686,8 +686,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@NonNull ApplicationMode appMode,
-									@Nullable String editedEngineKey) {
+	                                @NonNull ApplicationMode appMode,
+	                                @Nullable String editedEngineKey) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();

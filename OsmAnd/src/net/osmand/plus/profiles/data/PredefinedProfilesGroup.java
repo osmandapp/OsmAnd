@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.widgets.style.CustomClickableSpan;
 
 import java.util.List;
 
@@ -46,19 +47,13 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 		int startInd = fullDescription.indexOf(url);
 		spannable.setSpan(new ForegroundColorSpan(color), startInd, startInd + url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		ClickableSpan clickableSpan = new ClickableSpan() {
+		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override
 			public void onClick(@NonNull View widget) {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.setData(Uri.parse(url));
 				AndroidUtils.startActivityIfSafe(ctx, intent);
-			}
-
-			@Override
-			public void updateDrawState(@NonNull TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
 			}
 		};
 		spannable.setSpan(clickableSpan, startInd, startInd + url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -2652,7 +2652,7 @@
     <string name="poi_health_specialty_addiction_medicine_yes">Medicina zasvojenosti</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Zdravstvena specializacija: porodništvo (carski rez): ne</string>
     <string name="poi_health_specialty_pathology_yes">Patološka anatomija</string>
-    <string name="poi_health_specialty_dentistry_yes">Zobozdravstvo</string>
+    <string name="poi_health_specialty_stomatology_yes">Zobozdravstvo</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologija</string>
     <string name="poi_health_specialty_emergency_medicine_no">Zdravstvena specializacija: nezgodna in urgentna medicina: ne</string>
     <string name="poi_health_specialty_maternity_yes">Perinatologija</string>
@@ -2730,7 +2730,7 @@
     <string name="poi_provided_for_adult_no">Na voljo za odrasle: ne</string>
     <string name="poi_provided_for_woman_no">Na voljo za ženske: ne</string>
     <string name="poi_health_specialty_obstetrics_antenatal_no">Zdravstvena specializacija: porodništvo (predporodno): ne</string>
-    <string name="poi_health_specialty_podology_yes">Podologija</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologija</string>
     <string name="poi_dojo">Dojo</string>
     <string name="poi_gaelic_games">Gaelske igre</string>
     <string name="poi_running">Tek</string>
@@ -2764,13 +2764,13 @@
     <string name="poi_counselling_type_sexual_no">Svetovanje (spolno): ne</string>
     <string name="poi_nuclear_explosion_yield">Moč eksplozije</string>
     <string name="poi_hackerspace">Heklab</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interna medicina</string>
+    <string name="poi_health_specialty_internal_yes">Interna medicina</string>
     <string name="poi_health_specialty_paediatrics_no">Zdravstvena specializacija: pediatrija: ne</string>
     <string name="poi_health_specialty_trauma_yes">Travmatologija</string>
     <string name="poi_health_specialty_osteopathy_yes">Osteopatija</string>
     <string name="poi_health_specialty_pulmonology_yes">Pulmologija</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dentalna, oralna in maksilofacialna kirurgija</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Nezgodna in urgentna medicina</string>
+    <string name="poi_health_specialty_emergency_yes">Nezgodna in urgentna medicina</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastična kirurgija</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontija</string>
     <string name="poi_health_specialty_physiotherapy_yes">Fizioterapija</string>
