@@ -14,6 +14,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil.GeoParsedDirection;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
@@ -88,7 +89,12 @@ public class GeoIntentActivity extends OsmandListActivity {
 			}
 			try {
 				OsmandSettings settings = getMyApplication().getSettings();
-				if (p != null && p.isGeoPoint()) {
+				if (p instanceof GeoParsedDirection) {
+					GeoParsedDirection direction = (GeoParsedDirection) p;
+					settings.setPointToStart(direction.getFromLat(), direction.getFromLon(), new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
+					settings.setPointToNavigate(direction.getToLat(), direction.getToLon(), new PointDescription(PointDescription.POINT_TYPE_LOCATION, ""));
+					settings.setShowRoutePreparationMenu(true);
+				} else if (p != null && p.isGeoPoint()) {
 					PointDescription pd = new PointDescription(p.getLatitude(), p.getLongitude());
 					if (!Algorithms.isEmpty(p.getLabel())) {
 						pd.setName(p.getLabel());
