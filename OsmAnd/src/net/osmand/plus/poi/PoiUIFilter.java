@@ -180,6 +180,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return filterId.startsWith(STD_PREFIX + ROUTE_TRACK);
 	}
 
+	public boolean isShowPrivateNeeded() {
+		return filterByName != null && filterByName.contains("access:private");
+	}
+
 	public String getFilterByName() {
 		return filterByName;
 	}
