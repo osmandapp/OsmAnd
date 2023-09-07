@@ -43,14 +43,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
-import net.osmand.plus.settings.datastorage.task.FilesCollectTask;
-import net.osmand.plus.settings.datastorage.task.FilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.FilesCollectTask;
+import net.osmand.plus.settings.datastorage.task.FilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.task.MoveFilesTask;
 import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -217,7 +216,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			if (key != null) {
 				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
-					if (!key.equals(INTERNAL_STORAGE) && !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
+					if (!key.equals(INTERNAL_STORAGE) && !AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 						requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					} else if (key.equals(MANUALLY_SPECIFIED)) {
 						showFolderSelectionDialog();
