@@ -2259,7 +2259,7 @@
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">قم بشراء وتثبيت الملحق المساعد \"الطبوغرافيا\" لإظهار المناطق المرتفعة المتدرجة.</string>
-    <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
+    <string name="animate_my_location_desc">تحريك الخريطة بشكل سلس أثناء الحركة. يقدم تأخير طفيف.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقاً لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقا تصبح الوجهة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقا (إن وجدت).</string>
