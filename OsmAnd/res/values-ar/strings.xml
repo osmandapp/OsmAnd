@@ -5491,4 +5491,15 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
+    <string name="release_4_6">• معدل نسبة الإنحدار
+\n
+\n • ANT+ ويدجت مستشعر الحرارة
+\n
+\n • إدارة أفضل للذاكرة لمسارات GPX الكبيرة
+\n
+\n</string>
+    <string name="app_mode_baby_transport">عربة الطفل</string>
+    <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
+    <string name="sensor_temperature_desc">يُظهر درجة الحرارة من جهاز الاستشعار</string>
+    <string name="shared_string_temperature">درجة الحرارة</string>
 </resources>
