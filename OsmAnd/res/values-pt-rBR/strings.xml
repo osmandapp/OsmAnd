@@ -5325,4 +5325,7 @@
     <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
     <string name="help_article_personal_profiles_name">Perfis (Configurações)</string>
     <string name="help_article_personal_storage_name">Armazenamento</string>
+    <string name="app_mode_baby_transport">Transporte de bebê</string>
+    <string name="sensor_temperature_desc">Mostra a temperatura do sensor</string>
+    <string name="shared_string_temperature">Temperatura</string>
 </resources>
