@@ -100,8 +100,8 @@ public class Zoom {
 	}
 
 	@NonNull
-	public static Zoom checkZoomBounds(int baseZoom, float zoomFloatPart, int maxZoom, int minZoom) {
-		Zoom zoom = new Zoom(baseZoom, zoomFloatPart, maxZoom, minZoom);
+	public static Zoom checkZoomBounds(int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
+		Zoom zoom = new Zoom(baseZoom, zoomFloatPart, minZoom, maxZoom);
 		zoom.checkZoomBounds();
 		return zoom;
 	}
