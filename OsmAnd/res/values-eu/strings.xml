@@ -5392,7 +5392,7 @@
     <string name="help_article_personal_name">Nire datuak</string>
     <string name="help_article_personal_import_export_name">Inportatu / Esportatu</string>
     <string name="help_article_personal_profiles_name">Profilak (Ezarpenak)</string>
-    <string name="help_article_personal_storage_name">Biltegiratzea</string>
+    <string name="help_article_personal_storage_name">Memoria</string>
     <string name="help_article_plan_route_name">Planifikatu ibilbidea</string>
     <string name="help_article_plan_route_coordinate_input_name">Sartu koordenatuak</string>
     <string name="help_article_plan_route_web_name">Ibilbideak planifikatzeko web orria</string>
