@@ -476,9 +476,9 @@ public class BinaryMapRouteReaderAdapter {
 				return o;
 			}
 			
-			if(routeEncodingRules.isEmpty()) {
+			if (routeEncodingRules.isEmpty()) {
 				routeEncodingRules.addAll(o.region.routeEncodingRules);
-				referenceRouteRegion= o.region;
+				referenceRouteRegion = o.region;
 				return o;
 			}
 			RouteDataObject rdo = new RouteDataObject(this);
