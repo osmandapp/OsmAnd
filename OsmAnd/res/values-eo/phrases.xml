@@ -4600,4 +4600,13 @@
     <string name="poi_motor_vehicle_designated">Destinita por motoraj veturiloj</string>
     <string name="poi_motorcar_designated">Destinita por aŭtomobiloj</string>
     <string name="poi_vehicle_designated">Destinita por veturiloj</string>
+    <string name="poi_socket_typee_voltage_filter">Ŝtopilo tipo E: tensio</string>
+    <string name="poi_socket_typee_current">Ŝtopilo: tipo E: kurento</string>
+    <string name="poi_socket_typee_voltage_high">alta</string>
+    <string name="poi_socket_typee">Ŝtopilo: tipo E</string>
+    <string name="poi_socket_typee_voltage_low">malalta</string>
+    <string name="poi_socket_typee_output_filter">Ŝtopilo tipo E: povo</string>
+    <string name="poi_socket_typee_voltage_medium">meza</string>
+    <string name="poi_socket_typee_voltage">Ŝtopilo: tipo E: tensio</string>
+    <string name="poi_socket_typee_output">Ŝtopilo: tipo E: povo</string>
 </resources>
