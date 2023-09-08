@@ -5308,4 +5308,25 @@
     <string name="help_article_map_legend_nautical_map_name">Styl mapy morskiej</string>
     <string name="help_article_map_legend_osmand_name">Styl mapy OsmAnd</string>
     <string name="help_article_map_track_context_menu_name">Menu kontekstowe ścieżek</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Wyznaczanie tras w linii prostej (samolot)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Wyznaczanie tras pociągów</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Wyznaczanie tras transportu publicznego</string>
+    <string name="help_article_map_vector_maps_name">Mapy wektorowe (Style map)</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Komunikaty głosowe / Powiadomienia</string>
+    <string name="help_article_map_tracks_on_map_name">Ślady i trasy</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Trasa bezpośrednia do punktu (łódź)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ekran mapy podczas nawigacji</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Wyznaczanie tras samochodowych (ciężarówka, motocykl)</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Wyznaczanie tras pieszych</string>
+    <string name="help_article_map_map_context_menu_name">Menu kontekstowe mapy</string>
+    <string name="sensor_temperature_desc">Pokazuje temperaturę z czujnika</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Trasa konna</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Trasy narciarskie</string>
+    <string name="help_article_navigation_routing_name">Parametry trasy</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Trasa motoroweru</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Wyznaczanie tras łodzi</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Trasy rowerowe (MTB)</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="help_article_map_legend_ski_map_name">Styl mapy narciarskiej</string>
 </resources>
