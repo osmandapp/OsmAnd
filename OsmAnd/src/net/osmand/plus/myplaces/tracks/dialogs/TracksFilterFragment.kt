@@ -64,9 +64,11 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private fun setupBottomMenu(view: View) {
 		resetAllButton = view.findViewById(R.id.reset_all_button)
 		resetAllButton?.setOnClickListener {
-			filter.filter("")
 			filter.resetCurrentFilters()
-			adapter?.notifyDataSetChanged()
+			adapter?.let {
+				it.updateItems()
+				it.notifyItemRangeChanged(0, it.itemCount)
+			}
 		}
 		showButton = view.findViewById(R.id.show_button)
 		showButton?.setOnClickListener { dismiss() }
@@ -76,7 +78,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		val closeButton = view.findViewById<View>(R.id.close_button)
 		if (closeButton != null) {
 			closeButton.setOnClickListener {
-				filter.resetCurrentFilters()
+				adapter?.let {
+					it.updateItems()
+					it.notifyItemRangeChanged(0, it.itemCount)
+				}
 				dismiss()
 			}
 			if (closeButton is ImageView) {

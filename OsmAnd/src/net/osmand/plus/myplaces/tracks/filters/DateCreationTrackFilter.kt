@@ -42,6 +42,10 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	}
 
 	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		return trackItem.lastModified < valueFrom || trackItem.lastModified > valueTo
+		return if (trackItem.dataItem == null)
+			true
+		else {
+			trackItem.dataItem!!.fileCreateTime < valueFrom || trackItem.dataItem!!.fileCreateTime > valueTo
+		}
 	}
 }

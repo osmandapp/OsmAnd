@@ -9,6 +9,7 @@ import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterCityViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDateViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDurationViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder.TextChangedListener
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
@@ -32,14 +33,21 @@ class FiltersAdapter(
 				FilterNameViewHolder(view, nightMode)
 			}
 
-			FilterType.DURATION,
 			FilterType.LENGTH,
 			FilterType.TIME_IN_MOTION,
 			FilterType.AVERAGE_SPEED,
 			FilterType.MAX_SPEED,
+			FilterType.UPHILL,
+			FilterType.DOWNHILL,
+			FilterType.MAX_ALTITUDE,
 			FilterType.AVERAGE_ALTITUDE -> {
 				val view = inflater.inflate(R.layout.filter_range_item, parent, false)
 				FilterRangeViewHolder(view, nightMode)
+			}
+
+			FilterType.DURATION -> {
+				val view = inflater.inflate(R.layout.filter_range_item, parent, false)
+				FilterDurationViewHolder(view, nightMode)
 			}
 
 			FilterType.DATE_CREATION -> {
@@ -73,11 +81,11 @@ class FiltersAdapter(
 						item.value = newText
 					}
 				})
+		} else if (holder is FilterDurationViewHolder) {
+			holder.bindView(item as DurationTrackFilter)
 		} else if (holder is FilterRangeViewHolder) {
 			if (item.getFilerType() == FilterType.TIME_IN_MOTION) {
 				holder.bindView(item as TimeInMotionTrackFilter)
-			} else if (item.getFilerType() == FilterType.DURATION) {
-				holder.bindView(item as DurationTrackFilter)
 			} else if (item.getFilerType() == FilterType.LENGTH) {
 				holder.bindView(item as LengthTrackFilter)
 			} else if (item.getFilerType() == FilterType.AVERAGE_SPEED) {
@@ -86,6 +94,12 @@ class FiltersAdapter(
 				holder.bindView(item as MaxSpeedTrackFilter)
 			} else if (item.getFilerType() == FilterType.AVERAGE_ALTITUDE) {
 				holder.bindView(item as AverageAltitudeTrackFilter)
+			} else if (item.getFilerType() == FilterType.MAX_ALTITUDE) {
+				holder.bindView(item as MaxAltitudeTrackFilter)
+			} else if (item.getFilerType() == FilterType.UPHILL) {
+				holder.bindView(item as UphillTrackFilter)
+			} else if (item.getFilerType() == FilterType.DOWNHILL) {
+				holder.bindView(item as DownhillTrackFilter)
 			}
 		} else if (holder is FilterDateViewHolder) {
 			holder.bindView(item as DateCreationTrackFilter, activity)
@@ -104,7 +118,7 @@ class FiltersAdapter(
 		return filter
 	}
 
-	fun updateItem(item: Any) {
+	private fun updateItem(item: Any) {
 		val index = items.indexOf(item)
 		if (index != -1) {
 			notifyItemChanged(index)
@@ -115,5 +129,9 @@ class FiltersAdapter(
 		for (item in items) {
 			updateItem(item)
 		}
+	}
+
+	fun updateItems() {
+		items = filter.currentFilters
 	}
 }

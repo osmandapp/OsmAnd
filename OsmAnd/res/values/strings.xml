@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
        • Glide Ratio Widget \n\n
@@ -24,7 +25,7 @@
     <string name="shared_string_reset_all">Reset all</string>
     <string name="date_of_creation">Date of creation</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="track_filter_range_selected_format">%d - %d, %s</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="filter_by_name">Filter by name</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>

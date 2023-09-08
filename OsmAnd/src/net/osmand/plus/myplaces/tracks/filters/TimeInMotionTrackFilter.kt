@@ -1,11 +1,14 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.TIME_IN_MOTION
 
-class TimeInMotionTrackFilter(filterChangedListener: FilterChangedListener) :
-	RangeTrackFilter(R.string.moving_time, TIME_IN_MOTION, filterChangedListener) {
+class TimeInMotionTrackFilter(
+	app: OsmandApplication,
+	filterChangedListener: FilterChangedListener) :
+	RangeTrackFilter(app, R.string.moving_time, TIME_IN_MOTION, filterChangedListener) {
 
 	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
 		if (enabled) {

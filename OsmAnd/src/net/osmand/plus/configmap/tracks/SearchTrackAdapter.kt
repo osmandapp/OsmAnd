@@ -172,8 +172,10 @@ class SearchTracksAdapter(
 		if (query == null) {
 			query = "";
 		}
-		filter.nameFilter.value = query.toString()
-		filter.filter(query)
+        if (!query.toString().equals(filter.nameFilter.value)) {
+            filter.nameFilter.value = query.toString()
+            filter.filter(query)
+        }
 	}
 
 	fun updateItem(item: Any) {

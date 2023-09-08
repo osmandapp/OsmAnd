@@ -1,11 +1,12 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.DURATION
 
-class DurationTrackFilter(filterChangedListener: FilterChangedListener)
-	: RangeTrackFilter(R.string.duration, DURATION, filterChangedListener) {
+class DurationTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener)
+	: RangeTrackFilter(app, R.string.duration, DURATION, filterChangedListener) {
 	override val unitResId = R.string.shared_string_minute_lowercase
 
 	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {

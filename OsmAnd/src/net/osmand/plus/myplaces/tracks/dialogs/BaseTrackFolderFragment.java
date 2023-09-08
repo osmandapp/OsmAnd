@@ -266,11 +266,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		}
 	}
 
-	@Override
-	public void showFiltersDialog() {
-
-	}
-
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {

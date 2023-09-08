@@ -87,6 +87,9 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						} else {
 							database.updateAnalysis(item, analysis, conn);
 						}
+						if(item.getFileCreateTime() == -Long.MAX_VALUE) {
+							database.updateCreateTime(item, gpxFile.metadata.time);
+						}
 					}
 					if (GpxDbHelper.isCitySearchNeeded(item)) {
 						setupNearestCityName(item);

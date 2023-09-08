@@ -80,7 +80,9 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 
 		void showSortByDialog();
 
-		void showFiltersDialog();
+		default void showFiltersDialog() {
+
+		}
 
 		@NonNull
 		TracksSortMode getTracksSortMode();

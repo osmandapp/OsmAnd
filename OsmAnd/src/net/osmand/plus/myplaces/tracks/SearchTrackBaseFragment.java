@@ -179,9 +179,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable query) {
-				if (!searchEditText.getText().toString().equals(query.toString())) {
-					filterTracks(query.toString());
-				}
+				filterTracks(query.toString());
 				AndroidUiHelper.updateVisibility(clearSearchQuery, query.length() > 0);
 			}
 		});

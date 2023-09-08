@@ -59,12 +59,15 @@ class TrackFiltersSettingsCollection(val app: OsmandApplication) : FilterChanged
 	private fun createFilter(filterType: FilterType): BaseTrackFilter {
 		return when (filterType) {
 			FilterType.NAME -> TrackNameFilter(this)
-			FilterType.DURATION -> DurationTrackFilter(this)
-			FilterType.TIME_IN_MOTION -> TimeInMotionTrackFilter(this)
-			FilterType.LENGTH -> LengthTrackFilter(this)
-			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter(this)
-			FilterType.MAX_SPEED -> MaxSpeedTrackFilter(this)
-			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter(this)
+			FilterType.DURATION -> DurationTrackFilter(app, this)
+			FilterType.TIME_IN_MOTION -> TimeInMotionTrackFilter(app, this)
+			FilterType.LENGTH -> LengthTrackFilter(app, this)
+			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter(app, this)
+			FilterType.MAX_SPEED -> MaxSpeedTrackFilter(app, this)
+			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter(app, this)
+			FilterType.MAX_ALTITUDE -> MaxAltitudeTrackFilter(app, this)
+			FilterType.UPHILL -> UphillTrackFilter(app, this)
+			FilterType.DOWNHILL -> DownhillTrackFilter(app, this)
 			FilterType.DATE_CREATION -> DateCreationTrackFilter(this)
 			FilterType.CITY -> CityTrackFilter(this)
 			FilterType.OTHER -> OtherTrackFilter(app, this)
@@ -81,6 +84,9 @@ class TrackFiltersSettingsCollection(val app: OsmandApplication) : FilterChanged
 			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter::class.java
 			FilterType.MAX_SPEED -> MaxSpeedTrackFilter::class.java
 			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter::class.java
+			FilterType.MAX_ALTITUDE -> MaxAltitudeTrackFilter::class.java
+			FilterType.UPHILL -> UphillTrackFilter::class.java
+			FilterType.DOWNHILL -> DownhillTrackFilter::class.java
 			FilterType.DATE_CREATION -> DateCreationTrackFilter::class.java
 			FilterType.CITY -> CityTrackFilter::class.java
 			FilterType.OTHER -> OtherTrackFilter::class.java

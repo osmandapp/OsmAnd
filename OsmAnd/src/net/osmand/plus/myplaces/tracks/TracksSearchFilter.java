@@ -23,14 +23,20 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 	private final List<TrackItem> trackItems;
 	private CallbackWithObject<List<TrackItem>> callback;
 	private TrackFiltersSettingsCollection tracksFilterCollection;
+	private OsmandApplication app;
 
 	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems) {
+		this.app = app;
 		this.trackItems = trackItems;
+		initFilters(app);
+	}
+
+	private void initFilters(@NonNull OsmandApplication app) {
 		tracksFilterCollection = new TrackFiltersSettingsCollection(app);
 		tracksFilterCollection.addListener(this);
 		DateCreationTrackFilter dateFilter = tracksFilterCollection.getDateFilter();
 		if (dateFilter != null) {
-			long minDate = app.getGpxDbHelper().getTracksMinLastModifyDate();
+			long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
 			long now = (new Date()).getTime();
 			dateFilter.setInitialValueFrom(minDate);
 			dateFilter.setInitialValueTo(now);
@@ -114,7 +120,9 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 	}
 
 	public void resetCurrentFilters() {
-		tracksFilterCollection.resetCurrentFilters();
+		initFilters(app);
+//		tracksFilterCollection.resetCurrentFilters();
+		filter("");
 	}
 }
 
