@@ -2694,4 +2694,7 @@
     <string name="poi_gambling_bingo">宾果</string>
     <string name="poi_coworking_space">共享办公空间</string>
     <string name="poi_cuisine_syrian">叙利亚菜系</string>
+    <string name="poi_via_ferrata_scale">困难</string>
+    <string name="poi_via_ferrata">铁索攀岩（飞拉达）</string>
+    <string name="poi_service_vehicle_muffler_yes">消音器</string>
 </resources>
