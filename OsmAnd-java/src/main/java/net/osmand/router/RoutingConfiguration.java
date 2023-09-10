@@ -311,13 +311,18 @@ public class RoutingConfiguration {
 
 	public static RoutingConfiguration.Builder getDefault() {
 		if (DEFAULT == null) {
-			try {
-				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
-			} catch (Exception e) {
-				throw new IllegalStateException(e);
-			}
+			DEFAULT = parseDefault();
 		}
 		return DEFAULT;
+	}
+
+
+	public static Builder parseDefault() {
+		try {
+			return parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
