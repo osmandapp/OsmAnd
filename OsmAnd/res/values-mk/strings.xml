@@ -336,10 +336,8 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s ili %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Dobijte “%1$s” kako del od planot %2$s . Sporedba:</string>
     <string name="nautical_depth">Nautička dlabočina</string>
-    <string name="terrain_maps">Terenski karti</string>
     <string name="offline_wikivoyage">Oflajn Wikipatuvanje</string>
     <string name="offline_wikipeadia">Wkipedia oflajn</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Karti na terenot: konturni linii, ridovi, nagib</string>
     <string name="wikipedia_and_wikivoyage_offline">Wkipedia i Wikipatuvanje oflajn</string>
     <string name="unlimited_map_downloads">Neograniceno simnuvanje na karti</string>
     <string name="purchases_feature_desc_monthly_map_updates">Dobijte pristap do redovnite mesečni ažuriranja za oflajn karti.</string>
@@ -1270,7 +1268,6 @@
     <string name="quick_action_hillshade_descr">Kopče za prikažuvanje ili sokrivanje na ridovite na kartata.</string>
     <string name="shared_string_memory_used_mb_desc">Iskoristen %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Iskoristen %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Kontrolni linii i planisnki senki</string>
     <string name="update_all_maps">Site karti se azurirani</string>
     <string name="update_all_maps_q">Da se azuriraat site (%1$d) karti\?</string>
     <string name="track_storage_directory">Sledete ja papkata za skladiranje</string>
@@ -1912,7 +1909,6 @@
     <string name="wikivoyage_offline">Wikivoyage ofline</string>
     <string name="unlimited_downloads">Neograniceni prevzemanja</string>
     <string name="wikipedia_offline">Wikipedia ofline</string>
-    <string name="contour_lines_hillshade_maps">Konturni linii i karti na ridovi</string>
     <string name="unlock_all_features">Otklučete gi site funkcii na OsmAnd</string>
     <string name="purchase_dialog_travel_description">Kupete edno od slednive za da ja dobiete funkcionalnosta za oflajn vodič za patuvanje:</string>
     <string name="shared_string_dont">Nemoj</string>
@@ -2666,7 +2662,6 @@
     <string name="region_maps">Karti niz celiot region</string>
     <string name="world_maps">Svetski karti</string>
     <string name="hillshade_layer_disabled">Slojot na ridovi e onevozmožen</string>
-    <string name="srtm_plugin_disabled">Onevozmozeni konturni linii</string>
     <string name="favorite_category_add_new">Dodadi nov</string>
     <string name="favorite_category_select">Izberi kategorija</string>
     <string name="marker_2nd">Vtor marker</string>
@@ -3191,8 +3186,6 @@
     <string name="av_settings_descr">Postavete postavki za audio i video.</string>
     <string name="av_settings">Postavki za audio/video</string>
     <string name="map_widget_av_notes">Audio/video zabeleski</string>
-    <string name="index_srtm_parts">delovi</string>
-    <string name="index_srtm_ele">Konturni linii</string>
     <string name="download_select_map_types">Drugi karti</string>
     <string name="download_roads_only_maps">Patista-samo karta</string>
     <string name="rendering_attr_noAdminboundaries_name">Granici</string>

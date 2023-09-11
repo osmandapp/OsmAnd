@@ -95,7 +95,7 @@
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
-                android:id="@+id/text_value"
+                android:id="@id/text_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -106,7 +106,7 @@
                 tools:text="100 "/>
 
             <TextView
-                android:id="@+id/text_units"
+                android:id="@id/text_units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -129,7 +129,7 @@
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
-                android:id="@+id/text_value"
+                android:id="@id/text_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -140,7 +140,7 @@
                 tools:text="100 "/>
 
             <TextView
-                android:id="@+id/text_units"
+                android:id="@id/text_units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

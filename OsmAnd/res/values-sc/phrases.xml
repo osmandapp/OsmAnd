@@ -1694,7 +1694,7 @@
     <string name="poi_health_specialty_general_yes">Dutore generale</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Meighina interna</string>
+    <string name="poi_health_specialty_internal_yes">Meighina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringoiatria</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
@@ -1714,7 +1714,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgia dentale, orale e maxillo-fatziale</string>
     <string name="poi_health_specialty_maternity_yes">Maternidade</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Meighina de emergèntzia-urgèntzia</string>
+    <string name="poi_health_specialty_emergency_yes">Meighina de emergèntzia-urgèntzia</string>
     <string name="poi_health_specialty_emergency_medicine_no">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia: nono</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plàstica</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontzia</string>
@@ -2478,7 +2478,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgia maxillo-fatziale</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnòstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontoiatria</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontoiatria</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologia (maladias de sos renes)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsichiatria</string>
@@ -2502,7 +2502,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manuale</string>
     <string name="poi_health_specialty_sports_medicine_yes">Meighina de s\'isport</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psichiatria adulta</string>
     <string name="poi_health_specialty_acupuncture_yes">Agupuntura</string>
     <string name="poi_health_specialty_homeopathy_yes">Omeopatia</string>

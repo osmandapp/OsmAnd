@@ -276,7 +276,6 @@
     <string name="wikivoyage_offline">விக்கிவோயாஜ் இணையாநிலை</string>
     <string name="unlimited_downloads">வரம்பற்ற பதிவிறக்கங்கள்</string>
     <string name="wikipedia_offline">விக்கிப்பீடியா இணையாநிலை</string>
-    <string name="contour_lines_hillshade_maps">விளிம்பு கோடுகள் &amp; மலைநிழல் வரைபடங்கள்</string>
     <string name="unlock_all_features">அனைத்து OsmAnd அம்சங்கள் திறக்க</string>
     <string name="purchase_dialog_title">திட்டத்தைத் தேர்வுசெய்க</string>
     <string name="purchase_dialog_travel_description">ஆஃப்லைன் பயண வழிகாட்டி செயல்பாடுகளைப் பெறுவதற்கு பின்வரும் ஒன்றை வாங்கவும்:</string>
@@ -1006,8 +1005,6 @@
     <string name="map_widget_distancemeasurement">தொலைவு அளவீட்டு</string>
     <string name="audionotes_location_not_defined">குறிப்புடன் இணைந்த இடம் இன்னும் வரையறுக்கப்படவில்லை. குறிப்பிட்டுள்ள இருப்பிடத்திற்கு ஒரு குறிப்பை ஒதுக்க \"இருப்பிடத்தைப் பயன்படுத்து ...\".</string>
     <string name="map_widget_audionotes">ஆடியோ குறிப்புகள்</string>
-    <string name="index_srtm_parts">பாகங்கள்</string>
-    <string name="index_srtm_ele">சமநிலைக்கோடுகள்</string>
     <string name="download_select_map_types">பிற வரைபடங்கள்</string>
     <string name="download_roads_only_item">சாலைகள் மட்டுமே</string>
     <string name="download_srtm_maps">சமநிலைக்கோடுகள்</string>

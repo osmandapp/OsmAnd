@@ -1522,7 +1522,7 @@
     <string name="poi_health_specialty_osteopathy_yes">Osteopathi</string>
     <string name="poi_health_specialty_pulmonology_yes">Meddyginiaeth anadlol</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Llawdriniaeth ddeintyddol, genau-wyneb</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Meddygaeth damweiniau ac achosion brys</string>
+    <string name="poi_health_specialty_emergency_yes">Meddygaeth damweiniau ac achosion brys</string>
     <string name="poi_health_specialty_emergency_medicine_no">Arbenigedd iechyd: meddygaeth damweiniau ac achosion brys: na</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Llawdriniaeth gosmetig</string>
     <string name="poi_health_specialty_orthodontics_yes">Orthodonteg</string>
@@ -1532,7 +1532,7 @@
     <string name="poi_health_specialty_child_psychiatry_yes">Seiciatreg plant</string>
     <string name="poi_health_specialty_physiatry_yes">Meddygaeth gorfforol ac adsefydlu</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroleg</string>
-    <string name="poi_health_specialty_dentistry_yes">Deintyddiaeth</string>
+    <string name="poi_health_specialty_stomatology_yes">Deintyddiaeth</string>
     <string name="poi_health_specialty_nephrology_yes">Neffroleg (clefydau arennol)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Llawdriniaeth niwrolegol</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Niwroseiciatreg</string>
@@ -1553,7 +1553,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Therapi lleferydd</string>
     <string name="poi_health_specialty_manual_therapy_yes">Therapi llaw</string>
     <string name="poi_health_specialty_sports_medicine_yes">Meddygaeth chwaraeon</string>
-    <string name="poi_health_specialty_podology_yes">Podoleg</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoleg</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Seiciatreg oedolion</string>
     <string name="poi_health_specialty_acupuncture_yes">Aciwbigo</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopathi</string>
@@ -3829,7 +3829,7 @@
     <string name="poi_historic_era_neolithic">Cyfnod hanesyddol: neolithig</string>
     <string name="poi_historic_era_chalcolithic">Cyfnod hanesyddol: calcolithig (4ydd-3ydd mileniwm CC)</string>
     <string name="poi_historic_stone">Carreg hanesyddol</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Meddygaeth fewnol</string>
+    <string name="poi_health_specialty_internal_yes">Meddygaeth fewnol</string>
     <string name="poi_health_specialty_orthopaedics_yes">Orthopaedeg</string>
     <string name="poi_health_specialty_urology_yes">Wroleg</string>
     <string name="poi_inscription_se">Arysgrif:DDd</string>

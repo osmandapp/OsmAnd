@@ -951,19 +951,29 @@ public class GpxUiHelper {
 
 	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                                @NonNull ChartPointLayer chartPointLayer) {
-		GpxDisplayGroup group = null;
+	                                                @NonNull ChartPointLayer chartPointLayer, @Nullable GPXTrackAnalysis analysis) {
+		GpxDisplayGroup displayGroup = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			String groupName = GpxDisplayHelper.getGroupName(app, gpxFile);
-			group = app.getGpxDisplayHelper().buildGpxDisplayGroup(gpxFile, 0, groupName);
-			SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
-		}
-		if (group != null && group.getDisplayItems().size() > 0) {
-			GpxDisplayItem gpxItem = group.getDisplayItems().get(0);
-			if (gpxItem != null) {
-				gpxItem.chartPointLayer = chartPointLayer;
+			displayGroup = app.getGpxDisplayHelper().buildGpxDisplayGroup(gpxFile, 0, groupName);
+
+			if (analysis == null) {
+				SplitTrackAsyncTask.processGroupTrack(app, displayGroup, null, false);
+				if (!Algorithms.isEmpty(displayGroup.getDisplayItems())) {
+					GpxDisplayItem gpxItem = displayGroup.getDisplayItems().get(0);
+					if (gpxItem != null) {
+						gpxItem.chartPointLayer = chartPointLayer;
+					}
+					return gpxItem;
+				}
+			} else {
+				List<TrkSegment> segments = gpxFile.getSegments(true);
+				if (!Algorithms.isEmpty(segments)) {
+					GpxDisplayItem gpxItem = SplitTrackAsyncTask.createGpxDisplayItem(app, displayGroup, segments.get(0), analysis);
+					gpxItem.chartPointLayer = chartPointLayer;
+					return gpxItem;
+				}
 			}
-			return gpxItem;
 		}
 		return null;
 	}

@@ -2294,7 +2294,7 @@
     <string name="poi_health_specialty_general_yes">ജെനറല്‍ പ്രാക്ടീഷണര്‍</string>
 	<string name="poi_health_specialty_ophthalmology_yes">ഓഫ്താല്‍മോളജി (നേത്രരോഗങ്ങള്‍)</string>
 	<string name="poi_health_specialty_gynaecology_yes">ഗൈനക്കോളജി(ഗര്‍ഭാശയ സംബന്ധമായ)</string>
-	<string name="poi_health_specialty_internal_medicine_yes">ഇന്റേണല്‍ മെഡിസിന്‍</string>
+	<string name="poi_health_specialty_internal_yes">ഇന്റേണല്‍ മെഡിസിന്‍</string>
 	<string name="poi_health_specialty_orthopaedics_yes">ഓര്‍ത്തോപീഡിക്സ്(നട്ടെല്ല് സംബന്ധമായ രോഗങ്ങള്‍)</string>
 	<string name="poi_health_specialty_paediatrics_yes">പീഡിയാട്രിക്സ് (ശിശു രോഗം)</string>
 	<string name="poi_health_specialty_paediatrics_no">"പീഡിയാട്രിക്സ് ഇല്ല "</string>

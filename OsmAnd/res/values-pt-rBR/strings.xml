@@ -701,7 +701,6 @@
     <string name="map_widget_distancemeasurement">Medição de distância</string>
     <string name="audionotes_location_not_defined">Toque em \'Usar local…\' para adicionar uma nota ao local.</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
-    <string name="index_srtm_parts">peças</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
@@ -767,7 +766,6 @@
     <string name="follow">Iniciar orientação</string>
     <string name="get_directions">Direções</string>
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
-    <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_showRoadMaps_name">Apenas mapa de estradas</string>
     <string name="safe_mode_description">Executar o aplicativo em modo seguro (mais lento).</string>
@@ -1692,7 +1690,6 @@
     <string name="world_maps">Mapas mundiais</string>
     <string name="hillshade_layer_disabled">Camada de sombras de relevo desativada</string>
     <string name="region_maps">Mapas regionais</string>
-    <string name="srtm_plugin_disabled">Curvas de nível desativadas</string>
     <string name="favorite_category_add_new">Adicionar novo</string>
     <string name="favorite_category_select">Escolha categoria</string>
     <string name="default_speed_system_descr">Defina a unidade de velocidade.</string>
@@ -2631,7 +2628,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Downloads ilimitados</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Mapas de curvas de nível e sombras de relevo</string>
     <string name="purchase_dialog_title">Escolher plano</string>
     <string name="purchase_dialog_subtitle">Escolha o item adequado</string>
     <string name="download_wikipedia_label">Baixar dados da Wikipédia</string>
@@ -3201,7 +3197,6 @@
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas de nível e Sombras de relevo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_prefer_unpaved_description">Prefira estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
@@ -4156,10 +4151,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Sem dados perdidos após a reinstalação. Faça backup e restaure todas as informações facilmente.</string>
     <string name="unlimited_map_downloads">Downloads ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
     <string name="offline_wikipeadia">Wikipédia offline</string>
     <string name="offline_wikivoyage">Wikivoyage offline</string>
-    <string name="terrain_maps">Mapas de terreno</string>
     <string name="nautical_depth">Profundidade náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Obtenha “%1$s” como parte do plano: %2$s. Comparação:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
@@ -5098,7 +5091,6 @@
     <string name="weather_forecast">Previsão do tempo</string>
     <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
     <string name="offline_cache">Cache off-line</string>
-    <string name="test_heightmap">Mapa de altura de teste</string>
     <string name="offline_weather_forecast">Previsão do tempo off-line</string>
     <string name="offline_weather_forecast_desc">Você pode baixar a previsão do tempo para 7 dias.</string>
     <string name="clear_online_cache_description">Isto irá limpar toda a cache para os mosaicos de previsão meteorológica online.</string>
@@ -5333,4 +5325,7 @@
     <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
     <string name="help_article_personal_profiles_name">Perfis (Configurações)</string>
     <string name="help_article_personal_storage_name">Armazenamento</string>
+    <string name="app_mode_baby_transport">Transporte de bebê</string>
+    <string name="sensor_temperature_desc">Mostra a temperatura do sensor</string>
+    <string name="shared_string_temperature">Temperatura</string>
 </resources>

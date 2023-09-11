@@ -829,7 +829,6 @@
     <string name="av_settings">Lyd/video-innstillinger</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-tillegg for å vise koter, relieffskygge og bakkehelning, uten internett</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
-    <string name="index_srtm_ele">Koter</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
@@ -1232,7 +1231,6 @@
 \n&amp; navigering</string>
     <string name="routing_attr_avoid_shuttle_train_name">Ingen pendeltog</string>
     <string name="routing_attr_avoid_shuttle_train_description">Unngår bruk av pendeltog</string>
-    <string name="srtm_plugin_disabled">Koter deaktivert</string>
     <string name="favorite_category_add_new">Legg til ny</string>
     <string name="favorite_category_select">Velg kategori</string>
     <string name="shared_string_navigation">Navigering</string>
@@ -1830,7 +1828,6 @@
     <string name="recording_default_name">Spiller inn</string>
     <string name="map_widget_av_notes">Lyd/video-notater</string>
     <string name="map_widget_audionotes">Lydnotater</string>
-    <string name="index_srtm_parts">deler</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Gjengi stier i henhold til OSMC-spor.</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
@@ -2605,7 +2602,6 @@
     <string name="in_app_purchase_desc_ex">Når først kjøpt, vil det alltid være tilgjengelig for deg.</string>
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
-    <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
     <string name="wikivoyage_travel_guide_descr">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">Kjøp én av følgende for reiseguidefunksjon i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element</string>
@@ -3131,7 +3127,6 @@
     <string name="layer_osm_edits">OSM-redigeringer</string>
     <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutetid %2$s
 \nBeregning: %3$.1f sek., %4$d veier, %5$d fliser)</string>
-    <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
     <string name="update_all_maps">Oppdater alle kart</string>
     <string name="update_all_maps_q">Oppdater alle (%1$d) kart\?</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretrekk veier uten fast dekke</string>
@@ -4009,7 +4004,6 @@
     <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
     <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
-    <string name="terrain_maps">Terrengkart</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s eller %2$s</string>
     <string name="continue_with">Fortsett med %1$s</string>
     <string name="not_available_with">Ikke tilgjengelig med %1$s</string>
@@ -4118,7 +4112,6 @@
     <string name="osmand_maps_plus_tagline">Få utvidede funksjoner</string>
     <string name="osmand_pro_tagline">Få alle funksjonene</string>
     <string name="backup_delete_types">Slett avskrudde datatyper</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelning</string>
     <string name="contour_lines_hillshade_slope">Koter, relieffskygge, bakkehelning</string>
     <string name="active_till">Aktiv til %1$s</string>
     <string name="track_recording_title">Sporopptak stoppet</string>
@@ -5083,7 +5076,6 @@
     <string name="sort_date_ascending">Nyeste dato først</string>
     <string name="enable_3d_maps">Skru på 3D-kart</string>
     <string name="app_mode_moped">Moped</string>
-    <string name="test_heightmap">Test høydekart</string>
     <string name="app_mode_climbing">Klatring</string>
     <string name="shared_string_alt_name">Alternativt navn</string>
     <string name="token_is_not_valid">Symbolet er ikke gyldig</string>

@@ -115,6 +115,8 @@
 	<string name="poi_socket_cee_blue_voltage_filter">CEE blue connector voltage</string>
 	<string name="poi_socket_schuko_output_filter">Schuko connector output</string>
 	<string name="poi_socket_schuko_voltage_filter">Schuko connector voltage</string>
+	<string name="poi_socket_typee_voltage_filter">Type E connector voltage</string>
+	<string name="poi_socket_typee_output_filter">Type E connector output</string>
 	<string name="poi_service_car">Car service</string>
 	<string name="poi_glacier_type">Glacier type</string>
 	<string name="poi_checkpoint_type">Checkpoint type</string>
@@ -2681,7 +2683,7 @@
 	<string name="poi_health_specialty_general_yes">General practitioner</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Ophthalmology</string>
 	<string name="poi_health_specialty_gynaecology_yes">Gynaecology</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Internal medicine</string>
+	<string name="poi_health_specialty_internal_yes">Internal medicine</string>
 	<string name="poi_health_specialty_orthopaedics_yes">Orthopaedics</string>
 	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngology</string>
 	<string name="poi_health_specialty_paediatrics_yes">Paediatrics</string>
@@ -2702,7 +2704,7 @@
 	<string name="poi_health_specialty_pulmonology_yes">Respiratory medicine</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dental, oral and maxillo-facial surgery</string>
 	<string name="poi_health_specialty_maternity_yes">Maternity</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Accident and emergency medicine</string>
+	<string name="poi_health_specialty_emergency_yes">Accident and emergency medicine</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Health specialty: accident and emergency medicine: no</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Plastic surgery</string>
 	<string name="poi_health_specialty_orthodontics_yes">Orthodontics</string>
@@ -2714,7 +2716,7 @@
 	<string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-facial surgery</string>
 	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostic radiology</string>
 	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterology</string>
-	<string name="poi_health_specialty_dentistry_yes">Dentistry</string>
+	<string name="poi_health_specialty_stomatology_yes">Dentistry</string>
 	<string name="poi_health_specialty_nephrology_yes">Nephrology (renal diseases)</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Neurological surgery</string>
 	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatry</string>
@@ -2738,7 +2740,7 @@
 	<string name="poi_health_specialty_speech_therapy_yes">Speech therapy</string>
 	<string name="poi_health_specialty_manual_therapy_yes">Manual therapy</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Sports medicine</string>
-	<string name="poi_health_specialty_podology_yes">Podology</string>
+	<string name="poi_health_specialty_podiatry_yes">Podiatry</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Adult psychiatry</string>
 	<string name="poi_health_specialty_acupuncture_yes">Acupuncture</string>
 	<string name="poi_health_specialty_homeopathy_yes">Homeopathy</string>
@@ -3709,6 +3711,10 @@
 	<string name="poi_socket_as3112">Socket: AS/NZS 3112</string>
 	<string name="poi_socket_as3112_current">Socket: AS/NZS 3112: current</string>
 	<string name="poi_socket_as3112_output">Socket: AS/NZS 3112: output</string>
+	<string name="poi_socket_typee">Socket: Type E</string>
+	<string name="poi_socket_typee_current">Socket: Type E: current</string>
+	<string name="poi_socket_typee_output">Socket: Type E: output</string>
+	<string name="poi_socket_typee_voltage">Socket: Type E: voltage</string>
 
 	<string name="poi_car_no">Car: no</string>
 	<string name="poi_bicycle_yes">Bicycle: yes</string>
@@ -5025,6 +5031,9 @@
 	<string name="poi_socket_schuko_voltage_high">High</string>
 	<string name="poi_socket_schuko_voltage_medium">Medium</string>
 	<string name="poi_socket_schuko_voltage_low">Low</string>
+	<string name="poi_socket_typee_voltage_high">High</string>
+	<string name="poi_socket_typee_voltage_medium">Medium</string>
+	<string name="poi_socket_typee_voltage_low">Low</string>
 
 	<string name="poi_hiking_yes">Yes</string>
 
@@ -5037,6 +5046,9 @@
 	<string name="poi_socket_type3c_output_high">High</string>
 	<string name="poi_socket_type3c_output_medium">Medium</string>
 	<string name="poi_socket_type3c_output_low">Low</string>
+	<string name="poi_socket_typee_output_high">High</string>
+	<string name="poi_socket_typee_output_medium">Medium</string>
+	<string name="poi_socket_typee_output_low">Low</string>
 
 	<string name="poi_self_checkout_no">Self checkout: no</string>
 	<string name="poi_self_checkout_yes">Yes</string>
@@ -5166,5 +5178,25 @@
 	<string name="poi_motor_vehicle_designated">Designated for motor vehicles</string>
 	<string name="poi_motorcar_designated">Designated for motorcars</string>
 	<string name="poi_vehicle_designated">Designated for vehicles</string>
+
+	<string name="poi_health_specialty_allergology_yes">Allergology</string>
+	<string name="poi_health_specialty_cardiac_surgery_yes">Cardiac surgery</string>
+	<string name="poi_health_specialty_endodontics_yes">Endodontics</string>
+	<string name="poi_health_specialty_geriatrics_yes">Geriatrics</string>
+	<string name="poi_health_specialty_haematology_yes">Haematology</string>
+	<string name="poi_health_specialty_infectious_diseases_yes">Infectious diseases</string>
+	<string name="poi_health_specialty_paediatric_dentistry_yes">Paediatric dentistry</string>
+	<string name="poi_health_specialty_paediatric_surgery_yes">Paediatric surgery</string>
+	<string name="poi_health_specialty_periodontics_yes">Periodontics</string>
+	<string name="poi_health_specialty_rheumatology_yes">Rheumatology</string>
+	<string name="poi_health_specialty_community_yes">Community</string>
+	<string name="poi_health_specialty_dialysis_yes">Dialysis</string>
+	<string name="poi_health_specialty_covid19_yes">COVID19</string>
+	<string name="poi_health_specialty_weight_loss_yes">Weight loss</string>
+	<string name="poi_health_specialty_blood_check_yes">Blood check</string>
+	<string name="poi_health_specialty_intensive_yes">Intensive</string>
+	<string name="poi_health_specialty_fertility_yes">Fertility</string>
+	<string name="poi_health_specialty_massage_therapy_yes">Massage therapy</string>
+	<string name="poi_health_specialty_vascular_surgery_yes">Vascular surgery</string>
 
 </resources>

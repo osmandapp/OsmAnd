@@ -2251,7 +2251,7 @@
     <string name="poi_health_specialty_general_yes">Ģimenes ārsts</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloģija</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginekoloģija</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Iekšķīgās slimības</string>
+    <string name="poi_health_specialty_internal_yes">Iekšķīgās slimības</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopēdija</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaringoloģija (LOR)</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatrija</string>
@@ -2271,7 +2271,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Elpošanas ceļu saslimšanas</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zobu, sejas, orālā ķirurģija</string>
     <string name="poi_health_specialty_maternity_yes">Dzemdību nams</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Neatliekamā medicīniskā palīdzība</string>
+    <string name="poi_health_specialty_emergency_yes">Neatliekamā medicīniskā palīdzība</string>
     <string name="poi_health_specialty_emergency_medicine_no">Specialitāte: neatliekamā medicīniskā palīdzība: nav</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastiskā ķirurģija</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontija</string>
@@ -2283,7 +2283,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Sejas ķirurģija</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnosticējošā radioloģija</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloģija</string>
-    <string name="poi_health_specialty_dentistry_yes">Zobārstniecība</string>
+    <string name="poi_health_specialty_stomatology_yes">Zobārstniecība</string>
     <string name="poi_health_specialty_nephrology_yes">Nefroloģija</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neiroķirurģija</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neiropsihiatrija</string>
@@ -2303,7 +2303,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopēdija</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuālā terapija</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sporta medicīna</string>
-    <string name="poi_health_specialty_podology_yes">Podoloģija</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloģija</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Pieaugušo psihiatrija</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktūra</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopātija</string>

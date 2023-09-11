@@ -919,8 +919,6 @@
     <string name="map_widget_av_notes">Səs/video qeydləri</string>
     <string name="map_widget_distancemeasurement">Məsafə ölçülməsi</string>
     <string name="map_widget_audionotes">Səsli qeydlər</string>
-    <string name="index_srtm_parts">hissələr</string>
-    <string name="index_srtm_ele">Kontur xətləri</string>
     <string name="download_roads_only_item">Yalnız yollar</string>
     <string name="download_srtm_maps">Kontur xətləri</string>
     <string name="download_roads_only_maps">Yalnız yol xəritəsi</string>
@@ -1161,7 +1159,6 @@
     <string name="go_to_map">Xəritəni göstər</string>
     <string name="favorite_category_dublicate_message">Zəhmət olmasa, artıq mövcud olmayan kateqoriya adı istifadə edin.</string>
     <string name="region_maps">Region xəritələri</string>
-    <string name="srtm_plugin_disabled">Kontur xətləri sönülüdür</string>
     <string name="default_speed_system_descr">Sürət vahidi təyin edin.</string>
     <string name="default_speed_system">Sürət vahidi</string>
     <string name="min_km">dəq/km</string>
@@ -3171,14 +3168,12 @@
     <string name="srtm_plugin_description">Bu qoşma OsmAnd-ın standart xəritələrinin üzərində həm kontur xəttinin, həm də (relyef) təpə kölgəsi örtüyünün göstərilməsini təmin edir. Bu funksionallıq idmançılar, piyada gəzənlər, səyahətçilər və landşaftın relyef quruluşu ilə maraqlanan hər kəs tərəfindən yüksək qiymətləndiriləcək. (Nəzərə alın ki, kontur xətti və/yaxud relyef məlumatları ayrıdır, qoşmanı aktivləşdirdikdən sonra əlavə endirmələr mümkündür.)
 \n
 \nQlobal məlumatlar (70° şimal və 70° cənub arasında) SRTM (Shuttle Radar Topography Mission) və NASA-nın Yer Müşahidə Sisteminin qabaqcıl peyki olan Terra-nın göyərtəsində təsvir aləti olan ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) tərəfindən ölçmələrə əsaslanır. ASTER – NASA, Yaponiyanın İqtisadiyyat, Ticarət və Sənaye Nazirliyi (METI) və Yaponiya Kosmik Sistemləri (J-spacesystems) arasında ortaq işdir.</string>
-    <string name="contour_lines_and_hillshade">Kontur xətləri və təpə kölgəsi</string>
     <string name="hillshade_menu_download_descr">Şaquli kölgələri göstərmək üçün “Təpə kölgəsi” örtük xəritəsini endirin.</string>
     <string name="layer_hillshade">Təpə kölgəsi qatı</string>
     <string name="hillshade_layer_disabled">Təpə kölgəsi qatı sönülüdür</string>
     <string name="record_plugin_description">Bu qoşma xəritədə GPX qeydetmə vidcetinə əl ilə toxunmaqla izlərinizi qeyd etmək və saxlamaq, həmçinin bütün naviqasiya marşrutlarınızı avtomatik olaraq GPX faylına qeyd etmək funksiyasını aktivləşdirir.
 \n
 \nQeyd edilmiş izlər dostlarınızla paylaşıla və ya OSM töhfələri üçün istifadə edilə bilər. İdmançılar məşqlərinə nəzarət etmək üçün qeyd edilmiş izlərdən istifadə edə bilərlər. Dövrə vaxtları, orta sürət və s. kimi bəzi əsas iz analizləri birbaşa OsmAnd-da həyata keçirilə bilər və əlbəttə ki, daha sonra izlər xüsusi 3-cü tərəf analiz alətlərində də təhlil edilə bilər.</string>
-    <string name="contour_lines_hillshade_maps">Kontur xətləri və təpə kölgəsi xəritələri</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>

@@ -2257,7 +2257,7 @@
     <string name="poi_health_specialty_general_yes">Alment praktiserende læge</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologi</string>
     <string name="poi_health_specialty_gynaecology_yes">Gynækologi</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Intern medicin</string>
+    <string name="poi_health_specialty_internal_yes">Intern medicin</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopædkirurgi</string>
     <string name="poi_health_specialty_otolaryngology_yes">Ørelæge</string>
     <string name="poi_health_specialty_paediatrics_yes">Pædiatri</string>
@@ -2277,7 +2277,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologi</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Tand-, mund-, kæbe og ansigtskirurgi</string>
     <string name="poi_health_specialty_maternity_yes">Graviditet og barsel</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Akutmedicin</string>
+    <string name="poi_health_specialty_emergency_yes">Akutmedicin</string>
     <string name="poi_health_specialty_emergency_medicine_no">Sundhedsspeciale: akutmedicin: nej</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastikkirurgi</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodonti</string>
@@ -2289,7 +2289,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Ansigtskirurgi</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostisk radiologi</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologi</string>
-    <string name="poi_health_specialty_dentistry_yes">Tandpleje</string>
+    <string name="poi_health_specialty_stomatology_yes">Tandpleje</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologi (nyresygdomme)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurokirurgi</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsykiatri</string>
@@ -2313,7 +2313,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Taleterapi</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuelterapi</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sportsmedicin</string>
-    <string name="poi_health_specialty_podology_yes">Podologi</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologi</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Voksenpsykiatri</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktur</string>
     <string name="poi_health_specialty_homeopathy_yes">Homøopati</string>

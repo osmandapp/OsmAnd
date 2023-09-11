@@ -874,8 +874,6 @@
     <string name="map_widget_max_speed">Limita de viteză</string>
     <string name="rendering_attr_noAdminboundaries_name">Limitele</string>
     <string name="rendering_attr_noAdminboundaries_description">Suprimarea afișării limitelor regionale (niveluri de administrare 5-9).</string>
-    <string name="index_srtm_ele">Curbe de nivel</string>
-    <string name="index_srtm_parts">părți</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Alte hărți</string>
     <string name="download_srtm_maps">Curbe (izolinii)</string>
@@ -1436,7 +1434,6 @@
     <string name="region_maps">Hărțile regiunilor</string>
     <string name="world_maps">Hărțile lumii</string>
     <string name="hillshade_layer_disabled">Vizualizarea umbrelor de relief e dezactivată</string>
-    <string name="srtm_plugin_disabled">Dezactivarea curbelor (izoliniilor)</string>
     <string name="favorite_category_add_new">Adaugă nou</string>
     <string name="favorite_category_select">Alegeți categorie</string>
     <string name="default_speed_system_descr">Definiți unitatea de viteză.</string>
@@ -2295,7 +2292,6 @@
     <string name="daily_map_updates">Actualizări de hărți din oră în oră</string>
     <string name="in_app_purchase_desc">O singură plată</string>
     <string name="in_app_purchase_desc_ex">Odată achiziționat, acesta va fi permanent disponibil pentru dvs.</string>
-    <string name="contour_lines_hillshade_maps">Hărți curbe de nivel &amp; umbrire relief</string>
     <string name="download_maps_travel">Ghiduri de călătorie</string>
     <string name="wikivoyage_search_hint">Căutare pentru țară, oraș,sau provincie</string>
     <string name="shared_string_travel_guides">Ghiduri de călătorie</string>
@@ -2491,7 +2487,6 @@
     <string name="shared_string_memory_used_gb_desc">Utilizat %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Utilizat %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Utilizat %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curbe de nivel și umbrire relief</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer drumurile neasfaltate</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer drumurile nepavate.</string>
     <string name="update_all_maps">Actualizați toate hărțile</string>
@@ -2986,10 +2981,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Obțineți OsmAnd Cloud pentru a stoca online toate datele OsmAnd. Fără date pierdute după reinstalare. Faceți copii de rezervă și restaurați toate informațiile cu ușurință.</string>
     <string name="unlimited_map_downloads">Descărcări nelimitate de hărți</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia și Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Hărți relief: curbe de nivel, umbrire relief, pante</string>
     <string name="offline_wikipeadia">Wikipedia offline</string>
     <string name="offline_wikivoyage">Wikivoyage offline</string>
-    <string name="terrain_maps">Hărți de teren</string>
     <string name="nautical_depth">Adâncimea nautică</string>
     <string name="you_can_get_feature_as_part_of_pattern">Obțineți \"%1$s\" ca parte a planului %2$s. Comparație:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s sau %2$s</string>
@@ -5106,7 +5099,6 @@
     <string name="offline_weather_forecast_desc">Puteți descărca prognoza meteo pentru 7 zile.</string>
     <string name="generate_slope_from_3d_maps">Generarea de hărți raster de pantă din hărți 3D</string>
     <string name="enable_3d_maps">Activați hărțile 3D</string>
-    <string name="test_heightmap">Harta înălțimii de testare</string>
     <string name="shared_string_pounds">lire sterline</string>
     <string name="metric_lbs">livre</string>
     <string name="shared_string_all_world">Toată lumea</string>
@@ -5360,4 +5352,53 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
+    <string name="release_4_6">- Widgetul raportului de alunecare
+\n
+\n - A fost adăugat widget-ul ANT+ pentru temperatură
+\n
+\n - O mai bună gestionare a memoriei pentru trasee GPX mari
+\n
+\n</string>
+    <string name="app_mode_baby_transport">Transportul bebelușilor</string>
+    <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Temperatură</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Traseu în linie dreaptă (aeronave)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Traseul trenului</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Ruta de transport public</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navigați cu ajutorul markerilor</string>
+    <string name="help_article_map_point_layers_on_map_name">Puncte pe hartă</string>
+    <string name="help_article_map_vector_maps_name">Hărți vectoriale (stiluri de hartă)</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Indicații vocale / Notificări</string>
+    <string name="help_article_map_tracks_on_map_name">Piste și rute</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Rutare directă la punct (Barca)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ecranul hărții în timpul navigației</string>
+    <string name="help_article_navigation_guidance_name">Ghidare</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Rută auto (camion, motocicletă)</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalii despre traseu</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Pregătirea traseului</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Traseu pietonal</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigați pe traseu</string>
+    <string name="help_article_navigation_routing_online_routing_name">Traseu online</string>
+    <string name="help_article_map_map_context_menu_name">Meniul contextual al hărții</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_map_track_context_menu_name">Meniul contextual Tracks</string>
+    <string name="help_article_map_legend_osmand_name">Stil de hartă OsmAnd</string>
+    <string name="sensor_temperature_desc">Afișează temperatura de la senzor</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Drumeție călare</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Traseu de schi</string>
+    <string name="help_article_personal_name">Datele mele</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_name">Parametrii rutei</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Traseu pentru motorete</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Traseul navei</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Traseu pentru biciclete (MTB)</string>
+    <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
+    <string name="help_article_map_raster_maps_name">Hărți Raster (online / offline)</string>
+    <string name="help_article_map_legend_ski_map_name">Stilul hărții de schi</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Despre OsmAnd rute</string>
+    <string name="help_article_plan_route_coordinate_input_name">Introducerea coordonatelor</string>
+    <string name="help_article_personal_import_export_name">Import / Export</string>
+    <string name="help_article_plan_route_name">Planificarea traseului</string>
+    <string name="help_article_personal_storage_name">Depozitare</string>
 </resources>

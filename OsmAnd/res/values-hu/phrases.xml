@@ -2428,7 +2428,7 @@
     <string name="poi_health_specialty_general_yes">Háziorvos</string>
     <string name="poi_health_specialty_ophthalmology_yes">Szemészet</string>
     <string name="poi_health_specialty_gynaecology_yes">Nőgyógyászat</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Belgyógyászat</string>
+    <string name="poi_health_specialty_internal_yes">Belgyógyászat</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopédia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Fül-orr-gégészet</string>
     <string name="poi_health_specialty_paediatrics_yes">Gyermekgyógyászat</string>
@@ -2443,14 +2443,14 @@
     <string name="poi_health_specialty_biology_yes">Klinikai biológia</string>
     <string name="poi_health_specialty_osteopathy_yes">Csontkovácsolás</string>
     <string name="poi_health_specialty_maternity_yes">Szülészet</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Baleseti és sürgősségi ellátás</string>
+    <string name="poi_health_specialty_emergency_yes">Baleseti és sürgősségi ellátás</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plasztikai sebészet</string>
     <string name="poi_health_specialty_orthodontics_yes">Fogszabályozás</string>
     <string name="poi_health_specialty_physiotherapy_yes">Gyógytorna</string>
     <string name="poi_health_specialty_child_psychiatry_yes">Gyermekpszichiátria</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnosztikai radiológia</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gasztroenterológia</string>
-    <string name="poi_health_specialty_dentistry_yes">Fogászat</string>
+    <string name="poi_health_specialty_stomatology_yes">Fogászat</string>
     <string name="poi_health_specialty_neurosurgery_yes">Idegsebészet</string>
     <string name="poi_health_specialty_pathology_yes">Patológia</string>
     <string name="poi_health_specialty_oncology_yes">Onkológia</string>
@@ -2662,7 +2662,7 @@
     <string name="poi_health_specialty_addiction_medicine_yes">Addiktológia</string>
     <string name="poi_health_specialty_optometry_yes">Optometria</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuálterápia</string>
-    <string name="poi_health_specialty_podology_yes">Lábgyógyászat</string>
+    <string name="poi_health_specialty_podiatry_yes">Lábgyógyászat</string>
     <string name="poi_health_specialty_reiki_yes">Reiki</string>
     <string name="poi_health_specialty_herbalism_yes">Gyógynövénytan</string>
     <string name="poi_health_specialty_chiropractic_yes">Chiropraktika</string>

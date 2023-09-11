@@ -53,10 +53,12 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
-import net.osmand.plus.helpers.RateUsHelper.RateUsState;
+import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.plus.keyevent.devices.base.InputDevice;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
@@ -94,7 +96,6 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -1883,13 +1884,13 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getValue()).makeProfile();
+	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getId()).makeProfile();
 
-	public InputDevice getSelectedInputDevice() {
+	public InputDeviceProfile getSelectedInputDevice() {
 		return getSelectedInputDevice(getApplicationMode());
 	}
 
-	public InputDevice getSelectedInputDevice(@NonNull ApplicationMode appMode) {
+	public InputDeviceProfile getSelectedInputDevice(@NonNull ApplicationMode appMode) {
 		return InputDevice.getByValue(EXTERNAL_INPUT_DEVICE.getModeValue(appMode));
 	}
 

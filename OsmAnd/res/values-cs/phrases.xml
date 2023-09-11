@@ -2243,7 +2243,7 @@
     <string name="poi_health_specialty_general_yes">Praktický lékař</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
     <string name="poi_health_specialty_gynaecology_yes">Gynekologie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interní lékařství</string>
+    <string name="poi_health_specialty_internal_yes">Interní lékařství</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngologie</string>
     <string name="poi_health_specialty_paediatrics_yes">Dětské lékařství</string>
@@ -2263,7 +2263,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Respirační medicína</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dentální, orální a maxilofaciální chirurgie</string>
     <string name="poi_health_specialty_maternity_yes">Mateřství</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Traumatologie a urgentní medicína</string>
+    <string name="poi_health_specialty_emergency_yes">Traumatologie a urgentní medicína</string>
     <string name="poi_health_specialty_emergency_medicine_no">Zdravotní specializace: traumatologie a urgentní medicína: ne</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastická chirurgie</string>
     <string name="poi_health_specialty_physiotherapy_yes">Fyzioterapie</string>
@@ -2274,7 +2274,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Maxilofaciální chirurgie</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiologie</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologie</string>
-    <string name="poi_health_specialty_dentistry_yes">Stomatologie</string>
+    <string name="poi_health_specialty_stomatology_yes">Stomatologie</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologie (onemocnění ledvin)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurologická chirurgie</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
@@ -2298,7 +2298,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopedie</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuální terapie</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sportovní medicína</string>
-    <string name="poi_health_specialty_podology_yes">Podologie</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologie</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psychiatrie pro dospělé</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktura</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatie</string>

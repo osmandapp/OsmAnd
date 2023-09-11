@@ -1,8 +1,6 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.feedback;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
-
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,14 +9,12 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.OnCompleteListener;
 import com.google.android.play.core.tasks.Task;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -88,8 +84,7 @@ public class RateUsHelper {
 	}
 
 	public static void showRateDialog(@NonNull MapActivity mapActivity) {
-		boolean inAppReviewSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-		if (inAppReviewSupported && Version.isGooglePlayInstalled(mapActivity.getMyApplication())) {
+		if (Version.isGooglePlayInstalled(mapActivity.getMyApplication())) {
 			showInAppRateDialog(mapActivity);
 		} else {
 			RateUsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
@@ -100,17 +95,14 @@ public class RateUsHelper {
 		ReviewManager reviewManager = ReviewManagerFactory.create(activity);
 		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
 		Task<ReviewInfo> requestReview = reviewManager.requestReviewFlow();
-		requestReview.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
-			@Override
-			public void onComplete(@NonNull Task<ReviewInfo> task) {
-				if (task.isSuccessful()) {
-					FragmentActivity activity = activityRef.get();
-					if (activity != null) {
-						showInAppRateDialogInternal(reviewManager, activity, task.getResult());
-					}
-				} else {
-					log.error(task.getException());
+		requestReview.addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				FragmentActivity fragmentActivity = activityRef.get();
+				if (fragmentActivity != null) {
+					showInAppRateDialogInternal(reviewManager, fragmentActivity, task.getResult());
 				}
+			} else {
+				log.error(task.getException());
 			}
 		});
 	}
@@ -118,43 +110,15 @@ public class RateUsHelper {
 	private static void showInAppRateDialogInternal(ReviewManager reviewManager, FragmentActivity activity, ReviewInfo reviewInfo) {
 		Task<Void> reviewFlow = reviewManager.launchReviewFlow(activity, reviewInfo);
 		WeakReference<FragmentActivity> activityRef = new WeakReference<>(activity);
-		reviewFlow.addOnCompleteListener(new OnCompleteListener<Void>() {
-			@Override
-			public void onComplete(@NonNull Task<Void> task) {
-				if (task.isSuccessful()) {
-					FragmentActivity activity = activityRef.get();
-					if (activity != null) {
-						storeRateResult(activity, RateUsState.IGNORED);
-					}
-				} else {
-					log.error(task.getException());
+		reviewFlow.addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				FragmentActivity fragmentActivity = activityRef.get();
+				if (fragmentActivity != null) {
+					storeRateResult(fragmentActivity, RateUsState.IGNORED);
 				}
+			} else {
+				log.error(task.getException());
 			}
 		});
 	}
-
-	public enum RateUsState {
-		INITIAL_STATE,
-		IGNORED,
-		LIKED,
-		DISLIKED_WITH_MESSAGE,
-		DISLIKED_WITHOUT_MESSAGE,
-		DISLIKED_OR_IGNORED_AGAIN;
-
-		public static RateUsState getNewState(OsmandApplication app, RateUsState requiredState) {
-			RateUsState currentState = app.getSettings().RATE_US_STATE.get();
-			switch (requiredState) {
-				case INITIAL_STATE:
-				case LIKED:
-				case DISLIKED_OR_IGNORED_AGAIN:
-					return requiredState;
-				case IGNORED:
-				case DISLIKED_WITH_MESSAGE:
-				case DISLIKED_WITHOUT_MESSAGE:
-					return currentState == INITIAL_STATE ? requiredState : DISLIKED_OR_IGNORED_AGAIN;
-			}
-			return requiredState;
-		}
-	}
-
 }

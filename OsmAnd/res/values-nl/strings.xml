@@ -838,8 +838,6 @@
     <string name="map_widget_max_speed">Snelheidslimiet</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
-    <string name="index_srtm_parts">gedeelten</string>
-    <string name="index_srtm_ele">Hoogtelijnen</string>
     <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.
 \n
 \nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM(Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).
@@ -1611,7 +1609,6 @@
     <string name="region_maps">Kaarten van regio\'s</string>
     <string name="world_maps">Wereldkaarten</string>
     <string name="hillshade_layer_disabled">Reliëfschaduwlaag uitgeschakeld</string>
-    <string name="srtm_plugin_disabled">Hoogtelijnen uitgeschakeld</string>
     <string name="favorite_category_add_new">Categorie toevoegen</string>
     <string name="favorite_category_select">Kies categorie</string>
     <string name="default_speed_system_descr">Eenheid voor de snelheid instellen.</string>
@@ -2584,7 +2581,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Onbeperkte downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Hoogtelijnen &amp; reliëfschaduwkaarten</string>
     <string name="unlock_all_features">Ontgrendel alle OsmAnd-functies</string>
     <string name="purchase_dialog_title">Abonnementsvorm kiezen</string>
     <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om de offline reisgids te kunnen gebruiken:</string>
@@ -3109,7 +3105,6 @@
     <string name="quick_action_hillshade_descr">Knop om de reliëfschaduw al dan niet te tonen op de kaart.</string>
     <string name="track_saved">Track opgeslagen</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunt van de fietsroutes</string>
-    <string name="contour_lines_and_hillshade">Hoogtelijnen en reliëfschaduw</string>
     <string name="send_log">Verzend log</string>
     <string name="move_maps">Kaarten verplaatsen</string>
     <string name="rate_dialog_descr">Deel je feedback en beoordeel ons werk op Google Play.</string>
@@ -4386,9 +4381,7 @@
     <string name="shared_string_not_included">Niet inbegrepen</string>
     <string name="cancel_anytime_in_gplay">Annuleer het abonnement op elk moment via Google Play.</string>
     <string name="nautical_depth">Zeediepte</string>
-    <string name="terrain_maps">Terreinkaarten</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terreinkaarten: hoogtelijnen, reliëfschaduwen en hellingen</string>
     <string name="send_crash_log">Crashrapport verzenden</string>
     <string name="you_can_get_feature_as_part_of_pattern">Verkrijg \"%1$s\" als onderdeel van het %2$s abonnement. Vergelijking:</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
@@ -5154,7 +5147,6 @@
     <string name="shared_string_all_world">Wereldwijd</string>
     <string name="offline_weather_forecast">Offline weersvoorspelling</string>
     <string name="inch">inch</string>
-    <string name="test_heightmap">Test hoogtekaart</string>
     <string name="sort_distance_ascending">Kortste afstand eerst</string>
     <string name="sort_distance_descending">Langste afstand eerst</string>
     <string name="sort_date_ascending">Nieuwste datum eerst</string>

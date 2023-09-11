@@ -25,6 +25,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -398,9 +399,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
-	                              float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
-		SensorAttributesUtils.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+		SensorAttributesUtils.onAnalysePoint(analysis, point, attribute);
 	}
 
 	@Nullable

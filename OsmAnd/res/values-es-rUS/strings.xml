@@ -668,8 +668,6 @@
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -1666,7 +1664,6 @@
     <string name="m_s">m/s</string>
     <string name="favorite_category_add_new">Añadir nuevo</string>
     <string name="favorite_category_select">Elegir categoría</string>
-    <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
     <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="downloading_number_of_files">Descargando %1$d archivo(s)…</string>
@@ -2687,7 +2684,6 @@
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
-    <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
     <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
@@ -3204,7 +3200,6 @@
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreado</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
     <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
@@ -4160,10 +4155,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas topográficos: curvas de nivel, sombreados, pendiente</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
-    <string name="terrain_maps">Mapas topográficos</string>
     <string name="nautical_depth">Profundidad náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Consigue «%1$s» como parte del plan %2$s. Comparación:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
@@ -5111,7 +5104,6 @@
     <string name="generate_slope_from_3d_maps">Generar mapas ráster de pendientes a partir de mapas 3D</string>
     <string name="disable_vertex_hillshade_3d">Desactivar el sombreado de vértices en 3D</string>
     <string name="enable_3d_maps">Activar mapas en 3D</string>
-    <string name="test_heightmap">Probar mapas de altura</string>
     <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
     <string name="free_maps_updates">Actualizaciones gratuitas (emergencia)</string>
     <string name="clear_online_cache_description">Esto vaciará la memoria caché de las teselas meteorológicas en línea.</string>

@@ -3,6 +3,8 @@ package net.osmand.plus.track.helpers;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
@@ -37,6 +39,13 @@ public class GpxDisplayItem {
 
 	public Matrix chartMatrix;
 	public float chartHighlightPos = -1f;
+
+	public GpxDisplayItem() {
+	}
+
+	public GpxDisplayItem(@NonNull GPXTrackAnalysis analysis) {
+		this.analysis = analysis;
+	}
 
 	public boolean isGeneralTrack() {
 		return group != null && group.isGeneralTrack();

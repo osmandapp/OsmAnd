@@ -135,8 +135,6 @@
     <string name="map_widget_audionotes">Аудио бележки</string>
     <string name="audionotes_plugin_description">Добавяйте бележки (гласови, снимка или видео) по време на пътуване, ползвайки специалния бутон или контекстното меню.</string>
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
-    <string name="index_srtm_parts">части</string>
-    <string name="index_srtm_ele">Контурни линии</string>
     <string name="srtm_plugin_description">Информацията за терена, като контурни линии, хълмове и склонове, Ви помага визуално да оцените разположението на земята и релефа, възможностите за навигация и др. Топографската информация може да бъде представена на картата чрез засенчване на склонове, контурни линии и/или оцветяване на стръмнини.
 \n
 \nДанните, върху които лежи тази функционалност, произхождат от SRTM и ASTER.
@@ -1563,7 +1561,6 @@
     <string name="region_maps">Карти на региони</string>
     <string name="world_maps">Световни карти</string>
     <string name="hillshade_layer_disabled">Слоят за засенчване на релефа е изключен</string>
-    <string name="srtm_plugin_disabled">Контурните линии са изключени</string>
     <string name="favorite_category_add_new">Добавяне на нов</string>
     <string name="favorite_category_select">Изберете категория</string>
     <string name="default_speed_system_descr">Дефиниране на единица за скорост.</string>
@@ -2372,7 +2369,6 @@
     <string name="purchases_feature_desc_hourly_map_updates">Достъп до по-често обновяване на картите. Почасови, ежедневни или ежеседмични обновявания. Изтеглят поетапно, само за променената област.</string>
     <string name="unlimited_map_downloads">Неограничено изтегляне на карти</string>
     <string name="wikipedia_and_wikivoyage_offline">Уикипедия и Wikivoyage офлайн</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Карти на терена: контурни линии, засенчване на релефа, склонове</string>
     <string name="offline_wikipeadia">Офлайн Уикипедия</string>
     <string name="offline_wikivoyage">Офлайн Wikivoyage</string>
     <string name="nautical_depth">Морска дълбочина</string>
@@ -2649,7 +2645,6 @@
     <string name="display_route_tracks_as_poi">Показване на трасетата като POI</string>
     <string name="routing_attr_only_permitted_ways_description">Използват се само изрично разрешените пътища (селски пътища, пътеки и др.)</string>
     <string name="hillshade_slope_contour_lines">Релеф / склонове / контурни линии</string>
-    <string name="contour_lines_and_hillshade">Контурни линии и засенчване на релефа</string>
     <string name="store_tracks_in_rec_directory">Записване на трасета в папка „rec“</string>
     <string name="store_tracks_in_daily_directories">Записване на трасета в дневна папка</string>
     <string name="shared_string_meters">метри</string>
@@ -3145,7 +3140,6 @@
     <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)\?</string>
     <string name="keep_passed_markers_descr">Маркерите, добавени група Избрани или Отправни точки на GPX, отбекязани като преминати, ще останат на картата. Ако групата е изключена, маркерите ще изчезнат от картата.</string>
     <string name="shortcut_navigate_to_home">Към „Вкъщи“</string>
-    <string name="test_heightmap">Изпробване на карта на височините</string>
     <string name="enable_3d_maps">Включване на триизмерни карти</string>
     <string name="shared_string_inches">инчове</string>
     <string name="add_home">Добавяне на вкъщи</string>
@@ -3359,7 +3353,6 @@
 \nНамерете инструкции за това как да допринесете на адрес %1$s.</string>
     <string name="add_to_opr">Добавяне в OpenPlaceReviews</string>
     <string name="angular_measeurement">Ъглови единици</string>
-    <string name="contour_lines_hillshade_maps">Контурни линии и карти за засенчване на релефа</string>
     <string name="display_zoom_level">Увеличение: %1$s</string>
     <string name="simulate_location_by_gpx">Симулиране на местоположението чрез GPX</string>
     <string name="srtm_color_scheme">Цветова схема</string>
@@ -3806,7 +3799,6 @@
     <string name="routing_attr_avoid_ferry_name">Без фериботи</string>
     <string name="provided_by">Предоставен от %1$s</string>
     <string name="snap_to_road_descr">Иконата за позиция ще се придържа към текущия маршрут</string>
-    <string name="terrain_maps">Карти на терена</string>
     <string name="speed_cameras_restart_descr">Рестартирайте приложението, за да бъдат премахнати данните за предупреждение за камери за контрол на скоростта.</string>
     <string name="uninstall_speed_cameras">Премахване на камери за контрол на скоростта</string>
     <string name="speed_camera_pois">POI на камери за контрол на скоростта</string>
@@ -3820,4 +3812,7 @@
     <string name="error_calculate">Резултатът от изчислението е празен</string>
     <string name="calculate_offline">Изчисляване без мрежа</string>
     <string name="calculate_offline_altitude_descr">Изчисляване на надморската височина въз основа на данни от карта на височината. Разликите спрямо отчетената от устройството надморска височина могат да бъдат използвани за корекция на надморската височина.</string>
+    <string name="show_tunnels">Тунели</string>
+    <string name="download_wikipedia_label">Изтегли данните от Wikipedia</string>
+    <string name="download_wikipedia_description">Изтеглете статиите от Wikipedia за %1$s, за да ги четете офлайн.</string>
 </resources>

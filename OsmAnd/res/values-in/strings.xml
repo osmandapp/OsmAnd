@@ -2006,7 +2006,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Batasan</string>
     <string name="poi_filter_emergency">Darurat</string>
     <string name="logcat_buffer">Buffer logcat</string>
-    <string name="index_srtm_parts">bagian</string>
     <string name="prefs_plugins">Plugin</string>
     <string name="poi_filter_accomodation">Akomodasi</string>
     <string name="poi_filter_restaurants">Restoran</string>
@@ -2808,12 +2807,10 @@
     <string name="shared_string_progress">Kemajuan</string>
     <string name="backup_error_size_is_exceeded">Ukuran maksimum OsmAnd Cloud melebihi %1$s</string>
     <string name="backup_error_subscription_was_used">Langganan atau promo digunakan oleh akun lain %1$s</string>
-    <string name="terrain_maps">Peta medan</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia dan Wikivoyage luring</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dapatkan pembaruan peta lebih sering. Pembaruan setiap jam, hari, atau minggu. Pembaruan diunduh secara bertahap, hanya untuk area yang diubah.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Dapatkan unduhan tidak terbatas untuk semua peta benua dan wilayah luring.</string>
     <string name="purchases_feature_desc_wikipedia">Menyediakan semua artikel Wikipedia berkaitan dengan tempat secara luring, membantu Anda untuk mempelajari tentang tempat-tempat yang Anda kunjungi saat perjalanan Anda dengan ketukan sederhana di peta. Jangan lupa untuk mengunduh berkas peta Wikipedia untuk wilayah sendiri-sendiri.</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Peta medan: garis kontur, bayangan bukit, lereng</string>
     <string name="purchases_feature_desc_terrain">Garis kontur medan, bukit berskala abu-abu dan indikasi lereng skala warna, untuk menunjukkan puncak dan dataran rendah.</string>
     <string name="backup_version_history_delete_descr">Hapus catatan perubahan untuk tipe data usang dari OsmAnd Cloud\?</string>
     <string name="backup_delete_all_data_warning">Anda akan menghapus semua data yang sebelumnya diunggah ke OsmAnd Cloud, termasuk riwayat versi.
@@ -3488,7 +3485,6 @@
     <string name="shared_preference">Terbagi</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Nihil</string>
     <string name="osm_edits">Suntingan OSM</string>
-    <string name="index_srtm_ele">Garis kontur</string>
     <string name="rendering_attr_showRoadMaps_name">Peta hanya jalan</string>
     <string name="map_widget_vector_attributes">Atribut rendering</string>
     <string name="free">Gratis %1$s</string>
@@ -3753,7 +3749,6 @@
     <string name="voice_announces">Perintah suara</string>
     <string name="route_parameters">Parameter rute</string>
     <string name="av_video_quality_low">Kualitas terendah</string>
-    <string name="contour_lines_and_hillshade">Garis kontur dan bayangan bukit</string>
     <string name="plugins_settings">Pengaturan plugin</string>
     <string name="application_profile_changed">Profil aplikasi berubah menjadi \"%s\"</string>
     <string name="start_up_message_pref">Pesan pembuka</string>
@@ -3966,7 +3961,6 @@
     <string name="access_direction_haptic_feedback">Arah haptik</string>
     <string name="access_direction_haptic_feedback_descr">Tunjukkan arah titik target dengan getaran.</string>
     <string name="app_mode_personal_transporter">Pengangkut pribadi</string>
-    <string name="contour_lines_hillshade_maps">Garis kontur &amp; peta bayangan bukit</string>
     <string name="subsequent_dest_description">Pindahkan tujuan ke atas, dan buat</string>
     <string name="access_smart_autoannounce_descr">Hanya beritahu ketika arah ke titik target berubah.</string>
     <string name="routing_attr_avoid_share_taxi_description">Menghindari taksi berbagi</string>
@@ -4195,7 +4189,6 @@
     <string name="map_downloaded_descr">Peta %1$s siap untuk digunakan.</string>
     <string name="simulate_initial_startup">Simulasikan pemulaian aplikasi pertama</string>
     <string name="hillshade_layer_disabled">Lapisan bayangan bukit dinonaktifkan</string>
-    <string name="srtm_plugin_disabled">Garis kontur dinonaktifkan</string>
     <string name="specified_directiory_not_writeable">Peta tidak dapat dibuat dalam direktori yang ditetapkan</string>
     <string name="application_dir">Folder penyimpanan data</string>
     <string name="filter_poi_hint">Saring berdasarkan nama</string>
@@ -5101,7 +5094,6 @@
     <string name="generate_hillshade_from_3d_maps">Buat peta raster bayangan bukit dari peta 3D</string>
     <string name="generate_slope_from_3d_maps">Buat peta raster kemiringan dari peta 3D</string>
     <string name="disable_vertex_hillshade_3d">Nonaktifkan bayangan bukit verteks dalam 3D</string>
-    <string name="test_heightmap">Uji coba peta ketinggian</string>
     <string name="app_mode_climbing">Mendaki</string>
     <string name="enable_3d_maps">Aktifkan peta 3D</string>
     <string name="weather_forecast_is_outdated">Prakiraan kedaluwarsa.</string>
@@ -5437,5 +5429,15 @@
     <string name="open_issue_on_github_descr">Ajukan pertanyaan, minta fitur baru</string>
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
-    <string name="live_monitoring_adress_descr">Tentukan</string>
+    <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="release_4_6">• Widget Rasio Glide
+\n
+\n• Ditambahkan widget suhu ANT+
+\n
+\n• Pengelolaan memori lebih baik untuk trek GPX besar.
+\n
+\n</string>
+    <string name="shared_string_temperature">Suhu</string>
+    <string name="sensor_temperature_desc">Menampilkan suhu dari sensor</string>
+    <string name="app_mode_baby_transport">Transportasi bayi</string>
 </resources>

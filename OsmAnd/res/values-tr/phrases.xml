@@ -2477,7 +2477,7 @@
     <string name="poi_health_specialty_homeopathy_yes">Homeopati</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktur</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Yetişkin psikiyatrisi</string>
-    <string name="poi_health_specialty_podology_yes">Podoloji</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloji</string>
     <string name="poi_health_specialty_sports_medicine_yes">Spor hekimliği</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuel terapi</string>
     <string name="poi_health_specialty_speech_therapy_yes">Konuşma terapisi</string>
@@ -2501,7 +2501,7 @@
     <string name="poi_health_specialty_neuropsychiatry_yes">Nöropsikiyatri</string>
     <string name="poi_health_specialty_neurosurgery_yes">Beyin ve sinir cerrahisi</string>
     <string name="poi_health_specialty_nephrology_yes">Nefroloji (böbrek hastalıkları)</string>
-    <string name="poi_health_specialty_dentistry_yes">Diş hekimliği</string>
+    <string name="poi_health_specialty_stomatology_yes">Diş hekimliği</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloji</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Tıbbi görüntüleme</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Çene-yüz cerrahisi</string>
@@ -2513,7 +2513,7 @@
     <string name="poi_health_specialty_orthodontics_yes">Ortodonti</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastik cerrahi</string>
     <string name="poi_health_specialty_emergency_medicine_no">Sağlık uzmanlığı: kaza ve acil tıp: hayır</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Kaza ve acil tıp</string>
+    <string name="poi_health_specialty_emergency_yes">Kaza ve acil tıp</string>
     <string name="poi_health_specialty_maternity_yes">Hamilelik</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Diş, ağız ve çene-yüz cerrahisi</string>
     <string name="poi_health_specialty_pulmonology_yes">Göğüs hastalıkları</string>
@@ -2534,7 +2534,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Pediatri</string>
     <string name="poi_health_specialty_otolaryngology_yes">Kulak burun boğaz</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedi</string>
-    <string name="poi_health_specialty_internal_medicine_yes">İç hastalıkları</string>
+    <string name="poi_health_specialty_internal_yes">İç hastalıkları</string>
     <string name="poi_health_specialty_gynaecology_yes">Jinekoloji</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloji</string>
     <string name="poi_health_specialty_general_yes">Pratisyen doktor</string>

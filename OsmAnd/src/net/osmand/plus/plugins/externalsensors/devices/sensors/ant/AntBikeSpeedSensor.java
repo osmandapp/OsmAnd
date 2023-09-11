@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
 import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -103,7 +103,14 @@ public class OpeningHoursParserTest {
 
 		OpeningHoursParser.initLocalStrings(Locale.UK);
 		OpeningHoursParser.setTwelveHourFormattingEnabled(false, Locale.UK);
-		OpeningHours hours = parseOpenedHours("Mo-Fr 10:00-18:30; We 10:00-14:00; Sa 10:00-13:00; Dec-Feb Mo-Fr 11:00-17:00; Dec-Feb We off; Dec-Feb Sa 11:00-13:00; Dec 24-Dec 31 off \"Inventurarbeiten\"; PH off");
+		OpeningHours hours = parseOpenedHours("Mo-Fr 11:00-22:00; Sa,Su,PH 12:00-22:00; 2022 jul 31-2022 Aug 31 off \"Betriebsferien\"");
+		System.out.println(hours);
+		testOpened("25.08.2022 11:30", hours, false);
+		testOpened("31.08.2022 21:59", hours, false);
+		testOpened("01.09.2022 11:00", hours, true); // Thursday
+		testInfo("25.08.2022 11:30", hours, "Will open on 11:00 Thu."); // (2022 jul 31-2022 Aug 31 off "Betriebsferien")
+
+		hours = parseOpenedHours("Mo-Fr 10:00-18:30; We 10:00-14:00; Sa 10:00-13:00; Dec-Feb Mo-Fr 11:00-17:00; Dec-Feb We off; Dec-Feb Sa 11:00-13:00; Dec 24-Dec 31 off \"Inventurarbeiten\"; PH off");
 		System.out.println(hours);
 		testOpened("05.11.2022 10:30", hours, true); // saturday
 		testOpened("05.12.2022 10:30", hours, false); // Thursday

@@ -44,16 +44,12 @@ public class TileSourceManager {
 	private static final String RND_ALG_WIKIMAPIA = "wikimapia";
 
 	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
-	private static final String CYCLE_URL = "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116";
 	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
 			+ MAPILLARY_ACCESS_TOKEN;
 
 	private static final TileSourceTemplate MAPNIK_SOURCE =
 			new TileSourceTemplate("OsmAnd (online tiles)", MAPNIK_URL, ".png", 19,
 					1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$
-	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
-			new TileSourceTemplate("CycleMap", CYCLE_URL, ".png", 16, 1,
-					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
 					MAPILLARY_VECTOR_TILE_EXT, 22, 13, 256, 16, 3200);
@@ -69,7 +65,7 @@ public class TileSourceManager {
 		MAPILLARY_CACHE_SOURCE.setHidden(true);
 	}
 
-	private static final String PARAM_BING_QUAD_KEY = "{q}";
+	public static final String PARAM_BING_QUAD_KEY = "{q}";
 	private static final String PARAM_RND = "{rnd}";
 	private static final String PARAM_BOUNDING_BOX = "{bbox}";
 	public static final String PARAMETER_NAME = "{PARAM}";
@@ -412,7 +408,7 @@ public class TileSourceManager {
 			return buildUrlToLoad(urlToLoad, randomsArray, x, y, zoom, urlParameters);
 		}
 
-		private static String eqtBingQuadKey(int z, int x, int y) {
+		public static String eqtBingQuadKey(int z, int x, int y) {
 			char[] NUM_CHAR = {'0', '1', '2', '3'};
 			char[] tn = new char[z];
 			for (int i = z - 1; i >= 0; i--) {

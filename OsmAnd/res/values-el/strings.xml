@@ -850,13 +850,11 @@
     <string name="rendering_attr_noAdminboundaries_name">Όρια</string>
     <string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα διαχειριστή 5-9).</string>
     <string name="download_select_map_types">Άλλοι χάρτες</string>
-    <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
     <string name="srtm_plugin_description">Αυτό το πρόσθετο παρέχει και την επικάλυψη ισοϋψών γραμμών και ένα στρώμα (ανάγλυφο) σκιάς λόφων για να εμφανιστεί στην κορυφή των τυπικών χαρτών του OsmAnd. Αυτή η λειτουργικότητα θα εκτιμηθεί πολύ από αθλητές, πεζοπόρους, εκδρομείς και οποιονδήποτε ενδιαφέρεται για τη δομή του ανάγλυφου ενός τοπίου. (Παρακαλούμε, σημειώστε ότι η ισοϋψής γραμμή και/ή τα δεδομένα του αναγλύφου είναι ξεχωριστά, με διαθέσιμες πρόσθετες μεταφορτώσεις μετά την ενεργοποίηση του προσθέτου.)
 \n
 \nΤα γενικά δεδομένα (μεταξύ 70 ° βόρεια και 70 ° νότια βασίζονται σε μετρήσεις από τα SRTM (Shuttle Radar Topography Mission) και ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ένα ενσωματωμένο εργαλείο απεικόνισης στο Terra, τον βασικό δορυφόρο του συστήματος παρατήρησης της γης από τη NASA. Το ASTER είναι μια συνεργατική προσπάθεια της NASA, του Ιαπωνικού υπουργείου οικονομίας, εμπορίου και βιομηχανίας (METI) και των Ιαπωνικών διαστημικών συστημάτων (J-spacesystems).</string>
     <string name="srtm_plugin_name">Ισοϋψείς καμπύλες</string>
     <string name="download_srtm_maps">Ισοϋψείς γραμμές</string>
-    <string name="index_srtm_parts">μέρη</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
     <string name="audionotes_plugin_description">Πάρτε σημειώσεις ήχου/φωτογραφίας/βίντεο κατά τη διάρκεια του ταξιδιού, χρησιμοποιώντας είτε ένα πλήκτρο στον χάρτη, ή τη θέση στο μενού περιβάλλοντος.</string>
     <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
@@ -1469,7 +1467,6 @@
     <string name="favorite_category_add_new_title">Προσθήκη νέας κατηγορίας</string>
     <string name="regions">Περιοχές</string>
     <string name="world_maps">Παγκόσμιοι χάρτες</string>
-    <string name="srtm_plugin_disabled">Ισοϋψείς γραμμές απενεργοποιημένες</string>
     <string name="favorite_category_add_new">Προσθήκη νέου</string>
     <string name="favorite_category_select">Επιλέξτε κατηγορία</string>
     <string name="default_speed_system_descr">Ορισμός μονάδας ταχύτητας.</string>
@@ -2699,7 +2696,6 @@
     <string name="welcome_to_open_beta">Καλώς ήλθατε, στην ανοικτή βήτα</string>
     <string name="wikivoyage_travel_guide">Ταξιδιωτικοί Οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
-    <string name="contour_lines_hillshade_maps">Χάρτες ισοϋψών γραμμών &amp; σκίασης αναγλύφου</string>
     <string name="download_wikipedia_description">Λήψη των άρθρων της βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
     <string name="download_wikipedia_label">Λήψη δεδομένων βικιπαίδειας</string>
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου μέσω δεδομένων</string>
@@ -3215,7 +3211,6 @@
     <string name="shared_string_memory_used_gb_desc">Χρησιμοποιήθηκαν %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Χρησιμοποιήθηκαν %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Χρησιμοποιήθηκαν %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Ισοϋψείς γραμμές και σκίαση αναγλύφου</string>
     <string name="routing_attr_prefer_unpaved_name">Να προτιμώνται μη στρωμένοι δρόμοι</string>
     <string name="routing_attr_prefer_unpaved_description">Να προτιμώνται μη στρωμένοι δρόμοι.</string>
     <string name="update_all_maps">Ενημέρωση όλων των χαρτών</string>

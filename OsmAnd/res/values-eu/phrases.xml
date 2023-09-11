@@ -1580,7 +1580,7 @@
     <string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestesikoak</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Hortz-kirurkia, aho-kirurgia, eta kirurgia maxilo-faziala</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Istripu eta larrialdietarako medikuntza</string>
+    <string name="poi_health_specialty_emergency_yes">Istripu eta larrialdietarako medikuntza</string>
     <string name="poi_health_specialty_emergency_medicine_no">Osasun espezialitatea: istripu eta larrialdietarako medikuntza: ez</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Kirurgia plastikoa</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontzia</string>
@@ -1590,7 +1590,7 @@
     <string name="poi_health_specialty_child_psychiatry_yes">Haur psikiatria</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Kirurgia maxilo-faziala</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterología</string>
-    <string name="poi_health_specialty_dentistry_yes">Dentista</string>
+    <string name="poi_health_specialty_stomatology_yes">Dentista</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologia (giltzurrunetako gaixotasunak)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Kirurgia neurologikoa</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsikiatria</string>
@@ -1610,7 +1610,7 @@
     <string name="poi_health_specialty_clinical_pathology_yes">Patologia klinikoa</string>
     <string name="poi_health_specialty_manual_therapy_yes">Esku terapia</string>
     <string name="poi_health_specialty_sports_medicine_yes">Kirol medikuntza</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Helduen psikiatria</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupuntura</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatia</string>
@@ -2712,7 +2712,7 @@
     <string name="poi_health_specialty_general_yes">Mediku orokorra</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginekologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Barne medikuntza</string>
+    <string name="poi_health_specialty_internal_yes">Barne medikuntza</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">"Otorrinolaringologia "</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>

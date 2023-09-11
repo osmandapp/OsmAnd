@@ -1,4 +1,4 @@
-package net.osmand.plus.wikimedia;
+package net.osmand.wiki;
 
 public class WikiImage {
 

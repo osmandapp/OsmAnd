@@ -523,7 +523,6 @@
     <string name="favorite_category_name">"തരത്തിന്റെ പേര് "</string>
     <string name="favorite_category_add_new_title">പുതിയ തരങ്ങള്‍ ചേര്‍ക്കുക</string>
     <string name="world_maps">ലോകഭൂപടങ്ങള്‍</string>
-    <string name="srtm_plugin_disabled">"കോണ്ടൂര്‍ ലൈനുകള്‍ നിര്‍ജീവമാക്കിയിരിക്കുന്നു "</string>
     <string name="favorite_category_select">ഒരു വിഭാഗം തെരഞ്ഞെടുക്കുക</string>
     <string name="default_speed_system_descr">വേഗതയുടെ അളവ് നിര്‍വചിക്കുക</string>
     <string name="default_speed_system">വേഗതയുടെ അളവ്</string>
@@ -909,7 +908,6 @@
     <string name="prefer_motorways">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
     <string name="prefer_in_routing_descr">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
     <string name="local_indexes_cat_srtm">"കോണ്ടൂര്‍ ലൈനുകള്‍ "</string>
-    <string name="index_srtm_ele">"കോണ്ടൂര്‍ ലൈനുകള്‍ "</string>
     <string name="map_widget_max_speed">വേഗപരിധി</string>
     <string name="map_widget_top_text">തെരുവ് നാമം</string>
     <string name="show_cameras">സ്പീഡ് ക്യാമറ</string>
@@ -970,7 +968,6 @@
     <string name="base_world_map">അടിസ്ഥാന ലോക ഭൂപടം</string>
     <string name="clear_destination">ലക്ഷ്യസ്ഥാനങ്ങള്‍ കളയുക</string>
     <string name="download_hillshade_maps">പര്‍വതഛായകള്‍</string>
-    <string name="index_srtm_parts">കഷണങ്ങള്‍</string>
     <string name="close_changeset">"ചേഞ്ച്സെറ്റ്  അടയ്ക്കുക"</string>
     <string name="show_warnings_title">മുന്നറിയിപ്പുകള്‍ കാണിക്കുക…</string>
     <string name="context_menu_item_add_parking_point">"പാര്‍ക്കിങ്ങ് ആയി രേഖപ്പെടുത്തുക "</string>
@@ -2575,7 +2572,6 @@
     <string name="start_editing_card_description">വിക്കിവൊയേജിലെ ഏതൊരു ആർട്ടിക്കിളും നിങ്ങള്‍ക്ക് തിരുത്താം. അറിവ്| അനുഭവം| കഴിവുകൾ| നിങ്ങളുടെ ശ്രദ്ധ എന്നിവ പങ്കിടാം</string>
     <string name="get_unlimited_access">പരിധിയില്ലാത്ത ആക്സസ്സ് നേടുക</string>
     <string name="welcome_to_open_beta">ബീറ്റയിലേക്ക് വേര്‍ഷനിലേക്ക് സ്വാഗതം</string>
-    <string name="contour_lines_hillshade_maps">കോണ്ടൂര്‍ ലൈനുകള്‍ &amp; ഹില്‍ഷേഡ് മാപ്പുകള്‍</string>
     <string name="open_wikipedia_link_online_description">വെബ് ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.</string>
     <string name="topo_render_descr">"ഹൈക്കിംങ്| ട്രക്കിങ്| സൈക്ലിംഗ് എന്നിവയ്ക്ക് വേണ്ടി രൂപകൽപ്പന ചെയ്ത കോൺട്രാസ്റ്റ് ശൈലി. സങ്കീർണ്ണമായ വെളിച്ചത്തില്‍ പോലും  വായിക്കാനായ്. പ്രധാന സവിശേഷതകൾ: റോഡുകളും സ്വാഭാവിക വസ്തുക്കളും വേര്‍തിരിച്ചറിയാം| വിവിധ തരത്തിലുള്ള റൂട്ടുകൾ| വിപുലമായ സജ്ജീകരണങ്ങൾ ഉള്ള കോണ്ടൂർ ലൈനുകൾ| ഒരേ സൂം ലെവലിൽ സാധരണ ശൈലിയേക്കാൾ കൂടുതൽ വിശദാംശങ്ങൾ. റോഡ് ഗുണനിലവാരത്തെ തിരിച്ചറിയാം. രാത്രി മോഡ് ഇല്ല."</string>
     <string name="default_render_descr">പൊതു ഉദ്ദേശ്യ ശൈലി. ജനസാന്ദ്രതയുള്ള നഗരങ്ങളിൽ ലളിതമായ ക്ലീനർ റെൻഡറിംഗ്. പ്രധാന സവിശേഷതകൾ: കോണ്ടൂർ ലൈനുകൾ| വഴികൾ| ഉപരിതല നിലവാരം| പ്രവേശന നിയന്ത്രണങ്ങൾ| റോഡ് ഷീൽഡുകൾ| പാതകള്‍ എസ്എസി സ്കെയിൽ റെന്‍ഡര്‍ ചെയ്തിരിക്കുന്നു | വാട്ടർ സ്പോർട്സ് സവിശേഷതകൾ</string>

@@ -13,7 +13,6 @@ import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
@@ -38,8 +37,7 @@ import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
 import net.osmand.gpx.GPXInterpolator;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.PointAttribute;
-import net.osmand.gpx.PointAttribute.Elevation;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -254,31 +252,30 @@ public class ChartUtils {
 	                                                   boolean useGeneralTrackPoints,
 	                                                   boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
-		List<Elevation> elevationData = analysis.getElevationData().getAttributes();
 		float nextX = 0;
 		float nextY;
 		float elev;
 		float prevElevOrig = -80000;
 		float prevElev = 0;
 		int i = -1;
-		int lastIndex = elevationData.size() - 1;
+		int lastIndex = analysis.pointAttributes.size() - 1;
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
 		float x = 0f;
-		for (Elevation elevation : elevationData) {
+		for (PointAttributes attribute : analysis.pointAttributes) {
 			i++;
 			if (axisType == TIME || axisType == TIME_OF_DAY) {
-				x = elevation.timeDiff;
+				x = attribute.timeDiff;
 			} else {
-				x = elevation.distance;
+				x = attribute.distance;
 			}
 			if (x >= 0) {
-				if (!(calcWithoutGaps && elevation.firstPoint && lastEntry != null)) {
+				if (!(calcWithoutGaps && attribute.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
-				if (elevation.hasValidValue()) {
-					elev = elevation.value;
+				if (!Float.isNaN(attribute.elevation)) {
+					elev = attribute.elevation;
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
 							//elev -= 1f;
@@ -297,10 +294,10 @@ public class ChartUtils {
 						}
 						hasSameY = false;
 					}
-					if (useGeneralTrackPoints && elevation.firstPoint && lastEntry != null) {
+					if (useGeneralTrackPoints && attribute.firstPoint && lastEntry != null) {
 						values.add(new Entry(nextX, lastEntry.getY()));
 					}
-					prevElevOrig = elevation.value;
+					prevElevOrig = attribute.elevation;
 					prevElev = elev;
 					nextY = elev * convEle;
 					lastEntry = new Entry(nextX, nextY);
@@ -313,7 +310,7 @@ public class ChartUtils {
 
 	public static void setupHorizontalGPXChart(OsmandApplication app, HorizontalBarChart chart, int yLabelsCount,
 	                                           float topOffset, float bottomOffset, boolean useGesturesAndScale, boolean nightMode) {
-		chart.setHardwareAccelerationEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+		chart.setHardwareAccelerationEnabled(true);
 		chart.setTouchEnabled(useGesturesAndScale);
 		chart.setDragEnabled(useGesturesAndScale);
 		chart.setScaleYEnabled(false);
@@ -525,7 +522,7 @@ public class ChartUtils {
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		List<Entry> values = getPointAttributeValues(analysis, graphType, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
+		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String mainUnitY = graphType.getMainUnitY(app);
@@ -590,17 +587,16 @@ public class ChartUtils {
 	}
 
 	@NonNull
-	public static List<Entry> getPointAttributeValues(@NonNull GPXTrackAnalysis analysis,
-	                                                  @NonNull GPXDataSetType graphType,
+	public static List<Entry> getPointAttributeValues(@NonNull String key,
+	                                                  @NonNull GPXTrackAnalysis analysis,
 	                                                  @NonNull GPXDataSetAxisType axisType,
 	                                                  float divX, float mulY, float divY,
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
-		List<PointAttribute<? extends Number>> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
 		float currentX = 0;
 
-		for (int i = 0; i < attributes.size(); i++) {
-			PointAttribute<? extends Number> attribute = attributes.get(i);
+		for (int i = 0; i < analysis.pointAttributes.size(); i++) {
+			PointAttributes attribute = analysis.pointAttributes.get(i);
 
 			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
 
@@ -608,13 +604,12 @@ public class ChartUtils {
 				if (!(calcWithoutGaps && attribute.firstPoint)) {
 					currentX += stepX / divX;
 				}
-				if (attribute.hasValidValue()) {
-					float value = attribute.value.floatValue();
+				if (attribute.hasValidValue(key)) {
+					float value = attribute.getAttributeValue(key);
 					float currentY = Float.isNaN(divY) ? value * mulY : divY / value;
 					if (currentY < 0 || Float.isInfinite(currentY)) {
 						currentY = 0;
 					}
-
 					if (attribute.firstPoint && currentY != 0) {
 						values.add(new Entry(currentX, 0));
 					}
