@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
@@ -74,7 +75,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-			RouteSegment recalculationEnd, TLongObjectHashMap<RouteSegment> boundaries) throws InterruptedException, IOException {
+			RouteSegment recalculationEnd, TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
 
@@ -84,8 +85,8 @@ public class BinaryRoutePlanner {
 		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
 
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
-		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = boundaries == null ? new TLongObjectHashMap<RouteSegment>() : boundaries;
+		TLongObjectMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
+		TLongObjectMap<RouteSegment> visitedOppositeSegments = boundaries == null ? new TLongObjectHashMap<RouteSegment>() : boundaries;
 
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
@@ -195,7 +196,7 @@ public class BinaryRoutePlanner {
 	}
 
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
-			boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectHashMap<RouteSegment> visited,
+			boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectMap<RouteSegment> visited,
 			String msg) {
 		if (allowDirection && graphSegments.isEmpty()) {
 			if (pnt.others != null) {
@@ -299,7 +300,7 @@ public class BinaryRoutePlanner {
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
-			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
+			TLongObjectMap<RouteSegment> visitedDirectSegments, TLongObjectMap<RouteSegment> visitedOppositeSegments) {
 		RouteSegment startPos = initEdgeSegment(ctx, start, true, false);
 		RouteSegment startNeg = initEdgeSegment(ctx, start, false, false);
 		RouteSegment endPos = initEdgeSegment(ctx, end, true, true);
@@ -461,8 +462,8 @@ public class BinaryRoutePlanner {
 
 	@SuppressWarnings("unused")
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, 
-            RouteSegment startSegment, TLongObjectHashMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {
+			PriorityQueue<RouteSegment> graphSegments, TLongObjectMap<RouteSegment> visitedSegments, 
+            RouteSegment startSegment, TLongObjectMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {
 		if (ASSERT_CHECKS && !checkMovementAllowed(ctx, reverseWaySearch, startSegment)) {
 			throw new IllegalStateException();
 		}
@@ -602,7 +603,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean checkIfOppositeSegmentWasVisited(RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments) {
+			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectMap<RouteSegment> oppositeSegments) {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
@@ -764,7 +765,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments,  RouteSegment currentSegment,
+			TLongObjectMap<RouteSegment> visitedSegments,  RouteSegment currentSegment,
 			boolean reverseWaySearch, boolean doNotAddIntersections) {
 		RouteSegment nextCurrentSegment = null;
 		int targetEndX = reverseWaySearch ? ctx.startX : ctx.targetX;
@@ -867,7 +868,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
+			TLongObjectMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
 			if (!checkMovementAllowed(ctx, reverseWaySearch, next)) {
 				return false;
