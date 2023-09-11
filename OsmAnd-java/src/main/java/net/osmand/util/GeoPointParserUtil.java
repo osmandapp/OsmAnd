@@ -218,6 +218,43 @@ public class GeoPointParserUtil {
 			int zoom = GeoParsedPoint.NO_ZOOM;
 			Map<String, String> queryMap = getQueryParameters(uri);
 
+			if (queryMap.containsKey("route")) {
+				String routeValue = queryMap.get("route");
+				Pattern coordinatesPattern = Pattern.compile("^(\\d+[.]?\\d*),(\\d+[.]?\\d*);(\\d+[.]?\\d*),(\\d+[.]?\\d*)");
+				Matcher coordinatesMatcher = coordinatesPattern.matcher(routeValue);
+				if (coordinatesMatcher.matches()) {
+					GeoParsedPoint pointFrom = new GeoParsedPoint(parseSilentDouble(coordinatesMatcher.group(1)), parseSilentDouble(coordinatesMatcher.group(2)));
+					GeoParsedPoint pointTo = new GeoParsedPoint(parseSilentDouble(coordinatesMatcher.group(3)), parseSilentDouble(coordinatesMatcher.group(4)));
+
+					List<GeoParsedPoint> parsedPoints = new ArrayList<>();
+					parsedPoints.add(pointFrom);
+					parsedPoints.add(pointTo);
+
+					return parsedPoints;
+				}
+			} else if (queryMap.containsKey("from") || queryMap.containsKey("to")) {
+				GeoParsedPoint pointFrom = null;
+				String from = queryMap.get("from");
+				if (!Algorithms.isEmpty(from)) {
+					String[] coordinates = from.split(",");
+					lat = parseSilentDouble(coordinates[0]);
+					lon = parseSilentDouble(coordinates[1]);
+					pointFrom = new GeoParsedPoint(lat, lon);
+				}
+				GeoParsedPoint pointTo = null;
+				String to = queryMap.get("to");
+				if (!Algorithms.isEmpty(to)) {
+					String[] coordinates = to.split(",");
+					lat = parseSilentDouble(coordinates[0]);
+					lon = parseSilentDouble(coordinates[1]);
+					pointTo = new GeoParsedPoint(lat, lon);
+				}
+				List<GeoParsedPoint> parsedPoints = new ArrayList<>();
+				parsedPoints.add(pointFrom);
+				parsedPoints.add(pointTo);
+
+				return parsedPoints;
+			}
 			if (fragment != null) {
 				if (fragment.startsWith("map=")) {
 					fragment = fragment.substring("map=".length());
@@ -374,6 +411,26 @@ public class GeoPointParserUtil {
 			final String postf = "\\s\\((\\p{L}|\\p{M}|\\p{Z}|\\p{S}|\\p{N}|\\p{P}|\\p{C})*\\)$";
 			opath = opath.replaceAll(postf, "");
 			return parseGoogleMapsPath(opath, params);
+		} else if (params.containsKey("destination") || params.containsKey("origin")) {
+			GeoParsedPoint origin = null;
+			if (params.containsKey("origin")) {
+				String[] coordinates = params.get("origin").split(",");
+				double lat = parseSilentDouble(coordinates[0]);
+				double lon = parseSilentDouble(coordinates[1]);
+				origin = new GeoParsedPoint(lat, lon);
+			}
+			GeoParsedPoint destination = null;
+			if (params.containsKey("destination")) {
+				String[] coordinates = params.get("destination").split(",");
+				double lat = parseSilentDouble(coordinates[0]);
+				double lon = parseSilentDouble(coordinates[1]);
+				destination = new GeoParsedPoint(lat, lon);
+			}
+			List<GeoParsedPoint> parsedPoints = new ArrayList<>();
+			parsedPoints.add(origin);
+			parsedPoints.add(destination);
+
+			return parsedPoints;
 		}
 		if (fragment != null) {
 			Pattern p = Pattern.compile(".*[!&]q=([^&!]+).*");
