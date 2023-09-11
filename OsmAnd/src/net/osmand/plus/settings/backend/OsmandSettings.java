@@ -2422,7 +2422,6 @@ public class OsmandSettings {
 	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
 	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
 	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
-	public static final String SHOULD_SHOW_ROUTE_PREPARATION_MENU = "should_show_route_preparation_menu";
 	public static final String MY_LOC_POINT_LAT = "my_loc_point_lat";
 	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
@@ -2650,16 +2649,6 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(START_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		backupTargetPoints();
 		return add;
-	}
-
-	public boolean shouldShowRoutePreparationMenu(){
-		boolean show = settingsAPI.getBoolean(globalPreferences, SHOULD_SHOW_ROUTE_PREPARATION_MENU, false);
-		settingsAPI.edit(globalPreferences).remove(SHOULD_SHOW_ROUTE_PREPARATION_MENU).commit();
-		return show;
-	}
-
-	public boolean setShowRoutePreparationMenu(boolean showRoute) {
-		return settingsAPI.edit(globalPreferences).putBoolean(SHOULD_SHOW_ROUTE_PREPARATION_MENU, showRoute).commit();
 	}
 
 	public boolean navigateDialog() {

@@ -314,7 +314,6 @@ public class ExternalApiHelper {
 						startNavigation(mapActivity, profile, start, startDesc, dest, destDesc, locationPermission);
 					}
 				}
-
 			} else if (API_CMD_NAVIGATE_SEARCH.equals(cmd)) {
 				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
 				ApplicationMode profile = findNavigationProfile(app, profileStr);

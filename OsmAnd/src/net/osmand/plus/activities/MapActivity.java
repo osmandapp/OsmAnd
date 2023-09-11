@@ -1149,27 +1149,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
 		}
-
-		if (settings.shouldShowRoutePreparationMenu()) {
-			LatLon pointToStart = settings.getPointToStart();
-			LatLon pointToNavigate = settings.getPointToNavigate();
-			if (pointToNavigate != null || pointToStart != null) {
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (mapRouteInfoMenu != null) {
-					mapRouteInfoMenu.cancelSelectionFromMap();
-				}
-				if (!routingHelper.isFollowingMode()) {
-					getMapActions().enterRoutePlanningMode(pointToStart, null);
-
-					if ((pointToStart != null) ^ (pointToNavigate != null)) {
-						LatLon showLatLon = pointToStart != null ? pointToStart : pointToNavigate;
-						float height = settings.getLastKnownMapHeight();
-						LatLon mapShiftedLocation = settings.getLastKnownMapLocationShifted();
-						mapView.setLatLon(showLatLon, height, mapShiftedLocation);
-					}
-				}
-			}
-		}
 	}
 
 	@Override
