@@ -65,7 +65,7 @@ public class TileSourceManager {
 		MAPILLARY_CACHE_SOURCE.setHidden(true);
 	}
 
-	private static final String PARAM_BING_QUAD_KEY = "{q}";
+	public static final String PARAM_BING_QUAD_KEY = "{q}";
 	private static final String PARAM_RND = "{rnd}";
 	private static final String PARAM_BOUNDING_BOX = "{bbox}";
 	public static final String PARAMETER_NAME = "{PARAM}";
@@ -408,7 +408,7 @@ public class TileSourceManager {
 			return buildUrlToLoad(urlToLoad, randomsArray, x, y, zoom, urlParameters);
 		}
 
-		private static String eqtBingQuadKey(int z, int x, int y) {
+		public static String eqtBingQuadKey(int z, int x, int y) {
 			char[] NUM_CHAR = {'0', '1', '2', '3'};
 			char[] tn = new char[z];
 			for (int i = z - 1; i >= 0; i--) {
