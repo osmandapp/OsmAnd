@@ -19,7 +19,8 @@ public class WikiCoreHelper {
 	private static final Log LOG = PlatformUtil.getLog(WikiCoreHelper.class);
 	private static final String WIKIMEDIA_API_ENDPOINT = "https://commons.wikimedia.org/w/api.php";
 	private static final String WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
-	private static final String WIKIDATA_ACTION = "?action=wbgetclaims&property=P18&entity=";
+	private static final String WIKIDATA_GET_CLAIMS_P18 = "?action=wbgetclaims&property=P18&entity=";
+	private static final String WIKIDATA_GET_CLAIMS_P373 = "?action=wbgetclaims&property=P373&entity=";
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
 	private static final String CM_LIMIT = "&cmlimit=500";
 	private static final String FORMAT_JSON = "&format=json";
@@ -60,7 +61,13 @@ public class WikiCoreHelper {
 
 	public static List<WikiImage> getWikidataImageList(String wikidataId) {
 		List<WikiImage> wikiImages = new ArrayList<>();
-		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
+		getImageList(wikidataId, wikiImages);
+		getCategoryImageList(wikidataId, wikiImages);
+		return wikiImages;
+	}
+
+	private static void getImageList(String wikidataId, List<WikiImage> wikiImages) {
+		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_GET_CLAIMS_P18 + wikidataId + FORMAT_JSON;
 		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
 		if (response != null && response.claims != null && response.claims.p18 != null) {
 			for (P18 p18 : response.claims.p18) {
@@ -70,7 +77,17 @@ public class WikiCoreHelper {
 				}
 			}
 		}
-		return wikiImages;
+	}
+
+	private static void getCategoryImageList(String wikidataId, List<WikiImage> wikiImages) {
+		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_GET_CLAIMS_P373 + wikidataId + FORMAT_JSON;
+		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
+		if (response != null && response.claims != null && response.claims.p373 != null) {
+			for (P18 p373 : response.claims.p373) {
+				String imageFileName = WIKIMEDIA_CATEGORY + p373.mainsnak.datavalue.value;
+				getWikimediaImageList(imageFileName, wikiImages);
+			}
+		}
 	}
 
 	public static WikiImage getImageData(String imageFileName) {
@@ -116,6 +133,9 @@ public class WikiCoreHelper {
 		@SerializedName("P18")
 		@Expose
 		private final List<P18> p18 = null;
+		@SerializedName("P373")
+		@Expose
+		private final List<P18> p373 = null;
 	}
 
 	public static class P18 {
