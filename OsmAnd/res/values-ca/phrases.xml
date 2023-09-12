@@ -1944,7 +1944,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirurgia dental, oral i maxil·lofacial</string>
     <string name="poi_health_specialty_maternity_yes">Maternitat</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Servei d\'urgències</string>
+    <string name="poi_health_specialty_emergency_yes">Servei d\'urgències</string>
     <string name="poi_health_specialty_emergency_medicine_no">Especialitat mèdica: sense servei d\'urgències</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Cirurgia plàstica</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodòncia</string>
@@ -1956,7 +1956,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurgia maxil·lofacial</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnòstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontologia</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontologia</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologia (malalties renals)</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
@@ -2498,7 +2498,7 @@
     <string name="poi_cafeteria">Cafeteria</string>
     <string name="poi_aerialway_length">Llargària</string>
     <string name="poi_health_specialty_general_yes">Metge de capçalera</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringologia</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestesiologia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatria</string>
@@ -2748,7 +2748,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopèdia</string>
     <string name="poi_health_specialty_manual_therapy_yes">Teràpia manual</string>
     <string name="poi_health_specialty_sports_medicine_yes">Medicina esportiva</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatria per adults</string>
     <string name="poi_pump_type_gravity">Tipus de bombament: gravitacional</string>
     <string name="poi_pump_style_modern">Estil del bombament: modern</string>

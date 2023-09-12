@@ -24,6 +24,7 @@ import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
@@ -103,7 +104,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
+				SearchMyPlacesTracksFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
 				return true;
 			}
 		}

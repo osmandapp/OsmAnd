@@ -470,7 +470,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB utilizats</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB utilizats</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB utilizats</string>
-    <string name="contour_lines_and_hillshade">Corbas de nivèu e ombrejat de relèu</string>
     <string name="routing_attr_prefer_unpaved_name">Preferissi lei rotas sensa quitran</string>
     <string name="routing_attr_prefer_unpaved_description">Preferissi lei rotas sensa quitran.</string>
     <string name="update_all_maps">Actualizar totei lei mapas</string>
@@ -992,7 +991,6 @@
     <string name="change_default_settings">Modificar la configuracion</string>
     <string name="general_settings_profile_descr">Tema de l\'aplicacion, unitats, país</string>
     <string name="keep_passed_markers_descr">Lei marcadors ajustats a un grop de Preferits ò coma ponch GPX marcats per passats demoraràn sus la mapa. Si lo grop es pas actiu, lei marcadors pareisseràn pus sus la mapa.</string>
-    <string name="contour_lines_hillshade_maps">Mapas amb corbas de nivèu e ombra de relèu</string>
     <string name="remove_from_map_markers">Levar dei \'Marcadors de mapa\'</string>
     <string name="all_markers_moved_to_history">Totei lei marcadors de mapa son estats arquivats dins l\'istoric</string>
     <string name="marker_moved_to_history">Lo marcador de mapa es estat arquivat dins l\'istoric</string>
@@ -1010,7 +1008,6 @@
     <string name="region_maps">Mapas regionalas</string>
     <string name="world_maps">Mapas dau monde</string>
     <string name="impassable_road_desc">Indicatz lei vias que volètz evitar per la navigacion.</string>
-    <string name="srtm_plugin_disabled">Corbas de nivèu desactivadas</string>
     <string name="delay_to_start_navigation_descr">Indicatz lo temps maximau per demorar sus l\'ecran de planificacion dau percors.</string>
     <string name="delay_to_start_navigation">Comença lo guidatge pas a pas après…</string>
     <string name="shared_string_help">Ajuda</string>
@@ -1330,9 +1327,7 @@
     <string name="cloud_email_not_registered">Aquesta adreiça electronica es pas enregistrada sus la Nívol OsmAnd</string>
     <string name="backup_welcome_back">Content de vos tornar veire !</string>
     <string name="offline_wikipeadia">Wikipèdia fòra de linha</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas dau relèu : corbas de nivèu, ombratge, penda</string>
     <string name="offline_wikivoyage">Wikiviatge fòra de linha</string>
-    <string name="terrain_maps">Mapas dau relèu</string>
     <string name="osm_live_subscription">Abonament OsmAnd Live</string>
     <string name="backup_welcome_back_descr">Restauratz lei donadas sus aquest aparelh amb l\'ajuda dei sauvagardas existentas ò sauvagardatz lei donadas sus la Nívol OsmAnd.</string>
     <string name="osmand_routing_experimental">La navigacion fòra de linha OsmAnd es un servici experimentau e non foncciona per de distàncias superioras a 20 km.

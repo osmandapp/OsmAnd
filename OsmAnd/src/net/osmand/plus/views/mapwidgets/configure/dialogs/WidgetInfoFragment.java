@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,15 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,9 +34,9 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
@@ -43,20 +54,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsConfigurationChangeListener {
 
 	public static final String TAG = WidgetInfoFragment.class.getSimpleName();
 
-	private static final String APP_MODE_KEY = "app_mode";
 	private static final String WIDGET_ID_KEY = "widget_id";
 
 	private MapWidgetRegistry widgetRegistry;

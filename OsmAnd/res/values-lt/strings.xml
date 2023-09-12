@@ -854,8 +854,6 @@
     <string name="map_widget_max_speed">Leidžiamas greitis</string>
     <string name="rendering_attr_noAdminboundaries_name">Ribos</string>
     <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai).</string>
-    <string name="index_srtm_parts">dalys</string>
-    <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
     <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą ant OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
 \n
 \nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
@@ -1648,7 +1646,6 @@
     <string name="value_downloaded_of_max">%1$.1f iš %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atnaujinti viską (%1$s MB)</string>
-    <string name="srtm_plugin_disabled">Kontūro linijos išjungtos</string>
     <string name="shared_string_send">Siųsti</string>
     <string name="map_downloaded">Žemėlapis atsiųstas</string>
     <string name="map_downloaded_descr">%1$s žemėlapis paruoštas naudoti.</string>
@@ -2859,10 +2856,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="purchases_feature_desc_combined_wiki">Naršykite Wikipedia straipsnius keliaudami, neturėdami interneto ryšio. Duomenys neprisijungus prie interneto suskirstyti pagal šalis ir prieinami visomis kalbomis.</string>
     <string name="unlimited_map_downloads">Neribotas žemėlapių atsisiuntimas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia ir Wikivoyage be interneto</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Reljefo žemėlapiai: kontūrinės linijos, kalvos, nuolydis</string>
     <string name="offline_wikipeadia">Wikipedia be interneto</string>
     <string name="offline_wikivoyage">Wikivoyage be interneto</string>
-    <string name="terrain_maps">Reljefo žemėlapiai</string>
     <string name="nautical_depth">Jūrinis gylis</string>
     <string name="units_and_formats">Vienetai ir formatai</string>
     <string name="backup_version_history_removed">Pašalinama visa versijų istorija</string>

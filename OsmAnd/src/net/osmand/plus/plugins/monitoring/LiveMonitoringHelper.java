@@ -2,11 +2,17 @@ package net.osmand.plus.plugins.monitoring;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.SimulationProvider;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
@@ -35,7 +41,7 @@ public class LiveMonitoringHelper {
 	private long lastTimeUpdated;
 	private boolean started;
 
-	public LiveMonitoringHelper(OsmandApplication app) {
+	public LiveMonitoringHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		queue = new ConcurrentLinkedQueue<>();
 	}
@@ -45,30 +51,9 @@ public class LiveMonitoringHelper {
 		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
 
-	public void updateLocation(net.osmand.Location location) {
-		boolean record = false;
+	public void updateLocation(@Nullable net.osmand.Location location) {
 		long locationTime = System.currentTimeMillis();
-		if (location != null && isLiveMonitoringEnabled()
-				&& SimulationProvider.isNotSimulatedLocation(location)
-				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			OsmandSettings settings = app.getSettings();
-			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
-				record = true;
-			}
-			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
-			if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
-					minDistance) {
-				record = false;
-			}
-			float precision = settings.SAVE_TRACK_PRECISION.get();
-			if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
-				record = false;
-			}
-			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
-			if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
-				record = false;
-			}
-		}
+
 		if (isLiveMonitoringEnabled()) {
 			if (!started) {
 				new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
@@ -77,17 +62,76 @@ public class LiveMonitoringHelper {
 		} else {
 			started = false;
 		}
-		if(record) {
-			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
-					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+
+		if (shouldRecordLocation(location, locationTime)) {
+			LiveMonitoringData data = new LiveMonitoringData((float) location.getLatitude(), (float) location.getLongitude(),
+					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+			setupLiveDataTimeAndDistance(data, location, locationTime);
 			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
 		}
 	}
-	
-	
+
+	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
+		boolean record = false;
+		if (location != null && isLiveMonitoringEnabled()
+				&& SimulationProvider.isNotSimulatedLocation(location)
+				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
+			OsmandSettings settings = app.getSettings();
+			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
+				record = true;
+			}
+			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+			if (minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) <
+					minDistance) {
+				record = false;
+			}
+			float precision = settings.SAVE_TRACK_PRECISION.get();
+			if (precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
+				record = false;
+			}
+			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+			if (minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
+				record = false;
+			}
+		}
+		return record;
+	}
+
+	private void setupLiveDataTimeAndDistance(@NonNull LiveMonitoringData data, @Nullable net.osmand.Location location, long locationTime) {
+		long timeToArrival = 0, timeToIntermediateOrFinish = 0;
+		int distanceToArrivalOrMarker = 0, distanceToIntermediateOrFinish = 0;
+		RoutingHelper routingHelper = app.getRoutingHelper();
+
+		if (routingHelper.isRouteCalculated()) {
+			timeToArrival = (routingHelper.getLeftTime() * 1000L) + locationTime;
+			distanceToArrivalOrMarker = routingHelper.getLeftDistance();
+			int leftTimeNextIntermediate = routingHelper.getLeftTimeNextIntermediate();
+
+			if (leftTimeNextIntermediate == 0) {
+				timeToIntermediateOrFinish = timeToArrival;
+			} else {
+				timeToIntermediateOrFinish = (leftTimeNextIntermediate * 1000L) + locationTime;
+			}
+
+			distanceToIntermediateOrFinish = routingHelper.getLeftDistanceNextIntermediate();
+			if (distanceToIntermediateOrFinish == 0) {
+				distanceToIntermediateOrFinish = distanceToArrivalOrMarker;
+			}
+		} else {
+			MapMarker firstMarker = app.getMapMarkersHelper().getFirstMapMarker();
+
+			if (firstMarker != null && location != null) {
+				distanceToArrivalOrMarker = (int) MapUtils.getDistance(firstMarker.getLatitude(), firstMarker.getLongitude(), location.getLatitude(), location.getLongitude());
+			}
+		}
+		data.setTimesAndDistances(timeToArrival, timeToIntermediateOrFinish, distanceToArrivalOrMarker, distanceToIntermediateOrFinish);
+	}
+
+
 	private static class LiveMonitoringData {
+		public static final int NUMBER_OF_LIVE_DATA_FIELDS = 11;    //change the value after each addition\deletion of data field
 
 		private final float lat;
 		private final float lon;
@@ -96,6 +140,17 @@ public class LiveMonitoringHelper {
 		private final float bearing;
 		private final float hdop;
 		private final long time;
+		private long timeToArrival;
+		private long timeToIntermediateOrFinish;
+		private int distanceToArrivalOrMarker;
+		private int distanceToIntermediateOrFinish;
+
+		public void setTimesAndDistances(long timeToArrival, long timeToIntermediateOrFinish, int distanceToArrivalOrMarker, int distanceToIntermediateOrFinish) {
+			this.timeToArrival = timeToArrival;
+			this.timeToIntermediateOrFinish = timeToIntermediateOrFinish;
+			this.distanceToArrivalOrMarker = distanceToArrivalOrMarker;
+			this.distanceToIntermediateOrFinish = distanceToIntermediateOrFinish;
+		}
 
 		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time) {
 			this.lat = lat;
@@ -106,9 +161,8 @@ public class LiveMonitoringHelper {
 			this.time = time;
 			this.bearing = bearing;
 		}
-		
 	}
-	
+
 	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
 
 		@Override
@@ -130,7 +184,7 @@ public class LiveMonitoringHelper {
 		}
 	}
 
-	public void sendData(LiveMonitoringData data) {
+	public void sendData(@NonNull LiveMonitoringData data) {
 		String baseUrl = app.getSettings().LIVE_MONITORING_URL.get();
 		String urlStr;
 		try {
@@ -179,41 +233,52 @@ public class LiveMonitoringHelper {
 		}
 	}
 
-	private String getLiveUrl(String baseUrl, LiveMonitoringData data) {
-		List<String> prm = new ArrayList<String>();
+	private String getLiveUrl(@NonNull String baseUrl, @NonNull LiveMonitoringData data) {
+		List<String> prm = new ArrayList<>();
 		int maxLen = 0;
-		for (int i = 0; i < 7; i++) {
-			boolean b = baseUrl.contains("{"+i+"}");
-			if(b) {
+		for (int i = 0; i < LiveMonitoringData.NUMBER_OF_LIVE_DATA_FIELDS; i++) {
+			boolean b = baseUrl.contains("{" + i + "}");
+			if (b) {
 				maxLen = i;
 			}
 		}
 		for (int i = 0; i < maxLen + 1; i++) {
 			switch (i) {
-			case 0:
-				prm.add(data.lat + "");
-				break;
-			case 1:
-				prm.add(data.lon + "");
-				break;
-			case 2:
-				prm.add(data.time + "");
-				break;
-			case 3:
-				prm.add(data.hdop + "");
-				break;
-			case 4:
-				prm.add(data.alt + "");
-				break;
-			case 5:
-				prm.add(data.speed + "");
-				break;
-			case 6:
-				prm.add(data.bearing + "");
-				break;
-
-			default:
-				break;
+				case 0:
+					prm.add(data.lat + "");
+					break;
+				case 1:
+					prm.add(data.lon + "");
+					break;
+				case 2:
+					prm.add(data.time + "");
+					break;
+				case 3:
+					prm.add(data.hdop + "");
+					break;
+				case 4:
+					prm.add(data.alt + "");
+					break;
+				case 5:
+					prm.add(data.speed + "");
+					break;
+				case 6:
+					prm.add(data.bearing + "");
+					break;
+				case 7:
+					prm.add(data.timeToArrival + "");
+					break;
+				case 8:
+					prm.add(data.timeToIntermediateOrFinish + "");
+					break;
+				case 9:
+					prm.add(data.distanceToArrivalOrMarker + "");
+					break;
+				case 10:
+					prm.add(data.distanceToIntermediateOrFinish + "");
+					break;
+				default:
+					break;
 			}
 		}
 		return MessageFormat.format(baseUrl, prm.toArray());

@@ -213,7 +213,6 @@
     <string name="welcome_header">Saluton</string>
     <string name="shared_string_and">kaj</string>
     <string name="shared_string_or">aŭ</string>
-    <string name="srtm_plugin_disabled">Nivelkurboj kaŝitaj</string>
     <string name="hillshade_layer_disabled">Tavolo de nivelombrumo kaŝita</string>
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
@@ -984,8 +983,6 @@
     <string name="audionotes_plugin_description">Fari bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
-    <string name="index_srtm_parts">partoj</string>
-    <string name="index_srtm_ele">Nivelkurboj</string>
     <string name="audionotes_location_not_defined">Frepetu “uzi pozicion…” por aldoni noton al la loko.</string>
     <string name="download_select_map_types">Aliaj mapoj</string>
     <string name="download_roads_only_item">Nur vojoj</string>
@@ -1264,7 +1261,7 @@
     <string name="arrival_distance_factor_early">Frue</string>
     <string name="arrival_distance_factor_normally">Norme</string>
     <string name="arrival_distance_factor_late">Malfrue</string>
-    <string name="arrival_distance_factor_at_last">Dum la plej lastaj metroj</string>
+    <string name="arrival_distance_factor_at_last">Tre malfrue</string>
     <string name="arrival_distance">Anonco pri alveno</string>
     <string name="arrival_distance_descr">Kiafrue vi volas anoncon pri alveno?</string>
     <string name="rendering_out_of_memory">Mankas memoro por montri elektitan regionon</string>
@@ -2168,7 +2165,7 @@
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
     <string name="shared_string_gpx_track">Spuro</string>
-    <string name="add_new_folder">Aldoni novan dosierujon</string>
+    <string name="add_new_folder">Nova dosierujo</string>
     <string name="points_delete_multiple_succesful">Forigis punkto(j)n.</string>
     <string name="points_delete_multiple">Ĉu forigi %1$d punkto(j)n\?</string>
     <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
@@ -2347,7 +2344,7 @@
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
     <string name="animate_my_location">Movbildi pozicion</string>
-    <string name="animate_my_location_desc">Aktivigi animitan pligrandigadon de mapo al mia pozicio dum navigado.</string>
+    <string name="animate_my_location_desc">Glata pligrandigado de mapo dum moviĝi. Kaŭzas etan prokraston.</string>
     <string name="favorite_group_name">Grupa nomo</string>
     <string name="change_color">Ŝanĝi koloron</string>
     <string name="edit_name">Redakti nomon</string>
@@ -2688,7 +2685,6 @@
     <string name="start_editing">Komenci redakti</string>
     <string name="get_unlimited_access">Akiri senliman atingon</string>
     <string name="welcome_to_open_beta">Bonvenon al malfermita beta-testado!</string>
-    <string name="contour_lines_hillshade_maps">Nivelkurbaj kaj nivelombrumaj mapoj</string>
     <string name="download_wikipedia_description">Elŝutu Vikipediajn artikolojn por %1$s, por legi ilin malkonekte.</string>
     <string name="download_wikipedia_label">Elŝuti datumojn de Vikipedio</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
@@ -3202,7 +3198,6 @@
     <string name="shared_string_memory_used_gb_desc">Uzita %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Uzita %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Uzita %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Nivelkurboj kaj nivelombrumo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
@@ -3321,7 +3316,6 @@
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo ebligas al vi ne preterpasi aldoni datumojn al registrata spuro, kiam preskaŭ neniu movo registriĝas. Tio ĉi ankaŭ plibonigas aspekton de spuro sen aldona pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekzemple al moviĝo alia vojflanko, kiu estus registrita kiel turniĝo) povos esti forfiltritaj. Rimarku, ke via spur-dosiero enhavos malpliajn datumojn por posttrakti kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevoj aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
-    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}.</string>
     <string name="monitoring_notification">Sciigo</string>
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>
@@ -4145,7 +4139,7 @@
     <string name="routing_attr_avoid_tunnels_description">Eviti tunelojn</string>
     <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
     <string name="send_crash_log">Sendi pane-protokolon</string>
-    <string name="send_logcat_log">Sendi logcat-erar-protokolon</string>
+    <string name="send_logcat_log">Sendi «logcat»</string>
     <string name="backup_promocode">Reklamkodo</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s aŭ %2$s</string>
     <string name="continue_with">Pluigi kun %1$s</string>
@@ -4176,10 +4170,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstali. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
     <string name="offline_wikipeadia">Vikipedio malkonekte</string>
     <string name="offline_wikivoyage">Vikivojaĝo malkonekte</string>
-    <string name="terrain_maps">Terenaj mapoj</string>
     <string name="nautical_depth">Maraj profundec-kurboj</string>
     <string name="backup_error_user_is_already_registered">Tiu ĉi retpoŝta adreso estas uzata de alia konto</string>
     <string name="backup_error_subscription_was_expired">Abono senvalidiĝis</string>
@@ -5093,7 +5085,6 @@
     <string name="generate_slope_from_3d_maps">Generi deklivecan kahelan mapon uzante 3-dimensiajn mapojn</string>
     <string name="disable_vertex_hillshade_3d">Malaktivigi vertican nivelombrumon en 3D</string>
     <string name="enable_3d_maps">Aktivigi 3-dimensiajn mapojn</string>
-    <string name="test_heightmap">Testi altmapon</string>
     <string name="app_mode_climbing">Grimpado</string>
     <string name="offline_cache">Kaŝmemoro</string>
     <string name="shared_string_alt_name">Alternativa nomo</string>
@@ -5350,4 +5341,93 @@
     <string name="hillshade_slope">Nivelombrumo, dekliveco</string>
     <string name="glide_ratio_to_target">Glisrilato necesa por celo</string>
     <string name="map_widget_group_glide_ratio">Glisrilato</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Publikaj transportiloj</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skiado</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Rekta linio (aviadilo)</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigi laŭ spuro</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navigi laŭ markoj</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Prepari kurson</string>
+    <string name="help_article_navigation_setup_route_details_name">Detaloj pri kurso</string>
+    <string name="help_article_personal_name">Miaj datumoj</string>
+    <string name="help_article_personal_import_export_name">Enporti / elporti</string>
+    <string name="help_article_personal_profiles_name">Profiloj (agordoj)</string>
+    <string name="help_article_widgets_markers_name">Map-markaj fenestraĵoj</string>
+    <string name="telegram_chats">Kanaloj Telegram</string>
+    <string name="github_discussion">Diskutoj ĉe GitHub</string>
+    <string name="free_versions_descr">Elŝuti kaj instali senpagan version de OsmAnd</string>
+    <string name="wheel_circumference">Perimetro de rado</string>
+    <string name="external_sensor_name_property_description">Nomo de sentilo</string>
+    <string name="send_crash_log_descr">Enhavas nur informojn pri paneoj</string>
+    <string name="free_versions">Senpagaj versioj</string>
+    <string name="send_logcat_log_descr">Detala erar-protokolo</string>
+    <string name="contact_us">Kontakti</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ekrano de mapo dum navigi</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Voĉaj anoncoj</string>
+    <string name="help_article_start_with_main_menu_name">Ĉefmenuo</string>
+    <string name="help_article_map_legend_nautical_map_name">Map-stilo marnavigada</string>
+    <string name="help_article_map_legend_osmand_name">Map-stilo OsmAnd</string>
+    <string name="help_article_map_legend_ski_map_name">Map-stilo skiada</string>
+    <string name="help_article_map_interact_with_map_name">Interagi kun mapo</string>
+    <string name="help_article_map_map_context_menu_name">Kunteksta menuo de mapo</string>
+    <string name="help_article_map_point_layers_on_map_name">Punktoj sur mapo</string>
+    <string name="help_article_map_raster_maps_name">Rastrumaj mapoj (malkonektaj / konektaj)</string>
+    <string name="help_article_map_track_context_menu_name">Spuroj: kunteksta menuo</string>
+    <string name="help_article_map_tracks_on_map_name">Spuroj kaj kursoj</string>
+    <string name="help_article_map_vector_maps_name">Vektoraj mapoj kaj map-stiloj</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_guidance_name">Anoncoj</string>
+    <string name="help_article_navigation_routing_name">Parametroj de navigo</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Biciklo / montbiciklo</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Boato</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Aŭtomobilo / kamiono / motorciklo</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Ĉevalo</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Motorbiciklo</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Rekte al punkto (boato)</string>
+    <string name="help_article_navigation_routing_online_routing_name">Enreta navigilo</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Navigiloj en OsmAnd</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Piedirado</string>
+    <string name="help_article_navigation_routing_train_routing_name">Vagonaro</string>
+    <string name="help_article_personal_storage_name">Dosierujo de OsmAnd</string>
+    <string name="help_article_plan_route_name">Plani vojaĝon</string>
+    <string name="help_article_plan_route_coordinate_input_name">Enigi koordinatojn</string>
+    <string name="help_article_plan_route_web_name">Reteja vojaĝ-planilo</string>
+    <string name="help_article_purchases_android_name">Aĉetoj (Android)</string>
+    <string name="help_article_purchases_giveaway_name">Senpagaĵoj</string>
+    <string name="help_article_purchases_ios_name">Aĉetoj (iOS)</string>
+    <string name="help_article_search_search_all_name">Ĝenerala serĉado</string>
+    <string name="help_article_search_search_coordinates_name">Serĉi laŭ koordinatoj</string>
+    <string name="help_article_search_search_poi_name">Serĉi interesejojn</string>
+    <string name="help_article_start_with_name">Unuaj paŝoj kun OsmAnd</string>
+    <string name="help_article_start_with_first_steps_name">Unuaj paŝoj</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Pane-protokoloj</string>
+    <string name="help_article_troubleshooting_general_name">Aliaj</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapoj kaj datumoj</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Registri spuron</string>
+    <string name="help_article_widgets_name">Map-fenestraĵoj</string>
+    <string name="help_article_widgets_info_widgets_name">Informaj fenestraĵoj</string>
+    <string name="help_article_widgets_map_buttons_name">Butonoj de mapo</string>
+    <string name="help_article_widgets_nav_widgets_name">Navigaj fenestraĵoj</string>
+    <string name="help_article_widgets_radius_ruler_name">Cirkelo kaj mezurilo</string>
+    <string name="shared_string_setup">Agordi</string>
+    <string name="user_guide">Gvidlibro</string>
+    <string name="telegram_chats_descr">Aliĝu al iu el niaj Telegram-kanaloj.</string>
+    <string name="about_osmand">Pri OsmAnd</string>
+    <string name="open_issue_on_github_descr">Demandi, sugesti novan eblaĵon</string>
+    <string name="open_issue_on_github">GitHub: issues</string>
+    <string name="report_an_issues">Raporti problemon</string>
+    <string name="copy_build_version">Kopii version de kompilaĵo</string>
+    <string name="most_viewed">Ofte legataj</string>
+    <string name="app_mode_baby_transport">Transporto de beboj</string>
+    <string name="release_4_6">• nova fenestraĵo: glisrilato
+\n
+\n• aldonis fenestraĵon ANT+: temperaturo
+\n
+\n• pli bona mastrumado de memoro por grandaj GPX-spuroj
+\n
+\n</string>
+    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
+    <string name="sensor_temperature_desc">Montras temperaturon de sentilo</string>
+    <string name="shared_string_temperature">Temperaturo</string>
 </resources>

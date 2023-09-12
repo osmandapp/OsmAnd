@@ -48,8 +48,6 @@
     <string name="osmand_srtm_short_description_80_chars">ملحق أوسماند الإضافي لميزات توبو غير المتصلة بالإنترنت مثل خطوط الكنتور والتضاريس والانحدار</string>
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="map_widget_audionotes">الملاحظة صوتية</string>
-    <string name="index_srtm_parts">أجزاء</string>
-    <string name="index_srtm_ele">الخطوط الكنتورية</string>
     <string name="srtm_plugin_name">طوبوغرافيا</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
@@ -1248,7 +1246,7 @@
     <string name="arrival_distance_factor_early">مبكر</string>
     <string name="arrival_distance_factor_normally">طبيعي</string>
     <string name="arrival_distance_factor_late">متأخر</string>
-    <string name="arrival_distance_factor_at_last">في الأمتار الأخيرة</string>
+    <string name="arrival_distance_factor_at_last">متأخر جدا</string>
     <string name="index_name_netherlands">أوربا - هولندا</string>
     <string name="keep_informing">إعادة تعليمات الملاحة</string>
     <string name="shared_string_release">تم</string>
@@ -1333,7 +1331,7 @@
     <string name="sd_dir_not_accessible">لا يمكن الوصول لمجلد البيانات على الذاكرة!</string>
     <string name="mark_final_location_first">حدد الوجهة أولا</string>
     <string name="downloading_list_indexes">جار تحميل قائمة المناطق المتاحة…</string>
-    <string name="list_index_files_was_not_loaded">لم يتم تحميل قائمة المناطق من osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">تعذر جلب قائمة المناطق من https://osmand.net.</string>
     <string name="error_occurred_saving_gpx">خطأ أثناء حفظ GPX.</string>
     <string name="error_calculating_route">تعذر حساب المسار.</string>
     <string name="error_calculating_route_occured">حدث خطأ أثناء حساب الطريق.</string>
@@ -1841,7 +1839,6 @@
     <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، أبق جميع الإعدادات الأخرى دون تغيير.</string>
     <string name="region_maps">خرائط على مستوى المنطقة</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
-    <string name="srtm_plugin_disabled">الخطوط الكنتورية معطلة</string>
     <string name="nm">ميل بحري</string>
     <string name="nm_h">عقدة بحرية</string>
     <string name="simulate_your_location_descr">إجراء محاكاة تخيلية باستخدام توجيه نشط أو مسار مسجل.</string>
@@ -2262,7 +2259,7 @@
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">قم بشراء وتثبيت الملحق المساعد \"الطبوغرافيا\" لإظهار المناطق المرتفعة المتدرجة.</string>
-    <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
+    <string name="animate_my_location_desc">تحريك الخريطة بشكل سلس أثناء الحركة. يقدم تأخير طفيف.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقاً لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقا تصبح الوجهة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقا (إن وجدت).</string>
@@ -2644,7 +2641,6 @@
     <string name="wikivoyage_offline">ويكي الرحلات دون اتصال</string>
     <string name="unlimited_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_offline">ويكيبيديا دون اتصال</string>
-    <string name="contour_lines_hillshade_maps">الخطوط الكنتورية والتضاريس</string>
     <string name="shared_string_only_with_wifi">على الواي فاي فقط</string>
     <string name="wikivoyage_download_pics">تنزيل الصور</string>
     <string name="shared_string_wifi_only">فقط على شبكة Wi-Fi</string>
@@ -3013,7 +3009,6 @@
     <string name="shared_string_memory_used_gb_desc">المستخدم %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">تم استخدام %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">تم استخدام %1$s kB</string>
-    <string name="contour_lines_and_hillshade">الخطوط الكنتورية والتضاريس</string>
     <string name="routing_attr_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
@@ -3397,7 +3392,6 @@
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
     <string name="live_monitoring_adress">عنوان صفحة انترنت</string>
-    <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعلمة: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="monitoring_notification">إعلام</string>
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>
@@ -4230,10 +4224,8 @@
     <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بيانات أوسماند عبر الإنترنت. لن تفقد بياناتك بعد إعادة التثبيت. نسخ الاحتياطي واستعادة جميع المعلومات بسهولة.</string>
     <string name="unlimited_map_downloads">تنزيلات خرائط غير محدودة</string>
     <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
     <string name="offline_wikipeadia">ويكيبيديا غير متصل</string>
     <string name="offline_wikivoyage">ويكي الرحلات (بدون اتصال)</string>
-    <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
     <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s من %2$s</string>
@@ -4844,19 +4836,19 @@
     <string name="shared_string_large">كبير</string>
     <string name="shared_string_normal">عادي</string>
     <string name="map_widget_camera_tilt">تحريك الكاميرا</string>
-    <string name="map_widget_zoom_level_desc">تعرض الأداة مستوى تكبير/تصغير الخريطة الحالي.</string>
+    <string name="map_widget_zoom_level_desc">يظهر مستوى تكبير/تصغير الخريطة الحالي.</string>
     <string name="map_widget_zoom_level">مستويات التكبير</string>
-    <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى الحامل.</string>
+    <string name="map_widget_camera_distance_desc">يظهر ارتفاع الكاميرا فوق المستوى السطحي.</string>
     <string name="developer_widgets">أدوات المطور</string>
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
-    <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
+    <string name="coordinates_widget_map_center_desc">يبين الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
-    <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
+    <string name="map_widget_target_distance_desc">تظهر المسافة بين الكاميرا والموقع المستهدف.</string>
     <string name="rotate_map_manual_opt">تدوير يدوي</string>
-    <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
+    <string name="map_widget_camera_tilt_desc">تعرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
@@ -4889,7 +4881,7 @@
     <string name="map_widget_target_distance">المسافة من الكاميرا إلى الهدف</string>
     <string name="simulate_location_by_gpx">محاكاة الموقع بواسطة GPX</string>
     <string name="location_simulation_cutoff">محاكاة تخطي الأمتار الأولى</string>
-    <string name="map_widget_rendering_fps_desc">يوضح مدى سرعة إظهار الخريطة وعناصر الخريطة وتحديثها (معبرًا عنها في الإطارات في الثانية أو FPS).</string>
+    <string name="map_widget_rendering_fps_desc">ويبين مدى سرعة عرض الخريطة وعناصرها وتجديدها، معبرا عنها في إطارات في الثانية (FPS).</string>
     <string name="favorites_backup">النسخ الاحتياطي للمفضلة</string>
     <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
     <string name="map_center_widget">الإحداثيات: مركز الخرائط</string>
@@ -5163,7 +5155,6 @@
     <string name="app_mode_moped">الدراجة</string>
     <string name="generate_slope_from_3d_maps">إنشاء خرائط الانحدار من خرائط ثلاثية الأبعاد</string>
     <string name="enable_3d_maps">تمكين خريطة ثلاثية الأبعاد</string>
-    <string name="test_heightmap">اختبار خريطة الارتفاع</string>
     <string name="disable_vertex_hillshade_3d">تعطيل قمة الارتفاع في عرض الثلاثي الأبعاد</string>
     <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
     <string name="offline_cache">ذاكرة التخزين المؤقت دون اتصال</string>
@@ -5500,4 +5491,15 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
+    <string name="release_4_6">• معدل نسبة الإنحدار
+\n
+\n • ANT+ ويدجت مستشعر الحرارة
+\n
+\n • إدارة أفضل للذاكرة لمسارات GPX الكبيرة
+\n
+\n</string>
+    <string name="app_mode_baby_transport">عربة الطفل</string>
+    <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
+    <string name="sensor_temperature_desc">يُظهر درجة الحرارة من جهاز الاستشعار</string>
+    <string name="shared_string_temperature">درجة الحرارة</string>
 </resources>

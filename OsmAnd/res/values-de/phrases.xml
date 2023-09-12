@@ -219,7 +219,7 @@
     <string name="poi_craft_gardener">Gärtner</string>
     <string name="poi_gas">Flüssiggasspeicher</string>
     <string name="poi_gate">Tor</string>
-    <string name="poi_shop_yes">Allgemeines Geschäft</string>
+    <string name="poi_shop_yes">Geschäft</string>
     <string name="poi_geyser">Geysir</string>
     <string name="poi_gift">Geschenkeladen</string>
     <string name="poi_glacier">Gletscher</string>
@@ -2256,7 +2256,7 @@
     <string name="poi_health_specialty_general_yes">Allgemeinmediziner</string>
     <string name="poi_health_specialty_ophthalmology_yes">Augenheilkunde</string>
     <string name="poi_health_specialty_gynaecology_yes">Gynäkologie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Innere Medizin</string>
+    <string name="poi_health_specialty_internal_yes">Innere Medizin</string>
     <string name="poi_health_specialty_orthopaedics_yes">Orthopädie</string>
     <string name="poi_health_specialty_otolaryngology_yes">Hals-Nasen-Ohrenheilkunde</string>
     <string name="poi_health_specialty_paediatrics_yes">Kinderheilkunde</string>
@@ -2276,7 +2276,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologie</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zahn-, Mund-, Kiefer- und Gesichtschirurgie</string>
     <string name="poi_health_specialty_maternity_yes">Mutterschaft</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Unfall- und Notfallmedizin</string>
+    <string name="poi_health_specialty_emergency_yes">Unfall- und Notfallmedizin</string>
     <string name="poi_health_specialty_emergency_medicine_no">Fachrichtung: Unfall- und Notfallmedizin: nein</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastische Chirurgie</string>
     <string name="poi_health_specialty_orthodontics_yes">Kieferorthopädie</string>
@@ -2288,7 +2288,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Kiefer- und Gesichtschirurgie</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostische Radiologie</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologie</string>
-    <string name="poi_health_specialty_dentistry_yes">Zahnheilkunde</string>
+    <string name="poi_health_specialty_stomatology_yes">Zahnheilkunde</string>
     <string name="poi_health_specialty_nephrology_yes">Nephrologie (Nierenerkrankungen)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgie</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
@@ -2312,7 +2312,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopädie</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manualtherapie</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sportmedizin</string>
-    <string name="poi_health_specialty_podology_yes">Podologie</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologie</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Erwachsenenpsychiatrie</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktur</string>
     <string name="poi_health_specialty_homeopathy_yes">Homöopathie</string>

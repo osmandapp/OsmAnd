@@ -71,6 +71,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -83,7 +84,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -104,16 +105,6 @@ public class GpxUiHelper {
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-
-
-	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
-		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
-		return getDescription(app, analysis, html);
-	}
-
-	public static String getDescription(OsmandApplication app, TrkSegment t, boolean html) {
-		return getDescription(app, GPXTrackAnalysis.prepareInformation(0, null, t), html);
-	}
 
 	public static String getColorValue(String clr, String value, boolean html) {
 		if (!html) {
@@ -382,7 +373,7 @@ public class GpxUiHelper {
 		final int layout = R.layout.gpx_track_item;
 		DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
-		List<String> modifiableGpxFileNames = CtxMenuUtils.getNames(adapter.getItems());
+		List<String> modifiableGpxFileNames = ContextMenuUtils.getNames(adapter.getItems());
 		ArrayAdapter<String> alertDialogAdapter = new ArrayAdapter<String>(activity, layout, R.id.title, modifiableGpxFileNames) {
 
 			@Override
@@ -718,7 +709,7 @@ public class GpxUiHelper {
 		adapter.clear();
 		fillGpxContextMenuAdapter(adapter, allGpxFiles, true);
 		dialogAdapter.clear();
-		dialogAdapter.addAll(CtxMenuUtils.getNames(adapter.getItems()));
+		dialogAdapter.addAll(ContextMenuUtils.getNames(adapter.getItems()));
 		dialogAdapter.notifyDataSetInvalidated();
 	}
 
@@ -958,20 +949,31 @@ public class GpxUiHelper {
 		return gpx;
 	}
 
+	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                                @NonNull ChartPointLayer chartPointLayer) {
-		GpxDisplayGroup group = null;
+	                                                @NonNull ChartPointLayer chartPointLayer, @Nullable GPXTrackAnalysis analysis) {
+		GpxDisplayGroup displayGroup = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			GpxDisplayHelper helper = app.getGpxDisplayHelper();
-			String groupName = helper.getGroupName(gpxFile);
-			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
-		}
-		if (group != null && group.getDisplayItems().size() > 0) {
-			GpxDisplayItem gpxItem = group.getDisplayItems().get(0);
-			if (gpxItem != null) {
-				gpxItem.chartPointLayer = chartPointLayer;
+			String groupName = GpxDisplayHelper.getGroupName(app, gpxFile);
+			displayGroup = app.getGpxDisplayHelper().buildGpxDisplayGroup(gpxFile, 0, groupName);
+
+			if (analysis == null) {
+				SplitTrackAsyncTask.processGroupTrack(app, displayGroup, null, false);
+				if (!Algorithms.isEmpty(displayGroup.getDisplayItems())) {
+					GpxDisplayItem gpxItem = displayGroup.getDisplayItems().get(0);
+					if (gpxItem != null) {
+						gpxItem.chartPointLayer = chartPointLayer;
+					}
+					return gpxItem;
+				}
+			} else {
+				List<TrkSegment> segments = gpxFile.getSegments(true);
+				if (!Algorithms.isEmpty(segments)) {
+					GpxDisplayItem gpxItem = SplitTrackAsyncTask.createGpxDisplayItem(app, displayGroup, segments.get(0), analysis);
+					gpxItem.chartPointLayer = chartPointLayer;
+					return gpxItem;
+				}
 			}
-			return gpxItem;
 		}
 		return null;
 	}

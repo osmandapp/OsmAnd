@@ -320,7 +320,7 @@
     <string name="shared_string_select_all">Velg alle</string>
     <string name="fast_route_mode">Raskeste rute</string>
     <string name="fast_route_mode_descr">Aktiver for å beregne raskeste rute eller deaktiver for drivstoffbesparende rute.</string>
-    <string name="tiles_to_download_estimated_size">Ved zoom {0} last ned {1} fliser ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">Ved zoom {0} last ned {1} kartfliser ({2} MB)</string>
     <string name="shared_string_download_map">Last ned kart</string>
     <string name="renderers">Vektor-opptegning</string>
     <string name="renderers_descr">Velg opptegningsutseende</string>
@@ -754,7 +754,7 @@
     <string name="arrival_distance_factor_early">Tidlig</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sen</string>
-    <string name="arrival_distance_factor_at_last">De siste meterne</string>
+    <string name="arrival_distance_factor_at_last">Veldig sen</string>
     <string name="arrival_distance">Ankomstmelding</string>
     <string name="arrival_distance_descr">Hvor raskt vil du ha ankomstmeldingen\?</string>
     <string name="keep_informing_descr">Gjenta navigeringsinstruksjoner med jevne mellomrom.</string>
@@ -829,7 +829,6 @@
     <string name="av_settings">Lyd/video-innstillinger</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-tillegg for å vise koter, relieffskygge og bakkehelning, uten internett</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
-    <string name="index_srtm_ele">Koter</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
@@ -1232,7 +1231,6 @@
 \n&amp; navigering</string>
     <string name="routing_attr_avoid_shuttle_train_name">Ingen pendeltog</string>
     <string name="routing_attr_avoid_shuttle_train_description">Unngår bruk av pendeltog</string>
-    <string name="srtm_plugin_disabled">Koter deaktivert</string>
     <string name="favorite_category_add_new">Legg til ny</string>
     <string name="favorite_category_select">Velg kategori</string>
     <string name="shared_string_navigation">Navigering</string>
@@ -1830,7 +1828,6 @@
     <string name="recording_default_name">Spiller inn</string>
     <string name="map_widget_av_notes">Lyd/video-notater</string>
     <string name="map_widget_audionotes">Lydnotater</string>
-    <string name="index_srtm_parts">deler</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Gjengi stier i henhold til OSMC-spor.</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
@@ -2605,7 +2602,6 @@
     <string name="in_app_purchase_desc_ex">Når først kjøpt, vil det alltid være tilgjengelig for deg.</string>
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
-    <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
     <string name="wikivoyage_travel_guide_descr">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">Kjøp én av følgende for reiseguidefunksjon i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element</string>
@@ -3131,7 +3127,6 @@
     <string name="layer_osm_edits">OSM-redigeringer</string>
     <string name="new_route_calculated_dist_dbg">Rute: Distanse %1$s, rutetid %2$s
 \nBeregning: %3$.1f sek., %4$d veier, %5$d fliser)</string>
-    <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
     <string name="update_all_maps">Oppdater alle kart</string>
     <string name="update_all_maps_q">Oppdater alle (%1$d) kart\?</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretrekk veier uten fast dekke</string>
@@ -3643,7 +3638,6 @@
     <string name="monitoring_min_distance_descr">Ved å slå på dette filteret kan du unngå ytterligere dataopptak når bevegelse nesten ikke oppdages. Det forbedrer også det romlige utseendet til spor uten ytterligere behandling.</string>
     <string name="monitoring_min_distance_descr_side_effect">Bivirkning: Pauseperioder tas ikke opp i det hele tatt eller kun som ett punkt. Mindre bevegelser (f.eks. til siden av veien for å markere en mulig avkjøring i turen din) kan bli filtrert ut. Merk at filen din vil inneholde mindre informasjon for etterbehandling, og kan samtidig potensielt lagre GPS-artefakter forårsaket av dårlig mottak eller brikkesetteffekter.</string>
     <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Still inn 5 meters forskyvning hvis du ikke vil ta opp mindre detaljer om ruten din, og ikke trenger ytterligere data om pauseperioden.</string>
-    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="multimedia_rec_split_title">Opptaksoppdeling</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-intensjon «%s».</string>
     <string name="osm_authorization_success">Autorisert</string>
@@ -4010,7 +4004,6 @@
     <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
     <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
-    <string name="terrain_maps">Terrengkart</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s eller %2$s</string>
     <string name="continue_with">Fortsett med %1$s</string>
     <string name="not_available_with">Ikke tilgjengelig med %1$s</string>
@@ -4119,7 +4112,6 @@
     <string name="osmand_maps_plus_tagline">Få utvidede funksjoner</string>
     <string name="osmand_pro_tagline">Få alle funksjonene</string>
     <string name="backup_delete_types">Slett avskrudde datatyper</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelning</string>
     <string name="contour_lines_hillshade_slope">Koter, relieffskygge, bakkehelning</string>
     <string name="active_till">Aktiv til %1$s</string>
     <string name="track_recording_title">Sporopptak stoppet</string>
@@ -4701,7 +4693,7 @@
     <string name="routing_attr_motor_type_name">Motor-drivstoff</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Bensin</string>
-    <string name="routing_attr_motor_type_description">Velg drivstofftype brukt at din motor, for å regne ut CO2-utslipp.</string>
+    <string name="routing_attr_motor_type_description">Velg din motors drivstofftype, dette trengs for å beregne CO2-utslipp.</string>
     <string name="map_marker_average_speed_desc">Angi tidsintervall der gjennomsnittshastigheten vil bli målt for utregning av ankomsttid.</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="transport_hazmat_yes_desc">Du må velge rett kategori.</string>
@@ -5084,7 +5076,6 @@
     <string name="sort_date_ascending">Nyeste dato først</string>
     <string name="enable_3d_maps">Skru på 3D-kart</string>
     <string name="app_mode_moped">Moped</string>
-    <string name="test_heightmap">Test høydekart</string>
     <string name="app_mode_climbing">Klatring</string>
     <string name="shared_string_alt_name">Alternativt navn</string>
     <string name="token_is_not_valid">Symbolet er ikke gyldig</string>
@@ -5302,4 +5293,74 @@
     <string name="map_widget_glide_target_desc">Viser glidetallet som trengs for å nå målpunktet.</string>
     <string name="average_glide_time_interval_desc">Angi tidsintervallet for å bestemme gjennomsnittlig glidetall.</string>
     <string name="map_widget_group_glide_desc">Moduler viser glidetallet til målet eller gjennomsnittlig glidetall for den gjeldende turen.</string>
+    <string name="contact_us">Kontakt oss</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_plan_route_coordinate_input_name">Koordinatinntasting</string>
+    <string name="help_article_widgets_info_widgets_name">Informasjonsmoduler</string>
+    <string name="help_article_widgets_markers_name">Markørmoduler</string>
+    <string name="help_article_widgets_nav_widgets_name">Navigeringsmoduler</string>
+    <string name="help_article_map_legend_nautical_map_name">Sjøkartstil</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd-kartstil</string>
+    <string name="help_article_map_legend_ski_map_name">Skikartstil</string>
+    <string name="help_article_map_map_context_menu_name">Kontekstmeny for kart</string>
+    <string name="help_article_map_point_layers_on_map_name">Punkter på kartet</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Kartskjerm under navigering</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Talemeldinger / Varsler</string>
+    <string name="help_article_map_interact_with_map_name">Samhandle med kart</string>
+    <string name="help_article_map_track_context_menu_name">Kontekstmeny for spor</string>
+    <string name="help_article_map_tracks_on_map_name">Spor og ruter</string>
+    <string name="help_article_navigation_guidance_name">Veiledning</string>
+    <string name="help_article_map_raster_maps_name">Rasterkart (nettbasert / frakoblet)</string>
+    <string name="help_article_map_vector_maps_name">Vektorkart (kartstiler)</string>
+    <string name="help_article_navigation_routing_name">Ruteparametere</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Bilruting (lastebil, motorsykkel)</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Rideruting</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Mopedruting</string>
+    <string name="help_article_navigation_routing_online_routing_name">Nettbasert ruting</string>
+    <string name="help_article_navigation_routing_train_routing_name">Togruting</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Naviger etter spor</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Naviger etter markører</string>
+    <string name="help_article_navigation_setup_route_details_name">Rutedetaljer</string>
+    <string name="help_article_personal_storage_name">Lagring</string>
+    <string name="help_article_search_search_coordinates_name">Søk koordinater</string>
+    <string name="help_article_search_search_poi_name">Søk interessepunkt</string>
+    <string name="help_article_start_with_main_menu_name">Hovedmeny</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Krasjlogger</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Direkte-til-punkt-ruting (båt)</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnd-ruting</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Rett linje ruting (fly)</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Ruteforberedelse</string>
+    <string name="help_article_personal_import_export_name">Import / Eksport</string>
+    <string name="help_article_plan_route_name">Planlegg rute</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Sykkelruting (MTB)</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Fotgjengerruting</string>
+    <string name="help_article_personal_name">Mine data</string>
+    <string name="help_article_personal_profiles_name">Profiler (Innstillinger)</string>
+    <string name="help_article_start_with_name">Kom i gang med OsmAnd</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Båtruting</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Kollektivtransportruting</string>
+    <string name="help_article_purchases_android_name">Android-kjøp</string>
+    <string name="help_article_purchases_ios_name">iOS-kjøp</string>
+    <string name="help_article_start_with_first_steps_name">Første trinn</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skiruting</string>
+    <string name="help_article_search_search_all_name">Søk alle</string>
+    <string name="help_article_troubleshooting_general_name">Generelt</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Sporopptak</string>
+    <string name="shared_string_setup">Innstilling</string>
+    <string name="send_crash_log_descr">Inneholder kun informasjon om krasjer</string>
+    <string name="open_issue_on_github_descr">Still spørsmål, foreslå funksjoner</string>
+    <string name="help_article_widgets_name">Kartmoduler</string>
+    <string name="help_article_troubleshooting_maps_data_name">Kart &amp; Data</string>
+    <string name="help_article_widgets_map_buttons_name">Kartknapper</string>
+    <string name="user_guide">Brukerveiledning</string>
+    <string name="report_an_issues">Rapporter et problem</string>
+    <string name="most_viewed">Mest viste</string>
+    <string name="github_discussion">GitHub-diskusjon</string>
+    <string name="free_versions_descr">Last ned og installer gratis OsmAnd-versjon</string>
+    <string name="free_versions">Gratisversjoner</string>
+    <string name="about_osmand">Om OsmAnd</string>
+    <string name="send_logcat_log_descr">Detaljert loggfil</string>
+    <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

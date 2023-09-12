@@ -2153,7 +2153,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologie</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Tandheelkundige, orale en maxillofaciale chirurgie</string>
     <string name="poi_health_specialty_maternity_yes">Materniteit</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Spoeddienst</string>
+    <string name="poi_health_specialty_emergency_yes">Spoeddienst</string>
     <string name="poi_health_specialty_emergency_medicine_no">Specialiteit gezondheid: Spoeddienst: nee</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastische chirurgie</string>
     <string name="poi_health_specialty_orthodontics_yes">Orthodontie</string>
@@ -2164,7 +2164,7 @@
     <string name="poi_health_specialty_physiatry_yes">Fysische geneeskunde en revalidatie</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-faciale chirurgie</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostische Radiologie</string>
-    <string name="poi_health_specialty_dentistry_yes">Tandheelkunde</string>
+    <string name="poi_health_specialty_stomatology_yes">Tandheelkunde</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologie (nierziekten)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgie</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
@@ -2714,7 +2714,7 @@
     <string name="poi_fortification_type_hill_fort">Fortificatie type: heuvelfort</string>
     <string name="poi_fortification_type_limes">Fortificatie type: limes</string>
     <string name="poi_fitness_station">Fitness accomodatie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Interne geneeskunde</string>
+    <string name="poi_health_specialty_internal_yes">Interne geneeskunde</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radiotherapie</string>
     <string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereologie</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anesthesie</string>
@@ -2897,7 +2897,7 @@
     <string name="poi_health_specialty_clinical_pathology_yes">Klinische pathologie</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuele therapie</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sportgeneeskunde</string>
-    <string name="poi_health_specialty_podology_yes">Podologie</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologie</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psychiatrie volwassenen</string>
     <string name="poi_health_specialty_traditional_chinese_medicine_yes">Traditionele Chinese geneeskunde</string>
     <string name="poi_health_specialty_reiki_yes">Reiki</string>

@@ -339,7 +339,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getToolbarActiveColorId(boolean nightMode) {
-		return nightMode ? R.color.toolbar_active_color_dark : R.color.toolbar_active_color_light;
+		return nightMode ? R.color.app_bar_active_dark : R.color.app_bar_active_light;
 	}
 
 	@ColorRes

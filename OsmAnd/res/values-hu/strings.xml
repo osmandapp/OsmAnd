@@ -873,8 +873,6 @@
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Topográfia</string>
-    <string name="index_srtm_ele">Szintvonalak</string>
-    <string name="index_srtm_parts">részek</string>
     <string name="download_select_map_types">Egyéb térképek</string>
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
@@ -1062,9 +1060,9 @@
     <string name="shared_string_and">és</string>
     <string name="shared_string_or">vagy</string>
     <string name="amenity_type_seamark">Hajózási jelzés</string>
-    <string name="app_modes_choose_descr">Megjelenített profilok kijelölése.</string>
+    <string name="app_modes_choose_descr">Megjelenő profilok kijelölése.</string>
     <string name="app_modes_choose">Alkalmazásprofilok</string>
-    <string name="map_widget_map_rendering">Térkép kirajzolás</string>
+    <string name="map_widget_map_rendering">Térkép megjelenítés</string>
     <string name="app_mode_hiking">Túrázás</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
     <string name="app_mode_boat">Hajó</string>
@@ -1273,7 +1271,7 @@
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
     <string name="arrival_distance_factor_late">Közel</string>
-    <string name="arrival_distance_factor_at_last">Az utolsó métereken</string>
+    <string name="arrival_distance_factor_at_last">Nagyon közel</string>
     <string name="av_camera_pic_size">Kamera képmérete</string>
     <string name="av_camera_pic_size_descr">Kamera képméretének beállítása</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Jelzett turistautak megjelenítése (OSMC).</string>
@@ -1634,7 +1632,6 @@
     <string name="region_maps">Régiószintű térképek</string>
     <string name="world_maps">Világtérképek</string>
     <string name="hillshade_layer_disabled">Domborzatárnyékolás letiltva</string>
-    <string name="srtm_plugin_disabled">Szintvonalak letiltva</string>
     <string name="favorite_category_add_new">Új hozzáadása</string>
     <string name="favorite_category_select">Kategória kiválasztása</string>
     <string name="default_speed_system_descr">Sebesség mértékegységének megadása.</string>
@@ -2242,7 +2239,7 @@
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
     <string name="animate_my_location">Saját pozíció animált mozgatása</string>
-    <string name="animate_my_location_desc">A saját pozíció animált térképcsúsztatásának bekapcsolása navigáció közben.</string>
+    <string name="animate_my_location_desc">Sima térképcsúsztatás mozgás közben. Enyhe késleltetést vezet be.</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Hosszú távolságoknál: ha 10 percen belül nem kap eredményt, adjon hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OSM adatokhoz.
@@ -2548,7 +2545,6 @@
     <string name="wikivoyage_offline">Offline Wikivoyage</string>
     <string name="unlimited_downloads">Korlátlan letöltés</string>
     <string name="wikipedia_offline">Offline Wikipédia</string>
-    <string name="contour_lines_hillshade_maps">Szintvonalak &amp; domborzatárnyékolási térképek</string>
     <string name="unlock_all_features">Az OsmAnd összes funkciójának feloldása</string>
     <string name="purchase_dialog_title">Csomag kiválasztása</string>
     <string name="shared_string_only_with_wifi">Csak Wi-Fi</string>
@@ -2872,7 +2868,7 @@
     <string name="send_log">Napló küldése</string>
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordináta-widget</string>
-    <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
+    <string name="keep_passed_markers_descr">A Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
     <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
@@ -3043,7 +3039,6 @@
     <string name="shared_string_memory_used_gb_desc">Felhasznált %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Felhasznált %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Felhasznált %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Szintvonalak és domborzatárnyékolás</string>
     <string name="routing_attr_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
     <string name="apply_preference_to_all_profiles">A módosítás alkalmazása az összes profilra vagy a kiválasztottra.</string>
@@ -3602,7 +3597,6 @@
     <string name="live_monitoring_time_buffer">Idő puffer</string>
     <string name="live_monitoring_tracking_interval">Rögzítési intervallum</string>
     <string name="live_monitoring_adress">Webcím</string>
-    <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, pontosság={3}, magasság={4}, sebesség={5}, irány={6}.</string>
     <string name="monitoring_notification">Értesítés</string>
     <string name="monitoring_min_speed">Legkisebb sebesség</string>
     <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
@@ -4171,9 +4165,7 @@
     <string name="continue_with">Folytatás ezzel: %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s vagy %2$s</string>
     <string name="nautical_depth">Tengermélységek</string>
-    <string name="terrain_maps">Domborzati térképek</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
     <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
     <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
@@ -5095,7 +5087,6 @@
     <string name="disable_vertex_hillshade_3d">Vertex domborzatárnyékolás letiltása 3D-ben</string>
     <string name="generate_slope_from_3d_maps">Raszteres lejtéstérképek generálása 3D térképekből</string>
     <string name="enable_3d_maps">3D térképek engedélyezése</string>
-    <string name="test_heightmap">Magassági térkép tesztelése</string>
     <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
     <string name="app_mode_climbing">Mászás</string>
     <string name="shared_string_alt_name">Alternatív név</string>
@@ -5274,7 +5265,7 @@
 \n
 \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez
 \n
-\n • Közös widgetlista az alsó/felső panelhez
+\n • Egyforma widgetlista az alsó/felső panelhez
 \n
 \n • Új \"Vonat\" profil, vasúti útvonalak megtervezéséhez
 \n
@@ -5431,4 +5422,15 @@
     <string name="open_issue_on_github">Nyisson hibajegyet a Githubon</string>
     <string name="copy_build_version">Build verzió másolása</string>
     <string name="most_viewed">Legnézettebb</string>
+    <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Hőmérséklet</string>
+    <string name="release_4_6">• Siklási arány widget
+\n
+\n • ANT+ hőmérséklet widget hozzáadva
+\n
+\n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n
+\n</string>
+    <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
+    <string name="app_mode_baby_transport">Babakocsi</string>
 </resources>

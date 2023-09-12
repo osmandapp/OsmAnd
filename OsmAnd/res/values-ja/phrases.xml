@@ -1471,7 +1471,7 @@
     <string name="poi_health_specialty_general_yes">総合診療医</string>
     <string name="poi_health_specialty_ophthalmology_yes">眼科</string>
     <string name="poi_health_specialty_gynaecology_yes">婦人科</string>
-    <string name="poi_health_specialty_internal_medicine_yes">内科</string>
+    <string name="poi_health_specialty_internal_yes">内科</string>
     <string name="poi_health_specialty_orthopaedics_yes">整形外科</string>
     <string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科</string>
     <string name="poi_health_specialty_paediatrics_yes">小児科</string>
@@ -1491,7 +1491,7 @@
     <string name="poi_health_specialty_pulmonology_yes">呼吸器内科</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">歯科・口腔外科</string>
     <string name="poi_health_specialty_maternity_yes">産科</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">救急医療・救命救急センター</string>
+    <string name="poi_health_specialty_emergency_yes">救急医療・救命救急センター</string>
     <string name="poi_health_specialty_emergency_medicine_no">救急医療:無し</string>
     <string name="poi_health_specialty_plastic_surgery_yes">整形手術・形成外科</string>
     <string name="poi_health_specialty_orthodontics_yes">矯正歯科</string>
@@ -1503,7 +1503,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">顎顔面外科</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">放射線診断科</string>
     <string name="poi_health_specialty_gastroenterology_yes">消化器科</string>
-    <string name="poi_health_specialty_dentistry_yes">歯科</string>
+    <string name="poi_health_specialty_stomatology_yes">歯科</string>
     <string name="poi_health_specialty_nephrology_yes">腎臓(腎疾患)専門科</string>
     <string name="poi_health_specialty_neurosurgery_yes">脳神経外科</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">神経精神医</string>
@@ -1527,7 +1527,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">言語聴覚療法</string>
     <string name="poi_health_specialty_manual_therapy_yes">手技療法・整体・マッサージ</string>
     <string name="poi_health_specialty_sports_medicine_yes">スポーツ医学</string>
-    <string name="poi_health_specialty_podology_yes">ポドロジー・足学</string>
+    <string name="poi_health_specialty_podiatry_yes">ポドロジー・足学</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">成人の精神医学</string>
     <string name="poi_health_specialty_acupuncture_yes">鍼治療</string>
     <string name="poi_health_specialty_homeopathy_yes">ホメオパシー(民間療法)</string>

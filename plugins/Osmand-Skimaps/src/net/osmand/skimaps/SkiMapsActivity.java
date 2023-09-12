@@ -9,19 +9,16 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.skimapsPlugin.R;
 
 public class SkiMapsActivity extends Activity {
-	private static final String OSMAND_COMPONENT = "net.osmand"; //$NON-NLS-1$
-	private static final String OSMAND_COMPONENT_PLUS = "net.osmand.plus"; //$NON-NLS-1$
-	private static final String OSMAND_ACTIVITY = "net.osmand.plus.activities.MapActivity"; //$NON-NLS-1$
 
-	/**
-	 * Called when the activity is first created.
-	 */
+	private static final String OSMAND_COMPONENT = "net.osmand";
+	private static final String OSMAND_COMPONENT_PLUS = "net.osmand.plus";
+	private static final String OSMAND_ACTIVITY = "net.osmand.plus.activities.MapActivity";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,19 +48,16 @@ public class SkiMapsActivity extends Activity {
 				finish();
 			} else {
 				logEvent(this, "open_dialog");
-				findViewById(R.id.buyButton).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						String appName = OSMAND_COMPONENT;
-						logEvent(SkiMapsActivity.this, "open_play_store_" + appName);
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName));
-						try {
-							//stopService(intent);
-							startActivity(intent);
-							finish();
-						} catch (ActivityNotFoundException e) {
-							// ignore
-						}
+				findViewById(R.id.buyButton).setOnClickListener(v -> {
+					String appName = OSMAND_COMPONENT;
+					logEvent(SkiMapsActivity.this, "open_play_store_" + appName);
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName));
+					try {
+						//stopService(intent);
+						startActivity(intent);
+						finish();
+					} catch (ActivityNotFoundException e) {
+						// ignore
 					}
 				});
 			}

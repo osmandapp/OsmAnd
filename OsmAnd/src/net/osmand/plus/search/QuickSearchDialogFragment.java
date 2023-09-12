@@ -1836,7 +1836,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchResult sr = searchPhrase.getLastSelectedWord().getResult();
 			sr.object = filter;
 			sr.localeName = filter.getName();
-			searchUICore.getPhrase().syncWordsWithResults();
+			searchPhrase.syncWordsWithResults();
+			searchPhrase.setAcceptPrivate(filter.isShowPrivateNeeded());
 			String txt = filter.getName() + (!Algorithms.isEmpty(nameFilter) && filter.isStandardFilter() ? " " + nameFilter : " ");
 			searchQuery = txt;
 			searchEditText.setText(txt);

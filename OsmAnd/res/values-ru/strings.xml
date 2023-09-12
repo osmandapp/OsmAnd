@@ -45,10 +45,10 @@
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Загрузите карту «Наложение затенения рельефа» для отображения вертикального затенения (отмывки) рельефа.</string>
-    <string name="hillshade_purchase_header">Установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
+    <string name="hillshade_purchase_header">Установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
-    <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
+    <string name="srtm_purchase_header">Приобретите и установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
@@ -291,8 +291,8 @@
     <string name="srtm_plugin_description">Наложение контурных линий и слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, кому важна рельефная структура ландшафта.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основаны на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструменте визуализации Terra, флагманского спутника Системы наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических систем Японии (J-spacesystems).</string>
-    <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Линии высот» в Google Play, чтобы поддержать последующую разработку.</string>
-    <string name="srtm_paid_version_title">Линии высот</string>
+    <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Ландшафт» в Google Play, чтобы поддержать последующую разработку.</string>
+    <string name="srtm_paid_version_title">Ландшафт</string>
     <string name="av_def_action_video">Записать видео</string>
     <string name="av_def_action_audio">Записать аудио</string>
     <string name="av_widget_action_descr">Действие по умолчанию для виджета:</string>
@@ -324,9 +324,7 @@
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте в пути аудио-, видео- и фотозаметки, используя виджет или контекстное меню.</string>
     <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
-    <string name="index_srtm_parts">частей</string>
-    <string name="index_srtm_ele">Линии высот</string>
-    <string name="srtm_plugin_name">Контурные линии</string>
+    <string name="srtm_plugin_name">Ландшафт</string>
     <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9).</string>
     <string name="no_buildings_found">Здания не найдены.</string>
@@ -1187,7 +1185,7 @@
     <string name="incomplete_locale">неполный</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
     <string name="download_select_map_types">Прочие карты</string>
-    <string name="download_srtm_maps">Карты SRTM</string>
+    <string name="download_srtm_maps">Контурные линии</string>
     <string name="av_settings">Настройки аудио и видео </string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
     <string name="recording_context_menu_show">Просмотр</string>
@@ -1952,11 +1950,10 @@
     <string name="favorite_category_name">Название категории</string>
     <string name="favorite_category_add_new_title">Добавить категорию</string>
     <string name="hillshade_layer_disabled">Слой рельефа местности выключен</string>
-    <string name="srtm_plugin_disabled">Контурные линии выключены</string>
     <string name="roads">Дороги</string>
     <string name="buy">Купить</string>
     <string name="activate_seamarks_plugin">Активируйте плагин «Морские карты»</string>
-    <string name="activate_srtm_plugin">Активируйте плагин «Линии высот»</string>
+    <string name="activate_srtm_plugin">Активируйте плагин «Ландшафт»</string>
     <string name="later">Позже</string>
     <string name="get_full_version">Полная версия</string>
     <string name="downloads">Загрузки</string>
@@ -2732,7 +2729,6 @@
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
-    <string name="contour_lines_hillshade_maps">Карты горизонталей и затенение рельефа</string>
     <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их без интернета.</string>
     <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в интернете</string>
@@ -3206,7 +3202,6 @@
 \n • Другие исправления ошибок
 \n
 \n</string>
-    <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
     <string name="routing_attr_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги и тропы.</string>
     <string name="update_all_maps_q">Обновить все карты (%1$d)\?</string>
@@ -3475,7 +3470,6 @@
     <string name="accessibility_announce">Оповещение</string>
     <string name="monitoring_min_speed_descr_remark">Примечание: проверка скорости &gt; 0: большинство модулей GPS сообщают значение скорости только в том случае, если алгоритм определяет, что вы движетесь, и ничего, если вы не перемещаетесь. Следовательно, использование параметра &gt; 0 в этом фильтре в некотором смысле приводит к обнаружению факта перемещения модуля GPS. Но даже если мы не производим данную фильтрацию во время записи, то всё равно эта функция используется при анализе GPX для определения скорректированного расстояния, то есть значение, отображаемое в этом поле, является расстоянием, записанным во время движения.</string>
     <string name="multimedia_rec_split_title">Разделение записи</string>
-    <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_accuracy_descr">Будут записываться только точки, отвечающие по показателю минимальной точности (в метрах или футах — зависит от настроек системы). Точность — это близость измерений к истинному положению, и она не связана напрямую с точностью, которая представляет собой разброс повторных измерений.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
     <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
@@ -3791,7 +3785,7 @@
     <string name="sort_name_descending">По имени: Я–А</string>
     <string name="sort_name_ascending">По имени: А–Я</string>
     <string name="start_finish_icons">Значки старта и финиша</string>
-    <string name="contour_lines_thanks">Спасибо за покупку «Контурных линий»</string>
+    <string name="contour_lines_thanks">Спасибо за покупку плагина «Ландшафт»</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
     <string name="routing_attr_avoid_footways_name">Без пешеходных дорожек</string>
     <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените её в AppGallery в любое время.</string>
@@ -3958,7 +3952,7 @@
     <string name="uploading_count">Отправка %1$d из %2$d</string>
     <string name="uploaded_count">Отправлено %1$d из %2$d</string>
     <string name="toast_select_edits_for_upload">Выберите правки для отправки</string>
-    <string name="hillshade_slope_contour_lines">Рельеф / Уклон/ Контурные линии</string>
+    <string name="hillshade_slope_contour_lines">Контурные линии/Затенение рельефа/ Уклон</string>
     <string name="shared_string_vehicle">Транспортное средство</string>
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Электрический велосипед</string>
@@ -4180,8 +4174,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
     <string name="offline_wikivoyage">Локальный Викигид</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
-    <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
     <string name="you_can_get_feature_as_part_of_pattern">«%1$s» входит в тарифный план %2$s. Сравнение:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
@@ -5099,7 +5091,6 @@
     <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
     <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D-карт</string>
     <string name="disable_vertex_hillshade_3d">Отключить отмывку вершин в 3D</string>
-    <string name="test_heightmap">Тестировать карты высот</string>
     <string name="enable_3d_maps">Включить 3D-карты</string>
     <string name="app_mode_climbing">Альпинизм</string>
     <string name="offline_cache">Офлайн-кеш</string>
@@ -5344,4 +5335,75 @@
     <string name="local_indexes_category_terrain">Карты рельефа (3D)</string>
     <string name="hillshade_slope">Отмывка, уклон</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_map_legend_ski_map_name">Стиль карты «Зимний/лыжный»</string>
+    <string name="help_article_map_track_context_menu_name">Контекстное меню треков</string>
+    <string name="help_article_map_vector_maps_name">Векторные карты (стили карт)</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Автомобиль (грузовик, мотоцикл)</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Пешеход</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Лыжи</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">О маршрутизации OsmAnd</string>
+    <string name="help_article_navigation_setup_route_details_name">Детали маршрута</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Подготовка маршрута</string>
+    <string name="help_article_personal_name">Мои данные</string>
+    <string name="help_article_personal_profiles_name">Профили (настройки)</string>
+    <string name="help_article_personal_storage_name">Хранилище</string>
+    <string name="help_article_search_search_coordinates_name">Поиск координат</string>
+    <string name="help_article_start_with_first_steps_name">Первые шаги</string>
+    <string name="help_article_widgets_info_widgets_name">Информационные виджеты</string>
+    <string name="help_article_widgets_map_buttons_name">Кнопки карты</string>
+    <string name="free_versions_descr">Загрузить и установить бесплатную версию OsmAnd</string>
+    <string name="free_versions">Бесплатные версии</string>
+    <string name="about_osmand">Об OsmAnd</string>
+    <string name="send_logcat_log_descr">Детальный файл журнала</string>
+    <string name="shared_string_temperature">Температура</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Лодка</string>
+    <string name="help_article_navigation_routing_name">Настройки навигации</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Велописед (MTB)</string>
+    <string name="help_article_navigation_routing_online_routing_name">Онлайн-маршрутизатор</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Мопед</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Навигация по маркерам</string>
+    <string name="help_article_widgets_nav_widgets_name">Навигационные виджеты</string>
+    <string name="github_discussion">GitHub Discussion</string>
+    <string name="most_viewed">Наиболее просматриваемые</string>
+    <string name="help_article_map_interact_with_map_name">Взаимодействие с картой</string>
+    <string name="help_article_map_map_context_menu_name">Контекстное меню карты</string>
+    <string name="help_article_map_point_layers_on_map_name">Точки на карте</string>
+    <string name="help_article_map_tracks_on_map_name">Треки и маршруты</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_guidance_name">Руководство</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Экран карты во время навигации</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Голосовые подсказки/уведомления</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Общественный транспорт</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
+    <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
+    <string name="help_article_plan_route_name">Планирование маршрута</string>
+    <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
+    <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
+    <string name="help_article_purchases_android_name">Покупки на Android</string>
+    <string name="help_article_purchases_ios_name">Покупки на iOS</string>
+    <string name="help_article_start_with_main_menu_name">Главное меню</string>
+    <string name="contact_us">Наши контакты</string>
+    <string name="help_article_widgets_radius_ruler_name">Радиус-линейка и шкала масштаба</string>
+    <string name="report_an_issues">Сообщить о проблеме</string>
+    <string name="copy_build_version">Копировать версию сборки</string>
+    <string name="wheel_circumference">Длина окружности колеса</string>
+    <string name="external_sensor_name_property_description">Название датчика</string>
+    <string name="help_article_map_legend_osmand_name">Стиль карты «OsmAnd»</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Прямо-к-точке (лодка)</string>
+    <string name="shared_string_setup">Настройки</string>
+    <string name="sensor_temperature_desc">Показывает температуру, полученную от датчика</string>
+    <string name="help_article_map_legend_nautical_map_name">Cтиль карты «Морской»</string>
+    <string name="help_article_map_raster_maps_name">Растровые карты (online/offline)</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Навигация по треку</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Верховая езда</string>
+    <string name="help_article_search_search_poi_name">Поиск точек интереса (POI)</string>
+    <string name="user_guide">Руководство пользователя</string>
+    <string name="telegram_chats_descr">Присоединяйтесь к одному из наших телеграммных чатов.</string>
+    <string name="telegram_chats">Чаты Telegram</string>
+    <string name="open_issue_on_github_descr">Задать вопрос, предложить функционал</string>
+    <string name="send_crash_log_descr">Содержит только информацию о сбоях</string>
+    <string name="open_issue_on_github">Открыть тему на GitHub</string>
 </resources>

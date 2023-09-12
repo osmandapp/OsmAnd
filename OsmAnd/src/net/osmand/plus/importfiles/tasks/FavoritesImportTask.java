@@ -1,5 +1,6 @@
 package net.osmand.plus.importfiles.tasks;
 
+import static net.osmand.gpx.GPXUtilities.PointsGroup;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
@@ -8,10 +9,10 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -22,6 +23,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
@@ -50,10 +52,13 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
+		Map<String, PointsGroup> pointsGroups = gpxFile.getPointsGroups();
 
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
-			favoritesHelper.addFavourite(favourite, false, false, false);
+
+			PointsGroup pointsGroup = pointsGroups.get(favourite.getCategory());
+			favoritesHelper.addFavourite(favourite, false, false, false, pointsGroup);
 
 			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
 				plugin.updateParkingPoint(favourite);

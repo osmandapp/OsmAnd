@@ -87,7 +87,7 @@
     <string name="poi_frame">متجر اطارات الصور</string>
     <string name="poi_furniture">متجر أثاث</string>
     <string name="poi_gift">دكان الهدايا</string>
-    <string name="poi_shop_yes">متجر عام</string>
+    <string name="poi_shop_yes">المتجر</string>
     <string name="poi_garden_furniture">متجر اغراض الحدائق</string>
     <string name="poi_gas">متجر الغاز السائل</string>
     <string name="poi_jewelry">متجر مجوهرات</string>
@@ -1510,7 +1510,7 @@
     <string name="poi_craft_electronics_repair">إصلاح إلكترونيات</string>
     <string name="poi_aerialway_length">الطول</string>
     <string name="poi_health_specialty_general_yes">طبيب عام</string>
-    <string name="poi_health_specialty_internal_medicine_yes">طب باطني</string>
+    <string name="poi_health_specialty_internal_yes">طب باطني</string>
     <string name="poi_health_specialty_orthopaedics_yes">طب العظام</string>
     <string name="poi_health_specialty_otolaryngology_yes">الأنف والأذن والحنجرة</string>
     <string name="poi_health_specialty_radiology_yes">الأشعة</string>
@@ -1519,12 +1519,12 @@
     <string name="poi_health_specialty_biology_yes">احياء سريرية</string>
     <string name="poi_health_specialty_osteopathy_yes">تجبير العظام</string>
     <string name="poi_health_specialty_anaesthetics_yes">التخدير</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">طب الطوارئ والحوادث</string>
+    <string name="poi_health_specialty_emergency_yes">طب الطوارئ والحوادث</string>
     <string name="poi_health_specialty_emergency_medicine_no">التخصصات الصحية: طب الطوارئ والحوادث: لا يوجد</string>
     <string name="poi_health_specialty_occupational_yes">العلاج المهني</string>
     <string name="poi_health_specialty_physiatry_yes">الطب الطبيعي وإعادة التأهيل</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">جراحة الفك-الوجه</string>
-    <string name="poi_health_specialty_dentistry_yes">طب الأسنان</string>
+    <string name="poi_health_specialty_stomatology_yes">طب الأسنان</string>
     <string name="poi_health_specialty_pathology_yes">التشريح المرضي</string>
     <string name="poi_health_specialty_tropical_medicine_yes">الطب الاستوائي</string>
     <string name="poi_health_specialty_tropical_medicine_no">التخصص الصحي: الطب الاستوائي: لا</string>
@@ -1533,7 +1533,7 @@
     <string name="poi_health_specialty_social_paediatrics_no">التخصصات الصحية: طب الأطفال الاجتماعية: لا يوجد</string>
     <string name="poi_health_specialty_clinical_pathology_yes">علم الأمراض السريرية</string>
     <string name="poi_health_specialty_manual_therapy_yes">العلاج اليدوي</string>
-    <string name="poi_health_specialty_podology_yes">علاج الارجل</string>
+    <string name="poi_health_specialty_podiatry_yes">علاج الارجل</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">الطب النفسي للكبار</string>
     <string name="poi_health_specialty_homeopathy_yes">معالجة المثلية</string>
     <string name="poi_health_specialty_reiki_yes">علاج بالطاقة</string>
@@ -4600,4 +4600,8 @@
     <string name="poi_foot_designated">مخصصة للمشاة</string>
     <string name="poi_motorcar_designated">مصممة للسيارات</string>
     <string name="poi_motor_vehicle_designated">مصممة للمركبات ذات محرك</string>
+    <string name="poi_socket_typee_voltage_filter">وصلة جهد كهربائي من نوع E</string>
+    <string name="poi_socket_typee">المقبس: نوع E</string>
+    <string name="poi_socket_typee_output_filter">مخرج توصيل نوع E</string>
+    <string name="poi_socket_typee_current">مأخذ التوصيل: النوع E: تيار</string>
 </resources>

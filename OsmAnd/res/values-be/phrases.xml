@@ -2249,7 +2249,7 @@
     <string name="poi_health_specialty_general_yes">Сямейная медыцына</string>
     <string name="poi_health_specialty_ophthalmology_yes">Афтальмалогія</string>
     <string name="poi_health_specialty_gynaecology_yes">Гінэкалогія</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Унутраныя хваробы</string>
+    <string name="poi_health_specialty_internal_yes">Унутраныя хваробы</string>
     <string name="poi_health_specialty_orthopaedics_yes">Артапедыя</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оталарынгалогія</string>
     <string name="poi_health_specialty_paediatrics_yes">Педыятрыя</string>
@@ -2269,7 +2269,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Пульманалогія</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Сківічна-тваравая, зубная хірургія</string>
     <string name="poi_health_specialty_maternity_yes">Мацярынства</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Хуткая і неадкладная дапамога</string>
+    <string name="poi_health_specialty_emergency_yes">Хуткая і неадкладная дапамога</string>
     <string name="poi_health_specialty_emergency_medicine_no">Спецыялізацыя: хуткая і неадкладная дапамога: адсутнічае</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Пластычная хірургія</string>
     <string name="poi_health_specialty_orthodontics_yes">Артадонтыя</string>
@@ -2281,7 +2281,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Сківічна-тваравая хірургія</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Прамянёвая дыягностыка</string>
     <string name="poi_health_specialty_gastroenterology_yes">Гастраэнтэралогія</string>
-    <string name="poi_health_specialty_dentistry_yes">Стаматалогія</string>
+    <string name="poi_health_specialty_stomatology_yes">Стаматалогія</string>
     <string name="poi_health_specialty_nephrology_yes">Нефралогія (нырачныя захворванні)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Нейрахірургія</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Нейрапсіхіятрыя</string>
@@ -2305,7 +2305,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Лагапед</string>
     <string name="poi_health_specialty_manual_therapy_yes">Мануальная тэрапія</string>
     <string name="poi_health_specialty_sports_medicine_yes">Спартовая медыцына</string>
-    <string name="poi_health_specialty_podology_yes">Падалогія</string>
+    <string name="poi_health_specialty_podiatry_yes">Падалогія</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Псіхіятрыя для дарослых</string>
     <string name="poi_health_specialty_acupuncture_yes">Акупунктура</string>
     <string name="poi_health_specialty_homeopathy_yes">Гамеапатыя</string>

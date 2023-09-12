@@ -757,6 +757,33 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 	}
 
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			boolean isTabFragment = false;
+			for (TabActivity.TabItem tabItem : mTabs) {
+				if (fragment.getClass() == tabItem.fragment) {
+					isTabFragment = true;
+					break;
+				}
+			}
+			if (!isTabFragment) {
+				fragmentsWithoutTabs.add(fragment);
+			}
+		}
+		return fragmentsWithoutTabs;
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		View pagerContent = findViewById(R.id.pager);
+		View slidingTabs = findViewById(R.id.sliding_tabs);
+		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+		pagerContent.setImportantForAccessibility(accessibility);
+		slidingTabs.setImportantForAccessibility(accessibility);
+	}
+
 	public static class GoToMapFragment extends BottomSheetDialogFragment {
 		public static final String TAG = "GoToMapFragment";
 

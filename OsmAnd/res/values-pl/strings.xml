@@ -882,8 +882,6 @@
 \nDane bazowe pochodzą z SRTM i ASTER.
 \n
 \nWięcej informacji na stronie %1$s.</string>
-    <string name="index_srtm_ele">Poziomice</string>
-    <string name="index_srtm_parts">części</string>
     <string name="audionotes_plugin_description">Rób notatki audio/zdjęcia/wideo podczas podróży, używając przycisku mapy lub menu kontekstowego lokalizacji.</string>
     <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
     <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, aby dodać uwagę do lokalizacji.</string>
@@ -933,7 +931,7 @@
     <string name="precise_routing_mode_descr">Obliczanie precyzyjnych tras w nawigacji. Funkcja nadal jest dość powolna i ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny.</string>
-    <string name="download_hillshade_maps">Mapy cieniowane</string>
+    <string name="download_hillshade_maps">Mapa cieniowana</string>
     <string name="av_use_external_camera_descr">Robi zdjęcia przy użyciu aplikacji systemowej.</string>
     <string name="av_use_external_camera">Używanie aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1670,7 +1668,6 @@
     <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
     <string name="hillshade_layer_disabled">Wyłączona warstwa mapy cieniowanej</string>
-    <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
     <string name="favourites_edit_dialog_title">Informacje ulubione</string>
     <string name="downloading_number_of_files">Pobieranie %1$d plik…</string>
     <string name="show_free_version_banner">Baner darmowej wersji</string>
@@ -2610,11 +2607,11 @@
 \n</string>
     <string name="osmand_extended_description_part4">Narciarska:
 \n Wtyczka map tras narciarskich OsmAnd umożliwia oglądanie tras narciarskich o różnym stopniu trudności oraz dodatkowe informacje, takie jak lokalizacje wyciągów i innych obiektów.</string>
-    <string name="osmand_extended_description_part5">Rowerowa 
-\n • Znajdź ścieżki rowerowe na mapie 
-\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych 
-\n • Zobacz prędkość i wysokość 
-\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią 
+    <string name="osmand_extended_description_part5">Rowerowa
+\n • Znajdź ścieżki rowerowe na mapie
+\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych
+\n • Zobacz prędkość i wysokość
+\n • Opcja nagrywania GPX umożliwia nagranie podróży i udostępnianie jej
 \n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
     <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast 
 \n • Mapa pokazuje ci trasy piesze 
@@ -2671,7 +2668,6 @@
     <string name="topo_render_descr">Do uprawiania turystyki pieszej, trekkingu i kolarstwa przyrodniczego. Czytelny na zewnątrz. Kontrastujące drogi i naturalne obiekty, różne rodzaje tras, zaawansowane opcje izolinii, dodatkowe szczegóły. Regulacja integralności powierzchni odróżnia jakość drogi. Brak trybu nocnego.</string>
     <string name="touring_view_render_descr">Styl turystyczny o wysokim kontraście i maksymalnej szczegółowości. Zawiera wszystkie opcje domyślnego stylu OsmAnd, wyświetlając jak najwięcej szczegółów, w szczególności drogi, ścieżki i inne sposoby podróżowania. Czyste rozróżnienie typów dróg jak w atlasie turystycznym. Nadaje się do użytku w dzień, w nocy i na zewnątrz.</string>
     <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
-    <string name="contour_lines_hillshade_maps">Poziomice i mapy cieniowane</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
@@ -3206,7 +3202,6 @@
     <string name="shared_string_memory_used_gb_desc">Wykorzystuje %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Wykorzystuje %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Wykorzystuje %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Poziomice i mapa cieniowana</string>
     <string name="routing_attr_prefer_unpaved_name">Preferuj drogi nieutwardzone</string>
     <string name="routing_attr_prefer_unpaved_description">Preferuj drogi nieutwardzone.</string>
     <string name="update_all_maps">Zaktualizuj wszystkie mapy</string>
@@ -3399,7 +3394,6 @@
     <string name="monitoring_min_distance_descr_recommendation">Zalecenie: Ustaw przemieszczenie o 5 metrów, jeśli nie chcesz rejestrować drobnych szczegółów trasy i nie potrzebujesz dodatkowych danych o czasie odpoczynku.</string>
     <string name="live_monitoring_time_buffer">Bufor czasu</string>
     <string name="live_monitoring_tracking_interval">Częstość rejestrowania</string>
-    <string name="live_monitoring_adress_descr">Określa adres internetowy z zachowaniem składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Powiadomienie</string>
     <string name="profile_type_custom_string">Dostosowany profil</string>
     <string name="shared_string_angle_param">Kąt: %s°</string>
@@ -4178,8 +4172,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
     <string name="offline_wikipeadia">Wikipedia w trybie offline</string>
     <string name="offline_wikivoyage">Wikipodróże w trybie offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terenu: poziomice, mapy cieniowane, nachylenie</string>
-    <string name="terrain_maps">Mapy terenu</string>
     <string name="nautical_depth">Głębokość morska</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
     <string name="backup_delete_types">Usuń wyłączone typy danych</string>
@@ -5040,7 +5032,6 @@
     <string name="clear_online_cache_description">Spowoduje to wyczyszczenie pamięci podręcznej kafelków online pogody.</string>
     <string name="free_maps_updates">Bezpłatne aktualizacje (awaryjne)</string>
     <string name="app_mode_climbing">Wspinaczka</string>
-    <string name="test_heightmap">Przetestuj mapę wysokości</string>
     <string name="approximate_bearing">Przybliżony namiar</string>
     <string name="approximate_bearing_descr">Uzyskaj namiar na podstawie realizowanej trasy nawigacyjnej.</string>
     <string name="sort_date_ascending">Najpierw najnowsza data</string>
@@ -5317,4 +5308,25 @@
     <string name="help_article_map_legend_nautical_map_name">Styl mapy morskiej</string>
     <string name="help_article_map_legend_osmand_name">Styl mapy OsmAnd</string>
     <string name="help_article_map_track_context_menu_name">Menu kontekstowe ścieżek</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Wyznaczanie tras w linii prostej (samolot)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Wyznaczanie tras pociągów</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Wyznaczanie tras transportu publicznego</string>
+    <string name="help_article_map_vector_maps_name">Mapy wektorowe (Style map)</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Komunikaty głosowe / Powiadomienia</string>
+    <string name="help_article_map_tracks_on_map_name">Ślady i trasy</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Trasa bezpośrednia do punktu (łódź)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ekran mapy podczas nawigacji</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Wyznaczanie tras samochodowych (ciężarówka, motocykl)</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Wyznaczanie tras pieszych</string>
+    <string name="help_article_map_map_context_menu_name">Menu kontekstowe mapy</string>
+    <string name="sensor_temperature_desc">Pokazuje temperaturę z czujnika</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Trasa konna</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Trasy narciarskie</string>
+    <string name="help_article_navigation_routing_name">Parametry trasy</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Trasa motoroweru</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Wyznaczanie tras łodzi</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Trasy rowerowe (MTB)</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="help_article_map_legend_ski_map_name">Styl mapy narciarskiej</string>
 </resources>

@@ -2256,7 +2256,7 @@
     <string name="poi_health_specialty_general_yes">Médico general</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmología</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecología</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringología</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatría</string>
@@ -2276,7 +2276,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Neumología</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirugía dental, oral y maxilofacial</string>
     <string name="poi_health_specialty_maternity_yes">Maternidad</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Medicina de urgencia</string>
+    <string name="poi_health_specialty_emergency_yes">Medicina de urgencia</string>
     <string name="poi_health_specialty_emergency_medicine_no">Especialidad en salud: sin medicina de urgencia</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Cirugía plástica</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodoncia</string>
@@ -2288,7 +2288,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Cirugía maxilofacial</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiología diagnóstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterología</string>
-    <string name="poi_health_specialty_dentistry_yes">Dentista;Odontología</string>
+    <string name="poi_health_specialty_stomatology_yes">Dentista;Odontología</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrología (enfermedades renales)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurocirugía</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
@@ -2312,7 +2312,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Terapia del habla</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manual</string>
     <string name="poi_health_specialty_sports_medicine_yes">Medicina deportiva</string>
-    <string name="poi_health_specialty_podology_yes">Podología</string>
+    <string name="poi_health_specialty_podiatry_yes">Podología</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatría adulta</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>

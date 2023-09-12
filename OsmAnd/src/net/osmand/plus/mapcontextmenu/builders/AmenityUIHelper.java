@@ -134,7 +134,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
-		List<AmenityInfoRow> urlRows = new LinkedList<>();
 
 		Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 		AmenityInfoRow cuisineRow = null;
@@ -295,7 +294,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else if (Amenity.MOBILE.equals(key)) {
 				iconId = R.drawable.ic_action_phone;
 				isPhoneNumber = true;
-			} else if (Algorithms.equalsToAny(key, Amenity.WEBSITE, Amenity.URL_KEY)) {
+			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
 			} else if (Amenity.CUISINE.equals(key)) {
@@ -411,8 +410,6 @@ public class AmenityUIHelper extends MenuBuilder {
 				descriptions.add(row);
 			} else if (isCuisine) {
 				cuisineRow = row;
-			} else if (isUrl) {
-				addRowIfNotExists(urlRows, row);
 			} else if (poiType == null) {
 				infoRows.add(row);
 			}
@@ -488,7 +485,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
-		infoRows.addAll(urlRows);
+
 		Collections.sort(infoRows, (row1, row2) -> {
 			if (row1.order < row2.order) {
 				return -1;
@@ -519,12 +516,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
-		}
-	}
-
-	private void addRowIfNotExists(@NonNull List<AmenityInfoRow> rows, @NonNull AmenityInfoRow row) {
-		if (!rows.contains(row)) {
-			rows.add(row);
 		}
 	}
 

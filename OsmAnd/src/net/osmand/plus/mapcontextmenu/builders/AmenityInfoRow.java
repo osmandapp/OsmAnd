@@ -4,8 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 
-import java.util.Objects;
-
 public class AmenityInfoRow {
 
 	public final String key;
@@ -75,20 +73,5 @@ public class AmenityInfoRow {
 		this.isUrl = isUrl;
 		this.matchWidthDivider = matchWidthDivider;
 		this.textLinesLimit = textLinesLimit;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof AmenityInfoRow)) return false;
-
-		AmenityInfoRow that = (AmenityInfoRow) o;
-
-		return Objects.equals(text, that.text);
-	}
-
-	@Override
-	public int hashCode() {
-		return text != null ? text.hashCode() : 0;
 	}
 }

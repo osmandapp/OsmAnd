@@ -832,17 +832,4 @@ public class MapUtils {
 		}
 		return dist;
 	}
-
-	public static float calculateGlideRatio(LatLon l1, LatLon l2, double altitude1, double altitude2) {
-		double distance = getDistance(l1, l2);
-		double difference = altitude1 - altitude2;
-		return calculateGlideRatio(distance, difference);
-	}
-
-	public static float calculateGlideRatio(double distance, double difference) {
-		if (distance > 0 && difference != 0) {
-			return (float) (distance / difference);
-		}
-		return 0;
-	}
 }

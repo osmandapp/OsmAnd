@@ -10,7 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="app_mode_baby_transport">Baby transport</string>
+    <string name="release_4_6">
+       • Glide Ratio Widget \n\n
+       • Added ANT+ temperature widget \n\n
+       • Better memory management for large GPX tracks \n\n
+    </string>
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Temperature</string>
+    <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
     <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
     <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>
@@ -1914,7 +1922,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_adress">Web address</string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notification</string>
     <string name="monitoring_min_speed">Minimum speed</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
@@ -2524,7 +2531,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <!-- string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string -->
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">Purchase one of the following to receive the offline travel guide functionality:</string>
@@ -2811,7 +2817,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
     <string name="animate_my_location">Animate own position</string>
-    <string name="animate_my_location_desc">Turn on animated map panning of \'My position\' during navigation.</string>
+    <string name="animate_my_location_desc">Smooth map panning when in motion. Introduces slight delay.</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>
@@ -3300,7 +3306,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="region_maps">Regionwide maps</string>
     <string name="world_maps">World maps</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
-    <!-- string name="srtm_plugin_disabled">Topogaphy disabled</string -->
     <string name="favorite_category_add_new">Add new</string>
     <string name="favorite_category_select">Choose category</string>
     <string name="default_speed_system_descr">Define unit of speed.</string>
@@ -4110,8 +4115,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Tap \'Use location…\' to add a note to the location.</string>
     <string name="map_widget_audionotes">Audio notes</string>
-    <!-- string name="index_srtm_parts">parts</string -->
-    <!-- string name="index_srtm_ele">Contour lines</string -->
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
     <string name="download_srtm_maps">Contour lines</string>
@@ -4556,7 +4559,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Late</string>
-    <string name="arrival_distance_factor_at_last">In the last meters</string>
+    <string name="arrival_distance_factor_at_last">Very late</string>
     <string name="arrival_distance">Arrival announcement</string>
     <string name="arrival_distance_descr">How soon do you want the arrival announcement?</string>
     <string name="rendering_out_of_memory">Not enough process memory to display selected area</string>

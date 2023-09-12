@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.GPX;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
@@ -24,15 +26,14 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
@@ -103,9 +104,9 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	@Nullable
-	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return gpxFile.tracks.size() > 0 ?
-				GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX) : null;
+	public GpxDisplayItem getDisplayItem() {
+		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 	}
 
 	private GPXFile getGPXFile() {
@@ -115,7 +116,7 @@ public class GpxBlockStatisticsBuilder {
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
 	                           @Nullable GPXTrackAnalysis analysis) {
 		initItems(analysis);
-		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
+		adapter = new BlockStatisticsAdapter(getDisplayItem(), actionsListener, activeColor);
 		adapter.setItems(items);
 		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
 		blocksView.setAdapter(adapter);
@@ -168,10 +169,10 @@ public class GpxBlockStatisticsBuilder {
 				withoutGaps = !selectedGpxFile.isJoinSegments()
 						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
 			} else {
-				GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
-				if (gpxDisplayItem != null) {
-					analysis = gpxDisplayItem.analysis;
-					withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+				GpxDisplayItem displayItem = getDisplayItem();
+				if (displayItem != null) {
+					analysis = displayItem.analysis;
+					withoutGaps = !selectedGpxFile.isJoinSegments() && displayItem.isGeneralTrack();
 				}
 			}
 		} else {

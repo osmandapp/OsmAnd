@@ -24,6 +24,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -339,7 +340,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public void onItemDismiss(RecyclerView.ViewHolder holder) {
+		public void onItemDismiss(@NonNull ViewHolder holder) {
 
 		}
 

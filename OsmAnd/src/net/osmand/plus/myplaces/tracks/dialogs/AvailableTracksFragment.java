@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
@@ -165,7 +167,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SearchTrackItemsFragment.showInstance(manager, this, false, isUsedOnMap());
+				SearchMyPlacesTracksFragment.showInstance(manager, this, false, isUsedOnMap());
 			}
 		}
 		if (itemId == R.id.action_menu) {
@@ -181,15 +183,24 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment {
 	@NonNull
 	protected List<Object> getAdapterItems() {
 		List<Object> items = new ArrayList<>();
+		boolean osmMonitoringEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+		boolean isTracksEmpty = rootFolder.getFlattenedTrackItems().size() != 0;
+		boolean isSubFoldersEmpty = rootFolder.getFlattenedSubFolders().size() != 0;
+
 		items.add(TYPE_SORT_TRACKS);
-		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
+		if (osmMonitoringEnabled) {
 			items.add(recordingTrackItem);
 		}
-		items.add(visibleTracksGroup);
-		items.addAll(rootFolder.getSubFolders());
-		items.addAll(rootFolder.getTrackItems());
 
-		if (rootFolder.getFlattenedTrackItems().size() != 0) {
+		if (isTracksEmpty || isSubFoldersEmpty || osmMonitoringEnabled) {
+			items.add(visibleTracksGroup);
+			items.addAll(rootFolder.getSubFolders());
+			items.addAll(rootFolder.getTrackItems());
+		} else {
+			items.add(TYPE_EMPTY_TRACKS);
+		}
+
+		if (isTracksEmpty) {
 			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;

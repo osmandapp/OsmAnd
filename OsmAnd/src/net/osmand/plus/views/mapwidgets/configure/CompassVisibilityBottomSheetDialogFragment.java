@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +11,14 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,21 +33,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-
 public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = CompassVisibilityBottomSheetDialogFragment.class.getSimpleName();
-
-	private static final String APP_MODE_KEY = "app_mode";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;

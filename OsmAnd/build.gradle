@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
 
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
 // APK_NUMBER_VERSION - version number of apk

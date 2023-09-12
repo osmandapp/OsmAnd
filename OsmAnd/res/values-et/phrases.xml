@@ -1623,7 +1623,7 @@
     <string name="poi_outdoor_seating_garden">Istekohad õues: aias</string>
     <string name="poi_outdoor_seating_patio">Istekohad õues: siseõues</string>
     <string name="poi_cocktails_yes">Jah;Kokteilid</string>
-    <string name="poi_second_hand_yes">Kasutatud kaup</string>
+    <string name="poi_second_hand_yes">Jah</string>
     <string name="poi_second_hand_no">Kasutatud kaup puuduvad</string>
     <string name="poi_second_hand_only">Ainult kasutatud kaup</string>
     <string name="poi_service_parts">Varuosad</string>
@@ -2378,7 +2378,7 @@
     <string name="poi_health_specialty_general_yes">Perearst</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloogia</string>
     <string name="poi_health_specialty_gynaecology_yes">Günekoloogia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Sisemeditsiin</string>
+    <string name="poi_health_specialty_internal_yes">Sisemeditsiin</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopeedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolarüngoloogia</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediaatria</string>
@@ -2398,7 +2398,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Hingamisteede meditsiin</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Hamba-, suu- ja näo-lõualuukirurgia</string>
     <string name="poi_health_specialty_maternity_yes">Rasedus</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Õnnetusjuhtumi- ja erakorraline meditsiin</string>
+    <string name="poi_health_specialty_emergency_yes">Õnnetusjuhtumi- ja erakorraline meditsiin</string>
     <string name="poi_health_specialty_emergency_medicine_no">Tervise eriala: õnnetusjuhtumi- ja erakorraline meditsiin: ei</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Ilukirurgia</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontia</string>
@@ -2410,7 +2410,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Näo-lõualuu kirurgia</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostiline radioloogia</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloogia</string>
-    <string name="poi_health_specialty_dentistry_yes">Hambaravi</string>
+    <string name="poi_health_specialty_stomatology_yes">Hambaravi</string>
     <string name="poi_health_specialty_nephrology_yes">Nefroloogia (neeruhaigused)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurokirurgia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsühhiaatria</string>
@@ -2434,7 +2434,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopeed</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manuaalteraapia</string>
     <string name="poi_health_specialty_sports_medicine_yes">Spordimeditsiin</string>
-    <string name="poi_health_specialty_podology_yes">Podoloogia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloogia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Täiskasvanute psühhiaatria</string>
     <string name="poi_health_specialty_acupuncture_yes">Nõelravi</string>
     <string name="poi_health_specialty_homeopathy_yes">Homöopaatia</string>
@@ -4152,7 +4152,7 @@
     <string name="poi_agrarian_feed">Loomasööt</string>
     <string name="poi_generator_source_biogas">Energiaallikas: biogaas</string>
     <string name="poi_generator_type_stellarator">Generaatori tüüp: stellaraator</string>
-    <string name="poi_mattress_yes">Jah</string>
+    <string name="poi_mattress_yes">Jah;Madrats</string>
     <string name="poi_mattress_no">Ei</string>
     <string name="poi_generator_source_wave">Energiaallikas: lained</string>
     <string name="poi_furniture_office">Kontorimööbel</string>
@@ -4510,4 +4510,15 @@
     <string name="poi_waste_oil">Jääkõlid</string>
     <string name="poi_waste_drugs">Ravimid</string>
     <string name="poi_bridge_name">Silla nimi</string>
+    <string name="poi_water_filter">Vesi;Joogivesi</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_recycling_pens">Pliiatsid</string>
+    <string name="poi_recycling_marine_waste">Laevanduse jäätmed</string>
+    <string name="poi_waste_cigarettes">Sigaretid</string>
+    <string name="poi_wicket_gate">Külgvärav</string>
+    <string name="poi_waste_accepted">Vastuvõetavad jäätmed</string>
+    <string name="poi_recycling_plastic_bottle_tops">Plastpudelite korgid</string>
+    <string name="poi_waste_dog_excrement">Koera väljaheited</string>
+    <string name="poi_self_checkout_no">Iseteenindus: puudub</string>
+    <string name="poi_self_checkout">Iseteeninduskassa</string>
 </resources>

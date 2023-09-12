@@ -131,34 +131,31 @@ public class EntityParser {
 		}
 	}
 
-	
-	private static String getWikipediaUrl(Map<String, String> tagValues) {
-		String siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
-		if (siteUrl != null) {
-			if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
-				int i = siteUrl.indexOf(':');
-				if (i == -1) {
-					siteUrl = "http://en.wikipedia.org/wiki/" + siteUrl; //$NON-NLS-1$
-				} else {
-					siteUrl = "http://" + siteUrl.substring(0, i) + ".wikipedia.org/wiki/" + siteUrl.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-			}
-		}
-		return siteUrl;
-	}
-	
 	private static String getWebSiteURL(Map<String, String> tagValues) {
 		String siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
-		if (siteUrl == null) {
-			siteUrl = tagValues.get(OSMTagKey.URL.getValue());
-			if (siteUrl == null) {
-				siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
-			}
+		String url = tagValues.get(OSMTagKey.URL.getValue());
+		if (siteUrl == null && url == null) {
+			siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
 		}
 		if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
 			siteUrl = "http://" + siteUrl;
 		}
 		return siteUrl;
+	}
+
+	private static String getWikipediaURL(Map<String, String> tagValues) {
+		String wikiUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
+		if (wikiUrl != null) {
+			if (!wikiUrl.startsWith("http://")) {
+				int i = wikiUrl.indexOf(':');
+				if (i == -1) {
+					wikiUrl = "http://en.wikipedia.org/wiki/" + wikiUrl;
+				} else {
+					wikiUrl = "http://" + wikiUrl.substring(0, i) + ".wikipedia.org/wiki/" + wikiUrl.substring(i + 1);
+				}
+			}
+		}
+		return wikiUrl;
 	}
 
 
@@ -191,19 +188,25 @@ public class EntityParser {
 	}
 
 	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
-		if (am != null) {
+		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
 			parseMapObject(am, entity, ts);
-			String wbs = getWebSiteURL(ts);
-			if (wbs != null) {
-				am.setAdditionalInfo("website", wbs);
-			}
-			wbs = getWikipediaUrl(ts);
-			if (wbs != null) {
-				am.setAdditionalInfo("wikipedia", wbs);
-			}
-			if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
-				amenitiesList.add(am);
-			}
+			setWebsiteUrl(am, ts);
+			setWikipediaUrl(am, ts);
+			amenitiesList.add(am);
+		}
+	}
+
+	private static void setWikipediaUrl(Amenity am, Map<String, String> ts) {
+		String wbs = getWikipediaURL(ts);
+		if (wbs != null) {
+			am.setAdditionalInfo("wikipedia", wbs);
+		}
+	}
+
+	private static void setWebsiteUrl(Amenity am, Map<String, String> ts) {
+		String wbs = getWebSiteURL(ts);
+		if (wbs != null) {
+			am.setSite(wbs);
 		}
 	}
 
@@ -214,8 +217,7 @@ public class EntityParser {
 				return false;
 			}
 		}
-		return true;
-
+		return !"no".equals(a.getSubType());
 	}
 
 	public static Building parseBuilding(Entity e){
