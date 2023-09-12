@@ -63,7 +63,7 @@ public class GPXDatabase {
 	private static final String GPX_COL_COLOR = "color";
 	private static final String GPX_COL_FILE_LAST_MODIFIED_TIME = "fileLastModifiedTime";
 	private static final String GPX_COL_FILE_LAST_UPLOADED_TIME = "fileLastUploadedTime";
-	private static final String GPX_COL_FILE_CREATED_TIME = "fileCreatedTime";
+	private static final String GPX_COL_FILE_CREATION_TIME = "fileCreationTime";
 
 	private static final String GPX_COL_SPLIT_TYPE = "splitType";
 	private static final String GPX_COL_SPLIT_INTERVAL = "splitInterval";
@@ -125,7 +125,7 @@ public class GPXDatabase {
 			GPX_COL_COLOR + " TEXT, " +
 			GPX_COL_FILE_LAST_MODIFIED_TIME + " long, " +
 			GPX_COL_FILE_LAST_UPLOADED_TIME + " long, " +
-			GPX_COL_FILE_CREATED_TIME + " long, " +
+			GPX_COL_FILE_CREATION_TIME + " long, " +
 			GPX_COL_SPLIT_TYPE + " int, " +
 			GPX_COL_SPLIT_INTERVAL + " double, " +
 			GPX_COL_API_IMPORTED + " int, " + // 1 = true, 0 = false
@@ -171,7 +171,7 @@ public class GPXDatabase {
 			GPX_COL_COLOR + ", " +
 			GPX_COL_FILE_LAST_MODIFIED_TIME + ", " +
 			GPX_COL_FILE_LAST_UPLOADED_TIME + ", " +
-			GPX_COL_FILE_CREATED_TIME + ", " +
+			GPX_COL_FILE_CREATION_TIME + ", " +
 			GPX_COL_SPLIT_TYPE + ", " +
 			GPX_COL_SPLIT_INTERVAL + ", " +
 			GPX_COL_API_IMPORTED + ", " +
@@ -233,8 +233,8 @@ public class GPXDatabase {
 			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL";
 
 	private static final String GPX_MIN_CREATE_DATE = "SELECT " +
-			"MIN(" + GPX_COL_FILE_CREATED_TIME + ") " +
-			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATED_TIME +
+			"MIN(" + GPX_COL_FILE_CREATION_TIME + ") " +
+			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME +
 			" != 0";
 
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
@@ -261,7 +261,7 @@ public class GPXDatabase {
 		private double splitInterval;
 		private long fileLastModifiedTime;
 		private long fileLastUploadedTime;
-		private long fileCreateTime;
+		private long fileCreationTime;
 		private boolean importedByApi;
 		private boolean showAsMarkers;
 		private boolean joinSegments;
@@ -325,7 +325,7 @@ public class GPXDatabase {
 			minFilterAltitude = AltitudeFilter.getMinFilterAltitude(extensions);
 			maxFilterAltitude = AltitudeFilter.getMaxFilterAltitude(extensions);
 			maxFilterHdop = HdopFilter.getMaxFilterHdop(extensions);
-			fileCreateTime = gpxFile.metadata.time;
+			fileCreationTime = gpxFile.metadata.time;
 		}
 
 		public File getFile() {
@@ -349,8 +349,8 @@ public class GPXDatabase {
 			return width;
 		}
 
-		public long getFileCreateTime() {
-			return fileCreateTime;
+		public long getFileCreationTime() {
+			return fileCreationTime;
 		}
 
 		public long getFileLastModifiedTime() {
@@ -591,7 +591,7 @@ public class GPXDatabase {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_NEAREST_CITY_NAME + " TEXT");
 		}
 		if (oldVersion < 16) {
-			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_CREATED_TIME + " long");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_CREATION_TIME + " long");
 		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
 	}
@@ -642,7 +642,7 @@ public class GPXDatabase {
 				String fileName = getFileName(item.file);
 				String fileDir = getFileDir(item.file);
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
-								GPX_COL_FILE_CREATED_TIME + " = ? " +
+								GPX_COL_FILE_CREATION_TIME + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] {fileCreatedTime, fileName, fileDir});
 				item.fileLastUploadedTime = fileCreatedTime;
@@ -1010,7 +1010,7 @@ public class GPXDatabase {
 		rowsMap.put(GPX_COL_COLOR, color);
 		rowsMap.put(GPX_COL_FILE_LAST_MODIFIED_TIME, item.file.lastModified());
 		rowsMap.put(GPX_COL_FILE_LAST_UPLOADED_TIME, item.fileLastUploadedTime);
-		rowsMap.put(GPX_COL_FILE_CREATED_TIME, item.fileCreateTime);
+		rowsMap.put(GPX_COL_FILE_CREATION_TIME, item.fileCreationTime);
 		rowsMap.put(GPX_COL_SPLIT_TYPE, item.splitType);
 		rowsMap.put(GPX_COL_SPLIT_INTERVAL, item.splitInterval);
 		rowsMap.put(GPX_COL_API_IMPORTED, item.importedByApi ? 1 : 0);
@@ -1128,7 +1128,7 @@ public class GPXDatabase {
 		String color = query.getString(18);
 		long fileLastModifiedTime = query.getLong(19);
 		long fileLastUploadedTime = query.getLong(20);
-		long fileCreateTime = query.isNull(21) ? -Long.MAX_VALUE : query.getLong(21);
+		long fileCreateTime = query.isNull(21) ? -1 : query.getLong(21);
 		int splitType = query.getInt(22);
 		double splitInterval = query.getDouble(23);
 		boolean apiImported = query.getInt(24) == 1;
@@ -1185,7 +1185,7 @@ public class GPXDatabase {
 		item.color = GPXUtilities.parseColor(color, 0);
 		item.fileLastModifiedTime = fileLastModifiedTime;
 		item.fileLastUploadedTime = fileLastUploadedTime;
-		item.fileCreateTime = fileCreateTime;
+		item.fileCreationTime = fileCreateTime;
 		item.splitType = splitType;
 		item.splitInterval = splitInterval;
 		item.importedByApi = apiImported;
@@ -1215,7 +1215,7 @@ public class GPXDatabase {
 	}
 
 	public long getTracksMinCreateDate() {
-		long minDate = 0;
+		long minDate = -1;
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -1236,7 +1236,7 @@ public class GPXDatabase {
 		return minDate;
 	}
 
-	public ArrayList<String> getNearestCityList() {
+	public List<String> getNearestCityList() {
 		ArrayList<String> nearestCities = new ArrayList<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {

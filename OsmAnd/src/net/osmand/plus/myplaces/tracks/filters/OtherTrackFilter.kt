@@ -9,11 +9,9 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.OTHER
 class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: FilterChangedListener) :
 	BaseTrackFilter(R.string.shared_string_other, OTHER, filterChangedListener) {
 
-	override var enabled: Boolean = false
-		get() {
-			return isVisibleOnMap || hasWaypoints
-		}
-
+	override fun isEnabled(): Boolean {
+		return isVisibleOnMap || hasWaypoints
+	}
 	@Expose
 	var isVisibleOnMap: Boolean = false
 		set(value) {
@@ -28,17 +26,20 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 			filterChangedListener.onFilterChanged()
 		}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		if (isVisibleOnMap) {
 			val selectedGpxHelper = app.selectedGpxHelper
-			selectedGpxHelper.getSelectedFileByPath(trackItem.path) ?: return true
-		}
-		if (hasWaypoints) {
-			if (trackItem.dataItem?.analysis?.wptPoints == 0) {
+			if(selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null){
 				return true
 			}
 		}
-		return false
+		if (hasWaypoints) {
+			val wptPointsCount = trackItem.dataItem?.analysis?.wptPoints ?: 0
+			if (wptPointsCount > 0) {
+				return true
+			}
+		}
+		return !isVisibleOnMap && !hasWaypoints
 	}
 
 	fun getSelectedParamsCount(): Int {

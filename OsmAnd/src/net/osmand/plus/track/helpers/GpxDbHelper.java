@@ -16,7 +16,6 @@ import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -326,7 +325,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
 				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreateTime() == -Long.MAX_VALUE
+				|| item.getFileCreationTime() == -1
 				;
 	}
 

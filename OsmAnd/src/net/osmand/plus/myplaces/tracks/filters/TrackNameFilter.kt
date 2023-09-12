@@ -13,16 +13,30 @@ class TrackNameFilter(filterChangedListener: FilterChangedListener)
 	@Expose
 	var value = ""
 		set(value) {
+			if (!Algorithms.stringsEqual(field, value)) {
+				updateMatcher()
+			}
 			field = value
-			enabled = !Algorithms.isEmpty(value)
 			filterChangedListener.onFilterChanged()
 		}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		val namePart: String = value
-		val matcher = SearchPhrase.NameStringMatcher(
-			namePart.trim { it <= ' ' },
+	private fun updateMatcher() {
+		nameMatcher = createMatcher()
+	}
+
+	private var nameMatcher = createMatcher()
+
+	private fun createMatcher(): SearchPhrase.NameStringMatcher {
+		return SearchPhrase.NameStringMatcher(
+			value.trim { it <= ' ' },
 			CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
-		return !matcher.matches(trackItem.name)
+	}
+
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		return nameMatcher.matches(trackItem.name)
+	}
+
+	override fun isEnabled(): Boolean {
+		return !Algorithms.isEmpty(value)
 	}
 }

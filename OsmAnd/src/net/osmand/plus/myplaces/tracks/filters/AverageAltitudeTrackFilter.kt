@@ -11,14 +11,16 @@ class AverageAltitudeTrackFilter(
 	RangeTrackFilter(app, R.string.average_altitude, AVERAGE_ALTITUDE, filterChangedListener) {
 	override val unitResId = R.string.m
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (isEnabled()) {
 			val elevation = trackItem.dataItem?.analysis?.avgElevation
 			if (elevation == null || (elevation == 0.0)) {
-				return true
+				return false
 			}
-			return elevation < getValueFrom() || elevation > getValueTo()
+			return elevation > getValueFrom() && elevation < getValueTo()
+					|| elevation < minValue && getValueFrom() == minValue
+					|| elevation > maxValue && getValueTo() == maxValue
 		}
-		return false
+		return true
 	}
 }

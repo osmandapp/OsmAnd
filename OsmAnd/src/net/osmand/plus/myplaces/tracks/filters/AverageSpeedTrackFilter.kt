@@ -8,6 +8,9 @@ import net.osmand.plus.settings.enums.MetricsConstants
 
 class AverageSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener)
 	: RangeTrackFilter(app, R.string.average_speed, AVERAGE_SPEED, filterChangedListener) {
+
+	private var coef = 1f
+
 	override val unitResId: Int
 		get() {
 			val settings = app.settings
@@ -24,27 +27,32 @@ class AverageSpeedTrackFilter(app: OsmandApplication, filterChangedListener: Fil
 			}
 		}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (isEnabled()) {
 			val avgSpeed = trackItem.dataItem?.analysis?.avgSpeed
 			if (avgSpeed == null || (avgSpeed == 0f)) {
-				return true
-			}
-			val settings = app.settings
-			val mc = settings.METRIC_SYSTEM.get()
-			val coef = when (mc!!) {
-				MetricsConstants.MILES_AND_METERS,
-				MetricsConstants.MILES_AND_FEET,
-				MetricsConstants.MILES_AND_YARDS -> 2.237f
-
-				MetricsConstants.NAUTICAL_MILES_AND_FEET,
-				MetricsConstants.NAUTICAL_MILES_AND_METERS -> 1.94384f
-
-				MetricsConstants.KILOMETERS_AND_METERS -> 3.6f
+				return false
 			}
 			val normalizedValue = avgSpeed * coef
-			return normalizedValue < getValueFrom() || normalizedValue > getValueTo()
+			return normalizedValue > getValueFrom() && normalizedValue < getValueTo()
+					|| normalizedValue < minValue && getValueFrom() == minValue
+					|| normalizedValue > maxValue && getValueTo() == maxValue
 		}
-		return false
+		return true
+	}
+
+	override fun updateCoef() {
+		val settings = app.settings
+		val mc = settings.METRIC_SYSTEM.get()
+		coef = when (mc!!) {
+			MetricsConstants.MILES_AND_METERS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_YARDS -> 2.237f
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> 1.94384f
+
+			MetricsConstants.KILOMETERS_AND_METERS -> 3.6f
+		}
 	}
 }

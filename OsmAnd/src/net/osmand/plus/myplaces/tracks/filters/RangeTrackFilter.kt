@@ -13,32 +13,33 @@ abstract class RangeTrackFilter(
 	filterChangedListener: FilterChangedListener)
 	: BaseTrackFilter(displayNameId, filterType, filterChangedListener) {
 	@Expose
-	private var valueFrom = 0f
-
-	@Expose
-	private var valueTo = 300f
-
-	@Expose
 	var minValue = 0f
 
 	@Expose
-	var maxValue = 300f
+	var maxValue = TrackFiltersConstants.DEFAULT_MAX_VALUE
+
+	@Expose
+	private var valueFrom = 0f
+
+	@Expose
+	private var valueTo = maxValue
 
 	open val unitResId = R.string.shared_string_minute_lowercase
 
 	fun setValueFrom(from: Float, updateListeners: Boolean = true) {
 		valueFrom = max(minValue, from)
 		valueFrom = min(valueFrom, valueTo)
-		updateEnabled()
 		if (updateListeners) {
 			filterChangedListener.onFilterChanged()
 		}
 	}
 
 	fun setValueTo(to: Float, updateListeners: Boolean = true) {
-		valueTo = min(to, maxValue)
+		valueTo = to
+		if(valueTo > maxValue) {
+			maxValue = valueTo
+		}
 		valueTo = max(valueFrom, valueTo)
-		updateEnabled()
 		if (updateListeners) {
 			filterChangedListener.onFilterChanged()
 		}
@@ -52,7 +53,9 @@ abstract class RangeTrackFilter(
 		return valueTo
 	}
 
-	private fun updateEnabled() {
-		enabled = valueFrom > minValue || valueTo < maxValue
+	override fun isEnabled(): Boolean {
+		return valueFrom > minValue || valueTo < maxValue
 	}
+
+	open fun updateCoef() {}
 }

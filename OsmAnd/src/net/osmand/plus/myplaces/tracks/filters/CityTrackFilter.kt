@@ -5,16 +5,13 @@ import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.CITY
 import net.osmand.util.Algorithms
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 	BaseTrackFilter(R.string.nearest_cities, CITY, filterChangedListener) {
 
-	override var enabled: Boolean = false
-		get() {
-			return selectedCities.size > 0
-		}
+	override fun isEnabled(): Boolean {
+		return !Algorithms.isEmpty(selectedCities)
+	}
 
 	@Expose
 	val selectedCities = ArrayList<String>()
@@ -34,12 +31,15 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 		return selectedCities.contains(city)
 	}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean { //*
+		if (!isEnabled()) {
+			return true
+		}
 		for (city in selectedCities) {
 			if (Algorithms.stringsEqual(trackItem.dataItem?.nearestCityName, city)) {
-				return false
+				return true
 			}
 		}
-		return true
+		return false
 	}
 }

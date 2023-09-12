@@ -20,7 +20,6 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
 	protected val app: OsmandApplication
 	private val nightMode: Boolean
-	private val listener: TextChangedListener? = null
 	private var expanded = false
 	private val title: TextViewEx
 	private val minFilterValue: TextViewEx
@@ -104,6 +103,7 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 			"${app.getString(R.string.shared_string_from)}, ${app.getString(filter.unitResId)}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${app.getString(filter.unitResId)}"
+		filter.updateCoef()
 		updateExpandState()
 		updateValues()
 	}
@@ -133,7 +133,7 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 			"${decimalFormat.format(filter!!.maxValue)}, ${app.getString(filter!!.unitResId)}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
-		AndroidUiHelper.updateVisibility(selectedValue, filter!!.enabled)
+		AndroidUiHelper.updateVisibility(selectedValue, filter!!.isEnabled())
 		updateSelectedValue(valueFrom, valueTo)
 	}
 
@@ -146,9 +146,5 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 			toTxt,
 			app.getString(
 				filter!!.unitResId))
-	}
-
-	interface TextChangedListener {
-		fun onTextChanged(neeText: String)
 	}
 }

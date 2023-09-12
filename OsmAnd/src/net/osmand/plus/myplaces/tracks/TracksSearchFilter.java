@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCollection.FiltersSettingsListener {
+public class TracksSearchFilter extends Filter {
 
 	private final List<TrackItem> trackItems;
 	private CallbackWithObject<List<TrackItem>> callback;
@@ -33,7 +33,6 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 
 	private void initFilters(@NonNull OsmandApplication app) {
 		tracksFilterCollection = new TrackFiltersSettingsCollection(app);
-		tracksFilterCollection.addListener(this);
 		DateCreationTrackFilter dateFilter = tracksFilterCollection.getDateFilter();
 		if (dateFilter != null) {
 			long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
@@ -65,7 +64,7 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 			for (TrackItem item : trackItems) {
 				boolean needAddTrack = true;
 				for (BaseTrackFilter filter : tracksFilterCollection.getCurrentFilters()) {
-					if (filter.getEnabled() && filter.isTrackOutOfFilterBounds(item)) {
+					if (filter.isEnabled() && !filter.isTrackAccepted(item)) {
 						needAddTrack = false;
 						break;
 					}
@@ -91,7 +90,7 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 		int appliedFiltersCount = 0;
 		for (BaseTrackFilter filter :
 				tracksFilterCollection.getCurrentFilters()) {
-			if (filter.getEnabled()) {
+			if (filter.isEnabled()) {
 				appliedFiltersCount++;
 			}
 		}
@@ -101,14 +100,6 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 	@NonNull
 	public List<BaseTrackFilter> getCurrentFilters() {
 		return tracksFilterCollection.getCurrentFilters();
-	}
-
-	@Override
-	public void onFilterChanged() {
-		TrackNameFilter nameFilter = getNameFilter();
-		if (nameFilter != null) {
-			filter(nameFilter.getValue());
-		}
 	}
 
 	public TrackNameFilter getNameFilter() {
@@ -121,8 +112,16 @@ public class TracksSearchFilter extends Filter implements TrackFiltersSettingsCo
 
 	public void resetCurrentFilters() {
 		initFilters(app);
-//		tracksFilterCollection.resetCurrentFilters();
 		filter("");
 	}
+
+	public void filter() {
+		TrackNameFilter nameFilter = getNameFilter();
+		if (nameFilter != null) {
+			filter(nameFilter.getValue());
+		}
+
+	}
+
 }
 

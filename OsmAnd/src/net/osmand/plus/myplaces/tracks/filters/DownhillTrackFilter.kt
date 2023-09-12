@@ -9,14 +9,16 @@ class DownhillTrackFilter(app: OsmandApplication, filterChangedListener: FilterC
 	RangeTrackFilter(app, R.string.shared_string_downhill, DOWNHILL, filterChangedListener) {
 	override val unitResId = R.string.m
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean { //*
+		if (isEnabled()) {
 			val elevation = trackItem.dataItem?.analysis?.diffElevationDown
 			return if (elevation == null)
-				true
+				false
 			else
-				elevation < getValueFrom() || elevation > getValueTo()
+				elevation > getValueFrom() && elevation < getValueTo()
+						|| elevation < minValue && getValueFrom() == minValue
+						|| elevation > maxValue && getValueTo() == maxValue
 		}
-		return false
+		return true
 	}
 }

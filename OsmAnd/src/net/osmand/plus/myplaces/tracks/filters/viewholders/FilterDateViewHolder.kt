@@ -136,7 +136,7 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 			valueToInput.isClickable = false
 			valueToInput.focusable = View.NOT_FOCUSABLE
 
-			AndroidUiHelper.updateVisibility(selectedValue, filter!!.enabled)
+			AndroidUiHelper.updateVisibility(selectedValue, filter!!.isEnabled())
 			selectedValue.text = String.format(
 				app.getString(R.string.track_filter_date_selected_format),
 				DATE_FORMAT.format(valueFrom),

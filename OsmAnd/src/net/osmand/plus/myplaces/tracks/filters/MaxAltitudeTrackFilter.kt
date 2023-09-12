@@ -10,17 +10,20 @@ class MaxAltitudeTrackFilter(app: OsmandApplication, filterChangedListener: Filt
 	override val unitResId = R.string.m
 
 	init {
-		maxValue = 12000f
+		maxValue = TrackFiltersConstants.ALTITUDE_MAX_VALUE
+		setValueTo(maxValue, false)
 	}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (isEnabled()) {
 			val elevation = trackItem.dataItem?.analysis?.maxElevation
 			return if (elevation == null)
-				true
+				false
 			else
-				elevation < getValueFrom() || elevation > getValueTo()
+				elevation > getValueFrom() && elevation < getValueTo()
+						|| elevation < minValue && getValueFrom() == minValue
+						|| elevation > maxValue && getValueTo() == maxValue
 		}
-		return false
+		return true
 	}
 }

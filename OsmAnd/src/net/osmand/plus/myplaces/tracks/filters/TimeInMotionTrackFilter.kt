@@ -10,14 +10,16 @@ class TimeInMotionTrackFilter(
 	filterChangedListener: FilterChangedListener) :
 	RangeTrackFilter(app, R.string.moving_time, TIME_IN_MOTION, filterChangedListener) {
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (isEnabled()) {
 			val duration = trackItem.dataItem?.analysis?.timeMoving
 			if (duration == null || (duration == 0L)) {
-				return true
+				return false
 			}
 			val durationMinutes = duration.toDouble() / 1000 / 60
-			return durationMinutes < getValueFrom() || durationMinutes > getValueTo()
+			return durationMinutes > getValueFrom() && durationMinutes < getValueTo()
+					|| durationMinutes < minValue && getValueFrom() == minValue
+					|| durationMinutes > maxValue && getValueTo() == maxValue
 		}
 		return false
 	}

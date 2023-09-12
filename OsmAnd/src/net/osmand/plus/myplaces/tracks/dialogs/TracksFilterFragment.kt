@@ -71,7 +71,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			}
 		}
 		showButton = view.findViewById(R.id.show_button)
-		showButton?.setOnClickListener { dismiss() }
+		showButton?.setOnClickListener {
+			dismiss()
+			filter.filter()
+		}
 	}
 
 	fun setupToolbar(view: View) {

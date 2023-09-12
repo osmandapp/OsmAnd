@@ -9,13 +9,15 @@ class UphillTrackFilter(app: OsmandApplication, filterChangedListener: FilterCha
 	RangeTrackFilter(app, R.string.shared_string_uphill, UPHILL, filterChangedListener) {
 	override val unitResId = R.string.m
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
-		if (enabled) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (isEnabled()) {
 			val elevation = trackItem.dataItem?.analysis?.diffElevationUp
-			return if(elevation == null)
-				true
+			return if (elevation == null)
+				false
 			else
-				elevation < getValueFrom() || elevation > getValueTo()
+				elevation > getValueFrom() && elevation < getValueTo()
+						|| elevation < minValue && getValueFrom() == minValue
+						|| elevation > maxValue && getValueTo() == maxValue
 		}
 		return false
 	}

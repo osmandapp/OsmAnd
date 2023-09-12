@@ -14,9 +14,6 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	var initialValueFrom = Date().time
 	var initialValueTo = Date().time
 
-	override var enabled: Boolean = false
-		get() = isEnabled()
-
 	@Expose
 	var valueFrom = Date().time
 		set(value) {
@@ -31,7 +28,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 			filterChangedListener.onFilterChanged()
 		}
 
-	private fun isEnabled(): Boolean {
+	override fun isEnabled(): Boolean {
 		return !isDatesEquals(initialValueFrom, valueFrom) || !isDatesEquals(
 			initialValueTo,
 			valueTo)
@@ -41,11 +38,11 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 		return DATE_FORMAT.format(day1).equals(DATE_FORMAT.format(day2))
 	}
 
-	override fun isTrackOutOfFilterBounds(trackItem: TrackItem): Boolean {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		return if (trackItem.dataItem == null)
-			true
+			false
 		else {
-			trackItem.dataItem!!.fileCreateTime < valueFrom || trackItem.dataItem!!.fileCreateTime > valueTo
+			trackItem.dataItem!!.fileCreationTime > valueFrom && trackItem.dataItem!!.fileCreationTime < valueTo
 		}
 	}
 }
