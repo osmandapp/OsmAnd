@@ -1186,7 +1186,7 @@
     <string name="poi_payment_credit_cards_yes">Cartes de crédit</string>
     <string name="poi_payment_credit_cards_no">Cartes de crédit non acceptées</string>
     <string name="poi_payment_notes_yes">Billets</string>
-    <string name="poi_payment_notes_no">Chèques non acceptés</string>
+    <string name="poi_payment_notes_no">Billets non acceptés</string>
     <string name="poi_payment_bitcoin_yes">Bitcoin</string>
     <string name="poi_payment_bitcoin_no">Bitcoin non acceptés</string>
     <string name="poi_payment_visa_yes">Visa</string>
