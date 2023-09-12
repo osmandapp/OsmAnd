@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -10,6 +11,19 @@ class MaxSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterC
 	: RangeTrackFilter(app, R.string.max_speed, MAX_SPEED, filterChangedListener) {
 
 	private var coef = 1f
+
+	@Expose
+	override var minValue: Float = 0f
+
+	@Expose
+	override var maxValue: Float = TrackFiltersConstants.DEFAULT_MAX_VALUE
+
+	@Expose
+	override var valueFrom: Float = minValue
+
+	@Expose
+	override var valueTo: Float = maxValue
+
 
 	override val unitResId: Int
 		get() {
@@ -35,14 +49,14 @@ class MaxSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterC
 			}
 
 			val normalizedValue = maxSpeed * coef
-			return normalizedValue > getValueFrom() && normalizedValue < getValueTo()
-					|| normalizedValue < minValue && getValueFrom() == minValue
-					|| normalizedValue > maxValue && getValueTo() == maxValue
+			return normalizedValue > valueFrom && normalizedValue < valueTo
+					|| normalizedValue < minValue && valueFrom == minValue
+					|| normalizedValue > maxValue && valueTo == maxValue
 		}
 		return true
 	}
 
-	override fun updateCoef() {
+	override fun initFilter() {
 		val settings = app.settings
 		val mc = settings.METRIC_SYSTEM.get()
 		coef = when (mc!!) {

@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -28,10 +29,17 @@ class LengthTrackFilter(app: OsmandApplication, filterChangedListener: FilterCha
 			}
 		}
 
-	init {
-		maxValue = TrackFiltersConstants.LENGTH_MAX_VALUE
-		setValueTo(maxValue, false)
-	}
+	@Expose
+	override var minValue: Float = 0f
+
+	@Expose
+	override var maxValue: Float = TrackFiltersConstants.LENGTH_MAX_VALUE
+
+	@Expose
+	override var valueFrom: Float = minValue
+
+	@Expose
+	override var valueTo: Float = maxValue
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		if (isEnabled()) {
@@ -41,14 +49,14 @@ class LengthTrackFilter(app: OsmandApplication, filterChangedListener: FilterCha
 			}
 			var normalizedValue = length / coef
 
-			return normalizedValue > getValueFrom() && normalizedValue < getValueTo()
-					|| normalizedValue < minValue && getValueFrom() == minValue
-					|| normalizedValue > maxValue && getValueTo() == maxValue
+			return normalizedValue > valueFrom && normalizedValue < valueTo
+					|| normalizedValue < minValue && valueFrom == minValue
+					|| normalizedValue > maxValue && valueTo == maxValue
 		}
 		return true
 	}
 
-	override fun updateCoef() {
+	override fun initFilter() {
 		val settings = app.settings
 		val mc = settings.METRIC_SYSTEM.get()
 		coef = when (mc!!) {

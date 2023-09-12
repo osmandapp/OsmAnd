@@ -72,7 +72,7 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isFloat(newText.toString(), true)) {
 					val newValue = Math.round(newText.toString().toFloat() * 1000) / 1000f
-					if (filter!!.getValueFrom() != newValue) {
+					if (filter!!.valueFrom != newValue) {
 						filter!!.setValueFrom(newValue)
 						updateValues()
 					}
@@ -85,7 +85,7 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toFloat()
-					if (filter!!.getValueTo() != newValue) {
+					if (filter!!.valueTo != newValue) {
 						filter!!.setValueTo(newValue)
 						updateValues()
 					}
@@ -103,7 +103,6 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 			"${app.getString(R.string.shared_string_from)}, ${app.getString(filter.unitResId)}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${app.getString(filter.unitResId)}"
-		filter.updateCoef()
 		updateExpandState()
 		updateValues()
 	}
@@ -118,8 +117,8 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 	}
 
 	private fun updateValues() {
-		val valueFrom = filter!!.getValueFrom()
-		val valueTo = filter!!.getValueTo()
+		val valueFrom = filter!!.valueFrom
+		val valueTo = filter!!.valueTo
 		slider.setValues(valueFrom, valueTo)
 		slider.valueFrom = filter!!.minValue
 		slider.valueTo = filter!!.maxValue

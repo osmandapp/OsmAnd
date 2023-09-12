@@ -17,4 +17,6 @@ abstract class BaseTrackFilter(
 	fun getFilerType(): FilterType {
 		return filterType
 	}
+
+	open fun initFilter() {}
 }

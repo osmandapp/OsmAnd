@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import kotlin.math.max
@@ -12,17 +11,14 @@ abstract class RangeTrackFilter(
 	filterType: FilterType,
 	filterChangedListener: FilterChangedListener)
 	: BaseTrackFilter(displayNameId, filterType, filterChangedListener) {
-	@Expose
-	var minValue = 0f
 
-	@Expose
-	var maxValue = TrackFiltersConstants.DEFAULT_MAX_VALUE
+	abstract var minValue: Float
 
-	@Expose
-	private var valueFrom = 0f
+	abstract var maxValue: Float
 
-	@Expose
-	private var valueTo = maxValue
+	abstract var valueFrom: Float
+
+	abstract var valueTo: Float
 
 	open val unitResId = R.string.shared_string_minute_lowercase
 
@@ -36,7 +32,7 @@ abstract class RangeTrackFilter(
 
 	fun setValueTo(to: Float, updateListeners: Boolean = true) {
 		valueTo = to
-		if(valueTo > maxValue) {
+		if (valueTo > maxValue) {
 			maxValue = valueTo
 		}
 		valueTo = max(valueFrom, valueTo)
@@ -45,17 +41,7 @@ abstract class RangeTrackFilter(
 		}
 	}
 
-	fun getValueFrom(): Float {
-		return valueFrom
-	}
-
-	fun getValueTo(): Float {
-		return valueTo
-	}
-
 	override fun isEnabled(): Boolean {
 		return valueFrom > minValue || valueTo < maxValue
 	}
-
-	open fun updateCoef() {}
 }

@@ -61,9 +61,13 @@ public class TracksSearchFilter extends Filter {
 			results.count = trackItems.size();
 		} else {
 			List<TrackItem> res = new ArrayList<>();
+			List<BaseTrackFilter> currentFilters = tracksFilterCollection.getCurrentFilters();
+			for (BaseTrackFilter filter : currentFilters) {
+				filter.initFilter();
+			}
 			for (TrackItem item : trackItems) {
 				boolean needAddTrack = true;
-				for (BaseTrackFilter filter : tracksFilterCollection.getCurrentFilters()) {
+				for (BaseTrackFilter filter : currentFilters) {
 					if (filter.isEnabled() && !filter.isTrackAccepted(item)) {
 						needAddTrack = false;
 						break;
