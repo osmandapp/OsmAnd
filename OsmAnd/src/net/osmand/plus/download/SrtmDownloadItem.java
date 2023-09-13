@@ -3,7 +3,7 @@ package net.osmand.plus.download;
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
+import static net.osmand.plus.download.LocalIndexType.SRTM_DATA;
 
 import android.content.Context;
 

@@ -22,7 +22,6 @@ import androidx.viewpager.widget.ViewPager;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivity;

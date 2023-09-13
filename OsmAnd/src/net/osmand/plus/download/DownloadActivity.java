@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -22,8 +23,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
+import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.AskMapDownloadFragment;
+import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.GoToMapFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
@@ -99,9 +105,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
-		setContentView(R.layout.download);
-		//noinspection ConstantConditions
-		getSupportActionBar().setTitle(R.string.shared_string_map);
+		setContentView(R.layout.download_activity);
+		updateToolbar();
+
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
 		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(this, downloadProgressLayout);
@@ -110,14 +116,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
 
 
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-				getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), LocalIndexesFragment.class));
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
-				getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
+		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
+		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalIndexesFragment.class));
+		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
-		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
+		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
 		mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -160,6 +163,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 			filterGroup = intent.getExtras().getString(FILTER_GROUP);
+		}
+	}
+
+	public void updateToolbar() {
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(R.string.shared_string_map);
 		}
 	}
 
@@ -229,7 +239,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:
-				finish();
+				onBackPressed();
 				return true;
 
 		}
@@ -323,7 +333,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		visibleBanner.updateBannerInProgress();
 	}
 
-	protected int getCurrentTab() {
+	public int getCurrentTab() {
 		return viewPager.getCurrentItem();
 	}
 
@@ -462,5 +472,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
 		pagerContent.setImportantForAccessibility(accessibility);
 		slidingTabs.setImportantForAccessibility(accessibility);
+	}
+
+	@NonNull
+	public View getLayout() {
+		return getWindow().getDecorView().findViewById(android.R.id.content);
 	}
 }

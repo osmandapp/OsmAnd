@@ -290,7 +290,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void importTracks() {
-		Intent intent = ImportHelper.getImportTrackIntent();
+		Intent intent = ImportHelper.getImportFileIntent();
 		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FILE_REQUEST);
 	}

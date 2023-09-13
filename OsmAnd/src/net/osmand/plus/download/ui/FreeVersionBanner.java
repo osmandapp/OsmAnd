@@ -1,6 +1,7 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 import android.view.View;
@@ -15,28 +16,30 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class FreeVersionBanner {
+
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final DownloadActivity activity;
+
 	private final View freeVersionBanner;
 	private final View freeVersionBannerTitle;
 	private final TextView freeVersionDescriptionTextView;
 	private final TextView downloadsLeftTextView;
 	private final ProgressBar downloadsLeftProgressBar;
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-	private final DownloadActivity activity;
-
 	private final OnClickListener onCollapseListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE && DownloadActivity.isDownloadingPermitted(settings)) {
+			if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
+					&& DownloadActivity.isDownloadingPermitted(settings)) {
 				collapseBanner();
 			} else {
 				app.logEvent("click_free_dialog");
-				ChoosePlanFragment.showInstance(activity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+				ChoosePlanFragment.showInstance(activity, UNLIMITED_MAP_DOWNLOADS);
 			}
 		}
 	};

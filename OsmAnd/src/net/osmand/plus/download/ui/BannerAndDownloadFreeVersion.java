@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import static net.osmand.plus.download.DownloadActivity.UPDATES_TAB_NUMBER;
 
@@ -16,8 +16,7 @@ import com.ibm.icu.impl.IllegalIcuArgumentException;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -61,7 +60,13 @@ public class BannerAndDownloadFreeVersion {
 		if (isFinished) {
 			progressLayout.setOnClickListener(null);
 			updateDescriptionTextWithSize(activity, progressLayout);
-			AndroidUiHelper.updateVisibility(progressLayout, activity.getCurrentTab() != UPDATES_TAB_NUMBER || showSpace);
+
+			int tab = activity.getCurrentTab();
+			if (tab == UPDATES_TAB_NUMBER || !showSpace) {
+				progressLayout.setVisibility(View.GONE);
+			} else {
+				progressLayout.setVisibility(View.VISIBLE);
+			}
 			freeVersionBanner.updateFreeVersionBanner();
 		} else {
 			freeVersionBanner.setMinimizedFreeVersionBanner(true);

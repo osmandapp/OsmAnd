@@ -1,4 +1,6 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
+
+import static net.osmand.map.WorldRegion.WORLD_BASEMAP;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,16 +14,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 
 public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = AskMapDownloadFragment.class.getSimpleName();
 
-	private static final String KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME = "key_ask_map_download_item_filename";
+	private static final String ITEM_FILENAME_KEY = "item_filename_key";
+
 	private IndexItem indexItem;
 
 	public void setIndexItem(IndexItem indexItem) {
@@ -34,7 +38,7 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
 		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
-			String itemFileName = savedInstanceState.getString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME);
+			String itemFileName = savedInstanceState.getString(ITEM_FILENAME_KEY);
 			if (itemFileName != null) {
 				indexItem = app.getDownloadThread().getIndexes().getIndexItem(itemFileName);
 			}
@@ -51,7 +55,7 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 
 		Button actionButtonOk = view.findViewById(R.id.actionButtonOk);
 		if (indexItem != null) {
-			if (indexItem.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
+			if (indexItem.getBasename().equalsIgnoreCase(WORLD_BASEMAP)) {
 				((TextView) view.findViewById(R.id.titleTextView)).setText(R.string.index_item_world_basemap);
 				((TextView) view.findViewById(R.id.descriptionTextView)).setText(R.string.world_map_download_descr);
 			}
@@ -77,7 +81,7 @@ public class AskMapDownloadFragment extends BottomSheetDialogFragment {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		if (indexItem != null) {
-			outState.putString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME, indexItem.getFileName());
+			outState.putString(ITEM_FILENAME_KEY, indexItem.getFileName());
 		}
 	}
 }

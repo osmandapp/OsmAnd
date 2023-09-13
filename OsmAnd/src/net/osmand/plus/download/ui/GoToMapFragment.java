@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_WORLD_REGION_SHOW_ON_MAP;
 
@@ -20,24 +20,25 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class GoToMapFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = GoToMapFragment.class.getSimpleName();
 
-	private static final String KEY_GOTO_MAP_REGION_CENTER = "key_goto_map_region_center";
-	private static final String KEY_GOTO_MAP_REGION_NAME = "key_goto_map_region_name";
+	private static final String REGION_NAME_KEY = "region_name_key";
+	private static final String REGION_CENTER_KEY = "region_center_key";
 
-	private LatLon regionCenter;
 	private String regionName;
-
-	public void setRegionCenter(LatLon regionCenter) {
-		this.regionCenter = regionCenter;
-	}
+	private LatLon regionCenter;
 
 	public void setRegionName(String regionName) {
 		this.regionName = regionName;
+	}
+
+	public void setRegionCenter(LatLon regionCenter) {
+		this.regionCenter = regionCenter;
 	}
 
 	@Override
@@ -45,9 +46,8 @@ public class GoToMapFragment extends BottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 
 		if (savedInstanceState != null) {
-			regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME);
-			regionName = regionName == null ? "" : regionName;
-			regionCenter = AndroidUtils.getSerializable(savedInstanceState, KEY_GOTO_MAP_REGION_CENTER, LatLon.class);
+			regionName = savedInstanceState.getString(REGION_NAME_KEY, "");
+			regionCenter = AndroidUtils.getSerializable(savedInstanceState, REGION_CENTER_KEY, LatLon.class);
 			if (regionCenter == null) {
 				regionCenter = new LatLon(0, 0);
 			}
@@ -94,7 +94,7 @@ public class GoToMapFragment extends BottomSheetDialogFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(KEY_GOTO_MAP_REGION_NAME, regionName);
-		outState.putSerializable(KEY_GOTO_MAP_REGION_CENTER, regionCenter);
+		outState.putString(REGION_NAME_KEY, regionName);
+		outState.putSerializable(REGION_CENTER_KEY, regionCenter);
 	}
 }

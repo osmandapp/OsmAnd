@@ -33,7 +33,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;

@@ -4,7 +4,7 @@ import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.plus.download.DownloadActivityType.VOICE_FILE;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.VOICE_DATA;
+import static net.osmand.plus.download.LocalIndexType.VOICE_DATA;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
