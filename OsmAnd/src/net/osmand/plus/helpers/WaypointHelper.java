@@ -345,23 +345,8 @@ public class WaypointHelper {
 				for (int r = 0; r < pointTypes.length; r++) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
-
-					// For STOP first check if it has directional info
-					// Looks like has no effect here
-					//if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-					//	if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
-					//		info = null;
-					//	}
-					//}
-
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
-							long ms = System.currentTimeMillis();
-							Long timeLastAlarm = lastAnnouncedAlarmsTime.get(info.getType());
-							if (timeLastAlarm == null || ms - timeLastAlarm > 50 * 1000) {
-								lastAnnouncedAlarmsTime.put(info.getType(), ms);
-								getVoiceRouter().announceAlarm(info, loc.getSpeed());
-							}
 							return info;
 						}
 					}
@@ -443,6 +428,7 @@ public class WaypointHelper {
 								boolean filterCloseAlarms = false;
 								switch (t) {
 									case TRAFFIC_CALMING:
+									case HAZARD:
 										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
 										filterCloseAlarms = true;
 										break;
