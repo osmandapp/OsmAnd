@@ -1,8 +1,6 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.KITKAT;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
@@ -74,8 +72,8 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -422,7 +420,7 @@ public class ImportHelper {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				Intent intent = getImportTrackIntent();
+				Intent intent = getImportFileIntent();
 				ActivityResultListener listener = getImportFileResultListener(importType, callback);
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);
@@ -464,10 +462,9 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	public static Intent getImportTrackIntent() {
+	public static Intent getImportFileIntent() {
 		Intent intent = new Intent();
-		String action = SDK_INT >= KITKAT ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT;
-		intent.setAction(action);
+		intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
 		return intent;
 	}

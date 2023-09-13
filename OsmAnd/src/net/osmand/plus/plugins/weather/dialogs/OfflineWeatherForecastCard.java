@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.weather.dialogs;
 
 import static android.text.format.DateUtils.WEEK_IN_MILLIS;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
+import static net.osmand.plus.download.LocalIndexType.WEATHER_DATA;
 import static net.osmand.plus.download.ui.LocalIndexOperationTask.DELETE_OPERATION;
 
 import android.os.AsyncTask;

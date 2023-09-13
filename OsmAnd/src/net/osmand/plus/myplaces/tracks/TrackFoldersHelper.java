@@ -367,7 +367,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	private void importTracks(@NonNull BaseTrackFolderFragment fragment) {
-		Intent intent = ImportHelper.getImportTrackIntent();
+		Intent intent = ImportHelper.getImportFileIntent();
 		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 		AndroidUtils.startActivityForResultIfSafe(fragment, intent, IMPORT_FILE_REQUEST);
 	}

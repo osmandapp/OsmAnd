@@ -354,6 +354,7 @@ public class ChartUtils {
 		l.setEnabled(false);
 	}
 
+	@NonNull
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart chart,
 	                                              @NonNull RouteStatistics routeStatistics,

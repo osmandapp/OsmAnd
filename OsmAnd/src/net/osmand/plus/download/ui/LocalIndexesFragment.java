@@ -47,7 +47,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexOperationTask.OperationListener;
@@ -876,7 +876,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				if (child.isBackupedData()) {
 					colorId = R.color.color_unknown;
 				}
-				icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource(), colorId));
+				icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconId(), colorId));
 
 				nameTextView.setText(getNameToDisplay(child));
 				if (child.isNotSupported()) {

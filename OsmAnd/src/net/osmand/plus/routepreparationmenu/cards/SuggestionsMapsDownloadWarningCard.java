@@ -248,12 +248,4 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			updateSize();
 		}
 	}
-
-	@Override
-	public void downloadInProgress() {
-	}
-
-	@Override
-	public void downloadHasFinished() {
-	}
 }

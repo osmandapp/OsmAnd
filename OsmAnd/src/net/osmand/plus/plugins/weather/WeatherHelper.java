@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
+import static net.osmand.plus.download.LocalIndexType.WEATHER_DATA;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
