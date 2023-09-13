@@ -5401,4 +5401,15 @@
     <string name="help_article_personal_import_export_name">Import / Export</string>
     <string name="help_article_plan_route_name">Planificarea traseului</string>
     <string name="help_article_personal_storage_name">Depozitare</string>
+    <string name="help_article_search_search_coordinates_name">Coordonate de căutare</string>
+    <string name="help_article_start_with_main_menu_name">Meniul principal</string>
+    <string name="help_article_purchases_giveaway_name">Dăruiește</string>
+    <string name="help_article_start_with_first_steps_name">Primii pași</string>
+    <string name="help_article_troubleshooting_general_name">General</string>
+    <string name="help_article_personal_profiles_name">Profiluri (Setări)</string>
+    <string name="help_article_purchases_android_name">Achiziții Android</string>
+    <string name="help_article_plan_route_web_name">Planificator de rute web</string>
+    <string name="help_article_purchases_ios_name">Achiziții iOS</string>
+    <string name="help_article_search_search_all_name">Căutați toate</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Jurnale de accident</string>
 </resources>
