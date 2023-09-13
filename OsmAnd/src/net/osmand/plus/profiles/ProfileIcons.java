@@ -30,6 +30,8 @@ public enum ProfileIcons {
 	SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark"),
 	AIRCRAFT(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft"),
 	HELICOPTER(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter"),
+	PARAGLIDING(R.drawable.ic_action_paragliding, R.string.app_mode_paragliding, "ic_action_paragliding"),
+	HANG_GLIDING(R.drawable.ic_aciton_hang_gliding, R.string.app_mode_hang_gliding, "ic_aciton_hang_gliding"),
 	TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter"),
 	MONOWHEEL(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel"),
 	SCOOTER(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter"),
