@@ -2047,7 +2047,7 @@
     <string name="poi_vehicle_forestry">车辆通行：林业</string>
     <string name="poi_snowmobile_private">雪地摩托通行：私人</string>
     <string name="poi_snowmobile_no">雪地摩托通行：否</string>
-    <string name="poi_snowmobile_permissive">默许；雪地摩托默许通行</string>
+    <string name="poi_snowmobile_permissive">准许；雪地摩托准许通行</string>
     <string name="poi_embassy_yes">由大使领导</string>
     <string name="poi_consulate_yes">由一名领事领导</string>
     <string name="poi_refugee_site">难民营</string>
@@ -2694,4 +2694,7 @@
     <string name="poi_gambling_bingo">宾果</string>
     <string name="poi_coworking_space">共享办公空间</string>
     <string name="poi_cuisine_syrian">叙利亚菜系</string>
+    <string name="poi_via_ferrata_scale">困难</string>
+    <string name="poi_via_ferrata">铁索攀岩（飞拉达）</string>
+    <string name="poi_service_vehicle_muffler_yes">消音器</string>
 </resources>

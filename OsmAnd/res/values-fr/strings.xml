@@ -369,10 +369,10 @@
 \nSeules les cartes déjà installées seront accessibles.</string>
     <string name="unzipping_file">Décompression du fichier…</string>
     <string name="route_tr">Tournez à droite</string>
-    <string name="route_tshr">Tournez franchement à droite</string>
+    <string name="route_tshr">Prenez le virage serré à droite et continuez</string>
     <string name="route_tslr">Tournez légèrement vers la droite et continuez</string>
     <string name="route_tl">Tournez à gauche</string>
-    <string name="route_tshl">Tournez franchement à gauche</string>
+    <string name="route_tshl">Prenez le virage serré à gauche et continuez</string>
     <string name="route_tsll">Tournez légèrement vers la gauche et continuez</string>
     <string name="route_tu">Faites demi-tour et continuez</string>
     <string name="route_head">Avancez</string>

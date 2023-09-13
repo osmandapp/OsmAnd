@@ -5397,4 +5397,8 @@
     <string name="help_article_map_raster_maps_name">Hărți Raster (online / offline)</string>
     <string name="help_article_map_legend_ski_map_name">Stilul hărții de schi</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Despre OsmAnd rute</string>
+    <string name="help_article_plan_route_coordinate_input_name">Introducerea coordonatelor</string>
+    <string name="help_article_personal_import_export_name">Import / Export</string>
+    <string name="help_article_plan_route_name">Planificarea traseului</string>
+    <string name="help_article_personal_storage_name">Depozitare</string>
 </resources>

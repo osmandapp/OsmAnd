@@ -5111,47 +5111,47 @@
     <string name="map_2d_mode_action">2D 模式</string>
     <string name="map_3d_mode_action">3D 模式</string>
     <string name="mtb_imba_full">国际山地自行车协会</string>
-    <string name="release_4_5">• BLE/ANT+ 传感器：重新设计的连接，将接收到的数据写入 GPX 并查看
+    <string name="release_4_5">- BLE/ANT+ 传感器：重新设计的连接，将接收到的数据写入 GPX 并查看
 \n
-\n • 向 “OsmAnd 云端” 免费备份收藏夹和设置
+\n - 向 \"OsmAnd 云 \"免费备份收藏夹和设置
 \n
-\n • 支持 3D 浮雕的新地形图格式
+\n - 支持 3D 浮雕的新地形图形式
 \n
-\n • 轨迹管理：更新用户界面，增加排序功能，支持嵌套文件夹
+\n - 轨迹管理：更新用户界面，增加排序功能，支持嵌套文件夹
 \n
-\n • Android Auto：用于访问收藏、轨迹和 POI 类别的新开始菜单
+\n - Android Auto：用于访问收藏、轨迹和 POI 类别的新开始菜单
 \n
-\n • 顶部/底部面板的部件列表
+\n - 顶部/底部面板的部件列表
 \n
-\n • 新的 “火车”配置文件，允许计算铁路路线
+\n - 新的 \"火车 \"配置文件，允许计算铁路路线
 \n
-\n • 等高线可与任何 “地图源” 配合使用
+\n - 轮廓线可与任何 \"地图源 \"配合使用
 \n
-\n • 扩展了外部键盘的默认操作列表
+\n - 扩展了外部键盘的默认操作列表
 \n
-\n • 自定义路线文件，增加了删除或覆盖选项
+\n - 自定义路线文件，增加了删除或覆盖选项
 \n
-\n • 增加了 “宣布路线偏离” 选项
+\n - 增加了 \"宣布路线偏离 \"选项
 \n
-\n • 开始屏幕：添加了从文件恢复 OsmAnd 状态的选项
+\n - 开始屏幕：添加了从文件恢复 OsmAnd 状态的选项
 \n
-\n • 添加了 “危险物质” 分类，用于北美地区的卡车导航
+\n - 添加了 \"危险材料 \"类别 北美地区的卡车导航
 \n
-\n • 为行人路线添加了 \"Via ferrata \"支持
+\n - 为步行路线添加了 \"铁索攀岩\"支持
 \n
-\n • 为路线难度分类添加了 \"CAI \"量表
+\n - 为路线难度分类添加了 \"CAI \"分级表
 \n
-\n • 修复了每个应用程序的语言选择
+\n - 修复了每个应用程序的语言选择
 \n
-\n • 添加了对主题图标的支持
+\n - 添加了对主题图标的支持
 \n
-\n • OsmAnd 云端：添加了删除账户选项
+\n - OsmAnd 云：添加了删除账户选项
 \n
-\n • 无障碍：按钮的触摸目标尺寸改为 48 dp；修复了屏幕阅读器可看到地图 UI 的问题
+\n - 可访问性：按钮的触摸目标尺寸改为 48 dp；修复了屏幕阅读器可看到地图 UI 的问题
 \n
-\n • 重新制作了日语语音提示
+\n - 重新制作了日语语音提示
 \n
-\n • 重新设计了海拔变化和坡度评估
+\n - 重新设计了海拔变化和坡度评估
 \n
 \n</string>
     <string name="help_article_map_tracks_on_map_name">轨迹与路线</string>
@@ -5406,4 +5406,5 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">自行车路线规划（山地车）</string>
     <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="rendering_value_defaultMedium_name">默认（中等）</string>
+    <string name="routing_attr_allow_via_ferrata_name">山腰路线（铁索攀岩）</string>
 </resources>

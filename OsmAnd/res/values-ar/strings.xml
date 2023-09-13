@@ -1246,7 +1246,7 @@
     <string name="arrival_distance_factor_early">مبكر</string>
     <string name="arrival_distance_factor_normally">طبيعي</string>
     <string name="arrival_distance_factor_late">متأخر</string>
-    <string name="arrival_distance_factor_at_last">في الأمتار الأخيرة</string>
+    <string name="arrival_distance_factor_at_last">متأخر جدا</string>
     <string name="index_name_netherlands">أوربا - هولندا</string>
     <string name="keep_informing">إعادة تعليمات الملاحة</string>
     <string name="shared_string_release">تم</string>
@@ -1331,7 +1331,7 @@
     <string name="sd_dir_not_accessible">لا يمكن الوصول لمجلد البيانات على الذاكرة!</string>
     <string name="mark_final_location_first">حدد الوجهة أولا</string>
     <string name="downloading_list_indexes">جار تحميل قائمة المناطق المتاحة…</string>
-    <string name="list_index_files_was_not_loaded">لم يتم تحميل قائمة المناطق من osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">تعذر جلب قائمة المناطق من https://osmand.net.</string>
     <string name="error_occurred_saving_gpx">خطأ أثناء حفظ GPX.</string>
     <string name="error_calculating_route">تعذر حساب المسار.</string>
     <string name="error_calculating_route_occured">حدث خطأ أثناء حساب الطريق.</string>
@@ -2259,7 +2259,7 @@
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">قم بشراء وتثبيت الملحق المساعد \"الطبوغرافيا\" لإظهار المناطق المرتفعة المتدرجة.</string>
-    <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
+    <string name="animate_my_location_desc">تحريك الخريطة بشكل سلس أثناء الحركة. يقدم تأخير طفيف.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقاً لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقا تصبح الوجهة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقا (إن وجدت).</string>
