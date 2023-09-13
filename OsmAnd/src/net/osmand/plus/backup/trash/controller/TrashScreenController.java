@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.trash.ScreenItem;
 import net.osmand.plus.backup.trash.TrashUtils;
 import net.osmand.plus.backup.trash.data.TrashGroup;
@@ -42,6 +43,13 @@ public class TrashScreenController {
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
+
+		BackupHelper backupHelper = app.getBackupHelper();
+		if (backupHelper.isBackupPreparing()) {
+			screenItems.add(new ScreenItem(BACKUP_STATUS_HEADER));
+			screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
+			return screenItems;
+		}
 
 		List<TrashGroup> trashData = trashUtils.collectSortedTrashData();
 		if (!Algorithms.isEmpty(trashData)) {

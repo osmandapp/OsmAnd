@@ -30,6 +30,7 @@ import net.osmand.plus.backup.trash.viewholder.EmptyBannerViewHolder;
 import net.osmand.plus.backup.trash.viewholder.HeaderViewHolder;
 import net.osmand.plus.backup.trash.viewholder.SpaceViewHolder;
 import net.osmand.plus.backup.trash.viewholder.TrashItemViewHolder;
+import net.osmand.plus.backup.ui.status.StatusViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -66,6 +67,8 @@ public class TrashScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		switch (type) {
 			case ALERT_CARD:
 				return new AlertCardViewHolder(inflate(R.layout.card_trash_alert));
+			case BACKUP_STATUS_HEADER:
+				return new StatusViewHolder(inflate(R.layout.backup_status_header), isNightMode());
 			case CARD_DIVIDER:
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case HEADER:
@@ -116,6 +119,9 @@ public class TrashScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
 			boolean dividerNeeded = nextItem != null && nextItem.type == TRASH_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
+
+		} else if (holder instanceof StatusViewHolder) {
+			((StatusViewHolder) holder).bindView();
 		}
 	}
 

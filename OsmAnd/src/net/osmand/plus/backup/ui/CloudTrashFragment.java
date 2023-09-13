@@ -20,6 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.trash.TrashScreenAdapter;
 import net.osmand.plus.backup.trash.TrashUtils.TrashDataUpdatedListener;
 import net.osmand.plus.backup.trash.controller.TrashScreenController;
@@ -28,17 +32,22 @@ import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.Confi
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class CloudTrashFragment extends BaseOsmAndFragment implements ConfirmationDialogListener, TrashDataUpdatedListener {
+public class CloudTrashFragment extends BaseOsmAndFragment implements ConfirmationDialogListener, TrashDataUpdatedListener, OnPrepareBackupListener {
 
 	public static final String TAG = CloudTrashFragment.class.getSimpleName();
 
 	private TrashScreenAdapter adapter;
 	private TrashScreenController controller;
 
+	private NetworkSettingsHelper settingsHelper;
+	private BackupHelper backupHelper;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		controller = new TrashScreenController(app, this);
+		settingsHelper = app.getNetworkSettingsHelper();
+		backupHelper = app.getBackupHelper();
 	}
 
 	@Nullable
@@ -53,8 +62,11 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
 
-		updateViewContent();
-
+		if (shouldPrepareBackup()) {
+			backupHelper.prepareBackup();
+		} else {
+			updateViewContent();
+		}
 		setupToolbar(view);
 		return view;
 	}
@@ -93,12 +105,23 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 	}
 
 	@Override
+	public void onBackupPreparing() {
+		updateViewContent();
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		updateViewContent();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
 		}
+		backupHelper.addPrepareBackupListener(this);
 	}
 
 	@Override
@@ -108,6 +131,13 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+		backupHelper.removePrepareBackupListener(this);
+	}
+
+	private boolean shouldPrepareBackup() {
+		return !settingsHelper.isBackupSyncing()
+				&& !backupHelper.isBackupPreparing()
+				&& backupHelper.getBackup().getBackupInfo() == null;
 	}
 
 	@Nullable

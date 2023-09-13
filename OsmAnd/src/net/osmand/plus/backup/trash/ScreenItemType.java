@@ -2,6 +2,7 @@ package net.osmand.plus.backup.trash;
 
 public enum ScreenItemType {
 	ALERT_CARD,
+	BACKUP_STATUS_HEADER,
 	CARD_DIVIDER,
 	HEADER,
 	TRASH_ITEM,
