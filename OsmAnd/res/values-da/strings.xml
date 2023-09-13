@@ -5440,4 +5440,6 @@
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
     <string name="app_mode_baby_transport">Baby-transport</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="app_mode_hang_gliding">Hanggliding</string>
 </resources>
