@@ -3144,12 +3144,12 @@
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
-    <string name="month">hónap</string>
-    <string name="months_2_4">hónap</string>
-    <string name="months_5">hónap</string>
-    <string name="year">év</string>
-    <string name="years_2_4">év</string>
-    <string name="years_5">év</string>
+    <string name="month">hónapra</string>
+    <string name="months_2_4">hónapra</string>
+    <string name="months_5">hónapra</string>
+    <string name="year">évre</string>
+    <string name="years_2_4">évre</string>
+    <string name="years_5">évre</string>
     <string name="months_3">három hónap</string>
     <string name="price_free">Ingyenes</string>
     <string name="cancel_subscription">Előfizetés törlése</string>
@@ -5437,7 +5437,7 @@
     <string name="app_mode_hang_gliding">Sárkányrepülés</string>
     <string name="with_waypoints">Útpontokkal</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Max magasság</string>
+    <string name="max_altitude">Legnagyobb magasság</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Szűrés név alapján</string>
     <string name="shared_string_reset_all">Összes visszaállítása</string>
