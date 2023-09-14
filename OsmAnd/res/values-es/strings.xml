@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nToque prolongado para las opciones"</string>
+\nPulsación larga para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -5435,4 +5435,6 @@
 \n
 \n</string>
     <string name="app_mode_baby_transport">Cochecito</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
 </resources>
