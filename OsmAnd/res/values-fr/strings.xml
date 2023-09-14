@@ -5426,4 +5426,6 @@
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transport de bébés</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_hang_gliding">Deltaplane</string>
 </resources>
