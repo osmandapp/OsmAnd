@@ -4612,4 +4612,19 @@
     <string name="poi_health_specialty_infectious_diseases_yes">Maladie infectieuses</string>
     <string name="poi_health_specialty_dialysis_yes">Dialyse</string>
     <string name="poi_health_specialty_blood_check_yes">Analyse sanguine</string>
+    <string name="poi_socket_typee_output_medium">Moyen</string>
+    <string name="poi_socket_typee_voltage_filter">Tension des prises Type E</string>
+    <string name="poi_socket_typee_current">Prise de courant : Type E : courant</string>
+    <string name="poi_socket_typee_output_high">Haut</string>
+    <string name="poi_socket_typee_voltage_high">Haut</string>
+    <string name="poi_socket_typee">Prise de courant : Type E</string>
+    <string name="poi_socket_typee_output_low">Bas</string>
+    <string name="poi_health_specialty_massage_therapy_yes">Thérapie de massage</string>
+    <string name="poi_socket_typee_voltage_low">Bas</string>
+    <string name="poi_socket_typee_output_filter">Nombre de câbles avec prises Type E</string>
+    <string name="poi_health_specialty_community_yes">Communauté</string>
+    <string name="poi_health_specialty_intensive_yes">Intensif</string>
+    <string name="poi_socket_typee_voltage_medium">Moyen</string>
+    <string name="poi_socket_typee_voltage">Prise de courant : Type E : tension</string>
+    <string name="poi_socket_typee_output">Prise de courant : Type E : sortie</string>
 </resources>
