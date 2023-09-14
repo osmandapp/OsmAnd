@@ -3620,7 +3620,7 @@
     <string name="shared_string_meters">metri</string>
     <string name="details_dialog_decr">Mostra o nasconde i dettagli aggiuntivi della mappa</string>
     <string name="shared_string_night_map">Mappa notturna</string>
-    <string name="shared_string_tones">toni</string>
+    <string name="shared_string_tones">ton</string>
     <string name="add_online_source">Aggiungi sorgente online</string>
     <string name="clear_tiles_warning">Applicando questi cambiamenti, i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
     <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
@@ -5423,4 +5423,5 @@
     <string name="shared_string_temperature">Tempertura</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Informazioni sulla navigazione di OsmAnd</string>
     <string name="hillshade_slope">Ombreggiatura dei rilievi, Pendenza</string>
+    <string name="app_mode_baby_transport">Trasporto bebè</string>
 </resources>

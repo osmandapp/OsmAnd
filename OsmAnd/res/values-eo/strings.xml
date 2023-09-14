@@ -2344,7 +2344,7 @@
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
     <string name="animate_my_location">Movbildi pozicion</string>
-    <string name="animate_my_location_desc">Aktivigi animitan pligrandigadon de mapo al mia pozicio dum navigado.</string>
+    <string name="animate_my_location_desc">Glata pligrandigado de mapo dum moviĝi. Kaŭzas etan prokraston.</string>
     <string name="favorite_group_name">Grupa nomo</string>
     <string name="change_color">Ŝanĝi koloron</string>
     <string name="edit_name">Redakti nomon</string>
@@ -5419,4 +5419,15 @@
     <string name="report_an_issues">Raporti problemon</string>
     <string name="copy_build_version">Kopii version de kompilaĵo</string>
     <string name="most_viewed">Ofte legataj</string>
+    <string name="app_mode_baby_transport">Transporto de beboj</string>
+    <string name="release_4_6">• nova fenestraĵo: glisrilato
+\n
+\n• aldonis fenestraĵon ANT+: temperaturo
+\n
+\n• pli bona mastrumado de memoro por grandaj GPX-spuroj
+\n
+\n</string>
+    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
+    <string name="sensor_temperature_desc">Montras temperaturon de sentilo</string>
+    <string name="shared_string_temperature">Temperaturo</string>
 </resources>

@@ -120,14 +120,14 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private static class SortModeViewHolder extends RecyclerView.ViewHolder {
+	public static class SortModeViewHolder extends RecyclerView.ViewHolder {
 
-		private final TextView title;
-		private final ImageView groupTypeIcon;
-		private final ImageView selectedIcon;
-		private final View divider;
+		public final TextView title;
+		public final ImageView groupTypeIcon;
+		public final ImageView selectedIcon;
+		public final View divider;
 
-		SortModeViewHolder(@NonNull View itemView) {
+		public SortModeViewHolder(@NonNull View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			groupTypeIcon = itemView.findViewById(R.id.icon);

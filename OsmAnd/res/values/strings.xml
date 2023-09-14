@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="app_mode_hang_gliding">Hang gliding</string>
+    <string name="app_mode_paragliding">Paragliding</string>
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">

@@ -5349,4 +5349,14 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
+    <string name="release_4_6">- Widget Poměru klouzavosti 
+\n
+\n - Přidán widget teploty ANT+
+\n
+\n - Lepší správa paměti pro velké stopy GPX
+\n
+\n</string>
+    <string name="app_mode_baby_transport">Přeprava dětí</string>
+    <string name="sensor_temperature_desc">Zobrazuje teplotu ze snímače</string>
+    <string name="shared_string_temperature">Teplota</string>
 </resources>

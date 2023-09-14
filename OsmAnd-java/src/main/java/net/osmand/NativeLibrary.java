@@ -388,6 +388,7 @@ public class NativeLibrary {
 		// look for a pre-installed library
 		if (path != null && path.length() > 0) {
 			try {
+				System.out.printf("Loading native library %s...\n ", path + "/" + System.mapLibraryName(libBaseName));
 				System.load(path + "/" + System.mapLibraryName(libBaseName));
 				return true;
 			} catch (UnsatisfiedLinkError e) {
