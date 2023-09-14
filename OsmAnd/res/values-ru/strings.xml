@@ -5405,5 +5405,5 @@
     <string name="telegram_chats">Чаты Telegram</string>
     <string name="open_issue_on_github_descr">Задать вопрос, предложить функционал</string>
     <string name="send_crash_log_descr">Содержит только информацию о сбоях</string>
-    <string name="open_issue_on_github">Открыть тему на GitHub</string>
+    <string name="open_issue_on_github">Открыть issue на GitHub</string>
 </resources>
