@@ -214,6 +214,14 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getItems();
 	}
 
+	public List<String> getNearestCityList() {
+		return database.getNearestCityList();
+	}
+
+	public long getTracksMinCreateDate() {
+		return database.getTracksMinCreateDate();
+	}
+
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
@@ -316,7 +324,9 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
-				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0;
+				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
+				|| item.getFileCreationTime() == -1
+				;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {

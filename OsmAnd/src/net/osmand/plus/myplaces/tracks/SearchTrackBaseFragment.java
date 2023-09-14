@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageButton;
 
 import androidx.annotation.ColorRes;
@@ -35,6 +36,7 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -91,11 +93,6 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
-		adapter.setFilterCallback(filteredItems -> {
-			adapter.updateFilteredItems(filteredItems);
-			updateButtonsState();
-			return true;
-		});
 		if (fragment instanceof EmptyTracksListener) {
 			adapter.setImportTracksListener((EmptyTracksListener) fragment);
 		}
@@ -126,6 +123,13 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		searchEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
+		adapter.setFilterCallback(filteredItems -> {
+			searchEditText.setText(adapter.getCurrentSearchQuery());
+			searchEditText.setSelection(searchEditText.length());
+			adapter.updateFilteredItems(filteredItems);
+			updateButtonsState();
+			return true;
+		});
 	}
 
 	public void setupSelectionHelper() {
@@ -188,7 +192,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void filterTracks(@Nullable String query) {
-		adapter.getFilter().filter(query);
+		adapter.filter(query);
 	}
 
 	@Override
@@ -268,6 +272,15 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
 			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
+		}
+	}
+
+	@Override
+	public void showFiltersDialog() {
+		FragmentManager manager = getFragmentManager();
+		Filter filter = adapter.getFilter();
+		if (manager != null && filter instanceof TracksSearchFilter) {
+			TracksFilterFragment.Companion.showInstance(manager, this, (TracksSearchFilter) filter);
 		}
 	}
 
