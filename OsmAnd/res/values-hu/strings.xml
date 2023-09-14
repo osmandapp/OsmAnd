@@ -1076,7 +1076,7 @@
     <string name="keep_and_add_destination_point">Hozzáadás következő célpontként</string>
     <string name="select_gpx">GPX kijelölése…</string>
     <string name="route_descr_select_destination">Célpont megadása</string>
-    <string name="shared_string_select_on_map">Kijelölése a térképen</string>
+    <string name="shared_string_select_on_map">Kijelölés a térképen</string>
     <string name="shared_string_favorite">Kedvenc</string>
     <string name="route_preferences">Útvonal-beállítások</string>
     <string name="route_info">Útvonal-információk</string>
@@ -3147,9 +3147,9 @@
     <string name="month">hónap</string>
     <string name="months_2_4">hónap</string>
     <string name="months_5">hónap</string>
-    <string name="year">évre</string>
-    <string name="years_2_4">évre</string>
-    <string name="years_5">évre</string>
+    <string name="year">év</string>
+    <string name="years_2_4">év</string>
+    <string name="years_5">év</string>
     <string name="months_3">három hónap</string>
     <string name="price_free">Ingyenes</string>
     <string name="cancel_subscription">Előfizetés törlése</string>
@@ -4033,7 +4033,7 @@
     <string name="no_purchases">Ön nem vásárolt semmit</string>
     <string name="new_device_account">Új készülék / új fiók</string>
     <string name="contact_support_description">Ha kérdése van, lépjen kapcsolatba velünk: %1$s.</string>
-    <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson ide: „%1$s”.</string>
+    <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson erre: „%1$s”.</string>
     <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
     <string name="troubleshooting">Hibaelhárítás</string>
     <string name="troubleshooting_description">Ha problémája akad a vásrlással, kattintson erre a linkre.</string>
@@ -5435,4 +5435,13 @@
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
     <string name="app_mode_hang_gliding">Sárkányrepülés</string>
+    <string name="with_waypoints">Útpontokkal</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Max magasság</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Szűrés név alapján</string>
+    <string name="shared_string_reset_all">Összes visszaállítása</string>
+    <string name="filter_tracks_count">Szűrő: %d</string>
+    <string name="date_of_creation">Létrehozás dátuma</string>
+    <string name="filter_screen_title">Szűrő</string>
 </resources>
