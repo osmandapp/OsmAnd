@@ -31,10 +31,7 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 		return selectedCities.contains(city)
 	}
 
-	override fun isTrackAccepted(trackItem: TrackItem): Boolean { //*
-		if (!isEnabled()) {
-			return true
-		}
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (city in selectedCities) {
 			if (Algorithms.stringsEqual(trackItem.dataItem?.nearestCityName, city)) {
 				return true

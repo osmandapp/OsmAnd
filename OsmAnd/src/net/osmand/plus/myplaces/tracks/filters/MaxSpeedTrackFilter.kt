@@ -1,29 +1,20 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.MAX_SPEED
 import net.osmand.plus.settings.enums.MetricsConstants
 
-class MaxSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener)
-	: RangeTrackFilter(app, R.string.max_speed, MAX_SPEED, filterChangedListener) {
+class MaxSpeedTrackFilter(
+	minValue: Float,
+	maxValue: Float,
+	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	minValue,
+	maxValue,
+	app, R.string.max_speed, MAX_SPEED, filterChangedListener) {
 
 	private var coef = 1f
-
-	@Expose
-	override var minValue: Float = 0f
-
-	@Expose
-	override var maxValue: Float = TrackFiltersConstants.DEFAULT_MAX_VALUE
-
-	@Expose
-	override var valueFrom: Float = minValue
-
-	@Expose
-	override var valueTo: Float = maxValue
-
 
 	override val unitResId: Int
 		get() {
@@ -42,18 +33,15 @@ class MaxSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterC
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		if (isEnabled()) {
-			val maxSpeed = trackItem.dataItem?.analysis?.maxSpeed
-			if (maxSpeed == null || (maxSpeed == 0f)) {
-				return false
-			}
-
-			val normalizedValue = maxSpeed * coef
-			return normalizedValue > valueFrom && normalizedValue < valueTo
-					|| normalizedValue < minValue && valueFrom == minValue
-					|| normalizedValue > maxValue && valueTo == maxValue
+		val maxSpeed = trackItem.dataItem?.analysis?.maxSpeed
+		if (maxSpeed == null || (maxSpeed == 0f)) {
+			return false
 		}
-		return true
+
+		val normalizedValue = maxSpeed * coef
+		return normalizedValue > valueFrom && normalizedValue < valueTo
+				|| normalizedValue < minValue && valueFrom == minValue
+				|| normalizedValue > maxValue && valueTo == maxValue
 	}
 
 	override fun initFilter() {

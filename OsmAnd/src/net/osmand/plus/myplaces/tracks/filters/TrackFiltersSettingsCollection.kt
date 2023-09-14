@@ -59,15 +59,51 @@ class TrackFiltersSettingsCollection(val app: OsmandApplication) : FilterChanged
 	private fun createFilter(filterType: FilterType): BaseTrackFilter {
 		return when (filterType) {
 			FilterType.NAME -> TrackNameFilter(this)
-			FilterType.DURATION -> DurationTrackFilter(app, this)
-			FilterType.TIME_IN_MOTION -> TimeInMotionTrackFilter(app, this)
-			FilterType.LENGTH -> LengthTrackFilter(app, this)
-			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter(app, this)
-			FilterType.MAX_SPEED -> MaxSpeedTrackFilter(app, this)
-			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter(app, this)
-			FilterType.MAX_ALTITUDE -> MaxAltitudeTrackFilter(app, this)
-			FilterType.UPHILL -> UphillTrackFilter(app, this)
-			FilterType.DOWNHILL -> DownhillTrackFilter(app, this)
+			FilterType.DURATION -> DurationTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.TIME_IN_MOTION -> TimeInMotionTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.LENGTH -> LengthTrackFilter(
+				0f,
+				TrackFiltersConstants.LENGTH_MAX_VALUE,
+				app, this)
+
+			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.MAX_SPEED -> MaxSpeedTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.MAX_ALTITUDE -> MaxAltitudeTrackFilter(
+				0f,
+				TrackFiltersConstants.ALTITUDE_MAX_VALUE,
+				app, this)
+
+			FilterType.UPHILL -> UphillTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
+			FilterType.DOWNHILL -> DownhillTrackFilter(
+				0f,
+				TrackFiltersConstants.DEFAULT_MAX_VALUE,
+				app, this)
+
 			FilterType.DATE_CREATION -> DateCreationTrackFilter(this)
 			FilterType.CITY -> CityTrackFilter(this)
 			FilterType.OTHER -> OtherTrackFilter(app, this)

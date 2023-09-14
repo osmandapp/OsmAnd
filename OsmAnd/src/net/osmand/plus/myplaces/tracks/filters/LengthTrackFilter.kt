@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -8,8 +7,13 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.LENGTH
 import net.osmand.plus.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 
-class LengthTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener)
-	: RangeTrackFilter(app, R.string.routing_attr_length_name, LENGTH, filterChangedListener) {
+class LengthTrackFilter(
+	minValue: Float,
+	maxValue: Float,
+	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	minValue,
+	maxValue,
+	app, R.string.routing_attr_length_name, LENGTH, filterChangedListener) {
 
 	private var coef = 1f
 
@@ -29,31 +33,15 @@ class LengthTrackFilter(app: OsmandApplication, filterChangedListener: FilterCha
 			}
 		}
 
-	@Expose
-	override var minValue: Float = 0f
-
-	@Expose
-	override var maxValue: Float = TrackFiltersConstants.LENGTH_MAX_VALUE
-
-	@Expose
-	override var valueFrom: Float = minValue
-
-	@Expose
-	override var valueTo: Float = maxValue
-
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		if (isEnabled()) {
-			val length = trackItem.dataItem?.analysis?.totalDistance
-			if (length == null || (length == 0f)) {
-				return false
-			}
-			var normalizedValue = length / coef
-
-			return normalizedValue > valueFrom && normalizedValue < valueTo
-					|| normalizedValue < minValue && valueFrom == minValue
-					|| normalizedValue > maxValue && valueTo == maxValue
+		val length = trackItem.dataItem?.analysis?.totalDistance
+		if (length == null || (length == 0f)) {
+			return false
 		}
-		return true
+		var normalizedValue = length / coef
+		return normalizedValue > valueFrom && normalizedValue < valueTo
+				|| normalizedValue < minValue && valueFrom == minValue
+				|| normalizedValue > maxValue && valueTo == maxValue
 	}
 
 	override fun initFilter() {

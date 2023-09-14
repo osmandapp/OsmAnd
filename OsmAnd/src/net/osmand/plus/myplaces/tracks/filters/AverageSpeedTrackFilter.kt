@@ -1,26 +1,19 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.AVERAGE_SPEED
 import net.osmand.plus.settings.enums.MetricsConstants
 
-class AverageSpeedTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener)
-	: RangeTrackFilter(app, R.string.average_speed, AVERAGE_SPEED, filterChangedListener) {
-
-	@Expose
-	override var minValue: Float = 0f
-
-	@Expose
-	override var maxValue: Float = TrackFiltersConstants.DEFAULT_MAX_VALUE
-
-	@Expose
-	override var valueFrom: Float = minValue
-
-	@Expose
-	override var valueTo: Float = maxValue
+class AverageSpeedTrackFilter(
+	minValue: Float,
+	maxValue: Float,
+	app: OsmandApplication,
+	filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	minValue,
+	maxValue,
+	app, R.string.average_speed, AVERAGE_SPEED, filterChangedListener) {
 
 	private var coef = 1f
 
@@ -41,17 +34,14 @@ class AverageSpeedTrackFilter(app: OsmandApplication, filterChangedListener: Fil
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		if (isEnabled()) {
-			val avgSpeed = trackItem.dataItem?.analysis?.avgSpeed
-			if (avgSpeed == null || (avgSpeed == 0f)) {
-				return false
-			}
-			val normalizedValue = avgSpeed * coef
-			return normalizedValue > valueFrom && normalizedValue < valueTo
-					|| normalizedValue < minValue && valueFrom == minValue
-					|| normalizedValue > maxValue && valueTo == maxValue
+		val avgSpeed = trackItem.dataItem?.analysis?.avgSpeed
+		if (avgSpeed == null || (avgSpeed == 0f)) {
+			return false
 		}
-		return true
+		val normalizedValue = avgSpeed * coef
+		return normalizedValue > valueFrom && normalizedValue < valueTo
+				|| normalizedValue < minValue && valueFrom == minValue
+				|| normalizedValue > maxValue && valueTo == maxValue
 	}
 
 	override fun initFilter() {

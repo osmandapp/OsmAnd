@@ -1,24 +1,38 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import kotlin.math.max
 import kotlin.math.min
 
 abstract class RangeTrackFilter(
+	minValue: Float,
+	maxValue: Float,
 	val app: OsmandApplication,
 	displayNameId: Int,
 	filterType: FilterType,
 	filterChangedListener: FilterChangedListener)
 	: BaseTrackFilter(displayNameId, filterType, filterChangedListener) {
 
-	abstract var minValue: Float
+	@Expose
+	var minValue: Float
 
-	abstract var maxValue: Float
+	@Expose
+	var maxValue: Float
 
-	abstract var valueFrom: Float
+	@Expose
+	var valueFrom: Float
 
-	abstract var valueTo: Float
+	@Expose
+	var valueTo: Float
+
+	init {
+		this.minValue = minValue
+		this.maxValue = maxValue
+		this.valueFrom = minValue
+		this.valueTo = maxValue
+	}
 
 	open val unitResId = R.string.shared_string_minute_lowercase
 
