@@ -4600,4 +4600,19 @@
     <string name="poi_foot_designated">Určeno pro chodce</string>
     <string name="poi_assembly_point">Místo setkání</string>
     <string name="poi_osmand_not_pt_shelter_yes">Vše kromě přístřešků veřejné dopravy</string>
+    <string name="poi_socket_typee_output_medium">Střední</string>
+    <string name="poi_socket_typee_voltage_filter">Napětí konektoru typu E</string>
+    <string name="poi_socket_typee_current">Zásuvka: Typ E: proud</string>
+    <string name="poi_health_specialty_allergology_yes">Alergologie</string>
+    <string name="poi_socket_typee_output_high">Vysoké</string>
+    <string name="poi_socket_typee_voltage_high">Vysoké</string>
+    <string name="poi_socket_typee">Zásuvka: Typ E</string>
+    <string name="poi_socket_typee_output_low">Nízké</string>
+    <string name="poi_health_specialty_endodontics_yes">Endodoncie</string>
+    <string name="poi_socket_typee_voltage_low">Nízké</string>
+    <string name="poi_socket_typee_output_filter">Výstup konektoru typu E</string>
+    <string name="poi_health_specialty_cardiac_surgery_yes">Kardiochirurgie</string>
+    <string name="poi_socket_typee_voltage_medium">Střední</string>
+    <string name="poi_socket_typee_voltage">Zásuvka: Typ E: napětí</string>
+    <string name="poi_socket_typee_output">Zásuvka: Typ E: výstup</string>
 </resources>
