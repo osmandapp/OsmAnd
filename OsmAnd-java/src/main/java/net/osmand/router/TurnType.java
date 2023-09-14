@@ -102,7 +102,8 @@ public class TurnType {
 		} else if (s != null && (s.startsWith("EXIT") ||
 				s.startsWith("RNDB") || s.startsWith("RNLB"))) {
 			try {
-				t = TurnType.getExitTurn(Integer.parseInt(s.substring(4)), 0, leftSide);
+				int type = s.contains("RNLB") ? RNLB : RNDB;
+				t = TurnType.getExitTurn(type, Integer.parseInt(s.substring(4)), 0, leftSide);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
@@ -150,6 +151,16 @@ public class TurnType {
 
 	public static TurnType getExitTurn(int out, float angle, boolean leftSide) {
 		TurnType r = valueOf(RNDB, leftSide); //$NON-NLS-1$
+		r.exitOut = out;
+		r.setTurnAngle(angle);
+		return r;
+	}
+
+	private static TurnType getExitTurn(int type, int out, float angle, boolean leftSide) {
+		if (type != RNDB && type != RNLB) {
+			return getExitTurn(out, angle, leftSide);
+		}
+		TurnType r = valueOf(type, leftSide); //$NON-NLS-1$
 		r.exitOut = out;
 		r.setTurnAngle(angle);
 		return r;
