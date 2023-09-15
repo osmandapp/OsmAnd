@@ -1030,6 +1030,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					}
 				}
 				button.setVisibility(View.GONE);
+				notifyCollapseExpand(false);
 			});
 			view.addView(button);
 		}
