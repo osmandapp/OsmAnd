@@ -119,7 +119,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
-		mTabs.add(new TabItem(R.string.shared_string_save, getString(R.string.shared_string_save), LocalIndexesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
