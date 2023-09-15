@@ -113,8 +113,9 @@ public class MapScrollHelper {
 		MapRendererView renderer = mapView.getMapRenderer();
 		if (renderer != null) {
 			PointI point31 = new PointI();
-			PointI center = renderer.getState().getFixedPixel();
-			PointI newCenter = new PointI(center.getX() + dx, center.getY() + dy);
+			PointI newCenter = new PointI(
+					renderer.getWindowWidth() / 2 + dx,
+					renderer.getWindowHeight() / 2 + dy);
 			if (renderer.getLocationFromScreenPoint(newCenter, point31)) {
 				renderer.setTarget(point31, false, false);
 			}
