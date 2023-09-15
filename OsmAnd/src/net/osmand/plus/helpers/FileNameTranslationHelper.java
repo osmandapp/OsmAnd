@@ -41,7 +41,13 @@ public class FileNameTranslationHelper {
 		return getFileName(app, app.getResourceManager().getOsmandRegions(), fileName);
 	}
 
+	@Nullable
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
+		return getFileName(ctx, regions, fileName, true, false);
+	}
+
+	@Nullable
+	public static String getFileName(Context ctx, OsmandRegions regions, String fileName, boolean includingParent, boolean reversed) {
 		String basename = getBasename(ctx, fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
 			return getWikiName(ctx, basename);
@@ -69,18 +75,15 @@ public class FileNameTranslationHelper {
 				return name;
 			}
 		}
-
 		//if nothing else
 		String lc = basename.toLowerCase();
 		String std = getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
-
 		if (regions != null) {
-			return regions.getLocaleName(basename, true);
+			return regions.getLocaleName(basename, includingParent, reversed);
 		}
-
 		return null;
 	}
 

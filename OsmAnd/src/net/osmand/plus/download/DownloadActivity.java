@@ -26,11 +26,12 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
 import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.GoToMapFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.local.LocalIndexesFragment;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -117,7 +118,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 
 		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
-		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalIndexesFragment.class));
+		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
+		mTabs.add(new TabItem(R.string.shared_string_save, getString(R.string.shared_string_save), LocalIndexesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));

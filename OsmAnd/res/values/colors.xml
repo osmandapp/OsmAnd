@@ -469,4 +469,9 @@
 	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
+
+	<!-- Download Local tab colors  -->
+	<color name="local_resources_color">#1560D0</color>
+	<color name="local_my_places_color">#E8C71D</color>
+	<color name="local_settings_color">#14CC70</color>
 </resources>

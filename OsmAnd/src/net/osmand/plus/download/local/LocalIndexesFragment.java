@@ -1,9 +1,8 @@
-package net.osmand.plus.download.ui;
+package net.osmand.plus.download.local;
 
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.BACKUP_OPERATION;
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.CLEAR_TILES_OPERATION;
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.DELETE_OPERATION;
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.RESTORE_OPERATION;
+import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
+import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
+import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -47,11 +46,11 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.LocalIndexType;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.download.ui.LocalIndexOperationTask.OperationListener;
-import net.osmand.plus.download.ui.LocalIndexOperationTask.IndexOperationType;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -157,7 +156,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		} else if (resId == R.string.clear_tile_data) {
 			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
-			confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> new LocalIndexOperationTask(app, listAdapter, CLEAR_TILES_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info));
+//			confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> new LocalOperationTask(app, CLEAR_TILES_OPERATION, listAdapter).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info));
 			confirm.setNegativeButton(R.string.shared_string_no, null);
 			String fn = FileNameTranslationHelper.getFileName(getActivity(),
 					app.getResourceManager().getOsmandRegions(),
@@ -167,10 +166,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		} else if (resId == R.string.shared_string_edit) {
 			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity(), this, info.getFileName());
 		} else if (resId == R.string.local_index_mi_restore) {
-			new LocalIndexOperationTask(app, listAdapter, RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
+//			new LocalOperationTask(app, RESTORE_OPERATION, listAdapter).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
 			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
-			confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> new LocalIndexOperationTask(app, listAdapter, DELETE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info));
+//			confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> new LocalOperationTask(app, DELETE_OPERATION, listAdapter).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info));
 			confirm.setNegativeButton(R.string.shared_string_no, null);
 			String fn = FileNameTranslationHelper.getFileName(getActivity(),
 					app.getResourceManager().getOsmandRegions(),
@@ -178,7 +177,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
-			new LocalIndexOperationTask(app, listAdapter, BACKUP_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
+//			new LocalOperationTask(app, BACKUP_OPERATION, listAdapter).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		}
 		return true;
 	}
@@ -282,10 +281,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void downloadHasFinished() {
 		reloadData();
-	}
-
-	@Override
-	public void downloadInProgress() {
 	}
 
 	@Override
@@ -420,11 +415,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.local_index_mi_backup) {
-			operationTask = new LocalIndexOperationTask(app, listAdapter, BACKUP_OPERATION);
+//			operationTask = new LocalOperationTask(app, BACKUP_OPERATION, listAdapter);
 		} else if (actionResId == R.string.shared_string_delete) {
-			operationTask = new LocalIndexOperationTask(app, listAdapter, DELETE_OPERATION);
+//			operationTask = new LocalOperationTask(app, DELETE_OPERATION, listAdapter);
 		} else if (actionResId == R.string.local_index_mi_restore) {
-			operationTask = new LocalIndexOperationTask(app, listAdapter, RESTORE_OPERATION);
+//			operationTask = new LocalOperationTask(app, RESTORE_OPERATION, listAdapter);
 		} else {
 			operationTask = null;
 		}
@@ -524,32 +519,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (itemId == R.string.shared_string_refresh) {
 			reloadLocalIndexes();
 		} else if (itemId == R.string.shared_string_delete) {
-			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							doAction(itemId);
-						}
-					}, null);
+			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, (dialog, which) -> doAction(itemId), null);
 		} else if (itemId == R.string.local_index_mi_backup) {
-			openSelectionMode(itemId, R.drawable.ic_type_archive,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							doAction(itemId);
-						}
-					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA, LocalIndexType.DEPTH_DATA));
+			openSelectionMode(itemId, R.drawable.ic_type_archive, (dialog, which) -> doAction(itemId), EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA, LocalIndexType.DEPTH_DATA));
 		} else if (itemId == R.string.local_index_mi_restore) {
-			openSelectionMode(itemId, R.drawable.ic_type_archive,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							doAction(itemId);
-						}
-					}, EnumSet.of(LocalIndexType.DEACTIVATED));
+			openSelectionMode(itemId, R.drawable.ic_type_archive, (dialog, which) -> doAction(itemId), EnumSet.of(LocalIndexType.DEACTIVATED));
 		}
 	}
 
@@ -820,21 +794,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			getDownloadActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
-		@Override
-		public void onOperationProgress(@IndexOperationType int operation, LocalIndexInfo... values) {
-			if (isAdded()) {
-				if (operation == DELETE_OPERATION) {
-					listAdapter.delete(values);
-				} else if (operation == BACKUP_OPERATION) {
-					listAdapter.move(values, false);
-				} else if (operation == RESTORE_OPERATION) {
-					listAdapter.move(values, true);
-				}
-			}
-		}
+//		@Override
+//		public void onOperationProgress(@NonNull OperationType type, LocalIndexInfo... values) {
+//			if (isAdded()) {
+//				if (type == DELETE_OPERATION) {
+//					listAdapter.delete(values);
+//				} else if (type == BACKUP_OPERATION) {
+//					listAdapter.move(values, false);
+//				} else if (type == RESTORE_OPERATION) {
+//					listAdapter.move(values, true);
+//				}
+//			}
+//		}
 
 		@Override
-		public void onOperationFinished(@IndexOperationType int operation, String result) {
+		public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
 			DownloadActivity activity = getDownloadActivity();
 			if (AndroidUtils.isActivityNotDestroyed(activity)) {
 				activity.setProgressBarIndeterminateVisibility(false);
@@ -843,7 +817,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					app.showToastMessage(result);
 				}
 
-				if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION || operation == CLEAR_TILES_OPERATION) {
+				if (Algorithms.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
 					activity.reloadLocalIndexes();
 				} else {
 					activity.onUpdatedIndexesList();

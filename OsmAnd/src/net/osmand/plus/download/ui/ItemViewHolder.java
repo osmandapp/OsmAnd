@@ -10,9 +10,9 @@ import static net.osmand.plus.download.DownloadActivityType.TRAVEL_FILE;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.DownloadResources.WORLD_SEAMARKS_KEY;
+import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.DELETE_OPERATION;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -54,9 +54,11 @@ import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.LocalIndexType;
-import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.local.ItemType;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -388,7 +390,7 @@ public class ItemViewHolder {
 			DownloadActivityType type = item.getType();
 			if (item.getBasename().equalsIgnoreCase(WORLD_SEAMARKS_KEY) && nauticalPluginDisabled) {
 				action = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE || type == GEOTIFF_FILE ) && srtmDisabled) {
+			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE || type == GEOTIFF_FILE) && srtmDisabled) {
 				action = srtmNeedsInstallation ? ASK_FOR_SRTM_PLUGIN_PURCHASE : ASK_FOR_SRTM_PLUGIN_ENABLE;
 			} else if ((type == WIKIPEDIA_FILE || type == TRAVEL_FILE) && !Version.isPaidVersion(context.getMyApplication())) {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
@@ -467,8 +469,8 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-								   DownloadItem downloadItem,
-								   DownloadResourceGroup parentOptional) {
+	                               DownloadItem downloadItem,
+	                               DownloadResourceGroup parentOptional) {
 		OsmandApplication app = context.getMyApplication();
 		PopupMenu optionsMenu = new PopupMenu(context, v);
 
@@ -561,22 +563,23 @@ public class ItemViewHolder {
 		}
 		confirm.setMessage(message);
 
-		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			LocalIndexType type = getLocalIndexType(downloadItem);
-			remove(type, downloadedFiles);
-		});
+		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> remove(downloadedFiles));
 		confirm.setNegativeButton(R.string.shared_string_no, null);
 
 		confirm.show();
 	}
 
-	private void remove(@NonNull LocalIndexType type, @NonNull List<File> filesToDelete) {
-		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(context.getMyApplication(), null, DELETE_OPERATION);
-		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
+	private void remove(@NonNull List<File> filesToDelete) {
+		OsmandApplication app = context.getMyApplication();
+		LocalItem[] params = new LocalItem[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
-			params[i] = new LocalIndexInfo(type, file, false);
+			ItemType type = ItemType.getItemType(app, file);
+			if (type != null) {
+				params[i] = new LocalItem(app, file, type);
+			}
 		}
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, null);
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 

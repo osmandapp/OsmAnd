@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
 import static net.osmand.plus.download.DownloadActivity.UPDATES_TAB_NUMBER;
 
 import android.os.AsyncTask;
@@ -62,7 +63,7 @@ public class BannerAndDownloadFreeVersion {
 			updateDescriptionTextWithSize(activity, progressLayout);
 
 			int tab = activity.getCurrentTab();
-			if (tab == UPDATES_TAB_NUMBER || !showSpace) {
+			if (tab == UPDATES_TAB_NUMBER || tab == LOCAL_TAB_NUMBER || !showSpace) {
 				progressLayout.setVisibility(View.GONE);
 			} else {
 				progressLayout.setVisibility(View.VISIBLE);
