@@ -5428,4 +5428,13 @@
     <string name="app_mode_baby_transport">Transport de bébés</string>
     <string name="app_mode_paragliding">Parapente</string>
     <string name="app_mode_hang_gliding">Deltaplane</string>
+    <string name="with_waypoints">Avec points de passage</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitude maxi</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrer par nom</string>
+    <string name="shared_string_reset_all">Tout réinitialiser</string>
+    <string name="filter_tracks_count">Filtre : %d</string>
+    <string name="date_of_creation">Date de création</string>
+    <string name="filter_screen_title">Filtrer</string>
 </resources>
