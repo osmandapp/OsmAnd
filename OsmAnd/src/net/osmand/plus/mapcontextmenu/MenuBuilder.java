@@ -200,6 +200,12 @@ public class MenuBuilder {
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 	}
 
+	public void notifyCollapseExpand(boolean collapsed) {
+		if (collapseExpandListener != null) {
+			collapseExpandListener.onCollapseExpand(collapsed);
+		}
+	}
+
 	public CollapseExpandListener getCollapseExpandListener() {
 		return collapseExpandListener;
 	}
