@@ -5406,4 +5406,6 @@
     <string name="open_issue_on_github_descr">Задать вопрос, предложить функционал</string>
     <string name="send_crash_log_descr">Содержит только информацию о сбоях</string>
     <string name="open_issue_on_github">Открыть issue на GitHub</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
 </resources>
