@@ -94,8 +94,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark
 		);
 
 		readFullArticleButton = mainView.findViewById(R.id.read_full_article);
@@ -151,7 +151,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		webViewClient = new WikipediaWebViewClient(getActivity(), amenity, nightMode);
 		contentWebView.setWebViewClient(webViewClient);
 		updateWebSettings();
-		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
+		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 
 		return mainView;
 	}

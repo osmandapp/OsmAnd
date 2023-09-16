@@ -8,6 +8,7 @@ import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidg
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -24,6 +25,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -246,6 +248,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
+
+		MapWidget temperatureWidget = new SensorTextWidget(mapActivity, appMode, TEMPERATURE);
+		widgetsInfos.add(creator.createWidgetInfo(temperatureWidget));
 	}
 
 	@Override
@@ -262,6 +267,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId);
 			case BICYCLE_DISTANCE:
 				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId);
+			case TEMPERATURE:
+				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId);
 		}
 		return null;
 	}
@@ -392,9 +399,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
-	                              float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
-		SensorAttributesUtils.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+		SensorAttributesUtils.onAnalysePoint(analysis, point, attribute);
 	}
 
 	@Nullable

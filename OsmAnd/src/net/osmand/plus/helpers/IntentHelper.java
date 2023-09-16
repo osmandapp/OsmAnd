@@ -15,7 +15,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -64,6 +63,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -179,9 +180,35 @@ public class IntentHelper {
 				} else {
 					buildRoute(startLatLon, endLatLon, appMode, points);
 				}
-
 				clearIntent(intent);
 				return true;
+			} else {
+				List<GeoParsedPoint> points = GeoPointParserUtil.parsePoints(data.toString());
+				if (points != null && points.size() > 1) {
+					GeoParsedPoint startPoint = points.get(0);
+					GeoParsedPoint endPoint = points.get(points.size() - 1);
+
+					LatLon startLatLon = startPoint != null ? new LatLon(startPoint.getLatitude(), startPoint.getLongitude()) : null;
+					LatLon endLatLon = endPoint != null ? new LatLon(endPoint.getLatitude(), endPoint.getLongitude()) : null;
+					if (endLatLon == null) {
+						LOG.error("Malformed navigation URL: destination location is empty");
+						return true;
+					}
+					if (app.isApplicationInitializing()) {
+						app.getAppInitializer().addListener(new AppInitializeListener() {
+
+							@Override
+							public void onFinish(@NonNull AppInitializer init) {
+								init.removeListener(this);
+								buildRoute(startLatLon, endLatLon, null, null);
+							}
+						});
+					} else {
+						buildRoute(startLatLon, endLatLon, null, null);
+					}
+					clearIntent(intent);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -435,7 +462,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
-					closeAllFragments();
+					mapActivity.closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();
@@ -560,18 +587,6 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-		}
-	}
-
-	private void closeAllFragments() {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		for (Fragment fragment : fragmentManager.getFragments()) {
-			if (fragment instanceof DialogFragment) {
-				((DialogFragment) fragment).dismiss();
-			}
-		}
-		for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
-			fragmentManager.popBackStack();
 		}
 	}
 

@@ -170,7 +170,7 @@ public class MultiTouchSupport {
 					zoomRelative = distance / zoomStartedDistance;
 					listener.onZoomingOrRotating(zoomRelative, angleRelative);
 				} else if (inTiltMode) {
-					float dy2 = y2 - secondFingerStart.y;
+					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
 					listener.onChangingViewAngle(viewAngle);
 				} else if (isTiltSupportEnabled(app)) {

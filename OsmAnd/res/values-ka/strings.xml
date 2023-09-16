@@ -858,8 +858,6 @@
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
     <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
-    <string name="index_srtm_parts">მონაკვეთები</string>
-    <string name="index_srtm_ele">კონტურული ხაზები</string>
     <string name="srtm_plugin_description"></string>
     <string name="srtm_plugin_name">კონტურული ხაზების დამატება</string>
     <string name="download_select_map_types">სხვა რუკები</string>
@@ -2646,7 +2644,6 @@
     <string name="enter_country_name">შეიყვანეთ ქვეყნის სახელი</string>
     <string name="free_downloads_used">გამოყენებული უფასო გადმოწერები</string>
     <string name="favorite_category_add_new_title">ახალი კატეგორიის დამატება</string>
-    <string name="srtm_plugin_disabled">კონტურული ხაზები გამორთულია</string>
     <string name="si_min_m">წუთი მილში</string>
     <string name="si_min_km">წუთი კილომეტრში</string>
     <string name="si_m_s">მეტრი წამში</string>
@@ -2791,7 +2788,6 @@
     <string name="shared_string_details">დეტალები</string>
     <string name="use_login_and_password">გამოიყენეთ მომხმარებლის სახელი და პაროლი</string>
     <string name="shared_string_progress">მიმდინარეობა</string>
-    <string name="terrain_maps">რელიეფის რუკები</string>
     <string name="gps_filter_precision">GPS-ის სიზუსტე</string>
     <string name="shared_string_precision">სიზუსტე</string>
     <string name="shared_string_statistics">სტატისტიკა</string>

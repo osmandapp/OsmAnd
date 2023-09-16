@@ -16,7 +16,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			tools:background="@color/route_info_bg_dark">
+			tools:background="@color/card_and_list_background_dark">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/coordinate_input_toolbar"
@@ -101,7 +101,7 @@
 			android:id="@+id/keyboard_divider"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			tools:background="@color/keyboard_divider_dark"/>
+			tools:background="@color/divider_color_dark"/>
 
 		<LinearLayout
 			android:id="@+id/bottom_controls_container"

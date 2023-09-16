@@ -4,41 +4,92 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
-	android:minHeight="@dimen/favorites_list_item_height"
-	android:orientation="horizontal"
-	android:paddingHorizontal="@dimen/content_padding">
-
-	<ImageView
-		android:id="@+id/icon"
-		android:layout_width="@dimen/standard_icon_size"
-		android:layout_height="@dimen/standard_icon_size"
-		android:layout_gravity="center_vertical"
-		tools:src="@drawable/ic_action_sort_by_date"
-		tools:tint="?attr/active_color_basic" />
+	android:orientation="vertical">
 
 	<LinearLayout
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:orientation="vertical"
-		android:paddingHorizontal="@dimen/content_padding_small">
+		android:minHeight="@dimen/favorites_list_item_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding">
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/title"
-			style="@style/DescStyle.Medium"
+		<LinearLayout
+			android:id="@+id/sort_button"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/sort_by" />
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small">
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/description"
-			style="@style/DescStyle"
+			<ImageView
+				android:id="@+id/icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				tools:src="@drawable/ic_action_sort_by_date"
+				tools:tint="?attr/active_color_basic" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:orientation="vertical"
+				android:paddingHorizontal="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					style="@style/DescStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/sort_by" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="@string/sort_by_distance" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<androidx.legacy.widget.Space
+			android:layout_width="0dp"
+			android:layout_height="1dp"
+			android:layout_weight="1" />
+
+		<LinearLayout
+			android:id="@+id/filter_button"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="?android:attr/textColorSecondary"
-			android:textSize="@dimen/default_sub_text_size"
-			tools:text="@string/sort_by_distance" />
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/filter_count"
+				style="@style/DescStyle.Medium"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/content_padding_small"
+				android:text="@string/filter_tracks_count" />
+
+			<ImageView
+				android:id="@+id/filter_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				tools:src="@drawable/ic_action_filter_dark"
+				tools:tint="?attr/icon_color_active" />
+
+		</LinearLayout>
 
 	</LinearLayout>
+
+	<include layout="@layout/divider" />
 
 </LinearLayout>

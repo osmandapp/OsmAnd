@@ -7,7 +7,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -831,18 +830,5 @@ public class MapUtils {
 			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return dist;
-	}
-
-	public static float calculateGlideRatio(LatLon l1, LatLon l2, double altitude1, double altitude2) {
-		double distance = getDistance(l1, l2);
-		double difference = altitude1 - altitude2;
-		return calculateGlideRatio(distance, difference);
-	}
-
-	public static float calculateGlideRatio(double distance, double difference) {
-		if (distance > 0 && difference != 0) {
-			return (float) (distance / difference);
-		}
-		return 0;
 	}
 }

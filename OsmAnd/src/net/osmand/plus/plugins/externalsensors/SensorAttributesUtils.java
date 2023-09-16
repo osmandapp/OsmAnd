@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.externalsensors;
 
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
+
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -11,17 +17,12 @@ import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointsAttributesData;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.plugins.externalsensors.pointAttributes.BikeCadence;
-import net.osmand.plus.plugins.externalsensors.pointAttributes.BikePower;
-import net.osmand.plus.plugins.externalsensors.pointAttributes.HeartRate;
-import net.osmand.plus.plugins.externalsensors.pointAttributes.SensorSpeed;
-import net.osmand.plus.plugins.externalsensors.pointAttributes.Temperature;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -32,60 +33,31 @@ import java.util.List;
 
 public class SensorAttributesUtils {
 
-	public static final String SENSOR_TAG_HEART_RATE = "hr";
-	public static final String SENSOR_TAG_SPEED = "osmand:speed_sensor";
-	public static final String SENSOR_TAG_CADENCE = "cadence";
-	public static final String SENSOR_TAG_BIKE_POWER = "power";
-	public static final String SENSOR_TAG_TEMPERATURE = "temp";
-	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
+	private static final String[] SENSOR_GPX_TAGS = {SENSOR_TAG_HEART_RATE, SENSOR_TAG_SPEED,
+			SENSOR_TAG_CADENCE, SENSOR_TAG_BIKE_POWER, SENSOR_TAG_TEMPERATURE};
 
 	public static boolean hasHeartRateData(@NonNull GPXTrackAnalysis analysis) {
-		return getHeartRateData(analysis).hasData();
+		return analysis.hasData(SENSOR_TAG_HEART_RATE);
 	}
 
 	public static boolean hasSensorSpeedData(@NonNull GPXTrackAnalysis analysis) {
-		return getSensorSpeedData(analysis).hasData();
+		return analysis.hasData(SENSOR_TAG_SPEED);
 	}
 
 	public static boolean hasBikeCadenceData(@NonNull GPXTrackAnalysis analysis) {
-		return getBikeCadenceData(analysis).hasData();
+		return analysis.hasData(SENSOR_TAG_CADENCE);
 	}
 
 	public static boolean hasBikePowerData(@NonNull GPXTrackAnalysis analysis) {
-		return getBikePowerData(analysis).hasData();
+		return analysis.hasData(SENSOR_TAG_BIKE_POWER);
 	}
 
 	public static boolean hasTemperatureData(@NonNull GPXTrackAnalysis analysis) {
-		return getTemperatureData(analysis).hasData();
+		return analysis.hasData(SENSOR_TAG_TEMPERATURE);
 	}
 
-	@NonNull
-	public static PointsAttributesData<HeartRate> getHeartRateData(@NonNull GPXTrackAnalysis analysis) {
-		return analysis.getAttributesData(SENSOR_TAG_HEART_RATE);
-	}
-
-	@NonNull
-	public static PointsAttributesData<SensorSpeed> getSensorSpeedData(@NonNull GPXTrackAnalysis analysis) {
-		return analysis.getAttributesData(SENSOR_TAG_SPEED);
-	}
-
-	@NonNull
-	public static PointsAttributesData<BikeCadence> getBikeCadenceData(@NonNull GPXTrackAnalysis analysis) {
-		return analysis.getAttributesData(SENSOR_TAG_CADENCE);
-	}
-
-	@NonNull
-	public static PointsAttributesData<BikePower> getBikePowerData(@NonNull GPXTrackAnalysis analysis) {
-		return analysis.getAttributesData(SENSOR_TAG_BIKE_POWER);
-	}
-
-	@NonNull
-	public static PointsAttributesData<Temperature> getTemperatureData(@NonNull GPXTrackAnalysis analysis) {
-		return analysis.getAttributesData(SENSOR_TAG_TEMPERATURE);
-	}
-
-	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key) {
-		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), 0);
+	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key, float defaultValue) {
+		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), defaultValue);
 	}
 
 	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
@@ -106,19 +78,17 @@ public class SensorAttributesUtils {
 		}
 	}
 
-	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
-	                                  float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
-		int heartRate = (int) getPointAttribute(point, SENSOR_TAG_HEART_RATE);
-		float speed = getPointAttribute(point, SENSOR_TAG_SPEED);
-		float cadence = getPointAttribute(point, SENSOR_TAG_CADENCE);
-		float bikePower = getPointAttribute(point, SENSOR_TAG_BIKE_POWER);
-		float temperature = getPointAttribute(point, SENSOR_TAG_TEMPERATURE);
+	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+		for (String tag : SENSOR_GPX_TAGS) {
+			float defaultValue = SENSOR_TAG_TEMPERATURE.equals(tag) ? Float.NaN : 0;
+			float value = getPointAttribute(point, tag, defaultValue);
 
-		analysis.addPointAttribute(new HeartRate(heartRate, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new SensorSpeed(speed, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new BikePower(cadence, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new BikeCadence(bikePower, distance, timeDiff, firstPoint, lastPoint));
-		analysis.addPointAttribute(new Temperature(temperature, distance, timeDiff, firstPoint, lastPoint));
+			attribute.setAttributeValue(tag, value);
+
+			if (!analysis.hasData(tag) && attribute.hasValidValue(tag) && analysis.totalDistance > 0) {
+				analysis.setHasData(tag, true);
+			}
+		}
 	}
 
 	@Nullable
@@ -181,7 +151,7 @@ public class SensorAttributesUtils {
 		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		List<Entry> values = ChartUtils.getPointAttributeValues(analysis, graphType, axisType, divX, mulY, divY, calcWithoutGaps);
+		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis, axisType, divX, mulY, divY, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String format = null;

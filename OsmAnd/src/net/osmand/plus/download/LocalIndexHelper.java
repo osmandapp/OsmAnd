@@ -5,19 +5,15 @@ import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.WEATHER_EXT;
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.MAP_DATA;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.TERRAIN_DATA;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WIKI_DATA;
+import static net.osmand.plus.download.LocalIndexType.DEPTH_DATA;
+import static net.osmand.plus.download.LocalIndexType.MAP_DATA;
+import static net.osmand.plus.download.LocalIndexType.SRTM_DATA;
+import static net.osmand.plus.download.LocalIndexType.TERRAIN_DATA;
+import static net.osmand.plus.download.LocalIndexType.WEATHER_DATA;
+import static net.osmand.plus.download.LocalIndexType.WIKI_DATA;
 
-import android.content.Context;
-
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -27,7 +23,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -486,90 +481,6 @@ public class LocalIndexHelper {
 		result.add(info);
 		if (loadTask != null) {
 			loadTask.loadFile(info);
-		}
-	}
-
-	public enum LocalIndexType {
-		MAP_DATA(R.string.local_indexes_cat_map, R.drawable.ic_map, 10),
-		TILES_DATA(R.string.local_indexes_cat_tile, R.drawable.ic_map, 60),
-		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm, 40),
-		TERRAIN_DATA(R.string.local_indexes_category_terrain, R.drawable.ic_action_terrain, 42),
-		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 45),
-		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
-		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
-		WEATHER_DATA(R.string.weather_forecast, R.drawable.ic_action_umbrella, 65),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
-		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
-		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
-		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);
-
-		@StringRes
-		private final int resId;
-		@DrawableRes
-		private final int iconResource;
-		private final int orderIndex;
-
-		LocalIndexType(@StringRes int resId, @DrawableRes int iconResource, int orderIndex) {
-			this.resId = resId;
-			this.iconResource = iconResource;
-			this.orderIndex = orderIndex;
-		}
-
-		public String getHumanString(Context ctx) {
-			return ctx.getString(resId);
-		}
-
-		public int getIconResource() {
-			return iconResource;
-		}
-
-		public int getOrderIndex(LocalIndexInfo info) {
-			String fileName = info.getFileName();
-			int index = info.getOriginalType().orderIndex;
-			if (info.getType() == DEACTIVATED) {
-				index += DEACTIVATED.orderIndex;
-			}
-			if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
-				index++;
-			}
-			return index;
-		}
-
-		@NonNull
-		public String getBasename(@NonNull OsmandApplication app, @NonNull LocalIndexInfo localIndexInfo) {
-			String fileName = localIndexInfo.getFileName();
-			if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
-				return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
-			}
-			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-				OsmandSettings settings = app.getSettings();
-				return settings.getTileSourceTitle(fileName);
-			}
-			if (localIndexInfo.getType() == TRAVEL_DATA &&
-					fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
-				return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
-			}
-			if (this == VOICE_DATA) {
-				int l = fileName.lastIndexOf('_');
-				if (l == -1) {
-					l = fileName.length();
-				}
-				return fileName.substring(0, l);
-			}
-			if (this == FONT_DATA) {
-				int l = fileName.indexOf('.');
-				if (l == -1) {
-					l = fileName.length();
-				}
-				return fileName.substring(0, l).replace('_', ' ').replace('-', ' ');
-			}
-			int ls = fileName.lastIndexOf('_');
-			if (ls >= 0) {
-				return fileName.substring(0, ls);
-			} else if (fileName.indexOf('.') > 0) {
-				return fileName.substring(0, fileName.indexOf('.'));
-			}
-			return fileName;
 		}
 	}
 }

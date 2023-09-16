@@ -241,7 +241,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
 
-		int textColor = ContextCompat.getColor(app, R.color.activity_background_light);
+		int textColor = ContextCompat.getColor(app, R.color.activity_background_color_light);
 		firstCoordinate.setTextColor(textColor);
 		secondCoordinate.setTextColor(textColor);
 

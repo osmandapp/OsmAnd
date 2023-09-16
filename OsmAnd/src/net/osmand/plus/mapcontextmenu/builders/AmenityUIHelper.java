@@ -134,7 +134,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
-		List<AmenityInfoRow> urlRows = new LinkedList<>();
 
 		Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 		AmenityInfoRow cuisineRow = null;
@@ -295,7 +294,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else if (Amenity.MOBILE.equals(key)) {
 				iconId = R.drawable.ic_action_phone;
 				isPhoneNumber = true;
-			} else if (Algorithms.equalsToAny(key, Amenity.WEBSITE, Amenity.URL_KEY)) {
+			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
 			} else if (Amenity.CUISINE.equals(key)) {
@@ -411,8 +410,6 @@ public class AmenityUIHelper extends MenuBuilder {
 				descriptions.add(row);
 			} else if (isCuisine) {
 				cuisineRow = row;
-			} else if (isUrl) {
-				addRowIfNotExists(urlRows, row);
 			} else if (poiType == null) {
 				infoRows.add(row);
 			}
@@ -488,7 +485,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
-		infoRows.addAll(urlRows);
+
 		Collections.sort(infoRows, (row1, row2) -> {
 			if (row1.order < row2.order) {
 				return -1;
@@ -519,12 +516,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
-		}
-	}
-
-	private void addRowIfNotExists(@NonNull List<AmenityInfoRow> rows, @NonNull AmenityInfoRow row) {
-		if (!rows.contains(row)) {
-			rows.add(row);
 		}
 	}
 
@@ -716,7 +707,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.text_color_secondary_light));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
@@ -731,7 +722,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
-		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
 		if (isPhoneNumber || isUrl) {
 			textView.setTextColor(linkTextColor);
@@ -903,7 +894,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			AndroidUtils.setMargins(llTextParams, topMargin, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setTextColor(getColor(R.color.text_color_secondary_light));
 			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
@@ -1039,6 +1030,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					}
 				}
 				button.setVisibility(View.GONE);
+				notifyCollapseExpand(false);
 			});
 			view.addView(button);
 		}

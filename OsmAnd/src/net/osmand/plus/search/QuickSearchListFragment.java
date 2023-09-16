@@ -179,7 +179,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			if (dialogFragment.getSearchType().isTargetPoint()) {
 				File file = gpxInfo.getFile();
 				if (file != null) {
-					selectFollowTrack(file);
+					selectTrack(file);
 				}
 			} else {
 				showTrackMenuFragment(gpxInfo);
@@ -196,23 +196,21 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 	}
 
-	private void selectFollowTrack(@NonNull File file) {
+	private void selectTrack(@NonNull File file) {
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectFollowTrack(selectedGpxFile.getGpxFile());
+			selectTrack(selectedGpxFile.getGpxFile());
 		} else {
 			GpxFileLoaderTask.loadGpxFile(file, getMapActivity(), gpxFile -> {
-				selectFollowTrack(gpxFile);
+				selectTrack(gpxFile);
 				return true;
 			});
 		}
 	}
 
-	private void selectFollowTrack(@NonNull GPXFile gpxFile) {
+	private void selectTrack(@NonNull GPXFile gpxFile) {
 		MapRouteInfoMenu routeInfoMenu = requireMapActivity().getMapRouteInfoMenu();
 		routeInfoMenu.selectTrack(gpxFile, true);
-		routeInfoMenu.hide();
-		routeInfoMenu.showFollowTrack();
 
 		dialogFragment.dismiss();
 	}

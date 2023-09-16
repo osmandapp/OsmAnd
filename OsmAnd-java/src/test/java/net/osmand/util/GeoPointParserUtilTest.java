@@ -3,12 +3,11 @@ package net.osmand.util;
 
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 public class GeoPointParserUtilTest {
 
@@ -792,6 +791,19 @@ public class GeoPointParserUtilTest {
 		}
 
 
+	}
+
+	@Test
+	public void testDirectionsPoints() {
+		List<GeoParsedPoint> actual = GeoPointParserUtil.parsePoints(
+				"https://www.openstreetmap.org/directions?from=37.2445%2C-121.9125&to=37.2888%2C-122.1899");
+		assertGeoPoint(actual.get(0), new GeoParsedPoint(37.2445, -121.9125));
+		assertGeoPoint(actual.get(1), new GeoParsedPoint(37.2888, -122.1899));
+
+		actual = GeoPointParserUtil.parsePoints(
+				"https://www.google.com/maps/dir/?api=1&origin=-39.7649077,175.8822549&destination=-41.156615,174.975586");
+		assertGeoPoint(actual.get(0), new GeoParsedPoint(-39.7649077,175.8822549));
+		assertGeoPoint(actual.get(1), new GeoParsedPoint(-41.156615, 174.975586));
 	}
 
 	private static boolean areCloseEnough(double a, double b, long howClose) {

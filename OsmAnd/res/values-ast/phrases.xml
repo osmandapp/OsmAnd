@@ -1966,7 +1966,7 @@
     <string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Siquiatría p\'adultos</string>
-    <string name="poi_health_specialty_podology_yes">Podoloxía</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloxía</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sports medicine</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manual therapy</string>
     <string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
@@ -1990,7 +1990,7 @@
     <string name="poi_health_specialty_neuropsychiatry_yes">Neurosiquiatría</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurological surgery</string>
     <string name="poi_health_specialty_nephrology_yes">Nephrology (renal diseases)</string>
-    <string name="poi_health_specialty_dentistry_yes">Dentistry</string>
+    <string name="poi_health_specialty_stomatology_yes">Dentistry</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterology</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostic radiology</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-facial surgery</string>
@@ -2002,7 +2002,7 @@
     <string name="poi_health_specialty_orthodontics_yes">Orthodontics</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastic surgery</string>
     <string name="poi_health_specialty_emergency_medicine_no">Health specialty: accident and emergency medicine: no</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Accident and emergency medicine</string>
+    <string name="poi_health_specialty_emergency_yes">Accident and emergency medicine</string>
     <string name="poi_health_specialty_maternity_yes">Maternidá</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dental, oral and maxillo-facial surgery</string>
     <string name="poi_health_specialty_pulmonology_yes">Respiratory medicine</string>
@@ -2023,7 +2023,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Paediatrics</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngology</string>
     <string name="poi_health_specialty_orthopaedics_yes">Orthopaedics</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Internal medicine</string>
+    <string name="poi_health_specialty_internal_yes">Internal medicine</string>
     <string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
     <string name="poi_health_specialty_general_yes">General practitioner</string>

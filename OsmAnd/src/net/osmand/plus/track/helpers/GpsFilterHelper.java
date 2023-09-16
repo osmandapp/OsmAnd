@@ -505,7 +505,7 @@ public class GpsFilterHelper {
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
 		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
-			float speed = singlePoint ? (float) point.speed : analysis.getSpeedData().getAttributes().get(pointIndex).value;
+			float speed = singlePoint ? (float) point.speed : analysis.pointAttributes.get(pointIndex).speed;
 			return !isNeeded() || getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
 		}
 
@@ -601,7 +601,7 @@ public class GpsFilterHelper {
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex,
 		                           double distanceToLastSurvivedPoint, boolean singlePoint) {
-			float altitude = singlePoint ? (float) point.ele : analysis.getElevationData().getAttributes().get(pointIndex).value;
+			float altitude = singlePoint ? (float) point.ele : analysis.pointAttributes.get(pointIndex).elevation;
 			return !isNeeded() || getSelectedMinValue() <= altitude && altitude <= getSelectedMaxValue();
 		}
 

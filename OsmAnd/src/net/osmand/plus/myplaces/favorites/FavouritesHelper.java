@@ -17,6 +17,7 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -348,10 +349,11 @@ public class FavouritesHelper {
 	}
 
 	public boolean addFavourite(@NonNull FavouritePoint point) {
-		return addFavourite(point, true, true, true);
+		return addFavourite(point, true, true, true, null);
 	}
 
-	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync) {
+	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave,
+	                            boolean saveAsync, @Nullable PointsGroup pointsGroup) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
@@ -363,7 +365,7 @@ public class FavouritesHelper {
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 
-		FavoriteGroup group = getOrCreateGroup(point);
+		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
@@ -755,16 +757,31 @@ public class FavouritesHelper {
 		}
 	}
 
+	@NonNull
 	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point) {
-		if (flatGroups.containsKey(point.getCategory())) {
-			return flatGroups.get(point.getCategory());
+		return getOrCreateGroup(point, null);
+	}
+
+	@NonNull
+	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point, @Nullable PointsGroup pointsGroup) {
+		FavoriteGroup favoriteGroup = flatGroups.get(point.getCategory());
+		if (favoriteGroup == null) {
+			favoriteGroup = new FavoriteGroup(point);
+
+			flatGroups.put(favoriteGroup.getName(), favoriteGroup);
+			favoriteGroups.add(favoriteGroup);
 		}
-		FavoriteGroup group = new FavoriteGroup(point);
+		updateGroupAppearance(favoriteGroup, pointsGroup);
 
-		flatGroups.put(group.getName(), group);
-		favoriteGroups.add(group);
+		return favoriteGroup;
+	}
 
-		return group;
+	private void updateGroupAppearance(@Nullable FavoriteGroup favoriteGroup, @Nullable PointsGroup pointsGroup) {
+		if (favoriteGroup != null && pointsGroup != null) {
+			favoriteGroup.setColor(pointsGroup.color);
+			favoriteGroup.setIconName(pointsGroup.iconName);
+			favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE));
+		}
 	}
 
 	private void onFavouritePropertiesUpdated() {
@@ -773,6 +790,7 @@ public class FavouritesHelper {
 		}
 	}
 
+	@NonNull
 	public static List<FavouritePoint> getPointsFromGroups(@NonNull List<FavoriteGroup> groups) {
 		List<FavouritePoint> favouritePoints = new ArrayList<>();
 		for (FavoriteGroup group : groups) {

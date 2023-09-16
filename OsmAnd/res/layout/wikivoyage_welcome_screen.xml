@@ -62,7 +62,7 @@
 			android:ellipsize="end"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
 			android:text="@string/wikivoyage_travel_guide_descr"
-			android:textColor="@color/wikivoyage_secondary_text"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/default_list_text_size"/>
 
 		<FrameLayout

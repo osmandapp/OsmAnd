@@ -139,11 +139,11 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getSecondaryColor() {
-		return getResolvedColor(R.color.description_font_and_bottom_sheet_icons);
+		return getResolvedColor(R.color.icon_color_default_light);
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.description_font_and_bottom_sheet_icons);
+		return getColoredIcon(icon, R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {

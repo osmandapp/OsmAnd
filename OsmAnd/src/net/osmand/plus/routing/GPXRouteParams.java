@@ -80,7 +80,7 @@ public class GPXRouteParams {
 		int selectedRoute = builder.getSelectedRoute();
 		int selectedSegment = builder.getSelectedSegment();
 		if (OSMAND_ROUTER_V2.equals(file.author)) {
-			route = RouteProvider.parseOsmAndGPXRoute(points, file, segmentEndpoints, selectedSegment);
+			route = RouteProvider.parseOsmAndGPXRoute(points, file, segmentEndpoints, selectedSegment, builder.leftSide);
 			if (selectedSegment == -1) {
 				routePoints = file.getRoutePoints();
 			} else {

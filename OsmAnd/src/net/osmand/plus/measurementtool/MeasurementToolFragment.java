@@ -59,6 +59,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -885,15 +886,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void calculateSrtmTrack() {
-		GpxData gpxData = editingCtx.getGpxData();
-		if (isCalculateSrtmMode() && gpxData != null && calculateSrtmTask == null) {
+		if (isCalculateSrtmMode() && calculateSrtmTask == null) {
 			try {
-				GPXFile gpxFile = gpxData.getGpxFile();
-				File file = new File(gpxFile.path);
-				calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, file,
-						file.getName(), false, Collections.emptyMap(), null, this);
+				GPXFile gpxFile = generateGpxFile();
+				InputStream inputStream = new ByteArrayInputStream(GPXUtilities.asString(gpxFile).getBytes("UTF-8"));
+				calculateSrtmTask = AndroidNetworkUtils.uploadFileAsync(PROCESS_SRTM_URL, inputStream,
+						getSuggestedFileName(), false, Collections.emptyMap(), null, this);
 			} catch (IOException e) {
-				Toast.makeText(getMapActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+				app.showToastMessage(e.getMessage());
 			}
 		}
 	}
@@ -910,16 +910,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void calculateHeightmapTrack() {
-		GpxData gpxData = editingCtx.getGpxData();
-		if (isCalculateHeightmapMode() && gpxData != null && calculateHeightmapTask == null) {
-			GPXFile gpxFile = gpxData.getGpxFile();
-			calculateHeightmapTask = new HeightsResolverTask(new File(gpxFile.path), gpx -> {
+		if (isCalculateHeightmapMode() && calculateHeightmapTask == null) {
+			GPXFile gpxFile = generateGpxFile();
+			calculateHeightmapTask = new HeightsResolverTask(gpxFile, gpx -> {
 				calculateHeightmapTask = null;
-				if (gpx != null) {
-					editingCtx.clearSegments();
-					addNewGpxData(gpx);
-				} else {
-					updateInfoView();
+
+				updateInfoView();
+				if (gpx == null) {
 					app.showToastMessage(R.string.error_calculate);
 				}
 			});
@@ -1157,15 +1154,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void gpsFilterOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxData gpxData = editingCtx.getGpxData();
-			GPXFile sourceGpx = gpxData != null
-					? gpxData.getGpxFile()
-					: new GPXFile(Version.getFullVersion(app));
-			GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(editingCtx,
-					getSuggestedFileName(), sourceGpx, false, false);
-			gpxFile.path = gpxData != null
-					? gpxData.getGpxFile().path
-					: app.getAppPath(GPX_INDEX_DIR) + "/" + getSuggestedFileName() + GPX_FILE_EXT;
+			GPXFile gpxFile = generateGpxFile();
 
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().syncGroup().selectedByUser()
@@ -1177,6 +1166,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.map_ruler_container);
 			GpsFilterFragment.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile, this);
 		}
+	}
+
+	@NonNull
+	public GPXFile generateGpxFile() {
+		GpxData gpxData = editingCtx.getGpxData();
+		GPXFile sourceGpx = gpxData != null ? gpxData.getGpxFile() : new GPXFile(Version.getFullVersion(app));
+		GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(editingCtx, getSuggestedFileName(), sourceGpx, false, false);
+		gpxFile.path = gpxData != null ? gpxData.getGpxFile().path : getDefaultGpxPath();
+		return gpxFile;
+	}
+
+	@NonNull
+	private String getDefaultGpxPath() {
+		return app.getAppPath(GPX_INDEX_DIR) + "/" + getSuggestedFileName() + GPX_FILE_EXT;
 	}
 
 	@Override
@@ -2334,32 +2337,29 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onFileUploadStarted() {
-	}
-
-	@Override
-	public void onFileUploadProgress(int percent) {
-	}
-
-	@Override
 	public void onFileUploadDone(@NonNull NetworkResult networkResult) {
 		calculateSrtmTask = null;
 
 		String error = networkResult.getError();
 		String response = networkResult.getResponse();
 
-		GpxData prevGpxData = editingCtx.getGpxData();
-		if (error == null && prevGpxData != null && !Algorithms.isEmpty(response)) {
+		if (error == null && !Algorithms.isEmpty(response)) {
 			InputStream inputStream = new ByteArrayInputStream(response.getBytes());
 			GpxFileLoaderTask.loadGpxFile(inputStream, getActivity(), gpxFile -> {
-				gpxFile.path = prevGpxData.getGpxFile().path;
 				if (gpxFile.error == null) {
-					editingCtx.clearSegments();
-					addNewGpxData(gpxFile);
+					List<WptPt> points = editingCtx.getPoints();
+					List<WptPt> segmentsPoints = gpxFile.getAllSegmentsPoints();
+					if (points.size() == segmentsPoints.size()) {
+						for (int i = 0; i < points.size(); i++) {
+							WptPt point = points.get(i);
+							point.ele = segmentsPoints.get(i).ele;
+						}
+					}
 				} else {
-					updateInfoView();
 					app.showToastMessage(gpxFile.error.getMessage());
 				}
+				updateInfoView();
+
 				return true;
 			});
 		}

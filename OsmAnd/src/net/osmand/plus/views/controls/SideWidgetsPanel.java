@@ -1,5 +1,7 @@
 package net.osmand.plus.views.controls;
 
+import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -19,8 +21,11 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -66,18 +71,19 @@ public class SideWidgetsPanel extends FrameLayout {
 
 	public SideWidgetsPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-
 		nightMode = getMyApplication().getDaynightHelper().isNightMode();
-		definePanelSide(attrs);
+		context = UiUtilities.getThemedContext(getContext(), nightMode);
+
+		definePanelSide(context, attrs);
 		setWillNotDraw(false);
 		setupPaddings();
 		setupBorderPaint();
-		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.side_widgets_panel, this);
+		inflate(context, R.layout.side_widgets_panel, this);
 		setupChildren();
 	}
 
-	private void definePanelSide(@Nullable AttributeSet attrs) {
-		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SideWidgetsPanel);
+	private void definePanelSide(@NonNull Context context, @Nullable AttributeSet attrs) {
+		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SideWidgetsPanel);
 		rightSide = typedArray.getBoolean(R.styleable.SideWidgetsPanel_rightSide, true);
 		typedArray.recycle();
 	}
@@ -101,17 +107,27 @@ public class SideWidgetsPanel extends FrameLayout {
 	private void setupChildren() {
 		dots = findViewById(R.id.dots);
 
-		adapter = createWidgetsPagerAdapter();
+		adapter = createPagerAdapter();
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
-				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.itemView);
+				wrapContentAroundPage(viewHolder.itemView);
 			}
 		});
+
 		viewPager = findViewById(R.id.view_pager);
 		viewPager.setAdapter(adapter);
 		// Set transformer just to update pages without RecyclerView animation
 		viewPager.setPageTransformer(new CompositePageTransformer());
-		viewPager.registerOnPageChangeCallback(new WrapContentViewPager2Callback(viewPager) {
+		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				if (state == SCROLL_STATE_IDLE) { // when dragging is ended
+					runInUIThread(() -> {
+						wrapContentAroundPage(null);
+					});
+				}
+			}
+
 			@Override
 			public void onPageSelected(int position) {
 				super.onPageSelected(position);
@@ -121,8 +137,21 @@ public class SideWidgetsPanel extends FrameLayout {
 		updateDots();
 	}
 
-	protected WidgetsPagerAdapter createWidgetsPagerAdapter() {
-		return new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
+	protected WidgetsPagerAdapter createPagerAdapter() {
+		WidgetsPanel panel = rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+		return new WidgetsPagerAdapter(getMyApplication(), panel);
+	}
+
+	public void update(DrawSettings drawSettings) {
+		adapter.updateIfNeeded();
+		boolean show = hasVisibleWidgets() && selfShowAllowed;
+		selfVisibilityChanging = true;
+		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
+			selfShowAllowed = true;
+		}
+		wrapContentAroundPage(null);
+		selfVisibilityChanging = false;
+		updateDots();
 	}
 
 	private void updateDots() {
@@ -167,18 +196,6 @@ public class SideWidgetsPanel extends FrameLayout {
 		} else {
 			return selected ? R.color.icon_color_primary_light : R.color.icon_color_secondary_light;
 		}
-	}
-
-	public void update(DrawSettings drawSettings) {
-		adapter.updateIfNeeded();
-		boolean show = hasVisibleWidgets() && selfShowAllowed;
-		selfVisibilityChanging = true;
-		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
-			selfShowAllowed = true;
-		}
-		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
-		selfVisibilityChanging = false;
-		updateDots();
 	}
 
 	public void updateColors(@NonNull TextState textState) {
@@ -236,6 +253,42 @@ public class SideWidgetsPanel extends FrameLayout {
 		if (!selfVisibilityChanging) {
 			selfShowAllowed = visibility == VISIBLE;
 		}
+	}
+
+	/**
+	 * @param viewToWrap pass null if this param can be fetched only from RecyclerView
+	 */
+	private void wrapContentAroundPage(@Nullable View viewToWrap) {
+		if (viewToWrap == null) {
+			viewToWrap = getCurrentPageView();
+		}
+		if (viewToWrap != null) {
+			int unspecifiedSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+			viewToWrap.measure(unspecifiedSpec, unspecifiedSpec);
+
+			int width = viewPager.getWidth();
+			int height = viewPager.getHeight();
+			int measuredWidth = viewToWrap.getMeasuredWidth();
+			int measuredHeight = viewToWrap.getMeasuredHeight();
+
+			if (width != measuredWidth || height != measuredHeight) {
+				ViewGroup.LayoutParams pagerParams = viewPager.getLayoutParams();
+				pagerParams.width = measuredWidth;
+				pagerParams.height = measuredHeight;
+				viewPager.setLayoutParams(pagerParams);
+			}
+		}
+	}
+
+	@Nullable
+	private View getCurrentPageView() {
+		RecyclerView recyclerView = (RecyclerView) viewPager.getChildAt(0);
+		ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(viewPager.getCurrentItem());
+		return viewHolder != null ? viewHolder.itemView : null;
+	}
+
+	private void runInUIThread(@NonNull Runnable runnable) {
+		getMyApplication().runInUIThread(runnable);
 	}
 
 	@NonNull

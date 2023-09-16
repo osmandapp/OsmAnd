@@ -65,7 +65,7 @@ public class HistoryCard extends MapBaseCard {
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 
-		int iconColorId = nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light;
+		int iconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		int iconColor = ContextCompat.getColor(app, iconColorId);
 
 		for (int i = 0; i < list.size(); i++) {

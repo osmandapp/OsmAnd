@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -146,7 +147,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	}
 
 	@Override
-	public void onItemDismiss(RecyclerView.ViewHolder holder) {
+	public void onItemDismiss(@NonNull ViewHolder holder) {
 		listener.onDragEnded(holder);
 	}
 

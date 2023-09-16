@@ -12,12 +12,16 @@ import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
+import java.util.Objects;
+
 public class GlideAverageWidget extends GlideBaseWidget {
 
 	private static final String MEASURED_INTERVAL_PREF_ID = "average_glide_measured_interval_millis";
 
 	private final AverageGlideComputer averageGlideComputer;
 	private final CommonPreference<Long> measuredIntervalPref;
+
+	private String cachedFormattedGlideRatio = null;
 
 	public GlideAverageWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, WidgetType.GLIDE_AVERAGE);
@@ -37,19 +41,17 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		if (isUpdateNeeded() || isTimeToUpdate()) {
-			lastUpdateTime = System.currentTimeMillis();
-			updateAverageGlide();
-		}
-	}
-
-	private void updateAverageGlide() {
-		long measuredInterval = measuredIntervalPref.get();
-		float averageVal = averageGlideComputer.getAverageGlideRatio(measuredInterval);
-		if (Float.isNaN(averageVal)) {
-			setText(NO_VALUE, null);
-		} else {
-			setText(format(averageVal), null);
+		if (isTimeToUpdate()) {
+			long measuredInterval = measuredIntervalPref.get();
+			String ratio = averageGlideComputer.getFormattedAverageGlideRatio(measuredInterval);
+			if (!Objects.equals(ratio, cachedFormattedGlideRatio)) {
+				cachedFormattedGlideRatio = ratio;
+				if (Algorithms.isEmpty(ratio)) {
+					setText(NO_VALUE, null);
+				} else {
+					setText(ratio, null);
+				}
+			}
 		}
 	}
 

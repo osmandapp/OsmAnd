@@ -41,7 +41,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(showImagesPref.get().name))
-				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
+				.setDescriptionColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
 				.setIcon(getContentIcon(R.drawable.ic_type_img))
 				.setTitle(getString(R.string.download_images))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
@@ -69,7 +69,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 
 		BaseBottomSheetItem clearCacheItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.shared_string_clear))
-				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)
+				.setDescriptionColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
 				.setTitle(getString(R.string.images_cache))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setOnClickListener(new View.OnClickListener() {

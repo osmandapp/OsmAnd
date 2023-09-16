@@ -25,7 +25,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
@@ -65,11 +64,9 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -78,7 +75,6 @@ import java.util.List;
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
-	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
 
 	private static final String SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY = "showStartFinishIconsInitialValueKey";
 
@@ -760,18 +756,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			promoCard = new PromoBannerCard(mapActivity, true);
 			addCard(container, promoCard);
 
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, new OnNeedScrollListener() {
-
-				@Override
-				public void onVerticalScrollNeeded(int y) {
-					View view = trackWidthCard.getView();
-					if (view != null) {
-						int resultYPosition = view.getTop() + y;
-						int dialogHeight = getInnerScrollableHeight();
-						ScrollView scrollView = (ScrollView) getBottomScrollView();
-						if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
-							scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
-						}
+			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, y -> {
+				View view = trackWidthCard.getView();
+				if (view != null) {
+					int resultYPosition = view.getTop() + y;
+					int dialogHeight = getInnerScrollableHeight();
+					ScrollView scrollView = (ScrollView) getBottomScrollView();
+					if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
+						scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
 					}
 				}
 			});
@@ -804,12 +796,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		if (gpxFile == null) {
-			return new ArrayList<>();
-		}
 		if (gpxFile.modifiedTime != modifiedTime) {
 			modifiedTime = gpxFile.modifiedTime;
-			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile);
+			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile, true);
 			if (selectedGpxFile.getDisplayGroups(app) != null) {
 				displayGroups = selectedGpxFile.getDisplayGroups(app);
 			}
@@ -826,17 +815,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		}
 		return groups;
-	}
-
-	public void dismissImmediate() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			try {
-				mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				log.error(e);
-			}
-		}
 	}
 
 	public int getInnerScrollableHeight() {

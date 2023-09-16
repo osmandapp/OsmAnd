@@ -101,15 +101,16 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			markerImageViewToUpdate = holder.icon;
 		} else {
 			holder.iconDirection.setVisibility(View.VISIBLE);
-
 			holder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_flag, markerColor));
+
 			holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
 			holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
-			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_main_dark : R.color.divider_color_light));
 			holder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, nightMode ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			holder.optionsBtn.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_passed, actionIconColor));
 			holder.iconReorder.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_item_move));
 			holder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, nightMode));
+
 
 			drawableResToUpdate = R.drawable.ic_direction_arrow;
 			markerImageViewToUpdate = holder.iconDirection;

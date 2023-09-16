@@ -218,8 +218,8 @@ public class AndroidUtils {
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return createCheckedColorStateList(ctx, nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark);
 	}
 
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
@@ -303,7 +303,12 @@ public class AndroidUtils {
 	}
 
 	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
-		return !manager.isStateSaved();
+		return isFragmentCanBeAdded(manager, tag, false);
+	}
+
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean useTag) {
+		boolean isStateSaved = manager.isStateSaved();
+		return useTag ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

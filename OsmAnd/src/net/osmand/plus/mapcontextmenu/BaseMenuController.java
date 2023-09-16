@@ -17,8 +17,8 @@ public abstract class BaseMenuController {
 	@Nullable
 	private MapActivity mapActivity;
 	private boolean portraitMode;
-	private boolean nightMode;
 	private int landscapeWidthPx;
+	protected boolean nightMode;
 
 	public BaseMenuController(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;

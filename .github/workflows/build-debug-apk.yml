@@ -13,36 +13,36 @@ jobs:
 
     steps:
     - name: checkout OsmAnd
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: android
     - name: checkout OsmAnd-resources
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-resources
         path: resources
     - name: checkout OsmAnd-core
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-core
         path: core
     - name: checkout OsmAnd-core-legacy
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-core-legacy
         path: core-legacy
     - name: checkout OsmAnd-build
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-build
         path: build
     - name: checkout OsmAnd-tools
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-tools
         path: tools
     - name: checkout OsmAnd-misc
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: osmandapp/OsmAnd-misc
         path: misc

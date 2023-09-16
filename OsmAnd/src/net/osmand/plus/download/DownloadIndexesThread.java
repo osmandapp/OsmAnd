@@ -72,11 +72,14 @@ public class DownloadIndexesThread {
 
 	public interface DownloadEvents {
 
-		void onUpdatedIndexesList();
+		default void onUpdatedIndexesList() {
+		}
 
-		void downloadInProgress();
+		default void downloadInProgress() {
+		}
 
-		void downloadHasFinished();
+		default void downloadHasFinished() {
+		}
 	}
 
 	public DownloadIndexesThread(OsmandApplication app) {

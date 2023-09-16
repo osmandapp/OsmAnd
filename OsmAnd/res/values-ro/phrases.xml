@@ -2345,7 +2345,7 @@
     <string name="poi_health_specialty_homeopathy_yes">Homeopatie</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupunctură</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psihiatrie pentru adulți</string>
-    <string name="poi_health_specialty_podology_yes">Podologie</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologie</string>
     <string name="poi_health_specialty_sports_medicine_yes">Medicină sportivă</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manuală</string>
     <string name="poi_health_specialty_speech_therapy_yes">Terapia prin vorbire</string>
@@ -2369,7 +2369,7 @@
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsihiatrie</string>
     <string name="poi_health_specialty_neurosurgery_yes">Chirurgie neurologică</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologie (boli renale)</string>
-    <string name="poi_health_specialty_dentistry_yes">Stomatologie</string>
+    <string name="poi_health_specialty_stomatology_yes">Stomatologie</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologie</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiologie de diagnosticare</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgie maxilo-facială</string>
@@ -2381,7 +2381,7 @@
     <string name="poi_health_specialty_orthodontics_yes">Ortodonție</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgie plastică</string>
     <string name="poi_health_specialty_emergency_medicine_no">Specialitatea de sănătate: medicină de urgență și accidente: nu</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Medicină de urgență și accidente</string>
+    <string name="poi_health_specialty_emergency_yes">Medicină de urgență și accidente</string>
     <string name="poi_health_specialty_maternity_yes">Maternitate</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgie dentară, orală și maxilo-facială</string>
     <string name="poi_health_specialty_pulmonology_yes">Medicină respiratorie</string>
@@ -2402,7 +2402,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Pediatrie</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringologie</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicină internă</string>
+    <string name="poi_health_specialty_internal_yes">Medicină internă</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologie</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
     <string name="poi_health_specialty_general_yes">Medic generalist</string>

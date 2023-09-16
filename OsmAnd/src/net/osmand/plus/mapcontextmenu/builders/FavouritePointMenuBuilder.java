@@ -91,6 +91,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
+			helper.setCollapseExpandListener(getCollapseExpandListener());
 			helper.buildInternal(view);
 		}
 	}

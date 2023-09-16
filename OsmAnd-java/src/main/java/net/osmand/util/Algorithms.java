@@ -598,6 +598,17 @@ public class Algorithms {
 		return false;
 	}
 
+	public static boolean anyIsNull(Object ... args) {
+		if (args != null) {
+			for (Object o : args) {
+				if (o == null) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm

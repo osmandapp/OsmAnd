@@ -5,6 +5,7 @@ import static net.osmand.plus.Version.FULL_VERSION_NAME;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,23 +23,57 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.TalkbackUtils;
+import net.osmand.plus.utils.TalkbackUtils.TalkbackHandler;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class OsmandInAppPurchaseActivity extends AppCompatActivity implements InAppPurchaseListener {
+public class OsmandInAppPurchaseActivity extends AppCompatActivity implements InAppPurchaseListener, TalkbackHandler {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandInAppPurchaseActivity.class);
 
 	private InAppPurchaseHelper purchaseHelper;
 	private boolean activityDestroyed;
+	private boolean activityHiddenForTalkback = false;
+	protected FragmentManager.FragmentLifecycleCallbacks lifecycleCallbacks = TalkbackUtils.getLifecycleCallbacks(this);
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		initInAppPurchaseHelper();
+		getSupportFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		List<View> views = getHidingViews();
+		if (views == null) {
+			View view = getWindow().getDecorView();
+			TalkbackUtils.setActivityViewsAccessibility(view, hideActivity, this);
+		} else {
+			for (View hidingView : views) {
+				hidingView.setImportantForAccessibility(hideActivity ? View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS : View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+			}
+		}
+	}
+
+	@Nullable
+	protected List<View> getHidingViews() {
+		return null;
+	}
+
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		return getSupportFragmentManager().getFragments();
 	}
 
 	@Override
@@ -166,7 +201,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseErrorOnFragments(@NonNull FragmentManager fragmentManager,
-	                                              InAppPurchaseTaskType taskType, String error) {
+												  InAppPurchaseTaskType taskType, String error) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -207,7 +242,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager,
-	                                                      String sku, boolean active) {
+														  String sku, boolean active) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -223,7 +258,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseShowProgressOnFragments(@NonNull FragmentManager fragmentManager,
-	                                                     InAppPurchaseTaskType taskType) {
+														 InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -239,7 +274,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
-	                                                        InAppPurchaseTaskType taskType) {
+															InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -277,5 +312,15 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	public void dismissInAppPurchaseProgress(InAppPurchaseTaskType taskType) {
 		// not implemented
+	}
+
+	@Override
+	public boolean isActivityHiddenForTalkback() {
+		return activityHiddenForTalkback;
+	}
+
+	@Override
+	public void setActivityHiddenForTalkback(boolean activityHiddenForTalkback) {
+		this.activityHiddenForTalkback = activityHiddenForTalkback;
 	}
 }

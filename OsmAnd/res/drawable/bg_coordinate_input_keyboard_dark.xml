@@ -5,7 +5,7 @@
 	</item>
 	<item>
 		<shape>
-			<solid android:color="@color/ctx_menu_buttons_divider_dark" />
+			<solid android:color="@color/divider_color_dark" />
 		</shape>
 	</item>
 </layer-list>
