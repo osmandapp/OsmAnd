@@ -188,7 +188,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		if (info != null) {
 			switch (tabType) {
 				case RECENT_CHANGES_REMOTE:
-					return BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
+					return BackupHelper.mapItemsForRestore(info, backup.getSettingsItems()).size() > 0;
 				case RECENT_CHANGES_LOCAL:
 					return info.filteredFilesToDelete.size() + info.filteredFilesToUpload.size() > 0;
 				default:

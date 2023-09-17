@@ -73,6 +73,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
@@ -205,7 +206,7 @@ public class BackupHelper {
 	public static List<SettingsItem> getItemsForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
 		List<SettingsItem> itemsForRestore = new ArrayList<>();
 		if (info != null) {
-			Map<RemoteFile, SettingsItem> restoreItems = getRemoteFilesSettingsItems(settingsItems, info.filteredFilesToDownload, false);
+			Map<RemoteFile, SettingsItem> restoreItems = mapRemoteFilesWithSettingItems(settingsItems, info.filteredFilesToDownload, false);
 			for (SettingsItem restoreItem : restoreItems.values()) {
 				if (restoreItem instanceof CollectionSettingsItem) {
 					CollectionSettingsItem<?> settingsItem = (CollectionSettingsItem<?>) restoreItem;
@@ -219,18 +220,18 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	public static Map<RemoteFile, SettingsItem> getItemsMapForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
+	public static Map<RemoteFile, SettingsItem> mapItemsForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
 		Map<RemoteFile, SettingsItem> itemsForRestore = new HashMap<>();
 		if (info != null) {
-			itemsForRestore.putAll(getRemoteFilesSettingsItems(settingsItems, info.filteredFilesToDownload, false));
+			itemsForRestore.putAll(mapRemoteFilesWithSettingItems(settingsItems, info.filteredFilesToDownload, false));
 		}
 		return itemsForRestore;
 	}
 
 	@NonNull
-	public static Map<RemoteFile, SettingsItem> getRemoteFilesSettingsItems(@NonNull List<SettingsItem> items,
-	                                                                        @NonNull List<RemoteFile> remoteFiles,
-	                                                                        boolean infoFiles) {
+	public static Map<RemoteFile, SettingsItem> mapRemoteFilesWithSettingItems(@NonNull List<SettingsItem> items,
+	                                                                           @NonNull List<RemoteFile> remoteFiles,
+	                                                                           boolean infoFiles) {
 		Map<RemoteFile, SettingsItem> res = new HashMap<>();
 		List<RemoteFile> files = new ArrayList<>(remoteFiles);
 		for (SettingsItem item : items) {
@@ -317,10 +318,11 @@ public class BackupHelper {
 
 	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
 		String itemFileName = getItemFileName(item);
-		if (item.getType().name().equals(type)) {
+		if (Objects.equals(item.getType().name(), type)) {
 			if (name.equals(itemFileName)) {
 				return true;
-			} else if (item instanceof FileSettingsItem) {
+			}
+			if (item instanceof FileSettingsItem) {
 				FileSettingsItem fileItem = (FileSettingsItem) item;
 				if (name.startsWith(fileItem.getSubtype().getSubtypeFolder())) {
 					if (fileItem.getFile().isDirectory() && !itemFileName.endsWith("/")) {
@@ -938,6 +940,7 @@ public class BackupHelper {
 	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
 	                        @NonNull Map<String, RemoteFile> uniqueRemoteFiles,
 	                        @NonNull Map<String, RemoteFile> deletedRemoteFiles,
+	                        @NonNull Map<String, RemoteFile> oldRemoteFiles,
 	                        @Nullable OnGenerateBackupInfoListener listener) {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
@@ -971,7 +974,8 @@ public class BackupHelper {
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
-					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+					String key = remoteFile.getTypeNamePath();
+					LocalFile localFile = localFiles.get(key);
 					if (localFile != null) {
 						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
 						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
@@ -996,6 +1000,8 @@ public class BackupHelper {
 						} else {
 							info.filesToDownload.add(remoteFile);
 						}
+					} else if (deletedRemoteFiles.containsKey(key) && oldRemoteFiles.containsKey(key)) {
+						info.filesInTrash.add(remoteFile);
 					}
 				}
 				for (LocalFile localFile : localFiles.values()) {

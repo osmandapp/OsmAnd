@@ -1,6 +1,5 @@
 package net.osmand.plus.backup.trash;
 
-import static net.osmand.plus.utils.OsmAndFormatter.formatChangesPassedTime;
 import static java.util.Collections.sort;
 
 import androidx.annotation.NonNull;
@@ -8,8 +7,12 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupInfo;
+import net.osmand.plus.backup.ChangesUtils;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.trash.data.TrashGroup;
 import net.osmand.plus.backup.trash.data.TrashItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.text.ParseException;
@@ -27,10 +30,6 @@ public class TrashUtils {
 
 	private final OsmandApplication app;
 	private TrashDataUpdatedListener listener;
-
-	// Fake data only for testing
-	private static List<TrashItem> fakeTrashData = null;
-	private static boolean isFakeDataInitialized = false;
 
 	public TrashUtils(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -66,26 +65,49 @@ public class TrashUtils {
 
 	@NonNull
 	public List<TrashItem> collectTrashItems() {
-		if (!isFakeDataInitialized) {
-			fakeTrashData = collectTestTrashItems(app);
-			isFakeDataInitialized = true;
+		List<TrashItem> result = new ArrayList<>();
+		BackupInfo info = app.getBackupHelper().getBackup().getBackupInfo();
+		if (info != null) {
+			for (RemoteFile remoteFile : info.filesInTrash) {
+				TrashItem trashItem = createTrashItem(remoteFile);
+				if (trashItem != null) {
+					result.add(trashItem);
+				}
+			}
 		}
-		return fakeTrashData;
+		return !Algorithms.isEmpty(result) ? result : FakeTrashData.collectFakeTrashItems(app);
+	}
+
+	@Nullable
+	private TrashItem createTrashItem(@NonNull RemoteFile remoteFile) {
+		if (remoteFile.item == null) {
+			return null;
+		}
+		long deleteTime = remoteFile.getUpdatetimems();
+		SettingsItem settingsItem = remoteFile.item;
+		TrashItem trashItem = new TrashItem()
+				.setName(ChangesUtils.getName(app, settingsItem))
+				.setIconId(ChangesUtils.getIconId(settingsItem))
+				.setDeleteTime(deleteTime)
+				.setDescription(ChangesUtils.generateDeletedTimeString(app, deleteTime))
+				.setLocalItem(false);
+		trashItem.remoteFile = remoteFile;
+		return trashItem;
 	}
 
 	public void emptyTrash() {
-		fakeTrashData.clear();
+		FakeTrashData.emptyTrash();
 		app.showShortToastMessage(R.string.trash_is_empty);
 		notifyTrashDataUpdated();
 	}
 
 	public void restoreFromTrash(@NonNull TrashItem trashItem) {
-		fakeTrashData.remove(trashItem);
+		FakeTrashData.restoreFromTrash(trashItem);
 		notifyTrashDataUpdated();
 	}
 
 	public void deleteImmediately(@NonNull TrashItem trashItem) {
-		fakeTrashData.remove(trashItem);
+		FakeTrashData.deleteImmediately(trashItem);
 		notifyTrashDataUpdated();
 	}
 
@@ -111,106 +133,6 @@ public class TrashUtils {
 		} catch (ParseException e) {
 			return 0;
 		}
-	}
-
-	@NonNull
-	private static List<TrashItem> collectTestTrashItems(@NonNull OsmandApplication app) {
-		// Time constants in milliseconds
-		long ONE_HOUR = 3_600_000;
-		long ONE_MINUTE = ONE_HOUR / 60;
-		long ONE_DAY = ONE_HOUR * 24;
-		long ONE_WEEK = ONE_DAY * 7;
-
-		long now = System.currentTimeMillis();
-		long deleteTime = now - ONE_HOUR;
-
-		List<TrashItem> trashItems = new ArrayList<>();
-		trashItems.add(new TrashItem()
-				.setName("Driving")
-				.setIconId(R.drawable.ic_action_car_dark)
-				.setDeleteTime(deleteTime)
-		);
-
-		deleteTime -= ONE_DAY * 2;
-		trashItems.add(new TrashItem()
-				.setName("AmsterdamTrip")
-				.setIconId(R.drawable.ic_action_polygom_dark)
-				.setDeleteTime(deleteTime)
-		);
-
-		deleteTime -= ONE_WEEK - ONE_DAY * 4;
-		trashItems.add(new TrashItem()
-				.setName("2022-10-04_12-47_Tue")
-				.setIconId(R.drawable.ic_action_polygom_dark)
-				.setDeleteTime(deleteTime)
-		);
-
-		deleteTime -= 3 * ONE_WEEK + ONE_HOUR;
-		trashItems.add(new TrashItem()
-				.setName("Microsoft Earth")
-				.setIconId(R.drawable.ic_layer_top)
-				.setDeleteTime(deleteTime)
-				.setLocalItem(false)
-		);
-
-		deleteTime += ONE_HOUR * 7;
-		trashItems.add(new TrashItem()
-				.setName("Favorites")
-				.setIconId(R.drawable.ic_action_folder_favorites)
-				.setDeleteTime(deleteTime)
-		);
-
-		deleteTime -= ONE_WEEK * 12;
-		trashItems.add(new TrashItem()
-				.setName("Favorites Restaurant")
-				.setIconId(R.drawable.ic_action_favorite)
-				.setDeleteTime(deleteTime)
-		);
-
-		deleteTime -= ONE_HOUR * 1.5;
-		trashItems.add(new TrashItem()
-				.setName("Favorites SOTM")
-				.setIconId(R.drawable.ic_action_favorite)
-				.setDeleteTime(deleteTime)
-				.setLocalItem(false)
-		);
-
-		deleteTime -= ONE_MINUTE * 2;
-		trashItems.add(new TrashItem()
-				.setName("Favorites Flowers")
-				.setIconId(R.drawable.ic_action_favorite)
-				.setDeleteTime(deleteTime)
-				.setLocalItem(false)
-		);
-
-		deleteTime -= 500;
-		trashItems.add(new TrashItem()
-				.setName("Favorites TestOfflinePOI")
-				.setIconId(R.drawable.ic_action_favorite)
-				.setDeleteTime(deleteTime)
-				.setLocalItem(false)
-		);
-
-		deleteTime -= ONE_DAY * 2;
-		trashItems.add(new TrashItem()
-				.setName("Germany Baden-Wurttemberg Regierungsbezirk Stuttgart")
-				.setIconId(R.drawable.ic_action_map_download)
-				.setDeleteTime(deleteTime)
-				.setLocalItem(false)
-		);
-
-		// Setup description
-		for (TrashItem trashItem : trashItems) {
-			trashItem.setDescription(formatDeleteTimeDescription(app, trashItem.getDeleteTime()));
-		}
-
-		return trashItems;
-	}
-
-	public static String formatDeleteTimeDescription(@NonNull OsmandApplication app, long time) {
-		String deleted = app.getString(R.string.shared_string_deleted);
-		String formattedDate = formatChangesPassedTime(app, time, "", "MMM d, HH:mm", "HH:mm");
-		return app.getString(R.string.ltr_or_rtl_combine_via_colon, deleted, formattedDate);
 	}
 
 	public interface TrashDataUpdatedListener {

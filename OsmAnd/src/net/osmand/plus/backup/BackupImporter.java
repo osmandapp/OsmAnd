@@ -1,7 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
-import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
+import static net.osmand.plus.backup.BackupHelper.mapRemoteFilesWithSettingItems;
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
@@ -88,7 +88,7 @@ class BackupImporter {
 			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					if (settingsItems != null) {
-						Map<RemoteFile, SettingsItem> items = getRemoteFilesSettingsItems(settingsItems, remoteFiles, true);
+						Map<RemoteFile, SettingsItem> items = mapRemoteFilesWithSettingItems(settingsItems, remoteFiles, true);
 						remoteFiles = new ArrayList<>(items.keySet());
 					}
 					result.remoteFiles = remoteFiles;
@@ -217,10 +217,10 @@ class BackupImporter {
 
 			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
 			Set<String> uniqueFileIds = new TreeSet<>();
-			for (RemoteFile rf : remoteFiles) {
-				String fileId = rf.getTypeNamePath();
-				if (uniqueFileIds.add(fileId) && !rf.isDeleted()) {
-					uniqueRemoteFiles.add(rf);
+			for (RemoteFile remoteFile : remoteFiles) {
+				String fileId = remoteFile.getTypeNamePath();
+				if (uniqueFileIds.add(fileId)) {
+					uniqueRemoteFiles.add(remoteFile);
 				}
 			}
 			operationLog.log("build uniqueRemoteFiles");

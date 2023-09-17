@@ -10,18 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="app_mode_hang_gliding">Hang gliding</string>
-    <string name="app_mode_paragliding">Paragliding</string>
-    <string name="max_altitude">Max altitude</string>
-    <string name="app_mode_baby_transport">Baby transport</string>
-    <string name="release_4_6">
-       • Glide Ratio Widget \n\n
-       • Added ANT+ temperature widget \n\n
-       • Better memory management for large GPX tracks \n\n
-    </string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="shared_string_temperature">Temperature</string>
-    <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="shared_string_delete_item">Delete item</string>
     <string name="delete_trash_item_confirmation_desc">\"%1$s\" will be deleted permanently. Are you sure?\n\nThis action can\'t be undone.</string>
     <string name="shared_string_delete_immediately">Delete immediately</string>
@@ -34,6 +22,18 @@
     <string name="trash_is_empty">Trash is empty</string>
     <string name="shared_string_trash">Trash</string>
     <string name="shared_string_storage">Storage</string>
+    <string name="app_mode_hang_gliding">Hang gliding</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="max_altitude">Max altitude</string>
+    <string name="app_mode_baby_transport">Baby transport</string>
+    <string name="release_4_6">
+       • Glide Ratio Widget \n\n
+       • Added ANT+ temperature widget \n\n
+       • Better memory management for large GPX tracks \n\n
+    </string>
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_temperature">Temperature</string>
+    <string name="sensor_temperature_desc">Shows temperature from sensor</string>
     <string name="with_waypoints">With waypoints</string>
     <string name="shared_string_reset_all">Reset all</string>
     <string name="date_of_creation">Date of creation</string>

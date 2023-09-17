@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.BackupHelper.mapItemsForRestore;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DELETE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
@@ -55,7 +56,7 @@ public class LocalTabFragment extends ChangesTabFragment {
 			filesByName.put(key, fileInfo);
 		}
 		if (filesByName.size() > 0) {
-			Map<RemoteFile, SettingsItem> downloadItems = BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems());
+			Map<RemoteFile, SettingsItem> downloadItems = mapItemsForRestore(info, backup.getSettingsItems());
 			for (Map.Entry<RemoteFile, SettingsItem> entry : downloadItems.entrySet()) {
 				RemoteFile remoteFile = entry.getKey();
 				String key = remoteFile.getTypeNamePath();

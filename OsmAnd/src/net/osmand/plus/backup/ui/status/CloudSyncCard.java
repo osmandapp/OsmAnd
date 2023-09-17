@@ -171,7 +171,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 	private void setupCloudChangesButton(@NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
 		int itemsSize = info != null
-				? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() + info.filteredLocalFilesToDelete.size()
+				? BackupHelper.mapItemsForRestore(info, backup.getSettingsItems()).size() + info.filteredLocalFilesToDelete.size()
 				: -1;
 		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
 		String title = app.getString(R.string.cloud_changes);

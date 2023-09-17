@@ -5,7 +5,7 @@ import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYN
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
-import static net.osmand.plus.backup.ui.ChangesTabFragment.generateTimeString;
+import static net.osmand.plus.backup.ChangesUtils.generateTimeString;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

@@ -182,8 +182,10 @@ public class PrepareBackupTask {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}
-		backupHelper.generateBackupInfo(backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
-				backup.getRemoteFiles(RemoteFilesType.DELETED), (backupInfo, error) -> {
+		backupHelper.generateBackupInfo(
+				backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
+				backup.getRemoteFiles(RemoteFilesType.DELETED), backup.getRemoteFiles(RemoteFilesType.OLD),
+				(backupInfo, error) -> {
 					if (Algorithms.isEmpty(error)) {
 						backup.setBackupInfo(backupInfo);
 					} else {

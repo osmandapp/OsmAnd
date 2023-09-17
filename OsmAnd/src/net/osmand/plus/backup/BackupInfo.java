@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -20,6 +21,7 @@ public class BackupInfo {
 	public List<RemoteFile> filesToDelete = new ArrayList<>();
 	public List<LocalFile> localFilesToDelete = new ArrayList<>();
 	public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
+	public List<RemoteFile> filesInTrash = new ArrayList<>();
 
 	public List<SettingsItem> itemsToUpload;
 	public List<SettingsItem> itemsToDelete;
@@ -76,10 +78,8 @@ public class BackupInfo {
 
 	private void createFilteredFilesToDownload(@NonNull OsmandApplication app) {
 		List<RemoteFile> files = new ArrayList<>();
-		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDownload) {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
-			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
+			if (isExportTypeAllowed(app, ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile))) {
 				files.add(remoteFile);
 			}
 		}
@@ -88,12 +88,13 @@ public class BackupInfo {
 
 	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
-		BackupHelper helper = app.getBackupHelper();
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
-			ExportSettingsType type = localFile.item != null ?
-					ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
-			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable)) {
+			ExportSettingsType type = null;
+			if (localFile.item != null) {
+				type = ExportSettingsType.getExportSettingsTypeForItem(localFile.item);
+			}
+			if (isExportTypeAllowed(app, type) && (type.isAllowedInFreeVersion() || proAvailable)) {
 				files.add(localFile);
 			}
 		}
@@ -102,10 +103,8 @@ public class BackupInfo {
 
 	private void createFilteredFilesToDelete(@NonNull OsmandApplication app) {
 		List<RemoteFile> files = new ArrayList<>();
-		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDelete) {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
-			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
+			if (isExportTypeAllowed(app, ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile))) {
 				files.add(remoteFile);
 			}
 		}
@@ -127,18 +126,22 @@ public class BackupInfo {
 	private void createFilteredFilesToMerge(@NonNull OsmandApplication app) {
 		List<Pair<LocalFile, RemoteFile>> files = new ArrayList<>();
 		Set<SettingsItem> items = new HashSet<>();
-		BackupHelper helper = app.getBackupHelper();
 		for (Pair<LocalFile, RemoteFile> pair : filesToMerge) {
 			SettingsItem item = pair.first.item;
 			if (!items.contains(item)) {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(pair.second);
-				if (exportType != null && helper.getBackupTypePref(exportType).get()) {
+				if (isExportTypeAllowed(app, ExportSettingsType.getExportSettingsTypeForRemoteFile(pair.second))) {
 					files.add(pair);
 					items.add(item);
 				}
 			}
 		}
 		filteredFilesToMerge = files;
+	}
+
+	private boolean isExportTypeAllowed(@NonNull OsmandApplication app,
+	                                    @Nullable ExportSettingsType exportType) {
+		BackupHelper helper = app.getBackupHelper();
+		return exportType != null && helper.getBackupTypePref(exportType).get();
 	}
 
 	@NonNull

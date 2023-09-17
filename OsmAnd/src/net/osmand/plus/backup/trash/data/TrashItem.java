@@ -3,6 +3,8 @@ package net.osmand.plus.backup.trash.data;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.backup.RemoteFile;
+
 public class TrashItem {
 
 	private String name;
@@ -10,6 +12,7 @@ public class TrashItem {
 	private long deleteTime;
 	private String description;
 	private boolean isLocalItem = true;
+	public RemoteFile remoteFile;
 
 	public String getName() {
 		return name;
