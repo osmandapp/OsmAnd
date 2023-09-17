@@ -1,14 +1,17 @@
 package net.osmand.plus.keyevent.devices.base;
 
 import android.content.Context;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyEventCommandsFactory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.commands.MapZoomCommand;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.HashMap;
@@ -23,6 +26,7 @@ public abstract class InputDeviceProfile {
 	private final int id;
 	private final int titleId;
 
+	private final Map<String, Object> globalVariables = new HashMap<>();
 	private final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
 
 	public InputDeviceProfile(int id, @StringRes int titleId) {
@@ -39,13 +43,23 @@ public abstract class InputDeviceProfile {
 		this.settings = app.getSettings();
 		this.commandsFactory = app.getKeyEventHelper().getCommandsFactory();
 		collectCommands();
+
+		// Update commands when related preferences updated
+		StateChangedListener<Boolean> volumeButtonsPrefListener = aBoolean -> updateCommands();
+		globalVariables.put("volume_button_pref_listener", volumeButtonsPrefListener);
+		settings.USE_VOLUME_BUTTONS_AS_ZOOM.addListener(volumeButtonsPrefListener);
 	}
 
 	/**
 	 * Override this method to add or update bindings between
 	 * keycodes and commands for a specific input device profile.
 	 */
-	protected abstract void collectCommands();
+	protected void collectCommands() {
+		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
+			bindCommand(KeyEvent.KEYCODE_VOLUME_DOWN, MapZoomCommand.CONTINUOUS_ZOOM_OUT_ID);
+			bindCommand(KeyEvent.KEYCODE_VOLUME_UP, MapZoomCommand.CONTINUOUS_ZOOM_IN_ID);
+		}
+	}
 
 	protected void updateCommands() {
 		clearCommands();
