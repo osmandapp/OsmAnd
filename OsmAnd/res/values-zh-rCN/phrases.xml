@@ -2697,4 +2697,13 @@
     <string name="poi_via_ferrata_scale">困难</string>
     <string name="poi_via_ferrata">铁索攀岩（飞拉达）</string>
     <string name="poi_service_vehicle_muffler_yes">消音器</string>
+    <string name="poi_appliance">家电商店</string>
+    <string name="poi_cable_number">线缆编号</string>
+    <string name="poi_glacier_type_ice_tongue">冰舌</string>
+    <string name="poi_service_vehicle_alignment_yes">校准</string>
+    <string name="poi_glacier_ele_bottom">最低点</string>
+    <string name="poi_end_date">结束日期</string>
+    <string name="poi_glacier_ele_top">最高点</string>
+    <string name="poi_glacier_slope">平均坡度</string>
+    <string name="poi_climbing_adventure">攀爬冒险</string>
 </resources>
