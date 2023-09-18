@@ -3684,9 +3684,9 @@
     <string name="poi_mofa_yes">ja;Mofa</string>
     <string name="poi_mofa_designated">ausgewiesen;ausgewiesen für Mofas</string>
     <string name="poi_hgv_yes">ja;Lkw;Laster;Lastwagen</string>
-    <string name="poi_hgv_destination">Anlieger frei;Zugang für LKW als Anlieger frei</string>
-    <string name="poi_hgv_permissive">gestattet;Zugang für LKW gestattet</string>
-    <string name="poi_hgv_designated">ausgewiesen;für LKW ausgewiesen</string>
+    <string name="poi_hgv_destination">Anlieger frei;Zugang für Lkw als Anlieger frei</string>
+    <string name="poi_hgv_permissive">gestattet;Zugang für Lkw gestattet</string>
+    <string name="poi_hgv_designated">ausgewiesen;für Lkw ausgewiesen</string>
     <string name="poi_hgv_delivery">Lieferung;Zufahrt für Lieferwagen</string>
     <string name="poi_goods_yes">ja;Zufahrt für leichte Nutzfahrzeuge</string>
     <string name="poi_goods_designated">ausgewiesen;Zufahrt für leichte Nutzfahrzeuge ausgewiesen</string>
@@ -3871,7 +3871,7 @@
     <string name="poi_water_source_water_works">Wasserwerk</string>
     <string name="poi_lavoir">Waschplatz für Wäsche</string>
     <string name="poi_waste_transfer_station">Müllumladestation</string>
-    <string name="poi_weighbridge">Brückenwaage;LKW-Waage</string>
+    <string name="poi_weighbridge">Brückenwaage;Lkw-Waage</string>
     <string name="poi_ranger_station">Rangerstation</string>
     <string name="poi_swimming_area">Schwimmbereich</string>
     <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
@@ -4587,7 +4587,7 @@
     <string name="poi_bridge_name">Name der Brücke</string>
     <string name="poi_vending_machine_fuel">Ja</string>
     <string name="poi_vending_machine_fuel_filter">Automatische Zapfsäulen; Kraftstoffautomat</string>
-    <string name="poi_second_hand_filter">Second-Hand-Ware</string>
+    <string name="poi_second_hand_filter">Gebrauchtwaren</string>
     <string name="poi_surface_acrylic">Oberfläche: Acryl</string>
     <string name="poi_surface_carpet">Oberfläche: Teppich</string>
     <string name="poi_surface_plastic">Oberfläche: Plastik</string>
@@ -4598,6 +4598,6 @@
     <string name="poi_horse_designated">Ausgewiesen für Pferde</string>
     <string name="poi_bicycle_designated">Ausgewiesen für Fahrräder</string>
     <string name="poi_motor_vehicle_designated">Ausgewiesen für Kraftfahrzeuge</string>
-    <string name="poi_motorcar_designated">Ausgewiesen für PKW</string>
+    <string name="poi_motorcar_designated">Ausgewiesen für Pkw</string>
     <string name="poi_vehicle_designated">Ausgewiesen für Fahrzeuge</string>
 </resources>
