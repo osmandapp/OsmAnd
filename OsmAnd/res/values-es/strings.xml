@@ -4710,7 +4710,7 @@
     <string name="av_notes_audio_widget_desc">Si tocas el widget, podrás tomar una nota de voz.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo del viaje registrado actualmente.</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del trayecto registrado actualmente.</string>
-    <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
+    <string name="average_speed_time_interval_desc">Especifica el intervalo de tiempo para calcular el promedio de la velocidad.</string>
     <string name="calculate_online_altitude_descr">Calcula la elevación en línea desde los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="shared_string_duplicate">Duplicar</string>
@@ -4742,7 +4742,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="map_marker_interval_dialog_desc">Especifica el intervalo de tiempo durante el cual se medirá la velocidad media para calcular la hora estimada de llegada.</string>
     <string name="go_to_marker_location">Ir a la posición del marcador</string>
     <string name="shared_string_switch_mode">Cambiar de modo</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
