@@ -30,7 +30,7 @@ public class NoImagesCard extends AbstractCard {
 			MapActivity ctx = getMapActivity();
 			AndroidUtils.setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
 			((ImageView) view.findViewById(R.id.icon_sadface)).setImageDrawable(ic.getIcon(R.drawable.ic_action_sadface,
-					night ? R.color.color_white : R.color.icon_color_default_light));
+					night ? R.color.card_and_list_background_light : R.color.icon_color_default_light));
 			AndroidUtils.setTextPrimaryColor(ctx, view.findViewById(R.id.title), night);
 			AndroidUtils.setBackgroundColor(ctx, view.findViewById(R.id.button_background), night,
 					R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark);

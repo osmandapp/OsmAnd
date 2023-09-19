@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="@string/osm_live_subscription"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_list_text_size"
                 android:textStyle="bold"
                 app:typeface="@string/font_roboto_regular"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/osm_live_header"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_desc_text_size"
             app:typeface="@string/font_roboto_regular"/>
 
@@ -71,7 +71,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:text="@string/shared_string_read_more"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
 	            android:paddingStart="12dp"
 	            android:paddingEnd="12dp" />
 
@@ -84,7 +84,7 @@
                 android:layout_marginLeft="12dp"
                 android:background="@drawable/btn_round_shade"
                 android:text="@string/osm_live_subscribe_btn"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
 	            android:paddingStart="12dp"
 	            android:paddingEnd="12dp"
 	            android:layout_marginStart="12dp" />

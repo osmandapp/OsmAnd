@@ -37,7 +37,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="14dp"
         android:layout_marginBottom="@dimen/content_padding"
-        android:textColor="@color/color_white"
+        android:textColor="@color/card_and_list_background_light"
         android:text="@string/shared_string_add_photos"
 	    android:paddingEnd="14dp"
 	    android:paddingStart="10dp" />

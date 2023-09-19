@@ -30,7 +30,7 @@
 			android:layout_marginBottom="2dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginRight="8dp"
-			android:textColor="@color/color_white"
+			android:textColor="@color/card_and_list_background_light"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="MT231: Start - Stop" />

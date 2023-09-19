@@ -390,7 +390,7 @@
 								android:gravity="start|bottom"
 								android:padding="@dimen/map_button_margin"
 								android:text="@string/shared_string_hillshade"
-								android:textColor="@color/color_white" />
+								android:textColor="@color/card_and_list_background_light" />
 
 						</FrameLayout>
 
@@ -408,7 +408,7 @@
 								android:gravity="start|bottom"
 								android:padding="@dimen/map_button_margin"
 								android:text="@string/shared_string_slope"
-								android:textColor="@color/color_white" />
+								android:textColor="@color/card_and_list_background_light" />
 
 						</FrameLayout>
 

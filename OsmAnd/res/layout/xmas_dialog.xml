@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/christmas_desc"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_desc_text_size"/>
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
                 android:text="@string/christmas_desc_q"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_desc_text_size"/>
 
         </LinearLayout>
