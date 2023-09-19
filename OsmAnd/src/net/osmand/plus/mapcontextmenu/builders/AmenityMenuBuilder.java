@@ -64,6 +64,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
 		rowsBuilder.setLight(light);
 		rowsBuilder.setLatLon(getLatLon());
+		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
 
 		buildNearestRows((ViewGroup) view);

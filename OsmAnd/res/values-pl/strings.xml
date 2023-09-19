@@ -5329,4 +5329,6 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Trasy rowerowe (MTB)</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_map_legend_ski_map_name">Styl mapy narciarskiej</string>
+    <string name="app_mode_paragliding">Paralotniarstwo</string>
+    <string name="app_mode_hang_gliding">Lotniarstwo</string>
 </resources>

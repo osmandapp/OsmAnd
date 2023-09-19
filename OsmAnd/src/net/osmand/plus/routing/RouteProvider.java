@@ -896,6 +896,13 @@ public class RouteProvider {
 	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
 	                                                           List<Location> segmentEndpoints,
 	                                                           int selectedSegment) {
+		return parseOsmAndGPXRoute(points, gpxFile, segmentEndpoints, selectedSegment, false);
+	}
+
+	@NonNull
+	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+	                                                           List<Location> segmentEndpoints,
+	                                                           int selectedSegment, boolean leftSide) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);
@@ -904,7 +911,7 @@ public class RouteProvider {
 			return routeImporter.importRoute();
 		} else {
 			collectPointsFromSegments(segments, points, segmentEndpoints);
-			RouteImporter routeImporter = new RouteImporter(gpxFile);
+			RouteImporter routeImporter = new RouteImporter(gpxFile, leftSide);
 			return routeImporter.importRoute();
 		}
 	}

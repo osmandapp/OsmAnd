@@ -2529,7 +2529,7 @@
     <string name="poi_counselling_type_crisis_no">Beratung (Krise): nein</string>
     <string name="poi_counselling_type_drugs_yes">Beratung (Drogen): ja</string>
     <string name="poi_counselling_type_drugs_no">Beratung (Drogen): nein</string>
-    <string name="poi_counselling_type_education_yes">Beratung (Erziehung): ja</string>
+    <string name="poi_counselling_type_education_yes">Beratung (Bildung): ja</string>
     <string name="poi_counselling_type_education_no">Beratung (Bildung): nein</string>
     <string name="poi_counselling_type_family_yes">Beratung (Familie): ja</string>
     <string name="poi_counselling_type_family_no">Beratung (Familie): nein</string>
@@ -3565,7 +3565,7 @@
     <string name="poi_hazard_additional_minefield">Gefahr: Minenfeld</string>
     <string name="poi_hazard_additional_contamination">Gefahr: Kontamination</string>
     <string name="poi_defibrillator_location">Standort</string>
-    <string name="poi_changing_table_yes">ja; Wickeltisch: ja</string>
+    <string name="poi_changing_table_yes">ja;Wickeltisch: ja</string>
     <string name="poi_changing_table_no">nein;Wickeltisch: nein</string>
     <string name="poi_changing_table_limited">begrenzt;Wickeltisch: begrenzt</string>
     <string name="poi_changing_table_location_room">Wickeltischposition: Raum</string>

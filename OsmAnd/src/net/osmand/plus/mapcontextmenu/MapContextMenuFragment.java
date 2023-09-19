@@ -2189,6 +2189,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
 	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
