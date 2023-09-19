@@ -26,7 +26,7 @@ public abstract class InputDeviceProfile {
 	private final int id;
 	private final int titleId;
 
-	private final Map<String, Object> globalVariables = new HashMap<>();
+	private StateChangedListener<Boolean> volumeButtonsPrefListener;
 	private final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
 
 	public InputDeviceProfile(int id, @StringRes int titleId) {
@@ -45,8 +45,7 @@ public abstract class InputDeviceProfile {
 		collectCommands();
 
 		// Update commands when related preferences updated
-		StateChangedListener<Boolean> volumeButtonsPrefListener = aBoolean -> updateCommands();
-		globalVariables.put("volume_button_pref_listener", volumeButtonsPrefListener);
+		volumeButtonsPrefListener = aBoolean -> updateCommands();
 		settings.USE_VOLUME_BUTTONS_AS_ZOOM.addListener(volumeButtonsPrefListener);
 	}
 
