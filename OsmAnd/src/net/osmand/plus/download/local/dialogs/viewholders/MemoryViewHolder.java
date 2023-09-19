@@ -51,6 +51,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 		int padding = showHeader ? 0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		AndroidUtils.setMargins((MarginLayoutParams) chart.getLayoutParams(), 0, padding, 0, 0);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.header), showHeader);
+		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.bottom_divider), !showHeader);
 	}
 
 	public void bindView(@NonNull MemoryInfo memoryInfo) {

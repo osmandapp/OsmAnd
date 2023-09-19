@@ -36,7 +36,6 @@ import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.ItemType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
@@ -49,7 +48,6 @@ import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.Conf
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -65,11 +63,14 @@ import java.util.List;
 public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener, DownloadEvents,
 		ConfirmDeletionListener, OperationListener, MapsSortModeListener, OnMapSourceUpdateListener {
 
-	private static final String TAG = LocalItemsFragment.class.getSimpleName();
+	public static final String TAG = LocalItemsFragment.class.getSimpleName();
 
-	private LocalGroup group;
+	private static final String ITEM_TYPE_KEY = "item_type_key";
+
+	private ItemType type;
 	private ImportHelper importHelper;
-	private OptionsMenuHelper optionsHelper;
+	private ItemMenuProvider itemMenuProvider;
+	private GroupMenuProvider groupMenuProvider;
 	private ItemsSelectionHelper<LocalItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private LocalItemsAdapter adapter;
@@ -78,12 +79,37 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	@Override
 	@ColorRes
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		if (selectionMode) {
 			return ColorUtilities.getStatusBarActiveColorId(nightMode);
 		} else {
 			return ColorUtilities.getStatusBarColorId(nightMode);
 		}
+	}
+
+	public boolean isSelectionMode() {
+		return selectionMode;
+	}
+
+	public void setSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
+		updateContent();
+	}
+
+	@NonNull
+	public ItemsSelectionHelper<LocalItem> getSelectionHelper() {
+		return selectionHelper;
+	}
+
+	@Nullable
+	public LocalGroup getGroup() {
+		LocalCategory category = getCategory();
+		return category != null ? category.getGroups().get(type) : null;
+	}
+
+	@Nullable
+	public LocalCategory getCategory() {
+		LocalItemsHolder itemsHolder = getItemsHolder();
+		return itemsHolder != null ? itemsHolder.getCategory(type.getCategoryType()) : null;
 	}
 
 	@Nullable
@@ -96,29 +122,23 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		return null;
 	}
 
-	@NonNull
-	public ItemsSelectionHelper<LocalItem> getSelectionHelper() {
-		return selectionHelper;
-	}
-
-	public boolean isSelectionMode() {
-		return selectionMode;
-	}
-
-	public void setSelectionMode(boolean selectionMode) {
-		this.selectionMode = selectionMode;
-		updateContent();
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Bundle args = getArguments();
+		if (args != null) {
+			type = AndroidUtils.getSerializable(args, ITEM_TYPE_KEY, ItemType.class);
+		}
+
 		DownloadActivity activity = requireDownloadActivity();
 		importHelper = new ImportHelper(activity);
-		optionsHelper = new OptionsMenuHelper(activity);
+		groupMenuProvider = new GroupMenuProvider(activity, this);
+		itemMenuProvider = new ItemMenuProvider(activity, this);
+		itemMenuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
 
-		if (savedInstanceState == null) {
+		LocalGroup group = getGroup();
+		if (savedInstanceState == null && group != null) {
 			selectionHelper.setAllItems(group.getItems());
 		}
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -160,7 +180,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		recyclerView.setAdapter(adapter);
 	}
 
-	private void updateContent() {
+	public void updateContent() {
 		updateToolbar();
 		updateAdapter();
 	}
@@ -175,44 +195,62 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@NonNull
-	private List<LocalItem> getSortedItems() {
-		List<LocalItem> items = new ArrayList<>(group.getItems());
-		if (group.getType() == REGULAR_MAPS) {
+	private List<Object> getSortedItems() {
+		List<LocalItem> activeItems = new ArrayList<>();
+		List<LocalItem> backupedItems = new ArrayList<>();
+
+		LocalGroup group = getGroup();
+		if (group != null) {
+			for (LocalItem item : group.getItems()) {
+				if (item.isBackupedData(app)) {
+					backupedItems.add(item);
+				} else {
+					activeItems.add(item);
+				}
+			}
+			sortItems(activeItems);
+			sortItems(backupedItems);
+		}
+
+		List<Object> items = new ArrayList<>(activeItems);
+		if (!Algorithms.isEmpty(backupedItems)) {
+			items.add(new HeaderGroup(getString(R.string.local_indexes_cat_backup), backupedItems));
+			items.addAll(backupedItems);
+		}
+		return items;
+	}
+
+	private void sortItems(@NonNull List<LocalItem> items) {
+		if (type == REGULAR_MAPS) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
 			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(), o2.getName()));
 		}
-		return items;
 	}
 
 	private void addMemoryInfo(@NonNull List<Object> items) {
-		LocalItemsHolder itemsHolder = getItemsHolder();
-		if (itemsHolder != null) {
-			ItemType itemType = group.getType();
-			CategoryType categoryType = itemType.getCategoryType();
-			LocalCategory category = itemsHolder.getCategory(categoryType);
-			if (category != null) {
-				List<MemoryItem> memoryItems = new ArrayList<>();
+		List<MemoryItem> memoryItems = new ArrayList<>();
 
-				long size = group.getSize();
-				String title = getString(itemType.getTitleId());
-				String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, size));
-				memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColorId(nightMode)));
+		LocalGroup group = getGroup();
+		LocalCategory category = getCategory();
+		if (group != null && category != null) {
+			long size = group.getSize();
+			String title = group.getName(app);
+			String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, size));
+			memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColorId(nightMode)));
 
-				title = getString(categoryType.getTitleId());
-				text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
-				memoryItems.add(new MemoryItem(text, category.getSize() - group.getSize(), categoryType.getColorId()));
-
-				items.add(0, new MemoryInfo(memoryItems));
-			}
+			title = category.getName(app);
+			text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
+			memoryItems.add(new MemoryItem(text, category.getSize() - group.getSize(), category.getType().getColorId()));
 		}
+		items.add(0, new MemoryInfo(memoryItems));
 	}
 
 	@Override
 	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		optionsHelper.onCreateOptionsMenu(menu, group.getType(), this);
+		groupMenuProvider.onCreateMenu(menu, inflater);
 	}
 
 	@Override
@@ -220,14 +258,14 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		super.onResume();
 
 		updateToolbar();
-		optionsHelper.reloadItemsToUpdate();
+		itemMenuProvider.reloadItemsToUpdate();
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-
+	public void onPause() {
+		super.onPause();
 		updateToolbar();
+
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			activity.updateToolbar();
@@ -240,7 +278,12 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		if (actionBar != null) {
 			updateStatusBar(activity);
 			activity.invalidateOptionsMenu();
-			actionBar.setTitle(selectionMode ? getString(R.string.shared_string_select) : group.getName(app));
+
+			actionBar.setElevation(5.0f);
+			LocalGroup group = getGroup();
+			if (group != null) {
+				actionBar.setTitle(selectionMode ? getString(R.string.shared_string_select) : group.getName(app));
+			}
 
 			int colorId = selectionMode ? ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode) : 0;
 			actionBar.setHomeAsUpIndicator(getIcon(selectionMode ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app), colorId));
@@ -276,7 +319,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
-		optionsHelper.onItemOptionsSelected(item, view, this);
+		itemMenuProvider.setLocalItem(item);
+		itemMenuProvider.showMenu(view);
 	}
 
 	@Override
@@ -308,7 +352,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onOperationProgress(@NonNull OperationType type, @NonNull LocalItem... values) {
-		if (type == DELETE_OPERATION) {
+		LocalGroup group = getGroup();
+		if (type == DELETE_OPERATION && group != null) {
 			for (LocalItem item : values) {
 				group.getItems().remove(item);
 			}
@@ -338,12 +383,12 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onUpdatedIndexesList() {
-		optionsHelper.reloadItemsToUpdate();
+		itemMenuProvider.reloadItemsToUpdate();
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		optionsHelper.reloadItemsToUpdate();
+		itemMenuProvider.reloadItemsToUpdate();
 	}
 
 	@Override
@@ -358,11 +403,13 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull LocalGroup group, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull ItemType type, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putSerializable(ITEM_TYPE_KEY, type);
+
 			LocalItemsFragment fragment = new LocalItemsFragment();
-			fragment.group = group;
-			fragment.setRetainInstance(true);
+			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()

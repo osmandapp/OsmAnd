@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.dialogs.viewholders.HeaderViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.LocalItemHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.MemoryViewHolder;
 import net.osmand.plus.utils.UiUtilities;
@@ -22,7 +23,8 @@ import java.util.List;
 public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private static final int LIST_ITEM_TYPE = 0;
-	private static final int MEMORY_USAGE_TYPE = 1;
+	private static final int LIST_HEADER_TYPE = 1;
+	private static final int MEMORY_USAGE_TYPE = 2;
 
 
 	private final List<Object> items = new ArrayList<>();
@@ -60,6 +62,9 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case MEMORY_USAGE_TYPE:
 				itemView = themedInflater.inflate(R.layout.local_memory_card, parent, false);
 				return new MemoryViewHolder(itemView, false, nightMode);
+			case LIST_HEADER_TYPE:
+				itemView = themedInflater.inflate(R.layout.changes_list_header_item, parent, false);
+				return new HeaderViewHolder(itemView);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -75,9 +80,15 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof LocalItemHolder) {
 			LocalItem item = (LocalItem) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
+			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
 
 			LocalItemHolder viewHolder = (LocalItemHolder) holder;
-			viewHolder.bindView(item, selectionMode, lastItem);
+			viewHolder.bindView(item, selectionMode, lastItem, hideDivider);
+		} else if (holder instanceof HeaderViewHolder) {
+			HeaderGroup headerGroup = (HeaderGroup) items.get(position);
+
+			HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
+			viewHolder.bindView(headerGroup);
 		}
 	}
 
@@ -86,6 +97,8 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		Object object = items.get(position);
 		if (object instanceof LocalItem) {
 			return LIST_ITEM_TYPE;
+		} else if (object instanceof HeaderGroup) {
+			return LIST_HEADER_TYPE;
 		} else if (object instanceof MemoryInfo) {
 			return MEMORY_USAGE_TYPE;
 		}

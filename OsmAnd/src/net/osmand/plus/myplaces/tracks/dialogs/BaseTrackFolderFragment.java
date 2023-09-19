@@ -214,19 +214,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		adapter.setSortMode(getTracksSortMode());
 	}
 
-	protected void updateActionBar(boolean visible) {
-		MyPlacesActivity activity = requireMyActivity();
-		ActionBar actionBar = activity.getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setShowHideAnimationEnabled(false);
-			if (visible) {
-				actionBar.show();
-			} else {
-				actionBar.hide();
-			}
-		}
-	}
-
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {

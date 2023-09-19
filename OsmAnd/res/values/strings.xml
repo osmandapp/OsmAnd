@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="weather_online">Weather online</string>
     <string name="maps_and_resources">Maps &amp; Resources</string>
     <string name="shared_string_created">Created</string>
     <string name="sort_size_ascending">Small size first</string>

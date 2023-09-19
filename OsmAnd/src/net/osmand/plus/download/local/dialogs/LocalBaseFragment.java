@@ -8,8 +8,9 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.LocalItemsHolder;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 
-public abstract class LocalBaseFragment extends BaseOsmAndFragment {
+public abstract class LocalBaseFragment extends BaseOsmAndFragment implements OperationListener {
 
 	@Nullable
 	public abstract LocalItemsHolder getItemsHolder();

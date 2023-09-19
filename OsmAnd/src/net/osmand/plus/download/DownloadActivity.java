@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.DialogFragment;
@@ -26,12 +27,12 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.LocalIndexesFragment;
 import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
 import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.GoToMapFragment;
-import net.osmand.plus.download.local.LocalIndexesFragment;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -119,6 +120,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
+		mTabs.add(new TabItem(R.string.shared_string_save, getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
@@ -171,6 +173,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setTitle(R.string.shared_string_map);
+			actionBar.setElevation(0);
 		}
 	}
 
@@ -473,6 +476,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
 		pagerContent.setImportantForAccessibility(accessibility);
 		slidingTabs.setImportantForAccessibility(accessibility);
+	}
+
+	@Nullable
+	public <T> T getFragment(String fragmentTag) {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}
 
 	@NonNull

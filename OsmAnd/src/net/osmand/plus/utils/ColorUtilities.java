@@ -312,6 +312,13 @@ public class ColorUtilities {
 				R.color.stroked_buttons_and_links_outline_light;
 	}
 
+	@ColorRes
+	public static int getStrokedButtonsBgColorId(boolean nightMode) {
+		return nightMode ?
+				R.color.stroked_buttons_and_links_bg_dark :
+				R.color.stroked_buttons_and_links_bg_light;
+	}
+
 	@ColorInt
 	public static int getInactiveButtonsAndLinksColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getInactiveButtonsAndLinksColorId(nightMode));

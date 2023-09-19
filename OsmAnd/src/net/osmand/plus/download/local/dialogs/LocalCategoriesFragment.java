@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.CategoryType;
+import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItemsHolder;
 import net.osmand.plus.download.local.LocalItemsLoaderTask;
@@ -181,6 +181,14 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 
 		updateAdapter();
 		updateProgressVisibility(false);
+
+		DownloadActivity activity = getDownloadActivity();
+		if (activity != null) {
+			LocalItemsFragment itemsFragment = activity.getFragment(LocalItemsFragment.TAG);
+			if (itemsFragment != null) {
+				itemsFragment.updateContent();
+			}
+		}
 	}
 
 	@Override
@@ -197,7 +205,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onGroupSelected(@NonNull LocalGroup group) {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			LocalItemsFragment.showInstance(manager, group, this);
+			LocalItemsFragment.showInstance(manager, group.getType(), this);
 		}
 	}
 }

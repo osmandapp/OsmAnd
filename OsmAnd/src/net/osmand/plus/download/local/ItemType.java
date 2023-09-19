@@ -16,6 +16,7 @@ import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.WEATHER_EXT;
+import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
@@ -48,7 +49,7 @@ public enum ItemType {
 
 	REGULAR_MAPS(R.string.standard_maps, R.drawable.ic_map),
 	TERRAIN_MAPS(R.string.terrain_maps, R.drawable.ic_action_terrain),
-	WIKI_AND_TRAVEL_MAPS(R.string.wikipedia_and_travel_maps, R.drawable.ic_action_terrain),
+	WIKI_AND_TRAVEL_MAPS(R.string.wikipedia_and_travel_maps, R.drawable.ic_action_wikipedia),
 	NAUTICAL_MAPS(R.string.nautical_maps, R.drawable.ic_action_anchor),
 	WEATHER_MAPS(R.string.shared_string_weather, R.drawable.ic_action_umbrella),
 	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_action_layers),
@@ -139,8 +140,6 @@ public enum ItemType {
 			return NAUTICAL_MAPS;
 		} else if (name.endsWith(TIF_EXT) || SrtmDownloadItem.isSrtmFile(name)) {
 			return TERRAIN_MAPS;
-		} else if (path.contains(GEOTIFF_SQLITE_CACHE_DIR) && name.endsWith(HEIGHTMAP_SQLITE_EXT)) {
-			return CACHE;
 		} else if (path.endsWith("databases/" + OSMBUGS_DB_NAME)) {
 			return OSM_NOTES;
 		} else if (path.endsWith("databases/" + OPENSTREETMAP_DB_NAME)) {
@@ -182,6 +181,9 @@ public enum ItemType {
 			return WIKI_AND_TRAVEL_MAPS;
 		} else if (name.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return REGULAR_MAPS;
+		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
+				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
+			return file.isFile() ? CACHE : null;
 		}
 		return file.isFile() ? OTHER : null;
 	}
