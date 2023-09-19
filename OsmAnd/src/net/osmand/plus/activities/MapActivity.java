@@ -1422,6 +1422,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return super.onKeyUp(keyCode, event);
 	}
 
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyLongPress(keyCode, event)) {
+			return true;
+		}
+		return super.onKeyLongPress(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyMultiple(keyCode, repeatCount, event)) {
+			return true;
+		}
+		return super.onKeyMultiple(keyCode, repeatCount, event);
+	}
+
 	public void showMapControls() {
 		MapLayers mapLayers = getMapLayers();
 		if (!getDashboard().isVisible() && mapLayers.getMapControlsLayer() != null) {
