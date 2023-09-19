@@ -5412,4 +5412,13 @@
     <string name="help_article_purchases_ios_name">Achiziții iOS</string>
     <string name="help_article_search_search_all_name">Căutați toate</string>
     <string name="help_article_troubleshooting_crash_logs_name">Jurnale de accident</string>
+    <string name="with_waypoints">Cu puncte de trecere</string>
+    <string name="help_article_search_search_poi_name">Căutare POI</string>
+    <string name="max_altitude">Altitudinea maximă</string>
+    <string name="app_mode_paragliding">Parapantă</string>
+    <string name="shared_string_reset_all">Resetați toate</string>
+    <string name="filter_tracks_count">Filtru: %d</string>
+    <string name="app_mode_hang_gliding">Zbor cu parapanta</string>
+    <string name="filter_screen_title">Filtru</string>
+    <string name="help_article_start_with_name">Începeți cu OsmAnd</string>
 </resources>
