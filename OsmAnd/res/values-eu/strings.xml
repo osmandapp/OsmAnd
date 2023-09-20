@@ -109,7 +109,7 @@
     <string name="prefer_in_routing_descr">Hobetsi autobideak.</string>
     <string name="max_speed_none">bat ere ez</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_maps">Erliebe-itzalak</string>
+    <string name="download_hillshade_maps">Mendiko itzalak</string>
     <string name="local_indexes_cat_srtm">Sestra-kurbak</string>
     <string name="local_indexes_cat_av">Audio/Bideo datuak</string>
     <string name="stop_routing_confirm">Nabigazioa gelditu\?</string>
@@ -123,8 +123,8 @@
     <string name="dropbox_plugin_description">Sinkronizatu arrastoak eta audio/bideo oharrak zure Dropbox kontuarekin.</string>
     <string name="dropbox_plugin_name">Dropbox gehigarria</string>
     <string name="intermediate_points_change_order">Ordena aldatu</string>
-    <string name="srtm_paid_version_msg">Baloratu \'Sestra-kurbak\' gehigarriagatik ordaintzea honen garapena babesteko.</string>
-    <string name="srtm_paid_version_title">Sestra-kurben gehigarria</string>
+    <string name="srtm_paid_version_msg">Baloratu \'Topografia\' gehigarriagatik ordaintzea honen garapena babesteko.</string>
+    <string name="srtm_paid_version_title">Topografia gehigarria</string>
     <string name="av_def_action_video">Grabatu bideoa</string>
     <string name="av_def_action_audio">Grabatu audioa</string>
     <string name="av_widget_action_descr">Trepetaren ekintza lehenetsia:</string>
@@ -155,18 +155,18 @@
     <string name="shared_string_control_stop">Gelditu</string>
     <string name="shared_string_control_start">Hasi</string>
     <string name="map_widget_av_notes">Audio/bideo oharrak</string>
-    <string name="osmand_srtm_short_description_80_chars">Lineaz kanpoko sestra-kurben OsmAnd gehigarria</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugina lineaz kanpoko topografia funtzioetarako, hala nola sestra-kurbak, mendiko itzala, malda</string>
     <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
     <string name="audionotes_location_not_defined">Sakatu \"Erabili kokapena…\" oharra kokapenera gehitzeko.</string>
     <string name="map_widget_audionotes">Audio oharrak</string>
     <string name="audionotes_plugin_description">Hartu audio/argazki/bideo oharrak bidaian zehar, zuzenean mapan botoi bat erabiliz edo kokalekuaren araberako laster-menuan.</string>
     <string name="audionotes_plugin_name">Audio/bideo oharrak</string>
-    <string name="srtm_plugin_description">Lurzoruaren informazioa, hala nola sestra-lerroak, muinoen itzalak eta maldak, lur-erliebea, nabigagarritasuna eta abar ikusmenaren arabera ebaluatzen laguntzen dizu. Informazio topografikoa mapan malda itzalez, sestra-lerroen bidez eta/edo malda-kolorearen bidez irudikatu daiteke.
+    <string name="srtm_plugin_description">Lurzoruaren informazioa, hala nola sestra-kurbak, mendiko itzalak eta maldak, lur-erliebea, nabigagarritasuna eta abar ikusmenaren arabera ebaluatzen laguntzen dizu. Informazio topografikoa mapan malda itzalez, sestra-kurben bidez eta/edo malda-kolorearen bidez irudikatu daiteke.
 \n
 \nAzpiko datuak SRTM eta ASTER-en jatorria dira.
 \n
 \nIrakurketa gehiago %1$s helbidean.</string>
-    <string name="srtm_plugin_name">Sestra-kurbak</string>
+    <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Beste mapak</string>
     <string name="download_roads_only_item">Errepideak bakarrik</string>
     <string name="download_srtm_maps">Sestra-kurbak</string>
@@ -240,7 +240,7 @@
 \n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
 \n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
 \n- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interesguneak, gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.
+\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interesguneak, gogokoak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
 \n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
 \n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
 \n- Kotxea, bizikleta eta oinezkoentzat modua:
@@ -256,27 +256,27 @@
 \nOsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin. 
-\n 
-\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu. 
-\n 
-\nEzaugarri nagusi batzuk: 
-\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan) 
-\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri 
-\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean 
-\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak 
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak. 
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak) 
-\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako 
-\n- Kotxea, bizikleta eta oinezkoentzat modua: 
-\n- Aukerazko egun/gau ikuspegi automatizatua 
-\n- Aukerazko abiaduraren araberako maparen zooma 
-\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa 
+\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.
+\n
+\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.
+\n
+\nEzaugarri nagusi batzuk:
+\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
+\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
+\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
+\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak
+\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
+\n
+\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
+\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
+\n- Kotxea, bizikleta eta oinezkoentzat modua:
+\n- Aukerazko egun/gau ikuspegi automatizatua
+\n- Aukerazko abiaduraren araberako maparen zooma
+\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa
 \n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥
-\n</string>
+\n"</string>
     <string name="filterpoi_activity">Sortu interesguneen iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Garraio modua:</string>
@@ -362,7 +362,7 @@
     <string name="rendering_attr_noPolygons_name">Poligonoak</string>
     <string name="rendering_attr_appMode_name">Marrazte modua</string>
     <string name="rendering_attr_appMode_description">Mapa optimizatu</string>
-    <string name="rendering_attr_contourLines_description">Erakusteko gutxieneko zoom maila (erliebe datuak behar dira):</string>
+    <string name="rendering_attr_contourLines_description">Zoom mailatik bistaratu (sestra-kurben datuak behar dira):</string>
     <string name="rendering_attr_contourLines_name">Erakutsi sestra-kurbak</string>
     <string name="rendering_attr_hmRendered_description">Erakutsi xehetasun gehiago mapan.</string>
     <string name="rendering_attr_hmRendered_name">Erakutsi xehetasun gehiago mapan</string>
@@ -766,7 +766,7 @@
     <string name="poi_context_menu_delete">Ezabatu POI-a</string>
     <string name="rotate_map_compass_opt">Ipar-orratzaren norabidean</string>
     <string name="rotate_map_bearing_opt">Mugimenduaren norabidea</string>
-    <string name="rotate_map_north_opt">Biraketa gabe (iparra beti gorantza)</string>
+    <string name="rotate_map_north_opt">Iparra goian dago</string>
     <string name="rotate_map_to_descr">Maparen lerrokatzea:</string>
     <string name="rotate_map_to">Maparen orientazioa</string>
     <string name="show_route">Ibilbidearen xehetasunak</string>
@@ -939,7 +939,7 @@
     <string name="save_current_track">Gorde uneko arrastoa</string>
     <string name="save_track_interval">Erregistro-tartea nabigazioan zehar</string>
     <string name="save_track_interval_descr">Zehaztu erregistro-tartea nabigazio bitarteko arrastoen grabaketarako</string>
-    <string name="update_tile">Mapa eguneratu</string>
+    <string name="update_tile">Eguneratu</string>
     <string name="reload_tile">Tesela birkargatu</string>
     <string name="mark_point">Helmuga</string>
     <string name="shared_string_add_to_favorites">Gehitu \'Gogokoak\' atalera</string>
@@ -1109,7 +1109,7 @@
     <string name="arrival_distance_factor_early">Laster</string>
     <string name="arrival_distance_factor_normally">Arrunta</string>
     <string name="arrival_distance_factor_late">Berandu</string>
-    <string name="arrival_distance_factor_at_last">Azkeneko metrotan</string>
+    <string name="arrival_distance_factor_at_last">Oso berandu</string>
     <string name="arrival_distance">Iristearen iragarpena</string>
     <string name="arrival_distance_descr">Noizko nahi duzu iristearen iragarkia?</string>
     <string name="share_route_subject">Ibilbidea OsmAnd bidez partekatu da</string>
@@ -1867,7 +1867,7 @@
 \n
 \nIrakurketa gehiago %1$s helbidean.</string>
     <string name="plugin_install_needs_network">Internetera konektatu behar zara gehigarri hau instalatzeko.</string>
-    <string name="activate_srtm_plugin">Aktibatu \'Sestra-kurbak\' gehigarria</string>
+    <string name="activate_srtm_plugin">Aktibatu \'Topografia\' gehigarria</string>
     <string name="plugins_menu_group">Gehigarriak</string>
     <string name="rendering_attr_pisteGrooming_name">Pisten prestaketa</string>
     <string name="navigate_point_northing">Iparrera</string>
@@ -2221,7 +2221,7 @@
     <string name="shared_string_paused">Pausatua</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OSM mapak eskura jartzen dizkizuna.
 \n
-\nGozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesguneak (POI), sortu eta kudeatu GPX arrastoak, erabili sestra-kurbak eta garaiera datuak (gehigarri baten bidez), aukeratu auto, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.</string>
+\nGozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesguneak (POI), sortu eta kudeatu GPX arrastoak, erabili sestra-kurbak eta topografia datuak (gehigarri baten bidez), aukeratu auto, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.</string>
     <string name="type_address">Idatzi helbidea</string>
     <string name="osmand_extended_description_part2">GPS nabigazioa
 \n• Lineaz kanpo (Ibiltaritza kargurik ez atzerrian zaudenean) edo konektatuta (azkarragoa) aritzea erabaki dezakezu
@@ -2288,11 +2288,11 @@
     <string name="mapillary_widget_descr">Mapillary-n parte hartze azkar bat baimentzen du.</string>
     <string name="mapillary_descr">Kale mailako argazkiak denontzat. Deskubritu tokiak, parte hartu, eskuratu mundua.</string>
     <string name="plugin_mapillary_descr">Kale-mailako ikuspegien irudiak. Zuk ere ekarpenak egin ditzakezu. Dauden datuak mapa geruza gisa ikusteko, aktibatu \"Kale mailako irudiak\" \"Konfiguratu mapa\" menuan.</string>
-    <string name="srtm_purchase_header">Erosi eta instalatu \'Sestra-kurbak\' gehigarria mailakatutako era bertikalak ikusteko.</string>
+    <string name="srtm_purchase_header">Erosi eta instalatu \'Topografia\' gehigarria mailakatutako era bertikalak ikusteko.</string>
     <string name="hillshade_menu_download_descr">Deskargatu \'Erliebe-itzalak\' geruza mapan bertikaltasun itzalak ikusteko.</string>
-    <string name="hillshade_purchase_header">Instalatu \'Sestra-kurbak\' gehigarria mailakatutako area bertikalak ikusteko.</string>
+    <string name="hillshade_purchase_header">Instalatu \'Topografia\' gehigarria mailakatutako area bertikalak ikusteko.</string>
     <string name="srtm_menu_download_descr">Deskargatu eskualde honetako sestra-kurben mapa-geruza.</string>
-    <string name="animate_my_location_desc">Piztu \'Nire posizioa\'-ren mugimendu animatua nabigazioan.</string>
+    <string name="animate_my_location_desc">Maparen panoramika leuna mugimenduan dagoenean. Atzerapen txiki bat sartzen du.</string>
     <string name="shared_string_in_name">%1$s barne</string>
     <string name="osmand_extended_description_part4">Eskiatu
 \nOsmAnd eski-mapak gehigarriak eskiatzeko pistak ikustea baimentzen dizu, konplexutasun mailarekin eta bestelako informazio gehigarriarekin, arrasteak eta bestelako zerbitzuak.</string>
@@ -2369,7 +2369,7 @@
 \nMunduko herrialde gehienetako mapak deskargatu daitezke! 
 \nEskuratu nabigatzaile fidagarri bat zuretzat - Frantzian, Alemanian, Mexikon, Erresuma Batuan, Espainian, Herbehereetan, Estatu Batuetan, Errusian, Brasilen, edonon.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da, mundu osoko, kalitate oneko OSM mapak erabiltzen baimentzen dizkizu.
-\nGozatu ahots bidezko ibilbide jarraipena interesezko puntuak (POI), sortu eta kudeatu GPX arrastoak, erabili sestra-kurbak eta garaiera-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago.
+\nGozatu ahots bidezko ibilbide jarraipena interesezko puntuak (POI), sortu eta kudeatu GPX arrastoak, erabili sestra-kurbak eta topografia-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago.
 \n
 \nOsmAnd+ ordainpeko bertsioa da. Erosten baduzu proiektua babesten duzu eta ezaugarri berrien garapena, eta azken eguneraketak izango dituzu.
 \n
@@ -2714,7 +2714,7 @@
     <string name="off_road_render_descr">Errepidetik kanpo gidatzeko, \'Topo\' estiloan oinarritua atzealdean sateliteko irudiekin erabiltzeko. Errepide nagusien zabalera estutua, eta pista, bidexka eta bidegorrien zabalera handitua.</string>
     <string name="nautical_render_descr">Nabigazio nautikorako. Ezaugarri nagusiak: Boiak, faroak, ibai bideak, itxas erreiak eta markak, portuak, itsas zerbitzuak, sakonera marrak.</string>
     <string name="ski_map_render_descr">Eskiatzeko. Ezaugarri nagusiak: Pistak, arrasteak eta abar. Bestelako mapako objektuak leuntzen dira.</string>
-    <string name="light_rs_render_descr">Gidatzeko estilo sinplea. Begietara xamurra gau moduan, sestra-kurbak, kontraste handiko errepide laranjak, bestelako mapako objektuak leunduak.</string>
+    <string name="light_rs_render_descr">Gidatzeko estilo sinplea. Gaueko modu leuna, laranja estiloko errepide kontrastatuak, bigarren mailako mapako objektuak iluntzen ditu, topografia-ezaugarriak bezalako sestra-kurbak.</string>
     <string name="topo_render_descr">Bidezidor kirol eta mendiko bizikletarako. Irakurgarria kanpoaldean. Bide eta objektu naturalen kontrastea, ibilbide mota desberdinak, sestra-kurbak ezarpen aurreratuak, xehetasun gehiago. Azaleraren egonkortasunaren aukerak bidearen kalitatea bereizten du. Gau modurik ez.</string>
     <string name="touring_view_render_descr">Errepiderako kontraste eta xehetasun handiko estiloa. Lehenetsitako estiloaren konfigurazio aukera guztiak ditu eta ahal beste xehetasun erakusten ditu, bereziki errepideak, bideak eta bestelako garraio-bideak. Bide moten arteko bereizketa bisual argia. Egunez, gauez zein naturan erabiltzeko egokia.</string>
     <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. sestra-kurbak, ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC/CAI eskalaren arabera marrazten dira, ur kiroletarako elementuak.</string>
@@ -3227,7 +3227,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Hobetsi asfaltatu gabeko bideak ibilbideetan.</string>
     <string name="layer_osm_edits">OSM edizioak</string>
     <string name="quick_action_contour_lines_descr">Sestra-kurbak mapan erakusteko edo ezkutatzeko botoia.</string>
-    <string name="quick_action_hillshade_descr">Erliebe-itzalak mapan erakutsi edo ezkutatzeko botoia.</string>
+    <string name="quick_action_hillshade_descr">Mendiko itzalak mapan erakutsi edo ezkutatzeko botoia.</string>
     <string name="tts_initialization_error">Ezin da testu-ahots motorra abiarazi.</string>
     <string name="simulate_your_location_gpx_descr">Simulatu zure posizioa grabatutako GPX arrasto bat erabiliz.</string>
     <string name="export_profile">Esportatu profila</string>
@@ -3443,18 +3443,18 @@
     <string name="add_description">Gehitu deskripzioa</string>
     <string name="delete_description">Ezabatu deskripzioa</string>
     <string name="quick_action_terrain_descr">Mapako terreno geruza erakutsi edo ezkutatzeko botoia.</string>
-    <string name="download_slope_maps">Maldak</string>
+    <string name="download_slope_maps">Malda</string>
     <string name="shared_string_hillshade">Erliebea</string>
     <string name="terrain_empty_state_text">Muinoak edo maldak erakusten ditu mapan. Irakurri gehiago mapa mota hauei buruz gure webgunean.</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Zoom mailak</string>
     <string name="shared_string_transparency">Gardentasuna</string>
-    <string name="slope_read_more">Irakurri gehiago %1$s-ko aldapei buruz.</string>
+    <string name="slope_read_more">Irakurri gehiago %1$s-ko maldari buruz.</string>
     <string name="slope_download_description">Mapa osagarriak behar dira maldak mapan ikusteko.</string>
     <string name="hillshade_download_description">Mapa gehigarriak behar dira erliebea mapan ikusteko.</string>
     <string name="terrain_slider_description">Ezarri geruza bistaratuko den gutxieneko eta gehieneko zoom maila.</string>
     <string name="slope_description">Maldak koloreak erabiltzen ditu terrenoaren pikotasuna adierazteko.</string>
-    <string name="hillshade_description">Eman erliebea mapari itzalak erabiliz maldak, gailurrak eta behe-lauak erakusteko.</string>
+    <string name="hillshade_description">Mendiko itzalen mapak tonu ilunak erabiltzen ditu malda, gailurrak eta lur beheak erakusteko.</string>
     <string name="shared_string_terrain">Terrenoa</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
     <string name="shared_string_min">Min</string>
@@ -3714,7 +3714,7 @@
     <string name="sort_name_descending">Izena: Z - A</string>
     <string name="sort_name_ascending">Izena: A - Z</string>
     <string name="start_finish_icons">Hasiera eta amaiera ikonoak</string>
-    <string name="contour_lines_thanks">Eskerrik asko \"Sestra lerroak\" erosteagatik</string>
+    <string name="contour_lines_thanks">Eskerrik asko \"Topografia\" erosteagatik</string>
     <string name="osm_live_payment_desc_hw">Harpidetza hautatutako epearen arabera kobratzen da. Utzi zure AppGallery-n edonoiz.</string>
     <string name="osm_live_payment_subscription_management_hw">Ordainketa AppGallery kontutik kobratzen da erosketa berresten duzunean.
 \n
@@ -3910,7 +3910,7 @@
     <string name="update_all_maps_added">%1$s-ra gehitutako mapa guztiak eguneratu\?</string>
     <string name="shared_string_feet">oin</string>
     <string name="srtm_unit_format">Sestra-marren unitate aldaketa</string>
-    <string name="srtm_download_list_help_message">OsmAnd-ek sestra-marren datuak metro eta oinetan ematen ditu. Fitxategia berriro deskargatu beharko duzu formatua aldatzeko.</string>
+    <string name="srtm_download_list_help_message">OsmAnd-ek sestra-kurben datuak metro eta oinetan ematen ditu. Fitxategia berriro deskargatu beharko duzu formatua aldatzeko.</string>
     <string name="srtm_download_single_help_message">Aukeratu beste bat. Fitxategia berriro deskargatu beharko duzu formatua aldatzeko.</string>
     <string name="announce_when_exceeded">Abisatu gainditzen denean</string>
     <string name="user_points">Erabiltzailearen puntuak</string>
@@ -3937,7 +3937,7 @@
     <string name="osmand_cloud_help_descr">Laguntza behar duzu\? Kontaktatu gurekin hemen: %1$s</string>
     <string name="osmand_cloud_create_account_descr">Sartu zure helbide elektronikoa, egiaztapen-kode bat bidaliko da bertara,
 \neta zure datu guztiak hari lotuta egongo dira.</string>
-    <string name="osmand_cloud_login_descr">Sartu erregistratzeko erabili zenuen helbide elektronikoa. Bidaliko dizugu hurrengo urratserako behar duzun behin behineko pasahitza.</string>
+    <string name="osmand_cloud_login_descr">Sartu erregistratzeko erabili zenuen helbide elektronikoa. Bidaliko dizugu behin behineko pasahitza.</string>
     <string name="verify_email_address">Egiaztatu helbide elektronikoa</string>
     <string name="verify_email_address_descr">Bidali dugu egiaztatzeko kodea %1$s kontura, sartu beheko eremuan.</string>
     <string name="cloud_email_not_registered">Helbide elektroniko hau ez dago OsmAnd Cloud-en erregistratuta</string>
@@ -3994,7 +3994,7 @@
     <string name="send_crash_log">Bidali hutsegiteen erregistroa</string>
     <string name="send_logcat_log">Bidali logcat erregistroak</string>
     <string name="purchases_feature_desc_nautical">Izan eskura sakonera nautikoaren informazioa</string>
-    <string name="purchases_feature_desc_terrain">Lurraren sestra-marrak, muinoen itzalekin eta aldapak koloreekin markatuta bereizteko gailurrak eta lautadak.</string>
+    <string name="purchases_feature_desc_terrain">Lurraren sestra-kurbak, gris-eskalako muinoen itzala eta kolore-eskalaren maldaren adierazlea, gailurrak eta behe-lursailak erakusteko.</string>
     <string name="purchases_feature_desc_wikivoyage">Arakatu Wikibidaiak lineaz kanpo. Herrialde eta eskualdeen arabera eta hizkuntza guztietan eskuragarri dauden artikuluak.</string>
     <string name="purchases_feature_desc_wikipedia">Tokiekin erlazionatutako Wikipediako artikulu guztiak lineaz kanpo eskaintzen ditu, zure bidaian bisitatzen dituzun tokiei buruz ikasten lagunduko dizu mapan sakatu soilekin. Ez ahaztu dagozkien eskualdeetako Wikipediako mapa fitxategiak deskargatzea.</string>
     <string name="purchases_feature_desc_combined_wiki">Arakatu Wikipediako artikuluak edonon, Interneteko konexiorik gabe. Lineaz kanpoko datuak herrialdeen arabera eta hizkuntza guztietan eskuragarri.</string>
@@ -4420,7 +4420,7 @@
     <string name="activity_type_motorbike_name">Motorra</string>
     <string name="activity_type_offroad_name">Lur-orotakoa</string>
     <string name="activity_type_cycling_name">Txirringa</string>
-    <string name="hillshade_slope_contour_lines">Itzala / Malda / Sestra-lerroak</string>
+    <string name="hillshade_slope_contour_lines">Sestra kurbak / Mendiko itzalak / Malda</string>
     <string name="toast_select_edits_for_upload">Hautatu aldaketak kargatzeko</string>
     <string name="uploaded_count">%1$d/%2$d kargatu da</string>
     <string name="segments_count">%1$d segmentua</string>
@@ -4938,7 +4938,7 @@
 \n</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Tartekoa</string>
     <string name="apply_to_existing_favorites_descr">Taldeko gogokoen dauden puntuei aldaketak aplikatu ala berriei soilik\?</string>
-    <string name="rotate_map_manual_opt">Eskuz biratu (finkoa)</string>
+    <string name="rotate_map_manual_opt">Eskuz biratuta</string>
     <string name="max_speed_widget_desc">Unean errepidearen abiadura muga bistaratzen du.</string>
     <string name="map_markers_bar_widget_desc">Goiko barrako trepetak zure uneko kokapenetik hurrengo mapa-markagailura arteko distantzia eta norabidea bistaratzen ditu. Trepeta markatzaile 1 edo 2 erakusteko konfigura daiteke.</string>
     <string name="street_name_widget_desc">Uneko kalearen izena erakusten du zuzeneko gezi batekin edo hurrengo kalearen izena jarraitu behar duzun maniobrarekin.</string>
@@ -5201,7 +5201,7 @@
     <string name="no_search_results">Ez dago emaitzarik</string>
     <string name="rendering_value_small_name">Txikia</string>
     <string name="write_data_from_sensor_to_track">Idatzi datuak GPXra kanpoko sentsoreetatik bidaia grabatzen duzun bitartean.</string>
-    <string name="calculate_offline_altitude_descr">Kalkulatu kota konexiorik gabe, altuera-mapen datuetan oinarrituta. Gailuak erregistratutako altueraren desberdintasunak kota zuzentzeko erabil daitezke.</string>
+    <string name="calculate_offline_altitude_descr">Kalkulatu kota konexiorik gabe, lurraldearen maparen (3D) datuetan oinarrituta. Gailuak erregistratutako altueraren desberdintasunak kota zuzentzeko erabil daitezke.</string>
     <string name="error_calculate">Kalkuluaren emaitza hutsik dago</string>
     <string name="calculate_offline">Kalkulatu konexiorik gabe</string>
     <string name="delete_track_folder_dialog_message">Honek \"%1$s\" karpeta eta barne dauden arrasto guztiak (%2$s) ezabatuko ditu.</string>
@@ -5246,9 +5246,9 @@
 \n
 \nSartu erregistratu zaren helbide elektronikoa. Hurrengo urratserako behin-behineko pasahitza bidaliko da.</string>
     <string name="verify_account">Egiaztatu zure kontua</string>
-    <string name="slope_legend_description">Maldak koloreak erabiltzen ditu lurren aldapak irudikatzeko. Maldei buruzko informazio gehiago irakur dezakezu %1$s-en.</string>
-    <string name="terrain_category_description">Lurraren sestra-kurbak, itzal iluneko muinoen mapa osoa eta malden mapak koloreekin gailurrak eta behe-lurrak erakusteko.</string>
-    <string name="terrain_map">Lurraren mapa</string>
+    <string name="slope_legend_description">Maldak koloreak erabiltzen ditu zoruen aldapak irudikatzeko. Maldei buruzko informazio gehiago irakur dezakezu %1$s-en.</string>
+    <string name="terrain_category_description">Lurraren sestra-kurbak, gris-eskalako muinoen itzala eta kolore-eskalaren maldaren adierazlea, gailurrak eta behe-lursailak erakusteko.</string>
+    <string name="terrain_map">Lurraren mapa (3D)</string>
     <string name="relief_3d">3D erliebea</string>
     <string name="routing_attr_allow_via_ferrata_name">Mendiko ibilbidea (ferrata bidea)</string>
     <string name="free_ride">Doako bidaia</string>
@@ -5257,7 +5257,7 @@
     <string name="get_osmand_cloud">Lortu OsmAnd Cloud</string>
     <string name="free_account">Doako kontua</string>
     <string name="routing_attr_allow_via_ferrata_description">Kable, barra, eskailera eta zubi finkoz hornitutako mendi ibilbidea.</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Erabili sqltiedb raster malda / mendi-itzaletarako</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Erabili sqlitedb raster mendien itzalerako/maldarako</string>
     <string name="cache_size">Cachearen tamaina</string>
     <string name="shared_string_avoid">Saihestu</string>
     <string name="free_settings_backup">Ezarpenen doako babeskopia</string>
@@ -5432,4 +5432,15 @@
     <string name="help_article_navigation_setup_route_navigation_name">Ibilbidea prestatzea</string>
     <string name="open_issue_on_github_descr">Galdetu, funtzioak proposatu</string>
     <string name="open_issue_on_github">Ireki arazoa GitHub-en</string>
+    <string name="with_waypoints">Bide-puntuekin</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Gehienezko altitudea</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Parapentea</string>
+    <string name="filter_by_name">Iragazi izenaren arabera</string>
+    <string name="shared_string_reset_all">Berrezarri dena</string>
+    <string name="filter_tracks_count">Iragazkia: %d</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
+    <string name="date_of_creation">Sortze-data</string>
+    <string name="filter_screen_title">Iragazkia</string>
 </resources>

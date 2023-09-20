@@ -4727,8 +4727,8 @@
     <string name="shared_string_mode">نمط</string>
     <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="lang_sat">السنتالية</string>
-    <string name="average_speed_skip_stops">مراعاة التوقف</string>
-    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لحساب متوسط السرعة.</string>
+    <string name="average_speed_skip_stops">خذ أماكن التوقف في الحسبان</string>
+    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لمتوسط السرعة.</string>
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
     <string name="import_as_one_track">استيراد كمسار واحد</string>
@@ -4828,7 +4828,7 @@
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخرائط</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
-    <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
+    <string name="map_marker_interval_dialog_desc">تحديد الفترة الزمنية التي سيقاس فيها متوسط السرعة لحساب الوقت المقدر للوصول.</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
     <string name="go_to_marker_location">الانتقال إلى موقع العلامة</string>
     <string name="shared_string_switch_mode">وضع التبديل</string>
