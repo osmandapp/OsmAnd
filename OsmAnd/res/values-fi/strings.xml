@@ -4044,4 +4044,6 @@
     <string name="shared_string_wrist">Ranne</string>
     <string name="offline_cache">Offline tilan välimuisti</string>
     <string name="rendering_value_small_name">Pieni</string>
+    <string name="map_rendering_engine">Karttamoottori</string>
+    <string name="auto_backup_title">Automaattinen varmuuskopiointi</string>
 </resources>
