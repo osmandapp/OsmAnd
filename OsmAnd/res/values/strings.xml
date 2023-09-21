@@ -10,6 +10,21 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="weather_online">Weather online</string>
+    <string name="maps_and_resources">Maps &amp; Resources</string>
+    <string name="shared_string_created">Created</string>
+    <string name="sort_size_ascending">Small size first</string>
+    <string name="sort_size_descending">Large size first</string>
+    <string name="sort_country_name_ascending">Country name: A – Z</string>
+    <string name="sort_country_name_descending">Country name: Z – A</string>
+    <string name="delete_map_description">Are you sure you want to delete %1$s map?</string>
+    <string name="delete_map">Delete map</string>
+    <string name="map_is_up_to_date">%1$s map is up to date.</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="rendering_styles">Rendering styles</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia and Travel maps</string>
+    <string name="standard_maps">Standard maps</string>
+    <string name="terrain_maps">Terrain maps</string>
     <string name="app_mode_hang_gliding">Hang gliding</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="max_altitude">Max altitude</string>
