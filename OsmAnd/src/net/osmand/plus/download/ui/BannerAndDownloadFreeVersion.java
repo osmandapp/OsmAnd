@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
 import static net.osmand.plus.download.DownloadActivity.UPDATES_TAB_NUMBER;
 
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -57,22 +59,18 @@ public class BannerAndDownloadFreeVersion {
 	public void updateBannerInProgress() {
 		BasicProgressAsyncTask<?, ?, ?, ?> progressTask = activity.getDownloadThread().getCurrentRunningTask();
 		boolean isFinished = progressTask == null || progressTask.getStatus() == AsyncTask.Status.FINISHED;
+
+		int tab = activity.getCurrentTab();
+		boolean visible = tab != LOCAL_TAB_NUMBER && (!isFinished || tab != UPDATES_TAB_NUMBER || showSpace);
+		AndroidUiHelper.updateVisibility(progressLayout, visible);
+
 		if (isFinished) {
 			progressLayout.setOnClickListener(null);
 			updateDescriptionTextWithSize(activity, progressLayout);
-
-			int tab = activity.getCurrentTab();
-			if (tab == UPDATES_TAB_NUMBER || !showSpace) {
-				progressLayout.setVisibility(View.GONE);
-			} else {
-				progressLayout.setVisibility(View.VISIBLE);
-			}
 			freeVersionBanner.updateFreeVersionBanner();
 		} else {
 			freeVersionBanner.setMinimizedFreeVersionBanner(true);
 			freeVersionBanner.updateAvailableDownloads();
-
-			progressLayout.setVisibility(View.VISIBLE);
 			progressLayout.setOnClickListener(v -> new ActiveDownloadsDialogFragment().show(activity.getSupportFragmentManager(), "dialog"));
 
 			String message = progressTask.getDescription();

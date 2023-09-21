@@ -29,6 +29,7 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
 import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
@@ -116,6 +117,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 
 		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
+		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
@@ -164,7 +166,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public void updateToolbar() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			actionBar.setTitle(R.string.shared_string_map);
+			actionBar.setTitle(R.string.maps_and_resources);
+			actionBar.setElevation(0);
 		}
 	}
 
