@@ -26,9 +26,9 @@ public class MapsComparator implements Comparator<LocalItem> {
 			case NAME_DESCENDING:
 				return -compareItemNames(item1, item2);
 			case DATE_ASCENDING:
-				return -Long.compare(item1.getDate(), item2.getDate());
+				return -Long.compare(item1.getLastModified(), item2.getLastModified());
 			case DATE_DESCENDING:
-				return Long.compare(item1.getDate(), item2.getDate());
+				return Long.compare(item1.getLastModified(), item2.getLastModified());
 			case SIZE_DESCENDING:
 				return -Long.compare(item1.getSize(), item2.getSize());
 			case SIZE_ASCENDING:

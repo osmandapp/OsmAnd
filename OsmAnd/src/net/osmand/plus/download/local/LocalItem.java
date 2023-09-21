@@ -25,7 +25,7 @@ public class LocalItem implements Comparable<LocalItem> {
 	private String description;
 	@Nullable
 	private Object attachedObject;
-	private long date;
+	private long lastModified;
 
 
 	public LocalItem(@NonNull File file, @NonNull LocalItemType type) {
@@ -36,7 +36,7 @@ public class LocalItem implements Comparable<LocalItem> {
 		this.size = file.length();
 		this.backuped = path.contains(BACKUP_INDEX_DIR);
 		this.name = Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
-		this.date = file.lastModified();
+		this.lastModified = file.lastModified();
 	}
 
 	@NonNull
@@ -92,12 +92,12 @@ public class LocalItem implements Comparable<LocalItem> {
 		this.attachedObject = object;
 	}
 
-	public long getDate() {
-		return date;
+	public long getLastModified() {
+		return lastModified;
 	}
 
-	public void setDate(long date) {
-		this.date = date;
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
 	}
 
 	public boolean isLoaded(@NonNull OsmandApplication app) {
