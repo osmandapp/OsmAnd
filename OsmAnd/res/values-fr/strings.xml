@@ -4662,7 +4662,7 @@
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
     <string name="average_speed_widget_desc">Affiche la vitesse moyenne du trajet en cours.</string>
-    <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
+    <string name="average_speed_time_interval_desc">Spécifier l\'intervalle de temps pour le calcul de la moyenne.</string>
     <string name="transport_hazmat_yes_desc">Sélectionner la catégorie applicable.</string>
     <string name="transport_hazmat_title">Transport de matières dangereuses</string>
     <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels peuvent interdire le transport de matières dangereuses.</string>
@@ -4757,9 +4757,9 @@
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
-    <string name="click_on_widget">Cliquez sur le widget</string>
+    <string name="click_on_widget">Cliquer sur le gadget</string>
     <string name="shared_string_shows">Afficher</string>
-    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
+    <string name="map_marker_interval_dialog_desc">Spécifier l\'intervalle de temps pendant lequel la vitesse moyenne sera mesurée pour calculer l\'heure d\'arrivée estimée.</string>
     <string name="quick_action_current_location_widget_descr">Bouton pour afficher ou masquer le gadget Position actuelle.</string>
     <string name="coordinates_widget_current_location_desc">Affiche les coordonnées de la position actuelle</string>
     <string name="coordinates_widget_map_center">Coordonnées : centre de la carte</string>
