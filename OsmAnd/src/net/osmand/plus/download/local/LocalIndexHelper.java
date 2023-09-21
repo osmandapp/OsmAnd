@@ -28,13 +28,14 @@ import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
+import static net.osmand.plus.download.local.LocalItemType.OTHER;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
-import static net.osmand.plus.download.local.ItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.ItemType.TILES_DATA;
-import static net.osmand.plus.download.local.ItemType.TTS_VOICE_DATA;
-import static net.osmand.plus.download.local.ItemType.VOICE_DATA;
-import static net.osmand.plus.download.local.ItemType.WEATHER_DATA;
-import static net.osmand.plus.download.local.ItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
+import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
+import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
+import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
+import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
+import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
 import static java.text.DateFormat.SHORT;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,6 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.ItemType;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -64,6 +64,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public class LocalIndexHelper {
@@ -76,6 +77,54 @@ public class LocalIndexHelper {
 	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		resourceManager = app.getResourceManager();
+	}
+
+	@NonNull
+	public Map<CategoryType, LocalCategory> loadAllFilesByCategories() {
+		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
+		collectFiles(categories, getInternalDir(), false);
+		collectFiles(categories, getExternalDir(), true);
+		return categories;
+	}
+
+	@NonNull
+	private File getInternalDir() {
+		File filesDir = app.getFilesDir();
+		File parentDir = filesDir.getParentFile();
+		return parentDir != null ? parentDir : filesDir;
+	}
+
+	@NonNull
+	private File getExternalDir() {
+		File appDir = app.getAppPath(null);
+		File parentDir = appDir.getParentFile();
+		return parentDir != null ? parentDir : appDir;
+	}
+
+	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File dir, boolean addUnknown) {
+		File[] listFiles = dir.listFiles();
+		if (!Algorithms.isEmpty(listFiles)) {
+			for (File file : listFiles) {
+				addFile(categories, file, addUnknown);
+
+				if (file.isDirectory()) {
+					collectFiles(categories, file, addUnknown);
+				}
+			}
+		}
+	}
+
+	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
+		LocalItemType itemType = LocalItemType.getItemType(app, file);
+		if (itemType != null && (itemType != OTHER || addUnknown)) {
+			CategoryType categoryType = itemType.getCategoryType();
+			LocalCategory category = categories.get(categoryType);
+			if (category == null) {
+				category = new LocalCategory(categoryType);
+				categories.put(categoryType, category);
+			}
+			category.addLocalItem(new LocalItem(file, itemType));
+		}
 	}
 
 	@NonNull

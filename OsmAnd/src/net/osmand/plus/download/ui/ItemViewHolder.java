@@ -57,6 +57,7 @@ import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -467,8 +468,8 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-								   DownloadItem downloadItem,
-								   DownloadResourceGroup parentOptional) {
+	                               DownloadItem downloadItem,
+	                               DownloadResourceGroup parentOptional) {
 		OsmandApplication app = context.getMyApplication();
 		PopupMenu optionsMenu = new PopupMenu(context, v);
 
@@ -577,7 +578,7 @@ public class ItemViewHolder {
 				params[i] = new LocalItem(file, type);
 			}
 		}
-		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(app, DELETE_OPERATION, null);
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, null);
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 

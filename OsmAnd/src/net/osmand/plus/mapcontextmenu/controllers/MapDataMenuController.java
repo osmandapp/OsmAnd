@@ -1,7 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
@@ -26,7 +26,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.LocalIndexHelper;
-import net.osmand.plus.download.local.ItemType;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -531,24 +531,28 @@ public class MapDataMenuController extends MenuController {
 		if (indexItem != null) {
 			return indexItem.getType();
 		} else if (localItem != null) {
-			if (localItem.getType() == ItemType.MAP_DATA) {
+			if (localItem.getType() == LocalItemType.MAP_DATA) {
 				return DownloadActivityType.NORMAL_FILE;
-			} else if (localItem.getType() == ItemType.ROAD_DATA) {
+			} else if (localItem.getType() == LocalItemType.ROAD_DATA) {
 				return DownloadActivityType.ROADS_FILE;
-			} else if (localItem.getType() == ItemType.TERRAIN_DATA) {
-				return SRTM_COUNTRY_FILE;
-			} else if (localItem.getType() == ItemType.WIKI_AND_TRAVEL_MAPS) {
+			} else if (localItem.getType() == LocalItemType.TERRAIN_DATA) {
+				if (SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
+					return SRTM_COUNTRY_FILE;
+				} else if (localItem.getFileName().endsWith(TIF_EXT)) {
+					return DownloadActivityType.GEOTIFF_FILE;
+				}
+			} else if (localItem.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS) {
 				if (localItem.getFileName().endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
 					return DownloadActivityType.WIKIPEDIA_FILE;
-				} else if (localItem.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+				} else {
 					return DownloadActivityType.WIKIVOYAGE_FILE;
 				}
-			} else if (localItem.getType() == ItemType.TTS_VOICE_DATA
-					|| localItem.getType() == ItemType.VOICE_DATA) {
+			} else if (localItem.getType() == LocalItemType.TTS_VOICE_DATA
+					|| localItem.getType() == LocalItemType.VOICE_DATA) {
 				return DownloadActivityType.VOICE_FILE;
-			} else if (localItem.getType() == ItemType.FONT_DATA) {
+			} else if (localItem.getType() == LocalItemType.FONT_DATA) {
 				return DownloadActivityType.FONT_FILE;
-			} else if (localItem.getType() == ItemType.DEPTH_DATA) {
+			} else if (localItem.getType() == LocalItemType.DEPTH_DATA) {
 				return DownloadActivityType.DEPTH_MAP_FILE;
 			}
 		}
@@ -651,13 +655,11 @@ public class MapDataMenuController extends MenuController {
 			String fileName = item.getFileName();
 			if (item.isBackuped()) {
 				File parent = new File(item.getPath()).getParentFile();
-				if (item.getType() == ItemType.MAP_DATA) {
-					if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
-						parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
-					} else {
-						parent = app.getAppPath(IndexConstants.MAPS_PATH);
-					}
-				} else if (item.getType() == ItemType.TILES_DATA) {
+				if (item.getType() == LocalItemType.MAP_DATA) {
+					parent = app.getAppPath(IndexConstants.MAPS_PATH);
+				} else if (item.getType() == LocalItemType.ROAD_DATA) {
+					parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
+				} else if (item.getType() == LocalItemType.TILES_DATA) {
 					if (fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
 						parent = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
 					} else if (fileName.endsWith(IndexConstants.TIF_EXT)) {
@@ -665,19 +667,23 @@ public class MapDataMenuController extends MenuController {
 					} else {
 						parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 					}
-				} else if (item.getType() == ItemType.TERRAIN_DATA) {
-					parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
-				} else if (item.getType() == ItemType.WIKI_AND_TRAVEL_MAPS) {
+				} else if (item.getType() == LocalItemType.TERRAIN_DATA) {
+					if (SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
+						parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+					} else if (localItem.getFileName().endsWith(TIF_EXT)) {
+						parent = app.getAppPath(IndexConstants.GEOTIFF_DIR);
+					}
+				} else if (item.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS) {
 					if (fileName.endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
 						parent = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
 					} else {
 						parent = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 					}
-				} else if (item.getType() == ItemType.TTS_VOICE_DATA) {
+				} else if (item.getType() == LocalItemType.TTS_VOICE_DATA) {
 					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-				} else if (item.getType() == ItemType.VOICE_DATA) {
+				} else if (item.getType() == LocalItemType.VOICE_DATA) {
 					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-				} else if (item.getType() == ItemType.DEPTH_DATA) {
+				} else if (item.getType() == LocalItemType.DEPTH_DATA) {
 					parent = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
 				return new File(parent, fileName);

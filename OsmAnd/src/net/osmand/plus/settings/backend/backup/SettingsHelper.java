@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.ItemType;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -383,32 +383,32 @@ public abstract class SettingsHelper {
 			resourcesItems.put(ExportSettingsType.MAP_SOURCES, iTileSources);
 		}
 		List<LocalItem> localItems;
-		List<ItemType> dataTypes = new ArrayList<>();
+		List<LocalItemType> dataTypes = new ArrayList<>();
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.OFFLINE_MAPS)) {
-			dataTypes.add(ItemType.MAP_DATA);
-			dataTypes.add(ItemType.TILES_DATA);
-			dataTypes.add(ItemType.TERRAIN_DATA);
-			dataTypes.add(ItemType.WIKI_AND_TRAVEL_MAPS);
-			dataTypes.add(ItemType.DEPTH_DATA);
+			dataTypes.add(LocalItemType.MAP_DATA);
+			dataTypes.add(LocalItemType.TILES_DATA);
+			dataTypes.add(LocalItemType.TERRAIN_DATA);
+			dataTypes.add(LocalItemType.WIKI_AND_TRAVEL_MAPS);
+			dataTypes.add(LocalItemType.DEPTH_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.TTS_VOICE)) {
-			dataTypes.add(ItemType.TTS_VOICE_DATA);
+			dataTypes.add(LocalItemType.TTS_VOICE_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.VOICE)) {
-			dataTypes.add(ItemType.VOICE_DATA);
+			dataTypes.add(LocalItemType.VOICE_DATA);
 		}
-		localItems = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new ItemType[0]));
-		List<File> files = getFilesByType(localItems, ItemType.MAP_DATA, ItemType.TILES_DATA,
-				ItemType.TERRAIN_DATA, ItemType.WIKI_AND_TRAVEL_MAPS, ItemType.DEPTH_DATA);
+		localItems = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new LocalItemType[0]));
+		List<File> files = getFilesByType(localItems, LocalItemType.MAP_DATA, LocalItemType.TILES_DATA,
+				LocalItemType.TERRAIN_DATA, LocalItemType.WIKI_AND_TRAVEL_MAPS, LocalItemType.DEPTH_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			sortLocalFiles(files);
 			resourcesItems.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
-		files = getFilesByType(localItems, ItemType.TTS_VOICE_DATA);
+		files = getFilesByType(localItems, LocalItemType.TTS_VOICE_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.TTS_VOICE, files);
 		}
-		files = getFilesByType(localItems, ItemType.VOICE_DATA);
+		files = getFilesByType(localItems, LocalItemType.VOICE_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.VOICE, files);
 		}
@@ -422,7 +422,7 @@ public abstract class SettingsHelper {
 	}
 
 	@NonNull
-	private List<LocalItem> getLocalIndexData(@NonNull ItemType... types) {
+	private List<LocalItem> getLocalIndexData(@NonNull LocalItemType... types) {
 		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
 		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
 		List<LocalItem> items = indexHelper.getLocalIndexItems(readFiles, false, null, types);
@@ -431,7 +431,7 @@ public abstract class SettingsHelper {
 		Iterator<LocalItem> iterator = items.iterator();
 		while (iterator.hasNext()) {
 			LocalItem indexInfo = iterator.next();
-			if (ItemType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
+			if (LocalItemType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
 				iterator.remove();
 			}
 		}
@@ -440,12 +440,12 @@ public abstract class SettingsHelper {
 	}
 
 	@NonNull
-	private List<File> getFilesByType(@NonNull List<LocalItem> localItems, ItemType... types) {
+	private List<File> getFilesByType(@NonNull List<LocalItem> localItems, LocalItemType... types) {
 		List<File> files = new ArrayList<>();
 		for (LocalItem info : localItems) {
 			File file = new File(info.getPath());
 			boolean filtered = false;
-			for (ItemType type : types) {
+			for (LocalItemType type : types) {
 				if (info.getType() == type) {
 					filtered = true;
 					break;

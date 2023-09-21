@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.weather.dialogs;
 
 import static android.text.format.DateUtils.WEEK_IN_MILLIS;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
-import static net.osmand.plus.download.local.ItemType.WEATHER_DATA;
+import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 
 import android.os.AsyncTask;
@@ -26,8 +26,8 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.LocalIndexOperationTask;
-import net.osmand.plus.download.local.LocalIndexOperationTask.OperationListener;
+import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -253,7 +253,7 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 			File file = filesToDelete.get(i);
 			params[i] = new LocalItem(file, WEATHER_DATA);
 		}
-		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(app, DELETE_OPERATION, this);
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, this);
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 

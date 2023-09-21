@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.ItemType;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.util.Algorithms;
 
@@ -53,7 +53,7 @@ public class LoadLiveMapsTask extends AsyncTask<Void, LocalItem, Void> implement
 		List<LocalItem> matchingIndexes = new ArrayList<>();
 		for (LocalItem indexInfo : values) {
 			String fileNameLC = indexInfo.getFileName().toLowerCase();
-			if (indexInfo.getType() == ItemType.MAP_DATA
+			if (indexInfo.getType() == LocalItemType.MAP_DATA
 					&& !fileNameLC.contains("world") && !fileNameLC.startsWith("depth_")) {
 				matchingIndexes.add(indexInfo);
 			}

@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui;
+package net.osmand.plus.download.local;
 
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
@@ -43,8 +43,6 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -53,13 +51,13 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class LocalIndexOperationTask extends AsyncTask<LocalItem, LocalItem, String> {
+public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> {
 
 	private final OsmandApplication app;
 	private final OperationType type;
 	private final OperationListener listener;
 
-	public LocalIndexOperationTask(@NonNull OsmandApplication app, @NonNull OperationType type, @Nullable OperationListener listener) {
+	public LocalOperationTask(@NonNull OsmandApplication app, @NonNull OperationType type, @Nullable OperationListener listener) {
 		this.app = app;
 		this.type = type;
 		this.listener = listener;

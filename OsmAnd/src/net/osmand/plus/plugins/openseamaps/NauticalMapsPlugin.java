@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_DEPTH_CONTOURS;
-import static net.osmand.plus.download.local.ItemType.DEPTH_DATA;
+import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;

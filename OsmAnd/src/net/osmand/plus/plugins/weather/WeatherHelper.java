@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.download.local.ItemType.WEATHER_DATA;
+import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
