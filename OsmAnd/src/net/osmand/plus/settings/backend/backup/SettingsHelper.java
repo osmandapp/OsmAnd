@@ -16,9 +16,9 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.download.LocalIndexType;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.ItemType;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -367,50 +367,48 @@ public abstract class SettingsHelper {
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.MAP_SOURCES)) {
 			Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
 			for (String name : tileSourceNames) {
-				File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
-				if (f != null) {
-					ITileSource template;
-					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
-						template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
-					} else {
-						template = TileSourceManager.createTileSourceTemplate(f);
-					}
-					if (template.getUrlTemplate() != null) {
-						iTileSources.add(template);
-					}
+				File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
+				ITileSource template;
+				if (file.getName().endsWith(SQLiteTileSource.EXT)) {
+					template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
+				} else {
+					template = TileSourceManager.createTileSourceTemplate(file);
+				}
+				if (template.getUrlTemplate() != null) {
+					iTileSources.add(template);
 				}
 			}
 		}
 		if (!iTileSources.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.MAP_SOURCES, iTileSources);
 		}
-		List<LocalIndexInfo> localIndexInfoList;
-		List<LocalIndexType> dataTypes = new ArrayList<>();
+		List<LocalItem> localItems;
+		List<ItemType> dataTypes = new ArrayList<>();
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.OFFLINE_MAPS)) {
-			dataTypes.add(LocalIndexType.MAP_DATA);
-			dataTypes.add(LocalIndexType.TILES_DATA);
-			dataTypes.add(LocalIndexType.SRTM_DATA);
-			dataTypes.add(LocalIndexType.WIKI_DATA);
-			dataTypes.add(LocalIndexType.DEPTH_DATA);
+			dataTypes.add(ItemType.MAP_DATA);
+			dataTypes.add(ItemType.TILES_DATA);
+			dataTypes.add(ItemType.TERRAIN_DATA);
+			dataTypes.add(ItemType.WIKI_AND_TRAVEL_MAPS);
+			dataTypes.add(ItemType.DEPTH_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.TTS_VOICE)) {
-			dataTypes.add(LocalIndexType.TTS_VOICE_DATA);
+			dataTypes.add(ItemType.TTS_VOICE_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.VOICE)) {
-			dataTypes.add(LocalIndexType.VOICE_DATA);
+			dataTypes.add(ItemType.VOICE_DATA);
 		}
-		localIndexInfoList = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new LocalIndexType[0]));
-		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
-				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.DEPTH_DATA);
+		localItems = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new ItemType[0]));
+		List<File> files = getFilesByType(localItems, ItemType.MAP_DATA, ItemType.TILES_DATA,
+				ItemType.TERRAIN_DATA, ItemType.WIKI_AND_TRAVEL_MAPS, ItemType.DEPTH_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			sortLocalFiles(files);
 			resourcesItems.put(ExportSettingsType.OFFLINE_MAPS, files);
 		}
-		files = getFilesByType(localIndexInfoList, LocalIndexType.TTS_VOICE_DATA);
+		files = getFilesByType(localItems, ItemType.TTS_VOICE_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.TTS_VOICE, files);
 		}
-		files = getFilesByType(localIndexInfoList, LocalIndexType.VOICE_DATA);
+		files = getFilesByType(localItems, ItemType.VOICE_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.VOICE, files);
 		}
@@ -423,29 +421,31 @@ public abstract class SettingsHelper {
 		return resourcesItems;
 	}
 
-	private List<LocalIndexInfo> getLocalIndexData(LocalIndexType... indexTypes) {
+	@NonNull
+	private List<LocalItem> getLocalIndexData(@NonNull ItemType... types) {
 		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
 		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
-		List<LocalIndexInfo> indexInfos = indexHelper.getLocalIndexData(readFiles, false, null, indexTypes);
+		List<LocalItem> items = indexHelper.getLocalIndexItems(readFiles, false, null, types);
 
 		String miniBaseMapName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
-		Iterator<LocalIndexInfo> iterator = indexInfos.iterator();
+		Iterator<LocalItem> iterator = items.iterator();
 		while (iterator.hasNext()) {
-			LocalIndexInfo indexInfo = iterator.next();
-			if (LocalIndexType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
+			LocalItem indexInfo = iterator.next();
+			if (ItemType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
 				iterator.remove();
 			}
 		}
 
-		return indexInfos;
+		return items;
 	}
 
-	private List<File> getFilesByType(List<LocalIndexInfo> localVoiceFileList, LocalIndexType... localIndexType) {
+	@NonNull
+	private List<File> getFilesByType(@NonNull List<LocalItem> localItems, ItemType... types) {
 		List<File> files = new ArrayList<>();
-		for (LocalIndexInfo info : localVoiceFileList) {
-			File file = new File(info.getPathToData());
+		for (LocalItem info : localItems) {
+			File file = new File(info.getPath());
 			boolean filtered = false;
-			for (LocalIndexType type : localIndexType) {
+			for (ItemType type : types) {
 				if (info.getType() == type) {
 					filtered = true;
 					break;
