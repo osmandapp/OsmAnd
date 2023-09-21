@@ -271,7 +271,7 @@ public class UiUtilities {
 			tvMessage.setMaxLines(maxLines);
 		}
 		if (backgroundColor == null) {
-			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.color_black;
+			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_dark;
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
@@ -518,7 +518,7 @@ public class UiUtilities {
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
 		slider.setThumbTintList(activeCsl);
-		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.activity_background_color_dark);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
@@ -558,7 +558,7 @@ public class UiUtilities {
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
 		slider.setThumbTintList(activeCsl);
-		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.activity_background_color_dark);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;

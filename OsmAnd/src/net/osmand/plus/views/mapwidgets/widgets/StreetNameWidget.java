@@ -339,7 +339,7 @@ public class StreetNameWidget extends MapWidget {
 
 		int exitRefTextColorId = isNightMode()
 				? R.color.text_color_primary_dark
-				: R.color.color_white;
+				: R.color.card_and_list_background_light;
 		exitRefText.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 
 		ImageView moreImage = waypointInfoBar.findViewById(R.id.waypoint_more);

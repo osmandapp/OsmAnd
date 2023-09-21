@@ -127,9 +127,7 @@
     <string name="map_widget_audionotes">Sesli notlar</string>
     <string name="audionotes_plugin_description">Bir harita düğmesi veya konum içerik menüsünü kullanarak yolculuk sırasında ses/fotoğraf/video notları alın.</string>
     <string name="audionotes_plugin_name">Ses/video notları</string>
-    <string name="index_srtm_parts">bölümler</string>
-    <string name="index_srtm_ele">Eş yükselti eğrileri</string>
-    <string name="srtm_plugin_description">Bu eklenti, OsmAnd\'ın standart haritalarının üstünde hem eş yükselti eğrisi üst katmanının hem de (kabartma) tepe gölgesi katmanının gösterilmesini sağlamaktadır. Bu işlevsellik sporcular, uzun yürüyüşçüler, doğa yürüyüşçüleri ve manzaranın kabartma yapısıyla ilgilenen herkes tarafından çok takdir edilecektir. (Eş yükselti eğrisi ve/veya kabartma verilerinin ayrı olduğunu, eklentiyi etkinleştirdikten sonra ek indirmelerin mevcut olduğunu lütfen unutmayın.) 
+    <string name="srtm_plugin_description">Bu eklenti, OsmAnd\'ın standart haritalarının üstünde hem eş yükselti eğrisi üst katmanının hem de (kabartma) tepe gölgesi katmanının gösterilmesini sağlamaktadır. Bu işlevsellik sporcular, uzun yürüyüşçüler, doğa yürüyüşçüleri ve manzaranın kabartma yapısıyla ilgilenen herkes tarafından çok takdir edilecektir. (Eş yükselti eğrisi ve/veya kabartma verilerinin ayrı olduğunu, eklentiyi etkinleştirdikten sonra ek indirmelerin mevcut olduğunu lütfen unutmayın.)
 \n 
 \nKüresel veriler (70° kuzey ve 70° güney arasındaki) SRTM (Shuttle Radar Topography Mission) ve ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), NASA\'nın Dünya Gözlem Sisteminin amiral uydusu olan Terra üzerindeki bir görüntüleme aracı, tarafından yapılan ölçümlere dayanmaktadır. ASTER NASA, Japonya Ekonomi, Ticaret ve Sanayi Bakanlığı (METI) , ve Japon Uzay Sistemleri (J-spacesystems) arasında ortak bir çalışmadır.</string>
     <string name="srtm_plugin_name">Eş yükselti eğrileri</string>
@@ -1635,7 +1633,6 @@
     <string name="region_maps">Bölge çapında haritalar</string>
     <string name="world_maps">Dünya Haritaları</string>
     <string name="hillshade_layer_disabled">Hillshade katmanı devre dışı</string>
-    <string name="srtm_plugin_disabled">Eş yükselti eğrileri devre dışı</string>
     <string name="nm">nmi</string>
     <string name="si_kmh">Kilometre/saat</string>
     <string name="si_min_m">Dakika/mil</string>
@@ -2818,7 +2815,6 @@
     <string name="start_editing_card_description">Wikivoyage üzerindeki herhangi bir makaleyi düzenleyebilirsiniz. Bilgi, deneyim, yetenek ve dikkatinizi paylaşın.</string>
     <string name="start_editing">Düzenlemeye başla</string>
     <string name="welcome_to_open_beta">Açık betaya hoş geldiniz</string>
-    <string name="contour_lines_hillshade_maps">Eş yükselti eğrileri ve tepe gölgeleri haritaları</string>
     <string name="paid_app">Ücretli uygulama</string>
     <string name="paid_plugin">Ücretli eklenti</string>
     <string name="popular_destinations">Popüler yerler</string>
@@ -3207,7 +3203,6 @@
     <string name="shared_string_memory_used_gb_desc">Kullanılan %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Kullanılan %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Kullanılan %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Eş yükselti eğrileri ve tepe gölgeleri</string>
     <string name="routing_attr_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
     <string name="routing_attr_prefer_unpaved_description">Asfaltsız yolları tercih et.</string>
     <string name="update_all_maps">Tüm haritaları güncelle</string>
@@ -4172,10 +4167,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Tüm OsmAnd verilerini çevrim içi depolamak için OsmAnd Cloud edinin. Yeniden kurduktan sonra veri kaybı yaşamayın. Tüm bilgileri kolayca yedekleyin ve geri yükleyin.</string>
     <string name="unlimited_map_downloads">Sınırsız harita indirme</string>
     <string name="wikipedia_and_wikivoyage_offline">Çevrim dışı Wikipedia ve Wikivoyage</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Arazi haritaları: eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
     <string name="offline_wikipeadia">Çevrim dışı Wikipedia</string>
     <string name="offline_wikivoyage">Çevrim dışı Wikivoyage</string>
-    <string name="terrain_maps">Arazi haritaları</string>
     <string name="nautical_depth">Deniz derinliği</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s veya %2$s</string>
     <string name="continue_with">%1$s ile devam et</string>

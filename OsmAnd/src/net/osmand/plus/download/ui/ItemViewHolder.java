@@ -53,7 +53,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;

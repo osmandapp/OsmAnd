@@ -165,8 +165,6 @@
     <string name="map_widget_audionotes">Аўдыянататкі</string>
     <string name="audionotes_plugin_description">Стварайце аўдыё / фота / відэа нататкі падчас паездкі кнопкай мапы альбо праз кантэкстнае меню.</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
-    <string name="index_srtm_parts">частак</string>
-    <string name="index_srtm_ele">Контурныя лініі</string>
     <string name="srtm_plugin_name">Контурныя лініі</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
@@ -1680,7 +1678,6 @@
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
-    <string name="srtm_plugin_disabled">Контурныя лініі адключаныя</string>
     <string name="downloading_number_of_files">Спампоўванне файла %1$d…</string>
     <string name="show_free_version_banner_description">Паказваць банер бясплатнай версіі нават у платнай версіі.</string>
     <string name="show_free_version_banner">Паказваць банэр бясплатнай версіі</string>
@@ -2716,7 +2713,6 @@
     <string name="purchase_cancelled_dialog_descr">Прадоўжыць падпіску, каб і далей карыстацца ўсімі функцыямі:</string>
     <string name="maps_you_need_descr">На падставе закладзеных вамі артыкулаў рэкамендуецца спампаваць наступныя мапы:</string>
     <string name="maps_you_need">Патрэбныя вам мапы</string>
-    <string name="contour_lines_hillshade_maps">Контурныя лініі і зацяненне рэльефу</string>
     <string name="hide_full_description">Схаваць поўнае апісанне</string>
     <string name="show_full_description">Паказаць поўнае апісанне</string>
     <string name="nautical_render_descr">Для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
@@ -3230,7 +3226,6 @@
     <string name="shared_string_memory_used_gb_desc">Выкарыстана %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Выкарыстана %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Выкарыстана %1$s КБ</string>
-    <string name="contour_lines_and_hillshade">Контурныя лініі і зацяненне рэльефу</string>
     <string name="routing_attr_prefer_unpaved_name">Аддаваць перавагу грунтавым дарогам</string>
     <string name="routing_attr_prefer_unpaved_description">Аддаваць перавагу грунтавым дарогам.</string>
     <string name="update_all_maps">Абнавіць усе мапы</string>
@@ -4377,7 +4372,6 @@
     <string name="resend_verification_code">Адправіць паўторна</string>
     <string name="history_actions_descr">Вы можаце экспартаваць гісторыю ў файл.</string>
     <string name="no_items_of_type_message">У вас няма элементаў гэтага тыпу</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Мапы рэльефу: контурныя лініі, рэльеф, схілы</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Афарбоўка паводле сеткавай прыналежнасці.</string>
     <string name="route_line_use_map_style_width">Выкарыстоўваць прадвызначаную шырыню стылю мапы (%1$s).</string>
     <string name="shared_storage_last_step">Пасля гэтага вы можаце ўказаць новы каталог з данымі.</string>
@@ -4645,7 +4639,6 @@
     <string name="shortcut_navigate_to">Маршрут да…</string>
     <string name="complete_purchase">Завяршыць пакупку</string>
     <string name="shared_string_learn_more">Даведацца больш</string>
-    <string name="terrain_maps">Мапы рэльефу</string>
     <string name="online_maps_searching_descr">Пошук у сеціве…</string>
     <string name="nautical_depth">Марскія глыбіні</string>
     <string name="shared_string_not_included">Не ўключае</string>
@@ -5075,5 +5068,4 @@
 \n– Датчык актываваны
 \n– Гэта прылада знаходзіцца побач з датчыкам</string>
     <string name="external_device_ant">ANT</string>
-    <string name="test_heightmap">Тэст карты вышынь</string>
 </resources>

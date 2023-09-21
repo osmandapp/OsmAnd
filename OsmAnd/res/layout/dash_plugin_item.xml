@@ -87,7 +87,7 @@
 				android:paddingLeft="9.5dp"
 				android:paddingRight="9.5dp"
 				android:paddingTop="8dp"
-				android:textColor="@color/color_white"
+				android:textColor="@color/card_and_list_background_light"
 				android:text="@string/shared_string_get"
 				android:textSize="@dimen/default_sub_text_size"
 				android:lines="1"

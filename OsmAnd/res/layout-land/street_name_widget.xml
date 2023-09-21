@@ -23,7 +23,7 @@
 			android:background="@drawable/bg_topbar_shield_exit_ref"
 			android:gravity="center"
 			android:minWidth="@dimen/map_widget_height"
-			android:textColor="@color/color_white"
+			android:textColor="@color/card_and_list_background_light"
 			android:textSize="@dimen/map_widget_text_size"
 			android:visibility="gone"
 			tools:text="8"
@@ -55,7 +55,7 @@
 				android:importantForAccessibility="no"
 				android:maxLines="1"
 				android:singleLine="true"
-				android:textColor="@color/color_black"
+				android:textColor="@color/activity_background_color_dark"
 				android:textSize="@dimen/map_widget_text_size"
 				tools:text="Long Street Name" />
 
@@ -67,7 +67,7 @@
 				android:ellipsize="end"
 				android:maxLines="1"
 				android:singleLine="true"
-				android:textColor="@color/color_black"
+				android:textColor="@color/activity_background_color_dark"
 				android:textSize="@dimen/map_widget_text_size"
 				tools:text="Long Street Name" />
 
@@ -136,7 +136,7 @@
 				android:ellipsize="end"
 				android:importantForAccessibility="no"
 				android:maxLines="2"
-				android:textColor="@color/color_black"
+				android:textColor="@color/activity_background_color_dark"
 				android:textSize="@dimen/map_button_text_size"
 				tools:text="Waypoint" />
 
@@ -146,7 +146,7 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="2"
-				android:textColor="@color/color_black"
+				android:textColor="@color/activity_background_color_dark"
 				android:textSize="@dimen/map_button_text_size"
 				tools:text="Waypoint" />
 

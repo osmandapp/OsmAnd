@@ -47,7 +47,7 @@
 						android:id="@+id/map_marker_dist"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:textColor="@color/color_white"
+						android:textColor="@color/card_and_list_background_light"
 						android:textSize="26sp"
 						android:textStyle="bold"
 						tools:text="500 m" />
@@ -126,7 +126,7 @@
 						android:id="@+id/map_marker_dist_2nd"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:textColor="@color/color_white"
+						android:textColor="@color/card_and_list_background_light"
 						android:textSize="@dimen/default_list_text_size_large"
 						android:textStyle="bold"
 						tools:text="500 m" />

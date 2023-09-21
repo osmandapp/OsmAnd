@@ -527,7 +527,6 @@
     <string name="travel_card_download_descr">Laadi alla Wikivoyage reisijuhid, et vaadata artikleid kohtadest üle maailma ilma internetiühenduseta.</string>
     <string name="start_editing_card_image_text">Tasuta ülemaailmne kõigi poolt täiendatav reisijuht.</string>
     <string name="welcome_to_open_beta">Tere tulemast avatud beetasse</string>
-    <string name="contour_lines_hillshade_maps">Kõrgusjooned ja künkavarjutusega kaardid</string>
     <string name="maps_you_need_descr">Sinu järjehoidjatesse lisatud artiklite alusel on soovitame alla laadida järgmised kaardid:</string>
     <string name="purchase_cancelled_dialog_title">Oled tühistanud oma OsmAnd Live tellimuse</string>
     <string name="purchase_cancelled_dialog_descr">Uuenda tellimust kõigi funktsioonide kasutamise jätkamiseks:</string>
@@ -954,7 +953,6 @@
     <string name="shared_string_memory_used_gb_desc">Kasutatud %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Kasutatud %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Kasutatud %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Kõrgusjooned ja künkavarjutus</string>
     <string name="routing_attr_prefer_unpaved_name">Eelista katteta teid</string>
     <string name="routing_attr_prefer_unpaved_description">Eelista katteta teid.</string>
     <string name="update_all_maps">Uuenda kõiki kaarte</string>
@@ -1614,8 +1612,6 @@
     <string name="map_widget_av_notes">Heli/video märkmed</string>
     <string name="map_widget_distancemeasurement">Kauguse mõõtmine</string>
     <string name="map_widget_audionotes">Helimärkmed</string>
-    <string name="index_srtm_parts">osad</string>
-    <string name="index_srtm_ele">Kõrgusjooned</string>
     <string name="download_select_map_types">Muud kaardid</string>
     <string name="download_roads_only_item">Ainult teed</string>
     <string name="download_srtm_maps">Kõrgusjooned</string>
@@ -2177,7 +2173,6 @@
     <string name="m_s">m/s</string>
     <string name="favorite_category_add_new">Lisa uus</string>
     <string name="favorite_category_select">Vali kategooria</string>
-    <string name="srtm_plugin_disabled">Kõrgusjooned keelatud</string>
     <string name="regions">Piirkonnad</string>
     <string name="region_maps">Piirkonnaülesed kaardid</string>
     <string name="world_maps">Maailmakaardid</string>
@@ -4090,10 +4085,8 @@
     <string name="purchases_feature_desc_nautical">Juurdepääs meresügavuse teabele</string>
     <string name="unlimited_map_downloads">Piiramatu kaartide allalaadimine</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipeedia ja Wikivoyage ei ole võrgus</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Maastikukaardid: kõrgusjooned, mäenõlvad, kallakud</string>
     <string name="offline_wikipeadia">Võrguühenduseta Vikipeedia</string>
     <string name="offline_wikivoyage">Võrguühenduseta Wikivoyage</string>
-    <string name="terrain_maps">Maastikukaardid</string>
     <string name="nautical_depth">Meresügavus</string>
     <string name="you_can_get_feature_as_part_of_pattern">Saad \"%1$s\" %2$s kava osana. Võrdlus:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s või %2$s</string>

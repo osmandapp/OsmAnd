@@ -841,7 +841,6 @@
     <string name="map_widget_max_speed">Limite di velocità</string>
     <string name="rendering_attr_noAdminboundaries_name">Confini</string>
     <string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9).</string>
-    <string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Topografia</string>
@@ -850,7 +849,6 @@
 \nI dati di base sono forniti da SRTM e ASTER.
 \n
 \nUlteriori approfondimenti su %1$s.</string>
-    <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
@@ -1661,7 +1659,6 @@
     <string name="m_s">m/s</string>
     <string name="favorite_category_add_new">Aggiungi nuova</string>
     <string name="favorite_category_select">Scegli la categoria</string>
-    <string name="srtm_plugin_disabled">Linee isoipse disattivate</string>
     <string name="show_free_version_banner">Mostra il banner della versione gratuita</string>
     <string name="show_free_version_banner_description">Anche con la versione a pagamento mostra comunque il banner della versione gratuita.</string>
     <string name="downloading_number_of_files">In download %1$d file …</string>
@@ -2634,7 +2631,6 @@
     <string name="osmand_team">Team OsmAnd</string>
     <string name="travel_card_update_descr">Nuovi dati Wikivoyage disponibili, aggiorna per utilizzarli.</string>
     <string name="wikivoyage_travel_guide_descr">Guide dei luoghi più interessanti del pianeta, integrata in OsmAnd, senza connessione a Internet.</string>
-    <string name="contour_lines_hillshade_maps">Linee isoipse e ombreggiamento dei rilievi</string>
     <string name="purchase_dialog_title">Scegli il piano</string>
     <string name="purchase_dialog_travel_description">Acquista uno dei seguenti per ricevere la funzionalità delle guide di viaggio offline:</string>
     <string name="purchase_dialog_subtitle">Scegli uno degli oggetti disponibili</string>
@@ -3196,7 +3192,6 @@
     <string name="shared_string_memory_used_gb_desc">Utilizzato %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Utilizzato %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Utilizzato %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Linee isoipse e ombreggiatura dei rilievi</string>
     <string name="routing_attr_prefer_unpaved_name">Preferisci le strade non pavimentate</string>
     <string name="routing_attr_prefer_unpaved_description">Preferisci le strade non pavimentate.</string>
     <string name="update_all_maps">Aggiorna tutte le mappe</string>
@@ -3625,7 +3620,7 @@
     <string name="shared_string_meters">metri</string>
     <string name="details_dialog_decr">Mostra o nasconde i dettagli aggiuntivi della mappa</string>
     <string name="shared_string_night_map">Mappa notturna</string>
-    <string name="shared_string_tones">toni</string>
+    <string name="shared_string_tones">ton</string>
     <string name="add_online_source">Aggiungi sorgente online</string>
     <string name="clear_tiles_warning">Applicando questi cambiamenti, i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
     <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
@@ -4259,8 +4254,6 @@
     <string name="purchases_feature_desc_hourly_map_updates">Ottieni accesso ad aggiornamenti delle mappa più frequenti. Aggiornamenti orari, giornalieri o settimanali. Gli aggiornamenti sono incrementali, solo per le aree con cambiamenti.</string>
     <string name="unlimited_map_downloads">Download illimitato delle mappe</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia e Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mappe terreno: isoipse, ombreggiamento dei rilievi, pendenze</string>
-    <string name="terrain_maps">Mappe terreno</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
     <string name="continue_with">Continua con %1$s</string>
     <string name="not_available_with">Non disponibile con %1$s</string>
@@ -5108,7 +5101,6 @@
     <string name="generate_slope_from_3d_maps">Genera mappe raster di pendenza da mappe 3D</string>
     <string name="generate_hillshade_from_3d_maps">Genera mappe raster con ombreggiamenti delle colline da mappe 3D</string>
     <string name="weather_download_error">Impossibile scaricare i riquadri %1$s.</string>
-    <string name="test_heightmap">Prova la mappa dell\'altezza</string>
     <string name="proxy_port_max_warning">Valore massimo della porta è %1$s</string>
     <string name="shared_string_pounds">libbre</string>
     <string name="disable_vertex_hillshade_3d">Disabilita l\'ombreggiatura dei vertici in 3D</string>
@@ -5431,4 +5423,15 @@
     <string name="shared_string_temperature">Tempertura</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Informazioni sulla navigazione di OsmAnd</string>
     <string name="hillshade_slope">Ombreggiatura dei rilievi, Pendenza</string>
+    <string name="app_mode_baby_transport">Trasporto bebè</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitudine massima</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Parapendio</string>
+    <string name="filter_by_name">Filtra per nome</string>
+    <string name="shared_string_reset_all">Resetta tutto</string>
+    <string name="filter_tracks_count">Filtro: %d</string>
+    <string name="app_mode_hang_gliding">Deltaplano</string>
+    <string name="date_of_creation">Data di creazione</string>
+    <string name="filter_screen_title">Filtro</string>
 </resources>

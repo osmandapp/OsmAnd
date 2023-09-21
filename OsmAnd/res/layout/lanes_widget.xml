@@ -33,7 +33,7 @@
 			android:layout_marginHorizontal="@dimen/widget_turn_lane_border"
 			android:importantForAccessibility="no"
 			android:maxLines="1"
-			android:textColor="@color/color_black"
+			android:textColor="@color/activity_background_color_dark"
 			android:textSize="@dimen/map_button_text_size"
 			tools:text="1048 km" />
 
@@ -44,7 +44,7 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/widget_turn_lane_border"
 			android:maxLines="1"
-			android:textColor="@color/color_black"
+			android:textColor="@color/activity_background_color_dark"
 			android:textSize="@dimen/map_button_text_size"
 			tools:text="1048 km" />
 

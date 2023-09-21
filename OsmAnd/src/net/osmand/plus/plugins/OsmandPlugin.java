@@ -25,6 +25,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,6 +41,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -399,8 +402,11 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		return false;
+	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
+	}
+
+	public KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
+		return null;
 	}
 
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
@@ -492,7 +498,7 @@ public abstract class OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 	}
 
-	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
 	}
 
 	@Nullable

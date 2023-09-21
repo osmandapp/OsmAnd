@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
-	buildToolsVersion "33.0.2"
+	compileSdk 33
+	buildToolsVersion = "33.0.2"
 
 	signingConfigs {
 		development {

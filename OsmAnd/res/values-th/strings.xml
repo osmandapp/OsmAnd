@@ -26,7 +26,6 @@
     <string name="offline_cache">แคชออฟไลน์</string>
     <string name="disable_vertex_hillshade_3d">ปิดใช้งาน vertex hillshade ในแบบ 3 มิติ</string>
     <string name="enable_3d_maps">เปิดใช้งานแผนที่ 3 มิติ</string>
-    <string name="test_heightmap">ทดสอบแผนที่ความสูง</string>
     <string name="local_changes_will_be_dismissed">การเปลี่ยนแปลงบนเครื่องจะถูกยกเลิก</string>
     <string name="cloud_all_changes_uploaded">อัปโหลดการเปลี่ยนแปลงทั้งหมดแล้ว</string>
     <string name="check_for_updates">ตรวจสอบการอัปเดต</string>

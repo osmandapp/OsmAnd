@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/color_black"
+                    android:textColor="@color/activity_background_color_dark"
                     android:textSize="@dimen/map_alarm_text_size"
                     android:textStyle="bold"
                     tools:text="60"/>
@@ -55,7 +55,7 @@
                     android:textSize="@dimen/map_alarm_bottom_text_size"
                     android:textStyle="bold"
                     tools:text="1.2 km"
-                    tools:textColor="@color/color_black"/>
+                    tools:textColor="@color/activity_background_color_dark"/>
             </FrameLayout>
 
             <TextView

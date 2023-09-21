@@ -14,8 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.data.PointDescription;
@@ -23,14 +21,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.keyevent.devices.base.InputDevice;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -262,13 +260,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		uiPreference.setSummary(R.string.sett_no_ext_input);
 		uiPreference.setDescription(R.string.external_input_device_descr);
 
-		InputDevice[] devices = InputDevice.values();
+		InputDeviceProfile[] devices = InputDevice.values();
 		String[] entries = new String[devices.length];
 		Integer[] values = new Integer[devices.length];
 		for (int i = 0; i < devices.length; i++) {
-			InputDevice device = devices[i];
-			entries[i] = getString(device.getTitleId());
-			values[i] = device.getValue();
+			InputDeviceProfile device = devices[i];
+			entries[i] = device.getTitle(app);
+			values[i] = device.getId();
 		}
 		uiPreference.setEntries(entries);
 		uiPreference.setEntryValues(values);

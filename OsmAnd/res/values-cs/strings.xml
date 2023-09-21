@@ -872,7 +872,6 @@
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
-    <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti.
@@ -895,7 +894,6 @@
     <string name="map_widget_av_notes">Zvukové/video poznámky</string>
     <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
     <string name="audionotes_plugin_description">Vytvářejte zvukové/fotografické/video poznámky během cesty pomocí tlačítka na mapě nebo kontextové nabídky polohy.</string>
-    <string name="index_srtm_parts">části</string>
     <string name="av_def_action_video">Nahrát video</string>
     <string name="av_def_action_audio">Nahrát zvuk</string>
     <string name="av_widget_action_descr">Výchozí akce nástroje:</string>
@@ -1641,7 +1639,6 @@
     <string name="show_on_start">Zobrazit po spuštění</string>
     <string name="are_you_sure">Jste si jisti\?</string>
     <string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
-    <string name="srtm_plugin_disabled">Vrstevnice vypnuty</string>
     <string name="favorite_category_add_new">Přidat nový</string>
     <string name="favorite_category_select">Zvolte kategorii</string>
     <string name="default_speed_system_descr">Zvolte jednotku rychlosti.</string>
@@ -2672,7 +2669,6 @@
     <string name="shared_string_explore">Prozkoumat</string>
     <string name="shared_string_contents">Obsah</string>
     <string name="index_item_world_wikivoyage">Celosvětové články Wikivoyage</string>
-    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; stínování svahů</string>
     <string name="shared_string_restart">Restartovat aplikaci</string>
     <string name="show_images">Zobrazit obrázky</string>
     <string name="purchase_cancelled_dialog_descr">Obnovte předplatné, abyste nadále mohli využívat všechny funkce:</string>
@@ -3699,7 +3695,6 @@
     <string name="store_tracks_in_rec_directory">Ukládat stopy do složky \'rec</string>
     <string name="track_storage_directory_descrp">Stopy mohou být ukládány ve složce \'rec\' nebo v měsíčních či denních složkách.</string>
     <string name="track_storage_directory">Složka pro ukládání stop</string>
-    <string name="contour_lines_and_hillshade">Vrstevnice a stínování svahů</string>
     <string name="release_3_5">• Vylepšená nastavení aplikace a profilů. Nastavení jsou nyní uspořádána podle typu. Každý profil lze upravovat samostatně.
 \n
 \n• Nový dialog stahování map, který navrhuje mapy ke stažení během prohlížení
@@ -4370,7 +4365,6 @@
     <string name="continue_with">Pokračovat s %1$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získejte “%1$s” jako součást předplatného (%2$s). Srovnání:</string>
     <string name="nautical_depth">Námořní hloubka</string>
-    <string name="terrain_maps">Mapy terénu</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedie a Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Neomezený počet map ke stažení</string>
@@ -4402,7 +4396,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Získejte přístup k pravidelným měsíčním aktualizacím offline map.</string>
     <string name="from_with_param">Od %1$s</string>
     <string name="offline_wikipeadia">Offline Wikipedie</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terénu: vrstevnice, stínování svahů, sklony svahů</string>
     <string name="purchases_feature_desc_wikipedia">Poskytuje offline přístup ke všem článkům z Wikipedie týkajícím se míst, díky čemuž můžete jednoduchým klepnutím na mapě zjistit informace o místech, která navštívíte na své cestě. Nezapomeňte si stáhnout mapové soubory Wikipedie pro příslušné regiony.</string>
     <string name="enter_verification_code">Zadejte jednorázové heslo</string>
     <string name="contributions_may_calculate_with_delay">Výpočet příspěvků může trvat několik hodin.</string>
@@ -5099,7 +5092,6 @@
     <string name="app_mode_climbing">Horolezectví</string>
     <string name="generate_slope_from_3d_maps">Generovat rastrové mapy svahů z 3D map</string>
     <string name="disable_vertex_hillshade_3d">Vypnout stínování vrcholů ve 3D</string>
-    <string name="test_heightmap">Testovací výšková mapa</string>
     <string name="common_weight_limit_error">Minimální hodnota je \"%1$s\" %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%3$s\".</string>
     <string name="shared_string_pounds">libry</string>
     <string name="metric_lbs">lbs</string>
@@ -5357,4 +5349,14 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
+    <string name="release_4_6">- Widget Poměru klouzavosti 
+\n
+\n - Přidán widget teploty ANT+
+\n
+\n - Lepší správa paměti pro velké stopy GPX
+\n
+\n</string>
+    <string name="app_mode_baby_transport">Přeprava dětí</string>
+    <string name="sensor_temperature_desc">Zobrazuje teplotu ze snímače</string>
+    <string name="shared_string_temperature">Teplota</string>
 </resources>

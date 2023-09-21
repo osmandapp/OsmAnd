@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
-import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_TEMPERATURE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;

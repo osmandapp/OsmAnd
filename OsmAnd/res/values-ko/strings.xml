@@ -823,8 +823,6 @@
     <string name="map_widget_audionotes">소리 노트</string>
     <string name="audionotes_plugin_description">이 플러그인은 여행하는 동안 소리/사진/영상을 찍기 위한 기능과 버튼을 제공합니다.</string>
     <string name="audionotes_plugin_name">소리/영상 노트</string>
-    <string name="index_srtm_parts">부분</string>
-    <string name="index_srtm_ele">등고선</string>
     <string name="srtm_plugin_description">"오프라인 등고선 과 음영을 다운로드하기 위해 외부플러그인을 이용합니다 (설정→지도 관리→다운로드→ 원하는 지도 유형 선택). OsmAnd 오프라인 지도에서 조합하여 표시할 수 있습니다.
 \n↵\n↵\n이 플러그인은 등고선 오버레이와 음영레이어 모두 제공합니다. OsmAnd 오프라인 지도의 상단에 표시 할 수 있습니다. 이 기능은  운동선수, 하이커, 트레커등 음영에 관심이 있는 사람들이 즐겨 사용할 것이다.
 \n↵\n↵\n(70도 북쪽과 남쪽 70도 사이의) 글로벌 데이터는  SRTM (Shuttle Radar Topography Mission:셔틀 레이더 지형 미션)과 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer:고급 우주선 열 방출 및 반사 복사계)에 의한 측정을 기반으로 합니다, 테라 온보드 영상 측정, NASA의 지구 관찰 시스템의 주력 위성 . ASTER는 NASA, 일본 경제 산업성(METI), 일본 우주 시스템 (J-spacesystems) 사이의 협력적인 노력의 결과입니다. "</string>
@@ -1611,7 +1609,6 @@
     <string name="region_maps">지역 지도</string>
     <string name="world_maps">세계 지도</string>
     <string name="hillshade_layer_disabled">Hillshade 레이어 비활성화</string>
-    <string name="srtm_plugin_disabled">등고선 비활성화</string>
     <string name="favorite_category_add_new">새로 추가</string>
     <string name="favorite_category_select">범주 선택</string>
     <string name="default_speed_system_descr">이동속도 표시형식을 지정합니다</string>
@@ -1869,7 +1866,6 @@
     <string name="shared_string_all_languages">모든 언어</string>
     <string name="street_level_imagery">거리 기반의 파노라마 영상 서비스</string>
     <string name="osm_notes">OSM 노트</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">지형 지도: 등고선, 언덕길 쉐이드, 경사</string>
     <string name="backup_now">지금 백업</string>
     <string name="osm_edit_close_note">OSM 노트 닫기</string>
     <string name="mapillary_descr">모든 사람을 위한 거리 기반의 파노라마 영상 서비스. 장소를 탐색하고, 협업하고, 세상을 사로잡습니다.</string>
@@ -1935,7 +1931,6 @@
     <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org에 적극적으로 기여한 사람은 시간당 지도 업데이트를 무제한으로 받을 수 있습니다.</string>
     <string name="offline_wikivoyage">오프라인 Wikivoyage</string>
     <string name="offline_wikipeadia">오프라인 Wikipedia</string>
-    <string name="terrain_maps">지형 지도</string>
     <string name="routing_attr_avoid_tunnels_name">터널 방지</string>
     <string name="purchases_feature_desc_terrain">지형 등고선, 어두운 색조가 있는 완전한 언덕길 지도, 봉우리와 저지대를 보여주는 색상의 경사 지도.</string>
     <string name="backup_danger_zone">위험 영역</string>

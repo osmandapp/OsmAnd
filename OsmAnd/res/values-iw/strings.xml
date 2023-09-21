@@ -873,9 +873,7 @@
     <string name="map_widget_max_speed">מהירות מותרת</string>
     <string name="rendering_attr_noAdminboundaries_name">גבולות</string>
     <string name="rendering_attr_noAdminboundaries_description">הסתרת גבולות אזוריים (דרגות ניהול 5‏-9).</string>
-    <string name="index_srtm_parts">קטעים</string>
-    <string name="index_srtm_ele">קווי הגבהה</string>
-    <string name="srtm_plugin_description">תוסף זה מספק הן שכבת קווי מתאר והן שכבת הצללה אותן ניתן להציג על המפות הרגילות של OsmAnd. תכונה זו נחוצה ביותר לאתלטים, מטיילי שטח, תרמילאים וכל מי שמעוניין להבין את מבנה פני השטח. (נא לשים לב שנתוני קווי מתאר ו/או נתוני הצללה הם נפרדים, תתאפשרנה הורדות נוספות לאחר הפעלת התוסף.) 
+    <string name="srtm_plugin_description">תוסף זה מספק הן שכבת קווי מתאר והן שכבת הצללה אותן ניתן להציג על המפות הרגילות של OsmAnd. תכונה זו נחוצה ביותר לאתלטים, מטיילי שטח, תרמילאים וכל מי שמעוניין להבין את מבנה פני השטח. (נא לשים לב שנתוני קווי מתאר ו/או נתוני הצללה הם נפרדים, תתאפשרנה הורדות נוספות לאחר הפעלת התוסף.)
 \n
 \nהנתונים הגלובליים (בין 70° צפון ל־70° דרום) מבוססים על מדידות שבוצעו על ידי ה־SRTM (משימת הטופוגרפיה של מעבורת המכ״ם) ו־ASTER (רדיומטר חלל מתקדם לגילוי פליטה תרמית והשתקפות), התקן דימות על סיפונה של Terra, לוויין הדגל של מערכת ההשקפה על כדור הארץ של NASA.‏ ASTER הנו שיתוף פעולה בין NASA, משרד התמ״ת היפני (METI) ומערכות החלל היפניות (J-spacesystems).</string>
     <string name="srtm_plugin_name">קווי מתאר</string>
@@ -1859,7 +1857,6 @@
     <string name="regions">אזורים</string>
     <string name="region_maps">מפות אזוריות</string>
     <string name="world_maps">מפות עולמיות</string>
-    <string name="srtm_plugin_disabled">קווי מתאר מושבתים</string>
     <string name="favorite_category_add_new">הוספת חדש</string>
     <string name="favorite_category_select">בחירת קטגוריה</string>
     <string name="default_speed_system_descr">הגדרת יחידת מהירות.</string>
@@ -2581,7 +2578,6 @@
     <string name="welcome_to_open_beta">ברוך בואך לבטא הפתוחה</string>
     <string name="wikivoyage_travel_guide">מדריכי תיירות</string>
     <string name="wikivoyage_travel_guide_descr">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
-    <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     <string name="popular_destinations">יעדים נפוצים</string>
     <string name="osm_live_header">מינוי זה מאפשר לך לקבל עדכונים שעתיים של כל המפות ברחבי העולם.
 \n חלק מההכנסה חוזר אל קהילת OSM והוא מוענק לכל תורם OSM.
@@ -3193,7 +3189,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s ג״ב בשימוש</string>
     <string name="shared_string_memory_used_mb_desc">%1$s מ״ב בשימוש</string>
     <string name="shared_string_memory_used_kb_desc">%1$s ק״ב בשימוש</string>
-    <string name="contour_lines_and_hillshade">קווי מתאר והצללות תוואי שטח</string>
     <string name="routing_attr_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
     <string name="routing_attr_prefer_unpaved_description">להעדיף דרכים בלתי סלולות.</string>
     <string name="update_all_maps">עדכון כל המפות</string>
@@ -4168,9 +4163,7 @@
     <string name="backup_delete_types">מחיקת סוגי נתונים מושבתים</string>
     <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
     <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
-    <string name="terrain_maps">מפות תוואי שטח</string>
     <string name="wikipedia_and_wikivoyage_offline">ויקיפדיה וויקימסע בלתי־מקוונות</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">מפות תוואי שטח: קווי מתאר, הצללות הרים, מדרון</string>
     <string name="purchases_feature_desc_nautical">קבלת גישה לפרטי עומק ימי</string>
     <string name="purchases_feature_desc_wikivoyage">קריאה בוויקימסע ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_wikipedia">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
@@ -4807,7 +4800,6 @@
     <string name="clear_online_cache_description">פעולה זו תנקה זכרון מטמון לאריחי מזג אוויר.</string>
     <string name="enable_3d_maps">הפעלת מפות תלת־ממד</string>
     <string name="weather_download_error">לא ניתן להוריד %1$s אריחים.</string>
-    <string name="test_heightmap">בדיקת מפת גבהים</string>
     <string name="sort_distance_descending">העדפת מרחק ארוך קודם</string>
     <string name="sort_date_ascending">העדפת תאריך חדש יותר</string>
     <string name="sort_date_descending">העדפת תאריך ישן יותר</string>
@@ -4935,7 +4927,7 @@
     <string name="ant_write_to_gpx">כתיבה חזרה למסלול</string>
     <string name="ant_heart_rate_write_gpx_desc">לכלול את הדופק במסלול</string>
     <string name="map_widget_ant_heart_rate_desc">להציג את דופק המשתמש במהלך פעילות כלשהי בזמן אמת</string>
-    <string name="map_widget_group_glide_desc">ווידג\'טים מציגים את יחס הגלישה למטרה או יחס הגלישה הממוצע עבור הנסיעה הנוכחית.</string>
+    <string name="map_widget_group_glide_desc">וידג׳טים מציגים את יחס הגלישה למטרה או יחס הגלישה הממוצע עבור הנסיעה הנוכחית.</string>
     <string name="map_widget_camera_distance">גובה מצלמה</string>
     <string name="map_widget_camera_tilt">הטיית מצלמה</string>
     <string name="developer_widgets">וידג׳טים למפתחים</string>
@@ -5008,4 +5000,5 @@
     <string name="help_article_map_raster_maps_name">מפות מעובדות (מקוונות או שלא)</string>
     <string name="help_article_map_track_context_menu_name">תפריט הקשר מסלולים</string>
     <string name="help_article_widgets_map_buttons_name">כפתורי מפה</string>
+    <string name="app_mode_baby_transport">הסעת תינוקות</string>
 </resources>

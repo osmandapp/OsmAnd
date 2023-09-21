@@ -122,9 +122,9 @@ public class RouteColorize {
                     latList.add(p.lat);
                     lonList.add(p.lon);
                     if (type == ColorizationType.SPEED) {
-                        valList.add((double) analysis.getSpeedData().getPointAttribute(wptIdx).value);
+                        valList.add((double) analysis.pointAttributes.get(wptIdx).speed);
                     } else {
-                        valList.add((double) analysis.getElevationData().getPointAttribute(wptIdx).value);
+                        valList.add((double) analysis.pointAttributes.get(wptIdx).elevation);
                     }
                     wptIdx++;
                 }

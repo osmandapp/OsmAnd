@@ -3,12 +3,12 @@ task printc {
 }
 
 android {
-	compileSdkVersion 33
-	buildToolsVersion "30.0.3"
+	compileSdk 33
+	buildToolsVersion = "33.0.2"
 	// compileNdkVersion "android-ndk-r17b"
 
 	defaultConfig {
-		targetSdkVersion 31
+		targetSdkVersion 33
 		multiDexEnabled true
 		vectorDrawables.useSupportLibrary = true
 	}

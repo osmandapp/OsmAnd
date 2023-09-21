@@ -48,7 +48,7 @@
     <string name="poi_water_source">Vesipiste</string>
     <string name="poi_payment_toll_type">Maksutapa</string>
     <string name="poi_traffic_signals_sound">Ääni</string>
-    <string name="poi_highway_crossing_type">Tapa</string>
+    <string name="poi_highway_crossing_type">Tyyppi</string>
     <string name="poi_service_general">Palvelu</string>
     <string name="poi_self_service">Itsepalvelu</string>
     <string name="poi_automated">Automatisoitu</string>
@@ -1495,7 +1495,7 @@
     <string name="poi_railway_level_crossing">Tasoristeys</string>
     <string name="poi_railway_crossing">Rautatien ylitys</string>
     <string name="poi_crossing_traffic_signals">Liikennevaloilla</string>
-    <string name="poi_highway_crossing">Valtatien ylitys</string>
+    <string name="poi_highway_crossing">Ajoradan ylitys</string>
     <string name="poi_building_type_pyramid">Rakennuksen tyyppi: pyramidi</string>
     <string name="poi_building_type_shrine">Rakennuksen tyyppi: pyhäkkö</string>
     <string name="poi_building_type_synagogue">Rakennuksen tyyppi: synagoga</string>
@@ -1633,4 +1633,6 @@
     <string name="poi_diplomatic_services_citizen_services_filter">Kuntapalvelut</string>
     <string name="poi_houseware">Kodintarvikkeiden myymälä</string>
     <string name="poi_doityourself">Rautakauppa</string>
+    <string name="poi_crossing_unmarked">Merkitsemätön</string>
+    <string name="poi_crossing_uncontrolled">Vapaa ylitys</string>
 </resources>

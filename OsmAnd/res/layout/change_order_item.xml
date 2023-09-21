@@ -9,7 +9,7 @@
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
     android:weightSum="1"
-    android:background="@color/color_white"
+    android:background="@color/card_and_list_background_light"
 	android:layout_marginStart="5dip"
 	android:layout_marginEnd="5dip">
 
@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textSize="@dimen/default_list_text_size"
-        android:textColor="@color/color_black"
+        android:textColor="@color/activity_background_color_dark"
         android:layout_weight="1" />
 
     <ImageButton

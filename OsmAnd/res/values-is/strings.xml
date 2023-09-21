@@ -419,7 +419,7 @@
     <string name="max_speed_none">ekkert</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="download_hillshade_maps">Skuggar í landslagi</string>
+    <string name="download_hillshade_maps">Hæðaskygging</string>
     <string name="local_indexes_cat_srtm">Hæðarlínur</string>
     <string name="recording_context_menu_show">Sýna</string>
     <string name="av_def_action_picture">Taka ljósmynd</string>
@@ -429,7 +429,6 @@
     <string name="recording_context_menu_play">Spila</string>
     <string name="recording_description">Tek upp %1$s %3$s %2$s</string>
     <string name="recording_default_name">Upptaka</string>
-    <string name="index_srtm_parts">hlutar</string>
     <string name="map_widget_max_speed">Hraðatakmörk</string>
     <string name="shared_string_target_points">Áfangastaðir</string>
     <string name="add_tag">Bæta við merki</string>
@@ -513,7 +512,7 @@
     <string name="arrival_distance_factor_early">Snemma</string>
     <string name="arrival_distance_factor_normally">Venjulegt</string>
     <string name="arrival_distance_factor_late">Seint</string>
-    <string name="arrival_distance_factor_at_last">Á síðustu metrunum</string>
+    <string name="arrival_distance_factor_at_last">Mjög seint</string>
     <string name="local_openstreetmap_uploading">Sendi inn…</string>
     <string name="index_name_north_america">Norður-Ameríka</string>
     <string name="index_name_central_america">MIð-Ameríka</string>
@@ -764,7 +763,6 @@
     <string name="rendering_attr_showProposed_name">Uppástungur</string>
     <string name="world_map_download_descr">Grunnkort af heiminum (sem þekur alla jörðina í minni aðdrætti) vantar eða er úrelt. Íhugaðu að hlaða því inn til að fá hnattræna yfirsýn.</string>
     <string name="hillshade_layer_disabled">Hæðaskyggingalag óvirkt</string>
-    <string name="srtm_plugin_disabled">Hæðarlínur óvirkar</string>
     <string name="default_speed_system_descr">Skilgreindu einingu fyrir hraða.</string>
     <string name="shared_string_trip_recording">Skráning ferðar</string>
     <string name="osmand_running_in_background">Keyrandi í bakgrunni</string>
@@ -1027,7 +1025,7 @@
     <string name="number_of_edits">Fjöldi breytinga</string>
     <string name="reports_for">Skýrsla fyrir</string>
     <string name="file_name_containes_illegal_char">Skráarheitið inniheldur ógildan staf</string>
-    <string name="srtm_paid_version_title">Viðbót fyrir hæðarlínur</string>
+    <string name="srtm_paid_version_title">Viðbót fyrir landslag</string>
     <string name="rendering_attr_showAccess_name">Sýna aðgangstakmarkanir og gjald</string>
     <string name="index_item_world_basemap">Heims-yfirlitskort</string>
     <string name="index_item_world_ski">Heims-skíðakort</string>
@@ -1095,7 +1093,6 @@
     <string name="recording_context_menu_delete">Eyða upptöku</string>
     <string name="map_widget_distancemeasurement">Mæling vegalengda</string>
     <string name="map_widget_audionotes">Hljóð-minnispunktar</string>
-    <string name="index_srtm_ele">Hæðarlínur</string>
     <string name="download_select_map_types">Önnur kort</string>
     <string name="download_roads_only_item">Einungis vegir</string>
     <string name="download_srtm_maps">Hæðarlínur</string>
@@ -1144,7 +1141,7 @@
     <string name="avoid_toll_roads">Forðast gjaldskylda vegi</string>
     <string name="plugin_install_needs_network">Þú þarft internettengingu til að setja upp þessa viðbót..</string>
     <string name="activate_seamarks_plugin">Virkjaðu Sjómerkja-viðbótina</string>
-    <string name="activate_srtm_plugin">Virkjaðu hæðarlínu-viðbótina</string>
+    <string name="activate_srtm_plugin">Virkjaðu \'Landslag\'-viðbótina</string>
     <string name="route_roundabout_short">Beygðu útaf við %1$d afrein og haltu áfram</string>
     <string name="upload_poi">Senda inn merkisstað</string>
     <string name="christmas_desc_q">Birta jólastaðina?</string>
@@ -1158,7 +1155,7 @@
     <string name="map_downloaded">Búið að ná í kort</string>
     <string name="share_geo">geo:</string>
     <string name="record_plugin_name">Skráning ferðar</string>
-    <string name="srtm_plugin_name">Hæðarlínur</string>
+    <string name="srtm_plugin_name">Landslag</string>
     <string name="show_pedestrian_warnings">Gangbrautir</string>
     <string name="navigate_point_zone">Svæði</string>
     <string name="rendering_category_others">Önnur eigindi korts</string>
@@ -1373,7 +1370,7 @@
     <string name="confirmation_to_delete_history_items">Fjarlægja valin atriði úr breytingaskránni?</string>
     <string name="change_markers_position">Breyta staðsetningu kortamerkis</string>
     <string name="access_no_destination">Stillingaviðbót fyrir altækan aðgang: Áfangastaður er ekki stilltur</string>
-    <string name="map_widget_bearing">Hlutfallsleg stefna</string>
+    <string name="map_widget_bearing">Hlutfallsleg miðun</string>
     <string name="no_map_markers_found">Bættu við kortamerkjum á kortinu</string>
     <string name="anonymous_user_hint">Nafnlausir notendur geta ekki: 
 \n- búið til hópa; 
@@ -2115,7 +2112,7 @@
     <string name="mapillary_descr">Götumyndir af netinu fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
     <string name="plugin_mapillary_descr">Götumyndir fyrir alla. Þar sem myndefni vantar, geturðu einfaldlega bætt því við sjálf/ur svo aðrir geti nýtt sér það. Til að virkja fyrirliggjandi gögn sem kortalag, skaltu virkja \"Myndefni í götuhæð\" í stillingum landakortsins.</string>
     <string name="hillshade_menu_download_descr">Sæktu hæðaskyggingakortið af þessu svæði til að sjá lóðréttar hæðaskyggingar.</string>
-    <string name="hillshade_purchase_header">Settu upp hæðarlínuviðbótina til að sjá lóðrétta hæðafleti.</string>
+    <string name="hillshade_purchase_header">Settu upp landslagsviðbótina til að sjá lóðrétta hæðafleti.</string>
     <string name="srtm_menu_download_descr">Sæktu hæðarlínukortið af þessu svæði.</string>
     <string name="srtm_purchase_header">Til að sjá hæðarlínur á kortinu, þarftu að kaupa og setja inn hæðarlínuviðbótina.</string>
     <string name="show_from_zoom_level">Birting hefst við aðdráttarstigið</string>
@@ -2282,7 +2279,7 @@
     <string name="quick_action_sh_poi_descr">Þú getur bætt við einum eða fleiri flokkum merkisstaða til að birta á kortinu.</string>
     <string name="quick_action_page_list_descr">Hnappur til að fletta í gegnum listann hér fyrir neðan.</string>
     <string name="download_using_mobile_internet">Í augnablikinu er þráðlaust Wi-Fi net ekki tengt. Viltu nota núverandi internettengingu undir niðurhal?</string>
-    <string name="srtm_paid_version_msg">Íhugaðu að kaupa viðbótina fyrir hæðarlínur á markaðnum til að styðja við áframhaldandi þróun forritsins.</string>
+    <string name="srtm_paid_version_msg">Íhugaðu að kaupa viðbótina fyrir landslag á markaðnum til að styðja við áframhaldandi þróun forritsins.</string>
     <string name="recording_is_recorded">Verið er að taka upp hjóð/myndskeið. Til að stöðva það, ýttu á hljóð/mynd-viðmótshlutann.</string>
     <string name="recording_playing">Verið er að spila hjóð úr tilgreindri upptöku.
 \n%1$s</string>
@@ -2344,7 +2341,7 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'.
 \n
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="srtm_plugin_description">Yfirborðsupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi.
+    <string name="srtm_plugin_description">Landslagupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi.
 \n
 \nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
 \n
@@ -2695,7 +2692,6 @@
     <string name="start_editing">Hefja breytingar</string>
     <string name="get_unlimited_access">Fáðu ótakmarkaðan aðgang</string>
     <string name="welcome_to_open_beta">Velkomin í opnu beta-þróunarútgáfuna</string>
-    <string name="contour_lines_hillshade_maps">Hæðarlínur og hæðaskyggð kort</string>
     <string name="download_wikipedia_description">Sækja Wikipedia greinar fyrir %1$s til að lesa þær án nettengingar.</string>
     <string name="download_wikipedia_label">Sækja Wikipedia-gögn</string>
     <string name="open_in_browser_wiki">Opna greinina á netinu</string>
@@ -3209,7 +3205,6 @@
     <string name="shared_string_memory_used_gb_desc">Notað %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Notað %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Notað %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Hæðarlínur og hæðaskygging</string>
     <string name="routing_attr_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
     <string name="routing_attr_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
     <string name="update_all_maps">Uppfæra öll kort</string>
@@ -3451,13 +3446,13 @@
     <string name="terrain_slider_description">Stilltu lágmarks og hámarks aðdráttarstig þess að lagið verður birt.</string>
     <string name="hillshade_download_description">Viðbótarkort þarf til að skoða hæðaskyggingar á kortinu.</string>
     <string name="slope_download_description">Viðbótarkort þarf til að skoða brekkur á kortinu.</string>
-    <string name="slope_read_more">Þú getur lesið meira um brekkur á %1$s.</string>
+    <string name="slope_read_more">Þú getur lesið meira um halla á %1$s.</string>
     <string name="shared_string_transparency">Gegnsæi</string>
     <string name="shared_string_zoom_levels">Aðdráttarstig</string>
     <string name="shared_string_legend">Skýring</string>
     <string name="terrain_empty_state_text">Birtu hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
     <string name="shared_string_hillshade">Hæðaskygging</string>
-    <string name="download_slope_maps">Brekkur</string>
+    <string name="download_slope_maps">Brekka</string>
     <string name="quick_action_terrain_descr">Hnappur til að birta eða fela yfirborðslag á kortinu.</string>
     <string name="recalculate_route_in_deviation">Endurreikna leið ef farið er út af fyrirfram gefinni leið</string>
     <string name="select_distance_route_will_recalc">Veldu þá vegalengd sem þarf til að leiðin verði endurreiknuð.</string>
@@ -3630,7 +3625,7 @@
     <string name="keep_active">Halda virku</string>
     <string name="speed_cameras_alert">Aðvaranir vegna hraðamyndavéla eru bannaðar með lögum í sumum löndum.</string>
     <string name="quick_action_showhide_mapillary_descr">Víxlhnappur til að birta eða fela Mapillary-lagið á kortinu.</string>
-    <string name="shared_string_bearing">Stefna</string>
+    <string name="shared_string_bearing">Miðun</string>
     <string name="item_deleted">%1$s eytt</string>
     <string name="speed_cameras_restart_descr">Endurræstu forritið til að fjarlægja öll gögn um hraðamyndavélar.</string>
     <string name="shared_string_uninstall_and_restart">Fjarlægja og endurræsa</string>
@@ -3798,7 +3793,7 @@
     <string name="snowmobile_render_descr">Fyrir akstur vélsleða á sérstökum vegum og slóðum.</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s gögn aðeins tiltæk á vegunum, þú þarft að reikna leið með “Leið milli punkta” til að sjá gröf.</string>
     <string name="file_already_imported">Skrá hefur þegar verið flutt inn í OsmAnd</string>
-    <string name="contour_lines_thanks">Takk fyrir að kaupa \'Hæðarlínur\'</string>
+    <string name="contour_lines_thanks">Takk fyrir að kaupa \'Landslag\'</string>
     <string name="osm_live_payment_desc_hw">Áskriftargjaldið verður rukkað miðað við valið tímabil. Þú getur sagt áskriftinni upp hvenær sem er á AppGallery.</string>
     <string name="use_two_phase_routing">Nota 2-umferða A* leiðararútreikning</string>
     <string name="osm_live_payment_subscription_management_hw">Greiðsla verður gjaldfærð á AppGallery reikninginn þinn við staðfestingu á kaupunum.
@@ -3964,7 +3959,7 @@
     <string name="uploading_count">Sendi inn %1$d af %2$d</string>
     <string name="uploaded_count">Sent inn %1$d af %2$d</string>
     <string name="toast_select_edits_for_upload">Veldu breytingar til að senda inn</string>
-    <string name="hillshade_slope_contour_lines">Hæðaskygging / Halli / Hæðarlínur</string>
+    <string name="hillshade_slope_contour_lines">Hæðarlínur / Hæðaskygging / Halli</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Nota test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Skrá inn á OpenPlaceReviews</string>
@@ -4146,10 +4141,8 @@
     <string name="purchases_feature_desc_monthly_map_updates">Fáðu mánaðarlegar uppfærslur á ónettengdum kortum.</string>
     <string name="unlimited_map_downloads">Ótakmörkuð niðurhöl korta</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage ónettengt</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Yfirborðskort: Hæðarlínur, hæðaskyggingar, brekkur</string>
     <string name="offline_wikipeadia">Ónettengd Wikipedia</string>
     <string name="offline_wikivoyage">Ónettengdar Wikiferðir</string>
-    <string name="terrain_maps">Yfirborðskort</string>
     <string name="nautical_depth">Dýpt sjávar</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s eða %2$s</string>
     <string name="continue_with">Halda áfram með %1$s</string>
@@ -4232,7 +4225,7 @@
     <string name="option_available_only_in_osmand_pro">Tiltækt sem hluti af OsmAnd Pro áskrift.</string>
     <string name="purchases_restored">Endurheimt kaup</string>
     <string name="purchases_feature_desc_unlimited_map_download">Fáðu ótakmörkuð niðurhöl ónettengdra korta allra heimsálfa og svæða.</string>
-    <string name="backup_deleting_all_data_descr">Bíddu þar til OsmAnd er búið að eyða gönunum þínum af tölvuskýinu. Ekki verður hreyft við neinum gögnum á tækinu.</string>
+    <string name="backup_deleting_all_data_descr">Bíddu þar til OsmAnd er búið að eyða gögnunum þínum af tölvuskýinu. Ekki verður hreyft við neinum gögnum á tækinu.</string>
     <string name="backup_deleted_all_data_descr">Öllum gögnum þínum hefur verið eytt af OsmAnd-tölvuskýinu.</string>
     <string name="amz_manage_subscription_descr">Til að sýsla með áskriftina þína skaltu nota Amazon-forritið eða vefsvæði Amazon.com.</string>
     <string name="grey_color_undefined">Grár litur er notaður fyrir hluta án gagna.</string>
@@ -4578,7 +4571,7 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Lengra komnir</string>
     <string name="routing_attr_difficulty_preference_expert_name">Sérfræðingar</string>
     <string name="shared_string_symbol">Tákn</string>
-    <string name="no_widgets_descr">Bæta við einum eða fleiri viðmótshlutum úr listanum yfir tiltæka viðmótshluta.</string>
+    <string name="no_widgets_descr">Bættu við einum eða fleiri viðmótshlutum úr listanum yfir tiltæka viðmótshluta.</string>
     <string name="no_widgets_here_yet">Engir viðmótshlutar hér ennþá</string>
     <string name="rendering_attr_showRunningRoutes_description">Sýna hlaupaleiðir</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitness-leiðir</string>
@@ -4624,7 +4617,7 @@
     <string name="routing_attr_avoid_fords_name">Forðast vöð</string>
     <string name="circle_settings">Stillingar hrings</string>
     <string name="shared_string_mode">Hamur</string>
-    <string name="map_widget_true_bearing">Réttvísandi</string>
+    <string name="map_widget_true_bearing">Réttvísandi miðun</string>
     <string name="get_altitude_data">Ná í hæðargögn</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (engar takmarkanir)</string>
     <string name="routing_attr_hazmat_category_name">Flokkur spilliefna</string>
@@ -4686,7 +4679,7 @@
     <string name="use_latin_name_if_missing">Nota latneskt nafn ef vantar</string>
     <string name="altitude_widget_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu.</string>
     <string name="audio_video_notes_desc">Gefur fljótlegan aðgang að byrja/stöðva upptöku (á hljóði, myndskeiðum eða ljósmyndum).</string>
-    <string name="bearing_desc">Sýnir algilda eða hlutfallslega stefnu á markpunkt í horneiningum (gráður 180, gráður 360, millíradíanar).</string>
+    <string name="bearing_desc">Sýnir algilda eða hlutfallslega miðun á markpunkt í horneiningum (gráður 180, gráður 360, millíradíanar).</string>
     <string name="switch_widget_mode_desc">Með því að ýta á viðmótshlutann er skipt um ham.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Sýna IMBA-fjallahjólaleiðir</string>
     <string name="auto_25_chars_route_tl_kl">Beygðu til vinstri og haltu þig til vinstri</string>
@@ -5068,7 +5061,7 @@
     <string name="enable_3d_maps">Virkja þrívíddarkort</string>
     <string name="cloud_version_confirm_delete">Eyða \"%1$s\" af OsmAnd-tölvuskýinu\?</string>
     <string name="delete_cloud_version">Eyða útgáfu á tölvuskýi</string>
-    <string name="approximate_bearing">Nálguð stefna</string>
+    <string name="approximate_bearing">Nálguð miðun</string>
     <string name="shared_string_inches">tommur</string>
     <string name="speak_route_deviation">Tilkynna frávik frá leið</string>
     <string name="select_layer">Veldu lag</string>
@@ -5086,7 +5079,6 @@
     <string name="offline_cache">Ónettengt skyndiminni</string>
     <string name="token_is_not_valid">Teiknið er ekki gilt</string>
     <string name="app_mode_climbing">Klifur</string>
-    <string name="test_heightmap">Prófa hæðakort</string>
     <string name="shared_string_add_manually">Bæta handvirkt við…</string>
     <string name="shared_string_in_progress">Í vinnslu</string>
     <string name="shared_string_delete_file">Eyða skrá</string>
@@ -5135,7 +5127,7 @@
     <string name="shared_string_wrist">Úlnliður</string>
     <string name="shared_string_finger">Fingur</string>
     <string name="shared_string_hand">Hönd</string>
-    <string name="terrain_map">Yfirborðskort</string>
+    <string name="terrain_map">Yfirborðskort (3D)</string>
     <string name="relief_3d">Þrívíddarupphleyping</string>
     <string name="rendering_value_name_only_name">Aðeins nafn</string>
     <string name="shared_string_ear_lobe">Eyrnasnepill</string>
@@ -5164,4 +5156,153 @@
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="routing_attr_allow_via_ferrata_name">Hengistígur (Via ferrata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Hengistígur gerður með vírum, keðjum, stigum og brúm.</string>
+    <string name="write_heading">Skrifa stefnu</string>
+    <string name="wheel_circumference">Ummál hrings</string>
+    <string name="approximate_bearing_descr">Reikna miðun út frá leið sem verið er að fylgja.</string>
+    <string name="open_issue_on_github">Opnaðu verkbeiðni á GitHub</string>
+    <string name="about_osmand">Um OsmAnd</string>
+    <string name="local_indexes_category_terrain">Yfirborðskort (3D)</string>
+    <string name="user_guide">Notendahandbók</string>
+    <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
+    <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
+    <string name="help_article_search_search_coordinates_name">Leita að hnitum</string>
+    <string name="get_osmand_cloud">Fáðu OsmAnd Cloud-tölvuský</string>
+    <string name="verify_account_deletion_descr">Við þurfum að sannreyna aðganginn þinn áður en við eyðum honum.
+\n
+\nSettu inn tölvupóstfangið sem þú notaðir við skráningu. Eins-skiptis lykilorð til að nota í næsta skrefi verður sent á það.</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Leiðsögn eftir merkjum</string>
+    <string name="is_imported">Flutti inn %1$s.</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Ítalski Alpaklúbburinn)</string>
+    <string name="help_article_map_point_layers_on_map_name">Punktar á kortinu</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="send_crash_log_descr">Inniheldur einungis upplýsingar um hrun</string>
+    <string name="help_article_plan_route_coordinate_input_name">Innsetning hnita</string>
+    <string name="generate_slope_from_3d_maps">Búa til rastakort með brekkum út frá þrívíddarkortum</string>
+    <string name="dangerous_goods_description">Flutningur hættulegra spilliefna er bannaður á sumum vegum og í veggöngum.</string>
+    <string name="delete_account">Eyða aðgangi</string>
+    <string name="write_bearing">Skrifa miðun</string>
+    <string name="error_calculate">Niðurstaða útreiknings er auð</string>
+    <string name="help_article_start_with_main_menu_name">Aðalvalmynd</string>
+    <string name="show_all_tracks_on_the_map">Birta alla ferla á korti</string>
+    <string name="contact_us">Hafðu samband við okkur</string>
+    <string name="glide_ratio_to_target">Rennslishlutfall að áfangastað</string>
+    <string name="help_article_widgets_markers_name">Viðmótshlutar merkja</string>
+    <string name="help_article_purchases_giveaway_name">Gjafir</string>
+    <string name="help_article_start_with_first_steps_name">Fyrstu skref</string>
+    <string name="help_article_search_search_poi_name">Leita að merkisstað</string>
+    <string name="help_article_troubleshooting_general_name">Almennt</string>
+    <string name="manage_subscriptions">Sýsla með áskriftir.</string>
+    <string name="free_versions_descr">Sæktu og settu upp ókeypis OsmAnd-útgáfu</string>
+    <string name="shared_string_checked">Merkt</string>
+    <string name="shared_string_avoid">Forðast</string>
+    <string name="average_glide_ratio">Meðal-rennslishlutfall</string>
+    <string name="free_versions">Ókeypis útgáfur</string>
+    <string name="open_issue_on_github_descr">Spyrðu spurninga, stingdu upp á eiginleikum</string>
+    <string name="feature_available_as_part_of_plan">%1$s er boði sem hluti af %2$s-áskriftinni</string>
+    <string name="github_discussion">Umræður á GitHub</string>
+    <string name="free_favorites_backup">Ókeypis öryggisafrit eftirlæta</string>
+    <string name="release_4_6">• Viðmótshluti fyrir rennslishlutfall
+\n
+\n • Bætt við ANT+ hitastigshluta
+\n
+\n • Betri minnisstýring fyrir stóra GPX-ferla
+\n
+\n</string>
+    <string name="deleting_complete">Eyðingu lokið</string>
+    <string name="help_article_map_tracks_on_map_name">Ferlar og leiðir</string>
+    <string name="most_viewed">Oftast skoðað</string>
+    <string name="help_article_navigation_guidance_name">Leiðsögn</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprengiefni</string>
+    <string name="help_article_personal_profiles_name">Notkunarsnið (Stillingar)</string>
+    <string name="help_article_troubleshooting_maps_data_name">Landakort og gögn</string>
+    <string name="help_article_navigation_setup_route_details_name">Nánar um leið</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Geislavirk efni</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Undirbúningur leiðar</string>
+    <string name="write_bearing_description">Vista miðun í hvern ferilpunkt á meðan upptöku stendur</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="generate_hillshade_from_3d_maps">Búa til rastakort með hæðaskyggingum út frá þrívíddarkortum</string>
+    <string name="map_widget_group_glide_desc">Viðmótshluti sem sýnir rennslishlutfall að áfangastað eða meðal-rennslishlutfall fyrirliggjandi ferðar.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Leiðsögn eftir ferli</string>
+    <string name="help_article_navigation_routing_online_routing_name">Leiðagerð af netinu</string>
+    <string name="help_article_map_map_context_menu_name">Samhengisvalmynd korts</string>
+    <string name="map_widget_glide_average_desc">Birtir meðal-rennslishlutfall fyrir stillt tímabil.</string>
+    <string name="copy_build_version">Afrita byggingarútgáfu</string>
+    <string name="clear_online_cache_description">Þetta mun hreinsa skyndiminnið fyrir nettengdar veðurflísar.</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_personal_import_export_name">Inn- / útflutningur</string>
+    <string name="cache_size">Stærð skyndiminnis</string>
+    <string name="help_article_widgets_radius_ruler_name">Mælistika út frá miðju og mælistika</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Upptaka ferils</string>
+    <string name="live_monitoring_adress_descr">Tilgreindu vefslóð með málskipan færibreytu: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="help_article_map_legend_nautical_map_name">Sjókortastíll</string>
+    <string name="map_widget_group_glide_ratio">Rennslishlutfall</string>
+    <string name="folder_export_empty_error">Það er ekkert til að flytja út, mappan er tóm</string>
+    <string name="tracks_empty_folder_description">Þessi mappa er ekki ennþá með neina ferla.</string>
+    <string name="help_article_plan_route_name">Skipuleggja leið</string>
+    <string name="help_article_widgets_map_buttons_name">Kortahnappar</string>
+    <string name="map_widget_glide_target_desc">Birtir rennslishlutfallið sem nauðsynlegt er til að ná að áfangastað.</string>
+    <string name="osmand_cloud_deleted_account_descr">Aðgangi og öllum gögnum hefur verið eytt af OsmAnd-tölvuskýinu.</string>
+    <string name="common_weight_limit_error">Lágmarksgildi er \"%1$s\" %2$s. Notaðu \"%3$s\"-sniðið ef farartækið vegur minna en lágmarksgildið.</string>
+    <string name="shared_string_included">Innifalið</string>
+    <string name="free_settings_backup">Ókeypis öryggisafrit stillinga</string>
+    <string name="visible_in_3d_mode">Sýnilegt í 3D-ham</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd kortastíll</string>
+    <string name="verify_account">Staðfestu notandaaðganginn þinn</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Ætandi efni</string>
+    <string name="sensor_temperature_desc">Sýnir hitastig frá skynjara</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxunarefni og lífræn peroxíð</string>
+    <string name="shared_string_visible_on_map">Sýnilegt á korti</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Eldfimir vökvar</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_widgets_info_widgets_name">Viðmótshlutar til upplýsinga</string>
+    <string name="rendering_value_sacScale_description">Svissneski Alpaklúbburinn</string>
+    <string name="action_cannot_be_undone">Það er ekki hægt að afturkalla við þessa aðgerð.</string>
+    <string name="hillshade_slope">Hæðaskyggingar, brekkur</string>
+    <string name="disable_vertex_hillshade_3d">Gera hæðaskyggingu lína óvirka í þrívídd</string>
+    <string name="external_sensor_name_property_description">Nafn skynjara</string>
+    <string name="empty_tracks">Þú ert ekki með neinar ferlaskrár.</string>
+    <string name="running_scds_device_name">Hlaupatæki</string>
+    <string name="no_bt_permission">Heimild fyrir Bluetooth er ekki veitt</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Eitruð og smitandi efni</string>
+    <string name="shared_string_deleting">Eyði</string>
+    <string name="help_article_widgets_name">Viðmótshlutar korts</string>
+    <string name="help_article_personal_name">Gögnin mín</string>
+    <string name="help_article_purchases_android_name">Innkaup í Android</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ertu viss um að þú viljir eyða aðgangnum af OsmAnd-tölvuskýinu.
+\n
+\nÞessi aðgerð er ekki afturkræf.</string>
+    <string name="free_account">Ókeypis aðgangur</string>
+    <string name="report_an_issues">Tilkynntu vandamál</string>
+    <string name="telegram_chats">Telegram-spjöll</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Ýmislegt</string>
+    <string name="help_article_plan_route_web_name">Leiðagerð á vefnum</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Eldfim fastefni</string>
+    <string name="help_article_navigation_routing_name">Breytur varðandi leið</string>
+    <string name="osmand_cloud_delete_account_confirmation">Eyða aðgangi\?</string>
+    <string name="shared_string_not_checked">Ómerkt</string>
+    <string name="backup_error_delete_account_email_match">Tölvupóstfang samsvarar ekki innskráningarnafni</string>
+    <string name="map_3d_mode_hint">Ef ýtt er og haldið er hægt að breyta staðsetningu hnappsins.</string>
+    <string name="write_heading_description">Vista stefnu í hvern ferilpunkt á meðan upptöku stendur</string>
+    <string name="help_article_start_with_name">Fyrstu skrefin með OsmAnd</string>
+    <string name="help_article_purchases_ios_name">Innkaup í iOS</string>
+    <string name="osmand_cloud_deleting_account_descr">Eftir smástund verður búið að eyða öllum gögnunum þínum og aðgangnum af OsmAnd-tölvuskýinu.
+\n
+\nEkki verður hreyft við neinum gögnum á tækinu.</string>
+    <string name="shared_string_class">Flokkur</string>
+    <string name="bicycle_scd_device_name">Reiðhjólatæki</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gös</string>
+    <string name="dangerous_goods">Hættulegar vörur</string>
+    <string name="help_article_widgets_nav_widgets_name">Leiðsöguhlutar</string>
+    <string name="help_article_map_interact_with_map_name">Gagnvirkni við kort</string>
+    <string name="help_article_map_raster_maps_name">Rastakort (tengd/ótengd)</string>
+    <string name="help_article_search_search_all_name">Leita í öllu</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Hrunskrár</string>
+    <string name="shared_string_temperature">Hitastig</string>
+    <string name="help_article_personal_storage_name">Geymsla</string>
+    <string name="delete_account_warning">Ertu viss um að þú viljir eyða %1$s aðgangnum\?</string>
+    <string name="help_article_map_legend_ski_map_name">Skíðakortastíll</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Um leiðagerð OsmAnd</string>
+    <string name="shared_string_setup">Uppsetning</string>
 </resources>

@@ -2685,7 +2685,7 @@ public class OsmandAidlApi {
 				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
 				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
 					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
-					//An empty list means all key are requested
+					// An empty list means all key are requested
 					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {
 						try {
 							cb.getCallback().onKeyEvent(event);

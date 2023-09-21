@@ -758,8 +758,6 @@
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Ta ljud-/foto-/videoanteckningar under en resa, med antingen en kartknapp eller platsens snabbmeny.</string>
     <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
-    <string name="index_srtm_parts">delar</string>
-    <string name="index_srtm_ele">Höjdkurvor</string>
     <string name="download_select_map_types">Andra kartor</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
@@ -1637,7 +1635,6 @@
     <string name="min_mile">min/mi</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Höjdkurvor är inaktiverade</string>
     <string name="regions">Regioner</string>
     <string name="region_maps">Regionskartor</string>
     <string name="world_maps">Världskartor</string>
@@ -2613,7 +2610,6 @@
     <string name="wikivoyage_offline">Wikivoyage frånkopplad</string>
     <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
     <string name="wikipedia_offline">Wikipedia frånkopplad</string>
-    <string name="contour_lines_hillshade_maps">Höjdkurvor &amp; terrängskuggningskartor</string>
     <string name="unlock_all_features">Låsa upp alla OsmAnd-funktioner</string>
     <string name="purchase_dialog_title">Välj abonnemang</string>
     <string name="purchase_dialog_travel_description">Köp något av följande för att läsa researtiklar frånkopplad:</string>
@@ -3567,7 +3563,6 @@
     <string name="shared_string_calculate">Beräkna</string>
     <string name="update_all_maps_q">Uppdatera alla (%1$d) kartor\?</string>
     <string name="update_all_maps">Uppdatera alla kartor</string>
-    <string name="contour_lines_and_hillshade">Höjdkurvor och terrängskuggning</string>
     <string name="sunrise_at">Soluppgång %1$s</string>
     <string name="sunset_at">Solnedgång %1$s</string>
     <string name="rendering_attr_streetLightingNight_name">Visa endast på natten</string>
@@ -3624,10 +3619,8 @@
     <string name="purchases_feature_desc_monthly_map_updates">Få tillgång till regelbundna månatliga uppdateringar av offline-kartor.</string>
     <string name="unlimited_map_downloads">Obegränsade kartnedladdningar</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia och Wikivoyage i nedkopplat läge</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrängkartor: höjdkurvor, terrängskuggning, lutning</string>
     <string name="offline_wikipeadia">Wikipedia i nedkopplat läge</string>
     <string name="offline_wikivoyage">Wikivoyage i nedkopplat läge</string>
-    <string name="terrain_maps">Terrängkartor</string>
     <string name="pro_features">Pro-finesser</string>
     <string name="select_wikipedia_article_langs">Välj språk för Wikipedia-artiklar på kartan. Byt till vilket annat tillgängligt språk som helst vid läsning av artikeln.</string>
     <string name="measure_distance_item">Mät avstånd</string>
@@ -4483,7 +4476,6 @@
     <string name="weather_offline_forecast">Offline väderprognos</string>
     <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
     <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
-    <string name="test_heightmap">Testa höjdkarta</string>
     <string name="offline_weather_forecast">Väderprognos offline</string>
     <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
     <string name="marker_2nd">Andra markören</string>

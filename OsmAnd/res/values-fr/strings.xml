@@ -369,10 +369,10 @@
 \nSeules les cartes déjà installées seront accessibles.</string>
     <string name="unzipping_file">Décompression du fichier…</string>
     <string name="route_tr">Tournez à droite</string>
-    <string name="route_tshr">Tournez franchement à droite</string>
+    <string name="route_tshr">Prenez le virage serré à droite et continuez</string>
     <string name="route_tslr">Tournez légèrement vers la droite et continuez</string>
     <string name="route_tl">Tournez à gauche</string>
-    <string name="route_tshl">Tournez franchement à gauche</string>
+    <string name="route_tshl">Prenez le virage serré à gauche et continuez</string>
     <string name="route_tsll">Tournez légèrement vers la gauche et continuez</string>
     <string name="route_tu">Faites demi-tour et continuez</string>
     <string name="route_head">Avancez</string>
@@ -876,7 +876,6 @@
     <string name="map_widget_max_speed">Limite de vitesse</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
-    <string name="index_srtm_ele">Courbes de niveau</string>
     <string name="srtm_plugin_description">Fournit des informations sur le terrain (ombrage du relief, courbes de niveau, pente) pour vous aider à mieux interpréter le relief et l’accessibilité. Ces informations topographiques peuvent être représentées sur la carte par des ombres, des lignes d\'altitude et des couleurs variant selon la pente.
 \n
 \nLes données proviennent de SRTM et ASTER.
@@ -885,7 +884,6 @@
     <string name="srtm_plugin_name">Topographie</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
-    <string name="index_srtm_parts">parties</string>
     <string name="audionotes_location_not_defined">Appuyez sur « Utiliser la position… » pour ajouter une note sur le point.</string>
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire, soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
@@ -1667,7 +1665,6 @@
     <string name="m_s">m/s</string>
     <string name="favorite_category_add_new">Ajouter une catégorie</string>
     <string name="favorite_category_select">Sélectionner une catégorie</string>
-    <string name="srtm_plugin_disabled">Courbes de niveau désactivées</string>
     <string name="show_free_version_banner">Afficher le bandeau « Version gratuite »</string>
     <string name="show_free_version_banner_description">Afficher le bandeau « Version gratuite » même dans la version payante.</string>
     <string name="downloading_number_of_files">Téléchargement du fichier %1$d …</string>
@@ -2685,7 +2682,6 @@
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
-    <string name="contour_lines_hillshade_maps">Cartes avec courbes de niveau et ombrage du relief</string>
     <string name="download_wikipedia_description">Téléchargez les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
     <string name="download_wikipedia_label">Télécharger les données Wikipédia</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
@@ -3200,7 +3196,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s Go utilisés</string>
     <string name="shared_string_memory_used_mb_desc">%1$s Mo utilisés</string>
     <string name="shared_string_memory_used_kb_desc">%1$s ko utilisés</string>
-    <string name="contour_lines_and_hillshade">Courbes de niveau et Ombrage du relief</string>
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
@@ -4154,7 +4149,6 @@
     <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur bathymétrique</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Cartes du relief : courbes de niveau, ombres, pentes</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
     <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
     <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur bathymétrique</string>
@@ -4165,7 +4159,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
     <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
-    <string name="terrain_maps">Cartes du terrain</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continuer avec %1$s</string>
     <string name="not_available_with">Non disponible avec %1$s</string>
@@ -4479,9 +4472,9 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Tunnels sur voie navigable</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes de note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Étiquettes fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Catégorie</string>
@@ -5101,7 +5094,6 @@
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
     <string name="common_weight_limit_error">La valeur minimale est \"%1$s\" %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil \"%3$s\".</string>
     <string name="weather_forecast">Prévisions météo</string>
-    <string name="test_heightmap">Carte d\'altitude de test</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
     <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
     <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
@@ -5433,4 +5425,16 @@
 \n• Meilleure gestion de la mémoire pour les grosses traces GPX
 \n
 \n</string>
+    <string name="app_mode_baby_transport">Transport de bébés</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_hang_gliding">Deltaplane</string>
+    <string name="with_waypoints">Avec points de passage</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitude maxi</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrer par nom</string>
+    <string name="shared_string_reset_all">Tout réinitialiser</string>
+    <string name="filter_tracks_count">Filtre : %d</string>
+    <string name="date_of_creation">Date de création</string>
+    <string name="filter_screen_title">Filtrer</string>
 </resources>

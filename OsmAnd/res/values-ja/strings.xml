@@ -896,8 +896,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">マップ内ボタンや位置情報のコンテキストメニューから、旅行中の音声/写真/動画メモを取ることができます。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
-    <string name="index_srtm_parts">パート</string>
-    <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">等高線、起伏、勾配などの地形情報は、地形配置、起伏、航行の可能性などを視覚的に評価するのに役立ちます。地形情報は、勾配の陰影、等高線、勾配の度合いによる色付けでマップに表すことができます。
 \n
 \n基礎となるデータは、SRTM(スペースシャトル立体地形データ)およびASTER(資源探査用将来型センサ)に由来します。
@@ -1663,7 +1661,6 @@ POIの更新は利用できません</string>
     <string name="region_maps">広域マップ</string>
     <string name="world_maps">世界地図</string>
     <string name="hillshade_layer_disabled">陰影起伏図レイヤー表示無効</string>
-    <string name="srtm_plugin_disabled">等高線無効</string>
     <string name="favorite_category_add_new">新規追加</string>
     <string name="favorite_category_select">カテゴリーを選択</string>
     <string name="default_speed_system_descr">速度の単位を設定します</string>
@@ -2657,7 +2654,6 @@ POIの更新は利用できません</string>
     <string name="in_app_purchase_desc_ex">買いきりの場合、期限を問わず利用可能です。</string>
     <string name="purchase_unlim_title">購入 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyageオフライン</string>
-    <string name="contour_lines_hillshade_maps">等高線と陰影起伏図</string>
     <string name="unlock_all_features">OsmAnd機能のすべてをアンロック</string>
     <string name="purchase_dialog_title">プランの選択</string>
     <string name="purchase_dialog_subtitle">適切な項目を選択してください</string>
@@ -3174,7 +3170,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB使用</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB使用</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB 使用</string>
-    <string name="contour_lines_and_hillshade">等高線と陰影起伏図</string>
     <string name="routing_attr_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
     <string name="update_all_maps">すべてのマップを更新</string>
@@ -4128,10 +4123,8 @@ POIの更新は利用できません</string>
     <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloudを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
     <string name="unlimited_map_downloads">マップの無制限ダウンロード</string>
     <string name="wikipedia_and_wikivoyage_offline">WikipediaとWikivoyageはオフライン</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">地形マップ:等高線、陰影起伏図、傾斜</string>
     <string name="offline_wikipeadia">オフラインWikipedia</string>
     <string name="offline_wikivoyage">オフラインWikivoyage</string>
-    <string name="terrain_maps">地形マップ</string>
     <string name="nautical_depth">水深</string>
     <string name="you_can_get_feature_as_part_of_pattern">\"%1$s\"が利用可能なプラン:%2$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
@@ -5116,7 +5109,6 @@ POIの更新は利用できません</string>
     <string name="generate_slope_from_3d_maps">3Dマップから2D化した勾配マップを生成する</string>
     <string name="enable_3d_maps">3Dマップを有効にする</string>
     <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
-    <string name="test_heightmap">標高マップのテスト</string>
     <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
     <string name="shared_string_all_world">世界中</string>
     <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>

@@ -29,6 +29,8 @@ import java.util.List;
 
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
+	private static final int ELEVATION_THRESHOLD = 3;
+
 	private final OsmandApplication app;
 	private final GpxSplitParams splitParams;
 	private final List<GpxDisplayGroup> groups;
@@ -106,92 +108,97 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		}
 
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
-		String timeSpanClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
-		String speedClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
-		String ascClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_asc));
-		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
-		String distanceClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
-		final float eleThreshold = 3;
 
 		for (int segmentIdx = 0; segmentIdx < group.getTrack().segments.size(); segmentIdx++) {
 			if (progress != null && progress.isInterrupted()) {
 				return;
 			}
 			TrkSegment segment = group.getTrack().segments.get(segmentIdx);
-			if (segment.points.isEmpty()) {
-				continue;
-			}
+			if (!Algorithms.isEmpty(segment.points)) {
+				int splitTime = group.getSplitTime();
+				double splitDistance = group.getSplitDistance();
 
-			int splitTime = group.getSplitTime();
-			double splitDistance = group.getSplitDistance();
-			boolean split = splitTime > 0 || splitDistance > 0;
-			GPXTrackAnalysis[] trackAnalysis = getTrackAnalysis(segment, splitTime, splitDistance, joinSegments);
-
-			for (GPXTrackAnalysis analysis : trackAnalysis) {
-				if (progress != null && progress.isInterrupted()) {
-					return;
-				}
-				GpxDisplayItem item = new GpxDisplayItem();
-				item.group = group;
-				if (split) {
-					item.splitMetric = analysis.metricEnd;
-					item.secondarySplitMetric = analysis.secondaryMetricEnd;
-					item.splitName = formatSplitName(analysis.metricEnd, group, app);
-					item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
-				}
-
-				if (!group.isGeneralTrack() && !split) {
-					item.trackSegmentName = buildTrackSegmentName(group.getGpxFile(), group.getTrack(), segment, app);
-				}
-
-				item.description = GpxUiHelper.getDescription(app, analysis, true);
-				item.analysis = analysis;
-				String name = "";
-				if (!group.isSplitDistance()) {
-					name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
-				}
-				if ((analysis.timeSpan > 0 || analysis.timeMoving > 0) && !group.isSplitTime()) {
-					long tm = analysis.timeMoving;
-					if (tm == 0) {
-						tm = analysis.timeSpan;
+				for (GPXTrackAnalysis analysis : getTrackAnalysis(segment, splitTime, splitDistance, joinSegments)) {
+					if (progress != null && progress.isInterrupted()) {
+						return;
 					}
-					if (!name.isEmpty())
-						name += ", ";
-					name += GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000), app.accessibilityEnabled()));
+					displayItems.add(createGpxDisplayItem(app, group, segment, analysis));
 				}
-				if (analysis.isSpeedSpecified()) {
-					if (!name.isEmpty())
-						name += ", ";
-					name += GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
-				}
-				// add min/max elevation data to split track analysis to facilitate easier track/segment identification
-				if (analysis.isElevationSpecified()) {
-					if (!name.isEmpty())
-						name += ", ";
-					name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
-					name += " - ";
-					name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
-				}
-				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold ||
-						analysis.diffElevationDown > eleThreshold)) {
-					if (!name.isEmpty())
-						name += ", ";
-					if (analysis.diffElevationDown > eleThreshold) {
-						name += GpxUiHelper.getColorValue(descClr, " ↓ " +
-								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
-					}
-					if (analysis.diffElevationUp > eleThreshold) {
-						name += GpxUiHelper.getColorValue(ascClr, " ↑ " +
-								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
-					}
-				}
-				item.name = name;
-				item.locationStart = analysis.locationStart;
-				item.locationEnd = analysis.locationEnd;
-				displayItems.add(item);
 			}
 		}
 		group.addDisplayItems(displayItems);
+	}
+
+	@NonNull
+	public static GpxDisplayItem createGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group,
+	                                                  @NonNull TrkSegment segment, @NonNull GPXTrackAnalysis analysis) {
+		GpxDisplayItem item = new GpxDisplayItem(analysis);
+		item.group = group;
+		item.name = getItemName(app, group, analysis);
+		item.description = GpxUiHelper.getDescription(app, analysis, true);
+		item.locationStart = analysis.locationStart;
+		item.locationEnd = analysis.locationEnd;
+
+		if (group.getSplitTime() > 0 || group.getSplitDistance() > 0) {
+			item.splitMetric = analysis.metricEnd;
+			item.secondarySplitMetric = analysis.secondaryMetricEnd;
+			item.splitName = formatSplitName(analysis.metricEnd, group, app);
+			item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
+		} else if (!group.isGeneralTrack()) {
+			item.trackSegmentName = buildTrackSegmentName(group.getGpxFile(), group.getTrack(), segment, app);
+		}
+		return item;
+	}
+
+	@NonNull
+	public static String getItemName(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group, @NonNull GPXTrackAnalysis analysis) {
+		StringBuilder builder = new StringBuilder();
+
+		if (!group.isSplitDistance()) {
+			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
+			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app)));
+		}
+		if ((analysis.timeSpan > 0 || analysis.timeMoving > 0) && !group.isSplitTime()) {
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(", ");
+			}
+			long time = analysis.timeMoving != 0 ? analysis.timeMoving : analysis.timeSpan;
+			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
+			builder.append(GpxUiHelper.getColorValue(color, Algorithms.formatDuration((int) (time / 1000), app.accessibilityEnabled())));
+		}
+		if (analysis.isSpeedSpecified()) {
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(", ");
+			}
+			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
+			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app)));
+		}
+		// add min/max elevation data to split track analysis to facilitate easier track/segment identification
+		String ascClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_asc));
+		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
+		if (analysis.isElevationSpecified()) {
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(", ");
+			}
+			builder.append(GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app)));
+			builder.append(" - ");
+			builder.append(GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app)));
+		}
+		if (analysis.isElevationSpecified()
+				&& (analysis.diffElevationUp > ELEVATION_THRESHOLD || analysis.diffElevationDown > ELEVATION_THRESHOLD)) {
+			if (!Algorithms.isEmpty(builder)) {
+				builder.append(", ");
+			}
+			if (analysis.diffElevationDown > ELEVATION_THRESHOLD) {
+				builder.append(GpxUiHelper.getColorValue(descClr, " ↓ " +
+						OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app)));
+			}
+			if (analysis.diffElevationUp > ELEVATION_THRESHOLD) {
+				builder.append(GpxUiHelper.getColorValue(ascClr, " ↑ " +
+						OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app)));
+			}
+		}
+		return builder.toString();
 	}
 
 	@NonNull

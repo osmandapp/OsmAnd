@@ -873,8 +873,6 @@
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Topográfia</string>
-    <string name="index_srtm_ele">Szintvonalak</string>
-    <string name="index_srtm_parts">részek</string>
     <string name="download_select_map_types">Egyéb térképek</string>
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
@@ -1062,9 +1060,9 @@
     <string name="shared_string_and">és</string>
     <string name="shared_string_or">vagy</string>
     <string name="amenity_type_seamark">Hajózási jelzés</string>
-    <string name="app_modes_choose_descr">Megjelenített profilok kijelölése.</string>
+    <string name="app_modes_choose_descr">Megjelenő profilok kijelölése.</string>
     <string name="app_modes_choose">Alkalmazásprofilok</string>
-    <string name="map_widget_map_rendering">Térkép kirajzolás</string>
+    <string name="map_widget_map_rendering">Térkép megjelenítés</string>
     <string name="app_mode_hiking">Túrázás</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
     <string name="app_mode_boat">Hajó</string>
@@ -1078,7 +1076,7 @@
     <string name="keep_and_add_destination_point">Hozzáadás következő célpontként</string>
     <string name="select_gpx">GPX kijelölése…</string>
     <string name="route_descr_select_destination">Célpont megadása</string>
-    <string name="shared_string_select_on_map">Kijelölése a térképen</string>
+    <string name="shared_string_select_on_map">Kijelölés a térképen</string>
     <string name="shared_string_favorite">Kedvenc</string>
     <string name="route_preferences">Útvonal-beállítások</string>
     <string name="route_info">Útvonal-információk</string>
@@ -1634,7 +1632,6 @@
     <string name="region_maps">Régiószintű térképek</string>
     <string name="world_maps">Világtérképek</string>
     <string name="hillshade_layer_disabled">Domborzatárnyékolás letiltva</string>
-    <string name="srtm_plugin_disabled">Szintvonalak letiltva</string>
     <string name="favorite_category_add_new">Új hozzáadása</string>
     <string name="favorite_category_select">Kategória kiválasztása</string>
     <string name="default_speed_system_descr">Sebesség mértékegységének megadása.</string>
@@ -2548,7 +2545,6 @@
     <string name="wikivoyage_offline">Offline Wikivoyage</string>
     <string name="unlimited_downloads">Korlátlan letöltés</string>
     <string name="wikipedia_offline">Offline Wikipédia</string>
-    <string name="contour_lines_hillshade_maps">Szintvonalak &amp; domborzatárnyékolási térképek</string>
     <string name="unlock_all_features">Az OsmAnd összes funkciójának feloldása</string>
     <string name="purchase_dialog_title">Csomag kiválasztása</string>
     <string name="shared_string_only_with_wifi">Csak Wi-Fi</string>
@@ -2872,7 +2868,7 @@
     <string name="send_log">Napló küldése</string>
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordináta-widget</string>
-    <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
+    <string name="keep_passed_markers_descr">A Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
     <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
@@ -3043,7 +3039,6 @@
     <string name="shared_string_memory_used_gb_desc">Felhasznált %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Felhasznált %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Felhasznált %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Szintvonalak és domborzatárnyékolás</string>
     <string name="routing_attr_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
     <string name="apply_preference_to_all_profiles">A módosítás alkalmazása az összes profilra vagy a kiválasztottra.</string>
@@ -3150,9 +3145,9 @@
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
     <string name="month">hónap</string>
-    <string name="months_2_4">hónap</string>
-    <string name="months_5">hónap</string>
-    <string name="year">évre</string>
+    <string name="months_2_4">hónapra</string>
+    <string name="months_5">hónapra</string>
+    <string name="year">év</string>
     <string name="years_2_4">évre</string>
     <string name="years_5">évre</string>
     <string name="months_3">három hónap</string>
@@ -4038,7 +4033,7 @@
     <string name="no_purchases">Ön nem vásárolt semmit</string>
     <string name="new_device_account">Új készülék / új fiók</string>
     <string name="contact_support_description">Ha kérdése van, lépjen kapcsolatba velünk: %1$s.</string>
-    <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson ide: „%1$s”.</string>
+    <string name="empty_purchases_description">Ha a vásárlásai nem jelennek meg itt, lépjen kapcsolatba az ügyfélszolgálatunkkal, vagy koppintson erre: „%1$s”.</string>
     <string name="contact_support">Kapcsolatfelvétel az ügyfélszolgálattal</string>
     <string name="troubleshooting">Hibaelhárítás</string>
     <string name="troubleshooting_description">Ha problémája akad a vásrlással, kattintson erre a linkre.</string>
@@ -4063,7 +4058,7 @@
     <string name="srtm_unit_format">Szintvonalak egységváltozata</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
     <string name="shared_string_min_height">Legkisebb magasság</string>
-    <string name="shared_string_max_height">Legnagyobb magasság</string>
+    <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
     <string name="recorded_description">A felvett hang szebben hangzik, de csak előre rögzített kifejezéseket – bekanyarodási utasításokat – képes kiejteni. Utcaneveket vagy érdekes pontokat nem tud bemondani.</string>
     <string name="tts_title">TTS</string>
@@ -4170,9 +4165,7 @@
     <string name="continue_with">Folytatás ezzel: %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s vagy %2$s</string>
     <string name="nautical_depth">Tengermélységek</string>
-    <string name="terrain_maps">Domborzati térképek</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
     <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
     <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
@@ -5094,7 +5087,6 @@
     <string name="disable_vertex_hillshade_3d">Vertex domborzatárnyékolás letiltása 3D-ben</string>
     <string name="generate_slope_from_3d_maps">Raszteres lejtéstérképek generálása 3D térképekből</string>
     <string name="enable_3d_maps">3D térképek engedélyezése</string>
-    <string name="test_heightmap">Magassági térkép tesztelése</string>
     <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
     <string name="app_mode_climbing">Mászás</string>
     <string name="shared_string_alt_name">Alternatív név</string>
@@ -5273,7 +5265,7 @@
 \n
 \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez
 \n
-\n • Közös widgetlista az alsó/felső panelhez
+\n • Egyforma widgetlista az alsó/felső panelhez
 \n
 \n • Új \"Vonat\" profil, vasúti útvonalak megtervezéséhez
 \n
@@ -5440,4 +5432,16 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
+    <string name="app_mode_baby_transport">Babakocsi</string>
+    <string name="app_mode_paragliding">Siklóernyőzés</string>
+    <string name="app_mode_hang_gliding">Sárkányrepülés</string>
+    <string name="with_waypoints">Útpontokkal</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Legnagyobb magasság</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Szűrés név alapján</string>
+    <string name="shared_string_reset_all">Összes visszaállítása</string>
+    <string name="filter_tracks_count">Szűrő: %d</string>
+    <string name="date_of_creation">Létrehozás dátuma</string>
+    <string name="filter_screen_title">Szűrő</string>
 </resources>

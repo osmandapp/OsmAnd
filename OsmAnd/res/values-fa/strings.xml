@@ -167,7 +167,6 @@
     <string name="recording_open_external_player">بازکردن پخش‌کنندهٔ خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
     <string name="map_widget_distancemeasurement">اندازه‌گیری مسافت</string>
-    <string name="index_srtm_parts">بخش‌ها</string>
     <string name="map_widget_show_destination_arrow">نشان‌دادن جهت مقصد</string>
     <string name="no_route">مسیری وجود ندارد</string>
     <string name="add_tag">افزودن برچسب</string>
@@ -480,7 +479,6 @@
     <string name="default_buttons_commit">اجرا</string>
     <string name="download_srtm_maps">منحنی‌های میزان</string>
     <string name="srtm_plugin_name">منحنی‌های میزان</string>
-    <string name="index_srtm_ele">منحنی‌های میزان</string>
     <string name="download_roads_only_item">فقط جاده‌ها</string>
     <string name="rendering_attr_noAdminboundaries_description">مرزهای مناطق را نشان نده (تقسیمات سیاسی سطح ۵–۹).</string>
     <string name="incremental_search_city">جست‌وجوی حرف‌به‌حرف نام شهر</string>
@@ -2313,7 +2311,6 @@
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
     <string name="hillshade_layer_disabled">لایهٔ سایه‌روشن غیرفعال شد</string>
-    <string name="srtm_plugin_disabled">منحنی‌های میزان غیرفعال شد</string>
     <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">قطار خطی</string>
     <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز می‌کند</string>
@@ -2708,7 +2705,6 @@
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
-    <string name="contour_lines_hillshade_maps">منحنی‌های میزان و نقشه‌های سایه‌روشن</string>
     <string name="download_wikipedia_description">مقاله‌های ویکی‌سفر %1$s را بارگیری کنید تا آن‌ها را آفلاین بخوانید.</string>
     <string name="download_wikipedia_label">بارگیری دادهٔ ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
@@ -3221,7 +3217,6 @@
     <string name="shared_string_memory_used_gb_desc">استفاده‌شده %1$s گیگابایت</string>
     <string name="shared_string_memory_used_mb_desc">استفاده‌شده %1$s مگابایت</string>
     <string name="shared_string_memory_used_kb_desc">استفاده‌شده %1$s کیلوبایت</string>
-    <string name="contour_lines_and_hillshade">سایه‌روشن و منحنی‌های میزان</string>
     <string name="routing_attr_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
     <string name="routing_attr_prefer_unpaved_description">اولویت را به جاده‌های روسازی‌نشده می‌دهد.</string>
     <string name="update_all_maps">روزآمدسازی همهٔ نقشه‌ها</string>
@@ -4205,7 +4200,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین دست یابید.</string>
     <string name="unlimited_map_downloads">بارگیری‌های نامحدود نقشه</string>
     <string name="wikipedia_and_wikivoyage_offline">ویکی‌پدیا و ویکی‌سفر آفلاین</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="offline_wikipeadia">ویکی‌پدیای آفلاین</string>
     <string name="offline_wikivoyage">ویکی‌سفر آفلاین</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
@@ -4251,7 +4245,6 @@
     <string name="explore_wikipedia_offline">ویکی‌پدیا را آفلاین کاوش کنید.</string>
     <string name="app_mode_go_cart">خودروی کارتینگ</string>
     <string name="backup_conflicts">تداخل‌ها</string>
-    <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
     <string name="nautical_depth">عمق دریایی</string>
     <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
     <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دست یابید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده بارگیری می‌شوند.</string>

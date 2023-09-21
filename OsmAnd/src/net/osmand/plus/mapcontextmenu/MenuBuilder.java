@@ -200,6 +200,12 @@ public class MenuBuilder {
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 	}
 
+	public void notifyCollapseExpand(boolean collapsed) {
+		if (collapseExpandListener != null) {
+			collapseExpandListener.onCollapseExpand(collapsed);
+		}
+	}
+
 	public CollapseExpandListener getCollapseExpandListener() {
 		return collapseExpandListener;
 	}
@@ -967,7 +973,7 @@ public class MenuBuilder {
 			AndroidUtils.setMargins(llHorLineParams, dpToPx(64f), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
+		horizontalLine.setBackgroundColor(getColor(light ? R.color.divider_color_light : R.color.divider_color_dark));
 		((LinearLayout) view).addView(horizontalLine, index);
 	}
 

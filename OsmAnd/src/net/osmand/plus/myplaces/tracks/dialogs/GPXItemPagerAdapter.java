@@ -4,6 +4,7 @@ import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.GPX;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
@@ -46,7 +47,6 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -142,14 +142,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			GPXFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
 				analysis = gpxFile.getAnalysis(0);
-				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
+				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 			}
 		} else if (getFilteredGpxFile() != null) {
 			GPXFile gpxFile = getFilteredGpxFile();
-			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
-			analysis = gpxItem == null
-					? gpxFile.getAnalysis(System.currentTimeMillis())
-					: gpxItem.analysis;
+			analysis = gpxFile.getAnalysis(System.currentTimeMillis());
+			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 		} else if (gpxItem != null) {
 			analysis = gpxItem.analysis;
 		}

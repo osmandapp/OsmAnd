@@ -1296,8 +1296,6 @@
     <string name="route_tl">Skrenite levo i nastavite</string>
     <string name="route_tslr">Skrenite blago desno i nastavite</string>
     <string name="download_regular_maps">Uobičajena karta</string>
-    <string name="index_srtm_ele">Izohipse</string>
-    <string name="index_srtm_parts">delovi</string>
     <string name="audionotes_location_not_defined">Kliknite „Koristi položaj…“ da dodate belešku određenoj lokaciji.</string>
     <string name="recording_description">Snimam %1$s %3$s %2$s</string>
     <string name="recording_can_not_be_played">Ne mogu da pustim snimak.</string>
@@ -2380,7 +2378,6 @@
     <string name="default_speed_system_descr">Odredite merne jedinice za brzinu.</string>
     <string name="favorite_category_select">Odaberite kategoriju</string>
     <string name="favorite_category_add_new">Dodaj novo</string>
-    <string name="srtm_plugin_disabled">Izohipse su isključene</string>
     <string name="hillshade_layer_disabled">Sloj senčenja padina je isključen</string>
     <string name="world_maps">Svetske karte</string>
     <string name="region_maps">Karte velikih oblasti</string>
@@ -3199,7 +3196,6 @@
     <string name="purchase_dialog_travel_description">Kupite jedno od sledećeg da možete da čitate turističke članke van mreže:</string>
     <string name="purchase_dialog_title">Odaberite plan</string>
     <string name="unlock_all_features">Otključaj sve OsmAnd funkcionalnosti</string>
-    <string name="contour_lines_hillshade_maps">Karte izohipsi i reljefa</string>
     <string name="wikipedia_offline">Vikipedija van mreže</string>
     <string name="unlimited_downloads">Neograničeno preuzimanja</string>
     <string name="wikivoyage_offline">Wikivoyage van mreže</string>
@@ -3675,7 +3671,6 @@
     <string name="update_all_maps">Ažuriraj sve karte</string>
     <string name="routing_attr_prefer_unpaved_description">Prednost neasfaltiranim putevima.</string>
     <string name="routing_attr_prefer_unpaved_name">Prednost neasfaltiranim putevima</string>
-    <string name="contour_lines_and_hillshade">Izohipse i reljef</string>
     <string name="shared_string_memory_used_kb_desc">Iskorišćeno %1$s kB</string>
     <string name="shared_string_memory_used_mb_desc">Iskorišćeno %1$s MB</string>
     <string name="shared_string_memory_used_gb_desc">Iskorišćeno %1$s GB</string>
@@ -4373,7 +4368,6 @@
     <string name="connect_track_points_as">Povežite tačke puta</string>
     <string name="benefits_for_contributors_secondary_descr">Prijavite se na OpenStreetMap-e da proverite da li imate pravo na neograničena ažuriranja karte svaki sat i mesec.</string>
     <string name="offline_wikipeadia">Van mreže Vikipedia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mape terena: izohipse, reljef, nagib</string>
     <string name="provided_by">Obezbeđuje %1$s</string>
     <string name="routeInfo_horse_scale_name">Težina konjskih staza</string>
     <string name="start_copying">Započni kopiranje</string>
@@ -4585,7 +4579,6 @@
     <string name="not_available_with">Nije dostupno sa %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ili %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Uzmite „%1$s“ kao deo: %2$s plana. Uporedite planove:</string>
-    <string name="terrain_maps">Mape terena</string>
     <string name="purchases_feature_desc_osmand_cloud">Nabavite OsmAnd oblak za skladištenje svih podataka OsmAnd -a na mreži. Zaboravite na gubitak podataka nakon ponovne instalacije, napravite rezervne kopije i vratite sve podatke bez problema.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedite pristup češćem ažuriranju mapa, izaberite između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
     <string name="offline_wikivoyage">Van mreže Vikivojaž</string>

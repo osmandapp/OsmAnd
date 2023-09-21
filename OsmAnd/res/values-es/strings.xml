@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nToque prolongado para las opciones"</string>
+\nPulsación larga para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -874,8 +874,6 @@
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5 – 9).</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">La información sobre el terreno, como las curvas de nivel, el sombreado de las colinas o la pendiente, ayuda a evaluar visualmente la disposición del terreno, el relieve, la navegabilidad y mucho más. La información topográfica puede representarse en el mapa mediante curvas de nivel, sombreado del relieve y/o coloreado de la pendiente.
 \n
 \nLos datos subyacentes proceden de SRTM y ASTER.
@@ -1672,7 +1670,6 @@
     <string name="region_maps">Mapas de la región</string>
     <string name="world_maps">Mapas mundiales</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
-    <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
     <string name="downloading_number_of_files">Descargando %1$d archivo(s)…</string>
     <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
@@ -2691,7 +2688,6 @@
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
-    <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
     <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
@@ -3224,7 +3220,6 @@
     <string name="store_tracks_in_rec_directory">Grabar trazas en la carpeta «rec»</string>
     <string name="store_tracks_in_daily_directories">Grabar trazas en carpetas diarias</string>
     <string name="store_tracks_in_daily_directories_descrp">Grabar trazas en subcarpetas por día de grabación (como 2019-01-01).</string>
-    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreado</string>
     <string name="apply_preference_to_all_profiles">Aplicar este cambio a todos los perfiles o sólo al marcado.</string>
     <string name="shared_preference">Compartido</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
@@ -4306,9 +4301,7 @@
     <string name="osmand_maps_plus_tagline">Obtén funciones ampliadas</string>
     <string name="redeem_promo_code">Canjear código promocional</string>
     <string name="you_can_get_feature_as_part_of_pattern">Consigue «%1$s» como parte del plan %2$s. Comparación:</string>
-    <string name="terrain_maps">Mapas del terreno</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
     <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
@@ -4717,7 +4710,7 @@
     <string name="av_notes_audio_widget_desc">Si tocas el widget, podrás tomar una nota de voz.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo del viaje registrado actualmente.</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del trayecto registrado actualmente.</string>
-    <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
+    <string name="average_speed_time_interval_desc">Especifica el intervalo de tiempo para calcular el promedio de la velocidad.</string>
     <string name="calculate_online_altitude_descr">Calcula la elevación en línea desde los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="shared_string_duplicate">Duplicar</string>
@@ -4749,7 +4742,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="map_marker_interval_dialog_desc">Especifica el intervalo de tiempo durante el cual se medirá la velocidad media para calcular la hora estimada de llegada.</string>
     <string name="go_to_marker_location">Ir a la posición del marcador</string>
     <string name="shared_string_switch_mode">Cambiar de modo</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
@@ -5095,7 +5088,6 @@
     <string name="app_mode_moped">Ciclomotor</string>
     <string name="disable_vertex_hillshade_3d">Desactivar la sombra de los vértices en 3D</string>
     <string name="enable_3d_maps">Activar los mapas en 3D</string>
-    <string name="test_heightmap">Mapa de alturas en prueba</string>
     <string name="generate_slope_from_3d_maps">Generar mapas ráster de pendiente a partir de mapas 3D</string>
     <string name="generate_hillshade_from_3d_maps">Genere mapas ráster de sombreado a partir de mapas 3D</string>
     <string name="app_mode_climbing">Escalada</string>
@@ -5442,4 +5434,16 @@
 \n - Mejor gestión de la memoria para pistas GPX de gran tamaño
 \n
 \n</string>
+    <string name="app_mode_baby_transport">Cochecito</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
+    <string name="with_waypoints">Con puntos de referencia</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitud máxima</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrar por nombre</string>
+    <string name="shared_string_reset_all">Reiniciar todo</string>
+    <string name="filter_tracks_count">Filtrar: %d</string>
+    <string name="date_of_creation">Fecha de creación</string>
+    <string name="filter_screen_title">Filtrar</string>
 </resources>

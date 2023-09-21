@@ -87,9 +87,10 @@ public class MapRendererContext {
 
 	// сached objects
 	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
-	private CachedMapPresentation presentationObjectParams;
+	private CachedMapPresentation cachedMapPresentation;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	private MapPrimitiviser mapPrimitiviser;
+	private MapPrimitivesProvider mapPrimitivesProvider;
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
@@ -201,20 +202,33 @@ public class MapRendererContext {
 			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
-		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density,
-				settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get());
-		if (this.presentationObjectParams == null || !this.presentationObjectParams.equalsFields(pres)) {
-			this.presentationObjectParams = pres;
-			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density,
-					settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get(), langId,
-					langPref);
+		float mapDensity = settings.MAP_DENSITY.get();
+		float textScale = settings.TEXT_SCALE.get();
+
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density, mapDensity, textScale);
+		boolean recreateMapPresentation = cachedMapPresentation == null
+				|| cachedMapPresentation.shouldRecreateMapPresentation(pres);
+		boolean languageParamsChanged = cachedMapPresentation != null
+				&& cachedMapPresentation.languageParamsChanged(pres);
+		cachedMapPresentation = pres;
+
+		if (recreateMapPresentation) {
+			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density, mapDensity, textScale);
 		}
 
+		mapPresentationEnvironment.setLocaleLanguageId(langId);
+		mapPresentationEnvironment.setLanguagePreference(langPref);
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null)) {
-			recreateRasterAndSymbolsProvider(providerType);
+		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
+			if (recreateMapPresentation) {
+				recreateRasterAndSymbolsProvider(providerType);
+			} else if (languageParamsChanged) {
+				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
+					updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+				}
+			}
 			setMapBackgroundColor();
 		}
 		PluginsHelper.updateMapPresentationEnvironment(this);
@@ -314,18 +328,11 @@ public class MapRendererContext {
 	}
 
 	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
-		IObfsCollection obfsCollection = obfsCollections.get(providerType);
-		if (obfsCollection == null) {
-			return;
+		if (updateMapPrimitivesProvider(providerType)) {
+			updateObfMapRasterLayerProvider(mapPrimitivesProvider, providerType);
+			updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+			this.providerType = providerType;
 		}
-
-		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
-		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
-		MapPrimitivesProvider mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
-				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
-		updateObfMapRasterLayerProvider(mapPrimitivesProvider, providerType);
-		updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
-		this.providerType = providerType;
 	}
 
 	public void resetRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
@@ -337,6 +344,19 @@ public class MapRendererContext {
 				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 			}
 		}
+	}
+
+	private boolean updateMapPrimitivesProvider(@NonNull ProviderType providerType) {
+		IObfsCollection obfsCollection = obfsCollections.get(providerType);
+		if (obfsCollection == null) {
+			return false;
+		}
+
+		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
+		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
+		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
+				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
+		return true;
 	}
 
 	public void recreateHeightmapProvider() {
@@ -491,15 +511,20 @@ public class MapRendererContext {
 	}
 
 	private static class CachedMapPresentation {
+
+		@NonNull
 		String langId;
+		@NonNull
 		LanguagePreference langPref;
+		@Nullable
 		ResolvedMapStyle mapStyle;
 		float displayDensityFactor;
 		float mapScaleFactor;
 		float symbolsScaleFactor;
 
-		public CachedMapPresentation(String langId,
-		                             LanguagePreference langPref, ResolvedMapStyle mapStyle,
+		public CachedMapPresentation(@NonNull String langId,
+		                             @NonNull LanguagePreference langPref,
+		                             @Nullable ResolvedMapStyle mapStyle,
 		                             float displayDensityFactor,
 		                             float mapScaleFactor,
 		                             float symbolsScaleFactor) {
@@ -511,24 +536,15 @@ public class MapRendererContext {
 			this.symbolsScaleFactor = symbolsScaleFactor;
 		}
 
+		public boolean shouldRecreateMapPresentation(@NonNull CachedMapPresentation other) {
+			return Double.compare(displayDensityFactor, other.displayDensityFactor) != 0
+					|| Double.compare(mapScaleFactor, other.mapScaleFactor) != 0
+					|| Double.compare(symbolsScaleFactor, other.symbolsScaleFactor) != 0
+					|| !Algorithms.objectEquals(mapStyle, other.mapStyle);
+		}
 
-		public boolean equalsFields(CachedMapPresentation other) {
-			if (Double.compare(displayDensityFactor, other.displayDensityFactor) != 0)
-				return false;
-			if (Double.compare(mapScaleFactor, other.mapScaleFactor) != 0)
-				return false;
-			if (Double.compare(symbolsScaleFactor, other.symbolsScaleFactor) != 0)
-				return false;
-			if (langId == null) {
-				if (other.langId != null)
-					return false;
-			} else if (!langId.equals(other.langId))
-				return false;
-			if (langPref != other.langPref)
-				return false;
-			if (mapStyle == null) {
-				return other.mapStyle == null;
-			} else return mapStyle.equals(other.mapStyle);
+		public boolean languageParamsChanged(@NonNull CachedMapPresentation other) {
+			return !langId.equals(other.langId) || langPref != other.langPref;
 		}
 	}
 

@@ -12,7 +12,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;

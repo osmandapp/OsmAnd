@@ -417,9 +417,7 @@
     <string name="map_widget_audionotes">Notas de son</string>
     <string name="audionotes_plugin_description">Fai notas de audio, fotografías e/ou vídeos durante unha viaxe, empregando un botón no mapa ou o menú contextual da localización.</string>
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin) 
+    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin)
 \n 
 \nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e o ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. O ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
@@ -1610,7 +1608,6 @@ Lon %2$s</string>
     <string name="regions">Rexións</string>
     <string name="region_maps">Mapas de toda a rexión</string>
     <string name="world_maps">Mapas mundiais</string>
-    <string name="srtm_plugin_disabled">As curvas de nivel están desactivadas</string>
     <string name="favorite_category_select">Escoller categoría</string>
     <string name="default_speed_system_descr">Define a unidade de velocidade.</string>
     <string name="default_speed_system">Unidade de velocidade</string>
@@ -2486,7 +2483,6 @@ Lon %2$s</string>
     <string name="wikivoyage_offline">Wikiviaxes sen conexión</string>
     <string name="unlimited_downloads">Descargas sen límite</string>
     <string name="wikipedia_offline">Wikipedia sen conexión</string>
-    <string name="contour_lines_hillshade_maps">Curvas do nivel e mapas de asombreado</string>
     <string name="purchase_dialog_travel_description">Mercar un dos seguintes elementos para recibires a característica do guieiro de viaxe sen conexión:</string>
     <string name="purchase_dialog_subtitle">Escoller o elemento axeitado</string>
     <string name="shared_string_dont">Non</string>
@@ -3206,7 +3202,6 @@ Lon %2$s</string>
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas do nivel e sombras do relevo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavimentar.</string>
     <string name="update_all_maps">Actualizar todos os mapas</string>

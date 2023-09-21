@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -27,41 +29,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.graph.BaseChartAdapter;
-import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.measurementtool.graph.ChartAdapterHelper;
 import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallback;
+import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
@@ -74,7 +70,12 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -101,9 +102,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private int pageMarginPx;
 	private int toolbarHeightPx;
 
-	private GPXFile gpx;
-	@Nullable
-	private OrderedLineDataSet slopeDataSet;
+	private GPXFile gpxFile;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
@@ -111,7 +110,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	@Nullable
 	private PublicTransportCard transportCard;
 	private RouteDetailsFragmentListener routeDetailsListener;
-	private RouteStatisticCard statisticCard;
 	private final List<RouteInfoCard> routeInfoCards = new ArrayList<>();
 	private RouteDetailsMenu routeDetailsMenu;
 	private RefreshMapCallback refreshMapCallback;
@@ -308,19 +306,18 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		statisticCard = new RouteStatisticCard(mapActivity, gpx, v -> openDetails());
+		RouteStatisticCard statisticCard = new RouteStatisticCard(mapActivity, gpxFile, v -> openDetails());
 		statisticCard.setTransparentBackground(true);
 		statisticCard.setListener(this);
 		menuCards.add(statisticCard);
 		cardsContainer.addView(statisticCard.build(mapActivity));
 		buildRowDivider(cardsContainer, false);
-		slopeDataSet = statisticCard.getSlopeDataSet();
 		elevationDataSet = statisticCard.getElevationDataSet();
 
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
 			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
-			GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 			for (RouteStatistics statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
@@ -1375,8 +1372,8 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void makeGpx() {
-		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
+		gpxFile = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ROUTE, null);
 	}
 
 	void openDetails() {
@@ -1385,7 +1382,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = gpx.tracks.get(0).segments.get(0);
+				TrkSegment segment = gpxFile.tracks.get(0).segments.get(0);
 				if (segment != null) {
 					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
 					for (WptPt p : segment.points) {

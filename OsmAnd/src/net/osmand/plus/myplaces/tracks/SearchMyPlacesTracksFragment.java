@@ -132,7 +132,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		super.setupToolbar(view);
 
 		selectedCountTv = view.findViewById(R.id.selected_count);
-		selectedCountTv.setTextColor(ContextCompat.getColor(app, R.color.color_white));
+		selectedCountTv.setTextColor(ContextCompat.getColor(app, R.color.card_and_list_background_light));
 
 		searchContainer = view.findViewById(R.id.search_container);
 		selectButton = view.findViewById(R.id.select_all_button);

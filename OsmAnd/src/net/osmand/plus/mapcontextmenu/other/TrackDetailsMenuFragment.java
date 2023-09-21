@@ -273,7 +273,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 
 			ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
 			if (backButton != null) {
-				Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(ctx), R.color.color_white);
+				Drawable icBack = getIcon(AndroidUtils.getNavigationIconResId(ctx), R.color.card_and_list_background_light);
 				backButton.setImageDrawable(icBack);
 			}
 		}

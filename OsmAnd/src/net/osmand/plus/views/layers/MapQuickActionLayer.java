@@ -150,11 +150,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                     TapTarget.forView(quickActionButton, getString(R.string.quick_action_btn_tutorial_title), getString(R.string.quick_action_btn_tutorial_descr))
                             // All options below are optional
                             .outerCircleColor(R.color.osmand_orange)      // Specify a color for the outer circle
-                            .targetCircleColor(R.color.color_white)   // Specify a color for the target circle
+                            .targetCircleColor(R.color.card_and_list_background_light)   // Specify a color for the target circle
                             .titleTextSize(20)                  // Specify the size (in sp) of the title text
                             .descriptionTextSize(16)            // Specify the size (in sp) of the description text
-                            .descriptionTextColor(R.color.color_white)            // Specify a color for both the title and description text
-                            .titleTextColor(R.color.color_white)            // Specify a color for both the title and description text
+                            .descriptionTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
+                            .titleTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
                             .drawShadow(true)                   // Whether to draw a drop shadow or not
                             .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                             .tintTarget(false)                   // Whether to tint the target view's color

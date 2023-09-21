@@ -846,8 +846,6 @@
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9).</string>
-    <string name="index_srtm_parts">časti</string>
-    <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahrať video</string>
     <string name="av_def_action_audio">Nahrať zvuk</string>
     <string name="av_widget_action_descr">Predvolená akcia pre nástroj:</string>
@@ -1663,7 +1661,6 @@
     <string name="shared_string_trip_recording">Nahrávanie výletu</string>
     <string name="shared_string_navigation">Navigácia</string>
     <string name="osmand_running_in_background">Bežať v pozadí</string>
-    <string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>
     <string name="show_free_version_banner">Zobraziť nápis verzie zdarma</string>
     <string name="show_free_version_banner_description">Zobraziť nápis z verzie zadarmo, aj keď používate platenú verziu.</string>
     <string name="downloading_number_of_files">Sťahuje sa súbor %1$d…</string>
@@ -2709,7 +2706,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Neobmedzené sťahovania</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; tieňované svahy</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
     <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s na ich čítanie offline.</string>
     <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
@@ -3201,7 +3197,6 @@
     <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Použité %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Použité %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Vrstevnice a tieňované svahy</string>
     <string name="routing_attr_prefer_unpaved_name">Preferovať nespevnené cesty</string>
     <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
     <string name="update_all_maps">Aktualizovať všetky mapy</string>
@@ -4141,10 +4136,8 @@
     <string name="delete_version_history">Vymazať históriu verzií</string>
     <string name="unlimited_map_downloads">Neobmedzený počet stiahnutých máp</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terénu: vrstevnice, tieňované svahy, sklony svahov</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="terrain_maps">Mapy terénu</string>
     <string name="nautical_depth">Námorná hĺbka</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získajte “%1$s” ako súčasť: predplatné %2$s. Porovnanie:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s alebo %2$s</string>
@@ -5089,7 +5082,6 @@
     <string name="generate_slope_from_3d_maps">Generovať rastrové mapy sklonov svahov z 3D máp</string>
     <string name="disable_vertex_hillshade_3d">Vypnúť bodové tieňované svahy v 3D</string>
     <string name="enable_3d_maps">Povoliť 3D mapy</string>
-    <string name="test_heightmap">Testovať výškovú mapu</string>
     <string name="generate_hillshade_from_3d_maps">Generovať rastrové mapy tieňovaných svahov z 3D máp</string>
     <string name="app_mode_climbing">Lezenie</string>
     <string name="clear_online_cache">Vymazať online vyrovnávaciu pamäť</string>

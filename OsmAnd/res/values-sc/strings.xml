@@ -280,8 +280,6 @@
     <string name="map_widget_audionotes">Notas àudio</string>
     <string name="audionotes_plugin_description">Crea notas àudio/foto/vìdeu durante unu biàgiu, impreende o unu butone in sa mapa o su menù de cuntestu de sa positzione.</string>
     <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de livellu</string>
     <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa dispositzione de su terrinu, sa navigabilidade e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu e/o su colore de s\'àngulu de inclinatzione.
 \n
 \nSos datos impreados benint dae su SRTM e dae s\'ASTER.
@@ -1668,7 +1666,6 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Curvas de livellu istudadas</string>
     <string name="show_free_version_banner">Ammustra s’insigna de sa versione a indonu (gratùita)</string>
     <string name="show_free_version_banner_description">Ammustra s’insigna de sa versione a indonu fintzas si tenes cussa a pagamentu.</string>
     <string name="downloading_number_of_files">Iscarrighende %1$d documentu/os…</string>
@@ -2687,7 +2684,6 @@
     <string name="start_editing">Incumintza a modificare</string>
     <string name="get_unlimited_access">Otene s’atzessu illimitadu</string>
     <string name="welcome_to_open_beta">Bene bènnidu a sa beta aberta</string>
-    <string name="contour_lines_hillshade_maps">Curvas de livellu e mapas de umbradura de sos rilievos</string>
     <string name="download_wikipedia_description">Iscàrriga sos artìculos de Wikipedia pro %1$s pro los lèghere chene lìnia.</string>
     <string name="download_wikipedia_label">Iscàrriga sos datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Aberi un\'artìculu in lìnia</string>
@@ -3204,7 +3200,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB impreados</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB impreados</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB impreados</string>
-    <string name="contour_lines_and_hillshade">Curvas de livellu e umbradura de sos rilievos</string>
     <string name="routing_attr_prefer_unpaved_name">Privilègia sos caminos non pamentados</string>
     <string name="routing_attr_prefer_unpaved_description">Privilègia sos caminos non pamentados.</string>
     <string name="update_all_maps">Agiorna totu sas mapas</string>
@@ -4159,10 +4154,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Imprea OsmAnd Cloud pro archiviare totu sos datos de OsmAnd in lìnia. No as a pèrdere prus sos datos a pustis de un\'installatzione noa. Sarva e riprìstina totu sas informatziones in manera fàtzile.</string>
     <string name="unlimited_map_downloads">Iscarrigamentos chene lìmites de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia e Wikivoyage non in lìnia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de su terrinu: curvas de livellu, umbraduras, pendèntzias</string>
     <string name="offline_wikipeadia">Wikipedia non in lìnia</string>
     <string name="offline_wikivoyage">Wikivoyage non in lìnia</string>
-    <string name="terrain_maps">Mapas de su terrinu</string>
     <string name="nautical_depth">Profundidade nàutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Otene “%1$s” comente parte de su pranu %2$s. Cunfrontu:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>

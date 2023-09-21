@@ -929,8 +929,6 @@
     <string name="map_widget_audionotes">音訊註解</string>
     <string name="audionotes_plugin_description">在旅程中取得音訊／相片／視訊註記，使用地圖按鈕或位置情境選單。</string>
     <string name="audionotes_plugin_name">音訊/視訊附註</string>
-    <string name="index_srtm_parts">部件</string>
-    <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_name">地形</string>
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
@@ -1660,7 +1658,6 @@
     <string name="nm_h">節</string>
     <string name="favorite_category_add_new">增加新的</string>
     <string name="favorite_category_select">選擇類別</string>
-    <string name="srtm_plugin_disabled">等高線已停用</string>
     <string name="show_free_version_banner">顯示免費版標題</string>
     <string name="show_free_version_banner_description">即使是付費版本，仍顯示免費版本的標題。</string>
     <string name="downloading_number_of_files">正在下載 %1$d 檔案……</string>
@@ -2682,7 +2679,6 @@
     <string name="start_editing">開始編輯</string>
     <string name="get_unlimited_access">取得無限制的存取</string>
     <string name="welcome_to_open_beta">歡迎來到公開測試版</string>
-    <string name="contour_lines_hillshade_maps">等高線與丘陵陰影地圖</string>
     <string name="download_wikipedia_description">下載 %1$s 的維基百科文章以供離線閱讀。</string>
     <string name="download_wikipedia_label">下載維基百科資料</string>
     <string name="open_in_browser_wiki">線上開啟文章</string>
@@ -3198,7 +3194,6 @@
     <string name="shared_string_memory_used_gb_desc">已用 %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">已用 %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">已用 %1$s kB</string>
-    <string name="contour_lines_and_hillshade">等高線與地形陰影</string>
     <string name="routing_attr_prefer_unpaved_name">偏好無鋪面道路</string>
     <string name="routing_attr_prefer_unpaved_description">偏好無鋪面道路。</string>
     <string name="update_all_maps">更新所有地圖</string>
@@ -4153,10 +4148,8 @@
     <string name="purchases_feature_desc_osmand_cloud">取得 OsmAnd 以將所有 OsmAnd 的資料儲存到線上。重新安裝後資料也不會遺失。輕鬆備份並輕鬆復原。</string>
     <string name="unlimited_map_downloads">無限制的地圖下載</string>
     <string name="wikipedia_and_wikivoyage_offline">離線的維基百科與維基導遊</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">地形圖：等高線、地形陰影、坡度</string>
     <string name="offline_wikipeadia">離線維基百科</string>
     <string name="offline_wikivoyage">離線維基導遊</string>
-    <string name="terrain_maps">地形圖</string>
     <string name="nautical_depth">航海深度</string>
     <string name="you_can_get_feature_as_part_of_pattern">取得「%1$s」作為 %2$s 方案的一部分。比較：</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s 或 %2$s</string>
@@ -4770,16 +4763,16 @@
     <string name="quick_action_map_center_widget_descr">切換是否要在地圖上顯示或隱藏地圖中心。</string>
     <string name="quick_action_current_location_widget_descr">切換是否要在地圖上顯示或隱藏目前的位置。</string>
     <string name="coordinates_widget_map_center">座標：地圖中心</string>
-    <string name="coordinates_widget_map_center_desc">顯示目前地圖中心的地理座標</string>
+    <string name="coordinates_widget_map_center_desc">顯示目前地圖中心的地理經緯度</string>
     <string name="coordinates_widget_current_location_desc">顯示目前地理位置的經緯度</string>
     <string name="coordinates_widget_current_location">座標：目前位置</string>
     <string name="developer_widgets">開發者小工具</string>
-    <string name="map_widget_camera_tilt_desc">用來在透視模式下顯示相機傾斜角度。預設為 90°（無傾斜）。</string>
+    <string name="map_widget_camera_tilt_desc">顯示透視模式鏡頭傾斜角度。預設是 90° (沒有傾斜)。</string>
     <string name="map_widget_zoom_level">縮放水平</string>
     <string name="map_widget_camera_tilt">相機傾斜</string>
-    <string name="map_widget_target_distance_desc">顯示從相機到目標位置的距離。</string>
-    <string name="map_widget_zoom_level_desc">顯示目前地圖的縮放層級。</string>
-    <string name="map_widget_camera_distance_desc">顯示高於地面的相機海拔。</string>
+    <string name="map_widget_target_distance_desc">顯示鏡頭與目標位置的距離。</string>
+    <string name="map_widget_zoom_level_desc">顯示目前地圖縮放層級。</string>
+    <string name="map_widget_camera_distance_desc">顯示鏡頭在地面上的海拔高度。</string>
     <string name="map_widget_camera_distance">地圖視角高度</string>
     <string name="ant_missing_dependency">缺少依賴關係</string>
     <string name="ant_go_to_store">到商店</string>
@@ -4821,7 +4814,7 @@
     <string name="map_widget_altitude_current_location">海拔：目前位置</string>
     <string name="map_widget_altitude_current_location_desc">顯示目前地理位置海拔高度。</string>
     <string name="map_widget_rendering_fps">地圖繪製 FPS</string>
-    <string name="map_widget_rendering_fps_desc">顯示地圖與地圖元素的顯示與更新速度（以每秒畫面數或 FPS 表示）。</string>
+    <string name="map_widget_rendering_fps_desc">顯示地圖與地圖元素能多快呈現與重新整理，採用影格速率(FPS)來顯示。</string>
     <string name="simulate_location_by_gpx">透過 GPX 模擬位置</string>
     <string name="location_simulation_speedup">模擬加速</string>
     <string name="current_location_widget">座標：目前位置</string>
@@ -5089,7 +5082,6 @@
     <string name="disable_vertex_hillshade_3d">在 3D 中停用頂點陰影</string>
     <string name="enable_3d_maps">啟用 3D 地圖</string>
     <string name="app_mode_climbing">攀岩</string>
-    <string name="test_heightmap">測試高度圖</string>
     <string name="clear_online_cache">清除線上快取</string>
     <string name="offline_cache">離線快取</string>
     <string name="shared_string_alt_name">替代名稱</string>
@@ -5254,7 +5246,7 @@
     <string name="verify_account">驗證您的帳號</string>
     <string name="free_favorites_backup_description">在 OsmAnd Cloud 中註冊即可免費備份最愛與設定。</string>
     <string name="free_favorites_backup">免費最愛備份</string>
-    <string name="get_osmand_cloud">取得 OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">取得 OsmAnd 雲端</string>
     <string name="free_account">免費帳號</string>
     <string name="folder_export_empty_error">沒有可匯出的內容，資料夾為空</string>
     <string name="release_4_5">• BLE/ANT+ 偵測器：重新設計了連線、寫入與檢視接收到的資料到 GPX 的流程
@@ -5433,4 +5425,16 @@
 \n
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
+    <string name="app_mode_baby_transport">嬰兒運輸</string>
+    <string name="with_waypoints">有航點</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">最大高度</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">飛行傘</string>
+    <string name="filter_by_name">依名稱篩選</string>
+    <string name="shared_string_reset_all">全部重設</string>
+    <string name="filter_tracks_count">過濾條件：%d</string>
+    <string name="app_mode_hang_gliding">滑翔翼</string>
+    <string name="date_of_creation">建立日期</string>
+    <string name="filter_screen_title">過濾條件</string>
 </resources>
