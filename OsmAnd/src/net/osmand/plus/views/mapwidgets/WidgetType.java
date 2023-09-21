@@ -85,7 +85,7 @@ public enum WidgetType {
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, R.string.docs_widget_radius_ruler, null, RIGHT),
 
 	DEV_FPS("fps", R.string.map_widget_rendering_fps, R.string.map_widget_rendering_fps_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
-	DEV_MEMORY("memory", R.string.global_app_allocated_memory, R.string.global_app_allocated_memory_descr, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_MEMORY("memory", R.string.widget_available_ram, R.string.widget_available_ram_desc, R.drawable.widget_developer_ram_day, R.drawable.widget_developer_ram_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_TILT("dev_camera_tilt", R.string.map_widget_camera_tilt, R.string.map_widget_camera_tilt_desc, R.drawable.widget_developer_camera_tilt_day, R.drawable.widget_developer_camera_tilt_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_DISTANCE("dev_camera_distance", R.string.map_widget_camera_distance, R.string.map_widget_camera_distance_desc, R.drawable.widget_developer_camera_distance_day, R.drawable.widget_developer_camera_distance_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_ZOOM_LEVEL("dev_zoom_level", R.string.map_widget_zoom_level, R.string.map_widget_zoom_level_desc, R.drawable.widget_developer_map_zoom_day, R.drawable.widget_developer_map_zoom_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),

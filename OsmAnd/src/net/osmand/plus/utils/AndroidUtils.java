@@ -368,6 +368,22 @@ public class AndroidUtils {
 	}
 
 	@NonNull
+	public static String formatRatioOfSizes(Context ctx, long sizeBytes, long totalBytes) {
+		String fSize = formatSize(ctx, sizeBytes);
+		String fTotal = formatSize(ctx, totalBytes);
+
+		String[] split = fSize.split(" ");
+		if (split.length == 2) {
+			String numSuffix = isLayoutRtl(ctx) ? split[0] : split[1];
+
+			if (fTotal.contains(numSuffix)) {
+				fSize = isLayoutRtl(ctx) ? split[1] : split[0];
+			}
+		}
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, fSize, fTotal);
+	}
+
+	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
 		if (sizeBytes > 0) {
 			int sizeKb = (int) ((sizeBytes + 512) >> 10);
