@@ -75,7 +75,7 @@ public class SelectedTracksHelper {
 
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 		for (TrackItem item : trackItems) {
-			addLocalIndexInfo(trackTabs, item);
+			addTrackItem(trackTabs, item);
 		}
 		updateTrackTabs(trackTabs);
 	}
@@ -186,7 +186,7 @@ public class SelectedTracksHelper {
 	}
 
 	@Nullable
-	private TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
+	private TrackTab addTrackItem(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
 		File file = item.getFile();
 		if (file != null && file.getParentFile() != null) {
 			File dir = file.getParentFile();
@@ -217,7 +217,7 @@ public class SelectedTracksHelper {
 			allTab.items.addAll(getAllTabItems());
 			sortTrackTab(allTab);
 		}
-		TrackTab folderTab = addLocalIndexInfo(trackTabs, item);
+		TrackTab folderTab = addTrackItem(trackTabs, item);
 		if (folderTab != null) {
 			sortTrackTab(folderTab);
 		}

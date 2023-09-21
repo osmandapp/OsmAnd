@@ -313,6 +313,7 @@ public class RendererRegistry {
 		this.externalRenderers = externalRenderers;
 	}
 
+	@NonNull
 	public static String formatRendererFileName(String fileName) {
 		String name = fileName.substring(0, fileName.length() - RENDERER_INDEX_EXT.length());
 		name = name.replace('_', ' ').replace('-', ' ');
@@ -320,7 +321,7 @@ public class RendererRegistry {
 	}
 
 	@NonNull
-	public Map<String, String> getRenderers() {
+	public Map<String, String> getRenderers(boolean includeAddons) {
 		Map<String, String> renderers = new LinkedHashMap<>();
 		renderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
 		renderers.putAll(internalRenderers);
@@ -328,11 +329,13 @@ public class RendererRegistry {
 		for (Map.Entry<String, File> entry : externalRenderers.entrySet()) {
 			renderers.put(entry.getKey(), entry.getValue().getName());
 		}
-		Iterator<Entry<String, String>> iterator = renderers.entrySet().iterator();
-		while (iterator.hasNext()) {
-			String rendererVal = iterator.next().getValue();
-			if (rendererVal.endsWith(ADDON_RENDERER_INDEX_EXT)) {
-				iterator.remove();
+		if (!includeAddons) {
+			Iterator<Entry<String, String>> iterator = renderers.entrySet().iterator();
+			while (iterator.hasNext()) {
+				String rendererVal = iterator.next().getValue();
+				if (rendererVal.endsWith(ADDON_RENDERER_INDEX_EXT)) {
+					iterator.remove();
+				}
 			}
 		}
 		return renderers;

@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.local;
 
 
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
@@ -46,7 +46,6 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.ItemType;
-import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;

@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.download.DownloadActivityType.NORMAL_FILE;
+import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.DialogFragment;
@@ -30,7 +33,6 @@ import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.GoToMapFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -61,10 +63,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
-
-	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
-
-	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
 	public static final String FILTER_GROUP = "filter_group";
@@ -84,10 +82,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private String filter;
 	private String filterCat;
 	private String filterGroup;
-	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
+	private final List<TabItem> mTabs = new ArrayList<>();
+	private Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	private DownloadIndexesThread downloadThread;
-	protected WorldRegion downloadItem;
-	protected String downloadTargetFileName;
+	private WorldRegion downloadItem;
+	private String downloadTargetFileName;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
@@ -117,7 +116,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 
 		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
-		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
@@ -152,12 +150,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
 				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
-					showDialog(this, SearchDialogFragment.createInstance(
-							region, true, DownloadActivityType.NORMAL_FILE,
-							DownloadActivityType.WIKIPEDIA_FILE));
+					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE, WIKIPEDIA_FILE));
 				} else {
-					showDialog(this, SearchDialogFragment.createInstance(
-							region, true, DownloadActivityType.NORMAL_FILE));
+					showDialog(this, SearchDialogFragment.createInstance(region, true, NORMAL_FILE));
 				}
 			}
 			filter = intent.getExtras().getString(FILTER_KEY);
@@ -246,14 +241,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		return false;
 	}
 
-	public void setLocalIndexInfos(List<LocalIndexInfo> list) {
-		this.localIndexInfos = list;
-	}
-
-	public List<LocalIndexInfo> getLocalIndexInfos() {
-		return localIndexInfos;
-	}
-
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -301,8 +288,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	@UiThread
 	public void downloadInProgress() {
-		if (accessibilityAssistant.isUiUpdateDiscouraged())
-			return;
+		if (accessibilityAssistant.isUiUpdateDiscouraged()) return;
 		accessibilityAssistant.lockEvents();
 		visibleBanner.updateBannerInProgress();
 		showDownloadWorldMapIfNeeded();
@@ -348,8 +334,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
-		return !Version.isPaidVersion(application)
-				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
+		return !Version.isPaidVersion(application) || application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 	}
 
 	public void reloadLocalIndexes() {
@@ -394,8 +379,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 		IndexItem worldMap = getDownloadThread().getIndexes().getWorldBaseMapItem();
 		// (!worldMap.isDownloaded() || worldMap.isOutdated()) - now suggest to download if downloaded 
-		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded() && worldMap.isOutdated() &&
-				!getDownloadThread().isDownloading(worldMap)) {
+		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded()
+				&& worldMap.isOutdated() && !getDownloadThread().isDownloading(worldMap)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
 			fragment.setIndexItem(worldMap);
@@ -439,8 +424,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public void initAppStatusVariables() {
 		OsmandApplication app = getMyApplication();
-		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class)
-				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
+		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class) && !InAppPurchaseHelper.isContourLinesPurchased(app);
 		nauticalPluginDisabled = !PluginsHelper.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);
 		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
@@ -477,5 +461,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@NonNull
 	public View getLayout() {
 		return getWindow().getDecorView().findViewById(android.R.id.content);
+	}
+
+	@Nullable
+	public <T> T getFragment(String fragmentTag) {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}
 }
