@@ -43,7 +43,7 @@ public abstract class MapWidget {
 
 	private boolean nightMode;
 
-	protected final View view;
+	protected View view;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		this.app = mapActivity.getMyApplication();
@@ -54,7 +54,11 @@ public abstract class MapWidget {
 		this.locationProvider = app.getLocationProvider();
 		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode();
-		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(getLayoutId(), null);
+		createView(getLayoutId());
+	}
+
+	protected void createView(int layoutId){
+		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, null);
 	}
 
 	@LayoutRes

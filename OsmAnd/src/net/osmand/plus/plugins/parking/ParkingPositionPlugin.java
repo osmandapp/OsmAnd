@@ -412,7 +412,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		if (widgetType == PARKING) {
-			return new ParkingMapWidget(this, mapActivity);
+			return new ParkingMapWidget(this, mapActivity, customId);
 		}
 		return null;
 	}

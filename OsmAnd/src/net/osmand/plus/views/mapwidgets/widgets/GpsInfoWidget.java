@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -10,18 +12,21 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
-public class GpsInfoWidget extends TextInfoWidget {
+public class GpsInfoWidget extends SimpleWidget {
 
 	private int usedSatellites = -1;
 	private int foundSatellites = -1;
 
-	public GpsInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, GPS_INFO);
+	public GpsInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+		super(mapActivity, GPS_INFO, customId);
 		setIcons(GPS_INFO);
 		setText(null, null);
-		setOnClickListener(v -> {
-			new StartGPSStatus(mapActivity).run();
-		});
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> new StartGPSStatus(mapActivity).run();
 	}
 
 	@Override

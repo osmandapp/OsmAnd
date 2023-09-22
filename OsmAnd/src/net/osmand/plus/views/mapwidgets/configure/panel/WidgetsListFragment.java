@@ -53,7 +53,6 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
@@ -324,7 +323,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
 		MapActivity mapActivity = requireMapActivity();
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanelByType(mapActivity, selectedAppMode, filter, Collections.singletonList(selectedPanel));
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
 			List<WidgetType> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);

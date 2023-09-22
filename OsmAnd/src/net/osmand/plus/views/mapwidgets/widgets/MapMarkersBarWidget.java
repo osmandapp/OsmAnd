@@ -249,7 +249,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		if (widgetsPanel == WidgetsPanel.TOP) {
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof MapMarkersBarWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
+				if (widget instanceof MapMarkersBarWidget || widget instanceof SimpleWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
 					return false;
 				}
 			}

@@ -291,6 +291,47 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public Set<MapWidgetInfo> getWidgetsForPanelByType(@NonNull MapActivity mapActivity,
+													   @NonNull ApplicationMode appMode,
+													   int filterModes,
+													   @NonNull List<WidgetsPanel> panels) {
+		List<Class> includedWidgetTypes = new ArrayList<>();
+		if(panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT)){
+			includedWidgetTypes.add(SideWidgetInfo.class);
+			includedWidgetTypes.add(SimpleWidgetInfo.class);
+		}
+		if(panels.contains(WidgetsPanel.TOP) || panels.contains(WidgetsPanel.BOTTOM)){
+			includedWidgetTypes.add(CenterWidgetInfo.class);
+			includedWidgetTypes.add(SimpleWidgetInfo.class);
+		}
+		List<MapWidgetInfo> widgetInfos = new ArrayList<>();
+		if (settings.getApplicationMode() == appMode) {
+			widgetInfos.addAll(getAllWidgets());
+		} else {
+			widgetInfos.addAll(WidgetsInitializer.createAllControls(mapActivity, appMode));
+		}
+		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
+		for (MapWidgetInfo widget : widgetInfos) {
+			if (includedWidgetTypes.contains(widget.getClass())) {
+				boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
+				boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
+				boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
+				boolean defaultMode = (filterModes & DEFAULT_MODE) == DEFAULT_MODE;
+
+				boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
+				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
+				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
+				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
+
+				if (passDisabled && passEnabled && passAvailable && defaultAvailable) {
+					filteredWidgets.add(widget);
+				}
+			}
+		}
+		return filteredWidgets;
+	}
+
+	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgets = allWidgets.get(panel);
 		if (widgets == null) {

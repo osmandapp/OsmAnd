@@ -149,15 +149,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case DEV_FPS:
-				return new FPSTextInfoWidget(mapActivity);
+				return new FPSTextInfoWidget(mapActivity, customId);
 			case DEV_CAMERA_TILT:
-				return new CameraTiltWidget(mapActivity);
+				return new CameraTiltWidget(mapActivity, customId);
 			case DEV_CAMERA_DISTANCE:
-				return new CameraDistanceWidget(mapActivity);
+				return new CameraDistanceWidget(mapActivity, customId);
 			case DEV_ZOOM_LEVEL:
-				return new ZoomLevelWidget(mapActivity);
+				return new ZoomLevelWidget(mapActivity, customId);
 			case DEV_TARGET_DISTANCE:
-				return new TargetDistanceWidget(mapActivity);
+				return new TargetDistanceWidget(mapActivity, customId);
 		}
 		return null;
 	}

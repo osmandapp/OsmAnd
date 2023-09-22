@@ -24,7 +24,7 @@ public class GlideAverageWidget extends GlideBaseWidget {
 	private String cachedFormattedGlideRatio = null;
 
 	public GlideAverageWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, WidgetType.GLIDE_AVERAGE);
+		super(mapActivity, WidgetType.GLIDE_AVERAGE, customId);
 		averageGlideComputer = app.getAverageGlideComputer();
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);
 		updateInfo(null);

@@ -19,6 +19,7 @@ import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.TreeMap;
 
 public class WidgetUtils {
 	public static void addSelectedWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
-	                                      @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
+										  @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
@@ -57,7 +58,7 @@ public class WidgetUtils {
 	}
 
 	public static MapWidgetInfo createDuplicateWidget(@NonNull OsmandApplication app, @NonNull String widgetId, @NonNull WidgetsPanel panel,
-	                                                  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
+													  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
@@ -72,7 +73,7 @@ public class WidgetUtils {
 	}
 
 	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
-	                                   @NonNull WidgetsPanel widgetsPanel ,@NonNull ApplicationMode selectedAppMode) {
+									   @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -122,6 +123,10 @@ public class WidgetUtils {
 
 			targetWidget.pageIndex = lastPage;
 			targetWidget.priority = lastOrder;
+
+			if (targetWidget.widget instanceof SimpleWidget) {
+				((SimpleWidget) targetWidget.widget).recreateViewIfNeeded(targetWidget.widgetPanel);
+			}
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);

@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.monitoring.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DISTANCE;
 
+import android.view.View;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +16,9 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-public class TripRecordingDistanceWidget extends TextInfoWidget {
+public class TripRecordingDistanceWidget extends SimpleWidget {
 
 	private static final long BLINK_DELAY_MILLIS = 500;
 
@@ -24,17 +26,22 @@ public class TripRecordingDistanceWidget extends TextInfoWidget {
 
 	private long cachedLastUpdateTime;
 
-	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, TRIP_RECORDING_DISTANCE);
+	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+		super(mapActivity, TRIP_RECORDING_DISTANCE, customId);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			OsmandMonitoringPlugin plugin = getPlugin();
 			if (plugin != null) {
 				plugin.showTripRecordingDialog(mapActivity);
 			}
-		});
+		};
 	}
 
 	@Override

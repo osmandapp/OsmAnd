@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.areAltitudesEqual;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -33,16 +35,21 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	private boolean forceUpdate; // becomes 'true' when widget state switched
 
-	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState) {
-		super(mapActivity, WidgetType.GLIDE_TARGET);
+	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId) {
+		super(mapActivity, WidgetType.GLIDE_TARGET, customId);
 		this.widgetState = widgetState;
 		updateInfo(null);
 
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
-		});
+		};
 	}
 
 	@Override

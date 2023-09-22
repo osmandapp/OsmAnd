@@ -9,16 +9,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-public class CameraTiltWidget extends TextInfoWidget {
-
-
+public class CameraTiltWidget extends SimpleWidget {
 	private final OsmandMapTileView mapView;
 	private double cachedMapTilt;
 
-	public CameraTiltWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, WidgetType.DEV_CAMERA_TILT);
+	public CameraTiltWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+		super(mapActivity, WidgetType.DEV_CAMERA_TILT, customId);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_CAMERA_TILT);

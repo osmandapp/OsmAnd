@@ -13,7 +13,7 @@ import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
-public class AverageSpeedWidget extends TextInfoWidget {
+public class AverageSpeedWidget extends SimpleWidget {
 
 	private static final String MEASURED_INTERVAL_PREF_ID = "average_speed_measured_interval_millis";
 	private static final String SKIP_STOPS_PREF_ID = "average_speed_skip_stops";
@@ -28,7 +28,7 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	private long lastUpdateTime;
 
 	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, WidgetType.AVERAGE_SPEED);
+		super(mapActivity, WidgetType.AVERAGE_SPEED, customId);
 		averageSpeedComputer = app.getAverageSpeedComputer();
 		setIcons(WidgetType.AVERAGE_SPEED);
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);

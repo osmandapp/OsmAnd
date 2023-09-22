@@ -10,10 +10,10 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.core.android.MapRendererView;
 
-public class FPSTextInfoWidget extends TextInfoWidget {
+public class FPSTextInfoWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
 	private static final int HALF_FRAME_BUFFER_LENGTH = 20;
@@ -22,8 +22,8 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 	private long middleMs = 0;
 	private int middleFrameId;
 
-	public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, DEV_FPS);
+	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+		super(mapActivity, DEV_FPS, customId);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_FPS);

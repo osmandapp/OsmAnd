@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -8,18 +10,25 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
-public class AudioVideoNotesWidget extends TextInfoWidget {
+public class AudioVideoNotesWidget extends SimpleWidget {
 
 	private Boolean cachedRecording;
+	int actionId;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId) {
-		super(mapActivity, widgetType);
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId, @Nullable String customId) {
+		super(mapActivity, widgetType, customId);
+		this.actionId = actionId;
 
 		updateInfo(null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			AudioVideoNotesPlugin plugin = getPlugin();
 			if (plugin != null) {
 				if (plugin.isRecording()) {
@@ -28,7 +37,7 @@ public class AudioVideoNotesWidget extends TextInfoWidget {
 					plugin.makeAction(mapActivity, actionId);
 				}
 			}
-		});
+		};
 	}
 
 	@Override

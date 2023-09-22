@@ -15,13 +15,13 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
-public class AltitudeWidget extends TextInfoWidget {
+public class AltitudeWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
 
-	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+		super(mapActivity, widgetType, customId);
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);

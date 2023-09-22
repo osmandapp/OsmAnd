@@ -185,7 +185,7 @@ public enum WidgetsPanel {
 		if (this == LEFT || this == RIGHT) {
 			return Arrays.asList(LEFT, RIGHT);
 		} else if (this == TOP || this == BOTTOM) {
-			return Arrays.asList(TOP, BOTTOM);
+			return Arrays.asList(TOP, BOTTOM, LEFT, RIGHT);
 		}
 		throw new IllegalStateException("Unsupported widgets panel");
 	}

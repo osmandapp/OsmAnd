@@ -257,10 +257,18 @@ public enum WidgetType {
 			return BOTTOM.contains(widgetId, settings, mode) ? BOTTOM : TOP;
 		} else if (defaultPanel == BOTTOM) {
 			return TOP.contains(widgetId, settings, mode) ? TOP : BOTTOM;
-		} else if (defaultPanel == LEFT) {
-			return RIGHT.contains(widgetId, settings, mode) ? RIGHT : LEFT;
-		} else if (defaultPanel == RIGHT) {
-			return LEFT.contains(widgetId, settings, mode) ? LEFT : RIGHT;
+		} else if (defaultPanel == LEFT || defaultPanel == RIGHT) {
+			if (LEFT.contains(widgetId, settings, mode)) {
+				return LEFT;
+			} else if (RIGHT.contains(widgetId, settings, mode)) {
+				return RIGHT;
+			} else if (TOP.contains(widgetId, settings, mode)) {
+				return TOP;
+			} else if (BOTTOM.contains(widgetId, settings, mode)) {
+				return BOTTOM;
+			} else {
+				return defaultPanel;
+			}
 		}
 		throw new IllegalStateException("Unsupported panel");
 	}

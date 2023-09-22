@@ -334,7 +334,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanelByType(mapActivity, appMode, filter, Collections.singletonList(selectedPanel));
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)) {

@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHIL
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,26 +16,30 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-public abstract class TripRecordingElevationWidget extends TextInfoWidget {
+public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	private final SavingTrackHelper savingTrackHelper;
 	private int currentTrackIndex;
 
 	private double cachedElevationDiff = -1;
 
-	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId) {
+		super(mapActivity, widgetType, customId);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			if (getAnalysis().hasElevationData()) {
 				Bundle params = new Bundle();
 				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
@@ -42,7 +47,7 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
 						null, null, params);
 			}
-		});
+		};
 	}
 
 	@Override
@@ -74,8 +79,8 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 		private double diffElevationUp;
 
-		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, TRIP_RECORDING_UPHILL);
+		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+			super(mapActivity, TRIP_RECORDING_UPHILL, customId);
 			setIcons(TRIP_RECORDING_UPHILL);
 		}
 
@@ -93,8 +98,8 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 		private double diffElevationDown;
 
-		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity) {
-			super(mapActivity, TRIP_RECORDING_DOWNHILL);
+		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+			super(mapActivity, TRIP_RECORDING_DOWNHILL, customId);
 			setIcons(TRIP_RECORDING_DOWNHILL);
 		}
 

@@ -82,54 +82,54 @@ public class MapWidgetsFactory {
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case DISTANCE_TO_DESTINATION:
-				return new DistanceToDestinationWidget(mapActivity);
+				return new DistanceToDestinationWidget(mapActivity, customId);
 			case INTERMEDIATE_DESTINATION:
-				return new DistanceToIntermediateDestinationWidget(mapActivity);
+				return new DistanceToIntermediateDestinationWidget(mapActivity, customId);
 			case TIME_TO_INTERMEDIATE:
 				TimeToNavigationPointWidgetState state = new TimeToNavigationPointWidgetState(app, customId, true);
-				return new TimeToNavigationPointWidget(mapActivity, state);
+				return new TimeToNavigationPointWidget(mapActivity, state, customId);
 			case TIME_TO_DESTINATION:
 				TimeToNavigationPointWidgetState widgetState = new TimeToNavigationPointWidgetState(app, customId, false);
-				return new TimeToNavigationPointWidget(mapActivity, widgetState);
+				return new TimeToNavigationPointWidget(mapActivity, widgetState, customId);
 			case SIDE_MARKER_1:
 				MapMarkerSideWidgetState firstMarkerState = new MapMarkerSideWidgetState(app, customId, true);
-				return new MapMarkerSideWidget(mapActivity, firstMarkerState);
+				return new MapMarkerSideWidget(mapActivity, firstMarkerState, customId);
 			case SIDE_MARKER_2:
 				MapMarkerSideWidgetState secondMarkerState = new MapMarkerSideWidgetState(app, customId, false);
-				return new MapMarkerSideWidget(mapActivity, secondMarkerState);
+				return new MapMarkerSideWidget(mapActivity, secondMarkerState, customId);
 			case RELATIVE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING);
+				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING, customId);
 			case MAGNETIC_BEARING:
-				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING);
+				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING, customId);
 			case TRUE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING);
+				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING, customId);
 			case CURRENT_SPEED:
-				return new CurrentSpeedWidget(mapActivity);
+				return new CurrentSpeedWidget(mapActivity, customId);
 			case AVERAGE_SPEED:
 				return new AverageSpeedWidget(mapActivity, customId);
 			case MAX_SPEED:
-				return new MaxSpeedWidget(mapActivity);
+				return new MaxSpeedWidget(mapActivity, customId);
 			case ALTITUDE_MY_LOCATION:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION, customId);
 			case ALTITUDE_MAP_CENTER:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER, customId);
 			case GPS_INFO:
-				return new GpsInfoWidget(mapActivity);
+				return new GpsInfoWidget(mapActivity, customId);
 			case CURRENT_TIME:
-				return new CurrentTimeWidget(mapActivity);
+				return new CurrentTimeWidget(mapActivity, customId);
 			case BATTERY:
-				return new BatteryWidget(mapActivity);
+				return new BatteryWidget(mapActivity, customId);
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
-				return new SunriseSunsetWidget(mapActivity, sunriseState);
+				return new SunriseSunsetWidget(mapActivity, sunriseState, customId);
 			case SUNSET:
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
-				return new SunriseSunsetWidget(mapActivity, sunsetState);
+				return new SunriseSunsetWidget(mapActivity, sunsetState, customId);
 			case GLIDE_TARGET:
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
-				return new GlideTargetWidget(mapActivity, glideWidgetState);
+				return new GlideTargetWidget(mapActivity, glideWidgetState, customId);
 			case GLIDE_AVERAGE:
 				return new GlideAverageWidget(mapActivity, customId);
 			case ELEVATION_PROFILE:

@@ -202,13 +202,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case TRIP_RECORDING_DISTANCE:
-				return new TripRecordingDistanceWidget(mapActivity);
+				return new TripRecordingDistanceWidget(mapActivity, customId);
 			case TRIP_RECORDING_TIME:
-				return new TripRecordingTimeWidget(mapActivity);
+				return new TripRecordingTimeWidget(mapActivity, customId);
 			case TRIP_RECORDING_UPHILL:
-				return new TripRecordingUphillWidget(mapActivity);
+				return new TripRecordingUphillWidget(mapActivity, customId);
 			case TRIP_RECORDING_DOWNHILL:
-				return new TripRecordingDownhillWidget(mapActivity);
+				return new TripRecordingDownhillWidget(mapActivity, customId);
 		}
 		return null;
 	}

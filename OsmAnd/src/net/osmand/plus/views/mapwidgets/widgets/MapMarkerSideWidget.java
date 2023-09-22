@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.Si
 
 import java.util.List;
 
-public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
+public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonListener {
 
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
 
@@ -44,8 +45,8 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 
 	private LatLon customLatLon;
 
-	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState) {
-		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2);
+	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId) {
+		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2, customId);
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();
@@ -54,13 +55,18 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
 				changeWidgetState();
 			} else if (markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
 				showMarkerOnMap();
 			}
-		});
+		};
 	}
 
 	private void changeWidgetState() {

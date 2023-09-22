@@ -22,7 +22,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class BearingWidget extends TextInfoWidget {
+public class BearingWidget extends SimpleWidget {
 
 	private static final float MIN_SPEED = 1f;
 	private static final int INVALID_BEARING = -1000;
@@ -32,8 +32,8 @@ public class BearingWidget extends TextInfoWidget {
 
 	private int cachedBearing;
 
-	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
-		super(mapActivity, bearingType.widgetType);
+	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType, @Nullable String customId) {
+		super(mapActivity, bearingType.widgetType, customId);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 

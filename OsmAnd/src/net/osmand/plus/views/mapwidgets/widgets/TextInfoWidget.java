@@ -23,16 +23,16 @@ public class TextInfoWidget extends MapWidget {
 
 	protected static final String NO_VALUE = "—";
 
-	private String contentTitle;
+	protected String contentTitle;
 
-	private final ImageView imageView;
-	private final TextView textView;
-	private final TextView textViewShadow;
-	private final TextView smallTextView;
-	private final TextView smallTextViewShadow;
-	private final View container;
-	private final View emptyBanner;
-	private final View bottomDivider;
+	protected ImageView imageView;
+	protected TextView textView;
+	protected TextView textViewShadow;
+	protected TextView smallTextView;
+	protected TextView smallTextViewShadow;
+	protected View container;
+	protected View emptyBanner;
+	protected View bottomDivider;
 
 	@DrawableRes
 	private int dayIconId;
@@ -97,7 +97,7 @@ public class TextInfoWidget extends MapWidget {
 		}
 	}
 
-	private CharSequence combine(CharSequence text, CharSequence subtext) {
+	protected CharSequence combine(CharSequence text, CharSequence subtext) {
 		if (TextUtils.isEmpty(text)) {
 			return subtext;
 		} else if (TextUtils.isEmpty(subtext)) {

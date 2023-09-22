@@ -12,12 +12,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SensorTextWidget extends TextInfoWidget {
+public class SensorTextWidget extends SimpleWidget {
 	private AbstractSensor sensor;
 	private final SensorWidgetDataFieldType fieldType;
 	private Number cachedNumber;
@@ -26,8 +26,8 @@ public class SensorTextWidget extends TextInfoWidget {
 	protected ExternalSensorsPlugin plugin;
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId) {
-		super(mapActivity, fieldType.getWidgetType());
+							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId) {
+		super(mapActivity, fieldType.getWidgetType(), customId);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);
@@ -57,7 +57,7 @@ public class SensorTextWidget extends TextInfoWidget {
 	}
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                        @NonNull SensorWidgetDataFieldType fieldType) {
+							@NonNull SensorWidgetDataFieldType fieldType) {
 		this(mapActivity, appMode, fieldType, null);
 	}
 

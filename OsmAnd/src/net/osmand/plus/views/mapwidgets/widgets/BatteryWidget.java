@@ -13,14 +13,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
-public class BatteryWidget extends TextInfoWidget {
+public class BatteryWidget extends SimpleWidget {
 
 	private static final long UPDATE_INTERVAL_MILLIS = 1000;
 
 	private long cachedTime;
 
-	public BatteryWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, BATTERY);
+	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
+		super(mapActivity, BATTERY, customId);
 		setIcons(false);
 		setText(null, null);
 	}
