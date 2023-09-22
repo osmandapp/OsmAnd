@@ -184,9 +184,11 @@ public class ApplicationMode {
 		return true;
 	}
 
-	public int getRouteTypeProfile(){
-		if(isDerivedRoutingFrom(TRUCK)){
+	public int getRouteTypeProfile() {
+		if (isDerivedRoutingFrom(TRUCK)) {
 			return RouteTypeRule.PROFILE_TRUCK;
+		} else if (isDerivedRoutingFrom(CAR)) {
+			return RouteTypeRule.PROFILE_CAR;
 		}
 		return RouteTypeRule.PROFILE_NONE;
 	}
