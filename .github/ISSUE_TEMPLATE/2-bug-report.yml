@@ -6,32 +6,21 @@ body:
     -   type: markdown
         attributes:
             value: |
-                Oh hi there! 😄
+                    Before submitting a new issue, please check if any existing ones address your concern. Workarounds and progress updates may be available.
 
-                To expedite issue processing please search open and closed issues before submitting a new one.
-                Existing issues often contain information about workarounds, resolution, or progress updates.
-
-                GitHub is our main development tool for our developers. There are hundreds of requests a month and there are relatively few developers.
-                So by opening an issue, please know that your issue will be sent out to all developers and acknowledge that it could be closed without explanation or with just a brief message.
-                Comments on the closed issues are also sent to all developers, so you definitely will be heard.
-                However, there is no guarantee that a developer will pick up the issue to work on it.
-
-                Please be sure to read our [FAQ](https://osmand.net/docs/user/troubleshooting/) before creating an issue here.
-
-                The best way to get help about is to provide as many details as possible and follow the below template
-                so that we can try to **reproduce** your issue.
+                    Developer team informed of all updates and feedback for existing issues. Your feedback will be heard.
     -   type: textarea
         id: describe-the-bug
         attributes:
-            label: Describe the bug (required)
+            label: Description
             description: Please provide a brief summary of the issue and provide a summarised description in the title above.
         validations:
             required: true
     -   type: textarea
         id: steps-to-reproduce
         attributes:
-            label: Describe how the bug can be reproduced (required)
-            description: Please provide a brief summary how the bug can be reproduced.
+            label: Steps to reproduce
+            description: Please provide step-by-step instructions how the bug can be reproduced.
         validations:
             required: true
     -   type: textarea
