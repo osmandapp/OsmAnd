@@ -119,8 +119,8 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 		setVerticalWidget(panel);
 		int newLayoutId = getLayoutId();
-		int currentViewId = view.getId();
-		if (currentViewId != newLayoutId) {
+		int currentLayoutId = view.getSourceLayoutResId();
+		if (currentLayoutId != newLayoutId) {
 			View oldView = view;
 			ImageView oldImageView = imageView;
 			TextView oldTextView = textView;
