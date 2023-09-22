@@ -695,4 +695,10 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 	}
+
+	@Override
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
+		mapRendererContext.updateElevationConfiguration();
+		mapRendererContext.recreateHeightmapProvider();
+	}
 }
