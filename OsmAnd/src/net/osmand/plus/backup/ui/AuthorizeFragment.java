@@ -311,7 +311,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private void resendCode() {
 		if (startingDialogType != DELETE_ACCOUNT) {
-			registerUser();
+			registerUser(true);
 		} else {
 			sendCodeForDeletion(settings.BACKUP_USER_EMAIL.get());
 		}
@@ -411,8 +411,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		};
 	}
 
-	private void registerUser() {
-		boolean login = dialogType == SIGN_IN || signIn;
+	private void registerUser(boolean login) {
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), settings.BACKUP_PROMOCODE.get(), login);
 	}
 
@@ -448,7 +447,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				}
 			} else {
 				if (errorCode == dialogType.permittedErrorCode) {
-					registerUser();
+					registerUser(dialogType == SIGN_IN || signIn);
 				} else if (errorCode != -1) {
 					progressBar.setVisibility(View.INVISIBLE);
 					if (errorCode == dialogType.warningErrorCode) {
