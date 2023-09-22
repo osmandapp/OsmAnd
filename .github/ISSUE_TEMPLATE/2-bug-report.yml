@@ -26,15 +26,15 @@ body:
     -   type: textarea
         id: actual-result
         attributes:
-            label: Describe the actual result (required)
-            description: Please provide a brief summary of the actual result.
+            label: Actual result
+            description: Describe the actual result
         validations:
             required: true
     -   type: textarea
         id: expected-result
         attributes:
-            label: Describe the expected result (required)
-            description: Please provide a brief summary of the expected result.
+            label: Expected result
+            description: Describe the result you expect to see
         validations:
             required: true
     -   type: textarea
