@@ -19,6 +19,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
@@ -45,8 +46,8 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 	private LatLon customLatLon;
 
-	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId) {
-		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2, customId);
+	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();

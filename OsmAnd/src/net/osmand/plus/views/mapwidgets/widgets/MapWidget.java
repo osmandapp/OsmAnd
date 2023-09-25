@@ -32,6 +32,7 @@ import java.util.List;
 
 public abstract class MapWidget {
 
+	@Nullable protected String customId;
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
 	protected final MapActivity mapActivity;
@@ -55,6 +56,32 @@ public abstract class MapWidget {
 		this.routingHelper = app.getRoutingHelper();
 		this.nightMode = app.getDaynightHelper().isNightMode();
 		createView(getLayoutId());
+	}
+
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId) {
+		this.customId = customId;
+		this.app = mapActivity.getMyApplication();
+		this.settings = app.getSettings();
+		this.mapActivity = mapActivity;
+		this.widgetType = widgetType;
+		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
+		this.nightMode = app.getDaynightHelper().isNightMode();
+		createView(getLayoutId());
+	}
+
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, int layoutId) {
+		this.customId = customId;
+		this.app = mapActivity.getMyApplication();
+		this.settings = app.getSettings();
+		this.mapActivity = mapActivity;
+		this.widgetType = widgetType;
+		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
+		this.nightMode = app.getDaynightHelper().isNightMode();
+		createView(layoutId);
 	}
 
 	protected void createView(int layoutId){

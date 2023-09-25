@@ -16,6 +16,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class TripRecordingDistanceWidget extends SimpleWidget {
@@ -26,8 +27,8 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 
 	private long cachedLastUpdateTime;
 
-	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, TRIP_RECORDING_DISTANCE, customId);
+	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, TRIP_RECORDING_DISTANCE, customId, widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);

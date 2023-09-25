@@ -11,14 +11,15 @@ import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class GpsInfoWidget extends SimpleWidget {
 
 	private int usedSatellites = -1;
 	private int foundSatellites = -1;
 
-	public GpsInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, GPS_INFO, customId);
+	public GpsInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, GPS_INFO, customId, widgetsPanel);
 		setIcons(GPS_INFO);
 		setText(null, null);
 		setOnClickListener(getOnClickListener());

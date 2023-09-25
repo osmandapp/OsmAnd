@@ -206,7 +206,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		boolean isWidgetVisible = false;
 		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
 		for (MapWidgetInfo widget : widgets) {
-			if (WidgetsPanel.RIGHT == widget.widgetPanel) {
+			if (WidgetsPanel.RIGHT == widget.getWidgetPanel()) {
 				isWidgetVisible = isWidgetVisible(widget) && isRightPanelVisible();
 			} else {
 				isWidgetVisible = isWidgetVisible(widget) && isLeftPanelVisible();

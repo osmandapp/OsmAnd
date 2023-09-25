@@ -14,14 +14,15 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class AltitudeWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
 
-	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
-		super(mapActivity, widgetType, customId);
+	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);

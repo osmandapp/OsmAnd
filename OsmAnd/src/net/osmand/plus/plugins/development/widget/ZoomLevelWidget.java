@@ -5,6 +5,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,8 @@ public class ZoomLevelWidget extends SimpleWidget {
 	private float cachedZoomFloatPart;
 	private float cachedMapDensity;
 
-	public ZoomLevelWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, DEV_ZOOM_LEVEL, customId);
+	public ZoomLevelWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, DEV_ZOOM_LEVEL, customId, widgetsPanel);
 		this.osmandMap = app.getOsmandMap();
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);

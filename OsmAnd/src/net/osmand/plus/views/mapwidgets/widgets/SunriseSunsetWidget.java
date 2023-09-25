@@ -14,6 +14,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
@@ -41,8 +42,8 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private boolean isLocationChanged;
 	private boolean forceUpdate;
 
-	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId) {
-		super(mapActivity, widgetState.getWidgetType(), customId);
+	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
 		dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();

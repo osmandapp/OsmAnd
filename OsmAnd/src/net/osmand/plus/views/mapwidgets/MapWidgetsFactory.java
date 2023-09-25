@@ -53,17 +53,17 @@ public class MapWidgetsFactory {
 
 	@Nullable
 	public MapWidget createMapWidget(@NonNull WidgetType widgetType) {
-		return createMapWidget(null, widgetType);
+		return createMapWidget(null, widgetType, null);
 	}
 
-	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 		if (isWidgetCreationAllowed(widgetType)) {
-			return createMapWidgetImpl(customId, widgetType);
+			return createMapWidgetImpl(customId, widgetType, panel);
 		}
 		return null;
 	}
 
-	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType) {
+	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -82,60 +82,60 @@ public class MapWidgetsFactory {
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case DISTANCE_TO_DESTINATION:
-				return new DistanceToDestinationWidget(mapActivity, customId);
+				return new DistanceToDestinationWidget(mapActivity, customId, panel);
 			case INTERMEDIATE_DESTINATION:
-				return new DistanceToIntermediateDestinationWidget(mapActivity, customId);
+				return new DistanceToIntermediateDestinationWidget(mapActivity, customId, panel);
 			case TIME_TO_INTERMEDIATE:
 				TimeToNavigationPointWidgetState state = new TimeToNavigationPointWidgetState(app, customId, true);
-				return new TimeToNavigationPointWidget(mapActivity, state, customId);
+				return new TimeToNavigationPointWidget(mapActivity, state, customId, panel);
 			case TIME_TO_DESTINATION:
 				TimeToNavigationPointWidgetState widgetState = new TimeToNavigationPointWidgetState(app, customId, false);
-				return new TimeToNavigationPointWidget(mapActivity, widgetState, customId);
+				return new TimeToNavigationPointWidget(mapActivity, widgetState, customId, panel);
 			case SIDE_MARKER_1:
 				MapMarkerSideWidgetState firstMarkerState = new MapMarkerSideWidgetState(app, customId, true);
-				return new MapMarkerSideWidget(mapActivity, firstMarkerState, customId);
+				return new MapMarkerSideWidget(mapActivity, firstMarkerState, customId, panel);
 			case SIDE_MARKER_2:
 				MapMarkerSideWidgetState secondMarkerState = new MapMarkerSideWidgetState(app, customId, false);
-				return new MapMarkerSideWidget(mapActivity, secondMarkerState, customId);
+				return new MapMarkerSideWidget(mapActivity, secondMarkerState, customId, panel);
 			case RELATIVE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING, customId);
+				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING, customId, panel);
 			case MAGNETIC_BEARING:
-				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING, customId);
+				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING, customId, panel);
 			case TRUE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING, customId);
+				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING, customId, panel);
 			case CURRENT_SPEED:
-				return new CurrentSpeedWidget(mapActivity, customId);
+				return new CurrentSpeedWidget(mapActivity, customId, panel);
 			case AVERAGE_SPEED:
-				return new AverageSpeedWidget(mapActivity, customId);
+				return new AverageSpeedWidget(mapActivity, customId, panel);
 			case MAX_SPEED:
-				return new MaxSpeedWidget(mapActivity, customId);
+				return new MaxSpeedWidget(mapActivity, customId, panel);
 			case ALTITUDE_MY_LOCATION:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION, customId);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION, customId, panel);
 			case ALTITUDE_MAP_CENTER:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER, customId);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER, customId, panel);
 			case GPS_INFO:
-				return new GpsInfoWidget(mapActivity, customId);
+				return new GpsInfoWidget(mapActivity, customId, panel);
 			case CURRENT_TIME:
-				return new CurrentTimeWidget(mapActivity, customId);
+				return new CurrentTimeWidget(mapActivity, customId, panel);
 			case BATTERY:
-				return new BatteryWidget(mapActivity, customId);
+				return new BatteryWidget(mapActivity, customId, panel);
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
-				return new SunriseSunsetWidget(mapActivity, sunriseState, customId);
+				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);
 			case SUNSET:
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
-				return new SunriseSunsetWidget(mapActivity, sunsetState, customId);
+				return new SunriseSunsetWidget(mapActivity, sunsetState, customId, panel);
 			case GLIDE_TARGET:
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
-				return new GlideTargetWidget(mapActivity, glideWidgetState, customId);
+				return new GlideTargetWidget(mapActivity, glideWidgetState, customId, panel);
 			case GLIDE_AVERAGE:
-				return new GlideAverageWidget(mapActivity, customId);
+				return new GlideAverageWidget(mapActivity, customId, panel);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId);
 			default:
-				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId, panel);
 		}
 	}
 

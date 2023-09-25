@@ -43,6 +43,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -150,9 +151,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		if (widgetType == WidgetType.MAPILLARY) {
-			return new MapillaryMapWidget(mapActivity, customId);
+			return new MapillaryMapWidget(mapActivity, customId, widgetsPanel);
 		}
 		return null;
 	}

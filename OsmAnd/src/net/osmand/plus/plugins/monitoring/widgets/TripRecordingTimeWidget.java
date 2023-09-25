@@ -16,6 +16,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
@@ -25,8 +26,8 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 
 	private float cachedTimeSpan = -1;
 
-	public TripRecordingTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, TRIP_RECORDING_TIME, customId);
+	public TripRecordingTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, TRIP_RECORDING_TIME, customId, widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		setIcons(TRIP_RECORDING_TIME);

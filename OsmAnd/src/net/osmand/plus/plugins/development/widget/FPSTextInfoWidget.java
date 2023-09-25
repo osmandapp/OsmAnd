@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.core.android.MapRendererView;
 
@@ -22,8 +23,8 @@ public class FPSTextInfoWidget extends SimpleWidget {
 	private long middleMs = 0;
 	private int middleFrameId;
 
-	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, DEV_FPS, customId);
+	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, DEV_FPS, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_FPS);

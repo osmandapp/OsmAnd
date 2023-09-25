@@ -19,6 +19,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public abstract class DistanceToPointWidget extends SimpleWidget {
 
@@ -29,8 +30,8 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
-		super(mapActivity, widgetType, customId);
+	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.view = mapActivity.getMapView();
 
 		setIcons(widgetType);
@@ -87,8 +88,8 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 	public static class DistanceToDestinationWidget extends DistanceToPointWidget {
 
-		public DistanceToDestinationWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-			super(mapActivity, DISTANCE_TO_DESTINATION, customId);
+		public DistanceToDestinationWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
+			super(mapActivity, DISTANCE_TO_DESTINATION, customId, panel);
 		}
 
 		@Override
@@ -109,8 +110,8 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 		private final TargetPointsHelper targetPointsHelper;
 
-		public DistanceToIntermediateDestinationWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-			super(mapActivity, INTERMEDIATE_DESTINATION, customId);
+		public DistanceToIntermediateDestinationWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
+			super(mapActivity, INTERMEDIATE_DESTINATION, customId, panel);
 			targetPointsHelper = app.getTargetPointsHelper();
 		}
 

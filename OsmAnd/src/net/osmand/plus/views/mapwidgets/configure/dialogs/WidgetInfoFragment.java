@@ -113,7 +113,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		}
 		widgetType = widgetInfo.getWidgetType();
 		widgetGroup = widgetType == null ? null : widgetType.getGroup();
-		panel = widgetInfo.widgetPanel;
+		panel = widgetInfo.getWidgetPanel();
 	}
 
 	private void setupToolbar() {
@@ -299,7 +299,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType);
+		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, panel);
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
 				duplicateId, duplicateWidget, widgetType, panel);

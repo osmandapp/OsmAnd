@@ -180,6 +180,10 @@ public enum WidgetsPanel {
 		throw new IllegalStateException("Unsupported panel");
 	}
 
+	public  boolean isPanelVertical(){
+		return this == TOP || this == BOTTOM;
+	}
+
 	@NonNull
 	public List<WidgetsPanel> getMergedPanels() {
 		if (this == LEFT || this == RIGHT) {

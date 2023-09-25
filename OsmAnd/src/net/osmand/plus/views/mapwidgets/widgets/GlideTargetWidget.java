@@ -17,6 +17,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.GlideUtils;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.util.Algorithms;
@@ -35,8 +36,8 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	private boolean forceUpdate; // becomes 'true' when widget state switched
 
-	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId) {
-		super(mapActivity, WidgetType.GLIDE_TARGET, customId);
+	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		updateInfo(null);
 

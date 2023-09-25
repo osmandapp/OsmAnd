@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class CurrentSpeedWidget extends SimpleWidget {
 
@@ -19,8 +20,8 @@ public class CurrentSpeedWidget extends SimpleWidget {
 
 	private float cachedSpeed;
 
-	public CurrentSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, CURRENT_SPEED, customId);
+	public CurrentSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, CURRENT_SPEED, customId, widgetsPanel);
 		setIcons(CURRENT_SPEED);
 		setText(null, null);
 	}

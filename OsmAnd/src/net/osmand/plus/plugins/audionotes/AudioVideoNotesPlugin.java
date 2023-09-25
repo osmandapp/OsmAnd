@@ -78,6 +78,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -748,16 +749,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		switch (widgetType) {
 			case AV_NOTES_ON_REQUEST:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_CHOOSE, customId);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_CHOOSE, customId, widgetsPanel);
 			case AV_NOTES_RECORD_AUDIO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_AUDIO, customId);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_AUDIO, customId, widgetsPanel);
 			case AV_NOTES_RECORD_VIDEO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_VIDEO, customId);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_VIDEO, customId, widgetsPanel);
 			case AV_NOTES_TAKE_PHOTO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_TAKEPICTURE, customId);
+				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_TAKEPICTURE, customId, widgetsPanel);
 		}
 		return null;
 	}

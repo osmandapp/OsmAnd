@@ -271,7 +271,7 @@ public class MapWidgetRegistry {
 		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : widgetInfos) {
-			if (panels.contains(widget.widgetPanel)) {
+			if (panels.contains(widget.getWidgetPanel())) {
 				boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 				boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
 				boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
@@ -365,7 +365,7 @@ public class MapWidgetRegistry {
 	}
 
 	public void registerWidget(@NonNull MapWidgetInfo widgetInfo) {
-		getWidgetsForPanel(widgetInfo.widgetPanel).add(widgetInfo);
+		getWidgetsForPanel(widgetInfo.getWidgetPanel()).add(widgetInfo);
 		notifyWidgetRegistered(widgetInfo);
 	}
 

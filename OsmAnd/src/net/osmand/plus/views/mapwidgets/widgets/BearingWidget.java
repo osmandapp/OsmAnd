@@ -18,6 +18,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class BearingWidget extends SimpleWidget {
 
 	private int cachedBearing;
 
-	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType, @Nullable String customId) {
-		super(mapActivity, bearingType.widgetType, customId);
+	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, bearingType.widgetType, customId, widgetsPanel);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 

@@ -102,7 +102,7 @@ public class ElevationProfileWidget extends MapWidget {
 	};
 
 	public ElevationProfileWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, ELEVATION_PROFILE);
+		super(mapActivity, ELEVATION_PROFILE, customId);
 		this.showSlopePreference = registerShowSlopePref(customId);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);

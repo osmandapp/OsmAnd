@@ -364,7 +364,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
+		updateWidgetsCountForPanel(widgetInfo.getWidgetPanel());
 	}
 
 	private void updateWidgetsCountForPanel(@NonNull WidgetsPanel panel) {

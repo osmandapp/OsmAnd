@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
@@ -18,8 +19,8 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 	private Boolean cachedRecording;
 	int actionId;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId, @Nullable String customId) {
-		super(mapActivity, widgetType, customId);
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.actionId = actionId;
 
 		updateInfo(null);

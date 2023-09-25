@@ -20,6 +20,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public abstract class TripRecordingElevationWidget extends SimpleWidget {
@@ -29,8 +30,8 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	private double cachedElevationDiff = -1;
 
-	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId) {
-		super(mapActivity, widgetType, customId);
+	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId ,widgetsPanel);
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);
@@ -79,8 +80,8 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 		private double diffElevationUp;
 
-		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-			super(mapActivity, TRIP_RECORDING_UPHILL, customId);
+		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+			super(mapActivity, TRIP_RECORDING_UPHILL, customId, widgetsPanel);
 			setIcons(TRIP_RECORDING_UPHILL);
 		}
 
@@ -98,8 +99,8 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 		private double diffElevationDown;
 
-		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-			super(mapActivity, TRIP_RECORDING_DOWNHILL, customId);
+		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+			super(mapActivity, TRIP_RECORDING_DOWNHILL, customId, widgetsPanel);
 			setIcons(TRIP_RECORDING_DOWNHILL);
 		}
 

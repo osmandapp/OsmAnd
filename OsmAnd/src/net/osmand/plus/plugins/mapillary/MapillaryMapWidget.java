@@ -9,12 +9,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class MapillaryMapWidget extends SimpleWidget {
 
-	public MapillaryMapWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, MAPILLARY, customId);
+	public MapillaryMapWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, MAPILLARY, customId, widgetsPanel);
 
 		setText(app.getString(R.string.mapillary), "");
 		setIcons(MAPILLARY);

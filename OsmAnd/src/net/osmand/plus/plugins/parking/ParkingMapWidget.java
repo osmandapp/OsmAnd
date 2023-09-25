@@ -30,8 +30,8 @@ public class ParkingMapWidget extends SimpleWidget {
 	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, PARKING, customId);
+	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, PARKING, customId, widgetsPanel);
 		this.plugin = plugin;
 
 		setText(null, null);

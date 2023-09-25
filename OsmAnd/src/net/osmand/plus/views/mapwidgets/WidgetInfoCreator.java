@@ -35,7 +35,7 @@ public class WidgetInfoCreator {
 	public MapWidgetInfo createCustomWidgetInfo(@NonNull MapWidgetsFactory factory,
 	                                            @NonNull String key, @NonNull WidgetType widgetType) {
 		WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
-		MapWidget widget = factory.createMapWidget(key, widgetType);
+		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
 			return createCustomWidgetInfo(key, widget, widgetType, panel);
 		}

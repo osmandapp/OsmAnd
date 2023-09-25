@@ -38,6 +38,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettings
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -151,13 +152,13 @@ public enum WidgetType {
 	public final WidgetsPanel defaultPanel;
 
 	WidgetType(@NonNull String id,
-	           @StringRes int titleId,
-	           @StringRes int descId,
-	           @DrawableRes int dayIconId,
-	           @DrawableRes int nightIconId,
-	           @StringRes int docsUrlId,
-	           @Nullable WidgetGroup group,
-	           @NonNull WidgetsPanel defaultPanel) {
+			   @StringRes int titleId,
+			   @StringRes int descId,
+			   @DrawableRes int dayIconId,
+			   @DrawableRes int nightIconId,
+			   @StringRes int docsUrlId,
+			   @Nullable WidgetGroup group,
+			   @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -253,24 +254,36 @@ public enum WidgetType {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		if (defaultPanel == TOP) {
-			return BOTTOM.contains(widgetId, settings, mode) ? BOTTOM : TOP;
-		} else if (defaultPanel == BOTTOM) {
-			return TOP.contains(widgetId, settings, mode) ? TOP : BOTTOM;
-		} else if (defaultPanel == LEFT || defaultPanel == RIGHT) {
-			if (LEFT.contains(widgetId, settings, mode)) {
-				return LEFT;
-			} else if (RIGHT.contains(widgetId, settings, mode)) {
-				return RIGHT;
-			} else if (TOP.contains(widgetId, settings, mode)) {
-				return TOP;
-			} else if (BOTTOM.contains(widgetId, settings, mode)) {
-				return BOTTOM;
+		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode);
+		if (widgetsPanel != null) {
+			return widgetsPanel;
+		}
+		return defaultPanel;
+	}
+
+	@Nullable
+	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ApplicationMode mode) {
+		ApplicationMode appMode = mode == null ? settings.getApplicationMode() : mode;
+		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
+		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
+			if (widgetsPanel.getOrderPreference(settings).isSet()) {
+				setPanels.add(widgetsPanel);
 			} else {
-				return defaultPanel;
+				unsetPanels.add(widgetsPanel);
 			}
 		}
-		throw new IllegalStateException("Unsupported panel");
+		for (WidgetsPanel panel : setPanels) {
+			if (panel.contains(widgetId, settings, appMode)) {
+				return panel;
+			}
+		}
+		for (WidgetsPanel panel : unsetPanels) {
+			if (panel.contains(widgetId, settings, appMode)) {
+				return panel;
+			}
+		}
+		return null;
 	}
 
 	@Nullable

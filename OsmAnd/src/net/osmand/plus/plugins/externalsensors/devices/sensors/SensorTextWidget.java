@@ -12,6 +12,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
@@ -26,8 +27,8 @@ public class SensorTextWidget extends SimpleWidget {
 	protected ExternalSensorsPlugin plugin;
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId) {
-		super(mapActivity, fieldType.getWidgetType(), customId);
+							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);
@@ -58,7 +59,7 @@ public class SensorTextWidget extends SimpleWidget {
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 							@NonNull SensorWidgetDataFieldType fieldType) {
-		this(mapActivity, appMode, fieldType, null);
+		this(mapActivity, appMode, fieldType, null, null);
 	}
 
 	@Nullable

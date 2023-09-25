@@ -12,6 +12,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class MaxSpeedWidget extends SimpleWidget {
 
@@ -19,8 +20,8 @@ public class MaxSpeedWidget extends SimpleWidget {
 
 	private float cachedMaxSpeed;
 
-	public MaxSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, MAX_SPEED, customId);
+	public MaxSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, MAX_SPEED, customId, widgetsPanel);
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
 		setIcons(MAX_SPEED);

@@ -13,6 +13,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -28,8 +29,8 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
 	private int cachedLeftSeconds;
 
-	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId) {
-		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION, customId);
+	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.routingHelper = app.getRoutingHelper();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();

@@ -62,7 +62,7 @@ public class WidgetUtils {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
-			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
+			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType, panel);
 			if (widget != null) {
 				app.getSettings().CUSTOM_WIDGETS_KEYS.addValue(id);
 				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
@@ -81,8 +81,8 @@ public class WidgetUtils {
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
 				selectedAppMode, ENABLED_MODE, Collections.singletonList(widgetsPanel));
 
-		widgetRegistry.getWidgetsForPanel(targetWidget.widgetPanel).remove(targetWidget);
-		targetWidget.widgetPanel = widgetsPanel;
+		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
+		targetWidget.setWidgetPanel(widgetsPanel);
 
 		for (MapWidgetInfo widget : enabledWidgets) {
 			int page = widget.pageIndex;
@@ -124,9 +124,6 @@ public class WidgetUtils {
 			targetWidget.pageIndex = lastPage;
 			targetWidget.priority = lastOrder;
 
-			if (targetWidget.widget instanceof SimpleWidget) {
-				((SimpleWidget) targetWidget.widget).recreateViewIfNeeded(targetWidget.widgetPanel);
-			}
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);

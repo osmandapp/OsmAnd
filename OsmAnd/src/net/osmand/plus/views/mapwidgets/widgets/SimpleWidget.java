@@ -24,32 +24,35 @@ import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import java.util.List;
 
 public abstract class SimpleWidget extends TextInfoWidget {
-	private final String customId;
 	protected boolean isVerticalWidget;
 	private TextView widgetName;
 	private SimpleWidgetState simpleWidgetState;
 
-	public SimpleWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId) {
-		super(mapActivity, widgetType);
-		this.customId = customId;
+	public SimpleWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, getLayoutId(mapActivity, customId, widgetType, widgetsPanel));
+		if (widgetsPanel != null) {
+			setVerticalWidget(widgetsPanel);
+		} else if (widgetType != null) {
+			String id = customId != null ? customId : widgetType.id;
+			setVerticalWidget(widgetType.getPanel(id, settings));
+		}
 		this.simpleWidgetState = new SimpleWidgetState(getMyApplication(), customId, widgetType);
 		findViews();
 		updateWidgetView();
 	}
 
-/*	public SimpleWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @NonNull SimpleWidgetState simpleWidgetState) {
-		super(mapActivity, widgetType);
-		this.customId = customId;
-		this.simpleWidgetState = simpleWidgetState;
-		findViews();
-		updateWidgetView();
-		if (widgetType != null && widgetName != null) {
-			widgetName.setText(getString(widgetType.titleId));
+	protected static int getLayoutId(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetType widgetType, @Nullable WidgetsPanel panel) {
+		if (panel != null) {
+			return panel.isPanelVertical() ? R.layout.simple_map_widget : R.layout.map_hud_widget;
+		} else if (widgetType != null) {
+			WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, mapActivity.getMyApplication().getSettings());
+			return widgetsPanel.isPanelVertical() ? R.layout.simple_map_widget : R.layout.map_hud_widget;
 		}
-	}*/
+		return R.layout.map_hud_widget;
+	}
 
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
-		isVerticalWidget = panel == WidgetsPanel.TOP || panel == WidgetsPanel.BOTTOM;
+		isVerticalWidget = panel.isPanelVertical();
 	}
 
 	private void updateWidgetView() {
@@ -117,10 +120,9 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
+		boolean oldWidgetOrientation = isVerticalWidget;
 		setVerticalWidget(panel);
-		int newLayoutId = getLayoutId();
-		int currentLayoutId = view.getSourceLayoutResId();
-		if (currentLayoutId != newLayoutId) {
+		if (oldWidgetOrientation != isVerticalWidget) {
 			View oldView = view;
 			ImageView oldImageView = imageView;
 			TextView oldTextView = textView;
@@ -131,7 +133,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			View oldEmptyBanner = emptyBanner;
 			View oldBottomDivider = bottomDivider;
 
-			createView(newLayoutId);
+			createView(getLayoutId(mapActivity, customId, widgetType, panel));
 			findViews();
 
 			imageView.setImageDrawable(oldImageView.getDrawable());
@@ -235,11 +237,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 		view.setBackgroundResource(ColorUtilities.getWidgetBackgroundColorId(isNightMode()));
 		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
-	}
-
-	@Override
-	protected int getLayoutId() {
-		return isVerticalWidget ? R.layout.simple_map_widget : R.layout.map_hud_widget;
 	}
 
 	@Override

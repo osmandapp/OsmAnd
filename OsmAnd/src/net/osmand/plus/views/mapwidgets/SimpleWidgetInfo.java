@@ -27,13 +27,17 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 							int order,
 							@NonNull WidgetsPanel widgetPanel) {
 		super(key, widget, daySettingsIconId, nightSettingsIconId, messageId, message, page, order, widgetPanel);
-		widget.recreateViewIfNeeded(widgetPanel);
-
 		if (getMessage() != null) {
 			widget.setContentTitle(getMessage());
 		} else if (getMessageId() != MapWidgetInfo.INVALID_ID) {
 			widget.setContentTitle(getMessageId());
 		}
+	}
+
+	@Override
+	public void setWidgetPanel(WidgetsPanel widgetPanel) {
+		this.widgetPanel = widgetPanel;
+		((SimpleWidget) widget).recreateViewIfNeeded(widgetPanel);
 	}
 
 	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
@@ -51,23 +55,10 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
 		if (widgetType != null) {
-			if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings)) {
-				widgetPanel = RIGHT;
-			} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings)) {
-				widgetPanel = LEFT;
-			} else {
-				if (TOP.contains(key, settings)) {
-					widgetPanel = TOP;
-				} else if (BOTTOM.contains(key, settings)) {
-					widgetPanel = BOTTOM;
-				} else {
-					widgetPanel = widgetType.defaultPanel;
-				}
-			}
+			return widgetType.getPanel(key, settings);
 		} else {
-			widgetPanel = LEFT.contains(key, settings) ? LEFT : RIGHT;
+			WidgetType.findWidgetPanel(key, settings, null);
 		}
-
 		return widgetPanel;
 	}
 }

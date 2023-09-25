@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class CurrentTimeWidget extends SimpleWidget {
 
@@ -14,8 +15,8 @@ public class CurrentTimeWidget extends SimpleWidget {
 
 	private long cachedTime;
 
-	public CurrentTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, CURRENT_TIME, customId);
+	public CurrentTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, CURRENT_TIME, customId, widgetsPanel);
 		setIcons(CURRENT_TIME);
 		setText(null, null);
 	}

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class BatteryWidget extends SimpleWidget {
 
@@ -19,8 +20,8 @@ public class BatteryWidget extends SimpleWidget {
 
 	private long cachedTime;
 
-	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, BATTERY, customId);
+	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, BATTERY, customId, widgetsPanel);
 		setIcons(false);
 		setText(null, null);
 	}
