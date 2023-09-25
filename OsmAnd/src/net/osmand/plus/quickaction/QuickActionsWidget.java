@@ -181,7 +181,7 @@ public class QuickActionsWidget extends LinearLayout {
         OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
         boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        int colorEnabled = light ?  R.color.icon_color_default_light : R.color.color_white;
+        int colorEnabled = light ?  R.color.icon_color_default_light : R.color.card_and_list_background_light;
         int colorDisabled = light ?  R.color.icon_color_default_dark : R.color.white_50_transparent;
 
         next.setEnabled(viewPager.getAdapter().getCount() > position + 1);

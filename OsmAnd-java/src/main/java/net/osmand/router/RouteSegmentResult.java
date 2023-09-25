@@ -40,6 +40,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
+	private boolean leftside = false;
 
 	// Evaluates street name that the route follows after turn within specified distance.
 	// It is useful to find names for short segments on intersections
@@ -51,6 +52,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public RouteSegmentResult(RouteDataObject object) {
 		this.object = object;
+	}
+
+	public RouteSegmentResult(RouteDataObject object, boolean leftside) {
+		this.object = object;
+		this.leftside = leftside;
 	}
 
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
@@ -341,7 +347,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		speed = bundle.getFloat("speed", speed);
 		String turnTypeStr = bundle.getString("turnType", null);
 		if (!Algorithms.isEmpty(turnTypeStr)) {
-			turnType = TurnType.fromString(turnTypeStr, false);
+			turnType = TurnType.fromString(turnTypeStr, leftside);
 			turnType.setSkipToSpeak(bundle.getBoolean("skipTurn", turnType.isSkipToSpeak()));
 			turnType.setTurnAngle(bundle.getFloat("turnAngle", turnType.getTurnAngle()));
 			int[] turnLanes = TurnType.lanesFromString(bundle.getString("turnLanes", null));

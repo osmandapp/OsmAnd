@@ -80,8 +80,8 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(RIGHT_BUTTON_TITLE_KEY, rightButtonTitle);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm,
-	                                Fragment targetFragment,
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull Fragment target,
 	                                @NonNull String title,
 	                                @NonNull CharSequence message,
 	                                int rightButtonTitle,
@@ -90,9 +90,9 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		f.title = title;
 		f.message = message;
 		f.rightButtonTitle = rightButtonTitle;
-		f.setTargetFragment(targetFragment, 0);
+		f.setTargetFragment(target, 0);
 		f.setUsedOnMap(usedOnMap);
-		f.show(fm, TAG);
+		f.show(manager, TAG);
 	}
 
 	public interface OnConfirmButtonClickListener {

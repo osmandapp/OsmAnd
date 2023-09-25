@@ -1,0 +1,60 @@
+name: 🐞 Bug Report
+description: Report a bug in OsmAnd
+labels: [ ]
+assignees: [ ]
+body:
+    -   type: markdown
+        attributes:
+            value: |
+                    Before submitting a new issue, please check if any existing ones address your concern. Workarounds and progress updates may be available.
+
+                    Developer team informed of all updates and feedback for existing issues. Your feedback will be heard.
+    -   type: textarea
+        id: describe-the-bug
+        attributes:
+            label: Description
+            description: Please provide a brief summary of the issue and provide a summarised description in the title above.
+        validations:
+            required: true
+    -   type: textarea
+        id: steps-to-reproduce
+        attributes:
+            label: Steps to reproduce
+            description: Please provide step-by-step instructions how the bug can be reproduced.
+        validations:
+            required: true
+    -   type: textarea
+        id: actual-result
+        attributes:
+            label: Actual result
+            description: Describe the actual result
+        validations:
+            required: true
+    -   type: textarea
+        id: expected-result
+        attributes:
+            label: Expected result
+            description: Describe the result you expect to see
+        validations:
+            required: true
+    -   type: textarea
+        id: environment
+        attributes:
+            label: Your Environment (required)
+            description: |
+                Include as many relevant details about the environment you experienced the bug in.
+                If possible you may also provide [Crash-Logs](https://osmand.net/docs/user/troubleshooting/crash-logs/),
+                but be warned that **crash logs may contain sensitive information** you may not want to share publicly!
+            value: |
+                **WARNING** Crash-Logs **MAY** contain information you deem sensitive.
+                Review this **CAREFULLY** before posting your issue!
+                
+                ```
+                OsmAnd Version:
+                Android/iOS version:
+                Device model:
+                Crash-Logs: ?
+                ```
+        validations:
+            required: true
+

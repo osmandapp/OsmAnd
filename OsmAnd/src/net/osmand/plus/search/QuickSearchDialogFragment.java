@@ -443,7 +443,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbarEdit.setNavigationOnClickListener(v -> enableSelectionMode(false, -1));
 
 		titleEdit = view.findViewById(R.id.titleEdit);
-		Drawable shareIcon = iconsCache.getIcon(R.drawable.ic_action_gshare_dark, R.color.color_white);
+		Drawable shareIcon = iconsCache.getIcon(R.drawable.ic_action_gshare_dark, R.color.card_and_list_background_light);
 		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
 		ImageView shareButton = view.findViewById(R.id.shareButton);
 		shareButton.setImageDrawable(shareIcon);
@@ -1302,7 +1302,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
 			Spannable spannable = new SpannableString((selectStreets + " " + inCityName).toUpperCase());
 			boolean light = settings.isLightContent();
-			spannable.setSpan(new ForegroundColorSpan(app.getColor(light ? R.color.icon_color_default_light : R.color.color_white)),
+			spannable.setSpan(new ForegroundColorSpan(app.getColor(light ? R.color.icon_color_default_light : R.color.card_and_list_background_light)),
 					selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 			SearchResult lastCityFinal = lastCity;

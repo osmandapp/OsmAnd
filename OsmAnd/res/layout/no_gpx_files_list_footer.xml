@@ -46,7 +46,7 @@
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:background="@drawable/blue_button_drawable"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:text="@string/gpx_add_track"
 	        android:paddingEnd="14dp"
 	        android:paddingStart="14dp" />

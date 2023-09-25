@@ -67,9 +67,9 @@ public class PointImageDrawable extends Drawable {
 		mapIcon = uiUtilities.getIcon(pointInfo.synced
 						? R.drawable.ic_action_flag
 						: getMapIconId(ctx, overlayIconId),
-				R.color.color_white);
+				R.color.card_and_list_background_light);
 		int col = pointInfo.color == 0 ? ContextCompat.getColor(ctx, R.color.color_favorite) : pointInfo.color;
-		uiListIcon = uiUtilities.getIcon(overlayIconId, R.color.color_white);
+		uiListIcon = uiUtilities.getIcon(overlayIconId, R.color.card_and_list_background_light);
 		BackgroundType backgroundType = pointInfo.backgroundType;
 		int uiBackgroundIconId = backgroundType.getIconId();
 		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);

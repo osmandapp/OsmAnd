@@ -129,7 +129,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((RecentlyVisibleViewHolder) holder).bindView();
 		} else if (holder instanceof SortTracksViewHolder) {
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems());
-			((SortTracksViewHolder) holder).bindView(enabled);
+			((SortTracksViewHolder) holder).bindView(enabled, null);
 		}
 	}
 

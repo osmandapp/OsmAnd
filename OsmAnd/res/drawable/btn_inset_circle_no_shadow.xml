@@ -7,7 +7,7 @@
             android:insetRight="@dimen/map_button_inset"
             android:insetTop="@dimen/map_button_inset" >
             <shape android:shape="oval" >
-                <solid android:color="@color/color_white" />
+                <solid android:color="@color/card_and_list_background_light" />
             </shape>
         </inset>
     </item>

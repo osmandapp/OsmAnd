@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/list_header_bottom_margin"
             android:text="@string/storage_directory"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_list_text_size_large"/>
 
         <LinearLayout
@@ -48,7 +48,7 @@
                     android:id="@+id/location_path"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_white"
+                    android:textColor="@color/card_and_list_background_light"
                     android:textSize="@dimen/default_list_text_size"
                     tools:text="Location path"/>
 
@@ -56,7 +56,7 @@
                     android:id="@+id/location_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_white"
+                    android:textColor="@color/card_and_list_background_light"
                     android:textSize="@dimen/default_list_text_size"
                     tools:text="Location path  \u2022 300 MB"/>
             </LinearLayout>

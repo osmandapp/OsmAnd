@@ -30,7 +30,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="top"
                 android:contentDescription="@string/shared_string_close"
-                android:tint="@color/color_white"
+                android:tint="@color/card_and_list_background_light"
                 osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
             <LinearLayout
@@ -52,7 +52,7 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:singleLine="true"
-                    android:textColor="@color/color_white"
+                    android:textColor="@color/card_and_list_background_light"
                     android:textSize="@dimen/abc_text_size_medium_material"
                     tools:text="Title"/>
 
@@ -63,7 +63,7 @@
                     android:background="@null"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
-                    android:textColor="@color/color_white"
+                    android:textColor="@color/card_and_list_background_light"
                     android:textSize="@dimen/default_sub_text_size"
                     android:visibility="gone"
                     tools:text="Description"/>

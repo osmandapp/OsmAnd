@@ -151,7 +151,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		listView.setAdapter(listAdapter);
 
 		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight()
-				? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
+				? R.color.divider_color_light : R.color.divider_color_dark));
 
 		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(),
 				menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));

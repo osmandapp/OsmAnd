@@ -161,7 +161,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private OnItemClickListener adapterClickListener;
 
 	private boolean visible;
-	private DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
+	private final DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
+	private final Map<DashboardType, Integer> lastKnownScrolls = new HashMap<>();
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private final List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
@@ -544,9 +545,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.visible = visible;
 		updateVisibilityStack(type, visible);
+
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
-
 		boolean refresh = currentType && !appModeChanged;
 		previousAppMode = currentAppMode;
 		staticVisible = visible;
@@ -614,9 +615,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					DifficultyClassificationFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
-				scrollView.scrollTo(0, 0);
 				listViewLayout.setVisibility(View.GONE);
-				onScrollChanged(scrollView.getScrollY(), false, false);
+				applyScrollPosition(scrollView);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
@@ -625,7 +625,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				} else {
 					listView.scrollTo(0, 0);
 					listView.clearParams();
-					onScrollChanged(listView.getScrollY(), false, false);
+					onScrollChangedImpl(listView.getScrollY());
 					updateListAdapter();
 				}
 				updateListBackgroundHeight();
@@ -1099,6 +1099,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void backPressed() {
+		// Remove known scroll when screen closed
+		lastKnownScrolls.remove(visibleTypes.getCurrent());
+
 		DashboardType previous = visibleTypes.getPrevious();
 		if (previous != null) {
 			if (isCurrentType(MAPILLARY)) {
@@ -1123,8 +1126,25 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	private void applyScrollPosition(@NonNull ScrollView scrollView) {
+		Integer lastKnownScroll = lastKnownScrolls.get(visibleTypes.getCurrent());
+		applyScrollPosition(scrollView, lastKnownScroll != null ? lastKnownScroll : 0);
+	}
+
+	private void applyScrollPosition(@NonNull ScrollView scrollView, int scrollYPos) {
+		scrollView.postDelayed(() -> {
+			scrollView.scrollTo(0, scrollYPos);
+			onScrollChangedImpl(scrollYPos);
+		}, 100);
+	}
+
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+		lastKnownScrolls.put(visibleTypes.getCurrent(), scrollY);
+		onScrollChangedImpl(scrollY);
+	}
+
+	private void onScrollChangedImpl(int scrollY) {
 		// Translate list background
 		if (portrait) {
 			if (listBackgroundView != null) {

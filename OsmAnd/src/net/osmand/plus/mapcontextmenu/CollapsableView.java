@@ -50,8 +50,8 @@ public class CollapsableView {
 		if (collapseExpandListener != null) {
 			collapseExpandListener.onCollapseExpand(collapsed);
 		}
-		if (menuBuilder != null && menuBuilder.getCollapseExpandListener() != null) {
-			menuBuilder.getCollapseExpandListener().onCollapseExpand(collapsed);
+		if (menuBuilder != null) {
+			menuBuilder.notifyCollapseExpand(collapsed);
 		}
 	}
 

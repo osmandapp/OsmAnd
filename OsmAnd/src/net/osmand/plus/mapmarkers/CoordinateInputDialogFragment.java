@@ -266,7 +266,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		TextView optionsButton = mainView.findViewById(R.id.options_button);
 
 		if (orientationPortrait) {
-			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark);
+			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.activity_background_color_dark : R.color.active_buttons_and_links_text_dark);
 			backBtn.setImageDrawable(icBack);
 			optionsButton.setTextColor(ColorUtilities.getActiveColor(getContext(), !lightTheme));
 			TextView toolbar = mainView.findViewById(R.id.toolbar_text);
@@ -279,9 +279,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!lightTheme);
 			Drawable icBack = getColoredIcon(resId, color);
 			backBtn.setImageDrawable(icBack);
-			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.active_color_primary_dark));
+			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.card_and_list_background_light : R.color.active_color_primary_dark));
 			TextView toolbar = mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_main_light : R.color.card_and_list_background_dark);
 		}

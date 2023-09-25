@@ -110,9 +110,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	private void setupOkButtons() {
-		okButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
+		okButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.card_and_list_background_light));
 		okButton.setOnClickListener(v -> removeMarker(0));
-		okButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
+		okButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.card_and_list_background_light));
 		okButton2nd.setOnClickListener(v -> removeMarker(1));
 	}
 

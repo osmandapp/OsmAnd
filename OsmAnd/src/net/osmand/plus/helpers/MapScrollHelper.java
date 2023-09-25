@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import androidx.annotation.NonNull;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -113,8 +114,9 @@ public class MapScrollHelper {
 		MapRendererView renderer = mapView.getMapRenderer();
 		if (renderer != null) {
 			PointI point31 = new PointI();
-			PointI center = renderer.getState().getFixedPixel();
-			PointI newCenter = new PointI(center.getX() + dx, center.getY() + dy);
+			PointD newCenter = new PointD(
+					(double) renderer.getWindowWidth() / 2.0 + (double) dx,
+					(double) renderer.getWindowHeight() / 2.0 + (double) dy);
 			if (renderer.getLocationFromScreenPoint(newCenter, point31)) {
 				renderer.setTarget(point31, false, false);
 			}

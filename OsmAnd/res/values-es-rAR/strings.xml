@@ -5263,11 +5263,11 @@
 \nEsta acción no puede deshacerse.</string>
     <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios serán desvinculados de OsmAnd Cloud y se perderá acceso a las funciones de pago.</string>
-    <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud son %1$s. Los datos en el dispositivo se mantienen intactos.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos en el dispositivo se mantienen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
-    <string name="osmand_cloud_deletion_account_warning">La cuenta junto con todos los datos de ésta tiene %1$s</string>
+    <string name="osmand_cloud_deletion_account_warning">Ésta cuenta y todos sus datos serán %1$s.</string>
     <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
@@ -5450,4 +5450,15 @@
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
     <string name="app_mode_baby_transport">Transporte de bebés</string>
+    <string name="with_waypoints">Con puntos de ruta</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitud máx.</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="filter_by_name">Filtrar por nombre</string>
+    <string name="shared_string_reset_all">Restablecer todo</string>
+    <string name="filter_tracks_count">Filtro: %d</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
+    <string name="date_of_creation">Fecha de creación</string>
+    <string name="filter_screen_title">Filtro</string>
 </resources>

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
 

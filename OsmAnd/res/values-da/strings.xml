@@ -1493,7 +1493,7 @@
     <string name="osm_changes_added_to_local_edits">OSM-ændringer tilføjet til lokale ændringer</string>
     <string name="mark_to_delete">Markér for at slette</string>
     <string name="current_route">Aktuel rute</string>
-    <string name="welmode_download_maps">Administrer kort</string>
+    <string name="welmode_download_maps">Hent kort</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd tilbyder globale offline kortvisninger, og offline navigation.</string>
@@ -4768,7 +4768,7 @@
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_manual_opt">Manuelt roteret</string>
-    <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
+    <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, hvor gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="go_to_marker_location">Fortsæt til markørens placering</string>
     <string name="shared_string_shows">Viser</string>
     <string name="shared_string_switch_mode">Skift tilstand</string>
@@ -5440,4 +5440,15 @@
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
     <string name="app_mode_baby_transport">Baby-transport</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="app_mode_hang_gliding">Hanggliding</string>
+    <string name="with_waypoints">Med rutepunkter</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maks. højde</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrér efter navn</string>
+    <string name="shared_string_reset_all">Nulstil alt</string>
+    <string name="filter_tracks_count">Filter: %d</string>
+    <string name="date_of_creation">Dato for oprettelse</string>
+    <string name="filter_screen_title">Filter</string>
 </resources>

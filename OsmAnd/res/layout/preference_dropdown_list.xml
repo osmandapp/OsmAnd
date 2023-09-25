@@ -26,7 +26,7 @@
 			android:paddingLeft="0dp"
 			android:paddingStart="0dp"
 			app:srcCompat="@drawable/ic_action_arrow_drop_down"
-			android:tint="@color/settings_divider" />
+			android:tint="@color/divider_color_light" />
 
 		<net.osmand.plus.widgets.OsmandTextFieldBoxes
 			android:id="@+id/master_profile_otfb"

@@ -5329,4 +5329,23 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Trasy rowerowe (MTB)</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_map_legend_ski_map_name">Styl mapy narciarskiej</string>
+    <string name="app_mode_paragliding">Paralotniarstwo</string>
+    <string name="app_mode_hang_gliding">Lotniarstwo</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maksymalna wysokość</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="release_4_6">• Widżet współczynnika poślizgu
+\n
+\n• Dodano widżet temperatury ANT+
+\n
+\n• Lepsze zarządzanie pamięcią dla dużych ścieżek GPX
+\n
+\n</string>
+    <string name="app_mode_baby_transport">Transport dziecka</string>
+    <string name="filter_by_name">Filtruj według nazwy</string>
+    <string name="shared_string_reset_all">Resetuj wszystko</string>
+    <string name="help_article_navigation_guidance_name">Wskazówki</string>
+    <string name="filter_tracks_count">Filtr: %d</string>
+    <string name="date_of_creation">Data utworzenia</string>
+    <string name="filter_screen_title">Filtr</string>
 </resources>

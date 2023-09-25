@@ -675,7 +675,7 @@
     <string name="context_menu_item_update_map">Atnaujinti žemėlapį</string>
     <string name="context_menu_item_create_poi">Sukurti LV</string>
     <string name="shared_string_yes">Taip</string>
-    <string name="shared_string_cancel">Atšaukti</string>
+    <string name="shared_string_cancel">Atsisakyti</string>
     <string name="shared_string_apply">Taikyti</string>
     <string name="shared_string_add">Pridėti</string>
     <string name="shared_string_no">Ne</string>
@@ -891,7 +891,7 @@
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">Įrašas %1$s %3$s %2$s</string>
     <string name="recording_default_name">Įrašas</string>
-    <string name="shared_string_control_start">Įrašyti</string>
+    <string name="shared_string_control_start">Pradėti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="srtm_paid_version_msg">Apsvarstykite galimybę sumokėti už „Kontūrinių linijų“ įskiepį. Taip paremsite tolesnį programos vystymą.</string>
@@ -2807,8 +2807,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osmand_maps_plus_tagline">Gauti išplėstines funkcijas</string>
     <string name="osmand_pro_tagline">Gaukite maksimalias funkcijas</string>
     <string name="shared_string_learn_more">Sužinoti daugiau</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Atšaukti tai bet kuriuo metu Huawei AppGallery</string>
-    <string name="cancel_anytime_in_gplay">Atšaukti bet kada Google Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Atsisakyti bet kada per Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Atsisakyti bet kada per Google Play.</string>
     <string name="shared_string_not_included">Neįtraukta</string>
     <string name="shared_string_includes">Apima</string>
     <string name="complete_purchase">Užbaigti pirkimą</string>
@@ -2981,4 +2981,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="copy_to_map_favorites">Kopijuoti į mėgstamiausius</string>
     <string name="shared_string_min_height">Min. aukštis</string>
     <string name="map_widget_altitude">Esamos vietos aukštis</string>
+    <string name="shared_string_resume">Tęsti</string>
+    <string name="gpx_monitoring_start">Tęsti kelionės įrašymą</string>
 </resources>

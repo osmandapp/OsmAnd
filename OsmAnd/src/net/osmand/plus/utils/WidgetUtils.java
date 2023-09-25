@@ -31,6 +31,18 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class WidgetUtils {
+
+	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                     @NonNull WidgetsPanel panel) {
+		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+		addSelectedWidget(mapActivity, widgetId, appMode, panel);
+	}
+
+	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                     @NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+		addSelectedWidgets(mapActivity, Collections.singletonList(widgetId), panel, appMode);
+	}
+
 	public static void addSelectedWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
 										  @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();

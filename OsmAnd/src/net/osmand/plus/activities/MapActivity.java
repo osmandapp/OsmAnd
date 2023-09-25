@@ -831,7 +831,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
 						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
 						&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
-					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
+					if (AndroidUtils.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 						Bundle args = new Bundle();
 						args.putBoolean(FIRST_USAGE, true);
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
@@ -1420,6 +1420,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyLongPress(keyCode, event)) {
+			return true;
+		}
+		return super.onKeyLongPress(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyMultiple(keyCode, repeatCount, event)) {
+			return true;
+		}
+		return super.onKeyMultiple(keyCode, repeatCount, event);
 	}
 
 	public void showMapControls() {
@@ -2170,10 +2186,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Nullable
-	protected List<View> getHidingViews(){
+	protected List<View> getHidingViews() {
 		List<View> views = new ArrayList<>();
 		View mainContainer = findViewById(R.id.MapHudButtonsOverlay);
-		if(mainContainer != null){
+		if (mainContainer != null) {
 			views.add(mainContainer);
 		}
 		return views;
@@ -2183,8 +2199,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public List<Fragment> getActiveTalkbackFragments() {
 		List<Fragment> allFragments = getSupportFragmentManager().getFragments();
 		List<Fragment> fragmentForTalkBack = new ArrayList<>();
-		for(Fragment fragment : allFragments){
-			if(!(fragment instanceof DashBaseFragment)){
+		for (Fragment fragment : allFragments) {
+			if (!(fragment instanceof DashBaseFragment)) {
 				fragmentForTalkBack.add(fragment);
 			}
 		}

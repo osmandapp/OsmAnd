@@ -36,7 +36,7 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/card_and_list_background_light</item>
         <item name="android:background">?attr/btn_round</item>
     </style>
 
@@ -119,7 +119,7 @@
         <item name="search_background">@color/activity_background_color_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
-        <item name="actionMenuTextColor">@color/color_white</item>
+        <item name="actionMenuTextColor">@color/card_and_list_background_light</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_light</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_light</item>
         <item name="bg_plugin_logo_disabled">@drawable/bg_plugin_logo_disabled_light</item>
@@ -140,9 +140,9 @@
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:textColorTertiary">@color/text_color_tertiary_light</item>
 
-        <item name="spinnerItemTextColor">@color/color_black</item>
+        <item name="spinnerItemTextColor">@color/activity_background_color_dark</item>
         <item name="spinnerListBackground">@color/spinner_list_background_light</item>
-        <item name="colorButtonNormal">@color/color_white</item>
+        <item name="colorButtonNormal">@color/card_and_list_background_light</item>
 
         <item name="colorPrimary">@color/active_color_primary_light</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
@@ -152,7 +152,7 @@
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
-        <item name="android:actionMenuTextColor">@color/color_white</item>
+        <item name="android:actionMenuTextColor">@color/card_and_list_background_light</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_light</item>
@@ -196,7 +196,7 @@
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_light</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_light</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
-        <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
+        <item name="wikivoyage_bottom_bar_divider_color">@color/divider_color_light</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
         <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
@@ -320,11 +320,11 @@
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
-        <item name="android:textColorPrimary">@color/color_white</item>
+        <item name="android:textColorPrimary">@color/card_and_list_background_light</item>
         <item name="android:textColorSecondary">@color/inactive_item_orange</item>
         <item name="android:textColorHint">@color/inactive_item_orange</item>
-        <item name="colorAccent">@color/color_white</item>
-        <!--<item name="actionMenuTextColor">@color/color_white</item>-->
+        <item name="colorAccent">@color/card_and_list_background_light</item>
+        <!--<item name="actionMenuTextColor">@color/card_and_list_background_light</item>-->
     </style>
 
     <style name="OsmandLightTheme.SearchTabbar" parent="Widget.MaterialComponents.TabLayout">
@@ -337,8 +337,8 @@
     </style>
 
     <style name="OsmandLightTheme.Toolbar">
-        <item name="android:textColorPrimary">@color/color_white</item>
-        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:textColorPrimary">@color/card_and_list_background_light</item>
+        <item name="android:textColorSecondary">@color/card_and_list_background_light</item>
     </style>
 
     <style name="OsmandLightTheme.NewAppTheme">
@@ -354,7 +354,7 @@
     </style>
 
     <style name="OsmandDarkTheme.DarkActionbar">
-        <item name="colorAccent">@color/color_white</item>
+        <item name="colorAccent">@color/card_and_list_background_light</item>
     </style>
 
     <style name="OsmandDarkTheme.SearchTabbar"  parent="Widget.MaterialComponents.TabLayout">
@@ -477,7 +477,7 @@
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:textColorTertiary">@color/text_color_tertiary_dark</item>
 
-        <item name="spinnerItemTextColor">@color/color_white</item>
+        <item name="spinnerItemTextColor">@color/card_and_list_background_light</item>
         <item name="spinnerListBackground">@color/spinner_list_background_dark</item>
         <item name="colorButtonNormal">@color/app_bar_main_dark</item>
 
@@ -529,7 +529,7 @@
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_dark</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_dark</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
-        <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
+        <item name="wikivoyage_bottom_bar_divider_color">@color/divider_color_dark</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
         <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
@@ -620,7 +620,7 @@
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/card_and_list_background_light</item>
     </style>
 
     <style name="Theme.MaterialComponents.Dialog.Alert.NoAnimation">
@@ -684,7 +684,7 @@
     </style>
 
     <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/card_and_list_background_light</item>
     </style>
 
     <style name="Widget.Styled.DarkActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -701,7 +701,7 @@
     </style>
 
     <style name="WhiteActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
-        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textColor">@color/card_and_list_background_light</item>
     </style>
 
     <!-- Dialog popup -->
