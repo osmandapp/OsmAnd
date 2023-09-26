@@ -59,6 +59,7 @@
 						android:layout_height="match_parent"
 						android:gravity="center_vertical"
 						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_list_text_size"
 						tools:text="15 GB" />
 
 				</LinearLayout>

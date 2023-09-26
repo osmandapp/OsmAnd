@@ -1,5 +1,7 @@
 package net.osmand.plus.download.local.dialogs.viewholders;
 
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
 		super(itemView);
 		title = itemView.findViewById(R.id.title);
 		count = itemView.findViewById(R.id.count);
+		count.setTextSize(COMPLEX_UNIT_SP, 16);
 	}
 
 	public void bindView(@NonNull LocalCategory category) {
