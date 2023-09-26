@@ -24,7 +24,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	 * Use the same Commands factory to speed up new commands creation
 	 */
 	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
-	private InputDeviceProfile deviceProfile = InputDevice.NONE;
+	private InputDeviceProfile deviceProfile = null;
 
 	public KeyEventHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -72,10 +72,10 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			return null;
 		}
 		InputDeviceProfile inputDevice = getInputDeviceProfile();
-		return inputDevice.findCommand(keyCode);
+		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
 	}
 
-	@NonNull
+	@Nullable
 	private InputDeviceProfile getInputDeviceProfile() {
 		InputDeviceProfile selectedDevice = settings.getSelectedInputDevice();
 		if (!Objects.equals(deviceProfile, selectedDevice)) {

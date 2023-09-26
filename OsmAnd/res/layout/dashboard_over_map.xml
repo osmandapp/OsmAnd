@@ -74,6 +74,7 @@
                 android:layout_height="match_parent"
                 android:divider="@null"
                 android:fadeScrollbars="true"/>
+
         </FrameLayout>
 
     </FrameLayout>

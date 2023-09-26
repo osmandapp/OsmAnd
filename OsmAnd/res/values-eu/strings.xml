@@ -2291,7 +2291,7 @@
     <string name="srtm_purchase_header">Erosi eta instalatu \'Topografia\' gehigarria mailakatutako era bertikalak ikusteko.</string>
     <string name="hillshade_menu_download_descr">Deskargatu \'Erliebe-itzalak\' geruza mapan bertikaltasun itzalak ikusteko.</string>
     <string name="hillshade_purchase_header">Instalatu \'Topografia\' gehigarria mailakatutako area bertikalak ikusteko.</string>
-    <string name="srtm_menu_download_descr">Deskargatu eskualde honetako sestra-kurben mapa-geruza.</string>
+    <string name="srtm_menu_download_descr">Deskargatu eskualde honetako sestra-kurben mapa.</string>
     <string name="animate_my_location_desc">Maparen panoramika leuna mugimenduan dagoenean. Atzerapen txiki bat sartzen du.</string>
     <string name="shared_string_in_name">%1$s barne</string>
     <string name="osmand_extended_description_part4">Eskiatu
@@ -2332,11 +2332,11 @@
 \n• Mapan izenak nola bistaratu aukeratzen uzten dizu: zure hizkuntzan, tokiko hizkuntzan, edo ahoskera fonetikoa
 \n• Interneteko tesela mapak erakusten ditu, satelite ikuspegia (Bingek eskainia), hainbat gainazal, esaterako turismorako edo nabigaziorako GPX arrastoak eta azal gehigarriak gardentasun aldagarriarekin
 \n</string>
-    <string name="osmand_extended_description_part5">Bizikleta 
-\n• Bizikletentzako bideak aurki ditzakezu mapan 
-\n• Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du 
-\n• Zure abiadura eta garaiera ikusi ditzakezu 
-\n• GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu 
+    <string name="osmand_extended_description_part5">Bizikleta
+\n• Bizikletentzako bideak aurki ditzakezu mapan
+\n• Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du
+\n• Zure abiadura eta garaiera ikusi ditzakezu
+\n• GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu
 \n• Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
     <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak 
 \n• Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi 
@@ -2717,7 +2717,7 @@
     <string name="light_rs_render_descr">Gidatzeko estilo sinplea. Gaueko modu leuna, laranja estiloko errepide kontrastatuak, bigarren mailako mapako objektuak iluntzen ditu, topografia-ezaugarriak bezalako sestra-kurbak.</string>
     <string name="topo_render_descr">Bidezidor kirol eta mendiko bizikletarako. Irakurgarria kanpoaldean. Bide eta objektu naturalen kontrastea, ibilbide mota desberdinak, sestra-kurbak ezarpen aurreratuak, xehetasun gehiago. Azaleraren egonkortasunaren aukerak bidearen kalitatea bereizten du. Gau modurik ez.</string>
     <string name="touring_view_render_descr">Errepiderako kontraste eta xehetasun handiko estiloa. Lehenetsitako estiloaren konfigurazio aukera guztiak ditu eta ahal beste xehetasun erakusten ditu, bereziki errepideak, bideak eta bestelako garraio-bideak. Bide moten arteko bereizketa bisual argia. Egunez, gauez zein naturan erabiltzeko egokia.</string>
-    <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. sestra-kurbak, ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC/CAI eskalaren arabera marrazten dira, ur kiroletarako elementuak.</string>
+    <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. Ezaugarriak: ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC/CAI eskalaren arabera marrazten dira, ur kiroletarako elementuak, sestra-kurbak eta beste topografi elementuak.</string>
     <string name="access_intermediate_arrival_time">Tarteko iritsiera ordua</string>
     <string name="map_widget_intermediate_time">Tarteko denbora</string>
     <string name="quick_action_edit_actions">Editatu ekintzak</string>
@@ -3445,7 +3445,7 @@
     <string name="quick_action_terrain_descr">Mapako terreno geruza erakutsi edo ezkutatzeko botoia.</string>
     <string name="download_slope_maps">Malda</string>
     <string name="shared_string_hillshade">Erliebea</string>
-    <string name="terrain_empty_state_text">Muinoak edo maldak erakusten ditu mapan. Irakurri gehiago mapa mota hauei buruz gure webgunean.</string>
+    <string name="terrain_empty_state_text">Mendiko itzalak edo maldak erakusten ditu mapan. Irakurri gehiago mapa mota hauei buruz gure webgunean.</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Zoom mailak</string>
     <string name="shared_string_transparency">Gardentasuna</string>

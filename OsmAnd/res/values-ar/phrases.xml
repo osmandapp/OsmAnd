@@ -4631,4 +4631,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">الأمراض المعدية</string>
     <string name="poi_socket_typee_voltage">المقبس: النوع E: الجهد الكهربائي</string>
     <string name="poi_socket_typee_output">مأخذ التوصيل: نوع E: مخرج</string>
+    <string name="poi_checkpoint_cycling">نقطة ركوب الدراجات</string>
+    <string name="poi_socket_typee_yes">النوع E</string>
 </resources>

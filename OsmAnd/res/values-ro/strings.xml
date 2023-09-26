@@ -5421,4 +5421,16 @@
     <string name="app_mode_hang_gliding">Zbor cu parapanta</string>
     <string name="filter_screen_title">Filtru</string>
     <string name="help_article_start_with_name">Începeți cu OsmAnd</string>
+    <string name="about_osmand">Despre OsmAnd</string>
+    <string name="send_logcat_log_descr">Fișier jurnal detaliat</string>
+    <string name="help_article_widgets_markers_name">Widget-uri de marcare</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrează după nume</string>
+    <string name="help_article_troubleshooting_maps_data_name">Hărți &amp; Date</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Înregistrare track</string>
+    <string name="help_article_widgets_map_buttons_name">Butoane de hartă</string>
+    <string name="date_of_creation">Data creației</string>
+    <string name="help_article_widgets_info_widgets_name">Widget-uri informaționale</string>
+    <string name="help_article_widgets_name">Widgeturi de hărți</string>
 </resources>

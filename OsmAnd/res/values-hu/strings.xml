@@ -4355,7 +4355,7 @@
     <string name="history_actions_descr">Az előzményeket exportálhatja egy fájlba.</string>
     <string name="map_markers_history">Térképjelölők előzményei</string>
     <string name="navigation_history">Navigációs előzmények</string>
-    <string name="history_preferences_descr">Az előzmények naplózását külön-külön is letilthatja az egyes előzménytípusoknál.</string>
+    <string name="history_preferences_descr">Az előzmények naplózását egyesével kapcsolhatja ki minden előzménytípushoz.</string>
     <string name="shortcut_start_recording">Felvétel indítása</string>
     <string name="shortcut_navigate_to">Navigálás ide…</string>
     <string name="transparent_status_bar_descr">Térkép megjelenítése az állapotsor alatt</string>
@@ -4703,9 +4703,9 @@
     <string name="download_complete">A letöltés kész</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
-    <string name="trip_recording_downhill_widget_desc">Megjeleníti a jelenleg rögzített utazás összes ereszkedésének összegét.</string>
-    <string name="trip_recording_uphill_widget_desc">Megjeleníti a jelenleg rögzített utazás összes emelkedésének összegét.</string>
-    <string name="trip_recording_duration_widget_desc">Megjeleníti a jelenleg rögzített utazás időtartamát.</string>
+    <string name="trip_recording_downhill_widget_desc">Összeadja a jelenleg rögzített út lejtőinek hosszát.</string>
+    <string name="trip_recording_uphill_widget_desc">Összeadja a jelenleg rögzített út emelkedőinek hosszát.</string>
+    <string name="trip_recording_duration_widget_desc">Megjeleníti a jelenleg rögzített út idejét.</string>
     <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás hosszát.</string>
     <string name="true_bearing_wdiget_desc">A valódi észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
     <string name="relative_bearing_widget_desc">Megjeleníti a haladási iránya és a célpont közötti szöget.</string>
@@ -4722,9 +4722,9 @@
     <string name="time_to_intermediate_widget_desc">A widget megjeleníti az „Érkezési időt” vagy az első köztes célpontig „Hátralévő időt”. Az idő folyamatosan frissül a navigáció során, és a köztes pontot elhagyva frissül a következő köztes pontra vonatkozó időre.</string>
     <string name="auto_backup_preference_desc">Alapértelmezés szerint az Android biztonsági mentést készít a kedvencekről, a térkép-tokenekről és az OsmAnd beállításairól, hogy új eszközön vagy újratelepítés után vissza lehessen állítani ezeket. A mentés mérete legfeljebb 25 MB.
 \nHa az OsmAnd Cloudot használja, ez félreértésekhez vezethet az újratelepítés után.</string>
-    <string name="av_notes_audio_widget_desc">A widgetre koppintva hangjegyzetet készíthet.</string>
-    <string name="av_notes_photo_widget_desc">A widgetre koppintva fényképet készíthet.</string>
-    <string name="av_notes_video_widget_desc">A widgetre koppintva videofelvételt indíthat.</string>
+    <string name="av_notes_audio_widget_desc">A widget megérintésével hangjegyzetet készíthet.</string>
+    <string name="av_notes_photo_widget_desc">A widget megérintésével fényképet készíthet.</string>
+    <string name="av_notes_video_widget_desc">A widget megérintésével videót vehet fel.</string>
     <string name="duplacate_widget_added_snackbar">Egy ismétlődő widget lesz hozzáadva a listához.</string>
     <string name="second_marker_widget_desc">Beállíthatja a widgetet úgy, hogy a második térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
     <string name="first_marker_widget_desc">Beállíthatja a widgetet úgy, hogy az első térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
@@ -4769,7 +4769,7 @@
     <string name="map_markers_desc">A widget megjeleníti a távolságot vagy a becsült érkezési időt a térképjelölők listájában szereplő első két jelölőhöz.</string>
     <string name="quick_action_current_location_widget_descr">A jelenlegi helyet mutató widgetet a térképen megjelenítő vagy elrejtő kapcsoló.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
-    <string name="coordinates_widget_current_location_desc">Megjeleníti a jelenlegi hely földrajzi koordinátáit</string>
+    <string name="coordinates_widget_current_location_desc">Megjeleníti a jelenlegi helyzet földrajzi koordinátáit</string>
     <string name="coordinates_widget_current_location">Koordináták: jelenlegi hely</string>
     <string name="coordinates_widget_map_center_desc">Megjeleníti a jelenlegi térképközéppont földrajzi koordinátáit</string>
     <string name="quick_action_map_center_widget_descr">A térképközéppont-widgetet a térképen megjelenítő vagy elrejtő kapcsoló.</string>
