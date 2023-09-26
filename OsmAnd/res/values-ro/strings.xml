@@ -5433,4 +5433,20 @@
     <string name="date_of_creation">Data creației</string>
     <string name="help_article_widgets_info_widgets_name">Widget-uri informaționale</string>
     <string name="help_article_widgets_name">Widgeturi de hărți</string>
+    <string name="open_issue_on_github">Problema deschisă pe GitHub</string>
+    <string name="user_guide">Ghidul utilizatorului</string>
+    <string name="send_crash_log_descr">Conține numai informații despre accidente</string>
+    <string name="contact_us">Contactați-ne</string>
+    <string name="free_versions_descr">Descarcă și instalează versiunea gratuită a OsmAnd</string>
+    <string name="free_versions">Versiuni gratuite</string>
+    <string name="open_issue_on_github_descr">Puneți întrebări, propuneți caracteristici</string>
+    <string name="github_discussion">Discuție GitHub</string>
+    <string name="most_viewed">Cele mai vizualizate</string>
+    <string name="copy_build_version">Copiați versiunea de construcție</string>
+    <string name="help_article_widgets_radius_ruler_name">Radius-ruler și riglă</string>
+    <string name="telegram_chats_descr">Participă la una dintre discuțiile noastre locale prin telegram.</string>
+    <string name="report_an_issues">Raportați o problemă</string>
+    <string name="telegram_chats">Chat-uri pe Telegram</string>
+    <string name="help_article_widgets_nav_widgets_name">Widget-uri de navigație</string>
+    <string name="shared_string_setup">Configurare</string>
 </resources>
