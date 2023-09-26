@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/legend"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/content_padding"
+		android:layout_height="@dimen/content_padding"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/content_padding_small_half"
+		android:importantForAccessibility="no"
+		tools:src="@drawable/ic_action_circle"
+		tools:tint="?attr/active_color_basic" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/text"
+		style="@style/DescStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="center_vertical"
+		android:maxLines="1"
+		android:textColor="?android:textColorSecondary"
+		tools:text="@string/shared_string_resources" />
+
+</LinearLayout>

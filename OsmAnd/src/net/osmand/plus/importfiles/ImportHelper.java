@@ -232,6 +232,21 @@ public class ImportHelper {
 		}
 	}
 
+	public void handleImport(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri != null) {
+			String scheme = intent.getScheme();
+			if ("file".equals(scheme)) {
+				String path = uri.getPath();
+				if (!Algorithms.isEmpty(path)) {
+					handleFileImport(uri, new File(path).getName(), intent.getExtras(), true);
+				}
+			} else if ("content".equals(scheme)) {
+				handleContentImport(uri, intent.getExtras(), true);
+			}
+		}
+	}
+
 	public void handleFileImport(Uri intentUri, String fileName, Bundle extras, boolean useImportDir) {
 		boolean isFileIntent = "file".equals(intentUri.getScheme());
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(intentUri.getPath()));
