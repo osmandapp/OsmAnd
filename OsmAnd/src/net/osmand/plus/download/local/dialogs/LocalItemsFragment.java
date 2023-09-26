@@ -93,6 +93,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+		selectionHelper.clearSelectedItems();
 		updateContent();
 	}
 
