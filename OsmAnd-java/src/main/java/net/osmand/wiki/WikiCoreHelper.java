@@ -70,7 +70,7 @@ public class WikiCoreHelper {
 		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_GET_CLAIMS_P18 + wikidataId + FORMAT_JSON;
 		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
 		if (response != null && response.claims != null && response.claims.p18 != null) {
-			for (P18 p18 : response.claims.p18) {
+			for (Property p18 : response.claims.p18) {
 				String imageFileName = p18.mainsnak.datavalue.value;
 				if (imageFileName != null) {
 					wikiImages.add(getImageData(imageFileName));
@@ -83,7 +83,7 @@ public class WikiCoreHelper {
 		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_GET_CLAIMS_P373 + wikidataId + FORMAT_JSON;
 		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
 		if (response != null && response.claims != null && response.claims.p373 != null) {
-			for (P18 p373 : response.claims.p373) {
+			for (Property p373 : response.claims.p373) {
 				String imageFileName = WIKIMEDIA_CATEGORY + p373.mainsnak.datavalue.value;
 				getWikimediaImageList(imageFileName, wikiImages);
 			}
@@ -130,15 +130,15 @@ public class WikiCoreHelper {
 	}
 
 	public static class Claims {
-		@SerializedName("P18")
+		@SerializedName("P18") // image https://www.wikidata.org/wiki/Property:P18
 		@Expose
-		private final List<P18> p18 = null;
-		@SerializedName("P373")
+		private final List<Property> p18 = null;
+		@SerializedName("P373") // Commons category https://www.wikidata.org/wiki/Property:P373
 		@Expose
-		private final List<P18> p373 = null;
+		private final List<Property> p373 = null;
 	}
 
-	public static class P18 {
+	public static class Property {
 		@SerializedName("mainsnak")
 		@Expose
 		private Mainsnak mainsnak;
