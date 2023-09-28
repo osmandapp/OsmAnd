@@ -382,7 +382,7 @@ public class GeneralRouter implements VehicleRouter {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, dir);
-			if(obst == null) {
+			if (obst == null) {
 				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
 				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
 				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, dir);
