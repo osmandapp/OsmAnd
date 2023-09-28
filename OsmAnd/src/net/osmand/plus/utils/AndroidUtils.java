@@ -93,7 +93,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.util.Algorithms;
 
@@ -729,8 +728,7 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(@NonNull Activity activity, View view) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (!PluginsHelper.isDevelopment() || app.getSettings().TRANSPARENT_STATUS_BAR.get()) {
+		if (isInFullScreenMode(activity)) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();
@@ -867,8 +865,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isInFullScreenMode(Activity activity) {
-		int systemUiVisibility = activity.getWindow().getDecorView().getSystemUiVisibility();
-		return (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN) != 0;
+		int uiMode = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return (uiMode & View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN) != 0;
 	}
 
 	private static void requestLayout(View view) {
