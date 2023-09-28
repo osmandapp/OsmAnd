@@ -55,9 +55,7 @@ public class ShareMenu extends BaseMenuController {
 		NAME(R.drawable.ic_action_copy, R.string.copy_poi_name),
 		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
-		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code),
-		OSM_LINK(R.drawable.ic_action_copy, R.string.copy_osm_link);
-
+		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code);
 
 		final int iconResourceId;
 		final int titleResourceId;
@@ -89,7 +87,6 @@ public class ShareMenu extends BaseMenuController {
 		list.add(ShareItem.COORDINATES);
 		list.add(ShareItem.GEO);
 		list.add(ShareItem.QR_CODE);
-		list.add(ShareItem.OSM_LINK);
 		return list;
 	}
 
@@ -115,16 +112,6 @@ public class ShareMenu extends BaseMenuController {
 		if (mapActivity == null) {
 			return;
 		}
-
-		String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
-		String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
-		lat = lat.substring(0, lat.length() - 1);
-		lon = lon.substring(0, lon.length() - 1);
-		int zoom = mapActivity.getMapView().getZoom();
-		String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-		String httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
-		String osmUrl =  "https://www.openstreetmap.org/?mlat=" + lat + "&mlon=" + lon + "#map=12/" + lat + "/" + lon;
-
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
@@ -196,9 +183,6 @@ public class ShareMenu extends BaseMenuController {
 				bundle.putFloat("LAT", (float) latLon.getLatitude());
 				bundle.putFloat("LONG", (float) latLon.getLongitude());
 				sendQRCode(mapActivity, "LOCATION_TYPE", bundle, null);
-				break;
-			case OSM_LINK:
-				copyToClipboardWithToast(mapActivity, osmUrl, Toast.LENGTH_LONG);
 				break;
 		}
 	}
