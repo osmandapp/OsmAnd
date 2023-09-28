@@ -1106,6 +1106,13 @@ public class BinaryRoutePlanner {
 		public void setDistanceFromStart(float distanceFromStart) {
 			this.distanceFromStart = distanceFromStart;
 		}
+		
+		public int getDepth() {
+			if (parentRoute == null) {
+				return 0;
+			}
+			return this.parentRoute.getDepth() + 1;
+		}
 
 		public RouteDataObject getRoad() {
 			return road;
@@ -1150,6 +1157,8 @@ public class BinaryRoutePlanner {
 				}
 			};
 		}
+
+		
 	}
 
 	static class FinalRouteSegment extends RouteSegment {
