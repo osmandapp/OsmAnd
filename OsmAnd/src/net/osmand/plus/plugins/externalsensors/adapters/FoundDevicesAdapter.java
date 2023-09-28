@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.viewholders.FoundDeviceViewHolder;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -28,14 +29,16 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	protected final OsmandApplication app;
 	protected final ExternalSensorsPlugin plugin;
 	protected final boolean nightMode;
-	protected List<AbstractDevice<?>> items = new ArrayList<>();
+	protected List<AbstractDevice<? extends AbstractSensor>> items = new ArrayList<>();
 	protected DeviceClickListener deviceClickListener;
+	protected UiUtilities uiUtils;
 
 	public FoundDevicesAdapter(@NonNull OsmandApplication app, boolean nightMode, DeviceClickListener deviceClickListener) {
 		this.app = app;
 		this.plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		this.nightMode = nightMode;
 		this.deviceClickListener = deviceClickListener;
+		uiUtils = app.getUIUtilities();
 	}
 
 	@NonNull
@@ -43,19 +46,22 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	public FoundDeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.item_external_device, parent, false);
-		return new FoundDeviceViewHolder(view, nightMode);
+		return new FoundDeviceViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
+		holder.menuIcon.setVisibility(View.VISIBLE);
 		AbstractDevice<?> device = items.get(position);
 		DeviceType deviceType = device.getDeviceType();
 		holder.name.setText(plugin.getDeviceName(device));
-		holder.icon.setImageResource(nightMode ? deviceType.nightIconId : deviceType.dayIconId);
+		holder.icon.setImageResource(device.isConnected() ? (nightMode ? deviceType.nightIconId : deviceType.dayIconId) : deviceType.disconnectedIconId);
 		int rssi = device.getRssi();
 		Drawable signalLevelIcon;
 		UiUtilities uiUtils = app.getUIUtilities();
-		if (rssi > -50) {
+		if (!device.isConnected()) {
+			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_not_found, nightMode);
+		} else if (rssi > -50) {
 			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_high);
 		} else if (rssi > -70) {
 			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_middle);
@@ -66,10 +72,18 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 		boolean isBle = device instanceof BLEAbstractDevice;
 		String bleTextMarker = app.getString(R.string.external_device_ble);
 		String antTextMarker = app.getString(R.string.external_device_ant);
-		holder.description.setText(String.format(
-				app.getString(device.isConnected() ? R.string.bluetooth_connected : R.string.bluetooth_disconnected),
-				isBle ? bleTextMarker : antTextMarker));
-		holder.description.setCompoundDrawablesWithIntrinsicBounds(signalLevelIcon, null, null, null);
+		int connectedTextId;
+		if (device.isConnected()) {
+			connectedTextId = R.string.external_device_connected;
+		} else {
+			connectedTextId = R.string.external_device_disconnected;
+		}
+		holder.description.setText(app.getString(
+				R.string.ltr_or_rtl_combine_via_comma,
+				app.getString(connectedTextId),
+				isBle ? bleTextMarker : antTextMarker
+		));
+		holder.description.setCompoundDrawablesRelativeWithIntrinsicBounds(signalLevelIcon, null, null, null);
 		holder.description.setGravity(Gravity.CENTER_VERTICAL);
 		holder.itemView.setOnClickListener((v) -> {
 			if (deviceClickListener != null) {

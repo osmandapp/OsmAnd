@@ -128,6 +128,12 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		int visibility = feature.isAvailableInMapsPlus() ? View.VISIBLE : View.INVISIBLE;
 		AndroidUiHelper.setVisibility(visibility, view.findViewById(R.id.secondary_icon));
 
+		String osmandPro = getString(R.string.osmand_pro);
+		String osmandPlus = getString(R.string.osmand_plus);
+		String plan = feature.isAvailableInMapsPlus() ? getString(R.string.ltr_or_rtl_combine_via_or, osmandPlus , osmandPro) : osmandPro;
+		String contentDescription = getString(R.string.feature_available_as_part_of_plan, getString(feature.getListTitleId()), plan);
+		view.setContentDescription(contentDescription);
+
 		boolean isLastItem = feature == allFeatures.get(allFeatures.size() - 1);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !isLastItem);
 	}
@@ -171,7 +177,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, usedOnMap);
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, isUsedOnMap());
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}
@@ -192,7 +198,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 			String title = getString(selectedFeature.getTitleId());
 			((TextView) mainView.findViewById(R.id.header_title)).setText(title);
 
-			String desc = getString(selectedFeature.getDescriptionId());
+			String desc = selectedFeature.getDescription(app);
 			((TextView) mainView.findViewById(R.id.primary_description)).setText(desc);
 
 			String mapsPlus = getString(R.string.maps_plus);

@@ -227,6 +227,10 @@ public class SearchUICoreTest {
 		core.searchInternal(phrase, matcher);
 		SearchResultCollection collection = new SearchResultCollection(phrase);
 		collection.addSearchResults(matcher.getRequestResults(), true, true);
+		if (matcher.totalLimit != -1 && matcher.count > matcher.totalLimit) {
+			collection.setUseLimit(true);
+		}
+		
 		return collection.getCurrentSearchResults();
 	}
 

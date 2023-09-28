@@ -59,6 +59,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -82,7 +84,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
+import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -581,18 +583,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.audionotes_plugin_description);
 	}
 
 	@Override
 	public String getName() {
 		return app.getString(R.string.audionotes_plugin_name);
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/audio-video-notes-plugin.html";
 	}
 
 	@Override
@@ -751,7 +748,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case AV_NOTES_ON_REQUEST:
 				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION_CHOOSE);
@@ -1877,12 +1874,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		if (keyCode == KeyEvent.KEYCODE_CAMERA) {
-			makeAction(mapActivity, AV_DEFAULT_ACTION_CHOOSE);
-			return true;
+	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
+		deviceProfile.requestBindCommand(KeyEvent.KEYCODE_CAMERA, TakeMediaNoteCommand.ID);
+	}
+
+	@Override
+	public KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
+		if (commandId.equals(TakeMediaNoteCommand.ID)) {
+			return new TakeMediaNoteCommand();
 		}
-		return false;
+		return null;
 	}
 
 	@TargetApi(Build.VERSION_CODES.M)

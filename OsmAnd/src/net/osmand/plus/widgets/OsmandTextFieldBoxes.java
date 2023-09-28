@@ -54,6 +54,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		showClearButton();
 		clearButton.setColorFilter(null);
 		clearButton.setImageDrawable(clearIcon);
+		clearButton.setContentDescription(getContext().getString(R.string.shared_string_clear));
 	}
 
 	public void hideClearButton() {

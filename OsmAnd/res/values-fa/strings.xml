@@ -167,7 +167,6 @@
     <string name="recording_open_external_player">بازکردن پخش‌کنندهٔ خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
     <string name="map_widget_distancemeasurement">اندازه‌گیری مسافت</string>
-    <string name="index_srtm_parts">بخش‌ها</string>
     <string name="map_widget_show_destination_arrow">نشان‌دادن جهت مقصد</string>
     <string name="no_route">مسیری وجود ندارد</string>
     <string name="add_tag">افزودن برچسب</string>
@@ -347,7 +346,6 @@
     <string name="file_can_not_be_renamed">نام پرونده تغییر نکرد.</string>
     <string name="file_with_name_already_exists">پرونده‌ای با همین نام وجود دارد.</string>
     <string name="poi_filter_by_name">جست‌وجو بر اساس نام</string>
-    <string name="index_settings">مدیریت پرونده‌های نقشه</string>
     <string name="general_settings">عمومی</string>
     <string name="general_settings_descr">نما و تنظیمات عمومی برنامه را تنظیم کنید.</string>
     <string name="global_app_settings">تنظیمات کلی برنامه</string>
@@ -481,7 +479,6 @@
     <string name="default_buttons_commit">اجرا</string>
     <string name="download_srtm_maps">منحنی‌های میزان</string>
     <string name="srtm_plugin_name">منحنی‌های میزان</string>
-    <string name="index_srtm_ele">منحنی‌های میزان</string>
     <string name="download_roads_only_item">فقط جاده‌ها</string>
     <string name="rendering_attr_noAdminboundaries_description">مرزهای مناطق را نشان نده (تقسیمات سیاسی سطح ۵–۹).</string>
     <string name="incremental_search_city">جست‌وجوی حرف‌به‌حرف نام شهر</string>
@@ -1571,7 +1568,7 @@
     <string name="access_from_map">دسترسی از نقشه</string>
     <string name="versions_item">نسخه‌ها</string>
     <string name="feedback">بازخورد</string>
-    <string name="contact_us">تماس</string>
+    <string name="shared_string_contact">تماس</string>
     <string name="map_legend">کلید نقشه</string>
     <string name="save_poi_without_poi_type_message">نقطهٔ توجه را بدون مشخص‌کردن نوعش ذخیره می‌کنید؟</string>
     <string name="navigation_item_description">تنظیمات ناوبری را انجام دهید.</string>
@@ -1586,7 +1583,6 @@
     <string name="routing_attr_height_name">ارتفاع مجاز</string>
     <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
-    <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">مسیرهای پیاده‌گردی</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
     <string name="map_widget_battery">میزان شارژ باطری</string>
@@ -1606,7 +1602,6 @@
     <string name="action_create">کنش ایجاد</string>
     <string name="action_modify">کنش اصلاح</string>
     <string name="action_delete">کنش حذف</string>
-    <string name="rendering_attr_alpineHiking_name">مقیاس پیاده‌گردی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک مطابق دورهٔ انتخابی است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
@@ -2316,7 +2311,6 @@
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
     <string name="hillshade_layer_disabled">لایهٔ سایه‌روشن غیرفعال شد</string>
-    <string name="srtm_plugin_disabled">منحنی‌های میزان غیرفعال شد</string>
     <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">قطار خطی</string>
     <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز می‌کند</string>
@@ -2711,7 +2705,6 @@
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
-    <string name="contour_lines_hillshade_maps">منحنی‌های میزان و نقشه‌های سایه‌روشن</string>
     <string name="download_wikipedia_description">مقاله‌های ویکی‌سفر %1$s را بارگیری کنید تا آن‌ها را آفلاین بخوانید.</string>
     <string name="download_wikipedia_label">بارگیری دادهٔ ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
@@ -3209,7 +3202,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">راه هوایی</string>
     <string name="shared_string_calculate">محاسبه</string>
     <string name="shared_string_osmand_usage">کارکرد OsmAnd</string>
-    <string name="shared_sting_tiles">کاشی‌ها</string>
+    <string name="shared_string_tiles">کاشی‌ها</string>
     <string name="shared_string_maps">نقشه‌ها</string>
     <string name="shared_string_memory_tb_desc">%1$s ترابایت</string>
     <string name="shared_string_memory_gb_desc">%1$s گیگابایت</string>
@@ -3224,7 +3217,6 @@
     <string name="shared_string_memory_used_gb_desc">استفاده‌شده %1$s گیگابایت</string>
     <string name="shared_string_memory_used_mb_desc">استفاده‌شده %1$s مگابایت</string>
     <string name="shared_string_memory_used_kb_desc">استفاده‌شده %1$s کیلوبایت</string>
-    <string name="contour_lines_and_hillshade">سایه‌روشن و منحنی‌های میزان</string>
     <string name="routing_attr_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
     <string name="routing_attr_prefer_unpaved_description">اولویت را به جاده‌های روسازی‌نشده می‌دهد.</string>
     <string name="update_all_maps">روزآمدسازی همهٔ نقشه‌ها</string>
@@ -3356,8 +3348,6 @@
     <string name="live_monitoring_time_buffer">مدت حافظهٔ تأخیری</string>
     <string name="live_monitoring_tracking_interval">تناوب ردیابی</string>
     <string name="live_monitoring_adress">نشانی وب</string>
-    <string name="live_monitoring_adress_descr">نشانی اینترنتی را با این پارامترها تعریف کنید: 
-\nlat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_descr">اجازه می‌دهد موقعیت کنونی با استفاده از ضبط سفر هم‌رسانی شود.</string>
     <string name="tracks_view_descr">ردهای ضبط‌شدهٔ شما در %1$s یا در پوشهٔ OsmAnd قرار دارند.</string>
     <string name="multimedia_notes_view_descr">یادداشت‌های OSMای شما در %1$s قرار دارند.</string>
@@ -3902,7 +3892,6 @@
     <string name="routing_engine_vehicle_type_bike">دوچرخه</string>
     <string name="routing_engine_vehicle_type_car">خودرو</string>
     <string name="app_restart_required">برای به کار بستن برخی تنظیمات، لازم است برنامه باز و بسته شود.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">پنهان‌کردن مرز ذخیره‌گاه‌های طبیعی، مناطق حفاظت‌شده و پارک‌های ملی.</string>
     <string name="last_time_checked">آخرین زمان بررسی: %s</string>
     <string name="latest_openstreetmap_update">آخرین روزآمدسازهٔ اوپن‌استریت‌مپ:</string>
     <string name="updated">روزآمدشده: %s</string>
@@ -3913,7 +3902,6 @@
     <string name="track_recording_will_be_continued">ضبط ادامه می‌یابد.</string>
     <string name="copy_poi_name">کپی نام نقطهٔ توجه</string>
     <string name="quick_action_show_hide_title">آشکار/پنهان‌سازی</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">مرزهای حفاظت محیط‌زیست</string>
     <string name="track_has_no_altitude">رد فاقد دادهٔ ارتفاع است.</string>
     <string name="track_has_no_speed">رد فاقد دادهٔ سرعت است.</string>
     <string name="routing_attr_short_way_description">مسیر کوتاه‌ترِ بهینه (صرفه‌جویی انرژی)</string>
@@ -4212,7 +4200,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین دست یابید.</string>
     <string name="unlimited_map_downloads">بارگیری‌های نامحدود نقشه</string>
     <string name="wikipedia_and_wikivoyage_offline">ویکی‌پدیا و ویکی‌سفر آفلاین</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="offline_wikipeadia">ویکی‌پدیای آفلاین</string>
     <string name="offline_wikivoyage">ویکی‌سفر آفلاین</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
@@ -4229,7 +4216,7 @@
     <string name="backup_error_subscription_was_used">اشتراک یا کد تبلیغی را حساب دیگری استفاده کرده است %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">پرونده باید در قالب ‎.gzip فرستاده شود</string>
     <string name="backup_error_file_not_available">پرونده در دسترس نیست</string>
-    <string name="contour_lines_hillshades_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
+    <string name="contour_lines_hillshade_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="duration_moment_ago">لحظه‌ای پیش</string>
     <string name="backup_deleting_all_data">در حال حذف همهٔ داده‌ها…</string>
     <string name="backup_data_removed">همهٔ داده‌ها حذف شد.</string>
@@ -4258,7 +4245,6 @@
     <string name="explore_wikipedia_offline">ویکی‌پدیا را آفلاین کاوش کنید.</string>
     <string name="app_mode_go_cart">خودروی کارتینگ</string>
     <string name="backup_conflicts">تداخل‌ها</string>
-    <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
     <string name="nautical_depth">عمق دریایی</string>
     <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
     <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دست یابید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده بارگیری می‌شوند.</string>
@@ -4271,7 +4257,6 @@
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="option_available_only_in_osmand_pro">این گزینه با اشتراک OsmAnd Pro فعال می‌شود.</string>
     <string name="purchases_feature_desc_pro_widgets">به قابلیت‌های OsmAnd Pro دست یابید: رنگ مسیر و بیشتر.</string>
     <string name="explore_osmnad_plans_to_find_suitable">در میان طرح‌های OsmAnd کاوش کنید تا طرح مناسب خود را بیابید.</string>

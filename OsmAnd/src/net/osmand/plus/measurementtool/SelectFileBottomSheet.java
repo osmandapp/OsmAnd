@@ -208,6 +208,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		for (String name : getFolderNames()) {
 			ChipItem item = new ChipItem(name);
 			item.title = name;
+			item.contentDescription = name;
 			chipItems.add(item);
 		}
 		return chipItems;

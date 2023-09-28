@@ -143,7 +143,6 @@ MB)をダウンロードしますか?</string>
     <string name="general_settings_descr">アプリの表示オプションや共通の設定をおこないます。</string>
     <string name="general_settings">全般設定</string>
     <string name="index_settings_descr">マップなどのデータを取得/更新します</string>
-    <string name="index_settings">マップデータ等管理</string>
     <string name="osmand_service">バックグラウンドモード</string>
     <string name="osmand_service_descr">画面オフの間もOsmAndはバックグラウンドモードで動作します</string>
     <string name="fast_route_mode">最速ルート</string>
@@ -897,8 +896,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">マップ内ボタンや位置情報のコンテキストメニューから、旅行中の音声/写真/動画メモを取ることができます。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
-    <string name="index_srtm_parts">パート</string>
-    <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">等高線、起伏、勾配などの地形情報は、地形配置、起伏、航行の可能性などを視覚的に評価するのに役立ちます。地形情報は、勾配の陰影、等高線、勾配の度合いによる色付けでマップに表すことができます。
 \n
 \n基礎となるデータは、SRTM(スペースシャトル立体地形データ)およびASTER(資源探査用将来型センサ)に由来します。
@@ -1094,7 +1091,7 @@ POIの更新は利用できません</string>
 \nタイルマップはオンラインで直接ダウンロードするか、さまざまなサードパーティ製マップ作成ツールで作成されたSQLiteデータベースを事前に準備(OsmAndのデータフォルダーに手動でコピー)しておけばオフラインで使用することができます。</string>
     <string name="osm_editing_plugin_description">世界地図を包括的に管理し、すべてのユーザーが最新のオープンソースデータを利用できるようにするグローバルコミュニティであるOpenStreetMapに貢献してください。
 \n
-\n地図の編集方法は、弊社ウェブサイト https://osmand.net/docs/user/plugins/osm-editing に掲載されています。</string>
+\n地図の編集方法は、弊社ウェブサイト %1$s に掲載されています。</string>
     <string name="amenity_type_osmwiki">ウィキペディア(オフライン)</string>
     <string name="keep_and_add_destination_point">その後の目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
@@ -1282,8 +1279,6 @@ POIの更新は利用できません</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路分類を利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
-    <string name="rendering_attr_alpineHiking_name">アルペンハイキングスケール(SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">ハイキングルート</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写します。</string>
     <string name="interrupt_music_descr">有効にすると音声案内時に音楽を一時停止します</string>
@@ -1317,7 +1312,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_pedestrian_name">徒歩</string>
     <string name="record_plugin_description">ドライブやトレーニング時の経路を記録し、速度、累積登坂・降坂、標高プロファイルなどの観点からデータを分析することができます。記録した経路は、アーカイブしたり、友人と共有したり、編集などの後処理も行えます。
 \n
-\n詳しくは https://osmand.net/docs/user/plugins/trip-recording をご覧下さい。</string>
+\n詳しくは %1$s をご覧下さい。</string>
     <string name="record_plugin_name">旅程・経路記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
@@ -1482,7 +1477,7 @@ POIの更新は利用できません</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしますか？</string>
     <string name="plugin_nautical_descr">航路、ビーコン、海上の危険エリア、航行や係留が禁止されているエリアなどの情報で海図を充実させます。使用するには、対応する海図をダウンロードし[マップ設定]＞[マップスタイル]＞[船舶]を有効にしてください。
 \n
-\n詳しくは、https://osmand.net/docs/user/plugins/nautical-charts をご参照下さい。</string>
+\n詳しくは、%1$s をご参照下さい。</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
     <string name="plugin_ski_descr">ウィンタースポーツエリアでのナビゲーション用に設計されています。スキー場、スキーリフト、クロスカントリースキーコースを、難易度を示す色のついた線で見ることができます。この拡張機能を利用するには、プラグインを有効にしてから\"マップ設定\"内のマップスタイルで\"ウィンター＆スキー\"を選択します。</string>
     <string name="rename_failed">リネーム出来ませんでした</string>
@@ -1666,7 +1661,6 @@ POIの更新は利用できません</string>
     <string name="region_maps">広域マップ</string>
     <string name="world_maps">世界地図</string>
     <string name="hillshade_layer_disabled">陰影起伏図レイヤー表示無効</string>
-    <string name="srtm_plugin_disabled">等高線無効</string>
     <string name="favorite_category_add_new">新規追加</string>
     <string name="favorite_category_select">カテゴリーを選択</string>
     <string name="default_speed_system_descr">速度の単位を設定します</string>
@@ -1776,7 +1770,7 @@ POIの更新は利用できません</string>
     <string name="techical_articles_item">技術的項目</string>
     <string name="versions_item">バージョン履歴</string>
     <string name="feedback">フィードバック</string>
-    <string name="contact_us">問い合わせ先</string>
+    <string name="shared_string_contact">問い合わせ先</string>
     <string name="map_legend">マップの簡易説明</string>
     <string name="save_poi_without_poi_type_message">種類を指定せずにPOIを保存しますか？</string>
     <string name="poi_context_menu_modify_osm_change">修正をOSMに反映</string>
@@ -2660,7 +2654,6 @@ POIの更新は利用できません</string>
     <string name="in_app_purchase_desc_ex">買いきりの場合、期限を問わず利用可能です。</string>
     <string name="purchase_unlim_title">購入 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyageオフライン</string>
-    <string name="contour_lines_hillshade_maps">等高線と陰影起伏図</string>
     <string name="unlock_all_features">OsmAnd機能のすべてをアンロック</string>
     <string name="purchase_dialog_title">プランの選択</string>
     <string name="purchase_dialog_subtitle">適切な項目を選択してください</string>
@@ -3162,7 +3155,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
     <string name="shared_string_calculate">計算する</string>
     <string name="shared_string_osmand_usage">OsmAndの合計使用容量</string>
-    <string name="shared_sting_tiles">タイル</string>
+    <string name="shared_string_tiles">タイル</string>
     <string name="shared_string_maps">マップ</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3177,7 +3170,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB使用</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB使用</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB 使用</string>
-    <string name="contour_lines_and_hillshade">等高線と陰影起伏図</string>
     <string name="routing_attr_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
     <string name="update_all_maps">すべてのマップを更新</string>
@@ -3321,7 +3313,6 @@ POIの更新は利用できません</string>
     <string name="live_monitoring_time_buffer">タイムバッファ</string>
     <string name="live_monitoring_tracking_interval">追跡間隔</string>
     <string name="live_monitoring_adress">ウェブアドレス</string>
-    <string name="live_monitoring_adress_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
     <string name="monitoring_notification">通知</string>
     <string name="monitoring_min_speed">最低速度</string>
     <string name="monitoring_min_accuracy">最小精度</string>
@@ -3885,7 +3876,7 @@ POIの更新は利用できません</string>
     <string name="toast_select_edits_for_upload">アップロードする編集を選択</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
     <string name="open_place_reviews_plugin_description">"OpenPlaceReviewsプロジェクトに貢献しましょう。例えば、レストラン、ホテル、美術館のような公共の場所の写真、レビュー、リンクなどを投稿してください。
-\n貢献の方法については、私たちのウェブサイトhttps://osmand.net/docs/user/plugins/openplacereviews  を参照してください。"</string>
+\n貢献の方法については、私たちのウェブサイト%1$s  を参照してください。"</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.orgを使用</string>
     <string name="login_open_place_reviews">OpenPlaceReviewsにログイン</string>
@@ -3931,8 +3922,6 @@ POIの更新は利用できません</string>
     <string name="copy_poi_name">POI名をコピー</string>
     <string name="quick_action_show_hide_title">表示/非表示</string>
     <string name="shared_string_interval">間隔</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">自然保護区、保護地域、国立公園の境界を非表示にします。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">自然保護区の境界</string>
     <string name="track_has_no_altitude">経路には標高データは含まれていません。</string>
     <string name="track_has_no_speed">経路には速度データは含まれていません。</string>
     <string name="select_another_colorization">別タイプのカラーリングを選択してください。</string>
@@ -4134,10 +4123,8 @@ POIの更新は利用できません</string>
     <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloudを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
     <string name="unlimited_map_downloads">マップの無制限ダウンロード</string>
     <string name="wikipedia_and_wikivoyage_offline">WikipediaとWikivoyageはオフライン</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">地形マップ:等高線、陰影起伏図、傾斜</string>
     <string name="offline_wikipeadia">オフラインWikipedia</string>
     <string name="offline_wikivoyage">オフラインWikivoyage</string>
-    <string name="terrain_maps">地形マップ</string>
     <string name="nautical_depth">水深</string>
     <string name="you_can_get_feature_as_part_of_pattern">\"%1$s\"が利用可能なプラン:%2$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
@@ -4386,7 +4373,7 @@ POIの更新は利用できません</string>
     <string name="logout_from_osmand_cloud_decsr">ログアウトしますか？
 \nデータをバックアップまたは復元するには、再度ログインする必要があります。</string>
     <string name="logout_from_osmand_cloud">OsmAnd Cloudからログアウト</string>
-    <string name="contour_lines_hillshades_slope">等高線、陰影起伏、勾配</string>
+    <string name="contour_lines_hillshade_slope">等高線、陰影起伏、勾配</string>
     <string name="backup_error_subscription_was_expired_descr">OsmAnd Proのサブスクリプション期限が切れているので、データのバックアップを継続利用するのであれば更新してください。引き続きクラウドからデータを復元できるようになります。</string>
     <string name="rendering_attr_natureReserves_name">自然保護区</string>
     <string name="rendering_attr_natureReserves_description">自然保護区、保護地域、国立公園を表示します。</string>
@@ -4689,7 +4676,7 @@ POIの更新は利用できません</string>
 \n- 位置に応じたウィジェット
 \n- 温度/気圧の分布図
 \n
-\n気象データは、Global Forecast System (GFS、https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ) によって提供されています。</string>
+\n気象データは、Global Forecast System (GFS、%1$s) によって提供されています。</string>
     <string name="shared_string_weather">天候</string>
     <string name="shared_string_contours">輪郭</string>
     <string name="measurement_units">測定単位</string>
@@ -4940,7 +4927,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_normal">中</string>
     <string name="distance_by_tap_use_description">マップをタップすると、現在地とタップした地点の間の距離が表示されます。
 \nマップ上を2本指でタップすると、タップした地点間の距離が表示されます</string>
-    <string name="shared_string_2_5_d_view">2.5D表示</string>
     <string name="without_profiles_changing">プロファイルを変更しない</string>
     <string name="included_in_your_current_plan">現在の\"%1$s\"プランに含まれています</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBA基準トレイルを表示</string>
@@ -4953,8 +4939,6 @@ POIの更新は利用できません</string>
     <string name="compass_visible_if_map_rotated">マップが回転している場合に表示</string>
     <string name="compass_click_desc">ヒント:コンパスウィジェットをタップして、マップの方向モードを切り替えます。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深線の配色</string>
-    <string name="accessibility_2d_view_off">2.5D表示をOFF</string>
-    <string name="accessibility_2d_view_on">2.5D表示をON</string>
     <string name="goods_delivery_desc_3">3.5トン以下の配送トラックにのみ適用されます。</string>
     <string name="goods_delivery_desc">一部の道路では配送車両が制限される場合があります。</string>
     <string name="routing_attr_motor_type_electric_name">電気</string>
@@ -5125,7 +5109,6 @@ POIの更新は利用できません</string>
     <string name="generate_slope_from_3d_maps">3Dマップから2D化した勾配マップを生成する</string>
     <string name="enable_3d_maps">3Dマップを有効にする</string>
     <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
-    <string name="test_heightmap">標高マップのテスト</string>
     <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
     <string name="shared_string_all_world">世界中</string>
     <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>
@@ -5135,4 +5118,5 @@ POIの更新は利用できません</string>
     <string name="offline_weather_forecast_desc">7日分の天気予報をダウンロードすることができます。</string>
     <string name="nautical_depth_points">水深点(最高深度)</string>
     <string name="inch">インチ</string>
+    <string name="shared_string_visible_on_map">地図で表示</string>
 </resources>

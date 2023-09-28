@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
 import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,6 @@ import java.util.List;
 
 public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistancePcc> {
 
-	private static final double WHEEL_CIRCUMFERENCE = 2.1; //The wheel circumference in meters, used to calculate speed
 
 	private BikeSpeedData lastBikeSpeedData;
 
@@ -57,7 +57,7 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.map_widget_ant_bicycle_speed, -1, calculatedSpeed));
+					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, R.string.m_s, calculatedSpeed));
 		}
 
 		@NonNull
@@ -71,7 +71,7 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
 			return Collections.singletonList(
-					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, -1, calculatedSpeed));
+					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, R.string.m_s, calculatedSpeed));
 		}
 
 		@NonNull
@@ -98,6 +98,10 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		return "Bicycle Speed";
 	}
 
+	private AntBikeSpeedDistanceDevice getBikeSpeedDistanceDevice() {
+		return (AntBikeSpeedDistanceDevice) device;
+	}
+
 	@NonNull
 	@Override
 	public List<SensorWidgetDataFieldType> getSupportedWidgetDataFieldTypes() {
@@ -112,21 +116,25 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(new BigDecimal(WHEEL_CIRCUMFERENCE)) {
-			@Override
-			public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
-				lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());
-				getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
-			}
-		});
+		AntPlusBikeSpeedDistancePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeCalculatedSpeedEvent(null);
+			pcc.subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(BigDecimal.valueOf(getBikeSpeedDistanceDevice().getWheelCircumference())) {
+				@Override
+				public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
+					lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());//m/s
+					getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
+				}
+			});
+		}
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikeSpeedData data = lastBikeSpeedData;
 		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
 		if (calculatedSpeed > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(calculatedSpeed));
+			json.put(SENSOR_TAG_SPEED, DECIMAL_FORMAT.format(calculatedSpeed));
 		}
 	}
 }

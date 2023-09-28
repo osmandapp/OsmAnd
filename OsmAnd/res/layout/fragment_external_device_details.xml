@@ -1,296 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/activity_background_color"
-    android:orientation="vertical">
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+	<LinearLayout
+		android:id="@+id/content"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/content_padding_small"
-            android:background="?attr/card_and_list_background_basic"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/appbar_and_list_background_color"
+			android:elevation="2dp"
+			android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/close_button"
-                style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-                android:layout_width="@dimen/toolbar_height"
-                android:layout_height="@dimen/toolbar_height"
-                android:contentDescription="@string/access_shared_string_navigate_up"
-                android:tint="?attr/default_icon_color"
-                osmand:srcCompat="@drawable/ic_arrow_back" />
+			<ImageButton
+				android:id="@+id/close_button"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+				android:layout_width="@dimen/toolbar_height"
+				android:layout_height="@dimen/toolbar_height"
+				android:contentDescription="@string/access_shared_string_navigate_up"
+				android:tint="?attr/default_icon_color"
+				osmand:srcCompat="@drawable/ic_arrow_back" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/widget_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/content_padding"
-                    android:background="@drawable/bg_widget_type_icon"
-                    android:scaleType="center"
-                    tools:src="@drawable/widget_sensor_distance_day" />
+				<ImageView
+					android:id="@+id/widget_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="@drawable/bg_widget_type_icon_light"
+					android:scaleType="center"
+					tools:src="@drawable/widget_sensor_distance_day" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/content_padding"
-                    android:layout_marginBottom="@dimen/content_padding"
-                    android:orientation="vertical">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/device_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Wohoo"
-                        android:textSize="@dimen/dialog_header_text_size" />
+					<TextView
+						android:id="@+id/device_name"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="@dimen/dialog_header_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:text="Wohoo" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="0dp"
+						android:layout_weight="1"
+						android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/connection_state_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            tools:src="@drawable/ic_action_signal_high" />
+						<ImageView
+							android:id="@+id/connection_state_icon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="bottom"
+							tools:src="@drawable/ic_action_signal_high" />
 
-                        <TextView
-                            android:id="@+id/connection_state"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/content_padding_small_half"
-                            android:gravity="bottom|start"
-                            android:textColor="?android:textColorSecondary"
-                            android:textSize="@dimen/default_desc_text_size"
-                            tools:text="Disconnected" />
+						<TextView
+							android:id="@+id/connection_state"
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:layout_marginStart="@dimen/content_padding_small_half"
+							android:gravity="bottom|start"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_desc_text_size"
+							tools:text="Disconnected" />
 
-                    </LinearLayout>
+					</LinearLayout>
 
-                </LinearLayout>
+				</LinearLayout>
 
-            </LinearLayout>
+			</LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/pair_btn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dialog_button_height"
-                android:layout_margin="@dimen/content_padding">
+			<FrameLayout
+				android:id="@+id/pair_btn"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_margin="@dimen/content_padding">
 
-                <FrameLayout
-                    android:id="@+id/button_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:duplicateParentState="true"
-                    tools:ignore="UselessParent">
+				<FrameLayout
+					android:id="@+id/button_container"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:duplicateParentState="true"
+					tools:ignore="UselessParent">
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/button_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:drawablePadding="@dimen/content_padding_half"
-                        android:duplicateParentState="true"
-                        android:gravity="center"
-                        android:paddingStart="@dimen/content_padding_small"
-                        android:paddingLeft="@dimen/content_padding_small"
-                        android:paddingEnd="@dimen/content_padding_small"
-                        android:paddingRight="@dimen/content_padding_small"
-                        android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_medium"
-                        tools:text="Pair" />
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/button_text"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center"
+						android:drawablePadding="@dimen/content_padding_half"
+						android:duplicateParentState="true"
+						android:gravity="center"
+						android:paddingStart="@dimen/content_padding_small"
+						android:paddingLeft="@dimen/content_padding_small"
+						android:paddingEnd="@dimen/content_padding_small"
+						android:paddingRight="@dimen/content_padding_small"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:text="Pair"
+						tools:visibility="gone" />
 
-                </FrameLayout>
-            </FrameLayout>
-        </LinearLayout> <!--HEADER-->
+					<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+						android:id="@+id/progress_bar"
+						style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+						android:layout_width="120dp"
+						android:layout_height="4dp"
+						android:layout_gravity="center"
+						android:indeterminate="true"
+						android:visibility="gone"
+						osmand:mpb_progressStyle="horizontal"
+						osmand:mpb_useIntrinsicPadding="false"
+						tools:visibility="visible" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_padding_small"
-            android:layout_marginBottom="@dimen/content_padding_small"
-            android:background="?attr/card_and_list_background_basic"
-            android:orientation="vertical">
+				</FrameLayout>
+			</FrameLayout>
+		</LinearLayout> <!--HEADER-->
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/content_padding"
-                android:text="@string/external_device_details_information"
-                android:textSize="@dimen/default_list_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding_half">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="5sp"
-                    android:padding="@dimen/content_padding"
-                    android:text="@string/external_device_details_connection"
-                    android:textSize="@dimen/default_list_text_size" />
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/connection_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:lineSpacingExtra="5sp"
-                    android:padding="@dimen/content_padding"
-                    android:text="-"
-                    android:textSize="@dimen/default_list_text_size" />
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/external_device_details_information"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_medium" />
 
-            </LinearLayout>
+					<LinearLayout
+						android:id="@+id/connection_type_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_connection"
+						android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_details_connection"
+							android:textSize="@dimen/default_list_text_size" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="5sp"
-                    android:padding="@dimen/content_padding"
-                    android:text="@string/external_device_details_battery"
-                    android:textSize="@dimen/default_list_text_size" />
+						<TextView
+							android:id="@+id/connection_type"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="-"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
 
-                <TextView
-                    android:id="@+id/battery_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:lineSpacingExtra="5sp"
-                    android:padding="@dimen/content_padding"
-                    android:text="-"
-                    android:textSize="@dimen/default_list_text_size" />
+					</LinearLayout>
 
-            </LinearLayout>
+					<include
+						layout="@layout/divider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding" />
 
-        </LinearLayout>
+					<LinearLayout
+						android:id="@+id/battery_level_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_battery"
+						android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_padding_small"
-            android:background="?attr/card_and_list_background_basic"
-            android:orientation="vertical">
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_details_battery"
+							android:textSize="@dimen/default_list_text_size" />
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/content_padding"
-                android:text="@string/external_device_details_received_data"
-                android:textSize="@dimen/default_list_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+						<TextView
+							android:id="@+id/battery_level"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="-"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/received_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/device_characteristic_item" />
+					</LinearLayout>
 
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal">-->
+				</LinearLayout>
 
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="@string/external_device_details_speed"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/speed"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical|right"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="-"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/external_device_details_received_data"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_medium" />
 
-            <!--            </LinearLayout>-->
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal">-->
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/received_data"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+						tools:listitem="@layout/device_characteristic_item" />
 
-            <!--                <net.osmand.plus.widgets.TextViewEx-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="@string/external_device_details_total_distance"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+				</LinearLayout>
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/total_distance"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical|right"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="-"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
 
-            <!--            </LinearLayout>-->
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal">-->
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/shared_string_settings"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_medium" />
 
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="@string/external_device_details_distance"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+					<LinearLayout
+						android:id="@+id/name_property_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_sensor_name_property_description"
+						android:orientation="vertical"
+						android:padding="@dimen/content_padding">
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/distance"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical|right"-->
-            <!--                    android:lineSpacingExtra="5sp"-->
-            <!--                    android:padding="@dimen/content_padding"-->
-            <!--                    android:text="-"-->
-            <!--                    android:textSize="@dimen/default_list_text_size" />-->
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:text="@string/shared_string_name"
+							android:textSize="@dimen/default_list_text_size" />
 
-            <!--            </LinearLayout>-->
+						<TextView
+							android:id="@+id/property_name"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|start"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="Sensor name" />
 
-        </LinearLayout>
+					</LinearLayout>
 
-    </LinearLayout>
+					<include
+						layout="@layout/divider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding" />
+
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/changeable_properties"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layoutDirection="inherit"
+						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+					<LinearLayout
+						android:id="@+id/forget_device_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_forget_sensor"
+						android:orientation="horizontal">
+
+						<TextView
+							android:id="@+id/forget_btn"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_forget_sensor"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<ImageView
+							android:id="@+id/forget_icon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="@dimen/content_padding"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:src="@drawable/ic_action_sensor_remove"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</LinearLayout>
 
 </LinearLayout>

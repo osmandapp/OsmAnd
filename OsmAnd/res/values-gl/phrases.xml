@@ -1659,7 +1659,7 @@
     <string name="poi_socket_type2_combo_yes">Tipo 2 combinado</string>
     <string name="poi_socket_type3_yes">Tipo 3</string>
     <string name="poi_payment_contactless_no">Non se admiten tarxetas sen contacto (Contactless)</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Medicina de urxencia</string>
+    <string name="poi_health_specialty_emergency_yes">Medicina de urxencia</string>
     <string name="poi_health_specialty_emergency_medicine_no">Especialidade en saúde: sen medicina de urxencia</string>
     <string name="poi_emergency_yes">Urxencias: si</string>
     <string name="poi_emergency_no">Urxencias: non</string>
@@ -2044,9 +2044,7 @@
     <string name="poi_boat_dinghy_rental_yes">Botes: si</string>
     <string name="poi_boat_kayak_rental_yes">Caiaques: si</string>
     <string name="poi_boat_canoe_rental_yes">Canoas: si</string>
-    <string name="poi_car_yes">Automóbil: si</string>
     <string name="poi_scooter_yes">Scooter: si</string>
-    <string name="poi_truck_yes">Camións: si</string>
     <string name="poi_climbing_sport_yes">Deporte: si</string>
     <string name="poi_climbing_boulder_yes">Búlder: si</string>
     <string name="poi_climbing_toprope_yes">Moulinette: si</string>
@@ -2956,7 +2954,7 @@
     <string name="poi_health_specialty_general_yes">Médico xeral</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
     <string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+    <string name="poi_health_specialty_internal_yes">Medicina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringoloxía</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatría</string>
@@ -2985,7 +2983,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurxía maxilofacial</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radioloxía diagnóstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloxía</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontoloxía</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontoloxía</string>
     <string name="poi_health_specialty_nephrology_yes">Nefroloxía (doenzas renais)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurocirurxía</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
@@ -3009,7 +3007,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Terapia da fala</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manual</string>
     <string name="poi_health_specialty_sports_medicine_yes">Medicina deportiva</string>
-    <string name="poi_health_specialty_podology_yes">Podoloxía</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloxía</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatría adulta</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
@@ -3864,7 +3862,7 @@
     <string name="poi_mobile_money_agent">Axente de diñeiro móbil</string>
     <string name="poi_lavoir">Lavadoiro</string>
     <string name="poi_waste_transfer_station">Estación de transferencia de residuos</string>
-    <string name="poi_weightbridge">Balanza</string>
+    <string name="poi_weighbridge">Balanza</string>
     <string name="poi_ranger_station">Posto de garda forestal</string>
     <string name="poi_water_source_lake">Lago</string>
     <string name="poi_water_source_river">Río</string>

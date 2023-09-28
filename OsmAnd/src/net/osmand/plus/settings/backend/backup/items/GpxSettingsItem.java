@@ -5,11 +5,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -18,8 +17,8 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 
@@ -92,12 +91,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 					readItem = !gpxDbHelper.add(dataItem);
 				}
 				if (readItem) {
-					dataItem = gpxDbHelper.getItem(savedFile, new GpxDataItemCallback() {
-						@Override
-						public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-							updateGpxParams(item);
-						}
-					});
+					dataItem = gpxDbHelper.getItem(savedFile, this::updateGpxParams);
 				}
 				if (dataItem != null) {
 					updateGpxParams(dataItem);
@@ -119,23 +113,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
-		gpxDbHelper.updateColor(dataItem, appearanceInfo.color);
-		gpxDbHelper.updateWidth(dataItem, appearanceInfo.width);
-		gpxDbHelper.updateShowArrows(dataItem, appearanceInfo.showArrows);
-		gpxDbHelper.updateShowStartFinish(dataItem, appearanceInfo.showStartFinish);
-		gpxDbHelper.updateSplit(dataItem, splitType, appearanceInfo.splitInterval);
-		gpxDbHelper.updateColoringType(dataItem, appearanceInfo.coloringType);
+		app.getGpxDbHelper().updateAppearance(dataItem, appearanceInfo.color, appearanceInfo.width,
+				appearanceInfo.showArrows, appearanceInfo.showStartFinish, splitType.getType(),
+				appearanceInfo.splitInterval, appearanceInfo.coloringType);
 	}
 
 	private void createGpxAppearanceInfo() {
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				appearanceInfo = new GpxAppearanceInfo(item);
-			}
-		});
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(item));
 		if (dataItem != null) {
 			appearanceInfo = new GpxAppearanceInfo(dataItem);
 		}
@@ -143,7 +128,8 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	private void updateFile() {
 		String subtypeFolder = subtype.getSubtypeFolder();
-		if (fileName.contains(name) && !fileName.contains(subtypeFolder)) {
+		if (fileName.contains(name) && !(fileName.startsWith(subtypeFolder)
+				|| fileName.contains(File.separator + subtypeFolder))) {
 			this.file = new File(app.getAppPath(subtypeFolder), fileName);
 		}
 	}

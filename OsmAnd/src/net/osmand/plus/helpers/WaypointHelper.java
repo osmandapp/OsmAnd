@@ -85,10 +85,11 @@ public class WaypointHelper {
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
+	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
-	private long announcedAlarmTime;
 	private ApplicationMode appMode;
 
 
@@ -226,7 +227,7 @@ public class WaypointHelper {
 
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
-		float mxspeed = route.getCurrentMaxSpeed();
+		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
@@ -330,7 +331,7 @@ public class WaypointHelper {
 
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
-		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc));
+		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
@@ -344,22 +345,8 @@ public class WaypointHelper {
 				for (int r = 0; r < pointTypes.length; r++) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
-
-					// For STOP first check if it has directional info
-					// Looks like has no effect here
-					//if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-					//	if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
-					//		info = null;
-					//	}
-					//}
-
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
-							long ms = System.currentTimeMillis();
-							if (ms - announcedAlarmTime > 50 * 1000) {
-								announcedAlarmTime = ms;
-								getVoiceRouter().announceAlarm(info, loc.getSpeed());
-							}
 							return info;
 						}
 					}
@@ -441,6 +428,7 @@ public class WaypointHelper {
 								boolean filterCloseAlarms = false;
 								switch (t) {
 									case TRAFFIC_CALMING:
+									case HAZARD:
 										announceRadius = STATE_SHORT_ALARM_ANNOUNCE;
 										filterCloseAlarms = true;
 										break;
@@ -461,6 +449,14 @@ public class WaypointHelper {
 									if (lastAlarm != null) {
 										double dist = MapUtils.getDistance(lastAlarm.getLatitude(), lastAlarm.getLongitude(), alarm.getLatitude(), alarm.getLongitude());
 										if (atd.isTurnStateActive(atdSpeed, dist, STATE_SHORT_ALARM_ANNOUNCE)) {
+											locationPointsStates.put(point, ANNOUNCED_DONE);
+											proceed = false;
+										}
+									}
+									Long timeLastAlarm = lastAnnouncedAlarmsTime.get(t);
+									if (timeLastAlarm != null && proceed) {
+										long ms = System.currentTimeMillis();
+										if (ms - timeLastAlarm < SAME_ALARM_INTERVAL * 1000) {
 											locationPointsStates.put(point, ANNOUNCED_DONE);
 											proceed = false;
 										}
@@ -501,6 +497,7 @@ public class WaypointHelper {
 								AlarmInfo alarm = (AlarmInfo) pw.point;
 								voiceRouter.announceAlarm(new AlarmInfo(alarm.getType(), -1), lastKnownLocation.getSpeed());
 								lastAnnouncedAlarms.put(alarm.getType(), alarm);
+								lastAnnouncedAlarmsTime.put(alarm.getType(), System.currentTimeMillis());
 							}
 						} else if (type == FAVORITES) {
 							voiceRouter.approachFavorite(lastKnownLocation, approachPoints);
@@ -556,6 +553,7 @@ public class WaypointHelper {
 	public void clearAllVisiblePoints() {
 		this.locationPointsStates.clear();
 		this.lastAnnouncedAlarms.clear();
+		this.lastAnnouncedAlarmsTime.clear();
 		this.locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	}
 
@@ -646,6 +644,7 @@ public class WaypointHelper {
 		this.locationPoints = locationPoints;
 		this.locationPointsStates.clear();
 		this.lastAnnouncedAlarms.clear();
+		this.lastAnnouncedAlarmsTime.clear();
 		TIntArrayList list = new TIntArrayList(locationPoints.size());
 		list.fill(0, locationPoints.size(), 0);
 		this.pointsProgress = list;

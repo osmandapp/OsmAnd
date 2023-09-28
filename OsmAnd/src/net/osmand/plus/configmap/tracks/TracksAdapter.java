@@ -21,7 +21,6 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -67,11 +66,11 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				View view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new TrackViewHolder(view, fragment, locationViewCache, nightMode);
 			case TYPE_NO_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
-				return new EmptyTracksViewHolder(view, fragment, nightMode);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new EmptyTracksViewHolder(view, fragment);
 			case TYPE_NO_VISIBLE_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
-				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new NoVisibleTracksViewHolder(view, fragment);
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
 				return new RecentlyVisibleViewHolder(view, fragment, nightMode);
@@ -130,7 +129,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((RecentlyVisibleViewHolder) holder).bindView();
 		} else if (holder instanceof SortTracksViewHolder) {
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems());
-			((SortTracksViewHolder) holder).bindView(enabled);
+			((SortTracksViewHolder) holder).bindView(enabled, null);
 		}
 	}
 
@@ -146,16 +145,6 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		if (index != -1) {
 			notifyItemChanged(index);
 		}
-	}
-
-	public List<TrackItem> getCurrentTrackItems() {
-		List<TrackItem> trackItems = new ArrayList<>();
-		for (Object objectItem : getItems()) {
-			if (objectItem instanceof TrackItem) {
-				trackItems.add((TrackItem) objectItem);
-			}
-		}
-		return trackItems;
 	}
 
 	@Override

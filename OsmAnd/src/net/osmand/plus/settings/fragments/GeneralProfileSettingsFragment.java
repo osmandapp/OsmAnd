@@ -9,32 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.IDialogController;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.keyevent.devices.base.InputDevice;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -43,7 +37,6 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.MultiTouchSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +50,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
-		setup3DViewPref();
 		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -79,35 +71,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		updateDialogControllerCallbacks();
 	}
 
-	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = (buttonView, isChecked) -> {
-		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		if (isChecked) {
-			getPreferenceManager().showDialog(externalInputDevice);
-			buttonView.setChecked(false);
-		} else {
-			if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
-				externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
-			} else {
-				buttonView.setChecked(true);
-			}
-		}
-	};
-
-	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
-
-		String prefId = preference.getKey();
-		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
-			boolean checked = settings.EXTERNAL_INPUT_DEVICE.getModeValue(getSelectedAppMode()) != OsmandSettings.NO_EXTERNAL_DEVICE;
-
-			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
-			switchView.setOnCheckedChangeListener(null);
-			switchView.setChecked(checked);
-			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
-		}
-	}
-
 	private void setupAppThemePref() {
 		ListPreferenceEx appTheme =
 				findPreference(settings.OSMAND_THEME.getId());
@@ -120,7 +83,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		values.add(OsmandSettings.OSMAND_DARK_THEME);
 		values.add(OsmandSettings.OSMAND_LIGHT_THEME);
 
-		if (settings.isSupportSystemDefaultTheme()) {
+		if (settings.isSupportSystemTheme()) {
 			entries.add(getString(R.string.system_default_theme));
 			values.add(OsmandSettings.SYSTEM_DEFAULT_THEME);
 		}
@@ -134,7 +97,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private Drawable getOsmandThemeIcon() {
 		int iconId;
 		ApplicationMode mode = getSelectedAppMode();
-		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
+		if (settings.isSystemThemeUsed(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
 			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
@@ -151,16 +114,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());
 		}
-	}
-
-	private void setup3DViewPref() {
-		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
-		Drawable icon = getPersistentPrefIcon(enabled, disabled);
-
-		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
-		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
-		enabled3DView.setIcon(icon);
 	}
 
 	private void setupPositionPlacementOnMapPref() {
@@ -305,17 +258,25 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		uiPreference.setSummary(R.string.sett_no_ext_input);
-		InputDevice[] devices = InputDevice.values();
+		uiPreference.setDescription(R.string.external_input_device_descr);
 
+		InputDeviceProfile[] devices = InputDevice.values();
 		String[] entries = new String[devices.length];
 		Integer[] values = new Integer[devices.length];
 		for (int i = 0; i < devices.length; i++) {
-			InputDevice device = devices[i];
-			entries[i] = getString(device.getTitleId());
-			values[i] = device.getValue();
+			InputDeviceProfile device = devices[i];
+			entries[i] = device.getTitle(app);
+			values[i] = device.getId();
 		}
 		uiPreference.setEntries(entries);
 		uiPreference.setEntryValues(values);
+		uiPreference.setIcon(getExternalInputDeviceIcon());
+	}
+
+	private Drawable getExternalInputDeviceIcon() {
+		return settings.getSelectedInputDevice(getSelectedAppMode()) != InputDevice.NONE ?
+				getActiveIcon(R.drawable.ic_action_keyboard) :
+				getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
 
 	private void setupTrackballForMovementsPref() {
@@ -440,17 +401,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		return super.onPreferenceClick(preference);
 	}
 
-	private void showSingleSelectionDialog(@NonNull String processId,
-	                                       @NonNull IDialogController controller) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(processId, controller);
-			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
-		}
-	}
-
 	private void updateDialogControllerCallbacks() {
 		IDialogController controller;
 		DialogManager dialogManager = app.getDialogManager();
@@ -467,7 +417,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		Preference preference = findPreference(prefId);
 		if (preference != null) {
 			if (settings.OSMAND_THEME.getId().equals(prefId)) {

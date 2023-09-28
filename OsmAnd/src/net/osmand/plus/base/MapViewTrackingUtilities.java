@@ -88,7 +88,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
-		addEnable3DViewListener();
 		initMapLinkedToLocation();
 	}
 
@@ -107,11 +106,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.refreshMap();
 			}
 		}));
-	}
-
-	private void addEnable3DViewListener() {
-		enable3DViewListener = change -> updateMapTilt();
-		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {
@@ -220,7 +214,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			locationProvider = location.getProvider();
 			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
 				drivingRegionUpdated = true;
-				RoutingHelperUtils.checkAndUpdateStartLocation(app, location, true);
+				RoutingHelperUtils.updateDrivingRegionIfNeeded(app, location, true);
 			}
 		}
 		if (mapView != null) {
@@ -277,7 +271,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 								() -> movingToMyLocation = false);
 					} else {
 						if (zoom != null && zoom.first != null && zoom.second != null) {
-							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
+							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, null, false);
 						}
 						if (rotation != null) {
 							mapView.setRotate(rotation, false);
@@ -543,7 +537,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			showCompassModeToast();
 		}
 		if (settings.isCompassMode(CompassMode.MANUALLY_ROTATED)) {
-			settings.setManuallyMapRotation(getMapRotate());
+			Float mapRotate = getMapRotate();
+			if (mapRotate != null) {
+				settings.setManuallyMapRotation(mapRotate);
+			}
 		}
 	}
 

@@ -11,10 +11,12 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -356,6 +358,12 @@ public class GpxSelectionHelper {
 			}
 			if (dataItem != null) {
 				selectedFile.setJoinSegments(dataItem.isJoinSegments());
+
+				GPXTrackAnalysis analysis = dataItem.getAnalysis();
+				if (analysis != null) {
+					selectedFile.setTrackAnalysis(analysis);
+					selectedFile.modifiedTime = dataItem.getFileLastModifiedTime();
+				}
 			}
 			selectedFile.setGpxFile(gpx, app);
 		}
@@ -469,11 +477,28 @@ public class GpxSelectionHelper {
 		TRACK_ROUTE_POINTS
 	}
 
-	public void runSelection(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
+	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener) {
+		saveTracksVisibility(trackItems, listener, true);
+	}
+
+	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener, boolean clearPrevious) {
+		if (clearPrevious) {
+			clearAllGpxFilesToShow(true);
+		}
+
+		Map<String, Boolean> selectedFileNames = new HashMap<>();
+		for (TrackItem trackItem : trackItems) {
+			String path = trackItem.isShowCurrentTrack() ? CURRENT_TRACK : trackItem.getPath();
+			selectedFileNames.put(path, true);
+		}
+		runSelection(selectedFileNames, listener);
+	}
+
+	public void runSelection(@NonNull Map<String, Boolean> selectedItems, @Nullable SelectGpxTaskListener listener) {
 		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING)) {
 			selectGpxTask.cancel(false);
 		}
-		selectGpxTask = new SelectGpxTask(app, selectedItems, gpxTaskListener);
+		selectGpxTask = new SelectGpxTask(app, selectedItems, listener);
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

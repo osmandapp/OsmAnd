@@ -1,12 +1,15 @@
 package net.osmand.plus.plugins.osmedit.quickactions;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
+import static net.osmand.plus.quickaction.QuickActionIds.ADD_POI_ACTION_ID;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,6 +58,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -67,12 +71,9 @@ import java.util.Map;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.addPoiToStringSet;
-
 public class AddPOIAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(13,
+	public static final QuickActionType TYPE = new QuickActionType(ADD_POI_ACTION_ID,
 			"osmpoi.add", AddPOIAction.class).
 			nameRes(R.string.quick_action_add_poi).iconRes(R.drawable.ic_action_plus_dark).
 			category(QuickActionType.CREATE_CATEGORY);
@@ -249,15 +250,7 @@ public class AddPOIAction extends QuickAction {
 		showDialog.setChecked(Boolean.parseBoolean(getParams().get(KEY_DIALOG)));
 
 		String text = getTagsFromParams().get(POI_TYPE_TAG);
-		poiTypeEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		poiTypeEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String tp = s.toString();
@@ -444,15 +437,7 @@ public class AddPOIAction extends QuickAction {
 			});
 
 			valueEditText.setText(vl);
-			valueEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
+			valueEditText.addTextChangedListener(new SimpleTextWatcher() {
 				@Override
 				public void afterTextChanged(Editable s) {
 					tagsData.put(tagEditText.getText().toString(), s.toString());

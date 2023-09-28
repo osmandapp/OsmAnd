@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.parking;
 
+import static net.osmand.plus.quickaction.QuickActionIds.PARKING_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class ParkingAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(7,
+	public static final QuickActionType TYPE = new QuickActionType(PARKING_ACTION_ID,
 			"parking.add", ParkingAction.class).
 			nameRes(R.string.quick_action_add_parking).iconRes(R.drawable.ic_action_parking_dark).nonEditable().
 			category(QuickActionType.CREATE_CATEGORY);

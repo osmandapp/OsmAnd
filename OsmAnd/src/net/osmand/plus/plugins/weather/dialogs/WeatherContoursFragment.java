@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -24,7 +23,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -39,21 +37,21 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 	private static int TRANSPARENCY_MIN = 0;
 	private static int TRANSPARENCY_MAX = 100;
 
-	private OsmandApplication app;
 	private MapActivity mapActivity;
-	private OsmandSettings settings;
 	private WeatherPlugin weatherPlugin;
 
 	private View view;
 	private Map<WeatherContour, View> radioButtons = new HashMap<>();
 	private LayoutInflater themedInflater;
-	private boolean nightMode;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
 		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	}
@@ -61,7 +59,7 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		updateNightMode();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_weather_contours, container, false);
 

@@ -115,7 +115,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.plugin_mapillary_descr);
 	}
 
@@ -150,7 +150,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		if (widgetType == WidgetType.MAPILLARY) {
 			return new MapillaryMapWidget(mapActivity);
 		}

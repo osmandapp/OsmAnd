@@ -184,7 +184,7 @@ public class FavouritePointMenuController extends MenuController {
 				gravityIcon.setBoundsFrom(line2icon);
 				return gravityIcon;
 			} else {
-				int colorId = isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark;
+				int colorId = isLight() ? R.color.icon_color_default_light : R.color.icon_color_secondary_dark;
 				return getIcon(R.drawable.ic_action_group_name_16, colorId);
 			}
 		}

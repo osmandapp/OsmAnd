@@ -2,7 +2,6 @@ package net.osmand.plus.configmap;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -23,13 +21,12 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -45,29 +42,29 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
-	private OsmandApplication app;
 	private MapActivity mapActivity;
-	private OsmandSettings settings;
 	private ApplicationMode appMode;
 
 	private ContextMenuAdapter adapter;
 	private Map<ContextMenuItem, List<ContextMenuItem>> items;
 	private ViewCreator viewCreator;
 
-	private LinearLayout llList;
+	private LinearLayout itemsContainer;
 	private ListStringPreference collapsedIds;
 	private View.OnClickListener itemsClickListener;
 	private final Map<Integer, View> views = new HashMap<>();
 
-	private boolean nightMode;
 	private boolean useAnimation;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapActivity = (MapActivity) getMyActivity();
-		settings = app.getSettings();
 		collapsedIds = settings.COLLAPSED_CONFIGURE_MAP_CATEGORIES;
 	}
 
@@ -76,8 +73,9 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public View onCreateView(@NonNull LayoutInflater inflater,
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = inflater.inflate(R.layout.fragment_configure_map, container, false);
-		llList = view.findViewById(R.id.list);
+		itemsContainer = view.findViewById(R.id.list);
 		onDataSetInvalidated();
 		return view;
 	}
@@ -99,7 +97,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			item.refreshWithActualData();
 			View view = views.get(item.getTitleId());
 			if (view != null) {
-				bindItemView(item, llList);
+				bindItemView(item, itemsContainer);
 			}
 		}
 	}
@@ -113,30 +111,29 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			appMode = settings.getApplicationMode();
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 
+			updateNightMode();
 			viewCreator = new ViewCreator(activity, nightMode);
 			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 			viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
 			viewCreator.setUiAdapter(this);
 
-			int bgColor = ColorUtilities.getActivityBgColor(app, nightMode);
-			llList.setBackgroundColor(bgColor);
-
 			views.clear();
-			llList.removeAllViews();
+			itemsContainer.removeAllViews();
+			itemsContainer.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
+
 			updateItemsData();
 			updateItemsView();
 		}
 	}
 
 	private void updateItemsData() {
-		ConfigureMapMenu menu = new ConfigureMapMenu();
+		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity);
-		CtxMenuUtils.removeHiddenItems(adapter);
-		CtxMenuUtils.hideExtraDividers(adapter);
-		items = CtxMenuUtils.collectItemsByCategories(adapter.getItems());
+		ContextMenuUtils.removeHiddenItems(adapter);
+		ContextMenuUtils.hideExtraDividers(adapter);
+		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
 		ContextMenuItem bottomShadow = new ContextMenuItem(null);
 		bottomShadow.setLayout(R.layout.card_bottom_divider);
 		items.put(bottomShadow, null);
@@ -148,7 +145,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			if (topItem.isCategory() && nestedItems != null) {
 				bindCategoryView(topItem, nestedItems);
 			} else {
-				bindItemView(topItem, llList);
+				bindItemView(topItem, itemsContainer);
 			}
 		}
 	}
@@ -157,9 +154,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	                              @NonNull List<ContextMenuItem> nestedItems) {
 		// Use the same layout for all categories views
 		category.setLayout(R.layout.list_item_expandable_category);
-		List<String> titles = CtxMenuUtils.getNames(nestedItems);
-		String description = TextUtils.join(", ", titles);
-		category.setDescription(description);
+		category.setDescription(ContextMenuUtils.getCategoryDescription(nestedItems));
 
 		String id = category.getId();
 		int standardId = category.getTitleId();
@@ -171,7 +166,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		view.setFocusable(true);
 		if (existedView == null) {
 			views.put(standardId, view);
-			llList.addView(view);
+			itemsContainer.addView(view);
 		}
 		updateCategoryView(category);
 
@@ -196,11 +191,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		View existedView = views.get(standardId);
 		View view = viewCreator.getView(item, existedView);
 		view.setTag(R.id.item_as_tag, item);
-		view.setOnClickListener(getItemsClickListener());
+
+		boolean clickable = item.isClickable();
+		if (clickable) {
+			view.setOnClickListener(getItemsClickListener());
+		}
 		if (existedView == null) {
 			views.put(standardId, view);
 			container.addView(view);
-			if (item.getLayout() != R.layout.mode_toggles) {
+			if (item.getLayout() != R.layout.mode_toggles && clickable) {
 				setupSelectableBg(view);
 			}
 		}
@@ -215,7 +214,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			ImageView ivIndicator = view.findViewById(R.id.explicit_indicator);
 			ivIndicator.setImageResource(isCollapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed);
+			boolean hasDescription = category.getDescription() != null;
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed && hasDescription);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.items_container), !isCollapsed);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), !isCollapsed);
 		}

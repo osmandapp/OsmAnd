@@ -2,6 +2,13 @@ package net.osmand.plus.plugins.externalsensors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_DISTANCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -10,33 +17,47 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalSensorsPlugin extends OsmandPlugin {
@@ -45,10 +66,23 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	private final DevicesHelper devicesHelper;
 	private ScanDevicesListener scanDevicesListener;
+	private OsmandSettings settings;
 
-	public ExternalSensorsPlugin(OsmandApplication app) {
+	public final CommonPreference<String> SPEED_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
+
+	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
+		SPEED_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("speed_sensor_write_to_track_device", "").makeProfile().cache();
+		CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("cadence_sensor_write_to_track_device", "").makeProfile().cache();
+		POWER_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("power_sensor_write_to_track_device", "").makeProfile().cache();
+		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("heart_rate_sensor_write_to_track_device", "").makeProfile().cache();
+		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("temperature_sensor_write_to_track_device", "").makeProfile().cache();
 		devicesHelper = new DevicesHelper(app, this);
+		settings = app.getSettings();
 	}
 
 	@Override
@@ -72,7 +106,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.external_sensors_plugin_description);
 	}
 
@@ -108,18 +142,63 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		return devicesHelper.getPairedDevices();
 	}
 
+	private boolean isDeviceForWidgetFieldType(@NonNull AbstractDevice<?> device, @NonNull SensorWidgetDataFieldType fieldType) {
+		for (AbstractSensor sensor : device.getSensors()) {
+			for (SensorWidgetDataFieldType type :
+					sensor.getSupportedWidgetDataFieldTypes()) {
+				if (type == fieldType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	public List<AbstractDevice<?>> getPairedDevicesByWidgetType(@NonNull SensorWidgetDataFieldType fieldType) {
+		List<AbstractDevice<?>> devices = getPairedDevices();
+		ArrayList<AbstractDevice<?>> filteredDevices = new ArrayList<>();
+		for (AbstractDevice<?> device : devices) {
+			if (isDeviceForWidgetFieldType(device, fieldType)) {
+				filteredDevices.add(device);
+			}
+		}
+
+		return filteredDevices;
+	}
+
+
+	@Nullable
+	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
+		return devicesHelper.getPairedDeviceById(deviceId);
+	}
+
+	@NonNull
+	public List<AbstractDevice<?>> getUnpairedDevices() {
+		return devicesHelper.getUnpairedDevices();
+	}
+
 	@Nullable
 	public AbstractDevice<?> getDevice(@NonNull String deviceId) {
 		return devicesHelper.getDevice(deviceId);
 	}
 
 	@Override
-	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
-		for (AbstractDevice<?> device : devicesHelper.getDevices()) {
-			if (devicesHelper.isDeviceEnabled(device) && devicesHelper.shouldDeviceWriteGpx(device)
-					&& device.isConnected()) {
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) {
+		for (WriteToGpxWidgetType writeToGpxWidgetType : WriteToGpxWidgetType.values()) {
+			attachDeviceSensorInfoToRecordedTrack(writeToGpxWidgetType, json);
+		}
+	}
+
+	private void attachDeviceSensorInfoToRecordedTrack(WriteToGpxWidgetType writeToGpxWidgetType, JSONObject json) {
+		ApplicationMode selectedAppMode = settings.getApplicationMode();
+		CommonPreference<String> preference = getPrefSettingsForWidgetType(writeToGpxWidgetType);
+		String speedDeviceId = preference.getModeValue(selectedAppMode);
+		if (!Algorithms.isEmpty(speedDeviceId)) {
+			AbstractDevice<?> device = devicesHelper.getDevice(speedDeviceId);
+			if (device != null) {
 				try {
-					device.writeSensorDataToJson(json);
+					device.writeSensorDataToJson(json, writeToGpxWidgetType.getSensorType());
 				} catch (JSONException e) {
 					LOG.error(e);
 				}
@@ -154,14 +233,44 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
 	                          @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		for (AbstractDevice<?> device : getDevices()) {
-			for (AbstractSensor sensor : device.getSensors()) {
-				for (SensorWidgetDataFieldType fieldType : sensor.getSupportedWidgetDataFieldTypes()) {
-					MapWidget widget = new SensorTextWidget(mapActivity, sensor, fieldType);
-					widgetsInfos.add(creator.createWidgetInfo(widget));
-				}
-			}
+
+		MapWidget heartRateWidget = new SensorTextWidget(mapActivity, appMode, HEART_RATE);
+		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));
+
+		MapWidget bikePowerWidget = new SensorTextWidget(mapActivity, appMode, BIKE_POWER);
+		widgetsInfos.add(creator.createWidgetInfo(bikePowerWidget));
+
+		MapWidget bikeCadenceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_SPEED);
+		widgetsInfos.add(creator.createWidgetInfo(bikeCadenceWidget));
+
+		MapWidget bikeSpeedWidget = new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE);
+		widgetsInfos.add(creator.createWidgetInfo(bikeSpeedWidget));
+
+		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE);
+		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
+
+		MapWidget temperatureWidget = new SensorTextWidget(mapActivity, appMode, TEMPERATURE);
+		widgetsInfos.add(creator.createWidgetInfo(temperatureWidget));
+	}
+
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		switch (widgetType) {
+			case HEART_RATE:
+				return new SensorTextWidget(mapActivity, appMode, HEART_RATE, customId);
+			case BICYCLE_POWER:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_POWER, customId);
+			case BICYCLE_CADENCE:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE, customId);
+			case BICYCLE_SPEED:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId);
+			case BICYCLE_DISTANCE:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId);
+			case TEMPERATURE:
+				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId);
 		}
+		return null;
 	}
 
 	public CommonPreference<Boolean> registerBooleanPref(@NonNull String prefId, boolean defValue) {
@@ -188,10 +297,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 						return true;
 					}));
 		}
-	}
-
-	public boolean isBlueToothEnabled() {
-		return devicesHelper.isBLEEnabled();
 	}
 
 	public void searchAntDevices() {
@@ -254,26 +359,75 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		if (isDevicePaired(device)) {
 			devicesHelper.setDeviceEnabled(device, true);
 		}
-		device.connect(app, activity);
+		devicesHelper.connectDevice(activity, device);
 	}
 
 	public void disconnectDevice(@NonNull AbstractDevice<?> device) {
 		if (isDevicePaired(device)) {
 			devicesHelper.setDeviceEnabled(device, false);
 		}
-		device.disconnect();
+		devicesHelper.disconnectDevice(device);
 	}
 
-	@Nullable
+	@NonNull
 	public String getDeviceName(@NonNull AbstractDevice<?> device) {
-		String sensorName = devicesHelper.getDeviceName(device);
-		return sensorName != null ? sensorName : device.getName();
+		String sensorName = devicesHelper.getDeviceProperty(device, NAME);
+		return !Algorithms.isEmpty(sensorName) ? sensorName : device.getName();
 	}
 
 	public void changeDeviceName(@NonNull String deviceId, @NonNull String newName) {
 		AbstractDevice<?> device = getDevice(deviceId);
 		if (device != null) {
-			devicesHelper.setDeviceName(device, newName);
+			devicesHelper.setDeviceProperty(device, DeviceChangeableProperties.NAME, newName);
 		}
+	}
+
+	public CommonPreference<String> getPrefSettingsForWidgetType(@NonNull WriteToGpxWidgetType widgetType) {
+		switch (widgetType) {
+			case BIKE_SPEED:
+				return SPEED_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case BIKE_POWER:
+				return POWER_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case BIKE_CADENCE:
+				return CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case HEART_RATE:
+				return HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case TEMPERATURE:
+				return TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
+		}
+		throw new IllegalArgumentException("Unknown widget type");
+	}
+
+	@Override
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+		SensorAttributesUtils.onAnalysePoint(analysis, point, attribute);
+	}
+
+	@Nullable
+	@Override
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GPXDataSetType graphType,
+	                                                @NonNull GPXDataSetAxisType axisType,
+	                                                boolean calcWithoutGaps, boolean useRightAxis) {
+		return SensorAttributesUtils.getOrderedLineDataSet(app, chart, analysis, graphType, axisType, calcWithoutGaps, useRightAxis);
+	}
+
+	@Override
+	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
+	}
+
+	public void setDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property, @NonNull String value) {
+		devicesHelper.setDeviceProperty(device, property, value);
+	}
+
+	public String getDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property) {
+		return devicesHelper.getDeviceProperty(device, property);
+	}
+
+	@StringRes
+	public int getPropertyMetric(@NonNull DeviceChangeableProperties property, boolean shortForm) {
+		return devicesHelper.getPropertyMetric(property, shortForm);
 	}
 }

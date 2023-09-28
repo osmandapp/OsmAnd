@@ -290,7 +290,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB ಬಳಸಲಾಗಿದೆ</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB ಬಳಸಲಾಗಿದೆ</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB ಬಳಸಲಾಗುತ್ತದೆ</string>
-    <string name="contour_lines_and_hillshade">ಬಾಹ್ಯರೇಖೆ ರೇಖೆಗಳು ಮತ್ತು ಹಿಲ್ಶೇಡ್</string>
     <string name="routing_attr_prefer_unpaved_name">ಸುಸಜ್ಜಿತ ರಸ್ತೆಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಿ</string>
     <string name="routing_attr_prefer_unpaved_description">ಸುಸಜ್ಜಿತ ರಸ್ತೆಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಿ.</string>
     <string name="update_all_maps">ಎಲ್ಲಾ ನಕ್ಷೆಗಳನ್ನು ನವೀಕರಿಸಿ</string>

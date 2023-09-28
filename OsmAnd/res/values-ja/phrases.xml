@@ -6,7 +6,7 @@
     <string name="poi_car_rental">レンタカー</string>
     <string name="poi_car_wash">洗車場</string>
     <string name="poi_casino">賭場・カジノ</string>
-    <string name="poi_city">市</string>
+    <string name="poi_city">市町村・特別区</string>
     <string name="poi_college">大学(単科)</string>
     <string name="poi_dentist">歯科医</string>
     <string name="poi_embassy">大使館</string>
@@ -323,9 +323,9 @@
     <string name="poi_village">村</string>
     <string name="poi_hamlet">集落</string>
     <string name="poi_isolated_dwelling">孤立住居</string>
-    <string name="poi_suburb">区・区画</string>
+    <string name="poi_suburb">行政区</string>
     <string name="poi_quarter">大字</string>
-    <string name="poi_neighbourhood">小字・丁目</string>
+    <string name="poi_neighbourhood">町・字・丁目</string>
     <string name="poi_locality">非居住地</string>
     <string name="poi_place_allotments">住居付き農園</string>
     <string name="poi_place_farm">農場</string>
@@ -1471,7 +1471,7 @@
     <string name="poi_health_specialty_general_yes">総合診療医</string>
     <string name="poi_health_specialty_ophthalmology_yes">眼科</string>
     <string name="poi_health_specialty_gynaecology_yes">婦人科</string>
-    <string name="poi_health_specialty_internal_medicine_yes">内科</string>
+    <string name="poi_health_specialty_internal_yes">内科</string>
     <string name="poi_health_specialty_orthopaedics_yes">整形外科</string>
     <string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科</string>
     <string name="poi_health_specialty_paediatrics_yes">小児科</string>
@@ -1491,7 +1491,7 @@
     <string name="poi_health_specialty_pulmonology_yes">呼吸器内科</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">歯科・口腔外科</string>
     <string name="poi_health_specialty_maternity_yes">産科</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">救急医療・救命救急センター</string>
+    <string name="poi_health_specialty_emergency_yes">救急医療・救命救急センター</string>
     <string name="poi_health_specialty_emergency_medicine_no">救急医療:無し</string>
     <string name="poi_health_specialty_plastic_surgery_yes">整形手術・形成外科</string>
     <string name="poi_health_specialty_orthodontics_yes">矯正歯科</string>
@@ -1503,7 +1503,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">顎顔面外科</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">放射線診断科</string>
     <string name="poi_health_specialty_gastroenterology_yes">消化器科</string>
-    <string name="poi_health_specialty_dentistry_yes">歯科</string>
+    <string name="poi_health_specialty_stomatology_yes">歯科</string>
     <string name="poi_health_specialty_nephrology_yes">腎臓(腎疾患)専門科</string>
     <string name="poi_health_specialty_neurosurgery_yes">脳神経外科</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">神経精神医</string>
@@ -1527,7 +1527,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">言語聴覚療法</string>
     <string name="poi_health_specialty_manual_therapy_yes">手技療法・整体・マッサージ</string>
     <string name="poi_health_specialty_sports_medicine_yes">スポーツ医学</string>
-    <string name="poi_health_specialty_podology_yes">ポドロジー・足学</string>
+    <string name="poi_health_specialty_podiatry_yes">ポドロジー・足学</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">成人の精神医学</string>
     <string name="poi_health_specialty_acupuncture_yes">鍼治療</string>
     <string name="poi_health_specialty_homeopathy_yes">ホメオパシー(民間療法)</string>
@@ -3299,13 +3299,11 @@
     <string name="poi_socket_as3112">ソケット:AS/NZS 3112の数</string>
     <string name="poi_socket_as3112_current">ソケット:AS/NZS 3112の電流(A)</string>
     <string name="poi_socket_as3112_output">ソケット:AS/NZS 3112の電力(W)</string>
-    <string name="poi_car_yes">自動車:可</string>
     <string name="poi_car_no">自動車:不可</string>
     <string name="poi_bicycle_yes">自転車:可</string>
     <string name="poi_bicycle_no">自転車:不可</string>
     <string name="poi_scooter_yes">スクーター:可</string>
     <string name="poi_scooter_no">スクーター:不可</string>
-    <string name="poi_truck_yes">トラック:可</string>
     <string name="poi_truck_no">トラック:不可</string>
     <string name="poi_parking_fee_yes">必要</string>
     <string name="poi_parking_fee_no">不要</string>
@@ -3862,7 +3860,7 @@
     <string name="poi_fuel_propane">プロパン</string>
     <string name="poi_lavoir">洗濯場所</string>
     <string name="poi_waste_transfer_station">ごみ処理場</string>
-    <string name="poi_weightbridge">車両計量台;トラックスケール</string>
+    <string name="poi_weighbridge">車両計量台;トラックスケール</string>
     <string name="poi_ranger_station">自然公園管理事務所</string>
     <string name="poi_water_source_lake">湖</string>
     <string name="poi_water_source_river">川</string>
@@ -3986,7 +3984,6 @@
     <string name="poi_post_office_type">タイプ</string>
     <string name="poi_authentication_chip_card">スマートカード認証</string>
     <string name="poi_authentication_app">アプリによる認証</string>
-    <string name="poi_callable">呼び出し可</string>
     <string name="poi_medical_supply_filter">医薬品カテゴリー</string>
     <string name="poi_service_fleurop_filter">花の配達サービス</string>
     <string name="poi_mattress_filter">マットレス</string>

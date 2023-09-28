@@ -163,7 +163,6 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 				// create direction step
 				RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
 				direction.routePointOffset = routePointOffset;
-				direction.routeEndPointOffset = routeEndPointOffset;
 				direction.setDescriptionRoute(instruction);
 				direction.setStreetName(streetName);
 				direction.setDistance((int) Math.round(distance));

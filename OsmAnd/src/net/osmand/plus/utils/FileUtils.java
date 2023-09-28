@@ -45,14 +45,16 @@ public class FileUtils {
 		}
 	}
 
+	@Nullable
 	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
 	                                    RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, false);
 		if (dest == null) {
 			return null;
 		}
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		if (source.renameTo(dest)) {
 			String[] suffixes = {"-journal", "-wal", "-shm"};
@@ -63,7 +65,7 @@ public class FileUtils {
 				}
 			}
 			if (callback != null) {
-				callback.renamedTo(dest);
+				callback.fileRenamed(source, dest);
 			}
 			return dest;
 		} else {
@@ -82,7 +84,7 @@ public class FileUtils {
 		File res = renameGpxFile(app, source, dest);
 		if (res != null) {
 			if (callback != null) {
-				callback.renamedTo(res);
+				callback.fileRenamed(source, res);
 			}
 		} else {
 			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
@@ -90,19 +92,21 @@ public class FileUtils {
 		return res;
 	}
 
+	@Nullable
 	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
 	                              @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
 		}
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		File res = source.renameTo(dest) ? dest : null;
 		if (res != null) {
 			if (callback != null) {
-				callback.renamedTo(res);
+				callback.fileRenamed(source, res);
 			}
 		} else {
 			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
@@ -110,23 +114,43 @@ public class FileUtils {
 		return res;
 	}
 
+	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		if (src.renameTo(dest)) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
-			app.getGpxDbHelper().rename(src, dest);
-			app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
-			if (selected != null && selected.getGpxFile() != null) {
-				selected.resetSplitProcessed();
-				selected.getGpxFile().path = dest.getAbsolutePath();
-				helper.updateSelectedGpxFile(selected);
-			}
+			updateRenamedGpx(app, src, dest);
 			return dest;
 		}
 		return null;
+	}
+
+	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+		app.getGpxDbHelper().rename(src, dest);
+		app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
+
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			selectedGpxFile.resetSplitProcessed();
+			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
+		}
+	}
+
+	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
+	                                  @NonNull File srcDir, @NonNull File destDir) {
+		for (File srcFile : files) {
+			String path = srcFile.getAbsolutePath();
+			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
+
+			File destFile = new File(newPath);
+			if (destFile.exists()) {
+				updateRenamedGpx(app, srcFile, destFile);
+			}
+		}
 	}
 
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
@@ -135,7 +159,7 @@ public class FileUtils {
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
 			file.delete();
 			app.getGpxDbHelper().remove(file);
-			if (selected != null && selected.getGpxFile() != null) {
+			if (selected != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
@@ -298,6 +322,6 @@ public class FileUtils {
 	}
 
 	public interface RenameCallback {
-		void renamedTo(File file);
+		void fileRenamed(@NonNull File src, @NonNull File dest);
 	}
 }

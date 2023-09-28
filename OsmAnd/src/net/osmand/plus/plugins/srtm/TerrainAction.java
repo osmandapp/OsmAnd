@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_ACTION_ID;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class TerrainAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(30,
+	public static final QuickActionType TYPE = new QuickActionType(TERRAIN_ACTION_ID,
 			"terrain.showhide", TerrainAction.class).nameActionRes(R.string.quick_action_show_hide_title).
 			nameRes(R.string.shared_string_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
@@ -34,7 +36,7 @@ public class TerrainAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
-			plugin.toggleTerrain(mapActivity, !plugin.isTerrainLayerEnabled(), () -> {
+			plugin.toggleTerrain(!plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
 					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 				}

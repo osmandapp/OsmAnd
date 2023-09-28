@@ -1,17 +1,22 @@
 package net.osmand.plus.plugins.externalsensors.dialogs;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment {
 
@@ -59,14 +64,22 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setTitle(getString(R.string.ant_plus_help_title))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
-					MapActivity mapActivity = (MapActivity) getActivity();
-					if (mapActivity != null) {
-						hideBottomSheet();
-					}
+					dismiss();
+					FragmentActivity activity = getActivity();
+					boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(false);
+					AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
 				})
 				.create();
 		items.add(helpItem);
-
+		BaseBottomSheetItem cancelItem = new BottomSheetItemButton.Builder()
+				.setButtonType(DialogButtonType.SECONDARY)
+				.setTitle(getString(R.string.shared_string_cancel))
+				.setLayoutId(R.layout.bottom_sheet_button)
+				.setOnClickListener(v -> dismiss())
+				.create();
+		items.add(cancelItem);
+		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		items.add(new DividerSpaceItem(getContext(), padding));
 	}
 
 	@Override

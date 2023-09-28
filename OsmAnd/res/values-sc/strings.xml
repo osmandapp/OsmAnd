@@ -280,13 +280,11 @@
     <string name="map_widget_audionotes">Notas àudio</string>
     <string name="audionotes_plugin_description">Crea notas àudio/foto/vìdeu durante unu biàgiu, impreende o unu butone in sa mapa o su menù de cuntestu de sa positzione.</string>
     <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de livellu</string>
     <string name="srtm_plugin_description">Sas informatziones de su terrinu, che a sas curvas de livellu, sas umbraduras de sos rilievos e sas pendèntzias, t\'agiudant a valutare cun sos ogros tuos sa dispositzione de su terrinu, sa navigabilidade e àteru. Sas informatziones topogràficas in una mapa si podent rapresentare cun s\'umbradura de sas pendèntzias, curvas de livellu e/o su colore de s\'àngulu de inclinatzione.
 \n
 \nSos datos impreados benint dae su SRTM e dae s\'ASTER.
 \n
-\nÀteras informatziones in http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nÀteras informatziones in %1$s.</string>
     <string name="srtm_plugin_name">Curvas de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Caminos ebbia</string>
@@ -715,8 +713,6 @@
     <string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="continue_navigation">Sighi cun sa navigatzione</string>
     <string name="pause_navigation">Pone in pàusa sa navigatzione</string>
-    <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basende·ti in subra de s’iscala SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Àndalas pro s\'escursionismu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC.</string>
     <string name="osmand_parking_delete_confirm">Iscantzellare su marcadore de sa positzione de sa màchina parchegiada?</string>
@@ -750,7 +746,7 @@
 \nIscàrriga sas mapas a tasseddos de manera direta o còpia·las comente archìvios de bases de datos SQLite in sa cartella de sos datos de OsmAnd impreende una de sas medas ainas de tertzas partes pro s\' ammanniamentu de sas mapas.</string>
     <string name="osm_editing_plugin_description">Faghe contributziones a OpenStreetMap, una comunidade globale chi amministrat una mapa totale de su mundu e frunit datos a còdighe abertu e annoados a cada impreadore.
 \n
-\nPodes agatare istrutziones subra de comente modificare sa mapa in su situ nostru https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPodes agatare istrutziones subra de comente modificare sa mapa in su situ nostru %1$s.</string>
     <string name="play_commands_of_currently_selected_voice">Ischerta una boghe e proa·la riproduinde annùntzios:</string>
     <string name="test_voice_prompts">Proa sos cumandos vocales</string>
     <string name="switch_to_raster_map_to_see">Iscàrriga una mapa vetoriale pro custa positzione in \'Menù\' (\'Iscàrriga mapas\'), o cola a s\'estensione \'Mapas in lìnia\'.</string>
@@ -797,7 +793,6 @@
     <string name="index_name_tts_voice">Indicatziones vocales (TTS-sintetizadas, preferìbiles)</string>
     <string name="amenity_type_user_defined">Definidu dae s’impitadore</string>
     <string name="fav_export_confirmation">Esistint giai documentos cun preferidos esportados. Los boles remplasare?</string>
-    <string name="index_settings">Amministra sos documentos de sas mapas</string>
     <string name="open_street_map_login_descr">Netzessàriu pro sos contributos a openstreetmap.org.</string>
     <string name="osmand_service">Modalidade de isfundu</string>
     <string name="osmand_service_descr">OsmAnd sighit a funtzionare in s’isfundu, cun s’ischermu mortu.</string>
@@ -1297,7 +1292,7 @@
     <string name="index_tours">Itineràrios</string>
     <string name="record_plugin_description">Registra sos biàgios o sos allenamentos tuos, e analiza sos datos in tèrmines de lestresa, artziadas e achirradas cumuladas, profilu de s\'artària etc. Sas rastas registradas si podent archiviare, cumpartzire cun sos amigos, modificare e post-protzessare.
 \n
-\nÀteras informatziones in https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nÀteras informatziones in %1$s.</string>
     <string name="record_plugin_name">Registratzione biàgios</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1432,7 +1427,7 @@
     <string name="shared_string_audio">Àudio</string>
     <string name="plugin_nautical_descr">Arrichit sa mapa tua cun informatziones subra de sas àndalas de navigatzione, sas lughes de navigatziones, sas zonas nàuticas de perìgulu, sas zonas cun restritziones de navigatzione o aprodu etz. Pro l\'impreare iscàrriga sas mapas nàuticas rispetivas e abìlita s\'istile \"Mapa nàutica\" in \"Cunfigura mapa\".
 \n
-\nÀteras informatziones in https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nÀteras informatziones in %1$s.</string>
     <string name="plugin_ski_descr">Progetada pro navigare in tretos de isports ierriles: pòmpia sas pistas de iscì e sas funivias , gasi comente sas pistas de iscì de fundu cun lìnias coloradas chi indicant sos livellos de cumplessidade. Pro l\'impreare abilita custa estensione e bae fintzas a \"Cunfigura mapa\" e issèbera s\'istile de mapa \"Ierru e iscì\".</string>
     <string name="plugin_touringview_descr">Allughende custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiadores e autistas professionistas.
 \n
@@ -1671,7 +1666,6 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Curvas de livellu istudadas</string>
     <string name="show_free_version_banner">Ammustra s’insigna de sa versione a indonu (gratùita)</string>
     <string name="show_free_version_banner_description">Ammustra s’insigna de sa versione a indonu fintzas si tenes cussa a pagamentu.</string>
     <string name="downloading_number_of_files">Iscarrighende %1$d documentu/os…</string>
@@ -1725,7 +1719,7 @@
     <string name="techical_articles_item">Artìculos tècnicos</string>
     <string name="versions_item">Versiones</string>
     <string name="feedback">Sondàggiu</string>
-    <string name="contact_us">Cuntata·nos</string>
+    <string name="shared_string_contact">Cuntata·nos</string>
     <string name="osm_edit_created_poi">PDI de OSM creadu</string>
     <string name="map_legend">Legenda de sa mapa</string>
     <string name="shared_string_upload">Càrriga</string>
@@ -2690,7 +2684,6 @@
     <string name="start_editing">Incumintza a modificare</string>
     <string name="get_unlimited_access">Otene s’atzessu illimitadu</string>
     <string name="welcome_to_open_beta">Bene bènnidu a sa beta aberta</string>
-    <string name="contour_lines_hillshade_maps">Curvas de livellu e mapas de umbradura de sos rilievos</string>
     <string name="download_wikipedia_description">Iscàrriga sos artìculos de Wikipedia pro %1$s pro los lèghere chene lìnia.</string>
     <string name="download_wikipedia_label">Iscàrriga sos datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Aberi un\'artìculu in lìnia</string>
@@ -3192,7 +3185,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
     <string name="shared_string_calculate">Càrcula</string>
     <string name="shared_string_osmand_usage">Impreu de OsmAnd</string>
-    <string name="shared_sting_tiles">Tasseddos</string>
+    <string name="shared_string_tiles">Tasseddos</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3207,7 +3200,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB impreados</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB impreados</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB impreados</string>
-    <string name="contour_lines_and_hillshade">Curvas de livellu e umbradura de sos rilievos</string>
     <string name="routing_attr_prefer_unpaved_name">Privilègia sos caminos non pamentados</string>
     <string name="routing_attr_prefer_unpaved_description">Privilègia sos caminos non pamentados.</string>
     <string name="update_all_maps">Agiorna totu sas mapas</string>
@@ -3325,7 +3317,6 @@
     <string name="monitoring_min_speed_descr_side_effect">Efetu segundàriu: in sa rasta tua ant a mancare totu sas setziones in ue no as rispetadu su critèriu de sa lestresa mìnima (es. cando ispinghes sa bitzicleta tua cara a artu in unu montigru). Annotamala, non b\'ant a èssere informatziones a pitzu de sos perìodos de pasu, che a sas pàusas. Custu at a influentzare totu sas anàlisis o sos post-protzessamentos, a es. cando ses chirchende de determinare sa longària totale de su biàgiu tuo, su tempus in movimentu, o sa lestresa mèdia tua.</string>
     <string name="live_monitoring_tracking_interval">Intervallu de arrastamentu</string>
     <string name="live_monitoring_adress">Indiritzu web</string>
-    <string name="live_monitoring_adress_descr">Dislinda s\'indiritzu web cun sa sintassi de paràmetros: lat={0}, lon={1}, marcadesutempus={2}, hdop={3}, artària={4}, lestresa={5}, diretzione={6}.</string>
     <string name="monitoring_notification">Notìfica</string>
     <string name="monitoring_min_speed">Lestresa mìnima</string>
     <string name="monitoring_min_accuracy">Acuradesa mìnima</string>
@@ -3957,7 +3948,7 @@
     <string name="announcement_time_title">Tempus de s\'annùntziu</string>
     <string name="open_place_reviews_plugin_description">Faghe contributziones a su progetu de OpenPlaceReviews comente fotografias, retzensiones o ligàmenes pro logos pùblicos che a ristorantes, albergos o museos.
 \n
-\nAtzapa istrutziones subra de comente contribuire in su situ nostru https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nAtzapa istrutziones subra de comente contribuire in su situ nostru %1$s.</string>
     <string name="announcement_time_passing">Colende</string>
     <string name="announcement_time_approach">Acùrtzia·ti</string>
     <string name="announcement_time_prepare_long">Ammanniamentu longu</string>
@@ -4012,8 +4003,6 @@
     <string name="copy_poi_name">Còpia su nùmene de su PDI</string>
     <string name="quick_action_show_hide_title">Ammustra/cua</string>
     <string name="shared_string_interval">Intervallu</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Cua sas làcanas de sas riservas naturales, de sas àreas amparadas e de sos parcos natzionales.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Làcanas naturales</string>
     <string name="track_has_no_altitude">Sa rasta non cuntenet datos de artària.</string>
     <string name="track_has_no_speed">Sa rasta non cuntenet datos de lestresa.</string>
     <string name="select_another_colorization">Ischerta un\'àtera casta de colorimentu.</string>
@@ -4162,16 +4151,12 @@
     <string name="purchases_feature_desc_unlimited_map_download">Otene iscarrigamentos chene lìmites de mapas pro totu sos continentes e sas regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Otene atzessu a agiornamentos regulares mensiles pro sas mapas non in lìnia.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Otene atzessu a agiornamentos de sas mapas prus frecuentes: cada ora, cada die o cada chida. Sos agiornamentos s\'ant a iscarrigare in manera incrementale, petzi pro s\'àrea mudada.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Otene atzessu a sos widgets avantzados de OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Imprea OsmAnd Cloud pro archiviare totu sos datos de OsmAnd in lìnia. No as a pèrdere prus sos datos a pustis de un\'installatzione noa. Sarva e riprìstina totu sas informatziones in manera fàtzile.</string>
     <string name="unlimited_map_downloads">Iscarrigamentos chene lìmites de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia e Wikivoyage non in lìnia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de su terrinu: curvas de livellu, umbraduras, pendèntzias</string>
     <string name="offline_wikipeadia">Wikipedia non in lìnia</string>
     <string name="offline_wikivoyage">Wikivoyage non in lìnia</string>
-    <string name="terrain_maps">Mapas de su terrinu</string>
     <string name="nautical_depth">Profundidade nàutica</string>
-    <string name="advanced_widgets">Widgets avantzados</string>
     <string name="you_can_get_feature_as_part_of_pattern">Otene “%1$s” comente parte de su pranu %2$s. Cunfrontu:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
     <string name="continue_with">Sighi cun %1$s</string>
@@ -4211,7 +4196,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Getone invàlidu o iscadidu</string>
     <string name="backup_error_user_is_not_registered">Perunu impreadore registradu cun custu indiritzu de posta</string>
     <string name="backup_error_no_valid_subscription">Non b\'at perunu abbonamentu vàlidu</string>
-    <string name="contour_lines_hillshades_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
+    <string name="contour_lines_hillshade_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
     <string name="duration_moment_ago">unu momentu a como</string>
     <string name="logout_from_osmand_cloud">Essi dae OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Cheres essire\?
@@ -4633,8 +4618,6 @@
     <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
-    <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
     <string name="download_complete">Iscarrigamentu agabbadu</string>
     <string name="side_marker_eta">Ora carculada de arrivu</string>
     <string name="updated_map_time">Agiornadu: %1$s.</string>
@@ -4772,7 +4755,6 @@
     <string name="included_in_your_current_plan">Incluidu in su pianu currente tuo \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Toca in sa mapa pro bìdere sa distàntzia intre sa positzione atuale tua e su puntu tocadu.
 \nToca cun duos pòddighes in sa mapa pro bìdere sa distàntzia intre sos puntos tocados</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="shared_string_shows">Ammustrat</string>
     <string name="shared_string_large">Mannu</string>
     <string name="shared_string_normal">Normale</string>
@@ -4935,7 +4917,7 @@
 \n- basados subra de sa posidura
 \n- sas isolìnias de temperadura / pressione
 \n
-\nSos datos meteorològicos los frunit su Sistema de Previsiones Globale (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nSos datos meteorològicos los frunit su Sistema de Previsiones Globale (GFS, %1$s).</string>
     <string name="weather_wind_meters_per_second">Metros/segundu</string>
     <string name="weather_widgets_secondary_desc">Sas unidades de medida si podent cambiare in sas impostatziones de s\'estensione de su Mèteu.</string>
     <string name="clouds_widget_desc">Ammustrat sa cobertura de sas nues pro su tzentru atuale de sa mapa.</string>
@@ -4966,10 +4948,8 @@
     <string name="weather_temperature_celsius">Cèlsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="quick_action_temperature_layer">Unu butone pro ammustrare o cuare s\'istratu de sa temperadura in sa mapa.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Ammustra sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_name">Ammustra sos grados de dificultade MTB (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_description">Ammustra sas camineras segundu sos grados de dificultade MTB (pro bitzicletas de monte).</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Ammustra sas camineras segundu sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte).</string>
     <string name="mtb_segment_classification">Classificatzione de su segmentu</string>
     <string name="mtb_scale">Iscala MTB (pro bitzicletas de monte)</string>
     <string name="mtb_imba">IMBA</string>

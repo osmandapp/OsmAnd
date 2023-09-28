@@ -1,0 +1,54 @@
+name: 🚀 Feature request
+description: Suggest a feature for OsmAnd
+labels: [ ]
+assignees: [ ]
+body:
+    -   type: markdown
+        attributes:
+            value: |
+                Oh hi there! 😄
+                
+                To expedite issue processing please search open and closed issues before submitting a new one.
+                Existing issues often contain information about workarounds, resolution, or progress updates.
+                
+                GitHub is our main development tool for our developers. There are hundreds of requests a month and there are relatively few developers.
+                So by opening an issue, please know that your issue will be sent out to all developers and acknowledge that it could be closed without explanation or with just a brief message.
+                Comments on the closed issues are also sent to all developers, so you definitely will be heard.
+                However, there is no guarantee that a developer will pick up the issue to work on it.
+                
+                Please be sure to read our [FAQ](https://osmand.net/docs/user/troubleshooting/) before creating an issue here.
+                
+                The best way to get help about is to provide as many details as possible and follow the below template.
+    -   type: textarea
+        id: describe-the-idea
+        attributes:
+            label: Describe the idea (required)
+            description: Please provide a clear and concise description of your idea and provide a summarised description in the title above.
+        validations:
+            required: true
+    -   type: textarea
+        id: expected-behaviour
+        attributes:
+            label: Tell us about the expected behaviour (required)
+            description: |
+                If you're suggesting a change/improvement, tell us a bit more about the problem you attempt to solve and how you idea helps to solve it.
+                Include a brief description of what you think should happen, maybe even how it should work and how you plan on using it.
+                Ex. I'm always frustrated when [...]
+        validations:
+            required: true
+    -   type: textarea
+        id: alternatives
+        attributes:
+            label: Tell us about alternatives you've considered (required)
+            description: |
+                Have you considered any alternative solutions or workarounds?
+        validations:
+            required: true
+    -   type: textarea
+        id: context
+        attributes:
+            label: Context (optional)
+            description: |
+                Anything else relevant?
+        validations:
+            required: false

@@ -19,7 +19,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,6 +34,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.DistanceRulerControlLayer;
@@ -58,13 +58,14 @@ import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -76,6 +77,10 @@ import java.util.Map.Entry;
  * Object is responsible to maintain layers using by map activity
  */
 public class MapLayers {
+
+	private final static String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
+	private final static String LAYER_INSTALL_MORE = "LAYER_INSTALL_MORE";
+	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
 
@@ -175,7 +180,7 @@ public class MapLayers {
 		// 7.3 map markers layer
 		mapMarkersLayer = new MapMarkersLayer(app);
 		mapView.addLayer(mapMarkersLayer, 7.3f);
-		// 7.5 Impassible roads
+		// 7.5 Impassable roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(app);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
 		// 7.8 radius ruler control layer
@@ -434,49 +439,44 @@ public class MapLayers {
 		adapter.addItem(item);
 	}
 
-	public void selectMapLayer(@NonNull MapActivity mapActivity,
-	                           @NonNull ContextMenuItem item,
-	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
+	public void selectMapSourceLayer(
+			@NonNull MapActivity mapActivity,
+			@NonNull ContextMenuItem item,
+			@NonNull OnDataChangeUiAdapter uiAdapter
+	) {
 		selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, mapSourceName -> {
-			item.setDescription(Algorithms.isEmpty(mapSourceName) ? app.getString(R.string.vector_data) : mapSourceName);
+			OsmandSettings settings = app.getSettings();
+			item.setDescription(settings.getSelectedMapSourceTitle());
 			uiAdapter.onDataSetChanged();
 			return true;
 		});
 	}
 
-	public void selectMapLayer(@NonNull MapActivity mapActivity,
-	                           boolean includeOfflineMaps,
-	                           @NonNull CommonPreference<String> targetLayer,
-	                           @Nullable CallbackWithObject<String> callback) {
+	public void selectMapLayer(
+			@NonNull MapActivity mapActivity, boolean includeOfflineMaps,
+			@NonNull CommonPreference<String> targetLayer,
+			@Nullable CallbackWithObject<String> callback
+	) {
 		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return;
 		}
-
 		OsmandSettings settings = app.getSettings();
 
 		Map<String, String> entriesMap = new LinkedHashMap<>();
-
-		final String layerOsmVector = "LAYER_OSM_VECTOR";
-		final String layerInstallMore = "LAYER_INSTALL_MORE";
-		final String layerAdd = "LAYER_ADD";
-
 		if (includeOfflineMaps) {
-			entriesMap.put(layerOsmVector, getString(R.string.vector_data));
+			entriesMap.put(LAYER_OSM_VECTOR, getString(R.string.vector_data));
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
-		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerAdd, getString(R.string.shared_string_add_manually));
+		entriesMap.put(LAYER_INSTALL_MORE, getString(R.string.install_more));
+		entriesMap.put(LAYER_ADD, getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-
 		String selectedTileSourceKey = targetLayer.get();
-
 		int selectedItem = -1;
 		if (!settings.MAP_ONLINE_DATA.get() && targetLayer == settings.MAP_TILE_SOURCES) {
 			selectedItem = 0;
 		} else {
-
 			Entry<String, String> selectedEntry = null;
 			for (Entry<String, String> entry : entriesMap.entrySet()) {
 				if (entry.getKey().equals(selectedTileSourceKey)) {
@@ -490,7 +490,6 @@ public class MapLayers {
 				entriesMapList.add(0, selectedEntry);
 			}
 		}
-
 		String[] items = new String[entriesMapList.size()];
 		int i = 0;
 		for (Entry<String, String> entry : entriesMapList) {
@@ -498,77 +497,82 @@ public class MapLayers {
 		}
 
 		boolean nightMode = isNightMode();
-		int themeRes = getThemeRes();
-		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selectedItem, app, selectedModeColor, themeRes, v -> {
+		AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_dismiss, null);
+
+		CustomAlert.showSingleSelection(dialogData, items, selectedItem, v -> {
 					int which = (int) v.getTag();
 					String layerKey = entriesMapList.get(which).getKey();
-					switch (layerKey) {
-						case layerOsmVector:
-							if (targetLayer == settings.MAP_TILE_SOURCES) {
-								settings.MAP_ONLINE_DATA.set(false);
-							}
-							updateLayers(mapActivity);
-							if (callback != null) {
-								callback.processResult(null);
-							}
-							break;
-						case layerAdd:
-							OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity.getSupportFragmentManager(), null, null);
-							break;
-						case layerInstallMore:
-							OsmandRasterMapsPlugin.installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {
-								TileSourceTemplate template;
-								int count;
+					onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
+		});
+	}
 
-								@Override
-								public boolean publish(TileSourceTemplate object) {
-									if (object == null) {
-										if (count == 1) {
-											targetLayer.set(template.getName());
-											if (targetLayer == settings.MAP_TILE_SOURCES) {
-												settings.MAP_ONLINE_DATA.set(true);
-											}
-											updateLayers(mapActivity);
-											if (callback != null) {
-												callback.processResult(template.getName());
-											}
-										} else {
-											selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
-										}
-									} else {
-										count++;
-										template = object;
-									}
-									return false;
-								}
-
-								@Override
-								public boolean isCancelled() {
-									return false;
-								}
-							});
-							break;
-						default:
-							targetLayer.set(layerKey);
-							if (targetLayer == settings.MAP_TILE_SOURCES) {
-								settings.MAP_ONLINE_DATA.set(true);
-							}
-							updateLayers(mapActivity);
-							if (callback != null) {
-								callback.processResult(layerKey.replace(IndexConstants.SQLITE_EXT, ""));
-							}
-							break;
-					}
+	private void onMapLayerSelected(
+			@NonNull MapActivity mapActivity, boolean includeOfflineMaps,
+			@NonNull CommonPreference<String> targetLayer,
+			@Nullable CallbackWithObject<String> callback,
+			@NonNull String layerKey
+	) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		switch (layerKey) {
+			case LAYER_OSM_VECTOR:
+				if (targetLayer == settings.MAP_TILE_SOURCES) {
+					settings.MAP_ONLINE_DATA.set(false);
 				}
-		);
+				updateLayers(mapActivity);
+				if (callback != null) {
+					callback.processResult(null);
+				}
+				break;
+			case LAYER_ADD:
+				OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity, null, null);
+				break;
+			case LAYER_INSTALL_MORE:
+				OsmandRasterMapsPlugin.installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {
+					TileSourceTemplate template;
+					int count;
 
-		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode());
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		builder.setAdapter(dialogAdapter, null);
-		builder.setNegativeButton(R.string.shared_string_dismiss, null);
-		dialogAdapter.setDialog(builder.show());
+					@Override
+					public boolean publish(TileSourceTemplate object) {
+						if (object == null) {
+							if (count == 1) {
+								targetLayer.set(template.getName());
+								if (targetLayer == settings.MAP_TILE_SOURCES) {
+									settings.MAP_ONLINE_DATA.set(true);
+								}
+								updateLayers(mapActivity);
+								if (callback != null) {
+									callback.processResult(template.getName());
+								}
+							} else {
+								selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
+							}
+						} else {
+							count++;
+							template = object;
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
+				break;
+			default:
+				targetLayer.set(layerKey);
+				if (targetLayer == settings.MAP_TILE_SOURCES) {
+					settings.MAP_ONLINE_DATA.set(true);
+				}
+				updateLayers(mapActivity);
+				if (callback != null) {
+					callback.processResult(layerKey.replace(IndexConstants.SQLITE_EXT, ""));
+				}
+				break;
+		}
 	}
 
 	private void updateRoutingPoiFiltersIfNeeded() {
@@ -587,10 +591,6 @@ public class MapLayers {
 	}
 
 	@StyleRes
-	private int getThemeRes() {
-		return isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-	}
-
 	private String getString(int resId) {
 		return app.getString(resId);
 	}

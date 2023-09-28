@@ -43,14 +43,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
-import net.osmand.plus.settings.datastorage.task.FilesCollectTask;
-import net.osmand.plus.settings.datastorage.task.FilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.datastorage.task.FilesCollectTask;
+import net.osmand.plus.settings.datastorage.task.FilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.task.MoveFilesTask;
 import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -58,7 +57,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -217,7 +216,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			if (key != null) {
 				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
-					if (!key.equals(INTERNAL_STORAGE) && !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
+					if (!key.equals(INTERNAL_STORAGE) && !AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 						requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					} else if (key.equals(MANUALLY_SPECIFIED)) {
 						showFolderSelectionDialog();
@@ -410,14 +409,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
-	private void setupDetailsButton(StorageItem item, View detailsButton) {
+	private void setupDetailsButton(StorageItem item, DialogButton btnDetails) {
 		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
-		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && (!storageMigration && !firstUsage));
+		AndroidUiHelper.updateVisibility(btnDetails, sharedStorage && (!storageMigration && !firstUsage));
 
 		if (item.getKey().equals(SHARED_STORAGE)) {
-			detailsButton.setClickable(true);
-			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY, R.string.shared_string_migration);
-			detailsButton.setOnClickListener(v -> {
+			btnDetails.setClickable(true);
+			btnDetails.setOnClickListener(v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), false);

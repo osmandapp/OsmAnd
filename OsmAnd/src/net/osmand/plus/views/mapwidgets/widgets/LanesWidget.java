@@ -19,11 +19,11 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 
@@ -67,12 +67,6 @@ public class LanesWidget extends MapWidget {
 		return R.layout.lanes_widget;
 	}
 
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_LANES;
-	}
-
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int imminent = -1;
@@ -83,45 +77,32 @@ public class LanesWidget extends MapWidget {
 		boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 		boolean notOsmAndGpxRoute = routingHelper.getCurrentGPXRoute() != null && !routingHelper.isCurrentGPXRouteV2();
 		boolean mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		boolean lanesEnabled = settings.SHOW_LANES.get();
 
-		if (lanesEnabled) {
-			if (mapLinkedToLocation && (!followingMode || deviatedFromRoute || notOsmAndGpxRoute)) {
-				OsmAndLocationProvider locationProvider = app.getLocationProvider();
-				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
-				if (ro != null) {
-					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					float degree = lastKnownLocation == null || !lastKnownLocation.hasBearing()
-							? 0
-							: lastKnownLocation.getBearing();
-					lanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
-					if (lanes == null) {
-						lanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
-					}
-				}
-			} else if (routingHelper.isRouteCalculated() && followingMode) {
-				NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-				RouteDirectionInfo routeDirectionInfo = directionInfo != null ? directionInfo.directionInfo : null;
-				TurnType turnType = routeDirectionInfo != null ? routeDirectionInfo.getTurnType() : null;
-				boolean tooFar = (turnType != null)
-						&& (directionInfo.distanceTo > MAX_METERS_NOT_SPOKEN_TURN && turnType.isSkipToSpeak()
-						|| directionInfo.distanceTo > MAX_METERS_SPOKEN_TURN);
-
-				if (turnType != null && !tooFar) {
-					lanes = directionInfo.directionInfo.getTurnType().getLanes();
-					imminent = directionInfo.imminent;
-					dist = directionInfo.distanceTo;
+		if (mapLinkedToLocation && (!followingMode || deviatedFromRoute || notOsmAndGpxRoute)) {
+			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
+			if (ro != null) {
+				Location lastKnownLocation = locationProvider.getLastKnownLocation();
+				float degree = lastKnownLocation == null || !lastKnownLocation.hasBearing()
+						? 0
+						: lastKnownLocation.getBearing();
+				lanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+				if (lanes == null) {
+					lanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
 				}
 			}
-		} else {
-			int directionIndex = MapRouteInfoMenu.getDirectionInfo();
-			List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
-			boolean validDirectionIndex = directionIndex >= 0 && directionIndex < routeDirections.size();
-			if (validDirectionIndex && mapActivity.getMapRouteInfoMenu().isVisible()) {
-				RouteDirectionInfo next = routeDirections.get(directionIndex);
-				if (next != null) {
-					lanes = next.getTurnType().getLanes();
-				}
+		} else if (routingHelper.isRouteCalculated() && followingMode) {
+			NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+			RouteDirectionInfo routeDirectionInfo = directionInfo != null ? directionInfo.directionInfo : null;
+			TurnType turnType = routeDirectionInfo != null ? routeDirectionInfo.getTurnType() : null;
+			boolean tooFar = (turnType != null)
+					&& (directionInfo.distanceTo > MAX_METERS_NOT_SPOKEN_TURN && turnType.isSkipToSpeak()
+					|| directionInfo.distanceTo > MAX_METERS_SPOKEN_TURN);
+
+			if (turnType != null && !tooFar) {
+				lanes = directionInfo.directionInfo.getTurnType().getLanes();
+				imminent = directionInfo.imminent;
+				dist = directionInfo.distanceTo;
 			}
 		}
 
@@ -174,7 +155,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
+	                       int order, @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
@@ -194,8 +176,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView() {
-		super.detachView();
+	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of LanesWidget is lost
 		getSpecialContainer().removeAllViews();
 	}

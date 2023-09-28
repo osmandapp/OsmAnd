@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -30,26 +30,26 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.GPXHighlight;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.GPXHighlight;
-import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -60,6 +60,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
+
+	private static final String SHOW_SLOPE_PREF_ID = "show_slope_elevation_widget";
+
+	private final CommonPreference<Boolean> showSlopePreference;
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
@@ -97,11 +101,28 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 	};
 
-	public ElevationProfileWidget(@NonNull MapActivity mapActivity) {
+	public ElevationProfileWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, ELEVATION_PROFILE);
+		this.showSlopePreference = registerShowSlopePref(customId);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	public Boolean shouldShowSlope(@NonNull ApplicationMode appMode) {
+		return showSlopePreference.getModeValue(appMode);
+	}
+
+	public void setShouldShowSlope(@NonNull ApplicationMode appMode, boolean shouldShowSlope) {
+		showSlopePreference.setModeValue(appMode, shouldShowSlope);
+	}
+
+	@NonNull
+	private CommonPreference<Boolean> registerShowSlopePref(@Nullable String customId) {
+		String prefId = Algorithms.isEmpty(customId) ? SHOW_SLOPE_PREF_ID : SHOW_SLOPE_PREF_ID + customId;
+		return settings.registerBooleanPreference(prefId, false)
+				.makeProfile()
+				.cache();
 	}
 
 	private void restoreLastState() {
@@ -127,12 +148,6 @@ public class ElevationProfileWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.elevation_profile_widget;
-	}
-
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_ELEVATION_PROFILE_WIDGET;
 	}
 
 	private void setupStatisticBlocks() {
@@ -198,7 +213,7 @@ public class ElevationProfileWidget extends MapWidget {
 		boolean routeChanged = this.route != route;
 		this.route = route;
 		lastRoute = route.toString();
-		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
+		boolean showSlopes = showSlopePreference.get();
 		boolean slopesChanged = showSlopes != this.showSlopes;
 		this.showSlopes = showSlopes;
 		return routeChanged || slopesChanged;
@@ -208,7 +223,7 @@ public class ElevationProfileWidget extends MapWidget {
 		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ROUTE, analysis);
 		firstVisiblePointIndex = -1;
 		lastVisiblePointIndex = -1;
 		slopeDataSet = null;
@@ -223,15 +238,15 @@ public class ElevationProfileWidget extends MapWidget {
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
-					GPXDataSetAxisType.DISTANCE, false, true, false);
+					GPXDataSetType.ALTITUDE, GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
+						GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
@@ -445,11 +460,21 @@ public class ElevationProfileWidget extends MapWidget {
 		firstPointIndex = Math.max(0, firstPointIndex - 1);
 		lastPointIndex = Math.min(points.size() - 1, lastPointIndex + 1);
 		if (lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(
-					CALCULATED_GPX_WINDOW_LENGTH, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
+			int pointsCount = lastPointIndex - firstPointIndex + 1;
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
-				public WptPt getPoint(int index) {
-					return points.get(index);
+				public double getPointDistance(int index) {
+					return points.get(index).distance;
+				}
+
+				@Override
+				public double getPointElevation(int index) {
+					return points.get(index).ele;
+				}
+
+				@Override
+				public int getPointsCount() {
+					return pointsCount;
 				}
 			};
 			elevationDiffsCalc.calculateElevationDiffs();
@@ -477,7 +502,7 @@ public class ElevationProfileWidget extends MapWidget {
 			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}
-			if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+			if (gpxItem.chartPointLayer == ROUTE) {
 				mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
 			}
 			if (location != null) {

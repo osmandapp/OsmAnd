@@ -900,7 +900,6 @@
     <string name="shared_string_my_location">Իմ դիրքը</string>
     <string name="shared_string_my_places">Իմ վայրերը</string>
     <string name="shared_string_my_favorites">Սիրածները</string>
-    <string name="srtm_plugin_disabled">Եզրագծերը(բարձունքների) անջատված են</string>
     <string name="favourites_edit_dialog_title">Տեղեկատվություն ընտրված կետի մասին</string>
     <string name="lang_pms">Պյեմոնտերեն</string>
     <string name="shared_string_tracks">Տրեկները</string>
@@ -1356,15 +1355,11 @@
     <string name="map_widget_distancemeasurement">Հեռավորության չափում</string>
     <string name="audionotes_location_not_defined">Դիրքը դեռ հայտնի չէ, որպեսզի կապել նշումի հետ:«Օգտագործեք դիրղը...» նշումը նշված դիրքին նշանակելու համար։</string>
     <string name="map_widget_audionotes">Աուդիո նշումներ</string>
-    <string name="index_srtm_parts">մասեր</string>
-    <string name="index_srtm_ele">Բարձունքների գծեր</string>
     <string name="download_select_map_types">Այլ քարտեզներ</string>
     <string name="download_roads_only_item">Միայն ճանապարհները</string>
     <string name="download_srtm_maps">Քարտեզ SRTM (բարձունքների գծեր)</string>
     <string name="download_regular_maps">Ստանդարտ քարտեզ</string>
     <string name="download_roads_only_maps">Ճանապարհների քարտեզը</string>
-    <string name="rendering_attr_alpineHiking_name">Լեռնաշղթայի զբոսնում մասշտաբով (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Պատկերացնել ճանապարհը SAC մասշտաբով։</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների։</string>
     <string name="rendering_attr_noAdminboundaries_name">Սահմանները</string>
@@ -1835,7 +1830,6 @@
     <string name="routing_settings">Նավիգացիա</string>
     <string name="routing_settings_descr">Նշեք նավարկության ընտրանքները։</string>
     <string name="global_settings">Ընդհանուր «Կարգավորումներ»</string>
-    <string name="index_settings">Քարտեզների կառավարում</string>
     <string name="general_settings">Ընդհանուր</string>
     <string name="general_settings_descr">Էկրանի պարամետրերը, տեղայնացում, միավորներ և այլն։</string>
     <string name="global_app_settings">Հավելվածի ընդհանուր կարգավորումները</string>
@@ -2403,7 +2397,7 @@
     <string name="techical_articles_item">Տեխնիկական հոդվածներ</string>
     <string name="versions_item">Տարբերակներ</string>
     <string name="feedback">Արձագանք</string>
-    <string name="contact_us">Կապ մեզ հետ</string>
+    <string name="shared_string_contact">Կապ մեզ հետ</string>
     <string name="map_legend">Քարտեզի նշումներ</string>
     <string name="save_poi_too_many_uppercase">Անունը պարունակում է չափազանց շատ մեծ տառեր: Շարունակել\?</string>
     <string name="save_poi_without_poi_type_message">Վստահ եք, որ ցանկանում եք POI-ին պահպանել առանց տեսակը նշելու?</string>
@@ -2757,7 +2751,6 @@
     <string name="quick_action_edit_actions">Խմբագրել գործողությունը</string>
     <string name="get_osmand_live">Ձեռք բերեք OsmAnd Live, որպեսզի կարողանաք օգտվել բոլոր հնարավորություններից՝ քարտեզների օրական թարմացում անսահմանափակ ներբեռնում, բոլոր plugin-րը Wikipedia, Wikivoyage և շատ ավելին։</string>
     <string name="unirs_render_descr">Հիմնական ոճի ձևափոխում, հետիոտնային և հեծանվավազք ճանապարհների հակադրությունը ավելացնելու համար։ Օգտագործում է ժառանգական Mapnik գույները։</string>
-    <string name="contour_lines_hillshade_maps">Contour lines &amp; Hillshade Քարտեզներ</string>
     <string name="rendering_value_black_name">Սև</string>
     <string name="access_intermediate_arrival_time">Միջանկյալ նպատակակետ ժամանելու ժամը</string>
     <string name="map_widget_intermediate_time">Միջանկյալ նպատակակետ ժամանելու ժամը</string>

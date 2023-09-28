@@ -234,7 +234,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
+	public boolean isNightMode(@NonNull OsmandApplication app) {
 		if (usedOnMap) {
 			return app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode);
 		} else {

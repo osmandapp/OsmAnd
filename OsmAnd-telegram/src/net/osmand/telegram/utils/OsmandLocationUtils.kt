@@ -1,10 +1,10 @@
 package net.osmand.telegram.utils
 
 import android.os.AsyncTask
-import net.osmand.gpx.GPXUtilities
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.gpx.GPXFile
+import net.osmand.gpx.GPXUtilities
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.LocationMessages.BufferMessage
@@ -12,12 +12,15 @@ import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.util.GeoParsedPoint
 import net.osmand.util.GeoPointParserUtil
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import kotlin.math.abs
 
 const val TRACKS_DIR = "tracker/"
@@ -228,8 +231,7 @@ object OsmandLocationUtils {
 								)
 							) {
 								val url = (urlTextEntity.type as TdApi.TextEntityTypeTextUrl).url
-								val point: GeoPointParserUtil.GeoParsedPoint? =
-									GeoPointParserUtil.parse(url)
+								val point: GeoParsedPoint? = GeoPointParserUtil.parse(url)
 								if (point != null) {
 									res.lat = point.latitude
 									res.lon = point.longitude

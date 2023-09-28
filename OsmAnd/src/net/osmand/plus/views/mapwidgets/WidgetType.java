@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
@@ -26,11 +27,13 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
@@ -82,6 +85,7 @@ public enum WidgetType {
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, R.string.docs_widget_radius_ruler, null, RIGHT),
 
 	DEV_FPS("fps", R.string.map_widget_rendering_fps, R.string.map_widget_rendering_fps_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_MEMORY("memory", R.string.widget_available_ram, R.string.widget_available_ram_desc, R.drawable.widget_developer_ram_day, R.drawable.widget_developer_ram_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_TILT("dev_camera_tilt", R.string.map_widget_camera_tilt, R.string.map_widget_camera_tilt_desc, R.drawable.widget_developer_camera_tilt_day, R.drawable.widget_developer_camera_tilt_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_DISTANCE("dev_camera_distance", R.string.map_widget_camera_distance, R.string.map_widget_camera_distance_desc, R.drawable.widget_developer_camera_distance_day, R.drawable.widget_developer_camera_distance_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_ZOOM_LEVEL("dev_zoom_level", R.string.map_widget_zoom_level, R.string.map_widget_zoom_level_desc, R.drawable.widget_developer_map_zoom_day, R.drawable.widget_developer_map_zoom_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
@@ -98,11 +102,13 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	ANT_HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_sensor_cadence_day, R.drawable.widget_sensor_cadence_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_sensor_distance_day, R.drawable.widget_sensor_distance_night, 0, ANT_PLUS, RIGHT),
+	TEMPERATURE("temperature_sensor", R.string.shared_string_temperature, R.string.sensor_temperature_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, ANT_PLUS, RIGHT),
+	HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),
+	BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, ANT_PLUS, RIGHT),
+	BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_sensor_cadence_day, R.drawable.widget_sensor_cadence_night, 0, ANT_PLUS, RIGHT),
+	BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, ANT_PLUS, RIGHT),
+	BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_sensor_distance_day, R.drawable.widget_sensor_distance_night, 0, ANT_PLUS, RIGHT),
+	RSSI("rssi", R.string.map_widget_rssi, R.string.rssi_widget_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, R.string.docs_widget_rssi, null, RIGHT),
 
 	WEATHER_TEMPERATURE_WIDGET("weather_temp", R.string.map_settings_weather_temp, R.string.temperature_widget_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, WEATHER, RIGHT),
 	WEATHER_PRECIPITATION_WIDGET("weather_precip", R.string.map_settings_weather_precip, R.string.precipitation_widget_desc, R.drawable.widget_weather_precipitation_day, R.drawable.widget_weather_precipitation_night, 0, WEATHER, RIGHT),
@@ -112,6 +118,9 @@ public enum WidgetType {
 
 	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
+
+	GLIDE_TARGET("glide_ratio_to_target", R.string.glide_ratio_to_target, R.string.map_widget_glide_target_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0, GLIDE, RIGHT),
+	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
@@ -193,7 +202,7 @@ public enum WidgetType {
 			String coordinatesFormat = context.getString(R.string.coordinates_format);
 			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
 					generalSettings, coordinatesFormat);
-		} else if (this == DEV_FPS) {
+		} else if (this == DEV_FPS || this == DEV_MEMORY) {
 			return WidgetGroup.getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == MAPILLARY) {
 			return WidgetGroup.getPartOfPluginDesc(context, MapillaryPlugin.class);
@@ -213,7 +222,7 @@ public enum WidgetType {
 	public int getSecondaryIconId() {
 		if (this == COORDINATES_CURRENT_LOCATION || this == COORDINATES_MAP_CENTER) {
 			return R.drawable.ic_action_help;
-		} else if (this == DEV_FPS || this == MAPILLARY || this == PARKING) {
+		} else if (this == DEV_FPS || this == DEV_MEMORY || this == MAPILLARY || this == PARKING) {
 			return R.drawable.ic_extension_dark;
 		} else if (group != null) {
 			return group.getSecondaryIconId();
@@ -245,8 +254,10 @@ public enum WidgetType {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
-			return defaultPanel;
+		if (defaultPanel == TOP) {
+			return BOTTOM.contains(widgetId, settings, mode) ? BOTTOM : TOP;
+		} else if (defaultPanel == BOTTOM) {
+			return TOP.contains(widgetId, settings, mode) ? TOP : BOTTOM;
 		} else if (defaultPanel == LEFT) {
 			return RIGHT.contains(widgetId, settings, mode) ? RIGHT : LEFT;
 		} else if (defaultPanel == RIGHT) {
@@ -271,6 +282,16 @@ public enum WidgetType {
 			return new AverageSpeedWidgetSettingFragment();
 		} else if (this == SUNRISE || this == SUNSET) {
 			return new SunriseSunsetSettingsFragment();
+		} else if (this == HEART_RATE ||
+				this == BICYCLE_POWER ||
+				this == BICYCLE_CADENCE ||
+				this == BICYCLE_SPEED ||
+				this == BICYCLE_DISTANCE ||
+				this == RSSI ||
+				this == TEMPERATURE) {
+			return new SensorWidgetSettingFragment();
+		} else if (this == GLIDE_AVERAGE) {
+			return new AverageGlideWidgetSettingsFragment();
 		}
 		return null;
 	}

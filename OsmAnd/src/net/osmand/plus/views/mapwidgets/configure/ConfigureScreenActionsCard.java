@@ -70,7 +70,7 @@ public class ConfigureScreenActionsCard extends MapBaseCard {
 	private void showCopyFromProfileDialog() {
 		FragmentManager fragmentManager = target.getFragmentManager();
 		if (fragmentManager != null) {
-			SelectCopyAppModeBottomSheet.showInstance(fragmentManager, target, false, appMode);
+			SelectCopyAppModeBottomSheet.showInstance(fragmentManager, target, appMode);
 		}
 	}
 }

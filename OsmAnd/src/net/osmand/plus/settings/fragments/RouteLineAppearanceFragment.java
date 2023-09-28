@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -35,16 +37,13 @@ import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeLis
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-
-import static net.osmand.util.Algorithms.objectEquals;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements ColorPickerListener, OnMapThemeChangeListener, OnSelectedColorChangeListener,
@@ -52,12 +51,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
-	private static final String APP_MODE_KEY = "app_mode";
-
 	private PreviewRouteLineInfo previewRouteLineInfo;
 
 	private ApplicationMode appMode;
-	private OsmandSettings settings;
 
 	private int toolbarHeightPx;
 	private HeaderInfo selectedHeader;
@@ -66,7 +62,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private View controlButtons;
 	private View toolbarContainer;
 	private View headerContainer;
-	private View saveButton;
+	private DialogButton saveButton;
 	private TextView headerTitle;
 	private TextView headerDescr;
 
@@ -117,7 +113,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = requireSettings();
 		setupAppMode(savedInstanceState);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
@@ -139,7 +134,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		if (appMode == null) {
-			appMode =  settings.getApplicationMode();
+			appMode = settings.getApplicationMode();
 		}
 	}
 
@@ -151,7 +146,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
 		boolean showTurnArrows = settings.ROUTE_SHOW_TURN_ARROWS.getModeValue(appMode);
 
-		PreviewRouteLineInfo previewRouteLineInfo =  new PreviewRouteLineInfo(colorDay, colorNight,
+		PreviewRouteLineInfo previewRouteLineInfo = new PreviewRouteLineInfo(colorDay, colorNight,
 				coloringType, routeInfoAttribute, widthKey, showTurnArrows);
 
 		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
@@ -266,7 +261,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		if (!isNightMode() && view != null) {
 			AndroidUiHelper.setStatusBarContentColor(view, view.getSystemUiVisibility(), true);
 		}
-		return isNightMode() ? R.color.status_bar_color_dark : R.color.divider_color_light;
+		return isNightMode() ? R.color.status_bar_main_dark : R.color.divider_color_light;
 	}
 
 	@Override
@@ -278,21 +273,22 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		saveButton = view.findViewById(R.id.right_bottom_button);
+		saveButton.setButtonType(DialogButtonType.PRIMARY);
+		saveButton.setTitleId(R.string.shared_string_apply);
 		saveButton.setOnClickListener(v -> {
 			saveRouteLineAppearance();
 			dismiss();
 		});
 
-		View cancelButton = view.findViewById(R.id.dismiss_button);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
-
-		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
 
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
@@ -386,12 +382,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			lineBounds.bottom = bottomSheetStart - pathMargin;
 		} else {
 			int dialogWidth = getLandscapeNoShadowWidth();
-			lineBounds.left = isRtl ? screenWidth - dialogWidth: dialogWidth;
+			lineBounds.left = isRtl ? screenWidth - dialogWidth : dialogWidth;
 			lineBounds.top = statusBarHeight + pathMargin;
 			lineBounds.right = isRtl ? 0 : screenWidth;
 			lineBounds.bottom = screenHeight - pathMargin;
 			centerX = (lineBounds.left + lineBounds.right) / 2;
-			centerY = (screenHeight + statusBarHeight) / 2 ;
+			centerY = (screenHeight + statusBarHeight) / 2;
 		}
 		previewRouteLineInfo.setLineBounds(lineBounds);
 		previewRouteLineInfo.setCenterX(centerX);
@@ -422,11 +418,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void setMapThemeProvider(@Nullable MapThemeProvider provider) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			DayNightHelper helper = app.getDaynightHelper();
-			helper.setMapThemeProvider(provider);
-		}
+		DayNightHelper helper = app.getDaynightHelper();
+		helper.setMapThemeProvider(provider);
 	}
 
 	@Override

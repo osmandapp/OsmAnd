@@ -13,13 +13,12 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
@@ -30,7 +29,6 @@ import java.util.List;
 
 public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
 
-	private static final String DASH = "—";
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
 
 	private final MapMarkersHelper mapMarkersHelper;
@@ -87,12 +85,9 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		MapMarker marker = getMarker();
 
-		boolean hideWidget = marker == null
-				|| routingHelper.isRoutePlanningMode()
-				|| routingHelper.isFollowingMode();
+		boolean hideWidget = marker == null;
 		if (hideWidget) {
 			cachedMeters = 0;
 			lastUpdatedTime = 0;
@@ -145,7 +140,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		float averageSpeed = averageSpeedComputer.getAverageSpeed(interval, false);
 
 		if (Float.isNaN(averageSpeed) || averageSpeed == 0) {
-			setText(DASH, null);
+			setText(NO_VALUE, null);
 			return;
 		}
 

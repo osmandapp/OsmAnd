@@ -1,0 +1,73 @@
+name: Build debug apk
+
+on:
+  [workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout OsmAnd
+      uses: actions/checkout@v4
+      with:
+        path: android
+    - name: checkout OsmAnd-resources
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-resources
+        path: resources
+    - name: checkout OsmAnd-core
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-core
+        path: core
+    - name: checkout OsmAnd-core-legacy
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-core-legacy
+        path: core-legacy
+    - name: checkout OsmAnd-build
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-build
+        path: build
+    - name: checkout OsmAnd-tools
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-tools
+        path: tools
+    - name: checkout OsmAnd-misc
+      uses: actions/checkout@v4
+      with:
+        repository: osmandapp/OsmAnd-misc
+        path: misc
+
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Grant execute permission for gradlew
+      working-directory: ./android
+      run: chmod +x gradlew
+    - name: Patch memory requirements
+      working-directory: ./android
+      run: printf "\norg.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8\n" >> gradle.properties
+    - name: Build with Gradle
+      working-directory: ./android
+      run: ./gradlew assembleNightlyFreeLegacyFatDebug
+    - name: Rename APK
+      working-directory: ./android
+      run: mv OsmAnd/build/outputs/apk/nightlyFreeLegacyFat/debug/OsmAnd-nightlyFree-legacy-fat-debug.apk OsmAnd/build/outputs/apk/nightlyFreeLegacyFat/debug/OsmAnd-nightlyFree-legacy-fat-debug-$(git log -n 1 --format='%h').apk
+    - name: Archive APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: debug-apk
+        path: android/OsmAnd/build/outputs/apk/*/*/*.apk
+        retention-days: 90

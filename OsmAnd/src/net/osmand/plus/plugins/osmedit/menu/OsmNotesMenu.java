@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -16,6 +15,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
@@ -37,16 +38,12 @@ public class OsmNotesMenu {
 
 	private static void createLayersItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
+		boolean nightMode = isNightMode(app);
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
 		if (plugin == null) {
 			return;
 		}
-
-		boolean nightMode = isNightMode(app);
-		int themeRes = getThemeRes(app);
-		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
 		final int osmNotesStringId = R.string.layer_osm_bugs;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
@@ -68,20 +65,18 @@ public class OsmNotesMenu {
 				} else if (itemId == showZoomLevelStringId) {
 					int checked = Arrays.asList(zoomIntValues).indexOf(plugin.SHOW_OSM_BUGS_MIN_ZOOM.get());
 
-					DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-							zoomStrings, nightMode, checked, app, selectedModeColor, themeRes, v -> {
-								int which = (int) v.getTag();
-								plugin.SHOW_OSM_BUGS_MIN_ZOOM.set(zoomIntValues[which]);
-								item.setDescription(zoomStrings[which]);
-								uiAdapter.onDataSetChanged();
-								mapActivity.refreshMap();
-							}
-					);
-					AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes))
+					AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
 							.setTitle(R.string.show_from_zoom_level)
-							.setAdapter(dialogAdapter, null)
+							.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
 							.setNegativeButton(R.string.shared_string_dismiss, null);
-					dialogAdapter.setDialog(b.show());
+
+					CustomAlert.showSingleSelection(dialogData, zoomStrings, checked, v -> {
+						int which = (int) v.getTag();
+						plugin.SHOW_OSM_BUGS_MIN_ZOOM.set(zoomIntValues[which]);
+						item.setDescription(zoomStrings[which]);
+						uiAdapter.onDataSetChanged();
+						mapActivity.refreshMap();
+					});
 				} else if (itemId == showClosedNotesStringId) {
 					plugin.SHOW_CLOSED_OSM_BUGS.set(isChecked);
 					mapActivity.refreshMap();
@@ -136,14 +131,7 @@ public class OsmNotesMenu {
 		return res;
 	}
 
-	public static boolean isNightMode(OsmandApplication app) {
-		if (app == null) {
-			return false;
-		}
-		return app.getDaynightHelper().isNightModeForMapControls();
-	}
-
-	public static int getThemeRes(OsmandApplication app) {
-		return isNightMode(app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	public static boolean isNightMode(@NonNull OsmandApplication app) {
+		return app.getDaynightHelper().isNightMode(true);
 	}
 }

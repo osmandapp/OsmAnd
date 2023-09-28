@@ -148,7 +148,7 @@
     <string name="record_plugin_name">Gravação de viagem</string>
     <string name="record_plugin_description">Grave suas viagens ou treinamentos e analise os em termos de velocidades e subidas e descidas acumuladas. As trilhas gravadas podem ser arquivadas, compartilhadas com os amigos, editada e pós processadas.
 \n
-\nLeia mais em https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nLeia mais em %1$s.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nível</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para curvas de nível off-line</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
@@ -167,7 +167,7 @@
     <string name="plugin_nautical_name">Mapa náutico</string>
     <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
 \n
-\nLeitura adicional em https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nLeitura adicional em %1$s.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
     <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
@@ -204,11 +204,11 @@
 \n
 \nOs dados subjacentes são originários do SRTM e ASTER.
 \n
-\nLeia mais em http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nLeia mais em %1$s.</string>
     <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
     <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
-\nVocê pode encontrar instruções sobre como editar o mapa em nosso site https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nVocê pode encontrar instruções sobre como editar o mapa em nosso site %1$s.</string>
     <string name="osmand_development_plugin_description">Fornece funcionalidade para testar e depurar o OsmAnd: simular rotas de navegação, monitorar a renderização da tela, verificar o desempenho, etc. Este plug-in não é necessário para o uso normal do aplicativo.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
@@ -701,12 +701,10 @@
     <string name="map_widget_distancemeasurement">Medição de distância</string>
     <string name="audionotes_location_not_defined">Toque em \'Usar local…\' para adicionar uma nota ao local.</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
-    <string name="index_srtm_parts">peças</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Apenas mapa de estradas</string>
-    <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhada</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limites</string>
@@ -761,7 +759,6 @@
     <string name="osmand_parking_hours">Horas</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
-    <string name="index_settings">Gerenciar arquivos de mapas</string>
     <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
@@ -769,9 +766,7 @@
     <string name="follow">Iniciar orientação</string>
     <string name="get_directions">Direções</string>
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
-    <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
     <string name="rendering_attr_showRoadMaps_name">Apenas mapa de estradas</string>
     <string name="safe_mode_description">Executar o aplicativo em modo seguro (mais lento).</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na Google Play\?</string>
@@ -1424,7 +1419,7 @@
     <string name="data_settings_descr">Especificar o idioma, baixar/atualizar dados.</string>
     <string name="data_settings">Dados</string>
     <string name="additional_settings">Configurações adicionais</string>
-    <string name="update_tile">Atualizar mapa</string>
+    <string name="update_tile">Atualizar</string>
     <string name="reload_tile">Atualizar quadrículas</string>
     <string name="mark_point">Destino</string>
     <string name="app_settings">Configurações do aplicativo</string>
@@ -1695,7 +1690,6 @@
     <string name="world_maps">Mapas mundiais</string>
     <string name="hillshade_layer_disabled">Camada de sombras de relevo desativada</string>
     <string name="region_maps">Mapas regionais</string>
-    <string name="srtm_plugin_disabled">Curvas de nível desativadas</string>
     <string name="favorite_category_add_new">Adicionar novo</string>
     <string name="favorite_category_select">Escolha categoria</string>
     <string name="default_speed_system_descr">Defina a unidade de velocidade.</string>
@@ -1764,7 +1758,7 @@
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versões</string>
     <string name="feedback">Comente</string>
-    <string name="contact_us">Fale conosco</string>
+    <string name="shared_string_contact">Fale conosco</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="save_poi_without_poi_type_message">Salvar o POI sem especificar o tipo\?</string>
     <string name="poi_context_menu_modify_osm_change">Modificar alteração no OSM</string>
@@ -2634,7 +2628,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Downloads ilimitados</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Mapas de curvas de nível e sombras de relevo</string>
     <string name="purchase_dialog_title">Escolher plano</string>
     <string name="purchase_dialog_subtitle">Escolha o item adequado</string>
     <string name="download_wikipedia_label">Baixar dados da Wikipédia</string>
@@ -2680,7 +2673,7 @@
     <string name="coord_input_save_as_track">Salvar como trilha</string>
     <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
     <string name="topo_render_descr">Para caminhadas, trekking e ciclismo na natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de curvas de nível, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC, itens de esporte em corredeiras.</string>
+    <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC/CAI, itens de esporte em corredeiras.</string>
     <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \nCobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -2879,8 +2872,8 @@
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sem pedras irregulares ou paralelepípedo</string>
-    <string name="routing_attr_avoid_sett_description">Evitar pavimento de pedras irregulares e paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_name">Sem paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_description">Evitar paralelepípedo</string>
     <string name="shared_string_degrees">Graus</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="angular_measeurement">Unidade angular</string>
@@ -3187,7 +3180,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="shared_string_osmand_usage">Uso do OsmAnd</string>
-    <string name="shared_sting_tiles">Quadrículas</string>
+    <string name="shared_string_tiles">Quadrículas</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3204,7 +3197,6 @@
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas de nível e Sombras de relevo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_prefer_unpaved_description">Prefira estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
@@ -3332,7 +3324,6 @@
     <string name="live_monitoring_time_buffer">Buffer de tempo</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_adress">Endereço da web</string>
-    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notificação</string>
     <string name="monitoring_min_speed">Velocidade mínima</string>
     <string name="monitoring_min_accuracy">Precisão mínima</string>
@@ -3653,7 +3644,7 @@
     <string name="keep_active">Manter ativo</string>
     <string name="shared_string_uninstall">Desinstalar</string>
     <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
-    <string name="shared_string_bearing">Rolamento</string>
+    <string name="shared_string_bearing">Direção</string>
     <string name="item_deleted">%1$s excluído</string>
     <string name="speed_cameras_restart_descr">Reinicie o aplicativo para excluir todos os dados da câmera de velocidade.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
@@ -3664,7 +3655,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Controle o nível de zoom do mapa usando os botões de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
     <string name="lenght_limit_description">Forneça o comprimento do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos longos.</string>
-    <string name="quick_action_remove_next_destination">Apagar o ponto de destino mais próximo</string>
+    <string name="quick_action_remove_next_destination">Excluir próximo ponto de destino</string>
     <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
     <string name="quick_action_remove_next_destination_descr">Exclui o próximo destino da sua rota. Se esse for o destino final, a navegação será interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
@@ -3962,7 +3953,7 @@
     <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
     <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
-\nVeja as instruções sobre como contribuir em https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nVeja as instruções sobre como contribuir em %1$s.</string>
     <string name="activity_type_motorbike_name">Motocicleta</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
@@ -4009,12 +4000,10 @@
     <string name="copy_poi_name">Copiar nome de POI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar reserva natural, áreas protegidas e limites de parque nacional.</string>
     <string name="map_widget_distance_by_tap">Distância por toque</string>
     <string name="track_has_no_altitude">A trilha não contém dados de altitude.</string>
     <string name="track_has_no_speed">A trilha não contém dados de velocidade.</string>
     <string name="select_another_colorization">Selecione outro tipo de cor.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="trip_recording_save_and_continue">Salvar e continuar</string>
     <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
@@ -4091,7 +4080,7 @@
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Entre em contato conosco em %1$s</string>
     <string name="osmand_cloud_create_account_descr">Digite seu endereço de e-mail, um código de verificação será enviado para lá,
 \ne todos os seus dados serão vinculados a ele.</string>
-    <string name="osmand_cloud_login_descr">Por favor, insira o endereço de e-mail com o qual você se registrou. Uma senha de uso único para a próxima etapa será enviada a ele.</string>
+    <string name="osmand_cloud_login_descr">Por favor, insira o endereço de e-mail com o qual você se registrou. Uma senha de uso único será enviada a ele.</string>
     <string name="verify_email_address">Verifique o endereço de e-mail</string>
     <string name="verify_email_address_descr">Código de verificação enviado para %1$s. Por favor insira-o no campo abaixo.</string>
     <string name="cloud_email_not_registered">Este endereço de e-mail não está registrado para OsmAnd Cloud</string>
@@ -4162,10 +4151,8 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Sem dados perdidos após a reinstalação. Faça backup e restaure todas as informações facilmente.</string>
     <string name="unlimited_map_downloads">Downloads ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
     <string name="offline_wikipeadia">Wikipédia offline</string>
     <string name="offline_wikivoyage">Wikivoyage offline</string>
-    <string name="terrain_maps">Mapas de terreno</string>
     <string name="nautical_depth">Profundidade náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Obtenha “%1$s” como parte do plano: %2$s. Comparação:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
@@ -4224,7 +4211,7 @@
 \nVocê precisará entrar novamente para fazer backup ou restaurar os dados.</string>
     <string name="backup_deleted_all_data">Excluir todos os dados.</string>
     <string name="backup_error_subscription_was_expired_descr">Sua assinatura do OsmAnd Pro expirou, renove-a para usar o backup. Você ainda pode restaurar dados da nuvem.</string>
-    <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, inclinação</string>
+    <string name="contour_lines_hillshade_slope">Curvas de nível, sombras de relevo, inclinação</string>
     <string name="backup_deleting_all_data">Excluindo todos os dados…</string>
     <string name="backup_deleting_all_data_descr">Aguarde até que OsmAnd exclua seus dados da nuvem. Todos os dados no dispositivo permanecerão intactos.</string>
     <string name="backup_deleted_all_data_descr">Todos os seus dados foram excluídos com sucesso de OsmAnd Cloud.</string>
@@ -4251,7 +4238,6 @@
 \n
 \nTalvez alguns mapas não estejam carregados, você pode executar uma verificação online dos mapas necessários.</string>
     <string name="option_available_only_in_osmand_pro">Disponível como parte da assinatura do OsmAnd Pro.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro: Coloração de rotas e muito mais.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas de cores por…</string>
@@ -4442,7 +4428,6 @@
     <string name="gps_filter_actions_description">OsmAnd aplicará as alterações à trilha sem atualizar o arquivo. Você pode salvar as alterações manualmente.</string>
     <string name="shared_string_gps_filter">Filtro GPS</string>
     <string name="storage_migration_wrong_folder_warning">Nenhum dado OsmAnd encontrado na pasta selecionada. Por favor, tente novamente.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_downhill">Descida</string>
     <string name="shared_string_hide_slope">Esconder inclinação</string>
     <string name="shared_string_uphill">Subida</string>
@@ -4730,8 +4715,6 @@
 \nAo utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar trilhas dedicadas para mountain bike.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
-    <string name="accessibility_2d_view_off">Visualização 2.5D desligada</string>
-    <string name="accessibility_2d_view_on">Visualização 2.5D ligada</string>
     <string name="average_speed_skip_stops_desc">A velocidade menor que %1$s será contada e afetará a velocidade média.</string>
     <string name="attach_roads_warning">Apenas uma trilha gravada pode ser anexada às estradas.</string>
     <string name="without_profiles_changing">Sem alteração de perfis</string>
@@ -4740,7 +4723,7 @@
     <string name="available_as_part_of_subscription_plan">Disponível como parte da assinatura %1$s.</string>
     <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até o primeiro ponto intermediário. Uma vez que os pontos intermediários são passados, a distância será atualizada para o próximo ponto intermediário.</string>
     <string name="second_next_turn_widget_desc">O widget mostra informações sobre sua segunda próxima curva, que é ativada se a curva estiver próxima.</string>
-    <string name="shared_string_duplicate">Duplicado</string>
+    <string name="shared_string_duplicate">Duplicar</string>
     <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atualmente registrada.</string>
     <string name="relative_bearing_widget_desc">Mostra o ângulo entre a direção do seu movimento para frente e o ponto alvo.</string>
     <string name="second_marker_widget_desc">Você pode configurar o widget para mostrar a distância ou o tempo estimado de chegada até o segundo marcador do mapa.</string>
@@ -4762,7 +4745,7 @@
     <string name="compass_visible_if_map_rotated_desc">Escondido quando o Norte está para cima</string>
     <string name="compass_always_hidden">Sempre escondido</string>
     <string name="compass_always_visible">Sempre visível</string>
-    <string name="compass_click_desc">Dica: toque no widget da bússola para alternar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Dica: toque no botão da bússola para alternar o modo de orientação do mapa.</string>
     <string name="widget_with_dot">Widget.</string>
     <string name="download_complete">Download completo</string>
     <string name="favorite_delete_group">Excluir grupo</string>
@@ -4782,7 +4765,6 @@
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="quick_action_current_location_widget_descr">Uma alternância para mostrar ou ocultar o widget localização atual no mapa.</string>
     <string name="how_to_use">Como usar:</string>
-    <string name="shared_string_2_5_d_view">Visualização 2.5 D</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
     <string name="shared_string_shows">Mostrar</string>
@@ -4957,10 +4939,8 @@
     <string name="wind_layer">Camada de vento</string>
     <string name="cloud_layer">Camada de nuvem</string>
     <string name="precipitation_layer">Camada de precipitação</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
     <string name="rendering_attr_showMtbScale_description">Exibir trilhas de acordo com sua escala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Linhas isoladas de velocidade do vento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
@@ -4976,7 +4956,7 @@
 \n- widgets baseados na localização
 \n- isolinhas de temperatura / pressão
 \n
-\nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
     <string name="choose_what_to_sync">Escolha o que sincronizar</string>
@@ -5111,7 +5091,6 @@
     <string name="weather_forecast">Previsão do tempo</string>
     <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
     <string name="offline_cache">Cache off-line</string>
-    <string name="test_heightmap">Mapa de altura de teste</string>
     <string name="offline_weather_forecast">Previsão do tempo off-line</string>
     <string name="offline_weather_forecast_desc">Você pode baixar a previsão do tempo para 7 dias.</string>
     <string name="clear_online_cache_description">Isto irá limpar toda a cache para os mosaicos de previsão meteorológica online.</string>
@@ -5172,4 +5151,295 @@
     <string name="ant_plus_nothing_found_text">Não foi possível encontrar nenhum sensor</string>
     <string name="ant_plus_open_settings">Abrir configurações</string>
     <string name="external_device_low_battery">Bateria fraca</string>
+    <string name="rendering_attr_lightDetail_name">Detalhe da luz</string>
+    <string name="shared_string_finger">Dedo</string>
+    <string name="shared_string_hand">Mão</string>
+    <string name="shared_string_ear_lobe">Lóbulo da orelha</string>
+    <string name="no_bt_permission">A permissão Bluetooth não é concedida</string>
+    <string name="file_already_exists_description">%1$s\". Já existe um arquivo com esse nome. Substituir substituirá todas as alterações feitas com a versão atual</string>
+    <string name="rendering_value_sector4_name">Setor 4</string>
+    <string name="rendering_value_sector5_name">Setor 5</string>
+    <string name="rendering_value_small_name">Pequeno</string>
+    <string name="map_3d_mode_action">Modo 3D</string>
+    <string name="visible_in_3d_mode">Visível no modo 3D</string>
+    <string name="map_3d_mode_description">Toque no mapa com dois dedos e mova-os para cima e para baixo para ajustar a inclinação do mapa.</string>
+    <string name="no_poi_for_category">POI não encontrada</string>
+    <string name="rendering_value_sectors_name">Setores</string>
+    <string name="rendering_value_name_only_name">Somente nome</string>
+    <string name="running_scds_device_name">Dispositivo em execução</string>
+    <string name="bicycle_scd_device_name">Dispositivo de bicicleta</string>
+    <string name="external_device_blood_pressure">Pressão arterial</string>
+    <string name="shared_string_wrist">Pulso</string>
+    <string name="shared_string_foot">Pé</string>
+    <string name="shared_string_chest">Peito</string>
+    <string name="search_track_by_name">Pesquisar trilha por nome</string>
+    <string name="no_search_results">SME resultados</string>
+    <string name="file_already_exists">O arquivo já existe</string>
+    <string name="nav_profile_confirm_delete">Tem certeza de que deseja excluir \"%1$s\"\?</string>
+    <string name="map_2d_mode_action">Modo 2D</string>
+    <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>
+    <string name="rendering_value_sector1_name">Setor 1</string>
+    <string name="rendering_value_sector2_name">Setor 2</string>
+    <string name="rendering_value_sector3_name">Setor 3</string>
+    <string name="poi_categories">Categorias de POI</string>
+    <string name="external_device_characteristic_systolic">Sistólica</string>
+    <string name="external_device_characteristic_diastolic">Diastólica</string>
+    <string name="delete_folder">Excluir pasta</string>
+    <string name="shared_string_visible_on_map">Visível no mapa</string>
+    <string name="tracks_empty_folder">Pasta vazia</string>
+    <string name="track_not_recorded">Não gravado</string>
+    <string name="shared_string_new_track">Nova trilha</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="number_of_tracks">%1$s trilhas</string>
+    <string name="delete_folder_question">Excluir pasta\?</string>
+    <string name="show_all_tracks_on_the_map">Mostrar todas as trilhas no mapa</string>
+    <string name="tracks_empty_folder_description">Esta pasta ainda não tem nenhuma trilha</string>
+    <string name="write_data_from_sensor_to_track">Gravar dados de sensores externos no GPX durante a gravação da viagem.</string>
+    <string name="rssi_widget_desc">Mostra o nível RSSI do seu dispositivo externo.</string>
+    <string name="rendering_attr_lightDetail_description">Padrão: nome da baliza marítima (carácter de luz.grupo.período), seleciona informações adicionais sobre os setores 1 a 3 ou o carácter de luz do setor 1,2,3,4,5</string>
+    <string name="external_sensors_not_found">Sensores não encontrados</string>
+    <string name="save_track_external_sensors_data">Dados</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Não há sensores conectados deste tipo</string>
+    <string name="external_sensors_source_of_data">Fonte de dados</string>
+    <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todas as trilhas (%2$s) incluídas.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="is_imported">%1$s é importado.</string>
+    <string name="external_device_forget_sensor">Esquecer o sensor</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="device_disconnected">%1$s desconectado</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Emparelhar sensor ANT+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Pode emparelhar sensores Bluetooth LE e ANT+ com o OsmAnd.</string>
+    <string name="power_watts_unit">Watts</string>
+    <string name="calculate_offline">Calcular offline</string>
+    <string name="calculate_offline_altitude_descr">"Calcule a elevação offline, com base nos dados do mapa de altura.  As diferenças em relação à altitude registrada pelo dispositivo podem ser usadas como correção de elevação."</string>
+    <string name="error_calculate">O resultado do cálculo está vazio</string>
+    <string name="device_connected">%1$s conectado</string>
+    <string name="ant_plus_pair_new_sensor_ble">Emparelhar sensor Bluetooth LE</string>
+    <string name="external_device_characteristic_cuff_pressure">Pressão do punho</string>
+    <string name="external_device_details_pair">Emparelhar</string>
+    <string name="shared_string_close_the_dialog">Fechar tela</string>
+    <string name="relief_3d">Relevo 3D</string>
+    <string name="terrain_map">Mapa do terreno</string>
+    <string name="relief_3d_description">Possuir e observar a maquete do seu bairro ou de todo o continente.</string>
+    <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
+    <string name="terrain_category_description">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
+    <string name="slope_legend_description">O Slope usa cores para visualizar a inclinação do terreno. Você pode ler mais sobre Slopes em %1$s.</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de classificação de dificuldade para as rotas.</string>
+    <string name="shared_string_checked">Ativado</string>
+    <string name="shared_string_not_checked">Não ativado</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="write_bearing_description">Salvar a direção em cada ponto da trilha durante a gravação</string>
+    <string name="write_bearing">Salvar direção</string>
+    <string name="write_heading_description">Salvar o cabeçalho em cada ponto da trilha durante a gravação</string>
+    <string name="write_heading">Salvar cabeçalho</string>
+    <string name="rendering_value_sacScale_description">Clube Alpino Suíço</string>
+    <string name="rendering_value_caiScale_description">Clube Alpino Italiano</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="shared_string_included">Incluído</string>
+    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diversos</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="dangerous_goods">Mercadorias perigosas</string>
+    <string name="osmand_cloud_delete_account_confirmation">Excluir conta\?</string>
+    <string name="hillshade_slope">Sombras de relevo, Inclinação</string>
+    <string name="verify_account">Verificar a sua conta</string>
+    <string name="release_4_5">- Sensores BLE/ANT+: Link reformulado, escrita e visualização dos dados recebidos no GPX
+\n
+\n - Backup gratuito dos favoritos e das configurações para \"OsmAnd Cloud\"
+\n
+\n - Novo formato para mapas de terreno com suporte de relevo 3D
+\n
+\n - Gerenciamento de trilhas: interface de usuário atualizada, ordenação adicionada, suporte de pastas aninhadas
+\n
+\n - Android Auto: novo menu inicial para aceder aos favoritos, trilhas e categorias de POI
+\n
+\n - Uma lista de widgets para o painel superior/inferior
+\n
+\n - Novo perfil \"Trem\", que permite calcular percursos ferroviários
+\n
+\n - As curvas de nível funcionam com qualquer \"fonte de mapa\"
+\n
+\n - Lista alargada de ações predefinidas para teclados externos
+\n
+\n - Arquivos de encaminhamento personalizados, opções adicionadas para excluir ou substituir
+\n
+\n - Opção adicionada para \"Anunciar o desvio do itinerário\"
+\n
+\n - Tela inicial: opção adicionada para restaurar o status do OsmAnd a partir de um arquivo
+\n
+\n - Adicionadas classes \"Materiais perigosos\" na navegação de caminhões na América do Norte
+\n
+\n - Adicionado o suporte da \"Via ferrata\" para rotas pedestres
+\n
+\n - Adicionada a escala \"CAI\" para classificação da dificuldade das rotas
+\n
+\n - Correção da seleção do idioma por aplicativo
+\n
+\n - Adicionado suporte para ícones temáticos
+\n
+\n - OsmAnd Cloud: adicionada a opção de excluir a conta
+\n
+\n - Acessibilidade: o tamanho do alvo de toque para os botões foi alterado para 48 dp; foi corrigido um problema com a IU do mapa visível para leitores da tela
+\n
+\n - Avisos de voz em japonês reformulados
+\n
+\n - Mudança da elevação e avaliação da inclinação reformulada
+\n
+\n</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Todos os dados do OsmAnd Cloud serão %1$s. Os dados no aparelho permanecem intocados.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Isto não cancelará a sua assinatura do OsmAnd Pro.</string>
+    <string name="delete_account_warning">Tem certeza que pretende excluir a conta %1$s\?</string>
+    <string name="free_account">Conta gratuita</string>
+    <string name="folder_export_empty_error">Nada para exportar, a pasta está vazia</string>
+    <string name="osmand_cloud_deleted_account_descr">A conta e todos os dados foram excluídos do OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deletion_account_warning">A sua conta e todos os detalhes da conta serão %1$s</string>
+    <string name="shared_string_deleting">Excluindo</string>
+    <string name="routing_attr_allow_via_ferrata_name">Rota de montanha (via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Uma rota de montanha equipada com cabos fixos, grampos, escadas e pontes.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar sqltiedb raster para sombras de relevo / inclinações</string>
+    <string name="cache_size">Tamanho de cache</string>
+    <string name="shared_string_avoid">Evitar</string>
+    <string name="may_be_used_if_there_is_shortcut">Pode ser usado se houver um atalho</string>
+    <string name="free_favorites_backup_description">Registe-se no OsmAnd Cloud para obter um backup gratuito dos seus favoritos e configurações.</string>
+    <string name="free_favorites_backup">Backup gratuito de favoritos</string>
+    <string name="manage_subscriptions">Gerenciar as assinaturas.</string>
+    <string name="dangerous_goods_description">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
+    <string name="free_settings_backup">Backup gratuito das configurações</string>
+    <string name="get_osmand_cloud">Obter OsmAnd Cloud</string>
+    <string name="osmand_cloud_deleting_account_descr">Em poucos instantes, todos os seus dados e a sua conta serão excluídos do OsmAnd Cloud.
+\n
+\nTodos os dados no aparelho permanecem intactos.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Tem certeza de que deseja excluir a conta no OsmAnd Cloud\?
+\n
+\nEsta ação não pode ser desfeita.</string>
+    <string name="delete_account">Excluir conta</string>
+    <string name="action_cannot_be_undone">Essa ação não pode ser desfeita.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Os aparelhos secundários serão desconectados do OsmAnd Cloud e perderão o acesso aos recursos pagos.</string>
+    <string name="free_ride">Passeio gratuito</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substâncias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamáveis</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes e peróxidos orgânicos</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
+    <string name="help_article_personal_profiles_name">Perfis (Configurações)</string>
+    <string name="help_article_personal_storage_name">Armazenamento</string>
+    <string name="app_mode_baby_transport">Transporte de bebê</string>
+    <string name="sensor_temperature_desc">Mostra a temperatura do sensor</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="about_osmand">Sobre o OsmAnd</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
+    <string name="user_guide">Guia de usuário</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Roteamento em linha reta (Aeronave)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Roteamento de trem</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Roteamento de transporte público</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="average_glide_time_interval_desc">Especifique o intervalo de tempo para cálculo da média de planeio.</string>
+    <string name="help_article_search_search_coordinates_name">Pesquisar coordenadas</string>
+    <string name="verify_account_deletion_descr">Precisamos verificar sua conta antes de excluí-la.
+\n
+\nPor favor, insira o endereço de e-mail com o qual você se registrou. Uma senha de uso único para a próxima etapa será enviada a ele.</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navegação por marcadores</string>
+    <string name="help_article_map_point_layers_on_map_name">Pontos no mapa</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="send_crash_log_descr">Contém apenas informações sobre falhas</string>
+    <string name="help_article_plan_route_coordinate_input_name">Entrada de coordenadas</string>
+    <string name="help_article_map_vector_maps_name">Mapas vetoriais (estilos de mapa)</string>
+    <string name="help_article_start_with_main_menu_name">Menu principal</string>
+    <string name="widget_available_ram_desc">Exibe a memória disponível alocada para OsmAnd.</string>
+    <string name="contact_us">Fale conosco</string>
+    <string name="glide_ratio_to_target">Razão de planeio para o alvo</string>
+    <string name="sort_size_descending">Tamanho grande primeiro</string>
+    <string name="help_article_widgets_markers_name">Widgets de marcadores</string>
+    <string name="delete_map">Excluir mapa</string>
+    <string name="help_article_purchases_giveaway_name">Sorteio</string>
+    <string name="help_article_start_with_first_steps_name">Primeiros passos</string>
+    <string name="help_article_search_search_poi_name">Pesquisar POI</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">Mapas padrões</string>
+    <string name="help_article_troubleshooting_general_name">Geral</string>
+    <string name="free_versions_descr">Baixe e instale a versão gratuita do OsmAnd</string>
+    <string name="max_altitude">Altitude máxima</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Comandos de voz / Notificações</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="average_glide_ratio">Razão média de planeio</string>
+    <string name="shared_string_created">Criado</string>
+    <string name="free_versions">Versões gratuitas</string>
+    <string name="open_issue_on_github_descr">Faça perguntas, proponha recursos</string>
+    <string name="github_discussion">Discussão no GitHub</string>
+    <string name="deleting_complete">Exclusão concluída</string>
+    <string name="help_article_map_tracks_on_map_name">Trilhas e rotas</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="most_viewed">Mais visto</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Roteamento direto ao ponto (barco)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Tela do mapa durante a navegação</string>
+    <string name="filter_by_name">Filtrar por nome</string>
+    <string name="shared_string_reset_all">Redefinir tudo</string>
+    <string name="help_article_navigation_guidance_name">Guia</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Roteamento de carro (caminhão, motocicleta)</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapas e dados</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalhes da rota</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Preparação de rota</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia e mapas de viagens</string>
+    <string name="map_widget_group_glide_desc">Os widgets mostram a razão de planeio em relação ao alvo ou a razão de planeio média para a viagem atual.</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Roteamento de pedestres</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navegação por trilha</string>
+    <string name="help_article_navigation_routing_online_routing_name">Roteamento on-line</string>
+    <string name="help_article_map_map_context_menu_name">Menu de contexto do mapa</string>
+    <string name="map_widget_glide_average_desc">Mostra a razão de planeio média para o intervalo definido.</string>
+    <string name="copy_build_version">Copiar versão de compilação</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_personal_import_export_name">Importar / Exportar</string>
+    <string name="rendering_styles">Estilos de renderização</string>
+    <string name="filter_tracks_count">Filtro: %d</string>
+    <string name="sort_country_name_ascending">Nome do país: A – Z</string>
+    <string name="help_article_widgets_radius_ruler_name">Régua de raio e régua</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Gravação de trilha</string>
+    <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
+    <string name="map_widget_group_glide_ratio">Razão de planeio</string>
+    <string name="help_article_plan_route_name">Planejar rota</string>
+    <string name="help_article_widgets_map_buttons_name">Botões no mapa</string>
+    <string name="map_widget_glide_target_desc">Mostra a razão de planeio necessária para atingir o ponto alvo.</string>
+    <string name="weather_online">Tempo on-line</string>
+    <string name="help_article_map_track_context_menu_name">Menu de contexto de trilhas</string>
+    <string name="date_of_creation">Data da criação</string>
+    <string name="help_article_map_legend_osmand_name">Estilo de mapa do OsmAnd</string>
+    <string name="map_is_up_to_date">O mapa %1$s está atualizado.</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamáveis</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
+    <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
+    <string name="filter_screen_title">Filtro</string>
+    <string name="external_sensor_name_property_description">Nome do sensor</string>
+    <string name="widget_available_ram">RAM disponível</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Roteamento de esqui</string>
+    <string name="help_article_widgets_name">Widgets no mapa</string>
+    <string name="help_article_personal_name">Meus dados</string>
+    <string name="help_article_purchases_android_name">Compras no Android</string>
+    <string name="telegram_chats_descr">Participe de um de nossos bate-papos locais no telegram.</string>
+    <string name="report_an_issues">Relatar um problema</string>
+    <string name="telegram_chats">Bate-papos no Telegram</string>
+    <string name="help_article_plan_route_web_name">Planejador de rotas da web</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_name">Parâmetros de rota</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Roteamento de ciclomotor</string>
+    <string name="backup_error_delete_account_email_match">O e-mail não corresponde ao nome de usuário de login</string>
+    <string name="terrain_maps">Mapas de terreno</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Rota de barco</string>
+    <string name="help_article_start_with_name">Começando com OsmAnd</string>
+    <string name="help_article_purchases_ios_name">Compras no iOS</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rotas de bicicleta (MTB)</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="help_article_widgets_nav_widgets_name">Widgets de navegação</string>
+    <string name="help_article_map_interact_with_map_name">Interagir com o mapa</string>
+    <string name="help_article_search_search_all_name">Pesquisar tudo</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Registros de falhas</string>
+    <string name="sort_country_name_descending">Nome do país: Z – A</string>
+    <string name="delete_map_description">Tem certeza de que deseja excluir o mapa %1$s\?</string>
+    <string name="help_article_map_legend_ski_map_name">Estilo de mapa de esqui</string>
+    <string name="maps_and_resources">Mapas e recursos</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Sobre o roteamento do OsmAnd</string>
+    <string name="shared_string_setup">Configuração</string>
 </resources>

@@ -2,9 +2,11 @@ package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_HEIGHTMAP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
@@ -90,7 +92,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	public static final String TAG = RouteOptionsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(RouteOptionsBottomSheet.class);
-	public static final String APP_MODE_KEY = "APP_MODE_KEY";
 	public static final String DIALOG_MODE_KEY = "DIALOG_MODE_KEY";
 
 	private OsmandApplication app;
@@ -327,7 +328,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		});
 
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
-				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		if (Build.VERSION.SDK_INT >= 21) {
 			Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
 			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
@@ -442,7 +443,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 						fragment.setUsedOnMap(true);
 						fragment.setArguments(args);
 						fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
-						fragment.setAppMode(applicationMode);
 						fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
 						updateMenu();
 					}
@@ -480,7 +480,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		});
 
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
-				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
 		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		settingBtnImage.setImageDrawable(drawable);
@@ -564,7 +564,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 					public void onClick(View view) {
 						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 						mapRouteInfoMenu.hide();
-						mapRouteInfoMenu.selectTrack();
+						mapRouteInfoMenu.showFollowTrack();
 						dismiss();
 					}
 				})
@@ -696,6 +696,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_SRTM_MODE | FOLLOW_TRACK_MODE);
+			}
+		});
+	}
+
+	@Override
+	public void calculateOfflineSelected(int segmentIndex) {
+		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
+			if (errorMessage == null) {
+				openPlanRoute(gpxFile, segmentIndex, CALCULATE_HEIGHTMAP_MODE | FOLLOW_TRACK_MODE);
 			}
 		});
 	}

@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.base;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +9,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
@@ -36,8 +40,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public abstract class BaseRouteLayer extends OsmandMapLayer {
 
@@ -175,11 +177,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(getAppMode());
 		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		Float width = widthKey != null ? getWidthByKey(tileBox, widthKey) : null;
+		return width != null ? width : attrs.paint.getStrokeWidth();
 	}
 
 	@Nullable
-	protected Float getWidthByKey(RotatedTileBox tileBox, String widthKey) {
+	protected Float getWidthByKey(@NonNull RotatedTileBox tileBox, @NonNull String widthKey) {
 		Float resultValue = cachedRouteLineWidth.get(widthKey);
 		if (resultValue != null) {
 			return resultValue;
@@ -218,6 +221,11 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			return view.getSettings().ROUTE_SHOW_TURN_ARROWS.getModeValue(getAppMode());
 		}
+	}
+
+	protected void setTurnArrowPaintsColor(@ColorInt int color) {
+		attrs.paint3.setColor(color);
+		paintIconAction.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
 	}
 
 	protected void drawTurnArrow(Canvas canvas, Matrix matrix, float x, float y, float px, float py) {

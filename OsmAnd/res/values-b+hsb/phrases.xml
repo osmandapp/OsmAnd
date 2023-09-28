@@ -1870,11 +1870,9 @@
     <string name="poi_payment_fuel_type">tankowanske karty</string>
     <string name="poi_fire_hydrant_position">městno</string>
     <string name="poi_water_source">wodowa žórła</string>
-    <string name="poi_car_yes">awto: haj</string>
     <string name="poi_car_no">awto: ně</string>
     <string name="poi_scooter_yes">motorske: haj</string>
     <string name="poi_scooter_no">motorske: ně</string>
-    <string name="poi_truck_yes">LKW: haj</string>
     <string name="poi_truck_no">LKW: ně</string>
     <string name="poi_amperage">prudosylnosć</string>
     <string name="poi_map_type_topo">typ karty: topografiska</string>

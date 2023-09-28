@@ -1,12 +1,13 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -27,7 +31,6 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
@@ -36,8 +39,8 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentActivatedListener;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnSaveButtonClickListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -49,11 +52,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-
-import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFragmentActivatedListener,
 		OnSaveButtonClickListener {
@@ -74,9 +73,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		OsmandApplication app = requireMyApplication();
-		boolean nightMode = isNightMode(false);
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
 		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, !nightMode);
@@ -105,7 +102,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 	}
 
 	private void fillKeysValues(@NonNull Set<String> tagKeys, @NonNull Set<String> valueKeys) {
-		MapPoiTypes mapPoiTypes = requireMyApplication().getPoiTypes();
+		MapPoiTypes mapPoiTypes = app.getPoiTypes();
 		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();
 		for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
@@ -271,15 +268,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			valueEditText.setText(value);
 			valueEditText.setAdapter(valueAdapter);
 			valueEditText.setThreshold(3);
-			valueEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
+			valueEditText.addTextChangedListener(new SimpleTextWatcher() {
 				@Override
 				public void afterTextChanged(Editable s) {
 					if (!editPoiData.isInEdit()) {

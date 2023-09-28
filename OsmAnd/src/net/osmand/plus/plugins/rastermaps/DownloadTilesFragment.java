@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
 
@@ -42,16 +41,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.resources.BitmapTilesCache;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -65,10 +65,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
-	private boolean nightMode;
 
 	private UpdateTilesHandler handler;
 
@@ -97,7 +94,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private TextView tilesNumberText;
 	private TextView estimatedDownloadSizeText;
 
-	private View downloadButton;
+	private DialogButton downloadButton;
 
 	private int selectedMinZoom;
 	private int selectedMaxZoom;
@@ -116,14 +113,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (args != null) {
 			layerToDownload = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_LAYER, MapLayerType.class);
 		}
-
-		app = requireMyApplication();
-		settings = requireSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
-		tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+		tileSource = loadTileSource();
 		handler = new UpdateTilesHandler(() -> {
 			setupTilesDownloadInfo();
 			updateTilesPreview();
@@ -143,9 +136,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = requireMapActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
 		mapWindow = view.findViewById(R.id.map_window);
@@ -243,7 +240,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, false,
 						layerToDownload.getMapLayerSettings(app), mapSourceName -> {
 							if (shouldShowDialog(app)) {
-								tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+								tileSource = loadTileSource();
 								int currentZoom = mapView.getZoom();
 								selectedMaxZoom = tileSource.getMaximumZoomSupported();
 								selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
@@ -267,7 +264,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 		tvMapSource.setText(layerToDownload.getNameId());
 		ivIcon.setImageResource(layerToDownload.getIconId());
-		tvSelectedMapSource.setText(tileSource.getName().replace(SQLITE_EXT, ""));
+		tvSelectedMapSource.setText(settings.getTileSourceTitle(tileSource, tileSource.getName()));
 	}
 
 	private void setupTilesToDownloadSetting() {
@@ -405,8 +402,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private void setupDownloadButton() {
 		downloadButton = view.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, downloadButton, DialogButtonType.PRIMARY,
-				R.string.shared_string_download);
+		downloadButton.setButtonType(DialogButtonType.PRIMARY);
+		downloadButton.setTitleId(R.string.shared_string_download);
 		downloadButton.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
@@ -491,7 +488,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
-		outState.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
+		outState.putSerializable(KEY_DOWNLOAD_TYPE, downloadType);
 	}
 
 	@Override
@@ -548,6 +545,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
+			}
+			if (currentZoom > selectedMaxZoom && currentZoom <= maxZoom) {
+				selectedMaxZoom = currentZoom;
 			}
 
 			if (downloadType != DownloadType.ALL) {
@@ -609,6 +609,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		return activity == null ? null : ((MapActivity) activity);
+	}
+
+	private ITileSource loadTileSource() {
+		ITileSource tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+		if (tileSource instanceof SQLiteTileSource) {
+			((SQLiteTileSource) tileSource).initDatabaseIfNeeded();
+		}
+		return tileSource;
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {

@@ -10,7 +10,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class PromoBannerCard extends BaseCard {

@@ -2,9 +2,10 @@ package net.osmand.plus.settings.fragments;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
-import net.osmand.plus.plugins.externalsensors.AntPlusSettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
+import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
+import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
@@ -40,8 +41,10 @@ public enum SettingsScreenType {
 	OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
 	DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
 	SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
-	ANT_PLUS_SETTINGS(AntPlusSettingsFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
-	WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar);
+	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar),
+	EXTERNAL_SETTINGS_WRITE_TO_TRACK_SETTINGS(ExternalSettingsWriteToTrackSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.external_sensors_write_to_track_settings, R.layout.profile_preference_toolbar),
+	DANGEROUS_GOODS(DangerousGoodsFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.dangerous_goods_parameters, R.layout.global_preference_toolbar);
 
 	public final String fragmentName;
 	public final boolean profileDependent;

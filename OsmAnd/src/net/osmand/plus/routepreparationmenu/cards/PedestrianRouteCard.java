@@ -51,7 +51,7 @@ public class PedestrianRouteCard extends MapBaseCard {
 
 		Drawable icPedestrian = app.getUIUtilities().getIcon(
 				R.drawable.ic_action_pedestrian_dark,
-				R.color.description_font_and_bottom_sheet_icons);
+				R.color.icon_color_default_light);
 		((ImageView) view.findViewById(R.id.image)).setImageDrawable(
 				AndroidUtils.getDrawableForDirection(app, icPedestrian));
 		view.findViewById(R.id.card_divider).setVisibility(View.VISIBLE);

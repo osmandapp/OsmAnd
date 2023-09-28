@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_IN;
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_UP;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -28,19 +28,17 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
+	public static final String OPEN_BACKUP_AUTH = "open_backup_auth";
+
 	public static final String TAG = BackupAuthorizationFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-
-	private View signUpButton;
-	private View signInButton;
-
-	private boolean nightMode;
+	private DialogButton signUpButton;
+	private DialogButton signInButton;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -48,17 +46,10 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = isNightMode(false);
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_authorize_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -72,9 +63,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		TextView title = view.findViewById(R.id.toolbar_title);
-		title.setText(R.string.backup_and_restore);
-
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
 
@@ -90,27 +78,18 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	}
 
 	private void updateButtons() {
-		boolean subscribed = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (subscribed) {
-			setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
-		} else {
-			signUpButton.setOnClickListener(v -> {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
-				}
-			});
-			setupDialogButton(nightMode, signUpButton, DialogButtonType.PRIMARY, R.string.shared_string_get);
-		}
+		setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
-	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
-		setupDialogButton(nightMode, view, buttonType, textId);
-		view.setOnClickListener(v -> {
+	private void setupAuthorizeButton(DialogButton button, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
+		button.setButtonType(buttonType);
+		button.setTitleId(textId);
+		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), signUp);
+				LoginDialogType dialogType = signUp ? SIGN_UP : SIGN_IN;
+				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), dialogType);
 			}
 		});
 	}

@@ -19,10 +19,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -72,10 +73,6 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		return dialogView;
 	}
 
-	public static void showInstance(FragmentManager fragmentManager) {
-		new AnalyzeBottomSheet().show(fragmentManager, TAG);
-	}
-
 	private void setupDialogView(View dialogView) {
 		LinearLayout xTypesContainer = dialogView.findViewById(R.id.x_axis);
 		LinearLayout yTypesContainer = dialogView.findViewById(R.id.y_axis);
@@ -94,8 +91,8 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private View createAxisType(GPXDataSetType[] types) {
-		String title = GPXDataSetType.getName(app, types);
-		int iconId = types[0].getImageId();
+		String title = TrackDetailsMenu.getGpxDataSetsName(app, types);
+		int iconId = types[0].getIconId();
 		boolean selected = Arrays.equals(types, gpxDisplayItem.chartTypes);
 
 		return createAxisTypeItem(title, iconId, selected, types);
@@ -103,8 +100,8 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 
 	private View createAxisType(GPXDataSetAxisType type) {
 		boolean selected = type == gpxDisplayItem.chartAxisType;
-		int iconId = type.getImageId();
-		String title = getString(type.getStringId());
+		int iconId = type.getIconId();
+		String title = getString(type.getTitleId());
 
 		return createAxisTypeItem(title, iconId, selected, type);
 	}
@@ -153,11 +150,11 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 			if (obj instanceof GPXDataSetType[]) {
 				GPXDataSetType[] types = (GPXDataSetType[]) obj;
 				selected = Arrays.equals(types, gpxDisplayItem.chartTypes);
-				iconId = types[0].getImageId();
+				iconId = types[0].getIconId();
 			} else if (obj instanceof GPXDataSetAxisType) {
 				GPXDataSetAxisType types = (GPXDataSetAxisType) obj;
 				selected = types.equals(gpxDisplayItem.chartAxisType);
-				iconId = types.getImageId();
+				iconId = types.getIconId();
 			}
 
 			updateItemView(view, selected, iconId);
@@ -173,6 +170,13 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(selected);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			AnalyzeBottomSheet fragment = new AnalyzeBottomSheet();
+			fragment.show(manager, TAG);
+		}
 	}
 }
 

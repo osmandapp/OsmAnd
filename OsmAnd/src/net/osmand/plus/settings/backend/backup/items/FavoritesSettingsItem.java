@@ -1,6 +1,8 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.gpx.GPXUtilities.PointsGroup;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
@@ -10,13 +12,15 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -117,7 +121,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (!Algorithms.isEmpty(groupName)) {
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else if (!Algorithms.isEmpty(fileName)) {
-			groupName = fileName.replace(FAV_FILE_PREFIX, "").replace(GPX_FILE_EXT, "");
+			groupName = FavouritesFileHelper.getGroupName(fileName)
+					.replace(FAV_FILE_PREFIX, "").replace(GPX_FILE_EXT, "");
 			if (groupName.startsWith(FAV_GROUP_NAME_SEPARATOR)) {
 				groupName = groupName.substring(1);
 			}
@@ -125,6 +130,12 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		} else {
 			return ctx.getString(R.string.shared_string_favorites);
 		}
+	}
+
+	@NonNull
+	@Override
+	public String getDefaultFileName() {
+		return FavouritesFileHelper.getGroupFileName(getName()) + getDefaultFileExtension();
 	}
 
 	@NonNull
@@ -165,19 +176,22 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					}
 				}
 			}
-			List<FavouritePoint> favourites = FavouritesHelper.getPointsFromGroups(appliedItems);
-			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false, false);
+			for (FavoriteGroup group : appliedItems) {
+				PointsGroup pointsGroup = group.toPointsGroup(app);
+				for (FavouritePoint point : group.getPoints()) {
+					favoritesHelper.addFavourite(point, false, false, false, pointsGroup);
+				}
 			}
 			favoritesHelper.sortAll();
-			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.saveCurrentPointsIntoFile(false);
 			favoritesHelper.loadFavorites();
 		}
 	}
 
 	@Override
 	protected void deleteItem(FavoriteGroup item) {
-		favoritesHelper.deleteGroup(item);
+		favoritesHelper.deleteGroup(item, false);
+		favoritesHelper.saveCurrentPointsIntoFile(false);
 	}
 
 	@Override
@@ -235,13 +249,26 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
-							group = new FavoriteGroup(point);
+							group = createFavoriteGroup(gpxFile, point);
 							flatGroups.put(group.getName(), group);
 							items.add(group);
 						}
 						group.getPoints().add(point);
 					}
 				}
+			}
+
+			@NonNull
+			private FavoriteGroup createFavoriteGroup(@NonNull GPXFile gpxFile, @NonNull FavouritePoint point) {
+				FavoriteGroup favoriteGroup = new FavoriteGroup(point);
+
+				PointsGroup pointsGroup = gpxFile.getPointsGroups().get(favoriteGroup.getName());
+				if (pointsGroup != null) {
+					favoriteGroup.setColor(pointsGroup.color);
+					favoriteGroup.setIconName(pointsGroup.iconName);
+					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE));
+				}
+				return favoriteGroup;
 			}
 		};
 	}

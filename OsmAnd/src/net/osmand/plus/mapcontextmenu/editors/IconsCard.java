@@ -170,6 +170,9 @@ public class IconsCard extends MapBaseCard {
 			ChipItem item = new ChipItem(category);
 			if (!category.equals(KEY_LAST_USED_ICONS)) {
 				item.title = category;
+				item.contentDescription = category;
+			} else {
+				item.contentDescription = app.getString(R.string.shared_string_last_used);
 			}
 			items.add(item);
 		}
@@ -293,7 +296,7 @@ public class IconsCard extends MapBaseCard {
 			ImageView icon = newIconContainer.findViewById(R.id.icon);
 			// Intentionally not accessing icons cache here, because cached icons are wrongly
 			// positioned in FavoritePointEditorFragment and WptPtEditorFragmentNew
-			int whiteColor = ContextCompat.getColor(mapActivity, R.color.color_white);
+			int whiteColor = ContextCompat.getColor(mapActivity, R.color.card_and_list_background_light);
 			icon.setImageDrawable(UiUtilities.createTintedDrawable(mapActivity, newIconId, whiteColor));
 
 			ImageView backgroundCircle = newIconContainer.findViewById(R.id.background);

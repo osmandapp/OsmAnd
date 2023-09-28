@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,33 +16,29 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
 	public static final String KEY_APP_MODE = "app_mode";
 	public static final String KEY_WIDGET_ID = "widget_id";
 
-	protected OsmandApplication app;
-	protected OsmandSettings settings;
 	protected MapWidgetRegistry widgetRegistry;
 	protected ApplicationMode appMode;
 	protected String widgetId;
-	protected boolean nightMode;
 
 	protected View view;
 
@@ -53,10 +48,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		nightMode = !settings.isLightContent();
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {
@@ -74,9 +66,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			initParams(args);
 		}
 
-
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -120,7 +110,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	protected abstract void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container);
 
 	private void setupApplyButton() {
-		View applyButton = view.findViewById(R.id.dismiss_button);
+		DialogButton applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			applySettings();
 			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -133,7 +123,8 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			}
 			dismiss();
 		});
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 	}
 
 	protected abstract void applySettings();
@@ -155,7 +146,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@NonNull

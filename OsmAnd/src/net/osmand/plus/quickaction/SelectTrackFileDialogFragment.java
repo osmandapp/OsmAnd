@@ -40,7 +40,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), isNightMode());
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.select_track_file_dialog_fragment, container, false);
 		setupToolbar(view);
 		setupRecyclerView(view);
@@ -49,7 +49,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	private void setupToolbar(@NonNull View root) {
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		int closeIconColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode());
+		int closeIconColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Drawable closeIcon = getIcon(R.drawable.ic_action_close, closeIconColor);
 		toolbar.setNavigationIcon(closeIcon);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
@@ -97,8 +97,9 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	private boolean isNightMode() {
-		return isNightMode(true);
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,

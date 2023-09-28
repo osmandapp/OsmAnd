@@ -14,6 +14,7 @@ import net.osmand.plus.ProgressImplementation;
  * Created by GaidamakUA on 12/7/15.
  */
 public class ProgressDialogFragment extends DialogFragment {
+
 	public static final String TAG = "progress";
 	private static final String TITLE_ID = "title_id";
 	private static final String MESSAGE_ID = "message_id";

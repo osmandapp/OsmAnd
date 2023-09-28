@@ -13,7 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -24,16 +28,26 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteInfoCard extends MapBaseCard {
 
 	private final RouteKey routeKey;
+	private final GPXFile gpxFile;
 
-	public RouteInfoCard(@NonNull MapActivity mapActivity, @NonNull RouteKey routeKey) {
-		super(mapActivity);
+	public RouteInfoCard(
+			@NonNull MapActivity activity,
+			@NonNull RouteKey routeKey,
+			@NonNull GPXFile gpxFile
+	) {
+		super(activity);
 		this.routeKey = routeKey;
+		this.gpxFile = gpxFile;
 	}
 
 	@Override
@@ -62,44 +76,62 @@ public class RouteInfoCard extends MapBaseCard {
 		addWikiInfoRow(container, routeKey.getWikipedia());
 	}
 
-	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description) {
-		addInfoRow(container, text, description, false);
-	}
-
 	private void addWikiInfoRow(@NonNull ViewGroup container, @NonNull String text) {
 		if (Algorithms.isEmpty(text)) {
 			return;
 		}
 		String url = WikiAlgorithms.getWikiUrl(text);
 		String description = app.getString(R.string.shared_string_wikipedia);
-		if (Algorithms.isUrl(url)) {
-			addInfoRow(container, url, description, true);
-		} else {
-			addInfoRow(container, text, description);
+		View view = addInfoRow(container, url, description);
+
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if (Algorithms.isUrl(url) && view != null && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+			TextView tvContent = view.findViewById(R.id.title);
+			tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+			view.setOnClickListener(v -> {
+				WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), url);
+			});
 		}
 	}
 
-	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description, boolean needLinks) {
+	@Nullable
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description) {
+		return addInfoRow(container, text, description, false);
+	}
+
+	@Nullable
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description, boolean needLinks) {
 		if (Algorithms.isEmpty(text)) {
-			return;
+			return null;
 		}
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
 
-		TextView titleTv = view.findViewById(R.id.title);
-		TextView descriptionTv = view.findViewById(R.id.description);
+		TextView tvLabel = view.findViewById(R.id.description);
+		TextView tvContent = view.findViewById(R.id.title);
 
-		titleTv.setText(text);
-		descriptionTv.setText(description);
+		tvContent.setText(text);
+		tvLabel.setText(description);
 
 		OsmAndAppCustomization customization = app.getAppCustomization();
-		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(titleTv, Linkify.ALL)) {
-			titleTv.setMovementMethod(null);
-			titleTv.setLinkTextColor(ColorUtilities.getActiveColor(app, nightMode));
-			titleTv.setOnTouchListener(new ClickableSpanTouchListener());
-			AndroidUtils.removeLinkUnderline(titleTv);
+		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(tvContent, Linkify.ALL)) {
+			tvContent.setMovementMethod(null);
+			tvContent.setLinkTextColor(ColorUtilities.getActiveColor(app, nightMode));
+			tvContent.setOnTouchListener(new ClickableSpanTouchListener());
+			AndroidUtils.removeLinkUnderline(tvContent);
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), container.getChildCount() > 0);
 		container.addView(view);
+		return view;
+	}
+
+	private List<LatLon> collectTrackPoints() {
+		List<LatLon> points = new ArrayList<>();
+		if (gpxFile != null) {
+			for (WptPt wptPt : gpxFile.getAllPoints()) {
+				points.add(new LatLon(wptPt.lat, wptPt.lon));
+			}
+		}
+		return points;
 	}
 }

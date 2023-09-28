@@ -9,7 +9,7 @@ import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
-import net.osmand.plus.importfiles.ui.TrackItem;
+import net.osmand.plus.importfiles.ui.ImportTrackItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ import java.util.List;
 public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 
 	private final File importDir;
-	private final List<TrackItem> items;
+	private final List<ImportTrackItem> items;
 	private final SaveImportedGpxListener listener;
 
-	public SaveTracksTask(@NonNull List<TrackItem> items,
+	public SaveTracksTask(@NonNull List<ImportTrackItem> items,
 	                      @NonNull File importDir,
 	                      @Nullable SaveImportedGpxListener listener) {
 		this.items = items;
@@ -43,7 +43,7 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 		importDir.mkdirs();
 		List<String> warnings = new ArrayList<>();
 		if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
-			for (TrackItem trackItem : items) {
+			for (ImportTrackItem trackItem : items) {
 				GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
 				gpxFile.addPoints(trackItem.selectedPoints);
 

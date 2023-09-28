@@ -13,7 +13,6 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -30,7 +29,7 @@ import net.osmand.search.core.SearchResult;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HistorySettingsFragment extends BaseSettingsFragment implements OnConfirmDeletionListener {
@@ -146,34 +145,30 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 
-		if (prefId.equals(BACKUP_TO_FILE)) {
-			MapActivity activity = getMapActivity();
-			if (AndroidUtils.isActivityNotDestroyed(activity)) {
-				ApplicationMode mode = getSelectedAppMode();
-				List<ExportSettingsType> types = new ArrayList<>();
-				types.add(ExportSettingsType.SEARCH_HISTORY);
-				types.add(ExportSettingsType.HISTORY_MARKERS);
-				ExportSettingsFragment.showInstance(activity.getSupportFragmentManager(), mode, types, true);
-			}
-		} else if (prefId.equals(CLEAR_ALL_HISTORY)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ClearAllHistoryBottomSheet.showInstance(fragmentManager, this);
-			}
-		} else if (prefId.equals(SEARCH_HISTORY)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SearchHistorySettingsFragment.showInstance(fragmentManager, this);
-			}
-		} else if (prefId.equals(NAVIGATION_HISTORY)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				NavigationHistorySettingsFragment.showInstance(fragmentManager, this);
-			}
-		} else if (prefId.equals(MAP_MARKERS_HISTORY)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				MarkersHistorySettingsFragment.showInstance(fragmentManager, this);
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			switch (prefId) {
+				case BACKUP_TO_FILE:
+					HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
+					selectedTypes.put(ExportSettingsType.SEARCH_HISTORY, null);
+					selectedTypes.put(ExportSettingsType.NAVIGATION_HISTORY, null);
+					selectedTypes.put(ExportSettingsType.HISTORY_MARKERS, null);
+
+					ApplicationMode mode = getSelectedAppMode();
+					ExportSettingsFragment.showInstance(fragmentManager, mode, selectedTypes, true);
+					break;
+				case CLEAR_ALL_HISTORY:
+					ClearAllHistoryBottomSheet.showInstance(fragmentManager, this);
+					break;
+				case SEARCH_HISTORY:
+					SearchHistorySettingsFragment.showInstance(fragmentManager, this);
+					break;
+				case NAVIGATION_HISTORY:
+					NavigationHistorySettingsFragment.showInstance(fragmentManager, this);
+					break;
+				case MAP_MARKERS_HISTORY:
+					MarkersHistorySettingsFragment.showInstance(fragmentManager, this);
+					break;
 			}
 		}
 		return super.onPreferenceClick(preference);

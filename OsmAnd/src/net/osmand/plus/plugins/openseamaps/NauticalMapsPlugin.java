@@ -1,7 +1,8 @@
 package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_DEPTH_CONTOURS;
+import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -14,13 +15,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -66,18 +70,15 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_nautical);
+		String description = app.getString(R.string.plugin_nautical_descr, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override
 	public String getName() {
 		return app.getString(net.osmand.plus.R.string.plugin_nautical_name);
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/nautical-charts.html";
 	}
 
 	@Override
@@ -100,23 +101,33 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		return PLUGIN_NAUTICAL;
 	}
 
+	public void createAdapterItem(@NonNull String id,
+	                              @NonNull ContextMenuAdapter adapter,
+	                              @NonNull MapActivity mapActivity,
+	                              @NonNull List<RenderingRuleProperty> customRules) {
+		if ((isEnabled() || hasDepthMaps())) {
+			createNauticalItem(id, adapter, mapActivity, customRules);
+		}
+	}
+
 	@Override
 	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
 	                                            @NonNull MapActivity mapActivity,
 	                                            @NonNull List<RenderingRuleProperty> customRules) {
-		if (isEnabled() || hasDepthMaps()) {
-			createNauticalItem(menuAdapter, mapActivity, customRules);
+		if (!PluginsHelper.isEnabled(SRTMPlugin.class)) {
+			createAdapterItem(SHOW_DEPTH_CONTOURS, menuAdapter, mapActivity, customRules);
 		}
 	}
 
 	private boolean hasDepthMaps() {
 		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
 		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> depthIndexData = helper.getLocalIndexData(readFiles, false, null, DEPTH_DATA);
+		List<LocalItem> depthIndexData = helper.getLocalIndexItems(readFiles, false, null, DEPTH_DATA);
 		return !Algorithms.isEmpty(depthIndexData);
 	}
 
-	private void createNauticalItem(@NonNull ContextMenuAdapter adapter,
+	private void createNauticalItem(@NonNull String id,
+	                                @NonNull ContextMenuAdapter adapter,
 	                                @NonNull MapActivity mapActivity,
 	                                @NonNull List<RenderingRuleProperty> customRules) {
 		OsmandSettings settings = app.getSettings();
@@ -128,7 +139,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 				CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 				ItemClickListener listener = getPropertyItemClickListener(pref, mapActivity);
 
-				adapter.addItem(new ContextMenuItem(DEPTH_CONTOURS)
+				adapter.addItem(new ContextMenuItem(id)
 						.setTitleId(R.string.nautical_depth, mapActivity)
 						.setSecondaryIcon(R.drawable.ic_action_additional_option)
 						.setSecondaryDescription(pref.get() ? app.getString(R.string.shared_string_on) : app.getString(R.string.shared_string_off))

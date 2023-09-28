@@ -18,6 +18,7 @@
 	<asset source="voice/el/el_tts.js" destination="voice/el-tts/el_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/en_tts.js" destination="voice/en-tts/en_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/en-gb/en-gb_tts.js" destination="voice/en-gb-tts/en-gb_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/eo/eo_tts.js" destination="voice/eo-tts/eo_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/es_tts.js" destination="voice/es-tts/es_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es-ar/es-ar_tts.js" destination="voice/es-ar-tts/es-ar_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/et/et_tts.js" destination="voice/et-tts/et_tts.js" mode="overwriteOnlyIfExists" />

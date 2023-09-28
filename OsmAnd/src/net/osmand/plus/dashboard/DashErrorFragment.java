@@ -16,8 +16,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
-import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.helpers.FeedbackHelper;
+import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
+import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 

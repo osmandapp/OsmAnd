@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
 import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +58,7 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.map_widget_ant_bicycle_dist, -1, accumulatedDistance));
+					new SensorDistanceWidgetDataField(R.string.map_widget_ant_bicycle_dist, -1, accumulatedDistance));
 		}
 
 		@NonNull
@@ -98,6 +99,10 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		return "Bicycle Distance";
 	}
 
+	private AntBikeSpeedDistanceDevice getBikeSpeedDistanceDevice() {
+		return (AntBikeSpeedDistanceDevice) device;
+	}
+
 	@NonNull
 	@Override
 	public List<SensorWidgetDataFieldType> getSupportedWidgetDataFieldTypes() {
@@ -112,21 +117,25 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeCalculatedAccumulatedDistanceEvent(new CalculatedAccumulatedDistanceReceiver(new BigDecimal(WHEEL_CIRCUMFERENCE)) {
-			@Override
-			public void onNewCalculatedAccumulatedDistance(long estTimestamp, EnumSet<EventFlag> eventFlags, BigDecimal accumulatedDistance) {
-				lastBikeDistanceData = new BikeDistanceData(estTimestamp, accumulatedDistance.doubleValue());
-				getDevice().fireSensorDataEvent(AntBikeDistanceSensor.this, lastBikeDistanceData);
-			}
-		});
+		AntPlusBikeSpeedDistancePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeCalculatedAccumulatedDistanceEvent(null);
+			pcc.subscribeCalculatedAccumulatedDistanceEvent(new CalculatedAccumulatedDistanceReceiver(BigDecimal.valueOf(getBikeSpeedDistanceDevice().getWheelCircumference())) {
+				@Override
+				public void onNewCalculatedAccumulatedDistance(long estTimestamp, EnumSet<EventFlag> eventFlags, BigDecimal accumulatedDistance) {
+					lastBikeDistanceData = new BikeDistanceData(estTimestamp, accumulatedDistance.doubleValue());
+					getDevice().fireSensorDataEvent(AntBikeDistanceSensor.this, lastBikeDistanceData);
+				}
+			});
+		}
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikeDistanceData data = lastBikeDistanceData;
 		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
 		if (accumulatedDistance > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(accumulatedDistance));
+			json.put(SENSOR_TAG_DISTANCE, DECIMAL_FORMAT.format(accumulatedDistance));
 		}
 	}
 }

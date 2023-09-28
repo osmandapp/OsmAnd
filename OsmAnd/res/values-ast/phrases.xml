@@ -191,7 +191,7 @@
     <string name="poi_swimming_area">Swimming area</string>
     <string name="poi_lavoir">Lavoir</string>
     <string name="poi_waste_transfer_station">Waste transfer station</string>
-    <string name="poi_weightbridge">Weightbridge</string>
+    <string name="poi_weighbridge">Weightbridge</string>
     <string name="poi_ranger_station">Ranger station</string>
     <string name="poi_water_source_lake">Llagu</string>
     <string name="poi_water_source_river">Ríu</string>
@@ -697,13 +697,11 @@
     <string name="poi_parking_fee_no">Tarifa d\'aparcamientu: non</string>
     <string name="poi_parking_fee_yes">Tarifa d\'aparcamientu: sí</string>
     <string name="poi_truck_no">Camión: non</string>
-    <string name="poi_truck_yes">Camión: sí</string>
     <string name="poi_scooter_no">Scooter: no</string>
     <string name="poi_scooter_yes">Scooter: yes</string>
     <string name="poi_bicycle_no">Bicicleta: non</string>
     <string name="poi_bicycle_yes">Bicicleta: sí</string>
     <string name="poi_car_no">Coche: non</string>
-    <string name="poi_car_yes">Coche: sí</string>
     <string name="poi_socket_as3112_output">Socket: AS/NZS 3112: output</string>
     <string name="poi_socket_as3112_current">Socket: AS/NZS 3112: current</string>
     <string name="poi_socket_as3112">Socket: AS/NZS 3112</string>
@@ -1968,7 +1966,7 @@
     <string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
     <string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Siquiatría p\'adultos</string>
-    <string name="poi_health_specialty_podology_yes">Podoloxía</string>
+    <string name="poi_health_specialty_podiatry_yes">Podoloxía</string>
     <string name="poi_health_specialty_sports_medicine_yes">Sports medicine</string>
     <string name="poi_health_specialty_manual_therapy_yes">Manual therapy</string>
     <string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
@@ -1992,7 +1990,7 @@
     <string name="poi_health_specialty_neuropsychiatry_yes">Neurosiquiatría</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurological surgery</string>
     <string name="poi_health_specialty_nephrology_yes">Nephrology (renal diseases)</string>
-    <string name="poi_health_specialty_dentistry_yes">Dentistry</string>
+    <string name="poi_health_specialty_stomatology_yes">Dentistry</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterology</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Diagnostic radiology</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Maxillo-facial surgery</string>
@@ -2004,7 +2002,7 @@
     <string name="poi_health_specialty_orthodontics_yes">Orthodontics</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Plastic surgery</string>
     <string name="poi_health_specialty_emergency_medicine_no">Health specialty: accident and emergency medicine: no</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Accident and emergency medicine</string>
+    <string name="poi_health_specialty_emergency_yes">Accident and emergency medicine</string>
     <string name="poi_health_specialty_maternity_yes">Maternidá</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dental, oral and maxillo-facial surgery</string>
     <string name="poi_health_specialty_pulmonology_yes">Respiratory medicine</string>
@@ -2025,7 +2023,7 @@
     <string name="poi_health_specialty_paediatrics_yes">Paediatrics</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otolaryngology</string>
     <string name="poi_health_specialty_orthopaedics_yes">Orthopaedics</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Internal medicine</string>
+    <string name="poi_health_specialty_internal_yes">Internal medicine</string>
     <string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
     <string name="poi_health_specialty_general_yes">General practitioner</string>
@@ -3963,8 +3961,6 @@
     <string name="poi_prep_school">Tutorial school</string>
     <string name="poi_country_store">Country store</string>
     <string name="poi_groundskeeping">Groundskeeping store</string>
-    <string name="poi_callable_no">Non</string>
-    <string name="poi_callable_yes">Sí</string>
     <string name="poi_payment_reverse_charge_calls_yes">Reverse charge calls: yes</string>
     <string name="poi_payment_calling_cards_yes">Calling cards accepted</string>
     <string name="poi_payment_reverse_charge_calls_no">Reverse charge calls: no</string>
@@ -4016,7 +4012,6 @@
     <string name="poi_picnic_table_yes">Picnic table: yes</string>
     <string name="poi_fuel_propane">Propane</string>
     <string name="poi_power_terminal">Power terminal</string>
-    <string name="poi_callable">Callable</string>
     <string name="poi_shelter_filter">Shelter</string>
     <string name="poi_permanent_camping">Permanent camping</string>
     <string name="poi_authentication_none">Auth not required</string>

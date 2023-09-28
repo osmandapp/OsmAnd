@@ -272,7 +272,6 @@
     <string name="poi_service_vehicle_inspection_yes">Inspekcija vozila</string>
     <string name="poi_direction_west">Zapadni smjer</string>
     <string name="poi_shelter_no">Sklonište: ne</string>
-    <string name="poi_callable_yes">Da</string>
     <string name="poi_generator_type_pwr">Vrsta generatora: PWR</string>
     <string name="poi_generator_type_bwr_1">Vrsta generatora: BWR-1</string>
     <string name="poi_generator_type_phwr">Vrsta generatora: PHWR</string>
@@ -914,7 +913,7 @@
     <string name="poi_health_specialty_biology_yes">Kliniška biologija</string>
     <string name="poi_health_specialty_anaesthetics_yes">Anestezisti</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiološko dijagnosticiranje</string>
-    <string name="poi_health_specialty_dentistry_yes">Zubar</string>
+    <string name="poi_health_specialty_stomatology_yes">Zubar</string>
     <string name="poi_health_specialty_nuclear_medicine_yes">Nuklearna medicina</string>
     <string name="poi_health_specialty_oncology_yes">Onkologija</string>
     <string name="poi_health_specialty_optometry_yes">Optometrija</string>
@@ -1495,7 +1494,6 @@
     <string name="poi_shelter_yes">Da</string>
     <string name="poi_arch">Luk</string>
     <string name="poi_manufacturer">Proizvođač</string>
-    <string name="poi_callable_no">Ne</string>
     <string name="poi_country_store">Poljoprivredna prodavaonica</string>
     <string name="poi_trailhead">Početak puta</string>
     <string name="poi_sports_hall">Sportska sala</string>

@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_TRANSPORT_LINES_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.transport.TransportLinesMenu;
 
 public class ShowHideTransportLinesAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(31,
+	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_TRANSPORT_LINES_ACTION_ID,
 			"transport.showhide", ShowHideTransportLinesAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.poi_filter_public_transport)

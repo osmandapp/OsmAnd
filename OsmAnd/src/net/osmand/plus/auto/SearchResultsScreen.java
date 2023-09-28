@@ -1,12 +1,8 @@
 package net.osmand.plus.auto;
 
-import static androidx.car.app.constraints.ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.Screen;
-import androidx.car.app.constraints.ConstraintManager;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.ItemList;
@@ -17,9 +13,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -31,17 +25,12 @@ import java.util.List;
 /**
  * Screen for showing a list of places from a search.
  */
-public final class SearchResultsScreen extends Screen implements DefaultLifecycleObserver,
-		AppInitializeListener, SearchHelperListener {
+public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen implements DefaultLifecycleObserver,
+		AppInitializeListener {
 
-	private static final int CONTENT_LIMIT = 12;
-
-	private final SearchHelper searchHelper;
 
 	@NonNull
 	private final Action settingsAction;
-	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
 	@NonNull
 	private final String searchText;
 
@@ -51,30 +40,19 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	private boolean showResult;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                           @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
+	                           @NonNull String searchText) {
 		super(carContext);
-		ConstraintManager manager = carContext.getCarService(ConstraintManager.class);
-		int contentLimit = Math.min(CONTENT_LIMIT, manager.getContentLimit(CONTENT_LIMIT_TYPE_PLACE_LIST));
-		this.searchHelper = new SearchHelper(getApp(), false, contentLimit, 2, 5, true);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		this.searchText = searchText;
 
 		this.loading = getApp().isApplicationInitializing();
 		getLifecycle().addObserver(this);
 		getApp().getAppInitializer().addListener(this);
-		searchHelper.setListener(this);
-		searchHelper.setupSearchSettings(true);
 		if (!loading) {
 			if (!Algorithms.isEmpty(searchText)) {
-				searchHelper.runSearch(searchText);
+				getSearchHelper().runSearch(searchText);
 			}
 		}
-	}
-
-	@NonNull
-	public OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
 	}
 
 	@NonNull
@@ -84,7 +62,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 		builder.setTitle(getApp().getString(R.string.search_title, searchText))
 				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
 				.setHeaderAction(Action.BACK);
-		if (loading || searchHelper.isSearching()) {
+		if (loading || getSearchHelper().isSearching()) {
 			builder.setLoading(true);
 		} else {
 			builder.setLoading(false);
@@ -107,7 +85,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 		loading = false;
 		if (!destroyed) {
 			if (!Algorithms.isEmpty(searchText)) {
-				searchHelper.runSearch(searchText);
+				getSearchHelper().runSearch(searchText);
 			} else {
 				invalidate();
 			}
@@ -127,19 +105,14 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 
 			showResult(sr);
 		} else {
-			searchHelper.completeQueryWithObject(sr);
+			getSearchHelper().completeQueryWithObject(sr);
 			invalidate();
 		}
 	}
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-				obj -> {
-					if (obj != null) {
-						onRouteSelected(sr);
-					}
-				});
+		openRoutePreview(settingsAction, sr);
 	}
 
 	@Override
@@ -160,10 +133,5 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 			this.itemList = itemList;
 			invalidate();
 		}
-	}
-
-	private void onRouteSelected(@NonNull SearchResult sr) {
-		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
-		finish();
 	}
 }

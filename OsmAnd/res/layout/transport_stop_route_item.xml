@@ -10,7 +10,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:textAllCaps="true"
         osmand:typeface="@string/font_roboto_medium"
-        android:textColor="@color/color_white"
+        android:textColor="@color/card_and_list_background_light"
         android:textSize="@dimen/default_sub_text_size_small"
         tools:text="3"
         android:gravity="center"

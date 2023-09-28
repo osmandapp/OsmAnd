@@ -1,14 +1,21 @@
 package net.osmand.plus.utils;
 
 
+import static android.Manifest.permission.BLUETOOTH;
+import static android.Manifest.permission.BLUETOOTH_ADMIN;
+import static android.Manifest.permission.BLUETOOTH_CONNECT;
+import static android.Manifest.permission.BLUETOOTH_SCAN;
 import static android.content.Context.POWER_SERVICE;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -51,18 +58,21 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.DisplayCutout;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,7 +91,10 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -101,7 +114,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -203,8 +219,8 @@ public class AndroidUtils {
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return createCheckedColorStateList(ctx, nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark);
 	}
 
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
@@ -222,11 +238,12 @@ public class AndroidUtils {
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-					Bitmap scaledBitmap = scaleBitmap(srcBitmap, width, height, true);
-					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-					if (scaledBitmap != srcBitmap) {
-						scaledBitmap.recycle();
-					}
+					Rect srcRect = new Rect(0, 0, srcBitmap.getWidth(), srcBitmap.getHeight());
+					Rect dstRect = new Rect(locationX - width / 2,
+							locationY - height / 2,
+							locationX + width / 2,
+							locationY + height / 2);
+					canvas.drawBitmap(srcBitmap, srcRect, dstRect, bitmapPaint);
 				}
 			}
 		}
@@ -287,7 +304,12 @@ public class AndroidUtils {
 	}
 
 	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
-		return !manager.isStateSaved();
+		return isFragmentCanBeAdded(manager, tag, false);
+	}
+
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean useTag) {
+		boolean isStateSaved = manager.isStateSaved();
+		return useTag ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -346,26 +368,58 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
+	@NonNull
+	public static String formatRatioOfSizes(@NonNull Context ctx, long sizeBytes, long totalBytes) {
+		FormattedSize size = formatSize(sizeBytes);
+		FormattedSize total = formatSize(totalBytes);
+		if (size != null && total != null) {
+			String firstPart = Objects.equals(size.numSuffix, total.numSuffix)
+					? size.num
+					: ctx.getString(R.string.ltr_or_rtl_combine_via_space, size.num, size.numSuffix);
+			String secondPart =
+					ctx.getString(R.string.ltr_or_rtl_combine_via_space, total.num, total.numSuffix);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, firstPart, secondPart);
+		}
+		return "";
+	}
+
+	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
-		if (sizeBytes > 0) {
-			int sizeKb = (int) ((sizeBytes + 512) >> 10);
-			String size = "";
-			String numSuffix = "MB";
-			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
-				numSuffix = "GB";
-			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
-			} else {
-				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
-				numSuffix = "kB";
-			}
+		FormattedSize formattedSize = formatSize(sizeBytes);
+		if (formattedSize != null) {
+			String size = formattedSize.num;
+			String numSuffix = formattedSize.numSuffix;
 			if (ctx == null) {
 				return size + " " + numSuffix;
 			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
+	}
+
+	@Nullable
+	private static FormattedSize formatSize(long sizeBytes) {
+		if (sizeBytes <= 0) {
+			return null;
+		}
+		FormattedSize result = new FormattedSize();
+		int sizeKb = (int) ((sizeBytes + 512) >> 10);
+		if (sizeKb > 1 << 20) {
+			result.num = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+			result.numSuffix = "GB";
+		} else if (sizeBytes > (100 * (1 << 10))) {
+			result.num = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+			result.numSuffix = "MB";
+		} else {
+			result.num = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+			result.numSuffix = "kB";
+		}
+		return result;
+	}
+
+	final static class FormattedSize {
+		String num;
+		String numSuffix;
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
@@ -1063,36 +1117,21 @@ public class AndroidUtils {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
-	public static String createNewFileName(String oldName) {
-		int firstDotIndex = oldName.indexOf('.');
-		String nameWithoutExt = oldName.substring(0, firstDotIndex);
-		String ext = oldName.substring(firstDotIndex);
+	@NonNull
+	public static String createNewFileName(@NonNull String fileName) {
+		int index = fileName.lastIndexOf('.');
+		String name = fileName.substring(0, index);
+		String extension = fileName.substring(index);
 
-		StringBuilder numberSection = new StringBuilder();
-		int i = nameWithoutExt.length() - 1;
-		boolean hasNameNumberSection = false;
-		do {
-			char c = nameWithoutExt.charAt(i);
-			if (Character.isDigit(c)) {
-				numberSection.insert(0, c);
-			} else {
-				if (Character.isSpaceChar(c) && numberSection.length() > 0) {
-					hasNameNumberSection = true;
-				}
-				break;
-			}
-			i--;
-		} while (i >= 0);
-		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
+		Matcher matcher = Pattern.compile("\\s[(]\\d+[)]$").matcher(name);
+		if (matcher.find()) {
+			int startIndex = name.lastIndexOf('(');
+			int endIndex = name.lastIndexOf(')');
+			int counter = Algorithms.parseIntSilently(name.substring(startIndex + 1, endIndex), 1);
 
-		String newName;
-		if (newNumberValue == 1) {
-			newName = nameWithoutExt + " " + newNumberValue + ext;
-		} else {
-			newName = nameWithoutExt.substring(0, i) + " " + newNumberValue + ext;
+			return name.substring(0, startIndex + 1) + (counter + 1) + ")" + extension;
 		}
-
-		return newName;
+		return name + " (2)" + extension;
 	}
 
 	public static StringBuilder formatWarnings(List<String> warnings) {
@@ -1237,11 +1276,53 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean hasPermission(Context context, String permission) {
+	public static boolean hasPermission(@NonNull Context context, String permission) {
 		return ActivityCompat.checkSelfPermission(
 				context,
 				permission
 		) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	public static boolean hasBLEPermission(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			return hasPermission(context, BLUETOOTH_SCAN) &&
+					hasPermission(context, BLUETOOTH_CONNECT);
+		} else {
+			return hasPermission(context, BLUETOOTH) &&
+					hasPermission(context, BLUETOOTH_ADMIN);
+		}
+	}
+
+	private static final int BLUETOOTH_REQUEST_CODE = 2;
+	private static final int BLUETOOTH_ADMIN_REQUEST_CODE = 2;
+	private static final int BLUETOOTH_SCAN_REQUEST_CODE = 4;
+	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
+
+	public static boolean requestBLEPermissions(@NonNull Activity activity) {
+		ArrayList<String> neededPermissions = new ArrayList<>();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
+				neededPermissions.add(BLUETOOTH_SCAN);
+			}
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_CONNECT)) {
+				neededPermissions.add(BLUETOOTH_CONNECT);
+			}
+		} else {
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH)) {
+				neededPermissions.add(BLUETOOTH);
+			}
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
+				neededPermissions.add(BLUETOOTH_ADMIN);
+			}
+		}
+		if (!Algorithms.isEmpty(neededPermissions)) {
+			ActivityCompat.requestPermissions(
+					activity,
+					neededPermissions.toArray(new String[0]),
+					BLUETOOTH_CONNECT_REQUEST_CODE);
+
+		}
+		return Algorithms.isEmpty(neededPermissions);
 	}
 
 	@Nullable
@@ -1251,5 +1332,100 @@ public class AndroidUtils {
 		} else {
 			return (T) bundle.getSerializable(key);
 		}
+	}
+
+	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
+		return new View.OnTouchListener() {
+			private int initialMarginX = 0;
+			private int initialMarginY = 0;
+			private float initialTouchX = 0;
+			private float initialTouchY = 0;
+
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (mapActivity == null) {
+					return false;
+				}
+				switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						setUpInitialValues(v, event);
+						return true;
+					case MotionEvent.ACTION_UP:
+						fabButton.setOnTouchListener(null);
+						fabButton.setPressed(false);
+						fabButton.setScaleX(1);
+						fabButton.setScaleY(1);
+						fabButton.setAlpha(1f);
+						FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+						if (AndroidUiHelper.isOrientationPortrait(mapActivity))
+							preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+						else
+							preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+						return true;
+					case MotionEvent.ACTION_MOVE:
+						if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
+							setUpInitialValues(v, event);
+
+						int padding = calculateTotalSizePx(app, R.dimen.map_button_margin);
+						FrameLayout parent = (FrameLayout) v.getParent();
+						FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+						int deltaX = (int) (initialTouchX - event.getRawX());
+						int deltaY = (int) (initialTouchY - event.getRawY());
+
+						int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
+						int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
+
+						if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
+							param.bottomMargin = newMarginY;
+
+						if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
+							param.rightMargin = newMarginX;
+						}
+
+						v.setLayoutParams(param);
+
+						return true;
+				}
+				return false;
+			}
+
+			private int interpolate(int value, int divider, int boundsSize) {
+				if (value <= divider && value > 0)
+					return value * value / divider;
+				else {
+					int leftMargin = boundsSize - value - divider;
+					if (leftMargin <= divider && value < boundsSize - divider)
+						return leftMargin - (leftMargin * leftMargin / divider) + value;
+					else
+						return value;
+				}
+			}
+
+			private void setUpInitialValues(View v, MotionEvent event) {
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+				initialMarginX = params.rightMargin;
+				initialMarginY = params.bottomMargin;
+
+				initialTouchX = event.getRawX();
+				initialTouchY = event.getRawY();
+			}
+		};
+	}
+
+	public static int calculateTotalSizePx(OsmandApplication app, @DimenRes int... dimensId) {
+		int result = 0;
+		for (int id : dimensId) {
+			result += app.getResources().getDimensionPixelSize(id);
+		}
+		return result;
+	}
+
+	public static boolean isBluetoothEnabled(@NonNull Context context) {
+		BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
+		BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+		return bluetoothAdapter != null && bluetoothAdapter.isEnabled();
 	}
 }

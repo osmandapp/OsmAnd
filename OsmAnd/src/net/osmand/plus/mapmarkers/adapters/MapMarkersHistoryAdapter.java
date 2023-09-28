@@ -135,7 +135,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.divider_color_light));
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
 			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);

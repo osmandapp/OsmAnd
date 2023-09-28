@@ -210,7 +210,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
 		} catch (Exception e) {
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
-			e.printStackTrace();
 		}
 	}
 
@@ -687,6 +686,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		app.getAverageSpeedComputer().updateLocation(location);
+		app.getAverageGlideComputer().updateLocation(location);
 		PluginsHelper.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
@@ -730,6 +730,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location, heading);
 			app.getAverageSpeedComputer().updateLocation(location);
+			app.getAverageGlideComputer().updateLocation(location);
 			PluginsHelper.updateLocationPlugins(location);
 		}
 

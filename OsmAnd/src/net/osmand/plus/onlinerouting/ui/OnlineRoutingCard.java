@@ -1,7 +1,6 @@
 package net.osmand.plus.onlinerouting.ui;
 
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,13 +15,14 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -45,7 +45,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 	private TextView tvHelperText;
 	private TextView tvErrorText;
 	private View bottomDivider;
-	private View button;
+	private DialogButton button;
 	private OnTextChangedListener onTextChangedListener;
 	private boolean fieldBoxHelperTextShowed;
 
@@ -84,15 +84,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 		textFieldBoxes.setPrimaryColor(activeColor);
 		textFieldBoxes.setGravityFloatingLabel(Gravity.START);
 
-		editText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		editText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (onTextChangedListener != null) {
@@ -225,7 +217,7 @@ public class OnlineRoutingCard extends MapBaseCard {
 						  @NonNull OnClickListener listener) {
 		showElements(button);
 		button.setOnClickListener(listener);
-		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.PRIMARY, title);
+		button.setTitle(title);
 	}
 
 	public void show() {

@@ -33,7 +33,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -82,16 +81,13 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	private View subscribeEmailView;
 	private View freeMapsView;
 	private View descriptionView;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		downloadThread = app.getDownloadThread();
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		nightMode = isNightMode(false);
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		setHasOptionsMenu(true);
 	}
 
@@ -101,6 +97,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 		if (savedInstanceState != null) {
 			groupId = savedInstanceState.getString(REGION_ID_DLG_KEY);
@@ -149,7 +146,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 			listView.addHeaderView(subscribeEmailView);
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()
-					|| DownloadActivity.isDownlodingPermitted(settings)) {
+					|| DownloadActivity.isDownloadingPermitted(settings)) {
 				subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
 			}
 		}
@@ -215,7 +212,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 
 	private void updateSubscribeEmailView() {
 		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.GONE
-				&& !DownloadActivity.isDownlodingPermitted(settings)
+				&& !DownloadActivity.isDownloadingPermitted(settings)
 				&& !settings.EMAIL_SUBSCRIBED.get()) {
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
@@ -502,7 +499,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
-		if (subscribeEmailView != null && !DownloadActivity.isDownlodingPermitted(settings) && !settings.EMAIL_SUBSCRIBED.get()) {
+		if (subscribeEmailView != null && !DownloadActivity.isDownloadingPermitted(settings) && !settings.EMAIL_SUBSCRIBED.get()) {
 			subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();

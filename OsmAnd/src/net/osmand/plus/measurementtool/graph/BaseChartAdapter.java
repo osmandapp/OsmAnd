@@ -87,9 +87,7 @@ public abstract class BaseChartAdapter<_Chart extends Chart<_ChartData>, _ChartD
 	}
 
 	protected boolean isNightMode() {
-		return usedOnMap ?
-				app.getDaynightHelper().isNightModeForMapControls() :
-				!app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 
 	public interface ExternalValueSelectedListener {

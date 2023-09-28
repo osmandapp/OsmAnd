@@ -261,8 +261,13 @@ public abstract class SelectionBottomSheet<T> extends MenuBottomSheetDialogFragm
 	}
 
 	public interface DialogStateListener {
-		void onDialogCreated();
-		void onCloseDialog();
+		default void onDialogCreated() {
+
+		}
+
+		default void onCloseDialog() {
+
+		}
 	}
 
 	public interface OnApplySelectionListener<T> {

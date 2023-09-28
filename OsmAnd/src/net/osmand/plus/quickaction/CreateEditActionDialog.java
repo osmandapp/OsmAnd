@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.List;
 
@@ -211,18 +212,10 @@ public class CreateEditActionDialog extends DialogFragment
         int color = ColorUtilities.getActiveButtonsAndLinksTextColor(getContext(), !isLightContent);
         nameEditText.setTextColor(color);
 
-        nameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
+        nameEditText.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 action.setName(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
 

@@ -110,7 +110,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		}
 
 		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
-		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
+		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.card_and_list_background_light : R.color.activity_background_color_dark));
 		holder.title.setText(location != null ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
 		holder.iconDirection.setVisibility(View.GONE);
 		holder.optionsBtn.setVisibility(roundTripFinishItem ? View.VISIBLE : View.GONE);
@@ -126,7 +126,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				}
 			});
 		}
-		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
+		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_main_dark : R.color.divider_color_light));
 		holder.divider.setVisibility(lastMarkerItem ? View.GONE : View.VISIBLE);
 		holder.checkBox.setVisibility(roundTripFinishItem ? View.GONE : View.VISIBLE);
 		if (!roundTripFinishItem) {

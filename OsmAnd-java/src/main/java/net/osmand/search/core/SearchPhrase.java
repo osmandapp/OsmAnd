@@ -56,7 +56,7 @@ public class SearchPhrase {
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 
 	private AbstractPoiType unselectedPoiType;
-	
+	private boolean acceptPrivate;
 	private QuadRect cache1kmRect;
 	
 	static {
@@ -172,6 +172,7 @@ public class SearchPhrase {
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
+		thisTxt = Algorithms.normalizeSearchText(thisTxt);
 		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
 			textToSearch = textToSearch.substring(getText(false).length());
@@ -368,6 +369,14 @@ public class SearchPhrase {
 	
 	public boolean isFirstUnknownSearchWordComplete() {
 		return hasMoreThanOneUnknownSearchWord() || isLastUnknownSearchWordComplete();
+	}
+
+	public boolean isAcceptPrivate() {
+		return acceptPrivate;
+	}
+
+	public void setAcceptPrivate(boolean acceptPrivate) {
+		this.acceptPrivate = acceptPrivate;
 	}
 
 	public String getFullSearchPhrase() {

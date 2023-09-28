@@ -12,7 +12,7 @@ import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapTiledCollectionPoint;
 import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
@@ -111,7 +111,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     }
 
     @Override
-    public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
+    public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
         MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
         if (data == null) {
             return SwigUtilities.nullSkImage();
@@ -154,6 +154,11 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     @Override
     public ZoomLevel getMaxZoom() {
         return ZoomLevel.MaxZoomLevel;
+    }
+
+    @Override
+    public boolean supportsNaturalObtainDataAsync() {
+        return false;
     }
 
     public void addToData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {

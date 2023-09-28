@@ -44,6 +44,10 @@
 				<include
 					android:id="@+id/MapHudButtonsOverlayQuickActions"
 					layout="@layout/map_hud_quick_actions" />
+
+				<include
+					android:id="@+id/MapHudButtonsOverlay3DMode"
+					layout="@layout/map_hud_3d_mode" />
 			</FrameLayout>
 
 			<FrameLayout
@@ -70,10 +74,11 @@
 
 		</FrameLayout>
 
-		<FrameLayout
+		<LinearLayout
 			android:id="@+id/map_bottom_widgets_panel"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:orientation="vertical" />
 
 	</LinearLayout>
 

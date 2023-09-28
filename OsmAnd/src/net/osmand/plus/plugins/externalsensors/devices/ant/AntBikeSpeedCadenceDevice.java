@@ -16,7 +16,7 @@ import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
 import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeCadenceSensor;
 
-public class AntBikeSpeedCadenceDevice extends AntAbstractDevice<AntPlusBikeCadencePcc> {
+public class AntBikeSpeedCadenceDevice extends AntLegacyDevice<AntPlusBikeCadencePcc> {
 
 	private AntBikeSpeedDistanceDevice spdDistDevice;
 
@@ -70,10 +70,11 @@ public class AntBikeSpeedCadenceDevice extends AntAbstractDevice<AntPlusBikeCade
 	}
 
 	@Override
-	public void disconnect() {
-		super.disconnect();
+	public boolean disconnect() {
+		boolean res = super.disconnect();
 		if (spdDistDevice != null) {
-			spdDistDevice.disconnect();
+			res |= spdDistDevice.disconnect();
 		}
+		return res;
 	}
 }

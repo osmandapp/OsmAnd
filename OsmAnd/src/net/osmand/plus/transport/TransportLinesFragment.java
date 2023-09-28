@@ -33,7 +33,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = TransportLinesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
 	private MapActivity mapActivity;
 	private TransportLinesMenu menu;
 
@@ -44,7 +43,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapActivity = (MapActivity) requireMyActivity();
 		menu = new TransportLinesMenu(app);
 	}
@@ -54,7 +52,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		isShowAnyTransport = menu.isShowAnyTransport();
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		updateNightMode();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_transport_lines, container, false);
 
@@ -128,6 +126,11 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private void updateScreenMode(boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,

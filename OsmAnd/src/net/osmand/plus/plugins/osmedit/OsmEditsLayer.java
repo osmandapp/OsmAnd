@@ -21,6 +21,7 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
@@ -46,6 +47,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -227,30 +229,57 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		return true;
 	}
 
+	public void getOsmEditsFromPoint(PointF pixel, RotatedTileBox tileBox, List<? super OsmPoint> result) {
+		if (tileBox.getZoom() < START_ZOOM) {
+			return;
+		}
+		float radius = getScaledTouchRadius(app, getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
 
-	public void getOsmEditsFromPoint(PointF point, RotatedTileBox tileBox, List<? super OsmPoint> am) {
-		int ex = (int) point.x;
-		int ey = (int) point.y;
-		int compare = getScaledTouchRadius(app, getRadiusPoi(tileBox));
-		int radius = compare * 3 / 2;
-		compare = getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBBug().getOsmBugsPoints());
-		getFromPoint(tileBox, am, ex, ey, compare, radius, plugin.getDBPOI().getOpenstreetmapPoints());
+		List<OsmPoint> osmBugs = new ArrayList<>(plugin.getDBBug().getOsmBugsPoints());
+		if (!Algorithms.isEmpty(osmBugs)) {
+			QuadRect screenArea = new QuadRect(
+					pixel.x - radius,
+					pixel.y - radius / 3f,
+					pixel.x + radius,
+					pixel.y + radius * 1.5f
+			);
+			getOsmEditsFromScreenArea(tileBox, osmBugs, screenArea, result);
+		}
+
+		List<OsmPoint> osmEdits = new ArrayList<>(plugin.getDBPOI().getOpenstreetmapPoints());
+		if (!Algorithms.isEmpty(osmEdits)) {
+			QuadRect screenArea = new QuadRect(
+					pixel.x - radius,
+					pixel.y - radius,
+					pixel.x + radius,
+					pixel.y + radius
+			);
+			getOsmEditsFromScreenArea(tileBox, osmEdits, screenArea, result);
+		}
 	}
 
-	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
-							 int radius, List<? extends OsmPoint> points) {
-		for (OsmPoint n : points) {
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, n.getLatitude(), n.getLongitude());
-			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
-				compare = radius;
-				am.add(n);
+	public void getOsmEditsFromScreenArea(@NonNull RotatedTileBox tileBox,
+	                                      @NonNull List<OsmPoint> osmEdits,
+	                                      @NonNull QuadRect screenArea,
+	                                      @NonNull List<? super OsmPoint> result) {
+		MapRendererView mapRenderer = getMapRenderer();
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromScreenArea(mapRenderer, screenArea);
+			if (touchPolygon31 == null) {
+				return;
 			}
 		}
-		return compare;
-	}
 
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius;
+		for (OsmPoint osmEdit : osmEdits) {
+			LatLon latLon = osmEdit.getLocation();
+			boolean add = mapRenderer != null
+					? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+					: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
+			if (add) {
+				result.add(osmEdit);
+			}
+		}
 	}
 
 	public int getRadiusPoi(RotatedTileBox tb) {
@@ -410,11 +439,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 
-		if (osmPoint instanceof OsmNotesPoint) {
-			mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top);
-		} else {
-			mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
-		}
+		mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
+		mapMarkerBuilder.setPinIconOffset(new PointI(0, -backgroundType.getOffsetY(ctx, textScale)));
 
 		if (isTextVisible() && osmPoint instanceof OpenstreetmapPoint) {
 			mapMarkerBuilder

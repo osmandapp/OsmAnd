@@ -5,7 +5,7 @@
     <string name="no_updates_available">No updates available</string>
     <string name="download_live_updates">Anovamientos en direuto</string>
     <string name="copied_to_clipboard">Copióse nel cartafueyu</string>
-    <string name="contact_us">Contact</string>
+    <string name="shared_string_contact">Contact</string>
     <string name="first_usage_item">El primer usu</string>
     <string name="features_menu_group">Carauterístiques</string>
     <string name="help_us_to_improve_menu_group">Help improve OsmAnd</string>
@@ -1294,7 +1294,6 @@
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' → \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
     <string name="local_openstreetmap_uploadall">Upload all</string>
     <string name="local_openstreetmap_settings">OSM- POIs/-notes saved on device</string>
-    <string name="index_settings">Manage map files</string>
     <string name="local_index_mi_upload_gpx">Unviar a OSM</string>
     <string name="reading_cached_tiles">Lleendo les teseles de la caché…</string>
     <string name="reading_indexes">Reading local data…</string>
@@ -2453,11 +2452,7 @@
     <string name="shared_string_unexpected_error">Fallu inesperáu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Siendes</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC scale.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="download_srtm_maps">Contour lines</string>
-    <string name="index_srtm_ele">Contour lines</string>
-    <string name="index_srtm_parts">parts</string>
     <string name="map_widget_audionotes">Nota d\'audiu</string>
     <string name="map_widget_distancemeasurement">Midimientu de la distancia</string>
     <string name="recording_default_name">Recording</string>
@@ -2488,7 +2483,6 @@
     <string name="default_speed_system_descr">Define unit of speed.</string>
     <string name="favorite_category_select">Choose category</string>
     <string name="favorite_category_add_new">Amestar una</string>
-    <string name="srtm_plugin_disabled">Contour lines disabled</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
     <string name="world_maps">Mapes mundiales</string>
     <string name="favorite_category_add_new_title">Add new category</string>
@@ -2899,7 +2893,6 @@
     <string name="select_travel_book">Select a travel book</string>
     <string name="wikivoyage_download_pics_descr">Article images can be downloaded for offline use.
 \nAlways available in \'Explore\' → \'Options\'.</string>
-    <string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string>
     <string name="purchase_unlim_title">Buy - %1$s</string>
     <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
     <string name="in_app_purchase_desc">Pagu únicu</string>
@@ -3059,7 +3052,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_maps">Mapes</string>
-    <string name="shared_sting_tiles">Teseles</string>
+    <string name="shared_string_tiles">Teseles</string>
     <string name="shared_string_osmand_usage">Usu d\'OsmAnd</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="store_tracks_in_daily_directories_descrp">Record tracks in sub-folders per recording day (like 2018-01-01).</string>
@@ -3071,7 +3064,6 @@
     <string name="update_all_maps">Update all maps</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
-    <string name="contour_lines_and_hillshade">Contour lines and hillshade</string>
     <string name="shared_string_memory_used_kb_desc">%1$s KB n\'usu</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB n\'usu</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB n\'usu</string>
@@ -3184,7 +3176,6 @@
     <string name="monitoring_min_accuracy">Precisión mínima</string>
     <string name="monitoring_min_speed">Velocidá mínima</string>
     <string name="monitoring_notification">Avisu</string>
-    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_adress">Direición web</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
@@ -3819,8 +3810,6 @@
     <string name="copy_poi_name">Copiar el nome del PdI</string>
     <string name="quick_action_show_hide_title">Amosar/anubrir</string>
     <string name="shared_string_interval">Intervalu</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="select_another_colorization">Please select another type of coloring.</string>
@@ -4174,15 +4163,13 @@
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikivoyage ensin internet</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: contour lines, hillshades, slope</string>
     <string name="offline_wikipeadia">Wikipedia ensin internet</string>
     <string name="offline_wikivoyage">Wikivoyage ensin internet</string>
-    <string name="terrain_maps">Terrain maps</string>
     <string name="nautical_depth">Nautical depth</string>
     <string name="you_can_get_feature_as_part_of_pattern">Get “%1$s” as part of the %2$s plan. Comparison:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="continue_with">Siguir con %1$s</string>
-    <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
+    <string name="contour_lines_hillshade_slope">Contour lines, hillshades, slope</string>
     <string name="release_4_0">• Cloud backup
 \n
 \n • Added night mode for \"Topo\" map style

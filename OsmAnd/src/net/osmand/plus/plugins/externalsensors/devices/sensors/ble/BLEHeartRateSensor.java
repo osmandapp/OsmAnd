@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
@@ -189,10 +191,10 @@ public class BLEHeartRateSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		if (data != null) {
-			json.put(getSensorId(), data.heartRate);
+			json.put(SENSOR_TAG_HEART_RATE, data.heartRate);
 		}
 	}
 }

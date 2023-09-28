@@ -4,7 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/wikivoyage_bg_color"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:layout_width="match_parent"

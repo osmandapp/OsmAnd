@@ -94,7 +94,7 @@ public class WidgetsSettingsHelper {
 			}
 
 			WidgetType widgetTypeToCopy = widgetInfoToCopy.widget.getWidgetType();
-			boolean duplicateNotPossible = widgetTypeToCopy == null || !panel.isDuplicatesAllowed();
+			boolean duplicateNotPossible = widgetTypeToCopy == null;
 			String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetInfoToCopy.key);
 			MapWidgetInfo defaultWidgetInfo = getWidgetInfoById(defaultWidgetId, defaultWidgetInfos);
 

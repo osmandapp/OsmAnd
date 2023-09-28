@@ -11,26 +11,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.DialogListItemAdapter;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.slider.Slider;
+
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -250,50 +252,40 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 	}
 
 	private void showClickBehaviorDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(R.string.click_on_widget);
-
+		int selected = selectedMarkerClickBehaviour.ordinal();
 		String[] items = new String[MarkerClickBehaviour.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = MarkerClickBehaviour.values()[i].getTitle(app);
 		}
-		int selected = selectedMarkerClickBehaviour.ordinal();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					selectedMarkerClickBehaviour = MarkerClickBehaviour.values()[which];
-					setupConfigButtons();
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(R.string.click_on_widget)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			selectedMarkerClickBehaviour = MarkerClickBehaviour.values()[which];
+			setupConfigButtons();
+		});
 	}
 
 	private void showMarkerModeDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(R.string.shared_string_mode);
-
+		int selected = selectedMarkerMode.ordinal();
 		String[] items = new String[SideMarkerMode.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = SideMarkerMode.values()[i].getTitle(app);
 		}
-		int selected = selectedMarkerMode.ordinal();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					selectedMarkerMode = SideMarkerMode.values()[which];
-					setupConfigButtons();
-					updateToolbarIcon();
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(R.string.shared_string_mode)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			selectedMarkerMode = SideMarkerMode.values()[which];
+			setupConfigButtons();
+			updateToolbarIcon();
+		});
 	}
 
 	private void setupListItemBackground(@NonNull View view) {

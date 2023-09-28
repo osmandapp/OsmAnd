@@ -6,6 +6,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
 

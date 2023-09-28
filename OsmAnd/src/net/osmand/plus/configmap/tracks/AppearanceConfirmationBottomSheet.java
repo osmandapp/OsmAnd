@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -22,22 +23,22 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_apply_changes)));
 
-		SelectedTracksHelper helper = getSelectedTracksHelper();
-		if (helper != null) {
-			int count = helper.getSelectedTracks().size();
+		ItemsSelectionHelper<TrackItem> selectionHelper = getItemsSelectionHelper();
+		if (selectionHelper != null) {
+			int count = selectionHelper.getSelectedItemsSize();
 			items.add(new BottomSheetItemWithDescription.Builder()
 					.setDescription(getString(R.string.change_default_tracks_appearance_confirmation_description, String.valueOf(count)))
-							.setDescriptionColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
+					.setDescriptionColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 					.setLayoutId(R.layout.bottom_sheet_item_descr)
 					.create());
 		}
 	}
 
 	@Nullable
-	private SelectedTracksHelper getSelectedTracksHelper() {
+	private ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof TracksAppearanceFragment) {
-			return ((TracksAppearanceFragment) fragment).getSelectedTracksHelper();
+			return ((TracksAppearanceFragment) fragment).getItemsSelectionHelper();
 		}
 		return null;
 	}

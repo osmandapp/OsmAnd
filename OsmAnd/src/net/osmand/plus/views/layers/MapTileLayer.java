@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererContext.ProviderType;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
@@ -34,6 +36,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.MapTileAdapter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.YandexTrafficAdapter;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -45,7 +48,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private static final int SHOWN_MAP_ZOOM_MAX = 20;
 	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
-	protected final boolean suggestOfflineMap;
+	protected final boolean mainLayer;
 	protected ITileSource map;
 	protected MapTileAdapter mapTileAdapter;
 
@@ -65,9 +68,9 @@ public class MapTileLayer extends BaseMapLayer {
 	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
-	public MapTileLayer(@NonNull Context context, boolean suggestOfflineMap) {
+	public MapTileLayer(@NonNull Context context, boolean mainLayer) {
 		super(context);
-		this.suggestOfflineMap = suggestOfflineMap;
+		this.mainLayer = mainLayer;
 		this.settings = getApplication().getSettings();
 		this.resourceManager = getApplication().getResourceManager();
 	}
@@ -261,13 +264,21 @@ public class MapTileLayer extends BaseMapLayer {
 	protected boolean setLayerProvider(@Nullable ITileSource map) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
+			MapRendererContext mapRendererContext = mainLayer ? NativeCoreContext.getMapRendererContext() : null;
 			int layerIndex = view.getLayerIndex(this);
 			if (map != null) {
 				TileSourceProxyProvider prov = new TileSourceProxyProvider(getApplication(), map);
 				mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
 				prov.swigReleaseOwnership();
+
+				if (mapRendererContext != null) {
+					mapRendererContext.recreateRasterAndSymbolsProvider(ProviderType.CONTOUR_LINES);
+				}
 			} else {
 				mapRenderer.resetMapLayerProvider(layerIndex);
+				if (mapRendererContext != null) {
+					mapRendererContext.resetRasterAndSymbolsProvider(ProviderType.CONTOUR_LINES);
+				}
 			}
 			return true;
 		}
@@ -460,7 +471,7 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 		}
 
-		if (suggestOfflineMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
+		if (mainLayer && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
 			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
 				getApplication().showToastMessage(R.string.switch_to_vector_map_to_see);
 				warningToSwitchMapShown++;

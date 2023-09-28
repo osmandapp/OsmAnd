@@ -4,6 +4,7 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_M
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
@@ -31,6 +32,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -69,6 +71,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.CycleRoutesFragment;
+import net.osmand.plus.configmap.DifficultyClassificationFragment;
 import net.osmand.plus.configmap.HikingRoutesFragment;
 import net.osmand.plus.configmap.MtbRoutesFragment;
 import net.osmand.plus.configmap.TravelRoutesFragment;
@@ -99,6 +102,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -157,7 +161,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private OnItemClickListener adapterClickListener;
 
 	private boolean visible;
-	private DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
+	private final DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
+	private final Map<DashboardType, Integer> lastKnownScrolls = new HashMap<>();
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private final List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
@@ -204,7 +209,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		WEATHER_LAYER,
 		WEATHER_CONTOURS,
 		NAUTICAL_DEPTH,
-		MTB_ROUTES
+		MTB_ROUTES,
+		DIFFICULTY_CLASSIFICATION
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -218,7 +224,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private class DashboardActionButton {
 		private Drawable icon;
 		private String text;
-		private View.OnClickListener onClickListener;
+		private OnClickListener onClickListener;
 	}
 
 	public DashboardOnMap(MapActivity ma) {
@@ -250,7 +256,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
-		View.OnClickListener listener = new View.OnClickListener() {
+		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
@@ -335,7 +341,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(MAPILLARY)) {
 			tv.setText(R.string.street_level_imagery);
 		} else if (isCurrentType(CONTOUR_LINES)) {
-			tv.setText(R.string.srtm_plugin_name);
+			tv.setText(R.string.download_srtm_maps);
 		} else if (isCurrentType(OSM_NOTES)) {
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
@@ -366,6 +372,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.nautical_depth);
 		} else if (isCurrentType(MTB_ROUTES)) {
 			tv.setText(R.string.app_mode_mountain_bicycle);
+		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
+			tv.setText(R.string.rendering_attr_alpineHiking_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -534,12 +542,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.visible = visible;
 		updateVisibilityStack(type, visible);
+
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
-
 		boolean refresh = currentType && !appModeChanged;
 		previousAppMode = currentAppMode;
 		staticVisible = visible;
@@ -553,7 +561,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
-			mapActivity.dismissTrackMenu();
+			mapActivity.dismissFragment(TrackMenuFragment.TAG);
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
@@ -575,8 +583,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
-			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
+			if (isCurrentType(DASHBOARD) || isCurrentTypeHasIndividualFragment()) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -604,11 +611,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					WeatherContoursFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MTB_ROUTES)) {
 					MtbRoutesFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
+					DifficultyClassificationFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
-				scrollView.scrollTo(0, 0);
 				listViewLayout.setVisibility(View.GONE);
-				onScrollChanged(scrollView.getScrollY(), false, false);
+				applyScrollPosition(scrollView);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
@@ -617,7 +625,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				} else {
 					listView.scrollTo(0, 0);
 					listView.clearParams();
-					onScrollChanged(listView.getScrollY(), false, false);
+					onScrollChangedImpl(listView.getScrollY());
 					updateListAdapter();
 				}
 				updateListBackgroundHeight();
@@ -671,7 +679,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
 				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, DIFFICULTY_CLASSIFICATION)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -762,6 +770,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	public void refreshContent() {
+		refreshContent(!isCurrentTypeHasIndividualFragment());
+	}
+
 	public void refreshContent(boolean force) {
 		if (force) {
 			listView.clearParams();
@@ -793,6 +805,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(NauticalDepthContourFragment.TAG);
 		} else if (isCurrentType(MTB_ROUTES)) {
 			refreshFragment(MtbRoutesFragment.TAG);
+		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
+			refreshFragment(DifficultyClassificationFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
@@ -1022,6 +1036,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return !isCurrentType(types);
 	}
 
+	public boolean isCurrentTypeHasIndividualFragment() {
+		return isCurrentType(
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, DIFFICULTY_CLASSIFICATION
+		);
+	}
+
 	void onDetach(DashBaseFragment dashBaseFragment) {
 		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
 		while (it.hasNext()) {
@@ -1077,6 +1099,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void backPressed() {
+		// Remove known scroll when screen closed
+		lastKnownScrolls.remove(visibleTypes.getCurrent());
+
 		DashboardType previous = visibleTypes.getPrevious();
 		if (previous != null) {
 			if (isCurrentType(MAPILLARY)) {
@@ -1101,8 +1126,25 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	private void applyScrollPosition(@NonNull ScrollView scrollView) {
+		Integer lastKnownScroll = lastKnownScrolls.get(visibleTypes.getCurrent());
+		applyScrollPosition(scrollView, lastKnownScroll != null ? lastKnownScroll : 0);
+	}
+
+	private void applyScrollPosition(@NonNull ScrollView scrollView, int scrollYPos) {
+		scrollView.postDelayed(() -> {
+			scrollView.scrollTo(0, scrollYPos);
+			onScrollChangedImpl(scrollYPos);
+		}, 100);
+	}
+
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+		lastKnownScrolls.put(visibleTypes.getCurrent(), scrollY);
+		onScrollChangedImpl(scrollY);
+	}
+
+	private void onScrollChangedImpl(int scrollY) {
 		// Translate list background
 		if (portrait) {
 			if (listBackgroundView != null) {

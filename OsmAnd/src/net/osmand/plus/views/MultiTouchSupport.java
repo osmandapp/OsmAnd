@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.PointI;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.MapUtils;
 
@@ -63,8 +62,8 @@ public class MultiTouchSupport {
 		return multiTouchAPISupported;
 	}
 
-	public boolean isInZoomMode() {
-		return inZoomMode;
+	public boolean isInZoomAndRotationMode() {
+		return inZoomAndRotationMode;
 	}
 
 	public boolean isInTiltMode() {
@@ -83,7 +82,7 @@ public class MultiTouchSupport {
 		}
 	}
 
-	private boolean inZoomMode;
+	private boolean inZoomAndRotationMode;
 	private boolean inTiltMode;
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
@@ -96,7 +95,8 @@ public class MultiTouchSupport {
 	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
 	private static final double DELTA_DISTANCE_THRESHOLD = 0.04;
-	private static final double ANGLE_THRESHOLD = 4;
+	private static final float TILT_ANGLE_THRESHOLD = 20;
+	private static final double DELTA_ANGLE_THRESHOLD = 4;
 	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -113,9 +113,9 @@ public class MultiTouchSupport {
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if (pointCount < 2) {
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+					inZoomAndRotationMode = false;
 					return true;
 				} else if (inTiltMode) {
 					inTiltMode = false;
@@ -149,9 +149,9 @@ public class MultiTouchSupport {
 				angleStarted = angle;
 				return true;
 			} else if (actionCode == MotionEvent.ACTION_POINTER_UP) {
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+					inZoomAndRotationMode = false;
 				} else if (inTiltMode) {
 					inTiltMode = false;
 				}
@@ -159,7 +159,7 @@ public class MultiTouchSupport {
 			} else if (actionCode == MotionEvent.ACTION_MOVE) {
 				firstPoint = new PointF(x1, y1);
 				secondPoint = new PointF(x2, y2);
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 
 					// Keep zoom center fixed or flexible
 					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
@@ -179,28 +179,28 @@ public class MultiTouchSupport {
 					float dy1 = Math.abs(firstFingerStart.y - y1);
 					float dy2 = Math.abs(secondFingerStart.y - y2);
 					float startDy = Math.abs(secondFingerStart.y - firstFingerStart.y);
+					boolean useZoom = isZoomRotationGesture(distance, angle, angleDefined);
 					if (dx1 < TILT_X_THRESHOLD_PX && dx2 < TILT_X_THRESHOLD_PX
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
-							&& startDy < TILT_Y_THRESHOLD_PX * 6
+							&& (Math.abs(angleStarted) < TILT_ANGLE_THRESHOLD || 180 - Math.abs(angleStarted) < TILT_ANGLE_THRESHOLD)
 							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
 							&& startedMode == MODE.NONE
-							&& !isZoomRotationGesture(distance, angle, angleDefined)
+							&& !useZoom
 							|| startedMode == MODE.TILT) {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (isZoomRotationGesture(distance, angle, angleDefined)
-							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+					} else if (useZoom && (startedMode == MODE.NONE || startedMode == MODE.ZOOM_AND_ROTATION)) {
 						if (startedMode == MODE.NONE) {
 							angleRelative = 0;
 							zoomRelative = 0;
-							startedMode = MODE.ZOOM;
+							startedMode = MODE.ZOOM_AND_ROTATION;
 						}
-						inZoomMode = true;
+						inZoomAndRotationMode = true;
 					}
 				} else {
-					startedMode = MODE.ZOOM;
-					inZoomMode = true;
+					startedMode = MODE.ZOOM_AND_ROTATION;
+					inZoomAndRotationMode = true;
 				}
 				return true;
 			}
@@ -212,22 +212,22 @@ public class MultiTouchSupport {
 
 	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
 		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
-				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
+				|| Math.abs(MapUtils.unifyRotationTo360(angle - angleStarted)) > DELTA_ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
 		return centerPoint;
 	}
 
-	public PointI getFirstPoint() {
-		return new PointI((int) firstPoint.x, (int) firstPoint.y);
+	public PointF getFirstPoint() {
+		return firstPoint;
 	}
-	public PointI getSecondPoint() {
-		return new PointI((int) secondPoint.x, (int) secondPoint.y);
+	public PointF getSecondPoint() {
+		return secondPoint;
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
-		return isTiltSupported(app) && app.getSettings().ENABLE_3D_VIEW.get();
+		return isTiltSupported(app);
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
@@ -235,7 +235,7 @@ public class MultiTouchSupport {
 	}
 
 	private enum MODE {
-		NONE, ZOOM, TILT
+		NONE, ZOOM_AND_ROTATION, TILT
 	}
 
 }

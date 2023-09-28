@@ -1,7 +1,7 @@
 package net.osmand.gpx;
 
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXTrackAnalysis.SplitSegment;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.gpx.GPXUtilities.Route;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -61,6 +61,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public boolean hasRoute() {
 		return getNonEmptyTrkSegments(true).size() > 0;
+	}
+
+	public List<GPXUtilities.WptPt> getAllPoints() {
+		List<GPXUtilities.WptPt> total = new ArrayList<>();
+		total.addAll(getPoints());
+		total.addAll(getAllSegmentsPoints());
+		return total;
 	}
 
 	public List<GPXUtilities.WptPt> getPoints() {
@@ -256,13 +263,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	private void buildGeneralSegment() {
-		GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
-		for (GPXUtilities.Track track : tracks) {
-			for (GPXUtilities.TrkSegment s : track.segments) {
-				if (s.points.size() > 0) {
-					List<GPXUtilities.WptPt> waypoints = new ArrayList<>(s.points.size());
-					for (GPXUtilities.WptPt wptPt : s.points) {
-						waypoints.add(new GPXUtilities.WptPt(wptPt));
+		TrkSegment segment = new TrkSegment();
+		for (Track track : tracks) {
+			for (TrkSegment trkSegment : track.segments) {
+				if (trkSegment.points.size() > 0) {
+					List<WptPt> waypoints = new ArrayList<>(trkSegment.points.size());
+					for (WptPt wptPt : trkSegment.points) {
+						waypoints.add(new WptPt(wptPt));
 					}
 					waypoints.get(0).firstPoint = true;
 					waypoints.get(waypoints.size() - 1).lastPoint = true;
@@ -277,29 +284,27 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
-		return getAnalysis(fileTimestamp, null, null);
+		return getAnalysis(fileTimestamp, null, null, null);
 	}
 
-	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance) {
+	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance, TrackPointsAnalyser pointsAnalyzer) {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 		analysis.name = path;
 		analysis.wptPoints = points.size();
 		analysis.wptCategoryNames = getWaypointCategories();
 
 		List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
-		analysis.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
+		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, segments.toArray(new SplitSegment[0]));
 		return analysis;
 	}
 
-	private List<SplitSegment> getSplitSegments(GPXTrackAnalysis g,
-												Double fromDistance,
-												Double toDistance) {
+	private List<SplitSegment> getSplitSegments(GPXTrackAnalysis analysis, Double fromDistance, Double toDistance) {
 		List<SplitSegment> splitSegments = new ArrayList<>();
 		for (int i = 0; i < tracks.size(); i++) {
 			GPXUtilities.Track subtrack = tracks.get(i);
 			for (GPXUtilities.TrkSegment segment : subtrack.segments) {
 				if (!segment.generalSegment) {
-					g.totalTracks++;
+					analysis.totalTracks++;
 					if (segment.points.size() > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance));
 					}
@@ -309,9 +314,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return splitSegments;
 	}
 
-	private SplitSegment createSplitSegment(GPXUtilities.TrkSegment segment,
-														 Double fromDistance,
-														 Double toDistance) {
+	private SplitSegment createSplitSegment(TrkSegment segment, Double fromDistance, Double toDistance) {
 		if (fromDistance != null && toDistance != null) {
 			int startInd = getPointIndexByDistance(segment.points, fromDistance);
 			int endInd = getPointIndexByDistance(segment.points, toDistance);
@@ -585,6 +588,16 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 			}
 		}
 		return tracks;
+	}
+
+	public List<TrkSegment> getSegments(boolean includeGeneralTrack) {
+		List<TrkSegment> segments = new ArrayList<>();
+		for (Track track : tracks) {
+			if (includeGeneralTrack || !track.generalTrack) {
+				segments.addAll(track.segments);
+			}
+		}
+		return segments;
 	}
 
 	public int getTracksCount() {

@@ -16,18 +16,15 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
@@ -45,12 +42,14 @@ import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -71,7 +70,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private static final String SELECTING_TRACK = "selecting_track";
 
-	private OsmandApplication app;
 	private ImportHelper importHelper;
 
 	private GPXFile gpxFile;
@@ -123,7 +121,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		MapActivity mapActivity = requireMapActivity();
 		importHelper = new ImportHelper(mapActivity);
 
@@ -435,7 +432,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	public void importTrack() {
-		Intent intent = ImportHelper.getImportTrackIntent();
+		Intent intent = ImportHelper.getImportFileIntent();
 		AndroidUtils.startActivityForResultIfSafe(this, intent, ImportHelper.IMPORT_FILE_REQUEST);
 	}
 
@@ -528,9 +525,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
-		View cancelButton = view.findViewById(R.id.dismiss_button);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(v -> dismiss());
-		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_close);
 	}
 
 	private void close() {

@@ -896,7 +896,7 @@
     <string name="save_poi_without_poi_type_message">Sačuvati tačku od interesa bez tipa\?</string>
     <string name="save_poi_too_many_uppercase">Ime sadrži previše velikih slova. Ipak nastaviti\?</string>
     <string name="map_legend">Legenda na karti</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="feedback">Povratne informacije</string>
     <string name="versions_item">Verzije</string>
     <string name="techical_articles_item">Tehnički članci</string>
@@ -1279,8 +1279,6 @@
     <string name="rendering_attr_noAdminboundaries_description">Zabrani prikaz regionalnih granica (admin nivoi 5-9).</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Prikazuj puteve prema putanjama OSMC-a.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Putanje za pešačenje</string>
-    <string name="rendering_attr_alpineHiking_description">Prikazuj puteve prema lestvici SAC-a.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="download_roads_only_maps">Karta puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
     <string name="map_orientation_landscape">Pejzaž</string>
@@ -1298,8 +1296,6 @@
     <string name="route_tl">Skrenite levo i nastavite</string>
     <string name="route_tslr">Skrenite blago desno i nastavite</string>
     <string name="download_regular_maps">Uobičajena karta</string>
-    <string name="index_srtm_ele">Izohipse</string>
-    <string name="index_srtm_parts">delovi</string>
     <string name="audionotes_location_not_defined">Kliknite „Koristi položaj…“ da dodate belešku određenoj lokaciji.</string>
     <string name="recording_description">Snimam %1$s %3$s %2$s</string>
     <string name="recording_can_not_be_played">Ne mogu da pustim snimak.</string>
@@ -1519,7 +1515,6 @@
     <string name="global_app_settings">Opšte postavke aplikacije</string>
     <string name="general_settings_descr">Podesite prikaz i opšte postavke aplikacije.</string>
     <string name="general_settings">Opšte</string>
-    <string name="index_settings">Upravljanje fajlovima karata</string>
     <string name="global_settings">Opšte postavke</string>
     <string name="routing_settings_descr">Odaberite opcije navođenja.</string>
     <string name="routing_settings">Navođenje</string>
@@ -2383,7 +2378,6 @@
     <string name="default_speed_system_descr">Odredite merne jedinice za brzinu.</string>
     <string name="favorite_category_select">Odaberite kategoriju</string>
     <string name="favorite_category_add_new">Dodaj novo</string>
-    <string name="srtm_plugin_disabled">Izohipse su isključene</string>
     <string name="hillshade_layer_disabled">Sloj senčenja padina je isključen</string>
     <string name="world_maps">Svetske karte</string>
     <string name="region_maps">Karte velikih oblasti</string>
@@ -3202,7 +3196,6 @@
     <string name="purchase_dialog_travel_description">Kupite jedno od sledećeg da možete da čitate turističke članke van mreže:</string>
     <string name="purchase_dialog_title">Odaberite plan</string>
     <string name="unlock_all_features">Otključaj sve OsmAnd funkcionalnosti</string>
-    <string name="contour_lines_hillshade_maps">Karte izohipsi i reljefa</string>
     <string name="wikipedia_offline">Vikipedija van mreže</string>
     <string name="unlimited_downloads">Neograničeno preuzimanja</string>
     <string name="wikivoyage_offline">Wikivoyage van mreže</string>
@@ -3666,7 +3659,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_maps">Karte</string>
-    <string name="shared_sting_tiles">Sličice</string>
+    <string name="shared_string_tiles">Sličice</string>
     <string name="shared_string_osmand_usage">Korišćenje OsmAnd-a</string>
     <string name="shared_string_calculate">Izračunaj</string>
     <string name="store_tracks_in_daily_directories_descrp">Snimaj staze u podfascikle po danu snimanja (npr. 2018-01-01).</string>
@@ -3678,7 +3671,6 @@
     <string name="update_all_maps">Ažuriraj sve karte</string>
     <string name="routing_attr_prefer_unpaved_description">Prednost neasfaltiranim putevima.</string>
     <string name="routing_attr_prefer_unpaved_name">Prednost neasfaltiranim putevima</string>
-    <string name="contour_lines_and_hillshade">Izohipse i reljef</string>
     <string name="shared_string_memory_used_kb_desc">Iskorišćeno %1$s kB</string>
     <string name="shared_string_memory_used_mb_desc">Iskorišćeno %1$s MB</string>
     <string name="shared_string_memory_used_gb_desc">Iskorišćeno %1$s GB</string>
@@ -3791,7 +3783,6 @@
     <string name="monitoring_min_accuracy">Minimalna preciznost</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_notification">Obaveštenje</string>
-    <string name="live_monitoring_adress_descr">Odaberite veb adreus sa sintaksom za parametre: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="metric_ton">t</string>
     <string name="cubic_m">m³</string>
@@ -4018,8 +4009,6 @@
     <string name="copy_poi_name">Kopiraj ime tačke od interesa</string>
     <string name="quick_action_show_hide_title">Prikaži/sakrij</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Sakrij rezervate prirode, zaštićena područja i granice nacionalnih parkova</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Prirodne granice</string>
     <string name="track_has_no_altitude">Putanja ne sadrži podatke o nadmorskoj visini.</string>
     <string name="track_has_no_speed">Putanja ne sadrži podatke o brzini.</string>
     <string name="select_another_colorization">Odaberite drugi tip bojenja.</string>
@@ -4287,7 +4276,7 @@
     <string name="turn_arrows_descr">Izaberite da li su strelice za skretanje prikazane na liniji rute.</string>
     <string name="included_categories">Uključene kategorije</string>
     <string name="from_with_param">Od %1$s</string>
-    <string name="contour_lines_hillshades_slope">Izohipse, reljef, nagib</string>
+    <string name="contour_lines_hillshade_slope">Izohipse, reljef, nagib</string>
     <string name="verification_code_missing">Nisam dobio verifikacioni kod</string>
     <string name="backup_delete_old_data_warning">Izbrisaćete istoriju promena prethodno učitanih podataka.
 \n
@@ -4379,7 +4368,6 @@
     <string name="connect_track_points_as">Povežite tačke puta</string>
     <string name="benefits_for_contributors_secondary_descr">Prijavite se na OpenStreetMap-e da proverite da li imate pravo na neograničena ažuriranja karte svaki sat i mesec.</string>
     <string name="offline_wikipeadia">Van mreže Vikipedia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mape terena: izohipse, reljef, nagib</string>
     <string name="provided_by">Obezbeđuje %1$s</string>
     <string name="routeInfo_horse_scale_name">Težina konjskih staza</string>
     <string name="start_copying">Započni kopiranje</string>
@@ -4591,7 +4579,6 @@
     <string name="not_available_with">Nije dostupno sa %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ili %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Uzmite „%1$s“ kao deo: %2$s plana. Uporedite planove:</string>
-    <string name="terrain_maps">Mape terena</string>
     <string name="purchases_feature_desc_osmand_cloud">Nabavite OsmAnd oblak za skladištenje svih podataka OsmAnd -a na mreži. Zaboravite na gubitak podataka nakon ponovne instalacije, napravite rezervne kopije i vratite sve podatke bez problema.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedite pristup češćem ažuriranju mapa, izaberite između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
     <string name="offline_wikivoyage">Van mreže Vikivojaž</string>

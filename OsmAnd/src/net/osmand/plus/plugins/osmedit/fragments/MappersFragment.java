@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
@@ -65,19 +64,17 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final int CHANGES_FOR_MAPPER_PROMO = 30;
 	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
-	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
 	private Map<String, Contribution> changesInfo = new LinkedHashMap<>();
 
 	private View mainView;
-	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
 			MappersFragment fragment = new MappersFragment();
 			fragment.setRetainInstance(true);
-			fm.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
@@ -92,9 +89,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		nightMode = !app.getSettings().isLightContent();
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
@@ -107,7 +102,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.fragment_mappers_osm, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 

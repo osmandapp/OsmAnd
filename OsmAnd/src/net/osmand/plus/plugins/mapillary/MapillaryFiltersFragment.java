@@ -23,10 +23,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -47,12 +47,11 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        updateNightMode();
         MapActivity mapActivity = (MapActivity) requireActivity();
-        OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
         MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 
-        boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
         int currentModeColor = appMode.getProfileColor(nightMode);
@@ -67,7 +66,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         View toggleRow = view.findViewById(R.id.toggle_row);
         boolean selected = plugin.SHOW_MAPILLARY.get();
-        int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
+        int toggleActionStringId = R.string.street_level_imagery;
         int toggleIconColor;
         int toggleIconId;
         if (selected) {
@@ -127,19 +126,11 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             }
             return false;
         });
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
+        textView.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
                 enableButtonApply(view);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
         ImageView imageView = view.findViewById(R.id.warning_image_view);

@@ -149,7 +149,7 @@ public class TopToolbarController {
 
 	@ColorInt
 	public int getStatusBarColor(Context context, boolean nightMode) {
-		return ContextCompat.getColor(context, nightMode ? R.color.status_bar_route_dark : R.color.status_bar_route_light);
+		return ContextCompat.getColor(context, nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light);
 	}
 
 	public void setTitle(String title) {

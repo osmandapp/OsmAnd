@@ -26,19 +26,17 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.text.MessageFormat;
@@ -62,8 +60,6 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private static final String KEY_DOWNLOADED_SIZE_MB = "downloaded_size_mb";
 	private static final String KEY_DOWNLOADED_TILES_NUMBER = "downloaded_tiles_number";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
 
 	private ITileSource tileSource;
@@ -81,16 +77,10 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private float approxSizeMb;
 	private float downloadedSizeMb;
 
-	private boolean nightMode;
-
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 
 		Bundle args = getArguments();
 		if (args != null) {
@@ -106,6 +96,11 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 				dismiss(true);
 			}
 		});
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	private void restoreState(@NonNull Bundle savedState) {
@@ -151,8 +146,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.tiles_download_progress_fragment, container, false);
 
 		setupToolbar();
@@ -228,7 +222,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	}
 
 	private void updateTilesNumber() {
-		String tilesString = getString(R.string.shared_sting_tiles);
+		String tilesString = getString(R.string.shared_string_tiles);
 		String downloadedNumber = formatNumber(downloadedTilesNumber, 0);
 
 		TextView tvDownloaded = view.findViewById(R.id.downloaded_number);
@@ -248,10 +242,9 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	}
 
 	private void setupCancelCloseButton(boolean downloadFinished) {
-		View cancelButton = view.findViewById(R.id.cancel_button);
+		DialogButton cancelButton = view.findViewById(R.id.cancel_button);
 		cancelButton.setOnClickListener(v -> dismiss(true));
-		int buttonTextId = downloadFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
-		UiUtilities.setupDialogButton(nightMode, cancelButton, DialogButtonType.SECONDARY, buttonTextId);
+		cancelButton.setTitleId(downloadFinished ? R.string.shared_string_close : R.string.shared_string_cancel);
 	}
 
 	public void dismiss(boolean showWarningIfDownloading) {

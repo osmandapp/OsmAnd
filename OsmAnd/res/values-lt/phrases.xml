@@ -822,12 +822,12 @@
     <string name="poi_health_specialty_herbalism_yes">Vaistažolininkystė</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatija</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktūra</string>
-    <string name="poi_health_specialty_podology_yes">Podologija</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologija</string>
     <string name="poi_health_specialty_optometry_yes">Optometrija</string>
     <string name="poi_health_specialty_oncology_yes">Onkologija</string>
     <string name="poi_health_specialty_endocrinology_yes">Endokrinologija</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsichiatrija</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontologija</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontologija</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologija</string>
     <string name="poi_health_specialty_physiotherapy_yes">Fizioterapija</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontija</string>
@@ -1612,8 +1612,6 @@
     <string name="poi_direction_south">Pietų kryptis</string>
     <string name="poi_direction_east">Rytų kryptis</string>
     <string name="poi_direction_north">Šiaurės kryptis</string>
-    <string name="poi_callable_no">Ne</string>
-    <string name="poi_callable_yes">Taip</string>
     <string name="poi_shelter_no">Pastogė: ne</string>
     <string name="poi_manufacturer">Gamintojas</string>
     <string name="poi_guest_house">Svečių namai</string>
@@ -2490,8 +2488,6 @@
     <string name="poi_socket_cee_blue_voltage">Lizdas: CEE mėlyna: įtampa</string>
     <string name="poi_socket_type3a_current">Lizdas: 3a tipas: srovė</string>
     <string name="poi_socket_type3c_current">Lizdas: 3c tipas: srovė</string>
-    <string name="poi_socket_type3c">3c tipo išvestis</string>
-    <string name="poi_socket_type3a">3a tipo išvestis</string>
     <string name="poi_socket_type2_cable_current">Lizdas: 2 tipo kabelis: srovė</string>
     <string name="poi_socket_type3c_output_filter">3c tipo išvestis</string>
     <string name="poi_socket_type3a_output_filter">3a tipo išvestis</string>
@@ -2519,7 +2515,6 @@
     <string name="poi_authentication_phone_call">Autorizavimas skambučiu</string>
     <string name="poi_computer_repair">Kompiuterių remontas</string>
     <string name="poi_computer_parts">Kompiuterių dalys</string>
-    <string name="poi_climbing_bolted_filter">"  "</string>
     <string name="poi_traffic_signals">Šviesoforas</string>
     <string name="poi_internet_access_fee_yes">Interneto prieiga: imamas mokestis</string>
     <string name="poi_craft_photographic_laboratory">Fotografijos laboratorija</string>

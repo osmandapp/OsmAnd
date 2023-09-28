@@ -22,7 +22,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(net.osmand.plus.R.string.plugin_ski_descr);
 	}
 
@@ -49,11 +49,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	@Override
 	public String getComponentId1() {
 		return COMPONENT;
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/ski-plugin.html";
 	}
 
 	@Override

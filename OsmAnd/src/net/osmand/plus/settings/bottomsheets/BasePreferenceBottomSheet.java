@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,7 +20,6 @@ import java.util.List;
 public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String PREFERENCE_ID = "preference_id";
-	private static final String APP_MODE_KEY = "app_mode_key";
 	private static final String APPLY_QUERY_TYPE = "apply_query_type";
 	private static final String PROFILE_DEPENDENT = "profile_dependent";
 
@@ -58,7 +59,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	}
 
 	@Override
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
+	public boolean isNightMode(@NonNull OsmandApplication app) {
 		if (usedOnMap) {
 			return app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
 		} else {

@@ -41,6 +41,7 @@ public class ContextMenuItem {
 	private String secondaryDescription;
 
 	private boolean useNaturalIconColor;
+	private boolean useNaturalSecondIconColor;
 	@ColorInt
 	private Integer color;
 	@DrawableRes
@@ -128,6 +129,10 @@ public class ContextMenuItem {
 
 	public boolean useNaturalIconColor() {
 		return useNaturalIconColor;
+	}
+
+	public boolean useNaturalSecondIconColor() {
+		return useNaturalSecondIconColor;
 	}
 
 	@ColorInt
@@ -265,6 +270,12 @@ public class ContextMenuItem {
 	@NonNull
 	public ContextMenuItem setUseNaturalIconColor(boolean useNaturalIconColor) {
 		this.useNaturalIconColor = useNaturalIconColor;
+		return this;
+	}
+
+	@NonNull
+	public ContextMenuItem setUseNaturalSecondIconColor(boolean useNaturalSecondIconColor) {
+		this.useNaturalSecondIconColor = useNaturalSecondIconColor;
 		return this;
 	}
 

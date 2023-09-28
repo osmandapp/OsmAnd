@@ -54,17 +54,19 @@ public class DataStorageHelper {
 	public static final String MANUALLY_SPECIFIED = "manually_specified";
 
 	private static final String MAPS_STORAGE_SIZE = "maps_storage_size";
-	private static final String TERRAIN_STORAGE_SIZE = "terrain_storage_size";
 	public static final String TILES_STORAGE_SIZE = "tiles_storage_size";
+	private static final String CONTOUR_LINES_STORAGE_SIZE = "contour_lines_storage_size";
+	private static final String HILLSHADE_SLOPE_STORAGE_SIZE = "hillshade_slope_storage_size";
+	private static final String TERRAIN3D_STORAGE_SIZE = "terrain3d_storage_size";
 	private static final String ROADSONLY_STORAGE_SIZE = "roadsonly_storage_size";
 	private static final String NAUTICAL_STORAGE_SIZE = "nautical_storage_size";
 	private static final String LIVE_STORAGE_SIZE = "live_storage_size";
-	private static final String ARCHIVE_STORAGE_SIZE = "archive_storage_size";
 	private static final String WIKI_STORAGE_SIZE = "wiki_storage_size";
 	private static final String TRAVEL_STORAGE_SIZE = "travel_storage_size";
 	private static final String WEATHER_STORAGE_SIZE = "weather_storage_size";
 	private static final String TRACKS_STORAGE_SIZE = "tracks_storage_size";
 	private static final String NOTES_STORAGE_SIZE = "notes_storage_size";
+	private static final String ARCHIVE_STORAGE_SIZE = "archive_storage_size";
 	public static final String OTHER_STORAGE_SIZE = "other_storage_size";
 
 	private final OsmandApplication app;
@@ -74,17 +76,19 @@ public class DataStorageHelper {
 
 	private final ArrayList<MemoryItem> memoryItems = new ArrayList<>();
 	private MemoryItem mapsStorageSize;
-	private MemoryItem terrainStorageSize;
 	private MemoryItem tilesStorageSize;
+	private MemoryItem contourLinesStorageSize;
+	private MemoryItem hillshadeSlopeStorageSize;
+	private MemoryItem terrain3dStorageSize;
 	private MemoryItem roadsonlyStorageSize;
 	private MemoryItem nauticalStorageSize;
 	private MemoryItem liveStorageSize;
-	private MemoryItem archiveStorageSize;
 	private MemoryItem wikiStorageSize;
 	private MemoryItem travelStorageSize;
 	private MemoryItem weatherStorageSize;
 	private MemoryItem tracksStorageSize;
 	private MemoryItem notesStorageSize;
+	private MemoryItem archiveStorageSize;
 	private MemoryItem otherStorageSize;
 
 	private int currentStorageType;
@@ -200,19 +204,6 @@ public class DataStorageHelper {
 				.createItem();
 		memoryItems.add(mapsStorageSize);
 
-		terrainStorageSize = MemoryItem.builder()
-				.setKey(TERRAIN_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT, IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(TILES_INDEX_DIR, false, PREFIX, false),
-						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
-				.setPrefixes("Hillshade", "Slope")
-				.setExtensions(IndexConstants.TIF_EXT)
-				.createItem();
-		memoryItems.add(terrainStorageSize);
-
 		tilesStorageSize = MemoryItem.builder()
 				.setKey(TILES_STORAGE_SIZE)
 //				.setExtensions("")
@@ -220,6 +211,31 @@ public class DataStorageHelper {
 						createDirectory(TILES_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(tilesStorageSize);
+
+		contourLinesStorageSize = MemoryItem.builder()
+				.setKey(CONTOUR_LINES_STORAGE_SIZE)
+//				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT, IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
+				.setDirectories(
+						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true))
+				.createItem();
+		memoryItems.add(contourLinesStorageSize);
+
+		hillshadeSlopeStorageSize = MemoryItem.builder()
+				.setKey(HILLSHADE_SLOPE_STORAGE_SIZE)
+				.setDirectories(
+						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
+				.setPrefixes("Hillshade", "Slope")
+				.createItem();
+		memoryItems.add(hillshadeSlopeStorageSize);
+
+		terrain3dStorageSize = MemoryItem.builder()
+				.setKey(TERRAIN3D_STORAGE_SIZE)
+//				.setExtensions(IndexConstants.TIF_EXT)
+				.setDirectories(
+						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(GEOTIFF_DIR, true, EXTENSIONS, true))
+				.createItem();
+		memoryItems.add(terrain3dStorageSize);
 
 		roadsonlyStorageSize = MemoryItem.builder()
 				.setKey(ROADSONLY_STORAGE_SIZE)
@@ -337,14 +353,14 @@ public class DataStorageHelper {
 	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter uiAdapter) {
 		File rootDir = new File(currentStoragePath);
 		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(uiAdapter, otherStorageSize, rootDir, null, null, OTHER_STORAGE_SIZE);
-		task.execute(mapsStorageSize, terrainStorageSize, tilesStorageSize, roadsonlyStorageSize, nauticalStorageSize, liveStorageSize, 
-				archiveStorageSize, wikiStorageSize, travelStorageSize, weatherStorageSize, tracksStorageSize, notesStorageSize, otherStorageSize);
+		task.execute(mapsStorageSize, contourLinesStorageSize, hillshadeSlopeStorageSize, terrain3dStorageSize, tilesStorageSize, roadsonlyStorageSize, nauticalStorageSize, liveStorageSize, 
+				wikiStorageSize, travelStorageSize, weatherStorageSize, tracksStorageSize, notesStorageSize, archiveStorageSize, otherStorageSize);
 		return task;
 	}
 
 	public RefreshUsedMemoryTask calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(tilesStorageSize.getDirectories()[0].getAbsolutePath());
-		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherStorageSize, rootDir, null, terrainStorageSize.getPrefixes(), TILES_STORAGE_SIZE);
+		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherStorageSize, rootDir, null, hillshadeSlopeStorageSize.getPrefixes(), TILES_STORAGE_SIZE);
 		task.execute(tilesStorageSize);
 		return task;
 	}

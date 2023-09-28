@@ -11,7 +11,7 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.importfiles.ui.TrackItem;
+import net.osmand.plus.importfiles.ui.ImportTrackItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -19,7 +19,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
+public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackItem>> {
 
 	private final OsmandApplication app;
 	private final GPXFile gpxFile;
@@ -42,8 +42,8 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 	}
 
 	@Override
-	protected List<TrackItem> doInBackground(Void... params) {
-		List<TrackItem> items = new ArrayList<>();
+	protected List<ImportTrackItem> doInBackground(Void... params) {
+		List<ImportTrackItem> items = new ArrayList<>();
 		String name = Algorithms.getFileNameWithoutExtension(fileName);
 		for (int i = 0; i < gpxFile.tracks.size(); i++) {
 			Track track = gpxFile.tracks.get(i);
@@ -63,13 +63,13 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 
 				String trackName = track.name;
 				if (Algorithms.isEmpty(trackName)) {
-					name = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
+					trackName = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
 				}
-				items.add(new TrackItem(selectedGpxFile, trackName, i));
+				items.add(new ImportTrackItem(selectedGpxFile, trackName, i));
 			}
 		}
 		for (WptPt point : gpxFile.getPoints()) {
-			TrackItem item = findNearestTrack(point, items);
+			ImportTrackItem item = findNearestTrack(point, items);
 			if (item != null) {
 				item.selectedPoints.add(point);
 				item.suggestedPoints.add(point);
@@ -78,10 +78,10 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 		return items;
 	}
 
-	private TrackItem findNearestTrack(@NonNull WptPt point, @NonNull List<TrackItem> items) {
-		TrackItem trackItem = null;
+	private ImportTrackItem findNearestTrack(@NonNull WptPt point, @NonNull List<ImportTrackItem> items) {
+		ImportTrackItem trackItem = null;
 		double minDistance = Double.MAX_VALUE;
-		for (TrackItem item : items) {
+		for (ImportTrackItem item : items) {
 			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
 			for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
 				double distance = MapUtils.getDistance(point.lat, point.lon, wptPt.lat, wptPt.lon);
@@ -95,7 +95,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<TrackItem> items) {
+	protected void onPostExecute(List<ImportTrackItem> items) {
 		if (listener != null) {
 			listener.tracksCollectionFinished(items);
 		}
@@ -105,6 +105,6 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<TrackItem>> {
 
 		void tracksCollectionStarted();
 
-		void tracksCollectionFinished(List<TrackItem> items);
+		void tracksCollectionFinished(List<ImportTrackItem> items);
 	}
 }

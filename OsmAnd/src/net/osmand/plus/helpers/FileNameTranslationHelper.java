@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.IndexConstants.WEATHER_MAP_INDEX_EXT;
 import static net.osmand.map.WorldRegion.WORLD;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -29,7 +31,7 @@ public class FileNameTranslationHelper {
 
 	public static final String WIKI_NAME = "_wiki";
 	public static final String WIKIVOYAGE_NAME = "_wikivoyage";
-	public static final String WEATHER = "_weather";
+	public static final String WEATHER = "Weather";
 	public static final String HILL_SHADE = "Hillshade";
 	public static final String SLOPE = "Slope";
 	public static final String HEIGHTMAP = "Heightmap";
@@ -39,13 +41,20 @@ public class FileNameTranslationHelper {
 		return getFileName(app, app.getResourceManager().getOsmandRegions(), fileName);
 	}
 
+	@Nullable
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
-		String basename = getBasename(fileName);
+		return getFileName(ctx, regions, fileName, true, false);
+	}
+
+	@Nullable
+	public static String getFileName(Context ctx, OsmandRegions regions, String fileName, boolean includingParent, boolean reversed) {
+		String basename = getBasename(ctx, fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
 			return getWikiName(ctx, basename);
 		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
 			return getWikivoyageName(ctx, basename);
-		} else if (fileName.endsWith(WEATHER)) { //weather files
+		} else if (fileName.endsWith(WEATHER_MAP_INDEX_EXT)) { //weather files
+			basename = basename.replace("Weather_", "");
 			return getWeatherName(ctx, regions, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
@@ -55,8 +64,8 @@ public class FileNameTranslationHelper {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
 		} else if (fileName.startsWith(HEIGHTMAP)) {
-			basename = basename.replace(HEIGHTMAP + " ", "");
-			return getTerrainName(ctx, regions, basename, R.string.download_heightmap_maps);
+			basename = basename.replace(HEIGHTMAP + " ", "").replace(" ", "_");
+			return regions.getLocaleName(basename.trim(), true);
 		} else if (fileName.startsWith(SLOPE)) {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
@@ -66,18 +75,15 @@ public class FileNameTranslationHelper {
 				return name;
 			}
 		}
-
 		//if nothing else
 		String lc = basename.toLowerCase();
 		String std = getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
-
 		if (regions != null) {
-			return regions.getLocaleName(basename, true);
+			return regions.getLocaleName(basename, includingParent, reversed);
 		}
-
 		return null;
 	}
 
@@ -123,11 +129,10 @@ public class FileNameTranslationHelper {
 
 	public static String getWeatherName(Context ctx, OsmandRegions regions, String basename) {
 		basename = basename.replace(" ", "_");
-		if (WORLD.equals(basename)) {
+		if (WORLD.equalsIgnoreCase(basename)) {
 			return ctx.getString(R.string.shared_string_all_world);
 		} else {
-			WorldRegion region = regions.getRegionData(basename);
-			return region.getLocaleName();
+			return regions.getLocaleName(basename.trim(), false);
 		}
 	}
 
@@ -162,12 +167,14 @@ public class FileNameTranslationHelper {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
-	private static String getBasename(String fileName) {
+	private static String getBasename(Context ctx, String fileName) {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			OsmandSettings settings = app.getSettings();
+			return settings.getTileSourceTitle(fileName);
 		}
 		if (fileName.endsWith(IndexConstants.WEATHER_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.WEATHER_EXT.length());

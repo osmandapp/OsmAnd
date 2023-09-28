@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_padding_half"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             tools:text="Flevoland"/>
 
         <View
@@ -38,7 +38,7 @@
             android:layout_marginBottom="@dimen/content_padding_half"
             android:layout_marginTop="@dimen/content_padding_half"
             android:gravity="center"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_sub_text_size"
             tools:text="@string/last_map_change"/>
 
@@ -49,7 +49,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/content_padding_half"
             android:gravity="center"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_sub_text_size"
             tools:text="@string/last_update"/>
     </LinearLayout>

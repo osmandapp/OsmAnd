@@ -36,8 +36,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		boolean nightMode = isNightMode(true);
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		etText = view.findViewById(R.id.description);
@@ -64,18 +63,23 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 		return view;
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 		Activity ctx = requireActivity();
-		int themeId = isNightMode(true) ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, isNightMode(true));
+			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, nightMode);
 			window.setStatusBarColor(statusBarColor);
 		}
 		return dialog;
@@ -99,10 +103,10 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 		});
 
 		Context ctx = btnSaveContainer.getContext();
-		AndroidUtils.setBackground(ctx, btnSaveContainer, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
+		AndroidUtils.setBackground(ctx, btnSaveContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 		View btnSave = view.findViewById(R.id.btn_save);
-		int drawableRes = isNightMode(true) ? R.drawable.btn_solid_border_dark : R.drawable.btn_solid_border_light;
+		int drawableRes = nightMode ? R.drawable.btn_solid_border_dark : R.drawable.btn_solid_border_light;
 		AndroidUtils.setBackground(btnSave, getIcon(drawableRes));
 	}
 

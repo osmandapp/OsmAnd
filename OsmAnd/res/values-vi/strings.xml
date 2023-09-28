@@ -198,7 +198,6 @@
     <string name="general_settings_descr">Thiết lập hiển thị và cài đặt chung cho ứng dụng.</string>
     <string name="general_settings">Thiết lập chung</string>
     <string name="index_settings_descr">Tải xuống và quản lý các tệp bản đồ ngoại tuyến được lưu trữ trên thiết bị của bạn.</string>
-    <string name="index_settings">Quản lý tệp bản đồ</string>
     <string name="osmand_service">Chế độ nền</string>
     <string name="osmand_service_descr">OsmAnd chạy ở chế độ nền với màn hình tắt.</string>
     <string name="fast_route_mode">Nhanh nhất</string>

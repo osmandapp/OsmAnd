@@ -16,6 +16,7 @@ import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.NavigationHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
@@ -172,6 +173,9 @@ public class SettingsItemsFactory {
 				break;
 			case SEARCH_HISTORY:
 				item = new SearchHistorySettingsItem(app, json);
+				break;
+			case NAVIGATION_HISTORY:
+				item = new NavigationHistorySettingsItem(app, json);
 				break;
 			case GPX:
 				item = new GpxSettingsItem(app, json);

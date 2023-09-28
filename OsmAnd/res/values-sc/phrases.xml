@@ -1694,7 +1694,7 @@
     <string name="poi_health_specialty_general_yes">Dutore generale</string>
     <string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Meighina interna</string>
+    <string name="poi_health_specialty_internal_yes">Meighina interna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorinolaringoiatria</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
@@ -1714,7 +1714,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgia dentale, orale e maxillo-fatziale</string>
     <string name="poi_health_specialty_maternity_yes">Maternidade</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Meighina de emergèntzia-urgèntzia</string>
+    <string name="poi_health_specialty_emergency_yes">Meighina de emergèntzia-urgèntzia</string>
     <string name="poi_health_specialty_emergency_medicine_no">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia: nono</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plàstica</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodontzia</string>
@@ -2478,7 +2478,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgia maxillo-fatziale</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnòstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontoiatria</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontoiatria</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologia (maladias de sos renes)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsichiatria</string>
@@ -2502,7 +2502,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manuale</string>
     <string name="poi_health_specialty_sports_medicine_yes">Meighina de s\'isport</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psichiatria adulta</string>
     <string name="poi_health_specialty_acupuncture_yes">Agupuntura</string>
     <string name="poi_health_specialty_homeopathy_yes">Omeopatia</string>
@@ -2672,10 +2672,8 @@
     <string name="poi_animal_shelter_purpose_adoption_yes">Adotzione: eja</string>
     <string name="poi_animal_shelter_purpose_release_yes">Liberatzione: eja</string>
     <string name="poi_animal_shelter_purpose_release_no">Liberatzione: nono</string>
-    <string name="poi_car_yes">Màchina: eja</string>
     <string name="poi_bicycle_yes">Bitzicleta: eja</string>
     <string name="poi_scooter_yes">Motorinu: eja</string>
-    <string name="poi_truck_yes">Càmion: eja</string>
     <string name="poi_climbing_sport_yes">Isport: eja</string>
     <string name="poi_climbing_trad_yes">Traditzionale: eja</string>
     <string name="poi_climbing_ice_yes">Astra: eja</string>
@@ -3868,7 +3866,7 @@
     <string name="poi_water_source_tap">Isceta</string>
     <string name="poi_water_source_water_works">Òperas idràulicas</string>
     <string name="poi_water_source_tube_well">Putzu a tubu</string>
-    <string name="poi_weightbridge">Bilàntzia a ponte;Bilàntzia pro càmions</string>
+    <string name="poi_weighbridge">Bilàntzia a ponte;Bilàntzia pro càmions</string>
     <string name="poi_ranger_station">Istatzione de sos rangers</string>
     <string name="poi_lavoir">Sabunadòrgiu</string>
     <string name="poi_waste_transfer_station">Istatzione de tramudòngiu de s\'arga</string>
@@ -4021,9 +4019,6 @@
     <string name="poi_arch">Arcu</string>
     <string name="poi_payment_calling_cards_no">Ischedas telefònicas no atzetadas</string>
     <string name="poi_manufacturer">Produtore</string>
-    <string name="poi_callable">Si podet mutire</string>
-    <string name="poi_callable_no">Nono</string>
-    <string name="poi_callable_yes">Eja;Si podet mutire</string>
     <string name="poi_payment_reverse_charge_calls_yes">Mutidas cun addèbitu furriadu: eja</string>
     <string name="poi_payment_calling_cards_yes">Ischedas telefònicas</string>
     <string name="poi_payment_reverse_charge_calls_no">Mutidas cun addèbitu furriadu: nono</string>
@@ -4346,7 +4341,6 @@
     <string name="poi_club_aviation">Tzìrculu de aviatzione</string>
     <string name="poi_club_bicycle">Tzìrculu de tziclismu</string>
     <string name="poi_club_doityourself">Tzìrculu de bricolage</string>
-    <string name="poi_playground_type">Casta de parcu de giogos</string>
     <string name="poi_playground_structure">Istrutura</string>
     <string name="poi_playground_slide">Lassinadòrgiu</string>
     <string name="poi_playground_climbingframe">Istrutura de iscalada</string>
@@ -4381,7 +4375,6 @@
     <string name="poi_playground_roundabout">Carosellu manuale</string>
     <string name="poi_playground_seesaw">Artziacala (bantzigallera basculante)</string>
     <string name="poi_climbing_bolt">Bullone de iscalada</string>
-    <string name="poi_climbing_bolted_filter">"  "</string>
     <string name="poi_climbing_quality">Calidade de s\'iscalada</string>
     <string name="poi_climbing_rock_basalt">Perda de s\'iscalada: basaltu</string>
     <string name="poi_playground_aerialrotator">Giradore aèreu</string>

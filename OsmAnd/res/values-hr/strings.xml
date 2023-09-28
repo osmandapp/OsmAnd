@@ -52,7 +52,6 @@
     <string name="av_video_format">Video format</string>
     <string name="av_use_external_recorder_descr">Koristite sistemsku aplikaciju za video snimanje</string>
     <string name="av_use_external_recorder">Koristite sistemsku aplikaciju za snimanje</string>
-    <string name="index_srtm_parts">dijelovi</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
     <string name="download_roads_only_maps">Samo cestovne karte</string>
@@ -698,7 +697,6 @@
     <string name="general_settings">Opće postavke</string>
     <string name="general_settings_descr">Definiraj opće postavke</string>
     <string name="routing_settings_descr">Odredite mogućnosti za navigaciju</string>
-    <string name="index_settings">Upravljanje podacima</string>
     <string name="routing_settings">Navigacija</string>
     <string name="settings_preset_descr">Odaberite korisnički profil s već prilagođenim kartama i navigacijskim postavkama.</string>
     <string name="settings_preset">Korisnički profil</string>

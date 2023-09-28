@@ -5,8 +5,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -27,7 +27,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -40,6 +39,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
@@ -57,22 +57,22 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
 	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
-	private OsmandApplication app;
-
-	private View cancelButton;
-	private View applyButton;
+	private DialogButton cancelButton;
+	private DialogButton applyButton;
 
 	private boolean editMode;
 	private boolean continued;
 
-	private boolean nightMode;
 	private boolean portrait;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getMapActivity());
 
 		Fragment targetFragment = getTargetFragment();
@@ -88,8 +88,8 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themeInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View rootView = themeInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
+		updateNightMode();
+		View rootView = themedInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
 
 		applyButton = rootView.findViewById(R.id.right_bottom_button);
 		cancelButton = rootView.findViewById(R.id.dismiss_button);
@@ -117,6 +117,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 			int landscapeWidth = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 			rootView.setLayoutParams(new FrameLayout.LayoutParams(landscapeWidth, MATCH_PARENT));
 		}
+		refreshControlsButtons();
 		return rootView;
 	}
 
@@ -178,8 +179,10 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 				activity.onBackPressed();
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, cancelButton, SECONDARY, R.string.shared_string_cancel);
-		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_continue);
+		cancelButton.setButtonType(SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
+		applyButton.setButtonType(PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_continue);
 		AndroidUiHelper.updateVisibility(applyButton, !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), !editMode);
 	}
@@ -212,6 +215,13 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		if (fragment != null && !continued) {
 			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);
 		}
+		if (!continued) {
+			refreshControlsButtons();
+		}
+	}
+
+	private void refreshControlsButtons(){
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 
 	public MapActivity getMapActivity() {

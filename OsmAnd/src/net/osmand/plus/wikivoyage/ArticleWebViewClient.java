@@ -100,9 +100,6 @@ public class ArticleWebViewClient extends WebViewClient {
 	}
 
 	protected boolean isNightMode() {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

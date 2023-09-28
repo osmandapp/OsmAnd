@@ -39,7 +39,8 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -55,26 +56,24 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
 
-	private TrackItem trackItem;
+	private ImportTrackItem trackItem;
 	private final List<WptPt> points = new ArrayList<>();
 	private final Set<WptPt> selectedPoints = new HashSet<>();
 
 	private TrackPointsAdapter adapter;
 
-	private View applyButton;
-	private View selectAllButton;
+	private DialogButton applyButton;
+	private DialogButton selectAllButton;
 	private TextView toolbarTitle;
 	private ExpandableListView listView;
 
 	private Float heading;
 	private Location location;
 	private boolean locationUpdateStarted;
-	private boolean nightMode;
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@NonNull
@@ -95,7 +94,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.select_track_points_fragment, container, false);
 
 		setupToolbar(view);
@@ -216,10 +215,14 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	protected void updateButtonsState() {
+		applyButton.setTitleId(R.string.shared_string_apply);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+
 		boolean allSelected = selectedPoints.containsAll(points);
 		String selectAllText = getString(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, getString(R.string.shared_string_apply));
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY_ACTIVE, selectAllText, R.drawable.ic_action_deselect_all);
+		selectAllButton.setButtonType(DialogButtonType.SECONDARY_ACTIVE);
+		selectAllButton.setTitle(selectAllText);
+		selectAllButton.setIconId(R.drawable.ic_action_deselect_all);
 
 		TextView textView = selectAllButton.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
@@ -337,7 +340,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackItem trackItem,
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull ImportTrackItem trackItem,
 	                                @NonNull List<WptPt> points, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectPointsFragment fragment = new SelectPointsFragment();
@@ -352,6 +355,6 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	public interface PointsSelectionListener {
 
-		void onPointsSelected(@NonNull TrackItem trackItem, @NonNull Set<WptPt> folder);
+		void onPointsSelected(@NonNull ImportTrackItem trackItem, @NonNull Set<WptPt> folder);
 	}
 }

@@ -1,1 +1,241 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="metric_lbs">ปอนด์</string>
+    <string name="share_link">แชร์ลิงก์</string>
+    <string name="selected_value">ค่าที่เลือก</string>
+    <string name="delete_cloud_version">ลบเวอร์ชันคลาวด์</string>
+    <string name="display_position_automatic_descr">ขึ้นอยู่กับการวางแนวของแผนที่: ด้านล่างสำหรับทิศทางการเคลื่อนที่ กึ่งกลางสำหรับส่วนอื่นๆ ทั้งหมด</string>
+    <string name="new_file">ไฟล์ใหม่</string>
+    <string name="shared_string_cloud">คลาวด์</string>
+    <string name="set_up_backup">ตั้งค่าการสํารองข้อมูล</string>
+    <string name="cloud_sync_progress">ซิงค์…%1$s</string>
+    <string name="res_unknown">ไม่รู้จัก</string>
+    <string name="shared_string_all_world">โลกทั้งใบ</string>
+    <string name="ble_search_again">ค้นหาอีกครั้ง</string>
+    <string name="sort_date_ascending">วันที่ใหม่ล่าสุดก่อน</string>
+    <string name="checking_progress">กำลังตรวจสอบ…</string>
+    <string name="value_downloaded_of_mb">กําลังดาวน์โหลด %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">ข้ามการดาวน์โหลด</string>
+    <string name="determine_location">อนุญาตให้เราระบุตําแหน่งของคุณ</string>
+    <string name="external_device_characteristic_stride_length">ความยาวก้าว</string>
+    <string name="external_device_characteristic_temperature">อุณหภูมิ</string>
+    <string name="external_device_details_information">ข้อมูล</string>
+    <string name="clear_online_cache">ล้างแคชออนไลน์</string>
+    <string name="app_mode_moped">จักรยานยนต์</string>
+    <string name="clear_online_cache_description">การดําเนินการนี้จะล้างแคชสําหรับไทล์สภาพอากาศออนไลน์</string>
+    <string name="offline_cache">แคชออฟไลน์</string>
+    <string name="disable_vertex_hillshade_3d">ปิดใช้งาน vertex hillshade ในแบบ 3 มิติ</string>
+    <string name="enable_3d_maps">เปิดใช้งานแผนที่ 3 มิติ</string>
+    <string name="local_changes_will_be_dismissed">การเปลี่ยนแปลงบนเครื่องจะถูกยกเลิก</string>
+    <string name="cloud_all_changes_uploaded">อัปโหลดการเปลี่ยนแปลงทั้งหมดแล้ว</string>
+    <string name="check_for_updates">ตรวจสอบการอัปเดต</string>
+    <string name="map_2d_mode_action">โหมด 2D</string>
+    <string name="map_3d_mode_action">โหมด 3D</string>
+    <string name="map_3d_mode_hint">กดปุ่มค้างเพื่อเปลี่ยนตำแหน่งของปุ่ม</string>
+    <string name="visible_in_3d_mode">มองเห็นในโหมด 3D</string>
+    <string name="inch">นิ้ว</string>
+    <string name="external_device_characteristic_systolic">ซิสโตลิก</string>
+    <string name="external_device_details_connection">การเชื่อมต่อ</string>
+    <string name="external_device_details_battery">แบตเตอรี่</string>
+    <string name="external_device_details_speed">ความเร็ว</string>
+    <string name="bluetooth_disconnected">ตัดการเชื่อมต่อ %s</string>
+    <string name="bluetooth_connected">เชื่อมต่อ %s แล้ว</string>
+    <string name="ant_plus_pair_bluetooth_prompt">คุณสามารถจับคู่เซ็นเซอร์ Bluetooth LE และ ANT+ กับ OsmAnd ได้</string>
+    <string name="learn_more_about_sensors_link">เรียนรู้เพิ่มเติมเกี่ยวกับเซ็นเซอร์</string>
+    <string name="approximate_bearing_descr">รับแบริ่งจากเส้นทางการนําทางที่กําลังติดตาม</string>
+    <string name="movement_speed">ความเร็วในการเคลื่อนที่</string>
+    <string name="shared_string_inches">นิ้ว</string>
+    <string name="shared_string_yards">หลา</string>
+    <string name="weather_forecast">พยากรณ์อากาศ</string>
+    <string name="switch_folder">สลับโฟลเดอร์</string>
+    <string name="offline_weather_forecast">พยากรณ์อากาศแบบออฟไลน์</string>
+    <string name="av_audio_format_bottom_sheet_descr">เลือกรูปแบบเสียง รูปแบบคอนเทนเนอร์ประเภทไฟล์สำหรับเสียงคือ 3GPP (.3gp)</string>
+    <string name="weight_limit_error">ค่าต่ำสุดคือ \"%1$s\" ตัน ใช้โปรไฟล์ \"%2$s\" หากน้ำหนักรถน้อยกว่าค่าต่ำสุด</string>
+    <string name="share_as_file">แชร์เป็นไฟล์</string>
+    <string name="deleted_file">ไฟล์ที่ถูกลบ</string>
+    <string name="weather_download_error">ไม่สามารถดาวโหลดช่อง %1$s ได้</string>
+    <string name="select_layer">เลือกเลเยอร์</string>
+    <string name="free_maps_updates">อัปเดตฟรี (ฉุกเฉิน)</string>
+    <string name="shared_string_alt_name">ชื่ออื่น</string>
+    <string name="token_is_not_valid">โทเค็นไม่ถูกต้อง</string>
+    <string name="modified_file">ไฟล์ที่แก้ไข</string>
+    <string name="rendering_value_sectors_name">เซกเตอร์</string>
+    <string name="rendering_value_name_only_name">ชื่อเท่านั้น</string>
+    <string name="external_device_low_battery">แบตเตอรี่ต่ำ</string>
+    <string name="external_device_forget_sensor">ลืมเซ็นเซอร์</string>
+    <string name="external_device_forget_sensor_description">เซ็นเซอร์จะถูกลบจากรายการ คุณสามารถเชื่อมต่อเซ็นเซอร์อีกครั้งได้ทุกเวลา</string>
+    <string name="ant_plus_nothing_found_text">ไม่พบเซ็นเซอร์ใดๆ</string>
+    <string name="shared_string_pounds">ปอนด์</string>
+    <string name="no_visible_tracks">ไม่มีแทร็กบนแผนที่</string>
+    <string name="shared_string_kilograms">กิโลกรัม</string>
+    <string name="shared_string_apply_changes">นำการเปลี่ยนแปลงไปใช้</string>
+    <string name="no_visible_tracks_description">เลือกแทร็กเพื่อแสดงบนแผนที่</string>
+    <string name="weather_forecast_is_outdated">การคาดการณ์ล้าสมัย</string>
+    <string name="y_axis">แกน Y</string>
+    <string name="x_axis">แกน X</string>
+    <string name="si_nm_mt">ไมล์ทะเล/เมตร</string>
+    <string name="si_nm_ft">ไมล์ทะเล/ฟุต</string>
+    <string name="sort_duration_ascending">ระยะเวลาที่สั้นก่อน</string>
+    <string name="sort_distance_ascending">ระยะทางที่สั้นที่สุดก่อน</string>
+    <string name="sort_distance_descending">ระยะทางที่ยาวที่สุดก่อน</string>
+    <string name="shared_string_nearest">ใกล้ที่สุด</string>
+    <string name="approximate_bearing">แบริ่งโดยประมาณ</string>
+    <string name="shared_string_delete_file">ลบไฟล์</string>
+    <string name="shared_string_in_progress">กําลังดําเนินการ</string>
+    <string name="shared_string_original">ต้นฉบับ</string>
+    <string name="simulation_position_description">เลือกไฟล์แทร็กที่จะใช้เป็นแหล่งข้อมูลสําหรับการย้ายตําแหน่ง</string>
+    <string name="sort_duration_descending">ระยะเวลานานที่สุดก่อน</string>
+    <string name="changes">การเปลี่ยนแปลง %1$s</string>
+    <string name="shared_string_uploaded">อัปโหลดแล้ว</string>
+    <string name="cloud_changes">การเปลี่ยนแปลงระบบคลาวด์</string>
+    <string name="upload_change">อัปโหลดการเปลี่ยนแปลง</string>
+    <string name="change_default_tracks_appearance_confirmation_description">เปลี่ยนรูปลักษณ์ของแทร็ก %1$s หรือไม่\?</string>
+    <string name="empty_tracks">คุณไม่มีไฟล์แทร็ก</string>
+    <string name="local_changes">การเปลี่ยนแปลงในท้องถิ่น</string>
+    <string name="cloud_conflicts">ขัดแย้ง</string>
+    <string name="upload_all">อัปโหลดทั้งหมด</string>
+    <string name="device_disconnected">%1$s หยุดการเชื่อมต่อแล้ว</string>
+    <string name="device_connected">%1$s เชื่อต่อแล้ว</string>
+    <string name="running_scds_device_name">อุปกรณ์ที่ใช้งาน</string>
+    <string name="bicycle_scd_device_name">อุปกรณ์รถจักรยาน</string>
+    <string name="external_device_blood_pressure">ความดันเลือด</string>
+    <string name="no_bt_permission">การอนุญาตให้ใช้บลูทูธยังไม่ถูกอนุญาต</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_wrist">ข้อมือ</string>
+    <string name="shared_string_finger">นิ้วมือ</string>
+    <string name="shared_string_hand">มือ</string>
+    <string name="shared_string_ear_lobe">ติ่งหู</string>
+    <string name="shared_string_foot">เท้า</string>
+    <string name="number_of_tracks">%1$s เส้นทาง</string>
+    <string name="search_track_by_name">ค้นหาเส้นทางโดยใช้ชื่อ</string>
+    <string name="no_search_results">ไม่มีพบผลลัพธ์</string>
+    <string name="is_imported">%1$s ได้ถูกนำเข้าแล้ว</string>
+    <string name="file_already_exists">มีไฟล์อยู่แล้ว</string>
+    <string name="nav_profile_confirm_delete">คุณแน่ใจไหมว่าคุณต้องการลบ \"%1$s\"\?</string>
+    <string name="shared_string_chest">หน้าอก</string>
+    <string name="external_device_characteristic_speed">ความเร็ว</string>
+    <string name="delete_folder_question">ต้องการลบโฟลเดอร์ไหม\?</string>
+    <string name="delete_folder">ลบโฟลเดอร์</string>
+    <string name="show_all_tracks_on_the_map">แสดงแทรกทั้งหมดบนแผนที่</string>
+    <string name="rssi_widget_desc">แสดงระดับ RSSI ของอุปกรณ์ายนอกของคุณ</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="tracks_empty_folder_description">โฟลเดอร์นี้ยังไม่เส้นทาง</string>
+    <string name="tracks_empty_folder">โฟลเดอร์เปล่า</string>
+    <string name="track_not_recorded">ไม่ได้บันทึก</string>
+    <string name="shared_string_new_track">เส้นทางใหม่</string>
+    <string name="map_3d_mode_description">แตะแผนที่ด้วยสองนิ้วและเลื่อนขึ้นหรือลงเพื่อปรับความเอียงของแผนที่</string>
+    <string name="rendering_attr_lightDetail_name">ข้อมูลของแสง</string>
+    <string name="rendering_value_sector1_name">เซกเตอร์ 1</string>
+    <string name="rendering_value_sector2_name">เซกเตอร์ 2</string>
+    <string name="rendering_value_sector3_name">เซกเตอร์ 3</string>
+    <string name="rendering_value_sector4_name">เซกเตอร์ 4</string>
+    <string name="rendering_value_sector5_name">เซกเตอร์ 5</string>
+    <string name="rendering_value_small_name">เล็ก</string>
+    <string name="poi_categories">หมวดหมู่ POI</string>
+    <string name="file_already_exists_description">\"%1$s\" มีไฟล์ชื่อนั้นอยู่แล้ว การแทนที่จะเขียนทับการเปลี่ยนแปลงทั้งหมดที่ทำกับเวอร์ชันปัจจุบัน</string>
+    <string name="external_device_disconnected">ตัดการเชื่อมต่อ</string>
+    <string name="external_device_connected">เชื่อมต่อแล้ว</string>
+    <string name="external_device_menu_forget">ลืม</string>
+    <string name="proxy_port_max_warning">ค่าพอร์ตสูงสุดคือ %1$s</string>
+    <string name="external_device_characteristic_distance">ระยะทาง</string>
+    <string name="external_device_characteristic_total_distance">ระยะทางทั้งหมด</string>
+    <string name="external_device_characteristic_battery_level">แบตเตอรี่</string>
+    <string name="external_device_characteristic_gear_ratio">อัตราทดเกียร์</string>
+    <string name="external_device_characteristic_cadence">จังหวะ</string>
+    <string name="external_device_characteristic_heart_rate">อัตราการเต้นของหัวใจ</string>
+    <string name="external_device_characteristic_diastolic">ไดแอสโตลิก</string>
+    <string name="external_device_characteristic_arterial_pressure">ความดันเลือดในหลอดเลือดแดง</string>
+    <string name="external_device_characteristic_cuff_pressure">แรงกดที่ข้อมือ</string>
+    <string name="external_device_details_received_data">ข้อมูลที่ได้รับ</string>
+    <string name="external_device_details_total_distance">ระยะทางทั้งหมด</string>
+    <string name="external_device_details_distance">ระยะทาง</string>
+    <string name="external_device_details_connect">เชื่อมต่อ</string>
+    <string name="external_device_details_pair">คู่</string>
+    <string name="external_device_details_disconnect">ตัดการเชื่อมต่อ</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">พบ: %d</string>
+    <string name="bluetooth_not_supported">ไม่รองรับบลูทูธ</string>
+    <string name="ant_plus_bluetooth_off">บลูทูธถูกปิดใช้งาน</string>
+    <string name="ant_plus_searching_text">ค้นหาเซ็นเซอร์</string>
+    <string name="ant_plus_help_title">ฉันไม่รู้ว่าฉันมีเซ็นเซอร์ประเภทใด</string>
+    <string name="ant_plus_open_settings">เปิดการตั้งค่า</string>
+    <string name="ant_plus_pair_new_sensor_ble">จับคู่เซ็นเซอร์ Bluetooth LE</string>
+    <string name="shutter_sound">เสียงชัตเตอร์</string>
+    <string name="camera_app">แอพกล้องถ่ายรูป</string>
+    <string name="speak_route_deviation">ประกาศการเบี่ยงเบนจากเส้นทาง</string>
+    <string name="app_mode_climbing">ปีน เขา</string>
+    <string name="generate_hillshade_from_3d_maps">สร้างแผนที่แรสเตอร์ Hillshade จากแผนที่ 3 มิติ</string>
+    <string name="generate_slope_from_3d_maps">สร้างแผนที่แรสเตอร์ลาดชันจากแผนที่ 3 มิติ</string>
+    <string name="common_weight_limit_error">ค่าต่ำสุดคือ \"%1$s\" %2$s ใช้โปรไฟล์ \"%3$s\" หากน้ำหนักรถน้อยกว่าค่าต่ำสุด</string>
+    <string name="sort_date_descending">วันที่เก่าที่สุดก่อน</string>
+    <string name="shared_string_add_manually">เพิ่มด้วยตนเอง…</string>
+    <string name="local_version_do_not_exist">ไม่มีเวอร์ชันท้องถิ่น</string>
+    <string name="last_synchronized">ซิงโครไนซ์ครั้งล่าสุด</string>
+    <string name="choose_what_to_sync">เลือกสิ่งที่จะซิงค์</string>
+    <string name="shared_string_unsynced">ยังไม่ได้ซิงค์</string>
+    <string name="sync_now">ซิงค์ทันที</string>
+    <string name="cloud_version_will_be_removed">เวอร์ชันคลาวด์จะถูกลบออก</string>
+    <string name="cloud_changes_will_be_dismissed">การเปลี่ยนบนระบบคลาวด์จะถูกยกเลิก</string>
+    <string name="local_file_will_be_restored">ไฟล์ในเครื่องจะถูกกู้คืน</string>
+    <string name="cloud_conflict">ขัดแย้ง</string>
+    <string name="cloud_recent_changes">การเปลี่ยนแปลง</string>
+    <string name="cloud_all_changes_downloaded">ดาวน์โหลดการเปลี่ยนแปลงทั้งหมดแล้ว</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">จับคูเซนเซอร์ ANT+</string>
+    <string name="delete_track_folder_dialog_message">ถ้าคุณยอมรับ โฟลเดอร์ \"%1$s\" และแทรกทัั งหมด (%2$s) จะถูกลบ</string>
+    <string name="no_poi_for_category">ไม่พบ POI</string>
+    <string name="shared_string_visible_on_map">มองเห็นบนแผนที่</string>
+    <string name="rendering_attr_lightDetail_description">ค่าเริ่มต้น: ชื่อซีมาร์ค (light character.group.period), เลือกข้อมูลเพิ่มเติมเกี่ยวกับเซกเตอร์ 1 ถึง 3 หรือเซกเตอร์ 1,2,3,4,5 light character</string>
+    <string name="external_device_characteristic_pulse_rate">อัตราชีพจร</string>
+    <string name="ant_plus_bluetooth_off_description">เปิดบลูทูธเพื่อค้นหาและเชื่อมต่อกับเซนเซอร์</string>
+    <string name="ant_plus_nothing_found_description">ตรวจสอบให้แน่ใจว่า
+\n– บลูทูธได้เปิดอยู่
+\n– เซนเซอร์ได้เปิดอยู่
+\n– มือถืออยู่ใกล้กับเซนเซอร์</string>
+    <string name="ant_plus_searching_text_description">โปรดถืออุปกรณ์ใกล้กับเซ็นเซอร์ คุณต้องเปิดใช้งานเซ็นเซอร์เพื่อให้ OsmAnd สามารถค้นหาได้</string>
+    <string name="ant_plus_searching">กำลังค้นหา</string>
+    <string name="ant_plus_pair_new_sensor">จับคู่เซ็นเซอร์ใหม่</string>
+    <string name="cloud_version_confirm_delete">ลบ \"%1$s\" จาก OsmAnd Cloud หรือไม่\?</string>
+    <string name="recently_visible">เพิ่งเห็น %1$s</string>
+    <string name="shared_string_select_recent">เลือกล่าสุด</string>
+    <string name="empty_tracks_description">คุณสามารถนําเข้า สร้าง หรือบันทึกไฟล์แทร็กโดยใช้ OsmAnd</string>
+    <string name="change_appearance">เปลี่ยนรูปลักษณ์</string>
+    <string name="show_all_tracks">แสดงแทร็กทั้งหมด</string>
+    <string name="shared_string_on_map">บนแผนที่</string>
+    <string name="offline_weather_forecast_desc">คุณสามารถดาวน์โหลดพยากรณ์อากาศเป็นเวลา 7 วัน.</string>
+    <string name="release_4_4">•ปรับปรุงเมนู \"แทร็ก\" ใน \"กําหนดค่าแผนที่\"
+\n
+\n•เมนูบริบทตอนนี้แสดงชื่อที่แปลเป็นภาษาท้องถิ่นสําหรับ POI
+\n
+\n•เพิ่มตัวเลือกในการแบ่งปันเส้นทางโดยการเชื่อมโยง
+\n
+\n•เพิ่มหน่วยความยาว \"ไมล์ทะเล / ฟุต\"
+\n
+\n•การวางแนวแผนที่เพิ่มโหมดคงที่ใหม่
+\n
+\n•หน้าจอเริ่มต้นที่เรียบง่าย
+\n
+\n•ตําแหน่งคงที่ในโหมดแยกหน้าจอใน Android Auto
+\n
+\n•เพิ่มกราฟ \"ความเร็ว / ความชัน\" สําหรับการวิเคราะห์แทร็ก
+\n
+\n• Android 13 ย้ายการเลือกภาษาของแอปไปยังการตั้งค่าระบบ
+\n
+\n• แก้ไขปัญหาเกี่ยวกับการแสดงสถานที่มังสวิรัติ
+\n
+\n•เพิ่มความเป็นไปได้ในการดาวน์โหลดไทล์ออนไลน์ที่ใช้เป็นแผนที่ \"ซ้อนทับ\" หรือ \"Underlay\"
+\n
+\n•เพิ่มการสนับสนุนของหน่วยจักรวรรดิสําหรับ \"พารามิเตอร์ยานพาหนะ\"
+\n
+\n•โปรไฟล์จักรยานยนต์ใหม่
+\n
+\n• \"ตําแหน่งการแสดงผล\" เพิ่มตัวเลือกใหม่ \"อัตโนมัติ\"
+\n
+\n•ท่าทางแผนที่คงที่สําหรับการเอียงซูมและการหมุน
+\n
+\n</string>
+    <string name="shared_string_modified">แก้ไข</string>
+    <string name="calculate_offline">คํานวณแบบออฟไลน์</string>
+    <string name="power_watts_unit">วัตต์</string>
+    <string name="revolutions_per_minute_unit">รอบต่อนาที</string>
+</resources>

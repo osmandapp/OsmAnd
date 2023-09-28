@@ -21,19 +21,17 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 public class SimulatePositionFragment extends BaseOsmAndFragment {
 
@@ -41,8 +39,6 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	public static final String TRACK_FILE_NAME = "track_file_name";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private OsmAndLocationSimulation simulation;
 
 	private ImageView trackIcon;
@@ -58,7 +54,6 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	@Nullable
 	private GPXFile gpxFile;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 	private LocationSimulationListener simulationListener;
 
@@ -73,11 +68,14 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		simulation = app.getLocationProvider().getLocationSimulation();
 
 		if (simulation.isRouteAnimating() && gpxFile == null) {
@@ -102,8 +100,8 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !settings.isLightContent();
-		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.simulate_position_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.simulate_position_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		if (gpxFile == null && savedInstanceState != null) {
@@ -169,7 +167,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 		trackTextview.setText(R.string.shared_string_gpx_track);
 
 		speedButton = speedItem.findViewById(R.id.button_container);
-		speedButton.setOnClickListener(v -> showMovementSpeedDialog(requireActivity(), nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme, nightMode));
+		speedButton.setOnClickListener(v -> showMovementSpeedDialog(requireActivity(), nightMode));
 		TextView speedTextview = speedItem.findViewById(R.id.title);
 		speedTextview.setText(R.string.shared_string_speed);
 
@@ -240,11 +238,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 	}
 
-	protected void showMovementSpeedDialog(Activity activity, int themeRes, boolean nightMode) {
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-		builder.setTitle(R.string.movement_speed);
+	protected void showMovementSpeedDialog(Activity activity, boolean nightMode) {
 		int[] txtValues = {1, 2, 3, 4};
 		int selectedSpeed = app.getSettings().SIMULATE_POSITION_SPEED.get();
 		int selectedSpeedId = -1;
@@ -255,17 +249,19 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 			}
 			txtNames[i] = getSpeedString(txtValues[i]);
 		}
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				txtNames, nightMode, selectedSpeedId, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					settings.SIMULATE_POSITION_SPEED.set(txtValues[which]);
-					if (simulation.isRouteAnimating()) {
-						simulation.stop();
-					}
-					updateCard();
-				});
-		builder.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(builder.show());
+
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.movement_speed)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, txtNames, selectedSpeedId, v -> {
+			int which = (int) v.getTag();
+			settings.SIMULATE_POSITION_SPEED.set(txtValues[which]);
+			if (simulation.isRouteAnimating()) {
+				simulation.stop();
+			}
+			updateCard();
+		});
 	}
 
 	private String getSpeedString(int speed) {

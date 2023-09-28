@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -41,8 +41,8 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 			rightButtonTitle = savedInstanceState.getInt(RIGHT_BUTTON_TITLE_KEY);
 		}
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		UiUtilities.setupDialogButton(nightMode, rightButton,
-				UiUtilities.DialogButtonType.SECONDARY, rightButtonTitle);
+		rightButton.setButtonType(DialogButtonType.SECONDARY);
+		rightButton.setTitleId(rightButtonTitle);
 		TextView tvRightButton = rightButton.findViewById(R.id.button_text);
 		int colorDelete = ContextCompat.getColor(app, R.color.color_osm_edit_delete);
 		tvRightButton.setTextColor(colorDelete);
@@ -80,8 +80,8 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(RIGHT_BUTTON_TITLE_KEY, rightButtonTitle);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm,
-	                                Fragment targetFragment,
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull Fragment target,
 	                                @NonNull String title,
 	                                @NonNull CharSequence message,
 	                                int rightButtonTitle,
@@ -90,9 +90,9 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		f.title = title;
 		f.message = message;
 		f.rightButtonTitle = rightButtonTitle;
-		f.setTargetFragment(targetFragment, 0);
+		f.setTargetFragment(target, 0);
 		f.setUsedOnMap(usedOnMap);
-		f.show(fm, TAG);
+		f.show(manager, TAG);
 	}
 
 	public interface OnConfirmButtonClickListener {

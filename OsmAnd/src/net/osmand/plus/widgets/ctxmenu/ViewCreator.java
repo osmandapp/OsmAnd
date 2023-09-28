@@ -1,11 +1,11 @@
 package net.osmand.plus.widgets.ctxmenu;
 
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,21 +14,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -38,12 +36,11 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 public class ViewCreator {
 
@@ -120,7 +117,7 @@ public class ViewCreator {
 
 		ImageView secondaryIcon = convertView.findViewById(R.id.secondary_icon);
 		if (secondaryIcon != null) {
-			setupSecondaryIcon(secondaryIcon, item.getSecondaryIcon());
+			setupSecondaryIcon(secondaryIcon, item);
 		}
 
 		CompoundButton toggle = convertView.findViewById(R.id.toggle_item);
@@ -177,10 +174,10 @@ public class ViewCreator {
 			return getDrawerProfileView(convertView, layoutId, item);
 		} else if (layoutId == R.layout.profile_list_item) {
 			return getProfileListItemView(convertView, item);
-		} else if (layoutId == R.layout.help_to_improve_item) {
-			return getHelpToImproveItemView(convertView);
 		} else if (layoutId == R.layout.main_menu_drawer_osmand_version) {
 			return getOsmAndVersionView(convertView, item);
+		} else if (layoutId == R.layout.list_item_terrain_description) {
+			return getTerrainDescriptionView(convertView, item);
 		}
 		return null;
 	}
@@ -261,27 +258,17 @@ public class ViewCreator {
 	}
 
 	@NonNull
-	private View getHelpToImproveItemView(@NonNull View view) {
-		TextView feedbackButton = view.findViewById(R.id.feedbackButton);
-		Drawable pollIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_poll);
-		feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
-		feedbackButton.setOnClickListener(v -> {
-			String name = ctx.getString(R.string.feedback);
-			String url = ctx.getString(R.string.osmand_poll);
-			FragmentManager fm = ((FragmentActivity) ctx).getSupportFragmentManager();
-			HelpArticleDialogFragment.instantiateWithUrl(url, name).show(fm, null);
+	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
+		View clickableButton = view.findViewById(R.id.button_get_clickable);
+		clickableButton.setOnClickListener(v -> {
+			ItemClickListener listener = item.getItemClickListener();
+			if (listener != null) {
+				listener.onContextMenuClick(uiAdapter, view, item, false);
+			}
 		});
-		TextView contactUsButton = view.findViewById(R.id.contactUsButton);
-		Drawable contactUsIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_feedback);
-		contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
-				null);
-		String email = ctx.getString(R.string.support_email);
-		contactUsButton.setOnClickListener(v -> {
-			Intent intent = new Intent(Intent.ACTION_SENDTO);
-			intent.setData(Uri.parse("mailto:"));
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-			AndroidUtils.startActivityIfSafe(ctx, intent);
-		});
+		View button = view.findViewById(R.id.button_get);
+		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), PluginsHelper.isEnabled(NauticalMapsPlugin.class));
 		return view;
 	}
 
@@ -335,9 +322,11 @@ public class ViewCreator {
 		}
 	}
 
-	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @DrawableRes int secondaryIconId) {
+	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @NonNull ContextMenuItem item) {
+		int secondaryIconId = item.getSecondaryIcon();
 		if (secondaryIconId != INVALID_ID) {
 			int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
+			colorId = item.useNaturalSecondIconColor() ? 0 : colorId;
 			Drawable drawable = iconsCache.getIcon(secondaryIconId, colorId);
 			secondaryIcon.setImageDrawable(drawable);
 			if (secondaryIconId == R.drawable.ic_action_additional_option) {

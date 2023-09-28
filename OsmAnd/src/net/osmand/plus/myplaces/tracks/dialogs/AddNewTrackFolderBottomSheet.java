@@ -1,11 +1,11 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,8 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -28,37 +26,49 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 
 public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();
-	private static final Log LOG = PlatformUtil.getLog(AddNewTrackFolderBottomSheet.class);
+
 	private static final String FOLDER_NAME_KEY = "folder_name_key";
+	private static final String FOLDER_PATH_KEY = "folder_path_key";
 
 	private OsmandApplication app;
 
 	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
 
+	private File parentFolder;
 	private String folderName;
 	private boolean rightButtonEnabled = true;
 
+
 	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
+
 		if (savedInstanceState != null) {
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
+			String path = savedInstanceState.getString(FOLDER_PATH_KEY, null);
+			if (!Algorithms.isEmpty(path)) {
+				parentFolder = new File(path);
+			}
 		}
+	}
+
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.add_new_folder)));
 
 		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
-		int textBoxBgColorId = nightMode ? R.color.color_white : R.color.activity_background_color_light;
+		int textBoxBgColorId = nightMode ? R.color.card_and_list_background_light : R.color.activity_background_color_light;
 		int textBoxBgColor = ContextCompat.getColor(app, textBoxBgColorId);
 		if (nightMode) {
 			textBoxBgColor = ColorUtilities.getColorWithAlpha(textBoxBgColor, 0.1f);
@@ -69,20 +79,15 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		editText = view.findViewById(R.id.name_edit_text);
 		editText.setText(folderName);
-		editText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		editText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
-				updateFileNameFromEditText(s.toString());
+				updateFileNameFromEditText(s.toString().trim());
 			}
 		});
+		editText.requestFocus();
+		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);
+
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();
@@ -104,7 +109,8 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 			if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find()) {
 				nameTextBox.setError(getString(R.string.file_name_containes_illegal_char));
 			} else {
-				File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), name);
+				File parent = parentFolder != null ? parentFolder : app.getAppPath(GPX_INDEX_DIR);
+				File destFolder = new File(parent, name);
 				if (destFolder.exists()) {
 					nameTextBox.setError(getString(R.string.file_with_name_already_exist));
 				} else {
@@ -121,6 +127,9 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(FOLDER_NAME_KEY, folderName);
+		if (parentFolder != null) {
+			outState.putString(FOLDER_PATH_KEY, parentFolder.getAbsolutePath());
+		}
 		super.onSaveInstanceState(outState);
 	}
 
@@ -154,10 +163,11 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		void onTrackFolderAdd(String folderName);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable String folderName,
-	                                @Nullable Fragment target, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable File parentFolder,
+	                                @Nullable String folderName, @Nullable Fragment target, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			AddNewTrackFolderBottomSheet fragment = new AddNewTrackFolderBottomSheet();
+			fragment.parentFolder = parentFolder;
 			fragment.folderName = folderName;
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);

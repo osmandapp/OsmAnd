@@ -78,13 +78,14 @@
 					android:layout_weight="1"
 					android:text="@string/option_available_only_in_osmand_pro" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/button_action"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height"
-					android:layout_marginTop="@dimen/content_padding_small"
-					android:layout_marginBottom="@dimen/content_padding_small" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+					osmand:dialogButtonBottomMargin="@dimen/content_padding_small"
+					osmand:dialogButtonType="secondaryActive"
+					osmand:dialogButtonTitle="@string/shared_string_get"/>
 
 			</LinearLayout>
 

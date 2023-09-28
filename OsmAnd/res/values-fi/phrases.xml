@@ -48,7 +48,7 @@
     <string name="poi_water_source">Vesipiste</string>
     <string name="poi_payment_toll_type">Maksutapa</string>
     <string name="poi_traffic_signals_sound">Ääni</string>
-    <string name="poi_highway_crossing_type">Tapa</string>
+    <string name="poi_highway_crossing_type">Tyyppi</string>
     <string name="poi_service_general">Palvelu</string>
     <string name="poi_self_service">Itsepalvelu</string>
     <string name="poi_automated">Automatisoitu</string>
@@ -1495,7 +1495,7 @@
     <string name="poi_railway_level_crossing">Tasoristeys</string>
     <string name="poi_railway_crossing">Rautatien ylitys</string>
     <string name="poi_crossing_traffic_signals">Liikennevaloilla</string>
-    <string name="poi_highway_crossing">Valtatien ylitys</string>
+    <string name="poi_highway_crossing">Ajoradan ylitys</string>
     <string name="poi_building_type_pyramid">Rakennuksen tyyppi: pyramidi</string>
     <string name="poi_building_type_shrine">Rakennuksen tyyppi: pyhäkkö</string>
     <string name="poi_building_type_synagogue">Rakennuksen tyyppi: synagoga</string>
@@ -1530,7 +1530,7 @@
     <string name="poi_node_networks">Retkeily-/pyöräilyverkon solmut</string>
     <string name="poi_access_private">Yksityinen pääsy</string>
     <string name="poi_brand">Merkki</string>
-    <string name="poi_operator">Operaattori</string>
+    <string name="poi_operator">Toimija</string>
     <string name="poi_disused">Ei käytössä</string>
     <string name="poi_abandoned_poi">Hylätty esine</string>
     <string name="poi_abandoned">Hylätty</string>
@@ -1633,4 +1633,26 @@
     <string name="poi_diplomatic_services_citizen_services_filter">Kuntapalvelut</string>
     <string name="poi_houseware">Kodintarvikkeiden myymälä</string>
     <string name="poi_doityourself">Rautakauppa</string>
+    <string name="poi_crossing_unmarked">Merkitsemätön</string>
+    <string name="poi_crossing_uncontrolled">Vapaa ylitys</string>
+    <string name="poi_material_plastic">Materiaali: muovi</string>
+    <string name="poi_material_limestone">Materiaali: kalkkikivi</string>
+    <string name="poi_material_masonry">Materiaali: muurattu</string>
+    <string name="poi_material_reinforced_concrete">Materiaali: teräsbetoni</string>
+    <string name="poi_material_granite_stone">Materiaali: graniitti</string>
+    <string name="poi_material_wood">Materiaali: puu</string>
+    <string name="poi_material_earth">Materiaali: multa</string>
+    <string name="poi_material_metal">Materiaali: metalli</string>
+    <string name="poi_material_stone">Materiaali: kivi</string>
+    <string name="poi_material_brick">Materiaali: tiili</string>
+    <string name="poi_resource_radium">Radium</string>
+    <string name="poi_material_composite">Materiaali: komposiitti</string>
+    <string name="poi_material_metal_wood">Materiaali: metalli, puu</string>
+    <string name="poi_access_yes">Sallittu</string>
+    <string name="poi_material_glass">Materiaali: lasi</string>
+    <string name="poi_material_bronze">Materiaali: pronssi</string>
+    <string name="poi_material_aluminium">Materiaali: alumiini</string>
+    <string name="poi_material_marble">Materiaali: marmori</string>
+    <string name="poi_material_steel">Materiaali: teräs</string>
+    <string name="poi_material_concrete">Materiaali: betoni</string>
 </resources>

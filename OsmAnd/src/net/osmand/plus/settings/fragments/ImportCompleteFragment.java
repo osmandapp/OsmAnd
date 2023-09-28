@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
@@ -40,7 +39,6 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,12 +53,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private static final String KEY_SOURCE_NAME = "key_source_name";
 	private static final String KEY_NEED_RESTART = "key_need_restart";
 
-	private OsmandApplication app;
 	private final List<SettingsItem> settingsItems = new ArrayList<>();
 
 	private RecyclerView recyclerView;
 	private String sourceName;
-	private boolean nightMode;
 	private boolean needRestart;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
@@ -82,8 +78,6 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
@@ -100,8 +94,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
 		TextView btnClose = root.findViewById(R.id.button_close);
 		ViewGroup buttonContainer = root.findViewById(R.id.button_container);
@@ -110,12 +104,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				String.format(getString(R.string.import_complete_description), sourceName),
 				Typeface.BOLD, sourceName
 		));
-		btnClose.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismissFragment();
-			}
-		});
+		btnClose.setOnClickListener(view -> dismissFragment());
 		if (needRestart) {
 			description.append("\n\n");
 			description.append(app.getString(R.string.app_restart_required));
@@ -140,20 +129,13 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (settingsItems != null) {
-			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
-					app,
-					SettingsHelper.getSettingsToOperate(settingsItems, true, false),
-					nightMode,
-					new OnItemClickListener() {
-						@Override
-						public void onItemClick(ExportSettingsType type) {
-							navigateTo(type);
-						}
-					});
-			recyclerView.setLayoutManager(new LinearLayoutManager(getMyApplication()));
-			recyclerView.setAdapter(adapter);
-		}
+		ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
+				app,
+				SettingsHelper.getSettingsToOperate(settingsItems, true, false),
+				nightMode,
+				this::navigateTo);
+		recyclerView.setLayoutManager(new LinearLayoutManager(app));
+		recyclerView.setAdapter(adapter);
 	}
 
 	public void dismissFragment() {

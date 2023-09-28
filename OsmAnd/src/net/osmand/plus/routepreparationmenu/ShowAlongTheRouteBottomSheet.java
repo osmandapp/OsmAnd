@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.DialogListItemAdapter;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,6 +37,8 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -55,7 +57,6 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private MapActivity mapActivity;
 	private WaypointHelper waypointHelper;
-	private ApplicationMode appMode;
 
 	private ExpandableListView expListView;
 	private ExpandableListAdapter adapter;
@@ -209,17 +210,6 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			setupHeightAndBackground(getView());
 		}
 	}
-	
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-	
-	public ApplicationMode getAppMode() {
-		if (appMode == null) {
-			setAppMode(app.getSettings().getApplicationMode());
-		}
-		return appMode;
-	}
 
 	@Override
 	public void onRoutingDataUpdate() {
@@ -326,6 +316,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			ContentItem group = contentItem.getSubItems().get(groupPosition);
 			int type = group.type;
 			boolean enabled = waypointHelper.isTypeEnabled(type);
+			boolean nightMode = isNightMode(app);
 
 			if (convertView == null) {
 				convertView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.along_the_route_category_item, parent, false);
@@ -338,35 +329,29 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			CompoundButton compoundButton = convertView.findViewById(R.id.compound_button);
 			compoundButton.setChecked(enabled);
 			compoundButton.setEnabled(true);
-			compoundButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean isChecked = compoundButton.isChecked();
-					if (type == WaypointHelper.POI && isChecked) {
-						selectPoi(type, isChecked);
-					} else {
-						enableType(type, isChecked);
-					}
-					if (isChecked) {
-						expListView.expandGroup(groupPosition);
-						setupHeightAndBackground(getView());
-					}
+			compoundButton.setOnClickListener(v -> {
+				boolean isChecked = compoundButton.isChecked();
+				if (type == WaypointHelper.POI && isChecked) {
+					selectPoi(type, isChecked);
+				} else {
+					enableType(type, isChecked);
+				}
+				if (isChecked) {
+					expListView.expandGroup(groupPosition);
+					setupHeightAndBackground(getView());
 				}
 			});
-			int selectedProfileColor = getAppMode().getProfileColor(isNightMode(app));
-			UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, compoundButton);
+			int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
+			UiUtilities.setupCompoundButton(nightMode, profileColor, compoundButton);
 
-			convertView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (enabled) {
-						if (isExpanded) {
-							expListView.collapseGroup(groupPosition);
-						} else {
-							expListView.expandGroup(groupPosition);
-						}
-						setupHeightAndBackground(getView());
+			convertView.setOnClickListener(v -> {
+				if (enabled) {
+					if (isExpanded) {
+						expListView.collapseGroup(groupPosition);
+					} else {
+						expListView.expandGroup(groupPosition);
 					}
+					setupHeightAndBackground(getView());
 				}
 			});
 
@@ -480,28 +465,21 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				selected = i;
 			}
 		}
-		int selectedProfileColor = getAppMode().getProfileColor(nightMode);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				names, nightMode, selected, app, selectedProfileColor, themeRes, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						int which = (int) v.getTag();
-						int value = WaypointHelper.SEARCH_RADIUS_VALUES[which];
-						if (waypointHelper.getSearchDeviationRadius(type) != value) {
-							waypointHelper.setSearchDeviationRadius(type, value);
-							recalculatePoints(type);
-							updateAdapter();
-						}
-					}
-				}
-		);
-		AlertDialog dialog = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes))
+
+		AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
 				.setTitle(app.getString(R.string.search_radius_proximity))
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.setAdapter(dialogAdapter, null)
-				.create();
-		dialogAdapter.setDialog(dialog);
-		dialog.show();
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_cancel, null);
+
+		CustomAlert.showSingleSelection(dialogData, names, selected, v -> {
+			int which = (int) v.getTag();
+			int value = WaypointHelper.SEARCH_RADIUS_VALUES[which];
+			if (waypointHelper.getSearchDeviationRadius(type) != value) {
+				waypointHelper.setSearchDeviationRadius(type, value);
+				recalculatePoints(type);
+				updateAdapter();
+			}
+		});
 	}
 
 	private void enableType(int type,

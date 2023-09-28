@@ -27,14 +27,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 
-	protected boolean nightMode;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
-	}
-
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -67,12 +59,12 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {
-		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+		return getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 	}
 
 	@ColorInt
@@ -81,21 +73,14 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	protected View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		return LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(layoutId, container, false);
+		return themedInflater.inflate(layoutId, container, false);
 	}
 
 	protected void setupToolbar(Toolbar toolbar) {
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				closeFragment();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> closeFragment());
 	}
 	
 	protected void closeFragment() {

@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -30,7 +29,6 @@ import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherSettings;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -41,9 +39,6 @@ import java.util.Iterator;
 public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadEvents, RemoveLocalForecastListener {
 
 	public static final String TAG = WeatherMainFragment.class.getSimpleName();
-
-	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private WeatherHelper weatherHelper;
 	private OfflineForecastHelper forecastHelper;
@@ -57,8 +52,6 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		weatherHelper = app.getWeatherHelper();
 		forecastHelper = app.getOfflineForecastHelper();
 		weatherSettings = weatherHelper.getWeatherSettings();
@@ -69,7 +62,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_weather_main, container, false);
 
 		setupHeader(view);
@@ -86,7 +79,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	public void onResume() {
 		super.onResume();
 		forecastHelper.registerRemoveLocalForecastListener(this);
-		offlineForecastCard.updateIndexesList();
+		offlineForecastCard.onUpdatedIndexesList();
 	}
 
 	@Override
@@ -218,7 +211,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 
 	@Override
 	public void onRemoveLocalForecastEvent() {
-		offlineForecastCard.onRemoveLocalForecastEvent();
+		offlineForecastCard.onUpdatedIndexesList();
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {

@@ -374,7 +374,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-			if (isLatLonOutOfBounds(latLon)) {
+			if (Math.abs(latLon.getLatitude()) > 90) {
 				if (points.size() > 0) {
 					arrays.add(points);
 					points = new ArrayList<>();
@@ -382,7 +382,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				continue;
 			}
 
-			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 			points.add(new QuadPoint(screenPoint.x, screenPoint.y));
 		}
 		if (points.size() > 0) {
@@ -540,7 +540,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
-			PointF screenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 			if (arrowArc.isEmpty()) {
 				arrowArc.moveTo(screenPoint.x, screenPoint.y);
 			} else {
@@ -603,8 +603,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private LatLon getCenterLatLon(@NonNull RotatedTileBox tb) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			PointI center31 = mapRenderer.getTarget();
-			return center31 != null ? point31ToLatLon(center31) : tb.getCenterLatLon();
+			QuadPoint centerPixel = tb.getCenterPixelPoint();
+			return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixel.x, centerPixel.y);
 		} else {
 			return tb.getCenterLatLon();
 		}
@@ -625,9 +625,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		return isLatLonOutOfBounds(latLon)
+		return Math.abs(latLon.getLatitude()) > 90
 				? null
-				: NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+				: NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 	}
 
 	private LatLon point31ToLatLon(PointI point31) {
@@ -711,10 +711,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		} else {
 			return "";
 		}
-	}
-
-	private boolean isLatLonOutOfBounds(@NonNull LatLon latLon) {
-		return Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180;
 	}
 
 	private enum TextAlignment {

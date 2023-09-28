@@ -15,11 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
@@ -29,12 +25,16 @@ import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -47,7 +47,6 @@ import java.util.Map;
 public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
 
-	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
 
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
@@ -56,7 +55,6 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected ProgressBar progressBar;
 	protected BackupClearType clearType;
 
-	protected boolean nightMode;
 	protected boolean wasDrawerDisabled;
 
 	@Override
@@ -67,9 +65,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
-		nightMode = !app.getSettings().isLightContent();
 		clearType = getClearType();
 		dataList = getDataList();
 		selectedItemsMap = getSelectedItems();
@@ -86,7 +82,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_backup_types, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
@@ -148,10 +144,13 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportSettingsType> types = categoryItems.getTypes();
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (ExportSettingsType type : types) {
-			List<Object> items = getItemsForType(type);
-			hasItemsToDelete |= !Algorithms.isEmpty(items);
-			selectedItemsMap.put(type, selected ? items : null);
+			if (type.isAllowedInFreeVersion() || proAvailable) {
+				List<Object> items = getItemsForType(type);
+				hasItemsToDelete |= !Algorithms.isEmpty(items);
+				selectedItemsMap.put(type, selected ? items : null);
+			}
 		}
 		if (!selected && hasItemsToDelete) {
 			showClearTypesBottomSheet(types);
@@ -160,11 +159,15 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		List<Object> items = getItemsForType(type);
-		selectedItemsMap.put(type, selected ? items : null);
-
-		if (!selected && !Algorithms.isEmpty(items)) {
-			showClearTypesBottomSheet(Collections.singletonList(type));
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		if (type.isAllowedInFreeVersion() || proAvailable) {
+			List<Object> items = getItemsForType(type);
+			selectedItemsMap.put(type, selected ? items : null);
+			if (!selected && !Algorithms.isEmpty(items)) {
+				showClearTypesBottomSheet(Collections.singletonList(type));
+			}
+		} else {
+			OsmAndProPlanFragment.showInstance(requireActivity());
 		}
 	}
 

@@ -24,6 +24,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -93,8 +94,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 				if (!internetConnectionAvailable) {
 					LayoutInflater inflater = UiUtilities.getInflater(dialog.getContext(), nightMode);
 					View view = inflater.inflate(R.layout.bottom_sheet_no_internet_connection_view, null);
-					View tryAgainButton = view.findViewById(R.id.try_again_button);
-					UiUtilities.setupDialogButton(nightMode, tryAgainButton, UiUtilities.DialogButtonType.SECONDARY, R.string.try_again);
+					DialogButton tryAgainButton = view.findViewById(R.id.try_again_button);
 					tryAgainButton.setOnClickListener(v -> {
 						if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 							if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
@@ -122,11 +122,6 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 				progressBar.setIndeterminate(true);
 				progressBar.setVisibility(View.VISIBLE);
 				dialog.setCustomView(view);
-			}
-
-			@Override
-			public void onCloseDialog() {
-
 			}
 		});
 		msDialog.setSelectionUpdateListener(this::updateSize);
@@ -252,13 +247,5 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			dialog.onSelectedItemsChanged();
 			updateSize();
 		}
-	}
-
-	@Override
-	public void downloadInProgress() {
-	}
-
-	@Override
-	public void downloadHasFinished() {
 	}
 }

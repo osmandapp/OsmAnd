@@ -12,7 +12,7 @@ import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
 import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikePowerSensor;
 
-public class AntBikePowerDevice extends AntAbstractDevice<AntPlusBikePowerPcc> {
+public class AntBikePowerDevice extends AntCommonDevice<AntPlusBikePowerPcc> {
 
 	public AntBikePowerDevice(@NonNull String deviceId) {
 		super(deviceId);

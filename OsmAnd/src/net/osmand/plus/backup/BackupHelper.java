@@ -27,11 +27,13 @@ import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.commands.DeleteAccountCommand;
 import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
 import net.osmand.plus.backup.commands.DeleteFilesCommand;
 import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
 import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
+import net.osmand.plus.backup.commands.SendCodeCommand;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -97,6 +99,8 @@ public class BackupHelper {
 	public static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	public static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
 	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+	public static final String ACCOUNT_DELETE_URL = SERVER_URL + "/userdata/delete-account";
+	public static final String SEND_CODE_URL = SERVER_URL + "/userdata/send-code";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
@@ -444,19 +448,12 @@ public class BackupHelper {
 
 	public void updateOrderId(@Nullable OnUpdateSubscriptionListener listener) {
 		Map<String, String> params = new HashMap<>();
-		params.put("email", getEmail());
-
 		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
-			if (listener != null) {
-				String message = "Order id is empty";
-				String error = "{\"error\":{\"errorCode\":" + STATUS_NO_ORDER_ID_ERROR + ",\"message\":\"" + message + "\"}}";
-				listener.onUpdateSubscription(STATUS_NO_ORDER_ID_ERROR, message, error);
-			}
 			return;
-		} else {
-			params.put("orderid", orderId);
 		}
+		params.put("email", getEmail());
+		params.put("orderid", orderId);
 		String androidId = getAndroidId();
 		if (!Algorithms.isEmpty(androidId)) {
 			params.put("deviceid", androidId);
@@ -685,6 +682,16 @@ public class BackupHelper {
 	public void deleteOldFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
+	}
+
+	public void deleteAccount(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new DeleteAccountCommand(this, email, token));
+	}
+
+	public void sendCode(@NonNull String email, @NonNull String action) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new SendCodeCommand(this, email, action));
 	}
 
 	public long calculateFileSize(@NonNull RemoteFile remoteFile) {

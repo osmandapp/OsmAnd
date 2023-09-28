@@ -2,6 +2,8 @@ package net.osmand.plus.myplaces.tracks.tasks;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -59,12 +61,12 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 				}
 			}
-			syncGpx(gpx);
+			syncGpx(app, gpx);
 		}
 		return null;
 	}
 
-	private void syncGpx(GPXFile gpxFile) {
+	public static void syncGpx(@NonNull OsmandApplication app, GPXFile gpxFile) {
 		MapMarkersHelper helper = app.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {

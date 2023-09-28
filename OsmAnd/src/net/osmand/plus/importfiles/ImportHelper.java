@@ -1,8 +1,6 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.KITKAT;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
@@ -74,8 +72,8 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -136,6 +134,13 @@ public class ImportHelper {
 	}
 
 	public interface GpxImportListener {
+
+		default void onImportStarted() {
+		}
+
+		default void onImportFinished() {
+		}
+
 		default void onImportComplete(boolean success) {
 		}
 
@@ -166,8 +171,8 @@ public class ImportHelper {
 		importFavoritesImpl(gpxFile, fileName, false);
 	}
 
-	public void handleGpxImport(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir) {
-		handleResult(result, name, fileSize, save, useImportDir);
+	public void handleGpxImport(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir, boolean showSnackbar) {
+		handleResult(result, name, fileSize, save, useImportDir, showSnackbar);
 	}
 
 	public boolean handleGpxImport(@NonNull Uri uri, @Nullable OnSuccessfulGpxImport onGpxImport, boolean useImportDir) {
@@ -175,7 +180,7 @@ public class ImportHelper {
 		String fileName = getGpxFileName(name);
 		boolean isOsmandSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
 		if (!isOsmandSubDir && fileName != null) {
-			handleGpxImport(uri, fileName, onGpxImport, useImportDir, true);
+			handleGpxImport(uri, fileName, onGpxImport, useImportDir, true, false);
 		}
 		return false;
 	}
@@ -198,21 +203,24 @@ public class ImportHelper {
 	public void handleFavouritesImport(@NonNull Uri uri) {
 		String scheme = uri.getScheme();
 		boolean isFileIntent = "file".equals(scheme);
-		boolean isContentIntent = "content".equals(scheme);
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
 		boolean saveFile = !isFileIntent || !isOsmandSubdir;
 		String fileName = isFileIntent ? new File(uri.getPath()).getName() : getNameFromContentUri(app, uri);
-		handleGpxOrFavouritesImport(uri, fileName, saveFile, false, true, false);
+		handleGpxOrFavouritesImport(uri, fileName, saveFile, false, true, false, false);
 	}
 
-	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, boolean useImportDir) {
-		boolean showDialogs = filesUri.size() == 1;
+	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, @NonNull File destinationDir,
+	                                 @Nullable OnSuccessfulGpxImport onGpxImport,
+	                                 boolean showSnackbar, boolean singleImport) {
+		if (gpxImportListener != null) {
+			gpxImportListener.onImportStarted();
+		}
 		for (Uri uri : filesUri) {
 			String fileName = getGpxFileName(getNameFromContentUri(app, uri));
 			boolean isOsmAndSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
 			if (!isOsmAndSubDir && fileName != null) {
 				CallbackWithObject<Pair<GPXFile, Long>> callback = pair -> {
-					handleResult(pair.first, fileName, null, pair.second, true, useImportDir, showDialogs);
+					handleResult(pair.first, fileName, onGpxImport, pair.second, true, destinationDir, showSnackbar, singleImport);
 					return true;
 				};
 				GpxImportTask gpxImportTask = new GpxImportTask(activity, uri, fileName, callback);
@@ -220,6 +228,21 @@ public class ImportHelper {
 				executeImportTask(gpxImportTask);
 			} else if (gpxImportListener != null) {
 				gpxImportListener.onImportComplete(false);
+			}
+		}
+	}
+
+	public void handleImport(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri != null) {
+			String scheme = intent.getScheme();
+			if ("file".equals(scheme)) {
+				String path = uri.getPath();
+				if (!Algorithms.isEmpty(path)) {
+					handleFileImport(uri, new File(path).getName(), intent.getExtras(), true);
+				}
+			} else if ("content".equals(scheme)) {
+				handleContentImport(uri, intent.getExtras(), true);
 			}
 		}
 	}
@@ -232,7 +255,7 @@ public class ImportHelper {
 		if (fileName == null) {
 			handleUriImport(intentUri, saveFile, useImportDir);
 		} else if (fileName.endsWith(KML_SUFFIX) || fileName.endsWith(KMZ_SUFFIX)) {
-			handleGpxImport(intentUri, fileName, OPEN_GPX_CONTEXT_MENU, saveFile, useImportDir);
+			handleGpxImport(intentUri, fileName, OPEN_GPX_CONTEXT_MENU, saveFile, useImportDir, false);
 		} else if (fileName.endsWith(BINARY_MAP_INDEX_EXT) || fileName.endsWith(BINARY_MAP_INDEX_EXT + ZIP_EXT)) {
 			handleObfImport(intentUri, fileName);
 		} else if (fileName.endsWith(SQLITE_EXT)) {
@@ -242,11 +265,11 @@ public class ImportHelper {
 		} else if (fileName.endsWith(ROUTING_FILE_EXT)) {
 			handleXmlFileImport(intentUri, fileName, null);
 		} else if (fileName.endsWith(WPT_CHART_FILE_EXT)) {
-			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true);
+			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true, false);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName.replace(SQLITE_CHART_FILE_EXT, SQLITE_EXT));
 		} else {
-			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false);
+			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false, false);
 		}
 	}
 
@@ -276,18 +299,20 @@ public class ImportHelper {
 	}
 
 	public void handleGpxImport(@NonNull Uri uri, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
-	                            boolean useImportDir, boolean save) {
+	                            boolean useImportDir, boolean save, boolean showSnackbar) {
 		CallbackWithObject<Pair<GPXFile, Long>> callback = pair -> {
-			handleResult(pair.first, fileName, onGpxImport, pair.second, save, useImportDir, true);
+			handleResult(pair.first, fileName, onGpxImport, pair.second, save, getGpxDestinationDir(app, useImportDir), showSnackbar, true);
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
 	public void handleGpxOrFavouritesImport(Uri uri, String fileName, boolean save, boolean useImportDir,
-	                                        boolean forceImportFavourites, boolean forceImportGpx) {
+	                                        boolean forceImportFavourites, boolean forceImportGpx,
+	                                        boolean showSnackbar) {
 		CallbackWithObject<Pair<GPXFile, Long>> callback = pair -> {
-			importGpxOrFavourites(pair.first, fileName, pair.second, save, useImportDir, forceImportFavourites, forceImportGpx);
+			importGpxOrFavourites(pair.first, fileName, pair.second, save, useImportDir,
+					forceImportFavourites, forceImportGpx, showSnackbar);
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
@@ -410,7 +435,7 @@ public class ImportHelper {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				Intent intent = getImportTrackIntent();
+				Intent intent = getImportFileIntent();
 				ActivityResultListener listener = getImportFileResultListener(importType, callback);
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);
@@ -452,21 +477,20 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	public static Intent getImportTrackIntent() {
+	public static Intent getImportFileIntent() {
 		Intent intent = new Intent();
-		String action = SDK_INT >= KITKAT ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT;
-		intent.setAction(action);
+		intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
 		return intent;
 	}
 
-	protected void handleResult(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir) {
-		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, useImportDir, true);
+	protected void handleResult(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir, boolean showSnackbar) {
+		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, getGpxDestinationDir(app, useImportDir), showSnackbar, true);
 	}
 
-	private boolean checkGpxFile(@Nullable GPXFile gpxFile, boolean showDialogs) {
+	private boolean checkGpxFile(@Nullable GPXFile gpxFile, boolean singleImport) {
 		if (gpxFile == null) {
-			if (showDialogs) {
+			if (singleImport) {
 				showPermissionsAlert();
 			}
 		} else if (gpxFile.error != null) {
@@ -475,17 +499,19 @@ public class ImportHelper {
 		return gpxFile != null && gpxFile.error == null;
 	}
 
-	protected void handleResult(GPXFile result, String name, OnSuccessfulGpxImport onGpxImport,
-	                            long fileSize, boolean save, boolean useImportDir, boolean showDialogs) {
-		boolean success = checkGpxFile(result, showDialogs);
+	private void handleResult(GPXFile result, String name, OnSuccessfulGpxImport onGpxImport,
+	                          long fileSize, boolean save, @NonNull File destinationDir,
+	                          boolean showSnackbar, boolean singleImport) {
+		boolean success = checkGpxFile(result, singleImport);
 		if (success) {
 			if (save) {
 				int tracksCount = result.getTracksCount();
-				if (showDialogs && (tracksCount > 1 && tracksCount < 50)) {
+				if (singleImport && (tracksCount > 1 && tracksCount < 50)) {
 					FragmentManager manager = activity.getSupportFragmentManager();
-					ImportTracksFragment.showInstance(manager, result, name, gpxImportListener, fileSize);
+					ImportTracksFragment.showInstance(manager, result, name,
+							destinationDir.getAbsolutePath(), gpxImportListener, fileSize);
 				} else {
-					importAsOneTrack(result, name, useImportDir, onGpxImport);
+					importAsOneTrack(result, name, destinationDir, showSnackbar, onGpxImport);
 				}
 			} else {
 				showNeededScreen(onGpxImport, result);
@@ -520,11 +546,10 @@ public class ImportHelper {
 		}
 	}
 
-	private void importAsOneTrack(@NonNull GPXFile gpxFile, @NonNull String name,
-	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onGpxImport) {
-		String existingFilePath = getExistingFilePath(app, name);
-		File destinationDir = app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
-		SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport);
+	private void importAsOneTrack(@NonNull GPXFile gpxFile, @NonNull String name, @NonNull File destinationDir,
+	                              boolean showSnackbar, @Nullable OnSuccessfulGpxImport onGpxImport) {
+		String existingFilePath = getExistingFilePath(name, destinationDir);
+		SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, showSnackbar, onGpxImport);
 
 		if (existingFilePath != null) {
 			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, overwrite));
@@ -535,8 +560,14 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport) {
+	public static File getGpxDestinationDir(@NonNull OsmandApplication app, boolean useImportDir) {
+		return app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
+	}
+
+	@NonNull
+	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, boolean showSnackbar, @Nullable OnSuccessfulGpxImport onGpxImport) {
 		return new SaveImportedGpxListener() {
+			String importedFileName;
 
 			@Override
 			public void onGpxSavingStarted() {
@@ -544,21 +575,24 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
-
+				importedFileName = new File(gpxFile.path).getName();
 			}
 
 			@Override
 			public void onGpxSavingFinished(@NonNull List<String> warnings) {
 				boolean success = Algorithms.isEmpty(warnings);
 				if (success) {
-					Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
-									app.getString(R.string.is_imported, gpxFile.metadata.name),
-									BaseTransientBottomBar.LENGTH_LONG)
-							.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
+					if (showSnackbar) {
+						Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
+										app.getString(R.string.is_imported, importedFileName),
+										BaseTransientBottomBar.LENGTH_LONG)
+								.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 
-					UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
-					snackbar.show();
-
+						UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+						snackbar.show();
+					} else {
+						openTrack(gpxFile, onGpxImport);
+					}
 				} else {
 					app.showToastMessage(warnings.get(0));
 				}
@@ -578,9 +612,8 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	public static String getExistingFilePath(@NonNull OsmandApplication app, @NonNull String name) {
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+	public static String getExistingFilePath(@NonNull String name, @NonNull File destinationDir) {
+		List<GPXInfo> gpxInfoList = GpxUiHelper.getGPXFiles(destinationDir, true, false);
 		for (GPXInfo gpxInfo : gpxInfoList) {
 			String filePath = gpxInfo.getFileName();
 			String fileName = Algorithms.getFileWithoutDirs(filePath);
@@ -637,24 +670,21 @@ public class ImportHelper {
 		MeasurementToolFragment.showInstance(fragmentManager, editingContext, mode, false);
 	}
 
-	protected void importGpxOrFavourites(GPXFile gpxFile, String fileName, long fileSize,
-	                                     boolean save, boolean useImportDir,
-	                                     boolean forceImportFavourites, boolean forceImportGpx) {
+	protected void importGpxOrFavourites(GPXFile gpxFile, String fileName, long fileSize, boolean save,
+	                                     boolean useImportDir, boolean forceImportFavourites,
+	                                     boolean forceImportGpx, boolean showSnackbar) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					OnClickListener importAsTrackListener = new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							switch (which) {
-								case DialogInterface.BUTTON_POSITIVE:
-									handleResult(gpxFile, fileName, fileSize, save, useImportDir);
-									openFavorites();
-									break;
-								case DialogInterface.BUTTON_NEGATIVE:
-									dialog.dismiss();
-									break;
-							}
+					OnClickListener importAsTrackListener = (dialog, which) -> {
+						switch (which) {
+							case DialogInterface.BUTTON_POSITIVE:
+								handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
+								openFavorites();
+								break;
+							case DialogInterface.BUTTON_NEGATIVE:
+								dialog.dismiss();
+								break;
 						}
 					};
 					new AlertDialog.Builder(activity)
@@ -665,7 +695,7 @@ public class ImportHelper {
 							.show();
 				}
 			} else {
-				handleResult(gpxFile, fileName, fileSize, save, useImportDir);
+				handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
 			}
 			return;
 		}
@@ -674,10 +704,10 @@ public class ImportHelper {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else if (fileName != null) {
 			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
-				handleResult(gpxFile, fileName, fileSize, save, useImportDir);
+				handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
 			} else {
 				ImportGpxBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(),
-						this, gpxFile, fileName, fileSize, save, useImportDir);
+						this, gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
 			}
 		}
 	}

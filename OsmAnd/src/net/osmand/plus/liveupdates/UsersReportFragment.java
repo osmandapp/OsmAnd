@@ -20,8 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.liveupdates.Protocol.RankingUserByMonthResponse;
 import net.osmand.plus.liveupdates.Protocol.UserRankingByMonth;
-import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask;
-import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask.OnResponseListener;
+import net.osmand.plus.liveupdates.GetJsonAsyncTask.OnResponseListener;
 
 public class UsersReportFragment extends BaseOsmAndDialogFragment {
 
@@ -30,7 +29,8 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_simple_list, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.fragment_simple_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<Object> adapter = new ListAdapter(getListItemIcon());
 		String url = getArguments().getString(URL_REQUEST);
@@ -39,49 +39,35 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 		if (getTag().equals(ReportsFragment.EDITS_FRAGMENT)) {
 			((TextView) view.findViewById(R.id.titleTextView)).setText(R.string.osm_editors_ranking);
 			GetJsonAsyncTask<RankingUserByMonthResponse> task = new GetJsonAsyncTask<>(RankingUserByMonthResponse.class);
-			task.setOnResponseListener(new OnResponseListener<Protocol.RankingUserByMonthResponse>() {
-
-				@Override
-				public void onResponse(RankingUserByMonthResponse response) {
-					if (response != null && response.rows != null) {
-						for (UserRankingByMonth rankingByMonth : response.rows) {
-							if (rankingByMonth != null) {
-								adapter.add(rankingByMonth);
-							}
+			task.setOnResponseListener(response -> {
+				if (response != null && response.rows != null) {
+					for (UserRankingByMonth rankingByMonth : response.rows) {
+						if (rankingByMonth != null) {
+							adapter.add(rankingByMonth);
 						}
 					}
-					view.findViewById(R.id.progress).setVisibility(View.GONE);
 				}
+				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			});
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 		} else if (getTag().equals(ReportsFragment.RECIPIENTS_FRAGMENT)) {
-			((TextView)view.findViewById(R.id.titleTextView)).setText(R.string.osm_recipients_label);
+			((TextView) view.findViewById(R.id.titleTextView)).setText(R.string.osm_recipients_label);
 			GetJsonAsyncTask<Protocol.RecipientsByMonth> task = new GetJsonAsyncTask<>(Protocol.RecipientsByMonth.class);
-			task.setOnResponseListener(new OnResponseListener<Protocol.RecipientsByMonth>() {
-
-				@Override
-				public void onResponse(Protocol.RecipientsByMonth response) {
-					if (response != null && response.rows != null) {
-						for (Protocol.Recipient recipient : response.rows) {
-							if (recipient != null) {
-								adapter.add(recipient);
-							}
+			task.setOnResponseListener(response -> {
+				if (response != null && response.rows != null) {
+					for (Protocol.Recipient recipient : response.rows) {
+						if (recipient != null) {
+							adapter.add(recipient);
 						}
 					}
-					view.findViewById(R.id.progress).setVisibility(View.GONE);
 				}
+				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			});
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 		}
 		listView.setAdapter(adapter);
 		ImageButton clearButton = view.findViewById(R.id.closeButton);
-		//setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		clearButton.setOnClickListener(v -> dismiss());
 		return view;
 	}
 
@@ -105,7 +91,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 			textColor = typedValue.data;
 			theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 			textSecondaryColor = typedValue.data;
-			
+
 		}
 
 		@Override
@@ -126,11 +112,11 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 				text1.setText(rankingByMonth.user);
 				text2.setText(getString(R.string.osm_user_stat,
 						String.valueOf(rankingByMonth.changes), String.valueOf(rankingByMonth.rank), String.valueOf(rankingByMonth.globalchanges)));
-			} else if (item instanceof Protocol.Recipient){
+			} else if (item instanceof Protocol.Recipient) {
 				Protocol.Recipient recipient = (Protocol.Recipient) item;
 				text1.setText(recipient.osmid);
 				text2.setText(getString(R.string.osm_recipient_stat,
-						String.valueOf(recipient.changes), String.format("%.4f", (recipient.btc*1000f))));
+						String.valueOf(recipient.changes), String.format("%.4f", (recipient.btc * 1000f))));
 			}
 			return v;
 		}

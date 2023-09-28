@@ -2,7 +2,8 @@ package net.osmand.plus.plugins.osmedit;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_ITEMS_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
@@ -25,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -38,7 +40,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
+import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -47,8 +52,6 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -57,6 +60,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment;
+import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
 import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
@@ -73,6 +77,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -80,6 +85,8 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -91,6 +98,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -400,7 +408,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
 	                                                   @NonNull MapActivity mapActivity,
 	                                                   @NonNull List<RenderingRuleProperty> customRules) {
-		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP)
+		adapter.addItem(new ContextMenuItem(OPEN_STREET_MAP_CATEGORY_ID)
 				.setCategory(true)
 				.setTitleId(R.string.shared_string_open_street_map, mapActivity)
 				.setLayout(R.layout.list_group_title_with_switch));
@@ -463,7 +471,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			RenderingRuleProperty property = iterator.next();
 			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
 				iterator.remove();
-				String id = OPEN_STREET_MAP + property.getAttrName();
+				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
 				adapter.addItem(ConfigureMapMenu.createRenderingProperty(adapter, mapActivity, INVALID_ID, property, id, nightMode));
 			}
 		}
@@ -476,31 +484,65 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.osm_editing_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_osm);
+		String description = app.getString(R.string.osm_editing_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override
-	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter adapter) {
-		if (fragment instanceof AvailableGPXFragment) {
-			AvailableGPXFragment gpxFragment = ((AvailableGPXFragment) fragment);
-			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
-					.setColor(app, R.color.color_white)
-					.setListener((uiAdapter, view, item, isChecked) -> {
-						gpxFragment.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, items -> {
-									int size = items.size();
-									File[] files = new File[size];
-									for (int i = 0; i < size; i++) {
-										files[i] = items.get(i).getFile();
-									}
-									sendGPXFiles(activity, gpxFragment, files);
-								}
-						);
-						return true;
-					}));
+	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
+		String title = app.getString(R.string.upload_to_openstreetmap);
+		items.add(new Builder(app)
+				.setTitle(title)
+				.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_upload_to_openstreetmap))
+				.setOnClickListener(v -> {
+					if (selectedItems.isEmpty()) {
+						String message = app.getString(R.string.local_index_no_items_to_do, title.toLowerCase());
+						app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+					} else {
+						showUploadConfirmationDialog(activity, fragment, selectedItems);
+					}
+				})
+				.create()
+		);
+	}
+
+	private void showUploadConfirmationDialog(@NonNull FragmentActivity activity, @NonNull Fragment fragment, @NonNull Set<TrackItem> trackItems) {
+		long[] size = new long[1];
+		List<SelectableItem<TrackItem>> items = new ArrayList<>();
+		for (TrackItem gpxInfo : trackItems) {
+			File file = gpxInfo.getFile();
+			if (file != null) {
+				SelectableItem<TrackItem> item = new SelectableItem<>();
+				item.setObject(gpxInfo);
+				item.setTitle(gpxInfo.getName());
+				item.setIconId(R.drawable.ic_notification_track);
+
+				items.add(item);
+				size[0] += file.length();
+			}
+		}
+		FragmentManager manager = activity.getSupportFragmentManager();
+		UploadMultipleGPXBottomSheet dialog = UploadMultipleGPXBottomSheet.showInstance(manager, items, items);
+		if (dialog != null) {
+			dialog.setDialogStateListener(new DialogStateListener() {
+				@Override
+				public void onDialogCreated() {
+					dialog.setTitle(app.getString(R.string.upload_to_openstreetmap));
+					dialog.setApplyButtonTitle(app.getString(R.string.shared_string_continue));
+					String total = app.getString(R.string.shared_string_total);
+					dialog.setTitleDescription(app.getString(R.string.ltr_or_rtl_combine_via_colon, total,
+							AndroidUtils.formatSize(app, size[0])));
+				}
+			});
+			dialog.setOnApplySelectionListener(selectedItems -> {
+				List<File> files = new ArrayList<>();
+				for (SelectableItem<TrackItem> item : selectedItems) {
+					files.add(item.getObject().getFile());
+				}
+				sendGPXFiles(activity, fragment, files.toArray(new File[0]));
+			});
 		}
 	}
 
@@ -585,11 +627,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public Drawable getAssetResourceImage() {
 		return app.getUIUtilities().getIcon(R.drawable.osm_editing);
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/osm-editing-plugin.html";
 	}
 
 	public static String getEditName(OsmPoint point) {

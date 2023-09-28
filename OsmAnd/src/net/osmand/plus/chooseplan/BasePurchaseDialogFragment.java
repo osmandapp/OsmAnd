@@ -44,10 +44,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	protected View mainView;
 	protected AppBarLayout appBar;
 	protected NestedScrollView scrollView;
-	protected LayoutInflater themedInflater;
-
-	protected boolean nightMode;
-	protected boolean usedOnMap;
 
 	private int lastScrollY;
 	private int lastKnownToolbarOffset;
@@ -84,14 +80,17 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		purchaseHelper = app.getInAppPurchaseHelper();
-		usedOnMap = getMapActivity() != null;
-		nightMode = isNightMode(usedOnMap);
-		themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return getMapActivity() != null;
 	}
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		updateNightMode();
 		Activity ctx = requireActivity();
 		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 		Dialog dialog = new Dialog(ctx, themeId);
@@ -108,6 +107,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		mainView = themedInflater.inflate(getLayoutId(), container, false);
 		appBar = mainView.findViewById(R.id.appbar);
 		scrollView = mainView.findViewById(R.id.scroll_view);

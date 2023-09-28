@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -20,8 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
 import net.osmand.plus.dialogs.MapRenderingEngineDialog;
-import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
+import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.profiles.SelectDefaultProfileBottomSheet;
@@ -143,7 +144,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
 			Activity activity = getActivity();

@@ -32,7 +32,7 @@ import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxLi
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
@@ -84,6 +84,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String title = getString(visibilityType.getTitleId());
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = visibilityType;
 			itemsVisibility.add(item);
 		}

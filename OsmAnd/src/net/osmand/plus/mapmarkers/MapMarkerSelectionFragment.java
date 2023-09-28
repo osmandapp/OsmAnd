@@ -28,6 +28,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.List;
 
 public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
+
 	public static final String TAG = "MapMarkerSelectionFragment";
 	private static final String POINT_TYPE_KEY = "point_type";
 
@@ -43,7 +44,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+		updateNightMode();
 		Bundle bundle = null;
 		if (getArguments() != null) {
 			bundle = getArguments();
@@ -59,7 +60,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
 
-			screenOrientation = app.getUIUtilities().getScreenOrientation();
+			screenOrientation = app.getUIUtilities().getScreenOrientation(mapActivity);
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 			if (trackingUtils != null) {
@@ -76,18 +77,12 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				}
 			}
 		}
-		nightMode = !app.getSettings().isLightContent();
 
-		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.map_marker_selection_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.map_marker_selection_fragment, container, false);
 		ImageButton closeButton = view.findViewById(R.id.closeButton);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
 		closeButton.setImageDrawable(icBack);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		closeButton.setOnClickListener(v -> dismiss());
 
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
@@ -98,14 +93,11 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (onClickListener != null) {
-					onClickListener.onSelect(position, pointType);
-				}
-				dismiss();
+		listView.setOnItemClickListener((parent, v, position, id) -> {
+			if (onClickListener != null) {
+				onClickListener.onSelect(position, pointType);
 			}
+			dismiss();
 		});
 		return view;
 	}

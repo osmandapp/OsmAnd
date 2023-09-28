@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
@@ -36,9 +40,9 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	public static class RunningCadenceData implements SensorData {
 
 		private final long timestamp;
-		private final float cadence;
+		private final int cadence;
 
-		RunningCadenceData(long timestamp, float cadence) {
+		RunningCadenceData(long timestamp, int cadence) {
 			this.timestamp = timestamp;
 			this.cadence = cadence;
 		}
@@ -47,7 +51,7 @@ public class BLERunningSensor extends BLEAbstractSensor {
 			return timestamp;
 		}
 
-		public float getCadence() {
+		public int getCadence() {
 			return cadence;
 		}
 
@@ -333,22 +337,25 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		RunningCadenceData cadenceData = lastRunningCadenceData;
-		if (cadenceData != null) {
-			json.put(getSensorId() + "_cadence", cadenceData.cadence);
-		}
-		RunningSpeedData speedData = lastRunningSpeedData;
-		if (speedData != null) {
-			json.put(getSensorId() + "_speed", speedData.speed);
-		}
-		RunningDistanceData distanceData = lastRunningDistanceData;
-		if (distanceData != null) {
-			json.put(getSensorId() + "_total_distance", distanceData.totalDistance);
-		}
-		RunningStrideLengthData strideLengthData = lastRunningStrideLengthData;
-		if (strideLengthData != null) {
-			json.put(getSensorId() + "_stride_length", strideLengthData.strideLength);
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
+		switch (widgetDataFieldType) {
+			case BIKE_SPEED:
+				if (lastRunningSpeedData != null) {
+					json.put(SENSOR_TAG_SPEED, lastRunningSpeedData.speed);
+				}
+				break;
+			case BIKE_CADENCE:
+				if (lastRunningCadenceData != null) {
+					json.put(SENSOR_TAG_CADENCE, lastRunningCadenceData.cadence);
+				}
+				break;
+			case BIKE_DISTANCE:
+				if (lastRunningDistanceData != null) {
+					json.put(SENSOR_TAG_DISTANCE, lastRunningDistanceData.totalDistance);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 }

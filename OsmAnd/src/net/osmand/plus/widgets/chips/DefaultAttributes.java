@@ -5,12 +5,15 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 class DefaultAttributes {
 
@@ -67,7 +70,7 @@ class DefaultAttributes {
 				getColorFromAttr(context, R.attr.chip_content_color));
 		defAttrs.titleSelectedColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipTitleSelectedColor,
-				getColor(context, R.color.color_white));
+				getColor(context, R.color.card_and_list_background_light));
 		defAttrs.titleDisabledColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipTitleDisabledColor,
 				getColorFromAttr(context, R.attr.inactive_text_color));
@@ -77,7 +80,7 @@ class DefaultAttributes {
 				getColorFromAttr(context, R.attr.chip_content_color));
 		defAttrs.iconSelectedColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipIconSelectedColor,
-				getColor(context, R.color.color_white));
+				getColor(context, R.color.card_and_list_background_light));
 		defAttrs.iconDisabledColor = a.getInteger(
 				R.styleable.HorizontalChipsView_chipIconDisabledColor,
 				getColorFromAttr(context, R.attr.inactive_text_color));
@@ -112,11 +115,11 @@ class DefaultAttributes {
 	}
 
 	@ColorInt
-	private static int getColor(@NonNull Context ctx, int colorId) {
-		return ContextCompat.getColor(ctx, colorId);
+	private static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
+		return ColorUtilities.getColor(ctx, colorId);
 	}
 
-	private static int getDimension(@NonNull Context ctx, int dimen) {
+	private static int getDimension(@NonNull Context ctx, @DimenRes int dimen) {
 		return ctx.getResources().getDimensionPixelSize(dimen);
 	}
 

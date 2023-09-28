@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -154,22 +156,26 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeHeartRateDataEvent((estTimestamp, eventFlags, computedHeartRate, heartBeatCount, heartBeatEventTime, dataState) -> {
-			boolean zeroState = AntPlusHeartRatePcc.DataState.ZERO_DETECTED.equals(dataState);
-			boolean initialState = AntPlusHeartRatePcc.DataState.INITIAL_VALUE.equals(dataState);
+		AntPlusHeartRatePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeHeartRateDataEvent(null);
+			pcc.subscribeHeartRateDataEvent((estTimestamp, eventFlags, computedHeartRate, heartBeatCount, heartBeatEventTime, dataState) -> {
+				boolean zeroState = AntPlusHeartRatePcc.DataState.ZERO_DETECTED.equals(dataState);
+				boolean initialState = AntPlusHeartRatePcc.DataState.INITIAL_VALUE.equals(dataState);
 
-			lastHeartRateData = new HeartRateData(getDevice().isConnected(), estTimestamp, computedHeartRate, zeroState,
-					heartBeatCount, initialState, heartBeatEventTime, initialState);
-			getDevice().fireSensorDataEvent(AntHeartRateSensor.this, lastHeartRateData);
-		});
+				lastHeartRateData = new HeartRateData(getDevice().isConnected(), estTimestamp, computedHeartRate, zeroState,
+						heartBeatCount, initialState, heartBeatEventTime, initialState);
+				getDevice().fireSensorDataEvent(AntHeartRateSensor.this, lastHeartRateData);
+			});
+		}
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0) {
-			json.put(getSensorId(), computedHeartRate);
+			json.put(SENSOR_TAG_HEART_RATE, computedHeartRate);
 		}
 	}
 }

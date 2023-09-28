@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -19,9 +18,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,6 +35,8 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -95,11 +96,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(initialGpxName);
 		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
-		nameEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
+		nameEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				newGpxName = s.toString();
@@ -145,8 +142,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return UiUtilities.DialogButtonType.SECONDARY;
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.SECONDARY;
 	}
 
 	@Override

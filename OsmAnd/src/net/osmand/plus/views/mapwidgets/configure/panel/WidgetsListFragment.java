@@ -322,9 +322,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		availableWidgetsContainer.removeAllViews();
 
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
-		if (!selectedPanel.isDuplicatesAllowed()) {
-			filter |= DISABLED_MODE;
-		}
 
 		MapActivity mapActivity = requireMapActivity();
 		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, selectedPanel.getMergedPanels());

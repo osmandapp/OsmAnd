@@ -5,13 +5,14 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public enum SensorWidgetDataFieldType {
-	TEMPERATURE(WidgetType.WEATHER_TEMPERATURE_WIDGET),
-	HEART_RATE(WidgetType.ANT_HEART_RATE),
+	TEMPERATURE(WidgetType.TEMPERATURE),
+	HEART_RATE(WidgetType.HEART_RATE),
 	BATTERY(WidgetType.BATTERY),
-	BIKE_POWER(WidgetType.ANT_BICYCLE_POWER),
-	BIKE_SPEED(WidgetType.ANT_BICYCLE_SPEED),
-	BIKE_CADENCE(WidgetType.ANT_BICYCLE_CADENCE),
-	BIKE_DISTANCE(WidgetType.ANT_BICYCLE_DISTANCE);
+	RSSI(WidgetType.RSSI),
+	BIKE_POWER(WidgetType.BICYCLE_POWER),
+	BIKE_SPEED(WidgetType.BICYCLE_SPEED),
+	BIKE_CADENCE(WidgetType.BICYCLE_CADENCE),
+	BIKE_DISTANCE(WidgetType.BICYCLE_DISTANCE);
 
 	private final WidgetType widgetType;
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
+import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
@@ -13,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -22,6 +22,8 @@ import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -41,7 +43,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WeatherHelper {
 
 	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
-
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
 	private final OfflineForecastHelper offlineForecastHelper;
@@ -109,10 +110,7 @@ public class WeatherHelper {
 		if (weatherTileResourcesManager != null) {
 			return;
 		}
-		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
-		if (!weatherForecastDir.exists()) {
-			weatherForecastDir.mkdir();
-		}
+		File cacheDir = getForecastCacheDir();
 		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
 		int tileSize = 256;
 		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
@@ -120,13 +118,42 @@ public class WeatherHelper {
 
 		WeatherWebClient webClient = new WeatherWebClient();
 		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
-				new BandIndexGeoBandSettingsHash(), weatherForecastDir.getAbsolutePath(),
-				projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true)
+				new BandIndexGeoBandSettingsHash(), cacheDir.getAbsolutePath(), projResourcesPath,
+				tileSize, densityFactor, webClient.instantiateProxy(true)
 		);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
+	}
+
+	public boolean shouldUpdateForecastCache() {
+		File dir = getForecastCacheDir();
+		return Algorithms.isEmpty(dir.listFiles());
+	}
+
+	public void updateForecastCache() {
+		LocalIndexHelper helper = new LocalIndexHelper(app);
+		for (LocalItem item : helper.getLocalIndexItems(true, false, null, WEATHER_DATA)) {
+			updateForecastCache(item.getPath());
+		}
+	}
+
+	public void updateForecastCache(@NonNull String filePath) {
+		boolean updateForecastCache = false;
+		if (weatherTileResourcesManager != null) {
+			updateForecastCache = weatherTileResourcesManager.importDbCache(filePath);
+		}
+		log.info("updateForecastCache " + filePath + " success " + updateForecastCache);
+	}
+
+	@NonNull
+	private File getForecastCacheDir() {
+		File dir = new File(app.getCacheDir(), WEATHER_FORECAST_DIR);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		return dir;
 	}
 
 	public void clearOutdatedCache() {
@@ -207,8 +234,6 @@ public class WeatherHelper {
 	}
 
 	public static boolean isWeatherSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get()
-				&& NativeCore.isAvailable()
-				&& !Version.isQnxOperatingSystem();
+		return app.getSettings().USE_OPENGL_RENDER.get() && Version.isOpenGlAvailable(app);
 	}
 }

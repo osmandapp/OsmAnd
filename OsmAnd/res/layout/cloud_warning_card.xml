@@ -90,13 +90,14 @@
 
 		</LinearLayout>
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/action_button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
+			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginBottom="@dimen/content_padding" />
+			osmand:dialogButtonType="secondaryActive"
+			osmand:dialogButtonBottomMargin="@dimen/content_padding"
+			tools:dialogButtonTitle="@string/sync_now"/>
 
 	</LinearLayout>
 

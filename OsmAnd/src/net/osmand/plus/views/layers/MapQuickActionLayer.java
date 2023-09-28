@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
+import static net.osmand.plus.utils.AndroidUtils.*;
+import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.animation.Animator;
@@ -12,15 +15,12 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.Build;
 import android.os.Vibrator;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -46,6 +46,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
@@ -123,7 +124,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 quickActionButton.setScaleX(1.5f);
                 quickActionButton.setScaleY(1.5f);
                 quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(getActionOnTouchListener());
+                quickActionButton.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, quickActionButton, settings.QUICK_ACTION_FAB_MARGIN));
                 return true;
             });
         } else {
@@ -149,11 +150,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                     TapTarget.forView(quickActionButton, getString(R.string.quick_action_btn_tutorial_title), getString(R.string.quick_action_btn_tutorial_descr))
                             // All options below are optional
                             .outerCircleColor(R.color.osmand_orange)      // Specify a color for the outer circle
-                            .targetCircleColor(R.color.color_white)   // Specify a color for the target circle
+                            .targetCircleColor(R.color.card_and_list_background_light)   // Specify a color for the target circle
                             .titleTextSize(20)                  // Specify the size (in sp) of the title text
                             .descriptionTextSize(16)            // Specify the size (in sp) of the description text
-                            .descriptionTextColor(R.color.color_white)            // Specify a color for both the title and description text
-                            .titleTextColor(R.color.color_white)            // Specify a color for both the title and description text
+                            .descriptionTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
+                            .titleTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
                             .drawShadow(true)                   // Whether to draw a drop shadow or not
                             .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                             .tintTarget(false)                   // Whether to tint the target view's color
@@ -174,59 +175,21 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private void setQuickActionButtonMargin() {
         MapActivity mapActivity = getMapActivity();
         if (mapActivity != null) {
-            int defRightMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
-            int defBottomMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
+            int defRightMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
+            int defBottomMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
             FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) quickActionButton.getLayoutParams();
+            FabMarginPreference preference = settings.QUICK_ACTION_FAB_MARGIN;
             if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-                Pair<Integer, Integer> fabMargin = settings.getPortraitFabMargin();
-                setQuickActionButtonMargin(param, fabMargin, 0, defBottomMargin);
+                Pair<Integer, Integer> fabMargin = preference.getPortraitFabMargin();
+                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, 0, defBottomMargin);
             } else {
-                Pair<Integer, Integer> fabMargin = settings.getLandscapeFabMargin();
-                setQuickActionButtonMargin(param, fabMargin, defRightMargin, 0);
+                Pair<Integer, Integer> fabMargin = preference.getLandscapeFabMargin();
+                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, defRightMargin, 0);
             }
         }
     }
 
-    private void setQuickActionButtonMargin(FrameLayout.LayoutParams params,
-                                            Pair<Integer, Integer> fabMargin,
-                                            int defRightMargin, int defBottomMargin) {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity == null) {
-            return;
-        }
-        int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
-        int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
-        int btnHeight = quickActionButton.getHeight();
-        int btnWidth = quickActionButton.getWidth();
-        int maxRightMargin = screenWidth - btnWidth;
-        int maxBottomMargin = screenHeight - btnHeight;
 
-        int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
-        int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
-        // check limits
-        if (rightMargin <= 0) {
-            rightMargin = defRightMargin;
-        } else if (rightMargin > maxRightMargin) {
-            rightMargin = maxRightMargin;
-        }
-        if (bottomMargin <= 0) {
-            bottomMargin = defBottomMargin;
-        } else if (bottomMargin > maxBottomMargin) {
-            bottomMargin = maxBottomMargin;
-        }
-
-        params.rightMargin = rightMargin;
-        params.bottomMargin = bottomMargin;
-        quickActionButton.setLayoutParams(params);
-    }
-
-    private int calculateTotalSizePx(@DimenRes int... dimensId) {
-        int result = 0;
-        for (int id : dimensId) {
-            result += app.getResources().getDimensionPixelSize(id);
-        }
-        return result;
-    }
 
 	public boolean isWidgetVisible() {
 		return quickActionsWidget != null && quickActionsWidget.getVisibility() == View.VISIBLE;
@@ -276,7 +239,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         }
         AnimatorSet set = new AnimatorSet();
         List<Animator> animators = new ArrayList<>();
-        int[] animationCoordinates = AndroidUtils.getCenterViewCoordinates(quickActionButton);
+        int[] animationCoordinates = getCenterViewCoordinates(quickActionButton);
         int centerX = quickActionsWidget.getWidth() / 2;
         int centerY = quickActionsWidget.getHeight() / 2;
         float initialValueX = show ? animationCoordinates[0] - centerX : 0;
@@ -398,7 +361,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
         return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
                 app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
-                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to folow if there is selected point on map
+                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to follow if there is selected point on map
     }
 
     private void updateMapDisplayPosition() {
@@ -490,89 +453,5 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
     public boolean onBackPressed() {
         return setLayerState(false);
-    }
-
-    private OnTouchListener getActionOnTouchListener() {
-
-        return new OnTouchListener() {
-
-            private int initialMarginX = 0;
-            private int initialMarginY = 0;
-            private float initialTouchX = 0;
-            private float initialTouchY = 0;
-
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                MapActivity mapActivity = getMapActivity();
-                if (mapActivity == null) {
-                    return false;
-                }
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        setUpInitialValues(v, event);
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        quickActionButton.setOnTouchListener(null);
-                        quickActionButton.setPressed(false);
-                        quickActionButton.setScaleX(1);
-                        quickActionButton.setScaleY(1);
-                        quickActionButton.setAlpha(1f);
-                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-                        if (AndroidUiHelper.isOrientationPortrait(mapActivity))
-                            settings.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-                        else
-                            settings.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
-                            setUpInitialValues(v, event);
-
-                        int padding = calculateTotalSizePx(R.dimen.map_button_margin);
-                        FrameLayout parent = (FrameLayout) v.getParent();
-                        FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-                        int deltaX = (int) (initialTouchX - event.getRawX());
-                        int deltaY = (int) (initialTouchY - event.getRawY());
-
-                        int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
-                        int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
-
-                        if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
-                            param.bottomMargin = newMarginY;
-
-                        if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
-                            param.rightMargin = newMarginX;
-                        }
-
-                        v.setLayoutParams(param);
-
-                        return true;
-                }
-                return false;
-            }
-
-            private int interpolate(int value, int divider, int boundsSize) {
-                if (value <= divider && value > 0)
-                    return value * value / divider;
-                else {
-                    int leftMargin = boundsSize - value - divider;
-                    if (leftMargin <= divider && value < boundsSize - divider)
-                        return leftMargin - (leftMargin * leftMargin / divider) + value;
-                    else
-                        return value;
-                }
-            }
-
-            private void setUpInitialValues(View v, MotionEvent event) {
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-                initialMarginX = params.rightMargin;
-                initialMarginY = params.bottomMargin;
-
-                initialTouchX = event.getRawX();
-                initialTouchY = event.getRawY();
-            }
-        };
     }
 }

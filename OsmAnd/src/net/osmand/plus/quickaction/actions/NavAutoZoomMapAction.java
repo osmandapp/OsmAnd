@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.NAV_AUTO_ZOOM_MAP_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class NavAutoZoomMapAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(23,
+	public static final QuickActionType TYPE = new QuickActionType(NAV_AUTO_ZOOM_MAP_ACTION_ID,
 			"nav.autozoom", NavAutoZoomMapAction.class).
 			nameRes(R.string.quick_action_auto_zoom).iconRes(R.drawable.ic_action_search_dark).nonEditable().
 			category(QuickActionType.NAVIGATION);

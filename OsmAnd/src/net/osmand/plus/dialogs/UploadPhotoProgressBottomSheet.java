@@ -89,7 +89,8 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 	public void uploadPhotosFinished() {
 		uploadingFinished = true;
 		updateProgress(progress);
-		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
+		dismissButton.setButtonType(getDismissButtonType());
+		dismissButton.setTitleId(getDismissButtonTextId());
 	}
 
 	@Override

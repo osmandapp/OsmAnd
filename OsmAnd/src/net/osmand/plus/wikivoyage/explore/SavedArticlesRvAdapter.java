@@ -72,7 +72,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int iconId) {
-		int colorId = nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
+		int colorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		return app.getUIUtilities().getIcon(iconId, colorId);
 	}
 
@@ -292,7 +292,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 								});
 						boolean nightMode = !settings.isLightContent();
 						UiUtilities.setupSnackbar(snackbar, nightMode);
-						int wikivoyageActiveColorResId = nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
+						int wikivoyageActiveColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 						UiUtilities.setupSnackbar(snackbar, nightMode, null, null, wikivoyageActiveColorResId, null);
 						snackbar.show();
 					}

@@ -207,7 +207,7 @@ interface IOsmAndAidlInterface {
      *
      * @param layerId (String) - layer id.
      * @param pointId (String) - point id.
-     * @param updateOpenedMenuAndMap (boolean) - flag to enable folowing mode and menu updates for point
+     * @param updateOpenedMenuAndMap (boolean) - flag to enable following mode and menu updates for point
      * @param shortName (String) - short name (single char). Displayed on the map.
      * @param fullName (String) - full name. Displayed in the context menu on first row.
      * @param typeName (String) - type name. Displayed in context menu on second row.
@@ -251,7 +251,7 @@ interface IOsmAndAidlInterface {
      * Import GPX file to OsmAnd (from URI or file).
      *
      * @param gpxUri (Uri) - URI created by FileProvider (preferable method).
-     * @param file (File) - File which represents GPX track (not recomended, OsmAnd should have rights to access file location).
+     * @param file (File) - File which represents GPX track (not recommended, OsmAnd should have rights to access file location).
      * @param fileName (String) - Destination file name. May contain dirs.
      * @param color (String) - color of gpx. Can be one of: "red", "orange", "lightblue", "blue", "purple",
      *                    "translucent_red", "translucent_orange", "translucent_lightblue",
@@ -590,7 +590,7 @@ interface IOsmAndAidlInterface {
      * Register OsmAnd widgets for availability.
      *
      * @param widgetKey (String) - widget id.
-     * @param appModKeys (List<String>)- ist of OsmAnd Application modes widget active with. Could be "null" for all modes.
+     * @param appModKeys (List<String>)- list of OsmAnd Application modes widget active with. Could be "null" for all modes.
      */
     boolean regWidgetAvailability(in SetWidgetsParams params);
 

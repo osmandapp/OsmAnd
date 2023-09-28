@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -29,8 +28,8 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
@@ -55,17 +54,13 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	private boolean saved;
 
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		editor = requireMapActivity().getContextMenu().getWptPtPointEditor();
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		savingTrackHelper = app.getSavingTrackHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
+		editor = requireMapActivity().getContextMenu().getWptPtPointEditor();
 
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
@@ -185,13 +180,10 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			MapMarkersHelper helper = app.getMapMarkersHelper();
-			MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
-			if (group != null) {
-				helper.runSynchronization(group);
-			}
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
 		}
 	}
 
@@ -245,7 +237,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					}
 				} else {
 					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), extensions);
-					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -278,7 +270,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
 							Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
 					gpx.updateWptPt(wpt, wptInfo);
-					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -304,7 +296,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 							savingTrackHelper.deletePointData(wpt);
 						} else {
 							gpx.deleteWptPt(wpt);
-							saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+							saveGpx(app, gpx, editor.isGpxSelected());
 						}
 						syncGpx(gpx);
 					}

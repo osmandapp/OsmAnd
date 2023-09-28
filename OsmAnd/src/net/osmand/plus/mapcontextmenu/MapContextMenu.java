@@ -106,6 +106,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private final LinkedList<MapContextMenuData> historyStack = new LinkedList<>();
 
+	public void updateNightMode() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			menuController.updateNightMode();
+		}
+	}
+
 	public static class MapContextMenuData {
 
 		private final LatLon latLon;
@@ -1533,18 +1540,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			menuController.buildCustomAddressLine(ll);
-		}
-	}
-
-	public boolean isNightMode() {
-		MapActivity mapActivity = getMapActivity();
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return !menuController.isLight();
-		} else if (mapActivity != null) {
-			return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		} else {
-			return false;
 		}
 	}
 

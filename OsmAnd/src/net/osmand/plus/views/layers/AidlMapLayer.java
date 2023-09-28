@@ -44,6 +44,7 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.AidlTileProvider;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -460,17 +461,30 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AidlMapPointWrapper> points) {
-		if (view != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int radius = getPointRadius(tb);
-			for (AidlMapPointWrapper p : aidlLayer.getPoints()) {
-				LatLon position = p.getLocation();
-				if (position != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, position.getLatitude(), position.getLongitude());
-					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
-						points.add(p);
-					}
+		List<AidlMapPointWrapper> aidlPoints = aidlLayer.getPoints();
+		if (view == null || Algorithms.isEmpty(aidlPoints) || tb.getZoom() < START_ZOOM) {
+			return;
+		}
+
+		int radius = getPointRadius(tb);
+
+		MapRendererView mapRenderer = getMapRenderer();
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
+		for (AidlMapPointWrapper p : aidlPoints) {
+			LatLon position = p.getLocation();
+			if (position != null) {
+				boolean add = mapRenderer != null
+						? NativeUtilities.isPointInsidePolygon(position, touchPolygon31)
+						: tb.isLatLonNearPixel(position, point.x, point.y, radius);
+				if (add) {
+					points.add(p);
 				}
 			}
 		}

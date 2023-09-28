@@ -455,6 +455,7 @@ public class PoiFiltersHelper {
 		return false;
 	}
 
+	@NonNull
 	public Set<PoiUIFilter> getSelectedPoiFilters(PoiUIFilter ... filtersToExclude) {
 		if (filtersToExclude != null && filtersToExclude.length > 0) {
 			Set<PoiUIFilter> filters = new TreeSet<>();

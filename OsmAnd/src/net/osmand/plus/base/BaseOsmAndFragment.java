@@ -2,53 +2,80 @@ package net.osmand.plus.base;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.view.View;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.animation.Animation;
-import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
-	private UiUtilities iconsCache;
+	protected OsmandApplication app;
+	protected OsmandSettings settings;
+	protected UiUtilities uiUtilities;
+	protected LayoutInflater themedInflater;
+	protected boolean nightMode;
 
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = (OsmandApplication) requireActivity().getApplication();
+		settings = app.getSettings();
+		uiUtilities = app.getUIUtilities();
+		updateNightMode();
+	}
+
+	protected void updateNightMode() {
+		nightMode = isNightMode(isUsedOnMap());
+		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+	}
+
+	public boolean isNightMode() {
+		return nightMode;
+	}
+
+	protected boolean isUsedOnMap() {
+		return false;
+	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		Activity activity = getActivity();
 		if (activity != null) {
-			int colorId = getStatusBarColorId();
-			if (colorId != -1) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).updateStatusBarColor();
-				} else {
-					statusBarColor = activity.getWindow().getStatusBarColor();
-					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-				}
-			}
+			updateStatusBar(activity);
 			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
 				((MapActivity) activity).exitFromFullScreen(getView());
+			}
+		}
+	}
+
+	protected void updateStatusBar(@NonNull Activity activity) {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
+			} else {
+				statusBarColor = activity.getWindow().getStatusBarColor();
+				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 			}
 		}
 	}
@@ -109,22 +136,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	@Nullable
-	protected OsmandApplication getMyApplication() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			return (OsmandApplication) activity.getApplication();
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected OsmandApplication requireMyApplication() {
-		FragmentActivity activity = requireActivity();
-		return (OsmandApplication) activity.getApplication();
-	}
-
-	@Nullable
 	protected OsmandActionBarActivity getMyActivity() {
 		return (OsmandActionBarActivity) getActivity();
 	}
@@ -134,72 +145,25 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		return (OsmandActionBarActivity) requireActivity();
 	}
 
-	@Nullable
-	protected OsmandInAppPurchaseActivity getInAppPurchaseActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof OsmandInAppPurchaseActivity) {
-			return (OsmandInAppPurchaseActivity) getActivity();
-		} else {
-			return null;
-		}
-	}
-
-	@Nullable
-	protected UiUtilities getIconsCache() {
-		OsmandApplication app = getMyApplication();
-		if (iconsCache == null && app != null) {
-			iconsCache = app.getUIUtilities();
-		}
-		return iconsCache;
-	}
-
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getPaintedIcon(id, color) : null;
+		return uiUtilities.getPaintedIcon(id, color);
 	}
 
 	protected Drawable getIcon(@DrawableRes int id) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id) : null;
+		return uiUtilities.getIcon(id);
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id, colorId) : null;
+		return uiUtilities.getIcon(id, colorId);
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getThemedIcon(id) : null;
+		return uiUtilities.getThemedIcon(id);
 	}
 
 	@ColorInt
 	protected int getColor(@ColorRes int resId) {
-		return ColorUtilities.getColor(getContext(), resId);
-	}
-
-	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {
-		((ImageView) parent.findViewById(viewId)).setImageDrawable(getContentIcon(iconId));
-	}
-
-	protected void setThemedDrawable(View view, @DrawableRes int iconId) {
-		((ImageView) view).setImageDrawable(getContentIcon(iconId));
-	}
-
-	@Nullable
-	protected OsmandSettings getSettings() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			return app.getSettings();
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected OsmandSettings requireSettings() {
-		OsmandApplication app = requireMyApplication();
-		return app.getSettings();
+		return ColorUtilities.getColor(app, resId);
 	}
 
 	@Dimension
@@ -208,10 +172,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		OsmandApplication app = requireMyApplication();
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

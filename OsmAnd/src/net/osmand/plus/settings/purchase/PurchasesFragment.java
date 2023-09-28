@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.purchase;
 
 import static net.osmand.plus.settings.purchase.data.PurchaseUiDataUtils.shouldShowBackupSubscription;
+import static net.osmand.plus.settings.purchase.data.PurchaseUiDataUtils.shouldShowFreeAccRegistration;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -47,24 +48,13 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
-	private LayoutInflater themedInflater;
-
-	private boolean nightMode;
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
-	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_purchases, container, false);
 		createToolbar(view, nightMode);
 		cardsContainer = view.findViewById(R.id.cards_container);
-
 		return view;
 	}
 
@@ -103,8 +93,17 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			cardsContainer.addView(purchaseCard.build(activity));
 		}
 
+		boolean needToShowFreeAccountSubscriptionCard = shouldShowFreeAccRegistration(app);
+		if (needToShowFreeAccountSubscriptionCard) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			PurchaseUiData purchase = PurchaseUiDataUtils.createFreeAccPurchaseUiData(app);
+			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
+			purchaseCard.setListener(PurchasesFragment.this);
+			cardsContainer.addView(purchaseCard.build(activity));
+		}
+
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
-		if (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription)) {
+		if (!needToShowFreeAccountSubscriptionCard  && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription))) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {
@@ -170,7 +169,11 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 				PurchaseUiData purchase = purchaseCard.getDisplayedData();
 				FragmentManager fragmentManager = activity.getSupportFragmentManager();
 				String sku = purchase.isPromo() ? null : purchase.getSku();
-				PurchaseItemFragment.showInstance(fragmentManager, sku);
+				if (sku == null) {
+					PurchaseItemFragment.showInstance(fragmentManager, purchase.isFreeAccountSubscription());
+				} else {
+					PurchaseItemFragment.showInstance(fragmentManager, sku);
+				}
 			}
 		}
 	}

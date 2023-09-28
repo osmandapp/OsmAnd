@@ -1,10 +1,11 @@
 package net.osmand.plus.auto;
 
+import android.os.AsyncTask;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.Distance;
@@ -17,7 +18,8 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.osmand.CallbackWithObject;
+import net.osmand.StateChangedListener;
+import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -28,56 +30,81 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.IndexConstants;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 
 /**
  * The route preview screen for the app.
  */
-public final class RoutePreviewScreen extends Screen implements IRouteInformationListener,
+public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implements IRouteInformationListener,
 		DefaultLifecycleObserver {
 
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
-	@NonNull
 	private final SearchResult searchResult;
 	@NonNull
 	private List<Row> routeRows = new ArrayList<>();
 
+	@Nullable
+	private GPXFile routeGpxFile;
+
+	private LoadTracksTask loadTracksTask;
+
+	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
+		@Override
+		public void stateChanged(Void change) {
+			if (routeGpxFile != null) {
+				QuadRect mapRect = new QuadRect();
+				Algorithms.extendRectToContainRect(mapRect, routeGpxFile.getRect());
+				adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
+			}
+		}
+	};
+
 	private boolean calculating;
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                          @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
+	                          @NonNull SearchResult searchResult) {
 		super(carContext);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		this.searchResult = searchResult;
 
 		getLifecycle().addObserver(this);
-
 		calculating = true;
+	}
+
+	private class LoadTracksTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... voids) {
+			prepareRoute();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void unused) {
+			super.onPostExecute(unused);
+			invalidate();
+		}
+	}
+
+	private void prepareRoute(){
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
-			File file = new File(getApp().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
+			File file = gpxInfo.getFile();
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-			if(selectedGpxFile == null){
-				GpxFileLoaderTask.loadGpxFile(file, null, new CallbackWithObject<GPXFile>() {
-					@Override
-					public boolean processResult(GPXFile gpxFile) {
-						getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(gpxFile);
-						return true;
-					}
+			if (selectedGpxFile == null) {
+				GpxFileLoaderTask.loadGpxFile(file, null, gpxFile -> {
+					buildRouteByGivenGpx(gpxFile);
+					return true;
 				});
 			} else {
-				getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
+				buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
 			}
 		} else {
 			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
@@ -85,14 +112,17 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		}
 	}
 
-	@NonNull
-	public OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
+	private void buildRouteByGivenGpx(@NonNull GPXFile gpxFile) {
+		routeGpxFile = gpxFile;
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(gpxFile);
 	}
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
+		getApp().getTargetPointsHelper().addListener(stateChangedListener);
+		loadTracksTask = new LoadTracksTask();
+		loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
@@ -103,7 +133,13 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		if (routingHelper.isRoutePlanningMode()) {
 			app.stopNavigation();
 		}
+		getApp().getTargetPointsHelper().removeListener(stateChangedListener);
 		getLifecycle().removeObserver(this);
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		recenterMap();
 	}
 
 	@NonNull

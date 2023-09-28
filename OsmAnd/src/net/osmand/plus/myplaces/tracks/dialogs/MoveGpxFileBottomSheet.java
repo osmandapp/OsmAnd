@@ -1,11 +1,11 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import static net.osmand.util.Algorithms.collectDirs;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -24,10 +22,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,28 +32,36 @@ import java.util.List;
 
 public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implements OnTrackFolderAddListener {
 
-	public static final String TAG = MoveGpxFileBottomSheet.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(MoveGpxFileBottomSheet.class);
-	private static final String FILE_PATH_KEY = "file_path_key";
+	private static final String TAG = MoveGpxFileBottomSheet.class.getSimpleName();
+	private static final String SRC_FILE_KEY = "file_path_key";
+	private static final String EXCLUDED_DIR_KEY = "excluded_dir_key";
 	private static final String SHOW_ALL_FOLDERS_KEY = "show_all_folders_key";
 
 	private OsmandApplication app;
-	private String filePath;
+	@Nullable
+	private File srcFile;
+	@Nullable
+	private File excludedDir;
 	private boolean showAllFolders;
 
 	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
 		app = requiredMyApplication();
 		if (savedInstanceState != null) {
-			filePath = savedInstanceState.getString(FILE_PATH_KEY);
+			if (savedInstanceState.containsKey(SRC_FILE_KEY)) {
+				srcFile = AndroidUtils.getSerializable(savedInstanceState, SRC_FILE_KEY, File.class);
+			}
+			if (savedInstanceState.containsKey(EXCLUDED_DIR_KEY)) {
+				excludedDir = AndroidUtils.getSerializable(savedInstanceState, EXCLUDED_DIR_KEY, File.class);
+			}
 			showAllFolders = savedInstanceState.getBoolean(SHOW_ALL_FOLDERS_KEY);
 		}
-		if (filePath == null) {
-			return;
-		}
-		File file = new File(filePath);
-		File fileDir = file.getParentFile();
+	}
 
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.select_folder_descr))
 				.setTitle(getString(R.string.shared_string_folders))
@@ -71,14 +76,11 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.setTitle(getString(R.string.add_new_folder))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-									null, MoveGpxFileBottomSheet.this, usedOnMap);
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
+								null, null, MoveGpxFileBottomSheet.this, usedOnMap);
 					}
 				})
 				.setCustomView(addNewFolderView)
@@ -90,11 +92,14 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		items.add(dividerItem);
 
 		List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, showAllFolders ? null : fileDir);
-		if (showAllFolders || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
-			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
+		File rootDir = app.getAppPath(GPX_INDEX_DIR);
+		File fileDir = srcFile != null ? srcFile.getParentFile() : null;
+
+		collectDirs(rootDir, dirs, excludedDir);
+		if (showAllFolders || fileDir != null && !Algorithms.objectEquals(fileDir, rootDir)) {
+			dirs.add(0, rootDir);
 		}
-		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
+		String gpxDir = rootDir.getPath();
 		for (File dir : dirs) {
 			String dirName = dir.getPath();
 			if (dirName.startsWith(gpxDir)) {
@@ -117,16 +122,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 					.setTitle(capitalizeFirstLetter(dirName))
 					.setIcon(getActiveIcon(R.drawable.ic_action_folder))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment fragment = getTargetFragment();
-							if (fragment instanceof OnTrackFileMoveListener) {
-								OnTrackFileMoveListener listener = (OnTrackFileMoveListener) fragment;
-								listener.onFileMove(file, new File(dir, file.getName()));
-							}
-							dismiss();
-						}
+					.setOnClickListener(v -> {
+						folderSelected(dir);
+						dismiss();
 					})
 					.setTag(dir)
 					.create();
@@ -137,20 +135,28 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(FILE_PATH_KEY, filePath);
+		if (srcFile != null) {
+			outState.putSerializable(SRC_FILE_KEY, srcFile);
+		}
+		if (excludedDir != null) {
+			outState.putSerializable(EXCLUDED_DIR_KEY, excludedDir);
+		}
 		outState.putBoolean(SHOW_ALL_FOLDERS_KEY, showAllFolders);
 	}
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
+		File rootDir = app.getAppPath(GPX_INDEX_DIR);
+		folderSelected(new File(rootDir, folderName));
+		dismiss();
+	}
+
+	private void folderSelected(@NonNull File destDir) {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnTrackFileMoveListener) {
-			File file = new File(filePath);
-			File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName);
-			OnTrackFileMoveListener listener = (OnTrackFileMoveListener) fragment;
-			listener.onFileMove(file, new File(destFolder, file.getName()));
+			File dest = srcFile != null ? new File(destDir, srcFile.getName()) : destDir;
+			((OnTrackFileMoveListener) fragment).onFileMove(srcFile, dest);
 		}
-		dismiss();
 	}
 
 	public List<File> collectFiles(File parentDir) {
@@ -166,23 +172,21 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		return files;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
-		try {
-			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
-				MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
-				fragment.filePath = filePath;
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.showAllFolders = showAllFolders;
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fragmentManager, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable File srcFile,
+	                                @Nullable File excludedDir, @Nullable Fragment target,
+	                                boolean usedOnMap, boolean showAllFolders) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
+			fragment.srcFile = srcFile;
+			fragment.excludedDir = excludedDir;
+			fragment.showAllFolders = showAllFolders;
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 
 	public interface OnTrackFileMoveListener {
-		void onFileMove(@NonNull File src, @NonNull File dest);
+		void onFileMove(@Nullable File src, @NonNull File dest);
 	}
 }

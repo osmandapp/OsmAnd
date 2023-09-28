@@ -22,6 +22,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -39,8 +40,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
@@ -52,7 +55,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private static final String EXPORTING_STARTED_KEY = "exporting_started_key";
 	private static final String PROGRESS_MAX_KEY = "progress_max_key";
 	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
-	private static final String SELECTED_TYPES = "selected_types";
+	public static final String SELECTED_TYPES = "selected_types";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
@@ -86,13 +89,21 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			}
 			Bundle args = getArguments();
 			if (args != null && args.containsKey(SELECTED_TYPES)) {
-				List<String> selectedTypes = args.getStringArrayList(SELECTED_TYPES);
-				if (!Algorithms.isEmpty(selectedTypes)) {
-					for (String type : selectedTypes) {
-						ExportSettingsType settingsType = ExportSettingsType.valueOf(type);
-						List<Object> items = getItemsForType(settingsType);
-						selectedItemsMap.put(settingsType, items);
-					}
+				addSelectedTypes((Map<ExportSettingsType, List<?>>) AndroidUtils.getSerializable(args, SELECTED_TYPES, HashMap.class));
+			}
+		}
+	}
+
+	private void addSelectedTypes(@Nullable Map<ExportSettingsType, List<?>> selectedTypes) {
+		if (!Algorithms.isEmpty(selectedTypes)) {
+			for (Map.Entry<ExportSettingsType, List<?>> entry : selectedTypes.entrySet()) {
+				ExportSettingsType settingsType = entry.getKey();
+				List<?> items = entry.getValue();
+				if (items == null) {
+					items = getItemsForType(settingsType);
+				}
+				if (!Algorithms.isEmpty(items)) {
+					selectedItemsMap.put(settingsType, items);
 				}
 			}
 		}
@@ -103,11 +114,12 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
-		CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.toolbar_layout);
-		toolbarLayout.setTitle(getString(R.string.shared_string_export));
-		TextView description = header.findViewById(R.id.description);
-		description.setText(R.string.select_data_to_export);
-
+		if (view != null) {
+			CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.toolbar_layout);
+			toolbarLayout.setTitle(getString(R.string.shared_string_export));
+			TextView description = header.findViewById(R.id.description);
+			description.setText(R.string.select_data_to_export);
+		}
 		return view;
 	}
 
@@ -144,6 +156,17 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 	}
 
+	@Override
+	protected void dismissFragment() {
+		super.dismissFragment();
+
+		Bundle args = getArguments();
+		MapActivity activity = getMapActivity();
+		if (activity != null && args != null && args.containsKey(SELECTED_TYPES) && !exportingStarted) {
+			activity.launchPrevActivityIntent();
+		}
+	}
+
 	private void updateSelectedProfile() {
 		List<Object> profileItems = getItemsForType(ExportSettingsType.PROFILE);
 		if (!Algorithms.isEmpty(profileItems)) {
@@ -159,16 +182,14 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void prepareFile() {
-		if (app != null) {
-			exportingStarted = true;
-			exportStartTime = System.currentTimeMillis();
-			showExportProgressDialog();
-			File tempDir = FileUtils.getTempDir(app);
-			String fileName = getFileName();
-			List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
-			progress.setMax(getMaxProgress(items));
-			app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
-		}
+		exportingStarted = true;
+		exportStartTime = System.currentTimeMillis();
+		showExportProgressDialog();
+		File tempDir = FileUtils.getTempDir(app);
+		String fileName = getFileName();
+		List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
+		progress.setMax(getMaxProgress(items));
+		app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 	}
 
 	private int getMaxProgress(List<SettingsItem> items) {
@@ -203,21 +224,11 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		progress = new ProgressDialog(context);
 		progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		progress.setCancelable(true);
-		progress.setTitle(app.getString(R.string.shared_string_export));
-		progress.setMessage(app.getString(R.string.shared_string_preparing));
+		progress.setTitle(getString(R.string.shared_string_export));
+		progress.setMessage(getString(R.string.shared_string_preparing));
 		progress.setProgressNumberFormat("%1d/%2d MB");
-		progress.setButton(DialogInterface.BUTTON_NEGATIVE, app.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				cancelExport();
-			}
-		});
-		progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				cancelExport();
-			}
-		});
+		progress.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.shared_string_cancel), (dialog, which) -> cancelExport());
+		progress.setOnCancelListener(dialog -> cancelExport());
 		progress.show();
 	}
 
@@ -234,7 +245,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 					dismissExportProgressDialog();
-					exportingStarted = false;
 					if (succeed) {
 						shareProfile(file);
 						dismissFragment();
@@ -290,35 +300,26 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		sendIntent.setType("*/*");
 		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-		Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+		Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
 		AndroidUtils.startActivityIfSafe(app, chooserIntent);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull ApplicationMode appMode,
-	                                   @Nullable List<ExportSettingsType> selectedTypes,
-	                                   boolean globalExport) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			Bundle args = null;
-			if (!Algorithms.isEmpty(selectedTypes)) {
-				ArrayList<String> types = new ArrayList<>();
-				for (ExportSettingsType type : selectedTypes) {
-					types.add(type.name());
-				}
-				args = new Bundle();
-				args.putStringArrayList(SELECTED_TYPES, types);
-			}
-
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode,
+	                                @Nullable HashMap<ExportSettingsType, List<?>> selectedTypes, boolean globalExport) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
-			fragment.setArguments(args);
-			fragmentManager.beginTransaction().
+
+			if (!Algorithms.isEmpty(selectedTypes)) {
+				Bundle args = new Bundle();
+				args.putSerializable(SELECTED_TYPES, selectedTypes);
+				fragment.setArguments(args);
+			}
+			manager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(SETTINGS_LIST_TAG)
 					.commitAllowingStateLoss();
-			return true;
 		}
-		return false;
 	}
 }

@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,6 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -34,26 +43,17 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -78,12 +78,6 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.street_name_widget;
-	}
-
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_STREET_NAME;
 	}
 
 	public StreetNameWidget(@NonNull MapActivity mapActivity) {
@@ -287,7 +281,7 @@ public class StreetNameWidget extends MapWidget {
 		float xSize = shield.getIntrinsicWidth();
 		float ySize = shield.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
-		//setting view propotions (height is fixed by toolbar size - 48dp);
+		//setting view proportions (height is fixed by toolbar size - 48dp);
 		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
 
@@ -345,7 +339,7 @@ public class StreetNameWidget extends MapWidget {
 
 		int exitRefTextColorId = isNightMode()
 				? R.color.text_color_primary_dark
-				: R.color.color_white;
+				: R.color.card_and_list_background_light;
 		exitRefText.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 
 		ImageView moreImage = waypointInfoBar.findViewById(R.id.waypoint_more);
@@ -357,7 +351,7 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility) {
+		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.recreateTopWidgetsPanel();
@@ -368,22 +362,22 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
+	                       int order, @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
-		boolean specialPosition = specialContainer != null;
-		if (specialPosition) {
+		boolean useSpecialPosition = widgetsPanel == WidgetsPanel.TOP && specialContainer != null;
+		if (useSpecialPosition) {
 			specialContainer.removeAllViews();
 
-			boolean currentLocationVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
-			boolean mapCenterVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopMapCenterCoordinatesWidget();
+			boolean showTopCoordinates = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesBaseWidget && (currentLocationVisible || mapCenterVisible)) {
-					specialPosition = false;
+				if (widget instanceof CoordinatesBaseWidget && showTopCoordinates) {
+					useSpecialPosition = false;
 					break;
 				}
 			}
 		}
-		if (specialPosition) {
+		if (useSpecialPosition) {
 			specialContainer.addView(view);
 		} else {
 			container.addView(view, order);
@@ -391,8 +385,8 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView() {
-		super.detachView();
+	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of StreetNameWidget is lost
 		ViewGroup specialContainer = getSpecialContainer();
 		if (specialContainer != null) {
@@ -427,17 +421,14 @@ public class StreetNameWidget extends MapWidget {
 		}
 
 		private void computeParams() {
-			boolean widgetEnabled = settings.SHOW_STREET_NAME.get();
 			boolean onRoute = routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute();
 			boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			if (onRoute) {
 				if (routingHelper.isFollowingMode()) {
-					if (widgetEnabled) {
-						NextDirectionInfo nextDirInfo =
-								routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-						streetName = routingHelper.getCurrentName(nextDirInfo);
-						turnArrowColorId = R.color.nav_arrow;
-					}
+					NextDirectionInfo nextDirInfo =
+							routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+					streetName = routingHelper.getCurrentName(nextDirInfo);
+					turnArrowColorId = R.color.nav_arrow;
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
 					boolean routeMenuVisible = mapActivity.getMapRouteInfoMenu().isVisible();
@@ -449,7 +440,7 @@ public class StreetNameWidget extends MapWidget {
 						showClosestWaypointFirstInAddress = false;
 					}
 				}
-			} else if (mapLinkedToLocation && widgetEnabled) {
+			} else if (mapLinkedToLocation) {
 				streetName = new CurrentStreetName();
 				OsmAndLocationProvider locationProvider = app.getLocationProvider();
 				RouteDataObject lastKnownSegment = locationProvider.getLastKnownRouteSegment();

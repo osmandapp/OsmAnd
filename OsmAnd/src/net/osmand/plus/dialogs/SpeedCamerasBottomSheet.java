@@ -17,6 +17,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -71,7 +72,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
+	protected DialogButtonType getRightBottomButtonType() {
 		return getDismissButtonType();
 	}
 

@@ -13,7 +13,7 @@ import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapTiledCollectionPoint;
 import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
@@ -118,10 +118,11 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
-		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+		if (isMapRendererLost()) {
 			return new QListMapTiledCollectionPoint();
 		}
+
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
 		OsmandMapLayer.MapLayerData<List<TransportStop>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
@@ -132,7 +133,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
-			if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			if (isMapRendererLost()) {
 				return new QListMapTiledCollectionPoint();
 			}	
 			synchronized (dataReadyCallback.getSync()) {
@@ -146,6 +147,11 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 			}
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
+
+		if (isMapRendererLost()) {
+			return new QListMapTiledCollectionPoint();
+		}
+
 		List<TransportStop> results = dataReadyCallback.getResults();
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
@@ -170,7 +176,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	}
 
 	@Override
-	public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(int index, boolean isFullSize) {
+	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
 		return SwigUtilities.nullSkImage();
 	}
 
@@ -189,6 +195,10 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		return ZoomLevel.MaxZoomLevel;
 	}
 
+	@Override
+	public boolean supportsNaturalObtainDataAsync() {
+		return false;
+	}
 
 	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
@@ -228,7 +238,7 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		}
 
 		@Override
-		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
+		public SingleSkImage getImageBitmap(boolean isFullSize) {
 			Bitmap bitmap;
 			if (isFullSize) {
 				PointImageDrawable pointImageDrawable = null;
@@ -263,5 +273,9 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 		public String getCaption() {
 			return "";
 		}
+	}
+
+	private boolean isMapRendererLost() {
+		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
 	}
 }

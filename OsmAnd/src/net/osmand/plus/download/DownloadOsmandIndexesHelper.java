@@ -4,7 +4,7 @@ import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.plus.download.DownloadActivityType.VOICE_FILE;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.VOICE_DATA;
+import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
@@ -18,6 +18,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.resources.ResourceManager;
 
 import org.apache.commons.logging.Log;
@@ -238,26 +240,29 @@ public class DownloadOsmandIndexesHelper {
 	private static List<IndexItem> listCustomTtsVoiceIndexes(OsmandApplication app, List<AssetEntry> bundledAssets) {
 		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localIndexes = new ArrayList<>();
+		List<LocalItem> localItems = new ArrayList<>();
 		List<IndexItem> customTTS = new ArrayList<>();
 		long installDate = getInstallDate(app);
 
-		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, true, true,
-				app.getResourceManager().getIndexFiles(), null);
-		for (LocalIndexInfo indexInfo : localIndexes) {
-			if (!indexInfo.getFileName().contains("tts")) {
+		ResourceManager resourceManager = app.getResourceManager();
+		if (resourceManager != null) {
+			localIndexHelper.loadVoiceData(voiceDirPath, localItems,
+					true, true, resourceManager.getIndexFiles(), null);
+		}
+		for (LocalItem item : localItems) {
+			if (!item.getFileName().contains("tts")) {
 				continue;
 			}
 			boolean isCustomVoice = true;
 			for (AssetEntry assetEntry : bundledAssets) {
-				if (assetEntry.destination.contains("/" + indexInfo.getFileName() + "/")) {
+				if (assetEntry.destination.contains("/" + item.getFileName() + "/")) {
 					isCustomVoice = false;
 					break;
 				}
 			}
 			if (isCustomVoice) {
-				String fileName = indexInfo.getFileName().replace("-", "_") + ".js";
-				File file = new File(voiceDirPath, indexInfo.getFileName() + "/" + fileName);
+				String fileName = item.getFileName().replace("-", "_") + ".js";
+				File file = new File(voiceDirPath, item.getFileName() + "/" + fileName);
 				IndexItem customVoiceIndex = new AssetIndexItem(fileName, "voice", installDate, "0.1",
 						file.length(), "", file.getPath(), VOICE_FILE);
 				customVoiceIndex.setDownloaded(true);
@@ -272,19 +277,19 @@ public class DownloadOsmandIndexesHelper {
 	public static List<IndexItem> listLocalRecordedVoiceIndexes(OsmandApplication app) {
 		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> localIndexes = new ArrayList<>();
+		List<LocalItem> localItems = new ArrayList<>();
 		List<IndexItem> recordedVoiceList = new ArrayList<>();
 
-		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, true, true,
+		localIndexHelper.loadVoiceData(voiceDirPath, localItems, true, true,
 				app.getResourceManager().getIndexFiles(), null);
-		for (LocalIndexInfo indexInfo : localIndexes) {
-			if (indexInfo.getType() != VOICE_DATA || indexInfo.getFileName().contains("tts")) {
+		for (LocalItem item : localItems) {
+			if (item.getType() != VOICE_DATA || item.getFileName().contains("tts")) {
 				continue;
 			}
 
-			String recordedZipName = indexInfo.getFileName() + "_0" + VOICE_INDEX_EXT_ZIP;
-			String ttsFileName = indexInfo.getFileName() + "_" + TTSVOICE_INDEX_EXT_JS;
-			File ttsFile = new File(voiceDirPath, indexInfo.getFileName() + "/" + ttsFileName);
+			String recordedZipName = item.getFileName() + "_0" + VOICE_INDEX_EXT_ZIP;
+			String ttsFileName = item.getFileName() + "_" + TTSVOICE_INDEX_EXT_JS;
+			File ttsFile = new File(voiceDirPath, item.getFileName() + "/" + ttsFileName);
 			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
 					"", 0, 0, VOICE_FILE, false, null);
@@ -295,23 +300,23 @@ public class DownloadOsmandIndexesHelper {
 		return recordedVoiceList;
 	}
 
-	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {
+	private static IndexFileList downloadIndexesListFromInternet(@NonNull OsmandApplication app) {
 		try {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files");
 			try {
-				String strUrl = ctx.getAppCustomization().getIndexesUrl();
-				long nd = ctx.getAppInitializer().getFirstInstalledDays();
+				String strUrl = app.getAppCustomization().getIndexesUrl();
+				long nd = app.getAppInitializer().getFirstInstalledDays();
 				if (nd > 0) {
 					strUrl += "&nd=" + nd;
 				}
-				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
+				strUrl += "&ns=" + app.getAppInitializer().getNumberOfStarts();
 				try {
-					if (ctx.isUserAndroidIdAllowed()) {
-						strUrl += "&aid=" + ctx.getUserAndroidId();
+					if (app.isUserAndroidIdAllowed()) {
+						strUrl += "&aid=" + app.getUserAndroidId();
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e);
 				}
 				log.info(strUrl);
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
@@ -323,12 +328,12 @@ public class DownloadOsmandIndexesHelper {
 				while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
 						String attrValue = parser.getAttributeValue(null, "type");
-						DownloadActivityType tp = DownloadActivityType.getIndexType(attrValue);
+						DownloadActivityType type = DownloadActivityType.getIndexType(attrValue);
 						// ignore old DEPTH_CONTOUR_FILE
-						if (tp != null && tp != DownloadActivityType.DEPTH_CONTOUR_FILE) {
-							IndexItem it = tp.parseIndexItem(ctx, parser);
-							if (it != null) {
-								result.add(it);
+						if (type != null && type != DownloadActivityType.DEPTH_CONTOUR_FILE) {
+							IndexItem item = type.parseIndexItem(app, parser);
+							if (item != null) {
+								result.add(item);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
 							String mapVersion = parser.getAttributeValue(null, "mapversion");

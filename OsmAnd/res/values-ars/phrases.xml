@@ -302,7 +302,6 @@
     <string name="poi_parking_fee_no">رسوم وقوف السيارات: لا</string>
     <string name="poi_parking_fee_yes">رسوم وقوف السيارات: نعم</string>
     <string name="poi_truck_no">شاحنة: لا</string>
-    <string name="poi_truck_yes">شاحنة: نعم</string>
     <string name="poi_scooter_no">سكوتر: لا</string>
     <string name="poi_scooter_yes">سكوتر: نعم</string>
     <string name="poi_bicycle_no">الدراجة: لا</string>
@@ -327,7 +326,7 @@
     <string name="poi_wildlife_crossing">معبر الحيوانات البرية</string>
     <string name="poi_lavoir">مكان لغسل الملابس يدويا</string>
     <string name="poi_waste_transfer_station">محطة نقل نفايات</string>
-    <string name="poi_weightbridge">ميزان المركبات</string>
+    <string name="poi_weighbridge">ميزان المركبات</string>
     <string name="poi_ranger_station">مكتب الحارس</string>
     <string name="poi_water_source_lake">بحيرة</string>
     <string name="poi_water_source_river">نهر</string>
@@ -346,7 +345,6 @@
     <string name="poi_liaison_representative_office">مكتب تمثيلي</string>
     <string name="poi_liaison_liaison_office">مكتب</string>
     <string name="poi_car_no">السيارة: لا</string>
-    <string name="poi_car_yes">السيارة: نعم</string>
     <string name="poi_socket_as3112_output">المقبس: AS / NZS 3112: الإخراج</string>
     <string name="poi_socket_as3112_current">المقبس: AS / NZS 3112: التيار</string>
     <string name="poi_socket_as3112">المقبس: AS / NZS 3112</string>
@@ -1178,7 +1176,7 @@
     <string name="poi_street_cabinet">كبينة مرافق وخدمات في الشارع</string>
     <string name="poi_firepit">حفرة إشعال نار</string>
     <string name="poi_health_specialty_emergency_medicine_no">التخصصات الصحية: طب الطوارئ والحوادث: لا يوجد</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">طب الطوارئ والحوادث</string>
+    <string name="poi_health_specialty_emergency_yes">طب الطوارئ والحوادث</string>
     <string name="poi_health_specialty_maternity_yes">الأمومة</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">جراحة الأسنان والفم والفك و الوجه</string>
     <string name="poi_health_specialty_pulmonology_yes">طب الجهاز التنفسي</string>
@@ -1199,7 +1197,7 @@
     <string name="poi_health_specialty_paediatrics_yes">طب الأطفال</string>
     <string name="poi_health_specialty_otolaryngology_yes">الأنف والأذن والحنجرة</string>
     <string name="poi_health_specialty_orthopaedics_yes">طب العظام</string>
-    <string name="poi_health_specialty_internal_medicine_yes">طب باطني</string>
+    <string name="poi_health_specialty_internal_yes">طب باطني</string>
     <string name="poi_health_specialty_gynaecology_yes">طب النساء والتوليد</string>
     <string name="poi_health_specialty_ophthalmology_yes">طب العيون</string>
     <string name="poi_health_specialty_general_yes">طبيب عام</string>
@@ -1689,7 +1687,7 @@
     <string name="poi_health_specialty_homeopathy_yes">معالجة المثلية</string>
     <string name="poi_health_specialty_acupuncture_yes">الوخز بالإبر</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">الطب النفسي للكبار</string>
-    <string name="poi_health_specialty_podology_yes">علاج الارجل</string>
+    <string name="poi_health_specialty_podiatry_yes">علاج الارجل</string>
     <string name="poi_health_specialty_sports_medicine_yes">الطب الرياضي</string>
     <string name="poi_health_specialty_manual_therapy_yes">العلاج اليدوي</string>
     <string name="poi_health_specialty_speech_therapy_yes">علاج النطق</string>
@@ -1713,7 +1711,7 @@
     <string name="poi_health_specialty_neuropsychiatry_yes">الطب النفسي العصبي</string>
     <string name="poi_health_specialty_neurosurgery_yes">الجراحة العصبية</string>
     <string name="poi_health_specialty_nephrology_yes">طب وأمراض الكلى</string>
-    <string name="poi_health_specialty_dentistry_yes">طب الأسنان</string>
+    <string name="poi_health_specialty_stomatology_yes">طب الأسنان</string>
     <string name="poi_health_specialty_gastroenterology_yes">أمراض الجهاز الهضمي</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">الأشعة التشخيصية</string>
     <string name="poi_health_specialty_maxillofacial_surgery_yes">جراحة الفك-الوجه</string>

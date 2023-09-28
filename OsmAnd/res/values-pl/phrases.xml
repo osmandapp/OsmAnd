@@ -669,7 +669,7 @@
     <string name="poi_craft_jeweller">Jubiler</string>
     <string name="poi_transport_construction">Roboty drogowe</string>
     <string name="poi_base">Skoki spadochronowe</string>
-    <string name="poi_ice_stock">Ice stock</string>
+    <string name="poi_ice_stock">Curling bawarski</string>
     <string name="poi_artwork">Dzieło sztuki</string>
     <string name="poi_attraction_amusement_ride">Karuzela</string>
     <string name="poi_attraction_animal">Zwierzę (atrakcja)</string>
@@ -2504,7 +2504,7 @@
     <string name="poi_health_specialty_general_yes">Medycyna rodzinna</string>
     <string name="poi_health_specialty_ophthalmology_yes">Okulistyka</string>
     <string name="poi_health_specialty_gynaecology_yes">Ginekologia</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Medycyna wewnętrzna</string>
+    <string name="poi_health_specialty_internal_yes">Medycyna wewnętrzna</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
     <string name="poi_health_specialty_otolaryngology_yes">Otorynolaryngologia</string>
     <string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
@@ -2524,7 +2524,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Pulmonologia</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgia szczękowo-twarzowa</string>
     <string name="poi_health_specialty_maternity_yes">Położnictwo</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Medycyna ratunkowa</string>
+    <string name="poi_health_specialty_emergency_yes">Medycyna ratunkowa</string>
     <string name="poi_health_specialty_emergency_medicine_no">Specjalizacja: medycyna ratunkowa: nie</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plastyczna</string>
     <string name="poi_health_specialty_orthodontics_yes">Ortodoncja</string>
@@ -2536,7 +2536,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Chirurgia szczękowo-twarzowa</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Obrazowanie medyczne</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
-    <string name="poi_health_specialty_dentistry_yes">Stomatologia</string>
+    <string name="poi_health_specialty_stomatology_yes">Stomatologia</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrologia</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurochirurgia</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatria</string>
@@ -2560,7 +2560,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Logopedia</string>
     <string name="poi_health_specialty_manual_therapy_yes">Terapia manualna</string>
     <string name="poi_health_specialty_sports_medicine_yes">Medycyna sportowa</string>
-    <string name="poi_health_specialty_podology_yes">Podologia</string>
+    <string name="poi_health_specialty_podiatry_yes">Podologia</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Psychiatria dorosłych</string>
     <string name="poi_health_specialty_acupuncture_yes">Akupunktura</string>
     <string name="poi_health_specialty_homeopathy_yes">Homeopatia</string>
@@ -3285,13 +3285,11 @@
     <string name="poi_socket_as3112">Wtyczka: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Wtyczka: AS/NZS 3112, natężenie</string>
     <string name="poi_socket_as3112_output">Wtyczka: AS/NZS 3112, moc</string>
-    <string name="poi_car_yes">Samochód: tak</string>
     <string name="poi_car_no">Samochód: nie</string>
     <string name="poi_bicycle_yes">Rower: tak</string>
     <string name="poi_bicycle_no">Rower: nie</string>
     <string name="poi_scooter_yes">Skuter: tak</string>
     <string name="poi_scooter_no">Skuter: nie</string>
-    <string name="poi_truck_yes">Ciężarówka: tak</string>
     <string name="poi_truck_no">Ciężarówka: nie</string>
     <string name="poi_parking_fee_yes">Tak</string>
     <string name="poi_parking_fee_no">Nie</string>
@@ -3856,7 +3854,7 @@
     <string name="poi_health_specialty_vaccination_yes">Szczepienia</string>
     <string name="poi_swimming_area">Kąpielisko</string>
     <string name="poi_waste_transfer_station">Stacja przeładunkowa odpadów</string>
-    <string name="poi_weightbridge">Most ciężarowy;Waga samochodowa</string>
+    <string name="poi_weighbridge">Most ciężarowy;Waga samochodowa</string>
     <string name="poi_ranger_station">Strażnica</string>
     <string name="poi_water_source_powered_pump">Pompa zasilana</string>
     <string name="poi_water_source_water_works">Zakład wodociągowy</string>
@@ -4495,7 +4493,6 @@
     <string name="poi_recycling_textiles">Tekstylia</string>
     <string name="poi_waste_rubble">Gruz</string>
     <string name="poi_barrier_planter">Donica</string>
-    <string name="poi_barrier_spikes">Kolce</string>
     <string name="poi_self_checkout">Kasa samoobsługowa</string>
     <string name="poi_waste_accepted">Przyjmowane odpady</string>
     <string name="poi_water_filter">Woda;Woda pitna</string>

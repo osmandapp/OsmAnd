@@ -55,8 +55,9 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 		view.findViewById(R.id.create_button).setOnClickListener(v -> {
 			menuLayer.createGpxPoint();
 			if (pointDescription.isWpt()) {
+				RotatedTileBox tileBox = mapActivity.getMapView().getRotatedTileBox();
 				GPXFile gpx = newGpxPoint.getGpx();
-				LatLon latLon = getSelectedLatLon();
+				LatLon latLon = menuLayer.getMovableCenterLatLon(tileBox);
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
 					editor.setOnDismissListener(this);
@@ -70,14 +71,6 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			menuLayer.cancelAddGpxPoint();
 			onClose();
 		});
-	}
-
-	@NonNull
-	private LatLon getSelectedLatLon() {
-		RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-		PointF point = menuLayer.getMovableCenterPoint(tileBox);
-		return NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(),
-				tileBox, point.x, point.y);
 	}
 
 	public void onDraw(@NonNull RotatedTileBox tileBox) {

@@ -10,16 +10,9 @@ import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
-
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET;
-	}
 
 	public CoordinatesCurrentLocationWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, COORDINATES_CURRENT_LOCATION);
@@ -27,14 +20,14 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
+		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 		updateVisibility(visible);
 		if (visible) {
-			Location lastKnownLocation = locationProvider.getLastKnownLocation();
-			if (lastKnownLocation == null) {
+			Location location = locationProvider.getLastKnownLocation();
+			if (location == null) {
 				showSearchingGpsMessage();
 			} else {
-				showFormattedCoordinates(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+				showFormattedCoordinates(location.getLatitude(), location.getLongitude());
 			}
 		}
 	}

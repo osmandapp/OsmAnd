@@ -4,6 +4,8 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	android:background="?attr/card_and_list_background_basic"
+	android:clickable="true"
+	android:focusable="true"
 	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto">
 

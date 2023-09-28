@@ -4,7 +4,6 @@ import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetails
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
 import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -42,7 +41,7 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -92,8 +91,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		accountName = sendOsmNoteView.findViewById(R.id.user_name);
 		updateAccountName();
 		View signInButton = sendOsmNoteView.findViewById(R.id.sign_in_button);
-		setupButton(signInButton, R.string.sign_in_with_open_street_map, DialogButtonType.PRIMARY,
-				R.drawable.ic_action_openstreetmap_logo);
+		setupButtonIcon(signInButton, R.drawable.ic_action_openstreetmap_logo);
 		signInButton.setOnClickListener(v -> {
 			Fragment fragment = getParentFragment();
 			if (fragment instanceof OsmAuthorizationListener) {
@@ -102,7 +100,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 			app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
 		});
 		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
-		setupButton(loginButton, R.string.use_login_password, DialogButtonType.SECONDARY, -1);
 		loginButton.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -156,14 +153,13 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		signInView.setVisibility(isChecked || isLogged ? View.GONE : View.VISIBLE);
 	}
 
-	private void setupButton(View buttonView, int buttonTextId, DialogButtonType buttonType, int drawableId) {
+	private void setupButtonIcon(View buttonView, int drawableId) {
 		Drawable icon = null;
 		if (drawableId != -1) {
 			icon = app.getUIUtilities().getIcon(drawableId, R.color.popup_text_color);
 		}
 		TextView buttonText = buttonView.findViewById(R.id.button_text);
 		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(buttonText, icon, null, null, null);
-		setupDialogButton(nightMode, buttonView, buttonType, buttonTextId);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull OsmPoint[] points) {

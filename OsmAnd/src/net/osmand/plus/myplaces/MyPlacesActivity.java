@@ -1,10 +1,9 @@
 package net.osmand.plus.myplaces;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,23 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -40,19 +34,13 @@ import java.util.List;
  */
 public class MyPlacesActivity extends TabActivity {
 
-	private static final Log LOG = PlatformUtil.getLog(MyPlacesActivity.class);
-
-	public static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
-	public static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
 	public static final String TAB_ID = "selected_tab_id";
 
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
-	private ImportHelper importHelper;
 
 	private ViewPager viewPager;
 	private List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
@@ -62,21 +50,15 @@ public class MyPlacesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		settings = app.getSettings();
-		importHelper = new ImportHelper(this);
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
 
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setTitle(R.string.shared_string_my_places);
-			actionBar.setElevation(0);
-		}
-
-		setContentView(R.layout.tab_content);
+		updateToolbar();
+		setContentView(R.layout.my_places);
 		viewPager = findViewById(R.id.pager);
 
 		List<TabItem> tabItems = getTabItems();
@@ -99,50 +81,12 @@ public class MyPlacesActivity extends TabActivity {
 		}
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
-			if (data != null) {
-				Uri uri = data.getData();
-				AvailableGPXFragment fragment = getGpxFragment();
-				if (fragment != null) {
-					fragment.startImport();
-				}
-				importHelper.setGpxImportListener(new GpxImportListener() {
-					@Override
-					public void onImportComplete(boolean success) {
-						AvailableGPXFragment fragment = getGpxFragment();
-						if (fragment != null) {
-							fragment.finishImport(success);
-						}
-						importHelper.setGpxImportListener(null);
-					}
-				});
-				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
-					if (fragment != null) {
-						fragment.finishImport(false);
-					}
-				}
-			}
-		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
-			if (data != null && data.getData() != null) {
-				importHelper.handleFavouritesImport(data.getData());
-			}
-		} else {
-			super.onActivityResult(requestCode, resultCode, data);
+	public void updateToolbar() {
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(R.string.shared_string_my_places);
+			actionBar.setElevation(0);
 		}
-	}
-
-	@Nullable
-	private AvailableGPXFragment getGpxFragment() {
-		AvailableGPXFragment gpxFragment = null;
-		for (WeakReference<FragmentStateHolder> fragmentStateHolder : fragmentsStateList) {
-			FragmentStateHolder frag = fragmentStateHolder.get();
-			if (frag instanceof AvailableGPXFragment) {
-				gpxFragment = (AvailableGPXFragment) frag;
-			}
-		}
-		return gpxFragment;
 	}
 
 	private void setTabs(@NonNull List<TabItem> tabItems) {
@@ -164,7 +108,7 @@ public class MyPlacesActivity extends TabActivity {
 	private List<TabItem> getTabItems() {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
-		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
+		mTabs.add(getTabIndicator(GPX_TAB, AvailableTracksFragment.class));
 		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
 	}
@@ -214,10 +158,37 @@ public class MyPlacesActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == android.R.id.home) {
-			finish();
+			onBackPressed();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			boolean isTabFragment = false;
+			for (TabItem tabItem : getTabItems()) {
+				if (fragment.getClass() == tabItem.fragment) {
+					isTabFragment = true;
+					break;
+				}
+			}
+			if (!isTabFragment) {
+				fragmentsWithoutTabs.add(fragment);
+			}
+		}
+		return fragmentsWithoutTabs;
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		View pagerContent = findViewById(R.id.pager_content);
+		View slidingTabs = findViewById(R.id.sliding_tabs);
+		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+		pagerContent.setImportantForAccessibility(accessibility);
+		slidingTabs.setImportantForAccessibility(accessibility);
 	}
 
 	public void showOnMap(@Nullable FragmentStateHolder fragment, double latitude, double longitude,
@@ -225,5 +196,18 @@ public class MyPlacesActivity extends TabActivity {
 		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
 		MapActivity.launchMapActivityMoveToTop(this, bundle);
+	}
+
+	public void showOsmAndCloud(@Nullable FragmentStateHolder fragment) {
+		Bundle bundle = fragment != null ? fragment.storeState() : null;
+		Bundle openScreenArguments = new Bundle();
+		openScreenArguments.putBoolean(BackupAuthorizationFragment.OPEN_BACKUP_AUTH, true);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, openScreenArguments);
+	}
+
+	@Nullable
+	public <T> T getFragment(String fragmentTag) {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}
 }

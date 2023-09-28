@@ -2628,7 +2628,7 @@
     <string name="poi_health_specialty_general_yes">Општа пракса</string>
     <string name="poi_health_specialty_ophthalmology_yes">Офтамологија</string>
     <string name="poi_health_specialty_gynaecology_yes">Гинекологија</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Интерно</string>
+    <string name="poi_health_specialty_internal_yes">Интерно</string>
     <string name="poi_health_specialty_orthopaedics_yes">Ортопедија</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оториноларингологија</string>
     <string name="poi_health_specialty_paediatrics_yes">Педијатрија</string>
@@ -2647,7 +2647,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Пулмологија</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Зубна, орална и максилофацијална хирургија</string>
     <string name="poi_health_specialty_maternity_yes">Породиљско</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Ургентна медицина</string>
+    <string name="poi_health_specialty_emergency_yes">Ургентна медицина</string>
     <string name="poi_health_specialty_emergency_medicine_no">Медицинска специјализација: ургентна медицина: не</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Пластична хирургија</string>
     <string name="poi_health_specialty_physiotherapy_yes">Физиотерапија</string>
@@ -2657,7 +2657,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Максилофацијална хирургија</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Медицинско снимање</string>
     <string name="poi_health_specialty_gastroenterology_yes">Гастроентерологија</string>
-    <string name="poi_health_specialty_dentistry_yes">Стоматологија</string>
+    <string name="poi_health_specialty_stomatology_yes">Стоматологија</string>
     <string name="poi_health_specialty_nephrology_yes">Нефрологија (реналне болести)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Неурохирургија</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Неуропсихијатрија</string>
@@ -2801,7 +2801,7 @@
     <string name="poi_forestry_compartment">Показивач: шумарско одељење</string>
     <string name="poi_disc_golf">Диск голф</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Психијатрија за одрасле</string>
-    <string name="poi_health_specialty_podology_yes">Подологија</string>
+    <string name="poi_health_specialty_podiatry_yes">Подологија</string>
     <string name="poi_health_specialty_orthodontics_yes">Ортодонија</string>
     <string name="poi_health_specialty_dermatovenereology_yes">Дермато-венереологија</string>
     <string name="poi_traffic_signals_arrow">Стрелица</string>
@@ -3474,13 +3474,11 @@
     <string name="poi_parking_fee_no">Цена паркирања: не</string>
     <string name="poi_parking_fee_yes">Цена паркирања: да</string>
     <string name="poi_truck_no">Камион: не</string>
-    <string name="poi_truck_yes">Камион: да</string>
     <string name="poi_scooter_no">Скутер: не</string>
     <string name="poi_scooter_yes">Скутер: да</string>
     <string name="poi_bicycle_no">Бицикл: не</string>
     <string name="poi_bicycle_yes">Бицикл: да</string>
     <string name="poi_car_no">Аутомобил: не</string>
-    <string name="poi_car_yes">Аутомобил: да</string>
     <string name="poi_socket_as3112_output">Утичница: АС / НЗС 3112: излаз</string>
     <string name="poi_socket_as3112_current">Утичница: АС / НЗС 3112: струја</string>
     <string name="poi_socket_as3112">Утичница: АС / НЗС 3112</string>
@@ -3895,7 +3893,7 @@
     <string name="poi_swimming_area">Део за пливање</string>
     <string name="poi_lavoir">Појило</string>
     <string name="poi_waste_transfer_station">Станица за пренос отпада</string>
-    <string name="poi_weightbridge">Теретни мост; Колска вага</string>
+    <string name="poi_weighbridge">Теретни мост; Колска вага</string>
     <string name="poi_ranger_station">Шумарска станица</string>
     <string name="poi_water_source_tube_well">Цевни бунар</string>
     <string name="poi_water_source_well">Бунар</string>
@@ -4040,7 +4038,6 @@
     <string name="poi_reusable_packaging_offer_no">Понуда паковања за вишекратну употребу: не</string>
     <string name="poi_country_store">Пољопривредна продавница</string>
     <string name="poi_prep_school">Школа курсева</string>
-    <string name="poi_callable">Позивно</string>
     <string name="poi_computer_sales">Продаја рачунара</string>
     <string name="poi_computer_parts">Делови за рачунаре</string>
     <string name="poi_wine_type">Врста; Винска врста</string>
@@ -4063,8 +4060,6 @@
     <string name="poi_payment_reverse_charge_calls_no">Позиви са обрнутим задужењем: не</string>
     <string name="poi_payment_calling_cards_yes">Прихватају се позивне картице</string>
     <string name="poi_payment_reverse_charge_calls_yes">Позиви са обрнутим задужењем: да</string>
-    <string name="poi_callable_yes">Да; Позивно</string>
-    <string name="poi_callable_no">Не</string>
     <string name="poi_groundskeeping">Комунална продавница</string>
     <string name="poi_ticket_validator">Валидатор карата</string>
     <string name="poi_geoglyph">Геоглиф</string>

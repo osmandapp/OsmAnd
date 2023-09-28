@@ -15,10 +15,8 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;
@@ -27,46 +25,33 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
-	private OsmandApplication app;
+	private static final String TRACK_TAB_NAME_KEY = "track_tab_name_key";
 
-	private TrackTab trackTab;
+	private String trackTabName;
 	private TracksAdapter adapter;
+	private RecyclerView recyclerView;
 
 	private Location location;
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private boolean nightMode;
 
-	public TrackTab getTrackTab() {
-		return trackTab;
-	}
-
-	public void setTrackTab(@NonNull TrackTab trackTab) {
-		this.trackTab = trackTab;
-	}
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = isNightMode(true);
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.recycler_view_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
-		TracksFragment fragment = (TracksFragment) requireParentFragment();
-		adapter = new TracksAdapter(app, trackTab, fragment, nightMode);
-
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setItemAnimator(null);
-		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -75,19 +60,44 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 			}
 		});
 
+		TrackTab trackTab = getTrackTab();
+		if (trackTab != null) {
+			setupAdapter(trackTab);
+		}
 		return view;
+	}
+
+	private void setupAdapter(@NonNull TrackTab trackTab) {
+		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		adapter = new TracksAdapter(app, trackTab, fragment, nightMode);
+		recyclerView.setAdapter(adapter);
+	}
+
+	@Nullable
+	public TrackTab getTrackTab() {
+		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		return fragment.getTab(trackTabName);
+	}
+
+	public void setTrackTab(@NonNull TrackTab trackTab) {
+		this.trackTabName = trackTab.getTypeName();
 	}
 
 	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
-		adapter.onTrackItemsSelected(trackItems);
+		if (adapter != null) {
+			adapter.onTrackItemsSelected(trackItems);
+		}
 	}
 
 	@Override
 	public void updateContent() {
-		TracksFragment fragment = (TracksFragment) requireParentFragment();
-		SelectedTracksHelper selectedTrackHelper = fragment.getSelectedTracksHelper();
-		adapter.setTrackTab(selectedTrackHelper.getTrackTabs().get(trackTab.getTypeName()));
+		TrackTab trackTab = getTrackTab();
+		if (adapter != null) {
+			adapter.setTrackTab(trackTab);
+		} else if (trackTab != null) {
+			setupAdapter(trackTab);
+		}
 	}
 
 	@Override
@@ -100,6 +110,12 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(TRACK_TAB_NAME_KEY, trackTabName);
 	}
 
 	@Override

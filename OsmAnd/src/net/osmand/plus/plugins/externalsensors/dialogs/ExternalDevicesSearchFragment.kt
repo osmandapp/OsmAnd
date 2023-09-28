@@ -15,14 +15,16 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ScanDevicesListener
 import net.osmand.plus.plugins.externalsensors.adapters.FoundDevicesAdapter
+import net.osmand.plus.plugins.externalsensors.adapters.FoundDevicesAdapter.DeviceClickListener
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 
-class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
-    ScanDevicesListener,
-    FoundDevicesAdapter.DeviceClickListener {
+class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener,
+    DeviceClickListener {
+
     private var currentState = SearchStates.NOTHING_FOUND
     private var stateNoBluetoothView: View? = null
     private var stateSearchingView: View? = null
@@ -35,8 +37,8 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
 
     companion object {
         val TAG: String = Companion::class.java.simpleName
-        private const val BLE_SEARCH_KEY : String = "BLE_SEARCH"
-        private const val ANT_SEARCH_KEY : String = "ANT_SEARCH"
+        private const val BLE_SEARCH_KEY: String = "BLE_SEARCH"
+        private const val ANT_SEARCH_KEY: String = "ANT_SEARCH"
         fun showInstance(manager: FragmentManager, bleSearch: Boolean, antSearch: Boolean) {
             if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
                 val fragment = ExternalDevicesSearchFragment()
@@ -49,7 +51,10 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
                 }
                 fragment.arguments = args
                 fragment.retainInstance = true
-                fragment.show(manager, TAG)
+                manager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment, TAG)
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
             }
         }
     }
@@ -68,14 +73,9 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
 
     private fun setupNoBluetoothView(parentView: View) {
         stateNoBluetoothView = parentView.findViewById(R.id.state_no_bluetooth)
-        val openSettingButton = stateNoBluetoothView?.findViewById<View>(R.id.dismiss_button)
-        val buttonTextId = R.string.ant_plus_open_settings
-        UiUtilities.setupDialogButton(
-            nightMode,
-            openSettingButton,
-            UiUtilities.DialogButtonType.SECONDARY,
-            buttonTextId
-        )
+        val openSettingButton = stateNoBluetoothView?.findViewById<DialogButton>(R.id.dismiss_button)
+        openSettingButton?.setButtonType(SECONDARY)
+        openSettingButton?.setTitleId(R.string.ant_plus_open_settings)
         openSettingButton?.setOnClickListener {
             val intentOpenBluetoothSettings = Intent()
             intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
@@ -92,14 +92,9 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
 
     private fun setupNothingFoundView(parentView: View) {
         stateNothingFoundView = parentView.findViewById(R.id.state_nothing_found)
-        val searchAgain = stateNothingFoundView?.findViewById<View>(R.id.dismiss_button)
-        val buttonTextId = R.string.ble_search_again
-        UiUtilities.setupDialogButton(
-            nightMode,
-            searchAgain,
-            UiUtilities.DialogButtonType.SECONDARY,
-            buttonTextId
-        )
+        val searchAgain = stateNothingFoundView?.findViewById<DialogButton>(R.id.dismiss_button)
+        searchAgain?.setButtonType(SECONDARY)
+        searchAgain?.setTitleId(R.string.ble_search_again)
         searchAgain?.setOnClickListener {
             setCurrentState(SearchStates.SEARCHING)
             startSearch()
@@ -118,14 +113,18 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
     }
 
     private fun bindFoundDevices() {
-        val devices = plugin.devices
-        val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
-        formatString?.let {
-            foundDevicesCountView?.text =
-                String.format(formatString, devices.size)
+        val devices = plugin.unpairedDevices
+        if (devices.isEmpty()) {
+            setCurrentState(SearchStates.NOTHING_FOUND)
+        } else {
+            setCurrentState(SearchStates.DEVICES_LIST)
+            val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
+            formatString?.let {
+                foundDevicesCountView?.text =
+                    String.format(formatString, devices.size)
+            }
+            adapter.setItems(devices)
         }
-        adapter.setItems(devices)
-
     }
 
     override fun onCreateView(
@@ -145,7 +144,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentState = if (!plugin.isBlueToothEnabled) {
+        currentState = if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
             SearchStates.NO_BLUETOOTH
         } else {
             SearchStates.SEARCHING
@@ -154,6 +153,10 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
 
     override fun onResume() {
         super.onResume()
+        if (currentState == SearchStates.NO_BLUETOOTH && AndroidUtils.isBluetoothEnabled(
+                requireActivity())) {
+            setCurrentState(SearchStates.SEARCHING)
+        }
         if (currentState == SearchStates.SEARCHING) {
             startSearch()
         } else if (currentState == SearchStates.DEVICES_LIST) {
@@ -212,12 +215,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
     }
 
     override fun onScanFinished(foundDevices: List<AbstractDevice<out AbstractSensor>>) {
-        if (foundDevices.isEmpty()) {
-            setCurrentState(SearchStates.NOTHING_FOUND)
-        } else {
-            setCurrentState(SearchStates.DEVICES_LIST)
-            bindFoundDevices()
-        }
+        bindFoundDevices()
     }
 
     internal enum class SearchStates {

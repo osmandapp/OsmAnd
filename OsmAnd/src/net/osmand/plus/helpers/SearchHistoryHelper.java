@@ -83,11 +83,16 @@ public class SearchHistoryHelper {
 
 	@NonNull
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
-		return getHistoryEntries(onlyPoints, false);
+		return getHistoryEntries(null, onlyPoints, false);
 	}
 
 	@NonNull
-	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints, boolean includeDeleted) {
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints) {
+		return getHistoryEntries(source, onlyPoints, false);
+	}
+
+	@NonNull
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints, boolean includeDeleted) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
@@ -96,7 +101,7 @@ public class SearchHistoryHelper {
 			PointDescription description = entry.getName();
 
 			boolean exists = isPointDescriptionExists(description);
-			if (includeDeleted || exists) {
+			if ((includeDeleted || exists) && (source == null || entry.source == source)) {
 				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
 					entries.add(entry);
 				}
@@ -123,11 +128,9 @@ public class SearchHistoryHelper {
 		List<SearchResult> searchResults = new ArrayList<>();
 
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
-		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
+		for (HistoryEntry entry : getHistoryEntries(source, onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if (source == null || entry.source == source) {
-				searchResults.add(result);
-			}
+			searchResults.add(result);
 		}
 		return searchResults;
 	}
@@ -166,7 +169,7 @@ public class SearchHistoryHelper {
 			if (pd.isCustomPoiFilter()) {
 				app.getPoiFilters().markHistory(pd.getName(), false);
 			}
-			loadedEntries.remove(model);
+			loadedEntries = Algorithms.removeFromList(loadedEntries, model);
 			mp.remove(pd);
 		}
 	}
@@ -175,7 +178,7 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
 			app.getPoiFilters().clearHistory();
-			loadedEntries.clear();
+			loadedEntries = new ArrayList<>();
 			mp.clear();
 		}
 	}
@@ -183,8 +186,7 @@ public class SearchHistoryHelper {
 	private HistoryItemDBHelper checkLoadedEntries() {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
-			loadedEntries = helper.getEntries();
-			Collections.sort(loadedEntries, new HistoryEntryComparator());
+			loadedEntries = sortHistoryEntries(helper.getEntries());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
@@ -200,7 +202,7 @@ public class SearchHistoryHelper {
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.update(model);
 			} else {
-				loadedEntries.add(model);
+				loadedEntries = Algorithms.addToList(loadedEntries, model);
 				mp.put(model.getName(), model);
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.add(model);
@@ -218,29 +220,44 @@ public class SearchHistoryHelper {
 
 	public void updateEntriesList() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		Collections.sort(loadedEntries, new HistoryEntryComparator());
-		while (loadedEntries.size() > HISTORY_LIMIT) {
-			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
-				loadedEntries.remove(loadedEntries.size() - 1);
+		List<HistoryEntry> historyEntries = sortHistoryEntries(loadedEntries);
+
+		while (historyEntries.size() > HISTORY_LIMIT) {
+			int lastIndex = historyEntries.size() - 1;
+			if (helper.remove(historyEntries.get(lastIndex))) {
+				historyEntries.remove(lastIndex);
 			}
 		}
+		loadedEntries = historyEntries;
 	}
 
-	private void addItemToHistoryWithReplacement(HistoryEntry model) {
+	private void addItemToHistoryWithReplacement(@NonNull HistoryEntry model) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
+		List<HistoryEntry> historyEntries = new ArrayList<>(loadedEntries);
+
 		PointDescription name = model.getName();
 		if (mp.containsKey(name)) {
 			HistoryEntry oldModel = mp.remove(name);
-			loadedEntries.remove(oldModel);
+			historyEntries.remove(oldModel);
 			helper.remove(model);
 		}
-		loadedEntries.add(model);
+		historyEntries.add(model);
+		loadedEntries = historyEntries;
+
 		mp.put(name, model);
 		helper.add(model);
 	}
 
-	public HistoryEntry getEntryByName(PointDescription pd) {
-		return mp != null && pd != null ? mp.get(pd) : null;
+	@Nullable
+	public HistoryEntry getEntryByName(@Nullable PointDescription pd) {
+		return pd != null ? mp.get(pd) : null;
+	}
+
+	@NonNull
+	private List<HistoryEntry> sortHistoryEntries(@NonNull List<HistoryEntry> historyEntries) {
+		List<HistoryEntry> entries = new ArrayList<>(historyEntries);
+		Collections.sort(entries, new HistoryEntryComparator());
+		return entries;
 	}
 
 	public static class HistoryEntry {

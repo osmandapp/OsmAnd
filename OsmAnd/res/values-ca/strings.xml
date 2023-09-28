@@ -166,7 +166,6 @@
     <string name="routing_settings">Navegació</string>
     <string name="routing_settings_descr">Especifiqueu les opcions de navegació.</string>
     <string name="global_settings">Paràmetres globals</string>
-    <string name="index_settings">Gestió de fitxers de mapes</string>
     <string name="general_settings">Paràmetres generals</string>
     <string name="general_settings_descr">Configureu els paràmetres generals i de visualització de l\'aplicació.</string>
     <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
@@ -680,7 +679,7 @@
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="osm_editing_plugin_description">Feu contribucions a OpenStreetMap, una comunitat global que manté un mapa global del món i proporciona dades de codi obert actualitzades a tots els usuaris.
 \n
-\nPodeu trobar instruccions sobre com editar el mapa al nostre lloc web https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPodeu trobar instruccions sobre com editar el mapa al nostre lloc web %1$s.</string>
     <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat, s\'usarà la llengua del TTS per defecte. Voleu buscar un altre motor TTS a la botiga\?</string>
     <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
     <string name="old_map_index_is_not_supported">Format de mapa «{0}» obsolet, no s\'admet</string>
@@ -850,8 +849,6 @@
     <string name="audionotes_location_not_defined">Premeu «Usa localització…» per afegir una nota a la localització.</string>
     <string name="audionotes_plugin_description">Feu notes d\'àudio/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament al menú de localització contextual.</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
-    <string name="index_srtm_parts">peces</string>
-    <string name="index_srtm_ele">Línies de nivell</string>
     <string name="srtm_plugin_name">Corbes de nivell</string>
     <string name="download_roads_only_item">Carreteres</string>
     <string name="download_regular_maps">Mapes estàndards</string>
@@ -887,7 +884,7 @@
 \n
 \nLes dades subjacents provenen de SRTM i ASTER.
 \n
-\nMés informació a http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nMés informació a %1$s.</string>
     <string name="rendering_attr_showRoadMaps_description">Trieu quan mostrar mapes de carreteres i prou:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1268,8 +1265,6 @@
     <string name="rendering_attr_subwayMode_name">Rutes de metro</string>
     <string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
-    <string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
-    <string name="rendering_attr_alpineHiking_description">Representació dels camins segons l\'escala SAC (Club Alpí Suís).</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutes de senderisme</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Representació dels camins segons les traces OSMC (símbols de colors).</string>
     <string name="arrival_distance_factor_early">Aviat</string>
@@ -1293,7 +1288,7 @@
     <string name="shared_string_all">Tot</string>
     <string name="record_plugin_description">Enregistreu els vostres viatges o entrenaments i analitzeu les dades en termes de velocitat, ascensos i descensos acumulats, perfil d\'elevació, etc. Les pistes gravades es poden arxivar, compartir amb els amics, editar i processar posteriorment.
 \n
-\nMés informació a https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nMés informació a %1$s.</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1495,7 +1490,7 @@
     <string name="shared_string_address">Adreça</string>
     <string name="plugin_nautical_descr">Enriqueix el teu mapa amb informació sobre rutes de navegació, llums de navegació, zones de perill nàutic, zones amb restriccions de navegació o atracament, etc. Per utilitzar-lo, descarrega els respectius mapes nàutics i activa l\'estil \"Mapa nàutic\" a \"Configurar mapa\".
 \n
-\nMés informació a https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nMés informació a %1$s.</string>
     <string name="plugin_ski_descr">Dissenyat per navegar per zones d\'esports d\'hivern: veure pistes d\'esquí i remuntadors, i pistes d\'esquí de fons, amb línies de colors que indiquen els nivells de dificultat. Per utilitzar-lo, activeu aquest connector i aneu també a \"Configura el mapa\" i trieu l\'estil de mapa \"Hivern i esquí\".</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistent cartogràfic per OSM</string>
     <string name="shared_string_manage">Gestiona</string>
@@ -1664,7 +1659,6 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Corbes de nivell desactivades</string>
     <string name="show_free_version_banner">Mostra bàner de la versió gratuïta</string>
     <string name="show_free_version_banner_description">Mostra el bàner de la versió gratuïta encara que sigui la versió de pagament.</string>
     <string name="downloading_number_of_files">Baixada - %1$d fitxer…</string>
@@ -1720,7 +1714,7 @@
     <string name="techical_articles_item">Articles tècnics</string>
     <string name="versions_item">Versions</string>
     <string name="feedback">Comentaris</string>
-    <string name="contact_us">Contacte</string>
+    <string name="shared_string_contact">Contacte</string>
     <string name="map_legend">Llegenda del mapa</string>
     <string name="shared_string_update">Actualitza</string>
     <string name="rendering_attr_showProposed_name">Objectes proposats</string>
@@ -2698,7 +2692,6 @@
     <string name="wikivoyage_offline">Viquiviatges sense connexió</string>
     <string name="unlimited_downloads">Baixades il·limitades</string>
     <string name="wikipedia_offline">Viquipèdia sense connexió</string>
-    <string name="contour_lines_hillshade_maps">Mapes amb corbes de nivell i ombrejat de relleu</string>
     <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
     <string name="shared_string_wikivoyage">Viquiviatges</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
@@ -3174,7 +3167,6 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB utilitzats</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB utilitzats</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB utilitzats</string>
-    <string name="contour_lines_and_hillshade">Corbes de nivell i ombrejat de relleu</string>
     <string name="routing_attr_prefer_unpaved_name">Prefereix carreteres sense asfaltar</string>
     <string name="routing_attr_prefer_unpaved_description">Prefereix carreteres sense asfaltar.</string>
     <string name="update_all_maps">Actualitza tots els mapes</string>
@@ -3226,7 +3218,7 @@
     <string name="rendering_attr_piste_type_hike_name">Senderisme</string>
     <string name="default_speed_dialog_msg">Estima l\'hora d\'arribada per tipus de carretera desconeguts i limita la velocitat a totes les vies (podria afectar la ruta)</string>
     <string name="shared_string_other">Altres</string>
-    <string name="shared_sting_tiles">Tessel·les</string>
+    <string name="shared_string_tiles">Tessel·les</string>
     <string name="export_profile">Exporta el perfil</string>
     <string name="exported_osmand_profile">Perfil d\'OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">«%1$s» ja existeix. El voleu sobreescriure\?</string>
@@ -3677,7 +3669,6 @@
     <string name="monitoring_min_accuracy">Precisió mínima</string>
     <string name="monitoring_min_speed">Velocitat mínima</string>
     <string name="monitoring_notification">Notificació</string>
-    <string name="live_monitoring_adress_descr">Especifiqueu l\'adreça web amb la sintaxi de paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitud={4}, velocitat={5}, càrrega={6}.</string>
     <string name="live_monitoring_adress">Adreça web</string>
     <string name="sort_last_modified">Darrera modificació</string>
     <string name="sort_name_descending">Nom: Z - A</string>
@@ -3801,8 +3792,6 @@
     <string name="copy_poi_name">Copia el nom del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/amaga</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Amaga reserves naturals, àrees protegides i delimitacions de parcs nacionals</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteres naturals</string>
     <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
     <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
     <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
@@ -3867,7 +3856,6 @@
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="shared_string_precision">Precisió</string>
     <string name="gps_filter_precision">Precisió mínima del GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_hide_all">Amaga-ho tot</string>
     <string name="files_remaining">Fitxers restants: %1$s %2$s</string>
     <string name="copying_file">Copiant fitxer %1$s…</string>
@@ -4127,7 +4115,7 @@
 \n- ginys basats en ubicació
 \n- isolínies de temperatura / de pressió
 \n
-\nLes dades meteorològiques són proporcionades per Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nLes dades meteorològiques són proporcionades per Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_contours">Contorns</string>
     <string name="empty_screen_weather_contours">Activeu-ho per a mostrar els contorns meteorològics en el mapa.</string>
     <string name="empty_screen_weather_wind_layer">Activeu-ho per a mostrar la cap de ventositat en el mapa.</string>
@@ -4279,7 +4267,6 @@
     <string name="select_layer">Selecciona una capa</string>
     <string name="routing_attr_motor_type_name">Combustible utilitzat pel motor</string>
     <string name="favorite_confirm_delete_group">Esteu segur que voleu suprimir el grup «%1$s» i tots els punts inclosos (%2$d)\?</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="auto_backup_preference_desc">Per defecte, Android desa còpies de seguretat dels favorits, fitxes de mapes i configuració d\'OsmAnd per restaurar-los en dispositius nous o després de la reinstal·lació. Aquesta còpia de seguretat està limitada a 25 MB.
 \nQuan utilitzeu OsmAnd Cloud, això pot provocar malentesos després de la reinstal·lació.</string>
     <string name="routing_attr_motor_type_lpg_name">Gas liquat del petroli (GLP)</string>
@@ -4314,4 +4301,18 @@
 \n • Corregir errors amb RTL
 \n
 \n</string>
+    <string name="save_track_external_sensors_data">Dades</string>
+    <string name="external_sensors_not_found">No s\'han trobat sensors</string>
+    <string name="external_sensors_source_of_data">Procedència de les dades</string>
+    <string name="error_calculate">El càlcul no té resultat</string>
+    <string name="write_data_from_sensor_to_track">Incorpora dades de sensors externs de GPX mentre s\'enregistra el desplaçament.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hi ha sensors connectats d\'aquest tipus</string>
+    <string name="delete_folder">Suprimeix la carpeta</string>
+    <string name="show_all_tracks_on_the_map">Visualitza totes les traces al mapa</string>
+    <string name="calculate_offline_altitude_descr">Calcula localment l\'alçada, a partir de dades del mapa de relleu. Les diferències respecte l\'altitud registrada pel dispositiu es poden utilitzar com a correcció d\'elevació.</string>
+    <string name="delete_track_folder_dialog_message">Això eliminarà la carpeta \"%1$s\" i totes les traces que inclou (%2$s).</string>
+    <string name="calculate_offline">Càlcul local</string>
+    <string name="rssi_widget_desc">Mostra el nivell RSSI del vostre dispositiu extern.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="delete_folder_question">Segur que voleu suprimir la carpeta\?</string>
 </resources>

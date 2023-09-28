@@ -113,12 +113,6 @@ public class WidgetsDataHolder {
 	}
 
 	public void addWidgetToPage(@NonNull String widgetId, int page) {
-		if (!selectedPanel.isDuplicatesAllowed()) {
-			for (List<String> widgetsOfPage : pages.values()) {
-				widgetsOfPage.remove(widgetId);
-			}
-		}
-
 		List<String> widgetsOfPage = pages.get(page);
 		if (widgetsOfPage == null) {
 			widgetsOfPage = new ArrayList<>();

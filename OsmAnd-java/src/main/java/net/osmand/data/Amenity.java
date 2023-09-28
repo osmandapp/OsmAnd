@@ -41,6 +41,8 @@ public class Amenity extends MapObject {
 	public static final String REF = "ref";
 	public static final String OSM_DELETE_VALUE = "delete";
 	public static final String OSM_DELETE_TAG = "osmand_change";
+	public static final String PRIVATE_VALUE = "private";
+	public static final String ACCESS_PRIVATE_TAG = "access_private";
 	public static final String IMAGE_TITLE = "image_title";
 	public static final String IS_PART = "is_part";
 	public static final String IS_PARENT_OF = "is_parent_of";
@@ -68,6 +70,15 @@ public class Amenity extends MapObject {
 	private TIntArrayList y;
 	private TIntArrayList x;
 	private String mapIconName;
+	private int order;
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
@@ -416,6 +427,10 @@ public class Amenity extends MapObject {
 
 	public boolean isClosed() {
 		return OSM_DELETE_VALUE.equals(getAdditionalInfo(OSM_DELETE_TAG));
+	}
+
+	public boolean isPrivateAccess() {
+		return PRIVATE_VALUE.equals(getTagContent(ACCESS_PRIVATE_TAG));
 	}
 
 	public JSONObject toJSON() {

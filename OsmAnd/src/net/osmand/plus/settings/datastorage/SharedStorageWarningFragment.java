@@ -40,7 +40,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -57,7 +58,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	public static final String STORAGE_MIGRATION = "storage_migration";
 	private static final int FOLDER_ACCESS_REQUEST = 1009;
 
-	private OsmandApplication app;
 	private DataStorageHelper storageHelper;
 	private DocumentFilesCollectTask collectTask;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -73,7 +73,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private View progressContainer;
 	private View buttonsContainer;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 
 	@Override
@@ -82,11 +81,14 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		storageHelper = new DataStorageHelper(app);
-		nightMode = isNightMode(usedOnMap);
 
 		if (selectedStorage == null) {
 			selectedStorage = storageHelper.getStorage(DataStorageHelper.INTERNAL_STORAGE);
@@ -102,7 +104,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
 
 		stepsContainer = mainView.findViewById(R.id.steps_container);
@@ -237,8 +239,8 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	private void setupButtons() {
-		View skipButton = buttonsContainer.findViewById(R.id.dismiss_button);
-		View rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
+		DialogButton skipButton = buttonsContainer.findViewById(R.id.dismiss_button);
+		DialogButton rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 		View buttonsShadow = buttonsContainer.findViewById(R.id.buttons_shadow);
 		View buttonsDivider = buttonsContainer.findViewById(R.id.buttons_divider);
 		View bottomButtons = buttonsContainer.findViewById(R.id.buttons_container);
@@ -255,15 +257,18 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 				}
 			});
 			bottomButtons.setBackground(null);
-			UiUtilities.setupDialogButton(nightMode, skipButton, DialogButtonType.PRIMARY, R.string.start_copying);
+			skipButton.setButtonType(DialogButtonType.PRIMARY);
+			skipButton.setTitleId(R.string.start_copying);
 		} else {
 			skipButton.setOnClickListener(v -> showSkipMigrationDialog());
 			rightButton.setOnClickListener(v -> {
 				Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
 				startActivityForResult(intent, FOLDER_ACCESS_REQUEST);
 			});
-			UiUtilities.setupDialogButton(nightMode, skipButton, DialogButtonType.SECONDARY, R.string.shared_string_skip);
-			UiUtilities.setupDialogButton(nightMode, rightButton, DialogButtonType.PRIMARY, R.string.shared_string_continue);
+			skipButton.setButtonType(DialogButtonType.SECONDARY);
+			skipButton.setTitleId(R.string.shared_string_skip);
+			rightButton.setButtonType(DialogButtonType.PRIMARY);
+			rightButton.setTitleId(R.string.shared_string_continue);
 			bottomButtons.setBackgroundColor(AndroidUtils.getColorFromAttr(buttonsContainer.getContext(), R.attr.bg_color));
 		}
 		AndroidUiHelper.updateVisibility(rightButton, !folderSelected);

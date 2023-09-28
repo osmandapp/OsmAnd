@@ -56,20 +56,22 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AnalyticsHelper;
+import net.osmand.plus.feedback.AnalyticsHelper;
+import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.feedback.RateUsHelper;
+import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -111,7 +113,8 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.VoiceProviderDialog;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -127,6 +130,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -188,6 +192,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
+	KeyEventHelper keyEventHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
@@ -202,6 +207,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
+	AverageGlideComputer averageGlideComputer;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 
@@ -328,7 +334,7 @@ public class OsmandApplication extends MultiDexApplication {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
 		if (RateUsHelper.shouldShowRateDialog(this)) {
-			settings.RATE_US_STATE.set(RateUsHelper.RateUsState.IGNORED);
+			settings.RATE_US_STATE.set(RateUsState.IGNORED);
 		}
 		getNotificationHelper().removeNotifications(false);
 	}
@@ -447,6 +453,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return lockHelper;
 	}
 
+	public KeyEventHelper getKeyEventHelper() {
+		return keyEventHelper;
+	}
+
 	public FileSettingsHelper getFileSettingsHelper() {
 		return fileSettingsHelper;
 	}
@@ -482,10 +492,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+		Resources resources = getResources();
+		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+		resources = getBaseContext().getResources();
+		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
 		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
+		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
@@ -572,6 +587,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	@NonNull
+	public AverageGlideComputer getAverageGlideComputer() {
+		return averageGlideComputer;
 	}
 
 	@NonNull
@@ -681,8 +701,9 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void stopNavigation() {
-		if (locationProvider.getLocationSimulation().isRouteAnimating()) {
-			locationProvider.getLocationSimulation().stop();
+		OsmAndLocationSimulation locationSimulation = locationProvider.getLocationSimulation();
+		if (locationSimulation.isRouteAnimating() || locationSimulation.isLoadingRouteLocations()) {
+			locationSimulation.stop();
 		}
 		routingHelper.getVoiceRouter().interruptRouteCommands();
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
@@ -781,6 +802,20 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 
+	public void runMessageInUiThread(int messageId, long delay, @NonNull Runnable runnable) {
+		Message message = Message.obtain(uiHandler, runnable);
+		message.what = messageId;
+		uiHandler.sendMessageDelayed(message, delay);
+	}
+
+	public boolean hasMessagesInUiThread(int messageId) {
+		return uiHandler.hasMessages(messageId);
+	}
+
+	public void removeMessagesInUiThread(int messageId) {
+		uiHandler.removeMessages(messageId);
+	}
+
 	@NonNull
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
@@ -795,23 +830,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void applyTheme(@NonNull Context context) {
-		int themeResId;
-		boolean doNotUseAnimations = settings.DO_NOT_USE_ANIMATIONS.get();
+		int themeId;
+		boolean noAnimation = settings.DO_NOT_USE_ANIMATIONS.get();
 		if (!settings.isLightContent()) {
-			if (doNotUseAnimations) {
-				themeResId = R.style.OsmandDarkTheme_NoAnimation;
-			} else {
-				themeResId = R.style.OsmandDarkTheme;
-			}
+			themeId = noAnimation ? R.style.OsmandDarkTheme_NoAnimation : R.style.OsmandDarkTheme;
 		} else {
-			if (doNotUseAnimations) {
-				themeResId = R.style.OsmandLightTheme_NoAnimation;
-			} else {
-				themeResId = R.style.OsmandLightTheme;
-			}
+			themeId = noAnimation ? R.style.OsmandLightTheme_NoAnimation : R.style.OsmandLightTheme;
 		}
 		localeHelper.setLanguage(context);
-		context.setTheme(themeResId);
+		context.setTheme(themeId);
 	}
 
 	IBRouterService reconnectToBRouter() {
@@ -838,7 +865,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public String getLanguage() {
-		return localeHelper.getLanguage();
+		String appLang = localeHelper.getLanguage();
+		// assume english is default though it's not correct
+		if (Algorithms.isEmpty(appLang)) {
+			appLang = "en";
+		}
+		return appLang;
 	}
 
 	@Override

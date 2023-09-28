@@ -24,6 +24,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
 
 public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
+
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
 	private ContextMenuCardDialog dialog;

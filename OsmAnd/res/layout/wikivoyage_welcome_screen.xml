@@ -5,6 +5,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:clickable="true"
+	android:focusable="true"
 	android:orientation="vertical">
 
 	<FrameLayout
@@ -60,7 +62,7 @@
 			android:ellipsize="end"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
 			android:text="@string/wikivoyage_travel_guide_descr"
-			android:textColor="@color/wikivoyage_secondary_text"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/default_list_text_size"/>
 
 		<FrameLayout
@@ -82,7 +84,7 @@
 				android:paddingLeft="@dimen/content_padding"
 				android:paddingRight="@dimen/content_padding"
 				android:text="@string/shared_string_continue"
-				android:textColor="@color/color_white"
+				android:textColor="@color/card_and_list_background_light"
 				android:textSize="@dimen/text_button_text_size"
 				osmand:typeface="@string/font_roboto_medium"
 				android:paddingEnd="@dimen/content_padding"

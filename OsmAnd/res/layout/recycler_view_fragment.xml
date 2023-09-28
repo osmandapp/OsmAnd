@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
 	android:orientation="vertical">
 
 	<androidx.recyclerview.widget.RecyclerView
@@ -11,6 +14,8 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical"
 		android:scrollbars="vertical"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/bottom_sheet_title_height"
 		tools:listitem="@layout/track_list_item" />
 
 </LinearLayout>

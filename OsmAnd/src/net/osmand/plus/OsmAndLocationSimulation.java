@@ -5,9 +5,9 @@ import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,16 +17,14 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -50,6 +48,10 @@ public class OsmAndLocationSimulation {
 	private final OsmAndLocationProvider provider;
 
 	private Thread routeAnimation;
+
+	private LoadSimulatedLocationsTask loadLocationsTask;
+	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
+
 	@Nullable
 	private GPXFile gpxFile = null;
 	private List<LocationSimulationListener> listeners = new ArrayList<>();
@@ -61,6 +63,18 @@ public class OsmAndLocationSimulation {
 
 	public boolean isRouteAnimating() {
 		return routeAnimation != null;
+	}
+
+	public boolean isLoadingRouteLocations() {
+		return loadLocationsTask != null && loadLocationsTask.getStatus() == AsyncTask.Status.RUNNING;
+	}
+
+	public void addListener(@NonNull LoadSimulatedLocationsListener listener) {
+		loadLocationsListeners = Algorithms.addToList(loadLocationsListeners, listener);
+	}
+
+	public void removeListener(@NonNull LoadSimulatedLocationsListener listener) {
+		loadLocationsListeners = Algorithms.removeFromList(loadLocationsListeners, listener);
 	}
 
 	@Nullable
@@ -122,7 +136,7 @@ public class OsmAndLocationSimulation {
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+					boolean nightMode1 = app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
 						startAnimationThread(app, result[0], 0, true, speedup.getValue() + 1);
 						if (runnable != null) {
@@ -134,16 +148,8 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				List<SimulatedLocation> currentRoute = getSimulatedLocationsForRoute(app.getRoutingHelper().getRoute());
-				if (currentRoute.isEmpty()) {
-					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
-							Toast.LENGTH_LONG).show();
-				} else {
-					startAnimationThread(app, new ArrayList<>(currentRoute), false, 1);
-					if (runnable != null) {
-						runnable.run();
-					}
-				}
+				stopLoadLocationsTask();
+				startLoadLocationsTask(runnable);
 			}
 		} else {
 			stop();
@@ -151,6 +157,58 @@ public class OsmAndLocationSimulation {
 				runnable.run();
 			}
 		}
+	}
+
+	@NonNull
+	private LoadSimulatedLocationsListener getLoadLocationsListener(@Nullable Runnable runnable) {
+		return new LoadSimulatedLocationsListener() {
+			@Override
+			public void onLocationsStartedLoading() {
+				for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+					listener.onLocationsStartedLoading();
+				}
+			}
+
+			@Override
+			public void onLocationsLoadingProgress(int progress) {
+				for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+					listener.onLocationsLoadingProgress(progress);
+				}
+			}
+
+			@Override
+			public void onLocationsLoaded(@Nullable List<SimulatedLocation> currentRoute) {
+				loadLocationsTask = null;
+				notifyLocationsLoaded(currentRoute);
+
+				if (Algorithms.isEmpty(currentRoute)) {
+					app.showToastMessage(R.string.animate_routing_route_not_calculated);
+				} else {
+					startAnimationThread(app, new ArrayList<>(currentRoute), false, 1);
+					if (runnable != null) {
+						runnable.run();
+					}
+				}
+			}
+		};
+	}
+
+	private void notifyLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
+		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+			listener.onLocationsLoaded(locations);
+		}
+	}
+
+	private void startLoadLocationsTask(@Nullable Runnable runnable) {
+		loadLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
+		loadLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void stopLoadLocationsTask() {
+		if (loadLocationsTask != null && loadLocationsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			loadLocationsTask.cancel(false);
+		}
+		loadLocationsTask = null;
 	}
 
 	public void startStopRouteAnimation(@Nullable Activity activity) {
@@ -344,6 +402,7 @@ public class OsmAndLocationSimulation {
 	public void stop() {
 		gpxFile = null;
 		routeAnimation = null;
+		stopLoadLocationsTask();
 		notifyListeners(false);
 	}
 
@@ -352,16 +411,16 @@ public class OsmAndLocationSimulation {
 		double lon1 = toRad(start.getLongitude());
 		double R = 6371; // radius of earth in km
 		double d = meters / 1000; // in km
-		float brng = (float) (toRad(start.bearingTo(end)));
+		float bearing = (float) (toRad(start.bearingTo(end)));
 		double lat2 = Math.asin(Math.sin(lat1) * Math.cos(d / R)
-				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(brng));
+				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(bearing));
 		double lon2 = lon1
-				+ Math.atan2(Math.sin(brng) * Math.sin(d / R) * Math.cos(lat1),
+				+ Math.atan2(Math.sin(bearing) * Math.sin(d / R) * Math.cos(lat1),
 				Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
 		SimulatedLocation nl = new SimulatedLocation(start);
 		nl.setLatitude(toDegree(lat2));
 		nl.setLongitude(toDegree(lon2));
-		nl.setBearing(brng);
+		nl.setBearing(bearing);
 		nl.setTrafficLight(false);
 		return nl;
 	}
@@ -397,7 +456,7 @@ public class OsmAndLocationSimulation {
 				} else {
 					String sp = location.getExtensionsToRead().get("speed");
 					if (!Algorithms.isEmpty(sp)) {
-						l.setSpeed((float) Double.parseDouble(sp));
+						l.setSpeed((float) Algorithms.parseDoubleSilently(sp, 0));
 					}
 				}
 				if (!Double.isNaN(location.hdop)) {
@@ -405,7 +464,7 @@ public class OsmAndLocationSimulation {
 				}
 				String br = location.getExtensionsToRead().get("bearing");
 				if (!Algorithms.isEmpty(br)) {
-					l.setBearing((float) Double.parseDouble(br));
+					l.setBearing((float) Algorithms.parseDoubleSilently(br, 0));
 				}
 				if (!Double.isNaN(location.ele)) {
 					l.setAltitude(location.ele);
@@ -417,39 +476,7 @@ public class OsmAndLocationSimulation {
 		return simulatedLocations;
 	}
 
-	public List<SimulatedLocation> getSimulatedLocationsForRoute(RouteCalculationResult route) {
-		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-		for (Location l : route.getImmutableAllLocations()) {
-			SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
-			simulatedLocations.add(sm);
-		}
-		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
-		for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
-			RouteSegmentResult s = segments.get(routeInd);
-			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-			int i = s.getStartPointIndex();
-			while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-				LatLon point = s.getPoint(i);
-				for (SimulatedLocation sd : simulatedLocations) {
-					LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-					if (latLon.equals(point)) {
-						sd.setHighwayType(s.getObject().getHighway());
-						sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
-						if (s.getObject().hasTrafficLightAt(i)) {
-							sd.setTrafficLight(true);
-						}
-					}
-				}
-				if (i == s.getEndPointIndex()) {
-					break;
-				}
-				i += plus ? 1 : -1;
-			}
-		}
-		return simulatedLocations;
-	}
-
-	private static class SimulatedLocation extends Location {
+	public static class SimulatedLocation extends Location {
 
 		private boolean trafficLight;
 		private String highwayType;

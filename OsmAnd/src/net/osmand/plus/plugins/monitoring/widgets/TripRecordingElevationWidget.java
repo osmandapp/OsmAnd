@@ -15,6 +15,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -24,6 +25,7 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 	private final SavingTrackHelper savingTrackHelper;
+	private int currentTrackIndex;
 
 	private double cachedElevationDiff = -1;
 
@@ -33,7 +35,7 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 		updateInfo(null);
 		setOnClickListener(v -> {
-			if (getAnalysis().hasElevationData) {
+			if (getAnalysis().hasElevationData()) {
 				Bundle params = new Bundle();
 				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
 				params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());
@@ -45,7 +47,9 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		double elevationDiff = getElevationDiff();
+		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
+		double elevationDiff = getElevationDiff(this.currentTrackIndex != currentTrackIndex);
+		this.currentTrackIndex = currentTrackIndex;
 		if (isUpdateNeeded() || cachedElevationDiff != elevationDiff) {
 			cachedElevationDiff = elevationDiff;
 			MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
@@ -59,7 +63,7 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 		return true;
 	}
 
-	protected abstract double getElevationDiff();
+	protected abstract double getElevationDiff(boolean reset);
 
 	@NonNull
 	protected GPXTrackAnalysis getAnalysis() {
@@ -68,18 +72,26 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 	public static class TripRecordingUphillWidget extends TripRecordingElevationWidget {
 
+		private double diffElevationUp;
+
 		public TripRecordingUphillWidget(@NonNull MapActivity mapActivity) {
 			super(mapActivity, TRIP_RECORDING_UPHILL);
 			setIcons(TRIP_RECORDING_UPHILL);
 		}
 
 		@Override
-		protected double getElevationDiff() {
-			return getAnalysis().diffElevationUp;
+		protected double getElevationDiff(boolean reset) {
+			if (reset) {
+				diffElevationUp = 0;
+			}
+			diffElevationUp = Math.max(getAnalysis().diffElevationUp, diffElevationUp);
+			return diffElevationUp;
 		}
 	}
 
 	public static class TripRecordingDownhillWidget extends TripRecordingElevationWidget {
+
+		private double diffElevationDown;
 
 		public TripRecordingDownhillWidget(@NonNull MapActivity mapActivity) {
 			super(mapActivity, TRIP_RECORDING_DOWNHILL);
@@ -87,8 +99,12 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 		}
 
 		@Override
-		protected double getElevationDiff() {
-			return getAnalysis().diffElevationDown;
+		protected double getElevationDiff(boolean reset) {
+			if (reset) {
+				diffElevationDown = 0;
+			}
+			diffElevationDown = Math.max(getAnalysis().diffElevationDown, diffElevationDown);
+			return diffElevationDown;
 		}
 	}
 }

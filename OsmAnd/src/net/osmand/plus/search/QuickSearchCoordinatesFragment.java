@@ -54,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -155,7 +156,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
-		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.color_white : R.color.text_color_primary_dark));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
 
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
@@ -249,16 +250,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			}
 		});
 
-		TextWatcher textWatcher = new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
+		TextWatcher textWatcher = new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				parseLocation();

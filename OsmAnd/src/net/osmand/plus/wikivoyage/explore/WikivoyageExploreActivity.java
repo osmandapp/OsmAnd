@@ -268,7 +268,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int iconId) {
-		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+		return getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
@@ -277,7 +277,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 	}
 
 	@ColorInt
@@ -338,6 +338,39 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		if (savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.invalidateAdapter();
 		}
+	}
+
+	@Override
+	public List<Fragment> getActiveTalkbackFragments() {
+		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
+		List<Fragment> tabFragments = new ArrayList<>();
+		if (pagerAdapter != null) {
+			for (int i = 0; i < pagerAdapter.getCount(); i++) {
+				tabFragments.add(pagerAdapter.getItem(i));
+			}
+		}
+
+		List<Fragment> fragmentsWithoutTabs = new ArrayList<>();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			boolean isTabFragment = false;
+			for (Fragment tabFragment : tabFragments) {
+				if (fragment.getClass() == tabFragment.getClass()) {
+					isTabFragment = true;
+					break;
+				}
+			}
+			if (!isTabFragment) {
+				fragmentsWithoutTabs.add(fragment);
+			}
+		}
+		return fragmentsWithoutTabs;
+	}
+
+	@Override
+	public void setActivityAccessibility(boolean hideActivity) {
+		View pagerContent = findViewById(R.id.view_pager);
+		int accessibility = getActiveTalkbackFragments().isEmpty() ? View.IMPORTANT_FOR_ACCESSIBILITY_YES : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+		pagerContent.setImportantForAccessibility(accessibility);
 	}
 
 	@Override

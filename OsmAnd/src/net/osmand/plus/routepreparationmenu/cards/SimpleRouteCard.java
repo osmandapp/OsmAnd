@@ -3,7 +3,7 @@ package net.osmand.plus.routepreparationmenu.cards;
 import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
 import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
 import static net.osmand.plus.utils.AndroidUtils.spToPx;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType.DISTANCE;
+import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
@@ -13,13 +13,11 @@ import static net.osmand.plus.utils.OsmAndFormatter.getFormattedAlt;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDistanceValue;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDuration;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedTimeShort;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.STROKED;
 
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -33,6 +31,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
@@ -42,7 +41,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -83,15 +82,16 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupSecondRow() {
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
-		if (analysis.hasElevationData) {
+		boolean hasElevationData = analysis.hasElevationData();
+		if (hasElevationData) {
 			TextView uphill = view.findViewById(R.id.uphill);
 			TextView downhill = view.findViewById(R.id.downhill);
 
 			uphill.setText(getFormattedAlt(analysis.diffElevationUp, app));
 			downhill.setText(getFormattedAlt(analysis.diffElevationDown, app));
 		}
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.uphill_container), analysis.hasElevationData);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.downhill_container), analysis.hasElevationData);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.uphill_container), hasElevationData);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.downhill_container), hasElevationData);
 		setupEmission();
 	}
 
@@ -112,7 +112,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		LineChart chart = view.findViewById(R.id.chart);
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			ChartUtils.setupGPXChart(chart, 10f, 4f, false);
 
 			LineData data = lineData;
@@ -120,9 +120,9 @@ public class SimpleRouteCard extends MapBaseCard {
 				List<ILineDataSet> dataSets = new ArrayList<>();
 				OrderedLineDataSet slopeDataSet;
 				OrderedLineDataSet elevationDataSet = createGPXElevationDataSet(app, chart, analysis,
-						DISTANCE, false, true, false);
+						GPXDataSetType.ALTITUDE, DISTANCE, false, true, false);
 				dataSets.add(elevationDataSet);
-				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, DISTANCE,
+				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, GPXDataSetType.SLOPE, DISTANCE,
 						elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
@@ -132,14 +132,13 @@ public class SimpleRouteCard extends MapBaseCard {
 			}
 			chart.setData(data);
 		}
-		AndroidUiHelper.updateVisibility(chart, analysis.hasElevationData);
+		AndroidUiHelper.updateVisibility(chart, analysis.hasElevationData());
 	}
 
 	private void setupDetailsButton() {
-		View button = view.findViewById(R.id.details_button);
+		DialogButton button = view.findViewById(R.id.details_button);
 		button.setOnClickListener(v -> notifyCardPressed());
-		UiUtilities.setupDialogButton(nightMode, button, STROKED, R.string.shared_string_details);
-		AndroidUtils.setBackground(app, button, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, button.getButtonView(), nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 	}
 
 	private void setupFirstRow() {

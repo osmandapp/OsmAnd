@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/content_padding_small"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="22dp"
+			android:layout_height="22dp"
+			android:src="@drawable/ic_action_bluetooth_disabled"
+			android:tint="?attr/default_icon_color" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/no_bluetooth_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/ant_plus_bluetooth_off"
+				android:textColor="?android:textColor"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				osmand:typeface="@string/font_roboto_medium" />
+
+			<TextView
+				android:id="@+id/no_bluetooth_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/ant_plus_bluetooth_off_description"
+				android:textColor="?android:textColor"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_medium" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+
+	<include
+		android:id="@+id/bt_settings_button_container"
+		layout="@layout/bottom_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding" />
+
+	<include layout="@layout/divider" />
+
+</LinearLayout>

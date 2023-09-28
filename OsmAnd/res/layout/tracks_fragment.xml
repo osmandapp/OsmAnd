@@ -5,7 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
@@ -30,6 +32,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_back"
 					android:tint="?attr/primary_icon_color"
 					osmand:srcCompat="@drawable/ic_action_close" />
 
@@ -61,6 +64,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/switch_folder"
 					osmand:srcCompat="@drawable/ic_action_list_folders"
 					tools:tint="?attr/default_icon_color" />
 
@@ -70,6 +74,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_more_actions"
 					osmand:srcCompat="@drawable/ic_overflow_menu_white"
 					tools:tint="?attr/default_icon_color" />
 
@@ -125,22 +130,26 @@
 				android:orientation="horizontal"
 				android:padding="@dimen/content_padding_half">
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/selection_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonUseUppercaseTitle="true"
+					osmand:dialogButtonType="tertiary"
+					tools:dialogButtonTitle="@string/shared_string_select_recent" />
 
 				<View
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_weight="1" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/apply_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonUseUppercaseTitle="true"
+					osmand:dialogButtonTitle="@string/shared_string_apply"
+					osmand:dialogButtonType="tertiary"/>
 
 
 			</LinearLayout>

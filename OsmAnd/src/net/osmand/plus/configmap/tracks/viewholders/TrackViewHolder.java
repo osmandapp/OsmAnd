@@ -16,6 +16,7 @@ import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -65,6 +67,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private final TextView description;
 	private final ImageView imageView;
 	private final CompoundButton checkbox;
+	private final View menuButton;
 	private final View divider;
 	private final ImageView directionIcon;
 
@@ -82,7 +85,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		description = itemView.findViewById(R.id.description);
 		directionIcon = itemView.findViewById(R.id.direction_icon);
 		checkbox = itemView.findViewById(R.id.checkbox);
-		imageView = itemView.findViewById(R.id.track_icon);
+		menuButton = itemView.findViewById(R.id.menu_button);
+		imageView = itemView.findViewById(R.id.icon);
 		divider = itemView.findViewById(R.id.divider);
 	}
 
@@ -94,10 +98,20 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		checkbox.setChecked(selected);
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
+
+		int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
+		AndroidUtils.setMargins(params, margin, 0, selectionMode ? 0 : margin, 0);
 
 		itemView.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTrackItemsSelected(Collections.singleton(trackItem), !selected);
+			}
+		});
+		menuButton.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onTrackItemOptionsSelected(v, trackItem);
 			}
 		});
 		itemView.setOnLongClickListener(view -> {
@@ -315,6 +329,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		default void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+
+		}
+
+		default void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 
 		}
 	}

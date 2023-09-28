@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -40,7 +41,7 @@ public class SelectedGpxFile {
 	@NonNull
 	protected QuadRect bounds = new QuadRect();
 	@Nullable
-	protected QVectorPointI path31 = null;
+	protected TrackArea area = null;
 
 	protected int color;
 	protected long modifiedTime = -1;
@@ -81,6 +82,15 @@ public class SelectedGpxFile {
 				: getTrackAnalysis(app);
 	}
 
+	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
+		this.trackAnalysis = trackAnalysis;
+	}
+
+	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
+		this.displayGroups = displayGroups;
+		this.splitProcessed = true;
+	}
+
 	protected void update(@NonNull OsmandApplication app) {
 		modifiedTime = gpxFile.modifiedTime;
 		pointsModifiedTime = gpxFile.pointsModifiedTime;
@@ -109,7 +119,7 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public void processPoints(OsmandApplication app) {
+	public void processPoints(@NonNull OsmandApplication app) {
 		update(app);
 
 		processedPointsToDisplay = gpxFile.proccessPoints();
@@ -120,7 +130,7 @@ public class SelectedGpxFile {
 		}
 
 		updateBounds();
-		updatePath31(hasMapRenderer(app));
+		updateArea(hasMapRenderer(app));
 
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.processPoints(app);
@@ -169,19 +179,19 @@ public class SelectedGpxFile {
 
 		// Update path31 without iterating all points
 		if (hasMapRenderer(app)) {
-			if (path31 == null) {
-				path31 = new QVectorPointI();
+			if (area == null) {
+				area = new TrackArea();
 			}
 			int x31 = MapUtils.get31TileNumberX(point.lon);
 			int y31 = MapUtils.get31TileNumberY(point.lat);
-			path31.add(new PointI(x31, y31));
+			area.add(new PointI(x31, y31));
 		}
 	}
 
 	public final void clearSegmentsToDisplay() {
 		processedPointsToDisplay.clear();
 		bounds = new QuadRect();
-		path31 = null;
+		area = null;
 	}
 
 	@NonNull
@@ -192,33 +202,33 @@ public class SelectedGpxFile {
 	}
 
 	@NonNull
-	public final QVectorPointI getPath31ToDisplay() {
+	public final AreaI getAreaToDisplay() {
 		if (filteredSelectedGpxFile != null) {
-			return filteredSelectedGpxFile.getPath31ToDisplay();
+			return filteredSelectedGpxFile.getAreaToDisplay();
 		}
 
-		if (path31 == null) {
-			updatePath31(true);
+		if (area == null) {
+			updateArea(true);
 		}
-		return path31;
+		return area.normalized();
 	}
 
 	protected final void updateBounds() {
 		bounds = GPXUtilities.calculateTrackBounds(processedPointsToDisplay);
 	}
 
-	protected final void updatePath31(boolean hasMapRenderer) {
+	protected final void updateArea(boolean hasMapRenderer) {
 		if (!hasMapRenderer) {
-			path31 = null;
+			area = null;
 			return;
 		}
 
-		path31 = new QVectorPointI();
+		area = new TrackArea();
 		for (TrkSegment segment : processedPointsToDisplay) {
 			for (WptPt point : segment.points) {
 				int x31 = MapUtils.get31TileNumberX(point.lon);
 				int y31 = MapUtils.get31TileNumberY(point.lat);
-				path31.add(new PointI(x31, y31));
+				area.add(new PointI(x31, y31));
 			}
 		}
 	}

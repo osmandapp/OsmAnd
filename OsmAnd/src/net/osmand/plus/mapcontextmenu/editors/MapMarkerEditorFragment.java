@@ -12,8 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -21,19 +25,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	private MapMarkerEditor editor;
-	private boolean nightMode;
 	private boolean cancelled;
 
 	private EditText nameEdit;
@@ -42,14 +39,13 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		editor = ((MapActivity) requireActivity()).getContextMenu().getMapMarkerEditor();
-		nightMode = isNightMode(true);
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		Context context = requireContext();
-		View view = UiUtilities.getInflater(context, nightMode)
-				.inflate(R.layout.map_marker_editor_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.map_marker_editor_fragment, container, false);
 
 		MapMarkerEditor editor = this.editor;
 		if (editor == null) {
@@ -104,7 +100,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 		int markerColorId = MapMarker.getColorId(editor.getMarker().colorIndex);
 		nameImage.setImageDrawable(getIcon(R.drawable.ic_action_flag, markerColorId));
 
-		if (requireMyApplication().accessibilityEnabled()) {
+		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
 			nameEdit.setHint(R.string.access_hint_enter_name);
 		}
@@ -123,10 +119,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 					.setMessage(getString(R.string.markers_remove_dialog_msg, marker.getName(context)))
 					.setNegativeButton(R.string.shared_string_no, null)
 					.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-						OsmandApplication app = getMyApplication();
-						if (app != null) {
-							app.getMapMarkersHelper().removeMarker(marker);
-						}
+						app.getMapMarkersHelper().removeMarker(marker);
 						dismiss(true);
 					})
 					.create()
@@ -176,8 +169,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 		if (Algorithms.isBlank(name)) {
 			nameEdit.setError(getString(R.string.wrong_input));
 		} else {
-			OsmandApplication app = getMyApplication();
-			if (editor != null && app != null) {
+			if (editor != null) {
 				MapMarker marker = editor.getMarker();
 				marker.setOriginalPointDescription(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name));
 				app.getMapMarkersHelper().updateMapMarker(marker, true);
@@ -206,7 +198,7 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_color_light;
+		return R.color.status_bar_main_light;
 	}
 
 	@Override

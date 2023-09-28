@@ -417,9 +417,7 @@
     <string name="map_widget_audionotes">Notas de son</string>
     <string name="audionotes_plugin_description">Fai notas de audio, fotografías e/ou vídeos durante unha viaxe, empregando un botón no mapa ou o menú contextual da localización.</string>
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
-    <string name="index_srtm_parts">partes</string>
-    <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin) 
+    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin)
 \n 
 \nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e o ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. O ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
@@ -428,8 +426,6 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa normal</string>
     <string name="download_roads_only_maps">Mapa só de estradas</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de sendeirismo alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Amosar rotas seguindo a escala SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposición dos símbolos de sendeirismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar os camiños segundo as pistas do OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
@@ -784,7 +780,6 @@
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Especificar as opcións para a navegación.</string>
     <string name="global_settings">Axustes globais</string>
-    <string name="index_settings">Xestionar os ficheiros de mapas</string>
     <string name="general_settings">Xeral</string>
     <string name="general_settings_descr">Configurar a pantalla e os axustes globais da aplicación.</string>
     <string name="global_app_settings">Axustes globais da aplicación</string>
@@ -1613,7 +1608,6 @@ Lon %2$s</string>
     <string name="regions">Rexións</string>
     <string name="region_maps">Mapas de toda a rexión</string>
     <string name="world_maps">Mapas mundiais</string>
-    <string name="srtm_plugin_disabled">As curvas de nivel están desactivadas</string>
     <string name="favorite_category_select">Escoller categoría</string>
     <string name="default_speed_system_descr">Define a unidade de velocidade.</string>
     <string name="default_speed_system">Unidade de velocidade</string>
@@ -1691,7 +1685,7 @@ Lon %2$s</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versións</string>
     <string name="feedback">Enquisa</string>
-    <string name="contact_us">Contacto</string>
+    <string name="shared_string_contact">Contacto</string>
     <string name="map_legend">Lenda do mapa</string>
     <string name="hillshade_layer_disabled">A capa de curvas de nivel está desactivada</string>
     <string name="av_locations_descr">Ficheiro GPX con localizacións.</string>
@@ -2489,7 +2483,6 @@ Lon %2$s</string>
     <string name="wikivoyage_offline">Wikiviaxes sen conexión</string>
     <string name="unlimited_downloads">Descargas sen límite</string>
     <string name="wikipedia_offline">Wikipedia sen conexión</string>
-    <string name="contour_lines_hillshade_maps">Curvas do nivel e mapas de asombreado</string>
     <string name="purchase_dialog_travel_description">Mercar un dos seguintes elementos para recibires a característica do guieiro de viaxe sen conexión:</string>
     <string name="purchase_dialog_subtitle">Escoller o elemento axeitado</string>
     <string name="shared_string_dont">Non</string>
@@ -3192,7 +3185,7 @@ Lon %2$s</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="shared_string_osmand_usage">Uso do OsmAnd</string>
-    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_tiles">Teselas</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3209,7 +3202,6 @@ Lon %2$s</string>
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas do nivel e sombras do relevo</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir estradas sen pavimentar</string>
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavimentar.</string>
     <string name="update_all_maps">Actualizar todos os mapas</string>
@@ -3337,7 +3329,6 @@ Lon %2$s</string>
     <string name="live_monitoring_time_buffer">Búfer de tempo</string>
     <string name="live_monitoring_tracking_interval">Intre de rastrexamento</string>
     <string name="live_monitoring_adress">Enderezo web</string>
-    <string name="live_monitoring_adress_descr">Especificar o enderezo web con sintaxe de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notificación</string>
     <string name="monitoring_min_speed">Velocidade mínima</string>
     <string name="monitoring_min_accuracy">Precisión mínima</string>
@@ -3999,7 +3990,6 @@ Lon %2$s</string>
     <string name="copy_poi_name">Copiar nome do PDI</string>
     <string name="quick_action_show_hide_title">Amosar/Agochar</string>
     <string name="shared_string_interval">Intre</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Espazos naturais</string>
     <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
     <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
@@ -4022,7 +4012,6 @@ Lon %2$s</string>
     <string name="temporary_conditional_routing_descr">Empregar as restricións de estrada que están activas agora no mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada máis curta (baixo consumo)</string>
     <string name="routing_attr_driving_style_description">Escolle o propósito da condución para obter unha ruta máis curta, máis rápida ou máis segura</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Agochar reservas naturais, áreas protexidas e de parques nacionais.</string>
     <string name="release_4_0_beta">• Engadiuse a opción para baixar as curvas de nivel en pés.
 \n
 \n• Paisaxe do plan de ruta: engadíronse lapelas para alternar entre puntos ou gráficos
@@ -4084,7 +4073,7 @@ Lon %2$s</string>
 \n- complementos baseados na localización
 \n- as isolíneas da temperatura/presión
 \n
-\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Pronóstico sen conexión</string>
     <string name="weather_online_cache">Caché en liña</string>
     <string name="map_settings_weather_temp">Temperatura</string>

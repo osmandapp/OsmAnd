@@ -1,6 +1,7 @@
 package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -26,9 +26,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -90,8 +90,8 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-								suggestedDirName, this, usedOnMap);
+						FragmentManager manager = activity.getSupportFragmentManager();
+						AddNewTrackFolderBottomSheet.showInstance(manager, null, suggestedDirName, this, usedOnMap);
 					}
 				})
 				.setCustomView(view)
@@ -101,7 +101,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 
 	private void createFoldersItem(@NonNull LayoutInflater inflater) {
 		List<File> folders = new ArrayList<>();
-		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		folders.add(gpxDir);
 		Algorithms.collectDirs(gpxDir, folders);
 

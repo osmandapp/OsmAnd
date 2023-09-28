@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.*;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -31,7 +33,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -41,7 +42,7 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -63,18 +64,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener {
+		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, Map3DModeUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
-	private LayoutInflater themedInflater;
 
 	private AppBarLayout appBar;
 	private Toolbar toolbar;
@@ -84,7 +82,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private ViewGroup actionsCardContainer;
 	private NestedScrollView scrollView;
 
-	private boolean nightMode;
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
@@ -93,8 +90,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -104,9 +99,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -164,9 +157,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setupAppBar() {
-		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-			currentAppBarOffset = verticalOffset;
-		});
+		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> currentAppBarOffset = verticalOffset);
 		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
 		param.setBehavior(new AppBarLayout.Behavior());
 		setAppBarOffset(currentAppBarOffset);
@@ -220,6 +211,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			item.strokeSelectedWidth = AndroidUtils.dpToPx(app, 2);
 			item.rippleColor = profileColor;
 			item.bgSelectedColor = bgSelectedColor;
+			item.contentDescription = mode.toHumanString();
 			item.tag = mode;
 			if (Algorithms.objectEquals(selectedAppMode, mode)) {
 				selectedItem = item;
@@ -252,56 +244,75 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.TOP, false, false));
 		widgetsCard.addView(createWidgetGroupView(WidgetsPanel.BOTTOM, false, true));
 
-		widgetsCard.addView(createButtonWithSwitch(R.drawable.ic_action_appearance, getString(R.string.map_widget_transparent),
-				settings.TRANSPARENT_MAP_THEME.getModeValue(selectedAppMode),
-				false,
-				v -> {
+		widgetsCard.addView(new ButtonBuilder()
+				.setTitle(getString(R.string.map_widget_transparent))
+				.setIconId(R.drawable.ic_action_appearance)
+				.setEnabled(settings.TRANSPARENT_MAP_THEME.getModeValue(selectedAppMode))
+				.showSwitch(true, view -> {
 					boolean enabled = settings.TRANSPARENT_MAP_THEME.get();
 					settings.TRANSPARENT_MAP_THEME.setModeValue(selectedAppMode, !enabled);
 					mapActivity.updateApplicationModeSettings();
-				}
-		));
+				})
+				.createButton());
 	}
 
-	private void setupButtonsCard() {
+	public void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
 		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
-		buttonsCard.addView(createButtonWithDesc(
-				compassVisibility.iconId,
-				getString(R.string.map_widget_compass),
-				compassVisibility.getTitle(app),
-				true,
-				v -> {
+		buttonsCard.addView(new ButtonBuilder()
+				.setTitle(getString(R.string.map_widget_compass))
+				.setDescription(compassVisibility.getTitle(app))
+				.setIconId(compassVisibility.iconId)
+				.setEnabled(true)
+				.showShortDivider(true)
+				.setClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
 						CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, this, selectedAppMode);
 					}
-				}
-		));
+				})
+				.createButton());
 
-		buttonsCard.addView(createButtonWithState(
-				R.drawable.ic_action_ruler_line,
-				getString(R.string.map_widget_distance_by_tap),
-				settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode),
-				true,
-				v -> {
-					DistanceByTapFragment.showInstance(requireActivity());
-				}
-		));
+		if (app.useOpenGlRenderer()) {
+			Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
+			buttonsCard.addView(new ButtonBuilder()
+					.setTitle(getString(R.string.map_3d_mode_action))
+					.setDescription(map3DModeVisibility.getTitle(app))
+					.setIconId(map3DModeVisibility.iconId)
+					.setEnabled(true)
+					.showShortDivider(true)
+					.setClickListener(v -> {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
+						}
+					})
+					.createButton());
+		}
+
+		boolean distanceByTapEnabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
+		buttonsCard.addView(new ButtonBuilder()
+				.setTitle(getString(R.string.map_widget_distance_by_tap))
+				.setIconId(R.drawable.ic_action_ruler_line)
+				.setEnabled(distanceByTapEnabled)
+				.showState(true, getString(distanceByTapEnabled ? R.string.shared_string_on : R.string.shared_string_off))
+				.showShortDivider(true)
+				.setClickListener(v -> DistanceByTapFragment.showInstance(requireActivity())).createButton());
 
 		QuickActionRegistry registry = app.getQuickActionRegistry();
 		int actionsCount = registry.getQuickActions().size();
 		String actions = getString(R.string.shared_string_actions);
 		String desc = getString(R.string.ltr_or_rtl_combine_via_colon, actions, String.valueOf(actionsCount));
-		buttonsCard.addView(createButtonWithDesc(
-				R.drawable.ic_quick_action,
-				getString(R.string.configure_screen_quick_action),
-				desc,
-				settings.QUICK_ACTION.getModeValue(selectedAppMode),
-				v -> QuickActionListFragment.showInstance(requireActivity(), false)
-		));
+		buttonsCard.addView(new ButtonBuilder()
+				.setTitle(getString(R.string.configure_screen_quick_action))
+				.setDescription(desc)
+				.setIconId(R.drawable.ic_quick_action)
+				.setEnabled(settings.QUICK_ACTION.getModeValue(selectedAppMode))
+				.setClickListener(v -> QuickActionListFragment.showInstance(requireActivity(), false))
+				.createButton());
 	}
 
 	private void setupActionsCard() {
@@ -425,98 +436,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		AndroidUiHelper.updateVisibility(countContainer, true);
 	}
 
-	private View createButtonWithSwitch(int iconId,
-	                                    @NonNull String title,
-	                                    boolean enabled,
-	                                    boolean showShortDivider,
-	                                    @Nullable OnClickListener listener) {
-		int activeColor = selectedAppMode.getProfileColor(nightMode);
-		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int iconColor = enabled ? activeColor : defColor;
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
-
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
-		ImageView ivIcon = view.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(icon);
-		ivIcon.setColorFilter(enabled ? activeColor : defColor);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		CompoundButton cb = view.findViewById(R.id.compound_button);
-		cb.setChecked(enabled);
-		cb.setVisibility(View.VISIBLE);
-		UiUtilities.setupCompoundButton(nightMode, activeColor, cb);
-
-		if (showShortDivider) {
-			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
-		}
-
-		cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			ivIcon.setColorFilter(isChecked ? activeColor : defColor);
-			if (listener != null) {
-				listener.onClick(buttonView);
-			}
-		});
-		setupClickListener(view, v -> {
-			boolean newState = !cb.isChecked();
-			cb.setChecked(newState);
-		});
-		setupListItemBackground(view);
-
-		return view;
-	}
-
-	private View createButtonWithState(int iconId,
-	                                   @NonNull String title,
-	                                   boolean enabled,
-	                                   boolean showShortDivider,
-	                                   OnClickListener listener) {
-		View view = createButtonWithDesc(iconId, title, null, enabled, listener);
-
-		if (showShortDivider) {
-			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
-		}
-
-		TextView stateContainer = view.findViewById(R.id.items_count_descr);
-		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
-		stateContainer.setText(enabled ? R.string.shared_string_on: R.string.shared_string_off);
-
-		AndroidUiHelper.updateVisibility(stateContainer, true);
-
-		setupClickListener(view, listener);
-		setupListItemBackground(view);
-		return view;
-	}
-
-	private View createButtonWithDesc(int iconId,
-	                                  @NonNull String title,
-	                                  @Nullable String desc,
-	                                  boolean enabled,
-	                                  OnClickListener listener) {
-		int activeColor = selectedAppMode.getProfileColor(nightMode);
-		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int iconColor = enabled ? activeColor : defColor;
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
-
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
-		ImageView ivIcon = view.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(icon);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		TextView tvDesc = view.findViewById(R.id.description);
-		if (desc != null) {
-			tvDesc.setText(desc);
-			AndroidUiHelper.updateVisibility(tvDesc, true);
-		}
-
-		setupClickListener(view, listener);
-		setupListItemBackground(view);
-		return view;
-	}
-
 	private void setupListItemBackground(@NonNull View view) {
 		View button = view.findViewById(R.id.button_container);
 		int color = selectedAppMode.getProfileColor(nightMode);
@@ -579,5 +498,116 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			distanceByTapListener = change -> app.runInUIThread(() -> setupButtonsCard());
 		}
 		return distanceByTapListener;
+	}
+
+	@Override
+	public void onMap3DModeUpdated() {
+		setupButtonsCard();
+	}
+
+	private class ButtonBuilder {
+		private int iconId;
+		private String title;
+		private String desc;
+		private String stateText;
+		private boolean enabled = false;
+		private boolean showShortDivider = false;
+		private OnClickListener listener;
+		private OnClickListener onSwitchClickListener;
+		private boolean showState = false;
+		private boolean showSwitch = false;
+
+		public ButtonBuilder setTitle(@NonNull String title) {
+			this.title = title;
+			return this;
+		}
+
+		public ButtonBuilder setIconId(@DrawableRes int iconId) {
+			this.iconId = iconId;
+			return this;
+		}
+
+		public ButtonBuilder setDescription(@Nullable String desc) {
+			this.desc = desc;
+			return this;
+		}
+
+		public ButtonBuilder setEnabled(boolean enabled) {
+			this.enabled = enabled;
+			return this;
+		}
+
+		public ButtonBuilder setClickListener(@Nullable OnClickListener listener) {
+			this.listener = listener;
+			return this;
+		}
+
+		public ButtonBuilder showShortDivider(boolean showShortDivider) {
+			this.showShortDivider = showShortDivider;
+			return this;
+		}
+
+		public ButtonBuilder showState(boolean showState, @NonNull String stateText) {
+			this.showState = showState;
+			this.stateText = stateText;
+			return this;
+		}
+
+		public ButtonBuilder showSwitch(boolean showSwitch, @NonNull OnClickListener onSwitchClickListener) {
+			this.showSwitch = showSwitch;
+			this.onSwitchClickListener = onSwitchClickListener;
+			return this;
+		}
+
+		public View createButton() {
+			View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+			TextView tvTitle = view.findViewById(R.id.title);
+			ImageView ivIcon = view.findViewById(R.id.icon);
+			TextView tvDesc = view.findViewById(R.id.description);
+			View shortDivider = view.findViewById(R.id.short_divider);
+			CompoundButton cb = view.findViewById(R.id.compound_button);
+			TextView stateContainer = view.findViewById(R.id.items_count_descr);
+
+			int activeColor = selectedAppMode.getProfileColor(nightMode);
+			int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+			int iconColor = enabled ? activeColor : defColor;
+			tvTitle.setText(title);
+			Drawable icon = getPaintedContentIcon(iconId, iconColor);
+			ivIcon.setImageDrawable(icon);
+
+			if (desc != null) {
+				tvDesc.setText(desc);
+				AndroidUiHelper.updateVisibility(tvDesc, true);
+			}
+			if (showState) {
+				stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+				stateContainer.setText(stateText);
+				AndroidUiHelper.updateVisibility(stateContainer, true);
+			}
+			if (showSwitch) {
+				cb.setChecked(enabled);
+				AndroidUiHelper.updateVisibility(cb, true);
+				UiUtilities.setupCompoundButton(nightMode, activeColor, cb);
+
+				cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+					ivIcon.setColorFilter(isChecked ? activeColor : defColor);
+					if (onSwitchClickListener != null) {
+						onSwitchClickListener.onClick(buttonView);
+					}
+				});
+			}
+			if (listener == null && showSwitch) {
+				setupClickListener(view, v -> {
+					boolean newState = !cb.isChecked();
+					cb.setChecked(newState);
+				});
+			} else {
+				setupClickListener(view, listener);
+			}
+
+			AndroidUiHelper.updateVisibility(shortDivider, showShortDivider);
+			setupListItemBackground(view);
+			return view;
+		}
 	}
 }

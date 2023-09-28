@@ -32,14 +32,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -57,6 +55,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -187,7 +187,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			mpix.add((psps.get(index)).width * (psps.get(index)).height);
 			picSizesValues.add(index);
 		}
-		// sort list for max resolution in begining of list
+		// sort list for max resolution in beginning of list
 		for (int i = 0; i < mpix.size(); i++) {
 			for (int j = 0; j < mpix.size() - i - 1; j++) {
 				if (mpix.get(j) < mpix.get(j + 1)) {
@@ -253,7 +253,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Camera.Parameters parameters = cam.getParameters();
 
 		// focus mode settings
-		// show in menu only suppoted modes
+		// show in menu only supported modes
 		List<String> sfm = parameters.getSupportedFocusModes();
 		if (sfm == null) {
 			cameraFocusType.setVisible(false);
@@ -483,12 +483,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
 			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
 			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
@@ -516,24 +516,21 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		boolean nightMode = isNightMode();
 		ApplicationMode appMode = getSelectedAppMode();
 		int profileColor = appMode.getProfileColor(nightMode);
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
+		int selected = preference.getModeValue(appMode) ? 0 : 1;
 		String[] entries = new String[] {
 				getCameraAppTitle(true),
 				getCameraAppTitle(false)
 		};
-		int selected = preference.getModeValue(appMode) ? 0 : 1;
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				entries, nightMode, selected, app, profileColor, themeRes, v -> {
-					boolean useSystemApp = (int) v.getTag() == 0;
-					onConfirmPreferenceChange(preference.getId(), useSystemApp, ApplyQueryType.SNACK_BAR);
-				}
-		);
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(getString(R.string.camera_app));
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(ctx, nightMode)
+				.setTitle(getString(R.string.camera_app))
+				.setControlsColor(profileColor);
+
+		CustomAlert.showSingleSelection(dialogData, entries, selected, v -> {
+			boolean useSystemApp = (int) v.getTag() == 0;
+			onConfirmPreferenceChange(preference.getId(), useSystemApp, ApplyQueryType.SNACK_BAR);
+		});
 	}
 
 	@NonNull

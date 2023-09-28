@@ -57,7 +57,7 @@
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center_vertical"
 					osmand:srcCompat="@drawable/ic_action_gpx_width_bold"
-					tools:tint="@color/description_font_and_bottom_sheet_icons" />
+					tools:tint="@color/icon_color_default_light" />
 
 			</LinearLayout>
 

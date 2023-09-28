@@ -47,6 +47,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WIDTH = "width";
 	public static final String VEHICLE_LENGTH = "length";
 	public static final String MOTOR_TYPE = "motor_type";
+	public static final String ALLOW_VIA_FERRATA = "allow_via_ferrata";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
 
 	private static boolean USE_CACHE = true;
@@ -932,7 +933,9 @@ public class GeneralRouter implements VehicleRouter {
 		public static final int LESS_EXPRESSION = 1;
 		public static final int GREAT_EXPRESSION = 2;
 		public static final int EQUAL_EXPRESSION = 3;
-		
+		public static final int MIN_EXPRESSION = 4;
+		public static final int MAX_EXPRESSION = 5;
+
 		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
 			this.expressionType = expressionId;
 			this.values = vs;
@@ -973,15 +976,29 @@ public class GeneralRouter implements VehicleRouter {
 			return false;
 		}
 
+		private Double calculateExprValue(BitSet types, ParameterContext paramContext) {
+			double f1 = calculateExprValue(0, types, paramContext);
+			double f2 = calculateExprValue(1, types, paramContext);
+			if (!Double.isNaN(f1) && !Double.isNaN(f2)) {
+				switch (expressionType) {
+					case MIN_EXPRESSION:
+						return Math.min(f1, f2);
+					case MAX_EXPRESSION:
+						return Math.max(f1, f2);
+				}
+			}
+			return null;
+		}
+
 		private double calculateExprValue(int id, BitSet types, ParameterContext paramContext) {
 			String value = values[id];
 			Number cacheValue = cacheValues[id];
-			if(cacheValue != null) {
+			if (cacheValue != null) {
 				return cacheValue.doubleValue();
 			}
 			Object o = null;
-			if (value instanceof String && value.toString().startsWith("$")) {
-				BitSet mask = tagRuleMask.get(value.toString().substring(1));
+			if (value != null && value.startsWith("$")) {
+				BitSet mask = tagRuleMask.get(value.substring(1));
 				if (mask != null && mask.intersects(types)) {
 					BitSet findBit = new BitSet(mask.length());
 					findBit.or(mask);
@@ -989,10 +1006,10 @@ public class GeneralRouter implements VehicleRouter {
 					int v = findBit.nextSetBit(0);
 					o = parseValueFromTag(v, valueType);
 				}
-			} else if (value instanceof String && value.equals(":incline")) {
+			} else if (value != null && value.equals(":incline")) {
 				return paramContext.incline;
-			} else if (value instanceof String && value.toString().startsWith(":")) {
-				String p = ((String) value).substring(1);
+			} else if (value != null && value.startsWith(":")) {
+				String p = value.substring(1);
 				if (paramContext != null && paramContext.vars.containsKey(p)) {
 					o = parseValue(paramContext.vars.get(p), valueType);
 				}
@@ -1016,17 +1033,18 @@ public class GeneralRouter implements VehicleRouter {
 		protected String selectValueDef = null;
 		protected Object selectValue = null;
 		protected String selectType = null;
+		protected RouteAttributeExpression selectExpression = null;
 		protected BitSet filterTypes = new BitSet();
 		protected BitSet filterNotTypes = new BitSet();
 		protected BitSet evalFilterTypes = new BitSet();
 		
 		protected Set<String> onlyTags = new LinkedHashSet<String>();
 		protected Set<String> onlyNotTags = new LinkedHashSet<String>();
-		protected List<RouteAttributeExpression> expressions = new ArrayList<RouteAttributeExpression>();
+		protected List<RouteAttributeExpression> conditionExpressions = new ArrayList<RouteAttributeExpression>();
 		
 		
 		public RouteAttributeExpression[] getExpressions() {
-			return expressions.toArray(new RouteAttributeExpression[0]);
+			return conditionExpressions.toArray(new RouteAttributeExpression[0]);
 		}
 		
 		public String[] getParameters() {
@@ -1063,33 +1081,36 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public void printRule(PrintStream out) {
-			out.print(" Select " + selectValue  + " if ");
-			for(int k = 0; k < filterTypes.length(); k++) {
-				if(filterTypes.get(k)) {
+			out.print(" Select " + selectValue + " if ");
+			for (int k = 0; k < filterTypes.length(); k++) {
+				if (filterTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
 				}
 			}
-			if(filterNotTypes.length() > 0) {
+			if (filterNotTypes.length() > 0) {
 				out.print(" ifnot ");
 			}
-			for(int k = 0; k < filterNotTypes.length(); k++) {
-				if(filterNotTypes.get(k)) {
+			for (int k = 0; k < filterNotTypes.length(); k++) {
+				if (filterNotTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
 				}
 			}
-			for(int k = 0; k < parameters.size(); k++) {
-				out.print(" param="+parameters.get(k));
+			for (int k = 0; k < parameters.size(); k++) {
+				out.print(" param=" + parameters.get(k));
 			}
-			if(onlyTags.size() > 0) {
+			if (onlyTags.size() > 0) {
 				out.print(" match tag = " + onlyTags);
 			}
-			if(onlyNotTags.size() > 0) {
+			if (onlyNotTags.size() > 0) {
 				out.print(" not match tag = " + onlyNotTags);
 			}
-			if(expressions.size() > 0) {
-				out.println(" subexpressions " + expressions.size());
+			if (conditionExpressions.size() > 0) {
+				out.println(" subexpressions " + conditionExpressions.size());
+			}
+			if (selectExpression != null) {
+				out.println("  selectexpression " + selectExpression.expressionType);
 			}
 			out.println();
 		}
@@ -1115,20 +1136,30 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public void registerLessCondition(String value1, String value2, String valueType) {
-			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+			conditionExpressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
 					RouteAttributeExpression.LESS_EXPRESSION));
 		}
-		
+
 		public void registerGreatCondition(String value1, String value2, String valueType) {
-			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+			conditionExpressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
 					RouteAttributeExpression.GREAT_EXPRESSION));
 		}
-		
+
 		public void registerEqualCondition(String value1, String value2, String valueType) {
-			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+			conditionExpressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
 					RouteAttributeExpression.EQUAL_EXPRESSION));
 		}
-		
+
+		public void registerMinExpression(String value1, String value2, String valueType) {
+			selectExpression = new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+					RouteAttributeExpression.MIN_EXPRESSION);
+		}
+
+		public void registerMaxExpression(String value1, String value2, String valueType) {
+			selectExpression = new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+					RouteAttributeExpression.MAX_EXPRESSION);
+		}
+
 		public void registerAndParamCondition(String param, boolean not) {
 			param = not ? "-" + param : param;
 			parameters.add(param);
@@ -1143,7 +1174,9 @@ public class GeneralRouter implements VehicleRouter {
 		
 
 		protected Object calcSelectValue(BitSet types, ParameterContext paramContext) {
-			if (selectValue instanceof String && selectValue.toString().startsWith("$")) {
+			if (selectExpression != null) {
+				selectValue = selectExpression.calculateExprValue(types, paramContext);
+			} else if (selectValue instanceof String && selectValue.toString().startsWith("$")) {
 				BitSet mask = tagRuleMask.get(selectValue.toString().substring(1));
 				if (mask != null && mask.intersects(types)) {
 					BitSet findBit = new BitSet(mask.length());
@@ -1164,27 +1197,27 @@ public class GeneralRouter implements VehicleRouter {
 		}
 
 		public boolean matches(BitSet types, ParameterContext paramContext) {
-			if(!checkAllTypesShouldBePresent(types)) {
+			if (!checkAllTypesShouldBePresent(types)) {
 				return false;
 			}
-			if(!checkAllTypesShouldNotBePresent(types)) {
+			if (!checkAllTypesShouldNotBePresent(types)) {
 				return false;
 			}
-			if(!checkFreeTags(types)) {
+			if (!checkFreeTags(types)) {
 				return false;
 			}
-			if(!checkNotFreeTags(types)) {
+			if (!checkNotFreeTags(types)) {
 				return false;
 			}
-			if(!checkExpressions(types, paramContext)) {
+			if (!checkExpressions(types, paramContext)) {
 				return false;
 			}
 			return true;
 		}
 
 		private boolean checkExpressions(BitSet types, ParameterContext paramContext) {
-			for(RouteAttributeExpression e : expressions){
-				if(!e.matches(types, paramContext)) {
+			for (RouteAttributeExpression e : conditionExpressions) {
+				if (!e.matches(types, paramContext)) {
 					return false;
 				}
 			}

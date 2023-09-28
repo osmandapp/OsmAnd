@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
@@ -65,6 +66,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.CompassButton;
 import net.osmand.plus.views.controls.maphudbuttons.ConfigureMapButton;
 import net.osmand.plus.views.controls.maphudbuttons.DrawerMenuButton;
+import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.NavigationMenuButton;
@@ -98,6 +100,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapButton> mapButtons = new ArrayList<>();
 	private CompassButton compassButton;
+	private Map3DButton map3DButton;
 
 	private LinearLayout transparencyBarLayout;
 	private Slider transparencySlider;
@@ -141,6 +144,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			vh = mapActivity.getWidgetsVisibilityHelper();
 			initTopControls();
+			initFabButtons(mapActivity);
 			initTransparencyBar();
 			initZooms();
 			initDashboardRelatedControls();
@@ -154,6 +158,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapRouteInfoMenu = null;
 			compassButton = null;
 			zoomText = null;
+			if (map3DButton != null) {
+				map3DButton.onDestroyButton();
+			}
+			map3DButton = null;
 		}
 	}
 
@@ -161,8 +169,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return compassButton.moveToSpecialPosition(destLayout, layoutParams);
 	}
 
+	public void moveMap3DButton(ViewGroup destLayout, ViewGroup.LayoutParams layoutParams) {
+		if (map3DButton != null) {
+			map3DButton.moveToSpecialPosition(destLayout, layoutParams);
+		}
+	}
+
 	public void restoreCompassButton() {
 		compassButton.moveToDefaultPosition();
+	}
+
+	public void restoreMap3DButton() {
+		if (map3DButton != null) {
+			map3DButton.restoreSavedPosition();
+		}
 	}
 
 	private void initTopControls() {
@@ -173,6 +193,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		compassButton = new CompassButton(mapActivity);
 		mapButtons.add(compassButton);
+	}
+
+	private void initFabButtons(MapActivity mapActivity) {
+		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
+		if (map3DButton != null) {
+			map3DButton.onDestroyButton();
+		}
+		map3DButton = new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID);
+		mapButtons.add(map3DButton);
 	}
 
 	public void setControlsClickable(boolean clickable) {
@@ -582,7 +611,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
+		destroyButtons();
+	}
+
+	private void destroyButtons() {
+		for (MapButton button : mapButtons) {
+			button.onDestroyButton();
+		}
 		mapButtons.clear();
+	}
+
+	public void refreshButtons() {
+		for (MapButton button : mapButtons) {
+			button.refresh();
+		}
 	}
 
 	@Override

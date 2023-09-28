@@ -304,7 +304,7 @@
     <string name="backup_deleting_all_data">Se brišat site podatoci…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavuvanje\?
 \nḰe treba povtorno da se najavite za da napravite rezervna kopija ili da gi vratite podatocite.</string>
-    <string name="contour_lines_hillshades_slope">Konturni linii, ridovi, nagib</string>
+    <string name="contour_lines_hillshade_slope">Konturni linii, ridovi, nagib</string>
     <string name="backup_error_no_valid_subscription">Nema validna pretplata</string>
     <string name="backup_error_user_is_not_registered">Nitu eden korisnik ne e registriran so taa adresa na e-pošta</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažečki ili istečen token</string>
@@ -336,10 +336,8 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s ili %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Dobijte “%1$s” kako del od planot %2$s . Sporedba:</string>
     <string name="nautical_depth">Nautička dlabočina</string>
-    <string name="terrain_maps">Terenski karti</string>
     <string name="offline_wikivoyage">Oflajn Wikipatuvanje</string>
     <string name="offline_wikipeadia">Wkipedia oflajn</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Karti na terenot: konturni linii, ridovi, nagib</string>
     <string name="wikipedia_and_wikivoyage_offline">Wkipedia i Wikipatuvanje oflajn</string>
     <string name="unlimited_map_downloads">Neograniceno simnuvanje na karti</string>
     <string name="purchases_feature_desc_monthly_map_updates">Dobijte pristap do redovnite mesečni ažuriranja za oflajn karti.</string>
@@ -889,7 +887,6 @@
     <string name="live_monitoring_time_buffer">Vremenski odbojmik</string>
     <string name="live_monitoring_tracking_interval">Interval na sledenje</string>
     <string name="live_monitoring_adress">Web addresa</string>
-    <string name="live_monitoring_adress_descr">Navedete ja veb-adresata so sintaksa na parametarot: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Notifikacija</string>
     <string name="monitoring_min_speed">Minimalna brzina</string>
     <string name="monitoring_min_accuracy">Minimalna točnost</string>
@@ -1271,7 +1268,6 @@
     <string name="quick_action_hillshade_descr">Kopče za prikažuvanje ili sokrivanje na ridovite na kartata.</string>
     <string name="shared_string_memory_used_mb_desc">Iskoristen %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Iskoristen %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Kontrolni linii i planisnki senki</string>
     <string name="update_all_maps">Site karti se azurirani</string>
     <string name="update_all_maps_q">Da se azuriraat site (%1$d) karti\?</string>
     <string name="track_storage_directory">Sledete ja papkata za skladiranje</string>
@@ -1498,7 +1494,7 @@
     <string name="rendering_attr_piste_difficulty_undefined_name">Nedefinirano</string>
     <string name="routeInfo_piste_difficulty_name">Teskotii na patekata</string>
     <string name="shared_string_osmand_usage">OsmAnd upotreba</string>
-    <string name="shared_sting_tiles">Plocki</string>
+    <string name="shared_string_tiles">Plocki</string>
     <string name="shared_string_maps">Karti</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="navigate_point_format_olc">Otvorete go kodot za lokacija</string>
@@ -1913,7 +1909,6 @@
     <string name="wikivoyage_offline">Wikivoyage ofline</string>
     <string name="unlimited_downloads">Neograniceni prevzemanja</string>
     <string name="wikipedia_offline">Wikipedia ofline</string>
-    <string name="contour_lines_hillshade_maps">Konturni linii i karti na ridovi</string>
     <string name="unlock_all_features">Otklučete gi site funkcii na OsmAnd</string>
     <string name="purchase_dialog_travel_description">Kupete edno od slednive za da ja dobiete funkcionalnosta za oflajn vodič za patuvanje:</string>
     <string name="shared_string_dont">Nemoj</string>
@@ -2667,7 +2662,6 @@
     <string name="region_maps">Karti niz celiot region</string>
     <string name="world_maps">Svetski karti</string>
     <string name="hillshade_layer_disabled">Slojot na ridovi e onevozmožen</string>
-    <string name="srtm_plugin_disabled">Onevozmozeni konturni linii</string>
     <string name="favorite_category_add_new">Dodadi nov</string>
     <string name="favorite_category_select">Izberi kategorija</string>
     <string name="marker_2nd">Vtor marker</string>
@@ -3192,11 +3186,8 @@
     <string name="av_settings_descr">Postavete postavki za audio i video.</string>
     <string name="av_settings">Postavki za audio/video</string>
     <string name="map_widget_av_notes">Audio/video zabeleski</string>
-    <string name="index_srtm_parts">delovi</string>
-    <string name="index_srtm_ele">Konturni linii</string>
     <string name="download_select_map_types">Drugi karti</string>
     <string name="download_roads_only_maps">Patista-samo karta</string>
-    <string name="rendering_attr_alpineHiking_description">Avtomatski iscrtani karti spored скалата SAC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Granici</string>
     <string name="rendering_attr_noAdminboundaries_description">Potisnete go prikazot na regionalnite granici (administratorsko nivo 5–9).</string>
     <string name="map_widget_max_speed">Ogranici brzina</string>
@@ -3480,7 +3471,6 @@
     <string name="download_roads_only_item">Samo patista</string>
     <string name="download_srtm_maps">Konturni linii</string>
     <string name="download_regular_maps">Standardna karta</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Plainarski marsruti</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Avtomatski iscrtani karti spored OSMC tragite.</string>
     <string name="zxing_barcode_scanner_not_found">Aplikacijata ZXing Barcode Scanner ne e instalirana. Baraj vo Google Play\?</string>
@@ -4030,7 +4020,6 @@
     <string name="routing_settings">Navigacija</string>
     <string name="amenity_type_osmwiki">Vikipedija (oflajn)</string>
     <string name="global_settings">Globalni postavki</string>
-    <string name="index_settings">Upravuvajte so datotekite na kartite</string>
     <string name="pref_overlay">Preklopuvanje / podloga</string>
     <string name="pref_raster_map">Postavki za izvorot na kartata</string>
     <string name="pref_vector_map">Postavki za vektorska karta</string>
@@ -4687,7 +4676,7 @@
     <string name="voice_prompts_timetable">Vreminja na glasovni izvestuvanja</string>
     <string name="routing_attr_freeride_policy_description">„Freeride“ i „Off-piste“ se neoficijalni pravci i premini. Tipično neguvani, neodržuvani i ne provereni navečer. Vlezete na vaš sopstven rizik.</string>
     <string name="amenity_type_shop">Prodavnica</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="quick_action_map_underlay_title">Podlogi na kartata</string>
     <string name="quick_action_map_underlay_action">Dodadete podloga</string>
     <string name="quick_action_map_source">Promenete go izvorot na kartata</string>
@@ -4745,8 +4734,6 @@
     <string name="trip_recording_duration_widget_desc">Go prikazuva vremeto na snimanjeto na patekata, vremetraenjeto vo minuti/casovi od momentalno snimenoto patuvanje.</string>
     <string name="trip_recording_distance_widget_desc">Go prikazuva rastojanieto na tekovno snimenoto patuvanje.</string>
     <string name="time_to_intermediate_widget_desc">Vidzetot pokazuva „Vreme na pristignuvanje“ ili „Vreme za odenje“ do prvata sredna tocka. Vremeto postojano se azurira za vreme na navigacijata, stom ce pominat srednite tocki, vremeto ce se azurira na slednata sredna tocka.</string>
-    <string name="accessibility_2d_view_off">Isklucen 2,5 D</string>
-    <string name="accessibility_2d_view_on">Vklucen 2.5 D</string>
     <string name="download_complete">Simnuvanjeto e kompletno</string>
     <string name="compass_visible_if_map_rotated_desc">Skrieno koga sever e gore</string>
     <string name="distance_to_intermediate_widget_desc">Vidzetot go pokazuva rastojanieto ostaveno do prvata sredna tocka. Otkako ce se pominat srednite tocki, rastojanieto ce se azurira do slednata sredna tocka.</string>

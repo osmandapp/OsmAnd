@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
@@ -47,7 +49,7 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.external_device_characteristic_temperature, -1, temperature));
+					new SensorDataField(R.string.external_device_characteristic_temperature, R.string.degree_celsius, temperature));
 		}
 
 		@NonNull
@@ -136,10 +138,10 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		TemperatureData data = lastTemperatureData;
 		if (data != null) {
-			json.put(getSensorId(), data.temperature);
+			json.put(SENSOR_TAG_TEMPERATURE, data.temperature);
 		}
 	}
 }

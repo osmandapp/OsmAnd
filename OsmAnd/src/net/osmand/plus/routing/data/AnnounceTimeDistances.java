@@ -31,12 +31,11 @@ public class AnnounceTimeDistances {
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
-	private double voicePromptDelayTimeSec;
+	private double voicePromptDelayTimeSec = 0;
 
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;
 
-	private float TURN_NOW_SPEED;
 	private final int PREPARE_LONG_DISTANCE;
 	private int PREPARE_LONG_DISTANCE_END;
 	private final int PREPARE_DISTANCE;
@@ -101,21 +100,18 @@ public class AnnounceTimeDistances {
 
 	public void setArrivalDistances(float arrivalDistanceFactor) {
 		arrivalDistanceFactor = Math.max(arrivalDistanceFactor, 0.1f);
-		// Turn now: 3.5 s normal speed, 7 s for half speed (default)
-		// float TURN_NOW_TIME = 7;
-		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
-		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
-		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 
-		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (capped by POSITIONING_TOLERANCE)
-		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * arrivalDistanceFactor);
-		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
+		// TURN_NOW lead time heuristically: Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)
+		// car: 6.7 s * 45 km/h = 83 m, bicycle 3.2s * 10 km/h = 8 m -> 12 m,
+		// pedestrian 2 s * 4 km/h = 2 m -> 12 m, 1 km/h - 1 s (all floored by POSITIONING_TOLERANCE)
+		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, 
+				DEFAULT_SPEED * (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)) * arrivalDistanceFactor);
 
-		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
+		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (floored by POSITIONING_TOLERANCE)
 		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
-		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * arrivalDistanceFactor; // 20 seconds
+		OFF_ROUTE_DISTANCE = DEFAULT_SPEED * 20 * (2.0f - arrivalDistanceFactor); // 20 seconds
 
 		// assume for backward compatibility speed - 10 m/s
 		SHORT_ALARM_ANNOUNCE_RADIUS = (int) (7 * DEFAULT_SPEED * arrivalDistanceFactor); // 70 m
@@ -139,7 +135,12 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
+				if (currentSpeed < DEFAULT_SPEED) {
+					// Issue #17376: low speed adjustment for TURN_NOW timing
+					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE)
+							+ currentSpeed * voicePromptDelayTimeSec;
+				}
+				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
@@ -174,29 +175,15 @@ public class AnnounceTimeDistances {
 		return true;
 	}
 
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon) {
-		return isDistanceLess(currentSpeed, dist, etalon, DEFAULT_SPEED);
-	}
-
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
-		// Check triggers:
-		// (1) distance < etalon?
-		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
-			return true;
-		}
-		// (2) time_with_current_speed < etalon_time_with_default_speed?
-		// check only if speed > 0
-		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed;
+	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
+		// Check trigger. Lead distance is scaled up for high speeds. (For cases without such scaling we pass currentSpeed=0.)
+		return dist <= Math.max(leadDist, currentSpeed / DEFAULT_SPEED * leadDist) + currentSpeed * voicePromptDelayTimeSec;
 	}
 
 	public float getSpeed(Location loc) {
-		boolean simulation = false;
-		if (locationProvider != null) {
-			simulation = locationProvider.getLocationSimulation().isRouteAnimating();
-		}
 		float speed = DEFAULT_SPEED;
-		if (loc != null && loc.hasSpeed() && !simulation) {
-			speed = Math.max(loc.getSpeed(), speed);
+		if (loc != null && loc.hasSpeed()) {
+			speed = loc.getSpeed();
 		}
 		return speed;
 	}
@@ -214,12 +201,11 @@ public class AnnounceTimeDistances {
 	}
 
 	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, String meter, String second) {
-		appendTurnDesc(app, builder, name, dist, DEFAULT_SPEED, meter, second);
+		appendTurnDesc(app, builder, name, dist, (int) (dist / DEFAULT_SPEED), meter, second);
 	}
 
-	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, int time, String meter, String second) {
 		int minDist = (dist / 5) * 5;
-		int time = (int) (dist / speed);
 		if (time > 15) {
 			// round to 5
 			time = (time / 5) * 5;
@@ -259,7 +245,7 @@ public class AnnounceTimeDistances {
 			appendTurnDesc(app, builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
 		}
 		appendTurnDesc(app, builder, approach, TURN_IN_DISTANCE, meter, second);
-		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
+		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, (int) (TURN_NOW_DISTANCE / DEFAULT_SPEED), meter, second);
 
 		// Arrive at destination
 		appendTurnDesc(app, builder, arrive, (int) (getArrivalDistance()), meter, second);

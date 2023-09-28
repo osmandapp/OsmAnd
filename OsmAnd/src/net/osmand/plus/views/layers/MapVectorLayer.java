@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererContext.ProviderType;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
@@ -92,15 +93,14 @@ public class MapVectorLayer extends BaseMapLayer {
 	private void recreateLayerProvider() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			mapContext.recreateRasterAndSymbolsProvider();
+			mapContext.recreateRasterAndSymbolsProvider(ProviderType.MAIN);
 		}
 	}
 
 	private void resetLayerProvider() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			mapContext.resetRasterAndSymbolsProvider();
-			mapContext.resetHeightmapProvider();
+			mapContext.resetRasterAndSymbolsProvider(ProviderType.MAIN);
 		}
 	}
 

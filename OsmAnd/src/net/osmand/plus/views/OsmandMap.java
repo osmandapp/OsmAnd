@@ -138,6 +138,10 @@ public class OsmandMap implements NavigationSessionListener {
 		// double curZoom = mapView.getZoom() + mapView.getZoomFractionalPart() + stp * 0.3;
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
+		AnimateDraggingMapThread animateDraggingThread = mapView.getAnimatedDraggingThread();
+		if (animateDraggingThread.isAnimatingMapZoom()) {
+			animateDraggingThread.stopAnimatingSync();
+		}
 
 		Zoom zoom = new Zoom(mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom());
 
@@ -150,7 +154,7 @@ public class OsmandMap implements NavigationSessionListener {
 		}
 
 		zoom.changeZoom(stp);
-		mapView.getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), changeLocation);
+		animateDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, changeLocation);
 		if (app.accessibilityEnabled()) {
 			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
 		}

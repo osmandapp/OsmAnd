@@ -8,6 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
@@ -41,8 +42,9 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	@Override
 	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
 		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (ExportSettingsType type : ExportSettingsType.values()) {
-			if (backupHelper.getBackupTypePref(type).get()) {
+			if (backupHelper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable)) {
 				selectedItemsMap.put(type, getItemsForType(type));
 			}
 		}

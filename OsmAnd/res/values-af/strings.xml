@@ -196,7 +196,6 @@
     <string name="routing_settings">Navigasie</string>
   <string name="routing_settings_descr">Spesifiseer navigasie opsies</string>
   <string name="global_settings">Oorhoofse instellings</string>
-  <string name="index_settings">Inligting Bestuur</string>
   <string name="general_settings">Algemene instellings</string>
   <string name="general_settings_descr">Instel van oorhoofse verstellings</string>
   <string name="global_app_settings">oorhoofse toepassing instellings</string>
@@ -860,10 +859,8 @@
     <string name="map_widget_av_notes">Oudio/video notas</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd inlasmodule vir aflyn kontoerlyne</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
-    <string name="index_srtm_parts">dele</string>
     <string name="audionotes_plugin_name">Oudio/video notas</string>
     <string name="map_widget_audionotes">Oudio notas</string>
-    <string name="index_srtm_ele">Kontoerlyne</string>
     <string name="download_select_map_types">Ander kaarte</string>
     <string name="download_srtm_maps">Kontoerlyne</string>
     <string name="download_roads_only_item">Slegs paaie</string>

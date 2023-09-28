@@ -300,7 +300,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				if (latLon != null) {
 					int ex = (int) point.x;
 					int ey = (int) point.y;
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, latLon.getLatitude(), latLon.getLongitude());
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, latLon);
 					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
 						o.add(tp);
 					}

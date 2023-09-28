@@ -1,5 +1,9 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
+import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
+import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
+import static net.osmand.plus.charts.GPXDataSetType.SPEED;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -8,52 +12,43 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplayItem> {
 
-	private final GpxDisplayHelper gpxDisplayHelper;
-	private final GPXInfo gpxInfo;
+	private final GPXFile gpxFile;
+	private final WptPt selectedPoint;
 
-	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GPXInfo gpxInfo) {
+	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile, @Nullable WptPt selectedPoint) {
 		super(activity);
-		this.gpxInfo = gpxInfo;
-		this.gpxDisplayHelper = app.getGpxDisplayHelper();
+		this.gpxFile = gpxFile;
+		this.selectedPoint = selectedPoint;
 	}
 
 	@Nullable
 	@Override
 	protected GpxDisplayItem doInBackground(Void... voids) {
+		Track generalTrack = gpxFile.getGeneralTrack();
+
 		GpxDisplayGroup gpxDisplayGroup = null;
-		GPXFile gpxFile = null;
-		Track generalTrack = null;
-		if (gpxInfo.getGpxFile() == null) {
-			if (gpxInfo.getFile() != null) {
-				gpxFile = GPXUtilities.loadGPXFile(gpxInfo.getFile());
-			}
-		} else {
-			gpxFile = gpxInfo.getGpxFile();
-		}
-		if (gpxFile != null) {
-			generalTrack = gpxFile.getGeneralTrack();
-		}
 		if (generalTrack != null) {
 			gpxFile.addGeneralTrack();
-			gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
-		} else if (gpxFile != null && !gpxFile.tracks.isEmpty()) {
-			gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
+			gpxDisplayGroup = buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
+		} else if (!gpxFile.tracks.isEmpty()) {
+			gpxDisplayGroup = buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 		}
 		List<GpxDisplayItem> items = null;
 		if (gpxDisplayGroup != null) {
@@ -65,24 +60,44 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 		return null;
 	}
 
+	@NonNull
+	private GpxDisplayGroup buildGeneralGpxDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track) {
+		String name = GpxDisplayHelper.getGroupName(app, gpxFile);
+
+		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
+		group.setGpxName(name);
+		group.setColor(track.getColor(gpxFile.getColor(0)));
+		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
+		group.setTrack(track);
+		group.setName(app.getString(R.string.gpx_selection_track, name, ""));
+		String description = "";
+		if (track.name != null && !track.name.isEmpty()) {
+			description = track.name + " " + description;
+		}
+		group.setDescription(description);
+		group.setGeneralTrack(true);
+		SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
+		return group;
+	}
+
 	@Override
 	protected void onPostExecute(@Nullable GpxDisplayItem gpxItem) {
 		hideProgress();
 
 		if (gpxItem != null && gpxItem.analysis != null) {
 			ArrayList<GPXDataSetType> list = new ArrayList<>();
-			if (gpxItem.analysis.hasElevationData) {
-				list.add(GPXDataSetType.ALTITUDE);
+			if (gpxItem.analysis.hasElevationData()) {
+				list.add(ALTITUDE);
 			}
-			if (gpxItem.analysis.hasSpeedData) {
-				list.add(GPXDataSetType.SPEED);
-			} else if (gpxItem.analysis.hasElevationData) {
-				list.add(GPXDataSetType.SLOPE);
+			if (gpxItem.analysis.hasSpeedData()) {
+				list.add(SPEED);
+			} else if (gpxItem.analysis.hasElevationData()) {
+				list.add(SLOPE);
 			}
 			if (!list.isEmpty()) {
 				gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 			}
-			OsmandSettings settings = app.getSettings();
+			gpxItem.locationOnMap = selectedPoint;
 			settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
@@ -90,6 +105,11 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 					gpxItem);
 
 			FragmentActivity activity = activityRef.get();
+			if (activity instanceof MapActivity) {
+				MapActivity mapActivity = (MapActivity) activity;
+				mapActivity.getContextMenu().hide();
+				mapActivity.getDashboard().hideDashboard();
+			}
 			Context context = activity != null ? activity : app;
 			MapActivity.launchMapActivityMoveToTop(context);
 		}

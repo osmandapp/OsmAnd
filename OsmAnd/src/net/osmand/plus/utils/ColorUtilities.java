@@ -15,6 +15,23 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ColorUtilities {
 
+	public static float getColorsSquareDistance(@ColorInt int color1, @ColorInt int color2) {
+		int redDiff = Color.red(color1) - Color.red(color2);
+		int greenDiff = Color.green(color1) - Color.green(color2);
+		int blueDiff = Color.blue(color1) - Color.blue(color2);
+		float redmean = (Color.red(color1) + Color.red(color2)) / 2f;
+
+		float redCoeff = 2.0f + redmean / 255.0f;
+		float greenCoeff = 4.0f;
+		float blueCoeff = 2.0f + (255.0f - redmean) / 255.0f;
+
+		float redDelta = redCoeff * redDiff * redDiff;
+		float greenDelta = greenCoeff * greenDiff * greenDiff;
+		float blueDelta = blueCoeff * blueDiff * blueDiff;
+
+		return redDelta + greenDelta + blueDelta;
+	}
+
 	@ColorInt
 	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
 		// Counting the perceptive luminance - human eye favors green color...
@@ -144,6 +161,11 @@ public class ColorUtilities {
 	}
 
 	@ColorRes
+	public static int getSecondaryTextColorId() {
+		return R.color.text_color_secondary_dark;
+	}
+
+	@ColorRes
 	public static int getSecondaryTextColorId(boolean nightMode) {
 		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 	}
@@ -189,6 +211,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getPrimaryIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getPrimaryIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getPrimaryIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
+	}
+
+	@ColorInt
 	public static int getButtonSecondaryTextColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getButtonSecondaryTextColorId(nightMode));
 	}
@@ -225,7 +257,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getAppBarColorId(boolean nightMode) {
-		return nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light;
+		return nightMode ? R.color.app_bar_main_dark : R.color.app_bar_main_light;
 	}
 
 	@ColorInt
@@ -300,8 +332,43 @@ public class ColorUtilities {
 		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
 	}
 
+	@ColorInt
+	public static int getToolbarActiveColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getToolbarActiveColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getToolbarActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.app_bar_active_dark : R.color.app_bar_active_light;
+	}
+
 	@ColorRes
 	public static int getStatusBarColorId(boolean nightMode) {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
+	}
+
+	@ColorRes
+	public static int getStatusBarActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.status_bar_selection_color_dark : R.color.status_bar_selection_color_light;
+	}
+
+	@ColorInt
+	public static int getLinksColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getLinksColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getLinksColorId(boolean nightMode) {
+		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+	}
+
+	@ColorInt
+	public static int getOsmandIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getOsmandIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getOsmandIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 	}
 }

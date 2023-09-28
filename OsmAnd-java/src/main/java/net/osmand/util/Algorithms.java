@@ -3,6 +3,7 @@ package net.osmand.util;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
@@ -36,6 +37,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -53,6 +56,8 @@ public class Algorithms {
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
+
+	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
 
 	public static final int ZIP_FILE_SIGNATURE = 0x504b0304;
 	public static final int XML_FILE_SIGNATURE = 0x3c3f786d;
@@ -148,7 +153,7 @@ public class Algorithms {
 	}
 
 	public static long parseLongSilently(String input, long def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Long.parseLong(input);
 			} catch (NumberFormatException e) {
@@ -159,7 +164,7 @@ public class Algorithms {
 	}
 
 	public static int parseIntSilently(String input, int def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Integer.parseInt(input);
 			} catch (NumberFormatException e) {
@@ -170,9 +175,20 @@ public class Algorithms {
 	}
 
 	public static double parseDoubleSilently(String input, double def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Double.parseDouble(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
+	public static float parseFloatSilently(String input, float def) {
+		if (!isEmpty(input)) {
+			try {
+				return Float.parseFloat(input);
 			} catch (NumberFormatException e) {
 				return def;
 			}
@@ -272,15 +288,15 @@ public class Algorithms {
 	}
 
 	public static List<File> collectDirs(File parentDir, List<File> dirs, File exclDir) {
-		File[] listFiles = parentDir.listFiles();
-		if (listFiles != null) {
-			Arrays.sort(listFiles);
-			for (File f : listFiles) {
-				if (f.isDirectory()) {
-					if (!f.equals(exclDir)) {
-						dirs.add(f);
+		File[] files = parentDir.listFiles();
+		if (files != null) {
+			Arrays.sort(files);
+			for (File file : files) {
+				if (file.isDirectory()) {
+					if (!file.equals(exclDir)) {
+						dirs.add(file);
 					}
-					collectDirs(f, dirs);
+					collectDirs(file, dirs, exclDir);
 				}
 			}
 		}
@@ -452,7 +468,9 @@ public class Algorithms {
 	}
 
 	public static boolean isHtmlText(String text) {
-		return text.contains("</");
+		Pattern pattern = Pattern.compile(HTML_PATTERN);
+		Matcher matcher = pattern.matcher(text);
+		return matcher.find();
 	}
 
 	/**
@@ -573,6 +591,17 @@ public class Algorithms {
 		if (o != null && args != null) {
 			for (Object o1 : args) {
 				if (o.equals(o1)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean anyIsNull(Object ... args) {
+		if (args != null) {
+			for (Object o : args) {
+				if (o == null) {
 					return true;
 				}
 			}
@@ -861,23 +890,22 @@ public class Algorithms {
 		}
 	}
 
-	public static boolean removeAllFiles(File f) {
-		if (f == null) {
+	public static boolean removeAllFiles(File file) {
+		if (file == null) {
 			return false;
 		}
-		if (f.isDirectory()) {
-			File[] fs = f.listFiles();
-			if (fs != null) {
-				for (File c : fs) {
-					removeAllFiles(c);
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			if (!isEmpty(files)) {
+				for (File f : files) {
+					removeAllFiles(f);
 				}
 			}
-			return f.delete();
+			return file.delete();
 		} else {
-			return f.delete();
+			return file.delete();
 		}
 	}
-
 
 	public static long parseLongFromBytes(byte[] bytes, int offset) {
 		long o = 0xff & bytes[offset + 7];
@@ -1004,6 +1032,10 @@ public class Algorithms {
 	}
 
 	public static boolean isFloat(String value) {
+		return isFloat(value, false);
+	}
+
+	public static boolean isFloat(String value, boolean includeInt) {
 		int pointsCount = 0;
 		int length = value.length();
 		for (int i = 0; i < length; i++) {
@@ -1023,7 +1055,7 @@ public class Algorithms {
 				}
 			}
 		}
-		return pointsCount == 1;
+		return pointsCount == 1 || includeInt && pointsCount == 0;
 	}
 
 	public static <T> T getPercentile(List<T> sortedValues, int percentile) throws IllegalArgumentException {
@@ -1351,4 +1383,17 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
+		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
+		mapRect.right = Math.max(mapRect.right, longitude);
+		mapRect.bottom = mapRect.bottom == 0.0 ? latitude : Math.min(mapRect.bottom, latitude);
+		mapRect.top = Math.max(mapRect.top, latitude);
+	}
+
+	public static void extendRectToContainRect(QuadRect mapRect, QuadRect gpxRect) {
+		mapRect.left = mapRect.left == 0.0 ? gpxRect.left : Math.min(mapRect.left, gpxRect.left);
+		mapRect.right = Math.max(mapRect.right, gpxRect.right);
+		mapRect.top = Math.max(mapRect.top, gpxRect.top);
+		mapRect.bottom = mapRect.bottom == 0.0 ? gpxRect.bottom : Math.min(mapRect.bottom, gpxRect.bottom);
+	}
 }

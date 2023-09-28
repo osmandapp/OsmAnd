@@ -139,7 +139,6 @@
     <string name="routing_settings">ნავიგაცია</string>
     <string name="routing_settings_descr">მიუთითეთ ნავიგაციის პარამეტრები.</string>
     <string name="global_settings">გლობალური პარამეტრები</string>
-    <string name="index_settings">რუკების გადმოწერა</string>
     <string name="general_settings">მთავარი პარამეტრები</string>
     <string name="general_settings_descr">მთავარი პარამეტრების გამართვა.</string>
     <string name="global_app_settings">აპლიკაციის მთავარი პარამეტრები</string>
@@ -859,8 +858,6 @@
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
     <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
-    <string name="index_srtm_parts">მონაკვეთები</string>
-    <string name="index_srtm_ele">კონტურული ხაზები</string>
     <string name="srtm_plugin_description"></string>
     <string name="srtm_plugin_name">კონტურული ხაზების დამატება</string>
     <string name="download_select_map_types">სხვა რუკები</string>
@@ -1319,7 +1316,7 @@
     <string name="app_mode_motorboat">მოტორიანი ნავი</string>
     <string name="shared_preference">გაზიარებული</string>
     <string name="shared_string_maps">რუკები</string>
-    <string name="shared_sting_tiles">ფილები</string>
+    <string name="shared_string_tiles">ფილები</string>
     <string name="shared_string_calculate">გამოთვლა</string>
     <string name="rendering_attr_piste_difficulty_connection_name">კავშირი</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">საჰაერო</string>
@@ -1557,7 +1554,7 @@
     <string name="shared_string_update">განახლება</string>
     <string name="shared_string_upload">ატვირთვა</string>
     <string name="feedback">უკუკავშირი</string>
-    <string name="contact_us">კონტაქტი</string>
+    <string name="shared_string_contact">კონტაქტი</string>
     <string name="versions_item">ვერსიები</string>
     <string name="faq_item">კითხვაპასუხი</string>
     <string name="other_menu_group">სხვა</string>
@@ -2647,7 +2644,6 @@
     <string name="enter_country_name">შეიყვანეთ ქვეყნის სახელი</string>
     <string name="free_downloads_used">გამოყენებული უფასო გადმოწერები</string>
     <string name="favorite_category_add_new_title">ახალი კატეგორიის დამატება</string>
-    <string name="srtm_plugin_disabled">კონტურული ხაზები გამორთულია</string>
     <string name="si_min_m">წუთი მილში</string>
     <string name="si_min_km">წუთი კილომეტრში</string>
     <string name="si_m_s">მეტრი წამში</string>
@@ -2792,7 +2788,6 @@
     <string name="shared_string_details">დეტალები</string>
     <string name="use_login_and_password">გამოიყენეთ მომხმარებლის სახელი და პაროლი</string>
     <string name="shared_string_progress">მიმდინარეობა</string>
-    <string name="terrain_maps">რელიეფის რუკები</string>
     <string name="gps_filter_precision">GPS-ის სიზუსტე</string>
     <string name="shared_string_precision">სიზუსტე</string>
     <string name="shared_string_statistics">სტატისტიკა</string>

@@ -255,7 +255,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (plugin.OSM_USE_DEV_URL.getId().equals(prefId)) {
 			osmLogout();
 		}

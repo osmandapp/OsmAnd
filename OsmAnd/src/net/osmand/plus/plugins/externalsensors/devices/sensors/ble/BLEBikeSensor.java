@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
@@ -33,7 +38,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	private int lastCrankRevolutions = -1;
 	private int lastCrankEventTime = -1;
 
-	private int wheelSize = 2086;
+	private float wheelSize; //m
 
 	private BikeCadenceData lastBikeCadenceData;
 	private BikeSpeedDistanceData lastBikeSpeedDistanceData;
@@ -42,9 +47,9 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 
 		private final long timestamp;
 		private final float gearRatio;
-		private final float cadence;
+		private final int cadence;
 
-		BikeCadenceData(long timestamp, float gearRatio, float cadence) {
+		BikeCadenceData(long timestamp, float gearRatio, int cadence) {
 			this.timestamp = timestamp;
 			this.gearRatio = gearRatio;
 			this.cadence = cadence;
@@ -58,7 +63,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 			return gearRatio;
 		}
 
-		public float getCadence() {
+		public int getCadence() {
 			return cadence;
 		}
 
@@ -196,11 +201,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		return GattAttributes.UUID_CHARACTERISTIC_CYCLING_SPEED_AND_CADENCE_MEASUREMENT;
 	}
 
-	public int getWheelSize() {
-		return wheelSize;
-	}
-
-	public void setWheelSize(int wheelSize) {
+	public void setWheelSize(float wheelSize) {
 		this.wheelSize = wheelSize;
 	}
 
@@ -229,13 +230,13 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		if (wheelRevPresent) {
 			wheelRevolutions = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT32, 1);
 			lastWheelEventTime = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 5);
-			int circumference = wheelSize;
+			float circumference = wheelSize;
 			if (firstWheelRevolutions < 0) {
 				firstWheelRevolutions = wheelRevolutions;
 			}
 			if (this.lastWheelEventTime == lastWheelEventTime) {
-				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
-				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
+				float totalDistance = (float) wheelRevolutions * circumference;
+				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * circumference; //m
 				float speed = 0;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			} else if (lastWheelRevolutions >= 0) {
@@ -245,23 +246,20 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				} else {
 					timeDifference = (lastWheelEventTime - this.lastWheelEventTime) / 1024.0f;
 				}
-				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference / 1000.0f;
-				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
-				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
-				float speed = (distanceDifference / timeDifference) * 3.6f;
+				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference;
+				float totalDistance = (float) wheelRevolutions * circumference;
+				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * circumference;
+				float speed = (distanceDifference / timeDifference);
 				wheelCadence = (wheelRevolutions - lastWheelRevolutions) * 60.0f / timeDifference;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			}
-
 			lastWheelRevolutions = wheelRevolutions;
 			this.lastWheelEventTime = lastWheelEventTime;
 
 		} else if (crankRevPreset) {
 			int crankRevolutions = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 1);
 			int lastCrankEventTime = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 3);
-			if (this.lastCrankEventTime == lastCrankEventTime) {
-				getDevice().fireSensorDataEvent(this, createBikeCadenceData(0, 0));
-			} else if (lastCrankRevolutions >= 0) {
+			if (lastCrankRevolutions >= 0) {
 				float timeDifference;
 				if (lastCrankEventTime < this.lastCrankEventTime) {
 					timeDifference = (65535 + lastCrankEventTime - this.lastCrankEventTime) / 1024.0f;
@@ -271,7 +269,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				float crankCadence = (crankRevolutions - lastCrankRevolutions) * 60.0f / timeDifference;
 				if (crankCadence > 0) {
 					float gearRatio = wheelCadence / crankCadence;
-					getDevice().fireSensorDataEvent(this, createBikeCadenceData(gearRatio, crankCadence));
+					getDevice().fireSensorDataEvent(this, createBikeCadenceData(gearRatio, Math.round(crankCadence)));
 				}
 			}
 			lastCrankRevolutions = crankRevolutions;
@@ -279,6 +277,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		}
 	}
 
+	//speed m/s, distance m
 	@NonNull
 	private SensorData createBikeSpeedDistanceData(float speed, float distance, float totalDistance) {
 		BikeSpeedDistanceData data = new BikeSpeedDistanceData(System.currentTimeMillis(), speed, distance, totalDistance);
@@ -287,22 +286,33 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	}
 
 	@NonNull
-	private SensorData createBikeCadenceData(float gearRatio, float crankCadence) {
+	private SensorData createBikeCadenceData(float gearRatio, int crankCadence) {
 		BikeCadenceData data = new BikeCadenceData(System.currentTimeMillis(), gearRatio, crankCadence);
 		lastBikeCadenceData = data;
 		return data;
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BikeCadenceData cadenceData = lastBikeCadenceData;
-		if (cadenceData != null) {
-			json.put(getSensorId() + "_cadence", cadenceData.cadence);
-		}
-		BikeSpeedDistanceData speedDistanceData = lastBikeSpeedDistanceData;
-		if (speedDistanceData != null) {
-			json.put(getSensorId() + "_speed", speedDistanceData.speed);
-			json.put(getSensorId() + "_distance", speedDistanceData.distance);
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
+		switch (widgetDataFieldType) {
+			case BIKE_SPEED:
+				if (lastBikeSpeedDistanceData != null) {
+					json.put(SENSOR_TAG_SPEED, DECIMAL_FORMAT.format(lastBikeSpeedDistanceData.speed));
+				}
+				break;
+			case BIKE_CADENCE:
+				BikeCadenceData cadenceData = lastBikeCadenceData;
+				if (cadenceData != null) {
+					json.put(SENSOR_TAG_CADENCE, cadenceData.cadence);
+				}
+				break;
+			case BIKE_DISTANCE:
+				if (lastBikeSpeedDistanceData != null) {
+					json.put(SENSOR_TAG_DISTANCE, lastBikeSpeedDistanceData.distance);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 }

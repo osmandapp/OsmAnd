@@ -54,7 +54,7 @@ public class AppModeDialog {
 		if (useListBg) {
 			AndroidUtils.setListItemBackground(a, ll, nightMode);
 		} else {
-			ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+			ll.setBackgroundColor(ContextCompat.getColor(a, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
 		}
 		View[] buttons = new View[values.size()];
 		int k = 0;
@@ -214,11 +214,7 @@ public class AppModeDialog {
 		return tb;
 	}
 
-	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
-		if (useMapTheme) {
-			return ctx.getDaynightHelper().isNightModeForMapControls();
-		} else {
-			return !ctx.getSettings().isLightContent();
-		}
+	private static boolean isNightMode(OsmandApplication app, boolean usedOnMap) {
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

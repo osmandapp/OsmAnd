@@ -17,8 +17,7 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.weather.OfflineForecastHelper;
-import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -67,21 +66,36 @@ public class DownloadResources extends DownloadResourceGroup {
 		return itemsToUpdate;
 	}
 
+	@Nullable
 	public IndexItem getWorldBaseMapItem() {
 		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
-		IndexItem worldMap = null;
 		if (worldMaps != null) {
 			List<IndexItem> list = worldMaps.getIndividualResources();
 			if (list != null) {
 				for (IndexItem item : list) {
 					if (item.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
-						worldMap = item;
-						break;
+						return item;
 					}
 				}
 			}
 		}
-		return worldMap;
+		return null;
+	}
+
+	@Nullable
+	public IndexItem getWeatherWorldItem() {
+		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
+		if (worldMaps != null) {
+			List<IndexItem> list = worldMaps.getIndividualResources();
+			if (list != null) {
+				for (IndexItem item : list) {
+					if (item.type == DownloadActivityType.WEATHER_FORECAST) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -147,14 +161,19 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private void initAlreadyLoadedFiles() {
-		DateFormat dateFormat = app.getResourceManager().getDateFormat();
-		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
+		ResourceManager resourceManager = app.getResourceManager();
+		DateFormat dateFormat = resourceManager.getDateFormat();
+		Map<String, String> indexFileNames = resourceManager.getIndexFileNames();
+		Map<String, String> indexActivatedFileNames = resourceManager.getIndexFileNames();
+
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexActivatedFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexActivatedFileNames);
-		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WEATHER_FORECAST_DIR),
+				IndexConstants.WEATHER_EXT, indexActivatedFileNames);
+
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
 				indexFileNames);
@@ -176,11 +195,6 @@ public class DownloadResources extends DownloadResourceGroup {
 		boolean outdated = false;
 		item.setDownloaded(false);
 		item.setOutdated(false);
-
-		if (item instanceof WeatherIndexItem) {
-			OfflineForecastHelper offlineForecastHelper = app.getOfflineForecastHelper();
-			return offlineForecastHelper.checkIfItemOutdated((WeatherIndexItem) item);
-		}
 
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
@@ -204,7 +218,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				item.setLocalTimestamp(format.parse(indexFilesDate).getTime());
 				parsed = true;
 			} catch (ParseException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 		if (date != null && !date.equals(indexActivatedDate) && !date.equals(indexFilesDate)) {
@@ -215,6 +229,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE
+					|| item.getType() == DownloadActivityType.WEATHER_FORECAST
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else if (item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
@@ -355,81 +370,73 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
-		for (IndexItem ii : resources) {
-			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (DownloadActivityType.isVoiceTTS(ii)) {
-					voiceTTS.addItem(ii);
-				} else if (DownloadActivityType.isVoiceRec(ii)) {
-					voiceRec.addItem(ii);
+		for (IndexItem item : resources) {
+			DownloadActivityType type = item.getType();
+			if (type == DownloadActivityType.VOICE_FILE) {
+				if (DownloadActivityType.isVoiceTTS(item)) {
+					voiceTTS.addItem(item);
+				} else if (DownloadActivityType.isVoiceRec(item)) {
+					voiceRec.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.FONT_FILE) {
-				fonts.addItem(ii);
+			if (type == DownloadActivityType.FONT_FILE) {
+				fonts.addItem(item);
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.DEPTH_MAP_FILE) {
-				String fileName = ii.getFileName().toLowerCase();
+			if (type == DownloadActivityType.DEPTH_MAP_FILE) {
+				String fileName = item.getFileName().toLowerCase();
 				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
-					nauticalWorldwideMaps.addItem(ii);
+					nauticalWorldwideMaps.addItem(item);
 				} else if (InAppPurchaseHelper.isDepthContoursPurchased(app)) {
 					if (fileName.contains(NAUTICAL_DEPTH_POINTS_SUFFIX)) {
-						nauticalDepthPointsMaps.addItem(ii);
+						nauticalDepthPointsMaps.addItem(item);
 					} else {
-						nauticalDepthContoursMaps.addItem(ii);
+						nauticalDepthContoursMaps.addItem(item);
 					}
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+			if (type == DownloadActivityType.WIKIVOYAGE_FILE) {
 				if (app.getTravelHelper() instanceof TravelDbHelper) {
-					wikivoyageMaps.addItem(ii);
+					wikivoyageMaps.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.TRAVEL_FILE) {
-				if (ii.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
-					wikivoyageMaps.addItem(ii);
+			if (type == DownloadActivityType.TRAVEL_FILE) {
+				if (item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
+					wikivoyageMaps.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.GEOTIFF_FILE) {
-				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-				if (plugin == null || !plugin.isHeightmapEnabled()) {
-					continue;
-				}
-			}
-			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
+			if (type == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
-			WorldRegion region;
-			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
-				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) ii;
-				region = weatherIndexItem.getRegion();
-				if (WorldRegion.WORLD.equals(region.getRegionId())) {
-					worldMaps.addItem(ii);
+			if (type == DownloadActivityType.HILLSHADE_FILE || type == DownloadActivityType.SLOPE_FILE) {
+				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+				if (app.useOpenGlRenderer() && plugin != null && !plugin.USE_RASTER_SQLITEDB.get()) {
 					continue;
 				}
-			} else {
-				String basename = ii.getBasename().toLowerCase();
-				region = regs.getRegionDataByDownloadName(basename);
 			}
+
+			String basename = item.getBasename();
+			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
 			if (region != null) {
 				if (!groupByRegion.containsKey(region)) {
 					groupByRegion.put(region, new ArrayList<>());
 				}
-				groupByRegion.get(region).add(ii);
+				groupByRegion.get(region).add(item);
 			} else {
-				if (ii.getFileName().startsWith("World_")) {
-					String fileName = ii.getFileName().toLowerCase();
-					if (Algorithms.startsWithAny(fileName, WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
-						nauticalWorldwideMaps.addItem(ii);
+				String fileName = item.getFileName();
+				if (fileName.contains("World")) {
+					if (Algorithms.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
+						nauticalWorldwideMaps.addItem(item);
 					} else {
-						worldMaps.addItem(ii);
+						worldMaps.addItem(item);
 					}
 				} else {
-					otherMaps.addItem(ii);
+					otherMaps.addItem(item);
 				}
 			}
 		}

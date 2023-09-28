@@ -36,9 +36,14 @@ public abstract class BaseCard {
 	private CardListener listener;
 
 	public interface CardListener {
-		default void onCardLayoutNeeded(@NonNull BaseCard card) {}
-		default void onCardPressed(@NonNull BaseCard card) {}
-		default void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {}
+		default void onCardLayoutNeeded(@NonNull BaseCard card) {
+		}
+
+		default void onCardPressed(@NonNull BaseCard card) {
+		}
+
+		default void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		}
 	}
 
 	public BaseCard(@NonNull FragmentActivity activity) {
@@ -134,11 +139,11 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getSecondaryColor() {
-		return getResolvedColor(R.color.description_font_and_bottom_sheet_icons);
+		return getResolvedColor(R.color.icon_color_default_light);
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.description_font_and_bottom_sheet_icons);
+		return getColoredIcon(icon, R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {
@@ -186,9 +191,7 @@ public abstract class BaseCard {
 	}
 
 	public void updateVisibility(boolean show) {
-		if (view != null) {
-			AndroidUiHelper.updateVisibility(view, show);
-		}
+		AndroidUiHelper.updateVisibility(view, show);
 	}
 
 	public boolean isVisible() {

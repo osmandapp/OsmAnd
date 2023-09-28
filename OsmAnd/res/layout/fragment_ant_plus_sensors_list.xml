@@ -1,233 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/bg_color"
-    android:orientation="vertical">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:clickable="true"
+	android:fitsSystemWindows="false"
+	android:focusable="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height_expanded">
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height_expanded"
+		android:background="?attr/actionModeBackground">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height_expanded"
-            android:background="?attr/actionModeBackground"
-            osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-            osmand:expandedTitleGravity="start|bottom"
-            osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-            osmand:expandedTitleMarginEnd="@dimen/content_padding"
-            osmand:expandedTitleMarginStart="@dimen/content_padding"
-            osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-            osmand:layout_scrollFlags="scroll|exitUntilCollapsed"
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/actionModeBackground"
+			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
+			osmand:expandedTitleGravity="start|bottom"
+			osmand:expandedTitleMargin="@dimen/content_padding"
+			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
+			osmand:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+			osmand:scrimAnimationDuration="0"
+			osmand:title="@string/external_sensors_plugin_name">
 
-            osmand:title="@string/external_sensors_plugin_name">
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:fitsSystemWindows="true"
+				osmand:layout_collapseMode="pin"
+				osmand:menu="@menu/ble_sensors_menu">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height"
-                android:minHeight="@dimen/toolbar_height"
-                osmand:layout_collapseMode="none"
-                osmand:layout_scrollFlags="noScroll"
-                osmand:menu="@menu/ble_sensors_menu"
-                osmand:titleMarginEnd="0dp"
-                osmand:titleMarginStart="0dp">
+			</androidx.appcompat.widget.Toolbar>
 
-            </androidx.appcompat.widget.Toolbar>
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		osmand:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+		osmand:layout_scrollFlags="scroll">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+			<LinearLayout
+				android:id="@+id/empty_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/sensor_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="16dp" />
+				<ImageView
+					android:id="@+id/sensor_icon"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="24dp"
+					android:layout_marginRight="16dp"
+					android:scaleType="fitCenter" />
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginTop="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:lineSpacingExtra="5sp"
-                android:text="@string/ant_plus_pair_bluetooth_prompt"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+				<net.osmand.plus.widgets.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:lineSpacingExtra="5sp"
+					android:text="@string/ant_plus_pair_bluetooth_prompt"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:typeface="@string/font_roboto_regular" />
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/learn_more_button"
-                style="@style/DescStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/content_padding"
-                android:layout_marginTop="@dimen/content_padding_small"
-                android:text="@string/terms_of_service_desc"
-                android:textColor="?android:textColorSecondary" />
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/learn_more_button"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:text="@string/terms_of_service_desc"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size" />
 
-            <include
-                android:id="@+id/pair_btn_empty"
-                layout="@layout/bottom_buttons" />
+				<include
+					android:id="@+id/pair_btn_empty"
+					layout="@layout/bottom_buttons" />
 
-        </LinearLayout> <!--Empty view-->
+			</LinearLayout> <!--Empty view-->
 
-        <LinearLayout
-            android:id="@+id/devices_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+			<LinearLayout
+				android:id="@+id/devices_content"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/no_bluetooth_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/content_padding_small"
-                android:orientation="vertical">
+				<include
+					android:id="@+id/no_bluetooth_card"
+					layout="@layout/no_bluetooth_card" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/content_padding"
-                    android:layout_marginVertical="@dimen/content_padding_small"
-                    android:orientation="horizontal">
+				<androidx.core.widget.NestedScrollView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight="1">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_above="@+id/no_bluetooth_text"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_action_bluetooth_disabled"
-                        android:tint="?attr/default_icon_color" />
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+						<TextView
+							android:id="@+id/connected_prompt"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_extra_large"
+							android:layout_marginTop="@dimen/content_padding_medium"
+							android:lineSpacingExtra="3sp"
+							android:text="@string/external_device_connected"
+							android:textColor="@color/preference_category_title"
+							android:textSize="@dimen/default_desc_text_size"
+							osmand:typeface="@string/font_roboto_medium" />
 
-                        <TextView
-                            android:id="@+id/no_bluetooth_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="@dimen/content_padding"
-                            android:layout_marginEnd="@dimen/content_padding"
-                            android:lineSpacingExtra="5sp"
-                            android:text="@string/ant_plus_bluetooth_off"
-                            android:textColor="?android:textColor"
-                            android:textSize="@dimen/default_list_text_size"
-                            android:textStyle="bold"
-                            osmand:typeface="@string/font_roboto_medium" />
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/connected_devices_list"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                        <TextView
-                            android:id="@+id/no_bluetooth_description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/no_bluetooth_text"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="@dimen/content_padding"
-                            android:layout_marginTop="@dimen/content_padding_small_half"
-                            android:layout_marginEnd="@dimen/content_padding"
-                            android:lineSpacingExtra="5sp"
-                            android:text="@string/ant_plus_bluetooth_off_description"
-                            android:textColor="?android:textColor"
-                            android:textSize="@dimen/default_desc_text_size"
-                            osmand:typeface="@string/font_roboto_medium" />
+						<TextView
+							android:id="@+id/disconnected_prompt"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_extra_large"
+							android:layout_marginTop="@dimen/content_padding_medium"
+							android:lineSpacingExtra="3sp"
+							android:text="@string/external_device_disconnected"
+							android:textColor="@color/preference_category_title"
+							android:textSize="@dimen/default_desc_text_size"
+							osmand:typeface="@string/font_roboto_medium" />
 
-                    </LinearLayout>
+						<include
+							android:id="@+id/divider_between_device_groups"
+							layout="@layout/divider" />
 
-                </LinearLayout>
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/disconnected_devices_list"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+					</LinearLayout>
 
-                <include
-                    android:id="@+id/bt_settings_button_container"
-                    layout="@layout/bottom_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/no_bluetooth_description"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/content_padding"
-                    android:layout_marginBottom="@dimen/content_padding" />
+				</androidx.core.widget.NestedScrollView>
 
-                <include layout="@layout/divider" />
+				<include
+					android:id="@+id/pair_btn_additional_divider"
+					layout="@layout/divider" />
 
-            </LinearLayout> <!--NO_BLUETOOTH-->
+				<include
+					android:id="@+id/pair_btn_additional"
+					layout="@layout/bottom_buttons" />
 
+			</LinearLayout>
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+			<include
+				android:id="@+id/state_no_bluetooth"
+				layout="@layout/no_bluetooth_view" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+		</FrameLayout>
 
-                    <TextView
-                        android:id="@+id/connected_prompt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="@dimen/content_padding_extra_large"
-                        android:layout_marginTop="@dimen/content_padding_medium"
-                        android:lineSpacingExtra="3sp"
-                        android:text="@string/external_device_connected"
-                        android:textColor="@color/preference_category_title"
-                        android:textSize="@dimen/default_desc_text_size" />
+	</androidx.core.widget.NestedScrollView>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/connected_devices_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-                    <TextView
-                        android:id="@+id/disconnected_prompt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="@dimen/content_padding_extra_large"
-                        android:layout_marginTop="@dimen/content_padding_medium"
-                        android:lineSpacingExtra="3sp"
-                        android:text="@string/external_device_disconnected"
-                        android:textColor="@color/preference_category_title"
-                        android:textSize="@dimen/default_desc_text_size" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/disconnected_devices_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-            <include
-                android:id="@+id/pair_btn_additional"
-                layout="@layout/bottom_buttons" />
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

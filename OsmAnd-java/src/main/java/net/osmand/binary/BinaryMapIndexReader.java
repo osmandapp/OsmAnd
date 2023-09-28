@@ -191,7 +191,7 @@ public class BinaryMapIndexReader {
 			case 0:
 				if (!initCorrectly) {
 					//throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
-					throw new IOException("Corrupt file, it should have ended as it starts with version: " + file.getName()); //$NON-NLS-1$
+					throw new IOException("Corrupt file, it should have ended as it starts with version: " + file.getAbsolutePath()); //$NON-NLS-1$
 				}
 				return;
 			case OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER :
@@ -1989,10 +1989,10 @@ public class BinaryMapIndexReader {
 		}
 
 		public BinaryMapDataObject adoptMapObject(BinaryMapDataObject o) {
-			if(o.mapIndex == this || o.mapIndex == referenceMapIndex) {
+			if (o.mapIndex == this || o.mapIndex == referenceMapIndex) {
 				return o;
 			}
-			if(encodingRules.isEmpty()) {
+			if (encodingRules.isEmpty()) {
 				encodingRules.putAll(o.mapIndex.encodingRules);
 				decodingRules.putAll(o.mapIndex.decodingRules);
 				referenceMapIndex = o.mapIndex;
@@ -2004,7 +2004,7 @@ public class BinaryMapIndexReader {
 				for (int i = 0; i < o.types.length; i++) {
 					TagValuePair tp = o.mapIndex.decodeType(o.types[i]);
 					Integer r = getRule(tp);
-					if(r != null) {
+					if (r != null) {
 						types.add(r);
 					} else {
 						int nid = decodingRules.size() + 1;
@@ -2017,7 +2017,7 @@ public class BinaryMapIndexReader {
 				for (int i = 0; i < o.additionalTypes.length; i++) {
 					TagValuePair tp = o.mapIndex.decodeType(o.additionalTypes[i]);
 					Integer r = getRule(tp);
-					if(r != null) {
+					if (r != null) {
 						additionalTypes.add(r);
 					} else {
 						int nid = decodingRules.size() + 1;
@@ -2026,11 +2026,10 @@ public class BinaryMapIndexReader {
 					}
 				}
 			}
-				
-			BinaryMapDataObject bm = 
-					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
-							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(), 
-									o.labelX, o.labelY);
+
+			BinaryMapDataObject bm = new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates,
+					o.objectType, o.area, types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(),
+					o.labelX, o.labelY);
 			if (o.namesOrder != null) {
 				bm.objectNames = new TIntObjectHashMap<>();
 				bm.namesOrder = new TIntArrayList();
@@ -2038,16 +2037,14 @@ public class BinaryMapIndexReader {
 					int nameType = o.namesOrder.get(i);
 					String name = o.objectNames.get(nameType);
 					TagValuePair tp = o.mapIndex.decodeType(nameType);
-					Integer r = getRule(tp);
-					if(r != null) {
-						bm.namesOrder.add(r);
-						bm.objectNames.put(r, name);
-					} else {
-						int nid = decodingRules.size() + 1;
-						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
-						additionalTypes.add(nid);
-						bm.objectNames.put(nid, name);
+					Integer nameKeyId = getRule(tp);
+					if (nameKeyId == null) {
+						nameKeyId = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nameKeyId, tp.tag, tp.value);
+						additionalTypes.add(nameKeyId);
 					}
+					bm.objectNames.put(nameKeyId, name);
+					bm.namesOrder.add(nameKeyId);
 				}
 			}
 			return bm;

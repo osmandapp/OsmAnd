@@ -40,7 +40,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -76,7 +75,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	private FrameLayout bottomContainer;
 
 	private boolean portrait;
-	private boolean nightMode;
 	private boolean moving;
 	private boolean forceUpdateLayout;
 	private boolean initLayout = true;
@@ -184,19 +182,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return nightMode;
 	}
 
-	public boolean isNightMode() {
-		return nightMode;
-	}
-
 	protected String getThemeInfoProviderTag() {
 		return null;
 	}
 
-	public void updateNightMode() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		}
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	public String getPreferredMapLang() {
@@ -270,10 +262,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
-		MapActivity mapActivity = requireMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
-
 		updateNightMode();
+		MapActivity mapActivity = requireMapActivity();
+
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
@@ -350,7 +341,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 			private boolean hasMoved;
 
 			{
-				OsmandApplication app = requireMyApplication();
 				scroller = new OverScroller(app);
 				ViewConfiguration configuration = ViewConfiguration.get(requireContext());
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
@@ -1040,8 +1030,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	public void showLocationOnMap(LatLon latLon) {
-		OsmandApplication app = getMyApplication();
-		if (latLon == null && app != null) {
+		if (latLon == null) {
 			Location lastLocation = app.getLocationProvider().getLastKnownLocation();
 			if (lastLocation != null) {
 				latLon = new LatLon(lastLocation.getLatitude(), lastLocation.getLongitude());
@@ -1091,7 +1080,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	public int dpToPx(float dp) {
-		return AndroidUtils.dpToPx(requireMyApplication(), dp);
+		return AndroidUtils.dpToPx(app, dp);
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {

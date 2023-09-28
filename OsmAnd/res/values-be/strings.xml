@@ -165,8 +165,6 @@
     <string name="map_widget_audionotes">Аўдыянататкі</string>
     <string name="audionotes_plugin_description">Стварайце аўдыё / фота / відэа нататкі падчас паездкі кнопкай мапы альбо праз кантэкстнае меню.</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
-    <string name="index_srtm_parts">частак</string>
-    <string name="index_srtm_ele">Контурныя лініі</string>
     <string name="srtm_plugin_name">Контурныя лініі</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
@@ -418,7 +416,7 @@
     <string name="prefs_plugins">Убудовы</string>
     <string name="osm_editing_plugin_description">Дапамагаайце паляпшаць OpenStreetMap - глабальную супольнасць, якая падтрымлівае поўную мапу свету і падае даныя з адкрытым зыходным кодам любому карыстальніку.
 \n
-\n Вы можаце знайсці інструкцыі па рэдагаванні мапы на нашым сайце https://osmand.net/docs/user/plugins/osm-editing.</string>
+\n Вы можаце знайсці інструкцыі па рэдагаванні мапы на нашым сайце %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
     <string name="play_commands_of_currently_selected_voice">Абярыце голас і пратэстуйце яго прайграўшы апавяшчэнні:</string>
     <string name="debugging_and_development">Распрацоўванне OsmAnd</string>
@@ -528,7 +526,6 @@
     <string name="routing_settings">Навігацыя</string>
     <string name="routing_settings_descr">Вызначыць параметры навігацыі.</string>
     <string name="global_settings">Агульныя налады</string>
-    <string name="index_settings">Кіраваць файламі мапаў</string>
     <string name="general_settings">Агульныя</string>
     <string name="general_settings_descr">Налады экрана і агульныя налады праграмы.</string>
     <string name="global_app_settings">Агульныя налады праграмы</string>
@@ -1150,7 +1147,7 @@
 \n
 \n Базавыя даныя ўзятыя з SRTM і ASTER.
 \n
-\n Працягнуць чытанне на http://osmand.net/docs/user/plugins/contour-lines.</string>
+\n Працягнуць чытанне на %1$s.</string>
     <string name="arrival_distance_descr">Як хутка вы хочаце чуць паведамленне аб прыбыцці?</string>
     <string name="share_fav_subject">Улюбёныя мясціны, якімі падзяліліся праз OsmAnd</string>
     <string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
@@ -1239,8 +1236,6 @@
     <string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
     <string name="continue_navigation">Працягваць навігацыю</string>
     <string name="pause_navigation">Прыпыніць навігацыю</string>
-    <string name="rendering_attr_alpineHiking_name">Пешы горны турызм</string>
-    <string name="rendering_attr_alpineHiking_description">Візуалізацыя шляху па шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Пешыя маршруты</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трас OSMC.</string>
     <string name="arrival_distance_factor_early">Раней</string>
@@ -1262,7 +1257,7 @@
     <string name="index_tours">Паездкі</string>
     <string name="record_plugin_description">Запісвайце свае паездкі або трэнінгі і аналізуйце даныя па хуткасці, колькасці уздымаў і спускаў, профілю вышыні і г.д. Запісаныя сляды можна архіваваць, дзяліцца з сябрамі, рэдагаваць і апрацоўваць.
 \n
-\nБольш падрабязна https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nБольш падрабязна %1$s.</string>
     <string name="record_plugin_name">Запіс падарожжа</string>
     <string name="int_hour">г</string>
     <string name="duration">Працягласць</string>
@@ -1386,7 +1381,7 @@
     <string name="share_note">Падзяліцца нататкаю</string>
     <string name="plugin_nautical_descr">Узбагачае вашу мапу звесткамі пра маршруты плавання, маякі, небяспечных зонах, зонах з абмежаваннямі на плаванне і г.д. Каб пачаць выкарыстоўваць, спампуйце адпаведныя марскія мапы і ўключыце стыль \"Марская мапа\" ў раздзеле \"Наладзіць мапу\".
 \n
-\n Працягнуць чытанне на https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\n Працягнуць чытанне на %1$s.</string>
     <string name="back_to_map">Вярнуцца да мапы</string>
     <string name="track_segments">Адрэзкі следу</string>
     <string name="track_points">Пункты следу</string>
@@ -1683,7 +1678,6 @@
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
-    <string name="srtm_plugin_disabled">Контурныя лініі адключаныя</string>
     <string name="downloading_number_of_files">Спампоўванне файла %1$d…</string>
     <string name="show_free_version_banner_description">Паказваць банер бясплатнай версіі нават у платнай версіі.</string>
     <string name="show_free_version_banner">Паказваць банэр бясплатнай версіі</string>
@@ -1724,7 +1718,7 @@
     <string name="plugins_menu_group">Убудовы</string>
     <string name="faq_item">Частыя пытанні</string>
     <string name="versions_item">Версіі</string>
-    <string name="contact_us">Кантакты</string>
+    <string name="shared_string_contact">Кантакты</string>
     <string name="map_legend">Легенда мапы</string>
     <string name="shared_string_update">Абнавіць</string>
     <string name="world_map_download_descr">Базавая мапа свету (якая пакрывае ўвесь свет пры малым маштабе) адсутнічае або састарэла. Калі ласка, спампуйце яе каб мець магчымасць базавага агляду ўсяго свету.</string>
@@ -2719,7 +2713,6 @@
     <string name="purchase_cancelled_dialog_descr">Прадоўжыць падпіску, каб і далей карыстацца ўсімі функцыямі:</string>
     <string name="maps_you_need_descr">На падставе закладзеных вамі артыкулаў рэкамендуецца спампаваць наступныя мапы:</string>
     <string name="maps_you_need">Патрэбныя вам мапы</string>
-    <string name="contour_lines_hillshade_maps">Контурныя лініі і зацяненне рэльефу</string>
     <string name="hide_full_description">Схаваць поўнае апісанне</string>
     <string name="show_full_description">Паказаць поўнае апісанне</string>
     <string name="nautical_render_descr">Для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
@@ -3219,7 +3212,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Злучэнне</string>
     <string name="shared_string_calculate">Разлічыць</string>
     <string name="shared_string_osmand_usage">Выкарыстанне OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Мапы</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
@@ -3233,7 +3226,6 @@
     <string name="shared_string_memory_used_gb_desc">Выкарыстана %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Выкарыстана %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Выкарыстана %1$s КБ</string>
-    <string name="contour_lines_and_hillshade">Контурныя лініі і зацяненне рэльефу</string>
     <string name="routing_attr_prefer_unpaved_name">Аддаваць перавагу грунтавым дарогам</string>
     <string name="routing_attr_prefer_unpaved_description">Аддаваць перавагу грунтавым дарогам.</string>
     <string name="update_all_maps">Абнавіць усе мапы</string>
@@ -3566,7 +3558,6 @@
     <string name="all_previous_segments">Усе папярэднія сегменты</string>
     <string name="only_selected_segment_recalc">Толькі абраны сегмент пералічыцца з выкарыстаннем абранага профілю.</string>
     <string name="osm_edits_view_descr">Тут паказваюцца ўсе вашыя неадпраўленыя праўкі і хібы OSM, яшчэ не адпраўленыя ў %1$s. Адпраўленыя змены не паказваюцца.</string>
-    <string name="live_monitoring_adress_descr">Пазначце сеціўны адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_distance_descr_recommendation">Рэкамендацыя: параметр у 5 метраў можа вас задаволіць, калі вам не патрэбна фіксаваць больш кароткія перамяшчэнні, і вы не хочаце відавочна збіраць даныя ў стане спакою.</string>
     <string name="monitoring_min_distance_descr_side_effect">Пабочныя эфекты: перыяды ў стане спакою не запісваюцца наогул альбо па адным пункце кожны. Невялікія (у рэальным свеце) перамяшчэнні (напрыклад, убок, што адзначаюць магчымы паварот у вашай паездцы) могуць быць адфільтраваныя. Файл змяшчае менш інфармацыі для наступнага апрацоўвання і мае горшую статыстыку, адфільтроўваючы відавочна лішнія пункты падчас запісу. Пры гэтым патэнцыйна захоўваюцца артэфакты, якія з\'яўляюцца з прычыны дрэннага прыёму альбо эфектаў модуля GPS.</string>
     <string name="monitoring_min_distance_descr">Гэты фільтр дазваляе пазбегнуць запісу паўторных пунктаў, паміж якімі магло быць занадта мала руху, і робіць больш прыемным выгляд слядоў.</string>
@@ -3977,7 +3968,7 @@
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
     <string name="open_place_reviews_plugin_description">Рабіце ўнёскі у праект OpenPlaceReviews, напрыклад фатаграфіі, агляды або спасылкі на грамадскія месцы (рэстараны, гасцініцы або музеі).
 \n
-\nЗнайсці інструкцыі можна на нашым сайце https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nЗнайсці інструкцыі можна на нашым сайце %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
@@ -4381,7 +4372,6 @@
     <string name="resend_verification_code">Адправіць паўторна</string>
     <string name="history_actions_descr">Вы можаце экспартаваць гісторыю ў файл.</string>
     <string name="no_items_of_type_message">У вас няма элементаў гэтага тыпу</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Мапы рэльефу: контурныя лініі, рэльеф, схілы</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Афарбоўка паводле сеткавай прыналежнасці.</string>
     <string name="route_line_use_map_style_width">Выкарыстоўваць прадвызначаную шырыню стылю мапы (%1$s).</string>
     <string name="shared_storage_last_step">Пасля гэтага вы можаце ўказаць новы каталог з данымі.</string>
@@ -4397,7 +4387,7 @@
     <string name="use_login_and_password">Выкарыстоўваць імя карыстальніка і пароль</string>
     <string name="map_updates_for_mappers">Абнаўленні мапаў для картографаў</string>
     <string name="online_direct_line_maps_link">Праверце неабходныя мапы.</string>
-    <string name="contour_lines_hillshades_slope">Контурныя лініі, рэльеф, схілы</string>
+    <string name="contour_lines_hillshade_slope">Контурныя лініі, рэльеф, схілы</string>
     <string name="cancel_anytime_in_huawei_appgallery">Скасуйце ў любы час у Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Скасуйце ў любы час у Google Play.</string>
     <string name="choose_what_to_restore">Выберыце, што аднавіць.</string>
@@ -4649,7 +4639,6 @@
     <string name="shortcut_navigate_to">Маршрут да…</string>
     <string name="complete_purchase">Завяршыць пакупку</string>
     <string name="shared_string_learn_more">Даведацца больш</string>
-    <string name="terrain_maps">Мапы рэльефу</string>
     <string name="online_maps_searching_descr">Пошук у сеціве…</string>
     <string name="nautical_depth">Марскія глыбіні</string>
     <string name="shared_string_not_included">Не ўключае</string>
@@ -4723,8 +4712,6 @@
     <string name="routing_attr_motor_type_electric_name">Электрычны</string>
     <string name="lang_ckb">Курдская (цэнтральная)</string>
     <string name="co2_mission">Выкіды CO2</string>
-    <string name="accessibility_2d_view_off">Выгляд 2.5D адключаны</string>
-    <string name="accessibility_2d_view_on">Выгляд 2.5D уключаны</string>
     <string name="download_complete">Спампоўванне завершана</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Паказваць адмысловыя маршруты для горных ровараў.</string>
     <string name="av_notes_audio_widget_desc">Націсканнем на віджэт можна ствараць аўдыянататкі.</string>
@@ -4790,7 +4777,6 @@
     <string name="how_to_use">Як выкарыстоўваць:</string>
     <string name="distance_by_tap_use_description">Дакраніцеся да мапы, каб праглядзець адлегласць паміж вашым бягучым месцазнаходжаннем і пунктам, на які вы націснеце.
 \nДакраніцеся двума пальцамі да мапы, каб убачыць адлегласць паміж націснутымі пунктамі</string>
-    <string name="shared_string_2_5_d_view">Выгляд 2.5 D</string>
     <string name="quick_action_map_center_widget_descr">Пераключальнік для паказу або хавання віджэта цэнтра мапы.</string>
     <string name="quick_action_current_location_widget_descr">Пераключальнік для паказу або хавання віджэта бягучага месцазнаходжанне.</string>
     <string name="coordinates_widget_map_center_desc">Паказвае геаграфічныя каардынаты бягучага цэнтра мапы</string>
@@ -4856,7 +4842,7 @@
 \n- віджэты на аснове месцазнаходжання
 \n- ізатэрмы / ізабары
 \n
-\nДаныя бяруцца з Global Forecast System (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nДаныя бяруцца з Global Forecast System (%1$s).</string>
     <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
     <string name="weather_wind_meters_per_second">Метры за секунду</string>
     <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>
@@ -4894,4 +4880,192 @@
     <string name="map_widget_altitude_current_location_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
     <string name="map_widget_altitude_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання або для цэнтра мапы</string>
     <string name="map_widget_altitude_map_center_desc">Паказвае вышыню над узроўнем мора для цэнтра мапы.</string>
+    <string name="send_uuid_preference">Адпраўляць унікальны ідэнтыфікатар карыстальніка (UUID)</string>
+    <string name="shared_string_identifiers">Ідэнтыфікатары</string>
+    <string name="delete_track_folder_dialog_message">Гэта выдаліць папку \"%1$s\" і ўсе ўключаныя трэкі (%2$s).</string>
+    <string name="delete_folder_question">Выдаліць папку\?</string>
+    <string name="delete_folder">Выдаліць папку</string>
+    <string name="show_all_tracks_on_the_map">Паказаць усе сляды на карце</string>
+    <string name="rssi_widget_desc">Паказвае ўзровень магутнасці сігналу (RSSI) на вашай знешняй прыладзе.</string>
+    <string name="map_widget_rssi">Узровень магутнасці сігналу (RSSI)</string>
+    <string name="external_device_characteristic_arterial_pressure">Артэрыяльны ціск</string>
+    <string name="camera_app">Праграма камеры</string>
+    <string name="map_2d_mode_action">Двухмерны рэжым</string>
+    <string name="map_3d_mode_action">Трохмерны рэжым</string>
+    <string name="search_track_by_name">Шукаць след паводле назвы</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="ant_plus_searching">Пошук</string>
+    <string name="free_maps_updates">Бясплатныя абнаўленні (экстраныя)</string>
+    <string name="tracks_empty_folder_description">У гэтай папцы яшчэ няма слядоў.</string>
+    <string name="tracks_empty_folder">Пустая папка</string>
+    <string name="track_not_recorded">Не запісаны</string>
+    <string name="shared_string_new_track">Новы след</string>
+    <string name="map_3d_mode_hint">Для змянення размяшчэння кнопкі, націсніце на яе і ўтрымлівайце.</string>
+    <string name="no_search_results">Няма вынікаў</string>
+    <string name="number_of_tracks">%1$s слядоў</string>
+    <string name="external_device_characteristic_systolic">Сісталічны</string>
+    <string name="external_device_characteristic_diastolic">Дыясталічны</string>
+    <string name="shared_string_add_manually">Дадаць уручную…</string>
+    <string name="external_device_characteristic_temperature">Тэмпература</string>
+    <string name="external_device_details_information">Інфармацыя</string>
+    <string name="ant_plus_open_settings">Адкрыць налады</string>
+    <string name="free_ride">Бясплатны праезд</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Выкарыстоўваць растр sqltiedb для схілу / рэльефу</string>
+    <string name="cache_size">Памер кэша</string>
+    <string name="shared_string_avoid">Пазбягаць</string>
+    <string name="may_be_used_if_there_is_shortcut">Можа выкарыстоўвацца, калі ёсць ярлык</string>
+    <string name="release_4_5">• Датчыкі BLE/ANT+: удасканаленае злучэнне, запіс і прагляд атрыманых даных у GPX
+\n
+\n • Бясплатнае рэзервовае капіраванне выбраных і налад у \"OsmAnd Cloud\"
+\n
+\n • Новы фармат карт мясцовасці з падтрымкай 3D-рэльефу
+\n
+\n • Кіраванне слядамі: абноўлены інтэрфейс, дададзена сартаванне, падтрымка ўкладзеных папак
+\n
+\n • Android Auto: новае меню «Пуск» для доступу да абраных, трэкаў і катэгорый POI
+\n
+\n • Агульны спіс віджэтаў для верхняй/ніжняй панэлі
+\n
+\n • Новы профіль «Цягнік», які дазваляе разлічваць чыгуначныя маршруты
+\n
+\n • Контурныя лініі працуюць з любой «крыніцай карты»
+\n
+\n • Пашыраны спіс дзеянняў па змаўчанні для знешніх клавіятур
+\n
+\n • Карыстальніцкія файлы маршрутызацыі: дададзены параметры для выдалення або перазапісу
+\n
+\n • Дададзена опцыя «Апавяшчаць аб адхіленні ад маршруту»
+\n
+\n • Пачатковы экран: дададзена опцыя аднаўлення стану OsmAnd з файла
+\n
+\n • Дададзены класы «Небяспечныя матэрыялы» Навігацыя грузавікоў у Паўночнай Амерыцы
+\n
+\n • Дададзена падтрымка \"Via ferrata\" для пешаходнага маршруту
+\n
+\n • Дададзена шкала \"CAI\" для класіфікацыі складанасці маршрутаў
+\n
+\n • Выпраўлены выбар мовы для кожнага прыкладання
+\n
+\n • Дададзена падтрымка тэматычных значкоў
+\n
+\n • OsmAnd Cloud: дададзена магчымасць выдалення ўліковага запісу
+\n
+\n • Даступнасць: памер кнопак зменены на 48 dp; выпраўлена праблема з інтэрфейсам карты для праграм чытання з экрана
+\n
+\n • Перапрацаваныя галасавыя падказкі на японскай мове
+\n
+\n • Удасканалены разлік змены вышыні і ацэнка схілу
+\n
+\n</string>
+    <string name="osmand_cloud_deletion_account_warning">Ваш уліковы запіс і ўсе рэквізіты ўліковага запісу будуць %1$s</string>
+    <string name="manage_subscriptions">Кіраванне падпіскамі.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Гэта не скасуе вашу падпіску на OsmAnd Pro.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Горны маршрут (Via ferrata)</string>
+    <string name="shared_string_close_the_dialog">Закрыць дыялогавае акно</string>
+    <string name="routing_attr_allow_via_ferrata_description">Горны маршрут, абсталяваны фіксаванымі тросамі, выбоінамі, лесвіцамі і мастамі.</string>
+    <string name="external_device_details_battery">Батарэя</string>
+    <string name="free_favorites_backup_description">Зарэгіструйцеся ў OsmAnd Cloud, каб атрымаць бясплатную рэзервовую копію закладак і налад.</string>
+    <string name="osmand_cloud_deleted_account_descr">Уліковы запіс і ўсе даныя былі выдалены з OsmAnd Cloud.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Выдаліць уліковы запіс\?</string>
+    <string name="shared_string_deleting">Выдаленне</string>
+    <string name="deleting_complete">Выдаленне завершана</string>
+    <string name="verify_account">Спраўдзіце свой уліковы запіс</string>
+    <string name="free_favorites_backup">Бясплатная рэзервовая копія закладак</string>
+    <string name="get_osmand_cloud">Атрымаць OsmAnd Cloud</string>
+    <string name="action_cannot_be_undone">Гэта дзеянне нельга скасаваць.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Другасныя прылады будуць адключаны ад OsmAnd Cloud і страцяць доступ да платных функцый.</string>
+    <string name="backup_error_delete_account_email_match">Адрас электроннай пошты не адпавядае імю карыстальніка</string>
+    <string name="verify_account_deletion_descr">Нам трэба спраўдзіць ваш уліковы запіс перад яго выдаленнем.
+\n
+\nКалі ласка, увядзіце адрас электроннай пошты, пад якім вы зарэгістраваліся. На яго будзе адпраўлены аднаразовы пароль для наступнага кроку.</string>
+    <string name="terrain_category_description">Контурныя лініі мясцовасці, поўная карта рэльефу з цёмнымі адценнямі і карта схілаў з колерамі для адлюстравання вяршынь і нізін.</string>
+    <string name="calculate_offline">Разлічыць у аўтаномным рэжыме</string>
+    <string name="terrain_map">Карта мясцовасці</string>
+    <string name="external_device_details_pair">Спалучыць</string>
+    <string name="external_device_details_speed">Хуткасць</string>
+    <string name="external_device_details_total_distance">Агульная адлегласць</string>
+    <string name="free_settings_backup">Бясплатная рэзервовая копія налад</string>
+    <string name="relief_3d">3D рэльеф</string>
+    <string name="relief_3d_description">Стварайце і назірайце за маштабнай мадэллю вашага раёна або ўсяго кантынента.</string>
+    <string name="power_watts_unit">Ваты</string>
+    <string name="revolutions_per_minute_unit">аб/хв</string>
+    <string name="error_calculate">Вынік разліку пусты</string>
+    <string name="external_device_details_distance">Адлегласць</string>
+    <string name="calculate_offline_altitude_descr">Разлічыць вышыню ў аўтаномным рэжыме на аснове даных з карты вышынь. Адрозненні ад вышыні, запісанай прыладай, могуць быць выкарыстаны ў якасці карэкцыі вышыні.</string>
+    <string name="external_device_details_connect">Злучыць</string>
+    <string name="free_account">Бясплатны ўліковы запіс</string>
+    <string name="folder_export_empty_error">Няма элементаў для экспарту, папка пустая</string>
+    <string name="osmand_cloud_deleting_account_descr">Праз некалькі хвілін усе вашы даныя і ўліковы запіс будуць выдалены з OsmAnd Cloud.
+\n
+\nУсе даныя на прыладзе застануцца некранутымі.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud\?
+\n
+\nГэта дзеянне нельга скасаваць.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Усе даныя з OsmAnd Cloud будуць %1$s. Даныя на прыладзе застануцца некранутымі.</string>
+    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s\?</string>
+    <string name="delete_account">Выдаліць уліковы запіс</string>
+    <string name="slope_legend_description">Карта схілаў выкарыстоўвае колеры для візуалізацыі крутасці рэльефу. Вы можаце прачытаць больш пра карту схілаў у %1$s.</string>
+    <string name="external_device_characteristic_heart_rate">Частата сардэчнага рытму</string>
+    <string name="ant_plus_searching_text">Пошук датчыкаў</string>
+    <string name="bluetooth_found_title">Знойдзена: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth не падтрымліваецца</string>
+    <string name="ble_search_again">Шукаць зноў</string>
+    <string name="ant_plus_help_title">Я не ведаю, які ў мяне тып датчыка</string>
+    <string name="ant_plus_pair_new_sensor_ble">Спалучыць датчык Bluetooth LE</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Спалучыць датчык ANT+</string>
+    <string name="shared_string_alt_name">Альтэрнатыўная назва</string>
+    <string name="shared_string_pounds">фунтаў</string>
+    <string name="metric_lbs">фунтаў</string>
+    <string name="sort_duration_ascending">Спачатку меншая працягласць</string>
+    <string name="shared_string_ear_lobe">Мочка вуха</string>
+    <string name="sort_duration_descending">Спачатку найбольшая працягласць</string>
+    <string name="disable_vertex_hillshade_3d">Адключыць цень вяршынь ў 3D</string>
+    <string name="selected_value">Выбранае значэнне</string>
+    <string name="external_device_details_connection">Злучэнне</string>
+    <string name="external_device_characteristic_cadence">Хуткасць кручэння</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth адключаны</string>
+    <string name="ant_plus_bluetooth_off_description">Уключыце Bluetooth, знайдзіце і спалучыце датчыкі.</string>
+    <string name="sort_distance_ascending">Спачатку найкарацейшая адлегласць</string>
+    <string name="generate_hillshade_from_3d_maps">Стварыць растравыя карты рэльефу з 3D карт</string>
+    <string name="ant_plus_nothing_found_text">Немагчыма знайсці датчыкі</string>
+    <string name="shutter_sound">Гук засаўкі</string>
+    <string name="clear_online_cache_description">Гэта прывядзе да ачысткі кэша сеціўных тайлаў надвор\'я.</string>
+    <string name="clear_online_cache">Ачысціць сеціўны кэш</string>
+    <string name="offline_cache">Аўтаномны кэш</string>
+    <string name="generate_slope_from_3d_maps">Стварыць растравыя карты схілаў з 3D карт</string>
+    <string name="poi_categories">Катэгорыі POI</string>
+    <string name="is_imported">%1$s імпартаваны.</string>
+    <string name="external_device_characteristic_gear_ratio">Перадатачны лік</string>
+    <string name="enable_3d_maps">Уключыць 3D-карты</string>
+    <string name="token_is_not_valid">Токен несапраўдны</string>
+    <string name="common_weight_limit_error">Мінімальнае значэнне \"%1$s\" %2$s. Выкарыстоўвайце профіль \"%3$s\", калі вага аўтамабіля меньшая за мінімальнае значэнне.</string>
+    <string name="sort_distance_descending">Спачатку найдаўжэйшая адлегласць</string>
+    <string name="bluetooth_disconnected">Адлучана, %s</string>
+    <string name="bluetooth_connected">Злучана, %s</string>
+    <string name="ant_plus_pair_new_sensor">Спалучыць новы датчык</string>
+    <string name="speak_route_deviation">Апавясціць аб адхіленні ад маршруту</string>
+    <string name="app_mode_climbing">Скалалазанне</string>
+    <string name="external_device_details_received_data">Атрыманыя даныя</string>
+    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"\?</string>
+    <string name="external_device_low_battery">Нізкі зарад батарэі</string>
+    <string name="file_already_exists_description">\"%1$s\". Файл з такой назвай ужо існуе. Замена перазапіша ўсе змяненні, зробленыя ў бягучай версіі.</string>
+    <string name="file_already_exists">Файл ужо існуе</string>
+    <string name="ant_plus_searching_text_description">Калі ласка, трымайце прыладу бліжэй да датчыка. Вам неабходна актываваць датчык, каб OsmAnd мог яго знайсці.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Вы можаце спалучыць датчыкі Bluetooth LE і ANT+ з OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Даведайцеся больш пра датчыкі.</string>
+    <string name="shared_string_wrist">Запясце</string>
+    <string name="sort_date_ascending">Спачатку найноўшыя</string>
+    <string name="select_layer">Выбраць слой</string>
+    <string name="shared_string_finger">Палец</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нага</string>
+    <string name="external_device_details_disconnect">Адлучыць</string>
+    <string name="external_device_characteristic_cuff_pressure">Ціск у манжэце</string>
+    <string name="external_device_characteristic_pulse_rate">Частата пульса</string>
+    <string name="external_device_characteristic_stride_length">Даўжыня кроку</string>
+    <string name="ant_plus_nothing_found_description">Пераканайцеся, што:
+\n– Bluetooth уключаны
+\n– Датчык актываваны
+\n– Гэта прылада знаходзіцца побач з датчыкам</string>
+    <string name="external_device_ant">ANT</string>
 </resources>

@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -40,7 +41,8 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 		Set<TrackItem> recentlyVisibleTracks = helper.getRecentlyVisibleTracks();
 		title.setText(app.getString(R.string.recently_visible, "(" + recentlyVisibleTracks.size() + ")"));
 
-		boolean selected = helper.getSelectedTracks().containsAll(recentlyVisibleTracks);
+		ItemsSelectionHelper<TrackItem> selectionHelper =  helper.getItemsSelectionHelper();
+		boolean selected = selectionHelper.isItemsSelected(recentlyVisibleTracks);
 		checkbox.setChecked(selected);
 		int color = ColorUtilities.getAppModeColor(app, nightMode);
 		UiUtilities.setupCompoundButton(selected, color, checkbox);

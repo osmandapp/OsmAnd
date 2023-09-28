@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.view.MenuCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,15 +29,20 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		super.onBindViewHolder(holder, position);
 		AbstractDevice<?> device = items.get(position);
+		holder.menuIcon.setVisibility(View.VISIBLE);
 		holder.menuIcon.setOnClickListener(v -> showOptionsMenu(v, device));
-
+		holder.itemView.setOnClickListener(v -> {
+			if (plugin != null && plugin.isDevicePaired(device)) {
+				deviceMenuClickListener.onSettings(device);
+			}
+		});
+		holder.divider.setVisibility(position == getItemCount() - 1 ? View.GONE : View.VISIBLE);
 	}
 
 	private void showOptionsMenu(View view, AbstractDevice<?> device) {
 		PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
 		((MenuBuilder) optionsMenu.getMenu()).setOptionalIconsVisible(true);
-		// TODO: 28 API
-		//optionsMenu.getMenu().setGroupDividerEnabled(true);
+		MenuCompat.setGroupDividerEnabled(optionsMenu.getMenu(), true);
 		MenuItem enableDisableItem = optionsMenu.getMenu().add(1, 1, Menu.NONE,
 				device.isConnected()
 						? R.string.external_device_details_disconnect

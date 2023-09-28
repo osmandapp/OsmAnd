@@ -1,9 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -23,19 +21,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ColoringTypeCard;
 import net.osmand.plus.track.cards.ColorsCard;
@@ -47,27 +51,20 @@ import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.render.RenderingRulesStorage;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ColorPickerListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
-	private GpxDbHelper gpxDbHelper;
-	private GpxSelectionHelper gpxSelectionHelper;
-	private SelectedTracksHelper selectedTracksHelper;
+	private ItemsSelectionHelper<TrackItem> selectionHelper;
 
 	private TrackDrawInfo trackDrawInfo;
 	private final List<BaseCard> cards = new ArrayList<>();
@@ -77,23 +74,18 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private ColorsCard colorsCard;
 	private ColoringTypeCard coloringTypeCard;
 	private PromoBannerCard promoCard;
-	private View applyButton;
-
-	private boolean nightMode;
+	private DialogButton applyButton;
 
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gpxDbHelper = app.getGpxDbHelper();
-		gpxSelectionHelper = app.getSelectedGpxHelper();
-		selectedTracksHelper = getSelectedTracksHelper();
-		nightMode = isNightMode(true);
+		selectionHelper = getItemsSelectionHelper();
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
@@ -102,9 +94,15 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Activity activity = requireActivity();
 		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 		Dialog dialog = new Dialog(activity, themeId) {
@@ -126,8 +124,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
-		View view = inflater.inflate(R.layout.tracks_appearance_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.tracks_appearance_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		setupToolbar(view);
@@ -141,13 +139,13 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = appbar.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		String appearance = getString(R.string.change_appearance);
-		String count = "(" + String.valueOf(selectedTracksHelper.getSelectedTracks().size()) + ")";
+		String count = "(" + selectionHelper.getSelectedItemsSize() + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));
@@ -165,28 +163,28 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupCards(@NonNull View view) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			ViewGroup container = view.findViewById(R.id.cards_container);
 			container.removeAllViews();
 
-			addCard(container, new SplitIntervalCard(mapActivity, trackDrawInfo));
-			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
+			addCard(container, new SplitIntervalCard(activity, trackDrawInfo));
+			addCard(container, new DirectionArrowsCard(activity, trackDrawInfo));
+			addCard(container, new ShowStartFinishCard(activity, trackDrawInfo));
 
-			trackColoringCard = new TrackColoringCard(mapActivity, null, trackDrawInfo);
+			trackColoringCard = new TrackColoringCard(activity, null, trackDrawInfo);
 			addCard(container, trackColoringCard);
 
 			setupColorsCard(container);
 
 			ColoringType coloringType = trackDrawInfo.getColoringType();
-			coloringTypeCard = new ColoringTypeCard(mapActivity, null, coloringType);
+			coloringTypeCard = new ColoringTypeCard(activity, null, coloringType);
 			addCard(container, coloringTypeCard);
 
-			promoCard = new PromoBannerCard(mapActivity, true);
+			promoCard = new PromoBannerCard(activity, true);
 			addCard(container, promoCard);
 
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, y -> {
+			trackWidthCard = new TrackWidthCard(activity, trackDrawInfo, y -> {
 				View cardView = trackWidthCard.getView();
 				if (cardView != null) {
 					ScrollView scrollView = view.findViewById(R.id.scroll_view);
@@ -203,10 +201,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupColorsCard(@NonNull ViewGroup container) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			List<Integer> colors = GpxAppearanceAdapter.getTrackColors(app);
-			colorsCard = new ColorsCard(mapActivity, null, this,
+			colorsCard = new ColorsCard(activity, null, this,
 					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
 			addCard(container, colorsCard);
 			int dp12 = getResources().getDimensionPixelSize(R.dimen.card_padding);
@@ -268,12 +266,13 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 		applyButton = view.findViewById(R.id.right_bottom_button);
 		applyButton.setOnClickListener(v -> AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager()));
+		applyButton.setButtonType(PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 
-		View cancelButton = view.findViewById(R.id.dismiss_button);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(v -> dismiss());
-
-		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_apply);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, SECONDARY, R.string.shared_string_cancel);
+		cancelButton.setButtonType(SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 
 		AndroidUiHelper.updateVisibility(applyButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
@@ -287,10 +286,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			if (card instanceof SplitIntervalCard) {
-				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
+				SplitIntervalBottomSheet.showInstance(activity.getSupportFragmentManager(), trackDrawInfo, this);
 			} else if (card instanceof TrackColoringCard) {
 				TrackColoringCard trackColoringCard = ((TrackColoringCard) card);
 				ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
@@ -347,76 +346,43 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Nullable
-	public SelectedTracksHelper getSelectedTracksHelper() {
+	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TracksFragment) {
-			return ((TracksFragment) fragment).getSelectedTracksHelper();
+		if (fragment instanceof SelectionHelperProvider) {
+			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
 		}
 		return null;
 	}
 
 	public void saveTracksAppearance() {
-		saveDefaultAppearance();
-		updateSelectedTracksAppearance();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			CallbackWithObject<Void> callback = result -> {
+				onAppearanceSaved();
+				return true;
+			};
+			Set<TrackItem> items = selectionHelper.getSelectedItems();
+			ChangeTracksAppearanceTask appearanceTask = new ChangeTracksAppearanceTask(activity, trackDrawInfo, items, callback);
+			appearanceTask.execute();
+		}
+	}
 
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.refreshMapComplete();
+	private void onAppearanceSaved() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).refreshMapComplete();
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
 			((TracksFragment) fragment).updateTabsContent();
+		} else if (fragment instanceof TracksSelectionFragment) {
+			((TracksSelectionFragment) fragment).dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
+			searchTracksFragment.updateTargetFragment();
+			searchTracksFragment.dismiss();
 		}
 		dismiss();
-	}
-
-	private void updateSelectedTracksAppearance() {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return !isAdded();
-			}
-
-			@Override
-			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				updateTrackAppearance(item);
-			}
-		};
-		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
-			File file = trackItem.getFile();
-			if (file != null) {
-				GpxDataItem item = gpxDbHelper.getItem(file, callback);
-				if (item != null) {
-					updateTrackAppearance(item);
-				}
-			}
-		}
-	}
-
-	private void saveDefaultAppearance() {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		String colorName = GpxAppearanceAdapter.parseTrackColorName(renderer, trackDrawInfo.getColor());
-
-		settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).set(colorName);
-		settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).set(trackDrawInfo.getWidth());
-	}
-
-	private void updateTrackAppearance(@NonNull GpxDataItem item) {
-		gpxDbHelper.updateColor(item, trackDrawInfo.getColor());
-		gpxDbHelper.updateWidth(item, trackDrawInfo.getWidth());
-		gpxDbHelper.updateShowArrows(item, trackDrawInfo.isShowArrows());
-		gpxDbHelper.updateShowStartFinish(item, trackDrawInfo.isShowStartFinish());
-
-		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
-		gpxDbHelper.updateSplit(item, splitType, trackDrawInfo.getSplitInterval());
-		ColoringType coloringType = trackDrawInfo.getColoringType();
-		String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
-		gpxDbHelper.updateColoringType(item, coloringType.getName(routeInfoAttribute));
-
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
-		if (selectedGpxFile != null) {
-			selectedGpxFile.resetSplitProcessed();
-		}
 	}
 
 	@Override
@@ -435,11 +401,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		for (BaseCard card : cards) {
 			card.update();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {

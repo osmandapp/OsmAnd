@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -184,18 +185,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.osmand_parking_plugin_description);
 	}
 
 	@Override
 	public String getName() {
 		return app.getString(R.string.osmand_parking_plugin_name);
-	}
-
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/parking-plugin.html";
 	}
 
 	@Override
@@ -414,7 +410,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		if (widgetType == PARKING) {
 			return new ParkingMapWidget(this, mapActivity);
 		}

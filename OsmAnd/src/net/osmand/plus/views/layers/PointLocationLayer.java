@@ -327,7 +327,8 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			updateMarkerPosition(location, target31, animationDuration);
 			if (location.hasBearing()) {
 				float bearing = location.getBearing() - 90.0f;
-				boolean updateBearing = lastBearingCached == null || Math.abs(bearing - lastBearingCached) > 0.1;
+				Float cachedBearing = lastBearingCached;
+				boolean updateBearing = cachedBearing == null || Math.abs(bearing - cachedBearing) > 0.1;
 				if (updateBearing) {
 					lastBearingCached = bearing;
 					updateMarkerBearing(bearing, isAnimateMyLocation());
@@ -335,7 +336,8 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			}
 		}
 		if (heading != null && showHeadingCached) {
-			boolean updateHeading = lastHeadingCached == null || Math.abs(heading - lastHeadingCached) > 0.1;
+			Float cachedHeading = lastHeadingCached;
+			boolean updateHeading = cachedHeading == null || Math.abs(heading - cachedHeading) > 0.1;
 			if (updateHeading) {
 				lastHeadingCached = heading;
 				updateMarkerHeading(heading);
@@ -680,8 +682,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		if (location != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-					location.getLatitude(), location.getLongitude());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, location);
 			int rad = (int) (18 * tb.getDensity());
 			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
 				myLocation.add(location);

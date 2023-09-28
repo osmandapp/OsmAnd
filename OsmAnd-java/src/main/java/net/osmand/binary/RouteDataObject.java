@@ -2,16 +2,15 @@ package net.osmand.binary;
 
 import java.util.Arrays;
 
+
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-import org.apache.commons.logging.Log;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -36,7 +35,6 @@ public class RouteDataObject {
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
 	public float heightByCurrentLocation = Float.NaN;
-	private static final Log LOG = PlatformUtil.getLog(RouteDataObject.class);
 
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -596,26 +594,21 @@ public class RouteDataObject {
 	}
 
 	public float getMaximumSpeed(boolean direction) {
-		int sz = types.length;
-		float maxSpeed = 0;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			float mx = r.maxSpeed();
-			if (mx > 0) {
-				if (r.isForward() != 0) {
-					if ((r.isForward() == 1) != direction) {
-						continue;
-					} else {
-						// priority over default
-						maxSpeed = mx;
-						break;
-					}
-				} else {
-					maxSpeed = mx;
-				}
+		return getMaximumSpeed(direction, RouteTypeRule.PROFILE_NONE);
+	}
+
+	public float getMaximumSpeed(boolean direction, int profile) {
+		float maxSpeed = 0, maxProfileSpeed = 0;
+		for (int type : types) {
+			RouteTypeRule r = region.quickGetEncodingRule(type);
+			boolean forwardDirection = r.isForward() > 0;
+			if (forwardDirection == direction || r.isForward() == 0) {
+				// priority over default
+				maxSpeed = r.maxSpeed(RouteTypeRule.PROFILE_NONE) > 0 ? r.maxSpeed(RouteTypeRule.PROFILE_NONE) : maxSpeed;
+				maxProfileSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(profile) : maxProfileSpeed;
 			}
 		}
-		return maxSpeed;
+		return maxProfileSpeed > 0 ? maxProfileSpeed : maxSpeed;
 	}
 
 	public static float parseSpeed(String v, float def) {
@@ -1107,6 +1100,16 @@ public class RouteDataObject {
 	}
 
 	public void setRestriction(int k, long to, int type, long viaWay) {
+		if (restrictions == null) {
+			restrictions = new long[k + 1];
+		}
+		if (restrictions.length <= k) {
+			long[] copy = restrictions;
+			restrictions = new long[k + 1];
+			for (int i = 0; i < copy.length; i++) {
+				restrictions[i] = copy[i];
+			}
+		}
 		long valto = (to << RouteDataObject.RESTRICTION_SHIFT) | ((long) type & RouteDataObject.RESTRICTION_MASK);
 		restrictions[k] = valto;
 		if (viaWay != 0) {

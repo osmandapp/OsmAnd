@@ -51,9 +51,9 @@ public class ItineraryDataHelper {
 
 	public static final String VISITED_DATE = "visited_date";
 	public static final String CREATION_DATE = "creation_date";
+	public static final String FILE_TO_SAVE = "itinerary.gpx";
 
 	private static final String CATEGORIES_SPLIT = ",";
-	private static final String FILE_TO_SAVE = "itinerary.gpx";
 	private static final String ITINERARY_ID = "itinerary_id";
 	private static final String ITINERARY_GROUP = "itinerary_group";
 	private static final String GPX_KEY = "gpx";

@@ -164,7 +164,6 @@
     <string name="poi_post_street">Abrid</string>
     <string name="poi_bicycle_no">Azlalam</string>
     <string name="poi_car_no">Takerrust: uhu</string>
-    <string name="poi_car_yes">Takerrust: ih</string>
     <string name="poi_water_place_access_family">Famille</string>
     <string name="poi_water_place_access_community">Tarbaɛt</string>
     <string name="poi_water_supply_pump">Tamejγart</string>
@@ -247,7 +246,7 @@
     <string name="poi_fitness">Fitness</string>
     <string name="poi_fitness_centre">Centres de conditionnement physique</string>
     <string name="poi_health_specialty_behavior_yes">Comportement</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontologie</string>
+    <string name="poi_health_specialty_stomatology_yes">Odontologie</string>
     <string name="poi_aerialway_length">Tanzagt</string>
     <string name="poi_wiki_lang_jv">Javanese wikiAwiki Ajavani</string>
     <string name="poi_wiki_lang_als">Awiki alzasyan</string>

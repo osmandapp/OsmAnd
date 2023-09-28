@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,34 +10,6 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.map.ITileSource;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
-import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.view.ComplexButton;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,12 +20,36 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
+import net.osmand.map.ITileSource;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.view.ComplexButton;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
-	protected OsmandApplication app;
 	protected List<SettingsItem> settingsItems;
 	protected List<? super Object> duplicatesList;
 
@@ -61,8 +59,6 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	protected LinearLayout buttonsContainer;
 	protected NestedScrollView nestedScroll;
 	protected CollapsingToolbarLayout toolbarLayout;
-
-	protected boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -79,18 +75,12 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
 	protected abstract ImportType getImportTaskType();
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
-	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_import_duplicates, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_import_duplicates, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);
@@ -133,7 +123,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		super.onActivityCreated(savedInstanceState);
 		if (duplicatesList != null) {
 			DuplicatesSettingsAdapter adapter = new DuplicatesSettingsAdapter(app, prepareDuplicates(duplicatesList), nightMode);
-			list.setLayoutManager(new LinearLayoutManager(getMyApplication()));
+			list.setLayoutManager(new LinearLayoutManager(app));
 			list.setAdapter(adapter);
 		}
 		if (getImportTaskType() == ImportType.IMPORT) {

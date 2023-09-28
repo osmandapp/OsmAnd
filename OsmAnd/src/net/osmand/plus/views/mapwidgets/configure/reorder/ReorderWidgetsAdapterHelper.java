@@ -46,10 +46,6 @@ public class ReorderWidgetsAdapterHelper {
 
 	public void deleteWidget(@NonNull AddedWidgetUiInfo widgetUiInfo, int position) {
 		if (position != RecyclerView.NO_POSITION) {
-			if (!dataHolder.getSelectedPanel().isDuplicatesAllowed()) {
-				updateAvailableWidget(widgetUiInfo);
-			}
-
 			dataHolder.deleteWidget(widgetUiInfo.key);
 			items.remove(position);
 			adapter.notifyItemRemoved(position);
@@ -326,7 +322,7 @@ public class ReorderWidgetsAdapterHelper {
 		WidgetsPanel panel = dataHolder.getSelectedPanel();
 
 		boolean alreadyAdded = widgetAlreadyAdded(widgetInfo.key);
-		String widgetId = panel.isDuplicatesAllowed() && alreadyAdded ? getDuplicateWidgetId(widgetInfo.key) : widgetInfo.key;
+		String widgetId = alreadyAdded ? getDuplicateWidgetId(widgetInfo.key) : widgetInfo.key;
 
 		int page = getLastPage();
 		int order = dataHolder.getMaxOrderOfPage(page) + 1;
@@ -343,10 +339,6 @@ public class ReorderWidgetsAdapterHelper {
 		addedWidgetUiInfo.iconId = widgetInfo.getMapIconId(nightMode);
 
 		insertToEndOfAddedWidgets(new ListItem(ItemType.ADDED_WIDGET, addedWidgetUiInfo));
-
-		if (!panel.isDuplicatesAllowed()) {
-			removeAddedItemFromAvailable(widgetId);
-		}
 	}
 
 	private boolean widgetAlreadyAdded(@NonNull String widgetId) {

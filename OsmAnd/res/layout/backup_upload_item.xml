@@ -84,26 +84,28 @@
 
 	</LinearLayout>
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/local_version_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginTop="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding"
-		android:visibility="gone" />
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:visibility="gone"
+		osmand:dialogButtonTopMargin="@dimen/content_padding"
+		osmand:dialogButtonBottomMargin="@dimen/content_padding"
+		tools:dialogButtonType="secondaryActive"
+		tools:dialogButtonTitle="Local version"
+		tools:visibility="visible"/>
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/server_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding"
-		android:visibility="gone" />
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:visibility="gone"
+		osmand:dialogButtonBottomMargin="@dimen/content_padding"
+		tools:dialogButtonType="secondaryActive"
+		tools:dialogButtonTitle="Cloud version"
+		tools:visibility="visible"/>
 
 	<include
 		android:id="@+id/bottom_divider"

@@ -125,7 +125,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupShowCamerasPref();
 			setupSpeedCamerasAlert();

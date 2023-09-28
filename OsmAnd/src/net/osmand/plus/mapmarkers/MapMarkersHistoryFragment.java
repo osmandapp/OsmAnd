@@ -312,7 +312,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		updateAdapter();
 	}
 }

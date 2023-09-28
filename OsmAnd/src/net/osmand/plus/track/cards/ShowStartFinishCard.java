@@ -4,19 +4,19 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.TrackDrawInfo;
 
-public class ShowStartFinishCard extends MapBaseCard {
+public class ShowStartFinishCard extends BaseCard {
 
 	private final TrackDrawInfo trackDrawInfo;
 
-	public ShowStartFinishCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
-		super(mapActivity);
+	public ShowStartFinishCard(@NonNull FragmentActivity activity, @NonNull TrackDrawInfo trackDrawInfo) {
+		super(activity);
 		this.trackDrawInfo = trackDrawInfo;
 	}
 

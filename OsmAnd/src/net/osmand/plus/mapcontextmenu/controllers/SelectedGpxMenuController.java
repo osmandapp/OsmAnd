@@ -1,36 +1,21 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.ALTITUDE;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SLOPE;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SPEED;
-
-import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.util.Algorithms;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SelectedGpxMenuController extends MenuController {
 
@@ -56,90 +41,15 @@ public class SelectedGpxMenuController extends MenuController {
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				new OpenGpxDetailsTask(selectedGpxPoint.getSelectedGpxFile(), selectedGpxPoint.getSelectedPoint(), mapActivity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				WptPt selectedPoint = selectedGpxPoint.getSelectedPoint();
+				GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
+
+				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint);
+				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.analyze_on_map);
 		rightTitleButtonController.startIconId = R.drawable.ic_action_analyze_intervals;
-	}
-
-	public static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxDisplayItem> {
-
-		private final OsmandApplication app;
-
-		private final WptPt selectedPoint;
-		private final SelectedGpxFile selectedGpxFile;
-
-		private ProgressDialog progressDialog;
-		private final WeakReference<MapActivity> activityRef;
-
-		public OpenGpxDetailsTask(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, MapActivity mapActivity) {
-			app = mapActivity.getMyApplication();
-			this.activityRef = new WeakReference<>(mapActivity);
-			this.selectedGpxFile = selectedGpxFile;
-			this.selectedPoint = selectedPoint;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			MapActivity activity = activityRef.get();
-			if (activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-				if (selectedGpxFile.getGpxFile().path != null) {
-					progressDialog = new ProgressDialog(activity);
-					progressDialog.setTitle("");
-					progressDialog.setMessage(app.getString(R.string.loading_data));
-					progressDialog.setCancelable(false);
-					progressDialog.show();
-				}
-			}
-		}
-
-		@Override
-		protected GpxDisplayItem doInBackground(Void... voids) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			if (gpxFile.tracks.size() > 0) {
-				GpxDisplayGroup gpxDisplayGroup = app.getGpxDisplayHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
-
-				List<GpxDisplayItem> items = gpxDisplayGroup.getDisplayItems();
-				if (!Algorithms.isEmpty(items)) {
-					return items.get(0);
-				}
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(GpxDisplayItem gpxItem) {
-			MapActivity activity = activityRef.get();
-			if (activity != null) {
-				if (progressDialog != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progressDialog.dismiss();
-				}
-				if (gpxItem != null && gpxItem.analysis != null) {
-					ArrayList<GPXDataSetType> list = new ArrayList<>();
-					if (gpxItem.analysis.hasElevationData) {
-						list.add(ALTITUDE);
-					}
-					if (gpxItem.analysis.hasSpeedData) {
-						list.add(SPEED);
-					} else if (gpxItem.analysis.hasElevationData) {
-						list.add(SLOPE);
-					}
-					if (list.size() > 0) {
-						gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
-					}
-					gpxItem.locationOnMap = selectedPoint;
-					OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
-							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-							false,
-							gpxItem);
-					activity.getContextMenu().hide();
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
-			}
-		}
 	}
 
 	@Override

@@ -2,23 +2,22 @@ package net.osmand.plus.liveupdates;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-
-public class LoadLiveMapsTask
-		extends AsyncTask<Void, LocalIndexInfo, Void>
-		implements AbstractLoadLocalIndexTask {
+public class LoadLiveMapsTask extends AsyncTask<Void, LocalItem, Void> implements AbstractLoadLocalIndexTask {
 
 	public interface LocalIndexInfoAdapter {
-		void addData(@NonNull List<LocalIndexInfo> indexes);
+		void addData(@NonNull List<LocalItem> indexes);
 
 		void clearData();
 
@@ -45,18 +44,18 @@ public class LoadLiveMapsTask
 	}
 
 	@Override
-	public void loadFile(LocalIndexInfo... loaded) {
+	public void loadFile(LocalItem... loaded) {
 		publishProgress(loaded);
 	}
 
 	@Override
-	protected void onProgressUpdate(LocalIndexInfo... values) {
-		List<LocalIndexInfo> matchingIndexes = new ArrayList<>();
-		for (LocalIndexInfo localIndexInfo : values) {
-			String fileNameLC = localIndexInfo.getFileName().toLowerCase();
-			if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
+	protected void onProgressUpdate(LocalItem... values) {
+		List<LocalItem> matchingIndexes = new ArrayList<>();
+		for (LocalItem indexInfo : values) {
+			String fileNameLC = indexInfo.getFileName().toLowerCase();
+			if (indexInfo.getType() == LocalItemType.MAP_DATA
 					&& !fileNameLC.contains("world") && !fileNameLC.startsWith("depth_")) {
-				matchingIndexes.add(localIndexInfo);
+				matchingIndexes.add(indexInfo);
 			}
 		}
 

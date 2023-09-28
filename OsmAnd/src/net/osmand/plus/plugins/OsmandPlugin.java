@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -21,17 +23,26 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -45,12 +56,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
 
@@ -86,7 +98,7 @@ public abstract class OsmandPlugin {
 
 	public abstract String getName();
 
-	public abstract CharSequence getDescription();
+	public abstract CharSequence getDescription(boolean linksEnabled);
 
 	@Nullable
 	public Drawable getAssetResourceImage() {
@@ -190,7 +202,8 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public void addPluginIndexItems(@NonNull IndexFileList indexes) {}
+	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
+	}
 
 	public List<IndexItem> getSuggestedMaps() {
 		return Collections.emptyList();
@@ -216,7 +229,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
 
@@ -263,10 +276,6 @@ public abstract class OsmandPlugin {
 		for (ApplicationMode appMode : getAddedAppModes()) {
 			ApplicationMode.changeProfileAvailability(appMode, false, app);
 		}
-	}
-
-	public String getHelpFileName() {
-		return null;
 	}
 
 	/*
@@ -360,7 +369,7 @@ public abstract class OsmandPlugin {
 	protected void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 	}
 
-	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
 	}
 
 	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
@@ -381,16 +390,23 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		return null;
+	}
+
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		return createMapWidgetForParams(mapActivity, widgetType, null);
 	}
 
 	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return null;
 	}
 
-	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		return false;
+	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
+	}
+
+	public KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
+		return null;
 	}
 
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
@@ -479,5 +495,26 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) { }
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
+	}
+
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+	}
+
+	@Nullable
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GPXDataSetType graphType,
+	                                                @NonNull GPXDataSetAxisType chartAxisType,
+	                                                boolean calcWithoutGaps, boolean useRightAxis) {
+		return null;
+	}
+
+	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+
+	}
+
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+
+	}
 }

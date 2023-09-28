@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import net.osmand.IndexConstants;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
+import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
@@ -39,18 +37,19 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
@@ -166,15 +165,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		clearButton.setColorFilter(ContextCompat.getColor(app, iconColorResId));
 		clearButton.setVisibility(View.GONE);
 
-		searchEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				updateSearchText(s.toString());

@@ -67,6 +67,11 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
+		
+		public final static int PROFILE_NONE = 0;
+		public final static int PROFILE_TRUCK = 1000;
+		public final static int PROFILE_CAR = 1001;
+		
 		private String t;
 		private String v;
 		private int intValue;
@@ -192,32 +197,33 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return 0;
 		}
-		
-		public float maxSpeed(){
-			if(type == MAXSPEED){
+
+		public float maxSpeed(int profile) {
+			if (type == (MAXSPEED + profile)) {
 				return floatValue;
 			}
 			return -1;
 		}
+		
 
-		public int lanes(){
-			if(type == LANES){
+		public int lanes() {
+			if (type == LANES) {
 				return intValue;
 			}
 			return -1;
 		}
 
-		public String highwayRoad(){
-			if(type == HIGHWAY_TYPE){
+		public String highwayRoad() {
+			if (type == HIGHWAY_TYPE) {
 				return v;
 			}
 			return null;
 		}
 
 		private void analyze() {
-			if(t.equalsIgnoreCase("oneway")){
+			if (t.equalsIgnoreCase("oneway")) {
 				type = ONEWAY;
-				if("-1".equals(v) || "reverse".equals(v)) {
+				if ("-1".equals(v) || "reverse".equals(v)) {
 					intValue = -1;
 				} else if("1".equals(v) || "yes".equals(v)) {
 					intValue = 1;
@@ -263,19 +269,26 @@ public class BinaryMapRouteReaderAdapter {
 //				} else if(t.startsWith("access")) {
 //					type = ACCESS;
 //				}
-			} else if(t.startsWith("access") && v != null){
+			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
-			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
-				type = MAXSPEED;
+			} else if (t.startsWith("maxspeed") && v != null) {
+				if (t.endsWith(":forward")) {
+					t = t.substring(0, t.length() - ":forward".length());
+					forward = 1;
+				} else if (t.endsWith(":backward")) {
+					t = t.substring(0, t.length() - ":backward".length());
+					forward = -1;
+				} else {
+					forward = 0;
+				}
 				floatValue = RouteDataObject.parseSpeed(v, 0);
-			} else if(t.equalsIgnoreCase("maxspeed:forward") && v != null){
-				type = MAXSPEED;
-				forward = 1;
-				floatValue = RouteDataObject.parseSpeed(v, 0);
-			} else if(t.equalsIgnoreCase("maxspeed:backward") && v != null){
-				type = MAXSPEED;
-				forward = -1;
-				floatValue = RouteDataObject.parseSpeed(v, 0);
+				if (t.equalsIgnoreCase("maxspeed")) {
+					type = MAXSPEED;
+				} else if (t.equalsIgnoreCase("maxspeed:hgv")) {
+					type = MAXSPEED + PROFILE_TRUCK;
+				} else if (t.equalsIgnoreCase("maxspeed:motorcar")) {
+					type = MAXSPEED + PROFILE_CAR;
+				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
 				int i = 0;

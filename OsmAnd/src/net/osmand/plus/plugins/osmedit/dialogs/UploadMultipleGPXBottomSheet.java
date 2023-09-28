@@ -12,15 +12,16 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 
+import java.io.File;
 import java.util.List;
 
-public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<GPXInfo> {
+public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<TrackItem> {
 
 	public static final String TAG = UploadMultipleGPXBottomSheet.class.getSimpleName();
 
@@ -30,15 +31,15 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<G
 	}
 
 	@Override
-	protected void updateItemView(SelectableItem<GPXInfo> item, View view) {
+	protected void updateItemView(SelectableItem<TrackItem> item, View view) {
 		super.updateItemView(item, view);
 
 		TextView time = view.findViewById(R.id.time);
 		TextView distance = view.findViewById(R.id.distance);
 		TextView pointsCount = view.findViewById(R.id.points_count);
 
-		GPXInfo info = item.getObject();
-		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(info, app, null);
+		TrackItem trackItem = item.getObject();
+		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
 		if (analysis != null) {
 			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
@@ -55,8 +56,11 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<G
 
 	private void updateSizeDescription() {
 		long size = 0;
-		for (SelectableItem<GPXInfo> item : selectedItems) {
-			size += item.getObject().getIncreasedFileSize();
+		for (SelectableItem<TrackItem> item : selectedItems) {
+			File file = item.getObject().getFile();
+			if (file != null) {
+				size += file.length();
+			}
 		}
 		String total = getString(R.string.shared_string_total);
 		titleDescription.setText(getString(R.string.ltr_or_rtl_combine_via_colon, total,
@@ -65,8 +69,8 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<G
 
 	@Nullable
 	public static UploadMultipleGPXBottomSheet showInstance(@NonNull FragmentManager manager,
-	                                                        @NonNull List<SelectableItem<GPXInfo>> items,
-	                                                        @Nullable List<SelectableItem<GPXInfo>> selected) {
+	                                                        @NonNull List<SelectableItem<TrackItem>> items,
+	                                                        @Nullable List<SelectableItem<TrackItem>> selected) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			UploadMultipleGPXBottomSheet fragment = new UploadMultipleGPXBottomSheet();
 			fragment.setItems(items);

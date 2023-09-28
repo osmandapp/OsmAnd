@@ -59,7 +59,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingBottom="@dimen/content_padding_small_half"
-				android:textColor="@color/description_font_and_bottom_sheet_icons"
+				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/route_from" />
@@ -68,7 +68,7 @@
 				android:id="@+id/way_line"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/description_font_and_bottom_sheet_icons"
+				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/route_from" />
@@ -78,7 +78,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingTop="@dimen/content_padding_small_half"
-				android:textColor="@color/description_font_and_bottom_sheet_icons"
+				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"
 				android:visibility="gone"

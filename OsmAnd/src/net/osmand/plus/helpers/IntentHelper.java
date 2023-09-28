@@ -1,11 +1,12 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
+import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -31,10 +31,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
-import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
+import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
@@ -50,8 +52,10 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -59,6 +63,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -174,9 +180,35 @@ public class IntentHelper {
 				} else {
 					buildRoute(startLatLon, endLatLon, appMode, points);
 				}
-
 				clearIntent(intent);
 				return true;
+			} else {
+				List<GeoParsedPoint> points = GeoPointParserUtil.parsePoints(data.toString());
+				if (points != null && points.size() > 1) {
+					GeoParsedPoint startPoint = points.get(0);
+					GeoParsedPoint endPoint = points.get(points.size() - 1);
+
+					LatLon startLatLon = startPoint != null ? new LatLon(startPoint.getLatitude(), startPoint.getLongitude()) : null;
+					LatLon endLatLon = endPoint != null ? new LatLon(endPoint.getLatitude(), endPoint.getLongitude()) : null;
+					if (endLatLon == null) {
+						LOG.error("Malformed navigation URL: destination location is empty");
+						return true;
+					}
+					if (app.isApplicationInitializing()) {
+						app.getAppInitializer().addListener(new AppInitializeListener() {
+
+							@Override
+							public void onFinish(@NonNull AppInitializer init) {
+								init.removeListener(this);
+								buildRoute(startLatLon, endLatLon, null, null);
+							}
+						});
+					} else {
+						buildRoute(startLatLon, endLatLon, null, null);
+					}
+					clearIntent(intent);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -430,7 +462,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
-					closeAllFragments();
+					mapActivity.closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();
@@ -517,6 +549,23 @@ public class IntentHelper {
 				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
 				clearIntent(intent);
 			}
+			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
+				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName);
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
+				ApplicationMode mode = settings.getApplicationMode();
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				HashMap<ExportSettingsType, List<?>> selectedTypes = (HashMap<ExportSettingsType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
+				ExportSettingsFragment.showInstance(manager, mode, selectedTypes, true);
+
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(BackupAuthorizationFragment.OPEN_BACKUP_AUTH)) {
+				BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
+				clearIntent(intent);
+			}
 			if (intent.getExtras() != null) {
 				Bundle extras = intent.getExtras();
 				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
@@ -538,18 +587,6 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-		}
-	}
-
-	private void closeAllFragments() {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		for (Fragment fragment : fragmentManager.getFragments()) {
-			if (fragment instanceof DialogFragment) {
-				((DialogFragment) fragment).dismiss();
-			}
-		}
-		for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
-			fragmentManager.popBackStack();
 		}
 	}
 

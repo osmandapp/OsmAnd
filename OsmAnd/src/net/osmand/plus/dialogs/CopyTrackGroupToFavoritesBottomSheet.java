@@ -57,10 +57,11 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
 					plugin.updateParkingPoint(point);
 				}
-				favouritesHelper.addFavourite(point, false);
+				favouritesHelper.addFavourite(point, true, false, false, null);
 			}
 		}
-		favouritesHelper.saveCurrentPointsIntoFile();
+		favouritesHelper.saveCurrentPointsIntoFile(true);
+
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {
 			OnGroupNameChangeListener listener = (OnGroupNameChangeListener) fragment;

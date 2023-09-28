@@ -18,25 +18,24 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 public class DistanceByTapFragment extends BaseOsmAndFragment {
 
@@ -46,21 +45,12 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	private View toolbarSwitchContainer;
 	private ImageView navigationIcon;
 
-	private LayoutInflater themedInflater;
 	private ApplicationMode selectedAppMode;
 	private LinearLayout buttonsCard;
-
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		app = getMyApplication();
-		settings = getSettings();
-		nightMode = isNightMode(false);
 		selectedAppMode = settings.getApplicationMode();
 	}
 
@@ -68,8 +58,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.distance_by_tap_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -99,25 +88,19 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateToolbarNavigationIcon() {
-		navigationIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		navigationIcon.setOnClickListener(view -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 	}
 
 	private void updateToolbarActionButton() {
-		toolbar.findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Activity activity = getActivity();
-				if (activity != null) {
-					AndroidUtils.openUrl(activity, R.string.docs_widget_distance_by_tap, nightMode);
-				}
+		toolbar.findViewById(R.id.action_button).setOnClickListener(view -> {
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.openUrl(activity, R.string.docs_widget_distance_by_tap, nightMode);
 			}
 		});
 	}
@@ -134,38 +117,30 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		switchView.setChecked(checked);
 		UiUtilities.setupCompoundButton(switchView, nightMode, TOOLBAR);
 
-		toolbarSwitchContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !checked);
+		toolbarSwitchContainer.setOnClickListener(view -> {
+			settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !checked);
 
-				updateToolbarSwitch();
-				setupConfigButtons();
-			}
+			updateToolbarSwitch();
+			setupConfigButtons();
 		});
 	}
 
 	protected void showTextSizeDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(R.string.text_size);
-
 		String[] items = new String[DistanceByTapTextSize.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = DistanceByTapTextSize.values()[i].toHumanString(app);
 		}
 		int selected = settings.DISTANCE_BY_TAP_TEXT_SIZE.get().ordinal();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
-					setupConfigButtons();
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(R.string.text_size)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
+			setupConfigButtons();
+		});
 	}
 
 	private View createButtonWithState(int iconId,

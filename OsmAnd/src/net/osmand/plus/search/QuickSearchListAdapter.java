@@ -585,8 +585,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				Amenity amenity = (Amenity) listItem.getSearchResult().object;
 				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null && rs.getInfo() != null) {
-					int colorOpen = R.color.ctx_menu_amenity_opened_text_color;
-					int colorClosed = R.color.ctx_menu_amenity_closed_text_color;
+					int colorOpen = R.color.text_color_positive;
+					int colorClosed = R.color.text_color_negative;
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),

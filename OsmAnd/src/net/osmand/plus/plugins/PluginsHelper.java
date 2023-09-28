@@ -11,12 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttributes;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -25,20 +30,25 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.devices.base.DefaultInputDeviceProfile;
+import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -56,6 +66,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -98,7 +109,8 @@ public class PluginsHelper {
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-		allPlugins.add(new OpenPlaceReviewsPlugin(app));
+		// OpenPlaceReviews has been discontinued in 15 June 2023 (schedule to delete the code).
+		// allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
@@ -481,13 +493,7 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void addPluginIndexItems(@NonNull IndexFileList indexes) {
-		for (OsmandPlugin p : getAvailablePlugins()) {
-			p.addPluginIndexItems(indexes);
-		}
-	}
-
-	public static void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
+	public static void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) {
 		try {
 			for (OsmandPlugin plugin : getEnabledPlugins()) {
 				plugin.attachAdditionalInfoToRecordedTrack(location, json);
@@ -579,9 +585,9 @@ public class PluginsHelper {
 	}
 
 	@Nullable
-	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType);
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType, customId);
 			if (widget != null) {
 				return widget;
 			}
@@ -638,9 +644,9 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.optionsMenuFragment(activity, fragment, optionsMenuAdapter);
+			plugin.optionsMenuFragment(activity, fragment, selectedItems, items);
 		}
 	}
 
@@ -734,12 +740,21 @@ public class PluginsHelper {
 		return installed;
 	}
 
-	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
-			if (p.mapActivityKeyUp(mapActivity, keyCode))
-				return true;
+	public static void bindCommonKeyEventCommands(@NonNull InputDeviceProfile deviceProfile) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.bindCommonKeyEventCommands(deviceProfile);
 		}
-		return false;
+	}
+
+	@Nullable
+	public static KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			KeyEventCommand command = plugin.createKeyEventCommand(commandId);
+			if (command != null) {
+				return command;
+			}
+		}
+		return null;
 	}
 
 	public static boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
@@ -781,6 +796,39 @@ public class PluginsHelper {
 	public static void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.updateMapPresentationEnvironment(mapRendererContext);
+		}
+	}
+
+	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.onAnalysePoint(analysis, point, attribute);
+		}
+	}
+
+	@Nullable
+	public static OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GPXDataSetType graphType,
+	                                                       @NonNull GPXDataSetAxisType axisType,
+	                                                       boolean calcWithoutGaps, boolean useRightAxis) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			OrderedLineDataSet dataSet = plugin.getOrderedLineDataSet(chart, analysis, graphType, axisType, calcWithoutGaps, useRightAxis);
+			if (dataSet != null) {
+				return dataSet;
+			}
+		}
+		return null;
+	}
+
+	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
+		}
+	}
+
+	public static void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.onIndexItemDownloaded(item, updatingFile);
 		}
 	}
 }

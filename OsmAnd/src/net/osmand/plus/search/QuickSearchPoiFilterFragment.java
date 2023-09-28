@@ -43,7 +43,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.plus.widgets.tools.TextWatcherAdapter;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -203,7 +203,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		editText = editTextView.findViewById(R.id.editText);
 		editTextView.findViewById(R.id.divider).setVisibility(View.GONE);
 		editText.setText(nameFilterText);
-		editText.addTextChangedListener(new TextWatcherAdapter() {
+		editText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				nameFilterText = s.toString();
@@ -778,7 +778,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 				if (item.iconId != 0) {
 					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
-							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.color_white));
+							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.card_and_list_background_light));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

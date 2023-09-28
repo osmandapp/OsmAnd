@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -55,5 +57,10 @@ public class TracksTabAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 		return trackTabs.get(position).getName(app, false);
+	}
+
+	@Override
+	public Parcelable saveState() {
+		return null;
 	}
 }

@@ -7,7 +7,6 @@ import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolde
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_TYPE;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
@@ -44,6 +43,7 @@ import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
@@ -67,11 +67,12 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	private List<String> alreadySelectedWidgetsIds;
 
 	private View view;
-	private View applyButton;
+	private DialogButton applyButton;
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			initFromBundle(savedInstanceState);
@@ -80,8 +81,6 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			selectWidgetByDefault();
 		}
 
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -233,29 +232,19 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
 
-		MapActivity mapActivity = requireMapActivity();
-		WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
-		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
-				? alreadySelectedWidgetsIds.contains(widgetId)
-				: isWidgetEnabled(mapActivity, widgetId);
-		if (alreadyEnabled && !widgetsPanel.isDuplicatesAllowed()) {
-			checkBox.setChecked(true);
+		if (selectedWidgetsIds.containsValue(widgetId)) {
 			view.setSelected(true);
-			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));
-		} else {
-			if (selectedWidgetsIds.containsValue(widgetId)) {
-				view.setSelected(true);
-				checkBox.setChecked(true);
-			}
-
-			view.setOnClickListener(v -> {
-				boolean selected = !view.isSelected();
-				view.setSelected(selected);
-				checkBox.setChecked(selected);
-				updateWidgetSelection(order, widgetId, selected);
-				enableDisableApplyButton();
-			});
+			checkBox.setChecked(true);
 		}
+
+		view.setOnClickListener(v -> {
+			boolean selected = !view.isSelected();
+			view.setSelected(selected);
+			checkBox.setChecked(selected);
+			updateWidgetSelection(order, widgetId, selected);
+			enableDisableApplyButton();
+		});
+
 	}
 
 	private boolean isWidgetEnabled(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
@@ -305,7 +294,8 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			}
 			dismiss();
 		});
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_add);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_add);
 		enableDisableApplyButton();
 	}
 

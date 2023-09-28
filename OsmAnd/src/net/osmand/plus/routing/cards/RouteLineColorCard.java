@@ -96,8 +96,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			nightMapTheme = savedInstanceState.getBoolean(IS_NIGHT_MAP_THEME);
 		}
 		if (nightMapTheme == null) {
-			DayNightHelper themeHelper = app.getDaynightHelper();
-			nightMapTheme = themeHelper.isNightModeForMapControls();
+			DayNightHelper dayNightHelper = app.getDaynightHelper();
+			nightMapTheme = dayNightHelper.isNightModeForMapControls();
 		}
 		isNightMapTheme = nightMapTheme;
 	}

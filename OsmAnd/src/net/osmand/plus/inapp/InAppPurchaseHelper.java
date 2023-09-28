@@ -1092,7 +1092,7 @@ public abstract class InAppPurchaseHelper {
 
 	@NonNull
 	public PurchaseOrigin getPurchaseOriginBySku(@NonNull String sku) {
-		if (sku.equals("promo_website")) {
+		if (sku.startsWith("promo_")) {
 			return PurchaseOrigin.PROMO;
 		}
 		if (sku.startsWith("net.osmand.maps.")) {

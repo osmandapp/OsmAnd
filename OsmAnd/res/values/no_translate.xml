@@ -8,6 +8,7 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>
     <string name="apple_app_store">Apple App Store</string>
@@ -20,6 +21,7 @@
     <string name="srtm_plugin_price">€2,99</string>
     <string name="sea_depth_maps_price">€1,39</string>
     <string name="osm_live">OsmAnd Live</string>
+    <string name="osmand_start">OsmAnd Start</string>
     <string name="osmand_pro">OsmAnd Pro</string>
     <string name="maps_plus">Maps+</string>
     <string name="osmand_plus">OsmAnd+</string>

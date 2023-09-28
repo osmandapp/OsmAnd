@@ -22,6 +22,8 @@ import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToIntermediateDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
+import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
+import net.osmand.plus.views.mapwidgets.widgets.GlideTargetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.GpsInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
@@ -34,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
@@ -75,7 +78,7 @@ public class MapWidgetsFactory {
 			case STREET_NAME:
 				return new StreetNameWidget(mapActivity);
 			case MARKERS_TOP_BAR:
-				return new MapMarkersBarWidget(mapActivity);
+				return new MapMarkersBarWidget(mapActivity, customId);
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case DISTANCE_TO_DESTINATION:
@@ -124,10 +127,15 @@ public class MapWidgetsFactory {
 			case SUNSET:
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
 				return new SunriseSunsetWidget(mapActivity, sunsetState);
+			case GLIDE_TARGET:
+				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
+				return new GlideTargetWidget(mapActivity, glideWidgetState);
+			case GLIDE_AVERAGE:
+				return new GlideAverageWidget(mapActivity, customId);
 			case ELEVATION_PROFILE:
-				return new ElevationProfileWidget(mapActivity);
+				return new ElevationProfileWidget(mapActivity, customId);
 			default:
-				return PluginsHelper.createMapWidget(mapActivity, widgetType);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId);
 		}
 	}
 

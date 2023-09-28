@@ -32,7 +32,8 @@ import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -52,8 +53,8 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected final Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
 	protected View appbar;
-	protected View deleteButton;
-	protected View selectAllButton;
+	protected DialogButton deleteButton;
+	protected DialogButton selectAllButton;
 	protected ImageView shareButton;
 	protected HistoryAdapter adapter;
 	protected RecyclerView recyclerView;
@@ -63,20 +64,19 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	private Location location;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	protected boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		updateHistoryItems();
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.history_preferences_fragment, container, false);
 
 		appbar = view.findViewById(R.id.appbar);
 		recyclerView = view.findViewById(R.id.list);
@@ -167,6 +167,8 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
 		deleteButton = view.findViewById(R.id.right_bottom_button);
+		deleteButton.setButtonType(DialogButtonType.PRIMARY);
+		deleteButton.setTitleId(R.string.shared_string_delete);
 		deleteButton.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -174,6 +176,8 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			}
 		});
 		selectAllButton = view.findViewById(R.id.dismiss_button);
+		selectAllButton.setButtonType(DialogButtonType.SECONDARY);
+		selectAllButton.setTitleId(R.string.shared_string_select_all);
 		selectAllButton.setOnClickListener(v -> {
 			if (isAllItemsSelected()) {
 				selectedItems.clear();
@@ -185,9 +189,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			adapter.notifyDataSetChanged();
 		});
 		updateSelectAllButton();
-
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY, R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, deleteButton, DialogButtonType.PRIMARY, R.string.shared_string_delete);
 
 		AndroidUiHelper.updateVisibility(deleteButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
@@ -212,8 +213,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	}
 
 	private void updateSelectAllButton() {
-		TextView tvTitle = selectAllButton.findViewById(R.id.button_text);
-		tvTitle.setText(isAllItemsSelected() ?
+		selectAllButton.setTitleId(isAllItemsSelected() ?
 				R.string.shared_string_deselect_all :
 				R.string.shared_string_select_all);
 	}

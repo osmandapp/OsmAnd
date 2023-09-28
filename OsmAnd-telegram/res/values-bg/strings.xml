@@ -88,10 +88,10 @@
     <string name="privacy">Поверителност</string>
     <string name="proxy">Прокси</string>
     <string name="proxy_settings">Настройки на прокси сървъра</string>
-    <string name="proxy_disconnected">Връзката е прекъсната</string>
+    <string name="proxy_disconnected">Изключено</string>
     <string name="proxy_connected">Свързан</string>
     <string name="proxy_type">Тип прокси</string>
-    <string name="shared_string_enable">Разреши</string>
+    <string name="shared_string_enable">Включване</string>
     <string name="shared_string_connection">Връзка</string>
     <string name="proxy_server">Сървър</string>
     <string name="proxy_port">Порт</string>
@@ -106,7 +106,7 @@
     <string name="min_logging_accuracy">Минимална точност на регистриране</string>
     <string name="min_logging_distance_descr">Филтър: минимално разстояние за регистриране на нова точка</string>
     <string name="min_logging_distance">Минимално разстояние за регистриране</string>
-    <string name="shared_string_select">Избор</string>
+    <string name="shared_string_select">Избиране</string>
     <string name="timeline_no_data">Няма данни</string>
     <string name="timeline_no_data_descr">Нямаме събрани данни за избрания ден</string>
     <string name="start_end_date">Дата Начало - Край</string>
@@ -140,4 +140,6 @@
     <string name="si_m_s">Метри в секунда</string>
     <string name="shared_string_share">Споделяне</string>
     <string name="shared_string_continue">Напред</string>
+    <string name="shared_string_disable">Изключване</string>
+    <string name="shared_string_logout">Излизане</string>
 </resources>

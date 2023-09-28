@@ -81,7 +81,7 @@
     <string name="prefs_plugins">Zásuvné moduly</string>
     <string name="osm_editing_plugin_description">Prispievajte do OpenStreetMap, globálnej komunity tvoriacej podrobnú mapu sveta a poskytujúcej aktuálne slobodné údaje pre každého používateľa.
 \n
-\nInformácie o úpravách mapy môžete nájsť na webstránke https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nInformácie o úpravách mapy môžete nájsť na webstránke %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Zvoľte hlas a otestujte ho prehraním oznámení:</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -393,7 +393,6 @@
     <string name="general_settings_descr">Nastaviť zobrazenie a iné spoločné nastavenia aplikácie.</string>
     <string name="general_settings">Všeobecné nastavenia</string>
     <string name="index_settings_descr">Stiahnuť a spravovať mapové súbory na zariadení.</string>
-    <string name="index_settings">Spravovať mapové súbory</string>
     <string name="osmand_service">Režim na pozadí</string>
     <string name="osmand_service_descr">OsmAnd beží na pozadí aj počas vypnutej obrazovky.</string>
     <string name="fast_route_mode">Najrýchlejšia trasa</string>
@@ -847,8 +846,6 @@
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9).</string>
-    <string name="index_srtm_parts">časti</string>
-    <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahrať video</string>
     <string name="av_def_action_audio">Nahrať zvuk</string>
     <string name="av_widget_action_descr">Predvolená akcia pre nástroj:</string>
@@ -885,7 +882,7 @@
 \n
 \nÚdaje pochádzajú od SRTM a ASTER.
 \n
-\nĎalšie podrobnosti na http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
@@ -1219,8 +1216,6 @@
     <string name="lang_zh_tw">Čínsky (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
@@ -1243,7 +1238,7 @@
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">Nahrajte vaše výlety alebo tréningy a analyzujte údaje o vašom pohybe ako rýchlosť, stúpanie, klesanie alebo reliéf trasy. Zaznamenané stopy môžu byť archivované, zdieľané s priateľmi, upravované alebo ďalej spracovávané.
 \n
-\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
@@ -1366,7 +1361,7 @@
     <string name="roads_only">Iba cesty</string>
     <string name="plugin_nautical_descr">Obohatí mapu o informácie o lodných trasách, navigačných svetlách, nebezpečných námorných zónach, obmedzeniach na pohyb alebo pristávaní lodí, atď. Pre použitie stiahnite príslušné Námorné mapy a zapnite štýl \"Námorná mapa\" v \"Nastaviť mapu\".
 \n
-\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="plugin_ski_descr">Navrhnutý pre navigáciu v strediskách zimných športov. Sledujte zjazdovky, vleky a bežecké stopy farebne rozlíšené podľa obtiažnosti. Pre požitie zapnite tento modul a použite štýl mapy \"Zima a lyžovanie\" v menu \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Cestovný pohľad\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov. 
 \n 
@@ -1666,7 +1661,6 @@
     <string name="shared_string_trip_recording">Nahrávanie výletu</string>
     <string name="shared_string_navigation">Navigácia</string>
     <string name="osmand_running_in_background">Bežať v pozadí</string>
-    <string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>
     <string name="show_free_version_banner">Zobraziť nápis verzie zdarma</string>
     <string name="show_free_version_banner_description">Zobraziť nápis z verzie zadarmo, aj keď používate platenú verziu.</string>
     <string name="downloading_number_of_files">Sťahuje sa súbor %1$d…</string>
@@ -1721,7 +1715,7 @@
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verzie</string>
     <string name="feedback">Anketa</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="map_legend">Vysvetlivky k mape</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
@@ -2712,7 +2706,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Neobmedzené sťahovania</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; tieňované svahy</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
     <string name="download_wikipedia_description">Stiahnite články Wikipédie pre %1$s na ich čítanie offline.</string>
     <string name="download_wikipedia_label">Stiahnuť údaje Wikipédie</string>
@@ -3189,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Spojnica</string>
     <string name="shared_string_calculate">Vypočítať</string>
     <string name="shared_string_osmand_usage">Miesto použité OsmAndom</string>
-    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_tiles">Dlaždice</string>
     <string name="shared_string_maps">Mapy</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3204,7 +3197,6 @@
     <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Použité %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Použité %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Vrstevnice a tieňované svahy</string>
     <string name="routing_attr_prefer_unpaved_name">Preferovať nespevnené cesty</string>
     <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
     <string name="update_all_maps">Aktualizovať všetky mapy</string>
@@ -3324,7 +3316,6 @@
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
     <string name="live_monitoring_tracking_interval">Interval stopovania</string>
     <string name="live_monitoring_adress">Webová adresa</string>
-    <string name="live_monitoring_adress_descr">Zadajte webovú adresu so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Oznámenie</string>
     <string name="monitoring_min_speed">Minimálna rýchlosť</string>
     <string name="monitoring_min_accuracy">Minimálna presnosť</string>
@@ -3961,7 +3952,7 @@
     <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
     <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
-\nInštrukcie ako prispievať nájdete na našej webstránke https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
@@ -4006,8 +3997,6 @@
     <string name="copy_poi_name">Kopírovať názov POI</string>
     <string name="quick_action_show_hide_title">Zobraziť/skryť</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skryť hranice prírodných rezervácií, národných parkov a chránených oblastí.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice prírodných oblastí</string>
     <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmorskej výške.</string>
     <string name="track_has_no_speed">Stopa neobsahuje údaje o rýchlosti.</string>
     <string name="select_another_colorization">Prosím zvoľte iný typ zafarbenia.</string>
@@ -4147,10 +4136,8 @@
     <string name="delete_version_history">Vymazať históriu verzií</string>
     <string name="unlimited_map_downloads">Neobmedzený počet stiahnutých máp</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terénu: vrstevnice, tieňované svahy, sklony svahov</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="terrain_maps">Mapy terénu</string>
     <string name="nautical_depth">Námorná hĺbka</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získajte “%1$s” ako súčasť: predplatné %2$s. Porovnanie:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s alebo %2$s</string>
@@ -4230,10 +4217,9 @@
     <string name="purchases_feature_desc_unlimited_map_download">Získajte neobmedzené sťahovania všetkých kontinentov a regiónov offline máp.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Získajte prístup k pravidelným mesačným aktualizáciám pre offline mapy.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Získajte prístup k častejším aktualizáciám máp. Hodinové, denné alebo týždenné aktualizácie. Aktualizácie sú sťahované postupne, len pre zmenenú oblasť.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Získajte prístup k pokročilým nástrojom OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Získajte OsmAnd Cloud na uloženie všetkých údajov OsmAnd na serveri. Po preinštalovaní nestratíte údaje. Zálohujte a obnovte ľahko všetky informácie.</string>
     <string name="backup_error_subscription_was_expired_descr">Vaše predplatné OsmAnd Pro expirovalo, obnovte ho pre použitie zálohovania. Napriek tom môžete obnoviť údaje z Cloudu.</string>
-    <string name="contour_lines_hillshades_slope">Vrstevnice, tieňované svahy, sklony</string>
+    <string name="contour_lines_hillshade_slope">Vrstevnice, tieňované svahy, sklony</string>
     <string name="duration_moment_ago">pred chvíľou</string>
     <string name="logout_from_osmand_cloud">Odhlásiť z OsmAnd Cloudu</string>
     <string name="logout_from_osmand_cloud_decsr">Odhlásiť sa\?
@@ -4452,7 +4438,6 @@
     <string name="save_as_copy">Uložiť ako kópiu</string>
     <string name="gps_filter_actions_description">OsmAnd aplikuje zmeny stopy bez aktualizácie súboru. Zmeny môžete uložiť manuálne.</string>
     <string name="shared_string_gps_filter">Filter GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_speed_altitude_desc">Len body stopy spĺňajúce zadaný interval budú viditeľné na mape a grafe, ostatné budú skryté.</string>
     <string name="gps_filter_smoothing_desc">Zadajte hraničnú vzdialenosť medzi bodmi.
 \nBody stopy, ktoré nie sú aspoň v danej vzdialenosti od posledného viditeľného bodu budú skryté.
@@ -4710,9 +4695,7 @@
     <string name="live_update_frequency_week_variant">Aktualizácie máp sú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd, na základe satelitných snímkov a výškových modelov. Rozdiel od nadmorskej výšky zaznamenanej zariadením môže byť použitý ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
-    <string name="accessibility_2d_view_on">2,5D zobrazenie zapnuté</string>
     <string name="download_complete">Sťahovanie dokončené</string>
-    <string name="accessibility_2d_view_off">2,5D zobrazenie vypnuté</string>
     <string name="auto_backup_title">Automatické zálohovanie</string>
     <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridávaný ako ďalší v zozname.</string>
     <string name="shared_string_duplicate">Duplikát</string>
@@ -4825,7 +4808,6 @@
     <string name="developer_widgets">Nástroje pre vývojárov</string>
     <string name="coordinates_widget_current_location">Súradnice: súčasná poloha</string>
     <string name="map_marker_interval_dialog_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť pre výpočet odhadovaného času príjazdu.</string>
-    <string name="shared_string_2_5_d_view">2,5D zobrazenie</string>
     <string name="available_as_part_of_subscription_plan">Dostupné ako súčasť predplatného %1$s.</string>
     <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)\?</string>
     <string name="coordinates_widget_map_center_desc">Zobrazuje zemepisné súradnice stredu mapy</string>
@@ -4926,7 +4908,7 @@
 \n- nástroje podľa pozície
 \n- izočiary teploty a tlaku
 \n
-\nÚdaje o počasí sú poskytované službou Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nÚdaje o počasí sú poskytované službou Global Forecast System (GFS, %1$s).</string>
     <string name="empty_screen_weather_clouds_layer">Zapnite pre zobrazenie vrstvy oblačnosti na mape.</string>
     <string name="empty_screen_weather_contours">Zapnite pre zobrazenie izočiary počasia na mape.</string>
     <string name="empty_screen_weather_wind_layer">Zapnite pre zobrazenie vrstvy vetra na mape.</string>
@@ -4956,7 +4938,6 @@
     <string name="rendering_attr_showMtbScale_name">Zobraziť náročnosť pre horské bicykle</string>
     <string name="quick_action_wind_layer">Prepínač zobrazenia vrstvy vetra na mape.</string>
     <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa ich náročnosti pre horské bicykle.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Zobraziť náročnosť stúpania pre horské bicykle</string>
     <string name="quick_action_temperature_layer">Prepínač zobrazenia vrstvy teploty na mape.</string>
     <string name="quick_action_precipitation_layer">Prepínač zobrazenia vrstvy zrážok na mape.</string>
     <string name="cloud_layer">Vrstva oblakov</string>
@@ -4964,7 +4945,6 @@
     <string name="quick_action_air_pressure_layer">Prepínač zobrazenia vrstvy atmosférického tlaku na mape.</string>
     <string name="temperature_layer">Vrstva teploty</string>
     <string name="pressure_layer">Vrstva tlaku</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Zobraziť trasy podľa náročnosti stúpania pre horské bicykle.</string>
     <string name="wind_layer">Vrstva vetra</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_scale">Stupnica pre horské bicykle</string>
@@ -5037,11 +5017,7 @@
     <string name="change_appearance">Zmeniť vzhľad</string>
     <string name="shared_string_yards">yardov</string>
     <string name="shared_string_apply_changes">Použiť zmeny</string>
-    <string name="default_tracks_appearance_description">Tieto nastavenia vzhľadu sa použijú na všetky stopy zvolené na predošlej obrazovke.
-\n
-\nBudú tiež uložené ako \"%1$s\", aby boli použité %2$s pre všetky ostatné stopy bez implicitne alebo špecificky nastaveného vzhľadu.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Zmeniť vzhľad %1$s stôp\?</string>
-    <string name="default_tracks_appearance">Východzí vzhľad stôp</string>
     <string name="no_visible_tracks_description">Zvoľte stopy pre zobrazenie na mape.</string>
     <string name="no_visible_tracks">Žiadne stopy na mape</string>
     <string name="recently_visible">Nedávno viditeľné %1$s</string>
@@ -5106,7 +5082,6 @@
     <string name="generate_slope_from_3d_maps">Generovať rastrové mapy sklonov svahov z 3D máp</string>
     <string name="disable_vertex_hillshade_3d">Vypnúť bodové tieňované svahy v 3D</string>
     <string name="enable_3d_maps">Povoliť 3D mapy</string>
-    <string name="test_heightmap">Testovať výškovú mapu</string>
     <string name="generate_hillshade_from_3d_maps">Generovať rastrové mapy tieňovaných svahov z 3D máp</string>
     <string name="app_mode_climbing">Lezenie</string>
     <string name="clear_online_cache">Vymazať online vyrovnávaciu pamäť</string>

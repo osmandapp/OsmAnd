@@ -1,15 +1,10 @@
 package net.osmand.plus.auto;
 
-import static androidx.car.app.constraints.ConstraintManager.CONTENT_LIMIT_TYPE_LIST;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
-
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.Screen;
-import androidx.car.app.constraints.ConstraintManager;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ItemList;
 import androidx.car.app.model.Row;
@@ -50,20 +45,15 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SearchScreen extends Screen implements DefaultLifecycleObserver,
+public final class SearchScreen extends BaseOsmAndAndroidAutoSearchScreen implements DefaultLifecycleObserver,
 		AppInitializeListener, SearchHelperListener {
 
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
-	private static final int CONTENT_LIMIT = 12;
 
-	private final SearchHelper searchHelper;
 
 	@NonNull
 	private final Action settingsAction;
-
-	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
 
 	private ItemList itemList = withNoResults(new ItemList.Builder()).build();
 
@@ -73,26 +63,15 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	private List<SearchResult> recentResults;
 	private boolean showResult;
 
-	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                    @NonNull SurfaceRenderer surfaceRenderer) {
+	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction) {
 		super(carContext);
-		ConstraintManager manager = carContext.getCarService(ConstraintManager.class);
-		int contentLimit = Math.min(CONTENT_LIMIT, manager.getContentLimit(CONTENT_LIMIT_TYPE_LIST));
-		this.searchHelper = new SearchHelper(getApp(), true, contentLimit, 2, MAX_DEFAULT_SEARCH_RADIUS, false);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 
 		getLifecycle().addObserver(this);
 		getApp().getAppInitializer().addListener(this);
-		searchHelper.setListener(this);
-		searchHelper.setupSearchSettings(true);
 		reloadHistory();
 	}
 
-	@NonNull
-	public OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
-	}
 
 	@NonNull
 	public SearchUICore getSearchUICore() {
@@ -109,14 +88,14 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	@NonNull
 	@Override
 	public Template onGetTemplate() {
-		String searchQuery = searchHelper.getSearchQuery();
-		String searchHint = searchHelper.getSearchHint();
+		String searchQuery = getSearchHelper().getSearchQuery();
+		String searchHint = getSearchHelper().getSearchHint();
 		SearchTemplate.Builder builder = new SearchTemplate.Builder(
 				new SearchCallback() {
 					@Override
 					public void onSearchTextChanged(@NonNull String searchText) {
 						SearchScreen.this.searchText = searchText;
-						searchHelper.resetSearchRadius();
+						getSearchHelper().resetSearchRadius();
 						doSearch(searchText);
 					}
 
@@ -124,7 +103,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 					public void onSearchSubmitted(@NonNull String searchTerm) {
 						// When the user presses the search key use the top item in the list
 						// as the result and simulate as if the user had pressed that.
-						List<SearchResult> searchResults = searchHelper.getSearchResults();
+						List<SearchResult> searchResults = getSearchHelper().getSearchResults();
 						if (!Algorithms.isEmpty(searchResults)) {
 							onClickSearchResult(searchResults.get(0));
 						}
@@ -137,7 +116,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		if (!Algorithms.isEmpty(searchHint)) {
 			builder.setSearchHint(searchHint);
 		}
-		if (loading || searchHelper.isSearching()) {
+		if (loading || getSearchHelper().isSearching()) {
 			builder.setLoading(true);
 		} else {
 			builder.setLoading(false);
@@ -154,7 +133,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 			if (searchText.isEmpty()) {
 				showRecents();
 			} else {
-				searchHelper.runSearch(searchText);
+				getSearchHelper().runSearch(searchText);
 			}
 		}
 		invalidate();
@@ -177,7 +156,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 			if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 				showResult = true;
 			}
-			searchHelper.completeQueryWithObject(sr);
+			getSearchHelper().completeQueryWithObject(sr);
 			if (sr.object instanceof AbstractPoiType || sr.object instanceof PoiUIFilter) {
 				reloadHistory();
 			}
@@ -187,12 +166,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-				obj -> {
-					if (obj != null) {
-						onRouteSelected(sr);
-					}
-				});
+		openRoutePreview(settingsAction, sr);
 	}
 
 	@Override
@@ -307,7 +281,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 					recentResults.addAll(results);
 				}
 				this.recentResults = recentResults;
-				if (!searchHelper.isSearching() && Algorithms.isEmpty(searchHelper.getSearchQuery())) {
+				if (!getSearchHelper().isSearching() && Algorithms.isEmpty(getSearchHelper().getSearchQuery())) {
 					showRecents();
 					invalidate();
 				}
@@ -350,13 +324,13 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 			}
 			Drawable icon = QuickSearchListItem.getIcon(app, r);
 			String typeName = QuickSearchListItem.getTypeName(app, r);
-			Row.Builder builder = searchHelper.buildSearchRow(searchHelper.getSearchLocation(),
+			Row.Builder builder = getSearchHelper().buildSearchRow(getSearchHelper().getSearchLocation(),
 					r.location, name, icon, typeName);
 			if (builder != null) {
 				builder.setOnClickListener(() -> onClickSearchResult(r));
 				itemList.addItem(builder.build());
 				count++;
-				if (count >= searchHelper.getContentLimit()) {
+				if (count >= getSearchHelper().getContentLimit()) {
 					break;
 				}
 			}
@@ -370,7 +344,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		if (!destroyed) {
 			reloadHistoryInternal();
 			if (!Algorithms.isEmpty(searchText)) {
-				searchHelper.runSearch(searchText);
+				getSearchHelper().runSearch(searchText);
 			}
 			invalidate();
 		}
@@ -389,18 +363,16 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		routingHelper.onSettingsChanged(true);
 	}
 
-	private void onRouteSelected(@NonNull SearchResult sr) {
-		OsmandApplication app = getApp();
+	@Override
+	protected void onSearchResultSelected(@NonNull SearchResult sr) {
 		if (sr.objectType == ObjectType.ROUTE) {
-			ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
-			ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
+			ApplicationMode lastAppMode = getApp().getSettings().LAST_ROUTE_APPLICATION_MODE.get();
+			ApplicationMode currentAppMode = getApp().getRoutingHelper().getAppMode();
 			if (lastAppMode == ApplicationMode.DEFAULT) {
 				lastAppMode = currentAppMode;
 			}
 			updateApplicationMode(currentAppMode, lastAppMode);
-			app.getTargetPointsHelper().restoreTargetPoints(true);
+			getApp().getTargetPointsHelper().restoreTargetPoints(true);
 		}
-		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
-		finish();
 	}
 }

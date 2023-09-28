@@ -110,6 +110,14 @@ public class DayNightHelper implements SensorEventListener {
 		return preferenceStateListener;
 	}
 
+	public boolean isNightMode(boolean usedOnMap) {
+		if (usedOnMap) {
+			return isNightModeForMapControls();
+		} else {
+			return !app.getSettings().isLightContent();
+		}
+	}
+
 	public boolean isNightModeForMapControls() {
 		return isNightModeForMapControlsForProfile(settings.APPLICATION_MODE.get());
 	}
@@ -122,9 +130,6 @@ public class DayNightHelper implements SensorEventListener {
 		}
 	}
 
-	/**
-	 * @return true if day is supposed to be
-	 */
 	public boolean isNightMode() {
 		return isNightModeForProfile(settings.APPLICATION_MODE.get());
 	}

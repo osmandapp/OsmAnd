@@ -47,9 +47,6 @@ public abstract class BaseBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !settings.isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

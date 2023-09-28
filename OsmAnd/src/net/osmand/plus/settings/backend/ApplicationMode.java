@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.binary.BinaryMapRouteReaderAdapter.*;
+
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -81,7 +84,7 @@ public class ApplicationMode {
 			.description(R.string.app_mode_motorcycle).reg();
 	public static final ApplicationMode MOPED = create(BICYCLE, R.string.app_mode_moped, "moped")
 			.icon(R.drawable.ic_action_motor_scooter)
-			.description(R.string.app_mode_bicycle).reg();
+			.description(R.string.app_mode_moped).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark)
@@ -179,6 +182,15 @@ public class ApplicationMode {
 			}
 		}
 		return true;
+	}
+
+	public int getRouteTypeProfile() {
+		if (isDerivedRoutingFrom(TRUCK)) {
+			return RouteTypeRule.PROFILE_TRUCK;
+		} else if (isDerivedRoutingFrom(CAR)) {
+			return RouteTypeRule.PROFILE_CAR;
+		}
+		return RouteTypeRule.PROFILE_NONE;
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
@@ -455,13 +467,10 @@ public class ApplicationMode {
 	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
-			iconNameListener = new StateChangedListener<String>() {
-				@Override
-				public void stateChanged(String change) {
-					List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
-					for (ApplicationMode mode : modes) {
-						mode.updateAppModeIcon();
-					}
+			iconNameListener = change -> {
+				List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+				for (ApplicationMode mode : modes) {
+					mode.updateAppModeIcon();
 				}
 			};
 			settings.ICON_RES_NAME.addListener(iconNameListener);
@@ -504,12 +513,7 @@ public class ApplicationMode {
 	}
 
 	public static void reorderAppModes() {
-		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
-			@Override
-			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
-				return (mode1.getOrder() < mode2.getOrder()) ? -1 : ((mode1.getOrder() == mode2.getOrder()) ? 0 : 1);
-			}
-		};
+		Comparator<ApplicationMode> comparator = (mode1, mode2) -> Integer.compare(mode1.getOrder(), mode2.getOrder());
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);

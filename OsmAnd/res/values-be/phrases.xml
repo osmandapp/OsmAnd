@@ -2249,7 +2249,7 @@
     <string name="poi_health_specialty_general_yes">Сямейная медыцына</string>
     <string name="poi_health_specialty_ophthalmology_yes">Афтальмалогія</string>
     <string name="poi_health_specialty_gynaecology_yes">Гінэкалогія</string>
-    <string name="poi_health_specialty_internal_medicine_yes">Унутраныя хваробы</string>
+    <string name="poi_health_specialty_internal_yes">Унутраныя хваробы</string>
     <string name="poi_health_specialty_orthopaedics_yes">Артапедыя</string>
     <string name="poi_health_specialty_otolaryngology_yes">Оталарынгалогія</string>
     <string name="poi_health_specialty_paediatrics_yes">Педыятрыя</string>
@@ -2269,7 +2269,7 @@
     <string name="poi_health_specialty_pulmonology_yes">Пульманалогія</string>
     <string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Сківічна-тваравая, зубная хірургія</string>
     <string name="poi_health_specialty_maternity_yes">Мацярынства</string>
-    <string name="poi_health_specialty_emergency_medicine_yes">Хуткая і неадкладная дапамога</string>
+    <string name="poi_health_specialty_emergency_yes">Хуткая і неадкладная дапамога</string>
     <string name="poi_health_specialty_emergency_medicine_no">Спецыялізацыя: хуткая і неадкладная дапамога: адсутнічае</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Пластычная хірургія</string>
     <string name="poi_health_specialty_orthodontics_yes">Артадонтыя</string>
@@ -2281,7 +2281,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Сківічна-тваравая хірургія</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Прамянёвая дыягностыка</string>
     <string name="poi_health_specialty_gastroenterology_yes">Гастраэнтэралогія</string>
-    <string name="poi_health_specialty_dentistry_yes">Стаматалогія</string>
+    <string name="poi_health_specialty_stomatology_yes">Стаматалогія</string>
     <string name="poi_health_specialty_nephrology_yes">Нефралогія (нырачныя захворванні)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Нейрахірургія</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Нейрапсіхіятрыя</string>
@@ -2305,7 +2305,7 @@
     <string name="poi_health_specialty_speech_therapy_yes">Лагапед</string>
     <string name="poi_health_specialty_manual_therapy_yes">Мануальная тэрапія</string>
     <string name="poi_health_specialty_sports_medicine_yes">Спартовая медыцына</string>
-    <string name="poi_health_specialty_podology_yes">Падалогія</string>
+    <string name="poi_health_specialty_podiatry_yes">Падалогія</string>
     <string name="poi_health_specialty_adult_psychiatry_yes">Псіхіятрыя для дарослых</string>
     <string name="poi_health_specialty_acupuncture_yes">Акупунктура</string>
     <string name="poi_health_specialty_homeopathy_yes">Гамеапатыя</string>
@@ -3285,13 +3285,11 @@
     <string name="poi_socket_as3112">Разетка: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Разетка: AS/NZS 3112: ток</string>
     <string name="poi_socket_as3112_output">Разетка: AS/NZS 3112: магутнасць</string>
-    <string name="poi_car_yes">Аўтамабіль: так</string>
     <string name="poi_car_no">Аўтамабіль: не</string>
     <string name="poi_bicycle_yes">Ровар: так</string>
     <string name="poi_bicycle_no">Ровар: не</string>
     <string name="poi_scooter_yes">Скутэр: так</string>
     <string name="poi_scooter_no">Скутэр: не</string>
-    <string name="poi_truck_yes">Грузавік: так</string>
     <string name="poi_truck_no">Грузавік: не</string>
     <string name="poi_parking_fee_yes">Аплата за паркоўку: так</string>
     <string name="poi_parking_fee_no">Аплата за паркоўку: не</string>
@@ -3904,7 +3902,7 @@
     <string name="poi_water_source_well">Крыніца</string>
     <string name="poi_ranger_station">Лясніцтва</string>
     <string name="poi_water_source_lake">Возера</string>
-    <string name="poi_weightbridge">Аўтамабільныя вагі;Загрузка аўтамабіляў</string>
+    <string name="poi_weighbridge">Аўтамабільныя вагі;Загрузка аўтамабіляў</string>
     <string name="poi_waste_transfer_station">Станцыя перапампоўкі адходаў</string>
     <string name="poi_vaccination_covid19">Вакцынацыя: COVID19</string>
     <string name="poi_water_source_tube_well">Свідравіна</string>
@@ -4417,4 +4415,18 @@
     <string name="poi_socket_type2_cable_voltage_filter">Напружанне раздыма кабеля тыпу 2</string>
     <string name="poi_socket_type3a_output_filter">Выхад раздыма тыпу 3a</string>
     <string name="poi_socket_type2_cable_output_filter">Кабельны выхад тыпу 2</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_water_filter">Вада;Пітная вада</string>
+    <string name="poi_socket_type3a_voltage">Раздым: кабель (тып 3a): напружанне</string>
+    <string name="poi_socket_type2_cable">Раздым: кабель (тып 2)</string>
+    <string name="poi_socket_type3a_current">Раздым: кабель (тып 3a): ток</string>
+    <string name="poi_socket_type3a_output">Раздым: кабель (тып 3a): магутнасць</string>
+    <string name="poi_socket_type3c_voltage">Раздым: кабель (тып 3c): напружанне</string>
+    <string name="poi_self_checkout">Самастойнае афармленне</string>
+    <string name="poi_socket_type3c_current">Раздым: кабель (тып 3c): ток</string>
+    <string name="poi_socket_type3c_output">Раздым: кабель (тып 3c): магутнасць</string>
+    <string name="poi_recycling_pet_drink_bottles">Пластыкавыя бутэлькі ад напояў</string>
+    <string name="poi_socket_type2_cable_current">Раздым: кабель (тып 2): ток</string>
+    <string name="poi_socket_type2_cable_output">Раздым: кабель (тып 2): магутнасць</string>
+    <string name="poi_waste_accepted">Прыманыя адыходы</string>
 </resources>

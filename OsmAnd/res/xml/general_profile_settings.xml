@@ -19,13 +19,6 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/rotate_map_to" />
 
-	<SwitchPreferenceCompat
-		android:key="enable_3d_view"
-		android:layout="@layout/preference_switch_with_descr"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/shared_string_2_5_d_view" />
-
 	<Preference
 		android:key="position_placement_on_map"
 		android:layout="@layout/preference_with_descr"
@@ -95,6 +88,11 @@
 		android:title="@string/use_volume_buttons_as_zoom"
 		tools:icon="@drawable/ic_action_zoom_volume_buttons" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="external_input_device"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/external_input_device" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_kalman_filter_compass"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
@@ -129,11 +127,6 @@
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/animate_my_location" />
-
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:key="external_input_device"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:title="@string/external_input_device" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_trackball_for_movements"

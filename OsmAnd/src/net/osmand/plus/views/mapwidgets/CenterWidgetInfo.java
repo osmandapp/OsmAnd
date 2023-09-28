@@ -1,12 +1,14 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 
 public class CenterWidgetInfo extends MapWidgetInfo {
@@ -27,28 +29,19 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	@NonNull
 	@Override
 	public WidgetsPanel getUpdatedPanel() {
-		return widgetPanel;
-	}
-
-	@Override
-	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
-		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
-		return visibilityPref == null || visibilityPref.getModeValue(appMode);
-	}
-
-	@Override
-	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled) {
-		OsmandPreference<Boolean> visibilityPref = widget.getWidgetVisibilityPref();
-		if (visibilityPref != null) {
-			if (enabled == null) {
-				visibilityPref.resetModeToDefault(appMode);
+		OsmandSettings settings = widget.getMyApplication().getSettings();
+		WidgetType widgetType = getWidgetType();
+		if (widgetType != null) {
+			if (widgetType.defaultPanel == BOTTOM && TOP.contains(key, settings)) {
+				widgetPanel = TOP;
+			} else if (widgetType.defaultPanel == TOP && BOTTOM.contains(key, settings)) {
+				widgetPanel = BOTTOM;
 			} else {
-				visibilityPref.setModeValue(appMode, enabled);
+				widgetPanel = widgetType.defaultPanel;
 			}
+		} else {
+			widgetPanel = TOP.contains(key, settings) ? TOP : BOTTOM;
 		}
-		OsmandPreference<?> settingsPref = widget.getWidgetSettingsPrefToReset(appMode);
-		if ((enabled == null || !enabled) && settingsPref != null) {
-			settingsPref.resetModeToDefault(appMode);
-		}
+		return widgetPanel;
 	}
 }

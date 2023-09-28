@@ -50,6 +50,8 @@ public class ChipItem {
 
 	public Integer drawablePaddingPx;
 
+	public String contentDescription;
+
 	public Object tag;
 
 	public OnAfterViewBoundCallback onAfterViewBoundCallback;

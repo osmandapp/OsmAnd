@@ -44,6 +44,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.SpaceViewHo
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
@@ -248,7 +249,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		WidgetGroup widgetGroup = ((WidgetGroup) items.get(position).value);
 		OnClickListener showInfoListener = v -> {
 			if (actionsListener != null) {
-				actionsListener.showWidgetGroupInfo(widgetGroup, listAddedGroupWidgets(widgetGroup));
+				actionsListener.showWidgetGroupInfo(widgetGroup, Collections.emptyList());
 			}
 		};
 
@@ -263,23 +264,6 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		AndroidUtils.setBackground(viewHolder.container, getColoredSelectableDrawable(app, profileColor, 0.3f));
 
 		updateAvailableItemDivider(viewHolder, position);
-	}
-
-	@NonNull
-	private List<String> listAddedGroupWidgets(@NonNull WidgetGroup widgetGroup) {
-		List<String> addedGroupWidgets = new ArrayList<>();
-		if (!panel.isDuplicatesAllowed()) {
-			for (ListItem listItem : items) {
-				if (listItem.value instanceof AddedWidgetUiInfo) {
-					AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
-					WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
-					if (widgetType != null && widgetGroup == widgetType.getGroup()) {
-						addedGroupWidgets.add(widgetType.id);
-					}
-				}
-			}
-		}
-		return addedGroupWidgets;
 	}
 
 	private void bindAvailableWidgetViewHolder(@NonNull AvailableItemViewHolder viewHolder, int position) {
@@ -339,7 +323,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	}
 
 	@Override
-	public void onItemDismiss(ViewHolder holder) {
+	public void onItemDismiss(@NonNull ViewHolder holder) {
 		dragListener.onDragOrSwipeEnded(holder);
 	}
 

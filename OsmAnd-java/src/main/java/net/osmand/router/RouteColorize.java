@@ -109,9 +109,8 @@ public class RouteColorize {
         int wptIdx = 0;
 
         if (analysis == null) {
-            analysis = Algorithms.isEmpty(gpxFile.path)
-                    ? gpxFile.getAnalysis(System.currentTimeMillis())
-                    : gpxFile.getAnalysis(gpxFile.modifiedTime);
+            long time = Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() : gpxFile.modifiedTime;
+            analysis = gpxFile.getAnalysis(time);
         }
         for (Track t : gpxFile.tracks) {
             for (TrkSegment ts : t.segments) {
@@ -123,9 +122,9 @@ public class RouteColorize {
                     latList.add(p.lat);
                     lonList.add(p.lon);
                     if (type == ColorizationType.SPEED) {
-                        valList.add((double) analysis.speedData.get(wptIdx).speed);
+                        valList.add((double) analysis.pointAttributes.get(wptIdx).speed);
                     } else {
-                        valList.add((double) analysis.elevationData.get(wptIdx).elevation);
+                        valList.add((double) analysis.pointAttributes.get(wptIdx).elevation);
                     }
                     wptIdx++;
                 }

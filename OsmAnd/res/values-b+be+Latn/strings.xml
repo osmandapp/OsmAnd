@@ -485,9 +485,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
     <string name="audionotes_plugin_name">Aŭdyjo/vіdea-natatkі</string>
-    <string name="index_srtm_parts">častak</string>
-    <string name="index_srtm_ele">Іzalinіі vyšyń</string>
-    <string name="srtm_plugin_description">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.) 
+    <string name="srtm_plugin_description">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.)
 \n 
 \nHlabaĺnyja dadzienyja (pamiž 70 ° na poŭnačy i 70 ° na poŭdni) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirannia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kasmičnych sistem Japonii (J-spacesystems).</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
@@ -496,8 +494,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="download_srtm_maps">Іzalinіі vyšyń</string>
     <string name="download_regular_maps">Standartnyja mapy</string>
     <string name="download_roads_only_maps">Mapa tolkі daroh</string>
-    <string name="rendering_attr_alpineHiking_name">Piešy horny turyzm</string>
-    <string name="rendering_attr_alpineHiking_description">Vizualizacyja šliachu pa škalie SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Nakładańnie znakaŭ piešaha turyzmu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vizualizacyja šliachu zhodna trasam OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Miežy</string>
@@ -851,7 +847,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routing_settings">Navіhacyja</string>
     <string name="routing_settings_descr">Vyznačyć nalady navihacyi.</string>
     <string name="global_settings">Ahulnyja nałady</string>
-    <string name="index_settings">Kіravać fajłamі mapaŭ</string>
     <string name="general_settings">Ahulnyja</string>
     <string name="general_settings_descr">Nalady ekranu i ahuĺnyja nalady prykladannia.</string>
     <string name="global_app_settings">Ahulnyja nałady prahramy</string>
@@ -1589,7 +1584,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="region_maps">Rehіjanalnyja mapy</string>
     <string name="world_maps">Suśvietnyja mapy</string>
     <string name="hillshade_layer_disabled">Zacianieńnie reljefu adklučana</string>
-    <string name="srtm_plugin_disabled">Іzalinіі vyšyń adklučany</string>
     <string name="favorite_category_add_new">Dadać novuju</string>
     <string name="favorite_category_select">Abrać katehoryju</string>
     <string name="default_speed_system_descr">Vyznačyć adzinku chutkasci.</string>
@@ -1920,7 +1914,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="techical_articles_item">Technіčnyja artykuły</string>
     <string name="versions_item">Versіі</string>
     <string name="feedback">hałasavańnie</string>
-    <string name="contact_us">Kantakty</string>
+    <string name="shared_string_contact">Kantakty</string>
     <string name="map_legend">Lehienda mapy</string>
     <string name="save_poi_without_poi_type_message">Vy sapraŭdy chočacie zachavać POI biez typu?</string>
     <string name="poi_context_menu_modify_osm_change">Redahavać POI</string>
@@ -2694,7 +2688,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="wikivoyage_offline">Aŭtanomny Wikivoyage</string>
     <string name="unlimited_downloads">Nieabmiežavanyja spampoŭki</string>
     <string name="wikipedia_offline">Aŭtanomnaja Vikipedyja</string>
-    <string name="contour_lines_hillshade_maps">Kontupnyja linii i zacianiennie reĺjefu</string>
     <string name="unlock_all_features">Razblakavać usie funkcyi OsmAnd</string>
     <string name="purchase_dialog_title">Abiarycie plan</string>
     <string name="purchase_dialog_travel_description">Kupicie adzin z nastupnych kab atrymać aŭtanomny turystyčny daviednik:</string>

@@ -599,9 +599,9 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		@Override
 		public boolean removeGpx(RemoveGpxParams params) {
 			try {
-				if (params != null && params.getFileName() != null) {
+				if (params != null && (params.getFileName() != null || params.getRelativePath() != null)) {
 					OsmandAidlApi api = getApi("removeGpx");
-					return api != null && api.removeGpx(params.getFileName());
+					return api != null && api.removeGpx(params.getFileName(), params.getRelativePath());
 				}
 				return false;
 			} catch (Exception e) {
@@ -714,9 +714,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean navigateGpx(NavigateGpxParams params) {
 			try {
 				OsmandAidlApi api = getApi("navigateGpx");
-				return params != null && api != null && api.navigateGpxV2(params.getData(), params.getUri(),
-						params.isForce(), params.isNeedLocationPermission(), params.isPassWholeRoute(),
-						params.isSnapToRoad(), params.getSnapToRoadMode(), params.getSnapToRoadThreshold());
+				return params != null && api != null && api.navigateGpxV2(params);
 			} catch (Exception e) {
 				handleException(e);
 				return false;

@@ -29,7 +29,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.core.android.NativeCore;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
@@ -39,17 +38,18 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.helpers.AnalyticsHelper;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
+import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -86,7 +86,8 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -354,6 +355,7 @@ public class AppInitializer implements IProgress {
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
+		app.keyEventHelper = startupInit(new KeyEventHelper(app), KeyEventHelper.class);
 		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
 		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
@@ -364,6 +366,7 @@ public class AppInitializer implements IProgress {
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
+		app.averageGlideComputer = startupInit(new AverageGlideComputer(app), AverageGlideComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 
@@ -576,10 +579,10 @@ public class AppInitializer implements IProgress {
 			return;
 		}
 		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> fullMaps = helper.getLocalFullMaps(null);
+		List<LocalItem> fullMaps = helper.getLocalFullMaps(null);
 		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		for (LocalIndexInfo fm : fullMaps) {
-			String fileName = fm.getFileName();
+		for (LocalItem item : fullMaps) {
+			String fileName = item.getFileName();
 			if (!preferenceForLocalIndex(fileName, settings).get()) {
 				continue;
 			}
@@ -639,9 +642,14 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
+
+		if (!settings.USE_OPENGL_RENDER.get()) {
+			return;
+		}
+
+		if (!Version.isOpenGlAvailable(app)) {
 			settings.USE_OPENGL_RENDER.set(false);
-		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		} else {
 			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
 			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
 				settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
@@ -661,8 +669,8 @@ public class AppInitializer implements IProgress {
 				}
 			}
 
+			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 		}
-		notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 	}
 
 	private void initNativeCore() {

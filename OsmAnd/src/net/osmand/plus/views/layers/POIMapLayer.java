@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -99,6 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private PoiUIFilter routeTrackFilter;
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
+	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -145,6 +147,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 			@Override
 			protected List<Amenity> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				if (customObjectsDelegate != null) {
+					return customObjectsDelegate.getMapObjects();
+				}
 				if (calculatedFilters.isEmpty()) {
 					return new ArrayList<>();
 				}
@@ -218,21 +223,29 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return calculatedFilters;
 	}
 
-	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
+	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> result) {
 		List<Amenity> objects = data.getResults();
-		if (objects != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int compare = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb));
-			int radius = compare * 3 / 2;
+		if (tb.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
+			MapRendererView mapRenderer = getMapRenderer();
+			float radius = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
+			List<PointI> touchPolygon31 = null;
+			if (mapRenderer != null) {
+				touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+				if (touchPolygon31 == null) {
+					return;
+				}
+			}
+
 			try {
 				for (int i = 0; i < objects.size(); i++) {
-					Amenity n = objects.get(i);
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-							n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					if (Math.abs(pixel.x - ex) <= compare && Math.abs(pixel.y - ey) <= compare) {
-						compare = radius;
-						am.add(n);
+					Amenity amenity = objects.get(i);
+					LatLon latLon = amenity.getLocation();
+
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+							: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+					if (add) {
+						result.add(amenity);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
@@ -277,7 +290,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(int zoom) {
-		if (!filters.isEmpty() && zoom >= START_ZOOM) {
+		if (!filters.isEmpty() && zoom >= START_ZOOM || customObjectsDelegate != null) {
 			return true;
 		} else if (filters.isEmpty()) {
 			if ((travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
@@ -294,19 +307,23 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(@NonNull RotatedTileBox tileBox, @NonNull Amenity amenity) {
-		boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
-				|| ROUTE_ARTICLE.equals(amenity.getSubType());
-		boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
-		if (routeArticle) {
-			return tileBox.getZoom() >= START_ZOOM;
-		}  else if (routeTrack) {
-			if (travelRendererHelper.getRouteTracksProperty().get()) {
-				return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
-			} else {
-				return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
-			}
+		if(customObjectsDelegate != null){
+			return true;
 		} else {
-			return tileBox.getZoom() >= START_ZOOM;
+			boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
+					|| ROUTE_ARTICLE.equals(amenity.getSubType());
+			boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
+			if (routeArticle) {
+				return tileBox.getZoom() >= START_ZOOM;
+			}  else if (routeTrack) {
+				if (travelRendererHelper.getRouteTracksProperty().get()) {
+					return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
+				} else {
+					return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+				}
+			} else {
+				return tileBox.getZoom() >= START_ZOOM;
+			}
 		}
 	}
 
@@ -664,5 +681,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	public void setCustomMapObjects(List<Amenity> poiUIFilters) {
+		if (customObjectsDelegate != null) {
+			data.clearCache();
+			customObjectsDelegate.setCustomMapObjects(poiUIFilters);
+			getApplication().getOsmandMap().refreshMap();
+		}
 	}
 }

@@ -108,7 +108,7 @@ public class TestRouting {
 		if (!params.tests.isEmpty()) {
 			boolean allSuccess = runAllTests(params, lib);
 			if (allSuccess) {
-				System.out.println("All is successfull " + (System.currentTimeMillis() - time) + " ms");
+				System.out.println("All is successful " + (System.currentTimeMillis() - time) + " ms");
 			}
 		}
 		if(params.startLat != 0) {
