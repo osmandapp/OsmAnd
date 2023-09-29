@@ -40,7 +40,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -282,11 +282,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		private static final int INDEX_ITEM = 0;
 		private static final int OSM_LIVE_BANNER = 1;
 
-		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
+		private final ArrayList<LocalItem> mapsList = new ArrayList<>();
 		private final boolean showSubscriptionPurchaseBanner;
 
 		@Override
-		public void addData(@NonNull List<LocalIndexInfo> indexes) {
+		public void addData(@NonNull List<LocalItem> indexes) {
 			mapsList.addAll(indexes);
 			notifyDataSetChanged();
 		}
@@ -406,7 +406,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public List<LocalIndexInfo> getMapsToUpdate() {
+	public List<LocalItem> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
 	}
 }

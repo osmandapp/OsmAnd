@@ -1885,7 +1885,7 @@
     <string name="change_color">Endre farge</string>
     <string name="edit_name">Rediger navn</string>
     <string name="animate_my_location">Animer egen posisjon</string>
-    <string name="animate_my_location_desc">Skru på animasjon av min posisjon under navigering.</string>
+    <string name="animate_my_location_desc">Jevn kartpanorering under bevegelse. Medfører en liten forsinkelse.</string>
     <string name="shared_string_overview">Oversikt</string>
     <string name="select_street">Velg gate</string>
     <string name="shared_string_in_name">i %1$s</string>
@@ -5363,4 +5363,17 @@
     <string name="about_osmand">Om OsmAnd</string>
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
     <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="with_waypoints">Med rutepunkter</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maks. høyde</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="filter_by_name">Filtrer etter navn</string>
+    <string name="shared_string_reset_all">Tilbaksestill alt</string>
+    <string name="filter_tracks_count">Filter: %d</string>
+    <string name="app_mode_hang_gliding">Hanggliding</string>
+    <string name="date_of_creation">Opprettelsesdato</string>
+    <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
+    <string name="filter_screen_title">Filter</string>
+    <string name="shared_string_temperature">Temperatur</string>
 </resources>

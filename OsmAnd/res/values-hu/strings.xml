@@ -5444,4 +5444,21 @@
     <string name="filter_tracks_count">Szűrő: %d</string>
     <string name="date_of_creation">Létrehozás dátuma</string>
     <string name="filter_screen_title">Szűrő</string>
+    <string name="shared_string_cache">Gyorsítótár</string>
+    <string name="widget_available_ram_desc">Megjeleníti az OsmAnd számára elérhető memória mennyiségét.</string>
+    <string name="sort_size_descending">Nagy méretűek elöl</string>
+    <string name="delete_map">Térkép törlése</string>
+    <string name="standard_maps">Normál térképek</string>
+    <string name="shared_string_created">Létrehozva</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia és utazási térképek</string>
+    <string name="rendering_styles">Megjelenítő stílusok</string>
+    <string name="sort_country_name_ascending">Országnév A - Z</string>
+    <string name="weather_online">Online időjárás</string>
+    <string name="map_is_up_to_date">%1$s térképe naprakész.</string>
+    <string name="sort_size_ascending">Kis méretűek elöl</string>
+    <string name="widget_available_ram">Elérhető memória</string>
+    <string name="terrain_maps">Domborzati térképek</string>
+    <string name="sort_country_name_descending">Országnév Z - A</string>
+    <string name="delete_map_description">Biztosan törli %1$s térképét\?</string>
+    <string name="maps_and_resources">Térképek és erőforrások</string>
 </resources>

@@ -5451,4 +5451,21 @@
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="date_of_creation">Dato for oprettelse</string>
     <string name="filter_screen_title">Filter</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Viser tilgængelig hukommelse tildelt OsmAnd.</string>
+    <string name="sort_size_descending">Største først</string>
+    <string name="delete_map">Slet kort</string>
+    <string name="standard_maps">Standardkort</string>
+    <string name="shared_string_created">Oprettet</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia og rejsekort</string>
+    <string name="rendering_styles">Gengivelsesstile</string>
+    <string name="sort_country_name_ascending">Landenavn: A – Z</string>
+    <string name="weather_online">Vejr online</string>
+    <string name="map_is_up_to_date">%1$s kort er opdateret.</string>
+    <string name="sort_size_ascending">Mindste først</string>
+    <string name="widget_available_ram">Tilgængelig RAM</string>
+    <string name="terrain_maps">Terrænkort</string>
+    <string name="sort_country_name_descending">Landenavn: Z – A</string>
+    <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort\?</string>
+    <string name="maps_and_resources">Kort og ressourcer</string>
 </resources>

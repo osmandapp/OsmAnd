@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para las opciones"</string>
+\nPulsación larga para opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -5446,4 +5446,21 @@
     <string name="filter_tracks_count">Filtrar: %d</string>
     <string name="date_of_creation">Fecha de creación</string>
     <string name="filter_screen_title">Filtrar</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Muestra la memoria disponible asignada a OsmAnd.</string>
+    <string name="sort_size_descending">El más grande primero</string>
+    <string name="delete_map">Borrar el mapa</string>
+    <string name="standard_maps">Mapas estándar</string>
+    <string name="shared_string_created">Creado</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia y Mapas de viaje</string>
+    <string name="rendering_styles">Estilos de renderizado</string>
+    <string name="sort_country_name_ascending">Nombre del país: A - Z</string>
+    <string name="weather_online">El tiempo en Internet</string>
+    <string name="map_is_up_to_date">El mapa %1$s está actualizado.</string>
+    <string name="sort_size_ascending">El más pequeño primero</string>
+    <string name="widget_available_ram">Memoria RAM disponible</string>
+    <string name="terrain_maps">Mapas del terreno</string>
+    <string name="sort_country_name_descending">Nombre del país: Z - A</string>
+    <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s\?</string>
+    <string name="maps_and_resources">Mapas y recursos</string>
 </resources>
