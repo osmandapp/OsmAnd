@@ -116,7 +116,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 			if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget) {
 				SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
 				simpleWidget.showIcon(shouldShowIconPref.get());
-				simpleWidget.recreateView(null);
+				simpleWidget.recreateView();
 			}
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
 		}

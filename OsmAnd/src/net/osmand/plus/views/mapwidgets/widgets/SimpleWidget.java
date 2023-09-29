@@ -4,6 +4,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,13 +12,13 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -31,21 +32,38 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	protected boolean isVerticalWidget;
 	private TextView widgetName;
 
-	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel, @NonNull SimpleWidgetState simpleWidgetState) {
-		super(mapActivity, widgetType, customId, getLayoutId(mapActivity, simpleWidgetState, customId, widgetType, widgetsPanel));
+	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType);
 		WidgetsPanel selectedPanel = widgetsPanel != null ? widgetsPanel
 				: widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		setVerticalWidget(selectedPanel);
-		this.simpleWidgetState = simpleWidgetState;
+		this.simpleWidgetState = new SimpleWidgetState(getMyApplication(), customId, widgetType);
+		setupViews();
+	}
+
+	private void setupViews() {
+		FrameLayout mainViewsContainer = (FrameLayout) view;
+		mainViewsContainer.removeAllViews();
+		UiUtilities.getInflater(mapActivity, nightMode).inflate(isVerticalWidget ? getProperVerticalLayoutId(simpleWidgetState) : R.layout.map_hud_widget, mainViewsContainer);
 		findViews();
 		updateWidgetView();
 	}
 
-	@LayoutRes
-	protected static int getLayoutId(@NonNull MapActivity mapActivity, @NonNull SimpleWidgetState simpleWidgetState, @Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
-		WidgetsPanel selectedPanel = panel != null ? panel
-				: widgetType.getPanel(customId != null ? customId : widgetType.id, mapActivity.getMyApplication().getSettings());
-		return selectedPanel.isPanelVertical() ? getProperVerticalLayoutId(simpleWidgetState) : R.layout.map_hud_widget;
+	private void findViews() {
+		container = view.findViewById(R.id.container);
+		emptyBanner = view.findViewById(R.id.empty_banner);
+		imageView = view.findViewById(R.id.widget_icon);
+		textView = view.findViewById(R.id.widget_text);
+		textViewShadow = view.findViewById(R.id.widget_text_shadow);
+		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
+		smallTextView = view.findViewById(R.id.widget_text_small);
+		bottomDivider = view.findViewById(R.id.bottom_divider);
+		widgetName = view.findViewById(R.id.widget_name);
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.simple_widget_vertical_content_container;
 	}
 
 	@LayoutRes
@@ -58,10 +76,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			default:
 				return R.layout.simple_map_widget_medium;
 		}
-	}
-
-	protected static SimpleWidgetState createSimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType) {
-		return new SimpleWidgetState(app, customId, widgetType);
 	}
 
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
@@ -96,12 +110,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		boolean oldWidgetOrientation = isVerticalWidget;
 		setVerticalWidget(panel);
 		if (oldWidgetOrientation != isVerticalWidget) {
-			recreateView(panel);
+			recreateView();
 		}
 	}
 
-	public void recreateView(@Nullable WidgetsPanel panel) {
-		View oldView = view;
+	public void recreateView() {
 		ImageView oldImageView = imageView;
 		TextView oldTextView = textView;
 		TextView oldTextViewShadow = textViewShadow;
@@ -111,13 +124,12 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		View oldEmptyBanner = emptyBanner;
 		View oldBottomDivider = bottomDivider;
 
-		createView(getLayoutId(mapActivity, simpleWidgetState, customId, widgetType, panel));
+		setupViews();
 		findViews();
 
 		imageView.setImageDrawable(oldImageView.getDrawable());
 		copyView(imageView, oldImageView);
 		view.setOnClickListener(getOnClickListener());
-		copyView(view, oldView);
 
 		copyTextView(textView, oldTextView);
 		copyTextView(textViewShadow, oldTextViewShadow);
@@ -160,18 +172,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		return null;
 	}
 
-	protected void findViews() {
-		container = view.findViewById(R.id.container);
-		emptyBanner = view.findViewById(R.id.empty_banner);
-		imageView = view.findViewById(R.id.widget_icon);
-		textView = view.findViewById(R.id.widget_text);
-		textViewShadow = view.findViewById(R.id.widget_text_shadow);
-		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
-		smallTextView = view.findViewById(R.id.widget_text_small);
-		bottomDivider = view.findViewById(R.id.bottom_divider);
-		widgetName = view.findViewById(R.id.widget_name);
-	}
-
 	public void showIcon(boolean showIcon) {
 		AndroidUiHelper.updateVisibility(imageView, showIcon);
 		imageView.invalidate();
@@ -211,8 +211,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		if (isVerticalWidget) {
 			WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 			boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
-			WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
-			if (widgetsPanel == WidgetsPanel.TOP) {
+			if (isVerticalWidget) {
 				for (MapWidget widget : followingWidgets) {
 					if (widget instanceof MapMarkersBarWidget || widget instanceof SimpleWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
 						return false;

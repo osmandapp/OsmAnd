@@ -5,18 +5,12 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/widget_size_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal">
-
 		<LinearLayout
-			android:layout_width="0dp"
+			android:id="@+id/widget_size_container"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding_small"
-			android:layout_weight="1"
 			android:orientation="vertical">
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -35,8 +29,6 @@
 				tools:text="Small" />
 
 		</LinearLayout>
-
-	</LinearLayout>
 
 	<View
 		android:layout_width="match_parent"

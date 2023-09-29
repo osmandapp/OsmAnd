@@ -19,7 +19,7 @@ public class GpsInfoWidget extends SimpleWidget {
 	private int foundSatellites = -1;
 
 	public GpsInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, GPS_INFO, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, GPS_INFO));
+		super(mapActivity, GPS_INFO, customId, widgetsPanel);
 		setIcons(GPS_INFO);
 		setText(null, null);
 		setOnClickListener(getOnClickListener());

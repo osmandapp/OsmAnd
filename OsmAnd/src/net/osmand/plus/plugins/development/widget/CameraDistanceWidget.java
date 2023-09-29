@@ -21,7 +21,7 @@ public class CameraDistanceWidget extends SimpleWidget {
 	private float cachedCameraDistance = -1;
 
 	public CameraDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, WidgetType.DEV_CAMERA_DISTANCE));
+		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_CAMERA_DISTANCE);

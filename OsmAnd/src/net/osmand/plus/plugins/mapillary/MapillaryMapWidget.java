@@ -15,7 +15,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 public class MapillaryMapWidget extends SimpleWidget {
 
 	public MapillaryMapWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, MAPILLARY, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, MAPILLARY));
+		super(mapActivity, MAPILLARY, customId, widgetsPanel);
 
 		setText(app.getString(R.string.mapillary), "");
 		setIcons(MAPILLARY);

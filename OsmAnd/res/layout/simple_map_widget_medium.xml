@@ -70,7 +70,8 @@
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
 				android:textSize="@dimen/simple_widget_value_medium_size"
-				android:layout_gravity="center" />
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="36dp"/>
 
 		</FrameLayout>
 

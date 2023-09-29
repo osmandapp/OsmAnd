@@ -31,7 +31,7 @@ public class AverageSpeedWidget extends SimpleWidget {
 	private long lastUpdateTime;
 
 	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, AVERAGE_SPEED, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, AVERAGE_SPEED));
+		super(mapActivity, AVERAGE_SPEED, customId, widgetsPanel);
 		averageSpeedComputer = app.getAverageSpeedComputer();
 		setIcons(AVERAGE_SPEED);
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);

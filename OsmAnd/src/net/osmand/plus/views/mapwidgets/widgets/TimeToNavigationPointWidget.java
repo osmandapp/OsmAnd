@@ -31,8 +31,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	private int cachedLeftSeconds;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel,
-				createSimpleWidgetState(mapActivity.getMyApplication(), customId, getWidgetType(widgetState.isIntermediate())));
+		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.routingHelper = app.getRoutingHelper();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();

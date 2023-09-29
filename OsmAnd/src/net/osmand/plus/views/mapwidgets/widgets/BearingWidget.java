@@ -34,7 +34,7 @@ public class BearingWidget extends SimpleWidget {
 	private int cachedBearing;
 
 	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, bearingType.widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, bearingType.widgetType));
+		super(mapActivity, bearingType.widgetType, customId, widgetsPanel);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 

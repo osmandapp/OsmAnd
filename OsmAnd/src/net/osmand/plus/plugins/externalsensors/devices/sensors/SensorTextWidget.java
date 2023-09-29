@@ -28,7 +28,7 @@ public class SensorTextWidget extends SimpleWidget {
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, fieldType.getWidgetType()));
+		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);

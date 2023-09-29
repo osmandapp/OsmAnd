@@ -39,6 +39,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	private final MapMarkersHelper markersHelper;
 	private final boolean portraitMode;
+	private final String customId;
 
 	private final View markerContainer2nd;
 	private final ImageView arrowImg;
@@ -58,8 +59,8 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId) {
-		super(mapActivity, MARKERS_TOP_BAR, customId);
-
+		super(mapActivity, MARKERS_TOP_BAR);
+		this.customId = customId;
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 

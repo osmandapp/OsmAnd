@@ -43,7 +43,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private boolean forceUpdate;
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetState.getWidgetType()));
+		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
 		dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();

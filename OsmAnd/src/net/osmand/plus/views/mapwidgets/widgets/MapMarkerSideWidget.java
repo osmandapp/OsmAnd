@@ -48,8 +48,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	private LatLon customLatLon;
 
 	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, getWidgetType(widgetState.isFirstMarker()), customId, widgetsPanel,
-				createSimpleWidgetState(mapActivity.getMyApplication(), customId, getWidgetType(widgetState.isFirstMarker())));
+		super(mapActivity, getWidgetType(widgetState.isFirstMarker()), customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();

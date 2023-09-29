@@ -24,7 +24,7 @@ public class FPSTextInfoWidget extends SimpleWidget {
 	private int middleFrameId;
 
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, DEV_FPS, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_FPS));
+		super(mapActivity, DEV_FPS, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_FPS);

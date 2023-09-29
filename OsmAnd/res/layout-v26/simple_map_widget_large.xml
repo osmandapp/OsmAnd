@@ -66,12 +66,16 @@
 				android:id="@+id/widget_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:layout_marginHorizontal="36dp"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
-				android:textSize="@dimen/simple_widget_value_large_size" />
+				android:textSize="@dimen/simple_widget_value_large_size"
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="36dp"
+				android:autoSizeMinTextSize="@dimen/simple_widget_value_small_size"
+				android:autoSizeTextType="uniform"
+				android:autoSizeMaxTextSize="@dimen/simple_widget_value_large_size"
+				android:autoSizeStepGranularity="2sp"/>
 
 		</FrameLayout>
 

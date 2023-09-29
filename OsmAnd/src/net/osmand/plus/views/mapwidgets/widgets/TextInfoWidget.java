@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -46,15 +45,6 @@ public class TextInfoWidget extends MapWidget {
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		super(mapActivity, widgetType);
-		findViews();
-	}
-
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @LayoutRes int layoutId) {
-		super(mapActivity, widgetType, customId, layoutId);
-		findViews();
-	}
-
-	private void findViews() {
 		container = view.findViewById(R.id.container);
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);

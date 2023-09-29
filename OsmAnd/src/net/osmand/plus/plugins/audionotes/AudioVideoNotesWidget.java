@@ -24,7 +24,7 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 	private final int actionId;
 
 	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @AV_DEFAULT_ACTION int actionId, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
+		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.actionId = actionId;
 
 		updateInfo(null);

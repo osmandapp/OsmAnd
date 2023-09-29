@@ -23,7 +23,7 @@ public class ZoomLevelWidget extends SimpleWidget {
 	private float cachedMapDensity;
 
 	public ZoomLevelWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, DEV_ZOOM_LEVEL, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_ZOOM_LEVEL));
+		super(mapActivity, DEV_ZOOM_LEVEL, customId, widgetsPanel);
 		this.osmandMap = app.getOsmandMap();
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
