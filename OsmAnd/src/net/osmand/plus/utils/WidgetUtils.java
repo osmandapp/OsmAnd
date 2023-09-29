@@ -3,6 +3,7 @@ package net.osmand.plus.utils;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import androidx.annotation.NonNull;
 
@@ -49,7 +50,7 @@ public class WidgetUtils {
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-		int filter = AVAILABLE_MODE | ENABLED_MODE;
+		int filter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
@@ -91,7 +92,7 @@ public class WidgetUtils {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
-				selectedAppMode, ENABLED_MODE, Collections.singletonList(widgetsPanel));
+				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
 
 		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
 		targetWidget.setWidgetPanel(widgetsPanel);

@@ -1,10 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +9,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class SimpleWidgetInfo extends MapWidgetInfo {
-
-	private String externalProviderPackage;
-
 	public SimpleWidgetInfo(@NonNull String key,
 							@NonNull SimpleWidget widget,
 							@DrawableRes int daySettingsIconId,
@@ -35,18 +27,10 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 	}
 
 	@Override
-	public void setWidgetPanel(WidgetsPanel widgetPanel) {
+	public void setWidgetPanel(@NonNull WidgetsPanel widgetPanel) {
 		this.widgetPanel = widgetPanel;
-		((SimpleWidget) widget).recreateViewIfNeeded(widgetPanel);
-	}
-
-	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
-		this.externalProviderPackage = externalProviderPackage;
-	}
-
-	@Nullable
-	public String getExternalProviderPackage() {
-		return externalProviderPackage;
+		SimpleWidget simpleWidget = (SimpleWidget) widget;
+		simpleWidget.recreateViewIfNeeded(widgetPanel);
 	}
 
 	@NonNull

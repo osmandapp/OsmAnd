@@ -31,7 +31,7 @@ public class ParkingMapWidget extends SimpleWidget {
 	private int cachedMeters;
 
 	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, PARKING, customId, widgetsPanel);
+		super(mapActivity, PARKING, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, PARKING));
 		this.plugin = plugin;
 
 		setText(null, null);

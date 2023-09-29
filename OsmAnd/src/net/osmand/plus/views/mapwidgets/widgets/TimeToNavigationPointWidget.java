@@ -13,6 +13,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
@@ -30,7 +31,8 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	private int cachedLeftSeconds;
 
 	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION, customId, widgetsPanel);
+		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel,
+				createSimpleWidgetState(mapActivity.getMyApplication(), customId, getWidgetType(widgetState.isIntermediate())));
 		this.widgetState = widgetState;
 		this.routingHelper = app.getRoutingHelper();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();
@@ -40,6 +42,10 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		updateIcons();
 		updateContentTitle();
 		setOnClickListener(getOnClickListener());
+	}
+
+	private static WidgetType getWidgetType(boolean isIntermediate){
+		return isIntermediate ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION;
 	}
 
 	@Override

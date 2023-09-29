@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,10 +19,12 @@ import net.osmand.util.Algorithms;
 public class AudioVideoNotesWidget extends SimpleWidget {
 
 	private Boolean cachedRecording;
-	int actionId;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, widgetsPanel);
+	@AV_DEFAULT_ACTION
+	private final int actionId;
+
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @AV_DEFAULT_ACTION int actionId, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
 		this.actionId = actionId;
 
 		updateInfo(null);
@@ -43,6 +47,7 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		AudioVideoNotesPlugin plugin = getPlugin();
 		if (plugin == null) {
 			setText(null, null);

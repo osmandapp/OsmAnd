@@ -30,7 +30,7 @@ public class MemoryInfoWidget extends SimpleWidget {
 	private boolean memoryChanged;
 
 	public MemoryInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, DEV_MEMORY, customId, widgetsPanel);
+		super(mapActivity, DEV_MEMORY, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_MEMORY));
 		updateInfo(null);
 		setIcons(DEV_MEMORY);
 	}

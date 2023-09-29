@@ -17,7 +17,7 @@ public class CameraTiltWidget extends SimpleWidget {
 	private double cachedMapTilt;
 
 	public CameraTiltWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, WidgetType.DEV_CAMERA_TILT, customId, widgetsPanel);
+		super(mapActivity, DEV_CAMERA_TILT, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_CAMERA_TILT));
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_CAMERA_TILT);

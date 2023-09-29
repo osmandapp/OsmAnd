@@ -28,7 +28,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 	private long cachedLastUpdateTime;
 
 	public TripRecordingDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, TRIP_RECORDING_DISTANCE, customId, widgetsPanel);
+		super(mapActivity, TRIP_RECORDING_DISTANCE, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, TRIP_RECORDING_DISTANCE));
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);

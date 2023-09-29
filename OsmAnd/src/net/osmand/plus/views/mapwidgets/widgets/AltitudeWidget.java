@@ -22,7 +22,7 @@ public class AltitudeWidget extends SimpleWidget {
 	private int cachedAltitude;
 
 	public AltitudeWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, widgetsPanel);
+		super(mapActivity, widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
@@ -30,6 +30,7 @@ public class AltitudeWidget extends SimpleWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		Double altitude = getAltitudeInMeters();
 		if (altitude != null) {
 			int newAltitude = (int) (double) altitude;

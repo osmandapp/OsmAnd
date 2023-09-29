@@ -24,7 +24,7 @@ public class FPSTextInfoWidget extends SimpleWidget {
 	private int middleFrameId;
 
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, DEV_FPS, customId, widgetsPanel);
+		super(mapActivity, DEV_FPS, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_FPS));
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_FPS);
@@ -56,7 +56,7 @@ public class FPSTextInfoWidget extends SimpleWidget {
 			if (!mapView.isMeasureFPS()) {
 				mapView.setMeasureFPS(true);
 			}
-			setText((int) mapView.getFPS() + "",   (int) mapView.getSecondaryFPS() + " FPS");
+			setText((int) mapView.getFPS() + "", (int) mapView.getSecondaryFPS() + " FPS");
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class MaxSpeedWidget extends SimpleWidget {
 	private float cachedMaxSpeed;
 
 	public MaxSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, MAX_SPEED, customId, widgetsPanel);
+		super(mapActivity, MAX_SPEED, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, MAX_SPEED));
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 
 		setIcons(MAX_SPEED);

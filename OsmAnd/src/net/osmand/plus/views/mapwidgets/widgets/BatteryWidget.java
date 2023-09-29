@@ -21,13 +21,14 @@ public class BatteryWidget extends SimpleWidget {
 	private long cachedTime;
 
 	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, BATTERY, customId, widgetsPanel);
+		super(mapActivity, BATTERY, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, BATTERY));
 		setIcons(false);
 		setText(null, null);
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;

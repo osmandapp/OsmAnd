@@ -15,7 +15,7 @@ public abstract class GlideBaseWidget extends SimpleWidget {
 	private long lastUpdateTime;
 
 	public GlideBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, widgetsPanel);
+		super(mapActivity, widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
 		setText(NO_VALUE, null);
 		setIcons(widgetType);
 	}

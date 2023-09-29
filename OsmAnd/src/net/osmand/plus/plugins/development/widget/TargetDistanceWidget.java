@@ -23,7 +23,7 @@ public class TargetDistanceWidget extends SimpleWidget {
 	private float cachedTargetDistance = -1;
 
 	public TargetDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, WidgetType.DEV_TARGET_DISTANCE, customId, widgetsPanel);
+		super(mapActivity, DEV_TARGET_DISTANCE, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, DEV_TARGET_DISTANCE));
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_TARGET_DISTANCE);

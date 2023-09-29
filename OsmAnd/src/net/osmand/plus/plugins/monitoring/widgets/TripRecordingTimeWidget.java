@@ -27,7 +27,7 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 	private float cachedTimeSpan = -1;
 
 	public TripRecordingTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, TRIP_RECORDING_TIME, customId, widgetsPanel);
+		super(mapActivity, TRIP_RECORDING_TIME, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, TRIP_RECORDING_TIME));
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		setIcons(TRIP_RECORDING_TIME);

@@ -19,6 +19,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
@@ -47,7 +48,8 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	private LatLon customLatLon;
 
 	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2, customId, widgetsPanel);
+		super(mapActivity, getWidgetType(widgetState.isFirstMarker()), customId, widgetsPanel,
+				createSimpleWidgetState(mapActivity.getMyApplication(), customId, getWidgetType(widgetState.isFirstMarker())));
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();
@@ -57,6 +59,10 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 		setText(null, null);
 		setOnClickListener(getOnClickListener());
+	}
+
+	private static WidgetType getWidgetType(boolean isFirstMarker){
+		return isFirstMarker ? SIDE_MARKER_1 : SIDE_MARKER_2;
 	}
 
 	@Override

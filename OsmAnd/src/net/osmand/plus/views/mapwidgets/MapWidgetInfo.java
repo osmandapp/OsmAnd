@@ -47,14 +47,14 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	private final WidgetState widgetState;
 
 	public MapWidgetInfo(@NonNull String key,
-	                     @NonNull MapWidget widget,
-	                     @DrawableRes int daySettingsIconId,
-	                     @DrawableRes int nightSettingsIconId,
-	                     @StringRes int messageId,
-	                     @Nullable String message,
-	                     int page,
-	                     int order,
-	                     @NonNull WidgetsPanel widgetPanel) {
+						 @NonNull MapWidget widget,
+						 @DrawableRes int daySettingsIconId,
+						 @DrawableRes int nightSettingsIconId,
+						 @StringRes int messageId,
+						 @Nullable String message,
+						 int page,
+						 int order,
+						 @NonNull WidgetsPanel widgetPanel) {
 		this.key = key;
 		this.widget = widget;
 		this.widgetState = widget.getWidgetState();
@@ -67,10 +67,11 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		this.widgetPanel = widgetPanel;
 	}
 
-	public void setWidgetPanel(WidgetsPanel widgetPanel) {
+	public void setWidgetPanel(@NonNull WidgetsPanel widgetPanel) {
 		this.widgetPanel = widgetPanel;
 	}
 
+	@NonNull
 	public WidgetsPanel getWidgetPanel() {
 		return widgetPanel;
 	}
@@ -153,7 +154,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	@NonNull
 	public abstract WidgetsPanel getUpdatedPanel();
 
-	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode){
+	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode) {
 		List<String> widgetsVisibility = getWidgetsVisibility(appMode);
 		if (widgetsVisibility.contains(key) || widgetsVisibility.contains(COLLAPSED_PREFIX + key)) {
 			return true;
@@ -163,7 +164,7 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return WidgetsAvailabilityHelper.isWidgetVisibleByDefault(getApp(), key, appMode);
 	}
 
-	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled){
+	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled) {
 		List<String> widgetsVisibility = getWidgetsVisibility(appMode);
 		widgetsVisibility.remove(key);
 		widgetsVisibility.remove(COLLAPSED_PREFIX + key);

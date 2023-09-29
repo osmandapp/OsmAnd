@@ -1,8 +1,11 @@
 package net.osmand.plus.views.mapwidgets.widgetstates;
 
+import android.content.Context;
+
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,7 +35,7 @@ public class SimpleWidgetState extends WidgetState {
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerEnumStringPreference(prefId, WidgetSize.M, WidgetSize.values(), WidgetSize.class)
+		return settings.registerEnumStringPreference(prefId, WidgetSize.MEDIUM, WidgetSize.values(), WidgetSize.class)
 				.makeProfile();
 	}
 
@@ -71,7 +74,6 @@ public class SimpleWidgetState extends WidgetState {
 	public void changeToNextState() {
 	}
 
-
 	@Override
 	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		registerWidgetSizePref(customId, widgetType).setModeValue(appMode, widgetSizePref.getModeValue(appMode));
@@ -79,16 +81,19 @@ public class SimpleWidgetState extends WidgetState {
 	}
 
 	public enum WidgetSize {
-		S(R.dimen.simple_widget_value_s_size, R.dimen.simple_widget_s_height),
-		M(R.dimen.simple_widget_value_m_size, R.dimen.simple_widget_m_height),
-		L(R.dimen.simple_widget_value_l_size, R.dimen.simple_widget_l_height);
+		SMALL(R.string.rendering_value_small_name),
+		MEDIUM(R.string.rendering_value_medium_w_name),
+		LARGE(R.string.shared_string_large);
 
-		public final int valueSizeId;
-		public final int minWidgetHeightId;
+		public final int descriptionId;
 
-		WidgetSize(@DimenRes int valueSizeId, @DimenRes int minWidgetHeightId) {
-			this.valueSizeId = valueSizeId;
-			this.minWidgetHeightId = minWidgetHeightId;
+		WidgetSize(@StringRes int descriptionId) {
+			this.descriptionId = descriptionId;
+		}
+
+		@NonNull
+		public String getTitle(@NonNull Context context) {
+			return context.getString(descriptionId);
 		}
 	}
 }

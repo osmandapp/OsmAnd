@@ -21,7 +21,7 @@ public class CurrentSpeedWidget extends SimpleWidget {
 	private float cachedSpeed;
 
 	public CurrentSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, CURRENT_SPEED, customId, widgetsPanel);
+		super(mapActivity, CURRENT_SPEED, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, CURRENT_SPEED));
 		setIcons(CURRENT_SPEED);
 		setText(null, null);
 	}

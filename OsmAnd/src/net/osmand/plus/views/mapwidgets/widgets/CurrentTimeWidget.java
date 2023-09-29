@@ -16,7 +16,7 @@ public class CurrentTimeWidget extends SimpleWidget {
 	private long cachedTime;
 
 	public CurrentTimeWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, CURRENT_TIME, customId, widgetsPanel);
+		super(mapActivity, CURRENT_TIME, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, CURRENT_TIME));
 		setIcons(CURRENT_TIME);
 		setText(null, null);
 	}

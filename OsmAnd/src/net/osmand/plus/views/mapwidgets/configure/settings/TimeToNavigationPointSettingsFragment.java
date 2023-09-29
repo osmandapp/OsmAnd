@@ -24,7 +24,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 
-public class TimeToNavigationPointSettingsFragment extends WidgetSettingsBaseFragment {
+public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSettingsFragment {
 
 	private static final String KEY_ARRIVAL_TIME_OTHERWISE_TIME_TO_GO = "arrival_time_otherwise_time_to_go";
 
@@ -57,6 +57,8 @@ public class TimeToNavigationPointSettingsFragment extends WidgetSettingsBaseFra
 		themedInflater.inflate(R.layout.time_to_navigation_point_widget_settings_fragment, container);
 		updateToolbarIcon();
 		setupTimeModeSelector();
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	private void setupTimeModeSelector() {

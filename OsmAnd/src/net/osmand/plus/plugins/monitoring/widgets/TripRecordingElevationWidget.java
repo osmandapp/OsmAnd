@@ -30,8 +30,8 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	private double cachedElevationDiff = -1;
 
-	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId ,widgetsPanel);
+	public TripRecordingElevationWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId ,widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
 		savingTrackHelper = app.getSavingTrackHelper();
 
 		updateInfo(null);

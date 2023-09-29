@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
@@ -29,6 +30,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
@@ -37,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFr
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -148,7 +151,7 @@ public enum WidgetType {
 	@StringRes
 	public final int docsUrlId;
 	@Nullable
-	private WidgetGroup group;
+	private final WidgetGroup group;
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
@@ -268,7 +271,7 @@ public enum WidgetType {
 		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
 		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
 		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
-			if (widgetsPanel.getOrderPreference(settings).isSet()) {
+			if (widgetsPanel.getOrderPreference(settings).isSetForMode(appMode)) {
 				setPanels.add(widgetsPanel);
 			} else {
 				unsetPanels.add(widgetsPanel);
@@ -288,7 +291,7 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx) {
+	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
 		if (this == ELEVATION_PROFILE) {
 			return isPurchased(ctx) ? new ElevationProfileWidgetSettingsFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
@@ -313,6 +316,15 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetSettingsFragment();
+		}
+
+		if (widgetInfo instanceof SimpleWidgetInfo) {
+			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
+			if (simpleWidget.isVerticalWidget()) {
+				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
+				settingsFragment.setWidgetType(this);
+				return settingsFragment;
+			}
 		}
 		return null;
 	}

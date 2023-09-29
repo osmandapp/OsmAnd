@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.*;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -29,9 +31,9 @@ public class AverageSpeedWidget extends SimpleWidget {
 	private long lastUpdateTime;
 
 	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, WidgetType.AVERAGE_SPEED, customId, widgetsPanel);
+		super(mapActivity, AVERAGE_SPEED, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, AVERAGE_SPEED));
 		averageSpeedComputer = app.getAverageSpeedComputer();
-		setIcons(WidgetType.AVERAGE_SPEED);
+		setIcons(AVERAGE_SPEED);
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);
 		skipStopsPref = registerSkipStopsPref(customId);
 	}
@@ -56,6 +58,7 @@ public class AverageSpeedWidget extends SimpleWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - lastUpdateTime > UPDATE_INTERVAL_MILLIS) {
 			lastUpdateTime = time;

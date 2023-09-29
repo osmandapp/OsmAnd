@@ -32,7 +32,6 @@ import java.util.List;
 
 public abstract class MapWidget {
 
-	@Nullable protected String customId;
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
 	protected final MapActivity mapActivity;
@@ -41,21 +40,15 @@ public abstract class MapWidget {
 	protected final RoutingHelper routingHelper;
 
 	protected final WidgetType widgetType;
+	@Nullable
+	final protected String customId;
 
 	private boolean nightMode;
 
 	protected View view;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
-		this.app = mapActivity.getMyApplication();
-		this.settings = app.getSettings();
-		this.mapActivity = mapActivity;
-		this.widgetType = widgetType;
-		this.iconsCache = app.getUIUtilities();
-		this.locationProvider = app.getLocationProvider();
-		this.routingHelper = app.getRoutingHelper();
-		this.nightMode = app.getDaynightHelper().isNightMode();
-		createView(getLayoutId());
+		this(mapActivity, widgetType, null);
 	}
 
 	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId) {
@@ -71,7 +64,7 @@ public abstract class MapWidget {
 		createView(getLayoutId());
 	}
 
-	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, int layoutId) {
+	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @LayoutRes int layoutId) {
 		this.customId = customId;
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
@@ -84,7 +77,7 @@ public abstract class MapWidget {
 		createView(layoutId);
 	}
 
-	protected void createView(int layoutId){
+	protected void createView(@LayoutRes int layoutId) {
 		this.view = UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, null);
 	}
 
@@ -112,7 +105,7 @@ public abstract class MapWidget {
 	}
 
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+						   int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 
@@ -158,8 +151,8 @@ public abstract class MapWidget {
 	}
 
 	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
-	                                   @ColorInt int textColor, @ColorInt int textShadowColor,
-	                                   boolean boldText, int shadowRadius) {
+									   @ColorInt int textColor, @ColorInt int textShadowColor,
+									   boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		if (textShadow != null) {

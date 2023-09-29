@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -48,12 +49,12 @@ public class TextInfoWidget extends MapWidget {
 		findViews();
 	}
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, int layoutId) {
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @LayoutRes int layoutId) {
 		super(mapActivity, widgetType, customId, layoutId);
 		findViews();
 	}
 
-	private void findViews(){
+	private void findViews() {
 		container = view.findViewById(R.id.container);
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
@@ -136,18 +137,28 @@ public class TextInfoWidget extends MapWidget {
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
 		setContentDescription(combine(text, subtext));
 		if (text == null) {
-			textView.setText("");
-			textViewShadow.setText("");
+			setText("");
 		} else {
-			textView.setText(text);
-			textViewShadow.setText(text);
+			setText(text);
 		}
 		if (subtext == null) {
-			smallTextView.setText("");
-			smallTextViewShadow.setText("");
+			setSmallText("");
 		} else {
-			smallTextView.setText(subtext);
-			smallTextViewShadow.setText(subtext);
+			setSmallText(subtext);
+		}
+	}
+
+	private void setText(String text) {
+		textView.setText(text);
+		if (textViewShadow != null) {
+			textViewShadow.setText(text);
+		}
+	}
+
+	private void setSmallText(String text) {
+		smallTextView.setText(text);
+		if (smallTextViewShadow != null) {
+			smallTextViewShadow.setText(text);
 		}
 	}
 
@@ -190,8 +201,13 @@ public class TextInfoWidget extends MapWidget {
 			setImageDrawable(iconId);
 		}
 
-		view.setBackgroundResource(textState.widgetBackgroundId);
+		view.setBackgroundResource(getBackgroundResource(textState));
 		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+	}
+
+	@DrawableRes
+	protected int getBackgroundResource(@NonNull TextState textState){
+		return textState.widgetBackgroundId;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 	private int cachedMeters;
 
 	public DistanceToPointWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, widgetsPanel);
+		super(mapActivity, widgetType, customId, widgetsPanel, createSimpleWidgetState(mapActivity.getMyApplication(), customId, widgetType));
 		this.view = mapActivity.getMapView();
 
 		setIcons(widgetType);

@@ -1,19 +1,22 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import android.util.TypedValue;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -24,134 +27,108 @@ import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import java.util.List;
 
 public abstract class SimpleWidget extends TextInfoWidget {
+	private final SimpleWidgetState simpleWidgetState;
 	protected boolean isVerticalWidget;
 	private TextView widgetName;
-	private SimpleWidgetState simpleWidgetState;
 
-	public SimpleWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		super(mapActivity, widgetType, customId, getLayoutId(mapActivity, customId, widgetType, widgetsPanel));
-		if (widgetsPanel != null) {
-			setVerticalWidget(widgetsPanel);
-		} else if (widgetType != null) {
-			String id = customId != null ? customId : widgetType.id;
-			setVerticalWidget(widgetType.getPanel(id, settings));
-		}
-		this.simpleWidgetState = new SimpleWidgetState(getMyApplication(), customId, widgetType);
+	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel, @NonNull SimpleWidgetState simpleWidgetState) {
+		super(mapActivity, widgetType, customId, getLayoutId(mapActivity, simpleWidgetState, customId, widgetType, widgetsPanel));
+		WidgetsPanel selectedPanel = widgetsPanel != null ? widgetsPanel
+				: widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
+		setVerticalWidget(selectedPanel);
+		this.simpleWidgetState = simpleWidgetState;
 		findViews();
 		updateWidgetView();
 	}
 
-	protected static int getLayoutId(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetType widgetType, @Nullable WidgetsPanel panel) {
-		if (panel != null) {
-			return panel.isPanelVertical() ? R.layout.simple_map_widget : R.layout.map_hud_widget;
-		} else if (widgetType != null) {
-			WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, mapActivity.getMyApplication().getSettings());
-			return widgetsPanel.isPanelVertical() ? R.layout.simple_map_widget : R.layout.map_hud_widget;
+	@LayoutRes
+	protected static int getLayoutId(@NonNull MapActivity mapActivity, @NonNull SimpleWidgetState simpleWidgetState, @Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
+		WidgetsPanel selectedPanel = panel != null ? panel
+				: widgetType.getPanel(customId != null ? customId : widgetType.id, mapActivity.getMyApplication().getSettings());
+		return selectedPanel.isPanelVertical() ? getProperVerticalLayoutId(simpleWidgetState) : R.layout.map_hud_widget;
+	}
+
+	@LayoutRes
+	private static int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
+		switch (simpleWidgetState.getWidgetSizePref().get()) {
+			case SMALL:
+				return R.layout.simple_map_widget_small;
+			case LARGE:
+				return R.layout.simple_map_widget_large;
+			default:
+				return R.layout.simple_map_widget_medium;
 		}
-		return R.layout.map_hud_widget;
+	}
+
+	protected static SimpleWidgetState createSimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType) {
+		return new SimpleWidgetState(app, customId, widgetType);
 	}
 
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
 		isVerticalWidget = panel.isPanelVertical();
 	}
 
-	private void updateWidgetView() {
+	public boolean isVerticalWidget() {
+		return isVerticalWidget;
+	}
+
+	public void updateWidgetView() {
 		if (isVerticalWidget) {
-			SimpleWidgetState.WidgetSize widgetSize = simpleWidgetState.getWidgetSizePref().get();
-			textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(widgetSize.valueSizeId));
-			view.setMinimumHeight(app.getResources().getDimensionPixelSize(widgetSize.minWidgetHeightId));
-
-			boolean showIcon = simpleWidgetState.getShowIconPref().get();
+			boolean showIcon = shouldShowIcon();
 			AndroidUiHelper.updateVisibility(imageView, showIcon);
-
-			if (widgetSize == SimpleWidgetState.WidgetSize.S) {
-				setupSmallWidgetSize();
-			} else {
-				setupNormalWidgetSize();
-			}
 			updateWidgetName();
 		}
 	}
 
-	private void setupSmallWidgetSize() {
-		ConstraintLayout constraintLayout = (ConstraintLayout) container;
-		ConstraintSet constraintSet = new ConstraintSet();
-		constraintSet.clone(constraintLayout);
-		constraintSet.clear(R.id.widget_name, ConstraintSet.START);
-		constraintSet.connect(R.id.widget_name, ConstraintSet.END, R.id.container, ConstraintSet.END, 0);
-		constraintSet.connect(R.id.widget_name, ConstraintSet.TOP, R.id.container, ConstraintSet.TOP, 0);
-
-		constraintSet.clear(R.id.widget_text_small, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_text_small, ConstraintSet.TOP, R.id.widget_name, ConstraintSet.BOTTOM, 0);
-		constraintSet.connect(R.id.widget_text_small, ConstraintSet.END, R.id.container, ConstraintSet.END, 0);
-
-		constraintSet.clear(R.id.widget_text, ConstraintSet.END);
-		constraintSet.clear(R.id.widget_text, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, 12);
-		constraintSet.connect(R.id.widget_text, ConstraintSet.TOP, R.id.container, ConstraintSet.TOP, 0);
-
-		constraintSet.clear(R.id.widget_icon, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_icon, ConstraintSet.TOP, R.id.container, ConstraintSet.TOP, 0);
-		constraintSet.applyTo(constraintLayout);
+	public boolean shouldShowIcon() {
+		return simpleWidgetState.getShowIconPref().get();
 	}
 
-	private void setupNormalWidgetSize() {
-		ConstraintLayout constraintLayout = (ConstraintLayout) container;
-		ConstraintSet constraintSet = new ConstraintSet();
-		constraintSet.clone(constraintLayout);
-		constraintSet.clear(R.id.widget_name, ConstraintSet.END);
-		constraintSet.connect(R.id.widget_name, ConstraintSet.START, R.id.container, ConstraintSet.START, 0);
-		constraintSet.connect(R.id.widget_name, ConstraintSet.TOP, R.id.container, ConstraintSet.TOP, 0);
+	public CommonPreference<Boolean> shouldShowIconPref() {
+		return simpleWidgetState.getShowIconPref();
+	}
 
-		constraintSet.clear(R.id.widget_text_small, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_text_small, ConstraintSet.TOP, R.id.container, ConstraintSet.TOP, 0);
-		constraintSet.connect(R.id.widget_text_small, ConstraintSet.END, R.id.container, ConstraintSet.END, 0);
-
-		constraintSet.clear(R.id.widget_text, ConstraintSet.START);
-		constraintSet.clear(R.id.widget_text, ConstraintSet.END);
-		constraintSet.clear(R.id.widget_text, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.container, ConstraintSet.START, 0);
-		constraintSet.connect(R.id.widget_text, ConstraintSet.END, R.id.container, ConstraintSet.END, 0);
-		constraintSet.connect(R.id.widget_text, ConstraintSet.TOP, R.id.widget_name, ConstraintSet.BOTTOM, 0);
-
-		constraintSet.clear(R.id.widget_icon, ConstraintSet.TOP);
-		constraintSet.connect(R.id.widget_icon, ConstraintSet.TOP, R.id.widget_name, ConstraintSet.BOTTOM, 0);
-		constraintSet.applyTo(constraintLayout);
+	public OsmandPreference<SimpleWidgetState.WidgetSize> getWidgetSizePref() {
+		return simpleWidgetState.getWidgetSizePref();
 	}
 
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 		boolean oldWidgetOrientation = isVerticalWidget;
 		setVerticalWidget(panel);
 		if (oldWidgetOrientation != isVerticalWidget) {
-			View oldView = view;
-			ImageView oldImageView = imageView;
-			TextView oldTextView = textView;
-			TextView oldTextViewShadow = textViewShadow;
-			TextView oldSmallTextView = smallTextView;
-			TextView oldSmallTextViewShadow = smallTextViewShadow;
-			View oldContainer = container;
-			View oldEmptyBanner = emptyBanner;
-			View oldBottomDivider = bottomDivider;
-
-			createView(getLayoutId(mapActivity, customId, widgetType, panel));
-			findViews();
-
-			imageView.setImageDrawable(oldImageView.getDrawable());
-			copyView(imageView, oldImageView);
-			view.setOnClickListener(getOnClickListener());
-			copyView(view, oldView);
-
-			copyTextView(textView, oldTextView);
-			copyTextView(textViewShadow, oldTextViewShadow);
-			copyTextView(smallTextView, oldSmallTextView);
-			copyTextView(smallTextViewShadow, oldSmallTextViewShadow);
-			copyView(container, oldContainer);
-			copyView(emptyBanner, oldEmptyBanner);
-			copyView(bottomDivider, oldBottomDivider);
-
-			updateInfo(null);
-			updateWidgetView();
+			recreateView(panel);
 		}
+	}
+
+	public void recreateView(@Nullable WidgetsPanel panel) {
+		View oldView = view;
+		ImageView oldImageView = imageView;
+		TextView oldTextView = textView;
+		TextView oldTextViewShadow = textViewShadow;
+		TextView oldSmallTextView = smallTextView;
+		TextView oldSmallTextViewShadow = smallTextViewShadow;
+		View oldContainer = container;
+		View oldEmptyBanner = emptyBanner;
+		View oldBottomDivider = bottomDivider;
+
+		createView(getLayoutId(mapActivity, simpleWidgetState, customId, widgetType, panel));
+		findViews();
+
+		imageView.setImageDrawable(oldImageView.getDrawable());
+		copyView(imageView, oldImageView);
+		view.setOnClickListener(getOnClickListener());
+		copyView(view, oldView);
+
+		copyTextView(textView, oldTextView);
+		copyTextView(textViewShadow, oldTextViewShadow);
+		copyTextView(smallTextView, oldSmallTextView);
+		copyTextView(smallTextViewShadow, oldSmallTextViewShadow);
+		copyView(container, oldContainer);
+		copyView(emptyBanner, oldEmptyBanner);
+		copyView(bottomDivider, oldBottomDivider);
+
+		updateInfo(null);
+		updateWidgetView();
 	}
 
 	private void updateWidgetName() {
@@ -195,48 +172,31 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		widgetName = view.findViewById(R.id.widget_name);
 	}
 
-	protected void setTextNoUpdateVisibility(String text, String subtext) {
-		setContentDescription(combine(text, subtext));
-		if (text == null) {
-			setText("");
-		} else {
-			setText(text);
-		}
-		if (subtext == null) {
-			setSmallText("");
-		} else {
-			setSmallText(subtext);
-		}
-	}
-
-	private void setText(String text) {
-		textView.setText(text);
-		if (textViewShadow != null) {
-			textViewShadow.setText(text);
-		}
-	}
-
-	private void setSmallText(String text) {
-		smallTextView.setText(text);
-		if (smallTextViewShadow != null) {
-			smallTextViewShadow.setText(text);
-		}
+	public void showIcon(boolean showIcon) {
+		AndroidUiHelper.updateVisibility(imageView, showIcon);
+		imageView.invalidate();
 	}
 
 	@Override
-	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
-		super.updateColors(textState);
-		updateTextColor(smallTextView, null, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
-		updateTextColor(textView, null, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
-		int iconId = getIconId();
-		if (iconId != 0) {
-			setImageDrawable(iconId);
-		}
+	protected int getBackgroundResource(@NonNull MapInfoLayer.TextState textState) {
+		return isVerticalWidget ? ColorUtilities.getWidgetBackgroundColorId(isNightMode()) : textState.widgetBackgroundId;
+	}
 
-		view.setBackgroundResource(ColorUtilities.getWidgetBackgroundColorId(isNightMode()));
-		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+	public void setImageDrawable(int res) {
+		Drawable imageDrawable = iconsCache.getIcon(res, 0);
+		if (shouldShowIcon()) {
+			if (imageDrawable != null) {
+				imageView.setImageDrawable(imageDrawable);
+				Object anim = imageView.getDrawable();
+				if (anim instanceof AnimationDrawable) {
+					((AnimationDrawable) anim).start();
+				}
+				imageView.setVisibility(View.VISIBLE);
+			}
+		} else {
+			imageView.setVisibility(View.GONE);
+		}
+		imageView.invalidate();
 	}
 
 	@Override
