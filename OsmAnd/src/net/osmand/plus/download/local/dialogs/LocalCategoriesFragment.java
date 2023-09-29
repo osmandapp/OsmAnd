@@ -178,11 +178,13 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 
 	@Override
 	public void onUpdatedIndexesList() {
+		super.onUpdatedIndexesList();
 		reloadData();
 	}
 
 	@Override
 	public void downloadHasFinished() {
+		super.downloadHasFinished();
 		reloadData();
 	}
 

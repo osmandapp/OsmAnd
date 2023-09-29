@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -29,16 +28,15 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private final List<Object> items = new ArrayList<>();
 
+	private final LocalItemsFragment fragment;
 	private final LayoutInflater themedInflater;
-	@Nullable
-	private final LocalItemListener listener;
 	private final boolean nightMode;
 	private boolean selectionMode;
 
-	public LocalItemsAdapter(@NonNull Context context, @Nullable LocalItemListener listener, boolean nightMode) {
+	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemsFragment fragment) {
+		this.fragment = fragment;
+		this.nightMode = fragment.isNightMode();
 		themedInflater = UiUtilities.getInflater(context, nightMode);
-		this.listener = listener;
-		this.nightMode = nightMode;
 	}
 
 	public void setItems(@NonNull List<Object> items) {
@@ -58,7 +56,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		switch (viewType) {
 			case LIST_ITEM_TYPE:
 				View itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
-				return new LocalItemHolder(itemView, listener, nightMode);
+				return new LocalItemHolder(itemView, fragment);
 			case MEMORY_USAGE_TYPE:
 				itemView = themedInflater.inflate(R.layout.local_memory_card, parent, false);
 				return new MemoryViewHolder(itemView, false, nightMode);

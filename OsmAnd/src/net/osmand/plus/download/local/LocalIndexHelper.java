@@ -104,7 +104,7 @@ public class LocalIndexHelper {
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
-		LocalItemType itemType = LocalItemType.getItemType(app, file);
+		LocalItemType itemType = LocalItemUtils.getItemType(app, file);
 		if (itemType != null && (itemType != OTHER || addUnknown)) {
 			CategoryType categoryType = itemType.getCategoryType();
 			LocalCategory category = categories.get(categoryType);
@@ -326,7 +326,7 @@ public class LocalIndexHelper {
 		for (File file : files) {
 			if (file.isFile() && file.getName().endsWith(BINARY_MAP_INDEX_EXT)
 					&& (!readDir || dir.getPath().equals(file.getParent()))) {
-				LocalItemType type = LocalItemType.getItemType(app, file);
+				LocalItemType type = LocalItemUtils.getItemType(app, file);
 				if (type != null) {
 					loadLocalData(file, type, items, shouldUpdate, task);
 				}
