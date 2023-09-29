@@ -115,4 +115,10 @@ public class LocalItem implements Comparable<LocalItem> {
 	public int compareTo(LocalItem item) {
 		return fileName.compareTo(item.fileName);
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return fileName;
+	}
 }
