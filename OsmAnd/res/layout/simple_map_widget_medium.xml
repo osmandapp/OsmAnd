@@ -50,7 +50,7 @@
 
 		</LinearLayout>
 
-		<androidx.constraintlayout.widget.ConstraintLayout
+		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content">
 
@@ -60,9 +60,6 @@
 				android:layout_height="@dimen/map_widget_icon"
 				android:layout_gravity="start|center_vertical"
 				android:gravity="center"
-				osmand:layout_constraintBottom_toBottomOf="parent"
-				osmand:layout_constraintStart_toStartOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent"
 				osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 			<TextView
@@ -73,12 +70,9 @@
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
 				android:textSize="@dimen/simple_widget_value_medium_size"
-				osmand:layout_constraintBottom_toBottomOf="parent"
-				osmand:layout_constraintEnd_toEndOf="parent"
-				osmand:layout_constraintStart_toStartOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent" />
+				android:layout_gravity="center" />
 
-		</androidx.constraintlayout.widget.ConstraintLayout>
+		</FrameLayout>
 
 	</LinearLayout>
 
