@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class WidgetInfoCreator {
@@ -33,9 +34,9 @@ public class WidgetInfoCreator {
 	@Nullable
 	public MapWidgetInfo createCustomWidgetInfo(@NonNull MapWidgetsFactory factory,
 	                                            @NonNull String key, @NonNull WidgetType widgetType) {
-		MapWidget widget = factory.createMapWidget(key, widgetType);
+		WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
+		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
-			WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
 			return createCustomWidgetInfo(key, widget, widgetType, panel);
 		}
 		return null;
@@ -104,7 +105,12 @@ public class WidgetInfoCreator {
 	                                      @Nullable String message,
 	                                      int page,
 	                                      int order,
-	                                      @NonNull WidgetsPanel widgetPanel) {
+										  @NonNull WidgetsPanel widgetPanel) {
+		if (widget instanceof SimpleWidget) {
+			SimpleWidget simpleWidget = ((SimpleWidget) widget);
+			return new SimpleWidgetInfo(key, simpleWidget, daySettingsIconId, nightSettingIconId,
+					messageId, message, page, order, widgetPanel);
+		}
 		if (widget instanceof TextInfoWidget) {
 			TextInfoWidget textInfoWidget = ((TextInfoWidget) widget);
 			return new SideWidgetInfo(key, textInfoWidget, daySettingsIconId, nightSettingIconId,

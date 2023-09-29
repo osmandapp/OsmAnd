@@ -11,7 +11,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
 
-public class AverageGlideWidgetSettingsFragment extends WidgetSettingsBaseFragment {
+public class AverageGlideWidgetSettingsFragment extends BaseSimpleWidgetSettingsFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 
@@ -47,6 +47,8 @@ public class AverageGlideWidgetSettingsFragment extends WidgetSettingsBaseFragme
 		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.time_interval_card_container);
 		cardContainer.addView(timeIntervalCard.build(cardContainer.getContext()));
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	@Override

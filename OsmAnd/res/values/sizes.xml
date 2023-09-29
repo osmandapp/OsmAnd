@@ -110,6 +110,10 @@
 	<dimen name="chart_marker_vertical_padding">2dp</dimen>
 	<dimen name="track_image_height">96dp</dimen>
 
+	<dimen name="simple_widget_small_height">48dp</dimen>
+	<dimen name="simple_widget_medium_height">72dp</dimen>
+	<dimen name="simple_widget_large_height">96dp</dimen>
+
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
 	<!--  map buttons -->
@@ -167,6 +171,7 @@
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
 	<dimen name="bottom_sheet_title_big">20sp</dimen>
+	<dimen name="simple_widget_description_text_size">11sp</dimen>
 
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
@@ -228,6 +233,10 @@
 	<dimen name="default_title_line_height">24sp</dimen>
 	<dimen name="default_desc_line_height">20sp</dimen>
 	<dimen name="small_desc_line_height">14sp</dimen>
+
+	<dimen name="simple_widget_value_small_size">24sp</dimen>
+	<dimen name="simple_widget_value_medium_size">36sp</dimen>
+	<dimen name="simple_widget_value_large_size">60sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>

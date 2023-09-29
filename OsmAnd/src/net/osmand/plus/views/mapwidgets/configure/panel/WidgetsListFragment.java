@@ -53,8 +53,8 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
@@ -80,7 +80,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private ViewGroup availableWidgetsContainer;
 	private ViewGroup actionsCardContainer;
 
-	private final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE;
+	private final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 
 	private boolean nightMode;
 
@@ -276,7 +276,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
 
 			View settingsButton = view.findViewById(R.id.settings_button);
-			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app) : null;
+			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
 			if (fragment != null) {
 				settingsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
@@ -324,7 +324,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
 		MapActivity mapActivity = requireMapActivity();
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(selectedPanel));
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
 			List<WidgetType> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);

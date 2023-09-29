@@ -250,6 +250,11 @@ public class ColorUtilities {
 		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
+	@ColorRes
+	public static int getWidgetBackgroundColorId(boolean nightMode) {
+		return nightMode ? R.color.widget_background_color_dark : R.color.widget_background_color_light;
+	}
+
 	@ColorInt
 	public static int getAppBarColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getAppBarColorId(nightMode));

@@ -11,15 +11,16 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 import org.apache.commons.logging.Log;
 
-public class MemoryInfoWidget extends TextInfoWidget {
+public class MemoryInfoWidget extends SimpleWidget {
 
 	private static final Log log = PlatformUtil.getLog(MemoryInfoWidget.class);
 
-	private static final int UPDATE_INTERVAL_MS = 1000;
+	private static final long UPDATE_INTERVAL_MS = 1000;
 
 	private long cachedDalvikSize;
 	private long cachedTotalMemory;
@@ -28,15 +29,15 @@ public class MemoryInfoWidget extends TextInfoWidget {
 	private long lastUpdateTime;
 	private boolean memoryChanged;
 
-	public MemoryInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, DEV_MEMORY);
+	public MemoryInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, DEV_MEMORY, customId, widgetsPanel);
 		updateInfo(null);
 		setIcons(DEV_MEMORY);
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		if (checkMemoryChanged() && isTimeToUpdate(UPDATE_INTERVAL_MS)) {
+		if (checkMemoryChanged() && isTimeToUpdate()) {
 			memoryChanged = false;
 			lastUpdateTime = System.currentTimeMillis();
 			setText(getFormattedValue(), null);
@@ -61,12 +62,11 @@ public class MemoryInfoWidget extends TextInfoWidget {
 		return memoryChanged;
 	}
 
-	private boolean isTimeToUpdate(long interval) {
-		return System.currentTimeMillis() - lastUpdateTime > interval;
+	private boolean isTimeToUpdate() {
+		return System.currentTimeMillis() - lastUpdateTime > UPDATE_INTERVAL_MS;
 	}
 
 	private String getFormattedValue() {
 		return AndroidUtils.formatRatioOfSizes(app, cachedAvailableMemory, cachedTotalMemory);
 	}
-
 }

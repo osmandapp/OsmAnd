@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +53,7 @@ public class WidgetsSettingsHelper {
 	}
 
 	public void resetConfigureScreenSettings() {
-		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, 0, Arrays.asList(WidgetsPanel.values()));
+		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
 		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
 			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, null, false);
 		}
@@ -80,7 +81,7 @@ public class WidgetsSettingsHelper {
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
-		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, filter, panels);
 
@@ -101,7 +102,7 @@ public class WidgetsSettingsHelper {
 			if (defaultWidgetInfo != null) {
 				String widgetIdToAdd;
 				boolean disabled = !defaultWidgetInfo.isEnabledForAppMode(appMode);
-				boolean inAnotherPanel = defaultWidgetInfo.widgetPanel != panel;
+				boolean inAnotherPanel = defaultWidgetInfo.getWidgetPanel() != panel;
 				if (duplicateNotPossible || (disabled && !inAnotherPanel)) {
 					widgetRegistry.enableDisableWidgetForMode(appMode, defaultWidgetInfo, true, false);
 					widgetIdToAdd = defaultWidgetInfo.key;
@@ -142,9 +143,9 @@ public class WidgetsSettingsHelper {
 
 	@NonNull
 	private List<MapWidgetInfo> getDefaultWidgetInfos(@NonNull WidgetsPanel panel) {
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, 0, panel.getMergedPanels());
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, 0, Collections.singletonList(panel));
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			if (widgetInfo.widgetPanel == panel) {
+			if (widgetInfo.getWidgetPanel() == panel) {
 				Boolean visibility = WidgetType.isOriginalWidget(widgetInfo.key) ? false : null;
 				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, visibility, false);
 			}
@@ -156,7 +157,7 @@ public class WidgetsSettingsHelper {
 	@Nullable
 	private MapWidgetInfo createDuplicateWidgetInfo(@NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
 		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType);
-		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType);
+		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType, panel);
 		if (duplicateWidget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
@@ -180,7 +181,7 @@ public class WidgetsSettingsHelper {
 
 	public void resetWidgetsForPanel(@NonNull WidgetsPanel panel) {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, 0, panels);
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, MATCHING_PANELS_MODE, panels);
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
 			Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
@@ -192,7 +193,7 @@ public class WidgetsSettingsHelper {
 	private boolean isOriginalWidgetOnAnotherPanel(@NonNull MapWidgetInfo widgetInfo) {
 		boolean original = WidgetType.isOriginalWidget(widgetInfo.key);
 		WidgetType widgetType = widgetInfo.widget.getWidgetType();
-		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.widgetPanel;
+		return original && widgetType != null && widgetType.defaultPanel != widgetInfo.getWidgetPanel();
 	}
 
 	private <T> void copyPrefFromAppMode(@NonNull OsmandPreference<T> pref, @NonNull ApplicationMode fromAppMode) {
