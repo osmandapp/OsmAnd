@@ -30,7 +30,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -68,7 +67,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
-	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
+	private static final Log LOG = PlatformUtil.getLog(MapillaryPlugin.class);
 
 	public final OsmandPreference<Boolean> SHOW_MAPILLARY;
 	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN;
