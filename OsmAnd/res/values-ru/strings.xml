@@ -5438,4 +5438,19 @@
     <string name="sort_country_name_descending">Названия стран: Я – А</string>
     <string name="delete_map_description">Удалить карту %1$s\?</string>
     <string name="maps_and_resources">Карты и ресурсы</string>
+    <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
+    <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
+    <string name="average_glide_ratio">Средний коэффициент планирования</string>
+    <string name="release_4_6">• Виджет «Коэффициент планирования»
+\n
+\n • Добавлен виджет температуры ANT+.
+\n
+\n • Улучшено управление памятью для больших треков GPX.
+\n
+\n</string>
+    <string name="app_mode_paragliding">Парапланеризм</string>
+    <string name="map_widget_group_glide_ratio">Коэффициент планирования</string>
+    <string name="app_mode_hang_gliding">Дельтапланеризм</string>
+    <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
+    <string name="widget_available_ram">Доступная оперативная память</string>
 </resources>
