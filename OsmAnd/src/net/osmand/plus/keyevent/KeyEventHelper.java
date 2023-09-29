@@ -5,13 +5,16 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.base.InputDevice;
+import net.osmand.plus.keyevent.commands.MapZoomCommand;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class KeyEventHelper implements KeyEvent.Callback {
@@ -24,11 +27,27 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	 * Use the same Commands factory to speed up new commands creation
 	 */
 	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
+	private final Map<Integer, KeyEventCommand> globalCommands = new HashMap<>();
 	private InputDeviceProfile deviceProfile = null;
+
+	private StateChangedListener<Boolean> volumeButtonsPrefListener;
 
 	public KeyEventHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
+
+		// Update commands when related preferences updated
+		volumeButtonsPrefListener = aBoolean -> updateGlobalCommands();
+		settings.USE_VOLUME_BUTTONS_AS_ZOOM.addListener(volumeButtonsPrefListener);
+		updateGlobalCommands();
+	}
+
+	public void updateGlobalCommands() {
+		globalCommands.clear();
+		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
+			bindCommand(KeyEvent.KEYCODE_VOLUME_DOWN, MapZoomCommand.CONTINUOUS_ZOOM_OUT_ID);
+			bindCommand(KeyEvent.KEYCODE_VOLUME_UP, MapZoomCommand.CONTINUOUS_ZOOM_IN_ID);
+		}
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
@@ -71,8 +90,22 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			// Reject using of letter keycodes when the focus isn't on the Activity
 			return null;
 		}
+		// Search command in global bound commands
+		KeyEventCommand globalCommand = globalCommands.get(keyCode);
+		if (globalCommand != null) {
+			return globalCommand;
+		}
+		// Search command for current input device profile
 		InputDeviceProfile inputDevice = getInputDeviceProfile();
 		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
+	}
+
+	private void bindCommand(int keyCode, @NonNull String commandId) {
+		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
+		if (command != null) {
+			command.initialize(app);
+			globalCommands.put(keyCode, command);
+		}
 	}
 
 	@Nullable
