@@ -1373,10 +1373,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="activity_type_snowmobile_name">Snowmobile</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_water_name">Water</string>
-    <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website %1$s.</string>
     <string name="hillshade_slope_contour_lines">Contour lines / Hillshade / Slope</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
@@ -1468,10 +1464,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="plan_route_split_before">Split before</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
     <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
-    <string name="add_to_opr">Add to OpenPlaceReviews</string>
     <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="select_items_for_import">Select items that will be imported.</string>
     <string name="select_groups_for_import">Select groups that will be imported.</string>
@@ -1488,8 +1482,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_search_history">Search history</string>
     <string name="register_opr_have_account">I already have an account</string>
     <string name="register_opr_create_new_account">Create new account</string>
-    <string name="register_on_openplacereviews_desc">Photos are provided by the OpenPlaceReviews.org open data project. In order to upload your photos you need to sign up on their website.</string>
-    <string name="register_on_openplacereviews">Register on\nOpenPlaceReviews.org</string>
     <string name="shared_string_add_photo">Add photo</string>
     <string name="osm_login_descr">Log in using the OAuth method, or your OSM username and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>
