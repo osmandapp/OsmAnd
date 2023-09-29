@@ -67,8 +67,6 @@ public class HelpArticleUtils {
 				return app.getString(R.string.external_sensors_plugin_name);
 			case "plugins_mapillary":
 				return app.getString(R.string.mapillary);
-			case "plugins_openplacereviews":
-				return app.getString(R.string.open_place_reviews);
 			case "plugins_osm_editing":
 				return app.getString(R.string.osm_editing_plugin_name);
 			case "plugins_osmand_tracker":

@@ -30,7 +30,6 @@ import net.osmand.plus.plugins.development.widget.FPSTextInfoWidget;
 import net.osmand.plus.plugins.development.widget.MemoryInfoWidget;
 import net.osmand.plus.plugins.development.widget.TargetDistanceWidget;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
-import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -197,11 +196,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
-		}
-		OpenPlaceReviewsPlugin oprPlugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
-		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
-			oprPlugin.OPR_USE_DEV_URL.set(false);
-			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
 	}
