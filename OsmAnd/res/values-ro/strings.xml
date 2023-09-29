@@ -4661,7 +4661,7 @@
     <string name="routing_attr_motor_type_diesel_name">Motorină</string>
     <string name="routing_attr_motor_type_petrol_name">Benzină</string>
     <string name="transport_hazmat_no_desc">Drumurile și tunelurile pot restricționa transportul materialelor periculoase.</string>
-    <string name="radius_ruler_mode_desc">Atingând widget-ul comută la modul Riglă cu rază.</string>
+    <string name="radius_ruler_mode_desc">Atingând widgetul se comută la modul Riglă cu rază.</string>
     <string name="rendering_attr_weatherTempContours_name">Curbe izoterme</string>
     <string name="routing_attr_allow_private_for_truck_description">Permite accesul camioanelor în zonele private.</string>
     <string name="rendering_attr_weatherPressureContours_name">Curbe izobare</string>
@@ -4884,7 +4884,7 @@
     <string name="coordinates_widget_current_location">Coordonate: locația actuală</string>
     <string name="go_to_marker_location">Mergi la locația markerului</string>
     <string name="shared_string_switch_mode">Schimbă modul</string>
-    <string name="click_on_widget">Faceți clic pe widget</string>
+    <string name="click_on_widget">Atingeți widgetul</string>
     <string name="shared_string_shows">Arată</string>
     <string name="favorite_confirm_delete_group">Sunteți sigur că doriți să ștergeți grupul \"%1$s\" și toate punctele incluse (%2$d)\?</string>
     <string name="how_to_use">Cum se utilizează:</string>
