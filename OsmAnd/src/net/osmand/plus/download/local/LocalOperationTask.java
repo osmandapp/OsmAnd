@@ -144,8 +144,12 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 			if (tWal.exists()) {
 				Algorithms.removeAllFiles(tWal);
 			}
-			clearMapillaryTiles(item);
-			clearHeightmapTiles(item);
+			if (item.getType() == TILES_DATA) {
+				clearMapillaryTiles(item);
+			}
+			if (item.getType() == TERRAIN_DATA) {
+				clearHeightmapTiles(item);
+			}
 		}
 		return success;
 	}

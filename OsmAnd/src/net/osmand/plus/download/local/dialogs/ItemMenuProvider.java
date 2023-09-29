@@ -1,7 +1,5 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
 import static net.osmand.plus.download.local.LocalItemType.RENDERING_STYLES;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
@@ -37,13 +35,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
@@ -58,7 +57,6 @@ public class ItemMenuProvider implements MenuProvider {
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
 	private final LocalBaseFragment fragment;
-	private final Map<String, IndexItem> itemsToUpdate = new HashMap<>();
 	private final boolean nightMode;
 
 	private LocalItem localItem;
@@ -115,7 +113,12 @@ public class ItemMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = localItem.getType();
-		if (type == MAP_DATA) {
+
+		boolean backuped = localItem.isBackuped();
+		if (type.isBackupSupported() || backuped) {
+			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
+		}
+		if (type.isUpdateSupported()) {
 			menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -160,11 +163,16 @@ public class ItemMenuProvider implements MenuProvider {
 				return true;
 			});
 		}
-		boolean backuped = localItem.isBackuped();
-		if (type == MAP_DATA || backuped) {
-			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
+		if (type.isRenamingSupported()) {
+			menuItem = menu.add(0, R.string.shared_string_rename, Menu.NONE, R.string.shared_string_rename);
+			menuItem.setIcon(getIcon(R.drawable.ic_action_edit_dark, colorId));
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setOnMenuItemClickListener(item -> {
+				FileUtils.renameFile(activity, localItem.getFile(), fragment, false);
+				return true;
+			});
 		}
-		if (type != PROFILES) {
+		if (type.isDeletionSupported()) {
 			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -219,7 +227,7 @@ public class ItemMenuProvider implements MenuProvider {
 
 	private void updateItem() {
 		File file = localItem.getFile();
-		IndexItem indexItem = itemsToUpdate.get(file.getName());
+		IndexItem indexItem = fragment.getItemsToUpdate().get(file.getName());
 		if (indexItem != null) {
 			activity.startDownload(indexItem);
 		} else {
@@ -227,13 +235,6 @@ public class ItemMenuProvider implements MenuProvider {
 			Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG);
 			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();
-		}
-	}
-
-	public void reloadItemsToUpdate() {
-		itemsToUpdate.clear();
-		for (IndexItem item : app.getDownloadThread().getIndexes().getItemsToUpdate()) {
-			itemsToUpdate.put(item.getTargetFileName(), item);
 		}
 	}
 

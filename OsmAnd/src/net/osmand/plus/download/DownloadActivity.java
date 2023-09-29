@@ -116,7 +116,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
 
 
-		mTabs.add(new TabItem(R.string.download_tab_downloads, getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
+		mTabs.add(new TabItem(R.string.downloads, getString(R.string.downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
