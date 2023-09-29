@@ -10,7 +10,6 @@ import java.util.Locale
 
 class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	BaseTrackFilter(R.string.date_of_creation, DATE_CREATION, filterChangedListener) {
-	private val DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	var initialValueFrom = Date().time
 	var initialValueTo = Date().time
 
@@ -44,5 +43,30 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 		else {
 			trackItem.dataItem!!.fileCreationTime > valueFrom && trackItem.dataItem!!.fileCreationTime < valueTo
 		}
+	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is DateCreationTrackFilter) {
+			valueTo = value.valueTo
+			valueFrom = value.valueFrom
+			if (initialValueTo < valueTo) {
+				initialValueTo = valueTo
+			}
+			if (initialValueFrom > valueFrom) {
+				initialValueFrom = valueFrom
+			}
+		}
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is DateCreationTrackFilter &&
+				isDatesEquals(valueFrom, other.valueFrom) &&
+				isDatesEquals(valueTo, other.valueTo)
+	}
+
+
+	companion object {
+		private val DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	}
 }

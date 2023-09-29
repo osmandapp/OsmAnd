@@ -548,7 +548,12 @@ public class IntentHelper {
 			}
 			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
 				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
-				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName, false);
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(TracksFragment.OPEN_SMART_FOLDER_TRACKS_TAB)) {
+				String tabName = intent.getStringExtra(TracksFragment.OPEN_SMART_FOLDER_TRACKS_TAB);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName, true);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {

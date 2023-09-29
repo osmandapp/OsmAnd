@@ -17,13 +17,14 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
+import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache
 import net.osmand.util.Algorithms
-import java.util.*
+import java.util.Collections
 
 class SearchTracksAdapter(
     private val app: OsmandApplication,
@@ -194,6 +195,10 @@ class SearchTracksAdapter(
 	fun getCurrentSearchQuery(): String {
 		return filter.nameFilter.value
 	}
+
+    fun initSelectedFilters(selectedFilters: List<BaseTrackFilter>?) {
+        filter.initSelectedFilters(selectedFilters)
+    }
 
 	companion object {
 		const val TYPE_NO_FOUND_TRACKS = 5

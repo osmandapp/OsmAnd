@@ -5,31 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
+import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
-import net.osmand.plus.myplaces.tracks.filters.TrackFiltersSettingsCollection
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
+import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
-	TrackFiltersSettingsCollection.FiltersSettingsListener {
+	FilterChangedListener {
 	companion object {
 		val TAG: String = TracksFilterFragment::class.java.simpleName
 
-		fun showInstance(manager: FragmentManager, target: Fragment?, filter: TracksSearchFilter) {
+		fun showInstance(
+			manager: FragmentManager,
+			filter: TracksSearchFilter,
+			smartFolder: SmartFolder?) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = TracksFilterFragment()
 				fragment.retainInstance = true
 				fragment.filter = filter
-				filter.addFiltersChangedListener(fragment)
+				fragment.smartFolder = smartFolder
 				fragment.show(manager, TAG)
 			}
 		}
@@ -39,6 +44,13 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	var adapter: FiltersAdapter? = null
 	var resetAllButton: DialogButton? = null
 	var showButton: DialogButton? = null
+	private lateinit var smartFolderHelper: SmartFolderHelper
+	private var smartFolder: SmartFolder? = null
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		smartFolderHelper = app.smartFolderHelper
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -78,6 +90,19 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	fun setupToolbar(view: View) {
+		val saveFilterBtn = view.findViewById<ImageView>(R.id.save_filters_btn)
+		saveFilterBtn.setOnClickListener {
+			if (smartFolder != null) {
+				app.smartFolderHelper.saveSmartFolder(smartFolder!!, filter.currentFilters)
+				Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT).show()
+				dismiss()
+			} else {
+				smartFolderHelper.showSaveSmartFolderDialog(
+					requireActivity(),
+					nightMode,
+					filter.currentFilters)
+			}
+		}
 		val closeButton = view.findViewById<View>(R.id.close_button)
 		if (closeButton != null) {
 			closeButton.setOnClickListener {
@@ -107,5 +132,15 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	private fun updateUI() {
 		resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
+	}
+
+	override fun onResume() {
+		super.onResume()
+		filter.addFiltersChangedListener(this)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		filter.removeFiltersChangedListener(this)
 	}
 }

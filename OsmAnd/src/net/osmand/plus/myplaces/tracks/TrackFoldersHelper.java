@@ -4,7 +4,7 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
-import static net.osmand.plus.track.helpers.SelectGpxTask.*;
+import static net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -120,7 +120,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
+	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -138,6 +138,16 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				})
 				.showTopDivider(true)
 				.create());
+
+		if (isRootFolder) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.add_smart_folder)
+					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_smart_outlined))
+					.setOnClickListener(v -> {
+						app.getSmartFolderHelper().showSaveSmartFolderDialog(activity, fragment.isNightMode(), null);
+					})
+					.create());
+		}
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_import)
@@ -318,7 +328,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		}
 	}
 
-	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment,
+	public void showTracksSelection(@NonNull TracksGroup trackFolder, @NonNull BaseTrackFolderFragment fragment,
 	                                @Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		TracksSelectionFragment.showInstance(manager, trackFolder, fragment, trackItems, tracksGroups);

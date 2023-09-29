@@ -69,7 +69,7 @@ class FiltersAdapter(
 
 	override fun getItemViewType(position: Int): Int {
 		val filter = items[position]
-		return filter.getFilerType().ordinal
+		return filter.filterType.ordinal
 	}
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -84,21 +84,21 @@ class FiltersAdapter(
 		} else if (holder is FilterDurationViewHolder) {
 			holder.bindView(item as DurationTrackFilter)
 		} else if (holder is FilterRangeViewHolder) {
-			if (item.getFilerType() == FilterType.TIME_IN_MOTION) {
+			if (item.filterType == FilterType.TIME_IN_MOTION) {
 				holder.bindView(item as TimeInMotionTrackFilter)
-			} else if (item.getFilerType() == FilterType.LENGTH) {
+			} else if (item.filterType == FilterType.LENGTH) {
 				holder.bindView(item as LengthTrackFilter)
-			} else if (item.getFilerType() == FilterType.AVERAGE_SPEED) {
+			} else if (item.filterType == FilterType.AVERAGE_SPEED) {
 				holder.bindView(item as AverageSpeedTrackFilter)
-			} else if (item.getFilerType() == FilterType.MAX_SPEED) {
+			} else if (item.filterType == FilterType.MAX_SPEED) {
 				holder.bindView(item as MaxSpeedTrackFilter)
-			} else if (item.getFilerType() == FilterType.AVERAGE_ALTITUDE) {
+			} else if (item.filterType == FilterType.AVERAGE_ALTITUDE) {
 				holder.bindView(item as AverageAltitudeTrackFilter)
-			} else if (item.getFilerType() == FilterType.MAX_ALTITUDE) {
+			} else if (item.filterType == FilterType.MAX_ALTITUDE) {
 				holder.bindView(item as MaxAltitudeTrackFilter)
-			} else if (item.getFilerType() == FilterType.UPHILL) {
+			} else if (item.filterType == FilterType.UPHILL) {
 				holder.bindView(item as UphillTrackFilter)
-			} else if (item.getFilerType() == FilterType.DOWNHILL) {
+			} else if (item.filterType == FilterType.DOWNHILL) {
 				holder.bindView(item as DownhillTrackFilter)
 			}
 		} else if (holder is FilterDateViewHolder) {

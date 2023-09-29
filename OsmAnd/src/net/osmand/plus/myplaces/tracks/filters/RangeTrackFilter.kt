@@ -58,4 +58,23 @@ abstract class RangeTrackFilter(
 	override fun isEnabled(): Boolean {
 		return valueFrom > minValue || valueTo < maxValue
 	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is RangeTrackFilter) {
+			minValue = value.minValue
+			maxValue = value.maxValue
+			valueFrom = value.valueFrom
+			valueTo = value.valueTo
+			filterChangedListener.onFilterChanged()
+		}
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is RangeTrackFilter &&
+				other.minValue == minValue &&
+				other.maxValue == maxValue &&
+				other.valueFrom == valueFrom &&
+				other.valueTo == valueTo
+	}
 }

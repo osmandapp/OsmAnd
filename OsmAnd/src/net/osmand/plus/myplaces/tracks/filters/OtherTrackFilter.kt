@@ -12,6 +12,7 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 	override fun isEnabled(): Boolean {
 		return isVisibleOnMap || hasWaypoints
 	}
+
 	@Expose
 	var isVisibleOnMap: Boolean = false
 		set(value) {
@@ -29,7 +30,7 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		if (isVisibleOnMap) {
 			val selectedGpxHelper = app.selectedGpxHelper
-			if(selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null){
+			if (selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null) {
 				return true
 			}
 		}
@@ -48,4 +49,20 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 		if (hasWaypoints) selectedCount++
 		return selectedCount
 	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is OtherTrackFilter) {
+			isVisibleOnMap = value.isVisibleOnMap
+			hasWaypoints = value.hasWaypoints
+			filterChangedListener.onFilterChanged()
+		}
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is OtherTrackFilter &&
+				other.isVisibleOnMap == isVisibleOnMap &&
+				other.hasWaypoints == hasWaypoints
+	}
+
 }

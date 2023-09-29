@@ -14,9 +14,11 @@ abstract class BaseTrackFilter(
 
 	abstract fun isTrackAccepted(trackItem: TrackItem): Boolean
 
-	fun getFilerType(): FilterType {
-		return filterType
-	}
+	abstract fun initWithValue(value: BaseTrackFilter)
 
 	open fun initFilter() {}
+
+	override fun equals(other: Any?): Boolean {
+		return other is BaseTrackFilter && other.filterType == filterType
+	}
 }
