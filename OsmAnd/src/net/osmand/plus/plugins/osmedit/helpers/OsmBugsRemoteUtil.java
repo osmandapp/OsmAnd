@@ -81,7 +81,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 				b.append(getNotesApi()).append("?");
 				b.append("lat=").append(point.getLatitude());
 				b.append("&lon=").append(point.getLongitude());
-				b.append("&text=").append(URLEncoder.encode(text, "UTF-8"));
+				b.append("&text=").append(URLEncoder.encode(text + "\n\n#OsmAnd", "UTF-8"));
 				msg = "Creating bug";
 			} else {
 				b.append(getNotesApi()).append("/");
