@@ -5468,4 +5468,5 @@
     <string name="sort_country_name_descending">Nama negara: Z–A</string>
     <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s\?</string>
     <string name="maps_and_resources">Peta &amp; Sumber Daya</string>
+    <string name="shared_string_show_icon">Tampilkan ikon</string>
 </resources>
