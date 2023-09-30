@@ -5454,4 +5454,5 @@
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Êtes-vous certain de vouloir effacer la carte %1$s \?</string>
     <string name="maps_and_resources">Cartes et ressources</string>
+    <string name="shared_string_show_icon">Afficher l\'icône</string>
 </resources>
