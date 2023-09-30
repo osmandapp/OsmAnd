@@ -5468,4 +5468,5 @@
     <string name="sort_country_name_descending">Landenavn: Z – A</string>
     <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort\?</string>
     <string name="maps_and_resources">Kort og ressourcer</string>
+    <string name="shared_string_show_icon">Vis ikon</string>
 </resources>
