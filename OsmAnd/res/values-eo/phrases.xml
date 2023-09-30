@@ -4631,4 +4631,5 @@
     <string name="poi_health_specialty_paediatric_dentistry_yes">dent-kuracado de infanoj</string>
     <string name="poi_health_specialty_weight_loss_yes">perdo de pezo</string>
     <string name="poi_health_specialty_infectious_diseases_yes">infekt-malsan-scienco</string>
+    <string name="poi_socket_typee_yes">tipo E</string>
 </resources>
