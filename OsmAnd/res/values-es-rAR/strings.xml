@@ -5468,7 +5468,7 @@
     <string name="standard_maps">Mapas estándar</string>
     <string name="shared_string_created">Creado</string>
     <string name="wikipedia_and_travel_maps">Wikipedia y mapas turísticos</string>
-    <string name="rendering_styles">Estilos de dibujado</string>
+    <string name="rendering_styles">Estilos de representación</string>
     <string name="sort_country_name_ascending">Nombre del país: A – Z</string>
     <string name="weather_online">Clima en línea</string>
     <string name="map_is_up_to_date">El mapa «%1$s» está actualizado.</string>
@@ -5478,4 +5478,5 @@
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
     <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
+    <string name="shared_string_show_icon">Mostrar icono</string>
 </resources>
