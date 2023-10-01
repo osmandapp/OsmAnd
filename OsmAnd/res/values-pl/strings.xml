@@ -5348,4 +5348,12 @@
     <string name="filter_tracks_count">Filtr: %d</string>
     <string name="date_of_creation">Data utworzenia</string>
     <string name="filter_screen_title">Filtr</string>
+    <string name="sort_size_descending">Najpierw duży rozmiar</string>
+    <string name="shared_string_created">Utworzono</string>
+    <string name="sort_country_name_ascending">Nazwy krajów: A - Z</string>
+    <string name="weather_online">Pogoda online</string>
+    <string name="shared_string_show_icon">Wyświetl ikonę</string>
+    <string name="sort_size_ascending">Najpierw mały rozmiar</string>
+    <string name="sort_country_name_descending">Nazwy krajów: Z - A</string>
+    <string name="maps_and_resources">Mapy i źródła</string>
 </resources>
