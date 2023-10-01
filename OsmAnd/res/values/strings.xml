@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="enable_to_use_external_input_device">Enable to use external input device with OsmAnd</string>
+    <string name="key_bindings">Key bindings</string>
+    <string name="external_input_device_title">External input device</string>
     <string name="weather_online">Weather online</string>
     <string name="maps_and_resources">Maps &amp; Resources</string>
     <string name="shared_string_created">Created</string>

@@ -38,7 +38,6 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.base.DefaultInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;

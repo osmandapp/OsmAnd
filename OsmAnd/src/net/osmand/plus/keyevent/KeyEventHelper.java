@@ -11,6 +11,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			return globalCommand;
 		}
 		// Search command for current input device profile
-		InputDeviceProfile inputDevice = getInputDeviceProfile();
+		InputDeviceProfile inputDevice = getInputDeviceProfile(settings.getApplicationMode());
 		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
 	}
 
@@ -109,10 +110,10 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	}
 
 	@Nullable
-	private InputDeviceProfile getInputDeviceProfile() {
-		InputDeviceProfile selectedDevice = settings.getSelectedInputDevice();
-		if (!Objects.equals(deviceProfile, selectedDevice)) {
-			deviceProfile = selectedDevice.newInstance(app);
+	public InputDeviceProfile getInputDeviceProfile(@NonNull ApplicationMode appMode) {
+		InputDeviceProfile selectedType = settings.getEnabledInputDeviceType(appMode);
+		if (!Objects.equals(deviceProfile, selectedType)) {
+			deviceProfile = selectedType != null ? selectedType.newInstance(app) : null;
 		}
 		return deviceProfile;
 	}

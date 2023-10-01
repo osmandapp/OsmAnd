@@ -1,10 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
+
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.keyevent.devices.base.InputDevice;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -256,27 +258,22 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupExternalInputDevicePref() {
-		ListPreferenceEx uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		uiPreference.setSummary(R.string.sett_no_ext_input);
-		uiPreference.setDescription(R.string.external_input_device_descr);
-
-		InputDeviceProfile[] devices = InputDevice.values();
-		String[] entries = new String[devices.length];
-		Integer[] values = new Integer[devices.length];
-		for (int i = 0; i < devices.length; i++) {
-			InputDeviceProfile device = devices[i];
-			entries[i] = device.getTitle(app);
-			values[i] = device.getId();
+		Preference uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		if (uiPreference != null) {
+			uiPreference.setSummary(getExternalInputDeviceSummary());
+			uiPreference.setIcon(getExternalInputDeviceIcon());
 		}
-		uiPreference.setEntries(entries);
-		uiPreference.setEntryValues(values);
-		uiPreference.setIcon(getExternalInputDeviceIcon());
+	}
+
+	private String getExternalInputDeviceSummary() {
+		InputDeviceProfile inputDevice = settings.getEnabledInputDeviceType(getSelectedAppMode());
+		return inputDevice != null ? inputDevice.getTitle(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
-		return settings.getSelectedInputDevice(getSelectedAppMode()) != InputDevice.NONE ?
-				getActiveIcon(R.drawable.ic_action_keyboard) :
-				getContentIcon(R.drawable.ic_action_keyboard_disabled);
+		return settings.getEnabledInputDeviceType(getSelectedAppMode()) != null
+				? getActiveIcon(R.drawable.ic_action_keyboard)
+				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
 
 	private void setupTrackballForMovementsPref() {
@@ -396,6 +393,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
 			showSingleSelectionDialog(MapFocusDialogController.PROCESS_ID, controller);
 			controller.setCallback(this);
+			return true;
+		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
+			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
