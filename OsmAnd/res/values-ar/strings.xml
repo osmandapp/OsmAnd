@@ -5502,4 +5502,14 @@
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="sensor_temperature_desc">يُظهر درجة الحرارة من جهاز الاستشعار</string>
     <string name="shared_string_temperature">درجة الحرارة</string>
+    <string name="sort_size_descending">الحجم الكبير أولا</string>
+    <string name="delete_map">حذف الخريطة</string>
+    <string name="shared_string_created">تم الانشاء</string>
+    <string name="sort_country_name_ascending">اسم البلد: أ - ي</string>
+    <string name="shared_string_show_icon">أظهر الأيقونة</string>
+    <string name="map_is_up_to_date">خريطة %1$s محدثة.</string>
+    <string name="sort_size_ascending">الحجم الصغير أولا</string>
+    <string name="sort_country_name_descending">اسم البلد: ي - أ</string>
+    <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
+    <string name="maps_and_resources">خرائط ومصادر</string>
 </resources>
