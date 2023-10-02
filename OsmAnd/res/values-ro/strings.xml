@@ -70,7 +70,7 @@
 \n - Nu există acces offline la POI-urile din Wikipedia
 \n
 \n OsmAnd este dezvoltat în mod activ, iar proiectul nostru și progresul său continuu se bazează pe contribuții financiare pentru dezvoltarea și testarea de noi funcționalități. Vă rugăm să vă gândiți să cumpărați OsmAnd+, sau să finanțați noi caracteristici specifice sau să faceți o donație generală pe https://osmand.net.</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd+ este o aplicație open source pentru navigare cu hărți offline și online</string>
+    <string name="osmand_plus_short_description_80_chars">Vizualizare și navigare pe hartă mobilă globală pentru hărți OSM offline și online</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Indicații automate de navigație OSM)
 \n
 \n OsmAnd+ este o aplicație de navigație software open source cu acces la o mare varietate de date OSM globale. Toate datele hărților (hărți vectoriale sau hărți de tip tile) pot fi stocate pe cardul de memorie al telefonului pentru utilizare offline. Se oferă, de asemenea, funcționalitate de rutare offline și online, inclusiv ghidare vocală pas cu pas.
