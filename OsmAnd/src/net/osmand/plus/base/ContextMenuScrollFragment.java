@@ -103,7 +103,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+			mapControlsLayer.removeMapButtons(Arrays.asList(getButtonId(ZOOM_IN_BUTTON_ID), getButtonId(ZOOM_OUT_BUTTON_ID), getButtonId(BACK_TO_LOC_BUTTON_ID)));
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -126,11 +126,15 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 
-		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, ZOOM_IN_BUTTON_ID));
-		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, ZOOM_OUT_BUTTON_ID));
-		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, BACK_TO_LOC_BUTTON_ID, false));
+		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, getButtonId(ZOOM_IN_BUTTON_ID)));
+		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, getButtonId(ZOOM_OUT_BUTTON_ID)));
+		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, getButtonId(BACK_TO_LOC_BUTTON_ID), false));
 
 		setupMapRulerWidget(view, mapLayers);
+	}
+
+	public String getButtonId(String defaultId) {
+		return defaultId + this.getClass().getName();
 	}
 
 	protected void setupMapRulerWidget(@NonNull View view, @NonNull MapLayers mapLayers) {
