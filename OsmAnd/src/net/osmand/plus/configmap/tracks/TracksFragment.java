@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
@@ -273,29 +274,17 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	}
 
-	private void setTabs(List<TrackTab> tabs) {
+	private void setTabs(@NonNull List<TrackTab> tabs) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(0);
-		viewPager.addOnPageChangeListener(getOnPageChangeListener());
-	}
-
-	private ViewPager.OnPageChangeListener getOnPageChangeListener() {
-		return new ViewPager.OnPageChangeListener() {
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
-
+		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
 				updateButtonsState();
 			}
-
-			@Override
-			public void onPageScrollStateChanged(int state) {
-			}
-		};
+		});
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
@@ -318,8 +307,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void updateButtonsState() {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
-			boolean currentOnMapTab = trackTab.type == TrackTabType.ON_MAP;
-			if (currentOnMapTab) {
+			if (TrackTabType.ON_MAP == trackTab.type) {
 				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
 				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
 				selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
@@ -334,20 +322,21 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	@NonNull
 	private View.OnClickListener getSelectionButtonClickListener() {
 		return v -> {
-			TrackTab trackTab = getSelectedTab();
-			if (trackTab != null) {
-				boolean isSelectedOnMapTabType = trackTab.type == TrackTabType.ON_MAP;
-				boolean shouldSelectTracks = isSelectedOnMapTabType ? Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) : !itemsSelectionHelper.isItemsSelected(trackTab.getTrackItems());
-				Set<TrackItem> selectTracks;
-				if (isSelectedOnMapTabType) {
-					Set<TrackItem> selectedTracks = itemsSelectionHelper.getSelectedItems();
-					selectTracks = Algorithms.isEmpty(selectedTracks) ? selectedTracksHelper.getRecentlyVisibleTracks() : selectedTracks;
+			TrackTab tab = getSelectedTab();
+			if (tab != null) {
+				if (TrackTabType.ON_MAP == tab.type) {
+					Set<TrackItem> selectedItems = itemsSelectionHelper.getSelectedItems();
+					boolean hasSelectedItems = !Algorithms.isEmpty(selectedItems);
+					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : selectedTracksHelper.getRecentlyVisibleTracks();
+					onTrackItemsSelected(selectTracks, !hasSelectedItems);
 				} else {
-					selectTracks = new HashSet<>(getSelectedTab().getTrackItems());
+					Set<TrackItem> trackItems = new HashSet<>(tab.getTrackItems());
+					boolean itemsSelected = itemsSelectionHelper.isItemsSelected(trackItems);
+					onTrackItemsSelected(trackItems, !itemsSelected);
 				}
-				onTrackItemsSelected(selectTracks, shouldSelectTracks);
 			}
 		};
 	}
