@@ -80,6 +80,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -277,6 +278,24 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(0);
+		viewPager.addOnPageChangeListener(getOnPageChangeListener());
+	}
+
+	private ViewPager.OnPageChangeListener getOnPageChangeListener() {
+		return new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				updateButtonsState();
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		};
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
@@ -292,26 +311,45 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		});
 
 		selectionButton = view.findViewById(R.id.selection_button);
-		selectionButton.setOnClickListener(v -> {
-			Set<TrackItem> selectedTracks = itemsSelectionHelper.getSelectedItems();
-			if (Algorithms.isEmpty(selectedTracks)) {
-				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
-			} else {
-				onTrackItemsSelected(selectedTracks, false);
-			}
-		});
+		selectionButton.setOnClickListener(getSelectionButtonClickListener());
 		updateButtonsState();
 	}
 
 	private void updateButtonsState() {
-		boolean anySelected = itemsSelectionHelper.hasSelectedItems();
-		selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
+		TrackTab trackTab = getSelectedTab();
+		if (trackTab != null) {
+			boolean currentOnMapTab = trackTab.type == TrackTabType.ON_MAP;
+			if (currentOnMapTab) {
+				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
+				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
+				selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
+			} else {
+				boolean notAllSelected = !itemsSelectionHelper.isItemsSelected(trackTab.getTrackItems());
+				selectionButton.setTitleId(notAllSelected ? R.string.shared_string_select_all : R.string.shared_string_deselect_all);
+				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
+			}
+			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
+			TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
+		}
+	}
 
-		applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-		selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
-
-		TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
-		searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
+	private View.OnClickListener getSelectionButtonClickListener() {
+		return v -> {
+			TrackTab trackTab = getSelectedTab();
+			if (trackTab != null) {
+				boolean isSelectedOnMapTabType = trackTab.type == TrackTabType.ON_MAP;
+				boolean shouldSelectTracks = isSelectedOnMapTabType ? Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) : !itemsSelectionHelper.isItemsSelected(trackTab.getTrackItems());
+				Set<TrackItem> selectTracks;
+				if (isSelectedOnMapTabType) {
+					Set<TrackItem> selectedTracks = itemsSelectionHelper.getSelectedItems();
+					selectTracks = Algorithms.isEmpty(selectedTracks) ? selectedTracksHelper.getRecentlyVisibleTracks() : selectedTracks;
+				} else {
+					selectTracks = new HashSet<>(getSelectedTab().getTrackItems());
+				}
+				onTrackItemsSelected(selectTracks, shouldSelectTracks);
+			}
+		};
 	}
 
 	@NonNull
