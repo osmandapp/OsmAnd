@@ -5512,4 +5512,23 @@
     <string name="sort_country_name_descending">اسم البلد: ي - أ</string>
     <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
     <string name="maps_and_resources">خرائط ومصادر</string>
+    <string name="shared_string_cache">الذاكرة المؤقتة</string>
+    <string name="with_waypoints">مع نقاط الطريق</string>
+    <string name="widget_available_ram_desc">يعرض الذاكرة المخصصة لـOsmAnd</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">الخرائط العادية</string>
+    <string name="max_altitude">الحد الأقصى للارتفاع</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">الطيران المظلي</string>
+    <string name="filter_by_name">تصفية حسب الاسم</string>
+    <string name="shared_string_reset_all">إعادة ضبط الجميع للافتراضي</string>
+    <string name="wikipedia_and_travel_maps">خرائط الويكبيديا والسفر</string>
+    <string name="rendering_styles">أنماط التقديم</string>
+    <string name="filter_tracks_count">تصفية: %d</string>
+    <string name="app_mode_hang_gliding">الطيران الشراعي</string>
+    <string name="weather_online">الطقس أونلاين</string>
+    <string name="date_of_creation">تاريخ الإنشاء</string>
+    <string name="filter_screen_title">تصفية</string>
+    <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
+    <string name="terrain_maps">خرائط التضاريس</string>
 </resources>
