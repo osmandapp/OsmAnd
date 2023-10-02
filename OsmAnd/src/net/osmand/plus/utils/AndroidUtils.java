@@ -384,7 +384,7 @@ public class AndroidUtils {
 
 	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
-		FormattedSize formattedSize = formatSize(sizeBytes);
+		FormattedSize formattedSize = formatSize(sizeBytes, false);
 		if (formattedSize != null) {
 			String size = formattedSize.num;
 			String numSuffix = formattedSize.numSuffix;
@@ -397,11 +397,6 @@ public class AndroidUtils {
 	}
 
 	@Nullable
-	private static FormattedSize formatSize(long sizeBytes) {
-		return formatSize(sizeBytes, false);
-	}
-
-	@Nullable
 	private static FormattedSize formatSize(long sizeBytes, boolean round) {
 		if (sizeBytes <= 0) {
 			return null;
@@ -409,13 +404,13 @@ public class AndroidUtils {
 		FormattedSize result = new FormattedSize();
 		int sizeKb = (int) ((sizeBytes + 512) >> 10);
 		if (sizeKb > 1 << 20) {
-			result.num = formatGb.format(new Object[]{roundIfNeeded((float) sizeKb / (1 << 20), round)});
+			result.num = formatGb.format(new Object[] {roundIfNeeded((float) sizeKb / (1 << 20), round)});
 			result.numSuffix = "GB";
 		} else if (sizeBytes > (100 * (1 << 10))) {
-			result.num = formatMb.format(new Object[]{roundIfNeeded((float) sizeBytes / (1 << 20), round)});
+			result.num = formatMb.format(new Object[] {roundIfNeeded((float) sizeBytes / (1 << 20), round)});
 			result.numSuffix = "MB";
 		} else {
-			result.num = formatKb.format(new Object[]{roundIfNeeded((float) sizeBytes / (1 << 10), round)});
+			result.num = formatKb.format(new Object[] {roundIfNeeded((float) sizeBytes / (1 << 10), round)});
 			result.numSuffix = "kB";
 		}
 		return result;
@@ -427,10 +422,7 @@ public class AndroidUtils {
 	}
 
 	private static float roundIfNeeded(float value, boolean round) {
-		if (round) {
-			value = Math.round(value);
-		}
-		return value;
+		return round ? Math.round(value) : value;
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {

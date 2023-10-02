@@ -66,6 +66,7 @@ public class MemoryInfoWidget extends SimpleWidget {
 		return System.currentTimeMillis() - lastUpdateTime > UPDATE_INTERVAL_MS;
 	}
 
+	@NonNull
 	private String getFormattedValue() {
 		return AndroidUtils.formatRatioOfSizes(app, cachedAvailableMemory, cachedTotalMemory, true);
 	}
