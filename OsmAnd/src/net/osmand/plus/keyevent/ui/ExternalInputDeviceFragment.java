@@ -95,7 +95,7 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 	private Preference createTypePreference(@NonNull Context context) {
 		InputDeviceProfile[] devices = InputDevice.values();
 		String[] entries = new String[devices.length];
-		Integer[] values = new Integer[devices.length];
+		String[] values = new String[devices.length];
 		for (int i = 0; i < devices.length; i++) {
 			InputDeviceProfile device = devices[i];
 			entries[i] = device.getTitle(app);

@@ -13,7 +13,7 @@ import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 public class WunderLINQDeviceProfile extends InputDeviceProfile {
 
 	public WunderLINQDeviceProfile() {
-		super(3, R.string.sett_wunderlinq_ext_input);
+		super("wunderlinq", R.string.sett_wunderlinq_ext_input);
 	}
 
 	@Override

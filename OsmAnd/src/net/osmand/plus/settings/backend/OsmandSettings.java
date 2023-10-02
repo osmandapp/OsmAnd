@@ -1886,26 +1886,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getId()).makeProfile();
-	public final OsmandPreference<Boolean> EXTERNAL_INPUT_DEVICE_ENABLED = new BooleanPreference(this, "external_input_device_enabled", true){
-
-		// Check "0" value by default. This value was used to indicate
-		// about disabled preference in previous versions of the app.
-		@Override
-		public Boolean getProfileDefaultValue(ApplicationMode mode) {
-			return EXTERNAL_INPUT_DEVICE.getModeValue(mode) != 0;
-		}
-
-		// Reset selected external input device to default value,
-		// if we try to enable external device, but don't have any selected
-		@Override
-		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
-			if (obj != null && obj && EXTERNAL_INPUT_DEVICE.getModeValue(mode) == 0) {
-				EXTERNAL_INPUT_DEVICE.resetModeToDefault(mode);
-			}
-			return super.setModeValue(mode, obj);
-		}
-	}.makeProfile();
+	public final OsmandPreference<String> EXTERNAL_INPUT_DEVICE = new StringPreference(this, "selected_external_input_device", InputDevice.KEYBOARD.getId()).makeProfile();
+	public final OsmandPreference<Boolean> EXTERNAL_INPUT_DEVICE_ENABLED = new BooleanPreference(this, "external_input_device_enabled", true).makeProfile();
 
 	@Nullable
 	public InputDeviceProfile getEnabledInputDeviceType(@NonNull ApplicationMode appMode) {

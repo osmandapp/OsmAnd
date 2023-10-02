@@ -12,7 +12,7 @@ import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 public class ParrotDeviceProfile extends InputDeviceProfile {
 
 	public ParrotDeviceProfile() {
-		super(2, R.string.sett_parrot_ext_input);
+		super("parrot", R.string.sett_parrot_ext_input);
 	}
 
 	@Override

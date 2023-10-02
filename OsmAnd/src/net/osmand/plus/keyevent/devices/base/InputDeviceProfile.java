@@ -20,17 +20,18 @@ public abstract class InputDeviceProfile {
 	protected OsmandSettings settings;
 	private KeyEventCommandsFactory commandsFactory;
 
-	private final int id;
+	private final String id;
 	private final int titleId;
 
 	private final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
 
-	public InputDeviceProfile(int id, @StringRes int titleId) {
+	public InputDeviceProfile(@NonNull String id, @StringRes int titleId) {
 		this.id = id;
 		this.titleId = titleId;
 	}
 
-	public int getId() {
+	@NonNull
+	public String getId() {
 		return id;
 	}
 

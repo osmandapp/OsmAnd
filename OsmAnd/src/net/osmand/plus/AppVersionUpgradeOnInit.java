@@ -44,6 +44,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.keyevent.devices.base.InputDevice;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -53,6 +54,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -117,8 +119,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_4_01 = 4401;
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
+	// 4601 - 4.6-01 (Change external input device preference type from integer to string)
+	public static final int VERSION_4_6_01 = 4601;
 
-	public static final int LAST_APP_VERSION = VERSION_4_4_02;
+	public static final int LAST_APP_VERSION = VERSION_4_6_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -218,6 +222,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_4_02) {
 					increaseVehicleSizeLimitsAccuracy();
+				}
+				if (prevAppVersion < VERSION_4_6_01) {
+					updateExternalInputDevicePreferenceType();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -641,6 +648,26 @@ class AppVersionUpgradeOnInit {
 					preference.setModeValue(appMode, valueStr);
 				}
 			}
+		}
+	}
+
+	private void updateExternalInputDevicePreferenceType() {
+		Map<Integer, String> updatedIds = new HashMap<>();
+		updatedIds.put(1, InputDevice.KEYBOARD.getId());
+		updatedIds.put(2, InputDevice.PARROT.getId());
+		updatedIds.put(3, InputDevice.WUNDER_LINQ.getId());
+
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();;
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			Integer oldValue = oldPreference.getModeValue(appMode);
+			String newValue = oldValue != null ? updatedIds.get(oldValue) : null;
+			if (newValue != null) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, newValue);
+			} else {
+				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
+			}
+			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newValue != null);
 		}
 	}
 }

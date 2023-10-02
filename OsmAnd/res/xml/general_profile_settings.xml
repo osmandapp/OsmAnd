@@ -89,7 +89,7 @@
 		tools:icon="@drawable/ic_action_zoom_volume_buttons" />
 
 	<Preference
-		android:key="external_input_device"
+		android:key="selected_external_input_device"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/external_input_device" />
 

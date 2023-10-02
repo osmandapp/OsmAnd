@@ -19,7 +19,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 public class KeyboardDeviceProfile extends InputDeviceProfile {
 
 	public KeyboardDeviceProfile() {
-		super(1, R.string.sett_generic_ext_input);
+		super("keyboard", R.string.sett_generic_ext_input);
 	}
 
 	/**

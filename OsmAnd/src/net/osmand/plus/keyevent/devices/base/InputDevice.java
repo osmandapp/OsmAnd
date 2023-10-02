@@ -1,10 +1,13 @@
 package net.osmand.plus.keyevent.devices.base;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
+
+import java.util.Objects;
 
 public class InputDevice {
 
@@ -24,9 +27,9 @@ public class InputDevice {
 	}
 
 	@Nullable
-	public static InputDeviceProfile getByValue(int value) {
+	public static InputDeviceProfile getByValue(@NonNull String id) {
 		for (InputDeviceProfile device : values()) {
-			if (device.getId() == value) {
+			if (Objects.equals(id, device.getId())) {
 				return device;
 			}
 		}
