@@ -126,15 +126,8 @@ public class ItemMenuProvider implements MenuProvider {
 				updateItem();
 				return true;
 			});
-		} else if (type == RENDERING_STYLES) {
-			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				exportItem(ExportSettingsType.CUSTOM_ROUTING);
-				return true;
-			});
-		} else if (type == TILES_DATA) {
+		}
+		if (type == TILES_DATA) {
 			Object object = localItem.getAttachedObject();
 			if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
 					&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {
@@ -155,13 +148,6 @@ public class ItemMenuProvider implements MenuProvider {
 					return true;
 				});
 			}
-			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				exportItem(ExportSettingsType.MAP_SOURCES);
-				return true;
-			});
 		}
 		if (type.isRenamingSupported()) {
 			menuItem = menu.add(0, R.string.shared_string_rename, Menu.NONE, R.string.shared_string_rename);
@@ -169,6 +155,16 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem.setOnMenuItemClickListener(item -> {
 				FileUtils.renameFile(activity, localItem.getFile(), fragment, false);
+				return true;
+			});
+		}
+		ExportSettingsType exportType = type.getExportSettingsType();
+		if (exportType != null) {
+			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
+			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setOnMenuItemClickListener(item -> {
+				exportItem(exportType);
 				return true;
 			});
 		}

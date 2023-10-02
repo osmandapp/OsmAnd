@@ -5,9 +5,11 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
 public enum LocalItemType {
@@ -90,7 +92,7 @@ public enum LocalItemType {
 	}
 
 	public boolean isUpdateSupported() {
-		return isDownloadType();
+		return this != TILES_DATA && isDownloadType();
 	}
 
 	public boolean isDeletionSupported() {
@@ -103,5 +105,15 @@ public enum LocalItemType {
 
 	public boolean isRenamingSupported() {
 		return this != TILES_DATA && isDownloadType();
+	}
+
+	@Nullable
+	public ExportSettingsType getExportSettingsType() {
+		if (this == TILES_DATA) {
+			return ExportSettingsType.MAP_SOURCES;
+		} else if (this == RENDERING_STYLES) {
+			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+		}
+		return null;
 	}
 }
