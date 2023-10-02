@@ -2860,7 +2860,7 @@
     <string name="add_to_a_track">Adăugă la un traseu</string>
     <string name="shared_string_custom">Personalizat</string>
     <string name="gpx_direction_arrows">Săgeți direcționale</string>
-    <string name="track_coloring_solid">Masiv</string>
+    <string name="track_coloring_solid">Solidă</string>
     <string name="plan_route_last_edited">Ultima editare</string>
     <string name="plan_route_import_track">Importă traseu</string>
     <string name="plan_route_open_existing_track">Deschide un traseu existent</string>
@@ -2937,7 +2937,7 @@
     <string name="backup_confilcts_descr">Unele fișiere nu au putut fi încărcate pe server fiindcă o versiune mai nouă este stocată acolo.</string>
     <string name="backup_view_conflicts">Vedeți conflicte</string>
     <string name="backup_no_internet_descr">Verificați conexiunea la internet și descărcați din nou.</string>
-    <string name="backup_pause_all">Pauză toate</string>
+    <string name="backup_pause_all">Pauză la toate</string>
     <string name="upload_local_version">Încărcă versiunea locală</string>
     <string name="download_server_version">Descărcă versiunea de pe server</string>
     <string name="shared_string_logout">Deconectează-te</string>
@@ -3000,7 +3000,7 @@
     <string name="complete_purchase">Finalizează achiziția</string>
     <string name="regular_price">Preț normal</string>
     <string name="from_with_param">De la %1$s</string>
-    <string name="backup_delete_types_descr">Șterge toate datele despre tipurile de date învechite din OsmAnd Cloud\?</string>
+    <string name="backup_delete_types_descr">Ștergeți toate datele pentru tipurile de date depreciate din OsmAnd Cloud\?</string>
     <string name="backup_delete_types">Șterge tipuri de date dezactivate</string>
     <string name="shared_string_discussion">Discuție</string>
     <string name="shared_string_view_all">Vezi toate</string>
@@ -3271,7 +3271,7 @@
     <string name="lost_data_warning">Toate datele nesalvate vor fi pierdute.</string>
     <string name="show_start_dialog">Afișează dialogul de pornire</string>
     <string name="trip_recording_show_start_dialog_setting">Dacă este dezactivată, înregistrarea va începe imediat după atingerea widgetului sau a elementului din meniu, sărind peste dialogul de confirmare.</string>
-    <string name="customize_route_line">Personalizați linia de rută</string>
+    <string name="customize_route_line">Personalizați linia de traseu</string>
     <string name="shared_string_route_line">Linia de rută</string>
     <string name="specify_color_for_map_mode">Specificați culoarea pentru modul hartă %1$s.</string>
     <string name="no_purchases">Nu aveți achiziții</string>
@@ -3394,7 +3394,7 @@
     <string name="shared_string_sec">secundă</string>
     <string name="announcement_time_passing">Trecere</string>
     <string name="announcement_time_approach">Abordare</string>
-    <string name="announcement_time_prepare_long">Pregătiți-vă din timp</string>
+    <string name="announcement_time_prepare_long">Pregătire lungă</string>
     <string name="announcement_time_prepare">Pregătiți-vă</string>
     <string name="announcement_time_off_route">În afara traseului</string>
     <string name="announcement_time_arrive">Ajungeți la destinație</string>
@@ -4289,7 +4289,7 @@
     <string name="routeInfo_winter_ice_road_description">Colorează ruta sau linia traseului după clasificarea sa ca drum de iarnă.</string>
     <string name="routeInfo_smoothness_description">Clasificarea manevrabilității pe drumurile/căile pietonale pentru vehiculele pe roți, în special în ceea ce privește regularitatea/planeitatea suprafeței.</string>
     <string name="routeInfo_surface_description">Furnizează informații despre suprafața fizică a drumului/căii pietonale.</string>
-    <string name="routeInfo_roadClass_description">Colorează ruta sau linia traseului după clasificarea drumului.</string>
+    <string name="routeInfo_roadClass_description">Colorați traseul sau linia de cale ferată în funcție de clasificarea drumului.</string>
     <string name="add_group_to_markers">Adaugă grupul la lista de marcaje</string>
     <string name="remove_group_from_markers">Elimină grupul din lista de marcaje</string>
     <string name="start_point">Pornește</string>
@@ -4357,7 +4357,7 @@
     <string name="search_history_is_disabled_descr">Puteți activa istoricul căutărilor în setări.</string>
     <string name="shared_storage_warning_description">Din cauza noilor reguli Android, începând cu noiembrie 2021, OsmAnd 4.2 va pierde accesul la Stocarea partajată.
 \n
-\nVă rugăm să mutați folderul de date din Stocare partajată în stocarea disponibilă, altfel aplicația va pierde accesul la datele dvs. cum ar fi hărțile offline, traseele GPX, etc.</string>
+\nVă rugăm să mutați folderul de date din Stocare partajată în stocarea disponibilă, altfel aplicația va pierde accesul la datele dumneavoastră, cum ar fi hărțile offline, piesele GPX etc.</string>
     <string name="transparent_status_bar">Bara de stare transparentă</string>
     <string name="map_markers_history">Istoricul marcajelor de pe hartă</string>
     <string name="navigation_history">Istoricul de navigație</string>
