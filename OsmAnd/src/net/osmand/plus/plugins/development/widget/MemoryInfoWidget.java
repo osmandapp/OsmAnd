@@ -67,6 +67,6 @@ public class MemoryInfoWidget extends SimpleWidget {
 	}
 
 	private String getFormattedValue() {
-		return AndroidUtils.formatRatioOfSizes(app, cachedAvailableMemory, cachedTotalMemory);
+		return AndroidUtils.formatRatioOfSizes(app, cachedAvailableMemory, cachedTotalMemory, true);
 	}
 }
