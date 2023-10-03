@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_SMART_FOLDER_TRACKS_TAB;
+import static net.osmand.plus.configmap.tracks.TracksFragment.IS_SMART_FOLDER;
 import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -417,23 +416,21 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getDirName());
+		showTracksVisibilityDialog(folder.getDirName(), false);
 	}
 
-	protected void showTracksVisibilityDialog(@NonNull String tabName) {
+	@Override
+	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
+		showTracksVisibilityDialog(smartFolder.getFolderName(), true);
+	}
+
+
+	protected void showTracksVisibilityDialog(@NonNull String tabName, boolean isSmartFolder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Bundle bundle = new Bundle();
 			bundle.putString(OPEN_TRACKS_TAB, tabName);
-			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
-		}
-	}
-
-	public void showSmartFolderTracksOnMap(@NonNull SmartFolder folder) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			Bundle bundle = new Bundle();
-			bundle.putString(OPEN_SMART_FOLDER_TRACKS_TAB, folder.getFolderName());
+			bundle.putBoolean(IS_SMART_FOLDER, isSmartFolder);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}

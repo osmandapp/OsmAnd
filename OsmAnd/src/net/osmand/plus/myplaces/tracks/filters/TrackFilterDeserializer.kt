@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
+import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
 import java.lang.reflect.Type
 
 class TrackFilterDeserializer(private val smartFolderHelper: SmartFolderHelper) :
@@ -18,7 +19,7 @@ class TrackFilterDeserializer(private val smartFolderHelper: SmartFolderHelper) 
 		context: JsonDeserializationContext): BaseTrackFilter? {
 		var baseFilterObject = json.asJsonObject
 		var filterType = gson.fromJson(baseFilterObject.get("filterType"), FilterType::class.java)
-		var realFilterObjectType = smartFolderHelper.getFilterClass(filterType)
+		var realFilterObjectType = TrackFiltersHelper.getFilterClass(filterType)
 		return gson.fromJson(baseFilterObject, realFilterObjectType)
 	}
 }

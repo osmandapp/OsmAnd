@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
@@ -102,12 +104,15 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 
 	public interface LoadTracksListener {
 
+		@UiThread
 		default void loadTracksStarted() {
 		}
 
+		@WorkerThread
 		default void tracksLoaded(@NonNull TrackFolder folder) {
 		}
 
+		@UiThread
 		void loadTracksFinished(@NonNull TrackFolder folder);
 	}
 }

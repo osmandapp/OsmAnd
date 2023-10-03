@@ -8,23 +8,14 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.myplaces.tracks.filters.AverageAltitudeTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.AverageSpeedTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateCreationTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.DownhillTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.DurationTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
 import net.osmand.plus.myplaces.tracks.filters.FilterType;
 import net.osmand.plus.myplaces.tracks.filters.LengthTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.MaxAltitudeTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.MaxSpeedTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.TimeInMotionTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.TrackFiltersConstants;
 import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
-import net.osmand.plus.myplaces.tracks.filters.UphillTrackFilter;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -135,17 +126,13 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	public void addFiltersChangedListener(FilterChangedListener listener) {
 		if (!filterChangedListeners.contains(listener)) {
-			ArrayList<FilterChangedListener> newListeners = new ArrayList<>(filterChangedListeners);
-			newListeners.add(listener);
-			filterChangedListeners = newListeners;
+			filterChangedListeners = Algorithms.addToList(filterChangedListeners, listener);
 		}
 	}
 
 	public void removeFiltersChangedListener(FilterChangedListener listener) {
 		if (filterChangedListeners.contains(listener)) {
-			ArrayList<FilterChangedListener> newListeners = new ArrayList(filterChangedListeners);
-			newListeners.remove(listener);
-			filterChangedListeners = newListeners;
+			filterChangedListeners = Algorithms.removeFromList(filterChangedListeners, listener);
 		}
 	}
 
@@ -174,111 +161,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	void recreateFilters() {
 		currentFilters.clear();
 		for (FilterType filterType : FilterType.values()) {
-			currentFilters.add(createFilter(filterType));
+			currentFilters.add(TrackFiltersHelper.createFilter(app, filterType, this));
 		}
-
 	}
 
-	private BaseTrackFilter createFilter(FilterType filterType) {
-		BaseTrackFilter newFilter;
-
-		switch (filterType) {
-			case NAME: {
-				newFilter = new TrackNameFilter(this);
-
-			}
-			break;
-			case DURATION: {
-				newFilter = new DurationTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-			case TIME_IN_MOTION: {
-				newFilter = new TimeInMotionTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case LENGTH: {
-				newFilter = new LengthTrackFilter(
-						0f,
-						TrackFiltersConstants.LENGTH_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case AVERAGE_SPEED: {
-				newFilter = new AverageSpeedTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case MAX_SPEED: {
-				newFilter = new MaxSpeedTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case AVERAGE_ALTITUDE: {
-				newFilter = new AverageAltitudeTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case MAX_ALTITUDE: {
-				newFilter = new MaxAltitudeTrackFilter(
-						0f,
-						TrackFiltersConstants.ALTITUDE_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case UPHILL: {
-				newFilter = new UphillTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case DOWNHILL: {
-				newFilter = new DownhillTrackFilter(
-						0f,
-						TrackFiltersConstants.DEFAULT_MAX_VALUE,
-						app, this);
-			}
-			break;
-
-			case DATE_CREATION: {
-				newFilter = new DateCreationTrackFilter(this);
-			}
-			break;
-			case CITY: {
-				newFilter = new CityTrackFilter(this);
-			}
-			break;
-			case OTHER: {
-				newFilter = new OtherTrackFilter(app, this);
-			}
-			break;
-			default:
-				throw new IllegalArgumentException("Unknown filterType $filterType");
-		}
-
-
-		return newFilter;
-
-	}
 
 	public void initSelectedFilters(@Nullable List<BaseTrackFilter> selectedFilters) {
 		if (selectedFilters != null) {

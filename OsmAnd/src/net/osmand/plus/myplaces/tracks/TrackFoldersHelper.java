@@ -144,7 +144,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					.setTitleId(R.string.add_smart_folder)
 					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_smart_outlined))
 					.setOnClickListener(v -> {
-						app.getSmartFolderHelper().showSaveSmartFolderDialog(activity, fragment.isNightMode(), null);
+						app.getDialogManager().showSaveSmartFolderDialog(activity, fragment.isNightMode(), null);
 					})
 					.create());
 		}

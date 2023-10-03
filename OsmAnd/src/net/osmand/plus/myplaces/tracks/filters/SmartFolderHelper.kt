@@ -1,20 +1,13 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.app.Activity
-import android.view.View
-import android.widget.Toast
 import androidx.annotation.WorkerThread
-import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
-import net.osmand.plus.utils.UiUtilities
 import net.osmand.util.Algorithms
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 class SmartFolderHelper(val app: OsmandApplication) {
 	private val preference: CommonPreference<String>
@@ -25,36 +18,17 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	private val updateListeners = ArrayList<SmartFolderUpdateListener>()
 
 	companion object {
-		private const val TRACK_FILTERS_SETTINGS_PREF_ID = "track_filters_settings_pref_id"
+		private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
 	}
 
 	init {
 		gson = GsonBuilder()
 			.excludeFieldsWithoutExposeAnnotation()
 			.create()
-		preference = app.settings.registerStringPreference(TRACK_FILTERS_SETTINGS_PREF_ID, "")
+		preference = app.settings.registerStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
 			.makeProfile()
 			.cache()
 		readSettings()
-	}
-
-	fun getFilterClass(filterType: FilterType): Class<out BaseTrackFilter> {
-		return when (filterType) {
-			FilterType.NAME -> TrackNameFilter::class.java
-			FilterType.DURATION -> DurationTrackFilter::class.java
-			FilterType.TIME_IN_MOTION -> TimeInMotionTrackFilter::class.java
-			FilterType.LENGTH -> LengthTrackFilter::class.java
-			FilterType.AVERAGE_SPEED -> AverageSpeedTrackFilter::class.java
-			FilterType.MAX_SPEED -> MaxSpeedTrackFilter::class.java
-			FilterType.AVERAGE_ALTITUDE -> AverageAltitudeTrackFilter::class.java
-			FilterType.MAX_ALTITUDE -> MaxAltitudeTrackFilter::class.java
-			FilterType.UPHILL -> UphillTrackFilter::class.java
-			FilterType.DOWNHILL -> DownhillTrackFilter::class.java
-			FilterType.DATE_CREATION -> DateCreationTrackFilter::class.java
-			FilterType.CITY -> CityTrackFilter::class.java
-			FilterType.OTHER -> OtherTrackFilter::class.java
-		}
-		throw IllegalArgumentException("Unknown filterType $filterType")
 	}
 
 	private fun readSettings() {
@@ -63,15 +37,17 @@ class SmartFolderHelper(val app: OsmandApplication) {
 			val savedFilters = TrackFilterList.parseFilters(settingsJson, this)
 			if (savedFilters != null) {
 				this.savedFilters.putAll(savedFilters)
-				initSmartFolders()
+				resetSmartFolders()
 			}
 		}
 	}
 
-	private fun initSmartFolders() {
-		for (name in savedFilters.keys) {
-			val smartFolder = SmartFolder(name)
-			smartFolder.filters = savedFilters[name]
+	fun resetSmartFolders() {
+		smartFolderCollection.clear()
+		for (filter in savedFilters) {
+			val smartFolder = SmartFolder(filter.key)
+			smartFolder.filters = filter.value
+			smartFolderCollection.add(smartFolder)
 		}
 	}
 
@@ -96,7 +72,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		notifyFolderSavedListeners(smartFolder)
 	}
 
-	private fun saveNewSmartFolder(name: String, filters: MutableList<BaseTrackFilter>?) {
+	fun saveNewSmartFolder(name: String, filters: MutableList<BaseTrackFilter>?) {
 		var enabledFilters = getEnabledFilters(filters)
 		savedFilters[name] = enabledFilters
 		val newFolder = SmartFolder(name)
@@ -159,15 +135,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return savedFilters.contains(name)
 	}
 
-	fun resetSmartFolders() {
-		smartFolderCollection.clear()
-		for (filter in savedFilters) {
-			val smartFolder = SmartFolder(filter.key)
-			smartFolder.filters = filter.value
-			smartFolderCollection.add(smartFolder)
-		}
-	}
-
 	fun addTrackItemToSmartFolder(item: TrackItem) {
 		if (!allAvailableTrackItems.contains(item)) {
 			allAvailableTrackItems.add(item)
@@ -182,7 +149,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 					}
 				}
 			}
-			if (trackAccepted || Algorithms.isEmpty(savedFilter.value)) {
+			if (trackAccepted) {
 				var smartFolder = getSmartFolderByName(savedFilter.key)
 				if (smartFolder == null) {
 					smartFolder = SmartFolder(savedFilter.key)
@@ -210,30 +177,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return smartFolderCollection
 	}
 
-	fun showSaveSmartFolderDialog(
-		activity: Activity,
-		nightMode: Boolean,
-		filters: MutableList<BaseTrackFilter>?) {
-		val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
-		val themedInflater = UiUtilities.getInflater(activity, nightMode)
-		val customLayout: View = themedInflater.inflate(R.layout.dialog_save_smart_folder, null)
-		builder.setView(customLayout)
-		val dialog: AlertDialog = builder.create()
-		dialog.show()
-		customLayout.findViewById<View>(R.id.cancel_button).setOnClickListener {
-			dialog.dismiss()
-		}
-		customLayout.findViewById<View>(R.id.save_button).setOnClickListener {
-			val input = customLayout.findViewById<ExtendedEditText>(R.id.name_input)
-			val newSmartFolderName = input.text.trim().toString()
-			if (isSmartFolderPresent(newSmartFolderName)) {
-				Toast.makeText(app, R.string.smart_folder_name_present, Toast.LENGTH_SHORT).show()
-			} else {
-				saveNewSmartFolder(newSmartFolderName, filters)
-				dialog.dismiss()
-			}
-		}
-	}
 
 	fun renameSmartFolder(smartFolder: SmartFolder, newName: String) {
 		val savedFilter = savedFilters[smartFolder.folderName]

@@ -134,7 +134,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				dismiss()
 				trackFiltersContainer.onFilterDialogClosed()
 			} else {
-				smartFolderHelper.showSaveSmartFolderDialog(
+				app.dialogManager.showSaveSmartFolderDialog(
 					requireActivity(),
 					nightMode,
 					filter.currentFilters)

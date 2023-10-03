@@ -90,7 +90,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
 	public static final String OPEN_TRACKS_TAB = "open_tracks_tab";
-	public static final String OPEN_SMART_FOLDER_TRACKS_TAB = "open_smart_folder_tracks_tab";
+	public static final String IS_SMART_FOLDER = "is_smart_folder";
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
