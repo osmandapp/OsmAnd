@@ -307,7 +307,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void updateButtonsState() {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
-			if (TrackTabType.ON_MAP == trackTab.type) {
+			if (TrackTabType.ON_MAP == trackTab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
 				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
 				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
 				selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
@@ -327,7 +327,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		return v -> {
 			TrackTab tab = getSelectedTab();
 			if (tab != null) {
-				if (TrackTabType.ON_MAP == tab.type) {
+				if (TrackTabType.ON_MAP == tab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
 					Set<TrackItem> selectedItems = itemsSelectionHelper.getSelectedItems();
 					boolean hasSelectedItems = !Algorithms.isEmpty(selectedItems);
 					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : selectedTracksHelper.getRecentlyVisibleTracks();
