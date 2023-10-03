@@ -57,8 +57,7 @@ import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.keyevent.devices.base.InputDevice;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
@@ -1886,21 +1885,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<String> EXTERNAL_INPUT_DEVICE = new StringPreference(this, "selected_external_input_device", InputDevice.KEYBOARD.getId()).makeProfile();
+	public final OsmandPreference<String> EXTERNAL_INPUT_DEVICE = new StringPreference(this, "selected_external_input_device", KeyboardDeviceProfile.ID).makeProfile();
+	public final CommonPreference<String> CUSTOM_EXTERNAL_INPUT_DEVICES = new StringPreference(this, "custom_external_input_devices", "").makeGlobal().makeShared().storeLastModifiedTime();
 	public final OsmandPreference<Boolean> EXTERNAL_INPUT_DEVICE_ENABLED = new BooleanPreference(this, "external_input_device_enabled", true).makeProfile();
-
-	@Nullable
-	public InputDeviceProfile getEnabledInputDeviceType(@NonNull ApplicationMode appMode) {
-		if (EXTERNAL_INPUT_DEVICE_ENABLED.getModeValue(appMode)) {
-			return getSelectedInputDeviceType(appMode);
-		}
-		return null;
-	}
-
-	@Nullable
-	public InputDeviceProfile getSelectedInputDeviceType(@NonNull ApplicationMode appMode) {
-		return InputDevice.getByValue(EXTERNAL_INPUT_DEVICE.getModeValue(appMode));
-	}
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference(this, "route_map_markers_start_my_loc", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference(this, "route_map_markers_round_trip", false).makeGlobal().makeShared().cache();

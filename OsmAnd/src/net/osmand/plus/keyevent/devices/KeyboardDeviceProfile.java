@@ -1,6 +1,9 @@
 package net.osmand.plus.keyevent.devices;
 
+import android.content.Context;
 import android.view.KeyEvent;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.ActivityBackPressedCommand;
@@ -18,9 +21,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 
 public class KeyboardDeviceProfile extends InputDeviceProfile {
 
-	public KeyboardDeviceProfile() {
-		super("keyboard", R.string.sett_generic_ext_input);
-	}
+	public static final String ID = "keyboard";
 
 	/**
 	 * Collects default bindings, which are common for device sub-profiles.
@@ -55,8 +56,15 @@ public class KeyboardDeviceProfile extends InputDeviceProfile {
 		PluginsHelper.bindCommonKeyEventCommands(this);
 	}
 
+	@NonNull
 	@Override
-	protected InputDeviceProfile newInstance() {
-		return new KeyboardDeviceProfile();
+	public String getId() {
+		return ID;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(R.string.sett_generic_ext_input);
 	}
 }

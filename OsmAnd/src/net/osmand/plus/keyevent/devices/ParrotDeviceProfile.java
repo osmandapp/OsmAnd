@@ -1,6 +1,9 @@
 package net.osmand.plus.keyevent.devices;
 
+import android.content.Context;
 import android.view.KeyEvent;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
@@ -11,9 +14,7 @@ import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
  */
 public class ParrotDeviceProfile extends InputDeviceProfile {
 
-	public ParrotDeviceProfile() {
-		super("parrot", R.string.sett_parrot_ext_input);
-	}
+	public static final String ID = "parrot";
 
 	@Override
 	protected void collectCommands() {
@@ -21,8 +22,15 @@ public class ParrotDeviceProfile extends InputDeviceProfile {
 		bindCommand(KeyEvent.KEYCODE_DPAD_RIGHT, MapZoomCommand.ZOOM_IN_ID);
 	}
 
+	@NonNull
 	@Override
-	protected InputDeviceProfile newInstance() {
-		return new ParrotDeviceProfile();
+	public String getId() {
+		return ID;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(R.string.sett_parrot_ext_input);
 	}
 }

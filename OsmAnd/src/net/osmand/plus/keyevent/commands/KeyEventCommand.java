@@ -15,14 +15,16 @@ import java.util.Objects;
 
 public abstract class KeyEventCommand implements Callback {
 
+	protected String commandId;
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected KeyEventHelper keyEventHelper;
 
-	public void initialize(@NonNull OsmandApplication app) {
+	public void initialize(@NonNull OsmandApplication app, @NonNull String commandId) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.keyEventHelper = app.getKeyEventHelper();
+		this.commandId = commandId;
 	}
 
 	@NonNull
@@ -53,5 +55,10 @@ public abstract class KeyEventCommand implements Callback {
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
 		return false;
+	}
+
+	@NonNull
+	public String getId() {
+		return commandId;
 	}
 }

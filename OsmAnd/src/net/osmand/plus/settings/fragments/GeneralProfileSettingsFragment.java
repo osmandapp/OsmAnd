@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -266,12 +267,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private String getExternalInputDeviceSummary() {
-		InputDeviceProfile inputDevice = settings.getEnabledInputDeviceType(getSelectedAppMode());
-		return inputDevice != null ? inputDevice.getTitle(app) : getString(R.string.shared_string_disabled);
+		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
+		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice(getSelectedAppMode());
+		return inputDevice != null ? inputDevice.toHumanString(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
-		return settings.getEnabledInputDeviceType(getSelectedAppMode()) != null
+		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
+		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null
 				? getActiveIcon(R.drawable.ic_action_keyboard)
 				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}

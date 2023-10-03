@@ -22,20 +22,17 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final InputDeviceHelper deviceHelper;
 	private MapActivity mapActivity;
 
-	/**
-	 * Use the same Commands factory to speed up new commands creation
-	 */
-	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
 	private final Map<Integer, KeyEventCommand> globalCommands = new HashMap<>();
-	private InputDeviceProfile deviceProfile = null;
 
 	private StateChangedListener<Boolean> volumeButtonsPrefListener;
 
 	public KeyEventHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
+		deviceHelper = app.getInputDeviceHelper();
 
 		// Update commands when related preferences updated
 		volumeButtonsPrefListener = aBoolean -> updateGlobalCommands();
@@ -97,30 +94,17 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			return globalCommand;
 		}
 		// Search command for current input device profile
-		InputDeviceProfile inputDevice = getInputDeviceProfile(settings.getApplicationMode());
+		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice();
 		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
 	}
 
 	private void bindCommand(int keyCode, @NonNull String commandId) {
+		KeyEventCommandsFactory commandsFactory = deviceHelper.getCommandsFactory();
 		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
 		if (command != null) {
-			command.initialize(app);
+			command.initialize(app, commandId);
 			globalCommands.put(keyCode, command);
 		}
-	}
-
-	@Nullable
-	public InputDeviceProfile getInputDeviceProfile(@NonNull ApplicationMode appMode) {
-		InputDeviceProfile selectedType = settings.getEnabledInputDeviceType(appMode);
-		if (!Objects.equals(deviceProfile, selectedType)) {
-			deviceProfile = selectedType != null ? selectedType.newInstance(app) : null;
-		}
-		return deviceProfile;
-	}
-
-	@NonNull
-	public KeyEventCommandsFactory getCommandsFactory() {
-		return commandsFactory;
 	}
 
 	@Nullable

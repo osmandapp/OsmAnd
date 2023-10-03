@@ -1,6 +1,9 @@
 package net.osmand.plus.keyevent.devices;
 
+import android.content.Context;
 import android.view.KeyEvent;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
@@ -12,9 +15,7 @@ import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
  */
 public class WunderLINQDeviceProfile extends InputDeviceProfile {
 
-	public WunderLINQDeviceProfile() {
-		super("wunderlinq", R.string.sett_wunderlinq_ext_input);
-	}
+	public static final String ID = "wunderlinq";
 
 	@Override
 	protected void collectCommands() {
@@ -23,8 +24,15 @@ public class WunderLINQDeviceProfile extends InputDeviceProfile {
 		bindCommand(KeyEvent.KEYCODE_ESCAPE, OpenWunderLINQDatagridCommand.ID);
 	}
 
+	@NonNull
 	@Override
-	protected InputDeviceProfile newInstance() {
-		return new WunderLINQDeviceProfile();
+	public String getId() {
+		return ID;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(R.string.sett_wunderlinq_ext_input);
 	}
 }

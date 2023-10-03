@@ -44,7 +44,9 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.keyevent.devices.base.InputDevice;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
+import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
+import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -653,21 +655,21 @@ class AppVersionUpgradeOnInit {
 
 	private void updateExternalInputDevicePreferenceType() {
 		Map<Integer, String> updatedIds = new HashMap<>();
-		updatedIds.put(1, InputDevice.KEYBOARD.getId());
-		updatedIds.put(2, InputDevice.PARROT.getId());
-		updatedIds.put(3, InputDevice.WUNDER_LINQ.getId());
+		updatedIds.put(1, KeyboardDeviceProfile.ID);
+		updatedIds.put(2, ParrotDeviceProfile.ID);
+		updatedIds.put(3, WunderLINQDeviceProfile.ID);
 
 		OsmandSettings settings = app.getSettings();
 		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();;
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			Integer oldValue = oldPreference.getModeValue(appMode);
-			String newValue = oldValue != null ? updatedIds.get(oldValue) : null;
-			if (newValue != null) {
-				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, newValue);
+			Integer oldId = oldPreference.getModeValue(appMode);
+			String newId = oldId != null ? updatedIds.get(oldId) : null;
+			if (newId != null) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, newId);
 			} else {
 				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
 			}
-			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newValue != null);
+			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newId != null);
 		}
 	}
 }

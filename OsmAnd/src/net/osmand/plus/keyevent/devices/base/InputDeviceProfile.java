@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyEventCommandsFactory;
@@ -20,25 +19,13 @@ public abstract class InputDeviceProfile {
 	protected OsmandSettings settings;
 	private KeyEventCommandsFactory commandsFactory;
 
-	private final String id;
-	private final int titleId;
+	protected final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
 
-	private final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
-
-	public InputDeviceProfile(@NonNull String id, @StringRes int titleId) {
-		this.id = id;
-		this.titleId = titleId;
-	}
-
-	@NonNull
-	public String getId() {
-		return id;
-	}
-
-	public void initialize(@NonNull OsmandApplication app) {
+	public void initialize(@NonNull OsmandApplication app,
+	                       @NonNull KeyEventCommandsFactory commandsFactory) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.commandsFactory = app.getKeyEventHelper().getCommandsFactory();
+		this.commandsFactory = commandsFactory;
 		collectCommands();
 	}
 
@@ -48,13 +35,8 @@ public abstract class InputDeviceProfile {
 	 */
 	protected abstract void collectCommands();
 
-	protected void updateCommands() {
-		clearCommands();
-		collectCommands();
-	}
-
-	protected void clearCommands() {
-		mappedCommands.clear();
+	public Map<Integer, KeyEventCommand> getMappedCommands() {
+		return mappedCommands;
 	}
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {
@@ -66,7 +48,7 @@ public abstract class InputDeviceProfile {
 	protected void bindCommand(int keyCode, @NonNull String commandId) {
 		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
 		if (command != null) {
-			command.initialize(app);
+			command.initialize(app, commandId);
 			mappedCommands.put(keyCode, command);
 		}
 	}
@@ -76,21 +58,14 @@ public abstract class InputDeviceProfile {
 		return mappedCommands.get(keyCode);
 	}
 
-	@NonNull
-	public String getTitle(@NonNull Context context) {
-		return context.getString(titleId);
-	}
-
 	public int getCommandsCount() {
 		return mappedCommands.size();
 	}
 
-	public final InputDeviceProfile newInstance(@NonNull OsmandApplication app) {
-		InputDeviceProfile newInstance = newInstance();
-		newInstance.initialize(app);
-		return newInstance;
-	}
+	@NonNull
+	public abstract String getId();
 
-	protected abstract InputDeviceProfile newInstance();
+	@NonNull
+	public abstract String toHumanString(@NonNull Context context);
 
 }
