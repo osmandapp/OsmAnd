@@ -5443,4 +5443,8 @@
     <string name="sort_country_name_descending">Landesname: Z – A</string>
     <string name="delete_map_description">Sind Sie sicher, dass Sie die Karte %1$s löschen möchten\?</string>
     <string name="maps_and_resources">Karten &amp; Ressourcen</string>
+    <string name="app_mode_paragliding">Gleitschirmfliegen</string>
+    <string name="rendering_styles">Darstellungsstile</string>
+    <string name="app_mode_hang_gliding">Drachenfliegen</string>
+    <string name="weather_online">Online Wetter</string>
 </resources>
