@@ -14,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -60,6 +61,12 @@ public class TracksComparator implements Comparator<Object> {
 			return -1;
 		}
 		if (o2 instanceof VisibleTracksGroup) {
+			return 1;
+		}
+		if (o1 instanceof SmartFolder) {
+			return -1;
+		}
+		if (o2 instanceof SmartFolder) {
 			return 1;
 		}
 		if (o1 instanceof TrackFolder) {

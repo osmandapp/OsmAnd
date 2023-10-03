@@ -14,9 +14,9 @@ class TrackNameFilter(filterChangedListener: FilterChangedListener)
 	var value = ""
 		set(value) {
 			if (!Algorithms.stringsEqual(field, value)) {
+				field = value
 				updateMatcher()
 			}
-			field = value
 			filterChangedListener.onFilterChanged()
 		}
 
@@ -33,10 +33,26 @@ class TrackNameFilter(filterChangedListener: FilterChangedListener)
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (nameMatcher == null) {
+			updateMatcher()
+		}
 		return nameMatcher.matches(trackItem.name)
 	}
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(value)
+	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is TrackNameFilter) {
+			this.value = value.value
+			updateMatcher()
+		}
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is TrackNameFilter &&
+				other.value == value
 	}
 }

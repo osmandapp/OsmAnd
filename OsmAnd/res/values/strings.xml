@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="smart_folder_saved">SmartFolder saved</string>
+    <string name="edit_fiilter">Edit filter</string>
+    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="smart_folder_name_present">Such smartFolder already present</string>
+    <string name="empty_name">Empty name</string>
+    <string name="add_smart_folder">Add smart folder</string>
+    <string name="save_as_smart_folder">Save as smart folder</string>
     <string name="shared_string_show_icon">Show icon</string>
     <string name="weather_online">Weather online</string>
     <string name="maps_and_resources">Maps &amp; Resources</string>

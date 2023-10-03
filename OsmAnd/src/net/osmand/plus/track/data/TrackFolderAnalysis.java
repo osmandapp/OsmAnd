@@ -18,12 +18,17 @@ public class TrackFolderAnalysis {
 	public double diffElevationUp;
 	public double diffElevationDown;
 
-	public TrackFolderAnalysis(@NonNull TrackFolder folder) {
+	public TrackFolderAnalysis(@NonNull TracksGroup folder) {
 		prepareInformation(folder);
 	}
 
-	private void prepareInformation(@NonNull TrackFolder folder) {
-		List<TrackItem> items = folder.getFlattenedTrackItems();
+	private void prepareInformation(@NonNull TracksGroup folder) {
+		List<TrackItem> items;
+		if (folder instanceof TrackFolder) {
+			items = ((TrackFolder) folder).getFlattenedTrackItems();
+		} else {
+			items = folder.getTrackItems();
+		}
 		for (TrackItem trackItem : items) {
 			GpxDataItem dataItem = trackItem.getDataItem();
 			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;

@@ -52,6 +52,11 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return TAG;
 	}
 
+	@NonNull
+	protected TracksGroup getCurrentTrackGroup() {
+		return selectedFolder;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,18 +109,27 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SearchMyPlacesTracksFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
+				SearchMyPlacesTracksFragment.showInstance(manager,
+						getTargetFragment(),
+						false,
+						isUsedOnMap(),
+						null);
 				return true;
 			}
 		}
 		if (itemId == R.id.action_folder_menu) {
-			FragmentActivity activity = getActivity();
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null && activity != null) {
-				View view = activity.findViewById(R.id.action_folder_menu);
-				foldersHelper.showFolderOptionsMenu(selectedFolder, view, this);
-				return true;
-			}
+			if (showFolderOptionMenu()) return true;
+		}
+		return false;
+	}
+
+	protected boolean showFolderOptionMenu() {
+		FragmentActivity activity = getActivity();
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null && activity != null) {
+			View view = activity.findViewById(R.id.action_folder_menu);
+			foldersHelper.showFolderOptionsMenu(selectedFolder, view, this, isRootFolder());
+			return true;
 		}
 		return false;
 	}
@@ -127,23 +141,31 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		requireMyActivity().setToolbarVisibility(false);
 	}
 
-	private void onBackPressed() {
-		if (rootFolder.equals(selectedFolder)) {
+	protected void onBackPressed() {
+		if (isRootFolder()) {
 			dismiss();
+			updateTitle();
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
 			updateContent();
 		}
 	}
 
+	private boolean isRootFolder() {
+		return rootFolder.equals(selectedFolder);
+	}
+
 	@Override
 	public void updateContent() {
 		super.updateContent();
+		updateTitle();
+	}
 
+	private void updateTitle() {
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
-			actionBar.setTitle(selectedFolder.getName(app));
+			actionBar.setTitle(getCurrentTrackGroup().getName(app));
 		}
 	}
 
@@ -195,9 +217,14 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	private void showTracksSelection(@Nullable TrackItem trackItem, @Nullable TracksGroup tracksGroup) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
-			Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
-			foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
+			if (selectedFolder != null && selectedFolder instanceof TrackFolder) {
+				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
+				Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
+				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
+			} else if (smartFolder != null) {
+				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
+				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null);
+			}
 		}
 	}
 
@@ -213,7 +240,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public void restoreState(Bundle bundle) {
 		super.restoreState(bundle);
 
-		if (!Algorithms.isEmpty(selectedItemPath)) {
+		if (rootFolder != null && !Algorithms.isEmpty(selectedItemPath)) {
 			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
 			if (trackItem != null) {
 				int index = adapter.getItemPosition(trackItem);

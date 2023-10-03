@@ -15,8 +15,12 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
+import kotlin.math.ceil
+import kotlin.math.floor
 
-open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
+open class FilterRangeViewHolder(
+	itemView: View,
+	nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
 	protected val app: OsmandApplication
 	private val nightMode: Boolean
@@ -71,10 +75,13 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 			override fun afterTextChanged(newText: Editable) {
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isFloat(newText.toString(), true)) {
-					val newValue = Math.round(newText.toString().toFloat() * 1000) / 1000f
-					if (filter!!.valueFrom != newValue) {
-						filter!!.setValueFrom(newValue)
-						updateValues()
+					val newValue = newText.toString().toFloat()
+					filter?.let { rangeFilter ->
+						if (rangeFilter.valueFrom != newValue
+							&& newValue < rangeFilter.valueTo) {
+							rangeFilter.setValueFrom(newValue)
+							updateValues()
+						}
 					}
 				}
 			}
@@ -85,9 +92,12 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toFloat()
-					if (filter!!.valueTo != newValue) {
-						filter!!.setValueTo(newValue)
-						updateValues()
+					filter?.let { rangeFilter ->
+						if (rangeFilter.valueTo != newValue
+							&& newValue > rangeFilter.valueFrom) {
+							rangeFilter.setValueTo(newValue)
+							updateValues()
+						}
 					}
 				}
 			}
@@ -117,19 +127,19 @@ open class FilterRangeViewHolder(itemView: View, nightMode: Boolean) :
 	}
 
 	private fun updateValues() {
-		val valueFrom = filter!!.valueFrom
-		val valueTo = filter!!.valueTo
+		val valueFrom = floor(filter!!.valueFrom)
+		val valueTo = ceil(filter!!.valueTo)
+		slider.valueFrom = floor(filter!!.minValue)
+		slider.valueTo = ceil(filter!!.maxValue)
 		slider.setValues(valueFrom, valueTo)
-		slider.valueFrom = filter!!.minValue
-		slider.valueTo = filter!!.maxValue
 		valueFromInput.setText(decimalFormat.format(valueFrom))
 		valueFromInput.setSelection(valueFromInput.length())
 		valueToInput.setText(decimalFormat.format(valueTo))
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
-			"${decimalFormat.format(filter!!.minValue)}, ${app.getString(filter!!.unitResId)}"
+			"${decimalFormat.format(filter!!.minValue)} ${app.getString(filter!!.unitResId)}"
 		val maxValuePrompt =
-			"${decimalFormat.format(filter!!.maxValue)}, ${app.getString(filter!!.unitResId)}"
+			"${decimalFormat.format(filter!!.maxValue)} ${app.getString(filter!!.unitResId)}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
 		AndroidUiHelper.updateVisibility(selectedValue, filter!!.isEnabled())
