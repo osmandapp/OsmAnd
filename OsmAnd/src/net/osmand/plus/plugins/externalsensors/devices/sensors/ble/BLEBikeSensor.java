@@ -238,6 +238,9 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				float totalDistance = (float) wheelRevolutions * circumference;
 				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * circumference; //m
 				float speed = 0;
+				if (lastBikeSpeedDistanceData != null) {
+					speed = lastBikeSpeedDistanceData.speed;
+				}
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			} else if (lastWheelRevolutions >= 0) {
 				float timeDifference;
