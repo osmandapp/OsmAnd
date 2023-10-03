@@ -7,14 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.dialogs.LocalItemsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -24,7 +23,8 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
-	private final LocalItemListener listener;
+	private final LocalItemsFragment fragment;
+	private final boolean nightMode;
 
 	private final TextView title;
 	private final TextView description;
@@ -34,11 +34,12 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	private final View bottomShadow;
 	private final View bottomDivider;
 
-	public LocalItemHolder(@NonNull View itemView, @Nullable LocalItemListener listener, boolean nightMode) {
+	public LocalItemHolder(@NonNull View itemView, @NonNull LocalItemsFragment fragment) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
-		this.listener = listener;
+		this.fragment = fragment;
+		this.nightMode = fragment.isNightMode();
 
 		icon = itemView.findViewById(R.id.icon);
 		title = itemView.findViewById(R.id.title);
@@ -55,28 +56,37 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull LocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
-		LocalItemType type = item.getType();
-
 		title.setText(item.getName());
 		description.setText(item.getDescription());
-		icon.setImageDrawable(uiUtilities.getThemedIcon(type.getIconId()));
+		icon.setImageDrawable(getIcon(item));
 
-		boolean selected = listener != null && listener.isItemSelected(item);
+		boolean selected = fragment != null && fragment.isItemSelected(item);
 		compoundButton.setChecked(selected);
 
 		options.setOnClickListener(v -> {
-			if (listener != null) {
-				listener.onItemOptionsSelected(item, options);
+			if (fragment != null) {
+				fragment.onItemOptionsSelected(item, options);
 			}
 		});
 		itemView.setOnClickListener(v -> {
-			if (listener != null) {
-				listener.onItemSelected(item);
+			if (fragment != null) {
+				fragment.onItemSelected(item);
 			}
 		});
 		AndroidUiHelper.updateVisibility(options, !selectionMode);
 		AndroidUiHelper.updateVisibility(compoundButton, selectionMode);
 		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 		AndroidUiHelper.updateVisibility(bottomDivider, !lastItem && !hideDivider);
+	}
+
+	@NonNull
+	private Drawable getIcon(@NonNull LocalItem item) {
+		LocalItemType type = item.getType();
+		if (type.isDownloadType() && !item.isBackuped()) {
+			boolean shouldUpdate = fragment.getItemsToUpdate().containsKey(item.getFile().getName());
+			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
+		} else {
+			return uiUtilities.getThemedIcon(type.getIconId());
+		}
 	}
 }

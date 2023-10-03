@@ -9,8 +9,8 @@
     <string name="by_name">Prin nume</string>
     <string name="unit_of_length">Unități de lungime</string>
     <string name="shared_string_search">Căutați</string>
-    <string name="shared_string_logout">Deconectare</string>
-    <string name="duration_ago">%1$s în urmă</string>
+    <string name="shared_string_logout">Deconectează-te</string>
+    <string name="duration_ago">În urmă cu %1$s</string>
     <string name="shared_string_account">Cont</string>
     <string name="re_send_location">Trimiteți din nou locația</string>
     <string name="not_found_yet">Nu s-a găsit încă</string>

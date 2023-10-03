@@ -5456,4 +5456,5 @@
     <string name="sort_country_name_descending">Назва країни: Я – А</string>
     <string name="delete_map_description">Ви впевнені, що хочете видалити мапу %1$s\?</string>
     <string name="maps_and_resources">Мапи й ресурси</string>
+    <string name="shared_string_show_icon">Показати піктограму</string>
 </resources>

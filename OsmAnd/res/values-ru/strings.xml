@@ -1083,7 +1083,7 @@
     <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
     <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
     <string name="bg_service_interval">Установить интервал пробуждения:</string>
-    <string name="layer_map_appearance">Настройки экрана</string>
+    <string name="layer_map_appearance">Экран</string>
     <string name="show_lanes">Полосы движения</string>
     <string name="avoid_unpaved">Без грунтовых дорог</string>
     <string name="avoid_ferries">Без паромов</string>
@@ -1582,7 +1582,7 @@
     <string name="rendering_category_details">Детали</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другие атрибуты карты</string>
-    <string name="configure_map">Настройки карты</string>
+    <string name="configure_map">Карта</string>
     <string name="map_widget_appearance_rem">Остальное</string>
     <string name="map_widget_right">Правая панель</string>
     <string name="map_widget_left">Левая панель</string>
@@ -1729,8 +1729,8 @@
     <string name="shared_string_currently_recording_track">Текущий трек</string>
     <string name="share_note">Поделиться заметкой</string>
     <string name="shared_string_release">Дата выпуска</string>
-    <string name="routing_settings_2">Настройки навигации</string>
-    <string name="general_settings_2">Общие настройки</string>
+    <string name="routing_settings_2">Навигация</string>
+    <string name="general_settings_2">Общие</string>
     <string name="shared_string_clear_all">Очистить все</string>
     <string name="drawer">Плоский список</string>
     <string name="short_location_on_map">Широта %1$s
@@ -3495,7 +3495,7 @@
     <string name="shared_string_drawer">Главное меню</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
     <string name="shared_string_items">Элементы</string>
-    <string name="ui_customization">Настройки интерфейса</string>
+    <string name="ui_customization">Интерфейс</string>
     <string name="context_menu_actions">Действия контекстного меню</string>
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы: 
 \n%1$s.</string>
@@ -5221,7 +5221,7 @@
     <string name="calculate_offline">По карте высот</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
     <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
-    <string name="running_scds_device_name">Работающее устройство</string>
+    <string name="running_scds_device_name">Бег</string>
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
@@ -5438,4 +5438,23 @@
     <string name="sort_country_name_descending">Названия стран: Я – А</string>
     <string name="delete_map_description">Удалить карту %1$s\?</string>
     <string name="maps_and_resources">Карты и ресурсы</string>
+    <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
+    <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
+    <string name="average_glide_ratio">Средний коэффициент планирования</string>
+    <string name="release_4_6">• Виджет «Коэффициент планирования»
+\n
+\n • Добавлен виджет температуры ANT+.
+\n
+\n • Улучшено управление памятью для больших треков GPX.
+\n
+\n</string>
+    <string name="app_mode_paragliding">Парапланеризм</string>
+    <string name="map_widget_group_glide_ratio">Коэффициент планирования</string>
+    <string name="app_mode_hang_gliding">Дельтапланеризм</string>
+    <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
+    <string name="widget_available_ram">Доступная оперативная память</string>
+    <string name="shared_string_created">Дата создания</string>
+    <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующие параметры: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_show_icon">Показать значок</string>
+    <string name="bicycle_scd_device_name">Велосипед</string>
 </resources>

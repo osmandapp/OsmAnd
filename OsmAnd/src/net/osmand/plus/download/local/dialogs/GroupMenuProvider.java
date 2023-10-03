@@ -1,10 +1,7 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
@@ -28,9 +25,9 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -83,7 +80,7 @@ public class GroupMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = group.getType();
-		if (type == MAP_DATA) {
+		if (Algorithms.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
 			MapsSortMode sortMode = app.getSettings().LOCAL_MAPS_SORT_MODE.get();
 			MenuItem sortItem = menu.add(0, R.string.shared_string_sort, 0, R.string.shared_string_sort);
 			sortItem.setIcon(getIcon(sortMode.getIconId(), colorId));
@@ -109,10 +106,10 @@ public class GroupMenuProvider implements MenuProvider {
 		LocalItemType type = group.getType();
 		boolean selectionMode = fragment.isSelectionMode();
 		if (selectionMode) {
-			if (type != PROFILES) {
+			if (type.isDeletionSupported()) {
 				addOperationItem(items, DELETE_OPERATION);
 			}
-			if (Algorithms.equalsToAny(type, MAP_DATA, DEPTH_DATA, TERRAIN_DATA, WIKI_AND_TRAVEL_MAPS)) {
+			if (type.isBackupSupported()) {
 				addOperationItem(items, BACKUP_OPERATION);
 				addOperationItem(items, RESTORE_OPERATION);
 			}

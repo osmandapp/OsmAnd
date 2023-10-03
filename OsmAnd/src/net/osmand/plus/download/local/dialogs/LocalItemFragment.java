@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuProvider;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -28,6 +27,8 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
@@ -38,6 +39,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -49,7 +51,9 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	public static final String TAG = LocalItemFragment.class.getSimpleName();
 
 	private LocalItem localItem;
+	private ItemMenuProvider menuProvider;
 	private ViewGroup itemsContainer;
+	private CollapsingToolbarLayout toolbarLayout;
 
 	@Nullable
 	@Override
@@ -62,20 +66,30 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		menuProvider = new ItemMenuProvider(requireDownloadActivity(), this);
+		menuProvider.setShowInfoItem(false);
+		menuProvider.setLocalItem(localItem);
+		menuProvider.setColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
+	}
+
+	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.local_item_fragment, container, false);
 		itemsContainer = view.findViewById(R.id.container);
 
 		setupToolbar(view);
+		updateToolbar();
 		updateContent();
 
 		return view;
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.toolbar_layout);
-		toolbarLayout.setTitle(localItem.getName());
+		toolbarLayout = view.findViewById(R.id.toolbar_layout);
 		ViewCompat.setElevation(toolbarLayout, 5);
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -87,7 +101,12 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 				activity.onBackPressed();
 			}
 		});
-		toolbar.addMenuProvider(getMenuProvider(), this);
+		toolbar.addMenuProvider(menuProvider);
+	}
+
+	private void updateToolbar() {
+		menuProvider.setLocalItem(localItem);
+		toolbarLayout.setTitle(localItem.getName());
 	}
 
 	private void updateContent() {
@@ -116,13 +135,16 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_shadow), lastItem);
 	}
 
-	@NonNull
-	private MenuProvider getMenuProvider() {
-		ItemMenuProvider menuProvider = new ItemMenuProvider(requireDownloadActivity(), this);
-		menuProvider.setLocalItem(localItem);
-		menuProvider.setShowInfoItem(false);
-		menuProvider.setColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
-		return menuProvider;
+	@Override
+	public void onResume() {
+		super.onResume();
+		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), false);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), true);
 	}
 
 	@Override
@@ -162,27 +184,16 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	@Override
-	public void onMapSourceUpdated() {
-		reloadLocalIndexes();
-	}
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
+		super.fileRenamed(src, dest);
 
-	private void reloadLocalIndexes() {
-		DownloadActivity activity = getDownloadActivity();
-		if (activity != null) {
-			activity.reloadLocalIndexes();
+		LocalItemType type = LocalItemUtils.getItemType(app, dest);
+		if (type != null) {
+			localItem = new LocalItem(dest, type);
+			LocalItemUtils.updateItem(app, localItem);
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), false);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), true);
+		updateToolbar();
+		updateContent();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull LocalItem localItem, @Nullable Fragment target) {

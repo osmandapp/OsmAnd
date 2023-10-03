@@ -21,6 +21,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.MapUtils;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class RadiusRulerWidget extends TextInfoWidget {
@@ -88,7 +89,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 	public OsmandPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode) {
 		MapWidgetRegistry mapWidgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> widgetInfos = mapWidgetRegistry
-				.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, WidgetsPanel.LEFT.getMergedPanels());
+				.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, Collections.singletonList(WidgetsPanel.LEFT));
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			MapWidget widget = widgetInfo.widget;
 			boolean anotherRulerWidgetPresent = widget instanceof RadiusRulerWidget && !widget.equals(this);

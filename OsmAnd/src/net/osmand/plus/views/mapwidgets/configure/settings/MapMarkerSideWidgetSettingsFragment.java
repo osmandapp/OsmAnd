@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragment {
+public class MapMarkerSideWidgetSettingsFragment extends BaseSimpleWidgetSettingsFragment {
 
 	private static final String MARKER_MODE_KEY = "marker_mode";
 	private static final String MARKER_CLICK_BEHAVIOUR_KEY = "marker_click_behaviour";
@@ -101,6 +101,8 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 
 		updateToolbarIcon();
 		setupConfigButtons();
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	private void setupConfigButtons() {

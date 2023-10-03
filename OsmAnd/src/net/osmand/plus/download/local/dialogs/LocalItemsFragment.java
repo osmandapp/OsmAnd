@@ -35,21 +35,18 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.CategoryType;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
-import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.settings.enums.MapsSortMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -61,8 +58,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener, DownloadEvents,
-		ConfirmDeletionListener, OperationListener, MapsSortModeListener, OnMapSourceUpdateListener {
+public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener,
+		ConfirmDeletionListener, MapsSortModeListener {
 
 	public static final String TAG = LocalItemsFragment.class.getSimpleName();
 
@@ -72,7 +69,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private ImportHelper importHelper;
 	private ItemMenuProvider itemMenuProvider;
 	private GroupMenuProvider groupMenuProvider;
-	private ItemsSelectionHelper<LocalItem> selectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<LocalItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
@@ -175,7 +172,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new LocalItemsAdapter(view.getContext(), this, nightMode);
+		adapter = new LocalItemsAdapter(view.getContext(), this);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -233,22 +230,25 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void addMemoryInfo(@NonNull List<Object> items) {
-		List<MemoryItem> memoryItems = new ArrayList<>();
-
 		LocalGroup group = getGroup();
 		LocalCategory category = getCategory();
 		if (group != null && category != null) {
-			long size = group.getSize();
-			String title = group.getName(app);
-			String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, size));
-			memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColor(app, nightMode)));
+			List<MemoryItem> memoryItems = new ArrayList<>();
 
-			title = category.getName(app);
+			if (!Algorithms.isEmpty(group.getItems())) {
+				long size = group.getSize();
+				String title = group.getName(app);
+				String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, size));
+				memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColor(app, nightMode)));
+			}
+
+			String title = category.getName(app);
 			int color = ColorUtilities.getColor(app, category.getType().getColorId());
-			text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
+			String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
 			memoryItems.add(new MemoryItem(text, category.getSize() - group.getSize(), color));
+
+			items.add(0, new MemoryInfo(memoryItems));
 		}
-		items.add(0, new MemoryInfo(memoryItems));
 	}
 
 	@Override
@@ -259,9 +259,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		updateToolbar();
-		itemMenuProvider.reloadItemsToUpdate();
 	}
 
 	@Override
@@ -381,28 +379,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			} else {
 				activity.onUpdatedIndexesList();
 			}
-		}
-	}
-
-	@Override
-	public void onUpdatedIndexesList() {
-		itemMenuProvider.reloadItemsToUpdate();
-	}
-
-	@Override
-	public void downloadHasFinished() {
-		itemMenuProvider.reloadItemsToUpdate();
-	}
-
-	@Override
-	public void onMapSourceUpdated() {
-		reloadLocalIndexes();
-	}
-
-	private void reloadLocalIndexes() {
-		DownloadActivity activity = getDownloadActivity();
-		if (activity != null) {
-			activity.reloadLocalIndexes();
 		}
 	}
 
