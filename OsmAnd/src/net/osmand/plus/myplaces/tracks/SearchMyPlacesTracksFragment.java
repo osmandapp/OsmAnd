@@ -38,13 +38,14 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implements SelectGpxTaskListener,
-		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, SmartFolderUpdateListener, FilterChangedListener {
+		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, SmartFolderUpdateListener, FilterChangedListener, TackFiltersContainer {
 
 	public static final String TAG = SearchMyPlacesTracksFragment.class.getSimpleName();
 
@@ -307,6 +308,9 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onResume() {
 		super.onResume();
+		setupToolbar(requireView());
+//		updateNightMode();
+//		updateStatusBarColor(requireDialog().getWindow());
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();
@@ -359,6 +363,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 	@Override
 	public void onSmartFoldersUpdated() {
+		adapter.updateFilteredItems(new ArrayList<>(selectionHelper.getAllItems()));
 		updateButtonsState();
 	}
 
@@ -367,12 +372,21 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		FragmentManager manager = getFragmentManager();
 		Filter filter = adapter.getFilter();
 		if (manager != null && filter instanceof TracksSearchFilter) {
-			TracksFilterFragment.Companion.showInstance(manager, (TracksSearchFilter) filter, smartFolder);
+			TracksFilterFragment.Companion.showInstance(manager, (TracksSearchFilter) filter, this, smartFolder);
 		}
 	}
 
 	@Override
 	public void onFilterChanged() {
 		updateButtonsState();
+	}
+
+	@Override
+	public void onFilterDialogClosed() {
+		setupFilterCallback();
+		List<TrackItem> filteredItems = ((TracksSearchFilter) adapter.getFilter()).getFilteredTrackItems();
+		if (filteredItems != null) {
+			updateAdapterWithFilteredItems(filteredItems);
+		}
 	}
 }

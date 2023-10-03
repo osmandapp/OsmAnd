@@ -28,7 +28,7 @@ import java.util.Collections
 
 class SearchTracksAdapter(
     private val app: OsmandApplication,
-    private val trackItems: List<TrackItem>,
+    private var trackItems: List<TrackItem>,
     private val nightMode: Boolean,
     private var selectionMode: Boolean
 ) :
@@ -85,6 +85,11 @@ class SearchTracksAdapter(
 
     fun setFilterCallback(filterCallback: CallbackWithObject<List<TrackItem>>) {
         filter.setCallback(filterCallback)
+    }
+
+    fun updateAllItems(allItems: List<TrackItem>) {
+        trackItems = allItems
+        filter.setAllItems(allItems)
     }
 
     fun updateFilteredItems(filteredItems: List<TrackItem>) {

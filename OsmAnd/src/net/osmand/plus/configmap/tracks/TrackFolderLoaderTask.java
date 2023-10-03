@@ -97,6 +97,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 		if (listener != null) {
 			listener.loadTracksFinished(folder);
 		}
+		smartFolderHelper.notifyUpdateListeners();
 	}
 
 	public interface LoadTracksListener {

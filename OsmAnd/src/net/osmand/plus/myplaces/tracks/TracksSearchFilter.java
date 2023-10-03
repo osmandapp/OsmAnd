@@ -32,10 +32,11 @@ import java.util.List;
 
 public class TracksSearchFilter extends Filter implements FilterChangedListener {
 
-	private final List<TrackItem> trackItems;
+	private List<TrackItem> trackItems;
 	private CallbackWithObject<List<TrackItem>> callback;
 	private List<BaseTrackFilter> currentFilters = new ArrayList<>();
 	private List<FilterChangedListener> filterChangedListeners = new ArrayList<>();
+	private List<TrackItem> filteredTrackItems;
 
 	private OsmandApplication app;
 
@@ -55,6 +56,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			dateFilter.setInitialValueTo(now);
 			dateFilter.setValueFrom(minDate);
 			dateFilter.setValueTo(now);
+		}
+		LengthTrackFilter lengthFilter = (LengthTrackFilter) getFilterByType(FilterType.LENGTH);
+		if (lengthFilter != null) {
+			lengthFilter.setMaxValue((float) app.getGpxDbHelper().getTracksMaxDuration());
 		}
 		CityTrackFilter cityFilter = (CityTrackFilter) getFilterByType(FilterType.CITY);
 		if (cityFilter != null) {
@@ -296,5 +301,23 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		}
 
 	}
+
+	public void resetFilteredItems() {
+		filteredTrackItems = null;
+	}
+
+	@Nullable
+	public List<TrackItem> getFilteredTrackItems() {
+		return filteredTrackItems;
+	}
+
+	public void setFilteredTrackItems(List<TrackItem> trackItems) {
+		filteredTrackItems = trackItems;
+	}
+
+	public void setAllItems(List<TrackItem> trackItems) {
+		this.trackItems = trackItems;
+	}
+
 }
 

@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.util.Log
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -34,7 +35,9 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	}
 
 	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
-		return DATE_FORMAT.format(day1).equals(DATE_FORMAT.format(day2))
+		val day1String = DATE_FORMAT.format(day1)
+		val day2String = DATE_FORMAT.format(day2)
+		return day1String.equals(day2String)
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {

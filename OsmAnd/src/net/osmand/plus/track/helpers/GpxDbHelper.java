@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -222,6 +223,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getTracksMinCreateDate();
 	}
 
+	public double getTracksMaxDuration() {
+		return database.getTracksMaxDuration();
+	}
+
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
@@ -287,6 +292,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Override
 	public void onGpxDataItemRead(@NonNull GpxDataItem item) {
 		putToCache(item);
+		putGpxDataItemToSmartFolder(item);
+	}
+
+	private void putGpxDataItemToSmartFolder(@NonNull GpxDataItem item) {
+		TrackItem trackItem = new TrackItem(item.getFile());
+		trackItem.setDataItem(item);
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(trackItem);
 	}
 
 	@Override

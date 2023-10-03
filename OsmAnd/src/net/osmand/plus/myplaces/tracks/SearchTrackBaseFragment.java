@@ -61,7 +61,6 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private SmartFolderHelper smartFolderHelper;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -71,7 +70,6 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		smartFolderHelper = app.getSmartFolderHelper();
 		if (!selectionHelper.hasAnyItems()) {
 			setupSelectionHelper();
 		}
@@ -123,13 +121,21 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		searchEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
+		setupFilterCallback();
+	}
+
+	protected void setupFilterCallback() {
 		adapter.setFilterCallback(filteredItems -> {
-			searchEditText.setText(adapter.getCurrentSearchQuery());
-			searchEditText.setSelection(searchEditText.length());
-			adapter.updateFilteredItems(filteredItems);
-			updateButtonsState();
+			updateAdapterWithFilteredItems(filteredItems);
 			return true;
 		});
+	}
+
+	protected void updateAdapterWithFilteredItems(List<TrackItem> filteredItems) {
+		searchEditText.setText(adapter.getCurrentSearchQuery());
+		searchEditText.setSelection(searchEditText.length());
+		adapter.updateFilteredItems(filteredItems);
+		updateButtonsState();
 	}
 
 	public void setupSelectionHelper() {

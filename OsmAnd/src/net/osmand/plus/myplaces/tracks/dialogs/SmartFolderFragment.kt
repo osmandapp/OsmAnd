@@ -132,4 +132,13 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
 			updateContent()
 		}
 	}
+
+	override fun onSmartFoldersUpdated() {
+		super.onSmartFoldersUpdated()
+		val actualFolder = smartFolderHelper.getSmartFolder(smartFolder.folderName)
+		if (actualFolder != smartFolder) {
+			smartFolder = actualFolder
+		}
+		updateContent()
+	}
 }

@@ -14,7 +14,9 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:paddingTop="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding">
+		android:background="?attr/selectableItemBackground"
+		android:paddingBottom="@dimen/content_padding"
+		>
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
@@ -111,6 +113,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:labelBehavior="gone"
+		app:tickColorInactive="#000"
+		app:tickColorActive="#000"
 		android:layout_marginStart="@dimen/content_padding_small"
 		android:layout_marginLeft="@dimen/content_padding_small"
 		android:layout_marginEnd="@dimen/content_padding_small"

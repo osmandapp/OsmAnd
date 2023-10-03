@@ -20,6 +20,7 @@ abstract class RangeTrackFilter(
 
 	@Expose
 	var maxValue: Float
+		private set
 
 	@Expose
 	var valueFrom: Float
@@ -67,6 +68,11 @@ abstract class RangeTrackFilter(
 			valueTo = value.valueTo
 			filterChangedListener.onFilterChanged()
 		}
+	}
+
+	fun setMaxValue(value: Float) {
+		maxValue = value
+		valueTo = value
 	}
 
 	override fun equals(other: Any?): Boolean {

@@ -107,7 +107,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		notifyFolderCreatedListeners(newFolder)
 	}
 
-	private fun notifyUpdateListeners() {
+	fun notifyUpdateListeners() {
 		for (listener in updateListeners) {
 			listener.onSmartFoldersUpdated()
 		}

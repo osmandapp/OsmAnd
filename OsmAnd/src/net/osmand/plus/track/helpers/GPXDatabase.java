@@ -237,6 +237,10 @@ public class GPXDatabase {
 			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME +
 			" != 0";
 
+	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
+			"MAX(" + GPX_COL_TOTAL_DISTANCE + ") " +
+			" FROM " + GPX_TABLE_NAME;
+
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
 			GPX_TABLE_NAME + " SET " +
 			GPX_COL_COLOR + " = ?, " +
@@ -261,7 +265,7 @@ public class GPXDatabase {
 		private double splitInterval;
 		private long fileLastModifiedTime;
 		private long fileLastUploadedTime;
-		private long fileCreationTime;
+		private long fileCreationTime = -1;
 		private boolean importedByApi;
 		private boolean showAsMarkers;
 		private boolean joinSegments;
@@ -645,7 +649,7 @@ public class GPXDatabase {
 								GPX_COL_FILE_CREATION_TIME + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] {fileCreatedTime, fileName, fileDir});
-				item.fileLastUploadedTime = fileCreatedTime;
+				item.fileCreationTime = fileCreatedTime;
 			} finally {
 				db.close();
 			}
@@ -1234,6 +1238,28 @@ public class GPXDatabase {
 			}
 		}
 		return minDate;
+	}
+
+	public double getTracksMaxDuration() {
+		double maxLength = 0.0;
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GPX_MAX_TRACK_DURATION, null);
+				if (query != null) {
+					try {
+						if (query.moveToFirst()) {
+							maxLength = query.getDouble(0);
+						}
+					} finally {
+						query.close();
+					}
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return maxLength;
 	}
 
 	public List<String> getNearestCityList() {
