@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 
 /**
  * Parrot device has only dpad left and right

@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.devices.base;
+package net.osmand.plus.keyevent.devices;
 
 import android.content.Context;
 

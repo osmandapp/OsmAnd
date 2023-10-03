@@ -9,7 +9,7 @@ import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
+import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class InputDeviceHelper {
 	 */
 	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
-	private final List<CustomInputDeviceProfile> customDevices;
+	private final List<InputDeviceProfile> customDevices;
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
 
 	public InputDeviceHelper(@NonNull OsmandApplication app) {
@@ -67,7 +66,16 @@ public class InputDeviceHelper {
 		return commandsFactory;
 	}
 
-	public CustomInputDeviceProfile makeCustomDeviceDuplicate(@NonNull InputDeviceProfile device) {
+	@NonNull
+	public InputDeviceProfile createAndSaveCustomDevice(@NonNull String newName) {
+		return saveCustomDevice(makeCustomDevice(newName));
+	}
+
+	public InputDeviceProfile createAndSaveDeviceDuplicate(@NonNull InputDeviceProfile device) {
+		return saveCustomDevice(makeCustomDeviceDuplicate(device));
+	}
+
+	private InputDeviceProfile makeCustomDeviceDuplicate(@NonNull InputDeviceProfile device) {
 		String prevName = device.toHumanString(app);
 		String uniqueName = prevName;
 		int index = 0;
@@ -78,12 +86,12 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	public CustomInputDeviceProfile makeCustomDevice(@NonNull String newName) {
+	private InputDeviceProfile makeCustomDevice(@NonNull String newName) {
 		return makeCustomDevice(newName, KEYBOARD);
 	}
 
 	@NonNull
-	public CustomInputDeviceProfile makeCustomDevice(
+	private InputDeviceProfile makeCustomDevice(
 			@NonNull String newName, @NonNull InputDeviceProfile baseDevice
 	) {
 		String uniqueId = CUSTOM_PREFIX + System.currentTimeMillis();
@@ -91,24 +99,27 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	private CustomInputDeviceProfile makeCustomDevice(
+	private InputDeviceProfile makeCustomDevice(
 			@NonNull String id, @NonNull String name, @NonNull InputDeviceProfile baseDevice
 	) {
-		CustomInputDeviceProfile customDevice = new CustomInputDeviceProfile(id, name, baseDevice);
+		InputDeviceProfile customDevice = new CustomInputDeviceProfile(id, name, baseDevice);
 		customDevice.initialize(app, commandsFactory);
 		return customDevice;
 	}
 
-	public void saveCustomDevice(@NonNull CustomInputDeviceProfile device) {
+	private InputDeviceProfile saveCustomDevice(@NonNull InputDeviceProfile device) {
 		customDevices.add(device);
 		cachedDevices.put(device.getId(), device);
 		syncSettings();
+		return device;
 	}
 
-	public void removeCustomDevice(@NonNull CustomInputDeviceProfile device) {
-		customDevices.remove(device);
-		cachedDevices.remove(device.getId());
-		syncSettings();
+	public void removeCustomDevice(@NonNull String deviceId) {
+		InputDeviceProfile device = cachedDevices.remove(deviceId);
+		if (device != null) {
+			customDevices.remove(device);
+			syncSettings();
+		}
 	}
 
 	@Nullable
@@ -140,14 +151,14 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	private List<CustomInputDeviceProfile> loadCustomDevices() {
+	private List<InputDeviceProfile> loadCustomDevices() {
 		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get();
 		try {
 			return readFromJson(new JSONObject(json));
 		} catch (JSONException e) {
 			LOG.debug("Error when reading custom devices from JSON ", e);
 		}
-		return Collections.emptyList();
+		return new ArrayList<>();
 	}
 
 	public void syncSettings() {
@@ -160,11 +171,11 @@ public class InputDeviceHelper {
 		}
 	}
 
-	public static List<CustomInputDeviceProfile> readFromJson(@NonNull JSONObject json) throws JSONException {
+	public static List<InputDeviceProfile> readFromJson(@NonNull JSONObject json) throws JSONException {
 		if (!json.has("items")) {
-			return Collections.emptyList();
+			return new ArrayList<>();
 		}
-		List<CustomInputDeviceProfile> res = new ArrayList<>();
+		List<InputDeviceProfile> res = new ArrayList<>();
 		JSONArray jsonArray = json.getJSONArray("items");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			res.add(new CustomInputDeviceProfile(jsonArray.getJSONObject(i)));
@@ -173,10 +184,10 @@ public class InputDeviceHelper {
 	}
 
 	public static void writeToJson(@NonNull JSONObject json,
-	                               @NonNull List<CustomInputDeviceProfile> customDevices) throws JSONException {
+	                               @NonNull List<InputDeviceProfile> customDevices) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
-		for (CustomInputDeviceProfile device : customDevices) {
-			jsonArray.put(device.toJson());
+		for (InputDeviceProfile device : customDevices) {
+			jsonArray.put(((CustomInputDeviceProfile) device).toJson());
 		}
 		json.put("items", jsonArray);
 	}

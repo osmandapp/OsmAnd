@@ -16,7 +16,6 @@ import net.osmand.plus.keyevent.commands.OpenQuickSearchDialogCommand;
 import net.osmand.plus.keyevent.commands.SwitchAppModeCommand;
 import net.osmand.plus.keyevent.commands.SwitchCompassCommand;
 import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 import net.osmand.plus.plugins.PluginsHelper;
 
 public class KeyboardDeviceProfile extends InputDeviceProfile {

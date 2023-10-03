@@ -10,13 +10,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class KeyEventHelper implements KeyEvent.Callback {
 

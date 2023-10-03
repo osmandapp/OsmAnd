@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
 
 /**
  * WunderLINQ device, motorcycle smart phone control
