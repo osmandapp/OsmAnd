@@ -20,10 +20,11 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -143,6 +144,21 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateWidgetView();
 	}
 
+	@Override
+	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+		boolean shouldHideTopWidgets = (isVerticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
+		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
+		boolean visible = !(shouldHideTopWidgets || emptyValueTextView);
+
+		updateVisibility(visible);
+		if (!shouldHideTopWidgets || emptyValueTextView) {
+			updateSimpleWidgetInfo(drawSettings);
+		}
+	}
+
+	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+	}
+
 	private void updateWidgetName() {
 		if (widgetType != null && widgetName != null) {
 			widgetName.setText(getString(widgetType.titleId));
@@ -179,6 +195,9 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	protected int getBackgroundResource(@NonNull MapInfoLayer.TextState textState) {
+		if (settings.TRANSPARENT_MAP_THEME.get()) {
+			return R.color.color_transparent;
+		}
 		return isVerticalWidget ? ColorUtilities.getWidgetBackgroundColorId(isNightMode()) : textState.widgetBackgroundId;
 	}
 
@@ -200,32 +219,41 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@Override
+	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
+		if (isVerticalWidget) {
+			nightMode = textState.night;
+			textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+			smallTextView.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+			widgetName.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+			view.findViewById(R.id.widget_bg).setBackgroundResource(getBackgroundResource(textState));
+		} else {
+			super.updateColors(textState);
+		}
+	}
+
+	@Override
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, int order,
 						   @NonNull List<MapWidget> followingWidgets) {
 		super.attachView(container, panel, order, followingWidgets);
-		boolean showBottomDivider = shouldShowBottomDivider(followingWidgets);
-		showHideDivider(showBottomDivider);
+		showHideDivider(shouldShowBottomDivider(followingWidgets));
 	}
 
 	private boolean shouldShowBottomDivider(@NonNull List<MapWidget> followingWidgets) {
 		if (isVerticalWidget) {
-			WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-			boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
-			if (isVerticalWidget) {
-				for (MapWidget widget : followingWidgets) {
-					if (widget instanceof MapMarkersBarWidget || widget instanceof SimpleWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
-						return false;
-					}
-				}
-			} else {
-				return false;
+			if (Algorithms.isEmpty(followingWidgets) && settings.TRANSPARENT_MAP_THEME.get()) {
+				return true;
 			}
-			return true;
+			for (MapWidget widget : followingWidgets) {
+				if (widget instanceof SimpleWidget) {
+					return true;
+				}
+			}
+			return false;
 		}
 		return false;
 	}
 
 	private void showHideDivider(boolean show) {
-		AndroidUiHelper.updateVisibility(bottomDivider, !show);
+		AndroidUiHelper.updateVisibility(bottomDivider, show);
 	}
 }

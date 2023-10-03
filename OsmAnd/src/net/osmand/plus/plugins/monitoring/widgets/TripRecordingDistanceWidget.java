@@ -46,7 +46,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin == null) {
 			return;

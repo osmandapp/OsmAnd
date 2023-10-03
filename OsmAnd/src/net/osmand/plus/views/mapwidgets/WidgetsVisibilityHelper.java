@@ -26,7 +26,6 @@ import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public class WidgetsVisibilityHelper {
@@ -91,7 +90,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInConfigureMapOptionMode();
 	}
 
-	public boolean shouldHideMapMarkersWidget() {
+	public boolean shouldHideTopWidgets(){
 		return isMapRouteInfoMenuVisible()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
@@ -102,6 +101,10 @@ public class WidgetsVisibilityHelper {
 				|| isInWeatherForecastMode()
 				|| isSelectingTilesZone()
 				|| isInConfigureMapOptionMode();
+	}
+
+	public boolean shouldHideMapMarkersWidget() {
+		return shouldHideTopWidgets();
 	}
 
 	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {

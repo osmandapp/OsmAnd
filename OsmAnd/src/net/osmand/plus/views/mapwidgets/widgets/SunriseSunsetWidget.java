@@ -63,7 +63,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		updateCachedLocation();
 		if (!isUpdateNeeded()) {
 			return;

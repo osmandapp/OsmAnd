@@ -44,7 +44,7 @@ public class BearingWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int bearing = getBearing();
 		boolean bearingChanged = cachedBearing != bearing;
 		if (isUpdateNeeded() || bearingChanged) {

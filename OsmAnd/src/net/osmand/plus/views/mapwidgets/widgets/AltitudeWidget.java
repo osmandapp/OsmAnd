@@ -29,8 +29,7 @@ public class AltitudeWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		Double altitude = getAltitudeInMeters();
 		if (altitude != null) {
 			int newAltitude = (int) (double) altitude;
