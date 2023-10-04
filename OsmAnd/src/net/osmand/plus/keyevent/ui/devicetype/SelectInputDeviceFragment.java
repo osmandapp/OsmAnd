@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.InputDeviceHelperListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -43,7 +44,7 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new ScreenController(app, appMode);
+		controller = new ScreenController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -66,19 +67,27 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 
 	private void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
-
-		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(R.string.shared_string_type);
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
-		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
+		closeButton.setImageResource(R.drawable.ic_action_close);
 		closeButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+
+		TextView title = toolbar.findViewById(R.id.toolbar_title);
+		title.setText(getString(R.string.shared_string_type));
+		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
+
+		View actionButton = toolbar.findViewById(R.id.action_button);
+		ImageView actionButtonImage = toolbar.findViewById(R.id.action_button_icon);
+		actionButtonImage.setImageDrawable(getContentIcon(R.drawable.ic_action_add_no_bg));
+		actionButton.setOnClickListener(v -> {
+			controller.askAddNewCustomDevice();
+		});
+		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	@Override
@@ -117,7 +126,8 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 
 	@Override
 	public int getStatusBarColorId() {
-		return ColorUtilities.getStatusBarColorId(nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

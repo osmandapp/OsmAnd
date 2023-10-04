@@ -127,7 +127,7 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
 				.showTopDivider(true)
 				.setOnClickListener(v -> {
-					controller.removeDevice(device);
+					controller.askRemoveDevice(device);
 				}).create());
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();

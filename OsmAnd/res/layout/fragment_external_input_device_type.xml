@@ -12,7 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<include layout="@layout/global_preference_toolbar" />
+		<include layout="@layout/preference_toolbar_with_action_button" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 

@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 public class CustomInputDeviceProfile extends InputDeviceProfile {
 
 	private final String customId;
-	private final String customName;
+	private String customName;
 
 	private final Map<Integer, String> mappedCommandIds = new HashMap<>();
 
@@ -53,6 +53,10 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		for (Entry<Integer, String> entry : mappedCommandIds.entrySet()) {
 			bindCommand(entry.getKey(), entry.getValue());
 		}
+	}
+
+	public void setCustomName(@NonNull String customName) {
+		this.customName = customName;
 	}
 
 	@NonNull

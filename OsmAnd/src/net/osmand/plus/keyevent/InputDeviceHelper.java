@@ -82,22 +82,48 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	public InputDeviceProfile createAndSaveCustomDevice(@NonNull String newName) {
-		return saveCustomDevice(makeCustomDevice(newName));
+	public void createAndSaveCustomDevice(@NonNull String newName) {
+		saveCustomDevice(makeCustomDevice(newName));
 	}
 
-	public InputDeviceProfile createAndSaveDeviceDuplicate(@NonNull InputDeviceProfile device) {
-		return saveCustomDevice(makeCustomDeviceDuplicate(device));
+	public void createAndSaveDeviceDuplicate(@NonNull InputDeviceProfile device) {
+		saveCustomDevice(makeCustomDeviceDuplicate(device));
+	}
+
+	public void renameCustomDevice(@NonNull CustomInputDeviceProfile device, @NonNull String newName) {
+		device.setCustomName(newName);
+		syncSettings();
+		notifyListeners();
 	}
 
 	private InputDeviceProfile makeCustomDeviceDuplicate(@NonNull InputDeviceProfile device) {
 		String prevName = device.toHumanString(app);
-		String uniqueName = prevName;
-		int index = 0;
-		while (hasNameDuplicate(uniqueName)) {
-			uniqueName = prevName + " " + ++index;
-		}
+		String uniqueName = makeUniqueName(prevName);
 		return makeCustomDevice(uniqueName, device);
+	}
+
+	private String makeUniqueName(@NonNull String oldName) {
+		int suffix = 0;
+		int i = oldName.length() - 1;
+		do {
+			try {
+				if (oldName.charAt(i) == ' ' || oldName.charAt(i) == '-') {
+					throw new NumberFormatException();
+				}
+				suffix = Integer.parseInt(oldName.substring(i));
+			} catch (NumberFormatException e) {
+				break;
+			}
+			i--;
+		} while (i >= 0);
+		String newName;
+		String divider = suffix == 0 ? " " : "";
+		do {
+			suffix++;
+			newName = oldName.substring(0, i + 1) + divider + suffix;
+		}
+		while (hasNameDuplicate(newName));
+		return newName;
 	}
 
 	@NonNull
@@ -122,12 +148,11 @@ public class InputDeviceHelper {
 		return customDevice;
 	}
 
-	private InputDeviceProfile saveCustomDevice(@NonNull InputDeviceProfile device) {
+	private void saveCustomDevice(@NonNull InputDeviceProfile device) {
 		customDevices.add(device);
 		cachedDevices.put(device.getId(), device);
 		syncSettings();
 		notifyListeners();
-		return device;
 	}
 
 	public void removeCustomDevice(@NonNull String deviceId) {
@@ -175,7 +200,7 @@ public class InputDeviceHelper {
 
 	public boolean hasNameDuplicate(@NonNull String newName) {
 		for (InputDeviceProfile device : getAvailableDevices()) {
-			if (Algorithms.objectEquals(device.toHumanString(app), newName)) {
+			if (Algorithms.objectEquals(device.toHumanString(app).trim(), newName.trim())) {
 				return true;
 			}
 		}
