@@ -14,8 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;
@@ -63,16 +62,10 @@ public class TracksComparator implements Comparator<Object> {
 		if (o2 instanceof VisibleTracksGroup) {
 			return 1;
 		}
-		if (o1 instanceof SmartFolder) {
-			return -1;
+		if (o1 instanceof ComparableTracksGroup) {
+			return o2 instanceof ComparableTracksGroup ? compareTrackFolders((ComparableTracksGroup) o1, (ComparableTracksGroup) o2) : -1;
 		}
-		if (o2 instanceof SmartFolder) {
-			return 1;
-		}
-		if (o1 instanceof TrackFolder) {
-			return o2 instanceof TrackFolder ? compareTrackFolders((TrackFolder) o1, (TrackFolder) o2) : -1;
-		}
-		if (o2 instanceof TrackFolder) {
+		if (o2 instanceof ComparableTracksGroup) {
 			return 1;
 		}
 		if (o1 instanceof TrackItem && o2 instanceof TrackItem) {
@@ -81,7 +74,7 @@ public class TracksComparator implements Comparator<Object> {
 		return 0;
 	}
 
-	private int compareTrackFolders(@NonNull TrackFolder folder1, @NonNull TrackFolder folder2) {
+	private int compareTrackFolders(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
 		TrackFolderAnalysis folderAnalysis1 = folder1.getFolderAnalysis();
 		TrackFolderAnalysis folderAnalysis2 = folder2.getFolderAnalysis();
 
@@ -233,28 +226,28 @@ public class TracksComparator implements Comparator<Object> {
 		if (file1.lastModified() == file2.lastModified()) {
 			return compareTrackItemNames(item1, item2);
 		}
-		return compareFilesByLastModified(file1, file2);
+		return compareFilesByLastModified(file1.lastModified(), file2.lastModified());
 	}
 
-	private int compareFolderFilesByLastModified(@NonNull TrackFolder folder1, @NonNull TrackFolder folder2) {
-		File file1 = folder1.getDirFile();
-		File file2 = folder2.getDirFile();
+	private int compareFolderFilesByLastModified(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
+		long lastModified1 = folder1.lastModified();
+		long lastModified2 = folder2.lastModified();
 
-		if (file1.lastModified() == file2.lastModified()) {
+		if (lastModified1 == lastModified2) {
 			return compareTrackFolderNames(folder1, folder2);
 		}
-		return compareFilesByLastModified(file1, file2);
+		return compareFilesByLastModified(lastModified1, lastModified2);
 	}
 
-	private int compareFilesByLastModified(@NonNull File file1, @NonNull File file2) {
-		return -Long.compare(file1.lastModified(), file2.lastModified());
+	private int compareFilesByLastModified(long lastModified1, long lastModified2) {
+		return -Long.compare(lastModified1, lastModified2);
 	}
 
 	private int compareTrackItemNames(@NonNull TrackItem item1, @NonNull TrackItem item2) {
 		return compareNames(item1.getName(), item2.getName());
 	}
 
-	private int compareTrackFolderNames(@NonNull TrackFolder folder1, @NonNull TrackFolder folder2) {
+	private int compareTrackFolderNames(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
 		return compareNames(folder1.getDirName(), folder2.getDirName());
 	}
 
