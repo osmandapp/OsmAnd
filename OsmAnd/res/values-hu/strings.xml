@@ -5462,4 +5462,11 @@
     <string name="delete_map_description">Biztosan törli %1$s térképét\?</string>
     <string name="maps_and_resources">Térképek és erőforrások</string>
     <string name="shared_string_show_icon">Ikon mutatása</string>
+    <string name="smart_folder_name_present">Ilyen okosmappa már van</string>
+    <string name="smart_folder_saved">Okosmappa mentve</string>
+    <string name="add_smart_folder">Okosmappa hozzáadása</string>
+    <string name="empty_name">Üres név</string>
+    <string name="edit_fiilter">Szűrő szerkesztése</string>
+    <string name="save_as_smart_folder">Mentés okosmappaként</string>
+    <string name="delete_smart_folder_dialog_message">Ez törli a(z) \"%1$s okosmappát.</string>
 </resources>
