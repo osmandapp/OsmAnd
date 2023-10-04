@@ -5468,5 +5468,5 @@
     <string name="empty_name">Üres név</string>
     <string name="edit_fiilter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
-    <string name="delete_smart_folder_dialog_message">Ez törli a(z) \"%1$s okosmappát.</string>
+    <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
 </resources>
