@@ -138,11 +138,9 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowZoomButtons() {
 		boolean additionalDialogsHide = !isInGpxApproximationMode()
-				&& !isInTrackAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode()
 				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
@@ -182,13 +180,11 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowBackToLocationButton() {
-		boolean additionalDialogsHide = !isInTrackAppearanceMode()
-				&& !isInGpxApproximationMode()
+		boolean additionalDialogsHide = !isInGpxApproximationMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode()
 				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
