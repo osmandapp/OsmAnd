@@ -5469,4 +5469,11 @@
     <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s\?</string>
     <string name="maps_and_resources">Peta &amp; Sumber Daya</string>
     <string name="shared_string_show_icon">Tampilkan ikon</string>
+    <string name="smart_folder_name_present">Folder Pintar sudah ada</string>
+    <string name="smart_folder_saved">Folder Pintar disimpan</string>
+    <string name="add_smart_folder">Tambahkan folder pintar</string>
+    <string name="empty_name">Nama kosong</string>
+    <string name="edit_fiilter">Sunting saringan</string>
+    <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
+    <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
 </resources>
