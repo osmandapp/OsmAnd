@@ -12,6 +12,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -20,19 +22,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.ui.devicetype.SelectInputDeviceFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.List;
-
 public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 
-	private static final String TYPE_PREF_ID = "input_device_type_id";
-	private static final String BINDING_PREF_ID = "input_device_type_bindings_id";
+	private static final String PREF_ID_TYPE = "input_device_type_id";
+	private static final String PREF_ID_BINDING = "input_device_type_bindings_id";
 
 	private InputDeviceHelper deviceHelper;
 
@@ -95,25 +95,12 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 	}
 
 	private Preference createTypePreference(@NonNull Context context) {
-		List<InputDeviceProfile> devices = app.getInputDeviceHelper().getAllDevices();
-		String[] entries = new String[devices.size()];
-		String[] values = new String[devices.size()];
-		for (int i = 0; i < devices.size(); i++) {
-			InputDeviceProfile device = devices.get(i);
-			entries[i] = device.toHumanString(app);
-			values[i] = device.getId();
-		}
-
-		ListPreferenceEx uiPreference = createListPreferenceEx(
-				settings.EXTERNAL_INPUT_DEVICE.getId(), entries, values,
-				R.string.shared_string_type, R.layout.preference_with_descr_and_divider);
-
+		Preference uiPreference = new Preference(context);
 		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
 		if (inputDevice != null) {
-//			uiPreference.setKey(TYPE_PREF_ID);
+			uiPreference.setKey(PREF_ID_TYPE);
 			uiPreference.setLayoutResource(R.layout.preference_with_descr_and_divider);
 			uiPreference.setTitle(R.string.shared_string_type);
-			uiPreference.setDescription(R.string.external_input_device_descr);
 			uiPreference.setSummary(inputDevice.toHumanString(context));
 			uiPreference.setIcon(getContentIcon(R.drawable.ic_action_keyboard));
 			uiPreference.setSelectable(true);
@@ -125,7 +112,7 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 		Preference uiPreference = new Preference(context);
 		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
 		if (inputDevice != null) {
-			uiPreference.setKey(BINDING_PREF_ID);
+			uiPreference.setKey(PREF_ID_BINDING);
 			uiPreference.setLayoutResource(R.layout.preference_with_descr);
 			uiPreference.setTitle(R.string.key_bindings);
 			uiPreference.setSummary(String.valueOf(inputDevice.getCommandsCount()));
@@ -140,6 +127,20 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 		preference.setLayoutResource(layoutResId);
 		preference.setSelectable(false);
 		return preference;
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String key = preference.getKey();
+		if (PREF_ID_TYPE.equals(key)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				FragmentManager fm = activity.getSupportFragmentManager();
+				SelectInputDeviceFragment.showInstance(fm, getSelectedAppMode());
+			}
+			return true;
+		}
+		return super.onPreferenceClick(preference);
 	}
 
 	private boolean isInputDeviceEnabled() {

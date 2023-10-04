@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class InputDeviceHelper {
 
@@ -43,27 +44,41 @@ public class InputDeviceHelper {
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
 	private final List<InputDeviceProfile> customDevices;
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
+	private final List<InputDeviceHelperListener> listeners = new ArrayList<>();
 
 	public InputDeviceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		customDevices = loadCustomDevices();
-		for (InputDeviceProfile device : getAllDevices()) {
+		for (InputDeviceProfile device : getAvailableDevices()) {
 			device.initialize(app, commandsFactory);
 			cachedDevices.put(device.getId(), device);
 		}
 	}
 
-	public List<InputDeviceProfile> getAllDevices() {
+	public List<InputDeviceProfile> getAvailableDevices() {
 		List<InputDeviceProfile> result = new ArrayList<>();
 		result.addAll(defaultDevices);
 		result.addAll(customDevices);
 		return result;
 	}
 
+	public void addListener(@NonNull InputDeviceHelperListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeListener(@NonNull InputDeviceHelperListener listener) {
+		listeners.remove(listener);
+	}
+
 	@NonNull
 	public KeyEventCommandsFactory getCommandsFactory() {
 		return commandsFactory;
+	}
+
+	public void selectInputDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, deviceId);
+		notifyListeners();
 	}
 
 	@NonNull
@@ -111,6 +126,7 @@ public class InputDeviceHelper {
 		customDevices.add(device);
 		cachedDevices.put(device.getId(), device);
 		syncSettings();
+		notifyListeners();
 		return device;
 	}
 
@@ -119,7 +135,18 @@ public class InputDeviceHelper {
 		if (device != null) {
 			customDevices.remove(device);
 			syncSettings();
+			notifyListeners();
 		}
+	}
+
+	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		String selectedDeviceId = getSelectedDeviceId(appMode);
+		return Objects.equals(selectedDeviceId, deviceId);
+	}
+
+	public boolean isCustomDevice(@NonNull InputDeviceProfile device) {
+		String id = device.getId();
+		return id.startsWith(CUSTOM_PREFIX);
 	}
 
 	@Nullable
@@ -137,17 +164,28 @@ public class InputDeviceHelper {
 
 	@Nullable
 	public InputDeviceProfile getSelectedDevice(@NonNull ApplicationMode appMode) {
-		String id = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
+		String id = getSelectedDeviceId(appMode);
 		return id != null ? cachedDevices.get(id) : null;
 	}
 
+	@Nullable
+	public String getSelectedDeviceId(@NonNull ApplicationMode appMode) {
+		return settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
+	}
+
 	public boolean hasNameDuplicate(@NonNull String newName) {
-		for (InputDeviceProfile device : getAllDevices()) {
+		for (InputDeviceProfile device : getAvailableDevices()) {
 			if (Algorithms.objectEquals(device.toHumanString(app), newName)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private void notifyListeners() {
+		for (InputDeviceHelperListener listener : listeners) {
+			listener.onInputDeviceHelperMessage();
+		}
 	}
 
 	@NonNull

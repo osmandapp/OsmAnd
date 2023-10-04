@@ -18,12 +18,10 @@ public abstract class KeyEventCommand implements Callback {
 	protected String commandId;
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
-	protected KeyEventHelper keyEventHelper;
 
 	public void initialize(@NonNull OsmandApplication app, @NonNull String commandId) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.keyEventHelper = app.getKeyEventHelper();
 		this.commandId = commandId;
 	}
 
@@ -34,7 +32,7 @@ public abstract class KeyEventCommand implements Callback {
 
 	@Nullable
 	protected MapActivity getMapActivity() {
-		return keyEventHelper.getMapActivity();
+		return app.getKeyEventHelper().getMapActivity();
 	}
 
 	@Override
