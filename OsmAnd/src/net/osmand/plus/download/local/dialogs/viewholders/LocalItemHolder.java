@@ -1,5 +1,6 @@
 package net.osmand.plus.download.local.dialogs.viewholders;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -56,8 +57,9 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull LocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
-		title.setText(item.getName());
-		description.setText(item.getDescription());
+		Context context = itemView.getContext();
+		title.setText(item.getName(context));
+		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 
 		boolean selected = fragment != null && fragment.isItemSelected(item);

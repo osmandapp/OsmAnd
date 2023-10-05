@@ -59,20 +59,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -102,24 +96,9 @@ public class LocalItemUtils {
 		Date date = getInstalledDate(app, file, type);
 		item.setLastModified(date.getTime());
 
-		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
-		String localeName = FileNameTranslationHelper.getFileName(app, regions, fileName, true, true);
-		if (!Algorithms.isEmpty(localeName)) {
-			item.setName(localeName);
-		}
-		String size = AndroidUtils.formatSize(app, file.length());
-		if (type == CACHE) {
-			item.setDescription(size);
-		} else {
-			String formattedDate = getFormattedDate(date);
-			item.setDescription(app.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate));
-		}
 		if (type == MULTIMEDIA_NOTES) {
-			Recording recording = new Recording(file);
-			item.setName(recording.getName(app, true));
-			item.setAttachedObject(recording);
+			item.setAttachedObject(new Recording(file));
 		} else if (type == TRACKS) {
-			item.setName(GpxUiHelper.getGpxTitle(fileName));
 			item.setAttachedObject(app.getGpxDbHelper().getItem(file, item::setAttachedObject));
 		} else if (type == TILES_DATA) {
 			ITileSource template = null;
@@ -133,43 +112,21 @@ public class LocalItemUtils {
 			}
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
-			if (Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
-				item.setName(app.getString(R.string.osmand_settings));
-			} else {
+			if (!Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
 				int index = key.lastIndexOf('.');
 				if (index != -1) {
 					key = key.substring(index + 1);
 				}
-				ApplicationMode mode = ApplicationMode.valueOfStringKey(key, null);
-				if (mode != null) {
-					item.setAttachedObject(mode);
-					item.setName(mode.toHumanString());
-				}
+				item.setAttachedObject(ApplicationMode.valueOfStringKey(key, null));
 			}
 		} else if (type == RENDERING_STYLES) {
 			Map<String, String> renderers = app.getRendererRegistry().getRenderers(true);
 			for (Map.Entry<String, String> entry : renderers.entrySet()) {
 				if (Algorithms.stringsEqual(entry.getValue(), fileName)) {
-					String key = entry.getKey();
-					item.setAttachedObject(key);
-					item.setName(RendererRegistry.getRendererName(app, key));
+					item.setAttachedObject(entry.getKey());
 					break;
 				}
 			}
-		} else if (Algorithms.equalsToAny(type, OSM_EDITS, OSM_NOTES, ACTIVE_MARKERS)) {
-			item.setName(type.toHumanString(app));
-		} else if (type == CACHE) {
-			if (fileName.startsWith("heightmap")) {
-				item.setName(app.getString(R.string.relief_3d));
-			} else if (fileName.startsWith("hillshade")) {
-				item.setName(app.getString(R.string.shared_string_hillshade));
-			} else if (fileName.startsWith("slope")) {
-				item.setName(app.getString(R.string.shared_string_slope));
-			} else if (fileName.equals("weather_tiffs.db")) {
-				item.setName(app.getString(R.string.weather_online));
-			}
-		} else if (Algorithms.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
-			item.setName(FileNameTranslationHelper.getVoiceName(app, fileName));
 		}
 	}
 
@@ -197,7 +154,7 @@ public class LocalItemUtils {
 		for (LocalItem item : items) {
 			boolean needAdd = true;
 			for (LocalItem result : results) {
-				if (result.getName().equals(item.getName())) {
+				if (Algorithms.objectEquals(result.getFileName(), item.getFileName())) {
 					needAdd = false;
 					break;
 				}

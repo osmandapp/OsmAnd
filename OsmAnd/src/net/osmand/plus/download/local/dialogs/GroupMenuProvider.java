@@ -2,6 +2,7 @@ package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
+import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
@@ -32,6 +33,7 @@ import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.enums.MapsSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -120,6 +122,13 @@ public class GroupMenuProvider implements MenuProvider {
 					.setOnClickListener(v -> fragment.setSelectionMode(true))
 					.create());
 
+			if (type == TILES_DATA) {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitleId(R.string.add_online_source)
+						.setIcon(getContentIcon(R.drawable.ic_action_add))
+						.setOnClickListener(v -> OsmandRasterMapsPlugin.defineNewEditLayer(activity, fragment, null))
+						.create());
+			}
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_import)
 					.setIcon(getContentIcon(R.drawable.ic_action_import))

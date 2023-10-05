@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.measurementtool.graph;
 
 import android.graphics.RectF;
 
@@ -11,6 +11,7 @@ import com.github.mikephil.charting.renderer.HorizontalBarChartRenderer;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class CustomBarChartRenderer extends HorizontalBarChartRenderer {
+
 	private final float highlightHalfWidth;
 
 	public CustomBarChartRenderer(@NonNull BarChart chart) {

@@ -222,10 +222,10 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private void sortItems(@NonNull List<LocalItem> items) {
 		if (type == MAP_DATA) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
-			Collections.sort(items, new MapsComparator(sortMode));
+			Collections.sort(items, new MapsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
-			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(), o2.getName()));
+			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app), o2.getName(app)));
 		}
 	}
 

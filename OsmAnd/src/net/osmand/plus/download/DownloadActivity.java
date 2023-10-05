@@ -113,16 +113,15 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(this, downloadProgressLayout);
 
 		viewPager = findViewById(R.id.pager);
-		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
-
+		PagerSlidingTabStrip pagerSlidingTabs = findViewById(R.id.sliding_tabs);
 
 		mTabs.add(new TabItem(R.string.downloads, getString(R.string.downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_local, getString(R.string.download_tab_local), LocalCategoriesFragment.class));
 		mTabs.add(new TabItem(R.string.download_tab_updates, getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
-		mSlidingTabLayout.setViewPager(viewPager);
-		mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		pagerSlidingTabs.setViewPager(viewPager);
+		pagerSlidingTabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int position) {
