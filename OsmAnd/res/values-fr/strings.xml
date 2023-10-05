@@ -5460,4 +5460,6 @@
     <string name="add_smart_folder">Ajouter un dossier intelligent</string>
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
     <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
+    <string name="empty_name">Sans nom</string>
+    <string name="edit_fiilter">Modifier le filtre</string>
 </resources>
