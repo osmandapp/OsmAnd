@@ -835,9 +835,11 @@ public class OsmandApplication extends MultiDexApplication {
 		context.setTheme(themeId);
 	}
 
-	IBRouterService reconnectToBRouter() {
+	public IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
+      // a delay is necessary as the service process needs time to start..
+      Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
 				return bRouterServiceConnection.getBrouterService();
 			}

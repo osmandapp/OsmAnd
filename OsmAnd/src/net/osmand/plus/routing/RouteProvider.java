@@ -1220,7 +1220,7 @@ public class RouteProvider {
 
 		IBRouterService brouterService = ctx.getBRouterService();
 		if (brouterService == null) {
-			return new RouteCalculationResult("BRouter service is not available");
+			brouterService = ctx.reconnectToBRouter();
 		}
 		try {
 			String gpxMessage = brouterService.getTrackFromParams(bpars);
