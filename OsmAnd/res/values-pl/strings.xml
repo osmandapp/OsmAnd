@@ -5244,7 +5244,7 @@
     <string name="rendering_value_sacScale_name">Skala SAC</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="shared_string_class">Kategoria</string>
+    <string name="shared_string_class">Klasa</string>
     <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
     <string name="free_favorites_backup">Darmowa kopia zapasowa ulubionych</string>
     <string name="get_osmand_cloud">Pozyskaj OsmAnd Cloud</string>
@@ -5419,4 +5419,12 @@
     <string name="help_article_personal_storage_name">Przechowywanie</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O wyznaczaniu trasy OsmAnd</string>
     <string name="shared_string_setup">Ustawienie</string>
+    <string name="smart_folder_name_present">Taki mądry folder już istnieje</string>
+    <string name="smart_folder_saved">Zapisano mądry folder</string>
+    <string name="help_article_purchases_giveaway_name">Upominek</string>
+    <string name="add_smart_folder">Dodaj mądry folder</string>
+    <string name="empty_name">Pusta nazwa</string>
+    <string name="edit_fiilter">Edycja filtra</string>
+    <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
+    <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
 </resources>

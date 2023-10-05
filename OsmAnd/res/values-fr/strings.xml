@@ -5455,4 +5455,11 @@
     <string name="delete_map_description">Êtes-vous certain de vouloir effacer la carte %1$s \?</string>
     <string name="maps_and_resources">Cartes et ressources</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
+    <string name="smart_folder_name_present">Ce dossier intelligent existe déjà</string>
+    <string name="smart_folder_saved">Dossier intelligent enregistré</string>
+    <string name="add_smart_folder">Ajouter un dossier intelligent</string>
+    <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
+    <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
+    <string name="empty_name">Sans nom</string>
+    <string name="edit_fiilter">Modifier le filtre</string>
 </resources>

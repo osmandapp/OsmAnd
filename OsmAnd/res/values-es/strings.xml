@@ -5464,4 +5464,11 @@
     <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s\?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
     <string name="shared_string_show_icon">Mostrar el icono</string>
+    <string name="smart_folder_name_present">Dicha carpeta inteligente ya está presente</string>
+    <string name="smart_folder_saved">Carpeta inteligente guardada</string>
+    <string name="add_smart_folder">Agregar una carpeta inteligente</string>
+    <string name="empty_name">Nombre vacío</string>
+    <string name="edit_fiilter">Editar el filtro</string>
+    <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
 </resources>
