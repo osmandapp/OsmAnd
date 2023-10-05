@@ -5424,11 +5424,21 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Siklási arány widget
+    <string name="release_4_6">• Siklási arány widget hozzáadva
 \n
-\n • ANT+ hőmérséklet widget hozzáadva
+\n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
+\n
+\n • Sorok hozzáadva a felső és alsó widget panelekhez, az összes widget támogatásával
+\n
+\n • ANT+ hőmérséklet widget támogatás hozzáadva
 \n
 \n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n
+\n • Frissítve a helyi erőforrás-kezelés a Letöltésekben
+\n
+\n • \"Elérhető memória\" widget hozzáadva
+\n
+\n • Átlátszó állapotsor problémái javítva
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
