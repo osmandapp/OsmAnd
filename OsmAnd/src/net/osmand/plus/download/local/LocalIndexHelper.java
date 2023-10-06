@@ -323,14 +323,23 @@ public class LocalIndexHelper {
 	private void loadObfData(@NonNull File dir, @NonNull List<LocalItem> items, boolean readFiles,
 	                         boolean shouldUpdate, @NonNull Map<String, File> indexFiles,
 	                         @Nullable AbstractLoadLocalIndexTask task) {
-		boolean readDir = readFiles && dir.canRead();
-		List<File> files = readDir ? Arrays.asList(listFilesSorted(dir)) : new ArrayList<>(indexFiles.values());
-		for (File file : files) {
-			if (file.isFile() && file.getName().endsWith(BINARY_MAP_INDEX_EXT)
-					&& (!readDir || dir.getPath().equals(file.getParent()))) {
-				LocalItemType type = LocalItemUtils.getItemType(app, file);
-				if (type != null) {
-					loadLocalData(file, type, items, shouldUpdate, task);
+		if ((readFiles) && dir.canRead()) {
+			for (File file : listFilesSorted(dir)) {
+				if (file.isFile() && file.getName().endsWith(BINARY_MAP_INDEX_EXT)) {
+					LocalItemType type = LocalItemUtils.getItemType(app, file);
+					if (type != null) {
+						loadLocalData(file, type, items, shouldUpdate, task);
+					}
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && dir.getPath().equals(file.getParent())
+						&& file.getName().endsWith(BINARY_MAP_INDEX_EXT)) {
+					LocalItemType type = LocalItemUtils.getItemType(app, file);
+					if (type != null) {
+						loadLocalData(file, type, items, shouldUpdate, task);
+					}
 				}
 			}
 		}
@@ -339,12 +348,18 @@ public class LocalIndexHelper {
 	private void loadDataImpl(@NonNull File dir, @NonNull LocalItemType type, @NonNull String extension,
 	                          boolean readFiles, boolean shouldUpdate, @NonNull List<LocalItem> items,
 	                          @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask task) {
-		boolean readDir = readFiles && dir.canRead();
-		List<File> files = readDir ? Arrays.asList(listFilesSorted(dir)) : new ArrayList<>(indexFiles.values());
-		for (File file : files) {
-			if (file.isFile() && file.getName().endsWith(extension)
-					&& (!readDir || file.getPath().startsWith(dir.getPath()))) {
-				loadLocalData(file, type, items, shouldUpdate, task);
+		if ((readFiles) && dir.canRead()) {
+			for (File file : listFilesSorted(dir)) {
+				if (file.isFile() && file.getName().endsWith(extension)) {
+					loadLocalData(file, type, items, shouldUpdate, task);
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && file.getPath().startsWith(dir.getPath())
+						&& file.getName().endsWith(extension)) {
+					loadLocalData(file, type, items, shouldUpdate, task);
+				}
 			}
 		}
 	}

@@ -1,15 +1,6 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
 import android.content.Context;
@@ -33,7 +24,6 @@ import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -247,17 +237,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
-
-		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
-		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(ROADS_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(LIVE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(SRTM_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(NAUTICAL_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(WIKI_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(WIKIVOYAGE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(HEIGHTMAP_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(GEOTIFF_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeUnnecessaryFiles(this);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -282,17 +262,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
-	}
-
-	private void removeSqliteDbTravelFiles() {
-		File[] files = getAppPath(WIKIVOYAGE_INDEX_DIR).listFiles();
-		if (files != null) {
-			for (File file : files) {
-				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
-					file.delete();
-				}
-			}
-		}
 	}
 
 	@Override

@@ -1,7 +1,17 @@
 package net.osmand.plus.utils;
 
 import static net.osmand.IndexConstants.DOWNLOAD_EXT;
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
+import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
+import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
+import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
 import static net.osmand.IndexConstants.TEMP_DIR;
+import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
 import android.widget.Toast;
@@ -141,7 +151,7 @@ public class FileUtils {
 	}
 
 	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
-	                                  @NonNull File srcDir, @NonNull File destDir) {
+	                                       @NonNull File srcDir, @NonNull File destDir) {
 		for (File srcFile : files) {
 			String path = srcFile.getAbsolutePath();
 			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
@@ -319,6 +329,20 @@ public class FileUtils {
 			manager.closeFile(targetFile.getName());
 		}
 		return sourceFile.renameTo(targetFile);
+	}
+
+	public static void removeUnnecessaryFiles(@NonNull OsmandApplication app) {
+		Algorithms.removeAllFiles(app.getAppPath(TEMP_DIR));
+		Algorithms.removeAllFiles(app.getAppPath(DOWNLOAD_BUILD_NAME));
+		FileUtils.removeFilesWithExtensions(app.getAppPath(MAPS_PATH), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(ROADS_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(LIVE_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(SRTM_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(NAUTICAL_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKI_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKIVOYAGE_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(HEIGHTMAP_INDEX_DIR), false, DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(app.getAppPath(GEOTIFF_DIR), false, DOWNLOAD_EXT);
 	}
 
 	public interface RenameCallback {
