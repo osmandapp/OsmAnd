@@ -379,7 +379,7 @@ public class MapDataMenuController extends MenuController {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
 			addPlainMenuItem(R.drawable.ic_action_data, null, indexItem.getRemoteDate(dateFormat), false, false, null);
 		} else if (localItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_data, null, localItem.getDescription(), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_data, null, localItem.getDescription(mapActivity.getMyApplication()), false, false, null);
 		}
 	}
 

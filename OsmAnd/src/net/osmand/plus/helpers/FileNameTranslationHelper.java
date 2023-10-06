@@ -43,22 +43,23 @@ public class FileNameTranslationHelper {
 
 	@Nullable
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
-		return getFileName(ctx, regions, fileName, true, false);
+		return getFileName(ctx, regions, fileName, " ", true, false);
 	}
 
 	@Nullable
-	public static String getFileName(Context ctx, OsmandRegions regions, String fileName, boolean includingParent, boolean reversed) {
+	public static String getFileName(Context ctx, OsmandRegions regions, String fileName,
+	                                 String divider, boolean includingParent, boolean reversed) {
 		String basename = getBasename(ctx, fileName);
-		if (basename.endsWith(WIKI_NAME)) { //wiki files
+		if (basename.endsWith(WIKI_NAME)) {
 			return getWikiName(ctx, basename);
 		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
 			return getWikivoyageName(ctx, basename);
-		} else if (fileName.endsWith(WEATHER_MAP_INDEX_EXT)) { //weather files
+		} else if (fileName.endsWith(WEATHER_MAP_INDEX_EXT)) {
 			basename = basename.replace("Weather_", "");
 			return getWeatherName(ctx, regions, basename);
-		} else if (fileName.endsWith("tts")) { //tts files
+		} else if (fileName.endsWith("tts")) {
 			return getVoiceName(ctx, fileName);
-		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
+		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
 			return getFontName(basename);
 		} else if (fileName.startsWith(HILL_SHADE)) {
 			basename = basename.replace(HILL_SHADE + " ", "");
@@ -82,7 +83,7 @@ public class FileNameTranslationHelper {
 			return std;
 		}
 		if (regions != null) {
-			return regions.getLocaleName(basename, includingParent, reversed);
+			return regions.getLocaleName(basename, divider, includingParent, reversed);
 		}
 		return null;
 	}

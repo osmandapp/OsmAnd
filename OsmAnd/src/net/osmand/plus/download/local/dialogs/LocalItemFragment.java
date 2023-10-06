@@ -106,7 +106,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 
 	private void updateToolbar() {
 		menuProvider.setLocalItem(localItem);
-		toolbarLayout.setTitle(localItem.getName());
+		toolbarLayout.setTitle(localItem.getName(requireContext()));
 	}
 
 	private void updateContent() {

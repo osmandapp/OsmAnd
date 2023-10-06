@@ -317,7 +317,7 @@ public class ChartUtils {
 		chart.setDragEnabled(useGesturesAndScale);
 		chart.setScaleYEnabled(false);
 		chart.setAutoScaleMinMaxEnabled(true);
-		chart.setDrawBorders(true);
+		chart.setDrawBorders(false);
 		chart.getDescription().setEnabled(false);
 		chart.setDragDecelerationEnabled(false);
 

@@ -1,12 +1,12 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.RENDERING_STYLES;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,7 +49,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ItemMenuProvider implements MenuProvider {
 
@@ -211,13 +210,14 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	private void clearTiles() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+		Context context = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, fragment);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName()));
+		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));
 		builder.show();
 	}
 
@@ -227,7 +227,8 @@ public class ItemMenuProvider implements MenuProvider {
 		if (indexItem != null) {
 			activity.startDownload(indexItem);
 		} else {
-			String text = app.getString(R.string.map_is_up_to_date, localItem.getName());
+			Context context = UiUtilities.getThemedContext(activity, nightMode);
+			String text = app.getString(R.string.map_is_up_to_date, localItem.getName(context));
 			Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG);
 			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();

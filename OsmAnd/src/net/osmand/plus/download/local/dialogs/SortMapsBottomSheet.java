@@ -1,5 +1,6 @@
 package net.osmand.plus.download.local.dialogs;
 
+import static net.osmand.plus.settings.enums.MapsSortMode.COUNTRY_NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.MapsSortMode.DATE_DESCENDING;
 import static net.osmand.plus.settings.enums.MapsSortMode.NAME_DESCENDING;
 
@@ -108,7 +109,7 @@ public class SortMapsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		private boolean shouldShowDivider(@NonNull MapsSortMode mode) {
-			return mode == NAME_DESCENDING || mode == DATE_DESCENDING;
+			return mode == NAME_DESCENDING || mode == COUNTRY_NAME_DESCENDING || mode == DATE_DESCENDING;
 		}
 
 		@Override
