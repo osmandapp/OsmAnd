@@ -10,6 +10,25 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="key_event_category_map_interactions">Map interactions</string>
+    <string name="key_event_category_actions">Actions</string>
+    <string name="key_event_action_take_media_note">Take media note</string>
+    <string name="key_event_action_toggle_drower">Show/hide side menu</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
+    <string name="key_event_action_activity_back_pressed">Activity back pressed</string>
+    <string name="key_event_action_emit_navigation_hint">Emit navigation hint</string>
+    <string name="key_event_action_zoom_out">Zoom out</string>
+    <string name="key_event_action_zoom_in">Zoom in</string>
+    <string name="key_event_action_move_right">Move right</string>
+    <string name="key_event_action_move_left">Move left</string>
+    <string name="key_event_action_move_down">Move down</string>
+    <string name="key_event_action_move_up">Move up</string>
+    <string name="key_event_action_previous_app_profile">Previous app profile</string>
+    <string name="key_event_action_next_app_profile">Next app profile</string>
+    <string name="key_event_action_open_search_view">Open Search view</string>
+    <string name="key_event_action_open_navigation_view">Open Navigation view</string>
+    <string name="key_event_action_change_map_orientation">Change Map orientation</string>
+    <string name="key_event_action_move_to_my_location">Move to My location</string>
     <string name="remove_type_q">Are you sure you want to remove \"%1$s\" type?</string>
     <string name="add_new_type">Add new type</string>
     <string name="enable_to_use_external_input_device">Enable to use external input device with OsmAnd</string>

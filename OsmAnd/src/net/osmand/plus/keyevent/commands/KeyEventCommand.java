@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.view.KeyEvent;
 import android.view.KeyEvent.Callback;
 
@@ -8,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.keyevent.KeyEventHelper;
+import net.osmand.plus.keyevent.KeyEventCategory;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Objects;
@@ -59,4 +60,12 @@ public abstract class KeyEventCommand implements Callback {
 	public String getId() {
 		return commandId;
 	}
+
+	@NonNull
+	public KeyEventCategory getCategory() {
+		return KeyEventCategory.ACTIONS;
+	}
+
+	@NonNull
+	public abstract String toHumanString(@NonNull Context context);
 }
