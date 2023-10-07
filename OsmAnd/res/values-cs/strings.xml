@@ -5390,13 +5390,13 @@
     <string name="help_article_navigation_setup_route_navigation_name">Příprava trasy</string>
     <string name="wikipedia_and_travel_maps">Wikipedie a cestovní mapy</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Pěší navigace</string>
-    <string name="help_article_navigation_setup_gpx_navigation_name">Navigace podle stop</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigace podle stopy</string>
     <string name="help_article_navigation_routing_online_routing_name">Online navigace</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>
-    <string name="rendering_styles">skrýt varování o zastaralosti</string>
+    <string name="rendering_styles">Styly vykreslování</string>
     <string name="filter_tracks_count">Filtr: %d</string>
-    <string name="sort_country_name_ascending">Název země: A - Z</string>
+    <string name="sort_country_name_ascending">Název země: A – Z</string>
     <string name="app_mode_hang_gliding">Závěsné létání</string>
     <string name="help_article_plan_route_name">Plánování trasy</string>
     <string name="weather_online">Počasí online</string>
@@ -5422,7 +5422,7 @@
     <string name="help_article_map_raster_maps_name">Rastrové mapy (online / offline)</string>
     <string name="help_article_search_search_all_name">Vyhledat vše</string>
     <string name="help_article_personal_storage_name">Úložiště</string>
-    <string name="sort_country_name_descending">Název země: Z - A</string>
+    <string name="sort_country_name_descending">Název země: Z – A</string>
     <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>

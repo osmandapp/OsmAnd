@@ -3859,7 +3859,7 @@
     <string name="poi_nurse">Krankenpfleger/in</string>
     <string name="poi_mobile_money_agent">Mobiler Geldvermittler</string>
     <string name="poi_lifeguard_base">Rettungsschwimmerbasis</string>
-    <string name="poi_vaccination_covid19">Impfung: COVID19</string>
+    <string name="poi_vaccination_covid19">Impfung: COVID-19</string>
     <string name="poi_health_specialty_vaccination_yes">Impfung</string>
     <string name="poi_water_source_tube_well">Rammbrunnen</string>
     <string name="poi_water_source_lake">See</string>
@@ -4061,7 +4061,7 @@
     <string name="poi_heating_filter">Heizung</string>
     <string name="poi_fridge_filter">Kühlschrank</string>
     <string name="poi_wine_region">Weinanbaugebiet</string>
-    <string name="poi_service_fleurop_filter">Fleurop Service</string>
+    <string name="poi_service_fleurop_filter">Fleurop-Service</string>
     <string name="poi_sports_hall">Sporthalle</string>
     <string name="poi_reusable_packaging_offer_only">Wiederverwendbare Verpackungen anbietend: ausschließlich</string>
     <string name="poi_butcher_horse">Pferd</string>
@@ -4192,7 +4192,7 @@
     <string name="poi_faculty_communication">Kommunikationswissenschaften</string>
     <string name="poi_faculty_education">Bildungswissenschaften</string>
     <string name="poi_faculty_engineering">Ingenieurwissenschaften</string>
-    <string name="poi_faculty_geography">Geographie</string>
+    <string name="poi_faculty_geography">Geografie</string>
     <string name="poi_faculty_mathematics">Mathematik</string>
     <string name="poi_faculty_nursing">Pflegewissenschaften</string>
     <string name="poi_faculty_psychology">Psychologie</string>
@@ -4614,7 +4614,7 @@
     <string name="poi_health_specialty_endodontics_yes">Endodontie</string>
     <string name="poi_checkpoint_cycling">Fahrrad-Kontrollpunkt</string>
     <string name="poi_health_specialty_periodontics_yes">Parodontologie</string>
-    <string name="poi_health_specialty_covid19_yes">COVID19</string>
+    <string name="poi_health_specialty_covid19_yes">COVID-19</string>
     <string name="poi_health_specialty_vascular_surgery_yes">Gefäßchirurgie</string>
     <string name="poi_socket_typee_yes">Typ E</string>
     <string name="poi_health_specialty_massage_therapy_yes">Massagetherapie</string>

@@ -5531,4 +5531,11 @@
     <string name="filter_screen_title">تصفية</string>
     <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
     <string name="terrain_maps">خرائط التضاريس</string>
+    <string name="smart_folder_name_present">هكذا ملف ذكي موجود بالفعل</string>
+    <string name="smart_folder_saved">تم حفظ الملف الذكي</string>
+    <string name="add_smart_folder">أضف ملف ذكي</string>
+    <string name="empty_name">اسم فارغ</string>
+    <string name="edit_fiilter">تعديل الفلتر</string>
+    <string name="save_as_smart_folder">احفظ كملف ذكي</string>
+    <string name="delete_smart_folder_dialog_message">هذا سيحذف \"%1$s\" ملف ذكي.</string>
 </resources>
