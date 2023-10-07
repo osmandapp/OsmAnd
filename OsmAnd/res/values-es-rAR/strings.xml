@@ -5440,11 +5440,21 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Se ha añadido el widget de proporción del deslizamiento.
+    <string name="release_4_6">• Se ha añadido el widget \"Relación de planeo\".
+\n
+\n• Se añadieron filtros y carpetas inteligentes para las trazas
+\n
+\n• Se añadieron filas para los paneles de widget superior e inferior, con admisión a todos los widgets
 \n
 \n• Se ha añadido el widget de temperatura en ANT+
 \n
 \n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n
+\n• Se ha mejorado la gestión de archivos locales en el menú «Descargas»
+\n
+\n• Se ha añadido el widget «RAM disponible»
+\n
+\n• Se han corregido los problemas de transparencia en la barra de estado
 \n
 \n</string>
     <string name="shared_string_temperature">Temperatura</string>
@@ -5479,4 +5489,11 @@
     <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
     <string name="shared_string_show_icon">Mostrar icono</string>
+    <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
+    <string name="smart_folder_saved">Carpeta inteligente guardada</string>
+    <string name="add_smart_folder">Añadir carpeta inteligente</string>
+    <string name="empty_name">Nombre vacío</string>
+    <string name="edit_fiilter">Editar filtro</string>
+    <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
 </resources>
