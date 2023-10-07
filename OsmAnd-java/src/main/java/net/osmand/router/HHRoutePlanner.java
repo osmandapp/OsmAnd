@@ -1,11 +1,9 @@
 package net.osmand.router;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -14,14 +12,12 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeMap;
 
-
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.osm.edit.Entity;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -174,8 +170,8 @@ public class HHRoutePlanner {
 			c = DijkstraConfig.astar(1);
 //			c = DijkstraConfig.ch();
 			PRELOAD_SEGMENTS = false;
-			CALCULATE_GEOMETRY = false;
-			USE_LAST_MILE_ROUTING = false;
+			CALCULATE_GEOMETRY = true;
+			USE_LAST_MILE_ROUTING = true;
 			DEBUG_VERBOSE_LEVEL = 1;
 		}
 		System.out.println(c.toString(start, end));
@@ -323,7 +319,7 @@ public class HHRoutePlanner {
 				start == null ? null : start.getPoint(), end == null ? null : end.getPoint(), c, stats);
 	}
 	
-	protected NetworkDBPoint runDijkstraNetworkRouting(Collection<NetworkDBPoint> starts, Collection<NetworkDBPoint> ends,
+	protected NetworkDBPoint runDijkstraNetworkRouting(List<NetworkDBPoint> starts, List<NetworkDBPoint> ends,
 			LatLon startLatLon, LatLon endLatLon, DijkstraConfig c,
 			RoutingStats stats) throws SQLException {
 		Queue<NetworkDBPointCost> queue = new PriorityQueue<>(new Comparator<NetworkDBPointCost>() {
