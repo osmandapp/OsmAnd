@@ -314,8 +314,14 @@ public class HHRoutePlanner {
 	
 	protected NetworkDBPoint runDijkstraNetworkRouting(NetworkDBPoint start, NetworkDBPoint end, DijkstraConfig c,
 			RoutingStats stats) throws SQLException {
-		List<NetworkDBPoint> starts = start == null ? new ArrayList<>() : Collections.singletonList(start);
-		List<NetworkDBPoint> ends = end == null ? new ArrayList<>() : Collections.singletonList(end);
+		List<NetworkDBPoint> starts = new ArrayList<NetworkDBPoint>();
+		if (start != null) {
+			starts.add(start);
+		}
+		List<NetworkDBPoint> ends = new ArrayList<NetworkDBPoint>();
+		if (end != null) {
+			ends.add(end);
+		}
 		return runDijkstraNetworkRouting(starts, ends, start == null ? null : start.getPoint(),
 				end == null ? null : end.getPoint(), c, stats);
 	}
