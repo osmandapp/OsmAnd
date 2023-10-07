@@ -31,11 +31,11 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean ASSERT_CHECKS = true;
-	private static final boolean TRACE_ROUTING = false;
+	static boolean ASSERT_CHECKS = true;
+	static boolean TRACE_ROUTING = false;
 	private static final float INITIAL_PENALTY_FOR_REVERSE_DIRECTION = 500;
-	private static int TEST_ID = 194349150;
-	private static boolean TEST_SPECIFIC = false;
+	static int TEST_ID = 194349150;
+	static boolean TEST_SPECIFIC = false;
 	public static boolean PRECISE_DIST_MEASUREMENT = false;
 
 
@@ -85,20 +85,28 @@ public class BinaryRoutePlanner {
 		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
 
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		TLongObjectMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
-		TLongObjectMap<RouteSegment> visitedOppositeSegments = boundaries == null ? new TLongObjectHashMap<RouteSegment>() : boundaries;
+		TLongObjectMap<RouteSegment> visitedDirectSegments = start == null && boundaries != null ? boundaries
+				: new TLongObjectHashMap<RouteSegment>();
+		TLongObjectMap<RouteSegment> visitedOppositeSegments = end == null && boundaries != null ? boundaries
+				: new TLongObjectHashMap<RouteSegment>();
 
 		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
 				visitedDirectSegments, visitedOppositeSegments);
 
-
-
-		FinalRouteSegment finalSegment = null;
-		boolean dijkstraMode = end == null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
 		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
-		boolean forwardSearch = !onlyForward || dijkstraMode; // special case for Dijkstra
+		boolean forwardSearch = !onlyForward; 
+
+		FinalRouteSegment finalSegment = null;
+		int dijkstraMode = end == null ? 1 : (start == null ? -1 : 0);
+		if (dijkstraMode == 1) {
+			start.others = null;
+			forwardSearch = true;
+		} else if (dijkstraMode == -1) {
+			end.others = null;
+			forwardSearch = false;
+		}
 		PriorityQueue<RouteSegment> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
@@ -119,7 +127,7 @@ public class BinaryRoutePlanner {
 					println(" >>FINAL segment: " + segment);
 				}
 				
-				if (dijkstraMode) {
+				if (dijkstraMode != 0) {
 					if (finalSegment == null) {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
@@ -596,6 +604,9 @@ public class BinaryRoutePlanner {
 	}
 
 	private RouteSegment getParentDiffId(RouteSegment s) {
+		if (s == null) {
+			return null;
+		}
 		while (s.getParentRoute() != null && s.getParentRoute().getRoad().getId() == s.getRoad().getId()) {
 			s = s.getParentRoute();
 		}
@@ -619,8 +630,9 @@ public class BinaryRoutePlanner {
 				frs.setParentRoute(currentSegment.getParentRoute());
 				frs.reverseWaySearch = reverseWaySearch;
 				// parent is correct distanceFromStart
-				frs.distanceFromStart = (currentSegment.parentRoute == null ? currentSegment.distanceFromStart : currentSegment.parentRoute.distanceFromStart) + 
-						opposite.distanceFromStart;
+				float opp = opposite == null ? 0 : opposite.distanceFromStart;
+				frs.distanceFromStart = opp + (currentSegment.parentRoute == null ? currentSegment.distanceFromStart
+						: currentSegment.parentRoute.distanceFromStart);
 				frs.distanceToEnd = 0;
 				frs.opposite = opposite;
 				graphSegments.add(frs);
@@ -1095,6 +1107,22 @@ public class BinaryRoutePlanner {
 			return segStart;
 		}
 		
+		public int getStartPointX() {
+			return road.getPoint31XTile(segStart);
+		}
+		
+		public int getStartPointY() {
+			return road.getPoint31YTile(segStart);
+		}
+		
+		public int getEndPointY() {
+			return road.getPoint31YTile(segEnd);
+		}
+		
+		public int getEndPointX() {
+			return road.getPoint31XTile(segEnd);
+		}
+		
 		public short getSegmentEnd() {
 			return segEnd;
 		}
@@ -1157,6 +1185,8 @@ public class BinaryRoutePlanner {
 				}
 			};
 		}
+
+		
 
 		
 	}
