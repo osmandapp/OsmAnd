@@ -465,7 +465,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
+	public List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
