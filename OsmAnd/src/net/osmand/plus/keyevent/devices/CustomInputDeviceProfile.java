@@ -1,6 +1,7 @@
 package net.osmand.plus.keyevent.devices;
 
 import android.content.Context;
+import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 
@@ -13,16 +14,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class CustomInputDeviceProfile extends InputDeviceProfile {
 
 	private final String customId;
 	private String customName;
 
-	private final Map<Integer, String> mappedCommandIds = new HashMap<>();
+	/**
+	 * Cached mapped command ids.
+	 * Uses to store commands in preferences.
+	 * Uses ArrayMap collection to save original order of elements.
+	 */
+	private final ArrayMap<Integer, String> mappedCommandIds = new ArrayMap<>();
 
 	public CustomInputDeviceProfile(@NonNull String customId, @NonNull String customName,
 	                                @NonNull InputDeviceProfile baseDevice) {
@@ -33,15 +36,16 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 
 	public CustomInputDeviceProfile(@NonNull JSONObject object) throws JSONException {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<Integer, String>>() {}.getType();
+		Type type = new TypeToken<ArrayMap<Integer, String>>() {}.getType();
 		customId = object.getString("id");
 		customName = object.getString("name");
 		mappedCommandIds.putAll(gson.fromJson(object.getString("commands"), type));
 	}
 
-	private void initCommandIds(@NonNull Map<Integer, KeyEventCommand> mappedCommands) {
-		for (Integer keyCode : mappedCommands.keySet()) {
-			KeyEventCommand command = mappedCommands.get(keyCode);
+	private void initCommandIds(@NonNull ArrayMap<Integer, KeyEventCommand> mappedCommands) {
+		for (int i = 0; i < mappedCommands.size(); i++) {
+			Integer keyCode = mappedCommands.keyAt(i);
+			KeyEventCommand command = mappedCommands.valueAt(i);
 			if (command != null) {
 				mappedCommandIds.put(keyCode, command.getId());
 			}
@@ -50,8 +54,10 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 
 	@Override
 	protected void collectCommands() {
-		for (Entry<Integer, String> entry : mappedCommandIds.entrySet()) {
-			bindCommand(entry.getKey(), entry.getValue());
+		for (int i = 0; i < mappedCommandIds.size(); i++) {
+			Integer keyCode = mappedCommandIds.keyAt(i);
+			String commandId = mappedCommandIds.valueAt(i);
+			bindCommand(keyCode, commandId);
 		}
 	}
 
@@ -68,7 +74,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	@NonNull
 	public JSONObject toJson() throws JSONException {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<Integer, String>>() {}.getType();
+		Type type = new TypeToken<ArrayMap<Integer, String>>() {}.getType();
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("id", customId);
 		jsonObject.put("name", customName);

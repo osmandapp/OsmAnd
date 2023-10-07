@@ -1,8 +1,9 @@
-package net.osmand.plus.keyevent.ui.devicetype;
+package net.osmand.plus.keyevent.ui.keybindings;
 
 enum ScreenItemType {
 	CARD_DIVIDER,
-	DEVICE_ITEM,
+	HEADER,
+	ACTION_ITEM,
 	CARD_BOTTOM_SHADOW,
 	SPACE,
 	UNKNOWN

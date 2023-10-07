@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.ui.devicetype.SelectInputDeviceFragment;
+import net.osmand.plus.keyevent.ui.keybindings.KeyBindingsListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -137,6 +138,13 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 			if (activity != null) {
 				FragmentManager fm = activity.getSupportFragmentManager();
 				SelectInputDeviceFragment.showInstance(fm, getSelectedAppMode());
+			}
+			return true;
+		} else if (PREF_ID_BINDING.equals(key)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				FragmentManager fm = activity.getSupportFragmentManager();
+				KeyBindingsListFragment.showInstance(fm, getSelectedAppMode());
 			}
 			return true;
 		}

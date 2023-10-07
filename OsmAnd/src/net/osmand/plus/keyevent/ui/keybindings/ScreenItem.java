@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.devicetype;
+package net.osmand.plus.keyevent.ui.keybindings;
 
 class ScreenItem {
 

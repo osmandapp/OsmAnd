@@ -1,6 +1,7 @@
 package net.osmand.plus.keyevent.devices;
 
 import android.content.Context;
+import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ public abstract class InputDeviceProfile {
 	protected OsmandSettings settings;
 	private KeyEventCommandsFactory commandsFactory;
 
-	protected final Map<Integer, KeyEventCommand> mappedCommands = new HashMap<>();
+	protected final ArrayMap<Integer, KeyEventCommand> mappedCommands = new ArrayMap<>();
 
 	public void initialize(@NonNull OsmandApplication app,
 	                       @NonNull KeyEventCommandsFactory commandsFactory) {
@@ -35,7 +36,7 @@ public abstract class InputDeviceProfile {
 	 */
 	protected abstract void collectCommands();
 
-	public Map<Integer, KeyEventCommand> getMappedCommands() {
+	public ArrayMap<Integer, KeyEventCommand> getMappedCommands() {
 		return mappedCommands;
 	}
 
