@@ -18,8 +18,8 @@ public class WunderLINQDeviceProfile extends InputDeviceProfile {
 
 	@Override
 	protected void collectCommands() {
-		bindCommand(KeyEvent.KEYCODE_DPAD_DOWN, MapZoomCommand.ZOOM_OUT_ID);
 		bindCommand(KeyEvent.KEYCODE_DPAD_UP, MapZoomCommand.ZOOM_IN_ID);
+		bindCommand(KeyEvent.KEYCODE_DPAD_DOWN, MapZoomCommand.ZOOM_OUT_ID);
 		bindCommand(KeyEvent.KEYCODE_ESCAPE, OpenWunderLINQDatagridCommand.ID);
 	}
 

@@ -28,10 +28,13 @@ public class KeyboardDeviceProfile extends InputDeviceProfile {
 	 */
 	@Override
 	protected void collectCommands() {
-		// Default map zoom keycodes
-		bindCommand(KeyEvent.KEYCODE_PLUS, MapZoomCommand.ZOOM_IN_ID);
-		bindCommand(KeyEvent.KEYCODE_EQUALS, MapZoomCommand.ZOOM_IN_ID);
-		bindCommand(KeyEvent.KEYCODE_MINUS, MapZoomCommand.ZOOM_OUT_ID);
+		// Default letter keycodes
+		bindCommand(KeyEvent.KEYCODE_C, BackToLocationCommand.ID);
+		bindCommand(KeyEvent.KEYCODE_D, SwitchCompassCommand.ID);
+		bindCommand(KeyEvent.KEYCODE_N, OpenNavigationDialogCommand.ID);
+		bindCommand(KeyEvent.KEYCODE_S, OpenQuickSearchDialogCommand.ID);
+		bindCommand(KeyEvent.KEYCODE_P, SwitchAppModeCommand.SWITCH_TO_NEXT_ID);
+		bindCommand(KeyEvent.KEYCODE_O, SwitchAppModeCommand.SWITCH_TO_PREVIOUS_ID);
 
 		// Default map scroll keycodes
 		bindCommand(KeyEvent.KEYCODE_DPAD_UP, MapScrollCommand.SCROLL_UP_ID);
@@ -39,13 +42,10 @@ public class KeyboardDeviceProfile extends InputDeviceProfile {
 		bindCommand(KeyEvent.KEYCODE_DPAD_LEFT, MapScrollCommand.SCROLL_LEFT_ID);
 		bindCommand(KeyEvent.KEYCODE_DPAD_RIGHT, MapScrollCommand.SCROLL_RIGHT_ID);
 
-		// Default letter keycodes
-		bindCommand(KeyEvent.KEYCODE_C, BackToLocationCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_D, SwitchCompassCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_N, OpenNavigationDialogCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_O, SwitchAppModeCommand.SWITCH_TO_PREVIOUS_ID);
-		bindCommand(KeyEvent.KEYCODE_P, SwitchAppModeCommand.SWITCH_TO_NEXT_ID);
-		bindCommand(KeyEvent.KEYCODE_S, OpenQuickSearchDialogCommand.ID);
+		// Default map zoom keycodes
+		bindCommand(KeyEvent.KEYCODE_PLUS, MapZoomCommand.ZOOM_IN_ID);
+		bindCommand(KeyEvent.KEYCODE_EQUALS, MapZoomCommand.ZOOM_IN_ID);
+		bindCommand(KeyEvent.KEYCODE_MINUS, MapZoomCommand.ZOOM_OUT_ID);
 
 		// Other default keycodes
 		bindCommand(KeyEvent.KEYCODE_DPAD_CENTER, EmitNavigationHintCommand.ID);
