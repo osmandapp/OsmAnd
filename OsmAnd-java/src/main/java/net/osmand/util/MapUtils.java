@@ -71,7 +71,7 @@ public class MapUtils {
 		// System.out.println(String.format("Bits: %d %s (%d)", Integer.toBinaryString(precisionNumber).length(), Integer.toBinaryString(precisionNumber), precisionNumber));
 		return precisionNumber;
 	}
-
+	
 	public static int[] calculateFinalXYFromBaseAndPrecisionXY(int bazeZoom, int finalZoom,
 			int precisionXY, int xBase, int yBase, boolean ignoreNotEnoughPrecision) {
 		// System.out.println(String.format("Base x, y at zoom %d: %d %d", zoomToStart, xBaseApproximation, yBaseApproximation));
@@ -342,6 +342,14 @@ public class MapUtils {
 	public static double getTileDistanceWidth(double lat, float zoom) {
 		LatLon ll = new LatLon(lat, MapUtils.getLongitudeFromTile(zoom, 0));
 		LatLon ll2 = new LatLon(lat, MapUtils.getLongitudeFromTile(zoom, 1));
+		return getDistance(ll, ll2);
+	}
+
+	public static double getTileDistanceHeight(double lat, float zoom) {
+		// equals to getTileDistanceWidth (so no difference)
+		double y = MapUtils.getTileNumberY(zoom, lat);
+		LatLon ll = new LatLon(MapUtils.getLatitudeFromTile(zoom, Math.floor(y)), 0);
+		LatLon ll2 = new LatLon(MapUtils.getLatitudeFromTile(zoom, Math.floor(y) + 1), 0);
 		return getDistance(ll, ll2);
 	}
 

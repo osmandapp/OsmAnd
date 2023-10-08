@@ -795,6 +795,8 @@ public class HHRoutingPreparationDB {
 		}
 
 		public void clearRouting() {
+			rtExclude = false;
+			
 			rtDepth = -1;
 			rtRouteToPoint = null;
 			rtDistanceFromStart = 0;
