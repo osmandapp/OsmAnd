@@ -167,7 +167,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		int itemId = item.getItemId();
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
-			if (activity != null) {
+			if (activity != null && rootFolder != null) {
 				selectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
 				selectionHelper.clearSelectedItems();
 				selectionHelper.setOriginalSelectedItems(Collections.emptyList());

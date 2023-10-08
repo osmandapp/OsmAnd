@@ -309,8 +309,6 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onResume() {
 		super.onResume();
 		setupToolbar(requireView());
-//		updateNightMode();
-//		updateStatusBarColor(requireDialog().getWindow());
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();

@@ -187,6 +187,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 			public void afterTextChanged(Editable query) {
 				filterTracks(query.toString());
 				AndroidUiHelper.updateVisibility(clearSearchQuery, query.length() > 0);
+				adapter.notifyItemChanged(0);
 			}
 		});
 		clearSearchQuery.setOnClickListener((v) -> resetSearchQuery());

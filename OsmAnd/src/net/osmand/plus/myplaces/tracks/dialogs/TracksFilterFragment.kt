@@ -9,10 +9,12 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import net.osmand.CallbackWithObject
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
@@ -57,6 +59,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
 	private lateinit var trackFiltersContainer: TackFiltersContainer
+	private lateinit var appBar: AppBarLayout
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -66,7 +69,11 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 		val themeId =
 			if (nightMode) R.style.OsmandDarkTheme else R.style.OsmandLightTheme_LightStatusBar
-		val dialog = Dialog(requireContext(), themeId)
+		val dialog = object : Dialog(requireContext(), themeId) {
+			override fun onBackPressed() {
+				closeWithoutApply()
+			}
+		}
 		val window = dialog.window
 		if (window != null) {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
@@ -126,6 +133,13 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	fun setupToolbar(view: View) {
+		appBar = view.findViewById(R.id.app_bar_layout)
+		view.findViewById<Toolbar>(R.id.toolbar).apply {
+			navigationIcon = app.uiUtilities.getThemedIcon(R.drawable.ic_arrow_back)
+			setNavigationOnClickListener {
+				closeWithoutApply()
+			}
+		}
 		val saveFilterBtn = view.findViewById<ImageView>(R.id.save_filters_btn)
 		saveFilterBtn.setOnClickListener {
 			if (smartFolder != null) {
@@ -143,18 +157,36 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		val closeButton = view.findViewById<View>(R.id.close_button)
 		if (closeButton != null) {
 			closeButton.setOnClickListener {
-				adapter?.let {
-					it.updateItems()
-					it.notifyItemRangeChanged(0, it.itemCount)
-				}
-				dismiss()
-				filter.resetFilteredItems()
-				trackFiltersContainer.onFilterDialogClosed()
+				closeWithoutApply()
 			}
 			if (closeButton is ImageView) {
 				UiUtilities.rotateImageByLayoutDirection(closeButton)
 			}
 		}
+	}
+
+	private fun closeWithoutApply() {
+		if (filter.appliedFiltersCount > 0) {
+			val fragmentManager = fragmentManager
+			fragmentManager?.let {
+				LeaveFiltersConfirmBottomSheet.showInstance(it, this)
+			}
+		} else {
+			dismiss()
+		}
+	}
+
+	fun closeWithoutApplyConfirmed() {
+		filter.resetFilteredItems()
+		if (smartFolder == null) {
+			filter.resetCurrentFilters()
+		}
+		adapter?.let {
+			it.updateItems()
+			it.notifyItemRangeChanged(0, it.itemCount)
+		}
+		dismiss()
+		trackFiltersContainer.onFilterDialogClosed()
 	}
 
 	private fun setupList(view: View) {
@@ -183,12 +215,16 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			filteredItemsCount = filter.filteredTrackItems!!.size
 		}
 		showButton?.setTitle(
-			app.getString(R.string.shared_string_show) +
+			app.getString(R.string.shared_string_show) + " " +
 					String.format(app.getString(R.string.number_in_breckets), filteredItemsCount))
 	}
 
 	override fun onResume() {
 		super.onResume()
+		for (filter in filter.currentFilters) {
+			filter.initFilter()
+		}
+		adapter?.notifyDataSetChanged()
 		updateNightMode()
 		updateStatusBarColor(requireDialog().window)
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
