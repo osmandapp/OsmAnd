@@ -753,7 +753,7 @@ public class HHRoutingPreparationDB {
 			}
 		}
 		
-		public void setCostDetailedParentRt(boolean reverse, FinalRouteSegment r) {
+		public void setDetailedParentRt(boolean reverse, FinalRouteSegment r) {
 			if (reverse) {
 				rtDetailedRouteRev = r;
 			} else {

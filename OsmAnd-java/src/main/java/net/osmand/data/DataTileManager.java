@@ -54,7 +54,7 @@ public class DataTileManager<T> {
 			}
 			total += l.size();
 		}
-		System.out.printf("%s tiles stores %d in %d tiles. Tile size min %d, max %d, avg %.1f  ", name, total, objects.size(), min, max, 
+		System.out.printf("%s tiles stores %d in %d tiles. Tile size min %d, max %d, avg %.2f.\n ", name, total, objects.size(), min, max, 
 				total / (objects.size() + 0.1));
 	}
 
@@ -124,16 +124,19 @@ public class DataTileManager<T> {
 			return Collections.emptyList();
 		}
 		double tileDist = radius / MapUtils.getTileDistanceWidth(latitude, zoom);
-		int stTileX = (int) MapUtils.getTileNumberX(zoom, longitude);
-		int stTileY = (int) MapUtils.getTileNumberY(zoom, latitude);
+		int tileDistInt = (int) Math.ceil(tileDist);
+		double px = MapUtils.getTileNumberX(zoom, longitude);
+		double py = MapUtils.getTileNumberY(zoom, latitude);
+		int stTileX = (int) px;
+		int stTileY = (int) py;
 		Map<Long, Double> tiles = new HashMap<>();
-		for(int x = 0; x < tileDist; x++) {
-			for(int y = 0; y < tileDist; y++) {
-				double dist = Math.sqrt(x * x + y * y);
-				if(dist <= tileDist) {
-					int xtile = stTileX +x;
-					int ytile = stTileY + y;
-					tiles.put(evTile(xtile, ytile), dist);
+		for (int xTile = -tileDistInt; xTile <= tileDistInt; xTile++) {
+			for (int yTile = -tileDistInt; yTile <= tileDistInt; yTile++) {
+				double dx = xTile + 0.5 - (px - stTileX);
+				double dy = yTile + 0.5 - (py - stTileY);
+				double dist = Math.sqrt(dx * dx + dy * dy);
+				if (dist <= tileDist) {
+					tiles.put(evTile(stTileX + xTile, stTileY + yTile), dist);
 				}
 			}
 		}
