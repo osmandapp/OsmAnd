@@ -127,7 +127,7 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getActivityBgColorId(nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

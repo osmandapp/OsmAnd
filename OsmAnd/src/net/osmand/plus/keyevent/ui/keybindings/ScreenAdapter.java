@@ -38,13 +38,15 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private List<ScreenItem> screenItems = new ArrayList<>();
 	private boolean editable;
 	private final boolean usedOnMap;
+	private final ScreenController controller;
 
 	public ScreenAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
-	                     boolean usedOnMap) {
+	                     @NonNull ScreenController controller, boolean usedOnMap) {
 		setHasStableIds(true);
 		this.app = app;
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
+		this.controller = controller;
 	}
 
 	@NonNull
@@ -89,7 +91,7 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				// todo open edit keybinding screen
+				controller.askEditKeyAction(actionItem);
 			}: null);
 			h.actionName.setText(actionItem.getCommand().toHumanString(app));
 			h.keyName.setText(actionItem.getKeySymbol());

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
@@ -69,6 +70,11 @@ public class InputDeviceHelper {
 
 	public void removeListener(@NonNull InputDeviceHelperListener listener) {
 		listeners.remove(listener);
+	}
+
+	@Nullable
+	public KeyEventCommand getOrCreateCommand(@NonNull String commandId) {
+		return commandsFactory.getOrCreateCommand(commandId);
 	}
 
 	@NonNull

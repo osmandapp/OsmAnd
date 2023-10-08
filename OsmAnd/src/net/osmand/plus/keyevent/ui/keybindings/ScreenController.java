@@ -4,13 +4,15 @@ import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventCategory;
-import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.ui.EditKeyActionFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -24,13 +26,13 @@ class ScreenController {
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final InputDeviceHelper deviceHelper;
-	private final KeySymbolMapper keySymbolMapper;
+	private FragmentActivity activity;
 
-	public ScreenController(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+	public ScreenController(@NonNull OsmandApplication app,
+	                        @NonNull ApplicationMode appMode) {
 		this.app = app;
 		this.appMode = appMode;
 		this.deviceHelper = app.getInputDeviceHelper();
-		this.keySymbolMapper = KeySymbolMapper.load();
 	}
 
 	@NonNull
@@ -67,7 +69,6 @@ class ScreenController {
 		for (int i = 0; i < mappedCommands.size(); i++) {
 			Integer keyCode = mappedCommands.keyAt(i);
 			KeyEventCommand command = mappedCommands.valueAt(i);
-			String keySymbol = keySymbolMapper.getKeySymbol(keyCode);
 			if (command != null) {
 				KeyEventCategory category = command.getCategory();
 				List<ActionItem> actions = categorizedActions.get(category);
@@ -75,14 +76,23 @@ class ScreenController {
 					actions = new ArrayList<>();
 					categorizedActions.put(category, actions);
 				}
-				actions.add(new ActionItem(command, keySymbol));
+				actions.add(new ActionItem(keyCode, command));
 			}
 		}
 		return categorizedActions;
 	}
 
+	public void setActivity(FragmentActivity activity) {
+		this.activity = activity;
+	}
+
 	public boolean isEditableDeviceType() {
 		InputDeviceProfile device = deviceHelper.getSelectedDevice(appMode);
 		return device != null && deviceHelper.isCustomDevice(device);
+	}
+
+	public void askEditKeyAction(ActionItem action) {
+		FragmentManager fm = activity.getSupportFragmentManager();
+		EditKeyActionFragment.showInstance(fm, appMode, action);
 	}
 }

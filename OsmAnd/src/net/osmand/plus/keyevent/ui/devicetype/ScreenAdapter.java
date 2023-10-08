@@ -70,7 +70,7 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 			case CARD_BOTTOM_SHADOW:
 				return new CardBottomShadowViewHolder(inflate(R.layout.card_bottom_divider));
 			case SPACE:
-				return new SpaceViewHolder(new View(context), getDimen(R.dimen.content_padding));
+				return new SpaceViewHolder(new View(context), getDimen(R.dimen.fab_margin_bottom_big));
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}

@@ -57,7 +57,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new ScreenAdapter(app, appMode, isUsedOnMap());
+		adapter = new ScreenAdapter(app, appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -101,6 +101,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
+			controller.setActivity(mapActivity);
 		}
 		deviceHelper.addListener(this);
 	}
@@ -112,6 +113,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+		controller.setActivity(null);
 		deviceHelper.removeListener(this);
 	}
 
@@ -123,7 +125,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getActivityBgColorId(nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

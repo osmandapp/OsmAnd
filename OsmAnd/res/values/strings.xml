@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_button">Button</string>
+    <string name="shared_string_action">Action</string>
+    <string name="change_key_binding">Change key binding</string>
     <string name="key_event_category_map_interactions">Map interactions</string>
     <string name="key_event_category_actions">Actions</string>
     <string name="key_event_action_take_media_note">Take media note</string>

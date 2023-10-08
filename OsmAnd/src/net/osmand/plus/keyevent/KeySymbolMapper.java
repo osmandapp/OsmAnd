@@ -7,9 +7,18 @@ import androidx.annotation.NonNull;
 
 public class KeySymbolMapper {
 
-	private final SparseArray<String> keySymbolMap = new SparseArray<>();
+	private static final SparseArray<String> keySymbolMap = new SparseArray<>();
 
-	private KeySymbolMapper() {
+	@NonNull
+	public static String getKeySymbol(int keyCode) {
+		if (keySymbolMap.size() == 0) {
+			load();
+		}
+		String symbol = keySymbolMap.get(keyCode);
+		return symbol != null ? symbol : String.valueOf((char) keyCode);
+	}
+
+	public static void load() {
 		// Letter key codes
 		keySymbolMap.put(KeyEvent.KEYCODE_A, "A");
 		keySymbolMap.put(KeyEvent.KEYCODE_B, "B");
@@ -101,15 +110,5 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_NOTIFICATION, "Notification");
 		keySymbolMap.put(KeyEvent.KEYCODE_SOFT_SLEEP, "Sleep");
 		keySymbolMap.put(KeyEvent.KEYCODE_WAKEUP, "Wakeup");
-	}
-
-	@NonNull
-	public String getKeySymbol(int keyCode) {
-		String symbol = keySymbolMap.get(keyCode);
-		return symbol != null ? symbol : String.valueOf((char) keyCode);
-	}
-
-	public static KeySymbolMapper load() {
-		return new KeySymbolMapper();
 	}
 }
