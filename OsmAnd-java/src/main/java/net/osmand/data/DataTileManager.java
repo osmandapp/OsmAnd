@@ -2,7 +2,10 @@ package net.osmand.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -39,10 +42,25 @@ public class DataTileManager<T> {
 		}
 		return x;
 	}
+	
+	public void printStatsDistribution(String name) {
+		int min = -1, max = -1, total = 0;
+		for (List<T> l : objects.valueCollection()) {
+			if (min == -1) {
+				max = min = l.size();
+			} else {
+				min = Math.min(min, l.size());
+				max = Math.max(max, l.size());
+			}
+			total += l.size();
+		}
+		System.out.printf("%s tiles stores %d in %d tiles. Tile size min %d, max %d, avg %.1f  ", name, total, objects.size(), min, max, 
+				total / (objects.size() + 0.1));
+	}
 
-	private void putObjects(int tx, int ty, List<T> r) {
-		if (objects.containsKey(evTile(tx, ty))) {
-			r.addAll(objects.get(evTile(tx, ty)));
+	private void putObjects(long t, List<T> r) {
+		if (objects.containsKey(t)) {
+			r.addAll(objects.get(t));
 		}
 	}
 
@@ -74,7 +92,7 @@ public class DataTileManager<T> {
 		}
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
-				putObjects(i, j, result);
+				putObjects(evTile(i, j), result);
 			}
 		}
 		return result;
@@ -92,64 +110,74 @@ public class DataTileManager<T> {
 		int tileYDown = (bottomY31 >> (31 - zoom)) + 1;
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
-				putObjects(i, j, result);
+				putObjects(evTile(i, j), result);
 			}
 		}
 		return result;
 	}
 
 	/**
-	 * Depth of the neighbor tile to visit
-	 * returns not exactly sorted list,
-	 * however the first objects are from closer tile than last
+	 * returns not exactly sorted list (but sorted by tiles)
 	 */
-	public List<T> getClosestObjects(double latitude, double longitude, int defaultStep) {
+	public List<T> getClosestObjects(double latitude, double longitude, double radius) {
 		if (isEmpty()) {
 			return Collections.emptyList();
 		}
-		int dp = 0;
-		List<T> l = null;
-		while (l == null || l.isEmpty()) {
-			l = getClosestObjects(latitude, longitude, dp, dp + defaultStep);
-			dp += defaultStep;
+		double tileDist = radius / MapUtils.getTileDistanceWidth(latitude, zoom);
+		int stTileX = (int) MapUtils.getTileNumberX(zoom, longitude);
+		int stTileY = (int) MapUtils.getTileNumberY(zoom, latitude);
+		Map<Long, Double> tiles = new HashMap<>();
+		for(int x = 0; x < tileDist; x++) {
+			for(int y = 0; y < tileDist; y++) {
+				double dist = Math.sqrt(x * x + y * y);
+				if(dist <= tileDist) {
+					int xtile = stTileX +x;
+					int ytile = stTileY + y;
+					tiles.put(evTile(xtile, ytile), dist);
+				}
+			}
 		}
-		return l;
+		List<Long> keys = new ArrayList<>(tiles.keySet());
+		Collections.sort(keys, new Comparator<Long>() {
+			@Override
+			public int compare(Long o1, Long o2) {
+				return Double.compare(tiles.get(o1), tiles.get(o2));
+			}
+		});
+		List<T> result = new ArrayList<>();
+		for (Long key : keys) {
+			putObjects(key, result);
+		}
+		return result;
 	}
 
-	public List<T> getClosestObjects(double latitude, double longitude) {
-		return getClosestObjects(latitude, longitude, 3);
-	}
-
-	public List<T> getClosestObjects(double latitude, double longitude, int startDepth, int depth) {
+	protected List<T> getClosestObjectsBySpiral(double latitude, double longitude, int startDepth, int maxDepth) {
+		List<T> result = new ArrayList<>();
 		int tileX = (int) MapUtils.getTileNumberX(zoom, longitude);
 		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
-		List<T> result = new ArrayList<>();
-
 		if (startDepth <= 0) {
-			putObjects(tileX, tileY, result);
+			putObjects(evTile(tileX, tileY), result);
 			startDepth = 1;
 		}
 
-		// that's very difficult way visiting node : 
-		// similar to visit by spiral
-		// however the simplest way could be to visit row by row & after sort tiles by distance (that's less efficient) 
+		// that's very difficult way visiting node : similar to visit by spiral
+		// however the simplest way could be to visit row by row & after sort tiles by
+		// distance (that's less efficient)
 
-		// go through circle
-		for (int i = startDepth; i <= depth; i++) {
-
-			// goes 
-			for (int j = 0; j <= i; j++) {
+		// go through by different depth
+		for (int depth = startDepth; depth <= maxDepth; depth++) {
+			for (int j = 0; j <= depth; j++) {
 				// left & right
 				int dx = j == 0 ? 0 : -1;
-				for (; dx < 1 || (j < i && dx == 1); dx += 2) {
+				for (; dx < 1 || (j < depth && dx == 1); dx += 2) {
 					// north
-					putObjects(tileX + dx * j, tileY + i, result);
+					putObjects(evTile(tileX + dx * j, tileY + depth), result);
 					// east
-					putObjects(tileX + i, tileY - dx * j, result);
+					putObjects(evTile(tileX + depth, tileY - dx * j), result);
 					// south
-					putObjects(tileX - dx * j, tileY - i, result);
+					putObjects(evTile(tileX - dx * j, tileY - depth), result);
 					// west
-					putObjects(tileX - i, tileY + dx * j, result);
+					putObjects(evTile(tileX - depth, tileY + dx * j), result);
 				}
 			}
 		}
@@ -206,6 +234,5 @@ public class DataTileManager<T> {
 	public void clear() {
 		objects.clear();
 	}
-
 
 }
