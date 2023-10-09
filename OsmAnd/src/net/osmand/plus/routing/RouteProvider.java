@@ -27,6 +27,8 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -136,7 +138,8 @@ public class RouteProvider {
 					} else {
 						File dir = FileUtils.getExistingDir(params.ctx, HH_ROUTING_DIR);
 						File file = new File(dir, "Maps_" + params.mode.getRoutingProfile() + HH_FILE_EXT);
-						if (file.exists()) {
+						OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+						if (plugin != null && plugin.USE_HH_ROUTING.get() && file.exists()) {
 							res = findHHRoute(file, params, calcGPXRoute);
 						} else {
 							MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);

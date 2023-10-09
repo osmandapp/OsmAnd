@@ -54,6 +54,13 @@
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_hh_routing"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/special_routing_type" />
+
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"
