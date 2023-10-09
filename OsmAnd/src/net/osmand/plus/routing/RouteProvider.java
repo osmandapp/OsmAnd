@@ -774,8 +774,10 @@ public class RouteProvider {
 		try {
 			long start = System.currentTimeMillis();
 			if (log.isInfoEnabled()) {
-				log.info("Start finding findHHRoute from " + params.start + " to " + params.end +
-						" using " + params.mode.getRouteService().getName());
+				String message = "Start finding findHHRoute from " + params.start + " to " + params.end +
+						" using " + params.mode.getRouteService().getName();
+				log.info(message);
+				params.ctx.showToastMessage(message);
 			}
 
 			Class.forName("org.sqlite.JDBC");
@@ -790,7 +792,9 @@ public class RouteProvider {
 					params.start.getLongitude()), params.end, DijkstraConfig.astar(1));
 
 			if (log.isInfoEnabled()) {
-				log.info("findHHRoute time " + (System.currentTimeMillis() - start));
+				String message = "findHHRoute time " + (System.currentTimeMillis() - start);
+				log.info(message);
+				params.ctx.showToastMessage(message);
 			}
 
 			return new RouteCalculationResult(route.detailed, params.start, params.end,
