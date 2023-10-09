@@ -33,19 +33,9 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.MapUtils;
 
 public class HHRoutePlanner {
-	static String ROUTING_PROFILE = "car";
 	static int DEBUG_VERBOSE_LEVEL = 0;
+	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	
-	static boolean USE_LAST_MILE_ROUTING = true;
-	static boolean CALCULATE_GEOMETRY = true;
-	static boolean PRELOAD_SEGMENTS = false;
-	static int ALTERNATIVE_SELECTION = -1;
-	
-	// TODO alternative could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
-	static double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
-	static double ALT_EXCLUDE_RAD_MULT_IN = 2; // skip some points to speed up calculation
-	static double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
-
 	// TODO encapsulate HHRoutingPreparationDB, RoutingContext -> HHRoutingContext
 	private HHRoutingPreparationDB networkDB;
 	private RoutingContext ctx;
@@ -60,9 +50,20 @@ public class HHRoutePlanner {
 		networkDB.close();
 	}
 	
-	public static class DijkstraConfig {
+	public static class HHRoutingConfig {
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
+		
+		boolean ROUTE_LAST_MILE = false;
+		boolean ROUTE_ALL_SEGMENTS = false;
+		boolean PRELOAD_SEGMENTS = false;
+		
+		boolean CALC_ALTERNATIVES = false;
+		// TODO alternative could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
+		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
+		double ALT_EXCLUDE_RAD_MULT_IN = 2; // skip some points to speed up calculation
+		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
+
 		
 		double MAX_COST;
 		int MAX_DEPTH = -1; // max depth to go to
@@ -76,22 +77,22 @@ public class HHRoutePlanner {
 		int MIDPOINT_MAX_DEPTH = 20 + MIDPOINT_ERROR;
 		
 		
-		public static DijkstraConfig dijkstra(int direction) {
-			DijkstraConfig df = new DijkstraConfig();
+		public static HHRoutingConfig dijkstra(int direction) {
+			HHRoutingConfig df = new HHRoutingConfig();
 			df.HEURISTIC_COEFFICIENT = 0;
 			df.DIJKSTRA_DIRECTION = direction;
 			return df;
 		}
 		
-		public static DijkstraConfig astar(int direction) {
-			DijkstraConfig df = new DijkstraConfig();
+		public static HHRoutingConfig astar(int direction) {
+			HHRoutingConfig df = new HHRoutingConfig();
 			df.HEURISTIC_COEFFICIENT = 1;
 			df.DIJKSTRA_DIRECTION = direction;
 			return df;
 		}
 		
-		public static DijkstraConfig ch() {
-			DijkstraConfig df = new DijkstraConfig();
+		public static HHRoutingConfig ch() {
+			HHRoutingConfig df = new HHRoutingConfig();
 			df.HEURISTIC_COEFFICIENT = 0;
 			df.USE_CH = true;
 			df.USE_CH_SHORTCUTS = true;
@@ -99,30 +100,47 @@ public class HHRoutePlanner {
 			return df;
 		}
 		
-		public static DijkstraConfig midPoints(boolean astar, int dir) {
-			DijkstraConfig df = new DijkstraConfig();
+		public static HHRoutingConfig midPoints(boolean astar, int dir) {
+			HHRoutingConfig df = new HHRoutingConfig();
 			df.HEURISTIC_COEFFICIENT = astar ? 1 : 0;
 			df.USE_MIDPOINT = true;
 			df.DIJKSTRA_DIRECTION = dir;
 			return df;
 		}
 		
-		public DijkstraConfig useShortcuts() {
+		public HHRoutingConfig preloadSegments() {
+			this.PRELOAD_SEGMENTS = true;
+			return this;
+		}
+		
+		public HHRoutingConfig calcAlternative() {
+			this.CALC_ALTERNATIVES = true;
+			return this;
+		}
+		
+		public HHRoutingConfig calcDetailed(boolean allSegments) {
+			this.ROUTE_LAST_MILE = true;
+			this.ROUTE_ALL_SEGMENTS = allSegments;
+			return this;
+		}
+
+		
+		public HHRoutingConfig useShortcuts() {
 			USE_CH_SHORTCUTS = true;
 			return this;
 		}
 		
-		public DijkstraConfig maxCost(double cost) {
+		public HHRoutingConfig maxCost(double cost) {
 			MAX_COST = cost;
 			return this;
 		}
 		
-		public DijkstraConfig maxDepth(int depth) {
+		public HHRoutingConfig maxDepth(int depth) {
 			MAX_DEPTH = depth;
 			return this;
 		}
 		
-		public DijkstraConfig maxSettlePoints(int maxPoints) {
+		public HHRoutingConfig maxSettlePoints(int maxPoints) {
 			MAX_SETTLE_POINTS = maxPoints;
 			return this;
 		}
@@ -210,35 +228,35 @@ public class HHRoutePlanner {
 		return router.buildRoutingContext(config, null, new BinaryMapIndexReader[0], RouteCalculationMode.NORMAL);
 	}
 
-	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, DijkstraConfig c) throws SQLException, IOException, InterruptedException {
+	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig c) throws SQLException, IOException, InterruptedException {
 		RoutingStats stats = new RoutingStats();
 		long time = System.nanoTime(), startTime = System.nanoTime();
 		if (c == null) {
-			c = new DijkstraConfig();
+			c = new HHRoutingConfig();
 			// test data for debug swap
 //			c = DijkstraConfig.dijkstra(0);
-			c = DijkstraConfig.astar(1);
+			c = HHRoutingConfig.astar(1);
 //			c = DijkstraConfig.ch();
-			PRELOAD_SEGMENTS = false;
-			CALCULATE_GEOMETRY = false;
-			USE_LAST_MILE_ROUTING = false;
+//			c.preloadSegments();
+//			c.calcDetailed(true);
+			c.calcAlternative();
 			DEBUG_VERBOSE_LEVEL = 0;
-			ALTERNATIVE_SELECTION = -1;
-			ALT_EXCLUDE_RAD_MULT_IN = 5;
-			ALT_EXCLUDE_RAD_MULT = 0.3;
+//			DEBUG_ALT_ROUTE_SELECTION++;
+			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
+			c.ALT_EXCLUDE_RAD_MULT = 0.3;
 		}
 		System.out.println(c.toString(start, end));
 		HHRoutingContext hctx = this.cacheHctx;
 		if (hctx == null) {
-			hctx = initHCtx(stats);
+			hctx = initHCtx(c, stats);
 			cacheHctx = hctx;
 		}
 		hctx.clearVisited();
 		System.out.printf("Looking for route %s -> %s \n", start, end);
 		
 		System.out.print("Finding first / last segments...");
-		TLongObjectHashMap<NetworkDBPoint> stPoints = initStart(c, hctx, start, end, !USE_LAST_MILE_ROUTING, false);
-		TLongObjectHashMap<NetworkDBPoint> endPoints = initStart(c, hctx, end, start, !USE_LAST_MILE_ROUTING, true);
+		TLongObjectHashMap<NetworkDBPoint> stPoints = initStart(c, hctx, start, end, false);
+		TLongObjectHashMap<NetworkDBPoint> endPoints = initStart(c, hctx, end, start, true);
 		stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
 
 		time = System.nanoTime();
@@ -247,16 +265,21 @@ public class HHRoutePlanner {
 		HHNetworkRouteRes route = createRoute(finalPnt);
 		stats.routingTime = (System.nanoTime() - time) / 1e6;
 		
-		System.out.printf("%d segments, cost %.2f, %.2f ms\nAlternative routes...", route.segments.size(),
+		System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(),
 				route.routingTimeSegments, stats.routingTime);
-		time = System.nanoTime();
-		calcAlternativeRoute(route, stPoints, endPoints, start, end, c, hctx, stats);
-		stats.altRoutingTime = (System.nanoTime() - time) / 1e6;
-		stats.routingTime += stats.altRoutingTime;
 		
-		System.out.printf("%d %.2f ms\nPrepare detailed route segments...", route.altRoutes.size(), stats.altRoutingTime);		
+		if (c.CALC_ALTERNATIVES) {
+			System.out.printf("Alternative routes...");
+			time = System.nanoTime();
+			calcAlternativeRoute(route, stPoints, endPoints, start, end, c, hctx, stats);
+			stats.altRoutingTime = (System.nanoTime() - time) / 1e6;
+			stats.routingTime += stats.altRoutingTime;
+			System.out.printf("%d %.2f ms\n", route.altRoutes.size(), stats.altRoutingTime);
+		}
+		
+		System.out.printf("Prepare detailed route segments...");		
 		time = System.nanoTime();
-		prepareDetailedRoutingResults(networkDB, route, stats);
+		prepareDetailedRoutingResults(networkDB,c, route, stats);
 		route.stats = stats;
 		stats.prepTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("%.2f ms\n", stats.prepTime);
@@ -269,7 +292,7 @@ public class HHRoutePlanner {
 		time = System.nanoTime();
 		System.out.println(c.toString(start, end));
 		System.out.printf("Calculate turns...");
-		if (CALCULATE_GEOMETRY && route.detailed != null) {
+		if (c.ROUTE_ALL_SEGMENTS && route.detailed != null) {
 			route.detailed = new RouteResultPreparation().prepareResult(ctx, route.detailed, false);
 		}
 		System.out.printf("%.2f ms\n", (System.nanoTime() - time) / 1e6);
@@ -284,7 +307,7 @@ public class HHRoutePlanner {
 	}
 
 	private void calcAlternativeRoute(HHNetworkRouteRes route, TLongObjectHashMap<NetworkDBPoint> stPoints,
-			TLongObjectHashMap<NetworkDBPoint> endPoints, LatLon start, LatLon end, DijkstraConfig c,
+			TLongObjectHashMap<NetworkDBPoint> endPoints, LatLon start, LatLon end, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		List<NetworkDBPoint>  exclude = new ArrayList<>();
 		try {
@@ -321,10 +344,10 @@ public class HHRoutePlanner {
 			boolean[] useToSkip = new boolean[distances.length];
 			int altPoints = 0;
 			for (int i = 0; i < distances.length; i++) {
-				minDistance[i] = Math.min(cdistNeg[i], cdistPos[i]) * ALT_EXCLUDE_RAD_MULT;
+				minDistance[i] = Math.min(cdistNeg[i], cdistPos[i]) * c.ALT_EXCLUDE_RAD_MULT;
 				boolean coveredByPrevious = false;
 				for (int j = 0; j < i; j++) {
-					if (useToSkip[j] && cdistPos[i] - cdistPos[j] < minDistance[j] * ALT_EXCLUDE_RAD_MULT_IN) {
+					if (useToSkip[j] && cdistPos[i] - cdistPos[j] < minDistance[j] * c.ALT_EXCLUDE_RAD_MULT_IN) {
 						coveredByPrevious = true;
 						break;
 					}
@@ -392,7 +415,7 @@ public class HHRoutePlanner {
 						HHNetworkRouteRes cmp = j == k ? route : route.altRoutes.get(j);
 						TLongHashSet cp = new TLongHashSet(altR.uniquePoints);
 						cp.retainAll(cmp.uniquePoints);
-						if (cp.size() >= ALT_NON_UNIQUENESS * altR.uniquePoints.size()) {
+						if (cp.size() >= c.ALT_NON_UNIQUENESS * altR.uniquePoints.size()) {
 							unique = false;
 							break;
 						}
@@ -405,9 +428,9 @@ public class HHRoutePlanner {
 				}
 				System.out.printf("Cost %.2f - %.2f [%d unique / %d]...", route.altRoutes.get(0).routingTimeSegments,
 						route.altRoutes.get(route.altRoutes.size() - 1).routingTimeSegments, route.altRoutes.size(), size);
-				if (ALTERNATIVE_SELECTION >= 0) {
-					HHNetworkRouteRes rts = route.altRoutes.get(ALTERNATIVE_SELECTION % route.altRoutes.size());
-					System.out.printf(ALTERNATIVE_SELECTION + " select %.2f ", rts.routingTimeSegments);
+				if (DEBUG_ALT_ROUTE_SELECTION >= 0) {
+					HHNetworkRouteRes rts = route.altRoutes.get(DEBUG_ALT_ROUTE_SELECTION % route.altRoutes.size());
+					System.out.printf(DEBUG_ALT_ROUTE_SELECTION + " select %.2f ", rts.routingTimeSegments);
 					route.altRoutes = Collections.singletonList(rts);
 				}
 			}
@@ -419,7 +442,7 @@ public class HHRoutePlanner {
 				
 	}
 
-	protected HHRoutingContext initHCtx(RoutingStats stats) throws SQLException {
+	protected HHRoutingContext initHCtx(HHRoutingConfig c, RoutingStats stats) throws SQLException {
 		long time = System.nanoTime();
 		HHRoutingContext hctx = new HHRoutingContext();
 		System.out.print("Loading points... ");
@@ -428,7 +451,7 @@ public class HHRoutePlanner {
 		hctx.pointsByGeo = new TLongObjectHashMap<NetworkDBPoint>();
 		stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), stats.loadPointsTime);
-		if (PRELOAD_SEGMENTS) {
+		if (c.PRELOAD_SEGMENTS) {
 			time = System.nanoTime();
 			System.out.printf("Loading segments...");
 			int cntEdges = networkDB.loadNetworkSegments(hctx.pointsById.valueCollection());
@@ -457,10 +480,10 @@ public class HHRoutePlanner {
 		return hctx;
 	}
 
-	private TLongObjectHashMap<NetworkDBPoint> initStart(DijkstraConfig c, HHRoutingContext hctx, LatLon p, LatLon e, boolean simple, boolean reverse)
+	private TLongObjectHashMap<NetworkDBPoint> initStart(HHRoutingConfig c, HHRoutingContext hctx, LatLon p, LatLon e, boolean reverse)
 			throws IOException, InterruptedException {
 		TLongObjectHashMap<NetworkDBPoint> pnts = new TLongObjectHashMap<>();
-		if (simple) {
+		if (!c.ROUTE_LAST_MILE) {
 			double rad = 10000;
 			float spd = ctx.getRouter().getMinSpeed();
 			while (rad < 300000 && pnts.isEmpty()) {
@@ -523,7 +546,7 @@ public class HHRoutePlanner {
 		}
 	}
 	
-	protected NetworkDBPoint runDijkstraNetworkRouting(NetworkDBPoint start, NetworkDBPoint end, DijkstraConfig c,
+	protected NetworkDBPoint runDijkstraNetworkRouting(NetworkDBPoint start, NetworkDBPoint end, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		if (start != null) {
 			start.setCostParentRt(false, 0, null, 0);
@@ -541,7 +564,7 @@ public class HHRoutePlanner {
 	}
 	
 	protected NetworkDBPoint runDijkstraNetworkRouting(TLongObjectHashMap<NetworkDBPoint> stPoints, TLongObjectHashMap<NetworkDBPoint> endPoints,
-			LatLon startLatLon, LatLon endLatLon, DijkstraConfig c,
+			LatLon startLatLon, LatLon endLatLon, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		Queue<NetworkDBPointCost> queue = hctx.queue;
 		// TODO revert 2 queues to fail fast in 1 direction
@@ -569,7 +592,7 @@ public class HHRoutePlanner {
 	}
 	
 	protected NetworkDBPoint runDijkstraNetworkRouting(HHRoutingContext hctx, 
-				LatLon startLatLon, LatLon endLatLon, DijkstraConfig c, RoutingStats stats) throws SQLException {
+				LatLon startLatLon, LatLon endLatLon, HHRoutingConfig c, RoutingStats stats) throws SQLException {
 		Queue<NetworkDBPointCost> queue = hctx.queue;
 		while (!queue.isEmpty()) {
 			long tm = System.nanoTime();
@@ -634,7 +657,7 @@ public class HHRoutePlanner {
 	}
 	
 	private void addToQueue(Queue<NetworkDBPointCost> queue, NetworkDBPoint point, LatLon target, boolean reverse, 
-			DijkstraConfig c, HHRoutingContext hctx, RoutingStats stats) throws SQLException {
+			HHRoutingConfig c, HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		int depth = c.USE_MIDPOINT || c.MAX_DEPTH > 0 ? point.getDepth(!reverse) : 0;
 		if (c.MAX_DEPTH > 0 && depth >= c.MAX_DEPTH) {
 			return;
@@ -677,7 +700,7 @@ public class HHRoutePlanner {
 		}
 	}
 
-	private double distanceToEnd(DijkstraConfig c, boolean reverse,  NetworkDBPoint nextPoint, LatLon target) {
+	private double distanceToEnd(HHRoutingConfig c, boolean reverse,  NetworkDBPoint nextPoint, LatLon target) {
 		if (c.HEURISTIC_COEFFICIENT > 0) {
 			double distanceToEnd = nextPoint.distanceToEnd(reverse);
 			if (distanceToEnd == 0) {
@@ -747,12 +770,13 @@ public class HHRoutePlanner {
 	}
 	
 	
-	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingPreparationDB networkDB, HHNetworkRouteRes route, RoutingStats stats) throws SQLException, InterruptedException, IOException {
+	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingPreparationDB networkDB, HHRoutingConfig c, HHNetworkRouteRes route, RoutingStats stats) 
+			throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment != null) {
 				networkDB.loadGeometry(s.segment, false);
-				if (CALCULATE_GEOMETRY && s.segment.geometry.size() <= 2) {
+				if (c.ROUTE_ALL_SEGMENTS && s.segment.geometry.size() <= 2) {
 					runDetailedRouting(s);
 				}
 			}
