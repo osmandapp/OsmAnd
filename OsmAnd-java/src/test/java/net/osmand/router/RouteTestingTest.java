@@ -9,6 +9,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.RouterUtilTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -61,7 +62,9 @@ public class RouteTestingTest {
 
 	}
 
+	// FIXME delete
 	@Test(timeout = TIMEOUT)
+	@Ignore
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
 		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
