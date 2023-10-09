@@ -342,14 +342,14 @@ task cleanupDuplicatesInCore() {
 		file("libc++/x86_64").mkdirs()
 		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
 
-		file("libsqlitejdbc/arm64-v8a/libsqlitejdbc.so").copyTo(file("libc++/arm64-v8a/libsqlitejdbc.so"))
-		file("libsqlitejdbc/armeabi-v7a/libsqlitejdbc.so").copyTo(file("libc++/armeabi-v7a/libsqlitejdbc.so"))
-		file("libsqlitejdbc/x86/libsqlitejdbc.so").copyTo(file("libc++/x86/libsqlitejdbc.so"))
-		file("libsqlitejdbc/x86_64/libsqlitejdbc.so").copyTo(file("libc++/x86_64/libsqlitejdbc.so"))
-		file("libsqlitejdbc/arm64-v8a/libsqlitejdbc.so").copyTo(file("libs/arm64-v8a/libsqlitejdbc.so"))
-		file("libsqlitejdbc/armeabi-v7a/libsqlitejdbc.so").copyTo(file("libs/armeabi-v7a/libsqlitejdbc.so"))
-		file("libsqlitejdbc/x86/libsqlitejdbc.so").copyTo(file("libs/x86/libsqlitejdbc.so"))
-		file("libsqlitejdbc/x86_64/libsqlitejdbc.so").copyTo(file("libs/x86_64/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/arm64-v8a/libsqlitejdbc.so"), file("libc++/arm64-v8a/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/armeabi-v7a/libsqlitejdbc.so", file("libc++/armeabi-v7a/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/x86/libsqlitejdbc.so", file("libc++/x86/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/x86_64/libsqlitejdbc.so", file("libc++/x86_64/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/arm64-v8a/libsqlitejdbc.so", file("libs/arm64-v8a/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/armeabi-v7a/libsqlitejdbc.so", file("libs/armeabi-v7a/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/x86/libsqlitejdbc.so", file("libs/x86/libsqlitejdbc.so"))
+		Files.copy(file("libsqlitejdbc/x86_64/libsqlitejdbc.so", file("libs/x86_64/libsqlitejdbc.so"))
 	}
 }
 
