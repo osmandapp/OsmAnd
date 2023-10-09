@@ -3317,7 +3317,7 @@
     <string name="logcat_buffer_descr">Protokolle der Anwendung einsehen und freigeben</string>
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
-    <string name="monitoring_min_speed_descr">Dies ist ein Filter, welcher Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
+    <string name="monitoring_min_speed_descr">Dies ist ein Filter, der Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
     <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: Auf Ihrer Strecke fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
     <string name="plugin_global_prefs_info">Diese Erweiterungseinstellungen sind global und gelten für alle Profile</string>
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
@@ -3584,7 +3584,7 @@
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
     <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an.
 \n
-\nDeaktivieren Sie ungenutzte Plugins, um deren Steuerelemente auszublenden. %1$s.</string>
+\nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">Probleme mit einer GPX-Datei gefunden.
@@ -5452,21 +5452,21 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• \"Gleitzahl\"-Widget hinzugefügt
+    <string name="release_4_6">• Widget „Gleitzahl“ hinzugefügt
 \n
-\n• Filter und Intelligente Ordner für Tracks hinzugefügt
+\n• Filter und intelligente Ordner für Tracks hinzugefügt
 \n
-\n• Reihen für obere und untere Widget-Panels mit Unterstützung für alle Widgets zugefügt
+\n• Reihen für obere und untere Widget-Panels mit Unterstützung für alle Widgets hinzugefügt
 \n
-\n• Unterstützung für ANT+ Temperatur-Widget zugefügt
+\n• Unterstützung für ANT+ Temperatur-Widget hinzugefügt
 \n
-\n• Die Speicherverwaltung für große GPX-Tracks wurde verbessert.
+\n• Speicherverwaltung für große GPX-Tracks verbessert
 \n
-\n• Die Verwaltung der lokalen Ressourcen in Downloads wurde aktualisiert
+\n• Verwaltung der lokalen Ressourcen in Downloads aktualisiert
 \n
-\n• Widget \"Verfügbarer RAM\" zugefügt
+\n• Widget „Verfügbarer RAM“ hinzugefügt
 \n
-\n• Probleme mit der transparenten Statusleiste wurden behoben
+\n• Probleme mit der transparenten Statusleiste behoben
 \n
 \n</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
