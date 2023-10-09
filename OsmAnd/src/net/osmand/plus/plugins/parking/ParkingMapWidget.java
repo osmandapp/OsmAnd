@@ -55,7 +55,7 @@ public class ParkingMapWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		LatLon point = plugin.getParkingPosition();
 		if (point != null && !app.getRoutingHelper().isFollowingMode()) {
 			OsmandMapTileView view = mapActivity.getMapView();

@@ -41,7 +41,7 @@ public class GlideAverageWidget extends GlideBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (isTimeToUpdate()) {
 			long measuredInterval = measuredIntervalPref.get();
 			String ratio = averageGlideComputer.getFormattedAverageGlideRatio(measuredInterval);

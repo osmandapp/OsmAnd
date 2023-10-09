@@ -164,7 +164,7 @@ public class WeatherWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
 		PointI point31 = getPoint31();
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();
