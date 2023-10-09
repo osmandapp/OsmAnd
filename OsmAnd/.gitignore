@@ -45,7 +45,6 @@ local.properties
 raw/
 obj/
 libgnustl/
-libc++/
 cpd.xml
 jni/Local.mk
 out/
