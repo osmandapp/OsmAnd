@@ -7,6 +7,7 @@ import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.HH_FILE_EXT;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
@@ -54,6 +55,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.HHRoutingImportTask;
 import net.osmand.plus.importfiles.tasks.FavoritesImportTask;
 import net.osmand.plus.importfiles.tasks.GeoTiffImportTask;
 import net.osmand.plus.importfiles.tasks.GpxImportTask;
@@ -74,8 +76,8 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -117,7 +119,8 @@ public class ImportHelper {
 		RENDERING(RENDERER_INDEX_EXT),
 		GPX(GPX_FILE_EXT),
 		KML(KML_SUFFIX),
-		KMZ(KMZ_SUFFIX);
+		KMZ(KMZ_SUFFIX),
+		HH(HH_FILE_EXT);
 
 		private final String extension;
 
@@ -255,6 +258,8 @@ public class ImportHelper {
 			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true, false);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName.replace(SQLITE_CHART_FILE_EXT, SQLITE_EXT));
+		} else if (fileName.endsWith(HH_FILE_EXT)) {
+			handleHHRoutingImport(intentUri, fileName);
 		} else {
 			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false, false);
 		}
@@ -319,6 +324,10 @@ public class ImportHelper {
 
 	protected void handleGeoTiffImport(Uri uri, String name) {
 		executeImportTask(new GeoTiffImportTask(activity, uri, name));
+	}
+
+	protected void handleHHRoutingImport(Uri uri, String name) {
+		executeImportTask(new HHRoutingImportTask(activity, uri, name));
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {

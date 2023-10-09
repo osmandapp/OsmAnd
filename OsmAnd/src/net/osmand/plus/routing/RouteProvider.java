@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.IndexConstants.HH_FILE_EXT;
+import static net.osmand.IndexConstants.HH_ROUTING_DIR;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -30,6 +32,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -131,21 +134,22 @@ public class RouteProvider {
 					if (params.inPublicTransportMode) {
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					} else {
-						MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
-						List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
-						List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
-						List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
-						if (!Algorithms.isEmpty(missingMaps)) {
-							res = new RouteCalculationResult("Additional maps available");
-							res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+						File dir = FileUtils.getExistingDir(params.ctx, HH_ROUTING_DIR);
+						File file = new File(dir, "Maps_" + params.mode.getRoutingProfile() + HH_FILE_EXT);
+						if (file.exists()) {
+							res = findHHRoute(file, params, calcGPXRoute);
 						} else {
-							if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
-								params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
-							}
-							File file = params.ctx.getAppPath("Maps_" + params.mode.getRoutingProfile() + ".hhdb");
-							if (file.exists()) {
-								res = findHHRoute(file, params, calcGPXRoute);
+							MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
+							List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
+							List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
+							List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
+							if (!Algorithms.isEmpty(missingMaps)) {
+								res = new RouteCalculationResult("Additional maps available");
+								res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 							} else {
+								if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
+									params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+								}
 								res = findVectorMapsRoute(params, calcGPXRoute);
 							}
 						}
@@ -765,12 +769,26 @@ public class RouteProvider {
 			return applicationModeNotSupported(params);
 		}
 		try {
+			long start = System.currentTimeMillis();
+			if (log.isInfoEnabled()) {
+				log.info("Start finding findHHRoute from " + params.start + " to " + params.end +
+						" using " + params.mode.getRouteService().getName());
+			}
+
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+
+			if (log.isInfoEnabled()) {
+				log.info("HHRoute connection time " + (System.currentTimeMillis() - start));
+			}
 
 			HHRoutePlanner routePlanner = new HHRoutePlanner(env.getCtx(), new HHRoutingPreparationDB(connection));
 			HHNetworkRouteRes route = routePlanner.runRouting(new LatLon(params.start.getLatitude(),
 					params.start.getLongitude()), params.end, DijkstraConfig.astar(1));
+
+			if (log.isInfoEnabled()) {
+				log.info("findHHRoute time " + (System.currentTimeMillis() - start));
+			}
 
 			return new RouteCalculationResult(route.detailed, params.start, params.end,
 					params.intermediates, params.ctx, params.leftSide, null,

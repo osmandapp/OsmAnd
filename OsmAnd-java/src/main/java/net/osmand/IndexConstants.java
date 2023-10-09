@@ -66,6 +66,7 @@ public class IndexConstants {
 	public static final String HELP_ARTICLE_FILE_EXT = ".mht";
 
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
+	public static final String HH_FILE_EXT = ".hhdb";
 
 	public static final String POI_TABLE = "poi";
 
@@ -97,6 +98,7 @@ public class IndexConstants {
 	public static final String SETTINGS_DIR = "settings/";
 	public static final String TEMP_DIR = "temp/";
 	public static final String ROUTING_PROFILES_DIR = "routing/";
+	public static final String HH_ROUTING_DIR = "hh_routing/";
 	public static final String PLUGINS_DIR = "plugins/";
 	public static final String HEIGHTMAP_INDEX_DIR = "heightmap/";
 	public static final String GEOTIFF_SQLITE_CACHE_DIR = "geotiff_sqlite_cache/";

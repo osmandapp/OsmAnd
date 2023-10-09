@@ -525,6 +525,40 @@
 				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.3d.chart" />
 			</intent-filter>
 
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.hhdb" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/*.hhdb" />
+				<data android:pathPattern="/.*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.hhdb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.hhdb" />
+			</intent-filter>
+
 			<!--trying to handle emails-->
 			<intent-filter tools:ignore="AppLinkUrlError">
 				<action android:name="android.intent.action.VIEW" />
