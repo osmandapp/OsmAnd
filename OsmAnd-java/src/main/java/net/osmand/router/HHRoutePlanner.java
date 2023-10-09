@@ -56,6 +56,7 @@ public class HHRoutePlanner {
 		
 		boolean ROUTE_LAST_MILE = false;
 		boolean ROUTE_ALL_SEGMENTS = false;
+		boolean ROUTE_ALL_ALT_SEGMENTS = false;
 		boolean PRELOAD_SEGMENTS = false;
 		
 		boolean CALC_ALTERNATIVES = false;
@@ -118,9 +119,10 @@ public class HHRoutePlanner {
 			return this;
 		}
 		
-		public HHRoutingConfig calcDetailed(boolean allSegments) {
+		public HHRoutingConfig calcDetailed(int segments) {
 			this.ROUTE_LAST_MILE = true;
-			this.ROUTE_ALL_SEGMENTS = allSegments;
+			this.ROUTE_ALL_SEGMENTS = segments >= 1;
+			this.ROUTE_ALL_ALT_SEGMENTS = segments >= 2;
 			return this;
 		}
 
@@ -234,12 +236,12 @@ public class HHRoutePlanner {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
-//			c = DijkstraConfig.dijkstra(0);
+//			c = HHRoutingConfig.dijkstra(0); // TODO bug with detailed
 			c = HHRoutingConfig.astar(1);
-//			c = DijkstraConfig.ch();
+//			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
-//			c.calcDetailed(true);
-			c.calcAlternative();
+			c.calcDetailed(2);
+//			c.calcAlternative();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
@@ -313,19 +315,30 @@ public class HHRoutePlanner {
 		try {
 			HHNetworkRouteRes rt = route;
 			// distances between all points and start/end
-			double[] distances = new double[route.segments.size() + 1];
+			List<NetworkDBPoint> points = new ArrayList<>();
+			for (int i = 0; i < route.segments.size(); i++) {
+				NetworkDBSegment s = route.segments.get(i).segment;
+				if (s == null) {
+					continue;
+				}
+				if(points.size() == 0) {
+					points.add(s.start);
+				}
+				points.add(s.end);
+			}
+			double[] distances = new double[points.size()];
 			LatLon prev = null;
 			for (int i = 0; i < distances.length; i++) {
+				LatLon pnt = points.get(i).getPoint();
 				if (i == 0) {
-					prev = route.segments.get(0).segment.start.getPoint();
-					distances[i] = MapUtils.getDistance(start, prev);
+					distances[i] = MapUtils.getDistance(start, pnt);
+					prev = pnt;
 				} else if (i == distances.length - 1) {
-					LatLon last = route.segments.get(route.segments.size() - 1).segment.end.getPoint();
+					LatLon last = points.get(i).getPoint();
 					distances[i] = MapUtils.getDistance(last, end);
 				} else {
-					LatLon next = route.segments.get(i - 1).segment.end.getPoint();
-					distances[i] = MapUtils.getDistance(prev, next);
-					prev = next;
+					distances[i] = MapUtils.getDistance(prev, pnt);
+					prev = pnt;
 				}
 			}
 			// calculate min(cumPos, cumNeg) distance
@@ -374,10 +387,8 @@ public class HHRoutePlanner {
 				}
 				exclude.clear();
 				
-				LatLon pnt = i == 0 ? route.segments.get(0).segment.start.getPoint()
-						: route.segments.get(i - 1).segment.end.getPoint();
-				List<NetworkDBPoint> objs = 
-						hctx.pointsRect.getClosestObjects(pnt.getLatitude(), pnt.getLongitude(), minDistance[i]);
+				LatLon pnt = points.get(i).getPoint();
+				List<NetworkDBPoint> objs = hctx.pointsRect.getClosestObjects(pnt.getLatitude(), pnt.getLongitude(), minDistance[i]);
 				for(NetworkDBPoint p : objs) {
 					if(MapUtils.getDistance(p.getPoint(), pnt) <= minDistance[i]) {
 						exclude.add(p);
@@ -786,6 +797,9 @@ public class HHRoutePlanner {
 				HHNetworkSegmentRes s = alt.segments.get(i);
 				if (s.segment != null) {
 					networkDB.loadGeometry(s.segment, false);
+					if (c.ROUTE_ALL_ALT_SEGMENTS && s.segment.geometry.size() <= 2) {
+						runDetailedRouting(s);
+					}
 				}
 			}
 		}
@@ -852,7 +866,7 @@ public class HHRoutePlanner {
 			if (itPnt.rtDetailedRouteRev != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
 				res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, itPnt.rtDetailedRouteRev);
-				route.routingTimeSegments += itPnt.rtDetailedRoute.distanceFromStart;
+				route.routingTimeSegments += itPnt.rtDetailedRouteRev.distanceFromStart;
 				route.segments.add(res);
 			}
 			Collections.reverse(route.segments);
