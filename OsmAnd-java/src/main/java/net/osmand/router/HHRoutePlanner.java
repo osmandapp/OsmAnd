@@ -376,7 +376,7 @@ public class HHRoutePlanner {
 				}
 				
 			}
-			route.altRoutes.sort(new Comparator<>() {
+			route.altRoutes.sort(new Comparator<HHNetworkRouteRes>() {
 
 				@Override
 				public int compare(HHNetworkRouteRes o1, HHNetworkRouteRes o2) {

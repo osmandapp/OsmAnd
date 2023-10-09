@@ -129,7 +129,7 @@ public class DataTileManager<T> {
 		double py = MapUtils.getTileNumberY(zoom, latitude);
 		int stTileX = (int) px;
 		int stTileY = (int) py;
-		Map<Long, Double> tiles = new HashMap<>();
+		final Map<Long, Double> tiles = new HashMap<>();
 		for (int xTile = -tileDistInt; xTile <= tileDistInt; xTile++) {
 			for (int yTile = -tileDistInt; yTile <= tileDistInt; yTile++) {
 				double dx = xTile + 0.5 - (px - stTileX);
