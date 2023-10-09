@@ -204,6 +204,12 @@ public class HHRoutePlanner {
 			visited.clear();
 			visitedRev.clear();
 		}
+
+		public void unloadAllConnections() {
+			for(NetworkDBPoint p: pointsById.valueCollection()) {
+				p.markSegmentsNotLoaded();
+			}
+		}
 		
 	}
 	
@@ -247,6 +253,7 @@ public class HHRoutePlanner {
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.calcDetailed(2);
+			c.gc();
 //			c.calcAlternative();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
@@ -283,6 +290,11 @@ public class HHRoutePlanner {
 			stats.altRoutingTime = (System.nanoTime() - time) / 1e6;
 			stats.routingTime += stats.altRoutingTime;
 			System.out.printf("%d %.2f ms\n", route.altRoutes.size(), stats.altRoutingTime);
+		}
+
+		if (c.USE_GC_MORE_OFTEN) {
+			hctx.unloadAllConnections();
+			printGCInformation();
 		}
 		
 		System.out.printf("Prepare detailed route segments...");		
@@ -549,7 +561,7 @@ public class HHRoutePlanner {
 		}
 		if (c.USE_GC_MORE_OFTEN) {
 			ctx.unloadAllData();
-			System.gc();
+			printGCInformation();
 		}
 		return pnts;
 	}
@@ -779,9 +791,10 @@ public class HHRoutePlanner {
 		ctx.config.planRoadDirection = 0; // A* bidirectional
 		ctx.config.heuristicCoefficient = 1; 
 		ctx.unloadAllData(); // needed for proper multidijsktra work
-		if (c.USE_GC_MORE_OFTEN) {
-			System.gc();
-		}
+		// doesn't help and runs too often
+//		if (c.USE_GC_MORE_OFTEN) {
+//			printGCInformation();
+//		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
 		ctx.startX = start.getRoad().getPoint31XTile(start.getSegmentStart(), start.getSegmentEnd());
