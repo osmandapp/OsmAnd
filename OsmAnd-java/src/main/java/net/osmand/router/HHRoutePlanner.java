@@ -267,15 +267,19 @@ public class HHRoutePlanner {
 			cacheHctx = hctx;
 		}
 		hctx.clearVisited();
+		if (c.USE_GC_MORE_OFTEN) {
+			printGCInformation();
+		}
 		System.out.printf("Looking for route %s -> %s \n", start, end);
 		
-		System.out.print("Finding first / last segments...");
+		System.out.println("Finding first / last segments...");
 		TLongObjectHashMap<NetworkDBPoint> stPoints = initStart(c, hctx, start, end, false);
 		TLongObjectHashMap<NetworkDBPoint> endPoints = initStart(c, hctx, end, start, true);
 		stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
+		System.out.printf("Finding first / last segments...%.2f ms\n", stats.searchPointsTime);
 
 		time = System.nanoTime();
-		System.out.printf("%.2f ms\nRouting...", stats.searchPointsTime);
+		System.out.printf("Routing...");
 		NetworkDBPoint finalPnt = runDijkstraNetworkRouting(stPoints, endPoints, start, end, c, hctx, stats);
 		HHNetworkRouteRes route = createRoute(finalPnt);
 		stats.routingTime = (System.nanoTime() - time) / 1e6;
@@ -535,16 +539,17 @@ public class HHRoutePlanner {
 		ctx.config.heuristicCoefficient = 0; // dijkstra
 		ctx.unloadAllData(); // needed for proper multidijsktra work
 		ctx.calculationProgress = new RouteCalculationProgress();
+		ctx.startX = ctx.startY = ctx.targetX = ctx.targetY = 0; 
 		if (reverse) {
 			ctx.targetX = s.getRoad().getPoint31XTile(s.getSegmentStart(), s.getSegmentEnd());
-			ctx.targetY = s.getRoad().getPoint31XTile(s.getSegmentStart(), s.getSegmentEnd());
+			ctx.targetY = s.getRoad().getPoint31YTile(s.getSegmentStart(), s.getSegmentEnd());
 		} else {
 			ctx.startX = s.getRoad().getPoint31XTile(s.getSegmentStart(), s.getSegmentEnd());
 			ctx.startY = s.getRoad().getPoint31YTile(s.getSegmentStart(), s.getSegmentEnd());
 		}
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) new BinaryRoutePlanner().searchRouteInternal(ctx,
 				reverse ? null : s, reverse ? s : null, null, hctx.boundaries);
-		
+		System.out.println(ctx.calculationProgress.getInfo(null));		
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
@@ -558,6 +563,7 @@ public class HHRoutePlanner {
 					pnts.put(pnt.index, pnt);
 				}
 			}
+
 		}
 		if (c.USE_GC_MORE_OFTEN) {
 			ctx.unloadAllData();
