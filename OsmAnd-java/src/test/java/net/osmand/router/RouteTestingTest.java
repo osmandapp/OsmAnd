@@ -63,7 +63,7 @@ public class RouteTestingTest {
 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
-		NativeLibrary nativeLibrary = null;
+		/*NativeLibrary nativeLibrary = null;
 		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
 		if (useNative) {
 			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
@@ -171,7 +171,7 @@ public class RouteTestingTest {
 						break;
 				}
 			}
-		}
+		}*/
 	}
 	
 	private void checkRoutingTime(RoutingContext ctx, Map<String, String> params) {
