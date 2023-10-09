@@ -83,6 +83,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		info.setIconSpaceReserved(false);
 
 		setupMemoryAllocatedForRoutingPref();
+		setupUseHHRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
@@ -178,6 +179,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				"MB");
 		preference.setSummary(description);
 		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupUseHHRoutingPref() {
+		SwitchPreferenceEx pref = findPreference(plugin.USE_HH_ROUTING.getId());
+		pref.setIconSpaceReserved(false);
 	}
 
 	private void setupGlobalAppAllocatedMemoryPref() {

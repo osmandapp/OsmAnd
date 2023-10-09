@@ -341,6 +341,11 @@ task cleanupDuplicatesInCore() {
 		file("libs/x86/libc++_shared.so").renameTo(file("libc++/x86/libc++_shared.so"))
 		file("libc++/x86_64").mkdirs()
 		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
+
+		file("libsqlitejdbc/arm64-v8a/libsqlitejdbc.so").renameTo(file("libc++/arm64-v8a/libsqlitejdbc.so"))
+		file("libsqlitejdbc/armeabi-v7a/libsqlitejdbc.so").renameTo(file("libc++/armeabi-v7a/libsqlitejdbc.so"))
+		file("libsqlitejdbc/x86/libsqlitejdbc.so").renameTo(file("libc++/x86/libsqlitejdbc.so"))
+		file("libsqlitejdbc/x86_64/libsqlitejdbc.so").renameTo(file("libc++/x86_64/libsqlitejdbc.so"))
 	}
 }
 
@@ -405,4 +410,5 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.2.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
+	implementation 'org.xerial:sqlite-jdbc:3.42.0.1'
 }

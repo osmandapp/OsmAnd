@@ -1,22 +1,24 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.IndexConstants.HH_FILE_EXT;
+import static net.osmand.IndexConstants.HH_ROUTING_DIR;
 
 import android.os.Bundle;
 import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,14 +27,21 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.HHRoutePlanner;
+import net.osmand.router.HHRoutePlanner.HHNetworkRouteRes;
+import net.osmand.router.HHRoutePlanner.HHRoutingConfig;
+import net.osmand.router.HHRoutingPreparationDB;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
@@ -54,10 +63,13 @@ import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -124,18 +136,25 @@ public class RouteProvider {
 					if (params.inPublicTransportMode) {
 						res = findVectorMapsRoute(params, calcGPXRoute);
 					} else {
-						MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
-						List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
-						List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
-						List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
-						if (!Algorithms.isEmpty(missingMaps)) {
-							res = new RouteCalculationResult("Additional maps available");
-							res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+						File dir = FileUtils.getExistingDir(params.ctx, HH_ROUTING_DIR);
+						File file = new File(dir, "Maps_" + params.mode.getRoutingProfile() + HH_FILE_EXT);
+						OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+						if (plugin != null && plugin.USE_HH_ROUTING.get() && file.exists()) {
+							res = findHHRoute(file, params, calcGPXRoute);
 						} else {
-							if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
-								params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+							MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
+							List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
+							List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
+							List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
+							if (!Algorithms.isEmpty(missingMaps)) {
+								res = new RouteCalculationResult("Additional maps available");
+								res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+							} else {
+								if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
+									params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+								}
+								res = findVectorMapsRoute(params, calcGPXRoute);
 							}
-							res = findVectorMapsRoute(params, calcGPXRoute);
 						}
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
@@ -747,6 +766,47 @@ public class RouteProvider {
 		return new RoutingEnvironment(router, ctx, complexCtx, precalculated);
 	}
 
+	protected RouteCalculationResult findHHRoute(File file, RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
+		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
+		if (env == null) {
+			return applicationModeNotSupported(params);
+		}
+		try {
+			long start = System.currentTimeMillis();
+			if (log.isInfoEnabled()) {
+				String message = "Start finding findHHRoute from " + params.start + " to " + params.end +
+						" using " + params.mode.getRouteService().getName();
+				log.info(message);
+				params.ctx.showToastMessage(message);
+			}
+
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+
+			if (log.isInfoEnabled()) {
+				log.info("HHRoute connection time " + (System.currentTimeMillis() - start));
+			}
+
+			HHRoutePlanner routePlanner = new HHRoutePlanner(env.getCtx(), new HHRoutingPreparationDB(connection));
+			HHNetworkRouteRes route = routePlanner.runRouting(new LatLon(params.start.getLatitude(),
+					params.start.getLongitude()), params.end, HHRoutingConfig.astar(1));
+
+			if (log.isInfoEnabled()) {
+				String message = "findHHRoute time " + (System.currentTimeMillis() - start);
+				log.info(message);
+				params.ctx.showToastMessage(message);
+			}
+
+			return new RouteCalculationResult(route.detailed, params.start, params.end,
+					params.intermediates, params.ctx, params.leftSide, null,
+					null, params.mode, true, params.initialCalculation);
+		} catch (Exception e) {
+			params.ctx.showToastMessage(e.getMessage());
+			log.error(e);
+			return new RouteCalculationResult(e.getMessage());
+		}
+	}
+
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
 		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
 		if (env == null) {
@@ -983,10 +1043,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
+							}
 							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					} 
+					}
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;
