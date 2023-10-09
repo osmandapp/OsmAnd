@@ -801,6 +801,7 @@ public class RouteProvider {
 					params.intermediates, params.ctx, params.leftSide, null,
 					null, params.mode, true, params.initialCalculation);
 		} catch (Exception e) {
+			params.ctx.showToastMessage(e.getMessage());
 			log.error(e);
 			return new RouteCalculationResult(e.getMessage());
 		}
