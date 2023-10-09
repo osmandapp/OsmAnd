@@ -250,7 +250,7 @@ public class HHRoutePlanner {
 		System.out.printf("%d segments, cost %.2f, %.2f ms\nAlternative routes...", route.segments.size(),
 				route.routingTimeSegments, stats.routingTime);
 		time = System.nanoTime();
-		calcAlternativeRoute(route, stPoints, endPoints, start, end, c, hctx, stats);
+//		calcAlternativeRoute(route, stPoints, endPoints, start, end, c, hctx, stats);
 		stats.altRoutingTime = (System.nanoTime() - time) / 1e6;
 		stats.routingTime += stats.altRoutingTime;
 		
@@ -828,7 +828,7 @@ public class HHRoutePlanner {
 			if (itPnt.rtDetailedRouteRev != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
 				res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, itPnt.rtDetailedRouteRev);
-				route.routingTimeSegments += itPnt.rtDetailedRoute.distanceFromStart;
+				route.routingTimeSegments += itPnt.rtDetailedRouteRev.distanceFromStart;
 				route.segments.add(res);
 			}
 			Collections.reverse(route.segments);

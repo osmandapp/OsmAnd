@@ -6,17 +6,17 @@ import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,6 +33,10 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.HHRoutePlanner;
+import net.osmand.router.HHRoutePlanner.DijkstraConfig;
+import net.osmand.router.HHRoutePlanner.HHNetworkRouteRes;
+import net.osmand.router.HHRoutingPreparationDB;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
@@ -54,10 +58,13 @@ import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -135,7 +142,12 @@ public class RouteProvider {
 							if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
 								params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
 							}
-							res = findVectorMapsRoute(params, calcGPXRoute);
+							File file = params.ctx.getAppPath("Maps_" + params.mode.getRoutingProfile() + ".hhdb");
+							if (file.exists()) {
+								res = findHHRoute(file, params, calcGPXRoute);
+							} else {
+								res = findVectorMapsRoute(params, calcGPXRoute);
+							}
 						}
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
@@ -747,6 +759,28 @@ public class RouteProvider {
 		return new RoutingEnvironment(router, ctx, complexCtx, precalculated);
 	}
 
+	protected RouteCalculationResult findHHRoute(File file, RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
+		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
+		if (env == null) {
+			return applicationModeNotSupported(params);
+		}
+		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+
+			HHRoutePlanner routePlanner = new HHRoutePlanner(env.getCtx(), new HHRoutingPreparationDB(connection));
+			HHNetworkRouteRes route = routePlanner.runRouting(new LatLon(params.start.getLatitude(),
+					params.start.getLongitude()), params.end, DijkstraConfig.astar(1));
+
+			return new RouteCalculationResult(route.detailed, params.start, params.end,
+					params.intermediates, params.ctx, params.leftSide, null,
+					null, params.mode, true, params.initialCalculation);
+		} catch (Exception e) {
+			log.error(e);
+			return new RouteCalculationResult(e.getMessage());
+		}
+	}
+
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
 		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
 		if (env == null) {
@@ -976,10 +1010,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
+							}
 							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					} 
+					}
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;
