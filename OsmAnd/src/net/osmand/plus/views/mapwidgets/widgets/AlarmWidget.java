@@ -169,7 +169,7 @@ public class AlarmWidget {
 								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_text_size));
 							}
 							widgetBottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
-									info.americanType ? R.color.color_black : R.color.color_white));
+									info.americanType ? R.color.activity_background_color_dark : R.color.card_and_list_background_light));
 						}
 					}
 				}
@@ -228,7 +228,7 @@ public class AlarmWidget {
 			TextPaint textPaint = new TextPaint();
 			textPaint.setAntiAlias(true);
 			textPaint.setColor(Color.BLACK);
-			textPaint.setColor(ContextCompat.getColor(app, info.americanType ? R.color.color_black : R.color.color_white));
+			textPaint.setColor(ContextCompat.getColor(app, info.americanType ? R.color.activity_background_color_dark : R.color.card_and_list_background_light));
 			textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			textPaint.setTypeface(Typeface.DEFAULT_BOLD);

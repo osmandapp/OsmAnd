@@ -296,7 +296,7 @@ public class IconsCard extends MapBaseCard {
 			ImageView icon = newIconContainer.findViewById(R.id.icon);
 			// Intentionally not accessing icons cache here, because cached icons are wrongly
 			// positioned in FavoritePointEditorFragment and WptPtEditorFragmentNew
-			int whiteColor = ContextCompat.getColor(mapActivity, R.color.color_white);
+			int whiteColor = ContextCompat.getColor(mapActivity, R.color.card_and_list_background_light);
 			icon.setImageDrawable(UiUtilities.createTintedDrawable(mapActivity, newIconId, whiteColor));
 
 			ImageView backgroundCircle = newIconContainer.findViewById(R.id.background);

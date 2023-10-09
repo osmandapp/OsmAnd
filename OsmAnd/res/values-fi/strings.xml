@@ -619,7 +619,7 @@
     <string name="mark_to_delete">Merkitse poistaaksesi</string>
     <string name="shared_string_go">Mene</string>
     <string name="shared_string_do_not_use">Älä käytä</string>
-    <string name="shared_string_dismiss">Unohda</string>
+    <string name="shared_string_dismiss">Hylkää</string>
     <string name="shared_string_next">Seuraava</string>
     <string name="shared_string_enable">Ota käyttöön</string>
     <string name="shared_string_disable">Pois käytöstä</string>
@@ -1709,7 +1709,7 @@
     <string name="use_displayed_track_for_navigation">Käytä näytettyä jälkeä navigaatioon\?</string>
     <string name="keep_and_add_destination_point">Lisää myöhemmäksi päämääräksi</string>
     <string name="speak_descr">Aseta ilmoittamaan katunimet, liikennevaroitukset (pakolliset pysähdykset, hidasteet), nopeuskamera varoitukset, nopeusrajoitukset.</string>
-    <string name="context_menu_item_directions_from">Suunnat lähtien</string>
+    <string name="context_menu_item_directions_from">Reittiohjeet täältä</string>
     <string name="route_to">Minne:</string>
     <string name="route_from">Mistä:</string>
     <string name="download_using_mobile_internet">Ei yhdistetty Wi-Fi-verkkoon. Haluatko käyttää nykyistä Internet-yhteyttä lataukseen\?</string>
@@ -4044,4 +4044,9 @@
     <string name="shared_string_wrist">Ranne</string>
     <string name="offline_cache">Offline tilan välimuisti</string>
     <string name="rendering_value_small_name">Pieni</string>
+    <string name="map_rendering_engine">Karttamoottori</string>
+    <string name="auto_backup_title">Automaattinen varmuuskopiointi</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Piilota sotilasalueet</string>
+    <string name="show_borders_of_downloaded_maps">Näytä ladattujen karttojen rajat</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Piilota sotilasalueet</string>
 </resources>

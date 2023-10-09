@@ -8,6 +8,7 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="number_in_breckets">(%d)</string>
     <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>
@@ -55,8 +56,6 @@
     <string name="items_modified">items modified</string>
     <string name="osmand_unlimited">OsmAnd Unlimited</string>
     <string name="markers">Markers</string>
-    <string name="opr_base_url">https://openplacereviews.org/</string>
-    <string name="dev_opr_base_url">https://test.openplacereviews.org/</string>
     <string name="osm_oauth_developer_key">v8G8r9NLJZGMV4he5lwbQlz620FNVARKjI9Bm5UJ</string>
     <string name="osm_oauth_developer_secret">jDvM95Ne1Bq2BDTmIfB6b3ZMxvdK87WGfp6DC07J</string>
     <string name="osm_oauth_consumer_key">Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y</string>

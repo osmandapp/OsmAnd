@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/mainLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<net.osmand.plus.views.controls.PagerSlidingTabStrip
+			android:id="@+id/sliding_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_item_height"
+			android:background="?attr/colorPrimary" />
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<include layout="@layout/free_version_banner" />
+
+				<include layout="@layout/progress_with_two_texts" />
+
+				<androidx.viewpager.widget.ViewPager
+					android:id="@+id/pager"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" />
+
+			</LinearLayout>
+
+			<include layout="@layout/card_bottom_divider" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/fragmentContainer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+</FrameLayout>

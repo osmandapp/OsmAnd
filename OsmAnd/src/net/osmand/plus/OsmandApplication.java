@@ -76,6 +76,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -83,7 +84,6 @@ import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
@@ -198,7 +198,6 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
-	OprAuthHelper oprAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
@@ -210,6 +209,7 @@ public class OsmandApplication extends MultiDexApplication {
 	AverageGlideComputer averageGlideComputer;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
+	SmartFolderHelper smartFolderHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -469,10 +469,6 @@ public class OsmandApplication extends MultiDexApplication {
 		return osmOAuthHelper;
 	}
 
-	public OprAuthHelper getOprAuthHelper() {
-		return oprAuthHelper;
-	}
-
 	public LocaleHelper getLocaleHelper() {
 		return localeHelper;
 	}
@@ -602,6 +598,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public DialogManager getDialogManager() {
 		return dialogManager;
+	}
+
+	@NonNull
+	public SmartFolderHelper getSmartFolderHelper() {
+		return smartFolderHelper;
 	}
 
 	@NonNull
@@ -841,9 +842,11 @@ public class OsmandApplication extends MultiDexApplication {
 		context.setTheme(themeId);
 	}
 
-	IBRouterService reconnectToBRouter() {
+	public IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
+      // a delay is necessary as the service process needs time to start..
+      Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
 				return bRouterServiceConnection.getBrouterService();
 			}

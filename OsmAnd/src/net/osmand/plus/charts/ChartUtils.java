@@ -40,6 +40,8 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.dialogs.MemoryInfo;
+import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -315,7 +317,7 @@ public class ChartUtils {
 		chart.setDragEnabled(useGesturesAndScale);
 		chart.setScaleYEnabled(false);
 		chart.setAutoScaleMinMaxEnabled(true);
-		chart.setDrawBorders(true);
+		chart.setDrawBorders(false);
 		chart.getDescription().setEnabled(false);
 		chart.setDragDecelerationEnabled(false);
 
@@ -354,6 +356,7 @@ public class ChartUtils {
 		l.setEnabled(false);
 	}
 
+	@NonNull
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart chart,
 	                                              @NonNull RouteStatistics routeStatistics,
@@ -383,6 +386,41 @@ public class ChartUtils {
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);
+		chart.getAxisRight().setAxisMaximum(dataSet.getYMax());
+		chart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
+
+		return dataSet;
+	}
+
+	@NonNull
+	public static BarData buildStatisticChart(@NonNull OsmandApplication app,
+	                                          @NonNull HorizontalBarChart chart,
+	                                          @NonNull MemoryInfo memoryInfo,
+	                                          boolean nightMode) {
+		List<MemoryItem> items = memoryInfo.getItems();
+
+		int size = items.size();
+		int[] colors = new int[size];
+		float[] stacks = new float[size];
+
+		for (int i = 0; i < items.size(); i++) {
+			MemoryItem item = items.get(i);
+			stacks[i] = item.getValue();
+			colors[i] = item.getColor();
+		}
+
+		List<BarEntry> entries = new ArrayList<>();
+		entries.add(new BarEntry(0, stacks));
+
+		BarDataSet barDataSet = new BarDataSet(entries, "");
+		barDataSet.setColors(colors);
+		barDataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+
+		BarData dataSet = new BarData(barDataSet);
+		dataSet.setDrawValues(false);
+		dataSet.setBarWidth(1);
+
+		chart.getXAxis().setEnabled(false);
 		chart.getAxisRight().setAxisMaximum(dataSet.getYMax());
 		chart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
 

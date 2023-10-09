@@ -38,10 +38,10 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
+import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
@@ -55,13 +55,13 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
@@ -360,7 +360,6 @@ public class AppInitializer implements IProgress {
 		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
-		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
@@ -369,6 +368,7 @@ public class AppInitializer implements IProgress {
 		app.averageGlideComputer = startupInit(new AverageGlideComputer(app), AverageGlideComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
+		app.smartFolderHelper = startupInit(new SmartFolderHelper(app), SmartFolderHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -579,10 +579,10 @@ public class AppInitializer implements IProgress {
 			return;
 		}
 		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> fullMaps = helper.getLocalFullMaps(null);
+		List<LocalItem> fullMaps = helper.getLocalFullMaps(null);
 		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		for (LocalIndexInfo fm : fullMaps) {
-			String fileName = fm.getFileName();
+		for (LocalItem item : fullMaps) {
+			String fileName = item.getFileName();
 			if (!preferenceForLocalIndex(fileName, settings).get()) {
 				continue;
 			}

@@ -1493,7 +1493,7 @@
     <string name="osm_changes_added_to_local_edits">OSM-ændringer tilføjet til lokale ændringer</string>
     <string name="mark_to_delete">Markér for at slette</string>
     <string name="current_route">Aktuel rute</string>
-    <string name="welmode_download_maps">Administrer kort</string>
+    <string name="welmode_download_maps">Hent kort</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd tilbyder globale offline kortvisninger, og offline navigation.</string>
@@ -4768,7 +4768,7 @@
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_manual_opt">Manuelt roteret</string>
-    <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
+    <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, hvor gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="go_to_marker_location">Fortsæt til markørens placering</string>
     <string name="shared_string_shows">Viser</string>
     <string name="shared_string_switch_mode">Skift tilstand</string>
@@ -5431,13 +5431,59 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Glidetal-modul
+    <string name="release_4_6">• Tilføjet \"Glidetal\"-modul
 \n
-\n • Tilføjet ANT+ temperatur-modul
+\n • Tilføjet filtre og smarte mapper til spor
+\n
+\n • Tilføjet rækker til øverste og nederste modulpaneler med understøttelse af alle moduler
+\n
+\n • Tilføjet understøttelse af ANT+ temperatur-modul
 \n
 \n • Bedre hukommelseshåndtering for store GPX-spor
+\n
+\n • Opdateret lokal ressourcehåndtering i Downloads
+\n
+\n • Tilføjet modul \"Tilgængelig RAM\"
+\n
+\n • Løst problemer med gennemsigtig statuslinje
 \n
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
     <string name="app_mode_baby_transport">Baby-transport</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="app_mode_hang_gliding">Hanggliding</string>
+    <string name="with_waypoints">Med rutepunkter</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maks. højde</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrér efter navn</string>
+    <string name="shared_string_reset_all">Nulstil alt</string>
+    <string name="filter_tracks_count">Filter: %d</string>
+    <string name="date_of_creation">Dato for oprettelse</string>
+    <string name="filter_screen_title">Filter</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Viser tilgængelig hukommelse tildelt OsmAnd.</string>
+    <string name="sort_size_descending">Største først</string>
+    <string name="delete_map">Slet kort</string>
+    <string name="standard_maps">Standardkort</string>
+    <string name="shared_string_created">Oprettet</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia og rejsekort</string>
+    <string name="rendering_styles">Gengivelsesstile</string>
+    <string name="sort_country_name_ascending">Landenavn: A – Z</string>
+    <string name="weather_online">Vejr online</string>
+    <string name="map_is_up_to_date">%1$s kort er opdateret.</string>
+    <string name="sort_size_ascending">Mindste først</string>
+    <string name="widget_available_ram">Tilgængelig RAM</string>
+    <string name="terrain_maps">Terrænkort</string>
+    <string name="sort_country_name_descending">Landenavn: Z – A</string>
+    <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort\?</string>
+    <string name="maps_and_resources">Kort og ressourcer</string>
+    <string name="shared_string_show_icon">Vis ikon</string>
+    <string name="empty_name">Tomt navn</string>
+    <string name="edit_fiilter">Redigér filter</string>
+    <string name="smart_folder_name_present">Sådan en smartMappe findes allerede</string>
+    <string name="smart_folder_saved">SmartMappe gemt</string>
+    <string name="add_smart_folder">Tilføj smart mappe</string>
+    <string name="save_as_smart_folder">Gem som smart mappe</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil slette \"%1$s\" smart mappe.</string>
 </resources>

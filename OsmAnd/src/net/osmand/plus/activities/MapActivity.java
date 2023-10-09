@@ -158,6 +158,7 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
@@ -831,7 +832,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
 						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
 						&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
-					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
+					if (AndroidUtils.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 						Bundle args = new Bundle();
 						args.putBoolean(FIRST_USAGE, true);
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
@@ -952,8 +953,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			color = toolbarController.getStatusBarColor(this, night);
 		}
 		if (color == TopToolbarController.NO_COLOR) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = mapLayers.getMapWidgetRegistry().getStatusBarColorForTopWidget(night);
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(this, colorId);
 		}
@@ -1420,6 +1423,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyLongPress(keyCode, event)) {
+			return true;
+		}
+		return super.onKeyLongPress(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
+		if (keyEventHelper != null && keyEventHelper.onKeyMultiple(keyCode, repeatCount, event)) {
+			return true;
+		}
+		return super.onKeyMultiple(keyCode, repeatCount, event);
 	}
 
 	public void showMapControls() {
@@ -2170,10 +2189,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Nullable
-	protected List<View> getHidingViews(){
+	protected List<View> getHidingViews() {
 		List<View> views = new ArrayList<>();
 		View mainContainer = findViewById(R.id.MapHudButtonsOverlay);
-		if(mainContainer != null){
+		if (mainContainer != null) {
 			views.add(mainContainer);
 		}
 		return views;
@@ -2183,8 +2202,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public List<Fragment> getActiveTalkbackFragments() {
 		List<Fragment> allFragments = getSupportFragmentManager().getFragments();
 		List<Fragment> fragmentForTalkBack = new ArrayList<>();
-		for(Fragment fragment : allFragments){
-			if(!(fragment instanceof DashBaseFragment)){
+		for (Fragment fragment : allFragments) {
+			if (!(fragment instanceof DashBaseFragment)) {
 				fragmentForTalkBack.add(fragment);
 			}
 		}

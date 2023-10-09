@@ -30,7 +30,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -43,6 +42,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -68,7 +68,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
 
-	private static final Log LOG = PlatformUtil.getLog(OpenPlaceReviewsPlugin.class);
+	private static final Log LOG = PlatformUtil.getLog(MapillaryPlugin.class);
 
 	public final OsmandPreference<Boolean> SHOW_MAPILLARY;
 	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN;
@@ -150,9 +150,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		if (widgetType == WidgetType.MAPILLARY) {
-			return new MapillaryMapWidget(mapActivity);
+			return new MapillaryMapWidget(mapActivity, customId, widgetsPanel);
 		}
 		return null;
 	}

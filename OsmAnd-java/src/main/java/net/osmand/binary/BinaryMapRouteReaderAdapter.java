@@ -70,6 +70,7 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public final static int PROFILE_NONE = 0;
 		public final static int PROFILE_TRUCK = 1000;
+		public final static int PROFILE_CAR = 1001;
 		
 		private String t;
 		private String v;
@@ -285,6 +286,8 @@ public class BinaryMapRouteReaderAdapter {
 					type = MAXSPEED;
 				} else if (t.equalsIgnoreCase("maxspeed:hgv")) {
 					type = MAXSPEED + PROFILE_TRUCK;
+				} else if (t.equalsIgnoreCase("maxspeed:motorcar")) {
+					type = MAXSPEED + PROFILE_CAR;
 				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;

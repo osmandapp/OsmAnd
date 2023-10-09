@@ -10,11 +10,6 @@ public class NoneDeviceProfile extends InputDeviceProfile {
 	}
 
 	@Override
-	protected void collectCommands() {
-		// No commands
-	}
-
-	@Override
 	protected InputDeviceProfile newInstance() {
 		return new NoneDeviceProfile();
 	}

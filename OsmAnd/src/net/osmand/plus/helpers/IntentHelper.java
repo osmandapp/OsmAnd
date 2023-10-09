@@ -15,7 +15,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -47,8 +46,6 @@ import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragment;
 import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.plugins.openplacereviews.OPRConstants;
-import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -64,6 +61,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -129,8 +128,7 @@ public class IntentHelper {
 				|| parseTileSourceIntent()
 				|| parseOpenGpxIntent()
 				|| parseSendIntent()
-				|| parseOAuthIntent()
-				|| parseOprOAuthIntent();
+				|| parseOAuthIntent();
 	}
 
 	private boolean parseNavigationIntent() {
@@ -179,9 +177,35 @@ public class IntentHelper {
 				} else {
 					buildRoute(startLatLon, endLatLon, appMode, points);
 				}
-
 				clearIntent(intent);
 				return true;
+			} else {
+				List<GeoParsedPoint> points = GeoPointParserUtil.parsePoints(data.toString());
+				if (points != null && points.size() > 1) {
+					GeoParsedPoint startPoint = points.get(0);
+					GeoParsedPoint endPoint = points.get(points.size() - 1);
+
+					LatLon startLatLon = startPoint != null ? new LatLon(startPoint.getLatitude(), startPoint.getLongitude()) : null;
+					LatLon endLatLon = endPoint != null ? new LatLon(endPoint.getLatitude(), endPoint.getLongitude()) : null;
+					if (endLatLon == null) {
+						LOG.error("Malformed navigation URL: destination location is empty");
+						return true;
+					}
+					if (app.isApplicationInitializing()) {
+						app.getAppInitializer().addListener(new AppInitializeListener() {
+
+							@Override
+							public void onFinish(@NonNull AppInitializer init) {
+								init.removeListener(this);
+								buildRoute(startLatLon, endLatLon, null, null);
+							}
+						});
+					} else {
+						buildRoute(startLatLon, endLatLon, null, null);
+					}
+					clearIntent(intent);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -524,7 +548,11 @@ public class IntentHelper {
 			}
 			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
 				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
-				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName);
+				boolean isPreselectedSmartFolder = false;
+				if (intent.hasExtra(TracksFragment.IS_SMART_FOLDER)) {
+					isPreselectedSmartFolder = intent.getBooleanExtra(TracksFragment.IS_SMART_FOLDER, false);
+				}
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName, isPreselectedSmartFolder);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
@@ -624,37 +652,11 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseOprOAuthIntent() {
-		Intent intent = mapActivity.getIntent();
-		if (intent != null && intent.getData() != null) {
-			Uri uri = intent.getData();
-			if (uri.toString().startsWith(OPRConstants.OPR_OAUTH_PREFIX)) {
-				String token = uri.getQueryParameter("opr-token");
-				String username = uri.getQueryParameter("opr-nickname");
-				app.getOprAuthHelper().addListener(getOprAuthorizationListener());
-				app.getOprAuthHelper().authorize(token, username);
-				clearIntent(intent);
-				return true;
-			}
-		}
-		return false;
-	}
-
 	private OsmAuthorizationListener getOnAuthorizeListener() {
 		return () -> {
 			for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
 				if (fragment instanceof OsmAuthorizationListener) {
 					((OsmAuthorizationListener) fragment).authorizationCompleted();
-				}
-			}
-		};
-	}
-
-	private OprAuthorizationListener getOprAuthorizationListener() {
-		return () -> {
-			for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
-				if (fragment instanceof OprAuthorizationListener) {
-					((OprAuthorizationListener) fragment).authorizationCompleted();
 				}
 			}
 		};

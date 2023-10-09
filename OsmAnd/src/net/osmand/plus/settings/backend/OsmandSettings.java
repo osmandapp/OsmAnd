@@ -50,10 +50,10 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
-import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -98,6 +98,7 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
+import net.osmand.plus.settings.enums.MapsSortMode;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -139,8 +140,8 @@ public class OsmandSettings {
 	public static final int VERSION = 1;
 
 	// These settings are stored in SharedPreferences
-	private static final String CUSTOM_SHARED_PREFERENCES_PREFIX = "net.osmand.customsettings.";
-	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
+	public static final String CUSTOM_SHARED_PREFERENCES_PREFIX = "net.osmand.customsettings.";
+	public static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
 	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
@@ -1012,6 +1013,7 @@ public class OsmandSettings {
 	}.makeGlobal();
 
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(this, "first_map_is_downloaded", false);
+	public final CommonPreference<MapsSortMode> LOCAL_MAPS_SORT_MODE = new EnumStringPreference<>(this, "local_maps_sort_mode", MapsSortMode.getDefaultSortMode(), MapsSortMode.values()).makeGlobal().makeShared();
 
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,

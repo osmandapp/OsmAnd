@@ -45,6 +45,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -199,16 +200,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		switch (widgetType) {
 			case TRIP_RECORDING_DISTANCE:
-				return new TripRecordingDistanceWidget(mapActivity);
+				return new TripRecordingDistanceWidget(mapActivity, customId, widgetsPanel);
 			case TRIP_RECORDING_TIME:
-				return new TripRecordingTimeWidget(mapActivity);
+				return new TripRecordingTimeWidget(mapActivity, customId, widgetsPanel);
 			case TRIP_RECORDING_UPHILL:
-				return new TripRecordingUphillWidget(mapActivity);
+				return new TripRecordingUphillWidget(mapActivity, customId, widgetsPanel);
 			case TRIP_RECORDING_DOWNHILL:
-				return new TripRecordingDownhillWidget(mapActivity);
+				return new TripRecordingDownhillWidget(mapActivity, customId, widgetsPanel);
 		}
 		return null;
 	}

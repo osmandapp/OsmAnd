@@ -5407,4 +5407,16 @@
     <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="rendering_value_defaultMedium_name">默认（中等）</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路线（铁索攀岩）</string>
+    <string name="shared_string_cache">缓存</string>
+    <string name="widget_available_ram_desc">显示为 OsmAnd 分配的可用内存。</string>
+    <string name="delete_map">删除地图</string>
+    <string name="standard_maps">标准地图</string>
+    <string name="wikipedia_and_travel_maps">维基百科和旅游地图</string>
+    <string name="empty_name">空名称</string>
+    <string name="rendering_styles">渲染风格</string>
+    <string name="weather_online">在线天气</string>
+    <string name="shared_string_show_icon">显示图标</string>
+    <string name="widget_available_ram">可用 RAM</string>
+    <string name="terrain_maps">地形地图</string>
+    <string name="maps_and_resources">地图和资源</string>
 </resources>

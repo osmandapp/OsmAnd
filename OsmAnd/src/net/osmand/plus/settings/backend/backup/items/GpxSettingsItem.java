@@ -128,7 +128,8 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	private void updateFile() {
 		String subtypeFolder = subtype.getSubtypeFolder();
-		if (fileName.contains(name) && !fileName.contains(subtypeFolder)) {
+		if (fileName.contains(name) && !(fileName.startsWith(subtypeFolder)
+				|| fileName.contains(File.separator + subtypeFolder))) {
 			this.file = new File(app.getAppPath(subtypeFolder), fileName);
 		}
 	}

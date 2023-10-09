@@ -49,7 +49,7 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:textColor="@color/color_white"
+					android:textColor="@color/card_and_list_background_light"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="@string/app_version"/>
 
@@ -57,7 +57,7 @@
 					android:id="@+id/time_left"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textColor="@color/color_white"
+					android:textColor="@color/card_and_list_background_light"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:text="@string/app_mode_aircraft"/>
 
@@ -76,7 +76,7 @@
 				android:id="@+id/name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/color_white"
+				android:textColor="@color/card_and_list_background_light"
 				android:textSize="@dimen/default_desc_text_size"
 				tools:text="@string/parking_place_limited"/>
 

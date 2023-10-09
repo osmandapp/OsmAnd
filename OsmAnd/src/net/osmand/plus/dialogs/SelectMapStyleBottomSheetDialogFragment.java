@@ -1,5 +1,8 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.PISTE_ROUTES_ATTR;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -46,9 +49,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import static net.osmand.plus.configmap.ConfigureMapMenu.PISTE_ROUTES_ATTR;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -190,7 +190,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 				return collator.compare(string1, string2);
 			}
 		});
-		Map<String, String> renderers = getMyApplication().getRendererRegistry().getRenderers();
+		Map<String, String> renderers = getMyApplication().getRendererRegistry().getRenderers(false);
 		List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
 
 		if (!Algorithms.isEmpty(disabledRendererNames)) {

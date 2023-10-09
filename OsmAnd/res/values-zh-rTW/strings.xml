@@ -5426,4 +5426,33 @@
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
     <string name="app_mode_baby_transport">嬰兒運輸</string>
+    <string name="with_waypoints">有航點</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">最大高度</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">飛行傘</string>
+    <string name="filter_by_name">依名稱篩選</string>
+    <string name="shared_string_reset_all">全部重設</string>
+    <string name="filter_tracks_count">過濾條件：%d</string>
+    <string name="app_mode_hang_gliding">滑翔翼</string>
+    <string name="date_of_creation">建立日期</string>
+    <string name="filter_screen_title">過濾條件</string>
+    <string name="shared_string_cache">快取</string>
+    <string name="widget_available_ram_desc">顯示分配給 OsmAnd 的可用記憶體。</string>
+    <string name="sort_size_descending">大尺寸優先</string>
+    <string name="delete_map">刪除地圖</string>
+    <string name="standard_maps">標準地圖</string>
+    <string name="shared_string_created">已建立</string>
+    <string name="wikipedia_and_travel_maps">維基百科與旅行地圖</string>
+    <string name="rendering_styles">繪製樣式</string>
+    <string name="sort_country_name_ascending">國家名稱：A – Z</string>
+    <string name="weather_online">線上天氣</string>
+    <string name="shared_string_show_icon">顯示圖示</string>
+    <string name="map_is_up_to_date">%1$s 地圖已為最新。</string>
+    <string name="sort_size_ascending">小尺寸優先</string>
+    <string name="widget_available_ram">可用 RAM</string>
+    <string name="terrain_maps">地形圖</string>
+    <string name="sort_country_name_descending">國家名稱：Z – A</string>
+    <string name="delete_map_description">您確定您想要刪除 %1$s 地圖嗎？</string>
+    <string name="maps_and_resources">地圖與資源</string>
 </resources>

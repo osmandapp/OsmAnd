@@ -1,8 +1,6 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.KITKAT;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
@@ -237,6 +235,21 @@ public class ImportHelper {
 		}
 	}
 
+	public void handleImport(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri != null) {
+			String scheme = intent.getScheme();
+			if ("file".equals(scheme)) {
+				String path = uri.getPath();
+				if (!Algorithms.isEmpty(path)) {
+					handleFileImport(uri, new File(path).getName(), intent.getExtras(), true);
+				}
+			} else if ("content".equals(scheme)) {
+				handleContentImport(uri, intent.getExtras(), true);
+			}
+		}
+	}
+
 	public void handleFileImport(Uri intentUri, String fileName, Bundle extras, boolean useImportDir) {
 		boolean isFileIntent = "file".equals(intentUri.getScheme());
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(intentUri.getPath()));
@@ -431,7 +444,7 @@ public class ImportHelper {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				Intent intent = getImportTrackIntent();
+				Intent intent = getImportFileIntent();
 				ActivityResultListener listener = getImportFileResultListener(importType, callback);
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);
@@ -473,10 +486,9 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	public static Intent getImportTrackIntent() {
+	public static Intent getImportFileIntent() {
 		Intent intent = new Intent();
-		String action = SDK_INT >= KITKAT ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT;
-		intent.setAction(action);
+		intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
 		return intent;
 	}

@@ -35,6 +35,7 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -69,7 +70,6 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		if (!selectionHelper.hasAnyItems()) {
 			setupSelectionHelper();
 		}
@@ -91,11 +91,6 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
-		adapter.setFilterCallback(filteredItems -> {
-			adapter.updateFilteredItems(filteredItems);
-			updateButtonsState();
-			return true;
-		});
 		if (fragment instanceof EmptyTracksListener) {
 			adapter.setImportTracksListener((EmptyTracksListener) fragment);
 		}
@@ -126,6 +121,21 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		searchEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
+		setupFilterCallback();
+	}
+
+	protected void setupFilterCallback() {
+		adapter.setFilterCallback(filteredItems -> {
+			updateAdapterWithFilteredItems(filteredItems);
+			return true;
+		});
+	}
+
+	protected void updateAdapterWithFilteredItems(List<TrackItem> filteredItems) {
+		searchEditText.setText(adapter.getCurrentSearchQuery());
+		searchEditText.setSelection(searchEditText.length());
+		adapter.updateFilteredItems(filteredItems);
+		updateButtonsState();
 	}
 
 	public void setupSelectionHelper() {
@@ -170,7 +180,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		backButton.setOnClickListener((v) -> dismiss());
 		searchEditText = searchContainer.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_track_by_name);
-		searchEditText.setTextColor(ContextCompat.getColor(app, R.color.color_white));
+		searchEditText.setTextColor(ContextCompat.getColor(app, R.color.card_and_list_background_light));
 		searchEditText.setHintTextColor(ContextCompat.getColor(app, R.color.white_50_transparent));
 		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
@@ -188,7 +198,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void filterTracks(@Nullable String query) {
-		adapter.getFilter().filter(query);
+		adapter.filter(query);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import android.os.Bundle;
 
@@ -57,7 +58,7 @@ public class WidgetsDataHolder {
 		pages.clear();
 		orders.clear();
 
-		int filter = AVAILABLE_MODE | ENABLED_MODE;
+		int filter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(selectedPanel));
 		for (MapWidgetInfo widgetInfo : widgets) {
@@ -72,7 +73,7 @@ public class WidgetsDataHolder {
 		pages.clear();
 		orders.clear();
 
-		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		OsmandApplication app = activity.getMyApplication();
 		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(activity, modeFrom);
 		List<List<String>> widgetsOrder = helper.getWidgetsPagedOrder(modeFrom, selectedPanel, filter);

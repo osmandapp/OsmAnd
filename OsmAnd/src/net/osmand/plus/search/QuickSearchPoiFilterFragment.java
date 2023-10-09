@@ -778,7 +778,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 				if (item.iconId != 0) {
 					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
-							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.color_white));
+							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.card_and_list_background_light));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

@@ -637,10 +637,12 @@
 				<data android:host="www.openstreetmap.org" android:pathPrefix="/query"/>
 				<data android:host="www.openstreetmap.org" android:pathPrefix="/go"/>
 				<data android:host="www.openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/directions" />
 				<data android:host="openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
 				<data android:host="openstreetmap.org" android:pathPrefix="/query"/>
 				<data android:host="openstreetmap.org" android:pathPrefix="/go"/>
 				<data android:host="openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/directions" />
 				<data android:host="osm.org" />
 				<data android:host="map.baidu.cn" />
 				<data android:host="map.baidu.com" />

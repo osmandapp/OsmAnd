@@ -17,7 +17,7 @@
             <!--android:layout_marginLeft="16dp"-->
             <!--android:layout_marginRight="16dp"-->
             <!--android:scaleType="centerInside"-->
-            <!--android:tint="@color/color_white"-->
+            <!--android:tint="@color/card_and_list_background_light"-->
             <!--android:background="?attr/selectableItemBackground"-->
             <!--app:srcCompat="@drawable/ic_action_flag" />-->
         <!---->
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textColorHint="@color/white_80_transparent"
             android:textSize="@dimen/default_list_text_size_large"
             android:hint="@string/shared_string_action_name"
@@ -129,7 +129,7 @@
             android:layout_height="56dp"
             android:text="@string/shared_string_apply"
             android:textAllCaps="true"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_list_text_size"
             android:gravity="center"
             android:layout_gravity="bottom"

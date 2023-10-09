@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import net.osmand.plus.R;
 
@@ -21,6 +22,18 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 
 	public OsmandTextFieldBoxes(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+	}
+
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		editText.setOnFocusChangeListener((view, hasFocus) -> {
+			setHasFocus(hasFocus);
+			if (hasFocus) {
+				inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+				performClick();
+			}
+		});
 	}
 
 	public void makeCompactPadding() {

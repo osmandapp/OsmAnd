@@ -135,7 +135,7 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_marginBottom="@dimen/content_padding"
 				android:text="@string/shared_string_get"
-				android:textColor="@color/color_white"
+				android:textColor="@color/card_and_list_background_light"
 				android:textSize="@dimen/default_sub_text_size"
 				android:visibility="visible"
 				osmand:textAllCapsCompat="true"

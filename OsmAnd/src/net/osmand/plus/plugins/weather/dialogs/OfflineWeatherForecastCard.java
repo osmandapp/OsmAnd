@@ -2,8 +2,8 @@ package net.osmand.plus.plugins.weather.dialogs;
 
 import static android.text.format.DateUtils.WEEK_IN_MILLIS;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
-import static net.osmand.plus.download.ui.LocalIndexOperationTask.DELETE_OPERATION;
+import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
+import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -25,9 +25,10 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.LocalIndexInfo;
-import net.osmand.plus.download.ui.LocalIndexOperationTask;
-import net.osmand.plus.download.ui.LocalIndexOperationTask.OperationListener;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -247,12 +248,12 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 	}
 
 	private void remove(@NonNull List<File> filesToDelete) {
-		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
+		LocalItem[] params = new LocalItem[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
-			params[i] = new LocalIndexInfo(WEATHER_DATA, file, false);
+			params[i] = new LocalItem(file, WEATHER_DATA);
 		}
-		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(app, this, DELETE_OPERATION);
+		LocalOperationTask removeTask = new LocalOperationTask(app, DELETE_OPERATION, this);
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 
@@ -280,7 +281,7 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 	}
 
 	@Override
-	public void onOperationFinished(int operation, String result) {
+	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
 		updateContent();
 	}
 

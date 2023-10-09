@@ -3,6 +3,7 @@ package net.osmand.plus.utils;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +20,7 @@ import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -30,13 +32,25 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class WidgetUtils {
+
+	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                     @NonNull WidgetsPanel panel) {
+		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+		addSelectedWidget(mapActivity, widgetId, appMode, panel);
+	}
+
+	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                     @NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+		addSelectedWidgets(mapActivity, Collections.singletonList(widgetId), panel, appMode);
+	}
+
 	public static void addSelectedWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
-	                                      @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
+										  @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-		int filter = AVAILABLE_MODE | ENABLED_MODE;
+		int filter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
@@ -57,11 +71,11 @@ public class WidgetUtils {
 	}
 
 	public static MapWidgetInfo createDuplicateWidget(@NonNull OsmandApplication app, @NonNull String widgetId, @NonNull WidgetsPanel panel,
-	                                                  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
+													  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
-			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
+			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType, panel);
 			if (widget != null) {
 				app.getSettings().CUSTOM_WIDGETS_KEYS.addValue(id);
 				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
@@ -72,16 +86,16 @@ public class WidgetUtils {
 	}
 
 	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
-	                                   @NonNull WidgetsPanel widgetsPanel ,@NonNull ApplicationMode selectedAppMode) {
+									   @NonNull WidgetsPanel widgetsPanel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
-				selectedAppMode, ENABLED_MODE, Collections.singletonList(widgetsPanel));
+				selectedAppMode, ENABLED_MODE | MATCHING_PANELS_MODE, Collections.singletonList(widgetsPanel));
 
-		widgetRegistry.getWidgetsForPanel(targetWidget.widgetPanel).remove(targetWidget);
-		targetWidget.widgetPanel = widgetsPanel;
+		widgetRegistry.getWidgetsForPanel(targetWidget.getWidgetPanel()).remove(targetWidget);
+		targetWidget.setWidgetPanel(widgetsPanel);
 
 		for (MapWidgetInfo widget : enabledWidgets) {
 			int page = widget.pageIndex;
@@ -122,6 +136,7 @@ public class WidgetUtils {
 
 			targetWidget.pageIndex = lastPage;
 			targetWidget.priority = lastOrder;
+
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);

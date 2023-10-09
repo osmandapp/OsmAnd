@@ -2,11 +2,8 @@ package net.osmand.plus.keyevent.devices.base;
 
 import android.view.KeyEvent;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.commands.BackToLocationCommand;
 import net.osmand.plus.keyevent.commands.EmitNavigationHintCommand;
 import net.osmand.plus.keyevent.commands.MapScrollCommand;
@@ -20,18 +17,8 @@ import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
 
 public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
 
-	private StateChangedListener<Boolean> volumeButtonsPrefListener;
-
 	public DefaultInputDeviceProfile(int id, @StringRes int titleId) {
 		super(id, titleId);
-	}
-
-	@Override
-	public void initialize(@NonNull OsmandApplication app) {
-		super.initialize(app);
-		// Update commands when related preferences updated
-		volumeButtonsPrefListener = aBoolean -> updateCommands();
-		settings.USE_VOLUME_BUTTONS_AS_ZOOM.addListener(volumeButtonsPrefListener);
 	}
 
 	/**
@@ -40,14 +27,12 @@ public abstract class DefaultInputDeviceProfile extends InputDeviceProfile {
 	 */
 	@Override
 	protected void collectCommands() {
+		super.collectCommands();
+
 		// Default map zoom keycodes
 		bindCommand(KeyEvent.KEYCODE_PLUS, MapZoomCommand.ZOOM_IN_ID);
 		bindCommand(KeyEvent.KEYCODE_EQUALS, MapZoomCommand.ZOOM_IN_ID);
 		bindCommand(KeyEvent.KEYCODE_MINUS, MapZoomCommand.ZOOM_OUT_ID);
-		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
-			bindCommand(KeyEvent.KEYCODE_VOLUME_DOWN, MapZoomCommand.CONTINUOUS_ZOOM_OUT_ID);
-			bindCommand(KeyEvent.KEYCODE_VOLUME_UP, MapZoomCommand.CONTINUOUS_ZOOM_IN_ID);
-		}
 
 		// Default map scroll keycodes
 		bindCommand(KeyEvent.KEYCODE_DPAD_UP, MapScrollCommand.SCROLL_UP_ID);

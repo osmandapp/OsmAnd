@@ -7,7 +7,6 @@ import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
@@ -38,7 +37,6 @@ public enum SettingsScreenType {
 	MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
 	LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
 	ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
-	OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
 	DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
 	SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
 	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),

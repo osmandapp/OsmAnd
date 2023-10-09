@@ -21,7 +21,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
-public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
+public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
 
 	private SensorTextWidget sensorWidget;
 	protected ExternalSensorsPlugin plugin;
@@ -73,6 +73,8 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 		view.findViewById(R.id.widget_source_card).setOnClickListener((v) -> {
 			SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorWidget.getFieldType(), getSourceDeviceId());
 		});
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	@Nullable

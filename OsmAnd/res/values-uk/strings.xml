@@ -5427,4 +5427,62 @@
     <string name="live_monitoring_adress_descr">Вкажіть вебадресу з параметром syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Температура</string>
     <string name="sensor_temperature_desc">Показує температуру з сенсорів</string>
+    <string name="with_waypoints">З маршрутними точками</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Максимальна висота</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Парапланеризм</string>
+    <string name="app_mode_baby_transport">Транспортування дітей</string>
+    <string name="filter_by_name">Фільтрувати за назвою</string>
+    <string name="shared_string_reset_all">Скинути все</string>
+    <string name="filter_tracks_count">Фільтр: %d</string>
+    <string name="app_mode_hang_gliding">Дельтапланеризм</string>
+    <string name="date_of_creation">Дата створення</string>
+    <string name="filter_screen_title">Фільтр</string>
+    <string name="shared_string_cache">Кеш</string>
+    <string name="widget_available_ram_desc">Показує доступну пам\'ять, виділену для OsmAnd.</string>
+    <string name="sort_size_descending">Спочатку більшого розміру</string>
+    <string name="delete_map">Видалити мапу</string>
+    <string name="standard_maps">Стандартні мапи</string>
+    <string name="shared_string_created">Створено</string>
+    <string name="wikipedia_and_travel_maps">Вікіпедія та путівники</string>
+    <string name="rendering_styles">Стилі мап</string>
+    <string name="sort_country_name_ascending">Назва країни: А – Я</string>
+    <string name="weather_online">Погода онлайн</string>
+    <string name="map_is_up_to_date">Мапа %1$s оновлена.</string>
+    <string name="sort_size_ascending">Спочатку меншого розміру</string>
+    <string name="widget_available_ram">Доступна оперативна пам\'ять</string>
+    <string name="terrain_maps">Мапи рельєфу</string>
+    <string name="sort_country_name_descending">Назва країни: Я – А</string>
+    <string name="delete_map_description">Ви впевнені, що хочете видалити мапу %1$s\?</string>
+    <string name="maps_and_resources">Мапи й ресурси</string>
+    <string name="shared_string_show_icon">Показати піктограму</string>
+    <string name="smart_folder_name_present">Така розумна тека вже існує</string>
+    <string name="smart_folder_saved">Розумну теку збережено</string>
+    <string name="add_smart_folder">Додати розумну теку</string>
+    <string name="empty_name">Назва відсутня</string>
+    <string name="edit_fiilter">Змінити фільтр</string>
+    <string name="save_as_smart_folder">Зберегти як розумну теку</string>
+    <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
+    <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
+    <string name="release_4_6">- Додано віджет \"Коефіцієнт ковзання\"
+\n
+\n - Додано фільтри та розумні теки для треків
+\n
+\n - Додано рядки для верхньої та нижньої панелей віджетів з підтримкою всіх віджетів
+\n
+\n - Додано підтримку віджету температури ANT+
+\n
+\n - Покращено керування пам\'яттю для великих GPX-доріжок
+\n
+\n - Оновлене керування локальними ресурсами у розділі \"Завантаження
+\n
+\n - Додано віджет \"Доступна оперативна пам\'ять\"
+\n
+\n - Виправлено проблеми з прозорим рядком стану
+\n
+\n</string>
+    <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
+    <string name="map_widget_glide_average_desc">Показує середній коефіцієнт ковзання за встановленим інтервалом.</string>
+    <string name="map_widget_glide_target_desc">Показує коефіцієнт ковзання, необхідний для досягнення цільової точки.</string>
 </resources>

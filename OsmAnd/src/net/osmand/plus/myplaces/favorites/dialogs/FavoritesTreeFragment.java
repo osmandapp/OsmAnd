@@ -593,7 +593,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	private void importFavourites() {
-		Intent intent = ImportHelper.getImportTrackIntent();
+		Intent intent = ImportHelper.getImportFileIntent();
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 

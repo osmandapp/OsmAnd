@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_GROUP_NAME;
@@ -215,11 +216,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	}
 
 	private void setupWidgetItemView(@NonNull View view,
-	                                 @NonNull String widgetId,
-	                                 @NonNull String title,
-	                                 @Nullable String description,
-	                                 @Nullable Drawable icon,
-	                                 int order) {
+									 @NonNull String widgetId,
+									 @NonNull String title,
+									 @Nullable String description,
+									 @Nullable Drawable icon,
+									 int order) {
 		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(icon);
 		((TextView) view.findViewById(R.id.title)).setText(title);
 
@@ -250,7 +251,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	private boolean isWidgetEnabled(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				ENABLED_MODE, Arrays.asList(WidgetsPanel.values()));
+				ENABLED_MODE | MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (widgetId.equals(widgetInfo.key)) {
@@ -328,11 +329,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	 *                                  ({@link WidgetsListFragment})
 	 */
 	public static void showGroupDialog(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull Fragment target,
-	                                   @NonNull ApplicationMode appMode,
-	                                   @NonNull WidgetsPanel widgetsPanel,
-	                                   @NonNull WidgetGroup widgetGroup,
-	                                   @Nullable List<String> alreadySelectedWidgetsIds) {
+									   @NonNull Fragment target,
+									   @NonNull ApplicationMode appMode,
+									   @NonNull WidgetsPanel widgetsPanel,
+									   @NonNull WidgetGroup widgetGroup,
+									   @Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
@@ -348,11 +349,11 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	 * @see AddWidgetListener#showGroupDialog
 	 */
 	public static void showWidgetDialog(@NonNull FragmentManager fragmentManager,
-	                                    @NonNull Fragment target,
-	                                    @NonNull ApplicationMode appMode,
-	                                    @NonNull WidgetsPanel widgetsPanel,
-	                                    @NonNull WidgetType widgetType,
-	                                    @Nullable List<String> alreadySelectedWidgetsIds) {
+										@NonNull Fragment target,
+										@NonNull ApplicationMode appMode,
+										@NonNull WidgetsPanel widgetsPanel,
+										@NonNull WidgetType widgetType,
+										@Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());
@@ -368,12 +369,12 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	 * @see AddWidgetListener#showGroupDialog
 	 */
 	public static void showExternalWidgetDialog(@NonNull FragmentManager fragmentManager,
-	                                            @NonNull Fragment target,
-	                                            @NonNull ApplicationMode appMode,
-	                                            @NonNull WidgetsPanel widgetsPanel,
-	                                            @NonNull String widgetId,
-	                                            @NonNull String externalProviderPackage,
-	                                            @Nullable List<String> alreadySelectedWidgetsIds) {
+												@NonNull Fragment target,
+												@NonNull ApplicationMode appMode,
+												@NonNull WidgetsPanel widgetsPanel,
+												@NonNull String widgetId,
+												@NonNull String externalProviderPackage,
+												@Nullable List<String> alreadySelectedWidgetsIds) {
 		Bundle args = new Bundle();
 		args.putString(KEY_APP_MODE, appMode.getStringKey());
 		args.putString(KEY_WIDGETS_PANEL_ID, widgetsPanel.name());

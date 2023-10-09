@@ -603,14 +603,6 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	@Override
-	public void onUpdatedIndexesList() {
-	}
-
-	@Override
-	public void downloadInProgress() {
-	}
-
-	@Override
 	public void downloadHasFinished() {
 		updateFileSize();
 	}

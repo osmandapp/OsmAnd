@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nToque prolongado para las opciones"</string>
+\nPulsación larga para opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -4710,7 +4710,7 @@
     <string name="av_notes_audio_widget_desc">Si tocas el widget, podrás tomar una nota de voz.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo del viaje registrado actualmente.</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del trayecto registrado actualmente.</string>
-    <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
+    <string name="average_speed_time_interval_desc">Especifica el intervalo de tiempo para calcular el promedio de la velocidad.</string>
     <string name="calculate_online_altitude_descr">Calcula la elevación en línea desde los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="shared_string_duplicate">Duplicar</string>
@@ -4742,7 +4742,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="map_marker_interval_dialog_desc">Especifica el intervalo de tiempo durante el cual se medirá la velocidad media para calcular la hora estimada de llegada.</string>
     <string name="go_to_marker_location">Ir a la posición del marcador</string>
     <string name="shared_string_switch_mode">Cambiar de modo</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
@@ -5427,12 +5427,58 @@
     <string name="live_monitoring_adress_descr">Especifica la dirección web con la sintaxis de los parámetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
-    <string name="release_4_6">- Complemento de índice de planeo
+    <string name="release_4_6">• Añadido el widget \"relación de planeo\"
 \n
-\n - Añadido el complemento para la temperatura ANT
+\n • Filtros y carpetas inteligentes para las pistas
 \n
-\n - Mejor gestión de la memoria para pistas GPX de gran tamaño
+\n • Añadidas filas para los paneles de widgets superior e inferior con soporte para todos los widgets
+\n
+\n • Añadido el soporte para el widget de temperatura ANT
+\n
+\n • Mejora la gestión de la memoria para grandes pistas GPX
+\n
+\n • Actualizada la gestión de recursos locales en las Descargas
+\n
+\n • Añadido widget \"RAM disponible\"
+\n
+\n • Solucionados los problemas con la barra de estado transparente
 \n
 \n</string>
     <string name="app_mode_baby_transport">Cochecito</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
+    <string name="with_waypoints">Con puntos de referencia</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Altitud máxima</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="filter_by_name">Filtrar por nombre</string>
+    <string name="shared_string_reset_all">Reiniciar todo</string>
+    <string name="filter_tracks_count">Filtrar: %d</string>
+    <string name="date_of_creation">Fecha de creación</string>
+    <string name="filter_screen_title">Filtrar</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Muestra la memoria disponible asignada a OsmAnd.</string>
+    <string name="sort_size_descending">El más grande primero</string>
+    <string name="delete_map">Borrar el mapa</string>
+    <string name="standard_maps">Mapas estándar</string>
+    <string name="shared_string_created">Creado</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia y Mapas de viaje</string>
+    <string name="rendering_styles">Estilos de renderizado</string>
+    <string name="sort_country_name_ascending">Nombre del país: A - Z</string>
+    <string name="weather_online">El tiempo en Internet</string>
+    <string name="map_is_up_to_date">El mapa %1$s está actualizado.</string>
+    <string name="sort_size_ascending">El más pequeño primero</string>
+    <string name="widget_available_ram">Memoria RAM disponible</string>
+    <string name="terrain_maps">Mapas del terreno</string>
+    <string name="sort_country_name_descending">Nombre del país: Z - A</string>
+    <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s\?</string>
+    <string name="maps_and_resources">Mapas y recursos</string>
+    <string name="shared_string_show_icon">Mostrar el icono</string>
+    <string name="smart_folder_name_present">Dicha carpeta inteligente ya está presente</string>
+    <string name="smart_folder_saved">Carpeta inteligente guardada</string>
+    <string name="add_smart_folder">Agregar una carpeta inteligente</string>
+    <string name="empty_name">Nombre vacío</string>
+    <string name="edit_fiilter">Editar el filtro</string>
+    <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
 </resources>

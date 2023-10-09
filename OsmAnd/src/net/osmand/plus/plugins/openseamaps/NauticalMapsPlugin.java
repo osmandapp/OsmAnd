@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_DEPTH_CONTOURS;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
+import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -15,8 +15,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -122,7 +122,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	private boolean hasDepthMaps() {
 		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
 		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalIndexInfo> depthIndexData = helper.getLocalIndexData(readFiles, false, null, DEPTH_DATA);
+		List<LocalItem> depthIndexData = helper.getLocalIndexItems(readFiles, false, null, DEPTH_DATA);
 		return !Algorithms.isEmpty(depthIndexData);
 	}
 

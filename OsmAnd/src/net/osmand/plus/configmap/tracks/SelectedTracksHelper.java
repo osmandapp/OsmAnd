@@ -16,6 +16,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -72,10 +73,9 @@ public class SelectedTracksHelper {
 			allTrackItems.add(trackItem);
 		}
 		itemsSelectionHelper.setAllItems(allTrackItems);
-
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 		for (TrackItem item : trackItems) {
-			addLocalIndexInfo(trackTabs, item);
+			addTrackItem(trackTabs, item);
 		}
 		updateTrackTabs(trackTabs);
 	}
@@ -83,12 +83,11 @@ public class SelectedTracksHelper {
 	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
-
 		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
+		trackTabs.putAll(getAllSmartFoldersTabs());
 		trackTabs.putAll(folderTabs);
-
 		loadTabsSortModes();
 		sortTrackTabs();
 	}
@@ -185,8 +184,20 @@ public class SelectedTracksHelper {
 		itemsSelectionHelper.setOriginalSelectedItems(selectedItems);
 	}
 
+	@NonNull
+	private Map<String, TrackTab> getAllSmartFoldersTabs() {
+		Map<String, TrackTab> smartFoldersTabs = new LinkedHashMap<>();
+		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
+			TrackTab folderTab = new TrackTab(folder);
+			folderTab.items.add(TYPE_SORT_TRACKS);
+			folderTab.items.addAll(folder.getTrackItems());
+			smartFoldersTabs.put(folderTab.getTypeName(), folderTab);
+		}
+		return smartFoldersTabs;
+	}
+
 	@Nullable
-	private TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
+	private TrackTab addTrackItem(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
 		File file = item.getFile();
 		if (file != null && file.getParentFile() != null) {
 			File dir = file.getParentFile();
@@ -217,7 +228,7 @@ public class SelectedTracksHelper {
 			allTab.items.addAll(getAllTabItems());
 			sortTrackTab(allTab);
 		}
-		TrackTab folderTab = addLocalIndexInfo(trackTabs, item);
+		TrackTab folderTab = addTrackItem(trackTabs, item);
 		if (folderTab != null) {
 			sortTrackTab(folderTab);
 		}

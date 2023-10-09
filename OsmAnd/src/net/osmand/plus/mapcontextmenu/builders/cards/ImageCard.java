@@ -407,8 +407,6 @@ public abstract class ImageCard extends AbstractCard {
 		public interface GetImageCardsListener {
 			void onPostProcess(List<ImageCard> cardList);
 
-			void onPlaceIdAcquired(String[] placeId);
-
 			void onFinish(List<ImageCard> cardList);
 		}
 

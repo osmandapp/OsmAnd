@@ -7,7 +7,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 import java.util.Collections;
 import java.util.Comparator;

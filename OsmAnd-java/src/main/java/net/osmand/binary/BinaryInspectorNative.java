@@ -23,7 +23,7 @@ public class BinaryInspectorNative {
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbose output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");

@@ -353,7 +353,7 @@
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
-    <string name="routing_attr_avoid_toll_name">Sin cabinas de peajes</string>
+    <string name="routing_attr_avoid_toll_name">Sin peajes</string>
     <string name="routing_attr_avoid_toll_description">Evitar caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Sólo caminos pavimentados</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
@@ -2171,7 +2171,7 @@
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
-    <string name="shared_string_slope">Pendiente</string>
+    <string name="shared_string_slope">Pendientes</string>
     <string name="lang_ber">Bereber (amazig)</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
@@ -3134,7 +3134,7 @@
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
     <string name="map_during_navigation_info">Mapa al navegar</string>
-    <string name="map_during_navigation">Mapa durante la navegación</string>
+    <string name="map_during_navigation">Mapa al navegar</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
@@ -5252,8 +5252,8 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios serán desvinculados de OsmAnd Cloud y se perderá acceso a las funciones de pago.</string>
-    <string name="osmand_cloud_deletion_account_warning">La cuenta junto con todos los datos de ésta tiene %1$s</string>
-    <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud son %1$s. Los datos en el dispositivo se mantienen intactos.</string>
+    <string name="osmand_cloud_deletion_account_warning">Ésta cuenta y todos sus datos serán %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos en el dispositivo se mantienen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
     <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
@@ -5439,4 +5439,43 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Grabación de trazas</string>
     <string name="help_article_widgets_name">Widgets del mapa</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
+    <string name="shared_string_cache">Caché</string>
+    <string name="with_waypoints">Con puntos de ruta</string>
+    <string name="widget_available_ram_desc">Muestra la memoria RAM disponible, destinada a OsmAnd.</string>
+    <string name="sort_size_descending">Más largo primero</string>
+    <string name="delete_map">Borrar mapa</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">Mapas estándar</string>
+    <string name="max_altitude">Altitud máx.</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="shared_string_created">Creado</string>
+    <string name="release_4_6">• Se ha añadido el widget de proporción del deslizamiento.
+\n
+\n• Se ha añadido el widget de temperatura en ANT+
+\n
+\n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n
+\n</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="app_mode_baby_transport">Transporte de bebés</string>
+    <string name="filter_by_name">Filtrar por nombre</string>
+    <string name="shared_string_reset_all">Restablecer todo</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia y mapas turísticos</string>
+    <string name="rendering_styles">Estilos de representación</string>
+    <string name="filter_tracks_count">Filtro: %d</string>
+    <string name="sort_country_name_ascending">Nombre del país: A – Z</string>
+    <string name="app_mode_hang_gliding">Ala delta</string>
+    <string name="weather_online">Clima en línea</string>
+    <string name="date_of_creation">Fecha de creación</string>
+    <string name="shared_string_show_icon">Mostrar icono</string>
+    <string name="map_is_up_to_date">El mapa «%1$s» está actualizado.</string>
+    <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
+    <string name="sort_size_ascending">Más corto primero</string>
+    <string name="filter_screen_title">Filtro</string>
+    <string name="widget_available_ram">RAM disponible</string>
+    <string name="terrain_maps">Mapas topográficos</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="sort_country_name_descending">Nombre del país: Z – A</string>
+    <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
+    <string name="maps_and_resources">Mapas y Recursos</string>
 </resources>
