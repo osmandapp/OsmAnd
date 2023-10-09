@@ -210,7 +210,7 @@ public class RoutingContext {
 			if (tl.isLoaded()) {
 				if(except == null || except.searchSubregionTile(tl.subregion) < 0){
 					tl.unload();
-					if(calculationProgress != null) {
+					if (calculationProgress != null) {
 						calculationProgress.unloadedTiles ++;
 					}
 					global.size -= tl.tileStatistics.size;
