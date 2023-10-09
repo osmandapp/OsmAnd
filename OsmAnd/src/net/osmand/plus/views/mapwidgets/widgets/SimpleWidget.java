@@ -131,12 +131,12 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		imageView.setImageDrawable(oldImageView.getDrawable());
 		copyView(imageView, oldImageView);
 		view.setOnClickListener(getOnClickListener());
+		view.setVisibility(oldContainer.getVisibility());
 
 		copyTextView(textView, oldTextView);
 		copyTextView(textViewShadow, oldTextViewShadow);
 		copyTextView(smallTextView, oldSmallTextView);
 		copyTextView(smallTextViewShadow, oldSmallTextViewShadow);
-		copyView(container, oldContainer);
 		copyView(emptyBanner, oldEmptyBanner);
 		copyView(bottomDivider, oldBottomDivider);
 
@@ -193,14 +193,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		imageView.invalidate();
 	}
 
-	@Override
-	protected int getBackgroundResource(@NonNull MapInfoLayer.TextState textState) {
-		if (settings.TRANSPARENT_MAP_THEME.get()) {
-			return R.color.color_transparent;
-		}
-		return isVerticalWidget ? ColorUtilities.getWidgetBackgroundColorId(isNightMode()) : textState.widgetBackgroundId;
-	}
-
 	public void setImageDrawable(int res) {
 		Drawable imageDrawable = iconsCache.getIcon(res, 0);
 		if (shouldShowIcon()) {
@@ -222,12 +214,25 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		if (isVerticalWidget) {
 			nightMode = textState.night;
-			textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
-			smallTextView.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
-			widgetName.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
-			view.findViewById(R.id.widget_bg).setBackgroundResource(getBackgroundResource(textState));
+			textView.setTextColor(textState.textColor);
+			smallTextView.setTextColor(textState.secondaryTextColor);
+			widgetName.setTextColor(textState.secondaryTextColor);
+			int iconId = getIconId();
+			if (iconId != 0) {
+				setImageDrawable(iconId);
+			}
+			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 		} else {
 			super.updateColors(textState);
+		}
+	}
+
+	@Override
+	protected View getContentView() {
+		if (isVerticalWidget) {
+			return view;
+		} else {
+			return container;
 		}
 	}
 
