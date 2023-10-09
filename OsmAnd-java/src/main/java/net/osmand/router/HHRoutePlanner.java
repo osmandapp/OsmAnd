@@ -60,6 +60,7 @@ public class HHRoutePlanner {
 		boolean PRELOAD_SEGMENTS = false;
 		
 		boolean CALC_ALTERNATIVES = false;
+		boolean USE_GC_MORE_OFTEN = false;
 		// TODO alternative could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 2; // skip some points to speed up calculation
@@ -129,6 +130,11 @@ public class HHRoutePlanner {
 		
 		public HHRoutingConfig useShortcuts() {
 			USE_CH_SHORTCUTS = true;
+			return this;
+		}
+		
+		public HHRoutingConfig gc() {
+			USE_GC_MORE_OFTEN = true;
 			return this;
 		}
 		
@@ -541,6 +547,10 @@ public class HHRoutePlanner {
 				}
 			}
 		}
+		if (c.USE_GC_MORE_OFTEN) {
+			ctx.unloadAllData();
+			System.gc();
+		}
 		return pnts;
 	}
 
@@ -762,12 +772,16 @@ public class HHRoutePlanner {
 	}
 
 	
-	private HHNetworkSegmentRes runDetailedRouting(HHNetworkSegmentRes res) throws InterruptedException, IOException {
+	private HHNetworkSegmentRes runDetailedRouting(HHRoutingConfig c, HHNetworkSegmentRes res) throws InterruptedException, IOException {
+		
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		NetworkDBSegment segment = res.segment;
 		ctx.config.planRoadDirection = 0; // A* bidirectional
 		ctx.config.heuristicCoefficient = 1; 
 		ctx.unloadAllData(); // needed for proper multidijsktra work
+		if (c.USE_GC_MORE_OFTEN) {
+			System.gc();
+		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
 		ctx.startX = start.getRoad().getPoint31XTile(start.getSegmentStart(), start.getSegmentEnd());
@@ -788,7 +802,7 @@ public class HHRoutePlanner {
 			if (s.segment != null) {
 				networkDB.loadGeometry(s.segment, false);
 				if (c.ROUTE_ALL_SEGMENTS && s.segment.geometry.size() <= 2) {
-					runDetailedRouting(s);
+					runDetailedRouting(c, s);
 				}
 			}
 		}
@@ -798,7 +812,7 @@ public class HHRoutePlanner {
 				if (s.segment != null) {
 					networkDB.loadGeometry(s.segment, false);
 					if (c.ROUTE_ALL_ALT_SEGMENTS && s.segment.geometry.size() <= 2) {
-						runDetailedRouting(s);
+						runDetailedRouting(c, s);
 					}
 				}
 			}
