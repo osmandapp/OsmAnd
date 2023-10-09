@@ -4906,4 +4906,19 @@
     <string name="rendering_attr_horseScale_name">Svårighetsgrad för ridvägar</string>
     <string name="select_nav_profile_dialog_message">\'Navigeringstyp\' avgör hur rutter ska beräknas, med tillgängliga offline och online ruttberäkningsmotorer.</string>
     <string name="shared_string_temperature">Temperatur</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Kollektivtrafikvägvisning</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navigera efter markörer</string>
+    <string name="help_article_widgets_markers_name">Markörwidgets</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Bilvägvisning (Lastbil, Motorcykel)</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Ruttförberedelser</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Fotgängarvägvisning</string>
+    <string name="help_article_navigation_routing_online_routing_name">Onlinevägvisning</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Skidvägvisning</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Mopedvägvisning</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Båtvägvisning</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Cykelvägvisning (MTB)</string>
+    <string name="help_article_map_interact_with_map_name">Interagera med kartan</string>
+    <string name="help_article_search_search_all_name">Sök alla</string>
+    <string name="help_article_map_legend_ski_map_name">Vinter och skidor-kartstil</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnds ruttberäkning</string>
 </resources>
