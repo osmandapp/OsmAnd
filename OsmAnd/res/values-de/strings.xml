@@ -5452,11 +5452,21 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Gleitzahl-Widget
+    <string name="release_4_6">• \"Gleitzahl\"-Widget hinzugefügt
 \n
-\n • ANT+ Temperatur-Widget hinzugefügt
+\n• Filter und Intelligente Ordner für Tracks hinzugefügt
 \n
-\n • Bessere Speicherverwaltung für große GPX-Tracks
+\n• Reihen für obere und untere Widget-Panels mit Unterstützung für alle Widgets zugefügt
+\n
+\n• Unterstützung für ANT+ Temperatur-Widget zugefügt
+\n
+\n• Die Speicherverwaltung für große GPX-Tracks wurde verbessert.
+\n
+\n• Die Verwaltung der lokalen Ressourcen in Downloads wurde aktualisiert
+\n
+\n• Widget \"Verfügbarer RAM\" zugefügt
+\n
+\n• Probleme mit der transparenten Statusleiste wurden behoben
 \n
 \n</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>

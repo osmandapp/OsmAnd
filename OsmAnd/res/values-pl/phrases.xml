@@ -4627,4 +4627,9 @@
     <string name="poi_ship_destination">Dostęp dla statków: zakaz ruchu tranzytowego</string>
     <string name="poi_socket_typee_output">Gniazdo: Typ E: wyjście</string>
     <string name="poi_vending_machine_fuel_filter">Automatyczne dystrybutory paliwa;Automaty sprzedające paliwo</string>
+    <string name="poi_sinkhole_pit">Zapadlisko: dół</string>
+    <string name="poi_barrier_bar">Bariera</string>
+    <string name="poi_wicket_gate">Furtka</string>
+    <string name="poi_health_specialty_community_yes">Społeczność</string>
+    <string name="poi_barrier_coupure">Bariera ochronna</string>
 </resources>

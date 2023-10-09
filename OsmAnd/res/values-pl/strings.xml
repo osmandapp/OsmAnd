@@ -1280,7 +1280,7 @@
     <string name="arrival_distance_factor_early">Wcześnie</string>
     <string name="arrival_distance_factor_normally">Normalnie</string>
     <string name="arrival_distance_factor_late">Późno</string>
-    <string name="arrival_distance_factor_at_last">Tuż przed przybyciem</string>
+    <string name="arrival_distance_factor_at_last">Bardzo późno</string>
     <string name="av_camera_pic_size">Rozmiar obrazu aparatu</string>
     <string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu aparatu</string>
     <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, wahadłowe</string>
@@ -5221,7 +5221,7 @@
     <string name="calculate_offline_altitude_descr">Obliczanie wysokości w trybie offline na podstawie danych mapy wysokości. Różnice w stosunku do wysokości rejestrowanej przez urządzenie mogą być wykorzystane jako korekcja wysokości.</string>
     <string name="external_sensors_not_found">Nie znaleziono czujników</string>
     <string name="external_sensors_source_of_data">Źródło danych</string>
-    <string name="power_watts_unit">Watów</string>
+    <string name="power_watts_unit">Waty</string>
     <string name="revolutions_per_minute_unit">obr./min</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Mapa terenu (3D)</string>
@@ -5282,7 +5282,7 @@
     <string name="free_settings_backup">Bezpłatna kopia zapasowa ustawień</string>
     <string name="action_cannot_be_undone">Tego działania nie można cofnąć.</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Użyj rastra sqlitedb dla cieniowania / nachylenia wzgórza</string>
-    <string name="free_ride">Przejazd bezpłatny</string>
+    <string name="free_ride">Bezpłatny przejazd</string>
     <string name="routing_attr_allow_via_ferrata_name">Trasa górska (Via ferrata)</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Urządzenia dodatkowe zostaną wylogowane z OsmAnd Cloud i utracą dostęp do płatnych funkcji.</string>
     <string name="osmand_cloud_deletion_account_warning">Twoje konto i wszystkie dane konta będą %1$s</string>
