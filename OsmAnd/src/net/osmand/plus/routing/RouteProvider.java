@@ -789,7 +789,7 @@ public class RouteProvider {
 
 			HHRoutePlanner routePlanner = new HHRoutePlanner(env.getCtx(), new HHRoutingPreparationDB(connection));
 			HHNetworkRouteRes route = routePlanner.runRouting(new LatLon(params.start.getLatitude(),
-					params.start.getLongitude()), params.end, HHRoutingConfig.astar(1).calcDetailed(2));
+					params.start.getLongitude()), params.end, HHRoutingConfig.astar(1).calcDetailed(2).gc());
 
 			if (log.isInfoEnabled()) {
 				String message = "findHHRoute time " + (System.currentTimeMillis() - start);
