@@ -1,6 +1,11 @@
-armeabi/
-x86/
-armeabi-v7a/
+armeabi/*
+!armeabi/libsqlitejdbc.so
+x86/*
+!x86/libsqlitejdbc.so
+armeabi-v7a/*
+!armeabi-v7a/libsqlitejdbc.so
+arm64-v8a/*
+!arm64-v8a/libsqlitejdbc.so
+x86_64/*
+!x86_64/libsqlitejdbc.so
 mips/
-arm64-v8a/
-x86_64/

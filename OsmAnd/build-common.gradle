@@ -405,4 +405,5 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.2.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
+	implementation 'org.xerial:sqlite-jdbc:3.42.0.1'
 }
