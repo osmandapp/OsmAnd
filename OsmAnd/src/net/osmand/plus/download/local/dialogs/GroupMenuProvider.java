@@ -30,7 +30,6 @@ import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -77,7 +76,8 @@ public class GroupMenuProvider implements MenuProvider {
 			searchItem.setIcon(getIcon(R.drawable.ic_action_search_dark, colorId));
 			searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			searchItem.setOnMenuItemClickListener(item -> {
-				activity.showDialog(activity, SearchDialogFragment.createInstance(""));
+				FragmentManager manager = activity.getSupportFragmentManager();
+				LocalSearchFragment.showInstance(manager, group.getType(), null, fragment);
 				return true;
 			});
 		}
