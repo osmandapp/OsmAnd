@@ -1274,7 +1274,7 @@
     <string name="closing_at">Lukker</string>
     <string name="contact_info">Kontaktinformasjon</string>
     <string name="recent_places">Nylige steder</string>
-    <string name="saved_at_time">Nå lagret her: %1$s</string>
+    <string name="saved_at_time">Nå lagret: %1$s</string>
     <string name="new_version">Ny versjon</string>
     <string name="begin_with_osmand_menu_group">Første trinn med OsmAnd</string>
     <string name="features_menu_group">Funksjoner</string>
@@ -3449,7 +3449,7 @@
     <string name="lang_lmo">Langobardisk</string>
     <string name="parking_positions">Parkeringsposisjoner</string>
     <string name="add_edit_favorite">Legg til eller rediger favoritt</string>
-    <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
+    <string name="import_complete_description">Importert alle data fra %1$s. Bruk knappene nedenfor til å åpne en hvilken som helst del av programmet for å håndtere det.</string>
     <string name="restore_all_profile_settings_descr">Alle profilinnstillinger blir gjenopprettet til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
     <string name="clear_recorded_data_warning">Tømme data som er tatt opp\?</string>
     <string name="recalculate_route_in_deviation">Beregn rute på nytt ved avvik</string>
@@ -5394,4 +5394,10 @@
     <string name="sort_country_name_descending">Landets navn: Å – A</string>
     <string name="delete_map_description">Er du sikker på at du vil slette kartet %1$s\?</string>
     <string name="maps_and_resources">Kart &amp; Ressurser</string>
+    <string name="smart_folder_name_present">Slik en smart-mappe finnes allerede</string>
+    <string name="smart_folder_saved">Smart-mappe lagret</string>
+    <string name="add_smart_folder">Legg til smart-mappe</string>
+    <string name="empty_name">Tomt navn</string>
+    <string name="save_as_smart_folder">Lagre som smart-mappe</string>
+    <string name="delete_smart_folder_dialog_message">Dette sletter smart-mappen \"%1$s\".</string>
 </resources>

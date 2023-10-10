@@ -27,7 +27,7 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.actionId = actionId;
 
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setOnClickListener(getOnClickListener());
 	}
 
@@ -46,8 +46,7 @@ public class AudioVideoNotesWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		AudioVideoNotesPlugin plugin = getPlugin();
 		if (plugin == null) {
 			setText(null, null);

@@ -24,6 +24,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -230,6 +231,22 @@ public class MapWidgetRegistry {
 	@NonNull
 	public Set<MapWidgetInfo> getRightWidgets() {
 		return getWidgetsForPanel(WidgetsPanel.RIGHT);
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getSideWidgets() {
+		Set<MapWidgetInfo> sideWidgetsInfo = new HashSet<>();
+		sideWidgetsInfo.addAll(getWidgetsForPanel(WidgetsPanel.LEFT));
+		sideWidgetsInfo.addAll(getWidgetsForPanel(WidgetsPanel.RIGHT));
+		return sideWidgetsInfo;
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getVerticalWidgets() {
+		Set<MapWidgetInfo> verticalWidgetsInfo = new HashSet<>();
+		verticalWidgetsInfo.addAll(getWidgetsForPanel(WidgetsPanel.TOP));
+		verticalWidgetsInfo.addAll(getWidgetsForPanel(WidgetsPanel.BOTTOM));
+		return verticalWidgetsInfo;
 	}
 
 	@NonNull

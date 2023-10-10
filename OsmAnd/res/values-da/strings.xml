@@ -5431,11 +5431,21 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Glidetal-modul
+    <string name="release_4_6">• Tilføjet \"Glidetal\"-modul
 \n
-\n • Tilføjet ANT+ temperatur-modul
+\n • Tilføjet filtre og smarte mapper til spor
+\n
+\n • Tilføjet rækker til øverste og nederste modulpaneler med understøttelse af alle moduler
+\n
+\n • Tilføjet understøttelse af ANT+ temperatur-modul
 \n
 \n • Bedre hukommelseshåndtering for store GPX-spor
+\n
+\n • Opdateret lokal ressourcehåndtering i Downloads
+\n
+\n • Tilføjet modul \"Tilgængelig RAM\"
+\n
+\n • Løst problemer med gennemsigtig statuslinje
 \n
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
@@ -5471,4 +5481,9 @@
     <string name="shared_string_show_icon">Vis ikon</string>
     <string name="empty_name">Tomt navn</string>
     <string name="edit_fiilter">Redigér filter</string>
+    <string name="smart_folder_name_present">Sådan en smartMappe findes allerede</string>
+    <string name="smart_folder_saved">SmartMappe gemt</string>
+    <string name="add_smart_folder">Tilføj smart mappe</string>
+    <string name="save_as_smart_folder">Gem som smart mappe</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil slette \"%1$s\" smart mappe.</string>
 </resources>

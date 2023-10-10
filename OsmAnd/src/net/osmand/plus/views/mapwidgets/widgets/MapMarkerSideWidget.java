@@ -96,7 +96,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		MapMarker marker = getMarker();
 
 		boolean hideWidget = marker == null;

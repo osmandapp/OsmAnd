@@ -57,8 +57,7 @@ public class AverageSpeedWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - lastUpdateTime > UPDATE_INTERVAL_MILLIS) {
 			lastUpdateTime = time;

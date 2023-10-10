@@ -4621,4 +4621,12 @@
     <string name="poi_health_specialty_geriatrics_yes">Geriatria</string>
     <string name="poi_health_specialty_weight_loss_yes">Perda de peso</string>
     <string name="poi_health_specialty_infectious_diseases_yes">Doenças infeciosas</string>
+    <string name="poi_socket_typee_voltage_filter">Voltagem da tomada tipo E</string>
+    <string name="poi_socket_typee_current">Tomada: Tipo E: corrente</string>
+    <string name="poi_checkpoint_cycling">Checkpoint de ciclismo</string>
+    <string name="poi_socket_typee_yes">Tipo E</string>
+    <string name="poi_socket_typee_output_filter">Saída da tomada tipo E</string>
+    <string name="poi_health_specialty_intensive_yes">Intenso</string>
+    <string name="poi_socket_typee_voltage">Tomadas: Tipo E: voltagem</string>
+    <string name="poi_socket_typee_output">Tomada: Tipo E: saída</string>
 </resources>

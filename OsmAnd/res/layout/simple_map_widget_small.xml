@@ -9,7 +9,7 @@
 	android:minHeight="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
-	<LinearLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -22,34 +22,45 @@
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
-			android:layout_marginEnd="12dp"
-			android:gravity="center"
+			osmand:layout_constraintBottom_toBottomOf="parent"
+			osmand:layout_constraintStart_toStartOf="parent"
+			osmand:layout_constraintTop_toTopOf="parent"
 			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<TextView
 			android:id="@+id/widget_text"
-			android:layout_width="0dp"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
 			android:letterSpacing="0.04"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			android:textSize="@dimen/simple_widget_value_small_size" />
+			android:textSize="@dimen/simple_widget_value_small_size"
+			osmand:layout_constraintBottom_toBottomOf="parent"
+			osmand:layout_constraintEnd_toEndOf="parent"
+			osmand:layout_constraintStart_toStartOf="parent"
+			osmand:layout_constraintTop_toTopOf="parent" />
 
 		<LinearLayout
-			android:layout_width="wrap_content"
+			android:id="@+id/linearLayout"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:layout_marginStart="16dp"
+			osmand:layout_constraintBottom_toBottomOf="parent"
+			osmand:layout_constraintEnd_toEndOf="parent"
+			osmand:layout_constraintStart_toEndOf="@+id/widget_text"
+			osmand:layout_constraintTop_toTopOf="parent">
 
 			<TextView
 				android:id="@+id/widget_name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
-				android:layout_weight="1"
 				android:letterSpacing="0.06"
+				android:maxLines="1"
 				android:lineSpacingExtra="-2sp"
+				android:ellipsize="end"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -60,7 +71,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
-				android:layout_weight="1"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:textAllCaps="true"
@@ -70,7 +80,7 @@
 
 		</LinearLayout>
 
-	</LinearLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<View
 		android:id="@+id/bottom_divider"

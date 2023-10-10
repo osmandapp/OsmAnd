@@ -5430,11 +5430,21 @@
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Widget Rasio Glide
+    <string name="release_4_6">• Menambahkan widget \"Rasio Luncur\".
 \n
-\n• Ditambahkan widget suhu ANT+
+\n • Menambahkan filter dan folder pintar untuk trek
 \n
-\n• Pengelolaan memori lebih baik untuk trek GPX besar.
+\n • Menambahkan baris untuk panel widget atas dan bawah dengan dukungan untuk semua widget
+\n
+\n • Menambahkan dukungan untuk widget suhu ANT+
+\n
+\n • Peningkatan manajemen memori untuk trek GPX besar
+\n
+\n • Manajemen sumber daya lokal yang diperbarui di Unduhan
+\n
+\n • Menambahkan widget \"RAM yang Tersedia\"
+\n
+\n • Memperbaiki masalah dengan bilah status transparan
 \n
 \n</string>
     <string name="shared_string_temperature">Suhu</string>

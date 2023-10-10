@@ -19,12 +19,12 @@ public class CameraTiltWidget extends SimpleWidget {
 	public CameraTiltWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_CAMERA_TILT, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_CAMERA_TILT);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		double mapTilt = mapView.getElevationAngle();
 		if (isUpdateNeeded() || Math.abs(mapTilt - cachedMapTilt) > 0.05d) {
 			cachedMapTilt = mapTilt;
