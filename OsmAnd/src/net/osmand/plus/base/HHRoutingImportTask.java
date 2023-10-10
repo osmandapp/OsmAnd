@@ -23,7 +23,7 @@ public class HHRoutingImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		return ImportHelper.copyFile(app, app.getAppPath(HH_ROUTING_DIR + name), uri, false, false);
+		return ImportHelper.copyFile(app, app.getAppPath(HH_ROUTING_DIR + name), uri, true, false);
 	}
 
 	@Override
