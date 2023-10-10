@@ -42,7 +42,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 		if (listener != null) {
 			listener.loadTracksStarted();
 		}
-		smartFolderHelper.resetSmartFolders();
+		smartFolderHelper.resetSmartFoldersItems();
 	}
 
 	@Override

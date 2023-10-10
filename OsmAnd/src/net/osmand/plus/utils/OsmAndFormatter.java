@@ -107,9 +107,9 @@ public class OsmAndFormatter {
 		shortTimeFormatter = new TimeFormatter(locale, "HH:mm", "h:mm a");
 	}
 
-	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
-		int hours = seconds / (60 * 60);
-		int minutes = (seconds / 60) % 60;
+	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
+		long hours = seconds / (60 * 60);
+		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
 			return hours + " "
 					+ app.getString(R.string.osmand_parking_hour)

@@ -6,10 +6,9 @@ import net.osmand.plus.utils.OsmAndFormatter
 class FilterDurationViewHolder(itemView: View, nightMode: Boolean) :
 	FilterRangeViewHolder(itemView, nightMode) {
 
-	override fun updateSelectedValue(valueFromMinutes: Float, valueToMinutes: Float) {
-
-		val fromTxt = OsmAndFormatter.getFormattedDuration(valueFromMinutes.toInt() * 60, app)
-		val toTxt = OsmAndFormatter.getFormattedDuration(valueToMinutes.toInt() * 60, app)
+	override fun updateSelectedValue(valueFromMinutes: Int, valueToMinutes: Int) {
+		val fromTxt = OsmAndFormatter.getFormattedDuration(valueFromMinutes * 60L, app)
+		val toTxt = OsmAndFormatter.getFormattedDuration(valueToMinutes * 60L, app)
 		selectedValue.text = "$fromTxt - $toTxt"
 	}
 }
