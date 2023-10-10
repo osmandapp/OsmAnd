@@ -63,7 +63,7 @@ public class HHRoutePlanner {
 		boolean USE_GC_MORE_OFTEN = false;
 		// TODO alternative could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
-		double ALT_EXCLUDE_RAD_MULT_IN = 2; // skip some points to speed up calculation
+		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
 
 		
@@ -254,11 +254,11 @@ public class HHRoutePlanner {
 //			c.preloadSegments();
 			c.calcDetailed(2);
 			c.gc();
-//			c.calcAlternative();
+			c.calcAlternative();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
-			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
-			c.ALT_EXCLUDE_RAD_MULT = 0.3;
+//			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
+//			c.ALT_EXCLUDE_RAD_MULT = 0.3;
 		}
 		System.out.println(c.toString(start, end));
 		HHRoutingContext hctx = this.cacheHctx;
