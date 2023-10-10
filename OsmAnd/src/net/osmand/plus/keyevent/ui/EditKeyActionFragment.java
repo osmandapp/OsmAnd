@@ -6,6 +6,7 @@ import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -23,9 +25,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.InputDeviceHelperListener;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.ui.keybindings.ActionItem;
+import net.osmand.plus.keyevent.ui.keybindings.KeyAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -37,29 +38,33 @@ import java.util.Objects;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCodeSelected {
 
 	public static final String TAG = EditKeyActionFragment.class.getSimpleName();
 
-	private static final String ATTR_COMMAND_ID = "attr_command_id";
 	private static final String ATTR_KEY_CODE = "attr_key_code";
+	private static final String ATTR_COMMAND_ID = "attr_command_id";
+	private static final String ATTR_DEVICE_ID = "attr_device_id";
 
 	private ApplicationMode appMode;
 	private InputDeviceHelper deviceHelper;
 
 	private DialogButton applyButton;
 
-	private ActionItem actionItem;
-	private int initialKeyCode;
+	private KeyAction keyAction;
+	private int initialKeyCode = KeyEvent.KEYCODE_UNKNOWN;
 	private String initialCommandId;
+	private String deviceId;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		deviceHelper = app.getInputDeviceHelper();
+
 		Bundle arguments = requireArguments();
 		initialKeyCode = arguments.getInt(ATTR_KEY_CODE);
 		initialCommandId = arguments.getString(ATTR_COMMAND_ID);
+		deviceId = arguments.getString(ATTR_DEVICE_ID);
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 
@@ -74,7 +79,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		}
 		KeyEventCommand command = deviceHelper.getOrCreateCommand(commandId);
 		if (command != null) {
-			actionItem = new ActionItem(keyCode, command);
+			keyAction = new KeyAction(keyCode, command);
 		}
 	}
 
@@ -88,7 +93,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
-		if (actionItem != null) {
+		if (keyAction != null) {
 			setupActionNameRow(view);
 			setupActionTypeRow(view);
 			setupActionKeyRow(view);
@@ -106,7 +111,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		OsmandTextFieldBoxes textBox = view.findViewById(R.id.text_box);
 		textBox.setEnabled(false);
 		ExtendedEditText editText = view.findViewById(R.id.edit_text);
-		editText.setText(actionItem.getCommand().toHumanString(app));
+		editText.setText(keyAction.getCommandTitle(app));
 	}
 
 	private void setupActionTypeRow(@NonNull View view) {
@@ -114,7 +119,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		TextView title = actionButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_action);
 		TextView summary = actionButton.findViewById(R.id.description);
-		summary.setText(actionItem.getCommand().toHumanString(app));
+		summary.setText(keyAction.getCommandTitle(app));
 	}
 
 	private void setupActionKeyRow(@NonNull View view) {
@@ -122,12 +127,17 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		TextView title = keyButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_button);
 		TextView summary = keyButton.findViewById(R.id.description);
-		summary.setText(actionItem.getKeySymbol());
+		summary.setText(keyAction.getKeySymbol());
 		summary.setTypeface(summary.getTypeface(), Typeface.BOLD);
 		View backgroundView = keyButton.findViewById(R.id.selectable_list_item);
 		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
 		keyButton.setOnClickListener(v -> {
-			// todo open select key code screen
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				Fragment thisFragment = EditKeyActionFragment.this;
+				FragmentManager fm = activity.getSupportFragmentManager();
+				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyAction);
+			}
 		});
 		AndroidUiHelper.updateVisibility(keyButton.findViewById(R.id.bottom_divider), false);
 	}
@@ -135,7 +145,9 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
-			// todo save changes
+			int newKeyCode = keyAction.getKeyCode();
+			String commandId = keyAction.getCommandId();
+			deviceHelper.updateCustomKeyBinding(deviceId, commandId, initialKeyCode, newKeyCode);
 			dismiss();
 		});
 		applyButton.setButtonType(DialogButtonType.PRIMARY);
@@ -148,23 +160,24 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 	}
 
 	private boolean hasAnyChanges() {
-		return actionItem != null
-				&& (initialKeyCode != actionItem.getKeyCode()
-				|| !Objects.equals(initialCommandId, actionItem.getCommand().getId()));
+		return keyAction != null
+				&& (initialKeyCode != keyAction.getKeyCode()
+				|| !Objects.equals(initialCommandId, keyAction.getCommandId()));
 	}
 
 	@Override
-	public void onInputDeviceHelperMessage() {
+	public void onKeyCodeSelected(int newKeyCode) {
 		View view = getView();
-		if (view != null && actionItem != null) {
+		keyAction = new KeyAction(newKeyCode, keyAction.getCommand());
+		if (view != null) {
 			updateViewContent(view);
 		}
 	}
 
 	private void updateViewContent(@NonNull View view) {
-		View keyButton = view.findViewById(R.id.key_button);
-		TextView summary = keyButton.findViewById(R.id.description);
-		summary.setText(actionItem.getKeySymbol());
+		setupActionNameRow(view);
+		setupActionTypeRow(view);
+		setupActionKeyRow(view);
 	}
 
 	@Override
@@ -174,7 +187,6 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
 		}
-		deviceHelper.addListener(this);
 	}
 
 	@Override
@@ -184,15 +196,14 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-		deviceHelper.removeListener(this);
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (actionItem != null) {
-			outState.putInt(ATTR_KEY_CODE, actionItem.getKeyCode());
-			outState.putString(ATTR_COMMAND_ID, actionItem.getCommand().getId());
+		if (keyAction != null) {
+			outState.putInt(ATTR_KEY_CODE, keyAction.getKeyCode());
+			outState.putString(ATTR_COMMAND_ID, keyAction.getCommandId());
 		}
 	}
 
@@ -220,13 +231,15 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements InputDe
 
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull ActionItem actionItem) {
+	                                @NonNull KeyAction keyAction,
+	                                @NonNull String deviceId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyActionFragment fragment = new EditKeyActionFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
-			arguments.putString(ATTR_COMMAND_ID, actionItem.getCommand().getId());
-			arguments.putInt(ATTR_KEY_CODE, actionItem.getKeyCode());
+			arguments.putString(ATTR_COMMAND_ID, keyAction.getCommandId());
+			arguments.putString(ATTR_DEVICE_ID, deviceId);
+			arguments.putInt(ATTR_KEY_CODE, keyAction.getKeyCode());
 			fragment.setArguments(arguments);
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

@@ -1,6 +1,7 @@
 package net.osmand.plus.keyevent;
 
 import android.view.KeyEvent;
+import android.view.KeyEvent.Callback;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	private final Map<Integer, KeyEventCommand> globalCommands = new HashMap<>();
 
 	private StateChangedListener<Boolean> volumeButtonsPrefListener;
+	private KeyEvent.Callback externalCallback;
 
 	public KeyEventHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -50,8 +52,18 @@ public class KeyEventHelper implements KeyEvent.Callback {
 		this.mapActivity = mapActivity;
 	}
 
+	/**
+	 * Sets an external callback to process key events in another place with a custom algorithm.
+	 */
+	public void setExternalCallback(@Nullable Callback externalCallback) {
+		this.externalCallback = externalCallback;
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (externalCallback != null) {
+			return externalCallback.onKeyDown(keyCode, event);
+		}
 		KeyEventCommand command = findCommand(keyCode);
 		if (command != null && command.onKeyDown(keyCode, event)) {
 			return true;
@@ -61,12 +73,21 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (externalCallback != null) {
+			return externalCallback.onKeyLongPress(keyCode, event);
+		}
 		KeyEventCommand command = findCommand(keyCode);
 		return command != null && command.onKeyLongPress(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
+//		int deviceId = event.getDeviceId();
+//		String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
+//		app.showShortToastMessage("Device id: " + deviceId + ", key code: " + keyCode + " '" + keyLabel + "'");
+		if (externalCallback != null) {
+			return externalCallback.onKeyUp(keyCode, event);
+		}
 		KeyEventCommand command = findCommand(keyCode);
 		if (command != null && command.onKeyUp(keyCode, event)) {
 			return true;
@@ -76,6 +97,9 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
+		if (externalCallback != null) {
+			return externalCallback.onKeyMultiple(keyCode, count, event);
+		}
 		KeyEventCommand command = findCommand(keyCode);
 		return command != null && command.onKeyMultiple(keyCode, count, event);
 	}

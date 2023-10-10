@@ -92,7 +92,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 	}
 
 	private void updateViewContent() {
-		adapter.setScreenData(controller.populateScreenItems(), controller.isEditableDeviceType());
+		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceEditable());
 	}
 
 	@Override

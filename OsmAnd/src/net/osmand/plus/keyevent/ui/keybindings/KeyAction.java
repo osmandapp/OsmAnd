@@ -1,16 +1,18 @@
 package net.osmand.plus.keyevent.ui.keybindings;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 
-public class ActionItem {
+public class KeyAction {
 
 	private final KeyEventCommand command;
 	private final int keyCode;
 
-	public ActionItem(int keyCode, @NonNull KeyEventCommand command) {
+	public KeyAction(int keyCode, @NonNull KeyEventCommand command) {
 		this.command = command;
 		this.keyCode = keyCode;
 	}
@@ -18,6 +20,16 @@ public class ActionItem {
 	@NonNull
 	public KeyEventCommand getCommand() {
 		return command;
+	}
+
+	@NonNull
+	public String getCommandId() {
+		return getCommand().getId();
+	}
+
+	@NonNull
+	public String getCommandTitle(@NonNull Context context) {
+		return getCommand().toHumanString(context);
 	}
 
 	@NonNull

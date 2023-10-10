@@ -58,7 +58,7 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, "→");
 		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_CENTER, "CENTER");
 
-		keySymbolMap.put(KeyEvent.KEYCODE_SPACE, "space");
+		keySymbolMap.put(KeyEvent.KEYCODE_SPACE, "␣");
 		keySymbolMap.put(KeyEvent.KEYCODE_ENTER, "↵");
 		keySymbolMap.put(KeyEvent.KEYCODE_TAB, "⇥");
 		keySymbolMap.put(KeyEvent.KEYCODE_BACK, "⇦");
@@ -67,6 +67,8 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_CAPS_LOCK, "⇪");
 		keySymbolMap.put(KeyEvent.KEYCODE_DEL, "⌫");
 		keySymbolMap.put(KeyEvent.KEYCODE_ESCAPE, "⎋");
+		keySymbolMap.put(KeyEvent.KEYCODE_SLASH, "/");
+		keySymbolMap.put(KeyEvent.KEYCODE_GRAVE, "~");
 
 		keySymbolMap.put(KeyEvent.KEYCODE_NUM_LOCK, "Num");
 		keySymbolMap.put(KeyEvent.KEYCODE_ALT_LEFT, "Alt");
@@ -95,6 +97,8 @@ public class KeySymbolMapper {
 
 		keySymbolMap.put(KeyEvent.KEYCODE_BREAK, "Pause");
 		keySymbolMap.put(KeyEvent.KEYCODE_SCROLL_LOCK, "Scroll");
+		keySymbolMap.put(KeyEvent.KEYCODE_MOVE_HOME, "Home");
+		keySymbolMap.put(KeyEvent.KEYCODE_FORWARD_DEL, "Forward Delete");
 		keySymbolMap.put(KeyEvent.KEYCODE_SYSRQ, "SysRq");
 		keySymbolMap.put(KeyEvent.KEYCODE_MEDIA_PLAY, "Play");
 		keySymbolMap.put(KeyEvent.KEYCODE_MEDIA_PAUSE, "Pause");

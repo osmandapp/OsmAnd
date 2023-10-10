@@ -229,6 +229,10 @@
 	<dimen name="default_desc_line_height">20sp</dimen>
 	<dimen name="small_desc_line_height">14sp</dimen>
 
+	<dimen name="key_event_keycode_label_size">39sp</dimen>
+	<dimen name="key_event_cursor_width">4dp</dimen> <!--2dp-->
+	<dimen name="key_event_cursor_corners_radius">4dp</dimen> <!--4dp-->
+
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>
 	<dimen name="default_split_segments_sub">10sp</dimen>

@@ -3,7 +3,6 @@ package net.osmand.plus.keyevent.ui.keybindings;
 import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,6 +25,7 @@ class ScreenController {
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final InputDeviceHelper deviceHelper;
+	private final InputDeviceProfile inputDevice;
 	private FragmentActivity activity;
 
 	public ScreenController(@NonNull OsmandApplication app,
@@ -33,22 +33,23 @@ class ScreenController {
 		this.app = app;
 		this.appMode = appMode;
 		this.deviceHelper = app.getInputDeviceHelper();
+		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 	}
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		Map<KeyEventCategory, List<ActionItem>> categorizedActions = collectCategorizedActions();
+		Map<KeyEventCategory, List<KeyAction>> categorizedActions = collectCategorizedActions();
 		if (Algorithms.isEmpty(categorizedActions)) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
 		for (KeyEventCategory category : KeyEventCategory.values()) {
-			List<ActionItem> actions = categorizedActions.get(category);
+			List<KeyAction> actions = categorizedActions.get(category);
 			if (actions != null) {
 				String categoryName = app.getString(category.getTitleId());
 				screenItems.add(new ScreenItem(ScreenItemType.CARD_DIVIDER, categoryName));
 				screenItems.add(new ScreenItem(ScreenItemType.HEADER, categoryName));
-				for (ActionItem action : actions) {
+				for (KeyAction action : actions) {
 					screenItems.add(new ScreenItem(ScreenItemType.ACTION_ITEM, action));
 				}
 			}
@@ -58,25 +59,24 @@ class ScreenController {
 		return screenItems;
 	}
 
-	@Nullable
-	private Map<KeyEventCategory, List<ActionItem>> collectCategorizedActions() {
-		InputDeviceProfile device = deviceHelper.getSelectedDevice(appMode);
-		if (device == null) {
-			return null;
+	@NonNull
+	private Map<KeyEventCategory, List<KeyAction>> collectCategorizedActions() {
+		if (inputDevice == null) {
+			return new HashMap<>();
 		}
-		Map<KeyEventCategory, List<ActionItem>> categorizedActions = new HashMap<>();
-		ArrayMap<Integer, KeyEventCommand> mappedCommands = device.getMappedCommands();
+		Map<KeyEventCategory, List<KeyAction>> categorizedActions = new HashMap<>();
+		ArrayMap<Integer, KeyEventCommand> mappedCommands = inputDevice.getMappedCommands();
 		for (int i = 0; i < mappedCommands.size(); i++) {
 			Integer keyCode = mappedCommands.keyAt(i);
 			KeyEventCommand command = mappedCommands.valueAt(i);
 			if (command != null) {
 				KeyEventCategory category = command.getCategory();
-				List<ActionItem> actions = categorizedActions.get(category);
+				List<KeyAction> actions = categorizedActions.get(category);
 				if (actions == null) {
 					actions = new ArrayList<>();
 					categorizedActions.put(category, actions);
 				}
-				actions.add(new ActionItem(keyCode, command));
+				actions.add(new KeyAction(keyCode, command));
 			}
 		}
 		return categorizedActions;
@@ -86,13 +86,14 @@ class ScreenController {
 		this.activity = activity;
 	}
 
-	public boolean isEditableDeviceType() {
-		InputDeviceProfile device = deviceHelper.getSelectedDevice(appMode);
-		return device != null && deviceHelper.isCustomDevice(device);
+	public boolean isDeviceEditable() {
+		return inputDevice != null && deviceHelper.isCustomDevice(inputDevice);
 	}
 
-	public void askEditKeyAction(ActionItem action) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		EditKeyActionFragment.showInstance(fm, appMode, action);
+	public void askEditKeyAction(KeyAction action) {
+		if (inputDevice != null) {
+			FragmentManager fm = activity.getSupportFragmentManager();
+			EditKeyActionFragment.showInstance(fm, appMode, action, inputDevice.getId());
+		}
 	}
 }

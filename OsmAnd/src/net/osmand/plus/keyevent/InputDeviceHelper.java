@@ -7,10 +7,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
+import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -170,6 +170,17 @@ public class InputDeviceHelper {
 		}
 	}
 
+	public void updateCustomKeyBinding(@NonNull String deviceId,
+	                                   @NonNull String commandId,
+	                                   int oldKeyCode,
+	                                   int newKeyCode) {
+		InputDeviceProfile device = getDeviceById(deviceId);
+		if (device != null) {
+			device.updateMappedCommands(oldKeyCode, newKeyCode, commandId);
+			syncSettings();
+		}
+	}
+
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		String selectedDeviceId = getSelectedDeviceId(appMode);
 		return Objects.equals(selectedDeviceId, deviceId);
@@ -178,6 +189,11 @@ public class InputDeviceHelper {
 	public boolean isCustomDevice(@NonNull InputDeviceProfile device) {
 		String id = device.getId();
 		return id.startsWith(CUSTOM_PREFIX);
+	}
+
+	@Nullable
+	public InputDeviceProfile getDeviceById(@NonNull String deviceId) {
+		return cachedDevices.get(deviceId);
 	}
 
 	@Nullable

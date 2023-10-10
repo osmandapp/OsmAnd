@@ -81,7 +81,7 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		} else if (holder instanceof ActionItemViewHolder) {
 			ActionItemViewHolder h = (ActionItemViewHolder) holder;
-			ActionItem actionItem = (ActionItem) item.value;
+			KeyAction keyAction = (KeyAction) item.value;
 
 			if (isEditable()) {
 				boolean nightMode = isNightMode();
@@ -91,10 +91,10 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				controller.askEditKeyAction(actionItem);
+				controller.askEditKeyAction(keyAction);
 			}: null);
-			h.actionName.setText(actionItem.getCommand().toHumanString(app));
-			h.keyName.setText(actionItem.getKeySymbol());
+			h.actionName.setText(keyAction.getCommandTitle(app));
+			h.keyName.setText(keyAction.getKeySymbol());
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
 			boolean dividerNeeded = nextItem != null && nextItem.type == ScreenItemType.ACTION_ITEM;
