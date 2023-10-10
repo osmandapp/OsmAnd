@@ -165,15 +165,31 @@ public class InputDeviceHelper {
 		InputDeviceProfile device = cachedDevices.remove(deviceId);
 		if (device != null) {
 			customDevices.remove(device);
+			cachedDevices.remove(deviceId);
 			syncSettings();
+			resetSelectedDeviceIfNeeded();
 			notifyListeners();
+		}
+	}
+
+	public void resetSelectedDeviceIfNeeded() {
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			resetSelectedDeviceIfNeeded(appMode);
+		}
+	}
+
+	public void resetSelectedDeviceIfNeeded(@NonNull ApplicationMode appMode) {
+		InputDeviceProfile device = getSelectedDevice(appMode);
+		if (device == null) {
+			// If selected device is unknown for application mode
+			// we should reset it to default value
+			settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
 		}
 	}
 
 	public void updateCustomKeyBinding(@NonNull String deviceId,
 	                                   @NonNull String commandId,
-	                                   int oldKeyCode,
-	                                   int newKeyCode) {
+	                                   int oldKeyCode, int newKeyCode) {
 		InputDeviceProfile device = getDeviceById(deviceId);
 		if (device != null) {
 			device.updateMappedCommands(oldKeyCode, newKeyCode, commandId);

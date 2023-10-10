@@ -61,8 +61,9 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 		super.createToolbar(inflater, view);
 
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> {
-			boolean newState = !isInputDeviceEnabled();
 			ApplicationMode appMode = getSelectedAppMode();
+			deviceHelper.resetSelectedDeviceIfNeeded(appMode);
+			boolean newState = !isInputDeviceEnabled();
 			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newState);
 			updateToolbarSwitch(view);
 			updateAllSettings();
