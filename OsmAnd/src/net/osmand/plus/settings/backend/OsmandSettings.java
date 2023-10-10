@@ -1828,6 +1828,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
+	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
+
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 

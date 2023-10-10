@@ -61,6 +61,9 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (!isFromExternalDevice(event)) {
+			return false;
+		}
 		if (externalCallback != null) {
 			return externalCallback.onKeyDown(keyCode, event);
 		}
@@ -73,6 +76,9 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		if (!isFromExternalDevice(event)) {
+			return false;
+		}
 		if (externalCallback != null) {
 			return externalCallback.onKeyLongPress(keyCode, event);
 		}
@@ -82,9 +88,12 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-//		int deviceId = event.getDeviceId();
-//		String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
-//		app.showShortToastMessage("Device id: " + deviceId + ", key code: " + keyCode + " '" + keyLabel + "'");
+		if (settings.SHOW_INFO_ABOUT_PRESSED_KEY.get()) {
+			showToastAboutPressedKey(event);
+		}
+		if (!isFromExternalDevice(event)) {
+			return false;
+		}
 		if (externalCallback != null) {
 			return externalCallback.onKeyUp(keyCode, event);
 		}
@@ -97,11 +106,21 @@ public class KeyEventHelper implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
+		if (!isFromExternalDevice(event)) {
+			return false;
+		}
 		if (externalCallback != null) {
 			return externalCallback.onKeyMultiple(keyCode, count, event);
 		}
 		KeyEventCommand command = findCommand(keyCode);
 		return command != null && command.onKeyMultiple(keyCode, count, event);
+	}
+
+	private void showToastAboutPressedKey(@NonNull KeyEvent keyEvent) {
+		int keyCode = keyEvent.getKeyCode();
+		int deviceId = keyEvent.getDeviceId();
+		String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
+		app.showShortToastMessage("Device id: " + deviceId + ", key code: " + keyCode + ", label: \"" + keyLabel + "\"");
 	}
 
 	@Nullable
@@ -132,6 +151,10 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	private static boolean isFromExternalDevice(@NonNull KeyEvent keyEvent) {
+		return keyEvent.getDeviceId() > 0;
 	}
 
 	private static boolean isLetterKeyCode(int keyCode) {
