@@ -10,6 +10,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -189,7 +190,14 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		if (filterChanged()) {
 			val fragmentManager = fragmentManager
 			fragmentManager?.let {
-				LeaveFiltersConfirmBottomSheet.showInstance(it, this)
+				val builder = AlertDialog.Builder(requireContext())
+				builder.setTitle(R.string.discard_filter_changes)
+				builder.setMessage(R.string.discard_filter_changes_prompt)
+				builder.setNegativeButton(R.string.shared_string_cancel, null)
+				builder.setPositiveButton(R.string.discard_changes) { dialog, which ->
+					closeWithoutApplyConfirmed()
+				}
+				builder.show()
 			}
 		} else {
 			dismiss()
