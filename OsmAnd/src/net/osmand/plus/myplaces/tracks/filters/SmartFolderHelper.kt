@@ -9,13 +9,14 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.util.Algorithms
 import java.util.Date
+import java.util.HashSet
 
 class SmartFolderHelper(val app: OsmandApplication) {
 	private val preference: CommonPreference<String>
 	private val gson: Gson
 
 	private val smartFolderCollection: MutableList<SmartFolder> = ArrayList()
-	private val allAvailableTrackItems = ArrayList<TrackItem>()
+	private val allAvailableTrackItems = HashSet<TrackItem>()
 	private val updateListeners = ArrayList<SmartFolderUpdateListener>()
 
 	companion object {
@@ -45,11 +46,10 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	fun resetSmartFoldersItems() {
 		for (smartFolder in smartFolderCollection) {
 			smartFolder.trackItems.clear()
-			smartFolder.filters?.clear()
 		}
 	}
 
-	private fun getEnabledFilters(filters: MutableList<BaseTrackFilter>?): ArrayList<BaseTrackFilter> {
+	fun getEnabledFilters(filters: MutableList<BaseTrackFilter>?): ArrayList<BaseTrackFilter> {
 		var enabledFilters = ArrayList<BaseTrackFilter>()
 		filters?.let {
 			for (filter in filters) {
@@ -219,5 +219,11 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	fun refreshSmartFolder(smartFolder: SmartFolder) {
 		updateSmartFolderItems(smartFolder)
+	}
+
+	fun getAllAvailableTrackItems(): HashSet<TrackItem> {
+		val items = HashSet<TrackItem>()
+		items.addAll(allAvailableTrackItems)
+		return items
 	}
 }

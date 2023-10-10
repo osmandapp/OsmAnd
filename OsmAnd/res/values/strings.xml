@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="configure_filter">Configure filter</string>
+    <string name="no_config_smart_folder_title">Not configured</string>
+    <string name="no_config_smart_folder_description">Smart folders allow to group tracks by applied filters</string>
+    <string name="empty_smart_folder_title">No matching track</string>
+    <string name="empty_smart_folder_description">All matching tracks will automatically appear here</string>
     <string name="discard_filter_changes">Discard filter changes</string>
     <string name="discard_filter_changes_prompt">Are you sure you want to reset all filters?</string>
     <string name="smart_folder_saved">SmartFolder saved</string>

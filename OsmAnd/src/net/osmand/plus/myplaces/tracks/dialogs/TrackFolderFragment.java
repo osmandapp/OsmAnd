@@ -20,12 +20,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
@@ -113,7 +113,14 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 						getTargetFragment(),
 						false,
 						isUsedOnMap(),
-						null);
+						null,
+						null,
+						new DialogClosedListener() {
+							@Override
+							public void onDialogClosed() {
+								updateContent();
+							}
+						});
 				return true;
 			}
 		}

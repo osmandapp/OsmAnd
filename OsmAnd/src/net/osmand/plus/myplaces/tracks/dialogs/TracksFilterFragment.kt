@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,30 +22,35 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.TackFiltersContainer
+import net.osmand.plus.myplaces.tracks.DialogClosedListener
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.util.Algorithms
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
-	FilterChangedListener {
+	FilterChangedListener, SmartFolderUpdateListener {
 	companion object {
 		val TAG: String = TracksFilterFragment::class.java.simpleName
 
 		fun showInstance(
 			manager: FragmentManager,
+			target: Fragment?,
 			filter: TracksSearchFilter,
-			trackFiltersContainer: TackFiltersContainer,
+			trackFiltersContainer: DialogClosedListener,
 			smartFolder: SmartFolder?) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = TracksFilterFragment()
+				fragment.setTargetFragment(target, 0)
 				fragment.retainInstance = true
-				fragment.trackFiltersContainer = trackFiltersContainer
+				fragment.dialogClosedListener = trackFiltersContainer
 				fragment.filter = filter
 				fragment.smartFolder = smartFolder
 				fragment.show(manager, TAG)
@@ -58,7 +65,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	var showButton: DialogButton? = null
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
-	private lateinit var trackFiltersContainer: TackFiltersContainer
+	private lateinit var dialogClosedListener: DialogClosedListener
 	private lateinit var appBar: AppBarLayout
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,8 +133,22 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		}
 		showButton = view.findViewById(R.id.show_button)
 		showButton?.setOnClickListener {
-			dismiss()
-			trackFiltersContainer.onFilterDialogClosed()
+			val activity = activity
+			if (activity != null) {
+				val manager = activity.supportFragmentManager
+				SearchMyPlacesTracksFragment.showInstance(
+					manager,
+					targetFragment,
+					false,
+					isUsedOnMap,
+					smartFolder,
+					filter,
+					object : DialogClosedListener {
+						override fun onDialogClosed() {
+							updateFilters()
+						}
+					})
+			}
 		}
 		progressBar = view.findViewById(R.id.progress_bar)
 	}
@@ -146,7 +167,6 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				app.smartFolderHelper.saveSmartFolder(smartFolder!!, filter.currentFilters)
 				Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT).show()
 				dismiss()
-				trackFiltersContainer.onFilterDialogClosed()
 			} else {
 				app.dialogManager.showSaveSmartFolderDialog(
 					requireActivity(),
@@ -166,7 +186,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun closeWithoutApply() {
-		if (filter.appliedFiltersCount > 0) {
+		if (filterChanged()) {
 			val fragmentManager = fragmentManager
 			fragmentManager?.let {
 				LeaveFiltersConfirmBottomSheet.showInstance(it, this)
@@ -186,7 +206,6 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			it.notifyItemRangeChanged(0, it.itemCount)
 		}
 		dismiss()
-		trackFiltersContainer.onFilterDialogClosed()
 	}
 
 	private fun setupList(view: View) {
@@ -207,6 +226,31 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		filter.filter()
 	}
 
+	private fun filterChanged(): Boolean {
+		var changed = false
+		if (smartFolder == null) {
+			changed = filter.appliedFiltersCount > 0
+		} else {
+			smartFolder?.let { folder ->
+				if (Algorithms.isEmpty(folder.filters)) {
+					changed = filter.appliedFiltersCount > 0
+				} else {
+					val folderFilters = folder.filters!!
+					if (folderFilters.size != filter.appliedFiltersCount) {
+						changed = true
+					} else {
+						for (folderFilter in folderFilters) {
+							if (folderFilter != filter.getFilterByType(folderFilter.filterType)) {
+								changed = true
+								break
+							}
+						}
+					}
+				}
+			}
+		}
+		return changed
+	}
 
 	private fun updateUI() {
 		resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
@@ -221,6 +265,11 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	override fun onResume() {
 		super.onResume()
+		smartFolderHelper.addUpdateListener(this)
+		updateFilters()
+	}
+
+	private fun updateFilters() {
 		for (filter in filter.currentFilters) {
 			filter.initFilter()
 		}
@@ -239,10 +288,27 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	override fun onPause() {
 		super.onPause()
 		filter.removeFiltersChangedListener(this)
+		smartFolderHelper.removeUpdateListener(this)
 	}
 
 	private fun updateProgressVisibility(visible: Boolean) {
 		AndroidUiHelper.setVisibility(
 			if (visible) View.VISIBLE else View.GONE, progressBar)
+	}
+
+	override fun onDismiss(dialog: DialogInterface) {
+		super.onDismiss(dialog)
+		if (dialogClosedListener != null) {
+			dialogClosedListener.onDialogClosed()
+		}
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder?) {
+		super.onSmartFolderSaved(smartFolder)
+		dismiss()
+	}
+
+	override fun onSmartFolderCreated(smartFolder: SmartFolder?) {
+		dismiss()
 	}
 }

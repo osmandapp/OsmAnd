@@ -176,6 +176,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						this,
 						false,
 						isUsedOnMap(),
+						null,
+						null,
 						null);
 			}
 		}
@@ -520,6 +522,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFolderCreated(SmartFolder smartFolder) {
 		updateContent();
+		openSmartFolder(smartFolder);
 	}
 
 	@Override

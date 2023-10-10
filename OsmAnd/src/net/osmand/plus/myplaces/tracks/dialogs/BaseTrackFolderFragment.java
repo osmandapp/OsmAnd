@@ -6,6 +6,7 @@ import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
@@ -217,7 +218,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			trackItems = selectedFolder.getTrackItems();
 		}
 		if (Algorithms.isEmpty(folders) && Algorithms.isEmpty(trackItems)) {
-			items.add(TYPE_EMPTY_FOLDER);
+			items.add(smartFolder == null ? TYPE_EMPTY_FOLDER : TYPE_EMPTY_SMART_FOLDER);
 		} else {
 			if (!Algorithms.isEmpty(folders)) {
 				items.addAll(folders);

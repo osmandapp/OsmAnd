@@ -84,9 +84,9 @@ public class TracksComparator implements Comparator<Object> {
 			case NAME_DESCENDING:
 				return -compareTrackFolderNames(folder1, folder2);
 			case DATE_ASCENDING:
-				return -compareFolderFilesByLastModified(folder1, folder2);
-			case DATE_DESCENDING:
 				return compareFolderFilesByLastModified(folder1, folder2);
+			case DATE_DESCENDING:
+				return -compareFolderFilesByLastModified(folder1, folder2);
 			case LAST_MODIFIED:
 				return compareFolderFilesByLastModified(folder1, folder2);
 			case DISTANCE_DESCENDING:

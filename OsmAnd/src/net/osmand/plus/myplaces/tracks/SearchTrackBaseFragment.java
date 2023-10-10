@@ -87,7 +87,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 
 		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
-		adapter = new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+		adapter = createAdapter(trackItems);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
@@ -111,6 +111,11 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		setupSearch(view);
 		setupFragment(view);
 		return view;
+	}
+
+	@NonNull
+	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
+		return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
 	}
 
 	protected abstract void setupFragment(View view);

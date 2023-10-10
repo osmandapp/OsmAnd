@@ -11,6 +11,7 @@ import java.util.Locale
 
 class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	BaseTrackFilter(R.string.date_of_creation, DATE_CREATION, filterChangedListener) {
+	private var DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	var initialValueFrom = Date().time
 	var initialValueTo = Date().time
 
@@ -35,8 +36,8 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	}
 
 	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
-		val day1String = DATE_FORMAT.format(day1)
-		val day2String = DATE_FORMAT.format(day2)
+		val day1String = getDateFormat().format(day1)
+		val day2String = getDateFormat().format(day2)
 		return day1String.equals(day2String)
 	}
 
@@ -68,8 +69,10 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 				isDatesEquals(valueTo, other.valueTo)
 	}
 
-
-	companion object {
-		private val DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+	private fun getDateFormat(): SimpleDateFormat {
+		if(DATE_FORMAT == null) {
+			DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+		}
+		return DATE_FORMAT
 	}
 }

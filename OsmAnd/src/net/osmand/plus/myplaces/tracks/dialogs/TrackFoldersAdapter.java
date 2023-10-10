@@ -20,8 +20,10 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
+import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.EmptyFolderViewHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.EmptySmartFolderViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.FolderStatsViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
@@ -56,6 +58,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_FOLDER_STATS = 6;
 	public static final int TYPE_EMPTY_TRACKS = 7;
 	public static final int TYPE_SMART_FOLDER = 8;
+	public static final int TYPE_EMPTY_SMART_FOLDER = 9;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -71,6 +74,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private RecordingTrackListener recordingTrackListener;
 	@Nullable
 	private EmptyTracksListener emptyTracksListener;
+	@Nullable
+	private EmptySmartFolderListener emptySmartFolderListener;
 
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 	private boolean nightMode;
@@ -131,6 +136,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.emptyTracksListener = emptyTracksListener;
 	}
 
+	public void setEmptySmartFolderListener(@Nullable EmptySmartFolderListener emptySmartFolderListener) {
+		this.emptySmartFolderListener = emptySmartFolderListener;
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -157,6 +166,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_EMPTY_FOLDER:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptyFolderViewHolder(view, emptyTracksListener);
+			case TYPE_EMPTY_SMART_FOLDER:
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new EmptySmartFolderViewHolder(view, emptySmartFolderListener);
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
 				return new FolderStatsViewHolder(app, view);
@@ -189,6 +201,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_EMPTY_FOLDER;
 			} else if (TYPE_EMPTY_TRACKS == item) {
 				return TYPE_EMPTY_TRACKS;
+			}if (TYPE_EMPTY_SMART_FOLDER == item) {
+				return TYPE_EMPTY_SMART_FOLDER;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
@@ -230,6 +244,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView(trackItem);
 		} else if (holder instanceof EmptyFolderViewHolder) {
 			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
+			viewHolder.bindView();
+		}if (holder instanceof EmptySmartFolderViewHolder) {
+			EmptySmartFolderViewHolder viewHolder = (EmptySmartFolderViewHolder) holder;
 			viewHolder.bindView();
 		} else if (holder instanceof FolderStatsViewHolder) {
 			TrackFolderAnalysis folderAnalysis = (TrackFolderAnalysis) items.get(position);
