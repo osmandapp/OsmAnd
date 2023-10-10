@@ -21,21 +21,21 @@ import java.util.List;
 
 public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-	private static final int LIST_ITEM_TYPE = 0;
+	protected static final int LIST_ITEM_TYPE = 0;
 	private static final int LIST_HEADER_TYPE = 1;
 	private static final int MEMORY_USAGE_TYPE = 2;
 
 
 	private final List<Object> items = new ArrayList<>();
 
-	private final LocalItemsFragment fragment;
+	private final LocalItemListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 	private boolean selectionMode;
 
-	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemsFragment fragment) {
-		this.fragment = fragment;
-		this.nightMode = fragment.isNightMode();
+	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
+		this.listener = listener;
+		this.nightMode = nightMode;
 		themedInflater = UiUtilities.getInflater(context, nightMode);
 	}
 
@@ -56,7 +56,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		switch (viewType) {
 			case LIST_ITEM_TYPE:
 				View itemView = themedInflater.inflate(R.layout.local_list_item, parent, false);
-				return new LocalItemHolder(itemView, fragment);
+				return new LocalItemHolder(itemView, listener, nightMode);
 			case MEMORY_USAGE_TYPE:
 				itemView = themedInflater.inflate(R.layout.local_memory_card, parent, false);
 				return new MemoryViewHolder(itemView, false, nightMode);
@@ -121,10 +121,20 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public interface LocalItemListener {
 
-		boolean isItemSelected(@NonNull LocalItem item);
+		default boolean isItemSelected(@NonNull LocalItem item) {
+			return false;
+		}
 
-		void onItemSelected(@NonNull LocalItem item);
+		default boolean itemUpdateAvailable(@NonNull LocalItem item) {
+			return false;
+		}
 
-		void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view);
+		default void onItemSelected(@NonNull LocalItem item) {
+
+		}
+
+		default void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
+
+		}
 	}
 }

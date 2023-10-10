@@ -1,5 +1,11 @@
 package net.osmand.plus.download.local.dialogs;
 
+import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
+import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
+import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
+import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,16 +17,22 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
+import net.osmand.plus.download.local.OperationType;
+import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class LocalBaseFragment extends BaseOsmAndFragment implements OperationListener,
-		DownloadEvents, OnMapSourceUpdateListener, RenameCallback {
+		ConfirmDeletionListener, DownloadEvents, OnMapSourceUpdateListener, RenameCallback {
 
 	private final Map<String, IndexItem> itemsToUpdate = new HashMap<>();
 
@@ -72,6 +84,38 @@ public abstract class LocalBaseFragment extends BaseOsmAndFragment implements Op
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			activity.setSupportProgressBarIndeterminateVisibility(visible);
+		}
+	}
+
+	@Override
+	public void onDeletionConfirmed(@NonNull LocalItem localItem) {
+		performOperation(DELETE_OPERATION, localItem);
+	}
+
+	public void performOperation(@NonNull OperationType type, @NonNull LocalItem... items) {
+		LocalOperationTask task = new LocalOperationTask(app, type, this);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, items);
+	}
+
+	@Override
+	public void onOperationStarted() {
+		updateProgressVisibility(true);
+	}
+
+	@Override
+	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+		updateProgressVisibility(false);
+
+		if (!Algorithms.isEmpty(result)) {
+			app.showToastMessage(result);
+		}
+		DownloadActivity activity = getDownloadActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			if (Algorithms.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
+				activity.reloadLocalIndexes();
+			} else {
+				activity.onUpdatedIndexesList();
+			}
 		}
 	}
 
