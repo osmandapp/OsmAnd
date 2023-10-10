@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
 
 public class HHRoutingImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
@@ -23,7 +26,11 @@ public class HHRoutingImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		return ImportHelper.copyFile(app, app.getAppPath(HH_ROUTING_DIR + name), uri, true, false);
+		File file = app.getAppPath(HH_ROUTING_DIR + name);
+		if (file.exists()) {
+			Algorithms.removeAllFiles(file);
+		}
+		return ImportHelper.copyFile(app, file, uri, false, false);
 	}
 
 	@Override
