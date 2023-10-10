@@ -57,6 +57,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return selectedFolder;
 	}
 
+	private boolean isLoadingItems;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,12 +84,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return view;
 	}
 
-	private void setupProgressBar(@NonNull View view) {
+	protected void setupProgressBar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
 		updateProgress();
 	}
 
-	private void updateProgress() {
+	protected void updateProgress() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		boolean importing = foldersHelper != null && foldersHelper.isImporting();
 		AndroidUiHelper.updateVisibility(progressBar, importing);
@@ -267,6 +269,22 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
 		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
 		return selectionHelper;
+	}
+
+	@Override
+	protected Object getEmptyItem() {
+		Object emptyItem;
+		if (isLoadingItems) {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER_LOADING : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER_LOADING;
+		} else {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
+		}
+		return emptyItem;
+	}
+
+	public void setLoadingItems(boolean isLoadingItems) {
+		this.isLoadingItems = isLoadingItems;
+		updateContent();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {

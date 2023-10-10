@@ -14,6 +14,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
@@ -59,6 +61,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_EMPTY_TRACKS = 7;
 	public static final int TYPE_SMART_FOLDER = 8;
 	public static final int TYPE_EMPTY_SMART_FOLDER = 9;
+	public static final int TYPE_EMPTY_SMART_FOLDER_LOADING = 10;
+	public static final int TYPE_EMPTY_FOLDER_LOADING = 11;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -169,6 +173,12 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_EMPTY_SMART_FOLDER:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptySmartFolderViewHolder(view, emptySmartFolderListener);
+			case TYPE_EMPTY_SMART_FOLDER_LOADING:
+				view = inflater.inflate(R.layout.track_smart_folder_empty_loading_state, parent, false);
+				return new EmptySmartFolderLoadingTracksViewHolder(view);
+			case TYPE_EMPTY_FOLDER_LOADING:
+				view = inflater.inflate(R.layout.track_smart_folder_empty_loading_state, parent, false);
+				return new EmptyFolderLoadingTracksViewHolder(view);
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
 				return new FolderStatsViewHolder(app, view);
@@ -199,9 +209,13 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_SORT_TRACKS;
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
+			} else if (TYPE_EMPTY_SMART_FOLDER_LOADING == item) {
+				return TYPE_EMPTY_SMART_FOLDER_LOADING;
+			} else if (TYPE_EMPTY_FOLDER_LOADING == item) {
+				return TYPE_EMPTY_FOLDER_LOADING;
 			} else if (TYPE_EMPTY_TRACKS == item) {
 				return TYPE_EMPTY_TRACKS;
-			}if (TYPE_EMPTY_SMART_FOLDER == item) {
+			} else if (TYPE_EMPTY_SMART_FOLDER == item) {
 				return TYPE_EMPTY_SMART_FOLDER;
 			}
 		}
@@ -245,16 +259,21 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof EmptyFolderViewHolder) {
 			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
 			viewHolder.bindView();
-		}if (holder instanceof EmptySmartFolderViewHolder) {
+		} else if (holder instanceof EmptySmartFolderViewHolder) {
 			EmptySmartFolderViewHolder viewHolder = (EmptySmartFolderViewHolder) holder;
 			viewHolder.bindView();
 		} else if (holder instanceof FolderStatsViewHolder) {
 			TrackFolderAnalysis folderAnalysis = (TrackFolderAnalysis) items.get(position);
-
 			FolderStatsViewHolder viewHolder = (FolderStatsViewHolder) holder;
 			viewHolder.bindView(folderAnalysis);
 		} else if (holder instanceof EmptyTracksViewHolder) {
 			EmptyTracksViewHolder viewHolder = (EmptyTracksViewHolder) holder;
+			viewHolder.bindView();
+		} else if (holder instanceof EmptySmartFolderLoadingTracksViewHolder) {
+			EmptySmartFolderLoadingTracksViewHolder viewHolder = (EmptySmartFolderLoadingTracksViewHolder) holder;
+			viewHolder.bindView();
+		} else if (holder instanceof EmptyFolderLoadingTracksViewHolder) {
+			EmptyFolderLoadingTracksViewHolder viewHolder = (EmptyFolderLoadingTracksViewHolder) holder;
 			viewHolder.bindView();
 		} else if (holder instanceof SmartFolderViewHolder) {
 			SmartFolderViewHolder viewHolder = (SmartFolderViewHolder) holder;

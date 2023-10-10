@@ -218,7 +218,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			trackItems = selectedFolder.getTrackItems();
 		}
 		if (Algorithms.isEmpty(folders) && Algorithms.isEmpty(trackItems)) {
-			items.add(smartFolder == null ? TYPE_EMPTY_FOLDER : TYPE_EMPTY_SMART_FOLDER);
+			items.add(getEmptyItem());
 		} else {
 			if (!Algorithms.isEmpty(folders)) {
 				items.addAll(folders);
@@ -236,6 +236,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			}
 		}
 		return items;
+	}
+
+	protected Object getEmptyItem() {
+		return smartFolder == null ? TYPE_EMPTY_FOLDER : TYPE_EMPTY_SMART_FOLDER;
 	}
 
 	protected boolean shouldShowFolderStats() {

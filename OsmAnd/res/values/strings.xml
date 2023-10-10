@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_loading">Loading</string>
+    <string name="loading_tracks">Reloading tracks</string>
+    <string name="searching_matching_tracks">Search all matching tracks</string>
     <string name="configure_filter">Configure filter</string>
     <string name="no_config_smart_folder_title">Not configured</string>
     <string name="no_config_smart_folder_description">Smart folders allow to group tracks by applied filters</string>

@@ -272,10 +272,25 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	private void updateProgressVisibility(boolean visible) {
+		if (!updateFragmentsProgress(visible) || !visible) {
+			MyPlacesActivity activity = getMyActivity();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(visible);
+			}
+		}
+	}
+
+	private boolean updateFragmentsProgress(boolean isLoading) {
+		boolean appliedProgressToFragments = false;
 		MyPlacesActivity activity = getMyActivity();
 		if (activity != null) {
-			activity.setSupportProgressBarIndeterminateVisibility(visible);
+			TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
+			if (folderFragment != null) {
+				folderFragment.setLoadingItems(isLoading);
+				appliedProgressToFragments = true;
+			}
 		}
+		return appliedProgressToFragments;
 	}
 
 	private void openTrackFolder(@NonNull TrackFolder trackFolder) {
