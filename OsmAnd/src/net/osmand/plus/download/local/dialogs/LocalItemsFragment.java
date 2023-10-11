@@ -1,7 +1,6 @@
 package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.utils.ColorUtilities.getAppBarColorId;
@@ -215,7 +214,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void sortItems(@NonNull List<LocalItem> items) {
-		if (type == MAP_DATA) {
+		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(app, sortMode));
 		} else {
