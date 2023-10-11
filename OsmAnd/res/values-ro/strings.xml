@@ -3863,7 +3863,7 @@
 \nSe reînnoiește dacă nu se anulează înainte de perioada de reînnoire selectată.
 \n
 \nGestionați sau anulați abonamentele din setările Google Play în orice moment.</string>
-    <string name="search_poi_types">Căutarea tipurilor de POI</string>
+    <string name="search_poi_types">Căutare tipuri de puncte de interes</string>
     <string name="search_poi_types_descr">Combinați tipuri de puncte de interes din diferite categorii. Atingeți comutatorul pentru a le selecta pe toate, atingeți partea stângă pentru a selecta categoria.</string>
     <string name="extra_maps_menu_group">Hărți suplimentare</string>
     <string name="download_unsupported_action">Acțiune neacceptată %1$s</string>
