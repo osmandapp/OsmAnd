@@ -4839,7 +4839,7 @@
     <string name="simulate_location_by_gpx">Simular ubicación via GPX</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
-    <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir los patrones del tráfico y generar informes anónimos de mapas mensuales.</string>
+    <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd, supervisar el uso justo de los recursos del servidor, predecir patrones de tráfico y generar informes anónimos de mapas mensuales.</string>
     <string name="terms_of_service_desc">Al descargar los mapas, aceptas los %1$s y %2$s.</string>
     <string name="shared_string_terms_of_use">Términos de uso</string>
     <string name="map_widget_rendering_fps_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos , expresada en fotogramas por segundo (FPS).</string>
