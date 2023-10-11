@@ -107,6 +107,10 @@ public enum LocalItemType {
 		return this != TILES_DATA && isDownloadType();
 	}
 
+	public boolean isMapsSortingSupported() {
+		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA);
+	}
+
 	@Nullable
 	public ExportSettingsType getExportSettingsType() {
 		if (this == TILES_DATA) {

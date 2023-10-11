@@ -1,7 +1,5 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
@@ -82,7 +80,7 @@ public class GroupMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = group.getType();
-		if (Algorithms.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
+		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = app.getSettings().LOCAL_MAPS_SORT_MODE.get();
 			MenuItem sortItem = menu.add(0, R.string.shared_string_sort, 0, R.string.shared_string_sort);
 			sortItem.setIcon(getIcon(sortMode.getIconId(), colorId));

@@ -104,19 +104,17 @@ public class LocalIndexHelper {
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
-		if (file.length() != 0) {
-			LocalItemType itemType = LocalItemUtils.getItemType(app, file);
-			if (itemType != null && (itemType != OTHER || addUnknown)) {
-				CategoryType categoryType = itemType.getCategoryType();
-				LocalCategory category = categories.get(categoryType);
-				if (category == null) {
-					category = new LocalCategory(categoryType);
-					categories.put(categoryType, category);
-				}
-				LocalItem item = new LocalItem(file, itemType);
-				LocalItemUtils.updateItem(app, item);
-				category.addLocalItem(item);
+		LocalItemType itemType = LocalItemUtils.getItemType(app, file);
+		if (itemType != null && (itemType != OTHER || addUnknown)) {
+			CategoryType categoryType = itemType.getCategoryType();
+			LocalCategory category = categories.get(categoryType);
+			if (category == null) {
+				category = new LocalCategory(categoryType);
+				categories.put(categoryType, category);
 			}
+			LocalItem item = new LocalItem(file, itemType);
+			LocalItemUtils.updateItem(app, item);
+			category.addLocalItem(item);
 		}
 	}
 

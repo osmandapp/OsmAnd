@@ -83,6 +83,8 @@ public class LocalItemUtils {
 
 	private static final Log log = PlatformUtil.getLog(LocalItemUtils.class);
 
+	private static final long OTHER_MIN_SIZE = 1024 * 1024; // 1MB
+
 	@NonNull
 	public static String getFormattedDate(@NonNull Date date) {
 		return DateFormat.getDateInstance(SHORT).format(date);
@@ -233,6 +235,9 @@ public class LocalItemUtils {
 				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
 			return file.isFile() ? CACHE : null;
 		}
-		return file.isFile() ? OTHER : null;
+		if (file.isFile() && file.length() >= OTHER_MIN_SIZE) {
+			return OTHER;
+		}
+		return null;
 	}
 }
