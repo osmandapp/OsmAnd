@@ -5174,7 +5174,7 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Asociază senzor ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puteți asocia senzori Bluetooth LE și ANT+ cu OsmAnd.</string>
     <string name="speak_route_deviation">Anunță abaterea de la traseu</string>
-    <string name="ble_search_again">Caută din nou</string>
+    <string name="ble_search_again">Caută iar</string>
     <string name="ant_plus_nothing_found_text">Nu s-a putut găsi niciun senzor</string>
     <string name="ant_plus_nothing_found_description">Asigurați-vă că:
 \n- Bluetooth este pornit
