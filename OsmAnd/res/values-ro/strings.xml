@@ -5475,4 +5475,14 @@
     <string name="edit_fiilter">Editează filtru</string>
     <string name="save_as_smart_folder">Salvează ca folder inteligent</string>
     <string name="delete_smart_folder_dialog_message">Aceasta va șterge folderul inteligent \"%1$s\".</string>
+    <string name="empty_smart_folder_title">Niciun traseu găsit</string>
+    <string name="empty_smart_folder_description">Toate traseele ce se potrivesc vor apărea aici</string>
+    <string name="configure_filter">Configurare filtru</string>
+    <string name="no_config_smart_folder_title">Neconfigurat</string>
+    <string name="discard_filter_changes">Renunță la modificările filtrelor</string>
+    <string name="shared_string_loading">Se încarcă</string>
+    <string name="discard_filter_changes_prompt">Sigur doriți să resetați toate filtrele\?</string>
+    <string name="no_config_smart_folder_description">Folderele inteligente vă permit să grupați trasee în funcție de filtrele aplicate</string>
+    <string name="loading_tracks">Se reîncarcă traseele</string>
+    <string name="searching_matching_tracks">Caută toate traseele ce se potrivesc</string>
 </resources>
