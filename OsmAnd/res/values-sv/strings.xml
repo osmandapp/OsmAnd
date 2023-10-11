@@ -779,7 +779,7 @@
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
     <string name="dropbox_plugin_description">Synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
-    <string name="srtm_paid_version_msg">Köp gärna insticksmodulen \'Höjdkurvor\' för att stödja fortsatt utveckling.</string>
+    <string name="srtm_paid_version_msg">Köp gärna insticksmodulen \'Topografi\' för att stödja fortsatt utveckling.</string>
     <string name="av_def_action_audio">Spela in ljud</string>
     <string name="av_widget_action_descr">Standardåtgärd för widget:</string>
     <string name="av_widget_action">Standardåtgärd för widget</string>
@@ -2513,7 +2513,7 @@
     <string name="select_waypoints_category_description">Lägg till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) är en kart- och navigationsapp med tillgång till gratis världsomfattande och högkvalitativa OSM-data.
-\nNjut av röst- och visuell navigation, visning av POI (points of interest - intressepunkter), att skapa och hantera GPX-spår, se höjdkurvor och höjdinfo, välja mellan bil-cykel- och fotgängarlägen, OSM-redigering och mycket mer.
+\nNjut av röst- och visuell navigation, visning av POI (points of interest - intressepunkter), att skapa och hantera GPX-spår, se visualisering av höjdkurvor och topografi, välja mellan bil-cykel- och fotgängarlägen, OSM-redigering och mycket mer.
 \n
 \nOsmAnd+ är betalversionen av appen. Genom att köpa den stöttar du projektet, finansierar utveckling av nya funktioner och får de senaste uppdateringarna.
 \n
@@ -4921,4 +4921,5 @@
     <string name="help_article_search_search_all_name">Sök alla</string>
     <string name="help_article_map_legend_ski_map_name">Vinter och skidor-kartstil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnds ruttberäkning</string>
+    <string name="terrain_category_description">Höjdkurvor, terrängskuggning i gråskala och sluttningskartor i färg, för att visa toppar och dalar.</string>
 </resources>
