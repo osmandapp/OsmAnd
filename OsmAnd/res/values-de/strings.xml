@@ -5485,4 +5485,5 @@
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>
     <string name="help_article_widgets_nav_widgets_name">Navigations-Widgets</string>
+    <string name="shared_string_loading">Lädt</string>
 </resources>
