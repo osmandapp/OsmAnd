@@ -205,5 +205,8 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		this.trackItems = trackItems;
 	}
 
+	public List<TrackItem> getAllItems() {
+		return trackItems;
+	}
 }
 

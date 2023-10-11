@@ -91,7 +91,7 @@ public class SensorTextWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (sensor != null) {
 			List<SensorData> dataList = sensor.getLastSensorDataList();
 			if (!sensor.getDevice().isConnected() || Algorithms.isEmpty(dataList)) {

@@ -29,7 +29,7 @@ public class MaxSpeedWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		float maxSpeed = getMaxSpeed();
 		if (isUpdateNeeded() || cachedMaxSpeed != maxSpeed) {
 			cachedMaxSpeed = maxSpeed;

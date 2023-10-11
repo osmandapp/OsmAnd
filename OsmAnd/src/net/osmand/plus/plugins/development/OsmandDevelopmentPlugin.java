@@ -51,12 +51,13 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
+	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
 
 	public final OsmandPreference<Boolean> USE_HH_ROUTING;
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);

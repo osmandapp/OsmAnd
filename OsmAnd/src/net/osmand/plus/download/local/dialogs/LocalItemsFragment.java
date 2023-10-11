@@ -1,11 +1,7 @@
 package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
-import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
-import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.utils.ColorUtilities.getAppBarColorId;
 import static net.osmand.plus.utils.ColorUtilities.getToolbarActiveColorId;
@@ -42,7 +38,6 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
@@ -58,8 +53,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener,
-		ConfirmDeletionListener, MapsSortModeListener {
+public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener, MapsSortModeListener {
 
 	public static final String TAG = LocalItemsFragment.class.getSimpleName();
 
@@ -166,13 +160,13 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		activity.getAccessibilityAssistant().registerPage(view, LOCAL_TAB_NUMBER);
 
 		setupRecyclerView(view);
-		updateAdapter();
+		updateContent();
 
 		return view;
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new LocalItemsAdapter(view.getContext(), this);
+		adapter = new LocalItemsAdapter(view.getContext(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -220,12 +214,12 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void sortItems(@NonNull List<LocalItem> items) {
-		if (type == MAP_DATA) {
+		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
-			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app), o2.getName(app)));
+			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
 		}
 	}
 
@@ -305,6 +299,11 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
+	public boolean itemUpdateAvailable(@NonNull LocalItem item) {
+		return getItemsToUpdate().containsKey(item.getFile().getName());
+	}
+
+	@Override
 	public void onItemSelected(@NonNull LocalItem item) {
 		if (selectionMode) {
 			boolean selected = !isItemSelected(item);
@@ -328,11 +327,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	public void setMapsSortMode(@NonNull MapsSortMode sortMode) {
 		settings.LOCAL_MAPS_SORT_MODE.set(sortMode);
 		updateAdapter();
-	}
-
-	@Override
-	public void onDeletionConfirmed(@NonNull LocalItem localItem) {
-		performOperation(DELETE_OPERATION, localItem);
 	}
 
 	@Override
@@ -361,24 +355,6 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 		if (isAdded()) {
 			updateAdapter();
-		}
-	}
-
-	@Override
-	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
-		updateProgressVisibility(false);
-
-		if (!Algorithms.isEmpty(result)) {
-			app.showToastMessage(result);
-		}
-
-		DownloadActivity activity = getDownloadActivity();
-		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			if (Algorithms.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
-				activity.reloadLocalIndexes();
-			} else {
-				activity.onUpdatedIndexesList();
-			}
 		}
 	}
 

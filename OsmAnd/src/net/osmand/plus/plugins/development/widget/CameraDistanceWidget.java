@@ -23,12 +23,12 @@ public class CameraDistanceWidget extends SimpleWidget {
 	public CameraDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_CAMERA_DISTANCE);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		float cameraDistance = getCameraHeightInMeters();
 		if (isUpdateNeeded() || cameraDistance != cachedCameraDistance) {
 			cachedCameraDistance = cameraDistance;

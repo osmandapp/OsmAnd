@@ -54,7 +54,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (isInTargetAltitudeState()) {
 			updateTargetAltitude();
 		} else {

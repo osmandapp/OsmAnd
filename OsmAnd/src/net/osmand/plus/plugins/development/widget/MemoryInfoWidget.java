@@ -31,12 +31,12 @@ public class MemoryInfoWidget extends SimpleWidget {
 
 	public MemoryInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_MEMORY, customId, widgetsPanel);
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_MEMORY);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (checkMemoryChanged() && isTimeToUpdate()) {
 			memoryChanged = false;
 			lastUpdateTime = System.currentTimeMillis();

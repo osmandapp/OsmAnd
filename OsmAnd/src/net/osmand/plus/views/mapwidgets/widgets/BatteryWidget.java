@@ -27,8 +27,7 @@ public class BatteryWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		super.updateInfo(drawSettings);
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;

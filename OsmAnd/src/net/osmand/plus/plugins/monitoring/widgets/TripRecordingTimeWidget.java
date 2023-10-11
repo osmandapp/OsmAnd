@@ -48,7 +48,7 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		float timeSpan = getTimeSpan();
 		if (cachedTimeSpan != timeSpan) {
 			cachedTimeSpan = timeSpan;

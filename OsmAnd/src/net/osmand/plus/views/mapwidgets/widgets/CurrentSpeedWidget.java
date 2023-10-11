@@ -27,7 +27,7 @@ public class CurrentSpeedWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		Location location = locationProvider.getLastKnownLocation();
 		if (location != null && location.hasSpeed()) {
 			float updateThreshold = cachedSpeed < LOW_SPEED_THRESHOLD_MPS

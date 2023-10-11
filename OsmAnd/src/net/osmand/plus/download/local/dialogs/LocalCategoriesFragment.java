@@ -30,7 +30,6 @@ import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
@@ -123,7 +122,8 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		itemSearch.setOnMenuItemClickListener(item -> {
 			DownloadActivity activity = getDownloadActivity();
 			if (activity != null) {
-				activity.showDialog(activity, SearchDialogFragment.createInstance(""));
+				FragmentManager manager = activity.getSupportFragmentManager();
+				LocalSearchFragment.showInstance(manager, null, null, this);
 			}
 			return true;
 		});
@@ -172,6 +172,10 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 			LocalItemsFragment itemsFragment = activity.getFragment(LocalItemsFragment.TAG);
 			if (itemsFragment != null) {
 				itemsFragment.updateContent();
+			}
+			LocalSearchFragment searchFragment = activity.getFragment(LocalSearchFragment.TAG);
+			if (searchFragment != null) {
+				searchFragment.updateContent();
 			}
 		}
 	}

@@ -7,6 +7,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrackFolderAnalysis {
@@ -23,11 +24,11 @@ public class TrackFolderAnalysis {
 	}
 
 	private void prepareInformation(@NonNull TracksGroup folder) {
-		List<TrackItem> items;
+		List<TrackItem> items = new ArrayList<>();
 		if (folder instanceof TrackFolder) {
-			items = ((TrackFolder) folder).getFlattenedTrackItems();
+			items.addAll(((TrackFolder) folder).getFlattenedTrackItems());
 		} else {
-			items = folder.getTrackItems();
+			items.addAll(folder.getTrackItems());
 		}
 		for (TrackItem trackItem : items) {
 			GpxDataItem dataItem = trackItem.getDataItem();

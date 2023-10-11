@@ -31,7 +31,7 @@ public class ZoomLevelWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int newZoom = mapView.getZoom();
 		float newZoomFloatPart = mapView.getZoomFloatPart() + mapView.getZoomAnimation();
 		float newMapDensity = osmandMap.getMapDensity();
