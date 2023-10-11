@@ -5155,7 +5155,7 @@
     <string name="external_device_characteristic_arterial_pressure">Presiunea arterială</string>
     <string name="number_of_tracks">%1$s trasee</string>
     <string name="search_track_by_name">Caută traseu după nume</string>
-    <string name="no_search_results">Nu există rezultate</string>
+    <string name="no_search_results">Nu s-au găsit rezultate</string>
     <string name="rendering_attr_lightDetail_name">Detaliu de lumină</string>
     <string name="no_bt_permission">Permisiunea pentru Bluetooth nu este acordată</string>
     <string name="bluetooth_not_supported">Bluetooth nu este acceptat</string>
@@ -5411,10 +5411,10 @@
     <string name="help_article_purchases_android_name">Achiziții Android</string>
     <string name="help_article_plan_route_web_name">Planificator rute pe web</string>
     <string name="help_article_purchases_ios_name">Achiziții iOS</string>
-    <string name="help_article_search_search_all_name">Căutare peste tot</string>
+    <string name="help_article_search_search_all_name">Căutare prin toate</string>
     <string name="help_article_troubleshooting_crash_logs_name">Jurnale erori aplicație</string>
     <string name="with_waypoints">Cu puncte intermediare</string>
-    <string name="help_article_search_search_poi_name">Căutare puncte de interes</string>
+    <string name="help_article_search_search_poi_name">Căutare punct de interes</string>
     <string name="max_altitude">Altitudine maximă</string>
     <string name="app_mode_paragliding">Parapantă</string>
     <string name="shared_string_reset_all">Resetează tot</string>
