@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_community_yes">Społeczność</string>
     <string name="poi_barrier_coupure">Bariera ochronna</string>
     <string name="poi_wedge">Hydrauliczna zapora drogowa</string>
+    <string name="poi_dressing_room">Przebieralnia</string>
+    <string name="poi_emergency_bay">Zatoka awaryjna</string>
 </resources>

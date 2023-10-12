@@ -5470,4 +5470,14 @@
 \n • Przerobiono zmianę wysokości i ocenę nachylenia
 \n
 \n</string>
+    <string name="empty_smart_folder_title">Brak pasującej trasy</string>
+    <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
+    <string name="configure_filter">Skonfiguruj filtr</string>
+    <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
+    <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
+    <string name="shared_string_loading">Wczytywanie</string>
+    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry\?</string>
+    <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
+    <string name="loading_tracks">Ponowne wczytywanie tras</string>
+    <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
 </resources>
