@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_fertility_yes">Фертильність</string>
     <string name="poi_checkpoint_cycling">Велосипедний пункт пропуску</string>
     <string name="poi_socket_typee_yes">Вид E</string>
+    <string name="poi_dressing_room">Роздягальня</string>
+    <string name="poi_emergency_bay">Аварійний з\'їзд</string>
 </resources>
