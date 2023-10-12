@@ -8,5 +8,5 @@
     <string name="osmand_app_not_found">OsmAnd is not installed</string>
     <string name="app_name">OsmAnd Contour lines</string>
     <string name="app_label">OsmAnd Contour lines</string>
-    <string name="parking_plugin_installed">OsmAnd Contour Lines Plugin is installed and enabled in OsmAnd settings.</string>
+    <string name="srtm_plugin_installed">OsmAnd Contour Lines Plugin is installed and enabled in OsmAnd settings.</string>
 </resources>
