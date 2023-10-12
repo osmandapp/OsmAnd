@@ -781,10 +781,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandMapTileView mapView = getMapView();
 		if (settings.isLastKnownMapLocation()) {
-			LatLon mapLocation = settings.getLastKnownMapLocation();
-			float height = settings.getLastKnownMapHeight();
-			LatLon mapShiftedLocation = settings.getLastKnownMapLocationShifted();
-			mapView.setLatLon(mapLocation, height, mapShiftedLocation);
+			LatLon l = settings.getLastKnownMapLocation();
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
 			mapView.initMapRotationByCompassMode();
 		}
@@ -1326,11 +1324,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 
 		LatLon mapLocation = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon mapLocationShifted = mapLocation;
-		float height = mapView.getHeight();
-		if (height != 0.0f)
-			mapLocationShifted = mapView.getTargetLatLon(mapLocationShifted);
-		settings.setLastKnownMapLocation(mapLocation, height, mapLocationShifted);
+		settings.setLastKnownMapLocation(mapLocation);
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 		if (animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0 && !getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),
