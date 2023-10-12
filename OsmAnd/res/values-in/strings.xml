@@ -5486,4 +5486,14 @@
     <string name="edit_fiilter">Sunting saringan</string>
     <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
     <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
+    <string name="empty_smart_folder_title">Tidak ada trek yang cocok</string>
+    <string name="empty_smart_folder_description">Semua trek yang cocok akan muncul secara otomatis di sini</string>
+    <string name="configure_filter">Atur saringan</string>
+    <string name="no_config_smart_folder_title">Tidak ada yang diatur</string>
+    <string name="discard_filter_changes">Abaikan perubahan penyaring</string>
+    <string name="shared_string_loading">Memuat</string>
+    <string name="discard_filter_changes_prompt">Apakah Anda yakin ingin mengatur ulang semua saringan\?</string>
+    <string name="no_config_smart_folder_description">Folder pintar memungkinkan untuk mengelompokkan trek berdasarkan saringan yang diterapkan</string>
+    <string name="loading_tracks">Memuat ulang trek</string>
+    <string name="searching_matching_tracks">Cari semua trek yang cocok</string>
 </resources>
