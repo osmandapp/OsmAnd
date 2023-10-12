@@ -191,7 +191,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 				View view = activity.findViewById(R.id.action_overflow_menu);
 				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
 				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, this, isNightMode());
+				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, isNightMode());
 				return true;
 			}
 		}

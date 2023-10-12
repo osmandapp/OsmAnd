@@ -212,8 +212,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment,
-						currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 

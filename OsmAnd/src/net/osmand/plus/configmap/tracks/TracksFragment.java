@@ -65,6 +65,7 @@ import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -87,7 +88,7 @@ import java.util.Set;
 
 public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
-		TrackSelectionListener, SortTracksListener, EmptyTracksListener {
+		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -96,6 +97,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
+	private GpxSelectionHelper gpxSelectionHelper;
 	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -135,6 +137,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
+		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = selectedTracksHelper.getItemsSelectionHelper();
 	}
 
@@ -447,17 +450,15 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void saveChanges() {
 		selectedTracksHelper.saveTabsSortModes();
 		selectedTracksHelper.saveTracksVisibility();
-		selectedTracksHelper.updateTracksOnMap();
+	}
 
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
-			DashboardOnMap dashboard = mapActivity.getDashboard();
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
-		}
+	@Override
+	public void onGpxSelectionFinished() {
+		selectedTracksHelper.processVisibleTracks();
+		selectedTracksHelper.processRecentlyVisibleTracks();
+		selectedTracksHelper.updateTracksOnMap();
 		app.getOsmandMap().getMapView().refreshMap();
+		updateTabsContent();
 	}
 
 	@Override

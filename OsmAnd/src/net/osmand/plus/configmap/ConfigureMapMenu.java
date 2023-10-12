@@ -203,14 +203,16 @@ public class ConfigureMapMenu {
 				.setColor(selected ? selectedProfileColor : null)
 				.setListener(listener));
 
-		selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
 		adapter.addItem(new ContextMenuItem(GPX_FILES_ID)
 				.setTitleId(R.string.layer_gpx_layer, activity)
-				.setSelected(app.getSelectedGpxHelper().isAnyGpxFileSelected())
-				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
-				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setRefreshCallback(item -> {
+					boolean enabled = app.getSelectedGpxHelper().isAnyGpxFileSelected();
+					item.setSelected(app.getSelectedGpxHelper().isAnyGpxFileSelected());
+					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
+					item.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID);
+				})
 				.setListener(listener));
 
 		selected = settings.SHOW_MAP_MARKERS.get();

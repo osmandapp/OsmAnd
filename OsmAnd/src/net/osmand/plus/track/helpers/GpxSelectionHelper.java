@@ -477,11 +477,11 @@ public class GpxSelectionHelper {
 		TRACK_ROUTE_POINTS
 	}
 
-	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener) {
-		saveTracksVisibility(trackItems, listener, true);
+	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems) {
+		saveTracksVisibility(trackItems, true);
 	}
 
-	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener, boolean clearPrevious) {
+	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, boolean clearPrevious) {
 		if (clearPrevious) {
 			clearAllGpxFilesToShow(true);
 		}
@@ -491,13 +491,14 @@ public class GpxSelectionHelper {
 			String path = trackItem.isShowCurrentTrack() ? CURRENT_TRACK : trackItem.getPath();
 			selectedFileNames.put(path, true);
 		}
-		runSelection(selectedFileNames, listener);
+		runSelection(selectedFileNames);
 	}
 
-	public void runSelection(@NonNull Map<String, Boolean> selectedItems, @Nullable SelectGpxTaskListener listener) {
+	private void runSelection(@NonNull Map<String, Boolean> selectedItems) {
 		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING)) {
 			selectGpxTask.cancel(false);
 		}
+		SelectGpxTaskListener listener = app.getGlobalListenersManager().getGpxSelectionListener();
 		selectGpxTask = new SelectGpxTask(app, selectedItems, listener);
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

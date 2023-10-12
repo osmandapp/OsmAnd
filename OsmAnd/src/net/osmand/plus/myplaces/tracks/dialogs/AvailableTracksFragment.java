@@ -340,12 +340,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void gpxSelectionStarted() {
+	public void onGpxSelectionStarted() {
 		updateProgressVisibility(true);
 	}
 
 	@Override
-	public void gpxSelectionFinished() {
+	public void onGpxSelectionFinished() {
 		updateProgressVisibility(false);
 		updateVisibleTracks();
 	}
