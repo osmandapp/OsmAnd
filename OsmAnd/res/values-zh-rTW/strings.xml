@@ -5465,8 +5465,8 @@
     <string name="sort_country_name_descending">國家名稱：Z – A</string>
     <string name="delete_map_description">您確定您想要刪除 %1$s 地圖嗎？</string>
     <string name="maps_and_resources">地圖與資源</string>
-    <string name="smart_folder_name_present">這樣的 smartFolder 已存在</string>
-    <string name="smart_folder_saved">已儲存 SmartFolder</string>
+    <string name="smart_folder_name_present">這樣的 Smart Folder 已存在</string>
+    <string name="smart_folder_saved">已儲存 Smart Folder</string>
     <string name="add_smart_folder">新增智慧型資料夾</string>
     <string name="empty_name">空名稱</string>
     <string name="edit_fiilter">編輯篩選條件</string>

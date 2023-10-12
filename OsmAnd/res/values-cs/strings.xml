@@ -5437,11 +5437,11 @@
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
     <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
-    <string name="smart_folder_name_present">Taková složka smartFolder již existuje</string>
+    <string name="smart_folder_name_present">Taková složka Smart Folder již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
     <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
     <string name="configure_filter">Konfigurace filtru</string>
-    <string name="smart_folder_saved">SmartFolder uložen</string>
+    <string name="smart_folder_saved">Smart Folder uložen</string>
     <string name="no_config_smart_folder_title">Není nastaveno</string>
     <string name="add_smart_folder">Přidat chytrou složku</string>
     <string name="empty_name">Prázdný název</string>
