@@ -5496,4 +5496,14 @@
     <string name="edit_fiilter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
+    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="configure_filter">Configurar filtro</string>
+    <string name="no_config_smart_folder_title">No configurado</string>
+    <string name="discard_filter_changes">Descartar cambios del filtro</string>
+    <string name="shared_string_loading">Cargando</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
+    <string name="loading_tracks">Recargando trazas</string>
+    <string name="searching_matching_tracks">Buscar las trazas que coincidan</string>
 </resources>
