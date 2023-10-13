@@ -5481,4 +5481,14 @@
     <string name="edit_fiilter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
+    <string name="empty_smart_folder_title">No hay pista coincidente</string>
+    <string name="empty_smart_folder_description">Todas las pistas coincidentes aparecerán automáticamente aquí</string>
+    <string name="configure_filter">Configurar el filtro</string>
+    <string name="no_config_smart_folder_title">Sin configurar</string>
+    <string name="discard_filter_changes">Descartar los cambios del filtro</string>
+    <string name="shared_string_loading">Cargando</string>
+    <string name="discard_filter_changes_prompt">¿Estás seguro de que quieres restablecer todos los filtros\?</string>
+    <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar las pistas según los filtros que apliques</string>
+    <string name="loading_tracks">Recargar las pistas</string>
+    <string name="searching_matching_tracks">Buscar todas las pistas coincidentes</string>
 </resources>

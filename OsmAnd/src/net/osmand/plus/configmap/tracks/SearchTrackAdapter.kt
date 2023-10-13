@@ -30,13 +30,12 @@ class SearchTracksAdapter(
     private val app: OsmandApplication,
     private var trackItems: List<TrackItem>,
     private val nightMode: Boolean,
-    private var selectionMode: Boolean
+    private var selectionMode: Boolean,
+    private var filter: TracksSearchFilter
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private val locationViewCache: UpdateLocationViewCache
-    private val filter: TracksSearchFilter = TracksSearchFilter(app, trackItems)
-
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
     private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode()
@@ -46,11 +45,22 @@ class SearchTracksAdapter(
     private var emptyTracksListener: EmptyTracksListener? = null
 
     init {
-        updateFilteredItems(trackItems)
+        if (filter.filteredTrackItems != null) {
+            updateFilteredItems(filter.filteredTrackItems!!)
+        } else {
+            updateFilteredItems(trackItems)
+        }
         locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
         locationViewCache.arrowResId = R.drawable.ic_direction_arrow
         locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
     }
+
+    constructor(
+        app: OsmandApplication,
+        trackItems: List<TrackItem>,
+        nightMode: Boolean,
+        selectionMode: Boolean
+    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems))
 
     fun getFilteredItems(): Set<TrackItem> {
         return HashSet(filteredItems)

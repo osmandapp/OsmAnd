@@ -3,6 +3,8 @@ package net.osmand.plus.myplaces.tracks.filters
 import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import kotlin.math.ceil
+import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 
@@ -37,7 +39,7 @@ abstract class RangeTrackFilter(
 
 	open val unitResId = R.string.shared_string_minute_lowercase
 
-	fun setValueFrom(from: Float, updateListeners: Boolean = true) {
+	open fun setValueFrom(from: Float, updateListeners: Boolean = true) {
 		valueFrom = max(minValue, from)
 		valueFrom = min(valueFrom, valueTo)
 		if (updateListeners) {
@@ -45,7 +47,7 @@ abstract class RangeTrackFilter(
 		}
 	}
 
-	fun setValueTo(to: Float, updateListeners: Boolean = true) {
+	open fun setValueTo(to: Float, updateListeners: Boolean = true) {
 		valueTo = to
 		if (valueTo > maxValue) {
 			maxValue = valueTo
@@ -83,4 +85,21 @@ abstract class RangeTrackFilter(
 				other.valueFrom == valueFrom &&
 				other.valueTo == valueTo
 	}
+
+	open fun getDisplayMinValue(): Int {
+		return floor(minValue).toInt()
+	}
+
+	open fun getDisplayMaxValue(): Int {
+		return ceil(maxValue).toInt()
+	}
+
+	open fun getDisplayValueFrom(): Int {
+		return floor(valueFrom).toInt()
+	}
+
+	open fun getDisplayValueTo(): Int {
+		return ceil(valueTo).toInt()
+	}
+
 }

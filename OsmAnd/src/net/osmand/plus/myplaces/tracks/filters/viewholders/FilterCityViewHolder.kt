@@ -22,6 +22,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 	private val selectedValue: TextViewEx
 	private val recycler: RecyclerView
 	private val titleContainer: View
+	private val divider: View
 	private val explicitIndicator: ImageView
 	private var filter: CityTrackFilter? = null
 
@@ -30,6 +31,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 		this.nightMode = nightMode
 		title = itemView.findViewById(R.id.title)
 		selectedValue = itemView.findViewById(R.id.selected_value)
+		divider = itemView.findViewById(R.id.divider)
 		explicitIndicator = itemView.findViewById(R.id.explicit_indicator)
 		titleContainer = itemView.findViewById(R.id.title_container)
 		titleContainer.setOnClickListener { v: View? ->
@@ -82,6 +84,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 		override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
 			val cityName = items[position]
 			holder.title.text = cityName
+			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
 			filter?.let { cityFilter ->
 				holder.itemView.setOnClickListener {
 					cityFilter.setCitySelected(cityName, !cityFilter.isCitySelected(cityName))
@@ -96,10 +99,12 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 	inner class CityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 		var title: TextViewEx
 		var checkBox: AppCompatCheckBox
+		var divider: View
 
 		init {
 			title = view.findViewById(R.id.title)
 			checkBox = view.findViewById(R.id.compound_button)
+			divider = view.findViewById(R.id.divider)
 			UiUtilities.setupCompoundButton(
 				nightMode,
 				net.osmand.plus.utils.ColorUtilities.getActiveColor(app, nightMode),

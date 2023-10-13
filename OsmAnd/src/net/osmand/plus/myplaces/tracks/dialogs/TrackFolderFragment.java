@@ -20,12 +20,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
@@ -57,6 +57,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return selectedFolder;
 	}
 
+	private boolean isLoadingItems;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,12 +84,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return view;
 	}
 
-	private void setupProgressBar(@NonNull View view) {
+	protected void setupProgressBar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
 		updateProgress();
 	}
 
-	private void updateProgress() {
+	protected void updateProgress() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		boolean importing = foldersHelper != null && foldersHelper.isImporting();
 		AndroidUiHelper.updateVisibility(progressBar, importing);
@@ -113,7 +115,14 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 						getTargetFragment(),
 						false,
 						isUsedOnMap(),
-						null);
+						null,
+						null,
+						new DialogClosedListener() {
+							@Override
+							public void onDialogClosed() {
+								updateContent();
+							}
+						});
 				return true;
 			}
 		}
@@ -260,6 +269,22 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
 		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
 		return selectionHelper;
+	}
+
+	@Override
+	protected Object getEmptyItem() {
+		Object emptyItem;
+		if (isLoadingItems) {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER_LOADING : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER_LOADING;
+		} else {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
+		}
+		return emptyItem;
+	}
+
+	public void setLoadingItems(boolean isLoadingItems) {
+		this.isLoadingItems = isLoadingItems;
+		updateContent();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {

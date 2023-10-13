@@ -5479,4 +5479,14 @@
     <string name="edit_fiilter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
     <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
+    <string name="empty_smart_folder_description">Minden egyező nyomvonal itt fog megjelenni</string>
+    <string name="configure_filter">Szűrő konfigurálása</string>
+    <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
+    <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
+    <string name="shared_string_loading">Betöltés</string>
+    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt\?</string>
+    <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
+    <string name="loading_tracks">Nyomvonalak újratöltése</string>
+    <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
 </resources>

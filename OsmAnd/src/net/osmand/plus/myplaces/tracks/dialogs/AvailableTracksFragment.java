@@ -167,7 +167,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		int itemId = item.getItemId();
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
-			if (activity != null) {
+			if (activity != null && rootFolder != null) {
 				selectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
 				selectionHelper.clearSelectedItems();
 				selectionHelper.setOriginalSelectedItems(Collections.emptyList());
@@ -176,6 +176,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						this,
 						false,
 						isUsedOnMap(),
+						null,
+						null,
 						null);
 			}
 		}
@@ -270,10 +272,25 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	private void updateProgressVisibility(boolean visible) {
+		if (!updateFragmentsProgress(visible) || !visible) {
+			MyPlacesActivity activity = getMyActivity();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(visible);
+			}
+		}
+	}
+
+	private boolean updateFragmentsProgress(boolean isLoading) {
+		boolean appliedProgressToFragments = false;
 		MyPlacesActivity activity = getMyActivity();
 		if (activity != null) {
-			activity.setSupportProgressBarIndeterminateVisibility(visible);
+			TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
+			if (folderFragment != null) {
+				folderFragment.setLoadingItems(isLoading);
+				appliedProgressToFragments = true;
+			}
 		}
+		return appliedProgressToFragments;
 	}
 
 	private void openTrackFolder(@NonNull TrackFolder trackFolder) {
@@ -520,6 +537,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFolderCreated(SmartFolder smartFolder) {
 		updateContent();
+		openSmartFolder(smartFolder);
 	}
 
 	@Override
