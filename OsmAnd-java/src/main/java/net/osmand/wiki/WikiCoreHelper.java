@@ -38,7 +38,10 @@ public class WikiCoreHelper {
 
 		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
 			String imageFileName = wikiMediaTagContent.replace(WIKIMEDIA_FILE, "");
-			wikiImages.add(getImageData(imageFileName));
+			WikiImage wikiImage = getImageData(imageFileName);
+			if (wikiImage != null) {
+				wikiImages.add(wikiImage);
+			}
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			if (USE_OSMAND_WIKI_API) {
 				String categoryName = wikiMediaTagContent.replace(WIKIMEDIA_CATEGORY, "");
@@ -86,7 +89,10 @@ public class WikiCoreHelper {
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (String imageUrl : response.images) {
 				if (imageUrl != null) {
-					wikiImages.add(getOsmandApiImageData(imageUrl));
+					WikiImage wikiImage = getOsmandApiImageData(imageUrl);
+					if (wikiImage != null) {
+						wikiImages.add(wikiImage);
+					}
 				}
 			}
 		}
@@ -105,7 +111,10 @@ public class WikiCoreHelper {
 				for (P18 p18 : response.claims.p18) {
 					String imageFileName = p18.mainsnak.datavalue.value;
 					if (imageFileName != null) {
-						wikiImages.add(getImageData(imageFileName));
+						WikiImage wikiImage = getImageData(imageFileName);
+						if (wikiImage != null) {
+							wikiImages.add(wikiImage);
+						}
 					}
 				}
 			}
