@@ -32,15 +32,16 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class WidgetUtils {
+	public static final int MAXIMUM_WIDGETS_IN_ROW = 3;
 
 	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
-	                                     @NonNull WidgetsPanel panel) {
+										 @NonNull WidgetsPanel panel) {
 		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 		addSelectedWidget(mapActivity, widgetId, appMode, panel);
 	}
 
 	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
-	                                     @NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
+										 @NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
 		addSelectedWidgets(mapActivity, Collections.singletonList(widgetId), panel, appMode);
 	}
 
@@ -120,26 +121,62 @@ public class WidgetUtils {
 			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
 			List<String> lastPageOrder = orders.get(orders.size() - 1);
 
-			lastPageOrder.add(targetWidget.key);
-
-			String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
-			MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
-			int lastPage;
-			int lastOrder;
-			if (previousLastVisibleWidgetInfo != null) {
-				lastPage = previousLastVisibleWidgetInfo.pageIndex;
-				lastOrder = previousLastVisibleWidgetInfo.priority + 1;
+			if (widgetsPanel.isPanelVertical() && shouldCreateNewPage(targetWidget, getLastRowWidgets(lastPageOrder, enabledWidgets))) {
+				List<String> newPage = new ArrayList<>();
+				newPage.add(targetWidget.key);
+				orders.add(newPage);
+				targetWidget.pageIndex = pages.size() + 1;
+				targetWidget.priority = 0;
 			} else {
-				lastPage = pages.get(pages.size() - 1);
-				lastOrder = lastPageOrder.size() - 1;
+				lastPageOrder.add(targetWidget.key);
+
+				String previousLastWidgetId = lastPageOrder.get(lastPageOrder.size() - 2);
+				MapWidgetInfo previousLastVisibleWidgetInfo = widgetRegistry.getWidgetInfoById(previousLastWidgetId);
+				int lastPage;
+				int lastOrder;
+				if (previousLastVisibleWidgetInfo != null) {
+					lastPage = previousLastVisibleWidgetInfo.pageIndex;
+					lastOrder = previousLastVisibleWidgetInfo.priority + 1;
+				} else {
+					lastPage = pages.get(pages.size() - 1);
+					lastOrder = lastPageOrder.size() - 1;
+				}
+				targetWidget.pageIndex = lastPage;
+				targetWidget.priority = lastOrder;
 			}
 
-			targetWidget.pageIndex = lastPage;
-			targetWidget.priority = lastOrder;
-
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
-
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
+	}
+
+	private static List<MapWidget> getLastRowWidgets(List<String> lastPageOrder, Set<MapWidgetInfo> enabledWidgets) {
+		List<MapWidget> lastRowWidgets = new ArrayList<>();
+		for (String widgetId : lastPageOrder) {
+			for (MapWidgetInfo widgetInfo : enabledWidgets) {
+				if (widgetId.equals(widgetInfo.key)) {
+					lastRowWidgets.add(widgetInfo.widget);
+				}
+			}
+		}
+		return lastRowWidgets;
+	}
+
+	public static boolean shouldCreateNewPage(MapWidgetInfo targetWidget, List<MapWidget> lastRowWidgets) {
+		boolean shouldCreateNewRow = false;
+		MapWidget mapWidget = targetWidget.widget;
+		boolean isSimpleWidget = mapWidget instanceof SimpleWidget;
+		boolean rowHasComplexWidget = false;
+
+		for (MapWidget widget : lastRowWidgets) {
+			if (!(widget instanceof SimpleWidget)) {
+				rowHasComplexWidget = true;
+				break;
+			}
+		}
+		if ((isSimpleWidget && lastRowWidgets.size() >= MAXIMUM_WIDGETS_IN_ROW) || (!isSimpleWidget && !lastRowWidgets.isEmpty()) || rowHasComplexWidget) {
+			shouldCreateNewRow = true;
+		}
+		return shouldCreateNewRow;
 	}
 }

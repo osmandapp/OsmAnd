@@ -240,6 +240,10 @@
 		<attr name="rightSide" format="boolean" />
 	</declare-styleable>
 
+	<declare-styleable name="VerticalWidgetPanel">
+		<attr name="topPanel" format="boolean" />
+	</declare-styleable>
+
 	<declare-styleable name="FlowLayout">
 		<attr name="horizontalItemsSpacing" format="dimension"/>
 		<attr name="verticalItemsSpacing" format="dimension"/>

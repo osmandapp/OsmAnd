@@ -119,7 +119,18 @@ public class WidgetsDataHolder {
 			widgetsOfPage = new ArrayList<>();
 			pages.put(page, widgetsOfPage);
 		}
-		widgetsOfPage.add(widgetId);
+		if (!widgetsOfPage.contains(widgetId)) {
+			widgetsOfPage.add(widgetId);
+		}
+	}
+
+	public void addWidgetToPage(@NonNull String widgetId, int page, int position) {
+		List<String> widgetsOfPage = pages.get(page);
+		if (widgetsOfPage == null) {
+			widgetsOfPage = new ArrayList<>();
+			pages.put(page, widgetsOfPage);
+		}
+		widgetsOfPage.add(position, widgetId);
 	}
 
 	public void addEmptyPage(int page) {
@@ -154,6 +165,18 @@ public class WidgetsDataHolder {
 
 			if (widgetPage == page) {
 				orders.put(widgetId, widgetOrder + 1);
+			}
+		}
+	}
+
+	public void shiftPageOrdersToLeft(int page, int fromOrder) {
+		for (Entry<String, Integer> entry : orders.entrySet()) {
+			String widgetId = entry.getKey();
+			int widgetPage = getWidgetPage(widgetId);
+			int widgetOrder = entry.getValue();
+
+			if (widgetPage == page && widgetOrder > fromOrder) {
+				orders.put(widgetId, widgetOrder - 1);
 			}
 		}
 	}

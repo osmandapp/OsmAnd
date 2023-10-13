@@ -250,9 +250,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, null));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_visible_widgets)));
 		items.addAll(enabledItems);
-		if (dataHolder.getSelectedPanel().isPagingAllowed()) {
-			items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
-		}
+		items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
 		items.add(new ListItem(ItemType.CARD_DIVIDER, null));
 
 		if (!Algorithms.isEmpty(availableItems)) {
@@ -320,10 +318,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 			return Integer.compare(info1.order, info2.order);
 		});
-
-
-		boolean pagingAllowed = dataHolder.getSelectedPanel().isPagingAllowed();
-		return pagingAllowed ? getPagedWidgetItems(widgetsItems) : widgetsItems;
+		return getPagedWidgetItems(widgetsItems);
 	}
 
 	@NonNull

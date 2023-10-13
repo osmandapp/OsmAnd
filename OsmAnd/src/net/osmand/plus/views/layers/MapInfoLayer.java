@@ -21,13 +21,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -42,10 +42,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 
-	private ViewGroup topWidgetsContainer;
+	private VerticalWidgetPanel topWidgetsContainer;
+	private VerticalWidgetPanel bottomWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
-	private ViewGroup bottomWidgetsContainer;
 
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;
@@ -87,6 +87,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			widgetRegistry.clearWidgets();
 
 			topWidgetsContainer = null;
+			bottomWidgetsContainer = null;
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
 			mapRulerLayout = null;
@@ -162,6 +163,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerWidgets = new ArrayList<>();
 		sideWidgetsPanels = new ArrayList<>();
 
+		topWidgetsContainer.setMapActivity(mapActivity);
+		bottomWidgetsContainer.setMapActivity(mapActivity);
+
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
 
@@ -177,8 +181,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+			topWidgetsContainer.update();
+			bottomWidgetsContainer.update();
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 		}
@@ -187,15 +191,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void recreateTopWidgetsPanel() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-	}
-
-	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
-		if (container != null) {
-			container.removeAllViews();
-			widgetRegistry.populateControlsContainer(container, appMode, panel);
-			container.requestLayout();
-		}
+		topWidgetsContainer.update();
+		bottomWidgetsContainer.update();
 	}
 
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {

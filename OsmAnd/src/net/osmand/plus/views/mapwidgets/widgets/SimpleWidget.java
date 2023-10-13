@@ -1,23 +1,27 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -25,8 +29,6 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public abstract class SimpleWidget extends TextInfoWidget {
 	private final SimpleWidgetState simpleWidgetState;
@@ -43,11 +45,34 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	private void setupViews() {
-		FrameLayout mainViewsContainer = (FrameLayout) view;
+		LinearLayout mainViewsContainer = (LinearLayout) view;
 		mainViewsContainer.removeAllViews();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(isVerticalWidget ? getProperVerticalLayoutId(simpleWidgetState) : R.layout.map_hud_widget, mainViewsContainer);
 		findViews();
 		updateWidgetView();
+	}
+
+	public void updateValueAlign(boolean fullRow) {
+		if (SimpleWidgetState.WidgetSize.SMALL == getWidgetSizePref().get()) {
+			if (!(container instanceof ConstraintLayout)) {
+				return;
+			}
+			ConstraintSet constraintSet = new ConstraintSet();
+			constraintSet.clone((ConstraintLayout) container);
+			if (fullRow) {
+				constraintSet.connect(R.id.widget_text, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
+				constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
+			} else {
+				constraintSet.clear(R.id.widget_text, ConstraintSet.END);
+				constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, dpToPx(app, 12));
+			}
+			constraintSet.applyTo((ConstraintLayout) container);
+		} else {
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
+			params.gravity = fullRow ? Gravity.CENTER : Gravity.START;
+			params.setMarginStart(dpToPx(app, 36));
+			params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
+		}
 	}
 
 	private void findViews() {
@@ -58,7 +83,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
-		bottomDivider = view.findViewById(R.id.bottom_divider);
 		widgetName = view.findViewById(R.id.widget_name);
 	}
 
@@ -123,7 +147,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		TextView oldSmallTextViewShadow = smallTextViewShadow;
 		View oldContainer = container;
 		View oldEmptyBanner = emptyBanner;
-		View oldBottomDivider = bottomDivider;
 
 		setupViews();
 		findViews();
@@ -138,7 +161,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		copyTextView(smallTextView, oldSmallTextView);
 		copyTextView(smallTextViewShadow, oldSmallTextViewShadow);
 		copyView(emptyBanner, oldEmptyBanner);
-		copyView(bottomDivider, oldBottomDivider);
 
 		updateInfo(null);
 		updateWidgetView();
@@ -234,31 +256,5 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		} else {
 			return container;
 		}
-	}
-
-	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, int order,
-						   @NonNull List<MapWidget> followingWidgets) {
-		super.attachView(container, panel, order, followingWidgets);
-		showHideDivider(shouldShowBottomDivider(followingWidgets));
-	}
-
-	private boolean shouldShowBottomDivider(@NonNull List<MapWidget> followingWidgets) {
-		if (isVerticalWidget) {
-			if (Algorithms.isEmpty(followingWidgets) && settings.TRANSPARENT_MAP_THEME.get()) {
-				return true;
-			}
-			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof SimpleWidget) {
-					return true;
-				}
-			}
-			return false;
-		}
-		return false;
-	}
-
-	private void showHideDivider(boolean show) {
-		AndroidUiHelper.updateVisibility(bottomDivider, show);
 	}
 }

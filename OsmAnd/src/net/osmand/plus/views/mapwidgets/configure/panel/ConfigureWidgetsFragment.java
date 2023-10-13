@@ -244,6 +244,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
 		addSelectedWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode);
 		onWidgetsConfigurationChanged();
+		mapLayers.getMapInfoLayer().updateColorShadowsOfText();
 	}
 
 	@Override

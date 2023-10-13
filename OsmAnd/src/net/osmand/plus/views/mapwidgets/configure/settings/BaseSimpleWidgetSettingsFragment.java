@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 import static net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.*;
 
 import android.os.Bundle;
@@ -9,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
@@ -21,6 +26,9 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
+import java.util.List;
+import java.util.Set;
+
 public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
 	private static final String SHOW_ICON_KEY = "show_icon_key";
@@ -29,6 +37,8 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 	public CommonPreference<Boolean> shouldShowIconPref;
 	public OsmandPreference<WidgetSize> widgetSizePref;
 	private WidgetType widgetType;
+	@Nullable
+	private MapWidgetInfo widgetInfo;
 
 	private boolean showIcon;
 	private WidgetSize selectedWidgetSize;
@@ -40,7 +50,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget) {
 			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
 			isWidgetVertical = simpleWidget.isVerticalWidget();
@@ -110,15 +120,30 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 	@Override
 	protected void applySettings() {
 		if (isWidgetVertical) {
+			List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel((MapActivity) requireActivity(),
+					appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+			Set<MapWidgetInfo> rowWidgetsMapInfo = pagedWidgets.get(widgetInfo.pageIndex);
+			rowWidgetsMapInfo.remove(widgetInfo);
+			applySizeSettingToWidgetsInRow(rowWidgetsMapInfo);
+
 			shouldShowIconPref.set(showIcon);
 			widgetSizePref.set(selectedWidgetSize);
-			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget) {
 				SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
 				simpleWidget.showIcon(shouldShowIconPref.get());
 				simpleWidget.recreateView();
 			}
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
+		}
+	}
+
+	private void applySizeSettingToWidgetsInRow(Set<MapWidgetInfo> mapWidgetInfo) {
+		for (MapWidgetInfo info : mapWidgetInfo) {
+			if (info.widget instanceof SimpleWidget) {
+				SimpleWidget simpleWidget = (SimpleWidget) info.widget;
+				simpleWidget.getWidgetSizePref().set(selectedWidgetSize);
+				simpleWidget.recreateView();
+			}
 		}
 	}
 }
