@@ -17,7 +17,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -148,10 +147,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
 		boolean shouldHideTopWidgets = (isVerticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
 		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
-		boolean visible = !(shouldHideTopWidgets || emptyValueTextView);
+		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
+		boolean visible = typeAllowed && !(shouldHideTopWidgets || emptyValueTextView);
 
 		updateVisibility(visible);
-		if (!shouldHideTopWidgets || emptyValueTextView) {
+		if (typeAllowed && (!shouldHideTopWidgets || emptyValueTextView)) {
 			updateSimpleWidgetInfo(drawSettings);
 		}
 	}
