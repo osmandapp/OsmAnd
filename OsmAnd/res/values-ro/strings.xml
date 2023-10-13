@@ -5353,11 +5353,21 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
     <string name="help_article_map_legend_nautical_map_name">Stil de hartă nautică</string>
-    <string name="release_4_6">- Widgetul raportului de planare
+    <string name="release_4_6">• Adăugat \"Glide Ratio\" widget
 \n
-\n - A fost adăugat widget-ul ANT+ pentru temperatură
+\n• Adăugat filtre și foldere inteligente pentru piese
 \n
-\n - O mai bună gestionare a memoriei pentru trasee GPX mari
+\n• Adăugate rânduri pentru panourile widget de sus și de jos cu suport pentru toate widgeturile
+\n
+\n• Adăugat suport pentru widgetul de temperatură ANT+
+\n
+\n• Gestionare îmbunătățită a memoriei pentru piesele GPX mari
+\n
+\n• Gestionare actualizată a resurselor locale în Descărcări
+\n
+\n• A fost adăugat widgetul \"RAM disponibil\"
+\n
+\n• Au fost rezolvate problemele legate de bara de stare transparentă
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
