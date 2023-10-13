@@ -1,12 +1,11 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
@@ -179,13 +178,18 @@ public enum WidgetType {
 	}
 
 	public WidgetGroup getGroup() {
-		if (group == ALTITUDE) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.is3DMapsEnabled()) {
-				return null;
-			}
+		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed()) {
+			return null;
 		}
 		return group;
+	}
+
+	public boolean isAllowed() {
+		if (this == ALTITUDE_MAP_CENTER) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			return plugin != null && plugin.is3DMapsEnabled();
+		}
+		return true;
 	}
 
 	@StringRes
