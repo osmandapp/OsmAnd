@@ -337,7 +337,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
 				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreationTime() == -1
+				|| item.getFileCreationTime() <= 0
 				;
 	}
 

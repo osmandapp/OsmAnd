@@ -8,7 +8,7 @@ abstract class BaseTrackFilter(
 	val displayNameId: Int,
 	@Expose
 	@SerializedName("filterType") val filterType: FilterType,
-	var filterChangedListener: FilterChangedListener) {
+	var filterChangedListener: FilterChangedListener?) {
 
 	abstract fun isEnabled(): Boolean
 
