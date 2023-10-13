@@ -271,7 +271,9 @@ public class WikipediaPlugin extends OsmandPlugin {
 						if (url.contains(ORG_WIKI_SUFFIX) && colonIdx > 0) {
 							String fileName = url.substring(colonIdx + 1);
 							WikiImage wikiImage = WikiCoreHelper.getImageData(fileName);
-							imageCard = new WikiImageCard(mapActivity, wikiImage);
+							if (wikiImage != null) {
+								imageCard = new WikiImageCard(mapActivity, wikiImage);
+							}
 						}
 					}
 				}
