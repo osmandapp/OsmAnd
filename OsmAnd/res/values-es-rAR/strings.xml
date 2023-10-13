@@ -607,7 +607,7 @@
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
     <string name="contribution_activity">Instalar compilación</string>
     <string name="choose_osmand_theme_descr">Personaliza el aspecto de la aplicación.</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Aspecto de la aplicación</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Indicar dirección</string>
     <string name="favourites_list_activity">Elegir favorito</string>
