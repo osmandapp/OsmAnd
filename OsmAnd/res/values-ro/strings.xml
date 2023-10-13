@@ -778,8 +778,8 @@
     <string name="map_view_3d">Vedere hartă în 3D</string>
     <string name="show_poi_over_map_description">Arată stratul cu ultimul punct de interes utilizat.</string>
     <string name="show_poi_over_map">Arată strat cu punctele de interes</string>
-    <string name="map_tile_source_descr">Alegeți sursa hărților online sau a hărților din cache.</string>
-    <string name="map_tile_source">Sursă hartă raster</string>
+    <string name="map_tile_source_descr">Alegeți sursa hărților online sau a hărților segmentate din cache.</string>
+    <string name="map_tile_source">Sursă hartă segmentată</string>
     <string name="map_source">Sursă hartă</string>
     <string name="use_internet">Utilizați internetul</string>
     <string name="show_location">Arată-ți poziția</string>
