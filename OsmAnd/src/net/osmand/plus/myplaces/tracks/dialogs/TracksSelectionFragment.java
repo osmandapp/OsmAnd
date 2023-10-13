@@ -226,8 +226,15 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
-			int selectedSize = itemsSelectionHelper.getSelectedItemsSize() + groupsSelectionHelper.getSelectedItemsSize();
-			actionBar.setTitle(String.valueOf(selectedSize));
+			Set<TrackItem> tracks = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> groups = groupsSelectionHelper.getSelectedItems();
+			int items = tracks.size() + groups.size();
+			int total = tracks.size();
+			for (TracksGroup group : groups) {
+				total += group.getTrackItems().size();
+			}
+			String text = getResources().getQuantityString(R.plurals.tracks, total, items, total);
+			actionBar.setTitle(text);
 		}
 	}
 
