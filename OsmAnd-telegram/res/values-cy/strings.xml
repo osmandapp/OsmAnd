@@ -8,8 +8,10 @@
     <string name="shared_string_apply">Iawn</string>
     <string name="units_and_formats">Unedau a fformatau</string>
     <string name="unit_of_length">Unedau hyd</string>
-    <string name="shared_string_all">Y cwbl</string>
+    <string name="shared_string_all">Popeth</string>
     <string name="logcat_buffer_descr">Gwirio a rhannu logiau manwl o\'r ap</string>
     <string name="logcat_buffer">Byffyr Logcat</string>
     <string name="nm">nmi</string>
+    <string name="shared_string_cancel">Canslo</string>
+    <string name="foot">ft</string>
 </resources>
