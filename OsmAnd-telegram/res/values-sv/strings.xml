@@ -216,7 +216,7 @@
     <string name="type_contact_or_group_name">Skriv kontakt eller gruppnamn</string>
     <string name="search_contacts_descr">Sök i alla dina grupper och kontakter.</string>
     <string name="search_contacts">Sök kontakter</string>
-    <string name="bearing">Riktning</string>
+    <string name="bearing">Bäring</string>
     <string name="altitude">Höjd</string>
     <string name="precision">Precision</string>
     <string name="direction">Riktning</string>
