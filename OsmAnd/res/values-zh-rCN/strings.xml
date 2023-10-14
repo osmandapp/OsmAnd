@@ -5435,4 +5435,8 @@
     <string name="osmand_cloud_delete_account_confirmation">删除账号？</string>
     <string name="help_article_purchases_ios_name">iOS购买</string>
     <string name="sort_country_name_descending">国家名称：Z - A</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="date_of_creation">创建日期</string>
+    <string name="map_is_up_to_date">%1$s 地图已为最新版本。</string>
+    <string name="delete_map_description">您确定要删除 %1$s 地图吗？</string>
 </resources>
