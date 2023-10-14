@@ -784,7 +784,7 @@
     <string name="use_internet">Utilizați internetul</string>
     <string name="show_location">Arată-ți poziția</string>
     <string name="show_gps_coordinates_text">Afișați coordonatele GPS pe hartă</string>
-    <string name="use_internet_to_download_tile">Descărcați porțiunile de hartă lipsă</string>
+    <string name="use_internet_to_download_tile">Descărcați segmentele de hartă lipsă</string>
     <string name="app_description">App pentru navigare</string>
     <string name="shared_string_exit">Ieși</string>
     <string name="search_button">Căutare</string>
@@ -985,7 +985,7 @@
     <string name="clear_intermediate_points">Șterge destinațiile intermediare</string>
     <string name="keep_intermediate_points">Păstrează destinațiile intermediare</string>
     <string name="context_menu_item_directions_to">Indicații spre</string>
-    <string name="context_menu_item_directions_from">Navigare pornind din</string>
+    <string name="context_menu_item_directions_from">Navigație de la</string>
     <string name="route_descr_map_location">Hartă: </string>
     <string name="route_to">Către:</string>
     <string name="route_via">Prin:</string>
@@ -1042,7 +1042,7 @@
     <string name="recording_context_menu_show">Arată</string>
     <string name="recording_photo_description">Poza %1$s %2$s</string>
     <string name="av_def_action_picture">Faceți o poză</string>
-    <string name="recording_context_menu_precord">Fă o poză</string>
+    <string name="recording_context_menu_precord">Fotografiază</string>
     <string name="use_displayed_track_for_navigation">Utilizați track-ul afișat pentru navigație\?</string>
     <string name="keep_and_add_destination_point">Adăugați ca destinație subsecventă</string>
     <string name="shared_string_select_on_map">Selectează pe hartă</string>
@@ -1203,7 +1203,7 @@
     <string name="download_tab_local">Local</string>
     <string name="no_internet_connection">Descărcarea nu este posibilă, verificaţi conexiunea la Internet.</string>
     <string name="shared_string_dismiss">Închide</string>
-    <string name="everything_up_to_date">Toate fişierele actualizate</string>
+    <string name="everything_up_to_date">Toate fișierele au fost actualizate</string>
     <string name="use_opengl_render">Utilizaţi redare OpenGL</string>
     <string name="map_update">Actualizări disponibile pentru %1$s hărţi</string>
     <string name="search_for">Căutare pentru</string>
@@ -1353,7 +1353,7 @@
     <string name="osm_save_offline">Salvați offline</string>
     <string name="osm_edit_modified_poi">Modificat POI OSM</string>
     <string name="osm_edit_deleted_poi">POI OSM șters</string>
-    <string name="context_menu_item_open_note">Deschideți OSM Notițe</string>
+    <string name="context_menu_item_open_note">Creeză notă OSM</string>
     <string name="osm_edit_reopened_note">OSM Notițe redeschis</string>
     <string name="item_removed">Articol șters</string>
     <string name="n_items_removed">elemente șterse</string>
@@ -4210,7 +4210,7 @@
     <string name="quick_action_add_favorite">Adăugați favorit</string>
     <string name="quick_action_edit_action">Editați acțiunea</string>
     <string name="quick_action_new_action">Adăugați o acțiune</string>
-    <string name="quick_action_add_parking">Adăugați loc de parcare</string>
+    <string name="quick_action_add_parking">Adaugă loc de parcare</string>
     <string name="quick_action_navigation_voice_on">Dezactivare voce</string>
     <string name="quick_action_navigation_voice_off">Dezactivați Vocea</string>
     <string name="quick_action_navigation_voice">Voce pornit/oprit</string>
