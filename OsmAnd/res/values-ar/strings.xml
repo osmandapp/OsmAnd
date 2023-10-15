@@ -5538,4 +5538,14 @@
     <string name="edit_fiilter">تعديل الفلتر</string>
     <string name="save_as_smart_folder">احفظ كملف ذكي</string>
     <string name="delete_smart_folder_dialog_message">هذا سيحذف \"%1$s\" ملف ذكي.</string>
+    <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
+    <string name="empty_smart_folder_description">كل المسارات المطابقة ستظهر تلقائياً هنا</string>
+    <string name="configure_filter">تعديل الفلتر</string>
+    <string name="no_config_smart_folder_title">غير مهيأ</string>
+    <string name="discard_filter_changes">تجاهل تغييرات الفلتر</string>
+    <string name="shared_string_loading">قيد التحميل</string>
+    <string name="discard_filter_changes_prompt">هل أنت متأكد من أنك تريد إعادة ضبط جميع الفلاتر الى الوضع الافتراضي؟</string>
+    <string name="no_config_smart_folder_description">الملفات الذكية تسمح بتجميع المسارات بواسطة تطبيق الفلاتر</string>
+    <string name="loading_tracks">إعادة تحميل المسارات</string>
+    <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
 </resources>
