@@ -35,7 +35,6 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -147,11 +146,8 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof ItemsSelectionHelper.SelectionHelperProvider) {
 			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
-			ItemsSelectionHelper<TrackItem> helper = helperProvider.getSelectionHelper();
-
-			selectionHelper.setAllItems(helper.getAllItems());
-			selectionHelper.setSelectedItems(helper.getSelectedItems());
-			selectionHelper.setOriginalSelectedItems(helper.getOriginalSelectedItems());
+			ItemsSelectionHelper<TrackItem> originalHelper = helperProvider.getSelectionHelper();
+			selectionHelper.syncWith(originalHelper);
 		}
 	}
 

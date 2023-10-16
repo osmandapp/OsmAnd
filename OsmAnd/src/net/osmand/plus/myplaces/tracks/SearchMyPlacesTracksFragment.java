@@ -212,8 +212,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment,
-						currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 
@@ -324,6 +323,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onResume() {
 		super.onResume();
 		setupToolbar(requireView());
+		app.getSelectedGpxHelper().addListener(this);
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();
@@ -337,6 +337,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onPause() {
 		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 		app.getSmartFolderHelper().removeUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
 	}

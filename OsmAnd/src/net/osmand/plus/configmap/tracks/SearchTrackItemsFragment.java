@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchTrackBaseFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
@@ -80,8 +81,9 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
 			TracksFragment tracksFragment = (TracksFragment) fragment;
+			ItemsSelectionHelper<TrackItem> originalHelper = tracksFragment.getSelectionHelper();
+			originalHelper.syncWith(selectionHelper);
 			tracksFragment.saveChanges();
-			tracksFragment.updateTabsContent();
 		}
 		dismiss();
 	}
