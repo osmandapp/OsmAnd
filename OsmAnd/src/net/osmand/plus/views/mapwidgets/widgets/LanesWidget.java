@@ -156,7 +156,7 @@ public class LanesWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+	                       @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
@@ -171,7 +171,7 @@ public class LanesWidget extends MapWidget {
 		if (specialPosition) {
 			specialContainer.addView(view);
 		} else {
-			container.addView(view, order);
+			container.addView(view);
 		}
 	}
 

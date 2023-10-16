@@ -21,9 +21,11 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ import java.util.List;
 import java.util.Set;
 
 public class VerticalWidgetPanel extends LinearLayout {
+	private static final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
+
 	private final OsmandApplication app;
 	private MapActivity mapActivity;
 	protected boolean nightMode;
@@ -72,8 +76,9 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void update() {
 		removeAllViews();
-		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, app.getSettings().getApplicationMode(), topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM, enabledWidgetsFilter);
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		List<MapWidget> widgetsToShow = getWidgetsToShow(mode);
+		List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, mode, getWidgetsPanel(), enabledWidgetsFilter);
 
 		Iterator<Set<MapWidgetInfo>> rowIterator = pagedWidgets.listIterator();
 		while (rowIterator.hasNext()) {
@@ -84,33 +89,27 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 			List<MapWidgetInfo> widgetsInRow = new ArrayList<>(rowIterator.next());
 			Iterator<MapWidgetInfo> widgetsIterator = widgetsInRow.listIterator();
-
-			MapWidgetInfo firstMapWidgetInfo = null;
+			MapWidgetInfo firstMapWidgetInfoInRow = null;
 			while (widgetsIterator.hasNext()) {
 				MapWidgetInfo widgetInfo = widgetsIterator.next();
-				if (firstMapWidgetInfo == null) {
-					firstMapWidgetInfo = widgetInfo;
+				MapWidget widget = widgetInfo.widget;
+				if (firstMapWidgetInfoInRow == null) {
+					firstMapWidgetInfoInRow = widgetInfo;
 				} else {
-					setupWidgetSize(firstMapWidgetInfo, widgetInfo);
+					setupWidgetSize(firstMapWidgetInfoInRow, widgetInfo);
 				}
 
-				if (widgetInfo.widget.isViewVisible()) {
-					View widgetView = widgetInfo.widget.getView();
-					ViewParent viewParent = widgetView.getParent();
-					if (viewParent instanceof ViewGroup) {
-						ViewGroup viewGroup = (ViewGroup) widgetView.getParent();
-						viewGroup.removeView(widgetView);
-					}
-					widgetView.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
-					widgetRow.addView(widgetView);
-
+				if (widgetInfo.isEnabledForAppMode(mode) && widget.isViewVisible()) {
+					attachViewToRow(widget, widgetRow, getFollowingWidgets(widget, widgetsToShow));
 					if (widgetsIterator.hasNext()) {
 						addDivider(widgetRow, true);
 					}
-					if (widgetInfo.widget instanceof SimpleWidget) {
-						((SimpleWidget) widgetInfo.widget).updateValueAlign(widgetsInRow.size() == 1);
+					if (widget instanceof SimpleWidget) {
+						((SimpleWidget) widget).updateValueAlign(widgetsInRow.size() == 1);
 					}
 					anyRowWidgetVisible = true;
+				} else {
+					widgetInfo.widget.detachView(getWidgetsPanel());
 				}
 			}
 			addView(widgetRow);
@@ -118,11 +117,48 @@ public class VerticalWidgetPanel extends LinearLayout {
 				addDivider(this, false);
 			}
 		}
-		invalidate();
 		requestLayout();
 	}
 
-	private void setupWidgetSize(MapWidgetInfo firstWidgetInfo, MapWidgetInfo widgetInfo) {
+	private void attachViewToRow(@NonNull MapWidget widget, @NonNull ViewGroup container, @NonNull List<MapWidget> followingWidgets) {
+		View widgetView = widget.getView();
+		ViewParent viewParent = widgetView.getParent();
+		if (viewParent instanceof ViewGroup) {
+			((ViewGroup) viewParent).removeView(widgetView);
+		}
+
+		widgetView.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
+		widget.attachView(container, getWidgetsPanel(), followingWidgets);
+	}
+
+	private List<MapWidget> getWidgetsToShow(@NonNull ApplicationMode mode) {
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
+
+		List<MapWidget> widgetsToShow = new ArrayList<>();
+		for (MapWidgetInfo widgetInfo : widgets) {
+			if (widgetInfo.isEnabledForAppMode(mode) && widgetInfo.widget.isViewVisible()) {
+				widgetsToShow.add(widgetInfo.widget);
+			} else {
+				widgetInfo.widget.detachView(getWidgetsPanel());
+			}
+		}
+		return widgetsToShow;
+	}
+
+	private List<MapWidget> getFollowingWidgets(@NonNull MapWidget widget, @NonNull List<MapWidget> widgetsToShow) {
+		List<MapWidget> followingWidgets = new ArrayList<>();
+		int widgetIndex = widgetsToShow.indexOf(widget);
+		if (widgetIndex != -1 && widgetIndex + 1 == widgetsToShow.size()) {
+			followingWidgets = widgetsToShow.subList(widgetIndex + 1, widgetsToShow.size());
+		}
+		return followingWidgets;
+	}
+
+	private WidgetsPanel getWidgetsPanel() {
+		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
+	}
+
+	private void setupWidgetSize(@NonNull MapWidgetInfo firstWidgetInfo, @NonNull MapWidgetInfo widgetInfo) {
 		if (firstWidgetInfo.widget instanceof SimpleWidget && widgetInfo.widget instanceof SimpleWidget) {
 			SimpleWidget firstSimpleWidget = (SimpleWidget) firstWidgetInfo.widget;
 			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
@@ -133,7 +169,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 		}
 	}
 
-	private void addDivider(ViewGroup viewGroup, boolean verticalDivider) {
+	private void addDivider(@NonNull ViewGroup viewGroup, boolean verticalDivider) {
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
 				.inflate(verticalDivider ? R.layout.vertical_widget_divider : R.layout.horizontal_widget_divider, viewGroup);

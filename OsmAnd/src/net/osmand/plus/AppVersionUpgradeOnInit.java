@@ -117,8 +117,9 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_4_01 = 4401;
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
+	public static final int VERSION_4_6_03 = 4603;
 
-	public static final int LAST_APP_VERSION = VERSION_4_4_02;
+	public static final int LAST_APP_VERSION = VERSION_4_6_03;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -218,6 +219,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_4_02) {
 					increaseVehicleSizeLimitsAccuracy();
+				}
+				if (prevAppVersion < VERSION_4_6_03) {
+					updateWidgetPages(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -641,6 +645,29 @@ class AppVersionUpgradeOnInit {
 					preference.setModeValue(appMode, valueStr);
 				}
 			}
+		}
+	}
+
+	private void updateWidgetPages(OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			List<String> newTopPageOrder = getUpdatedWidgetPageOrder(settings.TOP_WIDGET_PANEL_ORDER.getStringsListForProfile(mode));
+			settings.TOP_WIDGET_PANEL_ORDER.setStringsListForProfile(mode, newTopPageOrder);
+			List<String> newBottomPageOrder = getUpdatedWidgetPageOrder(settings.BOTTOM_WIDGET_PANEL_ORDER.getStringsListForProfile(mode));
+			settings.BOTTOM_WIDGET_PANEL_ORDER.setStringsListForProfile(mode, newBottomPageOrder);
+		}
+	}
+
+	private List<String> getUpdatedWidgetPageOrder(List<String> oldWidgetOrder) {
+		if (oldWidgetOrder != null) {
+			List<String> newPageOrder = new ArrayList<>();
+			for (int pageIndex = 0; pageIndex < oldWidgetOrder.size(); pageIndex++) {
+				String page = oldWidgetOrder.get(pageIndex);
+				List<String> orders = Arrays.asList(page.split(","));
+				newPageOrder.addAll(orders);
+			}
+			return newPageOrder;
+		} else {
+			return null;
 		}
 	}
 }
