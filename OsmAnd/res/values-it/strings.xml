@@ -5413,11 +5413,21 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Widget Rapporto di planata
+    <string name="release_4_6">• Aggiunto widget \"Rapporto di planata\".
 \n
-\n• Aggiunto widget temperatura ANT+
+\n• Aggiunti filtri e cartelle intelligenti per le tracce
 \n
-\n• Migliore gestione della memoria per tracce GPX di grandi dimensioni
+\n• Aggiunte righe per i pannelli widget superiore e inferiore con supporto per tutti i widget
+\n
+\n• Aggiunto supporto per widget temperatura ANT+
+\n
+\n• Gestione migliorata della memoria per tracce GPX di grandi dimensioni
+\n
+\n• Aggiornata la gestione delle risorse locali nei download
+\n
+\n• Aggiunto widget \"RAM disponibile\"
+\n
+\n• Risolti problemi con la barra di stato trasparente
 \n
 \n</string>
     <string name="shared_string_temperature">Tempertura</string>
@@ -5434,4 +5444,26 @@
     <string name="app_mode_hang_gliding">Deltaplano</string>
     <string name="date_of_creation">Data di creazione</string>
     <string name="filter_screen_title">Filtro</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Visualizza la memoria disponibile per OsmAnd.</string>
+    <string name="sort_size_descending">Ordine discendente</string>
+    <string name="smart_folder_saved">Smart Folder salvata</string>
+    <string name="delete_map">Elimina la mappa</string>
+    <string name="standard_maps">Mappe standard</string>
+    <string name="shared_string_created">Creata</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia e mappe di viaggio</string>
+    <string name="empty_name">Nome vuoto</string>
+    <string name="edit_fiilter">Modifica i filtri</string>
+    <string name="rendering_styles">Stili di rendering</string>
+    <string name="sort_country_name_ascending">Nome del paese: A - Z</string>
+    <string name="weather_online">Meteo online</string>
+    <string name="shared_string_show_icon">Mostra l\'icona</string>
+    <string name="map_is_up_to_date">La mappa %1$s è aggiornata.</string>
+    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\".</string>
+    <string name="sort_size_ascending">Ordine ascendente</string>
+    <string name="widget_available_ram">RAM disponibile</string>
+    <string name="terrain_maps">Mappe del terreno</string>
+    <string name="sort_country_name_descending">Nome del paese: Z - A</string>
+    <string name="delete_map_description">Sei sicuro di voler eliminare la mappa %1$s\?</string>
+    <string name="maps_and_resources">Mappe e risorse</string>
 </resources>

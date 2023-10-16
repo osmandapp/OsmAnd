@@ -5472,4 +5472,14 @@
     <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
     <string name="empty_name">Sans nom</string>
     <string name="edit_fiilter">Modifier le filtre</string>
+    <string name="empty_smart_folder_title">Aucune trace trouvée</string>
+    <string name="empty_smart_folder_description">Toutes les traces correspondantes apparaîtront automatiquement ici</string>
+    <string name="configure_filter">Paramétrer le filtre</string>
+    <string name="no_config_smart_folder_title">Non paramétré</string>
+    <string name="discard_filter_changes">Effacer les filtres</string>
+    <string name="shared_string_loading">Chargement</string>
+    <string name="discard_filter_changes_prompt">Êtes-vous certain de vouloir réinitialiser tous les filtres \?</string>
+    <string name="no_config_smart_folder_description">Les dossiers intelligents regroupent les traces grâce aux filtres</string>
+    <string name="loading_tracks">Rechargement des traces</string>
+    <string name="searching_matching_tracks">Rechercher tous les traces correspondantes</string>
 </resources>

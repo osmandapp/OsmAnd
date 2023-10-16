@@ -4801,7 +4801,7 @@
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje aktuální polohy na mapě.</string>
     <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
     <string name="shared_string_switch_mode">Přepnout režim</string>
-    <string name="click_on_widget">Klikněte na nástroj</string>
+    <string name="click_on_widget">Klikněte na widget</string>
     <string name="last_synchronized">Poslední synchronizace</string>
     <string name="map_widget_altitude_map_center_desc">Zobrazuje nadmořskou výšku aktuálního středu mapy.</string>
     <string name="map_widget_altitude_map_center">Nadmořská výška: střed mapy</string>
@@ -5349,11 +5349,21 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
-    <string name="release_4_6">- Widget Poměru klouzavosti 
+    <string name="release_4_6">- Přidán widget \"Glide Ratio\"
 \n
-\n - Přidán widget teploty ANT+
+\n - Přidány filtry a inteligentní složky pro skladby
 \n
-\n - Lepší správa paměti pro velké stopy GPX
+\n - Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
+\n
+\n - Přidána podpora pro widget teploty ANT+
+\n
+\n - Vylepšená správa paměti pro velké stopy GPX
+\n
+\n - Aktualizovaná správa místních zdrojů v sekci Stažené soubory
+\n
+\n - Přidán widget \"Dostupná paměť RAM\"
+\n
+\n - Opraveny problémy s průhledným stavovým řádkem
 \n
 \n</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
@@ -5426,4 +5436,23 @@
     <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
+    <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
+    <string name="smart_folder_name_present">Taková složka Smart Folder již existuje</string>
+    <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
+    <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
+    <string name="configure_filter">Konfigurace filtru</string>
+    <string name="smart_folder_saved">Smart Folder uložen</string>
+    <string name="no_config_smart_folder_title">Není nastaveno</string>
+    <string name="add_smart_folder">Přidat chytrou složku</string>
+    <string name="empty_name">Prázdný název</string>
+    <string name="edit_fiilter">Upravit filtr</string>
+    <string name="discard_filter_changes">Zahodit změny filtru</string>
+    <string name="save_as_smart_folder">Uložit jako chytrou složku</string>
+    <string name="shared_string_show_icon">Zobrazit ikonu</string>
+    <string name="shared_string_loading">Načítání</string>
+    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
+    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry\?</string>
+    <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
+    <string name="loading_tracks">Znovu načítání tras</string>
+    <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>
 </resources>

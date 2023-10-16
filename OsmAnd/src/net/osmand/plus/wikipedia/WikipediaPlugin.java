@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+import static net.osmand.wiki.WikiCoreHelper.USE_OSMAND_WIKI_API;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -527,7 +528,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, holder);
 			}
 			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
-			if (wikimediaContent != null) {
+			if (wikimediaContent != null && !(USE_OSMAND_WIKI_API && wikidataId != null)) {
 				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
 				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, holder);
 			}

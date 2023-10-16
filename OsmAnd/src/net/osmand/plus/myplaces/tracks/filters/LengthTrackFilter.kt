@@ -6,6 +6,8 @@ import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.LENGTH
 import net.osmand.plus.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
+import kotlin.math.ceil
+import kotlin.math.floor
 
 class LengthTrackFilter(
 	minValue: Float,
@@ -38,7 +40,7 @@ class LengthTrackFilter(
 		if (length == null || (length == 0f)) {
 			return false
 		}
-		var normalizedValue = length / coef
+		var normalizedValue = length
 		return normalizedValue > valueFrom && normalizedValue < valueTo
 				|| normalizedValue < minValue && valueFrom == minValue
 				|| normalizedValue > maxValue && valueTo == maxValue
@@ -59,5 +61,29 @@ class LengthTrackFilter(
 
 			MetricsConstants.KILOMETERS_AND_METERS -> OsmAndFormatter.METERS_IN_KILOMETER
 		}
+	}
+
+	override fun setValueFrom(from: Float, updateListeners: Boolean) {
+		super.setValueFrom(from * coef, updateListeners)
+	}
+
+	override fun setValueTo(to: Float, updateListeners: Boolean) {
+		super.setValueTo(to * coef, updateListeners)
+	}
+
+	override fun getDisplayMaxValue(): Int {
+		return ceil(if (coef != 0f) maxValue / coef.toInt() else ceil(maxValue)).toInt()
+	}
+
+	override fun getDisplayMinValue(): Int {
+		return floor(if (coef != 0f) minValue / coef else minValue).toInt()
+	}
+
+	override fun getDisplayValueFrom(): Int {
+		return floor(if (coef != 0f) valueFrom / coef else valueFrom).toInt()
+	}
+
+	override fun getDisplayValueTo(): Int {
+		return ceil(if (coef != 0f) valueTo / coef else valueTo).toInt()
 	}
 }

@@ -5427,4 +5427,57 @@
     <string name="edit_fiilter">Edycja filtra</string>
     <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
     <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
+    <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX
+\n
+\n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud”
+\n
+\n • Nowy format map terenu z obsługą rzeźby terenu 3D
+\n
+\n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów
+\n
+\n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI
+\n
+\n • Jedna lista widżetów dla panelu górnego/dolnego
+\n
+\n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych
+\n
+\n • Linie konturowe działają z dowolnym „źródłem mapy”
+\n
+\n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych
+\n
+\n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania
+\n
+\n • Dodano opcję „Ogłaszaj zboczenie z trasy”
+\n
+\n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku
+\n
+\n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej
+\n
+\n • Dodano obsługę trasy „Via ferrata” dla pieszych
+\n
+\n • Dodano skalę „CAI” do klasyfikacji trudności tras
+\n
+\n • Naprawiono wybór języka dla poszczególnych aplikacji
+\n
+\n • Dodano obsługę ikon tematycznych
+\n
+\n • OsmAnd Cloud: dodano opcję usunięcia konta
+\n
+\n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu
+\n
+\n • Przerobiono japońskie komunikaty głosowe
+\n
+\n • Przerobiono zmianę wysokości i ocenę nachylenia
+\n
+\n</string>
+    <string name="empty_smart_folder_title">Brak pasującej trasy</string>
+    <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
+    <string name="configure_filter">Skonfiguruj filtr</string>
+    <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
+    <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
+    <string name="shared_string_loading">Wczytywanie</string>
+    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry\?</string>
+    <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
+    <string name="loading_tracks">Ponowne wczytywanie tras</string>
+    <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
 </resources>
