@@ -254,7 +254,7 @@ class BackupImporter {
 		Set<String> uniqueFileIds = new TreeSet<>();
 		for (RemoteFile rf : remoteFiles) {
 			String fileId = rf.getTypeNamePath();
-			if (uniqueFileIds.add(fileId) && !rf.isDeleted()) {
+			if (!rf.isDeleted() && uniqueFileIds.add(fileId)) {
 				uniqueRemoteFiles.add(rf);
 			}
 		}
