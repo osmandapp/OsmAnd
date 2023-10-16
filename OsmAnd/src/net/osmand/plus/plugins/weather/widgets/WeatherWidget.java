@@ -64,8 +64,8 @@ public class WeatherWidget extends SimpleWidget {
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
-		super(mapActivity, widgetType, null, null);
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band) {
+		super(mapActivity, widgetType, customId, null);
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();
