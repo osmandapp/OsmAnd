@@ -609,7 +609,7 @@ public class BackupHelper {
 		return error;
 	}
 
-	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
+	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
