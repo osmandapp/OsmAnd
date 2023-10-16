@@ -70,6 +70,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -264,7 +265,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
 				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_TEMPERATURE);
@@ -278,6 +279,12 @@ public class WeatherPlugin extends OsmandPlugin {
 				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_PRESSURE);
 		}
 		return null;
+	}
+
+	@Nullable
+	@Override
+	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		return createMapWidgetForParams(mapActivity, widgetType, null, null);
 	}
 
 	@Override
