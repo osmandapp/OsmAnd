@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.widgets;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
@@ -21,6 +22,7 @@ import net.osmand.plus.views.controls.WidgetsPagerAdapter;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 public class WeatherWidgetsPanel extends SideWidgetsPanel {
-
+	private final static String WIDGET_ID = WeatherWidgetsPanel.class.getName();
 	private final WeatherPlugin plugin;
 	private final List<WeatherWidget> weatherWidgets = new ArrayList<>();
 
@@ -63,11 +65,15 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 	}
 
 	private void createWidgets(@NonNull MapActivity activity) {
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, getWidgetId(WEATHER_TEMPERATURE_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, getWidgetId(WEATHER_AIR_PRESSURE_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET, getWidgetId(WEATHER_WIND_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, getWidgetId(WEATHER_PRECIPITATION_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, getWidgetId(WEATHER_CLOUDS_WIDGET), null));
+	}
+
+	private String getWidgetId(WidgetType widgetType){
+		return widgetType.id + DELIMITER + WIDGET_ID;
 	}
 
 	public void setSelectedDate(@Nullable Date date) {
