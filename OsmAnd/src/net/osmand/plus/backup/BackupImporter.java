@@ -1,7 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
-import static net.osmand.plus.backup.BackupHelper.mapRemoteFilesWithSettingItems;
+import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
-import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -88,7 +87,7 @@ class BackupImporter {
 			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					if (settingsItems != null) {
-						Map<RemoteFile, SettingsItem> items = mapRemoteFilesWithSettingItems(settingsItems, remoteFiles, true);
+						Map<RemoteFile, SettingsItem> items = getRemoteFilesSettingsItems(settingsItems, remoteFiles, true);
 						remoteFiles = new ArrayList<>(items.keySet());
 					}
 					result.remoteFiles = remoteFiles;
@@ -111,11 +110,10 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, @NonNull Collection<RemoteFile> remoteFiles, boolean forceReadData) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		Collection<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE).values();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}

@@ -424,8 +424,7 @@ public abstract class SettingsHelper {
 	@NonNull
 	private List<LocalItem> getLocalIndexData(@NonNull LocalItemType... types) {
 		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
-		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
-		List<LocalItem> items = indexHelper.getLocalIndexItems(readFiles, false, null, types);
+		List<LocalItem> items = indexHelper.getLocalIndexItems(true, false, null, types);
 
 		String miniBaseMapName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
 		Iterator<LocalItem> iterator = items.iterator();

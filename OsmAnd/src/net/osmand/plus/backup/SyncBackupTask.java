@@ -5,6 +5,7 @@ import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
+import static net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType.UNIQUE;
 
 import android.os.AsyncTask;
 
@@ -16,6 +17,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -96,7 +98,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			syncListener.onBackupSyncStarted();
 		}
 		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, true, this);
+			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
@@ -120,9 +122,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 				Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
-	public void downloadRemoteVersion(@NonNull SettingsItem item) {
+	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType) {
 		item.setShouldReplace(true);
-		networkSettingsHelper.importSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), true, this);
+		String name = BackupHelper.getItemFileName(item);
+		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, this);
 	}
 
 	private void uploadNewItems() {
