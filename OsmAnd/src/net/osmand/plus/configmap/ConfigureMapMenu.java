@@ -66,6 +66,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -208,10 +209,11 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setRefreshCallback(item -> {
-					boolean enabled = app.getSelectedGpxHelper().isAnyGpxFileSelected();
-					item.setSelected(app.getSelectedGpxHelper().isAnyGpxFileSelected());
-					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-					item.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID);
+					GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
+					boolean hasSelectedGpx = gpxHelper.isAnyGpxFileSelected();
+					item.setSelected(hasSelectedGpx);
+					item.setDescription(gpxHelper.getGpxDescription());
+					item.setColor(app, hasSelectedGpx ? R.color.osmand_orange : INVALID_ID);
 				})
 				.setListener(listener));
 

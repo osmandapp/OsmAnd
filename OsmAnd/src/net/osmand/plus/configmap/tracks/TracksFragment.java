@@ -43,7 +43,6 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -403,6 +402,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (asyncLoader == null) {
 			reloadTracks();
 		}
+		gpxSelectionHelper.addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		gpxSelectionHelper.removeListener(this);
 	}
 
 	private void reloadTracks() {

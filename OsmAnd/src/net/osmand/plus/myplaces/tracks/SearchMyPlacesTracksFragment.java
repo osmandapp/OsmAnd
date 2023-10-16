@@ -323,6 +323,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onResume() {
 		super.onResume();
 		setupToolbar(requireView());
+		app.getSelectedGpxHelper().addListener(this);
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();
@@ -336,6 +337,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onPause() {
 		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 		app.getSmartFolderHelper().removeUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
 	}

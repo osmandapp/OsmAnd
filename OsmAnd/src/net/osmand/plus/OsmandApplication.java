@@ -41,7 +41,6 @@ import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
-import net.osmand.plus.base.globallistener.GlobalListenersManager;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -201,7 +200,6 @@ public class OsmandApplication extends MultiDexApplication {
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
-	GlobalListenersManager globalListenersManager;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -579,10 +577,6 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public OfflineForecastHelper getOfflineForecastHelper() {
 		return weatherHelper.getOfflineForecastHelper();
-	}
-
-	public GlobalListenersManager getGlobalListenersManager() {
-		return globalListenersManager;
 	}
 
 	public CommandPlayer getPlayer() {

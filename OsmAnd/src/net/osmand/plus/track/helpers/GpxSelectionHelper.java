@@ -2,6 +2,7 @@ package net.osmand.plus.track.helpers;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -63,6 +65,7 @@ public class GpxSelectionHelper {
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
+	private List<WeakReference<SelectGpxTaskListener>> listeners = new ArrayList<>();
 	private SelectGpxTask selectGpxTask;
 
 	public GpxSelectionHelper(@NonNull OsmandApplication app) {
@@ -132,6 +135,14 @@ public class GpxSelectionHelper {
 		return gpxFile != null &&
 				((gpxFile.showCurrentTrack && helper.getSelectedCurrentRecordingTrack() != null) ||
 						(gpxFile.path != null && helper.getSelectedFileByPath(gpxFile.path) != null));
+	}
+
+	public void addListener(@NonNull SelectGpxTaskListener listener) {
+		listeners = Algorithms.updateWeakReferencesList(listeners, listener, true);
+	}
+
+	public void removeListener(@NonNull SelectGpxTaskListener listener) {
+		listeners = Algorithms.updateWeakReferencesList(listeners, listener, false);
 	}
 
 	@Nullable
@@ -495,11 +506,48 @@ public class GpxSelectionHelper {
 	}
 
 	private void runSelection(@NonNull Map<String, Boolean> selectedItems) {
-		if (selectGpxTask != null && (selectGpxTask.getStatus() == AsyncTask.Status.RUNNING)) {
+		if (selectGpxTask != null && (selectGpxTask.getStatus() == Status.RUNNING)) {
 			selectGpxTask.cancel(false);
 		}
-		SelectGpxTaskListener listener = app.getGlobalListenersManager().getGpxSelectionListener();
-		selectGpxTask = new SelectGpxTask(app, selectedItems, listener);
+		selectGpxTask = new SelectGpxTask(app, selectedItems, getGpxSelectionListener());
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@NonNull
+	private SelectGpxTaskListener getGpxSelectionListener() {
+		return new SelectGpxTaskListener() {
+			@Override
+			public void onGpxSelectionStarted() {
+				List<WeakReference<SelectGpxTaskListener>> selectionListeners = listeners;
+				for (WeakReference<SelectGpxTaskListener> weakReference : selectionListeners) {
+					SelectGpxTaskListener listener = weakReference.get();
+					if (listener != null) {
+						listener.onGpxSelectionStarted();
+					}
+				}
+			}
+
+			@Override
+			public void onGpxSelectionInProgress() {
+				List<WeakReference<SelectGpxTaskListener>> selectionListeners = listeners;
+				for (WeakReference<SelectGpxTaskListener> weakReference : selectionListeners) {
+					SelectGpxTaskListener listener = weakReference.get();
+					if (listener != null) {
+						listener.onGpxSelectionInProgress();
+					}
+				}
+			}
+
+			@Override
+			public void onGpxSelectionFinished() {
+				List<WeakReference<SelectGpxTaskListener>> selectionListeners = listeners;
+				for (WeakReference<SelectGpxTaskListener> weakReference : selectionListeners) {
+					SelectGpxTaskListener listener = weakReference.get();
+					if (listener != null) {
+						listener.onGpxSelectionFinished();
+					}
+				}
+			}
+		};
 	}
 }

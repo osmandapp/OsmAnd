@@ -41,8 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigureMapFragment extends BaseOsmAndFragment
-		implements OnDataChangeUiAdapter, InAppPurchaseListener, SelectGpxTaskListener {
+public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
+		InAppPurchaseListener, SelectGpxTaskListener {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
@@ -280,6 +280,18 @@ public class ConfigureMapFragment extends BaseOsmAndFragment
 		int profileColor = appMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getSelectedGpxHelper().addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 	}
 
 	@Nullable
