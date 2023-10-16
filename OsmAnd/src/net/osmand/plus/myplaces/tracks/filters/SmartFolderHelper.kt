@@ -5,11 +5,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.util.Algorithms
 import java.util.Date
-import java.util.HashSet
 
 class SmartFolderHelper(val app: OsmandApplication) {
 	private val preference: CommonPreference<String>
@@ -38,6 +38,18 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		val settingsJson = preference.get()
 		if (!Algorithms.isEmpty(settingsJson)) {
 			TrackFilterList.parseFilters(settingsJson, this)?.let { savedFilters ->
+				for (smartFolder in savedFilters) {
+					smartFolder.filters?.let {
+						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()
+						for (filter in it) {
+							var newFilter =
+								TrackFiltersHelper.createFilter(app, filter.filterType, null)
+							newFilter.initWithValue(filter)
+							newFilters.add(newFilter)
+						}
+						smartFolder.filters = newFilters
+					}
+				}
 				smartFolderCollection.addAll(savedFilters)
 			}
 		}

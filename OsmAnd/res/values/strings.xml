@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <plurals name="tracks">
+        <item quantity="one" formatted="true">%1$d (%2$d track)</item>
+        <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>
+    </plurals>
     <string name="shared_string_loading">Loading</string>
     <string name="loading_tracks">Reloading tracks</string>
     <string name="searching_matching_tracks">Search all matching tracks</string>

@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +32,6 @@ import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
 
@@ -47,6 +46,9 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			filter: TracksSearchFilter,
 			trackFiltersContainer: DialogClosedListener,
 			smartFolder: SmartFolder?) {
+			manager.findFragmentByTag(TAG)?.let { foundFragment ->
+				(foundFragment as TracksFilterFragment).dialog?.dismiss()
+			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = TracksFilterFragment()
 				fragment.setTargetFragment(target, 0)
@@ -157,31 +159,45 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	fun setupToolbar(view: View) {
 		appBar = view.findViewById(R.id.app_bar_layout)
 		view.findViewById<Toolbar>(R.id.toolbar).apply {
-			navigationIcon = app.uiUtilities.getThemedIcon(R.drawable.ic_arrow_back)
+			inflateMenu(R.menu.show_filters_menu)
+			val closeMenu = menu.findItem(R.id.action_filters)
+			val descriptionId =
+				if (smartFolder == null) R.string.save_as_smart_folder else R.string.save_filter
+			MenuItemCompat.setContentDescription(
+				closeMenu,
+				app.getString(descriptionId))
+			navigationContentDescription = app.getString(R.string.shared_string_close)
+			val navigationIconColorId =
+				if (nightMode) R.color.active_buttons_and_links_text_dark else R.color.icon_color_default_light
+			navigationIcon =
+				getIcon(R.drawable.ic_action_close, navigationIconColorId)
 			setNavigationOnClickListener {
 				closeWithoutApply()
 			}
-		}
-		val saveFilterBtn = view.findViewById<ImageView>(R.id.save_filters_btn)
-		saveFilterBtn.setOnClickListener {
-			if (smartFolder != null) {
-				app.smartFolderHelper.saveSmartFolder(smartFolder!!, filter.currentFilters)
-				Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT).show()
-				dismiss()
-			} else {
-				app.dialogManager.showSaveSmartFolderDialog(
-					requireActivity(),
-					nightMode,
-					filter.currentFilters)
-			}
-		}
-		val closeButton = view.findViewById<View>(R.id.close_button)
-		if (closeButton != null) {
-			closeButton.setOnClickListener {
-				closeWithoutApply()
-			}
-			if (closeButton is ImageView) {
-				UiUtilities.rotateImageByLayoutDirection(closeButton)
+			setTitle(R.string.filter_screen_title)
+			setOnMenuItemClickListener {
+				when (it.itemId) {
+					R.id.action_filters -> {
+						if (smartFolder != null) {
+							app.smartFolderHelper.saveSmartFolder(
+								smartFolder!!,
+								filter.currentFilters)
+							Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT)
+								.show()
+							dismiss()
+						} else {
+							app.dialogManager.showSaveSmartFolderDialog(
+								requireActivity(),
+								nightMode,
+								filter.currentFilters)
+						}
+						true
+					}
+
+					else -> {
+						false
+					}
+				}
 			}
 		}
 	}
@@ -282,8 +298,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			filter.initFilter()
 		}
 		adapter?.notifyDataSetChanged()
-		updateNightMode()
-		updateStatusBarColor(requireDialog().window)
+		context?.let {
+			updateNightMode()
+			updateStatusBarColor(requireDialog().window)
+		}
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
 			updateProgressVisibility(false)
 			filter.filteredTrackItems = trackItems

@@ -8,7 +8,7 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.MAX_ALTITUDE
 class MaxAltitudeTrackFilter(
 	minValue: Float,
 	maxValue: Float,
-	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	app: OsmandApplication, filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.max_altitude, MAX_ALTITUDE, filterChangedListener) {

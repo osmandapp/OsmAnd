@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter
+import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
@@ -101,6 +102,8 @@ open class FilterRangeViewHolder(
 		slider.stepSize = 1f
 		slider.addOnChangeListener(onSliderChanged)
 		slider.addOnSliderTouchListener(onSliderTouchListener)
+		val profileColor: Int = app.settings.applicationMode.getProfileColor(nightMode)
+		UiUtilities.setupSlider(slider, nightMode, profileColor, false)
 		valueFromInput = itemView.findViewById(R.id.value_from_et)
 		valueFromInput.addTextChangedListener(object : SimpleTextWatcher() {
 			override fun afterTextChanged(newText: Editable) {

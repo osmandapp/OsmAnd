@@ -351,6 +351,10 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	                                @Nullable SmartFolder smartFolder,
 	                                @Nullable TracksSearchFilter externalFilter,
 	                                @Nullable DialogClosedListener dialogClosedListener) {
+		Fragment foundFragment = manager.findFragmentByTag(TAG);
+		if (foundFragment instanceof SearchMyPlacesTracksFragment) {
+			((SearchMyPlacesTracksFragment) foundFragment).dismiss();
+		}
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
 			fragment.smartFolder = smartFolder;

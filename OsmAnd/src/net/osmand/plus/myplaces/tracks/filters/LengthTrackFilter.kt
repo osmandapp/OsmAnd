@@ -12,7 +12,7 @@ import kotlin.math.floor
 class LengthTrackFilter(
 	minValue: Float,
 	maxValue: Float,
-	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	app: OsmandApplication, filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.routing_attr_length_name, LENGTH, filterChangedListener) {

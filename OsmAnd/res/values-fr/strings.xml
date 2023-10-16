@@ -5186,7 +5186,7 @@
     <string name="shared_string_finger">Doigt</string>
     <string name="shared_string_hand">Main</string>
     <string name="rendering_value_name_only_name">Nom uniquement</string>
-    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type. signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type de l\'éclairage.signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 de la signature lumineuse</string>
     <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
     <string name="poi_categories">Catégories de PI</string>
     <string name="map_2d_mode_action">Mode 2D</string>

@@ -9,7 +9,7 @@ import net.osmand.plus.settings.enums.MetricsConstants
 class MaxSpeedTrackFilter(
 	minValue: Float,
 	maxValue: Float,
-	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	app: OsmandApplication, filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.max_speed, MAX_SPEED, filterChangedListener) {

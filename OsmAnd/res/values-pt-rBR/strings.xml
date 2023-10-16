@@ -151,7 +151,7 @@
 \nLeia mais em %1$s.</string>
     <string name="srtm_paid_version_title">Complemento de topologia</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para recursos topográficos off-line, como curvas de nível, sombra de relevo, escosta</string>
-    <string name="srtm_plugin_name">Topologia</string>
+    <string name="srtm_plugin_name">Topografia</string>
     <string name="plugin_touringview_name">Visão de mapa turístico</string>
     <string name="plugin_touringview_descr">Ativar este modo de exibição altera o estilo do mapa do OsmAnd para \'Visão turística\', que é uma visão detalhada especial para os viajantes e motoristas profissionais.
 \n
@@ -5453,4 +5453,17 @@
     <string name="shared_string_show_icon">Mostrar ícone</string>
     <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\".</string>
     <string name="help_article_navigation_routing_horse_routing_name">Roteamento de cavalo</string>
+    <string name="empty_smart_folder_title">Nenhuma trilha correspondente</string>
+    <string name="smart_folder_name_present">Essa pasta inteligente já está presente</string>
+    <string name="empty_smart_folder_description">Todas as trilhas correspondentes aparecerão automaticamente aqui</string>
+    <string name="configure_filter">Configurar filtro</string>
+    <string name="smart_folder_saved">Pasta inteligente salva</string>
+    <string name="no_config_smart_folder_title">Não configurado</string>
+    <string name="live_monitoring_adress_descr">Especifique o endereço da web com a sintaxe do parâmetro lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="discard_filter_changes">Descartar alterações de filtro</string>
+    <string name="shared_string_loading">Carregando</string>
+    <string name="discard_filter_changes_prompt">Tem certeza de que deseja redefinir todos os filtros\?</string>
+    <string name="no_config_smart_folder_description">Pastas inteligentes permitem agrupar trilhas por filtros aplicados</string>
+    <string name="loading_tracks">Carregando trilhas</string>
+    <string name="searching_matching_tracks">Pesquisar todas as faixas correspondentes</string>
 </resources>

@@ -5485,4 +5485,14 @@
     <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
     <string name="map_widget_glide_average_desc">Показує середній коефіцієнт ковзання за встановленим інтервалом.</string>
     <string name="map_widget_glide_target_desc">Показує коефіцієнт ковзання, необхідний для досягнення цільової точки.</string>
+    <string name="empty_smart_folder_title">Немає відповідного треку</string>
+    <string name="empty_smart_folder_description">Усі відповідні треки автоматично з\'являться тут</string>
+    <string name="configure_filter">Сконфігурувати фільтр</string>
+    <string name="no_config_smart_folder_title">Не сконфігуровано</string>
+    <string name="discard_filter_changes">Відкинути заміну фільтрів</string>
+    <string name="shared_string_loading">Завантаження</string>
+    <string name="discard_filter_changes_prompt">Ви впевнені, що хочете скинути всі фільтри\?</string>
+    <string name="no_config_smart_folder_description">Розумні теки дозволяють групувати треки за застосованими фільтрами</string>
+    <string name="loading_tracks">Перезавантаження треків</string>
+    <string name="searching_matching_tracks">Шукати всі відповідні треки</string>
 </resources>

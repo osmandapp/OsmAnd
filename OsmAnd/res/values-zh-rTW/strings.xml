@@ -5472,4 +5472,14 @@
     <string name="edit_fiilter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
     <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
+    <string name="empty_smart_folder_title">沒有相符的軌跡</string>
+    <string name="empty_smart_folder_description">所有相符的軌跡將會自動出現在此</string>
+    <string name="configure_filter">設定篩選條件</string>
+    <string name="no_config_smart_folder_title">未設定</string>
+    <string name="discard_filter_changes">放棄篩選條件變更</string>
+    <string name="shared_string_loading">正在載入</string>
+    <string name="discard_filter_changes_prompt">您確定您想要重設所有篩選條件嗎？</string>
+    <string name="no_config_smart_folder_description">智慧型資料夾允許透過套用的篩選條件對軌跡分組</string>
+    <string name="loading_tracks">正在重新載入軌跡</string>
+    <string name="searching_matching_tracks">搜尋所有相符的軌跡</string>
 </resources>
