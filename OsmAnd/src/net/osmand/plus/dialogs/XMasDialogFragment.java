@@ -99,11 +99,11 @@ public class XMasDialogFragment extends DialogFragment {
 			public void onShow(DialogInterface dialog) {
 				// Customize POSITIVE, NEGATIVE and NEUTRAL buttons.
 				Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-				positiveButton.setTextColor(mapActivity.getColor(R.color.color_white));
+				positiveButton.setTextColor(mapActivity.getColor(R.color.card_and_list_background_light));
 				positiveButton.invalidate();
 
 				Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-				negativeButton.setTextColor(mapActivity.getColor(R.color.color_white));
+				negativeButton.setTextColor(mapActivity.getColor(R.color.card_and_list_background_light));
 				negativeButton.invalidate();
 			}
 		});

@@ -878,9 +878,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			this.menuController = menuController;
 			setBgIds(R.color.app_bar_main_light, R.color.app_bar_main_dark,
 					R.color.app_bar_main_light, R.color.app_bar_main_dark);
-			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
-			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
-			setTitleTextClrIds(R.color.color_white, R.color.color_white);
+			setBackBtnIconClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
+			setCloseBtnIconClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
+			setTitleTextClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
 		}
 
 		public MenuController getMenuController() {

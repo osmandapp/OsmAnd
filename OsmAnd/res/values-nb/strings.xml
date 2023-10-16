@@ -687,7 +687,7 @@
     <string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving.</string>
     <string name="search_radius_proximity">Innen</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
-    <string name="fav_point_dublicate">Duplisert av favorittnavn angitt</string>
+    <string name="fav_point_dublicate">Duplisert favorittnavn angitt</string>
     <string name="traffic_warning_payment">Bomstasjon</string>
     <string name="speak_favorites">Favoritter i nærheten</string>
     <string name="speak_poi">Nærliggende interessepunkter</string>
@@ -1274,7 +1274,7 @@
     <string name="closing_at">Lukker</string>
     <string name="contact_info">Kontaktinformasjon</string>
     <string name="recent_places">Nylige steder</string>
-    <string name="saved_at_time">Nå lagret her: %1$s</string>
+    <string name="saved_at_time">Nå lagret: %1$s</string>
     <string name="new_version">Ny versjon</string>
     <string name="begin_with_osmand_menu_group">Første trinn med OsmAnd</string>
     <string name="features_menu_group">Funksjoner</string>
@@ -1885,7 +1885,7 @@
     <string name="change_color">Endre farge</string>
     <string name="edit_name">Rediger navn</string>
     <string name="animate_my_location">Animer egen posisjon</string>
-    <string name="animate_my_location_desc">Skru på animasjon av min posisjon under navigering.</string>
+    <string name="animate_my_location_desc">Jevn kartpanorering under bevegelse. Medfører en liten forsinkelse.</string>
     <string name="shared_string_overview">Oversikt</string>
     <string name="select_street">Velg gate</string>
     <string name="shared_string_in_name">i %1$s</string>
@@ -2166,8 +2166,8 @@
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer for nettbasert sporing</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angi tidsbuffer for å beholde posisjoner som skal sendes når internettforbindelse mangler</string>
     <string name="shared_string_others">Andre</string>
-    <string name="trace_rendering">Opptegningfeilsøkingsinfo</string>
-    <string name="trace_rendering_descr">Vis opptegningsytelsen.</string>
+    <string name="trace_rendering">Feilsøkingsinfo for ytelse</string>
+    <string name="trace_rendering_descr">Vis opptegnings- og navigeringsytelsen.</string>
     <string name="tts_missing_language_data">Gå til markedet for å laste ned valgt språk\?</string>
     <string name="gpx_option_reverse_route">Snu GPX-retning</string>
     <string name="gpx_option_from_start_point">Passer langs hele sporet</string>
@@ -3449,7 +3449,7 @@
     <string name="lang_lmo">Langobardisk</string>
     <string name="parking_positions">Parkeringsposisjoner</string>
     <string name="add_edit_favorite">Legg til eller rediger favoritt</string>
-    <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
+    <string name="import_complete_description">Importert alle data fra %1$s. Bruk knappene nedenfor til å åpne en hvilken som helst del av programmet for å håndtere det.</string>
     <string name="restore_all_profile_settings_descr">Alle profilinnstillinger blir gjenopprettet til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
     <string name="clear_recorded_data_warning">Tømme data som er tatt opp\?</string>
     <string name="recalculate_route_in_deviation">Beregn rute på nytt ved avvik</string>
@@ -4208,7 +4208,7 @@
 \nHåndter eller avbryt abonnementene dine fra Amazon-innstillingene når som helst.</string>
     <string name="cancel_anytime_in_amazon_app">Avbryt det når som helst i Amazon-programmet</string>
     <string name="amz_manage_subscription_descr">Bruk Amazon-programmet for å håndtere abonnementet ditt på enheten, eller i profilen din på Amazon-com-nettsiden.</string>
-    <string name="empty_category_name">Tomt kateogrinavn</string>
+    <string name="empty_category_name">Tomt kategorinavn</string>
     <string name="no_activity_for_intent">Installer et program som kan utføre denne handlingen.</string>
     <string name="release_3_9">• Tillagt innstilling for eksport og importering av data, inkludert innstillinger, ressurser, og mine steder.
 \n
@@ -4595,7 +4595,7 @@
     <string name="arrival_time_widget_desc">Tidspunkt for ankomst på reisemålet.</string>
     <string name="time_to_go_desc">Tid i minutter eller timer til du når ditt mål.</string>
     <string name="lanes_widgets_desc">Viser gjeldende kjørefeltoppsett og framhever filene å kjøre i under navigering.</string>
-    <string name="map_markers_bar_widget_desc">På toppen av stolpeminiprogrammet kan du se avstand og retning fra markøren til nåværende posisjon. Det er mulig å sette opp 1 eller 2 toppmarkører i miniprogrammet.</string>
+    <string name="map_markers_bar_widget_desc">Topplinjemodulen viser avstanden og retningen til den neste kartmarkøren fra din nåværende posisjon. Modulen kan stilles inn til å vise 1 eller 2 markører.</string>
     <string name="battery_widget_desc">Viser batterinivået til enheten din.</string>
     <string name="gps_info_widget_desc">Viser antall satellitter som for øyeblikket er synlige og brukes.</string>
     <string name="altitude_widget_desc">Viser høyden over havnivå for nåværende geoposisjon.</string>
@@ -4621,7 +4621,7 @@
     <string name="calculating_altitude">Beregner høyde</string>
     <string name="get_altitude_information">Hent høydeinformasjon</string>
     <string name="turn_on_public_transport_description">Slå på for å vise offentlige transportruter på kartet.</string>
-    <string name="street_name_widget_desc">Gatenavnsminiprogrammet viser nåværende gatenavn, med rett posisjonspil, eller neste gatenavn med manøveren som må fullføres.</string>
+    <string name="street_name_widget_desc">Gatenavnmodulen viser det aktuelle gatenavnet med en rett posisjonspil eller det neste gatenavnet med en pil som indikerer en kommende sving.</string>
     <string name="coordinates_widget_desc">Viser geografiske koordinater for nåværende geoposisjon.</string>
     <string name="audio_video_notes_desc">Gir hurtigtilgang til start/stopp av opptak lyd, video, eller bilde-notat.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
@@ -4908,7 +4908,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis løyper ment for terrengsykkel.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Endre utseende for %1$s spor\?</string>
     <string name="shared_string_select_recent">Velg nylige</string>
-    <string name="changes">Endrer %1$s</string>
+    <string name="changes">Endringer %1$s</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-isolinjer</string>
     <string name="open_weather_action_description">Lar deg åpne en skjerm med detaljert værinfo.</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
@@ -5363,4 +5363,41 @@
     <string name="about_osmand">Om OsmAnd</string>
     <string name="send_logcat_log_descr">Detaljert loggfil</string>
     <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="with_waypoints">Med rutepunkter</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maks. høyde</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="filter_by_name">Filtrer etter navn</string>
+    <string name="shared_string_reset_all">Tilbaksestill alt</string>
+    <string name="filter_tracks_count">Filter: %d</string>
+    <string name="app_mode_hang_gliding">Hanggliding</string>
+    <string name="date_of_creation">Opprettelsesdato</string>
+    <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
+    <string name="filter_screen_title">Filter</string>
+    <string name="shared_string_temperature">Temperatur</string>
+    <string name="shared_string_cache">Hurtiglager</string>
+    <string name="widget_available_ram_desc">Viser tilgjengelig minne tildelt OsmAnd.</string>
+    <string name="sort_size_descending">Stor størrelse først</string>
+    <string name="delete_map">Slett kart</string>
+    <string name="standard_maps">Standardkart</string>
+    <string name="shared_string_created">Opprettet</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia og reisekart</string>
+    <string name="edit_fiilter">Rediger filter</string>
+    <string name="rendering_styles">Opptegningsstiler</string>
+    <string name="sort_country_name_ascending">Landets navn: A – Å</string>
+    <string name="shared_string_show_icon">Vis ikon</string>
+    <string name="map_is_up_to_date">Kartet %1$s er oppdatert.</string>
+    <string name="sort_size_ascending">Liten størrelse først</string>
+    <string name="widget_available_ram">Tilgjengelig RAM</string>
+    <string name="terrain_maps">Terrengkart</string>
+    <string name="sort_country_name_descending">Landets navn: Å – A</string>
+    <string name="delete_map_description">Er du sikker på at du vil slette kartet %1$s\?</string>
+    <string name="maps_and_resources">Kart &amp; Ressurser</string>
+    <string name="smart_folder_name_present">Slik en smart-mappe finnes allerede</string>
+    <string name="smart_folder_saved">Smart-mappe lagret</string>
+    <string name="add_smart_folder">Legg til smart-mappe</string>
+    <string name="empty_name">Tomt navn</string>
+    <string name="save_as_smart_folder">Lagre som smart-mappe</string>
+    <string name="delete_smart_folder_dialog_message">Dette sletter smart-mappen \"%1$s\".</string>
 </resources>

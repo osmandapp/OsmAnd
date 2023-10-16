@@ -86,7 +86,6 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private SearchListAdapter listAdapter;
 	private BannerAndDownloadFreeVersion banner;
 	private String searchText;
-	private View searchView;
 	private EditText searchEditText;
 	private ProgressBar progressBar;
 	private ImageButton clearButton;
@@ -151,7 +150,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		listView.setOnItemClickListener(this);
 		listView.setAdapter(listAdapter);
 
-		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
+		View searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
 		searchEditText = view.findViewById(R.id.searchEditText);

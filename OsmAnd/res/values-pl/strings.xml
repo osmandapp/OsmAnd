@@ -1280,7 +1280,7 @@
     <string name="arrival_distance_factor_early">Wcześnie</string>
     <string name="arrival_distance_factor_normally">Normalnie</string>
     <string name="arrival_distance_factor_late">Późno</string>
-    <string name="arrival_distance_factor_at_last">Tuż przed przybyciem</string>
+    <string name="arrival_distance_factor_at_last">Bardzo późno</string>
     <string name="av_camera_pic_size">Rozmiar obrazu aparatu</string>
     <string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu aparatu</string>
     <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, wahadłowe</string>
@@ -1420,7 +1420,7 @@
     <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">pozostało</string>
     <string name="parking_place_limited">Czas parkowania ograniczony do</string>
-    <string name="your_edits">Zmiany</string>
+    <string name="your_edits">Twoje zmiany</string>
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symulowanie położenia</string>
@@ -5221,7 +5221,7 @@
     <string name="calculate_offline_altitude_descr">Obliczanie wysokości w trybie offline na podstawie danych mapy wysokości. Różnice w stosunku do wysokości rejestrowanej przez urządzenie mogą być wykorzystane jako korekcja wysokości.</string>
     <string name="external_sensors_not_found">Nie znaleziono czujników</string>
     <string name="external_sensors_source_of_data">Źródło danych</string>
-    <string name="power_watts_unit">Watów</string>
+    <string name="power_watts_unit">Waty</string>
     <string name="revolutions_per_minute_unit">obr./min</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Mapa terenu (3D)</string>
@@ -5244,7 +5244,7 @@
     <string name="rendering_value_sacScale_name">Skala SAC</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="shared_string_class">Kategoria</string>
+    <string name="shared_string_class">Klasa</string>
     <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
     <string name="free_favorites_backup">Darmowa kopia zapasowa ulubionych</string>
     <string name="get_osmand_cloud">Pozyskaj OsmAnd Cloud</string>
@@ -5282,7 +5282,7 @@
     <string name="free_settings_backup">Bezpłatna kopia zapasowa ustawień</string>
     <string name="action_cannot_be_undone">Tego działania nie można cofnąć.</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Użyj rastra sqlitedb dla cieniowania / nachylenia wzgórza</string>
-    <string name="free_ride">Przejazd bezpłatny</string>
+    <string name="free_ride">Bezpłatny przejazd</string>
     <string name="routing_attr_allow_via_ferrata_name">Trasa górska (Via ferrata)</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Urządzenia dodatkowe zostaną wylogowane z OsmAnd Cloud i utracą dostęp do płatnych funkcji.</string>
     <string name="osmand_cloud_deletion_account_warning">Twoje konto i wszystkie dane konta będą %1$s</string>
@@ -5329,4 +5329,155 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Trasy rowerowe (MTB)</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_map_legend_ski_map_name">Styl mapy narciarskiej</string>
+    <string name="app_mode_paragliding">Paralotniarstwo</string>
+    <string name="app_mode_hang_gliding">Lotniarstwo</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="max_altitude">Maksymalna wysokość</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="release_4_6">• Widżet współczynnika poślizgu
+\n
+\n• Dodano widżet temperatury ANT+
+\n
+\n• Lepsze zarządzanie pamięcią dla dużych ścieżek GPX
+\n
+\n</string>
+    <string name="app_mode_baby_transport">Transport dziecka</string>
+    <string name="filter_by_name">Filtruj według nazwy</string>
+    <string name="shared_string_reset_all">Resetuj wszystko</string>
+    <string name="help_article_navigation_guidance_name">Wskazówki</string>
+    <string name="filter_tracks_count">Filtr: %d</string>
+    <string name="date_of_creation">Data utworzenia</string>
+    <string name="filter_screen_title">Filtr</string>
+    <string name="sort_size_descending">Najpierw duży rozmiar</string>
+    <string name="shared_string_created">Utworzono</string>
+    <string name="sort_country_name_ascending">Nazwy krajów: A - Z</string>
+    <string name="weather_online">Pogoda online</string>
+    <string name="shared_string_show_icon">Wyświetl ikonę</string>
+    <string name="sort_size_ascending">Najpierw mały rozmiar</string>
+    <string name="sort_country_name_descending">Nazwy krajów: Z - A</string>
+    <string name="maps_and_resources">Mapy i źródła</string>
+    <string name="shared_string_cache">Pamięć podręczna</string>
+    <string name="with_waypoints">Z punktami orientacyjnymi</string>
+    <string name="widget_available_ram_desc">Wyświetla dostępną pamięć przydzieloną dla OsmAnd.</string>
+    <string name="delete_map">Usuń mapę</string>
+    <string name="standard_maps">Mapy standardowe</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia i mapy turystyczne</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="rendering_styles">Style renderowania</string>
+    <string name="map_is_up_to_date">Mapa %1$s jest aktualna.</string>
+    <string name="widget_available_ram">Dostępna pamięć RAM</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="terrain_maps">Mapy terenu</string>
+    <string name="delete_map_description">Czy na pewno chcesz usunąć mapę %1$s\?</string>
+    <string name="open_issue_on_github">Otwórz problem na GitHubie</string>
+    <string name="about_osmand">O aplikacji OsmAnd</string>
+    <string name="user_guide">Podręcznik użytkownika</string>
+    <string name="send_logcat_log_descr">Szczegółowy plik dziennika</string>
+    <string name="help_article_search_search_coordinates_name">Wyszukaj współrzędne</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Nawiguj według znaczników</string>
+    <string name="send_crash_log_descr">Zawiera wyłącznie informacje o awariach</string>
+    <string name="help_article_plan_route_coordinate_input_name">Wprowadzanie współrzędnych</string>
+    <string name="help_article_start_with_main_menu_name">Menu główne</string>
+    <string name="contact_us">Skontaktuj się z nami</string>
+    <string name="help_article_widgets_markers_name">Widżety znaczników</string>
+    <string name="help_article_start_with_first_steps_name">Pierwsze kroki</string>
+    <string name="help_article_search_search_poi_name">Wyszukaj POI</string>
+    <string name="help_article_troubleshooting_general_name">Ogólne</string>
+    <string name="free_versions_descr">Pobierz i zainstaluj bezpłatną wersję OsmAnd</string>
+    <string name="free_versions">Bezpłatne wersje</string>
+    <string name="open_issue_on_github_descr">Zadaj pytanie, zaproponuj funkcje</string>
+    <string name="github_discussion">Dyskusja na GitHubie</string>
+    <string name="most_viewed">Najczęściej oglądane</string>
+    <string name="help_article_personal_profiles_name">Profile (Ustawienia)</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapy i dane</string>
+    <string name="help_article_navigation_setup_route_details_name">Szczegóły trasy</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Przygotowanie trasy</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Nawiguj według ścieżki</string>
+    <string name="help_article_navigation_routing_online_routing_name">Wyznaczanie trasy online</string>
+    <string name="copy_build_version">Skopiuj wersję kompilacji</string>
+    <string name="help_article_personal_import_export_name">Import / Eksport</string>
+    <string name="help_article_widgets_radius_ruler_name">Linijka promienia i linijka</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Nagrywanie ścieżki</string>
+    <string name="live_monitoring_adress_descr">Określ adres internetowy za pomocą składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="help_article_plan_route_name">Zaplanuj trasę</string>
+    <string name="help_article_widgets_map_buttons_name">Przyciski mapy</string>
+    <string name="shared_string_included">Dołączony</string>
+    <string name="help_article_widgets_info_widgets_name">Widżety informacyjne</string>
+    <string name="hillshade_slope">Cieniowanie wzgórza, zbocze</string>
+    <string name="help_article_widgets_name">Widżety mapy</string>
+    <string name="help_article_personal_name">Moje dane</string>
+    <string name="help_article_purchases_android_name">Zakupy na Androidzie</string>
+    <string name="telegram_chats_descr">Dołącz do jednego z naszych lokalnych czatów telegramowych.</string>
+    <string name="report_an_issues">Zgłoś problem</string>
+    <string name="telegram_chats">Czaty telegramowe</string>
+    <string name="help_article_plan_route_web_name">Internetowy planer tras</string>
+    <string name="help_article_start_with_name">Rozpocznij od OsmAnda</string>
+    <string name="help_article_purchases_ios_name">Zakupy na iOS</string>
+    <string name="help_article_widgets_nav_widgets_name">Widżety nawigacyjne</string>
+    <string name="help_article_search_search_all_name">Wyszukaj wszystko</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Dzienniki awarii</string>
+    <string name="help_article_personal_storage_name">Przechowywanie</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">O wyznaczaniu trasy OsmAnd</string>
+    <string name="shared_string_setup">Ustawienie</string>
+    <string name="smart_folder_name_present">Taki mądry folder już istnieje</string>
+    <string name="smart_folder_saved">Zapisano mądry folder</string>
+    <string name="help_article_purchases_giveaway_name">Upominek</string>
+    <string name="add_smart_folder">Dodaj mądry folder</string>
+    <string name="empty_name">Pusta nazwa</string>
+    <string name="edit_fiilter">Edycja filtra</string>
+    <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
+    <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
+    <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX
+\n
+\n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud”
+\n
+\n • Nowy format map terenu z obsługą rzeźby terenu 3D
+\n
+\n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów
+\n
+\n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI
+\n
+\n • Jedna lista widżetów dla panelu górnego/dolnego
+\n
+\n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych
+\n
+\n • Linie konturowe działają z dowolnym „źródłem mapy”
+\n
+\n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych
+\n
+\n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania
+\n
+\n • Dodano opcję „Ogłaszaj zboczenie z trasy”
+\n
+\n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku
+\n
+\n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej
+\n
+\n • Dodano obsługę trasy „Via ferrata” dla pieszych
+\n
+\n • Dodano skalę „CAI” do klasyfikacji trudności tras
+\n
+\n • Naprawiono wybór języka dla poszczególnych aplikacji
+\n
+\n • Dodano obsługę ikon tematycznych
+\n
+\n • OsmAnd Cloud: dodano opcję usunięcia konta
+\n
+\n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu
+\n
+\n • Przerobiono japońskie komunikaty głosowe
+\n
+\n • Przerobiono zmianę wysokości i ocenę nachylenia
+\n
+\n</string>
+    <string name="empty_smart_folder_title">Brak pasującej trasy</string>
+    <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
+    <string name="configure_filter">Skonfiguruj filtr</string>
+    <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
+    <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
+    <string name="shared_string_loading">Wczytywanie</string>
+    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry\?</string>
+    <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
+    <string name="loading_tracks">Ponowne wczytywanie tras</string>
+    <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
 </resources>

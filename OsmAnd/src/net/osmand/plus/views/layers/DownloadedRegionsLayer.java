@@ -12,6 +12,9 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
@@ -34,8 +37,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.LocalIndexHelper;
-import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -62,9 +65,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection,
 		ResourceListener {
@@ -118,7 +118,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		private final BinaryMapDataObject dataObject;
 		private final WorldRegion worldRegion;
 		private final IndexItem indexItem;
-		private final LocalIndexInfo localIndexInfo;
+		private final LocalItem localItem;
 
 		@NonNull
 		public BinaryMapDataObject getDataObject() {
@@ -136,18 +136,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 
 		@Nullable
-		public LocalIndexInfo getLocalIndexInfo() {
-			return localIndexInfo;
+		public LocalItem getLocalItem() {
+			return localItem;
 		}
 
 		public DownloadMapObject(@NonNull BinaryMapDataObject dataObject,
 		                         @NonNull WorldRegion worldRegion,
 		                         @Nullable IndexItem indexItem,
-		                         @Nullable LocalIndexInfo localIndexInfo) {
+		                         @Nullable LocalItem localItem) {
 			this.dataObject = dataObject;
 			this.worldRegion = worldRegion;
 			this.indexItem = indexItem;
-			this.localIndexInfo = localIndexInfo;
+			this.localItem = localItem;
 		}
 	}
 
@@ -651,11 +651,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 						}
 					} else {
 						String downloadName = osmandRegions.getDownloadName(o);
-						List<LocalIndexInfo> infos = helper.getLocalIndexInfos(downloadName);
+						List<LocalItem> infos = helper.getLocalItems(downloadName);
 						if (infos.size() == 0) {
 							dataObjects.add(new DownloadMapObject(o, region, null, null));
 						} else {
-							for (LocalIndexInfo info : infos) {
+							for (LocalItem info : infos) {
 								dataObjects.add(new DownloadMapObject(o, region, null, info));
 							}
 						}
@@ -673,8 +673,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			order = mapObject.worldRegion.getLevel() * 1000 - 100000;
 			if (mapObject.indexItem != null) {
 				order += mapObject.indexItem.getType().getOrderIndex();
-			} else if (mapObject.localIndexInfo != null) {
-				order += mapObject.localIndexInfo.getType().getOrderIndex(mapObject.localIndexInfo);
+			} else if (mapObject.localItem != null) {
+				order += mapObject.localItem.getType().ordinal();
 			}
 		}
 		return order;

@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.areAltitudesEqual;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,6 +17,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.GlideUtils;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.util.Algorithms;
@@ -33,20 +36,25 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	private boolean forceUpdate; // becomes 'true' when widget state switched
 
-	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState) {
-		super(mapActivity, WidgetType.GLIDE_TARGET);
+	public GlideTargetWidget(@NonNull MapActivity mapActivity, @NonNull GlideTargetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, WidgetType.GLIDE_TARGET, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		updateInfo(null);
 
-		setOnClickListener(v -> {
-			forceUpdate = true;
-			widgetState.changeToNextState();
-			updateInfo(null);
-		});
+		setOnClickListener(getOnClickListener());
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
+			forceUpdate = true;
+			widgetState.changeToNextState();
+			updateInfo(null);
+		};
+	}
+
+	@Override
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (isInTargetAltitudeState()) {
 			updateTargetAltitude();
 		} else {

@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +30,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -34,7 +38,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
@@ -83,14 +89,19 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void setRootFolder(@NonNull TrackFolder rootFolder) {
-		super.setRootFolder(rootFolder);
+	public void setRootFolder(@NonNull TracksGroup rootFolder) {
+		if (rootFolder instanceof SmartFolder) {
+			setSmartFolder((SmartFolder) rootFolder);
+		} else {
+			super.setRootFolder(rootFolder);
+		}
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
 		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
-		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
-
+		if (rootFolder instanceof TrackFolder) {
+			groupsSelectionHelper.setAllItems(((TrackFolder) rootFolder).getSubFolders());
+		}
 		if (!Algorithms.isEmpty(preselectedTrackItems)) {
 			itemsSelectionHelper.setSelectedItems(preselectedTrackItems);
 		}
@@ -109,6 +120,30 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		updateSelection();
 
 		return view;
+	}
+
+	@NonNull
+	@Override
+	protected List<Object> getAdapterItems() {
+		if (rootFolder == null) {
+			List<Object> items = new ArrayList<>();
+			items.add(TYPE_SORT_TRACKS);
+
+			Set<TrackItem> trackItems = itemsSelectionHelper.getAllItems();
+
+			if (trackItems.isEmpty()) {
+				items.add(TYPE_EMPTY_FOLDER);
+			} else {
+				items.addAll(trackItems);
+				if (shouldShowFolderStats()) {
+					items.add(selectedFolder.getFolderAnalysis());
+				}
+			}
+			return items;
+
+		} else {
+			return super.getAdapterItems();
+		}
 	}
 
 	@Override
@@ -156,7 +191,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 				View view = activity.findViewById(R.id.action_overflow_menu);
 				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
 				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, this, isNightMode());
+				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, isNightMode());
 				return true;
 			}
 		}
@@ -191,18 +226,31 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
-			int selectedSize = itemsSelectionHelper.getSelectedItemsSize() + groupsSelectionHelper.getSelectedItemsSize();
-			actionBar.setTitle(String.valueOf(selectedSize));
+			Set<TrackItem> tracks = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> groups = groupsSelectionHelper.getSelectedItems();
+			int items = tracks.size() + groups.size();
+			int total = tracks.size();
+			for (TracksGroup group : groups) {
+				total += group.getTrackItems().size();
+			}
+			String text = getResources().getQuantityString(R.plurals.tracks, total, items, total);
+			actionBar.setTitle(text);
 		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		updateActivityTitle();
+	}
 
-		MyPlacesActivity activity = getMyActivity();
-		if (activity != null) {
-			activity.updateToolbar();
+	private void updateActivityTitle() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof AvailableTracksFragment) {
+			MyPlacesActivity activity = getMyActivity();
+			if (activity != null) {
+				activity.updateToolbar();
+			}
 		}
 	}
 
@@ -219,7 +267,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	private void onBackPressed() {
-		if (rootFolder.equals(selectedFolder)) {
+		if (rootFolder == null || rootFolder.equals(selectedFolder)) {
 			dismiss();
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
@@ -290,7 +338,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		return selectionHelper;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder,
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksGroup trackFolder,
 	                                @Nullable Fragment target, @Nullable Set<TrackItem> trackItems,
 	                                @Nullable Set<TracksGroup> tracksGroups) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
@@ -299,7 +347,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			fragment.preselectedTracksGroups = tracksGroups;
 			fragment.setRetainInstance(true);
 			fragment.setRootFolder(trackFolder);
-			fragment.setSelectedFolder(trackFolder);
+			if (trackFolder instanceof TrackFolder) {
+				fragment.setSelectedFolder((TrackFolder) trackFolder);
+			}
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()

@@ -5430,11 +5430,21 @@
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Widget Rasio Glide
+    <string name="release_4_6">• Menambahkan widget \"Rasio Luncur\".
 \n
-\n• Ditambahkan widget suhu ANT+
+\n • Menambahkan filter dan folder pintar untuk trek
 \n
-\n• Pengelolaan memori lebih baik untuk trek GPX besar.
+\n • Menambahkan baris untuk panel widget atas dan bawah dengan dukungan untuk semua widget
+\n
+\n • Menambahkan dukungan untuk widget suhu ANT+
+\n
+\n • Peningkatan manajemen memori untuk trek GPX besar
+\n
+\n • Manajemen sumber daya lokal yang diperbarui di Unduhan
+\n
+\n • Menambahkan widget \"RAM yang Tersedia\"
+\n
+\n • Memperbaiki masalah dengan bilah status transparan
 \n
 \n</string>
     <string name="shared_string_temperature">Suhu</string>
@@ -5451,4 +5461,39 @@
     <string name="app_mode_hang_gliding">Gantole</string>
     <string name="date_of_creation">Tanggal pembuatan</string>
     <string name="filter_screen_title">Saring</string>
+    <string name="shared_string_cache">Tembolok</string>
+    <string name="widget_available_ram_desc">Menampilkan memori tersedia yang dialokasikan untuk OsmAnd.</string>
+    <string name="sort_size_descending">Ukuran besar terlebih dahulu</string>
+    <string name="delete_map">Hapus peta</string>
+    <string name="standard_maps">Peta standar</string>
+    <string name="shared_string_created">Dibuat</string>
+    <string name="wikipedia_and_travel_maps">Peta Wikipedia dan Perjalanan</string>
+    <string name="rendering_styles">Gaya perenderan</string>
+    <string name="sort_country_name_ascending">Nama negara: A–Z</string>
+    <string name="weather_online">Cuaca daring</string>
+    <string name="map_is_up_to_date">Peta %1$s sudah terkini.</string>
+    <string name="sort_size_ascending">Ukuran kecil terlebih dahulu</string>
+    <string name="widget_available_ram">RAM yang tersedia</string>
+    <string name="terrain_maps">Peta medan</string>
+    <string name="sort_country_name_descending">Nama negara: Z–A</string>
+    <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s\?</string>
+    <string name="maps_and_resources">Peta &amp; Sumber Daya</string>
+    <string name="shared_string_show_icon">Tampilkan ikon</string>
+    <string name="smart_folder_name_present">Folder pintar sudah ada</string>
+    <string name="smart_folder_saved">Folder Pintar disimpan</string>
+    <string name="add_smart_folder">Tambahkan folder pintar</string>
+    <string name="empty_name">Nama kosong</string>
+    <string name="edit_fiilter">Sunting saringan</string>
+    <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
+    <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
+    <string name="empty_smart_folder_title">Tidak ada trek yang cocok</string>
+    <string name="empty_smart_folder_description">Semua trek yang cocok akan muncul secara otomatis di sini</string>
+    <string name="configure_filter">Atur saringan</string>
+    <string name="no_config_smart_folder_title">Tidak ada yang diatur</string>
+    <string name="discard_filter_changes">Abaikan perubahan penyaring</string>
+    <string name="shared_string_loading">Memuat</string>
+    <string name="discard_filter_changes_prompt">Apakah Anda yakin ingin mengatur ulang semua saringan\?</string>
+    <string name="no_config_smart_folder_description">Folder pintar memungkinkan untuk mengelompokkan trek berdasarkan saringan yang diterapkan</string>
+    <string name="loading_tracks">Memuat ulang trek</string>
+    <string name="searching_matching_tracks">Cari semua trek yang cocok</string>
 </resources>

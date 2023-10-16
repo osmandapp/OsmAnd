@@ -52,7 +52,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		items.add(new TitleItem(getString(R.string.get_altitude_data)));
 		createAttachToRoadsItem();
 		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
-			int margin = getResources().getDimensionPixelSize(R.dimen.settings_divider_margin_start);
+			int margin = getResources().getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
 			DividerItem dividerItem = new DividerItem(app);
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);

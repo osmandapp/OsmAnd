@@ -40,8 +40,7 @@ public abstract class MapWidget {
 	protected final RoutingHelper routingHelper;
 
 	protected final WidgetType widgetType;
-
-	private boolean nightMode;
+	protected boolean nightMode;
 
 	protected final View view;
 
@@ -81,7 +80,7 @@ public abstract class MapWidget {
 	}
 
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+						   int order, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 
@@ -127,8 +126,8 @@ public abstract class MapWidget {
 	}
 
 	public static void updateTextColor(@NonNull TextView text, @Nullable TextView textShadow,
-	                                   @ColorInt int textColor, @ColorInt int textShadowColor,
-	                                   boolean boldText, int shadowRadius) {
+									   @ColorInt int textColor, @ColorInt int textShadowColor,
+									   boolean boldText, int shadowRadius) {
 		int typefaceStyle = boldText ? Typeface.BOLD : Typeface.NORMAL;
 
 		if (textShadow != null) {

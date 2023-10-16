@@ -12,9 +12,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -271,7 +271,7 @@ public class UiUtilities {
 			tvMessage.setMaxLines(maxLines);
 		}
 		if (backgroundColor == null) {
-			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.color_black;
+			backgroundColor = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_dark;
 		}
 		view.setBackgroundColor(ContextCompat.getColor(ctx, backgroundColor));
 	}
@@ -518,7 +518,7 @@ public class UiUtilities {
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
 		slider.setThumbTintList(activeCsl);
-		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.activity_background_color_dark);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
@@ -558,7 +558,7 @@ public class UiUtilities {
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
 		slider.setThumbTintList(activeCsl);
-		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.activity_background_color_dark);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
@@ -666,6 +666,15 @@ public class UiUtilities {
 	public static SpannableString createUrlSpannable(@NonNull String text, @NonNull String url) {
 		SpannableString spannable = new SpannableString(text);
 		setSpan(spannable, new CustomURLSpan(url), text, url);
+		return spannable;
+	}
+
+	@NonNull
+	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String s : textToStyle) {
+			setSpan(spannable, new ForegroundColorSpan(color), text, s);
+		}
 		return spannable;
 	}
 

@@ -1165,11 +1165,6 @@
 				<category android:name="androidx.car.app.category.NAVIGATION"/>
 			</intent-filter>
 		</service>
-
-		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
-
-		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
-
 	</application>
 
 </manifest> 

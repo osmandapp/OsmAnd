@@ -28,7 +28,7 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            tools:background="@color/multi_selection_menu_divider_dark"/>
+            tools:background="@color/divider_color_dark"/>
 
         <FrameLayout
             android:id="@+id/cancel_row"

@@ -12,12 +12,13 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SensorTextWidget extends TextInfoWidget {
+public class SensorTextWidget extends SimpleWidget {
 	private AbstractSensor sensor;
 	private final SensorWidgetDataFieldType fieldType;
 	private Number cachedNumber;
@@ -26,8 +27,8 @@ public class SensorTextWidget extends TextInfoWidget {
 	protected ExternalSensorsPlugin plugin;
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId) {
-		super(mapActivity, fieldType.getWidgetType());
+							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);
@@ -57,8 +58,8 @@ public class SensorTextWidget extends TextInfoWidget {
 	}
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                        @NonNull SensorWidgetDataFieldType fieldType) {
-		this(mapActivity, appMode, fieldType, null);
+							@NonNull SensorWidgetDataFieldType fieldType) {
+		this(mapActivity, appMode, fieldType, null, null);
 	}
 
 	@Nullable
@@ -90,7 +91,7 @@ public class SensorTextWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (sensor != null) {
 			List<SensorData> dataList = sensor.getLastSensorDataList();
 			if (!sensor.getDevice().isConnected() || Algorithms.isEmpty(dataList)) {
@@ -153,8 +154,8 @@ public class SensorTextWidget extends TextInfoWidget {
 	private CommonPreference<String> registerSensorDevicePref(@Nullable String customId) {
 		String prefId = Algorithms.isEmpty(customId) ? fieldType.name() : fieldType.name() + customId;
 		return settings.registerStringPreference(prefId, null)
-				       .makeProfile()
-				       .cache();
+				.makeProfile()
+				.cache();
 	}
 
 	@Nullable

@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class DashboardVisibilityStack {
 
-	private Stack<DashboardType> stack = new Stack<>();
+	private final Stack<DashboardType> stack = new Stack<>();
 
 	public void add(@NonNull DashboardType type) {
 		stack.add(type);

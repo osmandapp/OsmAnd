@@ -93,7 +93,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.util.Algorithms;
 
@@ -114,6 +113,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -368,26 +368,61 @@ public class AndroidUtils {
 	}
 
 	@NonNull
+	public static String formatRatioOfSizes(@NonNull Context ctx, long sizeBytes, long totalBytes, boolean round) {
+		FormattedSize size = formatSize(sizeBytes, round);
+		FormattedSize total = formatSize(totalBytes, round);
+		if (size != null && total != null) {
+			String firstPart = Objects.equals(size.numSuffix, total.numSuffix)
+					? size.num
+					: ctx.getString(R.string.ltr_or_rtl_combine_via_space, size.num, size.numSuffix);
+			String secondPart =
+					ctx.getString(R.string.ltr_or_rtl_combine_via_space, total.num, total.numSuffix);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash, firstPart, secondPart);
+		}
+		return "";
+	}
+
+	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
-		if (sizeBytes > 0) {
-			int sizeKb = (int) ((sizeBytes + 512) >> 10);
-			String size = "";
-			String numSuffix = "MB";
-			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
-				numSuffix = "GB";
-			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
-			} else {
-				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
-				numSuffix = "kB";
-			}
+		FormattedSize formattedSize = formatSize(sizeBytes, false);
+		if (formattedSize != null) {
+			String size = formattedSize.num;
+			String numSuffix = formattedSize.numSuffix;
 			if (ctx == null) {
 				return size + " " + numSuffix;
 			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
+	}
+
+	@Nullable
+	private static FormattedSize formatSize(long sizeBytes, boolean round) {
+		if (sizeBytes <= 0) {
+			return null;
+		}
+		FormattedSize result = new FormattedSize();
+		int sizeKb = (int) ((sizeBytes + 512) >> 10);
+		if (sizeKb > 1 << 20) {
+			result.num = formatGb.format(new Object[] {roundIfNeeded((float) sizeKb / (1 << 20), round)});
+			result.numSuffix = "GB";
+		} else if (sizeBytes > (100 * (1 << 10))) {
+			result.num = formatMb.format(new Object[] {roundIfNeeded((float) sizeBytes / (1 << 20), round)});
+			result.numSuffix = "MB";
+		} else {
+			result.num = formatKb.format(new Object[] {roundIfNeeded((float) sizeBytes / (1 << 10), round)});
+			result.numSuffix = "kB";
+		}
+		return result;
+	}
+
+	final static class FormattedSize {
+		String num;
+		String numSuffix;
+	}
+
+	private static float roundIfNeeded(float value, boolean round) {
+		return round ? Math.round(value) : value;
 	}
 
 	public static String getFreeSpace(Context ctx, File dir) {
@@ -697,8 +732,7 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(@NonNull Activity activity, View view) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (!PluginsHelper.isDevelopment() || app.getSettings().TRANSPARENT_STATUS_BAR.get()) {
+		if (isInFullScreenMode(activity)) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();
@@ -835,8 +869,8 @@ public class AndroidUtils {
 	}
 
 	public static boolean isInFullScreenMode(Activity activity) {
-		int systemUiVisibility = activity.getWindow().getDecorView().getSystemUiVisibility();
-		return (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN) != 0;
+		int uiMode = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return (uiMode & View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN) != 0;
 	}
 
 	private static void requestLayout(View view) {

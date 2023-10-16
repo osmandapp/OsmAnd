@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
@@ -27,7 +30,7 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.Si
 
 import java.util.List;
 
-public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
+public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonListener {
 
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
 
@@ -44,8 +47,8 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 
 	private LatLon customLatLon;
 
-	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState) {
-		super(mapActivity, widgetState.isFirstMarker() ? SIDE_MARKER_1 : SIDE_MARKER_2);
+	public MapMarkerSideWidget(@NonNull MapActivity mapActivity, @NonNull MapMarkerSideWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, getWidgetType(widgetState.isFirstMarker()), customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();
@@ -54,13 +57,22 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	private static WidgetType getWidgetType(boolean isFirstMarker){
+		return isFirstMarker ? SIDE_MARKER_1 : SIDE_MARKER_2;
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
 				changeWidgetState();
 			} else if (markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
 				showMarkerOnMap();
 			}
-		});
+		};
 	}
 
 	private void changeWidgetState() {
@@ -84,7 +96,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		MapMarker marker = getMarker();
 
 		boolean hideWidget = marker == null;

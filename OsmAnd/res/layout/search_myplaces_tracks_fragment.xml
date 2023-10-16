@@ -87,4 +87,43 @@
 		android:scrollbars="vertical"
 		tools:listitem="@layout/track_list_item" />
 
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/simple_divider_item" />
+
+	<LinearLayout
+		android:id="@+id/buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:background="?attr/list_background_color"
+		android:gravity="center"
+		android:minHeight="@dimen/bottom_sheet_title_height"
+		android:orientation="horizontal"
+		android:padding="@dimen/content_padding_half">
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/reset_all_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			osmand:dialogButtonTitle="@string/shared_string_reset_all"
+			osmand:dialogButtonType="tertiary"
+			osmand:dialogButtonUseUppercaseTitle="true" />
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/save_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			osmand:dialogButtonTitle="@string/shared_string_save"
+			osmand:dialogButtonType="tertiary"
+			osmand:dialogButtonUseUppercaseTitle="true" />
+
+	</LinearLayout>
+
+
 </LinearLayout>

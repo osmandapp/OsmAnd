@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,11 +13,13 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
-public class TimeToNavigationPointWidget extends TextInfoWidget {
+public class TimeToNavigationPointWidget extends SimpleWidget {
 
 	private static final long UPDATE_INTERVAL_SECONDS = 30;
 
@@ -26,8 +30,8 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 	private boolean cachedArrivalTimeOtherwiseTimeToGo;
 	private int cachedLeftSeconds;
 
-	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState) {
-		super(mapActivity, widgetState.isIntermediate() ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION);
+	public TimeToNavigationPointWidget(@NonNull MapActivity mapActivity, @NonNull TimeToNavigationPointWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, getWidgetType(widgetState.isIntermediate()), customId, widgetsPanel);
 		this.widgetState = widgetState;
 		this.routingHelper = app.getRoutingHelper();
 		this.arrivalTimeOtherwiseTimeToGoPref = widgetState.getPreference();
@@ -36,11 +40,20 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 		setText(null, null);
 		updateIcons();
 		updateContentTitle();
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	private static WidgetType getWidgetType(boolean isIntermediate){
+		return isIntermediate ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION;
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
-		});
+		};
 	}
 
 	public boolean isIntermediate() {
@@ -59,7 +72,7 @@ public class TimeToNavigationPointWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int leftSeconds = 0;
 
 		boolean timeModeUpdated = arrivalTimeOtherwiseTimeToGoPref.get() != cachedArrivalTimeOtherwiseTimeToGo;

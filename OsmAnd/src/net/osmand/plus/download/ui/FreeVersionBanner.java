@@ -83,7 +83,7 @@ public class FreeVersionBanner {
 		marksContainer.addView(spaceView);
 
 		int markWidth = (int) (1 * activity.getResources().getDisplayMetrics().density);
-		int colorBlack = activity.getColor(R.color.color_black);
+		int colorBlack = activity.getColor(R.color.activity_background_color_dark);
 		for (int i = 1; i < MAXIMUM_AVAILABLE_FREE_DOWNLOADS; i++) {
 			View markView = new View(activity);
 			params = new LinearLayout.LayoutParams(markWidth, MATCH_PARENT);

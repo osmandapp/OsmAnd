@@ -9,23 +9,22 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-public class CameraTiltWidget extends TextInfoWidget {
-
-
+public class CameraTiltWidget extends SimpleWidget {
 	private final OsmandMapTileView mapView;
 	private double cachedMapTilt;
 
-	public CameraTiltWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, WidgetType.DEV_CAMERA_TILT);
+	public CameraTiltWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, DEV_CAMERA_TILT, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_CAMERA_TILT);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		double mapTilt = mapView.getElevationAngle();
 		if (isUpdateNeeded() || Math.abs(mapTilt - cachedMapTilt) > 0.05d) {
 			cachedMapTilt = mapTilt;

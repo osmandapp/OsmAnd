@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.*;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,11 +11,12 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
-public class AverageSpeedWidget extends TextInfoWidget {
+public class AverageSpeedWidget extends SimpleWidget {
 
 	private static final String MEASURED_INTERVAL_PREF_ID = "average_speed_measured_interval_millis";
 	private static final String SKIP_STOPS_PREF_ID = "average_speed_skip_stops";
@@ -27,10 +30,10 @@ public class AverageSpeedWidget extends TextInfoWidget {
 
 	private long lastUpdateTime;
 
-	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, WidgetType.AVERAGE_SPEED);
+	public AverageSpeedWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, AVERAGE_SPEED, customId, widgetsPanel);
 		averageSpeedComputer = app.getAverageSpeedComputer();
-		setIcons(WidgetType.AVERAGE_SPEED);
+		setIcons(AVERAGE_SPEED);
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);
 		skipStopsPref = registerSkipStopsPref(customId);
 	}
@@ -54,7 +57,7 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - lastUpdateTime > UPDATE_INTERVAL_MILLIS) {
 			lastUpdateTime = time;

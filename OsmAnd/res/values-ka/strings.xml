@@ -18,14 +18,14 @@
     <string name="map_online_data_descr">მიმდინარე რუკების გამოყენება (ჩამოტვირთვა და მეხსიერების ბარათზე ქეშირება).</string>
     <string name="shared_string_online_maps">მიმდინარე რუკები</string>
     <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა.</string>
-    <string name="osmand_rastermaps_plugin_description"></string>
+    <string name="osmand_rastermaps_plugin_description"/>
     <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
-    <string name="osmand_accessibility_description"></string>
-    <string name="osmand_development_plugin_description"></string>
+    <string name="osmand_accessibility_description"/>
+    <string name="osmand_development_plugin_description"/>
     <string name="plugins_screen">დამატებათა გამმართველი</string>
     <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა.</string>
     <string name="prefs_plugins">დამატების მმართველი</string>
-    <string name="osm_editing_plugin_description"></string>
+    <string name="osm_editing_plugin_description"/>
     <string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
     <string name="play_commands_of_currently_selected_voice">ხმით არჩეული ბრძანებების შესრულება:</string>
     <string name="debugging_and_development">OsmAnd -ის განვითარება და გამართვა</string>
@@ -390,7 +390,7 @@
     <string name="poi_context_menu_delete">POI-ს წაშლა</string>
     <string name="rotate_map_compass_opt">კომპასისაკენ</string>
     <string name="rotate_map_bearing_opt">მოძრაობის მიმართულებით</string>
-    <string name="rotate_map_north_opt">არ შეაბრუნო (ჩრდილოეთი ყოველთვის ზემოთკენაა)</string>
+    <string name="rotate_map_north_opt">ჩრდილოეთი ზემოთაა</string>
     <string name="rotate_map_to_descr">რუკის გასწორება:</string>
     <string name="rotate_map_to">რუკის ორიენტაცია</string>
     <string name="show_route">დეტალები გზის შესახებ</string>
@@ -566,7 +566,7 @@
     <string name="save_track_interval">ნავიგაციისას ჟურნალირების ინტერვალი</string>
     <string name="save_track_interval_descr">აირჩიეთ პოზიცირების ინტერვალი დევნისათვის</string>
     <string name="save_track_to_gpx">დევნის GPX-ში ჟურნალირება</string>
-    <string name="update_tile">რუკის განახლება</string>
+    <string name="update_tile">განახლება</string>
     <string name="reload_tile">ხელახალი ჩატვირთვა</string>
     <string name="mark_point">მიზანი</string>
     <string name="shared_string_add_to_favorites">რჩეულებში დამატება</string>
@@ -674,7 +674,7 @@
     <string name="rendering_attr_noPolygons_name">პოლიგონები</string>
     <string name="rendering_attr_appMode_name">რენდერის რეჟიმი</string>
     <string name="rendering_attr_appMode_description">რუკის გაუმჯობესება მომხმარებლის პროფილის მიხედვით</string>
-    <string name="rendering_attr_contourLines_description">აირჩიეთ მინიმალური გადიდების ზომა რუკის საჩვენებლად. შეიძლება საჭირო გახდეს SRTM ფაილი:</string>
+    <string name="rendering_attr_contourLines_description">აირჩიდეთ გადიდების დონე (მოითხოვს კონტურული ხაზის მონაცემებს):</string>
     <string name="rendering_attr_contourLines_name">კონტურის ჩვენება</string>
     <string name="rendering_attr_hmRendered_description">რუკის მეტი წვრილმანის ჩვენება.</string>
     <string name="rendering_attr_hmRendered_name">მეტი დეტალები რუკის შესახებ</string>
@@ -703,7 +703,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">პარკინგის ადგილი</string>
-    <string name="osmand_parking_plugin_description"></string>
+    <string name="osmand_parking_plugin_description"/>
     <string name="osmand_parking_plugin_name">პარკინგის მდებარეობა</string>
     <string name="context_menu_item_add_parking_point">დამატება პარკინგის მდებარეობად</string>
     <string name="context_menu_item_delete_parking_point">პარკინგის მაჩვენებლის წაშლა</string>
@@ -824,8 +824,8 @@
     <string name="dropbox_plugin_description">Dropbox-ის დამატება საშუალებას გაძლევთ გააკეთოთ სინქრონიზაცია თქვენი გზებისა და აუდიო/ვიდეო შენიშვნებისა თქვენს dropbox-ის ანგარიშთან.</string>
     <string name="dropbox_plugin_name">Dropbox-ის დამატება</string>
     <string name="intermediate_points_change_order">წყობის შეცვლა</string>
-    <string name="srtm_paid_version_msg">პროგრამის განვითარების მხარდასაჭერად გთხოვთ შეიძინოთ Contour lines პლაგინი.</string>
-    <string name="srtm_paid_version_title">დამატება Contour lines</string>
+    <string name="srtm_paid_version_msg">პროგრამის განვითარების მხარდასაჭერად გთხოვთ შეიძინოთ ტოპოგრაფიის დამატება.</string>
+    <string name="srtm_paid_version_title">ტოპოგრაფიის დამატება</string>
     <string name="av_def_action_video">ვიდეოს ჩაწერა</string>
     <string name="av_def_action_audio">ხმის ჩაწერა</string>
     <string name="av_widget_action_descr">ღილაკის ნაგულისხმევი ქცევის არჩევა:</string>
@@ -852,14 +852,14 @@
     <string name="recording_description">ჩანაწერი %1$s %2$s %3$s-დან</string>
     <string name="recording_default_name">მიმდინარეობს ჩაწერა</string>
     <string name="map_widget_av_notes">ხმოვანი/ვიდეო შენიშვნები</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის, დაქანებებისთვის, გორაკებისთვის</string>
     <string name="map_widget_distancemeasurement">მანძილის გაზომვა</string>
     <string name="audionotes_location_not_defined">გამოიყენეთ \"მდებარეობის გამოყენება…\" შენიშვნის სასურველი მდებარეობისათვის მისანიჭებლად.</string>
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
     <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
-    <string name="srtm_plugin_description"></string>
-    <string name="srtm_plugin_name">კონტურული ხაზების დამატება</string>
+    <string name="srtm_plugin_description"/>
+    <string name="srtm_plugin_name">ტოპოგრაფია</string>
     <string name="download_select_map_types">სხვა რუკები</string>
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>
     <string name="rendering_attr_noAdminboundaries_name">საზღვრები</string>
@@ -1149,7 +1149,7 @@
     <string name="nearest_cities">უახლოესი ქალაქები</string>
     <string name="select_city">აირჩიეთ ქალაქი</string>
     <string name="select_postcode">საფოსტო კოდის ძებნა</string>
-    <string name="quick_action_add_destination">დანიშნულების წერტილი</string>
+    <string name="quick_action_add_destination">დანიშნულების წერტილის დაყენება</string>
     <string name="quick_action_replace_destination">დანიშნულების წერტილის შეცვლა</string>
     <string name="subscribe_email_error">შეცდომა</string>
     <string name="fonts_header">რუკის ფონტები</string>
@@ -1214,7 +1214,7 @@
     <string name="profile_backup_failed">პროფილის დამარქაფება შეუძლებელია.</string>
     <string name="saving_new_profile">ახალი პროფილის ჩაწერა</string>
     <string name="n_items_of_z">%1$s %2$s-დან</string>
-    <string name="download_slope_maps">დაქანებები</string>
+    <string name="download_slope_maps">დაქანება</string>
     <string name="quick_action_terrain_descr">რელიეფის შრის საჩვენებელი ღილაკი.</string>
     <string name="delete_description">აღწერის წაშლა</string>
     <string name="add_description">აღწერის დამატება</string>
@@ -1720,7 +1720,7 @@
     <string name="icon_group_travel">მოგზაურობა</string>
     <string name="login_account">ანგარიში</string>
     <string name="user_login">შესვლა</string>
-    <string name="download_hillshade_maps">ბორცვები</string>
+    <string name="download_hillshade_maps">ბორცვი</string>
     <string name="app_mode_truck">სატვირთო</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
@@ -2381,7 +2381,7 @@
     <string name="details_dialog_decr">რუკის დამატებითი დეტალების ჩვენება ან დამალვა</string>
     <string name="shared_string_uninstall_and_restart">ამოღება და რესტარტი</string>
     <string name="speed_cameras_removed_descr">მოწყობილობას სიჩქარის კამერები არ გააჩნია.</string>
-    <string name="quick_action_remove_next_destination">უახლესი დანიშნულების პუნქტის წაშლა</string>
+    <string name="quick_action_remove_next_destination">შემდეგი დანიშნულების პუნქტის წაშლა</string>
     <string name="use_volume_buttons_as_zoom">ხმის აწევის ღილაკებით გადიდება</string>
     <string name="please_provide_point_name_error">გთხოვთ შეიყვანოთ სახელი მითითებული წერტილისათვის</string>
     <string name="osm_edit_closed_note">OSM-ის დახურული განმარტება</string>
@@ -2409,7 +2409,7 @@
     <string name="open_saved_track">ჩაწერილი კურსის გახსნა</string>
     <string name="one_point_error">გთხოვთ, დაამატოთ ორი წერტილი მაინც.</string>
     <string name="start_finish_icons">ხატულების დაწყება და დამთავრება</string>
-    <string name="contour_lines_thanks">მადლობა \"კონტურული ხაზების\" შეძენისათვის</string>
+    <string name="contour_lines_thanks">მადლობა \"ტოპოგრაფიის\" შეძენისათვის</string>
     <string name="use_live_routing">OsmAnd-ის მიმდინარე მონაცემები</string>
     <string name="use_live_public_transport">OsmAnd-ის მიმდინარე მონაცემები</string>
     <string name="use_native_pt">ადგილობრივი საზოგადოებრივი ტრანსპორტის განვითარება</string>
@@ -2496,7 +2496,7 @@
     <string name="logged_as">შესული ხართ, როგორც %1$s</string>
     <string name="rendering_attr_publicTransportMode_name">ავტობუსები და ტროლეიბუსები</string>
     <string name="av_camera_pic_size_descr">აირჩიეთ გადასაღები სურათის ზომა</string>
-    <string name="arrival_distance_factor_at_last">ბოლო დარჩენილი მეტრებისას</string>
+    <string name="arrival_distance_factor_at_last">ძალიან გვიან</string>
     <string name="gpx_selection_route_points">%1$s
 \n%2$s გზის წერტილი</string>
     <string name="gpx_info_end_time">დასრულების დრო: %1$tF, %1$tT</string>
@@ -2893,6 +2893,7 @@
     <string name="shared_string_move_up">გადაადგილება ↑</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
-    <string name="save_track_to_gpx_descrp"></string>
+    <string name="save_track_to_gpx_descrp"/>
     <string name="av_def_action_choose">მოთხოვნისას</string>
+    <string name="contact_us">დაგვიკავშირდით</string>
 </resources>

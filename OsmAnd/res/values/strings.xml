@@ -22,14 +22,58 @@
     <string name="trash_is_empty">Trash is empty</string>
     <string name="shared_string_trash">Trash</string>
     <string name="shared_string_storage">Storage</string>
+    <plurals name="tracks">
+        <item quantity="one" formatted="true">%1$d (%2$d track)</item>
+        <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>
+    </plurals>
+    <string name="shared_string_loading">Loading</string>
+    <string name="loading_tracks">Reloading tracks</string>
+    <string name="searching_matching_tracks">Search all matching tracks</string>
+    <string name="configure_filter">Configure filter</string>
+    <string name="no_config_smart_folder_title">Not configured</string>
+    <string name="no_config_smart_folder_description">Smart folders allow to group tracks by applied filters</string>
+    <string name="empty_smart_folder_title">No matching track</string>
+    <string name="empty_smart_folder_description">All matching tracks will automatically appear here</string>
+    <string name="discard_filter_changes">Discard filter changes</string>
+    <string name="discard_filter_changes_prompt">Are you sure you want to reset all filters?</string>
+    <string name="smart_folder_saved">Smart Folder saved</string>
+    <string name="edit_fiilter">Edit filter</string>
+    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="smart_folder_name_present">Such smart folder already present</string>
+    <string name="empty_name">Empty name</string>
+    <string name="add_smart_folder">Add smart folder</string>
+    <string name="save_as_smart_folder">Save as smart folder</string>
+    <string name="shared_string_show_icon">Show icon</string>
+    <string name="weather_online">Weather online</string>
+    <string name="maps_and_resources">Maps &amp; Resources</string>
+    <string name="shared_string_created">Created</string>
+    <string name="sort_size_ascending">Small size first</string>
+    <string name="sort_size_descending">Large size first</string>
+    <string name="sort_country_name_ascending">Country name: A – Z</string>
+    <string name="sort_country_name_descending">Country name: Z – A</string>
+    <string name="delete_map_description">Are you sure you want to delete %1$s map?</string>
+    <string name="delete_map">Delete map</string>
+    <string name="map_is_up_to_date">%1$s map is up to date.</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="rendering_styles">Rendering styles</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia and Travel maps</string>
+    <string name="standard_maps">Standard maps</string>
+    <string name="terrain_maps">Terrain maps</string>
+    <string name="widget_available_ram_desc">Displays available memory allocated for OsmAnd.</string>
+    <string name="widget_available_ram">Available RAM</string>
     <string name="app_mode_hang_gliding">Hang gliding</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
-       • Glide Ratio Widget \n\n
-       • Added ANT+ temperature widget \n\n
-       • Better memory management for large GPX tracks \n\n
+       • Added \"Glide Ratio\" widget\n\n
+       • Added filters and smart folders for tracks\n\n
+       • Added rows for top and bottom widget panels with support for all widgets\n\n
+       • Added support fot ANT+ temperature widget\n\n
+       • Improved memory management for large GPX tracks\n\n
+       • Updated local resource management in Downloads\n\n
+       • Added widget \"Available RAM\"\n\n
+       • Fixed issues with transparent status bar\n\n
     </string>
     <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperature</string>
@@ -1367,10 +1411,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="activity_type_snowmobile_name">Snowmobile</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_water_name">Water</string>
-    <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website %1$s.</string>
     <string name="hillshade_slope_contour_lines">Contour lines / Hillshade / Slope</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
@@ -1462,10 +1502,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="plan_route_split_before">Split before</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
     <string name="use_dev_url">Use dev.openstreetmap.org</string>
     <string name="use_dev_url_descr">Switch to use "dev.openstreetmap.org" instead of "openstreetmap.org" to testing uploading OSM Note / POI / GPX.</string>
-    <string name="add_to_opr">Add to OpenPlaceReviews</string>
     <string name="add_to_mapillary">Add to Mapillary</string>
     <string name="select_items_for_import">Select items that will be imported.</string>
     <string name="select_groups_for_import">Select groups that will be imported.</string>
@@ -1482,8 +1520,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_search_history">Search history</string>
     <string name="register_opr_have_account">I already have an account</string>
     <string name="register_opr_create_new_account">Create new account</string>
-    <string name="register_on_openplacereviews_desc">Photos are provided by the OpenPlaceReviews.org open data project. In order to upload your photos you need to sign up on their website.</string>
-    <string name="register_on_openplacereviews">Register on\nOpenPlaceReviews.org</string>
     <string name="shared_string_add_photo">Add photo</string>
     <string name="osm_login_descr">Log in using the OAuth method, or your OSM username and password.</string>
     <string name="osm_edit_comment_note">Comment OSM Note</string>

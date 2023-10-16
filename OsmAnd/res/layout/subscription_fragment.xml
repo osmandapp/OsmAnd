@@ -29,7 +29,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="@string/osm_live_subscription"
-            android:textColor="@color/color_white"
+            android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
             app:typeface="@string/font_roboto_regular" />
@@ -350,7 +350,7 @@
                             android:paddingEnd="16dp"
                             android:paddingRight="16dp"
                             android:text="@string/shared_string_save_changes"
-                            android:textColor="@color/color_white" />
+                            android:textColor="@color/card_and_list_background_light" />
 
                     </LinearLayout>
 

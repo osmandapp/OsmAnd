@@ -2,7 +2,7 @@
 <View xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="1dp"
-	android:layout_marginStart="@dimen/settings_divider_margin_start"
-	android:layout_marginLeft="@dimen/settings_divider_margin_start"
+	android:layout_marginStart="@dimen/divider_color_light_margin_start"
+	android:layout_marginLeft="@dimen/divider_color_light_margin_start"
 	android:background="?attr/divider_color_basic"
 	android:orientation="vertical" />

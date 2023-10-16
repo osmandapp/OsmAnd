@@ -3144,7 +3144,7 @@
     <string name="week">hétre</string>
     <string name="weeks_2_4">hétre</string>
     <string name="weeks_5">hétre</string>
-    <string name="month">hónapra</string>
+    <string name="month">hónap</string>
     <string name="months_2_4">hónapra</string>
     <string name="months_5">hónapra</string>
     <string name="year">év</string>
@@ -4058,7 +4058,7 @@
     <string name="srtm_unit_format">Szintvonalak egységváltozata</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
     <string name="shared_string_min_height">Legkisebb magasság</string>
-    <string name="shared_string_max_height">Legnagyobb magasság</string>
+    <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
     <string name="recorded_description">A felvett hang szebben hangzik, de csak előre rögzített kifejezéseket – bekanyarodási utasításokat – képes kiejteni. Utcaneveket vagy érdekes pontokat nem tud bemondani.</string>
     <string name="tts_title">TTS</string>
@@ -4355,7 +4355,7 @@
     <string name="history_actions_descr">Az előzményeket exportálhatja egy fájlba.</string>
     <string name="map_markers_history">Térképjelölők előzményei</string>
     <string name="navigation_history">Navigációs előzmények</string>
-    <string name="history_preferences_descr">Az előzmények naplózását külön-külön is letilthatja az egyes előzménytípusoknál.</string>
+    <string name="history_preferences_descr">Az előzmények naplózását egyesével kapcsolhatja ki minden előzménytípushoz.</string>
     <string name="shortcut_start_recording">Felvétel indítása</string>
     <string name="shortcut_navigate_to">Navigálás ide…</string>
     <string name="transparent_status_bar_descr">Térkép megjelenítése az állapotsor alatt</string>
@@ -4703,9 +4703,9 @@
     <string name="download_complete">A letöltés kész</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
-    <string name="trip_recording_downhill_widget_desc">Megjeleníti a jelenleg rögzített utazás összes ereszkedésének összegét.</string>
-    <string name="trip_recording_uphill_widget_desc">Megjeleníti a jelenleg rögzített utazás összes emelkedésének összegét.</string>
-    <string name="trip_recording_duration_widget_desc">Megjeleníti a jelenleg rögzített utazás időtartamát.</string>
+    <string name="trip_recording_downhill_widget_desc">Összeadja a jelenleg rögzített út lejtőinek hosszát.</string>
+    <string name="trip_recording_uphill_widget_desc">Összeadja a jelenleg rögzített út emelkedőinek hosszát.</string>
+    <string name="trip_recording_duration_widget_desc">Megjeleníti a jelenleg rögzített út idejét.</string>
     <string name="trip_recording_distance_widget_desc">Megjeleníti a jelenleg rögzített utazás hosszát.</string>
     <string name="true_bearing_wdiget_desc">A valódi észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
     <string name="relative_bearing_widget_desc">Megjeleníti a haladási iránya és a célpont közötti szöget.</string>
@@ -4722,9 +4722,9 @@
     <string name="time_to_intermediate_widget_desc">A widget megjeleníti az „Érkezési időt” vagy az első köztes célpontig „Hátralévő időt”. Az idő folyamatosan frissül a navigáció során, és a köztes pontot elhagyva frissül a következő köztes pontra vonatkozó időre.</string>
     <string name="auto_backup_preference_desc">Alapértelmezés szerint az Android biztonsági mentést készít a kedvencekről, a térkép-tokenekről és az OsmAnd beállításairól, hogy új eszközön vagy újratelepítés után vissza lehessen állítani ezeket. A mentés mérete legfeljebb 25 MB.
 \nHa az OsmAnd Cloudot használja, ez félreértésekhez vezethet az újratelepítés után.</string>
-    <string name="av_notes_audio_widget_desc">A widgetre koppintva hangjegyzetet készíthet.</string>
-    <string name="av_notes_photo_widget_desc">A widgetre koppintva fényképet készíthet.</string>
-    <string name="av_notes_video_widget_desc">A widgetre koppintva videofelvételt indíthat.</string>
+    <string name="av_notes_audio_widget_desc">A widget megérintésével hangjegyzetet készíthet.</string>
+    <string name="av_notes_photo_widget_desc">A widget megérintésével fényképet készíthet.</string>
+    <string name="av_notes_video_widget_desc">A widget megérintésével videót vehet fel.</string>
     <string name="duplacate_widget_added_snackbar">Egy ismétlődő widget lesz hozzáadva a listához.</string>
     <string name="second_marker_widget_desc">Beállíthatja a widgetet úgy, hogy a második térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
     <string name="first_marker_widget_desc">Beállíthatja a widgetet úgy, hogy az első térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
@@ -4769,7 +4769,7 @@
     <string name="map_markers_desc">A widget megjeleníti a távolságot vagy a becsült érkezési időt a térképjelölők listájában szereplő első két jelölőhöz.</string>
     <string name="quick_action_current_location_widget_descr">A jelenlegi helyet mutató widgetet a térképen megjelenítő vagy elrejtő kapcsoló.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
-    <string name="coordinates_widget_current_location_desc">Megjeleníti a jelenlegi hely földrajzi koordinátáit</string>
+    <string name="coordinates_widget_current_location_desc">Megjeleníti a jelenlegi helyzet földrajzi koordinátáit</string>
     <string name="coordinates_widget_current_location">Koordináták: jelenlegi hely</string>
     <string name="coordinates_widget_map_center_desc">Megjeleníti a jelenlegi térképközéppont földrajzi koordinátáit</string>
     <string name="quick_action_map_center_widget_descr">A térképközéppont-widgetet a térképen megjelenítő vagy elrejtő kapcsoló.</string>
@@ -5424,11 +5424,21 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Siklási arány widget
+    <string name="release_4_6">• Siklási arány widget hozzáadva
 \n
-\n • ANT+ hőmérséklet widget hozzáadva
+\n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
+\n
+\n • Sorok hozzáadva a felső és alsó widget panelekhez, az összes widget támogatásával
+\n
+\n • ANT+ hőmérséklet widget támogatás hozzáadva
 \n
 \n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n
+\n • Frissítve a helyi erőforrás-kezelés a Letöltésekben
+\n
+\n • \"Elérhető memória\" widget hozzáadva
+\n
+\n • Átlátszó állapotsor problémái javítva
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
@@ -5444,4 +5454,39 @@
     <string name="filter_tracks_count">Szűrő: %d</string>
     <string name="date_of_creation">Létrehozás dátuma</string>
     <string name="filter_screen_title">Szűrő</string>
+    <string name="shared_string_cache">Gyorsítótár</string>
+    <string name="widget_available_ram_desc">Megjeleníti az OsmAnd számára elérhető memória mennyiségét.</string>
+    <string name="sort_size_descending">Nagy méretűek elöl</string>
+    <string name="delete_map">Térkép törlése</string>
+    <string name="standard_maps">Normál térképek</string>
+    <string name="shared_string_created">Létrehozva</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia és utazási térképek</string>
+    <string name="rendering_styles">Megjelenítő stílusok</string>
+    <string name="sort_country_name_ascending">Országnév A - Z</string>
+    <string name="weather_online">Online időjárás</string>
+    <string name="map_is_up_to_date">%1$s térképe naprakész.</string>
+    <string name="sort_size_ascending">Kis méretűek elöl</string>
+    <string name="widget_available_ram">Elérhető memória</string>
+    <string name="terrain_maps">Domborzati térképek</string>
+    <string name="sort_country_name_descending">Országnév Z - A</string>
+    <string name="delete_map_description">Biztosan törli %1$s térképét\?</string>
+    <string name="maps_and_resources">Térképek és erőforrások</string>
+    <string name="shared_string_show_icon">Ikon mutatása</string>
+    <string name="smart_folder_name_present">Ilyen okosmappa már van</string>
+    <string name="smart_folder_saved">Okosmappa mentve</string>
+    <string name="add_smart_folder">Okosmappa hozzáadása</string>
+    <string name="empty_name">Üres név</string>
+    <string name="edit_fiilter">Szűrő szerkesztése</string>
+    <string name="save_as_smart_folder">Mentés okosmappaként</string>
+    <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
+    <string name="empty_smart_folder_description">Minden egyező nyomvonal itt fog megjelenni</string>
+    <string name="configure_filter">Szűrő konfigurálása</string>
+    <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
+    <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
+    <string name="shared_string_loading">Betöltés</string>
+    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt\?</string>
+    <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
+    <string name="loading_tracks">Nyomvonalak újratöltése</string>
+    <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
 </resources>

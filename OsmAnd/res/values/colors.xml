@@ -161,8 +161,6 @@
 
 	<color name="parking_outdated_color">#f41a34</color>
 
-
-
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 
@@ -195,7 +193,7 @@
 	<color name="download_pressed_dark">#be39464d</color>
 
 
-
+	<!-- Widgets  -->
 	<color name="color_transparent">#0000</color>
 	<color name="color_black_transparent">#90000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
@@ -216,9 +214,6 @@
 
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>
-	<!-- Old dialogs colors -->
-	<color name="color_white">#FFF</color>
-	<color name="color_black">#000</color>
 
 	<color name="row_selection_color">#CC33BBE0</color>
 
@@ -374,8 +369,6 @@
 	<color name="ctx_menu_bottom_view_secondary_text_color_light">#a6a6a6</color>
 	<color name="ctx_menu_bottom_view_secondary_text_color_dark">#595959</color>
 
-	<color name="ctx_menu_bottom_view_divider_light">#f2f2f2</color>
-	<color name="ctx_menu_bottom_view_divider_dark">#222526</color>
 	<color name="ctx_menu_controller_disabled_text_color_light">#b3b3b3</color>
 	<color name="ctx_menu_controller_disabled_text_color_dark">#666666</color>
 
@@ -388,8 +381,6 @@
 	<color name="route_info_cancel_button_color_light">#5959ff</color>
 	<color name="route_info_cancel_button_color_dark">#17181a</color>
 
-	<color name="multi_selection_menu_divider_light">#f0f0f0</color>
-	<color name="multi_selection_menu_divider_dark">#222526</color>
 	<color name="multi_selection_menu_close_btn_light">#2f7af5</color>
 	<color name="multi_selection_menu_close_btn_dark">#e69122</color>
 
@@ -397,8 +388,6 @@
 
 	<color name="wikivoyage_bottom_bar_bg_light">#f5f5f5</color>
 	<color name="wikivoyage_bottom_bar_bg_dark">#222526</color>
-	<color name="wikivoyage_bottom_bar_divider_light">#e3e3e3</color>
-	<color name="wikivoyage_bottom_bar_divider_dark">#2d3133</color>
 	<color name="wikivoyage_secondary_btn_bg_light">#f0f0f0</color>
 	<color name="wikivoyage_secondary_btn_bg_dark">#2d3133</color>
 	<color name="wikivoyage_welcome_bg_light">#ffffff</color>
@@ -417,7 +406,7 @@
 	<color name="inactive_pages_dark">#505050</color>
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
 	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
-	<color name="settings_divider">#dcdcdc</color>
+	<!-- <color name="settings_divider">#dcdcdc</color> -->
 	<color name="profile_button_gray">#EFEFEF</color>
 	<color name="profile_button_gray_pressed">#ababab</color>
 
@@ -469,4 +458,9 @@
 	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
+
+	<!-- Download Local tab colors  -->
+	<color name="local_resources_color">#1560D0</color>
+	<color name="local_my_places_color">#E8C71D</color>
+	<color name="local_settings_color">#14CC70</color>
 </resources>

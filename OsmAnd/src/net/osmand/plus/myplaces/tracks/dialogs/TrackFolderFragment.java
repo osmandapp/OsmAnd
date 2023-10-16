@@ -20,12 +20,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
@@ -52,6 +52,13 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return TAG;
 	}
 
+	@NonNull
+	protected TracksGroup getCurrentTrackGroup() {
+		return selectedFolder;
+	}
+
+	private boolean isLoadingItems;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,12 +84,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return view;
 	}
 
-	private void setupProgressBar(@NonNull View view) {
+	protected void setupProgressBar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
 		updateProgress();
 	}
 
-	private void updateProgress() {
+	protected void updateProgress() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		boolean importing = foldersHelper != null && foldersHelper.isImporting();
 		AndroidUiHelper.updateVisibility(progressBar, importing);
@@ -104,18 +111,34 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SearchMyPlacesTracksFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
+				SearchMyPlacesTracksFragment.showInstance(manager,
+						getTargetFragment(),
+						false,
+						isUsedOnMap(),
+						null,
+						null,
+						new DialogClosedListener() {
+							@Override
+							public void onDialogClosed() {
+								updateContent();
+							}
+						});
 				return true;
 			}
 		}
 		if (itemId == R.id.action_folder_menu) {
-			FragmentActivity activity = getActivity();
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null && activity != null) {
-				View view = activity.findViewById(R.id.action_folder_menu);
-				foldersHelper.showFolderOptionsMenu(selectedFolder, view, this);
-				return true;
-			}
+			if (showFolderOptionMenu()) return true;
+		}
+		return false;
+	}
+
+	protected boolean showFolderOptionMenu() {
+		FragmentActivity activity = getActivity();
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null && activity != null) {
+			View view = activity.findViewById(R.id.action_folder_menu);
+			foldersHelper.showFolderOptionsMenu(selectedFolder, view, this, isRootFolder());
+			return true;
 		}
 		return false;
 	}
@@ -127,23 +150,31 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		requireMyActivity().setToolbarVisibility(false);
 	}
 
-	private void onBackPressed() {
-		if (rootFolder.equals(selectedFolder)) {
+	protected void onBackPressed() {
+		if (isRootFolder()) {
 			dismiss();
+			updateTitle();
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
 			updateContent();
 		}
 	}
 
+	private boolean isRootFolder() {
+		return rootFolder.equals(selectedFolder);
+	}
+
 	@Override
 	public void updateContent() {
 		super.updateContent();
+		updateTitle();
+	}
 
+	private void updateTitle() {
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
-			actionBar.setTitle(selectedFolder.getName(app));
+			actionBar.setTitle(getCurrentTrackGroup().getName(app));
 		}
 	}
 
@@ -195,9 +226,14 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	private void showTracksSelection(@Nullable TrackItem trackItem, @Nullable TracksGroup tracksGroup) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
-			Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
-			foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
+			if (selectedFolder != null && selectedFolder instanceof TrackFolder) {
+				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
+				Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
+				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
+			} else if (smartFolder != null) {
+				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
+				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null);
+			}
 		}
 	}
 
@@ -213,7 +249,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public void restoreState(Bundle bundle) {
 		super.restoreState(bundle);
 
-		if (!Algorithms.isEmpty(selectedItemPath)) {
+		if (rootFolder != null && !Algorithms.isEmpty(selectedItemPath)) {
 			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
 			if (trackItem != null) {
 				int index = adapter.getItemPosition(trackItem);
@@ -233,6 +269,22 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
 		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
 		return selectionHelper;
+	}
+
+	@Override
+	protected Object getEmptyItem() {
+		Object emptyItem;
+		if (isLoadingItems) {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER_LOADING : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER_LOADING;
+		} else {
+			emptyItem = smartFolder == null ? TrackFoldersAdapter.TYPE_EMPTY_FOLDER : TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
+		}
+		return emptyItem;
+	}
+
+	public void setLoadingItems(boolean isLoadingItems) {
+		this.isLoadingItems = isLoadingItems;
+		updateContent();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {

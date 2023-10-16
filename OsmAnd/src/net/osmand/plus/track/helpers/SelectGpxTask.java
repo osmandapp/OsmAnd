@@ -33,7 +33,7 @@ public class SelectGpxTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPreExecute() {
 		if (gpxTaskListener != null) {
-			gpxTaskListener.gpxSelectionStarted();
+			gpxTaskListener.onGpxSelectionStarted();
 		}
 	}
 
@@ -74,28 +74,28 @@ public class SelectGpxTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onProgressUpdate(Void... values) {
 		if (gpxTaskListener != null) {
-			gpxTaskListener.gpxSelectionInProgress();
+			gpxTaskListener.onGpxSelectionInProgress();
 		}
 	}
 
 	@Override
 	protected void onPostExecute(Void v) {
 		if (gpxTaskListener != null) {
-			gpxTaskListener.gpxSelectionFinished();
+			gpxTaskListener.onGpxSelectionFinished();
 		}
 	}
 
 	public interface SelectGpxTaskListener {
 
-		default void gpxSelectionStarted() {
+		default void onGpxSelectionStarted() {
 
 		}
 
-		default void gpxSelectionInProgress() {
+		default void onGpxSelectionInProgress() {
 
 		}
 
-		default void gpxSelectionFinished() {
+		default void onGpxSelectionFinished() {
 
 		}
 	}

@@ -81,6 +81,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class TravelObfHelper implements TravelHelper {
 
@@ -379,32 +381,33 @@ public class TravelObfHelper implements TravelHelper {
 		}
 		if (!Algorithms.isEmpty(amenityMap)) {
 			boolean appLangEn = "en".equals(appLang);
+			TLongSet uniqueIds = new TLongHashSet();
 			for (Entry<File, List<Amenity>> entry : amenityMap.entrySet()) {
 				File file = entry.getKey();
 				for (Amenity amenity : entry.getValue()) {
+					if (!uniqueIds.add(amenity.getId())) {
+						continue;
+					}
 					Set<String> nameLangs = getLanguages(amenity);
 					if (nameLangs.contains(appLang) || Algorithms.isEmpty(appLang)) {
 						TravelArticle article = readArticle(file, amenity, appLang);
 						ArrayList<String> langs = new ArrayList<>(nameLangs);
-						Collections.sort(langs, new Comparator<String>() {
-							@Override
-							public int compare(String l1, String l2) {
-								if (l1.equals(appLang)) {
-									l1 = "1";
-								}
-								if (l2.equals(appLang)) {
-									l2 = "1";
-								}
-								if (!appLangEn) {
-									if (l1.equals("en")) {
-										l1 = "2";
-									}
-									if (l2.equals("en")) {
-										l2 = "2";
-									}
-								}
-								return l1.compareTo(l2);
+						Collections.sort(langs, (l1, l2) -> {
+							if (l1.equals(appLang)) {
+								l1 = "1";
 							}
+							if (l2.equals(appLang)) {
+								l2 = "1";
+							}
+							if (!appLangEn) {
+								if (l1.equals("en")) {
+									l1 = "2";
+								}
+								if (l2.equals("en")) {
+									l2 = "2";
+								}
+							}
+							return l1.compareTo(l2);
 						});
 						WikivoyageSearchResult r = new WikivoyageSearchResult(article, langs);
 						res.add(r);
@@ -544,6 +547,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			if (!Algorithms.isEmpty(amenities)) {
 				article = readArticle(reader.getFile(), amenities.get(0), lang);
+				break;
 			}
 		}
 		return article;

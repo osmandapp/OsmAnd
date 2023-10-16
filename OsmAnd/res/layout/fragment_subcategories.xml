@@ -35,7 +35,7 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/card_and_list_background_light"
                         android:textSize="@dimen/dialog_header_text_size"
                         osmand:typeface="@string/font_roboto_medium"
                         tools:text="Education" />
@@ -144,7 +144,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:text="@string/shared_string_apply"
-                android:textColor="@color/color_white"
+                android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_list_text_size" />
 
         </LinearLayout>

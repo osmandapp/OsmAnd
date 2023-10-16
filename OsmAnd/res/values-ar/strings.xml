@@ -4727,8 +4727,8 @@
     <string name="shared_string_mode">نمط</string>
     <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="lang_sat">السنتالية</string>
-    <string name="average_speed_skip_stops">مراعاة التوقف</string>
-    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لحساب متوسط السرعة.</string>
+    <string name="average_speed_skip_stops">خذ أماكن التوقف في الحسبان</string>
+    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لمتوسط السرعة.</string>
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
     <string name="import_as_one_track">استيراد كمسار واحد</string>
@@ -4828,7 +4828,7 @@
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخرائط</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
-    <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
+    <string name="map_marker_interval_dialog_desc">تحديد الفترة الزمنية التي سيقاس فيها متوسط السرعة لحساب الوقت المقدر للوصول.</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
     <string name="go_to_marker_location">الانتقال إلى موقع العلامة</string>
     <string name="shared_string_switch_mode">وضع التبديل</string>
@@ -4849,7 +4849,7 @@
     <string name="map_widget_target_distance_desc">تظهر المسافة بين الكاميرا والموقع المستهدف.</string>
     <string name="rotate_map_manual_opt">تدوير يدوي</string>
     <string name="map_widget_camera_tilt_desc">تعرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
-    <string name="click_on_widget">انقر على الويدجت</string>
+    <string name="click_on_widget">انقر على الأداة (الويدجت)</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
 \nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
@@ -5502,4 +5502,50 @@
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="sensor_temperature_desc">يُظهر درجة الحرارة من جهاز الاستشعار</string>
     <string name="shared_string_temperature">درجة الحرارة</string>
+    <string name="sort_size_descending">الحجم الكبير أولا</string>
+    <string name="delete_map">حذف الخريطة</string>
+    <string name="shared_string_created">تم الانشاء</string>
+    <string name="sort_country_name_ascending">اسم البلد: أ - ي</string>
+    <string name="shared_string_show_icon">أظهر الأيقونة</string>
+    <string name="map_is_up_to_date">خريطة %1$s محدثة.</string>
+    <string name="sort_size_ascending">الحجم الصغير أولا</string>
+    <string name="sort_country_name_descending">اسم البلد: ي - أ</string>
+    <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
+    <string name="maps_and_resources">خرائط ومصادر</string>
+    <string name="shared_string_cache">الذاكرة المؤقتة</string>
+    <string name="with_waypoints">مع نقاط الطريق</string>
+    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لـOsmAnd</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">الخرائط العادية</string>
+    <string name="max_altitude">أقصى ارتفاع</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="app_mode_paragliding">الطيران المظلي</string>
+    <string name="filter_by_name">فلترة حسب الاسم</string>
+    <string name="shared_string_reset_all">إعادة ضبط الجميع للافتراضي</string>
+    <string name="wikipedia_and_travel_maps">خرائط الويكبيديا والسفر</string>
+    <string name="rendering_styles">أنماط التقديم</string>
+    <string name="filter_tracks_count">تصفية: %d</string>
+    <string name="app_mode_hang_gliding">الطيران الشراعي</string>
+    <string name="weather_online">الطقس أونلاين</string>
+    <string name="date_of_creation">تاريخ الإنشاء</string>
+    <string name="filter_screen_title">فلتر</string>
+    <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
+    <string name="terrain_maps">خرائط التضاريس</string>
+    <string name="smart_folder_name_present">هكذا ملف ذكي موجود بالفعل</string>
+    <string name="smart_folder_saved">تم حفظ الملف الذكي</string>
+    <string name="add_smart_folder">أضف ملف ذكي</string>
+    <string name="empty_name">اسم فارغ</string>
+    <string name="edit_fiilter">تعديل الفلتر</string>
+    <string name="save_as_smart_folder">احفظ كملف ذكي</string>
+    <string name="delete_smart_folder_dialog_message">هذا سيحذف \"%1$s\" ملف ذكي.</string>
+    <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
+    <string name="empty_smart_folder_description">كل المسارات المطابقة ستظهر تلقائياً هنا</string>
+    <string name="configure_filter">تعديل الفلتر</string>
+    <string name="no_config_smart_folder_title">غير مهيأ</string>
+    <string name="discard_filter_changes">تجاهل تغييرات الفلتر</string>
+    <string name="shared_string_loading">قيد التحميل</string>
+    <string name="discard_filter_changes_prompt">هل أنت متأكد من أنك تريد إعادة ضبط جميع الفلاتر الى الوضع الافتراضي؟</string>
+    <string name="no_config_smart_folder_description">الملفات الذكية تسمح بتجميع المسارات بواسطة تطبيق الفلاتر</string>
+    <string name="loading_tracks">إعادة تحميل المسارات</string>
+    <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
 </resources>

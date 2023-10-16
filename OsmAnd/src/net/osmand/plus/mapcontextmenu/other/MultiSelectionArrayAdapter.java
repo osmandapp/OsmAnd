@@ -95,7 +95,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);
-			divider.setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
+			divider.setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.divider_color_light : R.color.divider_color_dark));
 			divider.setVisibility(position != getCount() - 1 ? View.VISIBLE : View.GONE);
 		}
 

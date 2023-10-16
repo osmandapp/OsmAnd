@@ -4801,7 +4801,7 @@
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje aktuální polohy na mapě.</string>
     <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
     <string name="shared_string_switch_mode">Přepnout režim</string>
-    <string name="click_on_widget">Klikněte na nástroj</string>
+    <string name="click_on_widget">Klikněte na widget</string>
     <string name="last_synchronized">Poslední synchronizace</string>
     <string name="map_widget_altitude_map_center_desc">Zobrazuje nadmořskou výšku aktuálního středu mapy.</string>
     <string name="map_widget_altitude_map_center">Nadmořská výška: střed mapy</string>
@@ -5349,14 +5349,110 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
-    <string name="release_4_6">- Widget Poměru klouzavosti 
+    <string name="release_4_6">- Přidán widget \"Glide Ratio\"
 \n
-\n - Přidán widget teploty ANT+
+\n - Přidány filtry a inteligentní složky pro skladby
 \n
-\n - Lepší správa paměti pro velké stopy GPX
+\n - Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
+\n
+\n - Přidána podpora pro widget teploty ANT+
+\n
+\n - Vylepšená správa paměti pro velké stopy GPX
+\n
+\n - Aktualizovaná správa místních zdrojů v sekci Stažené soubory
+\n
+\n - Přidán widget \"Dostupná paměť RAM\"
+\n
+\n - Opraveny problémy s průhledným stavovým řádkem
 \n
 \n</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
     <string name="sensor_temperature_desc">Zobrazuje teplotu ze snímače</string>
     <string name="shared_string_temperature">Teplota</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Přímá trasa (letadlo)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Vlaková navigace</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Navigace veřejné dopravy</string>
+    <string name="shared_string_cache">Mezipaměť</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navigace podle značek</string>
+    <string name="with_waypoints">S trasovými body</string>
+    <string name="help_article_plan_route_coordinate_input_name">Zadání souřadnic</string>
+    <string name="help_article_map_vector_maps_name">Vektorové mapy (styly map)</string>
+    <string name="widget_available_ram_desc">Zobrazí dostupnou paměť přidělenou pro OsmAnd.</string>
+    <string name="sort_size_descending">Nejdříve velká velikost</string>
+    <string name="delete_map">Smazat mapu</string>
+    <string name="help_article_purchases_giveaway_name">Dárek</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">Standardní mapy</string>
+    <string name="max_altitude">Max. výška</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Hlasové výzvy / upozornění</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="shared_string_created">Vytvořeno</string>
+    <string name="help_article_map_tracks_on_map_name">Stopy a trasy</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Navigace přímo do bodu (Loď)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Obrazovka mapy při navigaci</string>
+    <string name="filter_by_name">Filtrovat podle názvu</string>
+    <string name="shared_string_reset_all">Resetovat vše</string>
+    <string name="help_article_navigation_guidance_name">Průvodce</string>
+    <string name="help_article_personal_profiles_name">Profily (Nastavení)</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Navigace automobilů (nákladních automobilů, motocyklů)</string>
+    <string name="help_article_navigation_setup_route_details_name">Detaily trasy</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Příprava trasy</string>
+    <string name="wikipedia_and_travel_maps">Wikipedie a cestovní mapy</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Pěší navigace</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigace podle stopy</string>
+    <string name="help_article_navigation_routing_online_routing_name">Online navigace</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_personal_import_export_name">Import / Export</string>
+    <string name="rendering_styles">Styly vykreslování</string>
+    <string name="filter_tracks_count">Filtr: %d</string>
+    <string name="sort_country_name_ascending">Název země: A – Z</string>
+    <string name="app_mode_hang_gliding">Závěsné létání</string>
+    <string name="help_article_plan_route_name">Plánování trasy</string>
+    <string name="weather_online">Počasí online</string>
+    <string name="help_article_map_track_context_menu_name">Kontextová nabídka Stopy</string>
+    <string name="date_of_creation">Datum vytvoření</string>
+    <string name="map_is_up_to_date">Mapa %1$s je aktuální.</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="sort_size_ascending">Nejdříve malá velikost</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Koňské stezky</string>
+    <string name="filter_screen_title">Filtr</string>
+    <string name="widget_available_ram">Dostupná paměť RAM</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Lyžařská navigace</string>
+    <string name="help_article_personal_name">Moje data</string>
+    <string name="help_article_purchases_android_name">Nákupy pro Android</string>
+    <string name="help_article_plan_route_web_name">Webový plánovač tras</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_name">Parametry trasy</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Navigace mopedů</string>
+    <string name="terrain_maps">Mapy terénu</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Navigace lodí</string>
+    <string name="help_article_purchases_ios_name">Nákupy v iOS</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Cyklotrasy (MTB)</string>
+    <string name="help_article_map_raster_maps_name">Rastrové mapy (online / offline)</string>
+    <string name="help_article_search_search_all_name">Vyhledat vše</string>
+    <string name="help_article_personal_storage_name">Úložiště</string>
+    <string name="sort_country_name_descending">Název země: Z – A</string>
+    <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
+    <string name="maps_and_resources">Mapy a zdroje</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
+    <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
+    <string name="smart_folder_name_present">Taková složka Smart Folder již existuje</string>
+    <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
+    <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
+    <string name="configure_filter">Konfigurace filtru</string>
+    <string name="smart_folder_saved">Smart Folder uložen</string>
+    <string name="no_config_smart_folder_title">Není nastaveno</string>
+    <string name="add_smart_folder">Přidat chytrou složku</string>
+    <string name="empty_name">Prázdný název</string>
+    <string name="edit_fiilter">Upravit filtr</string>
+    <string name="discard_filter_changes">Zahodit změny filtru</string>
+    <string name="save_as_smart_folder">Uložit jako chytrou složku</string>
+    <string name="shared_string_show_icon">Zobrazit ikonu</string>
+    <string name="shared_string_loading">Načítání</string>
+    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
+    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry\?</string>
+    <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
+    <string name="loading_tracks">Znovu načítání tras</string>
+    <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>
 </resources>

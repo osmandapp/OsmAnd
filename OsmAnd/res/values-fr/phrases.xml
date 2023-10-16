@@ -4398,18 +4398,18 @@
     <string name="poi_socket_type2_cable">Prise de courant : Type 2 cable</string>
     <string name="poi_socket_type2_cable_current">Prise de courant : Type 2 cable : courant</string>
     <string name="poi_climbing_rock_conglomerate">Roche d\'escalade : conglomérat</string>
-    <string name="poi_climbing_grade_uiaa_max">Chemin le plus difficile (échelle UIAA)</string>
-    <string name="poi_climbing_grade_uiaa_mean">Chemin moyen (échelle UIAA)</string>
-    <string name="poi_climbing_grade_french_max">Chemin le plus difficile (échelle française)</string>
-    <string name="poi_climbing_grade_french_mean">Chemin moyen (échelle française)</string>
+    <string name="poi_climbing_grade_uiaa_max">Voie la plus difficile (cotation UIAA)</string>
+    <string name="poi_climbing_grade_uiaa_mean">Voie moyenne (cotation UIAA)</string>
+    <string name="poi_climbing_grade_french_max">Voie la plus difficile (cotation française)</string>
+    <string name="poi_climbing_grade_french_mean">Voie moyenne (cotation française)</string>
     <string name="poi_socket_type2_cable_output">Prise de courant : Type 2 cable : sortie</string>
     <string name="poi_climbing_rock_gritstone">Roche d\'escalade : gritstone</string>
     <string name="poi_climbing_rock_basalt">Roche d\'escalade : basalte</string>
-    <string name="poi_climbing_grade_saxon_max">Chemin le plus difficile (échelle saxonne)</string>
-    <string name="poi_climbing_grade_saxon_mean">Chemin moyen (échelle saxonne)</string>
-    <string name="poi_climbing_grade_uiaa">Échelle d\'escalade de l\'UIAA</string>
-    <string name="poi_climbing_grade_french">Échelle française d\'escalade</string>
-    <string name="poi_climbing_grade_saxon">Échelle saxone d\'escalade</string>
+    <string name="poi_climbing_grade_saxon_max">Voie la plus difficile (cotation saxonne)</string>
+    <string name="poi_climbing_grade_saxon_mean">Voie moyenne (cotation saxonne)</string>
+    <string name="poi_climbing_grade_uiaa">Cotation d\'escalade de l\'UIAA</string>
+    <string name="poi_climbing_grade_french">Cotation française d\'escalade</string>
+    <string name="poi_climbing_grade_saxon">Cotation saxone d\'escalade</string>
     <string name="poi_socket_cee_blue_voltage">Prise de courant : Bleu CEE : tension</string>
     <string name="poi_socket_cee_red_125a_voltage">Prise de courant : Rouge CEE 125A : tension</string>
     <string name="poi_socket_tesla_roadster_voltage">Prise de courant : Tesla Roadster : tension</string>
@@ -4627,4 +4627,6 @@
     <string name="poi_socket_typee_voltage_medium">Moyen</string>
     <string name="poi_socket_typee_voltage">Prise de courant : Type E : tension</string>
     <string name="poi_socket_typee_output">Prise de courant : Type E : sortie</string>
+    <string name="poi_socket_typee_yes">Type E</string>
+    <string name="poi_checkpoint_cycling">Point de contrôle pour les cyclistes</string>
 </resources>

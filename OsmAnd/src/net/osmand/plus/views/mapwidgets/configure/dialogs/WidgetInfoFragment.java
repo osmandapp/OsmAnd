@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -113,7 +115,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		}
 		widgetType = widgetInfo.getWidgetType();
 		widgetGroup = widgetType == null ? null : widgetType.getGroup();
-		panel = widgetInfo.widgetPanel;
+		panel = widgetInfo.getWidgetPanel();
 	}
 
 	private void setupToolbar() {
@@ -260,7 +262,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 	}
 
 	private void openSettingsFragment() {
-		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment(app);
+		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment(app, widgetInfo);
 		if (settingsFragment == null) {
 			throw new IllegalStateException("Widget has no available settings");
 		}
@@ -283,7 +285,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			return null;
 		}
 
-		int filter = MapWidgetRegistry.ENABLED_MODE;
+		int filter = ENABLED_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, panels));
 
@@ -299,7 +301,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType);
+		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, panel);
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
 				duplicateId, duplicateWidget, widgetType, panel);
@@ -341,7 +343,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<MapWidgetInfo> widgetInfos = new ArrayList<>(widgetRegistry.getWidgetsForPanel(mapActivity,
-					appMode, 0, Collections.singletonList(panel)));
+					appMode, MATCHING_PANELS_MODE, Collections.singletonList(panel)));
 			for (MapWidgetInfo widgetInfo : widgetInfos) {
 				if (widgetInfo.key.equals(duplicateId)) {
 					this.widgetInfo = widgetInfo;
@@ -434,7 +436,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			WidgetType widgetType = widgetInfo.widget.getWidgetType();
 			switch (this) {
 				case SETTINGS:
-					return widgetType != null && widgetType.getSettingsFragment(ctx) != null;
+					return widgetType != null && widgetType.getSettingsFragment(ctx, widgetInfo) != null;
 				case DUPLICATE:
 					return widgetType != null && widgetType.isPurchased(ctx);
 				case REMOVE:

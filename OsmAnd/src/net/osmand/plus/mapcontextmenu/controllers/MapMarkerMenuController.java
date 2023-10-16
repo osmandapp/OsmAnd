@@ -67,9 +67,6 @@ public class MapMarkerMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						if (!WidgetsVisibilityHelper.isWidgetEnabled(activity, TOP, MARKERS_TOP_BAR.id)) {
-							enableTopMapMarkerWidget(activity);
-						}
 						OsmandApplication app = activity.getMyApplication();
 						MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
@@ -80,13 +77,6 @@ public class MapMarkerMenuController extends MenuController {
 			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
 			rightTitleButtonController.startIcon = createShowOnTopbarIcon(ColorUtilities.getDefaultIconColorId(!isLight()));
 		}
-	}
-
-	private void enableTopMapMarkerWidget(@NonNull MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<String> widgetsIds = Collections.singletonList(WidgetType.MARKERS_TOP_BAR.id);
-		WidgetUtils.addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, appMode);
 	}
 
 	@Nullable

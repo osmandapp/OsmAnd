@@ -272,7 +272,7 @@
     <string name="poi_fishing">Horgászfelszerelés</string>
     <string name="poi_frame">Képkeretező</string>
     <string name="poi_furniture">Bútorbolt</string>
-    <string name="poi_shop_yes">Egyéb bolt</string>
+    <string name="poi_shop_yes">Bolt</string>
     <string name="poi_glaziery">Üveges</string>
     <string name="poi_hearing_aids">Hallókészülékbolt</string>
     <string name="poi_hunting">Vadászfelszerelés</string>
@@ -4565,4 +4565,14 @@
     <string name="poi_recycling_pens">Írószer</string>
     <string name="poi_cemt">CEMT</string>
     <string name="poi_second_hand_filter">Használtcikk</string>
+    <string name="poi_socket_typee_output_medium">Közepes</string>
+    <string name="poi_socket_typee_voltage_filter">Type E csatlakozó feszültsége</string>
+    <string name="poi_socket_typee_output_high">Nagy</string>
+    <string name="poi_socket_typee_voltage_high">Magas</string>
+    <string name="poi_socket_typee">Dugalj: Type E</string>
+    <string name="poi_socket_typee_output_low">Alacsony</string>
+    <string name="poi_socket_typee_yes">Type E</string>
+    <string name="poi_socket_typee_voltage_low">Alacsony</string>
+    <string name="poi_socket_typee_output_filter">Type E csatlakozó teljesítménye</string>
+    <string name="poi_socket_typee_voltage_medium">Közepes</string>
 </resources>

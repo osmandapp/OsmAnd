@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -16,10 +18,10 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.osmand.PlatformUtil;
-
-import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 /**
  * Created by dummy on 28.01.15.
@@ -86,10 +88,10 @@ public class AndroidUiHelper {
             }
         }
 
-        return orientation;
-    }
-    
-    public static boolean updateVisibility(@Nullable View view, boolean visible) {
+		return orientation;
+	}
+
+	public static boolean updateVisibility(@Nullable View view, boolean visible) {
 		if (view != null && visible != (view.getVisibility() == View.VISIBLE)) {
 			if (visible) {
 				view.setVisibility(View.VISIBLE);
@@ -111,7 +113,7 @@ public class AndroidUiHelper {
 		}
 	}
 
-	public static void setVisibility(int visibility, View ... views) {
+	public static void setVisibility(int visibility, View... views) {
 		for (View view : views) {
 			if (view != null && view.getVisibility() != visibility) {
 				view.setVisibility(visibility);
@@ -119,7 +121,7 @@ public class AndroidUiHelper {
 		}
 	}
 
-	public static void setEnabled(View rootView, boolean enabled, int ... ids) {
+	public static void setEnabled(View rootView, boolean enabled, int... ids) {
 		for (int id : ids) {
 			View view = rootView.findViewById(id);
 			if (view != null && view.isEnabled() != enabled) {
@@ -158,20 +160,21 @@ public class AndroidUiHelper {
 				}
 			}
 		} else {
-		    if (addLightFlag) {
-			    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-		    } else {
-			    flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-		    }
-		    view.setSystemUiVisibility(flags);
-	    }
+			if (addLightFlag) {
+				flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+			} else {
+				flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+			}
+			view.setSystemUiVisibility(flags);
+		}
 	}
 
 	@RequiresApi(api = VERSION_CODES.R)
 	private static void makeAbilityToResetLightStatusBar(@NonNull View view) {
 		view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
 			@Override
-			public void onViewAttachedToWindow(View v) { }
+			public void onViewAttachedToWindow(View v) {
+			}
 
 			@Override
 			public void onViewDetachedFromWindow(View v) {
@@ -183,5 +186,17 @@ public class AndroidUiHelper {
 				}
 			}
 		});
+	}
+
+	public static void updateActionBarVisibility(@Nullable AppCompatActivity activity, boolean visible) {
+		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
+		if (actionBar != null) {
+			actionBar.setShowHideAnimationEnabled(false);
+			if (visible) {
+				actionBar.show();
+			} else {
+				actionBar.hide();
+			}
+		}
 	}
 }

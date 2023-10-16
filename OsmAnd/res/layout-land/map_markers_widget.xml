@@ -53,7 +53,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:maxLines="1"
-							android:textColor="@color/color_white"
+							android:textColor="@color/card_and_list_background_light"
 							android:textSize="@dimen/default_list_text_size_large"
 							android:textStyle="bold"
 							tools:text="500 m" />
@@ -128,7 +128,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:maxLines="1"
-							android:textColor="@color/color_white"
+							android:textColor="@color/card_and_list_background_light"
 							android:textSize="@dimen/default_list_text_size_large"
 							android:textStyle="bold"
 							tools:text="500 m" />

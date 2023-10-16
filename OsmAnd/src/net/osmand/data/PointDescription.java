@@ -13,6 +13,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
@@ -63,6 +65,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_CUSTOM_POI_FILTER = "custom_poi_filter";
 
 	public static final int LOCATION_URL = 200;
+	public static final int OSM_LOCATION_URL = 210;
 	public static final int LOCATION_LIST_HEADER = 201;
 
 
@@ -213,6 +216,11 @@ public class PointDescription {
 			lonUrl = lonUrl.substring(0, lonUrl.length() - 1);
 			String httpUrl = "https://osmand.net/map?pin=" + latUrl + "," + lonUrl + "#" + zoom + "/" + latUrl + "/" + lonUrl;
 			results.put(LOCATION_URL, httpUrl);
+
+			if (PluginsHelper.isEnabled(OsmEditingPlugin.class)) {
+				String osmUrl = "https://www.openstreetmap.org/?mlat=" + latUrl + "&mlon=" + lonUrl + "#map=" + zoom + "/" + latUrl + "/" + lonUrl;
+				results.put(OSM_LOCATION_URL, osmUrl);
+			}
 		} catch (RuntimeException e) {
 			log.error("Failed to convert coordinates", e);
 		}

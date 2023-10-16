@@ -4631,4 +4631,8 @@
     <string name="poi_socket_typee_voltage_high">Alto</string>
     <string name="poi_socket_typee_voltage_low">Bajo</string>
     <string name="poi_socket_typee_output_high">Alto</string>
+    <string name="poi_checkpoint_cycling">Control ciclista</string>
+    <string name="poi_socket_typee_yes">Tipo E</string>
+    <string name="poi_dressing_room">Vestidor</string>
+    <string name="poi_emergency_bay">Área de emergencia</string>
 </resources>

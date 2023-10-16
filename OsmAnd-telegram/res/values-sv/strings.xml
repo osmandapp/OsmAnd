@@ -216,7 +216,7 @@
     <string name="type_contact_or_group_name">Skriv kontakt eller gruppnamn</string>
     <string name="search_contacts_descr">Sök i alla dina grupper och kontakter.</string>
     <string name="search_contacts">Sök kontakter</string>
-    <string name="bearing">Riktning</string>
+    <string name="bearing">Bäring</string>
     <string name="altitude">Höjd</string>
     <string name="precision">Precision</string>
     <string name="direction">Riktning</string>
@@ -267,7 +267,7 @@
     <string name="last_update_from_telegram_duration">Senaste uppdatering från Telegram: %1$s sedan</string>
     <string name="last_response_date">Senast response: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
-    <string name="shared_string_export">Export</string>
+    <string name="shared_string_export">Exportera</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="logcat_buffer_descr">Kontrollera och dela detaljerade loggar för appen</string>
     <string name="send_report">Skicka rapport</string>

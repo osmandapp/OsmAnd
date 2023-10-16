@@ -168,7 +168,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
 				bld.setTitle(R.string.renderers);
 
-				Map<String, String> renderers = app.getRendererRegistry().getRenderers();
+				Map<String, String> renderers = app.getRendererRegistry().getRenderers(false);
 				List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
 
 				if (!Algorithms.isEmpty(disabledRendererNames)) {

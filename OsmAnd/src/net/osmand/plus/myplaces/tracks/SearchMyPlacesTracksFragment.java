@@ -2,11 +2,16 @@ package net.osmand.plus.myplaces.tracks;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -23,17 +29,25 @@ import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
+import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implements SelectGpxTaskListener,
-		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener {
+		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, SmartFolderUpdateListener, FilterChangedListener, DialogClosedListener {
 
 	public static final String TAG = SearchMyPlacesTracksFragment.class.getSimpleName();
 
@@ -41,6 +55,12 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	private ImageButton actionButton;
 	private View searchContainer;
 	private TextView selectedCountTv;
+	private SmartFolder smartFolder;
+	private DialogButton resetAllButton;
+	private DialogButton saveButton;
+	private View bottomButtonsContainer;
+	private TracksSearchFilter externalFilter;
+	private DialogClosedListener dialogClosedListener;
 
 	@Override
 	protected int getLayoutId() {
@@ -58,6 +78,23 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		});
 	}
 
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		setupBottomMenu(view);
+		return view;
+	}
+
+	@NonNull
+	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
+		if (externalFilter != null) {
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
+		} else {
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+		}
+	}
+
 	@Override
 	protected void updateButtonsState() {
 		AndroidUiHelper.setVisibility(selectionMode ? View.VISIBLE : View.GONE, selectButton, actionButton, selectedCountTv);
@@ -71,6 +108,24 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 			String count = String.valueOf(selectionHelper.getSelectedItems().size());
 			selectedCountTv.setText(count);
+		}
+		AndroidUiHelper.setVisibility(smartFolder == null ? View.GONE : View.VISIBLE, bottomButtonsContainer);
+		if (saveButton != null && smartFolder != null) {
+			boolean filtersChanged = false;
+			TracksSearchFilter searchFilter = (TracksSearchFilter) adapter.getFilter();
+			List<BaseTrackFilter> currentFilters = searchFilter.getAppliedFilters();
+			if (currentFilters.size() != smartFolder.getFilters().size()) {
+				filtersChanged = true;
+			} else {
+				for (BaseTrackFilter folderFilter : smartFolder.getFilters()) {
+					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getFilterType());
+					if (currentFilter == null || !currentFilter.equals(folderFilter)) {
+						filtersChanged = true;
+						break;
+					}
+				}
+			}
+			saveButton.setEnabled(filtersChanged);
 		}
 	}
 
@@ -95,6 +150,14 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				dismiss(true);
 				return false;
 			});
+		}
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		if (dialogClosedListener != null) {
+			dialogClosedListener.onDialogClosed();
 		}
 	}
 
@@ -132,7 +195,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		super.setupToolbar(view);
 
 		selectedCountTv = view.findViewById(R.id.selected_count);
-		selectedCountTv.setTextColor(ContextCompat.getColor(app, R.color.color_white));
+		selectedCountTv.setTextColor(ContextCompat.getColor(app, R.color.card_and_list_background_light));
 
 		searchContainer = view.findViewById(R.id.search_container);
 		selectButton = view.findViewById(R.id.select_all_button);
@@ -149,8 +212,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment,
-						currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 
@@ -237,6 +299,49 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void restoreState(Bundle bundle) {
 	}
 
+	private void setupBottomMenu(View view) {
+		bottomButtonsContainer = view.findViewById(R.id.buttons_container);
+		resetAllButton = view.findViewById(R.id.reset_all_button);
+		resetAllButton.setOnClickListener(v -> {
+			TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+			filter.resetCurrentFilters();
+			filter.filter();
+		});
+
+		saveButton = view.findViewById(R.id.save_button);
+		saveButton.setOnClickListener(v -> {
+			TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+			if (smartFolder != null) {
+				app.getSmartFolderHelper().saveSmartFolder(smartFolder, filter.getCurrentFilters());
+				Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT).show();
+				dismiss();
+			}
+		});
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		setupToolbar(requireView());
+		app.getSelectedGpxHelper().addListener(this);
+		app.getSmartFolderHelper().addUpdateListener(this);
+		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
+		updateContent();
+	}
+
+	@Override
+	public void onSmartFolderSaved(SmartFolder smartFolder) {
+		updateContent();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
+		app.getSmartFolderHelper().removeUpdateListener(this);
+		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
+	}
+
 	@NonNull
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
@@ -244,14 +349,67 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
-	                                boolean selectionMode, boolean usedOnMap) {
+	                                boolean selectionMode, boolean usedOnMap,
+	                                @Nullable SmartFolder smartFolder,
+	                                @Nullable TracksSearchFilter externalFilter,
+	                                @Nullable DialogClosedListener dialogClosedListener) {
+		Fragment foundFragment = manager.findFragmentByTag(TAG);
+		if (foundFragment instanceof SearchMyPlacesTracksFragment) {
+			((SearchMyPlacesTracksFragment) foundFragment).dismiss();
+		}
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
+			fragment.smartFolder = smartFolder;
 			fragment.usedOnMap = usedOnMap;
 			fragment.selectionMode = selectionMode;
+			fragment.externalFilter = externalFilter;
+			fragment.dialogClosedListener = dialogClosedListener;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public void onSmartFolderUpdated(@NonNull SmartFolder smartFolder) {
+		updateButtonsState();
+	}
+
+	@Override
+	public void onSmartFoldersUpdated() {
+		adapter.updateFilteredItems(new ArrayList<>(selectionHelper.getAllItems()));
+		updateButtonsState();
+	}
+
+	@Override
+	public void showFiltersDialog() {
+		FragmentManager manager = getFragmentManager();
+		Filter filter = adapter.getFilter();
+		if (manager != null && filter instanceof TracksSearchFilter) {
+			TracksFilterFragment.Companion.showInstance(manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder);
+		}
+	}
+
+	@Override
+	public void onFilterChanged() {
+		updateButtonsState();
+	}
+
+	@Override
+	public void onDialogClosed() {
+		setupFilterCallback();
+		List<TrackItem> filteredItems = ((TracksSearchFilter) adapter.getFilter()).getFilteredTrackItems();
+		if (filteredItems != null) {
+			updateAdapterWithFilteredItems(filteredItems);
+		}
+	}
+
+	public void setDialogClosedListener(DialogClosedListener dialogClosedListener) {
+		this.dialogClosedListener = dialogClosedListener;
+	}
+
+	@Override
+	public void onSmartFolderCreated(SmartFolder smartFolder) {
+		dismiss();
 	}
 }

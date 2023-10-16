@@ -12,21 +12,22 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
-public class BatteryWidget extends TextInfoWidget {
+public class BatteryWidget extends SimpleWidget {
 
 	private static final long UPDATE_INTERVAL_MILLIS = 1000;
 
 	private long cachedTime;
 
-	public BatteryWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, BATTERY);
+	public BatteryWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, BATTERY, customId, widgetsPanel);
 		setIcons(false);
 		setText(null, null);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		long time = System.currentTimeMillis();
 		if (isUpdateNeeded() || time - cachedTime > UPDATE_INTERVAL_MILLIS) {
 			cachedTime = time;

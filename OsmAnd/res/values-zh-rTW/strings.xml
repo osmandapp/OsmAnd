@@ -5417,11 +5417,21 @@
     <string name="help_article_navigation_routing_train_routing_name">火車路線</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• 滑翔比小工具
+    <string name="release_4_6">• 新增「滑翔比」小工具
 \n
-\n • 新增 ANT+ 溫度小工具
+\n • 新增軌跡的篩選條件與智慧型資料夾
 \n
-\n • 更好地管理大型 GPX 軌跡的記憶體
+\n • 新增頂部與底部小工具面板的列，並支援所有小工具
+\n
+\n • 新增對 ANT+ 溫度小工具的支援
+\n
+\n • 改善大型 GPX 軌跡的記憶體管理
+\n
+\n • 更新了「下載」資料夾中的本機資源管理
+\n
+\n • 新增小工具「可用記憶體」
+\n
+\n • 修復透明狀態列的問題
 \n
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
@@ -5437,4 +5447,39 @@
     <string name="app_mode_hang_gliding">滑翔翼</string>
     <string name="date_of_creation">建立日期</string>
     <string name="filter_screen_title">過濾條件</string>
+    <string name="shared_string_cache">快取</string>
+    <string name="widget_available_ram_desc">顯示分配給 OsmAnd 的可用記憶體。</string>
+    <string name="sort_size_descending">大尺寸優先</string>
+    <string name="delete_map">刪除地圖</string>
+    <string name="standard_maps">標準地圖</string>
+    <string name="shared_string_created">已建立</string>
+    <string name="wikipedia_and_travel_maps">維基百科與旅行地圖</string>
+    <string name="rendering_styles">繪製樣式</string>
+    <string name="sort_country_name_ascending">國家名稱：A – Z</string>
+    <string name="weather_online">線上天氣</string>
+    <string name="shared_string_show_icon">顯示圖示</string>
+    <string name="map_is_up_to_date">%1$s 地圖已為最新。</string>
+    <string name="sort_size_ascending">小尺寸優先</string>
+    <string name="widget_available_ram">可用 RAM</string>
+    <string name="terrain_maps">地形圖</string>
+    <string name="sort_country_name_descending">國家名稱：Z – A</string>
+    <string name="delete_map_description">您確定您想要刪除 %1$s 地圖嗎？</string>
+    <string name="maps_and_resources">地圖與資源</string>
+    <string name="smart_folder_name_present">這樣的 Smart Folder 已存在</string>
+    <string name="smart_folder_saved">已儲存 Smart Folder</string>
+    <string name="add_smart_folder">新增智慧型資料夾</string>
+    <string name="empty_name">空名稱</string>
+    <string name="edit_fiilter">編輯篩選條件</string>
+    <string name="save_as_smart_folder">另存為智慧型資料夾</string>
+    <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
+    <string name="empty_smart_folder_title">沒有相符的軌跡</string>
+    <string name="empty_smart_folder_description">所有相符的軌跡將會自動出現在此</string>
+    <string name="configure_filter">設定篩選條件</string>
+    <string name="no_config_smart_folder_title">未設定</string>
+    <string name="discard_filter_changes">放棄篩選條件變更</string>
+    <string name="shared_string_loading">正在載入</string>
+    <string name="discard_filter_changes_prompt">您確定您想要重設所有篩選條件嗎？</string>
+    <string name="no_config_smart_folder_description">智慧型資料夾允許透過套用的篩選條件對軌跡分組</string>
+    <string name="loading_tracks">正在重新載入軌跡</string>
+    <string name="searching_matching_tracks">搜尋所有相符的軌跡</string>
 </resources>

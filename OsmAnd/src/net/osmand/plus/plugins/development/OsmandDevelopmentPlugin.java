@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
@@ -26,9 +27,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
 import net.osmand.plus.plugins.development.widget.CameraTiltWidget;
 import net.osmand.plus.plugins.development.widget.FPSTextInfoWidget;
+import net.osmand.plus.plugins.development.widget.MemoryInfoWidget;
 import net.osmand.plus.plugins.development.widget.TargetDistanceWidget;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
-import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -40,6 +41,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -49,17 +51,19 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
+	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
 
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_FPS, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_MEMORY, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_CAMERA_TILT, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_CAMERA_DISTANCE, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
@@ -143,21 +147,26 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		MapWidget targetDistanceWidget = createMapWidgetForParams(mapActivity, DEV_TARGET_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(targetDistanceWidget));
+
+		MapWidget memoryWidget = createMapWidgetForParams(mapActivity, DEV_MEMORY);
+		widgetsInfos.add(creator.createWidgetInfo(memoryWidget));
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		switch (widgetType) {
 			case DEV_FPS:
-				return new FPSTextInfoWidget(mapActivity);
+				return new FPSTextInfoWidget(mapActivity, customId, widgetsPanel);
 			case DEV_CAMERA_TILT:
-				return new CameraTiltWidget(mapActivity);
+				return new CameraTiltWidget(mapActivity, customId, widgetsPanel);
 			case DEV_CAMERA_DISTANCE:
-				return new CameraDistanceWidget(mapActivity);
+				return new CameraDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_ZOOM_LEVEL:
-				return new ZoomLevelWidget(mapActivity);
+				return new ZoomLevelWidget(mapActivity, customId, widgetsPanel);
 			case DEV_TARGET_DISTANCE:
-				return new TargetDistanceWidget(mapActivity);
+				return new TargetDistanceWidget(mapActivity, customId, widgetsPanel);
+			case DEV_MEMORY:
+				return new MemoryInfoWidget(mapActivity, customId, widgetsPanel);
 		}
 		return null;
 	}
@@ -189,11 +198,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
-		}
-		OpenPlaceReviewsPlugin oprPlugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
-		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
-			oprPlugin.OPR_USE_DEV_URL.set(false);
-			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
 	}
