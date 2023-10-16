@@ -6,7 +6,7 @@ import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.CITY
 import net.osmand.util.Algorithms
 
-class CityTrackFilter(filterChangedListener: FilterChangedListener) :
+class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(R.string.nearest_cities, CITY, filterChangedListener) {
 
 	override fun isEnabled(): Boolean {
@@ -24,7 +24,7 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 		} else {
 			selectedCities.remove(city)
 		}
-		filterChangedListener.onFilterChanged()
+		filterChangedListener?.onFilterChanged()
 	}
 
 	fun isCitySelected(city: String): Boolean {
@@ -45,11 +45,11 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 			selectedCities.clear()
 			selectedCities.addAll(value.selectedCities)
 			for (city in value.selectedCities) {
-				if (fullCitiesList.contains(city)) {
+				if (!fullCitiesList.contains(city)) {
 					fullCitiesList.add(city)
 				}
 			}
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 

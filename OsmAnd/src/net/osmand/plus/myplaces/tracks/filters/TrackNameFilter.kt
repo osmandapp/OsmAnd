@@ -8,7 +8,7 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.NAME
 import net.osmand.search.core.SearchPhrase
 import net.osmand.util.Algorithms
 
-class TrackNameFilter(filterChangedListener: FilterChangedListener)
+class TrackNameFilter(filterChangedListener: FilterChangedListener?)
 	: BaseTrackFilter(R.string.shared_string_name, NAME, filterChangedListener) {
 	@Expose
 	var value = ""
@@ -17,7 +17,7 @@ class TrackNameFilter(filterChangedListener: FilterChangedListener)
 				field = value
 				updateMatcher()
 			}
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	private fun updateMatcher() {

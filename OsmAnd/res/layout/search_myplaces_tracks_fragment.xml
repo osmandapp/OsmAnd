@@ -87,6 +87,10 @@
 		android:scrollbars="vertical"
 		tools:listitem="@layout/track_list_item" />
 
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/simple_divider_item" />
+
 	<LinearLayout
 		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"

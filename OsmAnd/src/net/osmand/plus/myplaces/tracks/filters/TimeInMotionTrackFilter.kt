@@ -9,7 +9,7 @@ class TimeInMotionTrackFilter(
 	minValue: Float,
 	maxValue: Float,
 	app: OsmandApplication,
-	filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.moving_time, TIME_IN_MOTION, filterChangedListener) {

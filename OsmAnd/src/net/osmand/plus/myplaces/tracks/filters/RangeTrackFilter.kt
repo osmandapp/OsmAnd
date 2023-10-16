@@ -14,7 +14,7 @@ abstract class RangeTrackFilter(
 	val app: OsmandApplication,
 	displayNameId: Int,
 	filterType: FilterType,
-	filterChangedListener: FilterChangedListener)
+	filterChangedListener: FilterChangedListener?)
 	: BaseTrackFilter(displayNameId, filterType, filterChangedListener) {
 
 	@Expose
@@ -43,7 +43,7 @@ abstract class RangeTrackFilter(
 		valueFrom = max(minValue, from)
 		valueFrom = min(valueFrom, valueTo)
 		if (updateListeners) {
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 
@@ -54,7 +54,7 @@ abstract class RangeTrackFilter(
 		}
 		valueTo = max(valueFrom, valueTo)
 		if (updateListeners) {
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 
@@ -68,7 +68,7 @@ abstract class RangeTrackFilter(
 			maxValue = value.maxValue
 			valueFrom = value.valueFrom
 			valueTo = value.valueTo
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 
