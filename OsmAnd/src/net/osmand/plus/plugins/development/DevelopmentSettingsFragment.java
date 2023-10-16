@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.development;
 
 import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
-import static net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,7 +23,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -327,7 +327,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public void onActionConfirmed(int confirmActionId) {
+	public void onActionConfirmed(int actionId) {
 		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
 		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
 

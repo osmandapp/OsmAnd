@@ -1,7 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
-import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -31,15 +32,19 @@ public class BackupStorageCard extends BaseCard {
 	}
 
 	private void setupTrashButton() {
-		View btnTrash = view.findViewById(R.id.trash_button);
-		btnTrash.setOnClickListener(v -> notifyButtonPressed(TRASH_BUTTON_INDEX));
-		setupSelectableBackground(btnTrash);
+		View button = view.findViewById(R.id.trash_button);
+
+		TextView textView = button.findViewById(android.R.id.title);
+		ImageView imageView = button.findViewById(android.R.id.icon);
+
+		textView.setText(R.string.shared_string_trash);
+		imageView.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
+		button.setOnClickListener(v -> notifyButtonPressed(TRASH_BUTTON_INDEX));
+		setupSelectableBackground(button);
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
-		Context ctx = view.getContext();
-		int color = ColorUtilities.getActiveColor(ctx, nightMode);
-		AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(ctx, color, 0.3f));
+		int color = ColorUtilities.getActiveColor(app, nightMode);
+		AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
 	}
-
 }

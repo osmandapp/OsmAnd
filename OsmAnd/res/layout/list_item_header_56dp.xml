@@ -12,10 +12,10 @@
 		style="@style/TitleStyle.Medium"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:layout_gravity="start|center_vertical"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_weight="1"
 		android:gravity="center_vertical"
-		android:layout_gravity="start|center_vertical"
 		android:textColor="?android:textColorPrimary"
 		tools:text="Changes" />
 
@@ -24,9 +24,9 @@
 		style="@style/DescStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
+		android:layout_gravity="end|center_vertical"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:gravity="center_vertical"
-		android:layout_gravity="end|center_vertical"
 		android:textColor="?android:textColorSecondary"
 		android:visibility="gone"
 		tools:text="5" />

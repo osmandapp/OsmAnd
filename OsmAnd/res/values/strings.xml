@@ -10,18 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="cloud_item_restored">%1$s is restored into Cloud.</string>
+    <string name="shared_string_is_deleted">%1$s is deleted.</string>
     <string name="shared_string_delete_item">Delete item</string>
     <string name="delete_trash_item_confirmation_desc">\"%1$s\" will be deleted permanently. Are you sure?\n\nThis action can\'t be undone.</string>
     <string name="shared_string_delete_immediately">Delete immediately</string>
     <string name="restore_from_trash">Restore from trash</string>
-    <string name="are_you_sure_empty_trash_q">Are you sure you want to permanently delete all items in the Trash? This action can\'t be undone.</string>
+    <string name="cloud_trash_clear_confirmation">Are you sure you want to permanently delete all items in the Trash? This action can\'t be undone.</string>
     <string name="delete_all_items">Delete all items</string>
     <string name="shared_string_empty_trash">Empty trash</string>
-    <string name="trash_alert_card_desc">Items in trash will be erased after 30 days.</string>
-    <string name="trash_is_empty_banner_desc">Files removed from OsmAnd Cloud will be available here for 30 days after.</string>
+    <string name="trash_alert_card_desc">Items in trash will be erased after %1$s days.</string>
+    <string name="trash_is_empty_banner_desc">Files removed from OsmAnd Cloud will be available here for %1$s days after.</string>
     <string name="trash_is_empty">Trash is empty</string>
     <string name="shared_string_trash">Trash</string>
-    <string name="shared_string_storage">Storage</string>
     <plurals name="tracks">
         <item quantity="one" formatted="true">%1$d (%2$d track)</item>
         <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>

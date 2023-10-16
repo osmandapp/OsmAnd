@@ -1,12 +1,12 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.backup.BackupHelper.mapItemsForRestore;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DELETE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
@@ -39,7 +39,7 @@ public class CloudTabFragment extends ChangesTabFragment {
 			return changeItems;
 		}
 		Map<String, FileInfo> filesByName = new HashMap<>();
-		Map<RemoteFile, SettingsItem> downloadItems = mapItemsForRestore(info, backup.getSettingsItems());
+		Map<RemoteFile, SettingsItem> downloadItems = BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems());
 		for (Map.Entry<RemoteFile, SettingsItem> entry : downloadItems.entrySet()) {
 			RemoteFile remoteFile = entry.getKey();
 			String key = remoteFile.getTypeNamePath();
@@ -86,7 +86,7 @@ public class CloudTabFragment extends ChangesTabFragment {
 			} else {
 				operation = SYNC_OPERATION_DOWNLOAD;
 			}
-			CloudChangeItem changeItem = createChangeItem(key, operation, fileInfo.localFile, fileInfo.remoteFile);
+			CloudChangeItem changeItem = createChangeItem(operation, fileInfo.localFile, fileInfo.remoteFile);
 			if (changeItem != null) {
 				// FIXME
 				changeItems.add(changeItem);

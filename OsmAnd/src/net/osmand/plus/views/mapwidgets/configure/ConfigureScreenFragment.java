@@ -54,7 +54,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListene
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
-import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -323,7 +323,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onActionConfirmed(int confirmActionId) {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;

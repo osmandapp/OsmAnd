@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
@@ -16,12 +18,30 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:clipToPadding="false"
-		android:orientation="vertical"
-		android:scrollbars="none" />
+		android:layout_height="match_parent">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:orientation="vertical"
+			android:scrollbars="none" />
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="invisible"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false"
+			tools:visibility="visible" />
+
+	</FrameLayout>
 
 </LinearLayout>

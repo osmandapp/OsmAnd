@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
-import static net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +17,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 
 public class ConfigureScreenActionsCard extends MapBaseCard {

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.ChangesUtils;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
@@ -31,8 +30,8 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.List;
 
-public abstract class ChangesTabFragment extends BaseOsmAndFragment
-		implements OnPrepareBackupListener, OnBackupSyncListener {
+public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
+		OnBackupSyncListener {
 
 	protected BackupHelper backupHelper;
 	protected NetworkSettingsHelper settingsHelper;
@@ -173,40 +172,40 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment
 		}
 	}
 
-	protected CloudChangeItem createChangeItem(String key,
-	                                           SyncOperationType operation,
-	                                           LocalFile localFile,
-	                                           RemoteFile remoteFile) {
-		SettingsItem settingsItem = getSettingsItem(tabType == RECENT_CHANGES_LOCAL, localFile, remoteFile);
-		if (settingsItem == null) {
-			return null;
+	@Nullable
+	protected CloudChangeItem createChangeItem(@NonNull SyncOperationType operationType,
+	                                           @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
+		boolean local = tabType == RECENT_CHANGES_LOCAL;
+		SettingsItem settingsItem = getSettingsItem(local, localFile, remoteFile);
+		if (settingsItem != null) {
+			long time = getTime(operationType, localFile, remoteFile);
+
+			CloudChangeItem item = new CloudChangeItem();
+			item.title = BackupUiUtils.getItemName(app, settingsItem);
+			item.summary = localizedSummaryForOperation(operationType, localFile, remoteFile);
+			item.description = BackupUiUtils.generateTimeString(app, item.summary, time);
+			item.time = BackupUiUtils.getTimeString(app, time);
+			item.iconId = BackupUiUtils.getIconId(settingsItem);
+			item.settingsItem = settingsItem;
+			item.operation = operationType;
+			item.localFile = localFile;
+			item.remoteFile = remoteFile;
+			item.fileName = BackupHelper.getItemFileName(settingsItem);
+
+			return item;
 		}
-		long time = getTime(operation, localFile, remoteFile);
-
-		CloudChangeItem changeItem = new CloudChangeItem();
-		changeItem.title = ChangesUtils.getName(app, settingsItem);
-		changeItem.summary = localizedSummaryForOperation(operation, localFile, remoteFile);
-		changeItem.description = ChangesUtils.generateTimeString(app, time, changeItem.summary);
-		changeItem.time = ChangesUtils.getTimeString(app, time);
-		changeItem.iconId = ChangesUtils.getIconId(settingsItem);
-		changeItem.settingsItem = settingsItem;
-		changeItem.operation = operation;
-		changeItem.localFile = localFile;
-		changeItem.remoteFile = remoteFile;
-		changeItem.fileName = BackupHelper.getItemFileName(settingsItem);
-
-		return changeItem;
+		return null;
 	}
 
-	public long getTime(SyncOperationType operation, LocalFile localFile, RemoteFile remoteFile) {
+	private long getTime(@NonNull SyncOperationType operationType, @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
 		long time = 0;
-		if (tabType == RECENT_CHANGES_LOCAL && operation == SYNC_OPERATION_DELETE)
+		if (tabType == RECENT_CHANGES_LOCAL && operationType == SYNC_OPERATION_DELETE)
 			time = remoteFile.getClienttimems();
 		else if (tabType == RECENT_CHANGES_LOCAL)
 			time = localFile.localModifiedTime;
 		else if (tabType == RECENT_CHANGES_CONFLICTS)
 			time = localFile.uploadTime;
-		else if (operation == SYNC_OPERATION_DELETE)
+		else if (operationType == SYNC_OPERATION_DELETE)
 			time = localFile.uploadTime;
 		else {
 			time = remoteFile.getUpdatetimems();
@@ -214,14 +213,14 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment
 		return time;
 	}
 
-	private SettingsItem getSettingsItem(boolean isLocal, LocalFile localFile, RemoteFile remoteFile) {
+	@Nullable
+	private SettingsItem getSettingsItem(boolean local, @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
 		SettingsItem settingsItem;
-		if (isLocal) {
+		if (local) {
 			settingsItem = localFile == null ? remoteFile.item : localFile.item;
 		} else {
 			settingsItem = remoteFile == null ? localFile.item : remoteFile.item;
 		}
 		return settingsItem;
 	}
-
 }

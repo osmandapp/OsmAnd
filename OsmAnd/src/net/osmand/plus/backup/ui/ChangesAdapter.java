@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements OnBackupSyncListener {
 
-	public static final int STATUS_HEADER_TYPE = 0;
+	public static final int BACKUP_STATUS_TYPE = 0;
 	public static final int LIST_HEADER_TYPE = 1;
 	public static final int LIST_ITEM_TYPE = 2;
 	public static final int EMPTY_STATE_TYPE = 3;
@@ -52,7 +52,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 		this.cloudChangeItems = changeItems;
 
 		items.clear();
-		items.add(STATUS_HEADER_TYPE);
+		items.add(BACKUP_STATUS_TYPE);
 
 		if (changeItems.isEmpty()) {
 			if (!app.getBackupHelper().isBackupPreparing()) {
@@ -70,7 +70,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		switch (viewType) {
-			case STATUS_HEADER_TYPE:
+			case BACKUP_STATUS_TYPE:
 				View itemView = inflater.inflate(R.layout.backup_status_header, parent, false);
 				return new StatusViewHolder(itemView, nightMode);
 			case EMPTY_STATE_TYPE:
@@ -90,8 +90,8 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
-		if (Algorithms.objectEquals(object, STATUS_HEADER_TYPE)) {
-			return STATUS_HEADER_TYPE;
+		if (Algorithms.objectEquals(object, BACKUP_STATUS_TYPE)) {
+			return BACKUP_STATUS_TYPE;
 		} else if (Algorithms.objectEquals(object, EMPTY_STATE_TYPE)) {
 			return EMPTY_STATE_TYPE;
 		} else if (Algorithms.objectEquals(object, LIST_HEADER_TYPE)) {
@@ -134,7 +134,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
-		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+		notifyItemChanged(items.indexOf(BACKUP_STATUS_TYPE));
 	}
 
 	@Override

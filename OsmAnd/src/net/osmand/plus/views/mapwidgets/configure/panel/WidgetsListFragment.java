@@ -26,7 +26,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
-import net.osmand.plus.settings.bottomsheets.SimpleConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
@@ -174,7 +174,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@Override
-	public void onActionConfirmed(int confirmActionId) {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;

@@ -42,6 +42,7 @@ import net.osmand.plus.backup.ui.status.BackupStorageCard;
 import net.osmand.plus.backup.ui.status.CloudSyncCard;
 import net.osmand.plus.backup.ui.status.IntroductionCard;
 import net.osmand.plus.backup.ui.status.WarningStatusCard;
+import net.osmand.plus.backup.ui.trash.CloudTrashFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -160,6 +161,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		if (view == null) {
 			return;
 		}
+		FragmentActivity activity = requireActivity();
 		ViewGroup container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
@@ -172,20 +174,20 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 				|| (dialogType == LoginDialogType.SIGN_IN && (backupSaved || !Algorithms.isEmpty(backup.getLocalFiles())));
 
 		if (showIntroductionItem) {
-			IntroductionCard introductionCard = new IntroductionCard(requireActivity(), dialogType);
+			IntroductionCard introductionCard = new IntroductionCard(activity, dialogType);
 			introductionCard.setListener(this);
 			container.addView(introductionCard.build(view.getContext()));
 		} else {
 			if (status.warningTitleRes != -1 || !Algorithms.isEmpty(backup.getError())) {
-				WarningStatusCard warningCard = new WarningStatusCard(requireActivity());
+				WarningStatusCard warningCard = new WarningStatusCard(activity);
 				warningCard.setListener(this);
 				container.addView(warningCard.build(view.getContext()));
 			}
-			syncCard = new CloudSyncCard(requireActivity(), this);
+			syncCard = new CloudSyncCard(activity, this);
 			syncCard.setListener(this);
 			container.addView(syncCard.build(view.getContext()));
 
-			BackupStorageCard storageCard = new BackupStorageCard(requireMyActivity());
+			BackupStorageCard storageCard = new BackupStorageCard(activity);
 			storageCard.setListener(this);
 			container.addView(storageCard.build(view.getContext()));
 		}

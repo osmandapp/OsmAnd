@@ -1,4 +1,4 @@
-package net.osmand.plus.backup.trash.viewholder;
+package net.osmand.plus.backup.ui.trash.viewholder;
 
 import android.view.View;
 import android.widget.TextView;
@@ -7,11 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.backup.ui.trash.TrashGroup;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
-	public TextView title;
+	private TextView title;
 
 	public HeaderViewHolder(@NonNull View itemView) {
 		super(itemView);
@@ -19,4 +20,7 @@ public class HeaderViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.count), false);
 	}
 
+	public void bindView(@NonNull TrashGroup group) {
+		title.setText(group.getName());
+	}
 }
