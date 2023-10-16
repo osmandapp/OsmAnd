@@ -65,15 +65,11 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 	}
 
 	private void createWidgets(@NonNull MapActivity activity) {
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, getWidgetId(WEATHER_TEMPERATURE_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, getWidgetId(WEATHER_AIR_PRESSURE_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET, getWidgetId(WEATHER_WIND_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, getWidgetId(WEATHER_PRECIPITATION_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, getWidgetId(WEATHER_CLOUDS_WIDGET), null));
-	}
-
-	private String getWidgetId(WidgetType widgetType){
-		return widgetType.id + DELIMITER + WIDGET_ID;
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_TEMPERATURE_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_AIR_PRESSURE_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_WIND_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_PRECIPITATION_WIDGET), null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_CLOUDS_WIDGET), null));
 	}
 
 	public void setSelectedDate(@Nullable Date date) {
