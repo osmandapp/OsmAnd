@@ -122,7 +122,7 @@
     <string name="shared_string_hide">Ascunde</string>
     <string name="shared_string_add">Adaugă</string>
     <string name="shared_string_map">Hartă</string>
-    <string name="average_speed">Viteza medie</string>
+    <string name="average_speed">Viteză medie</string>
     <string name="average_altitude">Altitudine medie</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_appearance">Aspect</string>
@@ -159,7 +159,7 @@
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
-    <string name="foot">picior</string>
+    <string name="foot">picioare</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Bine ați venit</string>
     <string name="shared_string_authorization_descr">Vă rugăm să introduceți numărul de telefon Telegram în format internațional</string>
