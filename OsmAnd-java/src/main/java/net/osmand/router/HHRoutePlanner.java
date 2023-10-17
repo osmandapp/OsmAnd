@@ -25,8 +25,8 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.HHRoutingPreparationDB.NetworkDBPoint;
-import net.osmand.router.HHRoutingPreparationDB.NetworkDBSegment;
+import net.osmand.router.HHRoutingDB.NetworkDBPoint;
+import net.osmand.router.HHRoutingDB.NetworkDBSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
@@ -37,11 +37,11 @@ public class HHRoutePlanner {
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	
 	// TODO encapsulate HHRoutingPreparationDB, RoutingContext -> HHRoutingContext
-	private HHRoutingPreparationDB networkDB;
+	private HHRoutingDB networkDB;
 	private RoutingContext ctx;
 	private HHRoutingContext cacheHctx;
 	
-	public HHRoutePlanner(RoutingContext ctx, HHRoutingPreparationDB networkDB) {
+	public HHRoutePlanner(RoutingContext ctx, HHRoutingDB networkDB) {
 		this.ctx = ctx;
 		this.networkDB = networkDB;
 	}
@@ -813,7 +813,7 @@ public class HHRoutePlanner {
 	}
 	
 	
-	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingPreparationDB networkDB, HHRoutingConfig c, HHNetworkRouteRes route, RoutingStats stats) 
+	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingDB networkDB, HHRoutingConfig c, HHNetworkRouteRes route, RoutingStats stats) 
 			throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
 			HHNetworkSegmentRes s = route.segments.get(i);
