@@ -22,7 +22,6 @@ import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
 
 import org.apache.commons.logging.Log;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -39,8 +38,9 @@ public class TimeSlider extends Slider {
 	private final Calendar calendar = getDefaultCalendar();
 	private final boolean twelveHoursFormat = !DateFormat.is24HourFormat(getContext());
 
-	private final int trackTop;
+	private int halfSliderHeight = 0;
 	private final int contentPadding;
+	private boolean isRtl;
 
 	private Calendar currentDate;
 
@@ -63,7 +63,6 @@ public class TimeSlider extends Slider {
 		textPaint.setColor(AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary));
 		textPaint.setLetterSpacing(AndroidUtils.getFloatValueFromRes(context, R.dimen.description_letter_spacing));
 
-		trackTop = calculateTop();
 		contentPadding = getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
@@ -71,9 +70,15 @@ public class TimeSlider extends Slider {
 		this.currentDate = currentDate;
 	}
 
+	public void setRtl(boolean isRtl) {
+		this.isRtl = isRtl;
+	}
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int height = trackTop + contentPadding + AndroidUtils.getTextHeight(textPaint);
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		halfSliderHeight = getMeasuredHeight() / 2 + getTrackHeight() / 2;
+		int height = halfSliderHeight + contentPadding + AndroidUtils.getTextHeight(textPaint);
 		heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
 		setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
 				getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
@@ -86,8 +91,8 @@ public class TimeSlider extends Slider {
 	}
 
 	private void drawLegend(@NonNull Canvas canvas) {
-		int hours = 0;
-		float y = trackTop + contentPadding;
+		int hours = isRtl ? 24 : 0;
+		float y = halfSliderHeight + contentPadding;
 		for (float x : getLegendCoordinates()) {
 			String text = getFormattedHours(calendar, hours, twelveHoursFormat);
 
@@ -96,7 +101,11 @@ public class TimeSlider extends Slider {
 			float yOffset = rect.height() / 2f - ((textPaint.descent() + textPaint.ascent()) / 2);
 
 			canvas.drawText(text, x, y + yOffset, textPaint);
-			hours += 3;
+			if (isRtl) {
+				hours -= 3;
+			} else {
+				hours += 3;
+			}
 		}
 	}
 
@@ -118,20 +127,5 @@ public class TimeSlider extends Slider {
 			coordinates[i] = getTrackSidePadding() + i * interval;
 		}
 		return coordinates;
-	}
-
-	private int calculateTop() {
-		try {
-			Method[] methods = getClass().getSuperclass().getSuperclass().getDeclaredMethods();
-			for (Method method : methods) {
-				if ("calculateTop".equals(method.getName())) {
-					method.setAccessible(true);
-					return (int) method.invoke(this);
-				}
-			}
-		} catch (Exception e) {
-			log.error(e);
-		}
-		return 0;
 	}
 }

@@ -102,7 +102,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		weatherHelper = app.getWeatherHelper();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
-		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis()));
+		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToCurrentHour(System.currentTimeMillis()));
 		selectedDate.setTime(currentDate.getTime());
 
 		if (savedInstanceState != null) {
@@ -190,6 +190,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
 		timeSlider.setStepSize(today ? 1 : 3);
 		timeSlider.setCurrentDate(today ? currentDate : null);
+		timeSlider.setRtl(AndroidUtils.isRTL());
 	}
 
 	private void buildZoomButtons(@NonNull View view) {

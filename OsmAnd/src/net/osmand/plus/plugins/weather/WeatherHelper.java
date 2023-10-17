@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -231,6 +232,15 @@ public class WeatherHelper {
 	public static long roundForecastTimeToHour(long time) {
 		long hour = 60 * 60 * 1000;
 		return (time + hour / 2) / hour * hour;
+	}
+
+	public static long roundForecastTimeToCurrentHour(long time) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date(time));
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTimeInMillis();
 	}
 
 	public static boolean isWeatherSupported(@NonNull OsmandApplication app) {
