@@ -5489,4 +5489,8 @@
     <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
     <string name="loading_tracks">Nyomvonalak újratöltése</string>
     <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d nyomvonal)</item>
+        <item quantity="other">%1$d (%2$d nyomvonal)</item>
+    </plurals>
 </resources>
