@@ -1084,12 +1084,25 @@ public class RouteResultPreparation {
 			return false;
 		}
 
+		boolean straight = false;
 		// set the allowed lane bit
 		for (int i = 0; i < active.disabledLanes.length; i++) {
 			if (i >= active.activeStartIndex && i <= active.activeEndIndex && 
 					active.originalLanes[i] % 2 == 1) {
 				active.disabledLanes[i] |= 1;
+				straight = TurnType.getPrimaryTurn(active.disabledLanes[i]) == TurnType.C;
 			}
+		}
+		TurnType currentTurnType = currentSegment.getTurnType();
+		if (straight && nextSegment.getTurnType().getActiveCommonLaneTurn() == TurnType.C) {
+			TurnType nextTurnType = TurnType.valueOf(nextSegment.getTurnType().getValue(), leftSide);
+			nextTurnType.setExitOut(currentTurnType.getExitOut());
+			nextTurnType.setTurnAngle(currentTurnType.getTurnAngle());
+			nextTurnType.setSkipToSpeak(currentTurnType.isSkipToSpeak());
+			nextTurnType.setLanes(currentTurnType.getLanes());
+			nextTurnType.setPossibleLeftTurn(currentTurnType.isPossibleLeftTurn());
+			nextTurnType.setPossibleRightTurn(currentTurnType.isPossibleRightTurn());
+			currentSegment.setTurnType(nextTurnType);
 		}
 		TurnType currentTurn = currentSegment.getTurnType();
 		currentTurn.setLanes(active.disabledLanes);
@@ -1641,17 +1654,17 @@ public class RouteResultPreparation {
 			}
 
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
-				if (smallTargetVariation || smallStraightVariation) {
+				if ((smallTargetVariation || smallStraightVariation)) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
@@ -1668,7 +1681,7 @@ public class RouteResultPreparation {
 		}
 		return rs;
 	}
-	
+
 	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
 		if (turnLanesPrevSegm != null) {
 			int[] turns = calculateRawTurnLanes(turnLanesPrevSegm, TurnType.C);
