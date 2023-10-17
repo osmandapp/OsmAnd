@@ -31,6 +31,7 @@ import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
+import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -45,7 +46,8 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			target: Fragment?,
 			filter: TracksSearchFilter,
 			trackFiltersContainer: DialogClosedListener,
-			smartFolder: SmartFolder?) {
+			smartFolder: SmartFolder?,
+			currentFolder: TrackFolder?) {
 			manager.findFragmentByTag(TAG)?.let { foundFragment ->
 				(foundFragment as TracksFilterFragment).dialog?.dismiss()
 			}
@@ -55,6 +57,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				fragment.retainInstance = true
 				fragment.dialogClosedListener = trackFiltersContainer
 				fragment.filter = filter
+				fragment.currentFolder = currentFolder
 				fragment.smartFolder = smartFolder
 				fragment.show(manager, TAG)
 			}
@@ -68,6 +71,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	var showButton: DialogButton? = null
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
+	private var currentFolder: TrackFolder? = null
 	private lateinit var dialogClosedListener: DialogClosedListener
 	private lateinit var appBar: AppBarLayout
 
@@ -150,7 +154,8 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 						override fun onDialogClosed() {
 							updateFilters()
 						}
-					})
+					},
+					currentFolder)
 			}
 		}
 		progressBar = view.findViewById(R.id.progress_bar)

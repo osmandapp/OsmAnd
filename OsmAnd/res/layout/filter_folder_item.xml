@@ -46,11 +46,10 @@
 			android:tint="?attr/default_icon_color"
 			tools:srcCompat="@drawable/ic_action_arrow_down" />
 
-
 	</LinearLayout>
 
 	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/variants"
+		android:id="@+id/folders"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

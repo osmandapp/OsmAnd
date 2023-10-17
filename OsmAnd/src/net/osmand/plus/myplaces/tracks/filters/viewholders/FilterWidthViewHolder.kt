@@ -3,17 +3,18 @@ package net.osmand.plus.myplaces.tracks.filters.viewholders
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter
+import net.osmand.plus.myplaces.tracks.filters.WidthTrackFilter
+import net.osmand.plus.routing.cards.RouteLineWidthCard
+import net.osmand.plus.track.fragments.TrackAppearanceFragment
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
 
-class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
+class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
 	private val app: OsmandApplication
 	private val nightMode: Boolean
@@ -24,7 +25,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 	private val titleContainer: View
 	private val divider: View
 	private val explicitIndicator: ImageView
-	private var filter: CityTrackFilter? = null
+	private var filter: WidthTrackFilter? = null
 
 	init {
 		app = itemView.context.applicationContext as OsmandApplication
@@ -34,14 +35,14 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 		divider = itemView.findViewById(R.id.divider)
 		explicitIndicator = itemView.findViewById(R.id.explicit_indicator)
 		titleContainer = itemView.findViewById(R.id.title_container)
-		titleContainer.setOnClickListener { v: View? ->
+		titleContainer.setOnClickListener { _: View? ->
 			expanded = !expanded
 			updateExpandState()
 		}
 		recycler = itemView.findViewById(R.id.variants)
 	}
 
-	fun bindView(filter: CityTrackFilter) {
+	fun bindView(filter: WidthTrackFilter) {
 		this.filter = filter
 		title.setText(filter.displayNameId)
 		updateExpandState()
@@ -57,58 +58,63 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 
 	private fun updateValues() {
 		filter?.let {
-			val adapter = CityAdapter()
+			val adapter = WidthAdapter()
 			adapter.items.clear()
-			adapter.items.addAll(it.fullCitiesList)
+			adapter.items.addAll(it.fullWidthList.keys)
 			recycler.adapter = adapter
 			recycler.layoutManager = LinearLayoutManager(app)
 			recycler.itemAnimator = null
-			selectedValue.text = "${it.selectedCities.size}"
-			AndroidUiHelper.updateVisibility(selectedValue, it.selectedCities.size > 0)
+			updateSelectedValue(it)
 		}
 	}
 
-	inner class CityAdapter : RecyclerView.Adapter<CityViewHolder>() {
+	private fun updateSelectedValue(it: WidthTrackFilter): Boolean {
+		selectedValue.text = "${it.selectedWidths.size}"
+		return AndroidUiHelper.updateVisibility(selectedValue, it.selectedWidths.size > 0)
+	}
+
+	inner class WidthAdapter : RecyclerView.Adapter<FilterVariantViewHolder>() {
 		var items = ArrayList<String>()
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterVariantViewHolder {
 			val inflater = UiUtilities.getInflater(parent.context, nightMode)
 			val view =
 				inflater.inflate(R.layout.track_filter_checkbox_item, parent, false)
-			return CityViewHolder(view)
+			return FilterVariantViewHolder(view, nightMode)
 		}
 
 		override fun getItemCount(): Int {
 			return items.size
 		}
 
-		override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-			val cityName = items[position]
-			holder.title.text = cityName
-			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
-			filter?.let { cityFilter ->
-				holder.itemView.setOnClickListener {
-					cityFilter.setCitySelected(cityName, !cityFilter.isCitySelected(cityName))
-					this.notifyItemChanged(position)
-					updateValues()
+		override fun onBindViewHolder(holder: FilterVariantViewHolder, position: Int) {
+			val widthName = items[position]
+			var iconColor = R.color.track_filter_width_standard
+			holder.title.text = when (widthName) {
+				RouteLineWidthCard.WidthMode.THICK.widthKey -> app.getString(R.string.rendering_value_bold_name)
+				RouteLineWidthCard.WidthMode.THIN.widthKey -> app.getString(R.string.rendering_value_thin_name)
+				RouteLineWidthCard.WidthMode.DEFAULT.widthKey -> app.getString(R.string.rendering_value_fine_name)
+				else -> {
+					iconColor = R.color.track_filter_width_custom
+					"${app.getString(R.string.shared_string_custom)}: $widthName"
 				}
-				holder.checkBox.isChecked = cityFilter.isCitySelected(cityName)
 			}
-		}
-	}
-
-	inner class CityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		var title: TextViewEx
-		var checkBox: AppCompatCheckBox
-		var divider: View
-
-		init {
-			title = view.findViewById(R.id.title)
-			checkBox = view.findViewById(R.id.compound_button)
-			divider = view.findViewById(R.id.divider)
-			UiUtilities.setupCompoundButton(
-				nightMode,
-				net.osmand.plus.utils.ColorUtilities.getActiveColor(app, nightMode),
-				checkBox)
+			val appearanceDrawable =
+				TrackAppearanceFragment.getTrackIcon(app, widthName, false, app.getColor(iconColor))
+			val marginTrackIconH =
+				app.resources.getDimensionPixelSize(R.dimen.standard_icon_size)
+			UiUtilities.setMargins(holder.icon, marginTrackIconH, 0, marginTrackIconH, 0)
+			holder.icon.setImageDrawable(appearanceDrawable)
+			AndroidUiHelper.updateVisibility(holder.icon, true)
+			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
+			filter?.let { widthFilter ->
+				holder.itemView.setOnClickListener {
+					widthFilter.setWidthSelected(widthName, !widthFilter.isWidthSelected(widthName))
+					this.notifyItemChanged(position)
+					updateSelectedValue(widthFilter)
+				}
+				holder.checkBox.isChecked = widthFilter.isWidthSelected(widthName)
+				holder.count.text = widthFilter.fullWidthList[widthName].toString()
+			}
 		}
 	}
 }

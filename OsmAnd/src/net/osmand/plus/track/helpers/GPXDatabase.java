@@ -24,6 +24,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -99,6 +100,10 @@ public class GPXDatabase {
 	private static final String GPX_COL_START_LAT = "startLat";
 	private static final String GPX_COL_START_LON = "startLon";
 	private static final String GPX_COL_NEAREST_CITY_NAME = "nearestCityName";
+
+	private static final String TMP_NAME_COLUMN_COUNT = "itemsCount";
+
+
 
 	public static final long CHECKED_UNKNOWN_TRACK_CREATION_TIME = 1;
 
@@ -234,6 +239,10 @@ public class GPXDatabase {
 			GPX_COL_NEAREST_CITY_NAME + " FROM " + GPX_TABLE_NAME +
 			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL";
 
+	private static final String GPX_TRACK_COLORS_LIST = "SELECT DISTINCT " +
+			GPX_COL_COLOR + " FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_COLOR + " <> ''";
+
 	private static final String GPX_MIN_CREATE_DATE = "SELECT " +
 			"MIN(" + GPX_COL_FILE_CREATION_TIME + ") " +
 			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME +
@@ -242,6 +251,29 @@ public class GPXDatabase {
 	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
 			"MAX(" + GPX_COL_TOTAL_DISTANCE + ") " +
 			" FROM " + GPX_TABLE_NAME;
+
+	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
+			GPX_COL_DIR + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" group by " + GPX_COL_DIR;
+
+	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
+			GPX_COL_NEAREST_CITY_NAME + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL" +
+			" group by " + GPX_COL_NEAREST_CITY_NAME;
+
+	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT " +
+			GPX_COL_COLOR + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_COLOR + " <> ''" +
+			" group by " + GPX_COL_COLOR;
+
+	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT " +
+			GPX_COL_WIDTH + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_WIDTH + " <> ''" +
+			" group by " + GPX_COL_WIDTH;
 
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
 			GPX_TABLE_NAME + " SET " +
@@ -1267,17 +1299,33 @@ public class GPXDatabase {
 		return maxLength;
 	}
 
-	public List<String> getNearestCityList() {
-		ArrayList<String> nearestCities = new ArrayList<>();
+	public Map<String, Integer> getTrackFolders() {
+		return getDistinctItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
+	}
+
+	public Map<String, Integer> getNearestCityCollection() {
+		return getDistinctItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
+	}
+
+	public Map<String, Integer> getTrackColorsCollection() {
+		return getDistinctItemsCollection(GPX_TRACK_COLORS_COLLECTION);
+	}
+
+	public Map<String, Integer> getTrackWidthCollection() {
+		return getDistinctItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
+	}
+
+	public Map<String, Integer> getDistinctItemsCollection(String dataQuery) {
+		HashMap<String, Integer> folderCollection = new HashMap<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GPX_NEAREST_CITY_LIST, null);
+				SQLiteCursor query = db.rawQuery(dataQuery, null);
 				if (query != null) {
 					try {
 						if (query.moveToFirst()) {
 							do {
-								nearestCities.add(query.getString(0));
+								folderCollection.put(query.getString(0), query.getInt(1));
 							} while (query.moveToNext());
 						}
 					} finally {
@@ -1288,7 +1336,7 @@ public class GPXDatabase {
 				db.close();
 			}
 		}
-		return nearestCities;
+		return folderCollection;
 	}
 
 	@NonNull

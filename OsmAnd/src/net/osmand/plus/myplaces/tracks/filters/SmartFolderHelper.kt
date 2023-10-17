@@ -17,6 +17,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	private val smartFolderCollection: MutableList<SmartFolder> = ArrayList()
 	private val allAvailableTrackItems = HashSet<TrackItem>()
+	private val allAvailableFolders = HashSet<String>()
 	private val updateListeners = ArrayList<SmartFolderUpdateListener>()
 
 	companion object {
@@ -142,6 +143,18 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	fun isSmartFolderPresent(name: String): Boolean {
 		return getSmartFolderByName(name) != null
+	}
+
+	fun addAvailableTrackFolder(folderName: String) {
+		if (!Algorithms.isEmpty(folderName)) {
+			allAvailableFolders.add(folderName)
+		}
+	}
+
+	fun getAvailableFolders(): Set<String> {
+		val items = HashSet<String>()
+		items.addAll(allAvailableFolders)
+		return items
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {

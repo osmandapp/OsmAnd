@@ -16,7 +16,7 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 	@Expose
 	val selectedCities = ArrayList<String>()
 
-	var fullCitiesList: MutableList<String> = ArrayList()
+	var fullCitiesList: MutableSet<String> = HashSet()
 
 	fun setCitySelected(city: String, selected: Boolean) {
 		if (selected) {

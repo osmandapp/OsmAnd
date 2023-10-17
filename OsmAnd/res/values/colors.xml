@@ -249,6 +249,8 @@
 
 	<color name="gpx_track">#B4B319FF</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
+	<color name="track_filter_width_standard">#ff0000</color>
+	<color name="track_filter_width_custom">#ff4785CD</color>
 
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>

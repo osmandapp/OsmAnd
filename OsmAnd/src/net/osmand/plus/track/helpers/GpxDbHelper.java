@@ -19,6 +19,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -215,8 +216,16 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getItems();
 	}
 
-	public List<String> getNearestCityList() {
-		return database.getNearestCityList();
+	public Set<String> getNearestCityList() {
+		return database.getNearestCityCollection().keySet();
+	}
+
+	public Map<String, Integer> getTrackColorsList() {
+		return database.getTrackColorsCollection();
+	}
+
+	public Map<String, Integer> getTrackWidthList() {
+		return database.getTrackWidthCollection();
 	}
 
 	public long getTracksMinCreateDate() {
@@ -225,6 +234,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public double getTracksMaxDuration() {
 		return database.getTracksMaxDuration();
+	}
+
+	public Map<String, Integer> getTrackFolders() {
+		return database.getTrackFolders();
 	}
 
 	@Nullable

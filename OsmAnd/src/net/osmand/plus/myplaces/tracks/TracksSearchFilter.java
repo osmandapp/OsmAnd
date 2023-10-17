@@ -10,11 +10,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.ColorTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateCreationTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
 import net.osmand.plus.myplaces.tracks.filters.FilterType;
 import net.osmand.plus.myplaces.tracks.filters.LengthTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.TrackFolderFilter;
 import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
+import net.osmand.plus.myplaces.tracks.filters.WidthTrackFilter;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -28,12 +32,19 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	private List<BaseTrackFilter> currentFilters = new ArrayList<>();
 	private List<FilterChangedListener> filterChangedListeners = new ArrayList<>();
 	private List<TrackItem> filteredTrackItems;
+	@Nullable
+	private TrackFolder currentFolder;
 
 	private OsmandApplication app;
 
 	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems) {
+		this(app, trackItems, null);
+	}
+
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable TrackFolder currentFolder) {
 		this.app = app;
 		this.trackItems = trackItems;
+		this.currentFolder = currentFolder;
 		initFilters(app);
 	}
 
@@ -56,6 +67,20 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		if (cityFilter != null) {
 			cityFilter.setFullCitiesList(app.getGpxDbHelper().getNearestCityList());
 		}
+		ColorTrackFilter colorsFilter = (ColorTrackFilter) getFilterByType(FilterType.COLOR);
+		if (colorsFilter != null) {
+			colorsFilter.setFullColorsList(app.getGpxDbHelper().getTrackColorsList());
+		}
+		WidthTrackFilter widthFilter = (WidthTrackFilter) getFilterByType(FilterType.WIDTH);
+		if (widthFilter != null) {
+			widthFilter.setFullWidthList(app.getGpxDbHelper().getTrackWidthList());
+		}
+		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
+		if (folderFilter != null) {
+			folderFilter.setFullFoldersList(app.getGpxDbHelper().getTrackFolders());
+			folderFilter.setCurrentFolder(currentFolder);
+		}
+
 	}
 
 	public void setCallback(@Nullable CallbackWithObject<List<TrackItem>> callback) {
@@ -207,6 +232,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	public List<TrackItem> getAllItems() {
 		return trackItems;
+	}
+
+	public void setCurrentFolder(TrackFolder currentFolder) {
+		this.currentFolder = currentFolder;
 	}
 }
 
