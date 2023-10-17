@@ -5482,4 +5482,9 @@
     <string name="no_config_smart_folder_description">Les dossiers intelligents regroupent les traces grâce aux filtres</string>
     <string name="loading_tracks">Rechargement des traces</string>
     <string name="searching_matching_tracks">Rechercher tous les traces correspondantes</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d trace)</item>
+        <item quantity="many">%1$d (%2$d traces)</item>
+        <item quantity="other">%1$d (%2$d traces)</item>
+    </plurals>
 </resources>
