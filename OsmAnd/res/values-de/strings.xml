@@ -5490,4 +5490,13 @@
     <string name="no_config_smart_folder_title">Nicht konfiguriert</string>
     <string name="discard_filter_changes">Filteränderungen verwerfen</string>
     <string name="discard_filter_changes_prompt">Sind Sie sicher, dass Sie alle Filter zurücksetzen möchten\?</string>
+    <string name="empty_smart_folder_title">Keine übereinstimmenden Tracks</string>
+    <string name="empty_smart_folder_description">Alle übereinstimmenden Tracks werden automatisch hier angezeigt</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d Track)</item>
+        <item quantity="other">%1$d (%2$d Tracks)</item>
+    </plurals>
+    <string name="no_config_smart_folder_description">Intelligente Ordner ermöglichen das Gruppieren von Strecken anhand angewendeter Filter</string>
+    <string name="loading_tracks">Tracks neu laden</string>
+    <string name="searching_matching_tracks">Suche alle übereinstimmenden Tracks</string>
 </resources>
