@@ -554,7 +554,7 @@ public class HHRoutePlanner {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
-				long pntId = calculateRoutePointInternalId(o);
+				long pntId = calcUniDirRoutePointInternalId(o);
 				if (set.add(pntId)) {
 					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setCostParentRt(reverse, o.getDistanceFromStart() + distanceToEnd(c, reverse, pnt, e), null,
@@ -959,7 +959,7 @@ public class HHRoutePlanner {
 		return (id << ROUTE_POINTS) + (pntId << 1) + (positive > 0 ? 1 : 0);
 	}
 
-	static long calculateRoutePointInternalId(RouteSegment segm) {
+	static long calcUniDirRoutePointInternalId(RouteSegment segm) {
 		if (segm.getSegmentStart() < segm.getSegmentEnd()) {
 			return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), segm.getSegmentEnd());
 		} else {

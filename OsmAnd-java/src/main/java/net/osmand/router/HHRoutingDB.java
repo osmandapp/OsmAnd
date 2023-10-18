@@ -38,23 +38,18 @@ public class HHRoutingDB {
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
 		if (!compactDB) {
-			st.execute(
-					"CREATE TABLE IF NOT EXISTS points(idPoint, ind, chInd, roadId, start, end, sx31, sy31, ex31, ey31,  PRIMARY key (idPoint))"); // ind
-																																					// unique
-			st.execute(
-					"CREATE TABLE IF NOT EXISTS clusters(idPoint, indPoint, clusterInd, PRIMARY key (indPoint, clusterInd))");
+			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, chInd, roadId, start, end, sx31, sy31, ex31, ey31) PRIMARY KEY(idPoint)");
+			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
+			
 			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut)");
+			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint)");
 			st.execute("CREATE INDEX IF NOT EXISTS segmentsPntInd on segments(idPoint)");
 			st.execute("CREATE INDEX IF NOT EXISTS segmentsConnPntInd on segments(idConnPoint)");
+			
 			st.execute("CREATE TABLE IF NOT EXISTS geometry(idPoint, idConnPoint, geometry, shortcut)");
-
-			st.execute(
-					"CREATE TABLE IF NOT EXISTS routeRegions(id, name, filePointer, size, filename, left, right, top, bottom, PRIMARY key (id))");
-			st.execute("CREATE TABLE IF NOT EXISTS routeRegionPoints(id, pntId)");
-			st.execute("CREATE INDEX IF NOT EXISTS routeRegionPointsIndex on routeRegionPoints(id)");
+			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS geometryMainInd on geometry(idPoint,idConnPoint,shortcut)");
+			
 			st.execute("CREATE TABLE IF NOT EXISTS midpoints(ind, maxMidDepth, proc, PRIMARY key (ind))"); // ind unique
-
-			st.execute("CREATE INDEX IF NOT EXISTS geometryMainInd on geometry(idPoint,idConnPoint,shortcut)");
 
 			loadGeometry = conn.prepareStatement("SELECT geometry, shortcut FROM geometry WHERE idPoint = ? AND idConnPoint = ? ");
 			loadSegmentEnd = conn.prepareStatement("SELECT idPoint, idConnPoint, dist, shortcut from segments where idPoint = ? ");
@@ -90,26 +85,6 @@ public class HHRoutingDB {
 	}
 	
 
-	public int getMaxClusterId() throws SQLException {
-		Statement s = conn.createStatement();
-		ResultSet rs = s.executeQuery("select max(clusterInd) from clusters");
-		if (rs.next()) {
-			return rs.getInt(1) + 1;
-		}
-		rs.close();
-		s.close();
-		return 0;
-	}
-	
-	public void loadNetworkPoints(TLongObjectHashMap<Integer> networkPointsCluster) throws SQLException {
-		Statement s = conn.createStatement();
-		ResultSet rs = s.executeQuery("SELECT idPoint, ind FROM points ");
-		while(rs.next()) {
-			networkPointsCluster.put(rs.getLong(1), rs.getInt(2));
-		}
-		rs.close();
-		s.close();
-	}
 	
 	public void loadMidPointsIndex(TLongObjectHashMap<NetworkDBPoint> pntsMap, Collection<NetworkDBPoint> pointsList, boolean update) throws SQLException {
 		Statement s = conn.createStatement();
