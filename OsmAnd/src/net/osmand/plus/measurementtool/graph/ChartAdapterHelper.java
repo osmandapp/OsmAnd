@@ -86,7 +86,7 @@ public class ChartAdapterHelper {
 		for (BaseChartAdapter adapter : otherGraphAdapters) {
 			if (adapter.getChart() != null) {
 				if (adapter.getChart() instanceof BarChart) {
-					// maybe we should find min and max axis from all charters
+					// maybe we should find min and max axis from all charts
 					BarChart barChart = (BarChart) adapter.getChart();
 					barChart.getAxisRight().setAxisMinimum(mainChart.getXChartMin());
 					barChart.getAxisRight().setAxisMaximum(mainChart.getXChartMax());
