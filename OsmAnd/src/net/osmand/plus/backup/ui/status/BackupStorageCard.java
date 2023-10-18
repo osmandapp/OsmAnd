@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -34,13 +36,18 @@ public class BackupStorageCard extends BaseCard {
 	private void setupTrashButton() {
 		View button = view.findViewById(R.id.trash_button);
 
-		TextView textView = button.findViewById(android.R.id.title);
-		ImageView imageView = button.findViewById(android.R.id.icon);
+		TextView title = button.findViewById(R.id.title);
+		ImageView icon = button.findViewById(R.id.icon);
+		ImageView proIcon = view.findViewById(R.id.pro_icon);
 
-		textView.setText(R.string.shared_string_trash);
-		imageView.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
+		title.setText(R.string.shared_string_trash);
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
+		proIcon.setImageDrawable(getIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day));
+
 		button.setOnClickListener(v -> notifyButtonPressed(TRASH_BUTTON_INDEX));
+
 		setupSelectableBackground(button);
+		AndroidUiHelper.updateVisibility(proIcon, !InAppPurchaseHelper.isOsmAndProAvailable(app));
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {

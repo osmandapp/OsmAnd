@@ -123,7 +123,7 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 		if (preparing) {
 			items.add(BACKUP_STATUS_TYPE);
 		}
-		Map<Long, TrashGroup> groups = controller.collectTrashGroups();
+		Map<String, TrashGroup> groups = controller.collectTrashGroups();
 		if (Algorithms.isEmpty(groups)) {
 			if (!preparing) {
 				items.add(EMPTY_BANNER_TYPE);

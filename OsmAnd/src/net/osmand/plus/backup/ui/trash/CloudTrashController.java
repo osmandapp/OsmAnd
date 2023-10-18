@@ -27,12 +27,15 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class CloudTrashController {
 
@@ -40,7 +43,7 @@ public class CloudTrashController {
 
 	public static final int CONFIRM_EMPTY_TRASH_ID = 1;
 	public static final int DAYS_FOR_TRASH_CLEARING = 30;
-	public static final String GROUP_DATE_PATTERN = "LLLL yyyy";
+	private final DateFormat GROUP_DATE_FORMAT = new SimpleDateFormat("LLLL yyyy", Locale.getDefault());
 
 	private final OsmandApplication app;
 	private final BackupHelper backupHelper;
@@ -55,22 +58,24 @@ public class CloudTrashController {
 	}
 
 	@NonNull
-	public Map<Long, TrashGroup> collectTrashGroups() {
-		Map<Long, TrashGroup> groups = new TreeMap<>();
+	public Map<String, TrashGroup> collectTrashGroups() {
+		Map<String, TrashGroup> groups = new LinkedHashMap<>();
 
 		List<TrashItem> items = collectTrashItems();
 		if (!Algorithms.isEmpty(items)) {
 			Calendar calendar = Calendar.getInstance();
-			Collections.sort(items, (i1, i2) -> Long.compare(i1.getTime(), i2.getTime()));
+			Collections.sort(items, (i1, i2) -> -Long.compare(i1.getTime(), i2.getTime()));
 
 			for (TrashItem item : items) {
 				updateCalendarTime(calendar, item);
 
 				long time = calendar.getTimeInMillis();
-				TrashGroup group = groups.get(time);
+				String name = Algorithms.capitalizeFirstLetter(GROUP_DATE_FORMAT.format(time));
+
+				TrashGroup group = groups.get(name);
 				if (group == null) {
-					group = new TrashGroup(time);
-					groups.put(time, group);
+					group = new TrashGroup(name);
+					groups.put(name, group);
 				}
 				group.addItem(item);
 			}
@@ -137,6 +142,10 @@ public class CloudTrashController {
 	}
 
 	public void restoreItem(@NonNull TrashItem item) {
+		if (item.getSettingsItem() == null) {
+			log.error("Failed to restore item: " + item.oldFile.getName() + ", SettingsItem is null");
+			return;
+		}
 		if (item.isLocalDeletion()) {
 			settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, UNIQUE, SYNC_OPERATION_DOWNLOAD);
 		} else {
