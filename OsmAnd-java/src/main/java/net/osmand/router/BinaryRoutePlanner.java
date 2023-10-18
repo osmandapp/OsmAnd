@@ -451,7 +451,7 @@ public class BinaryRoutePlanner {
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
  			if (alreadyVisited) {
- 				// 1.6 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
+ 				// 1.4 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
  				// Create tests STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
@@ -491,7 +491,7 @@ public class BinaryRoutePlanner {
 			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 
-			// 1.7 TODO test that routing time is different with on & off!
+			// 1.5 TODO test that routing time is different with on & off!
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
 //			if(nextCurrentSegment != null) { // currentSegment.distanceFromStart - startSegment.distanceFromStart > 100
