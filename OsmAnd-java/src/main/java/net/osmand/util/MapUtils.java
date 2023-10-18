@@ -609,7 +609,7 @@ public class MapUtils {
 
 
 	// 14 precision, gives 10x speedup, 0.02% error
-	private static final int PRECISION_ZOOM = 14;
+	public static int PRECISION_ZOOM = 14;
 	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
 	private static double getTileWidth(int x31, int y31) {
 		int tileX = (x31 >> (31 - PRECISION_ZOOM));
