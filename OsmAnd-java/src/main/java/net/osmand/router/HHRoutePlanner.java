@@ -317,7 +317,7 @@ public class HHRoutePlanner {
 		System.out.println(c.toString(start, end));
 		System.out.printf("Calculate turns...");
 		if (c.ROUTE_ALL_SEGMENTS && route.detailed != null) {
-			route.detailed = new RouteResultPreparation().prepareResult(ctx, route.detailed, false);
+			route.detailed = new RouteResultPreparation().prepareResult(ctx, route.detailed);
 		}
 		System.out.printf("%.2f ms\n", (System.nanoTime() - time) / 1e6);
 //			RouteResultPreparation.printResults(ctx, start, end, route.detailed);
@@ -479,7 +479,7 @@ public class HHRoutePlanner {
 		long time = System.nanoTime();
 		HHRoutingContext hctx = new HHRoutingContext();
 		System.out.print("Loading points... ");
-		hctx.pointsById = networkDB.getNetworkPoints();
+		hctx.pointsById = networkDB.loadNetworkPoints();
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<NetworkDBPoint>();
 		stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
@@ -536,16 +536,8 @@ public class HHRoutePlanner {
 		ctx.config.heuristicCoefficient = 0; // dijkstra
 		ctx.unloadAllData(); // needed for proper multidijsktra work
 		ctx.calculationProgress = new RouteCalculationProgress();
-		ctx.startX = ctx.startY = ctx.targetX = ctx.targetY = 0; 
-		if (reverse) {
-			ctx.targetX = s.getRoad().getPoint31XTile(s.getSegmentStart(), s.getSegmentEnd());
-			ctx.targetY = s.getRoad().getPoint31YTile(s.getSegmentStart(), s.getSegmentEnd());
-		} else {
-			ctx.startX = s.getRoad().getPoint31XTile(s.getSegmentStart(), s.getSegmentEnd());
-			ctx.startY = s.getRoad().getPoint31YTile(s.getSegmentStart(), s.getSegmentEnd());
-		}
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) new BinaryRoutePlanner().searchRouteInternal(ctx,
-				reverse ? null : s, reverse ? s : null, null, hctx.boundaries);
+				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		System.out.println(ctx.calculationProgress.getInfo(null));		
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
@@ -799,12 +791,8 @@ public class HHRoutePlanner {
 //		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
-		ctx.startX = start.getRoad().getPoint31XTile(start.getSegmentStart(), start.getSegmentEnd());
-		ctx.startY = start.getRoad().getPoint31YTile(start.getSegmentStart(), start.getSegmentEnd());
-		ctx.targetX = end.getRoad().getPoint31XTile(end.getSegmentStart(), end.getSegmentEnd());
-		ctx.targetY = end.getRoad().getPoint31YTile(end.getSegmentStart(), end.getSegmentEnd());
 		// TODO use cache boundaries to speed up
-		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null, null);
+		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, f);
 		return res;
 	}
@@ -927,11 +915,16 @@ public class HHRoutePlanner {
 	public static RouteSegmentPoint loadPoint(RoutingContext ctx, NetworkDBPoint pnt) {
 		RouteSegment s;
 		s = ctx.loadRouteSegment(pnt.startX, pnt.startY, ctx.config.memoryLimitation);
-		while (s != null && (s.getRoad().getId() != pnt.roadId || s.getSegmentStart() != pnt.start
-				|| s.getSegmentEnd() != pnt.end)) {
+		while (s != null) {
+			if(s.getRoad().getId() == pnt.roadId&& s.getSegmentStart() == pnt.start) {
+				if (s.getSegmentEnd() != pnt.end) {
+					s = s.initRouteSegment(!s.isPositive());
+				}
+				break;
+			}
 			s = s.getNext();
 		}
-		if (s == null) {
+		if (s == null || s.getSegmentStart() != pnt.start || s.getSegmentEnd() != pnt.end || s.getRoad().getId() != pnt.roadId) {
 			throw new IllegalStateException("Error on segment " + pnt.roadId / 64);
 		}
 		return new RouteSegmentPoint(s.getRoad(), s.getSegmentStart(), s.getSegmentEnd(), 0);

@@ -54,6 +54,8 @@ public class RoutingConfiguration {
 	
 	// 1.4 Used to calculate route in movement
 	public Double initialDirection;
+	public double PENALTY_FOR_REVERSE_DIRECTION = 500; // -1 reverse is forbidden
+
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;

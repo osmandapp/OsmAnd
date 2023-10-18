@@ -167,9 +167,8 @@ public class RoutePlannerFrontEnd {
 					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
 							r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j));
 					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
-					if (road == null || currentsDistSquare < road.distSquare) {
+					if (road == null || currentsDistSquare < road.distToProj) {
 						RouteDataObject ro = new RouteDataObject(r);
-						
 						road = new RouteSegmentPoint(ro, j - 1, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
@@ -179,7 +178,7 @@ public class RoutePlannerFrontEnd {
 					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
-							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
+							road.distToProj = (road.distToProj + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);
 							list.add(road);
 						}
@@ -194,7 +193,7 @@ public class RoutePlannerFrontEnd {
 
 			@Override
 			public int compare(RouteSegmentPoint o1, RouteSegmentPoint o2) {
-				return Double.compare(o1.distSquare, o2.distSquare);
+				return Double.compare(o1.distToProj, o2.distToProj);
 			}
 		});
 		if (ctx.calculationProgress != null) {
@@ -204,7 +203,7 @@ public class RoutePlannerFrontEnd {
 			RouteSegmentPoint ps = null;
 			if (ctx.publicTransport) {
 				for (RouteSegmentPoint p : list) {
-					if (transportStop && p.distSquare > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
+					if (transportStop && p.distToProj > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
 						break;
 					}
 					boolean platform = p.road.platform();
@@ -564,7 +563,7 @@ public class RoutePlannerFrontEnd {
 		strPnt.routeToTarget.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		try {
-			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget, false);
+			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget);
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -950,9 +949,12 @@ public class RoutePlannerFrontEnd {
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
-			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd, null);
+			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, recalculationEnd != null ? recalculationEnd : end, null);
+			RouteResultPreparation rrp = new RouteResultPreparation();
 			// 4. Route is found : collect all segments and prepare result
-			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
+			List<RouteSegmentResult> result  = rrp.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
+			addPrecalculatedToResult(recalculationEnd, result);
+			return rrp.prepareResult(ctx, result);
 		}
 	}
 
@@ -1030,6 +1032,12 @@ public class RoutePlannerFrontEnd {
 		if (TRACE_ROUTING) {
 			log.info("RecalculationEnd result!");
 		}
+		addPrecalculatedToResult(recalculationEnd, result);
+		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
+		return new RouteResultPreparation().prepareResult(ctx, result);
+	}
+
+	private void addPrecalculatedToResult(RouteSegment recalculationEnd, List<RouteSegmentResult> result) {
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
@@ -1048,8 +1056,6 @@ public class RoutePlannerFrontEnd {
 				current = pr;
 			}
 		}
-		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
-		return new RouteResultPreparation().prepareResult(ctx, result, recalculationEnd != null);
 	}
 
 	private boolean hasSegment(List<RouteSegmentResult> result, RouteSegment current) {

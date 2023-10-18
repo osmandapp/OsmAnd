@@ -138,7 +138,15 @@ public class HHRoutingDB {
 		ps.executeBatch();
 	}
 	
-	public TLongObjectHashMap<NetworkDBPoint> getNetworkPoints() throws SQLException {
+	public TLongObjectHashMap<NetworkDBPoint> loadNetworkPoints() throws SQLException {
+		return loadNetworkPoints(true);
+	}
+	
+	public TLongObjectHashMap<NetworkDBPoint> loadNetworkPointsByGeoId() throws SQLException {
+		return loadNetworkPoints(false);
+	}
+	
+	private TLongObjectHashMap<NetworkDBPoint> loadNetworkPoints(boolean byId) throws SQLException {
 		Statement st = conn.createStatement();
 		String pntGeoIdCol = compactDB ? "pointGeoId, id": "pointGeoId, idPoint";
 		ResultSet rs = st.executeQuery("SELECT "+pntGeoIdCol+", chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
@@ -158,7 +166,7 @@ public class HHRoutingDB {
 			pnt.endX = rs.getInt(p++);
 			pnt.endY = rs.getInt(p++);
 //			mp.put(byGeoId ? pnt.pntGeoId : pnt.index, pnt);
-			mp.put(pnt.index, pnt);
+			mp.put(byId ? pnt.index : pnt.pntGeoId, pnt);
 			long rpid = HHRoutePlanner.calculateRoutePointInternalId(pnt.roadId, Math.min(pnt.start, pnt.end), 
 					Math.max(pnt.start, pnt.end));
 			if (duals.contains(rpid)) {
@@ -342,7 +350,7 @@ public class HHRoutingDB {
 		List<NetworkDBSegment> connected = new ArrayList<NetworkDBSegment>();
 		List<NetworkDBSegment> connectedReverse = new ArrayList<NetworkDBSegment>();
 		
-		// TODO clear non used fields to free memory
+		// TODO Lightweight clear non used fields to free memory
 		// for routing
 		int rtDepth = -1;
 		NetworkDBPoint rtRouteToPoint;
