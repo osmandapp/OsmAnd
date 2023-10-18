@@ -479,7 +479,7 @@ public class HHRoutePlanner {
 		long time = System.nanoTime();
 		HHRoutingContext hctx = new HHRoutingContext();
 		System.out.print("Loading points... ");
-		hctx.pointsById = networkDB.getNetworkPoints(false);
+		hctx.pointsById = networkDB.getNetworkPoints();
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<NetworkDBPoint>();
 		stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
@@ -498,16 +498,13 @@ public class HHRoutePlanner {
 		}
 		for (NetworkDBPoint pnt : hctx.pointsById.valueCollection()) {
 			long pos = calculateRoutePointInternalId(pnt.roadId, pnt.start, pnt.end);
-			long neg = calculateRoutePointInternalId(pnt.roadId, pnt.end, pnt.start);
 			LatLon latlon = pnt.getPoint();
 			hctx.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), pnt);
-			if (pos != pnt.pntGeoId && neg != pnt.pntGeoId) {
+			if (pos != pnt.pntGeoId) {
 				throw new IllegalStateException();
 			}
 			hctx.boundaries.put(pos, null);
-			hctx.boundaries.put(neg, null);
 			hctx.pointsByGeo.put(pos, pnt);
-			hctx.pointsByGeo.put(neg, pnt);
 		}		
 		hctx.pointsRect.printStatsDistribution("Points distributed");
 		return hctx;
@@ -554,7 +551,7 @@ public class HHRoutePlanner {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
-				long pntId = calcUniDirRoutePointInternalId(o);
+				long pntId = calculateRoutePointInternalId(o.getRoad(), o.getSegmentStart(), o.getSegmentEnd()); // TODO
 				if (set.add(pntId)) {
 					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setCostParentRt(reverse, o.getDistanceFromStart() + distanceToEnd(c, reverse, pnt, e), null,

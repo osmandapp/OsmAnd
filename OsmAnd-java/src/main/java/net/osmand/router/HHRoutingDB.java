@@ -38,7 +38,7 @@ public class HHRoutingDB {
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
 		if (!compactDB) {
-			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, chInd, roadId, start, end, sx31, sy31, ex31, ey31) PRIMARY KEY(idPoint)");
+			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, chInd, roadId, start, end, sx31, sy31, ex31, ey31, PRIMARY KEY(idPoint))");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
 			
 			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut)");
@@ -138,11 +138,12 @@ public class HHRoutingDB {
 		ps.executeBatch();
 	}
 	
-	public TLongObjectHashMap<NetworkDBPoint> getNetworkPoints(boolean byGeoId) throws SQLException {
+	public TLongObjectHashMap<NetworkDBPoint> getNetworkPoints() throws SQLException {
 		Statement st = conn.createStatement();
-		String pntGeoIdCol = compactDB ? "pointGeoId, id": "idPoint, ind";
+		String pntGeoIdCol = compactDB ? "pointGeoId, id": "pointGeoId, idPoint";
 		ResultSet rs = st.executeQuery("SELECT "+pntGeoIdCol+", chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
 		TLongObjectHashMap<NetworkDBPoint> mp = new TLongObjectHashMap<>();
+		TLongObjectHashMap<NetworkDBPoint> duals = new TLongObjectHashMap<>();
 		while (rs.next()) {
 			NetworkDBPoint pnt = new NetworkDBPoint();
 			int p = 1;
@@ -156,7 +157,16 @@ public class HHRoutingDB {
 			pnt.startY = rs.getInt(p++);
 			pnt.endX = rs.getInt(p++);
 			pnt.endY = rs.getInt(p++);
-			mp.put(byGeoId ? pnt.pntGeoId : pnt.index, pnt);
+//			mp.put(byGeoId ? pnt.pntGeoId : pnt.index, pnt);
+			mp.put(pnt.index, pnt);
+			long rpid = HHRoutePlanner.calculateRoutePointInternalId(pnt.roadId, Math.min(pnt.start, pnt.end), 
+					Math.max(pnt.start, pnt.end));
+			if (duals.contains(rpid)) {
+				pnt.dualPoint = duals.get(rpid);
+				pnt.dualPoint.dualPoint = pnt;
+			} else {
+				duals.put(rpid, pnt);
+			}
 		}
 		rs.close();
 		st.close();
@@ -317,6 +327,7 @@ public class HHRoutingDB {
 	}
 	
 	static class NetworkDBPoint {
+		NetworkDBPoint dualPoint;
 		int index;
 		long chInd;
 		long pntGeoId;
