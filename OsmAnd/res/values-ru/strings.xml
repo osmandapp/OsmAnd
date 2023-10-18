@@ -5441,13 +5441,23 @@
     <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
     <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
     <string name="average_glide_ratio">Средний коэффициент планирования</string>
-    <string name="release_4_6">• Виджет «Коэффициент планирования»
+    <string name="release_4_6">"• Виджет «Коэффициент планирования»
 \n
-\n • Добавлен виджет температуры ANT+.
+\n  • Добавлены фильтры и смарт-папки для треков
 \n
-\n • Улучшено управление памятью для больших треков GPX.
+\n  • Добавлены строки для верхней и нижней панелей виджетов с поддержкой всех виджетов
 \n
-\n</string>
+\n  • Добавлен виджет температуры ANT+
+\n
+\n  • Улучшено управление памятью для больших треков GPX
+\n
+\n  • Обновлено управление локальными ресурсами в разделе «Загрузки карт»
+\n
+\n  • Добавлен виджет «Доступная оперативная память»
+\n
+\n  • Исправлены проблемы с прозрачной строкой состояния
+\n
+\n"</string>
     <string name="app_mode_paragliding">Парапланеризм</string>
     <string name="map_widget_group_glide_ratio">Коэффициент планирования</string>
     <string name="app_mode_hang_gliding">Дельтапланеризм</string>
@@ -5461,7 +5471,17 @@
     <string name="smart_folder_saved">Смарт-папка сохранена</string>
     <string name="add_smart_folder">Создать смарт-папку</string>
     <string name="empty_name">Отсутствует имя</string>
-    <string name="edit_fiilter">Редактировать фильтр</string>
+    <string name="edit_fiilter">Фильтр</string>
     <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
     <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
+    <string name="empty_smart_folder_title">Нет подходящего трека</string>
+    <string name="empty_smart_folder_description">Здесь автоматически появится все подходящие треки</string>
+    <string name="configure_filter">Настройка фильтра</string>
+    <string name="no_config_smart_folder_title">Не настроен</string>
+    <string name="discard_filter_changes">Отменить изменения фильтра</string>
+    <string name="shared_string_loading">Загрузка</string>
+    <string name="discard_filter_changes_prompt">Сбросить все фильтры\?</string>
+    <string name="no_config_smart_folder_description">Смарт-папки позволяют группировать треки по примененным фильтрам</string>
+    <string name="loading_tracks">Перезагрузка треков</string>
+    <string name="searching_matching_tracks">Искать все подходящие треки</string>
 </resources>
