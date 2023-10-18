@@ -76,7 +76,6 @@ public class BinaryRoutePlanner {
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
-
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
@@ -244,7 +243,8 @@ public class BinaryRoutePlanner {
 		RouteSegment seg = ctx.loadRouteSegment(originalDir ? pnt.getStartPointX() : pnt.getEndPointX(), 
 				originalDir ? pnt.getStartPointY() : pnt.getEndPointY(), 0, reverseSearchWay);
 		while (seg != null) {
-			if (seg.getRoad().getId() == pnt.getRoad().getId()) {
+			if (seg.getRoad().getId() == pnt.getRoad().getId() && 
+					(seg.getSegmentStart() == (originalDir ? pnt.getSegmentStart() : pnt.getSegmentEnd()))) {
 				break;
 			}
 			seg = seg.getNext();
@@ -491,13 +491,16 @@ public class BinaryRoutePlanner {
 			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 
-			// 1.5 TODO test that routing time is different with on & off!
+			// 1.5 TODO test that routing time is different with on & off! using unit tests
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
 //			if(nextCurrentSegment != null) { // currentSegment.distanceFromStart - startSegment.distanceFromStart > 100
 //				graphSegments.add(nextCurrentSegment);
 //				break;
 //			}
+			if (doNotAddIntersections) {
+				break;
+			}
 		}
 		
 		if (ctx.visitor != null) {
