@@ -130,10 +130,7 @@ public class RoutePlannerFrontEnd {
 
 
 	private static double squareDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2, x1);
-		double dx = MapUtils.convert31XToMeters(x1, x2, y1);
-		return dx * dx + dy * dy;
+		return MapUtils.squareDist31TileMetric(x1, y1, x2, y2);
 	}
 
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list) throws IOException {

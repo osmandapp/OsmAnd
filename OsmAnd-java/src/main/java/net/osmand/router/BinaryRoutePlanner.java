@@ -1110,7 +1110,7 @@ public class BinaryRoutePlanner {
 				int y = road.getPoint31YTile(segStart);
 				int xe = road.getPoint31XTile(segEnd);
 				int ye = road.getPoint31YTile(segEnd);
-				dst = ((int) (Math.sqrt(MapUtils.squareDist31TileMetric(x, y, xe, ye)) * 10)) / 10.0f + " m";
+				dst = ((int) (MapUtils.squareRootDist31(x, y, xe, ye) * 10)) / 10.0f + " m";
 			}
 			if (distanceFromStart != 0) {
 				dst = String.format("dstStart=%.2f", distanceFromStart);
