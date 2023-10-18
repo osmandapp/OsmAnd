@@ -461,13 +461,16 @@ public class RouteResultPreparation {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
+			float correctionTime = finalSegment.distanceFromStart - distanceFromStart(finalSegment.opposite)
+					- distanceFromStart(finalSegment.parentRoute);
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
 				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
-				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime + correctionTime);
+				correctionTime = 0;
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
 				
@@ -478,7 +481,8 @@ public class RouteResultPreparation {
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), segment.getSegmentEnd());
 				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
-				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime + correctionTime);
+				correctionTime = 0;
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
@@ -487,6 +491,10 @@ public class RouteResultPreparation {
 			checkTotalRoutingTime(result, finalSegment.distanceFromStart);
 		}
 		return result;
+	}
+
+	private float distanceFromStart(RouteSegment s) {
+		return s == null ? 0 : s.distanceFromStart;
 	}
 
 	protected void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
