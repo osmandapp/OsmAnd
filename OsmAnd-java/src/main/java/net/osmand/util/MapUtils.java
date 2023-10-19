@@ -615,8 +615,10 @@ public class MapUtils {
 		int tileY = (y31 >> (31 - PRECISION_ZOOM)); // width the same for all x
 		Double d = DIST_CACHE.get(tileY);
 		if (d == null) {
-			d = getTileDistanceWidth(MapUtils.get31LatitudeY(y31), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
-			DIST_CACHE.put(tileY, d);
+			synchronized (MapUtils.class) {
+				d = getTileDistanceWidth(MapUtils.get31LatitudeY(y31), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
+				DIST_CACHE.put(tileY, d);
+			}
 		}
 		return d;
 	}
