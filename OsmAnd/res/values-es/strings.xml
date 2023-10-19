@@ -5496,4 +5496,19 @@
         <item quantity="many">%1$d (%2$d pistas)</item>
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">¿Estás seguro de que deseas eliminar permanentemente todos los elementos de la Papelera\? Esta acción no se puede deshacer.</string>
+    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="delete_all_items">Borrar todos los elementos</string>
+    <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. ¿Estás seguro\?
+\n
+\nEsta acción no se puede deshacer.</string>
+    <string name="shared_string_empty_trash">Vaciar la papelera</string>
+    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_is_deleted">%1$s está borrado.</string>
+    <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
+    <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
+    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="shared_string_trash">Papelera</string>
+    <string name="shared_string_delete_item">Elemento borrado</string>
 </resources>

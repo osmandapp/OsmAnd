@@ -5499,4 +5499,19 @@
     <string name="no_config_smart_folder_description">Intelligente Ordner ermöglichen das Gruppieren von Strecken anhand angewendeter Filter</string>
     <string name="loading_tracks">Tracks neu laden</string>
     <string name="searching_matching_tracks">Suche alle übereinstimmenden Tracks</string>
+    <string name="cloud_trash_clear_confirmation">Bist du sicher, dass du alle Elemente im Papierkorb dauerhaft löschen möchtest\? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="restore_from_trash">Aus dem Papierkorb wiederherstellen</string>
+    <string name="delete_all_items">Alle Elemente löschen</string>
+    <string name="trash_is_empty_banner_desc">Dateien, die aus der OsmAnd Cloud entfernt wurden, stehen hier für %1$s Tage zur Verfügung.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" wird endgültig gelöscht. Bist du sicher\?
+\n
+\nDiese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="shared_string_empty_trash">Papierkorb leeren</string>
+    <string name="shared_string_delete_immediately">Sofort löschen</string>
+    <string name="shared_string_is_deleted">%1$s wurde gelöscht.</string>
+    <string name="cloud_item_restored">%1$s wurde in der Cloud wiederhergestellt.</string>
+    <string name="trash_alert_card_desc">Elemente im Papierkorb werden nach %1$s Tagen endgültig gelöscht.</string>
+    <string name="trash_is_empty">Papierkorb ist leer</string>
+    <string name="shared_string_trash">Papierkorb</string>
+    <string name="shared_string_delete_item">Element löschen</string>
 </resources>
