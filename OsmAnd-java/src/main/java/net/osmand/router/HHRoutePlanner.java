@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeMap;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
@@ -36,7 +37,7 @@ public class HHRoutePlanner {
 	static int DEBUG_VERBOSE_LEVEL = 0;
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	
-	// TODO encapsulate HHRoutingPreparationDB, RoutingContext -> HHRoutingContext
+	// TODO 1.8 HHRoutePlanner encapsulate HHRoutingPreparationDB, RoutingContext -> HHRoutingContext
 	private HHRoutingDB networkDB;
 	private RoutingContext ctx;
 	private HHRoutingContext cacheHctx;
@@ -61,7 +62,7 @@ public class HHRoutePlanner {
 		
 		boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
-		// TODO alternative could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
+		// TODO 3.1 HHRoutePlanner Alternative routes - could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
@@ -167,6 +168,9 @@ public class HHRoutePlanner {
 	public static class HHRoutingContext {
 		TLongObjectHashMap<NetworkDBPoint> pointsById;
 		TLongObjectHashMap<NetworkDBPoint> pointsByGeo;
+		TIntObjectHashMap<List<NetworkDBPoint>> clusterInPoints;
+		TIntObjectHashMap<List<NetworkDBPoint>> clusterOutPoints;
+
 		DataTileManager<NetworkDBPoint> pointsRect = new DataTileManager<>(11); // 20km tile
 		TLongObjectHashMap<RouteSegment> boundaries; 
 		
@@ -206,7 +210,7 @@ public class HHRoutePlanner {
 		}
 
 		public void unloadAllConnections() {
-			for(NetworkDBPoint p: pointsById.valueCollection()) {
+			for (NetworkDBPoint p : pointsById.valueCollection()) {
 				p.markSegmentsNotLoaded();
 			}
 		}
@@ -248,7 +252,7 @@ public class HHRoutePlanner {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
-//			c = HHRoutingConfig.dijkstra(0); // TODO bug with detailed
+//			c = HHRoutingConfig.dijkstra(0); // TODO 1.9 HHRoutePlanner bug with detailed calculation
 			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
@@ -402,7 +406,7 @@ public class HHRoutePlanner {
 				if (!useToSkip[i]) {
 					continue;
 				}
-				// TODO this is more correct to preserve startDistance
+				// TODO 1.7 HHRoutePlanner this is more correct to preserve startDistance
 //				hctx.clearVisited(stPoints, endPoints);
 				hctx.clearVisited();
 				for (NetworkDBPoint pnt : exclude) {
@@ -497,6 +501,8 @@ public class HHRoutePlanner {
 				p.markSegmentsNotLoaded();
 			}
 		}
+		hctx.clusterOutPoints = networkDB.groupByClusters(hctx.pointsById, true);
+		hctx.clusterInPoints = networkDB.groupByClusters(hctx.pointsById, false);
 		for (NetworkDBPoint pnt : hctx.pointsById.valueCollection()) {
 			long pos = calculateRoutePointInternalId(pnt.roadId, pnt.start, pnt.end);
 			LatLon latlon = pnt.getPoint();
@@ -634,7 +640,7 @@ public class HHRoutePlanner {
 			stats.visitedVertices++;
 			if (point.visited(!rev)) {
 				if (c.HEURISTIC_COEFFICIENT == 1 && c.DIJKSTRA_DIRECTION == 0) {
-					// TODO could be improved while adding vertices ? too slow
+					// TODO 2.12 HHRoutePlanner Improve / Review A* finish condition
 					double rcost = point.rtDistanceFromStart + point.rtDistanceFromStartRev;
 					if (rcost <= pointCost.cost) {
 						return point;
