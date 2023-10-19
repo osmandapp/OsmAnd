@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import net.osmand.IndexConstants
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -15,7 +14,6 @@ import net.osmand.plus.myplaces.tracks.filters.TrackFolderFilter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.util.Algorithms
-import java.io.File
 
 class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
@@ -63,7 +61,7 @@ class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 		filter?.let {
 			val adapter = FolderAdapter()
 			adapter.items.clear()
-			adapter.items.addAll(it.fullFoldersList.keys)
+			adapter.items.addAll(it.allFolders)
 			var trackFolder = filter?.currentFolder
 			trackFolder?.let { currentTrackFolder ->
 				val currentFolderName = currentTrackFolder.getDirName()
@@ -92,6 +90,7 @@ class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 		val ALL_FOLDERS_ITEM_TYPE = 0
 		val FOLDER_ITEM_TYPE = 1
 		val SHOW_ALL_ITEM_TYPE = 2
+
 		init {
 			fullFoldersListExpanded = false
 		}
@@ -155,7 +154,9 @@ class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 					} else {
 						folderName
 					}
-					AndroidUiHelper.updateVisibility(holder.divider, correctedPosition != itemCount - 1)
+					AndroidUiHelper.updateVisibility(
+						holder.divider,
+						correctedPosition != itemCount - 1)
 					filter?.let { folderFilter ->
 						var currentFolderPath = folderFilter.currentFolder?.getDirName()
 						AndroidUiHelper.updateVisibility(
@@ -170,7 +171,7 @@ class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 							filter?.let { updateSelectedValue(it) }
 						}
 						holder.checkBox.isChecked = folderFilter.isFolderSelected(folderName)
-						holder.count.text = folderFilter.fullFoldersList[folderName].toString()
+						holder.count.text = folderFilter.allFoldersCollection[folderName].toString()
 					}
 					holder.icon.setImageDrawable(
 						app.uiUtilities.getPaintedIcon(
@@ -202,7 +203,6 @@ class FilterFolderViewHolder(itemView: View, nightMode: Boolean) :
 					holder.title.setText(if (fullFoldersListExpanded) R.string.shared_string_show_less else R.string.shared_string_show_all)
 					holder.itemView.setOnClickListener {
 						fullFoldersListExpanded = !fullFoldersListExpanded
-		//					filter?.isAllFoldersSelected = fullFoldersListExpanded
 						notifyDataSetChanged()
 					}
 				}

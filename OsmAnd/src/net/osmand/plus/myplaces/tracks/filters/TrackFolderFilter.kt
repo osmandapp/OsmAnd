@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -34,7 +35,17 @@ class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
 			}
 		}
 
-	var fullFoldersList: MutableMap<String, Int> = HashMap()
+	var allFolders: MutableList<String> = arrayListOf()
+		private set
+	var allFoldersCollection: HashMap<String, Int> = hashMapOf()
+		private set
+
+	fun setFullFoldersCollection(collection: List<Pair<String, Int>>) {
+		for (pair in collection) {
+			allFolders.add(pair.first)
+			allFoldersCollection[pair.first] = pair.second
+		}
+	}
 
 	fun setSelectedFolders(folder: String, selected: Boolean) {
 		if (selected) {
@@ -76,8 +87,9 @@ class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
 			selectedFolders.clear()
 			selectedFolders.addAll(value.selectedFolders)
 			for (folder in value.selectedFolders) {
-				if (!fullFoldersList.containsKey(folder)) {
-					fullFoldersList[folder] = 0
+				if (!allFolders.contains(folder)) {
+					allFolders.add(folder)
+					allFoldersCollection[folder] = 0
 				}
 			}
 			filterChangedListener?.onFilterChanged()

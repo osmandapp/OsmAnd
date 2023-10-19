@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -16,7 +17,17 @@ class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
 	@Expose
 	val selectedWidths = ArrayList<String>()
 
-	var fullWidthList: MutableMap<String, Int> = HashMap()
+	var allWidth: MutableList<String> = arrayListOf()
+		private set
+	var allWidthCollection: HashMap<String, Int> = hashMapOf()
+		private set
+
+	fun setFullWidthCollection(collection: List<Pair<String, Int>>) {
+		for (pair in collection) {
+			allWidth.add(pair.first)
+			allWidthCollection[pair.first] = pair.second
+		}
+	}
 
 	fun setWidthSelected(width: String, selected: Boolean) {
 		if (selected) {
@@ -33,7 +44,9 @@ class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (width in selectedWidths) {
-			if (Algorithms.stringsEqual(trackItem.dataItem?.width, width)) {
+			val trackItemWidth = trackItem.dataItem?.width
+			if (Algorithms.stringsEqual(trackItemWidth, width) ||
+				Algorithms.isEmpty(trackItemWidth) && Algorithms.isEmpty(width)) {
 				return true
 			}
 		}
@@ -45,8 +58,9 @@ class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
 			selectedWidths.clear()
 			selectedWidths.addAll(value.selectedWidths)
 			for (city in value.selectedWidths) {
-				if (!fullWidthList.contains(city)) {
-					fullWidthList[city] = 0
+				if (!allWidth.contains(city)) {
+					allWidth.add(city)
+					allWidthCollection[city] = 0
 				}
 			}
 			filterChangedListener?.onFilterChanged()

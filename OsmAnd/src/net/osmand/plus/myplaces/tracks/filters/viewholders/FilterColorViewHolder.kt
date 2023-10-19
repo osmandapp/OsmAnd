@@ -17,6 +17,7 @@ import net.osmand.plus.myplaces.tracks.filters.ColorTrackFilter
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
+import net.osmand.util.Algorithms
 
 class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
@@ -64,7 +65,9 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 		filter?.let {
 			val adapter = ColorAdapter()
 			adapter.items.clear()
-			adapter.items.addAll(it.fullColorsList.keys)
+			adapter.items.addAll(it.allColors)
+			adapter.items.remove("")
+			adapter.items.add(0, "")
 			recycler.adapter = adapter
 			recycler.layoutManager = LinearLayoutManager(app)
 			recycler.itemAnimator = null
@@ -92,12 +95,17 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 
 		override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
 			val colorName = items[position]
-			val color = Color.parseColor(colorName)
-			holder.title.text = colorName
-			val transparencyIcon = getTransparencyIcon(app, color)
-			val colorIcon = app.uiUtilities.getPaintedIcon(R.drawable.bg_point_circle, color)
-			val layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon)
-			holder.icon.setImageDrawable(layeredIcon)
+			if (Algorithms.isEmpty(colorName)) {
+				holder.title.text = app.getString(R.string.not_specified)
+				holder.icon.setImageDrawable(app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled))
+			} else {
+				val color = Color.parseColor(colorName)
+				holder.title.text = colorName
+				val transparencyIcon = getTransparencyIcon(app, color)
+				val colorIcon = app.uiUtilities.getPaintedIcon(R.drawable.bg_point_circle, color)
+				val layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon)
+				holder.icon.setImageDrawable(layeredIcon)
+			}
 			AndroidUiHelper.updateVisibility(holder.icon, true)
 			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
 			filter?.let { colorFilter ->
@@ -107,7 +115,7 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 					updateSelectedValue(colorFilter)
 				}
 				holder.checkBox.isChecked = colorFilter.isColorSelected(colorName)
-				holder.count.text = colorFilter.fullColorsList[colorName].toString()
+				holder.count.text = colorFilter.allColorsCollection[colorName].toString()
 			}
 		}
 

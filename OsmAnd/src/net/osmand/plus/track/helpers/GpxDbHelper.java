@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -216,15 +217,15 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getItems();
 	}
 
-	public Set<String> getNearestCityList() {
-		return database.getNearestCityCollection().keySet();
+	public List<Pair<String, Integer>> getNearestCityList() {
+		return database.getNearestCityCollection();
 	}
 
-	public Map<String, Integer> getTrackColorsList() {
+	public List<Pair<String, Integer>> getTrackColorsList() {
 		return database.getTrackColorsCollection();
 	}
 
-	public Map<String, Integer> getTrackWidthList() {
+	public List<Pair<String, Integer>> getTrackWidthList() {
 		return database.getTrackWidthCollection();
 	}
 
@@ -236,7 +237,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getTracksMaxDuration();
 	}
 
-	public Map<String, Integer> getTrackFolders() {
+	public List<Pair<String, Integer>> getTrackFolders() {
 		return database.getTrackFolders();
 	}
 

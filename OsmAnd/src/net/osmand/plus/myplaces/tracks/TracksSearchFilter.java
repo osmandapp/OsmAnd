@@ -69,15 +69,15 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		}
 		ColorTrackFilter colorsFilter = (ColorTrackFilter) getFilterByType(FilterType.COLOR);
 		if (colorsFilter != null) {
-			colorsFilter.setFullColorsList(app.getGpxDbHelper().getTrackColorsList());
+			colorsFilter.setFullColorsCollection(app.getGpxDbHelper().getTrackColorsList());
 		}
 		WidthTrackFilter widthFilter = (WidthTrackFilter) getFilterByType(FilterType.WIDTH);
 		if (widthFilter != null) {
-			widthFilter.setFullWidthList(app.getGpxDbHelper().getTrackWidthList());
+			widthFilter.setFullWidthCollection(app.getGpxDbHelper().getTrackWidthList());
 		}
 		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
 		if (folderFilter != null) {
-			folderFilter.setFullFoldersList(app.getGpxDbHelper().getTrackFolders());
+			folderFilter.setFullFoldersCollection(app.getGpxDbHelper().getTrackFolders());
 			folderFilter.setCurrentFolder(currentFolder);
 		}
 

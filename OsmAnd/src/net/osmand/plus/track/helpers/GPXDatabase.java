@@ -2,6 +2,8 @@ package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -24,7 +26,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,7 +103,7 @@ public class GPXDatabase {
 	private static final String GPX_COL_NEAREST_CITY_NAME = "nearestCityName";
 
 	private static final String TMP_NAME_COLUMN_COUNT = "itemsCount";
-
+	private static final String TMP_NAME_COLUMN_NOT_NULL = "nonnull";
 
 
 	public static final long CHECKED_UNKNOWN_TRACK_CREATION_TIME = 1;
@@ -255,25 +256,29 @@ public class GPXDatabase {
 	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
 			GPX_COL_DIR + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" group by " + GPX_COL_DIR;
+			" group by " + GPX_COL_DIR +
+			" ORDER BY " + GPX_COL_DIR + " ASC";
 
 	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
 			GPX_COL_NEAREST_CITY_NAME + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
 			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL" +
-			" group by " + GPX_COL_NEAREST_CITY_NAME;
+			" group by " + GPX_COL_NEAREST_CITY_NAME +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
-	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT " +
-			GPX_COL_COLOR + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT DISTINCT " +
+			"case when " + GPX_COL_COLOR + " is null then '' else " + GPX_COL_COLOR + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" WHERE " + GPX_COL_COLOR + " <> ''" +
-			" group by " + GPX_COL_COLOR;
+			" group by " + TMP_NAME_COLUMN_NOT_NULL +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
-	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT " +
-			GPX_COL_WIDTH + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT DISTINCT " +
+			"case when " + GPX_COL_WIDTH + " is null then '' else " + GPX_COL_WIDTH + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" WHERE " + GPX_COL_WIDTH + " <> ''" +
-			" group by " + GPX_COL_WIDTH;
+			" group by " + TMP_NAME_COLUMN_NOT_NULL +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
 			GPX_TABLE_NAME + " SET " +
@@ -1299,24 +1304,24 @@ public class GPXDatabase {
 		return maxLength;
 	}
 
-	public Map<String, Integer> getTrackFolders() {
+	public List<Pair<String, Integer>> getTrackFolders() {
 		return getDistinctItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
 	}
 
-	public Map<String, Integer> getNearestCityCollection() {
+	public List<Pair<String, Integer>> getNearestCityCollection() {
 		return getDistinctItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
 	}
 
-	public Map<String, Integer> getTrackColorsCollection() {
+	public List<Pair<String, Integer>> getTrackColorsCollection() {
 		return getDistinctItemsCollection(GPX_TRACK_COLORS_COLLECTION);
 	}
 
-	public Map<String, Integer> getTrackWidthCollection() {
+	public List<Pair<String, Integer>> getTrackWidthCollection() {
 		return getDistinctItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
 	}
 
-	public Map<String, Integer> getDistinctItemsCollection(String dataQuery) {
-		HashMap<String, Integer> folderCollection = new HashMap<>();
+	public List<Pair<String, Integer>> getDistinctItemsCollection(String dataQuery) {
+		ArrayList<Pair<String, Integer>> folderCollection = new ArrayList<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -1325,7 +1330,7 @@ public class GPXDatabase {
 					try {
 						if (query.moveToFirst()) {
 							do {
-								folderCollection.put(query.getString(0), query.getInt(1));
+								folderCollection.add(new Pair<>(query.getString(0), query.getInt(1)));
 							} while (query.moveToNext());
 						}
 					} finally {

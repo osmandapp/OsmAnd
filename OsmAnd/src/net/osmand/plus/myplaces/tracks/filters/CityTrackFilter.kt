@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -16,7 +17,17 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 	@Expose
 	val selectedCities = ArrayList<String>()
 
-	var fullCitiesList: MutableSet<String> = HashSet()
+	var allCities: MutableList<String> = arrayListOf()
+		private set
+	var allCitiesCollection: HashMap<String, Int> = hashMapOf()
+		private set
+
+	fun setFullCitiesList (collection: List<Pair<String, Int>>) {
+		for (pair in collection) {
+			allCities.add(pair.first)
+			allCitiesCollection[pair.first] = pair.second
+		}
+	}
 
 	fun setCitySelected(city: String, selected: Boolean) {
 		if (selected) {
@@ -45,8 +56,9 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 			selectedCities.clear()
 			selectedCities.addAll(value.selectedCities)
 			for (city in value.selectedCities) {
-				if (!fullCitiesList.contains(city)) {
-					fullCitiesList.add(city)
+				if (!allCities.contains(city)) {
+					allCities.add(city)
+					allCitiesCollection[city] = 0
 				}
 			}
 			filterChangedListener?.onFilterChanged()

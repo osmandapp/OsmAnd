@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import android.graphics.Color
+import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -17,7 +18,18 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 	@Expose
 	val selectedColors = ArrayList<String>()
 
-	var fullColorsList: MutableMap<String, Int> = HashMap()
+	var allColors: MutableList<String> = arrayListOf()
+		private set
+	var allColorsCollection: HashMap<String, Int> = hashMapOf()
+		private set
+
+	fun setFullColorsCollection(collection: List<Pair<String, Int>>) {
+		for (pair in collection) {
+			allColors.add(pair.first)
+			allColorsCollection[pair.first] = pair.second
+		}
+	}
+
 
 	fun setColorSelected(color: String, selected: Boolean) {
 		if (selected) {
@@ -34,7 +46,9 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (color in selectedColors) {
-			if (trackItem.dataItem?.color == Color.parseColor(color)) {
+			val trackItemColor = trackItem.dataItem?.color
+			if (trackItemColor == Color.parseColor(color) ||
+				trackItemColor == 0 && Algorithms.isEmpty(color)) {
 				return true
 			}
 		}
@@ -46,8 +60,9 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 			selectedColors.clear()
 			selectedColors.addAll(value.selectedColors)
 			for (color in value.selectedColors) {
-				if (!fullColorsList.contains(color)) {
-					fullColorsList[color] = 0
+				if (!allColors.contains(color)) {
+					allColors.add(color)
+					allColorsCollection[color] = 0
 				}
 			}
 			filterChangedListener?.onFilterChanged()

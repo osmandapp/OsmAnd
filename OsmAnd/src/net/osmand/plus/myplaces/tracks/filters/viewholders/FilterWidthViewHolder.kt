@@ -13,6 +13,7 @@ import net.osmand.plus.routing.cards.RouteLineWidthCard
 import net.osmand.plus.track.fragments.TrackAppearanceFragment
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
+import net.osmand.util.Algorithms
 
 class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
@@ -60,7 +61,9 @@ class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 		filter?.let {
 			val adapter = WidthAdapter()
 			adapter.items.clear()
-			adapter.items.addAll(it.fullWidthList.keys)
+			adapter.items.addAll(it.allWidth)
+			adapter.items.remove("")
+			adapter.items.add(0, "")
 			recycler.adapter = adapter
 			recycler.layoutManager = LinearLayoutManager(app)
 			recycler.itemAnimator = null
@@ -88,22 +91,31 @@ class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 
 		override fun onBindViewHolder(holder: FilterVariantViewHolder, position: Int) {
 			val widthName = items[position]
-			var iconColor = R.color.track_filter_width_standard
-			holder.title.text = when (widthName) {
-				RouteLineWidthCard.WidthMode.THICK.widthKey -> app.getString(R.string.rendering_value_bold_name)
-				RouteLineWidthCard.WidthMode.THIN.widthKey -> app.getString(R.string.rendering_value_thin_name)
-				RouteLineWidthCard.WidthMode.DEFAULT.widthKey -> app.getString(R.string.rendering_value_fine_name)
-				else -> {
-					iconColor = R.color.track_filter_width_custom
-					"${app.getString(R.string.shared_string_custom)}: $widthName"
+			if (Algorithms.isEmpty(widthName)) {
+				holder.title.text = app.getString(R.string.not_specified)
+				holder.icon.setImageDrawable(app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled))
+			} else {
+				var iconColor = R.color.track_filter_width_standard
+				holder.title.text = when (widthName) {
+					RouteLineWidthCard.WidthMode.THICK.widthKey -> app.getString(R.string.rendering_value_bold_name)
+					RouteLineWidthCard.WidthMode.THIN.widthKey -> app.getString(R.string.rendering_value_thin_name)
+					RouteLineWidthCard.WidthMode.MEDIUM.widthKey -> app.getString(R.string.rendering_value_medium_name)
+					else -> {
+						iconColor = R.color.track_filter_width_custom
+						"${app.getString(R.string.shared_string_custom)}: $widthName"
+					}
 				}
+				val appearanceDrawable =
+					TrackAppearanceFragment.getTrackIcon(
+						app,
+						widthName,
+						false,
+						app.getColor(iconColor))
+				val marginTrackIconH =
+					app.resources.getDimensionPixelSize(R.dimen.standard_icon_size)
+				UiUtilities.setMargins(holder.icon, marginTrackIconH, 0, marginTrackIconH, 0)
+				holder.icon.setImageDrawable(appearanceDrawable)
 			}
-			val appearanceDrawable =
-				TrackAppearanceFragment.getTrackIcon(app, widthName, false, app.getColor(iconColor))
-			val marginTrackIconH =
-				app.resources.getDimensionPixelSize(R.dimen.standard_icon_size)
-			UiUtilities.setMargins(holder.icon, marginTrackIconH, 0, marginTrackIconH, 0)
-			holder.icon.setImageDrawable(appearanceDrawable)
 			AndroidUiHelper.updateVisibility(holder.icon, true)
 			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
 			filter?.let { widthFilter ->
@@ -113,7 +125,7 @@ class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 					updateSelectedValue(widthFilter)
 				}
 				holder.checkBox.isChecked = widthFilter.isWidthSelected(widthName)
-				holder.count.text = widthFilter.fullWidthList[widthName].toString()
+				holder.count.text = widthFilter.allWidthCollection[widthName].toString()
 			}
 		}
 	}
