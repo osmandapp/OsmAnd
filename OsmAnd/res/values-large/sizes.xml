@@ -11,7 +11,6 @@
 	<dimen name="map_route_planning_max_height">450dp</dimen>
 	<dimen name="map_minwidth_widget">160dp</dimen>
 	<dimen name="map_route_planning_land_width">510dp</dimen>
-	<dimen name="map_route_planning_land_width_minus_shadow">496dp</dimen>
 
 	<dimen name="map_address_height">60dp</dimen>
 	<dimen name="map_button_size">78dp</dimen>

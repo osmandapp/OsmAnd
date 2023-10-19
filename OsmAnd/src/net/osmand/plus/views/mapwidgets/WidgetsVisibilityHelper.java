@@ -90,7 +90,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInConfigureMapOptionMode();
 	}
 
-	public boolean shouldHideTopWidgets(){
+	public boolean shouldHideTopWidgets() {
 		return isMapRouteInfoMenuVisible()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
@@ -355,6 +355,14 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isPortrait() {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
+	}
+
+	public void hideWidgets() {
+		updateControlsVisibility(false, false);
+	}
+
+	public void showWidgets() {
+		updateControlsVisibility(true, true);
 	}
 
 	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
