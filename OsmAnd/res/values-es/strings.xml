@@ -5491,4 +5491,9 @@
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar las pistas según los filtros que apliques</string>
     <string name="loading_tracks">Recargar las pistas</string>
     <string name="searching_matching_tracks">Buscar todas las pistas coincidentes</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d pista)</item>
+        <item quantity="many">%1$d (%2$d pistas)</item>
+        <item quantity="other">%1$d (%2$d pistas)</item>
+    </plurals>
 </resources>

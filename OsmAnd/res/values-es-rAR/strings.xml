@@ -5440,7 +5440,7 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Se ha añadido el widget \"Relación de planeo\".
+    <string name="release_4_6">• Se ha añadido el widget «Relación de planeo».
 \n
 \n• Se añadieron filtros y carpetas inteligentes para las trazas
 \n
@@ -5506,4 +5506,9 @@
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
     <string name="loading_tracks">Recargando trazas</string>
     <string name="searching_matching_tracks">Buscar las trazas que coincidan</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d traza)</item>
+        <item quantity="many">%1$d (%2$d trazas)</item>
+        <item quantity="other"></item>
+    </plurals>
 </resources>

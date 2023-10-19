@@ -3081,7 +3081,7 @@
     <string name="next_segment">Nästa segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
     <string name="street_level_imagery">Bilder på gatunivå</string>
-    <string name="plan_route_exit_dialog_descr">Avfärda alla ändringar i den plannerade färdvägen\?</string>
+    <string name="plan_route_exit_dialog_descr">Avfärda alla ändringar i den planerade färdvägen\?</string>
     <string name="map_widget_monitoring">Inspelning av resa</string>
     <string name="follow_track">Följ färdväg</string>
     <string name="select_another_track">välj en annan färdväg</string>
@@ -5143,4 +5143,29 @@
     <string name="delete_account_warning">Är du säker på att du vill radera kontot %1$s \?</string>
     <string name="searching_matching_tracks">Sök alla matchande spår</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Använd raster sqlitedb för terrängskuggning / lutningsgrad</string>
+    <string name="write_heading">Logga kurs</string>
+    <string name="wheel_circumference">Hjulets omkrets</string>
+    <string name="open_issue_on_github">Öppna ärende på GitHub</string>
+    <string name="about_osmand">Om OsmAnd</string>
+    <string name="local_indexes_category_terrain">Terrängkartor (3D)</string>
+    <string name="send_logcat_log_descr">Detaljerad loggfil</string>
+    <string name="send_crash_log_descr">Innehåller endast information om krascher</string>
+    <string name="write_bearing">Logga bäring</string>
+    <string name="free_versions_descr">Ladda ner och installera OsmAnd gratisversion</string>
+    <string name="free_versions">Gratisversioner</string>
+    <string name="open_issue_on_github_descr">Ställ frågor, föreslå nya funktioner</string>
+    <string name="feature_available_as_part_of_plan">%1$s tillgänglig som del av abonnemanget %2$s</string>
+    <string name="github_discussion">GitHub-diskussion</string>
+    <string name="most_viewed">Mest läst</string>
+    <string name="write_bearing_description">Spara bäringen till varje spårpunkt vid inspelning</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d spår)</item>
+        <item quantity="other">%1$d (%2$d spår)</item>
+    </plurals>
+    <string name="copy_build_version">Kopiera byggversion</string>
+    <string name="help_article_widgets_radius_ruler_name">Radielinjal och linjal</string>
+    <string name="external_sensor_name_property_description">Sensornamn</string>
+    <string name="report_an_issues">Rapportera ett problem</string>
+    <string name="write_heading_description">Spara kursen till varje spårpunkt vid inspelning</string>
+    <string name="shared_string_setup">Konfiguration</string>
 </resources>

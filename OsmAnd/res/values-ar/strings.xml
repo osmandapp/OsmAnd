@@ -5548,4 +5548,12 @@
     <string name="no_config_smart_folder_description">الملفات الذكية تسمح بتجميع المسارات بواسطة تطبيق الفلاتر</string>
     <string name="loading_tracks">إعادة تحميل المسارات</string>
     <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
+    <plurals name="tracks">
+        <item quantity="zero">%1$d (%2$d مسار)</item>
+        <item quantity="one">%1$d (%2$d مسار)</item>
+        <item quantity="two">%1$d (%2$d مسارين)</item>
+        <item quantity="few">%1$d (%2$d مسارات)</item>
+        <item quantity="many">%1$d (%2$d مسار)</item>
+        <item quantity="other">%1$d (%2$d مسار)</item>
+    </plurals>
 </resources>
