@@ -5493,4 +5493,19 @@
         <item quantity="one">%1$d (%2$d nyomvonal)</item>
         <item quantity="other">%1$d (%2$d nyomvonal)</item>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból\? Ezt a műveletet nem lehet később visszavonni.</string>
+    <string name="restore_from_trash">Visszaállítás a Lomtárból</string>
+    <string name="delete_all_items">Összes elem törlése</string>
+    <string name="trash_is_empty_banner_desc">Az OsmAnd felhőből eltávolított elemek itt még elérhetőek %1$s napig.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne\?
+\n
+\nA művelet nem vonható vissza.</string>
+    <string name="shared_string_empty_trash">Lomtár kiürítése</string>
+    <string name="shared_string_delete_immediately">Azonnali törlés</string>
+    <string name="shared_string_is_deleted">%1$s törölve.</string>
+    <string name="cloud_item_restored">%1$s visszaállítva a felhőbe.</string>
+    <string name="trash_alert_card_desc">A lomtárban lévő elemek %1$s nap után törlődnek.</string>
+    <string name="trash_is_empty">A lomtár üres</string>
+    <string name="shared_string_trash">Lomtár</string>
+    <string name="shared_string_delete_item">Elem törlése</string>
 </resources>
