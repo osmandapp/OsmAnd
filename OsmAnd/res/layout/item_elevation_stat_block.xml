@@ -63,7 +63,7 @@
                 android:layout_width="@dimen/context_menu_transport_icon_size"
                 android:layout_height="@dimen/context_menu_transport_icon_size"
                 android:layout_gravity="center_vertical|end"
-                osmand:tint="?attr/default_icon_color"
+                osmand:tint="?attr/icon_color_default"
                 tools:src="@drawable/ic_action_track_16" />
 
         </FrameLayout>

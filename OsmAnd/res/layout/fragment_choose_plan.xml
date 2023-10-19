@@ -185,7 +185,7 @@
                         android:layout_width="match_parent"
                         android:layout_marginTop="@dimen/content_padding_small"
                         android:layout_height="1dp"
-                        android:background="?attr/divider_color_basic" />
+                        android:background="?attr/divider_color" />
 
                     <!-- Feature items list -->
                     <LinearLayout

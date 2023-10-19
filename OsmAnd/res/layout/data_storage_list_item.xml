@@ -27,7 +27,7 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_gravity="center"
 				osmand:srcCompat="@drawable/mm_storage_tank"
-				tools:tint="?attr/default_icon_color"
+				tools:tint="?attr/icon_color_default"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding" />
 
@@ -128,7 +128,7 @@
 						android:layout_gravity="bottom"
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="?attr/list_divider"/>
+						android:background="?attr/divider_color"/>
 
 				</FrameLayout>
 

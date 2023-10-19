@@ -19,7 +19,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			tools:srcCompat="@drawable/ic_map" />
 
 		<LinearLayout
@@ -65,7 +65,7 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			osmand:srcCompat="@drawable/ic_action_alert"
-			osmand:tint="?attr/default_icon_color" />
+			osmand:tint="?attr/icon_color_default" />
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progressBar"

@@ -16,20 +16,20 @@
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?attr/route_info_bg"
+			android:background="?attr/card_and_list_background_color"
 			android:foregroundGravity="top|fill_horizontal">
 
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:background="?attr/route_info_bg">
+				android:background="?attr/card_and_list_background_color">
 
 				<LinearLayout
 					android:id="@+id/route_menu_cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/route_info_bg"
+					android:background="?attr/card_and_list_background_color"
 					android:orientation="vertical"
 					android:paddingBottom="24dp">
 

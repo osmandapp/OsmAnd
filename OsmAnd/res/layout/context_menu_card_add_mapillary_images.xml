@@ -5,7 +5,7 @@
     android:layout_height="@dimen/context_img_card_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:background="?attr/bg_color"
+    tools:background="?attr/list_background_color"
     android:orientation="vertical">
 
     <TextView

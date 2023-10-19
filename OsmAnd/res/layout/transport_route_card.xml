@@ -20,14 +20,14 @@
 		android:id="@+id/top_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/divider_color_basic"
+		android:background="?attr/divider_color"
 		android:focusable="false" />
 
 	<LinearLayout
 		android:id="@+id/routes_info_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/card_and_list_background_basic"
+		android:background="?attr/card_and_list_background_color"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
 		android:paddingTop="@dimen/content_padding"

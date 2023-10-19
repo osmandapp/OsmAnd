@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
 	    android:paddingStart="16dp"
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"
+            android:background="?attr/divider_color"
 	        android:layout_marginStart="28dp" />
 
         <LinearLayout
@@ -213,7 +213,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"
+            android:background="?attr/divider_color"
 	        android:layout_marginStart="28dp" />
 
         <LinearLayout
@@ -405,7 +405,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="28dp"
-            android:background="?attr/dashboard_divider"
+            android:background="?attr/divider_color"
 	        android:layout_marginStart="28dp" />
 
         <LinearLayout

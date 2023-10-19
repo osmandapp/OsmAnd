@@ -199,7 +199,7 @@
 						osmand:typeface="@string/font_roboto_regular"
 						osmand:lineHeight="@dimen/default_desc_line_height"
 						osmand:drawableStartCompat="@drawable/ic_action_group_name_16"
-						osmand:drawableTint="?default_icon_color"
+						osmand:drawableTint="?icon_color_default"
 						tools:text="Some group" />
 
 				</LinearLayout>

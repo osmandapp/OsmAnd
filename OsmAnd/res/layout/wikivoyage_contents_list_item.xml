@@ -11,7 +11,7 @@
 		android:id="@+id/upper_row_divider"
 		android:layout_width="wrap_content"
 		android:layout_height="1dp"
-		android:background="?attr/wikivoyage_card_divider_color" />
+		android:background="?attr/divider_color" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

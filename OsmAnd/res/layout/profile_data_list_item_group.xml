@@ -15,7 +15,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color">
+		android:background="?attr/list_background_color">
 
 		<LinearLayout
 			android:id="@+id/item_container"
@@ -74,7 +74,7 @@
 				android:id="@+id/vertical_divider"
 				android:layout_width="1dp"
 				android:layout_height="@dimen/dialog_button_height"
-				android:background="?attr/list_divider" />
+				android:background="?attr/divider_color" />
 
 			<FrameLayout
 				android:id="@+id/check_box_container"
@@ -105,7 +105,7 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/list_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone"
 		tools:visibility="visible" />
 

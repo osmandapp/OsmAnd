@@ -82,7 +82,7 @@
 					android:contentDescription="@string/shared_string_menu"
 					android:scaleType="center"
 					android:src="@drawable/ic_overflow_menu_white"
-					android:tint="?attr/secondary_icon_color"
+					android:tint="?attr/icon_color_secondary"
 					android:visibility="gone" />
 
 			</LinearLayout>

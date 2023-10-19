@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/content_padding"
             tools:srcCompat="@drawable/ic_action_cloud_alert"
-            tools:tint="?attr/default_icon_color" />
+            tools:tint="?attr/icon_color_default" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -78,7 +78,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/content_padding"
-            android:tint="?attr/default_icon_color"
+            android:tint="?attr/icon_color_default"
             tools:srcCompat="@drawable/ic_action_arrow_down" />
 
     </LinearLayout>

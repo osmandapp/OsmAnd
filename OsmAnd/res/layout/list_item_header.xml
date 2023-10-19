@@ -14,7 +14,7 @@
         android:id="@+id/background_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color">
+        android:background="?attr/list_background_color">
 
         <LinearLayout
             android:id="@+id/header_row"

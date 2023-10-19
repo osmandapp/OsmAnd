@@ -46,7 +46,7 @@
 							android:layout_gravity="center_vertical"
 							android:contentDescription="@string/shared_string_back"
 							tools:srcCompat="@drawable/ic_arrow_back"
-							tools:tint="?attr/default_icon_color" />
+							tools:tint="?attr/icon_color_default" />
 
 						<TextView
 							android:id="@+id/title"
@@ -69,7 +69,7 @@
 							android:layout_gravity="center_vertical"
 							android:contentDescription="@string/reset_to_default"
 							tools:srcCompat="@drawable/ic_action_reset"
-							tools:tint="?attr/default_icon_color" />
+							tools:tint="?attr/icon_color_default" />
 
 					</LinearLayout>
 

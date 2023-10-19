@@ -13,7 +13,7 @@
 		android:layout_gravity="center"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		tools:src="@drawable/ic_action_car_dark"
-		tools:tint="?attr/default_icon_color" />
+		tools:tint="?attr/icon_color_default" />
 
 	<LinearLayout
 		android:layout_width="0dp"

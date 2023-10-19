@@ -53,7 +53,7 @@
 			android:id="@+id/default_speed_div"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider" />
+			android:background="?attr/divider_color" />
 
 		<LinearLayout
 			android:id="@+id/default_speed_container"
@@ -77,7 +77,7 @@
 			android:id="@+id/max_speed_div"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider" />
+			android:background="?attr/divider_color" />
 
 		<LinearLayout
 			android:id="@+id/max_speed_container"

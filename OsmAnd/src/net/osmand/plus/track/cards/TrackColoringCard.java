@@ -262,10 +262,10 @@ public class TrackColoringCard extends BaseCard {
 			int textColorId;
 
 			if (isSelected) {
-				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.icon_color_default);
 				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColor);
 			} else if (!item.isActive()) {
-				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.icon_color_default);
 				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColorSecondary);
 			} else {
 				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.colorPrimary);

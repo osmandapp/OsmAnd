@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/content_padding"
@@ -49,6 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color"/>
 
 </LinearLayout>

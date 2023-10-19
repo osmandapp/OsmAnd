@@ -13,7 +13,7 @@
         android:layout_height="@dimen/bottom_sheet_list_item_height">
 
         <net.osmand.plus.widgets.TextViewEx
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:id="@+id/show_hide_history_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

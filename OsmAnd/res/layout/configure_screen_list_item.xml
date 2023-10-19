@@ -89,7 +89,7 @@
 				android:id="@+id/short_divider"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/divider_color_basic"
+				android:background="?attr/divider_color"
 				android:visibility="gone"
 				tools:visibility="visible" />
 
@@ -102,7 +102,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
-		android:background="?attr/divider_color_basic"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 </LinearLayout>

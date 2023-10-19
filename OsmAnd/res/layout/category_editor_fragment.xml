@@ -102,7 +102,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="?attr/divider_color_basic" />
+						android:background="?attr/divider_color" />
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -140,7 +140,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
 						android:layout_marginTop="@dimen/content_padding"
-						android:background="?attr/divider_color_basic" />
+						android:background="?attr/divider_color" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						style="@style/TitleStyle.Medium"
@@ -162,7 +162,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="?attr/divider_color_basic" />
+						android:background="?attr/divider_color" />
 
 					<LinearLayout
 						android:layout_width="match_parent"

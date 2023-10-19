@@ -54,7 +54,7 @@
 			android:id="@+id/secondary_icon"
 			android:layout_width="@dimen/title_padding"
 			android:layout_height="@dimen/title_padding"
-			android:tint="?default_icon_color"
+			android:tint="?icon_color_default"
 			tools:src="@drawable/ic_extension_dark" />
 
 	</LinearLayout>
@@ -62,7 +62,7 @@
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<include
 		android:id="@+id/settings_action"

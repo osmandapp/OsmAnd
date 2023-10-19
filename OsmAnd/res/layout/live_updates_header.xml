@@ -160,7 +160,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/divider_color"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -204,7 +204,7 @@
             android:id="@+id/buttons_div"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"
+            android:background="?attr/divider_color"
             android:visibility="visible"/>
 
         <LinearLayout

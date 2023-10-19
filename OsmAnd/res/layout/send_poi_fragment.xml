@@ -67,7 +67,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
-		android:background="?attr/dashboard_divider" />
+		android:background="?attr/divider_color" />
 
 	<include layout="@layout/account_details" />
 
@@ -76,4 +76,3 @@
 		android:layout_height="@dimen/content_padding_small" />
 
 </LinearLayout>
-

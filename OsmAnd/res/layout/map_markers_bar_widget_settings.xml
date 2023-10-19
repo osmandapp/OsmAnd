@@ -19,7 +19,7 @@
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		style="@style/TitleStyle.Medium"

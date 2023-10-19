@@ -2,7 +2,7 @@
 	android:color="?attr/active_buttons_and_links_bg_pressed">
 	<item android:id="@android:id/mask">
 		<shape android:shape="rectangle">
-			<solid android:color="?attr/divider_color_basic" />
+			<solid android:color="?attr/divider_color" />
 			<corners android:radius="9dp" />
 		</shape>
 	</item>

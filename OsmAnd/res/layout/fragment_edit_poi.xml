@@ -128,7 +128,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/bg_color"
+                android:background="?attr/list_background_color"
                 app:layout_scrollFlags="scroll"
                 app:tabIndicatorColor="@color/osmand_orange"
                 app:tabSelectedTextColor="@color/osmand_orange"

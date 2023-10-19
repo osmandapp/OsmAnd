@@ -10,14 +10,14 @@
 		android:id="@+id/dividerToDropDown"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/divider_color_basic"
+		android:background="?attr/divider_color"
 		android:focusable="false" />
 
 	<LinearLayout
 		android:id="@+id/route_info_controls"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/card_and_list_background_basic"
+		android:background="?attr/card_and_list_background_color"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -57,7 +57,7 @@
 						android:layout_marginVertical="@dimen/text_margin_small"
 						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
 						osmand:srcCompat="@drawable/ic_action_altitude_ascent_16"
-						osmand:tint="?attr/secondary_icon_color" />
+						osmand:tint="?attr/icon_color_secondary" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/uphill"
@@ -84,7 +84,7 @@
 						android:layout_marginVertical="@dimen/text_margin_small"
 						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
 						osmand:srcCompat="@drawable/ic_action_altitude_descent_16"
-						osmand:tint="?attr/secondary_icon_color" />
+						osmand:tint="?attr/icon_color_secondary" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/downhill"
@@ -111,7 +111,7 @@
 						android:layout_gravity="center_vertical"
 						android:layout_marginVertical="@dimen/content_padding_small_half"
 						android:layout_marginEnd="@dimen/content_padding"
-						android:background="?attr/divider_color_basic" />
+						android:background="?attr/divider_color" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/emission"

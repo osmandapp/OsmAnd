@@ -20,8 +20,8 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			osmand:srcCompat="@drawable/mm_storage_tank"
-			android:tint="?attr/default_icon_color"
-			tools:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
+			tools:tint="?attr/icon_color_default"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding" />
 
@@ -74,7 +74,7 @@
 		<View
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"
+			android:background="?attr/divider_color"
 			android:focusable="false" />
 
 	</LinearLayout>

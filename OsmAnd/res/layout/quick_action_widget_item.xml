@@ -25,7 +25,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
-                android:tint="?attr/default_icon_color"
+                android:tint="?attr/icon_color_default"
                 android:scaleType="centerInside"/>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -60,7 +60,7 @@
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
         android:visibility="gone"/>
 
     <View
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
         android:visibility="gone"/>
 
 </FrameLayout>

@@ -40,7 +40,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/card_title_row_min_height"
-		android:background="?divider_color_basic"
+		android:background="?divider_color"
 		android:visibility="gone"
 		tools:visibility="visible" />
 

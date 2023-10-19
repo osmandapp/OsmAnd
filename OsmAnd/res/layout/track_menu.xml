@@ -85,7 +85,7 @@
 						android:minWidth="@dimen/standard_icon_size"
 						android:minHeight="@dimen/standard_icon_size"
 						osmand:srcCompat="@drawable/ic_action_polygom_dark"
-						tools:tint="?attr/default_icon_color" />
+						tools:tint="?attr/icon_color_default" />
 
 				</LinearLayout>
 
@@ -104,7 +104,7 @@
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?attr/activity_background_basic"
+			android:background="?attr/activity_background_color"
 			android:foregroundGravity="top|fill_horizontal"
 			tools:foreground="@drawable/bg_contextmenu_shadow">
 
@@ -298,7 +298,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/context_menu_action_buttons_height"
 		android:layout_gravity="bottom"
-		android:background="?attr/wikivoyage_card_bg_color"
+		android:background="?attr/card_and_list_background_color"
 		osmand:itemBackground="?attr/bottom_navigation_item_background"
 		osmand:itemIconTint="@color/bottom_navigation_color_selector_light"
 		osmand:itemTextColor="@color/bottom_navigation_color_selector_light"

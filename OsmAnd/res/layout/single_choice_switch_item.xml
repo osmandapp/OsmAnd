@@ -5,7 +5,7 @@
               android:orientation="vertical">
 
     <View
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
         android:id="@+id/topDivider"
         android:layout_height="1dp"
         android:layout_width="wrap_content"/>
@@ -53,11 +53,10 @@
     </LinearLayout>
 
     <View
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
         android:id="@+id/bottomDivider"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/list_header_padding"
         android:layout_width="wrap_content"/>
 
 </LinearLayout>
-

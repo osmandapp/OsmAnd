@@ -43,7 +43,7 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="?attr/dashboard_divider"
+            android:divider="?attr/divider_color"
             android:dividerHeight="1dp"
             android:drawSelectorOnTop="true"/>
 

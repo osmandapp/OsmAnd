@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:minHeight="56dp"
         android:orientation="horizontal">
 
@@ -54,7 +54,7 @@
         android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:orientation="vertical">
 
         <LinearLayout

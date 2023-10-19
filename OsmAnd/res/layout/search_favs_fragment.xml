@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/dashboard_map_toolbar"
             android:theme="?attr/toolbar_theme"
             app:contentInsetLeft="54dp"

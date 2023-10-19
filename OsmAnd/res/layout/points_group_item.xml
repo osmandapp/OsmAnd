@@ -32,7 +32,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				tools:srcCompat="@drawable/ic_action_folder"
-				tools:tint="?attr/default_icon_color" />
+				tools:tint="?attr/icon_color_default" />
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -69,14 +69,14 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				osmand:srcCompat="@drawable/ic_action_arrow_up"
-				tools:tint="?attr/default_icon_color" />
+				tools:tint="?attr/icon_color_default" />
 
 			<View
 				android:id="@+id/vertical_divider"
 				android:layout_width="1dp"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
-				android:background="?attr/divider_color_basic"
+				android:background="?attr/divider_color"
 				tools:visibility="visible" />
 
 			<FrameLayout

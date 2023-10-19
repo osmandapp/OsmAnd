@@ -578,7 +578,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void setupButtons() {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
-		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
+		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.list_background_color));
 		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_apply);

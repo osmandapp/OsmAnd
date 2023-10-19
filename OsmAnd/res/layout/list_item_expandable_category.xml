@@ -19,7 +19,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="?attr/bg_color">
+		android:background="?attr/list_background_color">
 
 		<LinearLayout
 			android:id="@+id/button_container"
@@ -65,7 +65,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginEnd="@dimen/content_padding"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				android:src="@drawable/ic_action_arrow_down" />
 
 		</LinearLayout>
@@ -76,12 +76,12 @@
 		android:id="@+id/divider"
 		android:layout_width="wrap_content"
 		android:layout_height="1dp"
-		android:background="?attr/divider_color_basic"/>
+		android:background="?attr/divider_color"/>
 
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color">
+		android:background="?attr/list_background_color">
 
 		<LinearLayout
 			android:id="@+id/items_container"

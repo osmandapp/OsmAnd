@@ -16,7 +16,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_list_item_height"
-		android:background="?attr/wikivoyage_card_bg_color"
+		android:background="?attr/card_and_list_background_color"
 		android:gravity="center_vertical"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"

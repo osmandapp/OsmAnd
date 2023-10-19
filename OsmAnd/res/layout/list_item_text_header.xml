@@ -3,7 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/bg_color"
+	android:background="?attr/list_background_color"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:orientation="vertical">
 
@@ -11,7 +11,7 @@
 		android:id="@+id/divider_top"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 	<LinearLayout
@@ -36,7 +36,7 @@
 		android:id="@+id/divider_bottom"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 </LinearLayout>

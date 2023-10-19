@@ -12,7 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginLeft="@dimen/route_info_list_text_padding"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone"
 		android:layout_marginStart="@dimen/route_info_list_text_padding" />
 
@@ -20,7 +20,7 @@
 		android:id="@+id/divider_dash"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"/>
+		android:background="?attr/divider_color"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"

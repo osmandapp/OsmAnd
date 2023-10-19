@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/bg_color">
+    android:background="?attr/list_background_color">
 
     <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/header"
@@ -25,6 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="top"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color"/>
 
 </FrameLayout>

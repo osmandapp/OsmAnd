@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="@dimen/content_padding"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:textColor="?attr/color_dialog_buttons"
             android:textSize="@dimen/default_list_text_size"
             android:visibility="gone"

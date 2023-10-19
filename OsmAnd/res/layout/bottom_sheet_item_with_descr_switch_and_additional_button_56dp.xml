@@ -81,7 +81,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/content_padding_half"
             android:layout_marginBottom="@dimen/content_padding_half"
-            android:background="?attr/divider_color_basic" />
+            android:background="?attr/divider_color" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/additional_button_icon"

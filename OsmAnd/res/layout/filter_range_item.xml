@@ -44,7 +44,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			tools:srcCompat="@drawable/ic_action_arrow_down" />
 
 

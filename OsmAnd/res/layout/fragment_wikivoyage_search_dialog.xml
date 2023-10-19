@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/wikivoyage_bg_color"
+	android:background="?attr/activity_background_color"
 	android:orientation="vertical"
 	android:clickable="true"
 	android:focusable="true">
@@ -16,7 +16,7 @@
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dashboard_map_toolbar"
-			android:background="?attr/wikivoyage_card_bg_color"
+			android:background="?attr/card_and_list_background_color"
 			android:minHeight="@dimen/dashboard_map_toolbar">
 
 			<include layout="@layout/search_text_layout"/>

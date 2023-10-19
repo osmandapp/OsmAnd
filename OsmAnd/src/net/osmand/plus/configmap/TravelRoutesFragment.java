@@ -151,7 +151,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 
 		ApplicationMode mode = settings.getApplicationMode();
 		int selectedColor = mode.getProfileColor(nightMode);
-		int disabledColor = AndroidUtils.getColorFromAttr(itemView.getContext(), R.attr.default_icon_color);
+		int disabledColor = AndroidUtils.getColorFromAttr(itemView.getContext(), R.attr.icon_color_default);
 
 		title.setText(name);
 		icon.setImageDrawable(getPaintedContentIcon(imageId, selected ? selectedColor : disabledColor));

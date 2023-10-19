@@ -64,7 +64,7 @@
 				android:layout_marginStart="@dimen/title_padding"
 				android:layout_marginEnd="@dimen/content_padding"
 				osmand:srcCompat="@drawable/ic_action_info"
-				osmand:tint="?default_icon_color"
+				osmand:tint="?icon_color_default"
 				tools:ignore="ContentDescription" />
 
 		</LinearLayout>
@@ -74,7 +74,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="@dimen/setting_list_item_large_height"
-			android:background="?attr/divider_color_basic"/>
+			android:background="?attr/divider_color"/>
 
 	</LinearLayout>
 

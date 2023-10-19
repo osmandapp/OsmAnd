@@ -69,7 +69,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_row_min_height"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -154,7 +154,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:minHeight="@dimen/dialog_button_ex_height"
         android:visibility="gone"
         tools:visibility="visible">

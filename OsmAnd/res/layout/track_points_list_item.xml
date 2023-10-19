@@ -14,11 +14,11 @@
 		android:minHeight="@dimen/card_row_min_height">
 
 		<View
-			android:id="@+id/list_divider"
+			android:id="@+id/divider_color"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="@dimen/divider_color_light_margin_start"
-			android:background="?attr/dashboard_divider"
+			android:background="?attr/divider_color"
 			android:visibility="gone" />
 
 		<LinearLayout
@@ -115,7 +115,7 @@
 						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginTop="@dimen/map_button_inset"
 						android:layout_gravity="start|center_vertical"
-						android:tint="?attr/default_icon_color"
+						android:tint="?attr/icon_color_default"
 						osmand:srcCompat="@drawable/circle_background_light" />
 
 					<net.osmand.plus.widgets.TextViewEx

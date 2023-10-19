@@ -26,7 +26,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minHeight="@dimen/route_info_card_row_min_height"
-		android:background="?attr/card_and_list_background_basic"
+		android:background="?attr/card_and_list_background_color"
 		android:baselineAligned="false"
 		android:gravity="center_vertical"
 		android:orientation="horizontal">
@@ -95,7 +95,7 @@
 			android:layout_height="match_parent"
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:layout_marginBottom="@dimen/content_padding_small"
-			android:background="?attr/divider_color_basic" />
+			android:background="?attr/divider_color" />
 
 		<LinearLayout
 			android:id="@+id/work_button"

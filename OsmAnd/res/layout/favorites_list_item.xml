@@ -12,16 +12,16 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 	<View
-		android:id="@+id/list_divider"
+		android:id="@+id/divider_color"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/divider_color_light_margin_start"
 		android:layout_marginLeft="@dimen/divider_color_light_margin_start"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 	<LinearLayout

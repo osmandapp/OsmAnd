@@ -221,7 +221,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		updateToolbarActionButton();
 		List<ListItem> items = new ArrayList<>();
 		if (actions.size() > 0) {
-			items.add(new ListItem(ItemType.LIST_DIVIDER));
+			items.add(new ListItem(ItemType.divider_color));
 			int screen = 0;
 			for (int i = 0; i < actions.size(); i++) {
 				if (i % ITEMS_IN_GROUP == 0) {
@@ -231,7 +231,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 		if (screenType == SCREEN_TYPE_REORDER) {
-			items.add(new ListItem(ItemType.LIST_DIVIDER));
+			items.add(new ListItem(ItemType.divider_color));
 			String promo = app.getString(R.string.export_import_quick_actions_with_profiles_promo);
 			items.add(new ListItem(ItemType.DESCRIPTION, promo));
 			items.add(new ListItem(ItemType.BUTTON,
@@ -412,8 +412,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			Context themedCtx = UiUtilities.getThemedContext(parent.getContext(), nightMode);
 			LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 			int listBgColor = ContextCompat.getColor(themedCtx,
-					AndroidUtils.resolveAttribute(themedCtx, R.attr.bg_color));
-			ItemType type = viewType < ItemType.values().length ? ItemType.values()[viewType] : ItemType.LIST_DIVIDER;
+					AndroidUtils.resolveAttribute(themedCtx, R.attr.list_background_color));
+			ItemType type = viewType < ItemType.values().length ? ItemType.values()[viewType] : ItemType.divider_color;
 			View itemView;
 			switch (type) {
 				case ACTION:
@@ -426,7 +426,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 					itemView = inflater.inflate(R.layout.bottom_sheet_item_description_with_padding, parent, false);
 					itemView.setBackgroundColor(listBgColor);
 					return new DescriptionVH(itemView);
-				case LIST_DIVIDER:
+				case divider_color:
 					itemView = inflater.inflate(R.layout.list_item_divider, parent, false);
 					return new ListDividerVH(itemView);
 				case BUTTON:
@@ -767,7 +767,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		ACTION,
 		HEADER,
 		DESCRIPTION,
-		LIST_DIVIDER,
+		divider_color,
 		BOTTOM_SHADOW,
 		BUTTON
 	}

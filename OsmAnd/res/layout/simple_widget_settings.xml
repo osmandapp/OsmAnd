@@ -33,7 +33,7 @@
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<LinearLayout
 		android:id="@+id/show_icon_container"
@@ -67,4 +67,3 @@
 	</LinearLayout>
 
 </LinearLayout>
-

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/card_and_list_background_basic"
+    android:background="?attr/card_and_list_background_color"
     android:orientation="vertical"
     android:clickable="true"
     android:focusable="true">
@@ -30,7 +30,7 @@
                 android:layout_width="@dimen/favorites_icon_size_small"
                 android:layout_height="@dimen/favorites_icon_size_small"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="?attr/default_icon_color"
+                android:tint="?attr/icon_color_default"
                 osmand:srcCompat="@drawable/ic_action_close" />
         </FrameLayout>
 

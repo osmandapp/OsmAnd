@@ -27,7 +27,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="@dimen/content_padding"
-			android:background="?divider_color_basic" />
+			android:background="?divider_color" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/import_as_one_track"

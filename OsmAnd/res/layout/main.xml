@@ -123,7 +123,7 @@
 			android:layout_width="280dp"
 			android:layout_height="match_parent"
 			android:layout_gravity="start"
-			android:background="?attr/bg_color"
+			android:background="?attr/list_background_color"
 			android:clipToPadding="false"
 			android:drawSelectorOnTop="false" />
 

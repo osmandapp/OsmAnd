@@ -78,7 +78,7 @@
 				android:text="•"
 				android:layout_gravity="center_vertical"
 				android:layout_marginStart="@dimen/content_padding_small"
-				android:textColor="?attr/secondary_icon_color"
+				android:textColor="?attr/icon_color_secondary"
 				android:textSize="@dimen/default_desc_text_size"/>
 
 			<androidx.appcompat.widget.AppCompatImageView

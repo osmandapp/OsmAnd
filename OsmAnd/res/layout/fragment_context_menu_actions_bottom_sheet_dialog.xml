@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:behavior_hideable="true"
             app:layout_behavior="net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior"
-            tools:background="?attr/bg_color">
+            tools:background="?attr/list_background_color">
 
             <LinearLayout
                 android:id="@+id/context_menu_items_container"
@@ -37,13 +37,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:background="?attr/bg_color">
+        tools:background="?attr/list_background_color">
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            tools:background="?attr/dashboard_divider"/>
+            tools:background="?attr/divider_color"/>
 
         <FrameLayout
             android:id="@+id/cancel_row"

@@ -23,7 +23,7 @@
 				android:id="@+id/description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/bg_color"
+				android:background="?attr/list_background_color"
 				android:paddingStart="@dimen/content_padding"
 				android:paddingTop="@dimen/list_header_settings_top_margin"
 				android:paddingEnd="@dimen/content_padding"
@@ -52,7 +52,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="?attr/bg_color"
+		android:background="?attr/list_background_color"
 		android:orientation="vertical">
 
 		<include layout="@layout/divider" />

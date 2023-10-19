@@ -97,7 +97,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 
 	private void updateHeader() {
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
-		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
+		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.icon_color_default);
 		headerIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, alpineHikingPref.get() ? selectedColor : disabledColor));
 
 		headerDescription.setText(getDifficultyClassificationDescription(app));

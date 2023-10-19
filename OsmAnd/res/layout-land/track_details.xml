@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:clickable="true"
             android:orientation="vertical">
 
@@ -153,7 +153,7 @@
                             android:id="@+id/divider_vertical"
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="?attr/dashboard_divider"
+                            android:background="?attr/divider_color"
                             android:focusable="false"/>
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -193,14 +193,14 @@
                     android:id="@+id/divider_bottom"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/dashboard_divider"
+                    android:background="?attr/divider_color"
                     android:focusable="false"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:background="?attr/bg_color"
+                    android:background="?attr/list_background_color"
                     android:paddingTop="8dp">
 
                     <com.github.mikephil.charting.charts.LineChart

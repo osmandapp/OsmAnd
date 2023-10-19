@@ -18,7 +18,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/appbar_and_list_background_color"
+			android:background="?attr/list_background_color"
 			android:elevation="2dp"
 			android:orientation="vertical">
 
@@ -28,7 +28,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				osmand:srcCompat="@drawable/ic_arrow_back" />
 
 			<LinearLayout

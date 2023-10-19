@@ -21,7 +21,7 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:orientation="vertical">
 
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
-                android:tint="?attr/secondary_icon_color"
+                android:tint="?attr/icon_color_secondary"
                 tools:src="@drawable/ic_action_item_move"/>
 
             <View

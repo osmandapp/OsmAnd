@@ -14,7 +14,7 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
-		osmand:tint="?attr/default_icon_color"
+		osmand:tint="?attr/icon_color_default"
 		tools:srcCompat="@drawable/ic_world_globe_dark" />
 
 	<LinearLayout

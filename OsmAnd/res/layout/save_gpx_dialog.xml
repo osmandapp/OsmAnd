@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/measurement_tool_divider_margin"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color"/>
 
     <RelativeLayout
         android:id="@+id/button_view"

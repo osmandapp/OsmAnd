@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/context_menu_action_buttons_h"
-        android:background="?attr/bg_color">
+        android:background="?attr/list_background_color">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/select_all"
@@ -27,7 +27,7 @@
             android:layout_gravity="bottom"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
-            android:background="?attr/dashboard_divider" />
+            android:background="?attr/divider_color" />
 
     </FrameLayout>
 

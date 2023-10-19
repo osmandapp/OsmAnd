@@ -57,7 +57,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
 				android:layout_marginTop="@dimen/content_padding"
-				android:background="?attr/divider_color_basic" />
+				android:background="?attr/divider_color" />
 
 			<LinearLayout
 				android:id="@+id/items_container"

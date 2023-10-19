@@ -24,7 +24,7 @@
 			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding"
-			android:tint="?attr/secondary_icon_color"
+			android:tint="?attr/icon_color_secondary"
 			osmand:srcCompat="@drawable/ic_action_item_move" />
 
 		<androidx.appcompat.widget.AppCompatImageView

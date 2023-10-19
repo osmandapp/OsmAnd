@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/wikivoyage_bg_color"
+    android:background="?attr/activity_background_color"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
-            android:background="?attr/wikivoyage_bg_color"
+            android:background="?attr/activity_background_color"
             android:padding="0dp">
 
             <LinearLayout
@@ -140,8 +140,8 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/wikivoyage_card_bg_color"
-        osmand:itemBackground="?attr/wikivoyage_card_bg_color"
+        android:background="?attr/card_and_list_background_color"
+        osmand:itemBackground="?attr/card_and_list_background_color"
         osmand:menu="@menu/wikivoyage_bottom_navigation"
         tools:itemIconTint="@color/bottom_navigation_color_selector_light"
         tools:itemTextColor="@color/bottom_navigation_color_selector_light" />

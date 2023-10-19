@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/dashboard_map_toolbar"
-                android:background="?attr/bg_color"
+                android:background="?attr/list_background_color"
                 android:minHeight="@dimen/dashboard_map_toolbar"
                 android:padding="0dp"
                 android:theme="?attr/toolbar_theme"
@@ -98,7 +98,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/ctx_menu_info_divider"/>
+                    android:background="?attr/divider_color"/>
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
@@ -124,7 +124,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/ctx_menu_info_divider"/>
+                    android:background="?attr/divider_color"/>
 
                 <LinearLayout
                     android:id="@+id/buttonToolbar"
@@ -210,7 +210,7 @@
 				android:id="@+id/keyboard_divider"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/ctx_menu_info_divider" />
+				android:background="?attr/divider_color" />
 
 			<LinearLayout
 				android:layout_width="match_parent"

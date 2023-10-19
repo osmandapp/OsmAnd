@@ -19,7 +19,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:src="@drawable/ic_action_map_download"
-			android:tint="?attr/default_icon_color" />
+			android:tint="?attr/icon_color_default" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -92,6 +92,6 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider" />
+		android:background="?attr/divider_color" />
 
 </LinearLayout>

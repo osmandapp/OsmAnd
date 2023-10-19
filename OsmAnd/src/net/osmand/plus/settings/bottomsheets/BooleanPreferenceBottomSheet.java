@@ -144,7 +144,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		int bgColor;
 		int selectedColor;
 		if (mode != null) {
-			int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
+			int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color);
 			bgColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 			selectedColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {

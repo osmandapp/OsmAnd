@@ -26,7 +26,7 @@
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"/>
+			android:tint="?attr/icon_color_default"/>
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@android:id/title"

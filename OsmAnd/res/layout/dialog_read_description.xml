@@ -67,7 +67,7 @@
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/activity_background_basic">
+		android:background="?attr/activity_background_color">
 
 		<LinearLayout
 			android:id="@+id/ll"
@@ -110,7 +110,7 @@
 				android:id="@+id/divider"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/ctx_menu_info_divider"
+				android:background="?attr/divider_color"
 				android:visibility="gone"
 				tools:visibility="visible" />
 
@@ -155,7 +155,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="?attr/activity_background_basic" />
+					android:background="?attr/activity_background_color" />
 			</FrameLayout>
 
 		</LinearLayout>

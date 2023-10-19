@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/card_and_list_background_basic"
+	android:background="?attr/card_and_list_background_color"
 	android:orientation="vertical">
 
 	<FrameLayout

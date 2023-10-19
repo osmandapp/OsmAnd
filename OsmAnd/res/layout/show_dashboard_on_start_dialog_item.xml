@@ -67,5 +67,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/subtext"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color"/>
 </RelativeLayout>

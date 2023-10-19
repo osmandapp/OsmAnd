@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:background="?attr/bg_color"
+              android:background="?attr/list_background_color"
               android:layout_height="@dimen/list_item_height">
 
     <LinearLayout

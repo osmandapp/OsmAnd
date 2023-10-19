@@ -587,7 +587,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			AndroidUiHelper.updateVisibility(icon, !selectionMode);
 			AndroidUiHelper.updateVisibility(checkBox, selectionMode);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), childPosition != 0);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider_color), childPosition != 0);
 
 			return row;
 		}

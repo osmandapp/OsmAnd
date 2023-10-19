@@ -14,13 +14,13 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/card_and_list_background_basic"
+		android:background="?attr/card_and_list_background_color"
 		android:orientation="vertical">
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/card_and_list_background_basic"
+			android:background="?attr/card_and_list_background_color"
 			android:gravity="center_vertical"
 			android:minHeight="@dimen/toolbar_height"
 			android:orientation="horizontal">
@@ -31,7 +31,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				osmand:srcCompat="@drawable/ic_arrow_back" />
 
 			<LinearLayout
@@ -43,7 +43,7 @@
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_weight="1"
-				android:background="?attr/card_and_list_background_basic"
+				android:background="?attr/card_and_list_background_color"
 				android:orientation="vertical"
 				android:paddingTop="@dimen/content_padding_half"
 				android:paddingBottom="@dimen/content_padding_half">
@@ -76,7 +76,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				osmand:srcCompat="@drawable/ic_action_help_online" />
 
 		</LinearLayout>

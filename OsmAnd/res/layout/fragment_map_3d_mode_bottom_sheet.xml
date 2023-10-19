@@ -41,7 +41,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -64,7 +64,7 @@
 			android:layout_height="@dimen/dialog_content_margin"
 			android:layout_marginStart="@dimen/list_content_padding_large"
 			android:src="@drawable/ic_action_help"
-			app:tint="?secondary_icon_color" />
+			app:tint="?icon_color_secondary" />
 
 	</LinearLayout>
 

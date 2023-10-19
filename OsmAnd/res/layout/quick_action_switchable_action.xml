@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color">
+        android:background="?attr/list_background_color">
 
         <LinearLayout
             android:id="@+id/saveButtonContainer"
@@ -62,7 +62,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:orientation="vertical">
 
         <LinearLayout
@@ -92,7 +92,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider" />
+            android:background="?attr/divider_color" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"

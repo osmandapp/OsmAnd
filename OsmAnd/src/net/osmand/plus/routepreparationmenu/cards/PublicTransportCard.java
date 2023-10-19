@@ -114,7 +114,7 @@ public class PublicTransportCard extends MapBaseCard {
 		view.findViewById(R.id.route_buttons).setVisibility(routeButtonsVisible ? View.VISIBLE : View.GONE);
 		if (badgesRowClickable) {
 			view.findViewById(R.id.badges_padding).setVisibility(View.VISIBLE);
-			view.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.card_and_list_background_basic));
+			view.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.card_and_list_background_color));
 			View info = view.findViewById(R.id.routes_info_container);
 			int paddingLeft = info.getPaddingLeft();
 			int paddingTop = info.getPaddingTop();

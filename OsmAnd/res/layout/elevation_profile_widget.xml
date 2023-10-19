@@ -32,7 +32,7 @@
                 android:layout_width="1dp"
                 android:layout_height="@dimen/horizontal_divider_height"
                 android:layout_gravity="center"
-                android:background="?attr/divider_color_basic" />
+                android:background="?attr/divider_color" />
 
             <FrameLayout
                 android:id="@+id/downhill_widget"
@@ -48,7 +48,7 @@
                 android:layout_width="1dp"
                 android:layout_height="@dimen/horizontal_divider_height"
                 android:layout_gravity="center"
-                android:background="?attr/divider_color_basic" />
+                android:background="?attr/divider_color" />
 
             <FrameLayout
                 android:id="@+id/grade_widget"

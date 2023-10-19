@@ -62,7 +62,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		TextView description = container.findViewById(R.id.description);
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
-		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
+		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.icon_color_default);
 		title.setText(AndroidUtils.getRenderingStringPropertyName(app, SHOW_CYCLE_ROUTES_ATTR, SHOW_CYCLE_ROUTES_ATTR));
 		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, pref.get() ? selectedColor : disabledColor));
 		description.setText(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled);

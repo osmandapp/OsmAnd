@@ -80,7 +80,7 @@
 				android:layout_marginLeft="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				android:layout_marginStart="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 

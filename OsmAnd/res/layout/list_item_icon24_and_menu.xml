@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:gravity="center_vertical"
     android:minHeight="60dp"
     android:orientation="horizontal"
@@ -76,7 +76,7 @@
                 android:layout_marginEnd="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
                 android:layout_marginBottom="@dimen/content_padding_small"
-                android:background="?attr/dashboard_divider"
+                android:background="?attr/divider_color"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
@@ -94,7 +94,7 @@
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider" />
+            android:background="?attr/divider_color" />
 
     </LinearLayout>
 

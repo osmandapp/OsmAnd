@@ -4,7 +4,7 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dialog_content_margin"
         app:srcCompat="@drawable/ic_action_purchases_outlined"
-        app:tint="?attr/default_icon_color" />
+        app:tint="?attr/icon_color_default" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/divider_color_basic" />
+        android:background="?attr/divider_color" />
 
     <LinearLayout
         android:id="@+id/cards_container"

@@ -58,7 +58,7 @@
 			android:id="@+id/bottom_divider"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="?attr/wikivoyage_card_divider_color" />
+			android:background="?attr/divider_color" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/bottom_button_text"

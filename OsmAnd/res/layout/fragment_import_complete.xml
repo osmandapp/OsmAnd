@@ -22,7 +22,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/bg_color"
+				android:background="?attr/list_background_color"
 				android:orientation="vertical">
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -63,7 +63,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="?attr/bg_color"
+		android:background="?attr/list_background_color"
 		android:orientation="vertical">
 
 		<include layout="@layout/divider" />

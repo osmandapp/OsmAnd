@@ -269,7 +269,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			skipButton.setTitleId(R.string.shared_string_skip);
 			rightButton.setButtonType(DialogButtonType.PRIMARY);
 			rightButton.setTitleId(R.string.shared_string_continue);
-			bottomButtons.setBackgroundColor(AndroidUtils.getColorFromAttr(buttonsContainer.getContext(), R.attr.bg_color));
+			bottomButtons.setBackgroundColor(AndroidUtils.getColorFromAttr(buttonsContainer.getContext(), R.attr.list_background_color));
 		}
 		AndroidUiHelper.updateVisibility(rightButton, !folderSelected);
 		AndroidUiHelper.updateVisibility(buttonsShadow, !folderSelected);

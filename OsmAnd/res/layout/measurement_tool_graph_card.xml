@@ -81,7 +81,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="?attr/list_divider" />
+                            android:background="?attr/divider_color" />
 
                         <LinearLayout
                             android:id="@+id/route_legend"
@@ -115,7 +115,7 @@
                             android:layout_width="@dimen/standard_icon_size"
                             android:layout_height="@dimen/standard_icon_size"
                             android:layout_marginEnd="@dimen/content_padding"
-                            android:tint="?attr/default_icon_color"
+                            android:tint="?attr/icon_color_default"
                             tools:src="@drawable/ic_action_info_dark" />
 
                         <ProgressBar
@@ -181,7 +181,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_marginStart="@dimen/content_padding"
-                                android:background="?attr/divider_color_basic" />
+                                android:background="?attr/divider_color" />
 
                             <net.osmand.plus.widgets.TextViewEx
                                 android:id="@+id/btn_text"

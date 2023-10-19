@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -70,7 +70,7 @@
                     android:layout_marginEnd="@dimen/content_padding_half"
                     android:layout_marginRight="@dimen/content_padding_half"
                     android:scaleType="centerInside"
-                    android:tint="?attr/default_icon_color"
+                    android:tint="?attr/icon_color_default"
                     osmand:srcCompat="@drawable/ic_action_flag" />
 
                 <LinearLayout
@@ -126,7 +126,7 @@
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
                         android:layout_gravity="center"
-                        android:tint="?attr/secondary_icon_color"
+                        android:tint="?attr/icon_color_secondary"
                         osmand:srcCompat="@drawable/ic_action_item_move" />
 
                 </FrameLayout>
@@ -137,7 +137,7 @@
                 android:id="@+id/item_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
 
         </LinearLayout>
 
@@ -147,6 +147,6 @@
         android:id="@+id/long_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/dashboard_divider" />
+        android:background="?attr/divider_color" />
 
 </LinearLayout>

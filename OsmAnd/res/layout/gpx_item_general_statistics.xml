@@ -105,7 +105,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/list_divider"
+		android:id="@+id/divider_color"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
@@ -117,7 +117,7 @@
 			android:layout_marginLeft="@dimen/content_padding_small"
 			android:layout_marginEnd="@dimen/content_padding_small"
 			android:layout_marginRight="@dimen/content_padding_small"
-			android:background="?attr/dashboard_divider" />
+			android:background="?attr/divider_color" />
 
 	</LinearLayout>
 

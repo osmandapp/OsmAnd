@@ -278,7 +278,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 			int textColorId;
 
 			if (selectedMode == item) {
-				iconColor = getIconColor(item, AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color));
+				iconColor = getIconColor(item, AndroidUtils.getColorFromAttr(ctx, R.attr.icon_color_default));
 				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColor);
 			} else {
 				iconColor = getIconColor(item, AndroidUtils.getColorFromAttr(ctx, R.attr.colorPrimary));

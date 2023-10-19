@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:minHeight="48dp"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/content_padding"
@@ -52,6 +52,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color"/>
 
 </LinearLayout>

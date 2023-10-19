@@ -72,7 +72,7 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
-						android:tint="?attr/default_icon_color"
+						android:tint="?attr/icon_color_default"
 						osmand:srcCompat="@drawable/ic_action_help_online" />
 
 					<androidx.appcompat.widget.AppCompatImageButton
@@ -80,7 +80,7 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
-						android:tint="?default_icon_color"
+						android:tint="?icon_color_default"
 						osmand:srcCompat="@drawable/ic_overflow_menu_white"
 						android:contentDescription="@string/shared_string_menu"/>
 

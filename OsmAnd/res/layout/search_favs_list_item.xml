@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="?attr/bg_color"
+              android:background="?attr/list_background_color"
               android:orientation="vertical">
 
     <LinearLayout
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="56dp"
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
 	    android:layout_marginStart="56dp" />
 
 </LinearLayout>

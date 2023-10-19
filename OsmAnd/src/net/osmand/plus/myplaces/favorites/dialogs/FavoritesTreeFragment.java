@@ -879,7 +879,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
-				row.findViewById(R.id.list_divider).setVisibility(View.VISIBLE);
+				row.findViewById(R.id.divider_color).setVisibility(View.VISIBLE);
 			}
 			int enabledColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);

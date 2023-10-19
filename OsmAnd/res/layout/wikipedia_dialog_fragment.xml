@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/wikivoyage_bg_color"
+    android:background="?attr/activity_background_color"
     android:orientation="vertical"
 	android:clickable="true"
 	android:focusable="true">

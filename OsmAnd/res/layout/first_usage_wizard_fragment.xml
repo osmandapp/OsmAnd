@@ -76,7 +76,7 @@
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/list_divider" />
+				android:background="?attr/divider_color" />
 
 			<LinearLayout
 				android:id="@+id/wizard_card"
@@ -107,7 +107,7 @@
 						android:layout_width="54dp"
 						android:layout_height="60dp"
 						android:scaleType="center"
-						android:tint="?attr/default_icon_color"
+						android:tint="?attr/icon_color_default"
 						osmand:srcCompat="@drawable/ic_map" />
 
 					<LinearLayout
@@ -145,7 +145,7 @@
 						android:layout_height="48dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_location"
-						android:tint="?attr/default_icon_color"
+						android:tint="?attr/icon_color_default"
 						osmand:srcCompat="@drawable/ic_action_my_location" />
 
 				</LinearLayout>

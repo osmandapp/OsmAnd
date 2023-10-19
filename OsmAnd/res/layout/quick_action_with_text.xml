@@ -10,7 +10,7 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:padding="16dp"
         android:text="@string/quick_action_showhide_favorites_descr"
         android:textColor="?android:textColorPrimary"

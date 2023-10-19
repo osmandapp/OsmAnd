@@ -9,7 +9,7 @@
 		android:id="@+id/description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
+		android:background="?attr/list_background_color"
 		android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingTop="@dimen/list_header_settings_top_margin"
@@ -23,7 +23,7 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/list_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone"
 		tools:visibility="visible" />
 

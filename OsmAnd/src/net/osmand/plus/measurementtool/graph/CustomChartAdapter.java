@@ -122,7 +122,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 			ImageView legendIcon = view.findViewById(R.id.legend_icon_color);
 			legendIcon.setImageDrawable(circle);
 			double contrastRatio = ColorUtils.calculateContrast(segmentColor,
-					AndroidUtils.getColorFromAttr(themedCtx, R.attr.card_and_list_background_basic));
+					AndroidUtils.getColorFromAttr(themedCtx, R.attr.card_and_list_background_color));
 			if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 				legendIcon.setBackgroundResource(AndroidUtils.resolveAttribute(themedCtx, R.attr.bg_circle_contour));
 			}

@@ -404,7 +404,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			int textColorId;
 
 			if (isItemSelected(coloringType, coloringTypeName)) {
-				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.default_icon_color);
+				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.icon_color_default);
 				textColorId = AndroidUtils.getColorFromAttr(ctx, android.R.attr.textColor);
 			} else {
 				iconColorId = AndroidUtils.getColorFromAttr(ctx, R.attr.colorPrimary);

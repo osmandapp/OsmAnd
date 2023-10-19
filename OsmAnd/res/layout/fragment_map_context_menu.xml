@@ -450,7 +450,7 @@
                 android:id="@+id/buttons_top_border"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/ctx_menu_divider"/>
+                android:background="?attr/divider_color"/>
 
             <LinearLayout
                 android:id="@+id/context_menu_buttons"
@@ -470,7 +470,7 @@
                 android:id="@+id/buttons_bottom_border"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/ctx_menu_divider"/>
+                android:background="?attr/divider_color"/>
 
             <LinearLayout
                 android:id="@+id/context_menu_bottom_buttons"

@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/wpt_list_item_height"
             android:orientation="horizontal">
 
@@ -59,7 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:paddingTop="@dimen/content_padding"
             android:paddingBottom="@dimen/content_padding_half"
             osmand:layout_scrollFlags="scroll">
@@ -127,7 +127,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:paddingBottom="16dp"
             android:orientation="vertical">
 

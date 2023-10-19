@@ -49,7 +49,7 @@
 				android:id="@+id/route_menu_cards_container"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:background="?attr/route_info_bg"
+				android:background="?attr/card_and_list_background_color"
 				android:orientation="vertical">
 
 				<net.osmand.plus.views.controls.WrapContentHeightViewPager

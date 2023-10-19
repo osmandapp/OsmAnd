@@ -9,6 +9,6 @@
 		android:layout_height="match_parent"
 		android:layout_marginStart="@dimen/route_info_end_divider_margin"
 		android:layout_marginLeft="@dimen/route_info_end_divider_margin"
-		android:background="?attr/divider_color_basic" />
+		android:background="?attr/divider_color" />
 
 </FrameLayout>

@@ -12,7 +12,7 @@
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:background="?attr/divider_color_basic"
+		android:background="?attr/divider_color"
 		android:focusable="false" />
 
 	<androidx.recyclerview.widget.RecyclerView

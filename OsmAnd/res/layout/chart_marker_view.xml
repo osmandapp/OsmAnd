@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:background="?attr/dashboard_divider"
+            android:background="?attr/divider_color"
             android:visibility="gone"
             tools:visibility="visible"/>
 
@@ -81,7 +81,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:background="?attr/dashboard_divider" />
+            android:background="?attr/divider_color" />
 
         <LinearLayout
             android:id="@+id/second_container"
@@ -163,7 +163,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

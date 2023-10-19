@@ -57,7 +57,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
-		android:background="?attr/dashboard_divider" />
+		android:background="?attr/divider_color" />
 
 	<include layout="@layout/account_details" />
 
@@ -76,7 +76,7 @@
 		<View
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider" />
+			android:background="?attr/divider_color" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/description"
@@ -117,4 +117,3 @@
 	</LinearLayout>
 
 </LinearLayout>
-

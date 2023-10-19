@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:minHeight="@dimen/setting_list_item_large_height"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="@dimen/content_padding"

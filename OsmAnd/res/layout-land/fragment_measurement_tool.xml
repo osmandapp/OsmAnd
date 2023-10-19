@@ -167,7 +167,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="?attr/dashboard_divider"/>
+                android:background="?attr/divider_color"/>
 
             <RelativeLayout
                 android:id="@+id/measure_mode_controls"

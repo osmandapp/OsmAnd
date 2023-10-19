@@ -25,7 +25,7 @@
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/divider_color_basic" />
+				android:background="?attr/divider_color" />
 
 			<include
 				android:id="@+id/local_changes_button"

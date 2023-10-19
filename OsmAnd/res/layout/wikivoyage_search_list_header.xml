@@ -16,7 +16,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/wikivoyage_search_list_header_height"
-		android:background="?attr/wikivoyage_card_bg_color"
+		android:background="?attr/card_and_list_background_color"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
 		android:paddingStart="@dimen/content_padding"

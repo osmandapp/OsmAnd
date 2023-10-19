@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	tools:background="?attr/bg_color">
+	tools:background="?attr/list_background_color">
 
 	<FrameLayout
 		android:layout_width="match_parent"

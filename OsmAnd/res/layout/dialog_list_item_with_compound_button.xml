@@ -9,7 +9,7 @@
 		android:id="@+id/topDivider"
 		android:layout_width="wrap_content"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 	<LinearLayout
@@ -76,8 +76,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/list_header_padding"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone" />
 
 </LinearLayout>
-

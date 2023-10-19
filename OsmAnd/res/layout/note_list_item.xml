@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -90,7 +90,7 @@
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/bottom_sheet_selected_item_title_height"
         android:layout_marginStart="@dimen/bottom_sheet_selected_item_title_height"
-        android:background="?attr/dashboard_divider"
+        android:background="?attr/divider_color"
         android:focusable="false"
         android:visibility="gone"
         tools:visibility="visible"/>

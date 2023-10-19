@@ -305,7 +305,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (hideStatistics) {
 			AndroidUiHelper.setVisibility(View.GONE,
 					view.findViewById(R.id.top_line_blocks),
-					view.findViewById(R.id.list_divider),
+					view.findViewById(R.id.divider_color),
 					view.findViewById(R.id.bottom_line_blocks));
 		}
 		return view;
@@ -328,7 +328,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		} else {
 			chart.setVisibility(View.GONE);
 			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
-			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+			view.findViewById(R.id.divider_color).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		if (!hideStatistics) {
@@ -380,7 +380,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		} else {
 			chart.setVisibility(View.GONE);
 			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
-			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+			view.findViewById(R.id.divider_color).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		if (!hideStatistics) {
@@ -417,14 +417,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				if (analysis.timeSpan > 0) {
 					setupTimeSpanStatistics(view, analysis);
 				} else {
-					view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+					view.findViewById(R.id.divider_color).setVisibility(View.GONE);
 					view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 				}
 			}
 		} else {
 			chart.setVisibility(View.GONE);
 			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
-			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+			view.findViewById(R.id.divider_color).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
 		if (!hideStatistics) {

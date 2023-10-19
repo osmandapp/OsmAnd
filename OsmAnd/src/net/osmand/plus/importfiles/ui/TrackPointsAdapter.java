@@ -160,7 +160,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		icon.setImageDrawable(PointImageDrawable.getFromWpt(app, color, false, point));
 
 		setupLocationData(viewCache, view, point);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.list_divider), childPosition != 0);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider_color), childPosition != 0);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), isLastChild);
 
 		return view;

@@ -59,7 +59,7 @@
 		android:layout_gravity="center"
 		android:background="?attr/selectableItemBackground"
 		android:contentDescription="@string/shared_string_more"
-		android:tint="?attr/default_icon_color"
+		android:tint="?attr/icon_color_default"
 		android:visibility="gone"
 		osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 

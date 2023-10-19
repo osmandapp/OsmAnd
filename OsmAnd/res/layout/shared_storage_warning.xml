@@ -171,7 +171,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						osmand:srcCompat="@drawable/ic_action_info_dark"
-						osmand:tint="?attr/default_icon_color" />
+						osmand:tint="?attr/icon_color_default" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shared_storage_last_step"

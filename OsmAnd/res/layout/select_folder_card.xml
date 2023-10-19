@@ -42,7 +42,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="@dimen/content_padding"
-			android:background="?attr/divider_color_basic" />
+			android:background="?attr/divider_color" />
 
 		<include
 			android:id="@+id/list_groups_button"

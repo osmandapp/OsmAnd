@@ -17,7 +17,7 @@
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<FrameLayout
 		android:id="@+id/average_speed_interval_card_container"
@@ -28,7 +28,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
-		android:background="?divider_color_basic" />
+		android:background="?divider_color" />
 
 	<LinearLayout
 		android:id="@+id/skip_stops_container"

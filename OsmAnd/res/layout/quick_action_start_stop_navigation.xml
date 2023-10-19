@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:padding="@dimen/content_padding"
         android:text="@string/quick_action_start_stop_navigation_descr"
         android:textColor="?android:textColorPrimary"
@@ -34,7 +34,7 @@
         android:id="@+id/show_dialog_row"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:orientation="horizontal">
 
         <TextView

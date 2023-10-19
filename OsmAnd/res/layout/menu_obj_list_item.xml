@@ -59,7 +59,7 @@
                 android:minWidth="@dimen/standard_icon_size"
                 android:minHeight="@dimen/standard_icon_size"
                 osmand:srcCompat="@drawable/ic_action_building_number"
-                tools:tint="?attr/default_icon_color" />
+                tools:tint="?attr/icon_color_default" />
 
         </LinearLayout>
 

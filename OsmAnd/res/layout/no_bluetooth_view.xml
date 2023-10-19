@@ -18,7 +18,7 @@
 		android:layout_centerHorizontal="true"
 		android:layout_marginBottom="@dimen/horizontal_divider_height"
 		android:src="@drawable/ic_action_bluetooth_disabled"
-		android:tint="?attr/default_icon_color" />
+		android:tint="?attr/icon_color_default" />
 
 	<View
 		android:id="@+id/no_bluetooth_text_top_guideline"

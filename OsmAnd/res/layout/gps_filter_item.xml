@@ -35,7 +35,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_marginStart="@dimen/title_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			osmand:srcCompat="@drawable/ic_action_arrow_up" />
 
 	</LinearLayout>

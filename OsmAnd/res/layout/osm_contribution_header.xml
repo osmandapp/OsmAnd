@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/content_padding"
         android:layout_marginRight="@dimen/content_padding"
-        android:tint="?attr/default_icon_color"
+        android:tint="?attr/icon_color_default"
         osmand:srcCompat="@drawable/ic_action_openstreetmap_logo" />
 
     <LinearLayout
@@ -63,7 +63,7 @@
             android:id="@+id/bottom_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/divider_color_basic" />
+            android:background="?attr/divider_color" />
 
     </LinearLayout>
 

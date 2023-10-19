@@ -23,7 +23,7 @@
 			android:layout_height="@dimen/dialog_content_margin"
 			android:layout_marginStart="@dimen/title_padding"
 			android:src="@drawable/ic_action_close"
-			android:tint="?attr/primary_icon_color"
+			android:tint="?attr/icon_color_primary"
 			android:contentDescription="@string/shared_string_close"/>
 
 		<View
@@ -38,7 +38,7 @@
 			android:layout_height="@dimen/dialog_content_margin"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:src="@drawable/ic_action_help_online"
-			android:tint="?default_icon_color" />
+			android:tint="?icon_color_default" />
 
 	</LinearLayout>
 

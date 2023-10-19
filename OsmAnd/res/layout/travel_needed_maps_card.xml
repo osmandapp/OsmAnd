@@ -62,7 +62,7 @@
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/wikivoyage_card_divider_color"/>
+		android:background="?attr/divider_color"/>
 
 	<LinearLayout
 		android:id="@+id/items_container"

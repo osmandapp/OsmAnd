@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:minHeight="@dimen/setting_profile_item_height"
     tools:layout_height="@dimen/setting_profile_item_height">
 
@@ -78,6 +78,6 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/toolbar_height"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/divider_color"/>
 
 </LinearLayout>

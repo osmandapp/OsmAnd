@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="@dimen/content_padding"
-	android:background="?attr/bg_color"
+	android:background="?attr/list_background_color"
 	android:orientation="horizontal"
 	android:paddingStart="@dimen/content_padding">
 

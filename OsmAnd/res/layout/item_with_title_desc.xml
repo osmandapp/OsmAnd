@@ -14,7 +14,7 @@
 		android:layout_gravity="center"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
-		android:tint="?attr/default_icon_color"
+		android:tint="?attr/icon_color_default"
 		tools:srcCompat="@drawable/ic_sdcard" />
 
 	<LinearLayout

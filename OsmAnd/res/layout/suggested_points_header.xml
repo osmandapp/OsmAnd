@@ -29,7 +29,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:layout_marginStart="@dimen/content_padding"
-			android:background="?attr/divider_color_basic" />
+			android:background="?attr/divider_color" />
 
 		<LinearLayout
 			android:id="@+id/selectable_list_item"
@@ -67,7 +67,7 @@
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:src="@drawable/ic_action_deselect_all"
-				android:tint="?attr/default_icon_color" />
+				android:tint="?attr/icon_color_default" />
 
 		</LinearLayout>
 

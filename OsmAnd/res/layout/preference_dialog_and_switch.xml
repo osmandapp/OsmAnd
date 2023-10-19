@@ -44,7 +44,7 @@
 			android:layout_height="match_parent"
 			android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 			android:layout_marginBottom="@dimen/context_menu_padding_margin_tiny"
-			android:background="?attr/divider_color_basic" />
+			android:background="?attr/divider_color" />
 
 		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/switchWidget"

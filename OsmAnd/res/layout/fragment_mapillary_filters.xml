@@ -22,7 +22,7 @@
             android:id="@+id/toggle_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/dialog_button_ex_height"
             tools:layout_height="@dimen/dialog_button_ex_height">
 
@@ -58,20 +58,20 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:paddingStart="@dimen/toolbar_height">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
 
         </FrameLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -143,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="?attr/bg_color"
+                android:background="?attr/list_background_color"
                 android:gravity="center"
                 android:minHeight="48dp"
                 android:orientation="vertical"
@@ -174,7 +174,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
         </LinearLayout>
 
         <!--
@@ -184,7 +184,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/dialog_button_ex_height"
             android:visibility="gone">
 
@@ -227,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/map_button_size"
             android:animateLayoutChanges="true"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -270,13 +270,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:minHeight="@dimen/dialog_button_ex_height">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -316,7 +316,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:orientation="vertical"
             android:paddingStart="@dimen/map_button_size">
 
@@ -366,14 +366,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/content_padding"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pano_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:gravity="center_vertical"
             android:minHeight="@dimen/dialog_button_ex_height">
 
@@ -400,21 +400,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:orientation="vertical"
             android:paddingStart="@dimen/map_button_size">
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:background="?attr/dashboard_divider" />
+                android:background="?attr/divider_color" />
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color">
+            android:background="?attr/list_background_color">
 
             <Button
                 android:id="@+id/button_clear"

@@ -13,14 +13,14 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/appbar_and_list_background_color"
+		android:background="?attr/list_background_color"
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
-			android:background="?attr/appbar_and_list_background_color"
+			android:background="?attr/list_background_color"
 			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			app:titleTextAppearance="@style/ToolbarTitle"
 			osmand:titleTextColor="?android:textColorPrimary"
@@ -203,7 +203,7 @@
 					android:layout_height="1dp"
 					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginRight="@dimen/content_padding"
-					android:background="?attr/dashboard_divider"
+					android:background="?attr/divider_color"
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginEnd="@dimen/content_padding" />
 
@@ -267,7 +267,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/dashboard_divider" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -376,7 +376,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/dashboard_divider" />
+					android:background="?attr/divider_color" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:layout_width="match_parent"
@@ -402,7 +402,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/dashboard_divider" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -453,7 +453,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/dashboard_divider" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -506,7 +506,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/dashboard_divider" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:id="@+id/button_replace_container"

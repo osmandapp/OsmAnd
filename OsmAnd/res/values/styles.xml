@@ -67,7 +67,6 @@
         <item name="alert_dialog_theme">@style/OsmandLightTheme</item>
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
-        <item name="bottom_bar_background_color">@color/card_and_list_background_light</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_main_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
@@ -75,11 +74,9 @@
         <item name="chart_label_background">@drawable/chart_label_background_light</item>
         <item name="chart_grid_line_color">@color/gpx_chart_grid_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
-        <item name="ctx_menu_info_divider">@color/divider_color_light</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_light</item>
         <item name="searchbar_text">@color/text_color_primary_light</item>
         <item name="searchbar_text_hint">@color/text_color_secondary_light</item>
-        <item name="list_divider">@color/divider_color_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
         <item name="downloadButtonBackground">@drawable/download_light</item>
@@ -94,7 +91,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionModeBackground">@color/app_bar_main_light</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-        <item name="bg_color">@color/list_background_color_light</item>
+        <item name="list_background_color">@color/list_background_color_light</item>
         <item name="bg_circle">@drawable/circle_background_light</item>
         <item name="bg_circle_contour">@drawable/circle_contour_bg_light</item>
         <item name="btn_round">@drawable/btn_round_light</item>
@@ -108,7 +105,6 @@
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
         <item name="right_menu_view_bg">@drawable/bg_right_menu_light</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
-        <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="activity_background_color">@color/activity_background_color_light</item>
@@ -116,7 +112,6 @@
         <item name="widget_background_color">@color/widget_background_color_light</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
-        <item name="ctx_menu_divider">@color/divider_color_light</item>
         <item name="search_background">@color/activity_background_color_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_arrow_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
@@ -130,12 +125,12 @@
         <item name="expandable_list_item_background">
             @drawable/expandable_list_item_background_light
         </item>
-        <item name="expandable_list_background">@color/list_background_color_light</item>
         <item name="size_progress_bar">@drawable/size_progressbar_light</item>
         <item name="dash_parking_bg">@drawable/dash_parking_light</item>
         <item name="dashboard_general_button_text_color">@color/active_color_primary_light</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
-
+        
+        <!-- Text -->
         <item name="android:textColor">@color/text_color_primary_light</item>
         <item name="android:textColorPrimary">@color/text_color_primary_light</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
@@ -158,9 +153,12 @@
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_light</item>
         <item name="textColorAlertDialogListItem">@color/text_color_primary_light</item>
-        <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
-        <item name="default_icon_color">@color/icon_color_default_light</item>
-        <item name="primary_icon_color">@color/icon_color_primary_light</item>
+
+        <!-- Icon -->
+        <item name="icon_color_secondary">@color/icon_color_secondary_light</item>
+        <item name="icon_color_default">@color/icon_color_default_light</item>
+        <item name="icon_color_primary">@color/icon_color_primary_light</item>
+        
         <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
         <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_light</item>
@@ -190,14 +188,10 @@
         <item name="dialog_text_description_color">@color/text_color_secondary_light</item>
         <item name="card_description_text_color">@color/text_color_tertiary_light</item>
 
-        <item name="wikivoyage_bg_color">@color/activity_background_color_light</item>
-        <item name="wikivoyage_card_bg_color">@color/card_and_list_background_light</item>
-        <item name="wikivoyage_card_divider_color">@color/divider_color_light</item>
         <item name="wikivoyage_app_bar_color">@color/activity_background_color_light</item>
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_light</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_light</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
-        <item name="wikivoyage_bottom_bar_divider_color">@color/divider_color_light</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
         <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
@@ -222,15 +216,14 @@
 
         <item name="menu_bottom_sheet_icon_color">@color/on_map_icon_color</item>
         <item name="route_info_control_icon_color">@color/icon_color_default_light</item>
-        <item name="route_info_bg">@color/card_and_list_background_light</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
-        <item name="divider_color_basic">@color/divider_color_light</item>
+        <item name="divider_color">@color/divider_color_light</item>
         <item name="main_font_color_basic">@color/text_color_primary_light</item>
         <item name="active_color_basic">@color/active_color_primary_light</item>
         <item name="profile_icon_color_green">@color/profile_icon_color_green_light</item>
-        <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
-        <item name="activity_background_basic">@color/activity_background_color_light</item>
+        <item name="card_and_list_background_color">@color/card_and_list_background_light</item>
+        <item name="activity_background_color">@color/activity_background_color_light</item>
         <item name="pages_bg">@drawable/pages_bg_light</item>
         <item name="dlg_btn_ripple">@drawable/ripple_light</item>
         <item name="dlg_btn_ripple_solid">@drawable/ripple_solid_light</item>
@@ -276,7 +269,6 @@
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored</item>
         <item name="chip_ripple">@drawable/ripple_solid_light_18dp</item>
         <item name="chip_content_color">@color/preference_category_title</item>
-        <item name="appbar_and_list_background_color">@color/list_background_color_light</item>
         <item name="image_tile_placeholder">@drawable/img_placeholder_tile_day</item>
         <item name="toolbar_back_button_color">@color/list_background_color_light</item>
         <item name="toolbar_title_color">@color/list_background_color_light</item>
@@ -411,7 +403,6 @@
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
         <item name="alert_dialog_theme">@style/OsmandDarkTheme</item>
-        <item name="bottom_bar_background_color">@color/card_and_list_background_dark</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_main_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
@@ -419,11 +410,9 @@
         <item name="chart_label_background">@drawable/chart_label_background_dark</item>
         <item name="chart_grid_line_color">@color/gpx_chart_grid_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
-        <item name="ctx_menu_info_divider">@color/divider_color_dark</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_dark</item>
         <item name="searchbar_text">@color/text_color_primary_dark</item>
         <item name="searchbar_text_hint">@color/text_color_secondary_dark</item>
-        <item name="list_divider">@color/divider_color_dark</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
         <item name="downloadButtonBackground">@drawable/download_dark</item>
@@ -437,7 +426,7 @@
         <item name="banner_border_bg">@drawable/banner_border_bg_dark</item>
         <item name="actionModeBackground">@color/app_bar_main_dark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-        <item name="bg_color">@color/list_background_color_dark</item>
+        <item name="list_background_color">@color/list_background_color_dark</item>
         <item name="bg_circle">@drawable/circle_background_dark</item>
         <item name="bg_circle_contour">@drawable/circle_contour_bg_dark</item>
         <item name="btn_round">@drawable/btn_round_dark</item>
@@ -451,7 +440,6 @@
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>
         <item name="right_menu_view_bg">@drawable/bg_right_menu_dark</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_dark</item>
-        <item name="dashboard_divider">@color/divider_color_dark</item>
         <item name="divider_color">@color/divider_color_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="activity_background_color">@color/activity_background_color_dark</item>
@@ -459,7 +447,6 @@
         <item name="widget_background_color">@color/widget_background_color_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
-        <item name="ctx_menu_divider">@color/divider_color_dark</item>
         <item name="search_background">@color/activity_background_color_light</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
@@ -468,12 +455,12 @@
         <item name="expandable_list_item_background">
             @drawable/expandable_list_item_background_dark
         </item>
-        <item name="expandable_list_background">@color/list_background_color_dark</item>
         <item name="size_progress_bar">@drawable/size_progressbar_dark</item>
         <item name="dash_parking_bg">@drawable/dash_parking_dark</item>
         <item name="dashboard_general_button_text_color">@color/active_color_primary_dark</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
 
+        <!-- Text -->
         <item name="android:textColor">@color/text_color_primary_dark</item>
         <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
@@ -487,10 +474,12 @@
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
-        <item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
-        <item name="default_icon_color">@color/icon_color_default_dark</item>
-        <item name="primary_icon_color">@color/icon_color_primary_dark</item>
+        <!-- Icon -->
+        <item name="icon_color_secondary">@color/icon_color_secondary_dark</item>
+        <item name="icon_color_default">@color/icon_color_default_dark</item>
+        <item name="icon_color_primary">@color/icon_color_primary_dark</item>
         <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
+        
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
         <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
         <item name="inactive_text_color">@color/icon_color_default_dark</item>
@@ -524,14 +513,10 @@
         <item name="dialog_text_description_color">@color/text_color_secondary_dark</item>
         <item name="card_description_text_color">@color/text_color_tertiary_dark</item>
 
-        <item name="wikivoyage_bg_color">@color/activity_background_color_dark</item>
-        <item name="wikivoyage_card_bg_color">@color/card_and_list_background_dark</item>
-        <item name="wikivoyage_card_divider_color">@color/divider_color_dark</item>
         <item name="wikivoyage_app_bar_color">@color/activity_background_color_dark</item>
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_dark</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_dark</item>
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
-        <item name="wikivoyage_bottom_bar_divider_color">@color/divider_color_dark</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
         <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
@@ -556,15 +541,14 @@
 
         <item name="menu_bottom_sheet_icon_color">@color/text_color_primary_dark</item>
         <item name="route_info_control_icon_color">@color/icon_color_default_dark</item>
-        <item name="route_info_bg">@color/card_and_list_background_dark</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
-        <item name="divider_color_basic">@color/divider_color_dark</item>
+        <item name="divider_color">@color/divider_color_dark</item>
         <item name="main_font_color_basic">@color/text_color_primary_dark</item>
         <item name="active_color_basic">@color/active_color_primary_dark</item>
         <item name="profile_icon_color_green">@color/profile_icon_color_green_dark</item>
-        <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
-        <item name="activity_background_basic">@color/activity_background_color_dark</item>
+        <item name="card_and_list_background_color">@color/card_and_list_background_dark</item>
+        <item name="activity_background_color">@color/activity_background_color_dark</item>
         <item name="pages_bg">@drawable/pages_bg_dark</item>
         <item name="dlg_btn_ripple">@drawable/ripple_dark</item>
         <item name="dlg_btn_ripple_solid">@drawable/ripple_solid_dark</item>
@@ -610,7 +594,6 @@
         <item name="ic_action_android_auto_logo_colored">@drawable/ic_action_android_auto_colored_night</item>
         <item name="chip_ripple">@drawable/ripple_solid_dark_18dp</item>
         <item name="chip_content_color">@color/active_color_primary_dark</item>
-        <item name="appbar_and_list_background_color">@color/app_bar_main_dark</item>
         <item name="image_tile_placeholder">@drawable/img_placeholder_tile_night</item>
         <item name="toolbar_back_button_color">@color/icon_color_primary_dark</item>
         <item name="toolbar_title_color">@color/text_color_primary_dark</item>
@@ -848,9 +831,9 @@
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
 
-        <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
-        <item name="default_icon_color">@color/icon_color_default_light</item>
-        <item name="bg_color">@color/list_background_color_light</item>
+        <item name="icon_color_secondary">@color/icon_color_secondary_light</item>
+        <item name="icon_color_default">@color/icon_color_default_light</item>
+        <item name="list_background_color">@color/list_background_color_light</item>
     </style>
 
     <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
@@ -858,9 +841,9 @@
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
 
-        <item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
-        <item name="default_icon_color">@color/icon_color_default_dark</item>
-        <item name="bg_color">@color/list_background_color_dark</item>
+        <item name="icon_color_secondary">@color/icon_color_secondary_dark</item>
+        <item name="icon_color_default">@color/icon_color_default_dark</item>
+        <item name="list_background_color">@color/list_background_color_dark</item>
     </style>
 
     <style name="AppBarControls" parent="Theme.AppCompat.Light.DarkActionBar">

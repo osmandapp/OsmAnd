@@ -98,7 +98,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/dashboard_divider"/>
+                        android:background="?attr/divider_color"/>
 
                     <Button
                         android:id="@+id/recalcDestButton"
@@ -122,7 +122,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/dashboard_divider"/>
+                        android:background="?attr/divider_color"/>
 
                     <Button
                         android:id="@+id/removeDestButton"

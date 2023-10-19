@@ -51,7 +51,7 @@
 					android:layout_gravity="center"
 					android:layout_marginVertical="@dimen/content_padding"
 					android:src="@drawable/ic_action_precipitation"
-					android:tint="?attr/default_icon_color" />
+					android:tint="?attr/icon_color_default" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					style="@style/DescStyle"

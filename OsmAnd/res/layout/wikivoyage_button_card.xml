@@ -9,7 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:padding="@dimen/content_padding"
-		android:background="?attr/wikivoyage_card_bg_color"
+		android:background="?attr/card_and_list_background_color"
 		android:gravity="center_vertical">
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton

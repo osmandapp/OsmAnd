@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:orientation="vertical">
 
             <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"
+                android:background="?attr/divider_color"
 	            android:layout_marginStart="56dp" />
 
             <LinearLayout
@@ -123,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color"
+            android:background="?attr/list_background_color"
             android:orientation="vertical">
 
             <FrameLayout
@@ -185,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"
+                android:background="?attr/divider_color"
 	            android:layout_marginStart="56dp" />
 
             <LinearLayout
@@ -235,7 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"
+                android:background="?attr/divider_color"
 	            android:layout_marginStart="56dp" />
 
             <LinearLayout
@@ -283,7 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:background="?attr/dashboard_divider"
+                android:background="?attr/divider_color"
 	            android:layout_marginStart="56dp" />
 
             <LinearLayout
@@ -338,7 +338,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="56dp"
-                    android:background="?attr/dashboard_divider"
+                    android:background="?attr/divider_color"
 	                android:layout_marginStart="56dp" />
 
             </LinearLayout>
@@ -397,7 +397,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            card_view:cardBackgroundColor="?attr/bg_color"
+            card_view:cardBackgroundColor="?attr/list_background_color"
             card_view:cardCornerRadius="4dp">
 
             <LinearLayout

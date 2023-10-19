@@ -26,7 +26,7 @@
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/bottom_sheet_icon_margin"
 				tools:srcCompat="@drawable/ic_map"
-				tools:tint="?attr/default_icon_color" />
+				tools:tint="?attr/icon_color_default" />
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -64,7 +64,7 @@
 				android:layout_marginHorizontal="@dimen/list_item_button_padding"
 				android:contentDescription="@string/shared_string_more_actions"
 				android:focusable="false"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			<androidx.appcompat.widget.AppCompatCheckBox

@@ -18,7 +18,7 @@
 			android:id="@+id/route_menu_top_shadow_all"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/card_and_list_background_basic"
+			android:background="?attr/card_and_list_background_color"
 			android:orientation="vertical">
 
 			<FrameLayout
@@ -209,7 +209,7 @@
 					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
 					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
 					android:layout_marginRight="@dimen/route_info_end_divider_margin"
-					android:background="?attr/divider_color_basic"
+					android:background="?attr/divider_color"
 					android:focusable="false" />
 
 				<LinearLayout
@@ -319,7 +319,7 @@
 					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
 					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
 					android:layout_marginRight="@dimen/route_info_end_divider_margin"
-					android:background="?attr/divider_color_basic"
+					android:background="?attr/divider_color"
 					android:focusable="false" />
 
 				<LinearLayout
@@ -427,7 +427,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
 				android:layout_gravity="bottom"
-				android:background="?attr/divider_color_basic"
+				android:background="?attr/divider_color"
 				android:focusable="false" />
 
 			<FrameLayout
@@ -517,13 +517,13 @@
 				android:id="@+id/route_menu_bottom_scroll"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:background="?attr/activity_background_basic">
+				android:background="?attr/activity_background_color">
 
 				<LinearLayout
 					android:id="@+id/route_menu_cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/activity_background_basic"
+					android:background="?attr/activity_background_color"
 					android:orientation="vertical"
 					android:paddingBottom="30dp">
 

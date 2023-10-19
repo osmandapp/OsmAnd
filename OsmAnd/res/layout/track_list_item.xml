@@ -35,7 +35,7 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		tools:src="@drawable/ic_action_track_line_bold_color"
-		tools:tint="?attr/default_icon_color" />
+		tools:tint="?attr/icon_color_default" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -103,7 +103,7 @@
 				android:layout_margin="@dimen/text_margin_small"
 				android:contentDescription="@string/shared_string_menu"
 				android:src="@drawable/ic_overflow_menu_white"
-				android:tint="?attr/default_icon_color" />
+				android:tint="?attr/icon_color_default" />
 
 		</LinearLayout>
 

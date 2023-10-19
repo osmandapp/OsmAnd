@@ -65,7 +65,7 @@
         android:layout_marginLeft="@dimen/toolbar_inset_start"
         android:layout_marginStart="@dimen/toolbar_inset_start"
         android:visibility="gone"
-        tools:background="?attr/dashboard_divider"
+        tools:background="?attr/divider_color"
         tools:visibility="visible"/>
 
     <ProgressBar

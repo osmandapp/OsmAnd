@@ -21,7 +21,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="?attr/ctx_menu_info_divider"/>
+            android:background="?attr/divider_color"/>
 
         <LinearLayout
             android:id="@+id/button"
@@ -66,7 +66,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="?attr/ctx_menu_info_divider"/>
+            android:background="?attr/divider_color"/>
 
         <View
             android:layout_width="match_parent"

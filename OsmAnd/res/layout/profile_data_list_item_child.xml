@@ -10,7 +10,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color">
+		android:background="?attr/list_background_color">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -80,7 +80,7 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/list_divider"
+		android:background="?attr/divider_color"
 		android:visibility="gone"
 		tools:visibility="visible" />
 

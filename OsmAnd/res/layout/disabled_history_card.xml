@@ -28,7 +28,7 @@
 			android:layout_gravity="center_horizontal"
 			android:layout_marginBottom="@dimen/content_padding"
 			app:srcCompat="@drawable/ic_action_history"
-			app:tint="?attr/default_icon_color" />
+			app:tint="?attr/icon_color_default" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"

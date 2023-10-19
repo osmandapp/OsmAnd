@@ -11,7 +11,7 @@
 		android:id="@+id/background_view"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/wikivoyage_card_bg_color">
+		android:background="?attr/card_and_list_background_color">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -177,7 +177,7 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/wikivoyage_card_divider_color"/>
+		android:background="?attr/divider_color"/>
 
 	<include
 		android:id="@+id/shadow"

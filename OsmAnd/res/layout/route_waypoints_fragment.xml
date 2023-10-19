@@ -13,7 +13,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="?attr/bg_color"
+		android:background="?attr/list_background_color"
 		android:orientation="vertical">
 
 		<FrameLayout

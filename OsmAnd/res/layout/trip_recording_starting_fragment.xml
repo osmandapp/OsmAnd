@@ -30,7 +30,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/content_padding"
-		android:background="?attr/dashboard_divider" />
+		android:background="?attr/divider_color" />
 
 	<LinearLayout
 		android:id="@+id/interval_view_container"

@@ -24,7 +24,7 @@
             android:paddingRight="@dimen/content_padding"
             android:paddingStart="@dimen/content_padding"
             android:paddingTop="@dimen/measurement_tool_content_padding_medium"
-            android:tint="?attr/secondary_icon_color"
+            android:tint="?attr/icon_color_secondary"
             tools:src="@drawable/ic_action_item_move"/>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -122,7 +122,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@+id/measure_point_reorder_icon"
             android:layout_toRightOf="@+id/measure_point_reorder_icon"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/divider_color"/>
     </RelativeLayout>
 
 </FrameLayout>

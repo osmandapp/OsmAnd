@@ -12,7 +12,7 @@
 		android:layout_marginTop="@dimen/content_padding_large"
 		android:layout_marginBottom="@dimen/horizontal_divider_height"
 		android:src="@drawable/ic_action_sensor_find"
-		android:tint="?attr/default_icon_color"
+		android:tint="?attr/icon_color_default"
 		osmand:layout_constraintBottom_toTopOf="@+id/nothing_found_text"
 		osmand:layout_constraintLeft_toLeftOf="parent"
 		osmand:layout_constraintRight_toRightOf="parent" />

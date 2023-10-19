@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/bg_color"
+	android:background="?attr/list_background_color"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/setting_list_item_large_height"
 	tools:layout_height="@dimen/list_item_triple_row_height">
@@ -78,7 +78,7 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
 			app:srcCompat="@drawable/ic_action_additional_option"
-			app:tint="?attr/default_icon_color" />
+			app:tint="?attr/icon_color_default" />
 
 	</LinearLayout>
 

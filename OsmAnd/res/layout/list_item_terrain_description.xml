@@ -3,7 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/bg_color"
+	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -95,7 +95,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/content_padding"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:focusable="false" />
 
 </LinearLayout>

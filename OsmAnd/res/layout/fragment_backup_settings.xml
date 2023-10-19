@@ -104,7 +104,7 @@
 					android:layout_marginRight="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_small"
 					osmand:srcCompat="@drawable/ic_action_info_dark"
-					osmand:tint="?attr/default_icon_color" />
+					osmand:tint="?attr/icon_color_default" />
 
 			</LinearLayout>
 
@@ -152,7 +152,7 @@
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_marginBottom="@dimen/content_padding_small"
 						osmand:srcCompat="@drawable/ic_action_info_dark"
-						osmand:tint="?attr/default_icon_color" />
+						osmand:tint="?attr/icon_color_default" />
 
 				</LinearLayout>
 
@@ -202,7 +202,7 @@
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_marginBottom="@dimen/content_padding_small"
 						osmand:srcCompat="@drawable/ic_action_user_account"
-						osmand:tint="?attr/default_icon_color" />
+						osmand:tint="?attr/icon_color_default" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/user_name"

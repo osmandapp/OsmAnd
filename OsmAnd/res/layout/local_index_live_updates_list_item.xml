@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
+    android:background="?attr/list_background_color"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal">
@@ -87,5 +87,5 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="56dp"
         android:layout_marginStart="56dp"
-        android:background="?attr/dashboard_divider" />
+        android:background="?attr/divider_color" />
 </RelativeLayout>

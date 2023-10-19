@@ -5,7 +5,7 @@
 	android:id="@+id/container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/bg_color"
+	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -63,7 +63,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
 			android:layout_margin="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			app:srcCompat="@drawable/ic_action_info" />
 
 		<View
@@ -71,7 +71,7 @@
 			android:layout_width="1dp"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
-			android:background="?attr/divider_color_basic" />
+			android:background="?attr/divider_color" />
 
 		<FrameLayout
 			android:id="@+id/settings_button"
@@ -87,7 +87,7 @@
 				android:layout_marginVertical="@dimen/content_padding_small"
 				android:clickable="false"
 				android:focusable="false"
-				android:tint="?attr/default_icon_color"
+				android:tint="?attr/icon_color_default"
 				app:srcCompat="@drawable/ic_action_settings" />
 
 		</FrameLayout>
@@ -99,6 +99,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/setting_list_item_large_height"
-		android:background="?attr/divider_color_basic" />
+		android:background="?attr/divider_color" />
 
 </LinearLayout>

@@ -523,7 +523,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
-		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
+		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.list_background_color));
 
 		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(v -> dismiss());

@@ -33,7 +33,7 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_marginStart="@dimen/content_padding"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			tools:src="@drawable/ic_action_info_dark" />
 
 		<LinearLayout

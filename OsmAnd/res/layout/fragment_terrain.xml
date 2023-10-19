@@ -22,13 +22,13 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?attr/activity_background_basic"
+			android:background="?attr/activity_background_color"
 			android:orientation="vertical">
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/setting_list_item_large_height"
-				android:background="?attr/bg_color"
+				android:background="?attr/list_background_color"
 				android:gravity="center_vertical"
 				android:orientation="horizontal">
 
@@ -93,7 +93,7 @@
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/bg_color"
+					android:background="?attr/list_background_color"
 					android:orientation="vertical">
 
 					<LinearLayout
@@ -137,7 +137,7 @@
 								android:layout_height="wrap_content"
 								android:layout_gravity="center_vertical"
 								android:layout_marginStart="@dimen/content_padding"
-								android:tint="?attr/secondary_icon_color"
+								android:tint="?attr/icon_color_secondary"
 								osmand:srcCompat="@drawable/ic_action_arrow_down" />
 
 						</LinearLayout>
@@ -170,7 +170,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="?attr/dashboard_divider"
+						android:background="?attr/divider_color"
 						android:focusable="false" />
 
 					<LinearLayout
@@ -186,7 +186,7 @@
 							android:layout_height="wrap_content"
 							android:layout_margin="@dimen/content_padding"
 							android:src="@drawable/ic_action_opacity"
-							android:tint="?attr/default_icon_color" />
+							android:tint="?attr/icon_color_default" />
 
 						<TextView
 							android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
 						android:layout_marginStart="72dp"
-						android:background="?attr/dashboard_divider"
+						android:background="?attr/divider_color"
 						android:focusable="false" />
 
 					<LinearLayout
@@ -230,7 +230,7 @@
 							android:layout_height="wrap_content"
 							android:layout_margin="@dimen/content_padding"
 							android:src="@drawable/ic_action_layers"
-							android:tint="?attr/default_icon_color" />
+							android:tint="?attr/icon_color_default" />
 
 						<TextView
 							android:layout_width="wrap_content"
@@ -263,7 +263,7 @@
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/setting_list_item_large_height"
-					android:background="?attr/bg_color"
+					android:background="?attr/list_background_color"
 					android:gravity="center_vertical"
 					android:orientation="horizontal">
 
@@ -272,7 +272,7 @@
 						android:layout_height="wrap_content"
 						android:layout_margin="@dimen/content_padding"
 						android:src="@drawable/ic_action_storage"
-						android:tint="?attr/default_icon_color" />
+						android:tint="?attr/icon_color_default" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:layout_width="wrap_content"
@@ -306,7 +306,7 @@
 					android:id="@+id/download_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/bg_color"
+					android:background="?attr/list_background_color"
 					android:orientation="vertical">
 
 					<net.osmand.plus.widgets.TextViewEx
@@ -355,7 +355,7 @@
 				android:id="@+id/empty_state"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/bg_color"
+				android:background="?attr/list_background_color"
 				android:orientation="vertical">
 
 				<FrameLayout

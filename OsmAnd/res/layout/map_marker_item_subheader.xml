@@ -11,7 +11,7 @@
 		android:id="@+id/top_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color"
 		android:visibility="visible"
 		tools:visibility="visible" />
 
@@ -19,7 +19,7 @@
 		android:id="@+id/main_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
+		android:background="?attr/list_background_color"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -55,7 +55,7 @@
 				android:layout_width="1dp"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
-				android:background="?attr/dashboard_divider" />
+				android:background="?attr/divider_color" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/categories_button"
@@ -96,7 +96,7 @@
 			android:layout_height="1dp"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding"
-			android:background="?attr/dashboard_divider" />
+			android:background="?attr/divider_color" />
 
 	</LinearLayout>
 

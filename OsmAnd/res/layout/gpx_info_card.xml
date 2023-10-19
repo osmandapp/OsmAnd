@@ -9,7 +9,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/activity_background_basic">
+		android:background="?attr/activity_background_color">
 
 		<include layout="@layout/list_item_divider" />
 

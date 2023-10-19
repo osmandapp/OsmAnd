@@ -100,7 +100,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
 					android:layout_marginTop="@dimen/content_padding_small"
-					android:background="?attr/divider_color_basic" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:id="@+id/contributions_button"
@@ -150,7 +150,7 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:background="?attr/divider_color_basic" />
+					android:background="?attr/divider_color" />
 
 				<LinearLayout
 					android:id="@+id/footer"

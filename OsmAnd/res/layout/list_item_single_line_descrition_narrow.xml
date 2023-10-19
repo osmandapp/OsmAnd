@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="?attr/bg_color">
+              android:background="?attr/list_background_color">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
@@ -58,6 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="?attr/dashboard_divider"/>
+            android:background="?attr/divider_color"/>
     </FrameLayout>
 </LinearLayout>

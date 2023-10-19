@@ -93,7 +93,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		boolean enabled = isEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
-		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
+		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.icon_color_default);
 
 		title.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
 		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));

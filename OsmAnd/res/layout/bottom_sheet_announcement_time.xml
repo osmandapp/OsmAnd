@@ -74,7 +74,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/content_padding_small"
-		android:background="?attr/divider_color_basic" />
+		android:background="?attr/divider_color" />
 
 	<LinearLayout
 		android:id="@+id/description_container"
@@ -102,7 +102,7 @@
 			android:id="@+id/iv_arrow"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:tint="?attr/default_icon_color"
+			android:tint="?attr/icon_color_default"
 			app:srcCompat="@drawable/ic_action_arrow_down" />
 
 	</LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_height="@dimen/context_img_card_height"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:background="?attr/bg_color"
+    tools:background="?attr/list_background_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            tools:tint="?attr/default_icon_color"
+            tools:tint="?attr/icon_color_default"
             tools:src="@drawable/ic_action_sadface"/>
 
         <TextView
