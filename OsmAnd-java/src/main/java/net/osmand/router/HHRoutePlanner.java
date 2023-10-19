@@ -640,7 +640,7 @@ public class HHRoutePlanner {
 			stats.visitedVertices++;
 			if (point.visited(!rev)) {
 				if (c.HEURISTIC_COEFFICIENT == 1 && c.DIJKSTRA_DIRECTION == 0) {
-					// TODO 2.12 HHRoutePlanner Improve / Review A* finish condition
+					// TODO 2.1 HHRoutePlanner Improve / Review A* finish condition
 					double rcost = point.rtDistanceFromStart + point.rtDistanceFromStartRev;
 					if (rcost <= pointCost.cost) {
 						return point;
@@ -700,7 +700,7 @@ public class HHRoutePlanner {
 			return;
 		}
 		long tm = System.nanoTime();
-		int cnt = networkDB.loadNetworkSegmentPoint(hctx.pointsById, point, reverse);
+		int cnt = networkDB.loadNetworkSegmentPoint(hctx.pointsById, hctx.clusterInPoints, hctx.clusterOutPoints,  point, reverse);
 		stats.loadEdgesCnt += cnt;
 		stats.loadEdgesTime += (System.nanoTime() - tm) / 1e6;
 		for (NetworkDBSegment connected : point.connected(reverse)) {

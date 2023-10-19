@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+
+import com.google.protobuf.CodedInputStream;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -71,19 +75,26 @@ public class HHRoutingDB {
 	}
 	
 	private List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<NetworkDBPoint> pntsById,
-			NetworkDBPoint pnt, boolean out) {
-		List<NetworkDBSegment> l = new ArrayList<>();
-		for (int i = 0; i < bytes.length; i += 12) {
-			int connId = Algorithms.parseIntFromBytes(bytes, i);
-			NetworkDBPoint pnt2 = pntsById.get(connId);
-			NetworkDBPoint start = out ? pnt : pnt2;
-			NetworkDBPoint end = out ? pnt2 : pnt;
-			float dist = Float.intBitsToFloat(Algorithms.parseIntFromBytes(bytes, i + 4));
-			NetworkDBSegment seg = new NetworkDBSegment(start, end, dist, out,
-					Algorithms.parseIntFromBytes(bytes, i + 8) > 0);
-			l.add(seg);
+			List<NetworkDBPoint> lst, NetworkDBPoint pnt, boolean out)  {
+		try {
+			List<NetworkDBSegment> l = new ArrayList<>();
+			ByteArrayInputStream str = new ByteArrayInputStream(bytes);
+			for (int i = 0; i < lst.size(); i++) {
+				int d = CodedInputStream.readRawVarint32(str);
+				if (d <= 0) {
+					continue;
+				}
+				double dist = d / 10.0;
+				NetworkDBPoint start = out ? pnt : lst.get(i);
+				NetworkDBPoint end = out ? lst.get(i) : pnt;
+				NetworkDBSegment seg = new NetworkDBSegment(start, end, dist, out, false);
+				l.add(seg);
+			}
+			return l;
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
 		}
-		return l;
+		
 	}
 
 	private boolean checkColumnExist(Statement st, String col, String table) throws SQLException {
@@ -214,8 +225,8 @@ public class HHRoutingDB {
 	}
 	
 	
-	public int loadNetworkSegmentPoint(TLongObjectHashMap<NetworkDBPoint> pntsById, NetworkDBPoint point,
-			boolean reverse) throws SQLException {
+	public int loadNetworkSegmentPoint(TLongObjectHashMap<NetworkDBPoint> pntsById, TIntObjectHashMap<List<NetworkDBPoint>> clusterInPoints,
+			TIntObjectHashMap<List<NetworkDBPoint>> clusterOutPoints, NetworkDBPoint point, boolean reverse) throws SQLException {
 		if (point.connected(reverse) != null) {
 			return 0;
 		}
@@ -224,8 +235,8 @@ public class HHRoutingDB {
 			loadSegmentStart.setInt(1, point.index);
 			ResultSet rs = loadSegmentStart.executeQuery();
 			if (rs.next()) {
-				point.connectedSet(true, parseSegments(rs.getBytes(2), pntsById, point, false));
-				point.connectedSet(false, parseSegments(rs.getBytes(3), pntsById, point, true));
+				point.connectedSet(true, parseSegments(rs.getBytes(2), pntsById, clusterInPoints.get(point.clusterId), point, false));
+				point.connectedSet(false, parseSegments(rs.getBytes(3), pntsById, clusterOutPoints.get(point.dualPoint.clusterId), point, true));
 				return point.connected(true).size() + point.connected(false).size();
 			}
 			return 0;
