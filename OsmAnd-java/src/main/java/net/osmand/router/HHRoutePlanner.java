@@ -253,8 +253,9 @@ public class HHRoutePlanner {
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.calcDetailed(2);
+//			c.ROUTE_LAST_MILE = false;
+//			c.calcAlternative();
 			c.gc();
-			c.calcAlternative();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 //			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
@@ -309,7 +310,7 @@ public class HHRoutePlanner {
 		System.out.printf("%.2f ms\n", stats.prepTime);
 		
 		
-		System.out.println(String.format("Found final route - cost %.2f (%.2f + start %.2f), %d depth ( visited %,d (%,d unique) of %,d added vertices )", 
+		System.out.println(String.format("Found final route - cost %.2f (HH %.2f with starts %.2f), %d depth ( visited %,d (%,d unique) of %,d added vertices )", 
 				route.routingTimeSegments, route.routingTimeHHDetailed, route.routingTimeDetailed,
 				route.segments.size(), stats.visitedVertices, stats.uniqueVisitedVertices, stats.addedVertices));
 		
@@ -543,7 +544,9 @@ public class HHRoutePlanner {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
-				long pntId = calculateRoutePointInternalId(o.getRoad(), o.getSegmentStart(), o.getSegmentEnd()); // TODO
+				long pntId = calculateRoutePointInternalId(o.getRoad().getId(),
+						reverse ? o.getSegmentEnd() : o.getSegmentStart(),
+						reverse ? o.getSegmentStart() : o.getSegmentEnd());
 				if (set.add(pntId)) {
 					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setCostParentRt(reverse, o.getDistanceFromStart() + distanceToEnd(c, reverse, pnt, e), null,
@@ -595,7 +598,7 @@ public class HHRoutePlanner {
 			LatLon startLatLon, LatLon endLatLon, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		Queue<NetworkDBPointCost> queue = hctx.queue;
-		// TODO revert 2 queues to fail fast in 1 direction
+		// TODO 1.6 HHRoutePlanner revert 2 queues to fail fast in 1 direction
 		for (NetworkDBPoint start : stPoints.valueCollection()) {
 			if (start.rtExclude) {
 				continue;
@@ -779,6 +782,7 @@ public class HHRoutePlanner {
 	}
 
 	
+	// TODO 1.3 HHRoutePlanner routing 1/-1/0 FIX routing time 7288 / 7088 / 7188 (43.15274, 19.55169 -> 42.955495, 19.0972263)
 	private HHNetworkSegmentRes runDetailedRouting(HHRoutingConfig c, HHNetworkSegmentRes res) throws InterruptedException, IOException {
 		
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
@@ -791,7 +795,7 @@ public class HHRoutePlanner {
 //		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
-		// TODO use cache boundaries to speed up
+		// TODO 1.4 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, f);
 		return res;

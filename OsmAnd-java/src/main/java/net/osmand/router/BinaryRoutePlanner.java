@@ -35,11 +35,13 @@ public class BinaryRoutePlanner {
 	static boolean TRACE_ROUTING = false;
 	static int TEST_ID = 194349150;
 	static boolean TEST_SPECIFIC = false;
-	public static boolean PRECISE_DIST_MEASUREMENT = false;
+	
+	public static boolean DEBUG_PRECISE_DIST_MEASUREMENT = false;
+	public static boolean DEBUG_BREAK_EACH_SEGMENT = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
-		if (PRECISE_DIST_MEASUREMENT) {
+		if (DEBUG_PRECISE_DIST_MEASUREMENT) {
 			return MapUtils.measuredDist31(x1, y1, x2, y2);
 		}
 		return MapUtils.squareRootDist31(x1, y1, x2, y2);
@@ -259,6 +261,10 @@ public class BinaryRoutePlanner {
 		if (!originalDir && (seg.getSegmentStart() != pnt.getSegmentEnd() || seg.getSegmentEnd() != pnt.getSegmentStart())) {
 			throw new IllegalStateException();
 		}
+		if (!originalDir && ctx.config.initialDirection == null && ctx.config.PENALTY_FOR_REVERSE_DIRECTION < 0) {
+			// special case for single side spread point-dijkstra
+			return null;
+		}
 		seg.setParentRoute(RouteSegment.NULL);
 		// compensate first segment difference to mid point (length) https://github.com/osmandapp/OsmAnd/issues/14148
 		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx, seg);
@@ -451,7 +457,7 @@ public class BinaryRoutePlanner {
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
  			if (alreadyVisited) {
- 				// 1.4 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
+ 				// 1.5 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
  				// Create tests STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
@@ -491,13 +497,12 @@ public class BinaryRoutePlanner {
 			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 
-			// 1.5 TODO test that routing time is different with on & off! using unit tests
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
-//			if(nextCurrentSegment != null) { // currentSegment.distanceFromStart - startSegment.distanceFromStart > 100
-//				graphSegments.add(nextCurrentSegment);
-//				break;
-//			}
+			if (DEBUG_BREAK_EACH_SEGMENT && nextCurrentSegment != null) {
+				graphSegments.add(nextCurrentSegment);
+				break;
+			}
 			if (doNotAddIntersections) {
 				break;
 			}

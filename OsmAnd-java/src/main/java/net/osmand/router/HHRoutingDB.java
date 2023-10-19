@@ -24,11 +24,11 @@ public class HHRoutingDB {
 	protected static final int XY_SHORTCUT_GEOM = 0;
 
 	protected Connection conn;
-	protected  PreparedStatement loadGeometry;
-	protected  PreparedStatement loadSegmentEnd;
-	protected  PreparedStatement loadSegmentStart;
+	protected PreparedStatement loadGeometry;
+	protected PreparedStatement loadSegmentEnd;
+	protected PreparedStatement loadSegmentStart;
 
-	protected  final int BATCH_SIZE = 10000;
+	protected final int BATCH_SIZE = 10000;
 	protected int batchInsPoint = 0;
 
 	protected boolean compactDB;
@@ -148,8 +148,7 @@ public class HHRoutingDB {
 	
 	private TLongObjectHashMap<NetworkDBPoint> loadNetworkPoints(boolean byId) throws SQLException {
 		Statement st = conn.createStatement();
-		String pntGeoIdCol = compactDB ? "pointGeoId, id": "pointGeoId, idPoint";
-		ResultSet rs = st.executeQuery("SELECT "+pntGeoIdCol+", chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
+		ResultSet rs = st.executeQuery("SELECT pointGeoId, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
 		TLongObjectHashMap<NetworkDBPoint> mp = new TLongObjectHashMap<>();
 		TLongObjectHashMap<NetworkDBPoint> duals = new TLongObjectHashMap<>();
 		while (rs.next()) {
@@ -157,6 +156,7 @@ public class HHRoutingDB {
 			int p = 1;
 			pnt.pntGeoId = rs.getLong(p++);
 			pnt.index = rs.getInt(p++);
+			pnt.clusterId = rs.getInt(p++);
 			pnt.chInd = rs.getInt(p++);
 			pnt.roadId = rs.getLong(p++);
 			pnt.start = rs.getInt(p++);
@@ -337,6 +337,7 @@ public class HHRoutingDB {
 	static class NetworkDBPoint {
 		NetworkDBPoint dualPoint;
 		int index;
+		public int clusterId;
 		long chInd;
 		long pntGeoId;
 		public long roadId;
@@ -376,7 +377,7 @@ public class HHRoutingDB {
 		int rtPrevCnt = 0;
 		int rtLevel = 0;
 		int rtIndex = 0;
-		public TIntArrayList clusters;
+		
 		
 		
 		public List<NetworkDBSegment> connected(boolean rev) {
