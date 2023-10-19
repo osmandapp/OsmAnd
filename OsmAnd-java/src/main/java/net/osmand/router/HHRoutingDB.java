@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -32,6 +34,14 @@ public class HHRoutingDB {
 	protected int batchInsPoint = 0;
 
 	protected boolean compactDB;
+	
+	protected static Comparator<NetworkDBPoint> indexComparator = new Comparator<NetworkDBPoint>() {
+
+		@Override
+		public int compare(NetworkDBPoint o1, NetworkDBPoint o2) {
+			return Integer.compare(o1.index, o2.index);
+		}
+	};
 	
 	public HHRoutingDB(Connection conn) throws SQLException {
 		this.conn = conn;
@@ -181,6 +191,21 @@ public class HHRoutingDB {
 		return mp;
 	}
 	
+	
+	public TIntObjectHashMap<List<NetworkDBPoint>> groupByClusters(TLongObjectHashMap<NetworkDBPoint> pointsById, boolean out) {
+		TIntObjectHashMap<List<NetworkDBPoint>> res = new TIntObjectHashMap<>();
+		for (NetworkDBPoint p : pointsById.valueCollection()) {
+			int cid = out ? p.clusterId : p.dualPoint.clusterId;
+			if (!res.containsKey(cid)) {
+				res.put(cid, new ArrayList<>());
+			}
+			res.get(cid).add(p);
+		}
+		for(List<NetworkDBPoint> l : res.valueCollection()) {
+			l.sort(indexComparator);
+		}
+		return res;
+	}
 	
 	public void loadGeometry(NetworkDBSegment segment, boolean reload) throws SQLException {
 		if (!segment.geometry.isEmpty() && !reload) {
@@ -515,6 +540,7 @@ public class HHRoutingDB {
 
 		
 	}
+
 
 
 }
