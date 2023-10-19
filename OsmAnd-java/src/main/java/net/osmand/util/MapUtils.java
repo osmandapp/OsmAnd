@@ -609,16 +609,14 @@ public class MapUtils {
 
 
 	// 14 precision, gives 10x speedup, 0.02% error
-	public static int PRECISION_ZOOM = 14;
+	public static int PRECISION_ZOOM = 14; // 16 doesn't fit into tile int
 	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
 	private static double getTileWidth(int x31, int y31) {
-		int tileX = (x31 >> (31 - PRECISION_ZOOM));
-		int tileY = (y31 >> (31 - PRECISION_ZOOM));
-		int tileId = (tileX << PRECISION_ZOOM) + tileY;
-		Double d = DIST_CACHE.get(tileId);
+		int tileY = (y31 >> (31 - PRECISION_ZOOM)); // width the same for all x
+		Double d = DIST_CACHE.get(tileY);
 		if (d == null) {
 			d = getTileDistanceWidth(MapUtils.get31LatitudeY(y31), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
-			DIST_CACHE.put(tileId, d);
+			DIST_CACHE.put(tileY, d);
 		}
 		return d;
 	}
