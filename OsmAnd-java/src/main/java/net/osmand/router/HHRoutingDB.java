@@ -149,21 +149,17 @@ public class HHRoutingDB {
 	}
 	
 	public TLongObjectHashMap<NetworkDBPoint> loadNetworkPoints() throws SQLException {
-		return loadNetworkPoints(true);
-	}
-	
-	public TLongObjectHashMap<NetworkDBPoint> loadNetworkPointsByGeoId() throws SQLException {
-		return loadNetworkPoints(false);
-	}
-	
-	private TLongObjectHashMap<NetworkDBPoint> loadNetworkPoints(boolean byId) throws SQLException {
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT pointGeoId, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
+		ResultSet rs = st.executeQuery("SELECT dualIdPoint, pointGeoId, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
 		TLongObjectHashMap<NetworkDBPoint> mp = new TLongObjectHashMap<>();
-		TLongObjectHashMap<NetworkDBPoint> duals = new TLongObjectHashMap<>();
 		while (rs.next()) {
 			NetworkDBPoint pnt = new NetworkDBPoint();
 			int p = 1;
+			int dualIdPoint = rs.getInt(p++);
+			if (dualIdPoint == 0) {
+				// ignore non-dual point as they don't exist
+				continue;
+			}
 			pnt.pntGeoId = rs.getLong(p++);
 			pnt.index = rs.getInt(p++);
 			pnt.clusterId = rs.getInt(p++);
@@ -175,15 +171,12 @@ public class HHRoutingDB {
 			pnt.startY = rs.getInt(p++);
 			pnt.endX = rs.getInt(p++);
 			pnt.endY = rs.getInt(p++);
-//			mp.put(byGeoId ? pnt.pntGeoId : pnt.index, pnt);
-			mp.put(byId ? pnt.index : pnt.pntGeoId, pnt);
-			long rpid = HHRoutePlanner.calculateRoutePointInternalId(pnt.roadId, Math.min(pnt.start, pnt.end), 
-					Math.max(pnt.start, pnt.end));
-			if (duals.contains(rpid)) {
-				pnt.dualPoint = duals.get(rpid);
+			mp.put(pnt.index, pnt);
+			if (mp.contains(dualIdPoint)) {
+				pnt.dualPoint = mp.get(dualIdPoint);
 				pnt.dualPoint.dualPoint = pnt;
 			} else {
-				duals.put(rpid, pnt);
+				// will be processed later
 			}
 		}
 		rs.close();
