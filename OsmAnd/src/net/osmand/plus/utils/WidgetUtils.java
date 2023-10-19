@@ -1,7 +1,6 @@
 package net.osmand.plus.utils;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
@@ -20,11 +19,9 @@ import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -34,37 +31,19 @@ import java.util.TreeMap;
 public class WidgetUtils {
 	public static final int MAXIMUM_WIDGETS_IN_ROW = 3;
 
-	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
-										 @NonNull WidgetsPanel panel) {
-		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-		addSelectedWidget(mapActivity, widgetId, appMode, panel);
-	}
-
-	public static void addSelectedWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId,
-										 @NonNull ApplicationMode appMode, @NonNull WidgetsPanel panel) {
-		addSelectedWidgets(mapActivity, Collections.singletonList(widgetId), panel, appMode);
-	}
-
-	public static void addSelectedWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
-										  @NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
+	public static void createNewWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
+										@NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-		int filter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		for (String widgetId : widgetsIds) {
-			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-			Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
-					filter, Arrays.asList(WidgetsPanel.values()));
-			if (widgetInfo == null || widgetInfos.contains(widgetInfo)) {
-				widgetInfo = createDuplicateWidget(app, widgetId, panel, widgetsFactory, selectedAppMode);
-			}
+			MapWidgetInfo widgetInfo = createDuplicateWidget(app, widgetId, panel, widgetsFactory, selectedAppMode);
 			if (widgetInfo != null) {
 				addWidgetToEnd(mapActivity, widgetInfo, panel, selectedAppMode);
 				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true, false);
 			}
 		}
-
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
@@ -121,11 +100,11 @@ public class WidgetUtils {
 			List<List<String>> orders = new ArrayList<>(pagedOrder.values());
 			List<String> lastPageOrder = orders.get(orders.size() - 1);
 
-			if (widgetsPanel.isPanelVertical() && shouldCreateNewPage(targetWidget, getLastRowWidgets(lastPageOrder, enabledWidgets))) {
+			if (widgetsPanel.isPanelVertical()) {
 				List<String> newPage = new ArrayList<>();
 				newPage.add(targetWidget.key);
 				orders.add(newPage);
-				targetWidget.pageIndex = pages.size() + 1;
+				targetWidget.pageIndex = orders.size() - 1;
 				targetWidget.priority = 0;
 			} else {
 				lastPageOrder.add(targetWidget.key);
@@ -148,35 +127,5 @@ public class WidgetUtils {
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
-	}
-
-	private static List<MapWidget> getLastRowWidgets(List<String> lastPageOrder, Set<MapWidgetInfo> enabledWidgets) {
-		List<MapWidget> lastRowWidgets = new ArrayList<>();
-		for (String widgetId : lastPageOrder) {
-			for (MapWidgetInfo widgetInfo : enabledWidgets) {
-				if (widgetId.equals(widgetInfo.key)) {
-					lastRowWidgets.add(widgetInfo.widget);
-				}
-			}
-		}
-		return lastRowWidgets;
-	}
-
-	public static boolean shouldCreateNewPage(MapWidgetInfo targetWidget, List<MapWidget> lastRowWidgets) {
-		boolean shouldCreateNewRow = false;
-		MapWidget mapWidget = targetWidget.widget;
-		boolean isSimpleWidget = mapWidget instanceof SimpleWidget;
-		boolean rowHasComplexWidget = false;
-
-		for (MapWidget widget : lastRowWidgets) {
-			if (!(widget instanceof SimpleWidget)) {
-				rowHasComplexWidget = true;
-				break;
-			}
-		}
-		if ((isSimpleWidget && lastRowWidgets.size() >= MAXIMUM_WIDGETS_IN_ROW) || (!isSimpleWidget && !lastRowWidgets.isEmpty()) || rowHasComplexWidget) {
-			shouldCreateNewRow = true;
-		}
-		return shouldCreateNewRow;
 	}
 }

@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.utils.WidgetUtils.addSelectedWidgets;
+import static net.osmand.plus.utils.WidgetUtils.createNewWidgets;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -242,9 +242,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
-		addSelectedWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode);
+		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode);
 		onWidgetsConfigurationChanged();
-		mapLayers.getMapInfoLayer().updateColorShadowsOfText();
 	}
 
 	@Override

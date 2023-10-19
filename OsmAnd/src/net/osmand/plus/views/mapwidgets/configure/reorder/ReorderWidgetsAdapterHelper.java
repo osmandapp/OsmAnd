@@ -283,15 +283,14 @@ public class ReorderWidgetsAdapterHelper {
 			return true;
 		}
 
-		int countSimpleWidgetsInRow = 0;
+		boolean containsSimpleWidget = true;
 		for (MapWidget widget : targetRowWidgets) {
-			if (widget instanceof SimpleWidget) {
-				countSimpleWidgetsInRow++;
-			} else {
-				return false;
+			if (!(widget instanceof SimpleWidget)) {
+				containsSimpleWidget = false;
+				break;
 			}
 		}
-		return fromWidget instanceof SimpleWidget && countSimpleWidgetsInRow < MAXIMUM_WIDGETS_IN_ROW;
+		return fromWidget instanceof SimpleWidget && containsSimpleWidget;
 	}
 
 	private boolean swapVerticalWidgets(int from, int to) {
@@ -484,20 +483,16 @@ public class ReorderWidgetsAdapterHelper {
 	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetsPanel panel = dataHolder.getSelectedPanel();
 
-		boolean alreadyAdded = widgetAlreadyAdded(widgetInfo.key);
-		String widgetId = alreadyAdded ? getDuplicateWidgetId(widgetInfo.key) : widgetInfo.key;
+		String widgetId = getDuplicateWidgetId(widgetInfo.key);
 
 		int page = getLastPage();
 		int order = dataHolder.getMaxOrderOfPage(page) + 1;
 
 		List<String> lastPageOrder = dataHolder.getPages().get(page);
 		if (lastPageOrder != null && panel.isPanelVertical()) {
-			List<MapWidget> enabledWidgets = getEnabledWidgets(page);
-			if (WidgetUtils.shouldCreateNewPage(widgetInfo, enabledWidgets)) {
-				page++;
-				order = 0;
-				insertToEndOfAddedWidgets(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
-			}
+			page++;
+			order = 0;
+			insertToEndOfAddedWidgets(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
 		}
 
 		dataHolder.addWidgetToPage(widgetId, page);
@@ -510,22 +505,9 @@ public class ReorderWidgetsAdapterHelper {
 		addedWidgetUiInfo.page = page;
 		addedWidgetUiInfo.order = order;
 		addedWidgetUiInfo.iconId = widgetInfo.getMapIconId(nightMode);
+		addedWidgetUiInfo.newWidgetToCreate = true;
 
 		insertToEndOfAddedWidgets(new ListItem(ItemType.ADDED_WIDGET, addedWidgetUiInfo));
-	}
-
-	private List<MapWidget> getEnabledWidgets(int lastPage) {
-		List<MapWidget> enabledWidgets = new ArrayList<>();
-		for (ListItem item : items) {
-			if (item.value instanceof AddedWidgetUiInfo && ((AddedWidgetUiInfo) item.value).page == lastPage) {
-				enabledWidgets.add(((AddedWidgetUiInfo) item.value).info.widget);
-			}
-		}
-		return enabledWidgets;
-	}
-
-	private boolean widgetAlreadyAdded(@NonNull String widgetId) {
-		return dataHolder.getOrders().containsKey(widgetId) || widgetRegistry.isWidgetVisible(widgetId);
 	}
 
 	private void removeAddedItemFromAvailable(@NonNull String widgetId) {

@@ -68,6 +68,9 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			}
 			constraintSet.applyTo((ConstraintLayout) container);
 		} else {
+			if (!(container instanceof FrameLayout)) {
+				return;
+			}
 			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
 			params.gravity = fullRow ? Gravity.CENTER : Gravity.START;
 			params.setMarginStart(dpToPx(app, 36));

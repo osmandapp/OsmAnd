@@ -53,6 +53,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -648,26 +649,20 @@ class AppVersionUpgradeOnInit {
 		}
 	}
 
-	private void updateWidgetPages(OsmandSettings settings) {
+	private void updateWidgetPages(@NonNull OsmandSettings settings) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			List<String> newTopPageOrder = getUpdatedWidgetPageOrder(settings.TOP_WIDGET_PANEL_ORDER.getStringsListForProfile(mode));
-			settings.TOP_WIDGET_PANEL_ORDER.setStringsListForProfile(mode, newTopPageOrder);
-			List<String> newBottomPageOrder = getUpdatedWidgetPageOrder(settings.BOTTOM_WIDGET_PANEL_ORDER.getStringsListForProfile(mode));
-			settings.BOTTOM_WIDGET_PANEL_ORDER.setStringsListForProfile(mode, newBottomPageOrder);
+			updateWidgetPage(mode, settings.TOP_WIDGET_PANEL_ORDER_OLD, settings.TOP_WIDGET_PANEL_ORDER);
+			updateWidgetPage(mode, settings.BOTTOM_WIDGET_PANEL_ORDER_OLD, settings.BOTTOM_WIDGET_PANEL_ORDER);
 		}
+		settings.TOP_WIDGET_PANEL_ORDER_OLD.clearAll();
+		settings.BOTTOM_WIDGET_PANEL_ORDER_OLD.clearAll();
 	}
 
-	private List<String> getUpdatedWidgetPageOrder(List<String> oldWidgetOrder) {
-		if (oldWidgetOrder != null) {
-			List<String> newPageOrder = new ArrayList<>();
-			for (int pageIndex = 0; pageIndex < oldWidgetOrder.size(); pageIndex++) {
-				String page = oldWidgetOrder.get(pageIndex);
-				List<String> orders = Arrays.asList(page.split(","));
-				newPageOrder.addAll(orders);
-			}
-			return newPageOrder;
-		} else {
-			return null;
+	private void updateWidgetPage(ApplicationMode mode, ListStringPreference oldWidgetPanelPreference, ListStringPreference newWidgetPanelPreference) {
+		if (oldWidgetPanelPreference.isSetForMode(mode)) {
+			String oldString = oldWidgetPanelPreference.getModeValue(mode);
+			String newString = oldString.replace(",", oldWidgetPanelPreference.getDelimiter());
+			newWidgetPanelPreference.setModeValue(mode, newString);
 		}
 	}
 }

@@ -128,4 +128,8 @@ public class ListStringPreference extends StringPreference {
 		}
 		return setModeValue(mode, vl);
 	}
+
+	public String getDelimiter(){
+		return delimiter;
+	}
 }

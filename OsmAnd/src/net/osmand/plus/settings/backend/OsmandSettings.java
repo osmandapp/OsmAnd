@@ -1832,14 +1832,53 @@ public class OsmandSettings {
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
+	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			if (s != null) {
+				return s.replace(",", getDelimiter());
+			}
+			return null;
+		}
+	}.makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			if (s != null) {
+				return s.replace(",", getDelimiter());
+			}
+			return null;
+		}
+	}.makeProfile();
+
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+			"top_widget_panel_order_new", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"bottom_widget_panel_order_new", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
-
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 

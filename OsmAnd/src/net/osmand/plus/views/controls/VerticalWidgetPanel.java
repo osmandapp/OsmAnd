@@ -172,7 +172,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	private void addDivider(@NonNull ViewGroup viewGroup, boolean verticalDivider) {
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(verticalDivider ? R.layout.vertical_widget_divider : R.layout.horizontal_widget_divider, viewGroup);
+				.inflate(verticalDivider ? R.layout.vertical_divider : R.layout.simple_divider_item, viewGroup);
 	}
 
 	public void setMapActivity(@NonNull MapActivity mapActivity) {

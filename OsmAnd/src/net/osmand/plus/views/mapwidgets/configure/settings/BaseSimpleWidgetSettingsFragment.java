@@ -120,11 +120,13 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 	@Override
 	protected void applySettings() {
 		if (isWidgetVertical) {
-			List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel((MapActivity) requireActivity(),
-					appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
-			Set<MapWidgetInfo> rowWidgetsMapInfo = pagedWidgets.get(widgetInfo.pageIndex);
-			rowWidgetsMapInfo.remove(widgetInfo);
-			applySizeSettingToWidgetsInRow(rowWidgetsMapInfo);
+			if (widgetInfo != null) {
+				List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel((MapActivity) requireActivity(),
+						appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+				Set<MapWidgetInfo> rowWidgetsMapInfo = pagedWidgets.get(widgetInfo.pageIndex);
+				rowWidgetsMapInfo.remove(widgetInfo);
+				applySizeSettingToWidgetsInRow(rowWidgetsMapInfo);
+			}
 
 			shouldShowIconPref.set(showIcon);
 			widgetSizePref.set(selectedWidgetSize);

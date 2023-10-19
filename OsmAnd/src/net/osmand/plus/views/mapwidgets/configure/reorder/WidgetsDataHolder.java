@@ -130,7 +130,9 @@ public class WidgetsDataHolder {
 			widgetsOfPage = new ArrayList<>();
 			pages.put(page, widgetsOfPage);
 		}
-		widgetsOfPage.add(position, widgetId);
+		if (!widgetsOfPage.contains(widgetId)) {
+			widgetsOfPage.add(position, widgetId);
+		}
 	}
 
 	public void addEmptyPage(int page) {
