@@ -358,20 +358,28 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public void hideWidgets() {
-		updateControlsVisibility(false, false);
+		updateWidgetsVisibility(false);
 	}
 
 	public void showWidgets() {
-		updateControlsVisibility(true, true);
+		updateWidgetsVisibility(true);
 	}
 
 	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
-		int topControlsVisibility = topControlsVisible ? View.VISIBLE : View.GONE;
-		AndroidUiHelper.setVisibility(mapActivity, topControlsVisibility,
+		updateWidgetsVisibility(topControlsVisible);
+		updateBottomControlsVisibility(bottomControlsVisible);
+	}
+
+	public void updateWidgetsVisibility(boolean visible) {
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		AndroidUiHelper.setVisibility(mapActivity, visibility,
 				R.id.map_center_info,
 				R.id.map_left_widgets_panel,
 				R.id.map_right_widgets_panel);
-		int bottomControlsVisibility = bottomControlsVisible ? View.VISIBLE : View.GONE;
+	}
+
+	public void updateBottomControlsVisibility(boolean visible) {
+		int bottomControlsVisibility = visible ? View.VISIBLE : View.GONE;
 		AndroidUiHelper.setVisibility(mapActivity, bottomControlsVisibility,
 				R.id.bottom_controls_container);
 	}
