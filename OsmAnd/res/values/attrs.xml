@@ -18,7 +18,6 @@
 		<attr name="banner_border_bg" format="reference" />
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="list_background_color" format="color"/>
-		<attr name="list_background_color" format="reference" />
 	    <attr name="bg_circle" format="reference"/>
         <attr name="bg_circle_contour" format="reference" />
 	    <attr name="btn_round" format="reference" />
@@ -31,7 +30,6 @@
         <attr name="bg_map_context_menu" format="reference" />
         <attr name="bg_point_editor_view" format="reference" />
         <attr name="activity_background_color" format="reference" />
-        <attr name="list_background_color" format="reference" />
         <attr name="ctx_menu_controller_bg" format="reference" />
         <attr name="ctx_menu_controller_text_color" format="reference" />
         <attr name="bottom_menu_view_bg" format="reference" />
@@ -88,14 +86,11 @@
 		<attr name="subscription_active_bg_color" format="reference"/>
 		<attr name="subscription_active_div_color" format="reference"/>
 
-		<attr name="activity_background_color" format="reference"/>
 		<attr name="card_and_list_background_color" format="reference"/>
-		<attr name="divider_color" format="reference"/>
 		<attr name="wikivoyage_app_bar_color" format="reference"/>
 		<attr name="wikivoyage_app_bar_text_color" format="reference"/>
 		<attr name="wikivoyage_active_color" format="reference"/>
 		<attr name="wikivoyage_bottom_bar_bg_color" format="reference"/>
-		<attr name="divider_color" format="reference"/>
 		<attr name="wikivoyage_secondary_btn_bg_color" format="reference"/>
 		<attr name="wikivoyage_primary_btn_text_color" format="reference"/>
 		<attr name="wikivoyage_welcome_bg_color" format="reference"/>
@@ -114,8 +109,6 @@
         <attr name="purchase_sc_header_icon_bg" format="color"/>
         <attr name="promo_banner_title_color" format="color"/>
 
-        <attr name="card_and_list_background_color" format="color" />
-
         <attr name="bottom_nav_shadow" format="reference"/>
 
 		<attr name="text_rounded_bg_regular" format="reference" />
@@ -123,14 +116,10 @@
 
 		<attr name="menu_bottom_sheet_icon_color" format="reference" />
 		<attr name="route_info_control_icon_color" format="reference" />
-		<attr name="card_and_list_background_color" format="reference" />
 		<attr name="flow_toolbar_bg" format="reference" />
-		<attr name="divider_color" format="reference" />
 		<attr name="main_font_color_basic" format="reference" />
 		<attr name="active_color_basic" format="reference" />
 		<attr name="profile_icon_color_green" format="reference" />
-		<attr name="card_and_list_background_color" format="reference" />
-		<attr name="activity_background_color" format="reference" />
 		<attr name="pages_bg" format="reference"/>
 	    <attr name="dlg_btn_ripple" format="reference" />
 	    <attr name="dlg_btn_ripple_solid" format="reference" />
@@ -163,7 +152,6 @@
 	    <attr name="chip_ripple" format="reference" />
 	    <attr name="chip_content_color" format="reference" />
 	    <attr name="inactive_text_color" format="reference" />
-	    <attr name="list_background_color" format="reference" />
 	    <attr name="image_tile_placeholder" format="reference" />
 	    <attr name="toolbar_back_button_color" format="reference" />
 	    <attr name="toolbar_title_color" format="reference" />
