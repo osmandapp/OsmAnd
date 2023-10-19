@@ -252,7 +252,7 @@ public class HHRoutePlanner {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
-//			c = HHRoutingConfig.dijkstra(0); // TODO 1.9 HHRoutePlanner bug with detailed calculation
+//			c = HHRoutingConfig.dijkstra(1); 
 			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
