@@ -197,7 +197,7 @@ public class HHRoutingDB {
 		for (NetworkDBPoint p : pointsById.valueCollection()) {
 			int cid = out ? p.clusterId : p.dualPoint.clusterId;
 			if (!res.containsKey(cid)) {
-				res.put(cid, new ArrayList<>());
+				res.put(cid, new ArrayList<NetworkDBPoint>());
 			}
 			res.get(cid).add(p);
 		}
