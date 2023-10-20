@@ -407,16 +407,16 @@ public class BinaryMapRouteReaderAdapter {
 		
 		
 		public void completeRouteEncodingRules() {
-			for(int i = 0; i < routeEncodingRules.size(); i++) {
+			for (int i = 0; i < routeEncodingRules.size(); i++) {
 				RouteTypeRule rtr = routeEncodingRules.get(i);
-				if(rtr != null && rtr.conditional()) {
+				if (rtr != null && rtr.conditional()) {
 					String tag = rtr.getNonConditionalTag();
-					for(RouteTypeCondition c : rtr.conditions ) {
-						if(tag != null && c.value != null) {
+					for (RouteTypeCondition c : rtr.conditions) {
+						if (tag != null && c.value != null) {
 							c.ruleid = findOrCreateRouteType(tag, c.value);
 						}
 					}
-					
+
 				}
 			}
 		}
@@ -431,7 +431,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getLeftLongitude() {
 			double l = 180;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.min(l, MapUtils.get31LongitudeX(s.left));
 			}
 			return l;
@@ -439,7 +439,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getRightLongitude() {
 			double l = -180;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.max(l, MapUtils.get31LongitudeX(s.right));
 			}
 			return l;
@@ -447,7 +447,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getBottomLatitude() {
 			double l = 90;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.min(l, MapUtils.get31LatitudeY(s.bottom));
 			}
 			return l;
@@ -455,15 +455,15 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getTopLatitude() {
 			double l = -90;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.max(l, MapUtils.get31LatitudeY(s.top));
 			}
 			return l;
 		}
 
 		public boolean contains(int x31, int y31) {
-			for(RouteSubregion s : subregions) {
-				if(s.left <= x31 && s.right >= x31 && s.top <= y31 && s.bottom >= y31) {
+			for (RouteSubregion s : subregions) {
+				if (s.left <= x31 && s.right >= x31 && s.top <= y31 && s.bottom >= y31) {
 					return true;
 				}
 			}
@@ -472,10 +472,10 @@ public class BinaryMapRouteReaderAdapter {
 
 
 		public RouteDataObject adopt(RouteDataObject o) {
-			if(o.region == this || o.region == referenceRouteRegion) {
+			if (o.region == this || o.region == referenceRouteRegion) {
 				return o;
 			}
-			
+
 			if (routeEncodingRules.isEmpty()) {
 				routeEncodingRules.addAll(o.region.routeEncodingRules);
 				referenceRouteRegion = o.region;
