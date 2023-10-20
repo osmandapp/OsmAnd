@@ -5267,7 +5267,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
-    <string name="osmand_cloud_deletion_account_warning">Ésta cuenta y todos sus datos serán %1$s.</string>
+    <string name="osmand_cloud_deletion_account_warning">Esta cuenta y todos sus datos serán %1$s.</string>
     <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
@@ -5509,6 +5509,21 @@
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d traza)</item>
         <item quantity="many">%1$d (%2$d trazas)</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="delete_all_items">Borrar todos los elementos</string>
+    <string name="trash_is_empty_banner_desc">Los elementos borrados desde OsmAnd Cloud estarán disponibles aquí por %1$s días.</string>
+    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
+\n
+\nEsta acción no se puede deshacer.</string>
+    <string name="shared_string_empty_trash">Papelera vacía</string>
+    <string name="shared_string_delete_immediately">Borrar inmediatamente</string>
+    <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
+    <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
+    <string name="trash_alert_card_desc">Los elementos en la papelera serán borrados luego de %1$s días.</string>
+    <string name="trash_is_empty">Papelera vacía</string>
+    <string name="shared_string_trash">Papelera</string>
+    <string name="shared_string_delete_item">Borrar elemento</string>
 </resources>

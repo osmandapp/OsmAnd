@@ -5487,19 +5487,19 @@
         <item quantity="many">%1$d (%2$d traces)</item>
         <item quantity="other">%1$d (%2$d traces)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">Êtes-vous sûr de supprimer de manière permanente tous les éléments de la corbeille \? Cette action ne peut pas être annulée.</string>
+    <string name="cloud_trash_clear_confirmation">Êtes-vous certain de vouloir supprimer de manière définitive tous les éléments présents dans la corbeille \? Cette action ne pourra pas être annulée.</string>
     <string name="restore_from_trash">Restaurer depuis la corbeille</string>
     <string name="delete_all_items">Supprimer tous les éléments</string>
     <string name="trash_is_empty_banner_desc">Les fichiers supprimés d\'OsmAnd Cloud seront disponibles ici pendant %1$s jours.</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" sera supprimé de manière permanente. Êtes-vous sûr \?
+    <string name="delete_trash_item_confirmation_desc">Êtes-vous certain de vouloir supprimer \"%1$s\" de manière définitive \?
 \n
 \nCette action ne pourra pas être annulée.</string>
     <string name="shared_string_empty_trash">Vider la corbeille</string>
-    <string name="shared_string_delete_immediately">Supprimer immédiatement</string>
+    <string name="shared_string_delete_immediately">Supprimer définitivement</string>
     <string name="shared_string_is_deleted">%1$s a été supprimé.</string>
     <string name="cloud_item_restored">%1$s a été restauré dans le Cloud.</string>
     <string name="trash_alert_card_desc">Les éléments de la corbeille seront supprimés après %1$s jours.</string>
     <string name="trash_is_empty">La corbeille est vide</string>
     <string name="shared_string_trash">Corbeille</string>
-    <string name="shared_string_delete_item">Supprimer élément(s)</string>
+    <string name="shared_string_delete_item">Supprimer l\'élément</string>
 </resources>

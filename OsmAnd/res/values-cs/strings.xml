@@ -5349,21 +5349,21 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
-    <string name="release_4_6">- Přidán widget \"Glide Ratio\"
+    <string name="release_4_6">• Přidán widget \"Glide Ratio\"
 \n
-\n - Přidány filtry a inteligentní složky pro skladby
+\n• Přidány filtry a chytré složky pro stopy
 \n
-\n - Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
+\n• Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
 \n
-\n - Přidána podpora pro widget teploty ANT+
+\n• Přidána podpora pro widget teploty ANT+
 \n
-\n - Vylepšená správa paměti pro velké stopy GPX
+\n• Vylepšená správa paměti pro velké stopy GPX
 \n
-\n - Aktualizovaná správa místních zdrojů v sekci Stažené soubory
+\n• Aktualizovaná správa místních zdrojů v sekci Stažené soubory
 \n
-\n - Přidán widget \"Dostupná paměť RAM\"
+\n• Přidán widget \"Dostupná paměť RAM\"
 \n
-\n - Opraveny problémy s průhledným stavovým řádkem
+\n• Opraveny problémy s průhledným stavovým řádkem
 \n
 \n</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
@@ -5437,11 +5437,11 @@
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
     <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
-    <string name="smart_folder_name_present">Taková složka Smart Folder již existuje</string>
+    <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
     <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
-    <string name="configure_filter">Konfigurace filtru</string>
-    <string name="smart_folder_saved">Smart Folder uložen</string>
+    <string name="configure_filter">Nastavit filtr</string>
+    <string name="smart_folder_saved">Chytrá složka uložena</string>
     <string name="no_config_smart_folder_title">Není nastaveno</string>
     <string name="add_smart_folder">Přidat chytrou složku</string>
     <string name="empty_name">Prázdný název</string>
