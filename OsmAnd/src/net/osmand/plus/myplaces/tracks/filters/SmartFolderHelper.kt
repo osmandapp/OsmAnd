@@ -29,8 +29,8 @@ class SmartFolderHelper(val app: OsmandApplication) {
 			.excludeFieldsWithoutExposeAnnotation()
 			.create()
 		preference = app.settings.registerStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
-			.makeProfile()
-			.cache()
+			.makeGlobal()
+			.makeShared()
 		readSettings()
 	}
 

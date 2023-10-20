@@ -94,7 +94,7 @@ public class PrepareBackupResult {
 			String typeNamePath = file.getTypeNamePath();
 			if (!remoteFilesMap.containsKey(typeNamePath)) {
 				remoteFilesMap.put(typeNamePath, file);
-			} else if (!file.isInfoFile() && !file.isDeleted()) {
+			} else if (!oldRemoteFiles.containsKey(typeNamePath) && !file.isInfoFile() && !file.isDeleted()) {
 				oldRemoteFiles.put(typeNamePath, file);
 			}
 		}

@@ -2377,7 +2377,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				cancelButtonsAnimations();
 				mapActivity.getMapView().setMapPositionX(0);
 				mapActivity.refreshMap();
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
@@ -2457,13 +2456,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 
 			MapRouteInfoMenuFragment.showInstance(mapActivity, initialMenuState);
-
-			if (!AndroidUiHelper.isXLargeDevice(mapActivity)) {
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
-			}
-			if (!portrait) {
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
-			}
+			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
 		}
 	}
 
@@ -2603,7 +2596,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						case ROUTE_INFO:
 							break;
 						case ROUTE_DETAILS:
-							mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(View.VISIBLE);
+							mapActivity.getWidgetsVisibilityHelper().showWidgets();
 							if (!portraitMode) {
 								mapActivity.getMapView().setMapPositionX(0);
 							}

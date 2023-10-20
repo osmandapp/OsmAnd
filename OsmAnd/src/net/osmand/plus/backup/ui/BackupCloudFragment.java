@@ -44,7 +44,9 @@ import net.osmand.plus.backup.ui.status.IntroductionCard;
 import net.osmand.plus.backup.ui.status.WarningStatusCard;
 import net.osmand.plus.backup.ui.trash.CloudTrashFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -302,7 +304,11 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			}
 		} else if (card instanceof BackupStorageCard) {
 			if (TRASH_BUTTON_INDEX == buttonIndex) {
-				CloudTrashFragment.showInstance(manager);
+				if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+					CloudTrashFragment.showInstance(manager);
+				} else {
+					OsmAndProPlanFragment.showInstance(requireActivity());
+				}
 			}
 		}
 	}

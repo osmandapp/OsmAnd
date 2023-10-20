@@ -67,9 +67,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		description.setText(item.getDescription(app));
 
 		int iconId = item.getIconId();
-		if (iconId != -1) {
-			icon.setImageDrawable(uiUtilities.getThemedIcon(iconId));
-		}
+		icon.setImageDrawable(iconId != -1 ? uiUtilities.getThemedIcon(iconId) : null);
+
 		setupProgress(item);
 		itemView.setEnabled(!isSyncing(item));
 		itemView.setOnClickListener(v -> controller.showItemMenu(item));
