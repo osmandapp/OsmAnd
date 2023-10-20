@@ -46,12 +46,6 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 			false
 		else {
 			val result = trackItem.dataItem!!.fileCreationTime in valueFrom..valueTo
-			TracksSearchFilter.LOG.debug(
-				"Check creationDate accepted. " + trackItem.name +
-						". creationDate " + getDateFormat().format(trackItem.dataItem!!.fileCreationTime) +
-						". dateFrom " + getDateFormat().format(valueFrom) +
-						". dateTo " + getDateFormat().format(valueTo) +
-						". result " + result)
 			result
 		}
 	}
