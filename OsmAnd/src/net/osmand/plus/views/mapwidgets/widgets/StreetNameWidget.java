@@ -39,6 +39,7 @@ import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.CurrentStreetName.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -72,8 +73,6 @@ public class StreetNameWidget extends MapWidget {
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
 	private boolean showMarker;
-	private String roadShieldName;
-
 
 	@Override
 	protected int getLayoutId() {
@@ -129,20 +128,15 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressText, true);
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
-			RouteDataObject shieldObject = streetName.shieldObject;
-			if (shieldObject != null && shieldObject.nameIds != null && setRoadShield(shieldObject)) {
+			RoadShield shield = streetName.shield;
+			if (shield != null && setRoadShield(shield)) {
 				AndroidUiHelper.updateVisibility(shieldImage, true);
 				int indexOf = streetName.text.indexOf("»");
 				if (indexOf > 0) {
 					streetName.text = streetName.text.substring(indexOf);
 				}
-				if (roadShieldName != null && streetName.text.startsWith(roadShieldName)) {
-					streetName.text = streetName.text.replaceFirst(roadShieldName, "");
-					streetName.text = streetName.text.trim();
-				}
 			} else {
 				AndroidUiHelper.updateVisibility(shieldImage, false);
-				roadShieldName = null;
 			}
 
 			if (Algorithms.isEmpty(streetName.exitRef)) {
@@ -212,24 +206,9 @@ public class StreetNameWidget extends MapWidget {
 		}
 	}
 
-	private boolean setRoadShield(@NonNull RouteDataObject object) {
-		StringBuilder additional = new StringBuilder();
-		for (int i = 0; i < object.nameIds.length; i++) {
-			String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
-			String val = object.names.get(object.nameIds[i]);
-			if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
-				additional.append(key).append("=").append(val).append(";");
-			}
-		}
-		for (int i = 0; i < object.nameIds.length; i++) {
-			String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
-			String val = object.names.get(object.nameIds[i]);
-			if (key.startsWith("route_road") && key.endsWith("_ref")) {
-				boolean visible = setRoadShield(object, key, val, additional);
-				if (visible) {
-					return true;
-				}
-			}
+	private boolean setRoadShield(@NonNull RoadShield shield) {
+		if (shield.hasShield()) {
+			return setRoadShield(shield.getRdo(), shield.getNameTag(), shield.getText(), shield.getAdditional());
 		}
 		return false;
 	}
@@ -268,13 +247,11 @@ public class StreetNameWidget extends MapWidget {
 					"drawable", app.getPackageName());
 		}
 		if (shieldRes == -1) {
-			roadShieldName = null;
 			return false;
 		}
 
 		Drawable shield = AppCompatResources.getDrawable(mapActivity, shieldRes);
 		if (shield == null) {
-			roadShieldName = null;
 			return false;
 		}
 
@@ -300,7 +277,6 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
 		shieldImage.setImageBitmap(bitmap);
-		roadShieldName = name;
 		return true;
 	}
 
