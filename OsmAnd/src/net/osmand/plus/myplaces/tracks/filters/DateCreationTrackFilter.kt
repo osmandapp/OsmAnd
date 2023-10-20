@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.filters
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterType.DATE_CREATION
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -44,7 +45,14 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			trackItem.dataItem!!.fileCreationTime >= valueFrom && trackItem.dataItem!!.fileCreationTime <= valueTo
+			val result = trackItem.dataItem!!.fileCreationTime in valueFrom..valueTo
+			TracksSearchFilter.LOG.debug(
+				"Check creationDate accepted. " + trackItem.name +
+						". creationDate " + getDateFormat().format(trackItem.dataItem!!.fileCreationTime) +
+						". dateFrom " + getDateFormat().format(valueFrom) +
+						". dateTo " + getDateFormat().format(valueTo) +
+						". result " + result)
+			result
 		}
 	}
 

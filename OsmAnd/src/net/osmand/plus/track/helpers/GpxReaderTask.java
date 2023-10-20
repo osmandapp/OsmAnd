@@ -69,6 +69,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
+		Thread.currentThread().setName("GpxReaderTask");
 		SQLiteConnection conn = database.openConnection(false);
 		if (conn != null) {
 			try {
