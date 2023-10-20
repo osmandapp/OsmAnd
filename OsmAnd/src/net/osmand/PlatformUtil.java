@@ -34,6 +34,7 @@ public class PlatformUtil {
 		
 		@Override
 		public void trace(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isTraceEnabled()){
 				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -41,15 +42,15 @@ public class PlatformUtil {
 		
 		@Override
 		public void trace(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isTraceEnabled()){
 				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 
-		
-		
 		@Override
 		public void debug(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isDebugEnabled()){
 				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -57,6 +58,7 @@ public class PlatformUtil {
 
 		@Override
 		public void debug(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isDebugEnabled()){
 				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
@@ -64,6 +66,7 @@ public class PlatformUtil {
 
 		@Override
 		public void error(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isErrorEnabled()){
 				android.util.Log.e(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -71,6 +74,7 @@ public class PlatformUtil {
 
 		@Override
 		public void error(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isErrorEnabled()){
 				android.util.Log.e(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
@@ -78,6 +82,7 @@ public class PlatformUtil {
 
 		@Override
 		public void fatal(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isFatalEnabled()){
 				android.util.Log.e(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -86,6 +91,7 @@ public class PlatformUtil {
 
 		@Override
 		public void fatal(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isFatalEnabled()){
 				android.util.Log.e(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
@@ -93,6 +99,7 @@ public class PlatformUtil {
 
 		@Override
 		public void info(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isInfoEnabled()){
 				android.util.Log.i(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -100,6 +107,7 @@ public class PlatformUtil {
 
 		@Override
 		public void info(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isInfoEnabled()){
 				android.util.Log.i(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
@@ -141,6 +149,7 @@ public class PlatformUtil {
 
 		@Override
 		public void warn(Object message) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isWarnEnabled()){
 				android.util.Log.w(TAG, name + " " + message); //$NON-NLS-1$
 			}
@@ -148,6 +157,7 @@ public class PlatformUtil {
 
 		@Override
 		public void warn(Object message, Throwable t) {
+			message += " {" + Thread.currentThread().getName() + "}";
 			if(isWarnEnabled()){
 				android.util.Log.w(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
