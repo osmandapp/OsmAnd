@@ -87,4 +87,10 @@ public class TrashItem {
 		TrashItem item = (TrashItem) o;
 		return Algorithms.objectEquals(oldFile, item.oldFile) && Algorithms.objectEquals(deletedFile, item.deletedFile);
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return oldFile.getName();
+	}
 }

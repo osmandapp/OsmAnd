@@ -5482,4 +5482,7 @@
     <string name="no_config_smart_folder_description">智慧型資料夾允許透過套用的篩選條件對軌跡分組</string>
     <string name="loading_tracks">正在重新載入軌跡</string>
     <string name="searching_matching_tracks">搜尋所有相符的軌跡</string>
+    <plurals name="tracks">
+        <item quantity="other">%1$d（%2$d 個軌跡）</item>
+    </plurals>
 </resources>

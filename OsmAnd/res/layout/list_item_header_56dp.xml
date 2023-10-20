@@ -3,32 +3,21 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/list_background_color"
-	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
-	android:orientation="horizontal">
+	android:orientation="vertical">
+
+	<include layout="@layout/list_item_divider" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"
 		style="@style/TitleStyle.Medium"
-		android:layout_width="0dp"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="start|center_vertical"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		android:layout_weight="1"
+		android:background="?attr/list_background_color"
 		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+		android:paddingHorizontal="@dimen/content_padding"
 		android:textColor="?android:textColorPrimary"
-		tools:text="Changes" />
-
-	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/count"
-		style="@style/DescStyle"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_gravity="end|center_vertical"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		android:gravity="center_vertical"
-		android:textColor="?android:textColorSecondary"
-		android:visibility="gone"
-		tools:text="5" />
+		tools:text="@string/shared_string_apply_changes" />
 
 </LinearLayout>

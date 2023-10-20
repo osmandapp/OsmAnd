@@ -57,18 +57,14 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(BACKGROUND_COLOR, ColorUtilities.getColorWithAlpha(ColorUtilities.getColor(app, activeColorId), 0.3f));
 
-		DisplayItem headerItem = new DisplayItem()
+		int iconId = item.getIconId();
+		displayData.addDisplayItem(new DisplayItem()
 				.setClickable(false)
 				.setTitle(item.getName(app))
 				.setDescription(item.getDescription(app))
+				.setIcon(iconId != -1 ? uiUtilities.getThemedIcon(iconId) : null)
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
-				.setShowBottomDivider(true, 0);
-
-		int iconId = item.getIconId();
-		if (iconId != -1) {
-			headerItem.setIcon(uiUtilities.getThemedIcon(iconId));
-		}
-		displayData.addDisplayItem(headerItem);
+				.setShowBottomDivider(true, 0));
 
 		displayData.addDisplayItem(new DisplayItem()
 				.setTitle(getString(R.string.restore_from_trash))
