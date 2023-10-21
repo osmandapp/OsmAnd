@@ -801,6 +801,10 @@ public class HHRoutePlanner {
 //		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
+		if(start == null || end == null) {
+			// TODO in Future
+			throw new IllegalStateException("Points are not present in detailed maps: segment need to be recalculated");
+		}
 		// TODO 1.4 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, f);
@@ -935,7 +939,8 @@ public class HHRoutePlanner {
 			s = s.getNext();
 		}
 		if (s == null || s.getSegmentStart() != pnt.start || s.getSegmentEnd() != pnt.end || s.getRoad().getId() != pnt.roadId) {
-			throw new IllegalStateException("Error on segment " + pnt.roadId / 64);
+//			throw new IllegalStateException("Error on segment " + pnt.roadId / 64);
+			return null;
 		}
 		return new RouteSegmentPoint(s.getRoad(), s.getSegmentStart(), s.getSegmentEnd(), 0);
 	}
