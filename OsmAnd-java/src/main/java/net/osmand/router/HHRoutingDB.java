@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -37,7 +38,9 @@ public class HHRoutingDB {
 	protected final int BATCH_SIZE = 10000;
 	protected int batchInsPoint = 0;
 
+	protected TIntObjectHashMap<String> routingProfiles = new TIntObjectHashMap<String>();
 	protected boolean compactDB;
+	protected int routingProfile;
 	
 	protected static Comparator<NetworkDBPoint> indexComparator = new Comparator<NetworkDBPoint>() {
 
@@ -51,27 +54,75 @@ public class HHRoutingDB {
 		this.conn = conn;
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
+		st.execute("CREATE TABLE IF NOT EXISTS profiles(id, params)");
 		if (!compactDB) {
 			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, dualIdPoint, dualClusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31, PRIMARY KEY(idPoint))");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
+			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut, profile)");
+			if (!checkColumnExist(st, "profile", "segments")) {
+				st.execute("DROP INDEX segmentsUnique");
+				st.execute("DROP INDEX segmentsConnPntInd");
+				st.execute("DROP INDEX segmentsPntInd");
+				st.execute("DROP INDEX geometryMainInd");
+				st.execute("INSERT INTO profiles(id, params) VALUES(0, '')");
+				st.execute("ALTER TABLE geometry ADD COLUMN profile");
+				st.execute("ALTER TABLE segments ADD COLUMN profile");
+				st.execute("UPDATE segments SET profile = 0 where profile is null");
+				st.execute("UPDATE geometry SET profile = 0 where profile is null");
+			}
+			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint, profile)");
+			st.execute("CREATE INDEX IF NOT EXISTS segmentsPntInd on segments(idPoint, profile)");
+			st.execute("CREATE INDEX IF NOT EXISTS segmentsConnPntInd on segments(idConnPoint, profile)");
 			
-			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut)");
-			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint)");
-			st.execute("CREATE INDEX IF NOT EXISTS segmentsPntInd on segments(idPoint)");
-			st.execute("CREATE INDEX IF NOT EXISTS segmentsConnPntInd on segments(idConnPoint)");
-			
-			st.execute("CREATE TABLE IF NOT EXISTS geometry(idPoint, idConnPoint, geometry, shortcut)");
-			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS geometryMainInd on geometry(idPoint,idConnPoint,shortcut)");
+			st.execute("CREATE TABLE IF NOT EXISTS geometry(idPoint, idConnPoint, geometry, shortcut, profile)");
+			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS geometryMainInd on geometry(idPoint,idConnPoint,shortcut, profile)");
 			
 			st.execute("CREATE TABLE IF NOT EXISTS midpoints(ind, maxMidDepth, proc, PRIMARY key (ind))"); // ind unique
-
-			loadGeometry = conn.prepareStatement("SELECT geometry, shortcut FROM geometry WHERE idPoint = ? AND idConnPoint = ? ");
-			loadSegmentEnd = conn.prepareStatement("SELECT idPoint, idConnPoint, dist, shortcut from segments where idPoint = ? ");
-			loadSegmentStart = conn.prepareStatement("SELECT idPoint, idConnPoint, dist, shortcut from segments where idConnPoint = ? ");
+			loadGeometry = conn.prepareStatement("SELECT geometry, shortcut FROM geometry WHERE idPoint = ? AND idConnPoint = ? AND profile = ?");
+			loadSegmentEnd = conn.prepareStatement("SELECT idPoint, idConnPoint, dist, shortcut from segments where idPoint = ? AND profile = ?");
+			loadSegmentStart = conn.prepareStatement("SELECT idPoint, idConnPoint, dist, shortcut from segments where idConnPoint = ? AND profile = ?");
 		} else {
-			loadSegmentStart = conn.prepareStatement("SELECT id, ins, outs from segments where id = ?  ");
+			if (!checkColumnExist(st, "profile", "segments")) {
+				st.execute("ALTER TABLE segments ADD COLUMN profile");
+				st.execute("INSERT INTO profiles(id, params) VALUES(0, '')");
+				st.execute("UPDATE segments SET profile = 0 where profile is null");
+				// we can't remove primary key so only one profile is possible for old file
+			}
+			loadSegmentStart = conn.prepareStatement("SELECT id, ins, outs from segments where id = ? and profile = ? ");
+		}
+		ResultSet rs = st.executeQuery("SELECT id, params from profiles");
+		while (rs.next()) {
+			routingProfiles.put(rs.getInt(1), rs.getString(2));
 		}
 		st.close();
+	}
+	
+	public void selectRoutingProfile(int routingProfile) {
+		this.routingProfile = routingProfile;
+	}
+	
+	public int getRoutingProfile() {
+		return routingProfile;
+	}
+	
+	public TIntObjectHashMap<String> getRoutingProfiles() {
+		return routingProfiles;
+	}
+	
+	public int insertRoutingProfile(String profileParams) throws SQLException {
+		TIntObjectIterator<String> it = routingProfiles.iterator();
+		while(it.hasNext()) {
+			it.advance();
+			String p = it.value();
+			if(p.equals(profileParams)) {
+				return it.key();
+			}
+		}
+		Statement s = conn.createStatement();
+		int id = routingProfiles.size();
+		routingProfiles.put(id, profileParams);
+		s.execute("INSERT INTO profiles(id, params) VALUES("+id+", '"+profileParams+"')");
+		return id;
 	}
 	
 	private List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<NetworkDBPoint> pntsById,
@@ -233,6 +284,7 @@ public class HHRoutingDB {
 		int loadedSegs = 0;
 		if (compactDB) {
 			loadSegmentStart.setInt(1, point.index);
+			loadSegmentStart.setInt(2, routingProfile);
 			ResultSet rs = loadSegmentStart.executeQuery();
 			if (rs.next()) {
 				point.connectedSet(true, parseSegments(rs.getBytes(2), pntsById, clusterInPoints.get(point.clusterId), point, false));
@@ -245,6 +297,7 @@ public class HHRoutingDB {
 			@SuppressWarnings("resource")
 			PreparedStatement pre = reverse ? loadSegmentStart : loadSegmentEnd;
 			pre.setInt(1, point.index);
+			pre.setInt(2, routingProfile);
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
 				loadedSegs++;
@@ -273,7 +326,7 @@ public class HHRoutingDB {
 			pntsById.put(p.index, p);
 		}
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT idPoint, idConnPoint, dist, shortcut from segments");
+		ResultSet rs = st.executeQuery("SELECT idPoint, idConnPoint, dist, shortcut from segments where profile = " + routingProfile);
 		int x = 0;
 		while (rs.next()) {
 			boolean shortcut = rs.getInt(4) > 0;
@@ -298,6 +351,7 @@ public class HHRoutingDB {
 		List<LatLon> l = new ArrayList<LatLon>();
 		loadGeometry.setLong(1, start);
 		loadGeometry.setLong(2, end);
+		loadGeometry.setInt(3, routingProfile);
 		int shortcutN = shortcut ? 1 : 0;
 		ResultSet rs = loadGeometry.executeQuery();
 		while (rs.next()) {
