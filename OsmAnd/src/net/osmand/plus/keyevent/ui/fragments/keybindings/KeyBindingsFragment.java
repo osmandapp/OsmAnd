@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.keybindings;
+package net.osmand.plus.keyevent.ui.fragments.keybindings;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
@@ -28,12 +28,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class KeyBindingsListFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
 
-	public static final String TAG = KeyBindingsListFragment.class.getSimpleName();
+	public static final String TAG = KeyBindingsFragment.class.getSimpleName();
 
-	private ScreenAdapter adapter;
-	private ScreenController controller;
+	private KeyBindingsAdapter adapter;
+	private KeyBindingsController controller;
 
 	private ApplicationMode appMode;
 	private InputDeviceHelper deviceHelper;
@@ -44,7 +44,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new ScreenController(app, appMode);
+		controller = new KeyBindingsController(app, appMode);
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -57,7 +57,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new ScreenAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new KeyBindingsAdapter(app, appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -131,7 +131,7 @@ public class KeyBindingsListFragment extends BaseOsmAndFragment implements Input
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			KeyBindingsListFragment fragment = new KeyBindingsListFragment();
+			KeyBindingsFragment fragment = new KeyBindingsFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);

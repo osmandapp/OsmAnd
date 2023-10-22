@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent;
 
+import android.os.Build;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 
@@ -56,7 +57,7 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_DOWN, "↓");
 		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_LEFT, "←");
 		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, "→");
-		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_CENTER, "CENTER");
+		keySymbolMap.put(KeyEvent.KEYCODE_DPAD_CENTER, "Center");
 
 		keySymbolMap.put(KeyEvent.KEYCODE_SPACE, "␣");
 		keySymbolMap.put(KeyEvent.KEYCODE_ENTER, "↵");
@@ -112,7 +113,9 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_CAMERA, "Camera");
 		keySymbolMap.put(KeyEvent.KEYCODE_POWER, "Power");
 		keySymbolMap.put(KeyEvent.KEYCODE_NOTIFICATION, "Notification");
-		keySymbolMap.put(KeyEvent.KEYCODE_SOFT_SLEEP, "Sleep");
 		keySymbolMap.put(KeyEvent.KEYCODE_WAKEUP, "Wakeup");
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			keySymbolMap.put(KeyEvent.KEYCODE_SOFT_SLEEP, "Sleep");
+		}
 	}
 }

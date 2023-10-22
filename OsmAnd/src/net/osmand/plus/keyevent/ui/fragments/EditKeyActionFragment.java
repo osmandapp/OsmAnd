@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui;
+package net.osmand.plus.keyevent.ui.fragments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -26,7 +26,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.ui.keybindings.KeyAction;
+import net.osmand.plus.keyevent.ui.containers.KeyAction;
+import net.osmand.plus.keyevent.ui.OnKeyCodeSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

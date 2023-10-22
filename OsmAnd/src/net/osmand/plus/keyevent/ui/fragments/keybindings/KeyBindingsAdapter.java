@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.keybindings;
+package net.osmand.plus.keyevent.ui.fragments.keybindings;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -20,15 +20,22 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.keyevent.ui.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.ui.containers.KeyAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
+class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
+
+	public static final int CARD_DIVIDER = 1;
+	public static final int HEADER = 2;
+	public static final int ACTION_ITEM = 3;
+	public static final int CARD_BOTTOM_SHADOW = 4;
+	public static final int SPACE = 5;
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
@@ -38,10 +45,10 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private List<ScreenItem> screenItems = new ArrayList<>();
 	private boolean editable;
 	private final boolean usedOnMap;
-	private final ScreenController controller;
+	private final KeyBindingsController controller;
 
-	public ScreenAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
-	                     @NonNull ScreenController controller, boolean usedOnMap) {
+	public KeyBindingsAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+	                          @NonNull KeyBindingsController controller, boolean usedOnMap) {
 		setHasStableIds(true);
 		this.app = app;
 		this.appMode = appMode;
@@ -54,8 +61,7 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		this.parent = parent;
 		context = parent.getContext();
-		ScreenItemType type = viewType < ScreenItemType.values().length ? ScreenItemType.values()[viewType] : ScreenItemType.UNKNOWN;
-		switch (type) {
+		switch (viewType) {
 			case CARD_DIVIDER:
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case HEADER:
@@ -97,14 +103,14 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.keyName.setText(keyAction.getKeySymbol());
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.type == ScreenItemType.ACTION_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.type == ACTION_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}
 
-	public void setScreenData(@NonNull List<ScreenItem> screenItems, boolean editableType) {
+	public void setScreenData(@NonNull List<ScreenItem> screenItems, boolean isTypeEditable) {
 		this.screenItems = screenItems;
-		this.editable = editableType;
+		this.editable = isTypeEditable;
 		notifyDataSetChanged();
 	}
 
@@ -115,16 +121,12 @@ class ScreenAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public int getItemViewType(int position) {
-		return screenItems.get(position).type.ordinal();
+		return screenItems.get(position).type;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		ScreenItem item = screenItems.get(position);
-		if (item.value instanceof InputDeviceProfile) {
-			return item.type.hashCode() + ((InputDeviceProfile) item.value).getId().hashCode();
-		}
-		return item.type.hashCode() + (item.value != null ? item.value.hashCode() : 0);
+		return screenItems.get(position).getId();
 	}
 
 	private View inflate(@LayoutRes int layoutResId) {

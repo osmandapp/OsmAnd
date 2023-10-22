@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.keybindings;
+package net.osmand.plus.keyevent.ui.containers;
 
 import android.content.Context;
 

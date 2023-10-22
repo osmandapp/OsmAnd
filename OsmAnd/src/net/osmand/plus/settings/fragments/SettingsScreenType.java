@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import net.osmand.plus.R;
-import net.osmand.plus.keyevent.ui.ExternalInputDeviceFragment;
+import net.osmand.plus.keyevent.ui.fragments.ExternalInputDeviceFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;

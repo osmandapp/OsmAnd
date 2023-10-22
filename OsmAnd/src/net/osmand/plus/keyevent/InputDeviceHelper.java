@@ -57,6 +57,7 @@ public class InputDeviceHelper {
 		}
 	}
 
+	@NonNull
 	public List<InputDeviceProfile> getAvailableDevices() {
 		List<InputDeviceProfile> result = new ArrayList<>();
 		result.addAll(defaultDevices);
@@ -87,7 +88,6 @@ public class InputDeviceHelper {
 		notifyListeners();
 	}
 
-	@NonNull
 	public void createAndSaveCustomDevice(@NonNull String newName) {
 		saveCustomDevice(makeCustomDevice(newName));
 	}
@@ -102,6 +102,7 @@ public class InputDeviceHelper {
 		notifyListeners();
 	}
 
+	@NonNull
 	private InputDeviceProfile makeCustomDeviceDuplicate(@NonNull InputDeviceProfile device) {
 		String prevName = device.toHumanString(app);
 		String uniqueName = makeUniqueName(prevName);
@@ -109,27 +110,7 @@ public class InputDeviceHelper {
 	}
 
 	private String makeUniqueName(@NonNull String oldName) {
-		int suffix = 0;
-		int i = oldName.length() - 1;
-		do {
-			try {
-				if (oldName.charAt(i) == ' ' || oldName.charAt(i) == '-') {
-					throw new NumberFormatException();
-				}
-				suffix = Integer.parseInt(oldName.substring(i));
-			} catch (NumberFormatException e) {
-				break;
-			}
-			i--;
-		} while (i >= 0);
-		String newName;
-		String divider = suffix == 0 ? " " : "";
-		do {
-			suffix++;
-			newName = oldName.substring(0, i + 1) + divider + suffix;
-		}
-		while (hasNameDuplicate(newName));
-		return newName;
+		return Algorithms.makeUniqueName(oldName, newName -> !hasNameDuplicate(newName));
 	}
 
 	@NonNull

@@ -45,42 +45,55 @@ public abstract class InputDeviceProfile {
 
 	/**
 	 * Uses to add, remove or update command bindings in cache.
-	 * @param oldKeyCode a key code with which command was bound before
-	 * @param newKeyCode a new key code with which command should be bound to
-	 * @param commandId an id of command for which key code changed
+	 * @param oldKeyCode a key code with which command was bound before.
+	 * @param newKeyCode a new key code with which command should be bound to.
+	 * @param commandId an id of command for which key code changed.
 	 */
 	public void updateMappedCommands(int oldKeyCode, int newKeyCode, @NonNull String commandId) {
-		ArrayMap<Integer, KeyEventCommand> newMappedCommands = new ArrayMap<>(mappedCommands);
 		if (newKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			// Remove key binding
-			newMappedCommands.remove(oldKeyCode);
+			removeKeyBinding(oldKeyCode);
 		} else if (oldKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			// Add a new key binding
-			KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
-			if (command != null) {
-				newMappedCommands.put(newKeyCode, command);
-			}
+			addKeyBinding(newKeyCode, commandId);
 		} else {
-			// Update existed key binding
-			ArrayMap<Integer, KeyEventCommand> oldMappedCommands = newMappedCommands;
-			newMappedCommands = new ArrayMap<>();
-			for (int i = 0; i < oldMappedCommands.size(); i++) {
-				int keyCode = oldMappedCommands.keyAt(i);
-				KeyEventCommand command = oldMappedCommands.valueAt(i);
-				if (keyCode == oldKeyCode) {
-					// Check is command the same and update if needed
-					KeyEventCommand newCommand = Objects.equals(command.getId(), commandId)
-							? command
-							: commandsFactory.getOrCreateCommand(commandId);
-					if (newCommand != null) {
-						newMappedCommands.put(newKeyCode, command);
-					}
-				} else {
-					newMappedCommands.put(keyCode, command);
-				}
-			}
+			updateKeyBinding(oldKeyCode, newKeyCode, commandId);
+		}
+	}
+
+	private void removeKeyBinding(int keyCode) {
+		ArrayMap<Integer, KeyEventCommand> newMappedCommands = new ArrayMap<>(mappedCommands);
+		newMappedCommands.remove(keyCode);
+		mappedCommands = newMappedCommands;
+	}
+
+	private void addKeyBinding(int keyCode, @NonNull String commandId) {
+		ArrayMap<Integer, KeyEventCommand> newMappedCommands = new ArrayMap<>(mappedCommands);
+		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
+		if (command != null) {
+			newMappedCommands.put(keyCode, command);
 		}
 		mappedCommands = newMappedCommands;
+	}
+
+	private void updateKeyBinding(int oldKeyCode, int newKeyCode, @NonNull String commandId) {
+		ArrayMap<Integer, KeyEventCommand> newCommands = new ArrayMap<>();
+		ArrayMap<Integer, KeyEventCommand> oldCommands = new ArrayMap<>(mappedCommands);
+
+		for (int i = 0; i < oldCommands.size(); i++) {
+			int keyCode = oldCommands.keyAt(i);
+			KeyEventCommand oldCommand = oldCommands.valueAt(i);
+			if (keyCode == oldKeyCode) {
+				// Check and update command if needed
+				KeyEventCommand newCommand = Objects.equals(oldCommand.getId(), commandId)
+						? oldCommand
+						: commandsFactory.getOrCreateCommand(commandId);
+				if (newCommand != null) {
+					newCommands.put(newKeyCode, oldCommand);
+					continue;
+				}
+			}
+			newCommands.put(keyCode, oldCommand);
+		}
+		mappedCommands = newCommands;
 	}
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {
@@ -112,4 +125,8 @@ public abstract class InputDeviceProfile {
 	@NonNull
 	public abstract String toHumanString(@NonNull Context context);
 
+	@Override
+	public int hashCode() {
+		return getId().hashCode();
+	}
 }

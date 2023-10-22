@@ -1,4 +1,10 @@
-package net.osmand.plus.keyevent.ui.keybindings;
+package net.osmand.plus.keyevent.ui.fragments.keybindings;
+
+import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.ACTION_ITEM;
+import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.HEADER;
+import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.SPACE;
 
 import android.util.ArrayMap;
 
@@ -7,11 +13,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.keyevent.ui.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.ui.EditKeyActionFragment;
+import net.osmand.plus.keyevent.ui.fragments.EditKeyActionFragment;
+import net.osmand.plus.keyevent.ui.containers.KeyAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -20,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class ScreenController {
+class KeyBindingsController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
@@ -28,8 +36,8 @@ class ScreenController {
 	private final InputDeviceProfile inputDevice;
 	private FragmentActivity activity;
 
-	public ScreenController(@NonNull OsmandApplication app,
-	                        @NonNull ApplicationMode appMode) {
+	public KeyBindingsController(@NonNull OsmandApplication app,
+	                             @NonNull ApplicationMode appMode) {
 		this.app = app;
 		this.appMode = appMode;
 		this.deviceHelper = app.getInputDeviceHelper();
@@ -47,15 +55,15 @@ class ScreenController {
 			List<KeyAction> actions = categorizedActions.get(category);
 			if (actions != null) {
 				String categoryName = app.getString(category.getTitleId());
-				screenItems.add(new ScreenItem(ScreenItemType.CARD_DIVIDER, categoryName));
-				screenItems.add(new ScreenItem(ScreenItemType.HEADER, categoryName));
+				screenItems.add(new ScreenItem(CARD_DIVIDER, categoryName));
+				screenItems.add(new ScreenItem(HEADER, categoryName));
 				for (KeyAction action : actions) {
-					screenItems.add(new ScreenItem(ScreenItemType.ACTION_ITEM, action));
+					screenItems.add(new ScreenItem(ACTION_ITEM, action));
 				}
 			}
 		}
-		screenItems.add(new ScreenItem(ScreenItemType.CARD_BOTTOM_SHADOW));
-		screenItems.add(new ScreenItem(ScreenItemType.SPACE));
+		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
+		screenItems.add(new ScreenItem(SPACE));
 		return screenItems;
 	}
 

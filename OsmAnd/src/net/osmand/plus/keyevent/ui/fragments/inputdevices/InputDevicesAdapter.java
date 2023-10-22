@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.devicetype;
+package net.osmand.plus.keyevent.ui.fragments.inputdevices;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.keyevent.ui.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -34,20 +35,25 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	public static final int CARD_DIVIDER = 1;
+	public static final int DEVICE_ITEM = 2;
+	public static final int CARD_BOTTOM_SHADOW = 3;
+	public static final int SPACE = 4;
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final UiUtilities iconsCache;
-	private final ScreenController controller;
+	private final InputDevicesController controller;
 	private ViewGroup parent;
 	private Context context;
 
 	private List<ScreenItem> screenItems = new ArrayList<>();
 	private final boolean usedOnMap;
 
-	public ScreenAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
-	                     @NonNull ScreenController controller, boolean usedOnMap) {
+	public InputDevicesAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+	                           @NonNull InputDevicesController controller, boolean usedOnMap) {
 		setHasStableIds(true);
 		this.app = app;
 		this.appMode = appMode;
@@ -61,8 +67,7 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		this.parent = parent;
 		context = parent.getContext();
-		ScreenItemType type = viewType < ScreenItemType.values().length ? ScreenItemType.values()[viewType] : ScreenItemType.UNKNOWN;
-		switch (type) {
+		switch (viewType) {
 			case CARD_DIVIDER:
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case DEVICE_ITEM:
@@ -79,7 +84,7 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		ScreenItem item = screenItems.get(position);
-		if (holder instanceof DeviceTypeViewHolder) {
+		if (item.type == DEVICE_ITEM) {
 			DeviceTypeViewHolder h = (DeviceTypeViewHolder) holder;
 			InputDeviceProfile device = (InputDeviceProfile) item.value;
 
@@ -100,7 +105,7 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 			});
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.type == ScreenItemType.DEVICE_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.type == DEVICE_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}
@@ -150,16 +155,12 @@ class ScreenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	@Override
 	public int getItemViewType(int position) {
-		return screenItems.get(position).type.ordinal();
+		return screenItems.get(position).type;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		ScreenItem item = screenItems.get(position);
-		if (item.value instanceof InputDeviceProfile) {
-			return item.type.hashCode() + ((InputDeviceProfile) item.value).getId().hashCode();
-		}
-		return item.type.hashCode();
+		return screenItems.get(position).getId();
 	}
 
 	private View inflate(@LayoutRes int layoutResId) {

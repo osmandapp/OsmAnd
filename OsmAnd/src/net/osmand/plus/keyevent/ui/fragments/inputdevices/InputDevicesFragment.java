@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.devicetype;
+package net.osmand.plus.keyevent.ui.fragments.inputdevices;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
@@ -28,12 +28,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class SelectInputDeviceFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class InputDevicesFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
 
-	public static final String TAG = SelectInputDeviceFragment.class.getSimpleName();
+	public static final String TAG = InputDevicesFragment.class.getSimpleName();
 
-	private ScreenAdapter adapter;
-	private ScreenController controller;
+	private InputDevicesAdapter adapter;
+	private InputDevicesController controller;
 
 	private ApplicationMode appMode;
 	private InputDeviceHelper deviceHelper;
@@ -44,7 +44,7 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new ScreenController(app, appMode, isUsedOnMap());
+		controller = new InputDevicesController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -57,7 +57,7 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new ScreenAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new InputDevicesAdapter(app, appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -133,7 +133,7 @@ public class SelectInputDeviceFragment extends BaseOsmAndFragment implements Inp
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SelectInputDeviceFragment fragment = new SelectInputDeviceFragment();
+			InputDevicesFragment fragment = new InputDevicesFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);

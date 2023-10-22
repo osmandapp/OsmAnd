@@ -154,7 +154,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	}
 
 	private static boolean isFromExternalDevice(@NonNull KeyEvent keyEvent) {
-		return keyEvent.getDeviceId() > 0;
+		return keyEvent.getDeviceId() != 0;
 	}
 
 	private static boolean isLetterKeyCode(int keyCode) {

@@ -1,4 +1,9 @@
-package net.osmand.plus.keyevent.ui.devicetype;
+package net.osmand.plus.keyevent.ui.fragments.inputdevices;
+
+import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.DEVICE_ITEM;
+import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.SPACE;
 
 import android.widget.EditText;
 
@@ -8,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.keyevent.ui.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
@@ -21,15 +27,15 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-class ScreenController {
+class InputDevicesController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final InputDeviceHelper deviceHelper;
 	private final boolean usedOnMap;
 
-	public ScreenController(@NonNull OsmandApplication app,
-	                        @NonNull ApplicationMode appMode, boolean usedOnMap) {
+	public InputDevicesController(@NonNull OsmandApplication app,
+	                              @NonNull ApplicationMode appMode, boolean usedOnMap) {
 		this.app = app;
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
@@ -39,12 +45,12 @@ class ScreenController {
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
-		screenItems.add(new ScreenItem(ScreenItemType.CARD_DIVIDER));
+		screenItems.add(new ScreenItem(CARD_DIVIDER));
 		for (InputDeviceProfile device : deviceHelper.getAvailableDevices()) {
-			screenItems.add(new ScreenItem(ScreenItemType.DEVICE_ITEM, device));
+			screenItems.add(new ScreenItem(DEVICE_ITEM, device));
 		}
-		screenItems.add(new ScreenItem(ScreenItemType.CARD_BOTTOM_SHADOW));
-		screenItems.add(new ScreenItem(ScreenItemType.SPACE));
+		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
+		screenItems.add(new ScreenItem(SPACE));
 		return screenItems;
 	}
 
