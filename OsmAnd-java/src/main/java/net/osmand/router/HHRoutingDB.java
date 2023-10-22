@@ -520,10 +520,17 @@ public class HHRoutingDB {
 		}
 		
 		public void setDetailedParentRt(boolean reverse, FinalRouteSegment r) {
+			double segmentDist = r.getDistanceFromStart();
 			if (reverse) {
+				rtRouteToPointRev = null;
+				rtCostRev = rtDistanceToEnd + segmentDist;
 				rtDetailedRouteRev = r;
+				rtDistanceFromStartRev = segmentDist;
 			} else {
+				rtRouteToPoint = null;
+				rtCost = rtDistanceToEndRev + segmentDist;
 				rtDetailedRoute = r;
+				rtDistanceFromStart = segmentDist;
 			}
 		}
 

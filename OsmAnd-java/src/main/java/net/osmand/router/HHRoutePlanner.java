@@ -196,16 +196,19 @@ public class HHRoutePlanner {
 			visitedRev.clear();
 		}
 
-		public void clearVisited(TLongObjectHashMap<NetworkDBPoint> stPoints,
-				TLongObjectHashMap<NetworkDBPoint> endPoints) {
+		public void clearVisited(TLongObjectHashMap<NetworkDBPoint> stPoints, TLongObjectHashMap<NetworkDBPoint> endPoints) {
 			queue.clear();
 			Iterator<NetworkDBPoint> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
-				if (!stPoints.containsKey(p.index) && !endPoints.containsKey(p.index)) {
+				if (stPoints.containsKey(p.index)) {
+					p.setDetailedParentRt(false, p.rtDetailedRoute);
+				} else if (endPoints.containsKey(p.index)) {
+					p.setDetailedParentRt(true, p.rtDetailedRouteRev);
+				} else {
 					p.clearRouting();
-					it.remove();
 				}
+				it.remove();
 			}
 			visited.clear();
 			visitedRev.clear();
@@ -259,15 +262,15 @@ public class HHRoutePlanner {
 			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
-			c.calcDetailed(1);
 //			c.ROUTE_LAST_MILE = false;
-//			c.calcAlternative();
+			c.calcDetailed(2);
+			c.calcAlternative();
 			c.gc();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
-//			c.ALT_EXCLUDE_RAD_MULT_IN = 5;
-//			c.ALT_EXCLUDE_RAD_MULT = 0.3;
-			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
+			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
+			c.ALT_EXCLUDE_RAD_MULT = 0.05;
+//			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 			System.out.println("Routing profile: " + networkDB.getRoutingProfiles().get(routingProfile));
 		}
 		System.out.println(c.toString(start, end));
@@ -414,9 +417,8 @@ public class HHRoutePlanner {
 				if (!useToSkip[i]) {
 					continue;
 				}
-				// TODO 1.7 HHRoutePlanner this is more correct to preserve startDistance
-//				hctx.clearVisited(stPoints, endPoints);
-				hctx.clearVisited();
+				hctx.clearVisited(stPoints, endPoints);
+//				hctx.clearVisited();
 				for (NetworkDBPoint pnt : exclude) {
 					pnt.rtExclude = false;
 				}
@@ -472,8 +474,10 @@ public class HHRoutePlanner {
 						route.altRoutes.remove(k);
 					}
 				}
-				System.out.printf("Cost %.2f - %.2f [%d unique / %d]...", route.altRoutes.get(0).routingTimeSegments,
+				if (route.altRoutes.size() > 0) {
+					System.out.printf("Cost %.2f - %.2f [%d unique / %d]...", route.altRoutes.get(0).routingTimeSegments,
 						route.altRoutes.get(route.altRoutes.size() - 1).routingTimeSegments, route.altRoutes.size(), size);
+				}
 				if (DEBUG_ALT_ROUTE_SELECTION >= 0) {
 					HHNetworkRouteRes rts = route.altRoutes.get(DEBUG_ALT_ROUTE_SELECTION % route.altRoutes.size());
 					System.out.printf(DEBUG_ALT_ROUTE_SELECTION + " select %.2f ", rts.routingTimeSegments);
@@ -534,7 +538,7 @@ public class HHRoutePlanner {
 			while (rad < 300000 && pnts.isEmpty()) {
 				rad = rad * 2;
 				List<NetworkDBPoint> pntSelect = hctx.pointsRect.getClosestObjects(p.getLatitude(), p.getLongitude(), rad);
-				for(NetworkDBPoint pnt : pntSelect) {
+				for (NetworkDBPoint pnt : pntSelect) {
 					double cost = MapUtils.getDistance(p, pnt.getPoint()) / spd;
 					pnt.setCostParentRt(reverse, cost + distanceToEnd(c, reverse, pnt, e), null, cost);
 					pnts.put(pnt.index, pnt);
@@ -563,8 +567,7 @@ public class HHRoutePlanner {
 						reverse ? o.getSegmentStart() : o.getSegmentEnd());
 				if (set.add(pntId)) {
 					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
-					pnt.setCostParentRt(reverse, o.getDistanceFromStart() + distanceToEnd(c, reverse, pnt, e), null,
-							o.getDistanceFromStart());
+					distanceToEnd(c, reverse, pnt, e);
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}
