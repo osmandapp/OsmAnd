@@ -2236,15 +2236,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getLocaleHelper().setLanguage(this);
 
 		app.runInUIThread(() -> {
-			List<Fragment> fragments = getSupportFragmentManager().getFragments();
-			for (Fragment fragment : fragments) {
-				getSupportFragmentManager()
-						.beginTransaction()
-						.detach(fragment)
-						.attach(fragment)
-						.commitAllowingStateLoss();
+			FragmentManager manager = getSupportFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+				manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 			}
-
 			DashboardOnMap dashboard = getDashboard();
 			if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
 				dashboard.refreshContent(true);
