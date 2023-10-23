@@ -80,14 +80,14 @@ public class LocalIndexHelper {
 	private File getInternalDir() {
 		File filesDir = app.getFilesDir();
 		File parentDir = filesDir.getParentFile();
-		return parentDir != null ? parentDir : filesDir;
+		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
 	}
 
 	@NonNull
 	private File getExternalDir() {
 		File appDir = app.getAppPath(null);
 		File parentDir = appDir.getParentFile();
-		return parentDir != null ? parentDir : appDir;
+		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
 	}
 
 	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File dir, boolean addUnknown) {
