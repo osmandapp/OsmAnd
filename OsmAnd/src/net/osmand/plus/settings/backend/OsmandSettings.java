@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.AppVersionUpgradeOnInit.updateExistingWidgetIds;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
@@ -1829,17 +1830,65 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
+	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 

@@ -58,30 +58,6 @@ public class MapWidgetRegistry {
 		this.settings = app.getSettings();
 	}
 
-	public void populateControlsContainer(@NonNull ViewGroup container,
-										  @NonNull ApplicationMode mode,
-										  @NonNull WidgetsPanel widgetPanel) {
-		Set<MapWidgetInfo> widgets = getWidgetsForPanel(widgetPanel);
-
-		List<MapWidget> widgetsToShow = new ArrayList<>();
-		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isEnabledForAppMode(mode) && widgetInfo.widget.isViewVisible()) {
-				widgetsToShow.add(widgetInfo.widget);
-			} else {
-				widgetInfo.widget.detachView(widgetPanel);
-			}
-		}
-
-		for (int i = 0; i < widgetsToShow.size(); i++) {
-			MapWidget widget = widgetsToShow.get(i);
-			List<MapWidget> followingWidgets = i + 1 == widgetsToShow.size()
-					? new ArrayList<>()
-					: widgetsToShow.subList(i + 1, widgetsToShow.size());
-			int order = Math.min(container.getChildCount(), i); // Avoid IndexOutOfBoundsException
-			widget.attachView(container, widgetPanel, order, followingWidgets);
-		}
-	}
-
 	public void updateWidgetsInfo(@NonNull ApplicationMode appMode, @NonNull DrawSettings drawSettings) {
 		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
 			if (widgetInfo.isEnabledForAppMode(appMode) || widgetInfo instanceof CenterWidgetInfo) {

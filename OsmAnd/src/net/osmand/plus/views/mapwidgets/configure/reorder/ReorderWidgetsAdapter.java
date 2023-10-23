@@ -208,7 +208,8 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		AndroidUiHelper.updateVisibility(viewHolder.topDivider, !firstPage);
 		viewHolder.pageText.setText(app.getString(R.string.page_number, String.valueOf(pageIndex + 1)));
 
-		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, !firstPage);
+		boolean showMoveIcon = !panel.isPanelVertical() && !firstPage;
+		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, showMoveIcon);
 		viewHolder.moveIcon.setOnTouchListener((v, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				dragListener.onDragStarted(viewHolder);

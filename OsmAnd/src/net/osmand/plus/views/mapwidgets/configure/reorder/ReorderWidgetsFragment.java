@@ -240,7 +240,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	private void updateItems() {
-		List<ListItem> enabledItems = createEnabledWidgetsList(selectedAppMode);
+		List<ListItem> enabledItems = createEnabledWidgetsList(selectedAppMode, false);
 		List<ListItem> availableWidgets = createAvailableWidgetsList(selectedAppMode);
 		updateItems(availableWidgets, enabledItems);
 	}
@@ -250,9 +250,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		items.add(new ListItem(ItemType.CARD_TOP_DIVIDER, null));
 		items.add(new ListItem(ItemType.HEADER, getString(R.string.shared_string_visible_widgets)));
 		items.addAll(enabledItems);
-		if (dataHolder.getSelectedPanel().isPagingAllowed()) {
-			items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
-		}
+		items.add(new ListItem(ItemType.ADD_PAGE_BUTTON, null));
 		items.add(new ListItem(ItemType.CARD_DIVIDER, null));
 
 		if (!Algorithms.isEmpty(availableItems)) {
@@ -277,7 +275,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		adapter.setItems(items);
 	}
 
-	private List<ListItem> createEnabledWidgetsList(@NonNull ApplicationMode appMode) {
+	private List<ListItem> createEnabledWidgetsList(@NonNull ApplicationMode appMode, boolean newWidgetsToCreate) {
 		List<ListItem> widgetsItems = new ArrayList<>();
 
 		MapActivity mapActivity = requireMapActivity();
@@ -308,6 +306,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			info.page = page;
 			info.order = order;
 			info.info = widgetInfo;
+			info.newWidgetToCreate = newWidgetsToCreate;
 			widgetsItems.add(new ListItem(ItemType.ADDED_WIDGET, info));
 		}
 		Collections.sort(widgetsItems, (o1, o2) -> {
@@ -320,10 +319,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 			return Integer.compare(info1.order, info2.order);
 		});
-
-
-		boolean pagingAllowed = dataHolder.getSelectedPanel().isPagingAllowed();
-		return pagingAllowed ? getPagedWidgetItems(widgetsItems) : widgetsItems;
+		return getPagedWidgetItems(widgetsItems);
 	}
 
 	@NonNull
@@ -399,10 +395,14 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		List<ListItem> items = adapter.getItems();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		List<String> enabledWidgetsIds = new ArrayList<>();
+		List<String> newWidgetToCreate = new ArrayList<>();
 
 		for (ListItem item : items) {
 			if (item.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo widgetInfo = (AddedWidgetUiInfo) item.value;
+				if (widgetInfo.newWidgetToCreate) {
+					newWidgetToCreate.add(widgetInfo.key);
+				}
 				List<String> widgetsOrder = pagedOrder.get(widgetInfo.page);
 				if (widgetsOrder == null) {
 					widgetsOrder = new ArrayList<>();
@@ -413,7 +413,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 		}
 
-		applyWidgetsPanel(enabledWidgetsIds);
+		applyWidgetsPanel(newWidgetToCreate);
 		applyWidgetsVisibility(enabledWidgetsIds);
 		applyWidgetsOrder(new ArrayList<>(pagedOrder.values()));
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -450,7 +450,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		MapActivity mapActivity = requireMapActivity();
 		dataHolder.copyAppModePrefs(mapActivity, selectedAppMode, appMode);
-		List<ListItem> enabledItems = createEnabledWidgetsList(appMode);
+		List<ListItem> enabledItems = createEnabledWidgetsList(appMode, true);
 		List<ListItem> availableItems = createAvailableWidgetsList(appMode);
 		updateItems(availableItems, enabledItems);
 	}

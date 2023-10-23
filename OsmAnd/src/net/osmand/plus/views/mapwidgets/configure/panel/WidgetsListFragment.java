@@ -121,8 +121,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 		updateContent();
 
-		TextView panelTitle = view.findViewById(R.id.panel_title);
-		panelTitle.setText(getString(selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app))));
+		boolean isRtl = AndroidUtils.isLayoutRtl(view.getContext());
+		TextView title = view.findViewById(R.id.panel_title);
+		title.setText(getString(isVerticalPanel() ? R.string.shared_string_rows : selectedPanel.getTitleId(isRtl)));
 
 		setupReorderButton(changeOrderListButton);
 		setupReorderButton(changeOrderFooterButton);
@@ -232,15 +233,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private void inflateEnabledWidgets() {
 		MapActivity mapActivity = requireMapActivity();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		if (selectedPanel.isPagingAllowed()) {
-			List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter);
-			for (int i = 0; i < pagedWidgets.size(); i++) {
+
+		List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter);
+		for (int i = 0; i < pagedWidgets.size(); i++) {
+			if (!isVerticalPanel()) {
 				inflatePageItemView(i, inflater);
-				inflateWidgetItemsViews(pagedWidgets.get(i), inflater);
 			}
-		} else {
-			Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, enabledWidgetsFilter, Collections.singletonList(selectedPanel));
-			inflateWidgetItemsViews(widgets, inflater);
+			inflateWidgetItemsViews(pagedWidgets.get(i), inflater, i + 1);
 		}
 	}
 
@@ -253,7 +252,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		enabledWidgetsContainer.addView(view);
 	}
 
-	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater) {
+	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater, int row) {
 		List<MapWidgetInfo> widgets = new ArrayList<>(widgetsInfo);
 
 		for (int i = 0; i < widgets.size(); i++) {
@@ -314,6 +313,17 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			boolean last = i + 1 == widgets.size();
 			AndroidUiHelper.updateVisibility(bottomDivider, !last);
 
+			if (isVerticalPanel()) {
+				TextView rowId = view.findViewById(R.id.row_id);
+				rowId.setText(String.valueOf(row));
+				AndroidUiHelper.setVisibility(i == 0 ? View.VISIBLE : View.INVISIBLE, rowId);
+
+				if (last) {
+					ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) bottomDivider.getLayoutParams();
+					params.setMarginStart(0);
+					AndroidUiHelper.updateVisibility(bottomDivider, true);
+				}
+			}
 			enabledWidgetsContainer.addView(view);
 		}
 	}
@@ -469,6 +479,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
 		Drawable background = UiUtilities.getColoredSelectableDrawable(context, color, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	private boolean isVerticalPanel() {
+		return selectedPanel.isPanelVertical();
 	}
 
 	@Override

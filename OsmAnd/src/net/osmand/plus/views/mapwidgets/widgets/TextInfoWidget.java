@@ -192,7 +192,9 @@ public class TextInfoWidget extends MapWidget {
 		}
 
 		view.setBackgroundResource(getBackgroundResource(textState));
-		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+		if (bottomDivider != null) {
+			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+		}
 	}
 
 	@DrawableRes
