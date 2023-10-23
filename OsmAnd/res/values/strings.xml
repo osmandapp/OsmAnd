@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="not_specified">Not specified</string>
     <string name="cloud_item_restored">%1$s is restored into Cloud.</string>
     <string name="shared_string_is_deleted">%1$s is deleted.</string>
     <string name="shared_string_delete_item">Delete item</string>
@@ -27,6 +28,10 @@
         <item quantity="one" formatted="true">%1$d (%2$d track)</item>
         <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>
     </plurals>
+    <string name="shared_string_show_less">Show less</string>
+    <string name="all_folders">All folders</string>
+    <string name="root_folder">Root folder</string>
+    <string name="folder">Folder</string>
     <string name="shared_string_loading">Loading</string>
     <string name="loading_tracks">Reloading tracks</string>
     <string name="searching_matching_tracks">Search all matching tracks</string>

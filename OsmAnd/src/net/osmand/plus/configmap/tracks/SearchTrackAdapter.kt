@@ -19,6 +19,7 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.settings.enums.TracksSortMode
+import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
@@ -61,6 +62,14 @@ class SearchTracksAdapter(
         nightMode: Boolean,
         selectionMode: Boolean
     ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems))
+
+    constructor(
+        app: OsmandApplication,
+        trackItems: List<TrackItem>,
+        nightMode: Boolean,
+        selectionMode: Boolean,
+        currentFolder: TrackFolder?
+    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems, currentFolder))
 
     fun getFilteredItems(): Set<TrackItem> {
         return HashSet(filteredItems)

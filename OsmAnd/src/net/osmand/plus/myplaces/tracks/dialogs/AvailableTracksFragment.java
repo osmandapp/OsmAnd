@@ -178,6 +178,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						isUsedOnMap(),
 						null,
 						null,
+						null,
 						null);
 			}
 		}

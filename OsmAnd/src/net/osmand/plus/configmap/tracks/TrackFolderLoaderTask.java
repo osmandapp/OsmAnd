@@ -71,6 +71,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 				trackFolder.addSubFolder(folder);
 				loadGPXFolder(folder, getSubfolderTitle(file, subfolder), updateSmartFolder);
 			} else if (isGpxFile(file)) {
+				smartFolderHelper.addAvailableTrackFolder(subfolder);
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
 				trackFolder.addTrackItem(trackItem);
