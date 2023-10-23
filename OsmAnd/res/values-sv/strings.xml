@@ -1403,7 +1403,7 @@
     <string name="shared_string_control_start">Starta</string>
     <string name="shared_string_control_stop">Stoppa</string>
     <string name="shared_string_import">Importera</string>
-    <string name="shared_string_export">Export</string>
+    <string name="shared_string_export">Exportera</string>
     <string name="shared_string_more">Mer…</string>
     <string name="shared_string_more_actions">Fler åtgärder</string>
     <string name="shared_string_do_not_show_again">Visa inte nästa gång</string>
@@ -1801,7 +1801,7 @@
     <string name="shared_string_save_changes">Spara ändringar</string>
     <string name="find_parking">Hitta en parkeringsplats</string>
     <string name="show_polygons">Visa polygoner</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mountainbike-spår</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mountainbike-leder</string>
     <string name="select_map_markers">Välj kartmarkörer</string>
     <string name="shared_string_reverse_order">Omvänd ordning</string>
     <string name="show_map_markers_description">Aktivera kartmarkörerna.</string>
@@ -2104,7 +2104,7 @@
     <string name="quick_action_btn_tutorial_descr">Genom att trycka länge och dra knappen ändras dess position på skärmen.</string>
     <string name="routing_attr_height_obstacles_name">Använd höjddata</string>
     <string name="rendering_attr_depthContours_description">Visa djupkurvor och -punkter.</string>
-    <string name="shared_string_slope">Sluttning</string>
+    <string name="shared_string_slope">Lutning</string>
     <string name="altitude_range">Höjdområde</string>
     <string name="relief_smoothness_factor_descr">Föredragen terräng: slätt eller kuperat.</string>
     <string name="full_version_thanks">Tack för att du köpt betalversionen av OsmAnd.</string>
@@ -2679,7 +2679,7 @@
     <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
     <string name="quick_action_category_descr">Kategori för att spara favoriten i:</string>
     <string name="quick_action_gpx_category_descr">Välj en valfri kategori.</string>
-    <string name="quick_action_poi_list">POI-lista</string>
+    <string name="quick_action_poi_list">Intressepunkt-lista</string>
     <string name="quick_action_sh_poi_descr">Lägga till en eller flera POI-kategorier som ska visas på kartan.</string>
     <string name="quick_action_map_style_action">Lägg till en kartstil</string>
     <string name="quick_action_empty_param_error">Fyll i alla parametrar</string>
@@ -3081,7 +3081,7 @@
     <string name="next_segment">Nästa segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
     <string name="street_level_imagery">Bilder på gatunivå</string>
-    <string name="plan_route_exit_dialog_descr">Avfärda alla ändringar i den plannerade färdvägen\?</string>
+    <string name="plan_route_exit_dialog_descr">Avfärda alla ändringar i den planerade färdvägen\?</string>
     <string name="map_widget_monitoring">Inspelning av resa</string>
     <string name="follow_track">Följ färdväg</string>
     <string name="select_another_track">välj en annan färdväg</string>
@@ -5143,4 +5143,29 @@
     <string name="delete_account_warning">Är du säker på att du vill radera kontot %1$s \?</string>
     <string name="searching_matching_tracks">Sök alla matchande spår</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Använd raster sqlitedb för terrängskuggning / lutningsgrad</string>
+    <string name="write_heading">Logga kurs</string>
+    <string name="wheel_circumference">Hjulets omkrets</string>
+    <string name="open_issue_on_github">Öppna ärende på GitHub</string>
+    <string name="about_osmand">Om OsmAnd</string>
+    <string name="local_indexes_category_terrain">Terrängkartor (3D)</string>
+    <string name="send_logcat_log_descr">Detaljerad loggfil</string>
+    <string name="send_crash_log_descr">Innehåller endast information om krascher</string>
+    <string name="write_bearing">Logga bäring</string>
+    <string name="free_versions_descr">Ladda ner och installera OsmAnd gratisversion</string>
+    <string name="free_versions">Gratisversioner</string>
+    <string name="open_issue_on_github_descr">Ställ frågor, föreslå nya funktioner</string>
+    <string name="feature_available_as_part_of_plan">%1$s tillgänglig som del av abonnemanget %2$s</string>
+    <string name="github_discussion">GitHub-diskussion</string>
+    <string name="most_viewed">Mest läst</string>
+    <string name="write_bearing_description">Spara bäringen till varje spårpunkt vid inspelning</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d spår)</item>
+        <item quantity="other">%1$d (%2$d spår)</item>
+    </plurals>
+    <string name="copy_build_version">Kopiera byggversion</string>
+    <string name="help_article_widgets_radius_ruler_name">Radielinjal och linjal</string>
+    <string name="external_sensor_name_property_description">Sensornamn</string>
+    <string name="report_an_issues">Rapportera ett problem</string>
+    <string name="write_heading_description">Spara kursen till varje spårpunkt vid inspelning</string>
+    <string name="shared_string_setup">Konfiguration</string>
 </resources>

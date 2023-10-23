@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
-import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -111,11 +110,10 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, @NonNull Collection<RemoteFile> remoteFiles, boolean forceReadData) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
-		Collection<RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE).values();
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
@@ -204,69 +202,25 @@ class BackupImporter {
 		try {
 			OperationLog operationLog = new OperationLog("getRemoteItems", BackupHelper.DEBUG);
 			operationLog.startOperation();
+
 			JSONObject json = new JSONObject();
 			JSONArray itemsJson = new JSONArray();
 			json.put("items", itemsJson);
-			Map<File, RemoteFile> remoteInfoFilesMap = new HashMap<>();
-			Map<String, RemoteFile> remoteItemFilesMap = new HashMap<>();
-			List<RemoteFile> remoteInfoFiles = new ArrayList<>();
-			Set<String> remoteInfoNames = new HashSet<>();
-			List<RemoteFile> noInfoRemoteItemFiles = new ArrayList<>();
-			OsmandApplication app = backupHelper.getApp();
-			File tempDir = FileUtils.getTempDir(app);
 
 			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
-			Set<String> uniqueFileIds = new TreeSet<>();
-			for (RemoteFile rf : remoteFiles) {
-				String fileId = rf.getTypeNamePath();
-				if (uniqueFileIds.add(fileId) && !rf.isDeleted()) {
-					uniqueRemoteFiles.add(rf);
-				}
-			}
+			collectUniqueRemoteFiles(remoteFiles, uniqueRemoteFiles);
 			operationLog.log("build uniqueRemoteFiles");
 
-			Map<String, UploadedFileInfo> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
-			BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
-			List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
-			for (RemoteFile remoteFile : uniqueRemoteFiles) {
-				String fileName = remoteFile.getTypeNamePath();
-				if (fileName.endsWith(INFO_EXT)) {
-					boolean delete = false;
-					String origFileName = remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length());
-					for (RemoteFile file : filesToDelete) {
-						if (file.getName().equals(origFileName)) {
-							delete = true;
-							break;
-						}
-					}
-					UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
-					long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
-					if (readItems && (uploadTime != remoteFile.getUpdatetimems() || delete)) {
-						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
-					}
-					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
-					remoteInfoNames.add(itemFileName);
-					remoteInfoFiles.add(remoteFile);
-				} else if (!remoteItemFilesMap.containsKey(fileName)) {
-					remoteItemFilesMap.put(fileName, remoteFile);
-				}
-			}
+			Set<String> remoteInfoNames = new HashSet<>();
+			List<RemoteFile> remoteInfoFiles = new ArrayList<>();
+			Map<File, RemoteFile> remoteInfoFilesMap = new HashMap<>();
+			Map<String, RemoteFile> remoteItemFilesMap = new HashMap<>();
+
+			processUniqueRemoteFiles(uniqueRemoteFiles, remoteItemFilesMap, remoteInfoFilesMap, remoteInfoNames, remoteInfoFiles, readItems);
 			operationLog.log("build maps");
 
-			for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFilesMap.entrySet()) {
-				String itemFileName = remoteFileEntry.getKey();
-				RemoteFile remoteFile = remoteFileEntry.getValue();
-				boolean hasInfo = false;
-				for (String remoteInfoName : remoteInfoNames) {
-					if (itemFileName.equals(remoteInfoName) || itemFileName.startsWith(remoteInfoName + "/")) {
-						hasInfo = true;
-						break;
-					}
-				}
-				if (!hasInfo && !remoteFile.isRecordedVoiceFile()) {
-					noInfoRemoteItemFiles.add(remoteFile);
-				}
-			}
+			List<RemoteFile> noInfoRemoteItemFiles = new ArrayList<>();
+			collectNoInfoRemoteItemFiles(noInfoRemoteItemFiles, remoteItemFilesMap, remoteInfoNames);
 			operationLog.log("build noInfoRemoteItemFiles");
 
 			if (readItems) {
@@ -276,7 +230,7 @@ class BackupImporter {
 			}
 			operationLog.log("generateItemsJson");
 
-			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(backupHelper.getApp(), json);
 			operationLog.log("create setting items");
 			List<SettingsItem> settingsItemList = itemsFactory.getItems();
 			if (settingsItemList.isEmpty()) {
@@ -294,6 +248,70 @@ class BackupImporter {
 			throw new IOException(e);
 		}
 		return items;
+	}
+
+	private void collectUniqueRemoteFiles(@NonNull List<RemoteFile> remoteFiles, @NonNull List<RemoteFile> uniqueRemoteFiles) {
+		Set<String> uniqueFileIds = new TreeSet<>();
+		for (RemoteFile rf : remoteFiles) {
+			String fileId = rf.getTypeNamePath();
+			if (!rf.isDeleted() && uniqueFileIds.add(fileId)) {
+				uniqueRemoteFiles.add(rf);
+			}
+		}
+	}
+
+	private void processUniqueRemoteFiles(@NonNull List<RemoteFile> uniqueRemoteFiles,
+	                                      @NonNull Map<String, RemoteFile> remoteItemFilesMap,
+	                                      @NonNull Map<File, RemoteFile> remoteInfoFilesMap,
+	                                      @NonNull Set<String> remoteInfoNames,
+	                                      @NonNull List<RemoteFile> remoteInfoFiles,
+	                                      boolean readItems) {
+		File tempDir = FileUtils.getTempDir(backupHelper.getApp());
+		Map<String, UploadedFileInfo> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
+		BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
+		List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
+		for (RemoteFile remoteFile : uniqueRemoteFiles) {
+			String fileName = remoteFile.getTypeNamePath();
+			if (fileName.endsWith(INFO_EXT)) {
+				boolean delete = false;
+				String origFileName = remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length());
+				for (RemoteFile file : filesToDelete) {
+					if (file.getName().equals(origFileName)) {
+						delete = true;
+						break;
+					}
+				}
+				UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
+				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
+				if (readItems && (uploadTime != remoteFile.getUpdatetimems() || delete)) {
+					remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
+				}
+				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
+				remoteInfoNames.add(itemFileName);
+				remoteInfoFiles.add(remoteFile);
+			} else if (!remoteItemFilesMap.containsKey(fileName)) {
+				remoteItemFilesMap.put(fileName, remoteFile);
+			}
+		}
+	}
+
+	private void collectNoInfoRemoteItemFiles(@NonNull List<RemoteFile> noInfoRemoteItemFiles,
+	                                          @NonNull Map<String, RemoteFile> remoteItemFilesMap,
+	                                          @NonNull Set<String> remoteInfoNames) {
+		for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFilesMap.entrySet()) {
+			String itemFileName = remoteFileEntry.getKey();
+			RemoteFile remoteFile = remoteFileEntry.getValue();
+			boolean hasInfo = false;
+			for (String remoteInfoName : remoteInfoNames) {
+				if (itemFileName.equals(remoteInfoName) || itemFileName.startsWith(remoteInfoName + "/")) {
+					hasInfo = true;
+					break;
+				}
+			}
+			if (!hasInfo && !remoteFile.isRecordedVoiceFile()) {
+				noInfoRemoteItemFiles.add(remoteFile);
+			}
+		}
 	}
 
 	@NonNull

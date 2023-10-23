@@ -1,7 +1,7 @@
 package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
-import static net.osmand.plus.settings.fragments.MainSettingsFragment.getLastBackupTimeDescription;
+import static net.osmand.plus.backup.ui.BackupUiUtils.getLastBackupTimeDescription;
 
 import android.view.View;
 import android.widget.ImageView;

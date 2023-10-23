@@ -34,6 +34,7 @@ import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
 import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -56,6 +57,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	private View searchContainer;
 	private TextView selectedCountTv;
 	private SmartFolder smartFolder;
+	private TrackFolder currentFolder;
 	private DialogButton resetAllButton;
 	private DialogButton saveButton;
 	private View bottomButtonsContainer;
@@ -91,7 +93,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (externalFilter != null) {
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
 		} else {
-			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, currentFolder);
 		}
 	}
 
@@ -212,8 +214,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment,
-						currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 
@@ -324,6 +325,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onResume() {
 		super.onResume();
 		setupToolbar(requireView());
+		app.getSelectedGpxHelper().addListener(this);
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();
@@ -337,6 +339,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onPause() {
 		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 		app.getSmartFolderHelper().removeUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
 	}
@@ -351,10 +354,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	                                boolean selectionMode, boolean usedOnMap,
 	                                @Nullable SmartFolder smartFolder,
 	                                @Nullable TracksSearchFilter externalFilter,
-	                                @Nullable DialogClosedListener dialogClosedListener) {
+	                                @Nullable DialogClosedListener dialogClosedListener,
+	                                @Nullable TrackFolder currentFolder
+	) {
+		Fragment foundFragment = manager.findFragmentByTag(TAG);
+		if (foundFragment instanceof SearchMyPlacesTracksFragment) {
+			((SearchMyPlacesTracksFragment) foundFragment).dismiss();
+		}
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
 			fragment.smartFolder = smartFolder;
+			fragment.currentFolder = currentFolder;
 			fragment.usedOnMap = usedOnMap;
 			fragment.selectionMode = selectionMode;
 			fragment.externalFilter = externalFilter;
@@ -379,9 +389,11 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void showFiltersDialog() {
 		FragmentManager manager = getFragmentManager();
-		Filter filter = adapter.getFilter();
+    TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+		filter.setCurrentFolder(currentFolder);
 		if (manager != null && filter instanceof TracksSearchFilter) {
-			TracksFilterFragment.Companion.showInstance(manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder);
+			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder, currentFolder);
+  
 		}
 	}
 

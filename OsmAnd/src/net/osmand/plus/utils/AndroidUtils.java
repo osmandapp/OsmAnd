@@ -104,6 +104,7 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -903,28 +904,6 @@ public class AndroidUtils {
 		return result;
 	}
 
-	public static boolean isScreenOn(Context context) {
-		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return pm.isInteractive();
-	}
-
-	public static boolean isScreenLocked(Context context) {
-		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-		return keyguardManager.inKeyguardRestrictedInputMode();
-	}
-
-	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
-
-		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD
-				|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC
-				|| baseString.toString().contains(STRING_PLACEHOLDER)) {
-
-			return getStyledString(baseString, stringToInsertAndStyle, null, new StyleSpan(typefaceStyle));
-		} else {
-			return baseString;
-		}
-	}
-
 	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
 		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
@@ -953,13 +932,6 @@ public class AndroidUtils {
 		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
-		}
-	}
-
-	public static void setTextDirection(@NonNull TextView tv, boolean rtl) {
-		if (isSupportRTL()) {
-			int textDirection = rtl ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
-			tv.setTextDirection(textDirection);
 		}
 	}
 
@@ -1115,10 +1087,6 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isRTL() {
-		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
-	}
-
 	@NonNull
 	public static String createNewFileName(@NonNull String fileName) {
 		int index = fileName.lastIndexOf('.');
@@ -1136,7 +1104,7 @@ public class AndroidUtils {
 		return name + " (2)" + extension;
 	}
 
-	public static StringBuilder formatWarnings(List<String> warnings) {
+	public static StringBuilder formatWarnings(Collection<String> warnings) {
 		StringBuilder builder = new StringBuilder();
 		boolean f = true;
 		for (String w : warnings) {

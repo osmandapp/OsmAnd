@@ -1,12 +1,13 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.CITY
 import net.osmand.util.Algorithms
 
-class CityTrackFilter(filterChangedListener: FilterChangedListener) :
+class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(R.string.nearest_cities, CITY, filterChangedListener) {
 
 	override fun isEnabled(): Boolean {
@@ -16,7 +17,17 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 	@Expose
 	val selectedCities = ArrayList<String>()
 
-	var fullCitiesList: MutableList<String> = ArrayList()
+	var allCities: MutableList<String> = arrayListOf()
+		private set
+	var allCitiesCollection: HashMap<String, Int> = hashMapOf()
+		private set
+
+	fun setFullCitiesList (collection: List<Pair<String, Int>>) {
+		for (pair in collection) {
+			allCities.add(pair.first)
+			allCitiesCollection[pair.first] = pair.second
+		}
+	}
 
 	fun setCitySelected(city: String, selected: Boolean) {
 		if (selected) {
@@ -24,7 +35,7 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 		} else {
 			selectedCities.remove(city)
 		}
-		filterChangedListener.onFilterChanged()
+		filterChangedListener?.onFilterChanged()
 	}
 
 	fun isCitySelected(city: String): Boolean {
@@ -45,11 +56,12 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener) :
 			selectedCities.clear()
 			selectedCities.addAll(value.selectedCities)
 			for (city in value.selectedCities) {
-				if (fullCitiesList.contains(city)) {
-					fullCitiesList.add(city)
+				if (!allCities.contains(city)) {
+					allCities.add(city)
+					allCitiesCollection[city] = 0
 				}
 			}
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure;
 
+import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,7 +65,7 @@ public class ConfigureScreenActionsCard extends MapBaseCard {
 	private void showResetToDefaultConfirmationDialog() {
 		FragmentManager fragmentManager = target.getFragmentManager();
 		if (fragmentManager != null) {
-			ConfirmResetToDefaultBottomSheetDialog.showInstance(fragmentManager, target, screenTitleId);
+			showResetSettingsDialog(fragmentManager, target, screenTitleId);
 		}
 	}
 

@@ -156,6 +156,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (foldersHelper != null) {
 			foldersHelper.setGpxImportListener(this);
 		}
+		gpxSelectionHelper.addListener(this);
 	}
 
 	@Override
@@ -166,6 +167,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (foldersHelper != null) {
 			foldersHelper.setGpxImportListener(null);
 		}
+		gpxSelectionHelper.removeListener(this);
 	}
 
 	@Override

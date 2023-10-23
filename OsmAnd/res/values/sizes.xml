@@ -98,6 +98,7 @@
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
 	<dimen name="big_icon_size">36dp</dimen>
+	<dimen name="small_icon_size">16dp</dimen>
 	<dimen name="icon_size_double">48dp</dimen>
 	<dimen name="icon_background_size">56dp</dimen>
 	<dimen name="poi_icon_size">16dp</dimen>
@@ -156,7 +157,6 @@
 	<dimen name="map_button_stroke">1dp</dimen>
 	<dimen name="map_button_stroke_dark">1dp</dimen>
 	<dimen name="map_route_planning_land_width">320dp</dimen>
-	<dimen name="map_route_planning_land_width_minus_shadow">306dp</dimen>
 	<dimen name="map_route_planning_max_height">330dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
 	<dimen name="map_widget_text_size">23sp</dimen>

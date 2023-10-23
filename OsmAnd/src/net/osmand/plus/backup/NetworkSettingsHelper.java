@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -189,10 +190,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 	public void importSettings(@NonNull String key,
 	                           @NonNull List<SettingsItem> items,
+	                           @NonNull RemoteFilesType filesType,
 	                           boolean forceReadData,
 	                           @Nullable ImportListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
-			ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
+			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType, listener, forceReadData);
 			importAsyncTasks.put(key, importTask);
 			importTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -227,6 +229,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void syncSettingsItems(@NonNull String key,
 	                              @Nullable LocalFile localFile,
 	                              @Nullable RemoteFile remoteFile,
+	                              @NonNull RemoteFilesType filesType,
 	                              @NonNull SyncOperationType operation) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
@@ -246,7 +249,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
 					if (remoteFile != null) {
-						syncTask.downloadRemoteVersion(remoteFile.item);
+						syncTask.downloadRemoteVersion(remoteFile.item, filesType);
 					}
 					break;
 			}

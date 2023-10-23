@@ -11,6 +11,7 @@ import net.osmand.plus.backup.BackupImporter.NetworkImportProgressListener;
 import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
 import net.osmand.plus.backup.ImportBackupItemsTask.ImportItemsListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
@@ -35,6 +36,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private BackupCollectListener collectListener;
 	private CheckDuplicatesListener duplicatesListener;
 	private final BackupImporter importer;
+	private final RemoteFilesType filesType;
 
 	private List<SettingsItem> items = new ArrayList<>();
 	private List<SettingsItem> selectedItems = new ArrayList<>();
@@ -56,6 +58,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
+		this.filesType = RemoteFilesType.UNIQUE;
 		this.collectListener = collectListener;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
@@ -65,11 +68,13 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	ImportBackupTask(@NonNull String key,
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @NonNull List<SettingsItem> items,
+	                 @NonNull RemoteFilesType filesType,
 	                 @Nullable ImportListener importListener,
 	                 boolean forceReadData) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
+		this.filesType = filesType;
 		this.importListener = importListener;
 		this.items = items;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
@@ -86,6 +91,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.items = items;
+		this.filesType = RemoteFilesType.UNIQUE;
 		this.duplicatesListener = duplicatesListener;
 		this.selectedItems = selectedItems;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
@@ -166,7 +172,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						helper.importAsyncTasks.remove(key);
 						helper.finishImport(importListener, succeed, items, needRestart);
 					};
-					new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData)
+					new ImportBackupItemsTask(app, importer, items, filesType, itemsListener, forceReadData)
 							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				} else {
 					helper.importAsyncTasks.remove(key);

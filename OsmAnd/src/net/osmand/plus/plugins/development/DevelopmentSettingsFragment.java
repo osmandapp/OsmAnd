@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.development;
 
 import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,14 +23,13 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ResetToDefaultListener {
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
@@ -270,7 +270,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ConfirmResetToDefaultBottomSheetDialog.showInstance(fragmentManager, this, R.string.debugging_and_development);
+				showResetSettingsDialog(fragmentManager, this, R.string.debugging_and_development);
 			}
 		}
 		return super.onPreferenceClick(preference);
@@ -327,7 +327,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public void onResetToDefaultConfirmed() {
+	public void onActionConfirmed(int actionId) {
 		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
 		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
 

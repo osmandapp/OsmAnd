@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.LocalFile;
@@ -27,14 +26,7 @@ import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -153,19 +145,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		}
 	}
 
-	public static String generateTimeString(OsmandApplication app, long time, String summary) {
-		return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, getTimeString(app, time));
-	}
-
-	public static String getTimeString(OsmandApplication app, long time) {
-		String never = app.getString(R.string.shared_string_never);
-		if (time != -1) {
-			return OsmAndFormatter.getChangesFormattedPassedTime(app, time, never);
-		} else {
-			return app.getString(R.string.shared_string_never);
-		}
-	}
-
 	static class FileInfo {
 		public LocalFile localFile;
 		public RemoteFile remoteFile;
@@ -193,40 +172,40 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		}
 	}
 
-	protected CloudChangeItem createChangeItem(String key,
-	                                           SyncOperationType operation,
-	                                           LocalFile localFile,
-	                                           RemoteFile remoteFile) {
-		SettingsItem settingsItem = getSettingsItem(localFile, remoteFile);
-		if (settingsItem == null) {
-			return null;
+	@Nullable
+	protected CloudChangeItem createChangeItem(@NonNull SyncOperationType operationType,
+	                                           @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
+		boolean local = tabType == RECENT_CHANGES_LOCAL;
+		SettingsItem settingsItem = getSettingsItem(local, localFile, remoteFile);
+		if (settingsItem != null) {
+			long time = getTime(operationType, localFile, remoteFile);
+
+			CloudChangeItem item = new CloudChangeItem();
+			item.title = BackupUiUtils.getItemName(app, settingsItem);
+			item.summary = localizedSummaryForOperation(operationType, localFile, remoteFile);
+			item.description = BackupUiUtils.generateTimeString(app, item.summary, time);
+			item.time = BackupUiUtils.getTimeString(app, time);
+			item.iconId = BackupUiUtils.getIconId(settingsItem);
+			item.settingsItem = settingsItem;
+			item.operation = operationType;
+			item.localFile = localFile;
+			item.remoteFile = remoteFile;
+			item.fileName = BackupHelper.getItemFileName(settingsItem);
+
+			return item;
 		}
-		long time = getTime(operation, localFile, remoteFile);
-
-		CloudChangeItem changeItem = new CloudChangeItem();
-		changeItem.title = getName(settingsItem);
-		changeItem.summary = localizedSummaryForOperation(operation, localFile, remoteFile);
-		changeItem.description = generateTimeString(app, time, changeItem.summary);
-		changeItem.time = getTimeString(app, time);
-		changeItem.iconId = getIcon(settingsItem);
-		changeItem.settingsItem = settingsItem;
-		changeItem.operation = operation;
-		changeItem.localFile = localFile;
-		changeItem.remoteFile = remoteFile;
-		changeItem.fileName = BackupHelper.getItemFileName(settingsItem);
-
-		return changeItem;
+		return null;
 	}
 
-	private long getTime(SyncOperationType operation, LocalFile localFile, RemoteFile remoteFile) {
+	private long getTime(@NonNull SyncOperationType operationType, @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
 		long time = 0;
-		if (tabType == RECENT_CHANGES_LOCAL && operation == SYNC_OPERATION_DELETE)
+		if (tabType == RECENT_CHANGES_LOCAL && operationType == SYNC_OPERATION_DELETE)
 			time = remoteFile.getClienttimems();
 		else if (tabType == RECENT_CHANGES_LOCAL)
 			time = localFile.localModifiedTime;
 		else if (tabType == RECENT_CHANGES_CONFLICTS)
 			time = localFile.uploadTime;
-		else if (operation == SYNC_OPERATION_DELETE)
+		else if (operationType == SYNC_OPERATION_DELETE)
 			time = localFile.uploadTime;
 		else {
 			time = remoteFile.getUpdatetimems();
@@ -234,49 +213,14 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		return time;
 	}
 
-	private String getName(SettingsItem settingsItem) {
-		String name = "";
-		if (settingsItem instanceof ProfileSettingsItem) {
-			name = ((ProfileSettingsItem) settingsItem).getAppMode().toHumanString();
-		} else {
-			name = settingsItem.getPublicName(app);
-			if (settingsItem instanceof FileSettingsItem) {
-				FileSettingsItem fileItem = (FileSettingsItem) settingsItem;
-				if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-					String suffix = app.getString(R.string.tts_title);
-					name = app.getString(R.string.ltr_or_rtl_combine_via_space, name, suffix);
-				} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-					String suffix = app.getString(R.string.shared_string_record);
-					name = app.getString(R.string.ltr_or_rtl_combine_via_space, name, suffix);
-				}
-			} else if (Algorithms.isEmpty(name)) {
-				name = app.getString(R.string.res_unknown);
-			}
-		}
-		return name;
-	}
-
-	private SettingsItem getSettingsItem(LocalFile localFile, RemoteFile remoteFile) {
+	@Nullable
+	private SettingsItem getSettingsItem(boolean local, @Nullable LocalFile localFile, @Nullable RemoteFile remoteFile) {
 		SettingsItem settingsItem;
-		if (tabType == RECENT_CHANGES_LOCAL) {
+		if (local) {
 			settingsItem = localFile == null ? remoteFile.item : localFile.item;
 		} else {
 			settingsItem = remoteFile == null ? localFile.item : remoteFile.item;
 		}
 		return settingsItem;
-	}
-
-	private int getIcon(@NonNull SettingsItem item) {
-		if (item instanceof ProfileSettingsItem) {
-			ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
-			ApplicationMode mode = profileItem.getAppMode();
-			return mode.getIconRes();
-		} else {
-			ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
-			if (type != null) {
-				return type.getIconRes();
-			}
-		}
-		return -1;
 	}
 }

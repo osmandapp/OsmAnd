@@ -5482,4 +5482,22 @@
     <string name="no_config_smart_folder_description">智慧型資料夾允許透過套用的篩選條件對軌跡分組</string>
     <string name="loading_tracks">正在重新載入軌跡</string>
     <string name="searching_matching_tracks">搜尋所有相符的軌跡</string>
+    <plurals name="tracks">
+        <item quantity="other">%1$d（%2$d 個軌跡）</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">您確定要永久刪除回收桶中的所有項目嗎？此動作無法還原。</string>
+    <string name="restore_from_trash">從回收桶還原</string>
+    <string name="delete_all_items">刪除所有項目</string>
+    <string name="trash_is_empty_banner_desc">從 OsmAnd Cloud 移除的檔案將在%1$s天後在此處可用。</string>
+    <string name="delete_trash_item_confirmation_desc">「%1$s」將會永久刪除。您確定嗎？
+\n
+\n此動作無法還原。</string>
+    <string name="shared_string_empty_trash">清空回收桶</string>
+    <string name="shared_string_delete_immediately">立刻刪除</string>
+    <string name="shared_string_is_deleted">%1$s 已刪除。</string>
+    <string name="cloud_item_restored">%1$s 已還原至雲端。</string>
+    <string name="trash_alert_card_desc">回收桶中的項目將在%1$s天後刪除。</string>
+    <string name="trash_is_empty">回收桶是空的</string>
+    <string name="shared_string_trash">回收桶</string>
+    <string name="shared_string_delete_item">刪除項目</string>
 </resources>

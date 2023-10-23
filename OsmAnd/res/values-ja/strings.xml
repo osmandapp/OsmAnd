@@ -2852,9 +2852,9 @@ POIの更新は利用できません</string>
     <string name="shared_string_milliradians">ミリラジアン</string>
     <string name="angular_measeurement">角度の単位</string>
     <string name="angular_measeurement_descr">方位角(方位を示す角度)の単位を変更します。</string>
-    <string name="avoid_pt_types_descr">ナビゲーション時に使用したくない公共交通機関を指定します:</string>
+    <string name="avoid_pt_types_descr">ナビゲーション時に利用しない交通機関を指定します:</string>
     <string name="quick_action_day_night_mode">%sモード</string>
-    <string name="avoid_pt_types">避けたい移動手段の種類…</string>
+    <string name="avoid_pt_types">利用を避ける交通機関の種類…</string>
     <string name="save_poi_value_exceed_length">\"%s\"タグの長さは255文字未満にしてください。</string>
     <string name="save_poi_value_exceed_length_title">\"%s\"値の長さ</string>
     <string name="public_transport_warning_descr_blog">OsmAndのルーティング詳細については、公式ブログをご参照ください。</string>
@@ -2885,7 +2885,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_surface_fine_gravel_name">砂利と砂の複数舗装</string>
     <string name="rendering_attr_surface_compacted_name">砂利や土などの圧縮舗装</string>
     <string name="routing_attr_avoid_sett_name">石畳や敷石の道を避ける</string>
-    <string name="routing_attr_avoid_sett_description">石畳や敷石の道を通らないようにします</string>
+    <string name="routing_attr_avoid_sett_description">敷石の道を避けます</string>
     <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーなども走行可</string>
     <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可</string>
     <string name="rendering_attr_smoothness_intermediate_name">シティバイク、スポーツカー、車椅子、スクーター及びオフロードバイクや車も走行可能</string>
@@ -2971,7 +2971,7 @@ POIの更新は利用できません</string>
     <string name="public_transport_try_ped">徒歩移動用ナビゲーションを試してください。</string>
     <string name="public_transport_try_change_settings">設定を変更してみてください。</string>
     <string name="public_transport_calc_pedestrian">徒歩移動でのルートを計算</string>
-    <string name="public_transport_type">交通機関の種類</string>
+    <string name="public_transport_type">交通機関の種類を選択</string>
     <string name="searching_gps">GPS検索</string>
     <string name="rate_dialog_descr">フィードバックの共有や、Google Playでの評価をお願いします。</string>
     <string name="help_us_make_osmand_better">OsmAndの改善にご協力ください</string>
@@ -4208,7 +4208,7 @@ POIの更新は利用できません</string>
     <string name="backup_into_file">ファイルにバックアップ</string>
     <string name="local_backup">ローカルバックアップ</string>
     <string name="restore_from_file">ファイルから復元</string>
-    <string name="osmand_cloud_help_descr">助けが必要ですか？%1$sまでお問い合わせください</string>
+    <string name="osmand_cloud_help_descr">詳しい説明が必要であれば%1$sまでお問い合わせください</string>
     <string name="osmand_cloud_create_account_descr">メールアドレスを入力してください。ワンタイムパスワードが送信されます。
 \n手続きを進めるとすべてのデータがリンクされます。</string>
     <string name="osmand_cloud_login_descr">登録したメールアドレスを入力してください。手続きを進めるためのワンタイムパスワードが送信されます。</string>
@@ -5119,4 +5119,61 @@ POIの更新は利用できません</string>
     <string name="nautical_depth_points">水深点(最高深度)</string>
     <string name="inch">インチ</string>
     <string name="shared_string_visible_on_map">地図で表示</string>
+    <string name="cloud_trash_clear_confirmation">ごみ箱内のすべてのアイテムを完全に削除してもよろしいですか？なおこの操作は元に戻すことができません。</string>
+    <string name="empty_smart_folder_title">一致する経路がありません</string>
+    <string name="smart_folder_name_present">同名のスマートフォルダーが存在します</string>
+    <string name="shared_string_cache">キャッシュ</string>
+    <string name="empty_smart_folder_description">一致するすべての経路がここに自動的に表示されます</string>
+    <string name="configure_filter">フィルターを設定</string>
+    <string name="restore_from_trash">ごみ箱から復元する</string>
+    <string name="widget_available_ram_desc">OsmAndに割り当てられた利用可能メモリを表示します。</string>
+    <string name="sort_size_descending">大きいサイズから</string>
+    <string name="smart_folder_saved">スマートフォルダーが保存されました</string>
+    <string name="delete_map">マップの削除</string>
+    <string name="standard_maps">標準マップ</string>
+    <string name="max_altitude">最大高度</string>
+    <string name="delete_all_items">すべての項目を削除</string>
+    <string name="shared_string_created">作成されました</string>
+    <string name="app_mode_paragliding">パラグライダー</string>
+    <string name="app_mode_baby_transport">ベビーカーなど</string>
+    <string name="no_config_smart_folder_title">未設定</string>
+    <string name="trash_is_empty_banner_desc">OsmAnd Cloud から削除されたファイルは、%1$s日後までここで利用可能です。</string>
+    <string name="wikipedia_and_travel_maps">Wikipediaと旅行マップ</string>
+    <plurals name="tracks">
+        <item quantity="other">経路</item>
+    </plurals>
+    <string name="add_smart_folder">スマートフォルダーを追加</string>
+    <string name="empty_name">名前が空です</string>
+    <string name="edit_fiilter">フィルターの編集</string>
+    <string name="rendering_styles">表示スタイル</string>
+    <string name="sort_country_name_ascending">国名:A – Z</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\"は完全に削除されます。よろしいですか？
+\n
+\nこの操作は元に戻すことができません。</string>
+    <string name="discard_filter_changes">フィルターの変更を破棄</string>
+    <string name="app_mode_hang_gliding">ハンググライダー</string>
+    <string name="save_as_smart_folder">スマートフォルダーとして保存</string>
+    <string name="weather_online">オンライン天気</string>
+    <string name="shared_string_empty_trash">ごみ箱は空です</string>
+    <string name="shared_string_show_icon">アイコンを表示</string>
+    <string name="map_is_up_to_date">マップ%1$sは最新です。</string>
+    <string name="shared_string_delete_immediately">すぐに削除する</string>
+    <string name="shared_string_loading">読み込み中</string>
+    <string name="delete_smart_folder_dialog_message">この操作により\"%1$s\"スマートフォルダーが削除されます。</string>
+    <string name="shared_string_is_deleted">%1$s は削除されました。</string>
+    <string name="sort_size_ascending">小さいサイズから</string>
+    <string name="cloud_item_restored">%1$s はクラウド側に復元されました。</string>
+    <string name="trash_alert_card_desc">ごみ箱内のアイテムは%1$s日後に消去されます。</string>
+    <string name="discard_filter_changes_prompt">すべてのフィルターをリセットしてもよろしいですか？</string>
+    <string name="no_config_smart_folder_description">スマートフォルダーを使用すると、適用されたフィルターによって経路をグループ化できます</string>
+    <string name="widget_available_ram">利用可能なRAM</string>
+    <string name="trash_is_empty">ごみ箱は空です</string>
+    <string name="terrain_maps">地形マップ</string>
+    <string name="shared_string_trash">ごみ</string>
+    <string name="loading_tracks">経路を再読み込み中</string>
+    <string name="shared_string_delete_item">項目の削除</string>
+    <string name="sort_country_name_descending">国名:Z - A</string>
+    <string name="delete_map_description">マップ%1$sを削除してもよろしいですか？</string>
+    <string name="searching_matching_tracks">一致するすべての経路を検索</string>
+    <string name="maps_and_resources">マップ＆リソース</string>
 </resources>

@@ -26,7 +26,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
@@ -59,7 +59,7 @@ import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettings
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
-		ResetToDefaultListener, CopyAppModePrefsListener {
+		ConfirmationDialogListener, CopyAppModePrefsListener {
 
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
 
@@ -174,7 +174,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@Override
-	public void onResetToDefaultConfirmed() {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
