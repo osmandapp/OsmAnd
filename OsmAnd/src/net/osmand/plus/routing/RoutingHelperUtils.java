@@ -34,12 +34,13 @@ public class RoutingHelperUtils {
 	}
 
 	@NonNull
-	public static String formatStreetName(String name, String originalRef, String destination, String towards, RoadShield shield) {
+	public static String formatStreetName(String name, String originalRef, String destination, String towards,
+	                                      RoadShield shield) {
 		StringBuilder formattedStreetName = new StringBuilder();
 		if (originalRef != null && originalRef.length() > 0) {
 			String[] refs = originalRef.split(";");
 			for (String ref : refs) {
-				if (shield != null && !isRefEqualsShield(shield.getText(), ref)) {
+				if ((shield == null || !isRefEqualsShield(shield.getText(), ref))) {
 					if (formattedStreetName.length() > 0) {
 						formattedStreetName.append(" ");
 					}
