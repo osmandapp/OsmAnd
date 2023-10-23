@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.CallbackWithObject
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -42,6 +43,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		val TAG: String = TracksFilterFragment::class.java.simpleName
 
 		fun showInstance(
+			app: OsmandApplication,
 			manager: FragmentManager,
 			target: Fragment?,
 			filter: TracksSearchFilter,
@@ -51,7 +53,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				(foundFragment as TracksFilterFragment).dialog?.dismiss()
 			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				val initialFilter = TracksSearchFilter(filter.app, arrayListOf())
+				val initialFilter = TracksSearchFilter(app, arrayListOf())
 				initialFilter.initSelectedFilters(filter.appliedFilters)
 				val fragment = TracksFilterFragment()
 				fragment.setTargetFragment(target, 0)
@@ -262,17 +264,12 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		var initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
 			this.initialFilterState.appliedFilters
 		} else {
-			smartFolder!!.filters
+			smartFolder?.filters
 		}
-//		if (smartFolder == null) {
-//			changed = filter.appliedFiltersCount > 0
-//		} else {
-//			smartFolder?.let { folder ->
 		initialFilters?.let {
 			if (Algorithms.isEmpty(it)) {
 				changed = filter.appliedFiltersCount > 0
 			} else {
-//				val folderFilters = initialFilters
 				if (it.size != filter.appliedFiltersCount) {
 					changed = true
 				} else {
@@ -285,8 +282,6 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				}
 			}
 		}
-//			}
-//		}
 		return changed
 	}
 

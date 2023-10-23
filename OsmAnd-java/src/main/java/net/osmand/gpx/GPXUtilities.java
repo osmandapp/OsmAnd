@@ -1297,8 +1297,8 @@ public class GPXUtilities {
 					time = formatMillis.parse(text).getTime();
 				} catch (ParseException e2) {
 					try {
-					time = getTimeNoTimeZoneFormatter().parse(text).getTime();
-					} catch (ParseException e3){
+						time = getTimeNoTimeZoneFormatter().parse(text).getTime();
+					} catch (ParseException e3) {
 						log.error("Failed to parse date " + text);
 					}
 				}

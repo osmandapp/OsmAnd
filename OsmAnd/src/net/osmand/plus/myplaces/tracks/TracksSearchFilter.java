@@ -33,7 +33,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	private List<FilterChangedListener> filterChangedListeners = new ArrayList<>();
 	private List<TrackItem> filteredTrackItems;
 
-	public OsmandApplication app;
+	private OsmandApplication app;
 
 	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems) {
 		this.app = app;

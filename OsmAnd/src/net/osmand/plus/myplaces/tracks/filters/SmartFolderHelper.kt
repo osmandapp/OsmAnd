@@ -3,16 +3,18 @@ package net.osmand.plus.myplaces.tracks.filters
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
-import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.util.Algorithms
 import java.util.Date
 
 class SmartFolderHelper(val app: OsmandApplication) {
+	private val LOG = PlatformUtil.getLog(SmartFolderHelper::class.java)
+
 	private val preference: CommonPreference<String>
 	private val gson: Gson
 
@@ -146,7 +148,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {
-		TracksSearchFilter.LOG.debug("addTrackItemToSmartFolder {${Thread.currentThread().name}}")
+		LOG.debug("addTrackItemToSmartFolder")
 		if (!allAvailableTrackItems.contains(item)) {
 			allAvailableTrackItems.add(item)
 		}
@@ -199,7 +201,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	@WorkerThread
 	fun updateSmartFolderItems(smartFolder: SmartFolder) {
-		TracksSearchFilter.LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
+		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
 		smartFolder.trackItems.clear()
 		val filters = smartFolder.filters
 		if (filters == null) {
