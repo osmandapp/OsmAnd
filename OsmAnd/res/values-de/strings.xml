@@ -2750,7 +2750,7 @@
     <string name="thank_you_for_feedback">Danke für Ihr Feedback</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse\?
-\nGeben Sie uns eine Rückmeldung.</string>
+\nGeben Sie uns eine Rückmeldung</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen</string>
     <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd den Zugriff auf den Standort, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
@@ -5514,4 +5514,10 @@
     <string name="trash_is_empty">Papierkorb ist leer</string>
     <string name="shared_string_trash">Papierkorb</string>
     <string name="shared_string_delete_item">Element löschen</string>
+    <string name="root_folder">Root-Verzeichnis</string>
+    <string name="shared_string_rows">Zeilen</string>
+    <string name="all_folders">Alle Verzeichnisse</string>
+    <string name="shared_string_show_less">Weniger anzeigen</string>
+    <string name="folder">Verzeichnis</string>
+    <string name="not_specified">Nicht angegeben</string>
 </resources>
