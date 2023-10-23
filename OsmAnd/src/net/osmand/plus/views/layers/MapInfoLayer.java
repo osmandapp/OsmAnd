@@ -28,6 +28,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -162,9 +163,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerWidgets = new ArrayList<>();
 		sideWidgetsPanels = new ArrayList<>();
 
-		topWidgetsPanel.setMapActivity(mapActivity);
-		bottomWidgetsPanel.setMapActivity(mapActivity);
-
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
 
@@ -180,8 +178,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-			topWidgetsPanel.update();
-			bottomWidgetsPanel.update();
+			topWidgetsPanel.update(drawSettings);
+			bottomWidgetsPanel.update(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 		}
@@ -190,8 +188,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void recreateTopWidgetsPanel() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		topWidgetsPanel.update();
-		bottomWidgetsPanel.update();
+		topWidgetsPanel.update(drawSettings);
+		bottomWidgetsPanel.update(drawSettings);
 	}
 
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
@@ -272,8 +270,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			leftWidgetsPanel.updateColors(sideWidgetsState);
 			rightWidgetsPanel.updateColors(sideWidgetsState);
 
-			topWidgetsPanel.invalidate();
-			bottomWidgetsPanel.invalidate();
+			topWidgetsPanel.updateColors(sideWidgetsState);
+			bottomWidgetsPanel.updateColors(sideWidgetsState);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));

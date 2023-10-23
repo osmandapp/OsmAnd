@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,13 +69,13 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			}
 			constraintSet.applyTo((ConstraintLayout) container);
 		} else {
-			if (!(container instanceof FrameLayout)) {
-				return;
+			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
+			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
+				params.gravity = fullRow ? Gravity.CENTER : Gravity.START;
+				params.setMarginStart(dpToPx(app, 36));
+				params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 			}
-			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
-			params.gravity = fullRow ? Gravity.CENTER : Gravity.START;
-			params.setMarginStart(dpToPx(app, 36));
-			params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 		}
 	}
 

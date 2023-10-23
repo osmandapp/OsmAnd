@@ -5,6 +5,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
+import static net.osmand.plus.settings.backend.OsmandSettings.changeIdIfSidePanelContains;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -119,8 +120,9 @@ class AppVersionUpgradeOnInit {
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
 	public static final int VERSION_4_6_03 = 4603;
+	public static final int VERSION_4_6_04 = 4604;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_03;
+	public static final int LAST_APP_VERSION = VERSION_4_6_04;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -223,6 +225,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_03) {
 					updateWidgetPages(settings);
+				}
+				if (prevAppVersion < VERSION_4_6_04) {
+					migrateVerticalWidgetToCustomId(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -646,6 +651,15 @@ class AppVersionUpgradeOnInit {
 					preference.setModeValue(appMode, valueStr);
 				}
 			}
+		}
+	}
+
+	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
+			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
+			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
+			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
 		}
 	}
 

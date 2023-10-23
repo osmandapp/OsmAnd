@@ -107,6 +107,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1840,6 +1841,8 @@ public class OsmandSettings {
 			if (appMode != null) {
 				String modeValue = json.getString(getId());
 				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				changeIdIfSidePanelContains(TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER, CUSTOM_WIDGETS_KEYS, appMode);
+				changeIdIfSidePanelContains(TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER, CUSTOM_WIDGETS_KEYS, appMode);
 			}
 		}
 
@@ -1859,6 +1862,8 @@ public class OsmandSettings {
 			if (appMode != null) {
 				String modeValue = json.getString(getId());
 				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				changeIdIfSidePanelContains(BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER, CUSTOM_WIDGETS_KEYS, appMode);
+				changeIdIfSidePanelContains(BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER, CUSTOM_WIDGETS_KEYS, appMode);
 			}
 		}
 
@@ -1879,6 +1884,29 @@ public class OsmandSettings {
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	public static void changeIdIfSidePanelContains(ListStringPreference verticalWidgetPanelPreference, ListStringPreference sideWidgetPanelPreference, ListStringPreference customWidgetKeysPreference, ApplicationMode mode) {
+		List<String> verticalWidgets = verticalWidgetPanelPreference.getStringsListForProfile(mode);
+		List<String> sideWidgets = sideWidgetPanelPreference.getStringsListForProfile(mode);
+		List<String> allSideWidgets = new ArrayList<>();
+
+		if (verticalWidgets != null && sideWidgets != null && verticalWidgetPanelPreference.isSetForMode(mode)) {
+			for(String widgetPage : sideWidgets){
+				allSideWidgets.addAll(Arrays.asList(widgetPage.split(",")));
+			}
+
+			for (int i = 0; i < verticalWidgets.size(); i++) {
+				String widgetId = verticalWidgets.get(i);
+				if (WidgetType.isOriginalWidget(widgetId) && allSideWidgets.contains(widgetId)) {
+					widgetId = WidgetType.getDuplicateWidgetId(widgetId);
+					verticalWidgets.set(i, widgetId);
+					verticalWidgetPanelPreference.setModeValues(mode, verticalWidgets);
+					customWidgetKeysPreference.addModeValue(mode, widgetId);
+				}
+			}
+		}
+		List<String> verticalWidgets1 = verticalWidgetPanelPreference.getStringsListForProfile(mode);
+	}
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
