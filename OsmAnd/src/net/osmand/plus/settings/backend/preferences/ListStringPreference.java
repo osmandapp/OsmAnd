@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -14,8 +15,9 @@ public class ListStringPreference extends StringPreference {
 
 	private final String delimiter;
 
-	public ListStringPreference(OsmandSettings osmandSettings, String id, String defaultValue, String delimiter) {
-		super(osmandSettings, id, defaultValue);
+	public ListStringPreference(@NonNull OsmandSettings settings, @NonNull String id,
+	                            @Nullable String defaultValue, @NonNull String delimiter) {
+		super(settings, id, defaultValue);
 		this.delimiter = delimiter;
 	}
 
@@ -129,7 +131,8 @@ public class ListStringPreference extends StringPreference {
 		return setModeValue(mode, vl);
 	}
 
-	public String getDelimiter(){
+	@NonNull
+	public String getDelimiter() {
 		return delimiter;
 	}
 }

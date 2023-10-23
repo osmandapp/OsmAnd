@@ -6,6 +6,7 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
+	<!-- Container for top widgets: Coordinates, Map markers bar, Street name, Lanes -->
 	<net.osmand.plus.views.controls.VerticalWidgetPanel
 		android:id="@+id/top_widgets_panel"
 		android:layout_width="match_parent"

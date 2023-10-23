@@ -121,11 +121,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 	protected void applySettings() {
 		if (isWidgetVertical) {
 			if (widgetInfo != null) {
-				List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel((MapActivity) requireActivity(),
-						appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
-				Set<MapWidgetInfo> rowWidgetsMapInfo = pagedWidgets.get(widgetInfo.pageIndex);
-				rowWidgetsMapInfo.remove(widgetInfo);
-				applySizeSettingToWidgetsInRow(rowWidgetsMapInfo);
+				updateRowWidgets(widgetInfo);
 			}
 
 			shouldShowIconPref.set(showIcon);
@@ -139,7 +135,19 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		}
 	}
 
-	private void applySizeSettingToWidgetsInRow(Set<MapWidgetInfo> mapWidgetInfo) {
+	private void updateRowWidgets(@NonNull MapWidgetInfo widgetInfo) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
+					appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+
+			Set<MapWidgetInfo> rowMapWidgetsInfo = widgets.get(widgetInfo.pageIndex);
+			rowMapWidgetsInfo.remove(widgetInfo);
+			applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
+		}
+	}
+
+	private void applySizeSettingToWidgetsInRow(@NonNull Set<MapWidgetInfo> mapWidgetInfo) {
 		for (MapWidgetInfo info : mapWidgetInfo) {
 			if (info.widget instanceof SimpleWidget) {
 				SimpleWidget simpleWidget = (SimpleWidget) info.widget;

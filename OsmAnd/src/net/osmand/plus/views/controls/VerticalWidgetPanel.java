@@ -3,7 +3,6 @@ package net.osmand.plus.views.controls;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,14 @@ import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -35,30 +35,33 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class VerticalWidgetPanel extends LinearLayout {
+
 	private final OsmandApplication app;
-	protected boolean nightMode;
-
+	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
-	private boolean topPanel;
 
-	public VerticalWidgetPanel(Context context) {
+	private boolean topPanel;
+	private boolean nightMode;
+
+	public VerticalWidgetPanel(@NonNull Context context) {
 		this(context, null);
 	}
 
-	public VerticalWidgetPanel(Context context, @Nullable AttributeSet attrs) {
+	public VerticalWidgetPanel(@NonNull Context context, @Nullable AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public VerticalWidgetPanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public VerticalWidgetPanel(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public VerticalWidgetPanel(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public VerticalWidgetPanel(@NonNull Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		app = getMyApplication();
+		app = (OsmandApplication) context.getApplicationContext();
+		settings = app.getSettings();
+		nightMode = app.getDaynightHelper().isNightMode();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		definePanelSide(context, attrs);
-		nightMode = getMyApplication().getDaynightHelper().isNightMode();
 	}
 
 	private void definePanelSide(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -67,30 +70,27 @@ public class VerticalWidgetPanel extends LinearLayout {
 		typedArray.recycle();
 	}
 
-	@NonNull
-	protected OsmandApplication getMyApplication() {
-		return ((OsmandApplication) getContext().getApplicationContext());
-	}
+	public void update(@Nullable DrawSettings drawSettings) {
+		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
 
-	public void update(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
-		if (drawSettings != null) {
-			nightMode = drawSettings.isNightMode();
-		}
 		removeAllViews();
-		ApplicationMode mode = app.getSettings().getApplicationMode();
+
+		ApplicationMode appMode = settings.getApplicationMode();
+
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
-		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(mode, flatOrderedWidgets);
+		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
 
 		Iterator<Set<MapWidgetInfo>> rowIterator = pagedWidgets.listIterator();
 		while (rowIterator.hasNext()) {
 			int visibleViewsInRowCount = 0;
-			MapWidgetInfo firstMapWidgetInfoInRow = null;
-			List<MapWidgetInfo> widgetsInRow = new ArrayList<>(rowIterator.next());
+
+			List<MapWidgetInfo> rowWidgets = new ArrayList<>(rowIterator.next());
 			View row = inflate(getContext(), R.layout.vertical_widget_row, null);
 			LinearLayout rowContainer = row.findViewById(R.id.widgets_container);
 
-			for (int i = 0; i < widgetsInRow.size(); i++) {
-				MapWidgetInfo widgetInfo = widgetsInRow.get(i);
+			MapWidgetInfo firstMapWidgetInfoInRow = null;
+			for (int i = 0; i < rowWidgets.size(); i++) {
+				MapWidgetInfo widgetInfo = rowWidgets.get(i);
 				MapWidget widget = widgetInfo.widget;
 
 				if (firstMapWidgetInfoInRow == null) {
@@ -98,10 +98,10 @@ public class VerticalWidgetPanel extends LinearLayout {
 				} else {
 					setupWidgetSize(firstMapWidgetInfoInRow, widgetInfo);
 				}
-				if (widgetInfo.isEnabledForAppMode(mode)) {
+				if (widgetInfo.isEnabledForAppMode(appMode)) {
 					attachViewToRow(widget, rowContainer, getFollowingWidgets(widget, flatOrderedWidgets));
 					int nextElementIndex = i + 1;
-					if (nextElementIndex < widgetsInRow.size() && widgetsInRow.get(nextElementIndex).widget.isViewVisible()) {
+					if (nextElementIndex < rowWidgets.size() && rowWidgets.get(nextElementIndex).widget.isViewVisible()) {
 						addDivider(rowContainer, true);
 					}
 					if (widget.isViewVisible()) {
@@ -112,17 +112,17 @@ public class VerticalWidgetPanel extends LinearLayout {
 				}
 			}
 
-			updateValueAlign(widgetsInRow, visibleViewsInRowCount);
+			updateValueAlign(rowWidgets, visibleViewsInRowCount);
 			addView(row);
+
 			if (rowIterator.hasNext() && visibleViewsInRowCount > 0) {
 				addDivider((ViewGroup) row, false);
 			}
 		}
-		requestLayout();
 	}
 
-	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
-		this.nightMode = textState.night;
+	public void updateColors(@NonNull TextState textState) {
+		nightMode = textState.night;
 		invalidate();
 	}
 
@@ -134,6 +134,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 		}
 	}
 
+	@NonNull
 	private List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
 
@@ -150,7 +151,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -170,6 +171,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 		widget.attachView(container, getWidgetsPanel(), followingWidgets);
 	}
 
+	@NonNull
 	private List<MapWidget> getFollowingWidgets(@NonNull MapWidget widget, @NonNull List<MapWidget> widgetsToShow) {
 		List<MapWidget> followingWidgets = new ArrayList<>();
 		int widgetIndex = widgetsToShow.indexOf(widget);
@@ -179,6 +181,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 		return followingWidgets;
 	}
 
+	@NonNull
 	private WidgetsPanel getWidgetsPanel() {
 		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
 	}
@@ -194,9 +197,8 @@ public class VerticalWidgetPanel extends LinearLayout {
 		}
 	}
 
-	private void addDivider(@NonNull ViewGroup viewGroup, boolean verticalDivider) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(verticalDivider ? R.layout.vertical_divider : R.layout.simple_divider_item, viewGroup);
+	private void addDivider(@NonNull ViewGroup container, boolean verticalDivider) {
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		inflater.inflate(verticalDivider ? R.layout.vertical_divider : R.layout.simple_divider_item, container);
 	}
 }

@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
-import static net.osmand.plus.settings.backend.OsmandSettings.changeIdIfSidePanelContains;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -73,7 +72,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class AppVersionUpgradeOnInit {
+public class AppVersionUpgradeOnInit {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN";
 	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER";
@@ -119,10 +118,9 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_4_01 = 4401;
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
-	public static final int VERSION_4_6_03 = 4603;
-	public static final int VERSION_4_6_04 = 4604;
+	public static final int VERSION_4_6_05 = 4605;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_04;
+	public static final int LAST_APP_VERSION = VERSION_4_6_05;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -223,10 +221,8 @@ class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_4_02) {
 					increaseVehicleSizeLimitsAccuracy();
 				}
-				if (prevAppVersion < VERSION_4_6_03) {
+				if (prevAppVersion < VERSION_4_6_05) {
 					updateWidgetPages(settings);
-				}
-				if (prevAppVersion < VERSION_4_6_04) {
 					migrateVerticalWidgetToCustomId(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
@@ -654,29 +650,66 @@ class AppVersionUpgradeOnInit {
 		}
 	}
 
-	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings, mode);
-			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings, mode);
-			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings, mode);
-			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings, mode);
-		}
-	}
-
 	private void updateWidgetPages(@NonNull OsmandSettings settings) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			updateWidgetPage(mode, settings.TOP_WIDGET_PANEL_ORDER_OLD, settings.TOP_WIDGET_PANEL_ORDER);
 			updateWidgetPage(mode, settings.BOTTOM_WIDGET_PANEL_ORDER_OLD, settings.BOTTOM_WIDGET_PANEL_ORDER);
 		}
-		settings.TOP_WIDGET_PANEL_ORDER_OLD.clearAll();
-		settings.BOTTOM_WIDGET_PANEL_ORDER_OLD.clearAll();
 	}
 
-	private void updateWidgetPage(ApplicationMode mode, ListStringPreference oldWidgetPanelPreference, ListStringPreference newWidgetPanelPreference) {
-		if (oldWidgetPanelPreference.isSetForMode(mode)) {
-			String oldString = oldWidgetPanelPreference.getModeValue(mode);
-			String newString = oldString.replace(",", oldWidgetPanelPreference.getDelimiter());
-			newWidgetPanelPreference.setModeValue(mode, newString);
+	private void updateWidgetPage(@NonNull ApplicationMode mode, @NonNull ListStringPreference oldPreference, @NonNull ListStringPreference newPreference) {
+		if (oldPreference.isSetForMode(mode)) {
+			String oldString = oldPreference.getModeValue(mode);
+			String newString = oldString.replace(WIDGET_SEPARATOR, oldPreference.getDelimiter());
+			newPreference.setModeValue(mode, newString);
+		}
+		oldPreference.clearAll();
+	}
+
+	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+		}
+	}
+
+	public static void updateExistingWidgetIds(@NonNull OsmandSettings settings,
+	                                           @NonNull ApplicationMode appMode,
+	                                           @NonNull ListStringPreference verticalPanelPreference,
+	                                           @NonNull ListStringPreference sidePanelPreference) {
+		List<String> allSideWidgets = new ArrayList<>();
+		List<String> sideWidgets = sidePanelPreference.getStringsListForProfile(appMode);
+		List<String> verticalWidgets = verticalPanelPreference.getStringsListForProfile(appMode);
+
+		if (verticalWidgets != null && sideWidgets != null && verticalPanelPreference.isSetForMode(appMode)) {
+			for (String widgetPage : sideWidgets) {
+				allSideWidgets.addAll(Arrays.asList(widgetPage.split(",")));
+			}
+			for (int i = 0; i < verticalWidgets.size(); i++) {
+				String widgetId = verticalWidgets.get(i);
+				if (WidgetType.isOriginalWidget(widgetId) && allSideWidgets.contains(widgetId)) {
+					String widgetsVisibilityString = settings.MAP_INFO_CONTROLS.getModeValue(appMode);
+					List<String> widgetsVisibility = new ArrayList<>(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)));
+					widgetsVisibility.remove(widgetId);
+					widgetsVisibility.remove(COLLAPSED_PREFIX + widgetId);
+					widgetsVisibility.remove(HIDE_PREFIX + widgetId);
+
+					widgetId = WidgetType.getDuplicateWidgetId(widgetId);
+
+					verticalWidgets.set(i, widgetId);
+					verticalPanelPreference.setModeValues(appMode, verticalWidgets);
+					settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, widgetId);
+
+					widgetsVisibility.add(widgetId);
+					StringBuilder newVisibilityString = new StringBuilder();
+					for (String visibility : widgetsVisibility) {
+						newVisibilityString.append(visibility).append(SETTINGS_SEPARATOR);
+					}
+					settings.MAP_INFO_CONTROLS.setModeValue(appMode, newVisibilityString.toString());
+				}
+			}
 		}
 	}
 }

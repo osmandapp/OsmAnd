@@ -28,7 +28,6 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -42,10 +41,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 
-	private VerticalWidgetPanel topWidgetsPanel;
-	private VerticalWidgetPanel bottomWidgetsPanel;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
+	private VerticalWidgetPanel topWidgetsPanel;
+	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;

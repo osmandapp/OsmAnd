@@ -29,7 +29,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class WidgetUtils {
-	public static final int MAXIMUM_WIDGETS_IN_ROW = 3;
 
 	public static void createNewWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
 										@NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {

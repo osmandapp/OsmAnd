@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.AppVersionUpgradeOnInit.updateExistingWidgetIds;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
@@ -12,9 +13,6 @@ import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYG
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
@@ -110,7 +108,6 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1833,9 +1830,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
-	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
-
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
 			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
 
@@ -1844,17 +1838,19 @@ public class OsmandSettings {
 			if (appMode != null) {
 				String modeValue = json.getString(getId());
 				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				changeIdIfSidePanelContains(TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER, OsmandSettings.this, appMode);
-				changeIdIfSidePanelContains(TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER, OsmandSettings.this, appMode);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
 			}
 		}
 
 		@Override
 		public String parseString(String s) {
-			if (s != null) {
-				return s.replace(",", getDelimiter());
-			}
-			return null;
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
 		}
 	}.makeProfile();
 
@@ -1865,63 +1861,34 @@ public class OsmandSettings {
 			if (appMode != null) {
 				String modeValue = json.getString(getId());
 				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				changeIdIfSidePanelContains(BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER, OsmandSettings.this, appMode);
-				changeIdIfSidePanelContains(BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER, OsmandSettings.this, appMode);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
 			}
 		}
 
 		@Override
 		public String parseString(String s) {
-			if (s != null) {
-				return s.replace(",", getDelimiter());
-			}
-			return null;
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
 		}
 	}.makeProfile();
 
+	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order_new", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order_new", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
-	public static void changeIdIfSidePanelContains(ListStringPreference verticalWidgetPanelPreference, ListStringPreference sideWidgetPanelPreference, OsmandSettings osmandSettings, ApplicationMode mode) {
-		List<String> verticalWidgets = verticalWidgetPanelPreference.getStringsListForProfile(mode);
-		List<String> sideWidgets = sideWidgetPanelPreference.getStringsListForProfile(mode);
-		List<String> allSideWidgets = new ArrayList<>();
-
-		if (verticalWidgets != null && sideWidgets != null && verticalWidgetPanelPreference.isSetForMode(mode)) {
-			for (String widgetPage : sideWidgets) {
-				allSideWidgets.addAll(Arrays.asList(widgetPage.split(",")));
-			}
-			for (int i = 0; i < verticalWidgets.size(); i++) {
-				String widgetId = verticalWidgets.get(i);
-				if (WidgetType.isOriginalWidget(widgetId) && allSideWidgets.contains(widgetId)) {
-					String widgetsVisibilityString = osmandSettings.MAP_INFO_CONTROLS.getModeValue(mode);
-					List<String> widgetsVisibility = new ArrayList<>(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)));
-					widgetsVisibility.remove(widgetId);
-					widgetsVisibility.remove(COLLAPSED_PREFIX + widgetId);
-					widgetsVisibility.remove(HIDE_PREFIX + widgetId);
-
-					widgetId = WidgetType.getDuplicateWidgetId(widgetId);
-
-					verticalWidgets.set(i, widgetId);
-					verticalWidgetPanelPreference.setModeValues(mode, verticalWidgets);
-					osmandSettings.CUSTOM_WIDGETS_KEYS.addModeValue(mode, widgetId);
-
-					widgetsVisibility.add(widgetId);
-					StringBuilder newVisibilityString = new StringBuilder();
-					for (String visibility : widgetsVisibility) {
-						newVisibilityString.append(visibility).append(SETTINGS_SEPARATOR);
-					}
-					osmandSettings.MAP_INFO_CONTROLS.setModeValue(mode, newVisibilityString.toString());
-				}
-			}
-		}
-	}
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 

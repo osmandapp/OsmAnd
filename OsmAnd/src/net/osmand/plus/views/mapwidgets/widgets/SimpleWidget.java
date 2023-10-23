@@ -29,32 +29,37 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.WidgetSize;
 import net.osmand.util.Algorithms;
 
 public abstract class SimpleWidget extends TextInfoWidget {
-	private final SimpleWidgetState simpleWidgetState;
-	protected boolean isVerticalWidget;
-	private TextView widgetName;
 
-	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+	private final SimpleWidgetState widgetState;
+
+	private TextView widgetName;
+	private boolean verticalWidget;
+
+	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
-		WidgetsPanel selectedPanel = widgetsPanel != null ? widgetsPanel
-				: widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
+		widgetState = new SimpleWidgetState(app, customId, widgetType);
+
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		setVerticalWidget(selectedPanel);
-		this.simpleWidgetState = new SimpleWidgetState(getMyApplication(), customId, widgetType);
 		setupViews();
 	}
 
 	private void setupViews() {
-		LinearLayout mainViewsContainer = (LinearLayout) view;
-		mainViewsContainer.removeAllViews();
-		UiUtilities.getInflater(mapActivity, nightMode).inflate(isVerticalWidget ? getProperVerticalLayoutId(simpleWidgetState) : R.layout.map_hud_widget, mainViewsContainer);
+		LinearLayout container = (LinearLayout) view;
+		container.removeAllViews();
+
+		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
 	}
 
 	public void updateValueAlign(boolean fullRow) {
-		if (SimpleWidgetState.WidgetSize.SMALL == getWidgetSizePref().get()) {
+		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
 			if (!(container instanceof ConstraintLayout)) {
 				return;
 			}
@@ -108,15 +113,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
-		isVerticalWidget = panel.isPanelVertical();
+		verticalWidget = panel.isPanelVertical();
 	}
 
 	public boolean isVerticalWidget() {
-		return isVerticalWidget;
+		return verticalWidget;
 	}
 
 	public void updateWidgetView() {
-		if (isVerticalWidget) {
+		if (verticalWidget) {
 			boolean showIcon = shouldShowIcon();
 			AndroidUiHelper.updateVisibility(imageView, showIcon);
 			updateWidgetName();
@@ -124,21 +129,23 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	public boolean shouldShowIcon() {
-		return simpleWidgetState.getShowIconPref().get();
+		return widgetState.getShowIconPref().get();
 	}
 
+	@NonNull
 	public CommonPreference<Boolean> shouldShowIconPref() {
-		return simpleWidgetState.getShowIconPref();
+		return widgetState.getShowIconPref();
 	}
 
+	@NonNull
 	public OsmandPreference<SimpleWidgetState.WidgetSize> getWidgetSizePref() {
-		return simpleWidgetState.getWidgetSizePref();
+		return widgetState.getWidgetSizePref();
 	}
 
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
-		boolean oldWidgetOrientation = isVerticalWidget;
+		boolean oldWidgetOrientation = verticalWidget;
 		setVerticalWidget(panel);
-		if (oldWidgetOrientation != isVerticalWidget) {
+		if (oldWidgetOrientation != verticalWidget) {
 			recreateView();
 		}
 	}
@@ -172,7 +179,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
-		boolean shouldHideTopWidgets = (isVerticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
+		boolean shouldHideTopWidgets = (verticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
 		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
 		boolean visible = typeAllowed && !(shouldHideTopWidgets || emptyValueTextView);
@@ -239,7 +246,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
-		if (isVerticalWidget) {
+		if (verticalWidget) {
 			nightMode = textState.night;
 			textView.setTextColor(textState.textColor);
 			smallTextView.setTextColor(textState.secondaryTextColor);
@@ -256,10 +263,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	protected View getContentView() {
-		if (isVerticalWidget) {
-			return view;
-		} else {
-			return container;
-		}
+		return verticalWidget ? view : container;
 	}
 }

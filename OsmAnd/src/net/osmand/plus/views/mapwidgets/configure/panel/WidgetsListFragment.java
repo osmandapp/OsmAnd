@@ -121,8 +121,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 		updateContent();
 
-		TextView panelTitle = view.findViewById(R.id.panel_title);
-		panelTitle.setText(getString(isVerticalPanel() ? R.string.shared_string_rows : selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app))));
+		boolean isRtl = AndroidUtils.isLayoutRtl(view.getContext());
+		TextView title = view.findViewById(R.id.panel_title);
+		title.setText(getString(isVerticalPanel() ? R.string.shared_string_rows : selectedPanel.getTitleId(isRtl)));
 
 		setupReorderButton(changeOrderListButton);
 		setupReorderButton(changeOrderFooterButton);
@@ -232,6 +233,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private void inflateEnabledWidgets() {
 		MapActivity mapActivity = requireMapActivity();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+
 		List<Set<MapWidgetInfo>> pagedWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, selectedAppMode, selectedPanel, enabledWidgetsFilter);
 		for (int i = 0; i < pagedWidgets.size(); i++) {
 			if (!isVerticalPanel()) {
@@ -312,13 +314,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			AndroidUiHelper.updateVisibility(bottomDivider, !last);
 
 			if (isVerticalPanel()) {
-				if (i == 0) {
-					TextView rowId = view.findViewById(R.id.row_id);
-					rowId.setVisibility(View.VISIBLE);
-					rowId.setText(String.valueOf(row));
-				} else {
-					view.findViewById(R.id.row_id).setVisibility(View.INVISIBLE);
-				}
+				TextView rowId = view.findViewById(R.id.row_id);
+				rowId.setText(String.valueOf(row));
+				AndroidUiHelper.setVisibility(i == 0 ? View.VISIBLE : View.INVISIBLE, rowId);
+
 				if (last) {
 					ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) bottomDivider.getLayoutParams();
 					params.setMarginStart(0);

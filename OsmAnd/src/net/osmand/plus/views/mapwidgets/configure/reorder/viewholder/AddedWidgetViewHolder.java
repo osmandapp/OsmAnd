@@ -50,7 +50,7 @@ public class AddedWidgetViewHolder extends ViewHolder implements UnmovableItem {
 		public int page;
 		public int order;
 		public int iconId;
-		public boolean newWidgetToCreate = false;
+		public boolean newWidgetToCreate;
 	}
 
 	public interface ItemMovableCallback {

@@ -1,13 +1,11 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
-import static net.osmand.plus.utils.WidgetUtils.MAXIMUM_WIDGETS_IN_ROW;
 import static net.osmand.plus.views.mapwidgets.WidgetType.getDuplicateWidgetId;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.utils.WidgetUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
@@ -36,7 +34,7 @@ public class ReorderWidgetsAdapterHelper {
 	private final MapWidgetRegistry widgetRegistry;
 	private final List<ListItem> items;
 	private final boolean nightMode;
-	private final boolean isVerticalPanel;
+	private final boolean verticalPanel;
 
 	public ReorderWidgetsAdapterHelper(@NonNull OsmandApplication app,
 									   @NonNull ReorderWidgetsAdapter adapter,
@@ -46,9 +44,9 @@ public class ReorderWidgetsAdapterHelper {
 		this.app = app;
 		this.adapter = adapter;
 		this.dataHolder = dataHolder;
-		this.isVerticalPanel = dataHolder.getSelectedPanel().isPanelVertical();
 		this.items = items;
 		this.nightMode = nightMode;
+		this.verticalPanel = dataHolder.getSelectedPanel().isPanelVertical();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 	}
 
@@ -151,7 +149,7 @@ public class ReorderWidgetsAdapterHelper {
 			return;
 		}
 
-		if (isVerticalPanel) {
+		if (verticalPanel) {
 			deletePageWithWidgets(pageToDelete);
 		} else {
 			moveWidgetsToPreviousPage(pageToDelete);
@@ -364,7 +362,7 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	public boolean swapItemsIfAllowed(int from, int to) {
-		return isVerticalPanel ? swapVerticalWidgets(from, to) : swapHorizontalWidgets(from, to);
+		return verticalPanel ? swapVerticalWidgets(from, to) : swapHorizontalWidgets(from, to);
 	}
 
 	private void addVerticalWidgetsToRow(int from, int to, int pageId, PageUiInfo pageUiInfo) {
