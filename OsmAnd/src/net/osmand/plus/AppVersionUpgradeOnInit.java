@@ -656,10 +656,10 @@ class AppVersionUpgradeOnInit {
 
 	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
-			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
-			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
-			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings.CUSTOM_WIDGETS_KEYS, mode);
+			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings, mode);
+			changeIdIfSidePanelContains(settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings, mode);
+			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER, settings, mode);
+			changeIdIfSidePanelContains(settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER, settings, mode);
 		}
 	}
 
