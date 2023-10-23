@@ -1,6 +1,7 @@
 package net.osmand.plus.keyevent.fragments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -9,14 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -94,8 +97,16 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		ImageView closeButton = view.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(v -> dismiss());
+		AppBarLayout appBar = view.findViewById(R.id.appbar);
+		appBar.setExpanded(AndroidUiHelper.isOrientationPortrait(requireActivity()));
+
+		int color = getPrimaryIconColor(app, nightMode);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
+		toolbar.setNavigationContentDescription(R.string.shared_string_close);
+		toolbar.setNavigationOnClickListener(v -> {
+			dismiss();
+		});
 	}
 
 	private void startPulseAnimation(@NonNull View view) {
