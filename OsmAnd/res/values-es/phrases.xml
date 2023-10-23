@@ -2750,7 +2750,7 @@
     <string name="poi_fire_hydrant_type">Tipo de hidrante</string>
     <string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
     <string name="poi_water_source">Fuente de agua</string>
-    <string name="poi_payment_toll_type">Forma de pago (peaje)</string>
+    <string name="poi_payment_toll_type">Método de pago</string>
     <string name="poi_traffic_signals_sound">Sonido</string>
     <string name="poi_highway_crossing_type">Tipo de cruce</string>
     <string name="poi_tactile_paving">Pavimento táctil</string>
@@ -2769,8 +2769,8 @@
     <string name="poi_observatory_designation">Designación</string>
     <string name="poi_telescope_type">Tipo de telescopio</string>
     <string name="poi_animal_training_type">Tipo de amaestramiento</string>
-    <string name="poi_diplomatic_filter">Tipo de embajada</string>
-    <string name="poi_city_capital">Ciudad capital</string>
+    <string name="poi_diplomatic_filter">Embajada</string>
+    <string name="poi_city_capital">Capital</string>
     <string name="poi_healthcare_alternative_types">Especialidad</string>
     <string name="poi_free_flying_characteristics">Características</string>
     <string name="poi_archaeological_site_type">Yacimiento arqueológico</string>
