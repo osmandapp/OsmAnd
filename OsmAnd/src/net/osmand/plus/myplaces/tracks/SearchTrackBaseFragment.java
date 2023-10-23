@@ -112,6 +112,12 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateSearchQuery();
+	}
+
 	@NonNull
 	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
 		return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
@@ -136,10 +142,14 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void updateAdapterWithFilteredItems(List<TrackItem> filteredItems) {
-		searchEditText.setText(adapter.getCurrentSearchQuery());
-		searchEditText.setSelection(searchEditText.length());
+		updateSearchQuery();
 		adapter.updateFilteredItems(filteredItems);
 		updateButtonsState();
+	}
+
+	private void updateSearchQuery() {
+		searchEditText.setText(adapter.getCurrentSearchQuery());
+		searchEditText.setSelection(searchEditText.length());
 	}
 
 	public void setupSelectionHelper() {

@@ -389,10 +389,11 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void showFiltersDialog() {
 		FragmentManager manager = getFragmentManager();
-		TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+    TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
 		filter.setCurrentFolder(currentFolder);
-		if (manager != null) {
-			TracksFilterFragment.Companion.showInstance(manager, getTargetFragment(), filter, this, smartFolder, currentFolder);
+		if (manager != null && filter instanceof TracksSearchFilter) {
+			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder, currentFolder);
+  
 		}
 	}
 

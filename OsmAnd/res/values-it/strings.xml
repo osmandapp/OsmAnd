@@ -5479,4 +5479,28 @@
     <string name="no_config_smart_folder_description">Le cartelle intelligenti consentono di raggruppare le tracce in base ai filtri applicati</string>
     <string name="loading_tracks">Ricaricamento delle tracce</string>
     <string name="searching_matching_tracks">Cerca tutte le tracce corrispondenti</string>
+    <string name="cloud_trash_clear_confirmation">Confermi di voler eliminare definitivamente tutti gli elementi nel cestino\? L\'azione non è reversibile.</string>
+    <string name="with_waypoints">Con punti intermedi</string>
+    <string name="restore_from_trash">Recupera dal cestino</string>
+    <string name="delete_all_items">Elimina tutti gli elementi</string>
+    <string name="trash_is_empty_banner_desc">I file rimossi dal OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d traccia)</item>
+        <item quantity="many">%1$d (%2$d tracce)</item>
+        <item quantity="other">%1$d (%2$d tracce)</item>
+    </plurals>
+    <string name="help_article_navigation_routing_online_routing_name">Navigazione online</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" sarà cancellato definitivamente. Confermi\?
+\n
+\nQuesta azione non può essere cancellata.</string>
+    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_empty_trash">Svuota il cestino</string>
+    <string name="shared_string_delete_immediately">Cancella subito</string>
+    <string name="shared_string_is_deleted">%1$s è cancellato.</string>
+    <string name="cloud_item_restored">%1$s è ripristinato nel Cloud.</string>
+    <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
+    <string name="trash_is_empty">Il cestino è vuoto</string>
+    <string name="shared_string_trash">Cestino</string>
+    <string name="shared_string_delete_item">Cancella oggetto</string>
+    <string name="help_article_personal_storage_name">Archiviazione</string>
 </resources>

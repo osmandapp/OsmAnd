@@ -5480,4 +5480,16 @@
     <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
     <string name="loading_tracks">Ponowne wczytywanie tras</string>
     <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
+    <string name="cloud_trash_clear_confirmation">Czy na pewno chcesz trwale usunąć wszystkie elementy z Kosza\? Tej czynności nie można cofnąć.</string>
+    <string name="restore_from_trash">Przywróć z kosza</string>
+    <string name="delete_all_items">Usuń wszystkie elementy</string>
+    <string name="trash_is_empty_banner_desc">Pliki usunięte z OsmAnd Cloud będą dostępne tutaj przez %1$s dni.</string>
+    <string name="shared_string_empty_trash">Opróżnij kosz</string>
+    <string name="shared_string_delete_immediately">Usuń natychmiast</string>
+    <string name="shared_string_is_deleted">%1$s został usunięty.</string>
+    <string name="cloud_item_restored">%1$s zostało przywrócone do Cloud.</string>
+    <string name="trash_alert_card_desc">Elementy w koszu zostaną usunięte po %1$s dniach.</string>
+    <string name="trash_is_empty">Kosz jest pusty</string>
+    <string name="shared_string_trash">Śmieci</string>
+    <string name="shared_string_delete_item">Usuń element</string>
 </resources>

@@ -105,8 +105,7 @@ public class GPXDatabase {
 	private static final String TMP_NAME_COLUMN_COUNT = "itemsCount";
 	private static final String TMP_NAME_COLUMN_NOT_NULL = "nonnull";
 
-
-	public static final long CHECKED_UNKNOWN_TRACK_CREATION_TIME = 1;
+	public static final long UNKNOWN_TIME_THRESHOLD = 10;
 
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
@@ -247,7 +246,7 @@ public class GPXDatabase {
 	private static final String GPX_MIN_CREATE_DATE = "SELECT " +
 			"MIN(" + GPX_COL_FILE_CREATION_TIME + ") " +
 			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME +
-			" > " + CHECKED_UNKNOWN_TRACK_CREATION_TIME;
+			" > " + UNKNOWN_TIME_THRESHOLD;
 
 	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
 			"MAX(" + GPX_COL_TOTAL_DISTANCE + ") " +
@@ -679,9 +678,6 @@ public class GPXDatabase {
 	}
 
 	public boolean updateCreateTime(@NonNull GpxDataItem item, long fileCreatedTime) {
-		if (fileCreatedTime == 0) {
-			fileCreatedTime = CHECKED_UNKNOWN_TRACK_CREATION_TIME;
-		}
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
