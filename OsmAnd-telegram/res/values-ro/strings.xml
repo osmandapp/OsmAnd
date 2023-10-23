@@ -133,7 +133,7 @@
     <string name="shared_string_apply">Aplică</string>
     <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="units_and_formats">Unități &amp; formate</string>
-    <string name="shared_string_export">Exportați</string>
+    <string name="shared_string_export">Exportă</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="logcat_buffer_descr">Verificați și partajați jurnalele detaliate ale aplicației</string>
     <string name="send_report">Trimiteți raportul</string>
