@@ -172,17 +172,17 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return isAcceptedKeyCode(keyCode);
+		return isKeyCodeSupported(keyCode);
 	}
 
 	@Override
 	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-		return isAcceptedKeyCode(keyCode);
+		return isKeyCodeSupported(keyCode);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (isAcceptedKeyCode(keyCode)) {
+		if (isKeyCodeSupported(keyCode)) {
 			this.keyCode = keyCode;
 			onValueChanged();
 			return true;
@@ -192,10 +192,10 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
-		return isAcceptedKeyCode(keyCode);
+		return isKeyCodeSupported(keyCode);
 	}
 
-	private boolean isAcceptedKeyCode(int keyCode) {
+	private boolean isKeyCodeSupported(int keyCode) {
 		return keyCode != KeyEvent.KEYCODE_BACK;
 	}
 
