@@ -386,7 +386,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		FragmentManager manager = getFragmentManager();
 		Filter filter = adapter.getFilter();
 		if (manager != null && filter instanceof TracksSearchFilter) {
-			TracksFilterFragment.Companion.showInstance(manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder);
+			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder);
 		}
 	}
 

@@ -150,7 +150,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			val filter = TracksSearchFilter(app, trackItems)
 			filter.initSelectedFilters(smartFolder.filters)
 			if (manager != null) {
-				targetFragment?.let { showInstance(manager, it, filter, this, smartFolder) }
+				targetFragment?.let { showInstance(app, manager, it, filter, this, smartFolder) }
 			}
 		}
 	}

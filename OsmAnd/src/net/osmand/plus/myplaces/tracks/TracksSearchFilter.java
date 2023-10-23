@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
@@ -17,11 +18,14 @@ import net.osmand.plus.myplaces.tracks.filters.LengthTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class TracksSearchFilter extends Filter implements FilterChangedListener {
+	public static final Log LOG = PlatformUtil.getLog(TracksSearchFilter.class);
 
 	private List<TrackItem> trackItems;
 	private CallbackWithObject<List<TrackItem>> callback;
@@ -64,6 +68,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	@Override
 	protected FilterResults performFiltering(CharSequence constraint) {
+		LOG.debug("perform tracks filtering");
 		FilterResults results = new FilterResults();
 		int filterCount = getAppliedFiltersCount();
 		if (filterCount == 0) {
@@ -88,6 +93,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			}
 			results.values = res;
 			results.count = res.size();
+			LOG.debug("found " + results.count + " tracks");
 		}
 		return results;
 	}

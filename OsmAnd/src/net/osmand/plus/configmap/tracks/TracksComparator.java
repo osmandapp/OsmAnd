@@ -135,15 +135,33 @@ public class TracksComparator implements Comparator<Object> {
 			case NAME_DESCENDING:
 				return -compareTrackItemNames(item1, item2);
 			case DATE_ASCENDING:
-				if (analysis1.startTime == analysis2.startTime) {
+				long startTime1_asc = analysis1 == null ? 0 : analysis1.startTime;
+				long startTime2_asc = analysis2 == null ? 0 : analysis2.startTime;
+				long time1_asc = dataItem1 == null ? startTime1_asc : dataItem1.getFileCreationTime();
+				long time2_asc = dataItem2 == null ? startTime2_asc : dataItem2.getFileCreationTime();
+				if (time1_asc == time2_asc || time1_asc < 10 && time2_asc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return -Long.compare(analysis1.startTime, analysis2.startTime);
+				if (time1_asc < 10) {
+					return 1;
+				} else if (time2_asc < 10) {
+					return -1;
+				}
+				return -Long.compare(time1_asc, time2_asc);
 			case DATE_DESCENDING:
-				if (analysis1.startTime == analysis2.startTime) {
+				long startTime1_desc = analysis1 == null ? 0 : analysis1.startTime;
+				long startTime2_desc = analysis2 == null ? 0 : analysis2.startTime;
+				long time1_desc = dataItem1 == null ? startTime1_desc : dataItem1.getFileCreationTime();
+				long time2_desc = dataItem2 == null ? startTime2_desc : dataItem2.getFileCreationTime();
+				if (time1_desc == time2_desc || time1_desc < 10 && time2_desc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return Long.compare(analysis1.startTime, analysis2.startTime);
+				if (time1_desc < 10) {
+					return 1;
+				} else if (time2_desc < 10) {
+					return -1;
+				}
+				return Long.compare(time1_desc, time2_desc);
 			case LAST_MODIFIED:
 				return compareItemFilesByLastModified(item1, item2);
 			case DISTANCE_DESCENDING:
