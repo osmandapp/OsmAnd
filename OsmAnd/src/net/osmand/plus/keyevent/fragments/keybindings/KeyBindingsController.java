@@ -1,10 +1,10 @@
-package net.osmand.plus.keyevent.ui.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.keybindings;
 
-import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.ACTION_ITEM;
-import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
-import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
-import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.HEADER;
-import static net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsAdapter.SPACE;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.ACTION_ITEM;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.HEADER;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.SPACE;
 
 import android.util.ArrayMap;
 
@@ -13,13 +13,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.ui.containers.ScreenItem;
+import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.ui.fragments.EditKeyActionFragment;
-import net.osmand.plus.keyevent.ui.containers.KeyAction;
+import net.osmand.plus.keyevent.fragments.EditKeyActionFragment;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -46,18 +46,18 @@ class KeyBindingsController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		Map<KeyEventCategory, List<KeyAction>> categorizedActions = collectCategorizedActions();
+		Map<KeyEventCategory, List<KeyBinding>> categorizedActions = collectCategorizedActions();
 		if (Algorithms.isEmpty(categorizedActions)) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
 		for (KeyEventCategory category : KeyEventCategory.values()) {
-			List<KeyAction> actions = categorizedActions.get(category);
+			List<KeyBinding> actions = categorizedActions.get(category);
 			if (actions != null) {
 				String categoryName = app.getString(category.getTitleId());
 				screenItems.add(new ScreenItem(CARD_DIVIDER, categoryName));
 				screenItems.add(new ScreenItem(HEADER, categoryName));
-				for (KeyAction action : actions) {
+				for (KeyBinding action : actions) {
 					screenItems.add(new ScreenItem(ACTION_ITEM, action));
 				}
 			}
@@ -68,23 +68,23 @@ class KeyBindingsController {
 	}
 
 	@NonNull
-	private Map<KeyEventCategory, List<KeyAction>> collectCategorizedActions() {
+	private Map<KeyEventCategory, List<KeyBinding>> collectCategorizedActions() {
 		if (inputDevice == null) {
 			return new HashMap<>();
 		}
-		Map<KeyEventCategory, List<KeyAction>> categorizedActions = new HashMap<>();
+		Map<KeyEventCategory, List<KeyBinding>> categorizedActions = new HashMap<>();
 		ArrayMap<Integer, KeyEventCommand> mappedCommands = inputDevice.getMappedCommands();
 		for (int i = 0; i < mappedCommands.size(); i++) {
 			Integer keyCode = mappedCommands.keyAt(i);
 			KeyEventCommand command = mappedCommands.valueAt(i);
 			if (command != null) {
 				KeyEventCategory category = command.getCategory();
-				List<KeyAction> actions = categorizedActions.get(category);
+				List<KeyBinding> actions = categorizedActions.get(category);
 				if (actions == null) {
 					actions = new ArrayList<>();
 					categorizedActions.put(category, actions);
 				}
-				actions.add(new KeyAction(keyCode, command));
+				actions.add(new KeyBinding(keyCode, command));
 			}
 		}
 		return categorizedActions;
@@ -98,7 +98,7 @@ class KeyBindingsController {
 		return inputDevice != null && deviceHelper.isCustomDevice(inputDevice);
 	}
 
-	public void askEditKeyAction(KeyAction action) {
+	public void askEditKeyAction(KeyBinding action) {
 		if (inputDevice != null) {
 			FragmentManager fm = activity.getSupportFragmentManager();
 			EditKeyActionFragment.showInstance(fm, appMode, action, inputDevice.getId());

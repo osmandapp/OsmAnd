@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments.inputdevices;
+package net.osmand.plus.keyevent.fragments.inputdevices;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.keyevent.ui.containers.ScreenItem;
+import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;

@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments;
+package net.osmand.plus.keyevent.fragments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -26,8 +26,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.ui.containers.KeyAction;
-import net.osmand.plus.keyevent.ui.OnKeyCodeSelected;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.interfaces.OnKeyCodeSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -52,7 +52,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 
 	private DialogButton applyButton;
 
-	private KeyAction keyAction;
+	private KeyBinding keyBinding;
 	private int initialKeyCode = KeyEvent.KEYCODE_UNKNOWN;
 	private String initialCommandId;
 	private String deviceId;
@@ -80,7 +80,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 		}
 		KeyEventCommand command = deviceHelper.getOrCreateCommand(commandId);
 		if (command != null) {
-			keyAction = new KeyAction(keyCode, command);
+			keyBinding = new KeyBinding(keyCode, command);
 		}
 	}
 
@@ -94,7 +94,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
-		if (keyAction != null) {
+		if (keyBinding != null) {
 			setupActionNameRow(view);
 			setupActionTypeRow(view);
 			setupActionKeyRow(view);
@@ -112,7 +112,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 		OsmandTextFieldBoxes textBox = view.findViewById(R.id.text_box);
 		textBox.setEnabled(false);
 		ExtendedEditText editText = view.findViewById(R.id.edit_text);
-		editText.setText(keyAction.getCommandTitle(app));
+		editText.setText(keyBinding.getCommandTitle(app));
 	}
 
 	private void setupActionTypeRow(@NonNull View view) {
@@ -120,7 +120,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 		TextView title = actionButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_action);
 		TextView summary = actionButton.findViewById(R.id.description);
-		summary.setText(keyAction.getCommandTitle(app));
+		summary.setText(keyBinding.getCommandTitle(app));
 	}
 
 	private void setupActionKeyRow(@NonNull View view) {
@@ -128,7 +128,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 		TextView title = keyButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_button);
 		TextView summary = keyButton.findViewById(R.id.description);
-		summary.setText(keyAction.getKeySymbol());
+		summary.setText(keyBinding.getKeySymbol());
 		summary.setTypeface(summary.getTypeface(), Typeface.BOLD);
 		View backgroundView = keyButton.findViewById(R.id.selectable_list_item);
 		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
@@ -137,7 +137,7 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 			if (activity != null) {
 				Fragment thisFragment = EditKeyActionFragment.this;
 				FragmentManager fm = activity.getSupportFragmentManager();
-				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyAction);
+				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyBinding);
 			}
 		});
 		AndroidUiHelper.updateVisibility(keyButton.findViewById(R.id.bottom_divider), false);
@@ -146,9 +146,9 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
-			int newKeyCode = keyAction.getKeyCode();
-			String commandId = keyAction.getCommandId();
-			deviceHelper.updateCustomKeyBinding(deviceId, commandId, initialKeyCode, newKeyCode);
+			int newKeyCode = keyBinding.getKeyCode();
+			String commandId = keyBinding.getCommandId();
+			deviceHelper.updateKeyBinding(deviceId, commandId, initialKeyCode, newKeyCode);
 			dismiss();
 		});
 		applyButton.setButtonType(DialogButtonType.PRIMARY);
@@ -161,15 +161,15 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 	}
 
 	private boolean hasAnyChanges() {
-		return keyAction != null
-				&& (initialKeyCode != keyAction.getKeyCode()
-				|| !Objects.equals(initialCommandId, keyAction.getCommandId()));
+		return keyBinding != null
+				&& (initialKeyCode != keyBinding.getKeyCode()
+				|| !Objects.equals(initialCommandId, keyBinding.getCommandId()));
 	}
 
 	@Override
 	public void onKeyCodeSelected(int newKeyCode) {
 		View view = getView();
-		keyAction = new KeyAction(newKeyCode, keyAction.getCommand());
+		keyBinding = new KeyBinding(newKeyCode, keyBinding.getCommand());
 		if (view != null) {
 			updateViewContent(view);
 		}
@@ -202,9 +202,9 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (keyAction != null) {
-			outState.putInt(ATTR_KEY_CODE, keyAction.getKeyCode());
-			outState.putString(ATTR_COMMAND_ID, keyAction.getCommandId());
+		if (keyBinding != null) {
+			outState.putInt(ATTR_KEY_CODE, keyBinding.getKeyCode());
+			outState.putString(ATTR_COMMAND_ID, keyBinding.getCommandId());
 		}
 	}
 
@@ -232,15 +232,15 @@ public class EditKeyActionFragment extends BaseOsmAndFragment implements OnKeyCo
 
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull KeyAction keyAction,
+	                                @NonNull KeyBinding keyBinding,
 	                                @NonNull String deviceId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyActionFragment fragment = new EditKeyActionFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
-			arguments.putString(ATTR_COMMAND_ID, keyAction.getCommandId());
+			arguments.putString(ATTR_COMMAND_ID, keyBinding.getCommandId());
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putInt(ATTR_KEY_CODE, keyAction.getKeyCode());
+			arguments.putInt(ATTR_KEY_CODE, keyBinding.getKeyCode());
 			fragment.setArguments(arguments);
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

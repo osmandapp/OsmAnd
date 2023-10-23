@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.containers;
+package net.osmand.plus.keyevent.keybinding;
 
 import android.content.Context;
 
@@ -7,12 +7,12 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 
-public class KeyAction {
+public class KeyBinding {
 
-	private final KeyEventCommand command;
 	private final int keyCode;
+	private final KeyEventCommand command;
 
-	public KeyAction(int keyCode, @NonNull KeyEventCommand command) {
+	public KeyBinding(int keyCode, @NonNull KeyEventCommand command) {
 		this.command = command;
 		this.keyCode = keyCode;
 	}

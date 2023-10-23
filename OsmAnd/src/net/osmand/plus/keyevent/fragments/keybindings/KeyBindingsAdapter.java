@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.keybindings;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.keyevent.ui.containers.ScreenItem;
+import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.ui.containers.KeyAction;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -87,7 +87,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		} else if (holder instanceof ActionItemViewHolder) {
 			ActionItemViewHolder h = (ActionItemViewHolder) holder;
-			KeyAction keyAction = (KeyAction) item.value;
+			KeyBinding keyBinding = (KeyBinding) item.value;
 
 			if (isEditable()) {
 				boolean nightMode = isNightMode();
@@ -97,10 +97,10 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				controller.askEditKeyAction(keyAction);
+				controller.askEditKeyAction(keyBinding);
 			}: null);
-			h.actionName.setText(keyAction.getCommandTitle(app));
-			h.keyName.setText(keyAction.getKeySymbol());
+			h.actionName.setText(keyBinding.getCommandTitle(app));
+			h.keyName.setText(keyBinding.getKeySymbol());
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
 			boolean dividerNeeded = nextItem != null && nextItem.type == ACTION_ITEM;

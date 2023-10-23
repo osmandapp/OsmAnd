@@ -1,9 +1,9 @@
-package net.osmand.plus.keyevent.ui.fragments.inputdevices;
+package net.osmand.plus.keyevent.fragments.inputdevices;
 
-import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.CARD_BOTTOM_SHADOW;
-import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.CARD_DIVIDER;
-import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.DEVICE_ITEM;
-import static net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesAdapter.SPACE;
+import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.DEVICE_ITEM;
+import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.SPACE;
 
 import android.widget.EditText;
 
@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.keyevent.ui.containers.ScreenItem;
+import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;

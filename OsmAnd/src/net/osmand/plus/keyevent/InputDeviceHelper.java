@@ -168,9 +168,9 @@ public class InputDeviceHelper {
 		}
 	}
 
-	public void updateCustomKeyBinding(@NonNull String deviceId,
-	                                   @NonNull String commandId,
-	                                   int oldKeyCode, int newKeyCode) {
+	public void updateKeyBinding(@NonNull String deviceId,
+	                             @NonNull String commandId,
+	                             int oldKeyCode, int newKeyCode) {
 		InputDeviceProfile device = getDeviceById(deviceId);
 		if (device != null) {
 			device.updateMappedCommands(oldKeyCode, newKeyCode, commandId);
@@ -228,7 +228,7 @@ public class InputDeviceHelper {
 
 	private void notifyListeners() {
 		for (InputDeviceHelperListener listener : listeners) {
-			listener.onInputDeviceHelperMessage();
+			listener.onInputDeviceHelperEvent();
 		}
 	}
 
@@ -272,5 +272,9 @@ public class InputDeviceHelper {
 			jsonArray.put(((CustomInputDeviceProfile) device).toJson());
 		}
 		json.put("items", jsonArray);
+	}
+
+	public interface InputDeviceHelperListener {
+		void onInputDeviceHelperEvent();
 	}
 }

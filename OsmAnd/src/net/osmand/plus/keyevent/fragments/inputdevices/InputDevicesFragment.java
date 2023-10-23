@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.inputdevices;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
@@ -23,17 +23,17 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.InputDeviceHelperListener;
+import net.osmand.plus.keyevent.InputDeviceHelper.InputDeviceHelperListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class InputDevicesFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
 
-	public static final String TAG = KeyBindingsFragment.class.getSimpleName();
+	public static final String TAG = InputDevicesFragment.class.getSimpleName();
 
-	private KeyBindingsAdapter adapter;
-	private KeyBindingsController controller;
+	private InputDevicesAdapter adapter;
+	private InputDevicesController controller;
 
 	private ApplicationMode appMode;
 	private InputDeviceHelper deviceHelper;
@@ -44,7 +44,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new KeyBindingsController(app, appMode);
+		controller = new InputDevicesController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -57,7 +57,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new KeyBindingsAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new InputDevicesAdapter(app, appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -69,7 +69,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
-		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(app));
+		closeButton.setImageResource(R.drawable.ic_action_close);
 		closeButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -78,21 +78,25 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		});
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(getString(R.string.key_bindings));
+		title.setText(getString(R.string.shared_string_type));
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);
-		AndroidUiHelper.updateVisibility(actionButton, false);
+		ImageView actionButtonImage = toolbar.findViewById(R.id.action_button_icon);
+		actionButtonImage.setImageDrawable(getContentIcon(R.drawable.ic_action_add_no_bg));
+		actionButton.setOnClickListener(v -> {
+			controller.askAddNewCustomDevice();
+		});
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	@Override
-	public void onInputDeviceHelperMessage() {
+	public void onInputDeviceHelperEvent() {
 		updateViewContent();
 	}
 
 	private void updateViewContent() {
-		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceEditable());
+		adapter.setScreenItems(controller.populateScreenItems());
 	}
 
 	@Override
@@ -101,7 +105,6 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
-			controller.setActivity(mapActivity);
 		}
 		deviceHelper.addListener(this);
 	}
@@ -113,7 +116,6 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
-		controller.setActivity(null);
 		deviceHelper.removeListener(this);
 	}
 
@@ -131,7 +133,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			KeyBindingsFragment fragment = new KeyBindingsFragment();
+			InputDevicesFragment fragment = new InputDevicesFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);

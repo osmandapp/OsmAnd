@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments;
+package net.osmand.plus.keyevent.fragments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
@@ -27,8 +27,8 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.ui.containers.KeyAction;
-import net.osmand.plus.keyevent.ui.OnKeyCodeSelected;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.interfaces.OnKeyCodeSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -264,14 +264,14 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public static void showInstance(@NonNull FragmentManager manager,
 									@NonNull Fragment targetFragment,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId, @NonNull KeyAction keyAction) {
+	                                @NonNull String deviceId, @NonNull KeyBinding keyBinding) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectKeyCodeFragment fragment = new SelectKeyCodeFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_COMMAND_ID, keyAction.getCommandId());
-			arguments.putInt(ATTR_KEY_CODE, keyAction.getKeyCode());
+			arguments.putString(ATTR_COMMAND_ID, keyBinding.getCommandId());
+			arguments.putInt(ATTR_KEY_CODE, keyBinding.getKeyCode());
 			fragment.setArguments(arguments);
 			fragment.setTargetFragment(targetFragment, 0);
 			manager.beginTransaction()

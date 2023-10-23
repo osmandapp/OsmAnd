@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.ui.fragments;
+package net.osmand.plus.keyevent.fragments;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
@@ -22,8 +22,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.ui.fragments.inputdevices.InputDevicesFragment;
-import net.osmand.plus.keyevent.ui.fragments.keybindings.KeyBindingsFragment;
+import net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesFragment;
+import net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
