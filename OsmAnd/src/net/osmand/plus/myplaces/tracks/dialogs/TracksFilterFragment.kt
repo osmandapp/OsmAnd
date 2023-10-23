@@ -231,7 +231,6 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		filter.resetFilteredItems()
 		if (smartFolder == null) {
 			filter.initSelectedFilters(initialFilterState.appliedFilters)
-//			filter.resetCurrentFilters()
 		}
 		adapter?.let {
 			it.updateItems()
