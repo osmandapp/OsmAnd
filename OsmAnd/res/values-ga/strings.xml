@@ -1585,4 +1585,5 @@
     <string name="created_on">Cruthaíodh ar</string>
     <string name="routing_attr_avoid_tunnels_name">Seachain tolláin</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Réidh</string>
+    <string name="download_all">Íoslódáil uile</string>
 </resources>
