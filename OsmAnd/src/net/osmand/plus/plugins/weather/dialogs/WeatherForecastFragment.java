@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
+import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
+import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
+import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -8,6 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.LabelFormatter;
 
@@ -23,6 +35,7 @@ import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,18 +63,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
@@ -102,7 +103,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		weatherHelper = app.getWeatherHelper();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
-		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToCurrentHour(System.currentTimeMillis()));
+		currentDate.setTimeInMillis(WeatherUtils.roundForecastTimeToHour(System.currentTimeMillis()));
 		selectedDate.setTime(currentDate.getTime());
 
 		if (savedInstanceState != null) {
@@ -189,8 +190,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
 		timeSlider.setStepSize(today ? 1 : 3);
-		timeSlider.setCurrentDate(today ? currentDate : null);
-		timeSlider.setRtl(AndroidUtils.isRTL());
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -266,7 +265,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		int toolbarHeight = getDimensionPixelSize(R.dimen.toolbar_height);
 		int topMargin = getDimensionPixelSize(R.dimen.map_small_button_margin);
 		int startMargin = getDimensionPixelSize(R.dimen.map_button_margin);
-		AndroidUtils.setMargins(params, startMargin,topMargin + toolbarHeight, 0, 0);
+		AndroidUtils.setMargins(params, startMargin, topMargin + toolbarHeight, 0, 0);
 
 		MapActivity activity = getMapActivity();
 		if (activity != null) {

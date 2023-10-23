@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -147,7 +148,7 @@ public class WeatherWidget extends SimpleWidget {
 
 	public long getDateTime() {
 		long time = dateTime != null ? dateTime : System.currentTimeMillis();
-		return WeatherHelper.roundForecastTimeToCurrentHour(time);
+		return WeatherUtils.roundForecastTimeToHour(time);
 	}
 
 	private boolean shouldObtainValue(@Nullable PointI point31, @Nullable ZoomLevel zoom, long dateTime) {
