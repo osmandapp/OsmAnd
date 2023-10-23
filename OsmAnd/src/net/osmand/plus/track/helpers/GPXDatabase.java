@@ -1305,22 +1305,22 @@ public class GPXDatabase {
 	}
 
 	public List<Pair<String, Integer>> getTrackFolders() {
-		return getDistinctItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
+		return getStringIntItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
 	}
 
 	public List<Pair<String, Integer>> getNearestCityCollection() {
-		return getDistinctItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
+		return getStringIntItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
 	}
 
 	public List<Pair<String, Integer>> getTrackColorsCollection() {
-		return getDistinctItemsCollection(GPX_TRACK_COLORS_COLLECTION);
+		return getStringIntItemsCollection(GPX_TRACK_COLORS_COLLECTION);
 	}
 
 	public List<Pair<String, Integer>> getTrackWidthCollection() {
-		return getDistinctItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
+		return getStringIntItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
 	}
 
-	public List<Pair<String, Integer>> getDistinctItemsCollection(String dataQuery) {
+	public List<Pair<String, Integer>> getStringIntItemsCollection(String dataQuery) {
 		ArrayList<Pair<String, Integer>> folderCollection = new ArrayList<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
