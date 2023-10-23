@@ -15,8 +15,8 @@ internal enum class SmartFolderOption(
 	SHOW_ALL_TRACKS(
 		R.string.show_all_tracks_on_the_map,
 		R.drawable.ic_show_on_map),
-	EDIT_NAME(
-		R.string.edit_name,
+	shared_string_rename(
+		R.string.shared_string_rename,
 		R.drawable.ic_action_edit_dark),
 	REFRESH(
 		R.string.shared_string_refresh,
@@ -38,7 +38,7 @@ internal enum class SmartFolderOption(
 			get() = arrayOf(
 				DETAILS,
 				SHOW_ALL_TRACKS,
-				EDIT_NAME,
+				shared_string_rename,
 				REFRESH,
 				CHANGE_APPEARANCE,
 				EXPORT,
