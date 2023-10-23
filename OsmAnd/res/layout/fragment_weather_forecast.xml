@@ -47,8 +47,8 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:layout_gravity="center_vertical"
 				android:contentDescription="@string/back_to_map"
-				android:tint="@color/card_and_list_background_light"
-				app:srcCompat="@drawable/ic_action_layers" />
+				app:srcCompat="@drawable/ic_action_layers"
+				app:tint="@color/card_and_list_background_light" />
 
 			<ImageButton
 				android:id="@+id/contour_layers"
@@ -57,8 +57,8 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:layout_gravity="center_vertical"
 				android:contentDescription="@string/back_to_map"
-				android:tint="@color/card_and_list_background_light"
-				app:srcCompat="@drawable/ic_plugin_srtm" />
+				app:srcCompat="@drawable/ic_plugin_srtm"
+				app:tint="@color/card_and_list_background_light" />
 
 		</LinearLayout>
 

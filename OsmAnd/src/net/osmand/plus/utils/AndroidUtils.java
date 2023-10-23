@@ -904,28 +904,6 @@ public class AndroidUtils {
 		return result;
 	}
 
-	public static boolean isScreenOn(Context context) {
-		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return pm.isInteractive();
-	}
-
-	public static boolean isScreenLocked(Context context) {
-		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-		return keyguardManager.inKeyguardRestrictedInputMode();
-	}
-
-	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
-
-		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD
-				|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC
-				|| baseString.toString().contains(STRING_PLACEHOLDER)) {
-
-			return getStyledString(baseString, stringToInsertAndStyle, null, new StyleSpan(typefaceStyle));
-		} else {
-			return baseString;
-		}
-	}
-
 	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
 		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
@@ -954,13 +932,6 @@ public class AndroidUtils {
 		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
-		}
-	}
-
-	public static void setTextDirection(@NonNull TextView tv, boolean rtl) {
-		if (isSupportRTL()) {
-			int textDirection = rtl ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
-			tv.setTextDirection(textDirection);
 		}
 	}
 
@@ -1114,10 +1085,6 @@ public class AndroidUtils {
 		} else {
 			return baseString;
 		}
-	}
-
-	public static boolean isRTL() {
-		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
 	@NonNull
