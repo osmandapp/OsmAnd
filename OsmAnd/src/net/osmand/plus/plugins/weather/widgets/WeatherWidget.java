@@ -147,7 +147,7 @@ public class WeatherWidget extends SimpleWidget {
 
 	public long getDateTime() {
 		long time = dateTime != null ? dateTime : System.currentTimeMillis();
-		return WeatherHelper.roundForecastTimeToHour(time);
+		return WeatherHelper.roundForecastTimeToCurrentHour(time);
 	}
 
 	private boolean shouldObtainValue(@Nullable PointI point31, @Nullable ZoomLevel zoom, long dateTime) {

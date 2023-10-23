@@ -73,7 +73,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = WeatherHelper.roundForecastTimeToHour(dateTime);
+		this.dateTime = WeatherHelper.roundForecastTimeToCurrentHour(dateTime);
 	}
 
 	@Override

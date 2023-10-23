@@ -228,12 +228,6 @@ public class WeatherHelper {
 		return bandsSettingsVersion.get();
 	}
 
-
-	public static long roundForecastTimeToHour(long time) {
-		long hour = 60 * 60 * 1000;
-		return (time + hour / 2) / hour * hour;
-	}
-
 	public static long roundForecastTimeToCurrentHour(long time) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date(time));
