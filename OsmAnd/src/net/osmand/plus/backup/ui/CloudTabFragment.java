@@ -86,7 +86,7 @@ public class CloudTabFragment extends ChangesTabFragment {
 			} else {
 				operation = SYNC_OPERATION_DOWNLOAD;
 			}
-			CloudChangeItem changeItem = createChangeItem(key, operation, fileInfo.localFile, fileInfo.remoteFile);
+			CloudChangeItem changeItem = createChangeItem(operation, fileInfo.localFile, fileInfo.remoteFile);
 			if (changeItem != null) {
 				// FIXME
 				changeItems.add(changeItem);

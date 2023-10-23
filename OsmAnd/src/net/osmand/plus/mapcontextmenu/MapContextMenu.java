@@ -498,6 +498,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public boolean close() {
+		return close(true);
+	}
+
+	public boolean close(boolean animated) {
 		boolean result = false;
 		if (active) {
 			active = false;
@@ -517,7 +521,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				if (object != null) {
 					clearSelectedObject(object);
 				}
-				result = hide();
+				result = hide(animated);
 				if (menuController != null) {
 					menuController.setActive(false);
 				}
@@ -1597,7 +1601,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Integer getMapDisplayPosition() {
 		if (shouldUpdateMapDisplayPosition) {
 			return OsmandSettings.CENTER_CONSTANT;

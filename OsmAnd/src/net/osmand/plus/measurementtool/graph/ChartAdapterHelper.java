@@ -26,6 +26,8 @@ public class ChartAdapterHelper {
 	public static final String BIND_GRAPH_ADAPTERS_KEY = "bind_graph_adapters_key";
 	public static final String BIND_TO_MAP_KEY = "bind_to_map_key";
 
+	private static final int MAX_HIGHLIGHT_DISTANCE_DP = 10_000;
+
 	public static void bindGraphAdapters(CommonChartAdapter mainGraphAdapter,
 	                                     List<BaseChartAdapter> otherGraphAdapters,
 	                                     ViewGroup mainView) {
@@ -50,6 +52,7 @@ public class ChartAdapterHelper {
 			return false;
 		};
 		mainChart.setOnTouchListener(mainChartTouchListener);
+		mainChart.setMaxHighlightDistance(MAX_HIGHLIGHT_DISTANCE_DP);
 
 		mainGraphAdapter.addValueSelectedListener(BIND_GRAPH_ADAPTERS_KEY,
 				new ExternalValueSelectedListener() {
@@ -83,7 +86,7 @@ public class ChartAdapterHelper {
 		for (BaseChartAdapter adapter : otherGraphAdapters) {
 			if (adapter.getChart() != null) {
 				if (adapter.getChart() instanceof BarChart) {
-					// maybe we should find min and max axis from all charters
+					// maybe we should find min and max axis from all charts
 					BarChart barChart = (BarChart) adapter.getChart();
 					barChart.getAxisRight().setAxisMinimum(mainChart.getXChartMin());
 					barChart.getAxisRight().setAxisMaximum(mainChart.getXChartMax());

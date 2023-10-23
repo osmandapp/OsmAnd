@@ -111,6 +111,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
+				TrackFolder currentFolder = getCurrentTrackGroup() instanceof TrackFolder ? (TrackFolder) getCurrentTrackGroup() : null;
 				SearchMyPlacesTracksFragment.showInstance(manager,
 						getTargetFragment(),
 						false,
@@ -122,7 +123,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 							public void onDialogClosed() {
 								updateContent();
 							}
-						});
+						},
+						currentFolder);
 				return true;
 			}
 		}

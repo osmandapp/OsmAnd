@@ -104,6 +104,7 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -1136,7 +1137,7 @@ public class AndroidUtils {
 		return name + " (2)" + extension;
 	}
 
-	public static StringBuilder formatWarnings(List<String> warnings) {
+	public static StringBuilder formatWarnings(Collection<String> warnings) {
 		StringBuilder builder = new StringBuilder();
 		boolean f = true;
 		for (String w : warnings) {

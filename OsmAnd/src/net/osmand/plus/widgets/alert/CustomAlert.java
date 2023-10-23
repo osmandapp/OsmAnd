@@ -31,7 +31,7 @@ public class CustomAlert {
 		showSimpleMessage(data, data.getContext().getString(messageId));
 	}
 
-	public static void showSimpleMessage(@NonNull AlertDialogData data, @NonNull String message) {
+	public static void showSimpleMessage(@NonNull AlertDialogData data, @NonNull CharSequence message) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		builder.setMessage(message);
 

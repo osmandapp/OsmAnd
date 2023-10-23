@@ -284,8 +284,18 @@ public abstract class MapRenderingTypes {
 				"yes".equals(parser.getAttributeValue("", "map")) || parser.getAttributeValue("", "map") == null;
 		rtype.poi = "true".equals(parser.getAttributeValue("", "poi")) || 
 				"yes".equals(parser.getAttributeValue("", "poi")) || parser.getAttributeValue("", "poi") == null;
-		rtype.propagateToNodes = "true".equals(parser.getAttributeValue("", "propagateToNodes")) ||
-				"true".equals(parser.getAttributeValue("", "propagateToNodes"));
+		String propagateToNodes = parser.getAttributeValue("", "propagateToNodes");
+		if (propagateToNodes != null) {
+			if ("true".equals(propagateToNodes) || "yes".equals(propagateToNodes) || "all".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.ALL;
+			} else if ("start".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.START;
+			} else if ("end".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.END;
+			} else if ("center".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.CENTER;
+			}
+		}
 		
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
@@ -536,7 +546,7 @@ public abstract class MapRenderingTypes {
 		protected String relationGroupPrefix;
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
-		protected boolean propagateToNodes = false;
+		protected PropagateToNodesType propagateToNodes = PropagateToNodesType.NONE;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -723,7 +733,19 @@ public abstract class MapRenderingTypes {
 		}
 		
 		public boolean isPropagateToNodes() {
+			return propagateToNodes != PropagateToNodesType.NONE;
+		}
+
+		public PropagateToNodesType getPropagateToNodesType() {
 			return propagateToNodes;
+		}
+
+		public enum PropagateToNodesType {
+			NONE,
+			ALL,
+			START,
+			END,
+			CENTER
 		}
 
 	}

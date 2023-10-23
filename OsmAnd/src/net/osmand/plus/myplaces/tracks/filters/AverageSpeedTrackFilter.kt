@@ -10,7 +10,7 @@ class AverageSpeedTrackFilter(
 	minValue: Float,
 	maxValue: Float,
 	app: OsmandApplication,
-	filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.average_speed, AVERAGE_SPEED, filterChangedListener) {

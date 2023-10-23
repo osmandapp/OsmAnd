@@ -3,7 +3,6 @@ package net.osmand.plus.myplaces.tracks.filters.viewholders
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
@@ -38,7 +37,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 			expanded = !expanded
 			updateExpandState()
 		}
-		recycler = itemView.findViewById(R.id.cities)
+		recycler = itemView.findViewById(R.id.variants)
 	}
 
 	fun bindView(filter: CityTrackFilter) {
@@ -59,7 +58,7 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 		filter?.let {
 			val adapter = CityAdapter()
 			adapter.items.clear()
-			adapter.items.addAll(it.fullCitiesList)
+			adapter.items.addAll(it.allCities)
 			recycler.adapter = adapter
 			recycler.layoutManager = LinearLayoutManager(app)
 			recycler.itemAnimator = null
@@ -68,20 +67,20 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 		}
 	}
 
-	inner class CityAdapter : RecyclerView.Adapter<CityViewHolder>() {
+	inner class CityAdapter : RecyclerView.Adapter<FilterVariantViewHolder>() {
 		var items = ArrayList<String>()
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterVariantViewHolder {
 			val inflater = UiUtilities.getInflater(parent.context, nightMode)
 			val view =
 				inflater.inflate(R.layout.track_filter_checkbox_item, parent, false)
-			return CityViewHolder(view)
+			return FilterVariantViewHolder(view, nightMode)
 		}
 
 		override fun getItemCount(): Int {
 			return items.size
 		}
 
-		override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
+		override fun onBindViewHolder(holder: FilterVariantViewHolder, position: Int) {
 			val cityName = items[position]
 			holder.title.text = cityName
 			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
@@ -92,23 +91,8 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 					updateValues()
 				}
 				holder.checkBox.isChecked = cityFilter.isCitySelected(cityName)
+				holder.count.text = cityFilter.allCitiesCollection[cityName].toString()
 			}
-		}
-	}
-
-	inner class CityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		var title: TextViewEx
-		var checkBox: AppCompatCheckBox
-		var divider: View
-
-		init {
-			title = view.findViewById(R.id.title)
-			checkBox = view.findViewById(R.id.compound_button)
-			divider = view.findViewById(R.id.divider)
-			UiUtilities.setupCompoundButton(
-				nightMode,
-				net.osmand.plus.utils.ColorUtilities.getActiveColor(app, nightMode),
-				checkBox)
 		}
 	}
 }

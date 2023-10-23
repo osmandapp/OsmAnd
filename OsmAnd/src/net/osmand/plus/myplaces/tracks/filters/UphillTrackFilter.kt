@@ -8,7 +8,7 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.UPHILL
 class UphillTrackFilter(
 	minValue: Float,
 	maxValue: Float,
-	app: OsmandApplication, filterChangedListener: FilterChangedListener) : RangeTrackFilter(
+	app: OsmandApplication, filterChangedListener: FilterChangedListener?) : RangeTrackFilter(
 	minValue,
 	maxValue,
 	app, R.string.shared_string_uphill, UPHILL, filterChangedListener) {

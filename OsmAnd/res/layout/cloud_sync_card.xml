@@ -53,6 +53,4 @@
 
 	</LinearLayout>
 
-	<include layout="@layout/card_bottom_divider" />
-
 </LinearLayout>

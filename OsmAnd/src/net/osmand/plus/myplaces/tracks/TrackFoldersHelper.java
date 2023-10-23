@@ -238,8 +238,8 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 	public void showItemsOptionsMenu(@NonNull View view, @Nullable TrackFolder trackFolder,
 	                                 @NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
-	                                 @NonNull Fragment fragment, @NonNull SelectGpxTaskListener gpxTaskListener,
-	                                 @NonNull FragmentStateHolder fragmentStateHolder, boolean nightMode) {
+	                                 @NonNull Fragment fragment, @NonNull FragmentStateHolder stateHolder,
+	                                 boolean nightMode) {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(items, groups);
 
@@ -247,7 +247,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, gpxTaskListener);
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems);
 					dismissFragment(fragment, false);
 				})
 				.create()
@@ -256,7 +256,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> {
-					showExportDialog(selectedTrackItems, fragmentStateHolder);
+					showExportDialog(selectedTrackItems, stateHolder);
 					dismissFragment(fragment, false);
 				})
 				.create()

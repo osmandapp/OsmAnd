@@ -7,5 +7,5 @@
     <string name="shared_string_yes">Yes</string>
     <string name="osmand_app_not_found">OsmAnd is not installed</string>
     <string name="app_name">OsmAnd Ski Maps</string>
-    <string name="parking_plugin_installed">OsmAnd Ski Maps Plugin is installed and enabled in OsmAnd settings.</string>
+    <string name="skimaps_plugin_installed">OsmAnd Ski Maps Plugin is installed and enabled in OsmAnd settings.</string>
 </resources>

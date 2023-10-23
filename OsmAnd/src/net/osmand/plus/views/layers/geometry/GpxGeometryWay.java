@@ -58,13 +58,16 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                float trackWidth,
 	                                @Nullable float[] dashPattern,
 	                                boolean drawDirectionArrows,
-	                                @NonNull ColoringType routeColoringType,
+	                                @NonNull ColoringType coloringType,
 	                                @Nullable String routeInfoAttribute) {
-		this.coloringChanged = this.customColor != trackColor
-				|| this.coloringType != routeColoringType
-				|| routeColoringType == ColoringType.ATTRIBUTE
+		boolean coloringTypeChanged = this.coloringType != coloringType
+				|| coloringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
 
+		if (coloringTypeChanged) {
+			resetSymbolProviders();
+		}
 		if (this.customWidth != trackWidth) {
 			updateStylesWidth(trackWidth);
 		}
@@ -74,14 +77,14 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		updatePaints(trackWidth, routeColoringType);
-		getDrawer().setColoringType(routeColoringType);
+		updatePaints(trackWidth, coloringType);
+		getDrawer().setColoringType(coloringType);
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;
 		this.dashPattern = dashPattern;
 		this.drawDirectionArrows = drawDirectionArrows;
-		this.coloringType = routeColoringType;
+		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 

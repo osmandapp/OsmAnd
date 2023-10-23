@@ -1,15 +1,15 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.util.Log
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterType.DATE_CREATION
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
+class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(R.string.date_of_creation, DATE_CREATION, filterChangedListener) {
 	private var DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	var initialValueFrom = Date().time
@@ -19,14 +19,14 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	var valueFrom = Date().time
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	@Expose
 	var valueTo = Date().time
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	override fun isEnabled(): Boolean {
@@ -45,7 +45,8 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			trackItem.dataItem!!.fileCreationTime > valueFrom && trackItem.dataItem!!.fileCreationTime < valueTo
+			val result = trackItem.dataItem!!.fileCreationTime in valueFrom..valueTo
+			result
 		}
 	}
 
@@ -70,7 +71,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	}
 
 	private fun getDateFormat(): SimpleDateFormat {
-		if(DATE_FORMAT == null) {
+		if (DATE_FORMAT == null) {
 			DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 		}
 		return DATE_FORMAT
