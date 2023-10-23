@@ -68,17 +68,19 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_CAPS_LOCK, "⇪");
 		keySymbolMap.put(KeyEvent.KEYCODE_DEL, "⌫");
 		keySymbolMap.put(KeyEvent.KEYCODE_ESCAPE, "⎋");
+		keySymbolMap.put(KeyEvent.KEYCODE_SEMICOLON, ";");
+		keySymbolMap.put(KeyEvent.KEYCODE_APOSTROPHE, "'");
 		keySymbolMap.put(KeyEvent.KEYCODE_SLASH, "/");
 		keySymbolMap.put(KeyEvent.KEYCODE_GRAVE, "~");
 
-		keySymbolMap.put(KeyEvent.KEYCODE_NUM_LOCK, "Num");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUM_LOCK, "Num Lock");
 		keySymbolMap.put(KeyEvent.KEYCODE_ALT_LEFT, "Alt");
 		keySymbolMap.put(KeyEvent.KEYCODE_ALT_RIGHT, "Alt");
 		keySymbolMap.put(KeyEvent.KEYCODE_CTRL_LEFT, "Ctrl");
 		keySymbolMap.put(KeyEvent.KEYCODE_CTRL_RIGHT, "Ctrl");
 
-		keySymbolMap.put(KeyEvent.KEYCODE_PAGE_UP, "⇞");
-		keySymbolMap.put(KeyEvent.KEYCODE_PAGE_DOWN, "⇟");
+		keySymbolMap.put(KeyEvent.KEYCODE_PAGE_UP, "Page Up ⇞");
+		keySymbolMap.put(KeyEvent.KEYCODE_PAGE_DOWN, "Page Down ⇟");
 		keySymbolMap.put(KeyEvent.KEYCODE_HOME, "⇱");
 		keySymbolMap.put(KeyEvent.KEYCODE_MOVE_END, "⇲");
 		keySymbolMap.put(KeyEvent.KEYCODE_INSERT, "Ins");
@@ -96,8 +98,25 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_F11, "F11");
 		keySymbolMap.put(KeyEvent.KEYCODE_F12, "F12");
 
+		keySymbolMap.put(KeyEvent.KEYCODE_0, "0");
+		keySymbolMap.put(KeyEvent.KEYCODE_1, "1");
+		keySymbolMap.put(KeyEvent.KEYCODE_2, "2");
+		keySymbolMap.put(KeyEvent.KEYCODE_3, "3");
+		keySymbolMap.put(KeyEvent.KEYCODE_4, "4");
+		keySymbolMap.put(KeyEvent.KEYCODE_5, "5");
+		keySymbolMap.put(KeyEvent.KEYCODE_6, "6");
+		keySymbolMap.put(KeyEvent.KEYCODE_7, "7");
+		keySymbolMap.put(KeyEvent.KEYCODE_8, "8");
+		keySymbolMap.put(KeyEvent.KEYCODE_9, "9");
+
+		keySymbolMap.put(KeyEvent.KEYCODE_LEFT_BRACKET, "[");
+		keySymbolMap.put(KeyEvent.KEYCODE_RIGHT_BRACKET, "]");
+
+		keySymbolMap.put(KeyEvent.KEYCODE_COMMA, ",");
+		keySymbolMap.put(KeyEvent.KEYCODE_PERIOD, ".");
+
 		keySymbolMap.put(KeyEvent.KEYCODE_BREAK, "Pause");
-		keySymbolMap.put(KeyEvent.KEYCODE_SCROLL_LOCK, "Scroll");
+		keySymbolMap.put(KeyEvent.KEYCODE_SCROLL_LOCK, "Scroll lock");
 		keySymbolMap.put(KeyEvent.KEYCODE_MOVE_HOME, "Home");
 		keySymbolMap.put(KeyEvent.KEYCODE_FORWARD_DEL, "Forward Delete");
 		keySymbolMap.put(KeyEvent.KEYCODE_SYSRQ, "SysRq");
@@ -117,5 +136,27 @@ public class KeySymbolMapper {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			keySymbolMap.put(KeyEvent.KEYCODE_SOFT_SLEEP, "Sleep");
 		}
+
+		// Add Numeric Keypad key codes
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_0, "Num 0");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_1, "Num 1");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_2, "Num 2");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_3, "Num 3");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_4, "Num 4");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_5, "Num 5");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_6, "Num 6");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_7, "Num 7");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_8, "Num 8");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_9, "Num 9");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_DIVIDE, "Num /");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, "Num *");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_SUBTRACT, "Num -");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_ADD, "Num +");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_DOT, "Num .");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_COMMA, "Num ,");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, "Num Enter");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_EQUALS, "Num =");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_LEFT_PAREN, "Num (");
+		keySymbolMap.put(KeyEvent.KEYCODE_NUMPAD_RIGHT_PAREN, "Num )");
 	}
 }
