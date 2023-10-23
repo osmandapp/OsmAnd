@@ -45,7 +45,7 @@ public class ZoomLevelWidget extends TextInfoWidget {
 			float visualZoom = newZoomFloatPart >= 0.0f
 					? 1.0f + newZoomFloatPart
 					: 1.0f + 0.5f * newZoomFloatPart;
-			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(visualZoom * newMapDensity);
+			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(visualZoom);
 			float preFormattedOffset = Math.round(Math.abs(offsetFromLogicalZoom) * 100) / 100.0f;
 			String formattedOffset = OsmAndFormatter
 					.formatValue(preFormattedOffset, "", true, 2, app)

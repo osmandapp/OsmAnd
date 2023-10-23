@@ -52,6 +52,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.MyLocationAnimation;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
@@ -191,6 +192,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	OsmandMap osmandMap;
+	MyLocationAnimation myLocationAnimation;
 	LockHelper lockHelper;
 	KeyEventHelper keyEventHelper;
 	FileSettingsHelper fileSettingsHelper;
@@ -1089,6 +1091,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OsmandMap getOsmandMap() {
 		return osmandMap;
+	}
+
+	public MyLocationAnimation getMyLocationAnimation() {
+		return myLocationAnimation;
 	}
 
 	public boolean useOpenGlRenderer() {

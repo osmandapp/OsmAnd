@@ -220,65 +220,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
 			if (isMapLinkedToLocation() && location != null) {
-				Pair<Integer, Double> zoom = null;
-				Float rotation = null;
-				boolean pendingRotation = false;
-				if (settings.AUTO_ZOOM_MAP.get()) {
-					zoom = autozoom(tb, location);
-				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);
-				boolean smallSpeedForAnimation = isSmallSpeedForAnimation(location);
 
-				showViewAngle = (!location.hasBearing() || smallSpeedForCompass) && (tb != null &&
-						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
-				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					// special case when bearing equals to zero (we don't change anything)
-					if (location.hasBearing() && location.getBearing() != 0f) {
-						rotation = -location.getBearing();
-					}
-					if (rotation == null && prevLocation != null && tb != null) {
-						double distDp = (tb.getPixDensity() * MapUtils.getDistance(prevLocation, location)) / tb.getDensity();
-						if (distDp > SKIP_ANIMATION_DP_THRESHOLD) {
-							movingTime = 0;
-						}
-					}
-				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
+				if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
-					pendingRotation = true;
-				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_NONE) {
-					rotation = 0.0f;
-					pendingRotation = true;
-				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_MANUAL) {
-					pendingRotation = true;
+				} else {
+					showViewAngle = (!location.hasBearing() || smallSpeedForCompass)
+							&& NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude());
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
-				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation) {
-					mapView.getAnimatedDraggingThread().startMoving(
-							location.getLatitude(), location.getLongitude(), zoom,
-							pendingRotation, rotation, movingTime, false,
-							() -> movingToMyLocation = false);
-				} else {
-					if (mapView.hasMapRenderer()) {
-						movingTime = movingToMyLocation
-								? (long) Math.min(movingTime * 0.7, MOVE_ANIMATION_TIME) : MOVE_ANIMATION_TIME;
-						if (mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-							movingTime = 0;
-						}
-						mapView.getAnimatedDraggingThread().startMoving(
-								location.getLatitude(), location.getLongitude(), zoom,
-								pendingRotation, rotation, movingTime, false,
-								() -> movingToMyLocation = false);
-					} else {
-						if (zoom != null && zoom.first != null && zoom.second != null) {
-							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, null, false);
-						}
-						if (rotation != null) {
-							mapView.setRotate(rotation, false);
-						}
-						mapView.setLatLon(location.getLatitude(), location.getLongitude());
-					}
-				}
 			} else if (location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null &&
 						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
@@ -383,7 +334,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// decrease a bit
 					zdelta += 1;
 				}
-				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
+				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoomFromSpeed);
 				boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
 				if ((now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM && !isUserZoomed)
@@ -401,6 +352,75 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		}
 		return null;
+	}
+
+//	@Nullable
+//	private Pair<Integer, Double> calculateAutoZoom(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox, @NonNull Location location) {
+//		if (!shouldAutoZoom(location)) {
+//			return null;
+//		}
+//
+//		LatLon target = tileBox.getLatLonFromPixel(tileBox.getCenterPixelX(), tileBox.getPixHeight() / 3f);
+//
+//		NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
+//		app.getRoutingHelper().getNextRouteDirectionInfo(nextDirectionInfo, true);
+//		if (nextDirectionInfo.distanceTo > 0 && nextDirectionInfo.directionInfo != null) {
+//			Location turnLocation = app.getRoutingHelper().getLocationFromRouteDirection(nextDirectionInfo.directionInfo);
+//
+//			if (turnLocation != null) {
+//				PointI point31 = NativeUtilities.getPoint31FromLatLon(turnLocation.getLatitude(), turnLocation.getLongitude());
+//				if (mapRenderer.isPositionVisible(point31)) {
+//					double distanceToTurnLocation = MapUtils.getDistance(turnLocation.getLatitude(), turnLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+//					double distanceToTarget = MapUtils.getDistance(target, location.getLatitude(), location.getLongitude());
+//					if (distanceToTurnLocation <= distanceToTarget) {
+//
+//					}
+//				}
+//			}
+//		}
+//
+//		AutoZoomMap autoZoomScale = settings.AUTO_ZOOM_MAP_SCALE.get();
+//
+//		int currentIntZoom = tileBox.getZoom();
+//		float currentZoomFloatPart = (float) tileBox.getZoomFloatPart();
+//
+//		RotatedTileBox intZoomTileBox = tileBox.copy();
+//		intZoomTileBox.setZoomAndAnimation(currentIntZoom, 0, 0);
+//
+//
+//		float currentMetersToTarget = (float) MapUtils.getDistance(focusLocation, location.getLatitude(), location.getLongitude());
+//		float requiredMetersToTarget = location.getSpeed() * 40 / autoZoomScale.coefficient;
+//		float zoomDelta = (float) (Math.log(currentMetersToTarget / requiredMetersToTarget) / Math.log(2)) - currentZoomFloatPart;
+//
+//		int minZoom = mapView.getMinZoom();
+//		int maxZoom = Math.min(mapView.getMaxZoom(), Math.round(autoZoomScale.maxZoom)); // todo float zoom
+//		Zoom zoom = new Zoom(currentIntZoom, currentZoomFloatPart, minZoom, maxZoom);
+//		zoom.calculateAnimatedZoom(currentIntZoom, zoomDelta);
+//
+//		if (Math.abs(zoomDelta) < 0.5f) {
+//			return null;
+//		}
+//
+//		Log.v("M_MapViewTrackingUtilities", "--------------");
+//		Log.v("M_MapViewTrackingUtilities", "Current dist: " + currentMetersToTarget);
+//		Log.v("M_MapViewTrackingUtilities", "Expected dist: " + requiredMetersToTarget);
+//		Log.v("M_MapViewTrackingUtilities", "Current zoom: " + currentIntZoom + currentZoomFloatPart);
+//		Log.v("M_MapViewTrackingUtilities", "Expected zoom: " + zoom.getZoom());
+//		Log.v("M_MapViewTrackingUtilities", "Zoom delta: " + (zoom.getZoom() - currentIntZoom - currentZoomFloatPart));
+//		return new Pair<>(zoom.getBaseZoom(), (double) (zoom.getZoomFloatPart() + zoom.getZoomAnimation()));
+//	}
+
+	private boolean shouldAutoZoom(@NonNull Location location) {
+		if (!location.hasSpeed() || location.getSpeed() < 7 / 3.6f) {
+			return false;
+		}
+
+		boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
+		long now = System.currentTimeMillis();
+		int autoZoomAfterUserThreshold = Math.max(settings.AUTO_FOLLOW_ROUTE.get(), AUTO_ZOOM_DEFAULT_CHANGE_ZOOM);
+		boolean zoomAfterUserZoom = isUserZoomed && now - lastTimeManualZooming > autoZoomAfterUserThreshold;
+		boolean zoomAfterAutoZoom = !isUserZoomed && now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM;
+		return zoomAfterUserZoom || zoomAfterAutoZoom;
 	}
 
 	public void backToLocationImpl() {
@@ -490,6 +510,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		} else {
 			updateSettings();
 		}
+	}
+
+	public void setIsMovingToMyLocation(boolean movingToMyLocation) {
+		this.movingToMyLocation = movingToMyLocation;
 	}
 
 	public boolean isMovingToMyLocation() {

@@ -8,14 +8,14 @@ public class Zoom {
 	private float zoomFloatPart;
 	private float zoomAnimation;
 
-	private final int minZoom;
-	private final int maxZoom;
+	private final int minZoomBase;
+	private final int maxZoomBase;
 
-	public Zoom(int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
+	public Zoom(int baseZoom, float zoomFloatPart, int minZoomBase, int maxZoomBase) {
 		this.baseZoom = baseZoom;
 		this.zoomFloatPart = zoomFloatPart;
-		this.minZoom = minZoom;
-		this.maxZoom = maxZoom;
+		this.minZoomBase = minZoomBase;
+		this.maxZoomBase = maxZoomBase;
 	}
 
 	public int getBaseZoom() {
@@ -31,11 +31,11 @@ public class Zoom {
 	}
 
 	public boolean isZoomInAllowed() {
-		return baseZoom < maxZoom || baseZoom == maxZoom && zoomFloatPart < 0;
+		return baseZoom < maxZoomBase || baseZoom == maxZoomBase && zoomFloatPart < 0;
 	}
 
 	public boolean isZoomOutAllowed() {
-		return baseZoom > minZoom || baseZoom == minZoom && zoomFloatPart > 0;
+		return baseZoom > minZoomBase || baseZoom == minZoomBase && zoomFloatPart > 0;
 	}
 
 	public void zoomIn() {
@@ -51,58 +51,82 @@ public class Zoom {
 		checkZoomBounds();
 	}
 
-	public void calculateAnimatedZoom(int currentBaseZoom, float deltaZoom) {
-		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
-			deltaZoom--;
+	public void applyZoomDelta(float delta) {
+		float normalizedDelta = normalizeZoomDelta(baseZoom, delta);
+		zoomFloatPart += normalizedDelta;
+	}
+
+	public void calculateAnimatedZoom(int currentZoomBase, float zoomDelta) {
+		zoomAnimation = normalizeZoomDelta(currentZoomBase, zoomDelta);
+	}
+
+	private float normalizeZoomDelta(int currentZoomBase, float zoomDelta) {
+		while (zoomFloatPart + zoomDelta >= 0.5 && baseZoom + 1 <= maxZoomBase) {
+			zoomDelta--;
 			baseZoom++;
 		}
-		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
-			deltaZoom++;
+		while (zoomFloatPart + zoomDelta < -0.5 && baseZoom - 1 >= minZoomBase) {
+			zoomDelta++;
 			baseZoom--;
 		}
 
 		// Extend zoom float part from [-0.5 ... +0.5) to [-0.6 ... +0.6)
 		// Example: previous zoom was 15 + 0.3f. With deltaZoom = 0.25f,
 		// zoom will become 15 + 0.55f, not 16 - 0.45f
-		if (baseZoom + 1 == currentBaseZoom && zoomFloatPart + deltaZoom >= 0.4f) {
+		if (baseZoom + 1 == currentZoomBase && zoomFloatPart + zoomDelta >= 0.4f) {
 			baseZoom++;
-			float invertedZoomFloatPart = (zoomFloatPart + deltaZoom) - 1.0f;
-			deltaZoom = invertedZoomFloatPart - zoomFloatPart;
-		} else if (baseZoom - 1 == currentBaseZoom && zoomFloatPart + deltaZoom < -0.4f) {
+			float invertedZoomFloatPart = (zoomFloatPart + zoomDelta) - 1.0f;
+			zoomDelta = invertedZoomFloatPart - zoomFloatPart;
+		} else if (baseZoom - 1 == currentZoomBase && zoomFloatPart + zoomDelta < -0.4f) {
 			baseZoom--;
-			float invertedZoomFloatPart = 1.0f + (zoomFloatPart + deltaZoom);
-			deltaZoom = invertedZoomFloatPart - zoomFloatPart;
+			float invertedZoomFloatPart = 1.0f + (zoomFloatPart + zoomDelta);
+			zoomDelta = invertedZoomFloatPart - zoomFloatPart;
 		}
 
-		boolean zoomInOverflow = baseZoom == maxZoom && zoomFloatPart + deltaZoom > 0;
-		boolean zoomOutOverflow = baseZoom == minZoom && zoomFloatPart + deltaZoom < 0;
+		boolean zoomInOverflow = baseZoom == maxZoomBase && zoomFloatPart + zoomDelta > 0;
+		boolean zoomOutOverflow = baseZoom == minZoomBase && zoomFloatPart + zoomDelta < 0;
 		if (zoomInOverflow || zoomOutOverflow) {
-			deltaZoom = -zoomFloatPart;
+			zoomDelta = -zoomFloatPart;
 		}
 
-		zoomAnimation = deltaZoom;
+		return zoomDelta;
 	}
 
 	private void checkZoomBounds() {
-		if (baseZoom == maxZoom) {
+		if (baseZoom == maxZoomBase) {
 			zoomFloatPart = Math.min(0, zoomFloatPart);
-		} else if (baseZoom > maxZoom) {
-			baseZoom = maxZoom;
+		} else if (baseZoom > maxZoomBase) {
+			baseZoom = maxZoomBase;
 			zoomFloatPart = 0;
 		}
 
-		if (baseZoom == minZoom) {
+		if (baseZoom == minZoomBase) {
 			zoomFloatPart = Math.max(0, zoomFloatPart);
-		} else if (baseZoom < minZoom) {
-			baseZoom = minZoom;
+		} else if (baseZoom < minZoomBase) {
+			baseZoom = minZoomBase;
 			zoomFloatPart = 0;
 		}
 	}
 
 	@NonNull
-	public static Zoom checkZoomBounds(int baseZoom, float zoomFloatPart, int minZoom, int maxZoom) {
-		Zoom zoom = new Zoom(baseZoom, zoomFloatPart, minZoom, maxZoom);
+	public static Zoom checkZoomBounds(int baseZoom, float zoomFloatPart, int minZoomBase, int maxZoomBase) {
+		Zoom zoom = new Zoom(baseZoom, zoomFloatPart, minZoomBase, maxZoomBase);
 		zoom.checkZoomBounds();
 		return zoom;
+	}
+
+	public static class ComplexZoom {
+
+		public final int base;
+		public final float floatPart;
+
+		public ComplexZoom(int base, float floatPart) {
+			this.base = base;
+			this.floatPart = floatPart;
+		}
+
+		boolean equals(int base, float floatPart) {
+			return this.base == base && this.floatPart == floatPart;
+		}
 	}
 }

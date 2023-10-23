@@ -7,12 +7,15 @@ import static net.osmand.plus.views.AnimateMapMarkersThread.ROTATE_ANIMATION_TIM
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -529,6 +532,19 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		updateParams(view.getSettings().getApplicationMode(), nightMode, locationProvider.getLastKnownLocation() == null);
 	}
 
+	private final Paint targetPaint = new Paint();
+	private final Paint centerPaint = new Paint();
+	private final Path path = new Path();
+	{
+		targetPaint.setColor(Color.argb(100, 255, 0, 0));
+		targetPaint.setStrokeWidth(getMapDensity() * 5);
+		targetPaint.setStyle(Style.STROKE);
+
+		centerPaint.setColor(Color.argb(50, 0, 0, 0));
+		centerPaint.setStrokeWidth(getMapDensity() * 5);
+		centerPaint.setStyle(Style.STROKE);
+	}
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
@@ -538,6 +554,29 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		if (!hasMapRenderer()) {
 			drawMarkers(canvas, tileBox, lastKnownLocation);
 		}
+
+		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+
+		float pointX = tileBox.getCenterPixelX();
+		float pointY = tileBox.getPixHeight() / 3f;
+		float lineLength = getMapDensity() * 40;
+
+		path.reset();
+		path.moveTo(pointX - lineLength / 2, pointY);
+		path.lineTo(pointX + lineLength / 2, pointY);
+		path.moveTo(pointX, pointY - lineLength / 2);
+		path.lineTo(pointX, pointY + lineLength / 2);
+
+		canvas.drawPath(path, targetPaint);
+
+		path.reset();
+		path.moveTo(0, tileBox.getPixHeight() / 2f);
+		path.lineTo(tileBox.getPixWidth(), tileBox.getPixHeight() / 2f);
+		path.moveTo(tileBox.getPixWidth() / 2f, 0);
+		path.lineTo(tileBox.getPixWidth() / 2f, tileBox.getPixHeight());
+		canvas.drawPath(path, centerPaint);
+
+		canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 	}
 
 	@Override

@@ -284,7 +284,7 @@ public class OsmAndLocationSimulation {
 							meters = (float) result.get(1);
 						}
 						float speed = meters / intervalTime * coeff;
-						if (intervalTime != 0 && speedSimulation) {
+						if (intervalTime != 0) {
 							current.setSpeed(speed);
 						}
 						if ((!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) ||

@@ -1396,6 +1396,10 @@ public class OsmandSettings {
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
+	public final CommonPreference<Boolean> AUTO_TILT_MAP = new BooleanPreference(this, "auto_tilt_map", true).makeProfile().cache();
+	public final CommonPreference<Boolean> AUTO_ZOOM_MAP_TO_FOCUS = new BooleanPreference(this, "auto_zoom_map_to_focus", true).makeProfile().cache();
+	public final CommonPreference<Boolean> AUTO_ROTATE_MAP_TO_FOCUS = new BooleanPreference(this, "auto_rotate_map_to_focus", false).makeProfile().cache();
+
 	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP_SCALE =
 			new EnumStringPreference<AutoZoomMap>(this, "auto_zoom_map_scale", AutoZoomMap.FAR,
 					AutoZoomMap.values()).makeProfile().cache();

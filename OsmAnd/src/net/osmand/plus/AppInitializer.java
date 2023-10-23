@@ -37,6 +37,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.MyLocationAnimation;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
@@ -350,6 +351,7 @@ public class AppInitializer implements IProgress {
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
+		app.myLocationAnimation = startupInit(new MyLocationAnimation(app), MyLocationAnimation.class);
 
 		app.travelHelper = startupInit(new TravelObfHelper(app), TravelHelper.class);
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
