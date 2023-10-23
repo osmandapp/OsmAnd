@@ -473,7 +473,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void showChangeAppearanceDialog(@NonNull SmartFolder folder) {
+	public void showEditFiltersDialog(@NonNull SmartFolder folder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);

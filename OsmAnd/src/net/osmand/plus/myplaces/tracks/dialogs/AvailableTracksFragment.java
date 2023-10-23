@@ -28,6 +28,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
@@ -515,11 +516,15 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void showChangeAppearanceDialog(@NonNull SmartFolder folder) {
-		selectionHelper.setAllItems(folder.getTrackItems());
-		selectionHelper.setSelectedItems(folder.getTrackItems());
-		selectionHelper.setOriginalSelectedItems(folder.getTrackItems());
-		super.showChangeAppearanceDialog(folder);
+	public void showEditFiltersDialog(@NonNull SmartFolder folder) {
+		FragmentManager manager = getFragmentManager();
+		ArrayList<TrackItem> trackItems = new ArrayList<>();
+		trackItems.addAll(smartFolderHelper.getAllAvailableTrackItems());
+		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
+		filter.initSelectedFilters(folder.getFilters());
+		if (manager != null) {
+			TracksFilterFragment.Companion.showInstance(app, manager, this, filter, null, folder, null);
+		}
 	}
 
 	@Override
