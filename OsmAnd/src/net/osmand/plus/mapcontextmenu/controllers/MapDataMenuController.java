@@ -80,7 +80,7 @@ public class MapDataMenuController extends MenuController {
 			otherIndexItems.remove(indexItem);
 		} else if (localItem != null) {
 			downloaded = true;
-			backuped = localItem.isBackuped();
+			backuped = localItem.isBackuped(app);
 			LocalIndexHelper helper = new LocalIndexHelper(app);
 			otherLocalItems = helper.getLocalItems(mapObject.getWorldRegion().getRegionDownloadName());
 			for (Iterator<LocalItem> iterator = otherLocalItems.iterator(); iterator.hasNext(); ) {
@@ -653,7 +653,7 @@ public class MapDataMenuController extends MenuController {
 		@NonNull
 		private File getFileToRestore(@NonNull LocalItem item) {
 			String fileName = item.getFileName();
-			if (item.isBackuped()) {
+			if (item.isBackuped(app)) {
 				File parent = new File(item.getPath()).getParentFile();
 				if (item.getType() == LocalItemType.MAP_DATA) {
 					parent = app.getAppPath(IndexConstants.MAPS_PATH);

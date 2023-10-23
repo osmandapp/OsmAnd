@@ -32,6 +32,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -45,7 +46,6 @@ public class LocalItem implements Comparable<LocalItem> {
 	private final String path;
 	private final String fileName;
 	private final long size;
-	private final boolean backuped;
 
 	@Nullable
 	private Object attachedObject;
@@ -58,7 +58,6 @@ public class LocalItem implements Comparable<LocalItem> {
 		this.fileName = file.getName();
 		this.path = file.getAbsolutePath();
 		this.size = file.length();
-		this.backuped = path.contains(BACKUP_INDEX_DIR);
 		this.lastModified = file.lastModified();
 	}
 
@@ -86,8 +85,9 @@ public class LocalItem implements Comparable<LocalItem> {
 		return size;
 	}
 
-	public boolean isBackuped() {
-		return backuped;
+	public boolean isBackuped(@NonNull OsmandApplication app) {
+		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
+		return path.startsWith(backupDir.getAbsolutePath());
 	}
 
 	@Nullable
@@ -171,7 +171,7 @@ public class LocalItem implements Comparable<LocalItem> {
 	}
 
 	public boolean isLoaded(@NonNull OsmandApplication app) {
-		return !isBackuped() && app.getResourceManager().getIndexFileNames().containsKey(fileName);
+		return !isBackuped(app) && app.getResourceManager().getIndexFileNames().containsKey(fileName);
 	}
 
 	public boolean isCorrupted() {

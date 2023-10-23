@@ -187,8 +187,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void recreateTopWidgetsPanel() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		topWidgetsPanel.update(drawSettings);
-		bottomWidgetsPanel.update(drawSettings);
+
+		if (topWidgetsPanel != null) {
+			topWidgetsPanel.update(drawSettings);
+		}
+		if (bottomWidgetsPanel != null) {
+			bottomWidgetsPanel.update(drawSettings);
+		}
 	}
 
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
@@ -318,7 +323,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark  :R.drawable.bs_side_widget_night;
+			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark : R.drawable.bs_side_widget_night;
 			ts.boxFree = R.drawable.btn_round_night;
 			ts.widgetDividerColorId = R.color.divider_color_dark;
 			ts.panelBorderColorId = R.color.icon_color_secondary_dark;

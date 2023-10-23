@@ -2151,7 +2151,7 @@ public class OsmandSettings {
 		}
 	}
 
-	private File getNoBackupPath() {
+	public File getNoBackupPath() {
 		return ctx.getNoBackupFilesDir();
 	}
 
