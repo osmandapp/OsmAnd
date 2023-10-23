@@ -7,6 +7,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -23,8 +24,8 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	private String cachedFormattedGlideRatio = null;
 
-	public GlideAverageWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, WidgetType.GLIDE_AVERAGE);
+	public GlideAverageWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, WidgetType.GLIDE_AVERAGE, customId, widgetsPanel);
 		averageGlideComputer = app.getAverageGlideComputer();
 		measuredIntervalPref = registerMeasuredIntervalPref(customId);
 		updateInfo(null);
@@ -40,7 +41,7 @@ public class GlideAverageWidget extends GlideBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		if (isTimeToUpdate()) {
 			long measuredInterval = measuredIntervalPref.get();
 			String ratio = averageGlideComputer.getFormattedAverageGlideRatio(measuredInterval);

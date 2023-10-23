@@ -4272,7 +4272,7 @@
     <string name="mapillary_widget_desc">提供快速访问Mapillary应用程序的小工具，以添加街道级影像。</string>
     <string name="routing_attr_avoid_4wd_only_name">避开四轮驱动道路</string>
     <string name="routing_attr_avoid_4wd_only_description">避开只适合四轮驱动车辆的道路</string>
-    <string name="bearing_secondary_desc">您可以更改显示数据的格式：%1$s – %2$s – %3$s。</string>
+    <string name="bearing_secondary_desc">您可以更改数据的格式：%1$s – %2$s – %3$s。</string>
     <string name="all_groups">所有组</string>
     <string name="no_widgets_here_yet">这里还没有小工具</string>
     <string name="available_widgets">可用的小部件</string>
@@ -4358,8 +4358,8 @@
     <string name="auto_25_chars_route_tr_kr">向右转并靠右</string>
     <string name="auto_25_chars_route_tu_kl">掉头并靠左</string>
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
-    <string name="auto_25_chars_route_roundabout_kl">从 %1$d 出口离开并靠左</string>
-    <string name="auto_25_chars_route_roundabout_kr">从 %1$d 出口离开并靠右</string>
+    <string name="auto_25_chars_route_roundabout_kl">从第%1$d 出口离开并靠左</string>
+    <string name="auto_25_chars_route_roundabout_kr">从第 %1$d 出口离开并靠右</string>
     <string name="attach_roads_descr">粗略计算您的轨迹，以便在各点之间确定路线，并关联精确的转弯指示和路线属性。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
@@ -4686,7 +4686,7 @@
     <string name="waypoint_appearance">路径点外观</string>
     <string name="predefined_waypoint_appearance_description">点击此操作将自动保存带有预定义参数的路径点。</string>
     <string name="rotate_map_manual_opt">手动旋转</string>
-    <string name="lang_de_casual"/>
+    <string name="lang_de_casual">德语（非正式）</string>
     <string name="routing_attr_allow_gate_name">允许使用大门</string>
     <string name="plan_route_change_route_type_after">在此之后更改路线类型</string>
     <string name="shared_string_redo">重做</string>
@@ -5407,4 +5407,36 @@
     <string name="live_monitoring_adress_descr">使用参数语法指定网页地址： lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="rendering_value_defaultMedium_name">默认（中等）</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路线（铁索攀岩）</string>
+    <string name="shared_string_cache">缓存</string>
+    <string name="widget_available_ram_desc">显示为 OsmAnd 分配的可用内存。</string>
+    <string name="delete_map">删除地图</string>
+    <string name="standard_maps">标准地图</string>
+    <string name="wikipedia_and_travel_maps">维基百科和旅游地图</string>
+    <string name="empty_name">空名称</string>
+    <string name="rendering_styles">渲染风格</string>
+    <string name="weather_online">在线天气</string>
+    <string name="shared_string_show_icon">显示图标</string>
+    <string name="widget_available_ram">可用 RAM</string>
+    <string name="terrain_maps">地形地图</string>
+    <string name="maps_and_resources">地图和资源</string>
+    <string name="smart_folder_saved">智能文件夹已保存</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="shared_string_created">已创建</string>
+    <string name="app_mode_paragliding">滑翔伞</string>
+    <string name="filter_by_name">按名称筛选</string>
+    <string name="shared_string_reset_all">重置全部</string>
+    <string name="add_smart_folder">添加智能文件夹</string>
+    <string name="sort_country_name_ascending">国家名称：A - Z</string>
+    <string name="app_mode_hang_gliding">悬挂式滑翔伞</string>
+    <string name="save_as_smart_folder">保存为智能文件夹</string>
+    <string name="shared_string_loading">README（请读我）：- 帮助翻译的最佳方法是通过https://hosted.weblate.org/engage/osmand/ - 如果您直接编辑strings.xml文件，请确保：1. 不要生成重复的字符串（通过名称检查字符串是否已经存在）2. 每个英文撇号（引号）前面都要加上反斜杠。3. 如果您修改了英语字符串文件，请将新字符串添加到文件的顶部，这样在发布之前的定期审查会更容易。- 有关措辞和连贯（一致）性，请参考https://docs.osmand.net/docs/technical/contributions/translating-osmand 谢谢 - Hardy</string>
+    <string name="filter_screen_title">筛选</string>
+    <string name="help_article_purchases_android_name">安卓购买</string>
+    <string name="osmand_cloud_delete_account_confirmation">删除账号？</string>
+    <string name="help_article_purchases_ios_name">iOS购买</string>
+    <string name="sort_country_name_descending">国家名称：Z - A</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="date_of_creation">创建日期</string>
+    <string name="map_is_up_to_date">%1$s 地图已为最新版本。</string>
+    <string name="delete_map_description">您确定要删除 %1$s 地图吗？</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackTab {
+	public static final String SMART_FOLDER_TAB_NAME_PREFIX = "SMART_FOLDER___";
 
 	public final TrackTabType type;
 	public final List<Object> items = new ArrayList<>();
@@ -20,16 +22,29 @@ public class TrackTab {
 	@Nullable
 	public final File directory;
 
+	@Nullable
+	private final String name;
+	private String typeName = null;
+
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 
 	public TrackTab(@NonNull File directory) {
 		this.directory = directory;
+		this.name = null;
 		this.type = TrackTabType.FOLDER;
 	}
 
 	public TrackTab(@NonNull TrackTabType type) {
 		this.directory = null;
+		this.name = null;
 		this.type = type;
+	}
+
+	public TrackTab(@NonNull SmartFolder smartFolder) {
+		this.directory = null;
+		this.name = smartFolder.getFolderName();
+		this.type = TrackTabType.SMART_FOLDER;
+		typeName = SMART_FOLDER_TAB_NAME_PREFIX + name;
 	}
 
 	@NonNull
@@ -49,15 +64,22 @@ public class TrackTab {
 		if (directory != null) {
 			return GpxUiHelper.getFolderName(context, directory, includeParentDir);
 		}
+		if (name != null) {
+			return name;
+		}
 		return "";
 	}
 
 	@NonNull
 	public String getTypeName() {
-		if (type != TrackTabType.FOLDER) {
-			return type.name();
+		switch (type) {
+			case FOLDER:
+				return directory != null ? directory.getName() : "";
+			case SMART_FOLDER:
+				return typeName != null ? typeName : "";
+			default:
+				return type.name();
 		}
-		return directory != null ? directory.getName() : "";
 	}
 
 	@NonNull

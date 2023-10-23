@@ -98,6 +98,7 @@
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
 	<dimen name="big_icon_size">36dp</dimen>
+	<dimen name="small_icon_size">16dp</dimen>
 	<dimen name="icon_size_double">48dp</dimen>
 	<dimen name="icon_background_size">56dp</dimen>
 	<dimen name="poi_icon_size">16dp</dimen>
@@ -109,6 +110,10 @@
 	<dimen name="chart_marker_horizontal_padding">6dp</dimen>
 	<dimen name="chart_marker_vertical_padding">2dp</dimen>
 	<dimen name="track_image_height">96dp</dimen>
+
+	<dimen name="simple_widget_small_height">48dp</dimen>
+	<dimen name="simple_widget_medium_height">72dp</dimen>
+	<dimen name="simple_widget_large_height">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
@@ -152,7 +157,6 @@
 	<dimen name="map_button_stroke">1dp</dimen>
 	<dimen name="map_button_stroke_dark">1dp</dimen>
 	<dimen name="map_route_planning_land_width">320dp</dimen>
-	<dimen name="map_route_planning_land_width_minus_shadow">306dp</dimen>
 	<dimen name="map_route_planning_max_height">330dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
 	<dimen name="map_widget_text_size">23sp</dimen>
@@ -167,6 +171,7 @@
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
 	<dimen name="bottom_sheet_title_big">20sp</dimen>
+	<dimen name="simple_widget_description_text_size">11sp</dimen>
 
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
@@ -232,6 +237,10 @@
 	<dimen name="key_event_keycode_label_size">39sp</dimen>
 	<dimen name="key_event_cursor_width">4dp</dimen> <!--2dp-->
 	<dimen name="key_event_cursor_corners_radius">4dp</dimen> <!--4dp-->
+
+	<dimen name="simple_widget_value_small_size">24sp</dimen>
+	<dimen name="simple_widget_value_medium_size">36sp</dimen>
+	<dimen name="simple_widget_value_large_size">60sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>

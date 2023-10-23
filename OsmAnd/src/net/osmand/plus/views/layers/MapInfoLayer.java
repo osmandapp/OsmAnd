@@ -18,6 +18,7 @@ import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -203,7 +204,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			RulerWidget rulerWidget = new RulerWidget(mapActivity.getMyApplication(), mapRulerView);
 			rulerWidget.setVisibility(false);
 
-			TextState ts = calculateTextState();
+			TextState ts = calculateTextState(false);
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
@@ -224,7 +225,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
 			sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
-			panel.updateColors(calculateTextState());
+			panel.updateColors(calculateTextState(false));
 		}
 	}
 
@@ -243,6 +244,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		public boolean night;
 		public int textColor;
 		public int textShadowColor;
+		public int secondaryTextColor;
 		public int boxTop;
 		public int widgetBackgroundId;
 		public int boxFree;
@@ -262,22 +264,26 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
-			TextState state = calculateTextState();
-			for (MapWidgetInfo widgetInfo : widgetRegistry.getAllWidgets()) {
-				widgetInfo.widget.updateColors(state);
+			TextState verticalWidgetsState = calculateTextState(true);
+			TextState sideWidgetsState = calculateTextState(false);
+			for (MapWidgetInfo widgetInfo : widgetRegistry.getSideWidgets()) {
+				widgetInfo.widget.updateColors(sideWidgetsState);
+			}
+			for (MapWidgetInfo widgetInfo : widgetRegistry.getVerticalWidgets()) {
+				widgetInfo.widget.updateColors(verticalWidgetsState);
 			}
 			updateTopToolbar(nightMode);
-			leftWidgetsPanel.updateColors(state);
-			rightWidgetsPanel.updateColors(state);
+			leftWidgetsPanel.updateColors(sideWidgetsState);
+			rightWidgetsPanel.updateColors(sideWidgetsState);
 
 			topWidgetsContainer.invalidate();
 			bottomWidgetsContainer.invalidate();
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
+				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
-				panel.updateColors(state);
+				panel.updateColors(sideWidgetsState);
 			}
 			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
@@ -288,15 +294,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	@NonNull
-	private TextState calculateTextState() {
+	private TextState calculateTextState(boolean verticalWidget) {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();
 		ts.textBold = following;
 		ts.night = nightMode;
-		ts.textColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_night) :
-				ContextCompat.getColor(getContext(), R.color.widgettext_day);
+		if (verticalWidget) {
+			ts.textColor = ColorUtilities.getPrimaryTextColor(getContext(), nightMode);
+		} else {
+			ts.textColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_night) :
+					ContextCompat.getColor(getContext(), R.color.widgettext_day);
+		}
+		ts.secondaryTextColor = ColorUtilities.getSecondaryTextColor(getContext(), nightMode);
+
 		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
 		ts.textShadowColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_shadow_night) :
 				ContextCompat.getColor(getContext(), R.color.widgettext_shadow_day);
@@ -313,7 +325,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = R.drawable.bs_side_widget_night;
+			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark  :R.drawable.bs_side_widget_night;
 			ts.boxFree = R.drawable.btn_round_night;
 			ts.widgetDividerColorId = R.color.divider_color_dark;
 			ts.panelBorderColorId = R.color.icon_color_secondary_dark;
@@ -321,7 +333,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.boxTop = R.drawable.btn_flat;
 			ts.widgetBackgroundId = R.drawable.bg_side_widget_day;
 			ts.boxFree = R.drawable.btn_round;
-			ts.widgetDividerColorId = R.color.divider_color_light;
+			ts.widgetDividerColorId = verticalWidget ? R.color.widget_background_color_light : R.color.divider_color_light;
 			ts.panelBorderColorId = R.color.stroked_buttons_and_links_outline_light;
 		}
 		return ts;

@@ -336,9 +336,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	}
 
 	private void enableLiveUpdates(boolean enable) {
-		if (!Algorithms.isEmpty(adapter.mapsList)) {
+		if (!Algorithms.isEmpty(adapter.localItems)) {
 			AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-			List<LocalItem> mapsToUpdate = getMapsToUpdate(adapter.mapsList, settings);
+			List<LocalItem> mapsToUpdate = getMapsToUpdate(adapter.localItems, settings);
 			for (LocalItem item : mapsToUpdate) {
 				String fileName = getFileNameWithoutRoadSuffix(item);
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
@@ -384,19 +384,18 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	}
 
 	protected class LiveMapsAdapter extends OsmandBaseExpandableListAdapter implements LocalIndexInfoAdapter {
-		private final ArrayList<LocalItem> mapsList = new ArrayList<>();
-
+		private final List<LocalItem> localItems = new ArrayList<>();
 
 		@Override
 		public void addData(@NonNull List<LocalItem> indexes) {
-			if (LocalItemUtils.addUnique(mapsList, indexes)) {
+			if (LocalItemUtils.addUnique(localItems, indexes)) {
 				notifyDataSetChanged();
 			}
 		}
 
 		@Override
 		public void clearData() {
-			mapsList.clear();
+			localItems.clear();
 			notifyDataSetChanged();
 		}
 
@@ -406,7 +405,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 
 		public void sort() {
-			Collections.sort(mapsList, (o1, o2) -> {
+			Collections.sort(localItems, (o1, o2) -> {
 				CommonPreference<Boolean> preference1 = preferenceForLocalIndex(getFileNameWithoutRoadSuffix(o1), settings);
 				CommonPreference<Boolean> preference2 = preferenceForLocalIndex(getFileNameWithoutRoadSuffix(o2), settings);
 				int prefSort = preference2.get().compareTo(preference1.get());
@@ -420,7 +419,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		@Override
 		public LocalItem getChild(int groupPosition, int childPosition) {
-			return mapsList.get(childPosition);
+			return localItems.get(childPosition);
 		}
 
 		@Override
@@ -467,7 +466,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			return mapsList.size();
+			return localItems.size();
 		}
 
 		@Override
@@ -622,7 +621,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	@Override
 	public List<LocalItem> getMapsToUpdate() {
-		return getMapsToUpdate(adapter.mapsList, settings);
+		return getMapsToUpdate(adapter.localItems, settings);
 	}
 
 	@Override

@@ -144,6 +144,7 @@ public class AnimateDraggingMapThread {
 			} else {
 				renderer.resetMapTarget();
 			}
+			tileView.setCurrentZoom();
 		}
 	}
 

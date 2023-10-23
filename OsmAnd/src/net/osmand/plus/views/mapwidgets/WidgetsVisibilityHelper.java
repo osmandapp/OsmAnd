@@ -25,7 +25,7 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
+import java.util.Collections;
 import java.util.Set;
 
 public class WidgetsVisibilityHelper {
@@ -90,7 +90,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInConfigureMapOptionMode();
 	}
 
-	public boolean shouldHideMapMarkersWidget() {
+	public boolean shouldHideTopWidgets() {
 		return isMapRouteInfoMenuVisible()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
@@ -103,13 +103,16 @@ public class WidgetsVisibilityHelper {
 				|| isInConfigureMapOptionMode();
 	}
 
+	public boolean shouldHideMapMarkersWidget() {
+		return shouldHideTopWidgets();
+	}
+
 	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
 		OsmandApplication app = activity.getMyApplication();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		List<WidgetsPanel> panels = panel.getMergedPanels();
 
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, panels);
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (Algorithms.containsAny(widgetInfo.key, widgetsIds)) {
@@ -138,11 +141,9 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowZoomButtons() {
 		boolean additionalDialogsHide = !isInGpxApproximationMode()
-				&& !isInTrackAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode()
 				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
@@ -182,13 +183,11 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowBackToLocationButton() {
-		boolean additionalDialogsHide = !isInTrackAppearanceMode()
-				&& !isInGpxApproximationMode()
+		boolean additionalDialogsHide = !isInGpxApproximationMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
-				&& !isInGpsFilteringMode()
 				&& !isSelectingTilesZone();
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
@@ -358,13 +357,29 @@ public class WidgetsVisibilityHelper {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
+	public void hideWidgets() {
+		updateWidgetsVisibility(false);
+	}
+
+	public void showWidgets() {
+		updateWidgetsVisibility(true);
+	}
+
 	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
-		int topControlsVisibility = topControlsVisible ? View.VISIBLE : View.GONE;
-		AndroidUiHelper.setVisibility(mapActivity, topControlsVisibility,
+		updateWidgetsVisibility(topControlsVisible);
+		updateBottomControlsVisibility(bottomControlsVisible);
+	}
+
+	public void updateWidgetsVisibility(boolean visible) {
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		AndroidUiHelper.setVisibility(mapActivity, visibility,
 				R.id.map_center_info,
 				R.id.map_left_widgets_panel,
 				R.id.map_right_widgets_panel);
-		int bottomControlsVisibility = bottomControlsVisible ? View.VISIBLE : View.GONE;
+	}
+
+	public void updateBottomControlsVisibility(boolean visible) {
+		int bottomControlsVisibility = visible ? View.VISIBLE : View.GONE;
 		AndroidUiHelper.setVisibility(mapActivity, bottomControlsVisibility,
 				R.id.bottom_controls_container);
 	}

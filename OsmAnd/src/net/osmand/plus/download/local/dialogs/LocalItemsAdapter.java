@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -22,23 +21,22 @@ import java.util.List;
 
 public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-	private static final int LIST_ITEM_TYPE = 0;
+	protected static final int LIST_ITEM_TYPE = 0;
 	private static final int LIST_HEADER_TYPE = 1;
 	private static final int MEMORY_USAGE_TYPE = 2;
 
 
 	private final List<Object> items = new ArrayList<>();
 
-	private final LayoutInflater themedInflater;
-	@Nullable
 	private final LocalItemListener listener;
+	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 	private boolean selectionMode;
 
-	public LocalItemsAdapter(@NonNull Context context, @Nullable LocalItemListener listener, boolean nightMode) {
-		themedInflater = UiUtilities.getInflater(context, nightMode);
+	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
 		this.listener = listener;
 		this.nightMode = nightMode;
+		themedInflater = UiUtilities.getInflater(context, nightMode);
 	}
 
 	public void setItems(@NonNull List<Object> items) {
@@ -123,10 +121,20 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public interface LocalItemListener {
 
-		boolean isItemSelected(@NonNull LocalItem item);
+		default boolean isItemSelected(@NonNull LocalItem item) {
+			return false;
+		}
 
-		void onItemSelected(@NonNull LocalItem item);
+		default boolean itemUpdateAvailable(@NonNull LocalItem item) {
+			return false;
+		}
 
-		void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view);
+		default void onItemSelected(@NonNull LocalItem item) {
+
+		}
+
+		default void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
+
+		}
 	}
 }

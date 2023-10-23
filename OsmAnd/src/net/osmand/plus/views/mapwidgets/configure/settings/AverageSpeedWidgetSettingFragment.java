@@ -16,7 +16,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 
-public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragment {
+public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_COUNT_STOPS = "count_stops";
@@ -57,6 +57,8 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 
 		setupIntervalSliderCard();
 		setupSkipStopsSetting();
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	private void setupIntervalSliderCard() {

@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
@@ -42,7 +43,6 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -64,6 +64,7 @@ import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -80,19 +81,22 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
-		TrackSelectionListener, SortTracksListener, EmptyTracksListener {
+		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
 	public static final String OPEN_TRACKS_TAB = "open_tracks_tab";
+	public static final String IS_SMART_FOLDER = "is_smart_folder";
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
+	private GpxSelectionHelper gpxSelectionHelper;
 	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -108,6 +112,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Nullable
 	private String preselectedTabName;
 	private int tabSize;
+	private boolean isPreselectedSmartFolder;
 
 	@NonNull
 	public SelectedTracksHelper getSelectedTracksHelper() {
@@ -131,6 +136,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
+		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = selectedTracksHelper.getItemsSelectionHelper();
 	}
 
@@ -272,11 +278,17 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	}
 
-	private void setTabs(List<TrackTab> tabs) {
+	private void setTabs(@NonNull List<TrackTab> tabs) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(0);
+		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				updateButtonsState();
+			}
+		});
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
@@ -292,26 +304,45 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		});
 
 		selectionButton = view.findViewById(R.id.selection_button);
-		selectionButton.setOnClickListener(v -> {
-			Set<TrackItem> selectedTracks = itemsSelectionHelper.getSelectedItems();
-			if (Algorithms.isEmpty(selectedTracks)) {
-				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
-			} else {
-				onTrackItemsSelected(selectedTracks, false);
-			}
-		});
+		selectionButton.setOnClickListener(getSelectionButtonClickListener());
 		updateButtonsState();
 	}
 
 	private void updateButtonsState() {
-		boolean anySelected = itemsSelectionHelper.hasSelectedItems();
-		selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
+		TrackTab trackTab = getSelectedTab();
+		if (trackTab != null) {
+			if (TrackTabType.ON_MAP == trackTab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
+				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
+				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
+				selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
+			} else {
+				boolean notAllSelected = !itemsSelectionHelper.isItemsSelected(trackTab.getTrackItems());
+				selectionButton.setTitleId(notAllSelected ? R.string.shared_string_select_all : R.string.shared_string_deselect_all);
+				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
+			}
+			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
+			TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
+		}
+	}
 
-		applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-		selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
-
-		TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
-		searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
+	@NonNull
+	private View.OnClickListener getSelectionButtonClickListener() {
+		return v -> {
+			TrackTab tab = getSelectedTab();
+			if (tab != null) {
+				if (TrackTabType.ON_MAP == tab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
+					Set<TrackItem> selectedItems = itemsSelectionHelper.getSelectedItems();
+					boolean hasSelectedItems = !Algorithms.isEmpty(selectedItems);
+					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : selectedTracksHelper.getRecentlyVisibleTracks();
+					onTrackItemsSelected(selectTracks, !hasSelectedItems);
+				} else {
+					Set<TrackItem> trackItems = new HashSet<>(tab.getTrackItems());
+					boolean itemsSelected = itemsSelectionHelper.isItemsSelected(trackItems);
+					onTrackItemsSelected(trackItems, !itemsSelected);
+				}
+			}
+		};
 	}
 
 	@NonNull
@@ -371,6 +402,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (asyncLoader == null) {
 			reloadTracks();
 		}
+		gpxSelectionHelper.addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		gpxSelectionHelper.removeListener(this);
 	}
 
 	private void reloadTracks() {
@@ -385,15 +423,28 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
+	public void tracksLoaded(@NonNull TrackFolder folder) {
+		selectedTracksHelper.updateTrackItems(folder.getFlattenedTrackItems());
+	}
+
+	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		AndroidUiHelper.updateVisibility(progressBar, false);
-		selectedTracksHelper.updateTrackItems(folder.getFlattenedTrackItems());
 		updateTrackTabs();
 		updateTabsContent();
 		updateButtonsState();
-
 		if (!Algorithms.isEmpty(preselectedTabName)) {
-			setSelectedTab(preselectedTabName);
+			if (isPreselectedSmartFolder) {
+				for (TrackTab tab : getTrackTabs()) {
+					if (tab.type == TrackTabType.SMART_FOLDER &&
+							tab.getName(app, false).equals(preselectedTabName)) {
+						setSelectedTab(tab.getTypeName());
+						break;
+					}
+				}
+			} else {
+				setSelectedTab(preselectedTabName);
+			}
 			preselectedTabName = "";
 		}
 	}
@@ -405,17 +456,15 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void saveChanges() {
 		selectedTracksHelper.saveTabsSortModes();
 		selectedTracksHelper.saveTracksVisibility();
-		selectedTracksHelper.updateTracksOnMap();
+	}
 
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
-			DashboardOnMap dashboard = mapActivity.getDashboard();
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
-		}
+	@Override
+	public void onGpxSelectionFinished() {
+		selectedTracksHelper.processVisibleTracks();
+		selectedTracksHelper.processRecentlyVisibleTracks();
+		selectedTracksHelper.updateTracksOnMap();
 		app.getOsmandMap().getMapView().refreshMap();
+		updateTabsContent();
 	}
 
 	@Override
@@ -488,6 +537,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(item);
 		selectedTracksHelper.addTrackItem(item);
 		updateTrackTabs();
 		setSelectedTab("import");
@@ -678,13 +728,14 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		showInstance(manager, null);
+		showInstance(manager, null, false);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable String preselectedTabName) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable String preselectedTabName, boolean isPreselectedSmartFolder) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksFragment fragment = new TracksFragment();
 			fragment.preselectedTabName = preselectedTabName;
+			fragment.isPreselectedSmartFolder = isPreselectedSmartFolder;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

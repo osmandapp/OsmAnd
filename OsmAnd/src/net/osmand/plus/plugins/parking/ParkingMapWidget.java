@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.parking;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.PARKING;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,6 +14,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 /**
@@ -19,22 +23,27 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
  * the current position on the map
  * and the location of the parked car
  */
-public class ParkingMapWidget extends TextInfoWidget {
+public class ParkingMapWidget extends SimpleWidget {
 
 	private final ParkingPositionPlugin plugin;
 
 	private final float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity) {
-		super(mapActivity, PARKING);
+	public ParkingMapWidget(@NonNull ParkingPositionPlugin plugin, @NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, PARKING, customId, widgetsPanel);
 		this.plugin = plugin;
 
 		setText(null, null);
 		setIcons(PARKING);
 		updateInfo(null);
 
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			OsmandMapTileView view = mapActivity.getMapView();
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 			LatLon parkingPoint = plugin.getParkingPosition();
@@ -42,11 +51,11 @@ public class ParkingMapWidget extends TextInfoWidget {
 				int fZoom = Math.max(view.getZoom(), 15);
 				thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
 			}
-		});
+		};
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		LatLon point = plugin.getParkingPosition();
 		if (point != null && !app.getRoutingHelper().isFollowingMode()) {
 			OsmandMapTileView view = mapActivity.getMapView();

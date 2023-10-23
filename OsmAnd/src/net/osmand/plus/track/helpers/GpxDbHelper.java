@@ -3,12 +3,14 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -18,6 +20,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -214,12 +217,28 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getItems();
 	}
 
-	public List<String> getNearestCityList() {
-		return database.getNearestCityList();
+	public List<Pair<String, Integer>> getNearestCityList() {
+		return database.getNearestCityCollection();
+	}
+
+	public List<Pair<String, Integer>> getTrackColorsList() {
+		return database.getTrackColorsCollection();
+	}
+
+	public List<Pair<String, Integer>> getTrackWidthList() {
+		return database.getTrackWidthCollection();
 	}
 
 	public long getTracksMinCreateDate() {
 		return database.getTracksMinCreateDate();
+	}
+
+	public double getTracksMaxDuration() {
+		return database.getTracksMaxDuration();
+	}
+
+	public List<Pair<String, Integer>> getTrackFolders() {
+		return database.getTrackFolders();
 	}
 
 	@Nullable
@@ -287,6 +306,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Override
 	public void onGpxDataItemRead(@NonNull GpxDataItem item) {
 		putToCache(item);
+		putGpxDataItemToSmartFolder(item);
+	}
+
+	private void putGpxDataItemToSmartFolder(@NonNull GpxDataItem item) {
+		TrackItem trackItem = new TrackItem(item.getFile());
+		trackItem.setDataItem(item);
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(trackItem);
 	}
 
 	@Override
@@ -325,7 +351,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
 				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreationTime() == -1
+				|| item.getFileCreationTime() <= 0
 				;
 	}
 

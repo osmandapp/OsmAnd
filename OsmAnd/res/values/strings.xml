@@ -10,6 +10,46 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="not_specified">Not specified</string>
+    <string name="cloud_item_restored">%1$s is restored into Cloud.</string>
+    <string name="shared_string_is_deleted">%1$s is deleted.</string>
+    <string name="shared_string_delete_item">Delete item</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" will be deleted permanently. Are you sure?\n\nThis action can\'t be undone.</string>
+    <string name="shared_string_delete_immediately">Delete immediately</string>
+    <string name="restore_from_trash">Restore from trash</string>
+    <string name="cloud_trash_clear_confirmation">Are you sure you want to permanently delete all items in the Trash? This action can\'t be undone.</string>
+    <string name="delete_all_items">Delete all items</string>
+    <string name="shared_string_empty_trash">Empty trash</string>
+    <string name="trash_alert_card_desc">Items in trash will be erased after %1$s days.</string>
+    <string name="trash_is_empty_banner_desc">Files removed from OsmAnd Cloud will be available here for %1$s days after.</string>
+    <string name="trash_is_empty">Trash is empty</string>
+    <string name="shared_string_trash">Trash</string>
+    <plurals name="tracks">
+        <item quantity="one" formatted="true">%1$d (%2$d track)</item>
+        <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>
+    </plurals>
+    <string name="shared_string_show_less">Show less</string>
+    <string name="all_folders">All folders</string>
+    <string name="root_folder">Root folder</string>
+    <string name="folder">Folder</string>
+    <string name="shared_string_loading">Loading</string>
+    <string name="loading_tracks">Reloading tracks</string>
+    <string name="searching_matching_tracks">Search all matching tracks</string>
+    <string name="configure_filter">Configure filter</string>
+    <string name="no_config_smart_folder_title">Not configured</string>
+    <string name="no_config_smart_folder_description">Smart folders allow to group tracks by applied filters</string>
+    <string name="empty_smart_folder_title">No matching track</string>
+    <string name="empty_smart_folder_description">All matching tracks will automatically appear here</string>
+    <string name="discard_filter_changes">Discard filter changes</string>
+    <string name="discard_filter_changes_prompt">Are you sure you want to reset all filters?</string>
+    <string name="smart_folder_saved">Smart Folder saved</string>
+    <string name="edit_fiilter">Edit filter</string>
+    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="smart_folder_name_present">Such smart folder already present</string>
+    <string name="empty_name">Empty name</string>
+    <string name="add_smart_folder">Add smart folder</string>
+    <string name="save_as_smart_folder">Save as smart folder</string>
+    <string name="shared_string_show_icon">Show icon</string>
     <string name="show_toast_about_key_pressed">Show toast about pressed key</string>
     <string name="key_is_already_assigned_error">The \"%1$s\" key is already assigned to another action: \"%2$s\"</string>
     <string name="press_button_to_link_with_action">Press the button on your device to link it with the chosen action.</string>
@@ -62,14 +102,18 @@
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
-       • Glide Ratio Widget \n\n
-       • Added ANT+ temperature widget \n\n
-       • Better memory management for large GPX tracks \n\n
+       • Added \"Glide Ratio\" widget\n\n
+       • Added filters and smart folders for tracks\n\n
+       • Added rows for top and bottom widget panels with support for all widgets\n\n
+       • Added support fot ANT+ temperature widget\n\n
+       • Improved memory management for large GPX tracks\n\n
+       • Updated local resource management in Downloads\n\n
+       • Added widget \"Available RAM\"\n\n
+       • Fixed issues with transparent status bar\n\n
     </string>
     <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperature</string>
     <string name="sensor_temperature_desc">Shows temperature from sensor</string>
-
     <string name="with_waypoints">With waypoints</string>
     <string name="shared_string_reset_all">Reset all</string>
     <string name="date_of_creation">Date of creation</string>

@@ -48,6 +48,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -254,21 +255,21 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		switch (widgetType) {
 			case HEART_RATE:
-				return new SensorTextWidget(mapActivity, appMode, HEART_RATE, customId);
+				return new SensorTextWidget(mapActivity, appMode, HEART_RATE, customId, widgetsPanel);
 			case BICYCLE_POWER:
-				return new SensorTextWidget(mapActivity, appMode, BIKE_POWER, customId);
+				return new SensorTextWidget(mapActivity, appMode, BIKE_POWER, customId, widgetsPanel);
 			case BICYCLE_CADENCE:
-				return new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE, customId);
+				return new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE, customId, widgetsPanel);
 			case BICYCLE_SPEED:
-				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId);
+				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId, widgetsPanel);
 			case BICYCLE_DISTANCE:
-				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId);
+				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId, widgetsPanel);
 			case TEMPERATURE:
-				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId);
+				return new SensorTextWidget(mapActivity, appMode, TEMPERATURE, customId, widgetsPanel);
 		}
 		return null;
 	}

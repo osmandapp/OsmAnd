@@ -11,6 +11,8 @@ public enum MapsSortMode {
 
 	NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
 	NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending),
+	COUNTRY_NAME_ASCENDING(R.string.sort_country_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
+	COUNTRY_NAME_DESCENDING(R.string.sort_country_name_descending, R.drawable.ic_action_sort_by_name_descending),
 	DATE_ASCENDING(R.string.sort_date_ascending, R.drawable.ic_action_sort_date_1),
 	DATE_DESCENDING(R.string.sort_date_descending, R.drawable.ic_action_sort_date_31),
 	SIZE_DESCENDING(R.string.sort_size_descending, R.drawable.ic_action_sort_duration_long_to_short),
@@ -49,6 +51,10 @@ public enum MapsSortMode {
 			}
 		}
 		return getDefaultSortMode();
+	}
+
+	public boolean isCountryMode() {
+		return Algorithms.equalsToAny(this, COUNTRY_NAME_ASCENDING, COUNTRY_NAME_DESCENDING);
 	}
 }
 

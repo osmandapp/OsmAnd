@@ -18,11 +18,12 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class BearingWidget extends TextInfoWidget {
+public class BearingWidget extends SimpleWidget {
 
 	private static final float MIN_SPEED = 1f;
 	private static final int INVALID_BEARING = -1000;
@@ -32,8 +33,8 @@ public class BearingWidget extends TextInfoWidget {
 
 	private int cachedBearing;
 
-	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType) {
-		super(mapActivity, bearingType.widgetType);
+	public BearingWidget(@NonNull MapActivity mapActivity, @NonNull BearingType bearingType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, bearingType.widgetType, customId, widgetsPanel);
 		this.locationProvider = app.getLocationProvider();
 		this.bearingType = bearingType;
 
@@ -43,7 +44,7 @@ public class BearingWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int bearing = getBearing();
 		boolean bearingChanged = cachedBearing != bearing;
 		if (isUpdateNeeded() || bearingChanged) {

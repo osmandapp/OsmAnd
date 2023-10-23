@@ -80,7 +80,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -90,6 +89,7 @@ import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -144,6 +144,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int screenHeight;
 	private int viewHeight;
 	private int zoomButtonsHeight;
+	private int statusBarHeight;
 
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
@@ -425,8 +426,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
 										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
-										screenHeight,
-										0, 0);
+										screenHeight, 0, 0);
 								currentY = scroller.getFinalY();
 								scroller.abortAnimation();
 
@@ -576,7 +576,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 			if (forceUpdateLayout || bottom != oldBottom) {
 				forceUpdateLayout = false;
-				processScreenHeight(view.getParent());
+				processScreenHeight((View) view.getParent());
 				runLayoutListener();
 			}
 		};
@@ -816,10 +816,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return -1;
 	}
 
-	private void processScreenHeight(ViewParent parent) {
-		View container = (View) parent;
-		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(container.getContext());
-		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(container.getContext());
+	private void processScreenHeight(@NonNull View container) {
+		FragmentActivity activity = requireActivity();
+		viewHeight = container.getHeight();
+		screenHeight = AndroidUtils.getScreenHeight(activity);
+		statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 	}
 
 	public void openMenuFullScreen() {
@@ -1002,7 +1003,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						public void onAnimationEnd(Animator animation) {
 							if (!canceled) {
 								if (needCloseMenu) {
-									menu.close();
+									menu.close(false);
 								} else {
 									updateMainViewLayout(posY);
 									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
@@ -1908,7 +1909,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int getPosY(int currentY, boolean needCloseMenu, int previousState) {
 		if (needCloseMenu) {
-			return screenHeight;
+			return screenHeight + statusBarHeight;
 		}
 
 		int destinationState;
@@ -2074,7 +2075,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getZoomButtonsY(int y) {
-		return y - mainView.getTop() - zoomButtonsHeight + zoomPaddingTop;
+		int zoomButtonsY = y - mainView.getTop() - zoomButtonsHeight + zoomPaddingTop;
+		int maxZoomButtonsY = screenHeight - (zoomButtonsHeight + zoomPaddingTop);
+		return Math.min(zoomButtonsY, maxZoomButtonsY);
 	}
 
 	private void doLayoutMenu() {

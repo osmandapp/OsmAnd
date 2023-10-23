@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -282,7 +283,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
 		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				AVAILABLE_MODE, Collections.singletonList(selectedPanel));
+				AVAILABLE_MODE | MATCHING_PANELS_MODE, Collections.singletonList(selectedPanel));
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
 			if (!enabled) {
@@ -334,7 +335,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(selectedPanel));
 
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)) {
@@ -492,9 +493,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull WidgetsPanel panel,
-	                                @NonNull ApplicationMode appMode,
-	                                @NonNull Fragment target) {
+									@NonNull WidgetsPanel panel,
+									@NonNull ApplicationMode appMode,
+									@NonNull Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReorderWidgetsFragment fragment = new ReorderWidgetsFragment();
 			fragment.setTargetFragment(target, 0);

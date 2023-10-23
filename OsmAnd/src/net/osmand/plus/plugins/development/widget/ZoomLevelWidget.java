@@ -5,14 +5,15 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
-public class ZoomLevelWidget extends TextInfoWidget {
+public class ZoomLevelWidget extends SimpleWidget {
 
 	private final OsmandMap osmandMap;
 	private final OsmandMapTileView mapView;
@@ -21,8 +22,8 @@ public class ZoomLevelWidget extends TextInfoWidget {
 	private float cachedZoomFloatPart;
 	private float cachedMapDensity;
 
-	public ZoomLevelWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, DEV_ZOOM_LEVEL);
+	public ZoomLevelWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, DEV_ZOOM_LEVEL, customId, widgetsPanel);
 		this.osmandMap = app.getOsmandMap();
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
@@ -30,7 +31,7 @@ public class ZoomLevelWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int newZoom = mapView.getZoom();
 		float newZoomFloatPart = mapView.getZoomFloatPart() + mapView.getZoomAnimation();
 		float newMapDensity = osmandMap.getMapDensity();

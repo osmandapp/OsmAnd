@@ -12,6 +12,7 @@
 		android:id="@+id/title_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
 		android:orientation="horizontal"
 		android:paddingTop="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding">
@@ -149,7 +150,5 @@
 		</LinearLayout>
 
 	</LinearLayout>
-
-	<include layout="@layout/divider" />
 
 </LinearLayout>

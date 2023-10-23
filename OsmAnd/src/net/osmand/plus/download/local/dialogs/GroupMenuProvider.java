@@ -1,10 +1,6 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
@@ -28,13 +24,13 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.enums.MapsSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -78,12 +74,13 @@ public class GroupMenuProvider implements MenuProvider {
 			searchItem.setIcon(getIcon(R.drawable.ic_action_search_dark, colorId));
 			searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			searchItem.setOnMenuItemClickListener(item -> {
-				activity.showDialog(activity, SearchDialogFragment.createInstance(""));
+				FragmentManager manager = activity.getSupportFragmentManager();
+				LocalSearchFragment.showInstance(manager, group.getType(), null, fragment);
 				return true;
 			});
 		}
 		LocalItemType type = group.getType();
-		if (type == MAP_DATA) {
+		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = app.getSettings().LOCAL_MAPS_SORT_MODE.get();
 			MenuItem sortItem = menu.add(0, R.string.shared_string_sort, 0, R.string.shared_string_sort);
 			sortItem.setIcon(getIcon(sortMode.getIconId(), colorId));
@@ -109,10 +106,10 @@ public class GroupMenuProvider implements MenuProvider {
 		LocalItemType type = group.getType();
 		boolean selectionMode = fragment.isSelectionMode();
 		if (selectionMode) {
-			if (type != PROFILES) {
+			if (type.isDeletionSupported()) {
 				addOperationItem(items, DELETE_OPERATION);
 			}
-			if (Algorithms.equalsToAny(type, MAP_DATA, DEPTH_DATA, TERRAIN_DATA, WIKI_AND_TRAVEL_MAPS)) {
+			if (type.isBackupSupported()) {
 				addOperationItem(items, BACKUP_OPERATION);
 				addOperationItem(items, RESTORE_OPERATION);
 			}
@@ -123,6 +120,13 @@ public class GroupMenuProvider implements MenuProvider {
 					.setOnClickListener(v -> fragment.setSelectionMode(true))
 					.create());
 
+			if (type == TILES_DATA) {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitleId(R.string.add_online_source)
+						.setIcon(getContentIcon(R.drawable.ic_action_add))
+						.setOnClickListener(v -> OsmandRasterMapsPlugin.defineNewEditLayer(activity, fragment, null))
+						.create());
+			}
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_import)
 					.setIcon(getContentIcon(R.drawable.ic_action_import))

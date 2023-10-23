@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
@@ -53,17 +52,10 @@ public class MapWidgetsFactory {
 
 	@Nullable
 	public MapWidget createMapWidget(@NonNull WidgetType widgetType) {
-		return createMapWidget(null, widgetType);
+		return createMapWidget(null, widgetType, null);
 	}
 
-	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
-		if (isWidgetCreationAllowed(widgetType)) {
-			return createMapWidgetImpl(customId, widgetType);
-		}
-		return null;
-	}
-
-	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType) {
+	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -82,68 +74,60 @@ public class MapWidgetsFactory {
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case DISTANCE_TO_DESTINATION:
-				return new DistanceToDestinationWidget(mapActivity);
+				return new DistanceToDestinationWidget(mapActivity, customId, panel);
 			case INTERMEDIATE_DESTINATION:
-				return new DistanceToIntermediateDestinationWidget(mapActivity);
+				return new DistanceToIntermediateDestinationWidget(mapActivity, customId, panel);
 			case TIME_TO_INTERMEDIATE:
 				TimeToNavigationPointWidgetState state = new TimeToNavigationPointWidgetState(app, customId, true);
-				return new TimeToNavigationPointWidget(mapActivity, state);
+				return new TimeToNavigationPointWidget(mapActivity, state, customId, panel);
 			case TIME_TO_DESTINATION:
 				TimeToNavigationPointWidgetState widgetState = new TimeToNavigationPointWidgetState(app, customId, false);
-				return new TimeToNavigationPointWidget(mapActivity, widgetState);
+				return new TimeToNavigationPointWidget(mapActivity, widgetState, customId, panel);
 			case SIDE_MARKER_1:
 				MapMarkerSideWidgetState firstMarkerState = new MapMarkerSideWidgetState(app, customId, true);
-				return new MapMarkerSideWidget(mapActivity, firstMarkerState);
+				return new MapMarkerSideWidget(mapActivity, firstMarkerState, customId, panel);
 			case SIDE_MARKER_2:
 				MapMarkerSideWidgetState secondMarkerState = new MapMarkerSideWidgetState(app, customId, false);
-				return new MapMarkerSideWidget(mapActivity, secondMarkerState);
+				return new MapMarkerSideWidget(mapActivity, secondMarkerState, customId, panel);
 			case RELATIVE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING);
+				return new BearingWidget(mapActivity, BearingType.RELATIVE_BEARING, customId, panel);
 			case MAGNETIC_BEARING:
-				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING);
+				return new BearingWidget(mapActivity, BearingType.MAGNETIC_BEARING, customId, panel);
 			case TRUE_BEARING:
-				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING);
+				return new BearingWidget(mapActivity, BearingType.TRUE_BEARING, customId, panel);
 			case CURRENT_SPEED:
-				return new CurrentSpeedWidget(mapActivity);
+				return new CurrentSpeedWidget(mapActivity, customId, panel);
 			case AVERAGE_SPEED:
-				return new AverageSpeedWidget(mapActivity, customId);
+				return new AverageSpeedWidget(mapActivity, customId, panel);
 			case MAX_SPEED:
-				return new MaxSpeedWidget(mapActivity);
+				return new MaxSpeedWidget(mapActivity, customId, panel);
 			case ALTITUDE_MY_LOCATION:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION, customId, panel);
 			case ALTITUDE_MAP_CENTER:
-				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER);
+				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER, customId, panel);
 			case GPS_INFO:
-				return new GpsInfoWidget(mapActivity);
+				return new GpsInfoWidget(mapActivity, customId, panel);
 			case CURRENT_TIME:
-				return new CurrentTimeWidget(mapActivity);
+				return new CurrentTimeWidget(mapActivity, customId, panel);
 			case BATTERY:
-				return new BatteryWidget(mapActivity);
+				return new BatteryWidget(mapActivity, customId, panel);
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
-				return new SunriseSunsetWidget(mapActivity, sunriseState);
+				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);
 			case SUNSET:
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
-				return new SunriseSunsetWidget(mapActivity, sunsetState);
+				return new SunriseSunsetWidget(mapActivity, sunsetState, customId, panel);
 			case GLIDE_TARGET:
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
-				return new GlideTargetWidget(mapActivity, glideWidgetState);
+				return new GlideTargetWidget(mapActivity, glideWidgetState, customId, panel);
 			case GLIDE_AVERAGE:
-				return new GlideAverageWidget(mapActivity, customId);
+				return new GlideAverageWidget(mapActivity, customId, panel);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId);
 			default:
-				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId, panel);
 		}
-	}
-
-	private boolean isWidgetCreationAllowed(@NonNull WidgetType widgetType) {
-		if (widgetType == ALTITUDE_MAP_CENTER) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			return plugin != null && plugin.is3DMapsEnabled();
-		}
-		return true;
 	}
 }

@@ -1,14 +1,12 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
-import static net.osmand.plus.download.local.LocalItemType.RENDERING_STYLES;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,20 +35,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ItemMenuProvider implements MenuProvider {
 
@@ -58,7 +56,6 @@ public class ItemMenuProvider implements MenuProvider {
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
 	private final LocalBaseFragment fragment;
-	private final Map<String, IndexItem> itemsToUpdate = new HashMap<>();
 	private final boolean nightMode;
 
 	private LocalItem localItem;
@@ -115,7 +112,12 @@ public class ItemMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = localItem.getType();
-		if (type == MAP_DATA) {
+
+		boolean backuped = localItem.isBackuped();
+		if (type.isBackupSupported() || backuped) {
+			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
+		}
+		if (type.isUpdateSupported()) {
 			menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -123,15 +125,8 @@ public class ItemMenuProvider implements MenuProvider {
 				updateItem();
 				return true;
 			});
-		} else if (type == RENDERING_STYLES) {
-			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				exportItem(ExportSettingsType.CUSTOM_ROUTING);
-				return true;
-			});
-		} else if (type == TILES_DATA) {
+		}
+		if (type == TILES_DATA) {
 			Object object = localItem.getAttachedObject();
 			if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
 					&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {
@@ -152,19 +147,27 @@ public class ItemMenuProvider implements MenuProvider {
 					return true;
 				});
 			}
+		}
+		if (type.isRenamingSupported()) {
+			menuItem = menu.add(0, R.string.shared_string_rename, Menu.NONE, R.string.shared_string_rename);
+			menuItem.setIcon(getIcon(R.drawable.ic_action_edit_dark, colorId));
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setOnMenuItemClickListener(item -> {
+				FileUtils.renameFile(activity, localItem.getFile(), fragment, false);
+				return true;
+			});
+		}
+		ExportSettingsType exportType = type.getExportSettingsType();
+		if (exportType != null) {
 			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem.setOnMenuItemClickListener(item -> {
-				exportItem(ExportSettingsType.MAP_SOURCES);
+				exportItem(exportType);
 				return true;
 			});
 		}
-		boolean backuped = localItem.isBackuped();
-		if (type == MAP_DATA || backuped) {
-			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
-		}
-		if (type != PROFILES) {
+		if (type.isDeletionSupported()) {
 			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -207,33 +210,28 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	private void clearTiles() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+		Context context = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			LocalOperationTask task = new LocalOperationTask(app, CLEAR_TILES_OPERATION, fragment);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName()));
+		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));
 		builder.show();
 	}
 
 	private void updateItem() {
 		File file = localItem.getFile();
-		IndexItem indexItem = itemsToUpdate.get(file.getName());
+		IndexItem indexItem = fragment.getItemsToUpdate().get(file.getName());
 		if (indexItem != null) {
 			activity.startDownload(indexItem);
 		} else {
-			String text = app.getString(R.string.map_is_up_to_date, localItem.getName());
+			Context context = UiUtilities.getThemedContext(activity, nightMode);
+			String text = app.getString(R.string.map_is_up_to_date, localItem.getName(context));
 			Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG);
 			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();
-		}
-	}
-
-	public void reloadItemsToUpdate() {
-		itemsToUpdate.clear();
-		for (IndexItem item : app.getDownloadThread().getIndexes().getItemsToUpdate()) {
-			itemsToUpdate.put(item.getTargetFileName(), item);
 		}
 	}
 

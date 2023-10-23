@@ -23,7 +23,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
+public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragment {
 
 	private static final String SHOW_TIME_TO_LEFT = "show_time_to_left";
 
@@ -64,10 +64,13 @@ public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 		View preferenceButton = container.findViewById(R.id.preference_container);
 		preferenceButton.setOnClickListener(v -> showPreferenceDialog());
 		preferenceButton.setBackground(getPressedStateDrawable());
+		themedInflater.inflate(R.layout.divider, container);
+		super.setupContent(themedInflater, container);
 	}
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
 		preference.setModeValue(appMode, showTimeToLeft);
 	}
 

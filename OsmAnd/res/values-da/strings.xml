@@ -5431,11 +5431,21 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Glidetal-modul
+    <string name="release_4_6">• Tilføjet \"Glidetal\"-modul
 \n
-\n • Tilføjet ANT+ temperatur-modul
+\n • Tilføjet filtre og smarte mapper til spor
+\n
+\n • Tilføjet rækker til øverste og nederste modulpaneler med understøttelse af alle moduler
+\n
+\n • Tilføjet understøttelse af ANT+ temperatur-modul
 \n
 \n • Bedre hukommelseshåndtering for store GPX-spor
+\n
+\n • Opdateret lokal ressourcehåndtering i Downloads
+\n
+\n • Tilføjet modul \"Tilgængelig RAM\"
+\n
+\n • Løst problemer med gennemsigtig statuslinje
 \n
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
@@ -5468,4 +5478,22 @@
     <string name="sort_country_name_descending">Landenavn: Z – A</string>
     <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort\?</string>
     <string name="maps_and_resources">Kort og ressourcer</string>
+    <string name="shared_string_show_icon">Vis ikon</string>
+    <string name="empty_name">Tomt navn</string>
+    <string name="edit_fiilter">Redigér filter</string>
+    <string name="smart_folder_name_present">Sådan en smart-mappe findes allerede</string>
+    <string name="smart_folder_saved">Smart-mappe gemt</string>
+    <string name="add_smart_folder">Tilføj smart-mappe</string>
+    <string name="save_as_smart_folder">Gem som smart-mappe</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil slette \"%1$s\" smart-mappe.</string>
+    <string name="empty_smart_folder_title">Ingen matchende spor</string>
+    <string name="empty_smart_folder_description">Alle matchende spor vises automatisk her</string>
+    <string name="configure_filter">Konfigurér filter</string>
+    <string name="no_config_smart_folder_title">Ikke konfigureret</string>
+    <string name="discard_filter_changes">Kassér filterændringer</string>
+    <string name="shared_string_loading">Indlæser</string>
+    <string name="discard_filter_changes_prompt">Er du sikker på, at du vil nulstille alle filtre\?</string>
+    <string name="no_config_smart_folder_description">Smarte mapper gør det muligt at gruppere spor efter anvendte filtre</string>
+    <string name="loading_tracks">Genindlæser spor</string>
+    <string name="searching_matching_tracks">Søg alle matchende spor</string>
 </resources>

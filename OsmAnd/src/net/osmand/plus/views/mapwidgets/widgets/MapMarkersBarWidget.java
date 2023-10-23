@@ -60,10 +60,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId) {
 		super(mapActivity, MARKERS_TOP_BAR);
-
+		this.customId = customId;
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		this.customId = customId;
 
 		markerContainer2nd = view.findViewById(R.id.map_markers_top_bar_2nd);
 		arrowImg = view.findViewById(R.id.map_marker_arrow);
@@ -249,7 +248,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		if (widgetsPanel == WidgetsPanel.TOP) {
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof MapMarkersBarWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
+				if (widget instanceof MapMarkersBarWidget || widget instanceof SimpleWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
 					return false;
 				}
 			}

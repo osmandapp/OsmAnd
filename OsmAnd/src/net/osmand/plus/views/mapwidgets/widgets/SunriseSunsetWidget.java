@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
@@ -23,7 +25,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class SunriseSunsetWidget extends TextInfoWidget {
+public class SunriseSunsetWidget extends SimpleWidget {
 
 	private static final String NEXT_TIME_FORMAT = "HH:mm E";
 
@@ -40,23 +42,28 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 	private boolean isLocationChanged;
 	private boolean forceUpdate;
 
-	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState) {
-		super(mapActivity, widgetState.getWidgetType());
+	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
 		dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
-		});
+		};
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		updateCachedLocation();
 		if (!isUpdateNeeded()) {
 			return;

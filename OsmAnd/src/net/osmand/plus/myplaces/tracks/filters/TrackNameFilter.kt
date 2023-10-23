@@ -8,16 +8,16 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.NAME
 import net.osmand.search.core.SearchPhrase
 import net.osmand.util.Algorithms
 
-class TrackNameFilter(filterChangedListener: FilterChangedListener)
+class TrackNameFilter(filterChangedListener: FilterChangedListener?)
 	: BaseTrackFilter(R.string.shared_string_name, NAME, filterChangedListener) {
 	@Expose
 	var value = ""
 		set(value) {
 			if (!Algorithms.stringsEqual(field, value)) {
+				field = value
 				updateMatcher()
 			}
-			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	private fun updateMatcher() {
@@ -33,10 +33,26 @@ class TrackNameFilter(filterChangedListener: FilterChangedListener)
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		if (nameMatcher == null) {
+			updateMatcher()
+		}
 		return nameMatcher.matches(trackItem.name)
 	}
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(value)
+	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is TrackNameFilter) {
+			this.value = value.value
+			updateMatcher()
+		}
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is TrackNameFilter &&
+				other.value == value
 	}
 }

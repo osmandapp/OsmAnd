@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.*;
 
 import android.graphics.drawable.Drawable;
@@ -53,7 +54,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListene
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -64,7 +65,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, Map3DModeUpdateListener {
+		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, Map3DModeUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -322,7 +323,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onResetToDefaultConfirmed() {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -364,7 +365,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
-		updateWidgetsCountForPanel(widgetInfo.widgetPanel);
+		updateWidgetsCountForPanel(widgetInfo.getWidgetPanel());
 	}
 
 	private void updateWidgetsCountForPanel(@NonNull WidgetsPanel panel) {
@@ -426,7 +427,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private int getWidgetsCount(@NonNull MapActivity mapActivity, @NonNull WidgetsPanel panel) {
-		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		return widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(panel)).size();
 	}
 

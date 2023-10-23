@@ -41,6 +41,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -50,11 +51,12 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
+	public static final String DOWNLOAD_BUILD_NAME = "osmandToInstall.apk";
 
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -152,20 +154,20 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		switch (widgetType) {
 			case DEV_FPS:
-				return new FPSTextInfoWidget(mapActivity);
+				return new FPSTextInfoWidget(mapActivity, customId, widgetsPanel);
 			case DEV_CAMERA_TILT:
-				return new CameraTiltWidget(mapActivity);
+				return new CameraTiltWidget(mapActivity, customId, widgetsPanel);
 			case DEV_CAMERA_DISTANCE:
-				return new CameraDistanceWidget(mapActivity);
+				return new CameraDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_ZOOM_LEVEL:
-				return new ZoomLevelWidget(mapActivity);
+				return new ZoomLevelWidget(mapActivity, customId, widgetsPanel);
 			case DEV_TARGET_DISTANCE:
-				return new TargetDistanceWidget(mapActivity);
+				return new TargetDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_MEMORY:
-				return new MemoryInfoWidget(mapActivity);
+				return new MemoryInfoWidget(mapActivity, customId, widgetsPanel);
 		}
 		return null;
 	}

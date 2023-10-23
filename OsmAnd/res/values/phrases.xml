@@ -4635,7 +4635,7 @@
 	<string name="poi_beauty_salon_pedicure">Pedicure</string>
 	<string name="poi_massage_chiropractic">Chiropractic</string>
 	<string name="poi_massage_shiatsu">Shiatsu</string>
-	<string name="poi_agrarian_yes">Yes;Argarian</string>
+	<string name="poi_agrarian_yes">Yes;Agrarian</string>
 	<string name="poi_agrarian_pesticide">Pesticide</string>
 	<string name="poi_agrarian_fertilizer">Fertilizer</string>
 	<string name="poi_agrarian_seed">Seed</string>
@@ -5201,5 +5201,9 @@
 	<string name="poi_health_specialty_vascular_surgery_yes">Vascular surgery</string>
 
 	<string name="poi_checkpoint_cycling">Cycling checkpoint</string>
+
+	<string name="poi_emergency_bay">Emergency bay</string>
+
+	<string name="poi_dressing_room">Dressing room</string>
 
 </resources>

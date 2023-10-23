@@ -109,9 +109,9 @@ public class NativeUtilities {
 		return Math.max(a, c) <= Math.min(b, d);
 	}
 
-	public static int getSignedArea31(@NonNull PointI a31, @NonNull PointI b31, @NonNull PointI c31) {
-		return (b31.getX() - a31.getX()) * (c31.getY() - a31.getY())
-				- (b31.getY() - a31.getY()) * (c31.getX() - a31.getX());
+	public static long getSignedArea31(@NonNull PointI a31, @NonNull PointI b31, @NonNull PointI c31) {
+		return (long) (b31.getX() - a31.getX()) * (c31.getY() - a31.getY())
+				- (long) (b31.getY() - a31.getY()) * (c31.getX() - a31.getX());
 	}
 
 	public static boolean isPointInsidePolygon(@NonNull LatLon latLon, @NonNull List<PointI> polygon31) {

@@ -1,5 +1,9 @@
 package net.osmand.plus.measurementtool.graph;
 
+import static net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType.ALL_AS_LIST;
+import static net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType.ONE_ELEMENT;
+import static net.osmand.plus.track.cards.ColorsCard.MINIMUM_CONTRAST_RATIO;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -10,18 +14,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.CustomBarChartRenderer;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
@@ -29,11 +36,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.core.graphics.ColorUtils;
-
-import static net.osmand.plus.track.cards.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
 public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 
@@ -67,7 +69,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
 					updateBottomInfo();
-				} else if (LegendViewType.ONE_ELEMENT == legendViewType && elems.size() == 1) {
+				} else if (ONE_ELEMENT == legendViewType && elems.size() == 1) {
 					selectedPropertyName = elems.get(0).getPropertyName();
 					updateBottomInfo();
 				}
@@ -97,22 +99,15 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 	@Override
 	protected void attachBottomInfo() {
 		List<RouteSegmentAttribute> attributes = getSegmentsList();
-		if (attributes == null) {
-			return;
-		}
-
-		switch (legendViewType) {
-			case ONE_ELEMENT:
-				for (RouteSegmentAttribute attribute : attributes) {
-					if (attribute.getPropertyName().equals(selectedPropertyName)) {
-						attachLegend(Collections.singletonList(attribute), null);
-						break;
-					}
+		if (legendViewType == ALL_AS_LIST) {
+			attachLegend(attributes, selectedPropertyName);
+		} else if (legendViewType == ONE_ELEMENT) {
+			for (RouteSegmentAttribute attribute : attributes) {
+				if (attribute.getPropertyName().equals(selectedPropertyName)) {
+					attachLegend(Collections.singletonList(attribute), null);
+					break;
 				}
-				break;
-			case ALL_AS_LIST:
-				attachLegend(attributes, selectedPropertyName);
-				break;
+			}
 		}
 	}
 
@@ -142,8 +137,8 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		}
 	}
 
-	private Spannable getSpanLegend(String title,
-	                                RouteSegmentAttribute segment,
+	private Spannable getSpanLegend(@NonNull String title,
+	                                @NonNull RouteSegmentAttribute segment,
 	                                boolean fullSpan) {
 		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), app);
 		title = Algorithms.capitalizeFirstLetter(title);
@@ -156,10 +151,12 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		return spannable;
 	}
 
+	@NonNull
 	private List<RouteSegmentAttribute> getSegmentsList() {
-		return getStatistics() != null ? new ArrayList<>(getStatistics().partition.values()) : null;
+		return getStatistics() != null ? new ArrayList<>(getStatistics().partition.values()) : new ArrayList<>();
 	}
 
+	@Nullable
 	private RouteStatistics getStatistics() {
 		return additionalData;
 	}

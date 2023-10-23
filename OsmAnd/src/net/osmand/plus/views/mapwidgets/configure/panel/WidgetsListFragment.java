@@ -26,7 +26,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
@@ -53,13 +53,13 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DISABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
-		ResetToDefaultListener, CopyAppModePrefsListener {
+		ConfirmationDialogListener, CopyAppModePrefsListener {
 
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
 
@@ -80,7 +80,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	private ViewGroup availableWidgetsContainer;
 	private ViewGroup actionsCardContainer;
 
-	private final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE;
+	private final int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 
 	private boolean nightMode;
 
@@ -174,7 +174,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@Override
-	public void onResetToDefaultConfirmed() {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -276,7 +276,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
 
 			View settingsButton = view.findViewById(R.id.settings_button);
-			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app) : null;
+			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
 			if (fragment != null) {
 				settingsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
@@ -324,7 +324,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		int filter = AVAILABLE_MODE | DEFAULT_MODE;
 
 		MapActivity mapActivity = requireMapActivity();
-		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, selectedPanel.getMergedPanels());
+		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(selectedPanel));
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
 			List<WidgetType> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);

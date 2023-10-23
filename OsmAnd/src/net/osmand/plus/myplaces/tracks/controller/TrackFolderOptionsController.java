@@ -99,7 +99,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 			showDetails();
 		} else if (option == TrackFolderOption.SHOW_ALL_TRACKS) {
 			showFolderTracksOnMap(trackFolder);
-		} else if (option == TrackFolderOption.EDIT_NAME) {
+		} else if (option == TrackFolderOption.shared_string_rename) {
 			showRenameDialog();
 		} else if (option == TrackFolderOption.CHANGE_APPEARANCE) {
 			showChangeAppearanceDialog(trackFolder);

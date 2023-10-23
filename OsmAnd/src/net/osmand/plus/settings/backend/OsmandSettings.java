@@ -2209,9 +2209,6 @@ public class OsmandSettings {
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_HEIGHT = "last_known_map_height"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED = "last_known_map_lat_height_shifted"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED = "last_known_map__lon_height_shifted"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM_FLOAT_PART = "last_known_map_zoom_float_part";
 
@@ -2228,16 +2225,6 @@ public class OsmandSettings {
 
 	public boolean isLastKnownMapLocation() {
 		return settingsAPI.contains(globalPreferences, LAST_KNOWN_MAP_LAT);
-	}
-
-	public float getLastKnownMapHeight() {
-		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_HEIGHT, 0);
-	}
-
-	public LatLon getLastKnownMapLocationShifted() {
-		float lat = settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED, 0);
-		float lon = settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED, 0);
-		return new LatLon(lat, lon);
 	}
 
 	public LatLon getAndClearMapLocationToShow() {
@@ -2321,13 +2308,10 @@ public class OsmandSettings {
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
-	public void setLastKnownMapLocation(LatLon mapLocation, float heightInMeters, LatLon mapLocationShifted) {
+	public void setLastKnownMapLocation(LatLon mapLocation) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) mapLocation.getLatitude());
 		edit.putFloat(LAST_KNOWN_MAP_LON, (float) mapLocation.getLongitude());
-		edit.putFloat(LAST_KNOWN_MAP_HEIGHT, heightInMeters);
-		edit.putFloat(LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED, (float) mapLocationShifted.getLatitude());
-		edit.putFloat(LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED, (float) mapLocationShifted.getLongitude());
 		edit.commit();
 	}
 

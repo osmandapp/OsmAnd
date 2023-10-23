@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.filters
 
 enum class FilterType {
 	NAME,
+	FOLDER,
 	DURATION,
 	TIME_IN_MOTION,
 	LENGTH,
@@ -13,5 +14,7 @@ enum class FilterType {
 	MAX_ALTITUDE,
 	DATE_CREATION,
 	CITY,
+	COLOR,
+	WIDTH,
 	OTHER
 }

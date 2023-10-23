@@ -26,6 +26,7 @@ class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :
 	private var hasWaypointsCheckBox: AppCompatCheckBox
 	private var visibleOnMapRow: View
 	private var waypointsRow: View
+	private val divider: View
 
 	init {
 		app = itemView.context.applicationContext as OsmandApplication
@@ -35,6 +36,7 @@ class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :
 		explicitIndicator = itemView.findViewById(R.id.explicit_indicator)
 		paramsContainer = itemView.findViewById(R.id.params_container)
 		titleContainer = itemView.findViewById(R.id.title_container)
+		divider = itemView.findViewById(R.id.divider)
 		titleContainer.setOnClickListener { v: View? ->
 			expanded = !expanded
 			updateExpandState()

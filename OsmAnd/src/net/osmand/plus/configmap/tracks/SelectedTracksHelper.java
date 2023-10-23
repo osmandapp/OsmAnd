@@ -16,6 +16,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -72,7 +73,6 @@ public class SelectedTracksHelper {
 			allTrackItems.add(trackItem);
 		}
 		itemsSelectionHelper.setAllItems(allTrackItems);
-
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 		for (TrackItem item : trackItems) {
 			addTrackItem(trackTabs, item);
@@ -83,12 +83,11 @@ public class SelectedTracksHelper {
 	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
-
 		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
+		trackTabs.putAll(getAllSmartFoldersTabs());
 		trackTabs.putAll(folderTabs);
-
 		loadTabsSortModes();
 		sortTrackTabs();
 	}
@@ -160,7 +159,7 @@ public class SelectedTracksHelper {
 		return items;
 	}
 
-	private void processRecentlyVisibleTracks() {
+	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		for (GPXFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
@@ -171,7 +170,7 @@ public class SelectedTracksHelper {
 		}
 	}
 
-	private void processVisibleTracks() {
+	public void processVisibleTracks() {
 		List<TrackItem> selectedItems = new ArrayList<>();
 		if (gpxSelectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : itemsSelectionHelper.getAllItems()) {
@@ -183,6 +182,18 @@ public class SelectedTracksHelper {
 		}
 		itemsSelectionHelper.setSelectedItems(selectedItems);
 		itemsSelectionHelper.setOriginalSelectedItems(selectedItems);
+	}
+
+	@NonNull
+	private Map<String, TrackTab> getAllSmartFoldersTabs() {
+		Map<String, TrackTab> smartFoldersTabs = new LinkedHashMap<>();
+		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
+			TrackTab folderTab = new TrackTab(folder);
+			folderTab.items.add(TYPE_SORT_TRACKS);
+			folderTab.items.addAll(folder.getTrackItems());
+			smartFoldersTabs.put(folderTab.getTypeName(), folderTab);
+		}
+		return smartFoldersTabs;
 	}
 
 	@Nullable
@@ -224,9 +235,7 @@ public class SelectedTracksHelper {
 	}
 
 	public void saveTracksVisibility() {
-		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems(), null);
-		processVisibleTracks();
-		processRecentlyVisibleTracks();
+		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems());
 	}
 
 	private void sortTrackTabs() {

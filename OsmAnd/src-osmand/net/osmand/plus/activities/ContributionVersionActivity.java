@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,7 +63,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pathToDownload = getMyApplication().getAppPath("osmandToInstall.apk");
+		pathToDownload = getMyApplication().getAppPath(DOWNLOAD_BUILD_NAME);
 		setContentView(R.layout.default_list_view);
 		getSupportActionBar().setSubtitle(R.string.select_build_to_install);
 

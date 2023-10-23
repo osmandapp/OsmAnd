@@ -768,25 +768,25 @@
 \n
 \n OsmAnd è continuamente in sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\n OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tile) possono essere memorizzate nella scheda di memoria del telefono per l\'utilizzo offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. 
-\n 
-\n OsmAnd+ è la versione a pagamento dell\'app, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Direzioni di Navigazione Automatizzate)+
+\n
+\n OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a riquadro) possono essere memorizzate nella scheda di memoria del telefono per l\'utilizzo offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida curva per curva.
+\n
+\n OsmAnd+ è la versione a pagamento dell\'app: tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.
 \n
 \n Alcune delle caratteristiche principali:
-\n - Funzionalità completa anche se disconnessi dalla rete (conserva le mappe vettoriali o a tile nella memoria del dispositivo) 
-\n - Mappe vettoriali offline compatte per tutto il mondo a disposizione 
+\n - Funzionalità completa anche se disconnessi dalla rete (conserva le mappe vettoriali o a riquadro nella memoria del dispositivo)
+\n - Mappe vettoriali offline compatte per tutto il mondo a disposizione
 \n - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti
-\n - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per visite turistiche 
+\n - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per visite turistiche
 \n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, linee isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
-\n 
-\n - Ricerca offline per indirizzi e luoghi (PDI) 
-\n - Calcolo del percorso per medie distanze 
-\n - Modalità automobile, bicicletta e pedonale con opzionali: 
-\n - Cambio automatico della visione giorno/notturna 
-\n - Zoom automatico della mappa in base alla velocità 
-\n - Allineamento della mappa in base alla bussola o alla direzione di movimento 
+\n
+\n - Ricerca offline per indirizzi e luoghi (PDI)
+\n - Calcolo del percorso per medie distanze
+\n - Modalità automobile, bicicletta e pedonale con opzioni
+\n - Cambio automatico della visione giorno/notturna
+\n - Zoom automatico della mappa in base alla velocità
+\n - Allineamento della mappa in base alla bussola o alla direzione di movimento
 \n - Indicazioni di corsia, indicazione limiti di velocità, voci registrate e text-to-speech sintetizzate
 \n</string>
     <string name="snap_to_road">Blocca sulle strade</string>
@@ -2288,7 +2288,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Direzioni di Navigazione Automatizzate) è un\'applicazione di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM).
 \n
-\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e le informazioni sull\'altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.</string>
+\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e topografiche (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bicicletta, a piedi, con le modifiche OSM e molto altro.</string>
     <string name="mapillary_widget">Widget di Mapillary</string>
     <string name="mapillary_widget_descr">Permette di contribuire facilmente a Mapillary.</string>
     <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
@@ -2426,7 +2426,7 @@
 \n • Visualizza mattonelle online speciali, vista satellitare (da Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Direzioni di Navigazione Automatizzate) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità di OpenStreetMap (OSM).
-\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e le informazioni sull\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro.
+\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e topografiche, la scelta tra le modalità automobile, bicicletta, a piedi, con le modifiche OSM e molto altro.
 \n
 \n OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti.
 \n
@@ -5413,11 +5413,21 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Widget Rapporto di planata
+    <string name="release_4_6">• Aggiunto widget \"Rapporto di planata\".
 \n
-\n• Aggiunto widget temperatura ANT+
+\n• Aggiunti filtri e cartelle intelligenti per le tracce
 \n
-\n• Migliore gestione della memoria per tracce GPX di grandi dimensioni
+\n• Aggiunte righe per i pannelli widget superiore e inferiore con supporto per tutti i widget
+\n
+\n• Aggiunto supporto per widget temperatura ANT+
+\n
+\n• Gestione migliorata della memoria per tracce GPX di grandi dimensioni
+\n
+\n• Aggiornata la gestione delle risorse locali nei download
+\n
+\n• Aggiunto widget \"RAM disponibile\"
+\n
+\n• Risolti problemi con la barra di stato trasparente
 \n
 \n</string>
     <string name="shared_string_temperature">Tempertura</string>
@@ -5434,4 +5444,63 @@
     <string name="app_mode_hang_gliding">Deltaplano</string>
     <string name="date_of_creation">Data di creazione</string>
     <string name="filter_screen_title">Filtro</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="widget_available_ram_desc">Visualizza la memoria disponibile per OsmAnd.</string>
+    <string name="sort_size_descending">Ordine discendente</string>
+    <string name="smart_folder_saved">Smart Folder salvata</string>
+    <string name="delete_map">Elimina la mappa</string>
+    <string name="standard_maps">Mappe standard</string>
+    <string name="shared_string_created">Creata</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia e mappe di viaggio</string>
+    <string name="empty_name">Nome vuoto</string>
+    <string name="edit_fiilter">Modifica i filtri</string>
+    <string name="rendering_styles">Stili di rendering</string>
+    <string name="sort_country_name_ascending">Nome del paese: A - Z</string>
+    <string name="weather_online">Meteo online</string>
+    <string name="shared_string_show_icon">Mostra l\'icona</string>
+    <string name="map_is_up_to_date">La mappa %1$s è aggiornata.</string>
+    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\".</string>
+    <string name="sort_size_ascending">Ordine ascendente</string>
+    <string name="widget_available_ram">RAM disponibile</string>
+    <string name="terrain_maps">Mappe del terreno</string>
+    <string name="sort_country_name_descending">Nome del paese: Z - A</string>
+    <string name="delete_map_description">Sei sicuro di voler eliminare la mappa %1$s\?</string>
+    <string name="maps_and_resources">Mappe e risorse</string>
+    <string name="empty_smart_folder_title">Nessuna traccia corrispondente</string>
+    <string name="smart_folder_name_present">Tale cartella intelligente è già presente</string>
+    <string name="empty_smart_folder_description">Tutte le tracce corrispondenti appariranno automaticamente qui</string>
+    <string name="configure_filter">Configura il filtro</string>
+    <string name="no_config_smart_folder_title">Non configurato</string>
+    <string name="add_smart_folder">Aggiungi cartella intelligente</string>
+    <string name="discard_filter_changes">Scarta le modifiche al filtro</string>
+    <string name="save_as_smart_folder">Salva come cartella intelligente</string>
+    <string name="shared_string_loading">Caricamento</string>
+    <string name="discard_filter_changes_prompt">Sei sicuro di voler reimpostare tutti i filtri\?</string>
+    <string name="no_config_smart_folder_description">Le cartelle intelligenti consentono di raggruppare le tracce in base ai filtri applicati</string>
+    <string name="loading_tracks">Ricaricamento delle tracce</string>
+    <string name="searching_matching_tracks">Cerca tutte le tracce corrispondenti</string>
+    <string name="cloud_trash_clear_confirmation">Confermi di voler eliminare definitivamente tutti gli elementi nel cestino\? L\'azione non è reversibile.</string>
+    <string name="with_waypoints">Con punti intermedi</string>
+    <string name="restore_from_trash">Recupera dal cestino</string>
+    <string name="delete_all_items">Elimina tutti gli elementi</string>
+    <string name="trash_is_empty_banner_desc">I file rimossi dal OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d traccia)</item>
+        <item quantity="many">%1$d (%2$d tracce)</item>
+        <item quantity="other">%1$d (%2$d tracce)</item>
+    </plurals>
+    <string name="help_article_navigation_routing_online_routing_name">Navigazione online</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" sarà cancellato definitivamente. Confermi\?
+\n
+\nQuesta azione non può essere cancellata.</string>
+    <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_empty_trash">Svuota il cestino</string>
+    <string name="shared_string_delete_immediately">Cancella subito</string>
+    <string name="shared_string_is_deleted">%1$s è cancellato.</string>
+    <string name="cloud_item_restored">%1$s è ripristinato nel Cloud.</string>
+    <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
+    <string name="trash_is_empty">Il cestino è vuoto</string>
+    <string name="shared_string_trash">Cestino</string>
+    <string name="shared_string_delete_item">Cancella oggetto</string>
+    <string name="help_article_personal_storage_name">Archiviazione</string>
 </resources>

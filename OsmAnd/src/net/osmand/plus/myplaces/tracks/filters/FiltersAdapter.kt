@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterCityViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterColorViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDateViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDurationViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterFolderViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder.TextChangedListener
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterRangeViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterWidthViewHolder
 import net.osmand.plus.utils.UiUtilities
 
 class FiltersAdapter(
@@ -60,16 +63,31 @@ class FiltersAdapter(
 				FilterCityViewHolder(view, nightMode)
 			}
 
+			FilterType.FOLDER -> {
+				val view = inflater.inflate(R.layout.filter_folder_item, parent, false)
+				FilterFolderViewHolder(view, nightMode)
+			}
+
 			FilterType.OTHER -> {
 				val view = inflater.inflate(R.layout.filter_other_item, parent, false)
 				FilterOtherViewHolder(view, nightMode)
+			}
+
+			FilterType.COLOR -> {
+				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
+				FilterColorViewHolder(view, nightMode)
+			}
+
+			FilterType.WIDTH -> {
+				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
+				FilterWidthViewHolder(view, nightMode)
 			}
 		}
 	}
 
 	override fun getItemViewType(position: Int): Int {
 		val filter = items[position]
-		return filter.getFilerType().ordinal
+		return filter.filterType.ordinal
 	}
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -84,27 +102,33 @@ class FiltersAdapter(
 		} else if (holder is FilterDurationViewHolder) {
 			holder.bindView(item as DurationTrackFilter)
 		} else if (holder is FilterRangeViewHolder) {
-			if (item.getFilerType() == FilterType.TIME_IN_MOTION) {
+			if (item.filterType == FilterType.TIME_IN_MOTION) {
 				holder.bindView(item as TimeInMotionTrackFilter)
-			} else if (item.getFilerType() == FilterType.LENGTH) {
+			} else if (item.filterType == FilterType.LENGTH) {
 				holder.bindView(item as LengthTrackFilter)
-			} else if (item.getFilerType() == FilterType.AVERAGE_SPEED) {
+			} else if (item.filterType == FilterType.AVERAGE_SPEED) {
 				holder.bindView(item as AverageSpeedTrackFilter)
-			} else if (item.getFilerType() == FilterType.MAX_SPEED) {
+			} else if (item.filterType == FilterType.MAX_SPEED) {
 				holder.bindView(item as MaxSpeedTrackFilter)
-			} else if (item.getFilerType() == FilterType.AVERAGE_ALTITUDE) {
+			} else if (item.filterType == FilterType.AVERAGE_ALTITUDE) {
 				holder.bindView(item as AverageAltitudeTrackFilter)
-			} else if (item.getFilerType() == FilterType.MAX_ALTITUDE) {
+			} else if (item.filterType == FilterType.MAX_ALTITUDE) {
 				holder.bindView(item as MaxAltitudeTrackFilter)
-			} else if (item.getFilerType() == FilterType.UPHILL) {
+			} else if (item.filterType == FilterType.UPHILL) {
 				holder.bindView(item as UphillTrackFilter)
-			} else if (item.getFilerType() == FilterType.DOWNHILL) {
+			} else if (item.filterType == FilterType.DOWNHILL) {
 				holder.bindView(item as DownhillTrackFilter)
 			}
 		} else if (holder is FilterDateViewHolder) {
 			holder.bindView(item as DateCreationTrackFilter, activity)
 		} else if (holder is FilterCityViewHolder) {
 			holder.bindView(item as CityTrackFilter)
+		} else if (holder is FilterColorViewHolder) {
+			holder.bindView(item as ColorTrackFilter)
+		} else if (holder is FilterWidthViewHolder) {
+			holder.bindView(item as WidthTrackFilter)
+		} else if (holder is FilterFolderViewHolder) {
+			holder.bindView(item as TrackFolderFilter)
 		} else if (holder is FilterOtherViewHolder) {
 			holder.bindView(item as OtherTrackFilter)
 		}

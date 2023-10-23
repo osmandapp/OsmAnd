@@ -35,7 +35,7 @@
     <string name="index_name_europe">Europe</string>
     <string name="index_name_france">Europe - France</string>
     <string name="index_name_germany">Europe - Allemagne</string>
-    <string name="index_name_russia">Europe/Asie - Russie</string>
+    <string name="index_name_russia">Russie</string>
     <string name="index_name_africa">Afrique</string>
     <string name="index_name_asia">Asie</string>
     <string name="index_name_oceania">Australie et Océanie</string>
@@ -3096,8 +3096,8 @@
     <string name="price_free">Gratuit</string>
     <string name="get_discount_second_part">Puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
-    <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
-    <string name="get_discount_first_few_part">%1$s pour le premier %2$s</string>
+    <string name="get_discount_first_part">%1$s pour le(la) premier(ère) %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pour le(la) premier(ère) %2$s</string>
     <string name="price_and_discount">%1$s • Économisez %2$s</string>
     <string name="shared_string_example">Exemple</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
@@ -5088,7 +5088,7 @@
     <string name="shared_string_alt_name">Autre dénomination</string>
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
-    <string name="weather_forecast_is_outdated">Les prévisions sont périmées.</string>
+    <string name="weather_forecast_is_outdated">Les prévisions ne sont plus à jour.</string>
     <string name="shared_string_all_world">Monde entier</string>
     <string name="shared_string_pounds">livres</string>
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
@@ -5186,7 +5186,7 @@
     <string name="shared_string_finger">Doigt</string>
     <string name="shared_string_hand">Main</string>
     <string name="rendering_value_name_only_name">Nom uniquement</string>
-    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type. signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type de l\'éclairage.signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 de la signature lumineuse</string>
     <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
     <string name="poi_categories">Catégories de PI</string>
     <string name="map_2d_mode_action">Mode 2D</string>
@@ -5418,11 +5418,21 @@
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Gadget de finesse de l\'aile
+    <string name="release_4_6">• Ajout du gadget \"finesse de l\'aile\"
 \n
-\n• Ajout du gadget ANT+ de température
+\n• Ajout de filtres et de dossiers intelligents pour les traces
 \n
-\n• Meilleure gestion de la mémoire pour les grosses traces GPX
+\n• Ajout des lignes pour les gadgets en haut et en bas avec support de tous les gadgets
+\n
+\n• Ajout du support pour le gadget de température ANT+
+\n
+\n• Gestion de la mémoire améliorée pour les grandes traces GPX
+\n
+\n• Mise à jour de la gestion des ressources locales dans \"Téléchargements\"
+\n
+\n• Ajout du gadget \"RAM disponible\"
+\n
+\n• Correction de bug avec la barre d\'état transparente
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transport de bébés</string>
@@ -5454,4 +5464,42 @@
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Êtes-vous certain de vouloir effacer la carte %1$s \?</string>
     <string name="maps_and_resources">Cartes et ressources</string>
+    <string name="shared_string_show_icon">Afficher l\'icône</string>
+    <string name="smart_folder_name_present">Ce dossier intelligent existe déjà</string>
+    <string name="smart_folder_saved">Dossier intelligent enregistré</string>
+    <string name="add_smart_folder">Ajouter un dossier intelligent</string>
+    <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
+    <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
+    <string name="empty_name">Sans nom</string>
+    <string name="edit_fiilter">Modifier le filtre</string>
+    <string name="empty_smart_folder_title">Aucune trace trouvée</string>
+    <string name="empty_smart_folder_description">Toutes les traces correspondantes apparaîtront automatiquement ici</string>
+    <string name="configure_filter">Paramétrer le filtre</string>
+    <string name="no_config_smart_folder_title">Non paramétré</string>
+    <string name="discard_filter_changes">Effacer les filtres</string>
+    <string name="shared_string_loading">Chargement</string>
+    <string name="discard_filter_changes_prompt">Êtes-vous certain de vouloir réinitialiser tous les filtres \?</string>
+    <string name="no_config_smart_folder_description">Les dossiers intelligents regroupent les traces grâce aux filtres</string>
+    <string name="loading_tracks">Rechargement des traces</string>
+    <string name="searching_matching_tracks">Rechercher tous les traces correspondantes</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d trace)</item>
+        <item quantity="many">%1$d (%2$d traces)</item>
+        <item quantity="other">%1$d (%2$d traces)</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">Êtes-vous certain de vouloir supprimer de manière définitive tous les éléments présents dans la corbeille \? Cette action ne pourra pas être annulée.</string>
+    <string name="restore_from_trash">Restaurer depuis la corbeille</string>
+    <string name="delete_all_items">Supprimer tous les éléments</string>
+    <string name="trash_is_empty_banner_desc">Les fichiers supprimés d\'OsmAnd Cloud seront disponibles ici pendant %1$s jours.</string>
+    <string name="delete_trash_item_confirmation_desc">Êtes-vous certain de vouloir supprimer \"%1$s\" de manière définitive \?
+\n
+\nCette action ne pourra pas être annulée.</string>
+    <string name="shared_string_empty_trash">Vider la corbeille</string>
+    <string name="shared_string_delete_immediately">Supprimer définitivement</string>
+    <string name="shared_string_is_deleted">%1$s a été supprimé.</string>
+    <string name="cloud_item_restored">%1$s a été restauré dans le Cloud.</string>
+    <string name="trash_alert_card_desc">Les éléments de la corbeille seront supprimés après %1$s jours.</string>
+    <string name="trash_is_empty">La corbeille est vide</string>
+    <string name="shared_string_trash">Corbeille</string>
+    <string name="shared_string_delete_item">Supprimer l\'élément</string>
 </resources>

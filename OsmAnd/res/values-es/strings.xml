@@ -5427,11 +5427,21 @@
     <string name="live_monitoring_adress_descr">Especifica la dirección web con la sintaxis de los parámetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
-    <string name="release_4_6">- Complemento de índice de planeo
+    <string name="release_4_6">• Añadido el widget \"relación de planeo\"
 \n
-\n - Añadido el complemento para la temperatura ANT
+\n • Filtros y carpetas inteligentes para las pistas
 \n
-\n - Mejor gestión de la memoria para pistas GPX de gran tamaño
+\n • Añadidas filas para los paneles de widgets superior e inferior con soporte para todos los widgets
+\n
+\n • Añadido el soporte para el widget de temperatura ANT
+\n
+\n • Mejora la gestión de la memoria para grandes pistas GPX
+\n
+\n • Actualizada la gestión de recursos locales en las Descargas
+\n
+\n • Añadido widget \"RAM disponible\"
+\n
+\n • Solucionados los problemas con la barra de estado transparente
 \n
 \n</string>
     <string name="app_mode_baby_transport">Cochecito</string>
@@ -5463,4 +5473,42 @@
     <string name="sort_country_name_descending">Nombre del país: Z - A</string>
     <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s\?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
+    <string name="shared_string_show_icon">Mostrar el icono</string>
+    <string name="smart_folder_name_present">Esta carpeta inteligente ya está presente</string>
+    <string name="smart_folder_saved">Carpeta inteligente guardada</string>
+    <string name="add_smart_folder">Agregar una carpeta inteligente</string>
+    <string name="empty_name">Nombre vacío</string>
+    <string name="edit_fiilter">Editar el filtro</string>
+    <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
+    <string name="empty_smart_folder_title">No hay pista coincidente</string>
+    <string name="empty_smart_folder_description">Todas las pistas coincidentes aparecerán automáticamente aquí</string>
+    <string name="configure_filter">Configurar el filtro</string>
+    <string name="no_config_smart_folder_title">Sin configurar</string>
+    <string name="discard_filter_changes">Descartar los cambios del filtro</string>
+    <string name="shared_string_loading">Cargando</string>
+    <string name="discard_filter_changes_prompt">¿Estás seguro de que quieres restablecer todos los filtros\?</string>
+    <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar las pistas según los filtros que apliques</string>
+    <string name="loading_tracks">Recargar las pistas</string>
+    <string name="searching_matching_tracks">Buscar todas las pistas coincidentes</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d pista)</item>
+        <item quantity="many">%1$d (%2$d pistas)</item>
+        <item quantity="other">%1$d (%2$d pistas)</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">¿Estás seguro de que deseas eliminar permanentemente todos los elementos de la Papelera\? Esta acción no se puede deshacer.</string>
+    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="delete_all_items">Borrar todos los elementos</string>
+    <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. ¿Estás seguro\?
+\n
+\nEsta acción no se puede deshacer.</string>
+    <string name="shared_string_empty_trash">Vaciar la papelera</string>
+    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_is_deleted">%1$s está borrado.</string>
+    <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
+    <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
+    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="shared_string_trash">Papelera</string>
+    <string name="shared_string_delete_item">Elemento borrado</string>
 </resources>

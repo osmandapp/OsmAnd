@@ -19,13 +19,6 @@
 		android:orientation="horizontal"
 		android:weightSum="1">
 
-		<View
-			android:id="@+id/map_route_land_left_margin"
-			android:layout_width="@dimen/map_route_planning_land_width_minus_shadow"
-			android:layout_height="0dp"
-			android:layout_gravity="top|start"
-			android:visibility="gone" />
-
 		<!-- LEFT widgets panel -->
 		<net.osmand.plus.views.controls.SideWidgetsPanel
 			android:id="@+id/map_left_widgets_panel"

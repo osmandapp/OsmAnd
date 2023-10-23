@@ -5221,7 +5221,7 @@
     <string name="calculate_offline">По карте высот</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
     <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
-    <string name="running_scds_device_name">Работающее устройство</string>
+    <string name="running_scds_device_name">Бег</string>
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
@@ -5443,9 +5443,19 @@
     <string name="average_glide_ratio">Средний коэффициент планирования</string>
     <string name="release_4_6">• Виджет «Коэффициент планирования»
 \n
-\n • Добавлен виджет температуры ANT+.
+\n • Добавлены фильтры и смарт-папки для треков
 \n
-\n • Улучшено управление памятью для больших треков GPX.
+\n • Добавлены строки для верхней и нижней панелей виджетов с поддержкой всех виджетов
+\n
+\n • Добавлен виджет температуры ANT+
+\n
+\n • Улучшено управление памятью для больших треков GPX
+\n
+\n • Обновлено управление локальными ресурсами в разделе «Загрузки карт»
+\n
+\n • Добавлен виджет «Доступная оперативная память»
+\n
+\n • Исправлены проблемы с прозрачной строкой состояния
 \n
 \n</string>
     <string name="app_mode_paragliding">Парапланеризм</string>
@@ -5453,4 +5463,26 @@
     <string name="app_mode_hang_gliding">Дельтапланеризм</string>
     <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
     <string name="widget_available_ram">Доступная оперативная память</string>
+    <string name="shared_string_created">Дата создания</string>
+    <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующие параметры: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_show_icon">Показать значок</string>
+    <string name="bicycle_scd_device_name">Велосипед</string>
+    <string name="smart_folder_name_present">Смарт-папка с таким именем уже существует</string>
+    <string name="smart_folder_saved">Смарт-папка сохранена</string>
+    <string name="add_smart_folder">Создать смарт-папку</string>
+    <string name="empty_name">Отсутствует имя</string>
+    <string name="edit_fiilter">Фильтр</string>
+    <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
+    <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
+    <string name="empty_smart_folder_title">Нет подходящего трека</string>
+    <string name="empty_smart_folder_description">Здесь автоматически появится все подходящие треки</string>
+    <string name="configure_filter">Настройка фильтра</string>
+    <string name="no_config_smart_folder_title">Не настроен</string>
+    <string name="discard_filter_changes">Отменить изменения фильтра</string>
+    <string name="shared_string_loading">Загрузка</string>
+    <string name="discard_filter_changes_prompt">Сбросить все фильтры\?</string>
+    <string name="no_config_smart_folder_description">Смарт-папки позволяют группировать треки по примененным фильтрам</string>
+    <string name="loading_tracks">Перезагрузка треков</string>
+    <string name="searching_matching_tracks">Искать все подходящие треки</string>
+    <string name="shared_string_is_deleted">%1$s удалено.</string>
 </resources>

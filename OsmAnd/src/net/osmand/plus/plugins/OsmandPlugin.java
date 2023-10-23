@@ -60,6 +60,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -390,12 +391,12 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		return null;
 	}
 
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
-		return createMapWidgetForParams(mapActivity, widgetType, null);
+		return createMapWidgetForParams(mapActivity, widgetType, null, null);
 	}
 
 	public List<String> indexingFiles(@Nullable IProgress progress) {

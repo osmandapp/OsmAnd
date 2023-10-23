@@ -607,7 +607,7 @@
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
     <string name="contribution_activity">Instalar compilación</string>
     <string name="choose_osmand_theme_descr">Personaliza el aspecto de la aplicación.</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Aspecto de la aplicación</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Indicar dirección</string>
     <string name="favourites_list_activity">Elegir favorito</string>
@@ -971,7 +971,7 @@
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
-    <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados inmediatamente.</string>
+    <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
@@ -3321,7 +3321,7 @@
     <string name="monitoring_min_accuracy_descr">Esto registrará solo los puntos medidos con una indicación de precisión mínima (en metros o pies, según lo informado por Android para su conjunto de chips). La precisión es la proximidad de las mediciones a la ubicación real y no está directamente relacionada con la precisión, que es la dispersión de las mediciones repetidas.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones atmosféricas.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir que se grabará y que no, puede ser mejor apagar este filtro.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado inmediatamente antes de una grabación, el primer punto medido podría tener una menor precisión, entonces en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado de inmediato antes de una grabación, el primer punto medido podría tener una menor precisión, entonces en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
     <string name="monitoring_min_distance_descr">Activar este filtro, permite evitar grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Pueden filtrarse los pequeños movimientos (por ejemplo, hacia los lados del camino para marcar un posible desvío en el viaje). Nótese que el archivo contendrá menos información para el post-procesamiento y, al mismo tiempo, podría guardar errores del GPS causados por una mala recepción o por efectos del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendación: Define un desplazamiento de 5 metros si no deseas registrar detalles menores de la ruta y no necesitas datos adicionales sobre el período de descanso.</string>
@@ -4839,7 +4839,7 @@
     <string name="simulate_location_by_gpx">Simular ubicación via GPX</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
-    <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir los patrones del tráfico y generar informes anónimos de mapas mensuales.</string>
+    <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd, supervisar el uso justo de los recursos del servidor, predecir patrones de tráfico y generar informes anónimos de mapas mensuales.</string>
     <string name="terms_of_service_desc">Al descargar los mapas, aceptas los %1$s y %2$s.</string>
     <string name="shared_string_terms_of_use">Términos de uso</string>
     <string name="map_widget_rendering_fps_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos , expresada en fotogramas por segundo (FPS).</string>
@@ -5267,7 +5267,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
-    <string name="osmand_cloud_deletion_account_warning">Ésta cuenta y todos sus datos serán %1$s.</string>
+    <string name="osmand_cloud_deletion_account_warning">Esta cuenta y todos sus datos serán %1$s.</string>
     <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
@@ -5440,11 +5440,21 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Se ha añadido el widget de proporción del deslizamiento.
+    <string name="release_4_6">• Se ha añadido el widget «Relación de planeo».
+\n
+\n• Se añadieron filtros y carpetas inteligentes para las trazas
+\n
+\n• Se añadieron filas para los paneles de widget superior e inferior, con admisión a todos los widgets
 \n
 \n• Se ha añadido el widget de temperatura en ANT+
 \n
 \n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n
+\n• Se ha mejorado la gestión de archivos locales en el menú «Descargas»
+\n
+\n• Se ha añadido el widget «RAM disponible»
+\n
+\n• Se han corregido los problemas de transparencia en la barra de estado
 \n
 \n</string>
     <string name="shared_string_temperature">Temperatura</string>
@@ -5468,7 +5478,7 @@
     <string name="standard_maps">Mapas estándar</string>
     <string name="shared_string_created">Creado</string>
     <string name="wikipedia_and_travel_maps">Wikipedia y mapas turísticos</string>
-    <string name="rendering_styles">Estilos de dibujado</string>
+    <string name="rendering_styles">Estilos de representación</string>
     <string name="sort_country_name_ascending">Nombre del país: A – Z</string>
     <string name="weather_online">Clima en línea</string>
     <string name="map_is_up_to_date">El mapa «%1$s» está actualizado.</string>
@@ -5478,4 +5488,42 @@
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
     <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
+    <string name="shared_string_show_icon">Mostrar icono</string>
+    <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
+    <string name="smart_folder_saved">Carpeta inteligente guardada</string>
+    <string name="add_smart_folder">Añadir carpeta inteligente</string>
+    <string name="empty_name">Nombre vacío</string>
+    <string name="edit_fiilter">Editar filtro</string>
+    <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
+    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="configure_filter">Configurar filtro</string>
+    <string name="no_config_smart_folder_title">No configurado</string>
+    <string name="discard_filter_changes">Descartar cambios del filtro</string>
+    <string name="shared_string_loading">Cargando</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
+    <string name="loading_tracks">Recargando trazas</string>
+    <string name="searching_matching_tracks">Buscar las trazas que coincidan</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d traza)</item>
+        <item quantity="many">%1$d (%2$d trazas)</item>
+        <item quantity="other"/>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="delete_all_items">Borrar todos los elementos</string>
+    <string name="trash_is_empty_banner_desc">Los elementos borrados desde OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
+    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
+\n
+\nEsta acción no se puede deshacer.</string>
+    <string name="shared_string_empty_trash">Papelera vacía</string>
+    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
+    <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
+    <string name="trash_alert_card_desc">Los elementos en la papelera serán borrados pasados los %1$s días.</string>
+    <string name="trash_is_empty">Papelera vacía</string>
+    <string name="shared_string_trash">Papelera</string>
+    <string name="shared_string_delete_item">Borrar elemento</string>
 </resources>

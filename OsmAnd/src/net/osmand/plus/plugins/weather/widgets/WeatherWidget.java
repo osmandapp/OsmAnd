@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.weather.widgets;
 
+import android.view.View;
+
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -15,10 +17,11 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -31,7 +34,7 @@ import java.util.TimeZone;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class WeatherWidget extends TextInfoWidget {
+public class WeatherWidget extends SimpleWidget {
 
 	public static final String TAG = WeatherWidget.class.getSimpleName();
 
@@ -62,8 +65,8 @@ public class WeatherWidget extends TextInfoWidget {
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
-		super(mapActivity, widgetType);
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band) {
+		super(mapActivity, widgetType, customId, null);
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();
@@ -77,11 +80,16 @@ public class WeatherWidget extends TextInfoWidget {
 		this.callback.swigReleaseOwnership();
 		setIcons(widgetType);
 		setText(NO_VALUE, null);
-		setOnClickListener(v -> {
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 				showForecastInfoToast();
 			}
-		});
+		};
 	}
 
 	private void onValueObtained(boolean success, @NonNull PointI requestedPoint31, long requestedTime, double value) {
@@ -140,7 +148,7 @@ public class WeatherWidget extends TextInfoWidget {
 
 	public long getDateTime() {
 		long time = dateTime != null ? dateTime : System.currentTimeMillis();
-		return WeatherHelper.roundForecastTimeToHour(time);
+		return WeatherUtils.roundForecastTimeToHour(time);
 	}
 
 	private boolean shouldObtainValue(@Nullable PointI point31, @Nullable ZoomLevel zoom, long dateTime) {
@@ -157,7 +165,7 @@ public class WeatherWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
 		PointI point31 = getPoint31();
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();

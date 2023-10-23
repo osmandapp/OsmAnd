@@ -5424,11 +5424,21 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Siklási arány widget
+    <string name="release_4_6">• Siklási arány widget hozzáadva
 \n
-\n • ANT+ hőmérséklet widget hozzáadva
+\n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
+\n
+\n • Sorok hozzáadva a felső és alsó widget panelekhez, az összes widget támogatásával
+\n
+\n • ANT+ hőmérséklet widget támogatás hozzáadva
 \n
 \n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n
+\n • Frissítve a helyi erőforrás-kezelés a Letöltésekben
+\n
+\n • \"Elérhető memória\" widget hozzáadva
+\n
+\n • Átlátszó állapotsor problémái javítva
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
@@ -5461,4 +5471,41 @@
     <string name="sort_country_name_descending">Országnév Z - A</string>
     <string name="delete_map_description">Biztosan törli %1$s térképét\?</string>
     <string name="maps_and_resources">Térképek és erőforrások</string>
+    <string name="shared_string_show_icon">Ikon mutatása</string>
+    <string name="smart_folder_name_present">Ilyen okosmappa már van</string>
+    <string name="smart_folder_saved">Okosmappa mentve</string>
+    <string name="add_smart_folder">Okosmappa hozzáadása</string>
+    <string name="empty_name">Üres név</string>
+    <string name="edit_fiilter">Szűrő szerkesztése</string>
+    <string name="save_as_smart_folder">Mentés okosmappaként</string>
+    <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
+    <string name="empty_smart_folder_description">Minden egyező nyomvonal itt fog megjelenni</string>
+    <string name="configure_filter">Szűrő konfigurálása</string>
+    <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
+    <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
+    <string name="shared_string_loading">Betöltés</string>
+    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt\?</string>
+    <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
+    <string name="loading_tracks">Nyomvonalak újratöltése</string>
+    <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d nyomvonal)</item>
+        <item quantity="other">%1$d (%2$d nyomvonal)</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból\? Ezt a műveletet nem lehet később visszavonni.</string>
+    <string name="restore_from_trash">Visszaállítás a Lomtárból</string>
+    <string name="delete_all_items">Összes elem törlése</string>
+    <string name="trash_is_empty_banner_desc">Az OsmAnd felhőből eltávolított elemek itt még elérhetőek %1$s napig.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne\?
+\n
+\nA művelet nem vonható vissza.</string>
+    <string name="shared_string_empty_trash">Lomtár kiürítése</string>
+    <string name="shared_string_delete_immediately">Azonnali törlés</string>
+    <string name="shared_string_is_deleted">%1$s törölve.</string>
+    <string name="cloud_item_restored">%1$s visszaállítva a felhőbe.</string>
+    <string name="trash_alert_card_desc">A lomtárban lévő elemek %1$s nap után törlődnek.</string>
+    <string name="trash_is_empty">A lomtár üres</string>
+    <string name="shared_string_trash">Lomtár</string>
+    <string name="shared_string_delete_item">Elem törlése</string>
 </resources>

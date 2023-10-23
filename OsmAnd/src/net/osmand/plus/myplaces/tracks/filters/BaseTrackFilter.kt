@@ -8,15 +8,17 @@ abstract class BaseTrackFilter(
 	val displayNameId: Int,
 	@Expose
 	@SerializedName("filterType") val filterType: FilterType,
-	var filterChangedListener: FilterChangedListener) {
+	var filterChangedListener: FilterChangedListener?) {
 
 	abstract fun isEnabled(): Boolean
 
 	abstract fun isTrackAccepted(trackItem: TrackItem): Boolean
 
-	fun getFilerType(): FilterType {
-		return filterType
-	}
+	abstract fun initWithValue(value: BaseTrackFilter)
 
 	open fun initFilter() {}
+
+	override fun equals(other: Any?): Boolean {
+		return other is BaseTrackFilter && other.filterType == filterType
+	}
 }

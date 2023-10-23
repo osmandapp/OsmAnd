@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+import static net.osmand.wiki.WikiCoreHelper.USE_OSMAND_WIKI_API;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -34,6 +36,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -55,13 +58,19 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.wikimedia.WikiImageCard;
 import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.wiki.WikiImage;
 
+import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -72,7 +81,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class WikipediaPlugin extends OsmandPlugin {
-
+	private static final Log LOG = PlatformUtil.getLog(WikipediaPlugin.class);
+	public static final String URL_PHOTO = "url-photo";
+	public static final String ORG_WIKI_SUFFIX = ".org/wiki/";
 	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED;
 	public final ListStringPreference WIKIPEDIA_POI_ENABLED_LANGUAGES;
 
@@ -245,6 +256,36 @@ public class WikipediaPlugin extends OsmandPlugin {
 		poiFilters.add(topWikiPoiFilter);
 
 		return poiFilters;
+	}
+
+	@Override
+	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder, @NonNull JSONObject imageObject) {
+		ImageCard imageCard = null;
+		if (mapActivity != null) {
+			try {
+				if (imageObject.has("type") && imageObject.has("url")) {
+					String type = imageObject.getString("type");
+					if (URL_PHOTO.equals(type)) {
+						String url = imageObject.getString("url");
+						int colonIdx = url.lastIndexOf(":");
+						if (url.contains(ORG_WIKI_SUFFIX) && colonIdx > 0) {
+							String fileName = url.substring(colonIdx + 1);
+							WikiImage wikiImage = WikiCoreHelper.getImageData(fileName);
+							if (wikiImage != null) {
+								imageCard = new WikiImageCard(mapActivity, wikiImage);
+							}
+						}
+					}
+				}
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+		}
+		if (imageCard != null) {
+			holder.add(ImageCard.ImageCardType.OTHER, imageCard);
+			return true;
+		}
+		return false;
 	}
 
 	public void updateWikipediaState() {
@@ -527,7 +568,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, holder);
 			}
 			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
-			if (wikimediaContent != null) {
+			if (wikimediaContent != null && !(USE_OSMAND_WIKI_API && wikidataId != null)) {
 				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
 				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, holder);
 			}

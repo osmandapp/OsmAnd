@@ -64,6 +64,7 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="alert_dialog_theme">@style/OsmandLightTheme</item>
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="bottom_bar_background_color">@color/card_and_list_background_light</item>
@@ -112,6 +113,7 @@
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="activity_background_color">@color/activity_background_color_light</item>
         <item name="list_background_color">@color/list_background_color_light</item>
+        <item name="widget_background_color">@color/widget_background_color_light</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
         <item name="ctx_menu_divider">@color/divider_color_light</item>
@@ -410,6 +412,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
+        <item name="alert_dialog_theme">@style/OsmandDarkTheme</item>
         <item name="bottom_bar_background_color">@color/card_and_list_background_dark</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_main_dark</item>
@@ -455,6 +458,7 @@
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="activity_background_color">@color/activity_background_color_dark</item>
         <item name="list_background_color">@color/list_background_color_dark</item>
+        <item name="widget_background_color">@color/widget_background_color_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
         <item name="ctx_menu_divider">@color/divider_color_dark</item>

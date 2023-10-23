@@ -206,8 +206,8 @@ public class RenderingRuleSearchRequest {
 		}
 		return fit;
 	}
-
-	protected void loadOutputProperties(RenderingRule rule, boolean override) {
+	
+	public void loadOutputProperties(RenderingRule rule, boolean override) {
 		RenderingRuleProperty[] properties = rule.getProperties();
 		for (int i = 0; i < properties.length; i++) {
 			RenderingRuleProperty rp = properties[i];

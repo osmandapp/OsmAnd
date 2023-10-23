@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="si_kmh">Kilometrii pe oră</string>
+    <string name="si_kmh">Kilometri pe oră</string>
     <string name="si_nm">Mile nautice</string>
     <string name="si_km_m">Km/metri</string>
     <string name="si_mi_meters">Mile/metri</string>
@@ -8,9 +8,9 @@
     <string name="si_mi_feet">Mile/picior</string>
     <string name="by_name">Prin nume</string>
     <string name="unit_of_length">Unități de lungime</string>
-    <string name="shared_string_search">Căutați</string>
-    <string name="shared_string_logout">Deconectare</string>
-    <string name="duration_ago">%1$s în urmă</string>
+    <string name="shared_string_search">Căutare</string>
+    <string name="shared_string_logout">Deconectează-te</string>
+    <string name="duration_ago">În urmă cu %1$s</string>
     <string name="shared_string_account">Cont</string>
     <string name="re_send_location">Trimiteți din nou locația</string>
     <string name="not_found_yet">Nu s-a găsit încă</string>
@@ -120,17 +120,17 @@
     <string name="last_update_from_telegram_date">Ultima actualizare de la Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
     <string name="shared_string_hide">Ascunde</string>
-    <string name="shared_string_add">Adăugați</string>
+    <string name="shared_string_add">Adaugă</string>
     <string name="shared_string_map">Hartă</string>
-    <string name="average_speed">Viteza medie</string>
-    <string name="average_altitude">Altitudinea medie</string>
+    <string name="average_speed">Viteză medie</string>
+    <string name="average_altitude">Altitudine medie</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_appearance">Aspect</string>
     <string name="shared_string_ok">OK</string>
     <string name="altitude">Altitudine</string>
     <string name="shared_string_enable">Activează</string>
     <string name="shared_string_select">Selectați</string>
-    <string name="shared_string_apply">Aplicați</string>
+    <string name="shared_string_apply">Aplică</string>
     <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="units_and_formats">Unități &amp; formate</string>
     <string name="shared_string_export">Exportați</string>
@@ -159,7 +159,7 @@
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
-    <string name="foot">picior</string>
+    <string name="foot">picioare</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Bine ați venit</string>
     <string name="shared_string_authorization_descr">Vă rugăm să introduceți numărul de telefon Telegram în format internațional</string>
@@ -214,7 +214,7 @@
     <string name="enter_phone_number">Introduceți numărul de telefon</string>
     <string name="do_not_have_telegram">Nu am cont de Telegram</string>
     <string name="already_registered_in_telegram">Aveți nevoie de un cont Telegram înregistrat și de un număr de telefon</string>
-    <string name="shared_string_off">Închideți</string>
+    <string name="shared_string_off">Inactiv</string>
     <string name="shared_string_all">Toate</string>
     <string name="get_telegram_after_creating_account">Atunci puteți utiliza această aplicație.</string>
     <string name="get_telegram_description_continue">Vă rugăm să instalați Telegram și să vă creați un cont.</string>
@@ -241,12 +241,12 @@
     <string name="logout_help_desc">Cum să dezactivați OsmAnd Tracker din Telegram</string>
     <string name="disconnect_from_telegram">Cum să dezactivați OsmAnd Tracker din Telegram</string>
     <string name="disconnect_from_telegram_desc">Pentru a revoca accesul la partajarea locației. Deschideți Telegram, accesați Setări → Confidențialitate și securitate → Sesiuni și încheiați sesiunea OsmAnd Tracker.</string>
-    <string name="shared_string_close">Închideți</string>
+    <string name="shared_string_close">Închide</string>
     <string name="logout_no_internet_msg">Conectați-vă la internet pentru a vă deconecta corect de la Telegram.</string>
     <string name="shared_string_group">Grup</string>
     <string name="last_response">Ultimul răspuns</string>
     <string name="time_ago">în urmă</string>
-    <string name="shared_string_exit">Ieșire</string>
+    <string name="shared_string_exit">Ieși</string>
     <string name="turn_off_all">Opriți toate</string>
     <string name="disable_all_sharing">Dezactivați toate partajările</string>
     <string name="disable_all_sharing_desc">Dezactivează partajarea locației pentru toate chat-urile selectate (%1$d).</string>
@@ -262,12 +262,12 @@
     <string name="live_now_description">Contacte și grupuri care vă partajează locația.</string>
     <string name="share_location_as">Partajați locația ca</string>
     <string name="add_device">Adăugați un dispozitiv</string>
-    <string name="shared_string_save">Salvați</string>
+    <string name="shared_string_save">Salvează</string>
     <string name="shared_string_disable">Dezactivați</string>
     <string name="no_internet_connection">Fără conectare la internet</string>
     <string name="no_gps_connection">Fără conexiune GPS</string>
     <string name="shared_string_status">Stare</string>
-    <string name="shared_string_enabled">Activat</string>
+    <string name="shared_string_enabled">Activ</string>
     <string name="location_sharing_status">Partajare: %1$s</string>
     <string name="sharing_status">Starea de partajare</string>
     <string name="last_available_location">Ultima locație disponibilă</string>

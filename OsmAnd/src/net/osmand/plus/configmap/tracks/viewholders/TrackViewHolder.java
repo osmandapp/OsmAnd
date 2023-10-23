@@ -163,7 +163,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
 				appendNameDescription(builder, item, analysis, shouldShowFolder);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
-				appendCreationTimeDescription(builder, analysis);
+				appendCreationTimeDescription(builder, item, analysis);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
 				appendDistanceDescription(builder, item, analysis, shouldShowFolder);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
@@ -202,10 +202,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
-	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
-		if (analysis.startTime > 0) {
+	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
+		if (item.getDataItem() != null && item.getDataItem().getFileCreationTime() > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			builder.append(format.format(new Date(analysis.startTime)));
+			builder.append(format.format(new Date(item.getDataItem().getFileCreationTime())));
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}

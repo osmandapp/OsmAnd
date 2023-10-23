@@ -70,6 +70,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -97,8 +98,8 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
-import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -781,10 +782,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandMapTileView mapView = getMapView();
 		if (settings.isLastKnownMapLocation()) {
-			LatLon mapLocation = settings.getLastKnownMapLocation();
-			float height = settings.getLastKnownMapHeight();
-			LatLon mapShiftedLocation = settings.getLastKnownMapLocationShifted();
-			mapView.setLatLon(mapLocation, height, mapShiftedLocation);
+			LatLon l = settings.getLastKnownMapLocation();
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
 			mapView.initMapRotationByCompassMode();
 		}
@@ -1300,7 +1299,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		getMapView().getAnimatedDraggingThread().blockAnimations();
+		NavigationService carNavigationService = app.getNavigationService();
+		if (carNavigationService == null || !carNavigationService.isCarNavigationActive()) {
+			getMapView().getAnimatedDraggingThread().blockAnimations();
+		}
 
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
@@ -1326,11 +1328,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 
 		LatLon mapLocation = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon mapLocationShifted = mapLocation;
-		float height = mapView.getHeight();
-		if (height != 0.0f)
-			mapLocationShifted = mapView.getTargetLatLon(mapLocationShifted);
-		settings.setLastKnownMapLocation(mapLocation, height, mapLocationShifted);
+		settings.setLastKnownMapLocation(mapLocation);
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 		if (animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0 && !getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),
@@ -2239,15 +2237,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getLocaleHelper().setLanguage(this);
 
 		app.runInUIThread(() -> {
-			List<Fragment> fragments = getSupportFragmentManager().getFragments();
-			for (Fragment fragment : fragments) {
-				getSupportFragmentManager()
-						.beginTransaction()
-						.detach(fragment)
-						.attach(fragment)
-						.commitAllowingStateLoss();
+			FragmentManager manager = getSupportFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+				manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 			}
-
 			DashboardOnMap dashboard = getDashboard();
 			if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
 				dashboard.refreshContent(true);

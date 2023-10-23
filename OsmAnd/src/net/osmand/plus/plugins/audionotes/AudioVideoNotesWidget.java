@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
+
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -8,18 +12,28 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
-public class AudioVideoNotesWidget extends TextInfoWidget {
+public class AudioVideoNotesWidget extends SimpleWidget {
 
 	private Boolean cachedRecording;
 
-	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType, int actionId) {
-		super(mapActivity, widgetType);
+	@AV_DEFAULT_ACTION
+	private final int actionId;
 
-		updateInfo(null);
-		setOnClickListener(v -> {
+	public AudioVideoNotesWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @AV_DEFAULT_ACTION int actionId, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, widgetType, customId, widgetsPanel);
+		this.actionId = actionId;
+
+		updateSimpleWidgetInfo(null);
+		setOnClickListener(getOnClickListener());
+	}
+
+	@Override
+	protected View.OnClickListener getOnClickListener() {
+		return v -> {
 			AudioVideoNotesPlugin plugin = getPlugin();
 			if (plugin != null) {
 				if (plugin.isRecording()) {
@@ -28,11 +42,11 @@ public class AudioVideoNotesWidget extends TextInfoWidget {
 					plugin.makeAction(mapActivity, actionId);
 				}
 			}
-		});
+		};
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		AudioVideoNotesPlugin plugin = getPlugin();
 		if (plugin == null) {
 			setText(null, null);

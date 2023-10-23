@@ -3462,7 +3462,7 @@
     <string name="poi_glacier_ele_top">Plej alta punkto</string>
     <string name="poi_glacier_ele_bottom">Plej malalta punkto</string>
     <string name="poi_glacier_slope">Mezuma klineco</string>
-    <string name="poi_checkpoint_type">Tipo de kontrolpunkto</string>
+    <string name="poi_checkpoint_type">Speco de kontrolpunkto</string>
     <string name="poi_checkpoint_hiking">Piedmarŝada kontrolpunkto</string>
     <string name="poi_checkpoint_type_stamp">stampilo</string>
     <string name="poi_checkpoint_type_code">kodo</string>
@@ -4631,4 +4631,6 @@
     <string name="poi_health_specialty_paediatric_dentistry_yes">dent-kuracado de infanoj</string>
     <string name="poi_health_specialty_weight_loss_yes">perdo de pezo</string>
     <string name="poi_health_specialty_infectious_diseases_yes">infekt-malsan-scienco</string>
+    <string name="poi_socket_typee_yes">tipo E</string>
+    <string name="poi_checkpoint_cycling">Biciklada kontrolpunkto</string>
 </resources>

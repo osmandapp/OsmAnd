@@ -69,7 +69,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
-				.setTitle(getString(R.string.edit_name))
+				.setTitle(getString(R.string.shared_string_rename))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
 					Activity activity = getActivity();

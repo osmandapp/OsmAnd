@@ -4,8 +4,8 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
@@ -29,6 +29,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
@@ -37,7 +38,9 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFr
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -147,18 +150,18 @@ public enum WidgetType {
 	@StringRes
 	public final int docsUrlId;
 	@Nullable
-	private WidgetGroup group;
+	private final WidgetGroup group;
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
 	WidgetType(@NonNull String id,
-	           @StringRes int titleId,
-	           @StringRes int descId,
-	           @DrawableRes int dayIconId,
-	           @DrawableRes int nightIconId,
-	           @StringRes int docsUrlId,
-	           @Nullable WidgetGroup group,
-	           @NonNull WidgetsPanel defaultPanel) {
+			   @StringRes int titleId,
+			   @StringRes int descId,
+			   @DrawableRes int dayIconId,
+			   @DrawableRes int nightIconId,
+			   @StringRes int docsUrlId,
+			   @Nullable WidgetGroup group,
+			   @NonNull WidgetsPanel defaultPanel) {
 		this.id = id;
 		this.titleId = titleId;
 		this.descId = descId;
@@ -175,13 +178,18 @@ public enum WidgetType {
 	}
 
 	public WidgetGroup getGroup() {
-		if (group == ALTITUDE) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.is3DMapsEnabled()) {
-				return null;
-			}
+		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed()) {
+			return null;
 		}
 		return group;
+	}
+
+	public boolean isAllowed() {
+		if (this == ALTITUDE_MAP_CENTER) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			return plugin != null && plugin.is3DMapsEnabled();
+		}
+		return true;
 	}
 
 	@StringRes
@@ -254,20 +262,40 @@ public enum WidgetType {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		if (defaultPanel == TOP) {
-			return BOTTOM.contains(widgetId, settings, mode) ? BOTTOM : TOP;
-		} else if (defaultPanel == BOTTOM) {
-			return TOP.contains(widgetId, settings, mode) ? TOP : BOTTOM;
-		} else if (defaultPanel == LEFT) {
-			return RIGHT.contains(widgetId, settings, mode) ? RIGHT : LEFT;
-		} else if (defaultPanel == RIGHT) {
-			return LEFT.contains(widgetId, settings, mode) ? LEFT : RIGHT;
+		WidgetsPanel widgetsPanel = findWidgetPanel(widgetId, settings, mode);
+		if (widgetsPanel != null) {
+			return widgetsPanel;
 		}
-		throw new IllegalStateException("Unsupported panel");
+		return defaultPanel;
 	}
 
 	@Nullable
-	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx) {
+	public static WidgetsPanel findWidgetPanel(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ApplicationMode mode) {
+		ApplicationMode appMode = mode == null ? settings.getApplicationMode() : mode;
+		ArrayList<WidgetsPanel> setPanels = new ArrayList<>();
+		ArrayList<WidgetsPanel> unsetPanels = new ArrayList<>();
+		for (WidgetsPanel widgetsPanel : WidgetsPanel.values()) {
+			if (widgetsPanel.getOrderPreference(settings).isSetForMode(appMode)) {
+				setPanels.add(widgetsPanel);
+			} else {
+				unsetPanels.add(widgetsPanel);
+			}
+		}
+		for (WidgetsPanel panel : setPanels) {
+			if (panel.contains(widgetId, settings, appMode)) {
+				return panel;
+			}
+		}
+		for (WidgetsPanel panel : unsetPanels) {
+			if (panel.contains(widgetId, settings, appMode)) {
+				return panel;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
 		if (this == ELEVATION_PROFILE) {
 			return isPurchased(ctx) ? new ElevationProfileWidgetSettingsFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
@@ -292,6 +320,15 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetSettingsFragment();
+		}
+
+		if (widgetInfo instanceof SimpleWidgetInfo) {
+			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
+			if (simpleWidget.isVerticalWidget()) {
+				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
+				settingsFragment.setWidgetType(this);
+				return settingsFragment;
+			}
 		}
 		return null;
 	}

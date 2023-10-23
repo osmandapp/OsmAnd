@@ -12,9 +12,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -666,6 +666,15 @@ public class UiUtilities {
 	public static SpannableString createUrlSpannable(@NonNull String text, @NonNull String url) {
 		SpannableString spannable = new SpannableString(text);
 		setSpan(spannable, new CustomURLSpan(url), text, url);
+		return spannable;
+	}
+
+	@NonNull
+	public static SpannableString createColorSpannable(@NonNull String text, @ColorInt int color, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String s : textToStyle) {
+			setSpan(spannable, new ForegroundColorSpan(color), text, s);
+		}
 		return spannable;
 	}
 

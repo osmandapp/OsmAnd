@@ -12,22 +12,23 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-public class CameraDistanceWidget extends TextInfoWidget {
+public class CameraDistanceWidget extends SimpleWidget {
 
 	private final OsmandMapTileView mapView;
 	private float cachedCameraDistance = -1;
 
-	public CameraDistanceWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE);
+	public CameraDistanceWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, WidgetType.DEV_CAMERA_DISTANCE, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_CAMERA_DISTANCE);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		float cameraDistance = getCameraHeightInMeters();
 		if (isUpdateNeeded() || cameraDistance != cachedCameraDistance) {
 			cachedCameraDistance = cameraDistance;

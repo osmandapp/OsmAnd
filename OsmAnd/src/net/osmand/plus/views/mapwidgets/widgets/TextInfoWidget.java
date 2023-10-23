@@ -23,16 +23,16 @@ public class TextInfoWidget extends MapWidget {
 
 	protected static final String NO_VALUE = "—";
 
-	private String contentTitle;
+	protected String contentTitle;
 
-	private final ImageView imageView;
-	private final TextView textView;
-	private final TextView textViewShadow;
-	private final TextView smallTextView;
-	private final TextView smallTextViewShadow;
-	private final View container;
-	private final View emptyBanner;
-	private final View bottomDivider;
+	protected ImageView imageView;
+	protected TextView textView;
+	protected TextView textViewShadow;
+	protected TextView smallTextView;
+	protected TextView smallTextViewShadow;
+	protected View container;
+	protected View emptyBanner;
+	protected View bottomDivider;
 
 	@DrawableRes
 	private int dayIconId;
@@ -97,7 +97,7 @@ public class TextInfoWidget extends MapWidget {
 		}
 	}
 
-	private CharSequence combine(CharSequence text, CharSequence subtext) {
+	protected CharSequence combine(CharSequence text, CharSequence subtext) {
 		if (TextUtils.isEmpty(text)) {
 			return subtext;
 		} else if (TextUtils.isEmpty(subtext)) {
@@ -127,18 +127,28 @@ public class TextInfoWidget extends MapWidget {
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
 		setContentDescription(combine(text, subtext));
 		if (text == null) {
-			textView.setText("");
-			textViewShadow.setText("");
+			setText("");
 		} else {
-			textView.setText(text);
-			textViewShadow.setText(text);
+			setText(text);
 		}
 		if (subtext == null) {
-			smallTextView.setText("");
-			smallTextViewShadow.setText("");
+			setSmallText("");
 		} else {
-			smallTextView.setText(subtext);
-			smallTextViewShadow.setText(subtext);
+			setSmallText(subtext);
+		}
+	}
+
+	private void setText(String text) {
+		textView.setText(text);
+		if (textViewShadow != null) {
+			textViewShadow.setText(text);
+		}
+	}
+
+	private void setSmallText(String text) {
+		smallTextView.setText(text);
+		if (smallTextViewShadow != null) {
+			smallTextViewShadow.setText(text);
 		}
 	}
 
@@ -181,21 +191,30 @@ public class TextInfoWidget extends MapWidget {
 			setImageDrawable(iconId);
 		}
 
-		view.setBackgroundResource(textState.widgetBackgroundId);
+		view.setBackgroundResource(getBackgroundResource(textState));
 		bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+	}
+
+	@DrawableRes
+	protected int getBackgroundResource(@NonNull TextState textState) {
+		return textState.widgetBackgroundId;
 	}
 
 	@Override
 	public boolean isViewVisible() {
-		return container.getVisibility() == View.VISIBLE;
+		return getContentView().getVisibility() == View.VISIBLE;
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		boolean updatedVisibility = AndroidUiHelper.updateVisibility(container, visible);
+		boolean updatedVisibility = AndroidUiHelper.updateVisibility(getContentView(), visible);
 		if (updatedVisibility && app.accessibilityEnabled()) {
-			container.setFocusable(visible);
+			getContentView().setFocusable(visible);
 		}
 		return updatedVisibility;
+	}
+
+	protected View getContentView() {
+		return container;
 	}
 
 	public boolean updateBannerVisibility(boolean visible) {
