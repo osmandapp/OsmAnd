@@ -112,7 +112,6 @@
 						android:id="@+id/action_button"
 						layout="@layout/list_item_with_right_text_56dp" />
 
-
 					<include
 						android:id="@+id/key_button"
 						layout="@layout/list_item_with_right_text_56dp" />
