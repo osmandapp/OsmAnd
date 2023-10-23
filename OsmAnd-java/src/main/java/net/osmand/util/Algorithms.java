@@ -1372,6 +1372,12 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static <T> List<T> setInList(Collection<T> original, int position, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.set(position, element);
+		return copy;
+	}
+
 	public static <T> List<T> removeFromList(Collection<T> original, T element) {
 		List<T> copy = new ArrayList<>(original);
 		copy.remove(element);

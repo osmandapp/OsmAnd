@@ -12,7 +12,7 @@ import net.osmand.plus.keyevent.commands.MapZoomCommand;
 /**
  * WunderLINQ device, motorcycle smart phone control
  */
-public class WunderLINQDeviceProfile extends InputDeviceProfile {
+public class WunderLINQDeviceProfile extends PredefinedInputDeviceProfile {
 
 	public static final String ID = "wunderlinq";
 

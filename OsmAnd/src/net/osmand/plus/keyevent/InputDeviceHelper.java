@@ -1,5 +1,7 @@
 package net.osmand.plus.keyevent;
 
+import android.view.KeyEvent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -38,10 +40,7 @@ public class InputDeviceHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	/**
-	 * Use the same Commands factory to speed up new commands creation
-	 */
-	private final KeyEventCommandsFactory commandsFactory = new KeyEventCommandsFactory();
+
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
 	private final List<InputDeviceProfile> customDevices;
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
@@ -52,7 +51,7 @@ public class InputDeviceHelper {
 		settings = app.getSettings();
 		customDevices = loadCustomDevices();
 		for (InputDeviceProfile device : getAvailableDevices()) {
-			device.initialize(app, commandsFactory);
+			device.initialize(app);
 			cachedDevices.put(device.getId(), device);
 		}
 	}
@@ -71,16 +70,6 @@ public class InputDeviceHelper {
 
 	public void removeListener(@NonNull InputDeviceHelperListener listener) {
 		listeners.remove(listener);
-	}
-
-	@Nullable
-	public KeyEventCommand getOrCreateCommand(@NonNull String commandId) {
-		return commandsFactory.getOrCreateCommand(commandId);
-	}
-
-	@NonNull
-	public KeyEventCommandsFactory getCommandsFactory() {
-		return commandsFactory;
 	}
 
 	public void selectInputDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
@@ -127,12 +116,11 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	private InputDeviceProfile makeCustomDevice(
-			@NonNull String id, @NonNull String name, @NonNull InputDeviceProfile baseDevice
-	) {
-		InputDeviceProfile customDevice = new CustomInputDeviceProfile(id, name, baseDevice);
-		customDevice.initialize(app, commandsFactory);
-		return customDevice;
+	private InputDeviceProfile makeCustomDevice(@NonNull String id, @NonNull String name,
+	                                            @NonNull InputDeviceProfile parentDevice) {
+		InputDeviceProfile device = new CustomInputDeviceProfile(id, name, parentDevice);
+		device.initialize(app);
+		return device;
 	}
 
 	private void saveCustomDevice(@NonNull InputDeviceProfile device) {
@@ -172,10 +160,17 @@ public class InputDeviceHelper {
 	                             @NonNull String commandId,
 	                             int oldKeyCode, int newKeyCode) {
 		InputDeviceProfile device = getDeviceById(deviceId);
-		if (device != null) {
-			device.updateMappedCommands(oldKeyCode, newKeyCode, commandId);
-			syncSettings();
+		if (device == null) {
+			return;
 		}
+		if (newKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
+			device.removeKeyBinding(oldKeyCode);
+		} else if (oldKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
+			device.addKeyBinding(newKeyCode, commandId);
+		} else {
+			device.updateKeyBinding(oldKeyCode, newKeyCode, commandId);
+		}
+		syncSettings();
 	}
 
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
@@ -260,7 +255,11 @@ public class InputDeviceHelper {
 		List<InputDeviceProfile> res = new ArrayList<>();
 		JSONArray jsonArray = json.getJSONArray("items");
 		for (int i = 0; i < jsonArray.length(); i++) {
-			res.add(new CustomInputDeviceProfile(jsonArray.getJSONObject(i)));
+			try {
+				res.add(new CustomInputDeviceProfile(jsonArray.getJSONObject(i)));
+			} catch (JSONException e) {
+				LOG.debug("Error while reading a custom device from JSON ", e);
+			}
 		}
 		return res;
 	}

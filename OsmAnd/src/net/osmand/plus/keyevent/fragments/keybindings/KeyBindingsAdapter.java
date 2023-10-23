@@ -33,7 +33,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public static final int CARD_DIVIDER = 1;
 	public static final int HEADER = 2;
-	public static final int ACTION_ITEM = 3;
+	public static final int KEY_BINDING_ITEM = 3;
 	public static final int CARD_BOTTOM_SHADOW = 4;
 	public static final int SPACE = 5;
 
@@ -66,7 +66,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case HEADER:
 				return new HeaderViewHolder(inflate(R.layout.list_item_header_48dp));
-			case ACTION_ITEM:
+			case KEY_BINDING_ITEM:
 				return new ActionItemViewHolder(inflate(R.layout.list_item_external_input_device_keybinding_item));
 			case CARD_BOTTOM_SHADOW:
 				return new CardBottomShadowViewHolder(inflate(R.layout.card_bottom_divider));
@@ -103,7 +103,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.keyName.setText(keyBinding.getKeySymbol());
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.type == ACTION_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.type == KEY_BINDING_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}

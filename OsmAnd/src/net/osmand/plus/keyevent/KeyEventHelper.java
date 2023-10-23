@@ -128,10 +128,8 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	}
 
 	private void bindCommand(int keyCode, @NonNull String commandId) {
-		KeyEventCommandsFactory commandsFactory = deviceHelper.getCommandsFactory();
-		KeyEventCommand command = commandsFactory.getOrCreateCommand(commandId);
+		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, commandId);
 		if (command != null) {
-			command.initialize(app, commandId);
 			globalCommands.put(keyCode, command);
 		}
 	}

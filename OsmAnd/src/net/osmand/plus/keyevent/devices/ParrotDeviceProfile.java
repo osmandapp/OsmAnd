@@ -11,7 +11,7 @@ import net.osmand.plus.keyevent.commands.MapZoomCommand;
 /**
  * Parrot device has only dpad left and right
  */
-public class ParrotDeviceProfile extends InputDeviceProfile {
+public class ParrotDeviceProfile extends PredefinedInputDeviceProfile {
 
 	public static final String ID = "parrot";
 

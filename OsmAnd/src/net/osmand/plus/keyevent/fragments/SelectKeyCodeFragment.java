@@ -209,7 +209,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private KeyEventCommand getCommandDuplication(int keyCode) {
 		if (inputDevice != null) {
-			KeyEventCommand command = inputDevice.getMappedCommands().get(keyCode);
+			KeyEventCommand command = inputDevice.findCommand(keyCode);
 			if (command != null && !Objects.equals(commandId, command.getId())) {
 				return command;
 			}
