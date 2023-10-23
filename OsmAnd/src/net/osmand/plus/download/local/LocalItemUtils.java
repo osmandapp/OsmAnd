@@ -170,7 +170,7 @@ public class LocalItemUtils {
 
 	@Nullable
 	public static LocalItemType getItemType(@NonNull OsmandApplication app, @NonNull File file) {
-		String name = file.getName();
+		String name = file.getName().toLowerCase();
 		String path = file.getAbsolutePath();
 
 		if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_FILE_EXT + ZIP_EXT)) {

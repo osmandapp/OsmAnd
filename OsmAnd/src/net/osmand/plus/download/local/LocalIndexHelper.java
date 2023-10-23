@@ -75,13 +75,14 @@ public class LocalIndexHelper {
 	public Map<CategoryType, LocalCategory> loadAllFilesByCategories() {
 		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
 
+		File noBackupDir = settings.getNoBackupPath();
 		File internalDir = getAppDir(settings.getInternalAppPath());
 		File externalDir = getAppDir(settings.getExternalStorageDirectory());
 
-		collectFiles(categories, internalDir, false);
+		collectFiles(categories, internalDir, noBackupDir, false);
 
 		if (!Algorithms.objectEquals(internalDir, externalDir)) {
-			collectFiles(categories, externalDir, true);
+			collectFiles(categories, externalDir, noBackupDir, true);
 		}
 
 		return categories;
@@ -93,14 +94,18 @@ public class LocalIndexHelper {
 		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
 	}
 
-	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File dir, boolean addUnknown) {
+	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories,
+	                          @NonNull File dir, @NonNull File noBackupDir, boolean addUnknown) {
+		if (!addUnknown && Algorithms.objectEquals(dir, noBackupDir)) {
+			addUnknown = true;
+		}
 		File[] listFiles = dir.listFiles();
 		if (!Algorithms.isEmpty(listFiles)) {
 			for (File file : listFiles) {
 				addFile(categories, file, addUnknown);
 
 				if (file.isDirectory()) {
-					collectFiles(categories, file, addUnknown);
+					collectFiles(categories, file, noBackupDir, addUnknown);
 				}
 			}
 		}
