@@ -73,8 +73,11 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		if (holder instanceof MemoryViewHolder) {
 			MemoryInfo memoryInfo = (MemoryInfo) items.get(position);
 
+			boolean lastItem = position == getItemCount() - 1;
+			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
+
 			MemoryViewHolder viewHolder = (MemoryViewHolder) holder;
-			viewHolder.bindView(memoryInfo);
+			viewHolder.bindView(memoryInfo, !hideDivider);
 		} else if (holder instanceof LocalItemHolder) {
 			LocalItem item = (LocalItem) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;

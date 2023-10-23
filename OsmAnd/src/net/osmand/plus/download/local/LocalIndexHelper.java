@@ -44,6 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -61,32 +62,34 @@ import java.util.TreeMap;
 public class LocalIndexHelper {
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final ResourceManager resourceManager;
 
 	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		settings = app.getSettings();
 		resourceManager = app.getResourceManager();
 	}
 
 	@NonNull
 	public Map<CategoryType, LocalCategory> loadAllFilesByCategories() {
 		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
-		collectFiles(categories, getInternalDir(), false);
-		collectFiles(categories, getExternalDir(), true);
+
+		File internalDir = getAppDir(settings.getInternalAppPath());
+		File externalDir = getAppDir(settings.getExternalStorageDirectory());
+
+		collectFiles(categories, internalDir, false);
+
+		if (!Algorithms.objectEquals(internalDir, externalDir)) {
+			collectFiles(categories, externalDir, true);
+		}
+
 		return categories;
 	}
 
 	@NonNull
-	private File getInternalDir() {
-		File filesDir = app.getFilesDir();
-		File parentDir = filesDir.getParentFile();
-		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
-	}
-
-	@NonNull
-	private File getExternalDir() {
-		File appDir = app.getAppPath(null);
-		File parentDir = appDir.getParentFile();
+	private File getAppDir(@NonNull File dir) {
+		File parentDir = dir.getParentFile();
 		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
 	}
 

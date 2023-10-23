@@ -62,7 +62,7 @@
 				android:id="@+id/container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/list_background_color"
+				android:background="?attr/activity_background_color"
 				android:orientation="vertical" />
 
 		</androidx.core.widget.NestedScrollView>
