@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -85,7 +87,7 @@ public class DownloadValidationManager {
 	}
 
 	private void copyVoiceAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
-		if (downloadFilesCheck_1_FreeVersion(activity)) {
+		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
 			downloadFilesCheck_3_ValidateSpace(activity, items);
 		}
 	}
@@ -100,21 +102,29 @@ public class DownloadValidationManager {
 	}
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, IndexItem... items) {
-		if (downloadFilesCheck_1_FreeVersion(activity)) {
+		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
 			downloadFilesCheck_2_Internet(activity, items);
 		}
 	}
 
-	private boolean downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context) {
-		if (!Version.isPaidVersion(app)) {
-			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
-				new InstallPaidVersionDialogFragment()
-						.show(context.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
-				return false;
-			}
+	private boolean downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context, IndexItem... items) {
+		if (!Version.isPaidVersion(app) && shouldShowChoosePlan(items)) {
+			ChoosePlanFragment.showInstance(context, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+			return false;
 		}
 		return true;
+	}
+
+	private boolean shouldShowChoosePlan(IndexItem... items) {
+		boolean isAnyItemCountedInDownload = false;
+		for (IndexItem indexItem : items) {
+			if (DownloadActivityType.isCountedInDownloads(indexItem)) {
+				isAnyItemCountedInDownload = true;
+				break;
+			}
+		}
+		int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+		return total >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS && isAnyItemCountedInDownload;
 	}
 
 	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, IndexItem[] items) {
