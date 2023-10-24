@@ -123,7 +123,7 @@ public class AppVersionUpgradeOnInit {
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
 	public static final int VERSION_4_6_05 = 4605;
-	// 4601 - 4.6-06 (Change external input device preference type from integer to string)
+	// 4606 - 4.6-06 (Change external input device preference type from integer to string)
 	public static final int VERSION_4_6_06 = 4606;
 
 	public static final int LAST_APP_VERSION = VERSION_4_6_06;
