@@ -16,11 +16,15 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ReorderWidgetsAdapterHelper {
 
@@ -30,17 +34,19 @@ public class ReorderWidgetsAdapterHelper {
 	private final MapWidgetRegistry widgetRegistry;
 	private final List<ListItem> items;
 	private final boolean nightMode;
+	private final boolean verticalPanel;
 
 	public ReorderWidgetsAdapterHelper(@NonNull OsmandApplication app,
-	                                   @NonNull ReorderWidgetsAdapter adapter,
-	                                   @NonNull WidgetsDataHolder dataHolder,
-	                                   @NonNull List<ListItem> items,
-	                                   boolean nightMode) {
+									   @NonNull ReorderWidgetsAdapter adapter,
+									   @NonNull WidgetsDataHolder dataHolder,
+									   @NonNull List<ListItem> items,
+									   boolean nightMode) {
 		this.app = app;
 		this.adapter = adapter;
 		this.dataHolder = dataHolder;
 		this.items = items;
 		this.nightMode = nightMode;
+		this.verticalPanel = dataHolder.getSelectedPanel().isPanelVertical();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 	}
 
@@ -143,10 +149,14 @@ public class ReorderWidgetsAdapterHelper {
 			return;
 		}
 
-		moveWidgetsToPreviousPage(pageToDelete);
+		if (verticalPanel) {
+			deletePageWithWidgets(pageToDelete);
+		} else {
+			moveWidgetsToPreviousPage(pageToDelete);
+		}
 		dataHolder.deletePage(pageToDelete);
-
 		items.remove(position);
+
 		List<Integer> changedPageItems = new ArrayList<>();
 		for (int i = position; i < adapter.getItemCount(); i++) {
 			ListItem listItem = items.get(i);
@@ -159,6 +169,33 @@ public class ReorderWidgetsAdapterHelper {
 		adapter.notifyItemRemoved(position);
 		for (int itemIndex : changedPageItems) {
 			adapter.notifyItemChanged(itemIndex);
+		}
+	}
+
+	private void deletePageWithWidgets(int pageToDelete) {
+		List<String> pageWidgets = dataHolder.getPages().get(pageToDelete);
+		if (pageWidgets == null) {
+			return;
+		}
+
+		List<String> widgetsToDelete = new ArrayList<>(pageWidgets);
+		for (String widgetId : widgetsToDelete) {
+			dataHolder.deleteWidget(widgetId);
+		}
+		List<ListItem> listItemsToDelete = new ArrayList<>();
+		for (ListItem item : items) {
+			if (item.value instanceof AddedWidgetUiInfo) {
+				AddedWidgetUiInfo widgetUiInfo = (AddedWidgetUiInfo) item.value;
+				if (widgetsToDelete.contains(widgetUiInfo.key)) {
+					listItemsToDelete.add(item);
+				}
+				if (widgetUiInfo.page > pageToDelete) {
+					widgetUiInfo.page -= 1;
+				}
+			}
+		}
+		for (ListItem item : listItemsToDelete) {
+			items.remove(item);
 		}
 	}
 
@@ -202,7 +239,94 @@ public class ReorderWidgetsAdapterHelper {
 		}
 	}
 
-	public boolean swapItemsIfAllowed(int from, int to) {
+	private int getTargetRowId(int fromWidgetId, int toRowId) {
+		ListIterator<ListItem> iterator = items.listIterator(toRowId);
+		int targetRowId = toRowId;
+		ListItem itemTo = items.get(toRowId);
+
+		if (itemTo.value instanceof PageUiInfo && fromWidgetId > toRowId) {
+			while (iterator.hasPrevious()) {
+				targetRowId = iterator.previousIndex();
+				ListItem item = iterator.previous();
+				if (item.value instanceof PageUiInfo) {
+					return targetRowId;
+				}
+			}
+		} else if (itemTo.value instanceof PageUiInfo && fromWidgetId < toRowId) {
+			return targetRowId;
+		}
+		return -1;
+	}
+
+	private List<MapWidget> getTargetRowWidgets(int targetRowId) {
+		List<MapWidget> targetRowWidgets = new ArrayList<>();
+		ListItem obj = items.get(targetRowId);
+		if (obj.value instanceof PageUiInfo && items.size() > targetRowId + 1) {
+			Iterator<ListItem> iterator = items.listIterator(targetRowId + 1);
+			while (iterator.hasNext()) {
+				ListItem listItem = iterator.next();
+				if (listItem.value instanceof AddedWidgetUiInfo) {
+					AddedWidgetUiInfo widgetUiInfo = (AddedWidgetUiInfo) listItem.value;
+					targetRowWidgets.add(widgetUiInfo.info.widget);
+				} else {
+					return targetRowWidgets;
+				}
+			}
+		}
+		return targetRowWidgets;
+	}
+
+	private boolean verticalWidgetCanBeAdded(@NonNull List<MapWidget> targetRowWidgets, @NonNull MapWidget fromWidget) {
+		if (Algorithms.isEmpty(targetRowWidgets)) {
+			return true;
+		}
+
+		boolean containsSimpleWidget = true;
+		for (MapWidget widget : targetRowWidgets) {
+			if (!(widget instanceof SimpleWidget)) {
+				containsSimpleWidget = false;
+				break;
+			}
+		}
+		return fromWidget instanceof SimpleWidget && containsSimpleWidget;
+	}
+
+	private boolean swapVerticalWidgets(int from, int to) {
+		ListItem itemFrom = items.get(from);
+		ListItem itemTo = items.get(to);
+		Object valueFrom = itemFrom.value;
+		Object valueTo = itemTo.value;
+
+		boolean swapWidgets = valueFrom instanceof AddedWidgetUiInfo && valueTo instanceof AddedWidgetUiInfo;
+		boolean swapWidgetWithPage = valueFrom instanceof AddedWidgetUiInfo
+				&& valueTo instanceof PageUiInfo
+				&& ((PageUiInfo) valueTo).index > 0;
+
+		if (swapWidgets) {
+			AddedWidgetUiInfo fromWidget = (AddedWidgetUiInfo) valueFrom;
+			AddedWidgetUiInfo toWidget = (AddedWidgetUiInfo) valueTo;
+			if (fromWidget.info.getClass() == toWidget.info.getClass()) {
+				swapWidgets(from, to);
+				return true;
+			}
+		}
+		if (swapWidgetWithPage) {
+			int targetRowId = getTargetRowId(from, to);
+			if (targetRowId == -1) {
+				return false;
+			}
+			List<MapWidget> targetRowWidgets = getTargetRowWidgets(targetRowId);
+			AddedWidgetUiInfo fromWidget = (AddedWidgetUiInfo) valueFrom;
+			PageUiInfo pageUiInfo = (PageUiInfo) items.get(targetRowId).value;
+			if (verticalWidgetCanBeAdded(targetRowWidgets, fromWidget.info.widget)) {
+				addVerticalWidgetsToRow(from, to, targetRowId, pageUiInfo);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean swapHorizontalWidgets(int from, int to) {
 		ListItem itemFrom = items.get(from);
 		ListItem itemTo = items.get(to);
 		Object valueFrom = itemFrom.value;
@@ -237,6 +361,40 @@ public class ReorderWidgetsAdapterHelper {
 		return false;
 	}
 
+	public boolean swapItemsIfAllowed(int from, int to) {
+		return verticalPanel ? swapVerticalWidgets(from, to) : swapHorizontalWidgets(from, to);
+	}
+
+	private void addVerticalWidgetsToRow(int from, int to, int pageId, PageUiInfo pageUiInfo) {
+		if (to > pageId) {
+			AddedWidgetUiInfo widgetFrom = ((AddedWidgetUiInfo) items.get(from).value);
+			dataHolder.deleteWidget(widgetFrom.key);
+			widgetFrom.page = pageUiInfo.index;
+			dataHolder.addWidgetToPage(widgetFrom.key, widgetFrom.page);
+			widgetFrom.order = dataHolder.getMaxOrderOfPage(widgetFrom.page) + 1;
+			ListItem fromItem = items.get(from);
+			items.remove(fromItem);
+			items.add(to, fromItem);
+		} else {
+			AddedWidgetUiInfo widgetFrom = ((AddedWidgetUiInfo) items.get(from).value);
+			dataHolder.deleteWidget(widgetFrom.key);
+			dataHolder.shiftPageOrdersToLeft(widgetFrom.page, widgetFrom.order);
+
+			widgetFrom.page = pageUiInfo.index;
+			dataHolder.addWidgetToPage(widgetFrom.key, widgetFrom.page, 0);
+
+			widgetFrom.order = 0;
+			dataHolder.shiftPageOrdersToRight(widgetFrom.page);
+			dataHolder.getOrders().put(widgetFrom.key, 0);
+
+			ListItem fromItem = items.get(from);
+			items.remove(fromItem);
+			items.add(to, fromItem);
+		}
+
+		adapter.notifyItemMoved(from, to);
+	}
+
 	private void swapWidgets(int from, int to) {
 		AddedWidgetUiInfo widgetFrom = ((AddedWidgetUiInfo) items.get(from).value);
 		AddedWidgetUiInfo widgetTo = ((AddedWidgetUiInfo) items.get(to).value);
@@ -249,6 +407,8 @@ public class ReorderWidgetsAdapterHelper {
 		widgetFrom.order = widgetTo.order;
 		widgetTo.order = tempOrder;
 
+		dataHolder.deleteWidget(widgetFrom.key);
+		dataHolder.deleteWidget(widgetTo.key);
 		dataHolder.addWidgetToPage(widgetFrom.key, widgetFrom.page);
 		dataHolder.addWidgetToPage(widgetTo.key, widgetTo.page);
 
@@ -321,11 +481,17 @@ public class ReorderWidgetsAdapterHelper {
 	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetsPanel panel = dataHolder.getSelectedPanel();
 
-		boolean alreadyAdded = widgetAlreadyAdded(widgetInfo.key);
-		String widgetId = alreadyAdded ? getDuplicateWidgetId(widgetInfo.key) : widgetInfo.key;
+		String widgetId = getDuplicateWidgetId(widgetInfo.key);
 
 		int page = getLastPage();
 		int order = dataHolder.getMaxOrderOfPage(page) + 1;
+
+		List<String> lastPageOrder = dataHolder.getPages().get(page);
+		if (lastPageOrder != null && panel.isPanelVertical()) {
+			page++;
+			order = 0;
+			insertToEndOfAddedWidgets(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
+		}
 
 		dataHolder.addWidgetToPage(widgetId, page);
 		dataHolder.getOrders().put(widgetId, order);
@@ -337,12 +503,9 @@ public class ReorderWidgetsAdapterHelper {
 		addedWidgetUiInfo.page = page;
 		addedWidgetUiInfo.order = order;
 		addedWidgetUiInfo.iconId = widgetInfo.getMapIconId(nightMode);
+		addedWidgetUiInfo.newWidgetToCreate = true;
 
 		insertToEndOfAddedWidgets(new ListItem(ItemType.ADDED_WIDGET, addedWidgetUiInfo));
-	}
-
-	private boolean widgetAlreadyAdded(@NonNull String widgetId) {
-		return dataHolder.getOrders().containsKey(widgetId) || widgetRegistry.isWidgetVisible(widgetId);
 	}
 
 	private void removeAddedItemFromAvailable(@NonNull String widgetId) {

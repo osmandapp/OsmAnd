@@ -37,6 +37,7 @@
 				android:layout_marginVertical="@dimen/content_padding_small"
 				android:gravity="center_vertical"
 				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
 				tools:text="@string/shared_string_cache" />
 
 		</LinearLayout>
@@ -49,9 +50,5 @@
 			android:background="?attr/divider_color_basic" />
 
 	</LinearLayout>
-
-	<include
-		android:id="@+id/bottom_shadow"
-		layout="@layout/card_bottom_divider" />
 
 </LinearLayout>

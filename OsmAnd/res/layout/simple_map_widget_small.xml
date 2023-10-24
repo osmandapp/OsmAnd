@@ -5,7 +5,6 @@
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/widget_background_color"
 	android:minHeight="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
@@ -45,8 +44,8 @@
 			android:id="@+id/linearLayout"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
 			android:layout_marginStart="16dp"
+			android:orientation="vertical"
 			osmand:layout_constraintBottom_toBottomOf="parent"
 			osmand:layout_constraintEnd_toEndOf="parent"
 			osmand:layout_constraintStart_toEndOf="@+id/widget_text"
@@ -57,10 +56,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
-				android:letterSpacing="0.06"
-				android:maxLines="1"
-				android:lineSpacingExtra="-2sp"
 				android:ellipsize="end"
+				android:letterSpacing="0.06"
+				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -73,6 +72,7 @@
 				android:layout_gravity="end"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -81,12 +81,5 @@
 		</LinearLayout>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
-
-	<View
-		android:id="@+id/bottom_divider"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="@drawable/divider"
-		android:visibility="visible" />
 
 </LinearLayout>

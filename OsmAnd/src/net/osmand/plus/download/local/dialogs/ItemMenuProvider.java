@@ -113,7 +113,7 @@ public class ItemMenuProvider implements MenuProvider {
 		}
 		LocalItemType type = localItem.getType();
 
-		boolean backuped = localItem.isBackuped();
+		boolean backuped = localItem.isBackuped(app);
 		if (type.isBackupSupported() || backuped) {
 			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
 		}

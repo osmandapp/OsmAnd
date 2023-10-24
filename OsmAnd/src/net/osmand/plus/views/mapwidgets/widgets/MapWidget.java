@@ -80,7 +80,7 @@ public abstract class MapWidget {
 	}
 
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-						   int order, @NonNull List<MapWidget> followingWidgets) {
+						   @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 

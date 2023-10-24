@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -12,23 +14,22 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 
 public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
@@ -47,24 +48,21 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
-		Context ctx = getContext();
-
 		if (savedInstanceState != null) {
 			currentDirectory = savedInstanceState.getParcelable(CURRENT_DIRECTORY);
 			newDirectory = savedInstanceState.getParcelable(NEW_DIRECTORY);
 		}
-
-		if (ctx == null || currentDirectory == null || newDirectory == null) {
+		if (currentDirectory == null || newDirectory == null) {
 			return;
 		}
 
+		Context ctx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		items.add(new TitleItem(getString(R.string.change_osmand_data_folder_question)));
 
 		int textColorPrimary = ColorUtilities.getPrimaryTextColorId(nightMode);
 		int activeColor = ColorUtilities.getActiveColorId(nightMode);
 		CharSequence desc = null;
-		
+
 		File currentStorageFile = new File(currentDirectory.getDirectory());
 		if ((!FileUtils.isWritable(currentStorageFile))) {
 			desc = String.format(getString(R.string.android_19_location_disabled), currentStorageFile.getAbsoluteFile());
@@ -95,7 +93,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 		//buttons
 		View mainView = View.inflate(ctx, R.layout.bottom_sheet_change_data_storage, null);
-		
+
 		View btnDontMoveView = mainView.findViewById(R.id.btnDontMove);
 		btnDontMoveView.setOnClickListener(v -> positiveButtonsClick(false));
 		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, DialogButtonType.SECONDARY,
@@ -131,7 +129,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		bundle.putParcelable(CHOSEN_DIRECTORY, newDirectory);
 		bundle.putBoolean(MOVE_DATA, moveData);
 		Fragment fragment = getTargetFragment();
-		if (fragment  instanceof BaseSettingsFragment) {
+		if (fragment instanceof BaseSettingsFragment) {
 			((BaseSettingsFragment) fragment).onPreferenceChange(getPreference(), bundle);
 		}
 		dismiss();
@@ -149,25 +147,20 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		return true;
 	}
 
-	public static boolean showInstance(FragmentManager fm, String prefId, StorageItem currentDirectory,
-	                                   StorageItem newDirectory, Fragment target, boolean usedOnMap) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, prefId);
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String prefId,
+	                                StorageItem currentDirectory, StorageItem newDirectory,
+	                                Fragment target, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, prefId);
 
-				ChangeDataStorageBottomSheet fragment = new ChangeDataStorageBottomSheet();
-				fragment.setCurrentDirectory(currentDirectory);
-				fragment.setNewDirectory(newDirectory);
-				fragment.setTargetFragment(target, 0);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setArguments(args);
-				fragment.show(fm, TAG);
-				return true;
-			}
-		} catch (RuntimeException e) {
-			LOG.error(e.getMessage());
+			ChangeDataStorageBottomSheet fragment = new ChangeDataStorageBottomSheet();
+			fragment.setCurrentDirectory(currentDirectory);
+			fragment.setNewDirectory(newDirectory);
+			fragment.setTargetFragment(target, 0);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
 		}
-		return false;
 	}
 }

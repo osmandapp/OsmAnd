@@ -46,6 +46,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 	private final TextView size;
 	private final HorizontalBarChart chart;
+	private final View bottomDivider;
 
 
 	public MemoryViewHolder(@NonNull View itemView, boolean showHeader, boolean nightMode) {
@@ -55,6 +56,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 		size = itemView.findViewById(R.id.size);
 		chart = itemView.findViewById(R.id.horizontal_chart);
+		bottomDivider = itemView.findViewById(R.id.bottom_divider);
 
 		ChartUtils.setupHorizontalGPXChart(app, chart, 0, 0, 0, false, nightMode);
 		chart.getAxisRight().setDrawLabels(false);
@@ -65,15 +67,16 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 		int padding = showHeader ? 0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		AndroidUtils.setMargins((MarginLayoutParams) chart.getLayoutParams(), 0, padding, 0, 0);
+		AndroidUiHelper.updateVisibility(bottomDivider, !showHeader);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.header), showHeader);
-		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.bottom_divider), !showHeader);
 	}
 
-	public void bindView(@NonNull MemoryInfo memoryInfo) {
+	public void bindView(@NonNull MemoryInfo memoryInfo, boolean showDivider) {
 		BarData barData = ChartUtils.buildStatisticChart(app, chart, memoryInfo, nightMode);
 		adapter.updateContent(barData, memoryInfo);
 
 		size.setText(AndroidUtils.formatSize(app, memoryInfo.getSize()));
+		AndroidUiHelper.updateVisibility(bottomDivider, showDivider);
 	}
 
 	private static class MemoryChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, MemoryInfo> {

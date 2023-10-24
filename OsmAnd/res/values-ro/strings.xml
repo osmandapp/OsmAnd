@@ -375,7 +375,7 @@
     <string name="update_poi_file_not_found">Fișierul local pentru salvarea modificărilor POI nu există și nu a putut fi creat.</string>
     <string name="button_upgrade_osmandplus">Upgradați OsmAnd+</string>
     <string name="map_version_changed_info">Descărcați noua versiune a aplicației pentru a putea utiliza noile fișiere de hartă.</string>
-    <string name="shared_string_rename">Redenumire</string>
+    <string name="shared_string_rename">Redenumește</string>
     <string name="poi_filter_nominatim">Căutare online după nume</string>
     <string name="search_position_current_location_search">Se caută poziția…</string>
     <string name="search_position_current_location_found">Poziția mea (găsită)</string>
@@ -1573,7 +1573,7 @@
     <string name="shared_string_toolbar">Bara de instrumente</string>
     <string name="shared_string_widgets">Widgeturi</string>
     <string name="add_points_to_map_markers_q">Adăugați toate punctele ca marcaje de hartă\?</string>
-    <string name="shared_string_add_to_map_markers">Adaugă la marcaje de hartă</string>
+    <string name="shared_string_add_to_map_markers">Adaugă la marcajele de hartă</string>
     <string name="select_map_markers">Selectați marcajele de hartă</string>
     <string name="shared_string_reverse_order">Ordine inversă</string>
     <string name="clear_active_markers_q">Eliminați toate marcajele active\?</string>
@@ -1629,7 +1629,7 @@
     <string name="shared_string_deselect">Deselectați</string>
     <string name="shared_string_deselect_all">Deselectează tot</string>
     <string name="shared_string_share">Distribuie</string>
-    <string name="shared_string_export">Exportați</string>
+    <string name="shared_string_export">Exportă</string>
     <string name="shared_string_unexpected_error">Eroare neașteptată</string>
     <string name="shared_string_action_template">Acțiunea {0}</string>
     <string name="shared_string_collapse">Colapsează</string>
@@ -1779,7 +1779,7 @@
     <string name="group_will_be_removed_after_restart">Grupul va dispărea data viitoare când porniți aplicația.</string>
     <string name="show_guide_line">Afișați liniile direcționale</string>
     <string name="show_arrows_on_the_map">Arată săgețile pe hartă</string>
-    <string name="remove_from_map_markers">Eliminați din \'Marcaje de hartă\'</string>
+    <string name="remove_from_map_markers">Șterge din \'Marcaje de hartă\'</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Adăugat</string>
@@ -1849,7 +1849,7 @@
     <string name="display_zoom_level">Afisează nivelul de zoom: %1$s</string>
     <string name="favorite_group_name">Numele grupului</string>
     <string name="change_color">Schimbă culoarea</string>
-    <string name="edit_name">Modifică numele</string>
+    <string name="edit_name">Modificare nume</string>
     <string name="animate_my_location">Animare poziție proprie</string>
     <string name="shared_string_overview">Vedere de ansamblu</string>
     <string name="select_street">Selectează strada</string>
@@ -4523,7 +4523,7 @@
     <string name="apply_to_existing_favorites_descr">Aplicați schimbările punctelor favorite existente în grup sau doar celor noi\?</string>
     <string name="apply_to_existing_points_descr">Aplicați schimbările punctelor existente în grup sau doar celor noi\?</string>
     <string name="apply_only_to_new_favorites">Aplică doar favoritelor noi</string>
-    <string name="change_default_appearance">Schimbă aspectul implicit</string>
+    <string name="change_default_appearance">Schimbare aspect implicit</string>
     <string name="routeInfo_horse_scale_name">Dificultate trasee pentru cai</string>
     <string name="rendering_attr_showTramRoutes_name">Rute de tramvai</string>
     <string name="rendering_attr_showTrainRoutes_name">Rute de tren</string>

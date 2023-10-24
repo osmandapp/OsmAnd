@@ -187,7 +187,7 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	@NonNull
 	private File getFileToBackup(@NonNull LocalItem item) {
 		File file = item.getFile();
-		if (!item.isBackuped()) {
+		if (!item.isBackuped(app)) {
 			return new File(app.getAppPath(BACKUP_INDEX_DIR), file.getName());
 		}
 		return file;
@@ -197,7 +197,7 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	private File getFileToRestore(@NonNull LocalItem item) {
 		File file = item.getFile();
 		String fileName = file.getName();
-		if (item.isBackuped()) {
+		if (item.isBackuped(app)) {
 			File parent = file.getParentFile();
 			if (item.getType() == MAP_DATA) {
 				if (fileName.endsWith(BINARY_ROAD_MAP_INDEX_EXT)) {
