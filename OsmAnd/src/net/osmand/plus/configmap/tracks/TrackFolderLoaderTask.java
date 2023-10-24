@@ -1,9 +1,5 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.track.helpers.GPXFolderUtils.getSubfolderTitle;
-import static net.osmand.plus.track.helpers.GPXFolderUtils.listFilesSorted;
-import static net.osmand.plus.track.helpers.GpxUiHelper.isGpxFile;
-
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -17,8 +13,10 @@ import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXFolderUtils;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -64,14 +62,13 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 
 	private void loadGPXFolder(@NonNull TrackFolder trackFolder, @NonNull String subfolder, boolean updateSmartFolder) {
 		File folderFile = trackFolder.getDirFile();
-		File[] files = listFilesSorted(sortByMode, folderFile);
+		File[] files = GPXFolderUtils.listFilesSorted(sortByMode, folderFile);
 		for (File file : files) {
 			if (file.isDirectory()) {
 				TrackFolder folder = new TrackFolder(file, trackFolder);
 				trackFolder.addSubFolder(folder);
-				loadGPXFolder(folder, getSubfolderTitle(file, subfolder), updateSmartFolder);
-			} else if (isGpxFile(file)) {
-				smartFolderHelper.addAvailableTrackFolder(subfolder);
+				loadGPXFolder(folder, GPXFolderUtils.getSubfolderTitle(file, subfolder), updateSmartFolder);
+			} else if (GpxUiHelper.isGpxFile(file)) {
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
 				trackFolder.addTrackItem(trackItem);

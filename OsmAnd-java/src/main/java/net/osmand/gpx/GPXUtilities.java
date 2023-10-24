@@ -1307,6 +1307,20 @@ public class GPXUtilities {
 		return time;
 	}
 
+	public static long getCreationTime(GPXFile gpxFile) {
+		long time = 0;
+		if (gpxFile != null) {
+			if (gpxFile.metadata != null && gpxFile.metadata.time > 0) {
+				time = gpxFile.metadata.time;
+			} else if (gpxFile.getLastPoint() != null && gpxFile.getLastPoint().time > 0) {
+				time = gpxFile.getLastPoint().time;
+			} else {
+				time = gpxFile.modifiedTime;
+			}
+		}
+		return 0;
+	}
+
 	private static SimpleDateFormat getTimeFormatter() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));

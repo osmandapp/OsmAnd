@@ -23,25 +23,31 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	@Expose
 	var filters: MutableList<BaseTrackFilter>? = null
 
-	private lateinit var folderAnalysis: TrackFolderAnalysis
+	private var folderAnalysis: TrackFolderAnalysis? = null
 
 	override fun getName(context: Context): String {
 		return folderName
 	}
 
-	override fun getTrackItems(): MutableList<TrackItem> {
+	override fun getTrackItems(): List<TrackItem> {
 		return trackItems
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
 		trackItems.add(trackItem)
+		folderAnalysis = null
+	}
+
+	fun addAllTrackItem(trackItem: Collection<TrackItem>) {
+		trackItems.addAll(trackItem)
+		folderAnalysis = null
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
-		if (!this::folderAnalysis.isInitialized) {
+		if (folderAnalysis == null) {
 			folderAnalysis = TrackFolderAnalysis(this)
 		}
-		return folderAnalysis
+		return folderAnalysis!!
 	}
 
 	fun updateAnalysis() {
@@ -54,5 +60,10 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 
 	override fun lastModified(): Long {
 		return creationTime
+	}
+
+	fun resetItems() {
+		trackItems.clear()
+		folderAnalysis = null
 	}
 }
