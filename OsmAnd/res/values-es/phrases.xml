@@ -59,8 +59,8 @@
     <string name="poi_baby_goods">Artículos para bebés;Pañalera</string>
     <string name="poi_computer">Tienda de informática</string>
     <string name="poi_florist">Florería;Floristería</string>
-    <string name="poi_furniture">Mueblería</string>
-    <string name="poi_garden_centre">Centro de jardinería;Vivero (venta)</string>
+    <string name="poi_furniture">Tienda de muebles</string>
+    <string name="poi_garden_centre">Centro de jardinería; Vivero (venta)</string>
     <string name="poi_gas">Venta de garrafas;Gas líquido</string>
     <string name="poi_shop_yes">Comercio</string>
     <string name="poi_gift">Regalería;Tienda de regalos</string>
@@ -124,7 +124,7 @@
     <string name="poi_fuel_methanol">Metanol</string>
     <string name="poi_fuel_lh2">Hidrógeno líquido</string>
     <string name="poi_fuel_electricity">Electricidad</string>
-    <string name="poi_electricity_combined_charging">Estación de carga;Estación de carga de vehículos eléctricos; Punto de recarga eléctrica; Punto de carga; Estación de carga electrónica; Equipo de suministro de vehículos eléctricos</string>
+    <string name="poi_electricity_combined_charging">Estación de carga; Estación de carga de vehículos eléctricos; Punto de recarga eléctrica; Punto de carga; Estación de carga electrónica; Equipo de suministro de vehículos eléctricos</string>
     <string name="poi_vehicle_ramp">Rampa de vehículos</string>
     <string name="poi_compressed_air">Aire comprimido</string>
     <string name="poi_parking">Aparcamiento</string>
@@ -1848,7 +1848,7 @@
     <string name="poi_fuel_91ul">91UL (sin plomo, para aviones)</string>
     <string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
     <string name="poi_fuel_autogas">Autogas (Etanol libre de plomo)</string>
-    <string name="poi_fuel_jeta1">Jet A-1 (diésel)</string>
+    <string name="poi_fuel_jeta1">Combustible Jet A-1</string>
     <string name="poi_fuel_adblue">Aditivo para escapes de Diesel (AdBlue)</string>
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
@@ -1911,7 +1911,7 @@
     <string name="poi_shoes_women">Femenino</string>
     <string name="poi_shoes_sport">Deportivo</string>
     <string name="poi_shoes_men">Masculino</string>
-    <string name="poi_shoes_orthopedic">Ortopédico</string>
+    <string name="poi_shoes_orthopedic">Ortopaedia</string>
     <string name="poi_historic_manor">Mansión histórica</string>
     <string name="poi_castle_type_stately">Tipo de castillo: majestuoso</string>
     <string name="poi_castle_type_defensive">Tipo de castillo: defensivo</string>
@@ -2844,7 +2844,7 @@
     <string name="poi_vacuum_cleaner_filter">Aspiradora</string>
     <string name="poi_free_flying_characteristic">Características</string>
     <string name="poi_emergency_infrastructure">Infraestructura de emergencias</string>
-    <string name="poi_waterway_fuel">Gasolinera náutica;Estación de combustible náutica</string>
+    <string name="poi_waterway_fuel">Gasolinera náutica; Estación de combustible náutica</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
     <string name="poi_diet_vegan_filter_yes">Vegana</string>
     <string name="poi_diet_gluten_free_filter_yes">Libre de gluten</string>
@@ -4082,7 +4082,7 @@
     <string name="poi_beauty_salon_pedicure">Pedicura</string>
     <string name="poi_massage_chiropractic">Quiropráctica</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
-    <string name="poi_agrarian_yes">Sí;Agrario;Agrícola</string>
+    <string name="poi_agrarian_yes">Sí;Agrario</string>
     <string name="poi_agrarian_pesticide">Pesticida</string>
     <string name="poi_agrarian_fertilizer">Fertilizante</string>
     <string name="poi_agrarian_seed">Semilla</string>
@@ -4159,7 +4159,7 @@
     <string name="poi_heating_district_heating">Calefacción urbana</string>
     <string name="poi_heating_gas">Gas</string>
     <string name="poi_heating_radiator">Radiador</string>
-    <string name="poi_fridge_yes">Sí;Nevera;Heladera</string>
+    <string name="poi_fridge_yes">Sí; Nevera</string>
     <string name="poi_fridge_no">No</string>
     <string name="poi_fumarole">Fumarola</string>
     <string name="poi_faculty_aerospace">Aeroespacial</string>

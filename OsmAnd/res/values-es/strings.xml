@@ -2007,7 +2007,7 @@
     <string name="lang_kab">Cabilio</string>
     <string name="wiki_around">Artículos de Wikipedia cerca</string>
     <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
-    <string name="upload_poi">Subir PDI</string>
+    <string name="upload_poi">Cargar un PDI</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="search_map_hint">Ciudad o región</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
@@ -5511,4 +5511,10 @@
     <string name="trash_is_empty">La papelera está vacía</string>
     <string name="shared_string_trash">Papelera</string>
     <string name="shared_string_delete_item">Elemento borrado</string>
+    <string name="root_folder">Directorio raíz</string>
+    <string name="shared_string_rows">Filas</string>
+    <string name="all_folders">Todas las carpetas</string>
+    <string name="shared_string_show_less">Mostrar menos</string>
+    <string name="folder">Carpeta</string>
+    <string name="not_specified">Sin especificar</string>
 </resources>

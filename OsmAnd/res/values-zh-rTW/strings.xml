@@ -5500,4 +5500,10 @@
     <string name="trash_is_empty">回收桶是空的</string>
     <string name="shared_string_trash">回收桶</string>
     <string name="shared_string_delete_item">刪除項目</string>
+    <string name="root_folder">根資料夾</string>
+    <string name="shared_string_rows">列</string>
+    <string name="all_folders">所有資料夾</string>
+    <string name="shared_string_show_less">顯示較少</string>
+    <string name="folder">資料夾</string>
+    <string name="not_specified">未指定</string>
 </resources>

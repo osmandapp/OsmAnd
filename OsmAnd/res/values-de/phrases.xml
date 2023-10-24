@@ -4102,7 +4102,7 @@
     <string name="poi_beauty_salon_aesthetic">Behandlungen der ästhetischen Medizin</string>
     <string name="poi_beauty_salon_massage">Massage</string>
     <string name="poi_beauty_salon_pedicure">Pediküre</string>
-    <string name="poi_agrarian_yes">ja;Landhandel</string>
+    <string name="poi_agrarian_yes">Ja;Landhandel</string>
     <string name="poi_agrarian_pesticide">Schädlingsbekämpfungsmittel</string>
     <string name="poi_agrarian_fertilizer">Dünger</string>
     <string name="poi_agrarian_seed">Saatgut</string>
