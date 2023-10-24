@@ -29,7 +29,8 @@ public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType
 
 	@Override
 	protected Map<CategoryType, LocalCategory> doInBackground(Void... params) {
-		return new LocalIndexHelper(app).loadAllFilesByCategories();
+		LocalIndexHelper helper = new LocalIndexHelper(app);
+		return helper.loadAllFilesByCategories();
 	}
 
 	@Override
@@ -41,8 +42,10 @@ public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType
 
 	public interface LoadItemsListener {
 
-		void loadItemsStarted();
+		default void loadItemsStarted() {
+		}
 
-		void loadItemsFinished(@NonNull Map<CategoryType, LocalCategory> categories);
+		default void loadItemsFinished(@NonNull Map<CategoryType, LocalCategory> categories) {
+		}
 	}
 }

@@ -80,6 +80,14 @@ public class RestartActivity extends AppCompatActivity {
 		return false;
 	}
 
+	public static void doRestart(@NonNull Context ctx, boolean silent) {
+		if (silent) {
+			RestartActivity.doRestartSilent(ctx);
+		} else {
+			RestartActivity.doRestart(ctx);
+		}
+	}
+
 	public static void doRestart(@NonNull Context ctx) {
 		doRestart(ctx, ctx.getString(R.string.restart_is_required));
 	}
