@@ -875,9 +875,11 @@ public class HHRoutePlanner {
 				RouteRegion reg = new RouteRegion();
 				reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 				RouteDataObject rdo = new RouteDataObject(reg);
+				rdo.types = new int[] { 0 };
 				rdo.pointsX = new int[] { s.start.startX, s.end.startX };
 				rdo.pointsY = new int[] { s.start.startY, s.end.startY };
 				RouteDataObject sh = new RouteDataObject(reg);
+				sh.types = new int[] { 0 };
 				sh.pointsX = new int[] { s.end.startX, s.end.endX };
 				sh.pointsY = new int[] { s.end.startY, s.end.endY };
 				shift = new RouteSegmentResult(sh, 0, 1);
