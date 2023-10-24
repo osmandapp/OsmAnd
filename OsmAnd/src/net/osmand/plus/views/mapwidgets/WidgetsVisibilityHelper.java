@@ -140,7 +140,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowZoomButtons() {
-		boolean additionalDialogsHide = !isInChoosingRoutesMode()
+		boolean additionalDialogsHide = !isInGpxApproximationMode()
+				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isSelectingTilesZone();
@@ -182,7 +183,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowBackToLocationButton() {
-		boolean additionalDialogsHide = !isInChoosingRoutesMode()
+		boolean additionalDialogsHide = !isInGpxApproximationMode()
+				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
