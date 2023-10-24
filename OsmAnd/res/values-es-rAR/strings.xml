@@ -5526,4 +5526,10 @@
     <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
     <string name="shared_string_delete_item">Borrar elemento</string>
+    <string name="root_folder">Carpeta raíz</string>
+    <string name="shared_string_rows">Filas</string>
+    <string name="all_folders">Todas las carpetas</string>
+    <string name="shared_string_show_less">Mostrar menos</string>
+    <string name="folder">Carpeta</string>
+    <string name="not_specified">Sin especificar</string>
 </resources>
