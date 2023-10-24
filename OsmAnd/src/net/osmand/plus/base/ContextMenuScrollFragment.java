@@ -131,6 +131,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, getButtonId(BACK_TO_LOC_BUTTON_ID), false));
 
 		setupMapRulerWidget(view, mapLayers);
+		mapActivity.refreshMap();
 	}
 
 	public String getButtonId(String defaultId) {
