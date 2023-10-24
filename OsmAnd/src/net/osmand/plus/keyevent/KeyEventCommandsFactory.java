@@ -18,30 +18,10 @@ import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * Factory to create new commands.
- * Use the same factory instance to speed up new commands creation.
- */
-public class KeyEventCommandsFactory {
-
-	private final Map<String, KeyEventCommand> cachedCommands = new HashMap<>();
+class KeyEventCommandsFactory {
 
 	@Nullable
-	public KeyEventCommand getOrCreateCommand(@NonNull String commandId) {
-		KeyEventCommand command = cachedCommands.get(commandId);
-		if (command == null) {
-			// Use cache to speed up creation of new commands
-			command = createCommand(commandId);
-			cachedCommands.put(commandId, command);
-		}
-		return command;
-	}
-
-	@Nullable
-	private KeyEventCommand createCommand(@NonNull String commandId) {
+	public KeyEventCommand createCommand(@NonNull String commandId) {
 		switch (commandId) {
 			// Map scroll
 			case MapScrollCommand.SCROLL_UP_ID:

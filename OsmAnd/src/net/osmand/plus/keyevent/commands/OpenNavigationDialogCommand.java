@@ -1,7 +1,11 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.R;
 import net.osmand.plus.views.layers.MapControlsLayer;
 
 public class OpenNavigationDialogCommand extends KeyEventCommand {
@@ -15,5 +19,11 @@ public class OpenNavigationDialogCommand extends KeyEventCommand {
 			mapControlsLayer.doRoute();
 		}
 		return true;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(R.string.key_event_action_open_navigation_view);
 	}
 }

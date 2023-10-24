@@ -44,6 +44,9 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
+import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
+import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -53,6 +56,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
@@ -119,8 +123,10 @@ public class AppVersionUpgradeOnInit {
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
 	public static final int VERSION_4_6_05 = 4605;
+	// 4606 - 4.6-06 (Change external input device preference type from integer to string)
+	public static final int VERSION_4_6_06 = 4606;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_05;
+	public static final int LAST_APP_VERSION = VERSION_4_6_06;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -224,6 +230,9 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_6_05) {
 					updateWidgetPages(settings);
 					migrateVerticalWidgetToCustomId(settings);
+				}
+				if (prevAppVersion < VERSION_4_6_06) {
+					updateExternalInputDevicePreferenceType();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -710,6 +719,26 @@ public class AppVersionUpgradeOnInit {
 					settings.MAP_INFO_CONTROLS.setModeValue(appMode, newVisibilityString.toString());
 				}
 			}
+		}
+	}
+
+	private void updateExternalInputDevicePreferenceType() {
+		Map<Integer, String> updatedIds = new HashMap<>();
+		updatedIds.put(1, KeyboardDeviceProfile.ID);
+		updatedIds.put(2, ParrotDeviceProfile.ID);
+		updatedIds.put(3, WunderLINQDeviceProfile.ID);
+
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();;
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			Integer oldId = oldPreference.getModeValue(appMode);
+			String newId = oldId != null ? updatedIds.get(oldId) : null;
+			if (newId != null) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, newId);
+			} else {
+				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
+			}
+			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newId != null);
 		}
 	}
 }

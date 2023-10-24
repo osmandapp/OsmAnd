@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.view.KeyEvent;
 import android.view.KeyEvent.Callback;
 
@@ -8,21 +9,23 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.keyevent.KeyEventHelper;
+import net.osmand.plus.keyevent.KeyEventCategory;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Objects;
 
 public abstract class KeyEventCommand implements Callback {
 
+	protected String commandId;
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
-	protected KeyEventHelper keyEventHelper;
 
-	public void initialize(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
-		this.keyEventHelper = app.getKeyEventHelper();
+	public void initialize(@NonNull OsmandApplication app, @NonNull String commandId) {
+		if (!isInitialized()) {
+			this.app = app;
+			this.settings = app.getSettings();
+			this.commandId = commandId;
+		}
 	}
 
 	@NonNull
@@ -32,26 +35,43 @@ public abstract class KeyEventCommand implements Callback {
 
 	@Nullable
 	protected MapActivity getMapActivity() {
-		return keyEventHelper.getMapActivity();
+		return app.getKeyEventHelper().getMapActivity();
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
-		return false;
+		return true;
 	}
+
+	private boolean isInitialized() {
+		return commandId != null;
+	}
+
+	@NonNull
+	public String getId() {
+		return commandId;
+	}
+
+	@NonNull
+	public KeyEventCategory getCategory() {
+		return KeyEventCategory.ACTIONS;
+	}
+
+	@NonNull
+	public abstract String toHumanString(@NonNull Context context);
 }

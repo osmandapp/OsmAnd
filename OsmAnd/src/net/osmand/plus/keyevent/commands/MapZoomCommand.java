@@ -1,6 +1,12 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.view.KeyEvent;
+
+import androidx.annotation.NonNull;
+
+import net.osmand.plus.R;
+import net.osmand.plus.keyevent.KeyEventCategory;
 
 public class MapZoomCommand extends KeyEventCommand {
 
@@ -36,5 +42,19 @@ public class MapZoomCommand extends KeyEventCommand {
 
 	private void changeZoom(int zoomStep) {
 		app.getOsmandMap().changeZoom(zoomStep);
+	}
+
+	@NonNull
+	@Override
+	public KeyEventCategory getCategory() {
+		return KeyEventCategory.MAP_INTERACTIONS;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(increment
+				? R.string.key_event_action_zoom_in
+				: R.string.key_event_action_zoom_out);
 	}
 }

@@ -61,6 +61,7 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -183,6 +184,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	KeyEventHelper keyEventHelper;
+	InputDeviceHelper inputDeviceHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
@@ -424,6 +426,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public KeyEventHelper getKeyEventHelper() {
 		return keyEventHelper;
+	}
+
+	public InputDeviceHelper getInputDeviceHelper() {
+		return inputDeviceHelper;
 	}
 
 	public FileSettingsHelper getFileSettingsHelper() {
