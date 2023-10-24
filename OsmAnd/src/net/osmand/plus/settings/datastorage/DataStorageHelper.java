@@ -1,23 +1,5 @@
 package net.osmand.plus.settings.datastorage;
 
-import static net.osmand.IndexConstants.AV_INDEX_DIR;
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.EXTENSIONS;
-import static net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType.PREFIX;
-
 import android.app.ProgressDialog;
 import android.os.Environment;
 
@@ -26,18 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IProgress;
-import net.osmand.IndexConstants;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem;
-import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
-import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
-import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
@@ -47,49 +24,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataStorageHelper {
+
 	public static final String INTERNAL_STORAGE = "internal_storage";
 	public static final String EXTERNAL_STORAGE = "external_storage";
 	public static final String SHARED_STORAGE = "shared_storage";
 	public static final String MULTIUSER_STORAGE = "multiuser_storage";
 	public static final String MANUALLY_SPECIFIED = "manually_specified";
 
-	private static final String MAPS_STORAGE_SIZE = "maps_storage_size";
-	public static final String TILES_STORAGE_SIZE = "tiles_storage_size";
-	private static final String CONTOUR_LINES_STORAGE_SIZE = "contour_lines_storage_size";
-	private static final String HILLSHADE_SLOPE_STORAGE_SIZE = "hillshade_slope_storage_size";
-	private static final String TERRAIN3D_STORAGE_SIZE = "terrain3d_storage_size";
-	private static final String ROADSONLY_STORAGE_SIZE = "roadsonly_storage_size";
-	private static final String NAUTICAL_STORAGE_SIZE = "nautical_storage_size";
-	private static final String LIVE_STORAGE_SIZE = "live_storage_size";
-	private static final String WIKI_STORAGE_SIZE = "wiki_storage_size";
-	private static final String TRAVEL_STORAGE_SIZE = "travel_storage_size";
-	private static final String WEATHER_STORAGE_SIZE = "weather_storage_size";
-	private static final String TRACKS_STORAGE_SIZE = "tracks_storage_size";
-	private static final String NOTES_STORAGE_SIZE = "notes_storage_size";
-	private static final String ARCHIVE_STORAGE_SIZE = "archive_storage_size";
-	public static final String OTHER_STORAGE_SIZE = "other_storage_size";
-
 	private final OsmandApplication app;
-	private final ArrayList<StorageItem> storageItems = new ArrayList<>();
+	private final List<StorageItem> storageItems = new ArrayList<>();
+
 	private StorageItem currentDataStorage;
 	private StorageItem manuallySpecified;
-
-	private final ArrayList<MemoryItem> memoryItems = new ArrayList<>();
-	private MemoryItem mapsStorageSize;
-	private MemoryItem tilesStorageSize;
-	private MemoryItem contourLinesStorageSize;
-	private MemoryItem hillshadeSlopeStorageSize;
-	private MemoryItem terrain3dStorageSize;
-	private MemoryItem roadsonlyStorageSize;
-	private MemoryItem nauticalStorageSize;
-	private MemoryItem liveStorageSize;
-	private MemoryItem wikiStorageSize;
-	private MemoryItem travelStorageSize;
-	private MemoryItem weatherStorageSize;
-	private MemoryItem tracksStorageSize;
-	private MemoryItem notesStorageSize;
-	private MemoryItem archiveStorageSize;
-	private MemoryItem otherStorageSize;
 
 	private int currentStorageType;
 	private String currentStoragePath;
@@ -99,9 +45,17 @@ public class DataStorageHelper {
 		prepareData();
 	}
 
+	@NonNull
+	public List<StorageItem> getStorageItems() {
+		return storageItems;
+	}
+
+	public StorageItem getCurrentStorage() {
+		return currentDataStorage;
+	}
+
 	private void prepareData() {
 		initStorageItems();
-		initStorageSizeItems();
 	}
 
 	private void initStorageItems() {
@@ -195,135 +149,6 @@ public class DataStorageHelper {
 				: R.drawable.ic_action_folder;
 	}
 
-	private void initStorageSizeItems() {
-		mapsStorageSize = MemoryItem.builder()
-				.setKey(MAPS_STORAGE_SIZE)
-				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(MAPS_PATH, false, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(mapsStorageSize);
-
-		tilesStorageSize = MemoryItem.builder()
-				.setKey(TILES_STORAGE_SIZE)
-//				.setExtensions("")
-				.setDirectories(
-						createDirectory(TILES_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(tilesStorageSize);
-
-		contourLinesStorageSize = MemoryItem.builder()
-				.setKey(CONTOUR_LINES_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT, IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(contourLinesStorageSize);
-
-		hillshadeSlopeStorageSize = MemoryItem.builder()
-				.setKey(HILLSHADE_SLOPE_STORAGE_SIZE)
-				.setDirectories(
-						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
-				.setPrefixes("Hillshade", "Slope")
-				.createItem();
-		memoryItems.add(hillshadeSlopeStorageSize);
-
-		terrain3dStorageSize = MemoryItem.builder()
-				.setKey(TERRAIN3D_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.TIF_EXT)
-				.setDirectories(
-						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(GEOTIFF_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(terrain3dStorageSize);
-
-		roadsonlyStorageSize = MemoryItem.builder()
-				.setKey(ROADSONLY_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(ROADS_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(roadsonlyStorageSize);
-
-		nauticalStorageSize = MemoryItem.builder()
-				.setKey(NAUTICAL_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(NAUTICAL_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(nauticalStorageSize);
-
-		liveStorageSize = MemoryItem.builder()
-				.setKey(LIVE_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(LIVE_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(liveStorageSize);
-
-		archiveStorageSize = MemoryItem.builder()
-				.setKey(ARCHIVE_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(BACKUP_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(archiveStorageSize);
-
-		wikiStorageSize = MemoryItem.builder()
-				.setKey(WIKI_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(WIKI_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(wikiStorageSize);
-
-		travelStorageSize = MemoryItem.builder()
-				.setKey(TRAVEL_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(WIKIVOYAGE_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(travelStorageSize);
-
-		weatherStorageSize = MemoryItem.builder()
-				.setKey(WEATHER_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
-				.setDirectories(
-						createDirectory(WEATHER_FORECAST_DIR, true, EXTENSIONS, true),
-						createDirectory(WEATHER_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(weatherStorageSize);
-
-		tracksStorageSize = MemoryItem.builder()
-				.setKey(TRACKS_STORAGE_SIZE)
-//				.setExtensions(IndexConstants.GPX_FILE_EXT, ".gpx.bz2")
-				.setDirectories(
-						createDirectory(GPX_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(tracksStorageSize);
-
-		notesStorageSize = MemoryItem.builder()
-				.setKey(NOTES_STORAGE_SIZE)
-//				.setExtensions("")
-				.setDirectories(
-						createDirectory(AV_INDEX_DIR, true, EXTENSIONS, true))
-				.createItem();
-		memoryItems.add(notesStorageSize);
-
-		otherStorageSize = MemoryItem.builder()
-				.setKey(OTHER_STORAGE_SIZE)
-				.createItem();
-		memoryItems.add(otherStorageSize);
-	}
-
-	public ArrayList<StorageItem> getStorageItems() {
-		return storageItems;
-	}
-
-	public StorageItem getCurrentStorage() {
-		return currentDataStorage;
-	}
-
 	private void addItem(StorageItem item) {
 		if (currentStorageType == item.getType() && currentStoragePath.equals(item.getDirectory())) {
 			currentDataStorage = item;
@@ -336,7 +161,7 @@ public class DataStorageHelper {
 	}
 
 	public StorageItem getStorage(String key) {
-		if (storageItems != null && key != null) {
+		if (key != null) {
 			for (StorageItem storageItem : storageItems) {
 				if (key.equals(storageItem.getKey())) {
 					return storageItem;
@@ -344,44 +169,6 @@ public class DataStorageHelper {
 			}
 		}
 		return null;
-	}
-
-	public ArrayList<MemoryItem> getMemoryInfoItems() {
-		return memoryItems;
-	}
-
-	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter uiAdapter) {
-		File rootDir = new File(currentStoragePath);
-		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(uiAdapter, otherStorageSize, rootDir, null, null, OTHER_STORAGE_SIZE);
-		task.execute(mapsStorageSize, contourLinesStorageSize, hillshadeSlopeStorageSize, terrain3dStorageSize, tilesStorageSize, roadsonlyStorageSize, nauticalStorageSize, liveStorageSize, 
-				wikiStorageSize, travelStorageSize, weatherStorageSize, tracksStorageSize, notesStorageSize, archiveStorageSize, otherStorageSize);
-		return task;
-	}
-
-	public RefreshUsedMemoryTask calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
-		File rootDir = new File(tilesStorageSize.getDirectories()[0].getAbsolutePath());
-		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(listener, otherStorageSize, rootDir, null, hillshadeSlopeStorageSize.getPrefixes(), TILES_STORAGE_SIZE);
-		task.execute(tilesStorageSize);
-		return task;
-	}
-
-	public long getTotalUsedBytes() {
-		long total = 0;
-		if (memoryItems != null && memoryItems.size() > 0) {
-			for (MemoryItem mi : memoryItems) {
-				total += mi.getUsedMemoryBytes();
-			}
-			return total;
-		}
-		return -1;
-	}
-
-	public DirectoryItem createDirectory(@NonNull String relativePath,
-	                                     boolean processInternalDirectories,
-	                                     CheckingType checkingType,
-	                                     boolean addUnmatchedToOtherMemory) {
-		String path = app.getAppPath(relativePath).getAbsolutePath();
-		return new DirectoryItem(path, processInternalDirectories, checkingType, addUnmatchedToOtherMemory);
 	}
 
 	public static String getFormattedMemoryInfo(long bytes, String[] formatStrings) {
@@ -393,11 +180,6 @@ public class DataStorageHelper {
 		}
 		String formattedUsed = new DecimalFormat("#.##").format(memory);
 		return String.format(formatStrings[type], formattedUsed);
-	}
-
-	public static boolean isCurrentStorageShared(@NonNull OsmandApplication app) {
-		DataStorageHelper dataStorageHelper = new DataStorageHelper(app);
-		return SHARED_STORAGE.equals(dataStorageHelper.getCurrentStorage().getKey());
 	}
 
 	public static boolean saveFilesLocation(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, int type, @NonNull File selectedFile) {
@@ -445,13 +227,5 @@ public class DataStorageHelper {
 				}
 			}
 		});
-	}
-
-	public interface UpdateMemoryInfoUIAdapter {
-
-		void onMemoryInfoUpdate();
-
-		void onFinishUpdating(String tag);
-
 	}
 }

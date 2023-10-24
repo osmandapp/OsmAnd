@@ -139,12 +139,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				accessibilityAssistant.onPageScrollStateChanged(state);
 			}
 		});
-		viewPager.setCurrentItem(loadCurrentTab());
-
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 		if (shouldShowFreeVersionBanner(getMyApplication())) {
 			visibleBanner.updateFreeVersionBanner();
 		}
+		viewPager.setCurrentItem(loadCurrentTab());
 
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
