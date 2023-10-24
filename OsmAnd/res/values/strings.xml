@@ -103,6 +103,7 @@
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
+       • Added ability to change key bindings for external input devices\n\n
        • Added \"Glide Ratio\" widget\n\n
        • Added filters and smart folders for tracks\n\n
        • Added rows for top and bottom widget panels with support for all widgets\n\n
