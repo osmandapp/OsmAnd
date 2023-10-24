@@ -462,7 +462,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 
 			public void updateFragmentsFolders() {
-				List<TrackFolder> folders = rootFolder.getFlattenedSubFolders();
+				List<TrackFolder> folders = new ArrayList<>(rootFolder.getFlattenedSubFolders());
 				folders.add(rootFolder);
 
 				MyPlacesActivity activity = getMyActivity();
