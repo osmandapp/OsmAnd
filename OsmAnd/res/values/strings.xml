@@ -204,7 +204,7 @@
     <string name="send_crash_log_descr">Contains only information about crashes</string>
     <string name="open_issue_on_github_descr">Ask question, propose features</string>
     <string name="open_issue_on_github">Open issue on GitHub</string>
-    <string name="report_an_issues">Report an issues</string>
+    <string name="report_an_issues">Report an issue</string>
     <string name="copy_build_version">Copy build version</string>
     <string name="most_viewed">Most viewed</string>
     <string name="local_indexes_category_terrain">"Terrain maps (3D)</string>
