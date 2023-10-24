@@ -40,7 +40,7 @@ public class RoutingHelperUtils {
 		if (originalRef != null && originalRef.length() > 0) {
 			String[] refs = originalRef.split(";");
 			for (String ref : refs) {
-				if ((shield == null || !isRefEqualsShield(shield.getText(), ref))) {
+				if (shield == null || !isRefEqualsShield(shield, ref)) {
 					if (formattedStreetName.length() > 0) {
 						formattedStreetName.append(" ");
 					}
@@ -63,8 +63,14 @@ public class RoutingHelperUtils {
 		return formattedStreetName.toString().replace(";", ", ");
 	}
 
-	private static boolean isRefEqualsShield(String shieldText, String ref) {
-		return ref.equals(shieldText) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldText);
+	private static boolean isRefEqualsShield(RoadShield shield, String ref) {
+		for (Entry<String, String> entry : shield.getShieldTags().entrySet()) {
+			String shieldText = entry.getValue();
+			if (ref.equals(shieldText) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldText)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Nullable

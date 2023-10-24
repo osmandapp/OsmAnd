@@ -12,6 +12,9 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class CurrentStreetName {
 	public String text;
 	public TurnType turnType;
@@ -90,8 +93,7 @@ public class CurrentStreetName {
 
 	public static class RoadShield {
 		private final RouteDataObject rdo;
-		private String text;
-		private String nameTag;
+		private final Map<String, String> shieldTags = new LinkedHashMap<>();
 		private StringBuilder additional;
 
 		public RoadShield(@NonNull RouteDataObject rdo) {
@@ -102,17 +104,12 @@ public class CurrentStreetName {
 				String val = rdo.names.get(rdo.nameIds[i]);
 				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
 					additional.append(key).append("=").append(val).append(";");
+				} else if (key.startsWith("route_road") && key.endsWith("_ref")) {
+					shieldTags.put(key, val);
 				}
 			}
-			for (int i = 0; i < rdo.nameIds.length; i++) {
-				String tag = rdo.region.routeEncodingRules.get(rdo.nameIds[i]).getTag();
-				String val = rdo.names.get(rdo.nameIds[i]);
-				if (tag.startsWith("route_road") && tag.endsWith("_ref")) {
-					this.additional = additional;
-					this.nameTag = tag;
-					text = val;
-					break;
-				}
+			if (!shieldTags.isEmpty()) {
+				this.additional = additional;
 			}
 		}
 
@@ -127,20 +124,16 @@ public class CurrentStreetName {
 			return rdo;
 		}
 
-		public String getText() {
-			return text;
-		}
-
-		public String getNameTag() {
-			return nameTag;
-		}
-
 		public StringBuilder getAdditional() {
 			return additional;
 		}
 
+		public Map<String, String> getShieldTags() {
+			return shieldTags;
+		}
+
 		public boolean hasShield() {
-			return text != null;
+			return !shieldTags.isEmpty();
 		}
 	}
 }
