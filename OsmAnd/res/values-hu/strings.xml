@@ -5508,4 +5508,10 @@
     <string name="trash_is_empty">A lomtár üres</string>
     <string name="shared_string_trash">Lomtár</string>
     <string name="shared_string_delete_item">Elem törlése</string>
+    <string name="root_folder">Gyökérmappa</string>
+    <string name="shared_string_rows">Sorok</string>
+    <string name="all_folders">Minden mappa</string>
+    <string name="shared_string_show_less">Kevesebb mutatása</string>
+    <string name="folder">Mappa</string>
+    <string name="not_specified">Nem meghatározott</string>
 </resources>
