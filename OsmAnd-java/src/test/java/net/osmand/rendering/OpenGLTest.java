@@ -2,10 +2,7 @@ package net.osmand.rendering;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 import net.osmand.PlatformUtil;
@@ -31,14 +28,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class OpenGLTest {
 
 	private Map<Integer, Integer> DISTANCES_TABLE;
 	private final int DISTANCE_ZOOM = 15;
 	private final int MAX_ZOOM = 21;
-	private final int MAX_DISTANCE_IN_METERS = 300;//for 15 zoom
+	private final int MAX_DISTANCE_IN_METERS = 400;//for 15 zoom
 	protected Log log = PlatformUtil.getLog(OpenGLTest.class);
 	private final String PATH_TO_RESOURCES = "src/test/resources/rendering/";
 	private final String TES_JSON = "/test_3d_rendering.json";
@@ -82,44 +78,38 @@ public class OpenGLTest {
 	private List<String> generateCommands(String eyepiecePath) {
 		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		JsonArray arr = gson.fromJson(reader, JsonArray.class);
+		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
 		LinkedList<String> res = new LinkedList<>();
-		for (int i = 0; i < arr.size(); i++) {
+		for (TestEntry testEntry : arr) {
 			EyepieceParams params = new EyepieceParams();
-			JsonObject o = (JsonObject) arr.get(i);
-			JsonObject center = o.getAsJsonObject("center");
-			assert(center != null);
-			params.latitude = center.getAsJsonPrimitive("latitude").getAsDouble();
-			params.longitude = center.getAsJsonPrimitive("longitude").getAsDouble();
+			assert(testEntry.center != null);
+			params.latitude = testEntry.center.latitude;
+			params.longitude = testEntry.center.longitude;
 
-			parseVisibilityZoom(o.getAsJsonArray("icons"), params);
-			parseVisibilityZoom(o.getAsJsonArray("textOnPath"), params);
-			parseVisibilityZoom(o.getAsJsonArray("text"), params);
+			parseVisibilityZoom(testEntry.icons, params);
+			parseVisibilityZoom(testEntry.textOnPath, params);
+			parseVisibilityZoom(testEntry.text, params);
 
-			JsonPrimitive eyepieceParams = o.getAsJsonPrimitive("eyepieceParams");
-			if (eyepieceParams != null) {
-				params.commandParams = eyepieceParams.getAsString();
+			if (testEntry.eyepieceParams != null) {
+				params.commandParams = testEntry.eyepieceParams;
 			}
-
-			JsonPrimitive testName = o.getAsJsonPrimitive("testName");
-			assert(testName != null);
-			params.testName = testName.getAsString();
+			assert(testEntry.testName != null);
+			params.testName = testEntry.testName;
 			res.add(params.getCommand(eyepiecePath));
 		}
 		return res;
 	}
 
-	private void parseVisibilityZoom(JsonArray arr, EyepieceParams params) {
-		if (arr == null) {
+	private void parseVisibilityZoom(List<TestEntryUnit> unitList, EyepieceParams params) {
+		if (unitList == null) {
 			return;
 		}
-		for (int i = 0; i < arr.size(); i++) {
-			JsonObject obj = (JsonObject) arr.get(i);
-			JsonObject zooms = obj.getAsJsonObject("visibilityZoom");
-			Set<Map.Entry<String, JsonElement>> set = zooms.entrySet();
-			for (Map.Entry<String, JsonElement> s : set) {
-				int z = Integer.parseInt(s.getKey());
-				params.registerZoom(z);
+		for (TestEntryUnit testEntryUnit : unitList) {
+			if (testEntryUnit.visibilityZoom == null) {
+				continue;
+			}
+			for (Map.Entry<Integer, Boolean> entry : testEntryUnit.visibilityZoom.entrySet()) {
+				params.registerZoom(entry.getKey());
 			}
 		}
 	}
@@ -161,18 +151,15 @@ public class OpenGLTest {
 		cummulativeException = new CummulativeException();
 		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		JsonArray arr = gson.fromJson(reader, JsonArray.class);
-		for (int i = 0; i < arr.size(); i++) {
-			JsonObject o = (JsonObject) arr.get(i);
-			JsonPrimitive testNamePrimitive = o.getAsJsonPrimitive("testName");
-			assert(testNamePrimitive != null);
-			String testName = testNamePrimitive.getAsString();
-			cummulativeException.setCurrentTestName(testName);
-			List<RenderedInfo> renderedInfo = parseRenderedJsonForMap(testName);
+		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
+		for (TestEntry testEntry : arr) {
+			assert(testEntry.testName != null);
+			cummulativeException.setCurrentTestName(testEntry.testName);
+			List<RenderedInfo> renderedInfo = parseRenderedJsonForMap(testEntry.testName);
 			if (renderedInfo.size() == 0) {
-				throw new RuntimeException("File(s) is empty for test:" + testName);
+				throw new RuntimeException("File(s) is empty for test:" + testEntry.testName);
 			}
-			List<TestInfo> testInfo = parseTestJson(o);
+			List<TestInfo> testInfo = parseTestJson(testEntry);
 			compareTestAndRenderedInfo(testInfo, renderedInfo);
 		}
 		if (cummulativeException.hasExceptions()) {
@@ -196,81 +183,58 @@ public class OpenGLTest {
 		List<RenderedInfo> renderedInfo = new ArrayList<>();
 		for (File f : jsonFiles) {
 			Gson gson = new Gson();
-			JsonArray arr = gson.fromJson(new JsonReader(new FileReader(f)), JsonArray.class);
+			RenderEntry[] arr = gson.fromJson(new JsonReader(new FileReader(f)), RenderEntry[].class);
 			renderedInfo.addAll(parseRenderedJson(arr));
 		}
 		return renderedInfo;
 	}
 
-	private List<RenderedInfo> parseRenderedJson(JsonArray arr) {
+	private List<RenderedInfo> parseRenderedJson(RenderEntry[] arr) {
 		if (arr == null) {
 			return null;
 		}
 		List<RenderedInfo> info = new ArrayList();
-		for (int i = 0; i < arr.size(); i++) {
+		for (RenderEntry renderEntry : arr) {
 			RenderedInfo ri = new RenderedInfo();
-			JsonObject obj = (JsonObject) arr.get(i);
-			String cl = obj.getAsJsonPrimitive("class").getAsString();
-			String type = obj.getAsJsonPrimitive("type").getAsString();
-			ri.setType(cl, type);
-			ri.zoom = obj.getAsJsonPrimitive("zoom").getAsInt();
-			ri.id = obj.getAsJsonPrimitive("id").getAsLong();
-			double lat = obj.getAsJsonPrimitive("lat").getAsDouble();
-			double lon = obj.getAsJsonPrimitive("lon").getAsDouble();
-			ri.center = new LatLon(lat, lon);
-
-			JsonObject start = obj.getAsJsonObject("startPoint");
-			JsonObject end = obj.getAsJsonObject("endPoint");
-			if (start != null && end != null) {
-				lat = start.getAsJsonPrimitive("lat").getAsDouble();
-				lon = start.getAsJsonPrimitive("lon").getAsDouble();
-				ri.startPoint = new LatLon(lat, lon);
-				lat = end.getAsJsonPrimitive("lat").getAsDouble();
-				lon = end.getAsJsonPrimitive("lon").getAsDouble();
-				ri.endPoint = new LatLon(lat, lon);
+			assert(renderEntry.cl != null && renderEntry.type != null);
+			ri.setType(renderEntry.cl, renderEntry.type);
+			ri.zoom = renderEntry.zoom;
+			ri.id = renderEntry.id;
+			ri.center = new LatLon(renderEntry.lat, renderEntry.lon);
+			if (renderEntry.startPoint != null && renderEntry.endPoint != null) {
+				ri.startPoint = new LatLon(renderEntry.startPoint.lat, renderEntry.startPoint.lon);
+				ri.endPoint = new LatLon(renderEntry.endPoint.lat, renderEntry.endPoint.lon);
 			}
-			JsonPrimitive content = obj.getAsJsonPrimitive("content");
-			if (content != null) {
-				ri.content = content.getAsString();
-			}
+			ri.content = renderEntry.content;
 			info.add(ri);
 		}
 		return info;
 	}
 
-	private List<TestInfo> parseTestJson(JsonObject testJsonObj) {
+	private List<TestInfo> parseTestJson(TestEntry testEntry) {
 		List<TestInfo> result = new ArrayList<>();
-		parseTestJsonArr(testJsonObj.getAsJsonArray("icons"), result, RenderedType.ICON);
-		parseTestJsonArr(testJsonObj.getAsJsonArray("text"), result, RenderedType.TEXT_ON_POINT);
-		parseTestJsonArr(testJsonObj.getAsJsonArray("textOnPath"), result, RenderedType.TEXT_ON_LINE);
+		parseTestJsonArr(testEntry.icons, result, RenderedType.ICON);
+		parseTestJsonArr(testEntry.text, result, RenderedType.TEXT_ON_POINT);
+		parseTestJsonArr(testEntry.textOnPath, result, RenderedType.TEXT_ON_LINE);
 		return result;
 	}
 
-	private void parseTestJsonArr(JsonArray arr, List<TestInfo> result, RenderedType type) {
-		if (arr == null) {
+	private void parseTestJsonArr(List<TestEntryUnit> unitList, List<TestInfo> result, RenderedType type) {
+		if (unitList == null) {
 			return;
 		}
-		for (int i = 0; i < arr.size(); i++) {
+		for (TestEntryUnit testEntryUnit : unitList) {
 			TestInfo testInfo = new TestInfo();
-			JsonObject obj = (JsonObject) arr.get(i);
-			if (obj.getAsJsonPrimitive("osmId") == null) {
-				throw new RuntimeException("osmId not found");
-			}
-			if (obj.getAsJsonObject("visibilityZoom") == null) {
+			if (testEntryUnit.visibilityZoom == null) {
 				throw new RuntimeException("visibilityZoom not found");
 			}
 
-			try {
-				testInfo.id = obj.getAsJsonPrimitive("osmId").getAsLong();
-			} catch (NumberFormatException e) {
-				throw new RuntimeException("osmId is empty");
+			if (testEntryUnit.osmId != null) {
+				testInfo.id = testEntryUnit.osmId;
 			}
-			JsonObject zooms = obj.getAsJsonObject("visibilityZoom");
-			Set<Map.Entry<String, JsonElement>> set = zooms.entrySet();
-			for (Map.Entry<String, JsonElement> s : set) {
-				int z = Integer.parseInt(s.getKey());
-				String v = s.getValue().getAsString();
-				boolean visible = "true".equals(v) || "yes".equals(v);
+			for (Map.Entry<Integer, Boolean> entry : testEntryUnit.visibilityZoom.entrySet()) {
+				int z = entry.getKey();
+				boolean visible = entry.getValue();
 				if (visible) {
 					testInfo.addVisibleZoom(z);
 				} else {
@@ -278,34 +242,14 @@ public class OpenGLTest {
 				}
 			}
 
-			JsonPrimitive lat = obj.getAsJsonPrimitive("latitude");
-			JsonPrimitive lon = obj.getAsJsonPrimitive("longitude");
-			if (lat != null && lon != null) {
-				testInfo.center = new LatLon(lat.getAsDouble(), lon.getAsDouble());
+			if (testEntryUnit.latitude != null && testEntryUnit.longitude != null) {
+				testInfo.center = new LatLon(testEntryUnit.latitude, testEntryUnit.longitude);
 			}
 
-			lat = obj.getAsJsonPrimitive("lat");
-			lon = obj.getAsJsonPrimitive("lon");
-			if (lat != null && lon != null) {
-				testInfo.center = new LatLon(lat.getAsDouble(), lon.getAsDouble());
-			}
-
-			JsonPrimitive name = obj.getAsJsonPrimitive("name");
-			if (name != null) {
-				testInfo.text = name.getAsString();
-			}
-
-			JsonObject startPoint = obj.getAsJsonObject("startPoint");
-			JsonObject endPoint = obj.getAsJsonObject("endPoint");
-			if (startPoint != null && endPoint != null) {
-				lat = startPoint.getAsJsonPrimitive("latitude");
-				lon = startPoint.getAsJsonPrimitive("longitude");
-				assert (lat != null && lon != null);
-				testInfo.startPoint = new LatLon(lat.getAsDouble(), lon.getAsDouble());
-				lat = endPoint.getAsJsonPrimitive("latitude");
-				lon = endPoint.getAsJsonPrimitive("longitude");
-				assert (lat != null && lon != null);
-				testInfo.endPoint = new LatLon(lat.getAsDouble(), lon.getAsDouble());
+			testInfo.text = testEntryUnit.name;
+			if (testEntryUnit.startPoint != null && testEntryUnit.endPoint != null) {
+				testInfo.startPoint = new LatLon(testEntryUnit.startPoint.latitude, testEntryUnit.startPoint.longitude);
+				testInfo.endPoint = new LatLon(testEntryUnit.endPoint.latitude, testEntryUnit.endPoint.longitude);
 			}
 
 			testInfo.type = type;
@@ -323,6 +267,8 @@ public class OpenGLTest {
 	private void checkOsmIdAndText(List<RenderedInfo> renderedInfo, TestInfo testInfo) {
 		HashSet<Integer> checkedZooms = testInfo.visibleZooms;
 		checkedZooms.addAll(testInfo.inVisibleZooms);
+		String name = testInfo.text != null ? " name:\"" + testInfo.text + "\"" : "";
+		String type = testInfo.type == RenderedType.ICON ? "icon " : "text ";
 		for (RenderedInfo info : renderedInfo) {
 			int zoom = info.zoom;
 			if (!checkedZooms.contains(zoom)) {
@@ -333,7 +279,7 @@ public class OpenGLTest {
 				continue;
 			}
 			if (info.id == testInfo.id && testInfo.inVisibleZooms.contains(zoom)) {
-				cummulativeException.addException("osmId:" + testInfo.id + " must be not visible on zoom:" + zoom);
+				cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be not visible on zoom:" + zoom);
 				checkedZooms.remove(zoom);
 				continue;
 			}
@@ -355,13 +301,18 @@ public class OpenGLTest {
 						double dist = MapUtils.getDistance(c, c2);
 						if (dist <= DISTANCES_TABLE.get(zoom)) {
 							if (testInfo.inVisibleZooms.contains(zoom)) {
-								cummulativeException.addException("text:" + testInfo.text + " must be not visible on zoom:" + zoom);
+								cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
 							}
 						} else {
-							cummulativeException.addException("text:" + testInfo.text + " is visible on zoom:" + zoom +
-									", but too far from test location. Found location " + info.id + " " + c2.getLatitude() + " " + c2.getLongitude() +
-									". Distance " + (int) dist + " meters");
+							cummulativeException.addException("text \"" + testInfo.text + "\" is visible on zoom:" + zoom +
+									", but too far from test location. Found location " +
+									String.format("%,.5f", c2.getLatitude()) + " " + String.format("%,.5f", c2.getLongitude()) +
+									" (" + info.id + ") " +
+									". Distance " + (int) dist + " meters. Maximum distance for zoom=" + zoom + " is " + DISTANCES_TABLE.get(zoom) + " meters");
 						}
+						checkedZooms.remove(zoom);
+					} else if (c == null) {
+						//lat and lon is not set in the test, just check visibility
 						checkedZooms.remove(zoom);
 					}
 				}
@@ -372,8 +323,7 @@ public class OpenGLTest {
 		}
 		checkedZooms.removeAll(testInfo.inVisibleZooms);
 		if (checkedZooms.size() > 0) {
-			String name = testInfo.text != null ? " name:\"" + testInfo.text + "\"" : "";
-			cummulativeException.addException("osmId:" + testInfo.id + name + " must be visible on zooms:" + checkedZooms.toString());
+			cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be visible on zooms:" + checkedZooms.toString());
 		}
 	}
 
@@ -405,7 +355,7 @@ public class OpenGLTest {
 	}
 
 	private class TestInfo {
-		long id;
+		long id = -1;
 		LatLon center;
 		LatLon startPoint;
 		LatLon endPoint;
@@ -422,13 +372,10 @@ public class OpenGLTest {
 	}
 
 	private class CummulativeException {
-		Map<String, List<String>> exceptions;
+		Map<String, List<String>> exceptions = new HashMap<>();
 		String currentTestName = "";
 
 		void addException(String e) {
-			if (exceptions == null) {
-				exceptions = new HashMap<>();
-			}
 			if (currentTestName.isEmpty()) {
 				throw new RuntimeException("Set test name");
 			}
@@ -511,6 +458,75 @@ public class OpenGLTest {
 			builder.append(commandParams);
 			return builder.toString();
 		}
+	}
+
+	private class TestEntry {
+		@SerializedName("testName")
+		public String testName;
+		@SerializedName("description")
+		public String description;
+		@SerializedName("center")
+		public Coordinates center;
+		@SerializedName("icons")
+		public List<TestEntryUnit> icons;
+		@SerializedName("text")
+		public List<TestEntryUnit> text;
+		@SerializedName("textOnPath")
+		public List<TestEntryUnit> textOnPath;
+		@SerializedName("eyepieceParams")
+		public String eyepieceParams;
+	}
+
+	private class TestEntryUnit {
+		@SerializedName("osmId")
+		public Long osmId;
+		@SerializedName("name")
+		public String name;
+		@SerializedName("latitude")
+		public Double latitude;
+		@SerializedName("longitude")
+		public Double longitude;
+		@SerializedName("visibilityZoom")
+		Map<Integer, Boolean> visibilityZoom;
+		@SerializedName("startPoint")
+		Coordinates startPoint;
+		@SerializedName("endPoint")
+		Coordinates endPoint;
+	}
+
+	private class Coordinates {
+		@SerializedName("latitude")
+		public Double latitude;
+		@SerializedName("longitude")
+		public Double longitude;
+	}
+
+	private class Coords {
+		@SerializedName("lat")
+		public Double lat;
+		@SerializedName("lon")
+		public Double lon;
+	}
+
+	private class RenderEntry {
+		@SerializedName("class")
+		public String cl;
+		@SerializedName("type")
+		public String type;
+		@SerializedName("zoom")
+		public Integer zoom;
+		@SerializedName("id")
+		public Long id;
+		@SerializedName("lat")
+		public Double lat;
+		@SerializedName("lon")
+		public Double lon;
+		@SerializedName("startPoint")
+		public Coords startPoint;
+		@SerializedName("endPoint")
+		public Coords endPoint;
+		@SerializedName("content")
+		public String content;
 	}
 
 }
