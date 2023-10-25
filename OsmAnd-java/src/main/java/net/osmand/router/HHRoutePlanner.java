@@ -264,7 +264,7 @@ public class HHRoutePlanner {
 //			c.preloadSegments();
 //			c.ROUTE_LAST_MILE = false;
 			c.calcDetailed(2);
-			c.calcAlternative();
+//			c.calcAlternative();
 			c.gc();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
@@ -875,6 +875,7 @@ public class HHRoutePlanner {
 				RouteRegion reg = new RouteRegion();
 				reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 				RouteDataObject rdo = new RouteDataObject(reg);
+				rdo.types = new int[] { 0 };
 				rdo.pointsX = new int[] { s.start.startX, s.end.startX };
 				rdo.pointsY = new int[] { s.start.startY, s.end.startY };
 				RouteDataObject sh = new RouteDataObject(reg);
