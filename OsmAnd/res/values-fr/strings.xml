@@ -5418,7 +5418,9 @@
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Ajout du gadget \"finesse de l\'aile\"
+    <string name="release_4_6">• Ajout de la possibilité de changer les assignements de touches pour les périphériques externes
+\n
+\n• Ajout du gadget \"finesse de l\'aile\"
 \n
 \n• Ajout de filtres et de dossiers intelligents pour les traces
 \n
@@ -5526,4 +5528,15 @@
     <string name="key_event_category_map_interactions">Interactions avec la carte</string>
     <string name="key_event_action_move_down">Déplacer vers le bas</string>
     <string name="key_event_category_actions">Actions</string>
+    <string name="enable_to_use_external_input_device">Activer pour utiliser l\'appareil d\'entrée externe avec OsmAnd</string>
+    <string name="key_event_action_previous_app_profile">Profile d\'application précédent</string>
+    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour le lier à l\'action choisie.</string>
+    <string name="deletion_error">Erreur de suppression</string>
+    <string name="key_event_action_next_app_profile">Profil d\'application suivant</string>
+    <string name="change_key_binding">Changer l\'assignement de touche</string>
+    <string name="key_event_action_take_media_note">Prendre une note média</string>
+    <string name="key_event_action_emit_navigation_hint">Émettre un indice de guidage</string>
+    <string name="external_input_device_title">Périphériques d\'entrée externes</string>
+    <string name="key_bindings">Assignements des touches</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
 </resources>
