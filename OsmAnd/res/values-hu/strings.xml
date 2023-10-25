@@ -2973,7 +2973,7 @@
     <string name="application_profiles">Alkalmazásprofilok</string>
     <string name="routing_attr_piste_type_sled_name">Szánkó</string>
     <string name="app_mode_offroad">Terep</string>
-    <string name="external_input_device">Külső beviteli eszköz</string>
+    <string name="external_input_device">Külső beviteli eszközök</string>
     <string name="external_input_device_descr">Külső vezérlőeszköz (például általános billentyűzet vagy WunderLINQ) kijelölése.</string>
     <string name="sett_no_ext_input">Nincs</string>
     <string name="sett_generic_ext_input">Billentyűzet</string>
@@ -5424,7 +5424,9 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Siklási arány widget hozzáadva
+    <string name="release_4_6">• Külső beviteli eszközök billentyű hozzárendelés megváltoztatásának lehetősége hozzáadva
+\n
+\n • Siklási arány widget hozzáadva
 \n
 \n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
 \n
@@ -5514,4 +5516,34 @@
     <string name="shared_string_show_less">Kevesebb mutatása</string>
     <string name="folder">Mappa</string>
     <string name="not_specified">Nem meghatározott</string>
+    <string name="key_event_action_zoom_in">Nagyítás</string>
+    <string name="enable_to_use_external_input_device">Külső beviteli eszköz használatának engedélyezése az OsmAnd-nek</string>
+    <string name="key_event_action_change_map_orientation">Térkép tájolás módosítása</string>
+    <string name="key_event_action_previous_app_profile">Előző alkalmazásprofil</string>
+    <string name="show_toast_about_key_pressed">A lenyomott billentyű kijelzése</string>
+    <string name="key_event_action_move_left">Mozgás balra</string>
+    <string name="press_button_to_link_with_action">Nyomja meg a gombot a készüléken, hogy összekapcsolja azt a kiválasztott művelettel.</string>
+    <string name="key_event_action_move_right">Mozgás jobbra</string>
+    <string name="shared_string_button">Gomb</string>
+    <string name="key_event_action_next_app_profile">Következő alkalmazásprofil</string>
+    <string name="change_key_binding">Billentyű hozzárendelés módosítása</string>
+    <string name="key_event_action_take_media_note">Médiajegyzet felvétele</string>
+    <string name="key_event_action_activity_back_pressed">Művelet vissza megnyomva</string>
+    <string name="key_event_action_emit_navigation_hint">Navigációs tippek adása</string>
+    <string name="remove_type_q">Biztosan eltávolítja a(z) \"%1$s\" típust\?</string>
+    <string name="shared_string_action">Művelet</string>
+    <string name="add_new_type">Új típus hozzáadása</string>
+    <string name="key_event_action_move_up">Mozgás fel</string>
+    <string name="key_event_action_open_search_view">Keresési nézet megnyitása</string>
+    <string name="key_event_action_zoom_out">Kicsinyítés</string>
+    <string name="key_event_action_toggle_drower">Oldalmenü be/ki</string>
+    <string name="key_is_already_assigned_error">A(z) \"%1$s\" billentyű már hozzá van rendelve ehhez a művelethez: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Navigációs nézet megnyitása</string>
+    <string name="external_input_device_title">Külső beviteli eszköz</string>
+    <string name="key_bindings">Billentyű hozzárendelések</string>
+    <string name="key_event_action_move_to_my_location">Ugrás a pozíciómra</string>
+    <string name="key_event_category_map_interactions">Térképműveletek</string>
+    <string name="key_event_action_move_down">Mozgás le</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ Datagrid megnyitása</string>
+    <string name="key_event_category_actions">Műveletek</string>
 </resources>

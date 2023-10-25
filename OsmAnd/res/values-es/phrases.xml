@@ -60,7 +60,7 @@
     <string name="poi_computer">Tienda de informática</string>
     <string name="poi_florist">Florería;Floristería</string>
     <string name="poi_furniture">Tienda de muebles</string>
-    <string name="poi_garden_centre">Centro de jardinería; Vivero (venta)</string>
+    <string name="poi_garden_centre">Centro de jardinería</string>
     <string name="poi_gas">Venta de garrafas;Gas líquido</string>
     <string name="poi_shop_yes">Comercio</string>
     <string name="poi_gift">Regalería;Tienda de regalos</string>
@@ -124,7 +124,7 @@
     <string name="poi_fuel_methanol">Metanol</string>
     <string name="poi_fuel_lh2">Hidrógeno líquido</string>
     <string name="poi_fuel_electricity">Electricidad</string>
-    <string name="poi_electricity_combined_charging">Estación de carga; Estación de carga de vehículos eléctricos; Punto de recarga eléctrica; Punto de carga; Estación de carga electrónica; Equipo de suministro de vehículos eléctricos</string>
+    <string name="poi_electricity_combined_charging">Estación de carga;Estación de carga para vehículos eléctricos;Estación de carga para VE;Punto de recarga eléctrica;Punto de carga;Estación de carga electrónica;Equipo de suministro para vehículos eléctricos</string>
     <string name="poi_vehicle_ramp">Rampa de vehículos</string>
     <string name="poi_compressed_air">Aire comprimido</string>
     <string name="poi_parking">Aparcamiento</string>
@@ -1848,7 +1848,7 @@
     <string name="poi_fuel_91ul">91UL (sin plomo, para aviones)</string>
     <string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
     <string name="poi_fuel_autogas">Autogas (Etanol libre de plomo)</string>
-    <string name="poi_fuel_jeta1">Combustible Jet A-1</string>
+    <string name="poi_fuel_jeta1">Combustible para aviones A-1</string>
     <string name="poi_fuel_adblue">Aditivo para escapes de Diesel (AdBlue)</string>
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
@@ -1911,7 +1911,7 @@
     <string name="poi_shoes_women">Femenino</string>
     <string name="poi_shoes_sport">Deportivo</string>
     <string name="poi_shoes_men">Masculino</string>
-    <string name="poi_shoes_orthopedic">Ortopaedia</string>
+    <string name="poi_shoes_orthopedic">Ortopedia</string>
     <string name="poi_historic_manor">Mansión histórica</string>
     <string name="poi_castle_type_stately">Tipo de castillo: majestuoso</string>
     <string name="poi_castle_type_defensive">Tipo de castillo: defensivo</string>
@@ -2755,7 +2755,7 @@
     <string name="poi_highway_crossing_type">Tipo de cruce</string>
     <string name="poi_tactile_paving">Pavimento táctil</string>
     <string name="poi_service_general">Estación de servicio</string>
-    <string name="poi_brushless">Sin cepillo</string>
+    <string name="poi_brushless">Sin escobillas</string>
     <string name="poi_self_service">Autoservicio</string>
     <string name="poi_automated">Automatizado</string>
     <string name="poi_parking_type">Tipo de aparcamiento</string>
@@ -2781,7 +2781,7 @@
     <string name="poi_information_contents">Contenido</string>
     <string name="poi_clock_option">Adicional</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
-    <string name="poi_resort_type">Tipo de complejo</string>
+    <string name="poi_resort_type">Tipo</string>
     <string name="poi_piste_difficulty">Dificultad de la pista</string>
     <string name="poi_piste_grooming">Estado de la pista</string>
     <string name="poi_theatre_genre">Género</string>
@@ -2801,8 +2801,8 @@
     <string name="poi_water_characteristic">Característica del agua</string>
     <string name="poi_beach_surface_type">Superficie</string>
     <string name="poi_nudism">Nudismo</string>
-    <string name="poi_pharmacy_dispensing">Dispensa</string>
-    <string name="poi_backcountry">Travesía</string>
+    <string name="poi_pharmacy_dispensing">Farmacia</string>
+    <string name="poi_backcountry">Zona rural</string>
     <string name="poi_wheelchair_accessibility">Accesible para sillas de rueda</string>
     <string name="poi_wiki_link">Wikipedia</string>
     <string name="poi_spices">Tienda de especias</string>
@@ -2844,7 +2844,7 @@
     <string name="poi_vacuum_cleaner_filter">Aspiradora</string>
     <string name="poi_free_flying_characteristic">Características</string>
     <string name="poi_emergency_infrastructure">Infraestructura de emergencias</string>
-    <string name="poi_waterway_fuel">Gasolinera náutica; Estación de combustible náutica</string>
+    <string name="poi_waterway_fuel">Estación de servicio para embarcaciones</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
     <string name="poi_diet_vegan_filter_yes">Vegana</string>
     <string name="poi_diet_gluten_free_filter_yes">Libre de gluten</string>
@@ -4060,8 +4060,8 @@
     <string name="poi_origin">Origen</string>
     <string name="poi_tobacco_yes">Sí;Tabaco;Cigarro;Cigarrillo</string>
     <string name="poi_membership_yes">Sí;Afiliación;Membresía</string>
-    <string name="poi_medical_supply_orthopedic">Ortopédico</string>
-    <string name="poi_medical_supply_orthotics">Ortopedia</string>
+    <string name="poi_medical_supply_orthopedic">Ortopedia</string>
+    <string name="poi_medical_supply_orthotics">Ortopédicas</string>
     <string name="poi_medical_supply_mobility">Movilidad</string>
     <string name="poi_medical_supply_diagnostic">Diagnóstico</string>
     <string name="poi_medical_supply_respiratory">Respiratorio</string>
