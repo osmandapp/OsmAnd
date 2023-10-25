@@ -4420,4 +4420,10 @@
     <string name="poi_collector">Samlarobjekt</string>
     <string name="poi_books_adults">Pornografiska böcker</string>
     <string name="poi_post_office_collection_times">Hämtningstider för postkontor</string>
+    <string name="poi_lgbtq_no">hbtq+ tillåts inte</string>
+    <string name="poi_lgbtq_only">hbtq+ enbart</string>
+    <string name="poi_faculty_engineering">Ingenjörsvetenskap</string>
+    <string name="poi_faculty_aerospace">Flyg- och rymdteknik</string>
+    <string name="poi_museum_aerospace">Flygfart</string>
+    <string name="poi_faculty_communication">Kommunikation och media</string>
 </resources>
