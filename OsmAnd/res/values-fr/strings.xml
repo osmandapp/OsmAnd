@@ -5528,15 +5528,15 @@
     <string name="key_event_category_map_interactions">Interactions avec la carte</string>
     <string name="key_event_action_move_down">Déplacer vers le bas</string>
     <string name="key_event_category_actions">Actions</string>
-    <string name="enable_to_use_external_input_device">Activer pour utiliser l\'appareil d\'entrée externe avec OsmAnd</string>
-    <string name="key_event_action_previous_app_profile">Profile d\'application précédent</string>
-    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour le lier à l\'action choisie.</string>
+    <string name="enable_to_use_external_input_device">Activer pour utiliser le périphérique d\'entrée externe avec OsmAnd</string>
+    <string name="key_event_action_previous_app_profile">Profil d\'application précédent</string>
+    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour l’affecter à l\'action sélectionnée.</string>
     <string name="deletion_error">Erreur de suppression</string>
     <string name="key_event_action_next_app_profile">Profil d\'application suivant</string>
-    <string name="change_key_binding">Changer l\'assignement de touche</string>
-    <string name="key_event_action_take_media_note">Prendre une note média</string>
+    <string name="change_key_binding">Modifier l\'affectation des touches</string>
+    <string name="key_event_action_take_media_note">Créer une note média</string>
     <string name="key_event_action_emit_navigation_hint">Émettre un indice de guidage</string>
     <string name="external_input_device_title">Périphériques d\'entrée externes</string>
-    <string name="key_bindings">Assignements des touches</string>
+    <string name="key_bindings">Affectation des touches</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
 </resources>
