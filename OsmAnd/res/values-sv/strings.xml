@@ -4645,7 +4645,7 @@
     <string name="shared_string_mode">Läge</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="use_osm_live_public_transport">OsmAnd Live kollektivtrafik</string>
-    <string name="app_mode_personal_transporter"/>
+    <string name="app_mode_personal_transporter">Enpersonsfordon</string>
     <string name="rendering_value_sectors_name">Sektorer</string>
     <string name="shared_string_duplicate">Duplicera</string>
     <string name="rendering_value_caiScale_name">CAI</string>
@@ -5198,4 +5198,6 @@
     <string name="live_monitoring_tracking_interval">Intervall för direktspårning</string>
     <string name="voice_prompts_timetable">Tider för röstmeddelanden</string>
     <string name="search_offline_geo_error">Kunde inte tolka geo-identifieraren \'%s\'.</string>
+    <string name="public_transport_try_ped">Prova navigering till fots.</string>
+    <string name="app_mode_monowheel">Monohjul</string>
 </resources>
