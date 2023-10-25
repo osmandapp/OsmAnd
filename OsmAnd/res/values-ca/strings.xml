@@ -4315,4 +4315,17 @@
     <string name="rssi_widget_desc">Mostra el nivell RSSI del vostre dispositiu extern.</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="delete_folder_question">Segur que voleu suprimir la carpeta\?</string>
+    <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
+    <string name="shared_string_rows">Files</string>
+    <string name="deletion_error">Error de supressió</string>
+    <string name="login_account">Compte</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="routing_engine_vehicle_type_foot">A peu</string>
+    <string name="user_login">Iniciar sessió</string>
+    <string name="shared_string_vehicle">Vehicle</string>
+    <string name="shared_string_subtype">Subtipus</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="routing_engine_vehicle_type_driving">Cotxe</string>
+    <string name="icon_group_travel">Viatge</string>
+    <string name="routing_engine_vehicle_type_car">Cotxe</string>
 </resources>
