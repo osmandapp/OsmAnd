@@ -75,6 +75,7 @@ public class StreetNameWidget extends MapWidget {
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
 	private boolean showMarker;
+	private RoadShield cachedRoadShield;
 
 	@Override
 	protected int getLayoutId() {
@@ -131,14 +132,20 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
 			RoadShield shield = streetName.shield;
-			if (shield != null && setRoadShield(shield)) {
-				AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
-				int indexOf = streetName.text.indexOf("»");
-				if (indexOf > 0) {
-					streetName.text = streetName.text.substring(indexOf);
+			if (shield != null && !shield.equalsShield(cachedRoadShield)) {
+				if (setRoadShield(shield)) {
+					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
+					int indexOf = streetName.text.indexOf("»");
+					if (indexOf > 0) {
+						streetName.text = streetName.text.substring(indexOf);
+					}
+				} else {
+					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 				}
-			} else {
+				cachedRoadShield = shield;
+			} else if (shield == null) {
 				AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
+				cachedRoadShield = null;
 			}
 
 			if (Algorithms.isEmpty(streetName.exitRef)) {

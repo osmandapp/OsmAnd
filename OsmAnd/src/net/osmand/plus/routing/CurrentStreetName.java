@@ -135,5 +135,9 @@ public class CurrentStreetName {
 		public boolean hasShield() {
 			return !shieldTags.isEmpty();
 		}
+
+		public boolean equalsShield(@Nullable RoadShield roadShield) {
+			return roadShield != null && shieldTags.equals(roadShield.shieldTags);
+		}
 	}
 }
