@@ -5443,7 +5443,7 @@
 \n
 \n • Añadido widget \"RAM disponible\"
 \n
-\n • Problemas fijos con barra de estado transparente
+\n • Problemas solucionados con barra de estado transparente
 \n
 \n</string>
     <string name="app_mode_baby_transport">Cochecito</string>
@@ -5549,4 +5549,5 @@
     <string name="key_event_action_move_down">Hacia abajo</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Abrir la cuadrícula de datos WunderLINQ</string>
     <string name="key_event_category_actions">Acciones</string>
+    <string name="deletion_error">Error en la eliminación</string>
 </resources>
