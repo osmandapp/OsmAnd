@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.text.BidiFormatter;
 import android.util.Pair;
@@ -40,24 +39,13 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.data.BarData;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.local.CategoryType;
-import net.osmand.plus.download.local.LocalCategory;
-import net.osmand.plus.download.local.LocalItemsLoaderTask;
-import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
-import net.osmand.plus.download.local.dialogs.MemoryInfo;
-import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
-import net.osmand.plus.download.local.dialogs.viewholders.MemoryViewHolder.MemoryChartAdapter;
-import net.osmand.plus.download.local.dialogs.viewholders.MemoryViewHolder.RoundedChartRenderer;
+import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
@@ -77,12 +65,11 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DataStorageFragment extends BaseSettingsFragment implements FilesCollectListener,
-		StorageMigrationRestartListener, MoveFilesStopListener, LoadItemsListener {
+		StorageMigrationRestartListener, MoveFilesStopListener {
 
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 
@@ -96,8 +83,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private String tmpManuallySpecifiedPath;
 	private DataStorageHelper dataStorageHelper;
 
-	private MemoryInfo memoryInfo;
-	private LocalItemsLoaderTask asyncLoader;
 	private OsmandActionBarActivity activity;
 	private boolean storageMigration;
 	private boolean firstUsage;
@@ -147,7 +132,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			dataStorageRadioButtonsGroup.add(preference);
 		}
 		Preference preference = findPreference(MEMORY_USAGE);
-		preference.setVisible(!storageMigration && !firstUsage && memoryInfo != null);
+		preference.setVisible(!storageMigration && !firstUsage);
 
 		changeButton = new Preference(app);
 		changeButton.setKey(CHANGE_DIRECTORY_BUTTON);
@@ -290,23 +275,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			icon.setVisibility(View.INVISIBLE);
 			title.setText(R.string.shared_string_change);
 		} else if (key.equals(MEMORY_USAGE)) {
-			if (memoryInfo != null) {
-				HorizontalBarChart chart = itemView.findViewById(R.id.horizontal_chart);
-				ChartUtils.setupHorizontalGPXChart(app, chart, 0, 0, 0, false, isNightMode());
-				chart.getAxisRight().setDrawLabels(false);
-				chart.setRenderer(new RoundedChartRenderer(chart));
-
-				MemoryChartAdapter adapter = new MemoryChartAdapter(app, chart, true);
-				adapter.setBottomInfoContainer(itemView.findViewById(R.id.legend));
-
-				BarData barData = ChartUtils.buildStatisticChart(app, chart, memoryInfo, isNightMode());
-				adapter.updateContent(barData, memoryInfo);
-
-				TextView size = itemView.findViewById(R.id.size);
-				size.setText(AndroidUtils.formatSize(app, memoryInfo.getSize()));
-
-				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.bottom_divider), false);
-			}
+			BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(app, itemView);
 		}
 	}
 
@@ -428,29 +397,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 		}
 	}
 
-	@Override
-	public void loadItemsFinished(@NonNull Map<CategoryType, LocalCategory> categories) {
-		List<MemoryItem> items = new ArrayList<>();
-		for (LocalCategory category : categories.values()) {
-			int color = ColorUtilities.getColor(app, category.getType().getColorId());
-			items.add(new MemoryItem(category.getName(app), category.getSize(), color));
-		}
-		memoryInfo = new MemoryInfo(items);
-		app.getSettings().OSMAND_USAGE_SPACE.set(memoryInfo.getSize());
-
-		updateSetting(MEMORY_USAGE);
-	}
-
-	@Override
-	public void onDestroy() {
-		if (!activity.isChangingConfigurations()) {
-			if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
-				asyncLoader.cancel(false);
-			}
-		}
-		super.onDestroy();
-	}
-
 	private void updateView(String key) {
 		//selection set up
 		for (CheckBoxPreference preference : dataStorageRadioButtonsGroup) {
@@ -526,10 +472,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 
 	private void refreshDataInfo() {
 		dataStorageHelper = new DataStorageHelper(app);
-		if (!storageMigration && !firstUsage) {
-			asyncLoader = new LocalItemsLoaderTask(app, this);
-			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
 	}
 
 	@Override

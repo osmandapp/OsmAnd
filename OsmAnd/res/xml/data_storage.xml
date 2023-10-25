@@ -4,7 +4,7 @@
 
 	<Preference
 		android:key="memory_usage"
-		android:layout="@layout/local_memory_card" />
+		android:layout="@layout/memory_usage_preference" />
 
 	<PreferenceCategory
 		android:key="change_data_storage_folder"

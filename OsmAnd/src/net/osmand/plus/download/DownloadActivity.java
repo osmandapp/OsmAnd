@@ -110,7 +110,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
-		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(this, downloadProgressLayout);
+		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(getMyApplication(), downloadProgressLayout);
 
 		viewPager = findViewById(R.id.pager);
 		PagerSlidingTabStrip pagerSlidingTabs = findViewById(R.id.sliding_tabs);
