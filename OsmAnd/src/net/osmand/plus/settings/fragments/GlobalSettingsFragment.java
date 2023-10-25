@@ -21,9 +21,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
 import net.osmand.plus.dialogs.MapRenderingEngineDialog;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.profiles.SelectDefaultProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
@@ -231,12 +231,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupExternalStorageDirPref() {
-		Preference externalStorageDir = findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
-		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
+		Preference preference = findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_folder));
 
-		DataStorageHelper holder = new DataStorageHelper(app);
-		StorageItem currentStorage = holder.getCurrentStorage();
-		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
+		DataStorageHelper storageHelper = new DataStorageHelper(app);
+		StorageItem currentStorage = storageHelper.getCurrentStorage();
+
+		long totalUsed = settings.OSMAND_USAGE_SPACE.get();
 		if (totalUsed > 0) {
 			String[] usedMemoryFormats = {
 					getString(R.string.shared_string_memory_used_kb_desc),
@@ -244,14 +245,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 					getString(R.string.shared_string_memory_used_gb_desc),
 					getString(R.string.shared_string_memory_used_tb_desc)
 			};
-			String sTotalUsed = DataStorageHelper.getFormattedMemoryInfo(totalUsed, usedMemoryFormats);
-			String summary = String.format(getString(R.string.data_storage_preference_summary),
-					currentStorage.getTitle(),
-					sTotalUsed);
-			summary = summary.replaceAll(" • ", "  •  ");
-			externalStorageDir.setSummary(summary);
+			String usedSpace = DataStorageHelper.getFormattedMemoryInfo(totalUsed, usedMemoryFormats);
+			String summary = getString(R.string.data_storage_preference_summary, currentStorage.getTitle(), usedSpace);
+			preference.setSummary(summary.replaceAll(" • ", "  •  "));
 		} else {
-			externalStorageDir.setSummary(currentStorage.getTitle());
+			preference.setSummary(currentStorage.getTitle());
 		}
 	}
 
