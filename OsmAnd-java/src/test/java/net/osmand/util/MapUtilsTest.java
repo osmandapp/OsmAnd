@@ -9,16 +9,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-//  return MapUtils.measuredDist31(x1, y1, x2, y2);
-//  return MapUtils.squareRootDist31(x1, y1, x2, y2);
-//  return new LatLon(MapUtils.get31LatitudeY(preciseY), MapUtils.get31LongitudeX(preciseX));
-//  dst = ((int) (MapUtils.squareRootDist31(x, y, xe, ye) * 10)) / 10.0f + " m";
-//  public static LatLon calculateMidPoint(LatLon s1, LatLon s2) {
-//	public static int get31TileNumberX(double longitude)
-//	public static int get31TileNumberY(double latitude)
-//	public static double get31LongitudeX(int tileX)
-//	public static double get31LatitudeY(int tileY)
-
 public class MapUtilsTest {
 
 	private void dist(int ideal, LatLon A, LatLon B, String info) {
@@ -38,6 +28,7 @@ public class MapUtilsTest {
 		float deviation = Math.abs((float) squareRootDist31Meters / (float) ideal * 100 - 100);
 
 		System.out.printf("deviation %.2f%%, ideal %d km, %s\n", deviation, ideal / 1000, info);
+		Assert.assertTrue(deviation < 1); // max 1% for squareRootDist31() method
 	}
 
 	@Test

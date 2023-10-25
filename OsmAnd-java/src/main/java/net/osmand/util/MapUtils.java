@@ -594,16 +594,13 @@ public class MapUtils {
 	}
 
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
-//		// translate into meters
-//		int px = Math.abs(x1 - x2) >> (31 - PRECISION_ZOOM);
-//		int py = Math.abs(y1 - y2) >> (31 - PRECISION_ZOOM);
-//		if (px + py > 2) {
-//			double mDist = measuredDist31(x1, y1, x2, y2);
-//			return mDist * mDist;
-//		}
-
-		// TODO: width!=height !?
-		// TODO: try center of xy1/xy2
+		// translate into meters 
+		int px = Math.abs(x1 - x2) >> (31 - PRECISION_ZOOM);
+		int py = Math.abs(y1 - y2) >> (31 - PRECISION_ZOOM);
+		if (px + py > 2) {
+			double mDist = measuredDist31(x1, y1, x2, y2);
+			return mDist * mDist;
+		}
 		double tw = getTileWidth(x1, y1);
 		double dy = (y1 - y2) * tw;
 		double dx = (x2 - x1) * tw;
