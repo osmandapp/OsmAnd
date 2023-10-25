@@ -5417,7 +5417,9 @@
     <string name="help_article_navigation_routing_train_routing_name">火車路線</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• 新增「滑翔比」小工具
+    <string name="release_4_6">• 新增變更外部輸入裝置按鍵綁定的功能
+\n
+\n • 新增「滑翔比」小工具
 \n
 \n • 新增軌跡的篩選條件與智慧型資料夾
 \n
@@ -5506,4 +5508,34 @@
     <string name="shared_string_show_less">顯示較少</string>
     <string name="folder">資料夾</string>
     <string name="not_specified">未指定</string>
+    <string name="key_event_action_zoom_in">放大</string>
+    <string name="enable_to_use_external_input_device">啟用以讓 OsmAnd 使用外部輸入裝置</string>
+    <string name="key_event_action_change_map_orientation">變更地圖方向</string>
+    <string name="key_event_action_previous_app_profile">上一個應用程式設定檔</string>
+    <string name="show_toast_about_key_pressed">顯示關於按下鍵的浮動式訊息</string>
+    <string name="key_event_action_move_left">向左移動</string>
+    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其與選定的動作連結。</string>
+    <string name="key_event_action_move_right">向右移動</string>
+    <string name="shared_string_button">按鈕</string>
+    <string name="key_event_action_next_app_profile">下一個應用程式設定檔</string>
+    <string name="change_key_binding">變更按鍵綁定</string>
+    <string name="key_event_action_take_media_note">記下媒體附註</string>
+    <string name="key_event_action_activity_back_pressed">按下返回活動</string>
+    <string name="key_event_action_emit_navigation_hint">發出導航提示</string>
+    <string name="remove_type_q">您真的想要移除「%1$s」類型嗎？</string>
+    <string name="shared_string_action">動作</string>
+    <string name="add_new_type">新增類型</string>
+    <string name="key_event_action_move_up">向上移動</string>
+    <string name="key_event_action_open_search_view">開啟搜尋檢視</string>
+    <string name="key_event_action_zoom_out">縮小</string>
+    <string name="key_event_action_toggle_drower">顯示/隱藏側邊選單</string>
+    <string name="key_is_already_assigned_error">「%1$s」鍵已被分配給其他動作：「%2$s」</string>
+    <string name="key_event_action_open_navigation_view">開啟導航檢視</string>
+    <string name="external_input_device_title">外部輸入裝置</string>
+    <string name="key_bindings">按鍵綁定</string>
+    <string name="key_event_action_move_to_my_location">移動到我的位置</string>
+    <string name="key_event_category_map_interactions">地圖互動</string>
+    <string name="key_event_action_move_down">向下移動</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">開啟 WunderLINQ Datagrid</string>
+    <string name="key_event_category_actions">動作</string>
 </resources>
