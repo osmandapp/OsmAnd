@@ -2151,6 +2151,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="navigate_point_format_swiss_grid">Swiss Grid (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Swiss Grid (CH1903+)</string>
+    <string name="navigate_point_format_maidenhead">Maidenhead Locator</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change setting</string>
@@ -3707,6 +3708,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="navigate_point_olc_info_area">Valid full OLC\nRepresents area: %1$s x %2$s</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
+    <string name="navigate_point_maidenhead">Maidenhead Locator</string>
     <string name="download_tab_downloads">All Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>

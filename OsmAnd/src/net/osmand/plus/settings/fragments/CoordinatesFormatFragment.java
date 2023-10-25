@@ -38,6 +38,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String OLC_FORMAT = "olc_format";
 	private static final String SWISS_GRID_FORMAT = "swiss_grid_format";
 	private static final String SWISS_GRID_PLUS_FORMAT = "swiss_grid_plus_format";
+	private static final String MAIDENHEAD_FORMAT = "maidenhead_format";
 
 	@Override
 	protected void setupPreferences() {
@@ -49,6 +50,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference olcPref = findPreference(OLC_FORMAT);
 		CheckBoxPreference swissGridPref = findPreference(SWISS_GRID_FORMAT);
 		CheckBoxPreference swissGridPlusPref = findPreference(SWISS_GRID_PLUS_FORMAT);
+		CheckBoxPreference maidenheadPref = findPreference(MAIDENHEAD_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -60,6 +62,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
 		swissGridPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_FORMAT));
 		swissGridPlusPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_PLUS_FORMAT));
+		maidenheadPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.MAIDENHEAD_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
@@ -198,6 +201,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.SWISS_GRID_FORMAT;
 			case SWISS_GRID_PLUS_FORMAT:
 				return PointDescription.SWISS_GRID_PLUS_FORMAT;
+			case MAIDENHEAD_FORMAT:
+				return PointDescription.MAIDENHEAD_FORMAT;
 			default:
 				return -1;
 		}
@@ -221,6 +226,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return SWISS_GRID_FORMAT;
 			case PointDescription.SWISS_GRID_PLUS_FORMAT:
 				return SWISS_GRID_PLUS_FORMAT;
+			case PointDescription.MAIDENHEAD_FORMAT:
+				return MAIDENHEAD_FORMAT;
 			default:
 				return "Unknown format";
 		}

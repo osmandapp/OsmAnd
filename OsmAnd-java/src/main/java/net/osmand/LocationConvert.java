@@ -18,6 +18,7 @@ public class LocationConvert {
 	public static final int MGRS_FORMAT = 5;
 	public static final int SWISS_GRID_FORMAT = 6;
 	public static final int SWISS_GRID_PLUS_FORMAT = 7;
+	public static final int MAIDENHEAD_FORMAT = 100;
 	private static final char DELIM = ':';
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';

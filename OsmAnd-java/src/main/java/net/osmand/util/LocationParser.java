@@ -8,6 +8,7 @@ import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.data.LatLon;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 

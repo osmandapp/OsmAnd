@@ -31,6 +31,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.LocationParser;
+import net.osmand.util.MaidenheadConverter;
 
 import org.apache.commons.logging.Log;
 
@@ -115,6 +117,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showSwissGrid(lat, lon, false);
 		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT){
 			showSwissGrid(lat, lon, true);
+		} else if (format == PointDescription.MAIDENHEAD_FORMAT){
+			showMaidenhead(lat, lon);
 		} else {
 			showStandardCoordinates(lat, lon, format);
 		}
@@ -160,6 +164,12 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 		firstCoordinate.setText(swissGridFormat.format(swissGrid[0]));
 		secondCoordinate.setText(swissGridFormat.format(swissGrid[1]));
+	}
+
+	private void showMaidenhead(double lat, double lon) {
+		String mh = MaidenheadConverter.latLonToMaidenhead(new LatLon(lat, lon));
+		setupForNonStandardFormat();
+		firstCoordinate.setText(mh);
 	}
 
 	private void setupForNonStandardFormat() {
