@@ -5197,4 +5197,5 @@
     <string name="quick_action_directions_from_desc">En knapp för att göra skärmens mitt till startpunkt. Frågar därefter om destination eller påbörjar ruttberäkning.</string>
     <string name="live_monitoring_tracking_interval">Intervall för direktspårning</string>
     <string name="voice_prompts_timetable">Tider för röstmeddelanden</string>
+    <string name="search_offline_geo_error">Kunde inte tolka geo-identifieraren \'%s\'.</string>
 </resources>
