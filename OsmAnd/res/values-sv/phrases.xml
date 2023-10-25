@@ -4415,4 +4415,6 @@
     <string name="poi_ship_destination">Tillträde för fartyg: destination</string>
     <string name="poi_waste_organic">Komposterbart</string>
     <string name="poi_recycling_belts">Bälten</string>
+    <string name="poi_dressing_room">Omklädningsrum</string>
+    <string name="poi_emergency_bay">Nöduppställningsplats</string>
 </resources>
