@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -88,10 +87,6 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		PopUpMenu.show(displayData)
 
 		return true
-	}
-
-	override fun restoreState(bundle: Bundle?) {
-		super.restoreState(bundle)
 	}
 
 	private fun showTracksSelection(
