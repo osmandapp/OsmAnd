@@ -34,13 +34,10 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
-		trackItems.add(trackItem)
-		folderAnalysis = null
-	}
-
-	fun addAllTrackItem(trackItem: Collection<TrackItem>) {
-		trackItems.addAll(trackItem)
-		folderAnalysis = null
+		if(!trackItems.contains(trackItem)) {
+			trackItems.add(trackItem)
+			folderAnalysis = null
+		}
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {

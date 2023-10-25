@@ -161,30 +161,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return getSmartFolderByName(name) != null
 	}
 
-	fun addTrackItemToSmartFolder(item: TrackItem) {
-		LOG.debug("addTrackItemToSmartFolder")
-		if (!allAvailableTrackItems.contains(item)) {
-			allAvailableTrackItems.add(item)
-		}
-		val smartFolders = ArrayList(smartFolderCollection)
-		for (smartFolder in smartFolders) {
-			var trackAccepted = true
-			smartFolder.filters?.let { filtersValue ->
-				for (filter in filtersValue) {
-					if (filter.isEnabled() && !filter.isTrackAccepted(item)) {
-						trackAccepted = false
-						break
-					}
-				}
-			}
-			if (trackAccepted) {
-				if (!smartFolder.trackItems.contains(item)) {
-					smartFolder.addTrackItem(item)
-				}
-			}
-		}
-	}
-
 	private fun getSmartFolderByName(name: String): SmartFolder? {
 		val smartFolders = ArrayList(smartFolderCollection)
 		for (folder in smartFolders) {
@@ -213,20 +189,24 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		notifyUpdateListeners()
 	}
 
-	@WorkerThread
-	fun updateSmartFolderItems(smartFolder: SmartFolder) {
-		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
-		smartFolder.resetItems()
-		val filters = smartFolder.filters
-		if (filters == null) {
-			smartFolder.addAllTrackItem(allAvailableTrackItems)
-		} else {
-			for (item in allAvailableTrackItems) {
+	fun addTrackItemToSmartFolder(item: TrackItem) {
+		LOG.debug("addTrackItemToSmartFolder")
+		if (!allAvailableTrackItems.contains(item)) {
+			allAvailableTrackItems.add(item)
+		}
+		addTracksToSmartFolders(arrayListOf(item), ArrayList(smartFolderCollection))
+	}
+
+	private fun addTracksToSmartFolders(items: List<TrackItem>, smartFolders: List<SmartFolder>) {
+		for (item in items) {
+			for (smartFolder in smartFolders) {
 				var trackAccepted = true
-				for (filter in filters) {
-					if (!filter.isTrackAccepted(item)) {
-						trackAccepted = false
-						break
+				smartFolder.filters?.let { smartFolderFilters ->
+					for (filter in smartFolderFilters) {
+						if (!filter.isTrackAccepted(item)) {
+							trackAccepted = false
+							break
+						}
 					}
 				}
 				if (trackAccepted) {
@@ -234,7 +214,13 @@ class SmartFolderHelper(val app: OsmandApplication) {
 				}
 			}
 		}
-		smartFolder.updateAnalysis()
+	}
+
+	@WorkerThread
+	fun updateSmartFolderItems(smartFolder: SmartFolder) {
+		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
+		smartFolder.resetItems()
+		addTracksToSmartFolders(ArrayList(allAvailableTrackItems), arrayListOf(smartFolder))
 		notifyFolderUpdatedListeners(smartFolder)
 	}
 
