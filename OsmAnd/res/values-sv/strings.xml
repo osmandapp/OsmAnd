@@ -2617,7 +2617,7 @@
     <string name="shared_string_dont">Gör inte</string>
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Hämta bilder</string>
+    <string name="wikivoyage_download_pics">Ladda ner bilder</string>
     <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. 
 \nDu kan alltid ändra inställningen i \"Utforska\" → \"Alternativ\".</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
@@ -3218,12 +3218,12 @@
     <string name="shared_string_sec">sek</string>
     <string name="announcement_time_passing">Passerar</string>
     <string name="announcement_time_approach">Närma sig</string>
-    <string name="announcement_time_prepare_long">Långt förberedan</string>
-    <string name="announcement_time_prepare">Förbereda</string>
-    <string name="announcement_time_off_route">Av rutten</string>
-    <string name="announcement_time_arrive">Anländer till destinationen</string>
+    <string name="announcement_time_prepare_long">Lång förberedelse</string>
+    <string name="announcement_time_prepare">Förbered</string>
+    <string name="announcement_time_off_route">Utanför rutten</string>
+    <string name="announcement_time_arrive">Ankomst till destinationen</string>
     <string name="shared_string_turn">Sväng</string>
-    <string name="announcement_time_intervals">Tid- och avstånds-intervaller</string>
+    <string name="announcement_time_intervals">Tids- och avståndsintervaller</string>
     <string name="announcement_time_descr">Meddelandetid för olika röstmeddelanden beror på typ, aktuell navigationshastighet och standardnavigeringshastighet.</string>
     <string name="announcement_time_title">Meddelandetid</string>
     <string name="start_recording">Starta inspelning</string>
@@ -3376,7 +3376,7 @@
 \n
 \n</string>
     <string name="update_all_maps_added">Uppdatera alla kartor som lagts till i %1$s\?</string>
-    <string name="exit_number">Utgångsnummer</string>
+    <string name="exit_number">Avfartsnummer</string>
     <string name="announce_when_exceeded">Meddela när den överskrids</string>
     <string name="user_points">Användarpunkter</string>
     <string name="output">Utgång</string>
@@ -4273,7 +4273,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Dessa widgetar visar information om kommande soluppgång och solnedgång.</string>
     <string name="share_crash_log">Dela kraschlogg</string>
     <string name="shared_string_large">Stor</string>
-    <string name="map_widget_altitude_map_center">Höjd: kartcentrum</string>
+    <string name="map_widget_altitude_map_center">Höjd: kartans mitt</string>
     <string name="external_sensors_plugin_name">Externa sensorer</string>
     <string name="external_sensors_plugin_description">Åtkomst till externa sensorer för att läsa av t.ex. din puls, cykelhastighet, cykeleffekt eller kadens. Kräver att din enhet är ansluten till respektive sensor via det trådlösa personliga nätverksprotokollet ANT+.</string>
     <string name="map_widget_ant_bicycle_power_desc">Visar cyklistens effekt, den kraft som genereras för att flytta cykeln framåt</string>
@@ -5200,4 +5200,14 @@
     <string name="search_offline_geo_error">Kunde inte tolka geo-identifieraren \'%s\'.</string>
     <string name="public_transport_try_ped">Prova navigering till fots.</string>
     <string name="app_mode_monowheel">Monohjul</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Föredra taktil beläggning</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Föredra taktil beläggning</string>
+    <string name="speed_camera_pois">Fartkameror</string>
+    <string name="speed_cameras_legal_descr">I några länder och regioner är det förbjudet att använda funktioner som varnar för fartkameror.
+\n
+\nDu behöver göra ett val beroende på lagstiftningen i ditt land.
+\n
+\nVälj %1$s så kan du få information och varningar om fartkameror.
+\n
+\nVälj %2$s så kommer all data om fartkameror raderas (varningar, objekt i kartan etc) tills OsmAnd ominstalleras helt.</string>
 </resources>
