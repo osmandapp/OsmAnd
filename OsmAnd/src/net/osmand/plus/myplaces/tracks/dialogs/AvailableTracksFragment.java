@@ -134,7 +134,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 		updateEnable = true;
 		startHandler();
-		restoreState(getArguments());
 		updateProgressVisibility();
 	}
 

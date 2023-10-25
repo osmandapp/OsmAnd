@@ -380,10 +380,14 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (bundle != null && bundle.getInt(TAB_ID) == GPX_TAB) {
 			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY);
 			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY);
-			if (bundle.containsKey(SELECTED_SMART_FOLDER_KEY)) {
-				String smartFolderName = bundle.getString(SELECTED_SMART_FOLDER_KEY);
+
+			String smartFolderName = bundle.getString(SELECTED_SMART_FOLDER_KEY);
+			if (smartFolderName != null) {
 				smartFolder = app.getSmartFolderHelper().getSmartFolder(smartFolderName);
 			}
+			bundle.remove(SELECTED_FOLDER_KEY);
+			bundle.remove(SELECTED_ITEM_PATH_KEY);
+			bundle.remove(SELECTED_SMART_FOLDER_KEY);
 		}
 	}
 
