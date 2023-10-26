@@ -5452,7 +5452,9 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Widget „Gleitzahl“ hinzugefügt
+    <string name="release_4_6">• Möglichkeit zum Ändern der Tastenbelegung für externe Eingabegeräte hinzugefügt
+\n
+\n• Widget „Gleitzahl“ hinzugefügt
 \n
 \n• Filter und intelligente Ordner für Tracks hinzugefügt
 \n
@@ -5520,4 +5522,23 @@
     <string name="shared_string_show_less">Weniger anzeigen</string>
     <string name="folder">Verzeichnis</string>
     <string name="not_specified">Nicht angegeben</string>
+    <string name="key_event_action_zoom_in">Hereinzoomen</string>
+    <string name="key_event_action_change_map_orientation">Kartenorientierung ändern</string>
+    <string name="press_button_to_link_with_action">Drücke die Taste auf deinem Gerät, um sie mit der ausgewählten Aktion zu verknüpfen.</string>
+    <string name="deletion_error">Löschungsfehler</string>
+    <string name="shared_string_button">Schaltfläche</string>
+    <string name="change_key_binding">Tastenbelegung ändern</string>
+    <string name="key_event_action_take_media_note">Mediennotiz aufnehmen</string>
+    <string name="shared_string_action">Aktion</string>
+    <string name="add_new_type">Neuen Typ ergänzen</string>
+    <string name="key_event_action_open_search_view">Suche öffnen</string>
+    <string name="key_event_action_zoom_out">Herauszoomen</string>
+    <string name="key_event_action_toggle_drower">Zeige/verberge das Seitenmenü</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel \"%1$s\" ist bereits einer anderen Aktion zugeordnet: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
+    <string name="external_input_device_title">Externes Eingabegerät</string>
+    <string name="key_bindings">Tastenbelegung</string>
+    <string name="key_event_category_map_interactions">Karteninteraktionen</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Öffne das WunderLINQ-Datenraster</string>
+    <string name="key_event_category_actions">Aktionen</string>
 </resources>
