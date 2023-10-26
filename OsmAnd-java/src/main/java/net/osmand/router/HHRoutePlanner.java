@@ -264,7 +264,7 @@ public class HHRoutePlanner {
 //			c.preloadSegments();
 //			c.ROUTE_LAST_MILE = false;
 			c.calcDetailed(2);
-			c.calcAlternative();
+//			c.calcAlternative();
 			c.gc();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;

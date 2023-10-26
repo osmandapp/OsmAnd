@@ -590,7 +590,7 @@ public class MapUtils {
 	}
 
 	public static double measuredDist31(int x1, int y1, int x2, int y2) {
-		return getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
+		return getDistance(get31LatitudeY(y1), get31LongitudeX(x1), get31LatitudeY(y2), get31LongitudeX(x2));
 	}
 
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
