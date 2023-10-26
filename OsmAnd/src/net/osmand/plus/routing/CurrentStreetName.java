@@ -1,7 +1,6 @@
 package net.osmand.plus.routing;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -12,14 +11,11 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class CurrentStreetName {
 	public String text;
 	public TurnType turnType;
 	public boolean showMarker; // turn type has priority over showMarker
-	public RoadShield shield;
+	public RouteDataObject shieldObject;
 	public String exitRef;
 
 	@NonNull
@@ -45,10 +41,9 @@ public class CurrentStreetName {
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
 			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
-			RouteDataObject routeDataObject = n.directionInfo.getRouteDataObject();
-			streetName.shield = RoadShield.create(routeDataObject);
-			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»", streetName.shield);
+			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»");
 			streetName.turnType = n.directionInfo.getTurnType();
+			streetName.shieldObject = n.directionInfo.getRouteDataObject();
 			if (streetName.turnType == null) {
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 			}
@@ -73,7 +68,7 @@ public class CurrentStreetName {
 					isSet = true;
 				}
 				streetName.showMarker = true;
-				streetName.shield = RoadShield.create(rs.getObject());
+				streetName.shieldObject = rs.getObject();
 			}
 		}
 		// 3. display next road street name if this one empty
@@ -82,62 +77,12 @@ public class CurrentStreetName {
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(routingHelper, rs, false);
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
-				streetName.shield = RoadShield.create(rs.getObject());
+				streetName.shieldObject = rs.getObject();
 			}
 		}
 		if (streetName.turnType == null) {
 			streetName.showMarker = true;
 		}
 		return streetName;
-	}
-
-	public static class RoadShield {
-		private final RouteDataObject rdo;
-		private final Map<String, String> shieldTags = new LinkedHashMap<>();
-		private StringBuilder additional;
-
-		public RoadShield(@NonNull RouteDataObject rdo) {
-			this.rdo = rdo;
-			StringBuilder additional = new StringBuilder();
-			for (int i = 0; i < rdo.nameIds.length; i++) {
-				String key = rdo.region.routeEncodingRules.get(rdo.nameIds[i]).getTag();
-				String val = rdo.names.get(rdo.nameIds[i]);
-				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
-					additional.append(key).append("=").append(val).append(";");
-				} else if (key.startsWith("route_road") && key.endsWith("_ref")) {
-					shieldTags.put(key, val);
-				}
-			}
-			if (!shieldTags.isEmpty()) {
-				this.additional = additional;
-			}
-		}
-
-		public static RoadShield create(@Nullable RouteDataObject rdo) {
-			if (rdo != null && rdo.nameIds != null) {
-				return new RoadShield(rdo);
-			}
-			return null;
-		}
-
-		public RouteDataObject getRdo() {
-			return rdo;
-		}
-
-		public StringBuilder getAdditional() {
-			return additional;
-		}
-
-		public Map<String, String> getShieldTags() {
-			return shieldTags;
-		}
-
-		public boolean hasShield() {
-			return !shieldTags.isEmpty();
-		}
-
-		public boolean equalsShield(@Nullable RoadShield roadShield) {
-			return roadShield != null && shieldTags.equals(roadShield.shieldTags);
-		}
 	}
 }

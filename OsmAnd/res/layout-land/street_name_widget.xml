@@ -35,14 +35,12 @@
 			android:layout_height="@dimen/map_widget_height"
 			android:scaleType="fitCenter" />
 
-		<LinearLayout
-			android:id="@+id/map_shields_container"
-			android:layout_width="wrap_content"
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/map_shield_icon"
+			android:layout_width="@dimen/dialog_button_ex_height"
 			android:layout_height="match_parent"
-			android:layout_gravity="center"
-			android:gravity="center"
-			android:orientation="horizontal">
-		</LinearLayout>
+			android:scaleType="fitCenter"
+			tools:src="@drawable/h_white_pillow_2_road_shield" />
 
 		<FrameLayout
 			android:layout_width="wrap_content"

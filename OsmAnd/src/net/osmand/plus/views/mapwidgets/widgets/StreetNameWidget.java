@@ -14,7 +14,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -40,7 +39,6 @@ import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.CurrentStreetName.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -56,7 +54,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-import java.util.Map;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -68,14 +65,15 @@ public class StreetNameWidget extends MapWidget {
 	private final TextView addressText;
 	private final TextView addressTextShadow;
 	private final TextView exitRefText;
-	private final LinearLayout shieldImagesContainer;
+	private final ImageView shieldImage;
 	private final ImageView turnIcon;
 	private final View waypointInfoBar;
 
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
 	private boolean showMarker;
-	private RoadShield cachedRoadShield;
+	private String roadShieldName;
+
 
 	@Override
 	protected int getLayoutId() {
@@ -91,7 +89,7 @@ public class StreetNameWidget extends MapWidget {
 		addressTextShadow = view.findViewById(R.id.map_address_text_shadow);
 		waypointInfoBar = view.findViewById(R.id.waypoint_info_bar);
 		exitRefText = view.findViewById(R.id.map_exit_ref);
-		shieldImagesContainer = view.findViewById(R.id.map_shields_container);
+		shieldImage = view.findViewById(R.id.map_shield_icon);
 		turnIcon = view.findViewById(R.id.map_turn_icon);
 
 		turnDrawable = new TurnDrawable(mapActivity, true);
@@ -121,7 +119,7 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressText, false);
 			AndroidUiHelper.updateVisibility(addressTextShadow, false);
 			AndroidUiHelper.updateVisibility(turnIcon, false);
-			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
+			AndroidUiHelper.updateVisibility(shieldImage, false);
 			AndroidUiHelper.updateVisibility(exitRefText, false);
 		} else if (streetName == null) {
 			updateVisibility(false);
@@ -131,21 +129,20 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressText, true);
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
-			RoadShield shield = streetName.shield;
-			if (shield != null && !shield.equalsShield(cachedRoadShield)) {
-				if (setRoadShield(shield)) {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
-					int indexOf = streetName.text.indexOf("»");
-					if (indexOf > 0) {
-						streetName.text = streetName.text.substring(indexOf);
-					}
-				} else {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
+			RouteDataObject shieldObject = streetName.shieldObject;
+			if (shieldObject != null && shieldObject.nameIds != null && setRoadShield(shieldObject)) {
+				AndroidUiHelper.updateVisibility(shieldImage, true);
+				int indexOf = streetName.text.indexOf("»");
+				if (indexOf > 0) {
+					streetName.text = streetName.text.substring(indexOf);
 				}
-				cachedRoadShield = shield;
-			} else if (shield == null) {
-				AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
-				cachedRoadShield = null;
+				if (roadShieldName != null && streetName.text.startsWith(roadShieldName)) {
+					streetName.text = streetName.text.replaceFirst(roadShieldName, "");
+					streetName.text = streetName.text.trim();
+				}
+			} else {
+				AndroidUiHelper.updateVisibility(shieldImage, false);
+				roadShieldName = null;
 			}
 
 			if (Algorithms.isEmpty(streetName.exitRef)) {
@@ -215,23 +212,30 @@ public class StreetNameWidget extends MapWidget {
 		}
 	}
 
-	private boolean setRoadShield(@NonNull RoadShield shield) {
-		if (shield.hasShield()) {
-			boolean shieldSet = false;
-			shieldImagesContainer.removeAllViews();
-			for (Map.Entry<String, String> entry : shield.getShieldTags().entrySet()) {
-				String nameTag = entry.getKey();
-				String text = entry.getValue();
-				shieldSet |= setShieldImage(shield, nameTag, text);
+	private boolean setRoadShield(@NonNull RouteDataObject object) {
+		StringBuilder additional = new StringBuilder();
+		for (int i = 0; i < object.nameIds.length; i++) {
+			String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
+			String val = object.names.get(object.nameIds[i]);
+			if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
+				additional.append(key).append("=").append(val).append(";");
 			}
-			return shieldSet;
+		}
+		for (int i = 0; i < object.nameIds.length; i++) {
+			String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
+			String val = object.names.get(object.nameIds[i]);
+			if (key.startsWith("route_road") && key.endsWith("_ref")) {
+				boolean visible = setRoadShield(object, key, val, additional);
+				if (visible) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
 
-	private boolean setShieldImage(@NonNull RoadShield shield, String nameTag, String name) {
-		RouteDataObject object = shield.getRdo();
-		StringBuilder additional = shield.getAdditional();
+	private boolean setRoadShield(@NonNull RouteDataObject object, @NonNull String nameTag,
+	                              @NonNull String name, @NonNull StringBuilder additional) {
 		int[] types = object.getTypes();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
@@ -264,20 +268,26 @@ public class StreetNameWidget extends MapWidget {
 					"drawable", app.getPackageName());
 		}
 		if (shieldRes == -1) {
+			roadShieldName = null;
 			return false;
 		}
 
-		Drawable shieldDrawable = AppCompatResources.getDrawable(mapActivity, shieldRes);
-		if (shieldDrawable == null) {
+		Drawable shield = AppCompatResources.getDrawable(mapActivity, shieldRes);
+		if (shield == null) {
+			roadShieldName = null;
 			return false;
 		}
 
-		float xSize = shieldDrawable.getIntrinsicWidth();
-		float ySize = shieldDrawable.getIntrinsicHeight();
+		float xSize = shield.getIntrinsicWidth();
+		float ySize = shield.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
 		//setting view proportions (height is fixed by toolbar size - 48dp);
 		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
+
+		ViewGroup.LayoutParams params = shieldImage.getLayoutParams();
+		params.width = viewWidthPx;
+		shieldImage.setLayoutParams(params);
 
 		Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
@@ -289,15 +299,8 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
-		ImageView imageView = new ImageView(view.getContext());
-		int viewSize = AndroidUtils.dpToPx(app, 40f);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
-		int padding = AndroidUtils.dpToPx(app, 4f);
-		imageView.setPadding(0, 0, 0, padding);
-		imageView.setLayoutParams(params);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		imageView.setImageBitmap(bitmap);
-		shieldImagesContainer.addView(imageView);
+		shieldImage.setImageBitmap(bitmap);
+		roadShieldName = name;
 		return true;
 	}
 
