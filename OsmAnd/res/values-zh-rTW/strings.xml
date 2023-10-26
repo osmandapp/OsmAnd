@@ -5538,4 +5538,5 @@
     <string name="key_event_action_move_down">向下移動</string>
     <string name="key_event_action_open_wunderlinq_datagrid">開啟 WunderLINQ Datagrid</string>
     <string name="key_event_category_actions">動作</string>
+    <string name="deletion_error">刪除錯誤</string>
 </resources>
