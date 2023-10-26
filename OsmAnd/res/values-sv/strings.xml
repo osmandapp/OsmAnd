@@ -163,8 +163,7 @@
     <string name="osmand_parking_pm">em</string>
     <string name="osmand_parking_am">fm</string>
     <string name="osmand_parking_position_name">Parkeringsplats</string>
-    <string name="osmand_parking_plugin_description">Låter dig spara var din bil är parkerad, inklusive hur mycket parkeringstid som finns kvar.
-\nBåde plats och tid är synliga både på instrumentpanelen och i en kartwidget. En larmpåminnelse kan läggas till i Android-kalendern.</string>
+    <string name="osmand_parking_plugin_description">Markera var din bil är parkerad, och sätt en avisering i kalendern när parkeringstiden tar slut. För att sätta ut markören, välj en plats i kartan, gå till \'Åtgärder\' och tryck \'Lägg till parkering\'.</string>
     <string name="osmand_parking_plugin_name">Parkeringsplats</string>
     <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
     <string name="context_menu_item_delete_parking_point">Ta bort parkeringsmarkör</string>
@@ -4869,21 +4868,23 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Ny widget för \"Glidtal\"
+    <string name="release_4_6">• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
 \n
-\n • Filter och smarta mappar för spår tillagda
+\n• Ny widget för \"Glidtal\"
 \n
-\n • Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
+\n• Filter och smarta mappar för spår tillagda
 \n
-\n • Stöd för ANT+ temperatur widget
+\n• Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
 \n
-\n • Förbättrad minneshantering för stora gpx-spår
+\n• Stöd för ANT+ temperatur widget
 \n
-\n • Uppdaterad resurshantering i Nedladdningar
+\n• Förbättrad minneshantering för stora gpx-spår
 \n
-\n • Ny widget \"Tillgängligt minne\"
+\n• Uppdaterad resurshantering i Nedladdningar
 \n
-\n • Löst problem med genomskinligt statusfält
+\n• Ny widget \"Tillgängligt minne\"
+\n
+\n• Löst problem med genomskinligt statusfält
 \n
 \n</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
