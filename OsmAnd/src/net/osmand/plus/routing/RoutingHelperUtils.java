@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.CurrentStreetName.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -14,7 +12,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
@@ -30,47 +27,23 @@ public class RoutingHelperUtils {
 
 	@NonNull
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
-		return formatStreetName(name, ref, destination, towards, null);
-	}
-
-	@NonNull
-	public static String formatStreetName(String name, String originalRef, String destination, String towards,
-	                                      RoadShield shield) {
-		StringBuilder formattedStreetName = new StringBuilder();
-		if (originalRef != null && originalRef.length() > 0) {
-			String[] refs = originalRef.split(";");
-			for (String ref : refs) {
-				if (shield == null || !isRefEqualsShield(shield, ref)) {
-					if (formattedStreetName.length() > 0) {
-						formattedStreetName.append(" ");
-					}
-					formattedStreetName.append(ref);
-				}
-			}
+		String formattedStreetName = "";
+		if (ref != null && ref.length() > 0) {
+			formattedStreetName = ref;
 		}
 		if (name != null && name.length() > 0) {
 			if (formattedStreetName.length() > 0) {
-				formattedStreetName.append(" ");
+				formattedStreetName = formattedStreetName + " ";
 			}
-			formattedStreetName.append(name);
+			formattedStreetName = formattedStreetName + name;
 		}
 		if (destination != null && destination.length() > 0) {
 			if (formattedStreetName.length() > 0) {
-				formattedStreetName.append(" ");
+				formattedStreetName = formattedStreetName + " ";
 			}
-			formattedStreetName.append(towards).append(" ").append(destination);
+			formattedStreetName = formattedStreetName + towards + " " + destination;
 		}
-		return formattedStreetName.toString().replace(";", ", ");
-	}
-
-	private static boolean isRefEqualsShield(RoadShield shield, String ref) {
-		for (Entry<String, String> entry : shield.getShieldTags().entrySet()) {
-			String shieldText = entry.getValue();
-			if (ref.equals(shieldText) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldText)) {
-				return true;
-			}
-		}
-		return false;
+		return formattedStreetName.replace(";", ", ");
 	}
 
 	@Nullable
