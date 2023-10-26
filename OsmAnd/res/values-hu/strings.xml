@@ -5546,4 +5546,5 @@
     <string name="key_event_action_move_down">Mozgás le</string>
     <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ Datagrid megnyitása</string>
     <string name="key_event_category_actions">Műveletek</string>
+    <string name="deletion_error">Hiba törléskor</string>
 </resources>
