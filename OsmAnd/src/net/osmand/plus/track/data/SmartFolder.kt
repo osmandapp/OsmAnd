@@ -47,10 +47,6 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 		return folderAnalysis!!
 	}
 
-	fun updateAnalysis() {
-		folderAnalysis = TrackFolderAnalysis(this)
-	}
-
 	override fun getDirName(): String {
 		return folderName
 	}
@@ -60,7 +56,7 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	}
 
 	fun resetItems() {
-		trackItems.clear()
+		trackItems = ArrayList()
 		folderAnalysis = null
 	}
 }
