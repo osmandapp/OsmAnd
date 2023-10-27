@@ -47,6 +47,10 @@ public class BinaryRoutePlanner {
 		return MapUtils.squareRootDist31(x1, y1, x2, y2);
 	}
 
+	private static double measuredDist(int x1, int y1, int x2, int y2) {
+		return MapUtils.measuredDist31(x1, y1, x2, y2);
+	}
+
 
 	private static class SegmentsComparator implements Comparator<RouteSegment> {
 		final RoutingContext ctx;
@@ -268,8 +272,8 @@ public class BinaryRoutePlanner {
 		seg.setParentRoute(RouteSegment.NULL);
 		// compensate first segment difference to mid point (length) https://github.com/osmandapp/OsmAnd/issues/14148
 		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx, seg);
-		double full = squareRootDist(seg.getStartPointX(), seg.getStartPointY(), seg.getEndPointX(), seg.getEndPointY()) + 0.01; // avoid div 0
-		double fromStart = squareRootDist(pnt.preciseX, pnt.preciseY, seg.getStartPointX(), seg.getStartPointY());
+		double full = measuredDist(seg.getStartPointX(), seg.getStartPointY(), seg.getEndPointX(), seg.getEndPointY()) + 0.01; // avoid div 0
+		double fromStart = measuredDist(pnt.preciseX, pnt.preciseY, seg.getStartPointX(), seg.getStartPointY());
 		// full segment length will be added on first visit
 		seg.distanceFromStart = (float) (-fromStart / full * fullTime); 
 		
@@ -361,12 +365,12 @@ public class BinaryRoutePlanner {
 	}
 
 	private float estimatedDistance(final RoutingContext ctx) {
-		double distance = squareRootDist(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
+		double distance = measuredDist(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
 		return (float) (distance / ctx.getRouter().getMaxSpeed());
 	}
 
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY) {
-		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
+		double distToFinalPoint = squareRootDist(begX, begY, endX, endY); // fast distance method is allowed
 		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
@@ -418,7 +422,7 @@ public class BinaryRoutePlanner {
 		if (speed > ctx.getRouter().getMaxSpeed()) {
 			speed = ctx.getRouter().getMaxSpeed();
 		}
-		float distOnRoadToPass = (float) squareRootDist(prevX, prevY, x, y);
+		float distOnRoadToPass = (float) measuredDist(prevX, prevY, x, y); // precise distance method is required
 		return distOnRoadToPass / speed;
 	}
 
