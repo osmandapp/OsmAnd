@@ -29,18 +29,19 @@ public class RoutingHelperUtils {
 	public static final int MAX_BEARING_DEVIATION = 160;
 
 	@NonNull
-	public static String formatStreetName(String name, String ref, String destination, String towards) {
+	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
+	                                      @NonNull String towards) {
 		return formatStreetName(name, ref, destination, towards, null);
 	}
 
 	@NonNull
-	public static String formatStreetName(String name, String originalRef, String destination, String towards,
-	                                      RoadShield shield) {
+	public static String formatStreetName(@Nullable String name, @Nullable String originalRef, @Nullable String destination,
+	                                      @NonNull String towards, @Nullable List<RoadShield> shields) {
 		StringBuilder formattedStreetName = new StringBuilder();
 		if (originalRef != null && originalRef.length() > 0) {
 			String[] refs = originalRef.split(";");
 			for (String ref : refs) {
-				if (shield == null || !isRefEqualsShield(shield, ref)) {
+				if (shields == null || !isRefEqualsShield(shields, ref)) {
 					if (formattedStreetName.length() > 0) {
 						formattedStreetName.append(" ");
 					}
@@ -63,10 +64,10 @@ public class RoutingHelperUtils {
 		return formattedStreetName.toString().replace(";", ", ");
 	}
 
-	private static boolean isRefEqualsShield(RoadShield shield, String ref) {
-		for (Entry<String, String> entry : shield.getShieldTags().entrySet()) {
-			String shieldText = entry.getValue();
-			if (ref.equals(shieldText) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldText)) {
+	private static boolean isRefEqualsShield(@NonNull List<RoadShield> shields, @NonNull String ref) {
+		for (RoadShield shield : shields) {
+			String shieldValue = shield.getValue();
+			if (ref.equals(shieldValue) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldValue)) {
 				return true;
 			}
 		}

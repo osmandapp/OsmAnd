@@ -56,7 +56,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-import java.util.Map;
 
 public class StreetNameWidget extends MapWidget {
 
@@ -75,7 +74,7 @@ public class StreetNameWidget extends MapWidget {
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
 	private boolean showMarker;
-	private RoadShield cachedRoadShield;
+	private List<RoadShield> cachedRoadShields;
 
 	@Override
 	protected int getLayoutId() {
@@ -131,9 +130,9 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressText, true);
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
-			RoadShield shield = streetName.shield;
-			if (shield != null && !shield.equalsShield(cachedRoadShield)) {
-				if (setRoadShield(shield)) {
+			List<RoadShield> shields = streetName.shields;
+			if (!shields.isEmpty() && !shields.equals(cachedRoadShields)) {
+				if (setRoadShield(shields)) {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
 					int indexOf = streetName.text.indexOf("»");
 					if (indexOf > 0) {
@@ -142,10 +141,10 @@ public class StreetNameWidget extends MapWidget {
 				} else {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 				}
-				cachedRoadShield = shield;
-			} else if (shield == null) {
+				cachedRoadShields = shields;
+			} else if (shields.isEmpty()) {
 				AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
-				cachedRoadShield = null;
+				cachedRoadShields = null;
 			}
 
 			if (Algorithms.isEmpty(streetName.exitRef)) {
@@ -215,23 +214,23 @@ public class StreetNameWidget extends MapWidget {
 		}
 	}
 
-	private boolean setRoadShield(@NonNull RoadShield shield) {
-		if (shield.hasShield()) {
-			boolean shieldSet = false;
+	private boolean setRoadShield(@NonNull List<RoadShield> shields) {
+		if (!Algorithms.isEmpty(shields)) {
+			boolean isShieldSet = false;
 			shieldImagesContainer.removeAllViews();
-			for (Map.Entry<String, String> entry : shield.getShieldTags().entrySet()) {
-				String nameTag = entry.getKey();
-				String text = entry.getValue();
-				shieldSet |= setShieldImage(shield, nameTag, text);
+			for (RoadShield shield : shields) {
+				isShieldSet |= setShieldImage(shield);
 			}
-			return shieldSet;
+			return isShieldSet;
 		}
 		return false;
 	}
 
-	private boolean setShieldImage(@NonNull RoadShield shield, String nameTag, String name) {
+	private boolean setShieldImage(@NonNull RoadShield shield) {
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
+		String shieldValue = shield.getValue();
+		String shieldTag = shield.getTag();
 		int[] types = object.getTypes();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
@@ -248,14 +247,14 @@ public class StreetNameWidget extends MapWidget {
 			}
 		}
 
-		rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, name.length());
-		rreq.setStringFilter(rreq.ALL.R_NAME_TAG, nameTag);
+		rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, shieldValue.length());
+		rreq.setStringFilter(rreq.ALL.R_NAME_TAG, shieldTag);
 		rreq.setStringFilter(rreq.ALL.R_ADDITIONAL, additional.toString());
 		rreq.search(RenderingRulesStorage.TEXT_RULES);
 
 		RenderingContext rc = new RenderingContext(app);
 		TextRenderer textRenderer = new TextRenderer(app);
-		TextDrawInfo text = new TextDrawInfo(name);
+		TextDrawInfo text = new TextDrawInfo(shieldValue);
 
 		int shieldRes = -1;
 		if (rreq.isSpecified(rreq.ALL.R_TEXT_SHIELD)) {

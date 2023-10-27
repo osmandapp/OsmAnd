@@ -12,14 +12,15 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class CurrentStreetName {
 	public String text;
 	public TurnType turnType;
 	public boolean showMarker; // turn type has priority over showMarker
-	public RoadShield shield;
+	public List<RoadShield> shields = new ArrayList<>();
 	public String exitRef;
 
 	@NonNull
@@ -46,8 +47,8 @@ public class CurrentStreetName {
 			String dn = n.directionInfo.getDestinationName();
 			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
 			RouteDataObject routeDataObject = n.directionInfo.getRouteDataObject();
-			streetName.shield = RoadShield.create(routeDataObject);
-			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»", streetName.shield);
+			streetName.shields = RoadShield.create(routeDataObject);
+			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»", streetName.shields);
 			streetName.turnType = n.directionInfo.getTurnType();
 			if (streetName.turnType == null) {
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
@@ -73,7 +74,7 @@ public class CurrentStreetName {
 					isSet = true;
 				}
 				streetName.showMarker = true;
-				streetName.shield = RoadShield.create(rs.getObject());
+				streetName.shields = RoadShield.create(rs.getObject());
 			}
 		}
 		// 3. display next road street name if this one empty
@@ -82,7 +83,7 @@ public class CurrentStreetName {
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(routingHelper, rs, false);
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
-				streetName.shield = RoadShield.create(rs.getObject());
+				streetName.shields = RoadShield.create(rs.getObject());
 			}
 		}
 		if (streetName.turnType == null) {
@@ -93,31 +94,37 @@ public class CurrentStreetName {
 
 	public static class RoadShield {
 		private final RouteDataObject rdo;
-		private final Map<String, String> shieldTags = new LinkedHashMap<>();
+		private final String tag;
+		private final String value;
 		private StringBuilder additional;
 
-		public RoadShield(@NonNull RouteDataObject rdo) {
+		public RoadShield(@NonNull RouteDataObject rdo, @NonNull String tag, @NonNull String value) {
 			this.rdo = rdo;
-			StringBuilder additional = new StringBuilder();
-			for (int i = 0; i < rdo.nameIds.length; i++) {
-				String key = rdo.region.routeEncodingRules.get(rdo.nameIds[i]).getTag();
-				String val = rdo.names.get(rdo.nameIds[i]);
-				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
-					additional.append(key).append("=").append(val).append(";");
-				} else if (key.startsWith("route_road") && key.endsWith("_ref")) {
-					shieldTags.put(key, val);
-				}
-			}
-			if (!shieldTags.isEmpty()) {
-				this.additional = additional;
-			}
+			this.tag = tag;
+			this.value = value;
 		}
 
-		public static RoadShield create(@Nullable RouteDataObject rdo) {
+		@NonNull
+		public static List<RoadShield> create(@Nullable RouteDataObject rdo) {
+			List<RoadShield> shields = new ArrayList<>();
 			if (rdo != null && rdo.nameIds != null) {
-				return new RoadShield(rdo);
+				StringBuilder additional = new StringBuilder();
+				for (int i = 0; i < rdo.nameIds.length; i++) {
+					String tag = rdo.region.routeEncodingRules.get(rdo.nameIds[i]).getTag();
+					String val = rdo.names.get(rdo.nameIds[i]);
+					if (!tag.endsWith("_ref") && !tag.startsWith("route_road")) {
+						additional.append(tag).append("=").append(val).append(";");
+					} else if (tag.startsWith("route_road") && tag.endsWith("_ref")) {
+						shields.add(new RoadShield(rdo, tag, val));
+					}
+				}
+				if (!shields.isEmpty()) {
+					for (RoadShield shield : shields) {
+						shield.additional = additional;
+					}
+				}
 			}
-			return null;
+			return shields;
 		}
 
 		public RouteDataObject getRdo() {
@@ -128,16 +135,26 @@ public class CurrentStreetName {
 			return additional;
 		}
 
-		public Map<String, String> getShieldTags() {
-			return shieldTags;
+		public String getTag() {
+			return tag;
 		}
 
-		public boolean hasShield() {
-			return !shieldTags.isEmpty();
+		public String getValue() {
+			return value;
 		}
 
-		public boolean equalsShield(@Nullable RoadShield roadShield) {
-			return roadShield != null && shieldTags.equals(roadShield.shieldTags);
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			RoadShield shield = (RoadShield) o;
+			return Objects.equals(tag, shield.tag)
+					&& Objects.equals(value, shield.value);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(tag, value);
 		}
 	}
 }
