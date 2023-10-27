@@ -8,6 +8,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxListener;
 
@@ -54,6 +55,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 			Exception exception = GPXUtilities.writeGpxFile(fout, gpx);
 			if (exception == null) {
 				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 			}
 		}
 		return shouldClearPath;

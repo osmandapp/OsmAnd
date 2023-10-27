@@ -34,17 +34,19 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
-		if(!trackItems.contains(trackItem)) {
+		if (!trackItems.contains(trackItem)) {
 			trackItems.add(trackItem)
 			folderAnalysis = null
 		}
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {
-		if (folderAnalysis == null) {
-			folderAnalysis = TrackFolderAnalysis(this)
+		var analysis = folderAnalysis
+		if (analysis == null) {
+			analysis = TrackFolderAnalysis(this)
+			folderAnalysis = analysis
 		}
-		return folderAnalysis!!
+		return analysis
 	}
 
 	override fun getDirName(): String {

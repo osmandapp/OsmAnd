@@ -516,18 +516,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void showEditFiltersDialog(@NonNull SmartFolder folder) {
-		FragmentManager manager = getFragmentManager();
-		ArrayList<TrackItem> trackItems = new ArrayList<>();
-		trackItems.addAll(smartFolderHelper.getAllAvailableTrackItems());
-		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
-		filter.initSelectedFilters(folder.getFilters());
-		if (manager != null) {
-			TracksFilterFragment.Companion.showInstance(app, manager, this, filter, null, folder, null);
-		}
-	}
-
-	@Override
 	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
 		selectionHelper.setAllItems(folder.getFlattenedTrackItems());
 		selectionHelper.setSelectedItems(folder.getFlattenedTrackItems());

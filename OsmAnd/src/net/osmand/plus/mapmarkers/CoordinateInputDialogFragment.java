@@ -65,6 +65,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -1462,6 +1463,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			} else {
 				GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
 			}
+			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 			return null;
 		}
 

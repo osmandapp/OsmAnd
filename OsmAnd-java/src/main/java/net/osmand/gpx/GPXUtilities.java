@@ -1314,11 +1314,14 @@ public class GPXUtilities {
 				time = gpxFile.metadata.time;
 			} else if (gpxFile.getLastPoint() != null && gpxFile.getLastPoint().time > 0) {
 				time = gpxFile.getLastPoint().time;
-			} else {
+			} else if (gpxFile.modifiedTime > 0) {
 				time = gpxFile.modifiedTime;
 			}
 		}
-		return 0;
+		if (time == 0) {
+			time = System.currentTimeMillis();
+		}
+		return time;
 	}
 
 	private static SimpleDateFormat getTimeFormatter() {
@@ -1739,6 +1742,9 @@ public class GPXUtilities {
 			}
 			if (addGeneralTrack) {
 				gpxFile.addGeneralTrack();
+			}
+			if (gpxFile.metadata.time == 0) {
+				gpxFile.metadata.time = getCreationTime(gpxFile);
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;

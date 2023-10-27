@@ -43,6 +43,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
 import net.osmand.plus.myplaces.tracks.controller.SmartFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.SmartFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
@@ -474,9 +475,12 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void showEditFiltersDialog(@NonNull SmartFolder folder) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);
+		FragmentManager manager = getFragmentManager();
+		ArrayList<TrackItem> trackItems = new ArrayList<>(smartFolderHelper.getAllAvailableTrackItems());
+		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
+		filter.initSelectedFilters(folder.getFilters());
+		if (manager != null) {
+			TracksFilterFragment.Companion.showInstance(app, manager, this, filter, null, folder, null);
 		}
 	}
 

@@ -83,7 +83,7 @@ class SmartFolderOptionsController(
 			}
 
 			SmartFolderOption.EDIT_FILTER -> {
-				showChangeAppearanceDialog(smartFolder)
+				showEditFiltersDialog(smartFolder)
 			}
 
 			SmartFolderOption.EXPORT -> {
@@ -137,7 +137,7 @@ class SmartFolderOptionsController(
 		dialogManager.askRefreshDialogCompletely(PROCESS_ID)
 	}
 
-	private fun showChangeAppearanceDialog(folder: SmartFolder) {
+	private fun showEditFiltersDialog(folder: SmartFolder) {
 		dialogManager.askDismissDialog(PROCESS_ID)
 		optionsListener?.showEditFiltersDialog(folder)
 	}

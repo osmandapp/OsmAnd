@@ -243,24 +243,22 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return HashSet(allAvailableTrackItems)
 	}
 
-	private class SmartFoldersUpdateTask(
+	private inner class SmartFoldersUpdateTask(
 		private val app: OsmandApplication,
 	) : AsyncTask<Void, Void, Void?>() {
 
 		@Deprecated("Deprecated in Java")
 		override fun doInBackground(vararg params: Void): Void? {
-			app.smartFolderHelper.run {
-				readSettings()
-				for (folder in smartFolderCollection) {
-					updateSmartFolderItems(folder)
-				}
-				notifyUpdateListeners()
+			readSettings()
+			for (folder in smartFolderCollection) {
+				updateSmartFolderItems(folder)
 			}
 			return null
 		}
 
 		@Deprecated("Deprecated in Java")
 		override fun onPostExecute(result: Void?) {
+			notifyUpdateListeners()
 		}
 	}
 }
