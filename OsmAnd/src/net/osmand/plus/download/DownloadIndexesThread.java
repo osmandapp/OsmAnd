@@ -112,9 +112,19 @@ public class DownloadIndexesThread {
 	protected void downloadHasStarted() {
 		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
 		if (app.getDownloadService() == null && shouldStartService) {
-			app.startDownloadService();
+			startDownloadService();
 		}
 		updateNotification();
+	}
+
+	private void startDownloadService() {
+		Intent intent = new Intent(app, DownloadService.class);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			app.startForegroundService(intent);
+		} else {
+			app.startService(intent);
+		}
 	}
 
 	@UiThread

@@ -36,7 +36,7 @@ public class ConfigureMapUtils {
 			boolean localNames = Algorithms.isEmpty(mapLanguageId);
 			String mapLanguageName = localNames
 					? app.getString(R.string.local_map_names)
-					: app.getLangTranslation(mapLanguageId);
+					: AndroidUtils.getLangTranslation(app, mapLanguageId);
 
 			mapLanguages.put(mapLanguageId, mapLanguageName);
 		}

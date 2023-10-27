@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 
@@ -26,9 +29,8 @@ public class DownloadService extends Service {
 		return binder;
 	}
 
-	public void stopService(Context ctx) {
-		Intent serviceIntent = new Intent(ctx, DownloadService.class);
-		ctx.stopService(serviceIntent);
+	public void stopService(@NonNull Context context) {
+		context.stopService(new Intent(context, DownloadService.class));
 	}
 
 	@Override
@@ -36,7 +38,8 @@ public class DownloadService extends Service {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		app.setDownloadService(this);
 
-		Notification notification = app.getNotificationHelper().buildDownloadNotification();
+		NotificationHelper notificationHelper = app.getNotificationHelper();
+		Notification notification = notificationHelper.buildDownloadNotification();
 		startForeground(DOWNLOAD_NOTIFICATION_SERVICE_ID, notification);
 		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
 

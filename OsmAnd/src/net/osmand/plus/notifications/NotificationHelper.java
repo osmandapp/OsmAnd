@@ -6,6 +6,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationManagerCompat;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.CarAppNotification;
@@ -13,11 +18,6 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat.Builder;
-import androidx.core.app.NotificationManagerCompat;
 
 public class NotificationHelper {
 
@@ -31,7 +31,7 @@ public class NotificationHelper {
 	private ErrorNotification errorNotification;
 	private final List<OsmandNotification> all = new ArrayList<>();
 
-	public NotificationHelper(OsmandApplication app) {
+	public NotificationHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		init();
 	}
@@ -48,6 +48,7 @@ public class NotificationHelper {
 		all.add(carAppNotification);
 	}
 
+	@Nullable
 	public Notification buildTopNotification() {
 		OsmandNotification notification = acquireTopNotification();
 		if (notification != null) {
@@ -69,6 +70,7 @@ public class NotificationHelper {
 		return downloadNotification.buildNotification(false).build();
 	}
 
+	@NonNull
 	public Notification buildErrorNotification() {
 		removeNotification(errorNotification.getType());
 		setTopNotification(errorNotification);

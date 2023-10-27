@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
@@ -185,9 +186,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
-	public static void updateCurrentTrack(View v, Activity ctx, OsmandApplication app) {
+	public static void updateCurrentTrack(View v, @Nullable FragmentActivity activity, OsmandApplication app) {
 		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-		if (v == null || ctx == null || app == null || plugin == null) {
+		if (v == null || activity == null || app == null || plugin == null) {
 			return;
 		}
 		boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -204,8 +205,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			public void onClick(View v) {
 				if (isRecording) {
 					plugin.stopRecording();
-				} else if (app.getLocationProvider().checkGPSEnabled(ctx)) {
-					plugin.startGPXMonitoring(ctx);
+				} else if (app.getLocationProvider().checkGPSEnabled(activity)) {
+					plugin.startGPXMonitoring(activity);
 				}
 			}
 		});

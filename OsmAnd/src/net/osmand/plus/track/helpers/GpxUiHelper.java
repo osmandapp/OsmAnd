@@ -195,7 +195,7 @@ public class GpxUiHelper {
 		return allGpxList;
 	}
 
-	public static AlertDialog selectGPXFile(Activity activity, boolean showCurrentGpx,
+	public static AlertDialog selectGPXFile(@NonNull FragmentActivity activity, boolean showCurrentGpx,
 	                                        boolean multipleChoice,
 	                                        CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                        boolean nightMode) {
@@ -359,7 +359,7 @@ public class GpxUiHelper {
 		}
 	}
 
-	private static AlertDialog createDialog(Activity activity,
+	private static AlertDialog createDialog(@NonNull FragmentActivity activity,
 	                                        boolean showCurrentGpx,
 	                                        boolean multipleChoice,
 	                                        CallbackWithObject<GPXFile[]> callbackWithObject,
