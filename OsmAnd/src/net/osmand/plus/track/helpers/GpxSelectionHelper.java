@@ -175,8 +175,7 @@ public class GpxSelectionHelper {
 
 	@Nullable
 	public SelectedGpxFile getSelectedFileByPath(String path) {
-		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
-		for (SelectedGpxFile selectedGpxFile : newList) {
+		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			if (selectedGpxFile.getGpxFile().path.equals(path)) {
 				return selectedGpxFile;
 			}
@@ -184,6 +183,11 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+
+	/**
+	 * @deprecated
+	 * Use the {@link #getSelectedFileByPath(String filePath)} method.
+	 */
 	@Nullable
 	public SelectedGpxFile getSelectedFileByName(String fileName) {
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {

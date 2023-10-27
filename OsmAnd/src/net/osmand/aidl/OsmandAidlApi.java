@@ -1264,7 +1264,7 @@ public class OsmandAidlApi {
 			}
 		}
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
-		SelectedGpxFile selectedGpx = helper.getSelectedFileByName(destination.getName());
+		SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(destination.getAbsolutePath());
 		if (selectedGpx != null) {
 			if (show) {
 				new AsyncTask<File, Void, GPXFile>() {
@@ -1443,9 +1443,12 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean hideGpx(String fileName) {
+	boolean hideGpx(String filePath, String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+			SelectedGpxFile selectedGpxFile = filePath != null
+					? selectionHelper.getSelectedFileByPath(filePath)
+					: selectionHelper.getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();

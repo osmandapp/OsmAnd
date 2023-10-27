@@ -541,7 +541,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				if (params != null && params.getFileName() != null) {
 					OsmandAidlApi api = getApi("hideGpx");
-					return api != null && api.hideGpx(params.getFileName());
+					return api != null && api.hideGpx(null, params.getFileName());
 				}
 				return false;
 			} catch (Exception e) {
