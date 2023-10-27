@@ -274,47 +274,56 @@ public class OpenGLTest {
 			if (!checkedZooms.contains(zoom)) {
 				continue;
 			}
-			if (info.id == testInfo.id && testInfo.visibleZooms.contains(zoom)) {
-				checkedZooms.remove(zoom);
-				continue;
-			}
-			if (info.id == testInfo.id && testInfo.inVisibleZooms.contains(zoom)) {
-				cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be not visible on zoom:" + zoom);
-				checkedZooms.remove(zoom);
-				continue;
-			}
-			if (testInfo.type == RenderedType.TEXT_ON_LINE || testInfo.type == RenderedType.TEXT_ON_POINT) {
-				if (info.content != null && info.content.equals(testInfo.text)) {
-					LatLon c = null;
-					LatLon c2 = null;
-					if (testInfo.center != null) {
-						c = testInfo.center;
-					} else if (testInfo.startPoint != null && testInfo.endPoint != null) {
-						c = MapUtils.calculateMidPoint(testInfo.startPoint, testInfo.endPoint);
-					}
-					if (info.startPoint != null && info.endPoint != null) {
-						c2 = MapUtils.calculateMidPoint(info.startPoint, info.endPoint);
-					} else if (info.center != null) {
-						c2 = info.center;
-					}
-					if (c != null && c2 != null) {
-						double dist = MapUtils.getDistance(c, c2);
-						if (dist <= DISTANCES_TABLE.get(zoom)) {
-							if (testInfo.inVisibleZooms.contains(zoom)) {
-								cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
-							}
-						} else {
-							cummulativeException.addException("text \"" + testInfo.text + "\" is visible on zoom:" + zoom +
-									", but too far from test location. Found location " +
-									String.format("%,.5f", c2.getLatitude()) + " " + String.format("%,.5f", c2.getLongitude()) +
-									" (" + info.id + ") " +
-									". Distance " + (int) dist + " meters. Maximum distance for zoom=" + zoom + " is " + DISTANCES_TABLE.get(zoom) + " meters");
+			boolean isEqualText = testInfo.type == RenderedType.TEXT_ON_LINE || testInfo.type == RenderedType.TEXT_ON_POINT;
+			isEqualText &= info.content != null && info.content.equals(testInfo.text);
+			if (isEqualText) {
+				LatLon c = null;
+				LatLon c2 = null;
+				if (testInfo.center != null) {
+					c = testInfo.center;
+				} else if (testInfo.startPoint != null && testInfo.endPoint != null) {
+					c = MapUtils.calculateMidPoint(testInfo.startPoint, testInfo.endPoint);
+				}
+				if (info.startPoint != null && info.endPoint != null) {
+					c2 = MapUtils.calculateMidPoint(info.startPoint, info.endPoint);
+				} else if (info.center != null) {
+					c2 = info.center;
+				}
+				if (c != null && c2 != null) {
+					double dist = MapUtils.getDistance(c, c2);
+					if (dist <= DISTANCES_TABLE.get(zoom)) {
+						if (testInfo.inVisibleZooms.contains(zoom)) {
+							cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
 						}
-						checkedZooms.remove(zoom);
-					} else if (c == null) {
-						//lat and lon is not set in the test, just check visibility
-						checkedZooms.remove(zoom);
+					} else {
+						cummulativeException.addException("text \"" + testInfo.text + "\" is visible on zoom:" + zoom +
+								", but too far from test location. Found location " +
+								String.format("%,.5f", c2.getLatitude()) + " " + String.format("%,.5f", c2.getLongitude()) +
+								" (" + info.id + ") " +
+								". Distance " + (int) dist + " meters. Maximum distance for zoom=" + zoom + " is " + DISTANCES_TABLE.get(zoom) + " meters");
 					}
+					checkedZooms.remove(zoom);
+					continue;
+				} else if (c == null) {
+					//lat and lon is not set in the test, just check visibility
+					if (testInfo.visibleZooms.contains(zoom)) {
+						checkedZooms.remove(zoom);
+						continue;
+					} else if (testInfo.inVisibleZooms.contains(zoom)) {
+						cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
+					}
+				}
+			}
+			if (testInfo.type == RenderedType.ICON || isEqualText) {
+				if (info.id == testInfo.id && testInfo.visibleZooms.contains(zoom)) {
+					checkedZooms.remove(zoom);
+					continue;
+				}
+
+				if (info.id == testInfo.id && testInfo.inVisibleZooms.contains(zoom)) {
+					cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be not visible on zoom:" + zoom);
+					checkedZooms.remove(zoom);
+					continue;
 				}
 			}
 			if (checkedZooms.size() == 0) {
