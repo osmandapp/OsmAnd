@@ -1299,7 +1299,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void setZoomAndAnimationImpl(int zoom, double zoomAnimation, double zoomFloatPart, int centerX, int centerY) {
-		zoom = getZoomInLimits(zoom);
+		zoom = normalizeZoomWithLimits(zoom);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			int centerX31Before = 0;
@@ -1622,14 +1622,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			double lat = tb.getLatFromPixel(event.getX(), event.getY());
 			double lon = tb.getLonFromPixel(event.getX(), event.getY());
 			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
-			int endZoom = getZoomInLimits(getZoom() + zoomDir);
+			int endZoom = normalizeZoomWithLimits(getZoom() + zoomDir);
 			getAnimatedDraggingThread().startMoving(lat, lon, endZoom, true);
 			return true;
 		}
 		return false;
 	}
 
-	private int getZoomInLimits(int targetZoom) {
+	private int normalizeZoomWithLimits(int targetZoom) {
 		int minZoom = getMinZoom();
 		int maxZoom = getMaxZoom();
 		Zoom zoom = new Zoom(targetZoom, getZoomFloatPart(), minZoom, maxZoom);
