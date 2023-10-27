@@ -830,16 +830,19 @@ public class RouteDataObject {
 	}
 
 	public boolean hasPrivateAccess(GeneralRouterProfile profile) {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule rule = region.quickGetEncodingRule(types[i]);
+		for (int type : types) {
+			RouteTypeRule rule = region.quickGetEncodingRule(type);
 			String tag = rule.getTag();
-			if ("vehicle".equals(tag) || "access".equals(tag)
-					|| (profile == GeneralRouterProfile.CAR && ("motorcar".equals(tag) || "motor_vehicle".equals(tag)))
-					|| (profile == GeneralRouterProfile.BICYCLE && ("bicycle".equals(tag)))) {
-				if (rule.getValue().equals("private")) {
-					return true;
-				}
+			boolean checkPrivate = false;
+			if ("vehicle".equals(tag) || "access".equals(tag)) {
+				checkPrivate = true;
+			} else if (profile == GeneralRouterProfile.CAR) {
+				checkPrivate = "motorcar".equals(tag) || "motor_vehicle".equals(tag);
+			} else if (profile == GeneralRouterProfile.BICYCLE) {
+				checkPrivate = "bicycle".equals(tag);
+			}
+			if (checkPrivate && rule.getValue().equals("private")) {
+				return true;
 			}
 		}
 		return false;
