@@ -210,6 +210,7 @@ public class NavigateGpxHelper {
 			mapViewTrackingUtilities.switchRoutePlanningMode();
 			routingHelper.notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+			AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 		}
 		if (checkLocationPermission) {
 			OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);

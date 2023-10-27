@@ -1297,6 +1297,18 @@ public class AndroidUtils {
 		return Algorithms.isEmpty(permissions);
 	}
 
+	public static final int POST_NOTIFICATIONS_REQUEST_CODE = 6;
+
+	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			if (!AndroidUtils.hasPermission(activity, Manifest.permission.POST_NOTIFICATIONS)) {
+				ActivityCompat.requestPermissions(activity,
+						new String[] {Manifest.permission.POST_NOTIFICATIONS},
+						POST_NOTIFICATIONS_REQUEST_CODE);
+			}
+		}
+	}
+
 	@Nullable
 	public static <T extends Serializable> T getSerializable(@NonNull Bundle bundle, @NonNull String key, @NonNull Class<T> clazz) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

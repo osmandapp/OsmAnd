@@ -7,7 +7,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHIL
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
@@ -16,18 +15,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidget;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingDownhillWidget;
@@ -37,13 +34,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -237,12 +236,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
-	public void showTripRecordingDialog(@NonNull Activity activity) {
-		FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+	public void showTripRecordingDialog(@NonNull FragmentActivity activity) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (hasDataToSave() || wasTrackMonitored()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(fragmentManager, app);
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, activity);
 		}
 	}
 
@@ -364,24 +363,28 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return liveMonitoringHelper.isLiveMonitoringEnabled();
 	}
 
-	public void startGPXMonitoring(Activity activity) {
+	public void startGPXMonitoring(@Nullable FragmentActivity activity) {
 		ValueHolder<Integer> vs = new ValueHolder<>();
 		ValueHolder<Boolean> choice = new ValueHolder<>();
+
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
 		choice.value = settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
-		Runnable runnable = () -> {
-			app.getSavingTrackHelper().startNewSegment();
-			settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
-			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-			settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
-			app.startNavigationService(NavigationService.USED_BY_GPX);
-		};
+
 		if (choice.value || activity == null) {
+			Runnable runnable = () -> {
+				app.getSavingTrackHelper().startNewSegment();
+				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
+				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
+				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
+
+				if (activity != null) {
+					AndroidUtils.requestNotificationPermissionIfNeeded(activity);
+				}
+				app.startNavigationService(NavigationService.USED_BY_GPX);
+			};
 			runnable.run();
-		} else if (activity instanceof FragmentActivity) {
-			FragmentActivity fragmentActivity = (FragmentActivity) activity;
-			FragmentManager manager = fragmentActivity.getSupportFragmentManager();
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(manager, app);
+		} else {
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, activity);
 		}
 	}
 

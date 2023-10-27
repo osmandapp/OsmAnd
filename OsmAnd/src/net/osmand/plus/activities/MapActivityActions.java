@@ -554,7 +554,7 @@ public class MapActivityActions extends MapActions {
 						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
 							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
-							TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
+							TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 						}
 						return true;
 					}));

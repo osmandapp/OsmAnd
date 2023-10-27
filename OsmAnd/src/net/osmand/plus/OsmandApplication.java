@@ -937,19 +937,19 @@ public class OsmandApplication extends MultiDexApplication {
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 
-	public void startNavigationService(int intent) {
-		Intent serviceIntent = new Intent(this, NavigationService.class);
-		if (getNavigationService() != null) {
-			intent |= getNavigationService().getUsedBy();
-			getNavigationService().stopSelf();
+	public void startNavigationService(int usageIntent) {
+		NavigationService service = getNavigationService();
+		if (service != null) {
+			usageIntent |= service.getUsedBy();
+			service.stopSelf();
 		}
-		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
+		Intent intent = new Intent(this, NavigationService.class);
+		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
+			startForegroundService(intent);
 		} else {
-			startService(serviceIntent);
+			startService(intent);
 		}
-		//getNotificationHelper().showNotifications();
 	}
 
 	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {

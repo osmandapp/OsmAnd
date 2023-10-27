@@ -111,8 +111,13 @@ public class DownloadIndexesThread {
 	@UiThread
 	protected void downloadHasStarted() {
 		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
-		if (app.getDownloadService() == null && shouldStartService) {
-			startDownloadService();
+		if (shouldStartService) {
+			if (app.getDownloadService() == null) {
+				startDownloadService();
+			}
+			if (uiActivity instanceof FragmentActivity) {
+				AndroidUtils.requestNotificationPermissionIfNeeded((FragmentActivity) uiActivity);
+			}
 		}
 		updateNotification();
 	}
