@@ -833,16 +833,14 @@ public class RouteDataObject {
 		for (int type : types) {
 			RouteTypeRule rule = region.quickGetEncodingRule(type);
 			String tag = rule.getTag();
-			boolean checkPrivate = false;
-			if ("vehicle".equals(tag) || "access".equals(tag)) {
-				checkPrivate = true;
-			} else if (profile == GeneralRouterProfile.CAR) {
-				checkPrivate = "motorcar".equals(tag) || "motor_vehicle".equals(tag);
-			} else if (profile == GeneralRouterProfile.BICYCLE) {
-				checkPrivate = "bicycle".equals(tag);
-			}
-			if (checkPrivate && rule.getValue().equals("private")) {
-				return true;
+			if (rule.getValue().equals("private")) {
+				if ("vehicle".equals(tag) || "access".equals(tag)) {
+					return true;
+				} else if (profile == GeneralRouterProfile.CAR) {
+					return "motorcar".equals(tag) || "motor_vehicle".equals(tag);
+				} else if (profile == GeneralRouterProfile.BICYCLE) {
+					return "bicycle".equals(tag);
+				}
 			}
 		}
 		return false;
