@@ -25,8 +25,8 @@ public class MapUtilsTest {
 		int squareRootDist31Meters = (int) MapUtils.squareRootDist31(x1, y1, x2, y2);
 		float deviation = Math.abs((float) squareRootDist31Meters / (float) ideal * 100 - 100);
 
-		System.err.printf("Got squaAreRootDist31() deviation %.2f%% from ideal %d km [%s]\n",
-				deviation, ideal / 1000, info);
+		System.err.printf("Got squaAreRootDist31() deviation %.2f%% from precise %d m [%s]\n",
+				deviation, getDistanceMeters, info);
 
 		Assert.assertEquals(ideal, getDistanceMeters); // haversine method - ideal
 		Assert.assertEquals(getDistanceMeters, measuredDist31Meters); // just re-check with x/y
@@ -35,6 +35,18 @@ public class MapUtilsTest {
 
 	@Test
 	public void testDistance() throws IOException {
+		dist(558, new LatLon(40.82126752, 14.42274696),
+				new LatLon(40.82125128, 14.42937738), "IT-Vesuvio (x)");
+		dist(543, new LatLon(40.82375190, 14.42624456),
+				new LatLon(40.81886422, 14.42618018), "IT-Vesuvio (y)");
+		dist(4729, new LatLon(-39.29491586, 174.03285739),
+				new LatLon(-39.29584579, 174.08778903), "NZ-Taranaki (x)");
+		dist(4532, new LatLon(-39.27883939, 174.06337019),
+				new LatLon(-39.31948845, 174.06714675), "NZ-Taranaki (y)");
+		dist(19270, new LatLon(-39.29212599, 173.95213362),
+				new LatLon(-39.29451731, 174.17598006), "NZ-Egmont (x)");
+		dist(19363, new LatLon(-39.20864435, 174.06371352),
+				new LatLon(-39.38267339, 174.06989333), "NZ-Egmont (y)");
 		dist(16000459, new LatLon(-33.70408492, 151.04180026),
 				new LatLon(40.76570188, -74.00214505), "Sydney-NewYork (far)");
 		dist(54808, new LatLon(48.22579901, 16.37482333),
