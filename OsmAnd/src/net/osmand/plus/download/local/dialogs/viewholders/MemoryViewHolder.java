@@ -46,6 +46,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 	private final TextView size;
 	private final HorizontalBarChart chart;
+	private final View bottomDivider;
 
 
 	public MemoryViewHolder(@NonNull View itemView, boolean showHeader, boolean nightMode) {
@@ -55,6 +56,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 		size = itemView.findViewById(R.id.size);
 		chart = itemView.findViewById(R.id.horizontal_chart);
+		bottomDivider = itemView.findViewById(R.id.bottom_divider);
 
 		ChartUtils.setupHorizontalGPXChart(app, chart, 0, 0, 0, false, nightMode);
 		chart.getAxisRight().setDrawLabels(false);
@@ -65,18 +67,19 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 
 		int padding = showHeader ? 0 : app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		AndroidUtils.setMargins((MarginLayoutParams) chart.getLayoutParams(), 0, padding, 0, 0);
+		AndroidUiHelper.updateVisibility(bottomDivider, !showHeader);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.header), showHeader);
-		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.bottom_divider), !showHeader);
 	}
 
-	public void bindView(@NonNull MemoryInfo memoryInfo) {
+	public void bindView(@NonNull MemoryInfo memoryInfo, boolean showDivider) {
 		BarData barData = ChartUtils.buildStatisticChart(app, chart, memoryInfo, nightMode);
 		adapter.updateContent(barData, memoryInfo);
 
 		size.setText(AndroidUtils.formatSize(app, memoryInfo.getSize()));
+		AndroidUiHelper.updateVisibility(bottomDivider, showDivider);
 	}
 
-	private static class MemoryChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, MemoryInfo> {
+	public static class MemoryChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, MemoryInfo> {
 
 		private final UiUtilities uiUtilities;
 		private final LayoutInflater themedInflater;
@@ -115,7 +118,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	private static class RoundedChartRenderer extends HorizontalBarChartRenderer {
+	public static class RoundedChartRenderer extends HorizontalBarChartRenderer {
 
 		private final Paint dividerPaint = new Paint();
 		private final Paint backgroundPaint = new Paint();
@@ -149,8 +152,7 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 			float bottom = buffer.buffer[j + 3];
 
 			if (isCustomFill) {
-				dataSet.getFill(pos).fillRect(
-						canvas, mRenderPaint, left, top, right, bottom, isInverted ? LEFT : RIGHT);
+				dataSet.getFill(pos).fillRect(canvas, mRenderPaint, left, top, right, bottom, isInverted ? LEFT : RIGHT);
 			} else {
 				canvas.drawRect(left, top, right, bottom, mRenderPaint);
 				if (j + 4 < buffer.size()) {

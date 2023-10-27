@@ -3612,7 +3612,7 @@
     <string name="track_show_start_finish_icons">Toon start en aankomst pictogrammen</string>
     <string name="gpx_direction_arrows">Richtingspijlen</string>
     <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart omdat de geselecteerde groep verborgen is, je kan het vinden in \"%s\".</string>
-    <string name="system_default_theme">Standaard</string>
+    <string name="system_default_theme">Systeem</string>
     <string name="route_between_points">Route tussen punten</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op wegen, bereken een route met behulp van \"Route tussen punten\" om grafieken te zien.</string>
     <string name="route_between_points_desc">Kies hoe de punten verbonden worden: via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>

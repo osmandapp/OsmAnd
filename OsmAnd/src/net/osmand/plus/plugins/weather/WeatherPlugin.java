@@ -181,7 +181,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return WeatherHelper.isWeatherSupported(app) && super.isEnabled();
+		return WeatherUtils.isWeatherSupported(app) && super.isEnabled();
 	}
 
 	@Override

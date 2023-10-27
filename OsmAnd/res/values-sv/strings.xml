@@ -163,8 +163,7 @@
     <string name="osmand_parking_pm">em</string>
     <string name="osmand_parking_am">fm</string>
     <string name="osmand_parking_position_name">Parkeringsplats</string>
-    <string name="osmand_parking_plugin_description">Låter dig spara var din bil är parkerad, inklusive hur mycket parkeringstid som finns kvar.
-\nBåde plats och tid är synliga både på instrumentpanelen och i en kartwidget. En larmpåminnelse kan läggas till i Android-kalendern.</string>
+    <string name="osmand_parking_plugin_description">Markera var din bil är parkerad, och sätt en avisering i kalendern när parkeringstiden tar slut. För att sätta ut markören, välj en plats i kartan, gå till \'Åtgärder\' och tryck \'Lägg till parkering\'.</string>
     <string name="osmand_parking_plugin_name">Parkeringsplats</string>
     <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
     <string name="context_menu_item_delete_parking_point">Ta bort parkeringsmarkör</string>
@@ -2617,7 +2616,7 @@
     <string name="shared_string_dont">Gör inte</string>
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Hämta bilder</string>
+    <string name="wikivoyage_download_pics">Ladda ner bilder</string>
     <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. 
 \nDu kan alltid ändra inställningen i \"Utforska\" → \"Alternativ\".</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
@@ -3218,12 +3217,12 @@
     <string name="shared_string_sec">sek</string>
     <string name="announcement_time_passing">Passerar</string>
     <string name="announcement_time_approach">Närma sig</string>
-    <string name="announcement_time_prepare_long">Långt förberedan</string>
-    <string name="announcement_time_prepare">Förbereda</string>
-    <string name="announcement_time_off_route">Av rutten</string>
-    <string name="announcement_time_arrive">Anländer till destinationen</string>
+    <string name="announcement_time_prepare_long">Lång förberedelse</string>
+    <string name="announcement_time_prepare">Förbered</string>
+    <string name="announcement_time_off_route">Utanför rutten</string>
+    <string name="announcement_time_arrive">Ankomst till destinationen</string>
     <string name="shared_string_turn">Sväng</string>
-    <string name="announcement_time_intervals">Tid- och avstånds-intervaller</string>
+    <string name="announcement_time_intervals">Tids- och avståndsintervaller</string>
     <string name="announcement_time_descr">Meddelandetid för olika röstmeddelanden beror på typ, aktuell navigationshastighet och standardnavigeringshastighet.</string>
     <string name="announcement_time_title">Meddelandetid</string>
     <string name="start_recording">Starta inspelning</string>
@@ -3376,7 +3375,7 @@
 \n
 \n</string>
     <string name="update_all_maps_added">Uppdatera alla kartor som lagts till i %1$s\?</string>
-    <string name="exit_number">Utgångsnummer</string>
+    <string name="exit_number">Avfartsnummer</string>
     <string name="announce_when_exceeded">Meddela när den överskrids</string>
     <string name="user_points">Användarpunkter</string>
     <string name="output">Utgång</string>
@@ -4273,7 +4272,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Dessa widgetar visar information om kommande soluppgång och solnedgång.</string>
     <string name="share_crash_log">Dela kraschlogg</string>
     <string name="shared_string_large">Stor</string>
-    <string name="map_widget_altitude_map_center">Höjd: kartcentrum</string>
+    <string name="map_widget_altitude_map_center">Höjd: kartans mitt</string>
     <string name="external_sensors_plugin_name">Externa sensorer</string>
     <string name="external_sensors_plugin_description">Åtkomst till externa sensorer för att läsa av t.ex. din puls, cykelhastighet, cykeleffekt eller kadens. Kräver att din enhet är ansluten till respektive sensor via det trådlösa personliga nätverksprotokollet ANT+.</string>
     <string name="map_widget_ant_bicycle_power_desc">Visar cyklistens effekt, den kraft som genereras för att flytta cykeln framåt</string>
@@ -4645,7 +4644,7 @@
     <string name="shared_string_mode">Läge</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="use_osm_live_public_transport">OsmAnd Live kollektivtrafik</string>
-    <string name="app_mode_personal_transporter"/>
+    <string name="app_mode_personal_transporter">Enpersonsfordon</string>
     <string name="rendering_value_sectors_name">Sektorer</string>
     <string name="shared_string_duplicate">Duplicera</string>
     <string name="rendering_value_caiScale_name">CAI</string>
@@ -4869,21 +4868,23 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Ny widget för \"Glidtal\"
+    <string name="release_4_6">• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
 \n
-\n • Filter och smarta mappar för spår tillagda
+\n• Ny widget för \"Glidtal\"
 \n
-\n • Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
+\n• Filter och smarta mappar för spår tillagda
 \n
-\n • Stöd för ANT+ temperatur widget
+\n• Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
 \n
-\n • Förbättrad minneshantering för stora gpx-spår
+\n• Stöd för ANT+ temperatur widget
 \n
-\n • Uppdaterad resurshantering i Nedladdningar
+\n• Förbättrad minneshantering för stora gpx-spår
 \n
-\n • Ny widget \"Tillgängligt minne\"
+\n• Uppdaterad resurshantering i Nedladdningar
 \n
-\n • Löst problem med genomskinligt statusfält
+\n• Ny widget \"Tillgängligt minne\"
+\n
+\n• Löst problem med genomskinligt statusfält
 \n
 \n</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
@@ -5168,4 +5169,46 @@
     <string name="report_an_issues">Rapportera ett problem</string>
     <string name="write_heading_description">Spara kursen till varje spårpunkt vid inspelning</string>
     <string name="shared_string_setup">Konfiguration</string>
+    <string name="select_base_profile_dialog_message">Basera din anpassade profil på en av appens standardprofiler, detta ställer in grunderna som måttenheter och widget-synlighet. Dessa är standardprofilerna, med exempel på anpassade profiler de är kopplade till:</string>
+    <string name="reset_confirmation_descr">Att klicka %1$s avfärdar alla dina ändringar.</string>
+    <string name="searching_gps">Söker GPS</string>
+    <string name="shared_string_rows">Rader</string>
+    <string name="multimedia_notes_view_descr">Dina OSM-anteckningar är i %1$s.</string>
+    <string name="files_present">%1$d filer (%2$s) finns på den tidigare platsen \'%3$s\'.</string>
+    <string name="profile_alert_duplicate_name_title">Duplicera namn</string>
+    <string name="press_button_to_link_with_action">Tryck på knappen på din enhet för att koppla den till vald åtgärd.</string>
+    <string name="public_transport_ped_route_title">Vägen till fots är ca %1$s, och kan vara snabbare än kollektivtrafik</string>
+    <string name="shared_string_button">Knapp</string>
+    <string name="navigate_point_format_swiss_grid">Schweiz nationella rutnät (CH1903)</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snöpark</string>
+    <string name="files_failed">Kunde inte kopiera %1$d filer (%2$s).</string>
+    <string name="move_maps">Flytta kartor</string>
+    <string name="shared_string_action">Åtgärd</string>
+    <string name="coordinates_widget">Koordinat-widget</string>
+    <string name="public_transport_type">Typ av kollektivtrafik</string>
+    <string name="public_transport_no_route_title">Tyvärr, kunde inte hitta en rutt som passar dina inställningar.</string>
+    <string name="dont_move_maps">Flytta inte</string>
+    <string name="key_is_already_assigned_error">\"%1$s\"-knappen har redan kopplats till en annan åtgärd: \"%2$s\"</string>
+    <string name="snowmobile_render_descr">För snöskoter, med särskilt avsedda vägar och skoterleder.</string>
+    <string name="osmand_default_routing">OsmAnds ruttberäkning</string>
+    <string name="public_transport_calc_pedestrian">Beräkna rutt till fots</string>
+    <string name="monitoring_prefs_descr">Navigering, loggningsnoggrannhet</string>
+    <string name="navigate_point_format_swiss_grid_plus">Schweiz nationella rutnät plus (CH1903+)</string>
+    <string name="rendering_attr_surface_grass_paver_name">Gräsarmering</string>
+    <string name="quick_action_directions_from_desc">En knapp för att göra skärmens mitt till startpunkt. Frågar därefter om destination eller påbörjar ruttberäkning.</string>
+    <string name="live_monitoring_tracking_interval">Intervall för direktspårning</string>
+    <string name="voice_prompts_timetable">Tider för röstmeddelanden</string>
+    <string name="search_offline_geo_error">Kunde inte tolka geo-identifieraren \'%s\'.</string>
+    <string name="public_transport_try_ped">Prova navigering till fots.</string>
+    <string name="app_mode_monowheel">Monohjul</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Föredra taktil beläggning</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Föredra taktil beläggning</string>
+    <string name="speed_camera_pois">Fartkameror</string>
+    <string name="speed_cameras_legal_descr">I några länder och regioner är det förbjudet att använda funktioner som varnar för fartkameror.
+\n
+\nDu behöver göra ett val beroende på lagstiftningen i ditt land.
+\n
+\nVälj %1$s så kan du få information och varningar om fartkameror.
+\n
+\nVälj %2$s så kommer all data om fartkameror raderas (varningar, objekt i kartan etc) tills OsmAnd ominstalleras helt.</string>
 </resources>

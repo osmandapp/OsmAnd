@@ -324,4 +324,8 @@ public class NavigationService extends Service {
 			}
 		}
 	}
+
+	public boolean isCarNavigationActive() {
+		return carNavigationActive;
+	}
 }

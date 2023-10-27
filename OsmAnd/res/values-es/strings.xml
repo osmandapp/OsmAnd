@@ -117,7 +117,7 @@
     <string name="local_index_items_uploaded">%1$d de %2$d elemento(s) enviado(s).</string>
     <string name="local_index_mi_upload_gpx">Enviar a OSM</string>
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
-    <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles de zum inferiores.</string>
+    <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles de zoom inferiores.</string>
     <string name="favourites_delete_multiple_succesful">Puntos favoritos borrados.</string>
     <string name="favorite_delete_multiple">¿Borrar %1$d favoritos y %2$d grupos de favoritos\?</string>
     <string name="favorite_home_category">Casa</string>
@@ -127,7 +127,7 @@
     <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
-    <string name="basemap_missing">Descarga el mapa base mundial para una vista general global en zums pequeños.</string>
+    <string name="basemap_missing">Descarga el mapa base mundial para una vista general global en zoom pequeño.</string>
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
@@ -193,7 +193,7 @@
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
     <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
-    <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
+    <string name="level_to_switch_vector_raster">Nivel mínimo de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
     <string name="error_doing_search">No se pudo realizar la búsqueda sin conexión.</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
@@ -287,7 +287,7 @@
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
-    <string name="tiles_to_download_estimated_size">En el zum {0}, se descargarán {1} teselas ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">En el zoom {0}, se descargarán {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Zum máximo a precargar</string>
     <string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
@@ -419,7 +419,7 @@
     <string name="update_poi_error_local">No se pudo actualizar la lista de PDI locales.</string>
     <string name="update_poi_error_loading">No se pudieron cargar los datos del servidor.</string>
     <string name="update_poi_no_offline_poi_index">Sin datos de PDI disponibles para esta área</string>
-    <string name="update_poi_is_not_available_for_zoom">El zum le permite actualizar los PDI</string>
+    <string name="update_poi_is_not_available_for_zoom">El zoom le permite actualizar los PDI</string>
     <string name="context_menu_item_update_poi">Actualizar PDI</string>
     <string name="context_menu_item_update_map_confirm">¿Actualizar datos locales desde Internet?</string>
     <string name="search_history_city">Ciudad: {0}</string>
@@ -438,8 +438,8 @@
     <string name="hint_search_online">Búsqueda en línea: Número de casa, calle, ciudad</string>
     <string name="search_offline_address">Búsqueda sin conexión</string>
     <string name="search_online_address">Búsqueda en línea</string>
-    <string name="max_level_download_tile">Máximo zum en línea</string>
-    <string name="max_level_download_tile_descr">No buscar en los mapas en línea para niveles de zum más allá de esto.</string>
+    <string name="max_level_download_tile">Máximo zoom en línea</string>
+    <string name="max_level_download_tile_descr">No buscar en los mapas en línea para niveles de zoom más allá de esto.</string>
     <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d min.</string>
     <string name="router_service_descr">Servicios de navegación con o sin conexión.</string>
     <string name="router_service">Servicio de navegación</string>
@@ -491,7 +491,7 @@
     <string name="data_settings_descr">Indica el idioma, descargar/recargar datos.</string>
     <string name="data_settings">Datos</string>
     <string name="osm_editing_plugin_name">Edición de OpenStreetMap</string>
-    <string name="auto_zoom_map_descr">Nivel de zum según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
+    <string name="auto_zoom_map_descr">Nivel de zoom según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
     <string name="auto_zoom_map">Zum automático del mapa</string>
     <string name="additional_settings">Ajustes adicionales</string>
     <string name="shared_string_settings">Configuración</string>
@@ -645,7 +645,7 @@
     <string name="backToMenu">Volver al menú</string>
     <string name="zoomOut">Alejar</string>
     <string name="zoomIn">Acercar</string>
-    <string name="zoomIs">Nivel de zum</string>
+    <string name="zoomIs">Nivel de zoom</string>
     <string name="north">norte</string>
     <string name="north_north_east">nor-nordeste</string>
     <string name="north_east">nordeste</string>
@@ -682,8 +682,8 @@
     <string name="auto_announce_on">Iniciar anuncios automáticos</string>
     <string name="auto_announce_off">Parar anuncios automáticos</string>
     <string name="i_am_here">Estoy aquí</string>
-    <string name="zoom_by_trackball_descr">Cambia el zum del mapa a través del movimiento horizontal de la rueda de desplazamiento.</string>
-    <string name="zoom_by_trackball">Usar la rueda de desplazamiento para controlar el zum</string>
+    <string name="zoom_by_trackball_descr">Cambia el zoom del mapa a través del movimiento horizontal de la rueda de desplazamiento.</string>
+    <string name="zoom_by_trackball">Usar la rueda de desplazamiento para controlar el zoom</string>
     <string name="accessibility_preferences_descr">Preferencias de accesibilidad.</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
     <string name="local_index_routing_data">Datos de navegación</string>
@@ -707,7 +707,7 @@
     <string name="asap">Lo antes posible</string>
     <string name="gpxup_public">Público</string>
     <string name="gpxup_identifiable">Identificable</string>
-    <string name="gpxup_trackable">Trazable</string>
+    <string name="gpxup_trackable">Rastreable</string>
     <string name="gpxup_private">Privado</string>
     <string name="osmand_parking_event">Recoger el coche del aparcamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
@@ -1052,11 +1052,11 @@
     <string name="shared_string_about">Información</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
-    <string name="local_index_tile_data_zooms">Niveles de zum descargados: %1$s</string>
+    <string name="local_index_tile_data_zooms">Niveles de zoom descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Proyección elíptica de Mercator</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="map_magnifier">Lupa del mapa</string>
-    <string name="auto_zoom_none">Sin zum automático</string>
+    <string name="auto_zoom_none">Sin zoom automático</string>
     <string name="shared_string_remember_my_choice">Recordar elección</string>
     <string name="shared_string_and">y</string>
     <string name="shared_string_or">o</string>
@@ -1203,7 +1203,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nPulsación larga para ver en el mapa"</string>
+\nToque prolongado para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -1222,8 +1222,8 @@
     <string name="select_destination_and_intermediate_points">Definir destinos</string>
     <string name="layer_amenity_label">Nombres de puntos (PDI, favoritos)</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
-    <string name="show_zoom_buttons_navigation_descr">Muestra los botones de zum durante la navegación.</string>
-    <string name="show_zoom_buttons_navigation">Mostrar botones de zum</string>
+    <string name="show_zoom_buttons_navigation_descr">Muestra los botones de zoom durante la navegación.</string>
+    <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
     <string name="route_descr_destination">Destino</string>
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
@@ -1234,7 +1234,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideText_name">Textos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
-    <string name="rendering_attr_buildings15zoom_name">Edificios en zum 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
@@ -1430,9 +1430,9 @@
     <string name="plugin_ski_descr">Diseñado para navegar por zonas de deportes de invierno: Vea las pistas de esquí y los remontes, así como las pistas de esquí de fondo, con líneas de color que indican los grados de dificultad. Para utilizarlo, activa este plugin y ve también a \"Configurar mapa\" y elige el estilo de mapa \"Invierno y esquí\".</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
 \n
-\nEsta vista proporciona, en cualquier nivel de zum del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
+\nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
 \n
-\nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
+\nTambién representa claramente todos los tipos de caminos sin duplicar por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
 \n
 \nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina.
 \n
@@ -1700,7 +1700,7 @@
     <string name="go_to_map">Mostrar mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Escribe el nombre del país</string>
-    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en zums pequeños), falta o está desactualizado. Considera descargarlo para una vista global.</string>
+    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en zoom pequeño, falta o está desactualizado. Considera descargarlo para una vista global.</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
@@ -2007,7 +2007,7 @@
     <string name="lang_kab">Cabilio</string>
     <string name="wiki_around">Artículos de Wikipedia cerca</string>
     <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
-    <string name="upload_poi">Subir PDI</string>
+    <string name="upload_poi">Cargar un PDI</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="search_map_hint">Ciudad o región</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
@@ -2205,7 +2205,7 @@
 \n • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta
 \n • Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente
 \n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo
-\n • El zum del mapa se ajusta a la velocidad
+\n • El zoom del mapa se ajusta a la velocidad
 \n • Busca destinos por dirección, por tipo (por ejemplo: aparcamientos, restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas
 \n • Admite puntos intermedios en el itinerario
 \n • Graba tu viaje o sube una traza GPX y síguela
@@ -2253,10 +2253,10 @@
 \n • Antártida: * 
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="quick_action_auto_zoom">Alternar zum automático del mapa</string>
-    <string name="quick_action_auto_zoom_desc">Un botón que alterna el zum automático de acuerdo a la velocidad.</string>
-    <string name="quick_action_auto_zoom_on">Activar el zum automático</string>
-    <string name="quick_action_auto_zoom_off">Desactivar el zum automático</string>
+    <string name="quick_action_auto_zoom">Alternar zoom automático del mapa</string>
+    <string name="quick_action_auto_zoom_desc">Un botón que alterna el zoom automático de acuerdo a la velocidad.</string>
+    <string name="quick_action_auto_zoom_on">Activa zoom automático</string>
+    <string name="quick_action_auto_zoom_off">Desactivar zoom automático</string>
     <string name="quick_action_add_destination">Definir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
@@ -2272,7 +2272,7 @@
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Puntos de profundidad náuticos del hemisferio sur</string>
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
-    <string name="download_depth_countours">Curvas de profundidad náuticas</string>
+    <string name="download_depth_countours">Contorno de profundidad</string>
     <string name="nautical_maps">Mapas náuticos</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direcciones de navegación automatizadas OSM) es una aplicación de mapas y navegación con acceso a los datos OSM gratuitos, mundiales y de alta calidad.
 \n Disfruta de navegación por voz y óptica, visualización de POIs (puntos de interés), creación y gestión de tracks GPX, uso de visualización de curvas de nivel e información topográfica, elección entre modos de conducción, ciclismo, peatones, edición OSM y mucho más.
@@ -2361,12 +2361,12 @@
     <string name="show_from_zoom_level">La visualización comienza a nivel de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
-    <string name="display_zoom_level">Nivel de zum de pantalla: %1$s</string>
+    <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añade destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar en favoritos</string>
-    <string name="hide_from_zoom_level">Ocultar desde el nivel de zum</string>
+    <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
@@ -2405,7 +2405,7 @@
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario, fecha o tipo. Sólo activado en los primeros zums.</string>
+    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario, fecha o tipo. Sólo activado en los primeros zooms.</string>
     <string name="map_widget_ruler_control">Regla radial</string>
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
@@ -3402,12 +3402,12 @@
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">El mapa Hillshade utiliza tonos oscuros para mostrar la pendiente, los picos y las tierras bajas.</string>
     <string name="slope_description">La pendiente usa colores para visualizar la inclinación del terreno.</string>
-    <string name="terrain_slider_description">Define los niveles de zum mínimo y máximo en los que se mostrará la capa.</string>
+    <string name="terrain_slider_description">Define los niveles de zoom mínimo y máximo en los que se mostrará la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
     <string name="slope_download_description">Se necesitan mapas adicionales para ver la pendiente en el mapa.</string>
     <string name="slope_read_more">Más información sobre la pendiente en %1$s.</string>
     <string name="shared_string_transparency">Transparencia</string>
-    <string name="shared_string_zoom_levels">Niveles de zum</string>
+    <string name="shared_string_zoom_levels">Niveles de zoom</string>
     <string name="terrain_empty_state_text">Muestra el relieve o la pendiente en el mapa. Más información sobre estos tipos de mapas en nuestra página web.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="shared_string_import_complete">Importación completa</string>
@@ -3585,7 +3585,7 @@
     <string name="expire_time">Tiempo de expiración</string>
     <string name="mercator_projection">Proyección de Mercator</string>
     <string name="storage_format">Formato de almacenamiento</string>
-    <string name="map_source_zoom_levels">Define un nivel de zum mínimo y máximo para mostrar o cargar el mapa en línea.</string>
+    <string name="map_source_zoom_levels">Define un nivel de zoom min y max para mostrar o cargar el mapa en línea.</string>
     <string name="expire_time_descr">Las teselas almacenadas serán renovadas después del número especificado en minutos. Dejar este campo vacío para que nunca se renueven las teselas de este repositorio.
 \n
 \nUn día son 1440 minutos.
@@ -3622,9 +3622,9 @@
     <string name="legend_item_description">La guía para la simbología de un mapa.</string>
     <string name="parking_positions">Posiciones de aparcamiento</string>
     <string name="turn_screen_on_power_button_disabled">Desactivado. Es necesario activar «Mantener la pantalla encendida» en «Tiempo de espera al encender».</string>
-    <string name="map_source_zoom_levels_descr">Afectan a la pantalla al usarlos como mapa, superposición o subyacencia.
+    <string name="map_source_zoom_levels_descr">Afectan a la pantalla al usarlos como mapa, superposición o bajoesposición
 \n
-\n%1$s: El mapa está limitado al rango de zum elegidos.
+\n%1$s: Mapa está limitado al rango de zoom elegidos.
 \n
 \n%2$s son los niveles en los que las teselas originales son visibles, el aumento o reducción de escala ocurrirá fuera de estos valores.</string>
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidad</string>
@@ -3657,8 +3657,8 @@
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
-    <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
-    <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controla el nivel del zoom del mapa con los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Botones del volumen como zoom</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
     <string name="quick_action_remove_next_destination">Eliminar el próximo punto de destino</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
@@ -4282,7 +4282,7 @@
     <string name="routing_attr_only_permitted_streets_name">Calles expresamente autorizadas</string>
     <string name="routing_attr_only_permitted_ways_name">Vías expresamente autorizadas</string>
     <string name="sample_wikivoyage">Ejemplo de Wikiviajes</string>
-    <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
+    <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o por tipo. Sólo activo en el zoom de primer plano.</string>
     <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
     <string name="routeInfo_surface_description">Proporciona información sobre la superficie física de los caminos y senderos.</string>
     <string name="routeInfo_smoothness_description">Clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
@@ -4492,8 +4492,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zoom bajo</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los iconos con zooms bajos</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Marcar los puntos sugeridos</string>
@@ -4542,7 +4542,7 @@
     <string name="stop_download">Parar descarga</string>
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
-    <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
+    <string name="zoom_levels_difference_description">La gran diferencia entre los niveles del zoom puede aumentar el tamaño de los datos descargados.</string>
     <string name="estimated_download_size">Tamaño estimado de descarga</string>
     <string name="number_of_tiles">Número de teselas</string>
     <string name="shared_string_item">Elemento</string>
@@ -5350,7 +5350,7 @@
     <string name="glide_ratio_to_target">Tasa de planeo hasta el objetivo</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo de las cartas náuticas</string>
     <string name="help_article_map_legend_osmand_name">Estilo del mapa de OsmAnd</string>
-    <string name="help_article_map_legend_ski_map_name">Estilo del mapa de las pistas de esquí</string>
+    <string name="help_article_map_legend_ski_map_name">Estilo del mapa pistas de esquí</string>
     <string name="help_article_map_interact_with_map_name">Interactuar con el mapa</string>
     <string name="help_article_map_map_context_menu_name">Menú contextual del mapa</string>
     <string name="help_article_map_point_layers_on_map_name">Puntos del mapa</string>
@@ -5427,21 +5427,23 @@
     <string name="live_monitoring_adress_descr">Especifica la dirección web con la sintaxis de los parámetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
-    <string name="release_4_6">• Añadido el widget \"relación de planeo\"
+    <string name="release_4_6">• Capacidad añadida para cambiar enlaces de teclas para dispositivos de entrada externos
 \n
-\n • Filtros y carpetas inteligentes para las pistas
+\n • Añadido el widget \"Ratio de deslizamiento\"
 \n
-\n • Añadidas filas para los paneles de widgets superior e inferior con soporte para todos los widgets
+\n • Añadidos filtros y carpetas inteligentes para pistas
 \n
-\n • Añadido el soporte para el widget de temperatura ANT
+\n • Se han añadido filas para los paneles de widgets superior e inferior con soporte para todos los widgets
 \n
-\n • Mejora la gestión de la memoria para grandes pistas GPX
+\n • Añadido soporte fot ANT+ widget de temperatura
 \n
-\n • Actualizada la gestión de recursos locales en las Descargas
+\n • Mejora de la gestión de la memoria para grandes pistas GPX
+\n
+\n • Gestión actualizada de los recursos locales en Descargas
 \n
 \n • Añadido widget \"RAM disponible\"
 \n
-\n • Solucionados los problemas con la barra de estado transparente
+\n • Problemas solucionados con barra de estado transparente
 \n
 \n</string>
     <string name="app_mode_baby_transport">Cochecito</string>
@@ -5496,4 +5498,56 @@
         <item quantity="many">%1$d (%2$d pistas)</item>
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">¿Estás seguro de que deseas eliminar permanentemente todos los elementos de la Papelera\? Esta acción no se puede deshacer.</string>
+    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="delete_all_items">Borrar todos los elementos</string>
+    <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. ¿Estás seguro\?
+\n
+\nEsta acción no se puede deshacer.</string>
+    <string name="shared_string_empty_trash">Vaciar la papelera</string>
+    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_is_deleted">%1$s está borrado.</string>
+    <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
+    <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
+    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="shared_string_trash">Papelera</string>
+    <string name="shared_string_delete_item">Elemento borrado</string>
+    <string name="root_folder">Directorio raíz</string>
+    <string name="shared_string_rows">Filas</string>
+    <string name="all_folders">Todas las carpetas</string>
+    <string name="shared_string_show_less">Mostrar menos</string>
+    <string name="folder">Carpeta</string>
+    <string name="not_specified">Sin especificar</string>
+    <string name="key_event_action_zoom_in">Acercar</string>
+    <string name="enable_to_use_external_input_device">Habilitar el uso de un dispositivo de entrada externo con OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Cambiar la orientación del mapa</string>
+    <string name="key_event_action_previous_app_profile">Perfil anterior de la aplicación</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificación del sistema sobre la tecla presionada</string>
+    <string name="key_event_action_move_left">A la izquierda</string>
+    <string name="press_button_to_link_with_action">Pulse el botón de su dispositivo para vincularlo a la acción elegida.</string>
+    <string name="key_event_action_move_right">A la derecha</string>
+    <string name="shared_string_button">Botón</string>
+    <string name="key_event_action_next_app_profile">Perfil de la siguiente aplicación</string>
+    <string name="change_key_binding">Cambiar la vinculación de las teclas</string>
+    <string name="key_event_action_take_media_note">Toma nota de los medios</string>
+    <string name="key_event_action_activity_back_pressed">Actividad pulsada de nuevo</string>
+    <string name="key_event_action_emit_navigation_hint">Emitir una sugerencia para la navegación</string>
+    <string name="remove_type_q">¿Está seguro de que desea eliminar el tipo \"%1$s\"\?</string>
+    <string name="shared_string_action">Acción</string>
+    <string name="add_new_type">Añadir un nuevo tipo</string>
+    <string name="key_event_action_move_up">Hacia arriba</string>
+    <string name="key_event_action_open_search_view">Abrir la vista de búsqueda</string>
+    <string name="key_event_action_zoom_out">Alejar</string>
+    <string name="key_event_action_toggle_drower">Mostrar/ocultar el menú lateral</string>
+    <string name="key_is_already_assigned_error">La tecla \"%1$s\" ya está asignada a otra acción: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Abrir la vista de la navegación</string>
+    <string name="external_input_device_title">Dispositivo de entrada externo</string>
+    <string name="key_bindings">Vinculación de las teclas</string>
+    <string name="key_event_action_move_to_my_location">Ir a Mi ubicación</string>
+    <string name="key_event_category_map_interactions">Interacciones del mapa</string>
+    <string name="key_event_action_move_down">Hacia abajo</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Abrir la cuadrícula de datos WunderLINQ</string>
+    <string name="key_event_category_actions">Acciones</string>
+    <string name="deletion_error">Error en la eliminación</string>
 </resources>

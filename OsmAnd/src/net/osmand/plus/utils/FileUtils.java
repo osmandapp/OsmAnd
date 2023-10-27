@@ -168,12 +168,12 @@ public class FileUtils {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
 			file.delete();
-			app.getGpxDbHelper().remove(file);
 			if (selected != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
+			app.getGpxDbHelper().remove(file);
 			return true;
 		}
 		return false;

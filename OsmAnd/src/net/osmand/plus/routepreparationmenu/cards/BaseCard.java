@@ -11,14 +11,15 @@ import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.ColorUtilities;
 
 public abstract class BaseCard {
 
@@ -196,5 +197,10 @@ public abstract class BaseCard {
 
 	public boolean isVisible() {
 		return view != null && view.getVisibility() == View.VISIBLE;
+	}
+
+	@NonNull
+	public final String getString(@StringRes int resId) {
+		return app.getString(resId);
 	}
 }

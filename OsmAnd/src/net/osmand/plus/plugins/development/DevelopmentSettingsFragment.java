@@ -76,6 +76,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupShouldShowFreeVersionBannerPref();
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
+		setupPressedKeyInfoPref();
 
 		setupTripRecordingPrefs();
 
@@ -154,6 +155,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference logcatBuffer = findPreference("logcat_buffer");
 		logcatBuffer.setIntent(new Intent(getActivity(), LogcatActivity.class));
 		logcatBuffer.setIconSpaceReserved(false);
+	}
+
+	private void setupPressedKeyInfoPref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SHOW_INFO_ABOUT_PRESSED_KEY.getId());
+		debugRenderingInfo.setDescription(getString(R.string.show_toast_about_key_pressed));
+		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupTripRecordingPrefs() {

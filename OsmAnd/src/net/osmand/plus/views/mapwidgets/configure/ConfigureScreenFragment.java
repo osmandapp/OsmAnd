@@ -471,14 +471,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void updateFragment() {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		Fragment fragment = fragmentManager.findFragmentByTag(TAG);
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentByTag(TAG);
+		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			currentScrollY = scrollView.getScrollY();
-			fragmentManager.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					.commitAllowingStateLoss();
+			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 		}
 	}
 

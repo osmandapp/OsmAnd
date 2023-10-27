@@ -5484,4 +5484,5 @@
     <string name="no_config_smart_folder_description">Смарт-папки позволяют группировать треки по примененным фильтрам</string>
     <string name="loading_tracks">Перезагрузка треков</string>
     <string name="searching_matching_tracks">Искать все подходящие треки</string>
+    <string name="shared_string_is_deleted">%1$s удалено.</string>
 </resources>

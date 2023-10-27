@@ -22,6 +22,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 public class LocalItemHolder extends RecyclerView.ViewHolder {
 
+	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final LocalItemListener listener;
 
@@ -35,7 +36,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 	public LocalItemHolder(@NonNull View itemView, @NonNull LocalItemListener listener, boolean nightMode) {
 		super(itemView);
-		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 		this.listener = listener;
 
@@ -81,7 +82,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private Drawable getIcon(@NonNull LocalItem item) {
 		LocalItemType type = item.getType();
-		if (type.isDownloadType() && !item.isBackuped()) {
+		if (type.isDownloadType() && !item.isBackuped(app)) {
 			boolean shouldUpdate = listener.itemUpdateAvailable(item);
 			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
 		} else {

@@ -1018,7 +1018,7 @@
     <string name="poi_barbecue">Grătar</string>
     <string name="poi_drinking_water">Apă potabilă</string>
     <string name="poi_food_court">Food court</string>
-    <string name="poi_pub">Tavernă</string>
+    <string name="poi_pub">Bar</string>
     <string name="poi_bar">Bar</string>
     <string name="poi_fast_food">Fast food</string>
     <string name="poi_restaurant">Restaurant</string>
@@ -3024,7 +3024,7 @@
     <string name="poi_surface_decoturf">Gazon ornamental</string>
     <string name="poi_surface_artificial_turf">Gazon artificial</string>
     <string name="poi_surface_tartan">Tartan (material)</string>
-    <string name="poi_surface_clay">Argilă</string>
+    <string name="poi_surface_clay">Zgură</string>
     <string name="poi_mountain_area">Zonă de munte</string>
     <string name="poi_couloir">Culoar</string>
     <string name="poi_gorge">Defileu</string>
@@ -3497,7 +3497,7 @@
     <string name="poi_blood_donation">Centru de transfuzie sanguină</string>
     <string name="poi_laboratory">Laborator medical</string>
     <string name="poi_shop_wholesale">Magazin en-gros</string>
-    <string name="poi_craft_confectionery">Producția de produse de cofetărie</string>
+    <string name="poi_craft_confectionery">Cofetărie</string>
     <string name="poi_substation_field_gathering">Colectarea pe teren</string>
     <string name="poi_substation_inspection_gauge">Manometru de inspecție</string>
     <string name="poi_substation_valve_group">Grup de supape</string>

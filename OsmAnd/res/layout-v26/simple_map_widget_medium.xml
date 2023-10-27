@@ -4,9 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="?attr/widget_background_color"
-	android:minHeight="@dimen/simple_widget_medium_height"
+	android:layout_height="@dimen/simple_widget_medium_height"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -30,6 +28,7 @@
 				android:gravity="start"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -43,6 +42,7 @@
 				android:gravity="end"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -52,7 +52,7 @@
 
 		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="match_parent">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/widget_icon"
@@ -66,26 +66,19 @@
 				android:id="@+id/widget_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginHorizontal="36dp"
+				android:autoSizeMaxTextSize="@dimen/simple_widget_value_large_size"
+				android:autoSizeMinTextSize="@dimen/simple_widget_value_small_size"
+				android:autoSizeStepGranularity="2sp"
+				android:autoSizeTextType="uniform"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
-				android:textSize="@dimen/simple_widget_value_medium_size"
-				android:layout_gravity="center"
-				android:layout_marginHorizontal="36dp"
-				android:autoSizeMinTextSize="@dimen/simple_widget_value_small_size"
-				android:autoSizeTextType="uniform"
-				android:autoSizeMaxTextSize="@dimen/simple_widget_value_large_size"
-				android:autoSizeStepGranularity="2sp"/>
+				android:textSize="@dimen/simple_widget_value_medium_size" />
 
 		</FrameLayout>
 
 	</LinearLayout>
-
-	<View
-		android:id="@+id/bottom_divider"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="@drawable/divider"
-		android:visibility="visible" />
 
 </LinearLayout>

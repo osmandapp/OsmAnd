@@ -50,7 +50,7 @@
 	</LinearLayout>
 
 	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/cities"
+		android:id="@+id/variants"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

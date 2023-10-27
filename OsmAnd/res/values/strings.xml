@@ -10,6 +10,39 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="deletion_error">Deletion error</string>
+    <string name="shared_string_rows">Rows</string>
+    <string name="show_toast_about_key_pressed">Show toast about pressed key</string>
+    <string name="key_is_already_assigned_error">The \"%1$s\" key is already assigned to another action: \"%2$s\"</string>
+    <string name="press_button_to_link_with_action">Press the button on your device to link it with the chosen action.</string>
+    <string name="shared_string_button">Button</string>
+    <string name="shared_string_action">Action</string>
+    <string name="change_key_binding">Change key binding</string>
+    <string name="key_event_category_map_interactions">Map interactions</string>
+    <string name="key_event_category_actions">Actions</string>
+    <string name="key_event_action_take_media_note">Take media note</string>
+    <string name="key_event_action_toggle_drower">Show/hide side menu</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
+    <string name="key_event_action_activity_back_pressed">Activity back pressed</string>
+    <string name="key_event_action_emit_navigation_hint">Emit navigation hint</string>
+    <string name="key_event_action_zoom_out">Zoom out</string>
+    <string name="key_event_action_zoom_in">Zoom in</string>
+    <string name="key_event_action_move_right">Move right</string>
+    <string name="key_event_action_move_left">Move left</string>
+    <string name="key_event_action_move_down">Move down</string>
+    <string name="key_event_action_move_up">Move up</string>
+    <string name="key_event_action_previous_app_profile">Previous app profile</string>
+    <string name="key_event_action_next_app_profile">Next app profile</string>
+    <string name="key_event_action_open_search_view">Open Search view</string>
+    <string name="key_event_action_open_navigation_view">Open Navigation view</string>
+    <string name="key_event_action_change_map_orientation">Change Map orientation</string>
+    <string name="key_event_action_move_to_my_location">Move to My location</string>
+    <string name="remove_type_q">Are you sure you want to remove \"%1$s\" type?</string>
+    <string name="add_new_type">Add new type</string>
+    <string name="enable_to_use_external_input_device">Enable to use external input device with OsmAnd</string>
+    <string name="key_bindings">Key bindings</string>
+    <string name="external_input_device_title">External input device</string>
+    <string name="not_specified">Not specified</string>
     <string name="cloud_item_restored">%1$s is restored into Cloud.</string>
     <string name="shared_string_is_deleted">%1$s is deleted.</string>
     <string name="shared_string_delete_item">Delete item</string>
@@ -27,6 +60,10 @@
         <item quantity="one" formatted="true">%1$d (%2$d track)</item>
         <item quantity="other" formatted="true">%1$d (%2$d tracks)</item>
     </plurals>
+    <string name="shared_string_show_less">Show less</string>
+    <string name="all_folders">All folders</string>
+    <string name="root_folder">Root folder</string>
+    <string name="folder">Folder</string>
     <string name="shared_string_loading">Loading</string>
     <string name="loading_tracks">Reloading tracks</string>
     <string name="searching_matching_tracks">Search all matching tracks</string>
@@ -67,6 +104,7 @@
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
+       • Added ability to change key bindings for external input devices\n\n
        • Added \"Glide Ratio\" widget\n\n
        • Added filters and smart folders for tracks\n\n
        • Added rows for top and bottom widget panels with support for all widgets\n\n
@@ -168,7 +206,7 @@
     <string name="send_crash_log_descr">Contains only information about crashes</string>
     <string name="open_issue_on_github_descr">Ask question, propose features</string>
     <string name="open_issue_on_github">Open issue on GitHub</string>
-    <string name="report_an_issues">Report an issues</string>
+    <string name="report_an_issues">Report an issue</string>
     <string name="copy_build_version">Copy build version</string>
     <string name="most_viewed">Most viewed</string>
     <string name="local_indexes_category_terrain">"Terrain maps (3D)</string>

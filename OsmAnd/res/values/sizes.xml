@@ -234,6 +234,10 @@
 	<dimen name="default_desc_line_height">20sp</dimen>
 	<dimen name="small_desc_line_height">14sp</dimen>
 
+	<dimen name="key_event_keycode_label_size">39sp</dimen>
+	<dimen name="key_event_cursor_width">4dp</dimen> <!--2dp-->
+	<dimen name="key_event_cursor_corners_radius">4dp</dimen> <!--4dp-->
+
 	<dimen name="simple_widget_value_small_size">24sp</dimen>
 	<dimen name="simple_widget_value_medium_size">36sp</dimen>
 	<dimen name="simple_widget_value_large_size">60sp</dimen>
@@ -391,6 +395,7 @@
 
 	<dimen name="toolbar_height">56dp</dimen>
 	<dimen name="toolbar_height_expanded">96dp</dimen>
+	<dimen name="toolbar_height_expanded_large">112dp</dimen>
 	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>
 	<dimen name="toolbar_inset_start">54dp</dimen>
 	<dimen name="toolbar_title_padding_top">7dp</dimen>

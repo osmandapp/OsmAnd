@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.filters
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
@@ -12,11 +13,14 @@ import net.osmand.util.Algorithms
 import java.util.Date
 
 class SmartFolderHelper(val app: OsmandApplication) {
+	private val LOG = PlatformUtil.getLog(SmartFolderHelper::class.java)
+
 	private val preference: CommonPreference<String>
 	private val gson: Gson
 
 	private val smartFolderCollection: MutableList<SmartFolder> = ArrayList()
 	private val allAvailableTrackItems = HashSet<TrackItem>()
+	private val allAvailableFolders = HashSet<String>()
 	private val updateListeners = ArrayList<SmartFolderUpdateListener>()
 
 	companion object {
@@ -144,7 +148,20 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return getSmartFolderByName(name) != null
 	}
 
+	fun addAvailableTrackFolder(folderName: String) {
+		if (!Algorithms.isEmpty(folderName)) {
+			allAvailableFolders.add(folderName)
+		}
+	}
+
+	fun getAvailableFolders(): Set<String> {
+		val items = HashSet<String>()
+		items.addAll(allAvailableFolders)
+		return items
+	}
+
 	fun addTrackItemToSmartFolder(item: TrackItem) {
+		LOG.debug("addTrackItemToSmartFolder")
 		if (!allAvailableTrackItems.contains(item)) {
 			allAvailableTrackItems.add(item)
 		}
@@ -161,7 +178,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 			if (trackAccepted) {
 				if (!smartFolder.trackItems.contains(item)) {
 					smartFolder.addTrackItem(item)
-					smartFolder.updateAnalysis()
 				}
 			}
 		}
@@ -198,6 +214,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	@WorkerThread
 	fun updateSmartFolderItems(smartFolder: SmartFolder) {
+		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
 		smartFolder.trackItems.clear()
 		val filters = smartFolder.filters
 		if (filters == null) {

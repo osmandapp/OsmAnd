@@ -134,7 +134,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 		updateEnable = true;
 		startHandler();
-		restoreState(getArguments());
 		updateProgressVisibility();
 	}
 
@@ -176,6 +175,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						this,
 						false,
 						isUsedOnMap(),
+						null,
 						null,
 						null,
 						null);
@@ -461,7 +461,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 
 			public void updateFragmentsFolders() {
-				List<TrackFolder> folders = rootFolder.getFlattenedSubFolders();
+				List<TrackFolder> folders = new ArrayList<>(rootFolder.getFlattenedSubFolders());
 				folders.add(rootFolder);
 
 				MyPlacesActivity activity = getMyActivity();

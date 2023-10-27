@@ -5556,4 +5556,19 @@
         <item quantity="many">%1$d (%2$d مسار)</item>
         <item quantity="other">%1$d (%2$d مسار)</item>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">هل أنت متأكد من أنك تريد أن تحذف كل الأشياء في سلة المهملات؟ لا يمكن إلغاء هذا الإجراء.</string>
+    <string name="restore_from_trash">استرجاع من سلة المهملات</string>
+    <string name="delete_all_items">احذف كل العناصر</string>
+    <string name="trash_is_empty_banner_desc">الملفات المزالة من التطبيق و الكلود ستكون متاحة هنا لمدة %1$s أيام بعد الحذف.</string>
+    <string name="delete_trash_item_confirmation_desc">سيتم حذف %1$s بشكل دائم. هل أنت متأكد؟
+\n
+\nلا يمكن إلغاء هذا الاجراء.</string>
+    <string name="shared_string_empty_trash">إفراغ سلة المهملات</string>
+    <string name="shared_string_delete_immediately">احذف فورا</string>
+    <string name="shared_string_is_deleted">%1$s تم حذفه.</string>
+    <string name="cloud_item_restored">%1$s تم استعادته إلى الكلود.</string>
+    <string name="trash_alert_card_desc">العناصر في سلة المهملات ستمحى بعد %1$s يوماً.</string>
+    <string name="trash_is_empty">سلة المهملات فارغة</string>
+    <string name="shared_string_trash">سلة المهملات</string>
+    <string name="shared_string_delete_item">حذف العنصر</string>
 </resources>

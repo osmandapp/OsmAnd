@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
@@ -19,9 +20,12 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 
 public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
+	public static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
 
 	private final GpxDbHelper gpxDbHelper;
 	private final File dir;
@@ -47,11 +51,14 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 
 	@Override
 	protected TrackFolder doInBackground(Void... voids) {
+		long startLoadingTime = System.currentTimeMillis();
+		LOG.info("Start loading tracks in " + dir.getName());
 		TrackFolder tracksFolder = new TrackFolder(dir, null);
 		loadGPXFolder(tracksFolder, "", true);
 		if (listener != null) {
 			listener.tracksLoaded(tracksFolder);
 		}
+		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - startLoadingTime) + "ms");
 		return tracksFolder;
 	}
 
@@ -64,6 +71,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 				trackFolder.addSubFolder(folder);
 				loadGPXFolder(folder, getSubfolderTitle(file, subfolder), updateSmartFolder);
 			} else if (isGpxFile(file)) {
+				smartFolderHelper.addAvailableTrackFolder(subfolder);
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
 				trackFolder.addTrackItem(trackItem);

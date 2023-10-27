@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,9 +33,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Map;
 
 public class LocalItemFragment extends LocalBaseFragment implements ConfirmDeletionListener,
@@ -104,29 +100,13 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	private void updateContent() {
-		String type = localItem.getType().toHumanString(app);
-		addRow(itemsContainer, getString(R.string.shared_string_type), type, false);
+		itemsContainer.removeAllViews();
 
-		DateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
-		String date = format.format(localItem.getFile().lastModified());
-		addRow(itemsContainer, getString(R.string.shared_string_created), date, false);
-
-		String size = AndroidUtils.formatSize(app, localItem.getSize());
-		addRow(itemsContainer, getString(R.string.shared_string_size), size, true);
-	}
-
-	private void addRow(@NonNull ViewGroup container, String title, String description, boolean lastItem) {
-		View view = themedInflater.inflate(R.layout.local_item_row, container, false);
-		container.addView(view);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		TextView tvDescription = view.findViewById(R.id.description);
-		tvDescription.setText(description);
-
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !lastItem);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_shadow), lastItem);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			LocalItemInfoCard card = new LocalItemInfoCard(activity, localItem);
+			itemsContainer.addView(card.build(itemsContainer.getContext()));
+		}
 	}
 
 	@Override

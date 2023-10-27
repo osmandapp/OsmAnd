@@ -110,7 +110,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
-		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(this, downloadProgressLayout);
+		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(getMyApplication(), downloadProgressLayout);
 
 		viewPager = findViewById(R.id.pager);
 		PagerSlidingTabStrip pagerSlidingTabs = findViewById(R.id.sliding_tabs);
@@ -139,12 +139,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				accessibilityAssistant.onPageScrollStateChanged(state);
 			}
 		});
-		viewPager.setCurrentItem(loadCurrentTab());
-
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 		if (shouldShowFreeVersionBanner(getMyApplication())) {
 			visibleBanner.updateFreeVersionBanner();
 		}
+		viewPager.setCurrentItem(loadCurrentTab());
 
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {

@@ -359,7 +359,7 @@ public class StreetNameWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+	                       @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		boolean useSpecialPosition = widgetsPanel == WidgetsPanel.TOP && specialContainer != null;
 		if (useSpecialPosition) {
@@ -376,7 +376,7 @@ public class StreetNameWidget extends MapWidget {
 		if (useSpecialPosition) {
 			specialContainer.addView(view);
 		} else {
-			container.addView(view, order);
+			container.addView(view);
 		}
 	}
 

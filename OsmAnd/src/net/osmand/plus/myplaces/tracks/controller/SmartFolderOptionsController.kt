@@ -73,7 +73,7 @@ class SmartFolderOptionsController(
 				showSmartFolderTracksOnMap(smartFolder)
 			}
 
-			SmartFolderOption.EDIT_NAME -> {
+			SmartFolderOption.shared_string_rename -> {
 				showRenameDialog()
 			}
 

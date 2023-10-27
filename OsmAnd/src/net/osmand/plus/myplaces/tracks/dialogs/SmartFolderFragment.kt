@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -90,10 +89,6 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		return true
 	}
 
-	override fun restoreState(bundle: Bundle?) {
-		super.restoreState(bundle)
-	}
-
 	private fun showTracksSelection(
 		folder: TracksGroup, fragment: BaseTrackFolderFragment,
 		trackItems: Set<TrackItem?>?, tracksGroups: Set<TracksGroup?>?) {
@@ -131,7 +126,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	override fun onSmartFoldersUpdated() {
 		super.onSmartFoldersUpdated()
 		val actualFolder = smartFolderHelper.getSmartFolder(smartFolder.folderName)
-		if (actualFolder != smartFolder) {
+		if (actualFolder != null && actualFolder != smartFolder) {
 			smartFolder = actualFolder
 		}
 		updateContent()
@@ -150,7 +145,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			val filter = TracksSearchFilter(app, trackItems)
 			filter.initSelectedFilters(smartFolder.filters)
 			if (manager != null) {
-				targetFragment?.let { showInstance(manager, it, filter, this, smartFolder) }
+				targetFragment?.let { showInstance(app, manager, it, filter, this, smartFolder, null) }
 			}
 		}
 	}

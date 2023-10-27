@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.AppVersionUpgradeOnInit.updateExistingWidgetIds;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
@@ -57,8 +58,7 @@ import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.keyevent.devices.base.InputDevice;
-import net.osmand.plus.keyevent.devices.base.InputDeviceProfile;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
@@ -1057,8 +1057,8 @@ public class OsmandSettings {
 	public final OsmandPreference<AngularConstants> ANGULAR_UNITS = new EnumStringPreference<AngularConstants>(this,
 			"angular_measurement", AngularConstants.DEGREES, AngularConstants.values()).makeProfile();
 
-	public static final String LAST_START_LAT = "last_searched_lat"; //$NON-NLS-1$
-	public static final String LAST_START_LON = "last_searched_lon"; //$NON-NLS-1$
+	public static final String LAST_START_LAT = "last_searched_lat";
+	public static final String LAST_START_LON = "last_searched_lon";
 
 	public LatLon getLastStartPoint() {
 		if (settingsAPI.contains(globalPreferences, LAST_START_LAT) && settingsAPI.contains(globalPreferences, LAST_START_LON)) {
@@ -1448,7 +1448,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference(this, "user_android_id", "").makeGlobal();
 	public final CommonPreference<Long> USER_ANDROID_ID_EXPIRED_TIME = new LongPreference(this, "user_android_id_expired_time", 0).makeGlobal();
 
-	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
+	public static final String SAVE_CURRENT_TRACK = "save_current_track";
 
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference(this, "save_global_track_to_gpx", false).makeGlobal().cache();
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference(this, "save_global_track_interval", 5000).makeProfile().cache();
@@ -1829,17 +1829,67 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
+	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
+
+	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String modeValue = json.getString(getId());
+				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public String parseString(String s) {
+			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
 	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference RIGHT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
 			"right_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.RIGHT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
@@ -1886,15 +1936,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getId()).makeProfile();
-
-	public InputDeviceProfile getSelectedInputDevice() {
-		return getSelectedInputDevice(getApplicationMode());
-	}
-
-	public InputDeviceProfile getSelectedInputDevice(@NonNull ApplicationMode appMode) {
-		return InputDevice.getByValue(EXTERNAL_INPUT_DEVICE.getModeValue(appMode));
-	}
+	public final OsmandPreference<String> EXTERNAL_INPUT_DEVICE = new StringPreference(this, "selected_external_input_device", KeyboardDeviceProfile.ID).makeProfile();
+	public final CommonPreference<String> CUSTOM_EXTERNAL_INPUT_DEVICES = new StringPreference(this, "custom_external_input_devices", "").makeGlobal().makeShared().storeLastModifiedTime();
+	public final OsmandPreference<Boolean> EXTERNAL_INPUT_DEVICE_ENABLED = new BooleanPreference(this, "external_input_device_enabled", true).makeProfile();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference(this, "route_map_markers_start_my_loc", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference(this, "route_map_markers_round_trip", false).makeGlobal().makeShared().cache();
@@ -2045,17 +2089,17 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_FINISHED = new BooleanPreference(this,
 			"shared_storage_migration_finished", false).makeGlobal();
 
-	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
+	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir";
 
-	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$
-	public static final String EXTERNAL_STORAGE_DIR_TYPE_V19 = "external_storage_dir_type_V19"; //$NON-NLS-1$
+	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19";
+	public static final String EXTERNAL_STORAGE_DIR_TYPE_V19 = "external_storage_dir_type_V19";
 	public static final int EXTERNAL_STORAGE_TYPE_DEFAULT = 0; // Environment.getExternalStorageDirectory()
 	public static final int EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE = 1; // ctx.getExternalFilesDirs(null)
 	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
-	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference(this, "osmand_usage_space", 0).makeGlobal();
 
+	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference(this, "osmand_usage_space", 0).makeGlobal();
 
 	public void freezeExternalStorageDirectory() {
 		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
@@ -2102,7 +2146,7 @@ public class OsmandSettings {
 		}
 	}
 
-	private File getNoBackupPath() {
+	public File getNoBackupPath() {
 		return ctx.getNoBackupFilesDir();
 	}
 
@@ -2212,15 +2256,15 @@ public class OsmandSettings {
 
 
 	// This value is a key for saving last known location shown on the map
-	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat";
+	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon";
+	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom";
 	public static final String LAST_KNOWN_MAP_ZOOM_FLOAT_PART = "last_known_map_zoom_float_part";
 
-	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
-	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
-	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
-	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
+	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show";
+	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show";
+	public static final String MAP_LON_TO_SHOW = "map_lon_to_show";
+	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show";
 
 	public LatLon getLastKnownMapLocation() {
 		float lat = settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_LAT, 0);
@@ -2388,26 +2432,26 @@ public class OsmandSettings {
 		LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
 	}
 
-	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
-	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public static final String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat";
+	public static final String POINT_NAVIGATE_LON = "point_navigate_lon";
+	public static final String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer";
 	public static final int NAVIGATE = 1;
-	public static final String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
-	public static final String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
-	public static final String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
-	public static final String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description";
+	public static final String START_POINT_LAT = "start_point_lat";
+	public static final String START_POINT_LON = "start_point_lon";
+	public static final String START_POINT_DESCRIPTION = "start_point_description";
 
-	public static final String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
-	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
+	public static final String INTERMEDIATE_POINTS = "intermediate_points";
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description";
 
-	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup"; //$NON-NLS-1$
-	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup"; //$NON-NLS-1$
-	public static final String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup"; //$NON-NLS-1$
-	public static final String START_POINT_LAT_BACKUP = "start_point_lat_backup"; //$NON-NLS-1$
-	public static final String START_POINT_LON_BACKUP = "start_point_lon_backup"; //$NON-NLS-1$
-	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
-	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
-	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup";
+	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup";
+	public static final String POINT_NAVIGATE_DESCRIPTION_BACKUP = "point_navigate_description_backup";
+	public static final String START_POINT_LAT_BACKUP = "start_point_lat_backup";
+	public static final String START_POINT_LON_BACKUP = "start_point_lon_backup";
+	public static final String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup";
+	public static final String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup";
+	public static final String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup";
 	public static final String MY_LOC_POINT_LAT = "my_loc_point_lat";
 	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
@@ -2698,15 +2742,15 @@ public class OsmandSettings {
 	 * the location of a parked car
 	 */
 
-	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_POSTCODE = "last_searched_postcode"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_LAT = "last_searched_lat"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_LON = "last_searched_lon"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_REGION = "last_searched_region";
+	public static final String LAST_SEARCHED_CITY = "last_searched_city";
+	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name";
+	public static final String LAST_SEARCHED_POSTCODE = "last_searched_postcode";
+	public static final String LAST_SEARCHED_STREET = "last_searched_street";
+	public static final String LAST_SEARCHED_BUILDING = "last_searched_building";
+	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street";
+	public static final String LAST_SEARCHED_LAT = "last_searched_lat";
+	public static final String LAST_SEARCHED_LON = "last_searched_lon";
 
 	public LatLon getLastSearchedPoint() {
 		if (settingsAPI.contains(globalPreferences, LAST_SEARCHED_LAT) && settingsAPI.contains(globalPreferences, LAST_SEARCHED_LON)) {
@@ -2730,15 +2774,15 @@ public class OsmandSettings {
 	}
 
 	public String getLastSearchedRegion() {
-		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_REGION, "");
 	}
 
 	public boolean setLastSearchedRegion(String region, LatLon l) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).
 				putString(LAST_SEARCHED_CITY_NAME, "").putString(LAST_SEARCHED_POSTCODE, "").
-				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
+				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-2$
 		if (settingsAPI.contains(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
 		}
 		boolean res = edit.commit();
 		setLastSearchedPoint(l);
@@ -2750,10 +2794,10 @@ public class OsmandSettings {
 	}
 
 	public boolean setLastSearchedPostcode(String postcode, LatLon point) {
-		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "") //$NON-NLS-1$
-				.putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
+		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "")
+				.putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, postcode);
 		if (settingsAPI.contains(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
 		}
 		boolean res = edit.commit();
 		setLastSearchedPoint(point);
@@ -2770,10 +2814,10 @@ public class OsmandSettings {
 
 	public boolean setLastSearchedCity(Long cityId, String name, LatLon point) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_CITY_NAME, name).
-				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, ""); //$NON-NLS-1$
+				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, "");
 		//edit.remove(LAST_SEARCHED_POSTCODE);
 		if (settingsAPI.contains(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
 		}
 		boolean res = edit.commit();
 		setLastSearchedPoint(point);
@@ -2781,13 +2825,13 @@ public class OsmandSettings {
 	}
 
 	public String getLastSearchedStreet() {
-		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_STREET, ""); //$NON-NLS-1$
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_STREET, "");
 	}
 
 	public boolean setLastSearchedStreet(String street, LatLon point) {
-		SettingsEditor edit = settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+		SettingsEditor edit = settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, "");
 		if (settingsAPI.contains(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
 		}
 		boolean res = edit.commit();
 		setLastSearchedPoint(point);
@@ -2795,7 +2839,7 @@ public class OsmandSettings {
 	}
 
 	public String getLastSearchedBuilding() {
-		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_BUILDING, "");
 	}
 
 	public boolean setLastSearchedBuilding(String building, LatLon point) {
@@ -2808,7 +2852,7 @@ public class OsmandSettings {
 		if (!settingsAPI.contains(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET)) {
 			return null;
 		}
-		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_INTERSECTED_STREET, "");
 	}
 
 	public boolean setLastSearchedIntersectedStreet(String street, LatLon l) {

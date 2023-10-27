@@ -2,6 +2,8 @@ package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -100,7 +102,10 @@ public class GPXDatabase {
 	private static final String GPX_COL_START_LON = "startLon";
 	private static final String GPX_COL_NEAREST_CITY_NAME = "nearestCityName";
 
-	public static final long CHECKED_UNKNOWN_TRACK_CREATION_TIME = 1;
+	private static final String TMP_NAME_COLUMN_COUNT = "itemsCount";
+	private static final String TMP_NAME_COLUMN_NOT_NULL = "nonnull";
+
+	public static final long UNKNOWN_TIME_THRESHOLD = 10;
 
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
@@ -234,14 +239,45 @@ public class GPXDatabase {
 			GPX_COL_NEAREST_CITY_NAME + " FROM " + GPX_TABLE_NAME +
 			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL";
 
+	private static final String GPX_TRACK_COLORS_LIST = "SELECT DISTINCT " +
+			GPX_COL_COLOR + " FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_COLOR + " <> ''";
+
 	private static final String GPX_MIN_CREATE_DATE = "SELECT " +
 			"MIN(" + GPX_COL_FILE_CREATION_TIME + ") " +
 			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME +
-			" > " + CHECKED_UNKNOWN_TRACK_CREATION_TIME;
+			" > " + UNKNOWN_TIME_THRESHOLD;
 
 	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
 			"MAX(" + GPX_COL_TOTAL_DISTANCE + ") " +
 			" FROM " + GPX_TABLE_NAME;
+
+	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
+			GPX_COL_DIR + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" group by " + GPX_COL_DIR +
+			" ORDER BY " + GPX_COL_DIR + " ASC";
+
+	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
+			GPX_COL_NEAREST_CITY_NAME + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL" +
+			" group by " + GPX_COL_NEAREST_CITY_NAME +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
+
+	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT DISTINCT " +
+			"case when " + GPX_COL_COLOR + " is null then '' else " + GPX_COL_COLOR + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" group by " + TMP_NAME_COLUMN_NOT_NULL +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
+
+	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT DISTINCT " +
+			"case when " + GPX_COL_WIDTH + " is null then '' else " + GPX_COL_WIDTH + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"count (*) as " + TMP_NAME_COLUMN_COUNT +
+			" FROM " + GPX_TABLE_NAME +
+			" group by " + TMP_NAME_COLUMN_NOT_NULL +
+			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
 	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
 			GPX_TABLE_NAME + " SET " +
@@ -642,9 +678,6 @@ public class GPXDatabase {
 	}
 
 	public boolean updateCreateTime(@NonNull GpxDataItem item, long fileCreatedTime) {
-		if (fileCreatedTime == 0) {
-			fileCreatedTime = CHECKED_UNKNOWN_TRACK_CREATION_TIME;
-		}
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -1267,17 +1300,33 @@ public class GPXDatabase {
 		return maxLength;
 	}
 
-	public List<String> getNearestCityList() {
-		ArrayList<String> nearestCities = new ArrayList<>();
+	public List<Pair<String, Integer>> getTrackFolders() {
+		return getStringIntItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
+	}
+
+	public List<Pair<String, Integer>> getNearestCityCollection() {
+		return getStringIntItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
+	}
+
+	public List<Pair<String, Integer>> getTrackColorsCollection() {
+		return getStringIntItemsCollection(GPX_TRACK_COLORS_COLLECTION);
+	}
+
+	public List<Pair<String, Integer>> getTrackWidthCollection() {
+		return getStringIntItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
+	}
+
+	public List<Pair<String, Integer>> getStringIntItemsCollection(String dataQuery) {
+		ArrayList<Pair<String, Integer>> folderCollection = new ArrayList<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GPX_NEAREST_CITY_LIST, null);
+				SQLiteCursor query = db.rawQuery(dataQuery, null);
 				if (query != null) {
 					try {
 						if (query.moveToFirst()) {
 							do {
-								nearestCities.add(query.getString(0));
+								folderCollection.add(new Pair<>(query.getString(0), query.getInt(1)));
 							} while (query.moveToNext());
 						}
 					} finally {
@@ -1288,7 +1337,7 @@ public class GPXDatabase {
 				db.close();
 			}
 		}
-		return nearestCities;
+		return folderCollection;
 	}
 
 	@NonNull

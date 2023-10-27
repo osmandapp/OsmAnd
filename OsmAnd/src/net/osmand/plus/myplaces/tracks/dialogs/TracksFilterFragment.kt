@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.CallbackWithObject
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -26,11 +27,13 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
+import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
+import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -41,20 +44,26 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		val TAG: String = TracksFilterFragment::class.java.simpleName
 
 		fun showInstance(
+			app: OsmandApplication,
 			manager: FragmentManager,
 			target: Fragment?,
 			filter: TracksSearchFilter,
 			trackFiltersContainer: DialogClosedListener,
-			smartFolder: SmartFolder?) {
+			smartFolder: SmartFolder?,
+			currentFolder: TrackFolder?) {
 			manager.findFragmentByTag(TAG)?.let { foundFragment ->
 				(foundFragment as TracksFilterFragment).dialog?.dismiss()
 			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+				val initialFilter = TracksSearchFilter(app, arrayListOf())
+				initialFilter.initSelectedFilters(filter.appliedFilters)
 				val fragment = TracksFilterFragment()
 				fragment.setTargetFragment(target, 0)
+				fragment.initialFilterState = initialFilter
 				fragment.retainInstance = true
 				fragment.dialogClosedListener = trackFiltersContainer
 				fragment.filter = filter
+				fragment.currentFolder = currentFolder
 				fragment.smartFolder = smartFolder
 				fragment.show(manager, TAG)
 			}
@@ -62,12 +71,14 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	lateinit var filter: TracksSearchFilter
+	lateinit var initialFilterState: TracksSearchFilter
 	var adapter: FiltersAdapter? = null
 	var resetAllButton: DialogButton? = null
 	var progressBar: ProgressBar? = null
 	var showButton: DialogButton? = null
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
+	private var currentFolder: TrackFolder? = null
 	private lateinit var dialogClosedListener: DialogClosedListener
 	private lateinit var appBar: AppBarLayout
 
@@ -150,7 +161,8 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 						override fun onDialogClosed() {
 							updateFilters()
 						}
-					})
+					},
+					currentFolder)
 			}
 		}
 		progressBar = view.findViewById(R.id.progress_bar)
@@ -220,10 +232,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		}
 	}
 
-	fun closeWithoutApplyConfirmed() {
+	private fun closeWithoutApplyConfirmed() {
 		filter.resetFilteredItems()
 		if (smartFolder == null) {
-			filter.resetCurrentFilters()
+			filter.initSelectedFilters(initialFilterState.appliedFilters)
 		}
 		adapter?.let {
 			it.updateItems()
@@ -252,22 +264,23 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	private fun filterChanged(): Boolean {
 		var changed = false
-		if (smartFolder == null) {
-			changed = filter.appliedFiltersCount > 0
+
+		var initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
+			this.initialFilterState.appliedFilters
 		} else {
-			smartFolder?.let { folder ->
-				if (Algorithms.isEmpty(folder.filters)) {
-					changed = filter.appliedFiltersCount > 0
+			smartFolder?.filters
+		}
+		initialFilters?.let {
+			if (Algorithms.isEmpty(it)) {
+				changed = filter.appliedFiltersCount > 0
+			} else {
+				if (it.size != filter.appliedFiltersCount) {
+					changed = true
 				} else {
-					val folderFilters = folder.filters!!
-					if (folderFilters.size != filter.appliedFiltersCount) {
-						changed = true
-					} else {
-						for (folderFilter in folderFilters) {
-							if (folderFilter != filter.getFilterByType(folderFilter.filterType)) {
-								changed = true
-								break
-							}
+					for (folderFilter in it) {
+						if (folderFilter != filter.getFilterByType(folderFilter.filterType)) {
+							changed = true
+							break
 						}
 					}
 				}

@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterCityViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterColorViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDateViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDurationViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterFolderViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder.TextChangedListener
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterRangeViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterWidthViewHolder
 import net.osmand.plus.utils.UiUtilities
 
 class FiltersAdapter(
@@ -60,9 +63,24 @@ class FiltersAdapter(
 				FilterCityViewHolder(view, nightMode)
 			}
 
+			FilterType.FOLDER -> {
+				val view = inflater.inflate(R.layout.filter_folder_item, parent, false)
+				FilterFolderViewHolder(view, nightMode)
+			}
+
 			FilterType.OTHER -> {
 				val view = inflater.inflate(R.layout.filter_other_item, parent, false)
 				FilterOtherViewHolder(view, nightMode)
+			}
+
+			FilterType.COLOR -> {
+				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
+				FilterColorViewHolder(view, nightMode)
+			}
+
+			FilterType.WIDTH -> {
+				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
+				FilterWidthViewHolder(view, nightMode)
 			}
 		}
 	}
@@ -105,6 +123,12 @@ class FiltersAdapter(
 			holder.bindView(item as DateCreationTrackFilter, activity)
 		} else if (holder is FilterCityViewHolder) {
 			holder.bindView(item as CityTrackFilter)
+		} else if (holder is FilterColorViewHolder) {
+			holder.bindView(item as ColorTrackFilter)
+		} else if (holder is FilterWidthViewHolder) {
+			holder.bindView(item as WidthTrackFilter)
+		} else if (holder is FilterFolderViewHolder) {
+			holder.bindView(item as TrackFolderFilter)
 		} else if (holder is FilterOtherViewHolder) {
 			holder.bindView(item as OtherTrackFilter)
 		}

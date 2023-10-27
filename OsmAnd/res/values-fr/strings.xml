@@ -5418,7 +5418,9 @@
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Ajout du gadget \"finesse de l\'aile\"
+    <string name="release_4_6">• Ajout de la possibilité de changer les assignements de touches pour les périphériques externes
+\n
+\n• Ajout du gadget \"finesse de l\'aile\"
 \n
 \n• Ajout de filtres et de dossiers intelligents pour les traces
 \n
@@ -5487,4 +5489,54 @@
         <item quantity="many">%1$d (%2$d traces)</item>
         <item quantity="other">%1$d (%2$d traces)</item>
     </plurals>
+    <string name="cloud_trash_clear_confirmation">Êtes-vous certain de vouloir supprimer de manière définitive tous les éléments présents dans la corbeille \? Cette action ne pourra pas être annulée.</string>
+    <string name="restore_from_trash">Restaurer depuis la corbeille</string>
+    <string name="delete_all_items">Supprimer tous les éléments</string>
+    <string name="trash_is_empty_banner_desc">Les fichiers supprimés d\'OsmAnd Cloud seront disponibles ici pendant %1$s jours.</string>
+    <string name="delete_trash_item_confirmation_desc">Êtes-vous certain de vouloir supprimer \"%1$s\" de manière définitive \?
+\n
+\nCette action ne pourra pas être annulée.</string>
+    <string name="shared_string_empty_trash">Vider la corbeille</string>
+    <string name="shared_string_delete_immediately">Supprimer définitivement</string>
+    <string name="shared_string_is_deleted">%1$s a été supprimé.</string>
+    <string name="cloud_item_restored">%1$s a été restauré dans le Cloud.</string>
+    <string name="trash_alert_card_desc">Les éléments de la corbeille seront supprimés après %1$s jours.</string>
+    <string name="trash_is_empty">La corbeille est vide</string>
+    <string name="shared_string_trash">Corbeille</string>
+    <string name="shared_string_delete_item">Supprimer l\'élément</string>
+    <string name="key_event_action_zoom_in">Zoomer</string>
+    <string name="key_event_action_change_map_orientation">Modifier l\'orientation de la carte</string>
+    <string name="root_folder">Dossier racine</string>
+    <string name="shared_string_rows">Lignes</string>
+    <string name="key_event_action_move_left">Déplacer ver la gauche</string>
+    <string name="all_folders">Tous les dossiers</string>
+    <string name="key_event_action_move_right">Déplacer vers la droite</string>
+    <string name="shared_string_show_less">Réduire</string>
+    <string name="shared_string_button">Bouton</string>
+    <string name="folder">Dossier</string>
+    <string name="remove_type_q">Êtes-vous certain de vouloir supprimer le type \"%1$s\" \?</string>
+    <string name="shared_string_action">Action</string>
+    <string name="add_new_type">Ajouter un nouveau type</string>
+    <string name="key_event_action_move_up">Déplacer vers le haut</string>
+    <string name="key_event_action_open_search_view">Ouvrir la vue Recherche</string>
+    <string name="key_event_action_zoom_out">Dézoomer</string>
+    <string name="key_event_action_toggle_drower">Afficher / masquer le menu latéral</string>
+    <string name="key_is_already_assigned_error">La touche \"%1$s\" est déjà affectée à l\'action : \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Ouvrir la vue Navigation</string>
+    <string name="key_event_action_move_to_my_location">Atteindre ma position</string>
+    <string name="not_specified">Non spécifié</string>
+    <string name="key_event_category_map_interactions">Interactions avec la carte</string>
+    <string name="key_event_action_move_down">Déplacer vers le bas</string>
+    <string name="key_event_category_actions">Actions</string>
+    <string name="enable_to_use_external_input_device">Activer pour utiliser le périphérique d\'entrée externe avec OsmAnd</string>
+    <string name="key_event_action_previous_app_profile">Profil d\'application précédent</string>
+    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour l’affecter à l\'action sélectionnée.</string>
+    <string name="deletion_error">Erreur de suppression</string>
+    <string name="key_event_action_next_app_profile">Profil d\'application suivant</string>
+    <string name="change_key_binding">Modifier l\'affectation des touches</string>
+    <string name="key_event_action_take_media_note">Créer une note média</string>
+    <string name="key_event_action_emit_navigation_hint">Émettre un indice de guidage</string>
+    <string name="external_input_device_title">Périphériques d\'entrée externes</string>
+    <string name="key_bindings">Affectation des touches</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
 </resources>

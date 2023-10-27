@@ -195,7 +195,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		LocalGroup group = getGroup();
 		if (group != null) {
 			for (LocalItem item : group.getItems()) {
-				if (item.isBackuped()) {
+				if (item.isBackuped(app)) {
 					backupedItems.add(item);
 				} else {
 					activeItems.add(item);
