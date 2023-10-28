@@ -5500,7 +5500,7 @@
         <item quantity="few">%1$d (%2$d trasee)</item>
         <item quantity="other">%1$d (%2$d de trasee)</item>
     </plurals>
-    <string name="key_event_action_zoom_in">Zoom interior</string>
+    <string name="key_event_action_zoom_in">Mărire</string>
     <string name="show_toast_about_key_pressed">Afișează toastul despre tasta apăsată</string>
     <string name="shared_string_rows">Rânduri</string>
     <string name="press_button_to_link_with_action">Apăsați butonul de pe dispozitiv pentru a-l lega de acțiunea aleasă.</string>
