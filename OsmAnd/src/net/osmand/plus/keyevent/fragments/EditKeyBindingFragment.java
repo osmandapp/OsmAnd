@@ -29,7 +29,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
-import net.osmand.plus.keyevent.interfaces.OnKeyCodeSelected;
+import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -41,7 +41,7 @@ import java.util.Objects;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyCodeSelected {
+public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyCodeSelectedCallback {
 
 	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
 

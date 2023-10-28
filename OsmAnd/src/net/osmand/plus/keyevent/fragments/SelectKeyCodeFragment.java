@@ -31,7 +31,7 @@ import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
-import net.osmand.plus.keyevent.interfaces.OnKeyCodeSelected;
+import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -121,8 +121,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
-			if (target instanceof OnKeyCodeSelected) {
-				((OnKeyCodeSelected) target).onKeyCodeSelected(keyCode);
+			if (target instanceof OnKeyCodeSelectedCallback) {
+				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(keyCode);
 			}
 			dismiss();
 		});

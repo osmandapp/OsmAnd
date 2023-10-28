@@ -7,12 +7,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -44,7 +45,7 @@ public class InputDeviceHelper {
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
 	private final List<InputDeviceProfile> customDevices;
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
-	private final List<InputDeviceHelperListener> listeners = new ArrayList<>();
+	private final List<InputDeviceHelperCallback> listeners = new ArrayList<>();
 
 	public InputDeviceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -64,17 +65,17 @@ public class InputDeviceHelper {
 		return result;
 	}
 
-	public void addListener(@NonNull InputDeviceHelperListener listener) {
+	public void addListener(@NonNull InputDeviceHelperCallback listener) {
 		listeners.add(listener);
 	}
 
-	public void removeListener(@NonNull InputDeviceHelperListener listener) {
+	public void removeListener(@NonNull InputDeviceHelperCallback listener) {
 		listeners.remove(listener);
 	}
 
 	public void selectInputDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, deviceId);
-		notifyListeners();
+		notifyListeners(EventType.SELECT_DEVICE);
 	}
 
 	public void createAndSaveCustomDevice(@NonNull String newName) {
@@ -88,7 +89,7 @@ public class InputDeviceHelper {
 	public void renameCustomDevice(@NonNull CustomInputDeviceProfile device, @NonNull String newName) {
 		device.setCustomName(newName);
 		syncSettings();
-		notifyListeners();
+		notifyListeners(EventType.RENAME_DEVICE);
 	}
 
 	@NonNull
@@ -127,7 +128,7 @@ public class InputDeviceHelper {
 		customDevices.add(device);
 		cachedDevices.put(device.getId(), device);
 		syncSettings();
-		notifyListeners();
+		notifyListeners(EventType.ADD_NEW_DEVICE);
 	}
 
 	public void removeCustomDevice(@NonNull String deviceId) {
@@ -137,7 +138,7 @@ public class InputDeviceHelper {
 			cachedDevices.remove(deviceId);
 			syncSettings();
 			resetSelectedDeviceIfNeeded();
-			notifyListeners();
+			notifyListeners(EventType.DELETE_DEVICE);
 		}
 	}
 
@@ -221,9 +222,9 @@ public class InputDeviceHelper {
 		return false;
 	}
 
-	private void notifyListeners() {
-		for (InputDeviceHelperListener listener : listeners) {
-			listener.onInputDeviceHelperEvent();
+	private void notifyListeners(@NonNull EventType event) {
+		for (InputDeviceHelperCallback listener : listeners) {
+			listener.processInputDeviceHelperEvent(event);
 		}
 	}
 
@@ -271,9 +272,5 @@ public class InputDeviceHelper {
 			jsonArray.put(((CustomInputDeviceProfile) device).toJson());
 		}
 		json.put("items", jsonArray);
-	}
-
-	public interface InputDeviceHelperListener {
-		void onInputDeviceHelperEvent();
 	}
 }
