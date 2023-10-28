@@ -82,12 +82,6 @@
 		</androidx.core.widget.NestedScrollView>
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
-
-		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
