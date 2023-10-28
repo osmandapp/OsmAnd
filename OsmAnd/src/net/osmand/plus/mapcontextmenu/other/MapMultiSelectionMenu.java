@@ -15,7 +15,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -146,14 +145,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 		}
 
-		Collections.sort(objects, new Comparator<MenuObject>() {
-			@Override
-			public int compare(MenuObject obj1, MenuObject obj2) {
-				if (obj1.order == obj2.order) {
-					return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
-				} else {
-					return obj1.order - obj2.order;
-				}
+		Collections.sort(objects, (obj1, obj2) -> {
+			if (obj1.order == obj2.order) {
+				return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
+			} else {
+				return obj1.order - obj2.order;
 			}
 		});
 	}
@@ -201,7 +197,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		Fragment fragment = getFragmentByTag();
 		if (fragment != null) {
 			MapMultiSelectionMenuFragment menuFragment = (MapMultiSelectionMenuFragment) fragment;
-			menuFragment.dismissMenu();
+			menuFragment.dismiss();
 		}
 	}
 

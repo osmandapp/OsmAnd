@@ -1,20 +1,24 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.app.Activity;
+import static net.osmand.plus.utils.ColorUtilities.getDividerColor;
+import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
+
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.AbsListView;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.DimenRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -23,64 +27,73 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
+import net.osmand.plus.mapcontextmenu.other.MultiSelectionArrayAdapter.OnClickListener;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.SimpleObservableScrollViewCallbacks;
 
-import java.util.LinkedList;
-import java.util.List;
+public class MapMultiSelectionMenuFragment extends Fragment
+		implements OnClickListener, OnGlobalLayoutListener, SimpleObservableScrollViewCallbacks {
 
-public class MapMultiSelectionMenuFragment extends Fragment implements MultiSelectionArrayAdapter.OnClickListener {
 	public static final String TAG = "MapMultiSelectionMenuFragment";
 
 	private View view;
+	private ListView listView;
 	private MultiSelectionArrayAdapter listAdapter;
 	private MapMultiSelectionMenu menu;
+
+	private int minHeight;
+	private boolean initialScroll = true;
 	private boolean dismissing;
 	private boolean wasDrawerDisabled;
 
+	private LayoutInflater themedInflater;
+	private boolean nightMode;
+
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-		menu = ((MapActivity) getActivity()).getContextMenu().getMultiSelectionMenu();
-
-		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		MapActivity mapActivity = (MapActivity) requireActivity();
+		menu = mapActivity.getContextMenu().getMultiSelectionMenu();
+		updateNightMode();
+		view = inflate(R.layout.menu_obj_selection_fragment, container);
+		Context context = view.getContext();
 
 		if (menu.isLandscapeLayout()) {
-			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
-					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
+			int backgroundId = nightMode
+					? R.drawable.multi_selection_menu_bg_dark_land
+					: R.drawable.multi_selection_menu_bg_light_land;
+			AndroidUtils.setBackground(context, view, backgroundId);
 		} else {
-			AndroidUtils.setBackground(view.getContext(),
-					view.findViewById(R.id.cancel_row), ColorUtilities.getListBgColorId(!menu.isLight()));
+			View cancelRow = view.findViewById(R.id.cancel_row);
+			AndroidUtils.setBackground(context, cancelRow, getListBgColorId(nightMode));
 		}
 
-		ListView listView = view.findViewById(R.id.list);
-		if (menu.isLandscapeLayout() && Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(getActivity(), listView);
+		listView = view.findViewById(R.id.list);
+		if (menu.isLandscapeLayout()) {
+			AndroidUtils.addStatusBarPadding21v(mapActivity, listView);
 		}
-		listAdapter = createAdapter();
+		listAdapter = new MultiSelectionArrayAdapter(menu);
 		listAdapter.setListener(this);
 
 		if (!menu.isLandscapeLayout()) {
-			Context context = getContext();
-
 			FrameLayout paddingView = new FrameLayout(context);
-			paddingView.setLayoutParams(new AbsListView.LayoutParams(
-					AbsListView.LayoutParams.MATCH_PARENT, getPaddingViewHeight())
-			);
+			int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+			int cancelButtonHeight = getDimension(R.dimen.bottom_sheet_cancel_button_height);
+			int padding = screenHeight - cancelButtonHeight;
+			paddingView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, padding));
 			paddingView.setClickable(true);
-			paddingView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dismissMenu();
-				}
-			});
+			paddingView.setOnClickListener(v -> dismiss());
 
 			FrameLayout shadowContainer = new FrameLayout(context);
 			shadowContainer.setLayoutParams(new FrameLayout.LayoutParams(
@@ -98,88 +111,108 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			paddingView.addView(shadowContainer);
 			listView.addHeaderView(paddingView);
 
-			view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
-					int maxHeight = (int) (titleHeight);
-					for (int i = 0; i < 3 && i < listAdapter.getCount(); i++) {
-						View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
-						childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-								View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-						maxHeight += childView.getMeasuredHeight();
-					}
-
-					listView.setSelectionFromTop(0, -maxHeight);
-
-					ViewTreeObserver obs = view.getViewTreeObserver();
-					obs.removeOnGlobalLayoutListener(this);
-				}
-			});
-
-			((ObservableListView) listView).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
-
-				boolean initialScroll = true;
-				final int minHeight = getResources().getDimensionPixelSize(R.dimen.multi_selection_header_height)
-						+ getResources().getDimensionPixelSize(R.dimen.list_item_height);
-
-				@Override
-				public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-					if (scrollY <= minHeight && !initialScroll) {
-						dismissMenu();
-					}
-				}
-
-				@Override
-				public void onDownMotionEvent() {
-					initialScroll = false;
-				}
-
-				@Override
-				public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
-				}
-			});
+			view.getViewTreeObserver().addOnGlobalLayoutListener(this);
+			((ObservableListView) listView).setScrollViewCallbacks(this);
 		}
-		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
+
+		View headerView = inflate(R.layout.menu_obj_selection_header, listView);
 		if (!menu.isLandscapeLayout()) {
-			int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
-			AndroidUtils.setBackground(getContext(), headerView, listBgColor);
+			AndroidUtils.setBackground(context, headerView, getListBgColorId(nightMode));
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
 		listView.setAdapter(listAdapter);
 
-		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight()
-				? R.color.divider_color_light : R.color.divider_color_dark));
+		View divider = view.findViewById(R.id.divider);
+		divider.setBackgroundColor(getDividerColor(context, nightMode));
 
-		((TextView) view.findViewById(R.id.cancel_row_text)).setTextColor(ContextCompat.getColor(getContext(),
-				menu.isLight() ? R.color.multi_selection_menu_close_btn_light : R.color.multi_selection_menu_close_btn_dark));
-		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismissMenu();
-			}
-		});
+		TextView tvCancelRow = view.findViewById(R.id.cancel_row_text);
+		int cancelRowColorId = nightMode
+				? R.color.multi_selection_menu_close_btn_dark
+				: R.color.multi_selection_menu_close_btn_light;
+		tvCancelRow.setTextColor(ColorUtilities.getColor(context, cancelRowColorId));
+		View cancelRow = view.findViewById(R.id.cancel_row);
+		cancelRow.setOnClickListener(view -> dismiss());
 
 		return view;
 	}
 
 	@Override
+	public void onGlobalLayout() {
+		float titleHeight = getResources().getDimension(R.dimen.multi_selection_header_height);
+		int maxHeight = (int) (titleHeight);
+		for (int i = 0; i < 3 && i < listAdapter.getCount(); i++) {
+			View childView = listAdapter.getView(0, null, view.findViewById(R.id.list));
+			childView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+					View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+			maxHeight += childView.getMeasuredHeight();
+		}
+
+		listView.setSelectionFromTop(0, -maxHeight);
+
+		ViewTreeObserver obs = view.getViewTreeObserver();
+		obs.removeOnGlobalLayoutListener(this);
+	}
+
+	@Override
+	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+		if (minHeight == 0) {
+			int headerHeight = getDimension(R.dimen.multi_selection_header_height);
+			int listItemHeight = getDimension(R.dimen.list_item_height);
+			minHeight = headerHeight + listItemHeight;
+		}
+		if (scrollY <= minHeight && !initialScroll) {
+			dismiss();
+		}
+	}
+
+	@Override
+	public void onDownMotionEvent() {
+		initialScroll = false;
+	}
+
+	@Override
+	public void onItemClicked(int position) {
+		MenuObject menuObject = listAdapter.getItem(position);
+		if (menuObject != null) {
+			menu.openContextMenu(menuObject);
+		}
+	}
+
+	private void updateNightMode() {
+		menu.updateNightMode();
+		nightMode = !menu.isLight();
+		themedInflater = UiUtilities.getInflater(menu.getMapActivity(), nightMode);
+	}
+
+	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
+		return themedInflater.inflate(layoutId, container, false);
+	}
+
+	@Override
 	public void onStart() {
 		super.onStart();
-		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
-		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+		MapActivity mapActivity = menu.getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(false);
+		mapActivity.getContextMenu().setBaseFragmentVisibility(false);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (menu.getMapActivity().getMapRouteInfoMenu().isVisible()) {
-			dismissMenu();
+		MapActivity mapActivity = menu.getMapActivity();
+		if (mapActivity == null) {
 			return;
 		}
-		wasDrawerDisabled = menu.getMapActivity().isDrawerDisabled();
+		MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+		if (mapRouteInfoMenu.isVisible()) {
+			dismiss();
+			return;
+		}
+		wasDrawerDisabled = mapActivity.isDrawerDisabled();
 		if (!wasDrawerDisabled) {
 			menu.getMapActivity().disableDrawer();
 		}
@@ -188,8 +221,9 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (!wasDrawerDisabled) {
-			menu.getMapActivity().enableDrawer();
+		MapActivity mapActivity = menu.getMapActivity();
+		if (mapActivity != null && !wasDrawerDisabled) {
+			mapActivity.enableDrawer();
 		}
 	}
 
@@ -199,64 +233,56 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		if (!dismissing) {
 			menu.onStop();
 		}
-		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
-		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
+		MapActivity mapActivity = menu.getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
+			mapActivity.getMapLayers().getMapControlsLayer().setControlsClickable(true);
+		}
 	}
 
-	private int getPaddingViewHeight() {
-		Activity activity = getActivity();
-		return AndroidUtils.getScreenHeight(activity)
-				- activity.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+	public void dismiss() {
+		dismissing = true;
+		MapActivity mapActivity = menu.getMapActivity();
+		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+			MapContextMenu contextMenu = mapActivity.getContextMenu();
+			if (contextMenu.isVisible()) {
+				contextMenu.hide();
+			} else {
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				if (!manager.isStateSaved()) {
+					manager.popBackStack();
+				}
+			}
+		}
+	}
+
+	private int getDimension(@DimenRes int dimensionResId) {
+		return requireContext().getResources().getDimensionPixelSize(dimensionResId);
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			if (mapActivity.getContextMenu().isVisible()) {
-				mapActivity.getContextMenu().hide();
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		MapMultiSelectionMenu menu = contextMenu.getMultiSelectionMenu();
+
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			if (contextMenu.isVisible()) {
+				contextMenu.hide();
 			}
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
-			MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
-			if (menu != null && !mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (menu != null && !settings.DO_NOT_USE_ANIMATIONS.get()) {
 				slideInAnim = menu.getSlideInAnimation();
 				slideOutAnim = menu.getSlideOutAnimation();
 			}
-
 			MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-		}
-	}
-
-	private MultiSelectionArrayAdapter createAdapter() {
-		List<MenuObject> items = new LinkedList<>(menu.getObjects());
-		return new MultiSelectionArrayAdapter(menu, R.layout.menu_obj_list_item, items);
-	}
-
-	@Override
-	public void onClick(int position) {
-		MenuObject menuObject = listAdapter.getItem(position);
-		if (menuObject != null) {
-			menu.openContextMenu(menuObject);
-		}
-	}
-
-	public void dismissMenu() {
-		dismissing = true;
-		MapActivity mapActivity = menu.getMapActivity();
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-			if (mapActivity.getContextMenu().isVisible()) {
-				mapActivity.getContextMenu().hide();
-			} else {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				if (!fragmentManager.isStateSaved()) {
-					fragmentManager.popBackStack();
-				}
-			}
 		}
 	}
 }
