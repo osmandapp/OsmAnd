@@ -46,7 +46,7 @@
 					android:orientation="vertical">
 
 					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/title"
+						android:id="@+id/description"
 						style="@style/TitleStyle"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
@@ -54,8 +54,8 @@
 						android:layout_margin="@dimen/content_padding"
 						android:layout_weight="1"
 						android:ellipsize="end"
-						android:text="@string/press_button_to_link_with_action"
-						android:textColor="?android:textColorPrimary" />
+						android:textColor="?android:textColorPrimary"
+						tools:text="@string/press_button_to_link_with_action" />
 
 					<FrameLayout
 						android:layout_width="match_parent"
@@ -164,25 +164,31 @@
 
 		</androidx.core.widget.NestedScrollView>
 
+	</FrameLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
-			android:layout_gravity="bottom"
 			android:scaleType="fitXY"
 			osmand:srcCompat="@drawable/bg_shadow_list_top" />
 
-	</FrameLayout>
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color">
 
-	<FrameLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:background="?attr/list_background_color">
+			<include layout="@layout/bottom_buttons" />
 
-		<include layout="@layout/bottom_buttons" />
+		</FrameLayout>
 
-	</FrameLayout>
+	</LinearLayout>
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
@@ -211,7 +217,7 @@
 				android:minHeight="@dimen/setting_list_item_large_height"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/shared_string_button"
+				osmand:title="@string/change_button"
 				osmand:titleMarginEnd="0dp"
 				osmand:titleMarginStart="0dp">
 
