@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">infekt-malsan-scienco</string>
     <string name="poi_socket_typee_yes">tipo E</string>
     <string name="poi_checkpoint_cycling">Biciklada kontrolpunkto</string>
+    <string name="poi_dressing_room">Vestejo</string>
+    <string name="poi_emergency_bay">Kriokaza golfo</string>
 </resources>
