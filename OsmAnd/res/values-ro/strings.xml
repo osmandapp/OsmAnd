@@ -5500,4 +5500,22 @@
         <item quantity="few">%1$d (%2$d trasee)</item>
         <item quantity="other">%1$d (%2$d de trasee)</item>
     </plurals>
+    <string name="key_event_action_zoom_in">Zoom interior</string>
+    <string name="show_toast_about_key_pressed">Afișează toastul despre tasta apăsată</string>
+    <string name="shared_string_rows">Rânduri</string>
+    <string name="press_button_to_link_with_action">Apăsați butonul de pe dispozitiv pentru a-l lega de acțiunea aleasă.</string>
+    <string name="deletion_error">Eroare de ștergere</string>
+    <string name="key_event_action_move_right">Mutați-vă la dreapta</string>
+    <string name="shared_string_button">Buton</string>
+    <string name="change_key_binding">Schimbarea legăturii cheilor</string>
+    <string name="key_event_action_take_media_note">Luați notă de presă</string>
+    <string name="key_event_action_activity_back_pressed">Activitate înapoi apăsat</string>
+    <string name="key_event_action_emit_navigation_hint">Emiteți indicii de navigare</string>
+    <string name="shared_string_action">Acțiune</string>
+    <string name="key_event_action_zoom_out">Zoom în afară</string>
+    <string name="key_event_action_toggle_drower">Afișați / ascundeți meniul lateral</string>
+    <string name="key_is_already_assigned_error">Tasta \"%1$s\" este deja atribuită unei alte acțiuni: \"%2$s\"</string>
+    <string name="key_event_category_map_interactions">Harta interacțiunilor</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Deschideți WunderLINQ Datagrid</string>
+    <string name="key_event_category_actions">Acțiuni</string>
 </resources>
