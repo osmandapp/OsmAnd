@@ -125,7 +125,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

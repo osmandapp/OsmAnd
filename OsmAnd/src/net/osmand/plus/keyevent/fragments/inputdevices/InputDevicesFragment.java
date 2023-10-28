@@ -127,7 +127,7 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
