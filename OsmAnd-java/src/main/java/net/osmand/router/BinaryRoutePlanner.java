@@ -101,11 +101,11 @@ public class BinaryRoutePlanner {
 		boolean forwardSearch = !onlyForward; 
 
 		FinalRouteSegment finalSegment = null;
-		int dijkstraMode = end == null ? 1 : (start == null ? -1 : 0);
-		if (dijkstraMode == 1) {
+		ctx.dijkstraMode = end == null ? 1 : (start == null ? -1 : 0);
+		if (ctx.dijkstraMode == 1) {
 			start.others = null;
 			forwardSearch = true;
-		} else if (dijkstraMode == -1) {
+		} else if (ctx.dijkstraMode == -1) {
 			end.others = null;
 			forwardSearch = false;
 		}
@@ -129,7 +129,7 @@ public class BinaryRoutePlanner {
 					println(" >>FINAL segment: " + segment);
 				}
 				
-				if (dijkstraMode != 0) {
+				if (ctx.dijkstraMode != 0) {
 					if (finalSegment == null) {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
@@ -370,6 +370,10 @@ public class BinaryRoutePlanner {
 	}
 
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY) {
+		if (ctx.dijkstraMode != 0) {
+			// TODO that doesn't speed up A* cause it's usually a long route and slow calculation of squareRootDist 
+			return 0;
+		}
 		double distToFinalPoint = squareRootDist(begX, begY, endX, endY); // fast distance method is allowed
 		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {

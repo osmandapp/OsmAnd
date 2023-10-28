@@ -68,7 +68,7 @@ public class RoutingContext {
 	public long targetRoadId;
 	public int targetSegmentInd;
 	public boolean targetTransportStop;
-	
+	public int dijkstraMode;
 	public boolean publicTransport;
 	
 	

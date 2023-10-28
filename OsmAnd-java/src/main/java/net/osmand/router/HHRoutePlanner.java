@@ -954,10 +954,9 @@ public class HHRoutePlanner {
 	/// Utilities
 	static final int ROUTE_POINTS = 11;
 	public static RouteSegmentPoint loadPoint(RoutingContext ctx, NetworkDBPoint pnt) {
-		RouteSegment s;
-		s = ctx.loadRouteSegment(pnt.startX, pnt.startY, ctx.config.memoryLimitation);
+		RouteSegment s = ctx.loadRouteSegment(pnt.startX, pnt.startY, ctx.config.memoryLimitation);
 		while (s != null) {
-			if(s.getRoad().getId() == pnt.roadId&& s.getSegmentStart() == pnt.start) {
+			if (s.getRoad().getId() == pnt.roadId && s.getSegmentStart() == pnt.start) {
 				if (s.getSegmentEnd() != pnt.end) {
 					s = s.initRouteSegment(!s.isPositive());
 				}
