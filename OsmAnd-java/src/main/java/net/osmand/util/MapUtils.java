@@ -173,9 +173,11 @@ public class MapUtils {
 		double R = 6372.8; // for haversine use R = 6372.8 km instead of 6371 km
 		double dLat = toRadians(lat2 - lat1);
 		double dLon = toRadians(lon2 - lon1);
-		double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-		        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-		        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		double sinHalfLat = Math.sin(dLat / 2);
+		double sinHalfLon = Math.sin(dLon / 2);
+		double a = sinHalfLat * sinHalfLat +
+				Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+						sinHalfLon * sinHalfLon;
 		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		//return R * c * 1000;
 		// simplify haversine:
