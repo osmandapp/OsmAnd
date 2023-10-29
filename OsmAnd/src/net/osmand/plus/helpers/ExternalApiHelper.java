@@ -389,6 +389,7 @@ public class ExternalApiHelper {
 				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
 					routingHelper.setRoutePlanningMode(false);
 					routingHelper.setFollowingMode(true);
+					AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_STOP_NAVIGATION.equals(cmd)) {

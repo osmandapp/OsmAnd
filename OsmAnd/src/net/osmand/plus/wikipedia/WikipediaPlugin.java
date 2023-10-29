@@ -297,7 +297,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	public String getWikiLanguageTranslation(String locale) {
-		String translation = app.getLangTranslation(locale);
+		String translation = AndroidUtils.getLangTranslation(app, locale);
 		if (translation.equalsIgnoreCase(locale)) {
 			translation = getTranslationFromPhrases(locale);
 		}

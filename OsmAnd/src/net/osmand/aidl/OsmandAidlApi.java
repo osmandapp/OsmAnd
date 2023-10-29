@@ -771,6 +771,7 @@ public class OsmandAidlApi {
 					if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
 						routingHelper.setRoutePlanningMode(false);
 						routingHelper.setFollowingMode(true);
+						AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 					}
 				}
 			}

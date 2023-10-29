@@ -24,8 +24,6 @@ import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -34,12 +32,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.List;
 
@@ -117,7 +112,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
-		MapLayers mapLayers = getApp().getOsmandMap().getMapLayers();
+
 		OsmandSettings settings = getApp().getSettings();
 		defaultAppMode = settings.getApplicationMode();
 		if (!isAppModeDerivedFromCar(defaultAppMode)) {

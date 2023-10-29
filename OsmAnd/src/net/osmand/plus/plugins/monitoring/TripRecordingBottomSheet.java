@@ -1,5 +1,13 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter.createGpxTabsView;
+import static net.osmand.plus.utils.AndroidUtils.setPadding;
+import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -30,28 +38,28 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.charts.TrackChartPoints;
-import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -67,14 +75,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter.createGpxTabsView;
-import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
-import static net.osmand.plus.utils.AndroidUtils.setPadding;
-import static net.osmand.plus.utils.ColorUtilities.getActiveTransparentColorId;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.GLOBAL;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -210,6 +210,11 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			} else {
 				app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				app.startNavigationService(NavigationService.USED_BY_GPX);
+
+				FragmentActivity activity = getMapActivity();
+				if (activity != null) {
+					AndroidUtils.requestNotificationPermissionIfNeeded(activity);
+				}
 			}
 			updateStatus();
 			createItem(resumePauseButton, !isRecordingTrack ? ItemType.PAUSE : ItemType.RESUME);
