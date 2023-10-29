@@ -520,12 +520,13 @@ public class GpxUiHelper {
 				if (showCurrentGpx && position == 0) {
 					callbackWithObject.processResult(null);
 				} else {
-					String fileName = gpxInfoList.get(position).getFileName();
-					SelectedGpxFile selectedGpxFile =
-							app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+					GPXInfo gpxInfo = gpxInfoList.get(position);
+					String filePath = gpxInfo.getFilePath();
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 					if (selectedGpxFile != null) {
 						callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 					} else {
+						String fileName = gpxInfo.getFileName();
 						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 					}
 				}

@@ -123,10 +123,10 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {
 		if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
-			String fileName = gpxInfoList.get(position).getFileName();
+			String filePath = gpxInfoList.get(position).getFilePath();
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), fileName, true);
+				MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), filePath, true);
 			}
 		}
 		dismiss();
@@ -165,11 +165,11 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 	private SelectFileListener createSelectFileListener() {
 		return new SelectFileListener() {
 			@Override
-			public void selectFileOnCLick(String fileName) {
+			public void selectFileOnCLick(String filePath) {
 				dismiss();
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), fileName, true);
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), filePath, true);
 				}
 			}
 

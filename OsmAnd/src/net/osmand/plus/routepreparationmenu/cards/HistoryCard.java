@@ -85,25 +85,23 @@ public class HistoryCard extends MapBaseCard {
 				ImageView icon = view.findViewById(R.id.icon);
 				icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
 
-				view.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
+				view.setOnClickListener(v -> {
+					String filePath = gpxInfo.getFilePath();
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
+					if (selectedGpxFile != null) {
+						GPXFile gpxFile = selectedGpxFile.getGpxFile();
+						mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true);
+					} else {
+						CallbackWithObject<GPXFile[]> callback = result -> {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								mapActivity.getMapRouteInfoMenu().selectTrack(result[0], true);
+							}
+							return true;
+						};
 						String fileName = gpxInfo.getFileName();
-						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
-						if (selectedGpxFile != null) {
-							GPXFile gpxFile = selectedGpxFile.getGpxFile();
-							mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true);
-						} else {
-							CallbackWithObject<GPXFile[]> callback = result -> {
-								MapActivity mapActivity = getMapActivity();
-								if (mapActivity != null) {
-									mapActivity.getMapRouteInfoMenu().selectTrack(result[0], true);
-								}
-								return true;
-							};
-							File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-							GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, callback, dir, null, fileName);
-						}
+						File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+						GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, callback, dir, null, fileName);
 					}
 				});
 			} else {
