@@ -115,7 +115,7 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 					updateSelectedValue(colorFilter)
 				}
 				holder.checkBox.isChecked = colorFilter.isColorSelected(colorName)
-				holder.count.text = colorFilter.allColorsCollection[colorName].toString()
+				holder.count.text = colorFilter.getTracksCountForColor(colorName).toString()
 			}
 		}
 
