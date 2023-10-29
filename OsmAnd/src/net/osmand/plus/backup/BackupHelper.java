@@ -612,7 +612,7 @@ public class BackupHelper {
 	}
 
 	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                        @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
@@ -731,10 +731,12 @@ public class BackupHelper {
 			params.put("accessToken", getAccessToken());
 			params.put("name", fileName);
 			params.put("type", type);
-			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
+			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+
+			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
-				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
 			IProgress iProgress = new AbstractProgress() {
@@ -780,7 +782,7 @@ public class BackupHelper {
 				}
 			};
 			iProgress.startWork(remoteFile.getFilesize() / 1024);
-			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, iProgress);
+			error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}
