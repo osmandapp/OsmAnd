@@ -5546,4 +5546,8 @@
     <string name="trash_alert_card_desc">Elementele din coșul de gunoi vor fi șterse după %1$s zile.</string>
     <string name="trash_is_empty">Coșul de gunoi este gol</string>
     <string name="shared_string_trash">Coș de gunoi</string>
+    <string name="root_folder">Folderul root</string>
+    <string name="all_folders">Toate folderele</string>
+    <string name="shared_string_show_less">Arată mai puțin</string>
+    <string name="folder">Folderul</string>
 </resources>
