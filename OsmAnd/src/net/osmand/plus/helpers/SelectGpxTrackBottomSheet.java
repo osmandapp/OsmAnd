@@ -63,9 +63,11 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 				callbackWithObject.processResult(null);
 				app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(null);
 			} else {
-				String fileName = gpxInfoList.get(position).getFileName();
+				GPXInfo gpxInfo = gpxInfoList.get(position);
+				String fileName = gpxInfo.getFileName();
+				String filePath = gpxInfo.getFilePath();
 				app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(fileName);
-				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 				if (selectedGpxFile != null) {
 					callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 				} else {

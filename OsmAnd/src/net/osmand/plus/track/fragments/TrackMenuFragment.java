@@ -1128,8 +1128,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap();
 				selectedGpxFile = gpxSelectionHelper.selectGpxFile(gpxFile, params);
 				dismiss();
-				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
-				MeasurementToolFragment.showInstance(fragmentManager, fileName, false);
+				MeasurementToolFragment.showInstance(fragmentManager, gpxFile.path, false);
 			} else if (buttonIndex == RENAME_BUTTON_INDEX) {
 				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {

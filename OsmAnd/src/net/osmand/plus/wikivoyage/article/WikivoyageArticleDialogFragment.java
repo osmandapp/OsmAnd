@@ -146,25 +146,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
 				getActiveIcon(R.drawable.ic_action_markers_dark), null, null, null
 		);
-		trackButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				FragmentManager fm = getFragmentManager();
-				if (article == null || activity == null || fm == null) {
-					return;
-				}
-				if (activity instanceof WikivoyageExploreActivity) {
-					WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
-					exploreActivity.setArticle(article);
-				}
-				TravelHelper travelHelper = app.getTravelHelper();
-				File file = travelHelper.createGpxFile(article);
-				boolean temporarySelected = app.getSelectedGpxHelper().getSelectedFileByName(file.getAbsolutePath()) == null;
-				TrackMenuFragment.openTrack(activity, new File(file.getAbsolutePath()), null,
-						getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
-			}
-		});
+		trackButton.setOnClickListener(v -> openTrack());
 		trackButton.setVisibility(View.GONE);
 		gpxProgress = mainView.findViewById(R.id.gpx_progress);
 		gpxProgress.setVisibility(View.GONE);
@@ -242,6 +224,23 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(true);
 			}
 		}
+	}
+
+	private void openTrack() {
+		FragmentActivity activity = getActivity();
+		FragmentManager fm = getFragmentManager();
+		if (article == null || activity == null || fm == null) {
+			return;
+		}
+		if (activity instanceof WikivoyageExploreActivity) {
+			WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+			exploreActivity.setArticle(article);
+		}
+		TravelHelper travelHelper = app.getTravelHelper();
+		File file = travelHelper.createGpxFile(article);
+		boolean temporarySelected = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) == null;
+		TrackMenuFragment.openTrack(activity, new File(file.getAbsolutePath()), null,
+				getString(R.string.icon_group_travel), TrackMenuTab.POINTS, temporarySelected);
 	}
 
 	private void updateSaveButton() {

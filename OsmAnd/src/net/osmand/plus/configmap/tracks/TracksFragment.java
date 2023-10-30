@@ -537,7 +537,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
-		app.getSmartFolderHelper().addTrackItemToSmartFolder(item);
 		selectedTracksHelper.addTrackItem(item);
 		updateTrackTabs();
 		setSelectedTab("import");

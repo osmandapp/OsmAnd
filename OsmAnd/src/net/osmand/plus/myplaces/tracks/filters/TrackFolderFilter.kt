@@ -7,7 +7,6 @@ import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.FOLDER
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.util.Algorithms
-import java.io.File
 
 class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
 	BaseTrackFilter(R.string.folder, FOLDER, filterChangedListener) {
@@ -69,11 +68,8 @@ class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
 			if (!Algorithms.isEmpty(selectedFolders)) {
 				for (folder in selectedFolders) {
 					trackItem.dataItem?.let { gpxDataItem ->
-						gpxDataItem.file.parent?.let { parentFolderName ->
-							var parent = File(parentFolderName).name
-							if (Algorithms.stringsEqual(parent, folder)) {
-								return true
-							}
+						if (Algorithms.stringsEqual(gpxDataItem.containingFolder, folder)) {
+							return true
 						}
 					}
 				}

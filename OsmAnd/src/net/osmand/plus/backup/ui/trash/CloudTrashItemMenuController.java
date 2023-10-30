@@ -30,8 +30,9 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 
 	public static final String PROCESS_ID = "trash_item_options_menu";
 
-	private static final int ACTION_RESTORE_ID = 0;
-	private static final int ACTION_DELETE_ID = 1;
+	private static final int ACTION_DELETE_ID = 0;
+	private static final int ACTION_RESTORE_ID = 1;
+	private static final int ACTION_DOWNLOAD_ID = 2;
 
 	private final TrashItem item;
 	private final CloudTrashController controller;
@@ -66,11 +67,20 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setShowBottomDivider(true, 0));
 
+		if (!item.isLocalDeletion()) {
+			displayData.addDisplayItem(new DisplayItem()
+					.setTitle(getString(R.string.restore_from_trash))
+					.setLayoutId(R.layout.bottom_sheet_item_simple_56dp_padding_32dp)
+					.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorId))
+					.setTag(ACTION_RESTORE_ID));
+		}
+
 		displayData.addDisplayItem(new DisplayItem()
-				.setTitle(getString(R.string.restore_from_trash))
+				.setTitle(getString(R.string.download_to_device))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp_padding_32dp)
-				.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, activeColorId))
-				.setTag(ACTION_RESTORE_ID));
+				.setIcon(uiUtilities.getIcon(R.drawable.ic_action_device_download, activeColorId))
+				.setShowBottomDivider(true, app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_start))
+				.setTag(ACTION_DOWNLOAD_ID));
 
 		displayData.addDisplayItem(new DisplayItem()
 				.setTitle(getString(R.string.shared_string_delete_immediately))
@@ -88,6 +98,9 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 			int actionId = (int) tag;
 			if (actionId == ACTION_RESTORE_ID) {
 				controller.restoreItem(item);
+				dismiss();
+			} else if (actionId == ACTION_DOWNLOAD_ID) {
+				controller.downloadItem(item);
 				dismiss();
 			} else if (actionId == ACTION_DELETE_ID) {
 				showDeleteConfirmationDialog();

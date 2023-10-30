@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.ui.ImportTrackItem;
 
@@ -17,13 +19,16 @@ import java.util.List;
 
 public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 
+	private final OsmandApplication app;
 	private final File importDir;
 	private final List<ImportTrackItem> items;
 	private final SaveImportedGpxListener listener;
 
-	public SaveTracksTask(@NonNull List<ImportTrackItem> items,
+	public SaveTracksTask(@NonNull OsmandApplication app,
+	                      @NonNull List<ImportTrackItem> items,
 	                      @NonNull File importDir,
 	                      @Nullable SaveImportedGpxListener listener) {
+		this.app = app;
 		this.items = items;
 		this.importDir = importDir;
 		this.listener = listener;
@@ -52,6 +57,8 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 				String error = warn != null ? warn.getMessage() : null;
 				if (error != null) {
 					warnings.add(error);
+				} else {
+					app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(new File(gpxFile.path)));
 				}
 				if (listener != null) {
 					listener.onGpxSaved(error, gpxFile);

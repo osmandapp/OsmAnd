@@ -16,6 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class NavResumePauseAction extends QuickAction {
 
@@ -45,6 +46,7 @@ public class NavResumePauseAction extends QuickAction {
 			routingHelper.setFollowingMode(false);
 			routingHelper.setPauseNavigation(true);
 		}
+		AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 		mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		mapActivity.refreshMap();
 	}

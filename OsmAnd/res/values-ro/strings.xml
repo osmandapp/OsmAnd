@@ -1044,8 +1044,8 @@
     <string name="av_def_action_picture">Fotografiere</string>
     <string name="recording_context_menu_precord">Fotografiază</string>
     <string name="use_displayed_track_for_navigation">Utilizați track-ul afișat pentru navigație\?</string>
-    <string name="keep_and_add_destination_point">Adăugați ca destinație subsecventă</string>
-    <string name="shared_string_select_on_map">Selectează pe hartă</string>
+    <string name="keep_and_add_destination_point">Adăugă ca destinație subsecventă</string>
+    <string name="shared_string_select_on_map">Selectare pe hartă</string>
     <string name="shared_string_favorite">Favorită</string>
     <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
     <string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
@@ -1618,7 +1618,7 @@
     <string name="short_location_on_map">Lat %1$s
 \nLun %2$s</string>
     <string name="tips_and_tricks_descr">Întrebări frecvente, schimbări recente și altele.</string>
-    <string name="routing_settings_2">Setare navigație</string>
+    <string name="routing_settings_2">Setări navigație</string>
     <string name="general_settings_2">Setări generale</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">Nu folosiți</string>
@@ -1669,7 +1669,7 @@
     <string name="shared_string_permissions">Permisiuni</string>
     <string name="shared_string_install">Instalați</string>
     <string name="shared_string_add_photos">Adaugă poze</string>
-    <string name="make_as_start_point">Faceți din aceasta punctul de început</string>
+    <string name="make_as_start_point">Setează acesta ca punct de plecare</string>
     <string name="shared_string_current">Actual</string>
     <string name="last_intermediate_dest_description">Adaugă o oprire intermediară</string>
     <string name="first_intermediate_dest_description">Adaugă oprirea inițială</string>
@@ -2229,7 +2229,7 @@
     <string name="by_transport_type">Cu %1$s</string>
     <string name="step_by_step">Pas cu pas</string>
     <string name="routeInfo_road_types_name">Tipuri drum</string>
-    <string name="exit_at">Coborâre la</string>
+    <string name="exit_at">Coborâre la stația</string>
     <string name="sit_on_the_stop">Urcare la stația</string>
     <string name="shared_string_swap">Schimbați</string>
     <string name="show_more">Afișați mai multe</string>
@@ -2534,7 +2534,7 @@
     <string name="external_input_device">Dispozitive externe de intrare</string>
     <string name="sett_generic_ext_input">Tastatură</string>
     <string name="temporary_conditional_routing">Ține cont de limitările temporare</string>
-    <string name="route_parameters_info">Setări pentru rutare în profilul selectat \"%1$s\".</string>
+    <string name="route_parameters_info">Setări de rutare pentru profilul selectat \"%1$s\".</string>
     <string name="units_and_formats">Unități &amp; formate</string>
     <string name="map_look_descr">Aspect hartă</string>
     <string name="list_of_installed_plugins">Plugin-uri instalate</string>
@@ -4018,7 +4018,7 @@
     <string name="select_nav_icon_descr">Icon afișat în timpul navigației sau deplasării.</string>
     <string name="tracks_view_descr">Traseele înregistrate se află în %1$s sau în folderul OsmAnd.</string>
     <string name="live_monitoring_descr">Permite partajarea locației curente folosindu-se de înregistrarea călătoriei.</string>
-    <string name="import_routing_file">Importul fișierului de rutare</string>
+    <string name="import_routing_file">Importă fișier de rutare</string>
     <string name="multimedia_rec_split_title">Împărțire înregistrare</string>
     <string name="reset_plugin_to_default">Resetază configurația pluginului la valorile implicite</string>
     <string name="live_monitoring_time_buffer">Buffer de timp</string>
@@ -5500,4 +5500,22 @@
         <item quantity="few">%1$d (%2$d trasee)</item>
         <item quantity="other">%1$d (%2$d de trasee)</item>
     </plurals>
+    <string name="key_event_action_zoom_in">Mărire</string>
+    <string name="show_toast_about_key_pressed">Afișează toastul despre tasta apăsată</string>
+    <string name="shared_string_rows">Rânduri</string>
+    <string name="press_button_to_link_with_action">Apăsați butonul de pe dispozitiv pentru a-l lega de acțiunea aleasă.</string>
+    <string name="deletion_error">Eroare de ștergere</string>
+    <string name="key_event_action_move_right">Mutați-vă la dreapta</string>
+    <string name="shared_string_button">Buton</string>
+    <string name="change_key_binding">Schimbarea legăturii cheilor</string>
+    <string name="key_event_action_take_media_note">Luați notă de presă</string>
+    <string name="key_event_action_activity_back_pressed">Activitate înapoi apăsat</string>
+    <string name="key_event_action_emit_navigation_hint">Emiteți indicii de navigare</string>
+    <string name="shared_string_action">Acțiune</string>
+    <string name="key_event_action_zoom_out">Zoom în afară</string>
+    <string name="key_event_action_toggle_drower">Afișați / ascundeți meniul lateral</string>
+    <string name="key_is_already_assigned_error">Tasta \"%1$s\" este deja atribuită unei alte acțiuni: \"%2$s\"</string>
+    <string name="key_event_category_map_interactions">Harta interacțiunilor</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Deschideți WunderLINQ Datagrid</string>
+    <string name="key_event_category_actions">Acțiuni</string>
 </resources>

@@ -19,6 +19,7 @@ import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
@@ -30,7 +31,6 @@ import org.apache.commons.logging.Log;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,13 +63,10 @@ public class CloudTrashController {
 
 		List<TrashItem> items = collectTrashItems();
 		if (!Algorithms.isEmpty(items)) {
-			Calendar calendar = Calendar.getInstance();
 			Collections.sort(items, (i1, i2) -> -Long.compare(i1.getTime(), i2.getTime()));
 
 			for (TrashItem item : items) {
-				updateCalendarTime(calendar, item);
-
-				long time = calendar.getTimeInMillis();
+				long time = item.getTime();
 				String name = Algorithms.capitalizeFirstLetter(GROUP_DATE_FORMAT.format(time));
 
 				TrashGroup group = groups.get(name);
@@ -81,15 +78,6 @@ public class CloudTrashController {
 			}
 		}
 		return groups;
-	}
-
-	private void updateCalendarTime(@NonNull Calendar calendar, @NonNull TrashItem item) {
-		calendar.setTimeInMillis(item.getTime());
-		calendar.set(Calendar.DAY_OF_MONTH, 0);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
 	}
 
 	@NonNull
@@ -141,34 +129,26 @@ public class CloudTrashController {
 		}
 	}
 
+	public void downloadItem(@NonNull TrashItem item) {
+		if (item.getSettingsItem() == null) {
+			log.error("Failed to download item: " + item.oldFile.getName() + ", SettingsItem is null");
+			return;
+		}
+		RemoteFilesType type = item.isLocalDeletion() ? UNIQUE : OLD;
+		settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, type, SYNC_OPERATION_DOWNLOAD);
+	}
+
 	public void restoreItem(@NonNull TrashItem item) {
 		if (item.getSettingsItem() == null) {
 			log.error("Failed to restore item: " + item.oldFile.getName() + ", SettingsItem is null");
 			return;
 		}
-		if (item.isLocalDeletion()) {
-			settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, UNIQUE, SYNC_OPERATION_DOWNLOAD);
-		} else {
-			try {
-				List<RemoteFile> files = Collections.singletonList(item.deletedFile);
-				backupHelper.deleteFiles(files, true, new TrashDeletionListener(null) {
-					@Override
-					public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-						if (Algorithms.isEmpty(errors)) {
-							settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, OLD, SYNC_OPERATION_DOWNLOAD);
-						}
-						if (!Algorithms.isEmpty(errors)) {
-							String message = AndroidUtils.formatWarnings(errors.values()).toString();
-							app.showToastMessage(new BackupError(message).getLocalizedError(app));
-						} else {
-							fragment.showSnackbar(app.getString(R.string.cloud_item_restored, item.getName(app)));
-						}
-						fragment.updateProgressVisibility(false);
-					}
-				});
-			} catch (UserNotRegisteredException e) {
-				log.error(e);
-			}
+		try {
+			List<RemoteFile> files = Collections.singletonList(item.deletedFile);
+			String message = app.getString(R.string.cloud_item_restored, item.getName(app));
+			backupHelper.deleteFiles(files, true, new TrashDeletionListener(message));
+		} catch (UserNotRegisteredException e) {
+			log.error(e);
 		}
 	}
 

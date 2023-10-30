@@ -4,7 +4,6 @@ package net.osmand.plus;
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.slider.Slider;
 
@@ -111,7 +111,7 @@ public class OsmAndLocationSimulation {
 //		}
 //	}
 
-	public void startStopRouteAnimation(@Nullable Activity activity, boolean useGpx, Runnable runnable) {
+	public void startStopRouteAnimation(@Nullable FragmentActivity activity, boolean useGpx, Runnable runnable) {
 		if (!isRouteAnimating()) {
 			if (useGpx) {
 				if (activity == null) {
@@ -211,11 +211,11 @@ public class OsmAndLocationSimulation {
 		loadLocationsTask = null;
 	}
 
-	public void startStopRouteAnimation(@Nullable Activity activity) {
+	public void startStopRouteAnimation(@Nullable FragmentActivity activity) {
 		startStopRouteAnimation(activity, false, null);
 	}
 
-	public void startStopGpxAnimation(@Nullable Activity activity) {
+	public void startStopGpxAnimation(@Nullable FragmentActivity activity) {
 		startStopRouteAnimation(activity, true, null);
 	}
 

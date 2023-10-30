@@ -37,6 +37,11 @@ public class GPXInfo {
 		return fileName;
 	}
 
+	@Nullable
+	public String getFilePath() {
+		return file != null ? file.getAbsolutePath() : null;
+	}
+
 	public long getLastModified() {
 		return lastModified;
 	}

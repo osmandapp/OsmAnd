@@ -68,6 +68,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
@@ -208,6 +209,7 @@ public class MapActivityActions extends MapActions {
 				String fileName = Algorithms.getFileNameWithoutExtension(file);
 				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
 				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 				return gpx;
 			}
 			return null;
@@ -554,7 +556,7 @@ public class MapActivityActions extends MapActions {
 						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
 							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
-							TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
+							TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 						}
 						return true;
 					}));

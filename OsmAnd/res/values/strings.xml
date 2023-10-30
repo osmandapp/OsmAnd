@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
     <string name="change_button">Change button</string>
+    <string name="download_to_device">Download to device</string>
     <string name="deletion_error">Deletion error</string>
     <string name="shared_string_rows">Rows</string>
     <string name="show_toast_about_key_pressed">Show toast about pressed key</string>

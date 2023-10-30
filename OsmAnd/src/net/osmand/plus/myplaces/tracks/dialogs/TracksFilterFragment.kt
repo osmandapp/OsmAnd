@@ -49,7 +49,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			manager: FragmentManager,
 			target: Fragment?,
 			filter: TracksSearchFilter,
-			trackFiltersContainer: DialogClosedListener,
+			trackFiltersContainer: DialogClosedListener?,
 			smartFolder: SmartFolder?,
 			currentFolder: TrackFolder?) {
 			manager.findFragmentByTag(TAG)?.let { foundFragment ->
@@ -80,7 +80,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
 	private var currentFolder: TrackFolder? = null
-	private lateinit var dialogClosedListener: DialogClosedListener
+	private var dialogClosedListener: DialogClosedListener? = null
 	private lateinit var appBar: AppBarLayout
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -335,9 +335,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	override fun onDismiss(dialog: DialogInterface) {
 		super.onDismiss(dialog)
-		if (dialogClosedListener != null) {
-			dialogClosedListener.onDialogClosed()
-		}
+		dialogClosedListener?.onDialogClosed()
 	}
 
 	override fun onSmartFolderSaved(smartFolder: SmartFolder?) {

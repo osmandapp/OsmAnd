@@ -1234,28 +1234,28 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@Nullable String title, @Nullable Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
-				@Override
-				public boolean processResult(GPXFile[] result) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						GPXFile gpxFile;
-						if (result != null && result.length > 0) {
-							gpxFile = result[0];
-						} else {
-							gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-						}
-						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
-						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
-						}
-					}
-					return true;
-				}
-			};
-
-			GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+			addNewWptToGPXFileImpl(mapActivity, title, amenity);
 		}
+	}
+
+	private void addNewWptToGPXFileImpl(@NonNull MapActivity mapActivity,
+	                                    @Nullable String title, @Nullable Amenity amenity) {
+		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				GPXFile gpxFile;
+				if (result != null && result.length > 0) {
+					gpxFile = result[0];
+				} else {
+					gpxFile = activity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
+				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
+				if (wptPtPointEditor != null) {
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
+				}
+			}
+			return true;
+		});
 	}
 
 	@Nullable

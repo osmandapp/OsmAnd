@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.status.StatusViewHolder;
-import net.osmand.plus.backup.ui.trash.viewholder.AlertViewHolder;
-import net.osmand.plus.backup.ui.trash.viewholder.ItemViewHolder;
 import net.osmand.plus.backup.ui.trash.viewholder.EmptyBannerViewHolder;
 import net.osmand.plus.backup.ui.trash.viewholder.HeaderViewHolder;
+import net.osmand.plus.backup.ui.trash.viewholder.ItemViewHolder;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.UiUtilities;
@@ -30,9 +29,8 @@ import java.util.List;
 public class CloudTrashAdapter extends RecyclerView.Adapter<ViewHolder> implements OnBackupSyncListener {
 
 	public static final int HEADER_TYPE = 1;
-	public static final int ALERT_CARD_TYPE = 2;
-	public static final int TRASH_ITEM_TYPE = 3;
-	public static final int EMPTY_BANNER_TYPE = 4;
+	public static final int TRASH_ITEM_TYPE = 2;
+	public static final int EMPTY_BANNER_TYPE = 3;
 
 	private final List<Object> items = new ArrayList<>();
 	private final LayoutInflater themedInflater;
@@ -57,8 +55,6 @@ public class CloudTrashAdapter extends RecyclerView.Adapter<ViewHolder> implemen
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		switch (viewType) {
-			case ALERT_CARD_TYPE:
-				return new AlertViewHolder(themedInflater.inflate(R.layout.card_trash_alert, parent, false), controller);
 			case BACKUP_STATUS_TYPE:
 				return new StatusViewHolder(themedInflater.inflate(R.layout.backup_status_header, parent, false), nightMode);
 			case HEADER_TYPE:
