@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
@@ -44,22 +45,9 @@
 					android:background="?attr/list_background_color"
 					android:orientation="vertical">
 
-					<net.osmand.plus.widgets.OsmandTextFieldBoxes
-						android:id="@+id/text_box"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_margin="@dimen/dialog_content_bottom_margin"
-						osmand:labelText="@string/shared_string_name"
-						osmand:primaryColor="?attr/active_color_basic"
-						osmand:secondaryColor="?android:textColorSecondary">
-
-						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-							android:id="@+id/edit_text"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier" />
-
-					</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+					<include
+						android:id="@+id/custom_name_button"
+						layout="@layout/list_item_with_right_text_56dp" />
 
 					<include
 						android:id="@+id/action_button"
@@ -80,24 +68,6 @@
 			</LinearLayout>
 
 		</androidx.core.widget.NestedScrollView>
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/buttons_shadow"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:layout_gravity="bottom"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
-
-	</FrameLayout>
-
-	<FrameLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:background="?attr/list_background_color">
-
-		<include layout="@layout/bottom_buttons" />
 
 	</FrameLayout>
 
@@ -128,9 +98,9 @@
 				android:minHeight="@dimen/setting_list_item_large_height"
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/change_key_binding"
 				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp">
+				osmand:titleMarginStart="0dp"
+				tools:title="My location">
 
 			</androidx.appcompat.widget.Toolbar>
 

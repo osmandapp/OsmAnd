@@ -14,6 +14,7 @@ import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.keyevent.callbacks.EventType;
 import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -157,19 +158,18 @@ public class InputDeviceHelper {
 		}
 	}
 
-	public void updateKeyBinding(@NonNull String deviceId,
-	                             @NonNull String commandId,
-	                             int oldKeyCode, int newKeyCode) {
+	public void updateKeyBinding(@NonNull String deviceId, int originalKeyCode,
+	                             @NonNull KeyBinding newKeyBinding) {
 		InputDeviceProfile device = getDeviceById(deviceId);
 		if (device == null) {
 			return;
 		}
-		if (newKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			device.removeKeyBinding(oldKeyCode);
-		} else if (oldKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			device.addKeyBinding(newKeyCode, commandId);
+		if (newKeyBinding.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) {
+			device.removeKeyBinding(originalKeyCode);
+		} else if (originalKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
+			device.addKeyBinding(newKeyBinding);
 		} else {
-			device.updateKeyBinding(oldKeyCode, newKeyCode, commandId);
+			device.updateKeyBinding(originalKeyCode, newKeyBinding);
 		}
 		syncSettings();
 	}

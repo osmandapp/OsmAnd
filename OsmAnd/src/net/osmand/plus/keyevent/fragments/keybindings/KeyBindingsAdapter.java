@@ -99,7 +99,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setOnClickListener(isEditable()? v -> {
 				controller.askEditKeyAction(keyBinding);
 			}: null);
-			h.actionName.setText(keyBinding.getCommandTitle(app));
+			h.actionName.setText(keyBinding.getName(app));
 			h.keyName.setText(keyBinding.getKeySymbol());
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
