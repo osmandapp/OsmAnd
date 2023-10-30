@@ -296,6 +296,10 @@ public abstract class MapRenderingTypes {
 				rtype.propagateToNodes = MapRulType.PropagateToNodesType.CENTER;
 			}
 		}
+		String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
+		if (propagateToNodesPrefix != null) {
+			rtype.propagateToNodesPrefix = propagateToNodesPrefix;
+		}
 		
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
@@ -547,6 +551,7 @@ public abstract class MapRenderingTypes {
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
 		protected PropagateToNodesType propagateToNodes = PropagateToNodesType.NONE;
+		protected String propagateToNodesPrefix;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -738,6 +743,10 @@ public abstract class MapRenderingTypes {
 
 		public PropagateToNodesType getPropagateToNodesType() {
 			return propagateToNodes;
+		}
+
+		public String getPropagateToNodesPrefix() {
+			return propagateToNodesPrefix;
 		}
 
 		public enum PropagateToNodesType {
