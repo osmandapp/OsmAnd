@@ -613,14 +613,22 @@ public class MapUtils {
 	// 14 precision, gives 10x speedup, 0.02% error
 	public static int PRECISION_ZOOM = 14; // 16 doesn't fit into tile int
 	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
+	private static int missedQueries = 0, cachedQueries = 0, lastMissed = 0;
 	private static double getTileWidth(int x31, int y31) {
 		int tileY = (y31 >> (31 - PRECISION_ZOOM)); // width the same for all x
 		Double d = DIST_CACHE.get(tileY);
 		if (d == null) {
+			missedQueries++;
 			synchronized (MapUtils.class) {
 				d = getTileDistanceWidth(MapUtils.get31LatitudeY(y31), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
 				DIST_CACHE.put(tileY, d);
 			}
+		} else {
+			cachedQueries++;
+		}
+		if (lastMissed != missedQueries || cachedQueries % 10000 == 0) {
+//			System.err.printf("cached %d missed %d (size %d)\n", cachedQueries, missedQueries, DIST_CACHE.size());
+			lastMissed = missedQueries;
 		}
 		return d;
 	}
