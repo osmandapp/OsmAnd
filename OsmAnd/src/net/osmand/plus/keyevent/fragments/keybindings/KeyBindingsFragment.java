@@ -23,12 +23,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper.InputDeviceHelperListener;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperCallback {
 
 	public static final String TAG = KeyBindingsFragment.class.getSimpleName();
 
@@ -87,8 +88,10 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	}
 
 	@Override
-	public void onInputDeviceHelperEvent() {
-		updateViewContent();
+	public void processInputDeviceHelperEvent(@NonNull EventType event) {
+		if (event == EventType.UPDATE_KEYBINDING) {
+			updateViewContent();
+		}
 	}
 
 	private void updateViewContent() {
@@ -125,7 +128,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
