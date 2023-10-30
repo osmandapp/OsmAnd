@@ -5534,7 +5534,7 @@
     <string name="shared_string_is_deleted">%1$s este șters.</string>
     <string name="cloud_item_restored">%1$s este restaurat în Cloud.</string>
     <string name="external_input_device_title">Dispozitiv de intrare extern</string>
-    <string name="key_bindings">Legături de chei</string>
+    <string name="key_bindings">Asignări de taste</string>
     <string name="not_specified">Nespecificat</string>
     <string name="shared_string_delete_item">Ștergeți elementul</string>
     <string name="cloud_trash_clear_confirmation">Sunteți sigur că doriți să ștergeți definitiv toate elementele din Coșul de gunoi\? Această acțiune nu poate fi anulată.</string>
