@@ -5518,4 +5518,5 @@
     <string name="key_event_category_map_interactions">Harta interacțiunilor</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Deschideți WunderLINQ Datagrid</string>
     <string name="key_event_category_actions">Acțiuni</string>
+    <string name="key_event_action_move_left">Mutarea la stânga</string>
 </resources>
