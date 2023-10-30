@@ -1517,7 +1517,7 @@
     <string name="shared_string_is_open">Deschise acum</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM maper asistent</string>
     <string name="agps_info">Info A-GPS</string>
-    <string name="shared_string_manage">Administrează</string>
+    <string name="shared_string_manage">Administrare</string>
     <string name="shared_string_edit">Editează</string>
     <string name="shared_string_places">Locații</string>
     <string name="shared_string_search">Căutare</string>
@@ -1792,7 +1792,7 @@
     <string name="move_all_to_history">Mută tot la istoric</string>
     <string name="show_direction">Indicație distanță</string>
     <string name="keep_showing_on_map">Păstrează afișarea pe hartă</string>
-    <string name="exit_without_saving">Ieșiți fără să salvați\?</string>
+    <string name="exit_without_saving">Ieșiți fără a salva\?</string>
     <string name="save_as_route_point">Salvează ca puncte ale rutei</string>
     <string name="save_as_line">Salvează ca linie</string>
     <string name="route_point">Punct de rută</string>
@@ -2455,7 +2455,7 @@
     <string name="rendering_attr_piste_type_hike_name">excursie pe jos</string>
     <string name="rendering_attr_piste_type_connection_name">Conexiune</string>
     <string name="rendering_attr_piste_type_skitour_name">traseu pentru skiori</string>
-    <string name="rendering_attr_piste_type_downhill_name">Coborâș</string>
+    <string name="rendering_attr_piste_type_downhill_name">Coborâre</string>
     <string name="rendering_attr_piste_type_nordic_name">la Nord</string>
     <string name="routeInfo_piste_type_name">Tipul pistei</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Incepator</string>
@@ -4445,8 +4445,8 @@
     <string name="gps_filter_hdop_desc">Setați valoarea maximă acceptată pentru HDOP.
 \nPunctele cu o valoare mai mare vor fi ascunse.</string>
     <string name="distance_between_points">Distanță între puncte</string>
-    <string name="shared_string_uphill">Urcuș</string>
-    <string name="shared_string_downhill">Coborâș</string>
+    <string name="shared_string_uphill">Urcare</string>
+    <string name="shared_string_downhill">Coborâre</string>
     <string name="gps_filter_speed_altitude_desc">Doar punctele traseului ce corespund intervalului setat vor apărea pe grafic și pe hartă, iar restul vor fi ascunse.</string>
     <string name="gps_filter_smoothing_desc">Setați distanța minimă între puncte.
 \nPunctele care nu se află la cel puțin această distanță de ultimul punct vizibil vor fi ascunse.
@@ -4617,7 +4617,7 @@
     <string name="transport_hazmat_title">Transportul de materiale periculoase</string>
     <string name="routing_attr_allow_private_for_truck_name">Permite accesul privat (camion)</string>
     <string name="routing_attr_avoid_highway_name">Evită autostrăzi</string>
-    <string name="map_widget_trip_recording_downhill">Coborâș</string>
+    <string name="map_widget_trip_recording_downhill">Coborâre</string>
     <string name="routing_attr_hazmat_category_description">Categorie materiale periculoase / Ține cont de permisiunile de acces pentru materiale periculoase</string>
     <string name="compass_on_circles">Busolă pe cercuri</string>
     <string name="routing_attr_avoid_4wd_only_description">Evită drumuri potrivite doar vehiculelor 4WD</string>
@@ -4667,7 +4667,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Permite accesul camioanelor în zonele private.</string>
     <string name="rendering_attr_weatherPressureContours_name">Curbe izobare</string>
     <string name="routing_attr_avoid_highway_description">Evită autostrăzi</string>
-    <string name="map_widget_trip_recording_uphill">Urcuș</string>
+    <string name="map_widget_trip_recording_uphill">Urcare</string>
     <string name="bearing_secondary_desc">Puteți modifica formatul de date utilizat în: %1$s - %2$s - %3$s.</string>
     <string name="route_maneuvers_desc">Widgeturile de navigație sunt activate în timpul navigației pentru a afișa informații precum distanța, ora de sosire sau durata, următoarele viraje, direcția, numele străzii curente, informații despre benzi, viteza maximă, alerte de apropiere, puncte de interes, puncte intermediare.</string>
     <string name="lanes_widgets_desc">Arată configurația benzilor de circulație și le evidențiază pe cele ce trebuie urmate în timpul navigației.</string>
