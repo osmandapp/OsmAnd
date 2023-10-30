@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 
+import static java.lang.Math.min;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -60,6 +62,7 @@ import java.util.List;
 public class StreetNameWidget extends MapWidget {
 
 	private static final int MAX_MARKER_DISTANCE = 50;
+	public static final int MAX_SHIELDS_QUANTITY = 3;
 
 	private final WaypointHelper waypointHelper;
 	private LocationPointWrapper lastPoint;
@@ -218,7 +221,9 @@ public class StreetNameWidget extends MapWidget {
 		if (!Algorithms.isEmpty(shields)) {
 			boolean isShieldSet = false;
 			shieldImagesContainer.removeAllViews();
-			for (RoadShield shield : shields) {
+			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
+			for (int i = 0; i < maxShields; i++) {
+				RoadShield shield = shields.get(i);
 				isShieldSet |= setShieldImage(shield);
 			}
 			return isShieldSet;
