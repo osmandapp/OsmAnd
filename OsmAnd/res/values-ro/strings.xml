@@ -1946,7 +1946,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">Apă</string>
     <string name="rendering_attr_hideWaterPolygons_name">Ascunde apa</string>
     <string name="search_map_hint">Oraș sau regiune</string>
-    <string name="upload_poi">Încărcați POI</string>
+    <string name="upload_poi">Încărcă punct de interes</string>
     <string name="route_calculation">Calcularea rutei</string>
     <string name="gpx_add_track">Adaugă mai multe…</string>
     <string name="shared_string_notifications">Notificări</string>
@@ -4476,7 +4476,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconuri la niveluri mici de zoom</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Afișare schematică a iconurilor la niveluri reduse de zoom</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Tuneluri navigabile</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Nu ascundeți tunelurile de căi navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Nu ascunde tunelurile căilor navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichete Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
