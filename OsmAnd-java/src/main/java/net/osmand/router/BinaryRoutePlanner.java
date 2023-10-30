@@ -426,7 +426,8 @@ public class BinaryRoutePlanner {
 		if (speed > ctx.getRouter().getMaxSpeed()) {
 			speed = ctx.getRouter().getMaxSpeed();
 		}
-		float distOnRoadToPass = (float) measuredDist(prevX, prevY, x, y); // precise distance method is required
+//		float distOnRoadToPass = (float) measuredDist(prevX, prevY, x, y); // precise distance method is required FIXME
+		float distOnRoadToPass = (float) squareRootDist(prevX, prevY, x, y); // precise distance method is required FIXME
 		return distOnRoadToPass / speed;
 	}
 
