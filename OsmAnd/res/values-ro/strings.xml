@@ -5528,4 +5528,13 @@
     <string name="key_event_action_open_search_view">Deschide fereastra Căutare</string>
     <string name="key_event_action_open_navigation_view">Deschide fereastra Navigație</string>
     <string name="key_event_action_move_to_my_location">Mută la \"Locația mea\"</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" va fi șters definitiv. Sunteți sigur\?
+\n
+\nAceastă acțiune nu poate fi anulată.</string>
+    <string name="shared_string_is_deleted">%1$s este șters.</string>
+    <string name="cloud_item_restored">%1$s este restaurat în Cloud.</string>
+    <string name="external_input_device_title">Dispozitiv de intrare extern</string>
+    <string name="key_bindings">Legături de chei</string>
+    <string name="not_specified">Nespecificat</string>
+    <string name="shared_string_delete_item">Ștergeți elementul</string>
 </resources>
