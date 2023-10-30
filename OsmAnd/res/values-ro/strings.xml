@@ -5503,7 +5503,7 @@
     <string name="key_event_action_zoom_in">Mărire</string>
     <string name="show_toast_about_key_pressed">Afișează toastul despre tasta apăsată</string>
     <string name="shared_string_rows">Rânduri</string>
-    <string name="press_button_to_link_with_action">Apăsați butonul de pe dispozitiv pentru a-l lega de acțiunea aleasă.</string>
+    <string name="press_button_to_link_with_action">Apăsați butonul de pe dispozitiv pentru a-l lega cu acțiunea: %1$s</string>
     <string name="deletion_error">Eroare de ștergere</string>
     <string name="key_event_action_move_right">Mutați-vă la dreapta</string>
     <string name="shared_string_button">Buton</string>
@@ -5519,4 +5519,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Deschideți WunderLINQ Datagrid</string>
     <string name="key_event_category_actions">Acțiuni</string>
     <string name="key_event_action_move_left">Mutarea la stânga</string>
+    <string name="key_event_action_move_up">Mutați-vă în sus</string>
+    <string name="download_to_device">Descărcați pe dispozitiv</string>
+    <string name="key_event_action_move_down">Mutarea în jos</string>
 </resources>
