@@ -8,25 +8,35 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.WIDTH
 import net.osmand.util.Algorithms
 
 class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(R.string.shared_string_width, WIDTH, filterChangedListener) {
+	BaseTrackFilter(R.string.shared_string_width, WIDTH, filterChangedListener), TracksCollectionFilter {
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(selectedWidths)
 	}
 
 	@Expose
-	val selectedWidths = ArrayList<String>()
-
+	var selectedWidths = ArrayList<String>()
+		private set
 	var allWidth: MutableList<String> = arrayListOf()
 		private set
 	var allWidthCollection: HashMap<String, Int> = hashMapOf()
 		private set
+
+	fun setFullWidthCollection(collection: HashMap<String, Int>) {
+		allWidth = ArrayList(collection.keys)
+		allWidthCollection = collection
+	}
 
 	fun setFullWidthCollection(collection: List<Pair<String, Int>>) {
 		for (pair in collection) {
 			allWidth.add(pair.first)
 			allWidthCollection[pair.first] = pair.second
 		}
+	}
+
+	fun setSelectedWidths(selectedItems: List<String>) {
+		selectedWidths = ArrayList(selectedItems)
+		filterChangedListener?.onFilterChanged()
 	}
 
 	fun setWidthSelected(width: String, selected: Boolean) {
@@ -86,4 +96,9 @@ class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
 	fun getTracksCountForWidth (widthName: String): Int {
 		return allWidthCollection[widthName] ?: 0
 	}
+
+	override fun getSelectedItems(): List<String> {
+		return ArrayList(selectedWidths)
+	}
+
 }

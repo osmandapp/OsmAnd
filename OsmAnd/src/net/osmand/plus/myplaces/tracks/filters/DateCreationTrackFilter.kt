@@ -36,8 +36,12 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 	}
 
 	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
-		val day1String = getDateFormat().format(day1)
-		val day2String = getDateFormat().format(day2)
+		val day1String: String
+		val day2String: String
+		synchronized(DATE_FORMAT) {
+			day1String = getDateFormat().format(day1)
+			day2String = getDateFormat().format(day2)
+		}
 		return day1String.equals(day2String)
 	}
 

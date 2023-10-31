@@ -26,7 +26,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TracksSearchFilter extends Filter implements FilterChangedListener {
 	public static final Log LOG = PlatformUtil.getLog(TracksSearchFilter.class);
@@ -36,6 +38,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	private List<BaseTrackFilter> currentFilters = new ArrayList<>();
 	private List<FilterChangedListener> filterChangedListeners = new ArrayList<>();
 	private List<TrackItem> filteredTrackItems;
+	private Map<FilterType, List<TrackItem>> filterSpecificSearchResults = new HashMap<>();
 	@Nullable
 	private TrackFolder currentFolder;
 
@@ -95,6 +98,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	protected FilterResults performFiltering(CharSequence constraint) {
 		LOG.debug("perform tracks filtering");
 		FilterResults results = new FilterResults();
+		filterSpecificSearchResults = new HashMap<>();
 		int filterCount = getAppliedFiltersCount();
 		if (filterCount == 0) {
 			results.values = trackItems;
@@ -103,23 +107,39 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			List<TrackItem> res = new ArrayList<>();
 			for (BaseTrackFilter filter : currentFilters) {
 				filter.initFilter();
+				filterSpecificSearchResults.put(filter.getFilterType(), new ArrayList<>());
 			}
 			for (TrackItem item : trackItems) {
-				boolean needAddTrack = true;
+				ArrayList<BaseTrackFilter> notAcceptedFilters = new ArrayList<>();
 				for (BaseTrackFilter filter : currentFilters) {
 					if (filter.isEnabled() && !filter.isTrackAccepted(item)) {
-						needAddTrack = false;
-						break;
+						notAcceptedFilters.add(filter);
 					}
 				}
-				if (needAddTrack) {
+				for (BaseTrackFilter filter : currentFilters) {
+					ArrayList<BaseTrackFilter> tmpNotAcceptedFilters = new ArrayList<>(notAcceptedFilters);
+					tmpNotAcceptedFilters.remove(filter);
+					if (Algorithms.isEmpty(tmpNotAcceptedFilters)) {
+						filterSpecificSearchResults.get(filter.getFilterType()).add(item);
+					}
+				}
+				if (Algorithms.isEmpty(notAcceptedFilters)) {
 					res.add(item);
 				}
 			}
 			results.values = res;
 			results.count = res.size();
-			LOG.debug("found " + results.count + " tracks");
 		}
+		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
+		if (folderFilter != null) {
+			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
+				folderFilter.setFullFoldersCollection(app.getGpxDbHelper().getTrackFolders());
+			} else {
+				List<TrackItem> ignoreFoldersItems = filterSpecificSearchResults.get(FilterType.FOLDER);
+				folderFilter.updateFullCollection(ignoreFoldersItems);
+			}
+		}
+		LOG.debug("found " + results.count + " tracks");
 		return results;
 	}
 
@@ -242,6 +262,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	public void setCurrentFolder(TrackFolder currentFolder) {
 		this.currentFolder = currentFolder;
+	}
+
+	public Map<FilterType, List<TrackItem>> getFilterSpecificSearchResults() {
+		return new HashMap<>(filterSpecificSearchResults);
 	}
 }
 

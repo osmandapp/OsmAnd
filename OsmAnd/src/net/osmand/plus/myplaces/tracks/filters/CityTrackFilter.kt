@@ -8,25 +8,35 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.CITY
 import net.osmand.util.Algorithms
 
 class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(R.string.nearest_cities, CITY, filterChangedListener) {
+	BaseTrackFilter(R.string.nearest_cities, CITY, filterChangedListener), TracksCollectionFilter {
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(selectedCities)
 	}
 
 	@Expose
-	val selectedCities = ArrayList<String>()
-
+	var selectedCities = ArrayList<String>()
+		private set
 	var allCities: MutableList<String> = arrayListOf()
 		private set
 	var allCitiesCollection: HashMap<String, Int> = hashMapOf()
 		private set
 
-	fun setFullCitiesList (collection: List<Pair<String, Int>>) {
+	fun setFullCitiesCollection(collection: HashMap<String, Int>) {
+		allCities = ArrayList(collection.keys)
+		allCitiesCollection = collection
+	}
+
+	fun setFullCitiesList(collection: List<Pair<String, Int>>) {
 		for (pair in collection) {
 			allCities.add(pair.first)
 			allCitiesCollection[pair.first] = pair.second
 		}
+	}
+
+	fun setSelectedCities(selectedItems: List<String>) {
+		selectedCities = ArrayList(selectedItems)
+		filterChangedListener?.onFilterChanged()
 	}
 
 	fun setCitySelected(city: String, selected: Boolean) {
@@ -63,6 +73,10 @@ class CityTrackFilter(filterChangedListener: FilterChangedListener?) :
 			}
 			filterChangedListener?.onFilterChanged()
 		}
+	}
+
+	override fun getSelectedItems(): List<String> {
+		return ArrayList(selectedCities)
 	}
 
 	override fun equals(other: Any?): Boolean {

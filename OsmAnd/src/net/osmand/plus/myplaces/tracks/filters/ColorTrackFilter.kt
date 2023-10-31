@@ -9,19 +9,26 @@ import net.osmand.plus.myplaces.tracks.filters.FilterType.COLOR
 import net.osmand.util.Algorithms
 
 class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(R.string.shared_string_color, COLOR, filterChangedListener) {
+	BaseTrackFilter(R.string.shared_string_color, COLOR, filterChangedListener),
+	TracksCollectionFilter {
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(selectedColors)
 	}
 
 	@Expose
-	val selectedColors = ArrayList<String>()
+	var selectedColors = ArrayList<String>()
+		private set
 
 	var allColors: MutableList<String> = arrayListOf()
 		private set
 	var allColorsCollection: HashMap<String, Int> = hashMapOf()
 		private set
+
+	fun setFullColorsCollection(collection: HashMap<String, Int>) {
+		allColors = ArrayList(collection.keys)
+		allColorsCollection = collection
+	}
 
 	fun setFullColorsCollection(collection: List<Pair<String, Int>>) {
 		for (pair in collection) {
@@ -30,6 +37,10 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 		}
 	}
 
+	fun setSelectedColor(selectedItems: List<String>) {
+		selectedColors = ArrayList(selectedItems)
+		filterChangedListener?.onFilterChanged()
+	}
 
 	fun setColorSelected(color: String, selected: Boolean) {
 		if (selected) {
@@ -67,6 +78,10 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 			}
 			filterChangedListener?.onFilterChanged()
 		}
+	}
+
+	override fun getSelectedItems(): List<String> {
+		return ArrayList(selectedColors)
 	}
 
 	override fun equals(other: Any?): Boolean {

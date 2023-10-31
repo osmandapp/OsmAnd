@@ -29,6 +29,7 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
+import net.osmand.plus.myplaces.tracks.filters.FilterType
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
@@ -245,11 +246,13 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun setupList(view: View) {
-		adapter = FiltersAdapter(requireActivity(), filter, nightMode)
-		val recyclerView = view.findViewById<RecyclerView>(R.id.filters_list)
-		recyclerView.layoutManager = LinearLayoutManager(app)
-		recyclerView.itemAnimator = null
-		recyclerView.adapter = adapter
+		fragmentManager?.let {
+			adapter = FiltersAdapter(requireActivity(), it, filter, nightMode)
+			val recyclerView = view.findViewById<RecyclerView>(R.id.filters_list)
+			recyclerView.layoutManager = LinearLayoutManager(app)
+			recyclerView.itemAnimator = null
+			recyclerView.adapter = adapter
+		}
 	}
 
 	override fun onFilterChanged() {
@@ -318,6 +321,9 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
 			updateProgressVisibility(false)
 			filter.filteredTrackItems = trackItems
+			adapter?.updateFilterItem(FilterType.FOLDER)
+			adapter?.updateFilterItem(FilterType.COLOR)
+			adapter?.updateFilterItem(FilterType.CITY)
 			updateUI()
 			return@CallbackWithObject true
 		})
