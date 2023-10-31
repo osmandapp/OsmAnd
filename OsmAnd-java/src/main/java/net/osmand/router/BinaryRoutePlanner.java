@@ -38,7 +38,7 @@ public class BinaryRoutePlanner {
 	
 	public static boolean DEBUG_PRECISE_DIST_MEASUREMENT = false;
 	public static boolean DEBUG_BREAK_EACH_SEGMENT = false;
-
+	public static boolean DEBUG_ALWAYS_AVOID_VISITED = false;
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
 		if (DEBUG_PRECISE_DIST_MEASUREMENT) {
@@ -879,7 +879,11 @@ public class BinaryRoutePlanner {
 						
 						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
 						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
-						toAdd = true;
+
+						if (DEBUG_ALWAYS_AVOID_VISITED == false) {
+							toAdd = true;
+						}
+
 						if (ctx.config.heuristicCoefficient <= 1) {
 							if (RoutingContext.PRINT_ROUTING_ALERTS) {
 								System.err.println("! ALERT new faster path to a visited segment: "
