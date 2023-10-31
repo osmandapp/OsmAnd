@@ -1,9 +1,12 @@
 package net.osmand.plus.keyevent.fragments;
 
+import static android.graphics.Typeface.BOLD;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
+import static net.osmand.plus.utils.UiUtilities.createSpannableString;
 
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +34,7 @@ import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
-import net.osmand.plus.keyevent.interfaces.OnKeyCodeSelected;
+import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -86,6 +89,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		View view = themedInflater.inflate(R.layout.fragment_select_key_code, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
+		setupDescription(view);
 		setupApplyButton(view);
 		return view;
 	}
@@ -109,6 +113,16 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		});
 	}
 
+	private void setupDescription(@NonNull View view) {
+		KeyEventCommand command = inputDevice.findCommand(initialKeyCode);
+		if (command != null) {
+			String action = command.toHumanString(app);
+			String message = getString(R.string.press_button_to_link_with_action, action);
+			TextView description = view.findViewById(R.id.description);
+			description.setText(createSpannableString(message, BOLD, action));
+		}
+	}
+
 	private void startPulseAnimation(@NonNull View view) {
 		AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
 		animation.setDuration(PULSE_DELAY_MS);
@@ -121,8 +135,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
-			if (target instanceof OnKeyCodeSelected) {
-				((OnKeyCodeSelected) target).onKeyCodeSelected(keyCode);
+			if (target instanceof OnKeyCodeSelectedCallback) {
+				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(keyCode);
 			}
 			dismiss();
 		});
@@ -171,7 +185,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 			String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
 			String actionName = commandDuplicate.toHumanString(app);
 			String message = getString(R.string.key_is_already_assigned_error, keyLabel, actionName);
-			errorMessage.setText(message);
+			errorMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
 		} else {
 			AndroidUiHelper.updateVisibility(warning, false);
 		}
@@ -269,7 +283,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

@@ -36,6 +36,7 @@ import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
 
@@ -108,10 +109,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	private fun updateStatusBarColor(window: Window?) {
 		window?.let {
-			val statusBarColor =
-				if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
-			ContextCompat.getColor(requireContext(), statusBarColor)
-			window.statusBarColor = ContextCompat.getColor(requireContext(), statusBarColor)
+			window.statusBarColor = getStatusBarSecondaryColor(requireContext(), nightMode)
 		}
 	}
 

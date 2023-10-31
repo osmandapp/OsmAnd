@@ -55,20 +55,18 @@ public abstract class InputDeviceProfile {
 		syncKeyBindingsCache();
 	}
 
-	public void addKeyBinding(int keyCode, @NonNull String commandId) {
-		KeyBinding keyBinding = new KeyBinding(keyCode, commandId);
+	public void addKeyBinding(@NonNull KeyBinding keyBinding) {
 		keyBindings = Algorithms.addToList(keyBindings, keyBinding);
 		syncKeyBindingsCache();
 	}
 
-	public void updateKeyBinding(int oldKeyCode, int newKeyCode, @NonNull String commandId) {
-		KeyBinding oldKeyBinding = keyBindingsCache.remove(oldKeyCode);
-		KeyBinding newKeyBinding = new KeyBinding(newKeyCode, commandId);
+	public void updateKeyBinding(int originalKeyCode, @NonNull KeyBinding newKeyBinding) {
+		KeyBinding oldKeyBinding = keyBindingsCache.remove(originalKeyCode);
 		if (oldKeyBinding != null) {
 			int index = keyBindings.indexOf(oldKeyBinding);
 			keyBindings = Algorithms.setInList(keyBindings, index, newKeyBinding);
 		} else {
-			addKeyBinding(newKeyCode, commandId);
+			addKeyBinding(newKeyBinding);
 		}
 		syncKeyBindingsCache();
 	}

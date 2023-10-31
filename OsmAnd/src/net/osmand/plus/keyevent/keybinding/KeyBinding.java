@@ -15,16 +15,34 @@ public class KeyBinding {
 
 	private final int keyCode;
 	private final String commandId;
+	private final String customName;
 	private KeyEventCommand cachedCommand;
 
-	public KeyBinding(int keyCode, @NonNull String commandId) {
+	public KeyBinding(int keyCode, @NonNull KeyBinding keyBinding) {
+		this(keyCode, keyBinding.commandId, keyBinding.customName);
+	}
+
+	public KeyBinding(@NonNull String customName, @NonNull KeyBinding keyBinding) {
+		this(keyBinding.keyCode, keyBinding.commandId, customName);
+	}
+
+	public KeyBinding(int keyCode, @NonNull String commandId, @Nullable String customName) {
 		this.keyCode = keyCode;
 		this.commandId = commandId;
+		this.customName = customName;
 	}
 
 	public KeyBinding(@NonNull JSONObject jsonObject) throws JSONException {
 		this.keyCode = jsonObject.getInt("keycode");
 		this.commandId = jsonObject.getString("commandId");
+		this.customName = jsonObject.has("customName")
+				? jsonObject.getString("customName")
+				: null;
+	}
+
+	@Nullable
+	public String getName(@NonNull OsmandApplication context) {
+		return customName != null ? customName : getCommandTitle(context);
 	}
 
 	@Nullable
@@ -55,11 +73,23 @@ public class KeyBinding {
 		return keyCode;
 	}
 
+	@Nullable
+	public String toJsonString() {
+		try {
+			return toJson().toString();
+		} catch (JSONException e) {
+			return null;
+		}
+	}
+
 	@NonNull
 	public JSONObject toJson() throws JSONException {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("keycode", keyCode);
 		jsonObject.put("commandId", commandId);
+		if (customName != null) {
+			jsonObject.put("customName", customName);
+		}
 		return jsonObject;
 	}
 }

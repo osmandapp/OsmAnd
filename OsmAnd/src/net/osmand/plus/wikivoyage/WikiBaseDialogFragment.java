@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage;
 
+import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
+
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -64,7 +66,7 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
+		return getStatusBarSecondaryColorId(nightMode);
 	}
 
 	@ColorInt

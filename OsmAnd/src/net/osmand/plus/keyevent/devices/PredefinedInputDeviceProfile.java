@@ -27,7 +27,7 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void bindCommand(int keyCode, @NonNull String commandId) {
-		KeyBinding keyBinding = new KeyBinding(keyCode, commandId);
+		KeyBinding keyBinding = new KeyBinding(keyCode, commandId, null);
 		keyBindings.add(keyBinding);
 		keyBindingsCache.put(keyCode, keyBinding);
 	}
