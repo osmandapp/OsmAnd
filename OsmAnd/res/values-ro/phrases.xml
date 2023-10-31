@@ -4126,7 +4126,7 @@
     <string name="poi_fumarole">Fumerolă</string>
     <string name="poi_agrarian_feed">Hrană</string>
     <string name="poi_lgbtq_only">Doar LGBTQ</string>
-    <string name="poi_agrarian_yes">Da;Argarian</string>
+    <string name="poi_agrarian_yes">Da;Agrarian</string>
     <string name="poi_massage_chiropractic">Chiropractică</string>
     <string name="poi_beauty_salon_tanning">Bronzare</string>
     <string name="poi_beauty_salon_cosmetics">Cosmetice</string>
@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">Boli infecțioase</string>
     <string name="poi_socket_typee_voltage">Mufă: Type E: tensiune</string>
     <string name="poi_socket_typee_output">Mufă: Type E: ieșire</string>
+    <string name="poi_dressing_room">Vestiar</string>
+    <string name="poi_emergency_bay">Compartimentul de urgență</string>
 </resources>
