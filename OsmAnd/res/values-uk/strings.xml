@@ -5495,7 +5495,7 @@
     <string name="no_config_smart_folder_description">Розумні теки дозволяють групувати треки за застосованими фільтрами</string>
     <string name="loading_tracks">Перезавантаження треків</string>
     <string name="searching_matching_tracks">Шукати всі відповідні треки</string>
-    <string name="cloud_trash_clear_confirmation">Ви дійсно хочете видалити назавжди усі елементи у Смітнику\? Цю дію скасувати буде неможливо.</string>
+    <string name="cloud_trash_clear_confirmation">Ви дійсно хочете остаточно видалити всі елементи зі Смітника\? Ця дія незворотна.</string>
     <string name="key_event_action_zoom_in">Збільшити</string>
     <string name="change_button">Змінити кнопку</string>
     <string name="enable_to_use_external_input_device">Увімкнути зовнішній пристрій введення з OsmAnd</string>
@@ -5514,7 +5514,7 @@
     <string name="shared_string_button">Клавіша</string>
     <string name="key_event_action_next_app_profile">Наступний профіль</string>
     <string name="folder">Тека</string>
-    <string name="delete_all_items">Видалити усі елементи</string>
+    <string name="delete_all_items">Видалити всі елементи</string>
     <string name="change_key_binding">Змінити прив\'язку клавіш</string>
     <string name="key_event_action_take_media_note">Створити медіа-нотатку</string>
     <string name="remove_type_q">Ви дійсно хочете вилучити тип \"%1$s\"\?</string>
@@ -5531,7 +5531,7 @@
     <string name="key_event_action_open_search_view">Відкрити пошук</string>
     <string name="delete_trash_item_confirmation_desc">\"%1$s\" буде видалено назавжди. Ви впевнені\?
 \n
-\nЦю дію скасувати буде неможливо.</string>
+\nЦю дію неможливо скасувати.</string>
     <string name="key_event_action_zoom_out">Зменшити</string>
     <string name="key_event_action_toggle_drower">Показати/сховати бічне меню</string>
     <string name="key_is_already_assigned_error">Клавіша \"%1$s\" вже призначена до такої дії: \"%2$s\"</string>
