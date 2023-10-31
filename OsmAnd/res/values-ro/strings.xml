@@ -5511,7 +5511,7 @@
     <string name="shared_string_button">Buton</string>
     <string name="change_key_binding">Schimbă asocierea tastelor</string>
     <string name="key_event_action_take_media_note">Înregistrează notă media</string>
-    <string name="key_event_action_activity_back_pressed">Activitate înapoi apăsat</string>
+    <string name="key_event_action_activity_back_pressed">Apăsați înapoi la activitate</string>
     <string name="key_event_action_emit_navigation_hint">Emite indicii de navigare</string>
     <string name="shared_string_action">Acțiune</string>
     <string name="key_event_action_zoom_out">Micșorează</string>
@@ -5552,4 +5552,8 @@
     <string name="all_folders">Toate folderele</string>
     <string name="shared_string_show_less">Arată mai puțin</string>
     <string name="folder">Folder</string>
+    <string name="change_button">Comută butonul</string>
+    <string name="enable_to_use_external_input_device">Activați utilizarea dispozitivului de intrare extern cu OsmAnd</string>
+    <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"\?</string>
+    <string name="add_new_type">Adăugați un nou tip</string>
 </resources>
