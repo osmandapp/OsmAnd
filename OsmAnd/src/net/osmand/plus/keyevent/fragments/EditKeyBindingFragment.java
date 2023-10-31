@@ -148,8 +148,14 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 			if (extra instanceof EditText) {
 				EditText editText = (EditText) extra;
 				String newName = editText.getText().toString();
+				String originalName = keyBinding.getName(app);
+				if (Objects.equals(originalName, newName)) {
+					return;
+				}
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
+				} else if (deviceHelper.hasKeybindingNameDuplicate(deviceId, newName)) {
+					app.showToastMessage(R.string.message_name_is_already_exists);
 				} else {
 					callback.processResult(newName.trim());
 				}

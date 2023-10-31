@@ -158,6 +158,20 @@ public class InputDeviceHelper {
 		}
 	}
 
+	public boolean hasKeybindingNameDuplicate(@NonNull String deviceId, @NonNull String newName) {
+		InputDeviceProfile device = getDeviceById(deviceId);
+		if (device == null) {
+			return false;
+		}
+		List<KeyBinding> keyBindings = device.getKeyBindings();
+		for (KeyBinding keyBinding : keyBindings) {
+			if (Objects.equals(keyBinding.getName(app), newName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void updateKeyBinding(@NonNull String deviceId, int originalKeyCode,
 	                             @NonNull KeyBinding newKeyBinding) {
 		InputDeviceProfile device = getDeviceById(deviceId);
