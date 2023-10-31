@@ -4088,7 +4088,7 @@
     <string name="recalc_angle_dialog_title">Unghiul minim dintre locație și rută</string>
     <string name="recalc_angle_dialog_descr">Se va afișa un segment drept între locație și ruta calculată până la recalcularea rutei</string>
     <string name="enter_the_file_name">Introduceți numele fișierului.</string>
-    <string name="transport_nearby_routes">În cadrul</string>
+    <string name="transport_nearby_routes">În raza de</string>
     <string name="transport_nearby_routes_within">Rutele apropiate din cadrul</string>
     <string name="optional_point_name">Denumirea opțională a punctului</string>
     <string name="distance_nearest">Prima cea mai apropiată</string>
@@ -5555,5 +5555,5 @@
     <string name="change_button">Comută butonul</string>
     <string name="enable_to_use_external_input_device">Activați utilizarea dispozitivului de intrare extern cu OsmAnd</string>
     <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"\?</string>
-    <string name="add_new_type">Adăugați un nou tip</string>
+    <string name="add_new_type">Adăugă tip nou</string>
 </resources>
