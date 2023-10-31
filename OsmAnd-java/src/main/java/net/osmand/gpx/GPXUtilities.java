@@ -1312,10 +1312,11 @@ public class GPXUtilities {
 		if (gpxFile != null) {
 			if (gpxFile.metadata != null && gpxFile.metadata.time > 0) {
 				time = gpxFile.metadata.time;
-			} else if (gpxFile.getLastPoint() != null && gpxFile.getLastPoint().time > 0) {
-				time = gpxFile.getLastPoint().time;
-			} else if (gpxFile.modifiedTime > 0) {
-				time = gpxFile.modifiedTime;
+			} else {
+				time = gpxFile.getLastPointTime();
+				if (time == 0) {
+					time = gpxFile.modifiedTime;
+				}
 			}
 		}
 		if (time == 0) {
@@ -1381,6 +1382,7 @@ public class GPXUtilities {
 
 	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
 		GPXFile gpxFile = new GPXFile(null);
+		gpxFile.metadata.time = 0;
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(stream));

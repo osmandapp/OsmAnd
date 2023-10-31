@@ -534,6 +534,22 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return tpoints;
 	}
 
+	public long getLastPointTime() {
+		for (int trackIndex = tracks.size() - 1; trackIndex >= 0; trackIndex--) {
+			GPXUtilities.Track track = tracks.get(trackIndex);
+			for (int segmentsIndex = track.segments.size() - 1; segmentsIndex >= 0; segmentsIndex--) {
+				GPXUtilities.TrkSegment segment = track.segments.get(segmentsIndex);
+				for (int pointsIndex = segment.points.size() - 1; pointsIndex >= 0; pointsIndex--) {
+					GPXUtilities.WptPt point = segment.points.get(pointsIndex);
+					if (point.time > 0) {
+						return point.time;
+					}
+				}
+			}
+		}
+		return 0;
+	}
+
 	public GPXUtilities.WptPt getLastPoint() {
 		if (tracks.size() > 0) {
 			GPXUtilities.Track tk = tracks.get(tracks.size() - 1);
