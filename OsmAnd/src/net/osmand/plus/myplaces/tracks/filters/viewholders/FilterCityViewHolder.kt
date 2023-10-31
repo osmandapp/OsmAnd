@@ -187,7 +187,7 @@ class FilterCityViewHolder(var app: OsmandApplication, itemView: View, nightMode
 		override fun getItemViewType(position: Int): Int {
 			return if (isExpanded) {
 				ITEM_TYPE
-			} else if (position == itemCount - 1 && items.size != MIN_VISIBLE_COUNT + additionalItems.size) {
+			} else if (position == itemCount - 1 && items.size > MIN_VISIBLE_COUNT + additionalItems.size) {
 				SHOW_ALL_ITEM_TYPE
 			} else {
 				ITEM_TYPE
