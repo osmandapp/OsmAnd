@@ -4634,5 +4634,5 @@
     <string name="poi_socket_typee_voltage">Mufă: Type E: tensiune</string>
     <string name="poi_socket_typee_output">Mufă: Type E: ieșire</string>
     <string name="poi_dressing_room">Vestiar</string>
-    <string name="poi_emergency_bay">Compartimentul de urgență</string>
+    <string name="poi_emergency_bay">Refugiu de urgență</string>
 </resources>
