@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
@@ -232,8 +233,8 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 	}
 
 	private void updateToolbarTitle(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setTitle(keyBinding.getName(app));
+		CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
+		collapsingToolbarLayout.setTitle(keyBinding.getName(app));
 	}
 
 	@Override
