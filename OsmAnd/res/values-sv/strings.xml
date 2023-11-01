@@ -5276,4 +5276,10 @@
     <string name="plugin_disabled_descr">Denna insticksmodul är en separat app, deaktivering tar inte bort den.
 \n
 \nDen kan avinstalleras i Androids inställningar under \'Appar\'.</string>
+    <string name="keep_active">Behåll på</string>
+    <string name="route_line_use_gradient_coloring">Ruttlinjen färgläggs efter lutningsgraden.</string>
+    <string name="delete_all_actions_message_q">Radera %d snabbåtgärder helt\? Detta kan inte ångras.</string>
+    <string name="default_screen_timeout">Förvald tid för skärmavstängning</string>
+    <string name="screen_timeout_descr">Om \"%1$s\" är på, kommer aktivitetstiden vara beroende av den.</string>
+    <string name="use_system_screen_timeout">Använd enhetens skärminställning</string>
 </resources>

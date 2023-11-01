@@ -5522,7 +5522,7 @@
     <string name="key_event_action_previous_app_profile">Előző alkalmazásprofil</string>
     <string name="show_toast_about_key_pressed">A lenyomott billentyű kijelzése</string>
     <string name="key_event_action_move_left">Mozgás balra</string>
-    <string name="press_button_to_link_with_action">Nyomja meg a gombot a készüléken, hogy összekapcsolja azt a kiválasztott művelettel.</string>
+    <string name="press_button_to_link_with_action">Nyomja meg a gombot a készülékén, hogy társítsa ehhez művelethez: %1$s</string>
     <string name="key_event_action_move_right">Mozgás jobbra</string>
     <string name="shared_string_button">Gomb</string>
     <string name="key_event_action_next_app_profile">Következő alkalmazásprofil</string>
@@ -5547,4 +5547,6 @@
     <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ Datagrid megnyitása</string>
     <string name="key_event_category_actions">Műveletek</string>
     <string name="deletion_error">Hiba törléskor</string>
+    <string name="change_button">Gomb módosítása</string>
+    <string name="download_to_device">Letöltés az eszközre</string>
 </resources>
