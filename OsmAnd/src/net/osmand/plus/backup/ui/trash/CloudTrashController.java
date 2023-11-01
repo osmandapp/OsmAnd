@@ -17,11 +17,14 @@ import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
+import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
+import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -130,12 +133,23 @@ public class CloudTrashController {
 	}
 
 	public void downloadItem(@NonNull TrashItem item) {
-		if (item.getSettingsItem() == null) {
+		SettingsItem settingsItem = item.getSettingsItem();
+		if (settingsItem == null) {
 			log.error("Failed to download item: " + item.oldFile.getName() + ", SettingsItem is null");
 			return;
 		}
-		RemoteFilesType type = item.isLocalDeletion() ? UNIQUE : OLD;
-		settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, type, SYNC_OPERATION_DOWNLOAD);
+		RemoteFilesType filesType = item.isLocalDeletion() ? UNIQUE : OLD;
+		LocalFile localFile = backupHelper.getBackup().getLocalFiles().get(item.oldFile.getTypeNamePath());
+		if (localFile != null) {
+			FragmentManager manager = fragment.getFragmentManager();
+			if (manager != null) {
+				FileExistBottomSheet.showInstance(manager, localFile.getFileName(), overwrite ->
+						settingsHelper.syncSettingsItems(item.oldFile.getName(), null,
+								item.oldFile, filesType, SYNC_OPERATION_DOWNLOAD, overwrite));
+			}
+		} else {
+			settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, filesType, SYNC_OPERATION_DOWNLOAD, true);
+		}
 	}
 
 	public void restoreItem(@NonNull TrashItem item) {

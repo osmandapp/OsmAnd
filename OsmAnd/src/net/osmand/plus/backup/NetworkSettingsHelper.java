@@ -192,9 +192,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	                           @NonNull List<SettingsItem> items,
 	                           @NonNull RemoteFilesType filesType,
 	                           boolean forceReadData,
+	                           boolean shouldReplace,
 	                           @Nullable ImportListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
-			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType, listener, forceReadData);
+			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType, listener, forceReadData, shouldReplace);
 			importAsyncTasks.put(key, importTask);
 			importTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -230,7 +231,8 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	                              @Nullable LocalFile localFile,
 	                              @Nullable RemoteFile remoteFile,
 	                              @NonNull RemoteFilesType filesType,
-	                              @NonNull SyncOperationType operation) {
+	                              @NonNull SyncOperationType operation,
+	                              boolean shouldReplace) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			registerSyncBackupTask(key, syncTask);
@@ -249,7 +251,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
 					if (remoteFile != null) {
-						syncTask.downloadRemoteVersion(remoteFile.item, filesType);
+						syncTask.downloadRemoteVersion(remoteFile.item, filesType, shouldReplace);
 					}
 					break;
 			}

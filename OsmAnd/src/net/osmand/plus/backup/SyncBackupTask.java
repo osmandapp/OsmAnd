@@ -98,7 +98,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			syncListener.onBackupSyncStarted();
 		}
 		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, this);
+			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, UNIQUE, true, true, this);
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
@@ -122,10 +122,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 				Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
-	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType) {
-		item.setShouldReplace(true);
+	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType, boolean shouldReplace) {
+		item.setShouldReplace(shouldReplace);
 		String name = BackupHelper.getItemFileName(item);
-		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, this);
+		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, shouldReplace, this);
 	}
 
 	private void uploadNewItems() {

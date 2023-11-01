@@ -47,6 +47,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final String key;
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private final ImportType importType;
+	private final boolean shouldReplace;
 
 	private int maxProgress;
 	private int generalProgress;
@@ -60,6 +61,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.app = helper.getApp();
 		this.filesType = RemoteFilesType.UNIQUE;
 		this.collectListener = collectListener;
+		this.shouldReplace = true;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 		maxProgress = calculateMaxProgress(app);
@@ -70,13 +72,15 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	                 @NonNull List<SettingsItem> items,
 	                 @NonNull RemoteFilesType filesType,
 	                 @Nullable ImportListener importListener,
-	                 boolean forceReadData) {
+	                 boolean forceReadData,
+	                 boolean shouldReplace) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.filesType = filesType;
 		this.importListener = importListener;
 		this.items = items;
+		this.shouldReplace = shouldReplace;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 		maxProgress = calculateMaxProgress(app);
@@ -94,6 +98,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.filesType = RemoteFilesType.UNIQUE;
 		this.duplicatesListener = duplicatesListener;
 		this.selectedItems = selectedItems;
+		this.shouldReplace = true;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = ImportType.CHECK_DUPLICATES;
 		maxProgress = calculateMaxProgress(app);
@@ -122,7 +127,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						try {
 							CollectItemsResult result = importer.collectItems(items, true);
 							for (SettingsItem item : result.items) {
-								item.setShouldReplace(true);
+								item.setShouldReplace(shouldReplace);
 							}
 							items = result.items;
 						} catch (IllegalArgumentException | IOException e) {
