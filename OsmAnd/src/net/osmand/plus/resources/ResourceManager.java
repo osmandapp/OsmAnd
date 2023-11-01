@@ -960,8 +960,9 @@ public class ResourceManager {
 			}
 			try {
 				BinaryMapIndexReader mapReader = null;
+				boolean reindex = filesToReindex.contains(f);
 				try {
-					mapReader = cachedOsmandIndexes.getReader(f, !filesToReindex.contains(f));
+					mapReader = cachedOsmandIndexes.getReader(f, !reindex);
 					if (mapReader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 						mapReader = null;
 					}
@@ -992,6 +993,9 @@ public class ResourceManager {
 						}
 					} else if (!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
+						if (reindex) {
+							context.getOsmandMap().getMapLayers().getGpxLayer().checkAndClearRoutesCache(mapReader);
+						}
 					}
 					indexFileNames.put(fileName, dateFormat.format(dateCreated));
 					indexFiles.put(fileName, f);

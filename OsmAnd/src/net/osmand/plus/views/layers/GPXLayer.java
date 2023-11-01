@@ -30,8 +30,8 @@ import androidx.core.content.ContextCompat;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.GpxAdditionalIconsProvider;
 import net.osmand.core.jni.GpxAdditionalIconsProvider.SplitLabel;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -158,6 +158,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
+	private final Map<RouteKey, GPXFile> routesCache = new HashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 
@@ -1755,23 +1756,23 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					CallbackWithObject<GPXFile> callback = gpxFile -> {
 						networkRouteSelectionTask = null;
 						if (gpxFile != null) {
-							WptPt wptPt = new WptPt();
-							wptPt.lat = latLon.getLatitude();
-							wptPt.lon = latLon.getLongitude();
-							String name = getObjectName(object).getName();
-							String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
-							File file = new File(FileUtils.getTempDir(app), fileName);
-							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeKey);
+							routesCache.put(routeKey, gpxFile);
+							saveAndOpenGpx(object, mapActivity, routeKey, latLon, gpxFile);
 						}
 						return true;
 					};
 					if (networkRouteSelectionTask != null) {
 						networkRouteSelectionTask.cancel(false);
 					}
-					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
-							mapActivity, routeKey, rect, callback);
-					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-					networkRouteSelectionTask = selectionTask;
+					GPXFile gpxFile = routesCache.get(routeKey);
+					if (gpxFile == null) {
+						NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
+								mapActivity, routeKey, rect, callback);
+						selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+						networkRouteSelectionTask = selectionTask;
+					} else {
+						saveAndOpenGpx(object, mapActivity, routeKey, latLon, gpxFile);
+					}
 					return true;
 				}
 			} else if (object instanceof SelectedGpxPoint) {
@@ -1788,6 +1789,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return false;
+	}
+
+	private void saveAndOpenGpx(@NonNull Object object, MapActivity mapActivity, RouteKey routeKey, LatLon latLon, GPXFile gpxFile) {
+		WptPt wptPt = new WptPt();
+		wptPt.lat = latLon.getLatitude();
+		wptPt.lon = latLon.getLongitude();
+		String name = getObjectName(object).getName();
+		String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
+		File file = new File(FileUtils.getTempDir(app), fileName);
+		GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeKey);
 	}
 
 	@Override
@@ -1882,6 +1893,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (customObjectsDelegate != null) {
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
+		}
+	}
+
+	public void checkAndClearRoutesCache(BinaryMapIndexReader reader) {
+		for (Iterator<Map.Entry<RouteKey, GPXFile>> it = routesCache.entrySet().iterator(); it.hasNext(); ) {
+			Map.Entry<RouteKey, GPXFile> route = it.next();
+			QuadRect routeBounds = route.getValue().getRect();
+			boolean mapContainsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(routeBounds.left),
+					MapUtils.get31TileNumberY(routeBounds.top), MapUtils.get31TileNumberX(routeBounds.right),
+					MapUtils.get31TileNumberY(routeBounds.bottom), 15);
+			if (mapContainsRoute) {
+				it.remove();
+			}
 		}
 	}
 }
