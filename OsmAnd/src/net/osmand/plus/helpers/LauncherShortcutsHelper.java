@@ -136,7 +136,7 @@ public class LauncherShortcutsHelper {
 				navigateTo(mapActivity, work);
 			}
 		} else if (Shortcut.START_RECORDING.id.equals(shortcutId)) {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
 			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {

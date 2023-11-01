@@ -745,7 +745,7 @@ public class RoutePlannerFrontEnd {
 				for (LatLon latLon : points) {
 					RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
 					if (rp != null && rp.road != null) {
-						if (rp.road.hasPrivateAccess()) {
+						if (rp.road.hasPrivateAccess(ctx.config.router.getProfile())) {
 							res = true;
 							break;
 						}

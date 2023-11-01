@@ -2,11 +2,12 @@ package net.osmand.plus;
 
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
+import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
+import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -29,6 +30,7 @@ import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -664,11 +666,12 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	@Nullable
 	public DownloadService getDownloadService() {
 		return downloadService;
 	}
 
-	public void setDownloadService(DownloadService downloadService) {
+	public void setDownloadService(@Nullable DownloadService downloadService) {
 		this.downloadService = downloadService;
 	}
 
@@ -820,8 +823,8 @@ public class OsmandApplication extends MultiDexApplication {
 	public IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
-      // a delay is necessary as the service process needs time to start..
-      Thread.sleep(800);
+			// a delay is necessary as the service process needs time to start..
+			Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
 				return bRouterServiceConnection.getBrouterService();
 			}
@@ -934,80 +937,40 @@ public class OsmandApplication extends MultiDexApplication {
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 
-	public String getVersionName() {
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return info.versionName;
-		} catch (NameNotFoundException e) {
-			return "";
+	public void startNavigationService(int usageIntent) {
+		NavigationService service = getNavigationService();
+		if (service != null) {
+			usageIntent |= service.getUsedBy();
+			service.stopSelf();
 		}
-	}
-
-	public int getVersionCode() {
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return info.versionCode;
-		} catch (NameNotFoundException e) {
-			return 0;
-		}
-	}
-
-	public void startNavigationService(int intent) {
-		Intent serviceIntent = new Intent(this, NavigationService.class);
-		if (getNavigationService() != null) {
-			intent |= getNavigationService().getUsedBy();
-			getNavigationService().stopSelf();
-		}
-		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
+		Intent intent = new Intent(this, NavigationService.class);
+		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
+			startForegroundService(intent);
 		} else {
-			startService(serviceIntent);
-		}
-		//getNotificationHelper().showNotifications();
-	}
-
-	public void startDownloadService() {
-		Intent serviceIntent = new Intent(this, DownloadService.class);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
-		} else {
-			startService(serviceIntent);
+			startService(intent);
 		}
 	}
 
-	public String getLangTranslation(String l) {
-		try {
-			java.lang.reflect.Field f = R.string.class.getField("lang_" + l);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return l;
-	}
-
-	public void setupDrivingRegion(WorldRegion reg) {
-		DrivingRegion drg = null;
-		WorldRegion.RegionParams params = reg.getParams();
+	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {
+		DrivingRegion drivingRegion = null;
+		RegionParams params = worldRegion.getParams();
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
-		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
-		for (DrivingRegion r : DrivingRegion.values()) {
-			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
-				drg = r;
+		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MILES_AND_FEET : KILOMETERS_AND_METERS;
+		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MILES_AND_METERS : KILOMETERS_AND_METERS;
+		for (DrivingRegion region : DrivingRegion.values()) {
+			if (region.leftHandDriving == leftHand && (region.defMetrics == mc1 || region.defMetrics == mc2)) {
+				drivingRegion = region;
 				break;
 			}
 		}
-		if (drg != null) {
-			settings.DRIVING_REGION.set(drg);
+		if (drivingRegion != null) {
+			settings.DRIVING_REGION.set(drivingRegion);
 		}
 	}
 
+	@NonNull
 	public String getUserAndroidId() {
 		String userAndroidId = settings.USER_ANDROID_ID.get();
 		if (Algorithms.isEmpty(userAndroidId) || isUserAndroidIdExpired()) {

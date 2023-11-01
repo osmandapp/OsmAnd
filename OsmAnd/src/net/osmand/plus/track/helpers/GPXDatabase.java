@@ -315,6 +315,7 @@ public class GPXDatabase {
 		private double minFilterAltitude = Double.NaN;
 		private double maxFilterAltitude = Double.NaN;
 		private double maxFilterHdop = Double.NaN;
+		private String containingFolder = "";
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
@@ -461,6 +462,15 @@ public class GPXDatabase {
 
 		public double getMaxFilterHdop() {
 			return maxFilterHdop;
+		}
+
+		@NonNull
+		public String getContainingFolder() {
+			if (containingFolder == null) {
+				return "";
+			} else {
+				return containingFolder;
+			}
 		}
 
 		@Nullable
@@ -1224,6 +1234,7 @@ public class GPXDatabase {
 			dir = new File(app.getAppPath(GPX_INDEX_DIR), fileDir);
 		}
 		GpxDataItem item = new GpxDataItem(new File(dir, fileName), analysis);
+		item.containingFolder = fileDir;
 		item.color = GPXUtilities.parseColor(color, 0);
 		item.fileLastModifiedTime = fileLastModifiedTime;
 		item.fileLastUploadedTime = fileLastUploadedTime;

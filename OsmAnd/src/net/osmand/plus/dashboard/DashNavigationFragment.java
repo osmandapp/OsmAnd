@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.AndroidUtils;
 
 /**
  */
@@ -115,23 +116,19 @@ public class DashNavigationFragment extends DashBaseFragment {
 				);
 		play.setContentDescription(getString(toContinueNavigation ? R.string.continue_navigation :
 			R.string.pause_navigation));
-		play.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(routingHelper.isRoutePlanningMode()) {
-					routingHelper.setRoutePlanningMode(false);
-					routingHelper.setFollowingMode(true);
-				} else {
-					routingHelper.setRoutePlanningMode(true);
-					routingHelper.setFollowingMode(false);
-					routingHelper.setPauseNavigation(true);
-				}
-				updatePlayButton(routingHelper, map, play);
-				map.getMapViewTrackingUtilities().switchRoutePlanningMode();
-				map.refreshMap();
+		play.setOnClickListener(v -> {
+			if(routingHelper.isRoutePlanningMode()) {
+				routingHelper.setRoutePlanningMode(false);
+				routingHelper.setFollowingMode(true);
+			} else {
+				routingHelper.setRoutePlanningMode(true);
+				routingHelper.setFollowingMode(false);
+				routingHelper.setPauseNavigation(true);
 			}
+			updatePlayButton(routingHelper, map, play);
+			AndroidUtils.requestNotificationPermissionIfNeeded(map);
+			map.getMapViewTrackingUtilities().switchRoutePlanningMode();
+			map.refreshMap();
 		});
 	}
-
 }

@@ -2732,7 +2732,7 @@
     <string name="poi_fire_hydrant_position_street">Gata</string>
     <string name="poi_fire_hydrant_position_underground">Underjord</string>
     <string name="poi_fire_hydrant_style_wsh">Brandpoststil: wsh</string>
-    <string name="poi_water_source_main">Huvud</string>
+    <string name="poi_water_source_main">Primär</string>
     <string name="poi_water_source_pond">Damm</string>
     <string name="poi_water_source_stream">Vattendrag</string>
     <string name="poi_in_service_yes">I tjänst: Ja</string>

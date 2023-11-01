@@ -609,7 +609,7 @@
     <string name="poi_stripclub">Klub ze striptizem</string>
     <string name="poi_beach_resort">Obszar ośrodka nadmorskiego</string>
     <string name="poi_dog_park">Park dla psów</string>
-    <string name="poi_hunting_stand">Myśliwski punkt obserwacyjny</string>
+    <string name="poi_hunting_stand">Ambona myśliwska</string>
     <string name="poi_marina">Marina</string>
     <string name="poi_bench">Ławka</string>
     <string name="poi_seamark_wreck">Znak nawigacyjny: wrak</string>
@@ -677,7 +677,7 @@
     <string name="poi_attraction_train">Pociąg (atrakcja)</string>
     <string name="poi_cabin">Chata;Schronienie</string>
     <string name="poi_lean_to">Szałas;Schronienie</string>
-    <string name="poi_hunting_lodge">Ambona myśliwska;Schronienie</string>
+    <string name="poi_hunting_lodge">Domek myśliwski;Schronienie</string>
     <string name="poi_resort">Obszar ośrodka wypoczynkowego</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_piste_downhill">Trasa zjazdowa</string>

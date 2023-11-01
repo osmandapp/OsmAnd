@@ -125,7 +125,7 @@ class FilterWidthViewHolder(itemView: View, nightMode: Boolean) :
 					updateSelectedValue(widthFilter)
 				}
 				holder.checkBox.isChecked = widthFilter.isWidthSelected(widthName)
-				holder.count.text = widthFilter.allWidthCollection[widthName].toString()
+				holder.count.text = widthFilter.getTracksCountForWidth(widthName).toString()
 			}
 		}
 	}

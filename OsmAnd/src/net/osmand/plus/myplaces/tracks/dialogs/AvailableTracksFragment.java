@@ -28,6 +28,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
@@ -511,14 +512,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFoldersUpdated() {
 		updateContent();
-	}
-
-	@Override
-	public void showChangeAppearanceDialog(@NonNull SmartFolder folder) {
-		selectionHelper.setAllItems(folder.getTrackItems());
-		selectionHelper.setSelectedItems(folder.getTrackItems());
-		selectionHelper.setOriginalSelectedItems(folder.getTrackItems());
-		super.showChangeAppearanceDialog(folder);
 	}
 
 	@Override

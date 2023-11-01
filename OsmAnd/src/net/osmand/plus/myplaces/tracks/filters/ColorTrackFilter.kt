@@ -84,4 +84,8 @@ class ColorTrackFilter(filterChangedListener: FilterChangedListener?) :
 		}
 		return true
 	}
+
+	fun getTracksCountForColor(colorName: String): Int {
+		return allColorsCollection[colorName] ?: 0
+	}
 }

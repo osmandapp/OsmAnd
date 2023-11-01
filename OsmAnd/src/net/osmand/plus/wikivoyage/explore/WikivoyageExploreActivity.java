@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -277,7 +279,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
+		return getStatusBarSecondaryColorId(nightMode);
 	}
 
 	@ColorInt

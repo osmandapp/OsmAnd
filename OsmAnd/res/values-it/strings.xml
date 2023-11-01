@@ -5413,7 +5413,9 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Aggiunto widget \"Rapporto di planata\".
+    <string name="release_4_6">• Aggiunta la possibilità di modificare le associazioni dei tasti per i dispositivi di input esterni
+\n
+\n• Aggiunto widget \"Rapporto di planata\".
 \n
 \n• Aggiunti filtri e cartelle intelligenti per le tracce
 \n
@@ -5483,7 +5485,7 @@
     <string name="with_waypoints">Con punti intermedi</string>
     <string name="restore_from_trash">Recupera dal cestino</string>
     <string name="delete_all_items">Elimina tutti gli elementi</string>
-    <string name="trash_is_empty_banner_desc">I file rimossi dal OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
+    <string name="trash_is_empty_banner_desc">I file rimossi da OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d traccia)</item>
         <item quantity="many">%1$d (%2$d tracce)</item>
@@ -5495,7 +5497,7 @@
 \nQuesta azione non può essere cancellata.</string>
     <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_empty_trash">Svuota il cestino</string>
-    <string name="shared_string_delete_immediately">Cancella subito</string>
+    <string name="shared_string_delete_immediately">Cancella immediatamente</string>
     <string name="shared_string_is_deleted">%1$s è cancellato.</string>
     <string name="cloud_item_restored">%1$s è ripristinato nel Cloud.</string>
     <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
@@ -5503,4 +5505,39 @@
     <string name="shared_string_trash">Cestino</string>
     <string name="shared_string_delete_item">Cancella oggetto</string>
     <string name="help_article_personal_storage_name">Archiviazione</string>
+    <string name="key_event_action_zoom_in">Ingrandisci</string>
+    <string name="enable_to_use_external_input_device">Abilita l\'uso del dispositivo di input esterno con OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Cambia l\'orientamento della mappa</string>
+    <string name="root_folder">Cartella principale</string>
+    <string name="key_event_action_previous_app_profile">Profilo dell\'applicazione precedente</string>
+    <string name="shared_string_rows">Righe</string>
+    <string name="key_event_action_move_left">Vai a sinistra</string>
+    <string name="all_folders">Tutte le cartelle</string>
+    <string name="press_button_to_link_with_action">Premi il pulsante sul tuo dispositivo per associarlo all\'azione: %1$s</string>
+    <string name="deletion_error">Errore di cancellazione</string>
+    <string name="key_event_action_move_right">Vai a destra</string>
+    <string name="shared_string_show_less">Mostra meno</string>
+    <string name="shared_string_button">Pulsante</string>
+    <string name="key_event_action_next_app_profile">Profilo dell\'applicazione successivo</string>
+    <string name="folder">Cartella</string>
+    <string name="change_key_binding">Cambia l\'associazione dei tasti</string>
+    <string name="key_event_action_take_media_note">Prendi nota dei media</string>
+    <string name="remove_type_q">Sei sicuro di voler rimuovere \"%1$s\"\?</string>
+    <string name="shared_string_action">Azione</string>
+    <string name="add_new_type">Aggiungi nuovo tipo</string>
+    <string name="key_event_action_move_up">Vai su</string>
+    <string name="key_event_action_zoom_out">Riduci</string>
+    <string name="key_event_action_toggle_drower">Mostra/nascondi il menu laterale</string>
+    <string name="key_is_already_assigned_error">Il tasto \"%1$s\" è già assegnato a un\'altra azione: \"%2$s\"</string>
+    <string name="external_input_device_title">Dispositivo di input esterno</string>
+    <string name="key_bindings">Associazioni dei tasti</string>
+    <string name="key_event_action_move_to_my_location">Vai alla mia posizione</string>
+    <string name="not_specified">Non specificato</string>
+    <string name="key_event_category_map_interactions">Interazioni sulla mappa</string>
+    <string name="key_event_action_move_down">Vai giù</string>
+    <string name="key_event_category_actions">Azioni</string>
+    <string name="change_button">Cambia il pulsante</string>
+    <string name="show_toast_about_key_pressed">Mostra la notifica sul tasto premuto</string>
+    <string name="key_event_action_emit_navigation_hint">Dai un suggerimento di navigazione</string>
+    <string name="download_to_device">Scarica sul dispositivo</string>
 </resources>

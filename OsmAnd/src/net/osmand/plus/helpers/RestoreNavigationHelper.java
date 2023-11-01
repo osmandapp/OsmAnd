@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -201,6 +202,7 @@ public class RestoreNavigationHelper {
 		if (mapActivity.getDashboard().isVisible()) {
 			mapActivity.getDashboard().hideDashboard();
 		}
+		AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 	}
 
 	private void notRestoreRoutingMode() {

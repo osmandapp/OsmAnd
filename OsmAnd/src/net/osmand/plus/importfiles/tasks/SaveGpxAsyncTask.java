@@ -14,6 +14,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -92,6 +93,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 				}
 				GpxDataItem item = new GpxDataItem(resultFile, gpxFile);
 				app.getGpxDbHelper().add(item);
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(resultFile));
 
 				warning = null;
 			} else {

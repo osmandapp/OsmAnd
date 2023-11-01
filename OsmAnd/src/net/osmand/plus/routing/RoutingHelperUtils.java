@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.routing.CurrentStreetName.*;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,6 +14,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
@@ -26,24 +29,49 @@ public class RoutingHelperUtils {
 	public static final int MAX_BEARING_DEVIATION = 160;
 
 	@NonNull
-	public static String formatStreetName(String name, String ref, String destination, String towards) {
-		String formattedStreetName = "";
-		if (ref != null && ref.length() > 0) {
-			formattedStreetName = ref;
+	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
+	                                      @NonNull String towards) {
+		return formatStreetName(name, ref, destination, towards, null);
+	}
+
+	@NonNull
+	public static String formatStreetName(@Nullable String name, @Nullable String originalRef, @Nullable String destination,
+	                                      @NonNull String towards, @Nullable List<RoadShield> shields) {
+		StringBuilder formattedStreetName = new StringBuilder();
+		if (originalRef != null && originalRef.length() > 0) {
+			String[] refs = originalRef.split(";");
+			for (String ref : refs) {
+				if (shields == null || !isRefEqualsShield(shields, ref)) {
+					if (formattedStreetName.length() > 0) {
+						formattedStreetName.append(" ");
+					}
+					formattedStreetName.append(ref);
+				}
+			}
 		}
 		if (name != null && name.length() > 0) {
 			if (formattedStreetName.length() > 0) {
-				formattedStreetName = formattedStreetName + " ";
+				formattedStreetName.append(" ");
 			}
-			formattedStreetName = formattedStreetName + name;
+			formattedStreetName.append(name);
 		}
 		if (destination != null && destination.length() > 0) {
 			if (formattedStreetName.length() > 0) {
-				formattedStreetName = formattedStreetName + " ";
+				formattedStreetName.append(" ");
 			}
-			formattedStreetName = formattedStreetName + towards + " " + destination;
+			formattedStreetName.append(towards).append(" ").append(destination);
 		}
-		return formattedStreetName.replace(";", ", ");
+		return formattedStreetName.toString().replace(";", ", ");
+	}
+
+	private static boolean isRefEqualsShield(@NonNull List<RoadShield> shields, @NonNull String ref) {
+		for (RoadShield shield : shields) {
+			String shieldValue = shield.getValue();
+			if (ref.equals(shieldValue) || String.valueOf(Algorithms.extractIntegerNumber(ref)).equals(shieldValue)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Nullable

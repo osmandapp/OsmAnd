@@ -1919,7 +1919,7 @@
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
     <string name="animate_my_location">Animar deslocação no mapa</string>
-    <string name="animate_my_location_desc">Ativar animação da deslocação do mapa da \"Minha posição\" durante a navegação.</string>
+    <string name="animate_my_location_desc">Desloca suavemente o mapa quando em movimento. Introduz um ligeiro atraso.</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
     <string name="shared_string_in_name">em %1$s</string>
@@ -2605,7 +2605,7 @@
     <string name="arrival_distance_factor_early">Adiantado</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
-    <string name="arrival_distance_factor_at_last">Nos últimos metros</string>
+    <string name="arrival_distance_factor_at_last">Muito tarde</string>
     <string name="live_monitoring_max_interval_to_send">Buffer de tempo para rastreamento online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais a enviar sem ligação à Internet</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
@@ -4665,7 +4665,7 @@
     <string name="shared_string_mode">Modo</string>
     <string name="lang_sat">Santáli</string>
     <string name="average_speed_skip_stops">Ter em conta as paragens</string>
-    <string name="average_speed_time_interval_desc">Especifique o intervalo de tempo para calcular a velocidade média.</string>
+    <string name="average_speed_time_interval_desc">Especifique o intervalo de tempo para calcular a média da velocidade.</string>
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
@@ -4767,7 +4767,7 @@
     <string name="shared_string_large">Larga</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
-    <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular a hora prevista de chegada.</string>
+    <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
     <string name="go_to_marker_location">Ir para a localização do marcador</string>
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
@@ -4778,12 +4778,12 @@
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
-    <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
+    <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. O padrão é 90° (sem inclinação).</string>
     <string name="map_widget_zoom_level">Nível de ampliação</string>
     <string name="map_widget_camera_distance">Elevação da câmara</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>
     <string name="map_widget_target_distance_desc">Mostra a distância entre a câmara e o local de destino.</string>
-    <string name="map_widget_zoom_level_desc">Mostra o nível atual de zoom do mapa.</string>
+    <string name="map_widget_zoom_level_desc">Mostra o nível de ampliação (zoom) do mapa atual.</string>
     <string name="map_widget_camera_tilt">Inclinação da câmara</string>
     <string name="ant_missing_dependency_descr">Não foi possível encontrar o serviço \"%1$s\".
 \nTem de instalar ou atualizar o Serviço de Plugins ANT+.
@@ -4823,7 +4823,7 @@
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Elevação: centro do mapa</string>
     <string name="map_widget_altitude_current_location_desc">Mostra a altitude acima do nível do mar da geolocalização atual.</string>
-    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados expresso em fotogramas por segundo (FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados, expressos em fotogramas por segundo (FPS).</string>
     <string name="simulate_location_by_gpx">Simular a localização por GPX</string>
     <string name="location_simulation_cutoff">A simulação ignora os primeiros metros</string>
     <string name="location_simulation_speedup">Velocidade da simulação</string>
@@ -5229,7 +5229,7 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="power_watts_unit">Watts</string>
     <string name="shared_string_close_the_dialog">Fechar o ecrã</string>
-    <string name="terrain_map">Mapa do terreno (3D)</string>
+    <string name="terrain_map">Mapa de terreno (3D)</string>
     <string name="relief_3d">Relevo 3D</string>
     <string name="relief_3d_description">Possua e observe o modelo do seu bairro ou de todo o continente.</string>
     <string name="verify_account_deletion_descr">Temos de verificar a sua conta antes de a apagar.
@@ -5340,4 +5340,218 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
     <string name="shared_string_included">Incluído</string>
+    <string name="cloud_trash_clear_confirmation">Quer mesmo eliminar permanentemente todos os itens do lixo\? Esta ação não pode ser desfeita.</string>
+    <string name="key_event_action_zoom_in">Aproximar</string>
+    <string name="empty_smart_folder_title">Nenhum trilho correspondente</string>
+    <string name="wheel_circumference">Circunferência da roda</string>
+    <string name="open_issue_on_github">Abrir problema no GitHub</string>
+    <string name="about_osmand">Sobre o OsmAnd</string>
+    <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
+    <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
+    <string name="user_guide">Guia do utilizador</string>
+    <string name="smart_folder_name_present">Essa pasta inteligente já existe</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Roteamento em linha reta (aeronave)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Roteamento de comboio</string>
+    <string name="root_folder">Pasta de raiz</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Roteamento de transporte público</string>
+    <string name="send_logcat_log_descr">Ficheiro de registo detalhado</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="average_glide_time_interval_desc">Especifique o intervalo de tempo para cálculo da média do planar.</string>
+    <string name="key_event_action_previous_app_profile">Perfil da aplicação anterior</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificação do sistema sobre a tecla pressionada</string>
+    <string name="help_article_search_search_coordinates_name">Pesquisar coordenadas</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navegar por marcadores</string>
+    <string name="help_article_map_point_layers_on_map_name">Pontos no mapa</string>
+    <string name="empty_smart_folder_description">Todos os trilhos correspondentes aparecerão automaticamente aqui</string>
+    <string name="with_waypoints">Com pontos de rotas</string>
+    <string name="shared_string_rows">Linhas</string>
+    <string name="key_event_action_move_left">Mover para a esquerda</string>
+    <string name="configure_filter">Configurar o filtro</string>
+    <string name="send_crash_log_descr">Contém apenas informações sobre falhas</string>
+    <string name="help_article_plan_route_coordinate_input_name">Introduzir coordenadas</string>
+    <string name="restore_from_trash">Restaurar do lixo</string>
+    <string name="all_folders">Todas as pastas</string>
+    <string name="help_article_map_vector_maps_name">Mapas vetoriais (estilos de mapa)</string>
+    <string name="help_article_start_with_main_menu_name">Menu principal</string>
+    <string name="widget_available_ram_desc">Mostra a memória disponível atribuída ao OsmAnd.</string>
+    <string name="press_button_to_link_with_action">Pressione o botão no seu dispositivo para vinculá-lo à ação escolhida.</string>
+    <string name="contact_us">Contacte-nos</string>
+    <string name="glide_ratio_to_target">Rácio de planar para o alvo</string>
+    <string name="deletion_error">Erro ao eliminar</string>
+    <string name="sort_size_descending">Tamanho grande primeiro</string>
+    <string name="smart_folder_saved">Pasta inteligente guardada</string>
+    <string name="help_article_widgets_markers_name">Widgets de marcadores</string>
+    <string name="key_event_action_move_right">Mover para a direita</string>
+    <string name="delete_map">Eliminar mapa</string>
+    <string name="help_article_purchases_giveaway_name">Oferta</string>
+    <string name="help_article_start_with_first_steps_name">Primeiros passos</string>
+    <string name="help_article_search_search_poi_name">Pesquisar POI</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="standard_maps">Mapas padrão</string>
+    <string name="shared_string_show_less">Mostrar menos</string>
+    <string name="help_article_troubleshooting_general_name">Geral</string>
+    <string name="shared_string_button">Botão</string>
+    <string name="key_event_action_next_app_profile">Perfil da aplicação seguinte</string>
+    <string name="free_versions_descr">Descarregue e instale a versão gratuita do OsmAnd</string>
+    <string name="max_altitude">Altitude máxima</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / notificações</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="folder">Pasta</string>
+    <string name="delete_all_items">Eliminar todos os itens</string>
+    <string name="change_key_binding">Alterar vinculação das teclas</string>
+    <string name="average_glide_ratio">Rácio médio de planar</string>
+    <string name="shared_string_created">Criado</string>
+    <string name="free_versions">Versões gratuitas</string>
+    <string name="open_issue_on_github_descr">Faça perguntas, sugira funcionalidades</string>
+    <string name="key_event_action_take_media_note">Tirar nota de mídia</string>
+    <string name="key_event_action_activity_back_pressed">Atividade de retorno pressionada</string>
+    <string name="github_discussion">Discussão no GitHub</string>
+    <string name="release_4_6">• Adicionada capacidade de alterar os atalhos de teclas para dispositivos de entrada externos
+\n
+\n• Adicionado widget \"Rácio de planar\"
+\n
+\n• Filtros adicionados e pastas inteligentes para trilhos
+\n
+\n• Linhas adicionadas aos painéis de widgets no topo e em baixo com suporte para todos os widgets
+\n
+\n• Adicionado suporte a ANT + widget de temperatura
+\n
+\n• Melhor gestão de memória para trilhos GPX grandes
+\n
+\n• Gestão de recursos locais atualizada em \"Descarregamentos\"
+\n
+\n• Adicionado widget \"RAM disponível\"
+\n
+\n• Problemas corrigidos com a barra de estado transparente
+\n
+\n</string>
+    <string name="help_article_map_tracks_on_map_name">Trilhos e rotas</string>
+    <string name="app_mode_paragliding">Parapente</string>
+    <string name="most_viewed">Mais visto</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Roteamento direto ao ponto (barco)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ecrã do mapa durante a navegação</string>
+    <string name="app_mode_baby_transport">Transporte de bebé</string>
+    <string name="filter_by_name">Filtrar por nome</string>
+    <string name="key_event_action_emit_navigation_hint">Emitir uma sugestão de navegação</string>
+    <string name="shared_string_reset_all">Repor tudo</string>
+    <string name="remove_type_q">Quer mesmo remover o tipo \"%1$s\"\?</string>
+    <string name="no_config_smart_folder_title">Não configurado</string>
+    <string name="help_article_navigation_guidance_name">Guia</string>
+    <string name="shared_string_action">Ação</string>
+    <string name="help_article_personal_profiles_name">Perfis (configurações)</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Roteamento de carro (camião, motocicleta)</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapas e dados</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalhes da rota</string>
+    <string name="trash_is_empty_banner_desc">Os ficheiros removidos do OsmAnd Cloud estarão disponíveis aqui durante %1$s dias.</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Preparação da rota</string>
+    <string name="add_new_type">Adicionar novo tipo</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia e mapas de viagens</string>
+    <string name="key_event_action_move_up">Mover para cima</string>
+    <string name="map_widget_group_glide_desc">Os widgets mostram o rácio de planar em relação ao alvo ou o rácio de planar médio para a viagem atual.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d trilho)</item>
+        <item quantity="many">%1$d (%2$d trilhos)</item>
+        <item quantity="other">%1$d (%2$d trilhos)</item>
+    </plurals>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Roteamento a pé</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navegar por trilho</string>
+    <string name="help_article_navigation_routing_online_routing_name">Roteamento online</string>
+    <string name="help_article_map_map_context_menu_name">Menu de contexto do mapa</string>
+    <string name="map_widget_glide_average_desc">Mostra o rácio de planar médio para o intervalo definido.</string>
+    <string name="add_smart_folder">Adicionar pasta inteligente</string>
+    <string name="empty_name">Nome vazio</string>
+    <string name="edit_fiilter">Editar filtro</string>
+    <string name="key_event_action_open_search_view">Abrir vista de pesquisa</string>
+    <string name="copy_build_version">Copiar versão de compilação</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_personal_import_export_name">Importar / exportar</string>
+    <string name="rendering_styles">Estilos de renderização</string>
+    <string name="filter_tracks_count">Filtrar: %d</string>
+    <string name="sort_country_name_ascending">Nome do país: A – Z</string>
+    <string name="help_article_widgets_radius_ruler_name">Régua radial e régua</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. Tem a certeza\?
+\n
+\nEsta ação não pode ser desfeita.</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Gravar viagem</string>
+    <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
+    <string name="discard_filter_changes">Descartar alterações do filtro</string>
+    <string name="map_widget_group_glide_ratio">Rácio de planar</string>
+    <string name="app_mode_hang_gliding">Asa-delta</string>
+    <string name="key_event_action_zoom_out">Afastar</string>
+    <string name="key_event_action_toggle_drower">Mostrar / ocultar menu lateral</string>
+    <string name="help_article_plan_route_name">Planear rota</string>
+    <string name="save_as_smart_folder">Guardar como pasta inteligente</string>
+    <string name="help_article_widgets_map_buttons_name">Botões do mapa</string>
+    <string name="map_widget_glide_target_desc">Mostra o rácio de planar necessário para atingir o ponto alvo.</string>
+    <string name="weather_online">Previsão meteorológica online</string>
+    <string name="help_article_map_track_context_menu_name">Menu de contexto de trilhos</string>
+    <string name="date_of_creation">Data da criação</string>
+    <string name="key_is_already_assigned_error">A tecla \"%1$s\" já está atribuída a outra ação:: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Abrir vista de navegação</string>
+    <string name="shared_string_empty_trash">Esvaziar o lixo</string>
+    <string name="shared_string_show_icon">Mostrar ícone</string>
+    <string name="help_article_map_legend_osmand_name">Estilo de mapa do OsmAnd</string>
+    <string name="map_is_up_to_date">O mapa %1$s está atualizado.</string>
+    <string name="sensor_temperature_desc">Mostra a temperatura do sensor</string>
+    <string name="shared_string_delete_immediately">Eliminar imediatamente</string>
+    <string name="shared_string_loading">A carregar</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="delete_smart_folder_dialog_message">Isto eliminará a pasta inteligente \"%1$s\".</string>
+    <string name="shared_string_is_deleted">%1$s foi eliminado.</string>
+    <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
+    <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
+    <string name="cloud_item_restored">%1$s é restaurado da Cloud.</string>
+    <string name="trash_alert_card_desc">Os itens no lixo serão eliminados após %1$s dias.</string>
+    <string name="external_input_device_title">Aparelho externo de entrada</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Roteamento de cavalo</string>
+    <string name="filter_screen_title">Filtro</string>
+    <string name="hillshade_slope">Sombras de relevo, declives</string>
+    <string name="external_sensor_name_property_description">Nome do sensor</string>
+    <string name="discard_filter_changes_prompt">Quer mesmo repor todos os filtros\?</string>
+    <string name="key_bindings">Atalhos de teclado</string>
+    <string name="no_config_smart_folder_description">As pastas inteligentes permitem agrupar trilhos por filtros</string>
+    <string name="widget_available_ram">RAM disponível</string>
+    <string name="trash_is_empty">O lixo está vazio</string>
+    <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Roteamento de esqui</string>
+    <string name="not_specified">Não especificado</string>
+    <string name="help_article_widgets_name">Widgets do mapa</string>
+    <string name="help_article_personal_name">Meus dados</string>
+    <string name="help_article_purchases_android_name">Compras Android</string>
+    <string name="telegram_chats_descr">Junte-se a uma das nossas salas de conversação local do Telegram.</string>
+    <string name="report_an_issues">Reportar problema</string>
+    <string name="telegram_chats">Conversação no Telegram</string>
+    <string name="help_article_plan_route_web_name">Planeador de rotas na internet</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="key_event_category_map_interactions">Interações do mapa</string>
+    <string name="help_article_navigation_routing_name">Parâmetros de rota</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Roteamento de ciclomotor</string>
+    <string name="key_event_action_move_down">Mover para baixo</string>
+    <string name="terrain_maps">Mapas de terreno</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Abrir grelha de dados WunderLINQ</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Roteamento de barco</string>
+    <string name="shared_string_trash">Lixo</string>
+    <string name="loading_tracks">A carregar novamente os trilhos</string>
+    <string name="shared_string_delete_item">Eliminar item</string>
+    <string name="help_article_start_with_name">Começar com o OsmAnd</string>
+    <string name="help_article_purchases_ios_name">Compras iOS</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rotas de bicicleta (MTB)</string>
+    <string name="help_article_widgets_nav_widgets_name">Widgets de navegação</string>
+    <string name="help_article_map_interact_with_map_name">Interagir com o mapa</string>
+    <string name="key_event_category_actions">Ações</string>
+    <string name="help_article_map_raster_maps_name">Mapas rasterizados (online / offline)</string>
+    <string name="help_article_search_search_all_name">Pesquisar tudo</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Registos de falhas</string>
+    <string name="shared_string_temperature">Temperatura</string>
+    <string name="help_article_personal_storage_name">Armazenamento</string>
+    <string name="sort_country_name_descending">Nome do país: Z – A</string>
+    <string name="delete_map_description">Quer mesmo eliminar o mapa %1$s\?</string>
+    <string name="searching_matching_tracks">Pesquisar todos os trilhos correspondentes</string>
+    <string name="help_article_map_legend_ski_map_name">Estilo de mapa de esqui</string>
+    <string name="maps_and_resources">Mapas e recursos</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Sobre o roteamento do OsmAnd</string>
+    <string name="shared_string_setup">Configuração</string>
 </resources>

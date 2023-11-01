@@ -149,7 +149,7 @@
     <string name="poi_coffee">Magazin de cafea</string>
     <string name="poi_chocolate">Magazin de ciocolată</string>
     <string name="poi_cheese">Magazin de brânzeturi</string>
-    <string name="poi_alcohol">Magazin de spirtoase</string>
+    <string name="poi_alcohol">Magazine de spirtoase</string>
     <string name="poi_bakery">Brutărie</string>
     <string name="poi_palaeontological_site">Sit paleontologic</string>
     <string name="poi_user_defined_other">Definit de utilizator</string>
@@ -160,12 +160,12 @@
     <string name="poi_finance">Finanțe</string>
     <string name="poi_craft">Artizanat</string>
     <string name="poi_service">Servicii</string>
-    <string name="poi_cafe_and_restaurant">Cafenea și restaurant</string>
+    <string name="poi_cafe_and_restaurant">Cafenele și restaurante</string>
     <string name="poi_sustenance">Mâncare</string>
     <string name="poi_club">Club</string>
     <string name="poi_entertainment">Timp liber</string>
     <string name="poi_internet_access">Acces la internet</string>
-    <string name="poi_accomodation">Cazare</string>
+    <string name="poi_accomodation">Cazări</string>
     <string name="poi_sightseeing">Obiectiv turistic</string>
     <string name="poi_tourism">Turism</string>
     <string name="poi_sport">Sport</string>
@@ -193,9 +193,9 @@
     <string name="poi_road_obstacle">Obstacol rutier</string>
     <string name="poi_transportation">Transport</string>
     <string name="poi_emergency_infrastructure">Infrastructura de urgență</string>
-    <string name="poi_emergency">Urgență</string>
-    <string name="poi_shop_food">Magazin de cartier și supermarket</string>
-    <string name="poi_shop">Magazin</string>
+    <string name="poi_emergency">Urgențe</string>
+    <string name="poi_shop_food">Magazine de cartier și supermarketuri</string>
+    <string name="poi_shop">Magazine</string>
     <string name="poi_shelter_filter">Adăpost</string>
     <string name="poi_permanent_camping">Campare permanentă</string>
     <string name="poi_authentication_none">Autentificare nenecesară</string>
@@ -692,7 +692,7 @@
     <string name="poi_historic_aircraft">Aeronave istorice</string>
     <string name="poi_boundary_stone">Piatră de hotar</string>
     <string name="poi_battlefield">Câmpul de luptă</string>
-    <string name="poi_archaeological_site">Situl arheologic</string>
+    <string name="poi_archaeological_site">Sit arheologic</string>
     <string name="poi_artwork">Lucrări de artă</string>
     <string name="poi_memorial">Memorial</string>
     <string name="poi_museum">Muzeu</string>
@@ -747,7 +747,7 @@
     <string name="poi_subway_entrance">Intrare metrou</string>
     <string name="poi_halt">Stație de cale ferată;Stație de tren;Stație de cale ferată;Stație de cale ferată;Stație de tren;Gară</string>
     <string name="poi_railway_platform">Platformă de cale ferată;Platformă de tren</string>
-    <string name="poi_railway_station">Stație auto;Stație de cale ferată;Stație de tren</string>
+    <string name="poi_railway_station">Stație de cale ferată;Stație de tren</string>
     <string name="poi_bus_station">Stație de autobuz</string>
     <string name="poi_public_transport_station">Stație de transport public</string>
     <string name="poi_tram_stop">Stație de tramvai</string>
@@ -828,7 +828,7 @@
     <string name="poi_fire_flapper">Lopată antiincendiu</string>
     <string name="poi_fire_extinguisher">Extinctor de incendiu</string>
     <string name="poi_fire_hydrant">Hidrant de incendiu</string>
-    <string name="poi_emergency_phone">Telefon de urgență</string>
+    <string name="poi_emergency_phone">Telefon de urgențe</string>
     <string name="poi_fire_station">Stație de pompieri</string>
     <string name="poi_police">Poliție</string>
     <string name="poi_religion">Produse religioase</string>
@@ -1393,7 +1393,7 @@
     <string name="poi_cape">Cap</string>
     <string name="poi_stone">Piatră remarcabilă</string>
     <string name="poi_rapids">Rapide</string>
-    <string name="poi_stream">Flux</string>
+    <string name="poi_stream">Pârâu</string>
     <string name="poi_river">Râu</string>
     <string name="poi_waterfall">Cascadă</string>
     <string name="poi_sinkhole">Dolină</string>
@@ -2627,7 +2627,7 @@
     <string name="poi_street_cabinet_telecom">Tip cabinet: telecom</string>
     <string name="poi_street_cabinet_power">Tipul de cabinet: putere</string>
     <string name="poi_in_service_yes">În serviciu: da</string>
-    <string name="poi_water_source_stream">Flux</string>
+    <string name="poi_water_source_stream">Pârâu</string>
     <string name="poi_water_source_pond">Iaz</string>
     <string name="poi_water_source_main">Principal</string>
     <string name="poi_fire_hydrant_style_wsh">Stilul hidrantului: wsh</string>
@@ -4126,7 +4126,7 @@
     <string name="poi_fumarole">Fumerolă</string>
     <string name="poi_agrarian_feed">Hrană</string>
     <string name="poi_lgbtq_only">Doar LGBTQ</string>
-    <string name="poi_agrarian_yes">Da;Argarian</string>
+    <string name="poi_agrarian_yes">Da;Agrarian</string>
     <string name="poi_massage_chiropractic">Chiropractică</string>
     <string name="poi_beauty_salon_tanning">Bronzare</string>
     <string name="poi_beauty_salon_cosmetics">Cosmetice</string>
@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">Boli infecțioase</string>
     <string name="poi_socket_typee_voltage">Mufă: Type E: tensiune</string>
     <string name="poi_socket_typee_output">Mufă: Type E: ieșire</string>
+    <string name="poi_dressing_room">Vestiar</string>
+    <string name="poi_emergency_bay">Refugiu de urgență</string>
 </resources>
