@@ -89,8 +89,7 @@ public class InputDeviceHelper {
 
 	public void renameCustomDevice(@NonNull CustomInputDeviceProfile device, @NonNull String newName) {
 		device.setCustomName(newName);
-		syncSettings();
-		notifyListeners(EventType.RENAME_DEVICE);
+		syncSettings(EventType.RENAME_DEVICE);
 	}
 
 	@NonNull
@@ -128,8 +127,7 @@ public class InputDeviceHelper {
 	private void saveCustomDevice(@NonNull InputDeviceProfile device) {
 		customDevices.add(device);
 		cachedDevices.put(device.getId(), device);
-		syncSettings();
-		notifyListeners(EventType.ADD_NEW_DEVICE);
+		syncSettings(EventType.ADD_NEW_DEVICE);
 	}
 
 	public void removeCustomDevice(@NonNull String deviceId) {
@@ -137,9 +135,8 @@ public class InputDeviceHelper {
 		if (device != null) {
 			customDevices.remove(device);
 			cachedDevices.remove(deviceId);
-			syncSettings();
 			resetSelectedDeviceIfNeeded();
-			notifyListeners(EventType.DELETE_DEVICE);
+			syncSettings(EventType.DELETE_DEVICE);
 		}
 	}
 
@@ -185,7 +182,7 @@ public class InputDeviceHelper {
 		} else {
 			device.updateKeyBinding(originalKeyCode, newKeyBinding);
 		}
-		syncSettings();
+		syncSettings(EventType.UPDATE_KEYBINDING);
 	}
 
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
@@ -253,7 +250,7 @@ public class InputDeviceHelper {
 		return new ArrayList<>();
 	}
 
-	public void syncSettings() {
+	public void syncSettings(@NonNull EventType eventType) {
 		JSONObject json = new JSONObject();
 		try {
 			writeToJson(json, customDevices);
@@ -261,6 +258,7 @@ public class InputDeviceHelper {
 		} catch (JSONException e) {
 			LOG.debug("Error when writing custom devices to JSON ", e);
 		}
+		notifyListeners(eventType);
 	}
 
 	public static List<InputDeviceProfile> readFromJson(@NonNull JSONObject json) throws JSONException {

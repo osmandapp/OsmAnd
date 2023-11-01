@@ -30,6 +30,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -45,7 +47,8 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyCodeSelectedCallback {
+public class EditKeyBindingFragment extends BaseOsmAndFragment
+		implements OnKeyCodeSelectedCallback, InputDeviceHelperCallback {
 
 	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
 
@@ -201,10 +204,6 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (!Objects.equals(originalName, newName)) {
 			keyBinding = new KeyBinding(newName, keyBinding);
 			deviceHelper.updateKeyBinding(deviceId, keyBinding.getKeyCode(), keyBinding);
-			View view = getView();
-			if (view != null) {
-				updateViewContent(view);
-			}
 		}
 	}
 
@@ -214,10 +213,14 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (newKeyCode != originalKeyCode) {
 			keyBinding = new KeyBinding(newKeyCode, keyBinding);
 			deviceHelper.updateKeyBinding(deviceId, originalKeyCode, keyBinding);
-			View view = getView();
-			if (view != null) {
-				updateViewContent(view);
-			}
+		}
+	}
+
+	@Override
+	public void processInputDeviceHelperEvent(@NonNull EventType event) {
+		View view = getView();
+		if (view != null) {
+			updateViewContent(view);
 		}
 	}
 
@@ -240,6 +243,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
 		}
+		deviceHelper.addListener(this);
 	}
 
 	@Override
@@ -249,6 +253,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+		deviceHelper.removeListener(this);
 	}
 
 	@Override
