@@ -61,6 +61,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -117,7 +118,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt>,
+		ResourceManager.ResourceListener {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
@@ -225,7 +227,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		gpxDbHelper = app.getGpxDbHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		mapMarkersHelper = app.getMapMarkersHelper();
-		osmandRenderer = app.getResourceManager().getRenderer().getRenderer();
+		ResourceManager resourceManager = app.getResourceManager();
+		resourceManager.addResourceListener(this);
+		osmandRenderer = resourceManager.getRenderer().getRenderer();
 		chartPointsHelper = new ChartPointsHelper(getContext());
 
 		currentTrackColorPref = settings.CURRENT_TRACK_COLOR;
@@ -1896,7 +1900,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public void checkAndClearRoutesCache(BinaryMapIndexReader reader) {
+	@Override
+	public void onReaderIndexed(BinaryMapIndexReader reader) {
+		checkAndClearRouteCache(reader);
+	}
+
+	@Override
+	public void onReaderClosed(BinaryMapIndexReader reader) {
+		checkAndClearRouteCache(reader);
+	}
+
+	private void checkAndClearRouteCache(BinaryMapIndexReader reader) {
 		for (Iterator<Map.Entry<RouteKey, GPXFile>> it = routesCache.entrySet().iterator(); it.hasNext(); ) {
 			Map.Entry<RouteKey, GPXFile> route = it.next();
 			QuadRect routeBounds = route.getValue().getRect();

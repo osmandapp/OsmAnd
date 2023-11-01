@@ -124,6 +124,8 @@ public class ResourceManager {
 
 	public interface ResourceListener {
 		default void onMapsIndexed() {}
+		default void onReaderIndexed(BinaryMapIndexReader reader) {}
+		default void onReaderClosed(BinaryMapIndexReader reader) {}
 		default void onMapClosed(String fileName) {}
 	}
 
@@ -994,7 +996,9 @@ public class ResourceManager {
 					} else if (!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
 						if (reindex) {
-							context.getOsmandMap().getMapLayers().getGpxLayer().checkAndClearRoutesCache(mapReader);
+							for (ResourceListener l : resourceListeners) {
+								l.onReaderIndexed(mapReader);
+							}
 						}
 					}
 					indexFileNames.put(fileName, dateFormat.format(dateCreated));
@@ -1407,6 +1411,9 @@ public class ResourceManager {
 		renderer.closeConnection(fileName);
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
 		if (resource != null) {
+			for (ResourceListener l : resourceListeners) {
+				l.onReaderClosed(resource.initialReader);
+			}
 			resource.close();
 		}
 		for (ResourceListener l : resourceListeners) {
