@@ -56,9 +56,6 @@ import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChan
 
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
@@ -104,12 +101,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	private ExternalSensorsPlugin externalSensorsPlugin;
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
 		this.devicesSettingsCollection = new DevicesSettingsCollection(plugin);
-		externalSensorsPlugin = plugin;
 	}
 
 	void setActivity(@Nullable Activity activity) {
@@ -495,8 +490,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				if (!Algorithms.isEmpty(deviceId)) {
 					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
-					updateDeviceProperties(device);
-					setupWriteDeviceDataToTrack(device);
 				}
 			}
 			//connectDevice(activity, device);
@@ -507,23 +500,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				mapActivity.updateApplicationModeSettings();
 			}
 		});
-	}
-
-	private void setupWriteDeviceDataToTrack(@NonNull AbstractDevice<?> device) {
-		for (AbstractSensor sensor : device.getSensors()) {
-			for (SensorWidgetDataFieldType widgetDataFieldType : sensor.getSupportedWidgetDataFieldTypes()) {
-				WriteToGpxWidgetType widgetType = WriteToGpxWidgetType.Companion.getBySensorWidgetDataFieldType(widgetDataFieldType);
-				if (widgetType != null) {
-					CommonPreference<String> preference = externalSensorsPlugin.getPrefSettingsForWidgetType(widgetType);
-					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-						String deviceId = preference.getModeValue(appMode);
-						if (Algorithms.isEmpty(deviceId)) {
-							preference.setModeValue(appMode, device.getDeviceId());
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public boolean isDeviceEnabled(@NonNull AbstractDevice<?> device) {
