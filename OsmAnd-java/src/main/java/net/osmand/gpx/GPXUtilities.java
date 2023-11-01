@@ -578,6 +578,7 @@ public class GPXUtilities {
 		public Bounds bounds = null;
 
 		public Metadata() {
+			time = System.currentTimeMillis();
 		}
 
 		public Metadata(Metadata source) {
@@ -1314,9 +1315,9 @@ public class GPXUtilities {
 				time = gpxFile.metadata.time;
 			} else {
 				time = gpxFile.getLastPointTime();
-				if (time == 0) {
-					time = gpxFile.modifiedTime;
-				}
+			}
+			if (time == 0) {
+				time = gpxFile.modifiedTime;
 			}
 		}
 		if (time == 0) {
