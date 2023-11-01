@@ -8,9 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
-import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
-import net.osmand.plus.mapcontextmenu.MenuTitleController;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 
@@ -26,71 +24,6 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private final LinkedList<MenuObject> objects = new LinkedList<>();
 	private final Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 
-	public static class MenuObject extends MenuTitleController {
-
-		private final LatLon latLon;
-		private final PointDescription pointDescription;
-		private final Object object;
-		private int order;
-
-		@Nullable
-		private MapActivity mapActivity;
-		@Nullable
-		private MenuController controller;
-
-		MenuObject(LatLon latLon, PointDescription pointDescription, Object object, @Nullable MapActivity mapActivity) {
-			this.latLon = latLon;
-			this.pointDescription = pointDescription;
-			this.object = object;
-			this.mapActivity = mapActivity;
-			init();
-		}
-
-		protected void init() {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
-				controller.setActive(true);
-				initTitle();
-			}
-		}
-
-		protected void deinit() {
-			controller = null;
-		}
-
-		@Override
-		public LatLon getLatLon() {
-			return latLon;
-		}
-
-		@Override
-		public PointDescription getPointDescription() {
-			return pointDescription;
-		}
-
-		@Override
-		public Object getObject() {
-			return object;
-		}
-
-		@Nullable
-		@Override
-		public MapActivity getMapActivity() {
-			return mapActivity;
-		}
-
-		@Override
-		public MenuController getMenuController() {
-			return controller;
-		}
-
-		@Override
-		protected boolean needStreetName() {
-			return false;
-		}
-	}
-
 	public MapMultiSelectionMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
@@ -98,7 +31,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		for (MenuObject o : objects) {
-			o.mapActivity = mapActivity;
+			o.setMapActivity(mapActivity);
 			if (mapActivity != null) {
 				o.init();
 			} else {
@@ -141,17 +74,18 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			objects.add(menuObject);
 
 			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
-				menuObject.order = ((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj);
+				menuObject.setOrder(((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj));
 			}
 		}
+		Collections.sort(objects, new MultiSelectionMenuComparator(getAppMode()));
+	}
 
-		Collections.sort(objects, (obj1, obj2) -> {
-			if (obj1.order == obj2.order) {
-				return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
-			} else {
-				return obj1.order - obj2.order;
-			}
-		});
+	private ApplicationMode getAppMode() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getMyApplication().getSettings().getApplicationMode();
+		}
+		return null;
 	}
 
 	private void clearMenu() {

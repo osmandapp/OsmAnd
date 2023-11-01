@@ -26,14 +26,13 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedList;
 
-public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMenu.MenuObject> {
+public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 
 	private final MapMultiSelectionMenu menu;
 	private final UiUtilities iconsCache;
