@@ -155,6 +155,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
+	private ResourceManager resourceManager;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
@@ -227,7 +228,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		gpxDbHelper = app.getGpxDbHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		mapMarkersHelper = app.getMapMarkersHelper();
-		ResourceManager resourceManager = app.getResourceManager();
+		resourceManager = app.getResourceManager();
 		resourceManager.addResourceListener(this);
 		osmandRenderer = resourceManager.getRenderer().getRenderer();
 		chartPointsHelper = new ChartPointsHelper(getContext());
@@ -1864,6 +1865,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
 		}
+	}
+
+	@Override
+	public void destroyLayer() {
+		super.destroyLayer();
+		resourceManager.removeResourceListener(this);
 	}
 
 	@Override
