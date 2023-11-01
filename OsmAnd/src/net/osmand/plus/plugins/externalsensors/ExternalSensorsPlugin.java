@@ -74,6 +74,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final static String DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY = "deny_write_sensor_data";
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -195,7 +196,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		ApplicationMode selectedAppMode = settings.getApplicationMode();
 		CommonPreference<String> preference = getPrefSettingsForWidgetType(writeToGpxWidgetType);
 		String speedDeviceId = preference.getModeValue(selectedAppMode);
-		if (!Algorithms.isEmpty(speedDeviceId)) {
+		if (!Algorithms.isEmpty(speedDeviceId) && !DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(speedDeviceId)) {
 			AbstractDevice<?> device = devicesHelper.getDevice(speedDeviceId);
 			if (device != null) {
 				try {
