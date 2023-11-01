@@ -124,6 +124,8 @@ public class ResourceManager {
 
 	public interface ResourceListener {
 		default void onMapsIndexed() {}
+		default void onReaderIndexed(BinaryMapIndexReader reader) {}
+		default void onReaderClosed(BinaryMapIndexReader reader) {}
 		default void onMapClosed(String fileName) {}
 	}
 
@@ -960,8 +962,9 @@ public class ResourceManager {
 			}
 			try {
 				BinaryMapIndexReader mapReader = null;
+				boolean reindex = filesToReindex.contains(f);
 				try {
-					mapReader = cachedOsmandIndexes.getReader(f, !filesToReindex.contains(f));
+					mapReader = cachedOsmandIndexes.getReader(f, !reindex);
 					if (mapReader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 						mapReader = null;
 					}
@@ -992,6 +995,11 @@ public class ResourceManager {
 						}
 					} else if (!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
+						if (reindex) {
+							for (ResourceListener l : resourceListeners) {
+								l.onReaderIndexed(mapReader);
+							}
+						}
 					}
 					indexFileNames.put(fileName, dateFormat.format(dateCreated));
 					indexFiles.put(fileName, f);
@@ -1403,6 +1411,9 @@ public class ResourceManager {
 		renderer.closeConnection(fileName);
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
 		if (resource != null) {
+			for (ResourceListener l : resourceListeners) {
+				l.onReaderClosed(resource.initialReader);
+			}
 			resource.close();
 		}
 		for (ResourceListener l : resourceListeners) {
