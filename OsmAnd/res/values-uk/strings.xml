@@ -5557,7 +5557,7 @@
     <string name="key_event_category_actions">Дії</string>
     <string name="glide_ratio_to_target">Коефіцієнт ковзання до цілі</string>
     <string name="average_glide_ratio">Середній коефіцієнт ковзання</string>
-    <string name="key_event_action_activity_back_pressed">Дія знову натиснута</string>
+    <string name="key_event_action_activity_back_pressed">Натиснено кнопку назад</string>
     <string name="key_event_action_emit_navigation_hint">Виведення навігаційної інформації</string>
     <string name="map_widget_group_glide_ratio">Коефіцієнт ковзання</string>
 </resources>
