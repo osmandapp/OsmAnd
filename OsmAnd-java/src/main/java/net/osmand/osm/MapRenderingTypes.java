@@ -294,6 +294,8 @@ public abstract class MapRenderingTypes {
 				rtype.propagateToNodes = MapRulType.PropagateToNodesType.END;
 			} else if ("center".equals(propagateToNodes)) {
 				rtype.propagateToNodes = MapRulType.PropagateToNodesType.CENTER;
+			} else if ("border".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.BORDER;
 			}
 		}
 		String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
@@ -754,7 +756,8 @@ public abstract class MapRenderingTypes {
 			ALL,
 			START,
 			END,
-			CENTER
+			CENTER,
+			BORDER
 		}
 
 	}
