@@ -42,20 +42,17 @@ public class InputDeviceHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private ApplicationMode appMode;
 
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
-	private final List<InputDeviceProfile> customDevices;
+	private final List<InputDeviceProfile> customDevices = new ArrayList<>();
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
 	private final List<InputDeviceHelperCallback> listeners = new ArrayList<>();
 
 	public InputDeviceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
-		customDevices = loadCustomDevices();
-		for (InputDeviceProfile device : getAvailableDevices()) {
-			device.initialize(app);
-			cachedDevices.put(device.getId(), device);
-		}
+		updateAppModeIfNeeded(settings.getApplicationMode());
 	}
 
 	@NonNull
@@ -79,15 +76,20 @@ public class InputDeviceHelper {
 		notifyListeners(EventType.SELECT_DEVICE);
 	}
 
-	public void createAndSaveCustomDevice(@NonNull String newName) {
+	public void createAndSaveCustomDevice(@NonNull ApplicationMode appMode, @NonNull String newName) {
+		updateAppModeIfNeeded(appMode);
 		saveCustomDevice(makeCustomDevice(newName));
 	}
 
-	public void createAndSaveDeviceDuplicate(@NonNull InputDeviceProfile device) {
+	public void createAndSaveDeviceDuplicate(@NonNull ApplicationMode appMode, @NonNull InputDeviceProfile device) {
+		updateAppModeIfNeeded(appMode);
 		saveCustomDevice(makeCustomDeviceDuplicate(device));
 	}
 
-	public void renameCustomDevice(@NonNull CustomInputDeviceProfile device, @NonNull String newName) {
+	public void renameCustomDevice(@NonNull ApplicationMode appMode,
+	                               @NonNull CustomInputDeviceProfile device,
+	                               @NonNull String newName) {
+		updateAppModeIfNeeded(appMode);
 		device.setCustomName(newName);
 		syncSettings(EventType.RENAME_DEVICE);
 	}
@@ -100,7 +102,7 @@ public class InputDeviceHelper {
 	}
 
 	private String makeUniqueName(@NonNull String oldName) {
-		return Algorithms.makeUniqueName(oldName, newName -> !hasNameDuplicate(newName));
+		return Algorithms.makeUniqueName(oldName, newName -> !hasNameDuplicate(appMode, newName));
 	}
 
 	@NonNull
@@ -130,23 +132,19 @@ public class InputDeviceHelper {
 		syncSettings(EventType.ADD_NEW_DEVICE);
 	}
 
-	public void removeCustomDevice(@NonNull String deviceId) {
+	public void removeCustomDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = cachedDevices.remove(deviceId);
 		if (device != null) {
 			customDevices.remove(device);
 			cachedDevices.remove(deviceId);
-			resetSelectedDeviceIfNeeded();
+			resetSelectedDeviceIfNeeded(appMode);
 			syncSettings(EventType.DELETE_DEVICE);
 		}
 	}
 
-	public void resetSelectedDeviceIfNeeded() {
-		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			resetSelectedDeviceIfNeeded(appMode);
-		}
-	}
-
 	public void resetSelectedDeviceIfNeeded(@NonNull ApplicationMode appMode) {
+		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getSelectedDevice(appMode);
 		if (device == null) {
 			// If selected device is unknown for application mode
@@ -155,8 +153,10 @@ public class InputDeviceHelper {
 		}
 	}
 
-	public boolean hasKeybindingNameDuplicate(@NonNull String deviceId, @NonNull String newName) {
-		InputDeviceProfile device = getDeviceById(deviceId);
+	public boolean hasKeybindingNameDuplicate(@NonNull ApplicationMode appMode,
+	                                          @NonNull String deviceId, @NonNull String newName) {
+		updateAppModeIfNeeded(appMode);
+		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device == null) {
 			return false;
 		}
@@ -169,9 +169,10 @@ public class InputDeviceHelper {
 		return false;
 	}
 
-	public void updateKeyBinding(@NonNull String deviceId, int originalKeyCode,
-	                             @NonNull KeyBinding newKeyBinding) {
-		InputDeviceProfile device = getDeviceById(deviceId);
+	public void updateKeyBinding(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                             int originalKeyCode, @NonNull KeyBinding newKeyBinding) {
+		updateAppModeIfNeeded(appMode);
+		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device == null) {
 			return;
 		}
@@ -196,7 +197,8 @@ public class InputDeviceHelper {
 	}
 
 	@Nullable
-	public InputDeviceProfile getDeviceById(@NonNull String deviceId) {
+	public InputDeviceProfile getDeviceById(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		updateAppModeIfNeeded(appMode);
 		return cachedDevices.get(deviceId);
 	}
 
@@ -216,7 +218,7 @@ public class InputDeviceHelper {
 	@Nullable
 	public InputDeviceProfile getSelectedDevice(@NonNull ApplicationMode appMode) {
 		String id = getSelectedDeviceId(appMode);
-		return id != null ? cachedDevices.get(id) : null;
+		return id != null ? getDeviceById(appMode, id) : null;
 	}
 
 	@Nullable
@@ -224,7 +226,8 @@ public class InputDeviceHelper {
 		return settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 	}
 
-	public boolean hasNameDuplicate(@NonNull String newName) {
+	public boolean hasNameDuplicate(@NonNull ApplicationMode appMode, @NonNull String newName) {
+		updateAppModeIfNeeded(appMode);
 		for (InputDeviceProfile device : getAvailableDevices()) {
 			if (Algorithms.objectEquals(device.toHumanString(app).trim(), newName.trim())) {
 				return true;
@@ -239,9 +242,38 @@ public class InputDeviceHelper {
 		}
 	}
 
+	/**
+	 * You must call this method at the beginning of each public method
+	 * that use devices cache and can be called from the outside.
+	 * This will help ensure correct interaction with profile-dependent parameters.
+	 *
+	 * This method checks if the app mode has changed since the last time this method was called,
+	 * and if so, reloads cached devices for currently selected app mode from the settings.
+	 *
+	 * @param appMode - currently selected app mode for the context
+	 *                   from where the public method was called.
+	 */
+	private void updateAppModeIfNeeded(@NonNull ApplicationMode appMode) {
+		if (this.appMode != appMode) {
+			this.appMode = appMode;
+			updateCachedInputDevices();
+		}
+	}
+
+	private void updateCachedInputDevices() {
+		customDevices.clear();
+		cachedDevices.clear();
+
+		customDevices.addAll(loadCustomDevices(appMode));
+		for (InputDeviceProfile device : getAvailableDevices()) {
+			device.initialize(app);
+			cachedDevices.put(device.getId(), device);
+		}
+	}
+
 	@NonNull
-	private List<InputDeviceProfile> loadCustomDevices() {
-		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get();
+	private List<InputDeviceProfile> loadCustomDevices(@NonNull ApplicationMode appMode) {
+		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.getModeValue(appMode);
 		try {
 			return readFromJson(new JSONObject(json));
 		} catch (JSONException e) {
@@ -254,7 +286,7 @@ public class InputDeviceHelper {
 		JSONObject json = new JSONObject();
 		try {
 			writeToJson(json, customDevices);
-			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(json.toString());
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString());
 		} catch (JSONException e) {
 			LOG.debug("Error when writing custom devices to JSON ", e);
 		}

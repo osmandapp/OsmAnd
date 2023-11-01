@@ -125,8 +125,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_6_05 = 4605;
 	// 4606 - 4.6-06 (Change external input device preference type from integer to string)
 	public static final int VERSION_4_6_06 = 4606;
+	// 4607 - 4.6-07 (Migrate custom input devices preference from global to profile dependent)
+	public static final int VERSION_4_6_07 = 4607;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_06;
+	public static final int LAST_APP_VERSION = VERSION_4_6_07;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -233,6 +235,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_06) {
 					updateExternalInputDevicePreferenceType();
+				}
+				if (prevAppVersion < VERSION_4_6_07) {
+					migrateCustomInputDevicesPreference();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -739,6 +744,15 @@ public class AppVersionUpgradeOnInit {
 				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
 			}
 			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newId != null);
+		}
+	}
+
+	private void migrateCustomInputDevicesPreference() {
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<String> oldPreference = new StringPreference(settings, "custom_external_input_devices", "").makeGlobal().makeShared().storeLastModifiedTime();
+		String oldPreferenceValue = oldPreference.get();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, oldPreferenceValue);
 		}
 	}
 }

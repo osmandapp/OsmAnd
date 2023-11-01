@@ -157,7 +157,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 				}
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
-				} else if (deviceHelper.hasKeybindingNameDuplicate(deviceId, newName)) {
+				} else if (deviceHelper.hasKeybindingNameDuplicate(appMode, deviceId, newName)) {
 					app.showToastMessage(R.string.message_name_is_already_exists);
 				} else {
 					callback.processResult(newName.trim());
@@ -203,7 +203,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		String originalName = keyBinding.getName(app);
 		if (!Objects.equals(originalName, newName)) {
 			keyBinding = new KeyBinding(newName, keyBinding);
-			deviceHelper.updateKeyBinding(deviceId, keyBinding.getKeyCode(), keyBinding);
+			deviceHelper.updateKeyBinding(appMode, deviceId, keyBinding.getKeyCode(), keyBinding);
 		}
 	}
 
@@ -212,7 +212,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		int originalKeyCode = keyBinding.getKeyCode();
 		if (newKeyCode != originalKeyCode) {
 			keyBinding = new KeyBinding(newKeyCode, keyBinding);
-			deviceHelper.updateKeyBinding(deviceId, originalKeyCode, keyBinding);
+			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyCode, keyBinding);
 		}
 	}
 

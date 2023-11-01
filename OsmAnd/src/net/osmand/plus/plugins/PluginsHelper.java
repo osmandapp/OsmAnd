@@ -741,7 +741,7 @@ public class PluginsHelper {
 	}
 
 	public static void bindCommonKeyEventCommands(@NonNull InputDeviceProfile deviceProfile) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.bindCommonKeyEventCommands(deviceProfile);
 		}
 	}

@@ -61,7 +61,7 @@ class InputDevicesController {
 	public void askAddNewCustomDevice() {
 		String title = app.getString(R.string.add_new_type);
 		showEnterNameDialog(title, "", newName -> {
-			deviceHelper.createAndSaveCustomDevice(newName);
+			deviceHelper.createAndSaveCustomDevice(appMode, newName);
 			return true;
 		});
 	}
@@ -70,7 +70,7 @@ class InputDevicesController {
 		String title = app.getString(R.string.shared_string_rename);
 		showEnterNameDialog(title, device.toHumanString(app), newName -> {
 			if (device instanceof CustomInputDeviceProfile) {
-				deviceHelper.renameCustomDevice((CustomInputDeviceProfile) device, newName);
+				deviceHelper.renameCustomDevice(appMode, (CustomInputDeviceProfile) device, newName);
 			}
 			return true;
 		});
@@ -94,7 +94,7 @@ class InputDevicesController {
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_filename);
 				} else {
-					if (deviceHelper.hasNameDuplicate(newName)) {
+					if (deviceHelper.hasNameDuplicate(appMode, newName)) {
 						app.showToastMessage(R.string.message_name_is_already_exists);
 					} else {
 						callback.processResult(newName.trim());
@@ -107,7 +107,7 @@ class InputDevicesController {
 	}
 
 	public void duplicateDevice(@NonNull InputDeviceProfile device) {
-		deviceHelper.createAndSaveDeviceDuplicate(device);
+		deviceHelper.createAndSaveDeviceDuplicate(appMode, device);
 	}
 
 	public void askRemoveDevice(@NonNull InputDeviceProfile device) {
@@ -119,7 +119,7 @@ class InputDevicesController {
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButtonTextColor(ColorUtilities.getColor(app, R.color.color_warning))
 				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-					deviceHelper.removeCustomDevice(device.getId());
+					deviceHelper.removeCustomDevice(appMode, device.getId());
 				});
 		String typeName = device.toHumanString(app);
 		String message = app.getString(R.string.remove_type_q, typeName);
