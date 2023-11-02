@@ -5420,7 +5420,7 @@
     <string name="help_article_navigation_routing_osmand_routing_name">O wyznaczaniu trasy OsmAnd</string>
     <string name="shared_string_setup">Ustawienie</string>
     <string name="smart_folder_name_present">Taki mądry folder już istnieje</string>
-    <string name="smart_folder_saved">Zapisano mądry folder</string>
+    <string name="smart_folder_saved">Zapisano inteligentny folder</string>
     <string name="help_article_purchases_giveaway_name">Upominek</string>
     <string name="add_smart_folder">Dodaj mądry folder</string>
     <string name="empty_name">Pusta nazwa</string>
@@ -5492,4 +5492,27 @@
     <string name="trash_is_empty">Kosz jest pusty</string>
     <string name="shared_string_trash">Śmieci</string>
     <string name="shared_string_delete_item">Usuń element</string>
+    <string name="change_button">Przycisk zmiany</string>
+    <string name="enable_to_use_external_input_device">Umożliwia korzystanie z zewnętrznego urządzenia wejściowego z OsmAnd</string>
+    <string name="root_folder">Główny folder</string>
+    <string name="shared_string_rows">Rzędy</string>
+    <string name="key_event_action_move_left">Przesuń w lewo</string>
+    <string name="all_folders">Wszystkie foldery</string>
+    <string name="deletion_error">Błąd usuwania</string>
+    <string name="key_event_action_move_right">Przesuń w prawo</string>
+    <string name="shared_string_show_less">Pokaż mniej</string>
+    <string name="shared_string_button">Przycisk</string>
+    <string name="folder">Folder</string>
+    <string name="key_event_action_take_media_note">Uwaga dla mediów</string>
+    <string name="shared_string_action">Akcja</string>
+    <string name="add_new_type">Dodaj nowy typ</string>
+    <string name="key_event_action_move_up">Przesuń w górę</string>
+    <string name="key_event_action_open_search_view">Otwórz widok wyszukiwania</string>
+    <string name="key_event_action_zoom_out">Powiększenie</string>
+    <string name="key_event_action_toggle_drower">Pokaż/ukryj menu boczne</string>
+    <string name="key_event_action_move_to_my_location">Przenieś do mojej lokalizacji</string>
+    <string name="not_specified">Nie określono</string>
+    <string name="download_to_device">Pobierz na urządzenie</string>
+    <string name="key_event_action_move_down">Przesuń w dół</string>
+    <string name="key_event_category_actions">Akcje</string>
 </resources>
