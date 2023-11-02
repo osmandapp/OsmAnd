@@ -129,7 +129,7 @@ public class MapRendererContext {
 	public void setNightMode(boolean nightMode) {
 		if (nightMode != this.nightMode) {
 			this.nightMode = nightMode;
-			updateMapSettings();
+			updateMapSettings(true);
 		}
 	}
 
@@ -138,17 +138,17 @@ public class MapRendererContext {
 		boolean useAppLocale = MapRenderRepositories.useAppLocaleForMap(app, zoom);
 		if (this.useAppLocale != useAppLocale) {
 			this.useAppLocale = useAppLocale;
-			updateMapSettings();
+			updateMapSettings(false);
 		}
 	}
 
-	public void updateMapSettings() {
+	public void updateMapSettings(boolean forceUpdateProviders) {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView instanceof AtlasMapRendererView && cachedReferenceTileSize != getReferenceTileSize()) {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(getReferenceTileSize());
 		}
 		if (mapPresentationEnvironment != null) {
-			updateMapPresentationEnvironment();
+			updateMapPresentationEnvironment(forceUpdateProviders);
 		}
 	}
 
@@ -156,7 +156,7 @@ public class MapRendererContext {
 	                        @NonNull Map<ProviderType, ObfsCollection> obfsCollections) {
 		this.mapStylesCollection = mapStylesCollection;
 		this.obfsCollections = obfsCollections;
-		updateMapPresentationEnvironment();
+		updateMapPresentationEnvironment(false);
 		recreateRasterAndSymbolsProvider(providerType);
 	}
 
@@ -171,7 +171,7 @@ public class MapRendererContext {
 	/**
 	 * Update map presentation environment and everything that depends on it
 	 */
-	private void updateMapPresentationEnvironment() {
+	private void updateMapPresentationEnvironment(boolean forceUpdateProviders) {
 		// Create new map presentation environment
 		OsmandSettings settings = app.getSettings();
 
@@ -222,7 +222,7 @@ public class MapRendererContext {
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
 		if (obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) {
-			if (recreateMapPresentation) {
+			if (recreateMapPresentation || forceUpdateProviders) {
 				recreateRasterAndSymbolsProvider(providerType);
 			} else if (languageParamsChanged) {
 				if (mapPrimitivesProvider != null || updateMapPrimitivesProvider(providerType)) {
