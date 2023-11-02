@@ -5470,7 +5470,7 @@
     <string name="maps_and_resources">Mapoj kaj rimedoj</string>
     <string name="show_toast_about_key_pressed">Montri sciigon pri premita klavo</string>
     <string name="shared_string_rows">Vicoj</string>
-    <string name="press_button_to_link_with_action">Premu butonon sur via aparato por asigni ĝin al la elektita ago.</string>
+    <string name="press_button_to_link_with_action">Premu butonon sur via aparato por asigni ĝin al la ago: %1$s</string>
     <string name="deletion_error">Eraro pri forigo</string>
     <string name="shared_string_button">Butono</string>
     <string name="shared_string_action">Ago</string>
@@ -5542,4 +5542,6 @@
     <string name="shared_string_delete_item">Forigi objekton</string>
     <string name="key_event_category_actions">Agoj</string>
     <string name="searching_matching_tracks">Serĉi ĉiujn kongruajn spurojn</string>
+    <string name="change_button">Ŝanĝi butonon</string>
+    <string name="download_to_device">Elŝuti al aparato</string>
 </resources>
