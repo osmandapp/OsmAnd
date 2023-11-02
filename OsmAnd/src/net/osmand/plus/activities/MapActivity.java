@@ -1155,54 +1155,70 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
-			float x = event.getX();
-			float y = event.getY();
-			float dx = x * 15;
-			float dy = y * 15;
-			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
-			QuadPoint cp = tb.getCenterPixelPoint();
-			MapRendererView renderer = getMapView().getMapRenderer();
-			LatLon l;
-			if (renderer != null) {
-				PointI point31 = new PointI();
-				if (renderer.getLocationFromScreenPoint(new PointI((int) (cp.x + dx), (int) (cp.y + dy)), point31)) {
-					PointI target31 = renderer.getState().getTarget31();
-					int deltaX = point31.getX() - target31.getX();
-					int deltaY = point31.getY() - target31.getY();
-					PointI mapTarget31 = renderer.getState().getFixedLocation31();
-					int nextTargetX = mapTarget31.getX();
-					int nextTargetY = mapTarget31.getY();
-					if (Integer.MAX_VALUE - nextTargetX < deltaX) {
-						deltaX -= Integer.MAX_VALUE;
-						deltaX--;
-					}
-					if (Integer.MAX_VALUE - nextTargetY < deltaY) {
-						deltaY -= Integer.MAX_VALUE;
-						deltaY--;
-					}
-					nextTargetX += deltaX;
-					nextTargetY += deltaY;
-					if (nextTargetX < 0) {
-						nextTargetX += Integer.MAX_VALUE;
-						nextTargetX++;
-					}
-					if (nextTargetY < 0) {
-						nextTargetY += Integer.MAX_VALUE;
-						nextTargetY++;
-					}
-					l = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
-				} else {
-					return true;
+		if (settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
+			MapRendererView mapRenderer = getMapView().getMapRenderer();
+			int action = event.getAction();
+			if (action == MotionEvent.ACTION_DOWN) {
+				if (mapRenderer != null) {
+					mapRenderer.suspendSymbolsUpdate();
 				}
-			} else {
-				l = NativeUtilities.getLatLonFromPixel(renderer, tb,
-						cp.x + dx, cp.y + dy);
+			} else if (action == MotionEvent.ACTION_MOVE) {
+				onTrackballMove(event.getX(), event.getY());
+				return true;
+			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+				if (mapRenderer != null) {
+					mapRenderer.resumeSymbolsUpdate();
+				}
 			}
-			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
-			return true;
 		}
 		return super.onTrackballEvent(event);
+	}
+
+	private void onTrackballMove(float moveX, float moveY) {
+		float dx = moveX * 15;
+		float dy = moveY * 15;
+		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
+		QuadPoint cp = tb.getCenterPixelPoint();
+		MapRendererView mapRenderer = getMapView().getMapRenderer();
+		LatLon newCenterLatLon;
+		if (mapRenderer != null) {
+			PointI point31 = new PointI();
+			PointI pixel = new PointI((int) (cp.x + dx), (int) (cp.y + dy));
+			boolean ok = mapRenderer.getLocationFromScreenPoint(pixel, point31);
+			if (!ok) {
+				return;
+			}
+
+			PointI target31 = mapRenderer.getState().getTarget31();
+			int deltaX = point31.getX() - target31.getX();
+			int deltaY = point31.getY() - target31.getY();
+			PointI mapTarget31 = mapRenderer.getState().getFixedLocation31();
+			int nextTargetX = mapTarget31.getX();
+			int nextTargetY = mapTarget31.getY();
+			if (Integer.MAX_VALUE - nextTargetX < deltaX) {
+				deltaX -= Integer.MAX_VALUE;
+				deltaX--;
+			}
+			if (Integer.MAX_VALUE - nextTargetY < deltaY) {
+				deltaY -= Integer.MAX_VALUE;
+				deltaY--;
+			}
+			nextTargetX += deltaX;
+			nextTargetY += deltaY;
+			if (nextTargetX < 0) {
+				nextTargetX += Integer.MAX_VALUE;
+				nextTargetX++;
+			}
+			if (nextTargetY < 0) {
+				nextTargetY += Integer.MAX_VALUE;
+				nextTargetY++;
+			}
+			newCenterLatLon = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
+		} else {
+			newCenterLatLon = NativeUtilities.getLatLonFromPixel(null, tb,
+					cp.x + dx, cp.y + dy);
+		}
+		app.getOsmandMap().setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
 	}
 
 	@Override
