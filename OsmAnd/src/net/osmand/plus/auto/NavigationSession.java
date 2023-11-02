@@ -101,7 +101,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		this.mapView = mapView;
 		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
 		if (navigationCarSurface != null) {
-			navigationCarSurface.setMapView(mapView);
+			navigationCarSurface.setMapView(hasStarted() ? mapView : null);
 		}
 	}
 

@@ -37,6 +37,7 @@ public class NativeCoreContext {
 
 	private static boolean init;
 
+	private static Map<ProviderType, ObfsCollection> obfsCollectionsByProviderType;
 	private static MapRendererContext mapRendererContext;
 
 	public static boolean isInit() {
@@ -63,7 +64,7 @@ public class NativeCoreContext {
 
 				String cacheFilePath = new File(app.getCacheDir(), CACHE_FILE_NAME).getAbsolutePath();
 
-				Map<ProviderType, ObfsCollection> obfsCollectionsByProviderType = new HashMap<>();
+				obfsCollectionsByProviderType = new HashMap<>();
 
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.setIndexCacheFile(cacheFilePath);
@@ -97,8 +98,7 @@ public class NativeCoreContext {
 					obfsCollectionsByProviderType.put(ProviderType.CONTOUR_LINES, contourLinesObfsCollection);
 				}
 
-				mapRendererContext = new MapRendererContext(app, dm.density);
-				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);
+				setMapRendererContext(app, dm.density);
 				init = true;
 			}
 		}
@@ -107,5 +107,15 @@ public class NativeCoreContext {
 	@Nullable
 	public static MapRendererContext getMapRendererContext() {
 		return mapRendererContext;
+	}
+
+	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
+		if (mapRendererContext != null) {
+			if (mapRendererContext.getDensity() == density)
+				return;
+			mapRendererContext.setMapRendererView(null);
+		}
+		mapRendererContext = new MapRendererContext(app, density);
+		mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);
 	}
 }
