@@ -71,8 +71,6 @@ import java.util.concurrent.Executors;
 public class DataStorageFragment extends BaseSettingsFragment implements FilesCollectListener,
 		StorageMigrationRestartListener, MoveFilesStopListener {
 
-	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
-
 	private static final String MEMORY_USAGE = "memory_usage";
 	private static final String CHANGE_DIRECTORY_BUTTON = "change_directory";
 
@@ -215,9 +213,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			if (key != null) {
 				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
-					if (!key.equals(INTERNAL_STORAGE) && !AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-						requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-					} else if (key.equals(MANUALLY_SPECIFIED)) {
+					if (key.equals(MANUALLY_SPECIFIED)) {
 						showFolderSelectionDialog();
 					} else if (storageMigration || firstUsage) {
 						confirm(app, activity, newDataStorage, false);
@@ -229,20 +225,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE && grantResults.length > 0
-				&& permissions.length > 0 && Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				if (newDataStorage != null) {
-					confirm(app, activity, newDataStorage, false);
-				}
-			} else {
-				app.showToastMessage(R.string.missing_write_external_storage_permission);
-			}
-		}
 	}
 
 	@Override
