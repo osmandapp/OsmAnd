@@ -138,18 +138,21 @@ public class CloudTrashController {
 			log.error("Failed to download item: " + item.oldFile.getName() + ", SettingsItem is null");
 			return;
 		}
-		RemoteFilesType filesType = item.isLocalDeletion() ? UNIQUE : OLD;
 		LocalFile localFile = backupHelper.getBackup().getLocalFiles().get(item.oldFile.getTypeNamePath());
 		if (localFile != null) {
 			FragmentManager manager = fragment.getFragmentManager();
 			if (manager != null) {
-				FileExistBottomSheet.showInstance(manager, localFile.getFileName(), overwrite ->
-						settingsHelper.syncSettingsItems(item.oldFile.getName(), null,
-								item.oldFile, filesType, SYNC_OPERATION_DOWNLOAD, overwrite));
+				FileExistBottomSheet.showInstance(manager, localFile.getFileName(), overwrite -> downloadItem(item, overwrite));
 			}
 		} else {
-			settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile, filesType, SYNC_OPERATION_DOWNLOAD, true);
+			downloadItem(item, true);
 		}
+	}
+
+	public void downloadItem(@NonNull TrashItem item, boolean shouldReplace) {
+		RemoteFilesType filesType = item.isLocalDeletion() ? UNIQUE : OLD;
+		settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile,
+				filesType, SYNC_OPERATION_DOWNLOAD, shouldReplace, item.isLocalDeletion());
 	}
 
 	public void restoreItem(@NonNull TrashItem item) {

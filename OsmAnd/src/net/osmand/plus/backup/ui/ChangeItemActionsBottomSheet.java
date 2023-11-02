@@ -198,7 +198,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {
-		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, operation, true);
+		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, operation);
 	}
 
 	private String getTitleForOperation() {
