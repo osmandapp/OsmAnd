@@ -8,7 +8,7 @@ import com.google.gson.stream.JsonReader;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.router.RouteResultPreparationTest;
-import net.osmand.util.MapUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
@@ -23,9 +23,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -83,12 +83,12 @@ public class OpenGLTest {
 		for (TestEntry testEntry : arr) {
 			EyepieceParams params = new EyepieceParams();
 			assert(testEntry.center != null);
-			params.latitude = testEntry.center.latitude;
-			params.longitude = testEntry.center.longitude;
+			params.latitude = testEntry.center.lat;
+			params.longitude = testEntry.center.lon;
 
 			parseVisibilityZoom(testEntry.icons, params);
 			parseVisibilityZoom(testEntry.textOnPath, params);
-			parseVisibilityZoom(testEntry.text, params);
+			parseVisibilityZoom(testEntry.billboardText, params);
 
 			if (testEntry.eyepieceParams != null) {
 				params.commandParams = testEntry.eyepieceParams;
@@ -105,11 +105,11 @@ public class OpenGLTest {
 			return;
 		}
 		for (TestEntryUnit testEntryUnit : unitList) {
-			if (testEntryUnit.visibilityZoom == null) {
+			if (testEntryUnit.visibleInstancesByZoom == null) {
 				continue;
 			}
-			for (Map.Entry<Integer, Boolean> entry : testEntryUnit.visibilityZoom.entrySet()) {
-				params.registerZoom(entry.getKey());
+			for (Integer zoom : testEntryUnit.visibleInstancesByZoom.keySet()) {
+				params.registerZoom(zoom);
 			}
 		}
 	}
@@ -160,7 +160,7 @@ public class OpenGLTest {
 				throw new RuntimeException("File(s) is empty for test:" + testEntry.testName);
 			}
 			List<TestInfo> testInfo = parseTestJson(testEntry);
-			compareTestAndRenderedInfo(testInfo, renderedInfo);
+			compareExpectedAndRenderedInfo(testInfo, renderedInfo);
 		}
 		if (cummulativeException.hasExceptions()) {
 			throw new IllegalStateException(cummulativeException.getFormatExceptions());
@@ -214,7 +214,7 @@ public class OpenGLTest {
 	private List<TestInfo> parseTestJson(TestEntry testEntry) {
 		List<TestInfo> result = new ArrayList<>();
 		parseTestJsonArr(testEntry.icons, result, RenderedType.ICON);
-		parseTestJsonArr(testEntry.text, result, RenderedType.TEXT_ON_POINT);
+		parseTestJsonArr(testEntry.billboardText, result, RenderedType.TEXT_ON_POINT);
 		parseTestJsonArr(testEntry.textOnPath, result, RenderedType.TEXT_ON_LINE);
 		return result;
 	}
@@ -225,121 +225,97 @@ public class OpenGLTest {
 		}
 		for (TestEntryUnit testEntryUnit : unitList) {
 			TestInfo testInfo = new TestInfo();
-			if (testEntryUnit.visibilityZoom == null) {
-				throw new RuntimeException("visibilityZoom not found");
+			if (testEntryUnit.visibleInstancesByZoom == null) {
+				throw new RuntimeException("visibleInstancesByZoom not found");
 			}
 
 			if (testEntryUnit.osmId != null) {
 				testInfo.id = testEntryUnit.osmId;
 			}
-			for (Map.Entry<Integer, Boolean> entry : testEntryUnit.visibilityZoom.entrySet()) {
-				int z = entry.getKey();
-				boolean visible = entry.getValue();
-				if (visible) {
-					testInfo.addVisibleZoom(z);
-				} else {
-					testInfo.addInVisibleZoom(z);
-				}
+
+			for (Map.Entry<Integer, String> entry : testEntryUnit.visibleInstancesByZoom.entrySet()) {
+				int zoom = entry.getKey();
+				String visibleInstancesRangeStr = entry.getValue();
+				Range visibleInstancesRange = Range.parse(visibleInstancesRangeStr);
+				testInfo.visibleInstancesByZoom.put(zoom, visibleInstancesRange);
 			}
 
-			if (testEntryUnit.latitude != null && testEntryUnit.longitude != null) {
-				testInfo.center = new LatLon(testEntryUnit.latitude, testEntryUnit.longitude);
-			}
-
-			testInfo.text = testEntryUnit.name;
-			if (testEntryUnit.startPoint != null && testEntryUnit.endPoint != null) {
-				testInfo.startPoint = new LatLon(testEntryUnit.startPoint.latitude, testEntryUnit.startPoint.longitude);
-				testInfo.endPoint = new LatLon(testEntryUnit.endPoint.latitude, testEntryUnit.endPoint.longitude);
-			}
-
+			testInfo.content = testEntryUnit.content;
 			testInfo.type = type;
 
 			result.add(testInfo);
 		}
 	}
 
-	private void compareTestAndRenderedInfo(List<TestInfo> testInfo, List<RenderedInfo> renderedInfo) {
-		for (TestInfo t : testInfo) {
-			checkOsmIdAndText(renderedInfo, t);
+	private void compareExpectedAndRenderedInfo(List<TestInfo> testInfo, List<RenderedInfo> renderedInfo) {
+		for (TestInfo expected : testInfo) {
+			Map<Integer, Integer> renderedSymbolsByZoom = getRenderedInstancesByZoom(expected, renderedInfo);
+			compareExpectedAndRenderedInstancesCount(expected, renderedSymbolsByZoom);
 		}
 	}
 
-	private void checkOsmIdAndText(List<RenderedInfo> renderedInfo, TestInfo testInfo) {
-		HashSet<Integer> checkedZooms = testInfo.visibleZooms;
-		checkedZooms.addAll(testInfo.inVisibleZooms);
-		String name = testInfo.text != null ? " name:\"" + testInfo.text + "\"" : "";
-		String type = testInfo.type == RenderedType.ICON ? "icon " : "text ";
-		for (RenderedInfo info : renderedInfo) {
-			int zoom = info.zoom;
-			if (!checkedZooms.contains(zoom)) {
+	private Map<Integer, Integer> getRenderedInstancesByZoom(TestInfo expected, List<RenderedInfo> renderedSymbols) {
+		Map<Integer, Integer> renderedInstancesByZoom = new HashMap<>();
+
+		for (RenderedInfo renderedSymbolInfo : renderedSymbols) {
+			assert (expected.id != -1 || expected.content != null);
+			if (expected.id != -1 && expected.id != renderedSymbolInfo.id) {
 				continue;
 			}
-			boolean isEqualText = testInfo.type == RenderedType.TEXT_ON_LINE || testInfo.type == RenderedType.TEXT_ON_POINT;
-			isEqualText &= info.content != null && info.content.equals(testInfo.text);
-			if (isEqualText) {
-				LatLon c = null;
-				LatLon c2 = null;
-				if (testInfo.center != null) {
-					c = testInfo.center;
-				} else if (testInfo.startPoint != null && testInfo.endPoint != null) {
-					c = MapUtils.calculateMidPoint(testInfo.startPoint, testInfo.endPoint);
-				}
-				if (info.startPoint != null && info.endPoint != null) {
-					c2 = MapUtils.calculateMidPoint(info.startPoint, info.endPoint);
-				} else if (info.center != null) {
-					c2 = info.center;
-				}
-				if (c != null && c2 != null) {
-					double dist = MapUtils.getDistance(c, c2);
-					if (dist <= DISTANCES_TABLE.get(zoom)) {
-						if (testInfo.inVisibleZooms.contains(zoom)) {
-							cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
-						}
-					} else {
-						cummulativeException.addException("text \"" + testInfo.text + "\" is visible on zoom:" + zoom +
-								", but too far from test location. Found location " +
-								String.format("%,.5f", c2.getLatitude()) + " " + String.format("%,.5f", c2.getLongitude()) +
-								" (" + info.id + ") " +
-								". Distance " + (int) dist + " meters. Maximum distance for zoom=" + zoom + " is " + DISTANCES_TABLE.get(zoom) + " meters");
-					}
-					checkedZooms.remove(zoom);
-					continue;
-				} else if (c == null) {
-					//lat and lon is not set in the test, just check visibility
-					if (testInfo.visibleZooms.contains(zoom)) {
-						checkedZooms.remove(zoom);
-						continue;
-					} else if (testInfo.inVisibleZooms.contains(zoom)) {
-						cummulativeException.addException("text \"" + testInfo.text + "\" must be not visible on zoom:" + zoom);
-					}
-				}
-			}
-			if (testInfo.type == RenderedType.ICON || isEqualText) {
-				if (info.id == testInfo.id && testInfo.visibleZooms.contains(zoom)) {
-					checkedZooms.remove(zoom);
-					continue;
-				}
 
-				if (info.id == testInfo.id && testInfo.inVisibleZooms.contains(zoom)) {
-					cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be not visible on zoom:" + zoom);
-					checkedZooms.remove(zoom);
-					continue;
-				}
+			if (expected.type != renderedSymbolInfo.type) {
+				continue;
 			}
-			if (checkedZooms.size() == 0) {
-				break;
+
+			if (!Algorithms.isEmpty(expected.content) && !expected.content.equals(renderedSymbolInfo.content)) {
+				continue;
+			}
+
+			int symbolZoom = renderedSymbolInfo.zoom;
+			if (expected.visibleInstancesByZoom.containsKey(symbolZoom)) {
+				Integer count = renderedInstancesByZoom.get(symbolZoom);
+				count = count == null ? 1 : count + 1;
+				renderedInstancesByZoom.put(symbolZoom, count);
 			}
 		}
-		checkedZooms.removeAll(testInfo.inVisibleZooms);
-		if (checkedZooms.size() > 0) {
-			cummulativeException.addException(type + "osmId:" + testInfo.id + name + " must be visible on zooms:" + checkedZooms.toString());
+
+		return renderedInstancesByZoom;
+	}
+
+	private void compareExpectedAndRenderedInstancesCount(TestInfo expected, Map<Integer, Integer> renderedSymbolsByZoom) {
+		for (Map.Entry<Integer, Range> expectedSymbolsOnZoom : expected.visibleInstancesByZoom.entrySet()) {
+			int zoom = expectedSymbolsOnZoom.getKey();
+			Range expectedRange = expectedSymbolsOnZoom.getValue();
+
+			int actualCount = renderedSymbolsByZoom.containsKey(zoom)
+					? renderedSymbolsByZoom.get(zoom)
+					: 0;
+
+			if (actualCount < expectedRange.min || actualCount > expectedRange.max) {
+				String contentStr = Algorithms.isEmpty(expected.content)
+						? ""
+						: String.format(Locale.US, " \"%s\"", expected.content);
+				String fromMapObjectId = expected.id == -1
+						? ""
+						: String.format(Locale.US, " from map object %d", expected.id);
+				String error = String.format(Locale.US, "%s%s%s is rendered %d times on %d zoom, expected %s times",
+						expected.type.name, contentStr, fromMapObjectId, actualCount, zoom, expectedRange.str);
+				cummulativeException.addException(error);
+			}
 		}
 	}
 
 	private enum RenderedType {
-		ICON,
-		TEXT_ON_POINT,
-		TEXT_ON_LINE
+
+		ICON("billboard icon"),
+		TEXT_ON_POINT("billboard text"),
+		TEXT_ON_LINE("text on path");
+
+		private final String name;
+
+		RenderedType(String name) {
+			this.name = name;
+		}
 	}
 
 	private class RenderedInfo {
@@ -365,18 +341,44 @@ public class OpenGLTest {
 
 	private class TestInfo {
 		long id = -1;
-		LatLon center;
-		LatLon startPoint;
-		LatLon endPoint;
-		HashSet<Integer> visibleZooms = new HashSet<>();
-		HashSet<Integer> inVisibleZooms = new HashSet<>();
-		String text;
+		Map<Integer, Range> visibleInstancesByZoom = new HashMap<>();
+		String content;
 		RenderedType type;
-		void addVisibleZoom(int zoom) {
-			visibleZooms.add(zoom);
+	}
+
+	private static class Range {
+		public final String str;
+		public final int min;
+		public final int max;
+
+		private Range(String str, int min, int max) {
+			this.str = str;
+			this.min = min;
+			this.max = max;
 		}
-		void addInVisibleZoom(int zoom) {
-			inVisibleZooms.add(zoom);
+
+		public static Range parse(String str) {
+			int min;
+			int max;
+			if (str.contains(":")) {
+				String[] split = str.split(":");
+				if (split.length == 0 || split.length > 2) {
+					throw new RuntimeException("invalid visible instances range");
+				}
+
+				try {
+					min = split[0].isEmpty() ? 0 : Integer.parseInt(split[0]);
+					max = split.length == 1 ? Integer.MAX_VALUE : Integer.parseInt(split[1]);
+				} catch (NumberFormatException e) {
+					throw new RuntimeException("invalid visible instances range");
+				}
+			} else {
+				int count = Integer.parseInt(str);
+				min = count;
+				max = count;
+			}
+
+			return new Range(str, min, max);
 		}
 	}
 
@@ -430,7 +432,7 @@ public class OpenGLTest {
 		}
 
 		String getCommand(String eyepiecePath) {
-			assert(minZoom < maxZoom);
+			assert(minZoom <= maxZoom);
 			StringBuilder builder = new StringBuilder();
 			builder.append(eyepiecePath + " -verbose ");
 			if (!commandParams.contains("-obfsPath")) {
@@ -472,49 +474,28 @@ public class OpenGLTest {
 	private class TestEntry {
 		@SerializedName("testName")
 		public String testName;
-		@SerializedName("description")
-		public String description;
+		@SerializedName("issue")
+		public String issue;
 		@SerializedName("center")
-		public Coordinates center;
+		public LatitudeLongitude center;
 		@SerializedName("icons")
 		public List<TestEntryUnit> icons;
-		@SerializedName("text")
-		public List<TestEntryUnit> text;
+		@SerializedName("billboardText")
+		public List<TestEntryUnit> billboardText;
 		@SerializedName("textOnPath")
 		public List<TestEntryUnit> textOnPath;
 		@SerializedName("eyepieceParams")
 		public String eyepieceParams;
 	}
 
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	private class TestEntryUnit {
 		@SerializedName("osmId")
 		public Long osmId;
-		@SerializedName("name")
-		public String name;
-		@SerializedName("latitude")
-		public Double latitude;
-		@SerializedName("longitude")
-		public Double longitude;
-		@SerializedName("visibilityZoom")
-		Map<Integer, Boolean> visibilityZoom;
-		@SerializedName("startPoint")
-		Coordinates startPoint;
-		@SerializedName("endPoint")
-		Coordinates endPoint;
-	}
-
-	private class Coordinates {
-		@SerializedName("latitude")
-		public Double latitude;
-		@SerializedName("longitude")
-		public Double longitude;
-	}
-
-	private class Coords {
-		@SerializedName("lat")
-		public Double lat;
-		@SerializedName("lon")
-		public Double lon;
+		@SerializedName("content")
+		public String content;
+		@SerializedName("visibleInstancesByZoom")
+		Map<Integer, String> visibleInstancesByZoom;
 	}
 
 	private class RenderEntry {
@@ -531,11 +512,17 @@ public class OpenGLTest {
 		@SerializedName("lon")
 		public Double lon;
 		@SerializedName("startPoint")
-		public Coords startPoint;
+		public LatitudeLongitude startPoint;
 		@SerializedName("endPoint")
-		public Coords endPoint;
+		public LatitudeLongitude endPoint;
 		@SerializedName("content")
 		public String content;
 	}
 
+	private class LatitudeLongitude {
+		@SerializedName("lat")
+		public Double lat;
+		@SerializedName("lon")
+		public Double lon;
+	}
 }
