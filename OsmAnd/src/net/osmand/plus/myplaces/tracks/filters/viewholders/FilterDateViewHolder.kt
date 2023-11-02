@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.filters.viewholders
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.os.Build
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
@@ -131,10 +132,15 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 			val valueTo = it.valueTo
 			valueFromInput.setText(DATE_FORMAT.format(valueFrom))
 			valueFromInput.isClickable = false
-			valueFromInput.focusable = View.NOT_FOCUSABLE
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				valueFromInput.focusable = View.NOT_FOCUSABLE
+				valueToInput.focusable = View.NOT_FOCUSABLE
+			} else {
+				valueFromInput.isFocusable = false
+				valueToInput.isFocusable = false
+			}
 			valueToInput.setText(DATE_FORMAT.format(valueTo))
 			valueToInput.isClickable = false
-			valueToInput.focusable = View.NOT_FOCUSABLE
 
 			AndroidUiHelper.updateVisibility(selectedValue, filter!!.isEnabled())
 			selectedValue.text = String.format(
