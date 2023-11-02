@@ -50,13 +50,11 @@ public class GroupMenuProvider implements MenuProvider {
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
 	private final LocalItemsFragment fragment;
-	private final LocalGroup group;
 	private final boolean nightMode;
 
 	public GroupMenuProvider(@NonNull DownloadActivity activity, @NonNull LocalItemsFragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
-		this.group = fragment.getGroup();
 		this.nightMode = fragment.isNightMode();
 		app = activity.getMyApplication();
 		uiUtilities = app.getUIUtilities();
@@ -66,6 +64,10 @@ public class GroupMenuProvider implements MenuProvider {
 	public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
 
+		LocalGroup group = fragment.getGroup();
+		if (group == null) {
+			return;
+		}
 		boolean selectionMode = fragment.isSelectionMode();
 		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 
@@ -95,12 +97,12 @@ public class GroupMenuProvider implements MenuProvider {
 		actionsItem.setIcon(getIcon(R.drawable.ic_overflow_menu_white, colorId));
 		actionsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		actionsItem.setOnMenuItemClickListener(item -> {
-			showAdditionalActions(activity.findViewById(item.getItemId()));
+			showAdditionalActions(activity.findViewById(item.getItemId()), group);
 			return true;
 		});
 	}
 
-	private void showAdditionalActions(@NonNull View view) {
+	private void showAdditionalActions(@NonNull View view, @NonNull LocalGroup group) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		LocalItemType type = group.getType();
