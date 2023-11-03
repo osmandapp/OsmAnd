@@ -31,10 +31,6 @@ import java.util.Objects;
 
 public class OpenGLTest {
 
-	private Map<Integer, Integer> DISTANCES_TABLE;
-	private final int DISTANCE_ZOOM = 15;
-	private final int MAX_ZOOM = 21;
-	private final int MAX_DISTANCE_IN_METERS = 400;//for 15 zoom
 	protected Log log = PlatformUtil.getLog(OpenGLTest.class);
 	private final String PATH_TO_RESOURCES = "src/test/resources/rendering/";
 	private final String TES_JSON = "/test_3d_rendering.json";
@@ -57,21 +53,10 @@ public class OpenGLTest {
 				throw new RuntimeException(e);
 			}
 		}
-		initDistanceTable();
 		try {
 			test();
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	private void initDistanceTable() {
-		if (DISTANCES_TABLE == null) {
-			DISTANCES_TABLE = new HashMap<>();
-			for (int i = 0; i <= MAX_ZOOM; i++) {
-				double coef = Math.pow(2, DISTANCE_ZOOM - i);
-				DISTANCES_TABLE.put(i, (int) (coef * MAX_DISTANCE_IN_METERS));
-			}
 		}
 	}
 
