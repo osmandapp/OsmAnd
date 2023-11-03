@@ -2120,7 +2120,7 @@
     <string name="poi_publisher">Birou de editură</string>
     <string name="poi_parish">Birou parohial</string>
     <string name="poi_logistics">Birou de logistică</string>
-    <string name="poi_office_forestry">Oficiul forestier</string>
+    <string name="poi_office_forestry">Oficiu forestier</string>
     <string name="poi_cooperative">Birou de cooperativă</string>
     <string name="poi_consulting">Birou de consultanță</string>
     <string name="poi_quango">Organism intermediar</string>
@@ -4267,8 +4267,8 @@
     <string name="poi_post_office_bureau">Birou</string>
     <string name="poi_post_office_post_annex">Anexă poștală</string>
     <string name="poi_post_office_post_partner">Partener de post</string>
-    <string name="poi_post_office_service_brand">Marca oficiului poștal</string>
-    <string name="poi_post_office_collection_times">Orele de colectare la oficiul poștal</string>
+    <string name="poi_post_office_service_brand">Marcă oficiu poștal</string>
+    <string name="poi_post_office_collection_times">Ore de colectare la oficiul poștal</string>
     <string name="poi_post_office_opening_hours">Ore de deschidere a oficiilor poștale</string>
     <string name="poi_toilets_hands_drying_no">Uscarea mâinilor: nu</string>
     <string name="poi_hot_water_yes">Apă caldă: da</string>
