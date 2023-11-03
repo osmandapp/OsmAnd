@@ -478,7 +478,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			options.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_with_background));
 			options.setOnClickListener(v ->
 					EditTrackGroupDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							group, mapActivity.getTrackMenuFragment()));
+							group, mapActivity.getFragmentsHelper().getTrackMenuFragment()));
 			return row;
 		}
 

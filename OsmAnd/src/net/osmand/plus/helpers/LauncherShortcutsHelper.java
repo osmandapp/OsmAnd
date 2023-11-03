@@ -138,7 +138,7 @@ public class LauncherShortcutsHelper {
 		} else if (Shortcut.START_RECORDING.id.equals(shortcutId)) {
 			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
-			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {
 			Intent activityIntent = new Intent(mapActivity, app.getAppCustomization().getMyPlacesActivity());
 			mapActivity.startActivity(activityIntent);

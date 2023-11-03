@@ -14,7 +14,7 @@ public class OpenQuickSearchDialogCommand extends KeyEventCommand {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		requireMapActivity().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+		requireMapActivity().getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		return true;
 	}
 

@@ -725,7 +725,7 @@ public class ExternalApiHelper {
 				mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
 				mapActivity.refreshMap();
 			}
-			mapActivity.showQuickSearch(ShowQuickSearchMode.DESTINATION_SELECTION_AND_START, true, searchQuery, searchLocation);
+			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.DESTINATION_SELECTION_AND_START, true, searchQuery, searchLocation);
 		} else {
 			ProgressDialog dlg = new ProgressDialog(mapActivity);
 			dlg.setTitle("");

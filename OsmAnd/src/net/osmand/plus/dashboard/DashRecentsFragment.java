@@ -72,7 +72,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			closeDashboard();
 			if (getActivity() instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) getActivity();
-				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW, false);
+				mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
 			}
 		});
 

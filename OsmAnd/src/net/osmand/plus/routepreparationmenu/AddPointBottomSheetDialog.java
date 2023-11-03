@@ -186,7 +186,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			public void onClick(View v) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					mapActivity.showQuickSearch(getSearchMode(), QuickSearchDialogFragment.QuickSearchTab.HISTORY);
+					mapActivity.getFragmentsHelper().showQuickSearch(getSearchMode(), QuickSearchDialogFragment.QuickSearchTab.HISTORY);
 				}
 				dismiss();
 			}
@@ -196,7 +196,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			public void onClick(View v) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					mapActivity.showQuickSearch(getSearchMode(), false);
+					mapActivity.getFragmentsHelper().showQuickSearch(getSearchMode(), false);
 				}
 				dismiss();
 			}

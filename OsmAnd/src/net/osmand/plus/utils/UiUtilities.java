@@ -56,6 +56,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -723,9 +724,10 @@ public class UiUtilities {
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
 
-		BaseOsmAndFragment fragmentAboveDashboard = activity.getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
-		BaseSettingsFragment settingsFragmentAboveDashboard = activity.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
-		BaseOsmAndFragment fragmentBelowDashboard = activity.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+		MapFragmentsHelper fragmentsHelper = activity.getFragmentsHelper();
+		BaseOsmAndFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
+		BaseOsmAndFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 		if (fragmentAboveDashboard != null) {
 			colorId = fragmentAboveDashboard.getStatusBarColorId();
 		} else if (settingsFragmentAboveDashboard != null) {

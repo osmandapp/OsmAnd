@@ -36,7 +36,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		view.findViewById(R.id.search_card).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MapActivity) getActivity()).showQuickSearch(ShowQuickSearchMode.NEW, false);
+				((MapActivity) getActivity()).getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
 				closeDashboard();
 			}
 		});

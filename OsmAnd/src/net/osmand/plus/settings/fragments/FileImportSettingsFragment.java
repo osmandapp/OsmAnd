@@ -111,7 +111,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 			}
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.disableFirstUsageFragment();
+				mapActivity.getFragmentsHelper().disableFirstUsageFragment();
 			}
 		}
 	}

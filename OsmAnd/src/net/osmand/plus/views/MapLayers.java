@@ -389,7 +389,7 @@ public class MapLayers {
 				if (mapActivity.getDashboard().isVisible()) {
 					mapActivity.getDashboard().hideDashboard();
 				}
-				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW, true);
+				mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, true);
 			} else {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();

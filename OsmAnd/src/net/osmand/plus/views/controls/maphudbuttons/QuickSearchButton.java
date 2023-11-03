@@ -1,12 +1,12 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.ShowQuickSearchMode;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
 
 import androidx.annotation.NonNull;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.search.ShowQuickSearchMode;
 
 public class QuickSearchButton extends MapButton {
 
@@ -16,8 +16,8 @@ public class QuickSearchButton extends MapButton {
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		setOnClickListener(v -> {
-			mapActivity.dismissCardDialog();
-			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			mapActivity.getFragmentsHelper().dismissCardDialog();
+			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		});
 	}
 

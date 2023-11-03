@@ -37,7 +37,7 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 	@Override
 	public boolean onSaveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
 		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity == null || mapActivity.getTrackMenuFragment() == null) {
+		if (mapActivity == null || mapActivity.getFragmentsHelper().getTrackMenuFragment() == null) {
 			return false;
 		}
 		controller.saveEditedDescription(editedText, () -> {

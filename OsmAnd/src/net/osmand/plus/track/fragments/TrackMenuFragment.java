@@ -340,7 +340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
 							contextMenu.show();
 						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
-							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 						} else {
 							mapActivity.launchPrevActivityIntent();
 						}

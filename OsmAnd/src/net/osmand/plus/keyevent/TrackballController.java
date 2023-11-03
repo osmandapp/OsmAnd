@@ -10,25 +10,24 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 public class TrackballController {
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-	private final OsmandMapTileView mapView;
+	private final MapActivity activity;
 
-	public TrackballController(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
-		this.mapView = app.getOsmandMap().getMapView();
+	public TrackballController(@NonNull MapActivity activity) {
+		this.activity = activity;
 	}
 
 	public boolean onTrackballEvent(@NonNull MotionEvent event) {
-		if (settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
+		OsmandApplication app = activity.getMyApplication();
+		if (app.getSettings().USE_TRACKBALL_FOR_MOVEMENTS.get()) {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			int action = event.getAction();
 			if (action == MotionEvent.ACTION_DOWN) {
@@ -36,7 +35,7 @@ public class TrackballController {
 					mapRenderer.suspendSymbolsUpdate();
 				}
 			} else if (action == MotionEvent.ACTION_MOVE) {
-				onTrackballMove(event.getX(), event.getY());
+				onTrackballMove(app, event.getX(), event.getY());
 				return true;
 			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
 				if (mapRenderer != null) {
@@ -47,12 +46,14 @@ public class TrackballController {
 		return false;
 	}
 
-	private void onTrackballMove(float moveX, float moveY) {
+	private void onTrackballMove(@NonNull OsmandApplication app, float moveX, float moveY) {
 		float dx = moveX * 15;
 		float dy = moveY * 15;
 
-		RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
-		QuadPoint cp = tb.getCenterPixelPoint();
+		OsmandMap osmandMap = app.getOsmandMap();
+		OsmandMapTileView mapView = osmandMap.getMapView();
+		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+		QuadPoint cp = tileBox.getCenterPixelPoint();
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		LatLon newCenterLatLon;
 		if (mapRenderer != null) {
@@ -89,9 +90,9 @@ public class TrackballController {
 			}
 			newCenterLatLon = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
 		} else {
-			newCenterLatLon = NativeUtilities.getLatLonFromPixel(null, tb,
+			newCenterLatLon = NativeUtilities.getLatLonFromPixel(null, tileBox,
 					cp.x + dx, cp.y + dy);
 		}
-		app.getOsmandMap().setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
+		osmandMap.setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
 	}
 }

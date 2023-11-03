@@ -167,7 +167,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 		setupTrackToggleButton(root, mapActivity);
 		setupWaypointAppearanceToggle(root, mapActivity);
 
-		boolean editingWaypointTemplate = mapActivity.getFragment(WptPtEditor.TAG) != null;
+		boolean editingWaypointTemplate = mapActivity.getFragmentsHelper().getFragment(WptPtEditor.TAG) != null;
 		if (editingWaypointTemplate) {
 			hideDialogWhileEditingTemplate(mapActivity);
 		}
@@ -418,7 +418,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	@Nullable
 	private CreateEditActionDialog getDialog(@NonNull MapActivity mapActivity) {
-		Fragment fragment = mapActivity.getFragment(CreateEditActionDialog.TAG);
+		Fragment fragment = mapActivity.getFragmentsHelper().getFragment(CreateEditActionDialog.TAG);
 		return fragment instanceof CreateEditActionDialog
 				? ((CreateEditActionDialog) fragment)
 				: null;

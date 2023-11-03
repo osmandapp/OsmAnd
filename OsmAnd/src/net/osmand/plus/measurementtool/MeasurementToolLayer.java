@@ -489,7 +489,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	private boolean isDrawingEnabled() {
 		MapActivity mapActivity = getMapActivity();
-		return mapActivity != null && inMeasurementMode && mapActivity.getGpsFilterFragment() == null;
+		return mapActivity != null && inMeasurementMode && mapActivity.getFragmentsHelper().getGpsFilterFragment() == null;
 	}
 
 	private boolean isInTileBox(RotatedTileBox tb, WptPt point) {

@@ -246,9 +246,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		View view = themedInflater.inflate(R.layout.search_dialog_fragment, container, false);
 
 		toolbarController = new QuickSearchToolbarController();
-		toolbarController.setOnBackButtonClickListener(v -> mapActivity.showQuickSearch(CURRENT, false));
-		toolbarController.setOnTitleClickListener(v -> mapActivity.showQuickSearch(CURRENT, false));
-		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.closeQuickSearch());
+		toolbarController.setOnBackButtonClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
+		toolbarController.setOnTitleClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
+		toolbarController.setOnCloseButtonClickListener(v -> mapActivity.getFragmentsHelper().closeQuickSearch());
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {

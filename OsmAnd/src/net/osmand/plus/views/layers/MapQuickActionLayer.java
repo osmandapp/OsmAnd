@@ -1,8 +1,9 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
-import static net.osmand.plus.utils.AndroidUtils.*;
 import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
+import static net.osmand.plus.utils.AndroidUtils.getCenterViewCoordinates;
+import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.animation.Animator;
@@ -47,7 +48,6 @@ import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListene
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -113,7 +113,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             updateQuickActionButton(false);
             quickActionButton.setContentDescription(getString(R.string.configure_screen_quick_action));
             quickActionButton.setOnClickListener(v -> {
-                mapActivity.dismissCardDialog();
+                mapActivity.getFragmentsHelper().dismissCardDialog();
                 if (!showTutorialIfNeeded()) {
                     setLayerState(!isWidgetVisible());
                 }

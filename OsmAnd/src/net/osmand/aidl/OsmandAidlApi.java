@@ -2406,7 +2406,7 @@ public class OsmandAidlApi {
 	}
 
 	public boolean isFragmentOpen() {
-		return mapActivity.isFragmentVisible();
+		return mapActivity.getFragmentsHelper().isFragmentVisible();
 	}
 
 	public boolean isMenuOpen() {
