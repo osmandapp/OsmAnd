@@ -5,12 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.router.RouteResultPreparationTest;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -31,17 +29,25 @@ import java.util.Objects;
 
 public class OpenGLTest {
 
-	private static final String TES_JSON = "/test_3d_rendering.json";
+	private static final String TEST_JSON = "/test_opengl_rendering.json";
+	private static final String EYEPIECE_PROPERTY = "eyepiece";
+	private static final String RESOURCES_PROPERTY = "openglTestResources";
 	private CummulativeException cummulativeException;
 
 	@Test
 	public void testRendering() {
-		String eyepiecePath = System.getProperty("eyepiece");
+		String eyepiecePath = System.getProperty(EYEPIECE_PROPERTY);
+		if (Algorithms.isEmpty(eyepiecePath)) {
+			eyepiecePath = System.getenv(EYEPIECE_PROPERTY);
+		}
 		if (Algorithms.isEmpty(eyepiecePath)) {
 			return;
 		}
 
-		String resourcesPath = System.getProperty("openglTestResources");
+		String resourcesPath = System.getProperty(RESOURCES_PROPERTY);
+		if (Algorithms.isEmpty(resourcesPath)) {
+			resourcesPath = System.getenv(RESOURCES_PROPERTY);
+		}
 		if (Algorithms.isEmpty(resourcesPath)) {
 			return;
 		}
@@ -62,7 +68,7 @@ public class OpenGLTest {
 	}
 
 	private List<String> generateCommands(String eyepiecePath, String resourcesPath) {
-		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
+		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TEST_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
 		LinkedList<String> res = new LinkedList<>();
@@ -135,7 +141,7 @@ public class OpenGLTest {
 
 	private void test(String resourcesPath) throws FileNotFoundException {
 		cummulativeException = new CummulativeException();
-		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
+		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TEST_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
 		for (TestEntry testEntry : arr) {
@@ -278,15 +284,18 @@ public class OpenGLTest {
 					: 0;
 
 			if (actualCount < expectedRange.min || actualCount > expectedRange.max) {
-				String contentStr = Algorithms.isEmpty(expected.content)
-						? ""
-						: String.format(Locale.US, " \"%s\"", expected.content);
-				String fromMapObjectId = expected.id == -1
-						? ""
-						: String.format(Locale.US, " from map object %d", expected.id);
-				String error = String.format(Locale.US, "%s%s%s is rendered %d times on %d zoom, expected %s times",
-						expected.type.name, contentStr, fromMapObjectId, actualCount, zoom, expectedRange.str);
-				cummulativeException.addException(error);
+				StringBuilder error = new StringBuilder();
+				error.append(expected.type.name.substring(0, 1).toUpperCase(Locale.US));
+				error.append(expected.type.name.substring(1));
+				if (!Algorithms.isEmpty(expected.content)) {
+					error.append(String.format(Locale.US, " 'content':'%s'", expected.content));
+				}
+				if (expected.id != -1) {
+					error.append(String.format(Locale.US, " 'osmId':'%d'", expected.id));
+				}
+				error.append(String.format(Locale.US, " is rendered %d times on %d zoom, expected %s times",
+						actualCount, zoom, expectedRange.str));
+				cummulativeException.addException(error.toString());
 			}
 		}
 	}
