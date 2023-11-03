@@ -148,6 +148,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -157,7 +158,6 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
@@ -920,48 +920,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateStatusBarColor() {
-		int colorId = -1;
-		MapLayers mapLayers = getMapLayers();
-		BaseOsmAndFragment fragmentAboveDashboard = getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
-		BaseSettingsFragment settingsFragmentAboveDashboard = getVisibleBaseSettingsFragment(R.id.fragmentContainer);
-		BaseOsmAndFragment fragmentBelowDashboard = getVisibleBaseOsmAndFragment(R.id.routeMenuContainer,
-				R.id.topFragmentContainer, R.id.bottomFragmentContainer);
-		if (fragmentAboveDashboard != null) {
-			colorId = fragmentAboveDashboard.getStatusBarColorId();
-		} else if (settingsFragmentAboveDashboard != null) {
-			colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
-		} else if (dashboardOnMap.isVisible()) {
-			colorId = dashboardOnMap.getStatusBarColor();
-		} else if (fragmentBelowDashboard != null) {
-			colorId = fragmentBelowDashboard.getStatusBarColorId();
-		} else if (mapLayers.getMapQuickActionLayer() != null
-				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
-			colorId = R.color.status_bar_transparent_gradient;
-		}
-		if (colorId != -1) {
-			getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
-			return;
-		}
-		int color = TopToolbarController.NO_COLOR;
-		boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
-		boolean topToolbarVisible = getMapLayers().getMapInfoLayer().isTopToolbarViewVisible();
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
-		TopToolbarController toolbarController = getMapLayers().getMapInfoLayer().getTopToolbarController();
-		if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
-			color = toolbarController.getStatusBarColor(this, night);
-		}
-		if (color == TopToolbarController.NO_COLOR) {
-			ApplicationMode appMode = settings.getApplicationMode();
-			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
-			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
-			color = ContextCompat.getColor(this, colorId);
-		}
-		getWindow().setStatusBarColor(color);
+		UiUtilities.updateStatusBarColor(this);
 	}
 
-	private BaseOsmAndFragment getVisibleBaseOsmAndFragment(int... ids) {
+	public BaseOsmAndFragment getVisibleBaseOsmAndFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
 			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment
@@ -972,7 +934,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return null;
 	}
 
-	private BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
+	public BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
 			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseSettingsFragment
