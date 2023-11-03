@@ -56,11 +56,8 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
@@ -105,6 +102,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.keyevent.KeyEventHelper;
+import net.osmand.plus.keyevent.TrackballController;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -150,7 +148,6 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -166,7 +163,6 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControlle
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -215,6 +211,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
 	private MapScrollHelper mapScrollHelper;
+	private TrackballController trackballController;
 	private RestoreNavigationHelper restoreNavigationHelper;
 
 	private boolean landscapeLayout;
@@ -265,6 +262,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
+		trackballController = new TrackballController(app);
 		keyEventHelper = app.getKeyEventHelper();
 		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
@@ -1156,70 +1154,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
-		if (settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
-			MapRendererView mapRenderer = getMapView().getMapRenderer();
-			int action = event.getAction();
-			if (action == MotionEvent.ACTION_DOWN) {
-				if (mapRenderer != null) {
-					mapRenderer.suspendSymbolsUpdate();
-				}
-			} else if (action == MotionEvent.ACTION_MOVE) {
-				onTrackballMove(event.getX(), event.getY());
-				return true;
-			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-				if (mapRenderer != null) {
-					mapRenderer.resumeSymbolsUpdate();
-				}
-			}
+		if (trackballController.onTrackballEvent(event)) {
+			return true;
 		}
 		return super.onTrackballEvent(event);
-	}
-
-	private void onTrackballMove(float moveX, float moveY) {
-		float dx = moveX * 15;
-		float dy = moveY * 15;
-		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
-		QuadPoint cp = tb.getCenterPixelPoint();
-		MapRendererView mapRenderer = getMapView().getMapRenderer();
-		LatLon newCenterLatLon;
-		if (mapRenderer != null) {
-			PointI point31 = new PointI();
-			PointI pixel = new PointI((int) (cp.x + dx), (int) (cp.y + dy));
-			boolean ok = mapRenderer.getLocationFromScreenPoint(pixel, point31);
-			if (!ok) {
-				return;
-			}
-
-			PointI target31 = mapRenderer.getState().getTarget31();
-			int deltaX = point31.getX() - target31.getX();
-			int deltaY = point31.getY() - target31.getY();
-			PointI mapTarget31 = mapRenderer.getState().getFixedLocation31();
-			int nextTargetX = mapTarget31.getX();
-			int nextTargetY = mapTarget31.getY();
-			if (Integer.MAX_VALUE - nextTargetX < deltaX) {
-				deltaX -= Integer.MAX_VALUE;
-				deltaX--;
-			}
-			if (Integer.MAX_VALUE - nextTargetY < deltaY) {
-				deltaY -= Integer.MAX_VALUE;
-				deltaY--;
-			}
-			nextTargetX += deltaX;
-			nextTargetY += deltaY;
-			if (nextTargetX < 0) {
-				nextTargetX += Integer.MAX_VALUE;
-				nextTargetX++;
-			}
-			if (nextTargetY < 0) {
-				nextTargetY += Integer.MAX_VALUE;
-				nextTargetY++;
-			}
-			newCenterLatLon = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
-		} else {
-			newCenterLatLon = NativeUtilities.getLatLonFromPixel(null, tb,
-					cp.x + dx, cp.y + dy);
-		}
-		app.getOsmandMap().setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
 	}
 
 	@Override
