@@ -134,7 +134,7 @@ public class OpenGLTest {
 		StringBuilder errors = new StringBuilder();
 		while ((s = stdError.readLine()) != null) {
 			System.out.println(s);
-			if (!s.startsWith("WARNING")) {
+			if (!s.startsWith("WARNING") && !s.startsWith("QSocketNotifier:")) {
 				errors.append(s);
 			}
 		}
