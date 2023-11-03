@@ -302,6 +302,7 @@ public abstract class MapRenderingTypes {
 		if (propagateToNodesPrefix != null) {
 			rtype.propagateToNodesPrefix = propagateToNodesPrefix;
 		}
+		rtype.propagateIf = parseMultiTagValue(parser, "propagateIf");
 		
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
@@ -554,6 +555,7 @@ public abstract class MapRenderingTypes {
 		protected Map<String, String> relationGroupAdditionalTags;
 		protected PropagateToNodesType propagateToNodes = PropagateToNodesType.NONE;
 		protected String propagateToNodesPrefix;
+		protected Map<String, String> propagateIf;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -751,6 +753,10 @@ public abstract class MapRenderingTypes {
 			return propagateToNodesPrefix;
 		}
 
+		public Map<String, String> getPropagateIf() {
+			return propagateIf;
+		}
+
 		public enum PropagateToNodesType {
 			NONE,
 			ALL,
@@ -781,6 +787,36 @@ public abstract class MapRenderingTypes {
 		}
 		return "unkonwn";
 
+	}
+
+	private Map<String, String> parseMultiTagValue(XmlPullParser parser, String attrPrefix) {
+		int cnt = parser.getAttributeCount();
+		Map<Integer, String> tags = new HashMap<>();
+		Map<Integer, String> values = new HashMap<>();
+		attrPrefix = attrPrefix.toLowerCase();
+		for (int i = 0; i < cnt; i++) {
+			String name = parser.getAttributeName(i).toLowerCase();
+			String value = parser.getAttributeValue(i).toLowerCase();
+			if (name.startsWith(attrPrefix + "tag")) {
+				String numStr = name.replace(attrPrefix + "tag", "");
+				int num = numStr.isEmpty() ? 0 : Integer.parseInt(numStr);
+				tags.put(num, value);
+			}
+			if (name.startsWith(attrPrefix + "value")) {
+				String numStr = name.replace(attrPrefix + "value", "");
+				int num = numStr.isEmpty() ? 0 : Integer.parseInt(numStr);
+				values.put(num, value);
+			}
+		}
+		if (tags.size() == 0) {
+			return null;
+		}
+		Map<String, String> result = new HashMap<>();
+		for (Map.Entry<Integer, String> entry : tags.entrySet()) {
+			int index = entry.getKey();
+			result.put(entry.getValue(), values.get(index));
+		}
+		return result;
 	}
 	
 }
