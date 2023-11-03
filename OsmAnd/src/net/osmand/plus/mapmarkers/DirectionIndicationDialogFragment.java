@@ -84,16 +84,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 						shadowVisible = false;
 					}
 				}
-
-				@Override
-				public void onDownMotionEvent() {
-
-				}
-
-				@Override
-				public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
-				}
 			});
 		}
 
