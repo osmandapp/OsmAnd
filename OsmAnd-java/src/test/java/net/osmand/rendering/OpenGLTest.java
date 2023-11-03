@@ -149,6 +149,10 @@ public class OpenGLTest {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
 		for (TestEntry testEntry : arr) {
+			if (testEntry.ignore) {
+				continue;
+			}
+
 			assert(testEntry.testName != null);
 			cummulativeException.setCurrentTestName(testEntry.testName);
 			List<RenderedInfo> renderedInfo = parseRenderedJsonForMap(testEntry.testName, resourcesPath);
