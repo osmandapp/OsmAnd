@@ -73,6 +73,10 @@ public class OpenGLTest {
 		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
 		LinkedList<String> res = new LinkedList<>();
 		for (TestEntry testEntry : arr) {
+			if (testEntry.ignore) {
+				continue;
+			}
+
 			EyepieceParams params = new EyepieceParams();
 			assert(testEntry.center != null);
 			params.latitude = testEntry.center.lat;
@@ -471,6 +475,8 @@ public class OpenGLTest {
 		public String testName;
 		@SerializedName("issue")
 		public String issue;
+		@SerializedName("ignore")
+		public boolean ignore;
 		@SerializedName("center")
 		public LatitudeLongitude center;
 		@SerializedName("icons")
