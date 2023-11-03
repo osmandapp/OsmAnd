@@ -463,7 +463,7 @@
     <string name="tile_source_already_installed">Harta deja instalată, \'Setările\' vor fi actualizate.</string>
     <string name="select_tile_source_to_install">Selectați surse pentru segmente de hartă:</string>
     <string name="internet_not_available">Nu se poate efectua operațiunea fără conexiune la Internet.</string>
-    <string name="install_more">Adăugați mai multe…</string>
+    <string name="install_more">Adăugare…</string>
     <string name="level_to_switch_vector_raster_descr">Folosiți hărți raster pentru tot ceea ce depășește acest nivel.</string>
     <string name="level_to_switch_vector_raster">Nivelul minim de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>Clasificarea online a hărților OSM</u> cu ajutorul imaginilor.</string>
@@ -630,7 +630,7 @@
     <string name="off_router_service_no_gps_available">Serviciul de navigare în fundal necesită un serviciu de localizare pornit.</string>
     <string name="hide_poi_filter">Ascunde filtrul POI</string>
     <string name="show_poi_filter">Arată filtrul POI</string>
-    <string name="search_poi_filter">Filtrează</string>
+    <string name="search_poi_filter">Filtrare</string>
     <string name="menu_mute_off">Sunetul e activ</string>
     <string name="menu_mute_on">Sunetul e inactiv</string>
     <string name="voice_provider_descr">Selectați ghidarea vocală pentru navigație.</string>
@@ -1064,7 +1064,7 @@
     <string name="way_alarms">Avertizări trafic</string>
     <string name="sleep_mode_stop_dialog">Opriți modul de fundal GPS\?</string>
     <string name="stop_navigation_service">Oprește</string>
-    <string name="confirm_every_run">Intreabă intotdeauna</string>
+    <string name="confirm_every_run">Întreabă mereu</string>
     <string name="save_global_track_interval">Interval de înregistrare generală</string>
     <string name="enable_sleep_mode">Activează modul GPS în fundal</string>
     <string name="save_track_to_gpx_globally_descr">Înregistrarea generală a poziției într-un fișier GPX poate fi activată sau dezactivată cu ajutorul widget-ului de înregistrare GPX de pe hartă.</string>
@@ -1091,7 +1091,7 @@
     <string name="gps_wake_up_timer">Interval de trezire al GPS-ului</string>
     <string name="index_tours">Călătorii</string>
     <string name="record_plugin_name">Înregistrare călătorie</string>
-    <string name="rendering_attr_subwayMode_name">Rute metrou</string>
+    <string name="rendering_attr_subwayMode_name">Rute de metrou</string>
     <string name="keep_navigation_service">Păstrează</string>
     <string name="map_preferred_locale_descr">Limba preferată pentru etichetele de pe hartă (dacă nu sunt disponibile, vor fi utilizate numele în limba engleză sau denumirile locale).</string>
     <string name="forward">Înainte</string>
@@ -1559,10 +1559,10 @@
     <string name="osm_live_header">Acest abonament permite actualizări din oră în oră pentru toate hărțile din întreaga lume.
 \n O parte din venituri se întoarce la comunitatea OSM și este plătită pentru fiecare contribuție OSM.
 \n Dacă iubiți OsmAnd și OSM și doriți să le susțineți și să fiți susținut de ele, aceasta este modalitatea perfectă de a o face.</string>
-    <string name="select_map_marker">Selectați marcajul pe hartă</string>
+    <string name="select_map_marker">Selectați marcajul de hartă</string>
     <string name="map_markers_other">Alte marcaje</string>
     <string name="upload_anonymously">Încarcă anonim</string>
-    <string name="show_transparency_seekbar">Afișați bara de căutare transparentă</string>
+    <string name="show_transparency_seekbar">Arată bara de schimbare transparență</string>
     <string name="download_files_error_not_enough_space">Nu este suficient spațiu!
 \n {3} MB este necesar temporar, {1} MB permanent.
 \n (Sunt disponibili doar {2} MB.)</string>
@@ -1662,7 +1662,7 @@
     <string name="measurement_tool">Măsoară distanța</string>
     <string name="quick_action_start_stop_navigation">Pornește/oprește navigația</string>
     <string name="shared_string_reset">Resetează</string>
-    <string name="shared_string_reload">Reâncarcă</string>
+    <string name="shared_string_reload">Reîncarcă</string>
     <string name="shared_string_to">Spre</string>
     <string name="mapillary_menu_date_from">De la</string>
     <string name="mapillary_menu_title_username">Nume de utilizator</string>
@@ -2672,7 +2672,7 @@
     <string name="save_heading_descr">Salvează direcția la fiecare punct de traseu în timpul înregistrării.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
-    <string name="personal_category_name">Personal</string>
+    <string name="personal_category_name">Personale</string>
     <string name="shared_string_downloading_formatted">Descarcarea %s</string>
     <string name="rendering_value_thick_name">Groasă</string>
     <string name="desert_render_descr">Pentru deșerturi și alte zone slab populate. Mai detaliat.</string>
@@ -3827,7 +3827,7 @@
     <string name="shared_string_language">Limbă</string>
     <string name="shared_string_all_languages">Toate limbile</string>
     <string name="wiki_menu_download_descr">Sunt necesare hărți suplimentare pentru a vizualiza POI-urile Wikipedia pe hartă.</string>
-    <string name="select_wikipedia_article_langs">Selectați pe hartă limbile pentru articolele Wikipedia. Treceți la orice limbă disponibilă în timp ce citiți articolul.</string>
+    <string name="select_wikipedia_article_langs">Selectați limbile pentru articolele Wikipedia de pe hartă. Treceți la orice limbă disponibilă în timp ce citiți articolul.</string>
     <string name="some_articles_may_not_available_in_lang">Este posibil ca unele articole din Wikipedia să nu fie disponibile în limba dumneavoastră.</string>
     <string name="lang_zhyue">Cantoneză</string>
     <string name="lang_zhminnan">Sud Min</string>
@@ -4171,7 +4171,7 @@
     <string name="quick_action_empty_param_error">Completați toți parametrii</string>
     <string name="quick_action_map_style_action">Adăugați un stil de hartă</string>
     <string name="quick_action_page_list_descr">Un buton pentru a răsfoi lista de mai jos.</string>
-    <string name="quick_action_sh_poi_descr">Adăugați una sau mai multe categorii de POI pentru a le afișa pe hartă.</string>
+    <string name="quick_action_sh_poi_descr">Adăugați una sau mai multe categorii de puncte de interes pentru afișare pe hartă.</string>
     <string name="quick_action_poi_list">Listă puncte de interes</string>
     <string name="quick_action_gpx_category_descr">Alegeți o categorie opțională.</string>
     <string name="quick_action_category_descr">Categoria în care se salvează Favorit:</string>
@@ -4209,14 +4209,14 @@
     <string name="dialog_add_action_title">Adăugare acțiune</string>
     <string name="quick_action_add_favorite">Adaugă favorit</string>
     <string name="quick_action_edit_action">Editați acțiunea</string>
-    <string name="quick_action_new_action">Adăugați o acțiune</string>
+    <string name="quick_action_new_action">Adăugă acțiune</string>
     <string name="quick_action_add_parking">Adaugă loc de parcare</string>
     <string name="quick_action_navigation_voice_on">Dezactivare voce</string>
     <string name="quick_action_navigation_voice_off">Dezactivați Vocea</string>
     <string name="quick_action_navigation_voice">Pornire/oprire voce</string>
     <string name="quick_action_add_osm_bug">Adaugă o notă OSM</string>
     <string name="quick_action_take_photo_note">Notă foto nouă</string>
-    <string name="quick_action_take_video_note">Notă video nouă</string>
+    <string name="quick_action_take_video_note">Creează notă video</string>
     <string name="quick_action_take_audio_note">Notă audio nouă</string>
     <string name="quick_action_map_style_switch">Stilul hărții a fost schimbat în \"%s\".</string>
     <string name="quick_action_map_style">Schimbă stil hartă</string>
@@ -4293,7 +4293,7 @@
     <string name="add_group_to_markers">Adaugă grupul la lista de marcaje</string>
     <string name="remove_group_from_markers">Elimină grupul din lista de marcaje</string>
     <string name="start_point">Pornește</string>
-    <string name="mapillary_menu_filter_description_new">Filtrează imaginile în funcție de dată sau de tip. Activ doar la un nivel de zoom mare.</string>
+    <string name="mapillary_menu_filter_description_new">Filtrează imaginile în funcție de dată sau de tip. Activ doar la mărire mare.</string>
     <string name="service_is_not_available_please_try_later">Serviciul nu este disponibil. Reîncercați mai târziu.</string>
     <string name="shared_string_files">Fișiere</string>
     <string name="travel_route_types">Tipuri de rute</string>
