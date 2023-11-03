@@ -1261,14 +1261,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		v.setBackgroundColor((alpha << 24) | color);
 	}
 
-	@Override
-	public void onDownMotionEvent() {
-	}
-
-	@Override
-	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-	}
-
 	<T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {
 		for (WeakReference<DashBaseFragment> f : fragList) {
 			DashBaseFragment b = f.get();

@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,10 +38,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.tools.SimpleObservableScrollViewCallbacks;
 
 public class MapMultiSelectionMenuFragment extends Fragment
-		implements OnClickListener, OnGlobalLayoutListener, SimpleObservableScrollViewCallbacks {
+		implements OnClickListener, OnGlobalLayoutListener, ObservableScrollViewCallbacks {
 
 	public static final String TAG = "MapMultiSelectionMenuFragment";
 

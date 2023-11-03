@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.mapcontextmenu.other.RouteTypeTags.*;
-
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -18,6 +16,28 @@ import java.util.Comparator;
 import java.util.List;
 
 class RouteTypesComparator implements Comparator<MenuObject> {
+
+	private String ROUTE_BICYCLE = "bicycle";
+	private String ROUTE_BUS = "bus";
+	private String ROUTE_CANOE = "canoe";
+	private String ROUTE_DETOUR = "detour";
+	private String ROUTE_FERRY = "ferry";
+	private String ROUTE_FOOT = "foot";
+	private String ROUTE_HIKING = "hiking";
+	private String ROUTE_HORSE = "horse";
+	private String ROUTE_INLINE_SKATES = "inline_skates";
+	private String ROUTE_LIGHT_RAIL = "light_rail";
+	private String ROUTE_MTB = "mtb";
+	private String ROUTE_PISTE = "piste";
+	private String ROUTE_RAILWAY = "railway";
+	private String ROUTE_ROAD = "road";
+	private String ROUTE_RUNNING = "running";
+	private String ROUTE_SKI = "ski";
+	private String ROUTE_SUBWAY = "subway";
+	private String ROUTE_TRAIN = "train";
+	private String ROUTE_TRACKS = "tracks";
+	private String ROUTE_TRAM = "tram";
+	private String ROUTE_TROLLEYBUS = "trolleybus";
 
 	private final ApplicationMode appMode;
 	private final List<String> orderedRouteTypes = new ArrayList<>();
