@@ -24,6 +24,8 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
 
+	private static final int SYMBOLS_UPDATE_INTERVAL = 2000;
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapView;
@@ -105,6 +107,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.setAzimuth(0);
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
+			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 		}
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 		if (mapRendererContext != null) {

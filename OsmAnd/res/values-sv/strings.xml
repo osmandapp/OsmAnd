@@ -163,8 +163,7 @@
     <string name="osmand_parking_pm">em</string>
     <string name="osmand_parking_am">fm</string>
     <string name="osmand_parking_position_name">Parkeringsplats</string>
-    <string name="osmand_parking_plugin_description">Låter dig spara var din bil är parkerad, inklusive hur mycket parkeringstid som finns kvar.
-\nBåde plats och tid är synliga både på instrumentpanelen och i en kartwidget. En larmpåminnelse kan läggas till i Android-kalendern.</string>
+    <string name="osmand_parking_plugin_description">Markera var din bil är parkerad, och sätt en avisering i kalendern när parkeringstiden tar slut. För att sätta ut markören, välj en plats i kartan, gå till \'Åtgärder\' och tryck \'Lägg till parkering\'.</string>
     <string name="osmand_parking_plugin_name">Parkeringsplats</string>
     <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
     <string name="context_menu_item_delete_parking_point">Ta bort parkeringsmarkör</string>
@@ -4732,7 +4731,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">Föredra obelagda vägar</string>
     <string name="data_storage_space_description">%1$s GB ledigt (av %2$s GB)</string>
     <string name="listed_exist">Angivna %1$s, finns redan i OsmAnd.</string>
-    <string name="replace_all_desc">Nuvarande poster kommer att ersättas med poster från filen</string>
+    <string name="replace_all_desc">Nuvarande objekt kommer att ersättas med objekt från filen</string>
     <string name="live_monitoring">Online spårning</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Grad 4</string>
     <string name="shared_string_app_default_w_val">App-standard (%s)</string>
@@ -4763,7 +4762,7 @@
     <string name="routing_attr_allow_skating_only_description">Inkludera rutter enbart preparerade för skejtskidor/fristil, utan spår för klassisk stil.</string>
     <string name="precision_hdop">Horisontell precision: %s</string>
     <string name="shared_string_quick_actions">Snabbåtgärder</string>
-    <string name="keep_both_desc">Importerade poster kommer att läggas till med ett prefix</string>
+    <string name="keep_both_desc">Objekten kommer att importeras med ett prefix</string>
     <string name="track_storage_directory">Mapp för lagring av inspelade spår</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB använt</string>
     <string name="routing_attr_prefer_unpaved_name">Föredra obelagda vägar</string>
@@ -4869,21 +4868,23 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Ny widget för \"Glidtal\"
+    <string name="release_4_6">• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
 \n
-\n • Filter och smarta mappar för spår tillagda
+\n• Ny widget för \"Glidtal\"
 \n
-\n • Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
+\n• Filter och smarta mappar för spår tillagda
 \n
-\n • Stöd för ANT+ temperatur widget
+\n• Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
 \n
-\n • Förbättrad minneshantering för stora gpx-spår
+\n• Stöd för ANT+ temperatur widget
 \n
-\n • Uppdaterad resurshantering i Nedladdningar
+\n• Förbättrad minneshantering för stora gpx-spår
 \n
-\n • Ny widget \"Tillgängligt minne\"
+\n• Uppdaterad resurshantering i Nedladdningar
 \n
-\n • Löst problem med genomskinligt statusfält
+\n• Ny widget \"Tillgängligt minne\"
+\n
+\n• Löst problem med genomskinligt statusfält
 \n
 \n</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
@@ -5210,4 +5211,75 @@
 \nVälj %1$s så kan du få information och varningar om fartkameror.
 \n
 \nVälj %2$s så kommer all data om fartkameror raderas (varningar, objekt i kartan etc) tills OsmAnd ominstalleras helt.</string>
+    <string name="add_new_custom_category_button_promo">Lägg till en ny anpassad kategori genom att välja en eller fler kategorier.</string>
+    <string name="quick_action_switch_profile_descr">Åtgärdsknappen växlar mellan valda profiler.</string>
+    <string name="osm_live_payment_subscription_management">Betalningen dras från ditt Google Play-konto när köpet bekräftas.
+\n
+\nDen förnyas automatiskt om du inte avbryter innan nästa vald förnyelseperiod.
+\n
+\nHantera eller avbryt dina prenumerationer när som helst från dina Google Play-inställningar.</string>
+    <string name="reset_deafult_order">Återställ förvald sortering</string>
+    <string name="wiki_menu_download_descr">Ytterligare kartor behövs för att via Wikipedias intressepunkter på kartan.</string>
+    <string name="online_map_name_helper_text">Ange ett namn för onlinekartan.</string>
+    <string name="back_to_editing">Återgå till redigering</string>
+    <string name="reset_items_descr">Att dölja inställningar återställer dem till deras ursprungliga tillstånd.</string>
+    <string name="system_screen_timeout_descr">Stänger av skärmen enligt enhetens systeminställningar.</string>
+    <string name="main_actions_descr">Har bara fyra knappar.</string>
+    <string name="slope_description">Lutningskartor använder färger för att visualisera hur brant terrängen är (lutningsgrad).</string>
+    <string name="ui_customization_short_descr">Huvudmeny-objekt, kontextmeny</string>
+    <string name="slope_download_description">Ytterligare kartor krävs för att visa terränglutning på kartan.</string>
+    <string name="ui_customization_description">Anpassa mängden objekt i \'Huvudmenyn\', \'Konfigurera kartan\' och \'Kontextmeny\'.
+\n
+\nDeaktivera oanvända insticksmoduler för att dölja alla deras inställningar och reglage. %1$s.</string>
+    <string name="main_actions">Primära åtgärder</string>
+    <string name="import_complete_description">Importerade alla data från %1$s. Använd knapparna nedan för att öppna någon del av appen för att hantera den.</string>
+    <string name="download_unsupported_action">Åtgärden %1$s stöds inte</string>
+    <string name="checking_for_duplicate_description">OsmAnd skannar %1$s för dubbletter med befintliga objekt i appen.
+\n
+\nDet kan ta lite tid.</string>
+    <string name="additional_actions_descr">Öppna dessa åtgärder genom att klicka på \"%1$s\"-knappen.</string>
+    <string name="tiles_storage_descr">Välj hur nedladdade raster-rutor ska lagras.</string>
+    <string name="divider_descr">Objekt nedanför denna punkt åtskiljs med en avgränsare.</string>
+    <string name="context_menu_actions">Åtgärder i kontextmenyn</string>
+    <string name="expire_time">Förfallotid</string>
+    <string name="import_duplicates_description">OsmAnd har redan objekt med samma namn som några av de som importeras.
+\n
+\nVälj en åtgärd.</string>
+    <string name="clear_recorded_data">Rensa inspelad data</string>
+    <string name="reorder_or_hide_from">Flytta om eller dölj objekt från %1$s.</string>
+    <string name="restore_all_profile_settings_descr">Alla profilinställningar återställs till ursprungliga förval vid profilens skapande eller import.</string>
+    <string name="slope_read_more">Läs mer om terränglutningskartor på %1$s.</string>
+    <string name="parking_positions">Parkeringsplats-positioner</string>
+    <string name="map_source_zoom_levels_descr">Påverkar kartvisningen olika om den används som huvudkarta eller över-/underläggskarta.
+\n
+\n%1$s: visning är begränsad helt till angivet zoomnivå-intervall.
+\n
+\n%2$s är nivåerna där kartan visas som original, men skalas upp/ner utanför angivna värden.</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="unsupported_type_error">Typen stöds inte</string>
+    <string name="import_duplicates_title">Några objekt finns redan</string>
+    <string name="terrain_slider_description">Ange minsta och maximala zoomnivån där lagrets ska visas.</string>
+    <string name="turn_screen_on_wake_time_descr">Ange hur länge skärmen är på efter väckning. (\"%1$s\" innebär ingen tidsgräns.)</string>
+    <string name="expire_time_descr">Förfallotid i minuter. Cachelagrade raster-rutor läses om efter angiven tid. Lämna tomt för att aldrig läsa om rutor för den här källan.
+\n
+\nEn dag är 1440 minuter.
+\nEn vecka är 10 080 minuter.
+\nEn månad är ca 43 800 minuter.</string>
+    <string name="not_support_file_type_with_ext">Välj en fil som stöds med filändelsen %1$s istället.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Exportera eller importera snabbåtgärder med app-profilerna.</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="n_items_of_z">%1$s av %2$s</string>
+    <string name="shared_string_delete_all_q">Ta bort alla\?</string>
+    <string name="system_screen_timeout">Använd enhetens skärmavstängningstid</string>
+    <string name="shared_string_drawer">Huvudmeny</string>
+    <string name="profiles_for_action_not_found">Hittade inte en sådan profil.</string>
+    <string name="plugin_disabled_descr">Denna insticksmodul är en separat app, deaktivering tar inte bort den.
+\n
+\nDen kan avinstalleras i Androids inställningar under \'Appar\'.</string>
+    <string name="keep_active">Behåll på</string>
+    <string name="route_line_use_gradient_coloring">Ruttlinjen färgläggs efter lutningsgraden.</string>
+    <string name="delete_all_actions_message_q">Radera %d snabbåtgärder helt\? Detta kan inte ångras.</string>
+    <string name="default_screen_timeout">Förvald tid för skärmavstängning</string>
+    <string name="screen_timeout_descr">Om \"%1$s\" är på, kommer aktivitetstiden vara beroende av den.</string>
+    <string name="use_system_screen_timeout">Använd enhetens skärminställning</string>
 </resources>

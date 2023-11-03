@@ -13,16 +13,21 @@ public class BackupListeners {
 	private final List<OnRegisterUserListener> registerUserListeners = new ArrayList<>();
 	private final List<OnRegisterDeviceListener> registerDeviceListeners = new ArrayList<>();
 	private final List<OnSendCodeListener> sendCodeListeners = new ArrayList<>();
+	private final List<OnCheckCodeListener> checkCodeListeners = new ArrayList<>();
 	private final List<OnDeleteAccountListener> deleteAccountListeners = new ArrayList<>();
 
 	public interface OnDeleteFilesListener {
-		default void onFilesDeleteStarted(@NonNull List<RemoteFile> files) { }
+		default void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+		}
 
-		default void onFileDeleteProgress(@NonNull RemoteFile file, int progress) { }
+		default void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
+		}
 
-		default void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) { }
+		default void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
+		}
 
-		default void onFilesDeleteError(int status, @NonNull String message) { }
+		default void onFilesDeleteError(int status, @NonNull String message) {
+		}
 	}
 
 	public interface OnRegisterUserListener {
@@ -39,6 +44,10 @@ public class BackupListeners {
 
 	public interface OnSendCodeListener {
 		void onSendCode(int status, @Nullable String message, @Nullable BackupError error);
+	}
+
+	public interface OnCheckCodeListener {
+		void onCheckCode(@NonNull String token, int status, @Nullable String message, @Nullable BackupError error);
 	}
 
 	public interface OnDeleteAccountListener {
@@ -137,6 +146,21 @@ public class BackupListeners {
 
 	public void removeSendCodeListener(@NonNull OnSendCodeListener listener) {
 		sendCodeListeners.remove(listener);
+	}
+
+	@NonNull
+	public List<OnCheckCodeListener> getCheckCodeListeners() {
+		return checkCodeListeners;
+	}
+
+	public void addCheckCodeListener(@NonNull OnCheckCodeListener listener) {
+		if (!checkCodeListeners.contains(listener)) {
+			checkCodeListeners.add(listener);
+		}
+	}
+
+	public void removeCheckCodeListener(@NonNull OnCheckCodeListener listener) {
+		checkCodeListeners.remove(listener);
 	}
 
 	@NonNull

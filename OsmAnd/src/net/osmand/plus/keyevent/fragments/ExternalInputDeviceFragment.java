@@ -156,6 +156,13 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null;
 	}
 
+	@Override
+	public int getStatusBarColorId() {
+		boolean nightMode = isNightMode();
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
+	}
+
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return ColorUtilities.getActivityBgColorId(isNightMode());

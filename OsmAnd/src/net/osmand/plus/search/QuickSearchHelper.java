@@ -694,10 +694,6 @@ public class QuickSearchHelper implements ResourceListener {
 		mapsIndexed = true;
 	}
 
-	@Override
-	public void onMapClosed(String fileName) {
-	}
-
 	public static void showPoiFilterOnMap(@NonNull MapActivity mapActivity,
 	                                      @NonNull PoiUIFilter filter,
 	                                      @Nullable Runnable action) {

@@ -5068,4 +5068,9 @@
 \n– Датчык актываваны
 \n– Гэта прылада знаходзіцца побач з датчыкам</string>
     <string name="external_device_ant">ANT</string>
+    <string name="shared_string_rows">Радкі</string>
+    <string name="shared_string_button">Кнопка</string>
+    <string name="shared_string_action">Дзеянне</string>
+    <string name="shared_string_trash">Сметніца</string>
+    <string name="key_event_category_actions">Дзеянні</string>
 </resources>

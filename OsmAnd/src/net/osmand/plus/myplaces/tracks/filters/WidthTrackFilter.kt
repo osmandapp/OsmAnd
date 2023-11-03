@@ -82,4 +82,8 @@ class WidthTrackFilter(filterChangedListener: FilterChangedListener?) :
 		}
 		return true
 	}
+
+	fun getTracksCountForWidth (widthName: String): Int {
+		return allWidthCollection[widthName] ?: 0
+	}
 }

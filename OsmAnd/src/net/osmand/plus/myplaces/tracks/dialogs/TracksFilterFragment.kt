@@ -35,6 +35,7 @@ import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
 
@@ -48,7 +49,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 			manager: FragmentManager,
 			target: Fragment?,
 			filter: TracksSearchFilter,
-			trackFiltersContainer: DialogClosedListener,
+			trackFiltersContainer: DialogClosedListener?,
 			smartFolder: SmartFolder?,
 			currentFolder: TrackFolder?) {
 			manager.findFragmentByTag(TAG)?.let { foundFragment ->
@@ -79,7 +80,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private lateinit var smartFolderHelper: SmartFolderHelper
 	private var smartFolder: SmartFolder? = null
 	private var currentFolder: TrackFolder? = null
-	private lateinit var dialogClosedListener: DialogClosedListener
+	private var dialogClosedListener: DialogClosedListener? = null
 	private lateinit var appBar: AppBarLayout
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,10 +108,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	private fun updateStatusBarColor(window: Window?) {
 		window?.let {
-			val statusBarColor =
-				if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
-			ContextCompat.getColor(requireContext(), statusBarColor)
-			window.statusBarColor = ContextCompat.getColor(requireContext(), statusBarColor)
+			window.statusBarColor = getStatusBarSecondaryColor(requireContext(), nightMode)
 		}
 	}
 
@@ -337,9 +335,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	override fun onDismiss(dialog: DialogInterface) {
 		super.onDismiss(dialog)
-		if (dialogClosedListener != null) {
-			dialogClosedListener.onDialogClosed()
-		}
+		dialogClosedListener?.onDialogClosed()
 	}
 
 	override fun onSmartFolderSaved(smartFolder: SmartFolder?) {

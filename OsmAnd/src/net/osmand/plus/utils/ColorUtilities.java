@@ -353,6 +353,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getStatusBarSecondaryColor(@NonNull Context context, boolean nightMode) {
+		return getColor(context, getStatusBarSecondaryColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getStatusBarSecondaryColorId(boolean nightMode) {
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
+	}
+
+	@ColorInt
 	public static int getLinksColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getLinksColorId(nightMode));
 	}

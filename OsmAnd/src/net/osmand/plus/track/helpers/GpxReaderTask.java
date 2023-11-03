@@ -15,6 +15,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -38,6 +39,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	private final GPXDatabase database;
 	private final GpxDbHelper gpxDbHelper;
 	private final SearchUICore searchUICore;
+	private final DownloadResources downloadResources;
 
 	private final ConcurrentLinkedQueue<File> readingItems;
 	private final Map<File, GpxDataItem> readingItemsMap;
@@ -53,6 +55,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.database = gpxDbHelper.getGPXDatabase();
 		this.searchUICore = app.getSearchUICore().getCore();
+		this.downloadResources = app.getDownloadThread().getIndexes();
 		this.readingItems = readingItems;
 		this.readingItemsMap = readingItemsMap;
 		this.listener = listener;
@@ -87,8 +90,8 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						} else {
 							database.updateAnalysis(item, analysis, conn);
 						}
-						if(item.getFileCreationTime() <= 0) {
-							database.updateCreateTime(item, gpxFile.metadata.time);
+						if (item.getFileCreationTime() <= 0) {
+							database.updateCreateTime(item, GPXUtilities.getCreationTime(gpxFile));
 						}
 					}
 					if (GpxDbHelper.isCitySearchNeeded(item)) {
@@ -116,37 +119,39 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
-					searchNearestCity(item);
+					checkAndSearchNearestCity(item);
 				}
 			});
 		} else {
-			searchNearestCity(item);
+			checkAndSearchNearestCity(item);
 		}
 	}
 
-	private void searchNearestCity(@NonNull GpxDataItem item) {
+	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		LatLon latLon = analysis != null ? analysis.latLonStart : null;
-		if (latLon == null) {
+		if (latLon == null || !downloadResources.hasDownloadedMapsAt(latLon, false)) {
 			item.setNearestCityName("");
-			return;
+		} else {
+			searchNearestCity(item, latLon);
 		}
+	}
+
+	private void searchNearestCity(@NonNull GpxDataItem item, @NonNull LatLon latLon) {
 		SearchSettings settings = getSearchSettings(latLon);
 
 		CallbackWithObject<SearchResultCollection> callback = resultCollection -> {
 			if (resultCollection != null && resultCollection.hasSearchResults()) {
-				List<SearchResult> searchResults = new ArrayList<>(resultCollection.getCurrentSearchResults());
-				sortSearchResults(searchResults, latLon);
+				List<SearchResult> results = new ArrayList<>(resultCollection.getCurrentSearchResults());
+				sortSearchResults(results, latLon);
 
-				SearchResult searchResult = searchResults.get(0);
-				double distance = MapUtils.getDistance(latLon, searchResult.location);
-				if (distance <= CityType.CITY.getRadius()) {
-					gpxDbHelper.updateNearestCityName(item, searchResult.localeName);
-					return true;
-				}
+				SearchResult result = results.get(0);
+				boolean found = MapUtils.getDistance(latLon, result.location) <= CityType.CITY.getRadius();
+				gpxDbHelper.updateNearestCityName(item, found ? result.localeName : "");
+			} else {
+				item.setNearestCityName("");
 			}
-			item.setNearestCityName("");
-			return false;
+			return true;
 		};
 		searchUICore.shallowSearchAsync(SearchAddressByNameAPI.class, "", null, false, false, settings, callback);
 	}

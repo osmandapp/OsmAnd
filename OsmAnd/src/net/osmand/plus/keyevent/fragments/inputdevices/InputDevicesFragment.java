@@ -23,12 +23,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper.InputDeviceHelperListener;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class InputDevicesFragment extends BaseOsmAndFragment implements InputDeviceHelperListener {
+public class InputDevicesFragment extends BaseOsmAndFragment implements InputDeviceHelperCallback {
 
 	public static final String TAG = InputDevicesFragment.class.getSimpleName();
 
@@ -70,12 +71,7 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_close);
-		closeButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		});
+		closeButton.setOnClickListener(v -> dismiss());
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
 		title.setText(getString(R.string.shared_string_type));
@@ -91,8 +87,11 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 	}
 
 	@Override
-	public void onInputDeviceHelperEvent() {
+	public void processInputDeviceHelperEvent(@NonNull EventType event) {
 		updateViewContent();
+		if (event == EventType.SELECT_DEVICE) {
+			dismiss();
+		}
 	}
 
 	private void updateViewContent() {
@@ -119,6 +118,13 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 		deviceHelper.removeListener(this);
 	}
 
+	private void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.onBackPressed();
+		}
+	}
+
 	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -127,7 +133,7 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,

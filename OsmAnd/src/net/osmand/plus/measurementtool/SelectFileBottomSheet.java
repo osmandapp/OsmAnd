@@ -144,14 +144,14 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		adapter.setAdapterListener(position -> {
 			List<GPXInfo> gpxList = adapter.getGpxInfoList();
 			if (position != RecyclerView.NO_POSITION && position < gpxList.size()) {
-				String fileName;
+				String filePath;
 				if (isShowCurrentGpx() && position == 0) {
-					fileName = null;
+					filePath = null;
 				} else {
-					fileName = gpxList.get(position).getFileName();
+					filePath = gpxList.get(position).getFilePath();
 				}
 				if (listener != null) {
-					listener.selectFileOnCLick(fileName);
+					listener.selectFileOnCLick(filePath);
 				}
 			}
 			dismiss();
@@ -349,7 +349,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	interface SelectFileListener {
 
-		void selectFileOnCLick(String fileName);
+		void selectFileOnCLick(String filePath);
 
 		void dismissButtonOnClick();
 

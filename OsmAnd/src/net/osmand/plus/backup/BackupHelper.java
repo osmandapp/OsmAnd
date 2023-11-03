@@ -27,6 +27,7 @@ import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.commands.CheckCodeCommand;
 import net.osmand.plus.backup.commands.DeleteAccountCommand;
 import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
 import net.osmand.plus.backup.commands.DeleteFilesCommand;
@@ -101,6 +102,7 @@ public class BackupHelper {
 	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 	public static final String ACCOUNT_DELETE_URL = SERVER_URL + "/userdata/delete-account";
 	public static final String SEND_CODE_URL = SERVER_URL + "/userdata/send-code";
+	public static final String CHECK_CODE_URL = SERVER_URL + "/userdata/auth/confirm-code";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
@@ -610,7 +612,7 @@ public class BackupHelper {
 	}
 
 	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+	                        @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
@@ -689,6 +691,11 @@ public class BackupHelper {
 		executor.runCommand(new DeleteAccountCommand(this, email, token));
 	}
 
+	public void checkCode(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new CheckCodeCommand(this, email, token));
+	}
+
 	public void sendCode(@NonNull String email, @NonNull String action) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new SendCodeCommand(this, email, action));
@@ -724,10 +731,12 @@ public class BackupHelper {
 			params.put("accessToken", getAccessToken());
 			params.put("name", fileName);
 			params.put("type", type);
-			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
+			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+
+			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
-				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
 			IProgress iProgress = new AbstractProgress() {
@@ -773,7 +782,7 @@ public class BackupHelper {
 				}
 			};
 			iProgress.startWork(remoteFile.getFilesize() / 1024);
-			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, iProgress);
+			error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}

@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui.trash;
 
 import static net.osmand.plus.backup.ui.ChangesAdapter.BACKUP_STATUS_TYPE;
-import static net.osmand.plus.backup.ui.trash.CloudTrashAdapter.ALERT_CARD_TYPE;
 import static net.osmand.plus.backup.ui.trash.CloudTrashAdapter.EMPTY_BANNER_TYPE;
 import static net.osmand.plus.backup.ui.trash.CloudTrashController.CONFIRM_EMPTY_TRASH_ID;
 
@@ -38,6 +37,9 @@ import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.Confirmatio
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -104,6 +106,28 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 				activity.onBackPressed();
 			}
 		});
+		ImageView actionButton = toolbar.findViewById(R.id.action_button);
+		actionButton.setOnClickListener(this::showOptionsMenu);
+		actionButton.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
+		actionButton.setContentDescription(getString(R.string.shared_string_more));
+		AndroidUiHelper.updateVisibility(actionButton, true);
+	}
+
+	private void showOptionsMenu(@NonNull View view) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(view.getContext())
+				.setTitleId(R.string.shared_string_empty_trash)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(v -> controller.showClearConfirmationDialog())
+				.create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.layoutId = R.layout.simple_popup_menu_item;
+		PopUpMenu.show(displayData);
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
@@ -129,8 +153,6 @@ public class CloudTrashFragment extends BaseOsmAndFragment implements Confirmati
 				items.add(EMPTY_BANNER_TYPE);
 			}
 		} else {
-			items.add(ALERT_CARD_TYPE);
-
 			for (TrashGroup group : groups.values()) {
 				items.add(group);
 				items.addAll(group.getItems());

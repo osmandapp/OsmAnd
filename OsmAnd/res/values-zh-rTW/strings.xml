@@ -5514,7 +5514,7 @@
     <string name="key_event_action_previous_app_profile">上一個應用程式設定檔</string>
     <string name="show_toast_about_key_pressed">顯示關於按下鍵的浮動式訊息</string>
     <string name="key_event_action_move_left">向左移動</string>
-    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其與選定的動作連結。</string>
+    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其連結至動作：%1$s</string>
     <string name="key_event_action_move_right">向右移動</string>
     <string name="shared_string_button">按鈕</string>
     <string name="key_event_action_next_app_profile">下一個應用程式設定檔</string>
@@ -5538,4 +5538,7 @@
     <string name="key_event_action_move_down">向下移動</string>
     <string name="key_event_action_open_wunderlinq_datagrid">開啟 WunderLINQ Datagrid</string>
     <string name="key_event_category_actions">動作</string>
+    <string name="deletion_error">刪除錯誤</string>
+    <string name="change_button">變更按鈕</string>
+    <string name="download_to_device">下載到裝置</string>
 </resources>

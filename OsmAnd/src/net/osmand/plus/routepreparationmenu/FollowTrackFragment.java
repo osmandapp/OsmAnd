@@ -389,8 +389,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && index < card.getGpxInfoList().size()) {
 			GPXInfo gpxInfo = card.getGpxInfoList().get(index);
-			String fileName = gpxInfo.getFileName();
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+			String filePath = gpxInfo.getFilePath();
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				selectTrackToFollow(gpxFile, true);
@@ -404,6 +404,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					}
 					return true;
 				};
+				String fileName = gpxInfo.getFileName();
 				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, callback, dir, null, fileName);
 			}

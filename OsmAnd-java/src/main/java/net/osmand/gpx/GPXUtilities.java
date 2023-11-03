@@ -578,6 +578,7 @@ public class GPXUtilities {
 		public Bounds bounds = null;
 
 		public Metadata() {
+			time = System.currentTimeMillis();
 		}
 
 		public Metadata(Metadata source) {
@@ -1307,6 +1308,24 @@ public class GPXUtilities {
 		return time;
 	}
 
+	public static long getCreationTime(GPXFile gpxFile) {
+		long time = 0;
+		if (gpxFile != null) {
+			if (gpxFile.metadata != null && gpxFile.metadata.time > 0) {
+				time = gpxFile.metadata.time;
+			} else {
+				time = gpxFile.getLastPointTime();
+			}
+			if (time == 0) {
+				time = gpxFile.modifiedTime;
+			}
+		}
+		if (time == 0) {
+			time = System.currentTimeMillis();
+		}
+		return time;
+	}
+
 	private static SimpleDateFormat getTimeFormatter() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1364,6 +1383,7 @@ public class GPXUtilities {
 
 	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
 		GPXFile gpxFile = new GPXFile(null);
+		gpxFile.metadata.time = 0;
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(stream));
@@ -1725,6 +1745,9 @@ public class GPXUtilities {
 			}
 			if (addGeneralTrack) {
 				gpxFile.addGeneralTrack();
+			}
+			if (gpxFile.metadata.time == 0) {
+				gpxFile.metadata.time = getCreationTime(gpxFile);
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;

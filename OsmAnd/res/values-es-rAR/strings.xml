@@ -5440,7 +5440,9 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Se ha añadido el widget «Relación de planeo».
+    <string name="release_4_6">• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.
+\n
+\n• Se ha añadido el widget «Relación de planeo».
 \n
 \n• Se añadieron filtros y carpetas inteligentes para las trazas
 \n
@@ -5532,4 +5534,37 @@
     <string name="shared_string_show_less">Mostrar menos</string>
     <string name="folder">Carpeta</string>
     <string name="not_specified">Sin especificar</string>
+    <string name="key_event_action_zoom_in">Acercar</string>
+    <string name="enable_to_use_external_input_device">Activar para usar un dispositivo de entrada externo con OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Cambiar orientación del mapa</string>
+    <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
+    <string name="key_event_action_move_left">Mover a la izquierda</string>
+    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para vincularlo con la acción: %1$s</string>
+    <string name="deletion_error">Error de borrado</string>
+    <string name="key_event_action_move_right">Mover a la derecha</string>
+    <string name="shared_string_button">Botón</string>
+    <string name="key_event_action_next_app_profile">Perfil de aplicación siguiente</string>
+    <string name="change_key_binding">Cambiar vinculación de tecla</string>
+    <string name="key_event_action_take_media_note">Crear nota multimedia</string>
+    <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
+    <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
+    <string name="remove_type_q">¿Quitar el tipo «%1$s»\?</string>
+    <string name="shared_string_action">Acción</string>
+    <string name="add_new_type">Añadir nuevo tipo</string>
+    <string name="key_event_action_move_up">Mover arriba</string>
+    <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
+    <string name="key_event_action_zoom_out">Alejar</string>
+    <string name="key_event_action_toggle_drower">Mostrar/ocultar menú lateral</string>
+    <string name="key_is_already_assigned_error">La tecla «%1$s» ya se ha asignado a otra acción: «%2$s»</string>
+    <string name="key_event_action_open_navigation_view">Abrir vista de navegación</string>
+    <string name="external_input_device_title">Dispositivo de entrada externo</string>
+    <string name="key_bindings">Atajos de teclado</string>
+    <string name="key_event_action_move_to_my_location">Mover a mi ubicación</string>
+    <string name="key_event_category_map_interactions">Interacciones del mapa</string>
+    <string name="key_event_action_move_down">Mover abajo</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Abrir cuadrícula de datos de WunderLINQ</string>
+    <string name="key_event_category_actions">Acciones</string>
+    <string name="change_button">Cambiar botón</string>
+    <string name="download_to_device">Descargar al dispositivo</string>
 </resources>

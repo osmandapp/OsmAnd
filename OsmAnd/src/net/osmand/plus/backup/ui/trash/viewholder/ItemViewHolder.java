@@ -67,12 +67,12 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		description.setText(item.getDescription(app));
 
 		int iconId = item.getIconId();
-		icon.setImageDrawable(iconId != -1 ? uiUtilities.getThemedIcon(iconId) : null);
+		icon.setImageDrawable(iconId != -1 ? uiUtilities.getIcon(iconId) : null);
 
 		setupProgress(item);
 		itemView.setEnabled(!isSyncing(item));
 		itemView.setOnClickListener(v -> controller.showItemMenu(item));
-		secondIcon.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_cloud_done));
+		secondIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cloud_done));
 
 		AndroidUiHelper.updateVisibility(secondIcon, item.synced);
 		AndroidUiHelper.updateVisibility(cloudIcon, !item.isLocalDeletion());

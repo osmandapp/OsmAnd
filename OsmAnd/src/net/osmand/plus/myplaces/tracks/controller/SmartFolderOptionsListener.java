@@ -15,6 +15,6 @@ public interface SmartFolderOptionsListener {
 	default void showExportDialog(@NonNull SmartFolder folder) {
 	}
 
-	default void showChangeAppearanceDialog(@NonNull SmartFolder trackFolder) {
+	default void showEditFiltersDialog(@NonNull SmartFolder trackFolder) {
 	}
 }

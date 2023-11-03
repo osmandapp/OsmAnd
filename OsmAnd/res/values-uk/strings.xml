@@ -5394,7 +5394,7 @@
     <string name="send_crash_log_descr">Містить лише дані про збої</string>
     <string name="open_issue_on_github_descr">Ставте запитання, пропонуйте функції</string>
     <string name="open_issue_on_github">Відкрити обговорення на GitHub</string>
-    <string name="report_an_issues">Повідомити про проблеми</string>
+    <string name="report_an_issues">Повідомити про проблему</string>
     <string name="copy_build_version">Копіювати версію збірки</string>
     <string name="most_viewed">Найогляданіші</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Маршрути для човнів</string>
@@ -5465,25 +5465,27 @@
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
-    <string name="release_4_6">- Додано віджет \"Коефіцієнт ковзання\"
+    <string name="release_4_6">• Додано можливість зміни прив’язки клавіш для зовнішніх пристроїв введення
 \n
-\n - Додано фільтри та розумні теки для треків
+\n • Додано віджет \"Коефіцієнт ковзання\"
 \n
-\n - Додано рядки для верхньої та нижньої панелей віджетів з підтримкою всіх віджетів
+\n • Додано фільтри та розумні теки для треків
 \n
-\n - Додано підтримку віджету температури ANT+
+\n • Додано рядки для верхньої та нижньої панелей віджетів з підтримкою усіх віджетів
 \n
-\n - Покращено керування пам\'яттю для великих GPX-доріжок
+\n • Додано підтримку віджета температури ANT+
 \n
-\n - Оновлене керування локальними ресурсами у розділі \"Завантаження
+\n • Покращено керування пам\'яттю для великих GPX-треків
 \n
-\n - Додано віджет \"Доступна оперативна пам\'ять\"
+\n • Оновлене керування локальними ресурсами у Завантаженнях
 \n
-\n - Виправлено проблеми з прозорим рядком стану
+\n • Додано віджет \"Доступна оперативна пам\'ять\"
+\n
+\n • Виправлено проблеми з прозорим рядком стану
 \n
 \n</string>
     <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
-    <string name="map_widget_glide_average_desc">Показує середній коефіцієнт ковзання за встановленим інтервалом.</string>
+    <string name="map_widget_glide_average_desc">Показує середній коефіцієнт ковзання для встановленого інтервалу.</string>
     <string name="map_widget_glide_target_desc">Показує коефіцієнт ковзання, необхідний для досягнення цільової точки.</string>
     <string name="empty_smart_folder_title">Немає відповідного треку</string>
     <string name="empty_smart_folder_description">Усі відповідні треки автоматично з\'являться тут</string>
@@ -5495,4 +5497,67 @@
     <string name="no_config_smart_folder_description">Розумні теки дозволяють групувати треки за застосованими фільтрами</string>
     <string name="loading_tracks">Перезавантаження треків</string>
     <string name="searching_matching_tracks">Шукати всі відповідні треки</string>
+    <string name="cloud_trash_clear_confirmation">Ви дійсно хочете остаточно видалити всі елементи зі Смітника\? Ця дія незворотна.</string>
+    <string name="key_event_action_zoom_in">Збільшити</string>
+    <string name="change_button">Змінити кнопку</string>
+    <string name="enable_to_use_external_input_device">Увімкнути зовнішній пристрій введення з OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Змінити орієнтацію мапи</string>
+    <string name="root_folder">Коренева тека</string>
+    <string name="key_event_action_previous_app_profile">Попередній профіль</string>
+    <string name="show_toast_about_key_pressed">Показувати сповіщення про натиснуту кнопку</string>
+    <string name="shared_string_rows">Рядки</string>
+    <string name="key_event_action_move_left">Вліво</string>
+    <string name="restore_from_trash">Відновити зі смітника</string>
+    <string name="all_folders">Усі теки</string>
+    <string name="press_button_to_link_with_action">Для призначення вказаної дії натисніть на своєму пристрої клавішу: %1$s</string>
+    <string name="deletion_error">Помилка видалення</string>
+    <string name="key_event_action_move_right">Вправо</string>
+    <string name="shared_string_show_less">Показувати менше</string>
+    <string name="shared_string_button">Клавіша</string>
+    <string name="key_event_action_next_app_profile">Наступний профіль</string>
+    <string name="folder">Тека</string>
+    <string name="delete_all_items">Видалити всі елементи</string>
+    <string name="change_key_binding">Змінити прив\'язку клавіш</string>
+    <string name="key_event_action_take_media_note">Створити медіа-нотатку</string>
+    <string name="remove_type_q">Ви дійсно хочете вилучити тип \"%1$s\"\?</string>
+    <string name="shared_string_action">Дія</string>
+    <string name="trash_is_empty_banner_desc">Вилучені з OsmAnd Cloud файли будуть тут доступні ще %1$s днів.</string>
+    <string name="add_new_type">Додати новий тип</string>
+    <string name="key_event_action_move_up">Вгору</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d трек)</item>
+        <item quantity="few">%1$d (%2$d треки)</item>
+        <item quantity="many">%1$d (%2$d треків)</item>
+        <item quantity="other">%1$d (%2$d треків)</item>
+    </plurals>
+    <string name="key_event_action_open_search_view">Відкрити пошук</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" буде видалено назавжди. Ви впевнені\?
+\n
+\nЦю дію неможливо скасувати.</string>
+    <string name="key_event_action_zoom_out">Зменшити</string>
+    <string name="key_event_action_toggle_drower">Показати/сховати бічне меню</string>
+    <string name="key_is_already_assigned_error">Клавіша \"%1$s\" вже призначена до такої дії: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Відкрити навігацію</string>
+    <string name="shared_string_empty_trash">Очистити смітник</string>
+    <string name="shared_string_delete_immediately">Видалити назавжди</string>
+    <string name="shared_string_is_deleted">%1$s видалено.</string>
+    <string name="cloud_item_restored">%1$s відновлено до Cloud.</string>
+    <string name="trash_alert_card_desc">Елементи у смітнику будуть знищені за %1$s днів.</string>
+    <string name="external_input_device_title">Зовнішній пристрій введення</string>
+    <string name="key_bindings">Прив\'язки клавіш</string>
+    <string name="trash_is_empty">Смітник порожній</string>
+    <string name="key_event_action_move_to_my_location">Перейти до моєї локації</string>
+    <string name="not_specified">Не вказано</string>
+    <string name="download_to_device">Завантажити на пристрій</string>
+    <string name="key_event_category_map_interactions">Взаємодії з мапою</string>
+    <string name="key_event_action_move_down">Вниз</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Відкрити набір даних WunderLINQ</string>
+    <string name="shared_string_trash">Смітник</string>
+    <string name="shared_string_delete_item">Видалити елемент</string>
+    <string name="key_event_category_actions">Дії</string>
+    <string name="glide_ratio_to_target">Коефіцієнт ковзання до цілі</string>
+    <string name="average_glide_ratio">Середній коефіцієнт ковзання</string>
+    <string name="key_event_action_activity_back_pressed">Натиснено кнопку назад</string>
+    <string name="key_event_action_emit_navigation_hint">Виведення навігаційної інформації</string>
+    <string name="map_widget_group_glide_ratio">Коефіцієнт ковзання</string>
 </resources>

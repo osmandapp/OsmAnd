@@ -7,9 +7,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.viewholders.FoundDeviceViewHolder;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
@@ -31,7 +31,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		if (position == 0) {
-			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId));
+			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId) || ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId));
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);

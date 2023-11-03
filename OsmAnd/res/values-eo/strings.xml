@@ -5017,7 +5017,7 @@
     <string name="shared_string_kilograms">kilogramoj</string>
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuroj\?</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuro(j)\?</string>
     <string name="recently_visible">Antaŭe vidigitaj %1$s</string>
     <string name="no_visible_tracks_description">Elektu spurojn por vidigi ilin sur la mapo.</string>
     <string name="no_visible_tracks">Neniu spuro sur la mapo</string>
@@ -5420,11 +5420,21 @@
     <string name="copy_build_version">Kopii version de kompilaĵo</string>
     <string name="most_viewed">Ofte legataj</string>
     <string name="app_mode_baby_transport">Transporto de beboj</string>
-    <string name="release_4_6">• nova fenestraĵo: glisrilato
+    <string name="release_4_6">• eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
 \n
-\n• aldonis fenestraĵon ANT+: temperaturo
+\n • nova fenestraĵo: Glisrilato
 \n
-\n• pli bona mastrumado de memoro por grandaj GPX-spuroj
+\n • filtriloj kaj inteligantaj dosierujoj por spuroj
+\n
+\n • aldonis vicojn por spura kaj malsupra paneloj de fenestraĵoj kun subteno por ĉiuj fenestraĵoj
+\n
+\n • aldonis fenestraĵon ANT+: temperaturo
+\n
+\n • pli bona mastrumado de memoro por grandaj GPX-spuroj
+\n
+\n • nova fenestraĵo: Disponebla RAM
+\n
+\n • riparitaj problemoj pri travideblaj stataj strioj
 \n
 \n</string>
     <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
@@ -5458,4 +5468,78 @@
     <string name="sort_country_name_descending">landnomo (Z → A)</string>
     <string name="delete_map_description">Ĉu vi certe volas forigi la mapon: %1$s\?</string>
     <string name="maps_and_resources">Mapoj kaj rimedoj</string>
+    <string name="show_toast_about_key_pressed">Montri sciigon pri premita klavo</string>
+    <string name="shared_string_rows">Vicoj</string>
+    <string name="press_button_to_link_with_action">Premu butonon sur via aparato por asigni ĝin al la elektita ago.</string>
+    <string name="deletion_error">Eraro pri forigo</string>
+    <string name="shared_string_button">Butono</string>
+    <string name="shared_string_action">Ago</string>
+    <string name="key_is_already_assigned_error">La klavo “%1$s” estas jam agordita por alia ago: “%2$s”</string>
+    <string name="cloud_trash_clear_confirmation">Ĉu vi certe volas por ĉiam forigi ĉiujn objektojn el la rubujo\? Tiu ĉi ago estas nemalfarebla.</string>
+    <string name="key_event_action_zoom_in">Pligrandigi</string>
+    <string name="empty_smart_folder_title">Neniu kongrua spuro</string>
+    <string name="enable_to_use_external_input_device">Aktivigu por uzi eksterajn enigajn aparatojn kun OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Ŝanĝi map-orientiĝon</string>
+    <string name="smart_folder_name_present">Inteligenta dosierujo kun tiu ĉi nomo jam ekzistas</string>
+    <string name="root_folder">Ĉefdosierujo</string>
+    <string name="key_event_action_previous_app_profile">Antaŭa aplikaĵa profilo</string>
+    <string name="empty_smart_folder_description">Ĉiuj kongruaj spuroj aŭtomate montriĝos tie ĉi</string>
+    <string name="key_event_action_move_left">Movi maldekstren</string>
+    <string name="configure_filter">Agordi filtrilon</string>
+    <string name="restore_from_trash">Restarigi el rubujo</string>
+    <string name="all_folders">Ĉiuj dosierujoj</string>
+    <string name="smart_folder_saved">Inteligenta dosierujo konservita</string>
+    <string name="key_event_action_move_right">Movi dekstren</string>
+    <string name="shared_string_show_less">Montri malpli</string>
+    <string name="key_event_action_next_app_profile">Sekva aplikaĵa profilo</string>
+    <string name="folder">Dosierujo</string>
+    <string name="delete_all_items">Forigi ĉiujn objektojn</string>
+    <string name="change_key_binding">Ŝanĝi klav-asignon</string>
+    <string name="key_event_action_take_media_note">Fari aŭdvidan noton</string>
+    <string name="key_event_action_activity_back_pressed">Premi agon “malfari”</string>
+    <string name="key_event_action_emit_navigation_hint">Montri navigan konsilon</string>
+    <string name="remove_type_q">Ĉu vi certe volas forigi la specon “%1$s”\?</string>
+    <string name="no_config_smart_folder_title">Neagordita</string>
+    <string name="trash_is_empty_banner_desc">Dosieroj forigitaj el OsmAnd-Nubo estos disponeblaj tie ĉi ankoraŭ dum %1$s tagoj.</string>
+    <string name="add_new_type">Aldoni novan specon</string>
+    <string name="key_event_action_move_up">Movi supren</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d spuro)</item>
+        <item quantity="other">%1$d (%2$d spuroj)</item>
+    </plurals>
+    <string name="add_smart_folder">Nova inteligenta dosierujo</string>
+    <string name="empty_name">Malplena nomo</string>
+    <string name="edit_fiilter">Redakti filtrilon</string>
+    <string name="key_event_action_open_search_view">Malfermi vidon “serĉi”</string>
+    <string name="delete_trash_item_confirmation_desc">“%1$s” estos forigita por ĉiam. Ĉui vi certas\?
+\n
+\nTiu ĉi ago estas neinversigebla.</string>
+    <string name="discard_filter_changes">Rezigni ŝanĝi filtrilon</string>
+    <string name="key_event_action_zoom_out">Malgrandigi</string>
+    <string name="key_event_action_toggle_drower">Montri/kaŝi flankan menuon</string>
+    <string name="save_as_smart_folder">Konservi kiel inteligentan dosierujon</string>
+    <string name="key_event_action_open_navigation_view">Malfermi vidon “navigi”</string>
+    <string name="shared_string_empty_trash">Malplenigi rubujon</string>
+    <string name="shared_string_show_icon">Montri emblemon</string>
+    <string name="shared_string_delete_immediately">Forigi senprokraste</string>
+    <string name="shared_string_loading">Ŝargado</string>
+    <string name="delete_smart_folder_dialog_message">Tio ĉi forigos la inteligentan dosierujon “%1$s”.</string>
+    <string name="shared_string_is_deleted">%1$s estas forigita.</string>
+    <string name="cloud_item_restored">%1$s estas restarigita al OsmAnd-Nubo.</string>
+    <string name="trash_alert_card_desc">Objektoj en la rubujo estos forigitaj post %1$s tagoj.</string>
+    <string name="external_input_device_title">Ekstera eniga aparato</string>
+    <string name="discard_filter_changes_prompt">Ĉu vi certe volas reagordi ĉiujn filtrilojn\?</string>
+    <string name="key_bindings">Klav-asignoj</string>
+    <string name="no_config_smart_folder_description">Inteligentaj dosierujoj ebligas grupigi spurojn laŭ aplikitaj filtriloj</string>
+    <string name="trash_is_empty">Rubujo estas malplena</string>
+    <string name="key_event_action_move_to_my_location">Centrigi al mia pozicio</string>
+    <string name="not_specified">Neprecizigita</string>
+    <string name="key_event_category_map_interactions">Mapaj agoj</string>
+    <string name="key_event_action_move_down">Movi malsupren</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Malfermi datum-menuon de WunderLINQ</string>
+    <string name="shared_string_trash">Rubujo</string>
+    <string name="loading_tracks">Reŝargado de spuroj</string>
+    <string name="shared_string_delete_item">Forigi objekton</string>
+    <string name="key_event_category_actions">Agoj</string>
+    <string name="searching_matching_tracks">Serĉi ĉiujn kongruajn spurojn</string>
 </resources>
