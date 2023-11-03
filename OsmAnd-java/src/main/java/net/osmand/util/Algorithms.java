@@ -1396,4 +1396,9 @@ public class Algorithms {
 		mapRect.top = Math.max(mapRect.top, gpxRect.top);
 		mapRect.bottom = mapRect.bottom == 0.0 ? gpxRect.bottom : Math.min(mapRect.bottom, gpxRect.bottom);
 	}
+	
+	public static long combine2Points(int x, int y) {
+		return (((long) x) << 32) | ((long) y);
+	}
+	
 }
