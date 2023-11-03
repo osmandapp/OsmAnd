@@ -1,6 +1,6 @@
 package net.osmand.plus.search;
 
-import static net.osmand.plus.activities.MapActivity.ShowQuickSearchMode.CURRENT;
+import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;

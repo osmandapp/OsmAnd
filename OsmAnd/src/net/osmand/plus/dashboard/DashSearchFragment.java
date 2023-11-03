@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 
 public class DashSearchFragment extends DashBaseFragment {

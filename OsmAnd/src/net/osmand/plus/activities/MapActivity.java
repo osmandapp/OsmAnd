@@ -133,6 +133,7 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -2280,21 +2281,5 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onInAppPurchaseGetItems() {
 		DiscountHelper.checkAndDisplay(this);
-	}
-
-	public enum ShowQuickSearchMode {
-		NEW,
-		NEW_IF_EXPIRED,
-		CURRENT,
-		START_POINT_SELECTION,
-		DESTINATION_SELECTION,
-		DESTINATION_SELECTION_AND_START,
-		INTERMEDIATE_SELECTION,
-		HOME_POINT_SELECTION,
-		WORK_POINT_SELECTION;
-
-		public boolean isPointSelection() {
-			return this != NEW && this != NEW_IF_EXPIRED && this != CURRENT;
-		}
 	}
 }

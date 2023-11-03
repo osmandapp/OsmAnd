@@ -6,7 +6,7 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 
 public class OpenQuickSearchDialogCommand extends KeyEventCommand {
 

@@ -2,7 +2,7 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 
 import androidx.annotation.NonNull;
 

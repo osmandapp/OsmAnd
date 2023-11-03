@@ -95,6 +95,7 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.profiles.data.RoutingProfilesHolder;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -541,7 +542,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_search_open");
-					mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+					mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 					return true;
 				}));
 
