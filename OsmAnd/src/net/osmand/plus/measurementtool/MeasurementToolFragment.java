@@ -522,8 +522,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		toolBarController.setOnBackButtonClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GpxApproximationFragment gpxApproximationFragment = activity.getGpxApproximationFragment();
-				SnapTrackWarningFragment snapTrackWarningFragment = activity.getSnapTrackWarningBottomSheet();
+				GpxApproximationFragment gpxApproximationFragment = activity.getFragmentsHelper().getGpxApproximationFragment();
+				SnapTrackWarningFragment snapTrackWarningFragment = activity.getFragmentsHelper().getSnapTrackWarningBottomSheet();
 				if (gpxApproximationFragment != null) {
 					gpxApproximationFragment.dismissImmediate();
 				} else if (snapTrackWarningFragment != null) {

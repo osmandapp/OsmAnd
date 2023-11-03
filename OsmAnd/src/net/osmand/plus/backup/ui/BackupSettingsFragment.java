@@ -170,7 +170,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			backupHelper.logout();
-			((MapActivity) activity).dismissFragment(BackupCloudFragment.TAG);
+			((MapActivity) activity).getFragmentsHelper().dismissFragment(BackupCloudFragment.TAG);
 			BackupAuthorizationFragment.showInstance(getActivity().getSupportFragmentManager());
 		}
 	}

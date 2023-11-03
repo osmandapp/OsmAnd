@@ -424,15 +424,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			SelectedGpxFile selectedGpxFile = null;
-			TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
+			TrackMenuFragment fragment = mapActivity.getFragmentsHelper().getTrackMenuFragment();
 			if (fragment != null) {
 				selectedGpxFile = fragment.getSelectedGpxFile();
 			}
-			TrackAppearanceFragment appearanceFragment = mapActivity.getTrackAppearanceFragment();
+			TrackAppearanceFragment appearanceFragment = mapActivity.getFragmentsHelper().getTrackAppearanceFragment();
 			if (appearanceFragment != null) {
 				selectedGpxFile = appearanceFragment.getSelectedGpxFile();
 			}
-			GpsFilterFragment gpsFilterFragment = mapActivity.getGpsFilterFragment();
+			GpsFilterFragment gpsFilterFragment = mapActivity.getFragmentsHelper().getGpsFilterFragment();
 			if (gpsFilterFragment != null) {
 				selectedGpxFile = gpsFilterFragment.getSelectedGpxFile();
 			}
