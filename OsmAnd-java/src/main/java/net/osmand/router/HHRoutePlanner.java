@@ -258,8 +258,8 @@ public class HHRoutePlanner {
 			c = new HHRoutingConfig();
 			
 			// test data for debug swap
-//			c = HHRoutingConfig.dijkstra(1); 
-			c = HHRoutingConfig.astar(1);
+			c = HHRoutingConfig.dijkstra(0); 
+//			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 //			c.ROUTE_LAST_MILE = false;
