@@ -24,7 +24,7 @@
     <string name="poi_climbing_crag">Da;Creasta de escaladă</string>
     <string name="poi_climbing_crag_filter">Stâncă de escaladă</string>
     <string name="poi_rtsa_scale_filter">Categorie de dificultate</string>
-    <string name="poi_park_ride">Park and ride</string>
+    <string name="poi_park_ride">Parcare și plimbare</string>
     <string name="poi_denotation">Denotare</string>
     <string name="poi_books_type">Cărți</string>
     <string name="poi_substation_type">Tip</string>
@@ -156,7 +156,7 @@
     <string name="poi_osmwiki">Wikipedia</string>
     <string name="poi_military">Militar</string>
     <string name="poi_seamark">Nautice</string>
-    <string name="poi_natural">Natural</string>
+    <string name="poi_natural">Naturală</string>
     <string name="poi_finance">Finanțe</string>
     <string name="poi_craft">Artizanat</string>
     <string name="poi_service">Servicii</string>
@@ -195,7 +195,7 @@
     <string name="poi_emergency_infrastructure">Infrastructura de urgență</string>
     <string name="poi_emergency">Urgențe</string>
     <string name="poi_shop_food">Magazine de cartier și supermarketuri</string>
-    <string name="poi_shop">Magazine</string>
+    <string name="poi_shop">Magazin</string>
     <string name="poi_shelter_filter">Adăpost</string>
     <string name="poi_permanent_camping">Campare permanentă</string>
     <string name="poi_authentication_none">Autentificare nenecesară</string>
@@ -4487,7 +4487,7 @@
     <string name="poi_recycling_plastic_bottle_caps">Capace de sticle de plastic</string>
     <string name="poi_recycling_pet_drink_bottles">Sticle PET pentru băuturi</string>
     <string name="poi_recycling_textiles">Textile</string>
-    <string name="poi_self_checkout">Self checkout</string>
+    <string name="poi_self_checkout">Autoservire</string>
     <string name="poi_recycling_aluminium_cans">Doze de aluminiu</string>
     <string name="poi_self_checkout_no">Autoservire: nu</string>
     <string name="poi_self_checkout_yes">Da</string>
