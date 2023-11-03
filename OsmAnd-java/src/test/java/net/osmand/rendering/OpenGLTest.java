@@ -31,21 +31,22 @@ import java.util.Objects;
 
 public class OpenGLTest {
 
-	protected Log log = PlatformUtil.getLog(OpenGLTest.class);
-	private final String PATH_TO_RESOURCES = "src/test/resources/rendering/";
-	private final String TES_JSON = "/test_3d_rendering.json";
+	private static final String TES_JSON = "/test_3d_rendering.json";
 	private CummulativeException cummulativeException;
 
 	@Test
 	public void testRendering() {
 		String eyepiecePath = System.getProperty("eyepiece");
-		if (eyepiecePath == null) {
-			eyepiecePath = System.getenv("eyepiece");
-		}
-		if (eyepiecePath == null || eyepiecePath.isEmpty()) {
+		if (Algorithms.isEmpty(eyepiecePath)) {
 			return;
 		}
-		List<String> commands = generateCommands(eyepiecePath);
+
+		String resourcesPath = System.getProperty("openglTestResources");
+		if (Algorithms.isEmpty(resourcesPath)) {
+			return;
+		}
+
+		List<String> commands = generateCommands(eyepiecePath, resourcesPath);
 		for (String cmd : commands) {
 			try {
 				runCommand(cmd);
@@ -54,13 +55,13 @@ public class OpenGLTest {
 			}
 		}
 		try {
-			test();
+			test(resourcesPath);
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private List<String> generateCommands(String eyepiecePath) {
+	private List<String> generateCommands(String eyepiecePath, String resourcesPath) {
 		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		TestEntry[] arr = gson.fromJson(reader, TestEntry[].class);
@@ -80,7 +81,7 @@ public class OpenGLTest {
 			}
 			assert(testEntry.testName != null);
 			params.testName = testEntry.testName;
-			res.add(params.getCommand(eyepiecePath));
+			res.add(params.getCommand(eyepiecePath, resourcesPath));
 		}
 		return res;
 	}
@@ -132,7 +133,7 @@ public class OpenGLTest {
 		}
 	}
 
-	private void test() throws FileNotFoundException {
+	private void test(String resourcesPath) throws FileNotFoundException {
 		cummulativeException = new CummulativeException();
 		Reader reader = new InputStreamReader(Objects.requireNonNull(RouteResultPreparationTest.class.getResourceAsStream(TES_JSON)));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -140,7 +141,7 @@ public class OpenGLTest {
 		for (TestEntry testEntry : arr) {
 			assert(testEntry.testName != null);
 			cummulativeException.setCurrentTestName(testEntry.testName);
-			List<RenderedInfo> renderedInfo = parseRenderedJsonForMap(testEntry.testName);
+			List<RenderedInfo> renderedInfo = parseRenderedJsonForMap(testEntry.testName, resourcesPath);
 			if (renderedInfo.size() == 0) {
 				throw new RuntimeException("File(s) is empty for test:" + testEntry.testName);
 			}
@@ -152,8 +153,8 @@ public class OpenGLTest {
 		}
 	}
 
-	private List<RenderedInfo> parseRenderedJsonForMap(String testName) throws FileNotFoundException {
-		File jsonDir = new File(PATH_TO_RESOURCES + "/mapdata");
+	private List<RenderedInfo> parseRenderedJsonForMap(String testName, String resourcesPath) throws FileNotFoundException {
+		File jsonDir = new File(resourcesPath + "/mapdata");
 		assert(jsonDir.isDirectory());
 		final String mapName = getMapName(testName);
 		File[] jsonFiles = jsonDir.listFiles(new FileFilter() {
@@ -416,18 +417,18 @@ public class OpenGLTest {
 			maxZoom = Math.max(maxZoom, zoom);
 		}
 
-		String getCommand(String eyepiecePath) {
+		String getCommand(String eyepiecePath, String resourcesPath) {
 			assert(minZoom <= maxZoom);
 			StringBuilder builder = new StringBuilder();
 			builder.append(eyepiecePath + " -verbose ");
 			if (!commandParams.contains("-obfsPath")) {
-				builder.append("-obfsPath=" + PATH_TO_RESOURCES + "maps/ ");
+				builder.append("-obfsPath=" + resourcesPath + "/maps/ ");
 			}
 			if (!commandParams.contains("-geotiffPath")) {
-				builder.append("-geotiffPath=" + PATH_TO_RESOURCES + "geotiffs/ ");
+				builder.append("-geotiffPath=" + resourcesPath + "/geotiffs/ ");
 			}
 			if (!commandParams.contains("-cachePath")) {
-				builder.append("-cachePath=" + PATH_TO_RESOURCES + "cache/ ");
+				builder.append("-cachePath=" + resourcesPath + "/cache/ ");
 			}
 			if (!commandParams.contains("-outputRasterWidth")) {
 				builder.append("-outputRasterWidth=1024 ");
@@ -436,10 +437,10 @@ public class OpenGLTest {
 				builder.append("-outputRasterHeight=768 ");
 			}
 			if (!commandParams.contains("-outputImageFilename")) {
-				builder.append("-outputImageFilename=" + PATH_TO_RESOURCES + "mapimage/" + getMapName(testName) + " ");
+				builder.append("-outputImageFilename=" + resourcesPath + "/mapimage/" + getMapName(testName) + " ");
 			}
 			if (!commandParams.contains("-outputJSONFilename")) {
-				builder.append("-outputJSONFilename=" + PATH_TO_RESOURCES + "mapdata/" + getMapName(testName) + " ");
+				builder.append("-outputJSONFilename=" + resourcesPath + "/mapdata/" + getMapName(testName) + " ");
 			}
 			if (!commandParams.contains("-latLon") && !commandParams.contains("-endLatLon")) {
 				builder.append("-latLon=" + latitude + ":" + longitude + " ");
