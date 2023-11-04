@@ -259,13 +259,13 @@ public class HHRoutePlanner {
 			
 			// test data for debug swap
 			c = HHRoutingConfig.dijkstra(0); 
-//			c = HHRoutingConfig.astar(1);
+			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 //			c.ROUTE_LAST_MILE = false;
 			c.calcDetailed(2);
 //			c.calcAlternative();
-			c.gc();
+//			c.gc();
 			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
@@ -811,9 +811,10 @@ public class HHRoutePlanner {
 //		}
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
-		if(start == null || end == null) {
-			// TODO in Future
-			throw new IllegalStateException("Points are not present in detailed maps: segment need to be recalculated");
+		if (start == null || end == null) {
+			// TODO 2.2 in Future
+			throw new IllegalStateException(String.format("Points are not present in detailed maps: %s", 
+					start == null ? segment.start : segment.end));
 		}
 		// TODO 1.4 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null);

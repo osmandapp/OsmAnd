@@ -317,10 +317,10 @@ public class HHRoutingDB {
 	
 
 	public int loadNetworkSegments(Collection<NetworkDBPoint> points) throws SQLException {
-		return loadNetworkSegments(points, false);
+		return loadNetworkSegmentsInternal(points, false);
 	}
 	
-	public int loadNetworkSegments(Collection<NetworkDBPoint> points, boolean excludeShortcuts) throws SQLException {
+	public int loadNetworkSegmentsInternal(Collection<NetworkDBPoint> points, boolean excludeShortcuts) throws SQLException {
 		TLongObjectHashMap<NetworkDBPoint> pntsById = new TLongObjectHashMap<>();
 		for (NetworkDBPoint p : points) {
 			pntsById.put(p.index, p);
