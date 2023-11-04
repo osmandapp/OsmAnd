@@ -523,12 +523,12 @@ public class HHRoutingDB {
 			double segmentDist = r.getDistanceFromStart();
 			if (reverse) {
 				rtRouteToPointRev = null;
-				rtCostRev = rtDistanceToEnd + segmentDist;
+				rtCostRev = rtDistanceToEndRev + segmentDist;
 				rtDetailedRouteRev = r;
 				rtDistanceFromStartRev = segmentDist;
 			} else {
 				rtRouteToPoint = null;
-				rtCost = rtDistanceToEndRev + segmentDist;
+				rtCost = rtDistanceToEnd + segmentDist;
 				rtDetailedRoute = r;
 				rtDistanceFromStart = segmentDist;
 			}

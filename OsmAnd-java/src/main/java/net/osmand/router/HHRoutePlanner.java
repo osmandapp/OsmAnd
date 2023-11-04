@@ -567,7 +567,7 @@ public class HHRoutePlanner {
 						reverse ? o.getSegmentStart() : o.getSegmentEnd());
 				if (set.add(pntId)) {
 					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
-					distanceToEnd(c, reverse, pnt, e);
+					pnt.setDistanceToEnd(reverse, distanceToEnd(c, reverse, pnt, e));
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}
