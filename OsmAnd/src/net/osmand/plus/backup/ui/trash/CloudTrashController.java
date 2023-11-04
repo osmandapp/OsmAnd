@@ -150,9 +150,10 @@ public class CloudTrashController {
 	}
 
 	public void downloadItem(@NonNull TrashItem item, boolean shouldReplace) {
-		RemoteFilesType filesType = item.isLocalDeletion() ? UNIQUE : OLD;
+		boolean localDeletion = item.isLocalDeletion();
+		RemoteFilesType filesType = localDeletion ? UNIQUE : OLD;
 		settingsHelper.syncSettingsItems(item.oldFile.getName(), null, item.oldFile,
-				filesType, SYNC_OPERATION_DOWNLOAD, shouldReplace, item.isLocalDeletion());
+				filesType, SYNC_OPERATION_DOWNLOAD, shouldReplace, !localDeletion);
 	}
 
 	public void restoreItem(@NonNull TrashItem item) {

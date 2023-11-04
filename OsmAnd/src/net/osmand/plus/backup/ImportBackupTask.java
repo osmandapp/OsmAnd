@@ -48,7 +48,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private final ImportType importType;
 	private final boolean shouldReplace;
-	private final boolean updateLastModified;
+	private final boolean restoreDeleted;
 
 	private int maxProgress;
 	private int generalProgress;
@@ -63,7 +63,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.filesType = RemoteFilesType.UNIQUE;
 		this.collectListener = collectListener;
 		this.shouldReplace = true;
-		this.updateLastModified = true;
+		this.restoreDeleted = false;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 		maxProgress = calculateMaxProgress(app);
@@ -76,7 +76,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	                 @Nullable ImportListener importListener,
 	                 boolean forceReadData,
 	                 boolean shouldReplace,
-	                 boolean updateLastModified) {
+	                 boolean restoreDeleted) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -84,7 +84,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.importListener = importListener;
 		this.items = items;
 		this.shouldReplace = shouldReplace;
-		this.updateLastModified = updateLastModified;
+		this.restoreDeleted = restoreDeleted;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 		maxProgress = calculateMaxProgress(app);
@@ -103,7 +103,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.duplicatesListener = duplicatesListener;
 		this.selectedItems = selectedItems;
 		this.shouldReplace = true;
-		this.updateLastModified = true;
+		this.restoreDeleted = false;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = ImportType.CHECK_DUPLICATES;
 		maxProgress = calculateMaxProgress(app);
@@ -115,7 +115,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			case COLLECT:
 			case COLLECT_AND_READ:
 				try {
-					CollectItemsResult result = importer.collectItems(null, importType == ImportType.COLLECT_AND_READ, updateLastModified);
+					CollectItemsResult result = importer.collectItems(null, importType == ImportType.COLLECT_AND_READ, restoreDeleted);
 					remoteFiles = result.remoteFiles;
 					return result.items;
 				} catch (IllegalArgumentException | IOException e) {
@@ -130,7 +130,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				if (items != null && items.size() > 0) {
 					if (importType == ImportType.IMPORT_FORCE_READ) {
 						try {
-							CollectItemsResult result = importer.collectItems(items, true, updateLastModified);
+							CollectItemsResult result = importer.collectItems(items, true, restoreDeleted);
 							for (SettingsItem item : result.items) {
 								item.setShouldReplace(shouldReplace);
 							}
@@ -182,7 +182,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						helper.importAsyncTasks.remove(key);
 						helper.finishImport(importListener, succeed, items, needRestart);
 					};
-					new ImportBackupItemsTask(app, importer, items, filesType, itemsListener, forceReadData, updateLastModified)
+					new ImportBackupItemsTask(app, importer, items, filesType, itemsListener, forceReadData, restoreDeleted)
 							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				} else {
 					helper.importAsyncTasks.remove(key);

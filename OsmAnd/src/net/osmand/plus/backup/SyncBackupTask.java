@@ -123,10 +123,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType,
-	                                  boolean shouldReplace, boolean updateLastModified) {
+	                                  boolean shouldReplace, boolean restoreDeleted) {
 		item.setShouldReplace(shouldReplace);
 		String name = BackupHelper.getItemFileName(item);
-		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, shouldReplace, updateLastModified, this);
+		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, shouldReplace, restoreDeleted, this);
 	}
 
 	private void uploadNewItems() {
