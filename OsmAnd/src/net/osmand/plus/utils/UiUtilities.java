@@ -53,8 +53,16 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
@@ -708,5 +716,52 @@ public class UiUtilities {
 		textView.setText(spannable);
 		textView.setMovementMethod(LinkMovementMethod.getInstance());
 		textView.setHighlightColor(ColorUtilities.getActiveColor(textView.getContext(), nightMode));
+	}
+
+	public static void updateStatusBarColor(@NonNull MapActivity activity) {
+		int colorId = -1;
+		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		MapLayers mapLayers = activity.getMapLayers();
+
+		MapFragmentsHelper fragmentsHelper = activity.getFragmentsHelper();
+		BaseOsmAndFragment fragmentAboveDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+		BaseSettingsFragment settingsFragmentAboveDashboard = fragmentsHelper.getVisibleBaseSettingsFragment(R.id.fragmentContainer);
+		BaseOsmAndFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
+		if (fragmentAboveDashboard != null) {
+			colorId = fragmentAboveDashboard.getStatusBarColorId();
+		} else if (settingsFragmentAboveDashboard != null) {
+			colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+		} else if (activity.getDashboard().isVisible()) {
+			colorId = activity.getDashboard().getStatusBarColor();
+		} else if (fragmentBelowDashboard != null) {
+			colorId = fragmentBelowDashboard.getStatusBarColorId();
+		} else if (mapLayers.getMapQuickActionLayer() != null
+				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
+			colorId = R.color.status_bar_transparent_gradient;
+		}
+		if (colorId != -1) {
+			activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			return;
+		}
+
+		int color = TopToolbarController.NO_COLOR;
+		boolean mapControlsVisible = activity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+		boolean topToolbarVisible = mapLayers.getMapInfoLayer().isTopToolbarViewVisible();
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+
+		TopToolbarController toolbarController = mapLayers.getMapInfoLayer().getTopToolbarController();
+		if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
+			color = toolbarController.getStatusBarColor(activity, night);
+		}
+		if (color == TopToolbarController.NO_COLOR) {
+			ApplicationMode appMode = settings.getApplicationMode();
+			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
+			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
+			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
+			color = ContextCompat.getColor(activity, colorId);
+		}
+		activity.getWindow().setStatusBarColor(color);
 	}
 }

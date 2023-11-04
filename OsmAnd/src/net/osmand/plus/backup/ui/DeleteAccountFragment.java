@@ -249,7 +249,7 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 			MapActivity activity = (MapActivity) getActivity();
 			if (activity != null) {
 				if (backupError == null) {
-					activity.dismissFragment(BackupCloudFragment.TAG);
+					activity.getFragmentsHelper().dismissFragment(BackupCloudFragment.TAG);
 					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
 				} else {
 					activity.onBackPressed();

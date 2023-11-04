@@ -649,6 +649,9 @@ public class OsmandApplication extends MultiDexApplication {
 		} else {
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
+		if (carNavigationSession == null && this.carNavigationSession != null) {
+			this.carNavigationSession.setMapView(null);
+		}
 		this.carNavigationSession = carNavigationSession;
 		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
 		if (navigationSessionListener != null) {

@@ -177,7 +177,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		map = mapActivity.getMapView();
 		menu = mapActivity.getContextMenu();
-		boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
+		boolean enabled = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
 			public void handleOnBackPressed() {
 				if (menu.isVisible() && menu.isClosable()) {
@@ -1301,7 +1301,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				return;
 			}
 			if (MapRouteInfoMenu.chooseRoutesVisible) {
-				mapActivity.getChooseRouteFragment().dismiss();
+				mapActivity.getFragmentsHelper().getChooseRouteFragment().dismiss();
 			}
 			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app, false);
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);

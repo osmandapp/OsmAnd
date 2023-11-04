@@ -1,16 +1,16 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapControlsLayer;
-
-import androidx.annotation.NonNull;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
 
 public class NavigationMenuButton extends MapButton {
 
@@ -22,7 +22,7 @@ public class NavigationMenuButton extends MapButton {
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_round, R.drawable.btn_round_night);
 		setOnClickListener(v -> {
-			mapActivity.dismissCardDialog();
+			mapActivity.getFragmentsHelper().dismissCardDialog();
 			MapControlsLayer mapControlsLayer = app.getOsmandMap().getMapLayers().getMapControlsLayer();
 			if (mapControlsLayer != null) {
 				mapControlsLayer.doRoute();

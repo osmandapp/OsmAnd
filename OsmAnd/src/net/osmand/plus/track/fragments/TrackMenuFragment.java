@@ -77,7 +77,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.charts.TrackChartPoints;
@@ -340,7 +340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
 							contextMenu.show();
 						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
-							mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 						} else {
 							mapActivity.launchPrevActivityIntent();
 						}

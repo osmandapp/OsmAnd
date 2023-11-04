@@ -1002,7 +1002,7 @@ public class AmenityUIHelper extends MenuBuilder {
 							accept.add(pt.getKeyName());
 							filter.selectSubTypesToAccept(type, accept);
 						}
-						getMapActivity().showQuickSearch(filter);
+						getMapActivity().getFragmentsHelper().showQuickSearch(filter);
 					}
 				}
 			});

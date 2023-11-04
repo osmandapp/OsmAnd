@@ -37,7 +37,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 
 	@Override
 	public void saveEditedDescription(@NonNull String editedText, @NonNull OnDescriptionSavedCallback callback) {
-		TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
+		TrackMenuFragment trackMenuFragment = activity.getFragmentsHelper().getTrackMenuFragment();
 		if (trackMenuFragment == null) {
 			return;
 		}
@@ -50,8 +50,8 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 			if (errorMessage != null) {
 				log.error(errorMessage);
 			}
-			if (activity.getTrackMenuFragment() != null) {
-				activity.getTrackMenuFragment().updateContent();
+			if (activity.getFragmentsHelper().getTrackMenuFragment() != null) {
+				activity.getFragmentsHelper().getTrackMenuFragment().updateContent();
 			}
 			callback.onDescriptionSaved();
 		});
@@ -59,7 +59,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 
 	@Nullable
 	private GPXFile getGpxFile() {
-		TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
+		TrackMenuFragment trackMenuFragment = activity.getFragmentsHelper().getTrackMenuFragment();
 		if (trackMenuFragment != null) {
 			TrackDisplayHelper displayHelper = trackMenuFragment.getDisplayHelper();
 			if (displayHelper != null) {
