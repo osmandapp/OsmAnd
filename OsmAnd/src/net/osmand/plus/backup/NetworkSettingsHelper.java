@@ -193,8 +193,19 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	                           @NonNull RemoteFilesType filesType,
 	                           boolean forceReadData,
 	                           @Nullable ImportListener listener) throws IllegalStateException {
+		importSettings(key, items, filesType, forceReadData, true, false, listener);
+	}
+
+	public void importSettings(@NonNull String key,
+	                           @NonNull List<SettingsItem> items,
+	                           @NonNull RemoteFilesType filesType,
+	                           boolean forceReadData,
+	                           boolean shouldReplace,
+	                           boolean restoreDeleted,
+	                           @Nullable ImportListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
-			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType, listener, forceReadData);
+			ImportBackupTask importTask = new ImportBackupTask(key, this, items, filesType,
+					listener, forceReadData, shouldReplace, restoreDeleted);
 			importAsyncTasks.put(key, importTask);
 			importTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -231,6 +242,16 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	                              @Nullable RemoteFile remoteFile,
 	                              @NonNull RemoteFilesType filesType,
 	                              @NonNull SyncOperationType operation) {
+		syncSettingsItems(key, localFile, remoteFile, filesType, operation, true, false);
+	}
+
+	public void syncSettingsItems(@NonNull String key,
+	                              @Nullable LocalFile localFile,
+	                              @Nullable RemoteFile remoteFile,
+	                              @NonNull RemoteFilesType filesType,
+	                              @NonNull SyncOperationType operation,
+	                              boolean shouldReplace,
+	                              boolean restoreDeleted) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			registerSyncBackupTask(key, syncTask);
@@ -249,7 +270,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
 					if (remoteFile != null) {
-						syncTask.downloadRemoteVersion(remoteFile.item, filesType);
+						syncTask.downloadRemoteVersion(remoteFile.item, filesType, shouldReplace, restoreDeleted);
 					}
 					break;
 			}

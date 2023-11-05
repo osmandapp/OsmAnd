@@ -22,6 +22,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private final RemoteFilesType filesType;
 	private final StateChangedListener<String> localeListener;
 	private final boolean forceReadData;
+	private final boolean restoreDeleted;
 	private boolean needRestart;
 
 	ImportBackupItemsTask(@NonNull OsmandApplication app,
@@ -29,13 +30,15 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	                      @NonNull List<SettingsItem> items,
 	                      @NonNull RemoteFilesType filesType,
 	                      @Nullable ImportItemsListener listener,
-	                      boolean forceReadData) {
+	                      boolean forceReadData,
+	                      boolean restoreDeleted) {
 		this.app = app;
 		this.importer = importer;
 		this.items = items;
 		this.filesType = filesType;
 		this.listener = listener;
 		this.forceReadData = forceReadData;
+		this.restoreDeleted = restoreDeleted;
 		localeListener = change -> needRestart = true;
 	}
 
@@ -49,7 +52,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 		try {
 			PrepareBackupResult backup = app.getBackupHelper().getBackup();
 			Collection<RemoteFile> remoteFiles = backup.getRemoteFiles(filesType).values();
-			importer.importItems(items, remoteFiles, forceReadData);
+			importer.importItems(items, remoteFiles, forceReadData, restoreDeleted);
 			return importer.isCancelled();
 		} catch (IllegalArgumentException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);

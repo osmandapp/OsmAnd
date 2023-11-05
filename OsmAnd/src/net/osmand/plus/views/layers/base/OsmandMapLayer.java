@@ -241,6 +241,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 	}
 
+	@Override
+	public void onFrameReady(MapRendererView mapRenderer) {
+	}
+
 	public void destroyLayer() {
 		cleanupResources();
 	}

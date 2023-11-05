@@ -16,15 +16,23 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.android.AtlasMapRendererView;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 /**
  * A very simple implementation of a renderer for the app's background surface.
  */
-public final class SurfaceRenderer implements DefaultLifecycleObserver {
+public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener {
 	private static final String TAG = "SurfaceRenderer";
 
 	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.25;
@@ -33,6 +41,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	private final CarSurfaceView surfaceView;
 	private OsmandMapTileView mapView;
 
+	private boolean visible;
+	@Nullable
+	private AtlasMapRendererView offscreenMapRendererView;
 	@Nullable
 	private Surface surface;
 	@Nullable
@@ -119,6 +130,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
 			synchronized (SurfaceRenderer.this) {
 				Log.i(TAG, "Surface destroyed");
+				stopOffscreenRenderer();
 				if (surface != null) {
 					surface.release();
 					surface = null;
@@ -174,6 +186,18 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		renderFrame();
 	}
 
+	@Override
+	public void onUpdateFrame(MapRendererView mapRendererView) {
+	}
+
+	/**
+	 * Callback called when OpenGL rendering result is ready and needs to be drawn on output canvas.
+	 */
+	@Override
+	public void onFrameReady(MapRendererView mapRendererView) {
+		renderFrame();
+	}
+
 	/**
 	 * Handles the map zoom-in and zoom-out events.
 	 */
@@ -203,6 +227,16 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	/**
+	 * Handles the map 2D/3D button press events.
+	 */
+	public void handleTilt() {
+		synchronized (this) {
+			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null)
+				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 10.0f);
+		}
+	}
+
+	/**
 	 * Handles the map re-centering events.
 	 */
 	public void handleRecenter() {
@@ -228,10 +262,82 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		return mapView;
 	}
 
+	public void setVisible() {
+		visible = true;
+	}
+	
 	public void setMapView(OsmandMapTileView mapView) {
+		if (mapView == null) {
+			stopOffscreenRenderer();
+			return;
+		}
 		this.mapView = mapView;
 		if (surface != null) {
 			mapView.setView(surfaceView);
+		}
+		if (getApp().isApplicationInitializing()) {
+			getApp().getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onFinish(@NonNull AppInitializer init) {
+					setupOffscreenRenderer();
+				}
+			});
+		} else
+			setupOffscreenRenderer();
+	}
+
+	public void setupOffscreenRenderer() {
+		if (visible && getApp().useOpenGlRenderer()) {
+			if (surface != null && surface.isValid()) {
+				if (offscreenMapRendererView != null) {
+					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+					if (mapRendererContext != null) {
+						if (mapRendererContext.getMapRendererView() == offscreenMapRendererView)
+							return;
+						offscreenMapRendererView = null;
+					}
+				}
+				if (offscreenMapRendererView == null) {
+					MapRendererView mapRendererView = null;
+					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+					if (mapRendererContext != null) {
+						if (mapView != null && mapView.getMapRenderer() != null)
+							mapView.setMapRenderer(null);
+						if (mapRendererContext.getMapRendererView() != null) {
+							mapRendererView = mapRendererContext.getMapRendererView();
+							mapRendererContext.setMapRendererView(null);
+						}
+						offscreenMapRendererView = new AtlasMapRendererView(carContext);
+						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
+						offscreenMapRendererView.setAzimuth(0);
+						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
+						offscreenMapRendererView.setElevationAngle(elevationAngle);
+						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
+						mapRendererContext = NativeCoreContext.getMapRendererContext();
+						if (mapRendererContext != null) {
+							mapRendererContext.setMapRendererView(offscreenMapRendererView);
+							mapView.setMapRenderer(offscreenMapRendererView);
+							getApp().getOsmandMap().getMapLayers().updateMapSource(mapView, null);
+							PluginsHelper.refreshLayers(getApp(), null);
+							offscreenMapRendererView.addListener(this);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void stopOffscreenRenderer() {
+		if (visible) {
+			visible = false;
+			if (offscreenMapRendererView != null) {
+				if (mapView != null && mapView.getMapRenderer() == offscreenMapRendererView)
+					mapView.setMapRenderer(null);
+				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+				if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
+					offscreenMapRendererView.stopRenderer();
+				offscreenMapRendererView = null;
+			}
 		}
 	}
 
@@ -280,6 +386,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
+			if (offscreenMapRendererView != null)
+				canvas.drawBitmap(offscreenMapRendererView.getBitmap(), 0, 0, null);
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
 			if (callback != null) {
