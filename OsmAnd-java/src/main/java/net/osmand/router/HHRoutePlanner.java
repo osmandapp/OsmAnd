@@ -520,7 +520,7 @@ public class HHRoutePlanner {
 			LatLon latlon = pnt.getPoint();
 			hctx.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), pnt);
 			if (pos != pnt.pntGeoId) {
-				throw new IllegalStateException();
+				throw new IllegalStateException(pnt + " " + pos + " != "+ pnt.pntGeoId);
 			}
 			hctx.boundaries.put(pos, null);
 			hctx.pointsByGeo.put(pos, pnt);

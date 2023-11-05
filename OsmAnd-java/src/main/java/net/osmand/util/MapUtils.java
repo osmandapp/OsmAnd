@@ -597,11 +597,11 @@ public class MapUtils {
 		// translate into meters 
 		int px = Math.abs(x1 - x2) >> (31 - PRECISION_ZOOM);
 		int py = Math.abs(y1 - y2) >> (31 - PRECISION_ZOOM);
-		if (px + py > 2) {
-			double mDist = measuredDist31(x1, y1, x2, y2);
-			return mDist * mDist;
-		}
-		double tw = getTileWidth(x1, y1);
+//		if (px + py > 2) {
+//			double mDist = measuredDist31(x1, y1, x2, y2);
+//			return mDist * mDist;
+//		}
+		double tw = getTileWidth(x1 / 2 + x2 / 2, y1 / 2 + y2 / 2);
 		double dy = (y1 - y2) * tw;
 		double dx = (x2 - x1) * tw;
 		return dx * dx + dy * dy;
@@ -612,15 +612,25 @@ public class MapUtils {
 	public static int PRECISION_ZOOM = 14; // 16 doesn't fit into tile int
 	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
 	private static double getTileWidth(int x31, int y31) {
-		int tileY = (y31 >> (31 - PRECISION_ZOOM)); // width the same for all x
+		double y = y31 / 1.0 / (1 << (31 - PRECISION_ZOOM));
+		int tileY = (int) y; // width the same for all x
+		double ry = y - tileY;
 		Double d = DIST_CACHE.get(tileY);
 		if (d == null) {
 			synchronized (MapUtils.class) {
-				d = getTileDistanceWidth(MapUtils.get31LatitudeY(y31), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
+				d = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
 				DIST_CACHE.put(tileY, d);
 			}
 		}
-		return d;
+		tileY = tileY + 1;
+		Double dp = DIST_CACHE.get(tileY);
+		if (dp == null) {
+			synchronized (MapUtils.class) {
+				dp = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
+				DIST_CACHE.put(tileY, dp);
+			}
+		}
+		return ry * dp + (1 - ry) * d;
 	}
 
 	public static boolean rightSide(double lat, double lon,
