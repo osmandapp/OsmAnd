@@ -1,7 +1,5 @@
 package net.osmand.plus.keyevent;
 
-import static net.osmand.util.Algorithms.isEmpty;
-
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
@@ -233,10 +231,12 @@ public class InputDeviceHelper {
 	@NonNull
 	private List<InputDeviceProfile> loadCustomDevices() {
 		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get();
-		try {
-			return !isEmpty(json) ? readFromJson(new JSONObject(json)) : new ArrayList<>();
-		} catch (JSONException e) {
-			LOG.debug("Error when reading custom devices from JSON ", e);
+		if (!Algorithms.isEmpty(json)) {
+			try {
+				return readFromJson(new JSONObject(json));
+			} catch (JSONException e) {
+				LOG.debug("Error when reading custom devices from JSON ", e);
+			}
 		}
 		return new ArrayList<>();
 	}
