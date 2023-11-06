@@ -100,6 +100,10 @@ public class FavoriteGroup {
 		return points;
 	}
 
+	public void setPoints(List<FavouritePoint> points) {
+		this.points = points;
+	}
+
 	public boolean isPersonal() {
 		return isPersonal(name);
 	}

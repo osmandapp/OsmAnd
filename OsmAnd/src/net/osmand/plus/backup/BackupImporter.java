@@ -146,6 +146,7 @@ class BackupImporter {
 		if (!restoreDeleted) {
 			for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
 				fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
+				fileItem.getValue().setLastModifiedTime(fileItem.getKey().getClienttimems());
 			}
 		}
 		operationLog.finishOperation();
@@ -191,6 +192,8 @@ class BackupImporter {
 		} catch (IllegalArgumentException | IOException | UserNotRegisteredException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (Throwable err) {
+			LOG.error("Error reading item: " + item.getName(), err);
 		} finally {
 			Algorithms.closeStream(is);
 		}
