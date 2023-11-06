@@ -215,11 +215,25 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		//}
 
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
-		builder.setMapActionStrip(new ActionStrip.Builder()
-				.addAction(new Action.Builder(Action.PAN)
-						//.setIcon(panIconBuilder.build())
-						.build())
-				.addAction(
+		ActionStrip.Builder mapActionStripBuilder = new ActionStrip.Builder();
+		if (getApp().useOpenGlRenderer()) {
+			mapActionStripBuilder.addAction(new Action.Builder()
+					.setIcon(
+							new CarIcon.Builder(
+									IconCompat.createWithResource(
+											getCarContext(),
+											R.drawable.ic_action_3d))
+									.build())
+					.setOnClickListener(
+							() -> {
+								if (surfaceRenderer != null) {
+									surfaceRenderer.handleTilt();
+								}
+							})
+					.build());
+		}
+		builder.setMapActionStrip(
+				mapActionStripBuilder.addAction(
 						new Action.Builder()
 								.setIcon(
 										new CarIcon.Builder(

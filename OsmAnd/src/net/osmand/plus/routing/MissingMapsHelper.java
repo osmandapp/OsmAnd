@@ -109,7 +109,7 @@ public class MissingMapsHelper {
 			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon, true);
 			Set<WorldRegion> regions = new LinkedHashSet<>();
 			boolean hasAnyRegionDownloaded =
-					!downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true).isEmpty();
+					!downloadResources.getExternalMapFileNamesAt(point31x, point31y, true).isEmpty();
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();

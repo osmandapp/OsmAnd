@@ -371,11 +371,8 @@ public class StreetNameWidget extends MapWidget {
 			specialContainer.removeAllViews();
 
 			boolean showTopCoordinates = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
-			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesBaseWidget && showTopCoordinates) {
-					useSpecialPosition = false;
-					break;
-				}
+			if (!followingWidgets.isEmpty() && showTopCoordinates) {
+				useSpecialPosition = false;
 			}
 		}
 		if (useSpecialPosition) {

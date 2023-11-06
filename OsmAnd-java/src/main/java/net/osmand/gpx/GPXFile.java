@@ -42,12 +42,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	private GPXUtilities.TrkSegment generalSegment;
 
 	public GPXFile(String author) {
-		metadata.time = System.currentTimeMillis();
 		this.author = author;
 	}
 
 	public GPXFile(String title, String lang, String description) {
-		metadata.time = System.currentTimeMillis();
 		if (description != null) {
 			metadata.getExtensionsToWrite().put("desc", description);
 		}
@@ -817,5 +815,26 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 			size++;
 		}
 		return size;
+	}
+
+	public long getLastPointTime() {
+		long time = getLastPointTime(getAllSegmentsPoints());
+		if (time == 0) {
+			time = getLastPointTime(getRoutePoints());
+		}
+		if (time == 0) {
+			time = getLastPointTime(getPoints());
+		}
+		return time;
+	}
+
+	private long getLastPointTime(List<WptPt> points) {
+		for (int i = points.size() - 1; i >= 0; i--) {
+			WptPt point = points.get(i);
+			if (point.time > 0) {
+				return point.time;
+			}
+		}
+		return 0;
 	}
 }

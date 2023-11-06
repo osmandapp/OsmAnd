@@ -49,7 +49,7 @@ public abstract class BaseMenuController {
 		return !nightMode;
 	}
 
-	protected void updateNightMode() {
+	public void updateNightMode() {
 		if (mapActivity != null) {
 			nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		}

@@ -10,4 +10,8 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal" />
 
+	<include
+		android:id="@+id/bottom_divider"
+		layout="@layout/simple_divider_item" />
+
 </LinearLayout>

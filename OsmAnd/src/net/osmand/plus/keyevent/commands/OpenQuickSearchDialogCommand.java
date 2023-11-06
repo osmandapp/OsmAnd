@@ -6,7 +6,7 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 
 public class OpenQuickSearchDialogCommand extends KeyEventCommand {
 
@@ -14,7 +14,7 @@ public class OpenQuickSearchDialogCommand extends KeyEventCommand {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		requireMapActivity().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+		requireMapActivity().getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		return true;
 	}
 

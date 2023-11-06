@@ -278,7 +278,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		boolean movingMarker = mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode();
-		boolean downloadingTiles = mapActivity.getDownloadTilesFragment() != null;
+		boolean downloadingTiles = mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null;
 		if (movingMarker || downloadingTiles) {
 			return;
 		}
@@ -302,8 +302,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			LatLon latLon = null;
 			if (menu != null && menu.isActive()) {
 				latLon = menu.getLatLon();
-			} else if (mapActivity.getTrackMenuFragment() != null) {
-				latLon = mapActivity.getTrackMenuFragment().getLatLon();
+			} else if (mapActivity.getFragmentsHelper().getTrackMenuFragment() != null) {
+				latLon = mapActivity.getFragmentsHelper().getTrackMenuFragment().getLatLon();
 			}
 			if (latLon != null) {
 				if (hasMapRenderer) {
@@ -789,8 +789,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
-				|| mapActivity.getGpsFilterFragment() != null
-				|| mapActivity.getDownloadTilesFragment() != null
+				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
+				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null
 				|| (plugin != null && plugin.hasCustomForecast())) {
 			return true;
 		}
@@ -837,8 +837,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
-				|| mapActivity.getGpsFilterFragment() != null
-				|| mapActivity.getDownloadTilesFragment() != null) {
+				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
+				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null) {
 			return true;
 		}
 
@@ -889,8 +889,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private boolean hideVisibleMenues() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && mapActivity.getTrackMenuFragment() != null) {
-			mapActivity.getTrackMenuFragment().dismiss();
+		if (mapActivity != null && mapActivity.getFragmentsHelper().getTrackMenuFragment() != null) {
+			mapActivity.getFragmentsHelper().getTrackMenuFragment().dismiss();
 			MapActivity.clearPrevActivityIntent();
 			return true;
 		}

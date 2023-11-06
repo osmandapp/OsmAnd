@@ -20,7 +20,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -351,8 +350,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
 				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreationTime() <= 0
-				;
+				|| item.getFileCreationTime() <= 0;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {

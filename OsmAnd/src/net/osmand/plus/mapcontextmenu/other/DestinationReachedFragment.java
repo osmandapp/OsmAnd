@@ -117,7 +117,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		btnFindParking.setOnClickListener(v -> {
 			PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
 			PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
-			mapActivity.showQuickSearch(parkingFilter);
+			mapActivity.getFragmentsHelper().showQuickSearch(parkingFilter);
 			dismiss();
 		});
 

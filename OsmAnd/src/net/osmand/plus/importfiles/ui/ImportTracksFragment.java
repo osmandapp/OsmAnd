@@ -470,7 +470,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		FragmentActivity activity = getActivity();
 		TracksFragment tracksFragment = null;
 		if (activity instanceof MapActivity) {
-			tracksFragment = ((MapActivity) activity).getFragment(TracksFragment.TAG);
+			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksFragment.TAG);
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();

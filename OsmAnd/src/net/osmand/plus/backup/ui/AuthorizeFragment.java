@@ -446,7 +446,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			if (dialogType == VERIFY_EMAIL) {
 				progressBar.setVisibility(View.INVISIBLE);
 				if (status == BackupHelper.STATUS_SUCCESS) {
-					activity.dismissFragment(BackupAuthorizationFragment.TAG);
+					activity.getFragmentsHelper().dismissFragment(BackupAuthorizationFragment.TAG);
 					BackupCloudFragment.showInstance(activity.getSupportFragmentManager(), signIn ? SIGN_IN : SIGN_UP);
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
@@ -495,7 +495,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			progressBar.setVisibility(View.INVISIBLE);
 
 			if (status == BackupHelper.STATUS_SUCCESS) {
-				activity.dismissFragment(TAG);
+				activity.getFragmentsHelper().dismissFragment(TAG);
 				AndroidUtils.hideSoftKeyboard(activity, editText);
 
 				openDeletionScreen(token);
