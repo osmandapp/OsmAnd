@@ -847,9 +847,12 @@ public class BinaryRoutePlanner {
 			if (!checkMovementAllowed(ctx, reverseWaySearch, next)) {
 				return false;
 			}
-			float obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, 
-					next.isPositive() ? next.getRoad().getPointsLength() - 1 : 0,    
-					segment, segment.getSegmentEnd());
+			float obstaclesTime = 0;
+			if (next.road.getId() != segment.road.getId()) {
+				// TODO 1.6 check 
+				obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next,
+						next.isPositive() ? next.getRoad().getPointsLength() - 1 : 0, segment, segment.getSegmentEnd());
+			}
 			if (obstaclesTime < 0) {
 				return false;
 			}
@@ -877,7 +880,7 @@ public class BinaryRoutePlanner {
 						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
 						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
 						if (ctx.config.heuristicCoefficient <= 1) {
-							// TODO
+							// TODO 1.6
 //							if (DEBUG_BREAK_EACH_SEGMENT) {
 //								throw new IllegalStateException();
 //							}
