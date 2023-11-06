@@ -749,7 +749,7 @@ public class AppVersionUpgradeOnInit {
 
 	private void migrateCustomInputDevicesPreference() {
 		OsmandSettings settings = app.getSettings();
-		CommonPreference<String> oldPreference = new StringPreference(settings, "custom_external_input_devices", "").makeGlobal().makeShared().storeLastModifiedTime();
+		CommonPreference<String> oldPreference = new StringPreference(settings, "custom_external_input_devices", "").makeGlobal();
 		String oldPreferenceValue = oldPreference.get();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, oldPreferenceValue);
