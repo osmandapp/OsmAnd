@@ -28,6 +28,7 @@ import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,10 +40,12 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class VerticalWidgetPanel extends LinearLayout {
-	protected final OsmandSettings settings;
+
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 
-	private Map<Integer, Row> rows = new HashMap<>();
+	private Map<Integer, Row> visibleRows = new HashMap<>();
 	private boolean topPanel;
 	private boolean nightMode;
 
@@ -60,7 +63,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public VerticalWidgetPanel(@NonNull Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		app = (OsmandApplication) context.getApplicationContext();
 		settings = app.getSettings();
 		nightMode = app.getDaynightHelper().isNightMode();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -76,6 +79,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	private void init() {
 		removeAllViews();
+
 		ApplicationMode appMode = settings.getApplicationMode();
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
 		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
@@ -84,7 +88,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 			List<MapWidgetInfo> rowWidgets = new ArrayList<>(pagedWidgets.get(i));
 			Row row = new Row(rowWidgets, flatOrderedWidgets);
 			addView(row.view);
-			rows.put(i, row);
+			visibleRows.put(i, row);
 		}
 		updateRows();
 	}
@@ -92,6 +96,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	public void update(@Nullable DrawSettings drawSettings) {
 		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
 		Map<Integer, Row> newRows = new HashMap<>();
+
 		ApplicationMode appMode = settings.getApplicationMode();
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
 		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
@@ -102,7 +107,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 			newRows.put(i, row);
 		}
 
-		PagesDiffUtilCallback diffUtilCallback = new PagesDiffUtilCallback(rows, newRows);
+		PagesDiffUtilCallback diffUtilCallback = new PagesDiffUtilCallback(visibleRows, newRows);
 		DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
 		diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
 			@Override
@@ -120,7 +125,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 					row.setupRow();
 					addView(row.view, position + i);
 				}
-				rows = newRows;
+				visibleRows = newRows;
 			}
 
 			@Override
@@ -132,7 +137,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 				for (View view : viewsToDelete) {
 					removeView(view);
 				}
-				rows = newRows;
+				visibleRows = newRows;
 			}
 
 			@Override
@@ -149,15 +154,15 @@ public class VerticalWidgetPanel extends LinearLayout {
 						addView(row.view, position + i);
 					}
 				}
-				rows = newRows;
+				visibleRows = newRows;
 			}
 		});
 	}
 
-	public void updateRow(MapWidget widget) {
-		for (Row row : rows.values()) {
-			for (int i = 0; i < row.enabledMapWidgets.size(); i++) {
-				if (widget.equals(row.enabledMapWidgets.get(i).widget)) {
+	public void updateRow(@NonNull MapWidget widget) {
+		for (Row row : visibleRows.values()) {
+			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
+				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
 					row.updateRow();
 				}
 			}
@@ -165,7 +170,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	public void updateRows() {
-		for (Row row : rows.values()) {
+		for (Row row : visibleRows.values()) {
 			row.updateRow();
 		}
 	}
@@ -200,7 +205,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -240,15 +245,16 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private class Row {
-		protected ViewGroup view;
-		protected View bottomDivider;
-		protected LinearLayout rowContainer;
 
-		protected List<MapWidgetInfo> enabledMapWidgets = new ArrayList<>();
-		protected List<MapWidget> flatOrderedWidgets;
+		private View view;
+		private View bottomDivider;
+		private LinearLayout rowContainer;
 
-		public Row(List<MapWidgetInfo> rowWidgets, List<MapWidget> flatOrderedWidgets) {
-			this.view = (ViewGroup) inflate(getContext(), R.layout.vertical_widget_row, null);
+		private List<MapWidgetInfo> enabledMapWidgets = new ArrayList<>();
+		private List<MapWidget> flatOrderedWidgets;
+
+		Row(@NonNull List<MapWidgetInfo> rowWidgets, @NonNull List<MapWidget> flatOrderedWidgets) {
+			this.view = inflate(getContext(), R.layout.vertical_widget_row, null);
 			this.bottomDivider = view.findViewById(R.id.bottom_divider);
 			this.rowContainer = view.findViewById(R.id.widgets_container);
 			this.flatOrderedWidgets = flatOrderedWidgets;
@@ -325,6 +331,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
+
 		private final Map<Integer, Row> oldRows;
 		private final Map<Integer, Row> newRows;
 
@@ -354,7 +361,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 			Row newRow = newRows.get(newItemPosition);
 			List<MapWidgetInfo> oldMapWidgets = oldRow != null ? oldRow.enabledMapWidgets : Collections.emptyList();
 			List<MapWidgetInfo> newMapWidgets = newRow != null ? newRow.enabledMapWidgets : Collections.emptyList();
-			return oldMapWidgets.equals(newMapWidgets);
+			return Algorithms.objectEquals(oldMapWidgets, newMapWidgets);
 		}
 	}
 }

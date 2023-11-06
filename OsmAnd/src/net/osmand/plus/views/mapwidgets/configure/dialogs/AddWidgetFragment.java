@@ -397,6 +397,6 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	}
 
 	public interface AddWidgetListener {
-		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel, boolean updateMapInfoLayer);
+		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls);
 	}
 }

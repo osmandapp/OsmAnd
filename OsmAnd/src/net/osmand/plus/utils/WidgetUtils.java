@@ -30,21 +30,22 @@ import java.util.TreeMap;
 
 public class WidgetUtils {
 
-	public static void createNewWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
-										@NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode, boolean updateMapInfoLayer) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
+	public static void createNewWidgets(@NonNull MapActivity activity, @NonNull List<String> widgetsIds,
+										@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
+										boolean recreateControls) {
+		OsmandApplication app = activity.getMyApplication();
+		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(activity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 		for (String widgetId : widgetsIds) {
-			MapWidgetInfo widgetInfo = createDuplicateWidget(app, widgetId, panel, widgetsFactory, selectedAppMode);
+			MapWidgetInfo widgetInfo = createDuplicateWidget(app, widgetId, panel, widgetsFactory, appMode);
 			if (widgetInfo != null) {
-				addWidgetToEnd(mapActivity, widgetInfo, panel, selectedAppMode);
-				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true, false);
+				addWidgetToEnd(activity, widgetInfo, panel, appMode);
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
 			}
 		}
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
-		if (mapInfoLayer != null && updateMapInfoLayer) {
+		if (mapInfoLayer != null && recreateControls) {
 			mapInfoLayer.recreateControls();
 		}
 	}

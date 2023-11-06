@@ -461,7 +461,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel, boolean updateMapInfoLayer) {
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls) {
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			if (widgetInfo != null) {
