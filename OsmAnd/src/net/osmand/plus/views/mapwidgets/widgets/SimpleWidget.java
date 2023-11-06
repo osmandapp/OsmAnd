@@ -70,15 +70,19 @@ public abstract class SimpleWidget extends TextInfoWidget {
 				constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
 			} else {
 				constraintSet.clear(R.id.widget_text, ConstraintSet.END);
-				constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, dpToPx(app, 12));
+				if (shouldShowIcon()) {
+					constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, dpToPx(app, 12));
+				} else {
+					constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dpToPx(app, 0));
+				}
 			}
 			constraintSet.applyTo((ConstraintLayout) container);
 		} else {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
-				params.gravity = fullRow ? Gravity.CENTER : Gravity.START;
-				params.setMarginStart(dpToPx(app, 36));
+				params.gravity = fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL;
+				params.setMarginStart(dpToPx(app, (shouldShowIcon() || fullRow) ? 36 : 0));
 				params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 			}
 		}
@@ -93,6 +97,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
 		widgetName = view.findViewById(R.id.widget_name);
+		bottomDivider = view.findViewById(R.id.bottom_divider);
 	}
 
 	@Override
@@ -125,6 +130,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			boolean showIcon = shouldShowIcon();
 			AndroidUiHelper.updateVisibility(imageView, showIcon);
 			updateWidgetName();
+			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
 		}
 	}
 
@@ -191,6 +197,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+	}
+
+	@Override
+	public boolean updateVisibility(boolean visible) {
+		boolean updatedVisibility = super.updateVisibility(visible);
+		if (verticalWidget && updatedVisibility) {
+			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+		}
+		return updatedVisibility;
 	}
 
 	private void updateWidgetName() {

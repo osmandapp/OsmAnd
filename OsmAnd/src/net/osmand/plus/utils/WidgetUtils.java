@@ -31,7 +31,7 @@ import java.util.TreeMap;
 public class WidgetUtils {
 
 	public static void createNewWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
-										@NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode) {
+										@NonNull WidgetsPanel panel, @NonNull ApplicationMode selectedAppMode, boolean updateMapInfoLayer) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
@@ -44,7 +44,7 @@ public class WidgetUtils {
 			}
 		}
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
-		if (mapInfoLayer != null) {
+		if (mapInfoLayer != null && updateMapInfoLayer) {
 			mapInfoLayer.recreateControls();
 		}
 	}
