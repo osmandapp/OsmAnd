@@ -479,7 +479,6 @@ public class BinaryRoutePlanner {
 					// insert back original segment (test case with large area way)
 					visitedSegments.put(nextPntId, existingSegment);
 					directionAllowed = false;
-					
 					if (TRACE_ROUTING) {
 						println("  " + currentSegment.segEnd + ">> Already visited");
 					}
@@ -822,9 +821,10 @@ public class BinaryRoutePlanner {
 		}
 		
 		if (nextCurrentSegment == null && directionAllowed) {
+			// TODO 1.6 make exception to test non base 
 			if (ctx.calculationMode != RouteCalculationMode.BASE) {
 				// exception as it should not occur 
-				// To do: happens anyway during approximation (should be investigated)
+				// happens anyway during approximation (should be investigated)
 //				throw new IllegalStateException();
 			} else {
 				//  Issue #13284: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
@@ -860,28 +860,27 @@ public class BinaryRoutePlanner {
 						" segmentPoint=" + segment.getSegmentEnd() + " -- ", next, null);
 			}
 			RouteSegment visIt = visitedSegments.get(calculateRoutePointId(next));
-			boolean toAdd = true;
 			if (visIt != null) {
 				if (TRACE_ROUTING) {
 					printRoad("  " + segment.segEnd + ">?", visitedSegments.get(calculateRoutePointId(next)), null);
 				}
-				toAdd = false;
 				// The segment was already visited! We can try to follow new route if it's shorter.
 				// That is very exceptional situation and almost exception, it can happen
 				// 1. We underestimate distanceToEnd - wrong h() of A* (heuristic > 1)
-				// 2. We don't process small segments 1 by 1 from the queue but the whole road, 
-				//  and it could be that deviation from the road is faster than following the whole road itself!
+				// 2. We don't process small segments 1 by 1 as we should by Dijkstra
 				if (distFromStart < visIt.distanceFromStart) {
 					double routeSegmentTime = calculateRouteSegmentTime(ctx, reverseWaySearch, visIt);
 					// we need to properly compare @distanceFromStart VISITED and NON-VISITED segment
 					if (distFromStart + routeSegmentTime < visIt.distanceFromStart) {
 						// Here it's not very legitimate action cause in theory we need to go up to the final segment in the queue & decrease final time
 						// But it's compensated by chain reaction cause next.distanceFromStart < finalSegment.distanceFromStart and revisiting all segments
-						
 						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
 						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
-						toAdd = true;
 						if (ctx.config.heuristicCoefficient <= 1) {
+							// TODO
+//							if (DEBUG_BREAK_EACH_SEGMENT) {
+//								throw new IllegalStateException();
+//							}
 							if (RoutingContext.PRINT_ROUTING_ALERTS) {
 								System.err.println("! ALERT new faster path to a visited segment: "
 										+ (distFromStart + routeSegmentTime) + " < " + visIt.distanceFromStart + ": " + next + " - " + visIt);
@@ -889,18 +888,16 @@ public class BinaryRoutePlanner {
 								ctx.alertFasterRoadToVisitedSegments++;
 							}
 						}
-						// ??? It's not clear whether this block is needed or not ???
-						// All Test cases work with and without it
-						// visIt.setParentRoute(segment);
-						// visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
-						// visIt.distanceToEnd = segment.distanceToEnd;
-						// ???
+						visitedSegments.remove(calculateRoutePointId(next));
+					} else {
+						return false;
 					}
+				} else {
+					return false;
 				}
-				
 			}
-			if (toAdd && (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
-					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0)) {
+			if (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
+					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0) {
 				next.distanceFromStart = distFromStart;
 				next.distanceToEnd = segment.distanceToEnd;
 				if (TRACE_ROUTING) {
