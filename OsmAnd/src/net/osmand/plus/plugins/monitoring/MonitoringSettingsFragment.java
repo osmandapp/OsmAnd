@@ -302,7 +302,9 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			for (WriteToGpxWidgetType widgetType : WriteToGpxWidgetType.values()) {
 				CommonPreference<String> preference = sensorsPlugin.getPrefSettingsForWidgetType(widgetType);
 				String deviceId = preference.getModeValue(selectedAppMode);
-				if (!Algorithms.isEmpty(deviceId) && sensorsPlugin.getDevice(deviceId) != null) {
+				if (!Algorithms.isEmpty(deviceId) &&
+						!ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId) &&
+						sensorsPlugin.getDevice(deviceId) != null) {
 					linkedSensors.add(app.getString(widgetType.getTitleId()));
 				}
 			}

@@ -53,9 +53,6 @@ task collectTestResources(type: Copy) {
 	from("../../resources/test-resources") {
 		include "*"
 		include "/search/*"
-		include "/rendering/*"
-		include "/rendering/maps/*"
-		include "/rendering/geotiffs/*"
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"

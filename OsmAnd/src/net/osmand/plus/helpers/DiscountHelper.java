@@ -207,7 +207,7 @@ public class DiscountHelper {
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
 						if (showChristmasDialog) {
-							mapActivity.showXMasDialog();
+							mapActivity.getFragmentsHelper().showXMasDialog();
 						} else {
 							InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
 							if (purchaseHelper != null) {
@@ -335,7 +335,7 @@ public class DiscountHelper {
 		} else if (url.startsWith(SEARCH_QUERY_PREFIX)) {
 			String query = url.substring(SEARCH_QUERY_PREFIX.length());
 			if (!query.isEmpty()) {
-				mapActivity.showQuickSearch(query);
+				mapActivity.getFragmentsHelper().showQuickSearch(query);
 			}
 		} else if (url.startsWith(SHOW_POI_PREFIX)) {
 			String names = url.substring(SHOW_POI_PREFIX.length());

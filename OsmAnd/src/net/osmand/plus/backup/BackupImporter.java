@@ -78,7 +78,7 @@ class BackupImporter {
 	}
 
 	@NonNull
-	CollectItemsResult collectItems(@Nullable List<SettingsItem> settingsItems, boolean readItems) throws IllegalArgumentException, IOException {
+	CollectItemsResult collectItems(@Nullable List<SettingsItem> settingsItems, boolean readItems, boolean restoreDeleted) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		OperationLog operationLog = new OperationLog("collectRemoteItems", BackupHelper.DEBUG);
@@ -92,7 +92,7 @@ class BackupImporter {
 					}
 					result.remoteFiles = remoteFiles;
 					try {
-						result.items = getRemoteItems(remoteFiles, readItems);
+						result.items = getRemoteItems(remoteFiles, readItems, restoreDeleted);
 					} catch (IOException e) {
 						error.append(e.getMessage());
 					}
@@ -110,7 +110,8 @@ class BackupImporter {
 		return result;
 	}
 
-	void importItems(@NonNull List<SettingsItem> items, @NonNull Collection<RemoteFile> remoteFiles, boolean forceReadData) throws IllegalArgumentException {
+	void importItems(@NonNull List<SettingsItem> items, @NonNull Collection<RemoteFile> remoteFiles,
+	                 boolean forceReadData, boolean restoreDeleted) throws IllegalArgumentException {
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -142,9 +143,11 @@ class BackupImporter {
 		ThreadPoolTaskExecutor<ItemFileImportTask> executor = createExecutor();
 		executor.run(tasks);
 
-		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
-			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
-			fileItem.getValue().setLastModifiedTime(fileItem.getKey().getClienttimems());
+		if (!restoreDeleted) {
+			for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
+				fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
+				fileItem.getValue().setLastModifiedTime(fileItem.getKey().getClienttimems());
+			}
 		}
 		operationLog.finishOperation();
 	}
@@ -197,7 +200,7 @@ class BackupImporter {
 	}
 
 	@NonNull
-	private List<SettingsItem> getRemoteItems(@NonNull List<RemoteFile> remoteFiles, boolean readItems) throws IllegalArgumentException, IOException {
+	private List<SettingsItem> getRemoteItems(@NonNull List<RemoteFile> remoteFiles, boolean readItems, boolean restoreDeleted) throws IllegalArgumentException, IOException {
 		if (remoteFiles.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -239,7 +242,7 @@ class BackupImporter {
 			if (settingsItemList.isEmpty()) {
 				return Collections.emptyList();
 			}
-			updateFilesInfo(remoteItemFilesMap, settingsItemList);
+			updateFilesInfo(remoteItemFilesMap, settingsItemList, restoreDeleted);
 			items.addAll(settingsItemList);
 			operationLog.log("updateFilesInfo");
 			operationLog.finishOperation();
@@ -504,12 +507,15 @@ class BackupImporter {
 	}
 
 	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles,
-	                             @NonNull List<SettingsItem> settingsItemList) {
+	                             @NonNull List<SettingsItem> settingsItemList,
+	                             boolean restoreDeleted) {
 		Map<String, RemoteFile> remoteFilesMap = new HashMap<>(remoteFiles);
 		for (SettingsItem settingsItem : settingsItemList) {
 			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
 			for (RemoteFile remoteFile : foundRemoteFiles) {
-				settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
+				if (!restoreDeleted) {
+					settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
+				}
 				remoteFile.item = settingsItem;
 				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;

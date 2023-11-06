@@ -7,13 +7,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
-import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -231,10 +231,12 @@ public class InputDeviceHelper {
 	@NonNull
 	private List<InputDeviceProfile> loadCustomDevices() {
 		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get();
-		try {
-			return readFromJson(new JSONObject(json));
-		} catch (JSONException e) {
-			LOG.debug("Error when reading custom devices from JSON ", e);
+		if (!Algorithms.isEmpty(json)) {
+			try {
+				return readFromJson(new JSONObject(json));
+			} catch (JSONException e) {
+				LOG.debug("Error when reading custom devices from JSON ", e);
+			}
 		}
 		return new ArrayList<>();
 	}

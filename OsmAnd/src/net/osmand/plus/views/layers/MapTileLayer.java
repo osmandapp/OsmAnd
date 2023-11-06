@@ -83,7 +83,7 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public boolean isMapGestureAllowed(MapGestureType type) {
 		MapActivity mapActivity = getMapActivity();
-		boolean downloadingTiles = mapActivity != null && mapActivity.getDownloadTilesFragment() != null;
+		boolean downloadingTiles = mapActivity != null && mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null;
 		boolean rotatingOrTiltingMap = type == MapGestureType.TWO_POINTERS_ROTATION || type == MapGestureType.TWO_POINTERS_TILT;
 		return !(downloadingTiles && rotatingOrTiltingMap);
 	}

@@ -86,7 +86,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 			if (exception == null) {
 				MapActivity activity = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-					TrackMenuFragment fragment = activity.getTrackMenuFragment();
+					TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
 					if (fragment != null) {
 						fragment.updateContent();
 					}
