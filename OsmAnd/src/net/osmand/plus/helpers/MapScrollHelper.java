@@ -71,6 +71,7 @@ public class MapScrollHelper {
 	public void startScrolling(@NonNull ScrollDirection direction) {
 		addDirection(direction);
 		if (!isContinuousScrolling) {
+			suspendSymbolsUpdate();
 			new Thread(scrollingRunnable).start();
 		}
 	}
@@ -137,6 +138,7 @@ public class MapScrollHelper {
 			double y = MapUtils.get31LatitudeY(target31.getY());
 			double x = MapUtils.get31LongitudeX(target31.getX());
 			osmandMap.setMapLocation(y, x);
+			renderer.resumeSymbolsUpdate();
 		}
 	}
 
@@ -145,6 +147,13 @@ public class MapScrollHelper {
 			Thread.sleep(SCROLL_PAUSE_MS);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void suspendSymbolsUpdate() {
+		MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.suspendSymbolsUpdate();
 		}
 	}
 }

@@ -694,17 +694,13 @@ public class QuickSearchHelper implements ResourceListener {
 		mapsIndexed = true;
 	}
 
-	@Override
-	public void onMapClosed(String fileName) {
-	}
-
 	public static void showPoiFilterOnMap(@NonNull MapActivity mapActivity,
 	                                      @NonNull PoiUIFilter filter,
 	                                      @Nullable Runnable action) {
 		TopToolbarController controller = new PoiFilterBarController();
 		View.OnClickListener listener = v -> {
 			hidePoiFilterOnMap(mapActivity, controller, action);
-			mapActivity.showQuickSearch(filter);
+			mapActivity.getFragmentsHelper().showQuickSearch(filter);
 		};
 		controller.setOnBackButtonClickListener(listener);
 		controller.setOnTitleClickListener(listener);

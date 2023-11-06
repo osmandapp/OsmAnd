@@ -5490,7 +5490,7 @@
     <string name="key_event_action_previous_app_profile">Предыдущий профиль</string>
     <string name="show_toast_about_key_pressed">Показывать всплывающее сообщение о нажатой клавише</string>
     <string name="key_event_action_move_left">Сдвиг влево</string>
-    <string name="press_button_to_link_with_action">Нажмите кнопку на своем устройстве, чтобы связать ее с выбранным действием.</string>
+    <string name="press_button_to_link_with_action">Нажмите кнопку на своем устройстве, чтобы связать ее с действием: %1$s</string>
     <string name="key_event_action_move_right">Сдвиг вправо</string>
     <string name="shared_string_button">Кнопка</string>
     <string name="key_event_action_next_app_profile">Следующий профиль</string>
@@ -5504,7 +5504,7 @@
     <string name="external_input_device_title">Внешнее устройство ввода</string>
     <string name="key_bindings">Привязки клавиш</string>
     <string name="key_event_action_move_to_my_location">Моё местоположение</string>
-    <string name="key_event_category_map_interactions">Взаимодействие с картой</string>
+    <string name="key_event_category_map_interactions">Взаимодействия с картой</string>
     <string name="key_event_action_move_down">Сдвиг вниз</string>
     <string name="key_event_category_actions">Действия</string>
     <string name="key_event_action_zoom_in">Увеличить масштаб</string>

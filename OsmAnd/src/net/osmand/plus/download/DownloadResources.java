@@ -21,6 +21,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -666,7 +667,19 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public List<String> getExternalMapFileNamesAt(int x31, int y31, int zoom, boolean routeData) {
+	public boolean hasDownloadedMapsAt(@NonNull LatLon latLon, boolean routeData) {
+		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
+		return !getMapFileNamesAt(x31, y31, routeData, false).isEmpty();
+	}
+
+	@NonNull
+	public List<String> getExternalMapFileNamesAt(int x31, int y31, boolean routeData) {
+		return getMapFileNamesAt(x31, y31, routeData, true);
+	}
+
+	@NonNull
+	public List<String> getMapFileNamesAt(int x31, int y31, boolean routeData, boolean onlyExternal) {
 		List<String> res = new ArrayList<>();
 		for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
 			String fileName = reader.getFileName();
@@ -680,7 +693,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					if (routeData && !shallowReader.containsRouteData()) {
 						continue;
 					}
-					if (shallowReader.containsMapData() && !isOsmandMapRegion(fileName)) {
+					if (shallowReader.containsMapData() && (!onlyExternal || !isOsmandMapRegion(fileName))) {
 						if (routeData) {
 							if (shallowReader.containsRouteData(x31, y31, x31, y31, DETAILED_MAP_MIN_ZOOM)) {
 								res.add(fileName);

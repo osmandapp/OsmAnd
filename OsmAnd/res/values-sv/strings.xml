@@ -5276,4 +5276,32 @@
     <string name="plugin_disabled_descr">Denna insticksmodul är en separat app, deaktivering tar inte bort den.
 \n
 \nDen kan avinstalleras i Androids inställningar under \'Appar\'.</string>
+    <string name="keep_active">Behåll på</string>
+    <string name="route_line_use_gradient_coloring">Ruttlinjen färgläggs efter lutningsgraden.</string>
+    <string name="delete_all_actions_message_q">Radera %d snabbåtgärder helt\? Detta kan inte ångras.</string>
+    <string name="default_screen_timeout">Förvald tid för skärmavstängning</string>
+    <string name="screen_timeout_descr">Om \"%1$s\" är på, kommer aktivitetstiden vara beroende av den.</string>
+    <string name="use_system_screen_timeout">Använd enhetens skärminställning</string>
+    <string name="screen_timeout">Skärmens tidsgräns</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_delete_old_data_descr">Aktuella versioner av dina data bevaras på OsmAnd Cloud</string>
+    <string name="backup_error_subscription_was_used">Prenumeration eller kampanj används av ett annat konto %1$s</string>
+    <string name="osmand_online_routing_promo">Använd förinställda mallar, eller lägg till OSRM, GraphHopper, openrouteservice, eller GPX online-ruttberäkning.</string>
+    <string name="backup_danger_zone">Farozon</string>
+    <string name="verification_code_missing_description">Det kan ta 10 minuter. Klicka på knappen nedan om koden inte är i skräppost-mappen.</string>
+    <string name="loading_list_of_routing_services">Läser in lista över tillgängliga ruttberäkningstjänster</string>
+    <string name="shared_string_show_slope">Visa lutningsgrad</string>
+    <string name="elevation_profile">Höjdprofil</string>
+    <string name="tts_description">Text-till-tal (TTS) kan uttala alla typer av instruktioner: vägnamn, svängar, intressepunkter etc.</string>
+    <string name="purchases_feature_desc_nautical">Få tillgång till information om havsdjup</string>
+    <string name="backup_delete_old_data_warning">Du håller på att radera ändringshistoriken för tidigare inläst data.
+\n
+\nAktuell version av datat bevaras på servern, men du kommer inte kunna återgå till tidigare ändringar.</string>
+    <string name="send_logcat_log">Skicka logcat-logg</string>
+    <string name="make_backup_descr">Det är många ändringar på den här enheten. Gör gärna en säkerhetskopia av dessa data för att inte förlora det.</string>
+    <string name="backup_storage_taken">Lagringsplats använd</string>
+    <string name="backup_version_history_delete_descr">Radera ändringsloggen för föråldrade datatyper från OsmAnd Cloud\?</string>
+    <string name="backup_delete_types_descr">Radera alla data för föråldrade datatyper från OsmAnd Cloud\?</string>
+    <string name="shared_string_hide_slope">Dölj lutningsgrad</string>
+    <string name="provided_by">Tillhandahålls av %1$s</string>
 </resources>

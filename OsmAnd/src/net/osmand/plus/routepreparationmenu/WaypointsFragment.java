@@ -321,21 +321,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	@Override
-	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-
-	}
-
-	@Override
-	public void onDownMotionEvent() {
-
-	}
-
-	@Override
-	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
-	}
-
-	@Override
 	public void reloadAdapter() {
 		StableArrayAdapter stableAdapter = listAdapter;
 		if (stableAdapter != null) {

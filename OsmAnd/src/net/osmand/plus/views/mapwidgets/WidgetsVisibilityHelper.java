@@ -282,7 +282,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean isInTrackMenuMode() {
-		return mapActivity.getTrackMenuFragment() != null && mapActivity.getTrackMenuFragment().isVisible();
+		return mapActivity.getFragmentsHelper().getTrackMenuFragment() != null
+				&& mapActivity.getFragmentsHelper().getTrackMenuFragment().isVisible();
 	}
 
 	private boolean isInChoosingRoutesMode() {
@@ -326,19 +327,19 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInGpsFilteringMode() {
-		return mapActivity.getGpsFilterFragment() != null;
+		return mapActivity.getFragmentsHelper().getGpsFilterFragment() != null;
 	}
 
 	public boolean isInConfigureMapOptionMode() {
-		return mapActivity.getConfigureMapOptionFragment() != null;
+		return mapActivity.getFragmentsHelper().getConfigureMapOptionFragment() != null;
 	}
 
 	private boolean isInWeatherForecastMode() {
-		return mapActivity.getWeatherForecastFragment() != null;
+		return mapActivity.getFragmentsHelper().getWeatherForecastFragment() != null;
 	}
 
 	private boolean isSelectingTilesZone() {
-		return mapActivity.getDownloadTilesFragment() != null;
+		return mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null;
 	}
 
 	private boolean isMapLinkedToLocation() {

@@ -1240,7 +1240,7 @@ public class MenuBuilder {
 		buttonShowAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.showQuickSearch(filter, latLon);
+				mapActivity.getFragmentsHelper().showQuickSearch(filter, latLon);
 			}
 		});
 		return buttonShowAll;
@@ -1268,7 +1268,7 @@ public class MenuBuilder {
 				controller.setOnTitleClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mapActivity.showQuickSearch(filter);
+						mapActivity.getFragmentsHelper().showQuickSearch(filter);
 					}
 				});
 				controller.setOnCloseButtonClickListener(new OnClickListener() {

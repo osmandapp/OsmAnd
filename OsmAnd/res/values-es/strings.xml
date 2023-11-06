@@ -5525,7 +5525,7 @@
     <string name="key_event_action_previous_app_profile">Perfil anterior de la aplicación</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación del sistema sobre la tecla presionada</string>
     <string name="key_event_action_move_left">A la izquierda</string>
-    <string name="press_button_to_link_with_action">Pulse el botón de su dispositivo para vincularlo a la acción elegida.</string>
+    <string name="press_button_to_link_with_action">Pulse el botón de su dispositivo para vincularlo con la acción: %1$s</string>
     <string name="key_event_action_move_right">A la derecha</string>
     <string name="shared_string_button">Botón</string>
     <string name="key_event_action_next_app_profile">Perfil de la siguiente aplicación</string>
@@ -5550,4 +5550,6 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Abrir la cuadrícula de datos WunderLINQ</string>
     <string name="key_event_category_actions">Acciones</string>
     <string name="deletion_error">Error en la eliminación</string>
+    <string name="change_button">Botón para cambiar</string>
+    <string name="download_to_device">Descargar al dispositivo</string>
 </resources>

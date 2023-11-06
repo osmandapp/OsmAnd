@@ -10,6 +10,7 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	@Override
 	public void initialize(@NonNull OsmandApplication app) {
 		super.initialize(app);
+		keyBindings.clear();
 		collectCommands();
 		syncKeyBindingsCache();
 	}

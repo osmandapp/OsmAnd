@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,7 +19,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.util.Algorithms;
 
@@ -132,7 +131,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	}
 
 	private void onClose() {
-		TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
+		TrackMenuFragment fragment = mapActivity.getFragmentsHelper().getTrackMenuFragment();
 		if (fragment != null) {
 			fragment.updateContent();
 			fragment.show();

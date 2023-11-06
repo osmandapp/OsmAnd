@@ -30,17 +30,17 @@ public interface ObservableScrollViewCallbacks {
      * @param firstScroll true when this is called for the first time in the consecutive motion events
      * @param dragging    true when the view is dragged and false when the view is scrolled in the inertia
      */
-    void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging);
+    default void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {}
 
     /**
      * Called when the down motion event occurred.
      */
-    void onDownMotionEvent();
+    default void onDownMotionEvent() {}
 
     /**
      * Called when the dragging ended or canceled.
      *
      * @param scrollState state to indicate the scroll direction
      */
-    void onUpOrCancelMotionEvent(ScrollState scrollState);
+    default void onUpOrCancelMotionEvent(ScrollState scrollState) {}
 }

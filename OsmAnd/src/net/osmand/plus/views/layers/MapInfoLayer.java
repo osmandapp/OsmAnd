@@ -28,6 +28,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -194,6 +195,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (bottomWidgetsPanel != null) {
 			bottomWidgetsPanel.update(drawSettings);
 		}
+	}
+
+	public void updateRow(MapWidget widget){
+		topWidgetsPanel.updateRow(widget);
+		bottomWidgetsPanel.updateRow(widget);
 	}
 
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
