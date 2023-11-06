@@ -615,7 +615,7 @@ public class HHRoutePlanner {
 			LatLon startLatLon, LatLon endLatLon, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		Queue<NetworkDBPointCost> queue = hctx.queue;
-		// TODO 1.6 HHRoutePlanner revert 2 queues to fail fast in 1 direction
+		// TODO 2.0.3 HHRoutePlanner revert 2 queues to fail fast in 1 direction
 		for (NetworkDBPoint start : stPoints.valueCollection()) {
 			if (start.rtExclude) {
 				continue;
@@ -798,30 +798,29 @@ public class HHRoutePlanner {
 	}
 
 	
-	// TODO 1.3 HHRoutePlanner routing 1/-1/0 FIX routing time 7288 / 7088 / 7188 (43.15274, 19.55169 -> 42.955495, 19.0972263)
-	private HHNetworkSegmentRes runDetailedRouting(HHRoutingConfig c, HHNetworkSegmentRes res) throws InterruptedException, IOException {
-		
+	private HHNetworkSegmentRes runDetailedRouting(HHRoutingConfig c, HHNetworkSegmentRes res)
+			throws InterruptedException, IOException {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		NetworkDBSegment segment = res.segment;
 		ctx.config.planRoadDirection = 0; // A* bidirectional
-		ctx.config.heuristicCoefficient = 1; 
+		ctx.config.heuristicCoefficient = 1;
+		// TODO 2.0.4 should be speed up by just clearing visited
 		ctx.unloadAllData(); // needed for proper multidijsktra work
-//		if (c.USE_GC_MORE_OFTEN) {
-//			printGCInformation();
-//		}
+		// if (c.USE_GC_MORE_OFTEN) {
+		// printGCInformation();
+		// }
 		RouteSegmentPoint start = loadPoint(ctx, segment.start);
 		RouteSegmentPoint end = loadPoint(ctx, segment.end);
 		if (start == null || end == null) {
 			// TODO 2.2 in Future
-			throw new IllegalStateException(String.format("Points are not present in detailed maps: %s", 
+			throw new IllegalStateException(String.format("Points are not present in detailed maps: %s",
 					start == null ? segment.start : segment.end));
 		}
-		// TODO 1.4 HHRoutePlanner use cache boundaries to speed up
+		// TODO 2.0.2 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(ctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(ctx, f);
 		return res;
 	}
-	
 	
 	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingDB networkDB, HHRoutingConfig c, HHNetworkRouteRes route, RoutingStats stats) 
 			throws SQLException, InterruptedException, IOException {
