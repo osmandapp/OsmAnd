@@ -874,7 +874,7 @@ public class BinaryRoutePlanner {
 				if (distFromStart < visIt.distanceFromStart) {
 					double routeSegmentTime = calculateRouteSegmentTime(ctx, reverseWaySearch, visIt);
 					// we need to properly compare @distanceFromStart VISITED and NON-VISITED segment
-					if (distFromStart + routeSegmentTime < visIt.distanceFromStart) {
+					if (visIt.distanceFromStart - (distFromStart + routeSegmentTime) > 0.01) { // cause we do double -> float we can get into infinite loop here
 						// Here it's not very legitimate action cause in theory we need to go up to the final segment in the queue & decrease final time
 						// But it's compensated by chain reaction cause next.distanceFromStart < finalSegment.distanceFromStart and revisiting all segments
 						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
