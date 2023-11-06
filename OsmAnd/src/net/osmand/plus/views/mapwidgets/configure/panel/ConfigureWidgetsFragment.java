@@ -230,8 +230,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
-		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode);
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel, boolean recreateControls) {
+		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls);
 		onWidgetsConfigurationChanged();
 	}
 
