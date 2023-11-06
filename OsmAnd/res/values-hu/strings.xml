@@ -1267,7 +1267,7 @@
     <string name="lang_sr">szerb (cirill betűs)</string>
     <string name="lang_zh_cn">kínai (egyszerűsített)</string>
     <string name="lang_zh_tw">kínai (hagyományos)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistautak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
     <string name="arrival_distance_factor_late">Közel</string>
@@ -3882,8 +3882,8 @@
     <string name="reverse_all_points">Összes pont megfordítása</string>
     <string name="profile_by_default_description">Jelölje ki az alkalmazás elindításakor használandó profilt.</string>
     <string name="shared_string_last_used">Utoljára használt</string>
-    <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
-    <string name="routing_attr_prefer_hiking_routes_name">Túraútvonalak előnyben részesítése</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Turistautak előnyben részesítése</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Turistautak előnyben részesítése</string>
     <string name="routing_attr_allow_streams_description">Patakok és vízelvezető árkok engedélyezése</string>
     <string name="routing_attr_allow_streams_name">Patakok és vízelvezető árkok engedélyezése</string>
     <string name="routing_attr_allow_intermittent_description">Időszakos vízfolyások engedélyezése</string>
@@ -3955,7 +3955,7 @@
     <string name="uploaded_count">%1$d / %2$d feltöltve</string>
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
-    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
+    <string name="hillshade_slope_contour_lines">Szintvonalak / Domborzatárnyékolás / Lejtés</string>
     <string name="open_place_reviews_plugin_description">Hozzájárulhat az OpenPlaceReviews projekthez, például éttermekről, szállodákról vagy múzeumokról készült fényképekkel, véleményekkel vagy linkekkel.
 \n
 \nA közreműködés módjáról olvashat a %1$s weboldalunkon.</string>
