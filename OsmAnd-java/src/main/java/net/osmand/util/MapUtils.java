@@ -564,7 +564,7 @@ public class MapUtils {
 	
 	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
 		// st31x, st31y - A, end31x, end31y - B, px, py - C
-		double tWidth = getTileWidth(px, py);
+		double tWidth = getTileWidth(py);
 		// Scalar multiplication between (AB, AC)
 		double projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth
 				+ (end31y - st31y) * tWidth * (py - st31y) * tWidth;
@@ -593,15 +593,24 @@ public class MapUtils {
 		return getDistance(get31LatitudeY(y1), get31LongitudeX(x1), get31LatitudeY(y2), get31LongitudeX(x2));
 	}
 
+	public static void main(String[] args) {
+		System.out.println(MapUtils.get31TileNumberY(0)  + " " + EQUATOR);
+	}
+	
+	public static final int EQUATOR = 1 << 30; 
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		int px = Math.abs(x1 - x2) >> (31 - PRECISION_ZOOM);
-		int py = Math.abs(y1 - y2) >> (31 - PRECISION_ZOOM);
-//		if (px + py > 2) {
-//			double mDist = measuredDist31(x1, y1, x2, y2);
-//			return mDist * mDist;
-//		}
-		double tw = getTileWidth(x1 / 2 + x2 / 2, y1 / 2 + y2 / 2);
+		boolean top1 = y1 > EQUATOR;
+		boolean top2 = y2 > EQUATOR;
+		if (top1 != top2 && y1 != EQUATOR && y2 != EQUATOR) {
+			int mx = x1 / 2 + x2 / 2;
+			double d1 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x2, y2));
+			double d2 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x1, y1));
+			return (d1 + d2) * (d1 + d2);
+		}
+		// translate into meters
+		int ymidx = y1 / 2 + y2 / 2;
+		double tw = getTileWidth(ymidx);
+		
 		double dy = (y1 - y2) * tw;
 		double dx = (x2 - x1) * tw;
 		return dx * dx + dy * dy;
@@ -611,7 +620,7 @@ public class MapUtils {
 	// 14 precision, gives 10x speedup, 0.02% error
 	public static int PRECISION_ZOOM = 14; // 16 doesn't fit into tile int
 	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
-	private static double getTileWidth(int x31, int y31) {
+	private static double getTileWidth(int y31) {
 		double y = y31 / 1.0 / (1 << (31 - PRECISION_ZOOM));
 		int tileY = (int) y; // width the same for all x
 		double ry = y - tileY;
