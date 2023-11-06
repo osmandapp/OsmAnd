@@ -71,7 +71,10 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		Bundle arguments = requireArguments();
 		initialKeyCode = arguments.getInt(ATTR_KEY_CODE);
 		commandId = arguments.getString(ATTR_COMMAND_ID);
-		inputDevice = deviceHelper.getDeviceById(arguments.getString(ATTR_DEVICE_ID));
+
+		String appModeKey = arguments.getString(APP_MODE_KEY);
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
+		inputDevice = deviceHelper.getDeviceById(appMode, arguments.getString(ATTR_DEVICE_ID));
 
 		if (savedInstanceState != null) {
 			keyCode = savedInstanceState.containsKey(ATTR_KEY_CODE)

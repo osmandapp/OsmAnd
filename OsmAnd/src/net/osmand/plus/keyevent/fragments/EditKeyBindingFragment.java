@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
@@ -30,6 +31,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.callbacks.EventType;
+import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
 import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -45,7 +48,8 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyCodeSelectedCallback {
+public class EditKeyBindingFragment extends BaseOsmAndFragment
+		implements OnKeyCodeSelectedCallback, InputDeviceHelperCallback {
 
 	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
 
@@ -148,8 +152,14 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 			if (extra instanceof EditText) {
 				EditText editText = (EditText) extra;
 				String newName = editText.getText().toString();
+				String originalName = keyBinding.getName(app);
+				if (Objects.equals(originalName, newName)) {
+					return;
+				}
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
+				} else if (deviceHelper.hasKeybindingNameDuplicate(appMode, deviceId, newName)) {
+					app.showToastMessage(R.string.message_name_is_already_exists);
 				} else {
 					callback.processResult(newName.trim());
 				}
@@ -194,11 +204,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		String originalName = keyBinding.getName(app);
 		if (!Objects.equals(originalName, newName)) {
 			keyBinding = new KeyBinding(newName, keyBinding);
-			deviceHelper.updateKeyBinding(deviceId, keyBinding.getKeyCode(), keyBinding);
-			View view = getView();
-			if (view != null) {
-				updateViewContent(view);
-			}
+			deviceHelper.updateKeyBinding(appMode, deviceId, keyBinding.getKeyCode(), keyBinding);
 		}
 	}
 
@@ -207,11 +213,15 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		int originalKeyCode = keyBinding.getKeyCode();
 		if (newKeyCode != originalKeyCode) {
 			keyBinding = new KeyBinding(newKeyCode, keyBinding);
-			deviceHelper.updateKeyBinding(deviceId, originalKeyCode, keyBinding);
-			View view = getView();
-			if (view != null) {
-				updateViewContent(view);
-			}
+			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyCode, keyBinding);
+		}
+	}
+
+	@Override
+	public void processInputDeviceHelperEvent(@NonNull EventType event) {
+		View view = getView();
+		if (view != null) {
+			updateViewContent(view);
 		}
 	}
 
@@ -223,8 +233,8 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 	}
 
 	private void updateToolbarTitle(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setTitle(keyBinding.getName(app));
+		CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
+		collapsingToolbarLayout.setTitle(keyBinding.getName(app));
 	}
 
 	@Override
@@ -234,6 +244,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
 		}
+		deviceHelper.addListener(this);
 	}
 
 	@Override
@@ -243,6 +254,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment implements OnKeyC
 		if (mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+		deviceHelper.removeListener(this);
 	}
 
 	@Override
