@@ -54,10 +54,11 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.setOnClickListener { v: View? ->
 				smartFolder?.let {
 					showTracksSelection(
-						it,
-						this,
-						null,
-						null)
+						folder = it,
+						fragment = this,
+						trackItems = null,
+						tracksGroups = null,
+						screenPositionData = null)
 				}
 			}.create())
 
@@ -91,14 +92,13 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 
 	private fun showTracksSelection(
 		folder: TracksGroup, fragment: BaseTrackFolderFragment,
-		trackItems: Set<TrackItem?>?, tracksGroups: Set<TracksGroup?>?) {
+		trackItems: Set<TrackItem?>?, tracksGroups: Set<TracksGroup?>?,
+		screenPositionData: ScreenPositionData?
+	) {
 		val manager = requireActivity().supportFragmentManager
 		TracksSelectionFragment.showInstance(
-			manager,
-			folder,
-			fragment,
-			trackItems,
-			tracksGroups)
+			manager, folder, fragment, trackItems, tracksGroups, screenPositionData
+		)
 	}
 
 	override fun onResume() {

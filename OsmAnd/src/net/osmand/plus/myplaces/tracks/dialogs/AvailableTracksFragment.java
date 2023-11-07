@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
+import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +29,6 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
@@ -332,12 +332,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null);
+		ScreenPositionData screenPositionData = new ScreenPositionData(trackItem, getViewOnScreenY(view));
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null, screenPositionData);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group));
+		ScreenPositionData screenPositionData = new ScreenPositionData(group, getViewOnScreenY(view));
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group), screenPositionData);
 	}
 
 	@Override
