@@ -36,10 +36,14 @@ abstract class ListTrackFilter(
 		}
 
 	fun setFullItemsCollection(collection: List<Pair<String, Int>>) {
+		val tmpAllItems = ArrayList<String>()
+		val tmpAllItemsCollection = HashMap<String, Int>()
 		for (pair in collection) {
-			allItems.add(pair.first)
-			allItemsCollection[pair.first] = pair.second
+			tmpAllItems.add(pair.first)
+			tmpAllItemsCollection[pair.first] = pair.second
 		}
+		allItems = tmpAllItems
+		allItemsCollection = tmpAllItemsCollection
 	}
 
 	fun setSelectedItems(selectedItems: List<String>) {
