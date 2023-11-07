@@ -5541,4 +5541,6 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
     <string name="change_button">Modifier le bouton</string>
     <string name="download_to_device">Télécharger sur l\'appareil</string>
+    <string name="add_row">Ajouter une ligne</string>
+    <string name="row_number">Ligne %1$s</string>
 </resources>
