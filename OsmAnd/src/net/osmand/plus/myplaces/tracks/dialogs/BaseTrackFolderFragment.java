@@ -9,6 +9,7 @@ import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_E
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
+import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -414,6 +416,26 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (foldersHelper != null) {
 			foldersHelper.reloadTracks();
 		}
+	}
+
+	@Nullable
+	public ScreenPositionData getFirstSuitableItemScreenPosition() {
+		LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+		if (layoutManager != null) {
+			int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
+			int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
+			for (int i = firstVisiblePosition; i <= lastVisiblePosition ; i++) {
+				Object item = adapter.getItemByPosition(firstVisiblePosition);
+				if (item instanceof TrackItem || item instanceof TracksGroup) {
+					ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(firstVisiblePosition);
+					View view = viewHolder != null ? viewHolder.itemView : null;
+					if (view != null) {
+						return new ScreenPositionData(item, getViewOnScreenY(view));
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
