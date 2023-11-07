@@ -5530,7 +5530,7 @@
     <string name="key_event_category_actions">Actions</string>
     <string name="enable_to_use_external_input_device">Activer pour utiliser le périphérique d\'entrée externe avec OsmAnd</string>
     <string name="key_event_action_previous_app_profile">Profil d\'application précédent</string>
-    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour l’affecter à l\'action sélectionnée.</string>
+    <string name="press_button_to_link_with_action">Appuyez sur le bouton de votre appareil pour l’associer à l\'action %1$s</string>
     <string name="deletion_error">Erreur de suppression</string>
     <string name="key_event_action_next_app_profile">Profil d\'application suivant</string>
     <string name="change_key_binding">Modifier l\'affectation des touches</string>
@@ -5539,4 +5539,6 @@
     <string name="external_input_device_title">Périphériques d\'entrée externes</string>
     <string name="key_bindings">Affectation des touches</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
+    <string name="change_button">Modifier le bouton</string>
+    <string name="download_to_device">Télécharger sur l\'appareil</string>
 </resources>
