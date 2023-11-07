@@ -261,7 +261,8 @@ public class GPXDatabase {
 	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
 			GPX_COL_NEAREST_CITY_NAME + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL" +
+			" WHERE " + GPX_COL_NEAREST_CITY_NAME + " NOT NULL" + " AND " +
+			GPX_COL_NEAREST_CITY_NAME + " <> '' " +
 			" group by " + GPX_COL_NEAREST_CITY_NAME +
 			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 

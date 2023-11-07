@@ -1,20 +1,20 @@
 package net.osmand.plus.myplaces.tracks.filters.viewholders
 
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter
-import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
 import net.osmand.plus.widgets.TextViewEx
 
-class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
+class FilterCityViewHolder(var app: OsmandApplication, itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
-	private val app: OsmandApplication
 	private val nightMode: Boolean
 	private var expanded = false
 	private val title: TextViewEx
@@ -25,23 +25,31 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 	private val explicitIndicator: ImageView
 	private var filter: CityTrackFilter? = null
 
+	private val filterPropertiesClosed = object : DialogClosedListener {
+		override fun onDialogClosed() {
+			updateValues()
+		}
+	}
+	private val adapter = ListFilterAdapter(app, nightMode, null, filterPropertiesClosed)
+
 	init {
-		app = itemView.context.applicationContext as OsmandApplication
 		this.nightMode = nightMode
 		title = itemView.findViewById(R.id.title)
 		selectedValue = itemView.findViewById(R.id.selected_value)
 		divider = itemView.findViewById(R.id.divider)
 		explicitIndicator = itemView.findViewById(R.id.explicit_indicator)
 		titleContainer = itemView.findViewById(R.id.title_container)
-		titleContainer.setOnClickListener { v: View? ->
+		titleContainer.setOnClickListener { _: View? ->
 			expanded = !expanded
 			updateExpandState()
 		}
 		recycler = itemView.findViewById(R.id.variants)
 	}
 
-	fun bindView(filter: CityTrackFilter) {
+	fun bindView(filter: CityTrackFilter, fragmentManager: FragmentManager) {
 		this.filter = filter
+		adapter.filter = filter
+		adapter.fragmentManager = fragmentManager
 		title.setText(filter.displayNameId)
 		updateExpandState()
 		updateValues()
@@ -56,43 +64,13 @@ class FilterCityViewHolder(itemView: View, nightMode: Boolean) :
 
 	private fun updateValues() {
 		filter?.let {
-			val adapter = CityAdapter()
-			adapter.items.clear()
-			adapter.items.addAll(it.allCities)
+			adapter.items = ArrayList(it.allItems)
 			recycler.adapter = adapter
 			recycler.layoutManager = LinearLayoutManager(app)
 			recycler.itemAnimator = null
-			selectedValue.text = "${it.selectedCities.size}"
-			AndroidUiHelper.updateVisibility(selectedValue, it.selectedCities.size > 0)
+			selectedValue.text = "${it.selectedItems.size}"
+			AndroidUiHelper.updateVisibility(selectedValue, it.selectedItems.size > 0)
 		}
 	}
 
-	inner class CityAdapter : RecyclerView.Adapter<FilterVariantViewHolder>() {
-		var items = ArrayList<String>()
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterVariantViewHolder {
-			val inflater = UiUtilities.getInflater(parent.context, nightMode)
-			val view =
-				inflater.inflate(R.layout.track_filter_checkbox_item, parent, false)
-			return FilterVariantViewHolder(view, nightMode)
-		}
-
-		override fun getItemCount(): Int {
-			return items.size
-		}
-
-		override fun onBindViewHolder(holder: FilterVariantViewHolder, position: Int) {
-			val cityName = items[position]
-			holder.title.text = cityName
-			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
-			filter?.let { cityFilter ->
-				holder.itemView.setOnClickListener {
-					cityFilter.setCitySelected(cityName, !cityFilter.isCitySelected(cityName))
-					this.notifyItemChanged(position)
-					updateValues()
-				}
-				holder.checkBox.isChecked = cityFilter.isCitySelected(cityName)
-				holder.count.text = cityFilter.allCitiesCollection[cityName].toString()
-			}
-		}
-	}
 }

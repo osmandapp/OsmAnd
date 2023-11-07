@@ -110,11 +110,11 @@ public class TrackFiltersHelper {
 				break;
 			}
 			case CITY: {
-				newFilter = new CityTrackFilter(filterChangedListener);
+				newFilter = new CityTrackFilter(app, filterChangedListener);
 				break;
 			}
 			case FOLDER: {
-				newFilter = new TrackFolderFilter(filterChangedListener);
+				newFilter = new TrackFolderFilter(app, filterChangedListener);
 				break;
 			}
 			case OTHER: {
@@ -122,11 +122,11 @@ public class TrackFiltersHelper {
 				break;
 			}
 			case COLOR: {
-				newFilter = new ColorTrackFilter(filterChangedListener);
+				newFilter = new ColorTrackFilter(app, filterChangedListener);
 				break;
 			}
 			case WIDTH: {
-				newFilter = new WidthTrackFilter(filterChangedListener);
+				newFilter = new WidthTrackFilter(app, filterChangedListener);
 				break;
 			}
 			default:
