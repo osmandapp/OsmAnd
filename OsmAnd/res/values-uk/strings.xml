@@ -5560,4 +5560,8 @@
     <string name="key_event_action_activity_back_pressed">Натиснено кнопку назад</string>
     <string name="key_event_action_emit_navigation_hint">Виведення навігаційної інформації</string>
     <string name="map_widget_group_glide_ratio">Коефіцієнт ковзання</string>
+    <string name="remove_widget_first">Спочатку видаліть віджет</string>
+    <string name="add_row">Додати рядок</string>
+    <string name="discard_changes_prompt">Ви дійсно хочете відкинути зміни?</string>
+    <string name="row_number">Рядок %1$s</string>
 </resources>
