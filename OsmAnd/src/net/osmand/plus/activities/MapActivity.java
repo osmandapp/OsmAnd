@@ -51,7 +51,6 @@ import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -926,7 +925,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		PluginsHelper.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession == null) {
+		if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (mapViewWithLayers != null) {
@@ -984,8 +983,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		NavigationService carNavigationService = app.getNavigationService();
-		if (carNavigationService == null || !carNavigationService.isCarNavigationActive()) {
+		if (app.getCarNavigationSession() == null) {
 			getMapView().getAnimatedDraggingThread().blockAnimations();
 		}
 

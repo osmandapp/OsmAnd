@@ -84,15 +84,9 @@ public class MapViewWithLayers extends FrameLayout {
 			mapView.setMapRenderer(null);
 			resetMapRendererView();
 		}
-		if (useAndroidAuto) {
-			AndroidUiHelper.updateVisibility(surfaceView, false);
-			AndroidUiHelper.updateVisibility(mapLayersView, false);
-			AndroidUiHelper.updateVisibility(atlasMapRendererView, false);
-		} else {
-			AndroidUiHelper.updateVisibility(surfaceView, !useOpenglRender);
-			AndroidUiHelper.updateVisibility(mapLayersView, useOpenglRender);
-			AndroidUiHelper.updateVisibility(atlasMapRendererView, useOpenglRender);
-		}
+		AndroidUiHelper.updateVisibility(surfaceView, !useAndroidAuto && !useOpenglRender);
+		AndroidUiHelper.updateVisibility(mapLayersView, !useAndroidAuto && useOpenglRender);
+		AndroidUiHelper.updateVisibility(atlasMapRendererView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(androidAutoPlaceholder, useAndroidAuto);
 	}
 
@@ -155,8 +149,11 @@ public class MapViewWithLayers extends FrameLayout {
 
 	public void onDestroy() {
 		if (atlasMapRendererView != null) {
-			mapView.setMapRenderer(null);
-			resetMapRendererView();
+			NavigationSession carNavigationSession = app.getCarNavigationSession();
+			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
+				mapView.setMapRenderer(null);
+				resetMapRendererView();
+			}
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();

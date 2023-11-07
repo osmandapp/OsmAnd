@@ -43,10 +43,6 @@ public final class NavigationCarAppService extends CarAppService {
 
 	@Override
 	public void onDestroy() {
-		// Disable Android Auto rendering surface
-		NavigationSession carNavigationSession = getApp().getCarNavigationSession();
-		if (carNavigationSession != null)
-			carNavigationSession.setMapView(null);
 		super.onDestroy();
 		getApp().setNavigationCarAppService(null);
 	}
@@ -56,36 +52,27 @@ public final class NavigationCarAppService extends CarAppService {
 	public Session onCreateSession() {
 		NavigationSession session = new NavigationSession();
 		getApp().getLocationProvider().addLocationListener(session);
-		getApp().setCarNavigationSession(session);
 		session.getLifecycle()
 				.addObserver(
 						new DefaultLifecycleObserver() {
 							@Override
+							public void onCreate(@NonNull LifecycleOwner owner) {
+								getApp().setCarNavigationSession(session);
+							}
+
+							@Override
 							public void onStart(@NonNull LifecycleOwner owner) {
-								NavigationSession carNavigationSession = getApp().getCarNavigationSession();
-								// Enable Android Auto rendering surface
-								if (carNavigationSession != null) {
-									SurfaceRenderer navigationCarSurface = carNavigationSession.getNavigationCarSurface();
-									if (navigationCarSurface != null)
-										navigationCarSurface.setVisible();
-								}
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onStop(@NonNull LifecycleOwner owner) {
-								// Disable Android Auto rendering surface
-								NavigationSession carNavigationSession = getApp().getCarNavigationSession();
-								if (carNavigationSession != null)
-									carNavigationSession.setMapView(null);
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
-								// Remove Android Auto rendering surface
-								if (getApp().getCarNavigationSession() != null)
-									getApp().setCarNavigationSession(null);
+								getApp().setCarNavigationSession(null);
 								getApp().getLocationProvider().removeLocationListener(session);
 							}
 						});
