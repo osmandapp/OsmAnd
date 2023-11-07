@@ -1,27 +1,20 @@
 package net.osmand.plus.myplaces.tracks.filters.viewholders
 
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.appcompat.widget.AppCompatImageView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.filters.ColorTrackFilter
-import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
 import net.osmand.plus.widgets.TextViewEx
-import net.osmand.util.Algorithms
 
-class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
+class FilterColorViewHolder(var app: OsmandApplication, itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
-	private val app: OsmandApplication
 	private val nightMode: Boolean
 	private var expanded = false
 	private val title: TextViewEx
@@ -31,6 +24,13 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 	private val divider: View
 	private val explicitIndicator: ImageView
 	private var filter: ColorTrackFilter? = null
+
+	private val filterPropertiesClosed = object : DialogClosedListener {
+		override fun onDialogClosed() {
+			updateValues()
+		}
+	}
+	private val adapter = ListFilterAdapter(app, nightMode, null, filterPropertiesClosed)
 
 	init {
 		app = itemView.context.applicationContext as OsmandApplication
@@ -47,8 +47,11 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 		recycler = itemView.findViewById(R.id.variants)
 	}
 
-	fun bindView(filter: ColorTrackFilter) {
+	fun bindView(filter: ColorTrackFilter, fragmentManager: FragmentManager) {
 		this.filter = filter
+		adapter.items = ArrayList(filter.allItems)
+		adapter.filter = filter
+		adapter.fragmentManager = fragmentManager
 		title.setText(filter.displayNameId)
 		updateExpandState()
 		updateValues()
@@ -63,9 +66,7 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 
 	private fun updateValues() {
 		filter?.let {
-			val adapter = ColorAdapter()
-			adapter.items.clear()
-			adapter.items.addAll(it.allColors)
+			adapter.items = ArrayList(it.allItems)
 			adapter.items.remove("")
 			adapter.items.add(0, "")
 			recycler.adapter = adapter
@@ -76,74 +77,7 @@ class FilterColorViewHolder(itemView: View, nightMode: Boolean) :
 	}
 
 	private fun updateSelectedValue(it: ColorTrackFilter): Boolean {
-		selectedValue.text = "${it.selectedColors.size}"
-		return AndroidUiHelper.updateVisibility(selectedValue, it.selectedColors.size > 0)
-	}
-
-	inner class ColorAdapter : RecyclerView.Adapter<ColorViewHolder>() {
-		var items = ArrayList<String>()
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
-			val inflater = UiUtilities.getInflater(parent.context, nightMode)
-			val view =
-				inflater.inflate(R.layout.track_filter_checkbox_item, parent, false)
-			return ColorViewHolder(view)
-		}
-
-		override fun getItemCount(): Int {
-			return items.size
-		}
-
-		override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
-			val colorName = items[position]
-			if (Algorithms.isEmpty(colorName)) {
-				holder.title.text = app.getString(R.string.not_specified)
-				holder.icon.setImageDrawable(app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled))
-			} else {
-				val color = Color.parseColor(colorName)
-				holder.title.text = colorName
-				val transparencyIcon = getTransparencyIcon(app, color)
-				val colorIcon = app.uiUtilities.getPaintedIcon(R.drawable.bg_point_circle, color)
-				val layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon)
-				holder.icon.setImageDrawable(layeredIcon)
-			}
-			AndroidUiHelper.updateVisibility(holder.icon, true)
-			AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
-			filter?.let { colorFilter ->
-				holder.itemView.setOnClickListener {
-					colorFilter.setColorSelected(colorName, !colorFilter.isColorSelected(colorName))
-					this.notifyItemChanged(position)
-					updateSelectedValue(colorFilter)
-				}
-				holder.checkBox.isChecked = colorFilter.isColorSelected(colorName)
-				holder.count.text = colorFilter.getTracksCountForColor(colorName).toString()
-			}
-		}
-
-		private fun getTransparencyIcon(app: OsmandApplication, @ColorInt color: Int): Drawable? {
-			val colorWithoutAlpha = ColorUtilities.removeAlpha(color)
-			val transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f)
-			return app.uiUtilities.getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor)
-		}
-
-	}
-
-	inner class ColorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-		var title: TextViewEx
-		var count: TextViewEx
-		var checkBox: AppCompatCheckBox
-		var icon: AppCompatImageView
-		var divider: View
-
-		init {
-			title = view.findViewById(R.id.title)
-			count = view.findViewById(R.id.count)
-			checkBox = view.findViewById(R.id.compound_button)
-			icon = view.findViewById(R.id.icon)
-			divider = view.findViewById(R.id.divider)
-			UiUtilities.setupCompoundButton(
-				nightMode,
-				ColorUtilities.getActiveColor(app, nightMode),
-				checkBox)
-		}
+		selectedValue.text = "${it.selectedItems.size}"
+		return AndroidUiHelper.updateVisibility(selectedValue, it.selectedItems.size > 0)
 	}
 }

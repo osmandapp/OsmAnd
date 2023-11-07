@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="discard_changes_prompt">Are you sure you want to discard changes?</string>
     <string name="change_button">Change button</string>
     <string name="download_to_device">Download to device</string>
     <string name="deletion_error">Deletion error</string>
