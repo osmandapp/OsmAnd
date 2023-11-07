@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="remove_widget_first">Please remove widget first</string>
+    <string name="add_row">Add row</string>
+    <string name="row_number">Row %1$s</string>
     <string name="change_button">Change button</string>
     <string name="download_to_device">Download to device</string>
     <string name="deletion_error">Deletion error</string>
