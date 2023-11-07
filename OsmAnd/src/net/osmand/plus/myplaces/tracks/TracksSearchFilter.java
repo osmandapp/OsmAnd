@@ -72,19 +72,19 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		}
 		CityTrackFilter cityFilter = (CityTrackFilter) getFilterByType(FilterType.CITY);
 		if (cityFilter != null) {
-			cityFilter.setFullCitiesList(app.getGpxDbHelper().getNearestCityList());
+			cityFilter.setFullItemsCollection(app.getGpxDbHelper().getNearestCityList());
 		}
 		ColorTrackFilter colorsFilter = (ColorTrackFilter) getFilterByType(FilterType.COLOR);
 		if (colorsFilter != null) {
-			colorsFilter.setFullColorsCollection(app.getGpxDbHelper().getTrackColorsList());
+			colorsFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackColorsList());
 		}
 		WidthTrackFilter widthFilter = (WidthTrackFilter) getFilterByType(FilterType.WIDTH);
 		if (widthFilter != null) {
-			widthFilter.setFullWidthCollection(app.getGpxDbHelper().getTrackWidthList());
+			widthFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackWidthList());
 		}
 		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
 		if (folderFilter != null) {
-			folderFilter.setFullFoldersCollection(app.getGpxDbHelper().getTrackFolders());
+			folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
 			folderFilter.setCurrentFolder(currentFolder);
 		}
 
@@ -133,7 +133,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
 		if (folderFilter != null) {
 			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
-				folderFilter.setFullFoldersCollection(app.getGpxDbHelper().getTrackFolders());
+				folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
 			} else {
 				List<TrackItem> ignoreFoldersItems = filterSpecificSearchResults.get(FilterType.FOLDER);
 				folderFilter.updateFullCollection(ignoreFoldersItems);

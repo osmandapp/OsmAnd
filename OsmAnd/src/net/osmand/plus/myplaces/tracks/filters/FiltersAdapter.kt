@@ -22,6 +22,7 @@ import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterWidthViewHolder
 import net.osmand.plus.utils.UiUtilities
 
 class FiltersAdapter(
+	private val app: OsmandApplication,
 	private val activity: Activity,
 	private val fragmentManager: FragmentManager,
 	private val filter: TracksSearchFilter,
@@ -64,7 +65,7 @@ class FiltersAdapter(
 			FilterType.CITY -> {
 				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
 				FilterCityViewHolder(
-					activity.applicationContext as OsmandApplication,
+					app,
 					view,
 					nightMode)
 			}
@@ -72,7 +73,7 @@ class FiltersAdapter(
 			FilterType.FOLDER -> {
 				val view = inflater.inflate(R.layout.filter_folder_item, parent, false)
 				FilterFolderViewHolder(
-					activity.applicationContext as OsmandApplication,
+					app,
 					view,
 					nightMode)
 			}
@@ -85,7 +86,7 @@ class FiltersAdapter(
 			FilterType.COLOR -> {
 				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
 				FilterColorViewHolder(
-					activity.applicationContext as OsmandApplication,
+					app,
 					view,
 					nightMode)
 			}
@@ -93,7 +94,7 @@ class FiltersAdapter(
 			FilterType.WIDTH -> {
 				val view = inflater.inflate(R.layout.filter_city_item, parent, false)
 				FilterWidthViewHolder(
-					activity.applicationContext as OsmandApplication,
+					app,
 					view,
 					nightMode)
 			}

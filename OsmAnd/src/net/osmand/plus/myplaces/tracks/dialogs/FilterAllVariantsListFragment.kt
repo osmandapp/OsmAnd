@@ -22,10 +22,10 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
+import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
+import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.myplaces.tracks.filters.TrackFilterPropertiesAdapter
-import net.osmand.plus.myplaces.tracks.filters.TracksCollectionFilter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -37,18 +37,29 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 		fun showInstance(
 			app: OsmandApplication,
 			manager: FragmentManager,
-			filter: BaseTrackFilter,
+			filter: ListTrackFilter,
 			dialogClosedListener: DialogClosedListener?,
-			adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
 			selectedItemsListener: NewSelectedItemsListener) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val initialFilter = TrackFiltersHelper.createFilter(app, filter.filterType, null)
+				if (initialFilter !is ListTrackFilter) {
+					throw IllegalArgumentException("Filter should be subclass from ListTrackFilter")
+				}
 				initialFilter.initWithValue(filter)
+				val nightMode = app.daynightHelper.isNightMode(true)
+				val currentFilter =
+					TrackFiltersHelper.createFilter(app, filter.filterType, null) as ListTrackFilter
+				currentFilter.initWithValue(filter)
+				currentFilter.setFullItemsCollection(filter.allItemsCollection)
+				val adapter = ListFilterAdapter(app, nightMode, null, null)
+				adapter.filter = currentFilter
+				adapter.showAllItems = true
+				adapter.items = ArrayList(filter.allItems)
 				val fragment = FilterAllVariantsListFragment()
 				fragment.initialFilter = initialFilter
 				fragment.retainInstance = true
 				fragment.dialogClosedListener = dialogClosedListener
-				fragment.currentChangesFilter = filter
+				fragment.currentChangesFilter = currentFilter
 				fragment.adapter = adapter
 				fragment.selectedItemsListener = selectedItemsListener
 				fragment.show(manager, TAG)
@@ -56,14 +67,14 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 		}
 	}
 
-	lateinit var initialFilter: BaseTrackFilter
+	lateinit var initialFilter: ListTrackFilter
 	lateinit var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 	var progressBar: ProgressBar? = null
 	private var showButton: DialogButton? = null
 	private var dialogClosedListener: DialogClosedListener? = null
 	private lateinit var appBar: AppBarLayout
-	private lateinit var currentChangesFilter: BaseTrackFilter
+	private lateinit var currentChangesFilter: ListTrackFilter
 	private lateinit var selectedItemsListener: NewSelectedItemsListener
 	private val textWatcher: TextWatcher = object : TextWatcher {
 		override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -129,10 +140,10 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 	private fun setupBottomMenu(view: View) {
 		showButton = view.findViewById(R.id.show_button)
 		showButton?.setOnClickListener {
-			var newSelectedItems = ArrayList<String>()
-			var oldSelectedItems = (initialFilter as TracksCollectionFilter).getSelectedItems()
-			var currentSelectedItems =
-				(currentChangesFilter as TracksCollectionFilter).getSelectedItems()
+			val newSelectedItems = ArrayList<String>()
+			val oldSelectedItems = initialFilter.getSelectedItems()
+			val currentSelectedItems =
+				currentChangesFilter.getSelectedItems()
 			for (selectedItem in currentSelectedItems) {
 				if (!oldSelectedItems.contains(selectedItem)) {
 					newSelectedItems.add(selectedItem)
@@ -164,7 +175,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			builder.setTitle(R.string.discard_filter_changes)
 			builder.setMessage(R.string.discard_changes_prompt)
 			builder.setNegativeButton(R.string.shared_string_cancel, null)
-			builder.setPositiveButton(R.string.discard_changes) { dialog, which ->
+			builder.setPositiveButton(R.string.discard_changes) { _, _ ->
 				closeWithoutApplyConfirmed()
 			}
 			builder.show()

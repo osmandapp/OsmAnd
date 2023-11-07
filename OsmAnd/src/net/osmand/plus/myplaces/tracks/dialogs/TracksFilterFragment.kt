@@ -245,7 +245,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 
 	private fun setupList(view: View) {
 		fragmentManager?.let {
-			adapter = FiltersAdapter(requireActivity(), it, filter, nightMode)
+			adapter = FiltersAdapter(app, requireActivity(), it, filter, nightMode)
 			val recyclerView = view.findViewById<RecyclerView>(R.id.filters_list)
 			recyclerView.layoutManager = LinearLayoutManager(app)
 			recyclerView.itemAnimator = null
