@@ -151,16 +151,17 @@ public class ReorderWidgetsAdapterHelper {
 
 		if (verticalPanel) {
 			deletePageWithWidgets(pageToDelete);
+			dataHolder.deletePageWithoutShift(pageToDelete);
 		} else {
 			moveWidgetsToPreviousPage(pageToDelete);
+			dataHolder.deletePage(pageToDelete);
 		}
-		dataHolder.deletePage(pageToDelete);
 		items.remove(position);
 
 		List<Integer> changedPageItems = new ArrayList<>();
 		for (int i = position; i < adapter.getItemCount(); i++) {
 			ListItem listItem = items.get(i);
-			if (listItem.value instanceof PageUiInfo) {
+			if (listItem.value instanceof PageUiInfo && !verticalPanel) {
 				((PageUiInfo) listItem.value).onPreviousPageDeleted();
 				changedPageItems.add(i);
 			}
@@ -188,9 +189,6 @@ public class ReorderWidgetsAdapterHelper {
 				AddedWidgetUiInfo widgetUiInfo = (AddedWidgetUiInfo) item.value;
 				if (widgetsToDelete.contains(widgetUiInfo.key)) {
 					listItemsToDelete.add(item);
-				}
-				if (widgetUiInfo.page > pageToDelete) {
-					widgetUiInfo.page -= 1;
 				}
 			}
 		}

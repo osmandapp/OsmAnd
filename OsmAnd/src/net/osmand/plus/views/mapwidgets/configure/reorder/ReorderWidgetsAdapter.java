@@ -24,6 +24,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.SimpleWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -184,7 +185,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			SpaceViewHolder holder = (SpaceViewHolder) viewHolder;
 			holder.setHeight((int) item.value);
 		} else if (viewHolder instanceof AddPageButtonViewHolder) {
-			((AddPageButtonViewHolder) viewHolder).buttonContainer.setOnClickListener(v -> reorderHelper.addPage());
+			AddPageButtonViewHolder holder = (AddPageButtonViewHolder) viewHolder;
+			holder.textView.setText(panel.isPanelVertical() ? R.string.add_row : R.string.add_page);
+			holder.buttonContainer.setOnClickListener(v -> reorderHelper.addPage());
 		}
 	}
 
@@ -333,11 +336,11 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		ListItem item = items.get(position);
 		if (item.value instanceof PageUiInfo) {
 			int page = ((PageUiInfo) item.value).index;
-			return app.getString(R.string.page_number, String.valueOf(page)).hashCode();
+			return app.getString(panel.isPanelVertical() ? R.string.row_number : R.string.page_number, String.valueOf(page)).hashCode();
 		} else if (item.value instanceof AddedWidgetUiInfo) {
 			return ((AddedWidgetUiInfo) item.value).key.hashCode();
 		} else if (item.type == ItemType.ADD_PAGE_BUTTON) {
-			return R.string.add_page;
+			return panel.isPanelVertical() ? R.string.add_row : R.string.add_page;
 		} else if (item.value instanceof ActionButtonInfo) {
 			return ((ActionButtonInfo) item.value).title.hashCode();
 		} else if (item.value instanceof WidgetGroup) {
