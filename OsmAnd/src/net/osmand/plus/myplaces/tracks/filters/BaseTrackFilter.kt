@@ -21,4 +21,8 @@ abstract class BaseTrackFilter(
 	override fun equals(other: Any?): Boolean {
 		return other is BaseTrackFilter && other.filterType == filterType
 	}
+
+	open fun updateOnOtherFiltersChangeNeeded(): Boolean {
+		return false
+	}
 }

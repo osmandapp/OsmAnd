@@ -158,11 +158,10 @@ class FiltersAdapter(
 		return filter
 	}
 
-	fun updateFilterItem(itemType: FilterType) {
+	fun onTracksFilteringComplete() {
 		for (i in 0 until items.size) {
-			if (items[i].filterType == itemType) {
+			if (items[i].updateOnOtherFiltersChangeNeeded()) {
 				notifyItemChanged(i)
-				break
 			}
 		}
 	}

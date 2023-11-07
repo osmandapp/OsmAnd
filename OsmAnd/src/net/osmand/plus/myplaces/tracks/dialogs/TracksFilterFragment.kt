@@ -319,9 +319,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		filter.setCallback(CallbackWithObject<List<TrackItem>> { trackItems ->
 			updateProgressVisibility(false)
 			filter.filteredTrackItems = trackItems
-			adapter?.updateFilterItem(FilterType.FOLDER)
-			adapter?.updateFilterItem(FilterType.COLOR)
-			adapter?.updateFilterItem(FilterType.CITY)
+			adapter?.onTracksFilteringComplete()
 			updateUI()
 			return@CallbackWithObject true
 		})

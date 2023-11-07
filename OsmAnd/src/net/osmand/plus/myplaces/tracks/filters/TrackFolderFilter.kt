@@ -92,11 +92,15 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 	}
 
 	override fun initWithValue(value: BaseTrackFilter) {
-		if(value is TrackFolderFilter) {
-			if(!Algorithms.isEmpty(value.selectedFolders) || Algorithms.isEmpty(value.selectedItems)){
+		if (value is TrackFolderFilter) {
+			if (!Algorithms.isEmpty(value.selectedFolders) || Algorithms.isEmpty(value.selectedItems)) {
 				value.selectedItems = ArrayList(value.selectedFolders)
 			}
 		}
 		super.initWithValue(value)
+	}
+
+	override fun updateOnOtherFiltersChangeNeeded(): Boolean {
+		return true
 	}
 }
