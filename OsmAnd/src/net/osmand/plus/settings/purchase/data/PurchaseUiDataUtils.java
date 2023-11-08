@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
@@ -77,7 +78,7 @@ public class PurchaseUiDataUtils {
 					boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseHelper.isFullVersionPurchased(app, false);
 					renewVisible = !isFullVersion && !InAppPurchaseHelper.isSubscribedToAny(app, false);
 				} else if (purchases.isOsmAndProSubscription(subscription)) {
-					renewVisible = !InAppPurchaseHelper.isOsmAndProAvailable(app, false);
+					renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
 				}
 			}
 		} else {

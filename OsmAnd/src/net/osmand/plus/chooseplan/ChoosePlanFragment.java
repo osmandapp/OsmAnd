@@ -26,7 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -244,8 +244,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
 
 		boolean fullVersion = !Version.isFreeVersion(app);
-		boolean subscribedToMaps = InAppPurchaseHelper.isSubscribedToMaps(app, false);
-		boolean fullVersionPurchased = InAppPurchaseHelper.isFullVersionPurchased(app, false);
+		boolean subscribedToMaps = InAppPurchaseUtils.isMapsPlusAvailable(app, false);
+		boolean fullVersionPurchased = InAppPurchaseUtils.isFullVersionAvailable(app, false);
 
 		boolean isFullVersion = fullVersion || fullVersionPurchased;
 		boolean mapsPlusPurchased = subscribedToMaps || isFullVersion;

@@ -5,7 +5,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -89,11 +89,11 @@ public class BackupInfo {
 	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
 			ExportSettingsType type = localFile.item != null ?
 					ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
-			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable)) {
+			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
 				files.add(localFile);
 			}
 		}

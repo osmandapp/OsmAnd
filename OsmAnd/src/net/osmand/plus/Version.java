@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

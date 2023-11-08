@@ -30,7 +30,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -187,7 +187,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
 		OsmandApplication app = getApp();
-		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
@@ -202,7 +202,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	public void onPurchaseDone() {
 		OsmandApplication app = getApp();
-		if (requestPurchaseScreen != null && InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+		if (requestPurchaseScreen != null && InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			requestPurchaseScreen.finish();
 			requestPurchaseScreen = null;
 			app.getOsmandMap().getMapView().setupRenderingView();

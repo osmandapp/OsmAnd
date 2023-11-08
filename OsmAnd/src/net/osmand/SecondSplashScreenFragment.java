@@ -16,6 +16,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
@@ -23,7 +24,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
@@ -87,21 +87,21 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		text.setId(TEXT_ID);
 		int textColorId = ColorUtilities.getTertiaryTextColorId(nightMode);
 		if (Version.isFreeVersion(app)) {
-			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+			if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_pro, textColorId));
-			} else if (InAppPurchaseHelper.isSubscribedToMaps(app)) {
+			} else if (InAppPurchaseUtils.isMapsPlusAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_maps_plus, textColorId));
-			} else if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			} else if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_osmlive, textColorId));
-			} else if (InAppPurchaseHelper.isFullVersionPurchased(app)) {
+			} else if (InAppPurchaseUtils.isFullVersionAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_inapp, textColorId));
 			} else {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand, textColorId));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+			if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_plus_pro, textColorId));
-			} else if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			} else if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_plus_osmlive, textColorId));
 			} else {
 				text.setImageDrawable(uiUtilities.getIcon(R.drawable.image_text_osmand_plus, textColorId));
@@ -168,19 +168,16 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return nightMode ?
-				R.color.status_bar_main_dark :
-				R.color.status_bar_transparent_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_transparent_light;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
+	public static boolean showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }

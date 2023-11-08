@@ -30,6 +30,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -194,7 +195,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	@Override
 	public void onGetItems() {
-		if (isAdded() && InAppPurchaseHelper.isSubscribedToAny(app)) {
+		if (isAdded() && InAppPurchaseUtils.isSubscribedToAny(app)) {
 			updateContent(false);
 		}
 	}

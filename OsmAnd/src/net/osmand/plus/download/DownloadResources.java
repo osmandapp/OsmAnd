@@ -14,7 +14,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
@@ -389,7 +389,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				String fileName = item.getFileName().toLowerCase();
 				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
 					nauticalWorldwideMaps.addItem(item);
-				} else if (InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+				} else if (InAppPurchaseUtils.isDepthContoursAvailable(app)) {
 					if (fileName.contains(NAUTICAL_DEPTH_POINTS_SUFFIX)) {
 						nauticalDepthPointsMaps.addItem(item);
 					} else {
