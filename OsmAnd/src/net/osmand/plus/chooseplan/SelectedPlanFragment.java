@@ -397,11 +397,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		}
 	}
 
-	@Override
-	protected void updateContent(boolean progress) {
-
-	}
-
 	private void bindIncludesFeatureItem(View itemView, OsmAndFeature feature) {
 		bindFeatureItem(itemView, feature, true);
 
@@ -413,14 +408,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				R.color.osmand_pro_item_bg);
 		int color = ColorUtilities.getColorWithAlpha(iconBgColor, 0.2f);
 		AndroidUtils.setBackground(itemView.findViewById(R.id.icon_background), createRoundedDrawable(color, ButtonBackground.ROUNDED));
-	}
-
-	protected Drawable getCheckmark() {
-		return getIcon(nightMode ? R.drawable.ic_action_checkmark_colored_night : R.drawable.ic_action_checkmark_colored_day);
-	}
-
-	protected Drawable getEmptyCheckmark() {
-		return getIcon(nightMode ? R.drawable.ic_action_radio_button_night : R.drawable.ic_action_radio_button_day);
 	}
 
 	@ColorRes

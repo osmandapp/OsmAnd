@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +24,7 @@ public class Version {
 
 	private static final Log log = PlatformUtil.getLog(Version.class);
 
+	public static final String TRIPLTEK_NAME = "TRIPLTEK";
 	public static final String FULL_VERSION_NAME = "net.osmand.plus";
 	private static final String FREE_VERSION_NAME = "net.osmand";
 	private static final String FREE_DEV_VERSION_NAME = "net.osmand.dev";
@@ -140,9 +142,7 @@ public class Version {
 	}
 
 	public static boolean isFreeVersion(@NonNull OsmandApplication app) {
-		return app.getPackageName().equals(FREE_VERSION_NAME) ||
-				app.getPackageName().equals(FREE_DEV_VERSION_NAME) ||
-				isHuawei();
+		return Algorithms.equalsToAny(app.getPackageName(), FREE_VERSION_NAME, FREE_DEV_VERSION_NAME) || isHuawei();
 	}
 
 	public static boolean isFullVersion(@NonNull OsmandApplication app) {
@@ -151,10 +151,11 @@ public class Version {
 
 	public static boolean isPaidVersion(@NonNull OsmandApplication app) {
 		return !isFreeVersion(app)
-				|| InAppPurchaseHelper.isFullVersionPurchased(app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
-				|| InAppPurchaseHelper.isSubscribedToMaps(app)
-				|| InAppPurchaseHelper.isOsmAndProAvailable(app);
+				|| InAppPurchaseUtils.isFullVersionAvailable(app)
+				|| InAppPurchaseUtils.isLiveUpdatesAvailable(app)
+				|| InAppPurchaseUtils.isMapsPlusAvailable(app)
+				|| InAppPurchaseUtils.isOsmAndProAvailable(app)
+				|| InAppPurchaseUtils.isTripltekPromoAvailable(app);
 	}
 
 	public static boolean isDeveloperVersion(@NonNull OsmandApplication app) {
@@ -163,6 +164,10 @@ public class Version {
 
 	public static boolean isDeveloperBuild(@NonNull OsmandApplication app) {
 		return getAppName(app).contains("~");
+	}
+
+	public static boolean isTripltekBuild() {
+		return Algorithms.equalsToAny(TRIPLTEK_NAME, Build.BRAND, Build.MANUFACTURER);
 	}
 
 	public static String getVersionForTracker(@NonNull OsmandApplication app) {
@@ -212,5 +217,13 @@ public class Version {
 			}
 		}
 		return false;
+	}
+
+	public static long getInstallTime(@NonNull OsmandApplication app) {
+		return app.getAppInitializer().getFirstInstalledTime();
+	}
+
+	public static long getUpdateTime(@NonNull OsmandApplication app) {
+		return app.getAppInitializer().getUpdateVersionTime();
 	}
 }

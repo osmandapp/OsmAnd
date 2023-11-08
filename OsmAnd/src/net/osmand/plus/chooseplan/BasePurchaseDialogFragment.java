@@ -131,6 +131,10 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		}
 	}
 
+	protected void updateContent(boolean progress) {
+
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -159,8 +163,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected abstract int getLayoutId();
-
-	protected abstract void updateContent(boolean progress);
 
 	protected abstract void updateToolbar(int verticalOffset);
 
@@ -263,6 +265,16 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {
 		return UiUtilities.createTintedDrawable(app, background.drawableId, color);
+	}
+
+	@NonNull
+	protected Drawable getCheckmark() {
+		return getIcon(nightMode ? R.drawable.ic_action_checkmark_colored_night : R.drawable.ic_action_checkmark_colored_day);
+	}
+
+	@NonNull
+	protected Drawable getEmptyCheckmark() {
+		return getIcon(nightMode ? R.drawable.ic_action_radio_button_night : R.drawable.ic_action_radio_button_day);
 	}
 
 	@ColorInt
