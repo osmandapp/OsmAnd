@@ -368,7 +368,6 @@ public class BinaryRoutePlanner {
 
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY) {
 		if (ctx.dijkstraMode != 0) {
-			// TODO that doesn't speed up A* cause it's usually a long route and slow calculation of squareRootDist 
 			return 0;
 		}
 		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
