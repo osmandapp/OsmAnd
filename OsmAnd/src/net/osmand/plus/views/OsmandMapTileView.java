@@ -588,7 +588,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		MapRendererView mapRenderer = getMapRenderer();
-		float diff = MapUtils.unifyRotationDiff(rotate, mapRenderer != null ? mapActivity.getMapRotateTarget() : getRotate());
+		float diff = MapUtils.unifyRotationDiff(rotate, mapRenderer != null && mapActivity != null ? mapActivity.getMapRotateTarget() : getRotate());
 		if (Math.abs(diff) > 5 || force) { // check smallest rotation
 			animatedDraggingThread.startRotate(rotate);
 		}
@@ -1455,12 +1455,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void moveTo(float dx, float dy, boolean notify) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			RotatedTileBox tb = currentViewport.copy();
-			PointI windowSize = mapRenderer.getState().getWindowSize();
-			PointI translationPoint31 = NativeUtilities.get31FromPixel(mapRenderer, tb,
-					(int) (windowSize.getX() / 2 + dx), (int) (windowSize.getY() / 2 + dy));
-			if (translationPoint31 != null) {
-				setTarget31Impl(translationPoint31.getX(), translationPoint31.getY());
+			PointI point31 = new PointI();
+			PointI center = mapRenderer.getTargetScreenPosition();
+			if (center.getX() < 0 || center.getY() < 0) {
+				PointD newCenter = new PointD(
+						(double) mapRenderer.getWindowWidth() / 2.0 + (double) dx,
+						(double) mapRenderer.getWindowHeight() / 2.0 + (double) dy);
+				if (mapRenderer.getLocationFromScreenPoint(newCenter, point31)) {
+					mapRenderer.setTarget(point31, false, false);
+					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+				}
+			} else {
+				PointD newCenter = new PointD(
+						(double) center.getX() + (double) dx,
+						(double) center.getY() + (double) dy);
+				PointI prevPoint31 = new PointI();
+				if (mapRenderer.getLocationFromScreenPoint(center, prevPoint31)
+						&& mapRenderer.getLocationFromScreenPoint(newCenter, point31)) {
+					point31 = NativeUtilities.calculateNewTarget31(mapRenderer.getTarget(),
+							new PointI(point31.getX() - prevPoint31.getX(), point31.getY() - prevPoint31.getY()));
+					mapRenderer.setTarget(point31);
+					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+				}
 			}
 		} else {
 			QuadPoint cp = currentViewport.getCenterPixelPoint();
@@ -2262,9 +2278,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private boolean isUseOpenGL() {
-		NavigationSession carNavigationSession = getApplication().getCarNavigationSession();
-		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
-		return getApplication().useOpenGlRenderer() && !androidAutoAttached;
+		return getApplication().useOpenGlRenderer();
 	}
 
 	private boolean isSteplessZoomSupported() {

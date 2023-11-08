@@ -56,6 +56,8 @@ public class RenderingContext {
 	public long renderingContextHandle;
 	
 	private float density = 1;
+	public boolean saveTextTile = false;
+	public String textTile;
 	
 	public void setDensityValue(float density) {
 		this.density =  density ;

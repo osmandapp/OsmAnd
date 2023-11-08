@@ -561,8 +561,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void switchMapControlsVisibility(boolean switchNavBarVisibility) {
 		MapActivity mapActivity = requireMapActivity();
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
-				|| mapActivity.getMeasurementToolFragment() != null
-				|| mapActivity.getPlanRouteFragment() != null
+				|| mapActivity.getFragmentsHelper().getMeasurementToolFragment() != null
+				|| mapActivity.getFragmentsHelper().getPlanRouteFragment() != null
 				|| mapActivity.getMapLayers().getDistanceRulerControlLayer().rulerModeOn()) {
 			return;
 		}

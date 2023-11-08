@@ -3,7 +3,6 @@ package net.osmand.plus.views.controls;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -12,9 +11,13 @@ import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListUpdateCallback;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
@@ -23,11 +26,15 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,6 +47,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 
+	private Map<Integer, Row> visibleRows = new HashMap<>();
 	private boolean topPanel;
 	private boolean nightMode;
 
@@ -62,6 +70,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 		nightMode = app.getDaynightHelper().isNightMode();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		definePanelSide(context, attrs);
+		init();
 	}
 
 	private void definePanelSide(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -70,66 +79,125 @@ public class VerticalWidgetPanel extends LinearLayout {
 		typedArray.recycle();
 	}
 
-	public void update(@Nullable DrawSettings drawSettings) {
-		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
-
+	private void init() {
 		removeAllViews();
 
 		ApplicationMode appMode = settings.getApplicationMode();
-
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
 		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
 
-		Iterator<Set<MapWidgetInfo>> rowIterator = pagedWidgets.listIterator();
-		while (rowIterator.hasNext()) {
-			int visibleViewsInRowCount = 0;
+		for (int i = 0; i < pagedWidgets.size(); i++) {
+			List<MapWidgetInfo> rowWidgets = new ArrayList<>(pagedWidgets.get(i));
+			Row row = new Row(rowWidgets, flatOrderedWidgets);
+			addView(row.view);
+			visibleRows.put(i, row);
+		}
+		updateRows();
+	}
 
-			List<MapWidgetInfo> rowWidgets = new ArrayList<>(rowIterator.next());
-			View row = inflate(getContext(), R.layout.vertical_widget_row, null);
-			LinearLayout rowContainer = row.findViewById(R.id.widgets_container);
+	public void update(@Nullable DrawSettings drawSettings) {
+		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
+		Map<Integer, Row> newRows = new HashMap<>();
 
-			MapWidgetInfo firstMapWidgetInfoInRow = null;
-			for (int i = 0; i < rowWidgets.size(); i++) {
-				MapWidgetInfo widgetInfo = rowWidgets.get(i);
-				MapWidget widget = widgetInfo.widget;
+		ApplicationMode appMode = settings.getApplicationMode();
+		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
+		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
 
-				if (firstMapWidgetInfoInRow == null) {
-					firstMapWidgetInfoInRow = widgetInfo;
-				} else {
-					setupWidgetSize(firstMapWidgetInfoInRow, widgetInfo);
-				}
-				if (widgetInfo.isEnabledForAppMode(appMode)) {
-					attachViewToRow(widget, rowContainer, getFollowingWidgets(widget, flatOrderedWidgets));
-					int nextElementIndex = i + 1;
-					if (nextElementIndex < rowWidgets.size() && rowWidgets.get(nextElementIndex).widget.isViewVisible()) {
-						addDivider(rowContainer, true);
+		for (int i = 0; i < pagedWidgets.size(); i++) {
+			List<MapWidgetInfo> rowWidgets = new ArrayList<>(pagedWidgets.get(i));
+			Row row = new Row(rowWidgets, flatOrderedWidgets);
+			newRows.put(i, row);
+		}
+
+		PagesDiffUtilCallback diffUtilCallback = new PagesDiffUtilCallback(visibleRows, newRows);
+		DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
+		diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
+			@Override
+			public void onInserted(int position, int count) {
+				for (int i = 0; i < count; i++) {
+					Row row = newRows.get(position + i);
+					if (row == null) {
+						break;
 					}
-					if (widget.isViewVisible()) {
-						visibleViewsInRowCount++;
+					View widgetView = row.view;
+					ViewParent viewParent = widgetView.getParent();
+					if (viewParent instanceof ViewGroup) {
+						((ViewGroup) viewParent).removeView(widgetView);
 					}
-				} else {
-					widgetInfo.widget.detachView(getWidgetsPanel());
+					row.setupRow();
+					addView(row.view, position + i);
 				}
+				visibleRows = newRows;
 			}
 
-			updateValueAlign(rowWidgets, visibleViewsInRowCount);
-			addView(row);
+			@Override
+			public void onRemoved(int position, int count) {
+				List<View> viewsToDelete = new ArrayList<>();
+				for (int i = 0; i < count; i++) {
+					viewsToDelete.add(getChildAt(position + i));
+				}
+				for (View view : viewsToDelete) {
+					removeView(view);
+				}
+				visibleRows = newRows;
+			}
 
-			if (rowIterator.hasNext() && visibleViewsInRowCount > 0) {
-				addDivider((ViewGroup) row, false);
+			@Override
+			public void onMoved(int fromPosition, int toPosition) {
+			}
+
+			@Override
+			public void onChanged(int position, int count, @Nullable Object payload) {
+				for (int i = 0; i < count; i++) {
+					removeViewAt(position + i);
+					Row row = newRows.get(position + i);
+					if (row != null) {
+						row.setupRow();
+						addView(row.view, position + i);
+					}
+				}
+				visibleRows = newRows;
+			}
+		});
+	}
+
+	public void updateRow(@NonNull MapWidget widget) {
+		for (Row row : visibleRows.values()) {
+			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
+				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
+					row.updateRow();
+					break;
+				}
 			}
 		}
 	}
 
+	private void updateDividerColors(boolean nightMode) {
+		for (Row row : visibleRows.values()) {
+			row.updateDividerColor(nightMode);
+		}
+	}
+
+	public void updateRows() {
+		for (Row row : visibleRows.values()) {
+			row.updateRow();
+		}
+	}
+
 	public void updateColors(@NonNull TextState textState) {
+		boolean oldNightMode = nightMode;
 		nightMode = textState.night;
 		invalidate();
+		updateRows();
+		if (oldNightMode != nightMode) {
+			updateDividerColors(nightMode);
+		}
 	}
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
 			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateValueAlign(visibleViewsInRowCount == 1);
+				((SimpleWidget) widgetInfo.widget).updateValueAlign(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
@@ -151,7 +219,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -186,19 +254,140 @@ public class VerticalWidgetPanel extends LinearLayout {
 		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
 	}
 
-	private void setupWidgetSize(@NonNull MapWidgetInfo firstWidgetInfo, @NonNull MapWidgetInfo widgetInfo) {
-		if (firstWidgetInfo.widget instanceof SimpleWidget && widgetInfo.widget instanceof SimpleWidget) {
-			SimpleWidget firstSimpleWidget = (SimpleWidget) firstWidgetInfo.widget;
-			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-			if (firstSimpleWidget.getWidgetSizePref().get() != simpleWidget.getWidgetSizePref().get()) {
-				simpleWidget.getWidgetSizePref().set(firstSimpleWidget.getWidgetSizePref().get());
-				simpleWidget.recreateView();
+	private void addVerticalDivider(@NonNull ViewGroup container) {
+		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
+	}
+
+	private class Row {
+
+		private final View view;
+		private final View bottomDivider;
+		private final LinearLayout rowContainer;
+
+		private final List<MapWidgetInfo> enabledMapWidgets = new ArrayList<>();
+		private final List<MapWidget> flatOrderedWidgets;
+
+		Row(@NonNull List<MapWidgetInfo> rowWidgets, @NonNull List<MapWidget> flatOrderedWidgets) {
+			this.view = inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_widget_row, null);
+			this.bottomDivider = view.findViewById(R.id.bottom_divider);
+			this.rowContainer = view.findViewById(R.id.widgets_container);
+			this.flatOrderedWidgets = flatOrderedWidgets;
+
+			ApplicationMode appMode = settings.getApplicationMode();
+			for (int j = 0; j < rowWidgets.size(); j++) {
+				MapWidgetInfo widgetInfo = rowWidgets.get(j);
+				if (widgetInfo.isEnabledForAppMode(appMode)) {
+					enabledMapWidgets.add(widgetInfo);
+				} else {
+					widgetInfo.widget.detachView(getWidgetsPanel());
+				}
+			}
+		}
+
+		public void updateRow() {
+			int visibleViewsInRowCount = 0;
+			boolean showBottomDivider = true;
+
+			for (int i = 0; i < enabledMapWidgets.size(); i++) {
+				MapWidget widget = enabledMapWidgets.get(i).widget;
+				if (widget.isViewVisible()) {
+					visibleViewsInRowCount++;
+					int nextWidgetIndex = i + 1;
+					showHideVerticalDivider(i, nextWidgetIndex < enabledMapWidgets.size() && enabledMapWidgets.get(nextWidgetIndex).widget.isViewVisible());
+				} else {
+					showHideVerticalDivider(i, false);
+				}
+				if (widget instanceof MapMarkersBarWidget || widget instanceof LanesWidget) {
+					showBottomDivider = false;
+				}
+			}
+			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
+			AndroidUiHelper.updateVisibility(bottomDivider, visibleViewsInRowCount > 0 && showBottomDivider);
+		}
+
+		public void updateDividerColor(boolean nightMode) {
+			for (int i = 1; i <= rowContainer.getChildCount(); i++) {
+				if (i % 2 == 0) {
+					View divider = rowContainer.getChildAt(i - 1).findViewById(R.id.vertical_divider);
+					if (divider != null) {
+						divider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+					}
+				}
+			}
+			bottomDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+		}
+
+		private void showHideVerticalDivider(int widgetIndex, boolean show) {
+			int dividerIndexInContainer = (widgetIndex * 2) + 1;
+			if (widgetIndex >= 0 && dividerIndexInContainer < rowContainer.getChildCount()) {
+				AndroidUiHelper.updateVisibility(rowContainer.getChildAt(dividerIndexInContainer), show);
+			}
+		}
+
+		public void setupRow() {
+			MapWidgetInfo firstMapWidgetInfoInRow = null;
+			for (int j = 0; j < enabledMapWidgets.size(); j++) {
+				MapWidgetInfo widgetInfo = enabledMapWidgets.get(j);
+				MapWidget widget = widgetInfo.widget;
+
+				if (firstMapWidgetInfoInRow == null) {
+					firstMapWidgetInfoInRow = widgetInfo;
+				} else {
+					setupWidgetSize(firstMapWidgetInfoInRow, widgetInfo);
+				}
+				attachViewToRow(widget, rowContainer, getFollowingWidgets(widget, flatOrderedWidgets));
+				int nextElementIndex = j + 1;
+				if (nextElementIndex < enabledMapWidgets.size()) {
+					addVerticalDivider(rowContainer);
+				}
+			}
+			updateRow();
+		}
+
+		private void setupWidgetSize(@NonNull MapWidgetInfo firstWidgetInfo, @NonNull MapWidgetInfo widgetInfo) {
+			if (firstWidgetInfo.widget instanceof SimpleWidget && widgetInfo.widget instanceof SimpleWidget) {
+				SimpleWidget firstSimpleWidget = (SimpleWidget) firstWidgetInfo.widget;
+				SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
+				if (firstSimpleWidget.getWidgetSizePref().get() != simpleWidget.getWidgetSizePref().get()) {
+					simpleWidget.getWidgetSizePref().set(firstSimpleWidget.getWidgetSizePref().get());
+					simpleWidget.recreateView();
+				}
 			}
 		}
 	}
 
-	private void addDivider(@NonNull ViewGroup container, boolean verticalDivider) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		inflater.inflate(verticalDivider ? R.layout.vertical_divider : R.layout.simple_divider_item, container);
+	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
+
+		private final Map<Integer, Row> oldRows;
+		private final Map<Integer, Row> newRows;
+
+		public PagesDiffUtilCallback(@NonNull Map<Integer, Row> oldRows, @NonNull Map<Integer, Row> newRows) {
+			this.oldRows = oldRows;
+			this.newRows = newRows;
+		}
+
+		@Override
+		public int getOldListSize() {
+			return oldRows.size();
+		}
+
+		@Override
+		public int getNewListSize() {
+			return newRows.size();
+		}
+
+		@Override
+		public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+			return oldItemPosition == newItemPosition;
+		}
+
+		@Override
+		public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+			Row oldRow = oldRows.get(oldItemPosition);
+			Row newRow = newRows.get(newItemPosition);
+			List<MapWidgetInfo> oldMapWidgets = oldRow != null ? oldRow.enabledMapWidgets : Collections.emptyList();
+			List<MapWidgetInfo> newMapWidgets = newRow != null ? newRow.enabledMapWidgets : Collections.emptyList();
+			return Algorithms.objectEquals(oldMapWidgets, newMapWidgets);
+		}
 	}
 }

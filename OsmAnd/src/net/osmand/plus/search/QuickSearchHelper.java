@@ -700,7 +700,7 @@ public class QuickSearchHelper implements ResourceListener {
 		TopToolbarController controller = new PoiFilterBarController();
 		View.OnClickListener listener = v -> {
 			hidePoiFilterOnMap(mapActivity, controller, action);
-			mapActivity.showQuickSearch(filter);
+			mapActivity.getFragmentsHelper().showQuickSearch(filter);
 		};
 		controller.setOnBackButtonClickListener(listener);
 		controller.setOnTitleClickListener(listener);

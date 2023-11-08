@@ -55,7 +55,7 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		String deviceId = prefSettings.getModeValue(getSelectedAppMode());
 		String deviceName = app.getString(R.string.shared_string_none);
 		boolean deviceFound = false;
-		if (!Algorithms.isEmpty(deviceId)) {
+		if (!Algorithms.isEmpty(deviceId) && !ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
 			AbstractDevice<?> device = plugin.getDevice(deviceId);
 			if (device != null) {
 				deviceName = device.getName();
@@ -87,7 +87,7 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 
 	@Override
 	public void selectNewDevice(@Nullable AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType) {
-		String deviceId = null;
+		String deviceId = ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY;
 		if (device != null) {
 			deviceId = device.getDeviceId();
 		}

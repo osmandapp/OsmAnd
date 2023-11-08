@@ -29,6 +29,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
@@ -71,7 +72,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			closeDashboard();
 			if (getActivity() instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) getActivity();
-				mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW, false);
+				mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false);
 			}
 		});
 

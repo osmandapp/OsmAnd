@@ -86,7 +86,7 @@ public class XMasDialogFragment extends DialogFragment {
 				dialog.dismiss();
 				PoiCategory xmas = mapActivity.getMyApplication().getPoiTypes().getPoiCategoryByName("xmas");
 				if (xmas != null) {
-					mapActivity.showQuickSearch(xmas);
+					mapActivity.getFragmentsHelper().showQuickSearch(xmas);
 				}
 			}
 		});

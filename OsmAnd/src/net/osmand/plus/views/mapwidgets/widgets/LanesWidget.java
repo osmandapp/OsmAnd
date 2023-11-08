@@ -160,14 +160,7 @@ public class LanesWidget extends MapWidget {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
-		boolean specialPosition = true;
-		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesBaseWidget
-					|| widget instanceof StreetNameWidget) {
-				specialPosition = false;
-				break;
-			}
-		}
+		boolean specialPosition = followingWidgets.isEmpty();
 		if (specialPosition) {
 			specialContainer.addView(view);
 		} else {

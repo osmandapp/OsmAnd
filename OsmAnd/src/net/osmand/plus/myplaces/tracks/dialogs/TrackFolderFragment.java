@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -127,9 +129,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 						currentFolder);
 				return true;
 			}
-		}
-		if (itemId == R.id.action_folder_menu) {
-			if (showFolderOptionMenu()) return true;
+		} else if (itemId == R.id.action_folder_menu) {
+			return showFolderOptionMenu();
 		}
 		return false;
 	}
@@ -217,24 +218,27 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		showTracksSelection(trackItem, null);
+		ScreenPositionData positionData = new ScreenPositionData(trackItem, getViewOnScreenY(view));
+		showTracksSelection(trackItem, null, positionData);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		showTracksSelection(null, group);
+		ScreenPositionData positionData = new ScreenPositionData(group, getViewOnScreenY(view));
+		showTracksSelection(null, group, positionData);
 	}
 
-	private void showTracksSelection(@Nullable TrackItem trackItem, @Nullable TracksGroup tracksGroup) {
+	private void showTracksSelection(@Nullable TrackItem trackItem, @Nullable TracksGroup tracksGroup,
+	                                 @Nullable ScreenPositionData screenPositionData) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			if (selectedFolder != null && selectedFolder instanceof TrackFolder) {
+			if (selectedFolder != null) {
 				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
 				Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
-				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
+				foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups, screenPositionData);
 			} else if (smartFolder != null) {
 				Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
-				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null);
+				foldersHelper.showTracksSelection(smartFolder, this, trackItems, null, screenPositionData);
 			}
 		}
 	}

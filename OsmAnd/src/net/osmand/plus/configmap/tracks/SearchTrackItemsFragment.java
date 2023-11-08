@@ -22,6 +22,7 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchTrackBaseFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.ScreenPositionData;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -121,7 +122,8 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 			@Override
 			public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
 				if (!selectionMode) {
-//					showTracksSelection(trackItem);
+//					ScreenPositionData positionData = new ScreenPositionData(trackItem, getViewOnScreenY(view));
+//					showTracksSelection(trackItem, positionData);
 				}
 			}
 
@@ -142,13 +144,14 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 				}
 			}
 
-			private void showTracksSelection(@NonNull TrackItem trackItem) {
+			private void showTracksSelection(@NonNull TrackItem trackItem,
+			                                 @Nullable ScreenPositionData screenPositionData) {
 				Fragment target = getTargetFragment();
 				FragmentManager manager = getFragmentManager();
 				if (target instanceof BaseTrackFolderFragment && manager != null) {
 					BaseTrackFolderFragment fragment = (BaseTrackFolderFragment) target;
 					TrackFolder trackFolder = fragment.getSelectedFolder();
-					TracksSelectionFragment.showInstance(manager, trackFolder, fragment, Collections.singleton(trackItem), null);
+					TracksSelectionFragment.showInstance(manager, trackFolder, fragment, Collections.singleton(trackItem), null, screenPositionData);
 
 					app.runInUIThread(() -> dismissAllowingStateLoss());
 				}

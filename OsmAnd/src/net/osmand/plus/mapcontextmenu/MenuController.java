@@ -180,7 +180,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	@Override
-	protected void updateNightMode() {
+	public void updateNightMode() {
 		super.updateNightMode();
 		if (builder != null) {
 			builder.setLight(!nightMode);

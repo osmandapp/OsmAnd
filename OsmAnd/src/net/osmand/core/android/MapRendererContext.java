@@ -113,6 +113,8 @@ public class MapRendererContext {
 	 */
 	public void setMapRendererView(@Nullable MapRendererView mapRendererView) {
 		boolean update = (this.mapRendererView != mapRendererView);
+		if (update && this.mapRendererView != null)
+			this.mapRendererView.stopRenderer();
 		this.mapRendererView = mapRendererView;
 		if (!update) {
 			return;
@@ -122,6 +124,10 @@ public class MapRendererContext {
 		}
 	}
 
+	@Nullable
+	public MapRendererView getMapRendererView() {
+		return mapRendererView;
+	}
 	public boolean isVectorLayerEnabled() {
 		return !app.getSettings().MAP_ONLINE_DATA.get();
 	}
@@ -158,6 +164,10 @@ public class MapRendererContext {
 		this.obfsCollections = obfsCollections;
 		updateMapPresentationEnvironment();
 		recreateRasterAndSymbolsProvider(providerType);
+	}
+
+	public float getDensity() {
+		return density;
 	}
 
 	protected int getRasterTileSize() {
@@ -426,9 +436,10 @@ public class MapRendererContext {
 			mapRendererView.setMapLayerProvider(providerType.layerIndex, obfMapRasterLayerProvider);
 		}
 		if (obfMapSymbolsProvider != null) {
-			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
+			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
+		setMapBackgroundColor();
 	}
 
 	public void updateElevationConfiguration() {

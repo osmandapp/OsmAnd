@@ -418,6 +418,33 @@ public class NativeUtilities {
 		return target31;
 	}
 
+	@NonNull
+	public static PointI calculateNewTarget31(@NonNull PointI currentTarget31, @NonNull PointI offset31) {
+		int deltaX = offset31.getX();
+		int deltaY = offset31.getY();
+		int nextTargetX = currentTarget31.getX();
+		int nextTargetY = currentTarget31.getY();
+		if (Integer.MAX_VALUE - nextTargetX < deltaX) {
+			deltaX -= Integer.MAX_VALUE;
+			deltaX--;
+		}
+		if (Integer.MAX_VALUE - nextTargetY < deltaY) {
+			deltaY -= Integer.MAX_VALUE;
+			deltaY--;
+		}
+		nextTargetX += deltaX;
+		nextTargetY += deltaY;
+		if (nextTargetX < 0) {
+			nextTargetX += Integer.MAX_VALUE;
+			nextTargetX++;
+		}
+		if (nextTargetY < 0) {
+			nextTargetY += Integer.MAX_VALUE;
+			nextTargetY++;
+		}
+		return new PointI(nextTargetX, nextTargetY);
+	}
+
 	public static boolean containsLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
 	                                     @NonNull LatLon latLon) {
 		return containsLatLon(mapRenderer, tileBox, latLon.getLatitude(), latLon.getLongitude());

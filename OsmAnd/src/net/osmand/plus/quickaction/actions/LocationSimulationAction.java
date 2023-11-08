@@ -347,7 +347,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	@Nullable
 	private CreateEditActionDialog getDialog(@NonNull MapActivity mapActivity) {
-		Fragment fragment = mapActivity.getFragment(TAG);
+		Fragment fragment = mapActivity.getFragmentsHelper().getFragment(TAG);
 		return fragment instanceof CreateEditActionDialog ? ((CreateEditActionDialog) fragment) : null;
 	}
 
