@@ -133,8 +133,9 @@ class ListFilterAdapter(
 					filter.getSelectAllItemIcon(
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
-				holder.switch.setOnCheckedChangeListener { _, isChecked ->
-					onAllFolderSelected(holder.switch, isChecked)
+				holder.itemView.setOnClickListener {
+					onAllFolderSelected(holder.switch, !filter.isSelectAllItemsSelected)
+					this.notifyItemChanged(position)
 				}
 			}
 		}
