@@ -33,9 +33,9 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 	public static final String TAG = ContextMenuScrollFragment.class.getSimpleName();
 
-	private static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
-	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
-	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
+	protected static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
+	protected static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
+	protected static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
 	@Nullable
 	private View mapBottomHudButtons;

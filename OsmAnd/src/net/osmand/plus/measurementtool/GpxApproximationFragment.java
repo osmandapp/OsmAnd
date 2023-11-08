@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -31,6 +32,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -190,6 +196,38 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			profileCard.setListener(this);
 			cardsContainer.addView(profileCard.build(mapActivity));
 		}
+	}
+
+	@Override
+	protected void setupControlButtons(@NonNull View view) {
+		MapActivity mapActivity = requireMapActivity();
+		ImageView zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		ImageView zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		ImageView myLocButtonView = view.findViewById(R.id.map_my_location_button);
+
+		MapLayers mapLayers = mapActivity.getMapLayers();
+		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
+
+		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, getButtonId(ZOOM_IN_BUTTON_ID)) {
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, getButtonId(ZOOM_OUT_BUTTON_ID)) {
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, getButtonId(BACK_TO_LOC_BUTTON_ID), false) {
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+
+		setupMapRulerWidget(view, mapLayers);
 	}
 
 	@Override

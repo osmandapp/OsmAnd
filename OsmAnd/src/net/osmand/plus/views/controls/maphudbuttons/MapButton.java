@@ -124,6 +124,28 @@ public abstract class MapButton {
 		}
 	}
 
+	public void updateIcon(boolean isNightMode) {
+		if (nightBackgroundId != 0 && dayBackgroundId != 0) {
+			view.setBackground(AppCompatResources.getDrawable(app, isNightMode ? nightBackgroundId : dayBackgroundId));
+		}
+		if (themedIconId == null) {
+			return;
+		}
+		Drawable drawable = null;
+		int iconId = themedIconId.getIconId(isNightMode);
+		if (iconId != 0) {
+			if (iconColor != null) {
+				drawable = iconsCache.getPaintedIcon(iconId, iconColor);
+			} else {
+				drawable = iconsCache.getIcon(iconId, isNightMode ? nightIconColorId : dayIconColorId);
+			}
+		}
+
+		if (drawable != null) {
+			setDrawable(drawable);
+		}
+	}
+
 	protected void setIconColor(@ColorInt int iconColor) {
 		if (!Algorithms.objectEquals(this.iconColor, iconColor)) {
 			this.iconColor = iconColor;
@@ -150,23 +172,7 @@ public abstract class MapButton {
 		this.forceUpdate = false;
 		this.nightMode = nightMode;
 
-		if (nightBackgroundId != 0 && dayBackgroundId != 0) {
-			view.setBackground(AppCompatResources.getDrawable(app, nightMode ? nightBackgroundId : dayBackgroundId));
-		}
-
-		Drawable drawable = null;
-		int iconId = themedIconId.getIconId(nightMode);
-		if (iconId != 0) {
-			if (iconColor != null) {
-				drawable = iconsCache.getPaintedIcon(iconId, iconColor);
-			} else {
-				drawable = iconsCache.getIcon(iconId, nightMode ? nightIconColorId : dayIconColorId);
-			}
-		}
-
-		if (drawable != null) {
-			setDrawable(drawable);
-		}
+		updateIcon(nightMode);
 	}
 
 	protected abstract boolean shouldShow();

@@ -29,6 +29,7 @@ public class MyLocationButton extends MapButton {
 		this.contextMenuAllowed = contextMenuAllowed;
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_circle_blue);
+		updateState(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private boolean moveBackToLocation(boolean showLocationMenu) {
@@ -81,6 +82,7 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
+		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setMapLinkedToLocationState() {
@@ -91,6 +93,7 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
+		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setReturnToLocationState() {
@@ -101,6 +104,7 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
+		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setMyLocationListeners() {

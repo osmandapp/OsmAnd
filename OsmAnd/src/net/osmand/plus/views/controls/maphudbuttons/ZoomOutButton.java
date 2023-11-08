@@ -21,6 +21,7 @@ public class ZoomOutButton extends MapButton {
 			app.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
 		});
 		setOnLongClickListener(MapControlsLayer.getOnClickMagnifierListener(mapActivity.getMapView()));
+		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	@Override
