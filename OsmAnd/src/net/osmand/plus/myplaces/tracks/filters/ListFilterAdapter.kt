@@ -74,8 +74,11 @@ class ListFilterAdapter(
 					false)
 				val topBottomPadding =
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_small)
-				val leftRightPadding =
+				val leftRightPadding = if(items.size > 0 && filter.getItemIcon(items[0]) != null) {
+					app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
+				} else {
 					app.resources.getDimensionPixelSize(R.dimen.content_padding)
+				}
 				view.setPadding(
 					leftRightPadding,
 					topBottomPadding,
@@ -133,6 +136,9 @@ class ListFilterAdapter(
 					filter.getSelectAllItemIcon(
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
+				holder.switch.setOnCheckedChangeListener { _, isChecked ->
+					onAllFolderSelected(holder.switch, isChecked)
+				}
 				holder.itemView.setOnClickListener {
 					onAllFolderSelected(holder.switch, !filter.isSelectAllItemsSelected)
 					this.notifyItemChanged(position)
