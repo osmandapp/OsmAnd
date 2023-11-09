@@ -462,6 +462,13 @@ public class HHRoutingDB {
 		int rtIndex = 0;
 		
 		
+		public int midX() {
+			return startX / 2 + endX / 2 ;
+		}
+		
+		public int midY() {
+			return startY / 2 + endY/ 2 ;
+		}
 		
 		public List<NetworkDBSegment> connected(boolean rev) {
 			return rev ? connectedReverse : connected;

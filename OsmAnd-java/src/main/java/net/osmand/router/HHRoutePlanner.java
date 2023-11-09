@@ -272,7 +272,7 @@ public class HHRoutePlanner {
 			
 			// test data for debug swap
 			c = HHRoutingConfig.dijkstra(0); 
-//			c = HHRoutingConfig.astar(1);
+			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 //			c.ROUTE_LAST_MILE = true;
@@ -751,10 +751,18 @@ public class HHRoutePlanner {
 			if (c.USE_MIDPOINT && Math.min(depth, c.MIDPOINT_MAX_DEPTH) > nextPoint.rtCnt + c.MIDPOINT_ERROR) {
 				continue;
 			}
-			double cost = point.distanceFromStart(reverse) + distanceToEnd(c, hctx, reverse, nextPoint) + connected.dist ;
+			double cost = point.distanceFromStart(reverse)  + connected.dist + distanceToEnd(c, hctx, reverse, nextPoint) ;
 			double exCost = nextPoint.rtCost(reverse);
 			if ((exCost == 0 && !nextPoint.visited(reverse)) || cost < exCost) {
+				if (DEBUG_VERBOSE_LEVEL > 2) {
+					System.out.printf("Add  %s to visit - cost %.2f (%.2f prev, %.2f dist) > prev cost %.2f \n", nextPoint, 
+							cost, point.distanceFromStart(reverse), connected.dist, exCost);
+				}
 				if (nextPoint.visited(reverse)) {
+					
+					System.out.printf("D %s - %s  %.2f", point, nextPoint,
+							MapUtils.squareRootDist31(point.midX(), point.midY(), nextPoint.midX(), nextPoint.midY())
+									/ ctx.getRouter().getMaxSpeed());
 					throw new IllegalStateException(String.format("%s visited - cost %.2f > prev cost %.2f", nextPoint, cost, exCost));
 				}
 				nextPoint.setCostParentRt(reverse, cost, point, connected.dist);
@@ -762,9 +770,6 @@ public class HHRoutePlanner {
 				hctx.queueAdded.add(nextPoint);
 				queue.add(new NetworkDBPointCost(nextPoint, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
 				stats.addQueueTime += (System.nanoTime() - tm) / 1e6;
-				if (DEBUG_VERBOSE_LEVEL > 2) {
-					System.out.printf("Add  %s to visit - cost %.2f > prev cost %.2f \n", nextPoint, cost, exCost);
-				}
 				stats.addedVertices++;
 			}
 		}
@@ -776,7 +781,7 @@ public class HHRoutePlanner {
 			if (distanceToEnd == 0) {
 				distanceToEnd = c.HEURISTIC_COEFFICIENT * 
 						MapUtils.squareRootDist31(reverse ? hctx.startX : hctx.endX, reverse ? hctx.startY : hctx.endY,
-								nextPoint.startX / 2 + nextPoint.endX / 2, nextPoint.startY / 2 + nextPoint.endY / 2)
+								nextPoint.midX(), nextPoint.midY())
 						/ ctx.getRouter().getMaxSpeed();
 				nextPoint.setDistanceToEnd(reverse, distanceToEnd);
 			}
