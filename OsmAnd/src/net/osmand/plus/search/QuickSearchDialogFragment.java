@@ -368,6 +368,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 						app.getPoiFilters().clearSelectedPoiFilters();
 						app.getPoiFilters().addSelectedPoiFilter(filter);
+						getMapActivity().getContextMenu().close();
 
 						mapActivity.getContextMenu().closeActiveToolbar();
 						showToolbar();
