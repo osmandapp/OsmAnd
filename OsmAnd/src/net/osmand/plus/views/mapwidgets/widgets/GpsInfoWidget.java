@@ -31,7 +31,7 @@ public class GpsInfoWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		GPSInfo gpsInfo = locationProvider.getGPSInfo();
 		if (isUpdateNeeded()
 				|| gpsInfo.usedSatellites != usedSatellites

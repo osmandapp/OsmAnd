@@ -196,21 +196,25 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	@DrawableRes
-	protected int getBackgroundResource(@NonNull TextState textState){
+	protected int getBackgroundResource(@NonNull TextState textState) {
 		return textState.widgetBackgroundId;
 	}
 
 	@Override
 	public boolean isViewVisible() {
-		return container.getVisibility() == View.VISIBLE;
+		return getContentView().getVisibility() == View.VISIBLE;
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		boolean updatedVisibility = AndroidUiHelper.updateVisibility(container, visible);
+		boolean updatedVisibility = AndroidUiHelper.updateVisibility(getContentView(), visible);
 		if (updatedVisibility && app.accessibilityEnabled()) {
-			container.setFocusable(visible);
+			getContentView().setFocusable(visible);
 		}
 		return updatedVisibility;
+	}
+
+	protected View getContentView() {
+		return container;
 	}
 
 	public boolean updateBannerVisibility(boolean visible) {

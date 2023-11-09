@@ -52,7 +52,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		int currentTrackIndex = savingTrackHelper.getCurrentTrackIndex();
 		double elevationDiff = getElevationDiff(this.currentTrackIndex != currentTrackIndex);
 		this.currentTrackIndex = currentTrackIndex;

@@ -26,12 +26,12 @@ public class FPSTextInfoWidget extends SimpleWidget {
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, DEV_FPS, customId, widgetsPanel);
 		this.mapView = mapActivity.getMapView();
-		updateInfo(null);
+		updateSimpleWidgetInfo(null);
 		setIcons(DEV_FPS);
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		MapRendererView mv = mapView.getMapRenderer();
 		if (mv != null) {
 			int frameId = mv.getFrameId();
