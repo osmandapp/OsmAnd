@@ -30,6 +30,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	private WidgetType widgetType;
 	private AbstractDevice<?> sourceDevice;
 	private AppCompatImageView deviceIcon;
+	private MapWidgetInfo widgetInfo;
 
 	@NonNull
 	@Override
@@ -50,12 +51,15 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-		if (widgetInfo != null) {
-			widgetType = widgetInfo.getWidgetType();
-			sensorWidget = ((SensorTextWidget) widgetInfo.widget);
-		} else {
-			dismiss();
+		if(widgetInfo == null) {
+			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+			if (widgetInfo != null) {
+				widgetType = widgetInfo.getWidgetType();
+				sensorWidget = ((SensorTextWidget) widgetInfo.widget);
+				setupDataSource();
+			} else {
+				dismiss();
+			}
 		}
 	}
 
@@ -69,11 +73,11 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.sensor_widget_settings_fragment, container);
 		deviceIcon = view.findViewById(R.id.device_icon);
-		setupDataSource();
 		view.findViewById(R.id.widget_source_card).setOnClickListener((v) -> {
 			SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorWidget.getFieldType(), getSourceDeviceId());
 		});
 		themedInflater.inflate(R.layout.divider, container);
+		updateSourceDeviceUI();
 		super.setupContent(themedInflater, container);
 	}
 
@@ -87,7 +91,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 			sensorWidget.getDeviceId(appMode);
 			sourceDevice = sensorWidget.getWidgetSensor().getDevice();
 		}
-		updateSourceDeviceUI();
 	}
 
 	private void updateSourceDeviceUI() {
