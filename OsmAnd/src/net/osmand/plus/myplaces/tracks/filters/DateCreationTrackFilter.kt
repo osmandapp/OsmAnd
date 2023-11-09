@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.util.Log
 import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -9,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
+class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(R.string.date_of_creation, DATE_CREATION, filterChangedListener) {
 	var initialValueFrom = Date().time
 	var initialValueTo = Date().time
@@ -18,14 +17,14 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	var valueFrom = Date().time
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	@Expose
 	var valueTo = Date().time
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	override fun isEnabled(): Boolean {
@@ -35,16 +34,17 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 	}
 
 	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
-		val day1String = DATE_FORMAT.format(day1)
-		val day2String = DATE_FORMAT.format(day2)
-		return day1String.equals(day2String)
+		val day1String: String = getDateFormat().format(day1)
+		val day2String: String = getDateFormat().format(day2)
+		return day1String == day2String
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			trackItem.dataItem!!.fileCreationTime > valueFrom && trackItem.dataItem!!.fileCreationTime < valueTo
+			val result = trackItem.dataItem!!.fileCreationTime in valueFrom..valueTo
+			result
 		}
 	}
 
@@ -68,8 +68,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener) :
 				isDatesEquals(valueTo, other.valueTo)
 	}
 
-
-	companion object {
-		private val DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+	private fun getDateFormat(): SimpleDateFormat {
+		return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	}
 }

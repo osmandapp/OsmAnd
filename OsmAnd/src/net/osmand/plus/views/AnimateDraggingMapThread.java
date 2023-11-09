@@ -51,7 +51,6 @@ public class AnimateDraggingMapThread {
 
 	private static final float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
 	private static final float TARGET_MOVE_DECELERATION = 8000f;
-	private static final int SYMBOLS_UPDATE_INTERVAL = 2000;
 
 	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
 	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
@@ -144,6 +143,7 @@ public class AnimateDraggingMapThread {
 			} else {
 				renderer.resetMapTarget();
 			}
+			tileView.setCurrentZoom();
 		}
 	}
 
@@ -551,7 +551,6 @@ public class AnimateDraggingMapThread {
 		boolean animateAzimuth = false;
 		boolean animateElevationAngle = false;
 
-		mapRenderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 		if (!stopped) {
 			mapRenderer.resumeMapAnimation();
 		}

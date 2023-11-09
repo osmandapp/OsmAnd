@@ -5420,11 +5420,99 @@
     <string name="help_article_navigation_routing_osmand_routing_name">O wyznaczaniu trasy OsmAnd</string>
     <string name="shared_string_setup">Ustawienie</string>
     <string name="smart_folder_name_present">Taki mądry folder już istnieje</string>
-    <string name="smart_folder_saved">Zapisano mądry folder</string>
+    <string name="smart_folder_saved">Zapisano inteligentny folder</string>
     <string name="help_article_purchases_giveaway_name">Upominek</string>
     <string name="add_smart_folder">Dodaj mądry folder</string>
     <string name="empty_name">Pusta nazwa</string>
     <string name="edit_fiilter">Edycja filtra</string>
     <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
     <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
+    <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX
+\n
+\n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud”
+\n
+\n • Nowy format map terenu z obsługą rzeźby terenu 3D
+\n
+\n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów
+\n
+\n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI
+\n
+\n • Jedna lista widżetów dla panelu górnego/dolnego
+\n
+\n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych
+\n
+\n • Linie konturowe działają z dowolnym „źródłem mapy”
+\n
+\n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych
+\n
+\n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania
+\n
+\n • Dodano opcję „Ogłaszaj zboczenie z trasy”
+\n
+\n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku
+\n
+\n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej
+\n
+\n • Dodano obsługę trasy „Via ferrata” dla pieszych
+\n
+\n • Dodano skalę „CAI” do klasyfikacji trudności tras
+\n
+\n • Naprawiono wybór języka dla poszczególnych aplikacji
+\n
+\n • Dodano obsługę ikon tematycznych
+\n
+\n • OsmAnd Cloud: dodano opcję usunięcia konta
+\n
+\n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu
+\n
+\n • Przerobiono japońskie komunikaty głosowe
+\n
+\n • Przerobiono zmianę wysokości i ocenę nachylenia
+\n
+\n</string>
+    <string name="empty_smart_folder_title">Brak pasującej trasy</string>
+    <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
+    <string name="configure_filter">Skonfiguruj filtr</string>
+    <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
+    <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
+    <string name="shared_string_loading">Wczytywanie</string>
+    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry\?</string>
+    <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
+    <string name="loading_tracks">Ponowne wczytywanie tras</string>
+    <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
+    <string name="cloud_trash_clear_confirmation">Czy na pewno chcesz trwale usunąć wszystkie elementy z Kosza\? Tej czynności nie można cofnąć.</string>
+    <string name="restore_from_trash">Przywróć z kosza</string>
+    <string name="delete_all_items">Usuń wszystkie elementy</string>
+    <string name="trash_is_empty_banner_desc">Pliki usunięte z OsmAnd Cloud będą dostępne tutaj przez %1$s dni.</string>
+    <string name="shared_string_empty_trash">Opróżnij kosz</string>
+    <string name="shared_string_delete_immediately">Usuń natychmiast</string>
+    <string name="shared_string_is_deleted">%1$s został usunięty.</string>
+    <string name="cloud_item_restored">%1$s zostało przywrócone do Cloud.</string>
+    <string name="trash_alert_card_desc">Elementy w koszu zostaną usunięte po %1$s dniach.</string>
+    <string name="trash_is_empty">Kosz jest pusty</string>
+    <string name="shared_string_trash">Śmieci</string>
+    <string name="shared_string_delete_item">Usuń element</string>
+    <string name="change_button">Przycisk zmiany</string>
+    <string name="enable_to_use_external_input_device">Umożliwia korzystanie z zewnętrznego urządzenia wejściowego z OsmAnd</string>
+    <string name="root_folder">Główny folder</string>
+    <string name="shared_string_rows">Rzędy</string>
+    <string name="key_event_action_move_left">Przesuń w lewo</string>
+    <string name="all_folders">Wszystkie foldery</string>
+    <string name="deletion_error">Błąd usuwania</string>
+    <string name="key_event_action_move_right">Przesuń w prawo</string>
+    <string name="shared_string_show_less">Pokaż mniej</string>
+    <string name="shared_string_button">Przycisk</string>
+    <string name="folder">Folder</string>
+    <string name="key_event_action_take_media_note">Uwaga dla mediów</string>
+    <string name="shared_string_action">Akcja</string>
+    <string name="add_new_type">Dodaj nowy typ</string>
+    <string name="key_event_action_move_up">Przesuń w górę</string>
+    <string name="key_event_action_open_search_view">Otwórz widok wyszukiwania</string>
+    <string name="key_event_action_zoom_out">Powiększenie</string>
+    <string name="key_event_action_toggle_drower">Pokaż/ukryj menu boczne</string>
+    <string name="key_event_action_move_to_my_location">Przenieś do mojej lokalizacji</string>
+    <string name="not_specified">Nie określono</string>
+    <string name="download_to_device">Pobierz na urządzenie</string>
+    <string name="key_event_action_move_down">Przesuń w dół</string>
+    <string name="key_event_category_actions">Akcje</string>
 </resources>

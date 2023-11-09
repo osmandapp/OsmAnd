@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -38,7 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter, InAppPurchaseListener {
+public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
+		InAppPurchaseListener, SelectGpxTaskListener {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
@@ -105,6 +109,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		recreateView();
+	}
+
+	@Override
+	public void onGpxSelectionFinished() {
+		onRefreshItem(GPX_FILES_ID);
 	}
 
 	private void recreateView() {
@@ -271,6 +280,18 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		int profileColor = appMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getSelectedGpxHelper().addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 	}
 
 	@Nullable

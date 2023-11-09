@@ -19,6 +19,7 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.settings.enums.TracksSortMode
+import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
@@ -30,13 +31,12 @@ class SearchTracksAdapter(
     private val app: OsmandApplication,
     private var trackItems: List<TrackItem>,
     private val nightMode: Boolean,
-    private var selectionMode: Boolean
+    private var selectionMode: Boolean,
+    private var filter: TracksSearchFilter
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private val locationViewCache: UpdateLocationViewCache
-    private val filter: TracksSearchFilter = TracksSearchFilter(app, trackItems)
-
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
     private var sortMode: TracksSortMode = TracksSortMode.getDefaultSortMode()
@@ -46,11 +46,30 @@ class SearchTracksAdapter(
     private var emptyTracksListener: EmptyTracksListener? = null
 
     init {
-        updateFilteredItems(trackItems)
+        if (filter.filteredTrackItems != null) {
+            updateFilteredItems(filter.filteredTrackItems!!)
+        } else {
+            updateFilteredItems(trackItems)
+        }
         locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
         locationViewCache.arrowResId = R.drawable.ic_direction_arrow
         locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
     }
+
+    constructor(
+        app: OsmandApplication,
+        trackItems: List<TrackItem>,
+        nightMode: Boolean,
+        selectionMode: Boolean
+    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems))
+
+    constructor(
+        app: OsmandApplication,
+        trackItems: List<TrackItem>,
+        nightMode: Boolean,
+        selectionMode: Boolean,
+        currentFolder: TrackFolder?
+    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems, currentFolder))
 
     fun getFilteredItems(): Set<TrackItem> {
         return HashSet(filteredItems)

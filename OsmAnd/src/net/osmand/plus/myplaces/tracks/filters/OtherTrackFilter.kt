@@ -6,7 +6,7 @@ import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.OTHER
 
-class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: FilterChangedListener) :
+class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(R.string.shared_string_other, OTHER, filterChangedListener) {
 
 	override fun isEnabled(): Boolean {
@@ -17,30 +17,30 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 	var isVisibleOnMap: Boolean = false
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	@Expose
 	var hasWaypoints: Boolean = false
 		set(value) {
 			field = value
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		if (isVisibleOnMap) {
 			val selectedGpxHelper = app.selectedGpxHelper
-			if (selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null) {
-				return true
+			if (selectedGpxHelper.getSelectedFileByPath(trackItem.path) == null) {
+				return false
 			}
 		}
 		if (hasWaypoints) {
 			val wptPointsCount = trackItem.dataItem?.analysis?.wptPoints ?: 0
-			if (wptPointsCount > 0) {
-				return true
+			if (wptPointsCount == 0) {
+				return false
 			}
 		}
-		return !isVisibleOnMap && !hasWaypoints
+		return true
 	}
 
 	fun getSelectedParamsCount(): Int {
@@ -54,7 +54,7 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 		if (value is OtherTrackFilter) {
 			isVisibleOnMap = value.isVisibleOnMap
 			hasWaypoints = value.hasWaypoints
-			filterChangedListener.onFilterChanged()
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 

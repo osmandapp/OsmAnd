@@ -15,22 +15,22 @@ internal enum class SmartFolderOption(
 	SHOW_ALL_TRACKS(
 		R.string.show_all_tracks_on_the_map,
 		R.drawable.ic_show_on_map),
-	EDIT_NAME(
-		R.string.edit_name,
+	shared_string_rename(
+		R.string.shared_string_rename,
 		R.drawable.ic_action_edit_dark),
 	REFRESH(
 		R.string.shared_string_refresh,
 		R.drawable.ic_action_update),
-	CHANGE_APPEARANCE(
-		R.string.change_default_appearance,
-		R.drawable.ic_action_appearance),
+	EDIT_FILTER(
+		R.string.edit_fiilter,
+		R.drawable.ic_action_filter_dark),
 	EXPORT(
 		R.string.shared_string_export,
 		R.drawable.ic_action_upload),
 	DELETE_FOLDER(R.string.delete_folder, R.drawable.ic_action_delete_dark);
 
 	fun shouldShowBottomDivider(): Boolean {
-		return Algorithms.equalsToAny(this, SHOW_ALL_TRACKS, CHANGE_APPEARANCE)
+		return Algorithms.equalsToAny(this, SHOW_ALL_TRACKS, EDIT_FILTER, EXPORT)
 	}
 
 	companion object {
@@ -38,9 +38,9 @@ internal enum class SmartFolderOption(
 			get() = arrayOf(
 				DETAILS,
 				SHOW_ALL_TRACKS,
-				EDIT_NAME,
+				shared_string_rename,
 				REFRESH,
-				CHANGE_APPEARANCE,
+				EDIT_FILTER,
 				EXPORT,
 				DELETE_FOLDER)
 	}

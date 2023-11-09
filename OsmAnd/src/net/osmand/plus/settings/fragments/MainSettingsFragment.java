@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.backup.ui.BackupUiUtils.getLastBackupTimeDescription;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
@@ -31,7 +32,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -198,11 +198,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 			}
 		}
-	}
-
-	public static String getLastBackupTimeDescription(OsmandApplication app, String def) {
-		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, def, false);
 	}
 
 	private void profileManagementPref() {

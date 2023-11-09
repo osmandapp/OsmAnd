@@ -21,7 +21,6 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.Version;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
@@ -225,15 +224,5 @@ public class WeatherHelper {
 
 	public int getBandsSettingsVersion() {
 		return bandsSettingsVersion.get();
-	}
-
-
-	public static long roundForecastTimeToHour(long time) {
-		long hour = 60 * 60 * 1000;
-		return (time + hour / 2) / hour * hour;
-	}
-
-	public static boolean isWeatherSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get() && Version.isOpenGlAvailable(app);
 	}
 }

@@ -1,21 +1,13 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
+import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
+import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
+import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -33,12 +25,12 @@ import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -71,6 +63,7 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -193,6 +186,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	KeyEventHelper keyEventHelper;
+	InputDeviceHelper inputDeviceHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
@@ -247,17 +241,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
-
-		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
-		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(ROADS_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(LIVE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(SRTM_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(NAUTICAL_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(WIKI_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(WIKIVOYAGE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(HEIGHTMAP_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(getAppPath(GEOTIFF_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeUnnecessaryFiles(this);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -282,17 +266,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isExternalStorageDirectoryReadOnly() {
 		return externalStorageDirectoryReadOnly;
-	}
-
-	private void removeSqliteDbTravelFiles() {
-		File[] files = getAppPath(WIKIVOYAGE_INDEX_DIR).listFiles();
-		if (files != null) {
-			for (File file : files) {
-				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
-					file.delete();
-				}
-			}
-		}
 	}
 
 	@Override
@@ -455,6 +428,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public KeyEventHelper getKeyEventHelper() {
 		return keyEventHelper;
+	}
+
+	public InputDeviceHelper getInputDeviceHelper() {
+		return inputDeviceHelper;
 	}
 
 	public FileSettingsHelper getFileSettingsHelper() {
@@ -639,16 +616,6 @@ public class OsmandApplication extends MultiDexApplication {
 		this.navigationService = navigationService;
 	}
 
-	public interface NavigationSessionListener {
-		void onNavigationSessionChanged(@Nullable NavigationSession navigationSession);
-	}
-
-	private NavigationSessionListener navigationSessionListener;
-
-	public void setNavigationSessionListener(@Nullable NavigationSessionListener navigationSessionListener) {
-		this.navigationSessionListener = navigationSessionListener;
-	}
-
 	@Nullable
 	public NavigationCarAppService getNavigationCarAppService() {
 		return navigationCarAppService;
@@ -673,10 +640,6 @@ public class OsmandApplication extends MultiDexApplication {
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
 		this.carNavigationSession = carNavigationSession;
-		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
-		if (navigationSessionListener != null) {
-			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
-		}
 	}
 
 	public void refreshCarScreen() {
@@ -689,11 +652,12 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	@Nullable
 	public DownloadService getDownloadService() {
 		return downloadService;
 	}
 
-	public void setDownloadService(DownloadService downloadService) {
+	public void setDownloadService(@Nullable DownloadService downloadService) {
 		this.downloadService = downloadService;
 	}
 
@@ -845,8 +809,8 @@ public class OsmandApplication extends MultiDexApplication {
 	public IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
-      // a delay is necessary as the service process needs time to start..
-      Thread.sleep(800);
+			// a delay is necessary as the service process needs time to start..
+			Thread.sleep(800);
 			if (bRouterServiceConnection != null) {
 				return bRouterServiceConnection.getBrouterService();
 			}
@@ -959,80 +923,40 @@ public class OsmandApplication extends MultiDexApplication {
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 
-	public String getVersionName() {
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return info.versionName;
-		} catch (NameNotFoundException e) {
-			return "";
+	public void startNavigationService(int usageIntent) {
+		NavigationService service = getNavigationService();
+		if (service != null) {
+			usageIntent |= service.getUsedBy();
+			service.stopSelf();
 		}
-	}
-
-	public int getVersionCode() {
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return info.versionCode;
-		} catch (NameNotFoundException e) {
-			return 0;
-		}
-	}
-
-	public void startNavigationService(int intent) {
-		Intent serviceIntent = new Intent(this, NavigationService.class);
-		if (getNavigationService() != null) {
-			intent |= getNavigationService().getUsedBy();
-			getNavigationService().stopSelf();
-		}
-		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
+		Intent intent = new Intent(this, NavigationService.class);
+		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
+			startForegroundService(intent);
 		} else {
-			startService(serviceIntent);
-		}
-		//getNotificationHelper().showNotifications();
-	}
-
-	public void startDownloadService() {
-		Intent serviceIntent = new Intent(this, DownloadService.class);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
-		} else {
-			startService(serviceIntent);
+			startService(intent);
 		}
 	}
 
-	public String getLangTranslation(String l) {
-		try {
-			java.lang.reflect.Field f = R.string.class.getField("lang_" + l);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return l;
-	}
-
-	public void setupDrivingRegion(WorldRegion reg) {
-		DrivingRegion drg = null;
-		WorldRegion.RegionParams params = reg.getParams();
+	public void setupDrivingRegion(@NonNull WorldRegion worldRegion) {
+		DrivingRegion drivingRegion = null;
+		RegionParams params = worldRegion.getParams();
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
-		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
-		for (DrivingRegion r : DrivingRegion.values()) {
-			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
-				drg = r;
+		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MILES_AND_FEET : KILOMETERS_AND_METERS;
+		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MILES_AND_METERS : KILOMETERS_AND_METERS;
+		for (DrivingRegion region : DrivingRegion.values()) {
+			if (region.leftHandDriving == leftHand && (region.defMetrics == mc1 || region.defMetrics == mc2)) {
+				drivingRegion = region;
 				break;
 			}
 		}
-		if (drg != null) {
-			settings.DRIVING_REGION.set(drg);
+		if (drivingRegion != null) {
+			settings.DRIVING_REGION.set(drivingRegion);
 		}
 	}
 
+	@NonNull
 	public String getUserAndroidId() {
 		String userAndroidId = settings.USER_ANDROID_ID.get();
 		if (Algorithms.isEmpty(userAndroidId) || isUserAndroidIdExpired()) {

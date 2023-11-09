@@ -6,7 +6,7 @@ import static net.osmand.map.WorldRegion.UNITED_KINGDOM_REGION_ID;
 import static net.osmand.map.WorldRegion.WORLD;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
-import static net.osmand.plus.plugins.weather.WeatherHelper.isWeatherSupported;
+import static net.osmand.plus.plugins.weather.WeatherUtils.isWeatherSupported;
 import static net.osmand.plus.plugins.weather.WeatherUtils.getRegionBounds;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.LOCAL_SIZE;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.PROGRESS_DOWNLOAD;

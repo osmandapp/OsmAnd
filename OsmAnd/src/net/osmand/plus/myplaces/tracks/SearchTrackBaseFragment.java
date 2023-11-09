@@ -35,7 +35,6 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -87,7 +86,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 
 		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
-		adapter = new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+		adapter = createAdapter(trackItems);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
@@ -113,6 +112,17 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateSearchQuery();
+	}
+
+	@NonNull
+	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
+		return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+	}
+
 	protected abstract void setupFragment(View view);
 
 	@Override
@@ -132,21 +142,22 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	protected void updateAdapterWithFilteredItems(List<TrackItem> filteredItems) {
-		searchEditText.setText(adapter.getCurrentSearchQuery());
-		searchEditText.setSelection(searchEditText.length());
+		updateSearchQuery();
 		adapter.updateFilteredItems(filteredItems);
 		updateButtonsState();
+	}
+
+	private void updateSearchQuery() {
+		searchEditText.setText(adapter.getCurrentSearchQuery());
+		searchEditText.setSelection(searchEditText.length());
 	}
 
 	public void setupSelectionHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof ItemsSelectionHelper.SelectionHelperProvider) {
 			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
-			ItemsSelectionHelper<TrackItem> helper = helperProvider.getSelectionHelper();
-
-			selectionHelper.setAllItems(helper.getAllItems());
-			selectionHelper.setSelectedItems(helper.getSelectedItems());
-			selectionHelper.setOriginalSelectedItems(helper.getOriginalSelectedItems());
+			ItemsSelectionHelper<TrackItem> originalHelper = helperProvider.getSelectionHelper();
+			selectionHelper.syncWith(originalHelper);
 		}
 	}
 
@@ -187,6 +198,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 			public void afterTextChanged(Editable query) {
 				filterTracks(query.toString());
 				AndroidUiHelper.updateVisibility(clearSearchQuery, query.length() > 0);
+				adapter.notifyItemChanged(0);
 			}
 		});
 		clearSearchQuery.setOnClickListener((v) -> resetSearchQuery());

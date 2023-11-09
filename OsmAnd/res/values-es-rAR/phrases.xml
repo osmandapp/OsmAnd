@@ -2755,7 +2755,7 @@
     <string name="poi_fire_hydrant_type">Tipo de hidrante</string>
     <string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
     <string name="poi_water_source">Origen del agua</string>
-    <string name="poi_payment_toll_type">Forma de pago (peaje)</string>
+    <string name="poi_payment_toll_type">Método de pago (peaje)</string>
     <string name="poi_traffic_signals_sound">Sonido</string>
     <string name="poi_highway_crossing_type">Tipo de cruce</string>
     <string name="poi_tactile_paving">Pavimento táctil</string>
@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_dialysis_yes">Diálisis</string>
     <string name="poi_checkpoint_cycling">Punto de control para bicicletas</string>
     <string name="poi_socket_typee_yes">Tipo E</string>
+    <string name="poi_dressing_room">Vestidor</string>
+    <string name="poi_emergency_bay">Bahía de emergencia</string>
 </resources>

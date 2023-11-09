@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
@@ -14,7 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackFolder implements TracksGroup {
+public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	private File dirFile;
 	private final TrackFolder parentFolder;
@@ -159,5 +160,10 @@ public class TrackFolder implements TracksGroup {
 	@Override
 	public String toString() {
 		return dirFile.getAbsolutePath();
+	}
+
+	@Override
+	public long lastModified() {
+		return getDirFile().lastModified();
 	}
 }

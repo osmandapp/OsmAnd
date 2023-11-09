@@ -4630,4 +4630,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">Doenças infecciosas</string>
     <string name="poi_socket_typee_voltage">Tomadas: Tipo E: voltagem</string>
     <string name="poi_socket_typee_output">Tomada: Tipo E: saída</string>
+    <string name="poi_dressing_room">Provador</string>
+    <string name="poi_health_specialty_intensive_yes">Intensivo</string>
 </resources>

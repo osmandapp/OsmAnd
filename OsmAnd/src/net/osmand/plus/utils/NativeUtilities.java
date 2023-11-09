@@ -109,9 +109,9 @@ public class NativeUtilities {
 		return Math.max(a, c) <= Math.min(b, d);
 	}
 
-	public static int getSignedArea31(@NonNull PointI a31, @NonNull PointI b31, @NonNull PointI c31) {
-		return (b31.getX() - a31.getX()) * (c31.getY() - a31.getY())
-				- (b31.getY() - a31.getY()) * (c31.getX() - a31.getX());
+	public static long getSignedArea31(@NonNull PointI a31, @NonNull PointI b31, @NonNull PointI c31) {
+		return (long) (b31.getX() - a31.getX()) * (c31.getY() - a31.getY())
+				- (long) (b31.getY() - a31.getY()) * (c31.getX() - a31.getX());
 	}
 
 	public static boolean isPointInsidePolygon(@NonNull LatLon latLon, @NonNull List<PointI> polygon31) {
@@ -416,6 +416,33 @@ public class NativeUtilities {
 			mapRenderer.setTarget(target31);
 		}
 		return target31;
+	}
+
+	@NonNull
+	public static PointI calculateNewTarget31(@NonNull PointI currentTarget31, @NonNull PointI offset31) {
+		int deltaX = offset31.getX();
+		int deltaY = offset31.getY();
+		int nextTargetX = currentTarget31.getX();
+		int nextTargetY = currentTarget31.getY();
+		if (Integer.MAX_VALUE - nextTargetX < deltaX) {
+			deltaX -= Integer.MAX_VALUE;
+			deltaX--;
+		}
+		if (Integer.MAX_VALUE - nextTargetY < deltaY) {
+			deltaY -= Integer.MAX_VALUE;
+			deltaY--;
+		}
+		nextTargetX += deltaX;
+		nextTargetY += deltaY;
+		if (nextTargetX < 0) {
+			nextTargetX += Integer.MAX_VALUE;
+			nextTargetX++;
+		}
+		if (nextTargetY < 0) {
+			nextTargetY += Integer.MAX_VALUE;
+			nextTargetY++;
+		}
+		return new PointI(nextTargetX, nextTargetY);
 	}
 
 	public static boolean containsLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,

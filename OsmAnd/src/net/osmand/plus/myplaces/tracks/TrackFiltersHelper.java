@@ -7,6 +7,7 @@ import net.osmand.plus.myplaces.tracks.filters.AverageAltitudeTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.AverageSpeedTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.ColorTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateCreationTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DownhillTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DurationTrackFilter;
@@ -18,8 +19,10 @@ import net.osmand.plus.myplaces.tracks.filters.MaxSpeedTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TimeInMotionTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TrackFiltersConstants;
+import net.osmand.plus.myplaces.tracks.filters.TrackFolderFilter;
 import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
 import net.osmand.plus.myplaces.tracks.filters.UphillTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.WidthTrackFilter;
 
 public class TrackFiltersHelper {
 
@@ -29,92 +32,103 @@ public class TrackFiltersHelper {
 		switch (filterType) {
 			case NAME: {
 				newFilter = new TrackNameFilter(filterChangedListener);
-
+				break;
 			}
-			break;
 			case DURATION: {
 				newFilter = new DurationTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 			case TIME_IN_MOTION: {
 				newFilter = new TimeInMotionTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case LENGTH: {
 				newFilter = new LengthTrackFilter(
 						0f,
 						TrackFiltersConstants.LENGTH_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case AVERAGE_SPEED: {
 				newFilter = new AverageSpeedTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case MAX_SPEED: {
 				newFilter = new MaxSpeedTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case AVERAGE_ALTITUDE: {
 				newFilter = new AverageAltitudeTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case MAX_ALTITUDE: {
 				newFilter = new MaxAltitudeTrackFilter(
 						0f,
 						TrackFiltersConstants.ALTITUDE_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case UPHILL: {
 				newFilter = new UphillTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case DOWNHILL: {
 				newFilter = new DownhillTrackFilter(
 						0f,
 						TrackFiltersConstants.DEFAULT_MAX_VALUE,
 						app, filterChangedListener);
+				break;
 			}
-			break;
 
 			case DATE_CREATION: {
 				newFilter = new DateCreationTrackFilter(filterChangedListener);
+				break;
 			}
-			break;
 			case CITY: {
-				newFilter = new CityTrackFilter(filterChangedListener);
+				newFilter = new CityTrackFilter(app, filterChangedListener);
+				break;
 			}
-			break;
+			case FOLDER: {
+				newFilter = new TrackFolderFilter(app, filterChangedListener);
+				break;
+			}
 			case OTHER: {
 				newFilter = new OtherTrackFilter(app, filterChangedListener);
+				break;
 			}
-			break;
+			case COLOR: {
+				newFilter = new ColorTrackFilter(app, filterChangedListener);
+				break;
+			}
+			case WIDTH: {
+				newFilter = new WidthTrackFilter(app, filterChangedListener);
+				break;
+			}
 			default:
 				throw new IllegalArgumentException("Unknown filterType " + filterType);
 		}
@@ -127,6 +141,10 @@ public class TrackFiltersHelper {
 		switch (filterType) {
 			case NAME: {
 				filterClass = TrackNameFilter.class;
+				break;
+			}
+			case FOLDER: {
+				filterClass = TrackFolderFilter.class;
 				break;
 			}
 			case DURATION: {
@@ -175,6 +193,14 @@ public class TrackFiltersHelper {
 			}
 			case OTHER: {
 				filterClass = OtherTrackFilter.class;
+				break;
+			}
+			case COLOR: {
+				filterClass = ColorTrackFilter.class;
+				break;
+			}
+			case WIDTH: {
+				filterClass = WidthTrackFilter.class;
 				break;
 			}
 			default:

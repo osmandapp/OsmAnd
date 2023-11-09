@@ -71,7 +71,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		if (holder instanceof MemoryViewHolder) {
 			MemoryInfo memoryInfo = (MemoryInfo) items.get(position);
 			MemoryViewHolder viewHolder = (MemoryViewHolder) holder;
-			viewHolder.bindView(memoryInfo);
+			viewHolder.bindView(memoryInfo, false);
 		} else if (holder instanceof CategoryViewHolder) {
 			LocalCategory category = (LocalCategory) items.get(position);
 			CategoryViewHolder viewHolder = (CategoryViewHolder) holder;

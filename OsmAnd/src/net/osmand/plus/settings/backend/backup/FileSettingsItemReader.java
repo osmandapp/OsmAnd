@@ -75,7 +75,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 	private void writeTargetFile(@NonNull File tempFile, @NonNull File targetFile, @NonNull FileSettingsItem item) {
 		if (FileUtils.replaceTargetFile(tempFile, targetFile)) {
 			long lastModifiedTime = item.getLastModifiedTime();
-			if (lastModifiedTime != -1) {
+			if (lastModifiedTime > 0) {
 				targetFile.setLastModified(lastModifiedTime);
 			}
 		}

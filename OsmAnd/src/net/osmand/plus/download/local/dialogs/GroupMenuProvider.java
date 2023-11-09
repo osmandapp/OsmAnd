@@ -1,7 +1,5 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
@@ -30,7 +28,6 @@ import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.OperationType;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -53,13 +50,11 @@ public class GroupMenuProvider implements MenuProvider {
 	private final UiUtilities uiUtilities;
 	private final DownloadActivity activity;
 	private final LocalItemsFragment fragment;
-	private final LocalGroup group;
 	private final boolean nightMode;
 
 	public GroupMenuProvider(@NonNull DownloadActivity activity, @NonNull LocalItemsFragment fragment) {
 		this.activity = activity;
 		this.fragment = fragment;
-		this.group = fragment.getGroup();
 		this.nightMode = fragment.isNightMode();
 		app = activity.getMyApplication();
 		uiUtilities = app.getUIUtilities();
@@ -69,6 +64,10 @@ public class GroupMenuProvider implements MenuProvider {
 	public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
 
+		LocalGroup group = fragment.getGroup();
+		if (group == null) {
+			return;
+		}
 		boolean selectionMode = fragment.isSelectionMode();
 		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 
@@ -77,12 +76,13 @@ public class GroupMenuProvider implements MenuProvider {
 			searchItem.setIcon(getIcon(R.drawable.ic_action_search_dark, colorId));
 			searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			searchItem.setOnMenuItemClickListener(item -> {
-				activity.showDialog(activity, SearchDialogFragment.createInstance(""));
+				FragmentManager manager = activity.getSupportFragmentManager();
+				LocalSearchFragment.showInstance(manager, group.getType(), null, fragment);
 				return true;
 			});
 		}
 		LocalItemType type = group.getType();
-		if (Algorithms.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
+		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = app.getSettings().LOCAL_MAPS_SORT_MODE.get();
 			MenuItem sortItem = menu.add(0, R.string.shared_string_sort, 0, R.string.shared_string_sort);
 			sortItem.setIcon(getIcon(sortMode.getIconId(), colorId));
@@ -97,12 +97,12 @@ public class GroupMenuProvider implements MenuProvider {
 		actionsItem.setIcon(getIcon(R.drawable.ic_overflow_menu_white, colorId));
 		actionsItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		actionsItem.setOnMenuItemClickListener(item -> {
-			showAdditionalActions(activity.findViewById(item.getItemId()));
+			showAdditionalActions(activity.findViewById(item.getItemId()), group);
 			return true;
 		});
 	}
 
-	private void showAdditionalActions(@NonNull View view) {
+	private void showAdditionalActions(@NonNull View view, @NonNull LocalGroup group) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		LocalItemType type = group.getType();

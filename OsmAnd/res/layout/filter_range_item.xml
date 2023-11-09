@@ -77,6 +77,7 @@
 				android:layout_height="wrap_content"
 				android:inputType="number"
 				android:maxLines="1"
+				android:maxLength="6"
 				android:scrollHorizontally="true" />
 
 		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
@@ -101,6 +102,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:inputType="number"
+				android:maxLength="6"
 				android:maxLines="1"
 				android:scrollHorizontally="true" />
 
@@ -112,9 +114,6 @@
 		android:id="@+id/slider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		app:labelBehavior="gone"
-		app:tickColorInactive="#000"
-		app:tickColorActive="#000"
 		android:layout_marginStart="@dimen/content_padding_small"
 		android:layout_marginLeft="@dimen/content_padding_small"
 		android:layout_marginEnd="@dimen/content_padding_small"

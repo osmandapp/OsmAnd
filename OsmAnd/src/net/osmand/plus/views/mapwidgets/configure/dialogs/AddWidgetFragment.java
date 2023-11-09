@@ -291,7 +291,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			if (target instanceof AddWidgetListener) {
 				List<String> widgetsIds = new ArrayList<>(selectedWidgetsIds.values());
 				WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
-				((AddWidgetListener) target).onWidgetsSelectedToAdd(widgetsIds, widgetsPanel);
+				((AddWidgetListener) target).onWidgetsSelectedToAdd(widgetsIds, widgetsPanel, true);
 			}
 			dismiss();
 		});
@@ -397,6 +397,6 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	}
 
 	public interface AddWidgetListener {
-		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel);
+		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls);
 	}
 }

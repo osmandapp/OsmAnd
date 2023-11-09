@@ -156,22 +156,15 @@ public class LanesWidget extends MapWidget {
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+	                       @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
-		boolean specialPosition = true;
-		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesBaseWidget
-					|| widget instanceof StreetNameWidget) {
-				specialPosition = false;
-				break;
-			}
-		}
+		boolean specialPosition = followingWidgets.isEmpty();
 		if (specialPosition) {
 			specialContainer.addView(view);
 		} else {
-			container.addView(view, order);
+			container.addView(view);
 		}
 	}
 

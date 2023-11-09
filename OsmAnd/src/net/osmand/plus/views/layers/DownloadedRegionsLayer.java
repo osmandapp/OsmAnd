@@ -299,7 +299,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 			DownloadIndexesThread downloadThread = app.getDownloadThread();
 			DownloadResources indexes = downloadThread.getIndexes();
-			if (!indexes.getExternalMapFileNamesAt(cx, cy, zoom, false).isEmpty()) {
+			if (!indexes.getExternalMapFileNamesAt(cx, cy, false).isEmpty()) {
 				hideDownloadMapToolbar();
 				return;
 			}

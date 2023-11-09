@@ -1,11 +1,14 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.R;
 import net.osmand.plus.helpers.MapScrollHelper;
 import net.osmand.plus.helpers.MapScrollHelper.ScrollDirection;
+import net.osmand.plus.keyevent.KeyEventCategory;
 
 public class MapScrollCommand extends KeyEventCommand {
 
@@ -32,6 +35,27 @@ public class MapScrollCommand extends KeyEventCommand {
 		MapScrollHelper scrollHelper = requireMapActivity().getMapScrollHelper();
 		scrollHelper.removeDirection(direction);
 		return true;
+	}
+
+	@NonNull
+	@Override
+	public KeyEventCategory getCategory() {
+		return KeyEventCategory.MAP_INTERACTIONS;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		switch (direction) {
+			case UP:
+				return context.getString(R.string.key_event_action_move_up);
+			case DOWN:
+				return context.getString(R.string.key_event_action_move_down);
+			case LEFT:
+				return context.getString(R.string.key_event_action_move_left);
+			default:
+				return context.getString(R.string.key_event_action_move_right);
+		}
 	}
 
 }

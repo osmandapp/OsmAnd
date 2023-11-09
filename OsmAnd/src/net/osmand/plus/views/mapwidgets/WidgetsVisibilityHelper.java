@@ -90,7 +90,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInConfigureMapOptionMode();
 	}
 
-	public boolean shouldHideTopWidgets(){
+	public boolean shouldHideTopWidgets() {
 		return isMapRouteInfoMenuVisible()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
@@ -282,7 +282,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean isInTrackMenuMode() {
-		return mapActivity.getTrackMenuFragment() != null && mapActivity.getTrackMenuFragment().isVisible();
+		return mapActivity.getFragmentsHelper().getTrackMenuFragment() != null
+				&& mapActivity.getFragmentsHelper().getTrackMenuFragment().isVisible();
 	}
 
 	private boolean isInChoosingRoutesMode() {
@@ -326,19 +327,19 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInGpsFilteringMode() {
-		return mapActivity.getGpsFilterFragment() != null;
+		return mapActivity.getFragmentsHelper().getGpsFilterFragment() != null;
 	}
 
 	public boolean isInConfigureMapOptionMode() {
-		return mapActivity.getConfigureMapOptionFragment() != null;
+		return mapActivity.getFragmentsHelper().getConfigureMapOptionFragment() != null;
 	}
 
 	private boolean isInWeatherForecastMode() {
-		return mapActivity.getWeatherForecastFragment() != null;
+		return mapActivity.getFragmentsHelper().getWeatherForecastFragment() != null;
 	}
 
 	private boolean isSelectingTilesZone() {
-		return mapActivity.getDownloadTilesFragment() != null;
+		return mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null;
 	}
 
 	private boolean isMapLinkedToLocation() {
@@ -357,13 +358,29 @@ public class WidgetsVisibilityHelper {
 		return AndroidUiHelper.isOrientationPortrait(mapActivity);
 	}
 
+	public void hideWidgets() {
+		updateWidgetsVisibility(false);
+	}
+
+	public void showWidgets() {
+		updateWidgetsVisibility(true);
+	}
+
 	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
-		int topControlsVisibility = topControlsVisible ? View.VISIBLE : View.GONE;
-		AndroidUiHelper.setVisibility(mapActivity, topControlsVisibility,
+		updateWidgetsVisibility(topControlsVisible);
+		updateBottomControlsVisibility(bottomControlsVisible);
+	}
+
+	public void updateWidgetsVisibility(boolean visible) {
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		AndroidUiHelper.setVisibility(mapActivity, visibility,
 				R.id.map_center_info,
 				R.id.map_left_widgets_panel,
 				R.id.map_right_widgets_panel);
-		int bottomControlsVisibility = bottomControlsVisible ? View.VISIBLE : View.GONE;
+	}
+
+	public void updateBottomControlsVisibility(boolean visible) {
+		int bottomControlsVisibility = visible ? View.VISIBLE : View.GONE;
 		AndroidUiHelper.setVisibility(mapActivity, bottomControlsVisibility,
 				R.id.bottom_controls_container);
 	}

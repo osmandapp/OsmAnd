@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import static net.osmand.router.GeneralRouter.*;
+
 import java.util.Arrays;
 
 
@@ -835,16 +837,17 @@ public class RouteDataObject {
 		return getHighway(types, region);
 	}
 
-	public boolean hasPrivateAccess() {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if ("motorcar".equals(r.getTag())
-					|| "motor_vehicle".equals(r.getTag())
-					|| "vehicle".equals(r.getTag())
-					|| "access".equals(r.getTag())) {
-				if (r.getValue().equals("private")) {
+	public boolean hasPrivateAccess(GeneralRouterProfile profile) {
+		for (int type : types) {
+			RouteTypeRule rule = region.quickGetEncodingRule(type);
+			String tag = rule.getTag();
+			if (rule.getValue().equals("private")) {
+				if ("vehicle".equals(tag) || "access".equals(tag)) {
 					return true;
+				} else if (profile == GeneralRouterProfile.CAR) {
+					return "motorcar".equals(tag) || "motor_vehicle".equals(tag);
+				} else if (profile == GeneralRouterProfile.BICYCLE) {
+					return "bicycle".equals(tag);
 				}
 			}
 		}

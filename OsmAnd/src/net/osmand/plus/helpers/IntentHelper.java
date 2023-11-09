@@ -230,7 +230,7 @@ public class IntentHelper {
 	}
 
 	private void registerDevice(@NonNull String token) {
-		AuthorizeFragment fragment = mapActivity.getFragment(AuthorizeFragment.TAG);
+		AuthorizeFragment fragment = mapActivity.getFragmentsHelper().getFragment(AuthorizeFragment.TAG);
 		if (fragment != null && fragment.getDialogType() == LoginDialogType.VERIFY_EMAIL) {
 			fragment.setToken(token);
 		} else if (!app.getBackupHelper().isRegistered() && !Algorithms.isEmpty(settings.BACKUP_USER_EMAIL.get())) {
@@ -459,7 +459,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
-					mapActivity.closeAllFragments();
+					mapActivity.getFragmentsHelper().closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();

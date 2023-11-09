@@ -68,6 +68,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
@@ -94,6 +95,7 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.profiles.data.RoutingProfilesHolder;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -208,6 +210,7 @@ public class MapActivityActions extends MapActions {
 				String fileName = Algorithms.getFileNameWithoutExtension(file);
 				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
 				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 				return gpx;
 			}
 			return null;
@@ -337,7 +340,7 @@ public class MapActivityActions extends MapActions {
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, view, item, false);
 				} else if (standardId == R.string.context_menu_item_search) {
-					mapActivity.showQuickSearch(latitude, longitude);
+					mapActivity.getFragmentsHelper().showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					//if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 					enterDirectionsFromPoint(latitude, longitude);
@@ -539,7 +542,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_search_open");
-					mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+					mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 					return true;
 				}));
 
@@ -554,7 +557,7 @@ public class MapActivityActions extends MapActions {
 						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
 							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
-							TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
+							TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 						}
 						return true;
 					}));
@@ -662,7 +665,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_settings)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_settings_new_open");
-					mapActivity.showSettings();
+					mapActivity.getFragmentsHelper().showSettings();
 					return true;
 				}));
 
@@ -715,7 +718,7 @@ public class MapActivityActions extends MapActions {
 				.setColor(currentMode.getProfileColor(nightMode))
 				.setTitle(getString(R.string.configure_profile))
 				.setListener((uiAdapter, view, item, isChecked) -> {
-					mapActivity.dismissSettingsScreens();
+					mapActivity.getFragmentsHelper().dismissSettingsScreens();
 					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE);
 					return true;
 				}));
@@ -835,7 +838,7 @@ public class MapActivityActions extends MapActions {
 
 		menuItemsListView.setAdapter(simpleListAdapter);
 		menuItemsListView.setOnItemClickListener((parent, view, position, id) -> {
-			mapActivity.dismissCardDialog();
+			mapActivity.getFragmentsHelper().dismissCardDialog();
 			boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 			boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
 			if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {

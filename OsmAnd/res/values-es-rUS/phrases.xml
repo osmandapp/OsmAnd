@@ -970,7 +970,7 @@
     <string name="poi_recycling_cardboard">Cartón</string>
     <string name="poi_recycling_hardcore">Escombros</string>
     <string name="poi_recycling_chipboard">Cartón prensado</string>
-    <string name="twitter">Twitter</string>
+    <string name="twitter">X (Twitter)</string>
     <string name="poi_skype">Skype</string>
     <string name="poi_youtube">YouTube</string>
     <string name="poi_instagram">Instagram</string>
@@ -4633,4 +4633,6 @@
     <string name="poi_health_specialty_infectious_diseases_yes">Enfermedades contagiosas;Enfermedades infecciosas</string>
     <string name="poi_socket_typee_voltage">Enchufe: Tipo E: voltaje</string>
     <string name="poi_socket_typee_output">Enchufe: Tipo E: salida</string>
+    <string name="poi_dressing_room">Vestidor</string>
+    <string name="poi_emergency_bay">Bahía de emergencia</string>
 </resources>

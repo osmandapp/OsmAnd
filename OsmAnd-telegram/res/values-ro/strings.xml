@@ -120,9 +120,9 @@
     <string name="last_update_from_telegram_date">Ultima actualizare de la Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
     <string name="shared_string_hide">Ascunde</string>
-    <string name="shared_string_add">Adăugați</string>
+    <string name="shared_string_add">Adaugă</string>
     <string name="shared_string_map">Hartă</string>
-    <string name="average_speed">Viteza medie</string>
+    <string name="average_speed">Viteză medie</string>
     <string name="average_altitude">Altitudine medie</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_appearance">Aspect</string>
@@ -133,7 +133,7 @@
     <string name="shared_string_apply">Aplică</string>
     <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="units_and_formats">Unități &amp; formate</string>
-    <string name="shared_string_export">Exportați</string>
+    <string name="shared_string_export">Exportă</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="logcat_buffer_descr">Verificați și partajați jurnalele detaliate ale aplicației</string>
     <string name="send_report">Trimiteți raportul</string>
@@ -159,7 +159,7 @@
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
-    <string name="foot">picior</string>
+    <string name="foot">picioare</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Bine ați venit</string>
     <string name="shared_string_authorization_descr">Vă rugăm să introduceți numărul de telefon Telegram în format internațional</string>
@@ -267,7 +267,7 @@
     <string name="no_internet_connection">Fără conectare la internet</string>
     <string name="no_gps_connection">Fără conexiune GPS</string>
     <string name="shared_string_status">Stare</string>
-    <string name="shared_string_enabled">Activat</string>
+    <string name="shared_string_enabled">Activ</string>
     <string name="location_sharing_status">Partajare: %1$s</string>
     <string name="sharing_status">Starea de partajare</string>
     <string name="last_available_location">Ultima locație disponibilă</string>

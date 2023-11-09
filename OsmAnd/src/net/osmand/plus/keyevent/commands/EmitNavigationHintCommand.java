@@ -1,10 +1,14 @@
 package net.osmand.plus.keyevent.commands;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -43,5 +47,11 @@ public class EmitNavigationHintCommand extends KeyEventCommand {
 			mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 		}
 		return true;
+	}
+
+	@NonNull
+	@Override
+	public String toHumanString(@NonNull Context context) {
+		return context.getString(R.string.key_event_action_emit_navigation_hint);
 	}
 }

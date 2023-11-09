@@ -4,7 +4,6 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,14 +20,15 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -42,10 +42,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 
-	private ViewGroup topWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
-	private ViewGroup bottomWidgetsContainer;
+	private VerticalWidgetPanel topWidgetsPanel;
+	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;
@@ -73,10 +73,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			topWidgetsContainer = mapActivity.findViewById(R.id.top_widgets_panel);
+			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-			bottomWidgetsContainer = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
+			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
@@ -86,7 +86,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
 
-			topWidgetsContainer = null;
+			topWidgetsPanel = null;
+			bottomWidgetsPanel = null;
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
 			mapRulerLayout = null;
@@ -177,8 +178,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
-			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
+			topWidgetsPanel.update(drawSettings);
+			bottomWidgetsPanel.update(drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 		}
@@ -187,15 +188,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void recreateTopWidgetsPanel() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
-		recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
+
+		if (topWidgetsPanel != null) {
+			topWidgetsPanel.update(drawSettings);
+		}
+		if (bottomWidgetsPanel != null) {
+			bottomWidgetsPanel.update(drawSettings);
+		}
 	}
 
-	private void recreateWidgetsPanel(@Nullable ViewGroup container, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
-		if (container != null) {
-			container.removeAllViews();
-			widgetRegistry.populateControlsContainer(container, appMode, panel);
-			container.requestLayout();
-		}
+	public void updateRow(MapWidget widget){
+		topWidgetsPanel.updateRow(widget);
+		bottomWidgetsPanel.updateRow(widget);
 	}
 
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
@@ -276,8 +280,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			leftWidgetsPanel.updateColors(sideWidgetsState);
 			rightWidgetsPanel.updateColors(sideWidgetsState);
 
-			topWidgetsContainer.invalidate();
-			bottomWidgetsContainer.invalidate();
+			topWidgetsPanel.updateColors(sideWidgetsState);
+			bottomWidgetsPanel.updateColors(sideWidgetsState);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));
@@ -325,7 +329,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark  :R.drawable.bs_side_widget_night;
+			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark : R.drawable.bs_side_widget_night;
 			ts.boxFree = R.drawable.btn_round_night;
 			ts.widgetDividerColorId = R.color.divider_color_dark;
 			ts.panelBorderColorId = R.color.icon_color_secondary_dark;

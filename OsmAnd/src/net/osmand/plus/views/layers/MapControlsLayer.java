@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
@@ -37,6 +38,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -76,7 +78,6 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.gpx.GPXFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -560,8 +561,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void switchMapControlsVisibility(boolean switchNavBarVisibility) {
 		MapActivity mapActivity = requireMapActivity();
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
-				|| mapActivity.getMeasurementToolFragment() != null
-				|| mapActivity.getPlanRouteFragment() != null
+				|| mapActivity.getFragmentsHelper().getMeasurementToolFragment() != null
+				|| mapActivity.getFragmentsHelper().getPlanRouteFragment() != null
 				|| mapActivity.getMapLayers().getDistanceRulerControlLayer().rulerModeOn()) {
 			return;
 		}
@@ -603,6 +604,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 					if (!sim.isRouteAnimating()) {
 						sim.startStopRouteAnimation(getMapActivity());
 					}
+				}
+				FragmentActivity activity = getMapActivity();
+				if (activity != null) {
+					AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 				}
 			}
 		}
@@ -909,7 +914,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 							view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
 							MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 							if (mapContext != null) {
-								mapContext.updateMapSettings();
+								mapContext.updateMapSettings(true);
 							}
 							dialog.dismiss();
 						});

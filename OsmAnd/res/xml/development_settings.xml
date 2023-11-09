@@ -101,6 +101,13 @@
 		android:summary="@string/logcat_buffer_descr"
 		android:title="@string/logcat_buffer" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_info_about_pressed_key"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_toast_about_key_pressed" />
+
 	<PreferenceCategory
 		android:key="trip_recording"
 		android:layout="@layout/preference_category_with_descr"

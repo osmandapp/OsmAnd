@@ -151,7 +151,7 @@
 \nLeia mais em %1$s.</string>
     <string name="srtm_paid_version_title">Complemento de topologia</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para recursos topográficos off-line, como curvas de nível, sombra de relevo, escosta</string>
-    <string name="srtm_plugin_name">Topologia</string>
+    <string name="srtm_plugin_name">Topografia</string>
     <string name="plugin_touringview_name">Visão de mapa turístico</string>
     <string name="plugin_touringview_descr">Ativar este modo de exibição altera o estilo do mapa do OsmAnd para \'Visão turística\', que é uma visão detalhada especial para os viajantes e motoristas profissionais.
 \n
@@ -5357,7 +5357,7 @@
     <string name="help_article_start_with_first_steps_name">Primeiros passos</string>
     <string name="help_article_search_search_poi_name">Pesquisar POI</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="standard_maps">Mapas padrões</string>
+    <string name="standard_maps">Mapas padrão</string>
     <string name="help_article_troubleshooting_general_name">Geral</string>
     <string name="free_versions_descr">Baixe e instale a versão gratuita do OsmAnd</string>
     <string name="max_altitude">Altitude máxima</string>
@@ -5381,7 +5381,7 @@
     <string name="help_article_troubleshooting_maps_data_name">Mapas e dados</string>
     <string name="help_article_navigation_setup_route_details_name">Detalhes da rota</string>
     <string name="help_article_navigation_setup_route_navigation_name">Preparação de rota</string>
-    <string name="wikipedia_and_travel_maps">Wikipedia e mapas de viagens</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia e mapas de viagens</string>
     <string name="map_widget_group_glide_desc">Os widgets mostram a razão de planeio em relação ao alvo ou a razão de planeio média para a viagem atual.</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Roteamento de pedestres</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
@@ -5427,7 +5427,7 @@
     <string name="help_article_navigation_routing_moped_routing_name">Roteamento de ciclomotor</string>
     <string name="backup_error_delete_account_email_match">O e-mail não corresponde ao nome de usuário de login</string>
     <string name="terrain_maps">Mapas de terreno</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">Rota de barco</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Roteamento de barco</string>
     <string name="help_article_start_with_name">Começando com OsmAnd</string>
     <string name="help_article_purchases_ios_name">Compras no iOS</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rotas de bicicleta (MTB)</string>
@@ -5443,7 +5443,7 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Sobre o roteamento do OsmAnd</string>
     <string name="shared_string_setup">Configuração</string>
     <string name="wheel_circumference">Circunferência da roda</string>
-    <string name="open_issue_on_github">Abrir problema noGitHub</string>
+    <string name="open_issue_on_github">Abrir problema no GitHub</string>
     <string name="send_logcat_log_descr">Arquivo de registro detalhado</string>
     <string name="with_waypoints">Com pontos de trajeto</string>
     <string name="add_smart_folder">Adicionar pasta inteligente</string>
@@ -5453,4 +5453,17 @@
     <string name="shared_string_show_icon">Mostrar ícone</string>
     <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\".</string>
     <string name="help_article_navigation_routing_horse_routing_name">Roteamento de cavalo</string>
+    <string name="empty_smart_folder_title">Nenhuma trilha correspondente</string>
+    <string name="smart_folder_name_present">Essa pasta inteligente já está presente</string>
+    <string name="empty_smart_folder_description">Todas as trilhas correspondentes aparecerão automaticamente aqui</string>
+    <string name="configure_filter">Configurar filtro</string>
+    <string name="smart_folder_saved">Pasta inteligente salva</string>
+    <string name="no_config_smart_folder_title">Não configurado</string>
+    <string name="live_monitoring_adress_descr">Especifique o endereço da web com a sintaxe do parâmetro lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="discard_filter_changes">Descartar alterações de filtro</string>
+    <string name="shared_string_loading">Carregando</string>
+    <string name="discard_filter_changes_prompt">Tem certeza de que deseja redefinir todos os filtros\?</string>
+    <string name="no_config_smart_folder_description">Pastas inteligentes permitem agrupar trilhas por filtros aplicados</string>
+    <string name="loading_tracks">Carregando trilhas</string>
+    <string name="searching_matching_tracks">Pesquisar todas as faixas correspondentes</string>
 </resources>

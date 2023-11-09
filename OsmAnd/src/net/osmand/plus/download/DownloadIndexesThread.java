@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -28,6 +29,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
@@ -108,10 +111,25 @@ public class DownloadIndexesThread {
 	@UiThread
 	protected void downloadHasStarted() {
 		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
-		if (app.getDownloadService() == null && shouldStartService) {
-			app.startDownloadService();
+		if (shouldStartService) {
+			if (app.getDownloadService() == null) {
+				startDownloadService();
+			}
+			if (uiActivity instanceof FragmentActivity) {
+				AndroidUtils.requestNotificationPermissionIfNeeded((FragmentActivity) uiActivity);
+			}
 		}
 		updateNotification();
+	}
+
+	private void startDownloadService() {
+		Intent intent = new Intent(app, DownloadService.class);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			app.startForegroundService(intent);
+		} else {
+			app.startService(intent);
+		}
 	}
 
 	@UiThread
@@ -415,6 +433,7 @@ public class DownloadIndexesThread {
 
 
 	private class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, IndexItem, Object, String> implements DownloadFileShowWarning {
+		private static final int OPEN_CHOOSE_PLAN_FRAGMENT = 1;
 
 		private final OsmandPreference<Integer> downloads;
 
@@ -450,6 +469,11 @@ public class DownloadIndexesThread {
 					String message = (String) o;
 					if (!message.toLowerCase().contains("interrupted") && !message.equals(app.getString(R.string.shared_string_download_successful))) {
 						app.showToastMessage(message);
+					}
+				} else if (o instanceof Integer) {
+					Integer value = (Integer) o;
+					if (OPEN_CHOOSE_PLAN_FRAGMENT == value) {
+						openChoosePlanFragment();
 					}
 				}
 			}
@@ -570,11 +594,16 @@ public class DownloadIndexesThread {
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if (exceed) {
-				String breakDownloadMessage = app.getString(R.string.free_version_message,
-						MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-				publishProgress(breakDownloadMessage);
+				publishProgress(OPEN_CHOOSE_PLAN_FRAGMENT);
 			}
 			return !exceed;
+		}
+
+		private void openChoosePlanFragment() {
+			if (uiActivity instanceof FragmentActivity) {
+				FragmentActivity activity = (FragmentActivity) uiActivity;
+				ChoosePlanFragment.showInstance(activity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+			}
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {

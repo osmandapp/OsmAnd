@@ -44,6 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -61,62 +62,67 @@ import java.util.TreeMap;
 public class LocalIndexHelper {
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final ResourceManager resourceManager;
 
 	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		settings = app.getSettings();
 		resourceManager = app.getResourceManager();
 	}
 
 	@NonNull
 	public Map<CategoryType, LocalCategory> loadAllFilesByCategories() {
 		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
-		collectFiles(categories, getInternalDir(), false);
-		collectFiles(categories, getExternalDir(), true);
+
+		File noBackupDir = settings.getNoBackupPath();
+		File internalDir = getAppDir(settings.getInternalAppPath());
+		File externalDir = getAppDir(settings.getExternalStorageDirectory());
+
+		collectFiles(categories, internalDir, noBackupDir, false);
+
+		if (!Algorithms.objectEquals(internalDir, externalDir)) {
+			collectFiles(categories, externalDir, noBackupDir, true);
+		}
+
 		return categories;
 	}
 
 	@NonNull
-	private File getInternalDir() {
-		File filesDir = app.getFilesDir();
-		File parentDir = filesDir.getParentFile();
-		return parentDir != null ? parentDir : filesDir;
+	private File getAppDir(@NonNull File dir) {
+		File parentDir = dir.getParentFile();
+		return parentDir != null && Algorithms.stringsEqual(parentDir.getName(), app.getPackageName()) ? parentDir : dir;
 	}
 
-	@NonNull
-	private File getExternalDir() {
-		File appDir = app.getAppPath(null);
-		File parentDir = appDir.getParentFile();
-		return parentDir != null ? parentDir : appDir;
-	}
-
-	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File dir, boolean addUnknown) {
+	private void collectFiles(@NonNull Map<CategoryType, LocalCategory> categories,
+	                          @NonNull File dir, @NonNull File noBackupDir, boolean addUnknown) {
+		if (!addUnknown && Algorithms.objectEquals(dir, noBackupDir)) {
+			addUnknown = true;
+		}
 		File[] listFiles = dir.listFiles();
 		if (!Algorithms.isEmpty(listFiles)) {
 			for (File file : listFiles) {
 				addFile(categories, file, addUnknown);
 
 				if (file.isDirectory()) {
-					collectFiles(categories, file, addUnknown);
+					collectFiles(categories, file, noBackupDir, addUnknown);
 				}
 			}
 		}
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
-		if (file.length() != 0) {
-			LocalItemType itemType = LocalItemUtils.getItemType(app, file);
-			if (itemType != null && (itemType != OTHER || addUnknown)) {
-				CategoryType categoryType = itemType.getCategoryType();
-				LocalCategory category = categories.get(categoryType);
-				if (category == null) {
-					category = new LocalCategory(categoryType);
-					categories.put(categoryType, category);
-				}
-				LocalItem item = new LocalItem(file, itemType);
-				LocalItemUtils.updateItem(app, item);
-				category.addLocalItem(item);
+		LocalItemType itemType = LocalItemUtils.getItemType(app, file);
+		if (itemType != null && (itemType != OTHER || addUnknown)) {
+			CategoryType categoryType = itemType.getCategoryType();
+			LocalCategory category = categories.get(categoryType);
+			if (category == null) {
+				category = new LocalCategory(categoryType);
+				categories.put(categoryType, category);
 			}
+			LocalItem item = new LocalItem(file, itemType);
+			LocalItemUtils.updateItem(app, item);
+			category.addLocalItem(item);
 		}
 	}
 
@@ -323,14 +329,23 @@ public class LocalIndexHelper {
 	private void loadObfData(@NonNull File dir, @NonNull List<LocalItem> items, boolean readFiles,
 	                         boolean shouldUpdate, @NonNull Map<String, File> indexFiles,
 	                         @Nullable AbstractLoadLocalIndexTask task) {
-		boolean readDir = readFiles && dir.canRead();
-		List<File> files = readDir ? Arrays.asList(listFilesSorted(dir)) : new ArrayList<>(indexFiles.values());
-		for (File file : files) {
-			if (file.isFile() && file.getName().endsWith(BINARY_MAP_INDEX_EXT)
-					&& (!readDir || dir.getPath().equals(file.getParent()))) {
-				LocalItemType type = LocalItemUtils.getItemType(app, file);
-				if (type != null) {
-					loadLocalData(file, type, items, shouldUpdate, task);
+		if ((readFiles) && dir.canRead()) {
+			for (File file : listFilesSorted(dir)) {
+				if (file.isFile() && file.getName().endsWith(BINARY_MAP_INDEX_EXT)) {
+					LocalItemType type = LocalItemUtils.getItemType(app, file);
+					if (type != null) {
+						loadLocalData(file, type, items, shouldUpdate, task);
+					}
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && dir.getPath().equals(file.getParent())
+						&& file.getName().endsWith(BINARY_MAP_INDEX_EXT)) {
+					LocalItemType type = LocalItemUtils.getItemType(app, file);
+					if (type != null) {
+						loadLocalData(file, type, items, shouldUpdate, task);
+					}
 				}
 			}
 		}
@@ -339,12 +354,18 @@ public class LocalIndexHelper {
 	private void loadDataImpl(@NonNull File dir, @NonNull LocalItemType type, @NonNull String extension,
 	                          boolean readFiles, boolean shouldUpdate, @NonNull List<LocalItem> items,
 	                          @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask task) {
-		boolean readDir = readFiles && dir.canRead();
-		List<File> files = readDir ? Arrays.asList(listFilesSorted(dir)) : new ArrayList<>(indexFiles.values());
-		for (File file : files) {
-			if (file.isFile() && file.getName().endsWith(extension)
-					&& (!readDir || file.getPath().startsWith(dir.getPath()))) {
-				loadLocalData(file, type, items, shouldUpdate, task);
+		if ((readFiles) && dir.canRead()) {
+			for (File file : listFilesSorted(dir)) {
+				if (file.isFile() && file.getName().endsWith(extension)) {
+					loadLocalData(file, type, items, shouldUpdate, task);
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && file.getPath().startsWith(dir.getPath())
+						&& file.getName().endsWith(extension)) {
+					loadLocalData(file, type, items, shouldUpdate, task);
+				}
 			}
 		}
 	}

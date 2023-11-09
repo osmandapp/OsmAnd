@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadActivity;
@@ -66,7 +67,7 @@ public class BannerAndDownloadFreeVersion {
 
 		if (isFinished) {
 			progressLayout.setOnClickListener(null);
-			updateDescriptionTextWithSize(activity, progressLayout);
+			updateDescriptionTextWithSize(activity.getMyApplication(), progressLayout);
 			freeVersionBanner.updateFreeVersionBanner();
 		} else {
 			freeVersionBanner.setMinimizedFreeVersionBanner(true);
@@ -88,18 +89,18 @@ public class BannerAndDownloadFreeVersion {
 		}
 	}
 
-	public static void updateDescriptionTextWithSize(@NonNull DownloadActivity activity, @NonNull View view) {
+	public static void updateDescriptionTextWithSize(@NonNull OsmandApplication app, @NonNull View view) {
 		TextView descriptionText = view.findViewById(R.id.rightTextView);
 		TextView messageTextView = view.findViewById(R.id.leftTextView);
 		ProgressBar sizeProgress = view.findViewById(R.id.progressBar);
 
-		File dir = activity.getMyApplication().getAppPath(null);
+		File dir = app.getAppPath(null);
 		String size = "";
 		int percent = 0;
 		if (dir.canRead()) {
 			try {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				size = AndroidUtils.formatSize(activity, (fs.getAvailableBlocksLong()) * fs.getBlockSizeLong());
+				size = AndroidUtils.formatSize(app, (fs.getAvailableBlocksLong()) * fs.getBlockSizeLong());
 				percent = 100 - (int) (fs.getAvailableBlocksLong() * 100 / fs.getBlockCountLong());
 			} catch (IllegalIcuArgumentException e) {
 				LOG.error(e);
@@ -107,7 +108,7 @@ public class BannerAndDownloadFreeVersion {
 		}
 		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);
-		String text = activity.getString(R.string.free, size);
+		String text = app.getString(R.string.free, size);
 		descriptionText.setText(text);
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 

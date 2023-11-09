@@ -81,6 +81,7 @@ public class GPXUtilities {
 
 	public static boolean GPX_TIME_OLD_FORMAT = false;
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	private static final String GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -1295,15 +1296,43 @@ public class GPXUtilities {
 				try {
 					time = formatMillis.parse(text).getTime();
 				} catch (ParseException e2) {
-
+					try {
+						time = getTimeNoTimeZoneFormatter().parse(text).getTime();
+					} catch (ParseException e3) {
+						log.error("Failed to parse date " + text);
+					}
 				}
 			}
 		}
 		return time;
 	}
 
+	public static long getCreationTime(GPXFile gpxFile) {
+		long time = 0;
+		if (gpxFile != null) {
+			if (gpxFile.metadata != null && gpxFile.metadata.time > 0) {
+				time = gpxFile.metadata.time;
+			} else {
+				time = gpxFile.getLastPointTime();
+			}
+			if (time == 0) {
+				time = gpxFile.modifiedTime;
+			}
+		}
+		if (time == 0) {
+			time = System.currentTimeMillis();
+		}
+		return time;
+	}
+
 	private static SimpleDateFormat getTimeFormatter() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
+	}
+
+	private static SimpleDateFormat getTimeNoTimeZoneFormatter() {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_NO_TIMEZONE_PATTERN, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
@@ -1353,6 +1382,7 @@ public class GPXUtilities {
 
 	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
 		GPXFile gpxFile = new GPXFile(null);
+		gpxFile.metadata.time = 0;
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(stream));
@@ -1714,6 +1744,9 @@ public class GPXUtilities {
 			}
 			if (addGeneralTrack) {
 				gpxFile.addGeneralTrack();
+			}
+			if (gpxFile.metadata.time == 0) {
+				gpxFile.metadata.time = getCreationTime(gpxFile);
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;

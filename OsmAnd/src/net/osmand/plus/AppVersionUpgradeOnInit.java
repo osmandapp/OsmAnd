@@ -44,6 +44,9 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
+import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
+import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -53,6 +56,8 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -71,7 +76,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class AppVersionUpgradeOnInit {
+public class AppVersionUpgradeOnInit {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN";
 	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER";
@@ -117,8 +122,13 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_4_01 = 4401;
 	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
 	public static final int VERSION_4_4_02 = 4402;
+	public static final int VERSION_4_6_05 = 4605;
+	// 4606 - 4.6-06 (Change external input device preference type from integer to string)
+	public static final int VERSION_4_6_06 = 4606;
+	// 4607 - 4.6-07 (Migrate custom input devices preference from global to profile dependent)
+	public static final int VERSION_4_6_07 = 4607;
 
-	public static final int LAST_APP_VERSION = VERSION_4_4_02;
+	public static final int LAST_APP_VERSION = VERSION_4_6_07;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -218,6 +228,16 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_4_02) {
 					increaseVehicleSizeLimitsAccuracy();
+				}
+				if (prevAppVersion < VERSION_4_6_05) {
+					updateWidgetPages(settings);
+					migrateVerticalWidgetToCustomId(settings);
+				}
+				if (prevAppVersion < VERSION_4_6_06) {
+					updateExternalInputDevicePreferenceType();
+				}
+				if (prevAppVersion < VERSION_4_6_07) {
+					migrateCustomInputDevicesPreference();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -641,6 +661,98 @@ class AppVersionUpgradeOnInit {
 					preference.setModeValue(appMode, valueStr);
 				}
 			}
+		}
+	}
+
+	private void updateWidgetPages(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			updateWidgetPage(mode, settings.TOP_WIDGET_PANEL_ORDER_OLD, settings.TOP_WIDGET_PANEL_ORDER);
+			updateWidgetPage(mode, settings.BOTTOM_WIDGET_PANEL_ORDER_OLD, settings.BOTTOM_WIDGET_PANEL_ORDER);
+		}
+	}
+
+	private void updateWidgetPage(@NonNull ApplicationMode mode, @NonNull ListStringPreference oldPreference, @NonNull ListStringPreference newPreference) {
+		if (oldPreference.isSetForMode(mode)) {
+			String oldString = oldPreference.getModeValue(mode);
+			String newString = oldString.replace(WIDGET_SEPARATOR, oldPreference.getDelimiter());
+			newPreference.setModeValue(mode, newString);
+		}
+		oldPreference.clearAll();
+	}
+
+	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+		}
+	}
+
+	public static void updateExistingWidgetIds(@NonNull OsmandSettings settings,
+	                                           @NonNull ApplicationMode appMode,
+	                                           @NonNull ListStringPreference verticalPanelPreference,
+	                                           @NonNull ListStringPreference sidePanelPreference) {
+		List<String> allSideWidgets = new ArrayList<>();
+		List<String> sideWidgets = sidePanelPreference.getStringsListForProfile(appMode);
+		List<String> verticalWidgets = verticalPanelPreference.getStringsListForProfile(appMode);
+
+		if (verticalWidgets != null && sideWidgets != null && verticalPanelPreference.isSetForMode(appMode)) {
+			for (String widgetPage : sideWidgets) {
+				allSideWidgets.addAll(Arrays.asList(widgetPage.split(",")));
+			}
+			for (int i = 0; i < verticalWidgets.size(); i++) {
+				String widgetId = verticalWidgets.get(i);
+				if (WidgetType.isOriginalWidget(widgetId) && allSideWidgets.contains(widgetId)) {
+					String widgetsVisibilityString = settings.MAP_INFO_CONTROLS.getModeValue(appMode);
+					List<String> widgetsVisibility = new ArrayList<>(Arrays.asList(widgetsVisibilityString.split(SETTINGS_SEPARATOR)));
+					widgetsVisibility.remove(widgetId);
+					widgetsVisibility.remove(COLLAPSED_PREFIX + widgetId);
+					widgetsVisibility.remove(HIDE_PREFIX + widgetId);
+
+					widgetId = WidgetType.getDuplicateWidgetId(widgetId);
+
+					verticalWidgets.set(i, widgetId);
+					verticalPanelPreference.setModeValues(appMode, verticalWidgets);
+					settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, widgetId);
+
+					widgetsVisibility.add(widgetId);
+					StringBuilder newVisibilityString = new StringBuilder();
+					for (String visibility : widgetsVisibility) {
+						newVisibilityString.append(visibility).append(SETTINGS_SEPARATOR);
+					}
+					settings.MAP_INFO_CONTROLS.setModeValue(appMode, newVisibilityString.toString());
+				}
+			}
+		}
+	}
+
+	private void updateExternalInputDevicePreferenceType() {
+		Map<Integer, String> updatedIds = new HashMap<>();
+		updatedIds.put(1, KeyboardDeviceProfile.ID);
+		updatedIds.put(2, ParrotDeviceProfile.ID);
+		updatedIds.put(3, WunderLINQDeviceProfile.ID);
+
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();;
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			Integer oldId = oldPreference.getModeValue(appMode);
+			String newId = oldId != null ? updatedIds.get(oldId) : null;
+			if (newId != null) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, newId);
+			} else {
+				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
+			}
+			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newId != null);
+		}
+	}
+
+	private void migrateCustomInputDevicesPreference() {
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<String> oldPreference = new StringPreference(settings, "custom_external_input_devices", "").makeGlobal();
+		String oldPreferenceValue = oldPreference.get();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, oldPreferenceValue);
 		}
 	}
 }

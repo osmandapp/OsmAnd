@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -32,6 +34,7 @@ import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
 import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -45,7 +48,7 @@ import java.util.List;
 import java.util.Set;
 
 public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implements SelectGpxTaskListener,
-		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, SmartFolderUpdateListener, FilterChangedListener, TackFiltersContainer {
+		FragmentStateHolder, SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, SmartFolderUpdateListener, FilterChangedListener, DialogClosedListener {
 
 	public static final String TAG = SearchMyPlacesTracksFragment.class.getSimpleName();
 
@@ -54,9 +57,12 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	private View searchContainer;
 	private TextView selectedCountTv;
 	private SmartFolder smartFolder;
+	private TrackFolder currentFolder;
 	private DialogButton resetAllButton;
 	private DialogButton saveButton;
 	private View bottomButtonsContainer;
+	private TracksSearchFilter externalFilter;
+	private DialogClosedListener dialogClosedListener;
 
 	@Override
 	protected int getLayoutId() {
@@ -78,14 +84,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		if (smartFolder != null) {
-			adapter.initSelectedFilters(smartFolder.getFilters());
-			String searchQuery = adapter.getCurrentSearchQuery();
-			searchEditText.setText(searchQuery);
-			adapter.updateFilteredItems(smartFolder.getTrackItems());
-		}
 		setupBottomMenu(view);
 		return view;
+	}
+
+	@NonNull
+	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
+		if (externalFilter != null) {
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
+		} else {
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, currentFolder);
+		}
 	}
 
 	@Override
@@ -146,6 +155,14 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		}
 	}
 
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		super.onDismiss(dialog);
+		if (dialogClosedListener != null) {
+			dialogClosedListener.onDialogClosed();
+		}
+	}
+
 	private void reloadTracks() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
@@ -197,8 +214,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
 				SearchMyPlacesTracksFragment currentFragment = SearchMyPlacesTracksFragment.this;
 				foldersHelper.showItemsOptionsMenu(actionButton, null, trackItems, new HashSet<>(),
-						currentFragment, currentFragment,
-						currentFragment, app.getDaynightHelper().isNightMode(false));
+						currentFragment, currentFragment, app.getDaynightHelper().isNightMode(false));
 			}
 		});
 
@@ -309,8 +325,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	public void onResume() {
 		super.onResume();
 		setupToolbar(requireView());
-//		updateNightMode();
-//		updateStatusBarColor(requireDialog().getWindow());
+		app.getSelectedGpxHelper().addListener(this);
 		app.getSmartFolderHelper().addUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).addFiltersChangedListener(this);
 		updateContent();
@@ -322,16 +337,9 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	public void updateContent() {
-		if (smartFolder != null) {
-			adapter.updateFilteredItems(smartFolder.getTrackItems());
-		}
-		super.updateContent();
-	}
-
-	@Override
 	public void onPause() {
 		super.onPause();
+		app.getSelectedGpxHelper().removeListener(this);
 		app.getSmartFolderHelper().removeUpdateListener(this);
 		((TracksSearchFilter) adapter.getFilter()).removeFiltersChangedListener(this);
 	}
@@ -344,12 +352,23 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
 	                                boolean selectionMode, boolean usedOnMap,
-	                                @Nullable SmartFolder smartFolder) {
+	                                @Nullable SmartFolder smartFolder,
+	                                @Nullable TracksSearchFilter externalFilter,
+	                                @Nullable DialogClosedListener dialogClosedListener,
+	                                @Nullable TrackFolder currentFolder
+	) {
+		Fragment foundFragment = manager.findFragmentByTag(TAG);
+		if (foundFragment instanceof SearchMyPlacesTracksFragment) {
+			((SearchMyPlacesTracksFragment) foundFragment).dismiss();
+		}
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchMyPlacesTracksFragment fragment = new SearchMyPlacesTracksFragment();
 			fragment.smartFolder = smartFolder;
+			fragment.currentFolder = currentFolder;
 			fragment.usedOnMap = usedOnMap;
 			fragment.selectionMode = selectionMode;
+			fragment.externalFilter = externalFilter;
+			fragment.dialogClosedListener = dialogClosedListener;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
@@ -370,9 +389,11 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void showFiltersDialog() {
 		FragmentManager manager = getFragmentManager();
-		Filter filter = adapter.getFilter();
+    TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+		filter.setCurrentFolder(currentFolder);
 		if (manager != null && filter instanceof TracksSearchFilter) {
-			TracksFilterFragment.Companion.showInstance(manager, (TracksSearchFilter) filter, this, smartFolder);
+			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder, currentFolder);
+  
 		}
 	}
 
@@ -382,11 +403,20 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	public void onFilterDialogClosed() {
+	public void onDialogClosed() {
 		setupFilterCallback();
 		List<TrackItem> filteredItems = ((TracksSearchFilter) adapter.getFilter()).getFilteredTrackItems();
 		if (filteredItems != null) {
 			updateAdapterWithFilteredItems(filteredItems);
 		}
+	}
+
+	public void setDialogClosedListener(DialogClosedListener dialogClosedListener) {
+		this.dialogClosedListener = dialogClosedListener;
+	}
+
+	@Override
+	public void onSmartFolderCreated(SmartFolder smartFolder) {
+		dismiss();
 	}
 }

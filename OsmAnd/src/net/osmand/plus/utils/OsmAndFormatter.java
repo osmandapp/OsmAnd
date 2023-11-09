@@ -62,8 +62,6 @@ public class OsmAndFormatter {
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
 
-	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
-	private static final int MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT = 24 * 60 * 60;
 	private static final int SECONDS_IN_HOUR = 3600;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
@@ -107,9 +105,9 @@ public class OsmAndFormatter {
 		shortTimeFormatter = new TimeFormatter(locale, "HH:mm", "h:mm a");
 	}
 
-	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
-		int hours = seconds / (60 * 60);
-		int minutes = (seconds / 60) % 60;
+	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
+		long hours = seconds / (60 * 60);
+		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
 			return hours + " "
 					+ app.getString(R.string.osmand_parking_hour)
@@ -120,52 +118,6 @@ public class OsmAndFormatter {
 		} else {
 			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
 		}
-	}
-
-	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems,
-	                                            String def, boolean showTime) {
-		if (lastUploadedTimems > 0) {
-			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
-			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				return showTime
-						? getFormattedDateTime(app, lastUploadedTimems)
-						: getFormattedDate(app, lastUploadedTimems);
-			} else {
-				String formattedDuration = getFormattedDuration((int) duration, app);
-				if (Algorithms.isEmpty(formattedDuration)) {
-					return app.getString(R.string.duration_moment_ago);
-				} else {
-					return app.getString(R.string.duration_ago, formattedDuration);
-				}
-			}
-		}
-		return def;
-	}
-
-	public static String getChangesFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
-		if (lastUploadedTimems > 0) {
-			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
-
-			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy, HH:mm:ss");
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(lastUploadedTimems);
-				return dateFormat.format(calendar.getTime());
-			} else if (duration > MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(lastUploadedTimems);
-				return app.getString(R.string.yesterday) + ", " + dateFormat.format(calendar.getTime());
-			} else {
-				String formattedDuration = getFormattedDuration((int) duration, app);
-				if (Algorithms.isEmpty(formattedDuration)) {
-					return app.getString(R.string.duration_moment_ago);
-				} else {
-					return app.getString(R.string.duration_ago, formattedDuration);
-				}
-			}
-		}
-		return def;
 	}
 
 	public static String getFormattedDurationShort(int seconds) {

@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
+import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -134,7 +135,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 		updateEnable = true;
 		startHandler();
-		restoreState(getArguments());
 		updateProgressVisibility();
 	}
 
@@ -167,7 +167,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		int itemId = item.getItemId();
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
-			if (activity != null) {
+			if (activity != null && rootFolder != null) {
 				selectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
 				selectionHelper.clearSelectedItems();
 				selectionHelper.setOriginalSelectedItems(Collections.emptyList());
@@ -176,6 +176,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						this,
 						false,
 						isUsedOnMap(),
+						null,
+						null,
+						null,
 						null);
 			}
 		}
@@ -270,10 +273,25 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	private void updateProgressVisibility(boolean visible) {
+		if (!updateFragmentsProgress(visible) || !visible) {
+			MyPlacesActivity activity = getMyActivity();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(visible);
+			}
+		}
+	}
+
+	private boolean updateFragmentsProgress(boolean isLoading) {
+		boolean appliedProgressToFragments = false;
 		MyPlacesActivity activity = getMyActivity();
 		if (activity != null) {
-			activity.setSupportProgressBarIndeterminateVisibility(visible);
+			TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
+			if (folderFragment != null) {
+				folderFragment.setLoadingItems(isLoading);
+				appliedProgressToFragments = true;
+			}
 		}
+		return appliedProgressToFragments;
 	}
 
 	private void openTrackFolder(@NonNull TrackFolder trackFolder) {
@@ -314,21 +332,23 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null);
+		ScreenPositionData screenPositionData = new ScreenPositionData(trackItem, getViewOnScreenY(view));
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null, screenPositionData);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group));
+		ScreenPositionData screenPositionData = new ScreenPositionData(group, getViewOnScreenY(view));
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group), screenPositionData);
 	}
 
 	@Override
-	public void gpxSelectionStarted() {
+	public void onGpxSelectionStarted() {
 		updateProgressVisibility(true);
 	}
 
 	@Override
-	public void gpxSelectionFinished() {
+	public void onGpxSelectionFinished() {
 		updateProgressVisibility(false);
 		updateVisibleTracks();
 	}
@@ -444,7 +464,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 
 			public void updateFragmentsFolders() {
-				List<TrackFolder> folders = rootFolder.getFlattenedSubFolders();
+				List<TrackFolder> folders = new ArrayList<>(rootFolder.getFlattenedSubFolders());
 				folders.add(rootFolder);
 
 				MyPlacesActivity activity = getMyActivity();
@@ -497,14 +517,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void showChangeAppearanceDialog(@NonNull SmartFolder folder) {
-		selectionHelper.setAllItems(folder.getTrackItems());
-		selectionHelper.setSelectedItems(folder.getTrackItems());
-		selectionHelper.setOriginalSelectedItems(folder.getTrackItems());
-		super.showChangeAppearanceDialog(folder);
-	}
-
-	@Override
 	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
 		selectionHelper.setAllItems(folder.getFlattenedTrackItems());
 		selectionHelper.setSelectedItems(folder.getFlattenedTrackItems());
@@ -520,6 +532,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onSmartFolderCreated(SmartFolder smartFolder) {
 		updateContent();
+		openSmartFolder(smartFolder);
 	}
 
 	@Override

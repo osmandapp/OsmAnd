@@ -22,7 +22,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -236,10 +236,6 @@ public class MapLayers {
 			}
 			layer.setMapActivity(mapActivity);
 		}
-		MapRendererView mapRenderer = mapView.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.removeAllSymbolsProviders();
-		}
 	}
 
 	public boolean hasMapActivity() {
@@ -389,7 +385,7 @@ public class MapLayers {
 				if (mapActivity.getDashboard().isVisible()) {
 					mapActivity.getDashboard().hideDashboard();
 				}
-				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW, true);
+				mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, true);
 			} else {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();

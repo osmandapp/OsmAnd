@@ -159,7 +159,7 @@ public class SelectedTracksHelper {
 		return items;
 	}
 
-	private void processRecentlyVisibleTracks() {
+	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		for (GPXFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
@@ -170,7 +170,7 @@ public class SelectedTracksHelper {
 		}
 	}
 
-	private void processVisibleTracks() {
+	public void processVisibleTracks() {
 		List<TrackItem> selectedItems = new ArrayList<>();
 		if (gpxSelectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : itemsSelectionHelper.getAllItems()) {
@@ -235,9 +235,7 @@ public class SelectedTracksHelper {
 	}
 
 	public void saveTracksVisibility() {
-		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems(), null);
-		processVisibleTracks();
-		processRecentlyVisibleTracks();
+		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems());
 	}
 
 	private void sortTrackTabs() {

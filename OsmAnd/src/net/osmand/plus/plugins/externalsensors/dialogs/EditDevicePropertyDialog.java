@@ -81,7 +81,7 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 			if (plugin != null) {
 				int metricResId = plugin.getPropertyMetric(property, false);
 				if (metricResId != 0) {
-					if (AndroidUtils.isRTL()) {
+					if (AndroidUtils.isLayoutRtl(view.getContext())) {
 						textInput.setPrefix(app.getString(metricResId));
 					} else {
 						textInput.setSuffix(app.getString(metricResId));

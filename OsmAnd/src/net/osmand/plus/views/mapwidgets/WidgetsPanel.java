@@ -119,8 +119,8 @@ public enum WidgetsPanel {
 
 	@NonNull
 	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
-	                                             @NonNull String widgetId,
-	                                             @NonNull OsmandSettings settings) {
+												 @NonNull String widgetId,
+												 @NonNull OsmandSettings settings) {
 		ListStringPreference orderPreference = getOrderPreference(settings);
 		List<String> pages = orderPreference.getStringsListForProfile(appMode);
 		if (Algorithms.isEmpty(pages)) {
@@ -140,8 +140,8 @@ public enum WidgetsPanel {
 	}
 
 	public boolean setWidgetsOrder(@NonNull ApplicationMode appMode,
-	                               @NonNull List<List<String>> pagedOrder,
-	                               @NonNull OsmandSettings settings) {
+								   @NonNull List<List<String>> pagedOrder,
+								   @NonNull OsmandSettings settings) {
 		ListStringPreference orderPreference = getOrderPreference(settings);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (List<String> widgets : pagedOrder) {
@@ -162,10 +162,6 @@ public enum WidgetsPanel {
 		return getWidgetOrder(appMode, widgetId, settings) != DEFAULT_ORDER;
 	}
 
-	public boolean isPagingAllowed() {
-		return this == LEFT || this == RIGHT;
-	}
-
 	@NonNull
 	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings) {
 		if (this == LEFT) {
@@ -180,7 +176,7 @@ public enum WidgetsPanel {
 		throw new IllegalStateException("Unsupported panel");
 	}
 
-	public  boolean isPanelVertical(){
+	public boolean isPanelVertical() {
 		return this == TOP || this == BOTTOM;
 	}
 

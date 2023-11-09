@@ -193,7 +193,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private OnBackPressedCallback onBackPressedCallback;
 	private OnGlobalLayoutListener widgetsLayoutListener;
 
-	private String fileName;
+	private String filePath;
 	private boolean showSnapWarning;
 	private boolean adjustMapPosition = true;
 
@@ -522,8 +522,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		toolBarController.setOnBackButtonClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GpxApproximationFragment gpxApproximationFragment = activity.getGpxApproximationFragment();
-				SnapTrackWarningFragment snapTrackWarningFragment = activity.getSnapTrackWarningBottomSheet();
+				GpxApproximationFragment gpxApproximationFragment = activity.getFragmentsHelper().getGpxApproximationFragment();
+				SnapTrackWarningFragment snapTrackWarningFragment = activity.getFragmentsHelper().getSnapTrackWarningBottomSheet();
 				if (gpxApproximationFragment != null) {
 					gpxApproximationFragment.dismissImmediate();
 				} else if (snapTrackWarningFragment != null) {
@@ -575,8 +575,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GpxData gpxData = editingCtx.getGpxData();
 		initMeasurementMode(gpxData, savedInstanceState == null);
 		if (savedInstanceState == null) {
-			if (fileName != null) {
-				getGpxFile(fileName, gpxFile -> {
+			if (filePath != null) {
+				getGpxFile(filePath, gpxFile -> {
 					addNewGpxData(gpxFile);
 					return true;
 				});
@@ -1395,9 +1395,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		return new SelectFileListener() {
 			@Override
-			public void selectFileOnCLick(String gpxFileName) {
+			public void selectFileOnCLick(String filePath) {
 				if (mapActivity != null) {
-					getGpxFile(gpxFileName, gpxFile -> {
+					getGpxFile(filePath, gpxFile -> {
 						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 						boolean showOnMap = selectedGpxFile != null;
 						saveExistingGpx(gpxFile, showOnMap, false, true, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
@@ -1412,15 +1412,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		};
 	}
 
-	private void getGpxFile(@Nullable String gpxFileName, @NonNull CallbackWithObject<GPXFile> callback) {
-		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(gpxFileName);
-		if (gpxFileName == null) {
+	private void getGpxFile(@Nullable String filePath, @NonNull CallbackWithObject<GPXFile> callback) {
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
+		if (filePath == null) {
 			callback.processResult(app.getSavingTrackHelper().getCurrentGpx());
 		} else if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile.getGpxFile());
 		} else {
-			File file = new File(app.getAppPath(GPX_INDEX_DIR), gpxFileName);
-			GpxFileLoaderTask.loadGpxFile(file, getActivity(), callback);
+			GpxFileLoaderTask.loadGpxFile(new File(filePath), getActivity(), callback);
 		}
 	}
 
@@ -2152,9 +2151,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, String fileName, boolean adjustMapPosition) {
+	public static boolean showInstance(FragmentManager fragmentManager, String filePath, boolean adjustMapPosition) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
-		fragment.fileName = fileName;
+		fragment.filePath = filePath;
 		fragment.adjustMapPosition = adjustMapPosition;
 		fragment.setMode(PLAN_ROUTE_MODE, true);
 		return showFragment(fragment, fragmentManager);

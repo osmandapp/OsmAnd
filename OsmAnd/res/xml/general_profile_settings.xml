@@ -88,8 +88,8 @@
 		android:title="@string/use_volume_buttons_as_zoom"
 		tools:icon="@drawable/ic_action_zoom_volume_buttons" />
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:key="external_input_device"
+	<Preference
+		android:key="selected_external_input_device"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/external_input_device" />
 

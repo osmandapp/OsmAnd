@@ -298,7 +298,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private void importTracks() {
 		File folder = new File(selectedFolder);
 		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
-		saveTracksTask = new SaveTracksTask(new ArrayList<>(selectedTracks), folder, saveGpxListener);
+		saveTracksTask = new SaveTracksTask(app, new ArrayList<>(selectedTracks), folder, saveGpxListener);
 		saveTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -470,7 +470,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		FragmentActivity activity = getActivity();
 		TracksFragment tracksFragment = null;
 		if (activity instanceof MapActivity) {
-			tracksFragment = ((MapActivity) activity).getFragment(TracksFragment.TAG);
+			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksFragment.TAG);
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();

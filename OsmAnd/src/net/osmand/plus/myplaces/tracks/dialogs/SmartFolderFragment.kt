@@ -1,12 +1,14 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
+import net.osmand.plus.myplaces.tracks.DialogClosedListener
+import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
+import net.osmand.plus.myplaces.tracks.TracksSearchFilter
+import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.track.data.TracksGroup
@@ -15,12 +17,14 @@ import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 
-class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
+class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
+	EmptySmartFolderListener,
+	DialogClosedListener {
 
 	companion object {
 		private val TAG = SmartFolderFragment::class.java.simpleName
 
-		fun showInstance(manager: FragmentManager, folder: SmartFolder, target: Fragment?) {
+		fun showInstance(manager: FragmentManager, folder: SmartFolder, target: Fragment) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TrackFolderFragment.TAG)) {
 				val fragment = SmartFolderFragment()
 				fragment.setSmartFolder(folder)
@@ -50,10 +54,11 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
 			.setOnClickListener { v: View? ->
 				smartFolder?.let {
 					showTracksSelection(
-						it,
-						this,
-						null,
-						null)
+						folder = it,
+						fragment = this,
+						trackItems = null,
+						tracksGroups = null,
+						screenPositionData = null)
 				}
 			}.create())
 
@@ -70,17 +75,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
 			.setTitleId(R.string.edit_fiilter)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
 			.setOnClickListener { v: View? ->
-
-				val manager = fragmentManager
-				if (manager != null) {
-					SearchMyPlacesTracksFragment.showInstance(
-						manager,
-						targetFragment,
-						false,
-						isUsedOnMap,
-						smartFolder)
-
-				}
+				editFilters()
 			}
 			.showTopDivider(true)
 			.create())
@@ -95,20 +90,15 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
 		return true
 	}
 
-	override fun restoreState(bundle: Bundle?) {
-		super.restoreState(bundle)
-	}
-
 	private fun showTracksSelection(
 		folder: TracksGroup, fragment: BaseTrackFolderFragment,
-		trackItems: Set<TrackItem?>?, tracksGroups: Set<TracksGroup?>?) {
+		trackItems: Set<TrackItem?>?, tracksGroups: Set<TracksGroup?>?,
+		screenPositionData: ScreenPositionData?
+	) {
 		val manager = requireActivity().supportFragmentManager
 		TracksSelectionFragment.showInstance(
-			manager,
-			folder,
-			fragment,
-			trackItems,
-			tracksGroups)
+			manager, folder, fragment, trackItems, tracksGroups, screenPositionData
+		)
 	}
 
 	override fun onResume() {
@@ -136,9 +126,32 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener {
 	override fun onSmartFoldersUpdated() {
 		super.onSmartFoldersUpdated()
 		val actualFolder = smartFolderHelper.getSmartFolder(smartFolder.folderName)
-		if (actualFolder != smartFolder) {
+		if (actualFolder != null && actualFolder != smartFolder) {
 			smartFolder = actualFolder
 		}
 		updateContent()
 	}
+
+	override fun setupAdapter(view: View) {
+		super.setupAdapter(view)
+		adapter.setEmptySmartFolderListener(this)
+	}
+
+	override fun editFilters() {
+		if (smartFolder != null) {
+			val manager = fragmentManager
+			val trackItems = ArrayList<TrackItem>()
+			trackItems.addAll(smartFolderHelper.getAllAvailableTrackItems())
+			val filter = TracksSearchFilter(app, trackItems)
+			filter.initSelectedFilters(smartFolder.filters)
+			if (manager != null) {
+				targetFragment?.let { showInstance(app, manager, it, filter, this, smartFolder, null) }
+			}
+		}
+	}
+
+	override fun onDialogClosed() {
+		updateContent()
+	}
+
 }

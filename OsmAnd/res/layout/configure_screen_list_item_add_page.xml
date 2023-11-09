@@ -28,6 +28,7 @@
 
 		<net.osmand.plus.widgets.TextViewEx
 			style="@style/TitleStyle.Medium"
+			android:id="@+id/add_page"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/dialog_button_height"

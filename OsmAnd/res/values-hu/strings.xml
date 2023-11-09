@@ -1267,7 +1267,7 @@
     <string name="lang_sr">szerb (cirill betűs)</string>
     <string name="lang_zh_cn">kínai (egyszerűsített)</string>
     <string name="lang_zh_tw">kínai (hagyományos)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistautak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
     <string name="arrival_distance_factor_late">Közel</string>
@@ -2973,7 +2973,7 @@
     <string name="application_profiles">Alkalmazásprofilok</string>
     <string name="routing_attr_piste_type_sled_name">Szánkó</string>
     <string name="app_mode_offroad">Terep</string>
-    <string name="external_input_device">Külső beviteli eszköz</string>
+    <string name="external_input_device">Külső beviteli eszközök</string>
     <string name="external_input_device_descr">Külső vezérlőeszköz (például általános billentyűzet vagy WunderLINQ) kijelölése.</string>
     <string name="sett_no_ext_input">Nincs</string>
     <string name="sett_generic_ext_input">Billentyűzet</string>
@@ -3882,8 +3882,8 @@
     <string name="reverse_all_points">Összes pont megfordítása</string>
     <string name="profile_by_default_description">Jelölje ki az alkalmazás elindításakor használandó profilt.</string>
     <string name="shared_string_last_used">Utoljára használt</string>
-    <string name="routing_attr_prefer_hiking_routes_description">Túraútvonalak előnyben részesítése</string>
-    <string name="routing_attr_prefer_hiking_routes_name">Túraútvonalak előnyben részesítése</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Turistautak előnyben részesítése</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Turistautak előnyben részesítése</string>
     <string name="routing_attr_allow_streams_description">Patakok és vízelvezető árkok engedélyezése</string>
     <string name="routing_attr_allow_streams_name">Patakok és vízelvezető árkok engedélyezése</string>
     <string name="routing_attr_allow_intermittent_description">Időszakos vízfolyások engedélyezése</string>
@@ -3955,7 +3955,7 @@
     <string name="uploaded_count">%1$d / %2$d feltöltve</string>
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
-    <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
+    <string name="hillshade_slope_contour_lines">Szintvonalak / Domborzatárnyékolás / Lejtés</string>
     <string name="open_place_reviews_plugin_description">Hozzájárulhat az OpenPlaceReviews projekthez, például éttermekről, szállodákról vagy múzeumokról készült fényképekkel, véleményekkel vagy linkekkel.
 \n
 \nA közreműködés módjáról olvashat a %1$s weboldalunkon.</string>
@@ -5424,7 +5424,9 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Siklási arány widget hozzáadva
+    <string name="release_4_6">• Külső beviteli eszközök billentyű hozzárendelés megváltoztatásának lehetősége hozzáadva
+\n
+\n • Siklási arány widget hozzáadva
 \n
 \n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
 \n
@@ -5479,4 +5481,76 @@
     <string name="edit_fiilter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
     <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
+    <string name="empty_smart_folder_description">Minden egyező nyomvonal itt fog megjelenni</string>
+    <string name="configure_filter">Szűrő konfigurálása</string>
+    <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
+    <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
+    <string name="shared_string_loading">Betöltés</string>
+    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt\?</string>
+    <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
+    <string name="loading_tracks">Nyomvonalak újratöltése</string>
+    <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d nyomvonal)</item>
+        <item quantity="other">%1$d (%2$d nyomvonal)</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból\? Ezt a műveletet nem lehet később visszavonni.</string>
+    <string name="restore_from_trash">Visszaállítás a Lomtárból</string>
+    <string name="delete_all_items">Összes elem törlése</string>
+    <string name="trash_is_empty_banner_desc">Az OsmAnd felhőből eltávolított elemek itt még elérhetőek %1$s napig.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne\?
+\n
+\nA művelet nem vonható vissza.</string>
+    <string name="shared_string_empty_trash">Lomtár kiürítése</string>
+    <string name="shared_string_delete_immediately">Azonnali törlés</string>
+    <string name="shared_string_is_deleted">%1$s törölve.</string>
+    <string name="cloud_item_restored">%1$s visszaállítva a felhőbe.</string>
+    <string name="trash_alert_card_desc">A lomtárban lévő elemek %1$s nap után törlődnek.</string>
+    <string name="trash_is_empty">A lomtár üres</string>
+    <string name="shared_string_trash">Lomtár</string>
+    <string name="shared_string_delete_item">Elem törlése</string>
+    <string name="root_folder">Gyökérmappa</string>
+    <string name="shared_string_rows">Sorok</string>
+    <string name="all_folders">Minden mappa</string>
+    <string name="shared_string_show_less">Kevesebb mutatása</string>
+    <string name="folder">Mappa</string>
+    <string name="not_specified">Nem meghatározott</string>
+    <string name="key_event_action_zoom_in">Nagyítás</string>
+    <string name="enable_to_use_external_input_device">Külső beviteli eszköz használatának engedélyezése az OsmAnd-nek</string>
+    <string name="key_event_action_change_map_orientation">Térkép tájolás módosítása</string>
+    <string name="key_event_action_previous_app_profile">Előző alkalmazásprofil</string>
+    <string name="show_toast_about_key_pressed">A lenyomott billentyű kijelzése</string>
+    <string name="key_event_action_move_left">Mozgás balra</string>
+    <string name="press_button_to_link_with_action">Nyomja meg a gombot a készülékén, hogy társítsa ehhez művelethez: %1$s</string>
+    <string name="key_event_action_move_right">Mozgás jobbra</string>
+    <string name="shared_string_button">Gomb</string>
+    <string name="key_event_action_next_app_profile">Következő alkalmazásprofil</string>
+    <string name="change_key_binding">Billentyű hozzárendelés módosítása</string>
+    <string name="key_event_action_take_media_note">Médiajegyzet felvétele</string>
+    <string name="key_event_action_activity_back_pressed">Művelet vissza megnyomva</string>
+    <string name="key_event_action_emit_navigation_hint">Navigációs tippek adása</string>
+    <string name="remove_type_q">Biztosan eltávolítja a(z) \"%1$s\" típust\?</string>
+    <string name="shared_string_action">Művelet</string>
+    <string name="add_new_type">Új típus hozzáadása</string>
+    <string name="key_event_action_move_up">Mozgás fel</string>
+    <string name="key_event_action_open_search_view">Keresési nézet megnyitása</string>
+    <string name="key_event_action_zoom_out">Kicsinyítés</string>
+    <string name="key_event_action_toggle_drower">Oldalmenü be/ki</string>
+    <string name="key_is_already_assigned_error">A(z) \"%1$s\" billentyű már hozzá van rendelve ehhez a művelethez: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Navigációs nézet megnyitása</string>
+    <string name="external_input_device_title">Külső beviteli eszköz</string>
+    <string name="key_bindings">Billentyű hozzárendelések</string>
+    <string name="key_event_action_move_to_my_location">Ugrás a pozíciómra</string>
+    <string name="key_event_category_map_interactions">Térképműveletek</string>
+    <string name="key_event_action_move_down">Mozgás le</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ Datagrid megnyitása</string>
+    <string name="key_event_category_actions">Műveletek</string>
+    <string name="deletion_error">Hiba törléskor</string>
+    <string name="change_button">Gomb módosítása</string>
+    <string name="download_to_device">Letöltés az eszközre</string>
+    <string name="remove_widget_first">Előbb távolítsa el a widgetet</string>
+    <string name="add_row">Sor hozzáadása</string>
+    <string name="discard_changes_prompt">Biztosan elveti a változtatásokat?</string>
+    <string name="row_number">%1$s. sor</string>
 </resources>

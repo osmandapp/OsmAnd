@@ -1,8 +1,5 @@
 package net.osmand.plus.feedback;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -86,21 +83,18 @@ public class FeedbackHelper {
 		text.append("\nBuild : ").append(Build.DISPLAY);
 		text.append("\nVersion : ").append(Build.VERSION.RELEASE);
 		text.append("\nApp Version : ").append(Version.getAppName(app));
-		try {
-			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
-			if (info != null) {
-				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-			}
-		} catch (NameNotFoundException e) {
-			log.error(e);
+
+		PackageInfo info = getPackageInfo();
+		if (info != null) {
+			text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
 		}
 		return text.toString();
 	}
 
 	public void setExceptionHandler() {
 		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
-			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		if (!(uncaughtExceptionHandler instanceof ExceptionHandler)) {
+			Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(app));
 		}
 	}
 
@@ -112,7 +106,7 @@ public class FeedbackHelper {
 		}
 	}
 
-	private void saveException(@NonNull Thread thread, @NonNull Throwable throwable) throws IOException {
+	public void saveException(@NonNull Thread thread, @NonNull Throwable throwable) throws IOException {
 		File file = app.getAppPath(EXCEPTION_PATH);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		PrintStream printStream = new PrintStream(out);
@@ -122,12 +116,10 @@ public class FeedbackHelper {
 				.append(Version.getFullVersion(app))
 				.append("\n")
 				.append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
-		try {
-			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
-			if (info != null) {
-				msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-			}
-		} catch (Throwable e) {
+
+		PackageInfo info = getPackageInfo();
+		if (info != null) {
+			msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
 		}
 		msg.append("\n")
 				.append("Exception occurred in thread ")
@@ -142,32 +134,13 @@ public class FeedbackHelper {
 		}
 	}
 
-	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
-
-		private final UncaughtExceptionHandler defaultHandler;
-		private final PendingIntent intent;
-
-		public DefaultExceptionHandler() {
-			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-			intent = PendingIntent.getActivity(app.getBaseContext(), 0,
-					new Intent(app.getBaseContext(),
-							app.getAppCustomization().getMapActivity()), PendingIntent.FLAG_IMMUTABLE);
-		}
-
-		@Override
-		public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
-			try {
-				saveException(thread, ex);
-				if (app.getRoutingHelper().isFollowingMode()) {
-					AlarmManager mgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-					mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					System.exit(2);
-				}
-				defaultHandler.uncaughtException(thread, ex);
-			} catch (Exception e) {
-				// swallow all exceptions
-				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e);
-			}
+	@Nullable
+	public PackageInfo getPackageInfo() {
+		try {
+			return app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
+		} catch (NameNotFoundException e) {
+			log.error(e);
+			return null;
 		}
 	}
 }

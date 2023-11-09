@@ -157,11 +157,12 @@
 	</FrameLayout>
 
 	<!-- Container for top widgets: Coordinates, Map markers bar, Street name, Lanes -->
-	<LinearLayout
+	<net.osmand.plus.views.controls.VerticalWidgetPanel
 		android:id="@+id/top_widgets_panel"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical" />
+		android:orientation="vertical"
+		osmand:topPanel="true"/>
 
 	<!-- LEFT, CENTER and RIGHT widgets -->
 	<FrameLayout

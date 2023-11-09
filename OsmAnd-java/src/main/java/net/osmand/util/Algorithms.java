@@ -1,5 +1,6 @@
 package net.osmand.util;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -1371,6 +1372,12 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static <T> List<T> setInList(Collection<T> original, int position, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.set(position, element);
+		return copy;
+	}
+
 	public static <T> List<T> removeFromList(Collection<T> original, T element) {
 		List<T> copy = new ArrayList<>(original);
 		copy.remove(element);
@@ -1400,5 +1407,28 @@ public class Algorithms {
 	public static long combine2Points(int x, int y) {
 		return (((long) x) << 32) | ((long) y);
 	}
-	
+
+	public static String makeUniqueName(String oldName, CallbackWithObject<String> checkNameCallback) {
+		int suffix = 0;
+		int i = oldName.length() - 1;
+		do {
+			try {
+				if (oldName.charAt(i) == ' ' || oldName.charAt(i) == '-') {
+					throw new NumberFormatException();
+				}
+				suffix = Integer.parseInt(oldName.substring(i));
+			} catch (NumberFormatException e) {
+				break;
+			}
+			i--;
+		} while (i >= 0);
+		String newName;
+		String divider = suffix == 0 ? " " : "";
+		do {
+			suffix++;
+			newName = oldName.substring(0, i + 1) + divider + suffix;
+		}
+		while (!checkNameCallback.processResult(newName));
+		return newName;
+	}
 }

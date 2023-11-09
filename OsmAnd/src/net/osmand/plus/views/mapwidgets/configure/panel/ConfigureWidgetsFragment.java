@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.utils.WidgetUtils.addSelectedWidgets;
+import static net.osmand.plus.utils.WidgetUtils.createNewWidgets;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -39,24 +39,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment.AddWidgetListener;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
 		OnOffsetChangedListener, InAppPurchaseListener, AddWidgetListener {
@@ -241,8 +230,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
-		addSelectedWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode);
+	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel, boolean recreateControls) {
+		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls);
 		onWidgetsConfigurationChanged();
 	}
 

@@ -500,19 +500,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void updateLocation(@Nullable Location location, @Nullable Float heading) {
-		// use because there is a bug on some devices with location.getTime()
-		long locationTime = System.currentTimeMillis();
-
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
 			lastRoutingApplicationMode = null;
 		}
-		boolean record = shouldRecordLocation(location, locationTime);
+		boolean record = shouldRecordLocation(location);
 		if (record) {
 			heading = getAdjustedHeading(heading);
 
-			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
+			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
 					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
 
 			String pluginsInfo = getPluginsInfo(location);
@@ -526,10 +523,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
-	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
+	private boolean shouldRecordLocation(@Nullable Location location) {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
+			long locationTime = location.getTime();
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()

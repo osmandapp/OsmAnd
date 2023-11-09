@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -54,6 +55,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	private Set<TrackItem> preselectedTrackItems;
 	@Nullable
 	private Set<TracksGroup> preselectedTracksGroups;
+	@Nullable
+	private ScreenPositionData screenPositionData;
+	private boolean scrollPositionApplied;
 	@Nullable
 	private MenuItem selectionItem;
 
@@ -118,6 +122,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		setupToolbar();
 		updateContent();
 		updateSelection();
+		applyScrollPosition();
 
 		return view;
 	}
@@ -191,7 +196,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 				View view = activity.findViewById(R.id.action_overflow_menu);
 				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
 				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, this, isNightMode());
+				foldersHelper.showItemsOptionsMenu(view, rootFolder, trackItems, tracksGroups, this, this, isNightMode());
 				return true;
 			}
 		}
@@ -226,9 +231,38 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null) {
-			int selectedSize = itemsSelectionHelper.getSelectedItemsSize() + groupsSelectionHelper.getSelectedItemsSize();
-			actionBar.setTitle(String.valueOf(selectedSize));
+			Set<TrackItem> tracks = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> groups = groupsSelectionHelper.getSelectedItems();
+			int items = tracks.size() + groups.size();
+			int total = tracks.size();
+			for (TracksGroup group : groups) {
+				total += group.getTrackItems().size();
+			}
+			String text = getResources().getQuantityString(R.plurals.tracks, total, items, total);
+			actionBar.setTitle(text);
 		}
+	}
+
+	private void applyScrollPosition() {
+		if (screenPositionData == null || scrollPositionApplied) {
+			return;
+		}
+		recyclerView.post(() -> {
+			int position = adapter.getItemPosition(screenPositionData.getReferenceObject());
+			recyclerView.scrollToPosition(position);
+
+			app.runInUIThread(() -> {
+				ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(position);
+				View view = viewHolder != null ? viewHolder.itemView : null;
+				if (view != null) {
+					int previousItemY = screenPositionData.getReferenceItemOnScreenY();
+					int currentItemY = AndroidUtils.getViewOnScreenY(view);
+					int correction = currentItemY - previousItemY;
+					recyclerView.scrollBy(0, correction);
+					scrollPositionApplied = true;
+				}
+			});
+		});
 	}
 
 	@Override
@@ -331,13 +365,16 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		return selectionHelper;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksGroup trackFolder,
-	                                @Nullable Fragment target, @Nullable Set<TrackItem> trackItems,
-	                                @Nullable Set<TracksGroup> tracksGroups) {
+	public static void showInstance(
+			@NonNull FragmentManager manager, @NonNull TracksGroup trackFolder, @Nullable Fragment target,
+			@Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups,
+			@Nullable ScreenPositionData screenPositionData
+	) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksSelectionFragment fragment = new TracksSelectionFragment();
 			fragment.preselectedTrackItems = trackItems;
 			fragment.preselectedTracksGroups = tracksGroups;
+			fragment.screenPositionData = screenPositionData;
 			fragment.setRetainInstance(true);
 			fragment.setRootFolder(trackFolder);
 			if (trackFolder instanceof TrackFolder) {

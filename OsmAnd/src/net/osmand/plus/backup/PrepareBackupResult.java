@@ -35,6 +35,7 @@ public class PrepareBackupResult {
 	PrepareBackupResult() {
 	}
 
+	@Nullable
 	public BackupInfo getBackupInfo() {
 		return backupInfo;
 	}
@@ -73,43 +74,44 @@ public class PrepareBackupResult {
 		return remoteFiles.get(typeWithName);
 	}
 
+	@Nullable
 	public String getError() {
 		return error;
 	}
 
-	void setBackupInfo(BackupInfo backupInfo) {
+	void setBackupInfo(@Nullable BackupInfo backupInfo) {
 		this.backupInfo = backupInfo;
 	}
 
-	void setSettingsItems(List<SettingsItem> settingsItems) {
+	void setSettingsItems(@NonNull List<SettingsItem> settingsItems) {
 		this.settingsItems = settingsItems;
 	}
 
-	void setRemoteFiles(List<RemoteFile> remoteFiles) {
+	void setRemoteFiles(@NonNull List<RemoteFile> remoteFiles) {
 		Map<String, RemoteFile> remoteFilesMap = new HashMap<>();
 		Map<String, RemoteFile> oldRemoteFiles = new HashMap<>();
-		for (RemoteFile rf : remoteFiles) {
-			String typeNamePath = rf.getTypeNamePath();
+		for (RemoteFile file : remoteFiles) {
+			String typeNamePath = file.getTypeNamePath();
 			if (!remoteFilesMap.containsKey(typeNamePath)) {
-				remoteFilesMap.put(typeNamePath, rf);
-			} else if (!rf.isInfoFile() && !rf.isDeleted()) {
-				oldRemoteFiles.put(typeNamePath, rf);
+				remoteFilesMap.put(typeNamePath, file);
+			} else if (!oldRemoteFiles.containsKey(typeNamePath) && !file.isInfoFile() && !file.isDeleted()) {
+				oldRemoteFiles.put(typeNamePath, file);
 			}
 		}
 		Map<String, RemoteFile> uniqueRemoteFiles = new HashMap<>();
 		Map<String, RemoteFile> uniqueInfoRemoteFiles = new HashMap<>();
 		Map<String, RemoteFile> deletedRemoteFiles = new HashMap<>();
 		Set<String> uniqueFileIds = new TreeSet<>();
-		for (Entry<String, RemoteFile> rfEntry : remoteFilesMap.entrySet()) {
-			String fileId = rfEntry.getKey();
-			RemoteFile rf = rfEntry.getValue();
+		for (Entry<String, RemoteFile> entry : remoteFilesMap.entrySet()) {
+			String fileId = entry.getKey();
+			RemoteFile file = entry.getValue();
 			if (uniqueFileIds.add(fileId)) {
-				if (rf.isInfoFile()) {
-					uniqueInfoRemoteFiles.put(fileId, rf);
-				} else if (rf.isDeleted()) {
-					deletedRemoteFiles.put(fileId, rf);
+				if (file.isInfoFile()) {
+					uniqueInfoRemoteFiles.put(fileId, file);
+				} else if (file.isDeleted()) {
+					deletedRemoteFiles.put(fileId, file);
 				} else {
-					uniqueRemoteFiles.put(fileId, rf);
+					uniqueRemoteFiles.put(fileId, file);
 				}
 			}
 		}
@@ -132,7 +134,7 @@ public class PrepareBackupResult {
 		this.localFiles = localFileMap;
 	}
 
-	void setError(String error) {
+	void setError(@Nullable String error) {
 		this.error = error;
 	}
 }

@@ -53,7 +53,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 	private TextView tvSelectedType;
 	private TextView tvDescription;
 
-	private enum WidthMode {
+	public enum WidthMode {
 		DEFAULT(R.string.map_widget_renderer, R.drawable.ic_action_map_style, null),
 		THIN(R.string.rendering_value_thin_name, R.drawable.ic_action_track_line_thin_color, "thin"),
 		MEDIUM(R.string.rendering_value_medium_name, R.drawable.ic_action_track_line_medium_color, "medium"),
@@ -69,6 +69,10 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 		int titleId;
 		int iconId;
 		String widthKey;
+
+		public String getWidthKey() {
+			return widthKey;
+		}
 	}
 
 	public RouteLineWidthCard(@NonNull MapActivity mapActivity,

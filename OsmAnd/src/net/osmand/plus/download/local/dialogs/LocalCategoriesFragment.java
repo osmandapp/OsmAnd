@@ -30,7 +30,6 @@ import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
@@ -41,8 +40,9 @@ import java.util.Map;
 
 public class LocalCategoriesFragment extends LocalBaseFragment implements DownloadEvents, LocalTypeListener, LoadItemsListener {
 
-	private LocalItemsLoaderTask asyncLoader;
+	private MemoryInfo memoryInfo;
 	private Map<CategoryType, LocalCategory> categories;
+	private LocalItemsLoaderTask asyncLoader;
 
 	private CategoriesAdapter adapter;
 
@@ -77,14 +77,9 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	private void updateAdapter() {
 		if (categories != null) {
 			List<Object> items = new ArrayList<>();
-			List<MemoryItem> memoryItems = new ArrayList<>();
 
 			for (LocalCategory category : categories.values()) {
 				items.add(category);
-
-				CategoryType type = category.getType();
-				int color = ColorUtilities.getColor(app, type.getColorId());
-				memoryItems.add(new MemoryItem(category.getName(app), category.getSize(), color));
 
 				List<LocalGroup> groups = new ArrayList<>(category.getGroups().values());
 				Collections.sort(groups, (o1, o2) -> -Long.compare(o1.getSize(), o2.getSize()));
@@ -93,7 +88,6 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 					items.add(group);
 				}
 			}
-			MemoryInfo memoryInfo = new MemoryInfo(memoryItems);
 			if (memoryInfo.hasData()) {
 				items.add(0, memoryInfo);
 			}
@@ -123,7 +117,8 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		itemSearch.setOnMenuItemClickListener(item -> {
 			DownloadActivity activity = getDownloadActivity();
 			if (activity != null) {
-				activity.showDialog(activity, SearchDialogFragment.createInstance(""));
+				FragmentManager manager = activity.getSupportFragmentManager();
+				LocalSearchFragment.showInstance(manager, null, null, this);
 			}
 			return true;
 		});
@@ -163,15 +158,36 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	@Override
 	public void loadItemsFinished(@NonNull Map<CategoryType, LocalCategory> categories) {
 		this.categories = categories;
+		this.memoryInfo = createMemoryInfo(categories);
 
+		if (memoryInfo.hasData()) {
+			settings.OSMAND_USAGE_SPACE.set(memoryInfo.getSize());
+		}
 		updateAdapter();
+		updateFragments();
 		updateProgressVisibility(false);
+	}
 
+	@NonNull
+	private MemoryInfo createMemoryInfo(@NonNull Map<CategoryType, LocalCategory> categories) {
+		List<MemoryItem> items = new ArrayList<>();
+		for (LocalCategory category : categories.values()) {
+			int color = ColorUtilities.getColor(app, category.getType().getColorId());
+			items.add(new MemoryItem(category.getName(app), category.getSize(), color));
+		}
+		return new MemoryInfo(items);
+	}
+
+	private void updateFragments() {
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			LocalItemsFragment itemsFragment = activity.getFragment(LocalItemsFragment.TAG);
 			if (itemsFragment != null) {
 				itemsFragment.updateContent();
+			}
+			LocalSearchFragment searchFragment = activity.getFragment(LocalSearchFragment.TAG);
+			if (searchFragment != null) {
+				searchFragment.updateContent();
 			}
 		}
 	}

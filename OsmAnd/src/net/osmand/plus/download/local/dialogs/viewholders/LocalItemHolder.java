@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.download.local.dialogs.LocalItemsFragment;
+import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -24,8 +24,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
-	private final LocalItemsFragment fragment;
-	private final boolean nightMode;
+	private final LocalItemListener listener;
 
 	private final TextView title;
 	private final TextView description;
@@ -35,12 +34,11 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	private final View bottomShadow;
 	private final View bottomDivider;
 
-	public LocalItemHolder(@NonNull View itemView, @NonNull LocalItemsFragment fragment) {
+	public LocalItemHolder(@NonNull View itemView, @NonNull LocalItemListener listener, boolean nightMode) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
-		this.fragment = fragment;
-		this.nightMode = fragment.isNightMode();
+		this.listener = listener;
 
 		icon = itemView.findViewById(R.id.icon);
 		title = itemView.findViewById(R.id.title);
@@ -62,17 +60,17 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 
-		boolean selected = fragment != null && fragment.isItemSelected(item);
+		boolean selected = listener != null && listener.isItemSelected(item);
 		compoundButton.setChecked(selected);
 
 		options.setOnClickListener(v -> {
-			if (fragment != null) {
-				fragment.onItemOptionsSelected(item, options);
+			if (listener != null) {
+				listener.onItemOptionsSelected(item, options);
 			}
 		});
 		itemView.setOnClickListener(v -> {
-			if (fragment != null) {
-				fragment.onItemSelected(item);
+			if (listener != null) {
+				listener.onItemSelected(item);
 			}
 		});
 		AndroidUiHelper.updateVisibility(options, !selectionMode);
@@ -84,8 +82,8 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private Drawable getIcon(@NonNull LocalItem item) {
 		LocalItemType type = item.getType();
-		if (type.isDownloadType() && !item.isBackuped()) {
-			boolean shouldUpdate = fragment.getItemsToUpdate().containsKey(item.getFile().getName());
+		if (type.isDownloadType() && !item.isBackuped(app)) {
+			boolean shouldUpdate = listener.itemUpdateAvailable(item);
 			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
 		} else {
 			return uiUtilities.getThemedIcon(type.getIconId());

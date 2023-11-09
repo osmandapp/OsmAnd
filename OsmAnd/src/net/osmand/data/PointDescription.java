@@ -218,7 +218,7 @@ public class PointDescription {
 			results.put(LOCATION_URL, httpUrl);
 
 			if (PluginsHelper.isEnabled(OsmEditingPlugin.class)) {
-				String osmUrl = "https://www.openstreetmap.org/?mlat=" + latUrl + "&mlon=" + lonUrl + "#map=12/" + latUrl + "/" + lonUrl;
+				String osmUrl = "https://www.openstreetmap.org/?mlat=" + latUrl + "&mlon=" + lonUrl + "#map=" + zoom + "/" + latUrl + "/" + lonUrl;
 				results.put(OSM_LOCATION_URL, osmUrl);
 			}
 		} catch (RuntimeException e) {

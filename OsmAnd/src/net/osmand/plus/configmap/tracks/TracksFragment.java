@@ -43,7 +43,6 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -65,6 +64,7 @@ import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -87,7 +87,7 @@ import java.util.Set;
 
 public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
-		TrackSelectionListener, SortTracksListener, EmptyTracksListener {
+		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -96,6 +96,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
+	private GpxSelectionHelper gpxSelectionHelper;
 	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -135,6 +136,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
+		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = selectedTracksHelper.getItemsSelectionHelper();
 	}
 
@@ -400,6 +402,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (asyncLoader == null) {
 			reloadTracks();
 		}
+		gpxSelectionHelper.addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		gpxSelectionHelper.removeListener(this);
 	}
 
 	private void reloadTracks() {
@@ -447,17 +456,15 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void saveChanges() {
 		selectedTracksHelper.saveTabsSortModes();
 		selectedTracksHelper.saveTracksVisibility();
-		selectedTracksHelper.updateTracksOnMap();
+	}
 
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
-			DashboardOnMap dashboard = mapActivity.getDashboard();
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
-		}
+	@Override
+	public void onGpxSelectionFinished() {
+		selectedTracksHelper.processVisibleTracks();
+		selectedTracksHelper.processRecentlyVisibleTracks();
+		selectedTracksHelper.updateTracksOnMap();
 		app.getOsmandMap().getMapView().refreshMap();
+		updateTabsContent();
 	}
 
 	@Override
@@ -530,7 +537,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
-		app.getSmartFolderHelper().addTrackItemToSmartFolder(item);
 		selectedTracksHelper.addTrackItem(item);
 		updateTrackTabs();
 		setSelectedTab("import");

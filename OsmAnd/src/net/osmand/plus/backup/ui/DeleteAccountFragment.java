@@ -19,7 +19,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -34,25 +33,21 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteAccountListener;
-import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
-import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.List;
-import java.util.Map;
-
-public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDeleteFilesListener, OnDeleteAccountListener {
+public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDeleteAccountListener {
 
 	public static final String TAG = DeleteAccountFragment.class.getSimpleName();
 
@@ -63,7 +58,6 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	private BackupHelper backupHelper;
 
 	private CollapsingToolbarLayout toolbarLayout;
-	private TextView percentage;
 	private TextView progressDescription;
 	private ProgressBar progressBar;
 	private View progressContainer;
@@ -73,9 +67,9 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	private View deleteButtonWarning;
 
 	private String token;
+	@Nullable
+	private BackupError backupError;
 	private DeletionStatus deletionStatus = NOT_STARTED;
-	private int progress;
-	private int maxProgress;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -112,14 +106,12 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	public void onResume() {
 		super.onResume();
 		updateContent();
-		backupHelper.getBackupListeners().addDeleteFilesListener(this);
 		backupHelper.getBackupListeners().addDeleteAccountListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		backupHelper.getBackupListeners().removeDeleteFilesListener(this);
 		backupHelper.getBackupListeners().removeDeleteAccountListener(this);
 	}
 
@@ -147,7 +139,6 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 
 	private void setupProgress(@NonNull View view) {
 		progressContainer = view.findViewById(R.id.progress_container);
-		percentage = progressContainer.findViewById(R.id.percentage);
 		progressBar = progressContainer.findViewById(R.id.progress_bar);
 		progressDescription = progressContainer.findViewById(R.id.progress_description);
 		updateProgress();
@@ -155,9 +146,12 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 
 	private void updateContent() {
 		if (isAdded()) {
-			toolbarLayout.setTitle(getString(deletionStatus.titleId));
+			boolean hasError = backupError != null;
+			toolbarLayout.setTitle(getString(hasError ? R.string.deletion_error : deletionStatus.titleId));
 
-			if (deletionStatus.descriptionId != -1) {
+			if (hasError) {
+				progressDescription.setText(backupError.getLocalizedError(app));
+			} else if (deletionStatus.descriptionId != -1) {
 				progressDescription.setText(deletionStatus.descriptionId);
 			}
 			updateProgress();
@@ -173,10 +167,8 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	}
 
 	private void updateProgress() {
-		if (isAdded() && progressBar != null && percentage != null) {
-			progressBar.setMax(maxProgress);
-			progressBar.setProgress(progress);
-			percentage.setText(ProgressHelper.normalizeProgressPercent(maxProgress != 0 ? progress * 100 / maxProgress : 0) + "%");
+		if (isAdded() && progressBar != null) {
+			progressBar.setIndeterminate(deletionStatus != FINISHED);
 		}
 	}
 
@@ -256,33 +248,27 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		closeButton.setOnClickListener(v -> {
 			MapActivity activity = (MapActivity) getActivity();
 			if (activity != null) {
-				activity.dismissFragment(BackupCloudFragment.TAG);
-				BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
+				if (backupError == null) {
+					activity.getFragmentsHelper().dismissFragment(BackupCloudFragment.TAG);
+					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
+				} else {
+					activity.onBackPressed();
+				}
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, closeButton, SECONDARY, getString(R.string.shared_string_close));
 	}
 
 	private void showConfirmationDialog(@NonNull View view) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-		builder.setTitle(R.string.osmand_cloud_delete_account_confirmation);
-		builder.setMessage(R.string.osmand_cloud_delete_account_confirmation_descr);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-			deletionStatus = RUNNING;
-			deleteAllFiles();
-		});
-		builder.show();
-	}
-
-	private void deleteAllFiles() {
-		try {
-			updateContent();
-			backupHelper.deleteAllFiles(null);
-		} catch (UserNotRegisteredException e) {
-			updateContent();
-			log.error(e);
-		}
+		AlertDialogData data = new AlertDialogData(view.getContext(), nightMode)
+				.setTitle(R.string.osmand_cloud_delete_account_confirmation)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					deletionStatus = RUNNING;
+					deleteAccount();
+				})
+				.setPositiveButtonTextColor(ColorUtilities.getColor(app, R.color.deletion_color_warning));
+		CustomAlert.showSimpleMessage(data, R.string.osmand_cloud_delete_account_confirmation_descr);
 	}
 
 	private void deleteAccount() {
@@ -296,30 +282,8 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	}
 
 	@Override
-	public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
-		maxProgress = files.size();
-		updateContent();
-	}
-
-	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
-		this.progress = progress;
-		updateProgress();
-	}
-
-	@Override
-	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-		deleteAccount();
-	}
-
-	@Override
-	public void onFilesDeleteError(int status, @NonNull String message) {
-		deleteAccount();
-	}
-
-	@Override
 	public void onDeleteAccount(int status, @Nullable String message, @Nullable BackupError error) {
-		progress = maxProgress;
+		backupError = error;
 		deletionStatus = FINISHED;
 		updateContent();
 

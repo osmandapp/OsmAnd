@@ -54,7 +54,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListene
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
-import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -65,7 +65,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ResetToDefaultListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, Map3DModeUpdateListener {
+		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener, CompassVisibilityUpdateListener, Map3DModeUpdateListener {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -323,7 +323,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onResetToDefaultConfirmed() {
+	public void onActionConfirmed(int actionId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -471,14 +471,12 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void updateFragment() {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		Fragment fragment = fragmentManager.findFragmentByTag(TAG);
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentByTag(TAG);
+		if (fragment != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			currentScrollY = scrollView.getScrollY();
-			fragmentManager.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					.commitAllowingStateLoss();
+			manager.beginTransaction().detach(fragment).commitAllowingStateLoss();
+			manager.beginTransaction().attach(fragment).commitAllowingStateLoss();
 		}
 	}
 

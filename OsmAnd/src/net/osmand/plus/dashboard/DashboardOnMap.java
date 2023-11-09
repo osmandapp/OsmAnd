@@ -221,14 +221,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		ROUTE
 	}
 
-	private class DashboardActionButton {
+	private static class DashboardActionButton {
 		private Drawable icon;
 		private String text;
 		private OnClickListener onClickListener;
 	}
 
-	public DashboardOnMap(MapActivity ma) {
-		this.mapActivity = ma;
+	public DashboardOnMap(@NonNull MapActivity activity) {
+		this.mapActivity = activity;
 	}
 
 	public WaypointDialogHelper getWaypointDialogHelper() {
@@ -260,7 +260,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
-				mapActivity.dismissSettingsScreens();
+				mapActivity.getFragmentsHelper().dismissSettingsScreens();
 			}
 		};
 		toolbar = dashboardView.findViewById(R.id.toolbar);
@@ -560,8 +560,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		removeFragment(WeatherMainFragment.TAG);
 
 		if (visible) {
-			mapActivity.dismissCardDialog();
-			mapActivity.dismissFragment(TrackMenuFragment.TAG);
+			mapActivity.getFragmentsHelper().dismissCardDialog();
+			mapActivity.getFragmentsHelper().dismissFragment(TrackMenuFragment.TAG);
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
@@ -1112,7 +1112,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			setDashboardVisibility(true, previous);
 		} else {
 			hideDashboard();
-			mapActivity.backToConfigureProfileFragment();
+			mapActivity.getFragmentsHelper().backToConfigureProfileFragment();
 		}
 	}
 
@@ -1259,14 +1259,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	@SuppressLint("NewApi")
 	private void setAlpha(View v, int alpha, int color) {
 		v.setBackgroundColor((alpha << 24) | color);
-	}
-
-	@Override
-	public void onDownMotionEvent() {
-	}
-
-	@Override
-	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 	}
 
 	<T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {

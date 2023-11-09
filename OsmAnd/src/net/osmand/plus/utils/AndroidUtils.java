@@ -5,12 +5,12 @@ import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
-import static android.content.Context.POWER_SERVICE;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -29,7 +29,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,7 +40,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.os.StatFs;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -52,7 +50,6 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
 import android.text.style.ImageSpan;
-import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -86,6 +83,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -104,6 +102,7 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -903,28 +902,6 @@ public class AndroidUtils {
 		return result;
 	}
 
-	public static boolean isScreenOn(Context context) {
-		PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-		return pm.isInteractive();
-	}
-
-	public static boolean isScreenLocked(Context context) {
-		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-		return keyguardManager.inKeyguardRestrictedInputMode();
-	}
-
-	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
-
-		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD
-				|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC
-				|| baseString.toString().contains(STRING_PLACEHOLDER)) {
-
-			return getStyledString(baseString, stringToInsertAndStyle, null, new StyleSpan(typefaceStyle));
-		} else {
-			return baseString;
-		}
-	}
-
 	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
 		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
@@ -953,13 +930,6 @@ public class AndroidUtils {
 		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
-		}
-	}
-
-	public static void setTextDirection(@NonNull TextView tv, boolean rtl) {
-		if (isSupportRTL()) {
-			int textDirection = rtl ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
-			tv.setTextDirection(textDirection);
 		}
 	}
 
@@ -1115,10 +1085,6 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isRTL() {
-		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
-	}
-
 	@NonNull
 	public static String createNewFileName(@NonNull String fileName) {
 		int index = fileName.lastIndexOf('.');
@@ -1136,7 +1102,7 @@ public class AndroidUtils {
 		return name + " (2)" + extension;
 	}
 
-	public static StringBuilder formatWarnings(List<String> warnings) {
+	public static StringBuilder formatWarnings(Collection<String> warnings) {
 		StringBuilder builder = new StringBuilder();
 		boolean f = true;
 		for (String w : warnings) {
@@ -1232,10 +1198,14 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
-
 	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
 		return value != null ? value : defValue;
+	}
+
+	public static String getLangTranslation(@NonNull Context context, @NonNull String lang) {
+		String value = getStringByProperty(context, "lang_" + lang);
+		return value != null ? value : lang;
 	}
 
 	@Nullable
@@ -1301,30 +1271,42 @@ public class AndroidUtils {
 	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
 
 	public static boolean requestBLEPermissions(@NonNull Activity activity) {
-		ArrayList<String> neededPermissions = new ArrayList<>();
+		List<String> permissions = new ArrayList<>();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
-				neededPermissions.add(BLUETOOTH_SCAN);
+				permissions.add(BLUETOOTH_SCAN);
 			}
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_CONNECT)) {
-				neededPermissions.add(BLUETOOTH_CONNECT);
+				permissions.add(BLUETOOTH_CONNECT);
 			}
 		} else {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH)) {
-				neededPermissions.add(BLUETOOTH);
+				permissions.add(BLUETOOTH);
 			}
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
-				neededPermissions.add(BLUETOOTH_ADMIN);
+				permissions.add(BLUETOOTH_ADMIN);
 			}
 		}
-		if (!Algorithms.isEmpty(neededPermissions)) {
+		if (!Algorithms.isEmpty(permissions)) {
 			ActivityCompat.requestPermissions(
 					activity,
-					neededPermissions.toArray(new String[0]),
+					permissions.toArray(new String[0]),
 					BLUETOOTH_CONNECT_REQUEST_CODE);
 
 		}
-		return Algorithms.isEmpty(neededPermissions);
+		return Algorithms.isEmpty(permissions);
+	}
+
+	public static final int POST_NOTIFICATIONS_REQUEST_CODE = 6;
+
+	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			if (!AndroidUtils.hasPermission(activity, Manifest.permission.POST_NOTIFICATIONS)) {
+				ActivityCompat.requestPermissions(activity,
+						new String[] {Manifest.permission.POST_NOTIFICATIONS},
+						POST_NOTIFICATIONS_REQUEST_CODE);
+			}
+		}
 	}
 
 	@Nullable

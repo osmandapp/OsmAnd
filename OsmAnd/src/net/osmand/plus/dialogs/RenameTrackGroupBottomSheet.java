@@ -84,7 +84,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 			if (exception == null) {
 				MapActivity activity = activityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					TrackMenuFragment fragment = activity.getTrackMenuFragment();
+					TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
 					if (fragment != null) {
 						fragment.updateContent();
 					}

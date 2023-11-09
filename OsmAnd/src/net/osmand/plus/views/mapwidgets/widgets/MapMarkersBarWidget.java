@@ -233,33 +233,10 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, int order,
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
 	                       @NonNull List<MapWidget> followingWidgets) {
-		super.attachView(container, panel, order, followingWidgets);
-
-		boolean showBottomShadow = shouldShowBottomShadow(followingWidgets);
-		showHideBottomShadow(showBottomShadow);
-	}
-
-	private boolean shouldShowBottomShadow(@NonNull List<MapWidget> followingWidgets) {
-		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
-
-		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
-		if (widgetsPanel == WidgetsPanel.TOP) {
-			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof MapMarkersBarWidget || widget instanceof SimpleWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
-					return false;
-				}
-			}
-		} else {
-			return false;
-		}
-		return true;
-	}
-
-	private void showHideBottomShadow(boolean show) {
+		super.attachView(container, panel, followingWidgets);
 		View bottomShadow = view.findViewById(R.id.bottom_shadow);
-		AndroidUiHelper.updateVisibility(bottomShadow, show);
+		AndroidUiHelper.updateVisibility(bottomShadow, followingWidgets.isEmpty());
 	}
 }

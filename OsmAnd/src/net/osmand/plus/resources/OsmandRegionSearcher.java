@@ -77,7 +77,7 @@ public class OsmandRegionSearcher {
 	}
 
 	public void search() {
-		if (!downloadResources.getExternalMapFileNamesAt(point31x, point31y, zoom, routeData).isEmpty()) {
+		if (!downloadResources.getExternalMapFileNamesAt(point31x, point31y, routeData).isEmpty()) {
 			return;
 		}
 		List<BinaryMapDataObject> mapDataObjects;

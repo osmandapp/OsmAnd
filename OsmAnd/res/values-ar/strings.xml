@@ -4849,7 +4849,7 @@
     <string name="map_widget_target_distance_desc">تظهر المسافة بين الكاميرا والموقع المستهدف.</string>
     <string name="rotate_map_manual_opt">تدوير يدوي</string>
     <string name="map_widget_camera_tilt_desc">تعرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
-    <string name="click_on_widget">انقر على الويدجت</string>
+    <string name="click_on_widget">انقر على الأداة (الويدجت)</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
 \nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
@@ -5514,13 +5514,13 @@
     <string name="maps_and_resources">خرائط ومصادر</string>
     <string name="shared_string_cache">الذاكرة المؤقتة</string>
     <string name="with_waypoints">مع نقاط الطريق</string>
-    <string name="widget_available_ram_desc">يعرض الذاكرة المخصصة لـOsmAnd</string>
+    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لـOsmAnd</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="standard_maps">الخرائط العادية</string>
-    <string name="max_altitude">الحد الأقصى للارتفاع</string>
+    <string name="max_altitude">أقصى ارتفاع</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="app_mode_paragliding">الطيران المظلي</string>
-    <string name="filter_by_name">تصفية حسب الاسم</string>
+    <string name="filter_by_name">فلترة حسب الاسم</string>
     <string name="shared_string_reset_all">إعادة ضبط الجميع للافتراضي</string>
     <string name="wikipedia_and_travel_maps">خرائط الويكبيديا والسفر</string>
     <string name="rendering_styles">أنماط التقديم</string>
@@ -5528,7 +5528,7 @@
     <string name="app_mode_hang_gliding">الطيران الشراعي</string>
     <string name="weather_online">الطقس أونلاين</string>
     <string name="date_of_creation">تاريخ الإنشاء</string>
-    <string name="filter_screen_title">تصفية</string>
+    <string name="filter_screen_title">فلتر</string>
     <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="smart_folder_name_present">هكذا ملف ذكي موجود بالفعل</string>
@@ -5538,4 +5538,37 @@
     <string name="edit_fiilter">تعديل الفلتر</string>
     <string name="save_as_smart_folder">احفظ كملف ذكي</string>
     <string name="delete_smart_folder_dialog_message">هذا سيحذف \"%1$s\" ملف ذكي.</string>
+    <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
+    <string name="empty_smart_folder_description">كل المسارات المطابقة ستظهر تلقائياً هنا</string>
+    <string name="configure_filter">تعديل الفلتر</string>
+    <string name="no_config_smart_folder_title">غير مهيأ</string>
+    <string name="discard_filter_changes">تجاهل تغييرات الفلتر</string>
+    <string name="shared_string_loading">قيد التحميل</string>
+    <string name="discard_filter_changes_prompt">هل أنت متأكد من أنك تريد إعادة ضبط جميع الفلاتر الى الوضع الافتراضي؟</string>
+    <string name="no_config_smart_folder_description">الملفات الذكية تسمح بتجميع المسارات بواسطة تطبيق الفلاتر</string>
+    <string name="loading_tracks">إعادة تحميل المسارات</string>
+    <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
+    <plurals name="tracks">
+        <item quantity="zero">%1$d (%2$d مسار)</item>
+        <item quantity="one">%1$d (%2$d مسار)</item>
+        <item quantity="two">%1$d (%2$d مسارين)</item>
+        <item quantity="few">%1$d (%2$d مسارات)</item>
+        <item quantity="many">%1$d (%2$d مسار)</item>
+        <item quantity="other">%1$d (%2$d مسار)</item>
+    </plurals>
+    <string name="cloud_trash_clear_confirmation">هل أنت متأكد من أنك تريد أن تحذف كل الأشياء في سلة المهملات؟ لا يمكن إلغاء هذا الإجراء.</string>
+    <string name="restore_from_trash">استرجاع من سلة المهملات</string>
+    <string name="delete_all_items">احذف كل العناصر</string>
+    <string name="trash_is_empty_banner_desc">الملفات المزالة من التطبيق و الكلود ستكون متاحة هنا لمدة %1$s أيام بعد الحذف.</string>
+    <string name="delete_trash_item_confirmation_desc">سيتم حذف %1$s بشكل دائم. هل أنت متأكد؟
+\n
+\nلا يمكن إلغاء هذا الاجراء.</string>
+    <string name="shared_string_empty_trash">إفراغ سلة المهملات</string>
+    <string name="shared_string_delete_immediately">احذف فورا</string>
+    <string name="shared_string_is_deleted">%1$s تم حذفه.</string>
+    <string name="cloud_item_restored">%1$s تم استعادته إلى الكلود.</string>
+    <string name="trash_alert_card_desc">العناصر في سلة المهملات ستمحى بعد %1$s يوماً.</string>
+    <string name="trash_is_empty">سلة المهملات فارغة</string>
+    <string name="shared_string_trash">سلة المهملات</string>
+    <string name="shared_string_delete_item">حذف العنصر</string>
 </resources>

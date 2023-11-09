@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -215,8 +216,16 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getItems();
 	}
 
-	public List<String> getNearestCityList() {
-		return database.getNearestCityList();
+	public List<Pair<String, Integer>> getNearestCityList() {
+		return database.getNearestCityCollection();
+	}
+
+	public List<Pair<String, Integer>> getTrackColorsList() {
+		return database.getTrackColorsCollection();
+	}
+
+	public List<Pair<String, Integer>> getTrackWidthList() {
+		return database.getTrackWidthCollection();
 	}
 
 	public long getTracksMinCreateDate() {
@@ -225,6 +234,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public double getTracksMaxDuration() {
 		return database.getTracksMaxDuration();
+	}
+
+	public List<Pair<String, Integer>> getTrackFolders() {
+		return database.getTrackFolders();
 	}
 
 	@Nullable
@@ -337,8 +350,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
 				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreationTime() == -1
-				;
+				|| item.getFileCreationTime() <= 0;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {

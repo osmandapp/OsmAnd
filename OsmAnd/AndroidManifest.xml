@@ -18,6 +18,7 @@
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
@@ -1165,11 +1166,6 @@
 				<category android:name="androidx.car.app.category.NAVIGATION"/>
 			</intent-filter>
 		</service>
-
-		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
-
-		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
-
 	</application>
 
 </manifest> 

@@ -25,7 +25,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -136,9 +136,9 @@ public class LauncherShortcutsHelper {
 				navigateTo(mapActivity, work);
 			}
 		} else if (Shortcut.START_RECORDING.id.equals(shortcutId)) {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(mapActivity.getSupportFragmentManager(), app);
+			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
-			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {
 			Intent activityIntent = new Intent(mapActivity, app.getAppCustomization().getMyPlacesActivity());
 			mapActivity.startActivity(activityIntent);

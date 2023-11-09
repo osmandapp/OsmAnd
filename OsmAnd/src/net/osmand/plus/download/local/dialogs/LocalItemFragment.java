@@ -1,16 +1,11 @@
 package net.osmand.plus.download.local.dialogs;
 
-import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
-import static net.osmand.plus.download.local.OperationType.CLEAR_TILES_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
-import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +24,6 @@ import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
-import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.local.dialogs.DeleteConfirmationBottomSheet.ConfirmDeletionListener;
@@ -37,12 +31,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Map;
 
 public class LocalItemFragment extends LocalBaseFragment implements ConfirmDeletionListener,
@@ -59,8 +49,8 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	@Override
 	public Map<CategoryType, LocalCategory> getCategories() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof LocalCategoriesFragment) {
-			return ((LocalCategoriesFragment) fragment).getCategories();
+		if (fragment instanceof LocalBaseFragment) {
+			return ((LocalBaseFragment) fragment).getCategories();
 		}
 		return null;
 	}
@@ -106,33 +96,17 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 
 	private void updateToolbar() {
 		menuProvider.setLocalItem(localItem);
-		toolbarLayout.setTitle(localItem.getName(requireContext()));
+		toolbarLayout.setTitle(localItem.getName(app).toString());
 	}
 
 	private void updateContent() {
-		String type = localItem.getType().toHumanString(app);
-		addRow(itemsContainer, getString(R.string.shared_string_type), type, false);
+		itemsContainer.removeAllViews();
 
-		DateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
-		String date = format.format(localItem.getFile().lastModified());
-		addRow(itemsContainer, getString(R.string.shared_string_created), date, false);
-
-		String size = AndroidUtils.formatSize(app, localItem.getSize());
-		addRow(itemsContainer, getString(R.string.shared_string_size), size, true);
-	}
-
-	private void addRow(@NonNull ViewGroup container, String title, String description, boolean lastItem) {
-		View view = themedInflater.inflate(R.layout.local_item_row, container, false);
-		container.addView(view);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		TextView tvDescription = view.findViewById(R.id.description);
-		tvDescription.setText(description);
-
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !lastItem);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_shadow), lastItem);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			LocalItemInfoCard card = new LocalItemInfoCard(activity, localItem);
+			itemsContainer.addView(card.build(itemsContainer.getContext()));
+		}
 	}
 
 	@Override
@@ -148,39 +122,13 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	@Override
-	public void onOperationStarted() {
-		updateProgressVisibility(true);
-	}
-
-	@Override
 	public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
-		updateProgressVisibility(false);
-
-		if (!Algorithms.isEmpty(result)) {
-			app.showToastMessage(result);
-		}
+		super.onOperationFinished(type, result);
 
 		DownloadActivity activity = getDownloadActivity();
-		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			if (Algorithms.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
-				activity.reloadLocalIndexes();
-			} else {
-				activity.onUpdatedIndexesList();
-			}
-			if (type == DELETE_OPERATION) {
-				activity.onBackPressed();
-			}
+		if (type == DELETE_OPERATION && AndroidUtils.isActivityNotDestroyed(activity)) {
+			activity.onBackPressed();
 		}
-	}
-
-	@Override
-	public void onDeletionConfirmed(@NonNull LocalItem localItem) {
-		performOperation(DELETE_OPERATION, localItem);
-	}
-
-	public void performOperation(@NonNull OperationType type, @NonNull LocalItem... items) {
-		LocalOperationTask task = new LocalOperationTask(app, type, this);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, items);
 	}
 
 	@Override

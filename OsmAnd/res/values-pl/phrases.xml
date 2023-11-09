@@ -227,8 +227,8 @@
     <string name="poi_village">Wieś</string>
     <string name="poi_hamlet">Przysiółek</string>
     <string name="poi_hospital">Szpital</string>
-    <string name="poi_doctors">Gabinet lekarski</string>
-    <string name="poi_clinic">Przychodnia</string>
+    <string name="poi_doctors">Przychodnia lekarska</string>
+    <string name="poi_clinic">Klinika lekarska</string>
     <string name="poi_dentist">Stomatolog</string>
     <string name="poi_nursing_home">Dom opieki</string>
     <string name="poi_baby_hatch">Okno życia</string>
@@ -609,7 +609,7 @@
     <string name="poi_stripclub">Klub ze striptizem</string>
     <string name="poi_beach_resort">Obszar ośrodka nadmorskiego</string>
     <string name="poi_dog_park">Park dla psów</string>
-    <string name="poi_hunting_stand">Myśliwski punkt obserwacyjny</string>
+    <string name="poi_hunting_stand">Ambona myśliwska</string>
     <string name="poi_marina">Marina</string>
     <string name="poi_bench">Ławka</string>
     <string name="poi_seamark_wreck">Znak nawigacyjny: wrak</string>
@@ -677,7 +677,7 @@
     <string name="poi_attraction_train">Pociąg (atrakcja)</string>
     <string name="poi_cabin">Chata;Schronienie</string>
     <string name="poi_lean_to">Szałas;Schronienie</string>
-    <string name="poi_hunting_lodge">Ambona myśliwska;Schronienie</string>
+    <string name="poi_hunting_lodge">Domek myśliwski;Schronienie</string>
     <string name="poi_resort">Obszar ośrodka wypoczynkowego</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_piste_downhill">Trasa zjazdowa</string>
@@ -2596,7 +2596,7 @@
     <string name="poi_health_service_test_yes">Usługi medyczne: testy: tak</string>
     <string name="poi_health_service_test_no">Usługi medyczne: testy: nie</string>
     <string name="poi_health_facility_type_field_hospital">Placówka medyczna: szpital polowy</string>
-    <string name="poi_health_facility_type_counselling_centre">Placówka medyczna: przychodnia</string>
+    <string name="poi_health_facility_type_counselling_centre">Placówka medyczna: centrum doradcze</string>
     <string name="poi_health_facility_type_laboratory">Placówka medyczna: laboratorium</string>
     <string name="poi_health_facility_type_therapy">Placówka medyczna: placówka rehabilitacyjna</string>
     <string name="poi_health_facility_type_department">Placówka medyczna: oddział</string>
@@ -4537,7 +4537,7 @@
     <string name="poi_waste_cigarettes">Papierosy</string>
     <string name="poi_toy_library">Biblioteka zabawek</string>
     <string name="poi_spikes">Kolce</string>
-    <string name="poi_sump_buster">Pogromca miski olejowej</string>
+    <string name="poi_sump_buster">Ogranicznik minimalnego prześwitu</string>
     <string name="poi_barrier_board">Tablica barierowa</string>
     <string name="poi_barrier_tyres">Opony</string>
     <string name="poi_tank_trap">Bariera przeciwpancerna</string>
@@ -4632,4 +4632,7 @@
     <string name="poi_wicket_gate">Furtka</string>
     <string name="poi_health_specialty_community_yes">Społeczność</string>
     <string name="poi_barrier_coupure">Bariera ochronna</string>
+    <string name="poi_wedge">Hydrauliczna zapora drogowa</string>
+    <string name="poi_dressing_room">Przebieralnia</string>
+    <string name="poi_emergency_bay">Zatoka awaryjna</string>
 </resources>
