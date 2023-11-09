@@ -5555,4 +5555,8 @@
     <string name="key_event_action_move_to_my_location">Zu meinem Standort bewegen</string>
     <string name="download_to_device">Auf das Gerät herunterladen</string>
     <string name="key_event_action_move_down">Nach unten bewegen</string>
+    <string name="remove_widget_first">Bitte entferne das Widget zuerst</string>
+    <string name="add_row">Zeile hinzufügen</string>
+    <string name="discard_changes_prompt">Bist du sicher, dass du die Änderungen verwerfen willst?</string>
+    <string name="row_number">Zeile %1$s</string>
 </resources>
