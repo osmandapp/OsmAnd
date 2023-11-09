@@ -268,7 +268,7 @@ public class BinaryRoutePlanner {
 		}
 		seg.setParentRoute(RouteSegment.NULL);
 		// compensate first segment difference to mid point (length) https://github.com/osmandapp/OsmAnd/issues/14148
-		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx, seg);
+		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), seg);
 		double full = squareRootDist(seg.getStartPointX(), seg.getStartPointY(), seg.getEndPointX(), seg.getEndPointY()) + 0.01; // avoid div 0
 		double fromStart = squareRootDist(pnt.preciseX, pnt.preciseY, seg.getStartPointX(), seg.getStartPointY());
 		// full segment length will be added on first visit
@@ -393,7 +393,7 @@ public class BinaryRoutePlanner {
 		short segmentInd = reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 		short prevSegmentInd = !reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 
-		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx, segment);
+		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
 		// calculate possible obstacle plus time
 		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
 		if (obstacle < 0) {
@@ -408,19 +408,19 @@ public class BinaryRoutePlanner {
 	}
 
 	
-	private double calcRoutingSegmentTimeOnlyDist(RoutingContext ctx, RouteSegment segment) {
+	public float calcRoutingSegmentTimeOnlyDist(VehicleRouter router, RouteSegment segment) {
 		int prevX = segment.road.getPoint31XTile(segment.getSegmentStart());
 		int prevY = segment.road.getPoint31YTile(segment.getSegmentStart());
 		int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
 		int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
-		float priority = ctx.getRouter().defineSpeedPriority(segment.road);
-		float speed = (ctx.getRouter().defineRoutingSpeed(segment.road) * priority);
+		float priority = router.defineSpeedPriority(segment.road);
+		float speed = (router.defineRoutingSpeed(segment.road) * priority);
 		if (speed == 0) {
-			speed = ctx.getRouter().getDefaultSpeed() * priority;
+			speed = router.getDefaultSpeed() * priority;
 		}
 		// speed can not exceed max default speed according to A*
-		if (speed > ctx.getRouter().getMaxSpeed()) {
-			speed = ctx.getRouter().getMaxSpeed();
+		if (speed > router.getMaxSpeed()) {
+			speed = router.getMaxSpeed();
 		}
 		float distOnRoadToPass = (float) squareRootDist(prevX, prevY, x, y);
 		return distOnRoadToPass / speed;
