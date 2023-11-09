@@ -37,6 +37,7 @@ import net.osmand.util.MapUtils;
 public class HHRoutePlanner {
 	static int DEBUG_VERBOSE_LEVEL = 0;
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
+	static final double MINIMAL_COST = 0.01;
 	
 	// TODO 1.8 HHRoutePlanner encapsulate HHRoutingPreparationDB, RoutingContext -> HHRoutingContext
 	private HHRoutingDB networkDB;
@@ -272,14 +273,14 @@ public class HHRoutePlanner {
 			
 			// test data for debug swap
 			c = HHRoutingConfig.dijkstra(0); 
-			c = HHRoutingConfig.astar(1);
+//			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
-//			c.ROUTE_LAST_MILE = true;
+			c.ROUTE_LAST_MILE = true;
 //			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 0;
+			DEBUG_VERBOSE_LEVEL = 1;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -607,9 +608,9 @@ public class HHRoutePlanner {
 
 	
 	static class NetworkDBPointCost {
-		NetworkDBPoint point;
-		double cost;
-		boolean rev;
+		final NetworkDBPoint point;
+		final double cost;
+		final boolean rev;
 		
 		NetworkDBPointCost(NetworkDBPoint p, double cost, boolean rev) {
 			point = p;
@@ -621,15 +622,10 @@ public class HHRoutePlanner {
 	protected NetworkDBPoint runDijkstraNetworkRouting(NetworkDBPoint start, NetworkDBPoint end, HHRoutingConfig c,
 			HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		if (start != null) {
-			start.setCostParentRt(false, 0, null, 0);
-			hctx.queueAdded.add(start);
-			hctx.queue.add(new NetworkDBPointCost(start, start.rtCost(false), false));
+			addPointToQueue(hctx, stats, hctx.queue, false, start, null, 0, MINIMAL_COST);
 		}
-		
 		if (end != null) {
-			end.setCostParentRt(true, 0, null, 0);
-			hctx.queueAdded.add(end);
-			hctx.queue.add(new NetworkDBPointCost(start, start.rtCost(true), true));
+			addPointToQueue(hctx, stats, hctx.queue, true, end, null, 0, MINIMAL_COST);
 		}
 		return runRoutingInternal(hctx, c, stats);
 
@@ -637,27 +633,21 @@ public class HHRoutePlanner {
 	
 	protected NetworkDBPoint runDijkstraNetworkRouting(TLongObjectHashMap<NetworkDBPoint> stPoints, TLongObjectHashMap<NetworkDBPoint> endPoints,
 			HHRoutingConfig c, HHRoutingContext hctx, RoutingStats stats) throws SQLException {
-		Queue<NetworkDBPointCost> queue = hctx.queue;
-		// TODO 2.0.3 HHRoutePlanner revert 2 queues to fail fast in 1 direction
 		for (NetworkDBPoint start : stPoints.valueCollection()) {
 			if (start.rtExclude) {
 				continue;
 			}
-			if (start.rtCost(false) <= 0) {
-				start.setCostParentRt(false, distanceToEnd(c, hctx, false, start), null, 0);
-			}
-			hctx.queueAdded.add(start);
-			queue.add(new NetworkDBPointCost(start, start.rtCost(false), false));
+			double cost = start.rtCost(false);
+			addPointToQueue(hctx, stats, hctx.queue, false, start, null, start.distanceFromStart(false),
+					cost <= 0 ? MINIMAL_COST : cost);
 		}
 		for (NetworkDBPoint end : endPoints.valueCollection()) {
 			if (end.rtExclude) {
 				continue;
 			}
-			if (end.rtCost(false) <= 0) {
-				end.setCostParentRt(true, distanceToEnd(c, hctx, true, end), null, 0);
-			}
-			hctx.queueAdded.add(end);
-			queue.add(new NetworkDBPointCost(end, end.rtCost(true), true));
+			double cost = end.rtCost(true);
+			addPointToQueue(hctx, stats, hctx.queue, true, end, null, end.distanceFromStart(true),
+					cost <= 0 ? MINIMAL_COST : cost);
 		}
 		return runRoutingInternal(hctx, c, stats);
 	}
@@ -707,7 +697,7 @@ public class HHRoutePlanner {
 			}
 			boolean directionAllowed = (c.DIJKSTRA_DIRECTION <= 0 && rev) || (c.DIJKSTRA_DIRECTION >= 0 && !rev);
 			if (directionAllowed) {
-				addToQueue(queue, point, rev, c, hctx, stats);
+				addConnectedToQueue(queue, point, rev, c, hctx, stats);
 			}
 		}			
 		return null;
@@ -726,7 +716,7 @@ public class HHRoutePlanner {
 		return finalPoint;
 	}
 	
-	private void addToQueue(Queue<NetworkDBPointCost> queue, NetworkDBPoint point, boolean reverse, 
+	private void addConnectedToQueue(Queue<NetworkDBPointCost> queue, NetworkDBPoint point, boolean reverse, 
 			HHRoutingConfig c, HHRoutingContext hctx, RoutingStats stats) throws SQLException {
 		int depth = c.USE_MIDPOINT || c.MAX_DEPTH > 0 ? point.getDepth(!reverse) : 0;
 		if (c.MAX_DEPTH > 0 && depth >= c.MAX_DEPTH) {
@@ -754,25 +744,27 @@ public class HHRoutePlanner {
 			double cost = point.distanceFromStart(reverse)  + connected.dist + distanceToEnd(c, hctx, reverse, nextPoint) ;
 			double exCost = nextPoint.rtCost(reverse);
 			if ((exCost == 0 && !nextPoint.visited(reverse)) || cost < exCost) {
-				if (DEBUG_VERBOSE_LEVEL > 2) {
-					System.out.printf("Add  %s to visit - cost %.2f (%.2f prev, %.2f dist) > prev cost %.2f \n", nextPoint, 
-							cost, point.distanceFromStart(reverse), connected.dist, exCost);
-				}
-				if (nextPoint.visited(reverse)) {
-					
-					System.out.printf("D %s - %s  %.2f", point, nextPoint,
-							MapUtils.squareRootDist31(point.midX(), point.midY(), nextPoint.midX(), nextPoint.midY())
-									/ ctx.getRouter().getMaxSpeed());
-					throw new IllegalStateException(String.format("%s visited - cost %.2f > prev cost %.2f", nextPoint, cost, exCost));
-				}
-				nextPoint.setCostParentRt(reverse, cost, point, connected.dist);
-				tm = System.nanoTime();
-				hctx.queueAdded.add(nextPoint);
-				queue.add(new NetworkDBPointCost(nextPoint, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
-				stats.addQueueTime += (System.nanoTime() - tm) / 1e6;
-				stats.addedVertices++;
+				addPointToQueue(hctx, stats, queue, reverse, nextPoint, point, connected.dist, cost);
 			}
 		}
+	}
+
+	private void addPointToQueue(HHRoutingContext hctx, RoutingStats stats, Queue<NetworkDBPointCost> queue,
+			boolean reverse, NetworkDBPoint point, NetworkDBPoint parent, double segmentDist, double cost) {
+		long tm = System.nanoTime();
+		if (DEBUG_VERBOSE_LEVEL > 2) {
+			System.out.printf("Add  %s to visit - cost %.2f (%.2f prev, %.2f dist) > prev cost %.2f \n", point, 
+					cost, parent == null ? 0 : parent.distanceFromStart(reverse), segmentDist, point.rtCost(reverse));
+		}
+		if (point.visited(reverse)) {
+			throw new IllegalStateException(String.format("%s visited - cost %.2f > prev cost %.2f", point, cost, 
+					point.rtCost(reverse)));
+		}
+		point.setCostParentRt(reverse, cost, parent, segmentDist);
+		hctx.queueAdded.add(point);
+		queue.add(new NetworkDBPointCost(point, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
+		stats.addQueueTime += (System.nanoTime() - tm) / 1e6;
+		stats.addedVertices++;
 	}
 
 	private double distanceToEnd(HHRoutingConfig c, HHRoutingContext hctx, boolean reverse,  NetworkDBPoint nextPoint) {

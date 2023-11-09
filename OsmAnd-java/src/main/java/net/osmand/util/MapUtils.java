@@ -593,10 +593,6 @@ public class MapUtils {
 		return getDistance(get31LatitudeY(y1), get31LongitudeX(x1), get31LatitudeY(y2), get31LongitudeX(x2));
 	}
 
-	public static void main(String[] args) {
-		System.out.println(MapUtils.get31TileNumberY(0)  + " " + EQUATOR);
-	}
-	
 	public static final int EQUATOR = 1 << 30; 
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
 		boolean top1 = y1 > EQUATOR;
