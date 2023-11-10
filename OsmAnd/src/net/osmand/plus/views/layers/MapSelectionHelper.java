@@ -426,7 +426,7 @@ public class MapSelectionHelper {
 			selectedPoint.lat = result.pointLatLon.getLatitude();
 			selectedPoint.lon = result.pointLatLon.getLongitude();
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
-			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getGpxLayer());
+			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 		}
 	}
 
@@ -458,7 +458,7 @@ public class MapSelectionHelper {
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
 
-		putRouteGpxToSelected(result.selectedObjects, mapLayers.getGpxLayer(), rect);
+		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect);
 	}
 
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,

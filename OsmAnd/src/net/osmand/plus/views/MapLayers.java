@@ -48,6 +48,7 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.MapVectorLayer;
+import net.osmand.plus.views.layers.NetworkRouteSelectionLayer;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
@@ -55,6 +56,7 @@ import net.osmand.plus.views.layers.PreviewRouteLineLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
+import net.osmand.plus.views.layers.TravelSelectionLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -88,6 +90,8 @@ public class MapLayers {
 	private MapTileLayer mapTileLayer;
 	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
+	private TravelSelectionLayer travelSelectionLayer;
+	private NetworkRouteSelectionLayer routeSelectionLayer;
 	private RouteLayer routeLayer;
 	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
@@ -148,7 +152,13 @@ public class MapLayers {
 		gpxLayer.setPointsOrder(0.9f);
 		mapView.addLayer(gpxLayer, 0.9f, -5.0f);
 
-		// route layer, 4-th in the order
+		travelSelectionLayer = new TravelSelectionLayer(app);
+		mapView.addLayer(travelSelectionLayer, 0.95f);
+
+		routeSelectionLayer = new NetworkRouteSelectionLayer(app);
+		mapView.addLayer(routeSelectionLayer, 0.99f);
+
+		// route layer, 6-th in the order
 		routeLayer = new RouteLayer(app);
 		mapView.addLayer(routeLayer, 1.0f, -2.0f);
 
@@ -603,6 +613,14 @@ public class MapLayers {
 
 	public GPXLayer getGpxLayer() {
 		return gpxLayer;
+	}
+
+	public NetworkRouteSelectionLayer getRouteSelectionLayer() {
+		return routeSelectionLayer;
+	}
+
+	public TravelSelectionLayer getTravelSelectionLayer() {
+		return travelSelectionLayer;
 	}
 
 	public ContextMenuLayer getContextMenuLayer() {

@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,7 +17,6 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
@@ -26,10 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.GpxAdditionalIconsProvider;
 import net.osmand.core.jni.GpxAdditionalIconsProvider.SplitLabel;
@@ -60,7 +55,6 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -77,7 +71,6 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -98,8 +91,6 @@ import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.WptPtTileProvider;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
-import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -118,8 +109,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt>,
-		ResourceManager.ResourceListener {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
@@ -155,13 +145,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
-	private ResourceManager resourceManager;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
-	private final Map<RouteKey, GPXFile> routesCache = new HashMap<>();
 	private final Map<String, Set<TrkSegment>> renderedSegmentsCache = new HashMap<>();
 	private SelectedGpxFile tmpVisibleTrack;
 
@@ -194,7 +182,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private long trackMarkersChangedTime;
 
 	private ContextMenuLayer contextMenuLayer;
-	private NetworkRouteSelectionTask networkRouteSelectionTask;
 
 	@ColorInt
 	private int visitedColor;
@@ -228,9 +215,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		gpxDbHelper = app.getGpxDbHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		mapMarkersHelper = app.getMapMarkersHelper();
-		resourceManager = app.getResourceManager();
-		resourceManager.addResourceListener(this);
-		osmandRenderer = resourceManager.getRenderer().getRenderer();
+		osmandRenderer = app.getResourceManager().getRenderer().getRenderer();
 		chartPointsHelper = new ChartPointsHelper(getContext());
 
 		currentTrackColorPref = settings.CURRENT_TRACK_COLOR;
@@ -256,16 +241,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	public void setTrackDrawInfo(@Nullable TrackDrawInfo trackDrawInfo) {
 		this.trackDrawInfo = trackDrawInfo;
-	}
-
-	public boolean isNetworkRouteSelectionMode() {
-		return networkRouteSelectionTask != null;
-	}
-
-	public void cancelNetworkRouteSelection() {
-		if (networkRouteSelectionTask != null) {
-			networkRouteSelectionTask.cancel(false);
-		}
 	}
 
 	private void initUI() {
@@ -1454,16 +1429,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				name = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.path));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
-		} else if (o instanceof Pair) {
-			Pair<?, ?> pair = (Pair<?, ?>) o;
-			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
-				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-				String name = Algorithms.isEmpty(travelGpx.getDescription()) ? travelGpx.getTitle() : travelGpx.getDescription();
-				return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
-			} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-				RouteKey routeKey = (RouteKey) pair.first;
-				return new PointDescription(PointDescription.POINT_TYPE_ROUTE, routeKey.getRouteName());
-			}
 		}
 		return null;
 	}
@@ -1560,15 +1525,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (o instanceof SelectedGpxPoint) {
 			WptPt point = ((SelectedGpxPoint) o).getSelectedPoint();
 			return new LatLon(point.lat, point.lon);
-		} else if (o instanceof Pair) {
-			Pair<?, ?> pair = (Pair<?, ?>) o;
-			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
-				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
-				return new LatLon(point.lat, point.lon);
-			} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-				QuadRect rect = (QuadRect) pair.second;
-				return new LatLon(rect.centerY(), rect.centerX());
-			}
 		}
 		return null;
 	}
@@ -1606,43 +1562,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public boolean showMenuAction(@Nullable Object object) {
 		MapActivity mapActivity = view.getMapActivity();
 		if (mapActivity != null) {
-			if (object instanceof Pair) {
-				Pair<?, ?> pair = (Pair<?, ?>) object;
-				if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
-					TravelGpx travelGpx = (TravelGpx) pair.first;
-					SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) pair.second;
-
-					WptPt wptPt = selectedGpxPoint.getSelectedPoint();
-					TravelHelper travelHelper = app.getTravelHelper();
-					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(), new LatLon(wptPt.lat, wptPt.lon));
-					return true;
-				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-					QuadRect rect = (QuadRect) pair.second;
-					RouteKey routeKey = (RouteKey) pair.first;
-					LatLon latLon = getObjectLocation(object);
-					CallbackWithObject<GPXFile> callback = gpxFile -> {
-						networkRouteSelectionTask = null;
-						if (gpxFile != null) {
-							routesCache.put(routeKey, gpxFile);
-							saveAndOpenGpx(object, mapActivity, routeKey, latLon, gpxFile);
-						}
-						return true;
-					};
-					if (networkRouteSelectionTask != null) {
-						networkRouteSelectionTask.cancel(false);
-					}
-					GPXFile gpxFile = routesCache.get(routeKey);
-					if (gpxFile == null) {
-						NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
-								mapActivity, routeKey, rect, callback);
-						selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-						networkRouteSelectionTask = selectionTask;
-					} else {
-						saveAndOpenGpx(object, mapActivity, routeKey, latLon, gpxFile);
-					}
-					return true;
-				}
-			} else if (object instanceof SelectedGpxPoint) {
+			if (object instanceof SelectedGpxPoint) {
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
 				if (selectedGpxPoint.shouldShowTrackPointMenu()) {
 					WptPt selectedWptPt = selectedGpxPoint.getSelectedPoint();
@@ -1656,16 +1576,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return false;
-	}
-
-	private void saveAndOpenGpx(@NonNull Object object, MapActivity mapActivity, RouteKey routeKey, LatLon latLon, GPXFile gpxFile) {
-		WptPt wptPt = new WptPt();
-		wptPt.lat = latLon.getLatitude();
-		wptPt.lon = latLon.getLongitude();
-		String name = getObjectName(object).getName();
-		String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
-		File file = new File(FileUtils.getTempDir(app), fileName);
-		GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeKey);
 	}
 
 	@Override
@@ -1729,12 +1639,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
-		resourceManager.removeResourceListener(this);
-	}
-
-	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
 		clearSelectedFilesSegments();
@@ -1765,29 +1669,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (customObjectsDelegate != null) {
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
-		}
-	}
-
-	@Override
-	public void onReaderIndexed(BinaryMapIndexReader reader) {
-		checkAndClearRouteCache(reader);
-	}
-
-	@Override
-	public void onReaderClosed(BinaryMapIndexReader reader) {
-		checkAndClearRouteCache(reader);
-	}
-
-	private void checkAndClearRouteCache(BinaryMapIndexReader reader) {
-		for (Iterator<Map.Entry<RouteKey, GPXFile>> it = routesCache.entrySet().iterator(); it.hasNext(); ) {
-			Map.Entry<RouteKey, GPXFile> route = it.next();
-			QuadRect routeBounds = route.getValue().getRect();
-			boolean mapContainsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(routeBounds.left),
-					MapUtils.get31TileNumberY(routeBounds.top), MapUtils.get31TileNumberX(routeBounds.right),
-					MapUtils.get31TileNumberY(routeBounds.bottom), 15);
-			if (mapContainsRoute) {
-				it.remove();
-			}
 		}
 	}
 }
