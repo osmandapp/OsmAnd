@@ -4778,7 +4778,7 @@
     <string name="shared_string_shows">Mostrar</string>
     <string name="shared_string_normal">Normal</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo a medir con la velocidad media para calcular la hora de llegada estimada.</string>
-    <string name="shared_string_large">Largo</string>
+    <string name="shared_string_large">Grande</string>
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
@@ -5520,7 +5520,7 @@
     <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
 \n
 \nEsta acción no se puede deshacer.</string>
-    <string name="shared_string_empty_trash">Papelera vacía</string>
+    <string name="shared_string_empty_trash">Vaciar papelera</string>
     <string name="shared_string_delete_immediately">Borrar de inmediato</string>
     <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
     <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
@@ -5567,4 +5567,8 @@
     <string name="key_event_category_actions">Acciones</string>
     <string name="change_button">Cambiar botón</string>
     <string name="download_to_device">Descargar al dispositivo</string>
+    <string name="remove_widget_first">Quitar antes el widget</string>
+    <string name="add_row">Añadir fila</string>
+    <string name="discard_changes_prompt">¿Descartar cambios?</string>
+    <string name="row_number">Fila %1$s</string>
 </resources>
