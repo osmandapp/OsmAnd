@@ -5540,7 +5540,7 @@
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
-    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para vincularlo con la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
     <string name="key_event_action_move_right">Mover a la derecha</string>
     <string name="shared_string_button">Botón</string>
@@ -5571,4 +5571,7 @@
     <string name="add_row">Añadir fila</string>
     <string name="discard_changes_prompt">¿Descartar cambios?</string>
     <string name="row_number">Fila %1$s</string>
+    <string name="tripltek_promo">Promoción Tripltek por %1$s meses</string>
+    <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="see_all_plans">Ver todos los planes</string>
 </resources>
