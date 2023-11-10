@@ -2755,7 +2755,7 @@
     <string name="poi_fire_hydrant_type">Tipo de hidrante</string>
     <string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
     <string name="poi_water_source">Origen del agua</string>
-    <string name="poi_payment_toll_type">Forma de pago (peaje)</string>
+    <string name="poi_payment_toll_type">Método de pago (peaje)</string>
     <string name="poi_traffic_signals_sound">Sonido</string>
     <string name="poi_highway_crossing_type">Tipo de cruce</string>
     <string name="poi_tactile_paving">Pavimento táctil</string>
@@ -4635,4 +4635,18 @@
     <string name="poi_socket_typee_output">Enchufe: Tipo E: salida</string>
     <string name="poi_dressing_room">Vestidor</string>
     <string name="poi_emergency_bay">Bahía de emergencia</string>
+    <string name="poi_osmand_motor_vehicle_no">Acceso para vehículos motorizados: no</string>
+    <string name="poi_osmand_motorcar_no">Acceso para automóviles: no</string>
+    <string name="poi_osmand_vehicle_no">Acceso para vehículos: no</string>
+    <string name="poi_osmand_access_no">Acceso: no</string>
+    <string name="poi_osmand_access_private">Acceso: privado</string>
+    <string name="poi_osmand_foot_private">Acceso peatonal: privado</string>
+    <string name="poi_osmand_bicycle_private">Acceso para bicicletas: privado</string>
+    <string name="poi_osmand_motor_vehicle_private">Acceso para vehículos motorizados: privado</string>
+    <string name="poi_osmand_foot_no">Acceso peatonal: no</string>
+    <string name="poi_osmand_bicycle_no">Acceso para bicicletas: no</string>
+    <string name="poi_osmand_vehicle_private">Acceso para vehículos: privado</string>
+    <string name="poi_osmand_motorcar_private">Acceso para automóviles: privado</string>
+    <string name="poi_osmand_motorcycle_no">Acceso para motocicletas: no</string>
+    <string name="poi_osmand_motorcycle_private">Acceso para motocicletas: privado</string>
 </resources>
