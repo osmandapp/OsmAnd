@@ -32,20 +32,26 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.MapUtils;
 
-public class HHRoutePlanner {
+public class HHRoutePlanner<T extends NetworkDBPoint> {
 	static int DEBUG_VERBOSE_LEVEL = 0;
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	static final double MINIMAL_COST = 0.01;
 	
-	HHRoutingContext cacheHctx;
+	HHRoutingContext<T> cacheHctx;
 	private int routingProfile = 0;
+	private final Class<T> pointClass;
 	
-	public HHRoutePlanner(RoutingContext ctx, HHRoutingDB networkDB) {
+	public static HHRoutePlanner<NetworkDBPoint> create(RoutingContext ctx, HHRoutingDB networkDB) {
+		return new HHRoutePlanner<NetworkDBPoint>(ctx, networkDB, NetworkDBPoint.class);
+	}
+	
+	public HHRoutePlanner(RoutingContext ctx, HHRoutingDB networkDB, Class<T> cl) {
+		this.pointClass = cl;
 		initEmptyContext(ctx, networkDB);
 	}
 	
-	private HHRoutingContext initEmptyContext(RoutingContext ctx, HHRoutingDB networkDB) {
-		cacheHctx = new HHRoutingContext();
+	private HHRoutingContext<T> initEmptyContext(RoutingContext ctx, HHRoutingDB networkDB) {
+		cacheHctx = new HHRoutingContext<T>();
 		cacheHctx.rctx = ctx;
 		cacheHctx.networkDB = networkDB;
 		return cacheHctx;
@@ -98,7 +104,7 @@ public class HHRoutePlanner {
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
 		long startTime = System.nanoTime();
 		config = prepareDefaultRoutingConfig(config);
-		HHRoutingContext hctx = initHCtx(config);
+		HHRoutingContext<T> hctx = initHCtx(config);
 		hctx.setStartEnd(start, end);
 		hctx.clearVisited();
 		if (hctx.config.USE_GC_MORE_OFTEN) {
@@ -107,8 +113,8 @@ public class HHRoutePlanner {
 		long time = System.nanoTime();
 		System.out.println(config.toString(start, end));
 		System.out.println("Finding first / last segments...");
-		TLongObjectHashMap<NetworkDBPoint> stPoints = initStart(hctx, false);
-		TLongObjectHashMap<NetworkDBPoint> endPoints = initStart(hctx, true);
+		TLongObjectHashMap<T> stPoints = initStart(hctx, false);
+		TLongObjectHashMap<T> endPoints = initStart(hctx, true);
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
 
@@ -163,8 +169,8 @@ public class HHRoutePlanner {
 		return route;
 	}
 
-	private void calcAlternativeRoute(HHRoutingContext hctx, HHNetworkRouteRes route, TLongObjectHashMap<NetworkDBPoint> stPoints,
-			TLongObjectHashMap<NetworkDBPoint> endPoints) throws SQLException {
+	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
+			TLongObjectHashMap<T> endPoints) throws SQLException {
 		List<NetworkDBPoint>  exclude = new ArrayList<>();
 		try {
 			HHNetworkRouteRes rt = route;
@@ -239,8 +245,8 @@ public class HHRoutePlanner {
 				exclude.clear();
 				
 				LatLon pnt = points.get(i).getPoint();
-				List<NetworkDBPoint> objs = hctx.pointsRect.getClosestObjects(pnt.getLatitude(), pnt.getLongitude(), minDistance[i]);
-				for (NetworkDBPoint p : objs) {
+				List<T> objs = hctx.pointsRect.getClosestObjects(pnt.getLatitude(), pnt.getLongitude(), minDistance[i]);
+				for (T p : objs) {
 					if (MapUtils.getDistance(p.getPoint(), pnt) <= minDistance[i]) {
 						exclude.add(p);
 						p.rtExclude = true;
@@ -249,7 +255,7 @@ public class HHRoutePlanner {
 				
 				NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
 				if (finalPnt != null) {
-					double cost = (finalPnt.rtDistanceFromStart + finalPnt.rtDistanceFromStartRev);
+					double cost = (finalPnt.rt().rtDistanceFromStart + finalPnt.rt().rtDistanceFromStartRev);
 					if (DEBUG_VERBOSE_LEVEL == 1) {
 						System.out.println("Alternative route cost: " + cost);
 					}
@@ -306,8 +312,8 @@ public class HHRoutePlanner {
 				
 	}
 
-	protected HHRoutingContext initHCtx(HHRoutingConfig c) throws SQLException {
-		HHRoutingContext hctx = this.cacheHctx;
+	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c) throws SQLException {
+		HHRoutingContext<T> hctx = this.cacheHctx;
 		if (hctx.networkDB.getRoutingProfile() != routingProfile) {
 			hctx.networkDB.selectRoutingProfile(routingProfile);
 			hctx = initEmptyContext(hctx.rctx, hctx.networkDB);
@@ -320,9 +326,9 @@ public class HHRoutePlanner {
 		}
 		long time = System.nanoTime();
 		System.out.print("Loading points... ");
-		hctx.pointsById = hctx.networkDB.loadNetworkPoints();
+		hctx.pointsById = hctx.networkDB.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
-		hctx.pointsByGeo = new TLongObjectHashMap<NetworkDBPoint>();
+		hctx.pointsByGeo = new TLongObjectHashMap<T>();
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		if (c.PRELOAD_SEGMENTS) {
@@ -339,7 +345,7 @@ public class HHRoutePlanner {
 		}
 		hctx.clusterOutPoints = hctx.networkDB.groupByClusters(hctx.pointsById, true);
 		hctx.clusterInPoints = hctx.networkDB.groupByClusters(hctx.pointsById, false);
-		for (NetworkDBPoint pnt : hctx.pointsById.valueCollection()) {
+		for (T pnt : hctx.pointsById.valueCollection()) {
 			long pos = calculateRoutePointInternalId(pnt.roadId, pnt.start, pnt.end);
 			LatLon latlon = pnt.getPoint();
 			hctx.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), pnt);
@@ -353,8 +359,9 @@ public class HHRoutePlanner {
 		return hctx;
 	}
 
-	private TLongObjectHashMap<NetworkDBPoint> initStart(HHRoutingContext hctx, boolean reverse) throws IOException, InterruptedException {
-		TLongObjectHashMap<NetworkDBPoint> pnts = new TLongObjectHashMap<>();
+	@SuppressWarnings("unchecked")
+	private TLongObjectHashMap<T> initStart(HHRoutingContext<T> hctx, boolean reverse) throws IOException, InterruptedException {
+		TLongObjectHashMap<T> pnts = new TLongObjectHashMap<>();
 		double startLat = MapUtils.get31LatitudeY(!reverse? hctx.startY : hctx.endY);
 		double startLon = MapUtils.get31LongitudeX(!reverse? hctx.startX : hctx.endX);
 		if (!hctx.config.ROUTE_LAST_MILE) {
@@ -363,14 +370,14 @@ public class HHRoutePlanner {
 			while (rad < 300000 && pnts.isEmpty()) {
 				rad = rad * 2;
 				
-				List<NetworkDBPoint> pntSelect = hctx.pointsRect.getClosestObjects(startLat, startLon, rad);
+				List<T> pntSelect = hctx.pointsRect.getClosestObjects(startLat, startLon, rad);
 				// limit by cluster
 				int cid = pntSelect.get(0).clusterId;
-				for (NetworkDBPoint pSelect : pntSelect) {
+				for (T pSelect : pntSelect) {
 					if(pSelect.clusterId != cid) {
 						continue;
 					}
-					NetworkDBPoint pnt  = reverse ? pSelect.dualPoint : pSelect;
+					T pnt  = reverse ? (T) pSelect.dualPoint : pSelect;
 					double cost = MapUtils.getDistance(pnt.getPoint(), startLat, startLon) / spd;
 					pnt.setCostParentRt(reverse, cost + distanceToEnd(hctx, reverse, pnt), null, cost);
 					pnts.put(pnt.index, pnt);
@@ -398,7 +405,7 @@ public class HHRoutePlanner {
 						reverse ? o.getSegmentEnd() : o.getSegmentStart(),
 						reverse ? o.getSegmentStart() : o.getSegmentEnd());
 				if (set.add(pntId)) {
-					NetworkDBPoint pnt = hctx.pointsByGeo.get(pntId);
+					T pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
@@ -414,7 +421,7 @@ public class HHRoutePlanner {
 	}
 
 	
-	protected NetworkDBPoint runRoutingPointToPoint(HHRoutingContext hctx, NetworkDBPoint start, NetworkDBPoint end) throws SQLException {
+	protected T runRoutingPointToPoint(HHRoutingContext<T> hctx, T start, T end) throws SQLException {
 		if (start != null) {
 			addPointToQueue(hctx, hctx.queue, false, start, null, 0, MINIMAL_COST);
 		}
@@ -425,9 +432,9 @@ public class HHRoutePlanner {
 
 	}
 	
-	protected NetworkDBPoint runRoutingPointsToPoints(HHRoutingContext hctx, TLongObjectHashMap<NetworkDBPoint> stPoints,
-			TLongObjectHashMap<NetworkDBPoint> endPoints) throws SQLException {
-		for (NetworkDBPoint start : stPoints.valueCollection()) {
+	protected T runRoutingPointsToPoints(HHRoutingContext<T> hctx, TLongObjectHashMap<T> stPoints,
+			TLongObjectHashMap<T> endPoints) throws SQLException {
+		for (T start : stPoints.valueCollection()) {
 			if (start.rtExclude) {
 				continue;
 			}
@@ -435,7 +442,7 @@ public class HHRoutePlanner {
 			addPointToQueue(hctx, hctx.queue, false, start, null, start.distanceFromStart(false),
 					cost <= 0 ? MINIMAL_COST : cost);
 		}
-		for (NetworkDBPoint end : endPoints.valueCollection()) {
+		for (T end : endPoints.valueCollection()) {
 			if (end.rtExclude) {
 				continue;
 			}
@@ -446,28 +453,28 @@ public class HHRoutePlanner {
 		return runRoutingWithInitQueue(hctx);
 	}
 	
-	private NetworkDBPoint runRoutingWithInitQueue(HHRoutingContext hctx) throws SQLException {
-		Queue<NetworkDBPointCost> queue = hctx.queue;
+	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException {
+		Queue<NetworkDBPointCost<T>> queue = hctx.queue;
 		while (!queue.isEmpty()) {
 			long tm = System.nanoTime();
-			NetworkDBPointCost pointCost = queue.poll();
-			NetworkDBPoint point = pointCost.point;
+			NetworkDBPointCost<T> pointCost = queue.poll();
+			T point = pointCost.point;
 			boolean rev = pointCost.rev;
 			hctx.stats.pollQueueTime += (System.nanoTime() - tm) / 1e6;
 			hctx.stats.visitedVertices++;
 			if (point.visited(!rev)) {
 				if (hctx.config.HEURISTIC_COEFFICIENT == 1 && hctx.config.DIJKSTRA_DIRECTION == 0) {
 					// TODO 2.1 HHRoutePlanner Improve / Review A* finish condition
-					double rcost = point.rtDistanceFromStart + point.rtDistanceFromStartRev;
+					double rcost = point.rt().rtDistanceFromStart + point.rt().rtDistanceFromStartRev;
 					if (rcost <= pointCost.cost) {
 						return point;
 					} else {
-						queue.add(new NetworkDBPointCost(point, rcost, rev));
+						queue.add(new NetworkDBPointCost<T>(point, rcost, rev));
 						point.markVisited(rev);
 						continue;
 					}
 				} else {
-					NetworkDBPoint finalPoint = point;
+					T finalPoint = point;
 					if (hctx.config.DIJKSTRA_DIRECTION == 0) {
 						finalPoint = scanFinalPoint(finalPoint, hctx.visited);
 						finalPoint = scanFinalPoint(finalPoint, hctx.visitedRev);
@@ -498,20 +505,21 @@ public class HHRoutePlanner {
 		
 	}
 
-	private NetworkDBPoint scanFinalPoint(NetworkDBPoint finalPoint, List<NetworkDBPoint> lt) {
-		for (NetworkDBPoint p : lt) {
-			if (p.rtDistanceFromStart == 0 || p.rtDistanceFromStartRev == 0) {
+	private T scanFinalPoint(T finalPoint, List<T> lt) {
+		for (T p : lt) {
+			if (p.rt().rtDistanceFromStart == 0 || p.rt().rtDistanceFromStartRev == 0) {
 				continue;
 			}
-			if (p.rtDistanceFromStart + p.rtDistanceFromStartRev < finalPoint.rtDistanceFromStart + finalPoint.rtDistanceFromStartRev) {
+			if (p.rt().rtDistanceFromStart + p.rt().rtDistanceFromStartRev < finalPoint.rt().rtDistanceFromStart + finalPoint.rt().rtDistanceFromStartRev) {
 				finalPoint = p;
 			}
 		}
 		return finalPoint;
 	}
 	
-	private void addConnectedToQueue(HHRoutingContext hctx, Queue<NetworkDBPointCost> queue, NetworkDBPoint point, boolean reverse) throws SQLException {
-		int depth = hctx.config.USE_MIDPOINT || hctx.config.MAX_DEPTH > 0 ? point.getDepth(!reverse) : 0;
+	@SuppressWarnings("unchecked")
+	private void addConnectedToQueue(HHRoutingContext<T> hctx, Queue<NetworkDBPointCost<T>> queue, T point, boolean reverse) throws SQLException {
+		int depth = hctx.config.USE_MIDPOINT || hctx.config.MAX_DEPTH > 0 ? point.rt().getDepth(!reverse) : 0;
 		if (hctx.config.MAX_DEPTH > 0 && depth >= hctx.config.MAX_DEPTH) {
 			return;
 		}
@@ -520,7 +528,7 @@ public class HHRoutePlanner {
 		hctx.stats.loadEdgesCnt += cnt;
 		hctx.stats.loadEdgesTime += (System.nanoTime() - tm) / 1e6;
 		for (NetworkDBSegment connected : point.connected(reverse)) {
-			NetworkDBPoint nextPoint = reverse ? connected.start : connected.end;
+			T nextPoint = (T) (reverse ? connected.start : connected.end);
 			if (!hctx.config.USE_CH && !hctx.config.USE_CH_SHORTCUTS && connected.shortcut) {
 				continue;
 			}
@@ -528,10 +536,10 @@ public class HHRoutePlanner {
 				continue;
 			}
 			// modify CH to not compute all top points
-			if (hctx.config.USE_CH && (nextPoint.chInd > 0 && nextPoint.chInd < point.chInd)) {
+			if (hctx.config.USE_CH && (nextPoint.chInd() > 0 && nextPoint.chInd() < point.chInd())) {
 				continue;
 			}
-			if (hctx.config.USE_MIDPOINT && Math.min(depth, hctx.config.MIDPOINT_MAX_DEPTH) > nextPoint.rtCnt + hctx.config.MIDPOINT_ERROR) {
+			if (hctx.config.USE_MIDPOINT && Math.min(depth, hctx.config.MIDPOINT_MAX_DEPTH) > nextPoint.midPntDepth() + hctx.config.MIDPOINT_ERROR) {
 				continue;
 			}
 			double cost = point.distanceFromStart(reverse)  + connected.dist + distanceToEnd(hctx, reverse, nextPoint) ;
@@ -542,8 +550,8 @@ public class HHRoutePlanner {
 		}
 	}
 
-	private void addPointToQueue(HHRoutingContext hctx, Queue<NetworkDBPointCost> queue,
-			boolean reverse, NetworkDBPoint point, NetworkDBPoint parent, double segmentDist, double cost) {
+	private void addPointToQueue(HHRoutingContext<T> hctx, Queue<NetworkDBPointCost<T>> queue,
+			boolean reverse, T point, T parent, double segmentDist, double cost) {
 		long tm = System.nanoTime();
 		if (DEBUG_VERBOSE_LEVEL > 2) {
 			System.out.printf("Add  %s to visit - cost %.2f (%.2f prev, %.2f dist) > prev cost %.2f \n", point, 
@@ -555,12 +563,12 @@ public class HHRoutePlanner {
 		}
 		point.setCostParentRt(reverse, cost, parent, segmentDist);
 		hctx.queueAdded.add(point);
-		queue.add(new NetworkDBPointCost(point, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
+		queue.add(new NetworkDBPointCost<T>(point, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
 		hctx.stats.addQueueTime += (System.nanoTime() - tm) / 1e6;
 		hctx.stats.addedVertices++;
 	}
 
-	private double distanceToEnd(HHRoutingContext hctx, boolean reverse,  NetworkDBPoint nextPoint) {
+	private double distanceToEnd(HHRoutingContext<T> hctx, boolean reverse,  NetworkDBPoint nextPoint) {
 		if (hctx.config.HEURISTIC_COEFFICIENT > 0) {
 			double distanceToEnd = nextPoint.distanceToEnd(reverse);
 			if (distanceToEnd == 0) {
@@ -574,18 +582,17 @@ public class HHRoutePlanner {
 		return 0;
 	}
 		
-	private void printPoint(NetworkDBPoint p, boolean rev) {
+	private void printPoint(T p, boolean rev) {
 		if (DEBUG_VERBOSE_LEVEL > 1) {
 			int pind = 0; long pchInd = 0;
-			if (rev && p.rtRouteToPointRev != null) {
-				pind = p.rtRouteToPointRev.index;
-				pchInd = p.rtRouteToPointRev.chInd;
+			if (rev && p.rt().rtRouteToPointRev != null) {
+				pind = p.rt().rtRouteToPointRev.index;
 			}
-			if (!rev && p.rtRouteToPoint != null) {
-				pind = p.rtRouteToPoint.index;
-				pchInd = p.rtRouteToPoint.chInd;
+			if (!rev && p.rt().rtRouteToPoint != null) {
+				pind = p.rt().rtRouteToPoint.index;
+				pchInd = p.rt().rtRouteToPoint.chInd();
 			}
-			String symbol = String.format("%s %d [%d] (from %d [%d])", rev ? "<-" : "->", p.index, p.chInd, pind, pchInd);
+			String symbol = String.format("%s %d [%d] (from %d [%d])", rev ? "<-" : "->", p.index, p.chInd(), pind, pchInd);
 			System.out.printf("Visit Point %s (cost %.1f s) %.5f/%.5f - %d\n", symbol, p.rtCost(rev),
 					MapUtils.get31LatitudeY(p.startY), MapUtils.get31LongitudeX(p.startX), p.roadId / 64);
 		}
@@ -593,7 +600,7 @@ public class HHRoutePlanner {
 	
 
 	
-	private HHNetworkSegmentRes runDetailedRouting(HHRoutingContext hctx, HHNetworkSegmentRes res)
+	private HHNetworkSegmentRes runDetailedRouting(HHRoutingContext<T> hctx, HHNetworkSegmentRes res)
 			throws InterruptedException, IOException {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		NetworkDBSegment segment = res.segment;
@@ -617,7 +624,7 @@ public class HHRoutePlanner {
 		return res;
 	}
 	
-	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingContext hctx, HHNetworkRouteRes route) 
+	private HHNetworkRouteRes prepareDetailedRoutingResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route) 
 			throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
 			HHNetworkSegmentRes s = route.segments.get(i);
@@ -693,7 +700,7 @@ public class HHRoutePlanner {
 			prevEmpty = false;
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
 				System.out.printf("\nRoute %d [%d] -> %d [%d] %s - hh dist %.2f s, detail %.2f s segments %d ( end %.5f/%.5f - %d ) ", 
-					s.start.index, s.start.chInd, s.end.index,s.end.chInd, s.shortcut ? "sh" : "bs",
+					s.start.index, s.start.chInd(), s.end.index,s.end.chInd(), s.shortcut ? "sh" : "bs",
 					s.dist, rt, detList,
 					MapUtils.get31LatitudeY(s.end.startY), MapUtils.get31LongitudeX(s.end.startX), s.end.roadId / 64);
 			}
@@ -702,13 +709,13 @@ public class HHRoutePlanner {
 	}
 
 
-	private HHNetworkRouteRes createRouteSegmentFromFinalPoint(HHRoutingContext hctx, NetworkDBPoint pnt) {
+	private HHNetworkRouteRes createRouteSegmentFromFinalPoint(HHRoutingContext<T> hctx, NetworkDBPoint pnt) {
 		HHNetworkRouteRes route = new HHNetworkRouteRes();
 		if (pnt != null) {
 			NetworkDBPoint itPnt = pnt;
 			route.uniquePoints.add(itPnt.index);
-			while (itPnt.rtRouteToPointRev != null) {
-				NetworkDBPoint nextPnt = itPnt.rtRouteToPointRev;
+			while (itPnt.rt().rtRouteToPointRev != null) {
+				NetworkDBPoint nextPnt = itPnt.rt().rtRouteToPointRev;
 				NetworkDBSegment segment = nextPnt.getSegment(itPnt, false);
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(segment);
 				route.segments.add(res);
@@ -716,16 +723,16 @@ public class HHRoutePlanner {
 				itPnt = nextPnt;
 				route.uniquePoints.add(itPnt.index);
 			}
-			if (itPnt.rtDetailedRouteRev != null) {
+			if (itPnt.rt().rtDetailedRouteRev != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
-				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rtDetailedRouteRev);
-				route.routingTimeSegments += itPnt.rtDetailedRouteRev.distanceFromStart;
+				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rt().rtDetailedRouteRev);
+				route.routingTimeSegments += itPnt.rt().rtDetailedRouteRev.distanceFromStart;
 				route.segments.add(res);
 			}
 			Collections.reverse(route.segments);
 			itPnt = pnt;
-			while (itPnt.rtRouteToPoint != null) {
-				NetworkDBPoint nextPnt = itPnt.rtRouteToPoint;
+			while (itPnt.rt().rtRouteToPoint != null) {
+				NetworkDBPoint nextPnt = itPnt.rt().rtRouteToPoint;
 				NetworkDBSegment segment = nextPnt.getSegment(itPnt, true);
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(segment);
 				route.segments.add(res);
@@ -733,10 +740,10 @@ public class HHRoutePlanner {
 				itPnt = nextPnt;
 				route.uniquePoints.add(itPnt.index);
 			}
-			if (itPnt.rtDetailedRoute != null) {
+			if (itPnt.rt().rtDetailedRoute != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
-				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rtDetailedRoute);
-				route.routingTimeSegments += itPnt.rtDetailedRoute.distanceFromStart;
+				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rt().rtDetailedRoute);
+				route.routingTimeSegments += itPnt.rt().rtDetailedRoute.distanceFromStart;
 				route.segments.add(res);
 			}
 			Collections.reverse(route.segments);

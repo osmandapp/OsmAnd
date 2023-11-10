@@ -133,19 +133,19 @@ public class HHRouteDataStructure {
 		}
 	}
 	
-	public static class HHRoutingContext {
+	public static class HHRoutingContext<T extends NetworkDBPoint> {
 		
 		// Initial data structure
 		RoutingContext rctx; 
 		HHRoutingDB networkDB;
 		
 		// Global network data structure 
-		TLongObjectHashMap<NetworkDBPoint> pointsById;
-		TLongObjectHashMap<NetworkDBPoint> pointsByGeo;
-		TIntObjectHashMap<List<NetworkDBPoint>> clusterInPoints;
-		TIntObjectHashMap<List<NetworkDBPoint>> clusterOutPoints;
+		TLongObjectHashMap<T> pointsById;
+		TLongObjectHashMap<T> pointsByGeo;
+		TIntObjectHashMap<List<T>> clusterInPoints;
+		TIntObjectHashMap<List<T>> clusterOutPoints;
 
-		DataTileManager<NetworkDBPoint> pointsRect = new DataTileManager<>(11); // 20km tile
+		DataTileManager<T> pointsRect = new DataTileManager<>(11); // 20km tile
 		TLongObjectHashMap<RouteSegment> boundaries;
 		
 		// Route specific details
@@ -157,12 +157,12 @@ public class HHRouteDataStructure {
 		int endX;
 		
 		// Route runtime vars
-		List<NetworkDBPoint> queueAdded = new ArrayList<>();
-		List<NetworkDBPoint> visited = new ArrayList<>();
-		List<NetworkDBPoint> visitedRev = new ArrayList<>();
-		Queue<NetworkDBPointCost> queue = new PriorityQueue<>(new Comparator<NetworkDBPointCost>() {
+		List<T> queueAdded = new ArrayList<>();
+		List<T> visited = new ArrayList<>();
+		List<T> visitedRev = new ArrayList<>();
+		Queue<NetworkDBPointCost<T>> queue = new PriorityQueue<>(new Comparator<NetworkDBPointCost<T>>() {
 			@Override
-			public int compare(NetworkDBPointCost o1, NetworkDBPointCost o2) {
+			public int compare(NetworkDBPointCost<T> o1, NetworkDBPointCost<T> o2) {
 				return Double.compare(o1.cost, o2.cost);
 			}
 		});
@@ -177,15 +177,15 @@ public class HHRouteDataStructure {
 			visitedRev.clear();
 		}
 
-		public void clearVisited(TLongObjectHashMap<NetworkDBPoint> stPoints, TLongObjectHashMap<NetworkDBPoint> endPoints) {
+		public void clearVisited(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
 			queue.clear();
-			Iterator<NetworkDBPoint> it = queueAdded.iterator();
+			Iterator<T> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
 				if (stPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(false, p.rtDetailedRoute);
+					p.setDetailedParentRt(false, p.getDetailedRouteRt(false));
 				} else if (endPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(true, p.rtDetailedRouteRev);
+					p.setDetailedParentRt(true, p.getDetailedRouteRt(true));
 				} else {
 					p.clearRouting();
 				}
@@ -210,12 +210,12 @@ public class HHRouteDataStructure {
 		
 	}
 
-	static class NetworkDBPointCost {
-		final NetworkDBPoint point;
+	static class NetworkDBPointCost<T> {
+		final T point;
 		final double cost;
 		final boolean rev;
 		
-		NetworkDBPointCost(NetworkDBPoint p, double cost, boolean rev) {
+		NetworkDBPointCost(T p, double cost, boolean rev) {
 			point = p;
 			this.cost = cost;
 			this.rev = rev;
