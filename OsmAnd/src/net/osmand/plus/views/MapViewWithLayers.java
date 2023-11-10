@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap.OsmandMapListener;
@@ -68,7 +68,7 @@ public class MapViewWithLayers extends FrameLayout {
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
 		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
-				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
+				&& InAppPurchaseUtils.isAndroidAutoAvailable(app);
 
 		OsmAndMapSurfaceView surfaceView = findViewById(R.id.MapView);
 		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);

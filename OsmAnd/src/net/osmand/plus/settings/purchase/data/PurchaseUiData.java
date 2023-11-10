@@ -1,11 +1,16 @@
 package net.osmand.plus.settings.purchase.data;
 
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.PROMO;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.util.Algorithms;
 
 public class PurchaseUiData {
 
@@ -15,7 +20,6 @@ public class PurchaseUiData {
 	private final String purchaseType;
 	private final long expireTime;
 	private final long purchaseTime;
-	private final boolean isFreeAccountSubscription;
 	private final boolean isSubscription;
 	private final boolean isLiveUpdateSubscription;
 	private final boolean isAutoRenewing;
@@ -23,11 +27,12 @@ public class PurchaseUiData {
 	private final SubscriptionState subscriptionState;
 	private final PurchaseOrigin origin;
 
-	public PurchaseUiData(String sku, @NonNull String title, @DrawableRes int iconId,
+	public PurchaseUiData(@Nullable String sku, @NonNull String title, @DrawableRes int iconId,
 	                      @NonNull String purchaseType, long expireTime, long purchaseTime,
 	                      boolean isSubscription, boolean isLiveUpdateSubscription,
 	                      boolean isAutoRenewing, boolean isRenewVisible,
-	                      @NonNull SubscriptionState subscriptionState, @NonNull PurchaseOrigin origin, boolean isFreeAccountSubscription) {
+	                      @NonNull SubscriptionState subscriptionState,
+	                      @NonNull PurchaseOrigin origin) {
 		this.sku = sku;
 		this.title = title;
 		this.iconId = iconId;
@@ -40,10 +45,9 @@ public class PurchaseUiData {
 		this.isRenewVisible = isRenewVisible;
 		this.subscriptionState = subscriptionState;
 		this.origin = origin;
-		this.isFreeAccountSubscription = isFreeAccountSubscription;
 	}
 
-	@NonNull
+	@Nullable
 	public String getSku() {
 		return sku;
 	}
@@ -98,11 +102,6 @@ public class PurchaseUiData {
 	}
 
 	public boolean isPromo() {
-		return origin == PurchaseOrigin.PROMO;
+		return Algorithms.equalsToAny(origin, PROMO, TRIPLTEK_PROMO);
 	}
-
-	public boolean isFreeAccountSubscription() {
-		return isFreeAccountSubscription;
-	}
-
 }

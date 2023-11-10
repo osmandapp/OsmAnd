@@ -94,7 +94,9 @@ public class PurchaseItemCard extends BaseCard {
 			boolean renewVisible = purchase.isRenewVisible();
 			View renewContainer = view.findViewById(R.id.renewContainer);
 			renewContainer.setOnClickListener(v -> {
-				InAppPurchaseHelper.subscribe(activity, purchaseHelper, purchase.getSku());
+				if (purchase.getSku() != null) {
+					InAppPurchaseHelper.subscribe(activity, purchaseHelper, purchase.getSku());
+				}
 			});
 			AndroidUiHelper.updateVisibility(renewContainer, renewVisible);
 			AndroidUtils.setBackground(activity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);

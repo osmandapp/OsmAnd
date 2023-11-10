@@ -196,6 +196,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";
 	String FRAGMENT_DRAWER_ID = FRAGMENT_ID + "drawer";
+	String FRAGMENT_TRIPLTEK_PROMO_ID = FRAGMENT_ID + "tripltek_promo";
 
 	//Map Context Menu rows:
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";

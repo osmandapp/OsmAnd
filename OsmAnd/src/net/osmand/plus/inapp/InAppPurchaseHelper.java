@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -49,6 +48,7 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class InAppPurchaseHelper {
+
 	// Debug tag, for logging
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
@@ -60,7 +60,6 @@ public abstract class InAppPurchaseHelper {
 	protected Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
-	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
 	protected boolean isDeveloperVersion;
 	protected String token = "";
@@ -149,93 +148,6 @@ public abstract class InAppPurchaseHelper {
 
 	public InAppPurchaseTaskType getActiveTask() {
 		return activeTask;
-	}
-
-	public static boolean isSubscribedToAny(@NonNull OsmandApplication app) {
-		return isSubscribedToAny(app, true);
-	}
-
-	public static boolean isSubscribedToAny(@NonNull OsmandApplication app, boolean checkDevBuild) {
-		return checkDevBuild && Version.isDeveloperBuild(app)
-				|| isSubscribedToMaps(app, checkDevBuild)
-				|| isOsmAndProAvailable(app, checkDevBuild)
-				|| isSubscribedToMapperUpdates(app)
-				|| app.getSettings().LIVE_UPDATES_PURCHASED.get();
-	}
-
-	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app) {
-		return isSubscribedToMaps(app, true);
-	}
-
-	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app, boolean checkDevBuild) {
-		return checkDevBuild && Version.isDeveloperBuild(app)
-				|| app.getSettings().OSMAND_MAPS_PURCHASED.get();
-	}
-
-	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
-				|| isSubscribedToMapperUpdates(ctx)
-				|| isOsmAndProAvailable(ctx);
-	}
-
-	private static boolean isSubscribedToOsmAndPro(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
-	}
-
-	private static boolean isSubscribedToMapperUpdates(@NonNull OsmandApplication ctx) {
-		return ctx.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
-	}
-
-	public static boolean isSubscribedToPromo(@NonNull OsmandApplication ctx) {
-		return ctx.getSettings().BACKUP_PURCHASE_ACTIVE.get();
-	}
-
-	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app, true);
-	}
-
-	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication app, boolean checkDevBuild) {
-		return checkDevBuild && Version.isDeveloperBuild(app)
-				|| isSubscribedToPromo(app)
-				|| isSubscribedToOsmAndPro(app);
-	}
-
-	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
-		long time = System.currentTimeMillis();
-		long installTime = getInstallTime(app);
-		if (time >= installTime + ANDROID_AUTO_START_DATE_MS) {
-			return Version.isDeveloperBuild(app) || Version.isPaidVersion(app);
-		}
-		return true;
-	}
-
-	private static long getInstallTime(@NonNull OsmandApplication app) {
-		AppInitializer initializer = app.getAppInitializer();
-		long updateVersionTime = initializer.getUpdateVersionTime();
-		long firstInstalledTime = initializer.getFirstInstalledTime();
-		return Math.max(updateVersionTime, firstInstalledTime);
-	}
-
-	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app) {
-		return isFullVersionPurchased(app, true);
-	}
-
-	public static boolean isFullVersionPurchased(@NonNull OsmandApplication app, boolean checkDevBuild) {
-		return checkDevBuild && Version.isDeveloperBuild(app) || app.getSettings().FULL_VERSION_PURCHASED.get();
-	}
-
-	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| Version.isPaidVersion(ctx)
-				|| ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
-	}
-
-	public static boolean isContourLinesPurchased(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| Version.isPaidVersion(ctx)
-				|| ctx.getSettings().CONTOUR_LINES_PURCHASED.get();
 	}
 
 	public InAppPurchases getInAppPurchases() {
@@ -343,9 +255,9 @@ public abstract class InAppPurchaseHelper {
 			purchase = purchases.getInAppSubscriptionBySku(sku);
 		}
 		if (purchase != null) {
-			if (purchases.isFullVersion(purchase) && isFullVersionPurchased(ctx)) {
+			if (purchases.isFullVersion(purchase) && InAppPurchaseUtils.isFullVersionAvailable(ctx)) {
 				return true;
-			} else if (purchases.isDepthContours(purchase) && isDepthContoursPurchased(ctx)) {
+			} else if (purchases.isDepthContours(purchase) && InAppPurchaseUtils.isDepthContoursAvailable(ctx)) {
 				return true;
 			}
 			int featureId = purchase.getFeatureId();
@@ -354,11 +266,11 @@ public abstract class InAppPurchaseHelper {
 					if (p.isPurchased()) {
 						return true;
 					} else {
-						if (purchases.isLiveUpdatesSubscription(p) && isSubscribedToLiveUpdates(ctx)) {
+						if (purchases.isLiveUpdatesSubscription(p) && InAppPurchaseUtils.isLiveUpdatesAvailable(ctx)) {
 							return true;
-						} else if (purchases.isOsmAndProSubscription(p) && isSubscribedToOsmAndPro(ctx)) {
+						} else if (purchases.isOsmAndProSubscription(p) && InAppPurchaseUtils.isOsmAndProAvailable(ctx)) {
 							return true;
-						} else if (purchases.isMapsSubscription(p) && isSubscribedToMaps(ctx)) {
+						} else if (purchases.isMapsSubscription(p) && InAppPurchaseUtils.isMapsPlusAvailable(ctx)) {
 							return true;
 						}
 					}
@@ -408,7 +320,7 @@ public abstract class InAppPurchaseHelper {
 	protected abstract void execImpl(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command);
 
 	public boolean needRequestInventory() {
-		return !inventoryRequested && ((isSubscribedToAny(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
+		return !inventoryRequested && ((InAppPurchaseUtils.isSubscribedToAny(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
 				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC);
 	}
 
