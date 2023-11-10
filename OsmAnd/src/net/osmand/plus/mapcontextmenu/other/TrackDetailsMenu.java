@@ -52,9 +52,9 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.GpxLayerUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -162,7 +162,7 @@ public class TrackDetailsMenu {
 				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
 				Pair<WptPt, WptPt> points = getTrackLineNearPoint(mapRenderer, tb, latLon, segment);
 				if (points != null) {
-					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
+					gpxItem.locationOnMap = GpxLayerUtils.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
@@ -212,11 +212,9 @@ public class TrackDetailsMenu {
 
 		if (mapRenderer != null) {
 			List<PointI> polygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, pixel, radius);
-			return polygon31 != null
-					? GPXLayer.findLineInPolygon31(polygon31, segment.points)
-					: null;
+			return polygon31 != null ? GpxLayerUtils.findLineInPolygon31(polygon31, segment.points) : null;
 		} else {
-			return GPXLayer.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
+			return GpxLayerUtils.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
 		}
 	}
 
