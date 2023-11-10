@@ -4635,4 +4635,18 @@
     <string name="poi_socket_typee_yes">Tipo E</string>
     <string name="poi_dressing_room">Vestidor</string>
     <string name="poi_emergency_bay">Bahía de emergencia</string>
+    <string name="poi_osmand_motor_vehicle_no">Acceso para vehículos motorizados: no</string>
+    <string name="poi_osmand_motorcar_no">Acceso para automóviles: no</string>
+    <string name="poi_osmand_vehicle_no">Acceso para vehículos: no</string>
+    <string name="poi_osmand_access_no">Acceso: no</string>
+    <string name="poi_osmand_access_private">Acceso: privado</string>
+    <string name="poi_osmand_foot_private">Acceso peatonal: privado</string>
+    <string name="poi_osmand_bicycle_private">Acceso para bicicletas: privado</string>
+    <string name="poi_osmand_motor_vehicle_private">Acceso para vehículos motorizados: privado</string>
+    <string name="poi_osmand_foot_no">Acceso peatonal: no</string>
+    <string name="poi_osmand_bicycle_no">Acceso para bicicletas: no</string>
+    <string name="poi_osmand_vehicle_private">Acceso para vehículos: privado</string>
+    <string name="poi_osmand_motorcar_private">Acceso para automóviles: privado</string>
+    <string name="poi_osmand_motorcycle_no">Acceso para motocicletas: no</string>
+    <string name="poi_osmand_motorcycle_private">Acceso para motocicletas: privado</string>
 </resources>
