@@ -365,6 +365,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							}
 						} else {
 							filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
+							if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+								filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+							}
 						}
 						app.getPoiFilters().clearSelectedPoiFilters();
 						app.getPoiFilters().addSelectedPoiFilter(filter);
