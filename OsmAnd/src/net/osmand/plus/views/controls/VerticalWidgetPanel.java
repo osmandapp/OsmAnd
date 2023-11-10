@@ -11,6 +11,7 @@ import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 
@@ -177,7 +178,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateColors(@NonNull TextState textState) {
 		nightMode = textState.night;
-		invalidate();
+		updateRows();
 	}
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
@@ -289,12 +290,15 @@ public class VerticalWidgetPanel extends LinearLayout {
 			}
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 			AndroidUiHelper.updateVisibility(bottomDivider, visibleViewsInRowCount > 0 && showBottomDivider);
+			bottomDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ?  R.color.divider_color_dark : R.color.divider_color_light));
 		}
 
 		private void showHideVerticalDivider(int widgetIndex, boolean show) {
 			int dividerIndexInContainer = (widgetIndex * 2) + 1;
 			if (widgetIndex >= 0 && dividerIndexInContainer < rowContainer.getChildCount()) {
-				AndroidUiHelper.updateVisibility(rowContainer.getChildAt(dividerIndexInContainer), show);
+				View verticalDivider = rowContainer.getChildAt(dividerIndexInContainer);
+				AndroidUiHelper.updateVisibility(verticalDivider, show);
+				verticalDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ?  R.color.divider_color_dark : R.color.divider_color_light));
 			}
 		}
 
