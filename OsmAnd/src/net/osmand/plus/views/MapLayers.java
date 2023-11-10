@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
@@ -22,7 +21,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -31,6 +29,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -83,6 +82,7 @@ public class MapLayers {
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
+	private final MapWidgetRegistry mapWidgetRegistry;
 
 	// the order of layer should be preserved ! when you are inserting new layer
 	private MapTileLayer mapTileLayer;
@@ -105,7 +105,6 @@ public class MapLayers {
 	private MapControlsLayer mapControlsLayer;
 	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-	private final MapWidgetRegistry mapWidgetRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
@@ -461,11 +460,11 @@ public class MapLayers {
 
 		Map<String, String> entriesMap = new LinkedHashMap<>();
 		if (includeOfflineMaps) {
-			entriesMap.put(LAYER_OSM_VECTOR, getString(R.string.vector_data));
+			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
-		entriesMap.put(LAYER_INSTALL_MORE, getString(R.string.install_more));
-		entriesMap.put(LAYER_ADD, getString(R.string.shared_string_add_manually));
+		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
+		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 		String selectedTileSourceKey = targetLayer.get();
@@ -584,11 +583,6 @@ public class MapLayers {
 
 	private boolean isNightMode() {
 		return app.getDaynightHelper().isNightModeForMapControls();
-	}
-
-	@StyleRes
-	private String getString(int resId) {
-		return app.getString(resId);
 	}
 
 	public RouteLayer getRouteLayer() {

@@ -4,7 +4,9 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
-import static net.osmand.router.network.NetworkRouteSelector.*;
+import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import static net.osmand.router.network.NetworkRouteSelector.RouteType;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -14,8 +16,6 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -47,6 +47,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -61,7 +63,6 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
@@ -457,13 +458,11 @@ public class MapSelectionHelper {
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
 
-		double searchDistance = RulerWidget.getRulerDistance(app, tileBox) / 2;
-		putRouteGpxToSelected(result.selectedObjects, mapLayers.getGpxLayer(), rect, searchDistance);
+		putRouteGpxToSelected(result.selectedObjects, mapLayers.getGpxLayer(), rect);
 	}
 
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-	                                   @NonNull IContextMenuProvider gpxMenuProvider,
-	                                   @NonNull QuadRect rect, double searchDistance) {
+	                                   @NonNull IContextMenuProvider provider, @NonNull QuadRect rect) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
@@ -475,7 +474,7 @@ public class MapSelectionHelper {
 		}
 		for (RouteKey routeKey : routes.keySet()) {
 			if (isUniqueRoute(selectedObjects.keySet(), routeKey)) {
-				selectedObjects.put(new Pair<>(routeKey, rect), gpxMenuProvider);
+				selectedObjects.put(new Pair<>(routeKey, rect), provider);
 			}
 		}
 	}

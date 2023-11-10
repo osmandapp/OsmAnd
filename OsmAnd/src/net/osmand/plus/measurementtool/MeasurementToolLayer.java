@@ -1084,16 +1084,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return isInMeasurementMode();
 	}
 
-	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
-	}
-
 	private Location getLocationFromLL(double lat, double lon) {
 		Location l = new Location("");
 		l.setLatitude(lat);
