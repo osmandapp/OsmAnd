@@ -26,13 +26,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +73,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
@@ -371,12 +370,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 						app.getPoiFilters().clearSelectedPoiFilters();
 						app.getPoiFilters().addSelectedPoiFilter(filter);
-						getMapActivity().getContextMenu().close();
 
-						mapActivity.getContextMenu().closeActiveToolbar();
+						MapContextMenu contextMenu = mapActivity.getContextMenu();
+						contextMenu.close();
+						contextMenu.closeActiveToolbar();
+
 						showToolbar();
-						getMapActivity().updateStatusBarColor();
-						getMapActivity().refreshMap();
+						mapActivity.updateStatusBarColor();
+						mapActivity.refreshMap();
 						hide();
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
@@ -2235,60 +2236,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public static class QuickSearchHistoryListFragment extends QuickSearchListFragment {
-		public static final int TITLE = R.string.shared_string_history;
-		private boolean selectionMode;
-
-		@Override
-		public SearchListFragmentType getType() {
-			return SearchListFragmentType.HISTORY;
-		}
-
-		public boolean isSelectionMode() {
-			return selectionMode;
-		}
-
-		public void setSelectionMode(boolean selectionMode, int position) {
-			this.selectionMode = selectionMode;
-			getListAdapter().setSelectionMode(selectionMode, position);
-		}
-
-		@Override
-		public void onActivityCreated(Bundle savedInstanceState) {
-			super.onActivityCreated(savedInstanceState);
-			getListView().setOnItemLongClickListener((parent, view, position, id) -> {
-				QuickSearchDialogFragment dialogFragment = getDialogFragment();
-				FragmentManager fragmentManager = dialogFragment.getFragmentManager();
-				if (fragmentManager != null) {
-					SearchHistorySettingsFragment.showInstance(fragmentManager, dialogFragment);
-				}
-				return true;
-			});
-			getListAdapter().setSelectionListener(new QuickSearchListAdapter.OnSelectionListener() {
-				@Override
-				public void onUpdateSelectionMode(List<QuickSearchListItem> selectedItems) {
-					getDialogFragment().updateSelectionMode(selectedItems);
-				}
-
-				@Override
-				public void reloadData() {
-					getDialogFragment().reloadHistory();
-				}
-			});
-		}
-
-		@Override
-		public void onListItemClick(@NonNull ListView listView, @NonNull View view, int position, long id) {
-			if (selectionMode) {
-				CheckBox ch = view.findViewById(R.id.toggle_item);
-				ch.setChecked(!ch.isChecked());
-				getListAdapter().toggleCheckbox(position - listView.getHeaderViewsCount(), ch);
-			} else {
-				super.onListItemClick(listView, view, position, id);
-			}
-		}
-	}
-
 	public static class QuickSearchCategoriesListFragment extends QuickSearchListFragment {
 		public static final int TITLE = R.string.search_categories;
 
@@ -2319,34 +2266,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		public QuickSearchToolbarController() {
 			super(TopToolbarControllerType.QUICK_SEARCH);
-		}
-	}
-
-	public static class DeleteDialogFragment extends DialogFragment {
-
-		private List<QuickSearchListItem> selectedItems;
-
-		public void setSelectedItems(List<QuickSearchListItem> selectedItems) {
-			this.selectedItems = selectedItems;
-		}
-
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-			builder.setTitle(R.string.confirmation_to_delete_history_items).setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-				Fragment parentFragment = getParentFragment();
-				if (parentFragment instanceof QuickSearchDialogFragment) {
-					QuickSearchDialogFragment searchDialogFragment = (QuickSearchDialogFragment) parentFragment;
-					SearchHistoryHelper helper = SearchHistoryHelper.getInstance(searchDialogFragment.getMyApplication());
-					for (QuickSearchListItem searchListItem : selectedItems) {
-						helper.remove(searchListItem.getSearchResult().object);
-					}
-					searchDialogFragment.reloadHistory();
-					searchDialogFragment.enableSelectionMode(false, -1);
-				}
-			}).setNegativeButton(R.string.shared_string_no, null);
-			return builder.create();
 		}
 	}
 }
