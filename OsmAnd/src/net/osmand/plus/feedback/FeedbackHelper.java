@@ -78,6 +78,7 @@ public class FeedbackHelper {
 		StringBuilder text = new StringBuilder();
 		text.append("Device : ").append(Build.DEVICE);
 		text.append("\nBrand : ").append(Build.BRAND);
+		text.append("\nManufacturer : ").append(Build.MANUFACTURER);
 		text.append("\nModel : ").append(Build.MODEL);
 		text.append("\nProduct : ").append(Build.PRODUCT);
 		text.append("\nBuild : ").append(Build.DISPLAY);

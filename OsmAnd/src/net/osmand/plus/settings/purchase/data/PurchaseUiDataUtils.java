@@ -1,17 +1,21 @@
 package net.osmand.plus.settings.purchase.data;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.PROMO;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.ACTIVE;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.CANCELLED;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.IN_GRACE_PERIOD;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import net.osmand.Period.PeriodUnit;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
@@ -27,6 +31,7 @@ import java.util.Locale;
 public class PurchaseUiDataUtils {
 
 	public static final int INVALID = -1;
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
 	@NonNull
 	public static PurchaseUiData createUiData(@NonNull OsmandApplication app, @NonNull InAppPurchase purchase) {
@@ -74,10 +79,10 @@ public class PurchaseUiDataUtils {
 			}
 			if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
 				if (purchases.isMapsSubscription(subscription)) {
-					boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseHelper.isFullVersionPurchased(app, false);
-					renewVisible = !isFullVersion && !InAppPurchaseHelper.isSubscribedToAny(app, false);
+					boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
+					renewVisible = !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
 				} else if (purchases.isOsmAndProSubscription(subscription)) {
-					renewVisible = !InAppPurchaseHelper.isOsmAndProAvailable(app, false);
+					renewVisible = !InAppPurchaseUtils.isOsmAndProAvailable(app, false);
 				}
 			}
 		} else {
@@ -88,7 +93,7 @@ public class PurchaseUiDataUtils {
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
 				liveUpdateSubscription, autoRenewing,
-				renewVisible, subscriptionState, origin, false);
+				renewVisible, subscriptionState, origin);
 	}
 
 	@NonNull
@@ -103,7 +108,7 @@ public class PurchaseUiDataUtils {
 		long expireTime = settings.BACKUP_PURCHASE_EXPIRE_TIME.get();
 		SubscriptionState state = settings.BACKUP_PURCHASE_STATE.get();
 		PurchaseOrigin origin = settings.BACKUP_SUBSCRIPTION_ORIGIN.get();
-		if (origin == InAppPurchase.PurchaseOrigin.PROMO) {
+		if (origin == PROMO) {
 			title = app.getString(R.string.promo);
 			purchaseType = app.getString(R.string.promo_subscription);
 		} else {
@@ -121,7 +126,7 @@ public class PurchaseUiDataUtils {
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
 				isLiveUpdateSubscription, autoRenewing,
-				renewVisible, state, origin, false);
+				renewVisible, state, origin);
 	}
 
 	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
@@ -142,9 +147,9 @@ public class PurchaseUiDataUtils {
 	}
 
 	public static boolean shouldShowFreeAccRegistration(@NonNull OsmandApplication app) {
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		boolean isRegistered = app.getBackupHelper().isRegistered();
-		return !proAvailable && isRegistered;
+		return !available && isRegistered;
 	}
 
 	@NonNull
@@ -171,6 +176,51 @@ public class PurchaseUiDataUtils {
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
 				isLiveUpdateSubscription, autoRenewing,
-				renewVisible, state, origin, true);
+				renewVisible, state, origin);
+	}
+
+	@NonNull
+	public static PurchaseUiData createTripltekPurchaseUiData(@NonNull OsmandApplication app) {
+		String title = app.getString(R.string.tripltek);
+		String purchaseType = app.getString(R.string.free_account);
+
+		long installTime = Version.getInstallTime(app);
+		long expireTime = InAppPurchaseUtils.getTripltekPromoExpirationTime(app);
+
+		return new PurchaseUiData(null, title, R.drawable.ic_action_osmand_start, purchaseType,
+				expireTime, installTime, false, false,
+				false, false, ACTIVE, TRIPLTEK_PROMO);
+	}
+
+	@NonNull
+	public static Pair<String, String> parseSubscriptionState(@NonNull OsmandApplication app,
+	                                                          @NonNull SubscriptionState state,
+	                                                          long startTime, long expireTime) {
+		String title;
+		String desc;
+		switch (state) {
+			case ACTIVE:
+			case CANCELLED:
+			case IN_GRACE_PERIOD:
+				title = expireTime > 0 ? app.getString(R.string.shared_string_expires) : app.getString(R.string.shared_string_purchased);
+				desc = expireTime > 0 ? DATE_FORMAT.format(expireTime) : DATE_FORMAT.format(startTime);
+				break;
+			case EXPIRED:
+				title = app.getString(R.string.expired);
+				desc = DATE_FORMAT.format(expireTime);
+				break;
+			case ON_HOLD:
+				title = app.getString(R.string.on_hold_since, "");
+				desc = DATE_FORMAT.format(startTime);
+				break;
+			case PAUSED:
+				title = app.getString(R.string.shared_string_paused);
+				desc = DATE_FORMAT.format(expireTime);
+				break;
+			default:
+				title = app.getString(R.string.shared_string_undefined);
+				desc = "";
+		}
+		return new Pair<>(title, desc);
 	}
 }

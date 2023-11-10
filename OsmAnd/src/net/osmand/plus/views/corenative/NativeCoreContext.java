@@ -18,7 +18,7 @@ import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -78,14 +78,14 @@ public class NativeCoreContext {
 
 				ObfsCollection contourLinesObfsCollection = null;
 
-				if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+				if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseUtils.isDepthContoursAvailable(app)) {
 					File nauticalIndexDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 					if (!nauticalIndexDir.exists()) {
 						nauticalIndexDir.mkdir();
 					}
 					obfsCollection.addDirectory(nauticalIndexDir.getAbsolutePath(), false);
 				}
-				if (PluginsHelper.isActive(SRTMPlugin.class) ||	InAppPurchaseHelper.isContourLinesPurchased(app)) {
+				if (PluginsHelper.isActive(SRTMPlugin.class) ||	InAppPurchaseUtils.isContourLinesAvailable(app)) {
 					File srtmIndexDir = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 					if (!srtmIndexDir.exists()) {
 						srtmIndexDir.mkdir();

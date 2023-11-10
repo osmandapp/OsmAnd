@@ -42,8 +42,8 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
@@ -123,7 +123,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 		OsmandRegions osmandRegions = app.getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(context, R.layout.download_index_list_item, indexItems,
-				!InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+				!InAppPurchaseUtils.isLiveUpdatesAvailable(app) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		Collator collator = OsmAndCollator.primaryCollator();
 		listAdapter.sort((indexItem, indexItem2) -> collator.compare(indexItem.getVisibleName(app, osmandRegions),
 				indexItem2.getVisibleName(app, osmandRegions)));
@@ -282,18 +282,18 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		private static final int INDEX_ITEM = 0;
 		private static final int OSM_LIVE_BANNER = 1;
 
-		private final ArrayList<LocalItem> mapsList = new ArrayList<>();
+		private final List<LocalItem> localItems = new ArrayList<>();
 		private final boolean showSubscriptionPurchaseBanner;
 
 		@Override
 		public void addData(@NonNull List<LocalItem> indexes) {
-			mapsList.addAll(indexes);
+			localItems.addAll(indexes);
 			notifyDataSetChanged();
 		}
 
 		@Override
 		public void clearData() {
-			mapsList.clear();
+			localItems.clear();
 			notifyDataSetChanged();
 		}
 
@@ -407,6 +407,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	@Override
 	public List<LocalItem> getMapsToUpdate() {
-		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
+		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.localItems, settings);
 	}
 }
