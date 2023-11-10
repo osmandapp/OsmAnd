@@ -2636,7 +2636,7 @@
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="saved_articles">Artículos favoritos</string>
+    <string name="saved_articles">Artículos destacados</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar por país, ciudad o provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -2696,7 +2696,7 @@
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos destacados, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
@@ -2715,7 +2715,7 @@
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
     <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC/CAI y características de deportes acuáticos y topográficas como curvas de nivel.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
-    <string name="shared_string_bookmark">Favorito</string>
+    <string name="shared_string_bookmark">Destacado</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
@@ -5001,7 +5001,7 @@
     <string name="cloud_conflict">Conflicto</string>
     <string name="upload_all">Enviar todos</string>
     <string name="cloud_recent_changes">Cambios</string>
-    <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
+    <string name="cloud_all_changes_uploaded">Todos los cambios cargados</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
     <string name="cloud_no_conflicts">Sin conflictos.</string>
     <string name="download_cloud_version">Descargar versión en la nube</string>
