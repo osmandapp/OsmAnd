@@ -236,10 +236,6 @@ public class MapLayers {
 			}
 			layer.setMapActivity(mapActivity);
 		}
-		MapRendererView mapRenderer = mapView.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.removeAllSymbolsProviders();
-		}
 	}
 
 	public boolean hasMapActivity() {

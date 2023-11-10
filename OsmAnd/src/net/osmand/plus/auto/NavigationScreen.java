@@ -183,6 +183,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		builder.setBackgroundColor(CarColor.SECONDARY);
 
 		// Set the action strip.
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
 		updateCompass();
 		if (!navigating) {
@@ -197,6 +198,17 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 						.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
 						.setOnClickListener(this::compassClick)
 						.build());
+		if (getApp().useOpenGlRenderer()) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_3d)).build())
+							.setOnClickListener(() -> {
+								if (surfaceRenderer != null) {
+									surfaceRenderer.handleTilt();
+								}
+							})
+							.build());
+		}
 		actionStripBuilder.addAction(settingsAction);
 		if (navigating) {
 			actionStripBuilder.addAction(
@@ -214,27 +226,13 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		//	panIconBuilder.setTint(CarColor.BLUE);
 		//}
 
-		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		ActionStrip.Builder mapActionStripBuilder = new ActionStrip.Builder();
-		if (getApp().useOpenGlRenderer()) {
-			mapActionStripBuilder.addAction(new Action.Builder()
-					.setIcon(
-							new CarIcon.Builder(
-									IconCompat.createWithResource(
-											getCarContext(),
-											R.drawable.ic_action_3d))
-									.build())
-					.setOnClickListener(
-							() -> {
-								if (surfaceRenderer != null) {
-									surfaceRenderer.handleTilt();
-								}
-							})
-					.build());
-		}
 		builder.setMapActionStrip(
-				mapActionStripBuilder.addAction(
-						new Action.Builder()
+				mapActionStripBuilder
+						.addAction(new Action.Builder(Action.PAN)
+								//.setIcon(panIconBuilder.build())
+								.build())
+						.addAction(new Action.Builder()
 								.setIcon(
 										new CarIcon.Builder(
 												IconCompat.createWithResource(
@@ -249,8 +247,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 									}
 								})
 								.build())
-				.addAction(
-						new Action.Builder()
+						.addAction(new Action.Builder()
 								.setIcon(
 										new CarIcon.Builder(
 												IconCompat.createWithResource(
@@ -266,8 +263,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 											}
 										})
 								.build())
-				.addAction(
-						new Action.Builder()
+						.addAction(new Action.Builder()
 								.setIcon(
 										new CarIcon.Builder(
 												IconCompat.createWithResource(
@@ -284,7 +280,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 										})
 								.build())
 
-				.build());
+						.build());
 
 		// When the user enters the pan mode, remind the user that they can exit the pan mode by
 		// pressing the select button again.

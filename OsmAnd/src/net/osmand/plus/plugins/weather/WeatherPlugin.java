@@ -534,7 +534,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private void updateMapSettings() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			mapContext.updateMapSettings();
+			mapContext.updateMapSettings(true);
 		}
 		weatherHelper.updateBandsSettings();
 	}

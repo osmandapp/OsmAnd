@@ -5552,4 +5552,8 @@
     <string name="deletion_error">Error en la eliminación</string>
     <string name="change_button">Botón para cambiar</string>
     <string name="download_to_device">Descargar al dispositivo</string>
+    <string name="remove_widget_first">Por favor, elimine primero el widget</string>
+    <string name="add_row">Añadir una fila</string>
+    <string name="discard_changes_prompt">¿Estás seguro de que quieres descartar los cambios?</string>
+    <string name="row_number">Fila %1$s</string>
 </resources>

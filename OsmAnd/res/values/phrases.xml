@@ -5206,4 +5206,19 @@
 
 	<string name="poi_dressing_room">Dressing room</string>
 
+	<string name="poi_osmand_access_no">Access: no</string>
+	<string name="poi_osmand_access_private">Access: private</string>
+	<string name="poi_osmand_vehicle_no">Vehicle access: no</string>
+	<string name="poi_osmand_vehicle_private">Vehicle access: private</string>
+	<string name="poi_osmand_motor_vehicle_no">Motor vehicle access: no</string>
+	<string name="poi_osmand_motor_vehicle_private">Motor vehicle access: private</string>
+	<string name="poi_osmand_motorcar_no">Motorcar access: no</string>
+	<string name="poi_osmand_motorcar_private">Motorcar access: private</string>
+	<string name="poi_osmand_motorcycle_no">Motorcycle access: no</string>
+	<string name="poi_osmand_motorcycle_private">Motorcycle access: private</string>
+	<string name="poi_osmand_foot_no">Pedestrian access: no</string>
+	<string name="poi_osmand_foot_private">Pedestrian access: private</string>
+	<string name="poi_osmand_bicycle_no">Bicycle access: no</string>
+	<string name="poi_osmand_bicycle_private">Bicycle access: private</string>
+
 </resources>

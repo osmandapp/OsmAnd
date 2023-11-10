@@ -290,6 +290,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return items.indexOf(object);
 	}
 
+	@Nullable
+	public Object getItemByPosition(int position) {
+		return items.size() > position ? items.get(position) : null;
+	}
+
 	public void updateItem(@NonNull Object object) {
 		int index = getItemPosition(object);
 		if (index != -1) {

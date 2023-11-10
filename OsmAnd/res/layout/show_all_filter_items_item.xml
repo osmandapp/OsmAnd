@@ -7,7 +7,6 @@
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/card_row_min_height"
-	android:orientation="horizontal"
 	android:paddingStart="@dimen/content_padding_extra_large"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingEnd="@dimen/content_padding"
@@ -20,8 +19,8 @@
 		android:layout_gravity="center_vertical|start"
 		android:gravity="center_vertical|start"
 		android:text="@string/shared_string_show_all"
-		android:textSize="16sp"
 		android:textColor="?attr/color_dialog_buttons"
+		android:textSize="16sp"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="Show all" />
 

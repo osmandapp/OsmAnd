@@ -7,13 +7,11 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
@@ -27,7 +25,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OsmandMap implements NavigationSessionListener {
+public class OsmandMap {
 
 	private final OsmandApplication app;
 
@@ -91,8 +89,6 @@ public class OsmandMap implements NavigationSessionListener {
 			}
 		};
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
-
-		app.setNavigationSessionListener(this);
 	}
 
 	@NonNull
@@ -181,18 +177,15 @@ public class OsmandMap implements NavigationSessionListener {
 		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {
-			navigationSession.setMapView(mapView);
-			app.getMapViewTrackingUtilities().setMapView(mapView);
-		} else if (mapView.getMapActivity() == null) {
-			app.getMapViewTrackingUtilities().setMapView(null);
-		}
-	}
-
-	@Override
-	public void onNavigationSessionChanged(@Nullable NavigationSession navigationSession) {
-		if (navigationSession != null) {
-			navigationSession.setMapView(mapView);
-			app.getMapViewTrackingUtilities().setMapView(mapView);
+			if (navigationSession.hasStarted()) {
+				navigationSession.setMapView(mapView);
+				app.getMapViewTrackingUtilities().setMapView(mapView);
+			} else {
+				navigationSession.setMapView(null);
+				if (mapView.getMapActivity() == null) {
+					app.getMapViewTrackingUtilities().setMapView(null);
+				}
+			}
 		} else if (mapView.getMapActivity() == null) {
 			app.getMapViewTrackingUtilities().setMapView(null);
 		}

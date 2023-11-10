@@ -2347,7 +2347,7 @@ POIの更新は利用できません</string>
     <string name="srtm_menu_download_descr">この地域用の等高線マップをダウンロードします。</string>
     <string name="shared_string_plugin">プラグイン</string>
     <string name="srtm_purchase_header">等高線をマップ上で見るには、等高線プラグイン『Contour lines plugin — OsmAnd』の購入とインストールが必要です</string>
-    <string name="show_from_zoom_level">表示はズームレベルで開始</string>
+    <string name="show_from_zoom_level">標準ズームレベル</string>
     <string name="routing_attr_allow_private_name">専有エリア(私有地など)を通行可とみなす</string>
     <string name="routing_attr_allow_private_description">専有エリア(業者用通路、私有地など)を通行可能と見なします。</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
@@ -4551,7 +4551,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_average_speed">平均速度</string>
     <string name="available_widgets">利用可能なウィジェット</string>
     <string name="compass_always_visible">常に表示</string>
-    <string name="map_widget_current_speed">現行速度</string>
+    <string name="map_widget_current_speed">現在速度</string>
     <string name="shared_string_buttons">ボタン</string>
     <string name="auto_backup_title">自動バックアップ</string>
     <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)路線</string>
@@ -5019,7 +5019,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_difficulty_preference_expert_name">熟練者</string>
     <string name="map_widget_camera_tilt_desc">パースペクティブモードにおけるカメラのチルト角度を表示します。デフォルトは 90°（チルトなし）です。</string>
     <string name="no_altitude_data_desc">%1$sデータを受け取るには、経路を道路に結びつけるか、オンラインで計算してください。</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">軍事エリアを非表示</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">軍事エリア</string>
     <string name="rendering_attr_showTramRoutes_name">路面電車路線</string>
     <string name="osm_carto_render_descr">OSMのメインページで使われているOpenStreetMap-cartoに似たスタイルです</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">乗合タクシー路線</string>
@@ -5176,4 +5176,148 @@ POIの更新は利用できません</string>
     <string name="delete_map_description">マップ%1$sを削除してもよろしいですか？</string>
     <string name="searching_matching_tracks">一致するすべての経路を検索</string>
     <string name="maps_and_resources">マップ＆リソース</string>
+    <string name="key_event_action_zoom_in">拡大</string>
+    <string name="change_button">変更ボタン</string>
+    <string name="enable_to_use_external_input_device">OsmAndで外部入力デバイスを使用できるようにします</string>
+    <string name="key_event_action_change_map_orientation">マップの向きを変更</string>
+    <string name="key_event_action_previous_app_profile">前のアプリプロファイルを選択</string>
+    <string name="show_toast_about_key_pressed">押されたキーに関するメッセージを表示</string>
+    <string name="rendering_value_caiScale_description">クラブ・アルピノ・イタリアーノ(イタリア山岳会)</string>
+    <string name="shared_string_rows">行</string>
+    <string name="key_event_action_move_left">左に移動</string>
+    <string name="glide_ratio_to_target">目標に対する滑空比</string>
+    <string name="deletion_error">削除エラー</string>
+    <string name="key_event_action_move_right">右に移動</string>
+    <string name="shared_string_button">ボタン</string>
+    <string name="key_event_action_next_app_profile">次のアプリプロファイルを選択</string>
+    <string name="change_key_binding">キーバインドを変更</string>
+    <string name="average_glide_ratio">平均滑空比</string>
+    <string name="key_event_action_take_media_note">メディアでメモをとる</string>
+    <string name="key_event_action_activity_back_pressed"/>
+    <string name="release_4_6">• 外部入力デバイス使用時のキーバインドを変更する機能を追加
+\n
+\n • \"滑空比\"ウィジェットを追加
+\n
+\n • 経路用のフィルターとスマートフォルダーを追加
+\n
+\n • すべてのウィジェットをサポートする上部と下部のウィジェットパネルを追加
+\n
+\n • ANT+温度ウィジェットのサポートを追加
+\n
+\n • 大規模GPX経路のメモリ管理を改善
+\n
+\n • ダウンロードのローカルリソース管理を更新
+\n
+\n • \"利用可能RAM\"のウィジェットを追加
+\n
+\n • 透明ステータスバーに関する問題を修正
+\n
+\n</string>
+    <string name="key_event_action_emit_navigation_hint">ナビゲーションのヒントを出力</string>
+    <string name="shared_string_action">アクション</string>
+    <string name="key_event_action_move_up">上に移動</string>
+    <string name="map_widget_group_glide_desc">目的地までの滑空比、または現在の旅程の平均滑空比を表示するウィジェットです。</string>
+    <string name="map_widget_glide_average_desc">設定された距離における平均滑空比を表示します。</string>
+    <string name="key_event_action_open_search_view">検索画面を開く</string>
+    <string name="map_widget_group_glide_ratio">滑空比</string>
+    <string name="key_event_action_zoom_out">縮小</string>
+    <string name="key_event_action_toggle_drower">サイドメニューの表示/非表示</string>
+    <string name="map_widget_glide_target_desc">目標点に到達するために必要な滑空比を表示します。</string>
+    <string name="key_event_action_open_navigation_view">ナビゲーション画面を開く</string>
+    <string name="rendering_attr_alpineHiking_name">難易度の分類</string>
+    <string name="rendering_value_sacScale_description">スイス・アルペン・クラブ(スイス山岳会)</string>
+    <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように
+\n
+\n • お気に入りや設定を\"OsmAnd Cloud\"に無料バックアップ出来るように
+\n
+\n • 3D形状を含む地形マップに対応した新しいフォーマットに対応
+\n
+\n • 経路管理: UIの刷新、ソート機能の追加、入れ子フォルダーのサポート
+\n
+\n • Android Auto: お気に入り、経路、POIカテゴリにアクセスするための新しいスタートメニュー
+\n
+\n • 上部/下部パネルウィジェットの統合化
+\n
+\n • 新しい\"電車\"プロファイルにより、鉄道のルートを計算できるように
+\n
+\n • 等高線はどのマップソースでも機能するように
+\n
+\n • 外部キーボードのデフォルトショートカットをリスト化しかつ変更可能に
+\n
+\n • カスタムルートファイルの削除または上書きのオプションを追加
+\n
+\n • \"ルートからの逸脱を案内する\"オプションを追加
+\n
+\n • スタート画面: ファイルからOsmAndの状態を復元するオプションを追加
+\n
+\n • 北米のトラック用ナビゲーション向けに\"危険物\"クラスを追加
+\n
+\n • 歩行者用ルートに\"Via ferrata\"のサポートを追加
+\n
+\n • ハイキングルートの難易度分類に\"CAI\"スケールを追加
+\n
+\n • アプリごとの言語選択を修正
+\n
+\n • テーマアイコンのサポートを追加
+\n
+\n • OsmAnd Cloud: アカウントを削除するオプションを追加
+\n
+\n • アクセシビリティ: ボタンのタッチターゲットサイズを48dpに変更。スクリーンリーダーに表示されるマップUIに関する問題を修正
+\n
+\n • 日本語音声案内プロンプトの一新
+\n
+\n • 標高の変更と傾斜の評価を再調整
+\n
+\n</string>
+    <string name="external_input_device_title">外部入力機器</string>
+    <string name="key_bindings">キーバインド</string>
+    <string name="key_event_action_move_to_my_location">現在地に移動</string>
+    <string name="download_to_device">端末にダウンロード</string>
+    <string name="key_event_category_map_interactions">マップ操作</string>
+    <string name="key_event_action_move_down">下に移動</string>
+    <string name="rendering_attr_alpineHiking_description">ハイキングルートの難易度を指定します。</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQデータグリッドを開く</string>
+    <string name="key_event_category_actions">ショートカット</string>
+    <string name="root_folder">ルートフォルダ</string>
+    <string name="average_glide_time_interval_desc">平均滑空比を決めるための時間間隔を入力します。</string>
+    <string name="help_article_map_point_layers_on_map_name">マップ上のポイント</string>
+    <string name="with_waypoints">経由地点を含む</string>
+    <string name="all_folders">すべてのフォルダ</string>
+    <string name="help_article_map_vector_maps_name">ベクターマップ (マップスタイル)</string>
+    <string name="press_button_to_link_with_action">デバイスのボタンを押してショートカットとして設定します: %1$s</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="shared_string_show_less">表示を少なくする</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">音声案内 / 通知</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="folder">フォルダ</string>
+    <string name="help_article_map_tracks_on_map_name">経路とルート</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">ナビゲーション中のマップ画面</string>
+    <string name="filter_by_name">名前でフィルタリング</string>
+    <string name="shared_string_reset_all">全てリセット</string>
+    <string name="remove_type_q">\"%1$s\"タイプを削除してもよろしいですか？</string>
+    <string name="help_article_navigation_guidance_name">案内</string>
+    <string name="add_new_type">新しいタイプを追加</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="help_article_map_map_context_menu_name">マップコンテキストメニュー</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="filter_tracks_count">フィルター: %d</string>
+    <string name="live_monitoring_adress_descr">以下のパラメータを利用し、指定のWebアドレスへ送信できます: 緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}、eta={7}、etfa={8}、eda={9}、edfa={10}</string>
+    <string name="help_article_map_legend_nautical_map_name">海図のスタイル</string>
+    <string name="remove_widget_first">まずウィジェットを削除してください</string>
+    <string name="help_article_map_track_context_menu_name">経路コンテキストメニュー</string>
+    <string name="date_of_creation">作成日</string>
+    <string name="key_is_already_assigned_error">\"%1$s\" キーはすでに別のアクション\"%2$s\"に割り当てられています</string>
+    <string name="add_row">行を追加</string>
+    <string name="discard_changes_prompt">変更を破棄してもよろしいですか？</string>
+    <string name="help_article_map_legend_osmand_name">OsmAndマップのスタイル</string>
+    <string name="sensor_temperature_desc">センサーからの温度を表示します</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="filter_screen_title">フィルター</string>
+    <string name="row_number">%1$s行</string>
+    <string name="not_specified">指定しない</string>
+    <string name="help_article_navigation_routing_name">ルートパラメータ</string>
+    <string name="help_article_map_interact_with_map_name">マップの操作</string>
+    <string name="help_article_map_raster_maps_name">ラスターマップ (オンライン/オフライン)</string>
+    <string name="shared_string_temperature">温度</string>
+    <string name="help_article_map_legend_ski_map_name">スキーマップのスタイル</string>
 </resources>

@@ -616,16 +616,6 @@ public class OsmandApplication extends MultiDexApplication {
 		this.navigationService = navigationService;
 	}
 
-	public interface NavigationSessionListener {
-		void onNavigationSessionChanged(@Nullable NavigationSession navigationSession);
-	}
-
-	private NavigationSessionListener navigationSessionListener;
-
-	public void setNavigationSessionListener(@Nullable NavigationSessionListener navigationSessionListener) {
-		this.navigationSessionListener = navigationSessionListener;
-	}
-
 	@Nullable
 	public NavigationCarAppService getNavigationCarAppService() {
 		return navigationCarAppService;
@@ -649,14 +639,7 @@ public class OsmandApplication extends MultiDexApplication {
 		} else {
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
-		if (carNavigationSession == null && this.carNavigationSession != null) {
-			this.carNavigationSession.setMapView(null);
-		}
 		this.carNavigationSession = carNavigationSession;
-		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
-		if (navigationSessionListener != null) {
-			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
-		}
 	}
 
 	public void refreshCarScreen() {

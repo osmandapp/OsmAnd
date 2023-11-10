@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -165,8 +166,15 @@ public class VerticalWidgetPanel extends LinearLayout {
 			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
 				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
 					row.updateRow();
+					break;
 				}
 			}
+		}
+	}
+
+	private void updateDividerColors(boolean nightMode) {
+		for (Row row : visibleRows.values()) {
+			row.updateDividerColor(nightMode);
 		}
 	}
 
@@ -177,8 +185,13 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	public void updateColors(@NonNull TextState textState) {
+		boolean oldNightMode = nightMode;
 		nightMode = textState.night;
+		invalidate();
 		updateRows();
+		if (oldNightMode != nightMode) {
+			updateDividerColors(nightMode);
+		}
 	}
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
@@ -206,7 +219,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -242,20 +255,20 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addVerticalDivider(@NonNull ViewGroup container) {
-		inflate(getContext(), R.layout.vertical_divider, container);
+		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
 	}
 
 	private class Row {
 
-		private View view;
-		private View bottomDivider;
-		private LinearLayout rowContainer;
+		private final View view;
+		private final View bottomDivider;
+		private final LinearLayout rowContainer;
 
-		private List<MapWidgetInfo> enabledMapWidgets = new ArrayList<>();
-		private List<MapWidget> flatOrderedWidgets;
+		private final List<MapWidgetInfo> enabledMapWidgets = new ArrayList<>();
+		private final List<MapWidget> flatOrderedWidgets;
 
 		Row(@NonNull List<MapWidgetInfo> rowWidgets, @NonNull List<MapWidget> flatOrderedWidgets) {
-			this.view = inflate(getContext(), R.layout.vertical_widget_row, null);
+			this.view = inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_widget_row, null);
 			this.bottomDivider = view.findViewById(R.id.bottom_divider);
 			this.rowContainer = view.findViewById(R.id.widgets_container);
 			this.flatOrderedWidgets = flatOrderedWidgets;
@@ -290,15 +303,24 @@ public class VerticalWidgetPanel extends LinearLayout {
 			}
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 			AndroidUiHelper.updateVisibility(bottomDivider, visibleViewsInRowCount > 0 && showBottomDivider);
-			bottomDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ?  R.color.divider_color_dark : R.color.divider_color_light));
+		}
+
+		public void updateDividerColor(boolean nightMode) {
+			for (int i = 1; i <= rowContainer.getChildCount(); i++) {
+				if (i % 2 == 0) {
+					View divider = rowContainer.getChildAt(i - 1).findViewById(R.id.vertical_divider);
+					if (divider != null) {
+						divider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+					}
+				}
+			}
+			bottomDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 		}
 
 		private void showHideVerticalDivider(int widgetIndex, boolean show) {
 			int dividerIndexInContainer = (widgetIndex * 2) + 1;
 			if (widgetIndex >= 0 && dividerIndexInContainer < rowContainer.getChildCount()) {
-				View verticalDivider = rowContainer.getChildAt(dividerIndexInContainer);
-				AndroidUiHelper.updateVisibility(verticalDivider, show);
-				verticalDivider.setBackgroundColor(ContextCompat.getColor(app, nightMode ?  R.color.divider_color_dark : R.color.divider_color_light));
+				AndroidUiHelper.updateVisibility(rowContainer.getChildAt(dividerIndexInContainer), show);
 			}
 		}
 

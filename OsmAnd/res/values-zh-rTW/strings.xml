@@ -5541,4 +5541,8 @@
     <string name="deletion_error">刪除錯誤</string>
     <string name="change_button">變更按鈕</string>
     <string name="download_to_device">下載到裝置</string>
+    <string name="remove_widget_first">請先移除小工具</string>
+    <string name="add_row">新增列</string>
+    <string name="discard_changes_prompt">您確定您要放棄變更嗎？</string>
+    <string name="row_number">列 %1$s</string>
 </resources>
