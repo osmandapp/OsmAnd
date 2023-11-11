@@ -377,64 +377,37 @@ public class HHRoutingDB {
 	
 	
 	static class NetworkDBPointRouteInfo {
-		int rtDepth = -1;
 		NetworkDBPoint rtRouteToPoint;
-		// TODO do we need all fields?
 		boolean rtVisited;
 		double rtDistanceFromStart;
-		double rtDistanceToEnd;
+		int rtDepth = -1; // possibly not needed (used 1)
+		double rtDistanceToEnd; // possibly not needed (used 1)
 		double rtCost;
 		FinalRouteSegment rtDetailedRoute;
 		
-		int rtDepthRev = -1;
-		NetworkDBPoint rtRouteToPointRev;
-		boolean rtVisitedRev;
-		double rtDistanceFromStartRev;
-		double rtDistanceToEndRev;
-		double rtCostRev;
-		FinalRouteSegment rtDetailedRouteRev;
-		
-		public int getDepth(boolean dir) {
-			if (dir && rtDepth > 0) {
+		public int getDepth(boolean rev) {
+			if (rtDepth > 0) {
 				return rtDepth;
-			} else if(!dir && rtDepthRev > 0) {
-				return rtDepthRev;
 			}
-			if (dir && rtRouteToPoint != null) {
-				rtDepth = rtRouteToPoint.route.getDepth(dir) + 1; 
+			if (rtRouteToPoint != null) {
+				rtDepth = rtRouteToPoint.rt(rev).getDepth(rev) + 1; 
 				return rtDepth ;
-			} else if (dir && rtRouteToPointRev != null) {
-				rtDepthRev = rtRouteToPointRev.route.getDepth(dir) + 1;
-				return rtDepthRev;
 			}
 			return 0;
 		}
 		
-		public void setDetailedParentRt(boolean reverse, FinalRouteSegment r) {
+		public void setDetailedParentRt(FinalRouteSegment r) {
 			double segmentDist = r.getDistanceFromStart();
-			if (reverse) {
-				rtRouteToPointRev = null;
-				rtCostRev = rtDistanceToEndRev + segmentDist;
-				rtDetailedRouteRev = r;
-				rtDistanceFromStartRev = segmentDist;
-			} else {
-				rtRouteToPoint = null;
-				rtCost = rtDistanceToEnd + segmentDist;
-				rtDetailedRoute = r;
-				rtDistanceFromStart = segmentDist;
-			}
+			rtRouteToPoint = null;
+			rtCost = rtDistanceToEnd + segmentDist;
+			rtDetailedRoute = r;
+			rtDistanceFromStart = segmentDist;
 		}
 		
-		public void setCostParentRt(boolean reverse, double cost, NetworkDBPoint point, double segmentDist) {
-			if (reverse) {
-				rtCostRev = cost;
-				rtRouteToPointRev = point;
-				rtDistanceFromStartRev = (point == null ? 0 : point.rt().rtDistanceFromStartRev) + segmentDist;
-			} else {
-				rtCost = cost;
-				rtRouteToPoint = point;
-				rtDistanceFromStart = (point == null ? 0 : point.rt().rtDistanceFromStart) + segmentDist;
-			}
+		public void setCostParentRt(boolean rev, double cost, NetworkDBPoint point, double segmentDist) {
+			rtCost = cost;
+			rtRouteToPoint = point;
+			rtDistanceFromStart = (point == null ? 0 : point.rt(rev).rtDistanceFromStart) + segmentDist;
 		}
 	}
 	
@@ -455,8 +428,8 @@ public class HHRoutingDB {
 		public int endY;
 		
 		boolean rtExclude;
-		private NetworkDBPointRouteInfo route;
-//		private NetworkDBPointRouteInfoExtra extra;
+		private NetworkDBPointRouteInfo rtRev;
+		private NetworkDBPointRouteInfo rtPos;
 		
 		List<NetworkDBSegment> connected = new ArrayList<NetworkDBSegment>();
 		List<NetworkDBSegment> connectedReverse = new ArrayList<NetworkDBSegment>();
@@ -469,47 +442,31 @@ public class HHRoutingDB {
 			return startY / 2 + endY/ 2 ;
 		}
 		
-		public NetworkDBPointRouteInfo rt() {
-			if (route == null) {
-				route = new NetworkDBPointRouteInfo();
+		public NetworkDBPointRouteInfo rt(boolean rev) {
+			if (rev) {
+				if (rtRev == null) {
+					rtRev = new NetworkDBPointRouteInfo();
+				}
+				return rtRev;
+			} else {
+				if (rtPos == null) {
+					rtPos = new NetworkDBPointRouteInfo();
+				}
+				return rtPos;
 			}
-			return route;
 		}
 		
 		public List<NetworkDBSegment> connected(boolean rev) {
 			return rev ? connectedReverse : connected;
 		}
 		
-		public double distanceFromStart(boolean rev) {
-			return rev ? rt().rtDistanceFromStartRev : rt().rtDistanceFromStart ;
-		}
-		
-		public double distanceToEnd(boolean rev) {
-			return rev ? rt().rtDistanceToEndRev : rt().rtDistanceToEnd ;
-		}
-		
 		public void setDistanceToEnd(boolean rev, double segmentDist) {
-			if (rev) {
-				rt().rtDistanceToEndRev = segmentDist;
-			} else {
-				rt().rtDistanceToEnd = segmentDist;
-			}
+			rt(rev).rtDistanceToEnd = segmentDist;
 		}
 		
-		public double rtCost(boolean rev) {
-			return rev ? rt().rtCostRev : rt().rtCost ;
-		}
-		
-		public boolean visited(boolean rev) {
-			return rev ? rt().rtVisitedRev : rt().rtVisited;
-		}
-		
+
 		public void markVisited(boolean rev) {
-			if (rev) {
-				rt().rtVisitedRev = true;
-			} else {
-				rt().rtVisited = true;
-			}
+			rt(rev).rtVisited = true;
 		}
 		
 		public void connectedSet(boolean rev, List<NetworkDBSegment> l) {
@@ -521,15 +478,11 @@ public class HHRoutingDB {
 		}
 		
 		public void setCostParentRt(boolean reverse, double cost, NetworkDBPoint point, double segmentDist) {
-			rt().setCostParentRt(reverse, cost, point, segmentDist);
+			rt(reverse).setCostParentRt(reverse, cost, point, segmentDist);
 		}
 		
 		public void setDetailedParentRt(boolean reverse, FinalRouteSegment r) {
-			rt().setDetailedParentRt(reverse, r);
-		}
-		
-		public FinalRouteSegment getDetailedRouteRt(boolean reverse) {
-			return reverse ? rt().rtDetailedRouteRev : rt().rtDetailedRoute;
+			rt(reverse).setDetailedParentRt(r);
 		}
 		
 		public void markSegmentsNotLoaded() {
@@ -564,7 +517,8 @@ public class HHRoutingDB {
 
 		public void clearRouting() {
 			rtExclude = false;
-			route = new NetworkDBPointRouteInfo();
+			rtPos = null;
+			rtRev = null;
 		}
 
 		public int chInd() {

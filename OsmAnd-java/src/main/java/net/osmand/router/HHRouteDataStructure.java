@@ -183,9 +183,9 @@ public class HHRouteDataStructure {
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
 				if (stPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(false, p.getDetailedRouteRt(false));
+					p.setDetailedParentRt(false, p.rt(false).rtDetailedRoute);
 				} else if (endPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(true, p.getDetailedRouteRt(true));
+					p.setDetailedParentRt(true, p.rt(true).rtDetailedRoute);
 				} else {
 					p.clearRouting();
 				}
