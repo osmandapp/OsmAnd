@@ -89,7 +89,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
-			c.calcDetailed(2);
+//			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
 			DEBUG_VERBOSE_LEVEL = 0;
@@ -628,7 +628,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment != null) {
 				hctx.networkDB.loadGeometry(s.segment, false);
-				if (hctx.config.ROUTE_ALL_SEGMENTS && s.segment.geometry.size() <= 2) {
+				if (hctx.config.ROUTE_ALL_SEGMENTS && s.segment.getGeometry().size() <= 2) {
 					runDetailedRouting(hctx, s);
 				}
 			}
@@ -638,7 +638,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				HHNetworkSegmentRes s = alt.segments.get(i);
 				if (s.segment != null) {
 					hctx.networkDB.loadGeometry(s.segment, false);
-					if (hctx.config.ROUTE_ALL_ALT_SEGMENTS && s.segment.geometry.size() <= 2) {
+					if (hctx.config.ROUTE_ALL_ALT_SEGMENTS && s.segment.getGeometry().size() <= 2) {
 						runDetailedRouting(hctx, s);
 					}
 				}

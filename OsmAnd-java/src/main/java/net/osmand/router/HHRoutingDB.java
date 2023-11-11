@@ -220,16 +220,17 @@ public class HHRoutingDB {
 	}
 	
 	public void loadGeometry(NetworkDBSegment segment, boolean reload) throws SQLException {
-		if (!segment.geometry.isEmpty() && !reload) {
+		if (segment.geom != null && !reload) {
 			return;
 		}
+		List<LatLon> geometry = segment.getGeometry();
+		geometry.clear();
 		if (compactDB) {
-			segment.geometry.add(segment.start.getPoint());
-			segment.geometry.add(segment.end.getPoint());
+			geometry.add(segment.start.getPoint());
+			geometry.add(segment.end.getPoint());
 			return;
 		}
-		segment.geometry.clear();
-		segment.geometry.addAll(parseGeometry(segment.start.index, segment.end.index, segment.shortcut));
+		geometry.addAll(parseGeometry(segment.start.index, segment.end.index, segment.shortcut));
 	}
 	
 	
@@ -347,25 +348,27 @@ public class HHRoutingDB {
 	}
 	
 	
-	
-	
-	
 	static class NetworkDBSegment {
 		final boolean direction;
 		final NetworkDBPoint start;
 		final NetworkDBPoint end;
 		final boolean shortcut;
 		final double dist;
-		List<LatLon> geometry = new ArrayList<>();
-		TIntArrayList segmentsStartEnd = new TIntArrayList();
-		// routing extra info
-				
+		List<LatLon> geom;
+		
 		public NetworkDBSegment(NetworkDBPoint start, NetworkDBPoint end, double dist, boolean direction, boolean shortcut) {
 			this.direction = direction;
 			this.start = start;
 			this.end = end;
 			this.shortcut = shortcut;
 			this.dist = dist;
+		}
+		
+		public List<LatLon> getGeometry() {
+			if (geom == null) {
+				geom = new ArrayList<LatLon>();
+			}
+			return geom;
 		}
 		
 		@Override
