@@ -5553,4 +5553,7 @@
     <string name="add_row">Sor hozzáadása</string>
     <string name="discard_changes_prompt">Biztosan elveti a változtatásokat?</string>
     <string name="row_number">%1$s. sor</string>
+    <string name="tripltek_promo">Tripltek ajánlat %1$s hónapra</string>
+    <string name="tripltek_promo_description">Ingyenes hozzáférés a funkciókhoz %1$s hónapig, beleértve a korlátlan térképletöltést, 3D domborzatot stb</string>
+    <string name="see_all_plans">Összes csomag megtekintése</string>
 </resources>
