@@ -5512,4 +5512,7 @@
     <string name="see_all_plans">Ver todos os planos</string>
     <string name="shared_string_delete_item">Excluir item</string>
     <string name="key_event_category_actions">Ações</string>
+    <string name="trash_is_empty_banner_desc">Os arquivos removidos do OsmAnd Cloud estarão disponíveis aqui durante %1$s dias.</string>
+    <string name="shared_string_empty_trash">Esvaziar lixeira</string>
+    <string name="trash_alert_card_desc">Os itens na lixeira serão excluídos após %1$s dias.</string>
 </resources>
