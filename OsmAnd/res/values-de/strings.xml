@@ -634,7 +634,7 @@
     <string name="search_poi_location">Warte auf Signal …</string>
     <string name="search_near_map">Suche in der Nähe</string>
     <string name="search_nearby">Suche um Aufenthaltsort</string>
-    <string name="map_orientation_default">Gleich wie Gerät</string>
+    <string name="map_orientation_default">Wie Standardeinstellung</string>
     <string name="map_orientation_portrait">Hochformat</string>
     <string name="map_orientation_landscape">Querformat</string>
     <string name="map_screen_orientation">Bildschirmausrichtung</string>
@@ -2521,7 +2521,7 @@
     <string name="wrong_input">Falsche Eingabe</string>
     <string name="enter_new_name">Neuen Namen eingeben</string>
     <string name="shared_string_back">Zurück</string>
-    <string name="shared_string_view">Ansehen</string>
+    <string name="shared_string_view">Anzeigen</string>
     <string name="waypoints_added_to_map_markers">Wegpunkte zur Kartenmarkierung hinzugefügt</string>
     <string name="wrong_format">Falsches Format</string>
     <string name="tap_on_map_to_hide_interface">Vollbildmodus</string>
@@ -2651,13 +2651,13 @@
     <string name="wikivoyage_search_hint">Suche nach Land, Stadt oder Provinz</string>
     <string name="shared_string_read">Lesen</string>
     <string name="saved_articles">Artikel mit Lesezeichen</string>
-    <string name="shared_string_explore">Durchsuchen</string>
+    <string name="shared_string_explore">Erkunden</string>
     <string name="shared_string_result">Ergebnis</string>
     <string name="download_maps_travel">Reiseführer</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikel entfernt</string>
     <string name="index_item_world_wikivoyage">Weltweite Wikivoyage-Artikel</string>
-    <string name="shared_string_contents">Inhalte</string>
+    <string name="shared_string_contents">Inhalt</string>
     <string name="wikivoyage_download_pics">Bilder herunterladen</string>
     <string name="wikivoyage_download_pics_descr">Artikelbilder können für den Offline-Einsatz heruntergeladen werden.
 \nImmer verfügbar unter „Durchsuchen → Optionen“.</string>
@@ -2674,7 +2674,7 @@
     <string name="images_cache">Bilder-Cache</string>
     <string name="download_images">Bilder herunterladen</string>
     <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, Aktualisierung möglich.</string>
-    <string name="travel_card_download_descr">Wikivoyage-Reiseführer herunterladen, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
+    <string name="travel_card_download_descr">Wikivoyage Reiseführer herunterladen, um ohne Internetverbindung Artikel über Orte auf der ganzen Welt zu lesen.</string>
     <string name="update_is_available">Aktualisierung verfügbar</string>
     <string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
