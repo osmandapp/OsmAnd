@@ -392,10 +392,10 @@
     <string name="search_poi_location">En espera de señal…</string>
     <string name="search_near_map">Buscar cerca del centro del mapa</string>
     <string name="search_nearby">Buscar cerca</string>
-    <string name="map_orientation_default">Según dispositivo</string>
-    <string name="map_orientation_portrait">Vertical</string>
-    <string name="map_orientation_landscape">Horizontal</string>
-    <string name="map_screen_orientation">Orientación de pantalla</string>
+    <string name="map_orientation_default">Igual que el dispositivo</string>
+    <string name="map_orientation_portrait">Retrato</string>
+    <string name="map_orientation_landscape">Panorama</string>
+    <string name="map_screen_orientation">Orientación de la pantalla</string>
     <string name="map_screen_orientation_descr">Vertical, horizontal o según dispositivo.</string>
     <string name="opening_hours_not_supported">El formato de horario de apertura no puede cambiarse.</string>
     <string name="add_new_rule">Añadir nueva regla</string>
