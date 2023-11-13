@@ -12,9 +12,6 @@ import androidx.core.app.ActivityCompat;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MultiTouchSupport;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 
 public class MyLocationButton extends MapButton {
@@ -25,7 +22,12 @@ public class MyLocationButton extends MapButton {
 	private final OnLongClickListener backToLocationWithMenu = v -> moveBackToLocation(true);
 
 	public MyLocationButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id, boolean contextMenuAllowed) {
-		super(mapActivity, view, id);
+		this(mapActivity, view, id, contextMenuAllowed, false);
+	}
+
+	public MyLocationButton(@NonNull MapActivity mapActivity, @NonNull ImageView view,
+	                        @NonNull String id, boolean contextMenuAllowed, boolean alwaysVisible) {
+		super(mapActivity, view, id, alwaysVisible);
 		this.contextMenuAllowed = contextMenuAllowed;
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_circle_blue);
@@ -41,8 +43,7 @@ public class MyLocationButton extends MapButton {
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
-					 Manifest.permission.ACCESS_COARSE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 		}
 		return false;
@@ -72,6 +73,7 @@ public class MyLocationButton extends MapButton {
 		} else {
 			setReturnToLocationState();
 		}
+		updateIcon(nightMode);
 	}
 
 	private void setNoLocationState() {
@@ -82,7 +84,6 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
-		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setMapLinkedToLocationState() {
@@ -93,7 +94,6 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
-		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setReturnToLocationState() {
@@ -104,7 +104,6 @@ public class MyLocationButton extends MapButton {
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
-		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void setMyLocationListeners() {
@@ -116,6 +115,6 @@ public class MyLocationButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return !isRouteDialogOpened() && widgetsVisibilityHelper.shouldShowBackToLocationButton();
+		return alwaysVisible || !isRouteDialogOpened() && visibilityHelper.shouldShowBackToLocationButton();
 	}
 }

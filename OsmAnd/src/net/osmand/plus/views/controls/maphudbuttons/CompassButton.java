@@ -36,7 +36,7 @@ public class CompassButton extends MapButton {
 	private float mapRotation;
 
 	public CompassButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_compass_button), COMPASS_HUD_ID);
+		super(mapActivity, mapActivity.findViewById(R.id.map_compass_button), COMPASS_HUD_ID, false);
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		setOnClickListener(v -> app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode());
@@ -90,7 +90,7 @@ public class CompassButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		forceHideCompass = isRouteDialogOpened() || widgetsVisibilityHelper.shouldHideCompass();
+		forceHideCompass = isRouteDialogOpened() || visibilityHelper.shouldHideCompass();
 		if (forceHideCompass) {
 			return false;
 		} else if (!specialPosition) {
