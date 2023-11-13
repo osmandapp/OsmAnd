@@ -291,9 +291,15 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED = 2;
 	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		//for Naismith/Scarf
-		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
-		double scarfSeconds = 7.92f / ctx.getRouter().getDefaultSpeed();
+		// Naismith's/Scarf rules are used to clarify time on uphills
+		// PEDESTRIAN profile uses classical 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule
+		// BICYCLE profile uses vertical-to-flat ratio 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/
+		GeneralRouter currentRouter = (GeneralRouter) ctx.getRouter();
+		GeneralRouterProfile currentProfile = currentRouter.getProfile();
+		boolean useNaismithRule = currentRouter.getHeightObstacles() &&
+				(currentProfile == GeneralRouterProfile.PEDESTRIAN || currentProfile == GeneralRouterProfile.BICYCLE);
+		double scarfSeconds = (currentProfile == GeneralRouterProfile.BICYCLE ? 8.2f : 7.92f)
+				/ currentRouter.getDefaultSpeed();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -313,7 +319,7 @@ public class RouteResultPreparation {
 
 			//for Naismith/Scarf
 			float[] heightDistanceArray = null;
-			if (usePedestrianHeight) {
+			if (useNaismithRule) {
 				road.calculateHeightArray();
 				heightDistanceArray = road.heightDistanceArray;
 			}
@@ -330,7 +336,7 @@ public class RouteResultPreparation {
 				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
 				//for Naismith/Scarf
-				if (usePedestrianHeight) {
+				if (useNaismithRule) {
 					int heightIndex = 2 * j + 1;
 					int nextHeightIndex = 2 * next + 1;
 					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length && nextHeightIndex < heightDistanceArray.length) {
