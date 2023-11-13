@@ -50,6 +50,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.GpxLayerUtils;
@@ -348,11 +349,10 @@ public class TrackDetailsMenu {
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 				float time = pos * 1000;
-				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
+				point = GpxUtils.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
 			} else {
 				float distance = pos * dataSet.getDivX();
-				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true,
-						joinSegments);
+				point = GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, true, joinSegments);
 			}
 		}
 		return point == null ? null : new LatLon(point.lat, point.lon);
