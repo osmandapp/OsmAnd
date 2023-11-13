@@ -300,8 +300,7 @@ public class RouteResultPreparation {
 			if (currentRouter.getProfile() == GeneralRouterProfile.PEDESTRIAN) {
 				// PEDESTRIAN 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule (Scarf rule)
 				scarfSeconds = 7.92f / currentRouter.getDefaultSpeed();
-			}
-			else if (currentRouter.getProfile() == GeneralRouterProfile.BICYCLE) {
+			} else if (currentRouter.getProfile() == GeneralRouterProfile.BICYCLE) {
 				// BICYCLE 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/ (Scarf's article)
 				scarfSeconds = 8.2f / currentRouter.getDefaultSpeed();
 			} else {
