@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap.OsmandMapListener;
@@ -68,7 +68,7 @@ public class MapViewWithLayers extends FrameLayout {
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
 		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
-				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
+				&& InAppPurchaseUtils.isAndroidAutoAvailable(app);
 
 		OsmAndMapSurfaceView surfaceView = findViewById(R.id.MapView);
 		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);
@@ -84,15 +84,9 @@ public class MapViewWithLayers extends FrameLayout {
 			mapView.setMapRenderer(null);
 			resetMapRendererView();
 		}
-		if (useAndroidAuto) {
-			AndroidUiHelper.updateVisibility(surfaceView, false);
-			AndroidUiHelper.updateVisibility(mapLayersView, false);
-			AndroidUiHelper.updateVisibility(atlasMapRendererView, false);
-		} else {
-			AndroidUiHelper.updateVisibility(surfaceView, !useOpenglRender);
-			AndroidUiHelper.updateVisibility(mapLayersView, useOpenglRender);
-			AndroidUiHelper.updateVisibility(atlasMapRendererView, useOpenglRender);
-		}
+		AndroidUiHelper.updateVisibility(surfaceView, !useAndroidAuto && !useOpenglRender);
+		AndroidUiHelper.updateVisibility(mapLayersView, !useAndroidAuto && useOpenglRender);
+		AndroidUiHelper.updateVisibility(atlasMapRendererView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(androidAutoPlaceholder, useAndroidAuto);
 	}
 
@@ -155,8 +149,11 @@ public class MapViewWithLayers extends FrameLayout {
 
 	public void onDestroy() {
 		if (atlasMapRendererView != null) {
-			mapView.setMapRenderer(null);
-			resetMapRendererView();
+			NavigationSession carNavigationSession = app.getCarNavigationSession();
+			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
+				mapView.setMapRenderer(null);
+				resetMapRendererView();
+			}
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();

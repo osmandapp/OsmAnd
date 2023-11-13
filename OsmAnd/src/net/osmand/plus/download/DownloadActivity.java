@@ -37,8 +37,8 @@ import net.osmand.plus.download.ui.GoToMapFragment;
 import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
@@ -425,7 +425,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public void initAppStatusVariables() {
 		OsmandApplication app = getMyApplication();
-		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class) && !InAppPurchaseHelper.isContourLinesPurchased(app);
+		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class) && !InAppPurchaseUtils.isContourLinesAvailable(app);
 		nauticalPluginDisabled = !PluginsHelper.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);
 		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);

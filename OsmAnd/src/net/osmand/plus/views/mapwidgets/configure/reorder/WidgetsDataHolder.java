@@ -148,7 +148,16 @@ public class WidgetsDataHolder {
 				newPages.put(pageEntry.getKey() - 1, pageEntry.getValue());
 			}
 		}
+		pages = newPages;
+	}
 
+	public void deletePageWithoutShift(int page) {
+		TreeMap<Integer, List<String>> newPages = new TreeMap<>();
+		for (Entry<Integer, List<String>> pageEntry : pages.entrySet()) {
+			if (pageEntry.getKey() != page) {
+				newPages.put(pageEntry.getKey(), pageEntry.getValue());
+			}
+		}
 		pages = newPages;
 	}
 

@@ -15,17 +15,15 @@
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/card_row_min_height"
 		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding">
+		android:paddingEnd="@dimen/content_padding">
 
 		<ImageView
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
-			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			tools:src="@drawable/ic_action_track_line_bold_color"
 			tools:tint="?attr/default_icon_color" />
 
@@ -34,6 +32,7 @@
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_gravity="center_vertical|start"
+			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_weight="1"
 			android:ellipsize="end"
@@ -44,7 +43,7 @@
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="Some title" />
 
-		<androidx.appcompat.widget.SwitchCompat
+		<net.osmand.view.ThreeStateCheckbox
 			android:id="@+id/toggle_item"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"

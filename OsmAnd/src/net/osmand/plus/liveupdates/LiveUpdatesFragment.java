@@ -63,6 +63,7 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
@@ -155,7 +156,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		expandAllGroups();
 
 		listView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
-			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) && settings.IS_LIVE_UPDATES_ON.get()) {
+			if (InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get()) {
 				if (getFragmentManager() != null) {
 					LiveUpdatesSettingsBottomSheet
 							.showInstance(getFragmentManager(), LiveUpdatesFragment.this,
@@ -303,7 +304,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			public void onClick(View view) {
 				boolean visible = !isChecked;
 				if (visible) {
-					if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+					if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 						switchOnLiveUpdates();
 						updateToolbarSwitch(true);
 					} else {
@@ -546,7 +547,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 			description.setText(getFormattedLastSuccessfulCheck(item));
 
-			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 				compoundButton.setEnabled(liveUpdateOn);
 				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
 					@Override

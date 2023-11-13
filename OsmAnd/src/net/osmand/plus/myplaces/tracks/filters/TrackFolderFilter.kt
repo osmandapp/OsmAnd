@@ -1,72 +1,48 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.util.Pair
+import android.graphics.drawable.Drawable
 import com.google.gson.annotations.Expose
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.FOLDER
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.util.Algorithms
 
-class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
-	BaseTrackFilter(R.string.folder, FOLDER, filterChangedListener) {
-
-	override fun isEnabled(): Boolean {
-		return !Algorithms.isEmpty(selectedFolders)
-	}
+class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener?) :
+	ListTrackFilter(app, R.string.folder, FOLDER, filterChangedListener) {
 
 	@Expose
-	val selectedFolders = ArrayList<String>()
-
-	@Expose
-	var isAllFoldersSelected = false
-		set(value) {
-			field = value
-			filterChangedListener?.onFilterChanged()
-		}
+	private var selectedFolders = HashSet<String>()
 
 	var currentFolder: TrackFolder? = null
 		set(value) {
 			field = value
 			value?.let {
-				selectedFolders.clear()
-				selectedFolders.add(it.getDirName())
+				selectedItems = arrayListOf(it.getDirName())
 			}
 		}
 
-	var allFolders: MutableList<String> = arrayListOf()
-		private set
-	var allFoldersCollection: HashMap<String, Int> = hashMapOf()
-		private set
-
-	fun setFullFoldersCollection(collection: List<Pair<String, Int>>) {
-		for (pair in collection) {
-			allFolders.add(pair.first)
-			allFoldersCollection[pair.first] = pair.second
-		}
-	}
-
-	fun setSelectedFolders(folder: String, selected: Boolean) {
-		if (selected) {
-			if (!selectedFolders.contains(folder)) {
-				selectedFolders.add(folder)
-			}
+	fun updateFullCollection(items: List<TrackItem>?) {
+		if (Algorithms.isEmpty(items)) {
+			allItemsCollection = HashMap()
 		} else {
-			selectedFolders.remove(folder)
+			val newCollection = HashMap<String, Int>()
+			for (item in items!!) {
+				val folderName = item.dataItem?.containingFolder ?: ""
+				val count = newCollection[folderName] ?: 0
+				newCollection[folderName] = count + 1
+			}
+			allItemsCollection = newCollection
 		}
-		filterChangedListener?.onFilterChanged()
-	}
-
-	fun isFolderSelected(folder: String): Boolean {
-		return selectedFolders.contains(folder)
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		if (isAllFoldersSelected) {
+		if (isSelectAllItemsSelected) {
 			return true
 		} else {
-			if (!Algorithms.isEmpty(selectedFolders)) {
-				for (folder in selectedFolders) {
+			if (!Algorithms.isEmpty(selectedItems)) {
+				for (folder in selectedItems) {
 					trackItem.dataItem?.let { gpxDataItem ->
 						if (Algorithms.stringsEqual(gpxDataItem.containingFolder, folder)) {
 							return true
@@ -78,33 +54,53 @@ class TrackFolderFilter(filterChangedListener: FilterChangedListener) :
 		return false
 	}
 
-	override fun initWithValue(value: BaseTrackFilter) {
-		if (value is TrackFolderFilter) {
-			selectedFolders.clear()
-			selectedFolders.addAll(value.selectedFolders)
-			for (folder in value.selectedFolders) {
-				if (!allFolders.contains(folder)) {
-					allFolders.add(folder)
-					allFoldersCollection[folder] = 0
-				}
-			}
-			filterChangedListener?.onFilterChanged()
-		}
-	}
-
 	override fun equals(other: Any?): Boolean {
 		return super.equals(other) &&
 				other is TrackFolderFilter &&
-				other.selectedFolders.size == selectedFolders.size &&
-				areAllFoldersSelected(other.selectedFolders)
+				other.selectedItems.size == selectedItems.size &&
+				areAllItemsSelected(other.selectedItems)
 	}
 
-	private fun areAllFoldersSelected(cities: List<String>): Boolean {
-		for (city in cities) {
-			if (!isFolderSelected(city)) {
-				return false
+	override fun hasSelectAllVariant(): Boolean {
+		return true
+	}
+
+	override fun getItemText(itemName: String): String {
+		return if (Algorithms.isEmpty(itemName)) {
+			app.getString(R.string.root_folder)
+		} else {
+			itemName.replace("/", " / ")
+		}
+	}
+
+	override fun getItemIcon(itemName: String): Drawable? {
+		return app.uiUtilities.getPaintedIcon(
+			R.drawable.ic_action_folder,
+			app.getColor(R.color.icon_color_default_light))
+	}
+
+	override fun getSelectAllItemIcon(isChecked: Boolean, nightMode: Boolean): Drawable? {
+		return if (isChecked) {
+			app.uiUtilities.getActiveIcon(
+				R.drawable.ic_action_group_select_all,
+				nightMode)
+		} else {
+			app.uiUtilities.getPaintedIcon(
+				R.drawable.ic_action_group_select_all,
+				app.getColor(R.color.icon_color_default_light))
+		}
+	}
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is TrackFolderFilter) {
+			if (!Algorithms.isEmpty(value.selectedFolders) || Algorithms.isEmpty(value.selectedItems)) {
+				value.selectedItems = ArrayList(value.selectedFolders)
 			}
 		}
+		super.initWithValue(value)
+	}
+
+	override fun updateOnOtherFiltersChangeNeeded(): Boolean {
 		return true
 	}
 }

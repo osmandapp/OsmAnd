@@ -2291,32 +2291,32 @@
 
     <string name="poi_aerialway_length">ദൂരം</string>
 
-    <string name="poi_health_specialty_general_yes">ജെനറല്‍ പ്രാക്ടീഷണര്‍</string>
-	<string name="poi_health_specialty_ophthalmology_yes">ഓഫ്താല്‍മോളജി (നേത്രരോഗങ്ങള്‍)</string>
-	<string name="poi_health_specialty_gynaecology_yes">ഗൈനക്കോളജി(ഗര്‍ഭാശയ സംബന്ധമായ)</string>
-	<string name="poi_health_specialty_internal_yes">ഇന്റേണല്‍ മെഡിസിന്‍</string>
-	<string name="poi_health_specialty_orthopaedics_yes">ഓര്‍ത്തോപീഡിക്സ്(നട്ടെല്ല് സംബന്ധമായ രോഗങ്ങള്‍)</string>
-	<string name="poi_health_specialty_paediatrics_yes">പീഡിയാട്രിക്സ് (ശിശു രോഗം)</string>
+    <string name="poi_healthcare_speciality_general">ജെനറല്‍ പ്രാക്ടീഷണര്‍</string>
+	<string name="poi_healthcare_speciality_ophthalmology">ഓഫ്താല്‍മോളജി (നേത്രരോഗങ്ങള്‍)</string>
+	<string name="poi_healthcare_speciality_gynaecology">ഗൈനക്കോളജി(ഗര്‍ഭാശയ സംബന്ധമായ)</string>
+	<string name="poi_healthcare_speciality_internal">ഇന്റേണല്‍ മെഡിസിന്‍</string>
+	<string name="poi_healthcare_speciality_orthopaedics">ഓര്‍ത്തോപീഡിക്സ്(നട്ടെല്ല് സംബന്ധമായ രോഗങ്ങള്‍)</string>
+	<string name="poi_healthcare_speciality_paediatrics">പീഡിയാട്രിക്സ് (ശിശു രോഗം)</string>
 	<string name="poi_health_specialty_paediatrics_no">"പീഡിയാട്രിക്സ് ഇല്ല "</string>
-	<string name="poi_health_specialty_dermatology_yes">ഡെര്‍മടോളജി( ത്വോക് രോഗങ്ങള്‍)</string>
-	<string name="poi_health_specialty_urology_yes">യൂറോളജി (മൂത്രാശയ രോഗങ്ങള്‍)</string>
-	<string name="poi_health_specialty_surgery_yes">ജെനറല്‍ സര്‍ജറി</string>
-	<string name="poi_health_specialty_radiology_yes">റേഡിയോളജി</string>
-	<string name="poi_health_specialty_psychiatry_yes">സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
-	<string name="poi_health_specialty_neurology_yes">ന്യൂറോളജി</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">ഡെര്‍മടോ-വെനെരിയോളജി</string>
-	<string name="poi_health_specialty_cardiology_yes">കാര്‍ഡിയോളജി (ഹൃദ്രോഗം)</string>
-	<string name="poi_health_specialty_trauma_yes">ട്രോമാടോളജി</string>
-	<string name="poi_health_specialty_biology_yes">ക്ളിനിക്കല്‍ ബയോളജി</string>
-	<string name="poi_health_specialty_anaesthetics_yes">അനസ്തീഷ്യനിസ്റ്റ്</string>
-	<string name="poi_health_specialty_pulmonology_yes">"റെസ്പിറേറ്ററി  മെഡിസിന്‍"</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">ദന്ത രോഗങ്ങള്‍</string>
-	<string name="poi_health_specialty_child_psychiatry_yes">കുട്ടികളുടെ പ്സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
-	<string name="poi_health_specialty_acupuncture_yes">അക്യുപംക്ചര്‍</string>
-	<string name="poi_health_specialty_homeopathy_yes">ഹോമിയോ</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">പരമ്പാഗത ചൈനീസ് മെഡിസിന്‍</string>
-	<string name="poi_health_specialty_reiki_yes">രീകി</string>
-	<string name="poi_health_specialty_herbalism_yes">ഹെര്‍ബലിസം</string>
+	<string name="poi_healthcare_speciality_dermatology">ഡെര്‍മടോളജി( ത്വോക് രോഗങ്ങള്‍)</string>
+	<string name="poi_healthcare_speciality_urology">യൂറോളജി (മൂത്രാശയ രോഗങ്ങള്‍)</string>
+	<string name="poi_healthcare_speciality_surgery">ജെനറല്‍ സര്‍ജറി</string>
+	<string name="poi_healthcare_speciality_radiology">റേഡിയോളജി</string>
+	<string name="poi_healthcare_speciality_psychiatry">സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
+	<string name="poi_healthcare_speciality_neurology">ന്യൂറോളജി</string>
+	<string name="poi_healthcare_speciality_dermatovenereology">ഡെര്‍മടോ-വെനെരിയോളജി</string>
+	<string name="poi_healthcare_speciality_cardiology">കാര്‍ഡിയോളജി (ഹൃദ്രോഗം)</string>
+	<string name="poi_healthcare_speciality_trauma">ട്രോമാടോളജി</string>
+	<string name="poi_healthcare_speciality_biology">ക്ളിനിക്കല്‍ ബയോളജി</string>
+	<string name="poi_healthcare_speciality_anaesthetics">അനസ്തീഷ്യനിസ്റ്റ്</string>
+	<string name="poi_healthcare_speciality_pulmonology">"റെസ്പിറേറ്ററി  മെഡിസിന്‍"</string>
+	<string name="poi_healthcare_speciality_dental_oral_maxillo_facial_surgery">ദന്ത രോഗങ്ങള്‍</string>
+	<string name="poi_healthcare_speciality_child_psychiatry">കുട്ടികളുടെ പ്സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
+	<string name="poi_healthcare_speciality_acupuncture">അക്യുപംക്ചര്‍</string>
+	<string name="poi_healthcare_speciality_homeopathy">ഹോമിയോ</string>
+	<string name="poi_healthcare_speciality_traditional_chinese_medicine">പരമ്പാഗത ചൈനീസ് മെഡിസിന്‍</string>
+	<string name="poi_healthcare_speciality_reiki">രീകി</string>
+	<string name="poi_healthcare_speciality_herbalism">ഹെര്‍ബലിസം</string>
 	<string name="poi_building_type_pyramid">കെട്ടിട ഇനം: പിരമിഡ്</string>
 
     <string name="poi_fitness_centre">"ഫിറ്റ്നെസ്  സെന്റര്‍"</string>
@@ -2432,7 +2432,7 @@
 	<string name="poi_health_facility_type_nursing_home">ആരോഗ്യ കേന്ദ്രം: നര്‍സിങ്ങ് ഹോം</string>
 	<string name="poi_health_facility_type_support_group_home">ആരോഗ്യ സേവനം: സപ്പോര്‍ട്ട് ഗ്രൂപ് ഹോം</string>
 
-    <string name="poi_health_specialty_palliative_medicine_yes">പാലിയേറ്റീവ് മെഡിസിന്‍</string>
+    <string name="poi_healthcare_speciality_palliative_medicine">പാലിയേറ്റീവ് മെഡിസിന്‍</string>
 
     <string name="poi_fire_hydrant_type_underground">ഭൂഗര്‍ഭം</string>
 	<string name="poi_fire_hydrant_type_pillar">തൂണ്‍</string>
@@ -2562,9 +2562,9 @@
 	<string name="poi_wetland_bog">ബോഗ്</string>
 	<string name="poi_wetland_palsa_bog">പല്‍സ ബോഗ്</string>
 	<string name="poi_shower_filter_yes">"ഉണ്ട് "</string>
-	<string name="poi_health_specialty_maternity_yes">മാതാക്കള്‍ക്കായി</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">പ്ളസ്റ്റിക് സര്‍ജറി</string>
-	<string name="poi_health_specialty_behavior_yes">പെരുമാറ്റം</string>
+	<string name="poi_healthcare_speciality_maternity">മാതാക്കള്‍ക്കായി</string>
+	<string name="poi_healthcare_speciality_plastic_surgery">പ്ളസ്റ്റിക് സര്‍ജറി</string>
+	<string name="poi_healthcare_speciality_behavior">പെരുമാറ്റം</string>
 	<string name="poi_water_heater_yes">വാട്ടര്‍ ഹീറ്റര്‍:ഉണ്ട്</string>
 	<string name="poi_water_heater_no">"വാട്ടര്‍ ഹീറ്റര്‍:ഇല്ല "</string>
 

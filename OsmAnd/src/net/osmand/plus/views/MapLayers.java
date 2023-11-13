@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
@@ -22,7 +21,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -31,6 +29,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -49,6 +48,7 @@ import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.MapVectorLayer;
+import net.osmand.plus.views.layers.NetworkRouteSelectionLayer;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
@@ -56,6 +56,7 @@ import net.osmand.plus.views.layers.PreviewRouteLineLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
+import net.osmand.plus.views.layers.TravelSelectionLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -83,11 +84,14 @@ public class MapLayers {
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
+	private final MapWidgetRegistry mapWidgetRegistry;
 
 	// the order of layer should be preserved ! when you are inserting new layer
 	private MapTileLayer mapTileLayer;
 	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
+	private TravelSelectionLayer travelSelectionLayer;
+	private NetworkRouteSelectionLayer routeSelectionLayer;
 	private RouteLayer routeLayer;
 	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
@@ -105,7 +109,6 @@ public class MapLayers {
 	private MapControlsLayer mapControlsLayer;
 	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-	private final MapWidgetRegistry mapWidgetRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
@@ -149,7 +152,13 @@ public class MapLayers {
 		gpxLayer.setPointsOrder(0.9f);
 		mapView.addLayer(gpxLayer, 0.9f, -5.0f);
 
-		// route layer, 4-th in the order
+		travelSelectionLayer = new TravelSelectionLayer(app);
+		mapView.addLayer(travelSelectionLayer, 0.95f);
+
+		routeSelectionLayer = new NetworkRouteSelectionLayer(app);
+		mapView.addLayer(routeSelectionLayer, 0.99f);
+
+		// route layer, 6-th in the order
 		routeLayer = new RouteLayer(app);
 		mapView.addLayer(routeLayer, 1.0f, -2.0f);
 
@@ -235,10 +244,6 @@ public class MapLayers {
 				layer.setMapActivity(null);
 			}
 			layer.setMapActivity(mapActivity);
-		}
-		MapRendererView mapRenderer = mapView.getMapRenderer();
-		if (mapRenderer != null) {
-			mapRenderer.removeAllSymbolsProviders();
 		}
 	}
 
@@ -465,11 +470,11 @@ public class MapLayers {
 
 		Map<String, String> entriesMap = new LinkedHashMap<>();
 		if (includeOfflineMaps) {
-			entriesMap.put(LAYER_OSM_VECTOR, getString(R.string.vector_data));
+			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
-		entriesMap.put(LAYER_INSTALL_MORE, getString(R.string.install_more));
-		entriesMap.put(LAYER_ADD, getString(R.string.shared_string_add_manually));
+		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
+		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 		String selectedTileSourceKey = targetLayer.get();
@@ -590,11 +595,6 @@ public class MapLayers {
 		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 
-	@StyleRes
-	private String getString(int resId) {
-		return app.getString(resId);
-	}
-
 	public RouteLayer getRouteLayer() {
 		return routeLayer;
 	}
@@ -613,6 +613,14 @@ public class MapLayers {
 
 	public GPXLayer getGpxLayer() {
 		return gpxLayer;
+	}
+
+	public NetworkRouteSelectionLayer getRouteSelectionLayer() {
+		return routeSelectionLayer;
+	}
+
+	public TravelSelectionLayer getTravelSelectionLayer() {
+		return travelSelectionLayer;
 	}
 
 	public ContextMenuLayer getContextMenuLayer() {

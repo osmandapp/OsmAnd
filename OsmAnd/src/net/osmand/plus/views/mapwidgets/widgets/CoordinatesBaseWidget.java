@@ -240,13 +240,15 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		super.updateColors(textState);
 
 		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
-
-		int textColor = ContextCompat.getColor(app, R.color.activity_background_color_light);
+		int textColor = textState.textColor;
 		firstCoordinate.setTextColor(textColor);
 		secondCoordinate.setTextColor(textColor);
 
 		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
 		firstCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		secondCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
+
+		view.setBackgroundResource(textState.widgetBackgroundId);
+		updateInfo(null);
 	}
 }

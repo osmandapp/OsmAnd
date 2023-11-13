@@ -51,7 +51,6 @@ import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,6 +58,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
@@ -550,22 +550,27 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			if (!dashboardOnMap.isVisible()) {
-				if (settings.SHOW_DASHBOARD_ON_START.get()) {
-					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
-				} else if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
-					SecondSplashScreenFragment.SHOW = false;
-					RenderInitErrorBottomSheet.showInstance(fragmentManager);
-				} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
-					SecondSplashScreenFragment.SHOW = false;
-					CrashBottomSheetDialogFragment.showInstance(fragmentManager);
-				} else if (RateUsHelper.shouldShowRateDialog(app)) {
-					SecondSplashScreenFragment.SHOW = false;
-					RateUsHelper.showRateDialog(this);
-				}
+			if (!dashboardOnMap.isVisible() && settings.SHOW_DASHBOARD_ON_START.get()) {
+				dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);
+
+		if (!dashboardOnMap.isVisible()) {
+			if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
+				SecondSplashScreenFragment.SHOW = false;
+				RenderInitErrorBottomSheet.showInstance(fragmentManager);
+			} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
+				SecondSplashScreenFragment.SHOW = false;
+				CrashBottomSheetDialogFragment.showInstance(fragmentManager);
+			} else if (RateUsHelper.shouldShowRateDialog(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				RateUsHelper.showRateDialog(this);
+			} else if (TripltekPromoFragment.shouldShow(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				TripltekPromoFragment.showInstance(fragmentManager);
+			}
+		}
 
 		boolean showStorageMigrationScreen = false;
 		if (fragmentsHelper.getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
@@ -926,7 +931,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		PluginsHelper.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession == null) {
+		if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (mapViewWithLayers != null) {
@@ -984,8 +989,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		NavigationService carNavigationService = app.getNavigationService();
-		if (carNavigationService == null || !carNavigationService.isCarNavigationActive()) {
+		if (app.getCarNavigationSession() == null) {
 			getMapView().getAnimatedDraggingThread().blockAnimations();
 		}
 

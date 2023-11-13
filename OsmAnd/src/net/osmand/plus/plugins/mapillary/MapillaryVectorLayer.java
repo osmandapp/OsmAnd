@@ -1,10 +1,17 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -47,13 +54,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
@@ -501,16 +501,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
-	public boolean disableSingleTap() {
-		return false;
-	}
-
-	@Override
-	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (map != null && tileBox.getZoom() >= MIN_POINTS_ZOOM) {
@@ -525,16 +515,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return new LatLon(image.getLatitude(), image.getLongitude());
 		}
 		return null;
-	}
-
-	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
 	}
 
 	@Override

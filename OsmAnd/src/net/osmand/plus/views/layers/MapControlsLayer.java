@@ -914,7 +914,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 							view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
 							MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 							if (mapContext != null) {
-								mapContext.updateMapSettings();
+								mapContext.updateMapSettings(true);
 							}
 							dialog.dismiss();
 						});

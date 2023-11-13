@@ -368,7 +368,7 @@
     <string name="poi_water_source_river">Sungai</string>
     <string name="poi_water_source_water_tank">Tangki air</string>
     <string name="poi_vaccination_covid19">Vaksinasi: COVID19</string>
-    <string name="poi_health_specialty_vaccination_yes">Vaksinasi</string>
+    <string name="poi_healthcare_speciality_vaccination">Vaksinasi</string>
     <string name="poi_siren">Sirene</string>
     <string name="poi_nurse">Perawat</string>
     <string name="poi_diplomatic_services_citizen_services_no">Tidak</string>
@@ -1319,7 +1319,7 @@
     <string name="poi_permanent_camping">Perkemahan permanen</string>
     <string name="poi_baby_goods">Perlengkapan bayi</string>
     <string name="poi_star_rating">Peringkat bintang</string>
-    <string name="poi_health_specialty">Spesialis kesehatan</string>
+    <string name="poi_healthcare_speciality">Spesialis kesehatan</string>
     <string name="poi_ice_cream">Kedai es krim</string>
     <string name="poi_butcher_type">Jenis daging utama</string>
     <string name="poi_coffee_filter">Kopi</string>

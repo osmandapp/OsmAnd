@@ -2,6 +2,8 @@ package net.osmand.plus.auto;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
 
@@ -16,14 +18,14 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.android.MapRendererView.MapRendererViewListener;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapRendererView.MapRendererViewListener;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -36,12 +38,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private static final String TAG = "SurfaceRenderer";
 
 	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.25;
+	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 
 	private final CarContext carContext;
 	private final CarSurfaceView surfaceView;
 	private OsmandMapTileView mapView;
+	private final Handler handler;
 
-	private boolean visible;
 	@Nullable
 	private AtlasMapRendererView offscreenMapRendererView;
 	@Nullable
@@ -130,7 +133,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
 			synchronized (SurfaceRenderer.this) {
 				Log.i(TAG, "Surface destroyed");
-				stopOffscreenRenderer();
 				if (surface != null) {
 					surface.release();
 					surface = null;
@@ -168,9 +170,21 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	};
 
 	public SurfaceRenderer(@NonNull CarContext carContext, @NonNull Lifecycle lifecycle) {
+		this.handler = new Handler();
 		this.carContext = carContext;
 		this.surfaceView = new CarSurfaceView(carContext, this);
 		lifecycle.addObserver(this);
+	}
+
+	private void sendRenderFrameMsg() {
+		if (!handler.hasMessages(MAP_RENDER_MESSAGE)) {
+			Message msg = Message.obtain(handler, () -> {
+				handler.removeMessages(MAP_RENDER_MESSAGE);
+				renderFrame();
+			});
+			msg.what = MAP_RENDER_MESSAGE;
+			handler.sendMessage(msg);
+		}
 	}
 
 	@Override
@@ -195,7 +209,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	@Override
 	public void onFrameReady(MapRendererView mapRendererView) {
-		renderFrame();
+		//renderFrame();
+		sendRenderFrameMsg();
 	}
 
 	/**
@@ -232,7 +247,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public void handleTilt() {
 		synchronized (this) {
 			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null)
-				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 10.0f);
+				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 30.0f);
 		}
 	}
 
@@ -262,10 +277,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		return mapView;
 	}
 
-	public void setVisible() {
-		visible = true;
-	}
-	
 	public void setMapView(OsmandMapTileView mapView) {
 		if (mapView == null) {
 			stopOffscreenRenderer();
@@ -287,7 +298,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	}
 
 	public void setupOffscreenRenderer() {
-		if (visible && getApp().useOpenGlRenderer()) {
+		Log.i(TAG, "setupOffscreenRenderer");
+		if (getApp().useOpenGlRenderer()) {
 			if (surface != null && surface.isValid()) {
 				if (offscreenMapRendererView != null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
@@ -328,16 +340,14 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	}
 
 	public void stopOffscreenRenderer() {
-		if (visible) {
-			visible = false;
-			if (offscreenMapRendererView != null) {
-				if (mapView != null && mapView.getMapRenderer() == offscreenMapRendererView)
-					mapView.setMapRenderer(null);
-				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-				if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
-					offscreenMapRendererView.stopRenderer();
-				offscreenMapRendererView = null;
-			}
+		Log.i(TAG, "stopOffscreenRenderer");
+		if (offscreenMapRendererView != null) {
+			if (mapView != null && mapView.getMapRenderer() == offscreenMapRendererView)
+				mapView.setMapRenderer(null);
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
+				offscreenMapRendererView.stopRenderer();
+			offscreenMapRendererView = null;
 		}
 	}
 

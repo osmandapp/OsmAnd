@@ -4766,7 +4766,7 @@
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
-    <string name="shared_string_large">Largo</string>
+    <string name="shared_string_large">Grande</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
@@ -5513,7 +5513,7 @@
 \nEsta acción no se puede deshacer.</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
-    <string name="shared_string_empty_trash">Papelera vacía</string>
+    <string name="shared_string_empty_trash">Vaciar papelera</string>
     <string name="shared_string_delete_immediately">Borrar de inmediato</string>
     <string name="shared_string_loading">Cargando</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
@@ -5537,7 +5537,7 @@
     <string name="shared_string_rows">Filas</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
     <string name="all_folders">Todas las carpetas</string>
-    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para vincularlo con la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
     <string name="key_event_action_move_right">Mover a la derecha</string>
     <string name="shared_string_show_less">Mostrar menos</string>
@@ -5566,4 +5566,11 @@
     <string name="key_event_action_move_down">Mover abajo</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Abrir cuadrícula de datos de WunderLINQ</string>
     <string name="key_event_category_actions">Acciones</string>
+    <string name="tripltek_promo">Promoción Tripltek por %1$s meses</string>
+    <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="remove_widget_first">Quitar antes el widget</string>
+    <string name="add_row">Añadir fila</string>
+    <string name="discard_changes_prompt">¿Descartar cambios?</string>
+    <string name="row_number">Fila %1$s</string>
+    <string name="see_all_plans">Ver todos los planes</string>
 </resources>

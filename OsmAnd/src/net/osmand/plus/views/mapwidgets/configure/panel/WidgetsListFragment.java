@@ -37,6 +37,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFra
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -181,6 +182,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			return;
 		}
 
+		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
+		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
+			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
+		}
+		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
+		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
+		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
 		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -239,7 +247,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			if (!isVerticalPanel()) {
 				inflatePageItemView(i, inflater);
 			}
-			inflateWidgetItemsViews(pagedWidgets.get(i), inflater, i + 1);
+			inflateWidgetItemsViews(pagedWidgets.get(i), inflater, i + 1, i == pagedWidgets.size() - 1);
 		}
 	}
 
@@ -252,7 +260,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		enabledWidgetsContainer.addView(view);
 	}
 
-	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater, int row) {
+	private void inflateWidgetItemsViews(@NonNull Set<MapWidgetInfo> widgetsInfo, @NonNull LayoutInflater inflater, int row, boolean lastRow) {
 		List<MapWidgetInfo> widgets = new ArrayList<>(widgetsInfo);
 
 		for (int i = 0; i < widgets.size(); i++) {
@@ -310,15 +318,15 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			setupListItemBackground(view);
 
 			View bottomDivider = view.findViewById(R.id.bottom_divider);
-			boolean last = i + 1 == widgets.size();
-			AndroidUiHelper.updateVisibility(bottomDivider, !last);
+			boolean lastWidget = i + 1 == widgets.size();
+			AndroidUiHelper.updateVisibility(bottomDivider, !lastWidget);
 
 			if (isVerticalPanel()) {
 				TextView rowId = view.findViewById(R.id.row_id);
 				rowId.setText(String.valueOf(row));
 				AndroidUiHelper.setVisibility(i == 0 ? View.VISIBLE : View.INVISIBLE, rowId);
 
-				if (last) {
+				if (lastWidget && !lastRow) {
 					ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) bottomDivider.getLayoutParams();
 					params.setMarginStart(0);
 					AndroidUiHelper.updateVisibility(bottomDivider, true);

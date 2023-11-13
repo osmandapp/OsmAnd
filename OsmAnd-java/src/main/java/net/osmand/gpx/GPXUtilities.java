@@ -578,7 +578,6 @@ public class GPXUtilities {
 		public Bounds bounds = null;
 
 		public Metadata() {
-			time = System.currentTimeMillis();
 		}
 
 		public Metadata(Metadata source) {

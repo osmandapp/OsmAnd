@@ -44,7 +44,7 @@ import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
 import net.osmand.plus.plugins.weather.WeatherRasterLayer.WeatherLayer;
@@ -213,7 +213,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isLocked() {
-		return !InAppPurchaseHelper.isOsmAndProAvailable(app);
+		return !InAppPurchaseUtils.isWeatherAvailable(app);
 	}
 
 	@Nullable
@@ -534,7 +534,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private void updateMapSettings() {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
-			mapContext.updateMapSettings();
+			mapContext.updateMapSettings(true);
 		}
 		weatherHelper.updateBandsSettings();
 	}

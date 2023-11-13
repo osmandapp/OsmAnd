@@ -5073,4 +5073,6 @@
     <string name="shared_string_action">Дзеянне</string>
     <string name="shared_string_trash">Сметніца</string>
     <string name="key_event_category_actions">Дзеянні</string>
+    <string name="about_osmand">Пра OsmAnd</string>
+    <string name="free_versions">Бясплатныя версіі</string>
 </resources>

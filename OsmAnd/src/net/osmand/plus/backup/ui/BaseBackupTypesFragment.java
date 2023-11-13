@@ -27,7 +27,7 @@ import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -144,9 +144,9 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportSettingsType> types = categoryItems.getTypes();
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (ExportSettingsType type : types) {
-			if (type.isAllowedInFreeVersion() || proAvailable) {
+			if (type.isAllowedInFreeVersion() || available) {
 				List<Object> items = getItemsForType(type);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(type, selected ? items : null);
@@ -159,8 +159,8 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (type.isAllowedInFreeVersion() || proAvailable) {
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
+		if (type.isAllowedInFreeVersion() || available) {
 			List<Object> items = getItemsForType(type);
 			selectedItemsMap.put(type, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
