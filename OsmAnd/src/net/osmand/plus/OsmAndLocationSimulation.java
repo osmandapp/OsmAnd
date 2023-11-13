@@ -23,7 +23,7 @@ import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -137,7 +137,7 @@ public class OsmAndLocationSimulation {
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 					boolean nightMode1 = app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
-					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
+					GpxDialogs.selectGPXFile(activity, false, false, result -> {
 						startAnimationThread(app, result[0], 0, true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
