@@ -292,14 +292,22 @@ public class RouteResultPreparation {
 	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
 		// Naismith's/Scarf rules are used to clarify time on uphills
-		// PEDESTRIAN profile uses classical 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule
-		// BICYCLE profile uses vertical-to-flat ratio 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/
+		boolean useNaismithRule = false;
+		double scarfSeconds = 0; // vertical-to-flat ratio
 		GeneralRouter currentRouter = (GeneralRouter) ctx.getRouter();
-		GeneralRouterProfile currentProfile = currentRouter.getProfile();
-		boolean useNaismithRule = currentRouter.getHeightObstacles() &&
-				(currentProfile == GeneralRouterProfile.PEDESTRIAN || currentProfile == GeneralRouterProfile.BICYCLE);
-		double scarfSeconds = (currentProfile == GeneralRouterProfile.BICYCLE ? 8.2f : 7.92f)
-				/ currentRouter.getDefaultSpeed();
+		if (currentRouter.getHeightObstacles()) {
+			useNaismithRule = true;
+			if (currentRouter.getProfile() == GeneralRouterProfile.PEDESTRIAN) {
+				// PEDESTRIAN 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule (Scarf rule)
+				scarfSeconds = 7.92f / currentRouter.getDefaultSpeed();
+			}
+			else if (currentRouter.getProfile() == GeneralRouterProfile.BICYCLE) {
+				// BICYCLE 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/ (Scarf's article)
+				scarfSeconds = 8.2f / currentRouter.getDefaultSpeed();
+			} else {
+				useNaismithRule = false;
+			}
+		}
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
