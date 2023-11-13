@@ -2,7 +2,7 @@ package net.osmand.plus.myplaces.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
 import android.content.Intent;
@@ -31,7 +31,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
+import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet.SaveExistingFileListener;
@@ -90,8 +90,8 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 	public TrackFoldersHelper(@NonNull MyPlacesActivity activity) {
 		this.activity = activity;
-		this.importHelper = new ImportHelper(activity);
 		this.app = activity.getMyApplication();
+		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
 	}
@@ -432,6 +432,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					@Override
 					public void onImportFinished() {
 						importing = false;
+						importHelper.setGpxImportListener(null);
 						if (gpxImportListener != null) {
 							gpxImportListener.onImportFinished();
 						}

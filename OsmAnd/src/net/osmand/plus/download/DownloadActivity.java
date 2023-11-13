@@ -218,7 +218,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	public void onAttachFragment(@NonNull Fragment fragment) {
-		fragSet.add(new WeakReference<Fragment>(fragment));
+		fragSet.add(new WeakReference<>(fragment));
 	}
 
 	@Override
@@ -226,9 +226,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		super.onResume();
 		initAppStatusVariables();
 		downloadThread.setUiActivity(this);
+		getMyApplication().getImportHelper().setUiActivity(this);
 		downloadInProgress();
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -246,6 +246,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public void onPause() {
 		super.onPause();
 		downloadThread.resetUiActivity(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		getMyApplication().getImportHelper().resetUIActivity(this);
 	}
 
 	@Override

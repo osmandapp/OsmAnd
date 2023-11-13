@@ -40,6 +40,7 @@ public class MyPlacesActivity extends TabActivity {
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
+	private OsmandApplication app;
 	private OsmandSettings settings;
 
 	private ViewPager viewPager;
@@ -50,7 +51,7 @@ public class MyPlacesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
+		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
@@ -140,6 +141,7 @@ public class MyPlacesActivity extends TabActivity {
 		if (tabItems.size() != tabSize) {
 			setTabs(tabItems);
 		}
+		app.getImportHelper().setUiActivity(this);
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -152,6 +154,12 @@ public class MyPlacesActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 		viewPager.clearOnPageChangeListeners();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		app.getImportHelper().resetUIActivity(this);
 	}
 
 	@Override

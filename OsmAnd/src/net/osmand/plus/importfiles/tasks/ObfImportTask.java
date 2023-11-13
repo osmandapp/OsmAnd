@@ -8,13 +8,12 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;
@@ -32,7 +31,7 @@ public class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		File dest = getObfDestFile(fileName);
 		String error = ImportHelper.copyFile(app, dest, uri, false, unzip);
 		if (error == null) {
-			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
 			app.getDownloadThread().updateLoadedFiles();
 			return app.getString(R.string.map_imported_successfully);
 		}
@@ -42,6 +41,7 @@ public class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String message) {
 		hideProgress();
+		notifyOnImportFinished();
 		app.showShortToastMessage(message);
 	}
 

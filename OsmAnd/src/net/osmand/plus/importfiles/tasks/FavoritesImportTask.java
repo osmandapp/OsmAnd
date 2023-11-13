@@ -15,7 +15,6 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
+public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private final GPXFile gpxFile;
 	private final String fileName;
@@ -94,6 +93,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
+		notifyOnImportFinished();
 		FragmentActivity activity = activityRef.get();
 		if (activity != null) {
 			app.showToastMessage(R.string.fav_imported_sucessfully);

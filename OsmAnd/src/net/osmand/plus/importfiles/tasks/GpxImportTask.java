@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.util.Algorithms;
@@ -27,7 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
+public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private final Uri uri;
 	private final String fileName;
@@ -64,7 +63,7 @@ public class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 				}
 			}
 		} catch (IOException | SecurityException | IllegalStateException e) {
-			ImportHelper.log.error(e.getMessage(), e);
+			ImportHelper.LOG.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);
 			Algorithms.closeStream(zis);
@@ -115,7 +114,7 @@ public class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			try {
 				return new ByteArrayInputStream(result.getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e) {
-				ImportHelper.log.error(e.getMessage(), e);
+				ImportHelper.LOG.error(e.getMessage(), e);
 			}
 		}
 		return null;
@@ -124,6 +123,7 @@ public class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile gpxFile) {
 		hideProgress();
-		callback.processResult(new Pair<GPXFile, Long>(gpxFile, fileSize));
+		notifyOnImportFinished();
+		callback.processResult(new Pair<>(gpxFile, fileSize));
 	}
 }

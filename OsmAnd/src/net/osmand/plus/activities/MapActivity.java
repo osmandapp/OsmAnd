@@ -294,7 +294,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		PluginsHelper.onMapActivityCreate(this);
-		importHelper = new ImportHelper(this);
+		importHelper = app.getImportHelper();
+		importHelper.setUiActivity(this);
 		if (System.currentTimeMillis() - tm > 50) {
 			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -927,9 +928,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
+		app.getImportHelper().resetUIActivity(this);
 		restoreNavigationHelper.quitRouteRestoreDialog();
 		PluginsHelper.onMapActivityDestroy(this);
-		getMyApplication().unsubscribeInitListener(initListener);
+		app.unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 			getMapViewTrackingUtilities().setMapView(null);

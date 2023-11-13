@@ -6,19 +6,16 @@ import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.ImportType;
+import net.osmand.plus.importfiles.ImportType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -32,20 +29,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private String destFileName;
 	private ImportType importType;
-	private final CallbackWithObject routingCallback;
 	private final boolean overwrite;
 
 	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-	                     @NonNull String fileName, @Nullable CallbackWithObject routingCallback, boolean overwrite) {
+	                     @NonNull String fileName, boolean overwrite) {
 		super(activity);
 		this.uri = uri;
 		this.destFileName = fileName;
-		this.routingCallback = routingCallback;
 		this.overwrite = overwrite;
 	}
 
@@ -68,17 +63,14 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		if (error == null && file.exists()) {
 			if (importType == ImportType.RENDERING) {
 				app.getRendererRegistry().updateExternalRenderers();
-				showSuccessSnackbar(destFileName);
+				onImportFinished(destFileName);
 				hideProgress();
 			} else if (importType == ImportType.ROUTING) {
 				loadRoutingFiles(app, () -> {
 					hideProgress();
 					Builder builder = app.getCustomRoutingConfig(destFileName);
 					if (builder != null) {
-						if (routingCallback != null) {
-							routingCallback.processResult(builder);
-						}
-						showSuccessSnackbar(destFileName);
+						onImportFinished(destFileName);
 					} else {
 						app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
 					}
@@ -88,6 +80,11 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			hideProgress();
 			app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
 		}
+	}
+
+	private void onImportFinished(@NonNull String fileName) {
+		showSuccessSnackbar(fileName);
+		notifyOnImportFinished();
 	}
 
 	private void showSuccessSnackbar(@NonNull String filename) {
@@ -156,11 +153,11 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				Algorithms.closeStream(is);
 			}
 		} catch (FileNotFoundException | XmlPullParserException e) {
-			ImportHelper.log.error(e);
+			ImportHelper.LOG.error(e);
 		} catch (IOException e) {
-			ImportHelper.log.error(e);
+			ImportHelper.LOG.error(e);
 		} catch (SecurityException e) {
-			ImportHelper.log.error(e.getMessage(), e);
+			ImportHelper.LOG.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);
 		}

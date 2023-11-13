@@ -12,10 +12,9 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 
-public class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;
@@ -42,6 +41,7 @@ public class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> 
 				MapActivity mapActivity = (MapActivity) activity;
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, null);
 			}
+			notifyOnImportFinished();
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();

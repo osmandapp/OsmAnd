@@ -62,7 +62,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
+import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -670,6 +670,7 @@ public class GpxUiHelper {
 							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
 						}
+						importHelper.setGpxImportListener(null);
 					}
 				});
 
