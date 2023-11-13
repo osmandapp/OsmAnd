@@ -20,27 +20,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.routing.GpxApproximator;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-public class GpxApproximationFragment extends ContextMenuScrollFragment
-		implements SliderCardListener, ProfileCardListener, GpxApproximationListener {
+public class GpxApproximationFragment extends ContextMenuScrollFragment implements SliderCardListener, ProfileCardListener, GpxApproximationListener {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxApproximationFragment.class);
 
@@ -280,7 +279,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		refreshControlsButtons();
 	}
 
-	private void refreshControlsButtons(){
+	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 

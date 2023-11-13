@@ -33,7 +33,7 @@ public class Map3DButton extends MapButton {
 	private boolean specialPosition;
 
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
-		super(mapActivity, fabButton, id);
+		super(mapActivity, fabButton, id, false);
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();

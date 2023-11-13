@@ -12,7 +12,7 @@ import net.osmand.plus.utils.AndroidUtils;
 public class DrawerMenuButton extends MapButton {
 
 	public DrawerMenuButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_menu_button), MENU_HUD_ID);
+		super(mapActivity, mapActivity.findViewById(R.id.map_menu_button), MENU_HUD_ID, false);
 		boolean dashboard = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
 		setIconId(dashboard ? R.drawable.ic_dashboard : R.drawable.ic_navigation_drawer);
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
