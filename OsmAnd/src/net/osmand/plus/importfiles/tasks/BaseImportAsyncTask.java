@@ -15,8 +15,7 @@ public abstract class BaseImportAsyncTask<Params, Progress, Result> extends Base
 		importHelper = app.getImportHelper();
 	}
 
-	protected void notifyOnImportFinished() {
-		importHelper.notifyOnImportFinished();
+	protected void notifyImportFinished() {
+		importHelper.notifyImportFinished();
 	}
-
 }

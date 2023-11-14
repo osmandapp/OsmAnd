@@ -36,8 +36,8 @@ public class GeoTiffImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		hideProgress();
+		notifyImportFinished();
 		if (error == null) {
-			notifyOnImportFinished();
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();

@@ -99,13 +99,14 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 							settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 						}
 					}
-					notifyOnImportFinished();
+					notifyImportFinished();
 				} else if (empty) {
 					app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 				}
 			});
 		} else {
 			hideProgress();
+			notifyImportFinished();
 			app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
 		}
 	}

@@ -123,7 +123,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	@Override
 	protected void onPostExecute(GPXFile gpxFile) {
 		hideProgress();
-		notifyOnImportFinished();
+		notifyImportFinished();
 		callback.processResult(new Pair<>(gpxFile, fileSize));
 	}
 }

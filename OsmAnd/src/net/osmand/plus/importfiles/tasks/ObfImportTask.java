@@ -41,7 +41,7 @@ public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String message) {
 		hideProgress();
-		notifyOnImportFinished();
+		notifyImportFinished();
 		app.showShortToastMessage(message);
 	}
 

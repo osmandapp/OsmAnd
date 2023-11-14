@@ -542,6 +542,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			recreate();
 			return;
 		}
+		importHelper.setUiActivity(this);
 
 		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();

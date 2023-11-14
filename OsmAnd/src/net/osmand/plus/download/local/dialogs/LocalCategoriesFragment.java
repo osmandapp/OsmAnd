@@ -30,7 +30,7 @@ import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
-import net.osmand.plus.importfiles.ImportTaskCallback;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
@@ -39,7 +39,8 @@ import java.util.List;
 import java.util.Map;
 
 
-public class LocalCategoriesFragment extends LocalBaseFragment implements DownloadEvents, LocalTypeListener, LoadItemsListener, ImportTaskCallback {
+public class LocalCategoriesFragment extends LocalBaseFragment implements DownloadEvents,
+		LocalTypeListener, LoadItemsListener, ImportTaskListener {
 
 	private MemoryInfo memoryInfo;
 	private Map<CategoryType, LocalCategory> categories;
@@ -128,7 +129,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	@Override
 	public void onResume() {
 		super.onResume();
-		app.getImportHelper().addImportTaskCallback(this);
+		app.getImportHelper().addImportTaskListener(this);
 		if (categories == null && (asyncLoader == null || asyncLoader.getStatus() == Status.FINISHED)) {
 			reloadData();
 		}
@@ -137,14 +138,14 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		app.getImportHelper().removeImportTaskCallback(this);
+		app.getImportHelper().removeImportTaskListener(this);
 		if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
 			asyncLoader.cancel(false);
 		}
 	}
 
 	@Override
-	public void onImportSuccessfullyFinished() {
+	public void onImportFinished() {
 		reloadData();
 	}
 

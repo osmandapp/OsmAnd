@@ -78,13 +78,14 @@ public class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 			}
 		} else {
 			hideProgress();
+			notifyImportFinished();
 			app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
 		}
 	}
 
 	private void onImportFinished(@NonNull String fileName) {
 		showSuccessSnackbar(fileName);
-		notifyOnImportFinished();
+		notifyImportFinished();
 	}
 
 	private void showSuccessSnackbar(@NonNull String filename) {

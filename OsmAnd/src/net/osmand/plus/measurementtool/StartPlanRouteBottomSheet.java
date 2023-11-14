@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 
@@ -25,9 +26,8 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
-import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.data.GPXInfo;
@@ -143,14 +143,16 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportListener(new GpxImportListener() {
-					@Override
-					public void onImportComplete(boolean success) {
-						finishImport(success);
-						importHelper.setGpxImportListener(null);
-					}
-				});
-				importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, false);
+				if (uri != null) {
+					importHelper.setGpxImportListener(new GpxImportListener() {
+						@Override
+						public void onImportComplete(boolean success) {
+							finishImport(success);
+							importHelper.setGpxImportListener(null);
+						}
+					});
+					importHelper.handleGpxImport(uri, OPEN_PLAN_ROUTE_FRAGMENT, false);
+				}
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

@@ -33,6 +33,7 @@ public class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String
 	@Override
 	protected void onPostExecute(String error) {
 		hideProgress();
+		notifyImportFinished();
 		if (error == null) {
 			FragmentActivity activity = activityRef.get();
 			OsmandRasterMapsPlugin plugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
@@ -41,7 +42,6 @@ public class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String
 				MapActivity mapActivity = (MapActivity) activity;
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, null);
 			}
-			notifyOnImportFinished();
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();

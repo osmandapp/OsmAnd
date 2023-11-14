@@ -93,7 +93,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile
 	@Override
 	protected void onPostExecute(GPXFile result) {
 		hideProgress();
-		notifyOnImportFinished();
+		notifyImportFinished();
 		FragmentActivity activity = activityRef.get();
 		if (activity != null) {
 			app.showToastMessage(R.string.fav_imported_sucessfully);

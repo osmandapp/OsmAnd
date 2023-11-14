@@ -27,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.ImportTaskCallback;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -54,7 +54,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskCallback {
+public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskListener {
 
 	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
 	private static final String DIALOG_TYPE = "dialog_type";
@@ -136,19 +136,13 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getImportHelper().addImportTaskCallback(this);
-		}
+		app.getImportHelper().addImportTaskListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getImportHelper().removeImportTaskCallback(this);
-		}
+		app.getImportHelper().removeImportTaskListener(this);
 	}
 
 	@Override
@@ -238,7 +232,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	}
 
 	@Override
-	public void onImportSuccessfullyFinished() {
+	public void onImportFinished() {
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof NavigationFragment) {
 			((NavigationFragment) targetFragment).updateRoutingProfiles();
