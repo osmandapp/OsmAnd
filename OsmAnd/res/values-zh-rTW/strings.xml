@@ -5514,7 +5514,7 @@
     <string name="key_event_action_previous_app_profile">上一個應用程式設定檔</string>
     <string name="show_toast_about_key_pressed">顯示關於按下鍵的浮動式訊息</string>
     <string name="key_event_action_move_left">向左移動</string>
-    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其連結至動作：%1$s</string>
+    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其分配給動作：%1$s</string>
     <string name="key_event_action_move_right">向右移動</string>
     <string name="shared_string_button">按鈕</string>
     <string name="key_event_action_next_app_profile">下一個應用程式設定檔</string>
@@ -5545,4 +5545,7 @@
     <string name="add_row">新增列</string>
     <string name="discard_changes_prompt">您確定您要放棄變更嗎？</string>
     <string name="row_number">列 %1$s</string>
+    <string name="tripltek_promo">Tripltek 促銷%1$s個月</string>
+    <string name="tripltek_promo_description">免費使用無限地圖下載、3D 地形陰影等功能%1$s個月</string>
+    <string name="see_all_plans">檢視所有方案</string>
 </resources>

@@ -4635,4 +4635,18 @@
     <string name="poi_socket_typee_output">Sockel: Typ E: Leistung</string>
     <string name="poi_dressing_room">Umkleideraum</string>
     <string name="poi_emergency_bay">Rettungsbucht</string>
+    <string name="poi_osmand_motor_vehicle_no">Zufahrt für Kraftfahrzeuge: nein</string>
+    <string name="poi_osmand_motorcar_no">PKW-Zufahrt: nein</string>
+    <string name="poi_osmand_vehicle_no">Zufahrt: nein</string>
+    <string name="poi_osmand_access_no">Zugang: nein</string>
+    <string name="poi_osmand_access_private">Zugang: privat</string>
+    <string name="poi_osmand_foot_private">Fußgängerzugang: privat</string>
+    <string name="poi_osmand_bicycle_private">Fahrradzufahrt: privat</string>
+    <string name="poi_osmand_motor_vehicle_private">Zufahrt für Kraftfahrzeuge: privat</string>
+    <string name="poi_osmand_foot_no">Fußgängerzugang: nein</string>
+    <string name="poi_osmand_bicycle_no">Fahrradzufahrt: nein</string>
+    <string name="poi_osmand_vehicle_private">Zufahrt: privat</string>
+    <string name="poi_osmand_motorcar_private">PKW-Zufahrt: privat</string>
+    <string name="poi_osmand_motorcycle_no">Motorradzufahrt: nein</string>
+    <string name="poi_osmand_motorcycle_private">Motorradzufahrt: privat</string>
 </resources>

@@ -4635,4 +4635,18 @@
     <string name="poi_socket_typee_yes">種類 E</string>
     <string name="poi_dressing_room">更衣室</string>
     <string name="poi_emergency_bay">避車彎</string>
+    <string name="poi_osmand_motor_vehicle_no">機動車輛進入：否</string>
+    <string name="poi_osmand_motorcar_no">汽車進入：否</string>
+    <string name="poi_osmand_vehicle_no">車輛進入：否</string>
+    <string name="poi_osmand_access_no">進入：否</string>
+    <string name="poi_osmand_access_private">進入：私人</string>
+    <string name="poi_osmand_foot_private">步行進入：私人</string>
+    <string name="poi_osmand_bicycle_private">腳踏車進入：私人</string>
+    <string name="poi_osmand_motor_vehicle_private">機動車輛進入：私人</string>
+    <string name="poi_osmand_foot_no">步行進入：否</string>
+    <string name="poi_osmand_bicycle_no">腳踏車進入：否</string>
+    <string name="poi_osmand_vehicle_private">車輛進入：私人</string>
+    <string name="poi_osmand_motorcar_private">汽車進入：私人</string>
+    <string name="poi_osmand_motorcycle_no">摩托車進入：否</string>
+    <string name="poi_osmand_motorcycle_private">摩托車進入：私人</string>
 </resources>
