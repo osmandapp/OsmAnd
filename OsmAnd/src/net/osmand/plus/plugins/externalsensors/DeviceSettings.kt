@@ -24,9 +24,7 @@ open class DeviceSettings(
 	constructor(settings: DeviceSettings) : this(
 		settings.deviceId, settings.deviceType, settings.deviceName,
 		settings.deviceEnabled) {
-		if (settings.additionalParams != null) {
-			additionalParams = settings.additionalParams
-		}
+		additionalParams = settings.additionalParams
 	}
 
 	fun setDeviceProperty(property: DeviceChangeableProperty, value: String) {
