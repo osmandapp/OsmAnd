@@ -224,6 +224,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 	}
 
+	@Override
+	protected boolean alwaysShowButtons(){
+		return false;
+	}
+
 	private OnNeedScrollListener createScrollListener() {
 		return new OnNeedScrollListener() {
 
