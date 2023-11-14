@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBikeSensor;
 import net.osmand.util.Algorithms;
 
@@ -25,8 +25,8 @@ public class BLEBikeSCDDevice extends BLEAbstractDevice {
 
 	@NonNull
 	@Override
-	public List<DeviceChangeableProperties> getChangeableProperties() {
-		return Collections.singletonList(DeviceChangeableProperties.WHEEL_CIRCUMFERENCE);
+	public List<DeviceChangeableProperty> getChangeableProperties() {
+		return Collections.singletonList(DeviceChangeableProperty.WHEEL_CIRCUMFERENCE);
 	}
 
 	@NonNull
@@ -45,8 +45,8 @@ public class BLEBikeSCDDevice extends BLEAbstractDevice {
 	}
 
 	@Override
-	public void setChangeableProperty(DeviceChangeableProperties property, String value) {
-		if (property == DeviceChangeableProperties.WHEEL_CIRCUMFERENCE && Algorithms.isFloat(value, true)) {
+	public void setChangeableProperty(DeviceChangeableProperty property, String value) {
+		if (property == DeviceChangeableProperty.WHEEL_CIRCUMFERENCE && Algorithms.isFloat(value, true)) {
 			setWheelCircumference(Float.parseFloat(value));
 		} else {
 			super.setChangeableProperty(property, value);

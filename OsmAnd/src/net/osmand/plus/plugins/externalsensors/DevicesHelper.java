@@ -1,10 +1,6 @@
 package net.osmand.plus.plugins.externalsensors;
 
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.WHEEL_CIRCUMFERENCE;
-import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_METERS;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +24,6 @@ import android.os.ParcelUuid;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc;
@@ -56,25 +51,18 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -90,7 +78,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			BLEHeartRateDevice.getServiceUUID(),
 			BLERunningSCDDevice.getServiceUUID(),
 			BLETemperatureDevice.getServiceUUID());
-	public static final double METER_TO_INCH_SCALE = 39.37;
 
 	private final OsmandApplication app;
 	private final DevicesSettingsCollection devicesSettingsCollection;
@@ -173,7 +160,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		String deviceId = device.getDeviceId();
 		DeviceSettings deviceSettings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (deviceSettings != null) {
-			for (DeviceChangeableProperties property : deviceSettings.getAdditionalParams().keySet()) {
+			for (DeviceChangeableProperty property : deviceSettings.getAdditionalParams().keySet()) {
 				device.setChangeableProperty(property, deviceSettings.getAdditionalParams().get(property));
 			}
 		}
@@ -437,7 +424,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 					if (!isDeviceEnabled(device)) {
 						updateDevice(activity, device);
 					} else {
-						app.showShortToastMessage(R.string.device_connected, getDeviceProperty(device, NAME));
+						app.showShortToastMessage(R.string.device_connected, getFormattedDevicePropertyValue(device, NAME));
 					}
 				}
 				break;
@@ -465,7 +452,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	@Override
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
-		app.showShortToastMessage(R.string.device_disconnected, getDeviceProperty(device, NAME));
+		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
 	}
 
 	@Override
@@ -496,7 +483,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 					updateDeviceProperties(device);
-					setupWriteDeviceDataToTrack(device);
+					externalSensorsPlugin.onDevicePaired(device);
 				}
 			}
 			//connectDevice(activity, device);
@@ -507,23 +494,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				mapActivity.updateApplicationModeSettings();
 			}
 		});
-	}
-
-	private void setupWriteDeviceDataToTrack(@NonNull AbstractDevice<?> device) {
-		for (AbstractSensor sensor : device.getSensors()) {
-			for (SensorWidgetDataFieldType widgetDataFieldType : sensor.getSupportedWidgetDataFieldTypes()) {
-				WriteToGpxWidgetType widgetType = WriteToGpxWidgetType.Companion.getBySensorWidgetDataFieldType(widgetDataFieldType);
-				if (widgetType != null) {
-					CommonPreference<String> preference = externalSensorsPlugin.getPrefSettingsForWidgetType(widgetType);
-					for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-						String deviceId = preference.getModeValue(appMode);
-						if (Algorithms.isEmpty(deviceId)) {
-							preference.setModeValue(appMode, device.getDeviceId());
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public boolean isDeviceEnabled(@NonNull AbstractDevice<?> device) {
@@ -546,46 +516,14 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@NonNull
-	public String getDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property) {
+	public String getFormattedDevicePropertyValue(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property) {
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(device.getDeviceId());
 		String value = settings != null ? settings.getAdditionalParams().get(property) : null;
-		if (value == null) {
-			value = "";
-		}
-		String formattedValue = value;
-		if (property == DeviceChangeableProperties.WHEEL_CIRCUMFERENCE) {
-			float floatValue = WheelDeviceSettings.DEFAULT_WHEEL_CIRCUMFERENCE;
-			if (settings != null && Algorithms.isFloat(value, true)) {
-				floatValue = Float.parseFloat(value.replace(",", "."));
-			}
-			if (!isMetricSelected()) {
-				floatValue *= METER_TO_INCH_SCALE;
-			}
-			formattedValue = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US)).format(floatValue);
-		}
-		return formattedValue;
+		return property.getFormattedValue(app, value);
 	}
 
-	@StringRes
-	public int getPropertyMetric(@NonNull DeviceChangeableProperties property, boolean shortForm) {
-		int metricResId = 0;
-		if (property == WHEEL_CIRCUMFERENCE) {
-			metricResId = isMetricSelected() ?
-					(shortForm ? R.string.m : R.string.shared_string_meters) :
-					(shortForm ? R.string.inch : R.string.shared_string_inches);
-		}
-		return metricResId;
-	}
-
-	private boolean isMetricSelected() {
-		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		return mc == KILOMETERS_AND_METERS ||
-				mc == MILES_AND_METERS ||
-				mc == NAUTICAL_MILES_AND_METERS;
-	}
-
-	public void setDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property, @NonNull String value) {
-		String normalizedValue = normalizePropertyValue(property, value);
+	public void setDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property, @NonNull String value) {
+		String normalizedValue = property.normalizeValue(app, value);
 		String deviceId = device.getDeviceId();
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (settings == null) {
@@ -593,21 +531,11 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), false);
 			}
 		}
-		settings.setDeviceProperty(property, normalizedValue);
-		device.setChangeableProperty(property, value);
-		devicesSettingsCollection.setDeviceSettings(deviceId, settings);
-	}
-
-	private String normalizePropertyValue(@NonNull DeviceChangeableProperties property, @NonNull String value) {
-		String normalizedValue = value;
-		if (property == WHEEL_CIRCUMFERENCE && Algorithms.isFloat(value, true)) {
-			float floatValue = Float.parseFloat(value.replace(",", "."));
-			if (!isMetricSelected()) {
-				floatValue /= METER_TO_INCH_SCALE;
-			}
-			normalizedValue = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US)).format(floatValue);
+		if (settings != null) {
+			settings.setDeviceProperty(property, normalizedValue);
+			device.setChangeableProperty(property, value);
+			devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 		}
-		return normalizedValue;
 	}
 
 	@Override

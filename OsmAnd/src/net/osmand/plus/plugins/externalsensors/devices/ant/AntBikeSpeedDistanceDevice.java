@@ -15,7 +15,7 @@ import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.externalsensors.DeviceType;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeDistanceSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeSpeedSensor;
@@ -101,13 +101,13 @@ public class AntBikeSpeedDistanceDevice extends AntLegacyDevice<AntPlusBikeSpeed
 
 	@NonNull
 	@Override
-	public List<DeviceChangeableProperties> getChangeableProperties() {
-		return Collections.singletonList(DeviceChangeableProperties.WHEEL_CIRCUMFERENCE);
+	public List<DeviceChangeableProperty> getChangeableProperties() {
+		return Collections.singletonList(DeviceChangeableProperty.WHEEL_CIRCUMFERENCE);
 	}
 
 	@Override
-	public void setChangeableProperty(DeviceChangeableProperties property, String value) {
-		if (property == DeviceChangeableProperties.WHEEL_CIRCUMFERENCE) {
+	public void setChangeableProperty(DeviceChangeableProperty property, String value) {
+		if (property == DeviceChangeableProperty.WHEEL_CIRCUMFERENCE) {
 			if (Algorithms.isFloat(value)) {
 				setWheelCircumference(Float.parseFloat(value));
 			}

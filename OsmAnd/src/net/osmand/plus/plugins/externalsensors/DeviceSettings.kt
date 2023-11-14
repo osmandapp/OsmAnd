@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors
 
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty
 import net.osmand.util.Algorithms
 
 open class DeviceSettings(
@@ -11,7 +11,7 @@ open class DeviceSettings(
 	private var deviceName: String
 	var deviceEnabled: Boolean
 	var additionalParams =
-		mutableMapOf(DeviceChangeableProperties.NAME to deviceName)
+		mutableMapOf(DeviceChangeableProperty.NAME to deviceName)
 
 	init {
 		require(!Algorithms.isEmpty(deviceId)) { "Device ID is empty" }
@@ -29,7 +29,7 @@ open class DeviceSettings(
 		}
 	}
 
-	fun setDeviceProperty(property: DeviceChangeableProperties, value: String) {
+	fun setDeviceProperty(property: DeviceChangeableProperty, value: String) {
 		if (additionalParams.containsKey(property)) {
 			additionalParams[property] = value
 		}

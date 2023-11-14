@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors
 
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty
 
 class WheelDeviceSettings : DeviceSettings {
 	companion object {
@@ -12,13 +12,13 @@ class WheelDeviceSettings : DeviceSettings {
 		deviceName: String, deviceEnabled: Boolean) : super(
 		deviceId, deviceType,
 		deviceName, deviceEnabled) {
-		additionalParams[DeviceChangeableProperties.WHEEL_CIRCUMFERENCE] =
+		additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
 			DEFAULT_WHEEL_CIRCUMFERENCE.toString()
 	}
 
 	constructor(settings: DeviceSettings) : super(settings) {
-		if (!additionalParams.containsKey(DeviceChangeableProperties.WHEEL_CIRCUMFERENCE)) {
-			additionalParams[DeviceChangeableProperties.WHEEL_CIRCUMFERENCE] =
+		if (!additionalParams.containsKey(DeviceChangeableProperty.WHEEL_CIRCUMFERENCE)) {
+			additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
 				DEFAULT_WHEEL_CIRCUMFERENCE.toString()
 		}
 	}
