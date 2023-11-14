@@ -8,7 +8,7 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty
 import net.osmand.plus.plugins.externalsensors.viewholders.DeviceCharacteristicsViewHolder
 import net.osmand.plus.utils.UiUtilities
 
@@ -18,7 +18,7 @@ class ChangeableCharacteristicsAdapter(
 	private val device: AbstractDevice<*>,
 	private val propertyClickedListener: OnPropertyClickedListener) :
 	RecyclerView.Adapter<DeviceCharacteristicsViewHolder>() {
-	private val items: List<DeviceChangeableProperties> = device.changeableProperties
+	private val items: List<DeviceChangeableProperty> = device.changeableProperties
 	private val plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin::class.java)
 
 	override fun onCreateViewHolder(
@@ -33,14 +33,14 @@ class ChangeableCharacteristicsAdapter(
 		val property = items[position]
 		holder.name.text = app.getString(property.displayNameResId)
 		AndroidUiHelper.updateVisibility(holder.divider, true)
-		val value = plugin.getDeviceProperty(device, property)
-		val metric = plugin.getPropertyMetric(property, true)
-		if (metric == 0) {
+		val value = plugin.getFormattedDevicePropertyValue(device, property)
+		val unitsId = property.getUnitsResId(app, true)
+		if (unitsId == 0) {
 			holder.value.text = value
 		} else {
-			val metricText = app.getString(metric)
+			val unitsStr = app.getString(unitsId)
 			holder.value.text =
-				app.getString(R.string.ltr_or_rtl_combine_via_space, value, metricText)
+				app.getString(R.string.ltr_or_rtl_combine_via_space, value, unitsStr)
 		}
 		holder.itemView.setOnClickListener { propertyClickedListener.onPropertyClicked(property) }
 	}
@@ -50,6 +50,6 @@ class ChangeableCharacteristicsAdapter(
 	}
 
 	interface OnPropertyClickedListener {
-		fun onPropertyClicked(property: DeviceChangeableProperties)
+		fun onPropertyClicked(property: DeviceChangeableProperty)
 	}
 }
