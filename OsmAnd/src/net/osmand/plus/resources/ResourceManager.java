@@ -123,10 +123,17 @@ public class ResourceManager {
 	private boolean reloadingIndexes;
 
 	public interface ResourceListener {
-		default void onMapsIndexed() {}
-		default void onReaderIndexed(BinaryMapIndexReader reader) {}
-		default void onReaderClosed(BinaryMapIndexReader reader) {}
-		default void onMapClosed(String fileName) {}
+		default void onMapsIndexed() {
+		}
+
+		default void onReaderIndexed(BinaryMapIndexReader reader) {
+		}
+
+		default void onReaderClosed(BinaryMapIndexReader reader) {
+		}
+
+		default void onMapClosed(String fileName) {
+		}
 	}
 
 	// Indexes
@@ -895,6 +902,7 @@ public class ResourceManager {
 		File roadsPath = context.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		roadsPath.mkdirs();
 
+		collectFiles(context.getAppInternalPath(IndexConstants.HIDDEN_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);

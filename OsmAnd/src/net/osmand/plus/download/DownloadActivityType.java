@@ -183,44 +183,47 @@ public class DownloadActivityType {
 		return false;
 	}
 
-	public File getDownloadFolder(OsmandApplication ctx, IndexItem indexItem) {
+	public File getDownloadFolder(OsmandApplication app, IndexItem indexItem) {
+		if (indexItem.isHidden) {
+			return app.getAppInternalPath(IndexConstants.HIDDEN_DIR);
+		}
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-				return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+				return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 			}
-			return ctx.getAppPath(IndexConstants.MAPS_PATH);
+			return app.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (VOICE_FILE == this) {
-			return ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+			return app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		} else if (FONT_FILE == this) {
-			return ctx.getAppPath(IndexConstants.FONT_INDEX_DIR);
+			return app.getAppPath(IndexConstants.FONT_INDEX_DIR);
 		} else if (ROADS_FILE == this) {
-			return ctx.getAppPath(IndexConstants.ROADS_INDEX_DIR);
+			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		} else if (SRTM_COUNTRY_FILE == this) {
-			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+			return app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 		} else if (WIKIPEDIA_FILE == this) {
-			return ctx.getAppPath(IndexConstants.WIKI_INDEX_DIR);
+			return app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
 		} else if (WIKIVOYAGE_FILE == this || TRAVEL_FILE == this) {
-			return ctx.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+			return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 		} else if (LIVE_UPDATES_FILE == this) {
-			return ctx.getAppPath(IndexConstants.LIVE_INDEX_DIR);
+			return app.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		} else if (HILLSHADE_FILE == this) {
-			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+			return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (SLOPE_FILE == this) {
-			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+			return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (HEIGHTMAP_FILE_LEGACY == this) {
-			return ctx.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+			return app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
 		} else if (GEOTIFF_FILE == this) {
-			return ctx.getAppPath(IndexConstants.GEOTIFF_DIR);
+			return app.getAppPath(IndexConstants.GEOTIFF_DIR);
 		} else if (DEPTH_CONTOUR_FILE == this) {
-			return ctx.getAppPath(IndexConstants.MAPS_PATH);
+			return app.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (GPX_FILE == this) {
-			return ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			return app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		} else if (SQLITE_FILE == this) {
-			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+			return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (DEPTH_MAP_FILE == this) {
-			return ctx.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
+			return app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 		} else if (WEATHER_FORECAST == this) {
-			return ctx.getAppPath(WEATHER_FORECAST_DIR);
+			return app.getAppPath(WEATHER_FORECAST_DIR);
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -353,13 +356,14 @@ public class DownloadActivityType {
 			return null;
 		}
 		String size = parser.getAttributeValue(null, "size");
+		boolean isHidden = Boolean.parseBoolean(parser.getAttributeValue(null, "isHidden"));
 		String description = parser.getAttributeValue(null, "description");
 		long containerSize = Algorithms.parseLongSilently(parser.getAttributeValue(null, "containerSize"), 0);
 		long contentSize = Algorithms.parseLongSilently(parser.getAttributeValue(null, "contentSize"), 0);
 		long timestamp = Algorithms.parseLongSilently(parser.getAttributeValue(null, "timestamp"), 0);
 		boolean free = Boolean.parseBoolean(parser.getAttributeValue(null, "free"));
 		String freeMessage = parser.getAttributeValue(null, "freeMessage");
-		IndexItem item = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this, free, freeMessage);
+		IndexItem item = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this, free, freeMessage, isHidden);
 		item.extra = FileNameTranslationHelper.getStandardMapName(app, item.getBasename().toLowerCase()) != null;
 		return item;
 	}

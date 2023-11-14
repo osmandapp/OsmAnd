@@ -35,8 +35,9 @@ public class CustomIndexItem extends IndexItem {
 	                       Map<String, String> firstSubNames,
 	                       Map<String, String> secondSubNames,
 	                       @NonNull DownloadActivityType type,
-	                       DownloadDescriptionInfo descriptionInfo) {
-		super(fileName, null, timestamp, size, contentSize, containerSize, type, false, null);
+	                       DownloadDescriptionInfo descriptionInfo,
+	                       boolean isHidden) {
+		super(fileName, null, timestamp, size, contentSize, containerSize, type, false, null, isHidden);
 		this.names = names;
 		this.firstSubNames = firstSubNames;
 		this.secondSubNames = secondSubNames;
@@ -113,6 +114,7 @@ public class CustomIndexItem extends IndexItem {
 		private Map<String, String> firstSubNames;
 		private Map<String, String> secondSubNames;
 		private DownloadActivityType type;
+		private boolean isHidden;
 
 		private DownloadDescriptionInfo descriptionInfo;
 
@@ -176,6 +178,11 @@ public class CustomIndexItem extends IndexItem {
 			return this;
 		}
 
+		public CustomIndexItemBuilder setIsHidden(boolean isHidden) {
+			this.isHidden = isHidden;
+			return this;
+		}
+
 		public CustomIndexItem create() {
 			return new CustomIndexItem(fileName,
 					subfolder,
@@ -188,7 +195,8 @@ public class CustomIndexItem extends IndexItem {
 					firstSubNames,
 					secondSubNames,
 					type,
-					descriptionInfo);
+					descriptionInfo,
+					isHidden);
 		}
 	}
 }

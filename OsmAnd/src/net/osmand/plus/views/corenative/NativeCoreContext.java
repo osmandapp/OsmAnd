@@ -69,6 +69,7 @@ public class NativeCoreContext {
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.setIndexCacheFile(cacheFilePath);
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
+				obfsCollection.addDirectory(app.getAppInternalPath(IndexConstants.HIDDEN_DIR).getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.LIVE_INDEX_DIR).getAbsolutePath(), false);
 				if (app.getSettings().SHOW_TRAVEL.get()) {
@@ -85,11 +86,11 @@ public class NativeCoreContext {
 					}
 					obfsCollection.addDirectory(nauticalIndexDir.getAbsolutePath(), false);
 				}
-				if (PluginsHelper.isActive(SRTMPlugin.class) ||	InAppPurchaseUtils.isContourLinesAvailable(app)) {
+				if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(app)) {
 					File srtmIndexDir = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 					if (!srtmIndexDir.exists()) {
 						srtmIndexDir.mkdir();
-					}			
+					}
 					obfsCollection.addDirectory(srtmIndexDir.getAbsolutePath(), false);
 
 					contourLinesObfsCollection = new ObfsCollection();

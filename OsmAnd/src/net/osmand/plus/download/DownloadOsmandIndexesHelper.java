@@ -228,7 +228,7 @@ public class DownloadOsmandIndexesHelper {
 			File destFile = new File(voiceDirPath, ttsIndexFolder + "/" + lang + "_tts.js");
 			IndexItem ttsIndex = new AssetIndexItem(lang + "_" + TTSVOICE_INDEX_EXT_JS,
 					"voice", installDate, "0.1", destFile.length(), asset.source,
-					destFile.getPath(), VOICE_FILE);
+					destFile.getPath(), VOICE_FILE, false);
 			ttsIndex.setDownloaded(destFile.exists());
 			defaultTTS.add(ttsIndex);
 		}
@@ -264,7 +264,7 @@ public class DownloadOsmandIndexesHelper {
 				String fileName = item.getFileName().replace("-", "_") + ".js";
 				File file = new File(voiceDirPath, item.getFileName() + "/" + fileName);
 				IndexItem customVoiceIndex = new AssetIndexItem(fileName, "voice", installDate, "0.1",
-						file.length(), "", file.getPath(), VOICE_FILE);
+						file.length(), "", file.getPath(), VOICE_FILE, false);
 				customVoiceIndex.setDownloaded(true);
 				customTTS.add(customVoiceIndex);
 			}
@@ -292,7 +292,7 @@ public class DownloadOsmandIndexesHelper {
 			File ttsFile = new File(voiceDirPath, item.getFileName() + "/" + ttsFileName);
 			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
-					"", 0, 0, VOICE_FILE, false, null);
+					"", 0, 0, VOICE_FILE, false, null, false);
 			localRecordedVoiceIndex.setDownloaded(true);
 			recordedVoiceList.add(localRecordedVoiceIndex);
 		}
@@ -379,8 +379,8 @@ public class DownloadOsmandIndexesHelper {
 		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, long dateModified, String size,
-		                      long sizeL, String assetName, String destFile, DownloadActivityType type) {
-			super(fileName, description, dateModified, size, sizeL, sizeL, type, false, null);
+		                      long sizeL, String assetName, String destFile, DownloadActivityType type, boolean isHidden) {
+			super(fileName, description, dateModified, size, sizeL, sizeL, type, false, null, isHidden);
 			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;

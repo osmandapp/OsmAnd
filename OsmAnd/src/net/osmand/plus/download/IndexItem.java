@@ -32,6 +32,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	long contentSize;
 	long containerSize;
 	boolean extra;
+	boolean isHidden;
 	
 	// Update information
 	boolean outdated;
@@ -48,7 +49,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	                 long containerSize,
 	                 @NonNull DownloadActivityType type,
 	                 boolean free,
-	                 String freeMessage) {
+	                 String freeMessage,
+	                 boolean isHidden) {
 		super(type);
 		this.fileName = fileName;
 		this.description = description;
@@ -58,6 +60,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		this.containerSize = containerSize;
 		this.free = free;
 		this.freeMessage = freeMessage;
+		this.isHidden = isHidden;
 	}
 
 	public void updateSize(@NonNull String size, long contentSize, long containerSize) {
