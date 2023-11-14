@@ -125,7 +125,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		}
 
 		DownloadActivity activity = requireDownloadActivity();
-		importHelper = new ImportHelper(activity);
+		importHelper = app.getImportHelper();
 		groupMenuProvider = new GroupMenuProvider(activity, this);
 		itemMenuProvider = new ItemMenuProvider(activity, this);
 		itemMenuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
@@ -350,7 +350,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		LocalGroup group = getGroup();
 		if (type == DELETE_OPERATION && group != null) {
 			for (LocalItem item : values) {
-				group.getItems().remove(item);
+				group.removeItem(item);
 			}
 		}
 		if (isAdded()) {

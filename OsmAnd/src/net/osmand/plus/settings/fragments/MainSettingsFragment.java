@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.backup.ui.BackupUiUtils.getLastBackupTimeDescription;
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
@@ -153,7 +153,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		} else if (IMPORT_FROM_FILE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS);
 				return true;
 			}
 		}

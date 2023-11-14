@@ -1,7 +1,6 @@
 package net.osmand.plus.importfiles;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 
 public abstract class MultipleTracksImportListener implements GpxImportListener {
 

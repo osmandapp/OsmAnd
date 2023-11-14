@@ -31,6 +31,14 @@ public class LocalGroup {
 		return type.toHumanString(context);
 	}
 
+	public void addItem(@NonNull LocalItem localItem) {
+		items.add(localItem);
+	}
+
+	public void removeItem(@NonNull LocalItem localItem) {
+		items.remove(localItem);
+	}
+
 	public long getSize() {
 		long size = 0;
 		for (LocalItem item : items) {

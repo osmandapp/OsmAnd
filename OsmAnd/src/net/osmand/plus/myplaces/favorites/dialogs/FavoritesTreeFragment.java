@@ -120,7 +120,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesAdapter = new FavouritesAdapter();
-		importHelper = new ImportHelper(requireActivity());
+		importHelper = app.getImportHelper();
 
 		helper = app.getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
