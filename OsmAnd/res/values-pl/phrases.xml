@@ -2541,7 +2541,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neurochirurgia</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsychiatria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrynologia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medycyna nuklearna</string>
+    <string name="poi_healthcare_speciality_nuclear">Medycyna nuklearna</string>
     <string name="poi_healthcare_speciality_pathology">Patomorfologia</string>
     <string name="poi_healthcare_speciality_oncology">Onkologia</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Medycyna tropikalna</string>
@@ -2554,12 +2554,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Specjalizacja: pediatria społeczna: nie</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Położnictwo (cesarskie cięcie)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Specjalizacja: położnictwo (cesarskie cięcie): nie</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Medycyna uzależnień</string>
+    <string name="poi_healthcare_speciality_addiction">Medycyna uzależnień</string>
     <string name="poi_healthcare_speciality_optometry">Optometria</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Medycyna laboratoryjna</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopedia</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manualna</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medycyna sportowa</string>
+    <string name="poi_healthcare_speciality_sports">Medycyna sportowa</string>
     <string name="poi_healthcare_speciality_podiatry">Podologia</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psychiatria dorosłych</string>
     <string name="poi_healthcare_speciality_acupuncture">Akupunktura</string>
@@ -2569,7 +2569,7 @@
     <string name="poi_healthcare_speciality_herbalism">Ziołolecznictwo</string>
     <string name="poi_healthcare_speciality_chiropractic">Chiropraktyka</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatia</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psychologia głębi</string>
+    <string name="poi_healthcare_speciality_depth">Psychologia głębi</string>
     <string name="poi_healthcare_speciality_behavior">Behawioryzm</string>
     <string name="poi_medical_system_western_yes">Zachodni</string>
     <string name="poi_medical_system_chinese_yes">Paramedycyna chińska</string>

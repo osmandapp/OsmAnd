@@ -2662,7 +2662,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Неурохирургија</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Неуропсихијатрија</string>
     <string name="poi_healthcare_speciality_endocrinology">Ендокринологија</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Нуклеарна медиција</string>
+    <string name="poi_healthcare_speciality_nuclear">Нуклеарна медиција</string>
     <string name="poi_healthcare_speciality_pathology">Патологија</string>
     <string name="poi_healthcare_speciality_oncology">Онкологија</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Тропска медицина</string>
@@ -2675,12 +2675,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Медицинска специјализација: друштвена педијатрија: не</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Акушерство (царски рез)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Медицинска специјализација: акушерство (царски рез): не</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Лечење болести зависности</string>
+    <string name="poi_healthcare_speciality_addiction">Лечење болести зависности</string>
     <string name="poi_healthcare_speciality_optometry">Оптометрија</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Клиничка патологија</string>
     <string name="poi_healthcare_speciality_speech_therapy">Логопед</string>
     <string name="poi_healthcare_speciality_manual_therapy">Спортска масажа</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Спортска медицина</string>
+    <string name="poi_healthcare_speciality_sports">Спортска медицина</string>
     <string name="poi_healthcare_speciality_acupuncture">Акупунктура</string>
     <string name="poi_healthcare_speciality_homeopathy">Хомеопатија</string>
     <string name="poi_healthcare_speciality_traditional_chinese_medicine">Традиционална кинеска медицина</string>
@@ -2688,7 +2688,7 @@
     <string name="poi_healthcare_speciality_herbalism">Траварство</string>
     <string name="poi_healthcare_speciality_chiropractic">Киропрактичар</string>
     <string name="poi_healthcare_speciality_naturopathy">Натуропатија</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Дубинска психологија</string>
+    <string name="poi_healthcare_speciality_depth">Дубинска психологија</string>
     <string name="poi_healthcare_speciality_behavior">Бихејвиорална терапија</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Палијативна медицина</string>
     <string name="poi_building_type_pyramid">Тип зграде: пирамида</string>

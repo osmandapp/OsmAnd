@@ -2288,7 +2288,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neiroķirurģija</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neiropsihiatrija</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinoloģija</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Kodolmedicīna</string>
+    <string name="poi_healthcare_speciality_nuclear">Kodolmedicīna</string>
     <string name="poi_healthcare_speciality_pathology">Patoloģiskā anatomija</string>
     <string name="poi_healthcare_speciality_oncology">Onkoloģija</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Tropiskā medicīna</string>
@@ -2297,12 +2297,12 @@
     <string name="poi_health_specialty_obstetrics_postnatal_no">Specialitāte: dzemdniecība: nav</string>
     <string name="poi_healthcare_speciality_social_paediatrics">Sociālā pediatrija</string>
     <string name="poi_health_specialty_social_paediatrics_no">Specialitāte: sociālā pediatrija: nav</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Narkoloģija</string>
+    <string name="poi_healthcare_speciality_addiction">Narkoloģija</string>
     <string name="poi_healthcare_speciality_optometry">Optometrija</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klīniskā pataloģija</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopēdija</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manuālā terapija</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Sporta medicīna</string>
+    <string name="poi_healthcare_speciality_sports">Sporta medicīna</string>
     <string name="poi_healthcare_speciality_podiatry">Podoloģija</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Pieaugušo psihiatrija</string>
     <string name="poi_healthcare_speciality_acupuncture">Akupunktūra</string>
@@ -2312,7 +2312,7 @@
     <string name="poi_healthcare_speciality_herbalism">Herbālisms</string>
     <string name="poi_healthcare_speciality_chiropractic">Hiropraktika</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopātija</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Dziļā psiholoģija</string>
+    <string name="poi_healthcare_speciality_depth">Dziļā psiholoģija</string>
     <string name="poi_healthcare_speciality_behavior">Uzvedības psihoterapija</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Specialitāte: paliatīvā medicīna</string>
     <string name="poi_building_type_pyramid">Celtnes tips: piramīda</string>

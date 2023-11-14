@@ -2468,7 +2468,7 @@
     <string name="poi_building_type_pyramid">Bina türü: piramit</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Palyatif tıp</string>
     <string name="poi_healthcare_speciality_behavior">Davranış</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Derinlik psikolojisi</string>
+    <string name="poi_healthcare_speciality_depth">Derinlik psikolojisi</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopati</string>
     <string name="poi_healthcare_speciality_chiropractic">Kayropraktik</string>
     <string name="poi_healthcare_speciality_herbalism">Bitkisel tıp</string>
@@ -2478,12 +2478,12 @@
     <string name="poi_healthcare_speciality_acupuncture">Akupunktur</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Yetişkin psikiyatrisi</string>
     <string name="poi_healthcare_speciality_podiatry">Podoloji</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Spor hekimliği</string>
+    <string name="poi_healthcare_speciality_sports">Spor hekimliği</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manuel terapi</string>
     <string name="poi_healthcare_speciality_speech_therapy">Konuşma terapisi</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klinik patoloji</string>
     <string name="poi_healthcare_speciality_optometry">Optometri</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Bağımlılık tedavisi</string>
+    <string name="poi_healthcare_speciality_addiction">Bağımlılık tedavisi</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Sağlık uzmanlığı: obstetrik (sezaryen): hayır</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrik (sezaryen)</string>
     <string name="poi_health_specialty_social_paediatrics_no">Sağlık uzmanlığı: sosyal pediatri: hayır</string>
@@ -2496,7 +2496,7 @@
     <string name="poi_healthcare_speciality_tropical_medicine">Tropikal tıp</string>
     <string name="poi_healthcare_speciality_oncology">Onkoloji</string>
     <string name="poi_healthcare_speciality_pathology">Patolojik anatomi</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nükleer tıp</string>
+    <string name="poi_healthcare_speciality_nuclear">Nükleer tıp</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinoloji</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Nöropsikiyatri</string>
     <string name="poi_healthcare_speciality_neurosurgery">Beyin ve sinir cerrahisi</string>

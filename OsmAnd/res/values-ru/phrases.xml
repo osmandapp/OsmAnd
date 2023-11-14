@@ -2349,7 +2349,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Нейрохирургия</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Нейропсихиатрия</string>
     <string name="poi_healthcare_speciality_endocrinology">Эндокринология</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Ядерная медицина</string>
+    <string name="poi_healthcare_speciality_nuclear">Ядерная медицина</string>
     <string name="poi_healthcare_speciality_pathology">Патанатомия</string>
     <string name="poi_healthcare_speciality_oncology">Онкология</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Тропическая медицина</string>
@@ -2357,12 +2357,12 @@
     <string name="poi_healthcare_speciality_obstetrics_antenatal">Акушерство (дородовое)</string>
     <string name="poi_healthcare_speciality_social_paediatrics">Социальная педиатрия</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Акушерство (кесарево сечение)</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Наркология</string>
+    <string name="poi_healthcare_speciality_addiction">Наркология</string>
     <string name="poi_healthcare_speciality_optometry">Оптометрия</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Клиническая патология</string>
     <string name="poi_healthcare_speciality_speech_therapy">Логопед</string>
     <string name="poi_healthcare_speciality_manual_therapy">Мануальная терапия</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Спортивная медицина</string>
+    <string name="poi_healthcare_speciality_sports">Спортивная медицина</string>
     <string name="poi_healthcare_speciality_podiatry">Подология</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Психиатрия для взрослых</string>
     <string name="poi_healthcare_speciality_acupuncture">Акупунктура</string>
@@ -2372,7 +2372,7 @@
     <string name="poi_healthcare_speciality_herbalism">Травничество</string>
     <string name="poi_healthcare_speciality_chiropractic">Хиропрактика</string>
     <string name="poi_healthcare_speciality_naturopathy">Натуропатия</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Глубинная психология</string>
+    <string name="poi_healthcare_speciality_depth">Глубинная психология</string>
     <string name="poi_healthcare_speciality_behavior">Бихевиоральная (поведенческая) психотерапия</string>
     <string name="poi_health_specialty_paediatrics_no">Специализация: педиатрия: отсутствует</string>
     <string name="poi_health_specialty_emergency_medicine_no">Специализация: скорая и неотложная помощь: отсутствует</string>
