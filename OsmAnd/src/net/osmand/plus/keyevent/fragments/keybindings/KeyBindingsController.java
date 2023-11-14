@@ -41,7 +41,7 @@ class KeyBindingsController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null || inputDevice.getCommandsCount() == 0) {
+		if (inputDevice == null || inputDevice.getActionsCount() == 0) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();

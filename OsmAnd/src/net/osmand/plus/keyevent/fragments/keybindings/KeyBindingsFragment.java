@@ -79,7 +79,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		});
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(getString(R.string.key_bindings));
+		title.setText(R.string.key_assignments);
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);

@@ -1,7 +1,5 @@
 package net.osmand.plus.keyevent;
 
-import android.view.KeyEvent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -170,20 +168,13 @@ public class InputDeviceHelper {
 	}
 
 	public void updateKeyBinding(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                             int originalKeyCode, @NonNull KeyBinding newKeyBinding) {
+	                             @NonNull KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
 		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
-		if (device == null) {
-			return;
+		if (device != null) {
+			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
+			syncSettings(EventType.UPDATE_KEYBINDING);
 		}
-		if (newKeyBinding.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) {
-			device.removeKeyBinding(originalKeyCode);
-		} else if (originalKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			device.addKeyBinding(newKeyBinding);
-		} else {
-			device.updateKeyBinding(originalKeyCode, newKeyBinding);
-		}
-		syncSettings(EventType.UPDATE_KEYBINDING);
 	}
 
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
