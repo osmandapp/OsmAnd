@@ -84,8 +84,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
-			c = HHRoutingConfig.dijkstra(0); 
-//			c = HHRoutingConfig.astar(1);
+			c = HHRoutingConfig.dijkstra(-1); 
+			c = HHRoutingConfig.astar(-1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
@@ -97,6 +97,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
+//			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
 		return c;
 	}
@@ -423,10 +424,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	protected T runRoutingPointToPoint(HHRoutingContext<T> hctx, T start, T end) throws SQLException {
 		if (start != null) {
-			addPointToQueue(hctx, hctx.queue, false, start, null, 0, MINIMAL_COST);
+			addPointToQueue(hctx, hctx.queue(false), false, start, null, 0, MINIMAL_COST);
 		}
 		if (end != null) {
-			addPointToQueue(hctx, hctx.queue, true, end, null, 0, MINIMAL_COST);
+			addPointToQueue(hctx, hctx.queue(true), true, end, null, 0, MINIMAL_COST);
 		}
 		return runRoutingWithInitQueue(hctx);
 
@@ -439,7 +440,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				continue;
 			}
 			double cost = start.rt(false).rtCost;
-			addPointToQueue(hctx, hctx.queue, false, start, null, start.rt(false).rtDistanceFromStart,
+			addPointToQueue(hctx, hctx.queue(false), false, start, null, start.rt(false).rtDistanceFromStart,
 					cost <= 0 ? MINIMAL_COST : cost);
 		}
 		for (T end : endPoints.valueCollection()) {
@@ -447,15 +448,43 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				continue;
 			}
 			double cost = end.rt(true).rtCost;
-			addPointToQueue(hctx, hctx.queue, true, end, null, end.rt(true).rtDistanceFromStart,
+			addPointToQueue(hctx, hctx.queue(true), true, end, null, end.rt(true).rtDistanceFromStart,
 					cost <= 0 ? MINIMAL_COST : cost);
 		}
-		return runRoutingWithInitQueue(hctx);
+		T t = runRoutingWithInitQueue(hctx);
+//		int i = 0;
+//		for(T p : hctx.pointsById.valueCollection()) {
+//			if (p.rtPos == null && p.dualPoint != null && p.dualPoint.rtPos == null) {
+//				System.out.println(i++ + "  " + p);
+//			}
+//		}
+		return t;
 	}
 	
 	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException {
-		Queue<NetworkDBPointCost<T>> queue = hctx.queue;
-		while (!queue.isEmpty()) {
+		
+		while (true) {
+			Queue<NetworkDBPointCost<T>> queue;
+			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
+				queue = hctx.queue(false);
+				if (queue.isEmpty()) {
+					break;
+				}
+			} else {
+				Queue<NetworkDBPointCost<T>> pos = hctx.queue(false);
+				Queue<NetworkDBPointCost<T>> rev = hctx.queue(true);
+				if (hctx.config.DIJKSTRA_DIRECTION == 0 || (!rev.isEmpty() && !pos.isEmpty())) {
+					if (rev.isEmpty() && pos.isEmpty()) {
+						break;
+					}
+					queue = pos.peek().cost < rev.peek().cost ? pos : rev;
+				} else {
+					queue = hctx.config.DIJKSTRA_DIRECTION > 0 ? pos : rev;
+					if (queue.isEmpty()) {
+						break;
+					}
+				}
+			}
 			long tm = System.nanoTime();
 			NetworkDBPointCost<T> pointCost = queue.poll();
 			T point = pointCost.point;
@@ -463,8 +492,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.pollQueueTime += (System.nanoTime() - tm) / 1e6;
 			hctx.stats.visitedVertices++;
 			if (point.rt(!rev).rtVisited) {
-				if (hctx.config.HEURISTIC_COEFFICIENT == 1 && hctx.config.DIJKSTRA_DIRECTION == 0) {
-					// TODO 2.1 HHRoutePlanner Improve / Review A* finish condition
+				if (hctx.config.HEURISTIC_COEFFICIENT == 0 && hctx.config.DIJKSTRA_DIRECTION == 0) {
+					// Valid only HC=0, Dijkstra as we run Many-to-Many - Test( Lat 49.12691 Lon 9.213685 -> Lat 49.155483 Lon 9.2140045)
+					T finalPoint = point;
+					finalPoint = scanFinalPoint(finalPoint, hctx.visited);
+					finalPoint = scanFinalPoint(finalPoint, hctx.visitedRev);
+					return finalPoint;
+				} else {
+					// TODO 2.1 HHRoutePlanner Improve / Review A* / Dijkstra finish condition (many to many)
+					// hctx.config.DIJKSTRA_DIRECTION == 0 -- need to run for all A* ?
 					double rcost = point.rt(true).rtDistanceFromStart + point.rt(false).rtDistanceFromStart;
 					if (rcost <= pointCost.cost) {
 						return point;
@@ -473,13 +509,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						point.markVisited(rev);
 						continue;
 					}
-				} else {
-					T finalPoint = point;
-					if (hctx.config.DIJKSTRA_DIRECTION == 0) {
-						finalPoint = scanFinalPoint(finalPoint, hctx.visited);
-						finalPoint = scanFinalPoint(finalPoint, hctx.visitedRev);
-					}
-					return finalPoint;
 				}
 			}
 			if (point.rt(rev).rtVisited) {
@@ -591,7 +620,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				pchInd = p.rt(rev).rtRouteToPoint.chInd();
 			}
 			String symbol = String.format("%s %d [%d] (from %d [%d])", rev ? "<-" : "->", p.index, p.chInd(), pind, pchInd);
-			System.out.printf("Visit Point %s (cost %.1f s) %.5f/%.5f - %d\n", symbol, p.rt(rev),
+			System.out.printf("Visit Point %s (cost %.1f s) %.5f/%.5f - %d\n", symbol, p.rt(rev).rtCost,
 					MapUtils.get31LatitudeY(p.startY), MapUtils.get31LongitudeX(p.startX), p.roadId / 64);
 		}
 	}

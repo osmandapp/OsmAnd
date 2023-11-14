@@ -431,8 +431,8 @@ public class HHRoutingDB {
 		public int endY;
 		
 		boolean rtExclude;
-		private NetworkDBPointRouteInfo rtRev;
-		private NetworkDBPointRouteInfo rtPos;
+		NetworkDBPointRouteInfo rtRev;
+		NetworkDBPointRouteInfo rtPos;
 		
 		List<NetworkDBSegment> connected = new ArrayList<NetworkDBSegment>();
 		List<NetworkDBSegment> connectedReverse = new ArrayList<NetworkDBSegment>();

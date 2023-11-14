@@ -134,6 +134,8 @@ public class HHRouteDataStructure {
 	}
 	
 	public static class HHRoutingContext<T extends NetworkDBPoint> {
+		// faster when roads are in 1 global network but doesn't make sense for isolated islands
+		static boolean USE_GLOBAL_QUEUE = false; 
 		
 		// Initial data structure
 		RoutingContext rctx; 
@@ -160,15 +162,23 @@ public class HHRouteDataStructure {
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
 		List<T> visitedRev = new ArrayList<>();
-		Queue<NetworkDBPointCost<T>> queue = new PriorityQueue<>(new Comparator<NetworkDBPointCost<T>>() {
-			@Override
-			public int compare(NetworkDBPointCost<T> o1, NetworkDBPointCost<T> o2) {
-				return Double.compare(o1.cost, o2.cost);
-			}
-		});
+		
+		Queue<NetworkDBPointCost<T>> queue = createQueue();
+		Queue<NetworkDBPointCost<T>> queuePos = createQueue();
+		Queue<NetworkDBPointCost<T>> queueRev = createQueue();
+
+		private PriorityQueue<NetworkDBPointCost<T>> createQueue() {
+			return new PriorityQueue<>(new Comparator<NetworkDBPointCost<T>>() {
+				@Override
+				public int compare(NetworkDBPointCost<T> o1, NetworkDBPointCost<T> o2) {
+					return Double.compare(o1.cost, o2.cost);
+				}
+			});
+		}
 		
 		public void clearVisited() {
-			queue.clear();
+			queue(false).clear();
+			queue(true).clear();
 			for (NetworkDBPoint p : queueAdded) {
 				p.clearRouting();
 			}
@@ -178,7 +188,8 @@ public class HHRouteDataStructure {
 		}
 
 		public void clearVisited(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
-			queue.clear();
+			queue(false).clear();
+			queue(true).clear();
 			Iterator<T> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
@@ -206,6 +217,10 @@ public class HHRouteDataStructure {
 			startX = MapUtils.get31TileNumberX(start.getLongitude());
 			endY = MapUtils.get31TileNumberY(end.getLatitude());
 			endX = MapUtils.get31TileNumberX(end.getLongitude());
+		}
+
+		public Queue<NetworkDBPointCost<T>> queue(boolean rev) {
+			return USE_GLOBAL_QUEUE ? queue : (rev ? queueRev : queuePos);
 		}
 		
 	}
