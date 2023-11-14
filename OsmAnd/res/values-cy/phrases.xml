@@ -1537,7 +1537,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Llawdriniaeth niwrolegol</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Niwroseiciatreg</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinoleg</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Meddygaeth niwclear</string>
+    <string name="poi_healthcare_speciality_nuclear">Meddygaeth niwclear</string>
     <string name="poi_healthcare_speciality_pathology">Anatomeg patholegol</string>
     <string name="poi_healthcare_speciality_oncology">Oncoleg</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Meddygaeth drofannol</string>
@@ -1552,7 +1552,7 @@
     <string name="poi_healthcare_speciality_clinical_pathology">Patholeg glinigol</string>
     <string name="poi_healthcare_speciality_speech_therapy">Therapi lleferydd</string>
     <string name="poi_healthcare_speciality_manual_therapy">Therapi llaw</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Meddygaeth chwaraeon</string>
+    <string name="poi_healthcare_speciality_sports">Meddygaeth chwaraeon</string>
     <string name="poi_healthcare_speciality_podiatry">Podoleg</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Seiciatreg oedolion</string>
     <string name="poi_healthcare_speciality_acupuncture">Aciwbigo</string>
@@ -1560,7 +1560,7 @@
     <string name="poi_healthcare_speciality_traditional_chinese_medicine">Meddygaeth Tsieineaidd draddodiadol</string>
     <string name="poi_healthcare_speciality_reiki">Reici</string>
     <string name="poi_healthcare_speciality_herbalism">Llysieuaeth</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Seicoleg dyfnder</string>
+    <string name="poi_healthcare_speciality_depth">Seicoleg dyfnder</string>
     <string name="poi_parking_garage_boxes">Bocsys garej</string>
     <string name="poi_dojo">Dojo</string>
     <string name="poi_gaelic_games">Gemau Gaeleg</string>
@@ -3699,7 +3699,7 @@
     <string name="poi_healthcare_speciality_maxillofacial_surgery">Llawfeddygaeth y genau-wyneb</string>
     <string name="poi_healthcare_speciality_diagnostic_radiology">Radioleg ddiagnostig</string>
     <string name="poi_health_specialty_tropical_medicine_no">Arbenigedd iechyd: meddygaeth drofannol: na</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Meddyginiaeth caethiwed</string>
+    <string name="poi_healthcare_speciality_addiction">Meddyginiaeth caethiwed</string>
     <string name="poi_parking_carports">Carports</string>
     <string name="poi_karting">Cartio</string>
     <string name="poi_button_operated_no">Gweithredu gan fotwm: na</string>

@@ -2450,7 +2450,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">神經外科</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">神經精神病學</string>
     <string name="poi_healthcare_speciality_endocrinology">內分泌學</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">核醫學</string>
+    <string name="poi_healthcare_speciality_nuclear">核醫學</string>
     <string name="poi_healthcare_speciality_pathology">病理解剖學</string>
     <string name="poi_healthcare_speciality_oncology">腫瘤學</string>
     <string name="poi_healthcare_speciality_tropical_medicine">熱帶醫學</string>
@@ -2461,7 +2461,7 @@
     <string name="poi_health_specialty_obstetrics_antenatal_no">醫療專業：婦產科（產前）︰無</string>
     <string name="poi_healthcare_speciality_social_paediatrics">社會小兒科</string>
     <string name="poi_health_specialty_social_paediatrics_no">醫療專業：社會小兒科：無</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">成癮醫學</string>
+    <string name="poi_healthcare_speciality_addiction">成癮醫學</string>
     <string name="poi_healthcare_speciality_optometry">驗光</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">婦產科（剖腹產）</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">醫療專業：婦產科（剖腹產）︰沒有</string>
@@ -2469,7 +2469,7 @@
     <string name="poi_healthcare_speciality_clinical_pathology">臨床病理學</string>
     <string name="poi_healthcare_speciality_speech_therapy">語言治療</string>
     <string name="poi_healthcare_speciality_manual_therapy">操作治療學</string>
-    <string name="poi_healthcare_speciality_sports_medicine">運動醫學</string>
+    <string name="poi_healthcare_speciality_sports">運動醫學</string>
     <string name="poi_healthcare_speciality_podiatry">足醫術</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">成人精神科</string>
     <string name="poi_healthcare_speciality_acupuncture">針灸</string>
@@ -2479,7 +2479,7 @@
     <string name="poi_healthcare_speciality_herbalism">藥草醫學</string>
     <string name="poi_healthcare_speciality_chiropractic">脊骨神經醫學</string>
     <string name="poi_healthcare_speciality_naturopathy">自然療法</string>
-    <string name="poi_healthcare_speciality_depth_psychology">深度心理學</string>
+    <string name="poi_healthcare_speciality_depth">深度心理學</string>
     <string name="poi_healthcare_speciality_behavior">行為療法</string>
     <string name="poi_fitness_centre">健身中心</string>
     <string name="poi_fitness">健身</string>

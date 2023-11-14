@@ -69,13 +69,13 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.GpxLayerUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1396,8 +1396,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			Pair<WptPt, WptPt> line = null;
 			for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
 				line = mapRenderer != null
-						? GpxLayerUtils.findLineInPolygon31(touchPolygon31, segment.points)
-						: GpxLayerUtils.findLineNearPoint(tb, segment.points, radius, (int) point.x, (int) point.y);
+						? GpxUtils.findLineInPolygon31(touchPolygon31, segment.points)
+						: GpxUtils.findLineNearPoint(tb, segment.points, radius, (int) point.x, (int) point.y);
 				if (line != null) {
 					break;
 				}
@@ -1406,7 +1406,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (latLonFromPixel == null) {
 					latLonFromPixel = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x, point.y);
 				}
-				res.add(GpxLayerUtils.createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLonFromPixel,
+				res.add(GpxUtils.createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLonFromPixel,
 						showTrackPointMenu));
 			}
 		}

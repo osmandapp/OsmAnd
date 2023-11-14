@@ -5,8 +5,8 @@ import androidx.annotation.StringRes
 import net.osmand.plus.R
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType
 
-enum class WriteToGpxWidgetType(
-	val id: String,
+enum class ExternalSensorTrackDataType(
+	val preferenceId: String,
 	@param:DrawableRes val icon: Int,
 	val sensorType: SensorWidgetDataFieldType,
 	@param:StringRes val titleId: Int) {
@@ -37,8 +37,8 @@ enum class WriteToGpxWidgetType(
 		R.string.map_settings_weather_temp);
 
 	companion object {
-		fun getBySensorWidgetDataFieldType(dataFieldType: SensorWidgetDataFieldType): WriteToGpxWidgetType? {
-			for (widgetType in WriteToGpxWidgetType.values()) {
+		fun getBySensorWidgetDataFieldType(dataFieldType: SensorWidgetDataFieldType): ExternalSensorTrackDataType? {
+			for (widgetType in ExternalSensorTrackDataType.values()) {
 				if (widgetType.sensorType == dataFieldType) {
 					return widgetType
 				}

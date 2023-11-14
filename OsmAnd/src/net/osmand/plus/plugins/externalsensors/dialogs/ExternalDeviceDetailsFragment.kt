@@ -20,8 +20,8 @@ import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceList
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField
 import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog.OnSaveSensorPropertyCallback
@@ -381,12 +381,12 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         updateButtonState()
     }
 
-    override fun changeSensorPropertyValue(sensorId: String, property: DeviceChangeableProperties, newValue: String) {
+    override fun changeSensorPropertyValue(sensorId: String, property: DeviceChangeableProperty, newValue: String) {
         plugin.setDeviceProperty(device, property, newValue)
         updateProperties()
     }
 
-    override fun onPropertyClicked(property: DeviceChangeableProperties) {
+    override fun onPropertyClicked(property: DeviceChangeableProperty) {
         EditDevicePropertyDialog.showInstance(requireActivity(), this, device, property)
     }
 }

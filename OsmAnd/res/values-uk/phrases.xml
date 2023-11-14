@@ -2521,7 +2521,7 @@
     <string name="poi_diet_kosher_filter_yes">Кошерне харчування</string>
     <string name="poi_resource_bauxite">Боксити</string>
     <string name="poi_industrial_agriculture">Вид: сільськогосподарська промисловість</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Ядерна медицина</string>
+    <string name="poi_healthcare_speciality_nuclear">Ядерна медицина</string>
     <string name="poi_free_flying_paragliding_yes">Парапланеризм</string>
     <string name="poi_length">Довжина</string>
     <string name="poi_cuisine_danish">Датська</string>
@@ -2767,7 +2767,7 @@
     <string name="poi_surface_stone">Поверхня: кам\'яниста</string>
     <string name="poi_surface_metal">Поверхня: метал</string>
     <string name="poi_street_lamp">Вуличний ліхтар</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Наркологія</string>
+    <string name="poi_healthcare_speciality_addiction">Наркологія</string>
     <string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Вид вибуху: атмосферний (поверхня води, баржа)</string>
     <string name="poi_provided_for_child_yes">Послуги надаються дітям: так</string>
     <string name="poi_xmas_tree">Різдвяна ялинка</string>
@@ -2826,7 +2826,7 @@
     <string name="poi_resource_gas">Природний газ</string>
     <string name="poi_surface_grass">Поверхня: трава</string>
     <string name="poi_crop_sugarcane">Вирощується культура: цукрова тростина</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Спортивна медицина</string>
+    <string name="poi_healthcare_speciality_sports">Спортивна медицина</string>
     <string name="poi_nuclear_explosion_date_utc">Дата вибуху (UTC)</string>
     <string name="poi_provided_for_senior_yes">Послуги надаються людям похилого віку: так</string>
     <string name="poi_public_bookcase">Громадська книжкова шафа</string>
@@ -2922,7 +2922,7 @@
     <string name="poi_resource_mercury">Ртуть</string>
     <string name="poi_route_trolleybus_ref">Тролейбус</string>
     <string name="poi_crop_poultry">Вирощується культура: корм для птиці</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Глибинна психологія</string>
+    <string name="poi_healthcare_speciality_depth">Глибинна психологія</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
     <string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
     <string name="poi_cuisine_coffee">Кава</string>

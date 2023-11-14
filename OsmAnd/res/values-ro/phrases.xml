@@ -2336,7 +2336,7 @@
     <string name="poi_building_type_pyramid">Tip clădire: piramidă</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Medicină paliativă</string>
     <string name="poi_healthcare_speciality_behavior">Comportament</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psihologia profunzimii</string>
+    <string name="poi_healthcare_speciality_depth">Psihologia profunzimii</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatie</string>
     <string name="poi_healthcare_speciality_chiropractic">Chiropractică</string>
     <string name="poi_healthcare_speciality_herbalism">Herbalistică</string>
@@ -2346,12 +2346,12 @@
     <string name="poi_healthcare_speciality_acupuncture">Acupunctură</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psihiatrie pentru adulți</string>
     <string name="poi_healthcare_speciality_podiatry">Podologie</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medicină sportivă</string>
+    <string name="poi_healthcare_speciality_sports">Medicină sportivă</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manuală</string>
     <string name="poi_healthcare_speciality_speech_therapy">Terapia prin vorbire</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologie clinică</string>
     <string name="poi_healthcare_speciality_optometry">Optometrie</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Medicina dependenței</string>
+    <string name="poi_healthcare_speciality_addiction">Medicina dependenței</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Specialitatea de sănătate: obstetrică (operație cezariană): nu</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrică (operație cezariană)</string>
     <string name="poi_health_specialty_social_paediatrics_no">Specialitatea de sănătate: pediatrie socială: nu</string>
@@ -2364,7 +2364,7 @@
     <string name="poi_healthcare_speciality_tropical_medicine">Medicină tropicală</string>
     <string name="poi_healthcare_speciality_oncology">Oncologie</string>
     <string name="poi_healthcare_speciality_pathology">Anatomie patologică</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medicină nucleară</string>
+    <string name="poi_healthcare_speciality_nuclear">Medicină nucleară</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinologie</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsihiatrie</string>
     <string name="poi_healthcare_speciality_neurosurgery">Chirurgie neurologică</string>

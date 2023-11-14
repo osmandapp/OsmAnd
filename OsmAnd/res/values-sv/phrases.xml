@@ -2429,7 +2429,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neurokirurgi</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsykiatri</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinologi</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nukleärmedicin</string>
+    <string name="poi_healthcare_speciality_nuclear">Nukleärmedicin</string>
     <string name="poi_healthcare_speciality_pathology">Patologisk anatomi</string>
     <string name="poi_healthcare_speciality_oncology">Onkologi</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Tropisk medicin</string>
@@ -2442,12 +2442,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Hälsospecialitet: social-och ungdomsmedicin: nej</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrik (kejsarsnitt)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Hälsospecialitet: obstetrik (kejsarsnitt): nej</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Beroendemedicin</string>
+    <string name="poi_healthcare_speciality_addiction">Beroendemedicin</string>
     <string name="poi_healthcare_speciality_optometry">Optometri</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klinisk patologi</string>
     <string name="poi_healthcare_speciality_speech_therapy">Talterapi</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manuell terapi</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Idrottsmedicin</string>
+    <string name="poi_healthcare_speciality_sports">Idrottsmedicin</string>
     <string name="poi_healthcare_speciality_podiatry">Podiatri</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Vuxenpsykiatri</string>
     <string name="poi_healthcare_speciality_acupuncture">Akupunktur</string>
@@ -2457,7 +2457,7 @@
     <string name="poi_healthcare_speciality_herbalism">Herbalism</string>
     <string name="poi_healthcare_speciality_chiropractic">Kiropraktik</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatisk medicin</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Djuppsykologi</string>
+    <string name="poi_healthcare_speciality_depth">Djuppsykologi</string>
     <string name="poi_healthcare_speciality_behavior">Beteende</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Palliativ medicin</string>
     <string name="poi_building_type_pyramid">Byggnadstyp: pyramid</string>

@@ -2918,7 +2918,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neurologická chirurgia</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsychiatria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinológia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nukleárna medicína</string>
+    <string name="poi_healthcare_speciality_nuclear">Nukleárna medicína</string>
     <string name="poi_healthcare_speciality_pathology">Patologická anatómia</string>
     <string name="poi_healthcare_speciality_oncology">Onkológia</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Tropická medicína</string>
@@ -3296,7 +3296,7 @@
     <string name="poi_wetland_saltern">Soľná odparovacia pláň</string>
     <string name="poi_wetland_tidalflat">Prílivová rovina</string>
     <string name="poi_wetland_saltmarsh">Slanisko</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Liečenie závislostí</string>
+    <string name="poi_healthcare_speciality_addiction">Liečenie závislostí</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klinická patológia</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopédia</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psychiatria pre dospelých</string>
@@ -3597,7 +3597,7 @@
     <string name="poi_health_service_nursing_yes">Zdravotná služba: opatrovateľstvo: áno</string>
     <string name="poi_health_service_nursing_no">Zdravotná služba: opatrovateľstvo: nie</string>
     <string name="poi_healthcare_speciality_behavior">Správanie</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Športová medicína</string>
+    <string name="poi_healthcare_speciality_sports">Športová medicína</string>
     <string name="poi_recycling_small_electrical_appliances">Malé elektrické spotrebiče</string>
     <string name="poi_departures_board">Tabuľa odjazdov/cestovný poriadok</string>
     <string name="poi_drinking_water_refill">Doplnenie pitnej vody</string>
@@ -3694,7 +3694,7 @@
     <string name="poi_valley_balka">Balka (ploché údolie v Rusku so suchým tokom)</string>
     <string name="poi_office_podologist">Ordinácia podológa</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Paliatívna medicína</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Hlbinná psychológia</string>
+    <string name="poi_healthcare_speciality_depth">Hlbinná psychológia</string>
     <string name="poi_healthcare_speciality_chiropractic">Chiropraxia</string>
     <string name="poi_healthcare_speciality_obstetrics_postnatal">Pôrodníctvo (postnatálne)</string>
     <string name="poi_radar_tower">Radarová veža</string>

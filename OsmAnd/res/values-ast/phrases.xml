@@ -1957,7 +1957,7 @@
     <string name="poi_building_type_pyramid">Tipu d\'edificación: pirámide</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Palliative medicine</string>
     <string name="poi_healthcare_speciality_behavior">Comportamientu</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Depth psychology</string>
+    <string name="poi_healthcare_speciality_depth">Depth psychology</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopathy</string>
     <string name="poi_healthcare_speciality_chiropractic">Quiropráutica</string>
     <string name="poi_healthcare_speciality_herbalism">Herbalism</string>
@@ -1967,12 +1967,12 @@
     <string name="poi_healthcare_speciality_acupuncture">Acupuntura</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Siquiatría p\'adultos</string>
     <string name="poi_healthcare_speciality_podiatry">Podoloxía</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Sports medicine</string>
+    <string name="poi_healthcare_speciality_sports">Sports medicine</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manual therapy</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopedia</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Clinical pathology</string>
     <string name="poi_healthcare_speciality_optometry">Optometry</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Addiction medicine</string>
+    <string name="poi_healthcare_speciality_addiction">Addiction medicine</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Health specialty: obstetrics (caesarean section): no</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrics (caesarean section)</string>
     <string name="poi_health_specialty_social_paediatrics_no">Health specialty: social paediatrics: no</string>
@@ -1985,7 +1985,7 @@
     <string name="poi_healthcare_speciality_tropical_medicine">Tropical medicine</string>
     <string name="poi_healthcare_speciality_oncology">Oncoloxía</string>
     <string name="poi_healthcare_speciality_pathology">Pathological anatomy</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nuclear medicine</string>
+    <string name="poi_healthcare_speciality_nuclear">Nuclear medicine</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinoloxía</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neurosiquiatría</string>
     <string name="poi_healthcare_speciality_neurosurgery">Neurological surgery</string>
