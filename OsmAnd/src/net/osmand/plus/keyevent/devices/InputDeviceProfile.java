@@ -1,6 +1,7 @@
 package net.osmand.plus.keyevent.devices;
 
 import android.content.Context;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,7 @@ public abstract class InputDeviceProfile {
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected List<KeyBinding> keyBindings = new ArrayList<>();
-	protected Map<Integer, KeyBinding> keyBindingsCache = new HashMap<>();
+	protected Map<Integer, KeyBinding> quickCache = new HashMap<>();
 
 	public void initialize(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -46,48 +47,43 @@ public abstract class InputDeviceProfile {
 
 	protected void setKeyBindings(@NonNull List<KeyBinding> keyBindings) {
 		this.keyBindings = keyBindings;
-		syncKeyBindingsCache();
+		syncQuickCache();
 	}
 
-	public void removeKeyBinding(int keyCode) {
-		KeyBinding keyBinding = keyBindingsCache.get(keyCode);
-		keyBindings = Algorithms.removeFromList(keyBindings, keyBinding);
-		syncKeyBindingsCache();
-	}
-
-	public void addKeyBinding(@NonNull KeyBinding keyBinding) {
-		keyBindings = Algorithms.addToList(keyBindings, keyBinding);
-		syncKeyBindingsCache();
-	}
-
-	public void updateKeyBinding(int originalKeyCode, @NonNull KeyBinding newKeyBinding) {
-		KeyBinding oldKeyBinding = keyBindingsCache.remove(originalKeyCode);
+	public void updateKeyBinding(@Nullable KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
 		if (oldKeyBinding != null) {
 			int index = keyBindings.indexOf(oldKeyBinding);
 			keyBindings = Algorithms.setInList(keyBindings, index, newKeyBinding);
 		} else {
-			addKeyBinding(newKeyBinding);
+			keyBindings = Algorithms.addToList(keyBindings, newKeyBinding);
 		}
-		syncKeyBindingsCache();
+		syncQuickCache();
 	}
 
-	protected void syncKeyBindingsCache() {
+	protected void syncQuickCache() {
 		Map<Integer, KeyBinding> newQuickCache = new HashMap<>();
 		for (KeyBinding keyBinding : keyBindings) {
-			newQuickCache.put(keyBinding.getKeyCode(), keyBinding);
+			int keyCode = keyBinding.getKeyCode();
+			if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
+				newQuickCache.put(keyCode, keyBinding);
+			}
 		}
-		this.keyBindingsCache = newQuickCache;
+		this.quickCache = newQuickCache;
 	}
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {}
 
 	@Nullable
 	public KeyEventCommand findCommand(int keyCode) {
-		KeyBinding keyBinding = keyBindingsCache.get(keyCode);
+		KeyBinding keyBinding = quickCache.get(keyCode);
 		return keyBinding != null ? keyBinding.getCommand(app) : null;
 	}
 
-	public int getCommandsCount() {
+	public int getAssignmentsCount() {
+		return quickCache.size();
+	}
+
+	public int getActionsCount() {
 		return keyBindings.size();
 	}
 

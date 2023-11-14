@@ -12,7 +12,7 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 		super.initialize(app);
 		keyBindings.clear();
 		collectCommands();
-		syncKeyBindingsCache();
+		syncQuickCache();
 	}
 
 	/**
@@ -22,7 +22,7 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	protected abstract void collectCommands();
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {
-		if (!keyBindingsCache.containsKey(keyCode)) {
+		if (!quickCache.containsKey(keyCode)) {
 			bindCommand(keyCode, commandId);
 		}
 	}
@@ -30,6 +30,6 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	public void bindCommand(int keyCode, @NonNull String commandId) {
 		KeyBinding keyBinding = new KeyBinding(keyCode, commandId, null);
 		keyBindings.add(keyBinding);
-		keyBindingsCache.put(keyCode, keyBinding);
+		quickCache.put(keyCode, keyBinding);
 	}
 }
