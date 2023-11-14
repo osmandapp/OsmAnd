@@ -5268,4 +5268,6 @@
 	<string name="poi_healthcare_speciality_chronic">Chronic</string>
 	<string name="poi_healthcare_speciality_physical_therapy">Physical therapy</string>
 	<string name="poi_healthcare_speciality_microbiology">Microbiology</string>
+	<string name="poi_healthcare_speciality_venereology">Venereology</string>
+
 </resources>
