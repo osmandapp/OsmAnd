@@ -92,7 +92,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 2;
+			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -436,7 +436,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					T pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
-					System.out.println(pnt);
 					pnts.put(pnt.index, pnt);
 				}
 			}
@@ -664,7 +663,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		NetworkDBSegment segment = res.segment;
 		hctx.rctx.config.planRoadDirection = 0; // A* bidirectional
 		hctx.rctx.config.heuristicCoefficient = 1;
-		// TODO 2.0.4 should be speed up by just clearing visited
+		// TODO 1.2 should be speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// if (c.USE_GC_MORE_OFTEN) {
 		// printGCInformation();
@@ -680,10 +679,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = RoutingConfiguration.DEFAULT_PENALTY_FOR_REVERSE_DIRECTION * 4; 
 		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
 		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
-//		BinaryRoutePlanner.TRACE_ROUTING = true;
-//		System.out.println("-----------------");
 		
-		// TODO 2.0.2 HHRoutePlanner use cache boundaries to speed up
+		// TODO 1.1 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, f);
 		res.rtTimeDetailed = f.distanceFromStart;
