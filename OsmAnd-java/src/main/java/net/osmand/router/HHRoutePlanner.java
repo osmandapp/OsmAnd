@@ -633,7 +633,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			throws InterruptedException, IOException {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		NetworkDBSegment segment = res.segment;
-		hctx.rctx.config.planRoadDirection = 1; // A* bidirectional
+		hctx.rctx.config.planRoadDirection = 0; // A* bidirectional
 		hctx.rctx.config.heuristicCoefficient = 1;
 		// TODO 2.0.4 should be speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
@@ -729,6 +729,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						MapUtils.get31LatitudeY(s.end.startY), MapUtils.get31LongitudeX(s.end.startX), s.end.roadId / 64);
 			}
 		}
+		LatLon start = new LatLon(MapUtils.get31LatitudeY(hctx.startY), MapUtils.get31LongitudeX(hctx.startX));
+		LatLon end = new LatLon(MapUtils.get31LatitudeY(hctx.endY), MapUtils.get31LongitudeX(hctx.endX));
+		new RoutePlannerFrontEnd().makeStartEndPointsPrecise(route.detailed, start, end, Collections.emptyList()); 
 		return route;
 	}
 
