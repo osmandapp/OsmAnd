@@ -10,6 +10,7 @@ import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
 import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
@@ -184,7 +185,7 @@ public class LocalItemUtils {
 			return RENDERING_STYLES;
 		} else if (name.endsWith(WEATHER_EXT)) {
 			return WEATHER_DATA;
-		} else if (name.endsWith(BINARY_DEPTH_MAP_INDEX_EXT)) {
+		} else if (name.endsWith(BINARY_DEPTH_MAP_INDEX_EXT) || name.equals("world_seamarks.obf") || (path.contains(NAUTICAL_INDEX_DIR) && name.endsWith(BINARY_MAP_INDEX_EXT))) {
 			return DEPTH_DATA;
 		} else if (name.endsWith(TIF_EXT) || SrtmDownloadItem.isSrtmFile(name)) {
 			return TERRAIN_DATA;
