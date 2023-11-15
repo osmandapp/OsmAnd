@@ -260,13 +260,29 @@ public class HHRouteDataStructure {
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
 		public TLongHashSet uniquePoints = new TLongHashSet();
 		
-		public float routingTimeDetailed;
-		public double routingTimeSegments;
+		public double getHHRoutingTime() {
+			double d = 0;
+			for (HHNetworkSegmentRes r : segments) {
+				d += r.rtTimeHHSegments;
+			}
+			return d;
+		}
+		
+		public double getHHRoutingDetailed() {
+			double d = 0;
+			for (HHNetworkSegmentRes r : segments) {
+				d += r.rtTimeDetailed;
+			}
+			return d;
+		}
+		
 	}
 	
 	public static class HHNetworkSegmentRes {
 		public NetworkDBSegment segment;
 		public List<RouteSegmentResult> list = null;
+		public double rtTimeDetailed;
+		public double rtTimeHHSegments;
 		public HHNetworkSegmentRes(NetworkDBSegment s) {
 			segment = s;
 		}

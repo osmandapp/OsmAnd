@@ -502,7 +502,7 @@ public class RouteResultPreparation {
 		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
 		}
-		if (Math.abs(totalRoutingTime - cmp) > 1) {
+		if (Math.abs(totalRoutingTime - cmp) > 0.1) {
 			println("Total sum routing time ! " + totalRoutingTime + " == " + cmp);
 		}
 	}
