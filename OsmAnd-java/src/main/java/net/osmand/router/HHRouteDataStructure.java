@@ -23,6 +23,9 @@ public class HHRouteDataStructure {
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
 		
+		Double INITIAL_DIRECTION = null;
+		
+		
 		boolean ROUTE_LAST_MILE = false;
 		boolean ROUTE_ALL_SEGMENTS = false;
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
@@ -46,7 +49,6 @@ public class HHRouteDataStructure {
 		boolean USE_MIDPOINT;
 		int MIDPOINT_ERROR = 3;
 		int MIDPOINT_MAX_DEPTH = 20 + MIDPOINT_ERROR;
-		
 		
 		public static HHRoutingConfig dijkstra(int direction) {
 			HHRoutingConfig df = new HHRoutingConfig();

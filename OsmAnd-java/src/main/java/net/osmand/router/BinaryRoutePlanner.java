@@ -274,11 +274,11 @@ public class BinaryRoutePlanner {
 		// full segment length will be added on first visit
 		seg.distanceFromStart = (float) (-fromStart / full * fullTime); 
 		
-		if (!reverseSearchWay && ctx.config.initialDirection != null) {
+		if ((!reverseSearchWay && ctx.config.initialDirection != null) || (reverseSearchWay && ctx.config.targetDirection != null)) {
 			// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 			// mark here as positive for further check
 			double plusDir = seg.getRoad().directionRoute(seg.getSegmentStart(), seg.isPositive());
-			double diff = plusDir - ctx.config.initialDirection;
+			double diff = plusDir - (reverseSearchWay ? ctx.config.targetDirection : ctx.config.initialDirection);
 			if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
 				seg.distanceFromStart += ctx.config.PENALTY_FOR_REVERSE_DIRECTION;
 			}

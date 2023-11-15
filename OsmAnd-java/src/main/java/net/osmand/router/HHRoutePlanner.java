@@ -84,18 +84,19 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
-			c = HHRoutingConfig.dijkstra(0); 
-//			c = HHRoutingConfig.astar(0);
+//			c = HHRoutingConfig.dijkstra(0); 
+			c = HHRoutingConfig.astar(1);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
 			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 0;
+			DEBUG_VERBOSE_LEVEL = 2;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
+//			c.INITIAL_DIRECTION = 30 / 180.0 * Math.PI;
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 //			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
@@ -114,7 +115,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		long time = System.nanoTime();
 		System.out.println(config.toString(start, end));
 		System.out.println("Finding first / last segments...");
+		hctx.rctx.config.initialDirection = config.INITIAL_DIRECTION;
 		TLongObjectHashMap<T> stPoints = initStart(hctx, false);
+		hctx.rctx.config.initialDirection = null;
 		TLongObjectHashMap<T> endPoints = initStart(hctx, true);
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
@@ -390,10 +393,35 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (s == null) {
 			return pnts;
 		}
+		T finitePnt = hctx.pointsByGeo.get(calcUniDirRoutePointInternalId(s));
+		if (finitePnt != null) {
+			double plusCost = 0, negCost = 0;
+			if (hctx.rctx.config.initialDirection != null) {
+				double diff = s.getRoad().directionRoute(s.getSegmentStart(), s.isPositive()) - hctx.rctx.config.initialDirection;
+				if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
+					plusCost += hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+				}
+				diff = s.getRoad().directionRoute(s.getSegmentEnd(), !s.isPositive()) - hctx.rctx.config.initialDirection;
+				if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
+					negCost += hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+				}
+			}
+			finitePnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, finitePnt));
+			finitePnt.setCostParentRt(reverse, plusCost, null, plusCost);
+			pnts.put(finitePnt.index, finitePnt);
+			
+			T dualPoint = (T) finitePnt.dualPoint;
+			dualPoint.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, dualPoint));
+			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
+			pnts.put(dualPoint.index, dualPoint);
+			
+			return pnts;
+		}
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		hctx.rctx.calculationProgress = new RouteCalculationProgress();
+		BinaryRoutePlanner.TRACE_ROUTING = false;
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) new BinaryRoutePlanner().searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		System.out.println(hctx.rctx.calculationProgress.getInfo(null));		
@@ -408,6 +436,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					T pnt = hctx.pointsByGeo.get(pntId);
 					pnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
+					System.out.println(pnt);
 					pnts.put(pnt.index, pnt);
 				}
 			}
@@ -647,10 +676,21 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			throw new IllegalStateException(String.format("Points are not present in detailed maps: %s",
 					start == null ? segment.start : segment.end));
 		}
+		double oldP = hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = RoutingConfiguration.DEFAULT_PENALTY_FOR_REVERSE_DIRECTION * 4; 
+		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
+		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
+//		BinaryRoutePlanner.TRACE_ROUTING = true;
+//		System.out.println("-----------------");
+		
 		// TODO 2.0.2 HHRoutePlanner use cache boundaries to speed up
 		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null);
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, f);
 		res.rtTimeDetailed = f.distanceFromStart;
+		// clean up
+		hctx.rctx.config.initialDirection = null;
+		hctx.rctx.config.targetDirection = null;
+		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = oldP;
 		return res;
 	}
 	

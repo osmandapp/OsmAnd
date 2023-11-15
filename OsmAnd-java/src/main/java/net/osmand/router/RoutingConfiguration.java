@@ -32,6 +32,7 @@ public class RoutingConfiguration {
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public static final int DEFAULT_NATIVE_MEMORY_LIMIT = 256;
 	public static final float DEVIATION_RADIUS = 3000;
+	public static final double DEFAULT_PENALTY_FOR_REVERSE_DIRECTION = 500;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 	// 1. parameters of routing and different tweaks
@@ -54,7 +55,8 @@ public class RoutingConfiguration {
 	
 	// 1.4 Used to calculate route in movement
 	public Double initialDirection;
-	public double PENALTY_FOR_REVERSE_DIRECTION = 500; // -1 reverse is forbidden
+	public Double targetDirection;
+	public double PENALTY_FOR_REVERSE_DIRECTION = DEFAULT_PENALTY_FOR_REVERSE_DIRECTION; // -1 reverse is forbidden
 
 	
 	// 1.5 Recalculate distance help
