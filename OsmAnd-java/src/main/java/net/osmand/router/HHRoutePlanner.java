@@ -85,7 +85,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c = new HHRoutingConfig();
 			// test data for debug swap
 			c = HHRoutingConfig.dijkstra(0); 
-//			c = HHRoutingConfig.astar(-1);
+//			c = HHRoutingConfig.astar(0);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
@@ -149,9 +149,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.stats.prepTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("%.2f ms\n", hctx.stats.prepTime);
 		
-		System.out.println(String.format("Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( visited %,d (%,d unique) of %,d added vertices )", 
+		System.out.println(String.format("Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
 				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / route.getHHRoutingTime()),
-				route.segments.size(), hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices));
+				route.segments.size(), hctx.stats.firstRouteVisitedVertices, hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices));
 		
 		time = System.nanoTime();
 		System.out.println(hctx.config.toString(start, end));
@@ -491,6 +491,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.pollQueueTime += (System.nanoTime() - tm) / 1e6;
 			hctx.stats.visitedVertices++;
 			if (point.rt(!rev).rtVisited) {
+				if (hctx.stats.firstRouteVisitedVertices == 0) {
+					hctx.stats.firstRouteVisitedVertices = hctx.stats.visitedVertices;
+				}
 				if (hctx.config.HEURISTIC_COEFFICIENT == 0 && hctx.config.DIJKSTRA_DIRECTION == 0) {
 					// Valid only HC=0, Dijkstra as we run Many-to-Many - Test( Lat 49.12691 Lon 9.213685 -> Lat 49.155483 Lon 9.2140045)
 					T finalPoint = point;
@@ -499,9 +502,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					return finalPoint;
 				} else {
 					// TODO 2.1 HHRoutePlanner Improve / Review A* / Dijkstra finish condition (many to many)
-					// hctx.config.DIJKSTRA_DIRECTION == 0 -- need to run for all A* ?
 					double rcost = point.rt(true).rtDistanceFromStart + point.rt(false).rtDistanceFromStart;
 					if (rcost <= pointCost.cost) {
+						// Universal condition to stop: works for any algorithm - cost equals to route length
 						return point;
 					} else {
 						queue.add(new NetworkDBPointCost<T>(point, rcost, rev));

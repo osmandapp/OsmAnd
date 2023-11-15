@@ -238,6 +238,7 @@ public class HHRouteDataStructure {
 	}
 	
 	public static class RoutingStats {
+		int firstRouteVisitedVertices = 0;
 		int visitedVertices = 0;
 		int uniqueVisitedVertices = 0;
 		int addedVertices = 0;

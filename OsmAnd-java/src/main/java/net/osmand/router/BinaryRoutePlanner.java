@@ -461,8 +461,7 @@ public class BinaryRoutePlanner {
 			// onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
  			if (alreadyVisited) {
- 				// 1.5 TODO ?? we don't stop here in order to allow improve found *potential* final segment - test case on short route 
- 				// Create tests STOP For HH we don't stop here in order to allow improve found *potential* final segment - test case on short route
+ 				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction) 
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
 					println("  " + currentSegment.segEnd + ">> Already visited");
