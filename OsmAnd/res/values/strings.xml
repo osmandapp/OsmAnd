@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="topography_maps">Topography maps</string>
     <string name="clear_key_assignment_desc">Key binding for the selected action will be cleared and set to None.</string>
     <string name="clear_key_assignment">Clear key assignment</string>
     <string name="key_assignments">Key assignments</string>
