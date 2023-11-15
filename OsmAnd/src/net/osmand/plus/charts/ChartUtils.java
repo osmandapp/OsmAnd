@@ -544,6 +544,7 @@ public class ChartUtils {
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean useRightAxis,
+														   boolean setYAxisMinimum,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
 		OsmandSettings settings = app.getSettings();
@@ -558,9 +559,13 @@ public class ChartUtils {
 		boolean speedInTrack = analysis.hasSpeedInTrack();
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
-		yAxis.setAxisMinimum(0f);
+		if (setYAxisMinimum) {
+			yAxis.setAxisMinimum(0f);
+		} else {
+			yAxis.resetAxisMinimum();
+		}
 
-		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
+		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String mainUnitY = graphType.getMainUnitY(app);
@@ -626,15 +631,15 @@ public class ChartUtils {
 
 	@NonNull
 	public static List<Entry> getPointAttributeValues(@NonNull String key,
-	                                                  @NonNull GPXTrackAnalysis analysis,
+	                                                  @NonNull List<PointAttributes> pointAttributes,
 	                                                  @NonNull GPXDataSetAxisType axisType,
 	                                                  float divX, float mulY, float divY,
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		float currentX = 0;
 
-		for (int i = 0; i < analysis.pointAttributes.size(); i++) {
-			PointAttributes attribute = analysis.pointAttributes.get(i);
+		for (int i = 0; i < pointAttributes.size(); i++) {
+			PointAttributes attribute = pointAttributes.get(i);
 
 			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
 
@@ -829,13 +834,13 @@ public class ChartUtils {
 		}
 		List<ILineDataSet> result = new ArrayList<>();
 		if (secondType == null) {
-			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
+			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
 			}
 		} else {
-			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
-			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, calcWithoutGaps, true);
+			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, calcWithoutGaps, false);
+			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, calcWithoutGaps, true);
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -867,6 +872,7 @@ public class ChartUtils {
 	                                            @NonNull LineChart chart,
 	                                            @NonNull GPXTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
+												@Nullable GPXDataSetType otherGraphType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
@@ -883,7 +889,9 @@ public class ChartUtils {
 			}
 			case SPEED: {
 				if (analysis.hasSpeedData()) {
-					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					boolean setYAxisMinimum = otherGraphType != GPXDataSetType.ZOOM_ANIMATED
+							&& otherGraphType != GPXDataSetType.ZOOM_NON_ANIMATED;
+					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
 				}
 			}
 			default: {

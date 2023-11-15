@@ -39,6 +39,7 @@ import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.AutoZoomBySpeedUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
@@ -223,8 +224,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				Pair<Integer, Double> zoom = null;
 				Float rotation = null;
 				boolean pendingRotation = false;
-				if (settings.AUTO_ZOOM_MAP.get()) {
-					zoom = autozoom(tb, location);
+				if (shouldAutoZoom(location)) {
+					zoom = AutoZoomBySpeedUtils.calculateAutoZoomBySpeed(app, tb, location.getSpeed());
+					if (zoom != null) {
+						lastTimeAutoZooming = System.currentTimeMillis();
+					}
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);
@@ -369,38 +373,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 	}
 
-	@Nullable
-	public Pair<Integer, Double> autozoom(RotatedTileBox tb, Location location) {
-		if (location.hasSpeed()) {
-			long now = System.currentTimeMillis();
-			float zdelta = defineZoomFromSpeed(tb, location.getSpeed());
-			if (Math.abs(zdelta) >= 0.5/*?Math.sqrt(0.5)*/) {
-				// prevent ui hysteresis (check time interval for autozoom)
-				if (zdelta >= 2) {
-					// decrease a bit
-					zdelta -= 1;
-				} else if (zdelta <= -2) {
-					// decrease a bit
-					zdelta += 1;
-				}
-				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
-				boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
-				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if ((now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM && !isUserZoomed)
-						|| (now - lastTimeManualZooming > Math.max(threshold, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM) && isUserZoomed)) {
-					lastTimeAutoZooming = now;
-//					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
-//					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
-//					double complexZoom = tb.getZoom() + zoomScale + zdelta;
-					// round to 0.33
-					targetZoom = Math.round(targetZoom * 3) / 3f;
-					int newIntegerZoom = (int) Math.round(targetZoom);
-					double zPart = targetZoom - newIntegerZoom;
-					return newIntegerZoom > 0 ? new Pair<>(newIntegerZoom, zPart) : null;
-				}
-			}
+	private boolean shouldAutoZoom(@NonNull Location location) {
+		if (!settings.AUTO_ZOOM_MAP.get() || !location.hasSpeed()) {
+			return false;
 		}
-		return null;
+
+		long now = System.currentTimeMillis();
+		boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
+		return isUserZoomed
+				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get(), AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
+				: now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM;
 	}
 
 	public void backToLocationImpl() {

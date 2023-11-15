@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="zoom_animated">Animated zoom</string>
+    <string name="zoom_non_animated">Non-animated zoom</string>
     <string name="remove_widget_first">Please remove widget first</string>
     <string name="add_row">Add row</string>
     <string name="row_number">Row %1$s</string>

@@ -12,6 +12,8 @@ public class PointAttributes {
 	public static final String SENSOR_TAG_TEMPERATURE = "temp";
 	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
 
+	public static final String DEV_ZOOM = "zoom";
+
 	public float distance;
 	public final float timeDiff;
 	public final boolean firstPoint;
@@ -24,6 +26,7 @@ public class PointAttributes {
 	public float bikeCadence;
 	public float bikePower;
 	public float temperature;
+	public float zoom;
 
 	public PointAttributes(float distance, float timeDiff, boolean firstPoint, boolean lastPoint) {
 		this.distance = distance;
@@ -48,6 +51,8 @@ public class PointAttributes {
 				return bikePower;
 			case SENSOR_TAG_TEMPERATURE:
 				return temperature;
+			case DEV_ZOOM:
+				return zoom;
 		}
 		return null;
 	}
@@ -74,6 +79,9 @@ public class PointAttributes {
 				break;
 			case SENSOR_TAG_TEMPERATURE:
 				temperature = value;
+				break;
+			case DEV_ZOOM:
+				zoom = value;
 				break;
 		}
 	}
