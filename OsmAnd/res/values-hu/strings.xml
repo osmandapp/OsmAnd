@@ -5556,4 +5556,7 @@
     <string name="tripltek_promo">Tripltek ajánlat %1$s hónapra</string>
     <string name="tripltek_promo_description">Ingyenes hozzáférés a funkciókhoz %1$s hónapig, beleértve a korlátlan térképletöltést, 3D domborzatot stb</string>
     <string name="see_all_plans">Összes csomag megtekintése</string>
+    <string name="key_assignments">Billentyű-hozzárendelések</string>
+    <string name="clear_key_assignment">Billentyű hozzárendelés törlése</string>
+    <string name="clear_key_assignment_desc">A kiválasztott művelet billentyű hozzárendelése törlődik és Nincs értékre lesz állítva.</string>
 </resources>
