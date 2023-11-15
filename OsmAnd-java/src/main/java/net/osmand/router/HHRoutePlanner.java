@@ -368,16 +368,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		double startLat = MapUtils.get31LatitudeY(!reverse? hctx.startY : hctx.endY);
 		double startLon = MapUtils.get31LongitudeX(!reverse? hctx.startX : hctx.endX);
 		if (!hctx.config.ROUTE_LAST_MILE) {
+			// simple method to calculate without detailed maps
 			double rad = 10000;
 			float spd = hctx.rctx.getRouter().getMinSpeed();
 			while (rad < 300000 && pnts.isEmpty()) {
 				rad = rad * 2;
-				
 				List<T> pntSelect = hctx.pointsRect.getClosestObjects(startLat, startLon, rad);
 				// limit by cluster
 				int cid = pntSelect.get(0).clusterId;
 				for (T pSelect : pntSelect) {
-					if(pSelect.clusterId != cid) {
+					if (pSelect.clusterId != cid) {
 						continue;
 					}
 					T pnt  = reverse ? (T) pSelect.dualPoint : pSelect;
@@ -395,6 +395,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		T finitePnt = hctx.pointsByGeo.get(calcUniDirRoutePointInternalId(s));
 		if (finitePnt != null) {
+			// start / end point is directly on a network point
 			double plusCost = 0, negCost = 0;
 			if (hctx.rctx.config.initialDirection != null) {
 				double diff = s.getRoad().directionRoute(s.getSegmentStart(), s.isPositive()) - hctx.rctx.config.initialDirection;
@@ -421,7 +422,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		hctx.rctx.calculationProgress = new RouteCalculationProgress();
-		BinaryRoutePlanner.TRACE_ROUTING = false;
+//		BinaryRoutePlanner.TRACE_ROUTING = true;
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) new BinaryRoutePlanner().searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		System.out.println(hctx.rctx.calculationProgress.getInfo(null));		
@@ -715,26 +716,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		hctx.rctx.routingTime = 0;
-		boolean prevEmpty = true;
-		RouteSegmentResult shift = null;
-		for (HHNetworkSegmentRes res : route.segments) {
-			int detList = 0;
-			NetworkDBSegment s = res.segment;
-			if (res.list != null && res.list.size() > 0) {
-				if (shift != null) {
-					route.detailed.add(shift);
-					shift = null;
+		RouteSegmentResult straightLine = null;
+		for(int routeSegmentInd = 0; routeSegmentInd < route.segments.size(); routeSegmentInd++ ) {
+			HHNetworkSegmentRes routeSegment = route.segments.get(routeSegmentInd);
+			NetworkDBSegment s = routeSegment.segment;
+			if (routeSegment.list != null && routeSegment.list.size() > 0) {
+				if (straightLine != null) {
+					route.detailed.add(straightLine);
+					straightLine = null;
 				}
-				detList = res.list.size();
-				if (!prevEmpty && s != null) {
-					RouteSegmentResult p = res.list.get(0);
+				if (routeSegmentInd > 0) {
+					RouteSegmentResult p = routeSegment.list.get(0);
 					if (Math.abs(p.getStartPointIndex() - p.getEndPointIndex()) <= 1) {
-						res.list.remove(0);
+						routeSegment.list.remove(0);
 					} else {
 						p.setStartPointIndex(p.getStartPointIndex() + (p.isForwardDirection() ? +1 : -1));
 					}
 				}
-				route.detailed.addAll(res.list);
+				route.detailed.addAll(routeSegment.list);
 			} else {
 				RouteRegion reg = new RouteRegion();
 				reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
@@ -746,24 +745,23 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				sh.types = new int[] { 0 };
 				sh.pointsX = new int[] { s.end.startX, s.end.endX };
 				sh.pointsY = new int[] { s.end.startY, s.end.endY };
-				shift = new RouteSegmentResult(sh, 0, 1);
+				straightLine = new RouteSegmentResult(sh, 0, 1);
 				route.detailed.add(new RouteSegmentResult(rdo, 0, 1));
 			}
-			hctx.rctx.routingTime += res.rtTimeDetailed;
-			if (s == null) {
-				prevEmpty = true;
-				if (DEBUG_VERBOSE_LEVEL >= 1) {
-					System.out.printf("First / last segment - %d segments, %.2fs \n",
-							res.list == null ? 0 : res.list.size(), res.rtTimeDetailed);
-				}
-				continue;
-			}
-			prevEmpty = false;
+			hctx.rctx.routingTime += routeSegment.rtTimeDetailed;
+
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
-				System.out.printf("\nRoute %d [%d] -> %d [%d] %s - hh dist %.2f s, detail %.2f s (%.1f%%) segments %d ( end %.5f/%.5f - %d ) ", 
-						s.start.index, s.start.chInd(), s.end.index, s.end.chInd(), s.shortcut ? "sh" : "bs", 
-						s.dist, res.rtTimeDetailed, 100 * (1 - res.rtTimeDetailed / s.dist), detList,  
-						MapUtils.get31LatitudeY(s.end.startY), MapUtils.get31LongitudeX(s.end.startX), s.end.roadId / 64);
+				int segments = routeSegment.list == null ? 0 : routeSegment.list.size();
+				if (s == null) {
+					System.out.printf("First / last segment - %d segments, %.2fs \n", segments,
+							routeSegment.rtTimeDetailed);
+				} else {
+					System.out.printf("\nRoute %d [%d] -> %d [%d] %s - hh dist %.2f s, detail %.2f s (%.1f%%) segments %d ( end %.5f/%.5f - %d ) ",
+							s.start.index, s.start.chInd(), s.end.index, s.end.chInd(), s.shortcut ? "sh" : "bs",
+							s.dist, routeSegment.rtTimeDetailed, 100 * (1 - routeSegment.rtTimeDetailed / s.dist),
+							segments, MapUtils.get31LatitudeY(s.end.startY), MapUtils.get31LongitudeX(s.end.startX),
+							s.end.roadId / 64);
+				}
 			}
 		}
 		LatLon start = new LatLon(MapUtils.get31LatitudeY(hctx.startY), MapUtils.get31LongitudeX(hctx.startX));

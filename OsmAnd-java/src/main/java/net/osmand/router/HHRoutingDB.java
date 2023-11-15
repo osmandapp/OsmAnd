@@ -15,7 +15,6 @@ import java.util.List;
 import com.google.protobuf.CodedInputStream;
 
 import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.data.LatLon;
