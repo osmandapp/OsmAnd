@@ -473,7 +473,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				Queue<NetworkDBPointCost<T>> pos = hctx.queue(false);
 				Queue<NetworkDBPointCost<T>> rev = hctx.queue(true);
 				if (hctx.config.DIJKSTRA_DIRECTION == 0 || (!rev.isEmpty() && !pos.isEmpty())) {
-					if (rev.isEmpty() && pos.isEmpty()) {
+					if (rev.isEmpty() || pos.isEmpty()) {
 						break;
 					}
 					queue = pos.peek().cost < rev.peek().cost ? pos : rev;
