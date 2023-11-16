@@ -147,6 +147,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		route.stats = hctx.stats;
 		hctx.stats.prepTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("%.2f ms\n", hctx.stats.prepTime);
+		if (DEBUG_VERBOSE_LEVEL >= 1) {
+			System.out.println("Detailed progress: " + hctx.rctx.calculationProgress.getInfo(null));
+		}
+
 		
 		System.out.println(String.format("Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
 				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / route.getHHRoutingTime()),
@@ -704,7 +708,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		NetworkDBSegment segment = res.segment;
 		hctx.rctx.config.planRoadDirection = 0; // A* bidirectional
 		hctx.rctx.config.heuristicCoefficient = 1;
-		// TODO 1.2 should be speed up by just clearing visited
+		// TODO 2.12 should be speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// if (c.USE_GC_MORE_OFTEN) {
 		// printGCInformation();
@@ -721,8 +725,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
 		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
 		
-		// TODO 1.1 HHRoutePlanner use cache boundaries to speed up
-		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null);
+		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null); // no diff at all: hctx.boundaries -> null 
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, f);
 		res.rtTimeDetailed = f.distanceFromStart;
 		// clean up
@@ -754,7 +757,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
-		
 		hctx.rctx.routingTime = 0;
 		RouteSegmentResult straightLine = null;
 		for(int routeSegmentInd = 0; routeSegmentInd < route.segments.size(); routeSegmentInd++ ) {

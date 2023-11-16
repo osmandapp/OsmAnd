@@ -180,12 +180,6 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 
-
-	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {
-		return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd,
-				config.heuristicCoefficient);
-	}
-	
 	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		initTargetPoint(end);
 		startX = start.preciseX;

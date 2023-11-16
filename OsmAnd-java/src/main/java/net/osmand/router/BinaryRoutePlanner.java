@@ -48,26 +48,29 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private static class SegmentsComparator implements Comparator<RouteSegment> {
-		final RoutingContext ctx;
-
-		public SegmentsComparator(RoutingContext ctx) {
-			this.ctx = ctx;
-		}
-
+	private static class SegmentsComparator implements Comparator<RouteSegmentCost> {
 		@Override
-		public int compare(RouteSegment o1, RouteSegment o2) {
-			return ctx.roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd);
+		public int compare(RouteSegmentCost o1, RouteSegmentCost o2) {
+			return Double.compare(o1.cost, o2.cost);
 		}
 	}
+	
+	private static float cost(float distanceFromStart, float distanceToEnd, RoutingContext ctx) {
+		return ctx.config.heuristicCoefficient * distanceToEnd + distanceFromStart;
+	}
 
-	private static class NonHeuristicSegmentsComparator implements Comparator<RouteSegment> {
-		public NonHeuristicSegmentsComparator() {
+	private static class RouteSegmentCost {
+		float cost;
+		RouteSegment segment;
+		
+		public RouteSegmentCost(RouteSegment segment, RoutingContext ctx) {
+			this.cost = cost(segment.distanceFromStart, segment.distanceToEnd, ctx);
+			this.segment = segment;
 		}
 
 		@Override
-		public int compare(RouteSegment o1, RouteSegment o2) {
-			return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 0.5);
+		public String toString() {
+			return String.format("%.2f %s", cost, segment);
 		}
 	}
 
@@ -80,9 +83,8 @@ public class BinaryRoutePlanner {
 		ctx.memoryOverhead = 1000;
 //		DEBUG_PRECISE_DIST_MEASUREMENT = true;
 		// Initializing priority queue to visit way segments 
-		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
-		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
-		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
+		PriorityQueue<RouteSegmentCost> graphDirectSegments = new PriorityQueue<>(50, new SegmentsComparator());
+		PriorityQueue<RouteSegmentCost> graphReverseSegments = new PriorityQueue<>(50, new SegmentsComparator());
 
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
 		TLongObjectMap<RouteSegment> visitedDirectSegments = start == null && boundaries != null ? boundaries
@@ -106,17 +108,18 @@ public class BinaryRoutePlanner {
 			end.others = null;
 			forwardSearch = false;
 		}
-		PriorityQueue<RouteSegment> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
+		PriorityQueue<RouteSegmentCost> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
+		double[] minCost = new double[] { Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
 		while (!graphSegments.isEmpty()) {
-			RouteSegment segment = graphSegments.poll();
+			RouteSegmentCost cst = graphSegments.poll();
+			RouteSegment segment = cst.segment;
 			// use accumulative approach
 			ctx.memoryOverhead = (visitedDirectSegments.size() + visitedOppositeSegments.size()) * STANDARD_ROAD_VISITED_OVERHEAD +
-					(graphDirectSegments.size() +
-					graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
-			
+					(graphDirectSegments.size() + graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
 			if (TRACE_ROUTING) {
 				printRoad(">", segment, !forwardSearch);
 			}
+			boolean skipSegment = false;
 			if (segment instanceof FinalRouteSegment) {
 				if (RoutingContext.SHOW_GC_SIZE) {
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1 << 20)) + " mb");
@@ -131,12 +134,13 @@ public class BinaryRoutePlanner {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
 					((MultiFinalRouteSegment) finalSegment).all.add((FinalRouteSegment) segment);
-					continue;
+					skipSegment = true;
 				} else {
 					finalSegment = (FinalRouteSegment) segment;
 					break;
 				}
 			}
+			
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95 && RoutingContext.SHOW_GC_SIZE) {
 				printMemoryConsumption("Memory occupied before exception : ");
 			}
@@ -146,14 +150,28 @@ public class BinaryRoutePlanner {
 			if (ctx.calculationProgress != null) {
 				ctx.calculationProgress.visitedSegments++;
 			}
-			if (forwardSearch) {
-				boolean doNotAddIntersections = onlyBackward;
-				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments,
-						segment, visitedOppositeSegments, doNotAddIntersections);
+			boolean visited = (forwardSearch ? visitedDirectSegments : visitedOppositeSegments)
+					.containsKey(calculateRoutePointId(segment));
+			if (visited) {
+				if (TRACE_ROUTING) {
+					println("  " + segment.segEnd + ">> Already visited by minimum");
+				}
+				skipSegment = true;
+			} else if (cst.cost < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS) {
+				throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 			} else {
-				boolean doNotAddIntersections = onlyForward;
-				processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, segment,
-						visitedDirectSegments, doNotAddIntersections);
+				minCost[forwardSearch ? 1 : 0] = cst.cost;
+			}
+			if (!skipSegment) {
+				if (forwardSearch) {
+					boolean doNotAddIntersections = onlyBackward;
+					processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, segment,
+							visitedOppositeSegments, doNotAddIntersections);
+				} else {
+					boolean doNotAddIntersections = onlyForward;
+					processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, segment,
+							visitedDirectSegments, doNotAddIntersections);
+				}
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
 
@@ -166,7 +184,8 @@ public class BinaryRoutePlanner {
 					// can't proceed - so no route
 					break;
 				} else {
-					forwardSearch = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) <= 0;
+					forwardSearch = Double.compare(graphDirectSegments.peek().segment.distanceFromStart, 
+							graphReverseSegments.peek().segment.distanceFromStart) <= 0;
 				}
 			} else {
 				// different strategy : use one directional graph
@@ -200,7 +219,7 @@ public class BinaryRoutePlanner {
 	}
 
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
-			boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectMap<RouteSegment> visited,
+			boolean reverseWaySearch, PriorityQueue<RouteSegmentCost> graphSegments, RouteSegmentPoint pnt, TLongObjectMap<RouteSegment> visited,
 			String msg) {
 		if (allowDirection && graphSegments.isEmpty()) {
 			if (pnt.others != null) {
@@ -215,7 +234,7 @@ public class BinaryRoutePlanner {
 						pos.setParentRoute(null);
 						pos.distanceFromStart = 0;
 						pos.distanceToEnd = estimatedDistance;
-						graphSegments.add(pos);
+						graphSegments.add(new RouteSegmentCost(pos, ctx));
 					}
 					RouteSegment neg = next.initRouteSegment(false);
 					if (neg != null && !visited.containsKey(calculateRoutePointId(neg)) && 
@@ -223,7 +242,7 @@ public class BinaryRoutePlanner {
 						neg.setParentRoute(null);
 						neg.distanceFromStart = 0;
 						neg.distanceToEnd = estimatedDistance;
-						graphSegments.add(neg);
+						graphSegments.add(new RouteSegmentCost(neg, ctx));
 					}
 					if (!graphSegments.isEmpty()) {
 						println("Reiterate point with new " + (!reverseWaySearch ? "start " : "destination ")
@@ -238,7 +257,7 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegmentPoint pnt, boolean originalDir, PriorityQueue<RouteSegment> graphSegments, boolean reverseSearchWay) {
+	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegmentPoint pnt, boolean originalDir, PriorityQueue<RouteSegmentCost> graphSegments, boolean reverseSearchWay) {
 		if (pnt == null) {
 			return null;
 		}
@@ -285,7 +304,7 @@ public class BinaryRoutePlanner {
 		}
 		if (checkMovementAllowed(ctx, reverseSearchWay, seg)) {
 			seg.distanceToEnd = estimatedDistance(ctx);
-			graphSegments.add(seg);
+			graphSegments.add(new RouteSegmentCost(seg, ctx));
 			return seg;
 		}
 		return null;
@@ -293,7 +312,7 @@ public class BinaryRoutePlanner {
 	
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-			PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
+			PriorityQueue<RouteSegmentCost> graphDirectSegments, PriorityQueue<RouteSegmentCost> graphReverseSegments) {
 		if (start != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;
@@ -322,19 +341,19 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private void updateCalculationProgress(final RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments,
-			PriorityQueue<RouteSegment> graphReverseSegments) {
+	private void updateCalculationProgress(final RoutingContext ctx, PriorityQueue<RouteSegmentCost> graphDirectSegments,
+			PriorityQueue<RouteSegmentCost> graphReverseSegments) {
 		if (ctx.calculationProgress != null) {
 			ctx.calculationProgress.reverseSegmentQueueSize = graphReverseSegments.size();
 			ctx.calculationProgress.directSegmentQueueSize = graphDirectSegments.size();
-			if (graphDirectSegments.size() > 0 && ctx.getPlanRoadDirection() >= 0) {
-				RouteSegment peek = graphDirectSegments.peek();
+			if (!graphDirectSegments.isEmpty() && ctx.getPlanRoadDirection() >= 0) {
+				RouteSegment peek = graphDirectSegments.peek().segment;
 				ctx.calculationProgress.distanceFromBegin = Math.max(peek.distanceFromStart,
 						ctx.calculationProgress.distanceFromBegin);
 				ctx.calculationProgress.directDistance = peek.distanceFromStart + peek.distanceToEnd;
 			}
-			if (graphReverseSegments.size() > 0 && ctx.getPlanRoadDirection() <= 0) {
-				RouteSegment peek = graphReverseSegments.peek();
+			if (!graphReverseSegments.isEmpty() && ctx.getPlanRoadDirection() <= 0) {
+				RouteSegment peek = graphReverseSegments.peek().segment;
 				ctx.calculationProgress.distanceFromEnd = Math.max(peek.distanceFromStart + peek.distanceToEnd,
 							ctx.calculationProgress.distanceFromEnd);
 				ctx.calculationProgress.reverseDistance = peek.distanceFromStart + peek.distanceToEnd;
@@ -428,7 +447,7 @@ public class BinaryRoutePlanner {
 
 	@SuppressWarnings("unused")
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, TLongObjectMap<RouteSegment> visitedSegments, 
+			PriorityQueue<RouteSegmentCost> graphSegments, TLongObjectMap<RouteSegment> visitedSegments, 
             RouteSegment startSegment, TLongObjectMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {
 		if (ASSERT_CHECKS && !checkMovementAllowed(ctx, reverseWaySearch, startSegment)) {
 			throw new IllegalStateException();
@@ -459,8 +478,12 @@ public class BinaryRoutePlanner {
 			// 2. check if segment was already visited in opposite direction
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
- 			if (alreadyVisited) {
+			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
+ 			
+			// 3. upload segment itself to visited segments
+			long nextPntId = calculateRoutePointId(currentSegment);
+			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
+			if (bothDirVisited) {
  				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction) 
 				directionAllowed = false;
 				if (TRACE_ROUTING) {
@@ -468,10 +491,6 @@ public class BinaryRoutePlanner {
 				}
 				break;
 			}
- 			
-			// 3. upload segment itself to visited segments
-			long nextPntId = calculateRoutePointId(currentSegment);
-			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
 			if (existingSegment != null) {
 				if (distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
 					// insert back original segment (test case with large area way)
@@ -502,7 +521,7 @@ public class BinaryRoutePlanner {
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
 			if (DEBUG_BREAK_EACH_SEGMENT && nextCurrentSegment != null) {
-				graphSegments.add(nextCurrentSegment);
+				graphSegments.add(new RouteSegmentCost(nextCurrentSegment, ctx));
 				break;
 			}
 			if (doNotAddIntersections) {
@@ -571,7 +590,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean checkIfOppositeSegmentWasVisited(RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectMap<RouteSegment> oppositeSegments) {
+			PriorityQueue<RouteSegmentCost> graphSegments, RouteSegment currentSegment, TLongObjectMap<RouteSegment> oppositeSegments) {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
@@ -582,7 +601,7 @@ public class BinaryRoutePlanner {
 			RouteSegment to = reverseWaySearch ? curParent : oppParent;
 			RouteSegment from = !reverseWaySearch ? curParent : oppParent;
 			if (checkViaRestrictions(from, to)) {
-				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(),
+				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
 				frs.reverseWaySearch = reverseWaySearch;
@@ -594,7 +613,7 @@ public class BinaryRoutePlanner {
 					// impossible route (when start/point on same segment but different dir) don't add to queue
 					return true;
 				}
-				graphSegments.add(frs);
+				graphSegments.add(new RouteSegmentCost(frs, ctx));
 				if (TRACE_ROUTING) {
 					printRoad("  " + currentSegment.segEnd + ">> Final segment : ", frs, reverseWaySearch);
 				}
@@ -735,7 +754,7 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
+	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegmentCost> graphSegments,
 			TLongObjectMap<RouteSegment> visitedSegments,  RouteSegment currentSegment,
 			boolean reverseWaySearch, boolean doNotAddIntersections) {
 		RouteSegment nextCurrentSegment = null;
@@ -839,7 +858,7 @@ public class BinaryRoutePlanner {
 		return nextCurrentSegment;
 	}
 
-	private boolean processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
+	private boolean processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegmentCost> graphSegments,
 			TLongObjectMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
 			if (!checkMovementAllowed(ctx, reverseWaySearch, next)) {
@@ -878,10 +897,9 @@ public class BinaryRoutePlanner {
 						// We don't check ```next.getParentRoute() == null``` cause segment could be unloaded
 						// so we need to add segment back to the queue & reassign the parent (same as for next.getParentRoute() == null)
 						if (ctx.config.heuristicCoefficient <= 1) {
-							// TODO 1.6
-//							if (DEBUG_BREAK_EACH_SEGMENT) {
-//								throw new IllegalStateException();
-//							}
+							if (DEBUG_BREAK_EACH_SEGMENT && ASSERT_CHECKS) {
+								throw new IllegalStateException();
+							}
 							if (RoutingContext.PRINT_ROUTING_ALERTS) {
 								System.err.println("! ALERT new faster path to a visited segment: "
 										+ (distFromStart + routeSegmentTime) + " < " + visIt.distanceFromStart + ": " + next + " - " + visIt);
@@ -897,17 +915,17 @@ public class BinaryRoutePlanner {
 					return false;
 				}
 			}
-			if (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
-					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0) {
+			if (!next.isSegmentAttachedToStart() || cost(next.distanceFromStart, next.distanceToEnd,
+					ctx) > cost(distFromStart, segment.distanceToEnd, ctx)) {
 				next.distanceFromStart = distFromStart;
 				next.distanceToEnd = segment.distanceToEnd;
 				if (TRACE_ROUTING) {
-					printRoad("  " + segment.getSegmentEnd() + ">>", next, null);
+					printRoad(" " + (next.isSegmentAttachedToStart() ? "*" : "") + segment.getSegmentEnd() + ">>", next, null);
 				}
 				// put additional information to recover whole route after
 				next.setParentRoute(segment);
 				if (graphSegments != null) {
-					graphSegments.add(next);
+					graphSegments.add(new RouteSegmentCost(next, ctx));
 				}
 				return true;
 			}
@@ -915,13 +933,6 @@ public class BinaryRoutePlanner {
 		return false;
 	}
 	
-
-	/*public */static int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
-			double o2DistanceFromStart, double o2DistanceToEnd, double heuristicCoefficient ) {
-		// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
-		return Double.compare(o1DistanceFromStart + heuristicCoefficient * o1DistanceToEnd, 
-				o2DistanceFromStart + heuristicCoefficient *  o2DistanceToEnd);
-	}
 
 	
 	public interface RouteSegmentVisitor {
