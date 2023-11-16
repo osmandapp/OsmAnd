@@ -646,7 +646,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
+	public double calculateTurnTime(RouteSegment segment, RouteSegment prev) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
 		float totalPenalty = 0;
@@ -674,9 +674,8 @@ public class GeneralRouter implements VehicleRouter {
 				totalPenalty += rt;
 			}
 		} else if (getLeftTurn() > 0 || getRightTurn() > 0) {
-			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(),
-					segment.getSegmentStart() < segmentEnd);
-			double a2 = prev.getRoad().directionRoute(prevSegmentEnd, prevSegmentEnd < prev.getSegmentStart());
+			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.isPositive());
+			double a2 = prev.getRoad().directionRoute(prev.getSegmentEnd(), !prev.isPositive());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {

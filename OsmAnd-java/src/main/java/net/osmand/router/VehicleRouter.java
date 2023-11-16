@@ -97,7 +97,7 @@ public interface VehicleRouter {
 	/**
 	 * Calculate turn time 
 	 */
-	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd);
+	public double calculateTurnTime(RouteSegment segment, RouteSegment prev);
 	
 		
 	public VehicleRouter build(Map<String, String> params);

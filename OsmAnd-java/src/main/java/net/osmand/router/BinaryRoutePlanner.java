@@ -841,11 +841,11 @@ public class BinaryRoutePlanner {
 		}
 		
 		if (nextCurrentSegment == null && directionAllowed) {
-			// TODO 1.6 make exception to test non base 
 			if (ctx.calculationMode != RouteCalculationMode.BASE) {
-				// exception as it should not occur 
-				// happens anyway during approximation (should be investigated)
-//				throw new IllegalStateException();
+				// exception as it should not occur, if happens during approximation - should be investigated
+				if (ASSERT_CHECKS) {
+					throw new IllegalStateException();
+				}
 			} else {
 				//  Issue #13284: we know that bug in data (how we simplify base data and connect between regions), so we workaround it
 				int newEnd = currentSegment.getSegmentEnd() + (currentSegment.isPositive() ? +1 :-1);
@@ -869,9 +869,7 @@ public class BinaryRoutePlanner {
 			}
 			float obstaclesTime = 0;
 			if (next.road.getId() != segment.road.getId()) {
-				// TODO 1.6 check 
-				obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next,
-						next.isPositive() ? next.getRoad().getPointsLength() - 1 : 0, segment, segment.getSegmentEnd());
+				obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, segment);
 			}
 			if (obstaclesTime < 0) {
 				return false;
