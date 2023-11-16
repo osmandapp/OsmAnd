@@ -16,7 +16,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
+import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase

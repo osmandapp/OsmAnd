@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 
 import java.io.File;
 import java.util.ArrayList;

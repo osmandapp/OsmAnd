@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.R;
 
 import java.util.Iterator;

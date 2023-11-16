@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.util.Algorithms;
 
@@ -25,12 +25,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
 
-	private static final int MAX_ITEMS_CACHE_SIZE = 5000;
-
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 
-	private final Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
+	private final Map<File, GpxDataItem> dataItems = new ConcurrentHashMap<>();
 
 	private final ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
 	private final Map<File, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
@@ -71,19 +69,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		}
 	}
 
-	private void updateItemsCacheSize() {
-		if (itemsCache.size() > MAX_ITEMS_CACHE_SIZE) {
-			itemsCache.clear();
-		}
-	}
-
 	private GpxDataItem putToCache(@NonNull GpxDataItem item) {
-		updateItemsCacheSize();
-		return itemsCache.put(item.getFile(), item);
+		return dataItems.put(item.getFile(), item);
 	}
 
 	private void removeFromCache(@NonNull File file) {
-		itemsCache.remove(file);
+		dataItems.remove(file);
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
@@ -96,7 +87,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
-	public boolean updateColor(@NonNull GpxDataItem item, int color) {
+	public boolean updateColor(@NonNull GpxDataItem item, @ColorInt int color) {
 		boolean res = database.updateColor(item, color);
 		putToCache(item);
 		return res;
@@ -183,13 +174,14 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public boolean remove(@NonNull File file) {
 		boolean res = database.remove(file);
-		itemsCache.remove(file);
+		removeFromCache(file);
 		return res;
 	}
 
 	public boolean remove(@NonNull GpxDataItem item) {
-		boolean res = database.remove(item);
-		itemsCache.remove(item.getFile());
+		File file = item.getFile();
+		boolean res = database.remove(file);
+		removeFromCache(file);
 		return res;
 	}
 
@@ -206,8 +198,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean clearAnalysis(@NonNull GpxDataItem item) {
-		boolean res = database.clearAnalysis(item);
-		itemsCache.remove(item.getFile());
+		boolean res = database.updateAnalysis(item, null);
+		removeFromCache(item.getFile());
 		return res;
 	}
 
@@ -247,7 +239,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
-		GpxDataItem item = itemsCache.get(file);
+		GpxDataItem item = dataItems.get(file);
 		if ((isAnalyseNeeded(file, item) || GpxDbHelper.isCitySearchNeeded(item)) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
@@ -255,7 +247,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean hasItem(@NonNull File file) {
-		return itemsCache.containsKey(file);
+		return dataItems.containsKey(file);
 	}
 
 	@NonNull
@@ -273,12 +265,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return readingItems.contains(file) || (analyser != null && file.equals(analyser.getFile()));
 	}
 
-	private void readGpxItem(@NonNull File gpxFile, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
-		readingItemsMap.put(gpxFile, item != null ? item : new GpxDataItem(null, (GPXTrackAnalysis) null));
+	private void readGpxItem(@NonNull File file, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
+		readingItemsMap.put(file, item != null ? item : new GpxDataItem(file));
 		if (callback != null) {
-			readingItemsCallbacks.put(gpxFile, callback);
+			readingItemsCallbacks.put(file, callback);
 		}
-		readingItems.add(gpxFile);
+		readingItems.add(file);
 		if (readerTask == null) {
 			startReading();
 		}
@@ -297,8 +289,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	@Override
-	public GPXDatabase getGPXDatabase() {
+	protected GPXDatabase getGPXDatabase() {
 		return database;
 	}
 

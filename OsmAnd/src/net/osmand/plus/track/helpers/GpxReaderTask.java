@@ -16,7 +16,6 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -78,14 +77,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (item != null && item.getFile() == null) {
-						item = database.getItem(file, conn);
-					}
 					if (GpxDbHelper.isAnalyseNeeded(file, item)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
-						if (item == null || item.getFile() == null) {
-							item = new GpxDataItem(file, analysis);
+						if (item == null) {
+							item = new GpxDataItem(file);
+							item.setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {
 							database.updateAnalysis(item, analysis, conn);
@@ -198,9 +195,6 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	interface GpxDbReaderCallback {
-
-		@NonNull
-		GPXDatabase getGPXDatabase();
 
 		void onGpxDataItemRead(@NonNull GpxDataItem item);
 

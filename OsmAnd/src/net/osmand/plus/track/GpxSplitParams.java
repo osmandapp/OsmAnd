@@ -2,7 +2,7 @@ package net.osmand.plus.track;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
 public class GpxSplitParams {

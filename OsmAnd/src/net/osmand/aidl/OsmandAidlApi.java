@@ -119,7 +119,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -1254,7 +1254,8 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
+			GpxDataItem gpxDataItem = new GpxDataItem(destination);
+			gpxDataItem.setColor(col);
 			gpxDataItem.setImportedByApi(true);
 			app.getGpxDbHelper().add(gpxDataItem);
 		} else {

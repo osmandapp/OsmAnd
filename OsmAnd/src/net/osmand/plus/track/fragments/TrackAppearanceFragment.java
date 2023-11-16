@@ -55,7 +55,7 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackColoringCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;

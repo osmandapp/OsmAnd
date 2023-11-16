@@ -27,7 +27,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -265,8 +265,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
-				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
-				GpxDataItem item = new GpxDataItem(fout, analysis);
+				GpxDataItem item = new GpxDataItem(fout);
+				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 				saveTrackAppearance(item);

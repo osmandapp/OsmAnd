@@ -16,7 +16,7 @@ import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

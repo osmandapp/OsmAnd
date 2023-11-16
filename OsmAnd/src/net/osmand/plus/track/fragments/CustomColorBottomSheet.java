@@ -22,11 +22,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.track.helpers.GPXDatabase;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -163,8 +163,8 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		List<GPXDatabase.GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
-		for (GPXDatabase.GpxDataItem dataItem : gpxDataItems) {
+		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
+		for (GpxDataItem dataItem : gpxDataItems) {
 			if (prevColor == dataItem.getColor()) {
 				gpxDbHelper.updateColor(dataItem, newColor);
 			}

@@ -17,7 +17,7 @@ import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
+import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
