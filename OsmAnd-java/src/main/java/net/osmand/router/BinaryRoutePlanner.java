@@ -108,7 +108,7 @@ public class BinaryRoutePlanner {
 			forwardSearch = false;
 		}
 		PriorityQueue<RouteSegmentCost> graphSegments = forwardSearch ?  graphDirectSegments : graphReverseSegments;
-		double[] minCost = new double[] { Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
+		float[] minCost = new float[] { Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY};
 		while (!graphSegments.isEmpty()) {
 			RouteSegmentCost cst = graphSegments.poll();
 			RouteSegment segment = cst.segment;
@@ -156,7 +156,7 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS) {
+			} else if (cst.cost + 0.01 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS) {
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}
@@ -182,15 +182,17 @@ public class BinaryRoutePlanner {
 			reiterate |= checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, false, graphDirectSegments, start,
 					visitedDirectSegments, "Route is not found from selected start point.");
 			if (reiterate) {
-				minCost = new double[] { Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY };
+				minCost = new float[] { Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY };
 			}
 			if (ctx.planRouteIn2Directions()) {
 				if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
 					// can't proceed - so no route
 					break;
 				} else {
-					forwardSearch = Double.compare(graphDirectSegments.peek().segment.distanceFromStart, 
-							graphReverseSegments.peek().segment.distanceFromStart) <= 0;
+					RouteSegment fw = graphDirectSegments.peek().segment;
+					RouteSegment bw = graphReverseSegments.peek().segment;
+					forwardSearch = Double.compare(cost(fw.distanceFromStart, fw.distanceToEnd, ctx), 
+							cost(bw.distanceFromStart, bw.distanceToEnd,ctx)) <= 0;
 				}
 			} else {
 				// different strategy : use one directional graph
@@ -529,7 +531,9 @@ public class BinaryRoutePlanner {
 			// Theoretically we should process each step separately but we don't have any issues with it. 
 			// a) final segment is always in queue & double checked b) using osm segment almost always is shorter routing than other connected
 			if (DEBUG_BREAK_EACH_SEGMENT && nextCurrentSegment != null) {
-				graphSegments.add(new RouteSegmentCost(nextCurrentSegment, ctx));
+				if (!doNotAddIntersections) {
+					graphSegments.add(new RouteSegmentCost(nextCurrentSegment, ctx));
+				}
 				break;
 			}
 			if (doNotAddIntersections) {
