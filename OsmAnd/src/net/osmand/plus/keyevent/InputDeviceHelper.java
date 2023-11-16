@@ -1,5 +1,9 @@
 package net.osmand.plus.keyevent;
 
+import static net.osmand.util.Algorithms.objectEquals;
+
+import android.view.KeyEvent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -172,8 +176,18 @@ public class InputDeviceHelper {
 		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device != null) {
+			resetPreviousAssignmentIfNeeded(device, newKeyBinding);
 			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
 			syncSettings(EventType.UPDATE_KEY_ASSIGNMENT);
+		}
+	}
+
+	private void resetPreviousAssignmentIfNeeded(@NonNull InputDeviceProfile device, @NonNull KeyBinding newKeyBinding) {
+		int keyCode = newKeyBinding.getKeyCode();
+		KeyBinding prevAssignment = device.findAssignment(keyCode);
+		if (prevAssignment != null && !objectEquals(newKeyBinding, prevAssignment)) {
+			KeyBinding newAssignment = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, prevAssignment);
+			updateKeyBinding(appMode, device.getId(), prevAssignment, newAssignment);
 		}
 	}
 
@@ -229,7 +243,7 @@ public class InputDeviceHelper {
 	public boolean hasNameDuplicate(@NonNull ApplicationMode appMode, @NonNull String newName) {
 		updateAppModeIfNeeded(appMode);
 		for (InputDeviceProfile device : getAvailableDevices()) {
-			if (Algorithms.objectEquals(device.toHumanString(app).trim(), newName.trim())) {
+			if (objectEquals(device.toHumanString(app).trim(), newName.trim())) {
 				return true;
 			}
 		}

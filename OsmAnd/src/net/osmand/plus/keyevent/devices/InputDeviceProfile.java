@@ -85,8 +85,13 @@ public abstract class InputDeviceProfile {
 
 	@Nullable
 	public KeyEventCommand findCommand(int keyCode) {
-		KeyBinding keyBinding = quickCache.get(keyCode);
+		KeyBinding keyBinding = findAssignment(keyCode);
 		return keyBinding != null ? keyBinding.getCommand(app) : null;
+	}
+
+	@Nullable
+	public KeyBinding findAssignment(int keyCode) {
+		return quickCache.get(keyCode);
 	}
 
 	public int getAssignmentsCount() {

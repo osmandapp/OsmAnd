@@ -6,7 +6,6 @@ import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 import static net.osmand.plus.utils.UiUtilities.createSpannableString;
 
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -195,7 +194,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void updateApplyButtonState() {
-		applyButton.setEnabled(isKeyCodeChanged() && isKeyCodeFree());
+		applyButton.setEnabled(isKeyCodeChanged());
+		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 
 	@Override
