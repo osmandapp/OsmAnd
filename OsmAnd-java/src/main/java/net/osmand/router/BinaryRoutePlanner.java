@@ -81,7 +81,6 @@ public class BinaryRoutePlanner {
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
-//		DEBUG_PRECISE_DIST_MEASUREMENT = true;
 		// Initializing priority queue to visit way segments 
 		PriorityQueue<RouteSegmentCost> graphDirectSegments = new PriorityQueue<>(50, new SegmentsComparator());
 		PriorityQueue<RouteSegmentCost> graphReverseSegments = new PriorityQueue<>(50, new SegmentsComparator());
@@ -175,10 +174,14 @@ public class BinaryRoutePlanner {
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
 
-			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() <= 0, true, graphReverseSegments, end, visitedOppositeSegments,
-					"Route is not found to selected target point.");
-			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, false, graphDirectSegments, start, visitedDirectSegments,
-					"Route is not found from selected start point.");
+			boolean reiterate = false;
+			reiterate |= checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() <= 0, true, graphReverseSegments, end,
+					visitedOppositeSegments, "Route is not found to selected target point.");
+			reiterate |= checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, false, graphDirectSegments, start,
+					visitedDirectSegments, "Route is not found from selected start point.");
+			if (reiterate) {
+				minCost = new double[] { Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY };
+			}
 			if (ctx.planRouteIn2Directions()) {
 				if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
 					// can't proceed - so no route
@@ -218,7 +221,7 @@ public class BinaryRoutePlanner {
 		return finalSegment;
 	}
 
-	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
+	protected boolean checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
 			boolean reverseWaySearch, PriorityQueue<RouteSegmentCost> graphSegments, RouteSegmentPoint pnt, TLongObjectMap<RouteSegment> visited,
 			String msg) {
 		if (allowDirection && graphSegments.isEmpty()) {
@@ -227,7 +230,7 @@ public class BinaryRoutePlanner {
 				while (pntIterator.hasNext()) {
 					RouteSegmentPoint next = pntIterator.next();
 					pntIterator.remove();
-					float estimatedDistance = (float) estimatedDistance(ctx);
+					float estimatedDistance = (float) estimatedDistance(next, reverseWaySearch, ctx);
 					RouteSegment pos = next.initRouteSegment(true);
 					if (pos != null && !visited.containsKey(calculateRoutePointId(pos)) &&
 							checkMovementAllowed(ctx, reverseWaySearch, pos)) {
@@ -247,7 +250,7 @@ public class BinaryRoutePlanner {
 					if (!graphSegments.isEmpty()) {
 						println("Reiterate point with new " + (!reverseWaySearch ? "start " : "destination ")
 								+ next.getRoad());
-						break;
+						return true;
 					}
 				}
 				if (graphSegments.isEmpty()) {
@@ -255,6 +258,7 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
+		return false;
 	}
 
 	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegmentPoint pnt, boolean originalDir, PriorityQueue<RouteSegmentCost> graphSegments, boolean reverseSearchWay) {
@@ -303,7 +307,7 @@ public class BinaryRoutePlanner {
 			}
 		}
 		if (checkMovementAllowed(ctx, reverseSearchWay, seg)) {
-			seg.distanceToEnd = estimatedDistance(ctx);
+			seg.distanceToEnd = estimatedDistance(seg, reverseSearchWay, ctx);
 			graphSegments.add(new RouteSegmentCost(seg, ctx));
 			return seg;
 		}
@@ -380,8 +384,10 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	private float estimatedDistance(final RoutingContext ctx) {
-		double distance = squareRootDist(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
+	private float estimatedDistance(RouteSegment seg, boolean rev, final RoutingContext ctx) {
+		int x = seg.getStartPointX() / 2 + seg.getEndPointX() /  2;
+		int y = seg.getStartPointY() / 2 + seg.getEndPointY() /  2;
+		double distance = squareRootDist(x, y, rev ? ctx.startX : ctx.targetX, rev ? ctx.startY : ctx.targetY);
 		return (float) (distance / ctx.getRouter().getMaxSpeed());
 	}
 
