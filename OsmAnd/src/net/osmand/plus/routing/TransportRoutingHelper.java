@@ -20,7 +20,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -524,35 +523,37 @@ public class TransportRoutingHelper {
 		}
 
 		@Nullable
-		private RouteCalculationParams getWalkingRouteParams() {
+		private RouteCalculationParams getOrProcessWalkingRouteParams() {
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
-
-			WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
-			if (walkingRouteSegment == null) {
-				return null;
-			}
-
-			OsmandApplication app = routingHelper.getApplication();
+			RouteCalculationResult cachedRoute;
 			Location start = new Location("");
-			start.setLatitude(walkingRouteSegment.start.getLatitude());
-			start.setLongitude(walkingRouteSegment.start.getLongitude());
-			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
-			RouteCalculationResult route = getRouteFromCache(start, end);
-			if (route != null) {
-				walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-				return null;
-			}
+			LatLon end;
+			WalkingRouteSegment walkingRouteSegment;
+			do {
+				walkingRouteSegment = walkingSegmentsToCalculate.poll();
+				if (walkingRouteSegment == null) {
+					walkingSegmentsCalculated = true;
+					return null;
+				}
+				start.setLatitude(walkingRouteSegment.start.getLatitude());
+				start.setLongitude(walkingRouteSegment.start.getLongitude());
+				end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
+				cachedRoute = getRouteFromCache(start, end);
+				if (cachedRoute != null) {
+					walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), cachedRoute);
+				}
+			} while (cachedRoute != null);
 
 			float currentDistanceFromBegin =
 					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
-
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
 			params.start = start;
 			params.end = end;
 			params.startTransportStop = walkingRouteSegment.startTransportStop;
 			params.targetTransportStop = walkingRouteSegment.endTransportStop;
+			OsmandApplication app = routingHelper.getApplication();
 			RoutingHelper.applyApplicationSettings(params, app.getSettings(), walkingMode);
 			params.mode = walkingMode;
 			params.ctx = app;
@@ -586,24 +587,17 @@ public class TransportRoutingHelper {
 						walkingSegmentsCalculated = true;
 					} else {
 						onUpdateCalculationProgress(0);
-						RouteCalculationParams walkingRouteParams;
-						do {
-							walkingRouteParams = getWalkingRouteParams();
-							walkingSegmentsCalculated = walkingSegmentsToCalculate.isEmpty();
-						}
-						while (walkingRouteParams == null && !walkingSegmentsCalculated);
+						RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 						if (walkingRouteParams != null) {
 							routingHelper.startRouteCalculationThread(walkingRouteParams);
 						}
 					}
 				}
 			};
-			params.alternateResultListener = new RouteCalculationResultListener() {
-				@Override
-				public void onRouteCalculated(RouteCalculationResult route) {
-					walkingRouteSegmentsCache.put(new Pair<>(params.start, params.end), route);
-					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-				}
+			WalkingRouteSegment finalWalkingRouteSegment = walkingRouteSegment;
+			params.alternateResultListener = route -> {
+				walkingRouteSegmentsCache.put(new Pair<>(params.start, params.end), route);
+				RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(finalWalkingRouteSegment.s1, finalWalkingRouteSegment.s2), route);
 			};
 
 			return params;
@@ -644,7 +638,7 @@ public class TransportRoutingHelper {
 						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prevSegment, params.end));
 					}
 				}
-				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+				RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 				if (walkingRouteParams != null) {
 					routingHelper.startRouteCalculationThread(walkingRouteParams);
 					// wait until all segments calculated
