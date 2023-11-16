@@ -65,9 +65,9 @@ public class RouteTestingTest {
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
 //		BinaryRoutePlanner.TRACE_ROUTING = true;
-//		BinaryRoutePlanner.DEBUG_BREAK_EACH_SEGMENT = true; // false - 1, true ...
-//		BinaryRoutePlanner.DEBUG_PRECISE_DIST_MEASUREMENT = false;
-		float DEFAULT_HR = 1;
+//		BinaryRoutePlanner.DEBUG_BREAK_EACH_SEGMENT = true; 
+//		BinaryRoutePlanner.DEBUG_PRECISE_DIST_MEASUREMENT = true;
+//		float DEFAULT_HR = 0;
 		
 		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
 		if (useNative) {
@@ -113,7 +113,7 @@ public class RouteTestingTest {
 			);
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					memoryLimits, params);
-			config.heuristicCoefficient = DEFAULT_HR;
+//			config.heuristicCoefficient = DEFAULT_HR;
 
 			System.out.println("planRoadDirection: " + planRoadDirection);
 
