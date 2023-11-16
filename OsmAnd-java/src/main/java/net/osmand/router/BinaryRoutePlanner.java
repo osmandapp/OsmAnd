@@ -157,7 +157,9 @@ public class BinaryRoutePlanner {
 				}
 				skipSegment = true;
 			} else if (cst.cost < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS) {
-				throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
+				if (ctx.config.heuristicCoefficient <= 1) {
+					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
+				}
 			} else {
 				minCost[forwardSearch ? 1 : 0] = cst.cost;
 			}
