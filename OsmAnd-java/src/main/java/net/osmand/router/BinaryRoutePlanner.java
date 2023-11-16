@@ -37,7 +37,7 @@ public class BinaryRoutePlanner {
 	static boolean TEST_SPECIFIC = false;
 	
 	public static boolean DEBUG_PRECISE_DIST_MEASUREMENT = false;
-	public static boolean DEBUG_BREAK_EACH_SEGMENT = true;
+	public static boolean DEBUG_BREAK_EACH_SEGMENT = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
