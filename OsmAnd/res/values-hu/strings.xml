@@ -5559,4 +5559,5 @@
     <string name="key_assignments">Billentyű-hozzárendelések</string>
     <string name="clear_key_assignment">Billentyű hozzárendelés törlése</string>
     <string name="clear_key_assignment_desc">A kiválasztott művelet billentyű hozzárendelése törlődik és Nincs értékre lesz állítva.</string>
+    <string name="topography_maps">Topográfiai térképek</string>
 </resources>
