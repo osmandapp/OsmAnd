@@ -78,13 +78,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
-		GpxDataItem item = itemsCache.get(currentFile);
-		boolean res = database.rename(item, currentFile, newFile);
-		if (item != null) {
-			putToCache(item);
+		boolean success = database.rename(currentFile, newFile);
+		if (success) {
+			GpxDataItem oldItem = dataItems.get(currentFile);
+			putToCache(new GpxDataItem(newFile, oldItem));
 			removeFromCache(currentFile);
 		}
-		return res;
+		return success;
 	}
 
 	public boolean updateColor(@NonNull GpxDataItem item, @ColorInt int color) {
@@ -154,14 +154,22 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
-		boolean res = database.updateGpsFiltersConfig(item, selectedGpxFile);
+		double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
+		double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
+		double maxSpeed = selectedGpxFile.getSpeedFilter().getSelectedMaxValue();
+		double minAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMinValue();
+		double maxAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMaxValue();
+		double maxHdop = selectedGpxFile.getHdopFilter().getSelectedMaxValue();
+
+		boolean res = database.updateGpsFiltersConfig(item, smoothingThreshold, minSpeed, maxSpeed, minAltitude, maxAltitude, maxHdop);
 		putToCache(item);
 		return res;
 	}
 
-	public void resetGpsFilters(@NonNull GpxDataItem item) {
-		database.resetGpsFilters(item);
+	public boolean resetGpsFilters(@NonNull GpxDataItem item) {
+		boolean res = database.updateGpsFiltersConfig(item, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN);
 		putToCache(item);
+		return res;
 	}
 
 	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,

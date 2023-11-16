@@ -85,7 +85,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 							item.setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {
-							database.updateAnalysis(item, analysis, conn);
+							database.updateAnalysis(conn, item, analysis);
 						}
 						if (item.getFileCreationTime() <= 0) {
 							database.updateCreateTime(item, GPXUtilities.getCreationTime(gpxFile));

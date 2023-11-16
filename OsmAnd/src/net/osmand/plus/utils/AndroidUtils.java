@@ -52,6 +52,7 @@ import android.text.style.CharacterStyle;
 import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.DisplayCutout;
 import android.view.Gravity;
@@ -112,6 +113,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -1131,6 +1133,35 @@ public class AndroidUtils {
 			}
 		}
 		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
+	}
+
+	@NonNull
+	public static Pair<String, Object[]> createDbUpdateQuery(@NonNull String tableName,
+	                                                         @NonNull Map<String, Object> columnsToUpdate,
+	                                                         @NonNull Map<String, Object> columnsToSearch) {
+		List<Object> values = new ArrayList<>();
+		String updateQuery = getRowsQuery(columnsToUpdate, values, ", ");
+		String whereQuery = getRowsQuery(columnsToSearch, values, " AND ");
+
+		String query = "UPDATE " + tableName + " SET " + updateQuery + " WHERE " + whereQuery;
+		return new Pair<>(query, values.toArray());
+	}
+
+	@NonNull
+	private static String getRowsQuery(@NonNull Map<String, Object> map, @NonNull List<Object> values, @NonNull String separator) {
+		StringBuilder builder = new StringBuilder();
+		Iterator<Entry<String, Object>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<String, Object> entry = iterator.next();
+			builder.append(entry.getKey());
+			builder.append(" = ?");
+
+			if (iterator.hasNext()) {
+				builder.append(separator);
+			}
+			values.add(entry.getValue());
+		}
+		return builder.toString();
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

@@ -54,7 +54,14 @@ public class GpxDataItem {
 
 
 	public GpxDataItem(@NonNull File file) {
+		this(file, null);
+	}
+
+	public GpxDataItem(@NonNull File file, @Nullable GpxDataItem item) {
 		this.file = file;
+		if (item != null) {
+			copyData(item);
+		}
 	}
 
 	@NonNull
@@ -272,6 +279,31 @@ public class GpxDataItem {
 		maxFilterAltitude = AltitudeFilter.getMaxFilterAltitude(extensions);
 		maxFilterHdop = HdopFilter.getMaxFilterHdop(extensions);
 		fileCreationTime = gpxFile.metadata.time;
+	}
+
+	private void copyData(@NonNull GpxDataItem item) {
+		this.analysis = item.analysis;
+		this.color = item.color;
+		this.width = item.width;
+		this.coloringType = item.coloringType;
+		this.nearestCityName = item.nearestCityName;
+		this.containingFolder = item.containingFolder;
+		this.splitType = item.splitType;
+		this.splitInterval = item.splitInterval;
+		this.fileCreationTime = item.fileCreationTime;
+		this.fileLastModifiedTime = item.fileLastModifiedTime;
+		this.fileLastUploadedTime = item.fileLastUploadedTime;
+		this.showArrows = item.showArrows;
+		this.showStartFinish = item.showStartFinish;
+		this.joinSegments = item.joinSegments;
+		this.showAsMarkers = item.showAsMarkers;
+		this.importedByApi = item.importedByApi;
+		this.maxFilterHdop = item.maxFilterHdop;
+		this.minFilterSpeed = item.minFilterSpeed;
+		this.maxFilterSpeed = item.maxFilterSpeed;
+		this.minFilterAltitude = item.minFilterAltitude;
+		this.maxFilterAltitude = item.maxFilterAltitude;
+		this.smoothingThreshold = item.smoothingThreshold;
 	}
 
 	@Override
