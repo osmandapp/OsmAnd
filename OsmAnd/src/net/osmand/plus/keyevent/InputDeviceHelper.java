@@ -173,7 +173,16 @@ public class InputDeviceHelper {
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device != null) {
 			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
-			syncSettings(EventType.UPDATE_KEYBINDING);
+			syncSettings(EventType.UPDATE_KEY_ASSIGNMENT);
+		}
+	}
+
+	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		updateAppModeIfNeeded(appMode);
+		InputDeviceProfile device = getDeviceById(appMode, deviceId);
+		if (device != null) {
+			device.resetAllAssignments();
+			syncSettings(EventType.RESET_ALL_KEY_ASSIGNMENTS);
 		}
 	}
 

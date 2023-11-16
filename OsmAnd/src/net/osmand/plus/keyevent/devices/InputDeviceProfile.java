@@ -50,6 +50,16 @@ public abstract class InputDeviceProfile {
 		syncQuickCache();
 	}
 
+	public void resetAllAssignments() {
+		List<KeyBinding> newKeyBindings = new ArrayList<>();
+		for (KeyBinding oldKeyBinding : getKeyBindings()) {
+			KeyBinding newKeyBinding = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, oldKeyBinding);
+			newKeyBindings.add(newKeyBinding);
+		}
+		this.keyBindings = newKeyBindings;
+		this.quickCache = new HashMap<>();
+	}
+
 	public void updateKeyBinding(@Nullable KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
 		if (oldKeyBinding != null) {
 			int index = keyBindings.indexOf(oldKeyBinding);
