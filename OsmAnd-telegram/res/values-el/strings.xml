@@ -60,4 +60,14 @@
     <string name="shared_string_error">Σφάλμα</string>
     <string name="send_live_location_error">Αναφορά σφάλματος ζωντανής τοποθεσίας : %1$s</string>
     <string name="send_report">Αποστολή αναφοράς</string>
+    <string name="duration_ago">%1$s πριν</string>
+    <string name="last_response_duration">Τελευταία απόκριση: %1$s πριν</string>
+    <string name="last_response_date">Τελευταία απόκριση: %1$s</string>
+    <string name="last_update_from_telegram_duration">Τελευταία ενημέρωση από Telegram: %1$s πριν</string>
+    <string name="shared_string_error_short">ERR</string>
+    <string name="shared_string_suggested">Προτεινόμενο</string>
+    <string name="status_widget_title">Κατάσταση OsmAnd Tracker</string>
+    <string name="shared_string_export">Εξαγωγή</string>
+    <string name="last_update_from_telegram_date">Τελευταία ενημέρωση από Telegram: %1$s</string>
+    <string name="back_to_osmand">Πίσω στο OsmAnd</string>
 </resources>

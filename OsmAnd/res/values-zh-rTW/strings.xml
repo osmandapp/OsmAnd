@@ -5551,4 +5551,5 @@
     <string name="key_assignments">按鍵分配</string>
     <string name="clear_key_assignment">清除按鍵分配</string>
     <string name="clear_key_assignment_desc">選定的按鍵繫結將被清除並設定為「無」。</string>
+    <string name="topography_maps">地形圖</string>
 </resources>

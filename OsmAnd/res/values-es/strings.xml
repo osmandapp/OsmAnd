@@ -5562,4 +5562,5 @@
     <string name="key_assignments">Asignaciones clave</string>
     <string name="clear_key_assignment">Borrar la asignación de teclas</string>
     <string name="clear_key_assignment_desc">La vinculación de las teclas para la acción seleccionada se borrará y se establecerá en Ninguna.</string>
+    <string name="topography_maps">Planos topográficos</string>
 </resources>
