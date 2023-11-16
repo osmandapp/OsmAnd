@@ -780,6 +780,9 @@ public class BinaryRoutePlanner {
 					if (nextCurrentSegment.isSegmentAttachedToStart()) {
 						directionAllowed = processOneRoadIntersection(ctx, reverseWaySearch, null, 
 								visitedSegments, currentSegment, nextCurrentSegment);
+						if (!directionAllowed) {
+							nextCurrentSegment = null;
+						}
 					} else {
 						nextCurrentSegment.setParentRoute(currentSegment);
 						nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
