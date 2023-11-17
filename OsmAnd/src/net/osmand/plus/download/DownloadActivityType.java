@@ -184,7 +184,7 @@ public class DownloadActivityType {
 	}
 
 	public File getDownloadFolder(OsmandApplication app, IndexItem indexItem) {
-		if (indexItem.isHidden) {
+		if (indexItem.hidden) {
 			return app.getAppInternalPath(IndexConstants.HIDDEN_DIR);
 		}
 		if (NORMAL_FILE == this) {

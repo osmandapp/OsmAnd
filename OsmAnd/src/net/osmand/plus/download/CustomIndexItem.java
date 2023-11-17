@@ -114,7 +114,7 @@ public class CustomIndexItem extends IndexItem {
 		private Map<String, String> firstSubNames;
 		private Map<String, String> secondSubNames;
 		private DownloadActivityType type;
-		private boolean isHidden;
+		private boolean hidden;
 
 		private DownloadDescriptionInfo descriptionInfo;
 
@@ -179,7 +179,7 @@ public class CustomIndexItem extends IndexItem {
 		}
 
 		public CustomIndexItemBuilder setIsHidden(boolean isHidden) {
-			this.isHidden = isHidden;
+			this.hidden = isHidden;
 			return this;
 		}
 
@@ -196,7 +196,7 @@ public class CustomIndexItem extends IndexItem {
 					secondSubNames,
 					type,
 					descriptionInfo,
-					isHidden);
+					hidden);
 		}
 	}
 }

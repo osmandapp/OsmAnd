@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
+import static net.osmand.IndexConstants.HIDDEN_BACKUP_DIR;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 
 import android.app.Activity;
@@ -7,22 +9,22 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.text.Html;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.plus.utils.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -31,6 +33,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -41,6 +44,8 @@ import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -49,6 +54,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -83,6 +93,77 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		readAdditionalDataFromJson(json);
 		readDependentFilesFromJson(json);
 		loadResources();
+		updateCustomRegionsState();
+	}
+
+	private void updateCustomRegionsState() {
+		ArrayList<Pair<File, File>> filesToCopy = new ArrayList();
+		for (WorldRegion region : getFlatCustomRegions()) {
+			if (region instanceof CustomRegion) {
+				CustomRegion customRegion = (CustomRegion) region;
+				List<IndexItem> indexItems = customRegion.loadIndexItems();
+				for (IndexItem item : indexItems) {
+					if (item.isHidden()) {
+						item.setIsHidden(false);
+						File nonHiddenFile = item.getTargetFile(app);
+						if (nonHiddenFile.exists()) {
+							item.setIsHidden(true);
+							File hiddenFile = item.getTargetFile(app);
+							filesToCopy.add(new Pair<>(nonHiddenFile, hiddenFile));
+						}
+						File nonHiddenBackupedFile = new File(app.getAppPath(BACKUP_INDEX_DIR), nonHiddenFile.getName());
+						if (nonHiddenBackupedFile.exists()) {
+							File hiddenBackupedFile = new File(app.getAppInternalPath(HIDDEN_BACKUP_DIR), nonHiddenFile.getName());
+							filesToCopy.add(new Pair<>(nonHiddenBackupedFile, hiddenBackupedFile));
+						}
+					}
+				}
+			}
+		}
+		CopyHiddenFilesTask task = new CopyHiddenFilesTask(filesToCopy);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	class CopyHiddenFilesTask extends AsyncTask<Void, Void, Void> {
+		ArrayList<Pair<File, File>> filesToCopy;
+
+		CopyHiddenFilesTask(ArrayList<Pair<File, File>> filesToCopy) {
+			this.filesToCopy = filesToCopy;
+		}
+
+		@Override
+		protected Void doInBackground(Void... voids) {
+			for (Pair<File, File> fileToCopy : filesToCopy) {
+				File origin = fileToCopy.first;
+				File target = fileToCopy.second;
+				boolean success = true;
+				File parent = target.getParentFile();
+				if (parent != null && !parent.exists()) {
+					parent.mkdirs();
+				}
+				try (InputStream in = new FileInputStream(origin)) {
+					try (OutputStream out = new FileOutputStream(target)) {
+						byte[] buf = new byte[1024];
+						int len;
+						while ((len = in.read(buf)) > 0) {
+							out.write(buf, 0, len);
+						}
+					}
+				} catch (IOException e) {
+					success = false;
+					e.printStackTrace();
+				}
+				if (success) {
+					origin.delete();
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void unused) {
+			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+		}
 	}
 
 	@Override

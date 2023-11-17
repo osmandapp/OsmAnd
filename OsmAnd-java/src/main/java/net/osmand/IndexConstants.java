@@ -73,8 +73,8 @@ public class IndexConstants {
 	public static final String APP_DIR = "osmand/";
 	public static final String MAPS_PATH = "";
 	public static final String HIDDEN_DIR = "hidden/";
-	public static final String HIDDEN_BACKUP_DIR = "hidden/backup/";
 	public static final String BACKUP_INDEX_DIR = "backup/";
+	public static final String HIDDEN_BACKUP_DIR = HIDDEN_DIR + BACKUP_INDEX_DIR;
 	public static final String GPX_INDEX_DIR = "tracks/";
 	public static final String FAVORITES_INDEX_DIR = "favorites/";
 	public static final String MAP_MARKERS_INDEX_DIR = "/map markers";
