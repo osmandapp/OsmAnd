@@ -544,7 +544,7 @@ public class ChartUtils {
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean useRightAxis,
-														   boolean setYAxisMinimum,
+	                                                       boolean setYAxisMinimum,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
 		OsmandSettings settings = app.getSettings();
@@ -872,7 +872,7 @@ public class ChartUtils {
 	                                            @NonNull LineChart chart,
 	                                            @NonNull GPXTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
-												@Nullable GPXDataSetType otherGraphType,
+	                                            @Nullable GPXDataSetType otherGraphType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
