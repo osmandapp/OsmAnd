@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -58,6 +59,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 		setText(null, null);
 		setOnClickListener(getOnClickListener());
+		updateWidgetName();
 	}
 
 	private static WidgetType getWidgetType(boolean isFirstMarker){
@@ -78,6 +80,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 	private void changeWidgetState() {
 		widgetState.changeToNextState();
 		updateInfo(null);
+		updateWidgetName();
 	}
 
 	private void showMarkerOnMap() {
@@ -204,6 +207,14 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 			} else if (markers.size() > 1) {
 				return markers.get(1);
 			}
+		}
+		return null;
+	}
+
+	@Nullable
+	protected String getAdditionalWidgetName() {
+		if (widgetState != null) {
+			return getString(widgetState.getMapMarkerModePref().get() == SideMarkerMode.DISTANCE ? R.string.distance : R.string.shared_string_eta);
 		}
 		return null;
 	}

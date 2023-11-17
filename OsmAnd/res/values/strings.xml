@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="target_elevation">Target elevation</string>
+    <string name="shared_string_eta">ETA</string>
     <string name="topography_maps">Topography maps</string>
     <string name="clear_key_assignment_desc">Key binding for the selected action will be cleared and set to None.</string>
     <string name="clear_key_assignment">Clear key assignment</string>
