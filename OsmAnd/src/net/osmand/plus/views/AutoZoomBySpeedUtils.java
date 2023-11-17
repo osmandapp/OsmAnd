@@ -18,23 +18,22 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.views.Zoom.ComplexZoom;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 public class AutoZoomBySpeedUtils {
 
-	private static final float ZOOM_PER_SECOND = 0.25f;
+	public static final float ZOOM_PER_SECOND = 0.25f;
+	public static final long FIXED_ZOOM_DURATION_MILLIS = 1000;
 	private static final int SHOW_DRIVING_SECONDS = 60;
 
 	@Nullable
-	public static Pair<Integer, Double> calculateAutoZoomBySpeed(@NonNull OsmandApplication app, @NonNull RotatedTileBox tb, float speed) {
+	public static ComplexZoom calculateAutoZoomBySpeed(@NonNull OsmandApplication app, @NonNull RotatedTileBox tb, float speed) {
 		OsmandSettings settings = app.getSettings();
 
 		float zoomProximityCoeff = settings.AUTO_ZOOM_MAP_SCALE.get().coefficient;
@@ -51,8 +50,8 @@ public class AutoZoomBySpeedUtils {
 		double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zoomDelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
 		targetZoom = Math.round(targetZoom * 3) / 3f;
 		int newIntegerZoom = (int) Math.round(targetZoom);
-		double zPart = targetZoom - newIntegerZoom;
-		return newIntegerZoom > 0 ? new Pair<>(newIntegerZoom, zPart) : null;
+		float zPart = (float) (targetZoom - newIntegerZoom);
+		return newIntegerZoom > 0 ? new ComplexZoom(newIntegerZoom, zPart) : null;
 	}
 
 	private static float defineZoomFromSpeed(@NonNull RotatedTileBox tb, float speed, float zoomProximityCoeff) {
@@ -66,9 +65,10 @@ public class AutoZoomBySpeedUtils {
 		return Zoom.fromDistanceRatio(visibleDist, distToSee, currentZoom);
 	}
 
-	public static float autoZoomBySpeed(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox, float speed) {
+	@Nullable
+	public static ComplexZoom autoZoomBySpeed(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox, float speed) {
 		if (speed < 7 / 3.6) {
-			return Float.NaN;
+			return null;
 		}
 
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
@@ -82,7 +82,7 @@ public class AutoZoomBySpeedUtils {
 		int minZoom = mapView.getMinZoom();
 		int maxZoom = Math.min(mapView.getMaxZoom(), autoZoomScale.maxZoom);
 		Zoom boundedZoom = Zoom.checkZoomBounds(expectedZoom, minZoom, maxZoom);
-		return boundedZoom.getBaseZoom() + boundedZoom.getZoomFloatPart();
+		return new ComplexZoom(boundedZoom.getBaseZoom(), boundedZoom.getZoomFloatPart());
 	}
 
 	@Nullable
@@ -96,10 +96,10 @@ public class AutoZoomBySpeedUtils {
 		}
 
 		return (analysis, point, attributes) -> {
-			float autoZoom = AutoZoomBySpeedUtils.autoZoomBySpeed(app, tileBox, attributes.speed);
+			ComplexZoom autoZoom = AutoZoomBySpeedUtils.autoZoomBySpeed(app, tileBox, attributes.speed);
 
-			if (!Float.isNaN(autoZoom)) {
-				tileBox.setZoomAndAnimation((int) autoZoom, 0.0, autoZoom - (int) autoZoom);
+			if (autoZoom != null) {
+				tileBox.setZoomAndAnimation(autoZoom.base, 0.0, autoZoom.floatPart);
 			}
 
 			float expectedZoom = (float) (tileBox.getZoom() + tileBox.getZoomFloatPart() + tileBox.getZoomAnimation());

@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -214,7 +215,7 @@ public class AnimateDraggingMapThread {
 		t.start();
 	}
 
-	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
+	public void startMoving(double finalLat, double finalLon, @Nullable Pair<ComplexZoom, Long> zoomParams,
 	                        boolean pendingRotation, Float finalRotation, long movingTime,
 	                        boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
 		if (animationsDisabled)
@@ -232,9 +233,9 @@ public class AnimateDraggingMapThread {
 		int zoom;
 		double zoomFP;
 		float rotation;
-		if (finalZoom != null && finalZoom.first != null && finalZoom.second != null) {
-			zoom = finalZoom.first;
-			zoomFP = finalZoom.second;
+		if (zoomParams != null) {
+			zoom = zoomParams.first.base;
+			zoomFP = zoomParams.first.floatPart;
 		} else {
 			zoom = startZoom;
 			zoomFP = startZoomFP;
@@ -272,7 +273,7 @@ public class AnimateDraggingMapThread {
 
 		float animationDuration = Math.max(movingTime, NAV_ANIMATION_TIME / 4);
 
-		boolean animateZoom = finalZoom != null && (zoom != startZoom || startZoomFP != 0);
+		boolean animateZoom = zoomParams != null && (zoom != startZoom || startZoomFP != 0);
 		float rotationDiff = finalRotation != null
 				? Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation)) : 0;
 		boolean animateRotation = rotationDiff > 0.1;
@@ -320,7 +321,7 @@ public class AnimateDraggingMapThread {
 
 			if (animateZoom)
 			{
-				animator.animateZoomTo(zoom + (float) zoomFP, NAV_ANIMATION_TIME / 1000f,
+				animator.animateZoomTo(zoom + (float) zoomFP, zoomParams.second / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
 			if (!animateZoom) {
@@ -359,7 +360,7 @@ public class AnimateDraggingMapThread {
 				}
 			} else {
 				if (animateZoom) {
-					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
+					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, zoomParams.second, notifyListener);
 				}
 
 				if (pendingRotation) {

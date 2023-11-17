@@ -151,4 +151,34 @@ public class Zoom {
 				? visualZoom - 1.0f
 				: (visualZoom - 1.0f) * 2.0f;
 	}
+
+	public static class ComplexZoom {
+		public int base;
+		public float floatPart;
+
+		public ComplexZoom(float zoom) {
+			this(Math.round(zoom), zoom - Math.round(zoom));
+		}
+
+		public ComplexZoom(int base, float floatPart) {
+			this.base = base;
+			this.floatPart = floatPart;
+		}
+
+		public float fullZoom() {
+			return base + floatPart;
+		}
+
+		@NonNull
+		public static ComplexZoom fromPreferredBase(float zoom, int preferredZoomBase) {
+			float floatPart = zoom - (int) zoom;
+			if (floatPart >= 0.4f && (int) zoom + 1 == preferredZoomBase) {
+				return new ComplexZoom(preferredZoomBase, zoom - preferredZoomBase);
+			} else if (floatPart < 0.6f && (int) zoom == preferredZoomBase) {
+				return new ComplexZoom(preferredZoomBase, zoom - preferredZoomBase);
+			} else {
+				return new ComplexZoom(zoom);
+			}
+		}
+	}
 }
