@@ -4,6 +4,7 @@ import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.ACTIVE;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.CANCELLED;
+import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.EXPIRED;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.IN_GRACE_PERIOD;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.UNDEFINED;
 
@@ -186,10 +187,11 @@ public class PurchaseUiDataUtils {
 
 		long installTime = Version.getInstallTime(app);
 		long expireTime = InAppPurchaseUtils.getTripltekPromoExpirationTime(app);
+		SubscriptionState state = InAppPurchaseUtils.isTripltekPromoAvailable(app) ? ACTIVE : EXPIRED;
 
 		return new PurchaseUiData(null, title, R.drawable.ic_action_osmand_start, purchaseType,
 				expireTime, installTime, false, false,
-				false, false, ACTIVE, TRIPLTEK_PROMO);
+				false, false, state, TRIPLTEK_PROMO);
 	}
 
 	@NonNull

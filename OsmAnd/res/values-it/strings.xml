@@ -5540,4 +5540,14 @@
     <string name="show_toast_about_key_pressed">Mostra la notifica sul tasto premuto</string>
     <string name="key_event_action_emit_navigation_hint">Dai un suggerimento di navigazione</string>
     <string name="download_to_device">Scarica sul dispositivo</string>
+    <string name="tripltek_promo">Promozione Tripltek per %1$s mesi</string>
+    <string name="tripltek_promo_description">Accesso libero a funzionalità quali scaricamento illimitato di mappe, 3D relief ecc. per %1$s mensili</string>
+    <string name="key_event_action_open_search_view">Apri la ricerca</string>
+    <string name="remove_widget_first">Per favore prima rimuovi il widget</string>
+    <string name="key_event_action_open_navigation_view">Apri la schermata di navigazione</string>
+    <string name="add_row">Aggiungi una riga</string>
+    <string name="discard_changes_prompt">Vuoi veramente annullare le modifiche?</string>
+    <string name="row_number">Riga %1$s</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Apri la griglia dati WunderLINQ</string>
+    <string name="see_all_plans">Vedi tutti i piani</string>
 </resources>

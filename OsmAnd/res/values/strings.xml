@@ -10,8 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="zoom_animated">Animated zoom</string>
     <string name="zoom_non_animated">Non-animated zoom</string>
+    <string name="reset_key_assignments_desc">All key assignments for the selected type will be removed.</string>
+    <string name="reset_key_assignments">Reset key assignments</string>
+    <string name="shared_string_reassign">Reassign</string>
+    <string name="target_elevation">Target elevation</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="topography_maps">Topography maps</string>
+    <string name="clear_key_assignment_desc">Key binding for the selected action will be cleared and set to None.</string>
+    <string name="clear_key_assignment">Clear key assignment</string>
+    <string name="key_assignments">Key assignments</string>
     <string name="see_all_plans">See all plans</string>
     <string name="tripltek_promo">Tripltek Promo for %1$s months</string>
     <string name="tripltek_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>

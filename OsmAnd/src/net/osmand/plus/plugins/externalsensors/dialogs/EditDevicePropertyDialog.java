@@ -23,7 +23,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -43,7 +43,7 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 	private ExtendedEditText textInput;
 	private TextView propertyName;
 	private String propertyOldValueValue;
-	private DeviceChangeableProperties property;
+	private DeviceChangeableProperty property;
 	private String deviceId;
 
 	@Nullable
@@ -73,24 +73,24 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 		if (args != null) {
 			int propertyId = args.getInt(PROPERTY_ID_KEY);
 			deviceId = args.getString(DEVICE_ID_KEY);
-			property = DeviceChangeableProperties.values()[propertyId];
+			property = DeviceChangeableProperty.values()[propertyId];
 			textInput.setInputType(property.getInputType());
 			propertyName.setText(property.getDisplayNameResId());
-			propertyValueView.setHasClearButton(property == DeviceChangeableProperties.NAME);
+			propertyValueView.setHasClearButton(property == DeviceChangeableProperty.NAME);
 			ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 			if (plugin != null) {
-				int metricResId = plugin.getPropertyMetric(property, false);
-				if (metricResId != 0) {
+				int unitsId = property.getUnitsResId(app, false);
+				if (unitsId != 0) {
 					if (AndroidUtils.isLayoutRtl(view.getContext())) {
-						textInput.setPrefix(app.getString(metricResId));
+						textInput.setPrefix(app.getString(unitsId));
 					} else {
-						textInput.setSuffix(app.getString(metricResId));
+						textInput.setSuffix(app.getString(unitsId));
 					}
 
 				}
 				AbstractDevice<?> device = plugin.getDevice(deviceId);
 				if (device != null) {
-					propertyOldValueValue = plugin.getDeviceProperty(device, property).replace(",", ".");
+					propertyOldValueValue = plugin.getFormattedDevicePropertyValue(device, property).replace(",", ".");
 					textInput.setText(propertyOldValueValue);
 				}
 			}
@@ -168,7 +168,7 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
 	                                @NonNull AbstractDevice<?> device,
-	                                @NonNull DeviceChangeableProperties property) {
+	                                @NonNull DeviceChangeableProperty property) {
 		if (!(target instanceof OnSaveSensorPropertyCallback)) {
 			throw new IllegalArgumentException("target fragment should implement OnSaveSensorNameCallback");
 		}
@@ -188,6 +188,6 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 	}
 
 	public interface OnSaveSensorPropertyCallback {
-		void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperties property, @NonNull String newValue);
+		void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperty property, @NonNull String newValue);
 	}
 }

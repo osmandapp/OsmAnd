@@ -12,10 +12,9 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 
-public class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class SqliteTileImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;
@@ -34,6 +33,7 @@ public class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> 
 	@Override
 	protected void onPostExecute(String error) {
 		hideProgress();
+		notifyImportFinished();
 		if (error == null) {
 			FragmentActivity activity = activityRef.get();
 			OsmandRasterMapsPlugin plugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);

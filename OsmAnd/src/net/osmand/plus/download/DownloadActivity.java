@@ -77,6 +77,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
+	private OsmandApplication app;
+	private DownloadIndexesThread downloadThread;
+
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
 	private AccessibilityAssistant accessibilityAssistant;
@@ -85,7 +88,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private String filterGroup;
 	private final List<TabItem> mTabs = new ArrayList<>();
 	private Set<WeakReference<Fragment>> fragSet = new HashSet<>();
-	private DownloadIndexesThread downloadThread;
 	private WorldRegion downloadItem;
 	private String downloadTargetFileName;
 
@@ -96,12 +98,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		getMyApplication().applyTheme(this);
+		app = getMyApplication();
+		downloadThread = app.getDownloadThread();
+		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
-		downloadThread = getMyApplication().getDownloadThread();
-		DownloadResources indexes = getDownloadThread().getIndexes();
+
+		DownloadResources indexes = downloadThread.getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
-			getDownloadThread().runReloadIndexFiles();
+			downloadThread.runReloadIndexFiles();
 		}
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
@@ -110,7 +114,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
-		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(getMyApplication(), downloadProgressLayout);
+		BannerAndDownloadFreeVersion.updateDescriptionTextWithSize(app, downloadProgressLayout);
 
 		viewPager = findViewById(R.id.pager);
 		PagerSlidingTabStrip pagerSlidingTabs = findViewById(R.id.sliding_tabs);
@@ -140,7 +144,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		});
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
-		if (shouldShowFreeVersionBanner(getMyApplication())) {
+		if (shouldShowFreeVersionBanner(app)) {
 			visibleBanner.updateFreeVersionBanner();
 		}
 		viewPager.setCurrentItem(loadCurrentTab());
@@ -218,7 +222,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	public void onAttachFragment(@NonNull Fragment fragment) {
-		fragSet.add(new WeakReference<Fragment>(fragment));
+		fragSet.add(new WeakReference<>(fragment));
 	}
 
 	@Override
@@ -226,9 +230,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		super.onResume();
 		initAppStatusVariables();
 		downloadThread.setUiActivity(this);
+		app.getImportHelper().setUiActivity(this);
 		downloadInProgress();
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -249,16 +253,22 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		app.getImportHelper().resetUIActivity(this);
+	}
+
+	@Override
 	@UiThread
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
-		if (downloadItem != null && downloadItem != getMyApplication().getRegions().getWorldRegion()
+		if (downloadItem != null && downloadItem != app.getRegions().getWorldRegion()
 				&& !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
 
 			if (!Algorithms.isEmpty(downloadTargetFileName)) {
 				File f = new File(downloadTargetFileName);
 				if (f.exists() && f.lastModified() > System.currentTimeMillis() - 10000) {
-					getMyApplication().getDownloadThread().initSettingsFirstMap(downloadItem);
+					downloadThread.initSettingsFirstMap(downloadItem);
 					showGoToMap(downloadItem);
 				}
 			}
@@ -272,7 +282,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
 					RestartActivity.doRestart(this);
 				} else if (fileName.startsWith(FileNameTranslationHelper.SEA_DEPTH)) {
-					getMyApplication().getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
+					app.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 				}
 			}
 			downloadItem = null;
@@ -339,7 +349,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void reloadLocalIndexes() {
-		OsmandApplication app = getMyApplication();
 		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
 			@Override
 			public void reloadIndexesStarted() {
@@ -375,13 +384,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private void showDownloadWorldMapIfNeeded() {
-		if (getDownloadThread().getCurrentDownloadingItem() == null) {
+		if (downloadThread.getCurrentDownloadingItem() == null) {
 			return;
 		}
-		IndexItem worldMap = getDownloadThread().getIndexes().getWorldBaseMapItem();
+		IndexItem worldMap = downloadThread.getIndexes().getWorldBaseMapItem();
 		// (!worldMap.isDownloaded() || worldMap.isOutdated()) - now suggest to download if downloaded 
 		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded()
-				&& worldMap.isOutdated() && !getDownloadThread().isDownloading(worldMap)) {
+				&& worldMap.isOutdated() && !downloadThread.isDownloading(worldMap)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
 			fragment.setIndexItem(worldMap);
@@ -424,7 +433,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void initAppStatusVariables() {
-		OsmandApplication app = getMyApplication();
 		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class) && !InAppPurchaseUtils.isContourLinesAvailable(app);
 		nauticalPluginDisabled = !PluginsHelper.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);

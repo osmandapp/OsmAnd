@@ -20,7 +20,7 @@ public enum LocalItemType {
 	TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
 	VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
 	FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language),
-	TERRAIN_DATA(R.string.terrain_maps, R.drawable.ic_action_terrain),
+	TERRAIN_DATA(R.string.topography_maps, R.drawable.ic_action_terrain),
 	DEPTH_DATA(R.string.nautical_maps, R.drawable.ic_action_anchor),
 	WIKI_AND_TRAVEL_MAPS(R.string.wikipedia_and_travel_maps, R.drawable.ic_action_wikipedia),
 	TILES_DATA(R.string.quick_action_map_source_title, R.drawable.ic_action_layers),

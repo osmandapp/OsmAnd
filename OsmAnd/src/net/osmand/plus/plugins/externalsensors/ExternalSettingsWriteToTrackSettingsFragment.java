@@ -35,24 +35,24 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 
 	@Override
 	protected void setupPreferences() {
-		for (WriteToGpxWidgetType widgetType : WriteToGpxWidgetType.values()) {
+		for (ExternalSensorTrackDataType widgetType : ExternalSensorTrackDataType.values()) {
 			setupSensorSettings(widgetType);
 		}
 	}
 
 
-	private void setupSensorSettings(@NonNull WriteToGpxWidgetType widgetType) {
-		CustomObjectPreference pref = findPreference(widgetType.getId());
+	private void setupSensorSettings(@NonNull ExternalSensorTrackDataType dataType) {
+		CustomObjectPreference pref = findPreference(dataType.getPreferenceId());
 		if (pref == null) {
 			pref = new CustomObjectPreference(requireContext());
-			pref.setKey(widgetType.getId());
-			pref.setCustomObject(widgetType);
-			pref.setTitle(widgetType.getTitleId());
+			pref.setKey(dataType.getPreferenceId());
+			pref.setCustomObject(dataType);
+			pref.setTitle(dataType.getTitleId());
 			pref.setLayoutResource(R.layout.preference_with_descr);
 			addOnPreferencesScreen(pref);
 		}
-		CommonPreference<String> prefSettings = plugin.getPrefSettingsForWidgetType(widgetType);
-		String deviceId = prefSettings.getModeValue(getSelectedAppMode());
+		CommonPreference<String> deviceIdPref = plugin.getWriteToTrackDeviceIdPref(dataType);
+		String deviceId = deviceIdPref.getModeValue(getSelectedAppMode());
 		String deviceName = app.getString(R.string.shared_string_none);
 		boolean deviceFound = false;
 		if (!Algorithms.isEmpty(deviceId) && !ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
@@ -64,9 +64,9 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		}
 		pref.setSummary(deviceName);
 		if (deviceFound) {
-			pref.setIcon(getActiveIcon(widgetType.getIcon()));
+			pref.setIcon(getActiveIcon(dataType.getIcon()));
 		} else {
-			pref.setIcon(getIcon(widgetType.getIcon()));
+			pref.setIcon(getIcon(dataType.getIcon()));
 		}
 	}
 
@@ -74,11 +74,11 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference instanceof CustomObjectPreference) {
 			CustomObjectPreference customPref = (CustomObjectPreference) preference;
-			if (customPref.getCustomObject() instanceof WriteToGpxWidgetType) {
-				WriteToGpxWidgetType widgetType = (WriteToGpxWidgetType) customPref.getCustomObject();
+			if (customPref.getCustomObject() instanceof ExternalSensorTrackDataType) {
+				ExternalSensorTrackDataType dataType = (ExternalSensorTrackDataType) customPref.getCustomObject();
 				ApplicationMode appMode = getSelectedAppMode();
-				SensorWidgetDataFieldType sensorType = widgetType.getSensorType();
-				String deviceId = plugin.getPrefSettingsForWidgetType(widgetType).getModeValue(appMode);
+				SensorWidgetDataFieldType sensorType = dataType.getSensorType();
+				String deviceId = plugin.getWriteToTrackDeviceIdPref(dataType).getModeValue(appMode);
 				SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorType, deviceId);
 			}
 		}
@@ -94,24 +94,24 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		ApplicationMode appMode = getSelectedAppMode();
 		switch (requestedWidgetDataFieldType) {
 			case BIKE_SPEED:
-				plugin.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.setModeValue(appMode, deviceId);
-				setupSensorSettings(WriteToGpxWidgetType.BIKE_SPEED);
+				plugin.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
+				setupSensorSettings(ExternalSensorTrackDataType.BIKE_SPEED);
 				break;
 			case BIKE_CADENCE:
-				plugin.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.setModeValue(appMode, deviceId);
-				setupSensorSettings(WriteToGpxWidgetType.BIKE_CADENCE);
+				plugin.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
+				setupSensorSettings(ExternalSensorTrackDataType.BIKE_CADENCE);
 				break;
 			case BIKE_POWER:
-				plugin.POWER_SENSOR_WRITE_TO_TRACK_DEVICE.setModeValue(appMode, deviceId);
-				setupSensorSettings(WriteToGpxWidgetType.BIKE_POWER);
+				plugin.POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
+				setupSensorSettings(ExternalSensorTrackDataType.BIKE_POWER);
 				break;
 			case HEART_RATE:
-				plugin.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.setModeValue(appMode, deviceId);
-				setupSensorSettings(WriteToGpxWidgetType.HEART_RATE);
+				plugin.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
+				setupSensorSettings(ExternalSensorTrackDataType.HEART_RATE);
 				break;
 			case TEMPERATURE:
-				plugin.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.setModeValue(appMode, deviceId);
-				setupSensorSettings(WriteToGpxWidgetType.TEMPERATURE);
+				plugin.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID.setModeValue(appMode, deviceId);
+				setupSensorSettings(ExternalSensorTrackDataType.TEMPERATURE);
 				break;
 		}
 	}

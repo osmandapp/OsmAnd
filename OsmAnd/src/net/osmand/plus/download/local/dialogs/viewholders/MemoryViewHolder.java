@@ -137,10 +137,12 @@ public class MemoryViewHolder extends RecyclerView.ViewHolder {
 		                         boolean isCustomFill, boolean isSingleColor, boolean isInverted) {
 			RectF rect = new RectF(buffer.buffer[0], buffer.buffer[1], buffer.buffer[buffer.size() - 2], buffer.buffer[3]);
 			canvas.drawRoundRect(rect, cornersRadius, cornersRadius, backgroundPaint);
-
 			mRenderPaint.setXfermode(new PorterDuffXfermode(Mode.SRC_ATOP));
+			dividerPaint.setXfermode(new PorterDuffXfermode(Mode.SRC_ATOP));
+
 			super.drawRects(canvas, dataSet, buffer, isCustomFill, isSingleColor, isInverted);
 			mRenderPaint.setXfermode(null);
+			dividerPaint.setXfermode(null);
 		}
 
 		@Override

@@ -32,7 +32,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
-import net.osmand.plus.plugins.externalsensors.WriteToGpxWidgetType;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -267,21 +267,21 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 				openExternalSensors.setVisible(true);
 				setPreferenceVisible("logging_data", true);
 				setPreferenceVisible("logging_data_divider", true);
-				List<String> linkedSensors = getLinkedSensors();
-				if (linkedSensors.isEmpty()) {
+				List<String> linkedSensorNames = getLinkedSensorNames();
+				if (linkedSensorNames.isEmpty()) {
 					@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 					openExternalSensors.setIcon(getIcon(R.drawable.ic_action_sensor, iconColor));
 					openExternalSensors.setSummary(R.string.shared_string_none);
 				} else {
 					openExternalSensors.setIcon(getActiveIcon(R.drawable.ic_action_sensor));
-					StringBuilder linkedSensorsString = new StringBuilder();
-					for (String linkedSensor : linkedSensors) {
-						if (!Algorithms.isEmpty(linkedSensorsString)) {
-							linkedSensorsString.append(", ");
+					StringBuilder summary = new StringBuilder();
+					for (String sensorName : linkedSensorNames) {
+						if (!Algorithms.isEmpty(summary)) {
+							summary.append(", ");
 						}
-						linkedSensorsString.append(linkedSensor);
+						summary.append(sensorName);
 					}
-					openExternalSensors.setSummary(linkedSensorsString);
+					openExternalSensors.setSummary(summary);
 				}
 			}
 		}
@@ -294,22 +294,22 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		}
 	}
 
-	private List<String> getLinkedSensors() {
+	private List<String> getLinkedSensorNames() {
 		ApplicationMode selectedAppMode = getSelectedAppMode();
-		List<String> linkedSensors = new ArrayList<>();
+		List<String> res = new ArrayList<>();
 		ExternalSensorsPlugin sensorsPlugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		if (sensorsPlugin != null) {
-			for (WriteToGpxWidgetType widgetType : WriteToGpxWidgetType.values()) {
-				CommonPreference<String> preference = sensorsPlugin.getPrefSettingsForWidgetType(widgetType);
-				String deviceId = preference.getModeValue(selectedAppMode);
+			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
+				CommonPreference<String> deviceIdPref = sensorsPlugin.getWriteToTrackDeviceIdPref(dataType);
+				String deviceId = deviceIdPref.getModeValue(selectedAppMode);
 				if (!Algorithms.isEmpty(deviceId) &&
 						!ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId) &&
 						sensorsPlugin.getDevice(deviceId) != null) {
-					linkedSensors.add(app.getString(widgetType.getTitleId()));
+					res.add(app.getString(dataType.getTitleId()));
 				}
 			}
 		}
-		return linkedSensors;
+		return res;
 	}
 
 	private void setupLiveMonitoringPref() {

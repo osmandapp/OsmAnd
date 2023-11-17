@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.dialogs;
 
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -28,7 +28,7 @@ import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog.OnSaveSensorPropertyCallback;
 import net.osmand.plus.utils.AndroidUtils;
@@ -258,7 +258,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	}
 
 	@Override
-	public void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperties property, @NonNull String newName) {
+	public void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperty property, @NonNull String newName) {
 		if (property == NAME) {
 			plugin.changeDeviceName(sensorId, newName);
 			updatePairedSensorsList();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new KeyBindingsController(app, appMode);
+		controller = new KeyBindingsController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -79,17 +80,22 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		});
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(getString(R.string.key_bindings));
+		title.setText(R.string.key_assignments);
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);
-		AndroidUiHelper.updateVisibility(actionButton, false);
+		ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
+		ivActionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_key_assignment_remove));
+		actionButton.setOnClickListener(v -> {
+			controller.askRemoveAllKeyAssignments();
+		});
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	@Override
 	public void processInputDeviceHelperEvent(@NonNull EventType event) {
-		if (event == EventType.UPDATE_KEYBINDING) {
+		if (event == EventType.UPDATE_KEY_ASSIGNMENT
+				|| event == EventType.RESET_ALL_KEY_ASSIGNMENTS) {
 			updateViewContent();
 		}
 	}

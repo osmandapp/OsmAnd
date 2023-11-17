@@ -48,6 +48,7 @@ import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
@@ -316,6 +317,7 @@ public class AppInitializer implements IProgress {
 		getLazyRoutingConfig();
 		app.applyTheme(app);
 		startupInit(app.reconnectToBRouter(), IBRouterService.class);
+		app.importHelper = startupInit(new ImportHelper(app), ImportHelper.class);
 		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);

@@ -22,7 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.ImportType;
+import net.osmand.plus.importfiles.ImportType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
@@ -73,7 +73,7 @@ public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				}
 			}
 		} catch (SecurityException | NullPointerException | IOException e) {
-			ImportHelper.log.error(e);
+			ImportHelper.LOG.error(e);
 			error = e.getMessage();
 		} finally {
 			Algorithms.closeStream(is);
@@ -97,7 +97,7 @@ public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				ImportType importType = XmlImportTask.checkImportType(app, tempUri);
 				if (importType == ImportType.RENDERING || importType == ImportType.ROUTING) {
 					String name = importType == ImportType.RENDERING ? "renderer" + RENDERER_INDEX_EXT : "router" + ROUTING_FILE_EXT;
-					importHelper.handleXmlFileImport(tempUri, name, null);
+					importHelper.handleXmlFileImport(tempUri, name);
 				} else if (importType == ImportType.GPX || importType == ImportType.KML) {
 					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false, false);
 				}

@@ -26,8 +26,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -121,8 +121,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapActivity mapActivity = requireMapActivity();
-		importHelper = new ImportHelper(mapActivity);
+		importHelper = app.getImportHelper();
 
 		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (routeParamsBuilder != null) {

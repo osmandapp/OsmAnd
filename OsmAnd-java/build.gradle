@@ -53,12 +53,12 @@ task collectTestResources(type: Copy) {
 	from("../../resources/test-resources") {
 		include "*"
 		include "/search/*"
+		include "/routing/*"
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"
 	}
 }
-
 
 processResources {
 	dependsOn collectRoutingResources,
