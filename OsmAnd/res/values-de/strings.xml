@@ -3124,7 +3124,7 @@
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
-    <string name="apply_to_current_profile">Nur auf „%1$s“ anwenden</string>
+    <string name="apply_to_current_profile">Nur auf Profil „%1$s“ anwenden</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
@@ -4666,7 +4666,7 @@
     <string name="gps_info_widget_desc">Zeigt die Anzahl der aktuell sichtbaren und verwendeten Satelliten an.</string>
     <string name="coordinates_widget_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an.</string>
     <string name="audio_video_notes_desc">Bietet schnellen Zugriff zum Starten/Stoppen einer Audio-, Video- oder Fotonotiz.</string>
-    <string name="bearing_desc">Zeigt die absolute oder relative Peilung zu einem Ziel in Winkeleinheiten an (im Modus 180 Grad, 360 Grad oder Milliradian).</string>
+    <string name="bearing_desc">Zeigt die absolute oder relative Peilung zu einem Ziel in Winkeleinheiten an (im Modus 180 Grad, 360 Grad oder Milliradiant).</string>
     <string name="shared_string_widget">Widget</string>
     <string name="route_maneuvers">Routenmanöver</string>
     <string name="navigation_points">Navigationspunkte</string>
@@ -5524,7 +5524,7 @@
     <string name="not_specified">Nicht angegeben</string>
     <string name="key_event_action_zoom_in">Hineinzoomen</string>
     <string name="key_event_action_change_map_orientation">Kartenorientierung ändern</string>
-    <string name="press_button_to_link_with_action">Drücken Sie die Taste auf Ihrem Gerät, um sie mit der Aktion zu verbinden: %1$s</string>
+    <string name="press_button_to_link_with_action">Drücken Sie die Schaltfläche auf Ihrem Gerät, um sie der Aktion zuzuweisen: %1$s</string>
     <string name="deletion_error">Löschungsfehler</string>
     <string name="shared_string_button">Schaltfläche</string>
     <string name="change_key_binding">Tastenbelegung ändern</string>
@@ -5555,4 +5555,11 @@
     <string name="key_event_action_move_to_my_location">Zu meinem Standort bewegen</string>
     <string name="download_to_device">Auf das Gerät herunterladen</string>
     <string name="key_event_action_move_down">Nach unten bewegen</string>
+    <string name="remove_widget_first">Bitte entfernen Sie zuerst das Widget</string>
+    <string name="add_row">Zeile hinzufügen</string>
+    <string name="discard_changes_prompt">Sind Sie sicher, dass Sie die Änderungen verwerfen wollen?</string>
+    <string name="row_number">Zeile %1$s</string>
+    <string name="tripltek_promo">Tripltek-Promo für %1$s Monate</string>
+    <string name="tripltek_promo_description">Kostenloser Zugriff für %1$s Monate auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw.</string>
+    <string name="see_all_plans">Alle Pläne anzeigen</string>
 </resources>

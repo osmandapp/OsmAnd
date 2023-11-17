@@ -2636,7 +2636,7 @@
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="saved_articles">Artículos favoritos</string>
+    <string name="saved_articles">Artículos destacados</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar por país, ciudad o provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -2696,7 +2696,7 @@
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos destacados, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
@@ -2715,7 +2715,7 @@
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
     <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC/CAI y características de deportes acuáticos y topográficas como curvas de nivel.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
-    <string name="shared_string_bookmark">Favorito</string>
+    <string name="shared_string_bookmark">Destacado</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
@@ -4778,7 +4778,7 @@
     <string name="shared_string_shows">Mostrar</string>
     <string name="shared_string_normal">Normal</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo a medir con la velocidad media para calcular la hora de llegada estimada.</string>
-    <string name="shared_string_large">Largo</string>
+    <string name="shared_string_large">Grande</string>
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
@@ -5001,7 +5001,7 @@
     <string name="cloud_conflict">Conflicto</string>
     <string name="upload_all">Enviar todos</string>
     <string name="cloud_recent_changes">Cambios</string>
-    <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
+    <string name="cloud_all_changes_uploaded">Todos los cambios cargados</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
     <string name="cloud_no_conflicts">Sin conflictos.</string>
     <string name="download_cloud_version">Descargar versión en la nube</string>
@@ -5520,7 +5520,7 @@
     <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
 \n
 \nEsta acción no se puede deshacer.</string>
-    <string name="shared_string_empty_trash">Papelera vacía</string>
+    <string name="shared_string_empty_trash">Vaciar papelera</string>
     <string name="shared_string_delete_immediately">Borrar de inmediato</string>
     <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
     <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
@@ -5540,7 +5540,7 @@
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
-    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para vincularlo con la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
     <string name="key_event_action_move_right">Mover a la derecha</string>
     <string name="shared_string_button">Botón</string>
@@ -5567,4 +5567,11 @@
     <string name="key_event_category_actions">Acciones</string>
     <string name="change_button">Cambiar botón</string>
     <string name="download_to_device">Descargar al dispositivo</string>
+    <string name="remove_widget_first">Quitar antes el widget</string>
+    <string name="add_row">Añadir fila</string>
+    <string name="discard_changes_prompt">¿Descartar cambios?</string>
+    <string name="row_number">Fila %1$s</string>
+    <string name="tripltek_promo">Promoción Tripltek por %1$s meses</string>
+    <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="see_all_plans">Ver todos los planes</string>
 </resources>

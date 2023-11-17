@@ -69,7 +69,7 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 		return if (Algorithms.isEmpty(itemName)) {
 			app.getString(R.string.root_folder)
 		} else {
-			itemName
+			itemName.replace("/", " / ")
 		}
 	}
 
@@ -82,11 +82,11 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 	override fun getSelectAllItemIcon(isChecked: Boolean, nightMode: Boolean): Drawable? {
 		return if (isChecked) {
 			app.uiUtilities.getActiveIcon(
-				R.drawable.ic_action_folder,
+				R.drawable.ic_action_group_select_all,
 				nightMode)
 		} else {
 			app.uiUtilities.getPaintedIcon(
-				R.drawable.ic_action_folder,
+				R.drawable.ic_action_group_select_all,
 				app.getColor(R.color.icon_color_default_light))
 		}
 	}

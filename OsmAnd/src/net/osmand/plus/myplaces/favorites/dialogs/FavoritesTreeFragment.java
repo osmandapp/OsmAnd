@@ -50,7 +50,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -188,9 +188,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(requireActivity(), ""));
 			listView.addHeaderView(searchView);
 			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
-			boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+			boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 			boolean isRegistered = app.getBackupHelper().isRegistered();
-			if (!proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
+			if (!available && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
 				freeFavoritesBackupCardDivider = inflater.inflate(R.layout.list_item_divider, listView, false);
 				listView.addHeaderView(freeFavoritesBackupCardDivider, null, false);
 				freeFavoritesBackupCard = inflater.inflate(R.layout.free_backup_card, listView, false);

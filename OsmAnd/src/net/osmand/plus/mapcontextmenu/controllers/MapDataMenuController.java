@@ -30,7 +30,7 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
@@ -93,7 +93,7 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class)
-				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
+				&& !InAppPurchaseUtils.isContourLinesAvailable(app);
 		OsmandPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 

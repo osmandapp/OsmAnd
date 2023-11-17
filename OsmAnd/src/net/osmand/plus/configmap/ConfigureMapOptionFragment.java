@@ -133,26 +133,11 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
-		MapControlsLayer layer = mapLayers.getMapControlsLayer();
+		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID) {
-			@Override
-			protected boolean shouldShow() {
-				return true;
-			}
-		});
-		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID) {
-			@Override
-			protected boolean shouldShow() {
-				return true;
-			}
-		});
-		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false) {
-			@Override
-			protected boolean shouldShow() {
-				return true;
-			}
-		});
+		controlsLayer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID, true));
+		controlsLayer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID, true));
+		controlsLayer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false, true));
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 

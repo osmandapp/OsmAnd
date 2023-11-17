@@ -648,26 +648,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 				getContext().getString(R.string.shared_string_my_location), "");
 	}
 
-	@Override
-	public boolean disableSingleTap() {
-		return false;
-	}
-
-	@Override
-	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
-	}
-
 	private LatLon getMyLocation() {
 		Location location = locationProvider.getLastKnownLocation();
 		if (location != null) {

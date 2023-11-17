@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -15,7 +16,6 @@ import net.osmand.Location;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -177,7 +177,7 @@ public enum ColoringType {
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
 	                                         @Nullable String attributeName, boolean route) {
 		if ((isRouteInfoAttribute() && route) || this == SLOPE) {
-			return InAppPurchaseHelper.isOsmAndProAvailable(app);
+			return InAppPurchaseUtils.isColoringTypeAvailable(app);
 		}
 		return true;
 	}

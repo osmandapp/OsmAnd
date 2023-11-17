@@ -210,9 +210,9 @@ public class VerticalWidgetPanel extends LinearLayout {
 		for (MapWidgetInfo widgetInfo : allPanelWidget) {
 			if (widgetInfo.isEnabledForAppMode(mode)) {
 				addWidgetViewToPage(rowWidgetMap, widgetInfo.pageIndex, widgetInfo);
-				if (widgetInfo.widget.isViewVisible()) {
-					widgetsToShow.add(widgetInfo.widget);
-				}
+				widgetsToShow.add(widgetInfo.widget);
+			} else {
+				widgetInfo.widget.detachView(getWidgetsPanel());
 			}
 		}
 		return new ArrayList<>(rowWidgetMap.values());
@@ -243,7 +243,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	private List<MapWidget> getFollowingWidgets(@NonNull MapWidget widget, @NonNull List<MapWidget> widgetsToShow) {
 		List<MapWidget> followingWidgets = new ArrayList<>();
 		int widgetIndex = widgetsToShow.indexOf(widget);
-		if (widgetIndex != -1 && widgetIndex + 1 == widgetsToShow.size()) {
+		if (widgetIndex != -1 && widgetIndex + 1 < widgetsToShow.size()) {
 			followingWidgets = widgetsToShow.subList(widgetIndex + 1, widgetsToShow.size());
 		}
 		return followingWidgets;

@@ -8,6 +8,7 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="tripltek">TRIPLTEK</string>
     <string name="number_in_breckets">(%d)</string>
     <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>

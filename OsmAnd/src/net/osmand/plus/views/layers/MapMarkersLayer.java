@@ -27,7 +27,6 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -70,8 +69,6 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -643,11 +640,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				.setAction(R.string.shared_string_cancel, v -> helper.moveMarkerToTop(old))
 				.show();
 		return true;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
 	}
 
 	@Override

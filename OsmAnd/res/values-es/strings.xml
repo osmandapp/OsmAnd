@@ -2615,7 +2615,7 @@
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpiar todos los puntos intermedios</string>
-    <string name="shared_string_travel_guides">Guías turísticas</string>
+    <string name="shared_string_travel_guides">Guías de viaje</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
     <string name="select_waypoints_category_description">Añadir todos los puntos de referencia de la traza o elegir categorías separadas.</string>
@@ -2642,13 +2642,13 @@
     <string name="images_cache">Almacén de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="download_maps_travel">Guías turísticas</string>
-    <string name="shared_string_wikivoyage">Wikiviajes</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artículo borrado</string>
     <string name="wikivoyage_search_hint">Buscar por país, ciudad o provincia</string>
     <string name="shared_string_read">Leer</string>
-    <string name="saved_articles">Artículos favoritos</string>
+    <string name="saved_articles">Artículos destacados</string>
     <string name="shared_string_explore">Explorar</string>
-    <string name="shared_string_contents">Contenido</string>
+    <string name="shared_string_contents">Contenidos</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="shared_string_dont">No</string>
     <string name="shared_string_do">Hacer</string>
@@ -2679,9 +2679,9 @@
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
-    <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre sitios alrededor del mundo, sin una conexión a Internet.</string>
+    <string name="travel_card_download_descr">Descarga las guías de viaje de Wikivoyage para ver los artículos sobre los lugares de todo el mundo sin conexión a Internet.</string>
     <string name="update_is_available">Actualización disponible</string>
-    <string name="download_file">Descargar archivo</string>
+    <string name="download_file">Descargar el archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
     <string name="welcome_to_open_beta_description">Las guías turísticas, se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita.</string>
     <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikiviajes. Comparte tu conocimiento, experiencia, talento y atención.</string>
@@ -2716,7 +2716,7 @@
     <string name="light_rs_render_descr">Estilo de conducción sencillo. Modo nocturno suave, carreteras de estilo naranja contrastado, atenúa los objetos secundarios del mapa, las características topográficas como las curvas de nivel.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
     <string name="default_render_descr">Estilo universal. Representación clara de las ciudades densamente pobladas. Características: rutas, calidad de la superficie, restricciones de acceso, señales de tráfico, enrutamiento a escala SAC/CAI, características de deportes de aguas bravas, características topográficas como las curvas de nivel.</string>
-    <string name="shared_string_bookmark">Favorito</string>
+    <string name="shared_string_bookmark">Marcar como favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
@@ -5303,7 +5303,7 @@
 \n</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para el relieve/la pendiente</string>
     <string name="shared_string_avoid">Evitar</string>
-    <string name="cache_size">Tamaño de la caché</string>
+    <string name="cache_size">Tamaño de la cache</string>
     <string name="may_be_used_if_there_is_shortcut">Puede utilizarse si existe un acceso directo</string>
     <string name="free_settings_backup">Copia de seguridad gratuita de la configuración</string>
     <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
@@ -5525,7 +5525,7 @@
     <string name="key_event_action_previous_app_profile">Perfil anterior de la aplicación</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación del sistema sobre la tecla presionada</string>
     <string name="key_event_action_move_left">A la izquierda</string>
-    <string name="press_button_to_link_with_action">Pulse el botón de su dispositivo para vincularlo con la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Pulse el botón de su dispositivo para asignarlo a la acción: %1$s</string>
     <string name="key_event_action_move_right">A la derecha</string>
     <string name="shared_string_button">Botón</string>
     <string name="key_event_action_next_app_profile">Perfil de la siguiente aplicación</string>
@@ -5552,4 +5552,11 @@
     <string name="deletion_error">Error en la eliminación</string>
     <string name="change_button">Botón para cambiar</string>
     <string name="download_to_device">Descargar al dispositivo</string>
+    <string name="remove_widget_first">Por favor, elimine primero el widget</string>
+    <string name="add_row">Añadir una fila</string>
+    <string name="discard_changes_prompt">¿Estás seguro de que quieres descartar los cambios?</string>
+    <string name="row_number">Fila %1$s</string>
+    <string name="tripltek_promo">Promoción Tripltek para %1$s meses</string>
+    <string name="tripltek_promo_description">Acceso gratuito a las funciones como descargas ilimitadas de mapas, relieve 3D, etc. durante %1$s mes</string>
+    <string name="see_all_plans">Ver todos los planos</string>
 </resources>

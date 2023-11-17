@@ -726,7 +726,7 @@
     <string name="poi_route_subway_ref">مترو</string>
     <string name="poi_recycling_accepted_waste">محل دفن زباله</string>
     <string name="poi_nudism">برهنگی</string>
-    <string name="poi_health_specialty">بهداشت</string>
+    <string name="poi_healthcare_speciality">بهداشت</string>
     <string name="poi_caravans">کاروان</string>
     <string name="poi_power_supply">پست برق</string>
     <string name="poi_medical_system">نظام پزشکی</string>

@@ -5549,4 +5549,11 @@
     <string name="deletion_error">Hiba törléskor</string>
     <string name="change_button">Gomb módosítása</string>
     <string name="download_to_device">Letöltés az eszközre</string>
+    <string name="remove_widget_first">Előbb távolítsa el a widgetet</string>
+    <string name="add_row">Sor hozzáadása</string>
+    <string name="discard_changes_prompt">Biztosan elveti a változtatásokat?</string>
+    <string name="row_number">%1$s. sor</string>
+    <string name="tripltek_promo">Tripltek ajánlat %1$s hónapra</string>
+    <string name="tripltek_promo_description">Ingyenes hozzáférés a funkciókhoz %1$s hónapig, beleértve a korlátlan térképletöltést, 3D domborzatot stb</string>
+    <string name="see_all_plans">Összes csomag megtekintése</string>
 </resources>

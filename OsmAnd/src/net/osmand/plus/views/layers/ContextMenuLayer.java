@@ -954,13 +954,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		PointDescription getObjectName(Object o);
 
-		boolean disableSingleTap();
+		default boolean disableSingleTap() {
+			return false;
+		}
 
-		boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox);
+		default boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
+			return false;
+		}
 
-		boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation);
+		default boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+			return false;
+		}
 
-		boolean showMenuAction(@Nullable Object o);
+		default boolean showMenuAction(@Nullable Object o) {
+			return false;
+		}
 	}
 
 	public interface IMoveObjectProvider {

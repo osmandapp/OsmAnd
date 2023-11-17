@@ -17,7 +17,7 @@ import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -84,12 +84,12 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		}
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		compoundButton.setChecked(proAvailable ? selectedTypes == items.getTypes().size() : false);
-		compoundButton.setEnabled(proAvailable);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
+		compoundButton.setChecked(available ? selectedTypes == items.getTypes().size() : false);
+		compoundButton.setEnabled(available);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 		View switchContainer = view.findViewById(R.id.switch_container);
-		if (proAvailable) {
+		if (available) {
 			switchContainer.setOnClickListener(view1 -> {
 				compoundButton.performClick();
 				if (listener != null) {
@@ -133,7 +133,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
-		boolean showProIcon = !InAppPurchaseHelper.isOsmAndProAvailable(app) && !type.isAllowedInFreeVersion();
+		boolean showProIcon = !InAppPurchaseUtils.isBackupAvailable(app) && !type.isAllowedInFreeVersion();
 		setupChildIcon(view, type.getIconRes(), selected && !showProIcon);
 		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 		view.setOnClickListener(view1 -> {

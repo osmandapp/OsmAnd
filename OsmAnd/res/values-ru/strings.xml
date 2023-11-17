@@ -5485,7 +5485,7 @@
     <string name="loading_tracks">Перезагрузка треков</string>
     <string name="searching_matching_tracks">Искать все подходящие треки</string>
     <string name="shared_string_is_deleted">%1$s удалено.</string>
-    <string name="enable_to_use_external_input_device">Включите использование внешнего устройства ввода с OsmAnd.</string>
+    <string name="enable_to_use_external_input_device">Включите для использование внешнего устройства ввода с OsmAnd.</string>
     <string name="key_event_action_change_map_orientation">Сменить ориентацию карты</string>
     <string name="key_event_action_previous_app_profile">Предыдущий профиль</string>
     <string name="show_toast_about_key_pressed">Показывать всплывающее сообщение о нажатой клавише</string>
@@ -5499,8 +5499,8 @@
     <string name="shared_string_action">Действие</string>
     <string name="add_new_type">Добавить новый тип</string>
     <string name="key_event_action_move_up">Сдвиг вверх</string>
-    <string name="key_event_action_open_search_view">Экран поиска</string>
-    <string name="key_event_action_open_navigation_view">Экран навигации</string>
+    <string name="key_event_action_open_search_view">Открыть экран поиска</string>
+    <string name="key_event_action_open_navigation_view">Открыть экран навигации</string>
     <string name="external_input_device_title">Внешнее устройство ввода</string>
     <string name="key_bindings">Привязки клавиш</string>
     <string name="key_event_action_move_to_my_location">Моё местоположение</string>
@@ -5511,4 +5511,6 @@
     <string name="deletion_error">Ошибка удаления</string>
     <string name="key_event_action_zoom_out">Уменьшить масштаб</string>
     <string name="key_event_action_toggle_drower">Показать/скрыть боковое меню</string>
+    <string name="shared_string_rows">Ряды</string>
+    <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на другое действии: «%2$s»</string>
 </resources>

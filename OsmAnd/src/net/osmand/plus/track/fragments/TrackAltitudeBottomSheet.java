@@ -20,8 +20,8 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
@@ -51,7 +51,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.get_altitude_data)));
 		createAttachToRoadsItem();
-		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+		if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
 			DividerItem dividerItem = new DividerItem(app);
 			dividerItem.setMargins(margin, 0, 0, 0);

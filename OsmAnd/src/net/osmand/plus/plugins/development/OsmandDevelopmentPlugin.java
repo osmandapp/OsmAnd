@@ -16,7 +16,7 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
@@ -232,7 +232,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	public boolean isRelief3dPurchased() {
-		return InAppPurchaseHelper.isOsmAndProAvailable(app);
+		return InAppPurchaseUtils.is3dMapsAvailable(app);
 	}
 
 	@Nullable
