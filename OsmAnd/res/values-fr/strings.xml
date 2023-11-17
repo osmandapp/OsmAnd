@@ -5543,4 +5543,9 @@
     <string name="download_to_device">Télécharger sur l\'appareil</string>
     <string name="add_row">Ajouter une ligne</string>
     <string name="row_number">Ligne %1$s</string>
+    <string name="remove_widget_first">Veuillez d\'abord supprimer le gadget</string>
+    <string name="discard_changes_prompt">Êtes-vous certain de vouloir ignorer les modifications ?</string>
+    <string name="tripltek_promo">Promotion Tripltek pour %1$s mois</string>
+    <string name="tripltek_promo_description">Accès gratuit aux fonctionnalités, y compris les téléchargements de cartes illimités, le relief 3D, etc. pour %1$s mois</string>
+    <string name="see_all_plans">Afficher tous les tarifs</string>
 </resources>

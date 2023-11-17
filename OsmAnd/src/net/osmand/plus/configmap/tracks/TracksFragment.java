@@ -2,7 +2,7 @@ package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 
@@ -46,8 +46,8 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
@@ -134,7 +134,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		importHelper = new ImportHelper(requireActivity());
+		importHelper = app.getImportHelper();
 		selectedTracksHelper = new SelectedTracksHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = selectedTracksHelper.getItemsSelectionHelper();

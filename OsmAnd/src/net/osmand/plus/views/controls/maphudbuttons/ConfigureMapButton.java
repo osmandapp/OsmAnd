@@ -1,19 +1,19 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 
-import androidx.annotation.NonNull;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-
 public class ConfigureMapButton extends MapButton {
 
 	public ConfigureMapButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_layers_button), LAYERS_HUD_ID);
+		super(mapActivity, mapActivity.findViewById(R.id.map_layers_button), LAYERS_HUD_ID, false);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		setOnClickListener(v -> {
 			MapActivity.clearPrevActivityIntent();
@@ -30,7 +30,7 @@ public class ConfigureMapButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return !isRouteDialogOpened() && widgetsVisibilityHelper.shouldShowTopButtons();
+		return !isRouteDialogOpened() && visibilityHelper.shouldShowTopButtons();
 	}
 
 	@Override

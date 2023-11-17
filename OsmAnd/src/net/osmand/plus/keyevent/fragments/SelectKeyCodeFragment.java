@@ -6,7 +6,6 @@ import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 import static net.osmand.plus.utils.UiUtilities.createSpannableString;
 
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -160,7 +159,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private void updateKeyLabel(@NonNull View view) {
 		TextView keyLabel = view.findViewById(R.id.key_label);
-		keyLabel.setText(KeySymbolMapper.getKeySymbol(keyCode));
+		keyLabel.setText(KeySymbolMapper.getKeySymbol(app, keyCode));
 	}
 
 	private void updateCursor(@NonNull View view) {
@@ -185,7 +184,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		KeyEventCommand commandDuplicate = getCommandDuplication(keyCode);
 		if (commandDuplicate != null) {
 			AndroidUiHelper.updateVisibility(warning, true);
-			String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
+			String keyLabel = KeySymbolMapper.getKeySymbol(app, keyCode);
 			String actionName = commandDuplicate.toHumanString(app);
 			String message = getString(R.string.key_is_already_assigned_error, keyLabel, actionName);
 			errorMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
@@ -195,7 +194,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void updateApplyButtonState() {
-		applyButton.setEnabled(isKeyCodeChanged() && isKeyCodeFree());
+		applyButton.setEnabled(isKeyCodeChanged());
+		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 
 	@Override

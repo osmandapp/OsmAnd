@@ -6,7 +6,7 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.TEMP_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
-import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.utils.FileUtils.createUniqueFileName;
 
 import android.net.Uri;
@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.ImportType;
+import net.osmand.plus.importfiles.ImportType;
 import net.osmand.util.Algorithms;
 
 import java.io.InputStream;
@@ -61,7 +61,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 				}
 			}
 		} catch (Exception e) {
-			ImportHelper.log.error(e.getMessage(), e);
+			ImportHelper.LOG.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);
 			Algorithms.closeStream(zis);
@@ -88,7 +88,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 		} else if (importType == ImportType.SETTINGS) {
 			String name = createUniqueFileName(app, "settings", TEMP_DIR, OSMAND_SETTINGS_FILE_EXT);
 			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT,
-					null, false, false, null, -1, null);
+					null, false, false, null, -1);
 		}
 	}
 }

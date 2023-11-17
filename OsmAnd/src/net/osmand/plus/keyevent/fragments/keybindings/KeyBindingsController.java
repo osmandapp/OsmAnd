@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventCategory;
@@ -18,6 +19,8 @@ import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.fragments.EditKeyBindingFragment;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -30,18 +33,21 @@ class KeyBindingsController {
 	private final InputDeviceHelper deviceHelper;
 	private final InputDeviceProfile inputDevice;
 	private FragmentActivity activity;
+	private final boolean usedOnMap;
 
 	public KeyBindingsController(@NonNull OsmandApplication app,
-	                             @NonNull ApplicationMode appMode) {
+	                             @NonNull ApplicationMode appMode,
+	                             boolean usedOnMap) {
 		this.app = app;
 		this.appMode = appMode;
+		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 	}
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null || inputDevice.getCommandsCount() == 0) {
+		if (inputDevice == null || inputDevice.getActionsCount() == 0) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
@@ -65,6 +71,16 @@ class KeyBindingsController {
 		this.activity = activity;
 	}
 
+	public void askRemoveAllKeyAssignments() {
+		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+				.setTitle(R.string.reset_key_assignments)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_reset_all, (dialog, which) -> {
+					deviceHelper.resetAllAssignments(appMode, inputDevice.getId());
+				});
+		CustomAlert.showSimpleMessage(dialogData, R.string.reset_key_assignments_desc);
+	}
+
 	public boolean isDeviceEditable() {
 		return inputDevice != null && deviceHelper.isCustomDevice(inputDevice);
 	}
@@ -74,5 +90,9 @@ class KeyBindingsController {
 			FragmentManager fm = activity.getSupportFragmentManager();
 			EditKeyBindingFragment.showInstance(fm, appMode, action, inputDevice.getId());
 		}
+	}
+
+	private boolean isNightMode() {
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

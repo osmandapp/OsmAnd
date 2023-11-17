@@ -30,6 +30,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -130,6 +131,10 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		}
 	}
 
+	protected void updateContent(boolean progress) {
+
+	}
+
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -158,8 +163,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected abstract int getLayoutId();
-
-	protected abstract void updateContent(boolean progress);
 
 	protected abstract void updateToolbar(int verticalOffset);
 
@@ -194,7 +197,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	@Override
 	public void onGetItems() {
-		if (isAdded() && InAppPurchaseHelper.isSubscribedToAny(app)) {
+		if (isAdded() && InAppPurchaseUtils.isSubscribedToAny(app)) {
 			updateContent(false);
 		}
 	}
@@ -262,6 +265,16 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {
 		return UiUtilities.createTintedDrawable(app, background.drawableId, color);
+	}
+
+	@NonNull
+	protected Drawable getCheckmark() {
+		return getIcon(nightMode ? R.drawable.ic_action_checkmark_colored_night : R.drawable.ic_action_checkmark_colored_day);
+	}
+
+	@NonNull
+	protected Drawable getEmptyCheckmark() {
+		return getIcon(nightMode ? R.drawable.ic_action_radio_button_night : R.drawable.ic_action_radio_button_day);
 	}
 
 	@ColorInt

@@ -5509,7 +5509,7 @@
     <string name="key_event_action_move_left">Вліво</string>
     <string name="restore_from_trash">Відновити зі смітника</string>
     <string name="all_folders">Усі теки</string>
-    <string name="press_button_to_link_with_action">Для призначення вказаної дії натисніть на своєму пристрої клавішу: %1$s</string>
+    <string name="press_button_to_link_with_action">Натисніть кнопку на вашому пристрої, щоб призначити його до дії: %1$s</string>
     <string name="deletion_error">Помилка видалення</string>
     <string name="key_event_action_move_right">Вправо</string>
     <string name="shared_string_show_less">Показувати менше</string>

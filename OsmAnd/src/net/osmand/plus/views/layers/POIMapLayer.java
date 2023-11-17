@@ -574,16 +574,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public boolean disableSingleTap() {
-		return false;
-	}
-
-	@Override
-	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
@@ -597,11 +587,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return ((Amenity) o).getLocation();
 		}
 		return null;
-	}
-
-	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
 	}
 
 	@Override

@@ -38,7 +38,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -575,7 +575,7 @@ public class IntentHelper {
 						try {
 							OsmAndFeature feature = OsmAndFeature.valueOf(featureValue);
 							if (feature == OsmAndFeature.ANDROID_AUTO) {
-								if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+								if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 									ChoosePlanFragment.showInstance(mapActivity, feature);
 								}
 							} else {

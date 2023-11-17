@@ -8,6 +8,7 @@ import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,15 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		toolbar.setNavigationOnClickListener(v -> {
 			dismiss();
 		});
+
+		toolbar.inflateMenu(R.menu.edit_key_assignment_menu);
+		toolbar.setOnMenuItemClickListener(item -> {
+			if (item.getItemId() == R.id.action_clear_key_assignment) {
+				showRemoveKeyAssignmentDialog();
+				return true;
+			}
+			return false;
+		});
 	}
 
 	private void setupActionNameRow(@NonNull View view) {
@@ -135,12 +145,41 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
 	}
 
+	private void setupActionTypeRow(@NonNull View view) {
+		View actionButton = view.findViewById(R.id.action_button);
+		TextView title = actionButton.findViewById(R.id.title);
+		title.setText(R.string.shared_string_action);
+		TextView summary = actionButton.findViewById(R.id.description);
+		summary.setText(keyBinding.getCommandTitle(app));
+	}
+
+	private void setupActionKeyRow(@NonNull View view) {
+		View keyButton = view.findViewById(R.id.key_button);
+		TextView title = keyButton.findViewById(R.id.title);
+		title.setText(R.string.shared_string_button);
+
+		TextView summary = keyButton.findViewById(R.id.description);
+		summary.setText(keyBinding.getKeyLabel(app));
+		summary.setTextColor(getActiveColor(app, nightMode));
+		summary.setTypeface(summary.getTypeface(), Typeface.BOLD);
+
+		keyButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				Fragment thisFragment = EditKeyBindingFragment.this;
+				FragmentManager fm = activity.getSupportFragmentManager();
+				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyBinding);
+			}
+		});
+		View backgroundView = keyButton.findViewById(R.id.selectable_list_item);
+		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
+		AndroidUiHelper.updateVisibility(keyButton.findViewById(R.id.bottom_divider), false);
+	}
+
 	private void showEnterNameDialog(@Nullable String oldName,
 	                                 @NonNull CallbackWithObject<String> callback) {
 		FragmentActivity activity = getActivity();
-		if (activity == null) {
-			return;
-		}
+		if (activity == null) return;
 
 		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
 				.setTitle(getString(R.string.shared_string_name))
@@ -169,51 +208,33 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		CustomAlert.showInput(dialogData, activity, oldName, caption);
 	}
 
-	private void setupActionTypeRow(@NonNull View view) {
-		View actionButton = view.findViewById(R.id.action_button);
-		TextView title = actionButton.findViewById(R.id.title);
-		title.setText(R.string.shared_string_action);
-		TextView summary = actionButton.findViewById(R.id.description);
-		summary.setText(keyBinding.getCommandTitle(app));
-	}
+	private void showRemoveKeyAssignmentDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity == null) return;
 
-	private void setupActionKeyRow(@NonNull View view) {
-		View keyButton = view.findViewById(R.id.key_button);
-		TextView title = keyButton.findViewById(R.id.title);
-		title.setText(R.string.shared_string_button);
-
-		TextView summary = keyButton.findViewById(R.id.description);
-		summary.setText(keyBinding.getKeySymbol());
-		summary.setTextColor(getActiveColor(app, nightMode));
-		summary.setTypeface(summary.getTypeface(), Typeface.BOLD);
-
-		keyButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				Fragment thisFragment = EditKeyBindingFragment.this;
-				FragmentManager fm = activity.getSupportFragmentManager();
-				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyBinding);
-			}
-		});
-		View backgroundView = keyButton.findViewById(R.id.selectable_list_item);
-		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
-		AndroidUiHelper.updateVisibility(keyButton.findViewById(R.id.bottom_divider), false);
+		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+				.setTitle(R.string.clear_key_assignment)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
+					onKeyCodeSelected(KeyEvent.KEYCODE_UNKNOWN);
+				});
+		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);
 	}
 
 	private void onNameEntered(@NonNull String newName) {
-		String originalName = keyBinding.getName(app);
-		if (!Objects.equals(originalName, newName)) {
+		KeyBinding originalKeyBinding = keyBinding;
+		if (!Objects.equals(originalKeyBinding.getName(app), newName)) {
 			keyBinding = new KeyBinding(newName, keyBinding);
-			deviceHelper.updateKeyBinding(appMode, deviceId, keyBinding.getKeyCode(), keyBinding);
+			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyBinding, keyBinding);
 		}
 	}
 
 	@Override
 	public void onKeyCodeSelected(int newKeyCode) {
-		int originalKeyCode = keyBinding.getKeyCode();
-		if (newKeyCode != originalKeyCode) {
+		KeyBinding originalKeyBinding = keyBinding;
+		if (newKeyCode != originalKeyBinding.getKeyCode()) {
 			keyBinding = new KeyBinding(newKeyCode, keyBinding);
-			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyCode, keyBinding);
+			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyBinding, keyBinding);
 		}
 	}
 

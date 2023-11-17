@@ -259,19 +259,22 @@ public abstract class InAppPurchases {
 		}
 
 		public enum PurchaseOrigin {
+
 			UNDEFINED(R.string.shared_string_undefined),
 			GOOGLE(R.string.google_play),
 			AMAZON(R.string.amazon_market),
 			HUAWEI(R.string.huawei_market),
 			IOS(R.string.apple_app_store),
-			PROMO(R.string.promo);
+			PROMO(R.string.promo),
+			TRIPLTEK_PROMO(R.string.tripltek);
 
-			final int storeNameId;
+			private final int storeNameId;
 
-			PurchaseOrigin(int storeNameId) {
+			PurchaseOrigin(@StringRes int storeNameId) {
 				this.storeNameId = storeNameId;
 			}
 
+			@StringRes
 			public int getStoreNameId() {
 				return storeNameId;
 			}

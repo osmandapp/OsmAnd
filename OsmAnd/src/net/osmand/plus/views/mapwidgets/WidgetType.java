@@ -20,7 +20,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -241,7 +241,7 @@ public enum WidgetType {
 	public boolean isPurchased(@NonNull Context ctx) {
 		if (getProWidgets().contains(this)) {
 			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			return InAppPurchaseHelper.isOsmAndProAvailable(app);
+			return InAppPurchaseUtils.isProWidgetsAvailable(app);
 		}
 		return true;
 	}

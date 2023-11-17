@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -15,6 +16,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
@@ -119,6 +121,14 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	private void updateTimeToGo(int leftSeconds) {
 		String formattedLeftTime = OsmAndFormatter.getFormattedDurationShortMinutes(leftSeconds);
 		setText(formattedLeftTime, null);
+	}
+
+	@Nullable
+	protected String getAdditionalWidgetName() {
+		if (widgetState != null && arrivalTimeOtherwiseTimeToGoPref != null) {
+			return getString(getCurrentState().titleId);
+		}
+		return null;
 	}
 
 	@NonNull

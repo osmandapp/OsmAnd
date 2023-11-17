@@ -2597,7 +2597,7 @@
     <string name="shared_string_read">Ler</string>
     <string name="saved_articles">Artigos marcados</string>
     <string name="shared_string_explore">Explorar</string>
-    <string name="shared_string_contents">Conteúdos</string>
+    <string name="shared_string_contents">Conteúdo</string>
     <string name="index_item_world_wikivoyage">Artigos Wikivoyage mundiais</string>
     <string name="wikivoyage_download_pics">Baixar imagens</string>
     <string name="shared_string_wifi_only">Somente com WiFi</string>
@@ -2673,7 +2673,7 @@
     <string name="coord_input_save_as_track">Salvar como trilha</string>
     <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
     <string name="topo_render_descr">Para caminhadas, trekking e ciclismo na natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de curvas de nível, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC/CAI, itens de esporte em corredeiras.</string>
+    <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC/CAI, itens de esporte em corredeiras, recursos topográficos como curvas de nível.</string>
     <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \nCobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -5466,4 +5466,88 @@
     <string name="no_config_smart_folder_description">Pastas inteligentes permitem agrupar trilhas por filtros aplicados</string>
     <string name="loading_tracks">Carregando trilhas</string>
     <string name="searching_matching_tracks">Pesquisar todas as faixas correspondentes</string>
+    <string name="cloud_trash_clear_confirmation">Quer mesmo excluir permanentemente todos os itens da lixeira? Esta ação não pode ser desfeita.</string>
+    <string name="key_event_action_zoom_in">Aproximar</string>
+    <string name="change_button">Botão de alterar</string>
+    <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
+    <string name="shared_string_rows">Linhas</string>
+    <string name="key_event_action_move_left">Mover para a esquerda</string>
+    <string name="restore_from_trash">Restaurar da lixeira</string>
+    <string name="press_button_to_link_with_action">Pressione o botão no seu dispositivo para atribuí-lo à ação: %1$s</string>
+    <string name="deletion_error">Erro de exclusão</string>
+    <string name="key_event_action_move_right">Mover para a direita</string>
+    <string name="shared_string_button">Botão</string>
+    <string name="delete_all_items">Excluir todos os itens</string>
+    <string name="change_key_binding">Alterar vinculação das teclas</string>
+    <string name="key_event_action_take_media_note">Tirar nota de mídia</string>
+    <string name="key_event_action_activity_back_pressed">Atividade de retorno pressionada</string>
+    <string name="key_event_action_emit_navigation_hint">Emitir uma sugestão de navegação</string>
+    <string name="remove_type_q">Quer mesmo remover o tipo \"%1$s\"?</string>
+    <string name="shared_string_action">Ação</string>
+    <string name="add_new_type">Adicionar novo tipo</string>
+    <string name="key_event_action_move_up">Mover para cima</string>
+    <string name="key_event_action_open_search_view">Abrir vista de pesquisa</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será excluído permanentemente. Tem a certeza?
+\n
+\nEsta ação não pode ser desfeita</string>
+    <string name="remove_widget_first">Remova o widget primeiro</string>
+    <string name="key_event_action_zoom_out">Afastar</string>
+    <string name="key_event_action_toggle_drower">Mostrar/ocultar menu lateral</string>
+    <string name="key_is_already_assigned_error">A chave \"%1$s\" já está atribuída a outra ação: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Abrir vista de navegação</string>
+    <string name="add_row">Adicionar linha</string>
+    <string name="discard_changes_prompt">Tem certeza de que deseja descartar as alterações?</string>
+    <string name="shared_string_delete_immediately">Excluir imediatamente</string>
+    <string name="shared_string_is_deleted">%1$s foi excluído.</string>
+    <string name="cloud_item_restored">%1$s é restaurado da Cloud.</string>
+    <string name="external_input_device_title">Aparelho externo de entrada</string>
+    <string name="row_number">Linha %1$s</string>
+    <string name="key_bindings">Atalhos de teclado</string>
+    <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
+    <string name="not_specified">Não especificado</string>
+    <string name="download_to_device">Baixar para o dispositivo</string>
+    <string name="key_event_category_map_interactions">Interações do mapa</string>
+    <string name="key_event_action_move_down">Mover para baixo</string>
+    <string name="see_all_plans">Ver todos os planos</string>
+    <string name="shared_string_delete_item">Excluir item</string>
+    <string name="key_event_category_actions">Ações</string>
+    <string name="trash_is_empty_banner_desc">Os arquivos removidos do OsmAnd Cloud estarão disponíveis aqui durante %1$s dias.</string>
+    <string name="shared_string_empty_trash">Esvaziar lixeira</string>
+    <string name="trash_alert_card_desc">Os itens na lixeira serão excluídos após %1$s dias.</string>
+    <string name="root_folder">Pasta raiz</string>
+    <string name="key_event_action_previous_app_profile">Perfil do aplicativo anterior</string>
+    <string name="show_toast_about_key_pressed">Mostrar notificação do sistema sobre a tecla pressionada</string>
+    <string name="all_folders">Todas as pastas</string>
+    <string name="shared_string_show_less">Mostrar menos</string>
+    <string name="key_event_action_next_app_profile">Perfil do aplicativo seguinte</string>
+    <string name="folder">Pasta</string>
+    <string name="release_4_6">• Adicionada capacidade de alterar os atalhos de teclas para dispositivos de entrada externos
+\n
+\n• Adicionado widget \"Rácio de planar\"
+\n
+\n• Filtros adicionados e pastas inteligentes para trilhas
+\n
+\n• Linhas adicionadas aos painéis de widgets no topo e em baixo com suporte para todos os widgets
+\n
+\n• Adicionado suporte a ANT + widget de temperatura
+\n
+\n• Melhor gestão de memória para trilhos GPX grandes
+\n
+\n• Gestão de recursos locais atualizada em \"Descarregamentos\"
+\n
+\n• Adicionado widget \"RAM disponível\"
+\n
+\n• Problemas corrigidos com a barra de estado transparente
+\n
+\n</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d trilha)</item>
+        <item quantity="many">%1$d (%2$d trilhas)</item>
+        <item quantity="other">%1$d (%2$d trilhas)</item>
+    </plurals>
+    <string name="app_mode_hang_gliding">Asa-delta</string>
+    <string name="trash_is_empty">A lixeira está vazia</string>
+    <string name="shared_string_trash">Lixeira</string>
+    <string name="help_article_map_raster_maps_name">Mapas rasterizados (online / offline)</string>
 </resources>

@@ -853,16 +853,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
-		return false;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
-	}
-
-	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
 		resetLayer();

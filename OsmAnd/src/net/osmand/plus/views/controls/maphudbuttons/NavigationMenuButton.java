@@ -17,7 +17,7 @@ public class NavigationMenuButton extends MapButton {
 	private final RoutingHelper routingHelper;
 
 	public NavigationMenuButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_route_info_button), ROUTE_PLANNING_HUD_ID);
+		super(mapActivity, mapActivity.findViewById(R.id.map_route_info_button), ROUTE_PLANNING_HUD_ID, false);
 		routingHelper = app.getRoutingHelper();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_round, R.drawable.btn_round_night);

@@ -5110,7 +5110,7 @@ POIの更新は利用できません</string>
     <string name="enable_3d_maps">3Dマップを有効にする</string>
     <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
     <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
-    <string name="shared_string_all_world">世界中</string>
+    <string name="shared_string_all_world">全世界</string>
     <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>
     <string name="weather_forecast">天気予報</string>
     <string name="metric_lbs">ポンド</string>
@@ -5284,7 +5284,7 @@ POIの更新は利用できません</string>
     <string name="with_waypoints">経由地点を含む</string>
     <string name="all_folders">すべてのフォルダ</string>
     <string name="help_article_map_vector_maps_name">ベクターマップ (マップスタイル)</string>
-    <string name="press_button_to_link_with_action">デバイスのボタンを押してショートカットとして設定します: %1$s</string>
+    <string name="press_button_to_link_with_action">任意のボタンをショートカットとして割り当てます: %1$s</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="shared_string_show_less">表示を少なくする</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">音声案内 / 通知</string>
@@ -5320,4 +5320,10 @@ POIの更新は利用できません</string>
     <string name="help_article_map_raster_maps_name">ラスターマップ (オンライン/オフライン)</string>
     <string name="shared_string_temperature">温度</string>
     <string name="help_article_map_legend_ski_map_name">スキーマップのスタイル</string>
+    <string name="tripltek_promo">%1$sか月間のTripltekプロモーション</string>
+    <string name="tripltek_promo_description">%1$sか月間、無制限のマップダウンロード、3Dレリーフマップなどの機能に無料でアクセスできます。</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">ボートルーティング</string>
+    <string name="see_all_plans">すべてのプランを見る</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">自転車ルーティング (MTB)</string>
 </resources>

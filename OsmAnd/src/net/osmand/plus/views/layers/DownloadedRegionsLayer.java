@@ -589,26 +589,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				getContext().getString(R.string.shared_string_map), "");
 	}
 
-	@Override
-	public boolean disableSingleTap() {
-		return false;
-	}
-
-	@Override
-	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
-	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		return false;
-	}
-
-	@Override
-	public boolean showMenuAction(@Nullable Object o) {
-		return false;
-	}
-
 	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super DownloadMapObject> dataObjects) {
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION

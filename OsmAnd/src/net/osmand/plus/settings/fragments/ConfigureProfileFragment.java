@@ -39,7 +39,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -340,9 +340,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void setupFreeFavoritesBackupCard() {
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		boolean isRegistered = app.getBackupHelper().isRegistered();
-		boolean shouldShowFreeBackupCard = !proAvailable && !isRegistered && !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get();
+		boolean shouldShowFreeBackupCard = !available && !isRegistered
+				&& !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get();
 		Preference freeBackupCard = findPreference("free_favorites_backup_card");
 		if (freeBackupCard != null) {
 			freeBackupCard.setVisible(shouldShowFreeBackupCard);

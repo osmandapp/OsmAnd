@@ -78,7 +78,7 @@ public class RouteTestingTest {
 			}
 		}
 
-		String fl = "src/test/resources/Routing_test.obf";
+		String fl = "src/test/resources/routing/Routing_test_archive.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
 
@@ -86,7 +86,7 @@ public class RouteTestingTest {
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 		Map<String, String> params = te.getParams();
 		if (params.containsKey("map")) {
-			String fl1 = "src/test/resources/" + params.get("map");
+			String fl1 = "src/test/resources/routing/" + params.get("map");
 			RandomAccessFile raf1 = new RandomAccessFile(fl1, "r");
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{
 					new BinaryMapIndexReader(raf1, new File(fl1)),

@@ -32,7 +32,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -158,14 +158,12 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean needsInstallation() {
-		return super.needsInstallation()
-				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
+		return super.needsInstallation() && !InAppPurchaseUtils.isContourLinesAvailable(app);
 	}
 
 	@Override
 	protected boolean isAvailable(OsmandApplication app) {
-		return super.isAvailable(app)
-				|| InAppPurchaseHelper.isContourLinesPurchased(app);
+		return super.isAvailable(app) || InAppPurchaseUtils.isContourLinesAvailable(app);
 	}
 
 	@Override
@@ -517,7 +515,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setTitleId(R.string.relief_3d, app)
 				.setIcon(R.drawable.ic_action_3d_relief)
 				.setListener((uiAdapter, view, contextItem, isChecked) -> {
-					if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
 						settings.ENABLE_3D_MAPS.set(isChecked);
 						contextItem.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						contextItem.setSelected(isChecked);
@@ -532,7 +530,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				});
 
 		boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
-		if (!InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
 			boolean nightMode = isNightMode(activity, app);
 			item.setUseNaturalSecondIconColor(true);
 			item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);

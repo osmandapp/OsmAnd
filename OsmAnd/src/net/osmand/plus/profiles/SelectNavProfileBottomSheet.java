@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.importfiles.ImportType.ROUTING;
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
 import android.content.Context;
@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -48,14 +48,13 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
-import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
+public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskListener {
 
 	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
 	private static final String DIALOG_TYPE = "dialog_type";
@@ -132,6 +131,18 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				refreshProfiles();
 			}
 		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getImportHelper().addImportTaskListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getImportHelper().removeImportTaskListener(this);
 	}
 
 	@Override
@@ -216,15 +227,17 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			if (mapActivity == null) {
 				return;
 			}
-			mapActivity.getImportHelper().chooseFileToImport(ROUTING, (CallbackWithObject<Builder>) builder -> {
-				Fragment targetFragment = getTargetFragment();
-				if (targetFragment instanceof NavigationFragment) {
-					((NavigationFragment) targetFragment).updateRoutingProfiles();
-				}
-				updateMenuItems();
-				return false;
-			});
+			mapActivity.getImportHelper().chooseFileToImport(ROUTING);
 		});
+	}
+
+	@Override
+	public void onImportFinished() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof NavigationFragment) {
+			((NavigationFragment) targetFragment).updateRoutingProfiles();
+		}
+		updateMenuItems();
 	}
 
 	private void createOnlineFooter() {

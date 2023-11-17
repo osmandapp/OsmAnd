@@ -43,7 +43,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -129,7 +129,7 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 		File file = item.getFile();
 		boolean success = Algorithms.removeAllFiles(file);
 
-		if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 			String fileNameWithoutExtension = Algorithms.getFileNameWithoutExtension(file);
 			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
 			changesManager.deleteUpdates(fileNameWithoutExtension);

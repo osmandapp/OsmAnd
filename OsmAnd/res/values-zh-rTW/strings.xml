@@ -5514,7 +5514,7 @@
     <string name="key_event_action_previous_app_profile">上一個應用程式設定檔</string>
     <string name="show_toast_about_key_pressed">顯示關於按下鍵的浮動式訊息</string>
     <string name="key_event_action_move_left">向左移動</string>
-    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其連結至動作：%1$s</string>
+    <string name="press_button_to_link_with_action">在您的裝置上按下按鈕以將其分配給動作：%1$s</string>
     <string name="key_event_action_move_right">向右移動</string>
     <string name="shared_string_button">按鈕</string>
     <string name="key_event_action_next_app_profile">下一個應用程式設定檔</string>
@@ -5529,7 +5529,7 @@
     <string name="key_event_action_open_search_view">開啟搜尋檢視</string>
     <string name="key_event_action_zoom_out">縮小</string>
     <string name="key_event_action_toggle_drower">顯示/隱藏側邊選單</string>
-    <string name="key_is_already_assigned_error">「%1$s」鍵已被分配給其他動作：「%2$s」</string>
+    <string name="key_is_already_assigned_error">「%1$s」鍵已被分配給動作：「%2$s」</string>
     <string name="key_event_action_open_navigation_view">開啟導航檢視</string>
     <string name="external_input_device_title">外部輸入裝置</string>
     <string name="key_bindings">按鍵綁定</string>
@@ -5545,4 +5545,11 @@
     <string name="add_row">新增列</string>
     <string name="discard_changes_prompt">您確定您要放棄變更嗎？</string>
     <string name="row_number">列 %1$s</string>
+    <string name="tripltek_promo">Tripltek 促銷%1$s個月</string>
+    <string name="tripltek_promo_description">免費使用無限地圖下載、3D 地形陰影等功能%1$s個月</string>
+    <string name="see_all_plans">檢視所有方案</string>
+    <string name="key_assignments">按鍵分配</string>
+    <string name="clear_key_assignment">清除按鍵分配</string>
+    <string name="clear_key_assignment_desc">選定的按鍵繫結將被清除並設定為「無」。</string>
+    <string name="topography_maps">地形圖</string>
 </resources>

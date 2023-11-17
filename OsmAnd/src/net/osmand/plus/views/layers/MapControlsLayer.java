@@ -207,7 +207,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void setControlsClickable(boolean clickable) {
 		for (MapButton mapButton : mapButtons) {
-			mapButton.view.setClickable(clickable);
+			mapButton.getView().setClickable(clickable);
 		}
 	}
 
@@ -476,7 +476,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		List<MapButton> mapButtons = new ArrayList<>(this.mapButtons);
 		for (Iterator<MapButton> iterator = mapButtons.iterator(); iterator.hasNext(); ) {
 			MapButton mapButton = iterator.next();
-			if (buttonIds.contains(mapButton.id)) {
+			if (buttonIds.contains(mapButton.getId())) {
 				iterator.remove();
 			}
 		}

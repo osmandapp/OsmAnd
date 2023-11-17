@@ -10,6 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="reset_key_assignments_desc">All key assignments for the selected type will be removed.</string>
+    <string name="reset_key_assignments">Reset key assignments</string>
+    <string name="shared_string_reassign">Reassign</string>
+    <string name="target_elevation">Target elevation</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="topography_maps">Topography maps</string>
+    <string name="clear_key_assignment_desc">Key binding for the selected action will be cleared and set to None.</string>
+    <string name="clear_key_assignment">Clear key assignment</string>
+    <string name="key_assignments">Key assignments</string>
+    <string name="see_all_plans">See all plans</string>
+    <string name="tripltek_promo">Tripltek Promo for %1$s months</string>
+    <string name="tripltek_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
     <string name="remove_widget_first">Please remove widget first</string>
     <string name="add_row">Add row</string>
     <string name="row_number">Row %1$s</string>
@@ -19,7 +32,7 @@
     <string name="deletion_error">Deletion error</string>
     <string name="shared_string_rows">Rows</string>
     <string name="show_toast_about_key_pressed">Show toast about pressed key</string>
-    <string name="key_is_already_assigned_error">The \"%1$s\" key is already assigned to another action: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">The \"%1$s\" key is already assigned to action: \"%2$s\"</string>
     <string name="press_button_to_link_with_action">Press the button on your device to assign it to the action: %1$s</string>
     <string name="shared_string_button">Button</string>
     <string name="shared_string_action">Action</string>
