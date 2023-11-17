@@ -32,6 +32,8 @@ public class RouteColorize {
     public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
     public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
+    public static final int BLUE_SLOPE = rgbaToDecimal(0, 0, 255, 255);
+    public static final int CYAN_SLOPE = rgbaToDecimal(0, 255, 255, 255);
     public static final int GREEN_SLOPE = rgbaToDecimal(46, 185, 0, 255);
     public static final int WHITE = rgbaToDecimal(255, 255, 255, 255);
     public static final int YELLOW_SLOPE = rgbaToDecimal(255, 222, 2, 255);
@@ -41,9 +43,10 @@ public class RouteColorize {
     public static final int[] COLORS = new int[] {GREEN, YELLOW, RED};
     public static final int[] SLOPE_COLORS = new int[] {GREEN_SLOPE, WHITE, YELLOW_SLOPE, RED_SLOPE, PURPLE_SLOPE};
 
-    public static final double SLOPE_MIN_VALUE = -0.25;//25%
+    public static final double SLOPE_MIN_VALUE = -1.00;//-100%
     public static final double SLOPE_MAX_VALUE = 1.0;//100%
-    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
+    //public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, BLUE_SLOPE}, {-0.15, CYAN_SLOPE}, {-0.075, GREEN_SLOPE}, {0.0, WHITE}, {0.075, YELLOW_SLOPE}, {0.15, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
 
     private static final float DEFAULT_BASE = 17.2f;
     public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
