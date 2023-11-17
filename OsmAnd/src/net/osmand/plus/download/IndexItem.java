@@ -104,10 +104,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return hidden;
 	}
 
-	public void setIsHidden(boolean hidden) {
-		this.hidden = hidden;
-	}
-
 	public double getContentSizeMB() {
 		return ((double)contentSize) / (1 << 20);
 	}
@@ -163,6 +159,12 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public File getTargetFile(@NonNull OsmandApplication ctx) {
 		String basename = getTranslatedBasename();
 		return new File(type.getDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
+	}
+
+	@NonNull
+	public File getDefaultTargetFile(@NonNull OsmandApplication ctx) {
+		String basename = getTranslatedBasename();
+		return new File(type.getDefaultDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
 	}
 
 	public String getTranslatedBasename() {

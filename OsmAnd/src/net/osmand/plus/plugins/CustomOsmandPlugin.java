@@ -16,7 +16,6 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -54,11 +53,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -103,68 +97,29 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 				CustomRegion customRegion = (CustomRegion) region;
 				List<IndexItem> indexItems = customRegion.loadIndexItems();
 				for (IndexItem item : indexItems) {
-					if (item.isHidden()) {
-						item.setIsHidden(false);
-						File nonHiddenFile = item.getTargetFile(app);
-						if (nonHiddenFile.exists()) {
-							item.setIsHidden(true);
-							File hiddenFile = item.getTargetFile(app);
-							filesToCopy.add(new Pair<>(nonHiddenFile, hiddenFile));
-						}
-						File nonHiddenBackupedFile = new File(app.getAppPath(BACKUP_INDEX_DIR), nonHiddenFile.getName());
-						if (nonHiddenBackupedFile.exists()) {
-							File hiddenBackupedFile = new File(app.getAppInternalPath(HIDDEN_BACKUP_DIR), nonHiddenFile.getName());
-							filesToCopy.add(new Pair<>(nonHiddenBackupedFile, hiddenBackupedFile));
-						}
-					}
+					getFilesToRestoreHiddenState(filesToCopy, item);
 				}
 			}
 		}
-		CopyHiddenFilesTask task = new CopyHiddenFilesTask(filesToCopy);
+		MoveHiddenFilesTask task = new MoveHiddenFilesTask(app, filesToCopy);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	class CopyHiddenFilesTask extends AsyncTask<Void, Void, Void> {
-		ArrayList<Pair<File, File>> filesToCopy;
-
-		CopyHiddenFilesTask(ArrayList<Pair<File, File>> filesToCopy) {
-			this.filesToCopy = filesToCopy;
-		}
-
-		@Override
-		protected Void doInBackground(Void... voids) {
-			for (Pair<File, File> fileToCopy : filesToCopy) {
-				File origin = fileToCopy.first;
-				File target = fileToCopy.second;
-				boolean success = true;
-				File parent = target.getParentFile();
-				if (parent != null && !parent.exists()) {
-					parent.mkdirs();
-				}
-				try (InputStream in = new FileInputStream(origin)) {
-					try (OutputStream out = new FileOutputStream(target)) {
-						byte[] buf = new byte[1024];
-						int len;
-						while ((len = in.read(buf)) > 0) {
-							out.write(buf, 0, len);
-						}
-					}
-				} catch (IOException e) {
-					success = false;
-					e.printStackTrace();
-				}
-				if (success) {
-					origin.delete();
-				}
+	private void getFilesToRestoreHiddenState(ArrayList<Pair<File, File>> filesToCopy, IndexItem item) {
+		if (item.isHidden()) {
+			File nonHiddenFile = item.getDefaultTargetFile(app);
+			if (nonHiddenFile.exists()) {
+				File hiddenFile = item.getTargetFile(app);
+				filesToCopy.add(new Pair<>(nonHiddenFile, hiddenFile));
 			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void unused) {
-			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+			File nonHiddenBackupedFile = new File(app.getAppPath(BACKUP_INDEX_DIR), nonHiddenFile.getName());
+			if (nonHiddenBackupedFile.exists()) {
+				File hiddenBackupedFile = new File(app.getAppInternalPath(HIDDEN_BACKUP_DIR), nonHiddenFile.getName());
+				filesToCopy.add(new Pair<>(nonHiddenBackupedFile, hiddenBackupedFile));
+			}
 		}
 	}
+
 
 	@Override
 	public String getId() {

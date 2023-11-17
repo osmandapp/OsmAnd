@@ -186,7 +186,13 @@ public class DownloadActivityType {
 	public File getDownloadFolder(OsmandApplication app, IndexItem indexItem) {
 		if (indexItem.hidden) {
 			return app.getAppInternalPath(IndexConstants.HIDDEN_DIR);
+		} else {
+			return getDefaultDownloadFolder(app, indexItem);
 		}
+	}
+
+	@NonNull
+	public File getDefaultDownloadFolder(OsmandApplication app, IndexItem indexItem) {
 		if (NORMAL_FILE == this) {
 			if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
