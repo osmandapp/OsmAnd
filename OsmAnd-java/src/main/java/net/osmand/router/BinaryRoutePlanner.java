@@ -466,7 +466,6 @@ public class BinaryRoutePlanner {
 		if (TEST_SPECIFIC && road.getId() >> 6 == TEST_ID) {
 			printRoad(" ! "  + startSegment.distanceFromStart + " ", startSegment, reverseWaySearch);
 		}
-		boolean directionAllowed = true;
 		// Go through all point of the way and find ways to continue
 		// ! Actually there is small bug when there is restriction to move forward on the way (it doesn't take into account)
 		// +/- diff from middle point
@@ -479,7 +478,6 @@ public class BinaryRoutePlanner {
 			// 1. calculate obstacle for passing this segment 
 			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
 			if (segmentAndObstaclesTime < 0) {
-				directionAllowed = false;
 				break;
 			}
 			// calculate new start segment time as we're going to assign to put to visited segments
@@ -493,19 +491,10 @@ public class BinaryRoutePlanner {
 			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
-			if (bothDirVisited) {
- 				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction) 
-				directionAllowed = false;
-				if (TRACE_ROUTING) {
-					println("  " + currentSegment.segEnd + ">> Already visited");
-				}
-				break;
-			}
 			if (existingSegment != null) {
 				if (distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
 					// insert back original segment (test case with large area way)
 					visitedSegments.put(nextPntId, existingSegment);
-					directionAllowed = false;
 					if (TRACE_ROUTING) {
 						println("  " + currentSegment.segEnd + ">> Already visited");
 					}
@@ -524,6 +513,14 @@ public class BinaryRoutePlanner {
 						
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
+			
+			if (bothDirVisited) {
+ 				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction) 
+				if (TRACE_ROUTING) {
+					println("  " + currentSegment.segEnd + ">> 2 dir visited");
+				}
+				break;
+			}
 			
 			// 4. load road connections at the end of segment
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
