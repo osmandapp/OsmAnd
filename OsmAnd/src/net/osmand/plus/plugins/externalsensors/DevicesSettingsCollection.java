@@ -7,12 +7,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,41 @@ public class DevicesSettingsCollection {
 	private List<DevicePreferencesListener> listeners = new ArrayList<>();
 
 
+	public static class DeviceSettings {
+		final String deviceId;
+		final DeviceType deviceType;
+		boolean enabled;
+		Map<DeviceChangeableProperty, String> additionalParams = new LinkedHashMap<>();
+
+		public DeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
+			this.deviceId = deviceId;
+			this.deviceType = deviceType;
+			this.enabled = deviceEnabled;
+			additionalParams.put(DeviceChangeableProperty.NAME, name);
+		}
+
+		public Map<DeviceChangeableProperty, String> getParams() {
+			return additionalParams;
+		}
+
+		public DeviceType getDeviceType() {
+			return deviceType;
+		}
+
+		public boolean getDeviceEnabled() {
+			return enabled;
+		}
+
+		public void setDeviceEnabled(boolean enabled) {
+			this.enabled = enabled;
+		}
+
+		public void setDeviceProperty(DeviceChangeableProperty property, String normalizedValue) {
+			LinkedHashMap<DeviceChangeableProperty, String> newParams = new LinkedHashMap<>(additionalParams);
+			newParams.put(property, normalizedValue);
+			additionalParams = newParams;
+		}
+	}
 	public interface DevicePreferencesListener {
 		void onDeviceEnabled(@NonNull String deviceId);
 

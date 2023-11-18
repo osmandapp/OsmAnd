@@ -40,6 +40,7 @@ import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceList
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
@@ -66,6 +67,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 public class DevicesHelper implements DeviceListener, DevicePreferencesListener {
 
@@ -158,10 +160,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	private void updateDeviceProperties(@NonNull AbstractDevice<?> device) {
 		String deviceId = device.getDeviceId();
-		DeviceSettings deviceSettings = devicesSettingsCollection.getDeviceSettings(deviceId);
+		DevicesSettingsCollection.DeviceSettings deviceSettings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (deviceSettings != null) {
-			for (DeviceChangeableProperty property : deviceSettings.getAdditionalParams().keySet()) {
-				device.setChangeableProperty(property, deviceSettings.getAdditionalParams().get(property));
+			for (DeviceChangeableProperty property : deviceSettings.getParams().keySet()) {
+				device.setChangeableProperty(property, deviceSettings.getParams().get(property));
 			}
 		}
 	}
@@ -236,9 +238,9 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			ScanRecord scanRecord = result.getScanRecord();
 			if (isSupportedBleDevice(scanRecord)) {
 				String address = result.getDevice().getAddress();
-				DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
+				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
-				deviceName = settings == null ? result.getDevice().getName() : settings.getAdditionalParams().get(NAME);
+				deviceName = settings == null ? result.getDevice().getName() : settings.getParams().get(NAME);
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				for (ParcelUuid uuid : uuids) {
 					BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
@@ -467,7 +469,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	public boolean isDevicePaired(@NonNull AbstractDevice<?> device) {
-		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(device.getDeviceId());
+		DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(device.getDeviceId());
 		return settings != null;
 	}
 
@@ -518,7 +520,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	@NonNull
 	public String getFormattedDevicePropertyValue(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property) {
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(device.getDeviceId());
-		String value = settings != null ? settings.getAdditionalParams().get(property) : null;
+		String value = settings != null ? settings.getParams().get(property) : null;
 		return property.getFormattedValue(app, value);
 	}
 
