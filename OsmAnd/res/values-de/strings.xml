@@ -4512,7 +4512,7 @@
     <string name="list_of_groups">Gruppenliste</string>
     <string name="import_tracks">Tracks importieren</string>
     <string name="shared_string_shape">Form</string>
-    <string name="default_appearance_desc">Standardfarbe, Symbol und Form gelten für die hinzugefügten Favoritenpunkte in der Gruppe.</string>
+    <string name="default_appearance_desc">Standardfarbe, Symbol und Form werden auf die hinzugefügten Favoritenpunkte in der Gruppe angewendet.</string>
     <string name="default_appearance">Standarddarstellung</string>
     <string name="edit_category">Kategorie bearbeiten</string>
     <string name="stop_download">Download abbrechen</string>
@@ -4570,7 +4570,7 @@
     <string name="apply_to_existing_points_descr">Änderungen auf die bestehenden Punkte der Gruppe anwenden oder nur auf neue\?</string>
     <string name="apply_to_existing_favorites_descr">Änderungen auf die bestehenden Favoritenpunkte der Gruppe anwenden oder nur auf neue\?</string>
     <string name="apply_to_existing">Anwenden auf bestehende</string>
-    <string name="apply_only_to_new_points">Nur auf neue Punkte anwenden</string>
+    <string name="apply_only_to_new_points">Anwenden auf neue Punkte</string>
     <string name="apply_only_to_new_favorites">Nur auf neue Favoriten anwenden</string>
     <string name="change_default_appearance">Standardaussehen ändern</string>
     <string name="on_with_params">%1$s auf %2$s</string>
@@ -5035,7 +5035,7 @@
     <string name="empty_tracks">Sie haben keine Trackdateien.</string>
     <string name="no_visible_tracks">Keine Tracks auf der Karte</string>
     <string name="shared_string_select_recent">Wählen Sie die letzten</string>
-    <string name="change_appearance">Aussehen ändern</string>
+    <string name="change_appearance">Erscheinungsbild ändern</string>
     <string name="switch_folder">Ordner wechseln</string>
     <string name="show_all_tracks">Alle Tracks anzeigen</string>
     <string name="shared_string_on_map">Auf der Karte</string>
@@ -5534,7 +5534,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüssel „%1$s“ ist bereits einer anderen Aktion zugeordnet: „%2$s“</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5562,4 +5562,8 @@
     <string name="tripltek_promo">Tripltek-Promo für %1$s Monate</string>
     <string name="tripltek_promo_description">Kostenloser Zugriff für %1$s Monate auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw.</string>
     <string name="see_all_plans">Alle Pläne anzeigen</string>
+    <string name="key_assignments">Tastenbelegungen</string>
+    <string name="topography_maps">Topografische Karten</string>
+    <string name="clear_key_assignment">Tastenbelegung löschen</string>
+    <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion wird gelöscht und auf \"Keine\" gesetzt.</string>
 </resources>
