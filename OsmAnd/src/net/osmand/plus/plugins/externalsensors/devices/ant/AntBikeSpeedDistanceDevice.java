@@ -108,8 +108,10 @@ public class AntBikeSpeedDistanceDevice extends AntLegacyDevice<AntPlusBikeSpeed
 	@Override
 	public void setChangeableProperty(DeviceChangeableProperty property, String value) {
 		if (property == DeviceChangeableProperty.WHEEL_CIRCUMFERENCE) {
-			if (Algorithms.isFloat(value)) {
+			try {
 				setWheelCircumference(Float.parseFloat(value));
+			} catch(RuntimeException e) {
+				LOG.error(e.getMessage(), e);
 			}
 		} else {
 			super.setChangeableProperty(property, value);

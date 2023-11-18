@@ -50,7 +50,8 @@ public class BLEBikeSCDDevice extends BLEAbstractDevice {
 
 	@Override
 	public void setChangeableProperty(DeviceChangeableProperty property, String value) {
-		if (property == DeviceChangeableProperty.WHEEL_CIRCUMFERENCE && Algorithms.isFloat(value, true)) {
+		if (property == DeviceChangeableProperty.WHEEL_CIRCUMFERENCE) {
+			// FIXME copy paste
 			try {
 				setWheelCircumference(Float.parseFloat(value));
 			} catch(RuntimeException e) {
