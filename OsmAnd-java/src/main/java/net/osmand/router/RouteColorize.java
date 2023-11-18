@@ -46,7 +46,7 @@ public class RouteColorize {
     public static final double SLOPE_MIN_VALUE = -1.00;//-100%
     public static final double SLOPE_MAX_VALUE = 1.0;//100%
     //public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
-    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, BLUE_SLOPE}, {-0.10, CYAN_SLOPE}, {-0.05, GREEN_SLOPE}, {0.0, LIGHT_GREY}, {0.05, YELLOW_SLOPE}, {0.10, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, BLUE_SLOPE}, {-0.15, CYAN_SLOPE}, {-0.05, GREEN_SLOPE}, {0.0, LIGHT_GREY}, {0.05, YELLOW_SLOPE}, {0.15, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
 
     private static final float DEFAULT_BASE = 17.2f;
     public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
