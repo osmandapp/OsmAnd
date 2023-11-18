@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -248,6 +249,9 @@ public class HHRoutingDB {
 				point.connectedSet(true, parseSegments(rs.getBytes(2), pntsById, clusterInPoints.get(point.clusterId), point, false));
 				point.connectedSet(false, parseSegments(rs.getBytes(3), pntsById, clusterOutPoints.get(point.dualPoint.clusterId), point, true));
 				return point.connected(true).size() + point.connected(false).size();
+			} else {
+				point.connectedSet(true, new ArrayList<>());
+				point.connectedSet(false, new ArrayList<>());
 			}
 			return 0;
 		} else {

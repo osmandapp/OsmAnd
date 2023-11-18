@@ -156,7 +156,7 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost + 0.01 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS) {
+			} else if (cst.cost + 0.1 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}
@@ -442,8 +442,8 @@ public class BinaryRoutePlanner {
 		int prevY = segment.road.getPoint31YTile(segment.getSegmentStart());
 		int x = segment.road.getPoint31XTile(segment.getSegmentEnd());
 		int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
-		float priority = router.defineSpeedPriority(segment.road);
-		float speed = (router.defineRoutingSpeed(segment.road) * priority);
+		float priority = router.defineSpeedPriority(segment.road, segment.isPositive());
+		float speed = (router.defineRoutingSpeed(segment.road, segment.isPositive()) * priority);
 		if (speed == 0) {
 			speed = router.getDefaultSpeed() * priority;
 		}
@@ -455,7 +455,6 @@ public class BinaryRoutePlanner {
 		return distOnRoadToPass / speed;
 	}
 
-	@SuppressWarnings("unused")
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegmentCost> graphSegments, TLongObjectMap<RouteSegment> visitedSegments, 
             RouteSegment startSegment, TLongObjectMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {

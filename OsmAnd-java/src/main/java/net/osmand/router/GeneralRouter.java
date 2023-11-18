@@ -499,38 +499,42 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	@Override
-	public float defineRoutingSpeed(RouteDataObject road) {
-		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
+	public float defineRoutingSpeed(RouteDataObject road, boolean dir) {
+		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (definedSpd == null) {
+			// TODO
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
-			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd);
+ 			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd, dir);
 		}
 		return definedSpd;
 	}
 	
 	@Override
-	public float defineVehicleSpeed(RouteDataObject road) {
+	public float defineVehicleSpeed(RouteDataObject road, boolean dir) {
 		// don't use cache cause max/min is different for routing speed
 		if (maxVehicleSpeed != maxSpeed) {
+			// TODO;
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			return Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
 		}
-		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (sp == null) {
+			// TODO
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			sp = Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
-			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp, dir);
 		}
 		return sp;
 	}
 	
 	@Override
-	public float defineSpeedPriority(RouteDataObject road) {
-		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road);
+	public float defineSpeedPriority(RouteDataObject road, boolean dir) {
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, dir);
 		if(sp == null) {
+			// TODO
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
-			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
+			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, dir);
 		}
 		return sp;
 	}
@@ -599,6 +603,10 @@ public class GeneralRouter implements VehicleRouter {
 
 	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road) {
 		return getCache(attr, road.region, road.types, false);
+	}
+	
+	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road, boolean extra) {
+		return getCache(attr, road.region, road.types, extra);
 	}
 	
 	private Float getCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, boolean extra) {
@@ -830,7 +838,7 @@ public class GeneralRouter implements VehicleRouter {
 			return rules.get(rules.size() - 1);
 		}
 
-		private Object evaluate(BitSet types) {
+		private synchronized Object evaluate(BitSet types) {
 			for (int k = 0; k < rules.size(); k++) {
 				RouteAttributeEvalRule r = rules.get(k);
 				Object o = r.eval(types, paramContext);
@@ -1164,7 +1172,7 @@ public class GeneralRouter implements VehicleRouter {
 			parameters.add(param);
 		}
 
-		public synchronized Object eval(BitSet types, ParameterContext paramContext) {
+		public Object eval(BitSet types, ParameterContext paramContext) {
 			if (matches(types, paramContext)) {
 				return calcSelectValue(types, paramContext);
 			}

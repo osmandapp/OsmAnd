@@ -272,21 +272,22 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
 			} else if (t.startsWith("maxspeed") && v != null) {
+				String tg = t;
 				if (t.endsWith(":forward")) {
-					t = t.substring(0, t.length() - ":forward".length());
+					tg = t.substring(0, t.length() - ":forward".length());
 					forward = 1;
 				} else if (t.endsWith(":backward")) {
-					t = t.substring(0, t.length() - ":backward".length());
+					tg = t.substring(0, t.length() - ":backward".length());
 					forward = -1;
 				} else {
 					forward = 0;
 				}
 				floatValue = RouteDataObject.parseSpeed(v, 0);
-				if (t.equalsIgnoreCase("maxspeed")) {
+				if (tg.equalsIgnoreCase("maxspeed")) {
 					type = MAXSPEED;
-				} else if (t.equalsIgnoreCase("maxspeed:hgv")) {
+				} else if (tg.equalsIgnoreCase("maxspeed:hgv")) {
 					type = MAXSPEED + PROFILE_TRUCK;
-				} else if (t.equalsIgnoreCase("maxspeed:motorcar")) {
+				} else if (tg.equalsIgnoreCase("maxspeed:motorcar")) {
 					type = MAXSPEED + PROFILE_CAR;
 				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
@@ -398,6 +399,7 @@ public class BinaryMapRouteReaderAdapter {
 				} else if (val.equals("backward")) {
 					directionBackward = id;
 				}
+				/// TODO make generic
 			} else if (tags.equals("maxheight:forward") && val != null) {
 				maxheightForward = id;
 			} else if (tags.equals("maxheight:backward") && val != null) {

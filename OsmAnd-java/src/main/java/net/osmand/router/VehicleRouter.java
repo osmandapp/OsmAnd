@@ -45,17 +45,17 @@ public interface VehicleRouter {
 	/**
 	 * return routing speed in m/s for vehicle for specified road
 	 */
-	public float defineRoutingSpeed(RouteDataObject road);
+	public float defineRoutingSpeed(RouteDataObject road, boolean dir);
 	
 	/**
 	 * return real speed in m/s for vehicle for specified road
 	 */
-	public float defineVehicleSpeed(RouteDataObject road);
+	public float defineVehicleSpeed(RouteDataObject road, boolean dir);
 	
 	/**
 	 * define priority to multiply the speed for g(x) A* 
 	 */
-	public float defineSpeedPriority(RouteDataObject road);
+	public float defineSpeedPriority(RouteDataObject road, boolean dir);
 	
 	/**
 	 * define destination priority
