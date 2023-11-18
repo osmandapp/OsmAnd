@@ -12,15 +12,15 @@ class WheelDeviceSettings : DeviceSettings {
 		deviceName: String, deviceEnabled: Boolean) : super(
 		deviceId, deviceType,
 		deviceName, deviceEnabled) {
-		additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
-			DEFAULT_WHEEL_CIRCUMFERENCE.toString()
+//		additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
+//			DEFAULT_WHEEL_CIRCUMFERENCE.toString()
 	}
 
 	constructor(settings: DeviceSettings) : super(settings) {
-		if (!additionalParams.containsKey(DeviceChangeableProperty.WHEEL_CIRCUMFERENCE)) {
-			additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
-				DEFAULT_WHEEL_CIRCUMFERENCE.toString()
-		}
+//		if (!additionalParams.containsKey(DeviceChangeableProperty.WHEEL_CIRCUMFERENCE)) {
+//			additionalParams[DeviceChangeableProperty.WHEEL_CIRCUMFERENCE] =
+//				DEFAULT_WHEEL_CIRCUMFERENCE.toString()
+//		}
 	}
 
 }
