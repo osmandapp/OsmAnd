@@ -64,6 +64,12 @@ public class DevicesSettingsCollection {
 			newParams.put(property, normalizedValue);
 			additionalParams = newParams;
 		}
+
+		public void verifyInit() {
+			if (additionalParams == null) {
+				additionalParams = new LinkedHashMap<>();
+			}
+		}
 	}
 	public interface DevicePreferencesListener {
 		void onDeviceEnabled(@NonNull String deviceId);
@@ -145,14 +151,17 @@ public class DevicesSettingsCollection {
 			}.getType());
 			if (settings != null) {
 				this.settings.clear();
+				// some versions gson don't call constructor properly?
+				for (DeviceSettings s : settings.values()) {
+					s.verifyInit();
+				}
 				this.settings.putAll(settings);
 			}
 		}
 	}
 
 	private void writeSettings() {
-		String json = gson.toJson(settings, new TypeToken<HashMap<String, DeviceSettings>>() {
-		}.getType());
+		String json = gson.toJson(settings);
 		preference.set(json);
 	}
 }
