@@ -502,7 +502,7 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineRoutingSpeed(RouteDataObject road, boolean dir) {
 		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (definedSpd == null) {
-			// TODO
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
  			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd, dir);
@@ -514,13 +514,13 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineVehicleSpeed(RouteDataObject road, boolean dir) {
 		// don't use cache cause max/min is different for routing speed
 		if (maxVehicleSpeed != maxSpeed) {
-			// TODO;
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			return Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
 		}
 		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (sp == null) {
-			// TODO
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			sp = Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp, dir);
@@ -532,7 +532,7 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineSpeedPriority(RouteDataObject road, boolean dir) {
 		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, dir);
 		if(sp == null) {
-			// TODO
+			// not implemented direction usage
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
 			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, dir);
 		}

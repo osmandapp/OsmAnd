@@ -399,7 +399,7 @@ public class BinaryMapRouteReaderAdapter {
 				} else if (val.equals("backward")) {
 					directionBackward = id;
 				}
-				/// TODO make generic
+				/// Could be generic 
 			} else if (tags.equals("maxheight:forward") && val != null) {
 				maxheightForward = id;
 			} else if (tags.equals("maxheight:backward") && val != null) {
