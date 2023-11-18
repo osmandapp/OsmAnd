@@ -41,7 +41,7 @@ public class RouteColorize {
     public static final int PURPLE_SLOPE = rgbaToDecimal(130, 1, 255, 255);
 
     public static final int[] COLORS = new int[] {GREEN, YELLOW, RED};
-    public static final int[] SLOPE_COLORS = new int[] {BLUE_SLOPE, CYAN_SLOPE, GREEN_SLOPE, LIGHT_GREY, YELLOW_SLOPE, RED_SLOPE, PURPLE_SLOPE};
+    public static final int[] SLOPE_COLORS = new int[] {CYAN_SLOPE, GREEN_SLOPE, LIGHT_GREY, YELLOW_SLOPE, RED_SLOPE};
 
     public static final double SLOPE_MIN_VALUE = -1.00;//-100%
     public static final double SLOPE_MAX_VALUE = 1.0;//100%
