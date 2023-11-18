@@ -5560,4 +5560,9 @@
     <string name="clear_key_assignment">Billentyű hozzárendelés törlése</string>
     <string name="clear_key_assignment_desc">A kiválasztott művelet billentyű hozzárendelése törlődik és Nincs értékre lesz állítva.</string>
     <string name="topography_maps">Topográfiai térképek</string>
+    <string name="reset_key_assignments_desc">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
+    <string name="shared_string_reassign">Újra hozzárendelés</string>
+    <string name="reset_key_assignments">Billentyű-hozzárendelések visszaállítása</string>
+    <string name="target_elevation">Célmagasság</string>
+    <string name="shared_string_eta">ETA</string>
 </resources>
