@@ -28,7 +28,8 @@ import androidx.annotation.Nullable;
 
 public class AutoZoomBySpeedUtils {
 
-	public static final float ZOOM_PER_SECOND = 0.25f;
+	public static final float ZOOM_PER_SECOND = 0.1f;
+	public static final int MIN_ZOOM_DURATION_MILLIS = 1500;
 	public static final long FIXED_ZOOM_DURATION_MILLIS = 1000;
 	private static final int SHOW_DRIVING_SECONDS = 60;
 

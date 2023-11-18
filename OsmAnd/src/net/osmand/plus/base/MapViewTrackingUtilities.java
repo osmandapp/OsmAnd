@@ -272,6 +272,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						zoomParams = mapRenderer != null
 								? smoothenAutoZoom(mapRenderer, autoZoom, movingTime)
 								: new Pair<>(autoZoom, AutoZoomBySpeedUtils.FIXED_ZOOM_DURATION_MILLIS);
+						if (mapRenderer != null && zoomParams.second < AutoZoomBySpeedUtils.MIN_ZOOM_DURATION_MILLIS) {
+							zoomParams = null;
+						}
 					}
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoomParams,
