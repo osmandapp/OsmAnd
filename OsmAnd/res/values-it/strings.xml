@@ -5503,7 +5503,7 @@
     <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
     <string name="trash_is_empty">Il cestino è vuoto</string>
     <string name="shared_string_trash">Cestino</string>
-    <string name="shared_string_delete_item">Cancella oggetto</string>
+    <string name="shared_string_delete_item">Cancella elemento</string>
     <string name="help_article_personal_storage_name">Archiviazione</string>
     <string name="key_event_action_zoom_in">Ingrandisci</string>
     <string name="enable_to_use_external_input_device">Abilita l\'uso del dispositivo di input esterno con OsmAnd</string>
@@ -5528,7 +5528,7 @@
     <string name="key_event_action_move_up">Vai su</string>
     <string name="key_event_action_zoom_out">Riduci</string>
     <string name="key_event_action_toggle_drower">Mostra/nascondi il menu laterale</string>
-    <string name="key_is_already_assigned_error">Il tasto \"%1$s\" è già assegnato a un\'altra azione: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">Il tasto \"%1$s\" è già assegnato all\'azione: \"%2$s\"</string>
     <string name="external_input_device_title">Dispositivo di input esterno</string>
     <string name="key_bindings">Associazioni dei tasti</string>
     <string name="key_event_action_move_to_my_location">Vai alla mia posizione</string>
@@ -5537,7 +5537,7 @@
     <string name="key_event_action_move_down">Vai giù</string>
     <string name="key_event_category_actions">Azioni</string>
     <string name="change_button">Cambia il pulsante</string>
-    <string name="show_toast_about_key_pressed">Mostra la notifica sul tasto premuto</string>
+    <string name="show_toast_about_key_pressed">Mostra la notifica del tasto premuto</string>
     <string name="key_event_action_emit_navigation_hint">Dai un suggerimento di navigazione</string>
     <string name="download_to_device">Scarica sul dispositivo</string>
     <string name="tripltek_promo">Promozione Tripltek per %1$s mesi</string>
@@ -5550,4 +5550,9 @@
     <string name="row_number">Riga %1$s</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Apri la griglia dati WunderLINQ</string>
     <string name="see_all_plans">Vedi tutti i piani</string>
+    <string name="reset_key_assignments_desc">Tutte le associazioni dei tasti per il tipo selezionato saranno rimosse.</string>
+    <string name="topography_maps">Mappe topografiche</string>
+    <string name="shared_string_reassign">Riassocia</string>
+    <string name="reset_key_assignments">Ripristina le associazioni dei tasti</string>
+    <string name="clear_key_assignment_desc">L\'associazione dei tasti per l\'azione selezionata verrà cancellata e impostata su Nessuna.</string>
 </resources>
