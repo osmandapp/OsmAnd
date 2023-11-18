@@ -5513,4 +5513,5 @@
     <string name="key_event_action_toggle_drower">Показать/скрыть боковое меню</string>
     <string name="shared_string_rows">Ряды</string>
     <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на другое действии: «%2$s»</string>
+    <string name="topography_maps">Карты ландшафта</string>
 </resources>

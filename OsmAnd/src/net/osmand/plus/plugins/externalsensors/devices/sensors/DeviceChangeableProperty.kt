@@ -5,7 +5,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.annotation.StringRes
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.plugins.externalsensors.WheelDeviceSettings
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.util.Algorithms
 import java.text.DecimalFormat
@@ -16,12 +16,13 @@ enum class DeviceChangeableProperty(val displayNameResId: Int, val inputType: In
 	NAME(R.string.shared_string_name, EditorInfo.TYPE_CLASS_TEXT),
 	WHEEL_CIRCUMFERENCE(R.string.wheel_circumference, EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
 
+
 	fun getFormattedValue(context: Context, value: String?): String {
 		val app = context.applicationContext as OsmandApplication
 		var res: String
 		if (this === WHEEL_CIRCUMFERENCE) {
-			var floatValue = WheelDeviceSettings.DEFAULT_WHEEL_CIRCUMFERENCE
-			if (value != null && Algorithms.isFloat(value, true)) {
+			var floatValue = DevicesSettingsCollection.DEFAULT_WHEEL_CIRCUMFERENCE
+			if (value != null) {
 				floatValue = value.replace(",", ".").toFloat()
 			}
 			if (app.settings.METRIC_SYSTEM.get().shouldUseFeet()) {
@@ -39,7 +40,7 @@ enum class DeviceChangeableProperty(val displayNameResId: Int, val inputType: In
 	fun normalizeValue(context: Context, value: String): String {
 		val app = context.applicationContext as OsmandApplication
 		var res: String
-		if (this === WHEEL_CIRCUMFERENCE && Algorithms.isFloat(value, true)) {
+		if (this === WHEEL_CIRCUMFERENCE) {
 			var floatValue = value.replace(",", ".").toFloat()
 			if (app.settings.METRIC_SYSTEM.get().shouldUseFeet()) {
 				floatValue /= OsmAndFormatter.INCHES_IN_ONE_METER

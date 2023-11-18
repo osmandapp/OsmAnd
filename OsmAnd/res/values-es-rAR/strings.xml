@@ -5577,4 +5577,5 @@
     <string name="key_assignments">Asignaciones de teclas</string>
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
+    <string name="topography_maps">Mapas topográficos</string>
 </resources>

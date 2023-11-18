@@ -293,18 +293,16 @@ public class RouteResultPreparation {
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
-		double scarfSeconds = 0; //Additional time as per Naismith/Scarf
+		double scarfSeconds = 0; // Additional time as per Naismith/Scarf
 		GeneralRouter currentRouter = (GeneralRouter) ctx.getRouter();
-		if (currentRouter.getHeightObstacles()) {
-			if (currentRouter.getProfile() == GeneralRouterProfile.PEDESTRIAN) {
-				// PEDESTRIAN 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule (Scarf rule)
-				scarfSeconds = 7.92f / currentRouter.getDefaultSpeed();
-				useNaismithRule = true;
-			} else if (currentRouter.getProfile() == GeneralRouterProfile.BICYCLE) {
-				// BICYCLE 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/ (Scarf's article)
-				scarfSeconds = 8.2f / currentRouter.getDefaultSpeed();
-				useNaismithRule = true;
-			}
+		if (currentRouter.getProfile() == GeneralRouterProfile.PEDESTRIAN) {
+			// PEDESTRIAN 1:7.92 based on https://en.wikipedia.org/wiki/Naismith%27s_rule (Scarf rule)
+			scarfSeconds = 7.92f / currentRouter.getDefaultSpeed();
+			useNaismithRule = true;
+		} else if (currentRouter.getProfile() == GeneralRouterProfile.BICYCLE) {
+			// BICYCLE 1:8.2 based on https://pubmed.ncbi.nlm.nih.gov/17454539/ (Scarf's article)
+			scarfSeconds = 8.2f / currentRouter.getDefaultSpeed();
+			useNaismithRule = true;
 		}
 
 		for (int i = 0; i < result.size(); i++) {

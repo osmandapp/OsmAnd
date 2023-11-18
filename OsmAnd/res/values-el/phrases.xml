@@ -2248,7 +2248,7 @@
     <string name="poi_historic_civilization_nuragic">Πολιτισμός: νουραγικός (18ος αιώνας π.Χ. - 2ος αιώνας μ.Χ.)</string>
     <string name="poi_historic_civilization_etruscan">Πολιτισμός: ετρουσκικός (12ος - 6ος αιώνας π.Χ.)</string>
     <string name="poi_historic_civilization_prehistoric">Πολιτισμός: προϊστορικός</string>
-    <string name="poi_historic_civilization_ancient_greek">"Πολιτισμός:  αρχαιοελληνικός"</string>
+    <string name="poi_historic_civilization_ancient_greek">Πολιτισμός: αρχαιοελληνικός</string>
     <string name="poi_historic_civilization_roman">Πολιτισμός: ρωμαϊκός</string>
     <string name="poi_historic_civilization_byzantine">Πολιτισμός: βυζαντινός (285 μ.Χ. - 1453 μ.Χ.)</string>
     <string name="poi_historic_civilization_imperial_chinese">Πολιτισμός: αυτοκρατορικός κινέζικος (221 π.Χ. - 1911 μ.Χ.)</string>
@@ -3493,7 +3493,7 @@
     <string name="poi_shoe_repair">Υποδηματοποιείο</string>
     <string name="poi_bulk_purchase_yes">Ναι</string>
     <string name="poi_bulk_purchase_only">Μόνο</string>
-    <string name="poi_pipeline_substation">"Υποσταθμός  ρεύματος"</string>
+    <string name="poi_pipeline_substation">Υποσταθμός ρεύματος</string>
     <string name="poi_substation_transmission">Μεταφορά</string>
     <string name="poi_substation_distribution">Διανομή</string>
     <string name="poi_substation_minor_distribution">Μικρή διανομή</string>
