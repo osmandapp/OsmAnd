@@ -446,7 +446,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		hctx.rctx.calculationProgress = new RouteCalculationProgress();
-		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) new BinaryRoutePlanner().searchRouteInternal(hctx.rctx,
+		BinaryRoutePlanner planner = new BinaryRoutePlanner();
+		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		System.out.println(hctx.rctx.calculationProgress.getInfo(null));		
 		if (frs != null) {
@@ -475,6 +476,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.endX = o.getEndPointX();
 						pnt.startY = o.getStartPointY();
 						pnt.endY = o.getEndPointY();
+						int preciseY = reverse? hctx.startY : hctx.endY;
+						int preciseX = reverse? hctx.startX : hctx.endX;
+						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
+					} else {
+						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2;
 					}
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();

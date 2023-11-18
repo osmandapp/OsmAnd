@@ -473,8 +473,8 @@ public class RouteResultPreparation {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
-			float correctionTime = finalSegment.distanceFromStart - distanceFromStart(finalSegment.opposite)
-					- distanceFromStart(finalSegment.parentRoute);
+			float correctionTime = finalSegment.opposite == null ? 0 :
+				finalSegment.distanceFromStart - distanceFromStart(finalSegment.opposite) - distanceFromStart(finalSegment.parentRoute);
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment thisSegment =  finalSegment.opposite == null ? finalSegment : finalSegment.parentRoute; // for dijkstra

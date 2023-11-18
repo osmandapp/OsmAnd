@@ -294,12 +294,9 @@ public class BinaryRoutePlanner {
 			return null;
 		}
 		seg.setParentRoute(RouteSegment.NULL);
-		// compensate first segment difference to mid point (length) https://github.com/osmandapp/OsmAnd/issues/14148
-		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), seg);
-		double full = squareRootDist(seg.getStartPointX(), seg.getStartPointY(), seg.getEndPointX(), seg.getEndPointY()) + 0.01; // avoid div 0
-		double fromStart = squareRootDist(pnt.preciseX, pnt.preciseY, seg.getStartPointX(), seg.getStartPointY());
+		float dist = -calculatePreciseStartTime(ctx, pnt.preciseX, pnt.preciseY, seg);
 		// full segment length will be added on first visit
-		seg.distanceFromStart = (float) (-fromStart / full * fullTime); 
+		seg.distanceFromStart = dist; 
 		
 		if ((!reverseSearchWay && ctx.config.initialDirection != null) || (reverseSearchWay && ctx.config.targetDirection != null)) {
 			// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
@@ -316,6 +313,15 @@ public class BinaryRoutePlanner {
 			return seg;
 		}
 		return null;
+	}
+
+	public float calculatePreciseStartTime(final RoutingContext ctx, int projX, int projY, RouteSegment seg) {
+		// compensate first segment difference to mid point (length) https://github.com/osmandapp/OsmAnd/issues/14148
+		double fullTime = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), seg);
+		double full = squareRootDist(seg.getStartPointX(), seg.getStartPointY(), seg.getEndPointX(), seg.getEndPointY()) + 0.01; // avoid div 0
+		double fromStart = squareRootDist(projX, projY, seg.getStartPointX(), seg.getStartPointY());
+		float dist = (float) (fromStart / full * fullTime);
+		return dist;
 	}
 	
 
