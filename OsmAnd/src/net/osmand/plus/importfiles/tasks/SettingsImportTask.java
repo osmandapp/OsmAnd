@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
@@ -21,11 +20,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -38,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;
@@ -47,12 +44,10 @@ public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private final boolean silentImport;
 	private final String latestChanges;
 	private final int version;
-	private final CallbackWithObject<List<SettingsItem>> callback;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
 							  @NonNull String name, List<ExportSettingsType> settingsTypes,
-							  boolean replace, boolean silentImport, String latestChanges, int version,
-							  CallbackWithObject<List<SettingsItem>> callback) {
+							  boolean replace, boolean silentImport, String latestChanges, int version) {
 		super(activity);
 		this.uri = uri;
 		this.name = name;
@@ -61,7 +56,6 @@ public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		this.silentImport = silentImport;
 		this.latestChanges = latestChanges;
 		this.version = version;
-		this.callback = callback;
 	}
 
 	@Override
@@ -77,58 +71,54 @@ public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		File file = new File(tempDir, name);
 		if (error == null && file.exists()) {
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsHelper.collectSettings(file, latestChanges, version, new CollectListener() {
-				@Override
-				public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-					hideProgress();
-					if (succeed) {
-						List<SettingsItem> pluginIndependentItems = new ArrayList<>();
-						List<PluginSettingsItem> pluginSettingsItems = new ArrayList<>();
-						for (SettingsItem item : items) {
-							if (item instanceof PluginSettingsItem) {
-								pluginSettingsItems.add((PluginSettingsItem) item);
-							} else if (Algorithms.isEmpty(item.getPluginId())) {
-								pluginIndependentItems.add(item);
-							}
+			settingsHelper.collectSettings(file, latestChanges, version, (succeed, empty, items) -> {
+				hideProgress();
+				if (succeed) {
+					List<SettingsItem> pluginIndependentItems = new ArrayList<>();
+					List<PluginSettingsItem> pluginSettingsItems = new ArrayList<>();
+					for (SettingsItem item : items) {
+						if (item instanceof PluginSettingsItem) {
+							pluginSettingsItems.add((PluginSettingsItem) item);
+						} else if (Algorithms.isEmpty(item.getPluginId())) {
+							pluginIndependentItems.add(item);
 						}
-						for (PluginSettingsItem pluginItem : pluginSettingsItems) {
-							handlePluginImport(pluginItem, file);
-						}
-						if (!pluginIndependentItems.isEmpty()) {
-							if (settingsTypes == null) {
-								FragmentActivity activity = activityRef.get();
-								if (!silentImport && activity != null) {
-									FragmentManager fragmentManager = activity.getSupportFragmentManager();
-									FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
-								}
-							} else {
-								Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
-								List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
-								settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
-							}
-						}
-					} else if (empty) {
-						app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 					}
+					for (PluginSettingsItem pluginItem : pluginSettingsItems) {
+						handlePluginImport(pluginItem, file);
+					}
+					if (!pluginIndependentItems.isEmpty()) {
+						if (settingsTypes == null) {
+							FragmentActivity activity = activityRef.get();
+							if (!silentImport && activity != null) {
+								FragmentManager fragmentManager = activity.getSupportFragmentManager();
+								FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
+							}
+						} else {
+							Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
+							List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
+							settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
+						}
+					}
+					notifyImportFinished();
+				} else if (empty) {
+					app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 				}
 			});
 		} else {
 			hideProgress();
+			notifyImportFinished();
 			app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
 		}
 	}
 
 	private CheckDuplicatesListener getDuplicatesListener(File file, boolean replace) {
-		return new CheckDuplicatesListener() {
-			@Override
-			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
-				if (replace) {
-					for (SettingsItem item : items) {
-						item.setShouldReplace(true);
-					}
+		return (duplicates, items) -> {
+			if (replace) {
+				for (SettingsItem item : items) {
+					item.setShouldReplace(true);
 				}
-				app.getFileSettingsHelper().importSettings(file, items, "", 1, getImportListener(file));
 			}
+			app.getFileSettingsHelper().importSettings(file, items, "", 1, getImportListener(file));
 		};
 	}
 
@@ -208,14 +198,11 @@ public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		};
 		List<SettingsItem> pluginItems = new ArrayList<>(pluginItem.getPluginDependentItems());
 		pluginItems.add(0, pluginItem);
-		app.getFileSettingsHelper().checkDuplicates(file, pluginItems, pluginItems, new CheckDuplicatesListener() {
-			@Override
-			public void onDuplicatesChecked(@NonNull List<Object> duplicates, List<SettingsItem> items) {
-				for (SettingsItem item : items) {
-					item.setShouldReplace(true);
-				}
-				app.getFileSettingsHelper().importSettings(file, items, "", 1, importListener);
+		app.getFileSettingsHelper().checkDuplicates(file, pluginItems, pluginItems, (duplicates, items) -> {
+			for (SettingsItem item : items) {
+				item.setShouldReplace(true);
 			}
+			app.getFileSettingsHelper().importSettings(file, items, "", 1, importListener);
 		});
 	}
 }

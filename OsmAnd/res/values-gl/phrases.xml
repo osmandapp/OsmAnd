@@ -2988,7 +2988,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neurocirurxía</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsiquiatría</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinoloxía</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medicina nuclear</string>
+    <string name="poi_healthcare_speciality_nuclear">Medicina nuclear</string>
     <string name="poi_healthcare_speciality_pathology">Anatomía patolóxica</string>
     <string name="poi_healthcare_speciality_oncology">Oncoloxía</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Medicina tropical</string>
@@ -3001,12 +3001,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Especialidade en saúde: sen pediatría social</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetricia (cesárea)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialidade en saúde: sen obstetricia (cesárea)</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Medicina toxicolóxica</string>
+    <string name="poi_healthcare_speciality_addiction">Medicina toxicolóxica</string>
     <string name="poi_healthcare_speciality_optometry">Optometría</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patoloxía clínica</string>
     <string name="poi_healthcare_speciality_speech_therapy">Terapia da fala</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manual</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medicina deportiva</string>
+    <string name="poi_healthcare_speciality_sports">Medicina deportiva</string>
     <string name="poi_healthcare_speciality_podiatry">Podoloxía</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psiquiatría adulta</string>
     <string name="poi_healthcare_speciality_acupuncture">Acupuntura</string>
@@ -3016,7 +3016,7 @@
     <string name="poi_healthcare_speciality_herbalism">Herbolaria</string>
     <string name="poi_healthcare_speciality_chiropractic">Quiropraxia</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatía</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psicoloxía profunda</string>
+    <string name="poi_healthcare_speciality_depth">Psicoloxía profunda</string>
     <string name="poi_healthcare_speciality_behavior">Comportamento</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Medicina paliativa</string>
     <string name="poi_fitness_centre">Ximnasio</string>

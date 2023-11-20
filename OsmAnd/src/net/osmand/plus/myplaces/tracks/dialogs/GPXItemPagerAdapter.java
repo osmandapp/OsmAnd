@@ -51,6 +51,7 @@ import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -232,13 +233,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			boolean joinSegments = displayHelper.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
-				return GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, false,
-						joinSegments);
+				return GpxUtils.getSegmentPointByTime(segment, gpxFile, time, false, joinSegments);
 			} else {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 				float distance = dataSet.getDivX() * pos;
-				return GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, false,
-						joinSegments);
+				return GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, false, joinSegments);
 			}
 		}
 		return null;

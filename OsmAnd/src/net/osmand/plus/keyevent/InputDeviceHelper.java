@@ -1,5 +1,7 @@
 package net.osmand.plus.keyevent;
 
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
@@ -170,20 +172,32 @@ public class InputDeviceHelper {
 	}
 
 	public void updateKeyBinding(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                             int originalKeyCode, @NonNull KeyBinding newKeyBinding) {
+	                             @NonNull KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
 		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
-		if (device == null) {
-			return;
+		if (device != null) {
+			resetPreviousAssignmentIfNeeded(device, newKeyBinding);
+			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
+			syncSettings(EventType.UPDATE_KEY_ASSIGNMENT);
 		}
-		if (newKeyBinding.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) {
-			device.removeKeyBinding(originalKeyCode);
-		} else if (originalKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			device.addKeyBinding(newKeyBinding);
-		} else {
-			device.updateKeyBinding(originalKeyCode, newKeyBinding);
+	}
+
+	private void resetPreviousAssignmentIfNeeded(@NonNull InputDeviceProfile device, @NonNull KeyBinding newKeyBinding) {
+		int keyCode = newKeyBinding.getKeyCode();
+		KeyBinding prevAssignment = device.findAssignment(keyCode);
+		if (prevAssignment != null && !objectEquals(newKeyBinding, prevAssignment)) {
+			KeyBinding newAssignment = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, prevAssignment);
+			updateKeyBinding(appMode, device.getId(), prevAssignment, newAssignment);
 		}
-		syncSettings(EventType.UPDATE_KEYBINDING);
+	}
+
+	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		updateAppModeIfNeeded(appMode);
+		InputDeviceProfile device = getDeviceById(appMode, deviceId);
+		if (device != null) {
+			device.resetAllAssignments();
+			syncSettings(EventType.RESET_ALL_KEY_ASSIGNMENTS);
+		}
 	}
 
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
@@ -229,7 +243,7 @@ public class InputDeviceHelper {
 	public boolean hasNameDuplicate(@NonNull ApplicationMode appMode, @NonNull String newName) {
 		updateAppModeIfNeeded(appMode);
 		for (InputDeviceProfile device : getAvailableDevices()) {
-			if (Algorithms.objectEquals(device.toHumanString(app).trim(), newName.trim())) {
+			if (objectEquals(device.toHumanString(app).trim(), newName.trim())) {
 				return true;
 			}
 		}

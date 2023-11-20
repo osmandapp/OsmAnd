@@ -1,19 +1,25 @@
 package net.osmand.plus.keyevent;
 
+import android.content.Context;
 import android.os.Build;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.R;
+
 public class KeySymbolMapper {
 
 	private static final SparseArray<String> keySymbolMap = new SparseArray<>();
 
 	@NonNull
-	public static String getKeySymbol(int keyCode) {
+	public static String getKeySymbol(@NonNull Context context, int keyCode) {
 		if (keySymbolMap.size() == 0) {
 			load();
+		}
+		if (keyCode == KeyEvent.KEYCODE_UNKNOWN) {
+			return context.getString(R.string.shared_string_none);
 		}
 		String symbol = keySymbolMap.get(keyCode);
 		return symbol != null ? symbol : String.valueOf((char) keyCode);

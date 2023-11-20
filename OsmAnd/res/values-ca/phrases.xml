@@ -1932,7 +1932,7 @@
     <string name="poi_healthcare_speciality_acupuncture">Acupuntura</string>
     <string name="poi_healthcare_speciality_chiropractic">Quiropràctica</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatia</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psicoanàlisi</string>
+    <string name="poi_healthcare_speciality_depth">Psicoanàlisi</string>
     <string name="poi_healthcare_speciality_radiology">Radiologia</string>
     <string name="poi_healthcare_speciality_psychiatry">Psiquiatria</string>
     <string name="poi_healthcare_speciality_neurology">Neurologia</string>
@@ -2503,7 +2503,7 @@
     <string name="poi_healthcare_speciality_anaesthetics">Anestesiologia</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsiquiatria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinologia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medicina nuclear</string>
+    <string name="poi_healthcare_speciality_nuclear">Medicina nuclear</string>
     <string name="poi_healthcare_speciality_obstetrics_postnatal">Obstetrícia (postnatal)</string>
     <string name="poi_health_specialty_obstetrics_postnatal_no">Especialitat mèdica: sense obstetrícia (postnatal)</string>
     <string name="poi_healthcare_speciality_obstetrics_antenatal">Obstetrícia (prenatal)</string>
@@ -2742,12 +2742,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Especialitat mèdica: sense sociologia pediàtrica</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrícia (cesàries)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialitat mèdica: sense obstetrícia (cesàries)</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Medicina de l\'addicció</string>
+    <string name="poi_healthcare_speciality_addiction">Medicina de l\'addicció</string>
     <string name="poi_healthcare_speciality_optometry">Optometria</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologia clínica</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopèdia</string>
     <string name="poi_healthcare_speciality_manual_therapy">Teràpia manual</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medicina esportiva</string>
+    <string name="poi_healthcare_speciality_sports">Medicina esportiva</string>
     <string name="poi_healthcare_speciality_podiatry">Podologia</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psiquiatria per adults</string>
     <string name="poi_pump_type_gravity">Tipus de bombament: gravitacional</string>

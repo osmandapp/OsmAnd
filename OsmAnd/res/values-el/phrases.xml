@@ -2248,7 +2248,7 @@
     <string name="poi_historic_civilization_nuragic">Πολιτισμός: νουραγικός (18ος αιώνας π.Χ. - 2ος αιώνας μ.Χ.)</string>
     <string name="poi_historic_civilization_etruscan">Πολιτισμός: ετρουσκικός (12ος - 6ος αιώνας π.Χ.)</string>
     <string name="poi_historic_civilization_prehistoric">Πολιτισμός: προϊστορικός</string>
-    <string name="poi_historic_civilization_ancient_greek">"Πολιτισμός:  αρχαιοελληνικός"</string>
+    <string name="poi_historic_civilization_ancient_greek">Πολιτισμός: αρχαιοελληνικός</string>
     <string name="poi_historic_civilization_roman">Πολιτισμός: ρωμαϊκός</string>
     <string name="poi_historic_civilization_byzantine">Πολιτισμός: βυζαντινός (285 μ.Χ. - 1453 μ.Χ.)</string>
     <string name="poi_historic_civilization_imperial_chinese">Πολιτισμός: αυτοκρατορικός κινέζικος (221 π.Χ. - 1911 μ.Χ.)</string>
@@ -2432,7 +2432,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Νευρολογική χειρουργική</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Νευροψυχιατρική</string>
     <string name="poi_healthcare_speciality_endocrinology">Ενδοκρινολογία</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Πυρηνική ιατρική</string>
+    <string name="poi_healthcare_speciality_nuclear">Πυρηνική ιατρική</string>
     <string name="poi_healthcare_speciality_pathology">Παθολογική ανατομία</string>
     <string name="poi_healthcare_speciality_oncology">Ογκολογία</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Τροπική ιατρική</string>
@@ -2445,12 +2445,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Ειδικότητα ιατρικής: κοινωνική παιδιατρική: όχι</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Μαιευτική (καισαρική τομή)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Ειδικότητα ιατρικής: μαιευτική (καισαρική τομή): όχι</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Ιατρική εξάρτησης</string>
+    <string name="poi_healthcare_speciality_addiction">Ιατρική εξάρτησης</string>
     <string name="poi_healthcare_speciality_optometry">Οπτομετρία</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Κλινική παθολογία</string>
     <string name="poi_healthcare_speciality_speech_therapy">Λογοθεραπεία</string>
     <string name="poi_healthcare_speciality_manual_therapy">Χειροθεραπεία</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Αθλητική ιατρική</string>
+    <string name="poi_healthcare_speciality_sports">Αθλητική ιατρική</string>
     <string name="poi_healthcare_speciality_podiatry">Ποδολογία</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Ψυχιατρική ενηλίκων</string>
     <string name="poi_healthcare_speciality_acupuncture">Βελονισμός</string>
@@ -2460,7 +2460,7 @@
     <string name="poi_healthcare_speciality_herbalism">Βοτανοθεραπεία</string>
     <string name="poi_healthcare_speciality_chiropractic">Χειροπρακτική</string>
     <string name="poi_healthcare_speciality_naturopathy">Φυσιοπαθητική</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Ψυχολογία βάθους</string>
+    <string name="poi_healthcare_speciality_depth">Ψυχολογία βάθους</string>
     <string name="poi_healthcare_speciality_behavior">Συμπεριφορά</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Παρηγορητική ιατρική</string>
     <string name="poi_building_type_pyramid">Τύπος οικοδομής: πυραμίδα</string>
@@ -3493,7 +3493,7 @@
     <string name="poi_shoe_repair">Υποδηματοποιείο</string>
     <string name="poi_bulk_purchase_yes">Ναι</string>
     <string name="poi_bulk_purchase_only">Μόνο</string>
-    <string name="poi_pipeline_substation">"Υποσταθμός  ρεύματος"</string>
+    <string name="poi_pipeline_substation">Υποσταθμός ρεύματος</string>
     <string name="poi_substation_transmission">Μεταφορά</string>
     <string name="poi_substation_distribution">Διανομή</string>
     <string name="poi_substation_minor_distribution">Μικρή διανομή</string>

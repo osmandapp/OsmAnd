@@ -1,6 +1,6 @@
 package net.osmand.plus.firstusage;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -789,7 +789,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void restoreFromFile() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+			mapActivity.getImportHelper().chooseFileToImport(SETTINGS);
 		}
 	}
 

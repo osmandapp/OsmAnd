@@ -25,7 +25,6 @@ import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -98,8 +97,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			cardsContainer.addView(purchaseCard.build(activity));
 		}
 
-		boolean tripltekPromoAvailable = InAppPurchaseUtils.isTripltekPromoAvailable(app);
-		if (tripltekPromoAvailable) {
+		if (Version.isTripltekBuild()) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);

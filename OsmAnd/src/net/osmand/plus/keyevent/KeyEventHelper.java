@@ -107,7 +107,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 	private void showToastAboutPressedKey(@NonNull KeyEvent keyEvent) {
 		int keyCode = keyEvent.getKeyCode();
 		int deviceId = keyEvent.getDeviceId();
-		String keyLabel = KeySymbolMapper.getKeySymbol(keyCode);
+		String keyLabel = KeySymbolMapper.getKeySymbol(app, keyCode);
 		app.showShortToastMessage("Device id: " + deviceId + ", key code: " + keyCode + ", label: \"" + keyLabel + "\"");
 	}
 

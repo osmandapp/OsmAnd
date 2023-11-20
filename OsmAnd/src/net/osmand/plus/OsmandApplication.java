@@ -62,6 +62,7 @@ import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
@@ -195,6 +196,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
+	ImportHelper importHelper;
 	TravelRendererHelper travelRendererHelper;
 	LauncherShortcutsHelper launcherShortcutsHelper;
 	GpsFilterHelper gpsFilterHelper;
@@ -514,6 +516,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public BackupHelper getBackupHelper() {
 		return backupHelper;
+	}
+
+	public ImportHelper getImportHelper() {
+		return importHelper;
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {

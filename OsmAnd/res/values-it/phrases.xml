@@ -3141,7 +3141,7 @@
     <string name="poi_healthcare_speciality_stomatology">Odontoiatria</string>
     <string name="poi_healthcare_speciality_physiotherapy">Fisioterapia</string>
     <string name="poi_healthcare_speciality_orthodontics">Ortodonzia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medicina nucleare</string>
+    <string name="poi_healthcare_speciality_nuclear">Medicina nucleare</string>
     <string name="poi_healthcare_speciality_podiatry">Podologia</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatia</string>
     <string name="poi_healthcare_speciality_chiropractic">Chiropratica</string>
@@ -3519,8 +3519,8 @@
     <string name="poi_seamark_obstruction">Ostruzione</string>
     <string name="poi_osmand_climbing_bolts_no">No</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manuale</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medicina sportiva</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psichiatria profonda</string>
+    <string name="poi_healthcare_speciality_sports">Medicina sportiva</string>
+    <string name="poi_healthcare_speciality_depth">Psichiatria profonda</string>
     <string name="poi_parking_garage_boxes">Box garage</string>
     <string name="poi_support_ceiling">Supporto: soffitto</string>
     <string name="poi_motorcycle_type_offroad">Fuoristrada</string>
@@ -3834,7 +3834,7 @@
     <string name="poi_healthcare_speciality_obstetrics_antenatal">Ostetricia (prenatale)</string>
     <string name="poi_health_specialty_obstetrics_antenatal_no">Specialità sanitaria: Ostetricia (prenatale): no</string>
     <string name="poi_health_specialty_obstetrics_postnatal_no">Specialità sanitaria: Ostetricia (postnatale): no</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Medicina di dipendenza</string>
+    <string name="poi_healthcare_speciality_addiction">Medicina di dipendenza</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologia clinica</string>
     <string name="poi_inscription_e">Inscrizione:E</string>
     <string name="poi_nuclear_explosion_type_underground_tunnel">Tipo esplosione: sotterranea, tunnel</string>

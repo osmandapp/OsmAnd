@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -26,8 +24,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -158,7 +156,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 		LinearLayout trackButton = trackItem.findViewById(R.id.button_container);
 		trackIcon.getDrawable().setTint(ColorUtilities.getDefaultIconColor(app, nightMode));
-		trackButton.setOnClickListener(v -> GpxUiHelper.selectGPXFile(requireActivity(), false, false, result -> {
+		trackButton.setOnClickListener(v -> GpxDialogs.selectGPXFile(requireActivity(), false, false, result -> {
 			gpxFile = result[0];
 			updateCard();
 			return true;

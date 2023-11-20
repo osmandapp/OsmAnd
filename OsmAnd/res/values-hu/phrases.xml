@@ -2457,7 +2457,7 @@
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Szülészet (császármetszés)</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klinikai patológia</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopédia</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Sportorvoslás</string>
+    <string name="poi_healthcare_speciality_sports">Sportorvoslás</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Felnőttpszichiátria</string>
     <string name="poi_healthcare_speciality_acupuncture">Akupunktúra</string>
     <string name="poi_healthcare_speciality_homeopathy">Homeopátia</string>
@@ -2650,7 +2650,7 @@
     <string name="poi_healthcare_speciality_nephrology">Nefrológia (vesegyógyászat)</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropszichiátria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinológia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nukleáris medicina</string>
+    <string name="poi_healthcare_speciality_nuclear">Nukleáris medicina</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Trópusibetegség-ellátás</string>
     <string name="poi_health_specialty_tropical_medicine_no">Trópusibetegség-ellátás nincs</string>
     <string name="poi_healthcare_speciality_obstetrics_postnatal">(Szülés utáni) szülészeti ellátás</string>
@@ -2659,7 +2659,7 @@
     <string name="poi_health_specialty_obstetrics_antenatal_no">Várandósgondozás nincs</string>
     <string name="poi_health_specialty_social_paediatrics_no">Szociális gyermekgyógyászat nincs</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Szülészet (császármetszés) nincs</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Addiktológia</string>
+    <string name="poi_healthcare_speciality_addiction">Addiktológia</string>
     <string name="poi_healthcare_speciality_optometry">Optometria</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manuálterápia</string>
     <string name="poi_healthcare_speciality_podiatry">Lábgyógyászat</string>
@@ -2667,7 +2667,7 @@
     <string name="poi_healthcare_speciality_herbalism">Gyógynövénytan</string>
     <string name="poi_healthcare_speciality_chiropractic">Chiropraktika</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopátia</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Mélylélektan</string>
+    <string name="poi_healthcare_speciality_depth">Mélylélektan</string>
     <string name="poi_healthcare_speciality_behavior">Viselkedés-lélektan</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Palliatív gyógyászat</string>
     <string name="poi_health_service_nursing_yes">Egészségügyi szolgáltatás: ápolás</string>

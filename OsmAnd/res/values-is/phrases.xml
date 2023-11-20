@@ -2917,7 +2917,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Taugaskurðlækningar</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Taugasálfræði</string>
     <string name="poi_health_specialty_tropical_medicine_no">Heilsutengt sérsvið: hitabeltissjúkdómar: nei</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Íþróttalækningar</string>
+    <string name="poi_healthcare_speciality_sports">Íþróttalækningar</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Geðlækningar fullorðinna</string>
     <string name="poi_karting">Kart</string>
     <string name="poi_health_person_type_podologist">Hlutverk heilbrigðisstarfsmanns: fótaaðgerðafræðingur</string>
@@ -3338,15 +3338,15 @@
     <string name="poi_denomination_unitarian">Únítarakirkjan</string>
     <string name="poi_denomination_wesleyan">Wesley-meþódistar</string>
     <string name="poi_healthcare_speciality_diagnostic_radiology">Geislagreining</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Ísótópagreining</string>
+    <string name="poi_healthcare_speciality_nuclear">Ísótópagreining</string>
     <string name="poi_healthcare_speciality_pathology">Vefjameinafræði</string>
     <string name="poi_healthcare_speciality_social_paediatrics">Félagsbarnalækningar</string>
     <string name="poi_health_specialty_social_paediatrics_no">Heilsutengt sérsvið: félagstengdir barnasjúkdómar: nei</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Fíknlækningar</string>
+    <string name="poi_healthcare_speciality_addiction">Fíknlækningar</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Klínísk meinafræði</string>
     <string name="poi_healthcare_speciality_speech_therapy">Talmeinafræði</string>
     <string name="poi_healthcare_speciality_manual_therapy">Sjúkraþjálfun</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Djúpsálfræði</string>
+    <string name="poi_healthcare_speciality_depth">Djúpsálfræði</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Líknarmeðferð</string>
     <string name="poi_crossing_activation_automatic">Virkjun þverunar: sjálfvirkt</string>
     <string name="poi_crossing_activation_local">Virkjun þverunar: á staðnum</string>

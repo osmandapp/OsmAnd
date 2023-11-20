@@ -2701,7 +2701,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">nerv-ĥirurgio</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">nerv-psiĥiatrio (neŭropsiĥiatrio)</string>
     <string name="poi_healthcare_speciality_endocrinology">hormon-scienco (endokrinologio)</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">perradioaktivizotop-kuracado (nuklea medicino)</string>
+    <string name="poi_healthcare_speciality_nuclear">perradioaktivizotop-kuracado (nuklea medicino)</string>
     <string name="poi_healthcare_speciality_pathology">anatomi-patologio</string>
     <string name="poi_healthcare_speciality_oncology">tumor-scienco (onkologio)</string>
     <string name="poi_healthcare_speciality_tropical_medicine">tropika medicino</string>
@@ -2714,12 +2714,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Neniu specialisto de socia pediatrio</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">operacio cezara (obstetriko)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Neniu specialisto de operacio cezara</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">drog-dependenc-kuracado</string>
+    <string name="poi_healthcare_speciality_addiction">drog-dependenc-kuracado</string>
     <string name="poi_healthcare_speciality_optometry">okul-kuracado (optometrio)</string>
     <string name="poi_healthcare_speciality_clinical_pathology">laboratoria medicino (klinik-patologio)</string>
     <string name="poi_healthcare_speciality_speech_therapy">ortofonio (logopedio)</string>
     <string name="poi_healthcare_speciality_manual_therapy">perman-terapio</string>
-    <string name="poi_healthcare_speciality_sports_medicine">sporta medicino</string>
+    <string name="poi_healthcare_speciality_sports">sporta medicino</string>
     <string name="poi_healthcare_speciality_podiatry">pied-kuracado</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">psiĥiatrio de plenkreskuloj</string>
     <string name="poi_healthcare_speciality_acupuncture">akupunkturo</string>
@@ -2729,7 +2729,7 @@
     <string name="poi_healthcare_speciality_herbalism">herb-kuracado</string>
     <string name="poi_healthcare_speciality_chiropractic">ĥiropraktiko</string>
     <string name="poi_healthcare_speciality_naturopathy">natur-kuracado (naturopatio)</string>
-    <string name="poi_healthcare_speciality_depth_psychology">profunda psiĥologio</string>
+    <string name="poi_healthcare_speciality_depth">profunda psiĥologio</string>
     <string name="poi_healthcare_speciality_behavior">konduta terapio</string>
     <string name="poi_wiki_link">Vikipedio</string>
     <string name="poi_resource_slate_iron_ore_copper">Ardezo, fer-erco, kupro</string>

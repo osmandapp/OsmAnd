@@ -70,7 +70,7 @@
 	<string name="poi_beach_surface_type">Surface</string>
 	<string name="poi_nudism">Nudism</string>
 	<string name="poi_diet">Diet</string>
-	<string name="poi_healthcare_speciality">Health specialty</string>
+	<string name="poi_healthcare_speciality">Healthcare speciality</string>
 	<string name="poi_massage_type">Massage type</string>
 	<string name="poi_tents">Tents</string>
 	<string name="poi_washing_machine">Washing machine</string>
@@ -202,6 +202,10 @@
 	<string name="poi_cemt">CEMT</string>
 	<string name="poi_vending_machine_fuel_filter">Automatic fuel dispensers;Fuel vending machine</string>
 	<string name="poi_second_hand_filter">Second hand goods</string>
+	<string name="poi_healthcare_speciality_clinic">Healthcare speciality: clinic</string>
+	<string name="poi_healthcare_speciality_psychotherapist">Healthcare speciality: psychotherapist</string>
+	<string name="poi_healthcare_speciality_laboratory">Healthcare speciality: laboratory</string>
+
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2721,7 +2725,7 @@
 	<string name="poi_healthcare_speciality_neurosurgery">Neurological surgery</string>
 	<string name="poi_healthcare_speciality_neuropsychiatry">Neuropsychiatry</string>
 	<string name="poi_healthcare_speciality_endocrinology">Endocrinology</string>
-	<string name="poi_healthcare_speciality_nuclear_medicine">Nuclear medicine</string>
+	<string name="poi_healthcare_speciality_nuclear">Nuclear medicine</string>
 	<string name="poi_healthcare_speciality_pathology">Pathological anatomy</string>
 	<string name="poi_healthcare_speciality_oncology">Oncology</string>
 	<string name="poi_healthcare_speciality_tropical_medicine">Tropical medicine</string>
@@ -2734,12 +2738,12 @@
 	<string name="poi_health_specialty_social_paediatrics_no">Health specialty: social paediatrics: no</string>
 	<string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrics (caesarean section)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Health specialty: obstetrics (caesarean section): no</string>
-	<string name="poi_healthcare_speciality_addiction_medicine">Addiction medicine</string>
+	<string name="poi_healthcare_speciality_addiction">Addiction medicine</string>
 	<string name="poi_healthcare_speciality_optometry">Optometry</string>
 	<string name="poi_healthcare_speciality_clinical_pathology">Clinical pathology</string>
 	<string name="poi_healthcare_speciality_speech_therapy">Speech therapy</string>
 	<string name="poi_healthcare_speciality_manual_therapy">Manual therapy</string>
-	<string name="poi_healthcare_speciality_sports_medicine">Sports medicine</string>
+	<string name="poi_healthcare_speciality_sports">Sports medicine</string>
 	<string name="poi_healthcare_speciality_podiatry">Podiatry</string>
 	<string name="poi_healthcare_speciality_adult_psychiatry">Adult psychiatry</string>
 	<string name="poi_healthcare_speciality_acupuncture">Acupuncture</string>
@@ -2749,7 +2753,7 @@
 	<string name="poi_healthcare_speciality_herbalism">Herbalism</string>
 	<string name="poi_healthcare_speciality_chiropractic">Chiropractic</string>
 	<string name="poi_healthcare_speciality_naturopathy">Naturopathy</string>
-	<string name="poi_healthcare_speciality_depth_psychology">Depth psychology</string>
+	<string name="poi_healthcare_speciality_depth">Depth psychology</string>
 	<string name="poi_healthcare_speciality_behavior">Behavior</string>
 	<string name="poi_healthcare_speciality_palliative_medicine">Palliative medicine</string>
 
@@ -5220,5 +5224,49 @@
 	<string name="poi_osmand_foot_private">Pedestrian access: private</string>
 	<string name="poi_osmand_bicycle_no">Bicycle access: no</string>
 	<string name="poi_osmand_bicycle_private">Bicycle access: private</string>
+
+	<string name="poi_healthcare_speciality_ayurveda">Ayurveda</string>
+	<string name="poi_healthcare_speciality_reflexology">Reflexology</string>
+	<string name="poi_healthcare_speciality_anthroposophical">Anthroposophical</string>
+	<string name="poi_healthcare_speciality_applied_kinesiology">Applied kinesiology</string>
+	<string name="poi_healthcare_speciality_aromatherapy">Aromatherapy</string>
+	<string name="poi_healthcare_speciality_hydrotherapy">Hydrotherapy</string>
+	<string name="poi_healthcare_speciality_hypnosis">Hypnosis</string>
+	<string name="poi_healthcare_speciality_shiatsu">Shiatsu</string>
+	<string name="poi_healthcare_speciality_tuina">Tuina</string>
+	<string name="poi_healthcare_speciality_unani">Unani</string>
+	<string name="poi_healthcare_speciality_neonatology">Neonatology</string>
+	<string name="poi_healthcare_speciality_family_medicine">Family medicine</string>
+	<string name="poi_healthcare_speciality_psychology">Psychology</string>
+	<string name="poi_healthcare_speciality_kinesitherapy">Kinesitherapy</string>
+	<string name="poi_healthcare_speciality_primary_care">Primary care</string>
+	<string name="poi_healthcare_speciality_otorhinolaryngology">Otorhinolaryngology</string>
+	<string name="poi_healthcare_speciality_implantology">Implantology</string>
+	<string name="poi_healthcare_speciality_rehabilitation">Rehabilitation</string>
+	<string name="poi_healthcare_speciality_nutrition">Nutrition</string>
+	<string name="poi_healthcare_speciality_obstetrics">Obstetrics</string>
+	<string name="poi_healthcare_speciality_humanistic">Humanistic psychology</string>
+	<string name="poi_healthcare_speciality_body">Body oriented psychotherapy</string>
+	<string name="poi_healthcare_speciality_systemic">Systemic therapy</string>
+	<string name="poi_healthcare_speciality_sophrologist">Sophrology</string>
+	<string name="poi_healthcare_speciality_abortion">Abortion</string>
+	<string name="poi_healthcare_speciality_travel_clinic">Travel clinic</string>
+	<string name="poi_healthcare_speciality_palliative">Palliative</string>
+	<string name="poi_healthcare_speciality_denturist">Denturist</string>
+	<string name="poi_healthcare_speciality_pediatric">Pediatric</string>
+	<string name="poi_healthcare_speciality_diabetology">Diabetology</string>
+	<string name="poi_healthcare_speciality_pharmacology">Pharmacology</string>
+	<string name="poi_healthcare_speciality_cosmetic">Cosmetic</string>
+	<string name="poi_healthcare_speciality_pedorthist">Pedorthist</string>
+	<string name="poi_healthcare_speciality_pain_control">Pain control</string>
+	<string name="poi_healthcare_speciality_first_aid_training">First aid training</string>
+	<string name="poi_healthcare_speciality_sleep">Sleep</string>
+	<string name="poi_healthcare_speciality_proctology">Proctology</string>
+	<string name="poi_healthcare_speciality_audiology">Audiology</string>
+	<string name="poi_healthcare_speciality_autism">Autism</string>
+	<string name="poi_healthcare_speciality_chronic">Chronic</string>
+	<string name="poi_healthcare_speciality_physical_therapy">Physical therapy</string>
+	<string name="poi_healthcare_speciality_microbiology">Microbiology</string>
+	<string name="poi_healthcare_speciality_venereology">Venereology</string>
 
 </resources>

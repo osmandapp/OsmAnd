@@ -914,11 +914,11 @@
     <string name="poi_healthcare_speciality_anaesthetics">Anestezisti</string>
     <string name="poi_healthcare_speciality_diagnostic_radiology">Radiološko dijagnosticiranje</string>
     <string name="poi_healthcare_speciality_stomatology">Zubar</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Nuklearna medicina</string>
+    <string name="poi_healthcare_speciality_nuclear">Nuklearna medicina</string>
     <string name="poi_healthcare_speciality_oncology">Onkologija</string>
     <string name="poi_healthcare_speciality_optometry">Optometrija</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Kliniška patologija</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Sportska medicina</string>
+    <string name="poi_healthcare_speciality_sports">Sportska medicina</string>
     <string name="poi_healthcare_speciality_chiropractic">Kiropraktičar</string>
     <string name="poi_healthcare_speciality_behavior">Ponašanje</string>
     <string name="poi_healthcare_speciality_palliative_medicine">Paliativna medicina</string>

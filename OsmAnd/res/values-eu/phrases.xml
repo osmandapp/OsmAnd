@@ -1595,7 +1595,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Kirurgia neurologikoa</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsikiatria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endokrinologia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medikuntza nuklearra</string>
+    <string name="poi_healthcare_speciality_nuclear">Medikuntza nuklearra</string>
     <string name="poi_healthcare_speciality_pathology">Anatomia patologikoa</string>
     <string name="poi_healthcare_speciality_oncology">Onkologia</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Medikuntza tropikala</string>
@@ -1609,7 +1609,7 @@
     <string name="poi_healthcare_speciality_optometry">Optometria</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologia klinikoa</string>
     <string name="poi_healthcare_speciality_manual_therapy">Esku terapia</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Kirol medikuntza</string>
+    <string name="poi_healthcare_speciality_sports">Kirol medikuntza</string>
     <string name="poi_healthcare_speciality_podiatry">Podologia</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Helduen psikiatria</string>
     <string name="poi_healthcare_speciality_acupuncture">Akupuntura</string>
@@ -2119,9 +2119,9 @@
     <string name="poi_healthcare_speciality_diagnostic_radiology">Diagnostikorako erradiologia</string>
     <string name="poi_healthcare_speciality_social_paediatrics">Soziologia pediatrikoa</string>
     <string name="poi_health_specialty_social_paediatrics_no">Osasun espezialitatea: soziologia pediatrikoa: ez</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">"Adikzioen medikuntza "</string>
+    <string name="poi_healthcare_speciality_addiction">"Adikzioen medikuntza "</string>
     <string name="poi_healthcare_speciality_speech_therapy">Hizketaren terapia</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psikoanalisia</string>
+    <string name="poi_healthcare_speciality_depth">Psikoanalisia</string>
     <string name="poi_aquaculture_shrimp">Akuikultura: ganbak</string>
     <string name="poi_water_supply_type">Ur hornidura mota</string>
     <string name="poi_water_place_access">Ur iturrira sarbidea</string>

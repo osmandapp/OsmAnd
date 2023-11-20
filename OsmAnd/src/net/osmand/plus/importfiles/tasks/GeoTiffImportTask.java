@@ -9,12 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.importfiles.ImportHelper;
 
 import java.io.File;
 
-public class GeoTiffImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class GeoTiffImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String targetFileName;
@@ -37,6 +36,7 @@ public class GeoTiffImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		hideProgress();
+		notifyImportFinished();
 		if (error == null) {
 			Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
 		} else {

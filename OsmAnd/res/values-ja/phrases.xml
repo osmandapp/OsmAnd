@@ -1508,7 +1508,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">脳神経外科</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">神経精神医</string>
     <string name="poi_healthcare_speciality_endocrinology">内分泌科</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">核医学</string>
+    <string name="poi_healthcare_speciality_nuclear">核医学</string>
     <string name="poi_healthcare_speciality_pathology">病理解剖学</string>
     <string name="poi_healthcare_speciality_oncology">臨床腫瘍科</string>
     <string name="poi_healthcare_speciality_tropical_medicine">熱帯医学</string>
@@ -1521,12 +1521,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">社会小児科:無し</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">産科(帝王切開)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">産科(帝王切開):無し</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">中毒医学</string>
+    <string name="poi_healthcare_speciality_addiction">中毒医学</string>
     <string name="poi_healthcare_speciality_optometry">検眼医</string>
     <string name="poi_healthcare_speciality_clinical_pathology">臨床病理学</string>
     <string name="poi_healthcare_speciality_speech_therapy">言語聴覚療法</string>
     <string name="poi_healthcare_speciality_manual_therapy">手技療法・整体・マッサージ</string>
-    <string name="poi_healthcare_speciality_sports_medicine">スポーツ医学</string>
+    <string name="poi_healthcare_speciality_sports">スポーツ医学</string>
     <string name="poi_healthcare_speciality_podiatry">ポドロジー・足学</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">成人の精神医学</string>
     <string name="poi_healthcare_speciality_acupuncture">鍼治療</string>
@@ -1536,7 +1536,7 @@
     <string name="poi_healthcare_speciality_herbalism">本草学</string>
     <string name="poi_healthcare_speciality_chiropractic">カイロプラクティック</string>
     <string name="poi_healthcare_speciality_naturopathy">自然療法</string>
-    <string name="poi_healthcare_speciality_depth_psychology">深層心理学</string>
+    <string name="poi_healthcare_speciality_depth">深層心理学</string>
     <string name="poi_healthcare_speciality_behavior">行動療法</string>
     <string name="poi_healthcare_speciality_palliative_medicine">緩和医療・ホスピス</string>
     <string name="poi_social_facility_type">福祉施設種類</string>

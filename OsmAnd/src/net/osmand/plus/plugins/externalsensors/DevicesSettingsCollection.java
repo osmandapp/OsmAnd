@@ -7,26 +7,70 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-class DevicesSettingsCollection {
+public class DevicesSettingsCollection {
 
 	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
+	public static final float DEFAULT_WHEEL_CIRCUMFERENCE = 2.086f;
 
 	private final CommonPreference<String> preference;
 	private final Gson gson;
-	private final Map<String, DeviceSettings> settings = new HashMap<>();
+	private final Map<String, DeviceSettings> settings = new ConcurrentHashMap<>();
 	private List<DevicePreferencesListener> listeners = new ArrayList<>();
 
 
+	public static class DeviceSettings {
+		final String deviceId;
+		final DeviceType deviceType;
+		boolean enabled;
+		Map<DeviceChangeableProperty, String> additionalParams = new LinkedHashMap<>();
+
+		public DeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
+			this.deviceId = deviceId;
+			this.deviceType = deviceType;
+			this.enabled = deviceEnabled;
+			additionalParams.put(DeviceChangeableProperty.NAME, name);
+		}
+
+		public Map<DeviceChangeableProperty, String> getParams() {
+			return additionalParams;
+		}
+
+		public DeviceType getDeviceType() {
+			return deviceType;
+		}
+
+		public boolean getDeviceEnabled() {
+			return enabled;
+		}
+
+		public void setDeviceEnabled(boolean enabled) {
+			this.enabled = enabled;
+		}
+
+		public void setDeviceProperty(DeviceChangeableProperty property, String normalizedValue) {
+			LinkedHashMap<DeviceChangeableProperty, String> newParams = new LinkedHashMap<>(additionalParams);
+			newParams.put(property, normalizedValue);
+			additionalParams = newParams;
+		}
+
+		public void verifyInit() {
+			if (additionalParams == null) {
+				additionalParams = new LinkedHashMap<>();
+			}
+		}
+	}
 	public interface DevicePreferencesListener {
 		void onDeviceEnabled(@NonNull String deviceId);
 
@@ -57,62 +101,33 @@ class DevicesSettingsCollection {
 
 	@NonNull
 	public Set<String> getDeviceIds() {
-		synchronized (settings) {
-			return new HashSet<>(settings.keySet());
-		}
+		return settings.keySet();
 	}
 
 	@Nullable
 	public DeviceSettings getDeviceSettings(@NonNull String deviceId) {
-		synchronized (settings) {
-			DeviceSettings deviceSettings = settings.get(deviceId);
-			return deviceSettings != null ? createDeviceSettings(deviceSettings) : null;
-		}
+		return settings.get(deviceId);
 	}
-
-	private DeviceSettings createDeviceSettings(@NonNull DeviceSettings settings) {
-		switch (settings.getDeviceType()) {
-			case ANT_BICYCLE_SD:
-			case BLE_BICYCLE_SCD:
-				return new WheelDeviceSettings(settings);
-			default:
-				return new DeviceSettings(settings);
-		}
-	}
-
 	public static DeviceSettings createDeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
-		switch (deviceType) {
-			case ANT_BICYCLE_SD:
-			case BLE_BICYCLE_SCD:
-				return new WheelDeviceSettings(deviceId, deviceType, name, deviceEnabled);
-			default:
-				return new DeviceSettings(deviceId, deviceType, name, deviceEnabled);
-		}
+		return new DeviceSettings(deviceId, deviceType, name, deviceEnabled);
 	}
 
-	public void setDeviceSettings(
-			@NonNull String deviceId,
-			@Nullable DeviceSettings deviceSettings) {
+	public void setDeviceSettings(@NonNull String deviceId, @Nullable DeviceSettings deviceSettings) {
 		setDeviceSettings(deviceId, deviceSettings, true);
 	}
 
-	public void setDeviceSettings(
-			@NonNull String deviceId,
-			@Nullable DeviceSettings deviceSettings,
-			boolean write) {
+	public void setDeviceSettings(@NonNull String deviceId, @Nullable DeviceSettings deviceSettings, boolean write) {
 		boolean stateChanged;
-		synchronized (settings) {
-			if (deviceSettings == null) {
-				settings.remove(deviceId);
-				stateChanged = true;
-			} else {
-				DeviceSettings prevSettings = settings.get(deviceId);
-				settings.put(deviceId, deviceSettings);
-				stateChanged = prevSettings != null && prevSettings.getDeviceEnabled() != deviceSettings.getDeviceEnabled();
-			}
-			if (write) {
-				writeSettings();
-			}
+		if (deviceSettings == null) {
+			settings.remove(deviceId);
+			stateChanged = true;
+		} else {
+			DeviceSettings prevSettings = settings.get(deviceId);
+			settings.put(deviceId, deviceSettings);
+			stateChanged = prevSettings != null && prevSettings.getDeviceEnabled() != deviceSettings.getDeviceEnabled();
+		}
+		if (write) {
+			writeSettings();
 		}
 		if (stateChanged) {
 			fireDeviceStateChangedEvent(deviceId, deviceSettings != null && deviceSettings.getDeviceEnabled());
@@ -132,20 +147,21 @@ class DevicesSettingsCollection {
 	private void readSettings() {
 		String settingsJson = preference.get();
 		if (!Algorithms.isEmpty(settingsJson)) {
-			Map<String, DeviceSettings> settings = gson.fromJson(settingsJson,
-					new TypeToken<HashMap<String, DeviceSettings>>() {
-					}.getType());
+			Map<String, DeviceSettings> settings = gson.fromJson(settingsJson, new TypeToken<HashMap<String, DeviceSettings>>() {
+			}.getType());
 			if (settings != null) {
 				this.settings.clear();
+				// some versions gson don't call constructor properly?
+				for (DeviceSettings s : settings.values()) {
+					s.verifyInit();
+				}
 				this.settings.putAll(settings);
 			}
 		}
 	}
 
 	private void writeSettings() {
-		String json = gson.toJson(settings,
-				new TypeToken<HashMap<String, DeviceSettings>>() {
-				}.getType());
+		String json = gson.toJson(settings);
 		preference.set(json);
 	}
 }

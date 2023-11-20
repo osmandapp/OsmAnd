@@ -2279,7 +2279,7 @@
     <string name="poi_healthcare_speciality_neurosurgery">Neurocirurgia</string>
     <string name="poi_healthcare_speciality_neuropsychiatry">Neuropsiquiatria</string>
     <string name="poi_healthcare_speciality_endocrinology">Endocrinologia</string>
-    <string name="poi_healthcare_speciality_nuclear_medicine">Medicina nuclear</string>
+    <string name="poi_healthcare_speciality_nuclear">Medicina nuclear</string>
     <string name="poi_healthcare_speciality_pathology">Anatomia patológica</string>
     <string name="poi_healthcare_speciality_oncology">Oncologia</string>
     <string name="poi_healthcare_speciality_tropical_medicine">Medicina tropical</string>
@@ -2292,12 +2292,12 @@
     <string name="poi_health_specialty_social_paediatrics_no">Sem pediatria social</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Obstetrícia (cesariana)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Sem obstetrícia (cesariana)</string>
-    <string name="poi_healthcare_speciality_addiction_medicine">Toxicologia clínica</string>
+    <string name="poi_healthcare_speciality_addiction">Toxicologia clínica</string>
     <string name="poi_healthcare_speciality_optometry">Optometria</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologia clínica</string>
     <string name="poi_healthcare_speciality_speech_therapy">Fonoaudiologia</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manual</string>
-    <string name="poi_healthcare_speciality_sports_medicine">Medicina esportiva</string>
+    <string name="poi_healthcare_speciality_sports">Medicina esportiva</string>
     <string name="poi_healthcare_speciality_podiatry">Podologia</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psiquiatria adulta</string>
     <string name="poi_healthcare_speciality_acupuncture">Acupuntura</string>
@@ -2307,7 +2307,7 @@
     <string name="poi_healthcare_speciality_herbalism">Fitoterapia</string>
     <string name="poi_healthcare_speciality_chiropractic">Quiropraxia</string>
     <string name="poi_healthcare_speciality_naturopathy">Naturopatia</string>
-    <string name="poi_healthcare_speciality_depth_psychology">Psicologia profunda</string>
+    <string name="poi_healthcare_speciality_depth">Psicologia profunda</string>
     <string name="poi_healthcare_speciality_behavior">Comportamental</string>
     <string name="poi_building_type_pyramid">Tipo de edificação: pirâmide</string>
     <string name="poi_pa">Pa (assentamento fortificado maori)</string>
@@ -4632,4 +4632,21 @@
     <string name="poi_socket_typee_output">Tomada: Tipo E: saída</string>
     <string name="poi_dressing_room">Provador</string>
     <string name="poi_healthcare_speciality_intensive">Intensivo</string>
+    <string name="poi_osmand_motor_vehicle_no">Acesso de veículos motorizados: não</string>
+    <string name="poi_osmand_motorcar_no">Acesso de automóveis: não</string>
+    <string name="poi_osmand_vehicle_no">Acesso de veículos: não</string>
+    <string name="poi_osmand_access_no">Acesso: não</string>
+    <string name="poi_osmand_access_private">Acesso: privado</string>
+    <string name="poi_osmand_foot_private">Acesso de pedestre: privada</string>
+    <string name="poi_osmand_bicycle_private">Acesso de bicicleta: privado</string>
+    <string name="poi_osmand_motor_vehicle_private">Acesso de veículos motorizados: privado</string>
+    <string name="poi_osmand_foot_no">Acesso de pedestre: não</string>
+    <string name="poi_osmand_bicycle_no">Acesso de bicicleta: não</string>
+    <string name="poi_osmand_vehicle_private">Acesso de veículos: privado</string>
+    <string name="poi_emergency_bay">Área de emergência</string>
+    <string name="poi_health_specialty_paediatric_surgery_yes">Cirurgia pediátrica</string>
+    <string name="poi_osmand_motorcar_private">Acesso de automóveis: privado</string>
+    <string name="poi_osmand_motorcycle_no">Acesso para motocicleta: não</string>
+    <string name="poi_osmand_motorcycle_private">Acesso de motocicleta: privado</string>
+    <string name="poi_health_specialty_paediatric_dentistry_yes">Odontopediatria</string>
 </resources>

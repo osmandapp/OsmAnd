@@ -49,10 +49,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.GpxLayerUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -162,7 +161,7 @@ public class TrackDetailsMenu {
 				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
 				Pair<WptPt, WptPt> points = getTrackLineNearPoint(mapRenderer, tb, latLon, segment);
 				if (points != null) {
-					gpxItem.locationOnMap = GpxLayerUtils.createProjectionPoint(points.first, points.second, latLon);
+					gpxItem.locationOnMap = GpxUtils.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
@@ -212,9 +211,9 @@ public class TrackDetailsMenu {
 
 		if (mapRenderer != null) {
 			List<PointI> polygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, pixel, radius);
-			return polygon31 != null ? GpxLayerUtils.findLineInPolygon31(polygon31, segment.points) : null;
+			return polygon31 != null ? GpxUtils.findLineInPolygon31(polygon31, segment.points) : null;
 		} else {
-			return GpxLayerUtils.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
+			return GpxUtils.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
 		}
 	}
 
@@ -348,11 +347,10 @@ public class TrackDetailsMenu {
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 				float time = pos * 1000;
-				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
+				point = GpxUtils.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
 			} else {
 				float distance = pos * dataSet.getDivX();
-				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true,
-						joinSegments);
+				point = GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, true, joinSegments);
 			}
 		}
 		return point == null ? null : new LatLon(point.lat, point.lon);

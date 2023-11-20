@@ -121,11 +121,15 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), getButtonId(ZOOM_IN_BUTTON_ID), true));
-		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), getButtonId(ZOOM_OUT_BUTTON_ID), true));
-		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), getButtonId(BACK_TO_LOC_BUTTON_ID), false, true));
+		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), getButtonId(ZOOM_IN_BUTTON_ID), alwaysShowButtons()));
+		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), getButtonId(ZOOM_OUT_BUTTON_ID), alwaysShowButtons()));
+		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), getButtonId(BACK_TO_LOC_BUTTON_ID), false, alwaysShowButtons()));
 
 		setupMapRulerWidget(view, mapLayers);
+	}
+
+	protected boolean alwaysShowButtons(){
+		return true;
 	}
 
 	public String getButtonId(String defaultId) {
