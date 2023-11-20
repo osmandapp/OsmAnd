@@ -793,6 +793,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return new File(externalStorageDirectory, child);
 	}
 
+	@NonNull
+	public File getAppInternalPath(@Nullable String path) {
+		String child = path != null ? path : "";
+		return new File(settings.getInternalAppPath(), child);
+	}
+
 	public void setExternalStorageDirectory(int type, String directory) {
 		settings.setExternalStorageDirectory(type, directory);
 		externalStorageDirectory = settings.getExternalStorageDirectory();

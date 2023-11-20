@@ -665,6 +665,12 @@ public class DownloadIndexesThread {
 				long time = System.currentTimeMillis() - start;
 				if (result) {
 					app.logMapDownloadEvent("done", item, time);
+					if(item.isHidden()) {
+						File nonHiddenFile = item.getDefaultTargetFile(app);
+						if(nonHiddenFile.exists()) {
+							nonHiddenFile.delete();
+						}
+					}
 					checkDownload(item);
 				} else {
 					app.logMapDownloadEvent("failed", item, time);

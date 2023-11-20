@@ -21,6 +21,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -87,7 +88,13 @@ public class LocalItem implements Comparable<LocalItem> {
 
 	public boolean isBackuped(@NonNull OsmandApplication app) {
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
-		return path.startsWith(backupDir.getAbsolutePath());
+		File hiddenBackupDir = app.getAppInternalPath(IndexConstants.HIDDEN_BACKUP_DIR);
+		return path.startsWith(backupDir.getAbsolutePath()) || path.startsWith(hiddenBackupDir.getAbsolutePath());
+	}
+
+	public boolean isHidden(@NonNull OsmandApplication app) {
+		File hiddenDir = app.getAppInternalPath(IndexConstants.HIDDEN_DIR);
+		return path.startsWith(hiddenDir.getAbsolutePath());
 	}
 
 	@Nullable

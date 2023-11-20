@@ -109,7 +109,7 @@ public class PerformLiveUpdateAsyncTask
 					}
 					IndexItem indexItem = new IndexItem(update.fileName, "Incremental update",
 							update.timestamp, update.sizeText, update.contentSize,
-							update.containerSize, DownloadActivityType.LIVE_UPDATES_FILE, false, null);
+							update.containerSize, DownloadActivityType.LIVE_UPDATES_FILE, false, null, false);
 					itemsToDownload.add(indexItem);
 				}
 				LOG.debug("Items to download size: " + itemsToDownload.size());
