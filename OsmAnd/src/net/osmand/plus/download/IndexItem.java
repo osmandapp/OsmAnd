@@ -24,7 +24,7 @@ import java.util.List;
 public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
-	
+
 	String description;
 	String fileName;
 	String size;
@@ -40,6 +40,26 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	long localTimestamp;
 	boolean free;
 	String freeMessage;
+
+	public IndexItem(String fileName,
+	                 String description,
+	                 long timestamp,
+	                 String size,
+	                 long contentSize,
+	                 long containerSize,
+	                 @NonNull DownloadActivityType type,
+	                 boolean free,
+	                 String freeMessage) {
+		this(fileName,
+				description,
+				timestamp,
+				size,
+				contentSize,
+				containerSize,
+				type,
+				free,
+				freeMessage, false);
+	}
 
 	public IndexItem(String fileName,
 	                 String description,

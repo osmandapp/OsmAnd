@@ -87,39 +87,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		readAdditionalDataFromJson(json);
 		readDependentFilesFromJson(json);
 		loadResources();
-		updateCustomRegionsState();
 	}
-
-	private void updateCustomRegionsState() {
-		ArrayList<Pair<File, File>> filesToCopy = new ArrayList();
-		for (WorldRegion region : getFlatCustomRegions()) {
-			if (region instanceof CustomRegion) {
-				CustomRegion customRegion = (CustomRegion) region;
-				List<IndexItem> indexItems = customRegion.loadIndexItems();
-				for (IndexItem item : indexItems) {
-					getFilesToRestoreHiddenState(filesToCopy, item);
-				}
-			}
-		}
-		MoveHiddenFilesTask task = new MoveHiddenFilesTask(app, filesToCopy);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	private void getFilesToRestoreHiddenState(ArrayList<Pair<File, File>> filesToCopy, IndexItem item) {
-		if (item.isHidden()) {
-			File nonHiddenFile = item.getDefaultTargetFile(app);
-			if (nonHiddenFile.exists()) {
-				File hiddenFile = item.getTargetFile(app);
-				filesToCopy.add(new Pair<>(nonHiddenFile, hiddenFile));
-			}
-			File nonHiddenBackupedFile = new File(app.getAppPath(BACKUP_INDEX_DIR), nonHiddenFile.getName());
-			if (nonHiddenBackupedFile.exists()) {
-				File hiddenBackupedFile = new File(app.getAppInternalPath(HIDDEN_BACKUP_DIR), nonHiddenFile.getName());
-				filesToCopy.add(new Pair<>(nonHiddenBackupedFile, hiddenBackupedFile));
-			}
-		}
-	}
-
 
 	@Override
 	public String getId() {
