@@ -1220,7 +1220,7 @@
     <string name="rendering_attr_moreDetailed_name">Mehr Details</string>
     <string name="rendering_attr_lessDetailed_name">Weniger Details</string>
     <string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
-    <string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen und Maut anzeigen</string>
+    <string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrradrouten</string>
@@ -5566,4 +5566,11 @@
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
     <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion wird gelöscht und auf \"Keine\" gesetzt.</string>
+    <string name="reset_key_assignments_desc">Alle Tastenzuweisungen für den ausgewählten Typ werden entfernt.</string>
+    <string name="rendering_attr_showToll_name">Zeige Mautbeschränkungen</string>
+    <string name="shared_string_reassign">Neu belegen</string>
+    <string name="reset_key_assignments">Tastenzuweisungen zurücksetzen</string>
+    <string name="rendering_attr_showToll_description">Zeige Mautbeschränkungen auf Straßen</string>
+    <string name="target_elevation">Zielhöhe</string>
+    <string name="shared_string_eta">Voraussichtliche Ankunftszeit (ETA)</string>
 </resources>
