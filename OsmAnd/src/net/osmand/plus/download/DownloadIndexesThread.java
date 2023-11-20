@@ -641,12 +641,6 @@ public class DownloadIndexesThread {
 		public boolean downloadFile(IndexItem item, List<File> filesToReindex, boolean forceWifi)
 				throws InterruptedException {
 			downloadFileHelper.setInterruptDownloading(false);
-			if(item.isHidden()) {
-				File nonHiddenFile = item.getDefaultTargetFile(app);
-				if(nonHiddenFile.exists()) {
-					nonHiddenFile.delete();
-				}
-			}
 			DownloadEntry de = item.createDownloadEntry(app);
 			boolean result = false;
 			if (de == null) {
@@ -671,6 +665,12 @@ public class DownloadIndexesThread {
 				long time = System.currentTimeMillis() - start;
 				if (result) {
 					app.logMapDownloadEvent("done", item, time);
+					if(item.isHidden()) {
+						File nonHiddenFile = item.getDefaultTargetFile(app);
+						if(nonHiddenFile.exists()) {
+							nonHiddenFile.delete();
+						}
+					}
 					checkDownload(item);
 				} else {
 					app.logMapDownloadEvent("failed", item, time);
