@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.HIDDEN_BACKUP_DIR;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 
 import android.app.Activity;
@@ -9,9 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.text.Html;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
