@@ -1251,7 +1251,7 @@
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevesebb részlet</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showAccess_name">Behajtási korlátozások és útdíj megjelenítése</string>
+    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak</string>
@@ -5565,4 +5565,6 @@
     <string name="reset_key_assignments">Billentyű-hozzárendelések visszaállítása</string>
     <string name="target_elevation">Célmagasság</string>
     <string name="shared_string_eta">ETA</string>
+    <string name="rendering_attr_showToll_name">Útdíjkorlátozások megjelenítése</string>
+    <string name="rendering_attr_showToll_description">Útdíjkorlátozások megjelenítése az utakon</string>
 </resources>
