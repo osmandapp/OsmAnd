@@ -47,7 +47,7 @@ class KeyBindingsController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null || inputDevice.getActionsCount() == 0) {
+		if (inputDevice == null || inputDevice.getKeyBindingsCount() == 0) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
@@ -71,17 +71,17 @@ class KeyBindingsController {
 		this.activity = activity;
 	}
 
-	public void askRemoveAllKeyAssignments() {
+	public void askRemoveAllKeyBindings() {
 		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_reset_all, (dialog, which) -> {
-					deviceHelper.resetAllAssignments(appMode, inputDevice.getId());
+					deviceHelper.resetAllKeyBindings(appMode, inputDevice.getId());
 				});
 		CustomAlert.showSimpleMessage(dialogData, R.string.reset_key_assignments_desc);
 	}
 
-	public boolean isDeviceEditable() {
+	public boolean isDeviceTypeEditable() {
 		return inputDevice != null && deviceHelper.isCustomDevice(inputDevice);
 	}
 

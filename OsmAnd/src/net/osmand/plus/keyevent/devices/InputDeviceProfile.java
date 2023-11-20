@@ -10,7 +10,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyEventCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -21,13 +20,11 @@ import java.util.Map;
 public abstract class InputDeviceProfile {
 
 	protected OsmandApplication app;
-	protected OsmandSettings settings;
 	protected List<KeyBinding> keyBindings = new ArrayList<>();
-	protected Map<Integer, KeyBinding> quickCache = new HashMap<>();
+	protected Map<Integer, KeyBinding> activeKeyBindings = new HashMap<>();
 
 	public void initialize(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.settings = app.getSettings();
 	}
 
 	public List<KeyBinding> getKeyBindingsForCategory(@NonNull KeyEventCategory category) {
@@ -47,17 +44,17 @@ public abstract class InputDeviceProfile {
 
 	protected void setKeyBindings(@NonNull List<KeyBinding> keyBindings) {
 		this.keyBindings = keyBindings;
-		syncQuickCache();
+		syncActiveKeyBindings();
 	}
 
-	public void resetAllAssignments() {
+	public void resetAllKeyBindings() {
 		List<KeyBinding> newKeyBindings = new ArrayList<>();
 		for (KeyBinding oldKeyBinding : getKeyBindings()) {
 			KeyBinding newKeyBinding = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, oldKeyBinding);
 			newKeyBindings.add(newKeyBinding);
 		}
 		this.keyBindings = newKeyBindings;
-		this.quickCache = new HashMap<>();
+		this.activeKeyBindings = new HashMap<>();
 	}
 
 	public void updateKeyBinding(@Nullable KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
@@ -67,39 +64,39 @@ public abstract class InputDeviceProfile {
 		} else {
 			keyBindings = Algorithms.addToList(keyBindings, newKeyBinding);
 		}
-		syncQuickCache();
+		syncActiveKeyBindings();
 	}
 
-	protected void syncQuickCache() {
-		Map<Integer, KeyBinding> newQuickCache = new HashMap<>();
+	protected void syncActiveKeyBindings() {
+		Map<Integer, KeyBinding> newActiveKeyBindings = new HashMap<>();
 		for (KeyBinding keyBinding : keyBindings) {
 			int keyCode = keyBinding.getKeyCode();
 			if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
-				newQuickCache.put(keyCode, keyBinding);
+				newActiveKeyBindings.put(keyCode, keyBinding);
 			}
 		}
-		this.quickCache = newQuickCache;
+		this.activeKeyBindings = newActiveKeyBindings;
 	}
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {}
 
 	@Nullable
 	public KeyEventCommand findCommand(int keyCode) {
-		KeyBinding keyBinding = findAssignment(keyCode);
+		KeyBinding keyBinding = findActiveKeyBinding(keyCode);
 		return keyBinding != null ? keyBinding.getCommand(app) : null;
 	}
 
 	@Nullable
-	public KeyBinding findAssignment(int keyCode) {
-		return quickCache.get(keyCode);
+	public KeyBinding findActiveKeyBinding(int keyCode) {
+		return activeKeyBindings.get(keyCode);
 	}
 
-	public int getAssignmentsCount() {
-		return quickCache.size();
-	}
-
-	public int getActionsCount() {
+	public int getKeyBindingsCount() {
 		return keyBindings.size();
+	}
+
+	public int getActiveKeyBindingsCount() {
+		return activeKeyBindings.size();
 	}
 
 	@NonNull
@@ -108,8 +105,4 @@ public abstract class InputDeviceProfile {
 	@NonNull
 	public abstract String toHumanString(@NonNull Context context);
 
-	@Override
-	public int hashCode() {
-		return getId().hashCode();
-	}
 }

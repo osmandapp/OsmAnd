@@ -27,7 +27,7 @@ public class KeyboardDeviceProfile extends PredefinedInputDeviceProfile {
 	 * Some types of devices may not support some of the keycodes.
 	 */
 	@Override
-	protected void collectCommands() {
+	protected void collectKeyBindings() {
 		// Default letter keycodes
 		bindCommand(KeyEvent.KEYCODE_C, BackToLocationCommand.ID);
 		bindCommand(KeyEvent.KEYCODE_D, SwitchCompassCommand.ID);

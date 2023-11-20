@@ -84,9 +84,9 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		ScreenItem item = screenItems.get(position);
-		if (item.type == DEVICE_ITEM) {
+		if (item.getType() == DEVICE_ITEM) {
 			DeviceTypeViewHolder h = (DeviceTypeViewHolder) holder;
-			InputDeviceProfile device = (InputDeviceProfile) item.value;
+			InputDeviceProfile device = (InputDeviceProfile) item.getValue();
 
 			boolean nightMode = isNightMode();
 			int color = appMode.getProfileColor(nightMode);
@@ -105,7 +105,7 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 			});
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.type == DEVICE_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.getType() == DEVICE_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}
@@ -155,7 +155,7 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 	@Override
 	public int getItemViewType(int position) {
-		return screenItems.get(position).type;
+		return screenItems.get(position).getType();
 	}
 
 	@Override

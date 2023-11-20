@@ -11,18 +11,18 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	public void initialize(@NonNull OsmandApplication app) {
 		super.initialize(app);
 		keyBindings.clear();
-		collectCommands();
-		syncQuickCache();
+		collectKeyBindings();
+		syncActiveKeyBindings();
 	}
 
 	/**
 	 * Override this method to add or update bindings between
-	 * keycodes and commands for a specific input device profile.
+	 * keycodes and commands for a specific predefined input device profile.
 	 */
-	protected abstract void collectCommands();
+	protected abstract void collectKeyBindings();
 
 	public void requestBindCommand(int keyCode, @NonNull String commandId) {
-		if (!quickCache.containsKey(keyCode)) {
+		if (!activeKeyBindings.containsKey(keyCode)) {
 			bindCommand(keyCode, commandId);
 		}
 	}
@@ -30,6 +30,6 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	public void bindCommand(int keyCode, @NonNull String commandId) {
 		KeyBinding keyBinding = new KeyBinding(keyCode, commandId, null);
 		keyBindings.add(keyBinding);
-		quickCache.put(keyCode, keyBinding);
+		activeKeyBindings.put(keyCode, keyBinding);
 	}
 }

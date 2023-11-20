@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import androidx.annotation.ColorInt;
@@ -11,6 +13,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -54,6 +57,16 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	protected boolean isUsedOnMap() {
 		return false;
+	}
+
+	@NonNull
+	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup parent) {
+		return inflate(layoutResId, parent, false);
+	}
+
+	@NonNull
+	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup parent, boolean attachToRoot) {
+		return themedInflater.inflate(layoutResId, parent, attachToRoot);
 	}
 
 	@Override

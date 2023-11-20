@@ -33,7 +33,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
+import net.osmand.plus.keyevent.callbacks.InputDevicesEventCallback;
 import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,7 +50,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 public class EditKeyBindingFragment extends BaseOsmAndFragment
-		implements OnKeyCodeSelectedCallback, InputDeviceHelperCallback {
+		implements OnKeyCodeSelectedCallback, InputDevicesEventCallback {
 
 	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
 
@@ -239,9 +239,9 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void processInputDeviceHelperEvent(@NonNull EventType event) {
+	public void processInputDevicesEvent(@NonNull EventType event) {
 		View view = getView();
-		if (view != null) {
+		if (view != null && event.isKeyBindingRelated()) {
 			updateViewContent(view);
 		}
 	}

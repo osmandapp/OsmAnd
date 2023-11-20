@@ -16,7 +16,7 @@ public class ParrotDeviceProfile extends PredefinedInputDeviceProfile {
 	public static final String ID = "parrot";
 
 	@Override
-	protected void collectCommands() {
+	protected void collectKeyBindings() {
 		bindCommand(KeyEvent.KEYCODE_DPAD_LEFT, MapZoomCommand.ZOOM_OUT_ID);
 		bindCommand(KeyEvent.KEYCODE_DPAD_RIGHT, MapZoomCommand.ZOOM_IN_ID);
 	}

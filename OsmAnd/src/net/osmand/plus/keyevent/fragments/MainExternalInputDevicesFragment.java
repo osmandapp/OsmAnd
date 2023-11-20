@@ -30,7 +30,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class ExternalInputDeviceFragment extends BaseSettingsFragment {
+public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 
 	private static final String PREF_ID_TYPE = "input_device_type_id";
 	private static final String PREF_ID_BINDING = "input_device_type_bindings_id";
@@ -117,7 +117,7 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 			uiPreference.setKey(PREF_ID_BINDING);
 			uiPreference.setLayoutResource(R.layout.preference_with_descr);
 			uiPreference.setTitle(R.string.key_assignments);
-			uiPreference.setSummary(String.valueOf(inputDevice.getAssignmentsCount()));
+			uiPreference.setSummary(String.valueOf(inputDevice.getActiveKeyBindingsCount()));
 			uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
 			uiPreference.setSelectable(true);
 		}

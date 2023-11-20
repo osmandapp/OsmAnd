@@ -92,9 +92,9 @@ class InputDevicesController {
 				EditText editText = (EditText) extra;
 				String newName = editText.getText().toString();
 				if (Algorithms.isBlank(newName)) {
-					app.showToastMessage(R.string.empty_filename);
+					app.showToastMessage(R.string.empty_name);
 				} else {
-					if (deviceHelper.hasNameDuplicate(appMode, newName)) {
+					if (deviceHelper.hasDeviceNameDuplicate(appMode, newName)) {
 						app.showToastMessage(R.string.message_name_is_already_exists);
 					} else {
 						callback.processResult(newName.trim());

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
+import net.osmand.plus.keyevent.callbacks.InputDevicesEventCallback;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
@@ -49,7 +49,7 @@ public class InputDeviceHelper {
 	private final List<InputDeviceProfile> defaultDevices = Arrays.asList(KEYBOARD, PARROT, WUNDER_LINQ);
 	private final List<InputDeviceProfile> customDevices = new ArrayList<>();
 	private final Map<String, InputDeviceProfile> cachedDevices = new HashMap<>();
-	private final List<InputDeviceHelperCallback> listeners = new ArrayList<>();
+	private final List<InputDevicesEventCallback> listeners = new ArrayList<>();
 
 	public InputDeviceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -65,11 +65,11 @@ public class InputDeviceHelper {
 		return result;
 	}
 
-	public void addListener(@NonNull InputDeviceHelperCallback listener) {
+	public void addListener(@NonNull InputDevicesEventCallback listener) {
 		listeners.add(listener);
 	}
 
-	public void removeListener(@NonNull InputDeviceHelperCallback listener) {
+	public void removeListener(@NonNull InputDevicesEventCallback listener) {
 		listeners.remove(listener);
 	}
 
@@ -104,7 +104,7 @@ public class InputDeviceHelper {
 	}
 
 	private String makeUniqueName(@NonNull String oldName) {
-		return Algorithms.makeUniqueName(oldName, newName -> !hasNameDuplicate(appMode, newName));
+		return Algorithms.makeUniqueName(oldName, newName -> !hasDeviceNameDuplicate(appMode, newName));
 	}
 
 	@NonNull
@@ -176,27 +176,28 @@ public class InputDeviceHelper {
 		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device != null) {
-			resetPreviousAssignmentIfNeeded(device, newKeyBinding);
+			resetPreviousKeyBindingIfNeeded(device, newKeyBinding);
 			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
-			syncSettings(EventType.UPDATE_KEY_ASSIGNMENT);
+			syncSettings(EventType.UPDATE_KEY_BINDING);
 		}
 	}
 
-	private void resetPreviousAssignmentIfNeeded(@NonNull InputDeviceProfile device, @NonNull KeyBinding newKeyBinding) {
+	private void resetPreviousKeyBindingIfNeeded(@NonNull InputDeviceProfile device,
+	                                             @NonNull KeyBinding newKeyBinding) {
 		int keyCode = newKeyBinding.getKeyCode();
-		KeyBinding prevAssignment = device.findAssignment(keyCode);
-		if (prevAssignment != null && !objectEquals(newKeyBinding, prevAssignment)) {
-			KeyBinding newAssignment = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, prevAssignment);
-			updateKeyBinding(appMode, device.getId(), prevAssignment, newAssignment);
+		KeyBinding prevKeyBinding = device.findActiveKeyBinding(keyCode);
+		if (prevKeyBinding != null && !objectEquals(newKeyBinding, prevKeyBinding)) {
+			KeyBinding newAssignment = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, prevKeyBinding);
+			updateKeyBinding(appMode, device.getId(), prevKeyBinding, newAssignment);
 		}
 	}
 
-	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+	public void resetAllKeyBindings(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		updateAppModeIfNeeded(appMode);
 		InputDeviceProfile device = getDeviceById(appMode, deviceId);
 		if (device != null) {
-			device.resetAllAssignments();
-			syncSettings(EventType.RESET_ALL_KEY_ASSIGNMENTS);
+			device.resetAllKeyBindings();
+			syncSettings(EventType.RESET_ALL_KEY_BINDINGS);
 		}
 	}
 
@@ -240,7 +241,7 @@ public class InputDeviceHelper {
 		return settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 	}
 
-	public boolean hasNameDuplicate(@NonNull ApplicationMode appMode, @NonNull String newName) {
+	public boolean hasDeviceNameDuplicate(@NonNull ApplicationMode appMode, @NonNull String newName) {
 		updateAppModeIfNeeded(appMode);
 		for (InputDeviceProfile device : getAvailableDevices()) {
 			if (objectEquals(device.toHumanString(app).trim(), newName.trim())) {
@@ -251,8 +252,8 @@ public class InputDeviceHelper {
 	}
 
 	private void notifyListeners(@NonNull EventType event) {
-		for (InputDeviceHelperCallback listener : listeners) {
-			listener.processInputDeviceHelperEvent(event);
+		for (InputDevicesEventCallback listener : listeners) {
+			listener.processInputDevicesEvent(event);
 		}
 	}
 

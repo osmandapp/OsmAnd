@@ -82,12 +82,12 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		ScreenItem item = screenItems.get(position);
 		if (holder instanceof HeaderViewHolder) {
 			HeaderViewHolder h = (HeaderViewHolder) holder;
-			String groupName = (String) item.value;
+			String groupName = (String) item.getValue();
 			h.title.setText(groupName);
 
 		} else if (holder instanceof ActionItemViewHolder) {
 			ActionItemViewHolder h = (ActionItemViewHolder) holder;
-			KeyBinding keyBinding = (KeyBinding) item.value;
+			KeyBinding keyBinding = (KeyBinding) item.getValue();
 
 			if (isEditable()) {
 				boolean nightMode = isNightMode();
@@ -103,14 +103,14 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.keyName.setText(keyBinding.getKeyLabel(app));
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.type == KEY_BINDING_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.getType() == KEY_BINDING_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}
 
-	public void setScreenData(@NonNull List<ScreenItem> screenItems, boolean isTypeEditable) {
+	public void setScreenData(@NonNull List<ScreenItem> screenItems, boolean isDeviceTypeEditable) {
 		this.screenItems = screenItems;
-		this.editable = isTypeEditable;
+		this.editable = isDeviceTypeEditable;
 		notifyDataSetChanged();
 	}
 
@@ -121,7 +121,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public int getItemViewType(int position) {
-		return screenItems.get(position).type;
+		return screenItems.get(position).getType();
 	}
 
 	@Override

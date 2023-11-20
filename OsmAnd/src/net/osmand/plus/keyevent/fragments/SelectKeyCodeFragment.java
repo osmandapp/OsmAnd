@@ -52,7 +52,6 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private static final int PULSE_DELAY_MS = 1000;
 
-	private InputDeviceHelper deviceHelper;
 	private KeyEventHelper keyEventHelper;
 	private DialogButton applyButton;
 
@@ -64,7 +63,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		deviceHelper = app.getInputDeviceHelper();
+		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
 		keyEventHelper = app.getKeyEventHelper();
 
 		Bundle arguments = requireArguments();
@@ -88,7 +87,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_select_key_code, container, false);
+		View view = inflate(R.layout.fragment_select_key_code, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 		setupDescription(view);
@@ -195,6 +194,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private void updateApplyButtonState() {
 		applyButton.setEnabled(isKeyCodeChanged());
+		applyButton.setButtonType(isKeyCodeFree() ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
 		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 

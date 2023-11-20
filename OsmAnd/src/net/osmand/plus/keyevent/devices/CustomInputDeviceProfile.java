@@ -31,7 +31,8 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		JSONArray jsonArray = object.getJSONArray("keybindings");
 		List<KeyBinding> keyBindings = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
-			keyBindings.add(new KeyBinding(jsonArray.getJSONObject(i)));
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			keyBindings.add(new KeyBinding(jsonObject));
 		}
 		setKeyBindings(keyBindings);
 	}

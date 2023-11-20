@@ -25,12 +25,12 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
+import net.osmand.plus.keyevent.callbacks.InputDevicesEventCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperCallback {
+public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevicesEventCallback {
 
 	public static final String TAG = KeyBindingsFragment.class.getSimpleName();
 
@@ -84,24 +84,27 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);
-		ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
-		ivActionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_key_assignment_remove));
-		actionButton.setOnClickListener(v -> {
-			controller.askRemoveAllKeyAssignments();
-		});
+		if (controller.isDeviceTypeEditable()) {
+			ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
+			ivActionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_key_assignment_remove));
+			actionButton.setOnClickListener(v -> {
+				controller.askRemoveAllKeyBindings();
+			});
+		} else {
+			actionButton.setVisibility(View.GONE);
+		}
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	@Override
-	public void processInputDeviceHelperEvent(@NonNull EventType event) {
-		if (event == EventType.UPDATE_KEY_ASSIGNMENT
-				|| event == EventType.RESET_ALL_KEY_ASSIGNMENTS) {
+	public void processInputDevicesEvent(@NonNull EventType event) {
+		if (event.isKeyBindingRelated()) {
 			updateViewContent();
 		}
 	}
 
 	private void updateViewContent() {
-		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceEditable());
+		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceTypeEditable());
 	}
 
 	@Override
