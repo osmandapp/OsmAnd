@@ -79,6 +79,7 @@ public class TransportRoutingHelper {
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long lastTimeEvaluatedRoute;
+	private final int WALKING_COUNT_CALCULATING = 4;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -620,7 +621,9 @@ public class TransportRoutingHelper {
 			walkingRouteSegments.clear();
 			walkingRouteSegmentsCache.clear();
 			if (routes != null && routes.size() > 0) {
-				for (TransportRouteResult r : routes) {
+				int size = Integer.min(routes.size(), transportRoutingHelper.WALKING_COUNT_CALCULATING);
+				for (int i = 0; i < size; i++) {
+					TransportRouteResult r = routes.get(i);
 					TransportRouteResultSegment prevSegment = null;
 					for (TransportRouteResultSegment segment : r.getSegments()) {
 						LatLon start = prevSegment != null ? prevSegment.getEnd().getLocation() : params.start;
@@ -667,9 +670,13 @@ public class TransportRoutingHelper {
 			List<TransportRouteResult> res = null;
 			String error = null;
 			try {
+				long startTime = System.currentTimeMillis();
 				res = calculateRouteImpl(params, lib);
+				System.out.println("Ivan TRANSPORT:" + (System.currentTimeMillis() - startTime));
+				startTime = System.currentTimeMillis();
 				if (res != null && !params.calculationProgress.isCancelled) {
 					calculateWalkingRoutes(res);
+					System.out.println("Ivan WALKING:" + (System.currentTimeMillis() - startTime));
 				}
 			} catch (Exception e) {
 				error = e.getMessage();
