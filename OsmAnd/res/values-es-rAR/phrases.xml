@@ -3690,7 +3690,7 @@
     <string name="poi_disabled_yes">Sí;Acceso para discapacitados</string>
     <string name="poi_disabled_designated">Designado;Acceso designado para discapacitados</string>
     <string name="poi_cellar_entrance">Entrada de la bodega</string>
-    <string name="poi_health_food">Alimentos saludables;Dietética</string>
+    <string name="poi_health_food">Alimentos saludables;Dietética;Almacén natural;Mercado natural</string>
     <string name="poi_craft_builder">Albañilería;Constructor</string>
     <string name="poi_craft_distillery">Destilería</string>
     <string name="poi_craft_joiner">Carpintería (ensamblado);Carpintero;Carpintera;Ensamblador</string>

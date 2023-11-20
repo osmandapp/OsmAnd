@@ -2566,7 +2566,7 @@
     <string name="pick_up_till">Recoger hasta las</string>
     <string name="without_time_limit">Tiempo ilimitado</string>
     <string name="context_menu_read_full_article">Leer artículo completo</string>
-    <string name="context_menu_read_article">Leer artículo</string>
+    <string name="context_menu_read_article">Leer el artículo</string>
     <string name="context_menu_points_of_group">Todos los puntos del grupo</string>
     <string name="open_from">Abierto desde las</string>
     <string name="open_till">Abierto hasta las</string>
@@ -4782,8 +4782,8 @@
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
-    <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
-    <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
+    <string name="map_widget_ant_heart_rate_desc">Muestra en tiempo real la frecuencia cardiaca del usuario durante una actividad determinada</string>
+    <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia del ciclista, que se utiliza para hacer avanzar la bicicleta</string>
     <string name="lang_sat">Santalí</string>
     <string name="external_sensor_widgets">Widgets de ANT+</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
@@ -4797,14 +4797,14 @@
     <string name="ant_read_data">Leer datos</string>
     <string name="ant_write_to_gpx">Escribir datos en la traza</string>
     <string name="ant_heart_rate_write_gpx_desc">Incluye la frecuencia cardíaca en la traza</string>
-    <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
+    <string name="map_widget_ant_heart_rate">Frecuencia cardíaca</string>
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
-    <string name="map_widget_ant_bicycle_cadence">Cadencia de la bicicleta</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">Muestra la velocidad a la que el usuario pedalea</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadencia de pedaleo</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Muestra la velocidad a la que pedalea el usuario</string>
     <string name="map_widget_ant_bicycle_speed">Velocidad de la bicicleta</string>
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
     <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
-    <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Distancia recorrida</string>
     <string name="nautical_depth_points">Puntos de profundidad náutica</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
@@ -4814,7 +4814,7 @@
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir los patrones del tráfico y generar informes anónimos de mapas mensuales.</string>
     <string name="current_location_widget">Coordenadas: ubicación actual</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Accede a sensores externos para leer, por ejemplo, tu ritmo cardíaco, la velocidad de la bicicleta, la potencia del ciclismo o la cadencia. Requiere que tu dispositivo esté conectado a los respectivos sensores a través del protocolo de una red personal inalámbrica ANT+.</string>
+    <string name="external_sensors_plugin_description">Accede a los sensores externos para leer, por ejemplo, tu frecuencia cardiaca, la velocidad de la bicicleta, la potencia de pedaleo o la cadencia. Requiere que el dispositivo esté conectado a los sensores correspondientes mediante el protocolo de red personal inalámbrica ANT+.</string>
     <string name="map_widget_altitude_map_center">Elevación: centro del mapa</string>
     <string name="map_widget_altitude_current_location_desc">Muestra la altitud sobre el nivel del mar en la ubicación geográfica actual.</string>
     <string name="map_widget_rendering_fps">Renderizado FPS del mapa</string>
@@ -4828,8 +4828,8 @@
     <string name="map_widget_altitude_desc">Mostrar la altitud de la geolocalización actual o la elevación del centro del mapa actual</string>
     <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar del centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
-    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
-    <string name="external_sensors_support">Sensores externos admitidos</string>
+    <string name="purchases_feature_desc_external_sensors">Muestra y registra los datos de los sensores externos: velocidad de la bicicleta, potencia de la bicicleta, cadencia y frecuencia cardiaca.</string>
+    <string name="external_sensors_support">Compatible con sensores externos</string>
     <string name="release_4_3">- Nuevo y más rápido motor de renderizado de mapas de la versión 2 (OpenGL), con vista 2,5D.
 \n
 \n - Animación suave de los cambios de ubicación en movimiento
@@ -5112,13 +5112,13 @@
     <string name="shutter_sound">Sonido del obturador</string>
     <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
     <string name="weather_download_error">No se pudieron descargar %1$s mosaicos.</string>
-    <string name="external_device_forget_sensor">Olvídate del sensor</string>
-    <string name="external_device_forget_sensor_description">El sensor será eliminado de la lista. Podrás volver a emparejar este sensor en cualquier momento.</string>
+    <string name="external_device_forget_sensor">Olvidar el sensor</string>
+    <string name="external_device_forget_sensor_description">El sensor se eliminará de la lista. Podrás volver a emparejar este sensor en cualquier momento.</string>
     <string name="external_device_disconnected">Desconectado</string>
     <string name="external_device_connected">Conectado</string>
     <string name="external_device_characteristic_battery_level">Batería</string>
     <string name="external_device_characteristic_gear_ratio">Reductores de velocidad</string>
-    <string name="external_device_characteristic_cadence">Ritmo</string>
+    <string name="external_device_characteristic_cadence">Cadencia</string>
     <string name="external_device_characteristic_heart_rate">Ritmo cardiaco</string>
     <string name="external_device_characteristic_systolic">Sístolica</string>
     <string name="external_device_characteristic_diastolic">Diastole</string>
@@ -5136,22 +5136,22 @@
     <string name="external_device_ant">ANT</string>
     <string name="bluetooth_found_title">Encontrado: %d</string>
     <string name="bluetooth_not_supported">Bluetooth no compatible</string>
-    <string name="ble_search_again">Buscar de nuevo</string>
-    <string name="ant_plus_nothing_found_text">No se puede encontrar ningún sensor</string>
-    <string name="ant_plus_nothing_found_description">Asegúrate:
-\n- El Bluetooth está encendido
+    <string name="ble_search_again">Volver a buscar</string>
+    <string name="ant_plus_nothing_found_text">No se encuentra ningún sensor</string>
+    <string name="ant_plus_nothing_found_description">Asegúrate de que
+\n- El Bluetooth está activado
 \n- El sensor está activado
 \n- Este dispositivo se encuentra cerca del sensor</string>
-    <string name="ant_plus_bluetooth_off">Bluetooth está apagado</string>
-    <string name="ant_plus_bluetooth_off_description">Enciende los sensores de búsqueda y emparejamiento del Bluetooth.</string>
-    <string name="ant_plus_searching_text">Buscando los sensores</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth desactivado</string>
+    <string name="ant_plus_bluetooth_off_description">Active la búsqueda y el emparejamiento de sensores Bluetooth.</string>
+    <string name="ant_plus_searching_text">Buscando sensores</string>
     <string name="ant_plus_searching_text_description">Por favor, mantén el dispositivo cerca del sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
     <string name="ant_plus_help_title">No se que tipo de sensor tengo</string>
     <string name="ant_plus_searching">Buscando</string>
-    <string name="ant_plus_pair_new_sensor">Emparejar un nuevo sensor</string>
+    <string name="ant_plus_pair_new_sensor">Emparejar el nuevo sensor</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="ant_plus_pair_new_sensor_ble">Emparejar un sensor Bluetooth LE</string>
-    <string name="learn_more_about_sensors_link">Obtén más información sobre los sensores.</string>
+    <string name="learn_more_about_sensors_link">Más información sobre los sensores.</string>
     <string name="external_device_low_battery">Batería baja</string>
     <string name="external_device_characteristic_distance">Distancia</string>
     <string name="external_device_details_total_distance">Distancia total</string>
@@ -5185,11 +5185,11 @@
     <string name="rendering_value_name_only_name">Solo el nombre</string>
     <string name="device_disconnected">Desconectado %1$s</string>
     <string name="device_connected">Conectado %1$s</string>
-    <string name="running_scds_device_name">Ejecutandose</string>
-    <string name="bicycle_scd_device_name">cuentakilómetros para bicicleta</string>
-    <string name="external_device_blood_pressure">Tensión</string>
-    <string name="no_bt_permission">No se concedió el permiso del Bluetooth</string>
-    <string name="beats_per_minute_short">Pulsaciones por minuto</string>
+    <string name="running_scds_device_name">Dispositivo en funcionamiento</string>
+    <string name="bicycle_scd_device_name">Dispositivo para bicicletas</string>
+    <string name="external_device_blood_pressure">Presión arterial</string>
+    <string name="no_bt_permission">El permiso Bluetooth no está concedido</string>
+    <string name="beats_per_minute_short">bpm</string>
     <string name="shared_string_wrist">Muñeca</string>
     <string name="shared_string_finger">Dedo</string>
     <string name="shared_string_hand">Mano</string>
@@ -5214,11 +5214,11 @@
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
     <string name="delete_folder_question">¿Borrar la carpeta\?</string>
-    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores conectados de este tipo</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay ningún sensor conectado de este tipo</string>
     <string name="write_data_from_sensor_to_track">Agrega los datos de los sensores externos a GPX mientras grabas un viaje.</string>
     <string name="save_track_external_sensors_data">Datos</string>
-    <string name="external_sensors_not_found">No se encontraron sensores</string>
-    <string name="external_sensors_source_of_data">Fuente de los datos</string>
+    <string name="external_sensors_not_found">No se encuentran los sensores</string>
+    <string name="external_sensors_source_of_data">Origen de los datos</string>
     <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándote en los datos del mapa del terreno (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
@@ -5562,4 +5562,10 @@
     <string name="key_assignments">Asignaciones clave</string>
     <string name="clear_key_assignment">Borrar la asignación de teclas</string>
     <string name="clear_key_assignment_desc">La vinculación de las teclas para la acción seleccionada se borrará y se establecerá en Ninguna.</string>
+    <string name="topography_maps">Planos topográficos</string>
+    <string name="reset_key_assignments_desc">Se eliminarán todas las asignaciones de las teclas del tipo seleccionado.</string>
+    <string name="shared_string_reassign">Reasignar</string>
+    <string name="reset_key_assignments">Restablecer la asignación de teclas</string>
+    <string name="target_elevation">Elevación del objetivo</string>
+    <string name="shared_string_eta">ETA</string>
 </resources>

@@ -579,7 +579,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				if (Algorithms.isFloat(value)) {
+				try {
 					double valueAsDouble = Double.valueOf(value);
 					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
@@ -590,10 +590,13 @@ public class AmenityUIHelper extends MenuBuilder {
 					} else {
 						formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
 					}
+				} catch (RuntimeException e) {
+					LOG.error(e.getMessage(), e);
 				}
+
 				break;
 			case "distance":
-				if (Algorithms.isFloat(value)) {
+				try {
 					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
 					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
 						formattedValue =
@@ -604,13 +607,13 @@ public class AmenityUIHelper extends MenuBuilder {
 					}
 					formattedPrefix = formatPrefix(prefix,
 							mapActivity.getResources().getString(R.string.distance));
-					break;
+				} catch (RuntimeException e) {
+					LOG.error(e.getMessage(), e);
 				}
+				break;
 			case "capacity":
 				if (subtype.equals("water_tower") || subtype.equals("storage_tank")) {
-					if (Algorithms.isFloat(value)) {
-						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
-					}
+					formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
 				}
 				break;
 			case "maxweight":

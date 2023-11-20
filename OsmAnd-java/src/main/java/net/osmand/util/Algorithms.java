@@ -1032,33 +1032,6 @@ public class Algorithms {
 		return true;
 	}
 
-	public static boolean isFloat(String value) {
-		return isFloat(value, false);
-	}
-
-	public static boolean isFloat(String value, boolean includeInt) {
-		int pointsCount = 0;
-		int length = value.length();
-		for (int i = 0; i < length; i++) {
-			char ch = value.charAt(i);
-			if (!Character.isDigit(ch)) {
-				if (length < 2) {
-					return false;
-				}
-				if (!(ch == '-' || ch == '.')) {
-					return false;
-				} else if (ch == '-' && i != 0) {
-					return false;
-				} else if ((ch == '.' && pointsCount >= 1) || (ch == '.' && i == length - 1)) {
-					return false;
-				} else if (ch == '.') {
-					pointsCount++;
-				}
-			}
-		}
-		return pointsCount == 1 || includeInt && pointsCount == 0;
-	}
-
 	public static <T> T getPercentile(List<T> sortedValues, int percentile) throws IllegalArgumentException {
 		if (percentile < 0 || percentile > 100) {
 			throw new IllegalArgumentException("invalid percentile " + percentile + ", should be 0-100");

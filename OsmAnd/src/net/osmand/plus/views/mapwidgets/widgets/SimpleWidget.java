@@ -36,7 +36,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	private final SimpleWidgetState widgetState;
 
-	private TextView widgetName;
+	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -96,7 +96,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
 		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = view.findViewById(R.id.widget_text_small);
-		widgetName = view.findViewById(R.id.widget_name);
+		widgetNameTextView = view.findViewById(R.id.widget_name);
 		bottomDivider = view.findViewById(R.id.bottom_divider);
 	}
 
@@ -208,10 +208,25 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		return updatedVisibility;
 	}
 
-	private void updateWidgetName() {
-		if (widgetType != null && widgetName != null) {
-			widgetName.setText(getString(widgetType.titleId));
+	protected void updateWidgetName() {
+		String widgetName = getWidgetName();
+		if (widgetName != null && widgetNameTextView != null) {
+			String additionalName = getAdditionalWidgetName();
+			if (additionalName != null) {
+				widgetName = widgetName + ", " + additionalName;
+			}
+			widgetNameTextView.setText(widgetName);
 		}
+	}
+
+	@Nullable
+	protected String getWidgetName() {
+		return widgetType != null ? getString(widgetType.titleId) : null;
+	}
+
+	@Nullable
+	protected String getAdditionalWidgetName(){
+		return null;
 	}
 
 	private void copyTextView(@Nullable TextView newTextView, @Nullable TextView oldTextView) {
@@ -265,7 +280,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			nightMode = textState.night;
 			textView.setTextColor(textState.textColor);
 			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetName.setTextColor(textState.secondaryTextColor);
+			widgetNameTextView.setTextColor(textState.secondaryTextColor);
 			int iconId = getIconId();
 			if (iconId != 0) {
 				setImageDrawable(iconId);

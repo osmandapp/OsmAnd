@@ -5564,4 +5564,11 @@
     <string name="add_row">Додати рядок</string>
     <string name="discard_changes_prompt">Ви дійсно хочете відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
+    <string name="key_assignments">Прив\'язки клавіш</string>
+    <string name="topography_maps">Топографічні мапи</string>
+    <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
+    <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
+    <string name="clear_key_assignment">Очистити прив\'язку клавіш</string>
+    <string name="clear_key_assignment_desc">Прив\'язку клавіш для обраної дії буде очищено та встановлено як \"Ні\".</string>
+    <string name="see_all_plans">Переглянути всі плани</string>
 </resources>

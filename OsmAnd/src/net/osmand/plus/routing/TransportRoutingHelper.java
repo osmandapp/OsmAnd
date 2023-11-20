@@ -20,7 +20,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -80,6 +79,7 @@ public class TransportRoutingHelper {
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long lastTimeEvaluatedRoute;
+	private final int WALKING_COUNT_CALCULATING = 4;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -447,6 +447,7 @@ public class TransportRoutingHelper {
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
 		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
+		private final Map<Pair<Location, LatLon>, RouteCalculationResult> walkingRouteSegmentsCache = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
 		private final NativeLibrary lib;
 
@@ -454,7 +455,7 @@ public class TransportRoutingHelper {
 		String routeCalcErrorShort;
 
 		public RouteRecalculationTask(@NonNull TransportRoutingHelper transportRoutingHelper,
-									  @NonNull TransportRouteCalculationParams params, @Nullable NativeLibrary library) {
+		                              @NonNull TransportRouteCalculationParams params, @Nullable NativeLibrary library) {
 			this.transportRoutingHelper = transportRoutingHelper;
 			this.routingHelper = transportRoutingHelper.routingHelper;
 			this.params = params;
@@ -523,30 +524,37 @@ public class TransportRoutingHelper {
 		}
 
 		@Nullable
-		private RouteCalculationParams getWalkingRouteParams() {
+		private RouteCalculationParams getOrProcessWalkingRouteParams() {
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
-
-			WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
-			if (walkingRouteSegment == null) {
-				return null;
-			}
-
-			OsmandApplication app = routingHelper.getApplication();
+			RouteCalculationResult cachedRoute;
 			Location start = new Location("");
-			start.setLatitude(walkingRouteSegment.start.getLatitude());
-			start.setLongitude(walkingRouteSegment.start.getLongitude());
-			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
+			LatLon end;
+			WalkingRouteSegment walkingRouteSegment;
+			do {
+				walkingRouteSegment = walkingSegmentsToCalculate.poll();
+				if (walkingRouteSegment == null) {
+					walkingSegmentsCalculated = true;
+					return null;
+				}
+				start.setLatitude(walkingRouteSegment.start.getLatitude());
+				start.setLongitude(walkingRouteSegment.start.getLongitude());
+				end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
+				cachedRoute = getRouteFromCache(start, end);
+				if (cachedRoute != null) {
+					walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), cachedRoute);
+				}
+			} while (cachedRoute != null);
 
 			float currentDistanceFromBegin =
 					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
-
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
 			params.start = start;
 			params.end = end;
 			params.startTransportStop = walkingRouteSegment.startTransportStop;
 			params.targetTransportStop = walkingRouteSegment.endTransportStop;
+			OsmandApplication app = routingHelper.getApplication();
 			RoutingHelper.applyApplicationSettings(params, app.getSettings(), walkingMode);
 			params.mode = walkingMode;
 			params.ctx = app;
@@ -580,46 +588,60 @@ public class TransportRoutingHelper {
 						walkingSegmentsCalculated = true;
 					} else {
 						onUpdateCalculationProgress(0);
-						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+						RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 						if (walkingRouteParams != null) {
 							routingHelper.startRouteCalculationThread(walkingRouteParams);
 						}
 					}
 				}
 			};
-			params.alternateResultListener = new RouteCalculationResultListener() {
-				@Override
-				public void onRouteCalculated(RouteCalculationResult route) {
-					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-				}
+			WalkingRouteSegment finalWalkingRouteSegment = walkingRouteSegment;
+			params.alternateResultListener = route -> {
+				walkingRouteSegmentsCache.put(new Pair<>(params.start, params.end), route);
+				RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(finalWalkingRouteSegment.s1, finalWalkingRouteSegment.s2), route);
 			};
 
 			return params;
+		}
+
+		private RouteCalculationResult getRouteFromCache(Location start, LatLon end) {
+			for (Map.Entry<Pair<Location, LatLon>, RouteCalculationResult> entry : walkingRouteSegmentsCache.entrySet()) {
+				Location startLocation = entry.getKey().first;
+				LatLon endLatLon = entry.getKey().second;
+				if (MapUtils.areLatLonEqual(startLocation, start) && endLatLon.equals(end)) {
+					return entry.getValue();
+				}
+			}
+			return null;
 		}
 
 		private void calculateWalkingRoutes(List<TransportRouteResult> routes) {
 			walkingSegmentsCalculated = false;
 			walkingSegmentsToCalculate.clear();
 			walkingRouteSegments.clear();
+			walkingRouteSegmentsCache.clear();
 			if (routes != null && routes.size() > 0) {
-				for (TransportRouteResult r : routes) {
-					TransportRouteResultSegment prev = null;
-					for (TransportRouteResultSegment s : r.getSegments()) {
-						LatLon start = prev != null ? prev.getEnd().getLocation() : params.start;
-						LatLon end = s.getStart().getLocation();
+				int size = Integer.min(routes.size(), transportRoutingHelper.WALKING_COUNT_CALCULATING);
+				for (int i = 0; i < size; i++) {
+					TransportRouteResult r = routes.get(i);
+					TransportRouteResultSegment prevSegment = null;
+					for (TransportRouteResultSegment segment : r.getSegments()) {
+						LatLon start = prevSegment != null ? prevSegment.getEnd().getLocation() : params.start;
+						LatLon end = segment.getStart().getLocation();
 						if (start != null && end != null) {
-							if (prev == null || MapUtils.getDistance(start, end) > 50) {
-								walkingSegmentsToCalculate.add(prev == null ?
-										new WalkingRouteSegment(start, s) : new WalkingRouteSegment(prev, s));
+							if (prevSegment == null || MapUtils.getDistance(start, end) > 50) {
+								walkingSegmentsToCalculate.add(prevSegment == null
+										? new WalkingRouteSegment(start, segment)
+										: new WalkingRouteSegment(prevSegment, segment));
 							}
 						}
-						prev = s;
+						prevSegment = segment;
 					}
-					if (prev != null) {
-						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prev, params.end));
+					if (prevSegment != null) {
+						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prevSegment, params.end));
 					}
 				}
-				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+				RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 				if (walkingRouteParams != null) {
 					routingHelper.startRouteCalculationThread(walkingRouteParams);
 					// wait until all segments calculated
