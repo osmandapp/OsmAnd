@@ -38,6 +38,6 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 		GPSInfo gpsInfo = locationProvider.getGPSInfo();
 		String message = getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;
-		firstCoordinate.setText(message);
+		setFirstCoordinateText(message);
 	}
 }
