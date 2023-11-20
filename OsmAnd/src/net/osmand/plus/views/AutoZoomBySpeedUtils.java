@@ -194,6 +194,7 @@ public class AutoZoomBySpeedUtils {
 			PointAttributes currentAttributes = overridenCurrentAttribute != null
 					? overridenCurrentAttribute
 					: original.get(i);
+			overridenCurrentAttribute = null;
 
 			float zoomToAnimate = currentAttributes.zoom;
 
@@ -213,10 +214,15 @@ public class AutoZoomBySpeedUtils {
 			PointAttributes nextAttributes = original.get(i + 1);
 
 			float zoomDelta = zoomToAnimate - currentZoom;
+			float secondsToZoom = Math.abs(zoomDelta) / ZOOM_PER_SECOND;
+
+			if (secondsToZoom * 1000f < MIN_ZOOM_DURATION_MILLIS) {
+				continue;
+			}
+
 			float allowedZoomDelta = ZOOM_PER_SECOND * nextAttributes.timeDiff;
 
 			if (Math.abs(zoomDelta) < allowedZoomDelta) {
-				float secondsToZoom = Math.abs(zoomDelta) / ZOOM_PER_SECOND;
 				float offsetN = secondsToZoom / nextAttributes.timeDiff;
 
 				PointAttributes intermediateAttribute = new PointAttributes(
@@ -239,7 +245,6 @@ public class AutoZoomBySpeedUtils {
 				currentZoom = zoomToAnimate;
 			} else {
 				currentZoom += Math.signum(zoomDelta) * Math.min(Math.abs(zoomDelta), allowedZoomDelta);
-				overridenCurrentAttribute = null;
 			}
 		}
 
