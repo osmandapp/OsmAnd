@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para opciones"</string>
+\nPulsación larga para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -1203,7 +1203,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nToque prolongado para ver en el mapa"</string>
+\nPulsación larga para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -5569,4 +5569,5 @@
     <string name="target_elevation">Elevación del objetivo</string>
     <string name="shared_string_eta">ETA</string>
     <string name="rendering_attr_showToll_name">Mostrar las restricciones del peaje</string>
+    <string name="rendering_attr_showToll_description">Mostrar los peajes en las carreteras</string>
 </resources>
