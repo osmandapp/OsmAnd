@@ -1238,7 +1238,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
+    <string name="rendering_attr_showAccess_name">Mostrar las restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -2390,7 +2390,7 @@
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">No se pudo importar el archivo. Asegúrese de que OsmAnd tiene permiso para leerlo.</string>
-    <string name="distance_moving">Distancia recorrida</string>
+    <string name="distance_moving">Distancia corregida</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
     <string name="store_tracks_in_monthly_directories_descrp">Guardar las trazas grabadas en subcarpetas, por mes de grabación (como 2018-01).</string>
     <string name="shared_string_reset">Restablecer</string>
@@ -4797,7 +4797,7 @@
     <string name="ant_read_data">Leer datos</string>
     <string name="ant_write_to_gpx">Escribir datos en la traza</string>
     <string name="ant_heart_rate_write_gpx_desc">Incluye la frecuencia cardíaca en la traza</string>
-    <string name="map_widget_ant_heart_rate">Frecuencia cardíaca</string>
+    <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
     <string name="map_widget_ant_bicycle_cadence">Cadencia de pedaleo</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Muestra la velocidad a la que pedalea el usuario</string>
@@ -5568,4 +5568,5 @@
     <string name="reset_key_assignments">Restablecer la asignación de teclas</string>
     <string name="target_elevation">Elevación del objetivo</string>
     <string name="shared_string_eta">ETA</string>
+    <string name="rendering_attr_showToll_name">Mostrar las restricciones del peaje</string>
 </resources>
