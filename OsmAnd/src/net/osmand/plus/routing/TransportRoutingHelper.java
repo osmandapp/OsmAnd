@@ -670,13 +670,9 @@ public class TransportRoutingHelper {
 			List<TransportRouteResult> res = null;
 			String error = null;
 			try {
-				long startTime = System.currentTimeMillis();
 				res = calculateRouteImpl(params, lib);
-				System.out.println("Ivan TRANSPORT:" + (System.currentTimeMillis() - startTime));
-				startTime = System.currentTimeMillis();
 				if (res != null && !params.calculationProgress.isCancelled) {
 					calculateWalkingRoutes(res);
-					System.out.println("Ivan WALKING:" + (System.currentTimeMillis() - startTime));
 				}
 			} catch (Exception e) {
 				error = e.getMessage();
