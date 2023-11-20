@@ -2041,7 +2041,7 @@
     <string name="gpx_add_track">Aggiungi altro…</string>
     <string name="shared_string_appearance">Aspetto</string>
     <string name="rendering_value_fine_name">Sottile</string>
-    <string name="upload_poi">Upload PDI</string>
+    <string name="upload_poi">Carica i PDI</string>
     <string name="route_roundabout_short">Prendere la %1$d uscita e proseguire</string>
     <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Città o regione</string>
@@ -2589,7 +2589,7 @@
     <string name="nothing_found_in_radius">Nessun risultato trovato:</string>
     <string name="shared_string_total">Totale</string>
     <string name="use_two_digits_longitude">Usa due cifre per la longitudine</string>
-    <string name="shared_string_travel_guides">Viaggio</string>
+    <string name="shared_string_travel_guides">Guide di viaggio</string>
     <string name="select_waypoints_category_description">Aggiungi tutti i punti intermedi della traccia oppure scegli una categoria separata.</string>
     <string name="shared_string_dont">Non fare</string>
     <string name="shared_string_do">Fai</string>
@@ -3337,7 +3337,7 @@
     <string name="monitoring_min_speed">Velocità minima</string>
     <string name="monitoring_min_accuracy">Accuratezza minima</string>
     <string name="monitoring_min_distance">Minimo spostamento</string>
-    <string name="reset_plugin_to_default">Reimposta le impostazioni dei componenti aggiuntivi a quelle preimpostate</string>
+    <string name="reset_plugin_to_default">Resetta le impostazioni dei componenti aggiuntivi ai valori di default</string>
     <string name="multimedia_rec_split_title">Divisione registrazione</string>
     <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
     <string name="multimedia_photo_play_sound">Suono otturatore fotocamera</string>
@@ -4764,8 +4764,8 @@
     <string name="quick_action_current_location_widget_descr">Un pulsante per mostrare o nascondere il widget della posizione attuale sulla mappa.</string>
     <string name="coordinates_widget_map_center">Coordinate: centro della mappa</string>
     <string name="quick_action_map_center_widget_descr">Un pulsante per mostrare o nascondere il widget «Centro della mappa» sulla mappa.</string>
-    <string name="map_widget_camera_distance_desc">Mostra l\'elevazione della fotocamera dalla superficie.</string>
-    <string name="map_widget_camera_tilt_desc">Mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
+    <string name="map_widget_camera_distance_desc">Mostra l\'elevazione della telecamera dalla superficie.</string>
+    <string name="map_widget_camera_tilt_desc">Mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. L\'impostazione predefinita è 90° (nessuna inclinazione).</string>
     <string name="map_widget_zoom_level_desc">Mostra il livello d\'ingrandimento attuale della mappa.</string>
     <string name="map_widget_target_distance_desc">Mostra la distanza tra la fotocamera e la destinazione.</string>
     <string name="map_widget_zoom_level">Livello di zoom</string>
@@ -4792,7 +4792,7 @@
     <string name="map_widget_altitude_map_center_desc">Mostra l\'altezza sul livello del mare dell\'attuale centro della mappa.</string>
     <string name="map_widget_altitude_current_location">Altitudine: posizione attuale</string>
     <string name="map_widget_rendering_fps">FPS rendering mappa</string>
-    <string name="map_widget_rendering_fps_desc">Mostra la velocità con cui la mappa e e i suoi elementi vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Mostra la velocità con cui la mappa e i suoi elementi vengono visualizzati e aggiornati, espressa in fotogrammi al secondo (FPS).</string>
     <string name="simulate_location_by_gpx">Simula posizione da GPX</string>
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
@@ -5294,7 +5294,7 @@
 \n</string>
     <string name="routing_attr_allow_via_ferrata_description">Percorso di montagna attrezzato con funi fisse, camini, scale e ponti.</string>
     <string name="slope_legend_description">Pendenza utilizza i colori per visualizzare la pendenza del terreno. Puoi leggere di più sulle pendenze in %1$s.</string>
-    <string name="free_ride">Corsa libera</string>
+    <string name="free_ride">Guida libera</string>
     <string name="routing_attr_allow_via_ferrata_name">Itinerario di montagna (Ferrata)</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usa mappe raster in formato sqlitedb per pendenza / ombra</string>
     <string name="free_settings_backup">Backup delle impostazioni gratuito</string>
@@ -5555,4 +5555,7 @@
     <string name="shared_string_reassign">Riassocia</string>
     <string name="reset_key_assignments">Ripristina le associazioni dei tasti</string>
     <string name="clear_key_assignment_desc">L\'associazione dei tasti per l\'azione selezionata verrà cancellata e impostata su Nessuna.</string>
+    <string name="key_assignments">Assegnazioni chiave</string>
+    <string name="key_event_action_activity_back_pressed">Attività indietro premuta</string>
+    <string name="shared_string_eta">ETA</string>
 </resources>
