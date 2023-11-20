@@ -1196,7 +1196,7 @@
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
-    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger og vejafgifter</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelruter</string>
@@ -5572,4 +5572,6 @@
     <string name="shared_string_delete_item">Slet element</string>
     <string name="key_event_category_actions">Handlinger</string>
     <string name="clear_key_assignment_desc">Nøglebinding for den valgte handling vil blive ryddet og sat til Ingen.</string>
+    <string name="rendering_attr_showToll_name">Vis vejafgiftsrestriktioner</string>
+    <string name="rendering_attr_showToll_description">Vis vejafgiftsrestriktioner på veje</string>
 </resources>
