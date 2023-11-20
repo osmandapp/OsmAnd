@@ -5552,4 +5552,9 @@
     <string name="clear_key_assignment">清除按鍵分配</string>
     <string name="clear_key_assignment_desc">選定的按鍵繫結將被清除並設定為「無」。</string>
     <string name="topography_maps">地形圖</string>
+    <string name="reset_key_assignments_desc">所選類型的所有按鍵分配都將被移除。</string>
+    <string name="shared_string_reassign">重新分配</string>
+    <string name="reset_key_assignments">重設按鍵分配</string>
+    <string name="target_elevation">目標海拔</string>
+    <string name="shared_string_eta">預計到達時間</string>
 </resources>

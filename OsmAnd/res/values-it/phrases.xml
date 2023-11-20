@@ -731,7 +731,7 @@
     <string name="poi_religion_type">Religione</string>
     <string name="poi_denomination">Denominazione</string>
     <string name="poi_information_type">Tipo</string>
-    <string name="poi_information_contents">Contenuto</string>
+    <string name="poi_information_contents">Contenuti</string>
     <string name="poi_clock_option">Ulteriori</string>
     <string name="poi_resort_type">Tipo</string>
     <string name="poi_piste_difficulty">Difficoltà delle piste</string>
@@ -3953,4 +3953,7 @@
     <string name="poi_second_hand_filter">Beni di seconda mano</string>
     <string name="poi_healthcare_speciality_reiki">Reiki</string>
     <string name="poi_vending_machine_fuel">Si</string>
+    <string name="poi_healthcare_speciality_laboratory">Specialità sanitaria: laboratorio</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Specialità sanitaria: psicoterapeuta</string>
+    <string name="poi_healthcare_speciality_clinic">Specialità sanitaria: ambulatorio</string>
 </resources>
