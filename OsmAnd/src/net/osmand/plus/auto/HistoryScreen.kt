@@ -5,7 +5,17 @@ import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.CarLocation
+import androidx.car.app.model.DistanceSpan
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.ListTemplate
+import androidx.car.app.model.Metadata
+import androidx.car.app.model.Place
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -110,7 +120,7 @@ class HistoryScreen(
 	}
 
 	private fun updateSearchResult(searchResult: SearchResult, dataItem: GpxDataItem) {
-		searchResult.location = dataItem.analysis?.latLonStart
+		searchResult.location = dataItem.gpxData.analysis?.latLonStart
 	}
 
 	private fun prepareList(templateBuilder: ListTemplate.Builder) {

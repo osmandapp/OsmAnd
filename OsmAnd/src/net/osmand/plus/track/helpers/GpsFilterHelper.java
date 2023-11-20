@@ -388,12 +388,13 @@ public class GpsFilterHelper {
 
 		public static void writeValidFilterValuesToExtensions(@NonNull Map<String, String> gpxExtensions,
 		                                                      @NonNull GpxDataItem dataItem) {
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, dataItem.getSmoothingThreshold());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, dataItem.getMinFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, dataItem.getMaxFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, dataItem.getMinFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, dataItem.getMaxFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, dataItem.getMaxFilterHdop());
+			GpxData gpxData = dataItem.getGpxData();
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, gpxData.getSmoothingThreshold());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, gpxData.getMinFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, gpxData.getMaxFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, gpxData.getMinFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, gpxData.getMaxFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, gpxData.getMaxFilterHdop());
 		}
 
 		private static void writeValueToExtensionsIfValid(@NonNull Map<String, String> gpxExtensions,

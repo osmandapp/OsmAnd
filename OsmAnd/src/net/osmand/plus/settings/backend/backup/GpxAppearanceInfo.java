@@ -1,19 +1,25 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.*;
 
 public class GpxAppearanceInfo {
 
@@ -40,27 +46,28 @@ public class GpxAppearanceInfo {
 	}
 
 	public GpxAppearanceInfo(@NonNull GpxDataItem dataItem) {
-		color = dataItem.getColor();
-		width = dataItem.getWidth();
-		showArrows = dataItem.isShowArrows();
-		showStartFinish = dataItem.isShowStartFinish();
-		splitType = dataItem.getSplitType();
-		splitInterval = dataItem.getSplitInterval();
-		coloringType = dataItem.getColoringType();
+		GpxData gpxData = dataItem.getGpxData();
+		color = gpxData.getColor();
+		width = gpxData.getWidth();
+		showArrows = gpxData.isShowArrows();
+		showStartFinish = gpxData.isShowStartFinish();
+		splitType = gpxData.getSplitType();
+		splitInterval = gpxData.getSplitInterval();
+		coloringType = gpxData.getColoringType();
 
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		GPXTrackAnalysis analysis = gpxData.getAnalysis();
 		if (analysis != null) {
 			timeSpan = analysis.timeSpan;
 			wptPoints = analysis.wptPoints;
 			totalDistance = analysis.totalDistance;
 		}
 
-		smoothingThreshold = dataItem.getSmoothingThreshold();
-		minFilterSpeed = dataItem.getMinFilterSpeed();
-		maxFilterSpeed = dataItem.getMaxFilterSpeed();
-		minFilterAltitude = dataItem.getMinFilterAltitude();
-		maxFilterAltitude = dataItem.getMaxFilterAltitude();
-		maxFilterHdop = dataItem.getMaxFilterHdop();
+		smoothingThreshold = gpxData.getSmoothingThreshold();
+		minFilterSpeed = gpxData.getMinFilterSpeed();
+		maxFilterSpeed = gpxData.getMaxFilterSpeed();
+		minFilterAltitude = gpxData.getMinFilterAltitude();
+		maxFilterAltitude = gpxData.getMaxFilterAltitude();
+		maxFilterHdop = gpxData.getMaxFilterHdop();
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {

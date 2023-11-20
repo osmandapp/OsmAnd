@@ -82,12 +82,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
 						if (item == null) {
 							item = new GpxDataItem(file);
-							item.setAnalysis(analysis);
+							item.getGpxData().setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {
 							database.updateAnalysis(conn, item, analysis);
 						}
-						if (item.getFileCreationTime() <= 0) {
+						if (item.getGpxData().getFileCreationTime() <= 0) {
 							database.updateCreateTime(item, GPXUtilities.getCreationTime(gpxFile));
 						}
 					}
@@ -125,10 +125,11 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
-		GPXTrackAnalysis analysis = item.getAnalysis();
+		GpxData data = item.getGpxData();
+		GPXTrackAnalysis analysis = data.getAnalysis();
 		LatLon latLon = analysis != null ? analysis.latLonStart : null;
 		if (latLon == null || !downloadResources.hasDownloadedMapsAt(latLon, false)) {
-			item.setNearestCityName("");
+			data.setNearestCityName("");
 		} else {
 			searchNearestCity(item, latLon);
 		}
@@ -146,7 +147,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				boolean found = MapUtils.getDistance(latLon, result.location) <= CityType.CITY.getRadius();
 				gpxDbHelper.updateNearestCityName(item, found ? result.localeName : "");
 			} else {
-				item.setNearestCityName("");
+				item.getGpxData().setNearestCityName("");
 			}
 			return true;
 		};

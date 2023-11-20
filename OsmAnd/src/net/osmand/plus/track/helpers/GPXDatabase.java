@@ -16,7 +16,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -410,7 +410,7 @@ public class GPXDatabase {
 	}
 
 	private boolean updateGpxParameters(@NonNull SQLiteConnection db, @NonNull Map<String, Object> rowsToUpdate, @NonNull Map<String, Object> rowsToSearch) {
-		Pair<String, Object[]> pair = AndroidUtils.createDbUpdateQuery(GPX_TABLE_NAME, rowsToUpdate, rowsToSearch);
+		Pair<String, Object[]> pair = AndroidDbUtils.createDbUpdateQuery(GPX_TABLE_NAME, rowsToUpdate, rowsToSearch);
 		db.execSQL(pair.first, pair.second);
 		return true;
 	}
@@ -430,7 +430,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_FILE_LAST_MODIFIED_TIME, lastModified);
 		boolean success = updateGpxParameters(map, getRowsToSearch(file));
 		if (success) {
-			item.setFileLastModifiedTime(lastModified);
+			item.getGpxData().setFileLastModifiedTime(lastModified);
 		}
 	}
 
@@ -438,7 +438,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_FILE_LAST_UPLOADED_TIME, lastUploadedTime);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setFileLastUploadedTime(lastUploadedTime);
+			item.getGpxData().setFileLastUploadedTime(lastUploadedTime);
 		}
 		return success;
 	}
@@ -447,7 +447,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_FILE_CREATION_TIME, creationTime);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setFileCreationTime(creationTime);
+			item.getGpxData().setFileCreationTime(creationTime);
 		}
 		return success;
 	}
@@ -464,7 +464,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_COLOR, (color == 0 ? "" : Algorithms.colorToString(color)));
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setColor(color);
+			item.getGpxData().setColor(color);
 		}
 		return success;
 	}
@@ -473,7 +473,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_COLORING_TYPE, coloringType);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setColoringType(coloringType);
+			item.getGpxData().setColoringType(coloringType);
 		}
 		return success;
 	}
@@ -482,7 +482,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_NEAREST_CITY_NAME, cityName);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setNearestCityName(cityName);
+			item.getGpxData().setNearestCityName(cityName);
 		}
 		return success;
 	}
@@ -491,7 +491,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_SHOW_ARROWS, showArrows ? 1 : 0);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setShowArrows(showArrows);
+			item.getGpxData().setShowArrows(showArrows);
 		}
 		return success;
 	}
@@ -500,7 +500,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_SHOW_START_FINISH, showStartFinish ? 1 : 0);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setShowStartFinish(showStartFinish);
+			item.getGpxData().setShowStartFinish(showStartFinish);
 		}
 		return success;
 	}
@@ -509,7 +509,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_WIDTH, width);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setWidth(width);
+			item.getGpxData().setWidth(width);
 		}
 		return success;
 	}
@@ -518,7 +518,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_SHOW_AS_MARKERS, showAsMarkers ? 1 : 0);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setShowAsMarkers(showAsMarkers);
+			item.getGpxData().setShowAsMarkers(showAsMarkers);
 		}
 		return success;
 	}
@@ -527,7 +527,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_API_IMPORTED, importedByApi ? 1 : 0);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setImportedByApi(importedByApi);
+			item.getGpxData().setImportedByApi(importedByApi);
 		}
 		return success;
 	}
@@ -536,7 +536,7 @@ public class GPXDatabase {
 		Map<String, Object> map = Collections.singletonMap(GPX_COL_JOIN_SEGMENTS, joinSegments ? 1 : 0);
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setJoinSegments(joinSegments);
+			item.getGpxData().setJoinSegments(joinSegments);
 		}
 		return success;
 	}
@@ -548,8 +548,9 @@ public class GPXDatabase {
 
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setSplitType(splitType);
-			item.setSplitInterval(splitInterval);
+			GpxData data = item.getGpxData();
+			data.setSplitType(splitType);
+			data.setSplitInterval(splitInterval);
 		}
 		return success;
 	}
@@ -567,12 +568,13 @@ public class GPXDatabase {
 
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setSmoothingThreshold(smoothingThreshold);
-			item.setMinFilterSpeed(minSpeed);
-			item.setMaxFilterSpeed(maxSpeed);
-			item.setMinFilterAltitude(minAltitude);
-			item.setMaxFilterAltitude(maxAltitude);
-			item.setMaxFilterHdop(maxHdop);
+			GpxData data = item.getGpxData();
+			data.setSmoothingThreshold(smoothingThreshold);
+			data.setMinFilterSpeed(minSpeed);
+			data.setMaxFilterSpeed(maxSpeed);
+			data.setMinFilterAltitude(minAltitude);
+			data.setMaxFilterAltitude(maxAltitude);
+			data.setMaxFilterHdop(maxHdop);
 		}
 		return success;
 	}
@@ -592,13 +594,14 @@ public class GPXDatabase {
 
 		boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setColor(color);
-			item.setWidth(width);
-			item.setShowArrows(showArrows);
-			item.setShowStartFinish(showStartFinish);
-			item.setSplitType(splitType);
-			item.setSplitInterval(splitInterval);
-			item.setColoringType(coloringType);
+			GpxData data = item.getGpxData();
+			data.setColor(color);
+			data.setWidth(width);
+			data.setShowArrows(showArrows);
+			data.setShowStartFinish(showStartFinish);
+			data.setSplitType(splitType);
+			data.setSplitInterval(splitInterval);
+			data.setColoringType(coloringType);
 		}
 		return success;
 	}
@@ -649,34 +652,35 @@ public class GPXDatabase {
 
 	void insert(@NonNull GpxDataItem item, @NonNull SQLiteConnection db) {
 		File file = item.getFile();
+		GpxData data = item.getGpxData();
 		String fileName = getFileName(file);
 		String fileDir = getFileDir(file);
-		GPXTrackAnalysis analysis = item.getAnalysis();
-		String color = item.getColor() == 0 ? "" : Algorithms.colorToString(item.getColor());
+		GPXTrackAnalysis analysis = data.getAnalysis();
+		String color = data.getColor() == 0 ? "" : Algorithms.colorToString(data.getColor());
 
 		Map<String, Object> rowsMap = new LinkedHashMap<>();
 		rowsMap.put(GPX_COL_NAME, fileName);
 		rowsMap.put(GPX_COL_DIR, fileDir);
 		rowsMap.put(GPX_COL_COLOR, color);
 		rowsMap.put(GPX_COL_FILE_LAST_MODIFIED_TIME, file.lastModified());
-		rowsMap.put(GPX_COL_FILE_LAST_UPLOADED_TIME, item.getFileLastUploadedTime());
-		rowsMap.put(GPX_COL_FILE_CREATION_TIME, item.getFileCreationTime());
-		rowsMap.put(GPX_COL_SPLIT_TYPE, item.getSplitType());
-		rowsMap.put(GPX_COL_SPLIT_INTERVAL, item.getSplitInterval());
-		rowsMap.put(GPX_COL_API_IMPORTED, item.isImportedByApi() ? 1 : 0);
-		rowsMap.put(GPX_COL_SHOW_AS_MARKERS, item.isShowAsMarkers() ? 1 : 0);
-		rowsMap.put(GPX_COL_JOIN_SEGMENTS, item.isJoinSegments() ? 1 : 0);
-		rowsMap.put(GPX_COL_SHOW_ARROWS, item.isShowArrows() ? 1 : 0);
-		rowsMap.put(GPX_COL_SHOW_START_FINISH, item.isShowStartFinish() ? 1 : 0);
-		rowsMap.put(GPX_COL_WIDTH, item.getWidth());
-		rowsMap.put(GPX_COL_COLORING_TYPE, item.getColoringType());
-		rowsMap.put(GPX_COL_SMOOTHING_THRESHOLD, item.getSmoothingThreshold());
-		rowsMap.put(GPX_COL_MIN_FILTER_SPEED, item.getMinFilterSpeed());
-		rowsMap.put(GPX_COL_MAX_FILTER_SPEED, item.getMaxFilterSpeed());
-		rowsMap.put(GPX_COL_MIN_FILTER_ALTITUDE, item.getMinFilterAltitude());
-		rowsMap.put(GPX_COL_MAX_FILTER_ALTITUDE, item.getMaxFilterAltitude());
-		rowsMap.put(GPX_COL_MAX_FILTER_HDOP, item.getMaxFilterHdop());
-		rowsMap.put(GPX_COL_NEAREST_CITY_NAME, item.getNearestCityName());
+		rowsMap.put(GPX_COL_FILE_LAST_UPLOADED_TIME, data.getFileLastUploadedTime());
+		rowsMap.put(GPX_COL_FILE_CREATION_TIME, data.getFileCreationTime());
+		rowsMap.put(GPX_COL_SPLIT_TYPE, data.getSplitType());
+		rowsMap.put(GPX_COL_SPLIT_INTERVAL, data.getSplitInterval());
+		rowsMap.put(GPX_COL_API_IMPORTED, data.isImportedByApi() ? 1 : 0);
+		rowsMap.put(GPX_COL_SHOW_AS_MARKERS, data.isShowAsMarkers() ? 1 : 0);
+		rowsMap.put(GPX_COL_JOIN_SEGMENTS, data.isJoinSegments() ? 1 : 0);
+		rowsMap.put(GPX_COL_SHOW_ARROWS, data.isShowArrows() ? 1 : 0);
+		rowsMap.put(GPX_COL_SHOW_START_FINISH, data.isShowStartFinish() ? 1 : 0);
+		rowsMap.put(GPX_COL_WIDTH, data.getWidth());
+		rowsMap.put(GPX_COL_COLORING_TYPE, data.getColoringType());
+		rowsMap.put(GPX_COL_SMOOTHING_THRESHOLD, data.getSmoothingThreshold());
+		rowsMap.put(GPX_COL_MIN_FILTER_SPEED, data.getMinFilterSpeed());
+		rowsMap.put(GPX_COL_MAX_FILTER_SPEED, data.getMaxFilterSpeed());
+		rowsMap.put(GPX_COL_MIN_FILTER_ALTITUDE, data.getMinFilterAltitude());
+		rowsMap.put(GPX_COL_MAX_FILTER_ALTITUDE, data.getMaxFilterAltitude());
+		rowsMap.put(GPX_COL_MAX_FILTER_HDOP, data.getMaxFilterHdop());
+		rowsMap.put(GPX_COL_NEAREST_CITY_NAME, data.getNearestCityName());
 
 		if (analysis != null) {
 			rowsMap.put(GPX_COL_TOTAL_DISTANCE, analysis.totalDistance);
@@ -700,7 +704,7 @@ public class GPXDatabase {
 			rowsMap.put(GPX_COL_START_LON, analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 		}
 
-		db.execSQL(AndroidUtils.createDbInsertQuery(GPX_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
+		db.execSQL(AndroidDbUtils.createDbInsertQuery(GPX_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
 	public boolean updateAnalysis(@NonNull GpxDataItem item, @Nullable GPXTrackAnalysis analysis) {
@@ -743,8 +747,9 @@ public class GPXDatabase {
 
 		boolean success = updateGpxParameters(db, map, getRowsToSearch(item.getFile()));
 		if (success) {
-			item.setAnalysis(analysis);
-			item.setFileLastModifiedTime(fileLastModifiedTime);
+			GpxData data = item.getGpxData();
+			data.setAnalysis(analysis);
+			data.setFileLastModifiedTime(fileLastModifiedTime);
 		}
 		return success;
 	}
@@ -826,36 +831,38 @@ public class GPXDatabase {
 			dir = new File(app.getAppPath(GPX_INDEX_DIR), fileDir);
 		}
 		GpxDataItem item = new GpxDataItem(new File(dir, fileName));
-		item.setAnalysis(analysis);
-		item.setContainingFolder(fileDir);
-		item.setColor(GPXUtilities.parseColor(color, 0));
-		item.setFileLastModifiedTime(fileLastModifiedTime);
-		item.setFileLastUploadedTime(fileLastUploadedTime);
-		item.setFileCreationTime(fileCreateTime);
-		item.setSplitType(splitType);
-		item.setSplitInterval(splitInterval);
-		item.setImportedByApi(apiImported);
-		item.setShowAsMarkers(showAsMarkers);
-		item.setJoinSegments(joinSegments);
-		item.setShowArrows(showArrows);
-		item.setShowStartFinish(showStartFinish);
-		item.setWidth(width);
-		item.setNearestCityName(nearestCityName);
+		GpxData data = item.getGpxData();
+
+		data.setAnalysis(analysis);
+		data.setContainingFolder(fileDir);
+		data.setColor(GPXUtilities.parseColor(color, 0));
+		data.setFileLastModifiedTime(fileLastModifiedTime);
+		data.setFileLastUploadedTime(fileLastUploadedTime);
+		data.setFileCreationTime(fileCreateTime);
+		data.setSplitType(splitType);
+		data.setSplitInterval(splitInterval);
+		data.setImportedByApi(apiImported);
+		data.setShowAsMarkers(showAsMarkers);
+		data.setJoinSegments(joinSegments);
+		data.setShowArrows(showArrows);
+		data.setShowStartFinish(showStartFinish);
+		data.setWidth(width);
+		data.setNearestCityName(nearestCityName);
 
 		if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) != null) {
-			item.setColoringType(coloringTypeName);
+			data.setColoringType(coloringTypeName);
 		} else if (GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
 			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
-			item.setColoringType(coloringType == null ? null : coloringType.getName(null));
+			data.setColoringType(coloringType == null ? null : coloringType.getName(null));
 		}
 
-		item.setSmoothingThreshold(smoothingThreshold);
-		item.setMinFilterSpeed(minFilterSpeed);
-		item.setMaxFilterSpeed(maxFilterSpeed);
-		item.setMinFilterAltitude(minFilterAltitude);
-		item.setMaxFilterAltitude(maxFilterAltitude);
-		item.setMaxFilterHdop(maxFilterHdop);
+		data.setSmoothingThreshold(smoothingThreshold);
+		data.setMinFilterSpeed(minFilterSpeed);
+		data.setMaxFilterSpeed(maxFilterSpeed);
+		data.setMinFilterAltitude(minFilterAltitude);
+		data.setMaxFilterAltitude(maxFilterAltitude);
+		data.setMaxFilterHdop(maxFilterHdop);
 
 		return item;
 	}

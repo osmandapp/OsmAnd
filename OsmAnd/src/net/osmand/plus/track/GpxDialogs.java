@@ -147,7 +147,7 @@ public class GpxDialogs {
 				} else {
 					GpxDataItem dataItem = getDataItem(info);
 					if (dataItem != null) {
-						analysis = dataItem.getAnalysis();
+						analysis = dataItem.getGpxData().getAnalysis();
 					}
 				}
 				GpxUiHelper.updateGpxInfoView(v, item.getTitle(), info, analysis, app);

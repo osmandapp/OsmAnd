@@ -16,6 +16,7 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -113,31 +114,32 @@ public class TrackDrawInfo {
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
-	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem) {
+	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem dataItem) {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		width = gpxDataItem.getWidth();
+		GpxData gpxData = dataItem.getGpxData();
+		width = gpxData.getWidth();
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = gpxDataItem.getColor();
+		color = gpxData.getColor();
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxDataItem.getColoringType());
-		splitType = gpxDataItem.getSplitType();
-		splitInterval = gpxDataItem.getSplitInterval();
-		joinSegments = gpxDataItem.isJoinSegments();
-		showArrows = gpxDataItem.isShowArrows();
-		showStartFinish = gpxDataItem.isShowStartFinish();
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getColoringType());
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getColoringType());
+		splitType = gpxData.getSplitType();
+		splitInterval = gpxData.getSplitInterval();
+		joinSegments = gpxData.isJoinSegments();
+		showArrows = gpxData.isShowArrows();
+		showStartFinish = gpxData.isShowStartFinish();
 	}
 
 	@Nullable

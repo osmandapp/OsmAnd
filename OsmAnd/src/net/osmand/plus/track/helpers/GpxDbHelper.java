@@ -80,8 +80,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		boolean success = database.rename(currentFile, newFile);
 		if (success) {
+			GpxDataItem newItem = new GpxDataItem(newFile);
 			GpxDataItem oldItem = dataItems.get(currentFile);
-			putToCache(new GpxDataItem(newFile, oldItem));
+			if (oldItem != null) {
+				newItem.getGpxData().copyData(oldItem.getGpxData());
+			}
+			putToCache(newItem);
 			removeFromCache(currentFile);
 		}
 		return success;
@@ -344,15 +348,22 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public static boolean isAnalyseNeeded(@NonNull File gpxFile, @Nullable GpxDataItem item) {
-		return item == null
-				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-				|| item.getAnalysis() == null
-				|| item.getAnalysis().wptCategoryNames == null
-				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
-				|| item.getFileCreationTime() <= 0;
+		if (item != null) {
+			GpxData data = item.getGpxData();
+			return data.getFileLastModifiedTime() != gpxFile.lastModified()
+					|| data.getAnalysis() == null
+					|| data.getAnalysis().wptCategoryNames == null
+					|| data.getAnalysis().latLonStart == null && data.getAnalysis().points > 0
+					|| data.getFileCreationTime() <= 0;
+		}
+		return true;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
-		return item != null && item.getNearestCityName() == null && item.getAnalysis() != null && item.getAnalysis().latLonStart != null;
+		if (item != null) {
+			GpxData data = item.getGpxData();
+			return data.getNearestCityName() == null && data.getAnalysis() != null && data.getAnalysis().latLonStart != null;
+		}
+		return true;
 	}
 }

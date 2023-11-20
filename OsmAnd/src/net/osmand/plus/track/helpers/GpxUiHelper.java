@@ -258,7 +258,7 @@ public class GpxUiHelper {
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(view, itemTitle, info, dataItem.getAnalysis(), app);
+		updateGpxInfoView(view, itemTitle, info, dataItem.getGpxData().getAnalysis(), app);
 		if (iconDrawable != null) {
 			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
@@ -661,18 +661,19 @@ public class GpxUiHelper {
 	}
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
-		gpxFile.setShowArrows(dataItem.isShowArrows());
-		gpxFile.setShowStartFinish(dataItem.isShowStartFinish());
-		gpxFile.setSplitInterval(dataItem.getSplitInterval());
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType()).getTypeName());
-		if (dataItem.getColor() != 0) {
-			gpxFile.setColor(dataItem.getColor());
+		GpxData gpxData = dataItem.getGpxData();
+		gpxFile.setShowArrows(gpxData.isShowArrows());
+		gpxFile.setShowStartFinish(gpxData.isShowStartFinish());
+		gpxFile.setSplitInterval(gpxData.getSplitInterval());
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(gpxData.getSplitType()).getTypeName());
+		if (gpxData.getColor() != 0) {
+			gpxFile.setColor(gpxData.getColor());
 		}
-		if (dataItem.getWidth() != null) {
-			gpxFile.setWidth(dataItem.getWidth());
+		if (gpxData.getWidth() != null) {
+			gpxFile.setWidth(gpxData.getWidth());
 		}
-		if (dataItem.getColoringType() != null) {
-			gpxFile.setColoringType(dataItem.getColoringType());
+		if (gpxData.getColoringType() != null) {
+			gpxFile.setColoringType(gpxData.getColoringType());
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}
@@ -790,7 +791,7 @@ public class GpxUiHelper {
 		} else if (trackItem.getFile() != null) {
 			GpxDataItem dataItem = app.getGpxDbHelper().getItem(trackItem.getFile(), callback);
 			if (dataItem != null) {
-				analysis = dataItem.getAnalysis();
+				analysis = dataItem.getGpxData().getAnalysis();
 			}
 		}
 		return analysis;

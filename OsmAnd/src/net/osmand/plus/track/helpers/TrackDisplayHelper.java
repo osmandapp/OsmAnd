@@ -92,7 +92,7 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null && gpxDataItem.isJoinSegments();
+		return gpxDataItem != null && gpxDataItem.getGpxData().isJoinSegments();
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {

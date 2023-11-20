@@ -27,6 +27,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -70,8 +71,9 @@ public class NavigateGpxHelper {
 
 	public void step2_markImportedIfNeeded() {
 		GpxDataItem item = new GpxDataItem(new File(gpxFile.path));
-		item.readGpxParams(gpxFile);
-		item.setImportedByApi(navigationParams.isImportedByApi());
+		GpxData gpxData = item.getGpxData();
+		gpxData.readGpxParams(gpxFile);
+		gpxData.setImportedByApi(navigationParams.isImportedByApi());
 		app.getGpxDbHelper().add(item);
 		step3_showGpxOnMap();
 	}

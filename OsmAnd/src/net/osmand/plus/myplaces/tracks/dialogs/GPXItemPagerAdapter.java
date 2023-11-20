@@ -199,7 +199,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
 		} else if (gpxItem != null) {
 			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
-			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
+			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.getGpxData().isJoinSegments();
 		}
 		if (chart != null && analysis != null) {
 			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
