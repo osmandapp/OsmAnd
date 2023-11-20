@@ -5566,5 +5566,5 @@
     <string name="target_elevation">Célmagasság</string>
     <string name="shared_string_eta">ETA</string>
     <string name="rendering_attr_showToll_name">Útdíjkorlátozások megjelenítése</string>
-    <string name="rendering_attr_showToll_description">Útdíjkorlátozások megjelenítése sz úton</string>
+    <string name="rendering_attr_showToll_description">Útdíjkorlátozások megjelenítése az utakon</string>
 </resources>
