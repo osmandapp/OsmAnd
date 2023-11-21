@@ -5549,16 +5549,16 @@
     <string name="tripltek_promo_description">Accès gratuit aux fonctionnalités, y compris les téléchargements de cartes illimités, le relief 3D, etc. pour %1$s mois</string>
     <string name="see_all_plans">Afficher tous les tarifs</string>
     <string name="key_assignments">Associations de touches</string>
-    <string name="reset_key_assignments_desc">Toutes les associations de clés pour le type sélectionné seront supprimées.</string>
+    <string name="reset_key_assignments_desc">Toutes les associations de touches pour le type sélectionné seront supprimées.</string>
     <string name="show_toast_about_key_pressed">Afficher un message sur la touche appuyée</string>
     <string name="rendering_attr_showToll_name">Afficher les restrictions liées aux péages</string>
     <string name="topography_maps">Cartes topographiques</string>
     <string name="key_event_action_activity_back_pressed">\"Retour de l\'activité\" appuyé</string>
     <string name="shared_string_reassign">Réassigner</string>
-    <string name="reset_key_assignments">Réinitialiser les associations de clés</string>
-    <string name="rendering_attr_showToll_description">Afficher les restrictions liées aux péages sur les routes</string>
+    <string name="reset_key_assignments">Réinitialiser les associations de touches</string>
+    <string name="rendering_attr_showToll_description">Afficher les restrictions liées aux péages</string>
     <string name="target_elevation">Altitude de la cible</string>
-    <string name="shared_string_eta">Heure d\'arrivée prévue (ETA)</string>
+    <string name="shared_string_eta">Heure d\'arrivée estimée (ETA)</string>
     <string name="clear_key_assignment">Effacer les associations de touches</string>
     <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définies à \"Aucun\".</string>
 </resources>
