@@ -5560,5 +5560,5 @@
     <string name="target_elevation">Altitude de la cible</string>
     <string name="shared_string_eta">Heure d\'arrivée prévue (ETA)</string>
     <string name="clear_key_assignment">Effacer les associations de touches</string>
-    <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définis sur \"Aucun\".</string>
+    <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définies à \"Aucun\".</string>
 </resources>
