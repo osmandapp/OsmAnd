@@ -270,7 +270,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					Pair<ComplexZoom, Long> zoomParams = null;
 					if (autoZoom != null) {
 						zoomParams = mapRenderer != null
-								? smoothenAutoZoom(mapRenderer, autoZoom, movingTime)
+								? smoothenAutoZoom(tb, autoZoom, movingTime)
 								: new Pair<>(autoZoom, AutoZoomBySpeedUtils.FIXED_ZOOM_DURATION_MILLIS);
 						if (mapRenderer != null && zoomParams.second < AutoZoomBySpeedUtils.MIN_ZOOM_DURATION_MILLIS) {
 							zoomParams = null;
@@ -335,14 +335,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	@NonNull
-	private Pair<ComplexZoom, Long> smoothenAutoZoom(@NonNull MapRendererView mapRenderer,
+	private Pair<ComplexZoom, Long> smoothenAutoZoom(@NonNull RotatedTileBox tileBox,
 	                                                 @NonNull ComplexZoom autoZoom,
 	                                                 long maxDuration) {
-		float currentZoom = mapRenderer.getFlatZoomLevel().ordinal() + Zoom.visualToFloatPart(mapRenderer.getFlatVisualZoom());
+		float currentZoom = (float) (tileBox.getZoom() + tileBox.getZoomAnimation() + tileBox.getZoomFloatPart());
 		float zoomDelta = autoZoom.fullZoom() - currentZoom;
 		long zoomingTime = Math.min(maxDuration, (long) (Math.abs(zoomDelta) / AutoZoomBySpeedUtils.ZOOM_PER_SECOND * 1000));
 		float boundedZoomDelta = Math.signum(zoomDelta) * AutoZoomBySpeedUtils.ZOOM_PER_SECOND * (zoomingTime / 1000f);
-		ComplexZoom boundedAutoZoom = ComplexZoom.fromPreferredBase(currentZoom + boundedZoomDelta, mapRenderer.getFlatZoomLevel().ordinal());
+		ComplexZoom boundedAutoZoom = ComplexZoom.fromPreferredBase(currentZoom + boundedZoomDelta, tileBox.getZoom());
 		return new Pair<>(boundedAutoZoom, zoomingTime);
 	}
 
