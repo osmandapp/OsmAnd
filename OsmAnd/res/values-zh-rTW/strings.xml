@@ -1197,7 +1197,7 @@
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">存取限制</string>
-    <string name="rendering_attr_showAccess_name">顯示進入限制和收費</string>
+    <string name="rendering_attr_showAccess_name">顯示進入限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
@@ -5557,4 +5557,6 @@
     <string name="reset_key_assignments">重設按鍵分配</string>
     <string name="target_elevation">目標海拔</string>
     <string name="shared_string_eta">預計到達時間</string>
+    <string name="rendering_attr_showToll_name">顯示通行費限制</string>
+    <string name="rendering_attr_showToll_description">顯示道路通行費限制</string>
 </resources>
