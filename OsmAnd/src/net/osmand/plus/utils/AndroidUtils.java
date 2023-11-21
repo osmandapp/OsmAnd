@@ -640,6 +640,18 @@ public class AndroidUtils {
 		return width;
 	}
 
+	public static void setTruncatedText(TextView textView, String text) {
+		Paint paint = new Paint();
+		paint.setTextSize(textView.getTextSize());
+		float textWidth = paint.measureText(text);
+		int viewWidth = textView.getWidth();
+		if (textWidth > viewWidth) {
+			int charactersToShow = paint.breakText(text, true, viewWidth, null);
+			text = text.substring(0, charactersToShow);
+		}
+		textView.setText(text);
+	}
+
 	public static int getTextWidth(float textSize, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);
