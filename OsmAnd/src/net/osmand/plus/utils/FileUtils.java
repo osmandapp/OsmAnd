@@ -14,6 +14,8 @@ import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
+import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -347,5 +350,55 @@ public class FileUtils {
 
 	public interface RenameCallback {
 		void fileRenamed(@NonNull File src, @NonNull File dest);
+	}
+
+	public static void deleteFile(File fileToDelete) {
+		if(fileToDelete != null && fileToDelete.exists()) {
+			fileToDelete.delete();
+		}
+	}
+
+	public static boolean move(@NonNull File from, @NonNull File to) {
+		File parent = to.getParentFile();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
+		}
+		return from.renameTo(to);
+	}
+
+	@Nullable
+	public static File saveUriToFileSystem(Context context, Uri source, String fileName, File destination) {
+		String destinationFilename = destination.getAbsolutePath() + "/" + System.currentTimeMillis() + "_" + fileName;
+		InputStream bis = null;
+		BufferedOutputStream bos = null;
+		try {
+			bis = context.getContentResolver().openInputStream(source);
+			bos = new BufferedOutputStream(new FileOutputStream(destinationFilename, false));
+			byte[] buf = new byte[1024];
+			bis.read(buf);
+			do {
+				bos.write(buf);
+				buf = new byte[1024];
+			} while (bis.read(buf) != -1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (bis != null) {
+					bis.close();
+				}
+				if (bos != null) {
+					bos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		File downloadedFile = new File(destinationFilename);
+		if (downloadedFile.exists()) {
+			return downloadedFile;
+		} else {
+			return null;
+		}
 	}
 }

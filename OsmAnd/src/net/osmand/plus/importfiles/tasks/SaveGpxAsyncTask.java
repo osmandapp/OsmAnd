@@ -21,6 +21,7 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -40,6 +41,8 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
+	private final File tmpFile;
+
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
@@ -47,12 +50,22 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	                        @NonNull String fileName,
 	                        @Nullable SaveImportedGpxListener listener,
 	                        boolean overwrite) {
+		this(app, gpxFile, destinationDir, fileName, listener, overwrite, null);
+	}
+
+	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
+	                        @NonNull GPXFile gpxFile,
+	                        @NonNull File destinationDir,
+	                        @NonNull String fileName,
+	                        @Nullable SaveImportedGpxListener listener,
+	                        boolean overwrite, File tmpFile) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
 		this.destinationDir = destinationDir;
 		this.listener = listener;
 		this.overwrite = overwrite;
+		this.tmpFile = tmpFile;
 	}
 
 	@Override
@@ -74,14 +87,20 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
 			WptPt pt = gpxFile.findPointToShow();
 			File toWrite = getFileToSave(fileName, destinationDir, pt);
+			Exception exception = null;
+			boolean fileCopyError = false;
+			if (tmpFile != null) {
+				fileCopyError = !FileUtils.move(tmpFile, toWrite);
+				FileUtils.deleteFile(tmpFile);
+			} else {
+				exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
+			}
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(toWrite.getAbsolutePath());
-			Exception exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-
 			if (listener != null) {
 				listener.onGpxSaved(exception != null ? exception.getMessage() : null, gpxFile);
 			}
-			if (exception == null) {
+			if (exception == null && !fileCopyError) {
 				gpxFile.path = toWrite.getAbsolutePath();
 				File resultFile = new File(gpxFile.path);
 				if (overwrite) {
@@ -94,7 +113,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 				GpxDataItem item = new GpxDataItem(resultFile, gpxFile);
 				app.getGpxDbHelper().add(item);
 				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(resultFile));
-
 				warning = null;
 			} else {
 				warning = app.getString(R.string.error_reading_gpx);
