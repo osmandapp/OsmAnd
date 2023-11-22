@@ -2013,7 +2013,6 @@
     <string name="selected_categories">Catégories sélectionnées</string>
     <string name="create_custom_poi">Créer un filtre personnalisé</string>
     <string name="custom_search">Recherche personnalisée</string>
-    <string name="edit_filter">Modifier les catégories</string>
     <string name="subcategories">Sous-catégories</string>
     <string name="translit_names">Transcrire les noms</string>
     <string name="rendering_value_light_brown_name">Marron clair</string>

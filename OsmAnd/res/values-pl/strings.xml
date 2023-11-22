@@ -2014,7 +2014,6 @@
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Tworzenie własnego filtra</string>
     <string name="custom_search">Własne wyszukiwanie</string>
-    <string name="edit_filter">Edytuj kategorie</string>
     <string name="subcategories">Podkategorie</string>
     <string name="translit_names">Transliteracja nazw</string>
     <string name="search_hint">Proszę wprowadzić miasto, adres, nazwę użytecznego miejsca</string>

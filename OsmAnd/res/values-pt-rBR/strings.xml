@@ -1861,7 +1861,6 @@
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo de rota se só estiver se movendo na direção oposta.</string>
     <string name="follow_us">Siga-nos</string>
     <string name="routing_attr_short_way_name">Via mais econômica</string>
-    <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>
     <string name="selected_categories">Categorias selecionadas</string>
     <string name="create_custom_poi">Criar filtro personalizado</string>

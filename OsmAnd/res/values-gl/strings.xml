@@ -1883,7 +1883,6 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das liñas de nivel</string>
     <string name="search_hint">Insire o nome da cidade, do enderezo ou do PDI</string>
     <string name="translit_names">Transliterar os nomes</string>
-    <string name="edit_filter">Editar as categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="selected_categories">Categorías escollidas</string>
     <string name="create_custom_poi">Crear un filtro personalizado</string>

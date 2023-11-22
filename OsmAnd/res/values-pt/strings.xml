@@ -2051,7 +2051,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da estrada</string>
     <string name="search_hint">Escreva cidade, endereço, nome do ponto de interesse (POI)</string>
     <string name="translit_names">Nomes transliterados</string>
-    <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>
     <string name="selected_categories">Categorias selecionadas</string>
     <string name="create_custom_poi">Criar filtro personalizado</string>

@@ -2003,7 +2003,6 @@ POIの更新は利用できません</string>
     <string name="rendering_value_light_brown_name">ライトブラウン</string>
     <string name="rendering_value_dark_brown_name">ダークブラウン</string>
     <string name="rendering_attr_contourColorScheme_name">等高線の配色</string>
-    <string name="edit_filter">カテゴリーを編集</string>
     <string name="subcategories">サブカテゴリー</string>
     <string name="selected_categories">選択したカテゴリー</string>
     <string name="create_custom_poi">カスタムフィルターを作成</string>

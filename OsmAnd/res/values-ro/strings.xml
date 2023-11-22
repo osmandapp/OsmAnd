@@ -1958,7 +1958,6 @@
     <string name="gpx_logging_no_data">Nu sunt date</string>
     <string name="rendering_value_light_brown_name">Maro deschis</string>
     <string name="rendering_value_dark_brown_name">Maro întunecat</string>
-    <string name="edit_filter">Editează categoriile</string>
     <string name="subcategories">Subcategorii</string>
     <string name="selected_categories">Categoriile selectate</string>
     <string name="create_custom_poi">Crează filtru personalizat</string>

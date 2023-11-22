@@ -3113,7 +3113,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="search_hint">Type city, address, POI name</string>
     <string name="translit_names">Transliterate names</string>
-    <string name="edit_filter">Edit categories</string>
     <string name="subcategories">Subcategories</string>
     <string name="selected_categories">Selected categories</string>
     <string name="create_custom_poi">Create custom filter</string>

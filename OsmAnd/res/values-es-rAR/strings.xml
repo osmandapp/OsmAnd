@@ -2013,7 +2013,6 @@
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Búsqueda personalizada</string>
-    <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>

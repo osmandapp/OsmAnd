@@ -1577,7 +1577,6 @@
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opprett egendefinert filter</string>
     <string name="custom_search">Egendefinert søk</string>
-    <string name="edit_filter">Rediger kategorier</string>
     <string name="subcategories">Underkategorier</string>
     <string name="rendering_attr_contourColorScheme_description">Fargeskjema for koter</string>
     <string name="rendering_value_light_brown_name">Lysebrun</string>

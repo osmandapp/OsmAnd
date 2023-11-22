@@ -2024,7 +2024,6 @@
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
-    <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen transliterieren</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>

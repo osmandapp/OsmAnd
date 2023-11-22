@@ -2001,7 +2001,6 @@
     <string name="replace_favorite_confirmation">Lecseréli ezt a kedvencet: %1$s\?</string>
     <string name="driving_region_australia">Ausztrália</string>
     <string name="get_for">Beszerzés %1$s-ért</string>
-    <string name="edit_filter">Kategóriák szerkesztése</string>
     <string name="subcategories">Alkategóriák</string>
     <string name="selected_categories">Kiválasztott kategóriák</string>
     <string name="create_custom_poi">Egyéni szűrő létrehozása</string>

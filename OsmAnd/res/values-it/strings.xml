@@ -1999,7 +1999,6 @@
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabila</string>
     <string name="translit_names">Traslittera i nomi</string>
-    <string name="edit_filter">Modifica le categorie</string>
     <string name="subcategories">Modifica le categorie</string>
     <string name="selected_categories">Categorie selezionate</string>
     <string name="create_custom_poi">Crea un filtro personalizzato</string>

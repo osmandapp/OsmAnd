@@ -215,7 +215,6 @@
     <string name="search_hint">Город, адрес, POI</string>
     <string name="new_filter_desc">Введите имя для нового фильтра. Он добавится в список «Категории».</string>
     <string name="translit_names">Транслитерация названий</string>
-    <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Создать настраиваемый фильтр</string>
