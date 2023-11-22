@@ -121,6 +121,7 @@ public class OsmandMap {
 
 	public void changeZoom(int stp, long time) {
 		mapViewTrackingUtilities.setZoomTime(time);
+		app.getMyLocationAnimation().setUserZoomedTime(time);
 		changeZoom(stp);
 	}
 

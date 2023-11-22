@@ -55,7 +55,7 @@ public class Map3DButton extends MapButton {
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {
 		return view -> {
 			boolean defaultElevationAngle = isDefaultElevationAngle();
-			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
+			float tiltAngle = defaultElevationAngle ? 30 : DEFAULT_ELEVATION_ANGLE;
 			if (!defaultElevationAngle) {
 				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(app.getOsmandMap().getMapView().getElevationAngle());
 			}

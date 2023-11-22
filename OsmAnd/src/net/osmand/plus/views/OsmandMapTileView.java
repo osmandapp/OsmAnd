@@ -1064,7 +1064,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom() || (plugin != null && plugin.hasCustomForecast())) {
+		if (true) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
