@@ -5483,7 +5483,7 @@
     <string name="smart_folder_saved">Folder Pintar disimpan</string>
     <string name="add_smart_folder">Tambahkan folder pintar</string>
     <string name="empty_name">Nama kosong</string>
-    <string name="edit_fiilter">Sunting saringan</string>
+    <string name="edit_filter">Sunting saringan</string>
     <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
     <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
     <string name="empty_smart_folder_title">Tidak ada trek yang cocok</string>

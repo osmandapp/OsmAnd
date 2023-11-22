@@ -5462,7 +5462,7 @@
     <string name="map_widget_glide_average_desc">Mostra o rácio de planar médio para o intervalo definido.</string>
     <string name="add_smart_folder">Adicionar pasta inteligente</string>
     <string name="empty_name">Nome vazio</string>
-    <string name="edit_fiilter">Editar filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="key_event_action_open_search_view">Abrir vista de pesquisa</string>
     <string name="copy_build_version">Copiar versão de compilação</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>

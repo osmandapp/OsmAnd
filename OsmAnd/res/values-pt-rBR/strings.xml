@@ -5448,7 +5448,7 @@
     <string name="with_waypoints">Com pontos de trajeto</string>
     <string name="add_smart_folder">Adicionar pasta inteligente</string>
     <string name="empty_name">Nome vazio</string>
-    <string name="edit_fiilter">Editar filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Salvar como pasta inteligente</string>
     <string name="shared_string_show_icon">Mostrar ícone</string>
     <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\".</string>

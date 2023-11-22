@@ -5461,7 +5461,7 @@
     <string name="smart_folder_saved">Розумну теку збережено</string>
     <string name="add_smart_folder">Додати розумну теку</string>
     <string name="empty_name">Назва відсутня</string>
-    <string name="edit_fiilter">Змінити фільтр</string>
+    <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>

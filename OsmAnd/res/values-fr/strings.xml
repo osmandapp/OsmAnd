@@ -5473,7 +5473,7 @@
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
     <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
     <string name="empty_name">Sans nom</string>
-    <string name="edit_fiilter">Modifier le filtre</string>
+    <string name="edit_filter">Modifier le filtre</string>
     <string name="empty_smart_folder_title">Aucune trace trouvée</string>
     <string name="empty_smart_folder_description">Toutes les traces correspondantes apparaîtront automatiquement ici</string>
     <string name="configure_filter">Paramétrer le filtre</string>

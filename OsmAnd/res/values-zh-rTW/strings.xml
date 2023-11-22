@@ -5471,7 +5471,7 @@
     <string name="smart_folder_saved">已儲存 Smart Folder</string>
     <string name="add_smart_folder">新增智慧型資料夾</string>
     <string name="empty_name">空名稱</string>
-    <string name="edit_fiilter">編輯篩選條件</string>
+    <string name="edit_filter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
     <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>

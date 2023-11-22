@@ -95,7 +95,7 @@
     <string name="discard_filter_changes">Discard filter changes</string>
     <string name="discard_filter_changes_prompt">Are you sure you want to reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
-    <string name="edit_fiilter">Edit filter</string>
+    <string name="edit_filter">Edit filter</string>
     <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>

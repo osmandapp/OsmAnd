@@ -5482,7 +5482,7 @@
     <string name="maps_and_resources">Kort og ressourcer</string>
     <string name="shared_string_show_icon">Vis ikon</string>
     <string name="empty_name">Tomt navn</string>
-    <string name="edit_fiilter">Redigér filter</string>
+    <string name="edit_filter">Redigér filter</string>
     <string name="smart_folder_name_present">Sådan en smart-mappe findes allerede</string>
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>

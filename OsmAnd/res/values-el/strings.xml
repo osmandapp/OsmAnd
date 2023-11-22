@@ -4063,7 +4063,7 @@
     <string name="map_2d_mode_action">Λειτουργία 2D</string>
     <string name="calculate_offline">Υπολογισμός εκτός σύνδεσης</string>
     <string name="ant_plus_searching">Αναζήτηση</string>
-    <string name="edit_fiilter">Επεξεργασία φίλτρου</string>
+    <string name="edit_filter">Επεξεργασία φίλτρου</string>
     <string name="weather_forecast">Πρόγνωση καιρού</string>
     <string name="external_device_disconnected">Αποσυνδέθηκε</string>
     <string name="external_device_characteristic_distance">Απόσταση</string>

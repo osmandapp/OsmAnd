@@ -5484,7 +5484,7 @@
     <string name="smart_folder_saved">Folder Inteligent salvat</string>
     <string name="add_smart_folder">Adaugă folder inteligent</string>
     <string name="empty_name">Nume gol</string>
-    <string name="edit_fiilter">Editează filtru</string>
+    <string name="edit_filter">Editează filtru</string>
     <string name="save_as_smart_folder">Salvează ca folder inteligent</string>
     <string name="delete_smart_folder_dialog_message">Aceasta va șterge folderul inteligent \"%1$s\".</string>
     <string name="empty_smart_folder_title">Niciun traseu găsit</string>

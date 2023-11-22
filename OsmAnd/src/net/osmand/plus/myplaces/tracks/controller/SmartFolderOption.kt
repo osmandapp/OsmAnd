@@ -22,7 +22,7 @@ internal enum class SmartFolderOption(
 		R.string.shared_string_refresh,
 		R.drawable.ic_action_update),
 	EDIT_FILTER(
-		R.string.edit_fiilter,
+		R.string.edit_filter,
 		R.drawable.ic_action_filter_dark),
 	EXPORT(
 		R.string.shared_string_export,

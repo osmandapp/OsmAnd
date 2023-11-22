@@ -5471,7 +5471,7 @@
     <string name="smart_folder_saved">Смарт-папка сохранена</string>
     <string name="add_smart_folder">Создать смарт-папку</string>
     <string name="empty_name">Отсутствует имя</string>
-    <string name="edit_fiilter">Фильтр</string>
+    <string name="edit_filter">Фильтр</string>
     <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
     <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
     <string name="empty_smart_folder_title">Нет подходящего трека</string>
