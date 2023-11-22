@@ -2021,7 +2021,6 @@
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opret brugerdefineret filter</string>
     <string name="custom_search">Brugerdefineret søgning</string>
-    <string name="edit_filter">Rediger kategorier</string>
     <string name="subcategories">Underkategorier</string>
     <string name="translit_names">Translitterere navne</string>
     <string name="search_hint">Indtast by, adresse, IP-navn</string>

@@ -1909,7 +1909,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Αρτιότητα επιφάνειας δρόμου</string>
     <string name="search_hint">Πληκτρολογήστε πόλη, διεύθυνση, όνομα ΣΕ</string>
     <string name="translit_names">Μεταγραμμάτιση ονομάτων</string>
-    <string name="edit_filter">Επεξεργασία κατηγοριών</string>
     <string name="subcategories">Υποκατηγορίες</string>
     <string name="selected_categories">Επιλεγμένες κατηγορίες</string>
     <string name="create_custom_poi">Δημιουργία προσαρμοσμένου φίλτρου</string>
