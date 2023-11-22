@@ -139,19 +139,7 @@ public class InputDeviceHelper {
 		InputDeviceProfile device = cachedDevices.remove(deviceId);
 		if (device != null) {
 			customDevices.remove(device);
-			cachedDevices.remove(deviceId);
-			resetSelectedDeviceIfNeeded(appMode);
 			syncSettings(EventType.DELETE_DEVICE);
-		}
-	}
-
-	public void resetSelectedDeviceIfNeeded(@NonNull ApplicationMode appMode) {
-		updateAppModeIfNeeded(appMode);
-		InputDeviceProfile device = getSelectedDevice(appMode);
-		if (device == null) {
-			// If selected device is unknown for application mode
-			// we should reset it to default value
-			settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode);
 		}
 	}
 
@@ -202,8 +190,8 @@ public class InputDeviceHelper {
 	}
 
 	public boolean isSelectedDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
-		String selectedDeviceId = getSelectedDeviceId(appMode);
-		return Objects.equals(selectedDeviceId, deviceId);
+		InputDeviceProfile selectedDevice = getSelectedDevice(appMode);
+		return Objects.equals(selectedDevice.getId(), deviceId);
 	}
 
 	public boolean isCustomDevice(@NonNull InputDeviceProfile device) {
@@ -230,14 +218,15 @@ public class InputDeviceHelper {
 		return null;
 	}
 
-	@Nullable
+	@NonNull
 	public InputDeviceProfile getSelectedDevice(@NonNull ApplicationMode appMode) {
 		String id = getSelectedDeviceId(appMode);
-		return id != null ? getDeviceById(appMode, id) : null;
+		InputDeviceProfile device = id != null ? getDeviceById(appMode, id) : null;
+		return device != null ? device : KEYBOARD;
 	}
 
 	@Nullable
-	public String getSelectedDeviceId(@NonNull ApplicationMode appMode) {
+	private String getSelectedDeviceId(@NonNull ApplicationMode appMode) {
 		return settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 	}
 

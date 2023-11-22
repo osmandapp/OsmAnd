@@ -40,12 +40,13 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		Context context = getContext();
+		ApplicationMode appMode = getSelectedAppMode();
 		PreferenceScreen screen = getPreferenceScreen();
 		if (context != null && screen != null) {
 			OsmandApplication app = requireMyApplication();
 			deviceHelper = app.getInputDeviceHelper();
 			screen.addPreference(createPreference(context, R.layout.list_item_divider));
-			if (isInputDeviceEnabled()) {
+			if (isInputDeviceEnabled(appMode)) {
 				screen.addPreference(createTypePreference(context));
 				screen.addPreference(createBindingPreference(context));
 			} else {
@@ -62,8 +63,7 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> {
 			ApplicationMode appMode = getSelectedAppMode();
-			deviceHelper.resetSelectedDeviceIfNeeded(appMode);
-			boolean newState = !isInputDeviceEnabled();
+			boolean newState = !isInputDeviceEnabled(appMode);
 			settings.EXTERNAL_INPUT_DEVICE_ENABLED.setModeValue(appMode, newState);
 			updateToolbarSwitch(view);
 			updateAllSettings();
@@ -81,7 +81,8 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 	}
 
 	private void updateToolbarSwitch(View view) {
-		boolean checked = isInputDeviceEnabled();
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean checked = isInputDeviceEnabled(appMode);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
 
 		int disabledColor = ColorUtilities.getColor(app, R.color.preference_top_switch_off);
@@ -99,28 +100,24 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 	private Preference createTypePreference(@NonNull Context context) {
 		Preference uiPreference = new Preference(context);
 		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
-		if (inputDevice != null) {
-			uiPreference.setKey(PREF_ID_TYPE);
-			uiPreference.setLayoutResource(R.layout.preference_with_descr_and_divider);
-			uiPreference.setTitle(R.string.shared_string_type);
-			uiPreference.setSummary(inputDevice.toHumanString(context));
-			uiPreference.setIcon(getContentIcon(R.drawable.ic_action_keyboard));
-			uiPreference.setSelectable(true);
-		}
+		uiPreference.setKey(PREF_ID_TYPE);
+		uiPreference.setLayoutResource(R.layout.preference_with_descr_and_divider);
+		uiPreference.setTitle(R.string.shared_string_type);
+		uiPreference.setSummary(inputDevice.toHumanString(context));
+		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_keyboard));
+		uiPreference.setSelectable(true);
 		return uiPreference;
 	}
 
 	private Preference createBindingPreference(@NonNull Context context) {
 		Preference uiPreference = new Preference(context);
 		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
-		if (inputDevice != null) {
-			uiPreference.setKey(PREF_ID_BINDING);
-			uiPreference.setLayoutResource(R.layout.preference_with_descr);
-			uiPreference.setTitle(R.string.key_assignments);
-			uiPreference.setSummary(String.valueOf(inputDevice.getActiveKeyBindingsCount()));
-			uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
-			uiPreference.setSelectable(true);
-		}
+		uiPreference.setKey(PREF_ID_BINDING);
+		uiPreference.setLayoutResource(R.layout.preference_with_descr);
+		uiPreference.setTitle(R.string.key_assignments);
+		uiPreference.setSummary(String.valueOf(inputDevice.getActiveKeyBindingsCount()));
+		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
+		uiPreference.setSelectable(true);
 		return uiPreference;
 	}
 
@@ -152,8 +149,8 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 		return super.onPreferenceClick(preference);
 	}
 
-	private boolean isInputDeviceEnabled() {
-		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null;
+	private boolean isInputDeviceEnabled(@NonNull ApplicationMode appMode) {
+		return deviceHelper.getEnabledDevice(appMode) != null;
 	}
 
 	@Override
