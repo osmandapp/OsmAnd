@@ -10,7 +10,7 @@ import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
 
 /**
- * WunderLINQ device, motorcycle smart phone control
+ * WunderLINQ device, motorcycle smart phone control.
  */
 public class WunderLINQDeviceProfile extends PredefinedInputDeviceProfile {
 

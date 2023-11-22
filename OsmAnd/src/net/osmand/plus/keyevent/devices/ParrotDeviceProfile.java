@@ -9,7 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
 
 /**
- * Parrot device has only dpad left and right
+ * Parrot device has only dpad left and right.
  */
 public class ParrotDeviceProfile extends PredefinedInputDeviceProfile {
 
