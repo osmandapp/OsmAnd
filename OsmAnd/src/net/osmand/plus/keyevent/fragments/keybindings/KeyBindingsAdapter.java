@@ -31,11 +31,12 @@ import java.util.List;
 
 class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-	public static final int CARD_DIVIDER = 1;
-	public static final int HEADER = 2;
-	public static final int KEY_BINDING_ITEM = 3;
-	public static final int CARD_BOTTOM_SHADOW = 4;
-	public static final int SPACE = 5;
+	public static final int CARD_TOP_DIVIDER = 1;
+	public static final int CARD_DIVIDER = 2;
+	public static final int HEADER = 3;
+	public static final int KEY_BINDING_ITEM = 4;
+	public static final int CARD_BOTTOM_SHADOW = 5;
+	public static final int SPACE = 6;
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
@@ -62,6 +63,8 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.parent = parent;
 		context = parent.getContext();
 		switch (viewType) {
+			case CARD_TOP_DIVIDER:
+				return new CardTopDividerViewHolder(inflate(R.layout.list_item_divider));
 			case CARD_DIVIDER:
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case HEADER:
@@ -153,6 +156,16 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	static class CardBottomShadowViewHolder extends ViewHolder {
 		public CardBottomShadowViewHolder(@NonNull View itemView) {
 			super(itemView);
+		}
+	}
+
+	static class CardTopDividerViewHolder extends ViewHolder {
+		public CardTopDividerViewHolder(@NonNull View itemView) {
+			super(itemView);
+			View shadowToHide = itemView.findViewById(R.id.bottomShadowView);
+			if (shadowToHide != null) {
+				shadowToHide.setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 

@@ -2,6 +2,7 @@ package net.osmand.plus.keyevent.fragments.keybindings;
 
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_TOP_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.HEADER;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.KEY_BINDING_ITEM;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.SPACE;
@@ -56,7 +57,7 @@ class KeyBindingsController {
 			if (Algorithms.isEmpty(keyBindings)) continue;
 
 			String categoryName = app.getString(category.getTitleId());
-			screenItems.add(new ScreenItem(CARD_DIVIDER, categoryName));
+			screenItems.add(new ScreenItem(category.ordinal() > 0 ? CARD_DIVIDER : CARD_TOP_DIVIDER, categoryName));
 			screenItems.add(new ScreenItem(HEADER, categoryName));
 			for (KeyBinding keyBinding : keyBindings) {
 				screenItems.add(new ScreenItem(KEY_BINDING_ITEM, keyBinding));
