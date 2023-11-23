@@ -14,6 +14,7 @@ import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -122,6 +123,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	private final BinaryMapRouteReaderAdapter routeAdapter;
+	private final BinaryHHRouteReaderAdapter hhAdapter;
 
 	private static final String BASEMAP_NAME = "basemap";
 
@@ -135,6 +137,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		init();
 	}
 
@@ -147,6 +150,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		if (init) {
 			init();
 		}
@@ -163,6 +167,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		mapIndexes = new ArrayList<BinaryMapIndexReader.MapIndex>(referenceToSameFile.mapIndexes);
 		poiIndexes = new ArrayList<PoiRegion>(referenceToSameFile.poiIndexes);
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
@@ -272,6 +277,18 @@ public class BinaryMapIndexReader {
 					indexes.add(poiInd);
 				}
 				codedIS.seek(poiInd.filePointer + poiInd.length);
+				break;
+			case OsmandOdb.OsmAndStructure.HHROUTINGINDEX_FIELD_NUMBER:
+				HHRouteRegion hhreg = new HHRouteRegion();
+				hhreg.length = readInt();
+				hhreg.filePointer = codedIS.getTotalBytesRead();
+				if (hhAdapter != null) {
+					oldLimit = codedIS.pushLimit(hhreg.length);
+					hhAdapter.readHHIndex(hhreg);
+					codedIS.popLimit(oldLimit);
+					indexes.add(hhreg);
+				}
+				codedIS.seek(hhreg.filePointer + hhreg.length);
 				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
