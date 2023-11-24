@@ -1163,7 +1163,6 @@ public class BinaryMapRouteReaderAdapter {
 					codedIS.popLimit(old);
 				}
 				searchRouteRegionTree(req, rs.subregions, toLoad);
-
 				if (rs.shiftToData != 0) {
 					toLoad.add(rs);
 				}

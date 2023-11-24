@@ -160,7 +160,7 @@ public class HHRoutingDB {
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(Class<T> cl) throws SQLException {
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT dualIdPoint, pointGeoId, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
+		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		while (rs.next()) {
 			T pnt;
@@ -175,7 +175,6 @@ public class HHRoutingDB {
 				// ignore non-dual point as they don't exist
 				continue;
 			}
-			pnt.pntGeoId = rs.getLong(p++);
 			pnt.index = rs.getInt(p++);
 			pnt.clusterId = rs.getInt(p++);
 			int chInd = rs.getInt(p++);
@@ -435,7 +434,6 @@ public class HHRoutingDB {
 		public int index;
 		public int clusterId;
 		public int fileId;
-		public long pntGeoId; // could be calculated
 		
 		public long roadId;
 		public short start;
@@ -545,6 +543,10 @@ public class HHRoutingDB {
 
 		public int midPntDepth() {
 			return 0;
+		}
+
+		public long getGeoPntId() {
+			return HHRoutePlanner.calculateRoutePointInternalId(roadId, start, end);
 		}
 		
 	}

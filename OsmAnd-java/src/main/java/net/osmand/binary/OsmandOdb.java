@@ -65893,30 +65893,19 @@ public final class OsmandOdb {
     com.google.protobuf.ByteString
         getProfileParamsBytes(int index);
 
-    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+    // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
     /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
-    java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> 
-        getPointBoxesList();
+    boolean hasPointBoxes();
     /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
-    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes(int index);
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes();
     /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
-    int getPointBoxesCount();
-    /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-     */
-    java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
-        getPointBoxesOrBuilderList();
-    /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-     */
-    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder(
-        int index);
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder();
 
     // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;
     /**
@@ -66017,11 +66006,16 @@ public final class OsmandOdb {
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                pointBoxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox>();
-                mutable_bitField0_ |= 0x00000008;
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = pointBoxes_.toBuilder();
               }
-              pointBoxes_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.PARSER, extensionRegistry));
+              pointBoxes_ = input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(pointBoxes_);
+                pointBoxes_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
               break;
             }
             case 50: {
@@ -66042,9 +66036,6 @@ public final class OsmandOdb {
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(profileParams_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          pointBoxes_ = java.util.Collections.unmodifiableList(pointBoxes_);
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
@@ -71283,40 +71274,26 @@ public final class OsmandOdb {
       return profileParams_.getByteString(index);
     }
 
-    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+    // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
     public static final int POINTBOXES_FIELD_NUMBER = 5;
-    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> pointBoxes_;
+    private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_;
     /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
-    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> getPointBoxesList() {
+    public boolean hasPointBoxes() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes() {
       return pointBoxes_;
     }
     /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
-    public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
-        getPointBoxesOrBuilderList() {
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder() {
       return pointBoxes_;
-    }
-    /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-     */
-    public int getPointBoxesCount() {
-      return pointBoxes_.size();
-    }
-    /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-     */
-    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes(int index) {
-      return pointBoxes_.get(index);
-    }
-    /**
-     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-     */
-    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder(
-        int index) {
-      return pointBoxes_.get(index);
     }
 
     // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;
@@ -71359,7 +71336,7 @@ public final class OsmandOdb {
       edition_ = 0L;
       profile_ = "";
       profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      pointBoxes_ = java.util.Collections.emptyList();
+      pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
       pointSegments_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -71375,11 +71352,13 @@ public final class OsmandOdb {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getPointBoxesCount(); i++) {
-        if (!getPointBoxes(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
+      if (!hasPointBoxes()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPointBoxes().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
       for (int i = 0; i < getPointSegmentsCount(); i++) {
         if (!getPointSegments(i).isInitialized()) {
@@ -71403,8 +71382,8 @@ public final class OsmandOdb {
       for (int i = 0; i < profileParams_.size(); i++) {
         output.writeBytes(3, profileParams_.getByteString(i));
       }
-      for (int i = 0; i < pointBoxes_.size(); i++) {
-        output.writeMessage(5, pointBoxes_.get(i));
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(5, pointBoxes_);
       }
       for (int i = 0; i < pointSegments_.size(); i++) {
         output.writeMessage(6, pointSegments_.get(i));
@@ -71435,9 +71414,9 @@ public final class OsmandOdb {
         size += dataSize;
         size += 1 * getProfileParamsList().size();
       }
-      for (int i = 0; i < pointBoxes_.size(); i++) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, pointBoxes_.get(i));
+          .computeMessageSize(5, pointBoxes_);
       }
       for (int i = 0; i < pointSegments_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -71572,11 +71551,11 @@ public final class OsmandOdb {
         profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (pointBoxesBuilder_ == null) {
-          pointBoxes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
         } else {
           pointBoxesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (pointSegmentsBuilder_ == null) {
           pointSegments_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000010);
@@ -71625,11 +71604,10 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.profileParams_ = profileParams_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
         if (pointBoxesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            pointBoxes_ = java.util.Collections.unmodifiableList(pointBoxes_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
           result.pointBoxes_ = pointBoxes_;
         } else {
           result.pointBoxes_ = pointBoxesBuilder_.build();
@@ -71677,31 +71655,8 @@ public final class OsmandOdb {
           }
           onChanged();
         }
-        if (pointBoxesBuilder_ == null) {
-          if (!other.pointBoxes_.isEmpty()) {
-            if (pointBoxes_.isEmpty()) {
-              pointBoxes_ = other.pointBoxes_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensurePointBoxesIsMutable();
-              pointBoxes_.addAll(other.pointBoxes_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.pointBoxes_.isEmpty()) {
-            if (pointBoxesBuilder_.isEmpty()) {
-              pointBoxesBuilder_.dispose();
-              pointBoxesBuilder_ = null;
-              pointBoxes_ = other.pointBoxes_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              pointBoxesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPointBoxesFieldBuilder() : null;
-            } else {
-              pointBoxesBuilder_.addAllMessages(other.pointBoxes_);
-            }
-          }
+        if (other.hasPointBoxes()) {
+          mergePointBoxes(other.getPointBoxes());
         }
         if (pointSegmentsBuilder_ == null) {
           if (!other.pointSegments_.isEmpty()) {
@@ -71742,11 +71697,13 @@ public final class OsmandOdb {
           
           return false;
         }
-        for (int i = 0; i < getPointBoxesCount(); i++) {
-          if (!getPointBoxes(i).isInitialized()) {
-            
-            return false;
-          }
+        if (!hasPointBoxes()) {
+          
+          return false;
+        }
+        if (!getPointBoxes().isInitialized()) {
+          
+          return false;
         }
         for (int i = 0; i < getPointSegmentsCount(); i++) {
           if (!getPointSegments(i).isInitialized()) {
@@ -72052,239 +72009,116 @@ public final class OsmandOdb {
         return this;
       }
 
-      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
-      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> pointBoxes_ =
-        java.util.Collections.emptyList();
-      private void ensurePointBoxesIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          pointBoxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox>(pointBoxes_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
+      // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+      private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
           net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> pointBoxesBuilder_;
-
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> getPointBoxesList() {
+      public boolean hasPointBoxes() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes() {
         if (pointBoxesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(pointBoxes_);
+          return pointBoxes_;
         } else {
-          return pointBoxesBuilder_.getMessageList();
+          return pointBoxesBuilder_.getMessage();
         }
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public int getPointBoxesCount() {
+      public Builder setPointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
         if (pointBoxesBuilder_ == null) {
-          return pointBoxes_.size();
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          pointBoxes_ = value;
+          onChanged();
         } else {
-          return pointBoxesBuilder_.getCount();
+          pointBoxesBuilder_.setMessage(value);
         }
+        bitField0_ |= 0x00000008;
+        return this;
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes(int index) {
-        if (pointBoxesBuilder_ == null) {
-          return pointBoxes_.get(index);
-        } else {
-          return pointBoxesBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
       public Builder setPointBoxes(
-          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
-        if (pointBoxesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePointBoxesIsMutable();
-          pointBoxes_.set(index, value);
-          onChanged();
-        } else {
-          pointBoxesBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public Builder setPointBoxes(
-          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
-        if (pointBoxesBuilder_ == null) {
-          ensurePointBoxesIsMutable();
-          pointBoxes_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          pointBoxesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public Builder addPointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
-        if (pointBoxesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePointBoxesIsMutable();
-          pointBoxes_.add(value);
-          onChanged();
-        } else {
-          pointBoxesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public Builder addPointBoxes(
-          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
-        if (pointBoxesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePointBoxesIsMutable();
-          pointBoxes_.add(index, value);
-          onChanged();
-        } else {
-          pointBoxesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public Builder addPointBoxes(
           net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
         if (pointBoxesBuilder_ == null) {
-          ensurePointBoxesIsMutable();
-          pointBoxes_.add(builderForValue.build());
+          pointBoxes_ = builderForValue.build();
           onChanged();
         } else {
-          pointBoxesBuilder_.addMessage(builderForValue.build());
+          pointBoxesBuilder_.setMessage(builderForValue.build());
         }
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public Builder addPointBoxes(
-          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
+      public Builder mergePointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
         if (pointBoxesBuilder_ == null) {
-          ensurePointBoxesIsMutable();
-          pointBoxes_.add(index, builderForValue.build());
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              pointBoxes_ != net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance()) {
+            pointBoxes_ =
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.newBuilder(pointBoxes_).mergeFrom(value).buildPartial();
+          } else {
+            pointBoxes_ = value;
+          }
           onChanged();
         } else {
-          pointBoxesBuilder_.addMessage(index, builderForValue.build());
+          pointBoxesBuilder_.mergeFrom(value);
         }
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public Builder addAllPointBoxes(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> values) {
-        if (pointBoxesBuilder_ == null) {
-          ensurePointBoxesIsMutable();
-          super.addAll(values, pointBoxes_);
-          onChanged();
-        } else {
-          pointBoxesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
       public Builder clearPointBoxes() {
         if (pointBoxesBuilder_ == null) {
-          pointBoxes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
           onChanged();
         } else {
           pointBoxesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public Builder removePointBoxes(int index) {
-        if (pointBoxesBuilder_ == null) {
-          ensurePointBoxesIsMutable();
-          pointBoxes_.remove(index);
-          onChanged();
-        } else {
-          pointBoxesBuilder_.remove(index);
-        }
-        return this;
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder getPointBoxesBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPointBoxesFieldBuilder().getBuilder();
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder getPointBoxesBuilder(
-          int index) {
-        return getPointBoxesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder(
-          int index) {
-        if (pointBoxesBuilder_ == null) {
-          return pointBoxes_.get(index);  } else {
-          return pointBoxesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
-           getPointBoxesOrBuilderList() {
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder() {
         if (pointBoxesBuilder_ != null) {
-          return pointBoxesBuilder_.getMessageOrBuilderList();
+          return pointBoxesBuilder_.getMessageOrBuilder();
         } else {
-          return java.util.Collections.unmodifiableList(pointBoxes_);
+          return pointBoxes_;
         }
       }
       /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
-      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder addPointBoxesBuilder() {
-        return getPointBoxesFieldBuilder().addBuilder(
-            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder addPointBoxesBuilder(
-          int index) {
-        return getPointBoxesFieldBuilder().addBuilder(
-            index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
-       */
-      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder> 
-           getPointBoxesBuilderList() {
-        return getPointBoxesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilder<
           net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
           getPointBoxesFieldBuilder() {
         if (pointBoxesBuilder_ == null) {
-          pointBoxesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          pointBoxesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder>(
                   pointBoxes_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           pointBoxes_ = null;
@@ -73969,7 +73803,7 @@ public final class OsmandOdb {
       "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd" +
       ".OBF.StringTable\"\273\007\n\024OsmAndHHRoutingInde" +
       "x\022\017\n\007edition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rp" +
-      "rofileParams\030\003 \003(\t\022E\n\npointBoxes\030\005 \003(\01321" +
+      "rofileParams\030\003 \003(\t\022E\n\npointBoxes\030\005 \002(\01321" +
       ".OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoute" +
       "PointsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAn" +
       "d.OBF.OsmAndHHRoutingIndex.HHRouteBlockS" +

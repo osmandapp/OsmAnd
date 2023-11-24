@@ -379,8 +379,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long pos = calculateRoutePointInternalId(pnt.roadId, pnt.start, pnt.end);
 			LatLon latlon = pnt.getPoint();
 			hctx.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), pnt);
-			if (pos != pnt.pntGeoId) {
-				throw new IllegalStateException(pnt + " " + pos + " != "+ pnt.pntGeoId);
+			if (pos != pnt.getGeoPntId()) {
+				throw new IllegalStateException(pnt + " " + pos + " != "+ pnt.getGeoPntId());
 			}
 			hctx.boundaries.put(pos, null);
 			hctx.pointsByGeo.put(pos, pnt);
