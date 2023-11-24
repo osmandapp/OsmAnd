@@ -19,7 +19,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AverageGlideComputer extends AbstractComputer {
+public class AverageGlideComputer extends AverageValueComputer {
 
 	public AverageGlideComputer(@NonNull OsmandApplication app) {
 		super(app);

@@ -39,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettings
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -355,6 +356,16 @@ public enum WidgetType {
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {
 		return widgetId.equals(getDefaultWidgetId(widgetId));
+	}
+
+	public static boolean isComplexWidget(@NonNull String widgetId) {
+		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), getComplexWidgetIds());
+	}
+
+	@NonNull
+	public static String[] getComplexWidgetIds() {
+		return new String[] {COORDINATES_MAP_CENTER.id, COORDINATES_CURRENT_LOCATION.id,
+				MARKERS_TOP_BAR.id, ELEVATION_PROFILE.id, STREET_NAME.id, LANES.id};
 	}
 
 	@NonNull

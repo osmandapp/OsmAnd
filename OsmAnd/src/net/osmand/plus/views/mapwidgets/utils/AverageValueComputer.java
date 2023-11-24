@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class AbstractComputer {
+public abstract class AverageValueComputer {
 
 	public static final long BIGGEST_MEASURED_INTERVAL;
 	public static final long ADD_POINT_INTERVAL_MILLIS = 1000;
@@ -39,7 +39,7 @@ public abstract class AbstractComputer {
 
 	protected final List<Location> locations = new LinkedList<>();
 
-	public AbstractComputer(@NonNull OsmandApplication app) {
+	public AverageValueComputer(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 	}
