@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -233,6 +232,18 @@ public class HHRoutingDB {
 		geometry.addAll(parseGeometry(segment.start.index, segment.end.index, segment.shortcut));
 	}
 	
+	public void loadSegmentPointInternal(int id, int profile, byte[][] res) throws SQLException {
+		loadSegmentStart.setInt(1, id);
+		loadSegmentStart.setInt(2, profile);
+		ResultSet rs = loadSegmentStart.executeQuery();
+		if (rs.next()) {
+			byte[] ins = rs.getBytes(2);
+			res[0] = ins;
+			byte[] outs = rs.getBytes(3);
+			res[1] = outs;
+		}
+	}
+	
 	
 	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(TLongObjectHashMap<T> pntsById, 
 			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, 
@@ -419,11 +430,12 @@ public class HHRoutingDB {
 	
 	
 	
-	static class NetworkDBPoint {
-		NetworkDBPoint dualPoint;
-		int index;
-		int clusterId;
-		long pntGeoId; // could be calculated
+	public static class NetworkDBPoint {
+		public NetworkDBPoint dualPoint;
+		public int index;
+		public int clusterId;
+		public int fileId;
+		public long pntGeoId; // could be calculated
 		
 		public long roadId;
 		public short start;
