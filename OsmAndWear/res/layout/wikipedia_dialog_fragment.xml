@@ -63,7 +63,8 @@
 				android:layout_height="match_parent"
 				android:layout_gravity="top"
 				android:contentDescription="@string/shared_string_options"
-				tools:src="@drawable/ic_overflow_menu_white"/>
+				android:translationX="-30dp"
+				tools:src="@drawable/ic_overflow_menu_white" />
 
             </LinearLayout>
 

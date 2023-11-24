@@ -19,12 +19,13 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
+			android:layout_marginStart="40dp"
 			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
-			tools:src="@drawable/ic_action_car_dark"
-			tools:tint="?colorAccent"
 			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginStart="@dimen/content_padding" />
+			android:layout_marginRight="@dimen/content_padding"
+			android:translationX="15dp"
+			tools:src="@drawable/ic_action_car_dark"
+			tools:tint="?colorAccent" />
 
 		<LinearLayout
 			android:layout_width="0dp"

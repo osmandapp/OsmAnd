@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color">
 
 	<View
@@ -24,11 +27,11 @@
 			android:layout_gravity="center"
 			android:layout_marginStart="@dimen/title_padding"
 			android:tint="?attr/active_color_basic"
+			android:translationX="25dp"
 			osmand:srcCompat="@drawable/ic_action_plus" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			style="@style/TitleStyle.Medium"
-			android:id="@+id/add_page"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/dialog_button_height"

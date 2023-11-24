@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:orientation="vertical">
 
@@ -20,6 +23,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding"
+			android:translationX="25dp"
 			tools:srcCompat="@drawable/ic_action_book_info"
 			tools:tint="?attr/default_icon_color" />
 
@@ -38,6 +42,7 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="2"
+				android:textSize="11sp"
 				android:textColor="?android:textColorPrimary"
 				tools:text="@string/share_crash_log" />
 
@@ -47,7 +52,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
-				android:maxLines="2"
+				android:maxLines="3"
+				android:textSize="12sp"
 				android:textColor="?android:textColorSecondary"
 				tools:text="@string/send_crash_log_descr" />
 

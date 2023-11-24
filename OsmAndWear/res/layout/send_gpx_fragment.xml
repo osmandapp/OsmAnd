@@ -6,6 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:focusable="true"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:focusableInTouchMode="true"
 	android:orientation="vertical">
 
@@ -24,9 +27,11 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="16dp"
+			android:layout_gravity="center"
+			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:text="@string/send_files_to_openstreetmap"
-			android:textSize="@dimen/default_list_text_size"
+			android:textSize="9sp"
 			osmand:typeface="@string/font_roboto_medium" />
 
 		<com.google.android.material.textfield.TextInputLayout

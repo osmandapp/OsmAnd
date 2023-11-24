@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/setting_list_item_small_height"
 	android:orientation="vertical">
 
@@ -28,6 +31,7 @@
 				android:layout_marginEnd="@dimen/list_content_padding_large"
 				android:layout_marginRight="@dimen/list_content_padding_large"
 				android:layout_marginBottom="@dimen/content_padding"
+				android:translationX="25dp"
 				tools:src="@drawable/ic_action_info_dark" />
 
 			<LinearLayout
@@ -66,11 +70,12 @@
 			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/check_box"
 				android:layout_width="wrap_content"
-				android:focusableInTouchMode="false"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
-				android:focusable="false" />
+				android:focusable="false"
+				android:focusableInTouchMode="false"
+				android:translationX="-25dp" />
 
 		</LinearLayout>
 

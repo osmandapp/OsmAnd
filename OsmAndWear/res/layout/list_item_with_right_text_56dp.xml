@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical">
 
 	<LinearLayout
@@ -25,9 +28,11 @@
 				style="@style/TitleStyle"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="center"
+				android:layout_marginStart="25dp"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_weight="1"
+				android:textSize="10sp"
 				android:ellipsize="end"
 				android:textColor="?android:textColorPrimary"
 				tools:text="Example of title" />
@@ -38,9 +43,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:layout_marginStart="0dp"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:ellipsize="end"
 				android:textColor="?android:textColorSecondary"
+				android:textSize="8sp"
+				android:translationX="-30dp"
 				tools:text="Summary" />
 
 		</LinearLayout>

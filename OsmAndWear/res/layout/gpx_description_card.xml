@@ -3,6 +3,9 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
@@ -50,6 +53,7 @@
 				android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
 				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:layout_marginStart="15dp"
 				android:text="@string/shared_string_read"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"

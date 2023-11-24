@@ -2,6 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
+	android:layout_marginStart="@dimen/content_padding"
+	android:layout_marginTop="20dp"
+	android:layout_marginEnd="@dimen/content_padding"
 	android:layout_height="wrap_content">
 
 	<net.osmand.plus.widgets.OsmandTextFieldBoxes

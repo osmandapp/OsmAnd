@@ -6,6 +6,9 @@
     android:background="?attr/btn_bg_border_inactive"
     android:baselineAligned="false"
     android:minHeight="@dimen/dialog_button_height"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="0dp"
     android:orientation="horizontal">
 
     <include

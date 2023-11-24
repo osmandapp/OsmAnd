@@ -3,7 +3,9 @@
 	android:id="@+id/map_ruler_layout"
 	android:layout_width="@dimen/map_ruler_width"
 	android:layout_height="wrap_content"
-	android:layout_gravity="bottom">
+	android:layout_gravity="bottom"
+	android:translationX="-20dp"
+	android:translationY="-50dp">
 
 	<FrameLayout
 		android:layout_width="match_parent"

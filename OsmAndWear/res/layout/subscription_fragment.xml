@@ -19,6 +19,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:layout_marginStart="25dp"
             android:contentDescription="@string/shared_string_close"
             app:srcCompat="@drawable/ic_action_remove_dark" />
 
@@ -28,10 +29,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
+            android:gravity="start"
             android:text="@string/osm_live_subscription"
             android:textColor="@color/card_and_list_background_light"
-            android:textSize="@dimen/default_list_text_size_large"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:translationX="-20dp"
             app:typeface="@string/font_roboto_regular" />
 
     </LinearLayout>

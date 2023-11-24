@@ -6,6 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:paddingLeft="@dimen/content_padding"
@@ -19,7 +22,8 @@
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/ic_action_polygom_dark"/>
+		android:translationX="25dp"
+		tools:src="@drawable/ic_action_polygom_dark" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -54,12 +58,13 @@
 		android:id="@+id/number_count_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
 		android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
 		android:ellipsize="end"
 		android:maxLines="1"
 		android:textColor="?attr/color_dialog_buttons"
 		android:textSize="@dimen/default_list_text_size"
+		android:translationX="-25dp"
 		osmand:typeface="@string/font_roboto_medium"
-		tools:text="25"/>
+		tools:text="25" />
 </LinearLayout>

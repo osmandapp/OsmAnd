@@ -6,6 +6,9 @@
               android:layout_height="56dp"
               android:focusableInTouchMode="true"
               android:gravity="center_vertical"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
               android:orientation="horizontal">
 
     <EditText
@@ -14,11 +17,12 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@null"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:hint="@string/search_poi_category_hint"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:lines="1"
+        android:textSize="12sp"
         android:singleLine="true"
         android:textColor="?attr/searchbar_text"
         android:textColorHint="?attr/searchbar_text_hint"/>
@@ -38,6 +42,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/shared_string_clear"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+        android:translationX="-35dp"
+        osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 </LinearLayout>

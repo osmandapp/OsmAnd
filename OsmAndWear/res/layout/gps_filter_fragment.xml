@@ -3,6 +3,9 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
 
@@ -94,6 +97,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:contentDescription="@string/access_shared_string_navigate_up"
+					android:translationX="25dp"
 					osmand:srcCompat="@drawable/ic_arrow_back" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -118,13 +122,14 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:contentDescription="@string/reset_to_original"
 					osmand:srcCompat="@drawable/ic_action_reset_to_default_dark" />
-				
+
 				<ImageButton
 					android:id="@+id/scroll_to_actions_button"
 					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:contentDescription="@string/shared_string_actions"
+					android:translationX="-25dp"
 					osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			</LinearLayout>

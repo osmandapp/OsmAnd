@@ -25,8 +25,9 @@
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="@dimen/toolbar_height"
             android:contentDescription="@string/access_shared_string_navigate_up"
-            app:srcCompat="@drawable/ic_arrow_back"
-            android:tint="?attr/default_icon_color" />
+            android:tint="?attr/default_icon_color"
+            android:translationX="25dp"
+            app:srcCompat="@drawable/ic_arrow_back" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -49,7 +50,7 @@
                 android:letterSpacing="@dimen/text_button_letter_spacing"
                 android:maxLines="2"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/dialog_header_text_size"
+                android:textSize="8sp"
                 app:typeface="@string/font_roboto_medium"
                 tools:text="@string/routing_settings_2" />
 
@@ -58,7 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:textSize="8sp"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
                 android:textColor="@null"
                 tools:text="Some description" />
@@ -67,24 +69,25 @@
 
         <FrameLayout
             android:id="@+id/action_button"
-            android:layout_gravity="center"
             android:layout_width="@dimen/acceptable_touch_radius"
-            android:layout_height="@dimen/acceptable_touch_radius">
+            android:layout_height="@dimen/acceptable_touch_radius"
+            android:layout_gravity="center"
+            android:translationX="-25dp">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/action_button_icon"
                 style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
-                android:layout_marginStart="@dimen/content_padding"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
+                android:clickable="false"
                 android:contentDescription="@string/access_shared_string_navigate_up"
                 android:duplicateParentState="true"
-                android:clickable="false"
                 android:focusable="false"
-                android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 tools:src="@drawable/ic_action_info_dark" />
 

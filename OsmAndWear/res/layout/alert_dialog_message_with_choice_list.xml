@@ -22,10 +22,14 @@
 			<net.osmand.plus.widgets.TextViewEx
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingTop="50dp"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingBottom="@dimen/content_padding_half"
 				android:paddingHorizontal="@dimen/content_padding_small"
 				android:text="@string/map_rendering_engine"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size_large"
+				android:textSize="16sp"
 				app:typeface="@string/font_roboto_medium" />
 
 			<TextView
@@ -36,7 +40,7 @@
 				android:paddingBottom="@dimen/content_padding"
 				android:text="@string/map_rendering_engine_descr"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_list_text_size" />
+				android:textSize="11sp" />
 
 		</LinearLayout>
 

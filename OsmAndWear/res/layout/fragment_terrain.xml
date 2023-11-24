@@ -3,6 +3,9 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="match_parent"
 	android:descendantFocusability="blocksDescendants"
 	android:orientation="vertical">
@@ -37,6 +40,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="@dimen/content_padding"
+					android:translationX="25dp"
 					tools:src="@drawable/ic_action_hillshade_dark" />
 
 				<LinearLayout
@@ -71,7 +75,8 @@
 					android:id="@+id/switch_compat"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/content_padding" />
+					android:layout_margin="@dimen/content_padding"
+					android:translationX="-25dp" />
 
 			</LinearLayout>
 

@@ -42,6 +42,8 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="@string/shared_string_filters"
                         android:textColor="@color/card_and_list_background_light"
                         android:textSize="@dimen/default_list_text_size_large"/>
@@ -52,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@null"
+                        android:gravity="center"
                         tools:text="Filling station"
                         android:textColor="@color/card_and_list_background_light"
                         android:textSize="@dimen/default_desc_text_size"/>
@@ -65,7 +68,8 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:contentDescription="@string/shared_string_more_actions"
-                    app:srcCompat="@drawable/ic_overflow_menu_white"/>
+                    android:translationX="-30dp"
+                    app:srcCompat="@drawable/ic_overflow_menu_white" />
 
             </LinearLayout>
 

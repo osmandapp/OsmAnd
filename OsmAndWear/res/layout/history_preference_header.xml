@@ -39,6 +39,7 @@
 				android:maxLines="1"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
+				android:translationX="40dp"
 				osmand:lineHeight="@dimen/default_title_line_height"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="Some title" />
@@ -47,12 +48,13 @@
 				android:id="@+id/toggle_item"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_marginStart="@dimen/content_padding"
+				android:layout_gravity="center"
+				android:layout_marginStart="25dp"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:clickable="false"
 				android:focusable="false"
-				android:focusableInTouchMode="false" />
+				android:focusableInTouchMode="false"
+				android:translationX="-25dp" />
 
 		</LinearLayout>
 

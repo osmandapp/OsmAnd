@@ -71,10 +71,11 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_marginHorizontal="@dimen/content_padding_half"
-				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				android:translationX="20dp"
 				app:dialogButtonBottomMargin="@dimen/content_padding_half"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
 				app:dialogButtonType="secondary"
-				tools:dialogButtonTitle="@string/shared_string_control_stop"/>
+				tools:dialogButtonTitle="@string/shared_string_control_stop" />
 
 			<View
 				android:layout_width="0dp"

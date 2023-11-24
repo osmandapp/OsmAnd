@@ -2,5 +2,11 @@
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/action_button"
 	style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-	android:layout_width="@dimen/toolbar_height"
-	android:layout_height="@dimen/toolbar_height" />
+	android:layout_width="30dp"
+	android:layout_marginStart="40dp"
+	android:layout_marginLeft="0dp"
+	android:layout_marginTop="28dp"
+	android:layout_marginEnd="@dimen/content_padding"
+	android:layout_marginRight="0dp"
+	android:layout_marginBottom="12dp"
+	android:layout_height="30dp" />

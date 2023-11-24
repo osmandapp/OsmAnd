@@ -14,7 +14,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="start|center_vertical"
 		android:background="?attr/list_background_color"
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 		android:paddingHorizontal="@dimen/content_padding"
 		android:textColor="?android:textColorPrimary"

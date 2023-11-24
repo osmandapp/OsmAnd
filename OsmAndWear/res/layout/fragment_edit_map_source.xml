@@ -12,6 +12,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
+        android:scaleX="0.6"
+        android:scaleY="0.7"
         app:title="@string/edit_online_source"
         tools:background="?attr/actionModeBackground">
 
@@ -26,6 +28,7 @@
             android:layout_marginEnd="@dimen/list_item_button_padding"
             android:layout_marginRight="@dimen/list_item_button_padding"
             android:contentDescription="@string/back_to_map"
+            android:translationX="-25dp"
             app:srcCompat="@drawable/ic_action_help_online" />
 
     </androidx.appcompat.widget.Toolbar>

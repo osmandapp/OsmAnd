@@ -71,7 +71,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
-				android:gravity="center_vertical"
+				android:gravity="center"
 				android:maxLines="1"
 				android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 				android:text="@string/attach_to_the_roads"

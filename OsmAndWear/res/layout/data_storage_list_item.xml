@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto">
 
 	<LinearLayout
@@ -67,11 +70,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding"
-				android:paddingStart="@dimen/content_padding"
-				android:paddingEnd="@dimen/content_padding"
 				android:background="@null"
 				android:clickable="true"
-				android:focusable="true" />
+				android:focusable="true"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingEnd="@dimen/content_padding"
+				android:translationX="-20dp" />
 
 		</LinearLayout>
 
@@ -85,9 +89,10 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:translationY="-25dp"
 				android:visibility="invisible"
-				osmand:srcCompat="@drawable/mm_storage_tank"
-				android:layout_marginHorizontal="@dimen/content_padding" />
+				osmand:srcCompat="@drawable/mm_storage_tank" />
 
 			<LinearLayout
 				android:orientation="vertical"

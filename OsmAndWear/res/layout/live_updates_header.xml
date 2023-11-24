@@ -53,7 +53,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/osm_live_header"
             android:textColor="@color/card_and_list_background_light"
-            android:textSize="@dimen/default_desc_text_size"
+            android:textSize="11sp"
             app:typeface="@string/font_roboto_regular"/>
 
         <LinearLayout

@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     tools:context="net.osmand.plus.liveupdates.ReportsFragment">
 
     <LinearLayout
@@ -32,27 +35,29 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
+                    android:layout_marginStart="30dp"
                     osmand:srcCompat="@drawable/ic_action_data"/>
 
                 <Spinner
                     android:id="@+id/monthReportsSpinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="-8dp"
-                    android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:clickable="false"
-	                android:layout_marginStart="-8dp"
+	                android:layout_marginStart="0dp"
 	                android:layout_marginEnd="16dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/monthDropDownIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
-	                android:layout_marginEnd="16dp" />
+                    android:translationX="-25dp"
+                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
             </LinearLayout>
 

@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -9,7 +12,10 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
-		android:gravity="center_vertical|start"
+		android:gravity="center"
+		android:layout_marginStart="40dp"
+		android:layout_marginEnd="40dp"
+		android:textSize="11sp"
 		android:minHeight="@dimen/bottom_sheet_title_height"
 		android:paddingHorizontal="@dimen/content_padding"
 		android:paddingVertical="@dimen/content_padding_small"
@@ -26,6 +32,7 @@
 		android:ellipsize="end"
 		android:gravity="center_vertical|start"
 		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+		android:textSize="12sp"
 		android:minHeight="@dimen/bottom_sheet_title_height"
 		android:paddingHorizontal="@dimen/content_padding"
 		android:paddingVertical="@dimen/content_padding_small"
@@ -44,7 +51,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
-		android:gravity="center_vertical|start"
+		android:gravity="center"
 		android:minHeight="@dimen/bottom_sheet_title_height"
 		android:paddingHorizontal="@dimen/content_padding"
 		android:paddingVertical="@dimen/content_padding_small"

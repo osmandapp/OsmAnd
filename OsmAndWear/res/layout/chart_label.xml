@@ -5,13 +5,16 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:background="?attr/chart_label_background"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center">
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:paddingStart="@dimen/list_item_button_padding"
+		android:paddingStart="20dp"
 		android:paddingTop="@dimen/dash_margin"
 		android:paddingEnd="@dimen/list_item_button_padding"
 		android:paddingBottom="@dimen/dash_margin"

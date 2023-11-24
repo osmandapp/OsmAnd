@@ -27,6 +27,7 @@
 			android:layout_height="@dimen/big_icon_size"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginBottom="@dimen/content_padding"
+			android:translationY="25dp"
 			app:srcCompat="@drawable/ic_action_history"
 			app:tint="?attr/default_icon_color" />
 

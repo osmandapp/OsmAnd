@@ -6,6 +6,9 @@
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding">
 
@@ -30,6 +33,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
+			android:gravity="right"
 			android:lineHeight="@dimen/default_title_line_height"
 			android:lineSpacingMultiplier="@dimen/text_button_letter_spacing"
 			android:text="@string/shared_string_progress"
@@ -42,10 +46,11 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:gravity="end"
+			android:gravity="start"
 			android:lineSpacingMultiplier="@dimen/text_button_letter_spacing"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="12dp"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="25%" />
 

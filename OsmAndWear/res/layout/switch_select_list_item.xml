@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             tools:text="Avoid selected roads"
-            android:textSize="@dimen/default_list_text_size"/>
+            android:textSize="10sp"/>
 
         <TextView
             android:id="@+id/description_text"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             tools:text="Select roads you want to avoid during navigation"
-            android:textSize="@dimen/default_desc_text_size"/>
+            android:textSize="10sp"/>
 
     </LinearLayout>
 

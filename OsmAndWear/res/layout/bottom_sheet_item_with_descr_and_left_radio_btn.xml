@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/bottom_sheet_large_list_item_height"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -23,7 +26,8 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:saveEnabled="false" />
+			android:saveEnabled="false"
+			android:translationX="20dp" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -59,6 +63,7 @@
 			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:translationX="-25dp"
 			tools:src="@drawable/ic_action_coordinates_latitude"
 			tools:tint="?attr/default_icon_color" />
 

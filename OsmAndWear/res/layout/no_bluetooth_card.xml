@@ -16,6 +16,7 @@
 		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="22dp"
 			android:layout_height="22dp"
+			android:layout_marginStart="25dp"
 			android:src="@drawable/ic_action_bluetooth_disabled"
 			android:tint="?attr/default_icon_color" />
 

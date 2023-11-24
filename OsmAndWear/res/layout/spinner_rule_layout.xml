@@ -3,6 +3,9 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
               android:orientation="vertical">
 
     <View
@@ -27,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
+            android:textSize="12sp"
+            android:gravity="center"
             android:textStyle="bold"
             tools:text="Hiking symbols overlay"/>
 

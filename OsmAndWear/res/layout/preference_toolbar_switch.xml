@@ -5,6 +5,9 @@
 	android:id="@+id/toolbar_switch_container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color">
 
 	<LinearLayout
@@ -39,11 +42,12 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:saveEnabled="false"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding" />
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:saveEnabled="false"
+			android:translationX="-15dp" />
 
 	</LinearLayout>
 

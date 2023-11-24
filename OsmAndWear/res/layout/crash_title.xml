@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="horizontal">
 
 	<LinearLayout
@@ -20,6 +23,7 @@
 			android:layout_height="wrap_content"
 			android:paddingBottom="@dimen/content_padding_small"
 			android:text="@string/shared_string_crash"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_medium" />
@@ -29,7 +33,7 @@
 			android:layout_height="wrap_content"
 			android:text="@string/last_launch_crashed"
 			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/default_desc_text_size" />
+			android:textSize="12sp" />
 
 	</LinearLayout>
 

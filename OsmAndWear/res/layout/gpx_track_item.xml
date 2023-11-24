@@ -4,6 +4,9 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
               android:background="?attr/selectableItemBackground"
               android:orientation="vertical">
 
@@ -44,10 +47,11 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            osmand:srcCompat="@drawable/ic_action_polygom_dark"
+            android:layout_marginEnd="@dimen/list_content_padding"
             android:layout_marginRight="@dimen/list_content_padding"
+            android:translationX="20dp"
             android:visibility="visible"
-	        android:layout_marginEnd="@dimen/list_content_padding" />
+            osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
 
         <LinearLayout

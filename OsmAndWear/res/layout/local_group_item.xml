@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="20dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -26,6 +29,7 @@
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/bottom_sheet_icon_margin"
 				tools:srcCompat="@drawable/ic_map"
+				android:layout_marginStart="25dp"
 				tools:tint="?attr/default_icon_color" />
 
 			<LinearLayout
@@ -49,6 +53,8 @@
 						android:layout_marginEnd="@dimen/content_padding"
 						android:layout_weight="1"
 						android:gravity="center_vertical"
+						android:layout_marginBottom="5dp"
+						android:textSize="12sp"
 						android:textColor="?android:textColorPrimary"
 						tools:text="@string/shared_string_resources" />
 
@@ -58,6 +64,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
 						android:gravity="center_vertical"
+						android:layout_marginEnd="10dp"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_list_text_size"
 						tools:text="15 GB" />

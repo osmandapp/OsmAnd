@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="0dp"
     android:background="?attr/bg_color"
     android:minHeight="@dimen/setting_profile_item_height"
     tools:layout_height="@dimen/setting_profile_item_height">
@@ -21,7 +24,8 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/content_padding"
-            tools:src="@drawable/ic_action_info_dark"/>
+            android:translationX="15dp"
+            tools:src="@drawable/ic_action_info_dark" />
 
         <LinearLayout
             android:id="@+id/text_wrapper"
@@ -38,6 +42,8 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8sp"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 tools:text="Some title text"/>
 
@@ -48,7 +54,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_desc_text_size"
+                android:textSize="6sp"
                 tools:text="Some very long subtitle text, that won't fit into one line"/>
 
         </LinearLayout>
@@ -69,7 +75,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/content_padding"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:translationX="-15dp" />
 
     </LinearLayout>
 

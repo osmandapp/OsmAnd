@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:background="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -25,7 +28,7 @@
             android:paddingLeft="@dimen/content_padding_small"
             android:paddingRight="@dimen/content_padding_small"
             android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:minHeight="@dimen/default_title_line_height"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"

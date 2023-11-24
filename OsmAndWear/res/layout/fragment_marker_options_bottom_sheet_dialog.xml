@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:background="@color/status_bar_transparent_light">
 
     <LinearLayout
@@ -29,7 +32,7 @@
                 <net.osmand.plus.widgets.TextViewEx
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bottom_sheet_title_height"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:paddingLeft="@dimen/content_padding"
                     android:paddingRight="@dimen/content_padding"
                     android:text="@string/shared_string_options"

@@ -5,6 +5,9 @@
 	android:id="@+id/street_name_widget"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:background="@drawable/btn_round"
 	android:minHeight="@dimen/map_address_height">
 

@@ -2,8 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/context_img_card_width"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/context_img_card_height"
+
     android:orientation="vertical">
 
     <FrameLayout
@@ -35,12 +36,13 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:translationX="30dp"
             android:visibility="gone"
             tools:src="@drawable/ic_action_photo_dark"
-            tools:visibility="visible"
-	        android:layout_marginStart="10dp" />
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/watermark"

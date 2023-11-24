@@ -51,7 +51,7 @@
 				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 				android:text="@string/distance_by_tap_use_description"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size" />
+				android:textSize="12sp" />
 
 			<View
 				android:layout_width="match_parent"

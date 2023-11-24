@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:gravity="center_vertical">
 
@@ -27,6 +30,8 @@
 					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_weight="1"
+					android:gravity="center"
+					android:textSize="12sp"
 					android:ellipsize="end"
 					android:textColor="?android:textColorPrimary"
 					tools:text="@string/key_event_action_move_to_my_location" />
@@ -41,6 +46,7 @@
 					android:ellipsize="end"
 					android:textColor="?attr/active_color_basic"
 					android:textStyle="bold"
+					android:translationX="-25dp"
 					tools:text="C" />
 
 			</LinearLayout>

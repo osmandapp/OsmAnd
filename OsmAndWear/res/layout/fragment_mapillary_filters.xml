@@ -30,10 +30,11 @@
                 android:id="@+id/toggle_row_icon"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding"
                 android:layout_marginBottom="@dimen/content_padding"
-                android:layout_gravity="center_vertical"
+                android:translationX="15dp"
                 tools:src="@drawable/ic_action_info_dark" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -156,6 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
+                    android:gravity="center"
                     android:text="@string/search_poi_filter"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_sub_text_size"
@@ -164,11 +166,9 @@
                 <net.osmand.plus.widgets.TextViewEx
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="4dp"
                     android:text="@string/mapillary_menu_filter_description_new"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size" />
+                    android:textSize="8sp" />
             </LinearLayout>
 
             <View

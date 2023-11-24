@@ -4,6 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="@dimen/favorites_select_group_button_width"
 	android:layout_height="@dimen/favorites_select_group_button_height"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:layout_marginLeft="@dimen/content_padding_half"
 	android:layout_marginStart="@dimen/content_padding_half">
 

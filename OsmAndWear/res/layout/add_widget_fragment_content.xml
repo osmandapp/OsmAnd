@@ -3,7 +3,8 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="match_parent"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -11,10 +12,13 @@
 		style="@style/TitleStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginTop="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginStart="40dp"
+		android:layout_marginTop="20dp"
+		android:layout_marginEnd="40dp"
 		android:textColor="?android:textColorPrimary"
+		android:gravity="center"
+		android:layout_gravity="center"
+		android:textSize="10sp"
 		tools:text="This is description of widget or widget group, that can be very long and take many lines" />
 
 	<LinearLayout
@@ -22,11 +26,12 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginTop="0dp"
 		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="0dp"
 		android:orientation="vertical"
-		tools:layout_height="@dimen/content_padding"
-		tools:background="?attr/divider_color_basic" />
+		tools:background="?attr/divider_color_basic"
+		tools:layout_height="@dimen/content_padding" />
 
 	<LinearLayout
 		android:id="@+id/secondary_info_container"
@@ -45,17 +50,20 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:layout_marginTop="@dimen/content_padding_small">
+			android:layout_marginStart="0dp"
+			android:layout_marginTop="0dp"
+			android:layout_marginEnd="0dp"
+			android:orientation="horizontal">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/secondary_description"
 				style="@style/DescStyle"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="40dp"
 				android:layout_weight="1"
-				android:layout_marginStart="@dimen/content_padding"
 				android:textColor="?android:textColorSecondary"
+				android:textSize="11sp"
 				tools:text="This is additional (and optional) multiline description of widget" />
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -65,8 +73,8 @@
 				android:layout_marginStart="@dimen/dialog_button_height"
 				android:layout_marginTop="@dimen/favorites_icon_padding"
 				android:layout_marginEnd="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_help"
-				android:tint="?android:textColorSecondary" />
+				android:tint="?android:textColorSecondary"
+				osmand:srcCompat="@drawable/ic_action_help" />
 
 		</LinearLayout>
 

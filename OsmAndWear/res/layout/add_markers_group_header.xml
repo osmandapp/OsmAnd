@@ -2,6 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
+
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="0dp"
+
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -10,7 +17,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_sheet_title_height"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:paddingEnd="@dimen/content_padding"
         android:paddingLeft="@dimen/content_padding"
         android:paddingRight="@dimen/content_padding"
@@ -27,8 +34,9 @@
         android:paddingLeft="@dimen/content_padding"
         android:paddingRight="@dimen/content_padding"
         android:paddingStart="@dimen/content_padding"
+        android:gravity="center"
         tools:text="@string/add_track_to_markers_descr"
         android:textColor="?android:textColorSecondary"
-        android:textSize="@dimen/default_desc_text_size"/>
+        android:textSize="12sp"/>
 
 </LinearLayout>

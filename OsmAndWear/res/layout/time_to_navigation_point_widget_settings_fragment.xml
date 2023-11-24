@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -10,6 +13,10 @@
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding_small"
+		android:textSize="11sp"
+		android:layout_marginStart="40dp"
+		android:layout_marginEnd="40dp"
+		android:gravity="center"
 		android:text="@string/time_to_navigation_point_widget_settings_desc"
 		android:textColor="?android:textColorSecondary" />
 

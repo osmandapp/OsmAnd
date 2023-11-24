@@ -31,6 +31,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
+				android:translationX="25dp"
 				tools:srcCompat="@drawable/ic_action_folder"
 				tools:tint="?attr/default_icon_color" />
 
@@ -86,7 +87,8 @@
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/list_item_button_padding"
-				android:layout_marginRight="@dimen/list_item_button_padding">
+				android:layout_marginRight="@dimen/list_item_button_padding"
+				android:translationX="-40dp">
 
 				<androidx.appcompat.widget.AppCompatCheckBox
 					android:id="@+id/compound_button"

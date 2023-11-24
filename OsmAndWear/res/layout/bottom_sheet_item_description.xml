@@ -14,4 +14,8 @@
 	android:textSize="@dimen/default_desc_text_size"
 	tools:text="Some long description"
 	android:paddingEnd="@dimen/content_padding"
+	android:layout_marginStart="40dp"
+	android:gravity="center"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="40dp"
 	android:paddingStart="@dimen/content_padding" />

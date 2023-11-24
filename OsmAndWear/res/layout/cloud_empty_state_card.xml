@@ -22,6 +22,7 @@
 			android:layout_height="@dimen/icon_size_double"
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:layout_marginBottom="@dimen/content_padding"
+			android:translationY="27dp"
 			tools:src="@drawable/ic_action_cloud_done"
 			tools:tint="?attr/default_icon_color" />
 
@@ -43,6 +44,7 @@
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/content_padding"
 			android:gravity="center"
+			android:textSize="12sp"
 			android:text="@string/cloud_all_changes_uploaded_descr"
 			android:textColor="?android:attr/textColorSecondary" />
 
@@ -50,8 +52,9 @@
 			android:id="@+id/button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			app:dialogButtonTitle="@string/check_for_updates"
-			app:dialogButtonBottomMargin="@dimen/content_padding_half" />
+			android:translationY="-10dp"
+			app:dialogButtonBottomMargin="@dimen/content_padding_half"
+			app:dialogButtonTitle="@string/check_for_updates" />
 
 	</LinearLayout>
 

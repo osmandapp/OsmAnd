@@ -17,7 +17,7 @@
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="45dp">
 
 			<LinearLayout
 				android:id="@+id/toolbar_container"
@@ -34,6 +34,7 @@
 					android:layout_gravity="center"
 					android:contentDescription="@string/shared_string_back"
 					android:tint="?attr/primary_icon_color"
+					android:translationX="35dp"
 					osmand:srcCompat="@drawable/ic_action_close" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -54,8 +55,8 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/search_button"
-					osmand:srcCompat="@drawable/ic_action_search_dark"
 					android:tint="?attr/default_icon_color"
+					osmand:srcCompat="@drawable/ic_action_search_dark"
 					tools:tint="?attr/default_icon_color" />
 
 				<ImageButton
@@ -65,6 +66,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/switch_folder"
+					android:translationX="-10dp"
 					osmand:srcCompat="@drawable/ic_action_list_folders"
 					tools:tint="?attr/default_icon_color" />
 

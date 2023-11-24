@@ -30,7 +30,8 @@
 			android:layout_margin="@dimen/content_padding"
 			android:background="?attr/selectableItemBackgroundBorderless"
 			android:contentDescription="@string/access_shared_string_navigate_up"
-			tools:src="@drawable/ic_arrow_back"/>
+			android:translationX="40dp"
+			tools:src="@drawable/ic_arrow_back" />
 
 	</FrameLayout>
 

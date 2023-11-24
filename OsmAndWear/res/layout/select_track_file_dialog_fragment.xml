@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:clickable="true"
 	android:focusable="true">
@@ -17,6 +20,7 @@
 		app:title="@string/select_track_file"
 		app:titleTextAppearance="@style/ToolbarTitle"
 		app:contentInsetStart="@dimen/toolbar_inset_start_with_navigation"
+		android:layout_marginStart="25dp"
 		tools:navigationIcon="@drawable/ic_action_close" />
 
 	<FrameLayout

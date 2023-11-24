@@ -7,14 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/card_and_list_background_dark"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical"
     android:theme="@style/FreeVersionBanner">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/list_header_padding"
-        android:paddingTop="@dimen/list_header_padding">
+        android:layout_height="50dp">
 
         <LinearLayout
             android:id="@+id/bannerTopLayout"
@@ -36,12 +37,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="8sp"
                     android:text="@string/free_version_title"/>
 
                 <TextView
                     android:id="@+id/downloadsLeftTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="8sp"
                     tools:text="@string/downloads_left_template"/>
             </LinearLayout>
 
@@ -49,13 +53,13 @@
                 android:id="@+id/freeVersionDescriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:gravity="center"
+                android:textSize="8sp"
                 tools:text="@string/free_version_message"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:layout_margin="4dp">
+                android:layout_height="8dp">
 
                 <ProgressBar
                     android:id="@+id/downloadsLeftProgressBar"

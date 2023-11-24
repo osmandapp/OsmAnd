@@ -5,6 +5,9 @@
 	android:orientation="vertical"
 	android:background="?attr/card_and_list_background_basic"
 	android:clickable="true"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:focusable="true"
 	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto">
@@ -21,10 +24,11 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginStart="@dimen/card_padding"
 			android:layout_marginLeft="@dimen/card_padding"
+			android:background="@null"
 			android:padding="@dimen/context_menu_padding_margin_small"
 			android:paddingStart="@dimen/context_menu_padding_margin_small"
 			android:paddingEnd="@dimen/context_menu_padding_margin_small"
-			android:background="@null">
+			android:translationX="25dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/favorites_icon_size_small"
@@ -43,7 +47,7 @@
 			android:layout_gravity="center_vertical"
 			android:text="@string/context_menu_edit_descr"
 			android:textColor="?attr/searchbar_text"
-			android:textSize="@dimen/dialog_header_text_size"
+			android:textSize="12sp"
 			osmand:typeface="@string/font_roboto_medium" />
 
 		<FrameLayout
@@ -56,16 +60,16 @@
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/btn_save"
-				android:layout_width="wrap_content"
+				android:layout_width="79dp"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:gravity="center_vertical"
 				android:duplicateParentState="true"
+				android:gravity="center_vertical"
 				android:paddingStart="@dimen/content_padding"
 				android:paddingLeft="@dimen/content_padding"
 				android:paddingTop="@dimen/content_padding_half"
-				android:paddingRight="@dimen/content_padding"
 				android:paddingEnd="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding"
 				android:paddingBottom="@dimen/content_padding_half"
 				android:text="@string/shared_string_save"
 				android:textColor="?attr/active_color_basic"
@@ -97,7 +101,7 @@
 			android:layout_height="wrap_content"
 			android:background="?attr/card_and_list_background_basic"
 			android:textColor="?android:attr/textColorPrimary"
-			android:textSize="@dimen/default_list_text_size"
+			android:textSize="12sp"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="Amsterdam is the Netherlands' capital and financial, cultural and creative centre with more than 850,000 inhabitants. Amsterdam is known for the canals that criss-cross the city, its impressive architecture and more than 1,500 bridges. The city has a heritage dating back to the Dutch Golden Age in the 17th century as well as a diverse art scene and a bustling nightlife." />
 

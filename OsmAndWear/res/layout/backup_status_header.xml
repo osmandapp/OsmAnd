@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/list_background_color"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,6 +22,7 @@
             android:id="@+id/icon"
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"
+            android:layout_marginStart="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/content_padding"
             tools:srcCompat="@drawable/ic_action_cloud_alert"
@@ -77,20 +81,12 @@
             android:layout_width="@dimen/standard_icon_size"
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center"
+            android:layout_marginEnd="40dp"
             android:layout_marginHorizontal="@dimen/content_padding"
             android:tint="?attr/default_icon_color"
             tools:srcCompat="@drawable/ic_action_arrow_down" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/card_bottom_divider" />
-
-    </LinearLayout>
 
 </LinearLayout>

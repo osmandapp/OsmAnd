@@ -38,6 +38,7 @@
 					style="@style/TitleStyle.Medium"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:gravity="center"
 					android:layout_marginHorizontal="@dimen/content_padding"
 					android:layout_marginVertical="@dimen/content_padding_small"
 					android:textColor="?android:textColorPrimary"

@@ -5,18 +5,22 @@
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/bottom_sheet_list_item_height"
 	android:background="@android:drawable/list_selector_background"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:orientation="horizontal">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/button_icon"
-		android:layout_width="@dimen/standard_icon_size"
-		android:layout_height="@dimen/standard_icon_size"
+		android:layout_width="20dp"
+		android:layout_height="20dp"
 		android:layout_gravity="center"
+		android:layout_marginStart="40dp"
 		android:tint="?attr/active_color_basic"
-		tools:visibility="visible"
+		android:translationX="10dp"
 		osmand:srcCompat="@drawable/ic_action_plus"
-		android:layout_marginHorizontal="@dimen/content_padding" />
+		tools:visibility="visible" />
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -30,7 +34,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:singleLine="true"
-			android:textSize="@dimen/default_list_text_size"
+			android:textSize="14sp"
 			android:ellipsize="end"
 			android:gravity="center_vertical"
 			android:layout_gravity="center_vertical"

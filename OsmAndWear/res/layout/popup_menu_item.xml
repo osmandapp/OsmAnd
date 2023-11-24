@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="horizontal">
 
 	<ImageView
@@ -13,6 +16,7 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
+		android:translationX="40dp"
 		tools:src="@drawable/ic_action_info_dark" />
 
 	<LinearLayout
@@ -36,12 +40,14 @@
 				android:id="@+id/title"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="center"
+				android:gravity="center"
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/content_padding_small"
 				android:layout_weight="1"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
+				android:translationX="25dp"
 				tools:text="Title" />
 
 			<RadioButton
@@ -52,7 +58,8 @@
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:clickable="false"
-				android:focusable="false" />
+				android:focusable="false"
+				android:translationX="-25dp" />
 
 		</LinearLayout>
 

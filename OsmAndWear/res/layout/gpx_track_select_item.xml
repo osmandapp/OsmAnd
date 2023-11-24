@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/favorites_list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/selectableItemBackground"
 	android:orientation="horizontal">
 
@@ -12,14 +15,15 @@
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/list_content_padding"
 		android:layout_marginLeft="@dimen/list_content_padding"
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
-		android:layout_gravity="center_vertical"
-		osmand:srcCompat="@drawable/ic_action_polygom_dark"
+		android:contentDescription="@string/shared_string_icon"
+		android:translationX="25dp"
 		android:visibility="visible"
-		android:contentDescription="@string/shared_string_icon" />
+		osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
 	<LinearLayout
 		android:layout_width="0dp"

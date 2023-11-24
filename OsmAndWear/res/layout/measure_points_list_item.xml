@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_list_item_height"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
@@ -15,17 +18,18 @@
             android:id="@+id/measure_point_reorder_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:paddingBottom="@dimen/measurement_tool_content_padding_medium"
-            android:paddingEnd="@dimen/content_padding"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding"
             android:paddingStart="@dimen/content_padding"
+            android:paddingLeft="@dimen/content_padding"
             android:paddingTop="@dimen/measurement_tool_content_padding_medium"
+            android:paddingEnd="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding"
+            android:paddingBottom="@dimen/measurement_tool_content_padding_medium"
             android:tint="?attr/secondary_icon_color"
-            tools:src="@drawable/ic_action_item_move"/>
+            android:translationX="25dp"
+            tools:src="@drawable/ic_action_item_move" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/measure_point_icon"
@@ -36,7 +40,8 @@
             android:layout_marginRight="@dimen/bottom_sheet_content_margin"
             android:layout_toEndOf="@id/measure_point_reorder_icon"
             android:layout_toRightOf="@id/measure_point_reorder_icon"
-            tools:src="@drawable/ic_action_measure_point"/>
+            android:translationX="15dp"
+            tools:src="@drawable/ic_action_measure_point" />
 
         <ImageButton
             android:id="@+id/measure_point_remove_image_button"
@@ -47,13 +52,14 @@
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackground"
             android:focusableInTouchMode="true"
-            android:paddingBottom="@dimen/measurement_tool_content_padding_medium"
-            android:paddingEnd="@dimen/content_padding"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding"
             android:paddingStart="@dimen/content_padding"
+            android:paddingLeft="@dimen/content_padding"
             android:paddingTop="@dimen/measurement_tool_content_padding_medium"
-            tools:src="@drawable/ic_action_remove_dark"/>
+            android:paddingEnd="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding"
+            android:paddingBottom="@dimen/measurement_tool_content_padding_medium"
+            android:translationX="-25dp"
+            tools:src="@drawable/ic_action_remove_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:descendantFocusability="blocksDescendants"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<View
@@ -38,7 +41,7 @@
 				android:layout_weight="2"
 				android:background="?attr/selectableItemBackground"
 				android:ellipsize="end"
-				android:gravity="center_vertical"
+				android:gravity="right|bottom"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:maxLines="1"
 				android:paddingEnd="@dimen/list_content_padding"
@@ -46,7 +49,7 @@
 				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 				android:paddingStart="@dimen/list_content_padding"
 				android:textColor="?attr/wikivoyage_active_color"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="8sp"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:ignore="UnusedAttribute"
 				tools:text="Van Gogh Museum" />
@@ -71,7 +74,7 @@
 				android:background="?attr/selectableItemBackground"
 				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
 				android:ellipsize="end"
-				android:gravity="center_vertical"
+				android:gravity="left|bottom"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:maxLines="1"
 				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
@@ -80,7 +83,7 @@
 				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
 				android:text="@string/search_categories"
 				android:textColor="?attr/wikivoyage_active_color"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="8sp"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:drawableRight="@drawable/ic_action_filter"
 				tools:ignore="UnusedAttribute"

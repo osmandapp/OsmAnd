@@ -8,6 +8,9 @@
     android:paddingTop="@dimen/content_padding_small_half"
     android:paddingBottom="@dimen/content_padding_small_half"
     android:paddingLeft="@dimen/content_padding_small"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="0dp"
     android:paddingRight="@dimen/content_padding_small">
     
     <androidx.appcompat.widget.AppCompatImageView

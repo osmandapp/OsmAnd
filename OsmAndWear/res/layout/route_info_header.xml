@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/card_and_list_background_basic"
 	android:orientation="vertical">
 
@@ -28,6 +31,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
+				android:translationX="25dp"
 				osmand:srcCompat="@drawable/ic_action_route_distance" />
 
 			<LinearLayout
@@ -66,7 +70,8 @@
 			android:layout_weight="1"
 			android:orientation="horizontal"
 			android:paddingStart="16dp"
-			android:paddingLeft="16dp">
+			android:paddingLeft="16dp"
+			android:translationX="-30dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/time_icon"

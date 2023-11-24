@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/setting_profile_item_height">
 
@@ -13,6 +16,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
+		android:translationX="30dp"
 		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<LinearLayout
@@ -47,6 +51,7 @@
 						android:layout_weight="1"
 						android:ellipsize="end"
 						android:maxLines="2"
+						android:gravity="center"
 						android:textColor="?android:textColorPrimary"
 						tools:text="Title" />
 
@@ -59,6 +64,7 @@
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
+						android:translationX="-50dp"
 						tools:text="off" />
 
 				</LinearLayout>
@@ -69,6 +75,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding"
+					android:gravity="center"
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textColor="?android:textColorSecondary"

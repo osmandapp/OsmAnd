@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
@@ -20,7 +23,8 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/list_destination"/>
+		android:translationX="20dp"
+		tools:src="@drawable/list_destination" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -54,11 +58,12 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
-		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
 		android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
 		android:background="@null"
 		android:clickable="false"
 		android:focusable="false"
-		android:focusableInTouchMode="false"/>
+		android:focusableInTouchMode="false"
+		android:translationX="-30dp" />
 
 </LinearLayout>

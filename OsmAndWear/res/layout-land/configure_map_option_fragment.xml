@@ -5,7 +5,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="horizontal">
+	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -34,8 +34,8 @@
 					android:minHeight="@dimen/toolbar_height">
 
 					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
+						android:layout_width="200dp"
+						android:layout_height="match_parent"
 						android:orientation="horizontal">
 
 						<ImageButton
@@ -45,6 +45,7 @@
 							android:layout_height="@dimen/toolbar_height"
 							android:layout_gravity="center_vertical"
 							android:contentDescription="@string/shared_string_back"
+							android:translationX="30dp"
 							tools:srcCompat="@drawable/ic_arrow_back"
 							tools:tint="?attr/default_icon_color" />
 
@@ -56,7 +57,8 @@
 							android:layout_weight="1"
 							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_header_text_size"
+							android:textSize="14sp"
+							android:gravity="center"
 							app:lineHeight="@dimen/default_title_line_height"
 							app:typeface="@string/font_roboto_medium"
 							tools:text="@string/shared_string_toolbar" />
@@ -68,6 +70,7 @@
 							android:layout_height="@dimen/toolbar_height"
 							android:layout_gravity="center_vertical"
 							android:contentDescription="@string/reset_to_default"
+							android:translationX="-15dp"
 							tools:srcCompat="@drawable/ic_action_reset"
 							tools:tint="?attr/default_icon_color" />
 
@@ -102,6 +105,8 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/content_padding"
+					android:layout_marginEnd="200dp"
+					android:layout_marginStart="40dp"
 					osmand:dialogButtonHeight="@dimen/dialog_button_height"
 					osmand:dialogButtonTitle="@string/shared_string_apply"
 					osmand:dialogButtonTopMargin="@dimen/content_padding_small" />

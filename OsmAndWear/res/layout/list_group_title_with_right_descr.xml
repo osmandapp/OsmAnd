@@ -36,6 +36,8 @@
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
+			android:textSize="12sp"
+			android:gravity="center"
 			tools:text="@string/available_maps" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -44,11 +46,13 @@
 			android:layout_height="match_parent"
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
+			android:gravity="start"
 			android:paddingStart="@dimen/subHeaderMarginLeft"
 			android:paddingLeft="@dimen/subHeaderMarginLeft"
 			android:paddingEnd="0dp"
 			android:paddingRight="0dp"
 			android:textSize="@dimen/default_desc_text_size"
+			android:translationX="-20dp"
 			tools:text="2/6"
 			tools:textColor="@color/text_color_secondary_dark" />
 

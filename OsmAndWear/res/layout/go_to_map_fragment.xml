@@ -4,13 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
+    android:layout_gravity="center"
     android:background="?attr/bottom_menu_view_bg"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:orientation="vertical">
 
@@ -29,12 +29,12 @@
                     android:layout_height="56dp"
                     android:scaleType="center"
                     tools:background="@color/color_warning"
-                    tools:src="@drawable/ic_map"/>
+                    tools:src="@drawable/ic_map" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="170dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -48,25 +48,25 @@
                         android:id="@+id/titleTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginTop="@dimen/content_padding"
+                        android:layout_marginStart="@dimen/content_padding_half"
                         android:layout_marginLeft="@dimen/content_padding_half"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:paddingEnd="8dp"
                         android:paddingRight="@dimen/content_padding_half"
                         android:text="@string/map_downloaded"
                         android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/dialog_header_text_size"
-	                    android:paddingEnd="8dp"
-	                    android:layout_marginStart="@dimen/content_padding_half" />
+                        android:textSize="@dimen/dialog_header_text_size" />
 
                     <ImageButton
                         android:id="@+id/closeImageButton"
-                        android:contentDescription="@string/shared_string_close"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:layout_gravity="center"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        tools:background="@color/color_warning"
-                        osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+                        android:contentDescription="@string/shared_string_close"
+                        osmand:srcCompat="@drawable/ic_action_remove_dark"
+                        tools:background="@color/color_warning" />
 
                 </LinearLayout>
 
@@ -75,29 +75,29 @@
                     android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding_half"
                     android:layout_marginLeft="@dimen/content_padding_half"
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:paddingEnd="@dimen/content_padding_half"
                     android:paddingRight="@dimen/content_padding_half"
                     android:text="@string/map_downloaded_descr"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_list_text_size"
-	                android:paddingEnd="@dimen/content_padding_half"
-	                android:layout_marginStart="@dimen/content_padding_half" />
+                    android:textSize="@dimen/default_list_text_size" />
 
                 <Button
                     android:id="@+id/actionButton"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:paddingStart="@dimen/content_padding_half"
                     android:paddingLeft="@dimen/content_padding_half"
+                    android:paddingEnd="@dimen/content_padding_half"
                     android:paddingRight="@dimen/content_padding_half"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:textColor="?attr/contextMenuButtonColor"
-                    tools:background="@color/color_warning"
                     android:text="@string/go_to_map"
-	                android:paddingEnd="@dimen/content_padding_half"
-	                android:paddingStart="@dimen/content_padding_half" />
+                    android:textColor="?attr/contextMenuButtonColor"
+                    tools:background="@color/color_warning" />
 
             </LinearLayout>
 

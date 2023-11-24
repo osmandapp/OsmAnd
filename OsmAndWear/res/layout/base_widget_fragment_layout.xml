@@ -21,7 +21,7 @@
 			style="@style/Widget.AppCompat.ActionButton"
 			android:layout_width="@dimen/dialog_content_margin"
 			android:layout_height="@dimen/dialog_content_margin"
-			android:layout_marginStart="@dimen/title_padding"
+			android:layout_marginStart="50dp"
 			android:src="@drawable/ic_action_close"
 			android:tint="?attr/primary_icon_color"
 			android:contentDescription="@string/shared_string_close"/>
@@ -36,7 +36,7 @@
 			style="@style/Widget.AppCompat.ActionButton"
 			android:layout_width="@dimen/dialog_content_margin"
 			android:layout_height="@dimen/dialog_content_margin"
-			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginEnd="50dp"
 			android:src="@drawable/ic_action_help_online"
 			android:tint="?default_icon_color" />
 
@@ -47,7 +47,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:orientation="horizontal"
-		android:minHeight="@dimen/setting_list_item_large_height"
+		android:minHeight="30dp"
 		android:gravity="center_vertical">
 
 		<LinearLayout
@@ -64,7 +64,7 @@
 				android:layout_height="wrap_content"
 				android:maxLines="1"
 				android:ellipsize="end"
-				android:textSize="@dimen/dialog_header_text_size"
+				android:textSize="12dp"
 				android:textColor="?android:textColorPrimary"
 				tools:text="Widget name" />
 
@@ -74,6 +74,7 @@
 				android:layout_height="wrap_content"
 				android:maxLines="1"
 				android:ellipsize="end"
+				android:textSize="9sp"
 				android:textColor="?android:textColorSecondary"
 				tools:text="Widget" />
 

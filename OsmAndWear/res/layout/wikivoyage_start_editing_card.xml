@@ -29,14 +29,11 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/list_content_padding"
-				android:layout_marginEnd="@dimen/list_content_padding"
-				android:layout_marginLeft="@dimen/list_content_padding"
-				android:layout_marginRight="@dimen/list_content_padding"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginTop="@dimen/wikivoyage_start_editing_card_text_image_padding"
 				android:layout_weight="1"
 				android:textColor="@color/text_color_tab_active_dark"
-				android:textSize="@dimen/default_list_text_size"
+				android:textSize="11sp"
 				tools:text="@string/start_editing_card_image_text" />
 
 			<androidx.appcompat.widget.AppCompatImageView

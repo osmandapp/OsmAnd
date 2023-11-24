@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:minHeight="@dimen/list_item_move_header_min_height"
 	android:orientation="vertical">
@@ -30,10 +33,11 @@
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
+			android:tint="?attr/secondary_icon_color"
+			android:translationX="15dp"
 			android:visibility="gone"
-			tools:visibility="visible"
 			osmand:srcCompat="@drawable/ic_action_item_move"
-			android:tint="?attr/secondary_icon_color" />
+			tools:visibility="visible" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -81,12 +85,13 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingTop="@dimen/bottom_sheet_icon_margin"
 			android:paddingEnd="@dimen/content_padding"
-			android:visibility="gone"
-			tools:visibility="visible"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
+			android:tint="?attr/secondary_icon_color"
+			android:translationX="-15dp"
+			android:visibility="gone"
 			osmand:srcCompat="@drawable/ic_action_item_move"
-			android:tint="?attr/secondary_icon_color" />
+			tools:visibility="visible" />
 
 	</LinearLayout>
 

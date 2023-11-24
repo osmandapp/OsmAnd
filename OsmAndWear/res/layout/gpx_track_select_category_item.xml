@@ -5,7 +5,8 @@
 	android:id="@+id/track_categories"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:paddingVertical="@dimen/content_padding_half"
+	android:paddingVertical="0dp"
 	android:paddingHorizontal="@dimen/content_padding"
 	tools:itemCount="3"
 	tools:listitem="@layout/custom_chip_view" />
+

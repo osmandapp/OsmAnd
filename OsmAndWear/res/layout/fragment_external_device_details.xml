@@ -29,6 +29,7 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
 				android:tint="?attr/default_icon_color"
+				android:translationX="25dp"
 				osmand:srcCompat="@drawable/ic_arrow_back" />
 
 			<LinearLayout

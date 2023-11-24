@@ -8,10 +8,12 @@
 
 	<ImageButton
 		android:id="@+id/map_3d_button"
-		android:layout_width="@dimen/map_button_size"
-		android:layout_height="@dimen/map_button_size"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
 		android:layout_gravity="bottom|end"
 		android:background="@drawable/btn_circle"
+		android:translationX="-60dp"
+		android:translationY="-20dp"
 		tools:contentDescription="@string/map_3d_mode_action" />
 
 </FrameLayout>

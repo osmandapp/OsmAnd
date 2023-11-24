@@ -5,11 +5,12 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:orientation="vertical"
-	android:layout_marginStart="@dimen/content_padding"
 	android:layout_marginLeft="@dimen/content_padding"
-	android:layout_marginEnd="@dimen/content_padding"
 	android:layout_marginRight="@dimen/content_padding">
 
 	<LinearLayout
@@ -20,7 +21,7 @@
 			android:id="@+id/title"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginStart="25dp"
 			android:layout_marginLeft="@dimen/content_padding_small"
 			android:layout_marginEnd="@dimen/content_padding_small"
 			android:layout_marginRight="@dimen/content_padding_small"
@@ -28,6 +29,7 @@
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:maxLines="1"
+			android:gravity="center"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			app:typeface="@string/font_roboto_regular"
 			tools:text="Some Title" />
@@ -36,14 +38,15 @@
 			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="end"
 			android:layout_marginEnd="@dimen/content_padding_small"
 			android:layout_marginRight="@dimen/content_padding_small"
-			android:layout_gravity="end"
 			android:background="@null"
-			android:saveEnabled="false"
 			android:clickable="false"
 			android:focusable="false"
-			android:focusableInTouchMode="false" />
+			android:focusableInTouchMode="false"
+			android:saveEnabled="false"
+			android:translationX="-25dp" />
 	</LinearLayout>
 
 	<net.osmand.plus.widgets.TextViewEx

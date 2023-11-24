@@ -18,8 +18,10 @@
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="20dp"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
+		android:translationY="20dp"
 		osmand:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
 
 	<LinearLayout

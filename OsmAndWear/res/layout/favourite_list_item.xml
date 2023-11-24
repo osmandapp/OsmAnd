@@ -7,6 +7,9 @@
     android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="@dimen/list_item_height"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding"
@@ -20,6 +23,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/list_content_padding"
         android:layout_marginRight="@dimen/list_content_padding"
+        android:translationX="30dp"
+        android:translationY="-2dp"
         osmand:srcCompat="@drawable/ic_action_favorite" />
 
     <LinearLayout

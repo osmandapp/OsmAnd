@@ -4,6 +4,7 @@
 	android:id="@+id/profile_button"
 	android:layout_width="@dimen/route_info_toolbar_button_size"
 	android:layout_height="@dimen/route_info_toolbar_button_size"
+	android:translationX="-25dp"
 	tools:background="?attr/bg_circle"
 	tools:backgroundTint="@color/active_buttons_and_links_trans_light">
 
@@ -11,8 +12,8 @@
 		android:id="@+id/profile_icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
-		android:contentDescription="@string/app_profile_type"
 		android:layout_gravity="center"
+		android:contentDescription="@string/app_profile_type"
 		tools:src="@drawable/ic_action_car_dark"
 		tools:tint="@color/active_color_primary_light" />
 

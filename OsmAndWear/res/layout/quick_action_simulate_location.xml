@@ -22,6 +22,7 @@
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:text="@string/track_file"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"

@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
@@ -30,15 +33,16 @@
             android:background="?attr/selectableItemBackground">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:textSize="@dimen/default_list_text_size"
-                tools:text="3"
-                android:gravity="center"
                 android:id="@+id/map_marker_number_text_view"
                 android:layout_width="@dimen/map_markers_recycler_view_item_height"
                 android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textSize="@dimen/default_list_text_size"
+                android:translationX="20dp"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:text="3"
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
@@ -63,7 +67,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
                 android:layout_marginRight="@dimen/bottom_sheet_content_margin"
-                tools:src="@drawable/ic_action_flag"/>
+                android:translationX="-20dp"
+                tools:src="@drawable/ic_action_flag" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -159,8 +164,9 @@
                 android:layout_height="@dimen/map_markers_recycler_view_item_height"
                 android:contentDescription="@string/map_marker_options"
                 android:focusableInTouchMode="true"
+                android:translationX="-20dp"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
-                tools:src="@drawable/ic_action_marker_passed"/>
+                tools:src="@drawable/ic_action_marker_passed" />
 
             <FrameLayout
                 android:id="@+id/check_box_container"

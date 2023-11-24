@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/dashboard_land_width"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/main_view"
-        android:layout_width="@dimen/dashboard_land_width"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/left_menu_view_bg"
         android:orientation="vertical">
@@ -64,7 +64,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textColor="?android:textColorSecondary"
-                            android:textSize="@dimen/default_list_text_size"
+                            android:textSize="10sp"
                             tools:text="~ 45 min."/>
                     </LinearLayout>
 
@@ -86,16 +86,16 @@
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackground"
                     android:ellipsize="end"
-                    android:gravity="center_vertical"
+                    android:gravity="start|bottom"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/list_content_padding"
                     android:paddingRight="@dimen/list_content_padding"
                     android:text="@string/shared_string_options"
                     android:textAllCaps="true"
                     android:textColor="?attr/color_dialog_buttons"
-                    android:textSize="@dimen/default_list_text_size"
+                    android:textSize="7sp"
                     osmand:typeface="@string/font_roboto_medium"
-	                android:paddingStart="@dimen/list_content_padding"
+	                android:paddingStart="0dp"
 	                android:paddingEnd="@dimen/list_content_padding" />
             </LinearLayout>
 

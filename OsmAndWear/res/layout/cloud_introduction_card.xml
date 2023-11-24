@@ -21,6 +21,7 @@
 			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/content_padding_small"
+			android:translationY="-20dp"
 			tools:src="@drawable/ic_action_cloud_smile_face_colored" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -30,6 +31,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
 			android:textColor="?android:textColorPrimary"
+			android:translationY="-40dp"
 			tools:text="@string/backup_do_not_have_any" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -40,15 +42,18 @@
 			android:layout_gravity="center_horizontal"
 			android:layout_marginBottom="@dimen/dialog_content_margin"
 			android:textColor="?android:textColorSecondary"
+			android:textSize="12sp"
+			android:translationY="-40dp"
 			tools:text="@string/backup_dont_have_any_descr" />
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/sync_button"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="33dp"
+			android:translationY="-40dp"
 			app:dialogButtonBottomMargin="@dimen/content_padding"
-			app:dialogButtonType="primary"
-			app:dialogButtonTitle="@string/sync_now"/>
+			app:dialogButtonTitle="@string/sync_now"
+			app:dialogButtonType="primary" />
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/settings_button"

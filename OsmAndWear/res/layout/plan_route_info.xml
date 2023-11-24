@@ -10,6 +10,9 @@
 		android:id="@+id/main_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:layout_marginStart="0dp"
+		android:layout_marginTop="100dp"
+		android:layout_marginEnd="0dp"
 		android:orientation="vertical">
 
 		<include layout="@layout/context_menu_top_shadow" />

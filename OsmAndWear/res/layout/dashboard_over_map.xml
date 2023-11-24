@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical"
     android:visibility="gone"
     tools:visibility="visible" >
@@ -34,6 +37,7 @@
                 <FrameLayout
                     android:id="@+id/map_part_dashboard"
                     android:contentDescription="@string/back_to_map"
+                    android:layout_marginTop="0dp"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/dashboard_map_top_padding">
 

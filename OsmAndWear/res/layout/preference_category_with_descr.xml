@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_cancel_button_height_small"
 	android:orientation="horizontal">
@@ -14,10 +17,11 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
+		android:layout_marginStart="30dp"
 		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding" />
+		android:translationX="15dp" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

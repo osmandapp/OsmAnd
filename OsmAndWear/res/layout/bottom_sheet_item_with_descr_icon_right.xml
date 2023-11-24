@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:paddingStart="@dimen/content_padding"
 	android:paddingLeft="@dimen/content_padding"
@@ -25,7 +28,9 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
+			android:gravity="center"
 			android:maxLines="1"
+			android:translationX="40dp"
 			tools:text="Some title" />
 
 		<TextView
@@ -36,6 +41,7 @@
 			android:ellipsize="end"
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:maxLines="1"
+			android:translationX="30dp"
 			tools:text="Some description" />
 
 	</LinearLayout>
@@ -45,6 +51,7 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
+		android:translationX="-30dp"
 		tools:src="@drawable/list_destination" />
 
 </LinearLayout>

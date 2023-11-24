@@ -2,6 +2,9 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
@@ -16,6 +19,7 @@
 			style="@style/TitleStyle.Medium"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:gravity="center"
 			android:text="@string/file_already_exists"
 			android:textColor="?android:textColorPrimary" />
 
@@ -25,6 +29,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/favorites_icon_padding"
+			android:gravity="center"
 			android:text="@string/compass_desc"
 			android:textColor="?android:textColorSecondary" />
 

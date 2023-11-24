@@ -5,6 +5,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="@color/color_transparent">
 
 	<com.google.android.material.appbar.AppBarLayout
@@ -31,6 +34,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center_vertical"
 					android:contentDescription="@string/back_to_map"
+					android:translationX="30dp"
 					tools:srcCompat="@drawable/ic_arrow_back"
 					tools:tint="?attr/default_icon_color" />
 
@@ -41,8 +45,9 @@
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:gravity="center"
 					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_header_text_size"
+					android:textSize="14sp"
 					app:lineHeight="@dimen/default_title_line_height"
 					app:typeface="@string/font_roboto_medium"
 					tools:text="@string/shared_string_toolbar" />
@@ -54,6 +59,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center_vertical"
 					android:contentDescription="@string/reset_to_default"
+					android:translationX="-30dp"
 					tools:srcCompat="@drawable/ic_action_reset"
 					tools:tint="?attr/default_icon_color" />
 
@@ -122,7 +128,9 @@
 				android:layout_marginHorizontal="@dimen/content_padding"
 				osmand:dialogButtonHeight="@dimen/dialog_button_height"
 				osmand:dialogButtonTitle="@string/shared_string_apply"
-				osmand:dialogButtonTopMargin="@dimen/content_padding" />
+				android:layout_marginStart="50dp"
+				android:layout_marginEnd="50dp"
+				osmand:dialogButtonTopMargin="0dp" />
 
 		</LinearLayout>
 

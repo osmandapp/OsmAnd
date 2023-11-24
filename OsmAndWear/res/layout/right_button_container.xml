@@ -12,8 +12,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:background="?attr/selectableItemBackground"
-		android:paddingHorizontal="@dimen/content_padding_small_half"
 		android:gravity="center"
+		android:paddingHorizontal="@dimen/content_padding_small_half"
 		android:textSize="@dimen/default_desc_text_size"
 		osmand:typeface="@string/font_roboto_medium"
 		tools:text="@string/shared_string_speed" />

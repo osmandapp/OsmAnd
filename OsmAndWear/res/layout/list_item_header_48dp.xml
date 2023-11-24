@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:orientation="horizontal">
 
@@ -14,7 +17,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_weight="1"
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:layout_gravity="start|center_vertical"
 		android:textColor="?android:textColorPrimary"
 		tools:text="Changes" />

@@ -21,8 +21,9 @@
 			<ImageButton
 				android:id="@+id/back_button"
 				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="@dimen/toolbar_height"
-				android:layout_height="@dimen/toolbar_height"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_marginStart="40dp"
 				android:layout_gravity="center_vertical"
 				android:contentDescription="@string/back_to_map"
 				tools:srcCompat="@drawable/ic_arrow_back" />
@@ -36,7 +37,7 @@
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:text="@string/shared_string_weather"
 				android:textColor="?attr/text_color_tab_active"
-				android:textSize="@dimen/default_header_text_size"
+				android:textSize="14dp"
 				app:lineHeight="@dimen/default_title_line_height"
 				app:typeface="@string/font_roboto_medium" />
 
@@ -55,8 +56,9 @@
 				style="@style/Widget.AppCompat.ActionButton"
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="start"
 				android:contentDescription="@string/back_to_map"
+				android:translationY="15dp"
 				app:srcCompat="@drawable/ic_plugin_srtm"
 				app:tint="@color/card_and_list_background_light" />
 
@@ -97,6 +99,7 @@
 				layout="@layout/map_hud_controls"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
 				android:layout_gravity="end|bottom" />
 
 		</FrameLayout>

@@ -137,7 +137,7 @@
 
         <LinearLayout
             android:id="@+id/buttons_layout"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="?attr/activity_background_color"
             android:orientation="horizontal">
@@ -151,8 +151,8 @@
                 android:paddingRight="10dp"
                 android:text="@string/shared_string_delete"
                 android:textColor="?attr/contextMenuButtonColor"
-	            android:paddingEnd="10dp"
-	            android:paddingStart="10dp" />
+	            android:paddingEnd="0dp"
+	            android:paddingStart="50dp" />
 
             <Button
                 android:id="@+id/replace_button"

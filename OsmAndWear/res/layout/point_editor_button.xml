@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="wrap_content"
-	android:layout_height="wrap_content">
+	android:layout_height="wrap_content"
+	android:translationX="50dp">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/outline"

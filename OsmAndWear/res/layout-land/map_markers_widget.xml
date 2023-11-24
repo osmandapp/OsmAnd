@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:clickable="true"
 	android:minHeight="@dimen/map_address_height"
 	android:visibility="gone"
@@ -39,6 +42,7 @@
 						android:id="@+id/map_marker_arrow"
 						android:layout_width="@dimen/dialog_button_ex_height"
 						android:layout_height="@dimen/dialog_content_margin"
+						android:translationX="15dp"
 						osmand:srcCompat="@drawable/ic_arrow_marker_diretion" />
 
 					<LinearLayout
@@ -113,6 +117,7 @@
 						android:id="@+id/map_marker_arrow_2nd"
 						android:layout_width="@dimen/dialog_button_ex_height"
 						android:layout_height="@dimen/dialog_content_margin"
+						android:translationX="-15dp"
 						osmand:srcCompat="@drawable/ic_arrow_marker_diretion" />
 
 					<LinearLayout
@@ -152,6 +157,7 @@
 						android:layout_height="@dimen/list_item_height"
 						android:background="@drawable/marker_circle_background_top_bar_with_inset"
 						android:contentDescription="@string/move_to_history"
+						android:translationX="-25dp"
 						tools:src="@drawable/ic_action_marker_passed" />
 
 					<ImageButton

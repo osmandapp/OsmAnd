@@ -26,6 +26,7 @@
 			android:layout_width="@dimen/toolbar_height"
 			android:layout_height="@dimen/toolbar_height"
 			android:contentDescription="@string/access_shared_string_navigate_up"
+			android:translationX="25dp"
 			app:srcCompat="@drawable/ic_arrow_back" />
 
 		<LinearLayout
@@ -44,9 +45,10 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:gravity="start"
 				android:maxLines="2"
 				android:textColor="?attr/app_bar_primary_item_color"
-				android:textSize="@dimen/dialog_header_text_size"
+				android:textSize="12sp"
 				app:typeface="@string/font_roboto_medium"
 				tools:text="@string/routing_settings_2" />
 

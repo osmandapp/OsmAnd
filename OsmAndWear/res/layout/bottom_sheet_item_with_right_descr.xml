@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/bottom_sheet_list_item_height"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="10dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingLeft="@dimen/content_padding"
@@ -19,7 +22,8 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/ic_action_info_dark"/>
+		android:translationX="20dp"
+		tools:src="@drawable/ic_action_info_dark" />
 
 	<TextView
 		android:id="@+id/title"
@@ -43,6 +47,7 @@
 		android:maxLines="1"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_list_text_size"
-		tools:text="Description"/>
+		android:translationX="-30dp"
+		tools:text="Description" />
 
 </LinearLayout>

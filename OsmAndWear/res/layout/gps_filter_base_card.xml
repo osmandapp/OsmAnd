@@ -45,6 +45,7 @@
 				android:layout_weight="1"
 				android:ellipsize="end"
 				android:text="@string/shared_string_actions"
+				android:gravity="center"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
@@ -55,7 +56,7 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/title_padding"
-				android:layout_marginEnd="@dimen/title_padding"
+				android:layout_marginEnd="40dp"
 				android:tint="?attr/default_icon_color"
 				osmand:srcCompat="@drawable/ic_action_arrow_up" />
 

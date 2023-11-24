@@ -5,6 +5,9 @@
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/setting_list_item_small_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<FrameLayout
@@ -30,6 +33,7 @@
 				android:layout_marginEnd="@dimen/list_content_padding_large"
 				android:layout_marginRight="@dimen/list_content_padding_large"
 				android:layout_marginBottom="@dimen/content_padding"
+				android:translationX="25dp"
 				tools:src="@drawable/ic_action_offroad" />
 
 			<LinearLayout

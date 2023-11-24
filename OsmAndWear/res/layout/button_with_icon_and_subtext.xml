@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/dialog_button_ex_height">
 
 	<LinearLayout
@@ -20,6 +23,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding_small"
 			android:layout_marginLeft="@dimen/content_padding_small"
+			android:translationX="25dp"
 			tools:src="@drawable/ic_action_keep_both" />
 
 		<LinearLayout
@@ -34,6 +38,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
+				android:gravity="center"
 				android:maxLines="1"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_medium"
@@ -45,7 +50,8 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="2"
-				android:textSize="@dimen/default_sub_text_size"
+				android:gravity="center"
+				android:textSize="10sp"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:text="Long subtext about two lines" />
 

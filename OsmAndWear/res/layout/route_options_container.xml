@@ -6,6 +6,9 @@
 	android:layout_width="100dp"
 	android:layout_height="32dp"
 	android:orientation="horizontal"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:visibility="visible"
 	tools:background="@drawable/btn_border_dark">
 

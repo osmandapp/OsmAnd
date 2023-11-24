@@ -9,6 +9,9 @@
 	android:paddingTop="@dimen/content_padding_small"
 	android:paddingBottom="@dimen/content_padding_small"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingEnd="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding">
 
@@ -17,7 +20,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:maxLines="1"
 		android:textColor="?android:textColorPrimary"
 		android:lineSpacingMultiplier="@dimen/text_button_letter_spacing"
@@ -32,6 +35,7 @@
 		android:letterSpacing="@dimen/description_letter_spacing"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
+		android:gravity="center"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="Some description" />
 

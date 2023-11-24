@@ -26,6 +26,7 @@
 			android:minHeight="@dimen/default_title_line_height"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="25dp"
 			app:lineHeight="@dimen/default_title_line_height"
 			app:typeface="@string/font_roboto_medium"
 			tools:text="Some title" />
@@ -54,6 +55,7 @@
 			android:minHeight="@dimen/default_title_line_height"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="-30dp"
 			app:lineHeight="@dimen/default_title_line_height"
 			app:typeface="@string/font_roboto_regular"
 			tools:text="5/6" />

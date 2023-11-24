@@ -30,6 +30,7 @@
 			android:layout_marginBottom="@dimen/content_padding_small"
 			android:text="@string/route_info"
 			android:textColor="?android:textColorSecondary"
+			android:translationX="25dp"
 			app:typeface="@string/font_roboto_medium" />
 
 	</LinearLayout>

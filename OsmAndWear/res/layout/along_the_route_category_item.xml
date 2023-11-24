@@ -5,11 +5,16 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingTop="0dp"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding_half"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:orientation="vertical">
 
 	<FrameLayout
 		android:layout_width="match_parent"
+
 		android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
 		android:background="?attr/selectableItemBackground">
 
@@ -17,14 +22,14 @@
 			android:id="@+id/explicit_indicator"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="start|center_vertical"
+			android:layout_gravity="center"
 			android:layout_marginBottom="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding"
 			tools:src="@drawable/ic_action_arrow_down"
 			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding" />
+			android:layout_marginEnd="0dp" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
@@ -33,10 +38,11 @@
 			android:layout_gravity="center_vertical|start"
 			android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
 			android:layout_marginRight="@dimen/bottom_sheet_divider_margin_start"
-			android:layout_marginEnd="@dimen/bottom_sheet_divider_margin_start"
-			android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+			android:layout_marginEnd="0dp"
+			android:layout_marginStart="50dp"
 			android:ellipsize="end"
 			android:maxLines="1"
+			android:textSize="11sp"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"
 			osmand:typeface="@string/font_roboto_medium"
@@ -47,14 +53,12 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical|end"
-			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="30dp"
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:focusableInTouchMode="false"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginStart="@dimen/content_padding" />
+			android:focusableInTouchMode="false" />
 
 	</FrameLayout>
 

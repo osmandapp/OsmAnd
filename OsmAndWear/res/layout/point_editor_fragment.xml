@@ -38,6 +38,7 @@
 				android:layout_marginEnd="@dimen/list_item_button_padding"
 				android:layout_marginRight="@dimen/list_item_button_padding"
 				android:contentDescription="@string/replace_point_descr"
+				android:translationX="-40dp"
 				app:srcCompat="@drawable/ic_action_replace" />
 
 		</androidx.appcompat.widget.Toolbar>

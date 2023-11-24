@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/toolbar"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="@dimen/action_bar_height"
 	android:orientation="horizontal"
 	android:gravity="center_vertical"
@@ -16,6 +19,7 @@
 		android:layout_height="@dimen/action_bar_height"
 		android:contentDescription="@string/access_shared_string_navigate_up"
 		android:tint="?attr/toolbar_back_button_color"
+		android:translationX="25dp"
 		osmand:srcCompat="@drawable/ic_arrow_back" />
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -27,7 +31,7 @@
 		android:layout_marginStart="@dimen/content_padding"
 		android:maxLines="1"
 		android:ellipsize="end"
-		android:textSize="@dimen/bottom_sheet_title_big"
+		android:textSize="12sp"
 		android:textColor="?attr/toolbar_title_color"
 		tools:text="Download map" />
 
@@ -38,6 +42,7 @@
 		android:layout_height="@dimen/action_bar_height"
 		android:contentDescription="@string/shared_string_help"
 		android:tint="?attr/app_bar_primary_item_color"
+		android:translationX="-25dp"
 		osmand:srcCompat="@drawable/ic_action_help_online" />
 
 </LinearLayout>

@@ -61,14 +61,6 @@
 				android:id="@+id/osmand_live"
 				layout="@layout/preference_button" />
 
-			<include
-				android:id="@+id/promo_divider"
-				layout="@layout/divider_half_item" />
-
-			<include
-				android:id="@+id/promo_details"
-				layout="@layout/preference_button" />
-
 			<include layout="@layout/card_bottom_divider"/>
 
 		</LinearLayout>

@@ -33,8 +33,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/content_padding"
                 android:layout_marginRight="@dimen/content_padding"
+                android:translationX="25dp"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_text_view"
@@ -43,7 +44,7 @@
                 android:layout_weight="1"
                 android:textColor="?android:textColorPrimary"
                 android:ellipsize="end"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:maxLines="1"
                 tools:text="Header"/>
         </LinearLayout>

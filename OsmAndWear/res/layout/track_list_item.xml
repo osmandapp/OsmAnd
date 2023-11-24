@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="10dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="horizontal">
 
 	<FrameLayout
@@ -12,19 +15,18 @@
 		android:layout_width="@dimen/acceptable_touch_radius"
 		android:layout_height="@dimen/acceptable_touch_radius"
 		android:layout_gravity="center"
-		android:layout_marginHorizontal="@dimen/text_margin_small"
+		android:layout_marginStart="20dp"
 		android:padding="@dimen/content_padding_small">
 
 		<androidx.appcompat.widget.AppCompatCheckBox
 			android:id="@+id/checkbox"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center"
+			android:layout_gravity="right"
 			android:background="@android:color/transparent"
 			android:clickable="false"
 			android:focusable="false"
-			android:focusableInTouchMode="false"
-			android:paddingHorizontal="@dimen/content_padding" />
+			android:focusableInTouchMode="false"/>
 
 	</FrameLayout>
 
@@ -33,9 +35,9 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
-		android:layout_marginHorizontal="@dimen/content_padding"
 		tools:src="@drawable/ic_action_track_line_bold_color"
 		tools:tint="?attr/default_icon_color" />
+
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -60,9 +62,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/content_padding_small"
-					android:layout_marginBottom="@dimen/text_margin_small"
 					android:maxLines="3"
 					android:paddingEnd="@dimen/content_padding"
+					android:textSize="11sp"
 					android:textColor="?android:textColorPrimary"
 					tools:text="Track name" />
 
@@ -86,6 +88,7 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:ellipsize="marquee"
+						android:textSize="11sp"
 						android:maxLines="2"
 						android:textColor="?android:textColorSecondary"
 						tools:text="28.12.2022 | 5,1 km • 0:59:09 • 11" />
@@ -97,13 +100,14 @@
 			<ImageButton
 				android:id="@+id/menu_button"
 				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-				android:layout_width="@dimen/acceptable_touch_radius"
-				android:layout_height="@dimen/acceptable_touch_radius"
-				android:layout_gravity="center_vertical"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
 				android:layout_margin="@dimen/text_margin_small"
 				android:contentDescription="@string/shared_string_menu"
 				android:src="@drawable/ic_overflow_menu_white"
-				android:tint="?attr/default_icon_color" />
+				android:tint="?attr/default_icon_color"
+				android:translationX="-30dp"
+				android:translationY="50dp" />
 
 		</LinearLayout>
 

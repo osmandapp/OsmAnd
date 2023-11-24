@@ -4,6 +4,8 @@
 	android:id="@+id/map_controls_container"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginBottom="0dp"
 	android:layout_gravity="bottom"
 	tools:visibility="invisible">
 

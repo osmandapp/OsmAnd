@@ -3,6 +3,9 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
 
@@ -29,19 +32,21 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start|center_vertical"
-			android:background="?attr/flow_toolbar_bg" />
+			android:background="?attr/flow_toolbar_bg"
+			android:translationX="25dp" />
 
 		<androidx.appcompat.widget.AppCompatImageButton
 			android:id="@+id/back_button_flow"
 			android:layout_width="@dimen/route_info_toolbar_button_size"
 			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
 			android:layout_marginTop="@dimen/content_padding_half"
-			android:layout_marginStart="@dimen/content_padding_half"
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
-			osmand:srcCompat="@drawable/ic_arrow_back"
-			android:tint="?attr/text_color_tab_active_white" />
+			android:tint="?attr/text_color_tab_active_white"
+			android:translationX="25dp"
+			osmand:srcCompat="@drawable/ic_arrow_back" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"
@@ -51,10 +56,11 @@
 			android:background="?attr/flow_toolbar_bg"
 			android:gravity="center"
 			android:orientation="horizontal"
-			android:paddingLeft="20dp"
-			android:paddingRight="20dp"
 			android:paddingStart="20dp"
-			android:paddingEnd="20dp" />
+			android:paddingLeft="20dp"
+			android:paddingEnd="20dp"
+			android:paddingRight="20dp"
+			android:translationX="20dp" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow"
@@ -63,40 +69,41 @@
 			android:layout_gravity="end|center_vertical"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
-			android:paddingLeft="@dimen/content_padding_small"
-			android:paddingRight="@dimen/content_padding_small"
 			android:paddingStart="@dimen/content_padding_small"
-			android:paddingEnd="@dimen/content_padding_small">
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:translationX="20dp">
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/print_route_flow"
-				android:layout_width="@dimen/route_info_toolbar_button_size"
-				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/print_route"
 				android:scaleType="center"
-				osmand:srcCompat="@drawable/ic_action_gprint_dark"
-				android:tint="?attr/text_color_tab_active_white" />
+				android:tint="?attr/text_color_tab_active_white"
+				osmand:srcCompat="@drawable/ic_action_gprint_dark" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/save_as_gpx_flow"
-				android:layout_width="@dimen/route_info_toolbar_button_size"
-				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/shared_string_save_as_gpx"
 				android:scaleType="center"
-				osmand:srcCompat="@drawable/ic_action_gsave_dark"
-				android:tint="?attr/text_color_tab_active_white" />
+				android:tint="?attr/text_color_tab_active_white"
+				osmand:srcCompat="@drawable/ic_action_gsave_dark" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/share_as_gpx_flow"
-				android:layout_width="@dimen/route_info_toolbar_button_size"
-				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/share_route_as_gpx"
 				android:scaleType="center"
-				osmand:srcCompat="@drawable/ic_action_gshare_dark"
-				android:tint="?attr/text_color_tab_active_white" />
+				android:tint="?attr/text_color_tab_active_white"
+				osmand:srcCompat="@drawable/ic_action_gshare_dark" />
 
 		</LinearLayout>
 
@@ -223,28 +230,30 @@
 		android:id="@+id/pages_control"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="5dp"
 		android:layout_marginLeft="5dp"
+		android:layout_marginEnd="5dp"
 		android:layout_marginRight="5dp"
 		android:background="?attr/pages_bg"
 		android:gravity="center"
-		android:layout_marginEnd="5dp"
-		android:layout_marginStart="5dp">
+		android:translationX="70dp"
+		android:translationY="20dp">
 
 		<View
 			android:layout_width="@dimen/pages_item_size"
 			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginStart="@dimen/pages_item_margin"
 			android:layout_marginLeft="@dimen/pages_item_margin"
-			android:layout_marginRight="@dimen/pages_item_padding"
-			android:background="@drawable/pages_active_dark"
 			android:layout_marginEnd="@dimen/pages_item_padding"
-			android:layout_marginStart="@dimen/pages_item_margin" />
+			android:layout_marginRight="@dimen/pages_item_padding"
+			android:background="@drawable/pages_active_dark" />
 
 		<View
 			android:layout_width="@dimen/pages_item_size"
 			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginEnd="@dimen/pages_item_margin"
 			android:layout_marginRight="@dimen/pages_item_margin"
-			android:background="@drawable/pages_inactive_dark"
-			android:layout_marginEnd="@dimen/pages_item_margin" />
+			android:background="@drawable/pages_inactive_dark" />
 
 
 	</LinearLayout>

@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+
     android:background="?attr/bg_color">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:visibility="gone" />
@@ -18,11 +22,11 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="56dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
         tools:text="Username" />
 

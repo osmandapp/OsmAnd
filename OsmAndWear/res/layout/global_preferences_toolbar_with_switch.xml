@@ -6,6 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/actionModeBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/toolbar_height"
 	android:padding="0dp"
 	android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -32,6 +35,7 @@
 				android:layout_width="@dimen/toolbar_height"
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
+				android:translationX="25dp"
 				app:srcCompat="@drawable/ic_arrow_back" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -45,7 +49,7 @@
 				android:layout_weight="1"
 				android:maxLines="2"
 				android:textColor="?attr/app_bar_primary_item_color"
-				android:textSize="@dimen/dialog_header_text_size"
+				android:textSize="14sp"
 				app:typeface="@string/font_roboto_medium"
 				tools:text="@string/routing_settings_2" />
 
@@ -53,7 +57,8 @@
 				android:id="@+id/action_button"
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
-				android:layout_gravity="center">
+				android:layout_gravity="center"
+				android:translationX="-25dp">
 
 				<androidx.appcompat.widget.AppCompatImageButton
 					android:id="@+id/action_button_icon"
@@ -61,7 +66,7 @@
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center"
-					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginStart="5dp"
 					android:layout_marginLeft="@dimen/content_padding"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginRight="@dimen/content_padding"

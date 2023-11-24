@@ -6,6 +6,9 @@
               android:layout_height="wrap_content"
               android:minHeight="@dimen/card_title_row_min_height"
               android:orientation="horizontal"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
               android:paddingBottom="@dimen/list_header_padding"
               android:paddingTop="@dimen/list_header_padding">
 
@@ -14,7 +17,8 @@
         android:layout_width="@dimen/card_title_row_min_height"
         android:layout_height="match_parent"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/img_logo_38dp_osmand"/>
+        android:translationX="15dp"
+        osmand:srcCompat="@drawable/img_logo_38dp_osmand" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -48,7 +48,7 @@
                 android:id="@+id/fragment_count_text"
                 android:background="@null"
                 android:layout_gravity="center_vertical"
-                android:gravity="end"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorSecondary"

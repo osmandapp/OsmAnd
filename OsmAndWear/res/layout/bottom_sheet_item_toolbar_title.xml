@@ -6,6 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="@android:color/transparent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	osmand:elevation="0dp">
 
 	<androidx.appcompat.widget.Toolbar
@@ -20,7 +23,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/bottom_sheet_title_height"
 			android:ellipsize="end"
-			android:gravity="center_vertical"
+			android:gravity="center"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			osmand:typeface="@string/font_roboto_medium"

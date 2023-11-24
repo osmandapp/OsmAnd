@@ -5,15 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:padding="18dp">
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textColor="?android:textColorPrimary"
         android:textSize="18sp"
-        tools:text="Dialog title"/>
+        android:translationX="40dp"
+        tools:text="Dialog title" />
 
     <TextView
         android:layout_marginTop="8dp"

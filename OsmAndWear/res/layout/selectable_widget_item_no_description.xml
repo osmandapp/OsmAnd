@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="@drawable/bg_selectable_widget_item"
 	android:layout_marginBottom="@dimen/content_padding_small">
 
@@ -21,6 +24,7 @@
 			android:id="@+id/icon"
 			android:layout_width="@dimen/dialog_content_margin"
 			android:layout_height="@dimen/dialog_content_margin"
+			android:translationX="25dp"
 			tools:srcCompat="@drawable/widget_next_turn_day" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -32,6 +36,9 @@
 			android:layout_weight="1"
 			android:layout_marginStart="@dimen/title_padding"
 			android:ellipsize="end"
+			android:textSize="8sp"
+			android:layout_gravity="center"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			tools:text="Widget name" />
 
@@ -39,11 +46,12 @@
 			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/title_padding"
 			android:layout_gravity="center_vertical"
-			android:saveEnabled="false"
+			android:layout_marginStart="@dimen/title_padding"
 			android:clickable="false"
-			android:focusable="false" />
+			android:focusable="false"
+			android:saveEnabled="false"
+			android:translationX="-25dp" />
 
 	</LinearLayout>
 

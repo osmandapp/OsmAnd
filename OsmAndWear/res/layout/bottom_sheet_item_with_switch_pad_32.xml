@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingStart="@dimen/content_padding"
@@ -17,6 +20,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin_large"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin_large"
+		android:translationX="25dp"
 		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<TextView
@@ -40,6 +44,7 @@
 		android:clickable="false"
 		android:focusable="false"
 		android:focusableInTouchMode="false"
-		android:saveEnabled="false" />
+		android:saveEnabled="false"
+		android:translationX="-25dp" />
 
 </LinearLayout>

@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="10dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -18,6 +21,7 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding_small"
+			android:translationX="25dp"
 			tools:src="@drawable/ic_action_screen_side_left"
 			tools:tint="?attr/active_color_basic" />
 
@@ -46,6 +50,7 @@
 						style="@style/TitleStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:textSize="10sp"
 						android:textColor="?android:textColorPrimary"
 						tools:text="Title" />
 
@@ -56,6 +61,7 @@
 						android:layout_height="wrap_content"
 						android:textColor="?android:textColorSecondary"
 						android:visibility="gone"
+						android:textSize="8sp"
 						tools:text="Description"
 						tools:visibility="visible" />
 
@@ -67,7 +73,6 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:layout_marginHorizontal="@dimen/content_padding"
 					android:textColor="?android:textColorSecondary"
 					android:visibility="gone"
 					tools:text="5"
@@ -78,8 +83,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:saveEnabled="false"
 					android:layout_marginHorizontal="@dimen/content_padding"
+					android:saveEnabled="false"
+					android:translationX="-15dp"
 					android:visibility="gone"
 					tools:visibility="visible" />
 

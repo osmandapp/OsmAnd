@@ -10,7 +10,7 @@
 	<LinearLayout
 		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="109dp">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
@@ -18,12 +18,12 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginRight="0dp"
 			android:tint="?attr/default_icon_color"
 			tools:srcCompat="@drawable/ic_map" />
 
 		<LinearLayout
-			android:layout_width="0dp"
+			android:layout_width="104dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
@@ -39,7 +39,7 @@
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size"
+				android:textSize="11sp"
 				osmand:fontFamily="@string/font_roboto_regular"
 				osmand:lineHeight="@dimen/default_title_line_height"
 				tools:text="Favorites" />
@@ -50,7 +50,7 @@
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="8sp"
 				osmand:fontFamily="@string/font_roboto_regular"
 				osmand:lineHeight="@dimen/default_desc_line_height"
 				tools:text="Last backup yesterday" />
@@ -62,8 +62,8 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginLeft="0dp"
+			android:layout_marginRight="0dp"
 			osmand:srcCompat="@drawable/ic_action_alert"
 			osmand:tint="?attr/default_icon_color" />
 
@@ -73,7 +73,8 @@
 			android:layout_width="@dimen/acceptable_touch_radius"
 			android:layout_height="@dimen/acceptable_touch_radius"
 			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="@dimen/text_margin_small"
+			android:layout_marginLeft="0dp
+"
 			android:layout_marginRight="@dimen/text_margin_small"
 			android:indeterminate="false"
 			android:visibility="gone"

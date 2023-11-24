@@ -16,8 +16,9 @@
             android:padding="24dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="45dp"
                 osmand:srcCompat="@drawable/ic_christmas_illustration"/>
 
             <TextView
@@ -26,7 +27,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/christmas_desc"
                 android:textColor="@color/card_and_list_background_light"
-                android:textSize="@dimen/default_desc_text_size"/>
+                android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="match_parent"

@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?android:attr/selectableItemBackground"
 	android:orientation="horizontal">
 
@@ -13,7 +16,8 @@
 		android:layout_gravity="center"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding_small"
-		android:src="@drawable/ic_action_folder" />
+		android:src="@drawable/ic_action_folder"
+		android:translationX="25dp" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -35,6 +39,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
+				android:textSize="8sp"
 				android:textColor="?android:textColorPrimary"
 				tools:text="@string/sort_last_modified" />
 
@@ -45,6 +50,7 @@
 				android:layout_gravity="center"
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/content_padding_small"
+				android:translationX="-25dp"
 				tools:src="@drawable/ic_action_done"
 				tools:tint="?attr/icon_color_active" />
 

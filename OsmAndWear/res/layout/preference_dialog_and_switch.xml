@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:gravity="center_vertical">
 
@@ -18,12 +21,13 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/content_padding_small"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding" />
+			android:translationX="25dp" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@android:id/title"
@@ -53,10 +57,11 @@
 			android:background="@null"
 			android:clickable="true"
 			android:focusable="true"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding" />
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:translationX="-15dp" />
 
 	</LinearLayout>
 

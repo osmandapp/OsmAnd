@@ -5,8 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="@dimen/dashboard_map_toolbar"
+    android:layout_height="45dp"
     android:background="@color/app_bar_main_light"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:padding="0dp"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
@@ -21,10 +24,11 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="start"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:translationX="15dp">
 
             <ImageButton
                 android:id="@+id/toolbar_back"
@@ -36,33 +40,34 @@
                 android:layout_marginEnd="@dimen/list_item_button_padding"
                 android:layout_marginRight="@dimen/list_item_button_padding"
                 android:contentDescription="@string/back_to_map"
+                android:translationX="20dp"
                 app:srcCompat="@drawable/ic_arrow_back"
                 tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_list"
-                android:contentDescription="@string/backToMenu"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/backToMenu"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_navigation_drawer"
-                tools:visibility="gone"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
+                tools:visibility="gone" />
 
             <TextView
                 android:id="@+id/toolbar_text"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:scaleType="center"
                 android:textColor="@color/abc_primary_text_material_dark"
-                android:textSize="@dimen/abc_text_size_large_material"
+                android:textSize="10dp"
                 tools:text="Toolbar"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
         </LinearLayout>
 
@@ -70,75 +75,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:translationX="30dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_settings"
-                android:contentDescription="@string/shared_string_settings"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/shared_string_settings"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_configure_screen_dark"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
+                android:translationX="0dp"
+                app:srcCompat="@drawable/ic_configure_screen_dark" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_ok"
-                android:contentDescription="@string/shared_string_ok"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/shared_string_ok"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_action_done"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
+                android:translationX="-30dp"
+                app:srcCompat="@drawable/ic_action_done" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_sort"
-                android:contentDescription="@string/intermediate_points_change_order"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/intermediate_points_change_order"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_sort_waypoint_dark"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top" />
+                android:translationX="-60dp"
+                app:srcCompat="@drawable/ic_sort_waypoint_dark" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_flat"
-                android:contentDescription="@string/drawer"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/drawer"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_flat_list_dark"
                 android:visibility="gone"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
+                app:srcCompat="@drawable/ic_flat_list_dark" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_edit"
-                android:contentDescription="@string/shared_string_edit"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
+                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
                 android:background="@drawable/dashboard_button_light"
+                android:contentDescription="@string/shared_string_edit"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_action_edit_dark"
                 android:visibility="gone"
-				android:layout_marginEnd="@dimen/multi_selection_menu_padding_top"
-				android:layout_marginStart="@dimen/multi_selection_menu_padding_top" />
+                app:srcCompat="@drawable/ic_action_edit_dark" />
         </LinearLayout>
 
     </LinearLayout>

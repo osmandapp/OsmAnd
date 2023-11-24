@@ -16,32 +16,36 @@
 			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/content_padding_large"
 			android:src="@drawable/ic_action_delete_outlined"
-			android:tint="?attr/default_icon_color" />
+			android:tint="?attr/default_icon_color"
+			android:translationY="-20dp" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			style="@style/TitleStyle.Medium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:gravity="center_horizontal"
 			android:layout_marginTop="@dimen/dialog_content_margin"
+			android:gravity="center_horizontal"
 			android:text="@string/trash_is_empty"
-			android:textColor="?android:textColorPrimary" />
+			android:textColor="?android:textColorPrimary"
+			android:translationY="-50dp" />
 
 		<net.osmand.plus.widgets.TextViewEx
-			style="@style/DescStyle"
 			android:id="@+id/description"
+			style="@style/DescStyle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
-			android:gravity="center_horizontal"
+			android:layout_marginHorizontal="@dimen/dialog_content_margin"
 			android:layout_marginTop="@dimen/content_padding_small_half"
 			android:layout_marginBottom="@dimen/content_padding"
-			android:layout_marginHorizontal="@dimen/dialog_content_margin"
+			android:gravity="center_horizontal"
 			android:paddingHorizontal="@dimen/content_padding"
 			android:paddingBottom="@dimen/content_padding"
 			android:text="@string/trash_is_empty_banner_desc"
-			android:textColor="?android:textColorSecondary" />
+			android:textColor="?android:textColorSecondary"
+			android:textSize="8sp"
+			android:translationY="-50dp" />
 
 	</LinearLayout>
 

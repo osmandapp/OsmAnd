@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:clipChildren="false"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:orientation="vertical">
 
@@ -26,6 +29,9 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_weight="1"
 			android:textColor="?android:textColorPrimary"
+			android:textSize="12sp"
+			android:gravity="end"
+			android:translationX="5dp"
 			tools:text="@string/duration" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -34,6 +40,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding"
+			android:textSize="12sp"
 			android:textColor="?android:textColorSecondary"
 			tools:text="@string/duration" />
 
@@ -45,6 +52,8 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:tint="?attr/default_icon_color"
+			android:translationX="-25dp"
+			android:translationY="5dp"
 			tools:srcCompat="@drawable/ic_action_arrow_down" />
 
 
@@ -135,6 +144,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:gravity="center"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
 			app:typeface="@string/font_roboto_regular"
@@ -148,6 +158,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="-40dp"
 			app:typeface="@string/font_roboto_regular"
 			tools:text="125 m" />
 

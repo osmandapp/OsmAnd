@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/setting_list_item_group_height"
 	android:orientation="horizontal">
 
@@ -15,6 +18,7 @@
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:tint="?attr/default_icon_color"
+		android:translationX="25dp"
 		tools:srcCompat="@drawable/ic_sdcard" />
 
 	<LinearLayout

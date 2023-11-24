@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_transparent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -15,6 +18,7 @@
         android:layout_marginLeft="@dimen/content_padding"
         android:layout_marginRight="@dimen/content_padding"
         android:tint="?attr/default_icon_color"
+        android:translationX="25dp"
         osmand:srcCompat="@drawable/ic_action_openstreetmap_logo" />
 
     <LinearLayout
@@ -40,7 +44,7 @@
                 android:paddingTop="@dimen/content_padding"
                 android:paddingBottom="@dimen/content_padding"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
+                android:textSize="12sp"
                 osmand:typeface="@string/font_roboto_regular"
                 tools:text="July - August" />
 
@@ -49,11 +53,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/content_padding"
                 android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
                 android:lineSpacingMultiplier="1.1"
                 android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_list_text_size"
+                android:translationX="-45dp"
                 osmand:typeface="@string/font_roboto_medium"
                 tools:text="20" />
 

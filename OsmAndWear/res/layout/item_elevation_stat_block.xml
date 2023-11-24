@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/bottom_sheet_list_item_height"
-    android:layout_marginStart="@dimen/content_padding"
     android:layout_marginLeft="@dimen/content_padding"
-    android:layout_marginEnd="@dimen/content_padding"
     android:layout_marginRight="@dimen/content_padding"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="20dp"
     android:gravity="start|center_vertical"
     android:orientation="vertical">
 
@@ -33,7 +34,9 @@
                 android:maxLines="1"
                 android:minWidth="10dp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/map_widget_text_size"
+                android:textSize="18sp"
+                android:translationX="40dp"
+                android:translationY="2dp"
                 tools:text="360" />
 
             <TextView
@@ -48,6 +51,7 @@
                 android:maxLines="1"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="@dimen/map_widget_text_size_small"
+                android:translationX="50dp"
                 tools:text="m" />
 
         </RelativeLayout>
@@ -56,7 +60,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/content_padding_half"
-            android:layout_marginLeft="@dimen/content_padding_half">
+            android:layout_marginLeft="@dimen/content_padding_half"
+            android:translationX="-40dp"
+            android:translationY="5dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image"
@@ -76,7 +82,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:ellipsize="end"
-        android:gravity="start|center_vertical"
+        android:gravity="center"
         android:letterSpacing="@dimen/description_letter_spacing"
         android:lines="1"
         android:maxWidth="@dimen/grid_menu_item_width"

@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height">
 
@@ -13,6 +16,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding_half"
+		android:translationX="25dp"
 		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<LinearLayout
@@ -50,7 +54,8 @@
 				android:clickable="false"
 				android:focusable="false"
 				android:focusableInTouchMode="false"
-				android:saveEnabled="false" />
+				android:saveEnabled="false"
+				android:translationX="-25dp" />
 
 		</LinearLayout>
 

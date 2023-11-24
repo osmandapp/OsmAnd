@@ -11,12 +11,12 @@
         android:id="@+id/empty_state_image_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/empty_state_image_margin_bottom"
-        android:layout_marginLeft="@dimen/empty_state_image_margin_left"
         android:layout_marginStart="@dimen/empty_state_image_margin_left"
+        android:layout_marginLeft="@dimen/empty_state_image_margin_left"
         android:layout_marginTop="@dimen/empty_state_image_margin_top"
+        android:layout_marginBottom="@dimen/empty_state_image_margin_bottom"
         android:adjustViewBounds="true"
-        tools:src="@drawable/ic_empty_state_av_notes_night"/>
+        tools:src="@drawable/ic_empty_state_av_notes_night" />
 
     <LinearLayout
         android:layout_width="wrap_content"

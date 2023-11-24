@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<TextView
@@ -11,9 +14,12 @@
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
 		android:paddingLeft="@dimen/content_padding"
+		android:layout_marginTop="20dp"
 		android:paddingRight="@dimen/content_padding"
+		android:layout_marginStart="50dp"
+		android:layout_marginEnd="50dp"
 		android:textColor="?android:textColorSecondary"
-		android:textSize="@dimen/default_desc_text_size"
+		android:textSize="8sp"
 		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 		android:text="@string/gpx_split_interval_descr"
 		android:paddingEnd="@dimen/content_padding"

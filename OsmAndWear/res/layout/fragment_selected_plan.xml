@@ -104,6 +104,7 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
+						android:layout_marginStart="30dp"
 						android:contentDescription="@string/access_shared_string_navigate_up"
 						android:tint="@color/icon_color_default_light"
 						osmand:srcCompat="@drawable/ic_arrow_back" />
@@ -113,8 +114,8 @@
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-						android:layout_marginStart="@dimen/content_padding"
-						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginStart="0dp"
+						android:layout_marginLeft="0dp"
 						android:layout_weight="1"
 						android:textSize="@dimen/dialog_header_text_size"
 						osmand:typeface="@string/font_roboto_medium"
@@ -123,9 +124,11 @@
 					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/button_help"
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:layout_marginRight="60dp"
 						android:contentDescription="@string/shared_string_help"
+						android:translationY="20dp"
 						osmand:srcCompat="@drawable/ic_action_help"
 						tools:tint="@color/icon_color_default_light" />
 

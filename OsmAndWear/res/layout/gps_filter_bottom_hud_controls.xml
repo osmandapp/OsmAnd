@@ -10,13 +10,14 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="start|bottom"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:translationY="-20dp">
 
 		<ImageButton
 			android:id="@+id/map_center_on_track"
-			android:layout_width="@dimen/map_button_size"
-			android:layout_height="@dimen/map_button_size"
-			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_marginStart="50dp"
 			android:background="@drawable/btn_circle"
 			tools:src="@drawable/ic_action_remove_dark" />
 
@@ -25,7 +26,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start|bottom"
-			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginStart="-40dp"
 			android:layout_marginEnd="@dimen/fab_margin_right" />
 
 	</LinearLayout>

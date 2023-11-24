@@ -23,6 +23,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:paddingTop="@dimen/content_padding_small"
 			android:text="@string/shared_string_restore"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			osmand:lineHeight="@dimen/default_title_line_height"

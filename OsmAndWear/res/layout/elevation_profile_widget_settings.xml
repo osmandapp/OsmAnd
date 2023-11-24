@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="00dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
@@ -17,6 +20,7 @@
 			android:layout_width="@dimen/dialog_content_margin"
 			android:layout_height="@dimen/dialog_content_margin"
 			android:layout_marginStart="@dimen/title_padding"
+			android:translationX="25dp"
 			tools:src="@drawable/ic_action_slope" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -27,6 +31,7 @@
 			android:layout_marginStart="@dimen/dialog_button_height"
 			android:maxLines="1"
 			android:ellipsize="end"
+			android:textSize="11sp"
 			android:text="@string/shared_string_show_slope"
 			android:textColor="?android:textColorPrimary" />
 
@@ -37,10 +42,11 @@
 			android:layout_marginStart="@dimen/title_padding"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:background="@null"
+			android:clickable="false"
 			android:focusable="false"
 			android:focusableInTouchMode="false"
-			android:clickable="false"
-			android:saveEnabled="false" />
+			android:saveEnabled="false"
+			android:translationX="-30dp" />
 
 	</LinearLayout>
 

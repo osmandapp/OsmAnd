@@ -6,6 +6,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:background="@drawable/view_transparent_selection"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="50dp"
@@ -25,7 +28,8 @@
         android:layout_width="56dp"
         android:layout_height="25dp"
         android:layout_gravity="center_vertical"
-        osmand:srcCompat="@drawable/ic_action_favorite"/>
+        android:translationX="25dp"
+        osmand:srcCompat="@drawable/ic_action_favorite" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -130,12 +134,13 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"
-	    android:layout_marginEnd="2dp" />
+        android:translationX="-25dp"
+        osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/info_move"

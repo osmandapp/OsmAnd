@@ -29,7 +29,9 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:layout_marginStart="10dp"
 					android:contentDescription="@string/back"
+					android:translationX="15dp"
 					osmand:srcCompat="@drawable/ic_arrow_back" />
 
 				<include layout="@layout/search_text_layout" />
@@ -75,11 +77,6 @@
 				osmand:dialogButtonType="tertiary"
 				osmand:dialogButtonUseUppercaseTitle="true"
 				tools:dialogButtonTitle="@string/shared_string_select_all" />
-
-			<View
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="1" />
 
 			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/apply_button"

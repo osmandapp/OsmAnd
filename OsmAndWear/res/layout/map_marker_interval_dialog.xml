@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical"
 	android:paddingHorizontal="@dimen/content_padding"
 	android:paddingTop="@dimen/content_padding"
@@ -16,6 +19,7 @@
 		android:layout_height="wrap_content"
 		android:paddingHorizontal="@dimen/content_padding_small"
 		android:text="@string/shared_string_interval"
+		android:gravity="center"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size_large"
 		app:typeface="@string/font_roboto_medium" />

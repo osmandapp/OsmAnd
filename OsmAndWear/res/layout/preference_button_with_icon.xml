@@ -6,6 +6,7 @@
 	android:layout_height="wrap_content"
 	android:minWidth="@dimen/context_menu_top_right_button_min_width"
 	android:minHeight="@dimen/setting_list_item_large_height"
+	android:translationX="10dp"
 	app:cardCornerRadius="4dp"
 	app:cardElevation="0dp"
 	tools:cardBackgroundColor="?attr/switch_button_active">
@@ -21,7 +22,7 @@
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
-			android:layout_width="@dimen/standard_icon_size"
+			android:layout_width="18dp"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:layout_marginBottom="@dimen/content_padding_small_half"

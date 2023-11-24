@@ -10,6 +10,7 @@
 	android:paddingVertical="@dimen/content_padding_half"
 	android:textColor="@color/preference_action_button_text"
 	android:textSize="@dimen/default_desc_text_size"
+	android:translationX="50dp"
 	osmand:lineHeight="@dimen/default_desc_line_height"
 	osmand:typeface="@string/font_roboto_medium"
 	tools:text="@string/shared_string_apply" />

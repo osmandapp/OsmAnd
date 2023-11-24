@@ -17,12 +17,12 @@
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
 		android:ellipsize="end"
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:letterSpacing="@dimen/text_button_letter_spacing"
 		android:maxLines="1"
 		android:minHeight="@dimen/bottom_sheet_icon_margin"
 		android:text="@string/login_open_street_map"
-		android:textSize="@dimen/default_list_text_size"
+		android:textSize="8sp"
 		osmand:typeface="@string/font_roboto_medium" />
 
 	<com.google.android.material.textfield.TextInputLayout

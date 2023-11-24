@@ -2,7 +2,7 @@
 <LinearLayout
     android:id="@+id/main_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dashboard_land_width"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
     tools:background="?attr/left_menu_view_bg"
@@ -35,7 +35,8 @@
             android:id="@+id/cancel_row"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            android:translationX="0dp">
 
             <TextView
                 android:id="@+id/cancel_row_text"
@@ -46,7 +47,7 @@
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </FrameLayout>
 
     </LinearLayout>

@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="24dp"
+            android:gravity="center"
             android:paddingEnd="0dp"
             android:text="@string/show_gpx"
             android:textColor="?android:attr/textColorPrimary"

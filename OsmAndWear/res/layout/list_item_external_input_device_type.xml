@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:gravity="center_vertical">
 
@@ -17,13 +20,14 @@
 			android:id="@+id/compound_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginBottom="1dp"
-			android:layout_gravity="center_vertical"
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:saveEnabled="false" />
+			android:saveEnabled="false"
+			android:translationX="25dp" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -53,8 +57,9 @@
 					android:id="@+id/overflow_menu"
 					android:layout_width="@dimen/acceptable_touch_radius"
 					android:layout_height="@dimen/acceptable_touch_radius"
+					android:layout_gravity="center_vertical"
 					android:layout_marginEnd="@dimen/list_item_button_padding"
-					android:layout_gravity="center_vertical">
+					android:translationX="-25dp">
 
 					<androidx.appcompat.widget.AppCompatImageButton
 						style="@style/Widget.AppCompat.ActionButton"
@@ -62,8 +67,8 @@
 						android:layout_height="@dimen/standard_icon_size"
 						android:layout_gravity="center"
 						android:layout_margin="@dimen/content_padding"
-						android:duplicateParentState="true"
 						android:clickable="false"
+						android:duplicateParentState="true"
 						android:focusable="false"
 						android:tint="?attr/default_icon_color"
 						app:srcCompat="@drawable/ic_overflow_menu_dark" />

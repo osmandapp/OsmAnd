@@ -4,7 +4,7 @@
 	android:id="@+id/free_favorites_backup_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginTop="@dimen/content_padding"
+	android:layout_marginTop="0dp"
 	android:background="?attr/bg_color"
 	android:orientation="horizontal"
 	android:paddingStart="@dimen/content_padding">
@@ -15,6 +15,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small"
 		android:layout_marginEnd="@dimen/content_padding"
+		android:translationX="25dp"
 		osmand:srcCompat="@drawable/ic_action_folder_cloud_colored" />
 
 	<LinearLayout
@@ -62,6 +63,7 @@
 				android:layout_marginRight="@dimen/content_padding_small"
 				android:background="@null"
 				android:contentDescription="@string/shared_string_close"
+				android:translationX="-30dp"
 				osmand:srcCompat="@drawable/ic_action_cancel" />
 
 		</LinearLayout>

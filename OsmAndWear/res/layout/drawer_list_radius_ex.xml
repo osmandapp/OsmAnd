@@ -5,6 +5,9 @@
 	android:orientation="horizontal"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingLeft="16dp"
 	android:paddingRight="16dp"
 	android:minHeight="50dp"
@@ -24,23 +27,26 @@
         <TextView
             android:id="@+id/title"
             android:text="@string/search_radius_proximity"
+			android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textSize="@dimen/default_desc_text_size" />
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textColor="@color/color_myloc_distance"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="2dp"
-            android:text="500 m"
-            android:layout_marginRight="16dp"
-	        android:layout_marginEnd="16dp" />
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginTop="2dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginRight="16dp"
+			android:gravity="right"
+			android:text="500 m"
+			android:textColor="@color/color_myloc_distance"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="bold"
+			android:translationX="50dp" />
 
     </LinearLayout>
 

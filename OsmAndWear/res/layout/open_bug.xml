@@ -5,14 +5,19 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:paddingLeft="?dialogPreferredPadding"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingRight="?dialogPreferredPadding"
 	android:paddingStart="?dialogPreferredPadding"
 	android:paddingEnd="?dialogPreferredPadding">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/osb_comment_dialog_message"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/osb_comment_dialog_message"
+		android:translationX="20dp"
+		android:translationY="20dp" />
 
     <EditText
         android:id="@+id/message_field"

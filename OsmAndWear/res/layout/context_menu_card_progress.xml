@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/context_img_card_width"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/context_img_card_height"
     android:gravity="center"
     android:orientation="vertical"

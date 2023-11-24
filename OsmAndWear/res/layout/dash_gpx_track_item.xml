@@ -5,6 +5,9 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
               android:orientation="vertical">
 
 	<View
@@ -42,10 +45,11 @@
 			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/list_content_padding"
 			android:layout_marginLeft="@dimen/list_content_padding"
-			osmand:srcCompat="@drawable/ic_action_polygom_dark"
+			android:translationX="30dp"
 			android:visibility="visible"
-			android:layout_marginStart="@dimen/list_content_padding" />
+			osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
 
 		<LinearLayout
@@ -64,71 +68,74 @@
 				android:id="@+id/name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:gravity="center"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				tools:text="@string/current_track"/>
+				android:translationX="25dp"
+				tools:text="@string/current_track" />
 
 			<LinearLayout
 				android:id="@+id/read_section"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
 				android:orientation="horizontal"
-				android:visibility="visible"
-                android:gravity="center_vertical">
+				android:translationX="25dp"
+				android:visibility="visible">
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/distance_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					osmand:srcCompat="@drawable/ic_action_distance_16"
-					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+					osmand:srcCompat="@drawable/ic_action_distance_16" />
 
 				<TextView
 					android:id="@+id/distance"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-                    android:includeFontPadding="false"
+					android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_sub_text_size"
-					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+					android:textSize="@dimen/default_sub_text_size" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/points_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					osmand:srcCompat="@drawable/ic_action_waypoint_16"
-					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+					osmand:srcCompat="@drawable/ic_action_waypoint_16" />
 
 				<TextView
 					android:id="@+id/points_count"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-                    android:includeFontPadding="false"
+					android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_sub_text_size"
-					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+					android:textSize="@dimen/default_sub_text_size" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/time_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
-					osmand:srcCompat="@drawable/ic_action_time_16"
-					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+					osmand:srcCompat="@drawable/ic_action_time_16" />
 
 				<TextView
 					android:id="@+id/time"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
+					android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
-                    android:includeFontPadding="false"
-					android:textSize="@dimen/default_sub_text_size"
-					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
 

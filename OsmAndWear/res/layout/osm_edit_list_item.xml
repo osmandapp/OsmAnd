@@ -4,6 +4,9 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
               android:minHeight="@dimen/list_item_height">
 
     <TextView
@@ -15,23 +18,24 @@
         android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
         android:layout_weight="1"
 	    android:textColor="?android:textColorPrimary"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textSize="@dimen/default_list_text_size"
 	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
 	    android:layout_marginStart="@dimen/dialog_elements_vertical_margin" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iconImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
-        android:gravity="center_vertical"
-        android:maxLines="2"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"
-        android:textSize="@dimen/default_desc_text_size"
-	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
-	    android:layout_marginStart="3dp" />
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/iconImageView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="3dp"
+		android:layout_marginLeft="3dp"
+		android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
+		android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
+		android:gravity="center_vertical"
+		android:maxLines="2"
+		android:textSize="@dimen/default_desc_text_size"
+		android:translationX="-25dp"
+		osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 </LinearLayout>

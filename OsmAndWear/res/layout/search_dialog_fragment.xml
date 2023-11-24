@@ -135,12 +135,13 @@
                     android:minHeight="48dp"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/buttonToolbarImage"
-                        android:layout_width="54dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_action_marker_dark"/>
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/buttonToolbarImage"
+						android:layout_width="54dp"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:translationX="15dp"
+						app:srcCompat="@drawable/ic_action_marker_dark" />
 
                     <TextView
                         android:id="@+id/buttonToolbarTitle"

@@ -27,6 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="16dp"
+                    android:paddingStart="20dp"
                     osmand:srcCompat="@drawable/ic_action_mapillary"
                     android:tint="@color/mapillary_color"
 	                android:layout_marginStart="16dp" />

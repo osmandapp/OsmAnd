@@ -34,6 +34,7 @@
 				android:layout_marginEnd="@dimen/map_widget_height"
 				android:layout_marginRight="@dimen/map_widget_height"
 				android:paddingBottom="@dimen/dialog_content_bottom_margin"
+				android:translationX="30dp"
 				app:srcCompat="@drawable/ic_action_help"
 				app:tint="?attr/profile_icon_color_green" />
 

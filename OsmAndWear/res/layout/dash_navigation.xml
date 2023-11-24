@@ -5,6 +5,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="?attr/expandable_list_item_background"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:minHeight="@dimen/list_item_height"
     android:orientation="vertical" >
 
@@ -25,12 +28,13 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
-            android:scaleType="center"
-        	android:paddingLeft="@dimen/list_content_padding"
-            osmand:srcCompat="@drawable/ic_action_start_navigation"
+            android:layout_marginEnd="@dimen/favorites_icon_right_margin"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
-	        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-	        android:paddingStart="@dimen/list_content_padding" />
+            android:paddingStart="@dimen/list_content_padding"
+            android:paddingLeft="@dimen/list_content_padding"
+            android:scaleType="center"
+            android:translationX="20dp"
+            osmand:srcCompat="@drawable/ic_action_start_navigation" />
 
         <TextView
             android:id="@+id/name"
@@ -55,12 +59,13 @@
 
         <ImageButton
             android:id="@+id/cancel"
-            android:contentDescription="@string/shared_string_cancel"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
+            android:contentDescription="@string/shared_string_cancel"
             android:focusable="false"
+            android:translationX="-25dp"
             osmand:srcCompat="@drawable/ic_action_remove_dark" />
     </LinearLayout>
 

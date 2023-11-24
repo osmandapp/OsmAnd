@@ -4,6 +4,9 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:minHeight="@dimen/list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
               android:descendantFocusability="blocksDescendants"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/list_content_padding"
@@ -29,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:text="@string/layer_poi"
@@ -48,12 +51,13 @@
         android:visibility="gone"
 	    android:paddingStart="@dimen/content_padding" />
 
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/toggle_item"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/list_item_height"
-        android:layout_gravity="center_vertical"
-        android:focusable="false"
-        android:gravity="center_vertical" />
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/toggle_item"
+		android:layout_width="wrap_content"
+		android:layout_height="@dimen/list_item_height"
+		android:layout_gravity="center_vertical"
+		android:focusable="false"
+		android:gravity="center_vertical"
+		android:translationX="-25dp" />
 
 </LinearLayout>

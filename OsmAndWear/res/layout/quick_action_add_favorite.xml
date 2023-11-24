@@ -20,8 +20,10 @@
             android:layout_gravity="center"
             android:text="@string/quick_action_interim_dialog"
             android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
+            android:layout_marginStart="25dp"
+            android:textSize="10sp"
             android:layout_weight="1"
+            android:gravity="center"
             android:id="@+id/textView3" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -29,10 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
-	        android:layout_marginStart="@dimen/content_padding"
-	        android:layout_marginEnd="@dimen/content_padding" />
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:translationX="-25dp" />
 
     </LinearLayout>
 

@@ -5,12 +5,16 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/bg_color"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
               android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groups_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:clipToPadding="false"/>
 
     <ProgressBar

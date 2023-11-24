@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
@@ -20,7 +23,8 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding_small"
-			android:src="@drawable/ic_notification_track" />
+			android:src="@drawable/ic_notification_track"
+			android:translationX="25dp" />
 
 		<LinearLayout
 			android:layout_width="match_parent"

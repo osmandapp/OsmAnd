@@ -17,6 +17,7 @@
 		android:layout_height="match_parent">
 
 		<androidx.recyclerview.widget.RecyclerView
+			android:layout_marginTop="30dp"
 			android:id="@+id/profiles_list"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -44,7 +45,8 @@
 
 				<include
 					layout="@layout/bottom_buttons"
-					android:layout_width="match_parent"
+					android:layout_width="wrap_content"
+					android:layout_marginStart="30dp"
 					android:layout_height="@dimen/dialog_button_ex_height" />
 
 			</LinearLayout>

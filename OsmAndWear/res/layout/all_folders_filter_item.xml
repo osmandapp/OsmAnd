@@ -15,38 +15,46 @@
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/card_row_min_height"
 		android:orientation="horizontal"
-		android:paddingEnd="@dimen/content_padding">
+		android:paddingStart="0dp"
+		android:paddingLeft="0dp"
+		android:layout_marginStart="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="-40dp"
+		android:layout_marginEnd="0dp"
+		android:paddingRight="0dp">
 
 		<ImageView
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
-			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding"
+			android:paddingStart="0dp"
+			android:paddingLeft="0dp"
+			android:layout_gravity="center"
+			android:layout_marginHorizontal="30dp"
 			tools:src="@drawable/ic_action_track_line_bold_color"
 			tools:tint="?attr/default_icon_color" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
-			android:layout_width="0dp"
+			android:layout_width="44dp"
 			android:layout_height="match_parent"
-			android:layout_gravity="center_vertical|start"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_gravity="center"
+			android:layout_marginEnd="0dp"
 			android:layout_weight="1"
 			android:ellipsize="end"
-			android:gravity="center_vertical"
+			android:gravity="center"
 			android:maxLines="1"
 			android:text="@string/all_folders"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			android:textSize="11sp"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="Some title" />
 
-		<net.osmand.view.ThreeStateCheckbox
+		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/toggle_item"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
+			android:layout_marginRight="30dp"
 			android:layout_gravity="center_vertical"
 			android:focusable="false" />
 

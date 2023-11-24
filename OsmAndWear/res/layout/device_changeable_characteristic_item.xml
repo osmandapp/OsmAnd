@@ -5,6 +5,9 @@
 	android:layout_height="wrap_content"
 	android:layoutDirection="rtl"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingStart="@dimen/content_padding"
 	android:paddingLeft="@dimen/content_padding"
 	android:textDirection="rtl">
@@ -26,9 +29,10 @@
 			android:layout_gravity="center_vertical|start"
 			android:layout_weight="1"
 			android:ellipsize="end"
-			android:gravity="start"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="30dp"
 			tools:text="Title" />
 
 		<TextView
@@ -40,6 +44,7 @@
 			android:gravity="start"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
+			android:translationX="25dp"
 			tools:text="20 km/h" />
 
 	</LinearLayout>

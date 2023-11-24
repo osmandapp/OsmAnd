@@ -3,6 +3,9 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
 
@@ -62,6 +65,7 @@
 							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:minHeight="@dimen/default_title_line_height"
 							android:textSize="@dimen/default_list_text_size"
+							android:gravity="right"
 							osmand:lineHeight="@dimen/default_title_line_height"
 							osmand:typeface="@string/font_roboto_medium"
 							tools:text="@string/search_address_building" />

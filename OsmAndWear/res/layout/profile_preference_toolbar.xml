@@ -25,8 +25,9 @@
 			android:layout_width="@dimen/toolbar_height"
 			android:layout_height="@dimen/toolbar_height"
 			android:contentDescription="@string/access_shared_string_navigate_up"
-			osmand:srcCompat="@drawable/ic_arrow_back"
-			android:tint="?attr/default_icon_color" />
+			android:tint="?attr/default_icon_color"
+			android:translationX="25dp"
+			osmand:srcCompat="@drawable/ic_arrow_back" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -49,7 +50,7 @@
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:maxLines="2"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/dialog_header_text_size"
+				android:textSize="8sp"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:text="@string/routing_settings_2" />
 
@@ -61,6 +62,7 @@
 				android:maxLines="2"
 				android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 				android:textColor="@null"
+				android:textSize="8sp"
 				tools:text="Some description" />
 		</LinearLayout>
 

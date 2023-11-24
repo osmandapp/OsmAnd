@@ -5,6 +5,10 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/bottom_sheet_descr_height"
+
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -18,7 +22,7 @@
 			android:id="@+id/title"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
+			android:layout_gravity="center"
 			android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
 			android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
 			android:layout_weight="1"
@@ -30,15 +34,15 @@
 			android:id="@+id/description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
+			android:layout_gravity="center"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:textColor="@color/color_myloc_distance"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="500 m"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:layout_marginStart="@dimen/content_padding" />
+			android:layout_marginEnd="60dp"
+			android:layout_marginStart="0dp" />
 
 	</LinearLayout>
 

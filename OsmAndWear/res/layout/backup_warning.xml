@@ -5,6 +5,10 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -21,11 +25,12 @@
 			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
-			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginStart="30dp"
 			android:layout_marginLeft="@dimen/content_padding_small"
 			android:layout_marginTop="@dimen/content_padding_small"
-			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
+			android:translationX="-20dp"
+			android:translationY="40dp"
 			tools:src="@drawable/ic_action_lock" />
 
 		<LinearLayout
@@ -55,7 +60,7 @@
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="12sp"
 				osmand:lineHeight="@dimen/default_desc_line_height"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/make_backup_descr" />

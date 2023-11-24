@@ -21,6 +21,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="25dp"
         android:layout_below="@id/appbar"
         android:clipToPadding="false" />
 
@@ -60,7 +61,8 @@
                 android:layout_gravity="center_vertical|start"
                 android:layout_margin="@dimen/content_padding_half"
                 android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/content_padding_half">
+                android:padding="@dimen/content_padding_half"
+                android:translationX="25dp">
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:layout_width="wrap_content"
@@ -84,8 +86,10 @@
                     android:id="@+id/button_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
                     android:background="?attr/selectableItemBackground"
-                    android:padding="@dimen/content_padding_half">
+                    android:padding="@dimen/content_padding_half"
+                    android:translationX="-35dp">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/button_text"

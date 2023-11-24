@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="end"
+    android:layout_marginStart="5dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="5dp"
+
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="0dp"
+    android:gravity="center|center_vertical"
+    android:padding="@dimen/content_padding_half"
     android:textColor="?attr/color_dialog_buttons"
     android:textSize="@dimen/default_list_text_size"
-    android:padding="@dimen/content_padding_half"
-    tools:text="Test text"/>
+    tools:text="Test text" />

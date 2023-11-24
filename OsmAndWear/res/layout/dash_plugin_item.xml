@@ -6,6 +6,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:background="?attr/expandable_list_item_background"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
@@ -23,11 +26,12 @@
 			android:id="@+id/plugin_logo"
 			android:layout_width="32dp"
 			android:layout_height="32dp"
-			android:layout_margin="11dp"
 			android:layout_gravity="center_vertical"
+			android:layout_margin="11dp"
 			android:background="@drawable/bg_plugin_logo_enabled_light"
 			android:scaleType="center"
-			tools:src="@drawable/ic_extension_dark"/>
+			android:translationX="25dp"
+			tools:src="@drawable/ic_extension_dark" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/plugin_name"

@@ -91,10 +91,12 @@
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/button_back"
                         style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-                        android:layout_width="@dimen/toolbar_height"
-                        android:layout_height="@dimen/toolbar_height"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="40dp"
                         android:contentDescription="@string/access_shared_string_navigate_up"
                         android:tint="@color/icon_color_default_light"
+                        android:translationY="5dp"
                         osmand:srcCompat="@drawable/ic_arrow_back" />
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -102,12 +104,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/content_padding"
-                        android:layout_marginLeft="@dimen/content_padding"
-                        android:layout_marginRight="@dimen/content_padding"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         android:layout_marginEnd="@dimen/content_padding"
                         android:layout_weight="1"
-                        android:textSize="@dimen/dialog_header_text_size"
+                        android:textSize="12sp"
                         osmand:typeface="@string/font_roboto_medium"
                         android:text="@string/benefits_for_contributors"/>
 

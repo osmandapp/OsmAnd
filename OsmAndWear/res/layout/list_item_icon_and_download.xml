@@ -5,6 +5,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,6 +25,7 @@
             android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_marginEnd="@dimen/list_content_padding"
             android:layout_marginRight="@dimen/list_content_padding"
+            android:translationX="25dp"
             tools:src="@drawable/ic_map" />
 
         <LinearLayout
@@ -99,8 +103,9 @@
                     android:id="@+id/secondary_icon"
                     android:layout_width="@dimen/list_item_height"
                     android:layout_height="@dimen/list_item_height"
-                    android:scaleType="center"
                     android:layout_gravity="center_vertical"
+                    android:scaleType="center"
+                    android:translationX="-15dp"
                     android:visibility="gone"
                     tools:src="@drawable/ic_action_import"
                     tools:visibility="visible" />

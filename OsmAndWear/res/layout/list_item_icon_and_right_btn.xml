@@ -7,6 +7,9 @@
     android:layout_height="wrap_content"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:background="?attr/bg_color"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="0dp"
     android:minHeight="60dp"
     tools:layout_height="60dp">
 
@@ -16,9 +19,10 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/content_padding"
         android:layout_marginStart="@dimen/content_padding"
-        tools:src="@drawable/ic_action_info_dark"/>
+        android:layout_marginLeft="@dimen/content_padding"
+        android:translationX="15dp"
+        tools:src="@drawable/ic_action_info_dark" />
 
     <LinearLayout
         android:id="@+id/text_wrapper"
@@ -44,6 +48,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text"/>
 

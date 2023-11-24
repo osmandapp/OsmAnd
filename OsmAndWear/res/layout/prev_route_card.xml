@@ -5,6 +5,9 @@
 	android:id="@+id/prev_route_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -33,7 +36,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:minHeight="@dimen/route_info_list_item_height"
+			android:minHeight="20dp"
 			android:paddingTop="@dimen/list_header_padding"
 			android:paddingBottom="@dimen/list_header_padding"
 			android:gravity="center_vertical">
@@ -45,6 +48,7 @@
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:text="@string/previous_route"
+				android:gravity="center"
 				android:textSize="@dimen/default_desc_text_size"
 				android:textColor="@color/text_color_secondary_light" />
 
@@ -54,8 +58,7 @@
 			android:id="@+id/card_button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:minHeight="@dimen/route_info_card_item_height"
-			android:paddingTop="@dimen/list_header_padding"
+			android:minHeight="40dp"
 			android:paddingBottom="@dimen/list_header_padding"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
@@ -65,7 +68,7 @@
 				android:id="@+id/card_img"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/list_content_padding"
+				android:layout_marginStart="25dp"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
@@ -87,7 +90,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/home_button"
-					android:textSize="@dimen/default_sub_text_size"
+					android:textSize="10sp"
 					tools:ignore="UnusedAttribute"
 					tools:text="My location - 160 Broadway, New York" />
 
@@ -95,12 +98,11 @@
 					android:id="@+id/destination_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
 					android:textColor="?android:textColorPrimary"
 					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
-					android:textSize="@dimen/default_list_text_size"
+					android:textSize="10sp"
 					tools:ignore="UnusedAttribute"
 					tools:text="McDonald's, 1560 Broadway, New York" />
 

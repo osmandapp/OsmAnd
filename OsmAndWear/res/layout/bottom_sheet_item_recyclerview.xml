@@ -5,12 +5,15 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
-	android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="-40dp"
+	android:layout_marginEnd="0dp"
+	android:minHeight="20dp">
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recycler_view"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:clipToPadding="false"
 		android:orientation="horizontal"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

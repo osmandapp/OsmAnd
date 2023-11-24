@@ -17,7 +17,8 @@
         android:id="@+id/icon_background"
         android:layout_width="@dimen/big_icon_size"
         android:layout_height="@dimen/big_icon_size"
-        android:background="@drawable/rectangle_rounded">
+        android:background="@drawable/rectangle_rounded"
+        android:translationX="25dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"

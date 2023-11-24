@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/profile_settings"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="40dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/selectableItemBackground"
 	android:descendantFocusability="blocksDescendants"
 	android:gravity="center"
-	android:orientation="horizontal">
+	android:orientation="horizontal"
+	android:translationX="0dp">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
-		android:layout_width="@dimen/standard_icon_size"
-		android:layout_height="@dimen/standard_icon_size"
+		android:layout_width="14dp"
+		android:layout_height="14dp"
+		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		tools:src="@drawable/ic_action_bicycle_dark"
 		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-		android:layout_marginStart="@dimen/content_padding" />
+		android:layout_marginRight="@dimen/favorites_icon_right_margin"
+		android:translationX="15dp"
+		tools:src="@drawable/ic_action_bicycle_dark" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -30,7 +35,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:background="?attr/list_divider" />
-		
+
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/setting_profile_item_height"
@@ -50,7 +55,7 @@
 					android:ellipsize="end"
 					android:maxLines="2"
 					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
+					android:textSize="12sp"
 					tools:text="Bicycle" />
 
 				<TextView
@@ -59,8 +64,8 @@
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textSize="@dimen/default_desc_text_size"
 					android:textColor="?android:textColorSecondary"
+					android:textSize="8sp"
 					tools:text="Type: Bicycle" />
 
 			</LinearLayout>
@@ -72,24 +77,25 @@
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/menu_image"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
+					android:layout_width="40dp"
+					android:layout_height="40dp"
 					android:layout_gravity="center_vertical"
 					android:paddingStart="@dimen/setting_profile_item_switch_margin"
 					android:paddingLeft="@dimen/setting_profile_item_switch_margin"
 					android:paddingEnd="10dp"
 					android:paddingRight="10dp"
-					osmand:srcCompat="@drawable/ic_action_additional_option"
-					android:tint="@color/icon_color_default_light" />
+					android:tint="@color/icon_color_default_light"
+					osmand:srcCompat="@drawable/ic_action_additional_option" />
 
 				<androidx.appcompat.widget.SwitchCompat
 					android:id="@+id/compound_button"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:layout_gravity="center_vertical|end"
+					android:layout_width="60dp"
+					android:layout_height="40dp"
+					android:layout_gravity="center_vertical"
 					android:background="@null"
 					android:focusableInTouchMode="true"
-					android:padding="@dimen/content_padding" />
+					android:padding="@dimen/content_padding"
+					android:translationX="0dp" />
 
 			</LinearLayout>
 

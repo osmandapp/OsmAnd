@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical">
 
     <net.osmand.plus.widgets.EmptyStateRecyclerView
@@ -9,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom"
+        android:layout_marginStart="10dp"
         android:clipToPadding="false"/>
 
     <include layout="@layout/empty_state_markers_active"

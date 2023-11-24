@@ -6,6 +6,9 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/expandable_list_item_background"
 	android:minHeight="@dimen/favorites_list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<View
@@ -38,7 +41,8 @@
 		<FrameLayout
 			android:layout_width="@dimen/favorites_my_places_icon_size"
 			android:layout_height="match_parent"
-			android:layout_gravity="center_vertical">
+			android:layout_gravity="center_vertical"
+			android:translationX="25dp">
 
 			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/toggle_item"

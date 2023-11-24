@@ -44,7 +44,7 @@
 					android:layout_height="match_parent"
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1"
-					android:gravity="center_vertical"
+					android:gravity="center"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:text="@string/shared_string_appearance"
 					android:textColor="?android:textColorPrimary"
@@ -56,6 +56,7 @@
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center_vertical"
+					android:translationX="-40dp"
 					osmand:srcCompat="@drawable/ic_action_gpx_width_bold"
 					tools:tint="@color/icon_color_default_light" />
 

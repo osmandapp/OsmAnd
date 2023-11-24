@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:clipChildren="false"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:orientation="vertical">
 
@@ -24,6 +27,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_weight="1"
+			android:textSize="12sp"
+			android:gravity="end"
 			android:textColor="?android:textColorPrimary"
 			tools:text="@string/duration" />
 
@@ -33,6 +38,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding"
+			android:textSize="12sp"
 			android:textColor="?android:textColorSecondary"
 			tools:text="@string/duration" />
 
@@ -44,6 +50,8 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:tint="?attr/default_icon_color"
+			android:translationX="-25dp"
+			android:translationY="5dp"
 			tools:srcCompat="@drawable/ic_action_arrow_down" />
 
 	</LinearLayout>

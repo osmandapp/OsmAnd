@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="20dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -21,9 +24,8 @@
 				android:id="@+id/icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginStart="21dp"
 				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
 				android:tint="?attr/secondary_icon_color"
 				tools:srcCompat="@drawable/ic_map" />
 
@@ -33,9 +35,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
 				android:orientation="vertical"
-				android:paddingLeft="@dimen/content_padding"
 				android:paddingTop="@dimen/content_padding_small"
-				android:paddingRight="@dimen/content_padding"
 				android:paddingBottom="@dimen/content_padding_small">
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -59,7 +59,6 @@
 						android:layout_width="@dimen/small_icon_size"
 						android:layout_height="@dimen/small_icon_size"
 						android:layout_gravity="center_vertical"
-						android:layout_marginEnd="@dimen/content_padding_half"
 						android:src="@drawable/ic_action_cloud"
 						android:tint="?attr/secondary_icon_color" />
 
@@ -83,18 +82,15 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
 				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 				android:id="@+id/progress_bar"
 				style="@style/Widget.MaterialProgressBar.ProgressBar.NoPadding"
-				android:layout_width="@dimen/acceptable_touch_radius"
-				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
 				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/text_margin_small"
-				android:layout_marginRight="@dimen/text_margin_small"
+				android:layout_marginRight="20dp"
 				android:indeterminate="false"
 				osmand:mpb_progressStyle="circular"
 				osmand:mpb_setBothDrawables="true"

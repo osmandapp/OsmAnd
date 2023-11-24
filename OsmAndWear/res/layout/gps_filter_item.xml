@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color">
 
 	<LinearLayout
@@ -23,6 +26,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
+			android:gravity="center"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			osmand:typeface="@string/font_roboto_regular"
@@ -36,6 +40,7 @@
 			android:layout_marginStart="@dimen/title_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
 			android:tint="?attr/default_icon_color"
+			android:translationX="-25dp"
 			osmand:srcCompat="@drawable/ic_action_arrow_up" />
 
 	</LinearLayout>
@@ -107,6 +112,7 @@
 				android:layout_weight="1"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
+				android:gravity="center"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="0 m" />
@@ -116,9 +122,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/dialog_content_margin"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
-				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:translationX="-25dp"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="125 m" />
 

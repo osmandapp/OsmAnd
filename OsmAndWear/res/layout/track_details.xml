@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:clickable="true"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -55,7 +58,7 @@
                         android:layout_weight="1"
                         android:layout_marginRight="8dp"
                         android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="@dimen/default_desc_text_size"
+                        android:textSize="7sp"
                         tools:text="@string/altitude"
 	                    android:layout_marginEnd="8dp" />
 
@@ -90,30 +93,33 @@
                         android:id="@+id/x_axis_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/list_content_padding"
                         android:layout_marginLeft="@dimen/list_content_padding"
+                        android:layout_marginEnd="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
-                        osmand:srcCompat="@drawable/ic_action_marker_dark"
-	                    android:layout_marginStart="@dimen/list_content_padding"
-	                    android:layout_marginEnd="@dimen/list_content_padding" />
+                        android:translationX="-15dp"
+                        osmand:srcCompat="@drawable/ic_action_marker_dark" />
 
                     <TextView
                         android:id="@+id/x_axis_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="1"
                         android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="@dimen/default_desc_text_size"
-                        tools:text="@string/distance"
-	                    android:layout_marginEnd="8dp" />
+                        android:textSize="7sp"
+                        android:translationX="-15dp"
+                        tools:text="@string/distance" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/x_axis_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
-	                    android:layout_marginEnd="8dp" />
+                        android:translationX="-20dp"
+                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
                 </LinearLayout>
 

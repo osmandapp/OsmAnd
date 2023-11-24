@@ -6,6 +6,9 @@
 	android:layout_height="wrap_content"
 	android:clipChildren="false"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -25,6 +28,9 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_weight="1"
 			android:textColor="?android:textColorPrimary"
+			android:textSize="12dp"
+			android:gravity="end"
+			android:translationX="10dp"
 			tools:text="@string/duration" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -33,6 +39,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/content_padding"
+			android:textSize="12sp"
 			android:textColor="?android:textColorSecondary"
 			tools:text="@string/duration" />
 
@@ -44,6 +51,8 @@
 			android:layout_gravity="center"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:tint="?attr/default_icon_color"
+			android:translationX="-25dp"
+			android:translationY="5dp"
 			tools:srcCompat="@drawable/ic_action_arrow_down" />
 
 

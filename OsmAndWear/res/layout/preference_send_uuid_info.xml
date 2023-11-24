@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
+	android:layout_marginStart="20dp"
+	android:layout_marginTop="40dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
@@ -10,6 +13,7 @@
 		style="@style/DescStyle"
 		android:textColor="?android:textColorSecondary"
 		android:paddingHorizontal="@dimen/content_padding"
+		android:textSize="11sp"
 		android:paddingBottom="@dimen/content_padding"
 		android:text="@string/send_uuid_preference_desc" />
 

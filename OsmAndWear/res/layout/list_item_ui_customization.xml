@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/setting_list_item_large_height"
 	android:orientation="horizontal">
 
@@ -15,6 +18,7 @@
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/list_content_padding_large"
 		android:layout_marginRight="@dimen/list_content_padding_large"
+		android:translationX="25dp"
 		tools:src="@drawable/ic_action_layers" />
 
 	<LinearLayout

@@ -6,6 +6,9 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingStart="@dimen/list_content_padding"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:paddingRight="0dp"
     android:paddingEnd="0dp"
     android:background="?attr/expandable_list_item_background"
@@ -31,6 +34,7 @@
         android:layout_marginEnd="@dimen/favorites_icon_right_margin"
         android:layout_marginRight="@dimen/favorites_icon_right_margin"
         android:focusable="false"
+        android:translationX="25dp"
         osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
     <LinearLayout
@@ -75,6 +79,7 @@
         android:background="?attr/dashboard_button"
         android:contentDescription="@string/shared_string_more"
         android:focusable="false"
+        android:translationX="-25dp"
         osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 </LinearLayout>

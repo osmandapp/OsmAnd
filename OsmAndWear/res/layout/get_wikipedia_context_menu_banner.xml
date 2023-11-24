@@ -12,6 +12,7 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/standard_icon_size"
         android:layout_height="@dimen/standard_icon_size"
+        android:translationX="25dp"
         app:srcCompat="@drawable/ic_action_wikipedia_download_colored_night" />
 
     <net.osmand.plus.widgets.TextViewEx

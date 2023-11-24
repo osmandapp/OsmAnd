@@ -13,6 +13,10 @@
     android:paddingEnd="@dimen/content_padding"
     android:paddingStart="@dimen/content_padding"
     android:paddingBottom="@dimen/content_padding_small"
+    android:layout_marginStart="40dp"
+    android:textSize="12sp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="40dp"
     android:textAppearance="@style/TextAppearance.ListItemTitle"
     app:typeface="@string/font_roboto_regular"
     tools:text="@string/auto_zoom_map_descr" />

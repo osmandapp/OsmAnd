@@ -7,6 +7,9 @@
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
     android:minHeight="72dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="0dp"
     tools:layout_height="72dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -43,6 +46,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="11sp"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text"/>
 
@@ -52,7 +56,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:textSize="@dimen/default_desc_text_size"
+            android:textSize="12sp"
             tools:text="Some very long subtitle text, that won't fit into one line"/>
 
         <View

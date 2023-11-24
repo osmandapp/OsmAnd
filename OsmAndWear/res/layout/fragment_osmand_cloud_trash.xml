@@ -29,6 +29,7 @@
 			android:clipToPadding="false"
 			android:orientation="vertical"
 			android:paddingBottom="@dimen/bottom_sheet_title_height"
+			android:layout_marginStart="10dp"
 			android:scrollbars="none" />
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar

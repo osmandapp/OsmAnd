@@ -4,7 +4,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:minHeight="48dp"
     android:layout_marginBottom="5dp">
 
@@ -26,6 +28,7 @@
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/default_desc_text_size"
+        android:gravity="center"
 	    android:layout_marginStart="8dp" />
 
     <TextView

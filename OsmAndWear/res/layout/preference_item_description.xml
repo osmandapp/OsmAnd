@@ -3,6 +3,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_large_list_item_height"
 	android:orientation="vertical">
 
@@ -13,6 +16,8 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
 		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginStart="50dp"
+		android:layout_marginEnd="50dp"
 		android:layout_marginVertical="@dimen/content_padding_small"
 		android:textColor="?android:textColorSecondary"
 		tools:text="@string/dangerous_goods_description" />

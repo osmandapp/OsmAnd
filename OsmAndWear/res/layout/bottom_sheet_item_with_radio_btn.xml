@@ -6,6 +6,9 @@
 	android:layout_height="@dimen/bottom_sheet_list_item_height"
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingEnd="@dimen/content_padding_small"
 	android:paddingLeft="@dimen/content_padding"
@@ -18,7 +21,8 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/ic_action_coordinates_latitude"/>
+		android:translationX="25dp"
+		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<TextView
 		android:id="@+id/title"
@@ -39,6 +43,7 @@
 		android:background="@null"
 		android:clickable="false"
 		android:focusable="false"
-		android:saveEnabled="false"/>
+		android:saveEnabled="false"
+		android:translationX="-25dp" />
 
 </LinearLayout>

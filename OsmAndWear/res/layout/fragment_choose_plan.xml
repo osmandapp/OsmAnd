@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:background="?attr/list_background_color"
     android:fitsSystemWindows="true"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -95,6 +98,7 @@
                         android:layout_height="@dimen/toolbar_height"
                         android:contentDescription="@string/access_shared_string_navigate_up"
                         android:tint="@color/icon_color_default_light"
+                        android:translationX="25dp"
                         osmand:srcCompat="@drawable/ic_arrow_back" />
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -111,11 +115,12 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/button_reset"
-                        android:contentDescription="@string/restore_purchases"
                         style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
                         android:layout_width="@dimen/toolbar_height"
                         android:layout_height="@dimen/toolbar_height"
+                        android:contentDescription="@string/restore_purchases"
                         android:tint="@color/icon_color_default_light"
+                        android:translationX="-25dp"
                         osmand:srcCompat="@drawable/ic_action_reset_to_default_dark" />
 
                 </LinearLayout>

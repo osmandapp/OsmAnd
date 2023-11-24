@@ -5,6 +5,9 @@
 	android:id="@+id/warning_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -66,6 +69,9 @@
 					android:id="@+id/title"
 					style="@style/TitleStyle.Medium"
 					android:layout_width="wrap_content"
+					android:gravity="center"
+					android:layout_marginStart="35dp"
+					android:textSize="12sp"
 					android:layout_height="wrap_content"
 					tools:text="@string/backup_error_subscription_was_expired" />
 
@@ -86,6 +92,7 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginVertical="@dimen/content_padding_small"
+				android:translationX="-35dp"
 				tools:src="@drawable/ic_action_osmand_pro_logo_colored" />
 
 		</LinearLayout>

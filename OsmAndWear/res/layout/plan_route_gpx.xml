@@ -6,6 +6,9 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:orientation="horizontal"
 	android:paddingLeft="@dimen/content_padding"
@@ -20,6 +23,7 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+		android:translationX="25dp"
 		tools:src="@drawable/ic_action_coordinates_latitude" />
 
 	<LinearLayout
@@ -55,6 +59,7 @@
 		android:id="@+id/dropDownIcon"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
+		android:translationX="-25dp"
 		osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
 </LinearLayout>

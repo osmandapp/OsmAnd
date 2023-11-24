@@ -6,6 +6,9 @@
               android:orientation="vertical"
               android:paddingLeft="24dp"
               android:paddingRight="16dp"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
               android:paddingTop="18dp"
 	android:paddingStart="24dp"
 	android:paddingEnd="16dp">
@@ -15,8 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/christmas_poi"
+		android:layout_gravity="center"
+		android:gravity="center"
         android:textColor="@color/card_and_list_background_light"
-        android:textSize="@dimen/dialog_header_text_size"
+        android:textSize="12sp"
         osmand:typeface="@string/font_roboto_medium"/>
 
 </LinearLayout>

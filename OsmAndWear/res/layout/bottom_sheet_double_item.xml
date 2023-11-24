@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
 
@@ -22,13 +25,14 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/first_icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
-				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-				android:layout_marginStart="@dimen/content_padding"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="30dp"
+				android:layout_marginLeft="0dp"
+				android:layout_marginEnd="2dp"
+				android:layout_marginRight="2dp"
+				android:translationX="20dp"
 				tools:src="@drawable/ic_action_search_dark" />
 
 			<TextView
@@ -37,10 +41,12 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
-				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+				android:layout_marginRight="0dp"
 				android:ellipsize="end"
 				android:maxLines="1"
 				android:textAppearance="@style/TextAppearance.ListItemTitle"
+				android:textSize="8sp"
+				android:translationX="20dp"
 				tools:text="@string/shared_string_search" />
 
 		</LinearLayout>
@@ -74,13 +80,13 @@
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/second_icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
-				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_gravity="center"
+				android:layout_marginEnd="2dp"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginStart="0dp"
 				tools:src="@drawable/ic_action_info_dark" />
 
 			<TextView
@@ -88,9 +94,11 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginStart="0dp"
+				android:layout_marginEnd="0dp"
 				android:layout_marginRight="@dimen/content_padding"
 				android:ellipsize="end"
+				android:textSize="8sp"
 				android:maxLines="1"
 				android:textAppearance="@style/TextAppearance.ListItemTitle"
 				tools:text="@string/shared_string_address" />

@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical">
 
 	<LinearLayout
@@ -25,6 +28,7 @@
 			android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 			android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
 			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
+			android:translationX="25dp"
 			osmand:srcCompat="@drawable/ic_action_altitude_average" />
 
 		<LinearLayout
@@ -76,7 +80,8 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:saveEnabled="false" />
+			android:saveEnabled="false"
+			android:translationX="-25dp" />
 
 	</LinearLayout>
 

@@ -28,7 +28,7 @@
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/plugin_settings"
 			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding" />
+			android:paddingStart="40dp" />
 
 	</LinearLayout>
 </LinearLayout>

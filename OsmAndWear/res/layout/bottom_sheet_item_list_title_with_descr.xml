@@ -10,6 +10,9 @@
 	android:paddingRight="@dimen/content_padding"
 	android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingEnd="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding">
 
@@ -18,7 +21,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:maxLines="1"
 		android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 		android:textColor="?android:textColorPrimary"
@@ -30,6 +33,7 @@
 		android:id="@+id/description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="center"
 		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_desc_text_size"

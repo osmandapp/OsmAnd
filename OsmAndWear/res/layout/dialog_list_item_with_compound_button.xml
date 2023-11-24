@@ -14,6 +14,10 @@
 
 	<LinearLayout
 		android:id="@+id/button"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_half"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/selectableItemBackground"

@@ -3,6 +3,9 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
@@ -23,10 +26,12 @@
 			android:id="@+id/title"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
+			android:layout_gravity="center"
+			android:gravity="center"
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:letterSpacing="@dimen/title_letter_spacing"
+			android:layout_marginStart="25dp"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"
@@ -42,7 +47,8 @@
 			android:clickable="false"
 			android:focusable="false"
 			android:focusableInTouchMode="false"
-			android:saveEnabled="false" />
+			android:saveEnabled="false"
+			android:translationX="-15dp" />
 
 	</LinearLayout>
 

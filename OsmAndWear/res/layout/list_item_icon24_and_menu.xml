@@ -7,6 +7,9 @@
     android:gravity="center_vertical"
     android:minHeight="60dp"
     android:orientation="horizontal"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="0dp"
     tools:layout_height="60dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -15,6 +18,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:translationX="15dp"
         tools:src="@drawable/ic_action_info_dark" />
 
     <LinearLayout
@@ -44,6 +48,7 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="8sp"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
                     tools:text="Some title text" />
 
@@ -53,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:textSize="@dimen/default_desc_text_size"
+                    android:textSize="8sp"
                     tools:text="Some very long subtitle text, that won't fit into one line" />
 
             </LinearLayout>
@@ -64,17 +69,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="16dp"
+                android:translationX="-15dp"
                 tools:src="@drawable/ic_action_info_dark" />
 
             <View
                 android:id="@+id/divider_vertical"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginTop="@dimen/content_padding_small"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginRight="@dimen/content_padding"
                 android:layout_marginBottom="@dimen/content_padding_small"
                 android:background="?attr/dashboard_divider"
                 android:visibility="gone"
@@ -86,7 +88,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:focusable="false" />
+                android:focusable="false"
+                android:translationX="-15dp" />
 
         </LinearLayout>
 

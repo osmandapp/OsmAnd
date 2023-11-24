@@ -4,9 +4,10 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginStart="@dimen/content_padding"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="20dp"
+	android:layout_marginEnd="0dp"
 	android:layout_marginLeft="@dimen/content_padding"
-	android:layout_marginEnd="@dimen/content_padding"
 	android:layout_marginRight="@dimen/content_padding"
 	android:baselineAligned="false"
 	android:gravity="center_vertical"
@@ -43,7 +44,8 @@
 				android:letterSpacing="@dimen/description_letter_spacing"
 				android:maxLines="1"
 				android:textColor="?attr/active_color_basic"
-				android:textSize="@dimen/default_desc_text_size"
+				android:textSize="11sp"
+				android:translationX="20dp"
 				app:typeface="@string/font_roboto_medium"
 				tools:text="Some title" />
 
@@ -52,10 +54,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_marginStart="@dimen/bottom_sheet_content_margin"
 				android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-				android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
-				android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+				android:layout_marginRight="20dp"
 				android:clickable="false"
 				android:focusable="false"
 				android:focusableInTouchMode="false"
@@ -76,17 +76,19 @@
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="?android:attr/selectableItemBackground">
+			android:background="?android:attr/selectableItemBackground"
+			android:translationX="-20dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/additional_button_icon"
-				android:layout_width="@dimen/favorites_icon_right_margin"
-				android:layout_height="@dimen/favorites_icon_right_margin"
+				android:layout_width="14dp"
+				android:layout_height="14dp"
 				android:layout_gravity="center"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
+				android:translationX="10dp"
 				app:srcCompat="@drawable/ic_action_track_line_bold_color"
 				tools:tint="?attr/active_color_basic" />
 

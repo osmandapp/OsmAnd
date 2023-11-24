@@ -3,6 +3,9 @@
     android:id="@+id/elevation_profile_widget_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:clickable="true"
     android:focusable="true">
 

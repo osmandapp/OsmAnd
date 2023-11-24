@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -33,38 +36,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:gravity="center_vertical|start"
-            android:layout_marginRight="52dp"
             android:layout_marginEnd="52dp"
+            android:layout_marginRight="52dp"
+            android:gravity="center"
             android:text="@string/layer_poi"
             android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size" />
+            android:textSize="12sp"
+            android:translationX="25dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:translationX="-25dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon_settings"
-                android:contentDescription="@string/shared_string_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/shared_string_settings"
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
             <!-- android:button="@drawable/ic_btn_wocheckbox" -->
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="24dp"
-                android:layout_marginEnd="24dp"
-                android:focusable="false"
                 android:layout_gravity="center"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:focusable="false"
                 app:buttonTint="?attr/active_color_basic" />
 
         </LinearLayout>

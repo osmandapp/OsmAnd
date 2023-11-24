@@ -29,7 +29,7 @@
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
 	            android:paddingStart="@dimen/context_menu_padding_margin_default"
-	            android:paddingEnd="@dimen/context_menu_padding_margin_default">
+	            android:paddingEnd="50dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -45,6 +45,8 @@
                         style="@style/TextAppearance.ContextMenuTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+						android:layout_marginStart="50dp"
+						android:textSize="11sp"
                         android:text="@string/search_address_building"/>
 
                     <LinearLayout
@@ -58,6 +60,7 @@
                             style="@style/TextAppearance.ContextMenuSubtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+							android:layout_marginStart="25dp"
                             android:layout_gravity="center_vertical"
                             android:text="@string/amenity_type_finance"/>
 
@@ -72,14 +75,15 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/context_menu_icon_view"
-                    android:layout_width="@dimen/map_widget_icon"
-                    android:layout_height="@dimen/map_widget_icon"
-                    android:layout_marginTop="@dimen/context_menu_padding_margin_default"
-                    osmand:srcCompat="@drawable/ic_action_building_number"/>
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/context_menu_icon_view"
+					android:layout_width="@dimen/map_widget_icon"
+					android:layout_height="@dimen/map_widget_icon"
+					android:layout_marginStart="0dp"
+					android:layout_marginTop="@dimen/context_menu_padding_margin_default"
+					osmand:srcCompat="@drawable/ic_action_building_number" />
 
-            </LinearLayout>
+			</LinearLayout>
 
             <LinearLayout
                 android:id="@+id/transport_badges_container"

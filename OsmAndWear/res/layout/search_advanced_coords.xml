@@ -39,13 +39,13 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:ellipsize="end"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:lines="1"
                     android:singleLine="true"
                     android:text="@string/coords_search"
                     android:textColor="@color/card_and_list_background_light"
                     osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/dialog_header_text_size"/>
+                    android:textSize="12sp"/>
 
                 <ProgressBar
                     android:id="@+id/searchProgressBar"

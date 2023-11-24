@@ -6,13 +6,13 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_card"
-	android:layout_marginTop="@dimen/dash_margin"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
     android:layout_marginBottom="@dimen/dash_margin"
     android:layout_marginLeft="@dimen/dash_margin_h"
     android:layout_marginRight="@dimen/dash_margin_h"
-	android:orientation="vertical"
-	android:layout_marginStart="@dimen/dash_margin_h"
-	android:layout_marginEnd="@dimen/dash_margin_h">
+	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="wrap_content"

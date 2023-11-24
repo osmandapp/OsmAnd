@@ -7,6 +7,9 @@
     android:background="?attr/card_and_list_background_basic"
     android:orientation="vertical"
     android:clickable="true"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
     android:focusable="true">
 
     <LinearLayout
@@ -14,25 +17,26 @@
         android:layout_height="@dimen/action_bar_height"
         android:orientation="horizontal">
 
-        <FrameLayout
-            android:id="@+id/btn_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginStart="@dimen/card_padding"
-            android:layout_marginLeft="@dimen/card_padding"
-            android:background="@null"
-            android:padding="@dimen/context_menu_padding_margin_small"
-            android:paddingStart="@dimen/context_menu_padding_margin_small"
-            android:paddingEnd="@dimen/context_menu_padding_margin_small">
+		<FrameLayout
+			android:id="@+id/btn_close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|start"
+			android:layout_marginStart="@dimen/card_padding"
+			android:layout_marginLeft="@dimen/card_padding"
+			android:background="@null"
+			android:padding="@dimen/context_menu_padding_margin_small"
+			android:paddingStart="@dimen/context_menu_padding_margin_small"
+			android:paddingEnd="@dimen/context_menu_padding_margin_small"
+			android:translationX="25dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/favorites_icon_size_small"
-                android:layout_height="@dimen/favorites_icon_size_small"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="?attr/default_icon_color"
-                osmand:srcCompat="@drawable/ic_action_close" />
-        </FrameLayout>
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/favorites_icon_size_small"
+				android:layout_height="@dimen/favorites_icon_size_small"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:tint="?attr/default_icon_color"
+				osmand:srcCompat="@drawable/ic_action_close" />
+		</FrameLayout>
 
 		<androidx.legacy.widget.Space
 			android:layout_width="0dp"
@@ -47,23 +51,23 @@
             android:layout_marginEnd="@dimen/content_padding_half"
             android:layout_marginRight="@dimen/content_padding_half">
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/content_padding"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingTop="@dimen/content_padding_half"
-                android:paddingEnd="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingBottom="@dimen/content_padding_half"
-                android:text="@string/shared_string_save"
-                android:textColor="?attr/active_color_basic"
-                android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/btn_save"
+				android:layout_width="92dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:duplicateParentState="true"
+				android:gravity="center_vertical"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingTop="@dimen/content_padding_half"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingBottom="@dimen/content_padding_half"
+				android:text="@string/shared_string_save"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_medium" />
 
         </FrameLayout>
 

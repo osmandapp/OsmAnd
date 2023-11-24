@@ -32,6 +32,8 @@
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:maxLines="1"
 			android:textSize="@dimen/default_desc_text_size"
+			android:gravity="center"
+			android:layout_gravity="center"
 			android:textColor="@color/preference_category_title"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="Quick actions" />

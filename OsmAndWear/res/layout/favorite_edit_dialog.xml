@@ -17,6 +17,7 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
 			android:text="@string/shared_string_name"/>
 
@@ -31,6 +32,7 @@
   			android:id="@+id/TextButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
 			android:text="@string/favourites_edit_dialog_category"/>
 
@@ -42,6 +44,7 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
 			android:text="@string/shared_string_description"/>
 

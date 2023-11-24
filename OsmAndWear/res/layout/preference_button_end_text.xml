@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical">
 
 	<LinearLayout
@@ -23,6 +26,7 @@
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
+			android:translationX="25dp"
 			tools:src="@drawable/ic_action_car_dark"
 			tools:tint="?colorAccent" />
 
@@ -67,6 +71,7 @@
 			android:singleLine="true"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_sub_text_size"
+			android:translationX="-40dp"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="10" />
 

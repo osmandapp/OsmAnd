@@ -3,6 +3,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:paddingHorizontal="@dimen/content_padding">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -11,6 +14,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small"
+		android:gravity="center"
 		android:text="@string/stop_download"
 		android:textColor="?android:textColorPrimary" />
 
@@ -18,6 +22,7 @@
 		android:id="@+id/description"
 		style="@style/DescStyle"
 		android:layout_width="match_parent"
+		android:layout_marginStart="0dp"
 		android:layout_height="wrap_content"
 		android:text="@string/stop_download_desc"
 		android:textColor="?android:textColorSecondary" />

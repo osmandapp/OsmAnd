@@ -99,7 +99,7 @@
 				osmand:layout_collapseMode="pin"
 				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
 				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp"
+				osmand:titleMarginStart="50dp"
 				tools:title="My location">
 
 			</androidx.appcompat.widget.Toolbar>

@@ -9,11 +9,12 @@
 		android:id="@+id/name_text_box"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="center"
 		android:hint="@string/shared_string_name"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding"
+		android:paddingStart="40dp"
 		app:boxBackgroundColor="?attr/text_input_background"
 		app:boxStrokeColor="@color/osmand_orange"
 		app:hintTextColor="@color/text_color_secondary_light">

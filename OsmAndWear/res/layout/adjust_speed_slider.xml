@@ -15,35 +15,45 @@
 			android:id="@+id/speed_title"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="40dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="0dp"
 			android:layout_weight="2"
 			android:paddingStart="@dimen/content_padding_small"
 			android:paddingLeft="@dimen/content_padding_small"
 			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/default_list_text_size"
+			android:textSize="8sp"
+			android:translationX="-20dp"
 			tools:text="@string/shared_string_speed" />
 
 		<TextView
 			android:id="@+id/speed_text"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="0dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="20dp"
 			android:layout_weight="1"
 			android:gravity="end"
 			android:maxLength="4"
 			android:maxLines="1"
+			android:paddingEnd="@dimen/text_margin_small"
 			android:paddingRight="@dimen/text_margin_small"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			tools:text="60"
-			android:paddingEnd="@dimen/text_margin_small" />
+			tools:text="60" />
 
 		<TextView
 			android:id="@+id/speed_units"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="0dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="40dp"
 			android:paddingEnd="@dimen/content_padding_small"
 			android:paddingRight="@dimen/content_padding_small"
 			android:textColor="?android:textColorSecondary"
-			android:textSize="@dimen/default_list_text_size"
+			android:textSize="11sp"
 			tools:text="km/h" />
 	</LinearLayout>
 
@@ -58,6 +68,7 @@
 			android:id="@+id/speed_seekbar_min_text"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
 			android:layout_weight="1"
 			android:gravity="start"
 			android:paddingStart="@dimen/content_padding_small"
@@ -72,7 +83,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:gravity="end"
-			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingEnd="25dp"
 			android:paddingRight="@dimen/content_padding_small"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
@@ -84,10 +95,10 @@
 		android:id="@+id/speed_slider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/content_padding_small"
-		android:layout_marginRight="@dimen/content_padding_small"
-		android:paddingBottom="@dimen/content_padding"
 		android:layout_marginStart="@dimen/content_padding_small"
-		android:layout_marginEnd="@dimen/content_padding_small" />
+		android:layout_marginLeft="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding_small"
+		android:layout_marginRight="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding" />
 
 </LinearLayout>

@@ -6,6 +6,9 @@
     android:layout_height="@dimen/bottom_sheet_list_item_height"
     android:background="?attr/selectableItemBackground"
     android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:paddingEnd="@dimen/content_padding"
     android:paddingLeft="@dimen/content_padding"
     android:paddingRight="@dimen/content_padding"
@@ -18,7 +21,8 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
         android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-        tools:src="@drawable/ic_action_car_dark"/>
+        android:translationX="35dp"
+        tools:src="@drawable/ic_action_car_dark" />
 
     <TextView
         android:id="@+id/title"
@@ -29,5 +33,6 @@
         android:layout_toRightOf="@id/icon"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
-        tools:text="@string/rendering_value_car_name"/>
+        android:translationX="25dp"
+        tools:text="@string/rendering_value_car_name" />
 </RelativeLayout>

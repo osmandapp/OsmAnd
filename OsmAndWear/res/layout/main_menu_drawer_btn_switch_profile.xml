@@ -5,6 +5,9 @@
 	android:id="@+id/profile_settings"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:descendantFocusability="blocksDescendants"
 	android:gravity="center"
 	android:orientation="horizontal">
@@ -13,11 +16,12 @@
 		android:id="@+id/bg_circle"
 		android:layout_width="@dimen/context_menu_big_icon_size"
 		android:layout_height="@dimen/context_menu_big_icon_size"
-		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_marginRight="@dimen/favorites_icon_right_margin"
 		android:layout_marginStart="@dimen/content_padding_half"
+		android:layout_marginLeft="@dimen/content_padding_half"
 		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-		android:background="?attr/bg_circle">
+		android:layout_marginRight="@dimen/favorites_icon_right_margin"
+		android:background="?attr/bg_circle"
+		android:translationX="20dp">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
@@ -77,12 +81,13 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginLeft="@dimen/content_padding_half"
-				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
-				android:tint="?attr/default_icon_color"
 				android:layout_marginStart="@dimen/content_padding_half"
-				android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
+				android:layout_marginLeft="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginRight="@dimen/favorites_icon_right_margin"
+				android:tint="?attr/default_icon_color"
+				android:translationX="-20dp"
+				osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
 		</LinearLayout>
 

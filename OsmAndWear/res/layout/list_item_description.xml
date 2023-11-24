@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical">
 
     <include layout="@layout/list_shadow_header" />
@@ -17,6 +20,9 @@
         android:paddingTop="@dimen/list_header_settings_top_margin"
         android:paddingEnd="@dimen/content_padding"
         android:paddingBottom="@dimen/list_header_settings_top_margin"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:gravity="center"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_desc_text_size"
         tools:text="@string/select_data_to_import" />

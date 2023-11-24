@@ -8,6 +8,9 @@
 	android:gravity="center"
 	android:layout_gravity="bottom"
 	android:orientation="horizontal"
+	android:layout_marginStart="20dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="20dp"
 	android:paddingHorizontal="@dimen/content_padding">
 
 	<net.osmand.plus.widgets.dialogbutton.DialogButton

@@ -149,8 +149,9 @@
 
 	<include
 		layout="@layout/bottom_buttons"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_marginStart="30dp"
 		android:layout_gravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

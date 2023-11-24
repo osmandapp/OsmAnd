@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingRight="@dimen/content_padding"
@@ -18,7 +21,8 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/list_destination"/>
+		android:translationX="40dp"
+		tools:src="@drawable/list_destination" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -29,11 +33,13 @@
 
 		<TextView
 			android:id="@+id/title"
+			style="@style/TextAppearance.ListItemTitle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
+			android:gravity="center"
 			android:maxLines="1"
-			style="@style/TextAppearance.ListItemTitle"
+			android:translationX="20dp"
 			tools:text="Some title" />
 
 		<TextView
@@ -42,6 +48,7 @@
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
 			android:maxLines="2"
+			android:gravity="center"
 			style="@style/TextAppearance.ContextMenuSubtitle"
 			android:textColor="@null"
 			tools:text="Some description" />

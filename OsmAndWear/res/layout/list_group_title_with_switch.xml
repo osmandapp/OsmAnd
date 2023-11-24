@@ -34,6 +34,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="12sp"
+            android:gravity="center"
             android:paddingTop="@dimen/bottom_sheet_image_text_margin_start"
             android:paddingBottom="@dimen/bottom_sheet_image_text_margin_start"
             style="@style/TextAppearance.ListItemCategoryTitle"
@@ -43,8 +45,9 @@
             android:id="@+id/toggle_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:translationX="-15dp"
             android:visibility="gone"
-            tools:visibility="visible"/>
+            tools:visibility="visible" />
     </LinearLayout>
 
     <View

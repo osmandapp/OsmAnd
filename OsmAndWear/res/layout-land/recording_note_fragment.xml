@@ -88,10 +88,10 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/centerButtonIcon"
                         android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:scaleType="center"
-                        tools:src="@drawable/ic_action_rec_stop"/>
+                        tools:src="@drawable/ic_action_rec_stop" />
 
                     <TextView
                         android:id="@+id/centerButtonText"

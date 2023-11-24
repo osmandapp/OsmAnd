@@ -4,6 +4,9 @@
 	android:minHeight="@dimen/context_menu_controller_height"
 	android:minWidth="@dimen/context_menu_top_right_button_min_width"
 	android:layout_width="@dimen/fab_recycler_view_padding_bottom"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:layout_height="@dimen/setting_list_item_small_height">
 
 	<androidx.appcompat.widget.AppCompatImageView

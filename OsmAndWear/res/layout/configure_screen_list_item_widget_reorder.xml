@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="10dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:orientation="horizontal">
@@ -16,9 +19,10 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
 		android:layout_marginStart="@dimen/content_padding"
+		android:translationX="10dp"
+		tools:ignore="ContentDescription"
 		tools:src="@drawable/ic_action_remove"
-		tools:tint="@color/color_osm_edit_delete"
-		tools:ignore="ContentDescription" />
+		tools:tint="@color/color_osm_edit_delete" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
@@ -26,22 +30,23 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
 		android:layout_marginStart="@dimen/list_content_padding_large"
+		android:translationX="-20dp"
 		tools:src="@drawable/mm_air_transport"
 		tools:tint="@color/poi_background" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"
-		android:layout_width="0dp"
+		android:layout_width="98dp"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/title_padding"
-		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="marquee"
 		android:paddingTop="@dimen/content_padding_half"
 		android:paddingBottom="@dimen/content_padding_half"
 		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
+		android:textSize="12sp"
+		android:translationX="-40dp"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="@string/poi_aerialway_transport" />
 
@@ -55,6 +60,7 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
 		android:tint="?attr/secondary_icon_color"
+		android:translationX="-10dp"
 		osmand:srcCompat="@drawable/ic_action_item_move" />
 
 </LinearLayout>

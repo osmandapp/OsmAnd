@@ -22,9 +22,10 @@
 			android:layout_height="@dimen/toolbar_height"
 			android:minHeight="@dimen/toolbar_height"
 			osmand:layout_collapseMode="pin"
+			android:gravity="center"
 			osmand:title="@string/ant_plus_searching"
 			osmand:titleMarginEnd="0dp"
-			osmand:titleMarginStart="0dp"
+			osmand:titleMarginStart="60dp"
 			osmand:titleTextAppearance="@style/AppBarTitle"
 			osmand:titleTextColor="?attr/app_bar_primary_item_color">
 

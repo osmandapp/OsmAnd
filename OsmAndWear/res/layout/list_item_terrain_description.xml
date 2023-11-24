@@ -4,6 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -25,6 +28,7 @@
 				android:layout_weight="1"
 				android:lineSpacingExtra="2.5dp"
 				android:ellipsize="end"
+				android:layout_marginStart="40dp"
 				android:text="@string/terrain_category_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size" />
@@ -35,7 +39,8 @@
 				android:layout_gravity="top"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding"
-				android:src="@drawable/ic_action_srtm_colored_day" />
+				android:src="@drawable/ic_action_srtm_colored_day"
+				android:translationX="-25dp" />
 
 		</LinearLayout>
 

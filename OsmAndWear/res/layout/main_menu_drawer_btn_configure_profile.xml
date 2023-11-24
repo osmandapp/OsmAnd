@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
@@ -17,21 +20,22 @@
 			android:id="@+id/bg_circle"
 			android:layout_width="@dimen/context_menu_big_icon_size"
 			android:layout_height="@dimen/context_menu_big_icon_size"
-			android:visibility="invisible"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 			android:layout_marginRight="@dimen/favorites_icon_right_margin"
 			android:background="?attr/bg_circle"
-			android:layout_marginStart="@dimen/content_padding_half"
-			android:layout_marginEnd="@dimen/favorites_icon_right_margin">
+			android:translationX="30dp"
+			android:visibility="invisible">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/icon"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
-				android:visibility="invisible"
 				android:layout_gravity="center"
+				android:visibility="visible"
 				tools:src="@drawable/ic_action_bicycle_dark" />
-			
+
 		</FrameLayout>
 
 
@@ -49,8 +53,9 @@
 				android:layout_gravity="center_vertical|start"
 				android:text="@string/configure_profile"
 				osmand:typeface="@string/font_roboto_medium"
+				android:layout_marginStart="15dp"
 				android:textColor="?attr/active_color_basic"
-				android:textSize="@dimen/default_list_text_size" />
+				android:textSize="12sp" />
 		</FrameLayout>
 
 	</LinearLayout>

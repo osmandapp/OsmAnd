@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="0dp"
     android:minHeight="@dimen/setting_profile_item_height"
     android:orientation="vertical">
 
@@ -20,6 +23,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding"
+            android:translationX="15dp"
             tools:src="@drawable/ic_action_info_dark" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -28,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="@dimen/content_padding"
+            android:textSize="14sp"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text" />
 
@@ -38,7 +43,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            android:focusable="false" />
+            android:focusable="false"
+            android:translationX="-15dp" />
 
     </LinearLayout>
 

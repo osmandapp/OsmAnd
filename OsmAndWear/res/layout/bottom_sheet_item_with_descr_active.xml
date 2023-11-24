@@ -6,6 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:minHeight="@dimen/setting_list_item_large_height"
 	android:orientation="horizontal"
 	android:paddingTop="@dimen/content_padding_small"
@@ -17,6 +20,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
+		android:translationY="50dp"
 		osmand:tint="?attr/active_color_basic"
 		tools:srcCompat="@drawable/ic_action_attach_track" />
 

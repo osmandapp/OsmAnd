@@ -5,6 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:gravity="center_vertical">
 
 	<LinearLayout
@@ -20,6 +23,7 @@
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
 			android:layout_margin="@dimen/content_padding"
+			android:translationX="30dp"
 			tools:src="@drawable/ic_action_car_dark"
 			tools:tint="?colorAccent" />
 
@@ -44,7 +48,7 @@
 				android:layout_height="match_parent"
 				android:layout_gravity="center_vertical"
 				android:ellipsize="marquee"
-				android:gravity="center_vertical"
+				android:gravity="center"
 				android:paddingStart="0dp"
 				android:paddingEnd="@dimen/content_padding"
 				android:singleLine="true"

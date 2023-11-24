@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/content_padding"
-            osmand:srcCompat="@drawable/ic_action_time"/>
+            android:translationX="25dp"
+            osmand:srcCompat="@drawable/ic_action_time" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -53,12 +57,13 @@
 
         <ImageButton
             android:id="@+id/deleteItemImageButton"
-            android:contentDescription="@string/shared_string_delete"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="@dimen/bottom_sheet_list_item_height"
             android:layout_height="@dimen/bottom_sheet_list_item_height"
             android:layout_gravity="top"
-            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+            android:contentDescription="@string/shared_string_delete"
+            android:translationX="-30dp"
+            osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
     </LinearLayout>
     <Button

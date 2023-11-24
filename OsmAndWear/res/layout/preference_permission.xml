@@ -4,6 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="?attr/list_background_color">
 
 	<LinearLayout
@@ -21,12 +24,13 @@
 			android:id="@android:id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
 			android:layout_marginTop="@dimen/content_padding_small"
-			android:layout_marginRight="@dimen/content_padding_half"
-			tools:src="@drawable/ic_action_lock"
 			android:layout_marginEnd="@dimen/content_padding_half"
-			android:layout_marginStart="@dimen/content_padding_half" />
+			android:layout_marginRight="@dimen/content_padding_half"
+			android:translationY="50dp"
+			tools:src="@drawable/ic_action_lock" />
 
 		<LinearLayout
 			android:layout_width="match_parent"

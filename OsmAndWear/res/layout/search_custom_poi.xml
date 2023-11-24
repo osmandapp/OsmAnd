@@ -45,11 +45,12 @@
                         android:ellipsize="end"
                         android:lines="1"
                         android:maxLines="1"
+                        android:gravity="center"
                         android:singleLine="true"
                         android:text="@string/create_custom_poi"
                         android:textColor="@color/card_and_list_background_light"
                         osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/dialog_header_text_size"/>
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 

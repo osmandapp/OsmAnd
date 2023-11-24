@@ -17,6 +17,7 @@
             android:contentDescription="@string/shared_string_close"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="52dp"
+            android:layout_marginStart="25dp"
             android:layout_height="52dp"
             app:srcCompat="@drawable/ic_arrow_back"/>
 
@@ -24,13 +25,14 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:text="@string/select_map_marker"
             android:textColor="?attr/app_bar_primary_item_color"
-            android:textSize="@dimen/default_list_text_size_large"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular"
-	        android:layout_marginStart="16dp" />
+            android:translationX="-20dp"
+            app:typeface="@string/font_roboto_regular" />
 
     </LinearLayout>
 

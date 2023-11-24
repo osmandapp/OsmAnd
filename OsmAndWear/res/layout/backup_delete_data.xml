@@ -8,8 +8,8 @@
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
-		android:layout_width="@dimen/bottom_sheet_list_item_height"
-		android:layout_height="@dimen/bottom_sheet_list_item_height"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="@dimen/content_padding"
 		tools:srcCompat="@drawable/ic_action_alert"
@@ -26,7 +26,7 @@
 		android:paddingRight="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding_small"
 		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/dialog_header_text_size"
+		android:textSize="12sp"
 		osmand:lineHeight="@dimen/welcome_header_text_size"
 		osmand:typeface="@string/font_roboto_medium"
 		tools:text="@string/backup_delete_all_data" />
@@ -38,9 +38,9 @@
 		android:letterSpacing="@dimen/text_button_letter_spacing"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small"
+		android:paddingBottom="0dp"
 		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
+		android:textSize="11sp"
 		osmand:lineHeight="@dimen/default_title_line_height"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="@string/backup_delete_all_data_warning" />

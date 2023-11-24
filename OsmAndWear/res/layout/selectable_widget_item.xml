@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="@drawable/bg_selectable_widget_item"
 	android:layout_marginBottom="@dimen/content_padding_small">
 
@@ -21,6 +24,7 @@
 			android:id="@+id/icon"
 			android:layout_width="@dimen/dialog_content_margin"
 			android:layout_height="@dimen/dialog_content_margin"
+			android:translationY="30dp"
 			tools:srcCompat="@drawable/widget_next_turn_day" />
 
 		<LinearLayout
@@ -59,9 +63,10 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/title_padding"
 			android:layout_marginTop="@dimen/favorites_icon_padding"
-			android:saveEnabled="false"
 			android:clickable="false"
-			android:focusable="false" />
+			android:focusable="false"
+			android:saveEnabled="false"
+			android:translationY="40dp" />
 
 	</LinearLayout>
 

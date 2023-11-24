@@ -30,6 +30,7 @@
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:gravity="center"
 			android:maxLines="1"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_medium"
@@ -40,11 +41,12 @@
 			android:id="@+id/description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
 			android:ellipsize="end"
 			android:maxLines="1"
-			tools:text="15"/>
+			android:translationX="-40dp"
+			tools:text="15" />
 
 	</LinearLayout>
 

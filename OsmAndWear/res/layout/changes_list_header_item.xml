@@ -21,7 +21,7 @@
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_marginVertical="@dimen/content_padding_small"
 			android:layout_weight="1"
-			android:gravity="center_vertical"
+			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			tools:text="Changes" />
 
@@ -34,6 +34,7 @@
 			android:layout_marginVertical="@dimen/content_padding_small"
 			android:gravity="center_vertical"
 			android:textColor="?android:textColorSecondary"
+			android:translationX="-35dp"
 			tools:text="5" />
 
 	</LinearLayout>

@@ -6,6 +6,9 @@
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
 	android:fitsSystemWindows="true"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:clickable="true"
 	android:focusable="true">
 
@@ -32,7 +35,7 @@
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/toolbar_height"
+				android:layout_height="45dp"
 				android:layout_marginTop="0dp"
 				android:minHeight="@dimen/toolbar_height"
 				osmand:layout_collapseMode="pin"
@@ -44,45 +47,54 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@color/color_transparent"
-					android:minHeight="@dimen/toolbar_height"
+					android:minHeight="40dp"
 					android:orientation="horizontal">
 
 					<ImageButton
 						android:id="@+id/back_button"
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:contentDescription="@string/shared_string_back"
 						android:tint="@color/icon_color_default_light"
-						osmand:srcCompat="@drawable/ic_arrow_back"
-						android:contentDescription="@string/shared_string_back"/>
+						android:translationX="60dp"
+						android:translationY="10dp"
+						osmand:srcCompat="@drawable/ic_arrow_back" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/toolbar_title"
-						android:layout_width="0dp"
+						android:layout_width="81dp"
 						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
+						android:layout_gravity="center"
+						android:gravity="center"
 						android:layout_marginHorizontal="@dimen/content_padding"
 						android:layout_weight="1"
 						android:text="@string/map_widget_config"
-						android:textSize="@dimen/dialog_header_text_size"
+						android:textSize="10sp"
+						android:translationX="20dp"
+						android:translationY="-10dp"
 						osmand:typeface="@string/font_roboto_medium" />
 
 					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/info_button"
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
 						android:tint="?attr/default_icon_color"
+						android:translationX="-15dp"
+						android:translationY="25dp"
 						osmand:srcCompat="@drawable/ic_action_help_online" />
 
 					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/actions_button"
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-						android:layout_width="@dimen/toolbar_height"
-						android:layout_height="@dimen/toolbar_height"
+						android:layout_width="20dp"
+						android:layout_height="40dp"
+						android:contentDescription="@string/shared_string_menu"
 						android:tint="?default_icon_color"
-						osmand:srcCompat="@drawable/ic_overflow_menu_white"
-						android:contentDescription="@string/shared_string_menu"/>
+						android:translationX="-50dp"
+						android:translationY="0dp"
+						osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 				</LinearLayout>
 
@@ -95,7 +107,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:paddingHorizontal="@dimen/content_padding"
-			android:paddingVertical="@dimen/content_padding_half"
 			tools:itemCount="3"
 			tools:listitem="@layout/custom_chip_view" />
 

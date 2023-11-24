@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="0dp"
     android:background="@color/color_transparent"
     android:orientation="horizontal">
 

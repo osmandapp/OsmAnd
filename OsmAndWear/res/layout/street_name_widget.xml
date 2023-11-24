@@ -4,6 +4,9 @@
 	android:id="@+id/street_name_widget"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:background="@drawable/btn_flat"
 	android:minHeight="@dimen/map_address_height">
 
@@ -26,6 +29,7 @@
 			android:textColor="@color/card_and_list_background_light"
 			android:textSize="@dimen/map_widget_text_size"
 			android:textStyle="bold"
+			android:translationX="-10dp"
 			android:visibility="gone"
 			tools:text="8"
 			tools:visibility="visible" />
@@ -60,7 +64,7 @@
 				android:maxLines="1"
 				android:singleLine="true"
 				android:textColor="@color/activity_background_color_dark"
-				android:textSize="@dimen/map_widget_text_size"
+				android:textSize="8sp"
 				tools:text="Long Street Name" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -72,7 +76,7 @@
 				android:maxLines="1"
 				android:singleLine="true"
 				android:textColor="@color/activity_background_color_dark"
-				android:textSize="@dimen/map_widget_text_size"
+				android:textSize="8sp"
 				tools:text="Long Street Name" />
 
 		</FrameLayout>

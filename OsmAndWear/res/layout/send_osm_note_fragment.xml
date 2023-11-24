@@ -21,6 +21,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/bottom_sheet_content_margin"
 			android:hint="@string/osn_bug_name"
+			android:gravity="center"
+			android:layout_gravity="center"
 			app:boxBackgroundColor="?attr/text_input_background"
 			app:boxStrokeColor="@color/osmand_orange"
 			app:hintTextColor="@color/text_color_secondary_light">

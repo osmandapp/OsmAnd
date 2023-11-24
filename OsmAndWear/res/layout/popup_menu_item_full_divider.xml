@@ -3,6 +3,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="vertical">
 
 	<View
@@ -24,6 +27,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_marginStart="@dimen/content_padding_half"
 			android:layout_marginLeft="@dimen/content_padding_half"
+			android:translationX="35dp"
 			tools:src="@drawable/ic_action_info_dark" />
 
 		<LinearLayout
@@ -40,7 +44,7 @@
 					android:id="@+id/title"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
+					android:layout_gravity="center"
 					android:layout_weight="1"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingLeft="@dimen/content_padding"
@@ -50,6 +54,7 @@
 					android:paddingBottom="@dimen/content_padding_small"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
+					android:translationX="15dp"
 					tools:text="Title" />
 
 				<androidx.appcompat.widget.AppCompatRadioButton
@@ -60,7 +65,8 @@
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginRight="@dimen/content_padding"
 					android:clickable="false"
-					android:focusable="false" />
+					android:focusable="false"
+					android:translationX="-30dp" />
 
 			</LinearLayout>
 

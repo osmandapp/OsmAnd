@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
     android:gravity="center_vertical"
     android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal"
@@ -20,6 +23,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
         android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+        android:translationX="25dp"
         osmand:srcCompat="@drawable/ic_action_appearance" />
 
     <TextView
@@ -30,6 +34,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textSize="10sp"
         android:text="@string/change_color"
         android:textAppearance="@style/TextAppearance.ListItemTitle" />
 
@@ -37,6 +42,7 @@
         android:id="@+id/colorImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:translationX="-30dp"
         osmand:srcCompat="@drawable/ic_action_circle" />
 
 </LinearLayout>

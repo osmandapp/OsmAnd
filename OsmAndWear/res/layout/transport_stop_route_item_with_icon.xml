@@ -5,6 +5,9 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:background="@drawable/transport_stop_route_bg"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="50dp"
+	android:layout_marginEnd="0dp"
 	android:orientation="horizontal">
 
 	<LinearLayout

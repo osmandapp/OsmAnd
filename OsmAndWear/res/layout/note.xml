@@ -6,6 +6,9 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="20dp"
+	android:layout_marginEnd="0dp"
 			  android:orientation="vertical">
 
 	<View
