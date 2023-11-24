@@ -23,6 +23,8 @@
 		android:title="@string/start_up_message_pref" />
 
 	<SwitchPreferenceCompat
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:icon="@drawable/ic_action_import"
 		android:key="show_download_map_dialog"
 		android:layout="@layout/preference_switch_with_descr"

@@ -67,6 +67,11 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_behaviour_base, parent, false);
+
+		mainView.setLayoutParams(new ViewGroup.LayoutParams(450, ViewGroup.LayoutParams.WRAP_CONTENT));
+		mainView.setPadding(0, 0, 0, 0);
+
+
 		itemsContainer = mainView.findViewById(R.id.items_container);
 
 		View scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);

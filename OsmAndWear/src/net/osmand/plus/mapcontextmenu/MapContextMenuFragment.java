@@ -313,8 +313,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			int bgAttrId = AndroidUtils.isLayoutRtl(app) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
-			mainView.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
-					ViewGroup.LayoutParams.MATCH_PARENT));
+
+			mainView.setLayoutParams(new FrameLayout.LayoutParams(500, ViewGroup.LayoutParams.MATCH_PARENT));
+
 			View fabContainer = view.findViewById(R.id.context_menu_fab_container);
 			fabContainer.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
 					ViewGroup.LayoutParams.MATCH_PARENT));

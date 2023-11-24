@@ -78,6 +78,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_menu_base, null);
+
+		mainView.setLayoutParams(new ViewGroup.LayoutParams(450, 450));
+
 		if (useScrollableItemsContainer()) {
 			itemsContainer = mainView.findViewById(R.id.scrollable_items_container);
 		} else {

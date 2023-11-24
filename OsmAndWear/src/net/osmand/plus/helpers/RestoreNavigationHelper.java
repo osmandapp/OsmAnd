@@ -83,7 +83,7 @@ public class RestoreNavigationHelper {
 				AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 				TextView tv = new TextView(mapActivity);
 				tv.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, delay + ""));
-				tv.setPadding(7, 5, 7, 5);
+				tv.setPadding(7, 150, 7, 5);
 				builder.setView(tv);
 				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override

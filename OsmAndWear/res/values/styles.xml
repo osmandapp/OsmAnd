@@ -64,6 +64,8 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:windowSwipeToDismiss">false</item>
+
         <item name="alert_dialog_theme">@style/OsmandLightTheme</item>
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
@@ -412,6 +414,8 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
+        <item name="android:windowSwipeToDismiss">false</item>
+
         <item name="alert_dialog_theme">@style/OsmandDarkTheme</item>
         <item name="bottom_bar_background_color">@color/card_and_list_background_dark</item>
         <item name="android:textDirection">locale</item>

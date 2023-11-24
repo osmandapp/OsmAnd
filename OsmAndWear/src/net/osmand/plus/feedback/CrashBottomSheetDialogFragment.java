@@ -5,6 +5,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,9 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		View titleView = View.inflate(new ContextThemeWrapper(requireContext(), themeRes), R.layout.crash_title, null);
+		titleView.setLayoutParams(new FrameLayout.LayoutParams(400, ViewGroup.LayoutParams.MATCH_PARENT));
+		titleView.setPadding(0, 0, 0, 0);
+
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
 				.create();

@@ -146,7 +146,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public abstract boolean isHeaderViewDetached();
 
 	public int getLandscapeWidth() {
-		return getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
+		return 465+15;
 	}
 
 	public int getLandscapeNoShadowWidth() {
