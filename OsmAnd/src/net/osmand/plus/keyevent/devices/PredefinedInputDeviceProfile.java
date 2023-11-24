@@ -8,11 +8,13 @@ import net.osmand.plus.keyevent.keybinding.KeyBinding;
 public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 
 	@Override
-	public void initialize(@NonNull OsmandApplication app) {
+	@NonNull
+	public InputDeviceProfile initialize(@NonNull OsmandApplication app) {
 		super.initialize(app);
 		keyBindings.clear();
 		collectKeyBindings();
 		syncActiveKeyBindings();
+		return this;
 	}
 
 	/**

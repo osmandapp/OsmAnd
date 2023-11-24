@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments.inputdevices;
 
+import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_BOTTOM_SHADOW;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.DEVICE_ITEM;
@@ -26,6 +27,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class InputDevicesController {
 
@@ -46,7 +48,7 @@ class InputDevicesController {
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
 		screenItems.add(new ScreenItem(CARD_DIVIDER));
-		for (InputDeviceProfile device : deviceHelper.getAvailableDevices()) {
+		for (InputDeviceProfile device : deviceHelper.getAllDevices(CUSTOMIZATION_CACHE_ID, appMode)) {
 			screenItems.add(new ScreenItem(DEVICE_ITEM, device));
 		}
 		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
@@ -61,7 +63,7 @@ class InputDevicesController {
 	public void askAddNewCustomDevice() {
 		String title = app.getString(R.string.add_new_type);
 		showEnterNameDialog(title, "", newName -> {
-			deviceHelper.createAndSaveCustomDevice(appMode, newName);
+			deviceHelper.createAndSaveCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, newName);
 			return true;
 		});
 	}
@@ -70,7 +72,7 @@ class InputDevicesController {
 		String title = app.getString(R.string.shared_string_rename);
 		showEnterNameDialog(title, device.toHumanString(app), newName -> {
 			if (device instanceof CustomInputDeviceProfile) {
-				deviceHelper.renameCustomDevice(appMode, (CustomInputDeviceProfile) device, newName);
+				deviceHelper.renameCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, device.getId(), newName);
 			}
 			return true;
 		});
@@ -94,7 +96,7 @@ class InputDevicesController {
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
 				} else {
-					if (deviceHelper.hasDeviceNameDuplicate(appMode, newName)) {
+					if (deviceHelper.hasDeviceNameDuplicate(CUSTOMIZATION_CACHE_ID, appMode, app, newName)) {
 						app.showToastMessage(R.string.message_name_is_already_exists);
 					} else {
 						callback.processResult(newName.trim());
@@ -107,7 +109,7 @@ class InputDevicesController {
 	}
 
 	public void duplicateDevice(@NonNull InputDeviceProfile device) {
-		deviceHelper.createAndSaveDeviceDuplicate(appMode, device);
+		deviceHelper.createAndSaveDeviceDuplicate(CUSTOMIZATION_CACHE_ID, appMode, device);
 	}
 
 	public void askRemoveDevice(@NonNull InputDeviceProfile device) {
@@ -119,7 +121,7 @@ class InputDevicesController {
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButtonTextColor(ColorUtilities.getColor(app, R.color.color_warning))
 				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-					deviceHelper.removeCustomDevice(appMode, device.getId());
+					deviceHelper.removeCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, device.getId());
 				});
 		String typeName = device.toHumanString(app);
 		String message = app.getString(R.string.remove_type_q, typeName);
@@ -127,11 +129,8 @@ class InputDevicesController {
 	}
 
 	public boolean isSelected(@NonNull InputDeviceProfile device) {
-		return deviceHelper.isSelectedDevice(appMode, device.getId());
-	}
-
-	public boolean isCustom(@NonNull InputDeviceProfile device) {
-		return deviceHelper.isCustomDevice(device);
+		InputDeviceProfile selectedDevice = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
+		return Objects.equals(selectedDevice.getId(), device.getId());
 	}
 
 	private boolean isNightMode() {

@@ -47,6 +47,11 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		return customId;
 	}
 
+	@Override
+	public boolean isCustom() {
+		return true;
+	}
+
 	@NonNull
 	public JSONObject toJson() throws JSONException {
 		JSONObject jsonObject = new JSONObject();

@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments;
 
+import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
 import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
@@ -33,7 +34,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDevicesEventCallback;
+import net.osmand.plus.keyevent.callbacks.InputDevicesEventListener;
 import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,7 +51,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 public class EditKeyBindingFragment extends BaseOsmAndFragment
-		implements OnKeyCodeSelectedCallback, InputDevicesEventCallback {
+		implements OnKeyCodeSelectedCallback, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
 
@@ -197,7 +198,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 				}
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
-				} else if (deviceHelper.hasKeybindingNameDuplicate(appMode, deviceId, newName)) {
+				} else if (deviceHelper.hasKeybindingNameDuplicate(CUSTOMIZATION_CACHE_ID, appMode, app, deviceId, newName)) {
 					app.showToastMessage(R.string.message_name_is_already_exists);
 				} else {
 					callback.processResult(newName.trim());
@@ -225,7 +226,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		KeyBinding originalKeyBinding = keyBinding;
 		if (!Objects.equals(originalKeyBinding.getName(app), newName)) {
 			keyBinding = new KeyBinding(newName, keyBinding);
-			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyBinding, keyBinding);
+			deviceHelper.updateKeyBinding(CUSTOMIZATION_CACHE_ID, appMode, deviceId, originalKeyBinding, keyBinding);
 		}
 	}
 
@@ -234,12 +235,12 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		KeyBinding originalKeyBinding = keyBinding;
 		if (newKeyCode != originalKeyBinding.getKeyCode()) {
 			keyBinding = new KeyBinding(newKeyCode, keyBinding);
-			deviceHelper.updateKeyBinding(appMode, deviceId, originalKeyBinding, keyBinding);
+			deviceHelper.updateKeyBinding(CUSTOMIZATION_CACHE_ID, appMode, deviceId, originalKeyBinding, keyBinding);
 		}
 	}
 
 	@Override
-	public void processInputDevicesEvent(@NonNull EventType event) {
+	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
 		View view = getView();
 		if (view != null && event.isKeyBindingRelated()) {
 			updateViewContent(view);

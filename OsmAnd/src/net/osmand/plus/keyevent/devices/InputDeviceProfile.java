@@ -23,8 +23,10 @@ public abstract class InputDeviceProfile {
 	protected List<KeyBinding> keyBindings = new ArrayList<>();
 	protected Map<Integer, KeyBinding> activeKeyBindings = new HashMap<>();
 
-	public void initialize(@NonNull OsmandApplication app) {
+	@NonNull
+	public InputDeviceProfile initialize(@NonNull OsmandApplication app) {
 		this.app = app;
+		return this;
 	}
 
 	public List<KeyBinding> getKeyBindingsForCategory(@NonNull KeyEventCategory category) {
@@ -101,6 +103,10 @@ public abstract class InputDeviceProfile {
 
 	@NonNull
 	public abstract String getId();
+
+	public boolean isCustom() {
+		return false;
+	}
 
 	@NonNull
 	public abstract String toHumanString(@NonNull Context context);

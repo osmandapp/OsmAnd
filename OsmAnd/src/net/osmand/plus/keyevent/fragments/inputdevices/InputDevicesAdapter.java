@@ -99,7 +99,7 @@ class InputDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 			UiUtilities.setupCompoundButton(nightMode, color, h.compoundButton);
 			h.compoundButton.setChecked(controller.isSelected(device));
 
-			AndroidUiHelper.updateVisibility(h.overflowMenuButton, controller.isCustom(device));
+			AndroidUiHelper.updateVisibility(h.overflowMenuButton, device.isCustom());
 			h.overflowMenuButton.setOnClickListener(v -> {
 				showOverflowMenu(h.overflowMenuButton, device);
 			});

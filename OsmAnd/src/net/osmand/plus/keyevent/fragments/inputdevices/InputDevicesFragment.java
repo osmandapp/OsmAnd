@@ -24,12 +24,12 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDeviceHelper;
 import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDevicesEventCallback;
+import net.osmand.plus.keyevent.callbacks.InputDevicesEventListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class InputDevicesFragment extends BaseOsmAndFragment implements InputDevicesEventCallback {
+public class InputDevicesFragment extends BaseOsmAndFragment implements InputDevicesEventListener {
 
 	public static final String TAG = InputDevicesFragment.class.getSimpleName();
 
@@ -87,7 +87,7 @@ public class InputDevicesFragment extends BaseOsmAndFragment implements InputDev
 	}
 
 	@Override
-	public void processInputDevicesEvent(@NonNull EventType event) {
+	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
 		if (event.isDeviceRelated()) {
 			updateViewContent();
 		}

@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments.keybindings;
 
+import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_TOP_DIVIDER;
@@ -43,7 +44,7 @@ class KeyBindingsController {
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
-		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
+		this.inputDevice = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
 	}
 
 	@NonNull
@@ -77,13 +78,13 @@ class KeyBindingsController {
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_reset_all, (dialog, which) -> {
-					deviceHelper.resetAllKeyBindings(appMode, inputDevice.getId());
+					deviceHelper.resetAllKeyBindings(CUSTOMIZATION_CACHE_ID, appMode, inputDevice.getId());
 				});
 		CustomAlert.showSimpleMessage(dialogData, R.string.reset_key_assignments_desc);
 	}
 
 	public boolean isDeviceTypeEditable() {
-		return inputDevice != null && deviceHelper.isCustomDevice(inputDevice);
+		return inputDevice != null && inputDevice.isCustom();
 	}
 
 	public void askEditKeyAction(KeyBinding action) {

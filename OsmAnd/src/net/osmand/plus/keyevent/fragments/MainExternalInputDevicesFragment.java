@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments;
 
+import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.content.Context;
@@ -99,11 +100,12 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 
 	private Preference createTypePreference(@NonNull Context context) {
 		Preference uiPreference = new Preference(context);
-		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDeviceProfile device = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
 		uiPreference.setKey(PREF_ID_TYPE);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr_and_divider);
 		uiPreference.setTitle(R.string.shared_string_type);
-		uiPreference.setSummary(inputDevice.toHumanString(context));
+		uiPreference.setSummary(device.toHumanString(context));
 		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_keyboard));
 		uiPreference.setSelectable(true);
 		return uiPreference;
@@ -111,11 +113,12 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 
 	private Preference createBindingPreference(@NonNull Context context) {
 		Preference uiPreference = new Preference(context);
-		InputDeviceProfile inputDevice = deviceHelper.getSelectedDevice(getSelectedAppMode());
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDeviceProfile device = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
 		uiPreference.setKey(PREF_ID_BINDING);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
 		uiPreference.setTitle(R.string.key_assignments);
-		uiPreference.setSummary(String.valueOf(inputDevice.getActiveKeyBindingsCount()));
+		uiPreference.setSummary(String.valueOf(device.getActiveKeyBindingsCount()));
 		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
 		uiPreference.setSelectable(true);
 		return uiPreference;
@@ -150,7 +153,7 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 	}
 
 	private boolean isInputDeviceEnabled(@NonNull ApplicationMode appMode) {
-		return deviceHelper.getEnabledDevice(appMode) != null;
+		return deviceHelper.getEnabledSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode) != null;
 	}
 
 	@Override

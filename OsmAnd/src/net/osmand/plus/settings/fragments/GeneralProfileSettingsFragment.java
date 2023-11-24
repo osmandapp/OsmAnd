@@ -1,12 +1,12 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -267,14 +267,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private String getExternalInputDeviceSummary() {
+		ApplicationMode appMode = getSelectedAppMode();
 		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice(getSelectedAppMode());
+		InputDeviceProfile inputDevice = deviceHelper.getEnabledSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
 		return inputDevice != null ? inputDevice.toHumanString(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
+		ApplicationMode appMode = getSelectedAppMode();
 		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null
+		return deviceHelper.getEnabledSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode) != null
 				? getActiveIcon(R.drawable.ic_action_keyboard)
 				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
@@ -335,9 +337,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
-						}
+						UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
 						return v;
 					}
 				};
