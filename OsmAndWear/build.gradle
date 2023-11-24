@@ -1,0 +1,224 @@
+apply plugin: 'com.android.application'
+apply from: 'build-common.gradle'
+
+apply plugin: 'kotlin-android'
+
+// Global Parameters accepted
+// TARGET_APP_NAME    - app name
+// APK_NUMBER_VERSION - version number of apk
+// APK_VERSION_SUFFIX - build number like #99999Z, appended (for dev builds) to Manifest's versionName as X.X.X#99999Z
+//                      Z means flavor: M=-master, D=-main-default, Des=-design, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
+// APP_EDITION        - date stamp of builds
+
+// 1. To be done Filter fonts
+// <unzip src="OsmAndCore_android.aar" dest=".">
+//            <patternset>
+//                <include name="assets/**/map/fonts/OpenSans/*"/>
+//                <include name="assets/**/map/fonts/NotoSans/*"/>
+//            </patternset>
+//        </unzip>
+// Less important
+
+android {
+	signingConfigs {
+		development {
+			storeFile file("../keystores/debug.keystore")
+			storePassword "android"
+			keyAlias "androiddebugkey"
+			keyPassword "android"
+		}
+
+		publishing {
+			storeFile file("/var/lib/jenkins/osmand_key")
+			storePassword System.getenv("OSMAND_APK_PASSWORD")
+			keyAlias "osmand"
+			keyPassword System.getenv("OSMAND_APK_PASSWORD")
+		}
+	}
+
+	defaultConfig {
+		minSdkVersion 23
+		versionCode 4600
+		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
+		versionName "4.6.0"
+		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
+	}
+
+	lintOptions {
+		lintConfig file("lint.xml")
+		warningsAsErrors false
+	}
+
+	bundle {
+		language {
+			// Specifies that the app bundle should not support
+			// configuration APKs for language resources. These
+			// resources are instead packaged with each base and
+			// dynamic feature APK.
+			enableSplit = false
+		}
+	}
+
+	// related to kuromoji
+	//packagingOptions {
+	//	exclude '/META-INF/CONTRIBUTORS.md'
+	//	exclude '/META-INF/LICENSE.md'
+	//	exclude '/META-INF/NOTICE.md'
+	//}
+
+	sourceSets {
+		debug {
+			manifest.srcFile "AndroidManifest-debug.xml"
+		}
+		gplayFull {
+			java.srcDirs = ["src-google"]
+		}
+		gplayFree {
+			java.srcDirs = ["src-google"]
+			manifest.srcFile "AndroidManifest-gplayFree.xml"
+		}
+		androidFull {
+			java.srcDirs = ["src-google", "src-osmand"]
+			manifest.srcFile "AndroidManifest-androidFull.xml"
+		}
+		nightlyFree {
+			java.srcDirs = ["src-google", "src-osmand"]
+			manifest.srcFile "AndroidManifest-nightlyFree.xml"
+		}
+		amazonFree {
+			java.srcDirs = ["src-amazon"]
+			manifest.srcFile "AndroidManifest-amazonFree.xml"
+		}
+		amazonFull {
+			java.srcDirs = ["src-amazon"]
+			manifest.srcFile "AndroidManifest-amazonFull.xml"
+		}
+		huawei {
+			java.srcDirs = ["src-huawei"]
+			manifest.srcFile "AndroidManifest-huawei.xml"
+		}
+
+		legacy {
+			jniLibs.srcDirs = ["libc++"]
+		}
+	}
+
+	flavorDimensions "version", "coreversion", "abi"
+	productFlavors {
+		// Version
+		nightlyFree {
+			dimension "version"
+			applicationId "net.osmand.dev"
+			resValue "string", "app_name", "OsmAnd Nightly"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
+			// resConfig "en"
+		}
+		androidFull {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd~"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
+		}
+		gplayFree {
+			dimension "version"
+			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
+		}
+		gplayFull {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
+		}
+		amazonFree {
+			dimension "version"
+			applicationId "net.osmand"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
+		}
+		amazonFull {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resValue "string", "app_name", "OsmAnd+"
+			resValue "string", "app_edition", ""
+		}
+		huawei {
+			dimension "version"
+			applicationId "net.osmand.huawei"
+			resValue "string", "app_name", "OsmAnd"
+			resValue "string", "app_edition", ""
+		}
+
+        // Build that includes 3D OpenGL release
+		opengl {
+			dimension "coreversion"
+		}
+        // Build that includes 3D OpenGL debug
+		opengldebug {
+			dimension "coreversion"
+		}
+	}
+
+	buildTypes {
+		debug {
+			signingConfig signingConfigs.development
+		}
+		release {
+			signingConfig signingConfigs.publishing
+		}
+	}
+
+}
+
+afterEvaluate {
+	android.applicationVariants.all { variant ->
+		if (variant.name.contains('Opengldebug')) {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
+		} else {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		}
+	}
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	if (tskReqStr.contains("huawei")) {
+		apply plugin: 'com.huawei.agconnect'
+	}
+}
+
+task copyOsmAndCoreWithJNI() {
+	dependsOn buildOsmAndCore
+	doLast {
+		file("libs/armeabi-v7a").mkdirs()
+		file("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/armeabi-v7a/libOsmAndCoreWithJNI.so"))
+		file("libs/arm64-v8a").mkdirs()
+		file("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/arm64-v8a/libOsmAndCoreWithJNI.so"))
+		file("libs/x86").mkdirs()
+		file("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86/libOsmAndCoreWithJNI.so"))
+		file("libs/x86_64").mkdirs()
+		file("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86_64/libOsmAndCoreWithJNI.so"))
+	}
+}
+
+dependencies {
+	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+
+	// Uncomment for local debug
+	//openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
+
+	// Comment for local debug
+	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
+
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
+
+	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
+	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
+
+	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+	    android:paddingStart="16dp"
+	    android:paddingEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:scaleType="centerInside"
+            osmand:srcCompat="@drawable/ic_action_search_dark"
+	        android:layout_marginEnd="16dp" />
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="?attr/color_dialog_buttons"
+            android:textSize="@dimen/default_sub_text_size"
+            osmand:typeface="@string/font_roboto_medium"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="56dp"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"
+	    android:layout_marginStart="56dp" />
+
+</LinearLayout>

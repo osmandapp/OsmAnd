@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
+              android:orientation="vertical">
+
+	<View
+		android:id="@+id/divider_list"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="@dimen/route_info_list_text_padding"
+		android:background="?attr/dashboard_divider"
+		android:visibility="gone"
+		android:layout_marginStart="@dimen/route_info_list_text_padding" />
+
+	<View
+		android:id="@+id/divider_dash"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+        android:minHeight="@dimen/list_item_height"
+        android:gravity="center_vertical">
+
+		<androidx.appcompat.widget.AppCompatCheckBox
+			android:id="@+id/check_local_index"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			android:focusable="false"
+			android:visibility="gone"
+			android:layout_marginStart="@dimen/list_content_padding" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			osmand:srcCompat="@drawable/ic_action_polygom_dark"
+			android:visibility="visible"
+			android:layout_marginStart="@dimen/list_content_padding" />
+
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+            android:paddingTop="@dimen/gpx_text_top_margin"
+            android:paddingBottom="@dimen/gpx_text_top_margin"
+			android:paddingLeft="@dimen/subHeaderMarginLeft"
+			android:paddingRight="@dimen/showAllButtonMarginRight"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingEnd="@dimen/showAllButtonMarginRight"
+			android:paddingStart="@dimen/subHeaderMarginLeft">
+
+			<TextView
+				android:id="@+id/name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="@string/current_track"/>
+
+			<LinearLayout
+				android:id="@+id/read_section"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:visibility="visible"
+                android:gravity="center_vertical">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/distance_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_icon_margin"
+					osmand:srcCompat="@drawable/ic_action_distance_16"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+
+				<TextView
+					android:id="@+id/distance"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:includeFontPadding="false"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/points_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_icon_margin"
+					osmand:srcCompat="@drawable/ic_action_waypoint_16"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+
+				<TextView
+					android:id="@+id/points_count"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:includeFontPadding="false"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/time_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_icon_margin"
+					osmand:srcCompat="@drawable/ic_action_time_16"
+					android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+
+				<TextView
+					android:id="@+id/time"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/gpx_small_text_margin"
+					android:textColor="?android:textColorSecondary"
+                    android:includeFontPadding="false"
+					android:textSize="@dimen/default_sub_text_size"
+					android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/unknown_section"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:visibility="gone">
+
+				<TextView
+					android:id="@+id/date_and_size_details"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_sub_text_size"/>
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_sub_text_size"
+				android:visibility="gone"/>
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/show_on_map"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
+			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+			android:background="?attr/dashboard_button"
+			osmand:srcCompat="@drawable/ic_action_gsave_dark"
+			android:visibility="gone"
+			android:layout_marginStart="@dimen/favorites_icon_right_margin" />
+
+		<ImageButton
+			android:id="@+id/stop"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
+			android:background="?attr/dashboard_button"
+			osmand:srcCompat="@drawable/ic_action_rec_stop"
+			android:visibility="gone"/>
+
+		<ImageButton
+			android:id="@+id/options"
+			android:contentDescription="@string/shared_string_more_actions"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
+			android:background="?attr/dashboard_button"
+			android:focusable="false"
+			osmand:srcCompat="@drawable/ic_overflow_menu_white"
+			android:visibility="gone"/>
+
+		<LinearLayout
+            android:id="@+id/check_item"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+			android:layout_marginRight="@dimen/list_content_padding"
+            android:visibility="gone"
+			android:layout_marginEnd="@dimen/list_content_padding">
+
+			<androidx.appcompat.widget.SwitchCompat
+				android:id="@+id/toggle_item"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="@dimen/list_item_button_padding"
+				android:paddingBottom="@dimen/list_item_button_padding"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+				android:gravity="center_vertical"/>
+
+			<androidx.appcompat.widget.AppCompatCheckBox
+				android:id="@+id/toggle_checkbox_item"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+                android:paddingTop="@dimen/list_item_button_padding"
+                android:paddingBottom="@dimen/list_item_button_padding"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+				android:visibility="gone"/>
+
+        </LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/row_id"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:lineSpacingExtra="5sp"
+			android:textSize="16sp"
+			android:textColor="?android:textColorSecondary"
+			android:layout_gravity="center_vertical"
+			android:visibility="gone"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			tools:src="@drawable/ic_action_info_dark" />
+
+		<LinearLayout
+			android:id="@+id/text_wrapper"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?android:textColorPrimary"
+				tools:text="Some title text" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?android:textColorSecondary"
+				android:visibility="gone"
+				tools:text="Some very long subtitle text, that won't fit into one line"
+				tools:visibility="visible" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageButton
+			android:id="@+id/info_button"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="@dimen/content_padding"
+			android:tint="?attr/default_icon_color"
+			app:srcCompat="@drawable/ic_action_info" />
+
+		<View
+			android:id="@+id/buttons_divider"
+			android:layout_width="1dp"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:background="?attr/divider_color_basic" />
+
+		<FrameLayout
+			android:id="@+id/settings_button"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical">
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:clickable="false"
+				android:focusable="false"
+				android:tint="?attr/default_icon_color"
+				app:srcCompat="@drawable/ic_action_settings" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/setting_list_item_large_height"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>

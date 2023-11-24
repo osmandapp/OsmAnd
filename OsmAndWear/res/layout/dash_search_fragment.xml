@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/search"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dash_margin"
+              android:layout_marginLeft="@dimen/dash_margin_h"
+              android:layout_marginRight="@dimen/dash_margin_h"
+              android:layout_marginTop="@dimen/dash_margin"
+              android:background="?attr/bg_card"
+              android:orientation="vertical"
+	android:layout_marginEnd="@dimen/dash_margin_h"
+	android:layout_marginStart="@dimen/dash_margin_h">
+
+    <LinearLayout
+        android:id="@+id/search_card"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/wpt_list_item_height"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/search_for"
+            style="@style/DashboardSubHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/search_hint"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/default_list_text_size"/>
+
+    </LinearLayout>
+
+</LinearLayout>

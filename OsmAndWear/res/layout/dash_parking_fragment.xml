@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:background="?attr/bg_card"
+			  android:layout_marginTop="@dimen/dash_margin"
+    		  android:layout_marginBottom="@dimen/dash_margin"
+    		  android:layout_marginLeft="@dimen/dash_margin_h"
+    		  android:layout_marginRight="@dimen/dash_margin_h"
+			  android:orientation="vertical"
+	android:layout_marginEnd="@dimen/dash_margin_h"
+	android:layout_marginStart="@dimen/dash_margin_h">
+
+	<LinearLayout
+		android:id="@+id/parking_header"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dash_parking_height"
+		android:background="?attr/dash_parking_bg"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/direction_icon"
+			android:layout_width="@dimen/dashboard_parking_icon_size"
+			android:layout_height="@dimen/dashboard_parking_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/dashboard_parking_left_margin"
+			android:layout_marginRight="@dimen/dashFavIconMargin"
+			osmand:srcCompat="@drawable/ic_action_start_navigation"
+			android:scaleType="center"
+			android:background="@drawable/btn_inset_circle_no_shadow"
+			android:layout_marginStart="@dimen/dashboard_parking_left_margin"
+			android:layout_marginEnd="@dimen/dashFavIconMargin" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/distance"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:textColor="@color/card_and_list_background_light"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="@string/app_version"/>
+
+				<TextView
+					android:id="@+id/time_left"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/card_and_list_background_light"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:text="@string/app_mode_aircraft"/>
+
+				<TextView
+					android:id="@+id/left_lbl"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/dashFavIconMargin"
+					tools:text="@string/app_mode_aircraft"
+					android:layout_marginEnd="@dimen/dashFavIconMargin" />
+
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/card_and_list_background_light"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="@string/parking_place_limited"/>
+
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<Button
+		android:id="@+id/remove_tag"
+		android:gravity="center"
+		style="@style/DashboardGeneralButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginRight="0dp"
+		android:text="@string/remove_the_tag"
+		android:layout_marginEnd="0dp" />
+
+</LinearLayout>

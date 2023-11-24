@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="@dimen/list_item_height"
+              android:descendantFocusability="blocksDescendants"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/list_content_padding"
+              android:paddingRight="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:scaleType="center"
+	    android:visibility="gone"
+        android:layout_marginRight="@dimen/list_content_padding"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        osmand:srcCompat="@drawable/ic_action_settings"
+	    android:layout_marginEnd="@dimen/list_content_padding" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:text="@string/layer_poi"
+        android:textSize="@dimen/default_list_text_size" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="@dimen/content_padding"
+        android:textSize="@dimen/default_list_text_size"
+        android:visibility="gone"
+	    android:paddingStart="@dimen/content_padding" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/toggle_item"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:gravity="center_vertical" />
+
+</LinearLayout>

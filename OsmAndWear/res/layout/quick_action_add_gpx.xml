@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<include layout="@layout/list_item_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:text="@string/track_file"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			osmand:typeface="@string/font_roboto_medium"
+			osmand:lineHeight="@dimen/default_title_line_height"/>
+
+		<include
+			android:id="@+id/track_toggle"
+			layout="@layout/custom_radio_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/always_ask_track_file"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:text="@string/track_file_description"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			osmand:typeface="@string/font_roboto_regular"
+			osmand:lineHeight="@dimen/default_desc_line_height" />
+
+		<LinearLayout
+			android:id="@+id/selected_track_file_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include
+				layout="@layout/gpx_track_select_item"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding" />
+
+			<FrameLayout
+				android:id="@+id/select_another_track_button_container"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/fab_margin_bottom_big"
+				android:layout_marginEnd="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/select_another_track_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding_half"
+					android:text="@string/select_another_track"
+					android:textColor="?attr/colorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					android:letterSpacing="@dimen/description_letter_spacing"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:background="@drawable/btn_solid_border_light" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:background="?attr/divider_color" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:text="@string/waypoint_appearance"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			osmand:typeface="@string/font_roboto_medium"
+			osmand:lineHeight="@dimen/default_title_line_height"/>
+
+		<include
+			android:id="@+id/appearance_toggle"
+			layout="@layout/custom_radio_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/always_ask_waypoint_appearance"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:text="@string/always_ask_waypoint_appearance_description"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			osmand:typeface="@string/font_roboto_regular"
+			osmand:lineHeight="@dimen/default_desc_line_height" />
+
+		<LinearLayout
+			android:id="@+id/predefined_appearance_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:text="@string/predefined_waypoint_appearance_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				osmand:typeface="@string/font_roboto_regular"
+				osmand:lineHeight="@dimen/default_desc_line_height" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/predefined_icon"
+					android:layout_width="@dimen/favorites_my_places_icon_size"
+					android:layout_height="@dimen/favorites_my_places_icon_size"
+					android:layout_gravity="start|center_vertical"
+					tools:srcCompat="@drawable/ic_action_home_dark" />
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginStart="@dimen/list_content_padding_large"
+					android:layout_gravity="start|center_vertical"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/predefined_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						osmand:typeface="@string/font_roboto_regular"
+						osmand:lineHeight="@dimen/default_title_line_height"
+						tools:text="Address or place name" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/predefined_category_name"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/favorites_icon_padding"
+						android:drawablePadding="@dimen/content_padding_small_half"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						osmand:typeface="@string/font_roboto_regular"
+						osmand:lineHeight="@dimen/default_desc_line_height"
+						osmand:drawableStartCompat="@drawable/ic_action_group_name_16"
+						osmand:drawableTint="?default_icon_color"
+						tools:text="Some group" />
+
+				</LinearLayout>
+
+				<FrameLayout
+					android:id="@+id/edit_appearance_button_container"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_marginStart="@dimen/content_padding">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/edit_appearance_button"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:paddingStart="@dimen/content_padding"
+						android:paddingTop="@dimen/content_padding_half"
+						android:paddingEnd="@dimen/content_padding"
+						android:paddingBottom="@dimen/content_padding_half"
+						android:tint="?active_color_basic"
+						osmand:srcCompat="@drawable/ic_action_edit_dark" />
+
+				</FrameLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include layout="@layout/card_bottom_divider" />
+
+</LinearLayout>

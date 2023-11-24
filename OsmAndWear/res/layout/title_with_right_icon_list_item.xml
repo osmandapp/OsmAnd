@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/list_content_padding"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingEnd="0dp"
+    android:paddingRight="0dp">
+
+    <View
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+        android:layout_marginRight="@dimen/favorites_icon_right_margin" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"
+            tools:text="Germany" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:maxLines="25"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="Contour Lines" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dashFavIconMargin"
+        android:layout_marginLeft="@dimen/dashFavIconMargin"
+        android:scaleType="center"
+        android:tint="?attr/default_icon_color"
+        android:visibility="gone"
+        tools:src="@drawable/ic_action_arrow_down"
+        tools:visibility="visible" />
+
+</LinearLayout>

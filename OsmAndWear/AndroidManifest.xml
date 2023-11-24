@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:installLocation="auto"
+	package="net.osmand.plus">
+
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+	<uses-permission android:name="androidx.car.app.NAVIGATION_TEMPLATES"/>
+	<uses-permission android:name="androidx.car.app.ACCESS_SURFACE"/>
+	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
+	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+	<uses-permission android:name="android.permission.BLUETOOTH"
+		android:maxSdkVersion="30" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+		android:maxSdkVersion="30" />
+
+	<uses-feature android:name="android.hardware.camera" android:required="false" />
+	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+	<uses-feature android:name="android.hardware.microphone" android:required="false" />
+	<uses-feature android:name="android.hardware.wifi" android:required="false" />
+	<uses-feature android:name="android.hardware.location" android:required="false" />
+	<uses-feature android:name="android.hardware.location.network" android:required="false" />
+	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.light" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
+
+	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
+		android:xlargeScreens="true" android:anyDensity="true" />
+
+	<queries>
+		<package android:name="net.osmand.srtmPlugin" />
+		<package android:name="net.osmand.srtmPlugin.paid" />
+		<package android:name="net.osmand.skimapsPlugin" />
+		<package android:name="net.osmand.nauticalPlugin" />
+
+		<package android:name="btools.routingapp" />
+		<package android:name="com.mapillary.app" />
+
+		<package android:name="org.bruxo.gpsconnected" />
+		<package android:name="com.eclipsim.gpsstatus2" />
+		<package android:name="com.chartcross.gpstest" />
+		<package android:name="com.chartcross.gpstestplus" />
+		<package android:name="com.android.gpstest" />
+		<package android:name="com.vonglasow.michael.satstat" />
+		<package android:name="com.android.gpstest.osmdroid" />
+		<package android:name="com.dsi.ant.plugins.antplus" />
+
+		<intent>
+			<action android:name="android.intent.action.TTS_SERVICE" />
+		</intent>
+	</queries>
+
+	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
+	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.helpers.OsmandBackupAgent"
+		android:icon="@mipmap/icon" android:label="@string/app_name"
+		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
+		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
+		android:supportsRtl="true" android:usesCleartextTraffic="true"
+		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
+		android:localeConfig="@xml/locales_config">
+
+		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
+		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value="" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@mipmap/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
+		<meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
+
+		<provider
+			android:name="androidx.core.content.FileProvider"
+			android:authorities="net.osmand.plus.fileprovider"
+			android:exported="false"
+			android:grantUriPermissions="true" >
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/paths" />
+		</provider>
+
+		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
+		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
+		<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.CAMERA_BUTTON" />
+				<!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
+			</intent-filter>
+		</receiver>
+
+		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:theme="@style/FirstSplashScreenPlus"
+			android:screenOrientation="unspecified" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:exported="true"
+			android:configChanges="uiMode">
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="content" android:host="*" android:mimeType="binary/octet-stream" />
+				<data android:scheme="content" android:host="*" android:mimeType="application/octet-stream" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+			</intent-filter>
+
+			<!-- Open osmand.net/go links in OsmAnd app by default (without showing chooser dialog). -->
+			<!-- Should work only with net.osmand and net.osmand.plus from google play. -->
+			<intent-filter android:autoVerify="true">
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/go" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+
+			<intent-filter android:autoVerify="true">
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/premium" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/map" />
+				<data android:pathPrefix="/go" />
+				<data android:pathPrefix="/add-tile-source" />
+				<data android:pathPrefix="/open-gpx" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+
+			<!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
+			<!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
+			<!-- Capture file open requests (pathPattern is honoured) where no MIME type is provided in the Intent.  An Intent with a null
+		   MIME type will never be matched by a filter with a set MIME type, so we need a second intent-filter if we wish to also
+		   match files with this extension and a non-null MIME type (even if it is non-null but zero length).
+		   https://stackoverflow.com/a/31028507/4654078 -->
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.gpx.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern="/.*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.gpx.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/*.kml"/>
+				<data android:pathPattern="/.*\\.kml" />
+				<data android:pathPattern="/.*\\..*\\.kml" />
+				<data android:pathPattern="/.*\\..*\\..*\\.kml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.kml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.kml" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.kmz" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.kmz" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.kmz" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.obf.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern="/.*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.obf.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.sqlitedb" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/*.sqlitedb" />
+				<data android:pathPattern="/.*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.sqlitedb" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.sqlitedb" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.sqlite" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/*.sqlite" />
+				<data android:pathPattern="/.*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.sqlite" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.sqlite" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.osf.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern="/.*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.osf.zip" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.xml" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:scheme="data"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.xml" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.xml" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.wpt.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.wpt.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.wpt.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:pathPattern="/.*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.3d.chart" />
+			</intent-filter>
+
+			<intent-filter
+				android:label="@string/app_name"
+				android:priority="50">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="file"/>
+				<data android:scheme="content"/>
+				<data android:host="*"/>
+				<data android:mimeType="*/*"/>
+				<data android:pathPattern="/.*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\.3d.chart" />
+				<data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.3d.chart" />
+			</intent-filter>
+
+			<!--trying to handle emails-->
+			<intent-filter tools:ignore="AppLinkUrlError">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:mimeType="application/gpx+xml" />
+			</intent-filter>
+
+			<!-- google navigation intent -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="google.navigation" />
+				<data android:scheme="osmand.navigation" />
+			</intent-filter>
+
+			<!-- osmand api -->
+			<intent-filter>
+				<data android:scheme="osmand.api" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="text/plain" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="osmand-oauth" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+
+				<data android:scheme="opr-oauth" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="osmand.shortcuts" />
+			</intent-filter>
+
+		</activity>
+
+		<activity android:name="net.osmand.plus.help.HelpActivity" />
+		<activity android:name="net.osmand.plus.myplaces.MyPlacesActivity" android:windowSoftInputMode="adjustPan" />
+		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
+
+		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
+		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" android:exported="true" android:label="@string/app_name">
+			<intent-filter>
+				<data android:scheme="osmand.geo" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="geo" />
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="maps.yandex.ru" />
+				<data android:host="maps.yandex.com" />
+				<data android:host="www.openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="www.openstreetmap.org" android:pathPrefix="/directions" />
+				<data android:host="openstreetmap.org" android:path="/"/> <!-- catches /#map=... -->
+				<data android:host="openstreetmap.org" android:pathPrefix="/query"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/go"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/search"/>
+				<data android:host="openstreetmap.org" android:pathPrefix="/directions" />
+				<data android:host="osm.org" />
+				<data android:host="map.baidu.cn" />
+				<data android:host="map.baidu.com" />
+				<data android:host="wb.amap.com" />
+				<data android:host="www.amap.com" />
+				<data android:host="here.com" />
+				<data android:host="www.here.com" />
+				<data android:host="share.here.com" />
+				<data android:host="map.wap.qq.com" />
+				<data android:host="map.qq.com" />
+				<data android:host="maps.apple.com" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:host="ge0.me" android:scheme="https"/>
+				<data android:host="ge0.me" android:scheme="http"/>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" android:host="openstreetmap.de" android:pathPrefix="/karte" />
+				<data android:scheme="https" android:host="openstreetmap.de" android:pathPrefix="/karte" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="/go" />
+				<data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="go" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+			<!-- requires read permission -->
+			<!--
+			<intent-filter android:label="OsmAnd">
+			<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+			</intent-filter>
+			-->
+			<!-- generated from https://en.wikipedia.org/wiki/List_of_Google_domains -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="maps.google.ac" />
+				<data android:host="maps.google.ad" />
+				<data android:host="maps.google.ae" />
+				<data android:host="maps.google.al" />
+				<data android:host="maps.google.am" />
+				<data android:host="maps.google.as" />
+				<data android:host="maps.google.at" />
+				<data android:host="maps.google.az" />
+				<data android:host="maps.google.ba" />
+				<data android:host="maps.google.be" />
+				<data android:host="maps.google.bf" />
+				<data android:host="maps.google.bg" />
+				<data android:host="maps.google.bi" />
+				<data android:host="maps.google.bj" />
+				<data android:host="maps.google.bs" />
+				<data android:host="maps.google.bt" />
+				<data android:host="maps.google.by" />
+				<data android:host="maps.google.ca" />
+				<data android:host="maps.google.cat" />
+				<data android:host="maps.google.cc" />
+				<data android:host="maps.google.cd" />
+				<data android:host="maps.google.cf" />
+				<data android:host="maps.google.cg" />
+				<data android:host="maps.google.ch" />
+				<data android:host="maps.google.ci" />
+				<data android:host="maps.google.cl" />
+				<data android:host="maps.google.cm" />
+				<data android:host="maps.google.cn" />
+				<data android:host="maps.google.co.ao" />
+				<data android:host="maps.google.co.bw" />
+				<data android:host="maps.google.co.ck" />
+				<data android:host="maps.google.co.cr" />
+				<data android:host="maps.googlecode.com" />
+				<data android:host="maps.google.co.id" />
+				<data android:host="maps.google.co.il" />
+				<data android:host="maps.google.co.in" />
+				<data android:host="maps.google.co.jp" />
+				<data android:host="maps.google.co.ke" />
+				<data android:host="maps.google.co.kr" />
+				<data android:host="maps.google.co.ls" />
+				<data android:host="maps.google.com" />
+				<data android:host="maps.google.co.ma" />
+				<data android:host="maps.google.com.af" />
+				<data android:host="maps.google.com.ag" />
+				<data android:host="maps.google.com.ai" />
+				<data android:host="maps.google.com.ar" />
+				<data android:host="maps.google.com.au" />
+				<data android:host="maps.google.com.bd" />
+				<data android:host="maps.google.com.bh" />
+				<data android:host="maps.google.com.bn" />
+				<data android:host="maps.google.com.bo" />
+				<data android:host="maps.google.com.br" />
+				<data android:host="maps.google.com.bz" />
+				<data android:host="maps.google.com.co" />
+				<data android:host="maps.google.com.cu" />
+				<data android:host="maps.google.com.cy" />
+				<data android:host="maps.google.com.do" />
+				<data android:host="maps.google.com.ec" />
+				<data android:host="maps.google.com.eg" />
+				<data android:host="maps.google.com.et" />
+				<data android:host="maps.google.com.fj" />
+				<data android:host="maps.google.com.gh" />
+				<data android:host="maps.google.com.gi" />
+				<data android:host="maps.google.com.gt" />
+				<data android:host="maps.google.com.hk" />
+				<data android:host="maps.google.com.jm" />
+				<data android:host="maps.google.com.kh" />
+				<data android:host="maps.google.com.kw" />
+				<data android:host="maps.google.com.lb" />
+				<data android:host="maps.google.com.lc" />
+				<data android:host="maps.google.com.ly" />
+				<data android:host="maps.google.com.mm" />
+				<data android:host="maps.google.com.mt" />
+				<data android:host="maps.google.com.mx" />
+				<data android:host="maps.google.com.my" />
+				<data android:host="maps.google.com.na" />
+				<data android:host="maps.google.com.nf" />
+				<data android:host="maps.google.com.ng" />
+				<data android:host="maps.google.com.ni" />
+				<data android:host="maps.google.com.np" />
+				<data android:host="maps.google.com.om" />
+				<data android:host="maps.google.com.pa" />
+				<data android:host="maps.google.com.pe" />
+				<data android:host="maps.google.com.pg" />
+				<data android:host="maps.google.com.ph" />
+				<data android:host="maps.google.com.pk" />
+				<data android:host="maps.google.com.pr" />
+				<data android:host="maps.google.com.py" />
+				<data android:host="maps.google.com.qa" />
+				<data android:host="maps.google.com.sa" />
+				<data android:host="maps.google.com.sb" />
+				<data android:host="maps.google.com.sg" />
+				<data android:host="maps.google.com.sl" />
+				<data android:host="maps.google.com.sv" />
+				<data android:host="maps.google.com.tj" />
+				<data android:host="maps.google.com.tn" />
+				<data android:host="maps.google.com.tr" />
+				<data android:host="maps.google.com.tw" />
+				<data android:host="maps.google.com.ua" />
+				<data android:host="maps.google.com.uy" />
+				<data android:host="maps.google.com.vc" />
+				<data android:host="maps.google.com.vn" />
+				<data android:host="maps.google.co.mz" />
+				<data android:host="maps.google.co.nz" />
+				<data android:host="maps.google.co.th" />
+				<data android:host="maps.google.co.tz" />
+				<data android:host="maps.google.co.ug" />
+				<data android:host="maps.google.co.uk" />
+				<data android:host="maps.google.co.uz" />
+				<data android:host="maps.google.co.ve" />
+				<data android:host="maps.google.co.vi" />
+				<data android:host="maps.google.co.za" />
+				<data android:host="maps.google.co.zm" />
+				<data android:host="maps.google.co.zw" />
+				<data android:host="maps.google.cv" />
+				<data android:host="maps.google.cz" />
+				<data android:host="maps.google.de" />
+				<data android:host="maps.google.dj" />
+				<data android:host="maps.google.dk" />
+				<data android:host="maps.google.dm" />
+				<data android:host="maps.google.dz" />
+				<data android:host="maps.googlee.com" />
+				<data android:host="maps.google.ee" />
+				<data android:host="maps.google.es" />
+				<data android:host="maps.google.fi" />
+				<data android:host="maps.google.fm" />
+				<data android:host="maps.google.fr" />
+				<data android:host="maps.google.ga" />
+				<data android:host="maps.google.ge" />
+				<data android:host="maps.google.gf" />
+				<data android:host="maps.google.gg" />
+				<data android:host="maps.google.gl" />
+				<data android:host="maps.google.gm" />
+				<data android:host="maps.google.gp" />
+				<data android:host="maps.google.gr" />
+				<data android:host="maps.google.gy" />
+				<data android:host="maps.google.hn" />
+				<data android:host="maps.google.hr" />
+				<data android:host="maps.google.ht" />
+				<data android:host="maps.google.hu" />
+				<data android:host="maps.google.ie" />
+				<data android:host="maps.google.im" />
+				<data android:host="maps.google.io" />
+				<data android:host="maps.google.iq" />
+				<data android:host="maps.google.ir" />
+				<data android:host="maps.google.is" />
+				<data android:host="maps.google.it" />
+				<data android:host="maps.google.je" />
+				<data android:host="maps.google.jo" />
+				<data android:host="maps.google.kg" />
+				<data android:host="maps.google.ki" />
+				<data android:host="maps.google.kz" />
+				<data android:host="maps.google.la" />
+				<data android:host="maps.google.li" />
+				<data android:host="maps.google.lk" />
+				<data android:host="maps.google.lt" />
+				<data android:host="maps.google.lu" />
+				<data android:host="maps.google.lv" />
+				<data android:host="maps.google.md" />
+				<data android:host="maps.google.me" />
+				<data android:host="maps.google.mg" />
+				<data android:host="maps.google.mk" />
+				<data android:host="maps.google.ml" />
+				<data android:host="maps.google.mn" />
+				<data android:host="maps.google.ms" />
+				<data android:host="maps.google.mu" />
+				<data android:host="maps.google.mv" />
+				<data android:host="maps.google.mw" />
+				<data android:host="maps.google.ne" />
+				<data android:host="maps.google.net" />
+				<data android:host="maps.google.nl" />
+				<data android:host="maps.google.no" />
+				<data android:host="maps.google.nr" />
+				<data android:host="maps.google.nu" />
+				<data android:host="maps.google.org" />
+				<data android:host="maps.google.pl" />
+				<data android:host="maps.google.pn" />
+				<data android:host="maps.google.ps" />
+				<data android:host="maps.google.pt" />
+				<data android:host="maps.google.ro" />
+				<data android:host="maps.google.rs" />
+				<data android:host="maps.google.ru" />
+				<data android:host="maps.google.rw" />
+				<data android:host="maps.google.sc" />
+				<data android:host="maps.google.se" />
+				<data android:host="maps.google.sh" />
+				<data android:host="maps.google.si" />
+				<data android:host="maps.google.sk" />
+				<data android:host="maps.google.sm" />
+				<data android:host="maps.google.sn" />
+				<data android:host="maps.google.so" />
+				<data android:host="maps.google.st" />
+				<data android:host="maps.google.td" />
+				<data android:host="maps.google.tg" />
+				<data android:host="maps.google.tk" />
+				<data android:host="maps.google.tl" />
+				<data android:host="maps.google.tm" />
+				<data android:host="maps.google.tn" />
+				<data android:host="maps.google.to" />
+				<data android:host="maps.google.tt" />
+				<data android:host="maps.google.us" />
+				<data android:host="maps.google.vg" />
+				<data android:host="maps.google.vu" />
+				<data android:host="maps.google.ws" />
+				<data android:host="www.googlemaps.com" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+
+				<data android:pathPrefix="/maps" />
+
+				<data android:host="www.google.ac" />
+				<data android:host="www.google.ad" />
+				<data android:host="www.google.ae" />
+				<data android:host="www.google.al" />
+				<data android:host="www.google.am" />
+				<data android:host="www.google.as" />
+				<data android:host="www.google.at" />
+				<data android:host="www.google.az" />
+				<data android:host="www.google.ba" />
+				<data android:host="www.google.be" />
+				<data android:host="www.google.bf" />
+				<data android:host="www.google.bg" />
+				<data android:host="www.google.bi" />
+				<data android:host="www.google.bj" />
+				<data android:host="www.google.bs" />
+				<data android:host="www.google.bt" />
+				<data android:host="www.google.by" />
+				<data android:host="www.google.ca" />
+				<data android:host="www.google.cat" />
+				<data android:host="www.google.cc" />
+				<data android:host="www.google.cd" />
+				<data android:host="www.google.cf" />
+				<data android:host="www.google.cg" />
+				<data android:host="www.google.ch" />
+				<data android:host="www.google.ci" />
+				<data android:host="www.google.cl" />
+				<data android:host="www.google.cm" />
+				<data android:host="www.google.cn" />
+				<data android:host="www.google.co.ao" />
+				<data android:host="www.google.co.bw" />
+				<data android:host="www.google.co.ck" />
+				<data android:host="www.google.co.cr" />
+				<data android:host="www.google.co.id" />
+				<data android:host="www.google.co.il" />
+				<data android:host="www.google.co.in" />
+				<data android:host="www.google.co.jp" />
+				<data android:host="www.google.co.ke" />
+				<data android:host="www.google.co.kr" />
+				<data android:host="www.google.co.ls" />
+				<data android:host="www.google.com" />
+				<data android:host="www.google.co.ma" />
+				<data android:host="www.google.com.af" />
+				<data android:host="www.google.com.ag" />
+				<data android:host="www.google.com.ai" />
+				<data android:host="www.google.com.ar" />
+				<data android:host="www.google.com.au" />
+				<data android:host="www.google.com.bd" />
+				<data android:host="www.google.com.bh" />
+				<data android:host="www.google.com.bn" />
+				<data android:host="www.google.com.bo" />
+				<data android:host="www.google.com.br" />
+				<data android:host="www.google.com.bz" />
+				<data android:host="www.google.com.co" />
+				<data android:host="www.google.com.cu" />
+				<data android:host="www.google.com.cy" />
+				<data android:host="www.google.com.do" />
+				<data android:host="www.google.com.ec" />
+				<data android:host="www.google.com.eg" />
+				<data android:host="www.google.com.et" />
+				<data android:host="www.google.com.fj" />
+				<data android:host="www.google.com.gh" />
+				<data android:host="www.google.com.gi" />
+				<data android:host="www.google.com.gt" />
+				<data android:host="www.google.com.hk" />
+				<data android:host="www.google.com.jm" />
+				<data android:host="www.google.com.kh" />
+				<data android:host="www.google.com.kw" />
+				<data android:host="www.google.com.lb" />
+				<data android:host="www.google.com.lc" />
+				<data android:host="www.google.com.ly" />
+				<data android:host="www.google.com.mm" />
+				<data android:host="www.google.com.mt" />
+				<data android:host="www.google.com.mx" />
+				<data android:host="www.google.com.my" />
+				<data android:host="www.google.com.na" />
+				<data android:host="www.google.com.nf" />
+				<data android:host="www.google.com.ng" />
+				<data android:host="www.google.com.ni" />
+				<data android:host="www.google.com.np" />
+				<data android:host="www.google.com.om" />
+				<data android:host="www.google.com.pa" />
+				<data android:host="www.google.com.pe" />
+				<data android:host="www.google.com.pg" />
+				<data android:host="www.google.com.ph" />
+				<data android:host="www.google.com.pk" />
+				<data android:host="www.google.com.pr" />
+				<data android:host="www.google.com.py" />
+				<data android:host="www.google.com.qa" />
+				<data android:host="www.google.com.sa" />
+				<data android:host="www.google.com.sb" />
+				<data android:host="www.google.com.sg" />
+				<data android:host="www.google.com.sl" />
+				<data android:host="www.google.com.sv" />
+				<data android:host="www.google.com.tj" />
+				<data android:host="www.google.com.tn" />
+				<data android:host="www.google.com.tr" />
+				<data android:host="www.google.com.tw" />
+				<data android:host="www.google.com.ua" />
+				<data android:host="www.google.com.uy" />
+				<data android:host="www.google.com.vc" />
+				<data android:host="www.google.com.vn" />
+				<data android:host="www.google.co.mz" />
+				<data android:host="www.google.co.nz" />
+				<data android:host="www.google.co.th" />
+				<data android:host="www.google.co.tz" />
+				<data android:host="www.google.co.ug" />
+				<data android:host="www.google.co.uk" />
+				<data android:host="www.google.co.uz" />
+				<data android:host="www.google.co.ve" />
+				<data android:host="www.google.co.vi" />
+				<data android:host="www.google.co.za" />
+				<data android:host="www.google.co.zm" />
+				<data android:host="www.google.co.zw" />
+				<data android:host="www.google.cv" />
+				<data android:host="www.google.cz" />
+				<data android:host="www.google.de" />
+				<data android:host="www.google.dj" />
+				<data android:host="www.google.dk" />
+				<data android:host="www.google.dm" />
+				<data android:host="www.google.dz" />
+				<data android:host="www.googlee.com" />
+				<data android:host="www.google.ee" />
+				<data android:host="www.google.es" />
+				<data android:host="www.google.fi" />
+				<data android:host="www.google.fm" />
+				<data android:host="www.google.fr" />
+				<data android:host="www.google.ga" />
+				<data android:host="www.google.ge" />
+				<data android:host="www.google.gf" />
+				<data android:host="www.google.gg" />
+				<data android:host="www.google.gl" />
+				<data android:host="www.google.gm" />
+				<data android:host="www.google.gp" />
+				<data android:host="www.google.gr" />
+				<data android:host="www.google.gy" />
+				<data android:host="www.google.hn" />
+				<data android:host="www.google.hr" />
+				<data android:host="www.google.ht" />
+				<data android:host="www.google.hu" />
+				<data android:host="www.google.ie" />
+				<data android:host="www.google.im" />
+				<data android:host="www.google.io" />
+				<data android:host="www.google.iq" />
+				<data android:host="www.google.ir" />
+				<data android:host="www.google.is" />
+				<data android:host="www.google.it" />
+				<data android:host="www.google.je" />
+				<data android:host="www.google.jo" />
+				<data android:host="www.google.kg" />
+				<data android:host="www.google.ki" />
+				<data android:host="www.google.kz" />
+				<data android:host="www.google.la" />
+				<data android:host="www.google.li" />
+				<data android:host="www.google.lk" />
+				<data android:host="www.google.lt" />
+				<data android:host="www.google.lu" />
+				<data android:host="www.google.lv" />
+				<data android:host="www.google.md" />
+				<data android:host="www.google.me" />
+				<data android:host="www.google.mg" />
+				<data android:host="www.google.mk" />
+				<data android:host="www.google.ml" />
+				<data android:host="www.google.mn" />
+				<data android:host="www.google.ms" />
+				<data android:host="www.google.mu" />
+				<data android:host="www.google.mv" />
+				<data android:host="www.google.mw" />
+				<data android:host="www.google.ne" />
+				<data android:host="www.google.net" />
+				<data android:host="www.google.nl" />
+				<data android:host="www.google.no" />
+				<data android:host="www.google.nr" />
+				<data android:host="www.google.nu" />
+				<data android:host="www.google.org" />
+				<data android:host="www.google.pl" />
+				<data android:host="www.google.pn" />
+				<data android:host="www.google.ps" />
+				<data android:host="www.google.pt" />
+				<data android:host="www.google.ro" />
+				<data android:host="www.google.rs" />
+				<data android:host="www.google.ru" />
+				<data android:host="www.google.rw" />
+				<data android:host="www.google.sc" />
+				<data android:host="www.google.se" />
+				<data android:host="www.google.sh" />
+				<data android:host="www.google.si" />
+				<data android:host="www.google.sk" />
+				<data android:host="www.google.sm" />
+				<data android:host="www.google.sn" />
+				<data android:host="www.google.so" />
+				<data android:host="www.google.st" />
+				<data android:host="www.google.td" />
+				<data android:host="www.google.tg" />
+				<data android:host="www.google.tk" />
+				<data android:host="www.google.tl" />
+				<data android:host="www.google.tm" />
+				<data android:host="www.google.tn" />
+				<data android:host="www.google.to" />
+				<data android:host="www.google.tt" />
+				<data android:host="www.google.us" />
+				<data android:host="www.google.vg" />
+				<data android:host="www.google.vu" />
+				<data android:host="www.google.ws" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name="net.osmand.plus.plugins.development.TestVoiceActivity" />
+		<activity android:name="net.osmand.plus.plugins.development.LogcatActivity" />
+		<activity android:name="net.osmand.plus.download.DownloadActivity" android:exported="true" android:label="" />
+		<activity android:name="net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity" android:exported="true">
+
+			<intent-filter>
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/travel" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<category android:name="android.intent.category.APP_MAPS" />
+				<category android:name="android.intent.category.CAR_MODE" />
+				<category android:name="android.intent.category.CAR_DOCK" />
+				<category android:name="android.intent.category.DESK_DOCK" />
+			</intent-filter>
+
+		</activity>
+
+		<activity
+			android:name="net.osmand.plus.activities.RestartActivity"
+			android:exported="false"
+			android:process=":restart"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+		<!-- keep android:process on a separate line !! -->
+		<service
+			android:process="net.osmand.plus"
+			android:label="@string/process_navigation_service"
+			android:name="net.osmand.plus.NavigationService"
+			android:exported="true"
+			android:foregroundServiceType="location"
+			android:stopWithTask="false">
+			<intent-filter>
+				<action android:name="net.osmand.plus.NavigationService" />
+			</intent-filter>
+		</service>
+
+		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
+			<intent-filter>
+				<action android:name="net.osmand.aidl.OsmandAidlService"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</service>
+
+		<service android:name="net.osmand.aidl.OsmandAidlServiceV2" android:exported="true" >
+			<intent-filter>
+				<action android:name="net.osmand.aidl.OsmandAidlServiceV2"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</service>
+
+		<service
+			android:name="net.osmand.plus.download.DownloadService"
+			android:label="@string/process_downloading_service"
+			android:stopWithTask="false" />
+
+		<meta-data android:name="com.google.android.gms.car.application"
+			android:resource="@xml/car_app_desc"
+			tools:ignore="MetadataTagInsideApplicationTag" />
+
+		<meta-data android:name="androidx.car.app.minCarApiLevel"
+			android:value="1"
+			tools:ignore="MetadataTagInsideApplicationTag" />
+
+		<service
+			android:name="net.osmand.plus.auto.NavigationCarAppService"
+			android:exported="true">
+
+			<intent-filter>
+				<action android:name="androidx.car.app.CarAppService" />
+				<category android:name="androidx.car.app.category.NAVIGATION"/>
+			</intent-filter>
+		</service>
+	</application>
+
+</manifest> 

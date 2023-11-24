@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:focusable="false"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_content_padding"
+	    android:paddingStart="@dimen/list_content_padding"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            android:layout_marginTop="@dimen/favorites_icon_top_margin"
+            osmand:srcCompat="@drawable/ic_sdcard"
+	        android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/direction"
+                    android:layout_width="@dimen/directionIconSize"
+                    android:layout_height="@dimen/directionIconSize"
+                    android:layout_marginTop="1sp"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="100500 km"
+	                android:layout_marginStart="2dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/type_name_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_gravity="center_vertical"
+                    osmand:srcCompat="@drawable/ic_action_group_name_16"
+	                android:layout_marginStart="4dp" />
+
+                <TextView
+                    android:id="@+id/type_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="100500 km"
+	                android:layout_marginStart="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/options"
+            android:contentDescription="@string/shared_string_more"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/dashboard_button"
+            android:focusable="false"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/navigate_to"
+            android:contentDescription="@string/context_menu_item_directions_to"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:background="?attr/dashboard_button"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"
+            android:visibility="gone"
+	        android:layout_marginStart="@dimen/dashFavIconMargin" />
+    </LinearLayout>
+
+</LinearLayout>

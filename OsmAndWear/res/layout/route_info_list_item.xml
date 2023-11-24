@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:minWidth="42dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+	        android:layout_marginStart="@dimen/list_content_padding">
+
+            <TextView
+                android:id="@+id/cumulative_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="?attr/active_color_basic"
+                android:textSize="@dimen/default_sub_text_size"
+                android:textStyle="bold"
+                tools:text="631 m"/>
+
+            <TextView
+                android:id="@+id/cumulative_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="?attr/active_color_basic"
+                android:textSize="@dimen/default_sub_text_size"
+                android:textStyle="bold"
+                tools:text="0:50"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/direction"
+            android:layout_marginLeft="@dimen/list_header_padding"
+            android:layout_marginRight="@dimen/list_header_padding"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+	        android:layout_marginEnd="@dimen/list_header_padding"
+	        android:layout_marginStart="@dimen/list_header_padding" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:minWidth="46dp"
+            android:layout_marginRight="@dimen/list_header_padding"
+            android:orientation="vertical"
+	        android:layout_marginEnd="@dimen/list_header_padding">
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="?attr/active_color_basic"
+                android:textSize="@dimen/default_sub_text_size"
+                android:textStyle="bold"
+                tools:text="@string/app_version"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/default_sub_text_size"
+                android:textColor="?attr/active_color_basic"
+                android:textStyle="bold"
+                tools:text="@string/app_version"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/content_padding_half"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="Head Dmytrivska Street" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/lanes"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitStart"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/divider_color_basic"/>
+
+</LinearLayout>

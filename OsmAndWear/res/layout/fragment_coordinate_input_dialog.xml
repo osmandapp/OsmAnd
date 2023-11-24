@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/app_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			tools:background="@color/card_and_list_background_dark">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/coordinate_input_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				android:padding="0dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center_vertical">
+
+					<ImageButton
+						android:id="@+id/back_button"
+						style="@style/Widget.AppCompat.ActionButton"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
+						android:contentDescription="@string/access_shared_string_navigate_up"
+						tools:src="@drawable/ic_arrow_back"/>
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_text"
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight="1"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:text="@string/coordinates"
+						android:textSize="@dimen/dialog_header_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:textColor="@color/card_and_list_background_light"/>
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/options_button"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:background="?attr/selectableItemBackground"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:paddingLeft="@dimen/content_padding"
+						android:paddingRight="@dimen/content_padding"
+						android:text="@string/shared_string_options"
+						android:textAllCaps="true"
+						android:textColor="@color/active_color_primary_light"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						android:paddingEnd="@dimen/content_padding"
+						android:paddingStart="@dimen/content_padding" />
+
+				</LinearLayout>
+
+			</androidx.appcompat.widget.Toolbar>
+
+			<include layout="@layout/coordinate_input_data_area"/>
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/markers_recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="72dp"
+			android:paddingTop="@dimen/content_padding"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/keyboard_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<View
+			android:id="@+id/keyboard_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			tools:background="@color/divider_color_dark"/>
+
+		<LinearLayout
+			android:id="@+id/bottom_controls_container"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+			android:background="?attr/wikivoyage_bottom_bar_bg_color">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/cancel_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="0"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_margin"
+				android:paddingRight="@dimen/bottom_sheet_content_margin"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:text="@string/shared_string_cancel"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				android:paddingEnd="@dimen/bottom_sheet_content_margin"
+				android:paddingStart="@dimen/bottom_sheet_content_margin" />
+
+
+			<View
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"/>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/add_marker_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical|end"
+				android:layout_weight="0"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical|end"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_margin"
+				android:paddingRight="@dimen/bottom_sheet_content_margin"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableRight="@drawable/ic_action_type_add"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute"
+				tools:text="@string/shared_string_add"
+				tools:drawableEnd="@drawable/ic_action_type_add"
+				android:paddingStart="@dimen/bottom_sheet_content_margin"
+				android:paddingEnd="@dimen/bottom_sheet_content_margin" />
+
+		</LinearLayout>
+
+		<include layout="@layout/coordinate_input_keyboard"/>
+		
+	</LinearLayout>
+
+</FrameLayout>

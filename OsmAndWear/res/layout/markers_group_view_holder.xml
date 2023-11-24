@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+		tools:src="@drawable/ic_action_polygom_dark"/>
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/name_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			tools:text="Some title"/>
+
+		<TextView
+			android:id="@+id/description_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+			android:textColor="@null"
+			android:visibility="gone"
+			tools:text="Some description"
+			tools:visibility="visible"/>
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/number_count_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+		android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+		android:ellipsize="end"
+		android:maxLines="1"
+		android:textColor="?attr/color_dialog_buttons"
+		android:textSize="@dimen/default_list_text_size"
+		osmand:typeface="@string/font_roboto_medium"
+		tools:text="25"/>
+</LinearLayout>

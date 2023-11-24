@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="@dimen/content_padding_small"
+	android:layout_marginLeft="@dimen/text_margin_small"
+	android:layout_marginRight="@dimen/text_margin_small"
+	android:background="?attr/wikivoyage_travel_card_bg"
+	android:orientation="vertical"
+	android:layout_marginStart="@dimen/text_margin_small"
+	android:layout_marginEnd="@dimen/text_margin_small">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/wikivoyage_explore_card_image_height"
+		android:layout_gravity="center_horizontal"
+		android:orientation="vertical"
+		android:background="@drawable/travel_card_open_beta_image_bg">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/background_image"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:contentDescription="@string/welcome_to_open_beta"
+			tools:src="@drawable/img_help_wikivoyage_articles" />
+	</LinearLayout>
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_marginEnd="@dimen/list_content_padding"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			android:layout_marginRight="@dimen/list_content_padding"
+			android:layout_marginStart="@dimen/list_content_padding"
+			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+			android:textSize="@dimen/empty_state_text_size"
+			android:textColor="?attr/wikivoyage_primary_text_color"
+			tools:text="@string/welcome_to_open_beta" />
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_marginEnd="@dimen/list_content_padding"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			android:layout_marginRight="@dimen/list_content_padding"
+			android:layout_marginStart="@dimen/list_content_padding"
+			tools:text="@string/welcome_to_open_beta_description" />
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/wikivoyage_card_divider_color" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/bottom_button_text"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_title_height"
+			android:layout_gravity="center"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_horizontal"
+			android:paddingTop="@dimen/wikivoyage_travel_card_button_padding"
+			android:textColor="?attr/color_dialog_buttons"
+			android:textSize="@dimen/default_desc_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:text="@string/get_unlimited_access" />
+
+
+</LinearLayout>

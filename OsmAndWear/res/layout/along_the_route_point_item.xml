@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/package_delivered_layout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/waypoint_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:descendantFocusability="blocksDescendants"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/waypoint_icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginTop="@dimen/content_padding"
+			osmand:srcCompat="@drawable/ic_action_favorite"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/waypoint_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Some waypoint text" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/subHeaderPadding">
+
+				<TextView
+					android:id="@+id/waypoint_dist"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:maxLines="1"
+					android:textColor="@color/color_myloc_distance"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="12 km" />
+
+				<TextView
+					android:id="@+id/waypoint_deviation"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_marginLeft="@dimen/dashPadding"
+					android:layout_marginStart="@dimen/dashPadding"
+					android:drawablePadding="@dimen/subHeaderPadding"
+					android:maxLines="1"
+					android:textColor="@color/text_color_secondary_dark"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="Intermediate point " />
+
+				<TextView
+					android:id="@+id/waypoint_desc_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="@color/text_color_secondary_dark"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="some description" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/info_close"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="@dimen/bottom_sheet_list_item_height"
+			android:layout_height="@dimen/bottom_sheet_list_item_height"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/subHeaderPadding"
+			android:layout_marginRight="@dimen/subHeaderPadding"
+			android:contentDescription="@string/shared_string_delete"
+			android:focusable="false"
+			android:scaleType="center"
+			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>

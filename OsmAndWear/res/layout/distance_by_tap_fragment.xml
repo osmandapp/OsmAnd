@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<include layout="@layout/profile_preference_toolbar_with_switch_action" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/descriptionImage"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:adjustViewBounds="true"
+				tools:src="@drawable/img_distance_by_tap_night" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:letterSpacing="0.02"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:text="@string/how_to_use"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				app:typeface="@string/font_roboto_medium" />
+
+			<TextView
+				android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:letterSpacing="0.02"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:text="@string/distance_by_tap_use_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginTop="@dimen/content_padding"
+				android:background="?attr/divider_color_basic" />
+
+			<LinearLayout
+				android:id="@+id/items_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>

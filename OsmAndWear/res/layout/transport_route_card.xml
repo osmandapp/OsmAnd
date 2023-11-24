@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/route_info_details_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/card_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/list_item_divider" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic"
+		android:focusable="false" />
+
+	<LinearLayout
+		android:id="@+id/routes_info_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/card_and_list_background_basic"
+		android:orientation="vertical"
+		android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingStart="@dimen/route_info_buttons_padding_top_bottom">
+
+		<net.osmand.plus.widgets.FlowLayout
+			android:id="@+id/routes_badges"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<View
+			android:id="@+id/badges_padding"
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:visibility="gone"/>
+
+		<LinearLayout
+			android:id="@+id/route_info"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_marginTop="4dp"
+			android:paddingBottom="14dp">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/from_line"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="@dimen/content_padding_small_half"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/route_from" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/way_line"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/route_from" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/interval_line"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="@dimen/content_padding_small_half"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				android:visibility="gone"
+				tools:visibility="visible"
+				tools:text="@string/shared_string_interval" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/route_buttons"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="@dimen/route_info_details_padding"
+			android:baselineAligned="false"
+			android:orientation="horizontal">
+
+			<FrameLayout
+				android:id="@+id/details_button"
+				android:layout_width="0dp"
+				android:layout_height="@dimen/route_info_buttons_height"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:orientation="horizontal">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/details_button_descr"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_gravity="center"
+					android:ellipsize="end"
+					android:gravity="center"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/rendering_category_details"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/text_button_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:ignore="UnusedAttribute" />
+
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/show_button"
+				android:layout_width="0dp"
+				android:layout_height="@dimen/route_info_buttons_height"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_weight="1"
+				android:orientation="horizontal">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/show_button_descr"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_gravity="center"
+					android:ellipsize="end"
+					android:gravity="center"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/shared_string_show_on_map"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/text_button_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:ignore="UnusedAttribute" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/bottom_shadow"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+</LinearLayout>

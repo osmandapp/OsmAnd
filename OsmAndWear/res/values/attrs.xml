@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableView">
+        <attr name="maxVisibleWidth" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="OsmAndTheme">
+        <attr name="mapBackground" format="reference"/>
+        <attr name="routeParameterTitleColor" format="color"/>
+        <attr name="chart_marker_background" format="reference" />
+        <attr name="chart_label_background" format="reference" />
+        <attr name="chart_grid_line_color" format="reference" />
+        <attr name="keyboard_controls_divider" format="color"/>
+        <!-- list colors -->
+        <attr name="ctx_menu_info_divider" format="color"/>
+        <attr name="searchbar_text" format="color"/>
+        <attr name="searchbar_text_hint" format="color"/>
+		<attr name="list_divider" format="color"/>
+		<attr name="btn_flat_bg" format="reference" />
+		<attr name="btn_border_bg" format="reference" />
+		<attr name="banner_border_bg" format="reference" />
+		<attr name="expandable_list_item_background" format="color"/>
+		<attr name="expandable_list_background" format="color"/>
+		<attr name="bg_color" format="reference" />
+	    <attr name="bg_circle" format="reference"/>
+        <attr name="bg_circle_contour" format="reference" />
+	    <attr name="btn_round" format="reference" />
+        <attr name="btn_round_border" format="reference" />
+		<attr name="btn_round_border_2" format="reference" />
+	    <attr name="bg_round_btn" format="reference" />
+		<attr name="bg_card" format="reference" />
+        <attr name="context_menu_card" format="reference" />
+        <attr name="ctx_menu_card_btn" format="reference" />
+        <attr name="bg_map_context_menu" format="reference" />
+        <attr name="bg_point_editor_view" format="reference" />
+        <attr name="activity_background_color" format="reference" />
+        <attr name="list_background_color" format="reference" />
+        <attr name="ctx_menu_controller_bg" format="reference" />
+        <attr name="ctx_menu_controller_text_color" format="reference" />
+        <attr name="ctx_menu_divider" format="reference" />
+        <attr name="bottom_menu_view_bg" format="reference" />
+        <attr name="left_menu_view_bg" format="reference" />
+        <attr name="right_menu_view_bg" format="reference" />
+        <attr name="stroked_buttons_and_links_outline" format="color" />
+		<attr name="widget_background_color" format="reference" />
+
+        <attr name="dashboard_divider" format="reference" />
+		<attr name="dashboard_button" format="reference" />
+
+		<attr name="coordinate_input_edit_text_normal" format="reference"/>
+
+        <attr name="expandable_category_color" format="reference"/>
+        <attr name="bottomToolBarColor" format="color" />
+		<attr name="downloadButtonBackground" format="reference" />
+		<attr name="spinnerItemTextColor" format="reference" />
+        <attr name="spinnerListBackground" format="color|reference" />
+		<attr name="search_background" format="reference" />
+		<attr name="switch_ex_background" format="reference" />
+		<attr name="switch_ex_text_color" format="color|reference" />
+		<attr name="bg_plugin_logo_disabled" format="reference" />
+		<attr name="plugin_details_install_header_bg" format="color|reference" />
+		
+		<attr name="size_progress_bar" format="reference"/>
+		<attr name="dash_parking_bg" format="reference"/>
+		<attr name="dashboard_general_button_text_color" format="color"/>
+
+        <attr name="appbar_layout_theme" format="reference"/>
+        <attr name="search_tabbar_layout_theme" format="reference"/>
+        <attr name="toolbar_theme" format="reference"/>
+        <attr name="new_app_theme" format="reference"/>
+	    <attr name="app_bar_primary_item_color" format="color"/>
+
+        <attr name="divider_color" format="reference" />
+        <attr name="contextMenuButtonColor" format="reference" />
+
+        <attr name="color_dialog_buttons" format="color"/>
+        <attr name="secondary_icon_color" format="color"/>
+        <attr name="default_icon_color" format="color"/>
+        <attr name="primary_icon_color" format="color"/>
+        <attr name="light_icon_color" format="color"/>
+
+		<attr name="text_color_tab_active" format="color"/>
+		<attr name="text_color_tab_active_white" format="color"/>
+
+        <attr name="circle_dialog_bg" format="reference"/>
+        <attr name="dialog_bg_color" format="reference"/>
+        <attr name="dialog_transparent_bg_color" format="reference"/>
+        <attr name="dialog_title_color" format="reference"/>
+        <attr name="dialog_description_color" format="reference"/>
+        <attr name="dialog_text_description_color" format="reference"/>
+        <attr name="card_description_text_color" format="reference"/>
+
+		<attr name="subscription_active_bg_color" format="reference"/>
+		<attr name="subscription_active_div_color" format="reference"/>
+
+		<attr name="wikivoyage_bg_color" format="reference"/>
+		<attr name="wikivoyage_card_bg_color" format="reference"/>
+		<attr name="wikivoyage_card_divider_color" format="reference"/>
+		<attr name="wikivoyage_app_bar_color" format="reference"/>
+		<attr name="wikivoyage_app_bar_text_color" format="reference"/>
+		<attr name="wikivoyage_active_color" format="reference"/>
+		<attr name="wikivoyage_bottom_bar_bg_color" format="reference"/>
+		<attr name="wikivoyage_bottom_bar_divider_color" format="reference"/>
+		<attr name="wikivoyage_secondary_btn_bg_color" format="reference"/>
+		<attr name="wikivoyage_primary_btn_text_color" format="reference"/>
+		<attr name="wikivoyage_welcome_bg_color" format="reference"/>
+		<attr name="wikivoyage_primary_text_color" format="reference"/>
+
+		<attr name="wikivoyage_travel_card_bg" format="reference"/>
+		<attr name="wikivoyage_travel_card_stroke_bg" format="reference"/>
+		<attr name="wikivoyage_secondary_btn_bg" format="reference"/>
+		<attr name="wikivoyage_primary_btn_bg" format="reference"/>
+	    <attr name="bg_keycode_cursor" format="reference"/>
+	    <attr name="bg_keycode_content" format="reference"/>
+        <attr name="purchase_dialog_shadow_btn_bg" format="reference"/>
+		<attr name="purchase_dialog_outline_btn_bg" format="reference"/>
+        <attr name="purchase_dialog_active_card_bg" format="reference"/>
+        <attr name="purchase_sc_feature_list_bg" format="color"/>
+        <attr name="purchase_sc_selected_plan_bg" format="color"/>
+        <attr name="purchase_sc_header_icon_bg" format="color"/>
+        <attr name="promo_banner_title_color" format="color"/>
+
+        <attr name="bottom_bar_background_color" format="color" />
+
+        <attr name="bottom_nav_shadow" format="reference"/>
+
+		<attr name="text_rounded_bg_regular" format="reference" />
+		<attr name="text_rounded_bg_active" format="reference" />
+
+		<attr name="menu_bottom_sheet_icon_color" format="reference" />
+		<attr name="route_info_control_icon_color" format="reference" />
+		<attr name="route_info_bg" format="reference" />
+		<attr name="flow_toolbar_bg" format="reference" />
+		<attr name="divider_color_basic" format="reference" />
+		<attr name="main_font_color_basic" format="reference" />
+		<attr name="active_color_basic" format="reference" />
+		<attr name="profile_icon_color_green" format="reference" />
+		<attr name="card_and_list_background_basic" format="reference" />
+		<attr name="activity_background_basic" format="reference" />
+		<attr name="pages_bg" format="reference"/>
+	    <attr name="dlg_btn_ripple" format="reference" />
+	    <attr name="dlg_btn_ripple_solid" format="reference" />
+	    <attr name="dlg_btn_ripple_tertiary" format="reference" />
+		<attr name="dlg_btn_primary" format="reference" />
+		<attr name="dlg_btn_primary_harmful" format="reference" />
+		<attr name="dlg_btn_primary_text" format="reference" />
+		<attr name="dlg_btn_secondary" format="reference" />
+		<attr name="dlg_btn_secondary_text" format="reference" />
+		<attr name="dlg_btn_secondary_harmful_text" format="reference" />
+		<attr name="dlg_btn_transparent" format="reference" />
+		<attr name="dlg_btn_stroked" format="reference" />
+		<attr name="dlg_btn_tertiary_text" format="reference" />
+		<attr name="dlg_btn_tertiary_harmful" format="reference" />
+		<attr name="stroked_btn_contour" format="reference" />
+		<attr name="profile_save_btn" format="reference"/>
+		<attr name="profile_cancel_btn" format="reference"/>
+		<attr name="btn_bg_border_inactive" format="reference"/>
+		<attr name="btn_radio_button_left" format="reference"/>
+		<attr name="btn_radio_button_right" format="reference"/>
+		<attr name="btn_radio_button_center" format="reference"/>
+        <attr name="radio_button_outline" format="reference"/>
+		<attr name="bg_dash_line" format="reference"/>
+		<attr name="text_input_background" format="reference"/>
+		<attr name="image_help_announcement_time" format="reference"/>
+		<attr name="switch_button_active" format="reference" />
+		<attr name="bottom_navigation_item_background" format="reference" />
+		<attr name="ic_action_osmand_pro_logo_colored" format="reference" />
+		<attr name="ic_action_android_auto_logo_colored" format="reference" />
+	    <attr name="chip_ripple" format="reference" />
+	    <attr name="chip_content_color" format="reference" />
+	    <attr name="inactive_text_color" format="reference" />
+	    <attr name="appbar_and_list_background_color" format="reference" />
+	    <attr name="image_tile_placeholder" format="reference" />
+	    <attr name="toolbar_back_button_color" format="reference" />
+	    <attr name="toolbar_title_color" format="reference" />
+	    <attr name="ripple_solid_6dp" format="reference" />
+	    <attr name="active_buttons_and_links_bg_pressed" format="reference" />
+	    <attr name="icon_color_active" format="reference" />
+	    <attr name="toolbar_active_color" format="reference" />
+	    <attr name="status_bar_active_color" format="reference" />
+	    <attr name="alert_dialog_theme" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsTextColor" format="color"/>
+        <attr name="pstsInactiveTextColor" format="color"/>
+        <attr name="pstsIndicatorColor" format="color"/>
+        <attr name="pstsUnderlineColor" format="color"/>
+        <attr name="pstsDividerColor" format="color"/>
+        <attr name="pstsDividerWidth" format="dimension"/>
+        <attr name="pstsIndicatorHeight" format="dimension"/>
+        <attr name="pstsUnderlineHeight" format="dimension"/>
+        <attr name="pstsDividerPadding" format="dimension"/>
+        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
+        <attr name="pstsScrollOffset" format="dimension"/>
+        <attr name="pstsTabBackground" format="reference"/>
+        <attr name="pstsShouldExpand" format="boolean"/>
+        <attr name="pstsTextAllCaps" format="boolean"/>
+        <attr name="pstsPaddingMiddle" format="boolean"/>
+        <attr name="pstsTextStyle">
+            <flag name="normal" value="0x0"/>
+            <flag name="bold" value="0x1"/>
+            <flag name="italic" value="0x2"/>
+        </attr>
+        <attr name="pstsTextSelectedStyle">
+            <flag name="normal" value="0x0"/>
+            <flag name="bold" value="0x1"/>
+            <flag name="italic" value="0x2"/>
+        </attr>
+        <attr name="pstsTextAlpha" format="float"/>
+        <attr name="pstsTextSelectedAlpha" format="float"/>
+    </declare-styleable>
+	
+	<declare-styleable name="TextViewEx">
+		<attr name="typeface" format="string|reference"/>
+		<attr name="textAllCapsCompat" format="reference|boolean" />
+	</declare-styleable>
+
+    <declare-styleable name="ComplexButton">
+        <attr name="setText" format="string" />
+        <attr name="setTextColor" format="color" />
+        <attr name="setSubText" format="string" />
+        <attr name="setSubTextColor" format="color" />
+        <attr name="setIcon" format="reference" />
+    </declare-styleable>
+
+	<declare-styleable name="HorizontalChipsView">
+		<attr name="chipTitleColor" format="reference" />
+		<attr name="chipTitleSelectedColor" format="reference" />
+		<attr name="chipTitleDisabledColor" format="reference" />
+
+		<attr name="chipIconColor" format="reference" />
+		<attr name="chipIconSelectedColor" format="reference" />
+		<attr name="chipIconDisabledColor" format="reference" />
+
+		<attr name="chipBgColor" format="reference" />
+		<attr name="chipBgSelectedColor" format="reference" />
+		<attr name="chipBgDisabledColor" format="reference" />
+	</declare-styleable>
+
+	<declare-styleable name="SideWidgetsPanel">
+		<attr name="rightSide" format="boolean" />
+	</declare-styleable>
+
+	<declare-styleable name="VerticalWidgetPanel">
+		<attr name="topPanel" format="boolean" />
+	</declare-styleable>
+
+	<declare-styleable name="FlowLayout">
+		<attr name="horizontalItemsSpacing" format="dimension"/>
+		<attr name="verticalItemsSpacing" format="dimension"/>
+	</declare-styleable>
+
+	<declare-styleable name="DialogButton">
+		<attr name="dialogButtonTitle" format="string"/>
+		<attr name="dialogButtonUseUppercaseTitle" format="boolean" />
+		<attr name="dialogButtonIcon" format="reference" />
+		<attr name="dialogButtonHeight" format="dimension" />
+		<attr name="dialogButtonTouchableHeight" format="dimension" />
+		<attr name="dialogButtonType" format="enum">
+			<enum name="primary" value="0" />
+			<enum name="primaryHarmful" value="1" />
+			<enum name="secondary" value="2" />
+			<enum name="secondaryHarmful" value="3" />
+			<enum name="secondaryActive" value="4" />
+			<enum name="stroked" value="5" />
+			<enum name="tertiary" value="6" />
+			<enum name="tertiary_harmful" value="7" />
+		</attr>
+		<attr name="dialogButtonTopMargin" format="dimension" />
+		<attr name="dialogButtonBottomMargin" format="dimension" />
+	</declare-styleable>
+
+    <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
+    <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
+</resources>

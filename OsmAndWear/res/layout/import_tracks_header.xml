@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:minHeight="@dimen/setting_list_item_large_height"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:textColor="?android:textColorPrimary"
+			tools:text="@string/import_tracks_descr" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="@dimen/content_padding"
+			android:background="?divider_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/import_as_one_track"
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?selectableItemBackground"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:text="@string/import_as_one_track"
+			android:textColor="?active_color_basic" />
+
+	</LinearLayout>
+
+	<include layout="@layout/list_item_divider" />
+
+</LinearLayout>

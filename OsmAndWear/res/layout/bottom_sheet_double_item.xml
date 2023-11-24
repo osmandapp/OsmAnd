@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height">
+
+	<FrameLayout
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/first_item"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_list_item_height"
+			android:layout_marginTop="4dp"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/first_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginStart="@dimen/content_padding"
+				tools:src="@drawable/ic_action_search_dark" />
+
+			<TextView
+				android:id="@+id/first_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
+				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textAppearance="@style/TextAppearance.ListItemTitle"
+				tools:text="@string/shared_string_search" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/first_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_gravity="bottom"
+			android:layout_marginBottom="3dp"
+			android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginStart="@dimen/content_padding" />
+
+	</FrameLayout>
+
+	<FrameLayout
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/second_item"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_list_item_height"
+			android:layout_marginTop="4dp"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/second_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginStart="@dimen/content_padding"
+				tools:src="@drawable/ic_action_info_dark" />
+
+			<TextView
+				android:id="@+id/second_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textAppearance="@style/TextAppearance.ListItemTitle"
+				tools:text="@string/shared_string_address" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/second_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_gravity="bottom"
+			android:layout_marginBottom="3dp"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/bottom_sheet_content_margin_small" />
+
+	</FrameLayout>
+
+</LinearLayout>

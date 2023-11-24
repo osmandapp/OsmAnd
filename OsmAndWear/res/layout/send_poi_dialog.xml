@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/osm_note_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/upload_osm_note_description"
+            android:textSize="@dimen/default_desc_text_size"
+	        android:layout_marginStart="24dp"
+	        android:layout_marginEnd="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="horizontal"
+	        android:layout_marginEnd="24dp"
+	        android:layout_marginStart="24dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/upload_anonymously"
+                android:textSize="@dimen/default_desc_text_size"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/upload_anonymously_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/divider_color"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/message_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/osb_comment_dialog_message"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
+
+    <EditText
+        android:id="@+id/message_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+	    android:layout_marginEnd="24dp"
+	    android:layout_marginStart="24dp" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/close_change_set_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/close_changeset"
+	    android:layout_marginStart="24dp"
+	    android:layout_marginEnd="24dp" />
+
+    <include layout="@layout/osm_user_login_details"/>
+</LinearLayout>

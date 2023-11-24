@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+	android:orientation="horizontal"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+		tools:src="@drawable/ic_action_coordinates_latitude" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:text="@string/shared_string_gpx_route"
+			android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+			android:textColor="@null" />
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/dropDownIcon"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
+
+</LinearLayout>

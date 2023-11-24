@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+	
+    <application
+        android:icon="@mipmap/icon_nightly"
+        tools:replace="android:icon">
+        <activity
+            android:name="net.osmand.plus.activities.MapActivity"
+            android:theme="@style/FirstSplashScreenNightlyFree"
+            tools:replace="android:theme"/>
+        <service
+            android:name="net.osmand.plus.NavigationService"
+            android:process="net.osmand.dev"
+            tools:replace="android:process"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="net.osmand.dev.fileprovider"
+            tools:replace="android:authorities"/>
+    </application>
+</manifest> 

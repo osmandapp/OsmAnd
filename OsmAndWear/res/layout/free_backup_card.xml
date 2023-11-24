@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/free_favorites_backup_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/content_padding"
+	android:background="?attr/bg_color"
+	android:orientation="horizontal"
+	android:paddingStart="@dimen/content_padding">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		osmand:srcCompat="@drawable/ic_action_folder_cloud_colored" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingBottom="@dimen/content_padding">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/free_favorites_backup"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="16sp"
+					osmand:typeface="@string/font_roboto_medium" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:text="@string/free_favorites_backup_description"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/btn_close"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_marginLeft="@dimen/content_padding_small"
+				android:layout_marginRight="@dimen/content_padding_small"
+				android:background="@null"
+				android:contentDescription="@string/shared_string_close"
+				osmand:srcCompat="@drawable/ic_action_cancel" />
+
+		</LinearLayout>
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/dismiss_button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_weight="0"
+			osmand:dialogButtonHeight="@dimen/dialog_button_height"
+			osmand:dialogButtonTitle="@string/get_osmand_cloud"
+			osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+			osmand:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
+			osmand:dialogButtonType="secondaryActive" />
+
+	</LinearLayout>
+
+</LinearLayout>

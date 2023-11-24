@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/bottom_sheet_title_padding_top"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/bottom_sheet_title_padding_bottom">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/last_edited"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:text="@string/plan_route_last_edited"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_desc_text_size"
+			osmand:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/gpx_track_list"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		tools:itemCount="1"
+		tools:listitem="@layout/gpx_track_select_item" />
+
+</LinearLayout>

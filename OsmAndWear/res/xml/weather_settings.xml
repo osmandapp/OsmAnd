@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/shared_string_weather">
+
+	<PreferenceCategory
+		android:key="measurement_units"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/measurement_units" />
+
+</PreferenceScreen>

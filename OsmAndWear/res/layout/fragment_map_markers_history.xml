@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.EmptyStateRecyclerView
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom" />
+
+	<include
+		android:id="@+id/empty_view"
+		layout="@layout/empty_state_markers_history"
+		android:visibility="gone" />
+
+	<include
+		android:id="@+id/disabled_history_card"
+		layout="@layout/disabled_history_card"
+		android:visibility="gone" />
+
+</LinearLayout>

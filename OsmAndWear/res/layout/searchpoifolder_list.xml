@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:background="?attr/expandable_list_item_background"
+    android:paddingLeft="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/folder_icon"
+        android:layout_width="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_marginRight="8dp"
+	    android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/folder_label"
+        android:textSize="@dimen/default_list_text_size"
+		android:layout_gravity="center_vertical"
+		android:textColor="?android:textColorPrimary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+    	android:layout_marginRight="@dimen/list_content_padding"
+	    android:layout_marginEnd="@dimen/list_content_padding" />
+         
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/options"
+        android:contentDescription="@string/search_poi_filter"
+        android:layout_width="@dimen/list_item_height"
+		android:layout_gravity="center_vertical"
+        android:layout_height="@dimen/list_item_height"
+        android:scaleType="center"
+        android:visibility="gone"
+        android:background="?attr/dashboard_button"
+        osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
+			  android:minHeight="@dimen/list_item_height"
+			  android:orientation="vertical">
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:visibility="gone"
+		android:focusable="false"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingStart="@dimen/list_content_padding"
+		android:paddingRight="0dp"
+		android:paddingEnd="0dp">
+
+		<androidx.appcompat.widget.AppCompatCheckBox
+			android:id="@+id/check_local_index"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginRight="@dimen/local_index_check_right_margin"
+			android:focusable="false"
+			android:visibility="gone"
+			android:layout_marginEnd="@dimen/local_index_check_right_margin" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginRight="@dimen/favorites_icon_right_margin"
+			osmand:srcCompat="@drawable/ic_sdcard"
+			android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/name"
+				android:textSize="@dimen/default_list_text_size"
+				android:textColor="?android:textColorPrimary"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				tools:text="@string/app_version"/>
+
+
+			<TextView
+				android:id="@+id/description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
+				android:gravity="center_vertical"
+				android:textSize="@dimen/default_sub_text_size"
+				android:maxLines="25"
+				tools:text="@string/app_mode_aircraft"/>
+
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/options"
+			android:contentDescription="@string/shared_string_more"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
+			android:layout_gravity="center_vertical"
+			android:background="?attr/dashboard_button"
+			android:focusable="false"
+			osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
+
+		<ImageButton
+			android:id="@+id/play"
+			android:contentDescription="@string/recording_context_menu_play"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/dashFavIconMargin"
+			android:background="?attr/dashboard_button"
+			osmand:srcCompat="@drawable/ic_play_dark"
+			android:layout_marginStart="@dimen/dashFavIconMargin" />
+		</LinearLayout>
+
+
+
+</LinearLayout>

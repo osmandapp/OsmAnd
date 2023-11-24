@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/chart_marker_background"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/icon_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/chart_marker_horizontal_padding"
+            android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+            android:paddingBottom="@dimen/chart_marker_vertical_padding"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                tools:src="@drawable/ic_action_location_color" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/icon_divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/dashboard_divider"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/first_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="@dimen/chart_marker_horizontal_padding"
+            android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+            android:paddingBottom="@dimen/chart_marker_vertical_padding">
+
+            <TextView
+                android:id="@+id/text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/gpx_chart_blue"
+                android:textSize="@dimen/default_desc_text_size"
+                android:textStyle="bold"
+                tools:text="100 " />
+
+            <TextView
+                android:id="@+id/text_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="m" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/dashboard_divider" />
+
+        <LinearLayout
+            android:id="@+id/second_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="@dimen/chart_marker_horizontal_padding"
+            android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+            android:paddingBottom="@dimen/chart_marker_vertical_padding">
+
+            <TextView
+                android:id="@id/text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/gpx_chart_orange"
+                android:textSize="@dimen/default_desc_text_size"
+                android:textStyle="bold"
+                tools:text="100 "/>
+
+            <TextView
+                android:id="@id/text_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="km/h" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/third_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="@dimen/chart_marker_horizontal_padding"
+            android:paddingTop="@dimen/chart_marker_vertical_padding"
+            android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+            android:paddingBottom="@dimen/chart_marker_vertical_padding">
+
+            <TextView
+                android:id="@id/text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/gpx_chart_green"
+                android:textSize="@dimen/default_desc_text_size"
+                android:textStyle="bold"
+                tools:text="100 "/>
+
+            <TextView
+                android:id="@id/text_units"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="%"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/x_axis_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/x_axis_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="?attr/dashboard_divider" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/chart_marker_horizontal_padding"
+                android:paddingTop="@dimen/chart_marker_vertical_padding"
+                android:paddingEnd="@dimen/chart_marker_horizontal_padding"
+                android:paddingBottom="@dimen/chart_marker_vertical_padding">
+
+                <TextView
+                    android:id="@+id/x_axis_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    android:textStyle="bold"
+                    tools:text="100 " />
+
+                <TextView
+                    android:id="@+id/x_axis_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="m" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

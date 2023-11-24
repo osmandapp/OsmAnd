@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/upper_row_divider"
+		android:layout_width="wrap_content"
+		android:layout_height="1dp"
+		android:background="?attr/wikivoyage_card_divider_color" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/item_label"
+			android:layout_width="0dp"
+			android:layout_height="@dimen/bottom_sheet_list_item_height"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+			android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+			android:layout_weight="1"
+			android:drawablePadding="@dimen/bottom_sheet_content_margin"
+			android:gravity="start|center_vertical"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:drawableStart="@drawable/ic_action_list_header"
+			tools:text="@string/shared_string_contents" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/explicit_indicator"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="end"
+			android:paddingLeft="@dimen/list_content_padding"
+			android:paddingRight="@dimen/list_content_padding"
+			android:background="?attr/selectableItemBackground"
+			android:scaleType="center"
+			android:visibility="gone"
+			tools:src="@drawable/ic_action_arrow_up"
+			android:paddingEnd="@dimen/list_content_padding"
+			android:paddingStart="@dimen/list_content_padding" />
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/debugging_and_development">
+
+	<Preference
+		android:key="development_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/plugin_global_prefs_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<PreferenceCategory
+		android:key="heightmap"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_terrain" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_raster_sqlitedb"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_raster_sqlitedb_for_slope_hillshade" />
+
+	<PreferenceCategory
+		android:key="safe"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/safe_settings" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="safe_mode"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/safe_mode" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="approx_safe_mode"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/approx_safe_mode" />
+
+	<PreferenceCategory
+		android:key="routing"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/routing_settings" />
+
+	<Preference
+		android:key="simulate_your_location"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/simulate_your_location"
+		tools:summary="@string/simulate_your_location_stop_descr" />
+
+	<PreferenceCategory
+		android:key="debugging_and_development"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/debugging_and_development" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="debug_rendering"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/trace_rendering" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="transparent_status_bar"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/transparent_status_bar" />
+
+	<Preference
+		android:key="simulate_initial_startup"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/simulate_initial_startup_descr"
+		android:title="@string/simulate_initial_startup" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="should_show_free_version_banner"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_free_version_banner" />
+
+	<Preference
+		android:key="test_voice_commands"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/play_commands_of_currently_selected_voice"
+		android:title="@string/test_voice_prompts" />
+
+	<Preference
+		android:key="logcat_buffer"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/logcat_buffer_descr"
+		android:title="@string/logcat_buffer" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_info_about_pressed_key"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_toast_about_key_pressed" />
+
+	<PreferenceCategory
+		android:key="trip_recording"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_trip_recording" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_bearing_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_bearing" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_heading_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_heading" />
+
+	<PreferenceCategory
+		android:key="info"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/info_button" />
+
+	<Preference
+		android:key="memory_allocated_for_routing"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/memory_allocated_for_routing"
+		tools:summary="256 MB" />
+
+	<Preference
+		android:key="global_app_allocated_memory"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/global_app_allocated_memory"
+		tools:summary="@string/global_app_allocated_memory_descr" />
+
+	<Preference
+		android:key="native_app_allocated_memory"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/native_app_allocated_memory"
+		tools:summary="@string/native_app_allocated_memory_descr" />
+
+	<Preference
+		android:key="agps_data_downloaded"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/agps_info"
+		tools:summary="@string/agps_data_last_downloaded" />
+
+	<Preference
+		android:key="day_night_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/day_night_info"
+		tools:summary="@string/day_night_info_description" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
+</PreferenceScreen>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatCheckedTextView
+    android:id="@+id/text1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:checkMark="?android:attr/listChoiceIndicatorSingle"
+    android:ellipsize="marquee"
+    android:gravity="center_vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="11dp"
+    android:paddingTop="11dp"
+    android:paddingBottom="11dip"
+    android:text="@string/layer_poi"
+    android:textSize="@dimen/default_list_text_size"
+	android:paddingEnd="11dp"
+	android:paddingStart="24dp" />

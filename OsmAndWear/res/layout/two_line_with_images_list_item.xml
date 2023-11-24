@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingStart="@dimen/list_content_padding"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            tools:src="@drawable/ic_map"
+            android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Germany"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="25"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="Contour Lines"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                tools:visibility="visible"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/secondaryIcon"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:background="?attr/dashboard_button"
+            android:scaleType="center"
+            android:visibility="gone"
+            tools:src="@drawable/ic_action_import"
+            tools:visibility="visible"
+            android:layout_marginStart="@dimen/dashFavIconMargin" />
+
+        <Button
+            android:id="@+id/rightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dashFavIconMargin"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:layout_marginEnd="@dimen/list_header_padding"
+            android:layout_marginRight="@dimen/list_header_padding"
+            android:minWidth="@dimen/list_header_height"
+            android:minHeight="@dimen/list_content_padding_large"
+            android:paddingStart="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingLeft="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingEnd="@dimen/bottom_sheet_exit_button_margin"
+            android:paddingRight="@dimen/bottom_sheet_exit_button_margin"
+            android:text="@string/buy"
+            android:textColor="@color/text_color_tab_active_light"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

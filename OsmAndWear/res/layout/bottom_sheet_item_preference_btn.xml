@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:paddingBottom="@dimen/content_padding_half"
+    android:paddingTop="@dimen/content_padding_half"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+        android:tint="?attr/active_color_basic"
+        tools:src="@drawable/ic_action_info_dark"/>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:singleLine="true"
+        android:textSize="@dimen/default_list_text_size"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        osmand:typeface="@string/font_roboto_medium"
+        android:textColor="?attr/active_color_basic"
+        tools:text="Title"/>
+
+</LinearLayout>

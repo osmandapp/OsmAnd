@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="2dip"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:weightSum="1"
+    android:background="@color/card_and_list_background_light"
+	android:layout_marginStart="5dip"
+	android:layout_marginEnd="5dip">
+
+    <ImageButton
+        osmand:srcCompat="@drawable/ic_action_down_dark"
+        android:id="@+id/down"
+        android:contentDescription="@string/shared_string_move_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:text="@string/layer_poi"
+        android:textSize="@dimen/default_list_text_size"
+        android:textColor="@color/activity_background_color_dark"
+        android:layout_weight="1" />
+
+    <ImageButton
+        osmand:srcCompat="@drawable/ic_action_up_dark"
+        android:id="@+id/up"
+        android:contentDescription="@string/shared_string_move_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

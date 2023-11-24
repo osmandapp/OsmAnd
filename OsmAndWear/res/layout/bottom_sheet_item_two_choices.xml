@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/bottom_sheet_item_with_switch" />
+
+    <LinearLayout
+        android:id="@+id/bottom_btns"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginTop="@dimen/text_margin_small"
+        android:layout_marginEnd="@dimen/content_padding"
+        android:layout_marginBottom="@dimen/content_padding_small"
+        android:background="?attr/btn_bg_border_inactive"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/left_btn_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/left_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/shared_string_hillshade"
+                android:textSize="@dimen/default_desc_text_size"
+                osmand:typeface="@string/font_roboto_medium" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/right_btn_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/right_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/shared_string_slope"
+                android:textSize="@dimen/default_desc_text_size"
+                osmand:typeface="@string/font_roboto_medium" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

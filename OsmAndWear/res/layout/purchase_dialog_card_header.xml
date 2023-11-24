@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="@dimen/card_title_row_min_height"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/list_header_padding"
+              android:paddingTop="@dimen/list_header_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/header_img"
+        android:layout_width="@dimen/card_title_row_min_height"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        osmand:srcCompat="@drawable/img_logo_38dp_osmand"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/wikivoyage_active_color"
+            android:textSize="@dimen/map_button_text_size"
+            android:textStyle="bold"
+            tools:text="@string/osm_live"/>
+
+        <TextView
+            android:id="@+id/header_descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="?attr/dialog_text_description_color"
+            android:textSize="@dimen/default_sub_text_size"
+            tools:text="@string/osm_live_subscription"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:text="@string/time_to_navigation_point_widget_settings_desc"
+		android:textColor="?android:textColorSecondary" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?divider_color_basic" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:text="@string/shared_string_mode"
+		android:textColor="?android:textColorPrimary" />
+
+	<include
+		android:id="@+id/time_to_go_container"
+		layout="@layout/widget_settings_radio_item" />
+
+	<include
+		android:id="@+id/arrival_time_container"
+		layout="@layout/widget_settings_radio_item" />
+
+</LinearLayout>

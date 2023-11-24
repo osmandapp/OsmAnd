@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.widgets.TextViewEx xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/description"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:letterSpacing="@dimen/description_letter_spacing"
+	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingTop="@dimen/bottom_sheet_image_text_margin_start"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingBottom="@dimen/gpx_small_text_margin"
+	android:textAppearance="@style/TextAppearance.ListItemTitle"
+	app:typeface="@string/font_roboto_regular"
+	tools:text="@string/auto_zoom_map_descr"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding" />

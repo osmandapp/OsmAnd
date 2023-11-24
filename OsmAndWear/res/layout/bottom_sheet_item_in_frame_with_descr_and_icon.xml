@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		tools:src="@drawable/list_destination" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:orientation="vertical"
+		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding"
+		android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+		android:paddingStart="@dimen/bottom_sheet_divider_margin_start"
+		android:paddingTop="@dimen/content_padding_small">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:paddingBottom="@dimen/text_margin_small"
+			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			tools:text="Some title" />
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_sub_text_size"
+			tools:text="Some description" />
+
+	</LinearLayout>
+
+</FrameLayout>

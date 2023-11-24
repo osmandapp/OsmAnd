@@ -1,0 +1,132 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  android:background="?attr/list_background_color">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:padding="0dp"
+			android:background="?attr/colorPrimary">
+
+			<Spinner
+				android:id="@+id/spinner_nav"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:popupBackground="?attr/spinnerListBackground"/>
+
+			<ProgressBar android:id="@+id/ProgressBar"
+						 android:layout_width="wrap_content"
+						 android:layout_height="wrap_content"
+						 android:layout_gravity="end"/>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<LinearLayout
+		android:id="@+id/type_selection_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/selectableItemBackground"
+		android:clickable="true">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="64dp"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding_small"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/mode_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+				android:layout_gravity="center_vertical"
+				tools:src="@drawable/ic_action_coordinates_latitude"/>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_gravity="center_vertical"
+				android:gravity="center_vertical"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/mode_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"
+					android:textColor="?android:textColorPrimary"
+					tools:text="Item Title"/>
+
+				<TextView
+					android:id="@+id/mode_subtitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					tools:text="Item additional desription"/>
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/type_down_arrow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="0"
+				android:layout_gravity="center_vertical"
+				app:srcCompat="@drawable/ic_action_arrow_drop_down"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		<ListView
+				android:id="@android:id/list"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/selector_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			app:srcCompat="@drawable/preference_activity_action_bar_shadow"
+			android:visibility="gone"
+			tools:ignore="ContentDescription"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/shadowView"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/abp__shadow_height"
+				app:srcCompat="@drawable/preference_activity_action_bar_shadow"
+				tools:ignore="ContentDescription" />
+
+	</FrameLayout>
+
+</LinearLayout>

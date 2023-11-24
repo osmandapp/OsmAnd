@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:paddingLeft="?dialogPreferredPadding"
+	android:paddingRight="?dialogPreferredPadding"
+	android:paddingStart="?dialogPreferredPadding"
+	android:paddingEnd="?dialogPreferredPadding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/osb_comment_dialog_message"/>
+
+    <EditText
+        android:id="@+id/message_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:minLines="1"/>
+
+
+    <TextView
+        android:id="@+id/userNameEditTextLabel"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/osb_comment_dialog_author"/>
+
+    <EditText
+        android:id="@+id/user_name_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        tools:text="NoName"/>
+
+
+    <TextView
+        android:id="@+id/passwordEditTextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/osb_author_dialog_password"/>
+
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+</LinearLayout>

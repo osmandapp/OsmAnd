@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+apply plugin: 'ivy-publish'
+apply from: 'build-common.gradle'
+
+apply plugin: 'kotlin-android'
+
+android {
+
+	defaultConfig {
+		minSdkVersion 21
+	}
+
+	lintOptions {
+		tasks.lint.enabled = false
+	}
+
+	sourceSets {
+		main {
+			manifest.srcFile "AndroidManifest-library.xml"
+			java.srcDirs = ["src", "src-gms", "src-google"]
+		}
+	}
+
+	productFlavors {
+		// CoreVersion
+		// Build that doesn't include 3D OpenGL
+		legacy {
+			dimension "coreversion"
+			resValue "string", "app_edition", ""
+		}
+	}
+}
+
+afterEvaluate {
+	android.libraryVariants.all { variant ->
+		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	}
+}
+
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
+project.afterEvaluate {
+	publishing {
+		repositories {
+			ivy {
+				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
+				
+			}
+		}
+		publications {
+			aar(IvyPublication) {
+				artifact bundleLegacyFatDebugAar {
+					classifier 'debug'
+				}
+				artifact bundleLegacyFatReleaseAar {
+					classifier 'release'
+				}
+			}
+		}
+	}
+}
+
+dependencies {
+	implementation 'com.google.android.gms:play-services-location:18.0.0'
+}

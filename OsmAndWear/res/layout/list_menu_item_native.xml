@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/LinearLayout1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/content_padding_small"
+        android:layout_marginLeft="@dimen/content_padding_small"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:layout_marginBottom="@dimen/content_padding_small"
+        android:layout_weight="1">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical|start"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:text="@string/layer_poi"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_settings"
+                android:contentDescription="@string/shared_string_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <!-- android:button="@drawable/ic_btn_wocheckbox" -->
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/toggle_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:focusable="false"
+                android:layout_gravity="center"
+                app:buttonTint="?attr/active_color_basic" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

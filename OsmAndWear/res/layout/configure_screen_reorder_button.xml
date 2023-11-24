@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/container"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/bottom_sheet_list_item_height"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/button_icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
+		android:tint="?attr/active_color_basic"
+		tools:visibility="visible"
+		osmand:srcCompat="@drawable/ic_action_change_order"
+		android:layout_marginHorizontal="@dimen/content_padding" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="top"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/button_text"
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textSize="@dimen/default_list_text_size"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:layout_gravity="center_vertical"
+			android:textColor="?attr/active_color_basic"
+			android:text="@string/shared_string_edit" />
+
+	</FrameLayout>
+
+</LinearLayout>

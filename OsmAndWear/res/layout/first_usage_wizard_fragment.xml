@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:id="@+id/toolbar_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/logo"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_marginStart="16dp"
+					android:layout_marginTop="16dp"
+					osmand:layout_constraintStart_toStartOf="parent"
+					osmand:layout_constraintTop_toTopOf="parent"
+					osmand:srcCompat="@drawable/ic_action_osmand_logo"
+					osmand:tint="@color/icon_color_osmand_light" />
+
+				<ImageButton
+					android:id="@+id/actions_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_other"
+					android:tint="?attr/active_color_basic"
+					osmand:layout_constraintEnd_toEndOf="parent"
+					osmand:layout_constraintTop_toTopOf="parent"
+					osmand:srcCompat="@drawable/ic_overflow_menu_with_background" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="16dp"
+					android:layout_marginTop="30dp"
+					android:text="@string/welcome_header"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="24sp"
+					android:textStyle="bold"
+					osmand:layout_constraintStart_toStartOf="parent"
+					osmand:layout_constraintTop_toBottomOf="@+id/logo"
+					osmand:typeface="@string/font_roboto_medium" />
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+			<TextView
+				android:id="@+id/wizard_description"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/content_padding"
+				android:text="@string/first_usage_wizard_desc"
+				android:textColor="?android:attr/textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/list_divider" />
+
+			<LinearLayout
+				android:id="@+id/wizard_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingBottom="@dimen/content_padding_small_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half_inverted"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:id="@+id/wizard_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackground"
+					android:minHeight="48dp"
+					android:orientation="horizontal">
+
+					<ProgressBar
+						android:id="@+id/wizard_progress_bar_icon"
+						android:layout_width="54dp"
+						android:layout_height="60dp"
+						android:indeterminate="true"
+						android:padding="10dp"
+						android:visibility="gone" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/wizard_icon"
+						android:layout_width="54dp"
+						android:layout_height="60dp"
+						android:scaleType="center"
+						android:tint="?attr/default_icon_color"
+						osmand:srcCompat="@drawable/ic_map" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:id="@+id/wizard_title"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:textColor="?android:attr/textColorPrimary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="The Netherlands" />
+
+
+						<ProgressBar
+							android:id="@+id/wizard_progress_bar"
+							style="?android:attr/progressBarStyleHorizontal"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/content_padding_small_half"
+							android:visibility="visible" />
+
+
+					</LinearLayout>
+
+					<ImageButton
+						android:id="@+id/location_button"
+						style="@style/Widget.AppCompat.ActionButton"
+						android:layout_width="48dp"
+						android:layout_height="48dp"
+						android:layout_gravity="center"
+						android:contentDescription="@string/shared_string_location"
+						android:tint="?attr/default_icon_color"
+						osmand:srcCompat="@drawable/ic_action_my_location" />
+
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/wizard_action_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:gravity="center"
+					osmand:dialogButtonHeight="@dimen/setting_list_item_small_height"
+					tools:dialogButtonType="secondary"
+					tools:dialogButtonTitle="@string/shared_string_download"/>
+
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/terms_of_service_description"
+				style="@style/DescStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:text="@string/terms_of_service_desc"
+				android:textColor="?android:textColorSecondary" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
+			<androidx.appcompat.widget.AppCompatButton
+				android:id="@+id/skip_button"
+				style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end"
+				android:text="@string/skip_download"
+				android:textColor="?attr/active_color_basic" />
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>

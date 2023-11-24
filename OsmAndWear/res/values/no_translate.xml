@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!-- Part of build.gradle -->
+    <!-- <string name="app_name">OsmAnd~</string> -->
+    <!-- <string name="app_edition"></string> -->
+    <!-- string name="app_version_suffix"></string -->
+
+    <string name="app_store_name">OsmAnd Maps</string>
+    
+    <!-- Not translatable -->
+    <string name="tripltek">TRIPLTEK</string>
+    <string name="number_in_breckets">(%d)</string>
+    <string name="degree_celsius">°C</string>
+    <string name="amazon_market">Amazon</string>
+    <string name="huawei_market">Huawei</string>
+    <string name="apple_app_store">Apple App Store</string>
+    <string name="google_play">Google Play</string>
+    <string name="google_play_services">Google Play Services</string>
+    <string name="android_api">Android API</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+    <string name="full_version_price">€24,99</string>
+    <string name="srtm_plugin_price">€2,99</string>
+    <string name="sea_depth_maps_price">€1,39</string>
+    <string name="osm_live">OsmAnd Live</string>
+    <string name="osmand_start">OsmAnd Start</string>
+    <string name="osmand_pro">OsmAnd Pro</string>
+    <string name="maps_plus">Maps+</string>
+    <string name="osmand_plus">OsmAnd+</string>
+    <string name="promo">Promo</string>
+    <string name="android_auto">Android Auto</string>
+    <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
+    <string name="support_email">support@osmand.net</string>
+    <string name="preferred_locale_no_translate">Display language</string>
+    <string name="system_locale_no_translate">Device language</string>
+	<string name="osmo">OsMo</string>
+    <string name="tag_poi_amenity">amenity</string>
+    <string name="tag_poi_name">name</string>
+    <string name="hint_tag">tag</string>
+    <string name="hint_value">value</string>
+    <!-- DEVELOPMENT -->
+    <string name="osm_live_default_price">€1,49</string>
+    <string name="osm_live_monthly_price">€1,99</string>
+    <string name="osm_live_3_months_price">€3,99</string>
+    <string name="osm_live_3_months_monthly_price">€1,33</string>
+    <string name="osm_live_annual_price">€7,99</string>
+    <string name="osm_live_annual_monthly_price">€0,66</string>
+    <string name="osm_pro_monthly_price">€2.99</string>
+    <string name="osm_pro_annual_price">€29.99</string>
+    <string name="osm_pro_annual_monthly_price">€2.49</string>
+    <string name="osm_maps_plus_annual_price">€9.99</string>
+    <string name="osm_maps_plus_annual_monthly_price">€0.83</string>
+    <string name="default_changeset_add">Add</string>
+    <string name="default_changeset_edit">Edit</string>
+    <string name="default_changeset_delete">Delete</string>
+    <string name="default_changeset_reopen">Reopen</string>
+    <string name="items_modified">items modified</string>
+    <string name="osmand_unlimited">OsmAnd Unlimited</string>
+    <string name="markers">Markers</string>
+    <string name="osm_oauth_developer_key">v8G8r9NLJZGMV4he5lwbQlz620FNVARKjI9Bm5UJ</string>
+    <string name="osm_oauth_developer_secret">jDvM95Ne1Bq2BDTmIfB6b3ZMxvdK87WGfp6DC07J</string>
+    <string name="osm_oauth_consumer_key">Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y</string>
+    <string name="osm_oauth_consumer_secret">lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM</string>
+</resources>

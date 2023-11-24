@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:osmand="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:background="?attr/wikivoyage_bg_color"
+		android:clickable="true"
+		android:focusable="true"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:background="?attr/wikivoyage_app_bar_color"
+			android:gravity="center_vertical"
+			android:padding="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+				<net.osmand.plus.widgets.TextViewEx
+				    android:id="@+id/article_toolbar_text"
+					android:layout_width="0dp"
+					android:gravity="center_vertical"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:ellipsize="end"
+					android:maxLines="1"
+					osmand:typeface="@string/font_roboto_medium"
+					android:layout_height="match_parent"
+					android:layout_weight="1"/>
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/select_language_text_view"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+					android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:drawablePadding="@dimen/context_menu_padding_margin_small"
+					android:gravity="center_vertical"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:padding="@dimen/context_menu_padding_margin_tiny"
+					android:textSize="@dimen/text_button_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:background="@drawable/wikipedia_select_lang_bg_dark_n"
+					tools:drawableLeft="@drawable/ic_action_map_language"
+					tools:ignore="UnusedAttribute"
+					tools:text="En"
+					tools:textColor="?attr/wikivoyage_active_color"
+					android:layout_marginStart="@dimen/context_menu_padding_margin_small"
+					android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
+					tools:drawableStart="@drawable/ic_action_map_language" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	<FrameLayout
+		    android:layout_width="match_parent"
+			android:layout_weight="1"
+			android:layout_height="0dp">
+
+		<net.osmand.plus.widgets.WebViewEx
+				android:id="@+id/content_web_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_gravity="bottom"
+			android:layout_height="10dp"
+			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+	</FrameLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|center_horizontal"
+		android:orientation="vertical">
+
+
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+			android:background="?attr/wikivoyage_bottom_bar_bg_color">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/contents_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="0.33"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_margin"
+				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:text="@string/shared_string_contents"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableLeft="@drawable/ic_action_list_header"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute"
+				android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+				android:paddingStart="@dimen/bottom_sheet_content_margin"
+				tools:drawableStart="@drawable/ic_action_list_header" />
+
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/gpx_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="0.33"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_margin"
+				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:text="@string/shared_string_gpx_points"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableLeft="@drawable/ic_action_markers_dark"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute"
+				android:paddingStart="@dimen/bottom_sheet_content_margin"
+				tools:drawableStart="@drawable/ic_action_markers_dark"
+				android:paddingEnd="@dimen/bottom_sheet_content_padding_small" />
+
+			<ProgressBar
+				android:id="@+id/gpx_progress"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:padding="@dimen/bottom_sheet_content_padding_small"
+				android:visibility="gone" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/save_button"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical|end"
+				android:layout_weight="0.34"
+				android:background="?attr/selectableItemBackground"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical|end"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+				android:paddingRight="@dimen/bottom_sheet_content_margin"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableRight="@drawable/ic_action_read_later_fill"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute"
+				tools:text="Save"
+				android:paddingStart="@dimen/bottom_sheet_content_padding_small"
+				android:paddingEnd="@dimen/bottom_sheet_content_margin"
+				tools:drawableEnd="@drawable/ic_action_read_later_fill" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

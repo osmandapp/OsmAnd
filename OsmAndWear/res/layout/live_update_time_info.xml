@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:minHeight="@dimen/bottom_sheet_title_height"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding_small">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/last_update_info"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Updated: Today, 18:05. Includes OSM changes made until 31.05.2022, 17:30."/>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/next_update_info"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Next update: in 19:05. " />
+
+</LinearLayout>

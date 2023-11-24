@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recording_note_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background_color_dark"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/viewfinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:layout_gravity="bottom"
+        android:background="#3c212121"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/leftButtonView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end|center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/leftButtonIcon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/circle_outline_background_style"
+                    android:scaleType="center"
+                    osmand:srcCompat="@drawable/ic_action_refresh_dark"/>
+
+                <TextView
+                    android:id="@+id/leftButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/shared_string_hide"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:visibility="gone"
+	                android:layout_marginEnd="8dp"
+	                android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/centerButtonView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/centerButtonIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/orange_circle_background_style"
+                        android:scaleType="center"
+                        osmand:srcCompat="@drawable/ic_action_done"/>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="500"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/progress_photo_circular"/>
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/centerButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/shared_string_control_stop"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:visibility="gone"
+	                android:layout_marginStart="8dp"
+	                android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightButtonView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="start|center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rightButtonIcon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/circle_outline_background_style"
+                    android:scaleType="center"
+                    osmand:srcCompat="@drawable/ic_action_device_camera"/>
+
+                <TextView
+                    android:id="@+id/rightButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/shared_string_control_stop"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:visibility="gone"
+	                android:layout_marginStart="8dp"
+	                android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timeView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:gravity="end"
+                android:text="00:00:00"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_list_text_size"
+	            android:layout_marginStart="12dp"
+	            android:layout_marginEnd="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

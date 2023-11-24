@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/favorites_select_group_button_width"
+	android:layout_height="@dimen/favorites_select_group_button_height"
+	android:layout_marginLeft="@dimen/content_padding_half"
+	android:layout_marginStart="@dimen/content_padding_half">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/outlineRect"
+		android:contentDescription="@string/add_to_group"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:srcCompat="@drawable/bg_select_group_button_outline" />
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/groupIcon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_marginLeft="@dimen/context_menu_padding_margin_tiny"
+			android:layout_marginRight="@dimen/context_menu_padding_margin_tiny"
+			android:layout_marginStart="@dimen/context_menu_padding_margin_tiny"
+			android:layout_marginEnd="@dimen/context_menu_padding_margin_tiny"
+			android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+			app:srcCompat="@drawable/ic_action_folder" />
+
+		<TextView
+			android:id="@+id/counter"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+			tools:text="255" />
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/groupName"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/content_padding_half"
+		android:paddingLeft="@dimen/content_padding_half"
+		android:paddingTop="@dimen/list_content_padding_large"
+		android:paddingEnd="@dimen/content_padding_half"
+		android:paddingRight="@dimen/content_padding_half"
+		android:textColor="?attr/active_color_basic"
+		app:typeface="@string/font_roboto_medium"
+		tools:text="@string/favorite" />
+
+</FrameLayout>

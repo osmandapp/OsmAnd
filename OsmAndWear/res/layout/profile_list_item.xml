@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/profile_settings"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:descendantFocusability="blocksDescendants"
+	android:gravity="center"
+	android:orientation="horizontal">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/favorites_icon_right_margin"
+		tools:src="@drawable/ic_action_bicycle_dark"
+		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<View
+			android:id="@+id/divider_up"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/list_divider" />
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/setting_profile_item_height"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="2"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="Bicycle" />
+
+				<TextView
+					android:id="@+id/description"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textSize="@dimen/default_desc_text_size"
+					android:textColor="?android:textColorSecondary"
+					tools:text="Type: Bicycle" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/menu_image"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
+					android:paddingStart="@dimen/setting_profile_item_switch_margin"
+					android:paddingLeft="@dimen/setting_profile_item_switch_margin"
+					android:paddingEnd="10dp"
+					android:paddingRight="10dp"
+					osmand:srcCompat="@drawable/ic_action_additional_option"
+					android:tint="@color/icon_color_default_light" />
+
+				<androidx.appcompat.widget.SwitchCompat
+					android:id="@+id/compound_button"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical|end"
+					android:background="@null"
+					android:focusableInTouchMode="true"
+					android:padding="@dimen/content_padding" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/divider_bottom"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/list_divider" />
+
+	</LinearLayout>
+
+</LinearLayout>

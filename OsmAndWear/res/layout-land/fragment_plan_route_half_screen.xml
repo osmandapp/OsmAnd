@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dashboard_land_width"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_view"
+        android:layout_width="@dimen/dashboard_land_width"
+        android:layout_height="match_parent"
+        android:background="?attr/left_menu_view_bg"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/plan_route_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:background="?attr/bg_color"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            app:contentInsetLeft="54dp"
+            app:contentInsetStart="54dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/markers_distance_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/text_margin_small"
+                            android:layout_marginRight="@dimen/text_margin_small"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textAppearance="@style/TextAppearance.ListItemTitle"
+                            tools:text="1.39 km,"/>
+
+                        <TextView
+                            android:id="@+id/markers_time_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            tools:text="~ 45 min."/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/markers_count_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"
+                        tools:text="3 markers"/>
+                </LinearLayout>
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/options_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/list_content_padding"
+                    android:paddingRight="@dimen/list_content_padding"
+                    android:text="@string/shared_string_options"
+                    android:textAllCaps="true"
+                    android:textColor="?attr/color_dialog_buttons"
+                    android:textSize="@dimen/default_list_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+	                android:paddingStart="@dimen/list_content_padding"
+	                android:paddingEnd="@dimen/list_content_padding" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ProgressBar
+            android:id="@+id/snap_to_road_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <FrameLayout
+            android:id="@+id/markers_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/activity_background_color_dark">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/markers_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include layout="@layout/card_bottom_divider"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

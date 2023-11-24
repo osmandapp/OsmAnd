@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/route_info_modes_height"
+	android:layout_height="@dimen/route_info_modes_height">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/app_mode_icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
+		tools:src="@drawable/ic_dashboard" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/selection"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="center"
+		android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
+		android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+		tools:background="@drawable/btn_border_light" />
+
+</FrameLayout>

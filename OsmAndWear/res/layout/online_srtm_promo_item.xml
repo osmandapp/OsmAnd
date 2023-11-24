@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/content_padding_half"
+	android:layout_marginEnd="@dimen/content_padding_half"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/ripple_solid_big"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/setting_list_item_large_height"
+			android:orientation="horizontal"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_half">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				osmand:srcCompat="@drawable/ic_action_world_globe"
+				osmand:tint="?attr/active_color_basic" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/calculate_online"
+					android:textColor="?attr/active_color_basic" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/calculate_online_altitude_descr"
+					android:textColor="?android:attr/textColorSecondary" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include layout="@layout/divider" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/DescStyle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/context_menu_padding_margin_medium"
+					android:layout_weight="1"
+					android:text="@string/option_available_only_in_osmand_pro" />
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/button_action"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+					osmand:dialogButtonBottomMargin="@dimen/content_padding_small"
+					osmand:dialogButtonType="secondaryActive"
+					osmand:dialogButtonTitle="@string/shared_string_get"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

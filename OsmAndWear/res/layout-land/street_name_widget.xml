@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/street_name_widget"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/btn_round"
+	android:minHeight="@dimen/map_address_height">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_marginHorizontal="@dimen/measurement_tool_menu_title_padding_bottom"
+		android:gravity="center"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/map_exit_ref"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/bg_topbar_shield_exit_ref"
+			android:gravity="center"
+			android:minWidth="@dimen/map_widget_height"
+			android:textColor="@color/card_and_list_background_light"
+			android:textSize="@dimen/map_widget_text_size"
+			android:visibility="gone"
+			tools:text="8"
+			tools:visibility="visible" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/map_turn_icon"
+			android:layout_width="@dimen/map_widget_height"
+			android:layout_height="@dimen/map_widget_height"
+			android:scaleType="fitCenter" />
+
+		<LinearLayout
+			android:id="@+id/map_shields_container"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center"
+			android:gravity="center"
+			android:orientation="horizontal">
+		</LinearLayout>
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/map_address_text_shadow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:ellipsize="end"
+				android:importantForAccessibility="no"
+				android:maxLines="1"
+				android:singleLine="true"
+				android:textColor="@color/activity_background_color_dark"
+				android:textSize="@dimen/map_widget_text_size"
+				tools:text="Long Street Name" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/map_address_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:singleLine="true"
+				android:textColor="@color/activity_background_color_dark"
+				android:textSize="@dimen/map_widget_text_size"
+				tools:text="Long Street Name" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/waypoint_info_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/waypoint_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/map_button_margin"
+			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/waypoint_dist"
+				android:layout_width="@dimen/card_title_row_min_height"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/favorites_icon_padding"
+				android:maxLines="2"
+				android:textColor="@color/osmand_orange"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/waypoint_deviation"
+				android:layout_width="@dimen/card_title_row_min_height"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:layout_marginStart="@dimen/favorites_icon_padding"
+				android:drawablePadding="@dimen/favorites_icon_padding"
+				android:maxLines="1"
+				android:textColor="@color/osmand_orange"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				android:visibility="gone" />
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/list_item_button_padding"
+			android:layout_weight="1">
+
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/waypoint_text_shadow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:importantForAccessibility="no"
+				android:maxLines="2"
+				android:textColor="@color/activity_background_color_dark"
+				android:textSize="@dimen/map_button_text_size"
+				tools:text="Waypoint" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/waypoint_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="@color/activity_background_color_dark"
+				android:textSize="@dimen/map_button_text_size"
+				tools:text="Waypoint" />
+
+		</FrameLayout>
+
+		<ImageButton
+			android:id="@+id/waypoint_more"
+			android:layout_width="@dimen/map_address_height"
+			android:layout_height="@dimen/map_address_height"
+			android:layout_gravity="center_vertical"
+			android:background="@drawable/btn_circle_transparent"
+			android:contentDescription="@string/shared_string_more"
+			osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+
+		<ImageButton
+			android:id="@+id/waypoint_close"
+			android:layout_width="@dimen/map_address_height"
+			android:layout_height="@dimen/map_address_height"
+			android:layout_gravity="center_vertical"
+			android:background="@drawable/btn_circle_transparent"
+			android:contentDescription="@string/shared_string_close"
+			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+
+	</LinearLayout>
+
+</FrameLayout>

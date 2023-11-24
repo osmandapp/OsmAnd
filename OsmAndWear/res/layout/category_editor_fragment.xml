@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height"
+		android:background="?attr/list_background_color"
+		android:contentInsetStart="@dimen/toolbar_inset_start_with_navigation"
+		app:titleTextAppearance="@style/ToolbarTitle"
+		osmand:titleTextColor="?android:textColorPrimary"
+		tools:navigationIcon="@drawable/ic_action_close"
+		tools:title="@string/favorite_category_add_new_title" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<ScrollView
+			android:id="@+id/editor_scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="@dimen/dialog_button_ex_height"
+			android:fillViewport="true">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/dialog_content_margin">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color">
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/name_caption"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_half"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginBottom="@dimen/content_padding"
+						android:hint="@string/favorite_category_name"
+						app:boxBackgroundColor="?attr/text_input_background"
+						app:boxStrokeColor="@color/osmand_orange"
+						app:hintTextColor="@color/text_color_secondary_light"
+						app:startIconDrawable="@drawable/ic_action_folder">
+
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/name_edit"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:inputType="textMultiLine|textCapSentences"
+							android:letterSpacing="@dimen/text_button_letter_spacing"
+							android:maxLines="4"
+							osmand:lineHeight="@dimen/default_title_line_height" />
+
+					</com.google.android.material.textfield.TextInputLayout>
+
+				</LinearLayout>
+
+				<include layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/TitleStyle.Medium"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:text="@string/default_appearance"
+						android:textColor="?android:textColorPrimary" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/DescStyle"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginBottom="@dimen/content_padding_small"
+						android:text="@string/default_appearance_desc"
+						android:textColor="?android:textColorSecondary" />
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="?attr/divider_color_basic" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:orientation="horizontal">
+
+						<net.osmand.plus.widgets.TextViewEx
+							style="@style/TitleStyle.Medium"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/select_color"
+							android:textColor="?android:textColorPrimary" />
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/color_name"
+							style="@style/TitleStyle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_small"
+							android:textColor="?android:textColorSecondary"
+							tools:text="@string/rendering_value_darkyellow_name" />
+
+					</LinearLayout>
+
+					<FrameLayout
+						android:id="@+id/colors_card_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:layout_marginTop="@dimen/content_padding"
+						android:background="?attr/divider_color_basic" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/TitleStyle.Medium"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:text="@string/select_icon_profile_dialog_title"
+						android:textColor="?android:textColorPrimary" />
+
+					<FrameLayout
+						android:id="@+id/icons_card_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginBottom="@dimen/content_padding_half" />
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="?attr/divider_color_basic" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:orientation="horizontal">
+
+						<net.osmand.plus.widgets.TextViewEx
+							style="@style/TitleStyle.Medium"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/shared_string_shape"
+							android:textColor="?android:textColorPrimary" />
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/shape_name"
+							style="@style/TitleStyle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_small"
+							android:textColor="?android:textColorSecondary"
+							tools:text="@string/shared_string_circle" />
+
+					</LinearLayout>
+
+					<FrameLayout
+						android:id="@+id/shapes_card_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginBottom="@dimen/content_padding_small" />
+
+				</LinearLayout>
+
+				<include layout="@layout/card_bottom_divider" />
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<include layout="@layout/control_bottom_buttons" />
+
+	</FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/active_color_primary_light"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="15dp"
+	    android:paddingEnd="24dp"
+	    android:paddingStart="24dp">
+
+        <TextView
+            android:id="@+id/regionNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/card_and_list_background_light"
+            tools:text="Flevoland"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_50_transparent"/>
+
+        <TextView
+            android:id="@+id/lastMapChangeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:layout_marginTop="@dimen/content_padding_half"
+            android:gravity="center"
+            android:textColor="@color/card_and_list_background_light"
+            android:textSize="@dimen/default_sub_text_size"
+            tools:text="@string/last_map_change"/>
+
+        <TextView
+            android:id="@+id/lastUpdateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/content_padding_half"
+            android:gravity="center"
+            android:textColor="@color/card_and_list_background_light"
+            android:textSize="@dimen/default_sub_text_size"
+            tools:text="@string/last_update"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_padding"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+	            android:layout_marginStart="24dp"
+	            android:layout_marginEnd="24dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/live_update"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/toggle_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:checked="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+	            android:layout_marginEnd="24dp"
+	            android:layout_marginStart="24dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/only_download_over_wifi"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="Only download over WiFi long text like really long"/>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/downloadOverWiFiSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:checked="true"
+                    android:textSize="@dimen/default_list_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="@dimen/content_padding"
+	            android:layout_marginEnd="@dimen/content_padding"
+	            android:layout_marginStart="24dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/shared_string_update"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"/>
+
+                <!--style="@style/OsmandLightTheme.Spinner"-->
+                <Spinner
+                    android:id="@+id/updateFrequencySpinner"
+                    style="@style/OsmandLightTheme.Spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="end"
+                    android:paddingLeft="0dp"
+	                android:paddingStart="0dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/updateTimesOfDayLayout"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="@dimen/content_padding"
+	            android:layout_marginStart="24dp"
+	            android:layout_marginEnd="@dimen/content_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/update_time"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"/>
+
+                <Spinner
+                    android:id="@+id/updateTimesOfDaySpinner"
+                    style="@style/OsmandLightTheme.Spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="end"
+                    android:paddingLeft="0dp"
+	                android:paddingStart="0dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+	            android:layout_marginEnd="24dp"
+	            android:layout_marginStart="24dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/updates_size"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"/>
+
+                <TextView
+                    android:id="@+id/sizeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="64MB"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"/>
+</LinearLayout>

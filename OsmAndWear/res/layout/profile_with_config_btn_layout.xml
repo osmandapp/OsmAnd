@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+
+	<LinearLayout
+		android:id="@+id/btn_background"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:elevation="2dp">
+
+		<ImageButton
+			android:id="@+id/profile"
+			android:layout_width="@dimen/map_route_buttons_height_land"
+			android:layout_height="@dimen/map_route_buttons_height_land"
+			app:srcCompat="@drawable/ic_action_car_dark"
+			android:background="@color/color_transparent"
+			android:contentDescription="@string/app_modes_choose"/>
+
+		<View
+			android:id="@+id/divider"
+			android:layout_width="1dp"
+			android:layout_height="24dp"
+			android:background="?attr/divider_color"
+			android:layout_gravity="center_vertical"/>
+
+		<ImageButton
+			android:id="@+id/profile_config"
+			android:layout_width="@dimen/map_route_buttons_height_land"
+			android:layout_height="@dimen/map_route_buttons_height_land"
+			app:srcCompat="@drawable/ic_action_settings"
+			android:background="@color/color_transparent"
+			android:contentDescription="@string/configure_profile" />
+
+	</LinearLayout>
+
+</LinearLayout>

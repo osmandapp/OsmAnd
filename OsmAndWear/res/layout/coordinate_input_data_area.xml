@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	tools:background="@color/list_background_color_dark">
+
+	<View
+		android:id="@+id/input_area_top_padding"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding"
+		android:visibility="gone"
+		tools:visibility="visible"/>
+
+	<!-- Latitude row: -->
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical">
+
+		<LinearLayout
+			android:id="@+id/lat_side_of_the_world_btn"
+			android:layout_width="@dimen/side_of_the_world_button_size"
+			android:layout_height="@dimen/side_of_the_world_button_size"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
+			tools:background="@drawable/context_menu_controller_bg_dark"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/south_side_iv"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="-12dp"
+				android:visibility="gone"
+				tools:src="@drawable/ic_action_coordinates_longitude"
+				tools:tint="@color/active_color_primary_light"/>
+
+			<TextView
+				android:id="@+id/lat_side_of_the_world_tv"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				tools:text="N"
+				tools:textColor="@color/active_color_primary_light"/>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/north_side_iv"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginBottom="-12dp"
+				tools:src="@drawable/ic_action_coordinates_longitude"
+				tools:tint="@color/active_color_primary_light"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:text="@string/navigate_point_latitude"
+				android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+				android:textSize="@dimen/default_sub_text_size"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lat_first_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="xx"
+					tools:maxLength="2"/>
+
+				<TextView
+					android:id="@+id/lat_first_separator_tv"
+					android:layout_width="@dimen/context_menu_padding_margin_large"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal"
+					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="°"/>
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lat_second_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="xx"
+					tools:maxLength="2"/>
+
+				<TextView
+					android:id="@+id/lat_second_separator_tv"
+					android:layout_width="@dimen/context_menu_padding_margin_large"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal"
+					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="."/>
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lat_third_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="xxxx"
+					tools:maxLength="4"/>
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/lat_backspace_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/text_margin_small"
+			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+			android:layout_marginRight="@dimen/text_margin_small"
+			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:background="?attr/selectableItemBackground"
+			android:padding="@dimen/content_padding_small"
+			tools:src="@drawable/ic_keyboard_backspace"/>
+
+		<View
+			android:id="@+id/lat_end_padding"
+			android:layout_width="@dimen/content_padding"
+			android:layout_height="match_parent"
+			android:visibility="gone"/>
+
+	</LinearLayout>
+
+	<!-- Longitude row: -->
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:gravity="center_vertical">
+
+		<LinearLayout
+			android:id="@+id/lon_side_of_the_world_btn"
+			android:layout_width="@dimen/side_of_the_world_button_size"
+			android:layout_height="@dimen/side_of_the_world_button_size"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:animateLayoutChanges="true"
+			tools:background="@drawable/context_menu_controller_bg_dark"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/east_side_iv"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginLeft="-12dp"
+				android:layout_marginStart="-12dp"
+				android:visibility="gone"
+				tools:src="@drawable/ic_action_coordinates_latitude"
+				tools:tint="@color/active_color_primary_light"/>
+
+			<TextView
+				android:id="@+id/lon_side_of_the_world_tv"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textSize="@dimen/default_list_text_size"
+				android:textStyle="bold"
+				tools:text="W"
+				tools:textColor="@color/active_color_primary_light"/>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/west_side_iv"
+				android:layout_width="24dp"
+				android:layout_height="24dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="-12dp"
+				android:layout_marginRight="-12dp"
+				tools:src="@drawable/ic_action_coordinates_latitude"
+				tools:tint="@color/active_color_primary_light"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:text="@string/navigate_point_longitude"
+				android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+				android:textSize="@dimen/default_sub_text_size"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lon_first_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="yy"
+					tools:maxLength="2"/>
+
+				<TextView
+					android:id="@+id/lon_first_separator_tv"
+					android:layout_width="@dimen/context_menu_padding_margin_large"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal"
+					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="°"/>
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lon_second_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="yy"
+					tools:maxLength="2"/>
+
+				<TextView
+					android:id="@+id/lon_second_separator_tv"
+					android:layout_width="@dimen/context_menu_padding_margin_large"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal"
+					android:textColor="@color/ctx_menu_bottom_view_secondary_text_color_light"
+					android:textSize="@dimen/dialog_header_text_size"
+					tools:text="."/>
+
+				<net.osmand.plus.widgets.EditTextEx
+					android:id="@+id/lon_third_input_et"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:imeOptions="actionNext"
+					android:inputType="number"
+					android:maxLines="1"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:theme="@style/CoordinateInputEditText"
+					tools:hint="yyyy"
+					tools:maxLength="4"/>
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/lon_backspace_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/text_margin_small"
+			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+			android:layout_marginRight="@dimen/text_margin_small"
+			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:background="?attr/selectableItemBackground"
+			android:padding="@dimen/content_padding_small"
+			tools:src="@drawable/ic_keyboard_backspace"/>
+
+		<View
+			android:id="@+id/lon_end_padding"
+			android:layout_width="@dimen/content_padding"
+			android:layout_height="match_parent"
+			android:visibility="gone"/>
+
+	</LinearLayout>
+
+	<!-- Point name row: -->
+
+	<View
+		android:id="@+id/point_name_top_space"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:visibility="gone"/>
+
+	<View
+		android:id="@+id/point_name_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding"
+		android:background="@color/divider_color_dark"/>
+
+	<LinearLayout
+		android:id="@+id/point_name_et_container"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_list_item_height"
+		tools:background="@color/card_and_list_background_dark">
+
+		<net.osmand.plus.widgets.EditTextEx
+			android:id="@+id/point_name_et"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_weight="1"
+			android:background="@null"
+			android:hint="@string/optional_point_name"
+			android:imeOptions="actionDone"
+			android:inputType="text"
+			android:textSize="@dimen/default_list_text_size"/>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/point_name_keyboard_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/text_margin_small"
+			android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+			android:layout_marginRight="@dimen/text_margin_small"
+			android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+			android:padding="@dimen/content_padding_small"
+			tools:src="@drawable/ic_action_keyboard"/>
+	</LinearLayout>
+
+</LinearLayout>

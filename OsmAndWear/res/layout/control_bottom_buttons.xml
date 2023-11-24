@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/control_buttons"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="bottom"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/buttons_shadow"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half"
+		android:background="@drawable/shadow" />
+
+	<include
+		layout="@layout/bottom_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_ex_height" />
+
+</LinearLayout>

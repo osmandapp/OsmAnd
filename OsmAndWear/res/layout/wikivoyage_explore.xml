@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/wikivoyage_bg_color"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        osmand:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="?attr/wikivoyage_bg_color"
+            android:padding="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/toolbar_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/shared_string_travel_guides"
+                    android:textColor="?attr/wikivoyage_app_bar_text_color"
+                    android:textSize="@dimen/dialog_header_text_size"
+                    osmand:typeface="@string/font_roboto_medium" />
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/options_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:letterSpacing="@dimen/text_button_letter_spacing"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
+                    android:text="@string/shared_string_options"
+                    android:textColor="?attr/wikivoyage_active_color"
+                    android:textSize="@dimen/text_button_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+                    tools:ignore="UnusedAttribute"
+                    android:paddingStart="@dimen/content_padding"
+                    android:paddingEnd="@dimen/content_padding" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+
+        <FrameLayout
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin_small"
+            android:layout_marginRight="@dimen/text_margin_small"
+            android:background="?attr/wikivoyage_travel_card_bg"
+            android:layout_marginEnd="@dimen/text_margin_small"
+            android:layout_marginStart="@dimen/text_margin_small">
+
+            <LinearLayout
+                android:id="@+id/search_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/search_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/wikivoyage_search_hint"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:textColor="?attr/searchbar_text_hint" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/content_padding_small"
+                    android:layout_marginRight="@dimen/content_padding_small"
+                    android:contentDescription="@string/shared_string_search"
+                    tools:src="@drawable/ic_action_search_dark"
+                    android:layout_marginEnd="@dimen/content_padding_small"
+                    android:layout_marginStart="@dimen/content_padding_small" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Coordinator layout is needed in order to display the snackbar above the bottom navigation -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <net.osmand.plus.LockableViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/wikivoyage_card_bg_color"
+        osmand:itemBackground="?attr/wikivoyage_card_bg_color"
+        osmand:menu="@menu/wikivoyage_bottom_navigation"
+        tools:itemIconTint="@color/bottom_navigation_color_selector_light"
+        tools:itemTextColor="@color/bottom_navigation_color_selector_light" />
+
+</LinearLayout>

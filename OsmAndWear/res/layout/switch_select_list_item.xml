@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:gravity="center_vertical"
+	android:minHeight="48dp"
+	android:orientation="horizontal"
+	android:paddingLeft="@dimen/list_content_padding"
+	android:paddingRight="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/list_content_padding"
+        osmand:srcCompat="@drawable/ic_action_info_dark"
+	    android:layout_marginEnd="@dimen/list_content_padding" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+	    android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="Avoid selected roads"
+            android:textSize="@dimen/default_list_text_size"/>
+
+        <TextView
+            android:id="@+id/description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="Select roads you want to avoid during navigation"
+            android:textSize="@dimen/default_desc_text_size"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/check_item_rel"/>
+
+    <TextView
+        android:id="@+id/select_button"
+        android:background="?attr/selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:maxWidth="150dp"
+        android:gravity="center_vertical|end"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/shared_string_select"
+        android:textSize="@dimen/default_list_text_size"
+	    android:paddingStart="8dp"
+	    android:paddingEnd="8dp" />
+
+</LinearLayout>

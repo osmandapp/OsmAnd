@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:baselineAligned="false"
+	android:orientation="horizontal"
+	android:paddingLeft="@dimen/content_padding_half"
+	android:paddingRight="@dimen/content_padding_half"
+	android:paddingBottom="@dimen/context_menu_padding_margin_small"
+	android:paddingStart="@dimen/content_padding_half"
+	android:paddingEnd="@dimen/content_padding_half">
+
+	<include
+		android:id="@+id/additional_button_left_view"
+		layout="@layout/map_context_menu_button" />
+
+	<View
+		android:id="@+id/additional_buttons_divider"
+		android:layout_width="@dimen/content_padding_half"
+		android:layout_height="match_parent" />
+
+	<include
+		android:id="@+id/additional_button_right_view"
+		layout="@layout/map_context_menu_button" />
+
+</LinearLayout>

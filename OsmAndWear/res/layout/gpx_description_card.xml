@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/background_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
+		android:paddingTop="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/context_menu_padding_margin_tiny"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:ellipsize="end"
+			android:maxLines="5"
+			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+			android:textColor="@null"
+			tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard."
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_padding_small"
+			android:layout_marginStart="@dimen/bottom_sheet_content_padding_small"
+			android:background="@drawable/rounded_background_3dp">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/read_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
+				android:paddingLeft="@dimen/bottom_sheet_content_padding_small"
+				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
+				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+				android:text="@string/shared_string_read"
+				android:textColor="?attr/wikivoyage_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:drawableLeft="@drawable/ic_action_read_article"
+				tools:drawableTint="?attr/wikivoyage_active_color"
+				tools:ignore="UnusedAttribute"
+				android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+				android:paddingStart="@dimen/bottom_sheet_content_padding_small"
+				tools:drawableStart="@drawable/ic_action_read_article" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<include layout="@layout/list_item_divider" />
+
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/content_padding"
+	android:layout_marginLeft="@dimen/content_padding"
+	android:layout_marginEnd="@dimen/content_padding"
+	android:layout_marginRight="@dimen/content_padding"
+	android:baselineAligned="false"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/bottom_sheet_list_item_height">
+
+	<androidx.cardview.widget.CardView
+		android:id="@+id/compound_container"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/content_padding_half"
+		android:layout_marginRight="@dimen/content_padding_half"
+		android:layout_weight="1"
+		android:gravity="center_vertical"
+		app:cardCornerRadius="4dp"
+		app:cardElevation="0dp"
+		tools:cardBackgroundColor="?attr/switch_button_active">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
+				android:layout_marginBottom="@dimen/context_menu_first_line_top_margin"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:maxLines="1"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_desc_text_size"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="Some title" />
+
+			<com.google.android.material.switchmaterial.SwitchMaterial
+				android:id="@+id/compound_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+				android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+				android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+				android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
+				tools:checked="true" />
+
+		</LinearLayout>
+
+	</androidx.cardview.widget.CardView>
+
+	<androidx.cardview.widget.CardView
+		android:id="@+id/additional_button_container"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		app:cardCornerRadius="4dp"
+		app:cardElevation="0dp"
+		tools:cardBackgroundColor="?attr/switch_button_active">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?android:attr/selectableItemBackground">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/additional_button_icon"
+				android:layout_width="@dimen/favorites_icon_right_margin"
+				android:layout_height="@dimen/favorites_icon_right_margin"
+				android:layout_gravity="center"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				app:srcCompat="@drawable/ic_action_track_line_bold_color"
+				tools:tint="?attr/active_color_basic" />
+
+		</FrameLayout>
+
+	</androidx.cardview.widget.CardView>
+
+</LinearLayout>

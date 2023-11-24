@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/bg_color"
+		android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_description"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/list_header_settings_top_margin"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/list_header_settings_top_margin"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		tools:text="@string/select_data_to_import" />
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/list_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<include
+		android:id="@+id/card_bottom_divider"
+		layout="@layout/card_bottom_divider" />
+
+</LinearLayout>

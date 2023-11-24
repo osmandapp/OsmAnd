@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/chips_view"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_list_item_height"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:scrollbars="none" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:contentDescription="@string/shared_string_close"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:lines="1"
+            tools:text="Search request" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"/>
+
+        <include layout="@layout/card_bottom_divider"/>
+
+    </FrameLayout>
+
+</LinearLayout>

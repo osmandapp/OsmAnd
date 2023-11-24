@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/setting_list_item_large_height"
+	tools:layout_height="@dimen/list_item_triple_row_height">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		tools:src="@drawable/ic_action_info_dark"
+		tools:tint="@color/icon_color_osmand_light" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_half"
+		android:layout_weight="1"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textAppearance="@style/TextAppearance.ListItemTitle"
+				tools:text="Title" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/sub_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:lines="1"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="Sub" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:letterSpacing="@dimen/description_letter_spacing"
+				android:lines="1"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="Description" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/secondary_icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			app:srcCompat="@drawable/ic_action_additional_option"
+			app:tint="?attr/default_icon_color" />
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.SwitchCompat
+		android:id="@+id/compound_button"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:focusable="false"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		tools:checked="true" />
+
+</LinearLayout>

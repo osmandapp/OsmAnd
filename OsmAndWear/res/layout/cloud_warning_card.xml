@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/warning_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/simple_warning"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/backup_warning"
+		tools:visibility="gone">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_margin="@dimen/content_padding"
+			tools:src="@drawable/ic_action_wifi_off" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@id/title"
+			style="@style/TitleStyle"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:textColor="@color/keyboard_item_button_text_color"
+			tools:text="@string/backup_error_subscription_was_expired" />
+
+		<ImageButton
+			android:id="@+id/retry_button"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="@dimen/toolbar_height"
+			android:layout_height="@dimen/toolbar_height"
+			android:contentDescription="@string/retry"
+			osmand:srcCompat="@drawable/ic_action_reset" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/full_warning"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					tools:text="@string/backup_error_subscription_was_expired" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/context_menu_subtitle_margin"
+					android:textColor="?android:textColorSecondary"
+					tools:text="@string/backup_error_subscription_was_expired_descr" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				tools:src="@drawable/ic_action_osmand_pro_logo_colored" />
+
+		</LinearLayout>
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/action_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			osmand:dialogButtonType="secondaryActive"
+			osmand:dialogButtonBottomMargin="@dimen/content_padding"
+			tools:dialogButtonTitle="@string/sync_now"/>
+
+	</LinearLayout>
+
+</LinearLayout>

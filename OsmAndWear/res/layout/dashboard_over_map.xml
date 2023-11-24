@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/dashboard"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible" >
+
+    <include
+        android:id="@+id/init_progress"
+        layout="@layout/application_loading"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/animateContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+            android:id="@+id/main_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/map_part_dashboard"
+                    android:contentDescription="@string/back_to_map"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dashboard_map_top_padding">
+
+                    <Button
+                        android:id="@+id/map_download_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/shared_string_download"
+                        android:visibility="gone"/>
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+        <FrameLayout
+            android:id="@+id/dash_list_view_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/dash_list_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/bg_color" />
+
+            <com.github.ksoichiro.android.observablescrollview.ObservableListView
+                android:id="@+id/dash_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:fadeScrollbars="true"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <include layout="@layout/dashboard_toolbar"/>
+
+</FrameLayout>

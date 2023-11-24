@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minHeight="@dimen/list_item_height"
+        android:paddingLeft="@dimen/dialog_content_margin"
+        android:paddingStart="@dimen/dialog_content_margin"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/check_local_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:visibility="gone"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginRight="@dimen/dialog_content_margin"
+            android:layout_marginEnd="@dimen/dialog_content_margin"
+            android:clickable="false"
+            android:scrollbars="none"
+            android:focusableInTouchMode="false" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            osmand:srcCompat="@drawable/ic_action_polygom_dark"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:visibility="visible"
+	        android:layout_marginEnd="@dimen/list_content_padding" />
+
+
+        <LinearLayout
+            android:id="@+id/name_and_read_section_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/gpx_text_top_margin"
+            android:paddingBottom="@dimen/gpx_text_top_margin"
+            android:layout_marginRight="@dimen/showAllButtonMarginRight"
+            android:layout_marginEnd="@dimen/showAllButtonMarginRight"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="@string/current_track"/>
+
+            <LinearLayout
+                android:id="@+id/read_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/distance_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    osmand:srcCompat="@drawable/ic_action_distance_16" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:maxLines="1"
+                    android:includeFontPadding="false"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/points_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    osmand:srcCompat="@drawable/ic_action_waypoint_16" />
+
+                <TextView
+                    android:id="@+id/points_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/time_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                    android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+                    osmand:srcCompat="@drawable/ic_action_time_16" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:maxLines="1"
+                    android:textColor="?android:textColorSecondary"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/default_sub_text_size"
+	                android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/unknown_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/date_and_size_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:maxLines="1"
+                    android:textSize="@dimen/default_sub_text_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_sub_text_size"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/show_on_map"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_marginStart="@dimen/favorites_icon_right_margin"
+            android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_action_gsave_dark" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/stop"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_action_rec_stop" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/options"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:contentDescription="@string/shared_string_more_actions"
+            android:focusable="false"
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+
+        <LinearLayout
+            android:id="@+id/check_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggle_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_marginRight="@dimen/list_content_padding"
+                android:layout_marginEnd="@dimen/list_content_padding"
+                android:gravity="center_vertical" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/toggle_checkbox_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginRight="@dimen/dialog_content_margin"
+                android:layout_marginEnd="@dimen/dialog_content_margin"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

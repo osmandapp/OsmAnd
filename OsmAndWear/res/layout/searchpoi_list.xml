@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding" 
+    android:descendantFocusability="blocksDescendants"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/poi_icon"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/favorites_icon_right_margin"
+        tools:visiblity="visible"
+	    android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:paddingRight="3dp"
+	    android:paddingEnd="3dp">
+
+        <TextView
+            android:id="@+id/poi_label"
+            android:textSize="@dimen/default_list_text_size"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:maxLines="2" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal" >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/poi_direction"
+                android:layout_width="@dimen/directionIconSize"
+                android:layout_height="@dimen/directionIconSize"
+                android:layout_marginTop="1sp"
+                android:layout_gravity="center_vertical"
+                osmand:srcCompat="@drawable/ic_direction_arrow"
+                tools:visiblity="visible" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                android:layout_marginRight="@dimen/gpx_small_text_margin"
+                tools:text="300 km"
+	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/time_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                osmand:srcCompat="@drawable/ic_action_time_16"
+	            android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:lines="1" 
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                
+                android:layout_marginRight="@dimen/gpx_small_text_margin"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+	            android:layout_marginEnd="@dimen/gpx_small_text_margin" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

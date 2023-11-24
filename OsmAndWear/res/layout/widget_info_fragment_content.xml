@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/desc"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:textColor="?android:textColorPrimary"
+		tools:text="Widget shows the arrival time left to the first intermediate point." />
+
+	<include
+		android:id="@+id/widget_item"
+		layout="@layout/selectable_widget_item_no_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding" />
+
+	<FrameLayout
+		android:id="@+id/promo_banner_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding"
+		android:visibility="gone"/>
+
+	<LinearLayout
+		android:id="@+id/secondary_desc_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:orientation="horizontal"
+		android:gravity="center_vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/secondary_desc"
+			style="@style/DescStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:textColor="?android:textColorSecondary"
+			tools:text="Part of “Trip recording” plugin." />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/secondary_icon"
+			android:layout_width="@dimen/title_padding"
+			android:layout_height="@dimen/title_padding"
+			android:tint="?default_icon_color"
+			tools:src="@drawable/ic_extension_dark" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?divider_color_basic" />
+
+	<include
+		android:id="@+id/settings_action"
+		layout="@layout/widget_info_action" />
+
+	<include
+		android:id="@+id/duplicate_action"
+		layout="@layout/widget_info_action" />
+
+	<include
+		android:id="@+id/remove_action"
+		layout="@layout/widget_info_action" />
+
+</LinearLayout>

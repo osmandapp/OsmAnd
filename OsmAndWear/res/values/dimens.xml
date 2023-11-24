@@ -1,0 +1,22 @@
+<resources>
+    <dimen name="app_defaultsize_w">640dip</dimen>
+    <dimen name="app_defaultsize_h">400dip</dimen>
+    <dimen name="app_minimumsize_w">400dip</dimen>
+    <dimen name="app_minimumsize_h">200dip</dimen>
+    <dimen name="first_usage_title_margin">110dp</dimen>
+    <dimen name="first_usage_title_margin_bottom">56dp</dimen>
+    <dimen name="first_usage_title_text_size">52sp</dimen>
+    <dimen name="first_usage_subtitle_text_size">18sp</dimen>
+
+    <dimen name="quick_action_widget_height_big">200dp</dimen>
+    <dimen name="quick_action_widget_height_small">100dp</dimen>
+
+    <dimen name="context_img_card_width">280dp</dimen>
+    <dimen name="context_img_card_height">160dp</dimen>
+
+    <dimen name="line_spacing_multiplier_description">1.2</dimen>
+    <dimen name="line_spacing_extra_description">5dp</dimen>
+	<dimen name="price_button_bottom_padding">2dp</dimen>
+    <dimen name="price_bottom_title_bottom_padding">1dp</dimen>
+	<dimen name="backup_icons_view_height">150dp</dimen>
+</resources>

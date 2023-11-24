@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/button"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/setting_profile_item_height"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					style="@style/TitleStyle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="2"
+					android:textColor="?android:textColorPrimary"
+					tools:text="Title" />
+
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?android:textColorSecondary"
+				android:visibility="gone"
+				tools:text="Description"
+				tools:visibility="visible" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatRadioButton
+			android:id="@+id/compound_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+			android:saveEnabled="false" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>
+

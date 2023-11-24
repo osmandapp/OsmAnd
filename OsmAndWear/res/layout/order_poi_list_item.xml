@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:background="?attr/list_background_color"
+	android:gravity="center_vertical">
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		tools:background="?android:attr/selectableItemBackground">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/move_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			android:tint="?attr/secondary_icon_color"
+			osmand:srcCompat="@drawable/ic_action_item_move" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			tools:src="@drawable/mm_air_transport"
+			tools:tint="@color/poi_background"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:ellipsize="marquee"
+			android:paddingLeft="0dp"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding_half"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			osmand:typeface="@string/font_roboto_regular"
+			tools:text="@string/poi_aerialway_transport"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingStart="0dp" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/action_delete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginLeft="@dimen/list_content_padding_large"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			tools:src="@drawable/ic_action_delete_item"
+			tools:tint="@color/icon_color_default_light" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/action_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding"
+			tools:src="@drawable/ic_action_remove"
+			tools:tint="@color/icon_color_default_light" />
+
+	</LinearLayout>
+
+</LinearLayout>

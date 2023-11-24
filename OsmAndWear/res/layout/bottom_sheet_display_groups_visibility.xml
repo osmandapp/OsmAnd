@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/bottom_sheet_title_height"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingEnd="@dimen/wikilink_bottom_sheet_padding"
+		android:paddingBottom="@dimen/wikilink_bottom_sheet_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/default_title_line_height"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/default_title_line_height"
+			app:typeface="@string/font_roboto_medium"
+			android:text="@string/shared_string_show_on_map" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title_description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/title"
+			android:ellipsize="end"
+			android:letterSpacing="@dimen/description_letter_spacing"
+			android:minHeight="@dimen/default_desc_line_height"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			app:lineHeight="@dimen/default_desc_line_height"
+			app:typeface="@string/font_roboto_regular"
+			android:text="@string/display_groups_visibility_dialog_description" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/selected_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentEnd="true"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/default_title_line_height"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/default_title_line_height"
+			app:typeface="@string/font_roboto_regular"
+			tools:text="5/6" />
+
+	</RelativeLayout>
+
+	<LinearLayout
+		android:id="@+id/state_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/state_button_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:minHeight="@dimen/default_title_line_height"
+			android:text="@string/shared_string_hide_all"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/default_title_line_height"
+			app:typeface="@string/font_roboto_medium" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic" />
+
+	<LinearLayout
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"/>
+
+</LinearLayout>

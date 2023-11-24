@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/wikivoyage_card_bg_color"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/selectableItemBackground"
+			android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+			android:paddingLeft="@dimen/wikivoyage_search_icon_margin_left"
+			android:paddingRight="@dimen/wikivoyage_search_icon_margin_left"
+			android:paddingStart="@dimen/wikivoyage_search_icon_margin_left"
+			android:paddingEnd="@dimen/wikivoyage_search_icon_margin_left">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/icon"
+				android:layout_width="28dp"
+				android:layout_height="28dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/wikivoyage_search_icon_margin_right"
+				android:layout_marginRight="@dimen/wikivoyage_search_icon_margin_right"
+				tools:src="@drawable/ic_action_placeholder_city"/>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"
+					tools:text="Amsterdam"/>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<TextView
+						android:id="@+id/left_description"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
+						android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+						android:textColor="@null"
+						tools:text="Amstellend North Holland"/>
+
+					<TextView
+						android:id="@+id/right_description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+						android:textColor="@null"
+						tools:text="En, Ru, De, ..."/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginLeft="@dimen/wikivoyage_search_divider_margin_start"
+			android:layout_marginStart="@dimen/wikivoyage_search_divider_margin_start"
+			android:background="?attr/wikivoyage_card_divider_color"
+			android:focusable="false"/>
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/shadow"
+		layout="@layout/card_bottom_divider"
+		android:visibility="gone"
+		tools:visibility="visible"/>
+
+</LinearLayout>

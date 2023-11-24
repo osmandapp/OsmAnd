@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="top|start"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_half"
+		android:text="@string/routing_attr_goods_restrictions_name"
+		android:textColor="?android:textColorPrimary" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:gravity="center_vertical|start"
+		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+		android:minHeight="@dimen/bottom_sheet_title_height"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		android:text="@string/goods_delivery_desc"
+		android:textColor="?android:textColorSecondary" />
+
+	<include layout="@layout/custom_radio_buttons" />
+
+	<LinearLayout
+		android:id="@+id/farther_description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:gravity="top|start"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:text="@string/goods_delivery_desc_2"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:gravity="center_vertical|start"
+			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:text="@string/goods_delivery_desc_3"
+			android:textColor="?android:textColorSecondary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:gravity="center_vertical|start"
+			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:text="@string/goods_delivery_desc_4"
+			android:textColor="?android:textColorSecondary" />
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+</LinearLayout>

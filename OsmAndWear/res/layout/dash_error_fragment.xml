@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_card"
+	android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
+	android:orientation="vertical"
+	android:layout_marginStart="@dimen/dash_margin_h"
+	android:layout_marginEnd="@dimen/dash_margin_h">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="10dp"
+		android:layout_marginTop="10dp"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:id="@+id/error_icon"
+			android:scaleType="center"
+			android:layout_marginLeft="@dimen/dashFavIconMargin"
+			android:layout_marginRight="@dimen/dashFavIconMargin"
+			osmand:srcCompat="@drawable/ic_action_remove_dark"
+			android:layout_marginEnd="@dimen/dashFavIconMargin"
+			android:layout_marginStart="@dimen/dashFavIconMargin" />
+
+		<TextView
+			android:id="@+id/error_header"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginBottom="@dimen/subHeaderPadding"
+			android:layout_marginTop="@dimen/subHeaderPadding"
+			android:textColor="?android:textColorPrimary"/>
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/list_header_height"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/error_btn"
+			style="@style/DashboardGeneralButton"
+			android:layout_width="0dp"
+			android:gravity="center"
+			android:layout_weight="1"
+			android:text="@string/send_report"/>
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/dashboard_divider"/>
+
+		<Button
+			android:id="@+id/error_cancel"
+			style="@style/DashboardGeneralButton"
+			android:layout_width="0dp"
+			android:gravity="center"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/shared_string_dismiss"/>
+	</LinearLayout>
+
+</LinearLayout>

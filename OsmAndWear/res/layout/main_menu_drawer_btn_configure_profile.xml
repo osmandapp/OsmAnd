@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:descendantFocusability="blocksDescendants"
+		android:gravity="center"
+		android:orientation="horizontal">
+
+		<FrameLayout
+			android:id="@+id/bg_circle"
+			android:layout_width="@dimen/context_menu_big_icon_size"
+			android:layout_height="@dimen/context_menu_big_icon_size"
+			android:visibility="invisible"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/favorites_icon_right_margin"
+			android:background="?attr/bg_circle"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/favorites_icon_right_margin">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:visibility="invisible"
+				android:layout_gravity="center"
+				tools:src="@drawable/ic_action_bicycle_dark" />
+			
+		</FrameLayout>
+
+
+		<FrameLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/card_row_min_height"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|start"
+				android:text="@string/configure_profile"
+				osmand:typeface="@string/font_roboto_medium"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_list_text_size" />
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/fatDivider"
+		android:layout_width="match_parent"
+		android:layout_height="2dp" />
+</LinearLayout>

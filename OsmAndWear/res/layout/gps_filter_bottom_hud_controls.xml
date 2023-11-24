@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_controls_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="bottom">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="start|bottom"
+		android:orientation="horizontal">
+
+		<ImageButton
+			android:id="@+id/map_center_on_track"
+			android:layout_width="@dimen/map_button_size"
+			android:layout_height="@dimen/map_button_size"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:background="@drawable/btn_circle"
+			tools:src="@drawable/ic_action_remove_dark" />
+
+		<include
+			layout="@layout/map_ruler"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|bottom"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/fab_margin_right" />
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/map_hud_controls"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_marginStart="@dimen/fab_margin_right"
+		android:layout_marginLeft="@dimen/fab_margin_right"
+		android:layout_marginEnd="@dimen/fab_margin_right"
+		android:layout_marginRight="@dimen/fab_margin_right" />
+
+</FrameLayout>

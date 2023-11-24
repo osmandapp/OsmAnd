@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clickable="false"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_color">
+
+		<include layout="@layout/list_item_divider" />
+
+	</FrameLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:background="?attr/bg_color">
+
+		<LinearLayout
+			android:id="@+id/button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:id="@+id/text_container"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginVertical="@dimen/content_padding_small"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					tools:text="Some title" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					tools:text="Some description" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/explicit_indicator"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:tint="?attr/default_icon_color"
+				android:src="@drawable/ic_action_arrow_down" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="wrap_content"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic"/>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/bg_color">
+
+		<LinearLayout
+			android:id="@+id/items_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:fillViewport="true"
+			android:orientation="vertical" />
+
+	</FrameLayout>
+
+</LinearLayout>

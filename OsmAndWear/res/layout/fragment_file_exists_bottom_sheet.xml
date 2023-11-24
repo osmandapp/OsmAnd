@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/file_already_exists"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/favorites_icon_padding"
+			android:text="@string/compass_desc"
+			android:textColor="?android:textColorSecondary" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/replace_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondary"
+			app:dialogButtonTitle="@string/update_existing"
+			app:dialogButtonTopMargin="@dimen/dialog_content_margin" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/duplicate_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="primary"
+			app:dialogButtonTitle="@string/keep_both"
+			app:dialogButtonTopMargin="@dimen/content_padding_small" />
+
+	</LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

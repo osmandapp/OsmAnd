@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:minHeight="@dimen/list_item_height"
+              android:orientation="vertical"
+              android:baselineAligned="false">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	    android:paddingStart="@dimen/list_content_padding"
+	    android:paddingEnd="@dimen/list_content_padding">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/multi_selection_menu_padding_bottom"
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/context_menu_line1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_address_building"
+                style="@style/TextAppearance.ContextMenuTitle"/>
+
+            <TextView
+                android:id="@+id/context_menu_line2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
+                android:text="@string/other_location"
+                style="@style/TextAppearance.ContextMenuSubtitle"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
+            android:id="@+id/context_menu_icon_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/context_menu_icon_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/standard_icon_size"
+                android:minHeight="@dimen/standard_icon_size"
+                osmand:srcCompat="@drawable/ic_action_building_number"
+                tools:tint="?attr/default_icon_color" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginLeft="@dimen/list_content_padding"
+        android:layout_marginStart="@dimen/list_content_padding"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        tools:background="@color/divider_color_dark"/>
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal"
+	android:background="@color/color_transparent">
+
+	<LinearLayout
+		android:id="@+id/main_view"
+		android:layout_width="@dimen/dashboard_land_width"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<include layout="@layout/download_tiles_toolbar" />
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:fillViewport="true"
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="fill_horizontal|top"
+			android:overScrollMode="never">
+
+			<include layout="@layout/download_tiles_content" />
+
+		</ScrollView>
+
+		<include layout="@layout/download_tiles_bottom_button" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/map_window_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/content_padding_half"
+				android:background="@color/map_window_outer_color" />
+
+			<View
+				android:layout_width="@dimen/content_padding_half"
+				android:layout_height="0dp"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_alignParentTop="true"
+				android:layout_alignBottom="@id/map_window"
+				android:background="@color/map_window_outer_color" />
+
+			<View
+				android:layout_width="@dimen/content_padding_half"
+				android:layout_height="0dp"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentEnd="true"
+				android:layout_alignBottom="@id/map_window"
+				android:background="@color/map_window_outer_color" />
+
+			<FrameLayout
+				android:id="@+id/map_window"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="@dimen/content_padding_small_half"
+				android:layout_marginTop="@dimen/content_padding_small_half"
+				android:layout_marginEnd="@dimen/content_padding_small_half"
+				android:background="@drawable/map_window_border" />
+
+		</RelativeLayout>
+
+		<include layout="@layout/map_window_caption" />
+
+	</LinearLayout>
+
+</LinearLayout>

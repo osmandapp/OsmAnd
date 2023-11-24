@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height"
+		android:background="?attr/actionModeBackground"
+		app:title="@string/select_track_file"
+		app:titleTextAppearance="@style/ToolbarTitle"
+		app:contentInsetStart="@dimen/toolbar_inset_start_with_navigation"
+		tools:navigationIcon="@drawable/ic_action_close" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/content_padding_half"
+			android:foregroundGravity="fill_horizontal|top"
+			android:foreground="@drawable/bg_contextmenu_shadow" />
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			tools:itemCount="5"
+			tools:listitem="@layout/gpx_track_select_item"/>
+
+	</FrameLayout>
+
+</LinearLayout>

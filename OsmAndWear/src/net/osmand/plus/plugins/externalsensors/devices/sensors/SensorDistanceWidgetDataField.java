@@ -1,0 +1,27 @@
+package net.osmand.plus.plugins.externalsensors.devices.sensors;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatter;
+
+public class SensorDistanceWidgetDataField extends SensorWidgetDataField {
+
+	public SensorDistanceWidgetDataField(int nameId, int unitNameId, @NonNull Number distanceValue) {
+		super(SensorWidgetDataFieldType.BIKE_DISTANCE, nameId, unitNameId, distanceValue);
+	}
+
+	@Nullable
+	@Override
+	public OsmAndFormatter.FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
+		float distance = getNumberValue().floatValue();
+		if (distance > 0) {
+			MetricsConstants metricsConstants = app.getSettings().METRIC_SYSTEM.get();
+			return OsmAndFormatter.getFormattedDistanceValue(distance,
+					app, false, metricsConstants);
+		}
+		return null;
+	}
+}

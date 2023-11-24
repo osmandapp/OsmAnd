@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <bitmap android:src="@drawable/map_bt_round_2_shadow" android:gravity="fill" />
+    </item>
+    <item>
+        <inset
+            android:insetBottom="@dimen/map_button_inset"
+            android:insetLeft="@dimen/map_button_inset"
+            android:insetRight="@dimen/map_button_inset"
+            android:insetTop="@dimen/map_button_inset" >
+            <shape android:shape="oval" >
+                <solid android:color="@color/map_widget_light_trans" />
+            </shape>
+        </inset>
+    </item>
+
+</layer-list>

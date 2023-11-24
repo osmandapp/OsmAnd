@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/clockIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/content_padding"
+            osmand:srcCompat="@drawable/ic_action_time"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_weight="1"
+            android:orientation="vertical"
+	        android:layout_marginStart="@dimen/content_padding">
+
+            <TextView
+                android:id="@+id/daysTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Mo-We"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:textColorSecondary"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timeListContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--<include layout="@layout/time_from_to_layout"/>-->
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/deleteItemImageButton"
+            android:contentDescription="@string/shared_string_delete"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="@dimen/bottom_sheet_list_item_height"
+            android:layout_height="@dimen/bottom_sheet_list_item_height"
+            android:layout_gravity="top"
+            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/addTimeSpanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:text="@string/add_time_span"
+        android:layout_toRightOf="@id/clockIconImageView"
+        android:layout_below="@id/timeListContainer"
+        android:textColor="?attr/color_dialog_buttons"
+        style="@style/Widget.AppCompat.Button.Borderless"
+	    android:layout_toEndOf="@id/clockIconImageView"
+	    android:layout_marginStart="60dp" />
+
+</LinearLayout>

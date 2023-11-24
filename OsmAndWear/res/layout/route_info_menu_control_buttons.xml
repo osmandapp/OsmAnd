@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/route_info_control_buttons_height"
+	android:orientation="horizontal">
+
+	<FrameLayout
+		android:id="@+id/cancel_button"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/cancel_button_descr"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/selectableItemBackground"
+			android:textColor="?attr/active_color_basic"
+			android:ellipsize="end"
+			android:gravity="center"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:maxLines="1"
+			android:paddingLeft="16dp"
+			android:paddingRight="16dp"
+			android:text="@string/shared_string_cancel"
+			android:textSize="@dimen/text_button_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:ignore="UnusedAttribute"
+			android:paddingEnd="16dp"
+			android:paddingStart="16dp" />
+
+	</FrameLayout>
+
+	<View
+		android:id="@+id/controls_divider"
+		android:layout_width="1dp"
+		android:layout_height="match_parent"
+		android:background="?attr/divider_color_basic"
+		android:visibility="visible"/>
+
+	<FrameLayout
+		android:id="@+id/start_button"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="1">
+
+		<ProgressBar
+			android:id="@+id/progress_bar_button"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="bottom"
+			android:max="100"
+			android:visibility="gone"
+			tools:progress="60"
+			tools:progressDrawable="?attr/size_progress_bar" />
+
+		<net.osmand.plus.widgets.TextViewExProgress
+			android:id="@+id/start_button_descr"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/selectableItemBackground"
+			android:ellipsize="end"
+			android:gravity="center"
+			android:layout_gravity="center"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:maxLines="1"
+			android:paddingLeft="@dimen/route_info_icon_padding_left"
+			android:paddingRight="@dimen/route_info_icon_padding_left"
+			android:text="@string/shared_string_control_start"
+			android:textSize="@dimen/text_button_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:drawableLeft="@drawable/ic_action_start_navigation"
+			tools:ignore="UnusedAttribute"
+			android:paddingStart="@dimen/route_info_icon_padding_left"
+			tools:drawableStart="@drawable/ic_action_start_navigation"
+			android:paddingEnd="@dimen/route_info_icon_padding_left" />
+
+	</FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_transparent">
+
+	<LinearLayout
+		android:id="@+id/pager_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		tools:visibility="visible">
+
+		<net.osmand.plus.LockableViewPager
+			android:id="@+id/pager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dashboard_map_toolbar"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|center_vertical"
+			android:background="?attr/flow_toolbar_bg" />
+
+		<androidx.appcompat.widget.AppCompatImageButton
+			android:id="@+id/back_button_flow"
+			android:layout_width="@dimen/route_info_toolbar_button_size"
+			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:background="@drawable/btn_circle_transparent_full"
+			android:contentDescription="@string/shared_string_back"
+			osmand:srcCompat="@drawable/ic_arrow_back"
+			android:tint="?attr/text_color_tab_active_white" />
+
+		<LinearLayout
+			android:id="@+id/toolbar_options_flow_bg"
+			android:layout_width="144dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|center_vertical"
+			android:background="?attr/flow_toolbar_bg"
+			android:gravity="center"
+			android:orientation="horizontal"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp"
+			android:paddingStart="20dp"
+			android:paddingEnd="20dp" />
+
+		<LinearLayout
+			android:id="@+id/toolbar_options_flow"
+			android:layout_width="144dp"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:layout_gravity="end|center_vertical"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small">
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:id="@+id/print_route_flow"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
+				android:contentDescription="@string/print_route"
+				android:scaleType="center"
+				osmand:srcCompat="@drawable/ic_action_gprint_dark"
+				android:tint="?attr/text_color_tab_active_white" />
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:id="@+id/save_as_gpx_flow"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
+				android:contentDescription="@string/shared_string_save_as_gpx"
+				android:scaleType="center"
+				osmand:srcCompat="@drawable/ic_action_gsave_dark"
+				android:tint="?attr/text_color_tab_active_white" />
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:id="@+id/share_as_gpx_flow"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
+				android:contentDescription="@string/share_route_as_gpx"
+				android:scaleType="center"
+				osmand:srcCompat="@drawable/ic_action_gshare_dark"
+				android:tint="?attr/text_color_tab_active_white" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<LinearLayout
+		android:id="@+id/toolbar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<LinearLayout
+			android:id="@+id/toolbar_container"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:background="?attr/bg_color"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="@dimen/dashboard_map_toolbar"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				android:layout_gravity="start|center_vertical"
+				android:gravity="center">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/back_button"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_close"
+					android:scaleType="center"
+					osmand:srcCompat="@drawable/ic_arrow_back"
+					android:tint="?attr/text_color_tab_active_white"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="14dp"
+				android:layout_marginBottom="14dp"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:ellipsize="end"
+					android:lines="1"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:textColor="?attr/searchbar_text"
+					android:textSize="@dimen/default_list_text_size_large"
+					osmand:typeface="@string/font_roboto_medium" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/toolbar_options"
+				android:layout_width="144dp"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				android:layout_gravity="end|center_vertical"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small"
+				android:visibility="visible"
+				android:paddingEnd="@dimen/content_padding_small"
+				android:paddingStart="@dimen/content_padding_small">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/print_route"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/print_route"
+					android:scaleType="center"
+					osmand:srcCompat="@drawable/ic_action_gprint_dark"
+					android:tint="?attr/text_color_tab_active_white" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/save_as_gpx"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_save_as_gpx"
+					android:scaleType="center"
+					osmand:srcCompat="@drawable/ic_action_gsave_dark"
+					android:tint="?attr/text_color_tab_active_white" />
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/share_as_gpx"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/share_route_as_gpx"
+					android:scaleType="center"
+					osmand:srcCompat="@drawable/ic_action_gshare_dark"
+					android:tint="?attr/text_color_tab_active_white" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top"
+			android:scaleType="fitXY"
+			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/pages_control"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:background="?attr/pages_bg"
+		android:gravity="center"
+		android:layout_marginEnd="5dp"
+		android:layout_marginStart="5dp">
+
+		<View
+			android:layout_width="@dimen/pages_item_size"
+			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginLeft="@dimen/pages_item_margin"
+			android:layout_marginRight="@dimen/pages_item_padding"
+			android:background="@drawable/pages_active_dark"
+			android:layout_marginEnd="@dimen/pages_item_padding"
+			android:layout_marginStart="@dimen/pages_item_margin" />
+
+		<View
+			android:layout_width="@dimen/pages_item_size"
+			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginRight="@dimen/pages_item_margin"
+			android:background="@drawable/pages_inactive_dark"
+			android:layout_marginEnd="@dimen/pages_item_margin" />
+
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/map_hud_controls"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_marginStart="@dimen/fab_margin_right"
+		android:layout_marginLeft="@dimen/fab_margin_right"
+		android:layout_marginEnd="@dimen/fab_margin_right"
+		android:layout_marginRight="@dimen/fab_margin_right" />
+
+</FrameLayout>

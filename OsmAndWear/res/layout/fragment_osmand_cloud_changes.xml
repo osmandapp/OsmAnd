@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_basic"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/actionModeBackground"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<include layout="@layout/global_preference_toolbar" />
+
+		<net.osmand.plus.views.controls.PagerSlidingTabStrip
+			android:id="@+id/sliding_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_list_item_height" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.viewpager.widget.ViewPager
+		android:id="@+id/pager"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:layout_constraintBottom_toTopOf="@+id/buttons_container"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+	</androidx.viewpager.widget.ViewPager>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/buttons_shadow"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_top_shadow_height"
+		android:layout_gravity="bottom"
+		android:src="@drawable/shadow"
+		app:layout_constraintBottom_toBottomOf="@+id/pager"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<LinearLayout
+		android:id="@+id/buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/cancel_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				app:dialogButtonBottomMargin="@dimen/content_padding_half"
+				app:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/shared_string_control_stop"/>
+
+			<View
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1" />
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/action_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				app:dialogButtonBottomMargin="@dimen/content_padding_half"
+				app:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/upload_all"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+		android:text="@string/gpx_split_interval_descr"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingStart="@dimen/content_padding" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding" />
+
+	<include layout="@layout/custom_radio_buttons" />
+
+	<LinearLayout
+		android:id="@+id/slider_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="start"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:text="@string/shared_string_interval"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_tv"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="end"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="@string/shared_string_max" />
+
+		</LinearLayout>
+
+		<com.google.android.material.slider.Slider
+			android:id="@+id/split_slider"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:stepSize="1"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_min"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="start"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="3" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_max"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="end"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="19" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/split_interval_none_descr"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+		android:text="@string/gpx_split_interval_none_descr"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size" />
+
+</LinearLayout>

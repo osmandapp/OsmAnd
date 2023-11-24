@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/title"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:ellipsize="end"
+	android:minHeight="@dimen/bottom_sheet_list_item_height"
+	android:paddingBottom="@dimen/bottom_sheet_content_margin_small"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:textAppearance="@style/TextAppearance.ListItemTitle"
+	tools:text="Some long description"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding" />

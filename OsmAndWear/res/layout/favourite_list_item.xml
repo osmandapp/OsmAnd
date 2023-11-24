@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/change_color_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
+	android:paddingStart="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favourite_icon"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding"
+        osmand:srcCompat="@drawable/ic_action_favorite" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/map_marker_title_height">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/favourite_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/favourite_direction_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/text_margin_small"
+                android:layout_marginRight="@dimen/text_margin_small"
+                tools:src="@drawable/ic_direction_arrow" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/favourite_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="213 m" />
+
+            <View
+                android:id="@+id/favourite_left_point_space"
+                android:layout_width="@dimen/text_margin_small"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/favourite_point_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="•"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/favourite_right_point_space"
+                android:layout_width="@dimen/text_margin_small"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/favourite_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="Amsterdam Weekend" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

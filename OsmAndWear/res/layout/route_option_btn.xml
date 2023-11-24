@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/route_option_button"
+	android:layout_width="100dp"
+	android:layout_height="32dp"
+	android:orientation="horizontal">
+
+	<LinearLayout
+		android:id="@+id/route_option_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="start"
+		android:visibility="visible"
+		tools:background="@drawable/btn_border_dark">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/route_option_image_view"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingBottom="@dimen/route_info_icon_vertical_padding"
+			android:paddingLeft="@dimen/route_info_icon_vertical_padding"
+			android:paddingRight="@dimen/route_info_icon_vertical_padding"
+			android:paddingTop="@dimen/route_info_icon_vertical_padding"
+			osmand:srcCompat="@drawable/ic_action_edit_dark"
+			tools:visibility="visible"
+			android:paddingEnd="@dimen/route_info_icon_vertical_padding"
+			android:paddingStart="@dimen/route_info_icon_vertical_padding" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/route_option_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:ellipsize="end"
+			android:gravity="center"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			android:maxLines="1"
+			android:paddingBottom="3dp"
+			android:layout_marginLeft="3dp"
+			android:layout_marginStart="3dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginEnd="16dp"
+			android:paddingTop="3dp"
+			android:text="@string/routing_attr_avoid_motorway_name"
+			android:textSize="@dimen/default_sub_text_size"
+			osmand:typeface="@string/font_roboto_medium"
+			tools:ignore="UnusedAttribute"
+			tools:textColor="?attr/wikivoyage_active_color" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/avoid_route_options_container"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:orientation="horizontal"
+		android:visibility="visible"
+		tools:background="@drawable/btn_border_dark" />
+
+</LinearLayout>

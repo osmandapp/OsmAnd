@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_content_margin" />
+
+	<include
+		android:id="@+id/slider_container"
+		layout="@layout/bottom_sheet_item_slider_with_four_text" />
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic"
+		android:layout_marginStart="@dimen/content_padding" />
+
+	<include
+		android:id="@+id/button_container"
+		layout="@layout/bottom_sheet_item_btn_with_icon_and_text" />
+
+</LinearLayout>

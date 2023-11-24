@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/package_delivered_layout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/view_transparent_selection"
+	android:descendantFocusability="blocksDescendants"
+	android:minHeight="48dp"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginEnd="@dimen/route_info_end_divider_margin"
+		android:layout_marginLeft="@dimen/route_info_start_divider_margin"
+		android:layout_marginRight="@dimen/route_info_end_divider_margin"
+		android:layout_marginStart="@dimen/route_info_start_divider_margin"
+		android:background="@color/divider_color_dark"
+		android:focusable="false" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="48dp"
+		android:orientation="horizontal">
+
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/info_move"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:clickable="false"
+			android:contentDescription="@string/shared_string_more"
+			android:focusable="false"
+			android:paddingBottom="12dp"
+			android:paddingEnd="24dp"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="24dp"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingTop="12dp"
+			android:scaleType="center"
+			osmand:srcCompat="@drawable/ic_action_item_move"
+			android:visibility="visible" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/waypoint_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			osmand:srcCompat="@drawable/ic_action_favorite" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:paddingLeft="24dp"
+			android:paddingStart="24dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dp">
+
+				<TextView
+					android:id="@+id/waypoint_dist"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:maxLines="1"
+					android:textColor="@color/color_myloc_distance"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="12 km" />
+
+				<TextView
+					android:id="@+id/waypoint_deviation"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_marginLeft="6dp"
+					android:layout_marginStart="6dp"
+					android:drawablePadding="2dp"
+					android:maxLines="1"
+					android:textColor="@color/text_color_secondary_dark"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="Intermediate point " />
+
+				<TextView
+					android:id="@+id/waypoint_desc_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="@color/text_color_secondary_dark"
+					android:textSize="@dimen/default_sub_text_size"
+					tools:text="some description" />
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/waypoint_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Some waypoint text" />
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/info_close"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="2dp"
+			android:layout_marginRight="2dp"
+			android:layout_marginLeft="6dp"
+			android:layout_marginStart="6dp"
+			android:contentDescription="@string/shared_string_delete"
+			android:focusable="false"
+			android:scaleType="center"
+			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+
+	</LinearLayout>
+
+</LinearLayout>

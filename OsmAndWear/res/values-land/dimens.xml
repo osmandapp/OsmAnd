@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="first_usage_title_margin">50dp</dimen>
+    <dimen name="first_usage_title_text_size">30sp</dimen>
+
+    <dimen name="quick_action_widget_height_big">100dp</dimen>
+    <dimen name="quick_action_widget_height_small">100dp</dimen>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/action_button"
+	style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+	android:layout_width="@dimen/toolbar_height"
+	android:layout_height="@dimen/toolbar_height" />

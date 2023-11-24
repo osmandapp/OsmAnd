@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/home_work_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/card_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="8dp" />
+
+		<include layout="@layout/card_top_divider" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/card_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/route_info_card_row_min_height"
+		android:background="?attr/card_and_list_background_basic"
+		android:baselineAligned="false"
+		android:gravity="center_vertical"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:id="@+id/home_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/home_img"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginStart="@dimen/list_content_padding"
+				android:layout_marginLeft="@dimen/list_content_padding"
+				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginRight="@dimen/favorites_icon_right_margin"
+				osmand:srcCompat="@drawable/ic_action_home_dark"
+				android:tint="@color/icon_color_default_light" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/list_content_padding"
+				android:layout_marginRight="@dimen/list_content_padding"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/home_button_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/home_button"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:ignore="UnusedAttribute" />
+
+				<TextView
+					android:id="@+id/home_button_descr"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/home_button"
+					android:textColor="@color/text_color_secondary_light"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:ignore="UnusedAttribute"
+					tools:text="Amsterdam" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/buttons_divider"
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:background="?attr/divider_color_basic" />
+
+		<LinearLayout
+			android:id="@+id/work_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/work_img"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginStart="@dimen/list_content_padding"
+				android:layout_marginLeft="@dimen/list_content_padding"
+				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+				android:layout_marginRight="@dimen/favorites_icon_right_margin"
+				osmand:srcCompat="@drawable/ic_action_work"
+				android:tint="@color/icon_color_default_light" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/list_content_padding"
+				android:layout_marginRight="@dimen/list_content_padding"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/work_button_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/work_button"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:ignore="UnusedAttribute" />
+
+				<TextView
+					android:id="@+id/work_button_descr"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:text="@string/work_button"
+					android:textColor="@color/text_color_secondary_light"
+					android:textSize="@dimen/default_desc_text_size"
+					tools:ignore="UnusedAttribute"
+					tools:text="Business centre" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="14dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/bottom_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="fitXY"
+			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+	</LinearLayout>
+
+</LinearLayout>

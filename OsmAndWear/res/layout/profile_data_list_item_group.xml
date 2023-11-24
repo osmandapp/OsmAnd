@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/card_top_divider"
+		layout="@layout/card_top_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/bg_color">
+
+		<LinearLayout
+			android:id="@+id/item_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/setting_list_item_large_height"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/explicit_indicator"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				osmand:srcCompat="@drawable/ic_action_arrow_down"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:orientation="vertical"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title_tv"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/subHeaderPadding"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					osmand:lineHeight="@dimen/default_title_line_height"
+					tools:text="Quick actions" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/sub_text_tv"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/description_letter_spacing"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					osmand:lineHeight="@dimen/default_desc_line_height"
+					tools:text="8 of 4" />
+
+			</LinearLayout>
+
+			<View
+				android:id="@+id/vertical_divider"
+				android:layout_width="1dp"
+				android:layout_height="@dimen/dialog_button_height"
+				android:background="?attr/list_divider" />
+
+			<FrameLayout
+				android:id="@+id/check_box_container"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:layout_marginLeft="@dimen/content_padding_small"
+				android:layout_marginEnd="@dimen/text_margin_small"
+				android:layout_marginRight="@dimen/text_margin_small">
+
+				<net.osmand.view.ThreeStateCheckbox
+					android:id="@+id/check_box"
+					android:layout_width="@dimen/standard_icon_size"
+					android:layout_height="@dimen/standard_icon_size"
+					android:layout_gravity="center"
+					android:clickable="false"
+					android:enabled="false"
+					android:focusable="false" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/list_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<include
+		android:id="@+id/card_bottom_divider"
+		layout="@layout/card_bottom_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+</LinearLayout>

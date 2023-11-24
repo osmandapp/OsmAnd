@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="64dp"
+    android:clickable="false"
+    android:orientation="vertical">
+
+    <include layout="@layout/card_bottom_divider"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"/>
+
+    <include layout="@layout/card_top_divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:minHeight="48dp"
+        android:background="?attr/bg_color"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+	    android:paddingStart="@dimen/content_padding"
+	    android:paddingEnd="@dimen/content_padding">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="@dimen/default_list_text_size"
+            android:textColor="?android:textColorPrimary"
+            tools:text="Live updates"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggle_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"/>
+
+</LinearLayout>

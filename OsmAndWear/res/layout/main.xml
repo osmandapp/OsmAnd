@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/drawer_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:layout_gravity="start"
+	android:background="?attr/mapBackground">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<net.osmand.plus.views.MapViewWithLayers
+				android:id="@+id/map_view_with_layers"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"/>
+
+			<FrameLayout
+				android:id="@+id/MapHudButtonsOverlay"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:fitsSystemWindows="true">
+
+				<include
+					android:id="@+id/MapHudButtonsOverlayTop"
+					layout="@layout/map_hud_top" />
+
+				<FrameLayout
+					android:id="@+id/left_side_menu"
+					android:layout_width="0dp"
+					android:layout_height="0dp" />
+
+				<include
+					android:id="@+id/MapHudButtonsOverlayBottom"
+					layout="@layout/map_hud_bottom" />
+
+				<include
+					android:id="@+id/MapHudButtonsOverlayQuickActions"
+					layout="@layout/map_hud_quick_actions" />
+
+				<include
+					android:id="@+id/MapHudButtonsOverlay3DMode"
+					layout="@layout/map_hud_3d_mode" />
+			</FrameLayout>
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom">
+
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="1px" />
+
+			</FrameLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/bottomShadow"
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:layout_gravity="bottom"
+				android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+		</FrameLayout>
+
+
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<FrameLayout
+			android:id="@+id/topFragmentContainer"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<FrameLayout
+			android:id="@+id/routeMenuContainer"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<include
+			layout="@layout/dashboard_over_map"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<FrameLayout
+			android:id="@+id/fragmentContainer"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+	</FrameLayout>
+
+	<RelativeLayout
+		android:id="@+id/drawer_relative_layout"
+		android:layout_width="280dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="start">
+
+		<ListView
+			android:id="@+id/menuItems"
+			android:layout_width="280dp"
+			android:layout_height="match_parent"
+			android:layout_gravity="start"
+			android:background="?attr/bg_color"
+			android:clipToPadding="false"
+			android:drawSelectorOnTop="false" />
+
+	</RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

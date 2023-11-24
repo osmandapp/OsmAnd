@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include layout="@layout/list_item_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:orientation="vertical">
+
+		<include
+			android:id="@+id/header_container"
+			layout="@layout/backup_status_header" />
+
+		<LinearLayout
+			android:id="@+id/changes_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/divider_color_basic" />
+
+			<include
+				android:id="@+id/local_changes_button"
+				layout="@layout/preference_button_end_text" />
+
+			<include layout="@layout/divider_half_item" />
+
+			<include
+				android:id="@+id/cloud_changes_button"
+				layout="@layout/preference_button_end_text" />
+
+			<include layout="@layout/divider_half_item" />
+
+			<include
+				android:id="@+id/conflicts_button"
+				layout="@layout/preference_button_end_text" />
+
+		</LinearLayout>
+
+		<include layout="@layout/simple_divider_item" />
+
+		<include
+			android:id="@+id/sync_button"
+			layout="@layout/cloud_sync_button" />
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/dividerToDropDown"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic"
+		android:focusable="false" />
+
+	<LinearLayout
+		android:id="@+id/route_info_controls"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_and_list_background_basic"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/info_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small_half">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/firstRow"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				tools:text="34,2 km  •  39 min (17:47)" />
+
+			<LinearLayout
+				android:id="@+id/secondRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/text_margin_small"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/uphill_container"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="@dimen/content_padding"
+						android:layout_height="@dimen/content_padding"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/text_margin_small"
+						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
+						osmand:srcCompat="@drawable/ic_action_altitude_ascent_16"
+						osmand:tint="?attr/secondary_icon_color" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/uphill"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="168 m" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/downhill_container"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="@dimen/content_padding"
+						android:layout_height="@dimen/content_padding"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/text_margin_small"
+						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
+						osmand:srcCompat="@drawable/ic_action_altitude_descent_16"
+						osmand:tint="?attr/secondary_icon_color" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/downhill"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="12 m" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/emission_container"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:orientation="horizontal"
+					android:visibility="gone">
+
+					<View
+						android:layout_width="1dp"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:layout_marginVertical="@dimen/content_padding_small_half"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:background="?attr/divider_color_basic" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/emission"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="14 kg CO2 emission" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<com.github.mikephil.charting.charts.LineChart
+			android:id="@+id/chart"
+			android:layout_width="match_parent"
+			android:layout_height="72dp"
+			android:layout_gravity="center_vertical"
+			android:paddingHorizontal="@dimen/content_padding" />
+
+		<FrameLayout
+			android:id="@+id/attach_to_roads_banner_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingHorizontal="@dimen/content_padding" />
+
+		<FrameLayout
+			android:id="@+id/button_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/details_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				osmand:dialogButtonType="stroked"
+				osmand:dialogButtonTitle="@string/shared_string_details"/>
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/shadow"
+		layout="@layout/card_bottom_divider"
+		android:visibility="visible" />
+
+</LinearLayout>

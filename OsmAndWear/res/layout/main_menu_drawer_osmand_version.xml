@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
+	android:orientation="vertical"
+	android:paddingHorizontal="@dimen/content_padding"
+	android:paddingVertical="@dimen/content_padding_small"
+	android:gravity="start|center_vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/osmand_version"
+		style="@style/TitleStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:maxLines="1"
+		android:ellipsize="end"
+		android:textColor="?android:textColorPrimary"
+		tools:text="OsmAnd 4.1.0#33591m" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/release_date"
+		style="@style/DescStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:visibility="gone"
+		android:maxLines="1"
+		android:ellipsize="end"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Released: 2020-02-15"
+		tools:visibility="visible" />
+
+</LinearLayout>
