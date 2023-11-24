@@ -2,22 +2,22 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.utils.AbstractComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageValueComputer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 
 public class TimeIntervalCard extends BaseCard {
 
@@ -96,7 +96,7 @@ public class TimeIntervalCard extends BaseCard {
 	@NonNull
 	private Map<Long, String> collectAvailableIntervals() {
 		Map<Long, String> intervals = new LinkedHashMap<>();
-		for (long interval : AbstractComputer.MEASURED_INTERVALS) {
+		for (long interval : AverageValueComputer.MEASURED_INTERVALS) {
 			boolean seconds = interval < 60 * 1000;
 			String timeInterval = seconds
 					? String.valueOf(interval / 1000)

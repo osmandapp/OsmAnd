@@ -22,7 +22,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AverageSpeedComputer extends AbstractComputer {
+public class AverageSpeedComputer extends AverageValueComputer {
 
 	private static final boolean CALCULATE_UNIFORM_SPEED = true;
 

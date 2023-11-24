@@ -119,23 +119,20 @@ public enum WidgetsPanel {
 
 	@NonNull
 	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
-												 @NonNull String widgetId,
-												 @NonNull OsmandSettings settings) {
-		ListStringPreference orderPreference = getOrderPreference(settings);
-		List<String> pages = orderPreference.getStringsListForProfile(appMode);
-		if (Algorithms.isEmpty(pages)) {
-			return Pair.create(0, DEFAULT_ORDER);
-		}
-
-		for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
-			String page = pages.get(pageIndex);
-			List<String> orders = Arrays.asList(page.split(","));
-			int order = orders.indexOf(widgetId);
-			if (order != -1) {
-				return Pair.create(pageIndex, order);
+	                                             @NonNull String widgetId,
+	                                             @NonNull OsmandSettings settings) {
+		ListStringPreference preference = getOrderPreference(settings);
+		List<String> pages = preference.getStringsListForProfile(appMode);
+		if (!Algorithms.isEmpty(pages)) {
+			for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
+				String page = pages.get(pageIndex);
+				List<String> orders = Arrays.asList(page.split(","));
+				int order = orders.indexOf(widgetId);
+				if (order != -1) {
+					return Pair.create(pageIndex, order);
+				}
 			}
 		}
-
 		return Pair.create(0, DEFAULT_ORDER);
 	}
 
