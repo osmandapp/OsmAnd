@@ -63,7 +63,7 @@ import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

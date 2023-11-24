@@ -34,7 +34,8 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -150,8 +151,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	public void bindInfoRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
 	                        @NonNull GpxDataItem dataItem, boolean shouldShowFolder) {
 		setupIcon(dataItem);
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
-		String cityName = dataItem.getNearestCityName();
+		GpxData gpxData = dataItem.getGpxData();
+		GPXTrackAnalysis analysis = gpxData.getAnalysis();
+		String cityName = gpxData.getNearestCityName();
 		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
@@ -180,7 +182,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupIcon(@NonNull GpxDataItem item) {
-		setupIcon(item.getColor(), item.getWidth(), item.isShowArrows());
+		GpxData gpxData = item.getGpxData();
+		setupIcon(gpxData.getColor(), gpxData.getWidth(), gpxData.isShowArrows());
 	}
 
 	private void setupIcon(int color, String width, boolean showArrows) {
@@ -203,9 +206,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
-		if (item.getDataItem() != null && item.getDataItem().getFileCreationTime() > 10) {
+		GpxData gpxData = item.getDataItem().getGpxData();
+		if (item.getDataItem() != null && gpxData.getFileCreationTime() > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			builder.append(format.format(new Date(item.getDataItem().getFileCreationTime())));
+			builder.append(format.format(new Date(gpxData.getFileCreationTime())));
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}

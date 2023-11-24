@@ -65,7 +65,8 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -1206,7 +1207,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				color = dataItem.getColor();
+				color = dataItem.getGpxData().getColor();
 			}
 		}
 		return color != 0 ? color : gpxFile.getColor(defaultColor);
@@ -1234,8 +1235,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getColoringType());
-				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getColoringType());
+				GpxData gpxData = dataItem.getGpxData();
+				coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getColoringType());
+				routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getColoringType());
 			}
 		}
 
@@ -1266,7 +1268,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				width = dataItem.getWidth();
+				width = dataItem.getGpxData().getWidth();
 			}
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
@@ -1282,7 +1284,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.isShowArrows();
+				return dataItem.getGpxData().isShowArrows();
 			}
 			return gpxFile.isShowArrows();
 		}
@@ -1298,7 +1300,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.isShowStartFinish();
+				return dataItem.getGpxData().isShowStartFinish();
 			}
 			return gpxFile.isShowStartFinish();
 		}

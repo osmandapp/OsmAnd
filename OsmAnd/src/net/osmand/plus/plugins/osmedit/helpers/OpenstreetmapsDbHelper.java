@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
@@ -159,7 +159,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			rowsMap.put(OPENSTREETMAP_COL_CHANGED_TAGS, chTags == null ? null : changedTags.toString());
 			rowsMap.put(OPENSTREETMAP_COL_ENTITY_TYPE, Entity.EntityType.valueOf(entity));
 
-			db.execSQL(AndroidUtils.createDbInsertQuery(OPENSTREETMAP_TABLE_NAME, rowsMap.keySet()),
+			db.execSQL(AndroidDbUtils.createDbInsertQuery(OPENSTREETMAP_TABLE_NAME, rowsMap.keySet()),
 					rowsMap.values().toArray());
 
 			db.close();

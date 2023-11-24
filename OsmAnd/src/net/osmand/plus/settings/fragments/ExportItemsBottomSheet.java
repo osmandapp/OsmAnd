@@ -59,7 +59,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -507,7 +507,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String getTrackDescrForDataItem(@NonNull GpxDataItem dataItem) {
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		GPXTrackAnalysis analysis = dataItem.getGpxData().getAnalysis();
 		if (analysis != null) {
 			File parent = dataItem.getFile().getParentFile();
 			String folder = Algorithms.capitalizeFirstLetter(parent.getName());

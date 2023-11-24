@@ -43,7 +43,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			val result = trackItem.dataItem!!.fileCreationTime in valueFrom..valueTo
+			val result = trackItem.dataItem!!.gpxData.fileCreationTime in valueFrom..valueTo
 			result
 		}
 	}

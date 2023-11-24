@@ -11,7 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
 import net.osmand.util.Algorithms;
 
@@ -506,7 +506,7 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
 							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile)));
 
-							conn.execSQL(AndroidUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
+							conn.execSQL(AndroidDbUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
 									rowsMap.values().toArray());
 						} finally {
 							conn.close();

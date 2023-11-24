@@ -20,7 +20,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
@@ -389,12 +388,13 @@ public class GpsFilterHelper {
 
 		public static void writeValidFilterValuesToExtensions(@NonNull Map<String, String> gpxExtensions,
 		                                                      @NonNull GpxDataItem dataItem) {
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, dataItem.getSmoothingThreshold());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, dataItem.getMinFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, dataItem.getMaxFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, dataItem.getMinFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, dataItem.getMaxFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, dataItem.getMaxFilterHdop());
+			GpxData gpxData = dataItem.getGpxData();
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, gpxData.getSmoothingThreshold());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, gpxData.getMinFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, gpxData.getMaxFilterSpeed());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, gpxData.getMinFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, gpxData.getMaxFilterAltitude());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, gpxData.getMaxFilterHdop());
 		}
 
 		private static void writeValueToExtensionsIfValid(@NonNull Map<String, String> gpxExtensions,

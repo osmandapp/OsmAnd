@@ -27,10 +27,10 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -265,8 +265,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
-				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
-				GpxDataItem item = new GpxDataItem(fout, analysis);
+				GpxDataItem item = new GpxDataItem(fout);
+				item.getGpxData().setAnalysis(gpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 				saveTrackAppearance(item);
@@ -647,7 +647,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(POINT_COL_ICON, iconName);
 		rowsMap.put(POINT_COL_BACKGROUND, backgroundName);
 
-		execWithClose(AndroidUtils.createDbInsertQuery(POINT_NAME, rowsMap.keySet()), rowsMap.values().toArray());
+		execWithClose(AndroidDbUtils.createDbInsertQuery(POINT_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 		return pt;
 	}
 
@@ -794,7 +794,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(TRACK_COL_DATE, time);
 		rowsMap.put(TRACK_COL_HEADING, Float.isNaN(heading) ? null : heading);
 		rowsMap.put(TRACK_COL_PLUGINS_INFO, pluginsInfo);
-		execWithClose(AndroidUtils.createDbInsertQuery(TRACK_NAME, rowsMap.keySet()), rowsMap.values().toArray());
+		execWithClose(AndroidDbUtils.createDbInsertQuery(TRACK_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
 	public void loadGpxFromDatabase() {
