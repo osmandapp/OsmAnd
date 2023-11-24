@@ -3190,7 +3190,7 @@
     <string name="use_live_routing">Date live OsmAnd</string>
     <string name="complex_routing_descr">Rutarea în două faze pentru navigația auto.</string>
     <string name="use_fast_recalculation_desc">Recalculează doar partea inițială a traseului, utilă pentru călătoriile lungi.</string>
-    <string name="use_native_pt">Dezvoltarea transportului public autohton</string>
+    <string name="use_native_pt">Dezvoltare transport public autohton</string>
     <string name="use_native_pt_desc">Comutați la Java (safe) Public Transport pentru transportul public în comun</string>
     <string name="perform_oauth_authorization_description">Conectați-vă cu OAuth pentru a utiliza facilitățile osmedit</string>
     <string name="perform_oauth_authorization">Conectați-vă folosind OAuth</string>

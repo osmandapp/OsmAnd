@@ -17,7 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -98,7 +98,7 @@ public class TracksCard extends MapBaseCard {
 			GpxDataItem dataItem = getDataItem(item.info);
 			GPXTrackAnalysis analysis = null;
 			if (dataItem != null) {
-				analysis = dataItem.getAnalysis();
+				analysis = dataItem.getGpxData().getAnalysis();
 			}
 			GpxUiHelper.updateGpxInfoView(v, item.title, item.info, analysis, app);
 

@@ -33,7 +33,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -113,7 +113,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void setupRegion() {
-		String cityName = dataItem != null ? dataItem.getNearestCityName() : null;
+		String cityName = dataItem != null ? dataItem.getGpxData().getNearestCityName() : null;
 		TextView regionText = view.findViewById(R.id.region);
 		regionText.setText(cityName);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.region_container), !Algorithms.isEmpty(cityName));

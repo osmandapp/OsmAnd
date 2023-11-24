@@ -12,7 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -113,7 +113,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			rowsMap.put(OSMBUGS_COL_ACTION, OsmPoint.stringAction.get(p.getAction()));
 			rowsMap.put(OSMBUGS_COL_AUTHOR, p.getAuthor());
 
-			db.execSQL(AndroidUtils.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap.keySet()),
+			db.execSQL(AndroidDbUtils.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap.keySet()),
 					rowsMap.values().toArray());
 			checkOsmBugsPoints(db);
 			updateLastModifiedTime();

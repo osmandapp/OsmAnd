@@ -21,7 +21,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -69,7 +69,7 @@ public class TrackEditCard extends MapBaseCard {
 		if (file != null) {
 			GpxDataItem dataItem = getDataItem(gpxInfo);
 			if (dataItem != null) {
-				analysis = dataItem.getAnalysis();
+				analysis = dataItem.getGpxData().getAnalysis();
 			}
 		} else {
 			analysis = gpxFile.getAnalysis(0);

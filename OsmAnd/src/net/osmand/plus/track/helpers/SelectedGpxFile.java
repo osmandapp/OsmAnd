@@ -13,7 +13,6 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
