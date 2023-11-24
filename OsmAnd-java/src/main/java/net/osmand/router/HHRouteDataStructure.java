@@ -1,6 +1,9 @@
 package net.osmand.router;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +13,8 @@ import java.util.Queue;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -142,6 +147,9 @@ public class HHRouteDataStructure {
 		// Initial data structure
 		RoutingContext rctx; 
 		HHRoutingDB networkDB;
+		BinaryMapIndexReader file;
+		HHRouteRegion fileRegion;
+		int routingProfile = 0;
 		
 		// Global network data structure 
 		TLongObjectHashMap<T> pointsById;
@@ -168,6 +176,8 @@ public class HHRouteDataStructure {
 		Queue<NetworkDBPointCost<T>> queue = createQueue();
 		Queue<NetworkDBPointCost<T>> queuePos = createQueue();
 		Queue<NetworkDBPointCost<T>> queueRev = createQueue();
+
+		
 
 		private PriorityQueue<NetworkDBPointCost<T>> createQueue() {
 			return new PriorityQueue<>(new Comparator<NetworkDBPointCost<T>>() {
@@ -223,6 +233,51 @@ public class HHRouteDataStructure {
 
 		public Queue<NetworkDBPointCost<T>> queue(boolean rev) {
 			return USE_GLOBAL_QUEUE ? queue : (rev ? queueRev : queuePos);
+		}
+
+		public TLongObjectHashMap<T> loadNetworkPoints(Class<T> pointClass) throws SQLException, IOException {
+			if (networkDB != null) {
+				return networkDB.loadNetworkPoints(pointClass);
+			}
+			if (file != null) {
+				return file.initHHPoints(fileRegion, pointClass);
+			}
+			throw new IllegalStateException();
+		}
+
+		public int loadNetworkSegments(Collection<T> valueCollection) throws SQLException {
+			if (networkDB != null) {
+				return networkDB.loadNetworkSegments(valueCollection, routingProfile);
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		public boolean loadGeometry(NetworkDBSegment segment, boolean reload) throws SQLException {
+			if (networkDB != null && !networkDB.compactDB) {
+				networkDB.loadGeometry(segment, routingProfile, reload);
+				return true;
+			}
+			return false;
+		}
+
+		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException {
+			if (networkDB != null) {
+				return networkDB.loadNetworkSegmentPoint(pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+			}
+			if (file != null) {
+				return file.loadNetworkSegmentPoint(fileRegion, pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		public String getRoutingProfile() {
+			if (networkDB != null) {
+				return networkDB.getRoutingProfiles().get(routingProfile);
+			}
+			if (fileRegion != null) {
+				return fileRegion.profile + " [" + fileRegion.profileParams.get(routingProfile) + "] ";
+			}
+			throw new UnsupportedOperationException();
 		}
 		
 	}

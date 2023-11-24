@@ -442,6 +442,12 @@ public class BinaryMapIndexReader {
 		return hhAdapter.initRegionAndLoadPoints(r, cl);
 	}
 
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion, TLongObjectHashMap<T> pointsById,
+			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, 
+			int routingProfile, T point, boolean reverse) {
+		return hhAdapter.loadNetworkSegmentPoint(fileRegion, pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+	}
+	
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
@@ -2841,4 +2847,6 @@ public class BinaryMapIndexReader {
 			}
 		}
 	}
+
+	
 }

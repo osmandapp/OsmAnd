@@ -9,11 +9,11 @@ import org.apache.commons.logging.Log;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
 import net.osmand.data.QuadRect;
-import net.osmand.router.HHRoutePlanner;
 import net.osmand.router.HHRoutingDB.NetworkDBPoint;
 import net.osmand.util.MapUtils;
 
@@ -280,6 +280,13 @@ public class BinaryHHRouteReaderAdapter {
 			}
 		}
 		
+	}
+
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion, TLongObjectHashMap<T> pointsById,
+			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints,
+			int routingProfile, T point, boolean reverse) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
