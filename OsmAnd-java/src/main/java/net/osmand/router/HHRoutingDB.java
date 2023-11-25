@@ -235,8 +235,8 @@ public class HHRoutingDB {
 				point.connectedSet(false, parseSegments(rs.getBytes(3), pntsById, clusterOutPoints.get(point.dualPoint.clusterId), point, true));
 				return point.connected(true).size() + point.connected(false).size();
 			} else {
-				point.connectedSet(true, new ArrayList<>());
-				point.connectedSet(false, new ArrayList<>());
+				point.connectedSet(true, new ArrayList<NetworkDBSegment>());
+				point.connectedSet(false, new ArrayList<NetworkDBSegment>());
 			}
 			return 0;
 		} else {
