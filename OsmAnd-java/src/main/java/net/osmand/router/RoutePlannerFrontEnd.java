@@ -13,11 +13,15 @@ import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
+import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.router.HHRoutingDB.NetworkDBPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,7 +41,8 @@ public class RoutePlannerFrontEnd {
 	public boolean useSmartRouteRecalculation = true;
 	public boolean useNativeApproximation = true;
 
-	private static final boolean TRACE_ROUTING = false;
+	static boolean TRACE_ROUTING = false;
+	public static boolean USE_HH_ROUTING = true;
 
 	
 	public RoutePlannerFrontEnd() {
@@ -769,6 +774,18 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
+		if (USE_HH_ROUTING && intermediatesEmpty) {
+			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
+			try {
+				HHNetworkRouteRes res = routePlanner.runRouting(start, end, HHRoutingConfig.astar(0).calcDetailed(2));
+				if (res.error == null) {
+					return res.detailed;
+				}
+			} catch (SQLException e) {
+				throw new IOException(e.getMessage(), e);
+			}
+		}
+		
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;

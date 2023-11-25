@@ -108,14 +108,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c = new HHRoutingConfig();
 			// test data for debug swap
 //			c = HHRoutingConfig.dijkstra(0); 
-			c = HHRoutingConfig.astar(1);
+			c = HHRoutingConfig.astar(0);
 //			c = HHRoutingConfig.ch();
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
 			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 1;
+			DEBUG_VERBOSE_LEVEL = 0;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -131,8 +131,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
 		if (hctx == null) {
-			System.err.println("Files for hh routing were not initialized. Route couldn't be calculated.");
-			return new HHNetworkRouteRes();
+			HHNetworkRouteRes res = new HHNetworkRouteRes();
+			res.error = "Files for hh routing were not initialized. Route couldn't be calculated.";
+			return res;
 		}
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			printGCInformation();
@@ -650,7 +651,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 	
 	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException, IOException {
-		
+		float DIR_CONFIG = hctx.config.DIJKSTRA_DIRECTION;
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
 			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
@@ -682,6 +683,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (point.rt(!rev).rtVisited) {
 				if (hctx.stats.firstRouteVisitedVertices == 0) {
 					hctx.stats.firstRouteVisitedVertices = hctx.stats.visitedVertices;
+					if (DIR_CONFIG == 0 && hctx.config.HEURISTIC_COEFFICIENT != 0) {
+						// focus on 1 direction as it slightly faster
+						DIR_CONFIG = rev ? -1 : 1;
+					}
 				}
 				if (hctx.config.HEURISTIC_COEFFICIENT == 0 && hctx.config.DIJKSTRA_DIRECTION == 0) {
 					// Valid only HC=0, Dijkstra as we run Many-to-Many - Test( Lat 49.12691 Lon 9.213685 -> Lat 49.155483 Lon 9.2140045)
@@ -690,7 +695,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					finalPoint = scanFinalPoint(finalPoint, hctx.visitedRev);
 					return finalPoint;
 				} else {
-					// TODO 2.1 HHRoutePlanner Improve / Review A* / Dijkstra finish condition (many to many)
 					double rcost = point.rt(true).rtDistanceFromStart + point.rt(false).rtDistanceFromStart;
 					if (rcost <= pointCost.cost) {
 						// Universal condition to stop: works for any algorithm - cost equals to route length
@@ -716,7 +720,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (hctx.config.MAX_SETTLE_POINTS > 0 && (rev ? hctx.visitedRev : hctx.visited).size() > hctx.config.MAX_SETTLE_POINTS) {
 				break;
 			}
-			boolean directionAllowed = (hctx.config.DIJKSTRA_DIRECTION <= 0 && rev) || (hctx.config.DIJKSTRA_DIRECTION >= 0 && !rev);
+			
+			boolean directionAllowed = (DIR_CONFIG <= 0 && rev) || (DIR_CONFIG >= 0 && !rev);
 			if (directionAllowed) {
 				addConnectedToQueue(hctx, queue, point, rev);
 			}
@@ -824,7 +829,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		NetworkDBSegment segment = res.segment;
 		hctx.rctx.config.planRoadDirection = 0; // A* bidirectional
 		hctx.rctx.config.heuristicCoefficient = 1;
-		// TODO 2.12 should be speed up by just clearing visited
+		// SPEEDUP: Speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// if (c.USE_GC_MORE_OFTEN) {
 		// printGCInformation();

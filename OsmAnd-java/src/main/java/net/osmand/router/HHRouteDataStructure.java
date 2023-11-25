@@ -324,6 +324,7 @@ public class HHRouteDataStructure {
 		public List<RouteSegmentResult> detailed = new ArrayList<>();
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
 		public TLongHashSet uniquePoints = new TLongHashSet();
+		public String error;
 		
 		public double getHHRoutingTime() {
 			double d = 0;
