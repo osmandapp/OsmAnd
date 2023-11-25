@@ -226,10 +226,14 @@ public class HHRouteDataStructure {
 		}
 
 		public void setStartEnd(LatLon start, LatLon end) {
-			startY = MapUtils.get31TileNumberY(start.getLatitude());
-			startX = MapUtils.get31TileNumberX(start.getLongitude());
-			endY = MapUtils.get31TileNumberY(end.getLatitude());
-			endX = MapUtils.get31TileNumberX(end.getLongitude());
+			if (start != null) {
+				startY = MapUtils.get31TileNumberY(start.getLatitude());
+				startX = MapUtils.get31TileNumberX(start.getLongitude());
+			}
+			if (end != null) {
+				endY = MapUtils.get31TileNumberY(end.getLatitude());
+				endX = MapUtils.get31TileNumberX(end.getLongitude());
+			}
 		}
 
 		public Queue<NetworkDBPointCost<T>> queue(boolean rev) {
@@ -280,7 +284,7 @@ public class HHRouteDataStructure {
 			if (fileRegion != null) {
 				return fileRegion.profile + " [" + fileRegion.profileParams.get(routingProfile) + "] ";
 			}
-			throw new UnsupportedOperationException();
+			return "";
 		}
 		
 	}

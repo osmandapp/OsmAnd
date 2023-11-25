@@ -1,6 +1,7 @@
 package net.osmand.router;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +30,8 @@ public class HHRoutingDB {
 
 	protected static final int XY_SHORTCUT_GEOM = 0;
 
-	protected Connection conn;
+	protected final Connection conn;
+	protected final File file;
 	protected PreparedStatement loadGeometry;
 	protected PreparedStatement loadSegmentEnd;
 	protected PreparedStatement loadSegmentStart;
@@ -48,8 +50,9 @@ public class HHRoutingDB {
 		}
 	};
 	
-	public HHRoutingDB(Connection conn) throws SQLException {
+	public HHRoutingDB(File f, Connection conn) throws SQLException {
 		this.conn = conn;
+		this.file = f;
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
 		st.execute("CREATE TABLE IF NOT EXISTS profiles(id, params)");
@@ -93,6 +96,10 @@ public class HHRoutingDB {
 			routingProfiles.put(rs.getInt(1), rs.getString(2));
 		}
 		st.close();
+	}
+	
+	public File getFile() {
+		return file;
 	}
 	
 	public TIntObjectHashMap<String> getRoutingProfiles() {
