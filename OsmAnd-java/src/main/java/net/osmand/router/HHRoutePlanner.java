@@ -369,34 +369,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c, LatLon start, LatLon end) throws SQLException, IOException {
 		HHRoutingContext<T> hctx = this.cacheHctx;
 		if (hctx.networkDB == null) {
-			BinaryMapIndexReader selected = null;
-			HHRouteRegion selectedRegion = null;
-			String profile = hctx.rctx.config.router.getProfileName();
-			profile = hctx.rctx.config.router.getProfile().toString().toLowerCase();
-			for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
-				for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
-					// TODO here we could take into account hhregion.profileParams
-					if (hhregion.profile.equals(profile) && hhregion.top.contains(start)
-							&& hhregion.top.contains(end)) {
-						selectedRegion = hhregion;
-						selected = r;
-						break;
-					}
-				}
-				if (selected != null) {
-					break;
-				}
-			}
-			if (selectedRegion == null) {
-				return null;
-			}
-			if (selected != hctx.file && selectedRegion != hctx.fileRegion) {
-				HHRoutingContext<T> cp = new HHRoutingContext<T>();
-				cp.file = selected;
-				cp.fileRegion = selectedRegion;
-				System.out.println("Initialize new context");
-				hctx = initEmptyContext(hctx.rctx, cp);
-			}
+			hctx = selectBestRoutingNetwork(start, end, hctx);
 			
 		}
 		System.out.printf("Selected file %s, routing profile = %s \n",
@@ -444,6 +417,64 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}		
 		hctx.pointsRect.printStatsDistribution("Points distributed");
 		
+		return hctx;
+	}
+
+
+	private HHRoutingContext<T> selectBestRoutingNetwork(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
+		BinaryMapIndexReader selected = null;
+		HHRouteRegion selectedRegion = null;
+		int selectedProfile = hctx.routingProfile;
+		int minExtraParam = Integer.MAX_VALUE;
+		int maxMatchingParams = 0;
+		GeneralRouter router = hctx.rctx.config.router;
+//		String profile = router.getProfileName();
+		String profile = router.getProfile().toString().toLowerCase(); // use base profile
+		List<String> ls = router.serializeParameterValues(router.getParameterValues());
+		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
+			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
+				if (hhregion.profile.equals(profile) && hhregion.top.contains(start) && hhregion.top.contains(end)) {
+					for (int k = 0; k < hhregion.profileParams.size(); k++) {
+						String[] params = hhregion.profileParams.get(k).split(",");
+						int extraParam = 0, matchParam = 0;
+						for (String p : params) {
+							if (p.trim().length() == 0) {
+								continue;
+							}
+							if (!ls.contains(p)) {
+								extraParam++;
+							} else {
+								matchParam++;
+							}
+						}
+						if (extraParam > minExtraParam) {
+							// not a good match
+						} else if (extraParam < minExtraParam || matchParam > maxMatchingParams) {
+							selectedRegion = hhregion;
+							selected = r;
+							selectedProfile = k;
+							minExtraParam = extraParam;
+							maxMatchingParams = matchParam;
+						}
+					}
+				}
+			}
+			if (selected != null) {
+				break;
+			}
+		}
+		if (selectedRegion == null) {
+			return null;
+		}
+		if (selected != hctx.file || selectedRegion != hctx.fileRegion ||
+				selectedProfile != hctx.routingProfile) {
+			HHRoutingContext<T> cp = new HHRoutingContext<T>();
+			cp.file = selected;
+			cp.fileRegion = selectedRegion;
+			cp.routingProfile = selectedProfile; 
+			System.out.println("Initialize new context");
+			hctx = initEmptyContext(hctx.rctx, cp);
+		}
 		return hctx;
 	}
 

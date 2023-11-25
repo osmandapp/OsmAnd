@@ -442,16 +442,6 @@ public class BinaryMapIndexReader {
 		return "";
 	}
 	
-	
-	public HHRouteRegion hasHHProfile(String hhProfile) {
-		for (HHRouteRegion r : hhIndexes) {
-			if (r.profile.equals(hhProfile)) {
-				return r;
-			}
-		}
-		return null;
-	}
-	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion r, Class<T> cl) throws IOException {
 		return hhAdapter.initRegionAndLoadPoints(r, cl);
 	}

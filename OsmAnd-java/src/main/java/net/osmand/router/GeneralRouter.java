@@ -56,6 +56,7 @@ public class GeneralRouter implements VehicleRouter {
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters;
+	private final Map<String, String> parameterValues; 
 	private final Map<String, Integer> universalRules;
 	private final List<String> universalRulesById;
 	private final Map<String, BitSet> tagRuleMask;
@@ -86,7 +87,8 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private GeneralRouterProfile profile;
 	
-	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;	
+	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;
+		
 	
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
@@ -143,9 +145,11 @@ public class GeneralRouter implements VehicleRouter {
 		// do not copy, keep linked
 		universalRules = parent.universalRules;
 		universalRulesById = parent.universalRulesById;
+		parameterValues = params;
 		tagRuleMask = parent.tagRuleMask;
 		ruleToValue = parent.ruleToValue;
 		parameters = parent.parameters;
+		profileName = parent.profileName;
 		
 		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
 		for (int i = 0; i < objectAttributes.length; i++) {
@@ -182,6 +186,7 @@ public class GeneralRouter implements VehicleRouter {
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
 		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
+		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
 		while(e.hasNext()){
 			Entry<String, String> next = e.next();
@@ -237,6 +242,24 @@ public class GeneralRouter implements VehicleRouter {
 
 	public Map<String, RoutingParameter> getParameters() {
 		return parameters;
+	}
+	
+	public Map<String, String> getParameterValues() {
+		return parameterValues;
+	}
+	
+	public List<String> serializeParameterValues(Map<String, String> vls) {
+		List<String> ls = new ArrayList<String>();
+		for (Entry<String, String> e : vls.entrySet()) {
+			if (parameters.containsKey(e.getKey())) {
+				if (parameters.get(e.getKey()).type == RoutingParameterType.BOOLEAN) {
+					ls.add(e.getKey());
+				} else {
+					ls.add(e.getKey() + "=" + e.getValue());
+				}
+			}
+		}
+		return ls;
 	}
 
 	public void addAttribute(String k, String v) {

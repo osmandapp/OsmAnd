@@ -493,7 +493,7 @@ public class RoutingConfiguration {
 	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config, String filename) {
 		String currentSelectedRouterName = parser.getAttributeValue("", "name");
 		Map<String, String> attrs = new LinkedHashMap<String, String>();
-		for(int i=0; i< parser.getAttributeCount(); i++) {
+		for (int i = 0; i < parser.getAttributeCount(); i++) {
 			attrs.put(parser.getAttributeName(i), parser.getAttributeValue(i));
 		}
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
