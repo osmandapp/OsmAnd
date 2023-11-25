@@ -1,6 +1,8 @@
 package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRoutePointsBox;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -13,6 +15,7 @@ import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.OsmandIndex.AddressPart;
 import net.osmand.binary.OsmandIndex.CityBlock;
 import net.osmand.binary.OsmandIndex.FileIndex;
+import net.osmand.binary.OsmandIndex.HHRoutingPart;
 import net.osmand.binary.OsmandIndex.MapLevel;
 import net.osmand.binary.OsmandIndex.MapPart;
 import net.osmand.binary.OsmandIndex.OsmAndStoredIndex;
@@ -156,6 +159,23 @@ public class CachedOsmandIndexes {
 				addRouteSubregion(routing, sub, true);
 			}
 			fileIndex.addRoutingIndex(routing);
+		}
+		
+		for (HHRouteRegion index : reader.getHHRoutingIndexes()) {
+			HHRoutingPart.Builder routing = OsmandIndex.HHRoutingPart.newBuilder();
+			routing.setSize(index.getLength());
+			routing.setOffset(index.getFilePointer());
+			routing.setEdition(index.edition);
+			routing.addAllProfileParams(index.profileParams);
+			routing.setProfile(index.profile);
+			
+			routing.setPointsLength(index.top.length);
+			routing.setPointsOffset(index.top.filePointer);
+			routing.setBottom(index.top.bottom);
+			routing.setTop(index.top.top);
+			routing.setLeft(index.top.left);
+			routing.setRight(index.top.right);
+			fileIndex.addHhRoutingIndex(routing);
 		}
 
 		FileIndex fi = fileIndex.build();
@@ -322,6 +342,22 @@ public class CachedOsmandIndexes {
 				}
 			}
 			reader.routingIndexes.add(mi);
+			reader.indexes.add(mi);
+		}
+		
+		for (HHRoutingPart index : found.getHhRoutingIndexList()) {
+			HHRouteRegion mi = new HHRouteRegion();
+			mi.length = (int) index.getSize();
+			mi.filePointer = (int) index.getOffset();
+			mi.edition = index.getEdition();
+			mi.profile = index.getProfile();
+			mi.profileParams = index.getProfileParamsList();
+			mi.top = new HHRoutePointsBox();
+			mi.top.bottom = index.getBottom();
+			mi.top.right = index.getRight();
+			mi.top.left = index.getLeft();
+			mi.top.top = index.getTop();
+			reader.hhIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
 

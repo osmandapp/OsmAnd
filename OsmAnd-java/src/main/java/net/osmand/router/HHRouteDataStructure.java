@@ -153,6 +153,7 @@ public class HHRouteDataStructure {
 		
 		// Global network data structure 
 		TLongObjectHashMap<T> pointsById;
+		TLongObjectHashMap<T> pointsByFileId;
 		TLongObjectHashMap<T> pointsByGeo;
 		TIntObjectHashMap<List<T>> clusterInPoints;
 		TIntObjectHashMap<List<T>> clusterOutPoints;
@@ -260,12 +261,14 @@ public class HHRouteDataStructure {
 			return false;
 		}
 
-		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException {
+		public int loadNetworkSegmentPoint(T point, boolean reverse) throws SQLException, IOException {
 			if (networkDB != null) {
-				return networkDB.loadNetworkSegmentPoint(pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+				return networkDB.loadNetworkSegmentPoint(pointsById, clusterInPoints, clusterOutPoints, routingProfile,
+						point, reverse);
 			}
 			if (file != null) {
-				return file.loadNetworkSegmentPoint(fileRegion, pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+				return file.loadNetworkSegmentPoint(fileRegion, pointsById, pointsByFileId, clusterInPoints,
+						clusterOutPoints, routingProfile, point, reverse);
 			}
 			throw new UnsupportedOperationException();
 		}

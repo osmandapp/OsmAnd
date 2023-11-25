@@ -338,6 +338,10 @@ public class BinaryMapIndexReader {
 	public List<RouteRegion> getRoutingIndexes() {
 		return routingIndexes;
 	}
+	
+	public List<HHRouteRegion> getHHRoutingIndexes() {
+		return hhIndexes;
+	}
 
 	public boolean isBasemap() {
 		return basemap;
@@ -438,14 +442,26 @@ public class BinaryMapIndexReader {
 		return "";
 	}
 	
+	
+	public HHRouteRegion hasHHProfile(String hhProfile) {
+		for (HHRouteRegion r : hhIndexes) {
+			if (r.profile.equals(hhProfile)) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion r, Class<T> cl) throws IOException {
 		return hhAdapter.initRegionAndLoadPoints(r, cl);
 	}
 
-	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion, TLongObjectHashMap<T> pointsById,
-			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, 
-			int routingProfile, T point, boolean reverse) {
-		return hhAdapter.loadNetworkSegmentPoint(fileRegion, pointsById, clusterInPoints, clusterOutPoints, routingProfile, point, reverse);
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion,
+			TLongObjectHashMap<T> pointsById, TLongObjectHashMap<T> pointsByFileId,
+			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, int routingProfile,
+			T point, boolean reverse) throws IOException {
+		return hhAdapter.loadNetworkSegmentPoint(fileRegion, pointsById, pointsByFileId, clusterInPoints,
+				clusterOutPoints, routingProfile, point, reverse);
 	}
 	
 	public String getRegionName() {

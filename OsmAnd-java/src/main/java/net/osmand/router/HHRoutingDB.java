@@ -115,10 +115,13 @@ public class HHRoutingDB {
 		return id;
 	}
 	
-	private List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
+	public static List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
 			List<? extends NetworkDBPoint> lst, NetworkDBPoint pnt, boolean out)  {
 		try {
 			List<NetworkDBSegment> l = new ArrayList<>();
+			if (bytes == null) {
+				return l;
+			}
 			ByteArrayInputStream str = new ByteArrayInputStream(bytes);
 			for (int i = 0; i < lst.size(); i++) {
 				int d = CodedInputStream.readRawVarint32(str);

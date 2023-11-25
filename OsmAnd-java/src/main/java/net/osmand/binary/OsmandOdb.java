@@ -69086,20 +69086,20 @@ public final class OsmandOdb {
        */
       int getIdRangeLength();
 
-      // required int32 profileId = 3;
+      // optional int32 profileId = 3;
       /**
-       * <code>required int32 profileId = 3;</code>
+       * <code>optional int32 profileId = 3;</code>
        *
        * <pre>
-       * profileParams specific segments
+       * profileParams specific segments (required on top level)
        * </pre>
        */
       boolean hasProfileId();
       /**
-       * <code>required int32 profileId = 3;</code>
+       * <code>optional int32 profileId = 3;</code>
        *
        * <pre>
-       * profileParams specific segments
+       * profileParams specific segments (required on top level)
        * </pre>
        */
       int getProfileId();
@@ -69350,24 +69350,24 @@ public final class OsmandOdb {
         return idRangeLength_;
       }
 
-      // required int32 profileId = 3;
+      // optional int32 profileId = 3;
       public static final int PROFILEID_FIELD_NUMBER = 3;
       private int profileId_;
       /**
-       * <code>required int32 profileId = 3;</code>
+       * <code>optional int32 profileId = 3;</code>
        *
        * <pre>
-       * profileParams specific segments
+       * profileParams specific segments (required on top level)
        * </pre>
        */
       public boolean hasProfileId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 profileId = 3;</code>
+       * <code>optional int32 profileId = 3;</code>
        *
        * <pre>
-       * profileParams specific segments
+       * profileParams specific segments (required on top level)
        * </pre>
        */
       public int getProfileId() {
@@ -69483,10 +69483,6 @@ public final class OsmandOdb {
           return false;
         }
         if (!hasIdRangeLength()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        if (!hasProfileId()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -69837,10 +69833,6 @@ public final class OsmandOdb {
             
             return false;
           }
-          if (!hasProfileId()) {
-            
-            return false;
-          }
           for (int i = 0; i < getInnerBlocksCount(); i++) {
             if (!getInnerBlocks(i).isInitialized()) {
               
@@ -69973,33 +69965,33 @@ public final class OsmandOdb {
           return this;
         }
 
-        // required int32 profileId = 3;
+        // optional int32 profileId = 3;
         private int profileId_ ;
         /**
-         * <code>required int32 profileId = 3;</code>
+         * <code>optional int32 profileId = 3;</code>
          *
          * <pre>
-         * profileParams specific segments
+         * profileParams specific segments (required on top level)
          * </pre>
          */
         public boolean hasProfileId() {
           return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
-         * <code>required int32 profileId = 3;</code>
+         * <code>optional int32 profileId = 3;</code>
          *
          * <pre>
-         * profileParams specific segments
+         * profileParams specific segments (required on top level)
          * </pre>
          */
         public int getProfileId() {
           return profileId_;
         }
         /**
-         * <code>required int32 profileId = 3;</code>
+         * <code>optional int32 profileId = 3;</code>
          *
          * <pre>
-         * profileParams specific segments
+         * profileParams specific segments (required on top level)
          * </pre>
          */
         public Builder setProfileId(int value) {
@@ -70009,10 +70001,10 @@ public final class OsmandOdb {
           return this;
         }
         /**
-         * <code>required int32 profileId = 3;</code>
+         * <code>optional int32 profileId = 3;</code>
          *
          * <pre>
-         * profileParams specific segments
+         * profileParams specific segments (required on top level)
          * </pre>
          */
         public Builder clearProfileId() {
@@ -73819,7 +73811,7 @@ public final class OsmandOdb {
       "(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId" +
       "\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\032\360\001\n\024HHRouteBl",
       "ockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridR" +
-      "angeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \002(\005\022J\n\013i" +
+      "angeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013i" +
       "nnerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRo" +
       "utingIndex.HHRouteBlockSegments\022L\n\rpoint" +
       "Segments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRout" +
