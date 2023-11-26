@@ -2024,7 +2024,6 @@
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
-    <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen transliterieren</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>
@@ -4820,7 +4819,7 @@
     <string name="map_center_widget">Koordinaten: Kartenmitte</string>
     <string name="current_location_widget">Koordinaten: aktueller Standort</string>
     <string name="external_sensors_plugin_name">Externe Sensoren</string>
-    <string name="external_sensors_plugin_description">Greift auf externe Sensoren zu, um z. B. Ihre Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung oder Trittfrequenz abzulesen. Erfordert, dass Ihr Gerät über das drahtlose persönliche Netzwerkprotokoll ANT+ mit den entsprechenden Sensoren verbunden ist.</string>
+    <string name="external_sensors_plugin_description">Zugriff auf externe Sensoren, um z.B. Ihre Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung oder Kadenz zu lesen. Erfordert, Ihr Gerät über das kabellose, persönliche ANT+ Netzwerkprotokoll mit entsprechenden Sensoren zu verbinden.</string>
     <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
     <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden, ausgedrückt in Bildern pro Sekunde (FPS).</string>
     <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
@@ -5158,7 +5157,7 @@
     <string name="external_device_characteristic_pulse_rate">Pulsfrequenz</string>
     <string name="ble_search_again">Erneut suchen</string>
     <string name="ant_plus_open_settings">Einstellungen öffnen</string>
-    <string name="ant_plus_nothing_found_text">Es können keine Sensoren gefunden werden</string>
+    <string name="ant_plus_nothing_found_text">Keine Sensoren gefunden</string>
     <string name="external_device_details_connect">Verbinden</string>
     <string name="ant_plus_bluetooth_off_description">Schalten Sie die Bluetooth-Suche ein und koppeln Sie die Sensoren.</string>
     <string name="ant_plus_pair_new_sensor_ble">Bluetooth-LE-Sensor koppeln</string>
@@ -5477,7 +5476,7 @@
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Strecke</string>
     <string name="add_smart_folder">Intelligenten Ordner hinzufügen</string>
     <string name="empty_name">Leerer Name</string>
-    <string name="edit_fiilter">Filter bearbeiten</string>
+    <string name="edit_filter">Filter bearbeiten</string>
     <string name="help_article_widgets_radius_ruler_name">Radius-Maßstab und Lineal</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>

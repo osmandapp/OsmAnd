@@ -2012,7 +2012,6 @@
     <string name="selected_categories">Elektitaj kategorioj</string>
     <string name="create_custom_poi">Krei propran filtrilon</string>
     <string name="custom_search">Propra serĉo</string>
-    <string name="edit_filter">Redakti kategoriojn</string>
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
     <string name="search_hint">Enigu urbon, adreson aŭ nomon de interesejo</string>
@@ -5509,7 +5508,7 @@
     </plurals>
     <string name="add_smart_folder">Nova inteligenta dosierujo</string>
     <string name="empty_name">Malplena nomo</string>
-    <string name="edit_fiilter">Redakti filtrilon</string>
+    <string name="edit_filter">Redakti filtrilon</string>
     <string name="key_event_action_open_search_view">Malfermi vidon “serĉi”</string>
     <string name="delete_trash_item_confirmation_desc">“%1$s” estos forigita por ĉiam. Ĉui vi certas\?
 \n

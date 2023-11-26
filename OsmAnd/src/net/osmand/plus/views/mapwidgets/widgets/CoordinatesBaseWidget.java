@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -46,8 +45,11 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	protected final View divider;
 	protected final View secondContainer;
 
-	protected final TextView firstCoordinate;
-	protected final TextView secondCoordinate;
+	private final TextView firstCoordinate;
+	private final TextView secondCoordinate;
+
+	private String firstCoordinateText = "";
+	private String secondCoordinateText = "";
 
 	protected final ImageView firstIcon;
 	protected final ImageView secondIcon;
@@ -74,9 +76,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	protected void copyCoordinates() {
 		if (lastLocation != null) {
-			String coordinates = firstCoordinate.getText().toString();
+			String coordinates = firstCoordinateText;
 			if (secondContainer.getVisibility() == View.VISIBLE) {
-				coordinates += ", " + secondCoordinate.getText().toString();
+				coordinates += ", " + secondCoordinateText;
 			}
 			if (ShareMenu.copyToClipboard(app, coordinates)) {
 				showShareSnackbar(coordinates);
@@ -123,13 +125,13 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	private void showUtmCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
 		ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
-		firstCoordinate.setText(utmPoint.format());
+		setFirstCoordinateText(utmPoint.format());
 	}
 
 	private void showMgrsCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
 		MGRSPoint mgrsPoint = new MGRSPoint(new LatLonPoint(lat, lon));
-		firstCoordinate.setText(mgrsPoint.toFlavoredString(5));
+		setFirstCoordinateText(mgrsPoint.toFlavoredString(5));
 	}
 
 	private void showOlcCoordinates(double lat, double lon) {
@@ -142,7 +144,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			log.error("Failed to define OLC location", e);
 			olcCoordinates = "0, 0";
 		}
-		firstCoordinate.setText(olcCoordinates);
+		setFirstCoordinateText(olcCoordinates);
 	}
 
 	private void showSwissGrid(double lat, double lon, boolean swissGridPlus){
@@ -158,8 +160,8 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		firstIcon.setImageDrawable(getLatitudeIcon(lat));
 		secondIcon.setImageDrawable(getLongitudeIcon(lon));
 
-		firstCoordinate.setText(swissGridFormat.format(swissGrid[0]));
-		secondCoordinate.setText(swissGridFormat.format(swissGrid[1]));
+		setFirstCoordinateText(swissGridFormat.format(swissGrid[0]));
+		setSecondCoordinateText(swissGridFormat.format(swissGrid[1]));
 	}
 
 	private void setupForNonStandardFormat() {
@@ -187,8 +189,22 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		firstIcon.setImageDrawable(getLatitudeIcon(lat));
 		secondIcon.setImageDrawable(getLongitudeIcon(lon));
 
-		firstCoordinate.setText(latitude);
-		secondCoordinate.setText(longitude);
+		setFirstCoordinateText(latitude);
+		setSecondCoordinateText(longitude);
+	}
+
+	protected void setFirstCoordinateText(@NonNull String text) {
+		firstCoordinateText = text;
+		setCoordinateText(firstCoordinate, text);
+	}
+
+	protected void setSecondCoordinateText(@NonNull String text) {
+		secondCoordinateText = text;
+		setCoordinateText(secondCoordinate, text);
+	}
+
+	private void setCoordinateText(@NonNull TextView textView, @NonNull String text) {
+		AndroidUtils.setTruncatedText(textView, text);
 	}
 
 	@NonNull

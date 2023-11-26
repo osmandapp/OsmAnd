@@ -4649,4 +4649,12 @@
     <string name="poi_osmand_motorcycle_no">Acesso para motocicleta: não</string>
     <string name="poi_osmand_motorcycle_private">Acesso de motocicleta: privado</string>
     <string name="poi_health_specialty_paediatric_dentistry_yes">Odontopediatria</string>
+    <string name="poi_healthcare_speciality_laboratory">Especialidade de saúde: laboratório</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Especialidade em saúde: psicoterapeuta</string>
+    <string name="poi_healthcare_speciality_hypnosis">Hipnose</string>
+    <string name="poi_healthcare_speciality_paediatric_surgery">Cirurgia pediátrica</string>
+    <string name="poi_healthcare_speciality_clinic">Especialidade de saúde: clínica</string>
+    <string name="poi_healthcare_speciality_reflexology">Reflexologia</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Antroposófico</string>
+    <string name="poi_healthcare_speciality_paediatric_dentistry">Odontopediatria</string>
 </resources>

@@ -9,7 +9,7 @@ import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;

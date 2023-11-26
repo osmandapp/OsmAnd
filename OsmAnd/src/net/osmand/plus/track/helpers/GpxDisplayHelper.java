@@ -18,7 +18,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.util.Algorithms;
 

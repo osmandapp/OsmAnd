@@ -2013,7 +2013,6 @@
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Búsqueda personalizada</string>
-    <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
@@ -5507,7 +5506,7 @@
     </plurals>
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
-    <string name="edit_fiilter">Editar filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
 \n
 \nEsta acción no se puede deshacer.</string>

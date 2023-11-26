@@ -1197,7 +1197,7 @@
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">存取限制</string>
-    <string name="rendering_attr_showAccess_name">顯示進入限制和收費</string>
+    <string name="rendering_attr_showAccess_name">顯示進入限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
@@ -1997,7 +1997,6 @@
     <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
     <string name="lang_kab">卡拜爾</string>
-    <string name="edit_filter">編輯分類</string>
     <string name="shared_string_filters">篩選</string>
     <string name="selected_categories">已選取的分類</string>
     <string name="subcategories">子分類</string>
@@ -5471,7 +5470,7 @@
     <string name="smart_folder_saved">已儲存 Smart Folder</string>
     <string name="add_smart_folder">新增智慧型資料夾</string>
     <string name="empty_name">空名稱</string>
-    <string name="edit_fiilter">編輯篩選條件</string>
+    <string name="edit_filter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
     <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>
@@ -5557,4 +5556,6 @@
     <string name="reset_key_assignments">重設按鍵分配</string>
     <string name="target_elevation">目標海拔</string>
     <string name="shared_string_eta">預計到達時間</string>
+    <string name="rendering_attr_showToll_name">顯示通行費限制</string>
+    <string name="rendering_attr_showToll_description">顯示道路通行費限制</string>
 </resources>

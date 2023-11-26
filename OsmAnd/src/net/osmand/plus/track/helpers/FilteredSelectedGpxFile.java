@@ -7,7 +7,6 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
@@ -50,10 +49,11 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		altitudeFilter = new AltitudeFilter(app, sourceSelectedGpxFile);
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
 		if (gpxDataItem != null) {
-			smoothingFilter.updateValue(gpxDataItem.getSmoothingThreshold());
-			speedFilter.updateValues(gpxDataItem.getMinFilterSpeed(), gpxDataItem.getMaxFilterSpeed());
-			altitudeFilter.updateValues(gpxDataItem.getMinFilterAltitude(), gpxDataItem.getMaxFilterAltitude());
-			hdopFilter.updateValue(gpxDataItem.getMaxFilterHdop());
+			GpxData gpxData = gpxDataItem.getGpxData();
+			smoothingFilter.updateValue(gpxData.getSmoothingThreshold());
+			speedFilter.updateValues(gpxData.getMinFilterSpeed(), gpxData.getMaxFilterSpeed());
+			altitudeFilter.updateValues(gpxData.getMinFilterAltitude(), gpxData.getMaxFilterAltitude());
+			hdopFilter.updateValue(gpxData.getMaxFilterHdop());
 		}
 	}
 
@@ -159,9 +159,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem dataItem) {
-		double sum = dataItem.getSmoothingThreshold() + dataItem.getMinFilterSpeed()
-				+ dataItem.getMaxFilterSpeed() + dataItem.getMinFilterAltitude()
-				+ dataItem.getMaxFilterAltitude() + dataItem.getMaxFilterHdop();
+		GpxData data = dataItem.getGpxData();
+		double sum = data.getSmoothingThreshold() + data.getMinFilterSpeed()
+				+ data.getMaxFilterSpeed() + data.getMinFilterAltitude()
+				+ data.getMaxFilterAltitude() + data.getMaxFilterHdop();
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

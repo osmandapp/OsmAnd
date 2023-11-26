@@ -215,7 +215,6 @@
     <string name="search_hint">Город, адрес, POI</string>
     <string name="new_filter_desc">Введите имя для нового фильтра. Он добавится в список «Категории».</string>
     <string name="translit_names">Транслитерация названий</string>
-    <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Создать настраиваемый фильтр</string>
@@ -936,8 +935,8 @@
     <string name="shared_string_off">Выкл.</string>
     <string name="accessibility_default">Использовать системную настройку</string>
     <string name="backToMenu">Назад к меню</string>
-    <string name="zoomOut">Уменьшить</string>
-    <string name="zoomIn">Увеличить</string>
+    <string name="zoomOut">Отдалить</string>
+    <string name="zoomIn">Приблизить</string>
     <string name="zoomIs">Масштаб</string>
     <string name="back_to_location">Вернуться</string>
     <string name="north">север</string>
@@ -1492,7 +1491,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
     <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
-    <string name="rendering_attr_showAccess_name">Ограничения доступа и платный проезд</string>
+    <string name="rendering_attr_showAccess_name">Показывать ограничения доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Велосипедные маршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
@@ -5365,7 +5364,7 @@
     <string name="help_article_navigation_routing_moped_routing_name">Мопед</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Навигация по маркерам</string>
     <string name="help_article_widgets_nav_widgets_name">Навигационные виджеты</string>
-    <string name="github_discussion">GitHub Discussion</string>
+    <string name="github_discussion">Обсуждения на GitHub</string>
     <string name="most_viewed">Наиболее просматриваемые</string>
     <string name="help_article_map_interact_with_map_name">Взаимодействие с картой</string>
     <string name="help_article_map_map_context_menu_name">Контекстное меню карты</string>
@@ -5441,7 +5440,9 @@
     <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
     <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
     <string name="average_glide_ratio">Средний коэффициент планирования</string>
-    <string name="release_4_6">• Виджет «Коэффициент планирования»
+    <string name="release_4_6">• Добавлена возможность изменения действий кнопок внешних устройств ввода
+\n
+\n• Виджет «Коэффициент планирования»
 \n
 \n • Добавлены фильтры и смарт-папки для треков
 \n
@@ -5471,7 +5472,7 @@
     <string name="smart_folder_saved">Смарт-папка сохранена</string>
     <string name="add_smart_folder">Создать смарт-папку</string>
     <string name="empty_name">Отсутствует имя</string>
-    <string name="edit_fiilter">Фильтр</string>
+    <string name="edit_filter">Изменить фильтр</string>
     <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
     <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
     <string name="empty_smart_folder_title">Нет подходящего трека</string>
@@ -5485,17 +5486,17 @@
     <string name="loading_tracks">Перезагрузка треков</string>
     <string name="searching_matching_tracks">Искать все подходящие треки</string>
     <string name="shared_string_is_deleted">%1$s удалено.</string>
-    <string name="enable_to_use_external_input_device">Включите для использование внешнего устройства ввода с OsmAnd.</string>
+    <string name="enable_to_use_external_input_device">Включите для использования внешнего устройства ввода с OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Сменить ориентацию карты</string>
     <string name="key_event_action_previous_app_profile">Предыдущий профиль</string>
-    <string name="show_toast_about_key_pressed">Показывать всплывающее сообщение о нажатой клавише</string>
+    <string name="show_toast_about_key_pressed">Показывать всплывающее сообщение о нажатой кнопке</string>
     <string name="key_event_action_move_left">Сдвиг влево</string>
-    <string name="press_button_to_link_with_action">Нажмите кнопку на своем устройстве, чтобы связать ее с действием: %1$s</string>
+    <string name="press_button_to_link_with_action">Нажмите кнопку на устройстве, чтобы назначить на неё действие: %1$s</string>
     <string name="key_event_action_move_right">Сдвиг вправо</string>
     <string name="shared_string_button">Кнопка</string>
     <string name="key_event_action_next_app_profile">Следующий профиль</string>
     <string name="change_key_binding">Изменить привязку клавиш</string>
-    <string name="remove_type_q">Вы уверены, что хотите удалить тип \"%1$s\"\?</string>
+    <string name="remove_type_q">Вы точно хотите удалить тип «%1$s»?</string>
     <string name="shared_string_action">Действие</string>
     <string name="add_new_type">Добавить новый тип</string>
     <string name="key_event_action_move_up">Сдвиг вверх</string>
@@ -5507,11 +5508,47 @@
     <string name="key_event_category_map_interactions">Взаимодействия с картой</string>
     <string name="key_event_action_move_down">Сдвиг вниз</string>
     <string name="key_event_category_actions">Действия</string>
-    <string name="key_event_action_zoom_in">Увеличить масштаб</string>
+    <string name="key_event_action_zoom_in">Приблизить</string>
     <string name="deletion_error">Ошибка удаления</string>
-    <string name="key_event_action_zoom_out">Уменьшить масштаб</string>
+    <string name="key_event_action_zoom_out">Отдалить</string>
     <string name="key_event_action_toggle_drower">Показать/скрыть боковое меню</string>
     <string name="shared_string_rows">Ряды</string>
-    <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на другое действии: «%2$s»</string>
+    <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на действие: «%2$s»</string>
     <string name="topography_maps">Карты ландшафта</string>
+    <string name="cloud_trash_clear_confirmation">Вы точно хотите удалить все элементы в к корзине? Это действие нельзя отменить.</string>
+    <string name="key_assignments">Назначения кнопок</string>
+    <string name="change_button">Изменить кнопку</string>
+    <string name="root_folder">Корневая папка</string>
+    <string name="reset_key_assignments_desc">Все назначения кнопок для выбранного типа будут удалены.</string>
+    <string name="rendering_attr_showToll_name">Показывать ограничения платного проезда</string>
+    <string name="restore_from_trash">Восстановить из корзины</string>
+    <string name="all_folders">Все папки</string>
+    <string name="shared_string_show_less">Показать меньше</string>
+    <string name="folder">Папка</string>
+    <string name="shared_string_reassign">Переназначить</string>
+    <string name="app_mode_baby_transport">Детский транспорт</string>
+    <string name="reset_key_assignments">Сбросить назначения кнопок</string>
+    <string name="rendering_attr_showToll_description">Показывать ограничения платного проезда на дорогах</string>
+    <string name="remove_widget_first">Пожалуйста, сначала удалите виджет</string>
+    <string name="add_row">Добавить ряд</string>
+    <string name="shared_string_included">Включено</string>
+    <string name="discard_changes_prompt">Вы точно хотите отклонить изменения?</string>
+    <string name="shared_string_delete_immediately">Удалить сразу</string>
+    <string name="shared_string_eta">предполагаемое время</string>
+    <string name="cloud_item_restored">%1$s восстановлено в Облако.</string>
+    <string name="row_number">Ряд %1$s</string>
+    <string name="trash_is_empty">В корзине пусто</string>
+    <string name="clear_key_assignment">Очистить назначения кнопок</string>
+    <string name="not_specified">Не указано</string>
+    <string name="download_to_device">Скачать на устройство</string>
+    <string name="shared_string_trash">Корзина</string>
+    <string name="average_glide_time_interval_desc">Укажите интервал для усреднения планирования.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d трек)</item>
+        <item quantity="few">%1$d (%2$d трека)</item>
+        <item quantity="many">%1$d (%2$d треков)</item>
+        <item quantity="other">%1$d (%2$d треков)</item>
+    </plurals>
+    <string name="map_widget_glide_average_desc">Показывать средний коэффициент планирования для заданного интервала.</string>
+    <string name="map_widget_glide_target_desc">Показывать средний коэффициент планирования для достижения целевой точки.</string>
 </resources>

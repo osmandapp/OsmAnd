@@ -1958,7 +1958,6 @@
     <string name="gpx_logging_no_data">Nu sunt date</string>
     <string name="rendering_value_light_brown_name">Maro deschis</string>
     <string name="rendering_value_dark_brown_name">Maro întunecat</string>
-    <string name="edit_filter">Editează categoriile</string>
     <string name="subcategories">Subcategorii</string>
     <string name="selected_categories">Categoriile selectate</string>
     <string name="create_custom_poi">Crează filtru personalizat</string>
@@ -3191,7 +3190,7 @@
     <string name="use_live_routing">Date live OsmAnd</string>
     <string name="complex_routing_descr">Rutarea în două faze pentru navigația auto.</string>
     <string name="use_fast_recalculation_desc">Recalculează doar partea inițială a traseului, utilă pentru călătoriile lungi.</string>
-    <string name="use_native_pt">Dezvoltarea transportului public autohton</string>
+    <string name="use_native_pt">Dezvoltare transport public autohton</string>
     <string name="use_native_pt_desc">Comutați la Java (safe) Public Transport pentru transportul public în comun</string>
     <string name="perform_oauth_authorization_description">Conectați-vă cu OAuth pentru a utiliza facilitățile osmedit</string>
     <string name="perform_oauth_authorization">Conectați-vă folosind OAuth</string>
@@ -5484,7 +5483,7 @@
     <string name="smart_folder_saved">Folder Inteligent salvat</string>
     <string name="add_smart_folder">Adaugă folder inteligent</string>
     <string name="empty_name">Nume gol</string>
-    <string name="edit_fiilter">Editează filtru</string>
+    <string name="edit_filter">Editează filtru</string>
     <string name="save_as_smart_folder">Salvează ca folder inteligent</string>
     <string name="delete_smart_folder_dialog_message">Aceasta va șterge folderul inteligent \"%1$s\".</string>
     <string name="empty_smart_folder_title">Niciun traseu găsit</string>

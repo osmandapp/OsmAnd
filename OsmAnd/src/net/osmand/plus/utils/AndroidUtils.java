@@ -106,14 +106,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -640,6 +638,18 @@ public class AndroidUtils {
 		return width;
 	}
 
+	public static void setTruncatedText(TextView textView, String text) {
+		Paint paint = new Paint();
+		paint.setTextSize(textView.getTextSize());
+		float textWidth = paint.measureText(text);
+		int viewWidth = textView.getWidth();
+		if (textWidth > viewWidth) {
+			int charactersToShow = paint.breakText(text, true, viewWidth, null);
+			text = text.substring(0, charactersToShow);
+		}
+		textView.setText(text);
+	}
+
 	public static int getTextWidth(float textSize, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);
@@ -1114,23 +1124,6 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
-	}
-
-	@NonNull
-	public static String createDbInsertQuery(@NonNull String tableName, @NonNull Set<String> rowKeys) {
-		StringBuilder keys = new StringBuilder();
-		StringBuilder values = new StringBuilder();
-		String split = ", ";
-		Iterator<String> iterator = rowKeys.iterator();
-		while (iterator.hasNext()) {
-			keys.append(iterator.next());
-			values.append("?");
-			if (iterator.hasNext()) {
-				keys.append(split);
-				values.append(split);
-			}
-		}
-		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

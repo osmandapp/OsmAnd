@@ -2042,7 +2042,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie del camino</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
     <string name="translit_names">Transliterar nombres</string>
-    <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
@@ -5480,7 +5479,7 @@
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
     <string name="add_smart_folder">Agregar una carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
-    <string name="edit_fiilter">Editar el filtro</string>
+    <string name="edit_filter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>

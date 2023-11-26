@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class TrackFolderAnalysis {
 		}
 		for (TrackItem trackItem : items) {
 			GpxDataItem dataItem = trackItem.getDataItem();
-			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
+			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getGpxData().getAnalysis() : null;
 			if (analysis != null) {
 				totalDistance += analysis.totalDistance;
 				diffElevationUp += analysis.diffElevationUp;

@@ -1196,7 +1196,7 @@
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
-    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger og vejafgifter</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelruter</string>
@@ -2021,7 +2021,6 @@
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opret brugerdefineret filter</string>
     <string name="custom_search">Brugerdefineret søgning</string>
-    <string name="edit_filter">Rediger kategorier</string>
     <string name="subcategories">Underkategorier</string>
     <string name="translit_names">Translitterere navne</string>
     <string name="search_hint">Indtast by, adresse, IP-navn</string>
@@ -5482,7 +5481,7 @@
     <string name="maps_and_resources">Kort og ressourcer</string>
     <string name="shared_string_show_icon">Vis ikon</string>
     <string name="empty_name">Tomt navn</string>
-    <string name="edit_fiilter">Redigér filter</string>
+    <string name="edit_filter">Redigér filter</string>
     <string name="smart_folder_name_present">Sådan en smart-mappe findes allerede</string>
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>
@@ -5572,4 +5571,6 @@
     <string name="shared_string_delete_item">Slet element</string>
     <string name="key_event_category_actions">Handlinger</string>
     <string name="clear_key_assignment_desc">Nøglebinding for den valgte handling vil blive ryddet og sat til Ingen.</string>
+    <string name="rendering_attr_showToll_name">Vis vejafgiftsrestriktioner</string>
+    <string name="rendering_attr_showToll_description">Vis vejafgiftsrestriktioner på veje</string>
 </resources>
