@@ -39,7 +39,7 @@ public class HHRoutingDB {
 	protected final int BATCH_SIZE = 10000;
 	protected int batchInsPoint = 0;
 
-	protected String routingProfile;
+	protected String routingProfile = "";
 	protected TIntObjectHashMap<String> routingProfiles = new TIntObjectHashMap<String>();
 	protected boolean compactDB;
 	
@@ -78,7 +78,7 @@ public class HHRoutingDB {
 		ResultSet rs = st.executeQuery("SELECT profile, id, params from profiles");
 		while (rs.next()) {
 			routingProfile = rs.getString(1);
-			routingProfiles.put(rs.getInt(1), rs.getString(2));
+			routingProfiles.put(rs.getInt(2), rs.getString(3));
 		}
 		st.close();
 	}
