@@ -6,6 +6,7 @@ import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
 import static net.osmand.plus.importfiles.ImportHelper.KMZ_SUFFIX;
 
 import android.net.Uri;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,26 +22,22 @@ import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import kotlin.Triple;
-
 public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 
 	private final Uri uri;
-	private File tmpFile;
 	private final String fileName;
-	private final CallbackWithObject<Triple<GPXFile, Long, File>> callback;
+	private final CallbackWithObject<Pair<GPXFile, Long>> callback;
 	private long fileSize;
 
 
 	public GpxImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-	                     @NonNull String fileName, @NonNull CallbackWithObject<Triple<GPXFile, Long, File>> callback) {
+	                     @NonNull String fileName, @NonNull CallbackWithObject<Pair<GPXFile, Long>> callback) {
 		super(activity);
 		this.uri = uri;
 		this.fileName = fileName;
@@ -52,31 +49,28 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		InputStream is = null;
 		ZipInputStream zis = null;
 		try {
-			if (fileName.endsWith(KML_SUFFIX) ||
-					fileName.endsWith(KMZ_SUFFIX) ||
-					fileName.endsWith(ZIP_EXT)) {
+			boolean createTmpFile = !Algorithms.endsWithAny(fileName, KML_SUFFIX, KMZ_SUFFIX, ZIP_EXT);
+			if (createTmpFile) {
+				File tmpDir = FileUtils.getTempDir(app);
+				File file = new File(tmpDir, System.currentTimeMillis() + "_" + fileName);
+				String error = ImportHelper.copyFile(app, file, uri, true, false);
+				if (error == null) {
+					fileSize = file.length();
+					return GPXUtilities.loadGPXFile(file);
+				}
+			} else {
 				is = app.getContentResolver().openInputStream(uri);
-				if (is != null && fileName != null) {
+				if (is != null) {
 					fileSize = is.available();
 					if (fileName.endsWith(KML_SUFFIX)) {
 						return loadGPXFileFromKml(is);
 					} else if (fileName.endsWith(KMZ_SUFFIX)) {
 						zis = new ZipInputStream(is);
 						return loadGPXFileFromKmz(zis);
-					} else {
+					} else if (fileName.endsWith(ZIP_EXT)) {
 						zis = new ZipInputStream(is);
 						return loadGPXFileFromZip(zis);
 					}
-				}
-			} else {
-				File tmpDir = FileUtils.getTempDir(app);
-				if (!tmpDir.exists()) {
-					tmpDir.mkdir();
-				}
-				tmpFile = FileUtils.saveUriToFileSystem(app, uri, fileName, tmpDir);
-				if (tmpFile != null) {
-					is = new FileInputStream(tmpFile);
-					return GPXUtilities.loadGPXFile(is);
 				}
 			}
 		} catch (IOException | SecurityException | IllegalStateException e) {
@@ -141,6 +135,6 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 	protected void onPostExecute(GPXFile gpxFile) {
 		hideProgress();
 		notifyImportFinished();
-		callback.processResult(new Triple<>(gpxFile, fileSize, tmpFile));
+		callback.processResult(new Pair<>(gpxFile, fileSize));
 	}
 }

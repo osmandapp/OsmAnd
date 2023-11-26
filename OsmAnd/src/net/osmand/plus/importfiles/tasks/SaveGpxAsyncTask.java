@@ -2,7 +2,6 @@ package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
-import static net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.syncGpx;
 
 import android.os.AsyncTask;
 
@@ -11,12 +10,12 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -25,6 +24,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -34,6 +34,8 @@ import java.util.Locale;
 @SuppressWarnings("deprecation")
 public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
+	public static final DateFormat GPX_FILE_DATE_FORMAT = new SimpleDateFormat("HH-mm_EEE", Locale.US);
+
 	private final OsmandApplication app;
 
 	private final GPXFile gpxFile;
@@ -41,8 +43,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
-	private final File tmpFile;
-
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
@@ -50,22 +50,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	                        @NonNull String fileName,
 	                        @Nullable SaveImportedGpxListener listener,
 	                        boolean overwrite) {
-		this(app, gpxFile, destinationDir, fileName, listener, overwrite, null);
-	}
-
-	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
-	                        @NonNull GPXFile gpxFile,
-	                        @NonNull File destinationDir,
-	                        @NonNull String fileName,
-	                        @Nullable SaveImportedGpxListener listener,
-	                        boolean overwrite, File tmpFile) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
 		this.destinationDir = destinationDir;
 		this.listener = listener;
 		this.overwrite = overwrite;
-		this.tmpFile = tmpFile;
 	}
 
 	@Override
@@ -80,55 +70,67 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (gpxFile.isEmpty()) {
 			return app.getString(R.string.error_reading_gpx);
 		}
-
-		String warning;
 		//noinspection ResultOfMethodCallIgnored
 		destinationDir.mkdirs();
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
-			WptPt pt = gpxFile.findPointToShow();
-			File toWrite = getFileToSave(fileName, destinationDir, pt);
-			Exception exception = null;
-			boolean fileCopyError = false;
-			if (tmpFile != null) {
-				fileCopyError = !FileUtils.move(tmpFile, toWrite);
-				FileUtils.deleteFile(tmpFile);
-			} else {
-				exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-			}
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(toWrite.getAbsolutePath());
+			File toSave = getFileToSave(fileName, destinationDir, gpxFile);
+			String error = saveFile(toSave);
+
 			if (listener != null) {
-				listener.onGpxSaved(exception != null ? exception.getMessage() : null, gpxFile);
+				listener.onGpxSaved(error, gpxFile);
 			}
-			if (exception == null && !fileCopyError) {
-				gpxFile.path = toWrite.getAbsolutePath();
-				File resultFile = new File(gpxFile.path);
-				if (overwrite) {
-					app.getGpxDbHelper().remove(toWrite);
-					if (selected != null) {
-						selected.setGpxFile(gpxFile, app);
-						syncGpx(app, gpxFile);
-					}
-				}
-				GpxDataItem item = new GpxDataItem(resultFile);
-				item.getGpxData().readGpxParams(gpxFile);
-				app.getGpxDbHelper().add(item);
-				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(resultFile));
-				warning = null;
+			if (error == null) {
+				processSavedFile(toSave);
 			} else {
-				warning = app.getString(R.string.error_reading_gpx);
+				return app.getString(R.string.error_reading_gpx);
 			}
 		} else {
-			warning = app.getString(R.string.sd_dir_not_accessible);
+			return app.getString(R.string.sd_dir_not_accessible);
 		}
+		return null;
+	}
 
-		return warning;
+	@Nullable
+	private String saveFile(@NonNull File toSave) {
+		File file = !Algorithms.isEmpty(gpxFile.path) ? new File(gpxFile.path) : null;
+		if (isTmpFileToMove(file)) {
+			if (!FileUtils.move(file, toSave)) {
+				return app.getString(R.string.error_reading_gpx);
+			}
+		} else {
+			Exception exception = GPXUtilities.writeGpxFile(toSave, gpxFile);
+			return exception != null ? exception.getMessage() : null;
+		}
+		return null;
+	}
+
+	private boolean isTmpFileToMove(@Nullable File file) {
+		return file != null && file.exists() && Algorithms.objectEquals(file.getParentFile(), FileUtils.getTempDir(app));
+	}
+
+	private void processSavedFile(@NonNull File file) {
+		gpxFile.path = file.getAbsolutePath();
+		if (overwrite) {
+			app.getGpxDbHelper().remove(file);
+
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
+			if (selected != null) {
+				selected.setGpxFile(gpxFile, app);
+				DeletePointsTask.syncGpx(app, gpxFile);
+			}
+		}
+		GpxDataItem item = new GpxDataItem(file);
+		item.getGpxData().readGpxParams(gpxFile);
+		app.getGpxDbHelper().add(item);
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(file));
 	}
 
 	@NonNull
-	private File getFileToSave(String fileName, File importDir, WptPt pt) {
+	private File getFileToSave(@NonNull String fileName, @NonNull File importDir, @NonNull GPXFile gpxFile) {
 		if (Algorithms.isEmpty(fileName)) {
-			fileName = "import_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time));
+			long time = gpxFile.findPointToShow().time;
+			fileName = "import_" + GPX_FILE_DATE_FORMAT.format(new Date(time));
 		} else if (fileName.endsWith(ImportHelper.KML_SUFFIX)) {
 			fileName = fileName.replace(ImportHelper.KML_SUFFIX, "");
 		} else if (fileName.endsWith(ImportHelper.KMZ_SUFFIX)) {
