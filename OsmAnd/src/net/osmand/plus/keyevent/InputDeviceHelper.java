@@ -234,6 +234,10 @@ public class InputDeviceHelper {
 		return collection;
 	}
 
+	public void releaseInputDevicesCache(int cacheId) {
+		cachedDevicesCollections.remove(cacheId);
+	}
+
 	@NonNull
 	private List<InputDeviceProfile> loadCustomDevices(@NonNull ApplicationMode appMode) {
 		String json = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.getModeValue(appMode);

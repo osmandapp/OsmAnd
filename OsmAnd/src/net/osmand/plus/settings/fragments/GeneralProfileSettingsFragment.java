@@ -432,6 +432,15 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (!requireActivity().isChangingConfigurations()) {
+			InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
+			deviceHelper.releaseInputDevicesCache(CUSTOMIZATION_CACHE_ID);
+		}
+	}
+
+	@Override
 	public void updateSetting(String prefId) {
 		if (settings.OSMAND_THEME.getId().equals(prefId)) {
 			recreate();
