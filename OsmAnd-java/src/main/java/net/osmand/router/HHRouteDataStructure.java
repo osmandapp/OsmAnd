@@ -279,7 +279,7 @@ public class HHRouteDataStructure {
 
 		public String getRoutingProfile() {
 			if (networkDB != null) {
-				return networkDB.getRoutingProfiles().get(routingProfile);
+				return networkDB.getRoutingProfile() + " [" + networkDB.getRoutingProfiles().get(routingProfile) + "] ";
 			}
 			if (fileRegion != null) {
 				return fileRegion.profile + " [" + fileRegion.profileParams.get(routingProfile) + "] ";
