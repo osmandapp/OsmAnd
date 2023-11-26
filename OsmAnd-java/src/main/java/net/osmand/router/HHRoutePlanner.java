@@ -371,7 +371,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		HHRoutingContext<T> hctx = this.cacheHctx;
 		if (hctx.networkDB == null) {
 			hctx = selectBestRoutingNetwork(start, end, hctx);
-			
+			if (hctx == null) {
+				return null;
+			}
 		}
 		System.out.printf("Selected file %s, routing profile = %s \n",
 				hctx.networkDB != null ? hctx.networkDB.getFile().getName() : hctx.file.getFile().getName(),
