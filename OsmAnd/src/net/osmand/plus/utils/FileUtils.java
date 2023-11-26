@@ -345,6 +345,14 @@ public class FileUtils {
 		FileUtils.removeFilesWithExtensions(app.getAppPath(GEOTIFF_DIR), false, DOWNLOAD_EXT);
 	}
 
+	public static boolean move(@NonNull File from, @NonNull File to) {
+		File parent = to.getParentFile();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
+		}
+		return from.renameTo(to);
+	}
+
 	public interface RenameCallback {
 		void fileRenamed(@NonNull File src, @NonNull File dest);
 	}

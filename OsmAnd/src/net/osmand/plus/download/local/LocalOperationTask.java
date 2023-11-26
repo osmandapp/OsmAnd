@@ -48,6 +48,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
@@ -157,12 +158,12 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	}
 
 	private boolean restoreItem(@NonNull LocalItem item) {
-		return move(item.getFile(), getFileToRestore(item));
+		return FileUtils.move(item.getFile(), getFileToRestore(item));
 	}
 
 	private boolean backupItem(@NonNull LocalItem item) {
 		File file = item.getFile();
-		boolean success = move(file, getFileToBackup(item));
+		boolean success = FileUtils.move(file, getFileToBackup(item));
 		if (success) {
 			app.getResourceManager().closeFile(file.getName());
 		}
@@ -176,14 +177,6 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 			clearMapillaryTiles(item);
 		}
 		return source != null;
-	}
-
-	private boolean move(@NonNull File from, @NonNull File to) {
-		File parent = to.getParentFile();
-		if (parent != null && !parent.exists()) {
-			parent.mkdirs();
-		}
-		return from.renameTo(to);
 	}
 
 	@NonNull

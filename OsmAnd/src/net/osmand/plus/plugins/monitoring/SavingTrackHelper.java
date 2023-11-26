@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -237,7 +239,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
 				if (!gpx.isEmpty()) {
 					WptPt pt = gpx.findPointToShow();
-					String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
+					String fileName = f + "_" + GPX_FILE_DATE_FORMAT.format(new Date(pt.time));
 					Integer trackStorageDirectory = app.getSettings().TRACK_STORAGE_DIRECTORY.get();
 					if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
 						SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);

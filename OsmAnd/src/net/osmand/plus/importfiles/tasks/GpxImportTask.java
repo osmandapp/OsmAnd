@@ -17,9 +17,11 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -47,19 +49,28 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		InputStream is = null;
 		ZipInputStream zis = null;
 		try {
-			is = app.getContentResolver().openInputStream(uri);
-			if (is != null && fileName != null) {
-				fileSize = is.available();
-				if (fileName.endsWith(KML_SUFFIX)) {
-					return loadGPXFileFromKml(is);
-				} else if (fileName.endsWith(KMZ_SUFFIX)) {
-					zis = new ZipInputStream(is);
-					return loadGPXFileFromKmz(zis);
-				} else if (fileName.endsWith(ZIP_EXT)) {
-					zis = new ZipInputStream(is);
-					return loadGPXFileFromZip(zis);
-				} else {
-					return GPXUtilities.loadGPXFile(is);
+			boolean createTmpFile = !Algorithms.endsWithAny(fileName, KML_SUFFIX, KMZ_SUFFIX, ZIP_EXT);
+			if (createTmpFile) {
+				File tmpDir = FileUtils.getTempDir(app);
+				File file = new File(tmpDir, System.currentTimeMillis() + "_" + fileName);
+				String error = ImportHelper.copyFile(app, file, uri, true, false);
+				if (error == null) {
+					fileSize = file.length();
+					return GPXUtilities.loadGPXFile(file);
+				}
+			} else {
+				is = app.getContentResolver().openInputStream(uri);
+				if (is != null) {
+					fileSize = is.available();
+					if (fileName.endsWith(KML_SUFFIX)) {
+						return loadGPXFileFromKml(is);
+					} else if (fileName.endsWith(KMZ_SUFFIX)) {
+						zis = new ZipInputStream(is);
+						return loadGPXFileFromKmz(zis);
+					} else if (fileName.endsWith(ZIP_EXT)) {
+						zis = new ZipInputStream(is);
+						return loadGPXFileFromZip(zis);
+					}
 				}
 			}
 		} catch (IOException | SecurityException | IllegalStateException e) {
