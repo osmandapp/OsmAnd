@@ -5542,4 +5542,13 @@
     <string name="not_specified">Не указано</string>
     <string name="download_to_device">Скачать на устройство</string>
     <string name="shared_string_trash">Корзина</string>
+    <string name="average_glide_time_interval_desc">Укажите интервал для усреднения планирования.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d трек)</item>
+        <item quantity="few">%1$d (%2$d трека)</item>
+        <item quantity="many">%1$d (%2$d треков)</item>
+        <item quantity="other">%1$d (%2$d треков)</item>
+    </plurals>
+    <string name="map_widget_glide_average_desc">Показывать средний коэффициент планирования для заданного интервала.</string>
+    <string name="map_widget_glide_target_desc">Показывать средний коэффициент планирования для достижения целевой точки.</string>
 </resources>
