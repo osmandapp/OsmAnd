@@ -1267,9 +1267,9 @@
     <string name="search_history_city">مدينة: {0}</string>
     <string name="transport">نقل</string>
     <string name="transport_Routes">طرق</string>
-    <string name="map_screen_orientation">وضعية الشاشة</string>
-    <string name="map_orientation_landscape">عرضي</string>
-    <string name="map_orientation_portrait">طولي</string>
+    <string name="map_screen_orientation">اتجاه الشاشة</string>
+    <string name="map_orientation_landscape">أفقي</string>
+    <string name="map_orientation_portrait">رأسي</string>
     <string name="map_orientation_default">حسب النظام</string>
     <string name="map_screen_orientation_descr">طولي، عرضي، حسب النظام.</string>
     <string name="first_time_continue">لاحقاً</string>
@@ -4569,7 +4569,7 @@
 \n
 \nإذا تحصلت على معلومات غير دقيقة عن الموقع أو استخدمت جهازًا بدون %2$s ، فحاول التبديل إلى \"%3$s\"</string>
     <string name="location_source">مصدر الموقع</string>
-    <string name="default_appearance_desc">سيتم تطبيق اللون والرمز والشكل الافتراضي على النقاط المفضلة المضافة في المجموعة.</string>
+    <string name="default_appearance_desc">سيتم تطبيق اللون والأيقونة والشكل الافتراضي على النقاط المفضلة المضافة إلى المجموعة.</string>
     <string name="default_appearance">المظهر الافتراضي</string>
     <string name="shared_string_shape">الشكل</string>
     <string name="edit_category">تعديل الفئة</string>
@@ -4619,7 +4619,7 @@
     <string name="map_widget_current_speed">السرعة الحالية</string>
     <string name="apply_only_to_new_favorites">تطبيق على المفضلة الجديدة فقط</string>
     <string name="apply_to_existing_points_descr">تطبيق التغييرات على النقاط الموجودة في المجموعة أو على النقاط الجديدة فقط؟</string>
-    <string name="apply_to_existing_favorites_descr">تطبيق التغييرات على النقاط المفضلة الحالية للمجموعة أم على النقاط الجديدة فقط؟</string>
+    <string name="apply_to_existing_favorites_descr">هل تريد تطبيق التغييرات على النقاط المفضلة الموجودة بالمجموعة أم على النقاط الجديدة فقط؟</string>
     <string name="apply_only_to_new_points">تطبيق على النقاط الجديدة فقط</string>
     <string name="change_default_appearance">تغيير المظهر الافتراضي</string>
     <string name="map_widget_altitude">ارتفاع الموقع الحالي</string>
@@ -5190,7 +5190,7 @@
     <string name="nav_profile_confirm_delete">هل أنت متأكد أنك تريد حذف \"%1$s\"؟</string>
     <string name="external_device_low_battery">البطارية ضعيفة</string>
     <string name="external_device_forget_sensor">إزالة المستشعر</string>
-    <string name="external_device_forget_sensor_description">ستتم إزالة المستشعر من القائمة. بإمكانك الاقتران بهذا المستشعر مرة أخرى في أي وقت.</string>
+    <string name="external_device_forget_sensor_description">سيُحذف من القائمة ستكون قادراً على ربط هذا المستشعرمجدداً في أي وقت.</string>
     <string name="external_device_disconnected">غير متصل</string>
     <string name="external_device_connected">متصل</string>
     <string name="external_device_menu_forget">نسيان</string>
@@ -5227,7 +5227,7 @@
 \n- البلوتوث قيد التشغيل
 \n- تم تنشيط المستشعر
 \n- الجهاز قريب من المستشعر</string>
-    <string name="ant_plus_bluetooth_off">البلوتوث متوقف</string>
+    <string name="ant_plus_bluetooth_off">تم إيقاف تشغيل البلوتوث</string>
     <string name="ant_plus_bluetooth_off_description">قم بالبحث عن أجهزة الاستشعار وعمل اقتران بالبلوتوث.</string>
     <string name="ant_plus_searching_text">البحث عن أجهزة الاستشعار</string>
     <string name="ant_plus_help_title">نوع المستشعر غير معروف لدي</string>
@@ -5413,7 +5413,7 @@
     <string name="average_glide_time_interval_desc">حدد الفاصل الزمني لحساب متوسط الانحدار.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">متوسط نسبة الانحدار</string>
-    <string name="wheel_circumference">محيط العجلة</string>
+    <string name="wheel_circumference">حاجز العجلات</string>
     <string name="external_sensor_name_property_description">اسم المستشعر</string>
     <string name="contact_us">اتصل بنا</string>
     <string name="help_article_map_legend_nautical_map_name">نمط الخرائط البحرية</string>
@@ -5491,11 +5491,23 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
-    <string name="release_4_6">• معدل نسبة الإنحدار
+    <string name="release_4_6">• تمت إضافة قدرة تغيير روابط المفاتيح لأجهزة الإدخال الخارجية
 \n
-\n • ANT+ ويدجت مستشعر الحرارة
+\n • تمت إضافة ويدجت\"نسبة الإنحدار\".
 \n
-\n • إدارة أفضل للذاكرة لمسارات GPX الكبيرة
+\n • تمت إضافة المرشحات والمجلدات الذكية للمسارات
+\n
+\n • تمت إضافة ويدجت صفوف للوحات العلوية والسفلية مع دعم لجميع الأدوات
+\n
+\n • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
+\n
+\n • تحسين إدارة الذاكرة لمسارات GPX الكبيرة
+\n
+\n • تحديث إدارة الموارد المحلية في التنزيلات
+\n
+\n • تمت إضافة القطعة \"ذاكرة الوصول العشوائي المتوفرة\"
+\n
+\n • تم إصلاح المشكلات المتعلقة بشفافية شريط الحالة
 \n
 \n</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
@@ -5514,7 +5526,7 @@
     <string name="maps_and_resources">خرائط ومصادر</string>
     <string name="shared_string_cache">الذاكرة المؤقتة</string>
     <string name="with_waypoints">مع نقاط الطريق</string>
-    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لـOsmAnd</string>
+    <string name="widget_available_ram_desc">يعرض الذاكرة المتاحة المخصصة لأوسماند.</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="standard_maps">الخرائط العادية</string>
     <string name="max_altitude">أقصى ارتفاع</string>
@@ -5572,4 +5584,59 @@
     <string name="shared_string_delete_item">حذف العنصر</string>
     <string name="rendering_attr_showToll_name">عرض قيود الرسوم</string>
     <string name="rendering_attr_showToll_description">عرض القيود المفروضة على الطرق</string>
+    <string name="key_event_action_zoom_in">تكبير</string>
+    <string name="key_assignments">المهام الرئيسية</string>
+    <string name="change_button">زر التغيير</string>
+    <string name="enable_to_use_external_input_device">تمكين استخدام جهاز الإدخال الخارجي مع أوسماند</string>
+    <string name="key_event_action_change_map_orientation">تغيير اتجاه الخريطة</string>
+    <string name="root_folder">المجلد الرئيسي</string>
+    <string name="reset_key_assignments_desc">ستتم إزالة كافة تعيينات المفاتيح للنوع المحدد.</string>
+    <string name="key_event_action_previous_app_profile">ملف تعريف التطبيق السابق</string>
+    <string name="show_toast_about_key_pressed">عرض مقتطف حول الضغط على المفتاح</string>
+    <string name="topography_maps">الخرائط الطبوغرافية</string>
+    <string name="shared_string_rows">الصفوف</string>
+    <string name="key_event_action_move_left">حرك لليسار</string>
+    <string name="tripltek_promo">عرض تريبلتيك الترويجي لمدة %1$s شهرًا</string>
+    <string name="all_folders">كل المجلدات</string>
+    <string name="press_button_to_link_with_action">اضغط على الزر الموجود على جهازك لتعيينه للإجراء: %1$s</string>
+    <string name="tripltek_promo_description">وصول مجاني إلى الميزات بما في ذلك تنزيلات غير محدودة للخرائط والتضاريس ثلاثية الأبعاد وما إلى ذلك لمدة %1$s شهر</string>
+    <string name="deletion_error">خطأ في الحذف</string>
+    <string name="key_event_action_move_right">حرك لليمين</string>
+    <string name="shared_string_show_less">عرض أقل</string>
+    <string name="shared_string_button">زر</string>
+    <string name="key_event_action_next_app_profile">ملف تعريف التطبيق التالي</string>
+    <string name="folder">مجلد</string>
+    <string name="change_key_binding">تغيير ارتباط المفتاح</string>
+    <string name="key_event_action_take_media_note">مذكرة إعلامية</string>
+    <string name="key_event_action_activity_back_pressed">التراجع في النشاط</string>
+    <string name="shared_string_reassign">إعادة التعيين</string>
+    <string name="reset_key_assignments">إعادة تعيين المهام الرئيسية</string>
+    <string name="key_event_action_emit_navigation_hint">إرسال تلميح التنقل</string>
+    <string name="remove_type_q">هل أنت متأكد أنك تريد إزالة النوع \"%1$s\"؟</string>
+    <string name="shared_string_action">إجراء</string>
+    <string name="add_new_type">إضافة نوع جديد</string>
+    <string name="key_event_action_move_up">حرك للأعلى</string>
+    <string name="key_event_action_open_search_view">فتح عرض البحث</string>
+    <string name="target_elevation">حد الارتفاع</string>
+    <string name="remove_widget_first">يرجى إزالة الويدجت أولا</string>
+    <string name="key_event_action_zoom_out">تصغير</string>
+    <string name="key_event_action_toggle_drower">إظهار/إخفاء القائمة الجانبية</string>
+    <string name="key_is_already_assigned_error">تم بالفعل تعيين المفتاح \"%1$s\" للإجراء: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">فتح طريقة عرض التنقل</string>
+    <string name="add_row">اضف سطر</string>
+    <string name="discard_changes_prompt">هل أنت متأكد أنك تريد تجاهل التغييرات؟</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="external_input_device_title">جهاز إدخال خارجي</string>
+    <string name="row_number">الصف %1$s</string>
+    <string name="key_bindings">الارتباطات الرئيسية</string>
+    <string name="key_event_action_move_to_my_location">انتقل إلى موقعي</string>
+    <string name="clear_key_assignment">مسح مهمة المفتاح</string>
+    <string name="not_specified">غير محدد</string>
+    <string name="download_to_device">تحميل على الجهاز</string>
+    <string name="key_event_category_map_interactions">تفاعلات الخرائط</string>
+    <string name="key_event_action_move_down">حرك للأسفل</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">فتح شبكة بيانات وندرلينك</string>
+    <string name="see_all_plans">شاهد جميع الخطط</string>
+    <string name="key_event_category_actions">إجراءات</string>
+    <string name="clear_key_assignment_desc">سيتم مسح ارتباطات المفتاح للإجراء المحدد وتعيينه بدون ارتباط.</string>
 </resources>
