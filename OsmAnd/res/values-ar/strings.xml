@@ -2050,7 +2050,7 @@
     <string name="gpx_no_tracks_title_folder">يمكنك إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">أضف المزيد…</string>
     <string name="shared_string_appearance">المظهر</string>
-    <string name="upload_poi">رفع POI</string>
+    <string name="upload_poi">رفع النقاط</string>
     <string name="route_calculation">حساب المسار</string>
     <string name="gpx_no_tracks_title">لايوجد مسارات</string>
     <string name="rendering_value_fine_name">اللون والسمك</string>
@@ -2614,8 +2614,8 @@
     <string name="show_tunnels">الأنفاق</string>
     <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
     <string name="shared_string_explore">استكشاف</string>
-    <string name="shared_string_result">النتيجة</string>
-    <string name="shared_string_travel_guides">أدلة السفر</string>
+    <string name="shared_string_result">الناتج</string>
+    <string name="shared_string_travel_guides">ارشادات السفر</string>
     <string name="enter_lon">أدخل خط الطول</string>
     <string name="enter_lat">أدخل خط العرض</string>
     <string name="transport_nearby_routes">في غضون</string>
@@ -2632,7 +2632,7 @@
     <string name="popular_destinations">الوجهات الشعبية</string>
     <string name="travel_card_update_descr">تتوفر تحديثات جديدة لويكي الرحلات،حدثها لتستمتع.</string>
     <string name="update_is_available">تحديث متوفر</string>
-    <string name="download_file">تحميل</string>
+    <string name="download_file">تحميل الملف</string>
     <string name="start_editing">ابدأ التحرير</string>
     <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
@@ -2646,9 +2646,9 @@
     <string name="shared_string_wifi_only">فقط على شبكة Wi-Fi</string>
     <string name="download_images">تنزيل الصور</string>
     <string name="article_removed">تم حذف المقال</string>
-    <string name="shared_string_read">قراءة</string>
+    <string name="shared_string_read">إقرأ</string>
     <string name="saved_articles">مقالات مرجعية</string>
-    <string name="shared_string_contents">المحتويات</string>
+    <string name="shared_string_contents">محتويات</string>
     <string name="pick_up_till">المغادرة قبل</string>
     <string name="show_number_pad">إظهار لوحة الأرقام</string>
     <string name="index_item_world_wikivoyage">مقالات ويكي الرحلات حول العالم</string>
@@ -2799,7 +2799,7 @@
     <string name="topo_render_descr">على النقيض من نمط مصممة أساسا للمشي والتنزه وركوب الدراجات في الطبيعة. قراءة جيدة في الإضاءة الخارجية المعقدة. الميزات الرئيسية: مقارنة الطرق والأجسام الطبيعية، أنواع مختلفة من طرق، والخطوط الكنتورية مع إعدادات متقدمة، تفاصيل أكثر في مستويات التكبير/التصغير المقابلة من النمط الافتراضي. يسمح الخيار تكامل سطحي التمييز بين نوعية سطح الطريق. لا يوجد وضع ليلي.</string>
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي أوسماند، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
     <string name="default_render_descr">الغرض العام. إظهار المدن الكثيفة بشكل واضح. بخطوط الكنتور ، والطرق ، وجودة السطح ، وقيود الوصول ، ودروع الطرق ، وعرض المسارات وفقا لمقياس SAC / CAI ، وميزات رياضة الماء الأبيض.</string>
-    <string name="travel_card_download_descr">قم بتنزيل أدلة السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
+    <string name="travel_card_download_descr">قم بتنزيل إرشادات السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
     <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.</string>
     <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
     <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
@@ -4856,7 +4856,7 @@
     <string name="ant_missing_dependency">التابع مفقود</string>
     <string name="ant_go_to_store">انتقل إلى المتجر</string>
     <string name="map_widget_ant_bicycle_power">طاقة الدراجة</string>
-    <string name="map_widget_ant_bicycle_power_desc">يعرض طاقة الدراج ، أثناء تحريك الدراجة للأمام</string>
+    <string name="map_widget_ant_bicycle_power_desc">عرض ناتج الطاقة لراكب الدراجة، والذي يُستخدم لتحريك الدراجة للأمام</string>
     <string name="map_widget_ant_bicycle_cadence">دراجة نارية</string>
     <string name="map_widget_ant_bicycle_cadence_desc">إظهار السرعة التي يقوم بها المستخدم عند التدريج</string>
     <string name="map_widget_ant_bicycle_speed">سرعة الدراجة</string>
@@ -4864,7 +4864,7 @@
     <string name="map_widget_ant_bicycle_dist">مسافة الدراجة</string>
     <string name="map_widget_ant_bicycle_dist_desc">يعرض المسافة المقطوعة</string>
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
-    <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
+    <string name="map_widget_ant_heart_rate">معدل ضربات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>
     <string name="external_sensor_widgets">ويدجت مستشعر ANT+</string>
     <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
@@ -4874,7 +4874,7 @@
     <string name="depth_contours">ملامح العمق</string>
     <string name="current_location_widget">الإحداثيات: الموقع الحالي</string>
     <string name="external_sensors_plugin_name">مجسات خارجية</string>
-    <string name="external_sensors_plugin_description">مراقبة معدل ضربات القلب وسرعة الدراجة وقوة الدراجة والإيقاع. تتطلب توصيل الجهاز بأجهزة الاستشعار المعنية عبر مستشعر بروتوكول الشبكة الشخصية اللاسلكية ANT +.</string>
+    <string name="external_sensors_plugin_description">الوصول إلى أجهزة الاستشعار الخارجية للقراءة على سبيل المثال. معدل ضربات القلب، وسرعة الدراجة، وقوة ركوب الدراجات، أو الإيقاع. يتطلب أن يكون جهازك متصلاً بأجهزة الاستشعار المعنية عبر بروتوكول الشبكة الشخصية اللاسلكية ANT+.</string>
     <string name="map_widget_altitude_map_center">الارتفاع: مركز الخريطة</string>
     <string name="map_widget_altitude_map_center_desc">إظهارالارتفاع فوق مستوى سطح البحر لمركز الخريطة الحالي.</string>
     <string name="terms_of_service_desc">من خلال تنزيل الخرائط ، فإنك توافق على %1$s و %2$s.</string>
@@ -5236,7 +5236,7 @@
     <string name="ant_plus_open_settings">فتح الإعدادات</string>
     <string name="ant_plus_pair_new_sensor_ble">إقران مستشعر بلوتوث LE</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">قم بربط مستشعر +ANT</string>
-    <string name="learn_more_about_sensors_link">تعرف على المزيد حول أجهزة الاستشعار.</string>
+    <string name="learn_more_about_sensors_link">تعلم المزيد عن أجهزة الاستشعار.</string>
     <string name="no_search_results">لا توجد نتائج</string>
     <string name="search_track_by_name">بحث عن المسار بالاسم</string>
     <string name="number_of_tracks">%1$s مسار</string>
@@ -5500,7 +5500,7 @@
 \n</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
-    <string name="sensor_temperature_desc">يُظهر درجة الحرارة من جهاز الاستشعار</string>
+    <string name="sensor_temperature_desc">درجة الحرارة من جهاز الاستشعار</string>
     <string name="shared_string_temperature">درجة الحرارة</string>
     <string name="sort_size_descending">الحجم الكبير أولا</string>
     <string name="delete_map">حذف الخريطة</string>
@@ -5570,4 +5570,6 @@
     <string name="trash_is_empty">سلة المهملات فارغة</string>
     <string name="shared_string_trash">سلة المهملات</string>
     <string name="shared_string_delete_item">حذف العنصر</string>
+    <string name="rendering_attr_showToll_name">عرض قيود الرسوم</string>
+    <string name="rendering_attr_showToll_description">عرض القيود المفروضة على الطرق</string>
 </resources>
