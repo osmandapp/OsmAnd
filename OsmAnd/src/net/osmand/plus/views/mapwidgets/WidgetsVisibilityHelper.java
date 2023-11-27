@@ -48,7 +48,7 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowQuickActionButton() {
 		return isQuickActionLayerOn()
 				&& !isInConfigureMapOptionMode()
-				&& shouldShowFabButton();
+				&& true;
 	}
 
 	public boolean shouldShowMap3DButton() {

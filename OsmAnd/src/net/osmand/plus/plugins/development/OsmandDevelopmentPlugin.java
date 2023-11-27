@@ -33,7 +33,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.views.AutoZoomBySpeedUtils;
+import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -242,19 +242,19 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
-		AutoZoomBySpeedUtils.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
+		AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
 
 	@Nullable
 	@Override
 	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart, @NonNull GPXTrackAnalysis analysis, @NonNull GPXDataSetType graphType, @NonNull GPXDataSetAxisType chartAxisType, boolean calcWithoutGaps, boolean useRightAxis) {
-		return AutoZoomBySpeedUtils.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType,
+		return AutoZoomBySpeedHelper.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType,
 				calcWithoutGaps, useRightAxis);
 	}
 
 	@Nullable
 	@Override
 	protected TrackPointsAnalyser getTrackPointsAnalyser() {
-		return AutoZoomBySpeedUtils.getTrackPointsAnalyser(app);
+		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
 	}
 }

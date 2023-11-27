@@ -759,11 +759,15 @@ public class MapUtils {
 	}
 
 	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing) {
+		return rhumbDestinationPoint(latLon.getLatitude(), latLon.getLongitude(), distance, bearing);
+	}
+
+	public static LatLon rhumbDestinationPoint(double lat, double lon, double distance, double bearing) {
 		double radius = EARTH_RADIUS_A;
 
 		double d = distance / radius; // angular distance in radians
-		double phi1 = Math.toRadians(latLon.getLatitude());
-		double lambda1 = Math.toRadians(latLon.getLongitude());
+		double phi1 = Math.toRadians(lat);
+		double lambda1 = Math.toRadians(lon);
 		double theta = Math.toRadians(bearing);
 
 		double deltaPhi = d * Math.cos(theta);

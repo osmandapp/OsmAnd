@@ -273,7 +273,7 @@ public class AnimateDraggingMapThread {
 
 		float animationDuration = Math.max(movingTime, NAV_ANIMATION_TIME / 4);
 
-		boolean animateZoom = zoomParams != null && (zoom != startZoom || startZoomFP != 0);
+		boolean animateZoom = zoomParams != null && (zoom != startZoom || zoomFP != startZoomFP);
 		float rotationDiff = finalRotation != null
 				? Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation)) : 0;
 		boolean animateRotation = rotationDiff > 0.1;
@@ -337,7 +337,11 @@ public class AnimateDraggingMapThread {
 
 		startThreadAnimating(() -> {
 			animatingMapMove = true;
-			setTargetValues(zoom, zoomFP, finalLat, finalLon);
+			if (mapRenderer != null) {
+				setTargetValues(0, 0, finalLat, finalLon);
+			} else {
+				setTargetValues(zoom, zoomFP, finalLat, finalLon);
+			}
 
 			if (mapRenderer != null) {
 				if (animateZoom) {
@@ -543,7 +547,6 @@ public class AnimateDraggingMapThread {
 
 		PointI initFlatTarget31 = mapRenderer.getState().getTarget31();
 		float initZoom = mapRenderer.getZoom();
-		int zoomThreshold = ((int) (targetFloatZoom * 2));
 		float initAzimuth = mapRenderer.getAzimuth();
 		float initElevationAngle = mapRenderer.getElevationAngle();
 
@@ -574,7 +577,7 @@ public class AnimateDraggingMapThread {
 					|| initFlatTarget31.getY() != flatTarget31.getY();
 			}
 			if (!animateZoom) {
-				animateZoom = initZoom != zoom && targetIntZoom > 0;
+				animateZoom = initZoom != zoom;
 			}
 			if (!animateAzimuth) {
 				animateAzimuth = initAzimuth != azimuth;
@@ -588,9 +591,9 @@ public class AnimateDraggingMapThread {
 					MapUtils.get31LongitudeX(target31.getX()));
 			}
 			if (!stopped && animateZoom) {
-				int baseZoom = (int) Math.round(zoom - 0.5 * zoomThreshold);
-				double zaAnimate = zoom - baseZoom;
-				tb.setZoomAndAnimation(baseZoom, zaAnimate, tb.getZoomFloatPart());
+				int zoomBase = Math.round(zoom);
+				double zoomAnimation = zoom - zoomBase - tb.getZoomFloatPart();
+				tb.setZoomAndAnimation(zoomBase, zoomAnimation, tb.getZoomFloatPart());
 			}
 			if (!stopped && animateAzimuth) {
 				tb.setRotate(-azimuth);
@@ -604,8 +607,12 @@ public class AnimateDraggingMapThread {
 			}
 		}
 		if (animateZoom && mapRenderer != null) {
-			mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);
-			tb.setZoomAndAnimation(targetIntZoom, 0, targetFloatZoom);
+			if (targetIntZoom > 0) {
+				mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);
+				tb.setZoomAndAnimation(targetIntZoom, 0, targetFloatZoom);
+			} else {
+				tb.setZoomAndAnimation(tb.getZoom(), 0, tb.getZoomFloatPart() + tb.getZoomAnimation());
+			}
 		}
 		tileView.refreshMap();
 	}
