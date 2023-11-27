@@ -216,7 +216,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		progressTitle = mainView.findViewById(R.id.progress_title);
 		copyFilesDescr = mainView.findViewById(R.id.copy_files_descr);
 
-		progressBar.setMin(0);
 		progressBar.setMax((int) (filesSize.second / 1024));
 
 		setupFilesTitle();
