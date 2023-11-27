@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 import android.view.View;
@@ -10,7 +11,6 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -20,7 +20,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -165,18 +164,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
