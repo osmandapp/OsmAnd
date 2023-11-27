@@ -27,6 +27,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -1167,8 +1168,13 @@ public class ResourceManager {
 		return res;
 	}
 
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect) {
+		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+	}
+
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+	                                     double topLatitude, double leftLongitude, double bottomLatitude,
+	                                     double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
