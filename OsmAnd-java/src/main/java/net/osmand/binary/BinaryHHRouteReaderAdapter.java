@@ -9,7 +9,6 @@ import org.apache.commons.logging.Log;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
@@ -17,8 +16,10 @@ import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.router.HHRoutingDB;
-import net.osmand.router.HHRoutingDB.NetworkDBPoint;
+import net.osmand.router.HHRouteDataStructure;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
+import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.MapUtils;
 
 public class BinaryHHRouteReaderAdapter {
@@ -33,6 +34,7 @@ public class BinaryHHRouteReaderAdapter {
 		
 		List<HHRouteBlockSegments> sublist;
 	}
+	
 	
 	public static class HHRoutePointsBox {
 		int length;
@@ -100,11 +102,11 @@ public class BinaryHHRouteReaderAdapter {
 		return map.readInt();
 	}
 	
-	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initRegionAndLoadPoints(HHRouteRegion r, Class<T> cl) throws IOException {
-		codedIS.seek(r.filePointer);
-		int oldLimit = codedIS.pushLimit(r.length);
+	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initRegionAndLoadPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
+		codedIS.seek(reg.filePointer);
+		int oldLimit = codedIS.pushLimit(reg.length);
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
-		r.segments = new ArrayList<>();
+		reg.segments = new ArrayList<>();
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -113,10 +115,10 @@ public class BinaryHHRouteReaderAdapter {
 				codedIS.popLimit(oldLimit);
 				return mp;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
-				readPointBox(cl, mp, null);
+				readPointBox(cl, mapId, mp, null);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTSEGMENTS_FIELD_NUMBER:
-				r.segments.add(readRegionSegmentHeader());
+				reg.segments.add(readRegionSegmentHeader());
 				break;
 			default:
 				skipUnknownField(t);
@@ -145,7 +147,7 @@ public class BinaryHHRouteReaderAdapter {
 				region.profileParams.add(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
-				region.top = readPointBox(null, null, null);
+				region.top = readPointBox(null, (short) 0, null, null);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTSEGMENTS_FIELD_NUMBER:
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -157,7 +159,8 @@ public class BinaryHHRouteReaderAdapter {
 		}
 	}
 
-	private <T extends NetworkDBPoint>  HHRoutePointsBox readPointBox(Class<T> cl, TLongObjectHashMap<T> mp, HHRoutePointsBox parent) throws IOException {
+	private <T extends NetworkDBPoint>  HHRoutePointsBox readPointBox(Class<T> cl, short mapId, 
+			TLongObjectHashMap<T> mp, HHRoutePointsBox parent) throws IOException {
 		HHRoutePointsBox box = new HHRoutePointsBox();
 		box.length = readInt();
 		box.filePointer = codedIS.getTotalBytesRead();
@@ -188,14 +191,14 @@ public class BinaryHHRouteReaderAdapter {
 				if (cl == null) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				} else {
-					readPointBox(cl, mp, box);
+					readPointBox(cl, mapId, mp, box);
 				}
 				break;
 			case OsmAndHHRoutingIndex.HHRoutePointsBox.POINTS_FIELD_NUMBER:
 				if (cl == null) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				} else {
-					readPoint(cl, mp, box.left, box.top);
+					readPoint(cl, mapId, mp, box.left, box.top);
 				}
 				break;
 			default:
@@ -205,13 +208,14 @@ public class BinaryHHRouteReaderAdapter {
 		}		
 	}
 
-	private <T extends NetworkDBPoint> T readPoint(Class<T> cl, TLongObjectHashMap<T> mp, int dx, int dy) throws IOException {
+	private <T extends NetworkDBPoint> T readPoint(Class<T> cl, short mapId, TLongObjectHashMap<T> mp, int dx, int dy) throws IOException {
 		T pnt;
 		try {
 			pnt = cl.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}		
+		pnt.mapId = mapId;
 		int size = codedIS.readRawVarint32();
 		int oldLimit = codedIS.pushLimit(size);
 		int dualIdPoint = -1;
@@ -303,15 +307,12 @@ public class BinaryHHRouteReaderAdapter {
 		
 	}
 	
-	private <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteBlockSegments block,
-			TLongObjectHashMap<T> pntsById, TLongObjectHashMap<T> pntsByFileId,
-			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, int searchInd,
-			boolean reverse) throws IOException {
+	private <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg, 
+			HHRouteBlockSegments block, int searchInd, boolean reverse) throws IOException {
 		if (block.sublist != null) {
 			for (HHRouteBlockSegments s : block.sublist) {
 				if (checkId(searchInd, s)) {
-					return loadNetworkSegmentPoint(s, pntsById, pntsByFileId, clusterInPoints, clusterOutPoints,
-							searchInd, reverse);
+					return loadNetworkSegmentPoint(ctx, reg, s, searchInd, reverse);
 				}
 			}
 			return 0;
@@ -350,8 +351,7 @@ public class BinaryHHRouteReaderAdapter {
 					child.length = readInt();
 					child.filePointer = codedIS.getTotalBytesRead();
 					int olLimit = codedIS.pushLimit(child.length);
-					loaded += loadNetworkSegmentPoint(child, pntsById, pntsByFileId, clusterInPoints, clusterOutPoints,
-							searchInd, reverse);
+					loaded += loadNetworkSegmentPoint(ctx, reg, child, searchInd, reverse);
 					codedIS.popLimit(olLimit);
 					block.sublist.add(child);
 				}
@@ -361,14 +361,12 @@ public class BinaryHHRouteReaderAdapter {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				} else {
 					int pntFileId = (ind++) + block.idRangeStart;
-					T point = pntsByFileId.get(pntFileId);
+					T point = reg.getPoint(pntFileId);
 					Builder bld = HHRoutePointSegments.newBuilder();
 					codedIS.readMessage(bld, null);
 					HHRoutePointSegments s = bld.buildPartial();
-					point.connectedSet(true, HHRoutingDB.parseSegments(s.getSegmentsIn().toByteArray(), pntsById,
-							clusterInPoints.get(point.clusterId), point, false));
-					point.connectedSet(false, HHRoutingDB.parseSegments(s.getSegmentsOut().toByteArray(), pntsById,
-							clusterOutPoints.get(point.dualPoint.clusterId), point, true));
+					HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(), 
+							s.getSegmentsOut().toByteArray());
 					loaded += point.connected(true).size() + point.connected(false).size();
 				}
 
@@ -384,22 +382,20 @@ public class BinaryHHRouteReaderAdapter {
 		return s.idRangeStart <= id && s.idRangeStart + s.idRangeLength > id;
 	}
 
-	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion,
-			TLongObjectHashMap<T> pntsById, TLongObjectHashMap<T> pntsByFileId,
-			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, int routingProfile,
-			T point, boolean reverse) throws IOException {
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T> ctx,
+			HHRouteRegionPointsCtx<T> reg, T point, boolean reverse) throws IOException {
 		if (point.connected(reverse) != null) {
 			return 0;
 		}
-
+		HHRouteRegion fileRegion = reg.getFileRegion();
 		for (HHRouteBlockSegments s : fileRegion.segments) {
-			if (s.profileId == routingProfile && checkId(point.fileId, s)) {
- 				return loadNetworkSegmentPoint(s, pntsById, pntsByFileId, clusterInPoints, clusterOutPoints,
-						point.fileId, reverse);
+			if (s.profileId == reg.getRoutingProfile() && checkId(point.fileId, s)) {
+				return loadNetworkSegmentPoint(ctx, reg, s, point.fileId, reverse);
 			}
 		}
 		return 0;
-		
 	}
+	
+	
 
 }

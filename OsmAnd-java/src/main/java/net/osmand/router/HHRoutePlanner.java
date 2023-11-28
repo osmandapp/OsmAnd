@@ -28,12 +28,13 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHNetworkSegmentRes;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
+import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.router.HHRouteDataStructure.RoutingStats;
-import net.osmand.router.HHRoutingDB.NetworkDBPoint;
-import net.osmand.router.HHRoutingDB.NetworkDBSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
@@ -50,39 +51,41 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	
 	public static HHRoutePlanner<NetworkDBPoint> create(RoutingContext ctx, HHRoutingDB networkDB) {
-		return new HHRoutePlanner<NetworkDBPoint>(ctx, networkDB, NetworkDBPoint.class);
+		if (networkDB != null) {
+			return new HHRoutePlanner<NetworkDBPoint>(ctx,
+					new HHRouteRegionPointsCtx<NetworkDBPoint>((short) 0, networkDB), NetworkDBPoint.class);
+		}
+		return new HHRoutePlanner<NetworkDBPoint>(ctx, null, NetworkDBPoint.class);
 	}
 	
 	
-	public HHRoutePlanner(RoutingContext ctx, HHRoutingDB networkDB, Class<T> cl) {
+	public HHRoutePlanner(RoutingContext ctx, HHRouteRegionPointsCtx<T> src, Class<T> cl) {
 		this.pointClass = cl;
-		HHRoutingContext<T> c = new HHRoutingContext<T>();
-		c.networkDB = networkDB;
-		initEmptyContext(ctx, c);
+		initNewContext(ctx, src == null ? null : Collections.singletonList(src));
 	}
 	
-	public void setRoutingProfile(int routingProfile) {
-		cacheHctx.routingProfile = routingProfile;
-		initEmptyContext(cacheHctx.rctx, cacheHctx);
-	}
-	
-	private HHRoutingContext<T> initEmptyContext(RoutingContext ctx, HHRoutingContext<T> cp) {
+	private HHRoutingContext<T> initNewContext(RoutingContext ctx, List<HHRouteRegionPointsCtx<T>> regions) {
+		if (cacheHctx != null) {
+			for (HHRouteRegionPointsCtx<T> p : cacheHctx.regions) {
+				if (p.networkDB != null) {
+					try {
+						p.networkDB.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 		cacheHctx = new HHRoutingContext<T>();
 		cacheHctx.rctx = ctx;
-		if (cp != null) {
-			cacheHctx.networkDB = cp.networkDB;
-			cacheHctx.file = cp.file;
-			cacheHctx.fileRegion = cp.fileRegion;
-			cacheHctx.routingProfile = cp.routingProfile;
+		if (regions != null) {
+			cacheHctx.regions.addAll(regions);
 		}
 		return cacheHctx;
 	}
 
 	public void close() throws SQLException {
-		if (cacheHctx.networkDB != null) {
-			cacheHctx.networkDB.close();
-		}
-		initEmptyContext(cacheHctx.rctx, null);
+		initNewContext(cacheHctx.rctx, null);
 	}
 	
 	public static double squareRootDist31(int x1, int y1, int x2, int y2) {
@@ -369,28 +372,23 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c, LatLon start, LatLon end) throws SQLException, IOException {
 		HHRoutingContext<T> hctx = this.cacheHctx;
-		if (hctx.networkDB == null) {
-			hctx = selectBestRoutingNetwork(start, end, hctx);
-			if (hctx == null) {
-				return null;
-			}
+		if (hctx.regions.isEmpty()) {
+			hctx = selectBestRoutingFiles(start, end, hctx);
 		}
-		System.out.printf("Selected file %s, routing profile = %s \n",
-				hctx.networkDB != null ? hctx.networkDB.getFile().getName() : hctx.file.getFile().getName(),
-				hctx.getRoutingProfile());
 		hctx.stats = new RoutingStats();
 		hctx.config = c;
 		hctx.setStartEnd(start, end);
 		hctx.clearVisited();
-		if (hctx.pointsById != null) {
+		System.out.println("Selected files: " + (hctx == null ? " EMPTY " : hctx.getRoutingInfo()));
+		if (hctx == null || hctx.initialized) {
 			return hctx;
 		}
+		
 		long time = System.nanoTime();
 		System.out.print("Loading points... ");
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<T>();
-		hctx.pointsByFileId = new TLongObjectHashMap<T>();
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		if (c.PRELOAD_SEGMENTS) {
@@ -416,18 +414,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			hctx.boundaries.put(pos, null);
 			hctx.pointsByGeo.put(pos, pnt);
-			hctx.pointsByFileId.put(pnt.fileId, pnt);
+			hctx.regions.get(pnt.mapId).pntsByFileId.put(pnt.fileId, pnt);
 		}		
 		hctx.pointsRect.printStatsDistribution("Points distributed");
-		
+		hctx.initialized = true;
 		return hctx;
 	}
 
 
-	private HHRoutingContext<T> selectBestRoutingNetwork(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
-		BinaryMapIndexReader selected = null;
-		HHRouteRegion selectedRegion = null;
-		int selectedProfile = hctx.routingProfile;
+	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
+		// TODO not always clear (cache)
+		List<HHRouteRegionPointsCtx<T>> regions = new ArrayList<>();
+		// TODO filter by edition
+		// TODO load by bbox
+		
 		int minExtraParam = Integer.MAX_VALUE;
 		int maxMatchingParams = 0;
 		GeneralRouter router = hctx.rctx.config.router;
@@ -437,6 +437,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
 				if (hhregion.profile.equals(profile) && hhregion.top.contains(start) && hhregion.top.contains(end)) {
+					int bestProfile = -1;
 					for (int k = 0; k < hhregion.profileParams.size(); k++) {
 						String[] params = hhregion.profileParams.get(k).split(",");
 						int extraParam = 0, matchParam = 0;
@@ -453,32 +454,25 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						if (extraParam > minExtraParam) {
 							// not a good match
 						} else if (extraParam < minExtraParam || matchParam > maxMatchingParams) {
-							selectedRegion = hhregion;
-							selected = r;
-							selectedProfile = k;
+							bestProfile = k;
 							minExtraParam = extraParam;
 							maxMatchingParams = matchParam;
 						}
 					}
+					if(bestProfile != -1) {
+						short mapId = (short) regions.size();
+						HHRouteRegionPointsCtx<T> region = new HHRouteRegionPointsCtx<T>(mapId, hhregion, r);
+						region.routingProfile = bestProfile;
+						regions.add(region);
+					}
+					
 				}
 			}
-			if (selected != null) {
-				break;
-			}
 		}
-		if (selectedRegion == null) {
+		if (regions.isEmpty()) {
 			return null;
 		}
-		if (selected != hctx.file || selectedRegion != hctx.fileRegion ||
-				selectedProfile != hctx.routingProfile) {
-			HHRoutingContext<T> cp = new HHRoutingContext<T>();
-			cp.file = selected;
-			cp.fileRegion = selectedRegion;
-			cp.routingProfile = selectedProfile; 
-			System.out.println("Initialize new context");
-			hctx = initEmptyContext(hctx.rctx, cp);
-		}
-		return hctx;
+		return initNewContext(hctx.rctx, regions);
 	}
 
 	public static <T extends NetworkDBPoint> TIntObjectHashMap<List<T>> groupByClusters(TLongObjectHashMap<T> pointsById, boolean out) {

@@ -1,8 +1,6 @@
 package net.osmand.router;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,13 +11,15 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import com.google.protobuf.CodedInputStream;
-
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.data.LatLon;
-import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
+import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPointCh;
+import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -112,31 +112,6 @@ public class HHRoutingDB {
 		return id;
 	}
 	
-	public static List<NetworkDBSegment> parseSegments(byte[] bytes, TLongObjectHashMap<? extends NetworkDBPoint> pntsById,
-			List<? extends NetworkDBPoint> lst, NetworkDBPoint pnt, boolean out)  {
-		try {
-			List<NetworkDBSegment> l = new ArrayList<>();
-			if (bytes == null) {
-				return l;
-			}
-			ByteArrayInputStream str = new ByteArrayInputStream(bytes);
-			for (int i = 0; i < lst.size(); i++) {
-				int d = CodedInputStream.readRawVarint32(str);
-				if (d <= 0) {
-					continue;
-				}
-				double dist = d / 10.0;
-				NetworkDBPoint start = out ? pnt : lst.get(i);
-				NetworkDBPoint end = out ? lst.get(i) : pnt;
-				NetworkDBSegment seg = new NetworkDBSegment(start, end, dist, out, false);
-				l.add(seg);
-			}
-			return l;
-		} catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
-		
-	}
 
 	private boolean checkColumnExist(Statement st, String col, String table) throws SQLException {
 		try {
@@ -149,7 +124,7 @@ public class HHRoutingDB {
 
 	
 	
-	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(Class<T> cl) throws SQLException {
+	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(short mapId, Class<T> cl) throws SQLException {
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
@@ -166,6 +141,7 @@ public class HHRoutingDB {
 				// ignore non-dual point as they don't exist
 				continue;
 			}
+			pnt.mapId = mapId;
 			pnt.index = rs.getInt(p++);
 			pnt.clusterId = rs.getInt(p++);
 			int chInd = rs.getInt(p++);
@@ -194,13 +170,11 @@ public class HHRoutingDB {
 	
 	
 	
-	public void loadGeometry(NetworkDBSegment segment, int profile, boolean reload) throws SQLException {
-		if (segment.geom != null && !reload) {
-			return;
-		}
+	public boolean loadGeometry(NetworkDBSegment segment, int profile, boolean reload) throws SQLException {
 		List<LatLon> geometry = segment.getGeometry();
 		geometry.clear();
 		geometry.addAll(parseGeometry(segment.start.index, segment.end.index, profile, segment.shortcut));
+		return !geometry.isEmpty();
 	}
 	
 	public void loadSegmentPointInternal(int id, int profile, byte[][] res) throws SQLException {
@@ -216,20 +190,17 @@ public class HHRoutingDB {
 	}
 	
 	
-	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(TLongObjectHashMap<T> pntsById, 
-			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, 
-			int profile, NetworkDBPoint point, boolean reverse) throws SQLException {
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg, T point, boolean reverse) throws SQLException {
 		if (point.connected(reverse) != null) {
 			return 0;
 		}
 		int loadedSegs = 0;
 		if (compactDB) {
 			loadSegmentStart.setInt(1, point.index);
-			loadSegmentStart.setInt(2, profile);
+			loadSegmentStart.setInt(2, reg.routingProfile);
 			ResultSet rs = loadSegmentStart.executeQuery();
 			if (rs.next()) {
-				point.connectedSet(true, parseSegments(rs.getBytes(2), pntsById, clusterInPoints.get(point.clusterId), point, false));
-				point.connectedSet(false, parseSegments(rs.getBytes(3), pntsById, clusterOutPoints.get(point.dualPoint.clusterId), point, true));
+				HHRouteDataStructure.setSegments(ctx, point, rs.getBytes(2), rs.getBytes(3));
 				return point.connected(true).size() + point.connected(false).size();
 			} else {
 				point.connectedSet(true, new ArrayList<NetworkDBSegment>());
@@ -241,12 +212,12 @@ public class HHRoutingDB {
 			@SuppressWarnings("resource")
 			PreparedStatement pre = reverse ? loadSegmentStart : loadSegmentEnd;
 			pre.setInt(1, point.index);
-			pre.setInt(2, profile);
+			pre.setInt(2, reg.routingProfile);
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
 				loadedSegs++;
-				NetworkDBPoint start = pntsById.get(rs.getLong(1));
-				NetworkDBPoint end = pntsById.get(rs.getLong(2));
+				NetworkDBPoint start = ctx.pointsById.get(rs.getLong(1));
+				NetworkDBPoint end = ctx.pointsById.get(rs.getLong(2));
 				double dist = rs.getDouble(3);
 				boolean shortcut = rs.getInt(4) > 0;
 				NetworkDBSegment rev = new NetworkDBSegment(start, end, dist, !reverse, shortcut);
@@ -320,7 +291,7 @@ public class HHRoutingDB {
 				}
 			}
 		}
-		if(l.isEmpty()) {
+		if (l.isEmpty()) {
 			System.err.printf("Empty route geometry %d -> %d  %s\n", start, end, shortcut ? "sh" : "bs");
 		}
 		return l;
@@ -333,211 +304,5 @@ public class HHRoutingDB {
 	}
 	
 	
-	static class NetworkDBSegment {
-		final boolean direction;
-		final NetworkDBPoint start;
-		final NetworkDBPoint end;
-		final boolean shortcut;
-		final double dist;
-		List<LatLon> geom;
-		
-		public NetworkDBSegment(NetworkDBPoint start, NetworkDBPoint end, double dist, boolean direction, boolean shortcut) {
-			this.direction = direction;
-			this.start = start;
-			this.end = end;
-			this.shortcut = shortcut;
-			this.dist = dist;
-		}
-		
-		public List<LatLon> getGeometry() {
-			if (geom == null) {
-				geom = new ArrayList<LatLon>();
-			}
-			return geom;
-		}
-		
-		@Override
-		public String toString() {
-			return String.format("Segment %s -> %s [%.2f] %s", start, end, dist, shortcut ? "sh" : "bs");
-		}
-		
-	}
-	
-	
-	static class NetworkDBPointRouteInfo {
-		NetworkDBPoint rtRouteToPoint;
-		boolean rtVisited;
-		double rtDistanceFromStart;
-		int rtDepth = -1; // possibly not needed (used 1)
-		double rtDistanceToEnd; // possibly not needed (used 1)
-		double rtCost;
-		FinalRouteSegment rtDetailedRoute;
-		
-		public int getDepth(boolean rev) {
-			if (rtDepth > 0) {
-				return rtDepth;
-			}
-			if (rtRouteToPoint != null) {
-				rtDepth = rtRouteToPoint.rt(rev).getDepth(rev) + 1; 
-				return rtDepth ;
-			}
-			return 0;
-		}
-		
-		public void setDetailedParentRt(FinalRouteSegment r) {
-			double segmentDist = r.getDistanceFromStart();
-			rtRouteToPoint = null;
-			rtCost = rtDistanceToEnd + segmentDist;
-			rtDetailedRoute = r;
-			rtDistanceFromStart = segmentDist;
-		}
-		
-		public void setCostParentRt(boolean rev, double cost, NetworkDBPoint point, double segmentDist) {
-			rtCost = cost;
-			rtRouteToPoint = point;
-			rtDistanceFromStart = (point == null ? 0 : point.rt(rev).rtDistanceFromStart) + segmentDist;
-		}
-	}
-	
-	
-	
-	public static class NetworkDBPoint {
-		public NetworkDBPoint dualPoint;
-		public int index;
-		public int clusterId;
-		public int fileId;
-		
-		public long roadId;
-		public short start;
-		public short end;
-		public int startX;
-		public int startY;
-		public int endX;
-		public int endY;
-		
-		boolean rtExclude;
-		NetworkDBPointRouteInfo rtRev;
-		NetworkDBPointRouteInfo rtPos;
-		
-		List<NetworkDBSegment> connected = new ArrayList<NetworkDBSegment>();
-		List<NetworkDBSegment> connectedReverse = new ArrayList<NetworkDBSegment>();
-		
-		public int midX() {
-			return startX / 2 + endX / 2 ;
-		}
-		
-		public int midY() {
-			return startY / 2 + endY/ 2 ;
-		}
-		
-		public NetworkDBPointRouteInfo rt(boolean rev) {
-			if (rev) {
-				if (rtRev == null) {
-					rtRev = new NetworkDBPointRouteInfo();
-				}
-				return rtRev;
-			} else {
-				if (rtPos == null) {
-					rtPos = new NetworkDBPointRouteInfo();
-				}
-				return rtPos;
-			}
-		}
-		
-		public List<NetworkDBSegment> connected(boolean rev) {
-			return rev ? connectedReverse : connected;
-		}
-		
-		public void setDistanceToEnd(boolean rev, double segmentDist) {
-			rt(rev).rtDistanceToEnd = segmentDist;
-		}
-		
-
-		public void markVisited(boolean rev) {
-			rt(rev).rtVisited = true;
-		}
-		
-		public void connectedSet(boolean rev, List<NetworkDBSegment> l) {
-			if (rev) {
-				connectedReverse = l;
-			} else {
-				connected = l;
-			}
-		}
-		
-		public void setCostParentRt(boolean reverse, double cost, NetworkDBPoint point, double segmentDist) {
-			rt(reverse).setCostParentRt(reverse, cost, point, segmentDist);
-		}
-		
-		public void setDetailedParentRt(boolean reverse, FinalRouteSegment r) {
-			rt(reverse).setDetailedParentRt(r);
-		}
-		
-		public void markSegmentsNotLoaded() {
-			connected = null;
-			connectedReverse = null;
-		}
-		
-		@Override
-		public String toString() {
-			return String.format("Point %d (%d %d-%d)", index, roadId / 64, start, end);
-		}
-		
-		public LatLon getPoint() {
-			return new LatLon(MapUtils.get31LatitudeY(this.startY / 2 + this.endY / 2),
-					MapUtils.get31LongitudeX(this.startX / 2 + this.endX / 2));
-		}
-		
-		public NetworkDBSegment getSegment(NetworkDBPoint target, boolean dir) {
-			List<NetworkDBSegment> l = (dir ? connected : connectedReverse);
-			if (l == null) {
-				return null;
-			}
-			for (NetworkDBSegment s : l) {
-				if (dir && s.end == target) {
-					return s;
-				} else if (!dir && s.start == target) {
-					return s;
-				}
-			}
-			return null;
-		}
-
-		public void clearRouting() {
-			rtExclude = false;
-			rtPos = null;
-			rtRev = null;
-		}
-
-		public int chInd() {
-			return 0;
-		}
-
-		public int midPntDepth() {
-			return 0;
-		}
-
-		public long getGeoPntId() {
-			return HHRoutePlanner.calculateRoutePointInternalId(roadId, start, end);
-		}
-		
-	}
-
-	static class NetworkDBPointMid extends NetworkDBPoint  {
-		
-		int rtMidPointDepth = 0;
-		
-		public int midPntDepth() {
-			return rtMidPointDepth;
-		}
-	}
-
-	static class NetworkDBPointCh extends NetworkDBPoint {
-		int chInd;
-		
-		public int chInd() {
-			return chInd;
-		}
-	}
 
 }

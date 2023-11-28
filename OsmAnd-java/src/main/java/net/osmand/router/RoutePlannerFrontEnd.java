@@ -1,6 +1,19 @@
 package net.osmand.router;
 
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -15,22 +28,8 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
-import net.osmand.router.HHRoutingDB.NetworkDBPoint;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
 
 
 public class RoutePlannerFrontEnd {

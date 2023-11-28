@@ -1,11 +1,50 @@
 package net.osmand.binary;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.logging.Log;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -38,49 +77,11 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Way;
-import net.osmand.router.HHRoutingDB.NetworkDBPoint;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
+import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TIntHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -442,16 +443,13 @@ public class BinaryMapIndexReader {
 		return "";
 	}
 	
-	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion r, Class<T> cl) throws IOException {
-		return hhAdapter.initRegionAndLoadPoints(r, cl);
+	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
+		return hhAdapter.initRegionAndLoadPoints(reg, mapId, cl);
 	}
 
-	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRouteRegion fileRegion,
-			TLongObjectHashMap<T> pointsById, TLongObjectHashMap<T> pointsByFileId,
-			TIntObjectHashMap<List<T>> clusterInPoints, TIntObjectHashMap<List<T>> clusterOutPoints, int routingProfile,
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg,
 			T point, boolean reverse) throws IOException {
-		return hhAdapter.loadNetworkSegmentPoint(fileRegion, pointsById, pointsByFileId, clusterInPoints,
-				clusterOutPoints, routingProfile, point, reverse);
+		return hhAdapter.loadNetworkSegmentPoint(ctx, reg, point, reverse);
 	}
 	
 	public String getRegionName() {
