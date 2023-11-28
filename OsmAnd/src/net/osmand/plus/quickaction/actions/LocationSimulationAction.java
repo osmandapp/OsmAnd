@@ -22,7 +22,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -124,7 +124,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null && gpxFile.hasTrkPt()) {
-			sim.startAnimationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
+			sim.startSimulationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
 		}
 	}
 
