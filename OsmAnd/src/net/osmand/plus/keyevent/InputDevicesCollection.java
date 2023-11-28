@@ -42,19 +42,6 @@ class InputDevicesCollection {
 		return false;
 	}
 
-	public boolean hasKeybindingNameDuplicate(@NonNull OsmandApplication context,
-	                                          @NonNull String deviceId, @NonNull String newName) {
-		InputDeviceProfile device = getDeviceById(deviceId);
-		if (device != null) {
-			for (KeyBinding keyBinding : device.getKeyBindings()) {
-				if (Objects.equals(keyBinding.getName(context), newName)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	@NonNull
 	public ApplicationMode getAppMode() {
 		return appMode;

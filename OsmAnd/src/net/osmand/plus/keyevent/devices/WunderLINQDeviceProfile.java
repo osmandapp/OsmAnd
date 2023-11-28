@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * WunderLINQ device, motorcycle smart phone control.
@@ -17,10 +21,13 @@ public class WunderLINQDeviceProfile extends PredefinedInputDeviceProfile {
 	public static final String ID = "wunderlinq";
 
 	@Override
-	protected void collectKeyBindings() {
-		bindCommand(KeyEvent.KEYCODE_DPAD_UP, MapZoomCommand.ZOOM_IN_ID);
-		bindCommand(KeyEvent.KEYCODE_DPAD_DOWN, MapZoomCommand.ZOOM_OUT_ID);
-		bindCommand(KeyEvent.KEYCODE_ESCAPE, OpenWunderLINQDatagridCommand.ID);
+	@NonNull
+	protected List<KeyBinding> collectAssignments() {
+		List<KeyBinding> list = new ArrayList<>();
+		addAssignment(list, MapZoomCommand.ZOOM_IN_ID, KeyEvent.KEYCODE_DPAD_UP);
+		addAssignment(list, MapZoomCommand.ZOOM_OUT_ID, KeyEvent.KEYCODE_DPAD_DOWN);
+		addAssignment(list, OpenWunderLINQDatagridCommand.ID, KeyEvent.KEYCODE_ESCAPE);
+		return list;
 	}
 
 	@NonNull

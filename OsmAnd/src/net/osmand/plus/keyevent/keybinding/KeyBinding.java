@@ -1,52 +1,96 @@
 package net.osmand.plus.keyevent.keybinding;
 
+import static net.osmand.plus.keyevent.KeySymbolMapper.getKeySymbol;
+
 import android.content.Context;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.keyevent.KeyEventCommandsCache;
-import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class KeyBinding {
 
-	private final int keyCode;
 	private final String commandId;
-	private final String customName;
+	private String customName;
+	private List<Integer> keyCodes = new ArrayList<>();
 	private KeyEventCommand cachedCommand;
 
-	public KeyBinding(int keyCode, @NonNull KeyBinding keyBinding) {
-		this(keyCode, keyBinding.commandId, keyBinding.customName);
-	}
-
-	public KeyBinding(@NonNull String customName, @NonNull KeyBinding keyBinding) {
-		this(keyBinding.keyCode, keyBinding.commandId, customName);
-	}
-
-	public KeyBinding(int keyCode, @NonNull String commandId, @Nullable String customName) {
-		this.keyCode = keyCode;
+	public KeyBinding(@NonNull String commandId, @NonNull Integer ... keyCodes) {
 		this.commandId = commandId;
-		this.customName = customName;
+		this.keyCodes = Arrays.asList(keyCodes);
 	}
 
 	public KeyBinding(@NonNull JSONObject jsonObject) throws JSONException {
-		this.keyCode = jsonObject.getInt("keycode");
 		this.commandId = jsonObject.getString("commandId");
 		this.customName = jsonObject.has("customName")
 				? jsonObject.getString("customName")
 				: null;
+
+		if (jsonObject.has("keycodes")) {
+			JSONArray keyCodesJsonArray = jsonObject.getJSONArray("keycodes");
+			for (int i = 0; i < keyCodesJsonArray.length(); i++) {
+				JSONObject keyCodeJson = keyCodesJsonArray.getJSONObject(i);
+				int keyCode = keyCodeJson.getInt("keycode");
+				keyCodes.add(keyCode);
+			}
+		} else if (jsonObject.has("keycode")) {
+			// For previous version compatibility
+			int keyCode = jsonObject.getInt("keycode");
+			if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
+				keyCodes.add(keyCode);
+			}
+		}
+	}
+
+	public void addKeyCode(int keyCode) {
+		if (!keyCodes.contains(keyCode)) {
+			keyCodes = Algorithms.addToList(keyCodes, keyCode);
+		}
+	}
+
+	public void updateKeyCode(int oldKeyCode, int newKeyCode) {
+		if (keyCodes.contains(oldKeyCode)) {
+			int index = keyCodes.indexOf(oldKeyCode);
+			keyCodes = Algorithms.setInList(keyCodes, index, newKeyCode);
+		}
+	}
+
+	public void removeKeyCode(int keyCode) {
+		keyCodes = Algorithms.removeFromList(keyCodes, (Integer) keyCode);
+	}
+
+	public void clearKeyCodes() {
+		keyCodes = new ArrayList<>();
+	}
+
+	@NonNull
+	public String getId() {
+		return "default_" + commandId;
 	}
 
 	@Nullable
 	public String getName(@NonNull OsmandApplication context) {
 		return customName != null ? customName : getCommandTitle(context);
+	}
+
+	public void setCustomName(@Nullable String customName) {
+		this.customName = customName;
 	}
 
 	@Nullable
@@ -69,49 +113,52 @@ public class KeyBinding {
 	}
 
 	@NonNull
-	public String getKeyLabel(@NonNull Context context) {
-		return KeySymbolMapper.getKeySymbol(context, getKeyCode());
+	public List<String> getKeyLabels(@NonNull Context context) {
+		List<Integer> keyCodes = getKeyCodes();
+		if (Algorithms.isEmpty(keyCodes)) {
+			String none = context.getString(R.string.shared_string_none);
+			return Collections.singletonList(none);
+		}
+		List<String> keyLabels = new ArrayList<>();
+		for (int keyCode : getKeyCodes()) {
+			keyLabels.add(getKeySymbol(context, keyCode));
+		}
+		return keyLabels;
 	}
 
-	public int getKeyCode() {
-		return keyCode;
+	@NonNull
+	public List<Integer> getKeyCodes() {
+		return keyCodes;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof KeyBinding)) return false;
-
 		KeyBinding that = (KeyBinding) o;
-		if (getKeyCode() != that.getKeyCode()) return false;
-		if (!getCommandId().equals(that.getCommandId())) return false;
-		return Objects.equals(customName, that.customName);
+		return Objects.equals(getId(), that.getId());
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getKeyCode();
-		result = 31 * result + getCommandId().hashCode();
-		result = 31 * result + (customName != null ? customName.hashCode() : 0);
-		return result;
-	}
-
-	@Nullable
-	public String toJsonString() {
-		try {
-			return toJson().toString();
-		} catch (JSONException e) {
-			return null;
-		}
+		return getId().hashCode();
 	}
 
 	@NonNull
 	public JSONObject toJson() throws JSONException {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("keycode", keyCode);
 		jsonObject.put("commandId", commandId);
 		if (customName != null) {
 			jsonObject.put("customName", customName);
+		}
+		if (!Algorithms.isEmpty(keyCodes)) {
+			JSONArray keyCodesJsonArray = new JSONArray();
+			for (Integer keyCode : keyCodes) {
+				JSONObject keyCodeObject = new JSONObject();
+				keyCodeObject.put("keycode", keyCode);
+				keyCodesJsonArray.put(keyCodeObject);
+			}
+			jsonObject.put("keycodes", keyCodesJsonArray);
 		}
 		return jsonObject;
 	}

@@ -4,7 +4,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum KeyEventCategory {
+public enum AssignmentsCategory {
 
 	ACTIONS(R.string.key_event_category_actions),
 	MAP_INTERACTIONS(R.string.key_event_category_map_interactions);
@@ -12,7 +12,7 @@ public enum KeyEventCategory {
 	@StringRes
 	private final int titleId;
 
-	KeyEventCategory(@StringRes int titleId) {
+	AssignmentsCategory(@StringRes int titleId) {
 		this.titleId = titleId;
 	}
 

@@ -33,7 +33,6 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -139,7 +138,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof OnKeyCodeSelectedCallback) {
-				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(keyCode);
+				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(initialKeyCode, keyCode);
 			}
 			dismiss();
 		});
@@ -294,14 +293,16 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public static void showInstance(@NonNull FragmentManager manager,
 									@NonNull Fragment targetFragment,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId, @NonNull KeyBinding keyBinding) {
+	                                @NonNull String deviceId,
+	                                @NonNull String commandId,
+	                                @NonNull Integer keyCode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectKeyCodeFragment fragment = new SelectKeyCodeFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_COMMAND_ID, keyBinding.getCommandId());
-			arguments.putInt(ATTR_KEY_CODE, keyBinding.getKeyCode());
+			arguments.putString(ATTR_COMMAND_ID, commandId);
+			arguments.putInt(ATTR_KEY_CODE, keyCode);
 			fragment.setArguments(arguments);
 			fragment.setTargetFragment(targetFragment, 0);
 			manager.beginTransaction()

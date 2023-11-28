@@ -8,15 +8,24 @@ public enum EventType {
 	RENAME_DEVICE,
 	ADD_NEW_DEVICE,
 	DELETE_DEVICE,
-	UPDATE_KEY_BINDING,
-	RESET_ALL_KEY_BINDINGS;
+
+	RENAME_ASSIGNMENT,
+	UPDATE_ASSIGNMENT_KEYCODE,
+	ADD_ASSIGNMENT_KEYCODE,
+	REMOVE_ASSIGNMENT_KEYCODE,
+	CLEAR_ASSIGNMENT_KEYCODES,
+	RESET_ASSIGNMENTS;
 
 	public boolean isDeviceRelated() {
-		return Algorithms.equalsToAny(this, SELECT_DEVICE, RENAME_DEVICE, ADD_NEW_DEVICE, DELETE_DEVICE);
+		return Algorithms.equalsToAny(this, SELECT_DEVICE,
+				RENAME_DEVICE, ADD_NEW_DEVICE, DELETE_DEVICE);
 	}
 
-	public boolean isKeyBindingRelated() {
-		return Algorithms.equalsToAny(this, UPDATE_KEY_BINDING, RESET_ALL_KEY_BINDINGS);
+	public boolean isAssignmentRelated() {
+		return Algorithms.equalsToAny(this, RENAME_ASSIGNMENT,
+				UPDATE_ASSIGNMENT_KEYCODE, ADD_ASSIGNMENT_KEYCODE,
+				REMOVE_ASSIGNMENT_KEYCODE, RESET_ASSIGNMENTS,
+				CLEAR_ASSIGNMENT_KEYCODES);
 	}
 
 	public boolean isCustomPreferenceRelated() {

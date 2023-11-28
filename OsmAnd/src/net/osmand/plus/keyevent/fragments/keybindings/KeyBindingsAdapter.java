@@ -5,6 +5,7 @@ import static net.osmand.plus.utils.AndroidUtils.setBackground;
 import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,10 +101,11 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				controller.askEditKeyAction(keyBinding);
+				controller.askEditAssignment(keyBinding);
 			}: null);
 			h.actionName.setText(keyBinding.getName(app));
-			h.keyName.setText(keyBinding.getKeyLabel(app));
+			List<String> keyLabels = keyBinding.getKeyLabels(app);
+			h.keyName.setText(TextUtils.join(", ", keyLabels));
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
 			boolean dividerNeeded = nextItem != null && nextItem.getType() == KEY_BINDING_ITEM;

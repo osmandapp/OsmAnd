@@ -61,7 +61,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -1887,8 +1887,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
-		deviceProfile.requestBindCommand(KeyEvent.KEYCODE_CAMERA, TakeMediaNoteCommand.ID);
+	public void addCommonKeyEventAssignments(@NonNull List<KeyBinding> assignments) {
+		assignments.add(new KeyBinding(TakeMediaNoteCommand.ID, KeyEvent.KEYCODE_CAMERA));
 	}
 
 	@Override
@@ -1899,7 +1899,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	@TargetApi(Build.VERSION_CODES.M)
 	@Override
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
 											   int[] grantResults) {

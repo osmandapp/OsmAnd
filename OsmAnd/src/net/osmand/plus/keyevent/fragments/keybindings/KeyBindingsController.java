@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.KeyEventCategory;
+import net.osmand.plus.keyevent.AssignmentsCategory;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.fragments.EditKeyBindingFragment;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
@@ -27,6 +27,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 class KeyBindingsController {
 
@@ -49,12 +50,13 @@ class KeyBindingsController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null || inputDevice.getKeyBindingsCount() == 0) {
+		if (inputDevice == null || inputDevice.getAssignmentsCount() == 0) {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
-		for (KeyEventCategory category : KeyEventCategory.values()) {
-			List<KeyBinding> keyBindings = inputDevice.getKeyBindingsForCategory(category);
+		Map<AssignmentsCategory, List<KeyBinding>> categorizedAssignments = inputDevice.getCategorizedAssignments();
+		for (AssignmentsCategory category : AssignmentsCategory.values()) {
+			List<KeyBinding> keyBindings = categorizedAssignments.get(category);
 			if (Algorithms.isEmpty(keyBindings)) continue;
 
 			String categoryName = app.getString(category.getTitleId());
@@ -78,7 +80,7 @@ class KeyBindingsController {
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_reset_all, (dialog, which) -> {
-					deviceHelper.resetAllKeyBindings(CUSTOMIZATION_CACHE_ID, appMode, inputDevice.getId());
+					deviceHelper.resetAllAssignments(CUSTOMIZATION_CACHE_ID, appMode, inputDevice.getId());
 				});
 		CustomAlert.showSimpleMessage(dialogData, R.string.reset_key_assignments_desc);
 	}
@@ -87,10 +89,10 @@ class KeyBindingsController {
 		return inputDevice != null && inputDevice.isCustom();
 	}
 
-	public void askEditKeyAction(KeyBinding action) {
+	public void askEditAssignment(@NonNull KeyBinding assignment) {
 		if (inputDevice != null) {
 			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyBindingFragment.showInstance(fm, appMode, action, inputDevice.getId());
+			EditKeyBindingFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
 		}
 	}
 

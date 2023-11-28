@@ -5,33 +5,29 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 
+import java.util.List;
+
 public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 
 	@Override
 	@NonNull
 	public InputDeviceProfile initialize(@NonNull OsmandApplication app) {
 		super.initialize(app);
-		keyBindings.clear();
-		collectKeyBindings();
-		syncActiveKeyBindings();
+		setAssignments(collectAssignments());
 		return this;
 	}
 
 	/**
 	 * Override this method to add or update bindings between
 	 * keycodes and commands for a specific predefined input device profile.
+	 *
+	 * @return list of predefined assignments for the particular device type.
 	 */
-	protected abstract void collectKeyBindings();
+	@NonNull
+	protected abstract List<KeyBinding> collectAssignments();
 
-	public void requestBindCommand(int keyCode, @NonNull String commandId) {
-		if (!activeKeyBindings.containsKey(keyCode)) {
-			bindCommand(keyCode, commandId);
-		}
-	}
-
-	public void bindCommand(int keyCode, @NonNull String commandId) {
-		KeyBinding keyBinding = new KeyBinding(keyCode, commandId, null);
-		keyBindings.add(keyBinding);
-		activeKeyBindings.put(keyCode, keyBinding);
+	public void addAssignment(@NonNull List<KeyBinding> assignments,
+	                          @NonNull String commandId, @NonNull Integer ... keyCodes) {
+		assignments.add(new KeyBinding(commandId, keyCodes));
 	}
 }

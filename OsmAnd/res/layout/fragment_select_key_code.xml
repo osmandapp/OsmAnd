@@ -49,7 +49,7 @@
 						android:id="@+id/description"
 						style="@style/TitleStyle"
 						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
+						android:layout_height="0dp"
 						android:layout_gravity="center_vertical"
 						android:layout_margin="@dimen/content_padding"
 						android:layout_weight="1"

@@ -98,7 +98,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 
 	@Override
 	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
-		if (event.isKeyBindingRelated()) {
+		if (event.isAssignmentRelated()) {
 			updateViewContent();
 		}
 	}

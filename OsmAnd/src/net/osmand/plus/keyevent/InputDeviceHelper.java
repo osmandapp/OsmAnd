@@ -1,10 +1,8 @@
 package net.osmand.plus.keyevent;
 
 import static net.osmand.plus.keyevent.DefaultInputDevices.KEYBOARD;
-import static net.osmand.util.Algorithms.objectEquals;
 
 import android.content.Context;
-import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -137,48 +135,10 @@ public class InputDeviceHelper {
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
 	}
 
-	public void updateKeyBinding(int cacheId, @NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                             @NonNull KeyBinding oldKeyBinding, @NonNull KeyBinding newKeyBinding) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device != null) {
-			resetPreviousKeyBindingIfNeeded(cacheId, appMode, device, newKeyBinding);
-			device.updateKeyBinding(oldKeyBinding, newKeyBinding);
-			syncSettings(devicesCollection, EventType.UPDATE_KEY_BINDING);
-		}
-	}
-
-	private void resetPreviousKeyBindingIfNeeded(int cacheId, @NonNull ApplicationMode appMode,
-	                                             @NonNull InputDeviceProfile device,
-	                                             @NonNull KeyBinding newKeyBinding) {
-		int keyCode = newKeyBinding.getKeyCode();
-		KeyBinding prevKeyBinding = device.findActiveKeyBinding(keyCode);
-		if (prevKeyBinding != null && !objectEquals(newKeyBinding, prevKeyBinding)) {
-			KeyBinding newAssignment = new KeyBinding(KeyEvent.KEYCODE_UNKNOWN, prevKeyBinding);
-			updateKeyBinding(cacheId, appMode, device.getId(), prevKeyBinding, newAssignment);
-		}
-	}
-
-	public void resetAllKeyBindings(int cacheId, @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device != null) {
-			device.resetAllKeyBindings();
-			syncSettings(devicesCollection, EventType.RESET_ALL_KEY_BINDINGS);
-		}
-	}
-
 	public boolean hasDeviceNameDuplicate(int cacheId, @NonNull ApplicationMode appMode,
 	                                      @NonNull Context context, String newName) {
 		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
 		return devicesCollection.hasDeviceNameDuplicate(context, newName);
-	}
-
-	public boolean hasKeybindingNameDuplicate(int cacheId, @NonNull ApplicationMode appMode,
-	                                          OsmandApplication context, String deviceId, String newName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		return devicesCollection.hasKeybindingNameDuplicate(context, deviceId, newName);
 	}
 
 	@NonNull
@@ -210,6 +170,75 @@ public class InputDeviceHelper {
 	public InputDeviceProfile getDeviceById(int cacheId, @NonNull ApplicationMode appMode,
 	                                        @NonNull String deviceId) {
 		return getInputDevicesCollection(cacheId, appMode).getDeviceById(deviceId);
+	}
+
+	public void renameAssignment(int cacheId, @NonNull ApplicationMode appMode,
+	                             @NonNull String deviceId, @NonNull String assignmentId,
+	                             @NonNull String newName) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			((CustomInputDeviceProfile) device).renameAssignment(assignmentId, newName);
+			syncSettings(devicesCollection, EventType.RENAME_ASSIGNMENT);
+		}
+	}
+
+	public void updateAssignmentKeyCode(int cacheId, @NonNull ApplicationMode appMode,
+	                                    @NonNull String deviceId, @NonNull String assignmentId,
+	                                    int oldKeyCode, int newKeyCode) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			CustomInputDeviceProfile customDevice = (CustomInputDeviceProfile) device;
+			customDevice.updateAssignmentKeyCode(assignmentId, oldKeyCode, newKeyCode);
+			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT_KEYCODE);
+		}
+	}
+
+	public void addAssignmentKeyCode(int cacheId, @NonNull ApplicationMode appMode,
+	                                 @NonNull String deviceId, @NonNull String assignmentId,
+	                                 int keyCode) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			((CustomInputDeviceProfile) device).addAssignmentKeyCode(assignmentId, keyCode);
+			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT_KEYCODE);
+		}
+	}
+
+	public void clearAssignmentKeyCodes(int cacheId, @NonNull ApplicationMode appMode,
+	                                    @NonNull String deviceId, @NonNull String assignmentId) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			((CustomInputDeviceProfile) device).clearAssignmentKeyCodes(assignmentId);
+			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
+		}
+	}
+
+	public void resetAllAssignments(int cacheId, @NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			((CustomInputDeviceProfile) device).resetAllAssignments();
+			syncSettings(devicesCollection, EventType.RESET_ASSIGNMENTS);
+		}
+	}
+
+	@Nullable
+	public KeyBinding getAssignment(int cacheId, @NonNull ApplicationMode appMode,
+	                                @NonNull String deviceId, @NonNull String assignmentId) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		return device != null ? device.findAssignment(assignmentId) : null;
+	}
+
+	public boolean hasAssignmentNameDuplicate(int cacheId, @NonNull ApplicationMode appMode,
+	                                          @NonNull OsmandApplication context,
+	                                          @NonNull String deviceId, @NonNull String newName) {
+		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+		return device != null && device.hasAssignmentNameDuplicate(context, newName);
 	}
 
 	@Nullable
