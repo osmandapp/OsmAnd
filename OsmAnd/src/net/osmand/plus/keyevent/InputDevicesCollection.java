@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -68,6 +69,15 @@ class InputDevicesCollection {
 			customDevices = Algorithms.removeFromList(customDevices, device);
 			syncCachedDevices();
 		}
+	}
+
+	@Nullable
+	public CustomInputDeviceProfile getCustomDeviceById(@NonNull String deviceId) {
+		InputDeviceProfile device = getDeviceById(deviceId);
+		if (device instanceof CustomInputDeviceProfile) {
+			return (CustomInputDeviceProfile) device;
+		}
+		return null;
 	}
 
 	@Nullable

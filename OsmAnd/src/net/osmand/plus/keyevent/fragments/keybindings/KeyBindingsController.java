@@ -1,6 +1,5 @@
 package net.osmand.plus.keyevent.fragments.keybindings;
 
-import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_TOP_DIVIDER;
@@ -15,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.AssignmentsCategory;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.fragments.EditKeyBindingFragment;
@@ -33,7 +32,7 @@ class KeyBindingsController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private final InputDeviceHelper deviceHelper;
+	private final InputDevicesHelper deviceHelper;
 	private final InputDeviceProfile inputDevice;
 	private FragmentActivity activity;
 	private final boolean usedOnMap;
@@ -45,7 +44,7 @@ class KeyBindingsController {
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
-		this.inputDevice = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
+		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 	}
 
 	@NonNull
@@ -80,7 +79,7 @@ class KeyBindingsController {
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_reset_all, (dialog, which) -> {
-					deviceHelper.resetAllAssignments(CUSTOMIZATION_CACHE_ID, appMode, inputDevice.getId());
+					deviceHelper.resetAllAssignments(appMode, inputDevice.getId());
 				});
 		CustomAlert.showSimpleMessage(dialogData, R.string.reset_key_assignments_desc);
 	}

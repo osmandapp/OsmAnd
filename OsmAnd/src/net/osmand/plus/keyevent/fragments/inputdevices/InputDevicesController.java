@@ -1,6 +1,5 @@
 package net.osmand.plus.keyevent.fragments.inputdevices;
 
-import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_BOTTOM_SHADOW;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.CARD_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.inputdevices.InputDevicesAdapter.DEVICE_ITEM;
@@ -15,7 +14,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -33,7 +32,7 @@ class InputDevicesController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private final InputDeviceHelper deviceHelper;
+	private final InputDevicesHelper deviceHelper;
 	private final boolean usedOnMap;
 
 	public InputDevicesController(@NonNull OsmandApplication app,
@@ -48,7 +47,7 @@ class InputDevicesController {
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
 		screenItems.add(new ScreenItem(CARD_DIVIDER));
-		for (InputDeviceProfile device : deviceHelper.getAllDevices(CUSTOMIZATION_CACHE_ID, appMode)) {
+		for (InputDeviceProfile device : deviceHelper.getAllDevices(appMode)) {
 			screenItems.add(new ScreenItem(DEVICE_ITEM, device));
 		}
 		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
@@ -63,7 +62,7 @@ class InputDevicesController {
 	public void askAddNewCustomDevice() {
 		String title = app.getString(R.string.add_new_type);
 		showEnterNameDialog(title, "", newName -> {
-			deviceHelper.createAndSaveCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, newName);
+			deviceHelper.createAndSaveCustomDevice(appMode, newName);
 			return true;
 		});
 	}
@@ -72,7 +71,7 @@ class InputDevicesController {
 		String title = app.getString(R.string.shared_string_rename);
 		showEnterNameDialog(title, device.toHumanString(app), newName -> {
 			if (device instanceof CustomInputDeviceProfile) {
-				deviceHelper.renameCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, device.getId(), newName);
+				deviceHelper.renameCustomDevice(appMode, device.getId(), newName);
 			}
 			return true;
 		});
@@ -96,7 +95,7 @@ class InputDevicesController {
 				if (Algorithms.isBlank(newName)) {
 					app.showToastMessage(R.string.empty_name);
 				} else {
-					if (deviceHelper.hasDeviceNameDuplicate(CUSTOMIZATION_CACHE_ID, appMode, app, newName)) {
+					if (deviceHelper.hasDeviceNameDuplicate(app, appMode, newName)) {
 						app.showToastMessage(R.string.message_name_is_already_exists);
 					} else {
 						callback.processResult(newName.trim());
@@ -109,7 +108,7 @@ class InputDevicesController {
 	}
 
 	public void duplicateDevice(@NonNull InputDeviceProfile device) {
-		deviceHelper.createAndSaveDeviceDuplicate(CUSTOMIZATION_CACHE_ID, appMode, device);
+		deviceHelper.createAndSaveDeviceDuplicate(appMode, device);
 	}
 
 	public void askRemoveDevice(@NonNull InputDeviceProfile device) {
@@ -121,7 +120,7 @@ class InputDevicesController {
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButtonTextColor(ColorUtilities.getColor(app, R.color.color_warning))
 				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-					deviceHelper.removeCustomDevice(CUSTOMIZATION_CACHE_ID, appMode, device.getId());
+					deviceHelper.removeCustomDevice(appMode, device.getId());
 				});
 		String typeName = device.toHumanString(app);
 		String message = app.getString(R.string.remove_type_q, typeName);
@@ -129,7 +128,7 @@ class InputDevicesController {
 	}
 
 	public boolean isSelected(@NonNull InputDeviceProfile device) {
-		InputDeviceProfile selectedDevice = deviceHelper.getSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
+		InputDeviceProfile selectedDevice = deviceHelper.getSelectedDevice(appMode);
 		return Objects.equals(selectedDevice.getId(), device.getId());
 	}
 

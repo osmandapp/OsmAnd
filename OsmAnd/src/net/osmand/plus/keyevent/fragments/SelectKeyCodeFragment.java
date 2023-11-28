@@ -1,7 +1,6 @@
 package net.osmand.plus.keyevent.fragments;
 
 import static android.graphics.Typeface.BOLD;
-import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 import static net.osmand.plus.utils.UiUtilities.createSpannableString;
@@ -28,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -63,7 +62,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
 		keyEventHelper = app.getKeyEventHelper();
 
 		Bundle arguments = requireArguments();
@@ -73,7 +72,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		String deviceId = Objects.requireNonNull(arguments.getString(ATTR_DEVICE_ID));
-		inputDevice = deviceHelper.getDeviceById(CUSTOMIZATION_CACHE_ID, appMode, deviceId);
+		inputDevice = deviceHelper.getDeviceById(appMode, deviceId);
 
 		if (savedInstanceState != null) {
 			keyCode = savedInstanceState.containsKey(ATTR_KEY_CODE)

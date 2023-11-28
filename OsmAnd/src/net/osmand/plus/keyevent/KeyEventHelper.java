@@ -1,7 +1,5 @@
 package net.osmand.plus.keyevent;
 
-import static net.osmand.plus.keyevent.InputDeviceHelper.FUNCTIONALITY_CACHE_ID;
-
 import android.view.KeyEvent;
 import android.view.KeyEvent.Callback;
 
@@ -26,7 +24,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final InputDeviceHelper deviceHelper;
+	private final InputDevicesHelper deviceHelper;
 	private MapActivity mapActivity;
 
 	private final Map<Integer, KeyEventCommand> globalCommands = new HashMap<>();
@@ -114,8 +112,8 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
 		// If custom preference for current app mode was updated,
 		// We need to reload device from preferences to use it with actual customizations.
-		if (deviceHelper.getAppMode(0) == appMode && event.isCustomPreferenceRelated()) {
-			deviceHelper.reloadInputDevicesCollection(FUNCTIONALITY_CACHE_ID, appMode);
+		if (deviceHelper.getFunctionalityAppMode() == appMode && event.isCustomPreferenceRelated()) {
+			deviceHelper.reloadFunctionalityCollection(appMode);
 		}
 	}
 
@@ -139,7 +137,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 		}
 		// Search command for current input device profile
 		ApplicationMode appMode = settings.getApplicationMode();
-		InputDeviceProfile device = deviceHelper.getEnabledSelectedDevice(FUNCTIONALITY_CACHE_ID, appMode);
+		InputDeviceProfile device = deviceHelper.getFunctionalityDevice(appMode);
 		return device != null ? device.findCommand(keyCode) : null;
 	}
 

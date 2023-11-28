@@ -29,12 +29,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class InputDeviceHelper {
+public class InputDevicesHelper {
 
-	public static final int FUNCTIONALITY_CACHE_ID = 0;
-	public static final int CUSTOMIZATION_CACHE_ID = 1;
+	private static final int FUNCTIONALITY_PURPOSE_ID = 0;
+	private static final int CUSTOMIZATION_PURPOSE_ID = 1;
 
-	private static final Log LOG = PlatformUtil.getLog(InputDeviceHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(InputDevicesHelper.class);
 	private static final String CUSTOM_DEVICE_PREFIX = "custom_";
 
 	private final OsmandApplication app;
@@ -43,7 +43,7 @@ public class InputDeviceHelper {
 	private final List<InputDevicesEventListener> listeners = new ArrayList<>();
 	private final Map<Integer, InputDevicesCollection> cachedDevicesCollections = new HashMap<>();
 
-	public InputDeviceHelper(@NonNull OsmandApplication app) {
+	public InputDevicesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		DefaultInputDevices.initialize(app);
@@ -68,21 +68,21 @@ public class InputDeviceHelper {
 		notifyListeners(appMode, EventType.SELECT_DEVICE);
 	}
 
-	public void createAndSaveCustomDevice(int cacheId, @NonNull ApplicationMode appMode,
+	public void createAndSaveCustomDevice(@NonNull ApplicationMode appMode,
 	                                      @NonNull String newDeviceName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		saveCustomDevice(devicesCollection, makeCustomDevice(newDeviceName));
 	}
 
-	public void createAndSaveDeviceDuplicate(int cacheId, @NonNull ApplicationMode appMode,
+	public void createAndSaveDeviceDuplicate(@NonNull ApplicationMode appMode,
 	                                         @NonNull InputDeviceProfile device) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		saveCustomDevice(devicesCollection, makeCustomDeviceDuplicate(devicesCollection, device));
 	}
 
-	public void renameCustomDevice(int cacheId, @NonNull ApplicationMode appMode,
-	                               @NonNull String deviceId, @NonNull String newName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+	public void renameCustomDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                               @NonNull String newName) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
 		if (device instanceof CustomInputDeviceProfile) {
 			((CustomInputDeviceProfile) device).setCustomName(newName);
@@ -117,9 +117,9 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	private InputDeviceProfile makeCustomDevice(@NonNull String id, @NonNull String name,
+	private InputDeviceProfile makeCustomDevice(@NonNull String newDeviceId, @NonNull String name,
 	                                            @NonNull InputDeviceProfile parentDevice) {
-		return new CustomInputDeviceProfile(id, name, parentDevice).initialize(app);
+		return new CustomInputDeviceProfile(newDeviceId, name, parentDevice).initialize(app);
 	}
 
 	private void saveCustomDevice(@NonNull InputDevicesCollection devicesCollection,
@@ -128,27 +128,37 @@ public class InputDeviceHelper {
 		syncSettings(devicesCollection, EventType.ADD_NEW_DEVICE);
 	}
 
-	public void removeCustomDevice(int cacheId, @NonNull ApplicationMode appMode,
-	                               @NonNull String deviceId) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+	public void removeCustomDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		devicesCollection.removeCustomDevice(deviceId);
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
 	}
 
-	public boolean hasDeviceNameDuplicate(int cacheId, @NonNull ApplicationMode appMode,
-	                                      @NonNull Context context, String newName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+	public boolean hasDeviceNameDuplicate(@NonNull Context context,
+	                                      @NonNull ApplicationMode appMode,
+	                                      @NonNull String newName) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		return devicesCollection.hasDeviceNameDuplicate(context, newName);
 	}
 
 	@NonNull
-	public List<InputDeviceProfile> getAllDevices(int cacheId, @NonNull ApplicationMode appMode) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+	public List<InputDeviceProfile> getAllDevices(@NonNull ApplicationMode appMode) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		return devicesCollection.getAllDevices();
 	}
 
 	@Nullable
-	public InputDeviceProfile getEnabledSelectedDevice(int cacheId, @NonNull ApplicationMode appMode) {
+	public InputDeviceProfile getFunctionalityDevice(@NonNull ApplicationMode appMode) {
+		return getEnabledSelectedDevice(FUNCTIONALITY_PURPOSE_ID, appMode);
+	}
+
+	@Nullable
+	public InputDeviceProfile getCustomizationDevice(@NonNull ApplicationMode appMode) {
+		return getEnabledSelectedDevice(CUSTOMIZATION_PURPOSE_ID, appMode);
+	}
+
+	@Nullable
+	private InputDeviceProfile getEnabledSelectedDevice(int cacheId, @NonNull ApplicationMode appMode) {
 		if (settings.EXTERNAL_INPUT_DEVICE_ENABLED.getModeValue(appMode)) {
 			return getSelectedDevice(cacheId, appMode);
 		}
@@ -156,7 +166,12 @@ public class InputDeviceHelper {
 	}
 
 	@NonNull
-	public InputDeviceProfile getSelectedDevice(int cacheId, @NonNull ApplicationMode appMode) {
+	public InputDeviceProfile getSelectedDevice(@NonNull ApplicationMode appMode) {
+		return getSelectedDevice(CUSTOMIZATION_PURPOSE_ID, appMode);
+	}
+
+	@NonNull
+	private InputDeviceProfile getSelectedDevice(int cacheId, @NonNull ApplicationMode appMode) {
 		String id = getSelectedDeviceId(appMode);
 		InputDeviceProfile device = id != null ? getDeviceById(cacheId, appMode, id) : null;
 		return device != null ? device : KEYBOARD;
@@ -166,85 +181,93 @@ public class InputDeviceHelper {
 	private String getSelectedDeviceId(@NonNull ApplicationMode appMode) {
 		return settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 	}
+
 	@Nullable
-	public InputDeviceProfile getDeviceById(int cacheId, @NonNull ApplicationMode appMode,
+	public InputDeviceProfile getDeviceById(@NonNull ApplicationMode appMode,
 	                                        @NonNull String deviceId) {
+		return getDeviceById(CUSTOMIZATION_PURPOSE_ID, appMode, deviceId);
+	}
+
+	@Nullable
+	private InputDeviceProfile getDeviceById(int cacheId, @NonNull ApplicationMode appMode,
+	                                         @NonNull String deviceId) {
 		return getInputDevicesCollection(cacheId, appMode).getDeviceById(deviceId);
 	}
 
-	public void renameAssignment(int cacheId, @NonNull ApplicationMode appMode,
-	                             @NonNull String deviceId, @NonNull String assignmentId,
-	                             @NonNull String newName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device instanceof CustomInputDeviceProfile) {
-			((CustomInputDeviceProfile) device).renameAssignment(assignmentId, newName);
+	public void renameAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                             @NonNull String assignmentId, @NonNull String newName) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.renameAssignment(assignmentId, newName);
 			syncSettings(devicesCollection, EventType.RENAME_ASSIGNMENT);
 		}
 	}
 
-	public void updateAssignmentKeyCode(int cacheId, @NonNull ApplicationMode appMode,
-	                                    @NonNull String deviceId, @NonNull String assignmentId,
-	                                    int oldKeyCode, int newKeyCode) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device instanceof CustomInputDeviceProfile) {
-			CustomInputDeviceProfile customDevice = (CustomInputDeviceProfile) device;
-			customDevice.updateAssignmentKeyCode(assignmentId, oldKeyCode, newKeyCode);
+	public void updateAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                    @NonNull String assignmentId, int oldKeyCode, int newKeyCode) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.updateAssignmentKeyCode(assignmentId, oldKeyCode, newKeyCode);
 			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT_KEYCODE);
 		}
 	}
 
-	public void addAssignmentKeyCode(int cacheId, @NonNull ApplicationMode appMode,
-	                                 @NonNull String deviceId, @NonNull String assignmentId,
-	                                 int keyCode) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device instanceof CustomInputDeviceProfile) {
-			((CustomInputDeviceProfile) device).addAssignmentKeyCode(assignmentId, keyCode);
+	public void addAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                 @NonNull String assignmentId, int keyCode) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.addAssignmentKeyCode(assignmentId, keyCode);
 			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT_KEYCODE);
 		}
 	}
 
-	public void clearAssignmentKeyCodes(int cacheId, @NonNull ApplicationMode appMode,
-	                                    @NonNull String deviceId, @NonNull String assignmentId) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device instanceof CustomInputDeviceProfile) {
-			((CustomInputDeviceProfile) device).clearAssignmentKeyCodes(assignmentId);
+	public void clearAssignmentKeyCodes(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                    @NonNull String assignmentId) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.clearAssignmentKeyCodes(assignmentId);
 			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
 		}
 	}
 
-	public void resetAllAssignments(int cacheId, @NonNull ApplicationMode appMode, @NonNull String deviceId) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
-		if (device instanceof CustomInputDeviceProfile) {
-			((CustomInputDeviceProfile) device).resetAllAssignments();
+	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.resetAllAssignments();
 			syncSettings(devicesCollection, EventType.RESET_ASSIGNMENTS);
 		}
 	}
 
 	@Nullable
-	public KeyBinding getAssignment(int cacheId, @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId, @NonNull String assignmentId) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+	public KeyBinding findAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                 @NonNull String assignmentId) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
 		return device != null ? device.findAssignment(assignmentId) : null;
 	}
 
-	public boolean hasAssignmentNameDuplicate(int cacheId, @NonNull ApplicationMode appMode,
-	                                          @NonNull OsmandApplication context,
+	public boolean hasAssignmentNameDuplicate(@NonNull OsmandApplication context,
+	                                          @NonNull ApplicationMode appMode,
 	                                          @NonNull String deviceId, @NonNull String newName) {
-		InputDevicesCollection devicesCollection = getInputDevicesCollection(cacheId, appMode);
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
 		return device != null && device.hasAssignmentNameDuplicate(context, newName);
 	}
 
 	@Nullable
-	public ApplicationMode getAppMode(int cacheId) {
-		InputDevicesCollection collection = cachedDevicesCollections.get(cacheId);
+	public ApplicationMode getFunctionalityAppMode() {
+		InputDevicesCollection collection = cachedDevicesCollections.get(FUNCTIONALITY_PURPOSE_ID);
 		return collection != null ? collection.getAppMode() : null;
+	}
+
+	@NonNull
+	private InputDevicesCollection getCustomizationCollection(@NonNull ApplicationMode appMode) {
+		return getInputDevicesCollection(CUSTOMIZATION_PURPOSE_ID, appMode);
 	}
 
 	@NonNull
@@ -256,15 +279,19 @@ public class InputDeviceHelper {
 		return collection;
 	}
 
+	public void reloadFunctionalityCollection(@NonNull ApplicationMode appMode) {
+		reloadInputDevicesCollection(FUNCTIONALITY_PURPOSE_ID, appMode);
+	}
+
 	@NonNull
-	public InputDevicesCollection reloadInputDevicesCollection(int cacheId, @NonNull ApplicationMode appMode) {
+	private InputDevicesCollection reloadInputDevicesCollection(int cacheId, @NonNull ApplicationMode appMode) {
 		InputDevicesCollection collection = new InputDevicesCollection(appMode, loadCustomDevices(appMode));
 		cachedDevicesCollections.put(cacheId, collection);
 		return collection;
 	}
 
-	public void releaseInputDevicesCache(int cacheId) {
-		cachedDevicesCollections.remove(cacheId);
+	public void releaseCustomizationCollection() {
+		cachedDevicesCollections.remove(CUSTOMIZATION_PURPOSE_ID);
 	}
 
 	@NonNull

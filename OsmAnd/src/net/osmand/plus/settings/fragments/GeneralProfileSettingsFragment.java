@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.keyevent.InputDeviceHelper.CUSTOMIZATION_CACHE_ID;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
 
 import android.content.Context;
@@ -24,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -268,15 +267,15 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private String getExternalInputDeviceSummary() {
 		ApplicationMode appMode = getSelectedAppMode();
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		InputDeviceProfile inputDevice = deviceHelper.getEnabledSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode);
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		InputDeviceProfile inputDevice = deviceHelper.getCustomizationDevice(appMode);
 		return inputDevice != null ? inputDevice.toHumanString(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
 		ApplicationMode appMode = getSelectedAppMode();
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		return deviceHelper.getEnabledSelectedDevice(CUSTOMIZATION_CACHE_ID, appMode) != null
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		return deviceHelper.getCustomizationDevice(appMode) != null
 				? getActiveIcon(R.drawable.ic_action_keyboard)
 				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
@@ -435,8 +434,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	public void onDestroy() {
 		super.onDestroy();
 		if (!requireActivity().isChangingConfigurations()) {
-			InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-			deviceHelper.releaseInputDevicesCache(CUSTOMIZATION_CACHE_ID);
+			app.getInputDeviceHelper().releaseCustomizationCollection();
 		}
 	}
 

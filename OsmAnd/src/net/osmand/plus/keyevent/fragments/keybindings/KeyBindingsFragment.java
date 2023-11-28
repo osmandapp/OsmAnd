@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.callbacks.EventType;
 import net.osmand.plus.keyevent.callbacks.InputDevicesEventListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -38,7 +38,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	private KeyBindingsController controller;
 
 	private ApplicationMode appMode;
-	private InputDeviceHelper deviceHelper;
+	private InputDevicesHelper deviceHelper;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
