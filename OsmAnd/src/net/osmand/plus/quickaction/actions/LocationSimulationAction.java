@@ -22,7 +22,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

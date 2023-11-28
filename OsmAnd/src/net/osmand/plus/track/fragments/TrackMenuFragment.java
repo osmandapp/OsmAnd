@@ -98,7 +98,7 @@ import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteList
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.development.SimulatePositionFragment;
+import net.osmand.plus.simulation.SimulatePositionFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;

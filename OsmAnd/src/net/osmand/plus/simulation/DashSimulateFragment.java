@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.development;
+package net.osmand.plus.simulation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 					return TITLE_ID;
 				}
 			};
-	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(TAG,
+	public static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(TAG,
 			DashSimulateFragment.class,
 			SHOULD_SHOW_FUNCTION, 150, null);
 

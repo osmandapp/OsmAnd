@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -24,6 +24,7 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.simulation.SimulatePositionFragment;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 

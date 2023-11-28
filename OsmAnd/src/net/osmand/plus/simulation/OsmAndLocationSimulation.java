@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.simulation;
 
 
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
@@ -19,7 +19,10 @@ import com.google.android.material.slider.Slider;
 import net.osmand.Location;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
+import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
@@ -34,15 +37,15 @@ import java.util.Random;
 
 public class OsmAndLocationSimulation {
 
-	public static final float PRECISION_1_M = 0.00001f;
-	public static final float LOCATION_TIMEOUT = 1.5f;
-	public static final int DEVIATION_M = 6;
-	private final float MOTORWAY_MAX_SPEED = 120.0f;
-	private final float TRUNK_MAX_SPEED = 90.0f;
-	private final float PRIMARY_MAX_SPEED = 60.0f;
-	private final float SECONDARY_MAX_SPEED = 50.0f;
-	private final float LIVING_SPTREET_MAX_SPEED = 15.0f;
-	private final float DEFAULT_MAX_SPEED = 40.0f;
+	private static final float PRECISION_1_M = 0.00001f;
+	private static final float LOCATION_TIMEOUT = 1.5f;
+	private static final float DEVIATION_M = 6;
+	private static final float MOTORWAY_MAX_SPEED = 120.0f;
+	private static final float TRUNK_MAX_SPEED = 90.0f;
+	private static final float PRIMARY_MAX_SPEED = 60.0f;
+	private static final float SECONDARY_MAX_SPEED = 50.0f;
+	private static final float LIVING_SPTREET_MAX_SPEED = 15.0f;
+	private static final float DEFAULT_MAX_SPEED = 40.0f;
 
 	private final OsmandApplication app;
 	private final OsmAndLocationProvider provider;
@@ -321,9 +324,9 @@ public class OsmAndLocationSimulation {
 
 			private void addNoise(Location location) {
 				Random r = new Random();
-				float d = (r.nextInt(DEVIATION_M + 1) - DEVIATION_M / 2) * PRECISION_1_M;
+				float d = (r.nextInt((int) (DEVIATION_M + 1)) - DEVIATION_M / 2) * PRECISION_1_M;
 				location.setLatitude(location.getLatitude() + d);
-				d = (r.nextInt(DEVIATION_M + 1) - DEVIATION_M / 2) * PRECISION_1_M;
+				d = (r.nextInt((int) (DEVIATION_M + 1)) - DEVIATION_M / 2) * PRECISION_1_M;
 				location.setLongitude(location.getLongitude() + d);
 			}
 

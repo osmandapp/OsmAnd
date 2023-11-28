@@ -1,6 +1,6 @@
-package net.osmand.plus.plugins.development;
+package net.osmand.plus.simulation;
 
-import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
