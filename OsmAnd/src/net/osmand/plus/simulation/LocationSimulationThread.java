@@ -72,9 +72,13 @@ class LocationSimulationThread extends Thread {
 					current = directions.remove(0);
 					meters = current.distanceTo(prev);
 					if (!directions.isEmpty()) {
-						timeout = Math.abs((directions.get(0).getTime() - current.getTime()));
-						intervalTime = Math.abs((current.getTime() - prevTime) / 1000f);
-						prevTime = current.getTime();
+						long currentTime = current.getTime();
+						long nextTime = directions.get(0).getTime();
+						if (currentTime != 0 && nextTime != 0) {
+							timeout = Math.abs(nextTime - currentTime);
+							intervalTime = Math.abs((currentTime - prevTime) / 1000f);
+							prevTime = currentTime;
+						}
 					}
 				} else {
 					Pair<SimulatedLocation, Float> pair = LocationSimulationUtils.createSimulatedLocation(
