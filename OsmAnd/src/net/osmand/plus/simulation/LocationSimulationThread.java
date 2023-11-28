@@ -1,6 +1,6 @@
 package net.osmand.plus.simulation;
 
-import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER;
 
 import android.util.Pair;
 
@@ -38,6 +38,7 @@ class LocationSimulationThread extends Thread {
 	public LocationSimulationThread(@NonNull OsmandApplication app,
 	                                @NonNull List<SimulatedLocation> directions,
 	                                float coeff, boolean locationTime) {
+		super();
 		this.app = app;
 		this.provider = app.getLocationProvider();
 		this.locationSimulation = provider.getLocationSimulation();

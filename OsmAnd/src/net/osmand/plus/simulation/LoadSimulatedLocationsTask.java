@@ -1,6 +1,6 @@
 package net.osmand.plus.simulation;
 
-import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER;
 
 import android.os.AsyncTask;
 
@@ -16,12 +16,12 @@ import net.osmand.router.RouteSegmentResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadLocationsTask extends AsyncTask<Void, Integer, List<SimulatedLocation>> {
+public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<SimulatedLocation>> {
 
 	private final RouteCalculationResult route;
 	private final LoadSimulatedLocationsListener listener;
 
-	LoadLocationsTask(@NonNull RouteCalculationResult route, @Nullable LoadSimulatedLocationsListener listener) {
+	LoadSimulatedLocationsTask(@NonNull RouteCalculationResult route, @Nullable LoadSimulatedLocationsListener listener) {
 		this.route = route;
 		this.listener = listener;
 	}

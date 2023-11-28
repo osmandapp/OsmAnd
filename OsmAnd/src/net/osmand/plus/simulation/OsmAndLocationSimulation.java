@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.simulation.LoadLocationsTask.LoadSimulatedLocationsListener;
+import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class OsmAndLocationSimulation {
 
 	private Thread simulationThread;
 
-	private LoadLocationsTask loadLocationsTask;
+	private LoadSimulatedLocationsTask loadLocationsTask;
 	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
 
 	@Nullable
@@ -134,7 +134,7 @@ public class OsmAndLocationSimulation {
 	}
 
 	private void startLoadLocationsTask(@Nullable Runnable runnable) {
-		loadLocationsTask = new LoadLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
+		loadLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
 		loadLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

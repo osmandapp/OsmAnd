@@ -21,7 +21,7 @@ import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SimulationProvider;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;

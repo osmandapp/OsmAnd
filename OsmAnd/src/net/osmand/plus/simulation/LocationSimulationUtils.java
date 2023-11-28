@@ -1,6 +1,6 @@
 package net.osmand.plus.simulation;
 
-import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER_GPX;
 import static net.osmand.plus.settings.enums.SimulationMode.CONSTANT;
 
 import android.util.Pair;

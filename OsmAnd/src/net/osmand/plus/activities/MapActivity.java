@@ -110,7 +110,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.simulation.LoadLocationsTask.LoadSimulatedLocationsListener;
+import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
 import net.osmand.plus.track.GpxSelectionParams;
