@@ -1,7 +1,8 @@
 package net.osmand.plus.simulation;
 
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
-import static net.osmand.plus.settings.enums.SimulationMode.CONSTANT;
+
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,14 +77,10 @@ class LocationSimulationThread extends Thread {
 						prevTime = current.getTime();
 					}
 				} else {
-					List<Object> result;
-					if (mode == CONSTANT) {
-						result = LocationSimulationUtils.useSimulationConstantSpeed(current, directions, speed, meters, intervalTime, coeff);
-					} else {
-						result = LocationSimulationUtils.useDefaultSimulation(current, directions, meters, intervalTime, coeff, realistic);
-					}
-					current = (SimulatedLocation) result.get(0);
-					meters = (float) result.get(1);
+					Pair<SimulatedLocation, Float> pair = LocationSimulationUtils.createSimulatedLocation(
+							current, directions, mode, meters, intervalTime, coeff, speed, realistic);
+					current = pair.first;
+					meters = pair.second;
 				}
 				setupLocation(triple, current, prev, meters, intervalTime);
 			}
@@ -101,7 +98,8 @@ class LocationSimulationThread extends Thread {
 			}
 			app.runInUIThread(() -> provider.setLocationFromSimulation(toSet));
 			try {
-				Thread.sleep((long) (timeout / coeff));
+				long time = (long) (timeout / coeff);
+				Thread.sleep(time);
 			} catch (InterruptedException e) {
 				// do nothing
 			}

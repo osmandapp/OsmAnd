@@ -1,12 +1,16 @@
 package net.osmand.plus.simulation;
 
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
+import static net.osmand.plus.settings.enums.SimulationMode.CONSTANT;
+
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -23,11 +27,23 @@ public class LocationSimulationUtils {
 	private static final float DEFAULT_MAX_SPEED = 40.0f;
 
 	@NonNull
-	protected static List<Object> useSimulationConstantSpeed(@NonNull SimulatedLocation current,
-	                                                         @NonNull List<SimulatedLocation> directions,
-	                                                         float speed, float meters,
-	                                                         float intervalTime, float coeff) {
-		List<Object> result = new ArrayList<>();
+	protected static Pair<SimulatedLocation, Float> createSimulatedLocation(@NonNull SimulatedLocation current,
+	                                                                        @NonNull List<SimulatedLocation> directions,
+	                                                                        @NonNull SimulationMode mode,
+	                                                                        float meters, float intervalTime,
+	                                                                        float coeff, float speed, boolean realistic) {
+		if (mode == CONSTANT) {
+			return LocationSimulationUtils.useSimulationConstantSpeed(current, directions, speed, meters, intervalTime, coeff);
+		} else {
+			return LocationSimulationUtils.useDefaultSimulation(current, directions, meters, intervalTime, coeff, realistic);
+		}
+	}
+
+	@NonNull
+	private static Pair<SimulatedLocation, Float> useSimulationConstantSpeed(@NonNull SimulatedLocation current,
+	                                                                           @NonNull List<SimulatedLocation> directions,
+	                                                                           float speed, float meters,
+	                                                                           float intervalTime, float coeff) {
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
@@ -35,40 +51,31 @@ public class LocationSimulationUtils {
 		}
 		meters = speed * intervalTime * coeff;
 
-		result.add(current);
-		result.add(meters);
-
-		return result;
+		return Pair.create(current, meters);
 	}
 
 	@NonNull
-	protected static List<Object> useDefaultSimulation(@NonNull SimulatedLocation current,
-	                                                   @NonNull List<SimulatedLocation> directions,
-	                                                   float meters, float intervalTime,
-	                                                   float coeff, boolean realistic) {
-		List<Object> result = new ArrayList<>();
+	private static Pair<SimulatedLocation, Float> useDefaultSimulation(@NonNull SimulatedLocation current,
+	                                                                     @NonNull List<SimulatedLocation> directions,
+	                                                                     float meters, float intervalTime,
+	                                                                     float coeff, boolean realistic) {
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
 			current = new SimulatedLocation(directions.remove(0));
 			meters = metersToGoInFiveSteps(directions, current);
 		}
-
 		if (realistic) {
 			float limit = getMetersLimitForPoint(current, intervalTime, coeff);
 			if (meters > limit) {
 				meters = limit;
 			}
 		}
-
-		result.add(current);
-		result.add(meters);
-
-		return result;
+		return Pair.create(current, meters);
 	}
 
 	@NonNull
-	protected static SimulatedLocation middleLocation(@NonNull SimulatedLocation start, @NonNull SimulatedLocation end, float meters) {
+	private static SimulatedLocation middleLocation(@NonNull SimulatedLocation start, @NonNull SimulatedLocation end, float meters) {
 		double lat1 = toRad(start.getLatitude());
 		double lon1 = toRad(start.getLongitude());
 		double R = 6371; // radius of earth in km
@@ -87,11 +94,11 @@ public class LocationSimulationUtils {
 		return location;
 	}
 
-	protected static double toDegree(double radians) {
+	private static double toDegree(double radians) {
 		return radians * 180 / Math.PI;
 	}
 
-	protected static double toRad(double degree) {
+	private static double toRad(double degree) {
 		return degree * Math.PI / 180;
 	}
 
@@ -141,7 +148,7 @@ public class LocationSimulationUtils {
 		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2);
 	}
 
-	protected static float getMetersLimitForPoint(@NonNull SimulatedLocation point, float intervalTime, float coeff) {
+	private static float getMetersLimitForPoint(@NonNull SimulatedLocation point, float intervalTime, float coeff) {
 		float maxSpeed = (float) (getMaxSpeedForRoadType(point.getHighwayType()) / 3.6);
 		float speedLimit = point.getSpeedLimit();
 		if (speedLimit > 0 && maxSpeed > speedLimit) {
@@ -150,7 +157,7 @@ public class LocationSimulationUtils {
 		return maxSpeed * intervalTime / coeff;
 	}
 
-	protected static float getMaxSpeedForRoadType(@NonNull String roadType) {
+	private static float getMaxSpeedForRoadType(@NonNull String roadType) {
 		switch (roadType) {
 			case "motorway":
 				return MOTORWAY_MAX_SPEED;
