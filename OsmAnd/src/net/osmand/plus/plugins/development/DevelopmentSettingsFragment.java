@@ -24,7 +24,7 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
-import net.osmand.plus.simulation.SimulatePositionFragment;
+import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -248,7 +248,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
 			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {

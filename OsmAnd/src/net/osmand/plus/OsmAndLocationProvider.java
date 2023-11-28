@@ -141,11 +141,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private StateChangedListener<LocationSource> locationSourceListener;
 
-	public OsmAndLocationProvider(OsmandApplication app) {
+	public OsmAndLocationProvider(@NonNull OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
 		currentPositionHelper = new CurrentPositionHelper(app);
-		locationSimulation = new OsmAndLocationSimulation(app, this);
+		locationSimulation = new OsmAndLocationSimulation(app);
 		locationServiceHelper = app.createLocationServiceHelper();
 		addLocationSourceListener();
 		addLocationListener(navigationInfo);

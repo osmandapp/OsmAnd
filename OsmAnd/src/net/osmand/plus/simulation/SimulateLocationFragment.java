@@ -30,9 +30,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SimulatePositionFragment extends BaseOsmAndFragment {
+public class SimulateLocationFragment extends BaseOsmAndFragment {
 
-	public static final String TAG = SimulatePositionFragment.class.getSimpleName();
+	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 
 	public static final String TRACK_FILE_NAME = "track_file_name";
 
@@ -83,7 +83,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 			app.getSettings().SIMULATE_POSITION_SPEED.set(1);
 		}
 
-		simulationListener = simulating -> app.runInUIThread(SimulatePositionFragment.this::updateCard);
+		simulationListener = simulating -> app.runInUIThread(SimulateLocationFragment.this::updateCard);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.simulate_position_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.simulate_location_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		if (gpxFile == null && savedInstanceState != null) {
@@ -182,7 +182,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	private void startStopSimulation() {
 		if (!simulation.isRouteAnimating()) {
 			if (gpxFile != null) {
-				simulation.startAnimationThread(app, gpxFile, 0, true, (float) app.getSettings().SIMULATE_POSITION_SPEED.get());
+				simulation.startSimulationThread(app, gpxFile, 0, true, (float) app.getSettings().SIMULATE_POSITION_SPEED.get());
 			}
 		} else {
 			simulation.stop();
@@ -267,7 +267,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable GPXFile gpxFile, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SimulatePositionFragment fragment = new SimulatePositionFragment();
+			SimulateLocationFragment fragment = new SimulateLocationFragment();
 			fragment.setGpxFile(gpxFile);
 			fragment.usedOnMap = usedOnMap;
 			manager.beginTransaction()

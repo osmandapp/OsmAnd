@@ -124,7 +124,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null && gpxFile.hasTrkPt()) {
-			sim.startAnimationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
+			sim.startSimulationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
 		}
 	}
 
