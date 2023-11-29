@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/coordinates_format">
-	
+
 	<CheckBoxPreference
 		android:key="format_degrees"
 		android:layout="@layout/preference_radio_button"
@@ -50,5 +50,11 @@
 		android:layout="@layout/preference_radio_button"
 		android:persistent="false"
 		android:title="@string/navigate_point_format_swiss_grid_plus" />
+
+	<CheckBoxPreference
+		android:key="maidenhead_format"
+		android:layout="@layout/preference_radio_button"
+		android:persistent="false"
+		android:title="@string/navigate_point_format_maidenhead" />
 
 </PreferenceScreen>

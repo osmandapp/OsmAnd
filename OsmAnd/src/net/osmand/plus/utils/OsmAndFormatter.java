@@ -35,6 +35,8 @@ import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
+import net.osmand.util.LocationParser;
+import net.osmand.util.MaidenheadConverter;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -82,6 +84,7 @@ public class OsmAndFormatter {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int MAIDENHEAD_FORMAT = LocationConvert.MAIDENHEAD_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';
 	private static final char DELIMITER_SECONDS = '″';
@@ -781,6 +784,9 @@ public class OsmAndFormatter {
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+		} else if (outputFormat == MAIDENHEAD_FORMAT) {
+			String mh = MaidenheadConverter.latLonToMaidenhead(new LatLon(lat, lon));
+			result.append(mh);
 		}
 		return result.toString();
 	}
