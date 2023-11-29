@@ -5569,4 +5569,6 @@
     <string name="shared_string_eta">ETA</string>
     <string name="rendering_attr_showToll_name">Mostrar las restricciones del peaje</string>
     <string name="rendering_attr_showToll_description">Mostrar los peajes en las carreteras</string>
+    <string name="lang_zh_hans">Chino simplificado</string>
+    <string name="lang_zh_hant">Chino tradicional</string>
 </resources>
