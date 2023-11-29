@@ -11,12 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
@@ -26,9 +20,15 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
@@ -168,9 +168,9 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 
 	@Override
 	@Nullable
-	public Integer getMapDisplayPosition() {
+	public MapPosition getMapDisplayPosition() {
 		if (isVisible()) {
-			return OsmandSettings.CENTER_CONSTANT;
+			return MapPosition.CENTER;
 		}
 		return null;
 	}

@@ -42,6 +42,7 @@ import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapT
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -904,10 +905,11 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		manager.updateMapDisplayPosition();
 	}
 
-	@Nullable @Override
-	public Integer getMapDisplayPosition() {
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
 		}
 		return null;
 	}

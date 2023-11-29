@@ -65,6 +65,7 @@ import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -158,7 +159,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private float rotate; // accumulate
 
-	private int mapPosition;
+	@NonNull
+	private MapPosition mapPosition = MapPosition.CENTER;
 	private int mapPositionX;
 
 	private float customMapRatioX;
@@ -741,12 +743,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		refreshMap();
 	}
 
-	public int getMapPosition() {
+	@NonNull
+	public MapPosition getMapPosition() {
 		return mapPosition;
 	}
 
-	public void setMapPosition(int type) {
-		this.mapPosition = type;
+	public void setMapPosition(@NonNull MapPosition position) {
+		this.mapPosition = position;
 	}
 
 	public void setMapPositionX(int type) {
@@ -755,6 +758,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setCustomMapRatio(float ratioX, float ratioY) {
 		this.customMapRatioX = ratioX;
+		this.customMapRatioY = ratioY;
+	}
+
+	public void setCustomMapRatioY(float ratioY) {
 		this.customMapRatioY = ratioY;
 	}
 
@@ -876,29 +883,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	@NonNull
 	private PointF calculateRatio() {
-		float ratioy = customMapRatioY != 0 ? customMapRatioY : getDefaultRatioY();
-
-		float ratiox;
-		if (customMapRatioX != 0) {
-			ratiox = customMapRatioX;
-		} else if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
-			ratiox = 0.7f;
-		} else {
-			ratiox = mapPositionX == 0 ? 0.5f : (isLayoutRtl() ? 0.25f : 0.75f);
-		}
-		return new PointF(ratiox, ratioy);
-	}
-
-	public float getDefaultRatioY() {
-		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
-			return 0.85f;
-		} else if (mapPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
-			return 0.70f;
-		} else if (mapPosition == OsmandSettings.MIDDLE_TOP_CONSTANT) {
-			return 0.25f;
-		} else {
-			return 0.5f;
-		}
+		float ratioX = customMapRatioX != 0.0f ? customMapRatioX : mapPosition.getRatioX(mapPositionX == 1, isLayoutRtl());
+		float ratioY = customMapRatioY != 0.0f ? customMapRatioY : mapPosition.getRatioY();
+		return new PointF(ratioX, ratioY);
 	}
 
 	private void refreshMapInternal(@NonNull DrawSettings drawSettings) {

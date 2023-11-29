@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -16,7 +17,8 @@ public class MapDisplayPositionManager {
 
 	private OsmandMapTileView mapView;
 	private final OsmandSettings settings;
-	private List<IMapDisplayPositionProvider> externalProviders = new ArrayList<>();
+	private List<IMapDisplayPositionProvider> displayPositionProviders = new ArrayList<>();
+	private List<IMapRatioShifter> mapRatioShifters = new ArrayList<>();
 
 	public MapDisplayPositionManager(@NonNull OsmandApplication app) {
 		this.settings = app.getSettings();
@@ -35,13 +37,23 @@ public class MapDisplayPositionManager {
 	}
 
 	public void registerProvider(@NonNull IMapDisplayPositionProvider provider) {
-		if (!externalProviders.contains(provider)) {
-			externalProviders = Algorithms.addToList(externalProviders, provider);
+		if (!displayPositionProviders.contains(provider)) {
+			displayPositionProviders = Algorithms.addToList(displayPositionProviders, provider);
 		}
 	}
 
 	public void unregisterProvider(@NonNull IMapDisplayPositionProvider provider) {
-		externalProviders = Algorithms.removeFromList(externalProviders, provider);
+		displayPositionProviders = Algorithms.removeFromList(displayPositionProviders, provider);
+	}
+
+	public void registerMapRatioShifter(@NonNull IMapRatioShifter shifter) {
+		if (!mapRatioShifters.contains(shifter)) {
+			mapRatioShifters = Algorithms.addToList(mapRatioShifters, shifter);
+		}
+	}
+
+	public void unregisterMapRatioShifter(@NonNull IMapRatioShifter shifter) {
+		mapRatioShifters = Algorithms.removeFromList(mapRatioShifters, shifter);
 	}
 
 	public void updateMapDisplayPosition() {
@@ -55,11 +67,18 @@ public class MapDisplayPositionManager {
 	}
 
 	private void updateMapDisplayPositionImpl(boolean shouldRefreshMap) {
-		Integer position = getPositionFromProviders();
-		if (position == null) {
-			position = getPositionFromPreferences();
+		MapPosition positionFromProviders = getPositionFromProviders();
+		if (positionFromProviders != null) {
+			mapView.setMapPosition(positionFromProviders);
+		} else {
+			MapPosition position = getPositionFromPreferences();
+			float shifterRatioY = getShiftedRatioY(position.getRatioY());
+			if (shifterRatioY != 0.0f) {
+				mapView.setCustomMapRatioY(shifterRatioY);
+			} else {
+				mapView.setMapPosition(position);
+			}
 		}
-		mapView.setMapPosition(position);
 		refreshMapIfNeeded(shouldRefreshMap);
 	}
 
@@ -75,9 +94,10 @@ public class MapDisplayPositionManager {
 		}
 	}
 
-	private Integer getPositionFromProviders() {
-		for (IMapDisplayPositionProvider provider : externalProviders) {
-			Integer position = provider.getMapDisplayPosition();
+	@Nullable
+	private MapPosition getPositionFromProviders() {
+		for (IMapDisplayPositionProvider provider : displayPositionProviders) {
+			MapPosition position = provider.getMapDisplayPosition();
 			if (position != null) {
 				return position;
 			}
@@ -85,12 +105,23 @@ public class MapDisplayPositionManager {
 		return null;
 	}
 
-	private int getPositionFromPreferences() {
+	@NonNull
+	private MapPosition getPositionFromPreferences() {
 		if (useCenterByDefault() || (useAutomaticByDefault() && useCenterForAutomatic())) {
-			return OsmandSettings.CENTER_CONSTANT;
+			return MapPosition.CENTER;
 		} else {
-			return OsmandSettings.BOTTOM_CONSTANT;
+			return MapPosition.BOTTOM;
 		}
+	}
+
+	private float getShiftedRatioY(float originalRatioY) {
+		for (IMapRatioShifter shifter : mapRatioShifters) {
+			float shiftedMapRatioY = shifter.getShiftedMapRatioY(originalRatioY);
+			if (shiftedMapRatioY != 0.0f) {
+				return shiftedMapRatioY;
+			}
+		}
+		return 0.0f;
 	}
 
 	private boolean useCenterByDefault() {
@@ -105,7 +136,13 @@ public class MapDisplayPositionManager {
 		return settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_BEARING;
 	}
 
-	public static interface IMapDisplayPositionProvider {
-		@Nullable Integer getMapDisplayPosition();
+	public interface IMapDisplayPositionProvider {
+		@Nullable
+		MapPosition getMapDisplayPosition();
+	}
+	
+	public interface IMapRatioShifter {
+		
+		float getShiftedMapRatioY(float originalRatioY);
 	}
 }

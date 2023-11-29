@@ -109,7 +109,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					}
 					float ratioY = 0;
 					if ((float) containerHeight / visibleAreaHeight > VISIBLE_AREA_MIN_DETECTION_SIZE) {
-						float defaultRatioY = mapView.getDefaultRatioY();
+						float defaultRatioY = mapView.getMapPosition().getRatioY();
 						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
 						ratioY = centerY / containerHeight;
 					}

@@ -4,6 +4,7 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.charts.TrackChartPoints;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapRatioShifter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
@@ -36,11 +39,12 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapInfoLayer extends OsmandMapLayer {
+public class MapInfoLayer extends OsmandMapLayer implements IMapRatioShifter {
 
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
+	private final MapDisplayPositionManager mapDisplayPositionManager;
 
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
@@ -59,6 +63,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TopToolbarView topToolbarView;
 
+	private final OnLayoutChangeListener verticalPanelLayoutChangeListener;
+
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
 		this.routeLayer = layer;
@@ -67,6 +73,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		settings = app.getSettings();
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
+		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		verticalPanelLayoutChangeListener = (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+			int newHeight = bottom - top;
+			int oldHeight = oldBottom - oldTop;
+			if (newHeight != oldHeight) {
+				mapDisplayPositionManager.updateMapDisplayPosition(true);
+			}
+		};
 	}
 
 	@Override
@@ -82,7 +96,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			registerAllControls(mapActivity);
 			recreateControls();
+
+			mapDisplayPositionManager.registerMapRatioShifter(this);
+			topWidgetsPanel.addOnLayoutChangeListener(verticalPanelLayoutChangeListener);
+			bottomWidgetsPanel.addOnLayoutChangeListener(verticalPanelLayoutChangeListener);
 		} else {
+			mapDisplayPositionManager.unregisterMapRatioShifter(this);
+			topWidgetsPanel.removeOnLayoutChangeListener(verticalPanelLayoutChangeListener);
+			bottomWidgetsPanel.removeOnLayoutChangeListener(verticalPanelLayoutChangeListener);
+
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
 
@@ -366,5 +388,25 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	@Override
+	public float getShiftedMapRatioY(float originalRatioY) {
+		int viewHeight = view.getViewHeight();
+		if (viewHeight == 0) {
+			return 0;
+		}
+
+		int topOffset = 0;
+		int bottomOffset = 0;
+		if (topWidgetsPanel != null) {
+			topOffset = topWidgetsPanel.getVisibility() == View.VISIBLE ? topWidgetsPanel.getHeight() : 0;
+		}
+		if (bottomWidgetsPanel != null) {
+			bottomOffset = bottomWidgetsPanel.getVisibility() == View.VISIBLE ? bottomWidgetsPanel.getHeight() : 0;
+		}
+
+		int freeHeight = viewHeight - topOffset - bottomOffset;
+		return (topOffset + freeHeight * originalRatioY) / viewHeight;
 	}
 }
