@@ -11,7 +11,7 @@ class EmptySmartFolderViewHolder(view: View, private var listener: EmptySmartFol
 		super.bindView()
 		title.setText(R.string.empty_smart_folder_title)
 		description.setText(R.string.empty_smart_folder_description)
-		button.setTitleId(R.string.edit_fiilter)
+		button.setTitleId(R.string.edit_filter)
 		button.setOnClickListener {
 			listener.editFilters()
 		}

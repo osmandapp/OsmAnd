@@ -48,7 +48,7 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
@@ -199,7 +199,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
 		} else if (gpxItem != null) {
 			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
-			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
+			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.getGpxData().isJoinSegments();
 		}
 		if (chart != null && analysis != null) {
 			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);

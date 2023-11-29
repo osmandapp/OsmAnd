@@ -1255,7 +1255,7 @@
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
     <string name="rendering_attr_hideAccess_name">Accès restreints</string>
-    <string name="rendering_attr_showAccess_name">Afficher les accès restreints et les péages</string>
+    <string name="rendering_attr_showAccess_name">Afficher les accès restreints</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Itinéraires cyclables</string>
@@ -1521,7 +1521,7 @@
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières</string>
     <string name="routing_attr_height_name">Hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter sur les routes.</string>
-    <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
+    <string name="use_fast_recalculation">Recalcul intelligent de l\'itinéraire</string>
     <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
@@ -2013,7 +2013,6 @@
     <string name="selected_categories">Catégories sélectionnées</string>
     <string name="create_custom_poi">Créer un filtre personnalisé</string>
     <string name="custom_search">Recherche personnalisée</string>
-    <string name="edit_filter">Modifier les catégories</string>
     <string name="subcategories">Sous-catégories</string>
     <string name="translit_names">Transcrire les noms</string>
     <string name="rendering_value_light_brown_name">Marron clair</string>
@@ -2632,7 +2631,7 @@
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Aucun résultat :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
-    <string name="shared_string_travel_guides">Voyage</string>
+    <string name="shared_string_travel_guides">Guides de voyage</string>
     <string name="shared_string_result">Résultat</string>
     <string name="saved_articles">Articles favoris</string>
     <string name="shared_string_explore">Explorer</string>
@@ -2640,7 +2639,7 @@
     <string name="wikivoyage_search_hint">Rechercher par Pays, Ville, Département</string>
     <string name="shared_string_read">Lire</string>
     <string name="article_removed">Article supprimé</string>
-    <string name="shared_string_contents">Contenus</string>
+    <string name="shared_string_contents">Contenu</string>
     <string name="download_maps_travel">Guides de voyage</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="index_item_world_wikivoyage">Articles mondiaux Wikivoyage</string>
@@ -5473,7 +5472,7 @@
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
     <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
     <string name="empty_name">Sans nom</string>
-    <string name="edit_fiilter">Modifier le filtre</string>
+    <string name="edit_filter">Modifier le filtre</string>
     <string name="empty_smart_folder_title">Aucune trace trouvée</string>
     <string name="empty_smart_folder_description">Toutes les traces correspondantes apparaîtront automatiquement ici</string>
     <string name="configure_filter">Paramétrer le filtre</string>
@@ -5538,7 +5537,7 @@
     <string name="key_event_action_emit_navigation_hint">Émettre un indice de guidage</string>
     <string name="external_input_device_title">Périphériques d\'entrée externes</string>
     <string name="key_bindings">Affectation des touches</string>
-    <string name="key_event_action_open_wunderlinq_datagrid">Open WunderLINQ Datagrid</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Ouvrir la grille de données WunderLINQ</string>
     <string name="change_button">Modifier le bouton</string>
     <string name="download_to_device">Télécharger sur l\'appareil</string>
     <string name="add_row">Ajouter une ligne</string>
@@ -5548,4 +5547,17 @@
     <string name="tripltek_promo">Promotion Tripltek pour %1$s mois</string>
     <string name="tripltek_promo_description">Accès gratuit aux fonctionnalités, y compris les téléchargements de cartes illimités, le relief 3D, etc. pour %1$s mois</string>
     <string name="see_all_plans">Afficher tous les tarifs</string>
+    <string name="key_assignments">Associations de touches</string>
+    <string name="reset_key_assignments_desc">Toutes les associations de touches pour le type sélectionné seront supprimées.</string>
+    <string name="show_toast_about_key_pressed">Afficher un message sur la touche appuyée</string>
+    <string name="rendering_attr_showToll_name">Afficher les restrictions liées aux péages</string>
+    <string name="topography_maps">Cartes topographiques</string>
+    <string name="key_event_action_activity_back_pressed">\"Retour de l\'activité\" appuyé</string>
+    <string name="shared_string_reassign">Réassigner</string>
+    <string name="reset_key_assignments">Réinitialiser les associations de touches</string>
+    <string name="rendering_attr_showToll_description">Afficher les restrictions liées aux péages</string>
+    <string name="target_elevation">Altitude de la cible</string>
+    <string name="shared_string_eta">Heure d\'arrivée estimée (ETA)</string>
+    <string name="clear_key_assignment">Effacer les associations de touches</string>
+    <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définies à \"Aucun\".</string>
 </resources>

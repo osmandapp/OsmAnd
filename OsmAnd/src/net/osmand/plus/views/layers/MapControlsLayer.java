@@ -40,7 +40,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

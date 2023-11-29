@@ -292,7 +292,7 @@ public class DownloadOsmandIndexesHelper {
 			File ttsFile = new File(voiceDirPath, item.getFileName() + "/" + ttsFileName);
 			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
-					"", 0, 0, VOICE_FILE, false, null);
+					"", 0, 0, VOICE_FILE, false, null, false);
 			localRecordedVoiceIndex.setDownloaded(true);
 			recordedVoiceList.add(localRecordedVoiceIndex);
 		}

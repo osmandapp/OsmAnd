@@ -11,6 +11,7 @@ import net.osmand.Location;
 import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.NativeUtilities;
@@ -42,6 +43,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		updateInfo(null);
 
 		setOnClickListener(getOnClickListener());
+		updateWidgetName();
 	}
 
 	@Override
@@ -50,6 +52,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 			forceUpdate = true;
 			widgetState.changeToNextState();
 			updateInfo(null);
+			updateWidgetName();
 		};
 	}
 
@@ -60,6 +63,14 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		} else {
 			updateRequiredRatioToTarget();
 		}
+	}
+
+	@Nullable
+	protected String getWidgetName() {
+		if (widgetState != null) {
+			return getString(isInTargetAltitudeState() ? R.string.target_elevation : R.string.glide_ratio_to_target);
+		}
+		return widgetType != null ? getString(widgetType.titleId) : null;
 	}
 
 	private void updateTargetAltitude() {

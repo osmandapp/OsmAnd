@@ -9,6 +9,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ListStringPreference extends StringPreference {
@@ -88,11 +89,7 @@ public class ListStringPreference extends StringPreference {
 			if (listAsString.contains(delimiter)) {
 				return Arrays.asList(listAsString.split(delimiter));
 			} else {
-				return new ArrayList<String>() {
-					{
-						add(listAsString);
-					}
-				};
+				return new ArrayList<String>(Collections.singleton(listAsString));
 			}
 		}
 		return null;

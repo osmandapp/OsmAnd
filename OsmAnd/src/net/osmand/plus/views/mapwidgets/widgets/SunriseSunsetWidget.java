@@ -50,6 +50,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
 		setOnClickListener(getOnClickListener());
+		updateWidgetName();
 	}
 
 	@Override
@@ -59,7 +60,16 @@ public class SunriseSunsetWidget extends SimpleWidget {
 			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
+			updateWidgetName();
 		};
+	}
+
+	@Nullable
+	protected String getAdditionalWidgetName(){
+		if(widgetState != null){
+			return getString(widgetState.getPreference().get() ? R.string.shared_string_time_left : R.string.shared_string_next);
+		}
+		return null;
 	}
 
 	@Override

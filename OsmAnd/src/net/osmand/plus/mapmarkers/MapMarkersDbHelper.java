@@ -1,7 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -252,7 +252,7 @@ public class MapMarkersDbHelper {
 		rowsMap.put(MARKERS_COL_SELECTED, 0);
 		rowsMap.put(MARKERS_COL_MAP_OBJECT_NAME, marker.mapObjectName);
 
-		db.execSQL(AndroidUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
+		db.execSQL(AndroidDbUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 
 		if (marker.history) {
 			updateMarkersHistoryLastModifiedTime();

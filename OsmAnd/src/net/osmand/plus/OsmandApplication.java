@@ -99,6 +99,7 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -791,6 +792,12 @@ public class OsmandApplication extends MultiDexApplication {
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(externalStorageDirectory, child);
+	}
+
+	@NonNull
+	public File getAppInternalPath(@Nullable String path) {
+		String child = path != null ? path : "";
+		return new File(settings.getInternalAppPath(), child);
 	}
 
 	public void setExternalStorageDirectory(int type, String directory) {

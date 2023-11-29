@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GPXFolderUtils;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;

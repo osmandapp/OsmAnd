@@ -4,7 +4,14 @@ import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarColor
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.DistanceSpan
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -17,7 +24,7 @@ import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
+import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
@@ -141,11 +148,11 @@ class TracksScreen(
 			var description = ""
 			var dist = 0f
 			track.dataItem?.let { dataItem ->
-				description = dataItem.nearestCityName ?: ""
-				dist = if (dataItem.analysis == null || dataItem.analysis?.latLonStart == null) {
+				description = dataItem.gpxData.nearestCityName ?: ""
+				dist = if (dataItem.gpxData.analysis == null || dataItem.gpxData.analysis?.latLonStart == null) {
 					0f
 				} else {
-					MapUtils.getDistance(latLon, dataItem.analysis?.latLonStart).toFloat()
+					MapUtils.getDistance(latLon, dataItem.gpxData.analysis?.latLonStart).toFloat()
 				}
 			}
 			val address =

@@ -1,7 +1,6 @@
-package net.osmand.plus;
+package net.osmand.plus.simulation;
 
-import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
-import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER;
 
 import android.os.AsyncTask;
 

@@ -20,7 +20,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -39,6 +38,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -441,12 +441,15 @@ public class TransportRoutingHelper {
 
 	private static class RouteRecalculationTask implements Runnable {
 
+		private final int MAX_WALKING_CNT = 4;
 		private final TransportRoutingHelper transportRoutingHelper;
 		private final RoutingHelper routingHelper;
 		private final TransportRouteCalculationParams params;
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
+		private List<WalkingRouteSegment> walkingSegmentsFromCacheOnly = new ArrayList<>();
 		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
+		private final Map<Pair<Location, LatLon>, RouteCalculationResult> walkingRouteSegmentsCache = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
 		private final NativeLibrary lib;
 
@@ -454,7 +457,7 @@ public class TransportRoutingHelper {
 		String routeCalcErrorShort;
 
 		public RouteRecalculationTask(@NonNull TransportRoutingHelper transportRoutingHelper,
-									  @NonNull TransportRouteCalculationParams params, @Nullable NativeLibrary library) {
+		                              @NonNull TransportRouteCalculationParams params, @Nullable NativeLibrary library) {
 			this.transportRoutingHelper = transportRoutingHelper;
 			this.routingHelper = transportRoutingHelper.routingHelper;
 			this.params = params;
@@ -523,30 +526,38 @@ public class TransportRoutingHelper {
 		}
 
 		@Nullable
-		private RouteCalculationParams getWalkingRouteParams() {
+		private RouteCalculationParams getOrProcessWalkingRouteParams() {
 			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
-
-			WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
-			if (walkingRouteSegment == null) {
-				return null;
-			}
-
-			OsmandApplication app = routingHelper.getApplication();
+			RouteCalculationResult cachedRoute;
 			Location start = new Location("");
-			start.setLatitude(walkingRouteSegment.start.getLatitude());
-			start.setLongitude(walkingRouteSegment.start.getLongitude());
-			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
+			LatLon end;
+			WalkingRouteSegment walkingRouteSegment;
+			do {
+				walkingRouteSegment = walkingSegmentsToCalculate.poll();
+				if (walkingRouteSegment == null) {
+					for (WalkingRouteSegment ws : walkingSegmentsFromCacheOnly) {
+						retrieveFromCache(ws);
+					}
+					walkingSegmentsFromCacheOnly.clear();
+					walkingSegmentsCalculated = true;
+					return null;
+				}
+				cachedRoute = retrieveFromCache(walkingRouteSegment);
+			} while (cachedRoute != null);
 
 			float currentDistanceFromBegin =
 					this.params.calculationProgress.distanceFromBegin +
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
-
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
+			start.setLatitude(walkingRouteSegment.start.getLatitude());
+			start.setLongitude(walkingRouteSegment.start.getLongitude());
+			end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 			params.start = start;
 			params.end = end;
 			params.startTransportStop = walkingRouteSegment.startTransportStop;
 			params.targetTransportStop = walkingRouteSegment.endTransportStop;
+			OsmandApplication app = routingHelper.getApplication();
 			RoutingHelper.applyApplicationSettings(params, app.getSettings(), walkingMode);
 			params.mode = walkingMode;
 			params.ctx = app;
@@ -577,49 +588,89 @@ public class TransportRoutingHelper {
 				@Override
 				public void onCalculationFinish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
+						for (WalkingRouteSegment ws : walkingSegmentsFromCacheOnly) {
+							retrieveFromCache(ws);
+						}
+						walkingSegmentsFromCacheOnly.clear();
 						walkingSegmentsCalculated = true;
 					} else {
 						onUpdateCalculationProgress(0);
-						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+						RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 						if (walkingRouteParams != null) {
 							routingHelper.startRouteCalculationThread(walkingRouteParams);
 						}
 					}
 				}
 			};
-			params.alternateResultListener = new RouteCalculationResultListener() {
-				@Override
-				public void onRouteCalculated(RouteCalculationResult route) {
-					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-				}
+			WalkingRouteSegment finalWalkingRouteSegment = walkingRouteSegment;
+			params.alternateResultListener = route -> {
+				walkingRouteSegmentsCache.put(new Pair<>(params.start, params.end), route);
+				RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(finalWalkingRouteSegment.s1, finalWalkingRouteSegment.s2), route);
 			};
 
 			return params;
+		}
+
+		private RouteCalculationResult retrieveFromCache(WalkingRouteSegment ws) {
+			Location start = new Location("");
+			start.setLatitude(ws.start.getLatitude());
+			start.setLongitude(ws.start.getLongitude());
+			LatLon end = new LatLon(ws.end.getLatitude(), ws.end.getLongitude());
+			RouteCalculationResult cachedRoute = getRouteFromCache(start, end);
+			if (cachedRoute != null) {
+				walkingRouteSegments.put(new Pair<>(ws.s1, ws.s2), cachedRoute);
+			}
+			return cachedRoute;
+		}
+
+		private RouteCalculationResult getRouteFromCache(Location start, LatLon end) {
+			for (Map.Entry<Pair<Location, LatLon>, RouteCalculationResult> entry : walkingRouteSegmentsCache.entrySet()) {
+				Location startLocation = entry.getKey().first;
+				LatLon endLatLon = entry.getKey().second;
+				if (MapUtils.areLatLonEqual(startLocation, start) && endLatLon.equals(end)) {
+					return entry.getValue();
+				}
+			}
+			return null;
 		}
 
 		private void calculateWalkingRoutes(List<TransportRouteResult> routes) {
 			walkingSegmentsCalculated = false;
 			walkingSegmentsToCalculate.clear();
 			walkingRouteSegments.clear();
+			walkingRouteSegmentsCache.clear();
 			if (routes != null && routes.size() > 0) {
-				for (TransportRouteResult r : routes) {
-					TransportRouteResultSegment prev = null;
-					for (TransportRouteResultSegment s : r.getSegments()) {
-						LatLon start = prev != null ? prev.getEnd().getLocation() : params.start;
-						LatLon end = s.getStart().getLocation();
+				for (int i = 0; i < routes.size(); i++) {
+					TransportRouteResult r = routes.get(i);
+					TransportRouteResultSegment prevSegment = null;
+					boolean cacheOnly = i >= MAX_WALKING_CNT;
+					for (TransportRouteResultSegment segment : r.getSegments()) {
+						LatLon start = prevSegment != null ? prevSegment.getEnd().getLocation() : params.start;
+						LatLon end = segment.getStart().getLocation();
 						if (start != null && end != null) {
-							if (prev == null || MapUtils.getDistance(start, end) > 50) {
-								walkingSegmentsToCalculate.add(prev == null ?
-										new WalkingRouteSegment(start, s) : new WalkingRouteSegment(prev, s));
+							if (prevSegment == null || MapUtils.getDistance(start, end) > 50) {
+								WalkingRouteSegment ws = prevSegment == null
+										? new WalkingRouteSegment(start, segment)
+										: new WalkingRouteSegment(prevSegment, segment);
+								if (cacheOnly) {
+									walkingSegmentsFromCacheOnly.add(ws);
+								} else {
+									walkingSegmentsToCalculate.add(ws);
+								}
 							}
 						}
-						prev = s;
+						prevSegment = segment;
 					}
-					if (prev != null) {
-						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prev, params.end));
+					if (prevSegment != null) {
+						WalkingRouteSegment ws = new WalkingRouteSegment(prevSegment, params.end);
+						if (cacheOnly) {
+							walkingSegmentsFromCacheOnly.add(ws);
+						} else {
+							walkingSegmentsToCalculate.add(ws);
+						}
 					}
 				}
-				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+				RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();
 				if (walkingRouteParams != null) {
 					routingHelper.startRouteCalculationThread(walkingRouteParams);
 					// wait until all segments calculated

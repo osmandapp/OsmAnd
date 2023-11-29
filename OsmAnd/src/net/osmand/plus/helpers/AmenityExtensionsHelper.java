@@ -1,17 +1,17 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SEPARATOR;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
@@ -43,17 +43,7 @@ public class AmenityExtensionsHelper {
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(new SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return true;
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-		}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
 
 		for (Amenity amenity : amenities) {
 			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {

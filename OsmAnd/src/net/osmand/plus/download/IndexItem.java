@@ -24,7 +24,7 @@ import java.util.List;
 public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
-	
+
 	String description;
 	String fileName;
 	String size;
@@ -32,7 +32,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	long contentSize;
 	long containerSize;
 	boolean extra;
-	
+	boolean hidden;
+
 	// Update information
 	boolean outdated;
 	boolean downloaded;
@@ -49,6 +50,27 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	                 @NonNull DownloadActivityType type,
 	                 boolean free,
 	                 String freeMessage) {
+		this(fileName,
+				description,
+				timestamp,
+				size,
+				contentSize,
+				containerSize,
+				type,
+				free,
+				freeMessage, false);
+	}
+
+	public IndexItem(String fileName,
+	                 String description,
+	                 long timestamp,
+	                 String size,
+	                 long contentSize,
+	                 long containerSize,
+	                 @NonNull DownloadActivityType type,
+	                 boolean free,
+	                 String freeMessage,
+	                 boolean hidden) {
 		super(type);
 		this.fileName = fileName;
 		this.description = description;
@@ -58,6 +80,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		this.containerSize = containerSize;
 		this.free = free;
 		this.freeMessage = freeMessage;
+		this.hidden = hidden;
 	}
 
 	public void updateSize(@NonNull String size, long contentSize, long containerSize) {
@@ -96,7 +119,11 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public long getContentSize() {
 		return contentSize;
 	}
-	
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
 	public double getContentSizeMB() {
 		return ((double)contentSize) / (1 << 20);
 	}
@@ -152,6 +179,12 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public File getTargetFile(@NonNull OsmandApplication ctx) {
 		String basename = getTranslatedBasename();
 		return new File(type.getDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
+	}
+
+	@NonNull
+	public File getDefaultTargetFile(@NonNull OsmandApplication ctx) {
+		String basename = getTranslatedBasename();
+		return new File(type.getDefaultDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
 	}
 
 	public String getTranslatedBasename() {

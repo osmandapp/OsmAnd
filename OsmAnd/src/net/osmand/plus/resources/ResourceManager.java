@@ -27,6 +27,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -123,10 +124,17 @@ public class ResourceManager {
 	private boolean reloadingIndexes;
 
 	public interface ResourceListener {
-		default void onMapsIndexed() {}
-		default void onReaderIndexed(BinaryMapIndexReader reader) {}
-		default void onReaderClosed(BinaryMapIndexReader reader) {}
-		default void onMapClosed(String fileName) {}
+		default void onMapsIndexed() {
+		}
+
+		default void onReaderIndexed(BinaryMapIndexReader reader) {
+		}
+
+		default void onReaderClosed(BinaryMapIndexReader reader) {
+		}
+
+		default void onMapClosed(String fileName) {
+		}
 	}
 
 	// Indexes
@@ -895,6 +903,7 @@ public class ResourceManager {
 		File roadsPath = context.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		roadsPath.mkdirs();
 
+		collectFiles(context.getAppInternalPath(IndexConstants.HIDDEN_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -1159,8 +1168,13 @@ public class ResourceManager {
 		return res;
 	}
 
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect) {
+		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+	}
+
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+	                                     double topLatitude, double leftLongitude, double bottomLatitude,
+	                                     double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {

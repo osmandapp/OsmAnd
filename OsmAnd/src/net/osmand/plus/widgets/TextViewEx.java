@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
 public class TextViewEx extends androidx.appcompat.widget.AppCompatTextView {
+
 	public TextViewEx(Context context) {
 		super(context);
 	}

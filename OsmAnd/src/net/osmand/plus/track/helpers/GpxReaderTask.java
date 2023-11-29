@@ -1,33 +1,28 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.data.City.CityType.CITY;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.data.City.CityType;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreFactory.SearchAddressByNameAPI;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -38,15 +33,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 	private final GpxDbHelper gpxDbHelper;
-	private final SearchUICore searchUICore;
-	private final DownloadResources downloadResources;
 
 	private final ConcurrentLinkedQueue<File> readingItems;
 	private final Map<File, GpxDataItem> readingItemsMap;
 	private final GpxDbReaderCallback listener;
 
 	private File file;
-	private SearchSettings searchSettings;
 
 
 	public GpxReaderTask(@NonNull OsmandApplication app, @NonNull ConcurrentLinkedQueue<File> readingItems,
@@ -54,8 +46,6 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		this.app = app;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.database = gpxDbHelper.getGPXDatabase();
-		this.searchUICore = app.getSearchUICore().getCore();
-		this.downloadResources = app.getDownloadThread().getIndexes();
 		this.readingItems = readingItems;
 		this.readingItemsMap = readingItemsMap;
 		this.listener = listener;
@@ -78,19 +68,17 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (item != null && item.getFile() == null) {
-						item = database.getItem(file, conn);
-					}
 					if (GpxDbHelper.isAnalyseNeeded(file, item)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
-						if (item == null || item.getFile() == null) {
-							item = new GpxDataItem(file, analysis);
+						if (item == null) {
+							item = new GpxDataItem(file);
+							item.getGpxData().setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {
-							database.updateAnalysis(item, analysis, conn);
+							database.updateAnalysis(conn, item, analysis);
 						}
-						if (item.getFileCreationTime() <= 0) {
+						if (item.getGpxData().getFileCreationTime() <= 0) {
 							database.updateCreateTime(item, GPXUtilities.getCreationTime(gpxFile));
 						}
 					}
@@ -128,50 +116,43 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
-		GPXTrackAnalysis analysis = item.getAnalysis();
+		GpxData data = item.getGpxData();
+		GPXTrackAnalysis analysis = data.getAnalysis();
 		LatLon latLon = analysis != null ? analysis.latLonStart : null;
-		if (latLon == null || !downloadResources.hasDownloadedMapsAt(latLon, false)) {
-			item.setNearestCityName("");
+		if (latLon == null) {
+			data.setNearestCityName("");
 		} else {
 			searchNearestCity(item, latLon);
 		}
 	}
 
 	private void searchNearestCity(@NonNull GpxDataItem item, @NonNull LatLon latLon) {
-		SearchSettings settings = getSearchSettings(latLon);
-
-		CallbackWithObject<SearchResultCollection> callback = resultCollection -> {
-			if (resultCollection != null && resultCollection.hasSearchResults()) {
-				List<SearchResult> results = new ArrayList<>(resultCollection.getCurrentSearchResults());
-				sortSearchResults(results, latLon);
-
-				SearchResult result = results.get(0);
-				boolean found = MapUtils.getDistance(latLon, result.location) <= CityType.CITY.getRadius();
-				gpxDbHelper.updateNearestCityName(item, found ? result.localeName : "");
-			} else {
-				item.setNearestCityName("");
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), (int) CITY.getRadius());
+		List<Amenity> cities = app.getResourceManager().searchAmenities(new SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory type, String subcategory) {
+				return Algorithms.equalsToAny(subcategory, "city", "town");
 			}
-			return true;
-		};
-		searchUICore.shallowSearchAsync(SearchAddressByNameAPI.class, "", null, false, false, settings, callback);
-	}
 
-	@NonNull
-	private SearchSettings getSearchSettings(@NonNull LatLon latLon) {
-		if (searchSettings == null) {
-			searchSettings = searchUICore.getSearchSettings()
-					.setEmptyQueryAllowed(true)
-					.setSortByName(false)
-					.setSearchTypes(ObjectType.CITY)
-					.setRadiusLevel(1);
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		}, rect);
+
+		if (!Algorithms.isEmpty(cities)) {
+			sortAmenities(cities, latLon);
+			Amenity city = cities.get(0);
+			gpxDbHelper.updateNearestCityName(item, city.getName());
+		} else {
+			item.getGpxData().setNearestCityName("");
 		}
-		return searchSettings.setOriginalLocation(latLon);
 	}
 
-	private void sortSearchResults(@NonNull List<SearchResult> results, @NonNull LatLon latLon) {
-		Collections.sort(results, (o1, o2) -> {
-			double distance1 = MapUtils.getDistance(latLon, o1.location);
-			double distance2 = MapUtils.getDistance(latLon, o2.location);
+	private void sortAmenities(@NonNull List<Amenity> amenities, @NonNull LatLon latLon) {
+		Collections.sort(amenities, (o1, o2) -> {
+			double distance1 = MapUtils.getDistance(latLon, o1.getLocation());
+			double distance2 = MapUtils.getDistance(latLon, o2.getLocation());
 			return Double.compare(distance1, distance2);
 		});
 	}
@@ -198,9 +179,6 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	interface GpxDbReaderCallback {
-
-		@NonNull
-		GPXDatabase getGPXDatabase();
 
 		void onGpxDataItemRead(@NonNull GpxDataItem item);
 

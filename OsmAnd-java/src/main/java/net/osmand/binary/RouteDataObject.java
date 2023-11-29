@@ -679,10 +679,6 @@ public class RouteDataObject {
 		return def;
 	}
 
-	public boolean loop() {
-		return pointsX[0] == pointsX[pointsX.length - 1] && pointsY[0] == pointsY[pointsY.length - 1];
-	}
-
 	public boolean platform() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
@@ -702,8 +698,6 @@ public class RouteDataObject {
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if (r.roundabout()) {
-				return true;
-			} else if (r.onewayDirection() != 0 && loop()) {
 				return true;
 			}
 		}

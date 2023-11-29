@@ -46,6 +46,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
@@ -74,6 +76,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int RUN_SIMULATE_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 3;
 	private static final long LOST_LOCATION_CHECK_DELAY = 18000;
 	private static final long START_LOCATION_SIMULATION_DELAY = 2000;
+	private static final int UPCOMING_TUNNEL_DISTANCE = 250;
 
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 
@@ -140,11 +143,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private StateChangedListener<LocationSource> locationSourceListener;
 
-	public OsmAndLocationProvider(OsmandApplication app) {
+	public OsmAndLocationProvider(@NonNull OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
 		currentPositionHelper = new CurrentPositionHelper(app);
-		locationSimulation = new OsmAndLocationSimulation(app, this);
+		locationSimulation = new OsmAndLocationSimulation(app);
 		locationServiceHelper = app.createLocationServiceHelper();
 		addLocationSourceListener();
 		addLocationListener(navigationInfo);
@@ -633,7 +636,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					return;
 				}
 				// Speed 120kmh, 2 seconds -> 60 m
-				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(250);
+				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(UPCOMING_TUNNEL_DISTANCE);
 				if (tunnel != null) {
 					simulatePosition = new SimulationProvider(location, tunnel);
 					simulatePosition.startSimulation();

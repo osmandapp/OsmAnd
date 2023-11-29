@@ -379,7 +379,7 @@
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
     <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e pedágio</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas de bicicleta</string>
@@ -1861,7 +1861,6 @@
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo de rota se só estiver se movendo na direção oposta.</string>
     <string name="follow_us">Siga-nos</string>
     <string name="routing_attr_short_way_name">Via mais econômica</string>
-    <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>
     <string name="selected_categories">Categorias selecionadas</string>
     <string name="create_custom_poi">Criar filtro personalizado</string>
@@ -5448,7 +5447,7 @@
     <string name="with_waypoints">Com pontos de trajeto</string>
     <string name="add_smart_folder">Adicionar pasta inteligente</string>
     <string name="empty_name">Nome vazio</string>
-    <string name="edit_fiilter">Editar filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Salvar como pasta inteligente</string>
     <string name="shared_string_show_icon">Mostrar ícone</string>
     <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\".</string>
@@ -5494,7 +5493,7 @@
     <string name="remove_widget_first">Remova o widget primeiro</string>
     <string name="key_event_action_zoom_out">Afastar</string>
     <string name="key_event_action_toggle_drower">Mostrar/ocultar menu lateral</string>
-    <string name="key_is_already_assigned_error">A chave \"%1$s\" já está atribuída a outra ação: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">A chave \"%1$s\" já está atribuída a uma ação: \"%2$s\"</string>
     <string name="key_event_action_open_navigation_view">Abrir vista de navegação</string>
     <string name="add_row">Adicionar linha</string>
     <string name="discard_changes_prompt">Tem certeza de que deseja descartar as alterações?</string>
@@ -5550,4 +5549,18 @@
     <string name="trash_is_empty">A lixeira está vazia</string>
     <string name="shared_string_trash">Lixeira</string>
     <string name="help_article_map_raster_maps_name">Mapas rasterizados (online / offline)</string>
+    <string name="key_assignments">Atribuições de teclas</string>
+    <string name="reset_key_assignments_desc">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
+    <string name="rendering_attr_showToll_name">Mostrar restrições de pedágio</string>
+    <string name="topography_maps">Mapas topográficos</string>
+    <string name="tripltek_promo">Promoção Tripltek por %1$s meses</string>
+    <string name="tripltek_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
+    <string name="shared_string_reassign">Reatribuir</string>
+    <string name="reset_key_assignments">Redefinir atribuições de teclas</string>
+    <string name="rendering_attr_showToll_description">Mostrar restrições de pedágio nas estradas</string>
+    <string name="target_elevation">Elevação do alvo</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="clear_key_assignment">Limpar atribuição de teclas</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Abra a grade de dados WunderLINQ</string>
+    <string name="clear_key_assignment_desc">A ligação de teclas para a ação selecionada será desmarcada e definida como Nenhuma.</string>
 </resources>

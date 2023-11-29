@@ -72,7 +72,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.create())
 
 		items.add(PopUpMenuItem.Builder(app)
-			.setTitleId(R.string.edit_fiilter)
+			.setTitleId(R.string.edit_filter)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
 			.setOnClickListener { v: View? ->
 				editFilters()

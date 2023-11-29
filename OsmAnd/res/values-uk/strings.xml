@@ -2001,7 +2001,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Якість дорожнього покриття</string>
     <string name="search_hint">Введіть назву міста, адресу, назву точки інтересу</string>
     <string name="translit_names">Транслітерація назв</string>
-    <string name="edit_filter">Редагувати категорії</string>
     <string name="subcategories">Підкатегорії</string>
     <string name="selected_categories">Вибрані підкатегорії</string>
     <string name="create_custom_poi">Налаштування пошуку</string>
@@ -5461,7 +5460,7 @@
     <string name="smart_folder_saved">Розумну теку збережено</string>
     <string name="add_smart_folder">Додати розумну теку</string>
     <string name="empty_name">Назва відсутня</string>
-    <string name="edit_fiilter">Змінити фільтр</string>
+    <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
@@ -5564,4 +5563,11 @@
     <string name="add_row">Додати рядок</string>
     <string name="discard_changes_prompt">Ви дійсно хочете відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
+    <string name="key_assignments">Прив\'язки клавіш</string>
+    <string name="topography_maps">Топографічні мапи</string>
+    <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
+    <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
+    <string name="clear_key_assignment">Очистити прив\'язку клавіш</string>
+    <string name="clear_key_assignment_desc">Прив\'язку клавіш для обраної дії буде очищено та встановлено як \"Ні\".</string>
+    <string name="see_all_plans">Переглянути всі плани</string>
 </resources>
