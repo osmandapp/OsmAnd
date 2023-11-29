@@ -373,15 +373,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c, LatLon start, LatLon end) throws SQLException, IOException {
 		HHRoutingContext<T> hctx = this.cacheHctx;
-		if (hctx.regions.isEmpty()) {
+		if (hctx.regions.size() != 1 || hctx.regions.get(0).networkDB == null) {
 			hctx = selectBestRoutingFiles(start, end, hctx);
+		}
+		System.out.println("Selected files: " + (hctx == null ? " EMPTY " : hctx.getRoutingInfo()));
+		if (hctx == null) {
+			return hctx;
 		}
 		hctx.stats = new RoutingStats();
 		hctx.config = c;
 		hctx.setStartEnd(start, end);
 		hctx.clearVisited();
-		System.out.println("Selected files: " + (hctx == null ? " EMPTY " : hctx.getRoutingInfo()));
-		if (hctx == null || hctx.initialized) {
+		if (hctx.initialized) {
 			return hctx;
 		}
 		
@@ -425,8 +428,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
 		List<HHRouteRegionPointsCtx<T>> regions = new ArrayList<>();
-		int minExtraParam = Integer.MAX_VALUE;
-		int maxMatchingParams = 0;
+	
 		GeneralRouter router = hctx.rctx.config.router;
 //		String profile = router.getProfileName();
 		String profile = router.getProfile().toString().toLowerCase(); // use base profile
@@ -438,8 +440,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		long edition = -1;
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
-				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr) &&
-						(hhregion.edition == edition || edition < 0)) {
+				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr)
+						&& (hhregion.edition == edition || edition < 0)) {
+					int minExtraParam = Integer.MAX_VALUE;
+					int maxMatchingParams = 0;
 					int bestProfile = -1;
 					for (int k = 0; k < hhregion.profileParams.size(); k++) {
 						String[] params = hhregion.profileParams.get(k).split(",");

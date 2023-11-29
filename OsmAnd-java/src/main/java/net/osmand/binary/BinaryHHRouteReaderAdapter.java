@@ -316,65 +316,72 @@ public class BinaryHHRouteReaderAdapter {
 				}
 			}
 			return 0;
-		}		
+		}
 		if (codedIS.getTotalBytesRead() != block.filePointer) {
 			codedIS.seek(block.filePointer);
 		}
 		int loaded = 0;
 		int oldLimit = codedIS.pushLimit(block.length);
 		int ind = 0;
-		while (true) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				codedIS.popLimit(oldLimit);
-				return loaded;
-			case OsmAndHHRoutingIndex.HHRouteBlockSegments.IDRANGELENGTH_FIELD_NUMBER:
-				block.idRangeLength = codedIS.readInt32();
-				break;
-			case OsmAndHHRoutingIndex.HHRouteBlockSegments.IDRANGESTART_FIELD_NUMBER:
-				block.idRangeStart = codedIS.readInt32();
-				break;
-			case OsmAndHHRoutingIndex.HHRouteBlockSegments.PROFILEID_FIELD_NUMBER:
-				block.profileId = codedIS.readInt32();
-				break;
-			case OsmAndHHRoutingIndex.HHRouteBlockSegments.INNERBLOCKS_FIELD_NUMBER:
-				if (!checkId(searchInd, block)) {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				} else {
-					// read all sublist
-					if (block.sublist == null) {
-						block.sublist = new ArrayList<>();
+		try {
+			while (true) {
+				int t = codedIS.readTag();
+				int tag = WireFormat.getTagFieldNumber(t);
+				switch (tag) {
+				case 0:
+                    // codedIS.popLimit(oldLimit); // finally
+					return loaded;
+				case OsmAndHHRoutingIndex.HHRouteBlockSegments.IDRANGELENGTH_FIELD_NUMBER:
+					block.idRangeLength = codedIS.readInt32();
+					break;
+				case OsmAndHHRoutingIndex.HHRouteBlockSegments.IDRANGESTART_FIELD_NUMBER:
+					block.idRangeStart = codedIS.readInt32();
+					break;
+				case OsmAndHHRoutingIndex.HHRouteBlockSegments.PROFILEID_FIELD_NUMBER:
+					block.profileId = codedIS.readInt32();
+					break;
+				case OsmAndHHRoutingIndex.HHRouteBlockSegments.INNERBLOCKS_FIELD_NUMBER:
+					if (!checkId(searchInd, block)) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					} else {
+						// read all sublist
+						if (block.sublist == null) {
+							block.sublist = new ArrayList<>();
+						}
+						HHRouteBlockSegments child = new HHRouteBlockSegments();
+						child.length = readInt();
+						child.filePointer = codedIS.getTotalBytesRead();
+						int olLimit = codedIS.pushLimit(child.length);
+						loaded += loadNetworkSegmentPoint(ctx, reg, child, searchInd, reverse);
+						codedIS.popLimit(olLimit);
+						block.sublist.add(child);
 					}
-					HHRouteBlockSegments child = new HHRouteBlockSegments();
-					child.length = readInt();
-					child.filePointer = codedIS.getTotalBytesRead();
-					int olLimit = codedIS.pushLimit(child.length);
-					loaded += loadNetworkSegmentPoint(ctx, reg, child, searchInd, reverse);
-					codedIS.popLimit(olLimit);
-					block.sublist.add(child);
-				}
-				break;
-			case OsmAndHHRoutingIndex.HHRouteBlockSegments.POINTSEGMENTS_FIELD_NUMBER:
-				if(!checkId(searchInd, block)) {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				} else {
-					int pntFileId = (ind++) + block.idRangeStart;
-					T point = reg.getPoint(pntFileId);
-					Builder bld = HHRoutePointSegments.newBuilder();
-					codedIS.readMessage(bld, null);
-					HHRoutePointSegments s = bld.buildPartial();
-					HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(), 
-							s.getSegmentsOut().toByteArray());
-					loaded += point.connected(true).size() + point.connected(false).size();
-				}
+					break;
+				case OsmAndHHRoutingIndex.HHRouteBlockSegments.POINTSEGMENTS_FIELD_NUMBER:
+					if (!checkId(searchInd, block)) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					} else {
+						int pntFileId = (ind++) + block.idRangeStart;
+						T point = reg.getPoint(pntFileId);
+						Builder bld = HHRoutePointSegments.newBuilder();
+						codedIS.readMessage(bld, null);
+						HHRoutePointSegments s = bld.buildPartial();
+						if (point != null) {
+							// not used from this file
+							HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(),
+									s.getSegmentsOut().toByteArray());
+							loaded += point.connected(true).size() + point.connected(false).size();
+						}
+					}
 
-				break;
-			default:
-				skipUnknownField(t);
-				break;
+					break;
+				default:
+					skipUnknownField(t);
+					break;
+				}
 			}
+		} finally {
+			codedIS.popLimit(oldLimit);
 		}
 	}
 

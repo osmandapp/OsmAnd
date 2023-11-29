@@ -200,7 +200,7 @@ public class HHRouteDataStructure {
 		boolean initialized = false;
 		
 		// Route specific details
-		RoutingStats stats;
+		RoutingStats stats = new RoutingStats();
 		HHRoutingConfig config;
 		int startX;
 		int startY;
