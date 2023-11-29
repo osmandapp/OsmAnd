@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
+import net.osmand.plus.keyevent.KeyEventCommandsCache;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -114,7 +115,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void setupDescription(@NonNull View view) {
-		KeyEventCommand command = inputDevice.findCommand(initialKeyCode);
+		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, commandId);
 		if (command != null) {
 			String action = command.toHumanString(app);
 			String message = getString(R.string.press_button_to_link_with_action, action);

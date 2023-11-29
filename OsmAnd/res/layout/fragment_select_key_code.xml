@@ -158,7 +158,8 @@
 
 				<View
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/list_content_padding_large" />
+					android:layout_height="@dimen/dialog_button_ex_height"
+					android:layout_marginBottom="@dimen/content_padding"/>
 
 			</LinearLayout>
 
