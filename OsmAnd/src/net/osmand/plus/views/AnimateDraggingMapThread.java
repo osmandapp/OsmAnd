@@ -346,7 +346,7 @@ public class AnimateDraggingMapThread {
 					targetRotate = rotation;
 					animatingMapRotation = true;
 				}
-				animatingMapAnimator();
+				animatingMapAnimator(notifyListener);
 				if (animateZoom) {
 					animatingMapZoom = false;
 				}
@@ -468,7 +468,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingMapZoom = true;
 				}
-				animatingMapAnimator();
+				animatingMapAnimator(notifyListener);
 				if (animateZoom) {
 					animatingMapZoom = false;
 				}
@@ -532,7 +532,7 @@ public class AnimateDraggingMapThread {
 		return skipAnimation ? 0 : rb.getZoom();
 	}
 
-	private void animatingMapAnimator() {
+	private void animatingMapAnimator(boolean notifyListener) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
@@ -605,7 +605,7 @@ public class AnimateDraggingMapThread {
 		if (animateTarget && mapRenderer != null) {
 			resetMapTarget();
 			PointI target31 = mapRenderer.getTarget();
-			tileView.setTarget31(target31.getX(), target31.getY(), true);
+			tileView.setTarget31(target31.getX(), target31.getY(), notifyListener);
 		}
 		if (animateZoom && mapRenderer != null) {
 			mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);
@@ -790,7 +790,7 @@ public class AnimateDraggingMapThread {
 				}
 
 				animatingMapZoom = true;
-				animatingMapAnimator();
+				animatingMapAnimator(notifyListener);
 				animatingMapZoom = false;
 
 				if (!stopped && zoomingLatLon != null) {
@@ -850,7 +850,7 @@ public class AnimateDraggingMapThread {
 				if (animator != null) {
 					invalidateMapTarget();
 				}
-				animatingMapAnimator();
+				animatingMapAnimator(notifyListener);
 			} else {
 				float curX = endX;
 				float curY = endY;
@@ -915,7 +915,7 @@ public class AnimateDraggingMapThread {
 		startThreadAnimating(() -> {
 			animatingMapTilt = true;
 			if (mapRenderer != null) {
-				animatingMapAnimator();
+				animatingMapAnimator(false);
 				if (mapRenderer.isMapAnimationFinished() && tileView.getElevationAngle() != elevationAngle) {
 					tileView.setElevationAngle(elevationAngle);
 				}
@@ -1002,7 +1002,7 @@ public class AnimateDraggingMapThread {
 			startThreadAnimating(() -> {
 				targetRotate = rotate;
 				animatingMapRotation = true;
-				animatingMapAnimator();
+				animatingMapAnimator(false);
 				animatingMapRotation = false;
 				targetRotate = TARGET_NO_ROTATION;
 			});
