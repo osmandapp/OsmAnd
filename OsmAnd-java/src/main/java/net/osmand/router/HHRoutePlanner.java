@@ -22,6 +22,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -423,20 +424,22 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 
 	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
-		// TODO not always clear (cache)
 		List<HHRouteRegionPointsCtx<T>> regions = new ArrayList<>();
-		// TODO filter by edition
-		// TODO load by bbox
-		
 		int minExtraParam = Integer.MAX_VALUE;
 		int maxMatchingParams = 0;
 		GeneralRouter router = hctx.rctx.config.router;
 //		String profile = router.getProfileName();
 		String profile = router.getProfile().toString().toLowerCase(); // use base profile
 		List<String> ls = router.serializeParameterValues(router.getParameterValues());
+		QuadRect qr = new QuadRect(Math.min(start.getLongitude(), end.getLongitude()),
+				Math.max(start.getLatitude(), end.getLatitude()),
+				Math.max(start.getLongitude(), end.getLongitude()),
+				Math.min(start.getLatitude(), end.getLatitude()));
+		long edition = -1;
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
-				if (hhregion.profile.equals(profile) && hhregion.top.contains(start) && hhregion.top.contains(end)) {
+				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr) &&
+						(hhregion.edition == edition || edition < 0)) {
 					int bestProfile = -1;
 					for (int k = 0; k < hhregion.profileParams.size(); k++) {
 						String[] params = hhregion.profileParams.get(k).split(",");
@@ -459,18 +462,38 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 							maxMatchingParams = matchParam;
 						}
 					}
-					if(bestProfile != -1) {
+					if (bestProfile != -1) {
+						edition = hhregion.edition;
 						short mapId = (short) regions.size();
 						HHRouteRegionPointsCtx<T> region = new HHRouteRegionPointsCtx<T>(mapId, hhregion, r);
 						region.routingProfile = bestProfile;
 						regions.add(region);
 					}
-					
+
 				}
 			}
 		}
 		if (regions.isEmpty()) {
 			return null;
+		}
+		if (cacheHctx != null) {
+			boolean allMatched = true;
+			for (HHRouteRegionPointsCtx<T> r : regions) {
+				boolean match = false;
+				for (HHRouteRegionPointsCtx<T> p : cacheHctx.regions) {
+					if (p.file == r.file && p.fileRegion == r.fileRegion && p.routingProfile == r.routingProfile) {
+						match = true;
+						break;
+					}
+				}
+				if (!match) {
+					allMatched = false;
+					break;
+				}
+			}
+			if (allMatched) {
+				return cacheHctx;
+			}
 		}
 		return initNewContext(hctx.rctx, regions);
 	}

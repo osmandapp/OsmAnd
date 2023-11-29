@@ -67768,6 +67768,24 @@ public final class OsmandOdb {
        * </pre>
        */
       int getProfileIds(int index);
+
+      // optional int32 partialInd = 11;
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      boolean hasPartialInd();
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      int getPartialInd();
     }
     /**
      * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint}
@@ -67884,6 +67902,11 @@ public final class OsmandOdb {
                   profileIds_.add(input.readInt32());
                 }
                 input.popLimit(limit);
+                break;
+              }
+              case 88: {
+                bitField0_ |= 0x00000200;
+                partialInd_ = input.readInt32();
                 break;
               }
             }
@@ -68140,6 +68163,30 @@ public final class OsmandOdb {
         return profileIds_.get(index);
       }
 
+      // optional int32 partialInd = 11;
+      public static final int PARTIALIND_FIELD_NUMBER = 11;
+      private int partialInd_;
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      public boolean hasPartialInd() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      public int getPartialInd() {
+        return partialInd_;
+      }
+
       private void initFields() {
         id_ = 0;
         dx_ = 0;
@@ -68151,6 +68198,7 @@ public final class OsmandOdb {
         dualPointId_ = 0;
         dualClusterId_ = 0;
         profileIds_ = java.util.Collections.emptyList();
+        partialInd_ = 0;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -68218,6 +68266,9 @@ public final class OsmandOdb {
         for (int i = 0; i < profileIds_.size(); i++) {
           output.writeInt32(10, profileIds_.get(i));
         }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          output.writeInt32(11, partialInd_);
+        }
         getUnknownFields().writeTo(output);
       }
 
@@ -68271,6 +68322,10 @@ public final class OsmandOdb {
           }
           size += dataSize;
           size += 1 * getProfileIdsList().size();
+        }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(11, partialInd_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -68408,6 +68463,8 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000100);
           profileIds_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000200);
+          partialInd_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000400);
           return this;
         }
 
@@ -68477,6 +68534,10 @@ public final class OsmandOdb {
             bitField0_ = (bitField0_ & ~0x00000200);
           }
           result.profileIds_ = profileIds_;
+          if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+            to_bitField0_ |= 0x00000200;
+          }
+          result.partialInd_ = partialInd_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -68529,6 +68590,9 @@ public final class OsmandOdb {
               profileIds_.addAll(other.profileIds_);
             }
             onChanged();
+          }
+          if (other.hasPartialInd()) {
+            setPartialInd(other.getPartialInd());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -69032,6 +69096,55 @@ public final class OsmandOdb {
         public Builder clearProfileIds() {
           profileIds_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+          return this;
+        }
+
+        // optional int32 partialInd = 11;
+        private int partialInd_ ;
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public boolean hasPartialInd() {
+          return ((bitField0_ & 0x00000400) == 0x00000400);
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public int getPartialInd() {
+          return partialInd_;
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public Builder setPartialInd(int value) {
+          bitField0_ |= 0x00000400;
+          partialInd_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public Builder clearPartialInd() {
+          bitField0_ = (bitField0_ & ~0x00000400);
+          partialInd_ = 0;
           onChanged();
           return this;
         }
@@ -73793,7 +73906,7 @@ public final class OsmandOdb {
       "ataObjects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\022" +
       "1\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.Restr" +
       "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd" +
-      ".OBF.StringTable\"\273\007\n\024OsmAndHHRoutingInde" +
+      ".OBF.StringTable\"\317\007\n\024OsmAndHHRoutingInde" +
       "x\022\017\n\007edition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rp" +
       "rofileParams\030\003 \003(\t\022E\n\npointBoxes\030\005 \002(\01321" +
       ".OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoute" +
@@ -73804,23 +73917,23 @@ public final class OsmandOdb {
       "\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAn" +
       "dHHRoutingIndex.HHRoutePointsBox\022D\n\006poin" +
       "ts\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingInd" +
-      "ex.HHRouteNetworkPoint\032\311\001\n\023HHRouteNetwor" +
+      "ex.HHRouteNetworkPoint\032\335\001\n\023HHRouteNetwor" +
       "kPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
       "(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021" +
       "roadStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001" +
       "(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId" +
-      "\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\032\360\001\n\024HHRouteBl",
-      "ockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridR" +
-      "angeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013i" +
-      "nnerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRo" +
-      "utingIndex.HHRouteBlockSegments\022L\n\rpoint" +
-      "Segments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRout" +
-      "ingIndex.HHRoutePointSegments\032?\n\024HHRoute" +
-      "PointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013seg" +
-      "mentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001 " +
-      "\002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003 \001" +
-      "(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.binar",
-      "yB\tOsmandOdb"
+      "\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd",
+      "\030\013 \001(\005\032\360\001\n\024HHRouteBlockSegments\022\024\n\014idRan" +
+      "geStart\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\t" +
+      "profileId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.O" +
+      "smAnd.OBF.OsmAndHHRoutingIndex.HHRouteBl" +
+      "ockSegments\022L\n\rpointSegments\030\004 \003(\01325.Osm" +
+      "And.OBF.OsmAndHHRoutingIndex.HHRoutePoin" +
+      "tSegments\032?\n\024HHRoutePointSegments\022\022\n\nseg" +
+      "mentsIn\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013Os" +
+      "mAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(" +
+      "\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\t",
+      "B\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -74138,7 +74251,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor,
-              new java.lang.String[] { "Id", "Dx", "Dy", "GlobalId", "RoadId", "RoadStartEndIndex", "ClusterId", "DualPointId", "DualClusterId", "ProfileIds", });
+              new java.lang.String[] { "Id", "Dx", "Dy", "GlobalId", "RoadId", "RoadStartEndIndex", "ClusterId", "DualPointId", "DualClusterId", "ProfileIds", "PartialInd", });
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor =
             internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(2);
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable = new

@@ -1922,8 +1922,6 @@ public class BinaryMapIndexReader {
 		// to speed up comparision
 		private MapIndex referenceMapIndex;
 
-		
-
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
 			if (m != null) {
