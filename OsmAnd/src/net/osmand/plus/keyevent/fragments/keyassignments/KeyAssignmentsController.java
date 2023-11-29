@@ -17,7 +17,7 @@ import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.fragments.EditKeyAssignmentFragment;
+import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentFragment;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -75,6 +75,10 @@ class KeyAssignmentsController {
 	}
 
 	public void askRemoveAllAssignments() {
+		if (!inputDevice.hasActiveAssignments()) {
+			app.showShortToastMessage(R.string.key_assignments_already_cleared_message);
+			return;
+		}
 		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
@@ -95,7 +99,7 @@ class KeyAssignmentsController {
 		}
 	}
 
-	private boolean isNightMode() {
+	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

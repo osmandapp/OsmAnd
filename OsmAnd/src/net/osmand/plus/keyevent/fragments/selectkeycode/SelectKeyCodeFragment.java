@@ -31,6 +31,7 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventCommandsCache;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -46,8 +47,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public static final String TAG = SelectKeyCodeFragment.class.getSimpleName();
 
 	private static final String ATTR_KEY_CODE = "attr_key_code";
-	private static final String ATTR_COMMAND_ID = "attr_command_id";
 	private static final String ATTR_DEVICE_ID = "attr_input_device_id";
+	private static final String ATTR_ASSIGNMENT_ID = "attr_key_assignment_id";
 
 	private static final int PULSE_DELAY_MS = 1000;
 
@@ -56,7 +57,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private Integer keyCode = null;
 	private int initialKeyCode;
-	private String commandId;
+	private String assignmentId;
 	private InputDeviceProfile inputDevice;
 
 	@Override
@@ -67,7 +68,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 		Bundle arguments = requireArguments();
 		initialKeyCode = arguments.getInt(ATTR_KEY_CODE);
-		commandId = arguments.getString(ATTR_COMMAND_ID);
+		assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID);
 
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
@@ -115,7 +116,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void setupDescription(@NonNull View view) {
-		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, commandId);
+		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, getCommandId());
 		if (command != null) {
 			String action = command.toHumanString(app);
 			String message = getString(R.string.press_button_to_link_with_action, action);
@@ -193,7 +194,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void updateApplyButtonState() {
-		applyButton.setEnabled(isKeyCodeChanged());
+		applyButton.setEnabled(isKeyCodeChanged() && !isKeyCodeAlreadyAssignedToThisAction());
 		applyButton.setButtonType(isKeyCodeFree() ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
 		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
@@ -235,14 +236,30 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		return getCommandDuplication(keyCode) == null;
 	}
 
+	private boolean isKeyCodeAlreadyAssignedToThisAction() {
+		KeyAssignment keyAssignment = getKeyAssignment();
+		return keyAssignment != null && keyAssignment.hasKeyCode(keyCode);
+	}
+
 	private KeyEventCommand getCommandDuplication(int keyCode) {
 		if (inputDevice != null) {
 			KeyEventCommand command = inputDevice.findCommand(keyCode);
-			if (command != null && !Objects.equals(commandId, command.getId())) {
+			if (command != null && !Objects.equals(getCommandId(), command.getId())) {
 				return command;
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	private String getCommandId() {
+		KeyAssignment assignment = getKeyAssignment();
+		return assignment != null ? assignment.getCommandId() : "";
+	}
+
+	@Nullable
+	private KeyAssignment getKeyAssignment() {
+		return inputDevice.findAssignment(assignmentId);
 	}
 
 	@Override
@@ -293,14 +310,14 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 									@NonNull Fragment targetFragment,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String deviceId,
-	                                @NonNull String commandId,
+									@NonNull String assignmentId,
 	                                @NonNull Integer keyCode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectKeyCodeFragment fragment = new SelectKeyCodeFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_COMMAND_ID, commandId);
+			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);
 			arguments.putInt(ATTR_KEY_CODE, keyCode);
 			fragment.setArguments(arguments);
 			fragment.setTargetFragment(targetFragment, 0);

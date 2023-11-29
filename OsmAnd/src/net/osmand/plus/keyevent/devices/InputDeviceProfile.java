@@ -63,6 +63,10 @@ public abstract class InputDeviceProfile {
 		return assignmentsCollection.getAllAssignments().size();
 	}
 
+	public boolean hasActiveAssignments() {
+		return getActiveAssignmentsCount() > 0;
+	}
+
 	public int getActiveAssignmentsCount() {
 		return assignmentsCollection.getActiveAssignmentsCount();
 	}

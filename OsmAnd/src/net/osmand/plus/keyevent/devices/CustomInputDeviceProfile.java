@@ -50,7 +50,6 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
 			assignment.setCustomName(newName);
-			assignmentsCollection.syncCache();
 		}
 	}
 

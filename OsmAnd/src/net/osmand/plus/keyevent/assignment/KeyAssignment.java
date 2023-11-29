@@ -79,6 +79,15 @@ public class KeyAssignment {
 		keyCodes = new ArrayList<>();
 	}
 
+	public boolean hasKeyCode(int keyCode) {
+		for (int assignedKeyCode : getKeyCodes()) {
+			if (assignedKeyCode == keyCode) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@NonNull
 	public String getId() {
 		return "default_" + commandId;
@@ -124,6 +133,10 @@ public class KeyAssignment {
 			keyLabels.add(getKeySymbol(context, keyCode));
 		}
 		return keyLabels;
+	}
+
+	public boolean hasKeyCodes() {
+		return !Algorithms.isEmpty(getKeyCodes());
 	}
 
 	@NonNull
