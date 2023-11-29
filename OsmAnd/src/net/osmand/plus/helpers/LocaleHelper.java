@@ -3,14 +3,21 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -27,16 +34,40 @@ public class LocaleHelper {
 	private final Locale defaultLocale;
 	private Locale preferredLocale;
 	private Resources localizedResources;
+	private final StateChangedListener<String> localeListener;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.defaultLocale = Locale.getDefault();
+		localeListener = change -> onPreferredLocaleChanged();
+	}
+
+	private void onPreferredLocaleChanged() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
+			if (!Algorithms.isEmpty(preferredLocale)) {
+				Locale newLocale = new Locale(preferredLocale);
+				Locale.setDefault(newLocale);
+				LocaleListCompat list = LocaleListCompat.create(newLocale);
+				app.runInUIThread(
+						() -> AppCompatDelegate.setApplicationLocales(list)
+				);
+			}
+		}
 	}
 
 	public void checkPreferredLocale() {
 		Configuration config = app.getBaseContext().getResources().getConfiguration();
 
 		String pl = app.getSettings().PREFERRED_LOCALE.get();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			Locale currentLocale = Locale.getDefault();
+			if(!Algorithms.stringsEqual(currentLocale.toString(), pl)) {
+				pl = currentLocale.toString();
+				app.getSettings().PREFERRED_LOCALE.set(pl);
+			}
+		}
+		app.getSettings().PREFERRED_LOCALE.addListener(localeListener);
 		String[] splitScript = pl.split("\\+");
 		String script = (splitScript.length > 1) ? splitScript[1] : "";
 		String[] splitCountry = splitScript[0].split("_");
