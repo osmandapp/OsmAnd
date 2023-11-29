@@ -98,7 +98,7 @@ import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteList
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.development.SimulatePositionFragment;
+import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -1151,7 +1151,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					showTrackAltitudeDialog(-1);
 				}
 			} else if (buttonIndex == SIMULATE_POSITION_BUTTON_INDEX) {
-				SimulatePositionFragment.showInstance(fragmentManager, gpxFile, true);
+				SimulateLocationFragment.showInstance(fragmentManager, gpxFile, true);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 

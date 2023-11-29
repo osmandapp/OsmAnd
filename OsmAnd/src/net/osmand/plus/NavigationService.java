@@ -29,6 +29,7 @@ import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 
 import java.util.Collections;
 import java.util.List;

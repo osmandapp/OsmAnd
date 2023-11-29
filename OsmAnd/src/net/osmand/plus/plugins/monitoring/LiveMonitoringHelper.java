@@ -9,7 +9,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SimulationProvider;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
