@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.fragments;
+package net.osmand.plus.keyevent.fragments.selectkeycode;
 
 import static android.graphics.Typeface.BOLD;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
@@ -32,7 +32,6 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

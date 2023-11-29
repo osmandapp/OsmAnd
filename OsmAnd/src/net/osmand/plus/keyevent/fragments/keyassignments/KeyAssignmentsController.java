@@ -1,11 +1,11 @@
-package net.osmand.plus.keyevent.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.keyassignments;
 
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_BOTTOM_SHADOW;
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_DIVIDER;
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.CARD_TOP_DIVIDER;
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.HEADER;
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.KEY_BINDING_ITEM;
-import static net.osmand.plus.keyevent.fragments.keybindings.KeyBindingsAdapter.SPACE;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.CARD_DIVIDER;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.CARD_TOP_DIVIDER;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.HEADER;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.KEY_ASSIGNMENT_ITEM;
+import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.SPACE;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -15,10 +15,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDevicesHelper;
-import net.osmand.plus.keyevent.AssignmentsCategory;
+import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.fragments.EditKeyBindingFragment;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.fragments.EditKeyAssignmentFragment;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class KeyBindingsController {
+class KeyAssignmentsController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
@@ -37,9 +37,9 @@ class KeyBindingsController {
 	private FragmentActivity activity;
 	private final boolean usedOnMap;
 
-	public KeyBindingsController(@NonNull OsmandApplication app,
-	                             @NonNull ApplicationMode appMode,
-	                             boolean usedOnMap) {
+	public KeyAssignmentsController(@NonNull OsmandApplication app,
+	                                @NonNull ApplicationMode appMode,
+	                                boolean usedOnMap) {
 		this.app = app;
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
@@ -53,16 +53,16 @@ class KeyBindingsController {
 			return new ArrayList<>();
 		}
 		List<ScreenItem> screenItems = new ArrayList<>();
-		Map<AssignmentsCategory, List<KeyBinding>> categorizedAssignments = inputDevice.getCategorizedAssignments();
-		for (AssignmentsCategory category : AssignmentsCategory.values()) {
-			List<KeyBinding> keyBindings = categorizedAssignments.get(category);
-			if (Algorithms.isEmpty(keyBindings)) continue;
+		Map<KeyAssignmentCategory, List<KeyAssignment>> categorizedAssignments = inputDevice.getCategorizedAssignments();
+		for (KeyAssignmentCategory category : KeyAssignmentCategory.values()) {
+			List<KeyAssignment> assignments = categorizedAssignments.get(category);
+			if (Algorithms.isEmpty(assignments)) continue;
 
 			String categoryName = app.getString(category.getTitleId());
 			screenItems.add(new ScreenItem(category.ordinal() > 0 ? CARD_DIVIDER : CARD_TOP_DIVIDER, categoryName));
 			screenItems.add(new ScreenItem(HEADER, categoryName));
-			for (KeyBinding keyBinding : keyBindings) {
-				screenItems.add(new ScreenItem(KEY_BINDING_ITEM, keyBinding));
+			for (KeyAssignment assignment : assignments) {
+				screenItems.add(new ScreenItem(KEY_ASSIGNMENT_ITEM, assignment));
 			}
 		}
 		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
@@ -74,7 +74,7 @@ class KeyBindingsController {
 		this.activity = activity;
 	}
 
-	public void askRemoveAllKeyBindings() {
+	public void askRemoveAllAssignments() {
 		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
 				.setTitle(R.string.reset_key_assignments)
 				.setNegativeButton(R.string.shared_string_cancel, null)
@@ -88,10 +88,10 @@ class KeyBindingsController {
 		return inputDevice != null && inputDevice.isCustom();
 	}
 
-	public void askEditAssignment(@NonNull KeyBinding assignment) {
+	public void askEditAssignment(@NonNull KeyAssignment assignment) {
 		if (inputDevice != null) {
 			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyBindingFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
+			EditKeyAssignmentFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
 		}
 	}
 

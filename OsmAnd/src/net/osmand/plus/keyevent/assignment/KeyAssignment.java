@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.keybinding;
+package net.osmand.plus.keyevent.assignment;
 
 import static net.osmand.plus.keyevent.KeySymbolMapper.getKeySymbol;
 
@@ -24,19 +24,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class KeyBinding {
+public class KeyAssignment {
 
 	private final String commandId;
 	private String customName;
 	private List<Integer> keyCodes = new ArrayList<>();
 	private KeyEventCommand cachedCommand;
 
-	public KeyBinding(@NonNull String commandId, @NonNull Integer ... keyCodes) {
+	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
 		this.commandId = commandId;
 		this.keyCodes = Arrays.asList(keyCodes);
 	}
 
-	public KeyBinding(@NonNull JSONObject jsonObject) throws JSONException {
+	public KeyAssignment(@NonNull JSONObject jsonObject) throws JSONException {
 		this.commandId = jsonObject.getString("commandId");
 		this.customName = jsonObject.has("customName")
 				? jsonObject.getString("customName")
@@ -134,8 +134,8 @@ public class KeyBinding {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof KeyBinding)) return false;
-		KeyBinding that = (KeyBinding) o;
+		if (!(o instanceof KeyAssignment)) return false;
+		KeyAssignment that = (KeyAssignment) o;
 		return Objects.equals(getId(), that.getId());
 	}
 

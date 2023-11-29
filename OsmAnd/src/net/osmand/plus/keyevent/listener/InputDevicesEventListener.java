@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.callbacks;
+package net.osmand.plus.keyevent.listener;
 
 import androidx.annotation.NonNull;
 

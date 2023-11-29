@@ -33,10 +33,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
-import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDevicesEventListener;
-import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.listener.EventType;
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
+import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -48,13 +49,13 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 import java.util.Objects;
 
-public class EditKeyBindingFragment extends BaseOsmAndFragment
+public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		implements OnKeyCodeSelectedCallback, InputDevicesEventListener {
 
-	public static final String TAG = EditKeyBindingFragment.class.getSimpleName();
+	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
 
 	private static final String ATTR_DEVICE_ID = "attr_device_id";
-	private static final String ATTR_ASSIGNMENT_ID = "attr_keybinding";
+	private static final String ATTR_ASSIGNMENT_ID = "attr_key_assignment";
 
 	private ApplicationMode appMode;
 	private InputDevicesHelper deviceHelper;
@@ -109,12 +110,12 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		});
 	}
 
-	private void setupActionNameRow(@NonNull View view, @NonNull KeyBinding keyBinding) {
+	private void setupActionNameRow(@NonNull View view, @NonNull KeyAssignment assignment) {
 		View customNameButton = view.findViewById(R.id.custom_name_button);
 		TextView title = customNameButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_name);
 
-		String name = keyBinding.getName(app);
+		String name = assignment.getName(app);
 		TextView summary = customNameButton.findViewById(R.id.description);
 		summary.setText(name);
 
@@ -126,21 +127,21 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		setupSelectableBackground(backgroundView, appMode.getProfileColor(nightMode));
 	}
 
-	private void setupActionTypeRow(@NonNull View view, @NonNull KeyBinding keyBinding) {
+	private void setupActionTypeRow(@NonNull View view, @NonNull KeyAssignment assignment) {
 		View actionButton = view.findViewById(R.id.action_button);
 		TextView title = actionButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_action);
 		TextView summary = actionButton.findViewById(R.id.description);
-		summary.setText(keyBinding.getCommandTitle(app));
+		summary.setText(assignment.getCommandTitle(app));
 	}
 
-	private void setupKeyButtonRow(@NonNull View view, @NonNull KeyBinding keyBinding) {
+	private void setupKeyButtonRow(@NonNull View view, @NonNull KeyAssignment assignment) {
 		View keyButton = view.findViewById(R.id.key_button);
 		TextView title = keyButton.findViewById(R.id.title);
 		title.setText(R.string.shared_string_button);
 
 		TextView summary = keyButton.findViewById(R.id.description);
-		List<String> keyLabels = keyBinding.getKeyLabels(app);
+		List<String> keyLabels = assignment.getKeyLabels(app);
 		String fullSummary = TextUtils.join(", ", keyLabels);
 		summary.setText(fullSummary);
 		summary.setTextColor(getActiveColor(app, nightMode));
@@ -149,10 +150,10 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		keyButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				Fragment thisFragment = EditKeyBindingFragment.this;
+				Fragment thisFragment = EditKeyAssignmentFragment.this;
 				FragmentManager fm = activity.getSupportFragmentManager();
-				int keyCode = Algorithms.isEmpty(keyBinding.getKeyCodes()) ? KeyEvent.KEYCODE_UNKNOWN : keyBinding.getKeyCodes().get(0);
-				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, keyBinding.getCommandId(), keyCode);
+				int keyCode = Algorithms.isEmpty(assignment.getKeyCodes()) ? KeyEvent.KEYCODE_UNKNOWN : assignment.getKeyCodes().get(0);
+				SelectKeyCodeFragment.showInstance(fm, thisFragment, appMode, deviceId, assignment.getCommandId(), keyCode);
 			}
 		});
 		View backgroundView = keyButton.findViewById(R.id.selectable_list_item);
@@ -228,22 +229,22 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private void updateViewContent(@Nullable View view, @Nullable KeyBinding keyBinding) {
-		if (view != null && keyBinding != null) {
-			updateToolbarTitle(view, keyBinding);
-			setupActionNameRow(view, keyBinding);
-			setupActionTypeRow(view, keyBinding);
-			setupKeyButtonRow(view, keyBinding);
+	private void updateViewContent(@Nullable View view, @Nullable KeyAssignment assignment) {
+		if (view != null && assignment != null) {
+			updateToolbarTitle(view, assignment);
+			setupActionNameRow(view, assignment);
+			setupActionTypeRow(view, assignment);
+			setupKeyButtonRow(view, assignment);
 		}
 	}
 
-	private void updateToolbarTitle(@NonNull View view, @NonNull KeyBinding keyBinding) {
+	private void updateToolbarTitle(@NonNull View view, @NonNull KeyAssignment assignment) {
 		CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
-		collapsingToolbarLayout.setTitle(keyBinding.getName(app));
+		collapsingToolbarLayout.setTitle(assignment.getName(app));
 	}
 
 	@Nullable
-	private KeyBinding getAssignment() {
+	private KeyAssignment getAssignment() {
 		return deviceHelper.findAssignment(appMode, deviceId, assignmentId);
 	}
 
@@ -294,7 +295,7 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 	                                @NonNull String deviceId,
 	                                @NonNull String assignmentId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			EditKeyBindingFragment fragment = new EditKeyBindingFragment();
+			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
 			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);

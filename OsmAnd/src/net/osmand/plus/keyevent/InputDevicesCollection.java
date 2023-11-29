@@ -7,17 +7,15 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
+import net.osmand.plus.keyevent.devices.DefaultInputDevices;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 class InputDevicesCollection {
 

@@ -6,10 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.AssignmentsCollection;
-import net.osmand.plus.keyevent.AssignmentsCategory;
+import net.osmand.plus.keyevent.KeyAssignmentsCollection;
+import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.Map;
 public abstract class InputDeviceProfile {
 
 	protected OsmandApplication app;
-	protected AssignmentsCollection assignmentsCollection;
+	protected KeyAssignmentsCollection assignmentsCollection;
 
 	@NonNull
 	public InputDeviceProfile initialize(@NonNull OsmandApplication app) {
@@ -25,18 +25,18 @@ public abstract class InputDeviceProfile {
 		return this;
 	}
 
-	protected void setAssignments(@NonNull List<KeyBinding> keyBindings) {
-		assignmentsCollection = new AssignmentsCollection(keyBindings);
+	protected void setAssignments(@NonNull List<KeyAssignment> assignments) {
+		assignmentsCollection = new KeyAssignmentsCollection(assignments);
 	}
 
 	@NonNull
-	public Map<AssignmentsCategory, List<KeyBinding>> getCategorizedAssignments() {
+	public Map<KeyAssignmentCategory, List<KeyAssignment>> getCategorizedAssignments() {
 		return assignmentsCollection.getCategorizedAssignments(app);
 	}
 
 	@NonNull
-	public List<KeyBinding> getAssignments() {
-		return assignmentsCollection.getAssignments();
+	public List<KeyAssignment> getAssignments() {
+		return assignmentsCollection.getAllAssignments();
 	}
 
 	public boolean hasAssignmentNameDuplicate(@NonNull OsmandApplication context, @NonNull String newName) {
@@ -45,22 +45,22 @@ public abstract class InputDeviceProfile {
 
 	@Nullable
 	public KeyEventCommand findCommand(int keyCode) {
-		KeyBinding keyBinding = findAssignment(keyCode);
-		return keyBinding != null ? keyBinding.getCommand(app) : null;
+		KeyAssignment assignment = findAssignment(keyCode);
+		return assignment != null ? assignment.getCommand(app) : null;
 	}
 
 	@Nullable
-	public KeyBinding findAssignment(int keyCode) {
+	public KeyAssignment findAssignment(int keyCode) {
 		return assignmentsCollection.findByKeyCode(keyCode);
 	}
 
 	@Nullable
-	public KeyBinding findAssignment(@NonNull String assignmentId) {
+	public KeyAssignment findAssignment(@NonNull String assignmentId) {
 		return assignmentsCollection.findById(assignmentId);
 	}
 
 	public int getAssignmentsCount() {
-		return assignmentsCollection.getAssignments().size();
+		return assignmentsCollection.getAllAssignments().size();
 	}
 
 	public int getActiveAssignmentsCount() {

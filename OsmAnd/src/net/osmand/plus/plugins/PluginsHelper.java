@@ -38,7 +38,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -740,7 +740,7 @@ public class PluginsHelper {
 		return installed;
 	}
 
-	public static void addCommonKeyEventAssignments(@NonNull List<KeyBinding> assignments) {
+	public static void addCommonKeyEventAssignments(@NonNull List<KeyAssignment> assignments) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.addCommonKeyEventAssignments(assignments);
 		}

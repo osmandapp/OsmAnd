@@ -16,7 +16,7 @@ import net.osmand.plus.keyevent.commands.OpenQuickSearchDialogCommand;
 import net.osmand.plus.keyevent.commands.SwitchAppModeCommand;
 import net.osmand.plus.keyevent.commands.SwitchCompassCommand;
 import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.plugins.PluginsHelper;
 
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class KeyboardDeviceProfile extends PredefinedInputDeviceProfile {
 
 	@Override
 	@NonNull
-	protected List<KeyBinding> collectAssignments() {
-		List<KeyBinding> list = new ArrayList<>();
+	protected List<KeyAssignment> collectAssignments() {
+		List<KeyAssignment> list = new ArrayList<>();
 		
 		// Default letter keycodes
 		addAssignment(list, BackToLocationCommand.ID, KeyEvent.KEYCODE_C);

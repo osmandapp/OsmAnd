@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.keyassignments;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
@@ -23,19 +23,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
+class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public static final int CARD_TOP_DIVIDER = 1;
 	public static final int CARD_DIVIDER = 2;
 	public static final int HEADER = 3;
-	public static final int KEY_BINDING_ITEM = 4;
+	public static final int KEY_ASSIGNMENT_ITEM = 4;
 	public static final int CARD_BOTTOM_SHADOW = 5;
 	public static final int SPACE = 6;
 
@@ -47,10 +47,10 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private List<ScreenItem> screenItems = new ArrayList<>();
 	private boolean editable;
 	private final boolean usedOnMap;
-	private final KeyBindingsController controller;
+	private final KeyAssignmentsController controller;
 
-	public KeyBindingsAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
-	                          @NonNull KeyBindingsController controller, boolean usedOnMap) {
+	public KeyAssignmentsAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+	                             @NonNull KeyAssignmentsController controller, boolean usedOnMap) {
 		setHasStableIds(true);
 		this.app = app;
 		this.appMode = appMode;
@@ -70,8 +70,8 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case HEADER:
 				return new HeaderViewHolder(inflate(R.layout.list_item_header_48dp));
-			case KEY_BINDING_ITEM:
-				return new ActionItemViewHolder(inflate(R.layout.list_item_external_input_device_keybinding_item));
+			case KEY_ASSIGNMENT_ITEM:
+				return new ActionItemViewHolder(inflate(R.layout.list_item_external_input_device_key_assignment_item));
 			case CARD_BOTTOM_SHADOW:
 				return new CardBottomShadowViewHolder(inflate(R.layout.card_bottom_divider));
 			case SPACE:
@@ -91,7 +91,7 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		} else if (holder instanceof ActionItemViewHolder) {
 			ActionItemViewHolder h = (ActionItemViewHolder) holder;
-			KeyBinding keyBinding = (KeyBinding) item.getValue();
+			KeyAssignment assignment = (KeyAssignment) item.getValue();
 
 			if (isEditable()) {
 				boolean nightMode = isNightMode();
@@ -101,14 +101,14 @@ class KeyBindingsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				controller.askEditAssignment(keyBinding);
+				controller.askEditAssignment(assignment);
 			}: null);
-			h.actionName.setText(keyBinding.getName(app));
-			List<String> keyLabels = keyBinding.getKeyLabels(app);
+			h.actionName.setText(assignment.getName(app));
+			List<String> keyLabels = assignment.getKeyLabels(app);
 			h.keyName.setText(TextUtils.join(", ", keyLabels));
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.getType() == KEY_BINDING_ITEM;
+			boolean dividerNeeded = nextItem != null && nextItem.getType() == KEY_ASSIGNMENT_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}

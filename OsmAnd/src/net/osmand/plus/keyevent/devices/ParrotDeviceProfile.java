@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,9 @@ public class ParrotDeviceProfile extends PredefinedInputDeviceProfile {
 
 	@Override
 	@NonNull
-	protected List<KeyBinding> collectAssignments() {
-		List<KeyBinding> list = new ArrayList<>();
+	protected List<KeyAssignment> collectAssignments() {
+		List<KeyAssignment> list = new ArrayList<>();
+
 		addAssignment(list, MapZoomCommand.ZOOM_OUT_ID, KeyEvent.KEYCODE_DPAD_LEFT);
 		addAssignment(list, MapZoomCommand.ZOOM_IN_ID, KeyEvent.KEYCODE_DPAD_RIGHT);
 		return list;

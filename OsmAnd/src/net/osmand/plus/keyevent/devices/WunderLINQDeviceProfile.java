@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.commands.OpenWunderLINQDatagridCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,9 @@ public class WunderLINQDeviceProfile extends PredefinedInputDeviceProfile {
 
 	@Override
 	@NonNull
-	protected List<KeyBinding> collectAssignments() {
-		List<KeyBinding> list = new ArrayList<>();
+	protected List<KeyAssignment> collectAssignments() {
+		List<KeyAssignment> list = new ArrayList<>();
+
 		addAssignment(list, MapZoomCommand.ZOOM_IN_ID, KeyEvent.KEYCODE_DPAD_UP);
 		addAssignment(list, MapZoomCommand.ZOOM_OUT_ID, KeyEvent.KEYCODE_DPAD_DOWN);
 		addAssignment(list, OpenWunderLINQDatagridCommand.ID, KeyEvent.KEYCODE_ESCAPE);

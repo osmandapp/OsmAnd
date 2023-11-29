@@ -3,7 +3,7 @@ package net.osmand.plus.keyevent.devices;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 
 import java.util.List;
 
@@ -24,10 +24,10 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 	 * @return list of predefined assignments for the particular device type.
 	 */
 	@NonNull
-	protected abstract List<KeyBinding> collectAssignments();
+	protected abstract List<KeyAssignment> collectAssignments();
 
-	public void addAssignment(@NonNull List<KeyBinding> assignments,
+	public void addAssignment(@NonNull List<KeyAssignment> assignments,
 	                          @NonNull String commandId, @NonNull Integer ... keyCodes) {
-		assignments.add(new KeyBinding(commandId, keyCodes));
+		assignments.add(new KeyAssignment(commandId, keyCodes));
 	}
 }

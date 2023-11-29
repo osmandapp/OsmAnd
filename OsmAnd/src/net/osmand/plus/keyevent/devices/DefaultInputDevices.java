@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent;
+package net.osmand.plus.keyevent.devices;
 
 import androidx.annotation.NonNull;
 

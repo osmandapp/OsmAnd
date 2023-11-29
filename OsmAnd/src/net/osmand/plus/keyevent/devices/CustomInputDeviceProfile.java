@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +34,10 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 				// For previous version compatibility
 				: object.getJSONArray("keybindings");
 
-		List<KeyBinding> assignments = new ArrayList<>();
+		List<KeyAssignment> assignments = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			assignments.add(new KeyBinding(jsonObject));
+			assignments.add(new KeyAssignment(jsonObject));
 		}
 		setAssignments(assignments);
 	}
@@ -47,15 +47,15 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void renameAssignment(@NonNull String assignmentId, @NonNull String newName) {
-		KeyBinding keyBinding = assignmentsCollection.findById(assignmentId);
-		if (keyBinding != null) {
-			keyBinding.setCustomName(newName);
+		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
+		if (assignment != null) {
+			assignment.setCustomName(newName);
 			assignmentsCollection.syncCache();
 		}
 	}
 
 	public void addAssignmentKeyCode(@NonNull String assignmentId, int keyCode) {
-		KeyBinding assignment = assignmentsCollection.findById(assignmentId);
+		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
 			removeKeyCodeFromPreviousAssignment(keyCode);
 			assignment.addKeyCode(keyCode);
@@ -64,7 +64,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void updateAssignmentKeyCode(@NonNull String assignmentId, int oldKeyCode, int newKeyCode) {
-		KeyBinding assignment = assignmentsCollection.findById(assignmentId);
+		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
 			removeKeyCodeFromPreviousAssignment(newKeyCode);
 			assignment.updateKeyCode(oldKeyCode, newKeyCode);
@@ -73,14 +73,14 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	private void removeKeyCodeFromPreviousAssignment(int keyCode) {
-		KeyBinding previousAssignment = assignmentsCollection.findByKeyCode(keyCode);
+		KeyAssignment previousAssignment = assignmentsCollection.findByKeyCode(keyCode);
 		if (previousAssignment != null) {
 			previousAssignment.removeKeyCode(keyCode);
 		}
 	}
 
 	public void clearAssignmentKeyCodes(@NonNull String assignmentId) {
-		KeyBinding assignment = assignmentsCollection.findById(assignmentId);
+		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
 			assignment.clearKeyCodes();
 			assignmentsCollection.syncCache();
@@ -88,7 +88,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void resetAllAssignments() {
-		for (KeyBinding assignment : assignmentsCollection.getAssignments()) {
+		for (KeyAssignment assignment : assignmentsCollection.getAllAssignments()) {
 			assignment.clearKeyCodes();
 		}
 		assignmentsCollection.syncCache();
@@ -111,8 +111,8 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		jsonObject.put("id", customId);
 		jsonObject.put("name", customName);
 		JSONArray jsonArray = new JSONArray();
-		for (KeyBinding keyBinding : getAssignments()) {
-			jsonArray.put(keyBinding.toJson());
+		for (KeyAssignment assignment : getAssignments()) {
+			jsonArray.put(assignment.toJson());
 		}
 		jsonObject.put("assignments", jsonArray);
 		return jsonObject;

@@ -1,6 +1,6 @@
 package net.osmand.plus.keyevent;
 
-import static net.osmand.plus.keyevent.DefaultInputDevices.KEYBOARD;
+import static net.osmand.plus.keyevent.devices.DefaultInputDevices.KEYBOARD;
 
 import android.content.Context;
 
@@ -9,11 +9,12 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDevicesEventListener;
+import net.osmand.plus.keyevent.devices.DefaultInputDevices;
+import net.osmand.plus.keyevent.listener.EventType;
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -244,10 +245,9 @@ public class InputDevicesHelper {
 	}
 
 	@Nullable
-	public KeyBinding findAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                 @NonNull String assignmentId) {
-		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
-		InputDeviceProfile device = devicesCollection.getDeviceById(deviceId);
+	public KeyAssignment findAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                    @NonNull String assignmentId) {
+		InputDeviceProfile device = getDeviceById(CUSTOMIZATION_PURPOSE_ID, appMode, deviceId);
 		return device != null ? device.findAssignment(assignmentId) : null;
 	}
 
