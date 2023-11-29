@@ -738,7 +738,7 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
-		public final String name;
+		public String name;
 		public String iconName;
 		public String backgroundType;
 		public List<WptPt> points = new ArrayList<>();
@@ -765,6 +765,10 @@ public class GPXUtilities {
 		@Override
 		public int hashCode() {
 			return Algorithms.hash(name, iconName, backgroundType, color, points);
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		@Override
