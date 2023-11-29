@@ -3947,6 +3947,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="sound_beep_simple">Beep: simple</string>
     <string name="sound_beep_simple_loud">Beep: simple loud</string>
     <string name="lang_zh">Chinese</string>
+    <string name="lang_zh_hans">Simplified Chinese</string>
+    <string name="lang_zh_hant">Traditional Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
     <string name="lang_en_gb">English (United Kingdom)</string>
