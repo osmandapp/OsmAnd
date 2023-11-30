@@ -405,7 +405,9 @@ public class RoutePlannerFrontEnd {
 			start.stepBackRoute.add(removed);
 		}
 		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
-		next.pnt = new RouteSegmentPoint(res.getObject(), res.getEndPointIndex(), 0);
+		boolean pos = res.getStartPointIndex() < res.getEndPointIndex();
+		int end = res.getEndPointIndex();
+		next.pnt = new RouteSegmentPoint(res.getObject(), pos ? end - 1 : end + 1, end, 0);
 		return true;
 	}
 
