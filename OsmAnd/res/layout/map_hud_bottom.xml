@@ -221,6 +221,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		app:topPanel="false"/>
+		app:topPanel="false"
+		android:paddingTop="5dp"/>
 
 </LinearLayout>

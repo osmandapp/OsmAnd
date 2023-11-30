@@ -149,6 +149,10 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@NonNull
 	protected Drawable getPressedStateDrawable() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);

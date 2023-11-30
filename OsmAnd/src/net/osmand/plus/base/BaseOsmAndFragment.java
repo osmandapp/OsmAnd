@@ -131,6 +131,10 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		return -1;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return true;
+	}
+
 	protected boolean isFullScreenAllowed() {
 		return true;
 	}

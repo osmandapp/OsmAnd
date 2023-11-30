@@ -163,6 +163,10 @@ public class ExternalInputDeviceFragment extends BaseSettingsFragment {
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return isNightMode();
+	}
+
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return ColorUtilities.getActivityBgColorId(isNightMode());

@@ -227,6 +227,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		return -1;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return isNightMode();
+	}
+
 	private void updateToolbar() {
 		MapActivity mapActivity = getMapActivity();
 		if (menu == null || mapActivity == null) {
