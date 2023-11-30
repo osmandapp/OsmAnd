@@ -32,8 +32,8 @@ public enum GPXDataSetType {
 	SENSOR_BIKE_CADENCE(R.string.map_widget_ant_bicycle_cadence, R.drawable.ic_action_sensor_cadence_outlined, SENSOR_TAG_CADENCE, R.color.gpx_chart_indigo_label, R.color.gpx_chart_indigo),
 	SENSOR_TEMPERATURE(R.string.map_settings_weather_temp, R.drawable.ic_action_thermometer, SENSOR_TAG_TEMPERATURE, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
 
-	ZOOM_ANIMATED(R.string.zoom_animated, R.drawable.widget_developer_map_zoom_day, PointAttributes.DEV_ANIMATED_ZOOM, R.color.gpx_chart_teal_label, R.color.gpx_chart_teal),
-	ZOOM_NON_ANIMATED(R.string.zoom_non_animated, R.drawable.widget_developer_map_zoom_day, PointAttributes.DEV_RAW_ZOOM, R.color.gpx_chart_indigo_label, R.color.gpx_chart_indigo);
+	ZOOM_ANIMATED(R.string.zoom_animated, R.drawable.ic_action_map_zoom, PointAttributes.DEV_ANIMATED_ZOOM, R.color.gpx_chart_teal_label, R.color.gpx_chart_teal),
+	ZOOM_NON_ANIMATED(R.string.zoom_non_animated, R.drawable.ic_action_map_zoom, PointAttributes.DEV_RAW_ZOOM, R.color.gpx_chart_indigo_label, R.color.gpx_chart_indigo);
 
 	@StringRes
 	private final int titleId;
