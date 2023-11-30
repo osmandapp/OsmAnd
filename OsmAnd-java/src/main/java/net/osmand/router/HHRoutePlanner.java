@@ -376,7 +376,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx.regions.size() != 1 || hctx.regions.get(0).networkDB == null) {
 			hctx = selectBestRoutingFiles(start, end, hctx);
 		}
-		System.out.println("Selected files: " + (hctx == null ? " EMPTY " : hctx.getRoutingInfo()));
+		System.out.println("Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
 		if (hctx == null) {
 			return hctx;
 		}

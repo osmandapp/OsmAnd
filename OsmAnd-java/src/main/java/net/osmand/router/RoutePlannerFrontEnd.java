@@ -777,11 +777,13 @@ public class RoutePlannerFrontEnd {
 			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
 			try {
 				HHNetworkRouteRes res = routePlanner.runRouting(start, end, HHRoutingConfig.astar(0).calcDetailed(2));
-				if (res.error == null) {
+				if (res != null && res.error == null) {
 					return res.detailed;
 				}
 			} catch (SQLException e) {
 				throw new IOException(e.getMessage(), e);
+			} catch (IOException | RuntimeException e) {
+				e.printStackTrace(); // ignore for now as we debug new routing
 			}
 		}
 		
