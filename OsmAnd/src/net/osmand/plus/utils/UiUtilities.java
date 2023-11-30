@@ -720,7 +720,7 @@ public class UiUtilities {
 
 	public static void updateStatusBarColor(@NonNull MapActivity activity) {
 		int colorId = -1;
-		Boolean nightModeForContent = true;
+		boolean nightModeForContent = true;
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
