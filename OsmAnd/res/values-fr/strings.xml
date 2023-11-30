@@ -5560,4 +5560,6 @@
     <string name="shared_string_eta">Heure d\'arrivée estimée (ETA)</string>
     <string name="clear_key_assignment">Effacer les associations de touches</string>
     <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définies à \"Aucun\".</string>
+    <string name="lang_zh_hans">Chinois simplifié</string>
+    <string name="lang_zh_hant">Chinois traditionnel</string>
 </resources>
