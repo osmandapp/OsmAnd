@@ -929,7 +929,7 @@ public class ResourceManager {
 		File indCache = context.getAppPath(INDEXES_CACHE);
 		if (indCache.exists()) {
 			try {
-				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+				cachedOsmandIndexes.readFromFile(indCache);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
