@@ -25,6 +25,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -299,7 +300,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (animateMyLocation) {
 				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 			}
-			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation);
+			float distanceToNextTurn = getDistanceToNextTurn();
+			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation, distanceToNextTurn);
 		}
 
 		long movingTime;
@@ -315,8 +317,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		}
 
-		Pair<ComplexZoom, Long> zoomParams = autoZoom != null
-				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, !animateMyLocation)
+		float fixedZoomDuration = animateMyLocation ? -1 : AnimateDraggingMapThread.NAV_ANIMATION_TIME;
+		Pair<ComplexZoom, Float> zoomParams = autoZoom != null
+				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, fixedZoomDuration)
 				: null;
 
 		mapView.getAnimatedDraggingThread().startMoving(
@@ -336,8 +339,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 
 		if (animateMyLocation(location)) {
-			Pair<ComplexZoom, Long> zoomParams = autoZoom != null
-					? new Pair<>(autoZoom, AutoZoomBySpeedHelper.FIXED_ZOOM_DURATION_MILLIS)
+			Pair<ComplexZoom, Float> zoomParams = autoZoom != null
+					? new Pair<>(autoZoom, AnimateDraggingMapThread.NAV_ANIMATION_TIME)
 					: null;
 			mapView.getAnimatedDraggingThread().startMoving(
 					location.getLatitude(), location.getLongitude(), zoomParams,
@@ -605,5 +608,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public long getLastManualZoomTime() {
 		return lastTimeManualZooming;
+	}
+
+	private float getDistanceToNextTurn() {
+		NextDirectionInfo directionInfo = new NextDirectionInfo();
+		app.getRoutingHelper().getNextRouteDirectionInfo(directionInfo, true);
+		return directionInfo.directionInfo != null && directionInfo.distanceTo > 0
+				? directionInfo.distanceTo
+				: -1;
 	}
 }

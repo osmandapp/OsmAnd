@@ -41,7 +41,7 @@ public class AnimateDraggingMapThread {
 	private static final float ZOOM_ANIMATION_TIME = 250f;
 	private static final float ZOOM_MOVE_ANIMATION_TIME = 350f;
 	private static final float MOVE_MOVE_ANIMATION_TIME = 900f;
-	private static final float NAV_ANIMATION_TIME = 1000f;
+	public static final float NAV_ANIMATION_TIME = 1000f;
 	private static final int DEFAULT_SLEEP_TO_REDRAW = 15;
 	private static final float ROTATION_ANIMATION_TIME = 250f;
 	private static final float ROTATION_MOVE_ANIMATION_TIME = 1000f;
@@ -215,7 +215,7 @@ public class AnimateDraggingMapThread {
 		t.start();
 	}
 
-	public void startMoving(double finalLat, double finalLon, @Nullable Pair<ComplexZoom, Long> zoomParams,
+	public void startMoving(double finalLat, double finalLon, @Nullable Pair<ComplexZoom, Float> zoomParams,
 	                        boolean pendingRotation, Float finalRotation, long movingTime,
 	                        boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
 		if (animationsDisabled)

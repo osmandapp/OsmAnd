@@ -111,7 +111,8 @@ public class Zoom {
 		return zoom;
 	}
 
-	public static float getZoomedDistance(float distance, float startZoom, float endZoom) {
+	// Example: getDistanceAfterZoom(100, 10, 11) == 50
+	public static float getDistanceAfterZoom(float distance, float startZoom, float endZoom) {
 		int startZoomBase = (int) startZoom;
 		float startZoomFloatPart = startZoom - startZoomBase;
 
@@ -127,6 +128,7 @@ public class Zoom {
 		return distanceNoStartZoomFloatPart / zoomFactorFromStartIntZoom;
 	}
 
+	// Example: fromDistanceRatio(100, 200, 15.5f) == 14.5f
 	public static float fromDistanceRatio(double startDistance, double endDistance, float startZoom) {
 		int startIntZoom = (int) startZoom;
 		float startZoomFloatPart = startZoom - startIntZoom;

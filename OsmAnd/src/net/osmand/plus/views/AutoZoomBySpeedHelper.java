@@ -7,9 +7,7 @@ import com.github.mikephil.charting.data.Entry;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapRendererState;
-import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -45,9 +43,7 @@ public class AutoZoomBySpeedHelper {
 	public static final float ZOOM_PER_SECOND = 0.1f;
 	public static final float ZOOM_PER_MILLIS = ZOOM_PER_SECOND / 1000f;
 	public static final int MIN_ZOOM_DURATION_MILLIS = 1500;
-	public static final long FIXED_ZOOM_DURATION_MILLIS = 1000;
-
-	private static final int SHOW_DRIVING_SECONDS_V2 = 37; // TODO: depending on map center?
+	private static final int SHOW_DRIVING_SECONDS_V2 = 37;
 	private static final float MIN_AUTO_ZOOM_SPEED = 7 / 3.6f;
 
 	private static final int FOCUS_DIV_X = 2;
@@ -65,8 +61,8 @@ public class AutoZoomBySpeedHelper {
 
 	@Nullable
 	public ComplexZoom calculateAutoZoomBySpeedV1(@NonNull RotatedTileBox tb, float speed) {
-		float zoomProximityCoeff = settings.AUTO_ZOOM_MAP_SCALE.get().coefficient;
-		float zoomDelta = defineZoomFromSpeed(tb, speed, zoomProximityCoeff);
+		AutoZoomMap autoZoomScale = settings.AUTO_ZOOM_MAP_SCALE.get();
+		float zoomDelta = defineZoomFromSpeed(tb, speed, autoZoomScale);
 		if (Math.abs(zoomDelta) < 0.5) {
 			return null;
 		}
@@ -76,26 +72,29 @@ public class AutoZoomBySpeedHelper {
 		} else if (zoomDelta <= -2) {
 			zoomDelta += 1;
 		}
-		double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zoomDelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
+		double targetZoom = tb.getZoom() + tb.getZoomFloatPart() + zoomDelta;
 		targetZoom = Math.round(targetZoom * 3) / 3f;
 		int newIntegerZoom = (int) Math.round(targetZoom);
 		float zPart = (float) (targetZoom - newIntegerZoom);
 		return newIntegerZoom > 0 ? new ComplexZoom(newIntegerZoom, zPart) : null;
 	}
 
-	private float defineZoomFromSpeed(@NonNull RotatedTileBox tb, float speed, float zoomProximityCoeff) {
+	private float defineZoomFromSpeed(@NonNull RotatedTileBox tb, float speed, @NonNull AutoZoomMap autoZoomScale) {
 		if (speed < MIN_AUTO_ZOOM_SPEED) {
 			return 0;
 		}
 		double visibleDist = tb.getDistance(tb.getCenterPixelX(), 0, tb.getCenterPixelX(), tb.getCenterPixelY());
 		float time = speed < 83f / 3.6 ? 60 : 75;
-		double distToSee = speed * time / zoomProximityCoeff;
+		double distToSee = Math.max(speed * time / autoZoomScale.coefficient, autoZoomScale.minDistanceToDrive);
 		float currentZoom = (float) (tb.getZoom() + tb.getZoomFloatPart() + tb.getZoomAnimation());
 		return Zoom.fromDistanceRatio(visibleDist, distToSee, currentZoom);
 	}
 
 	@Nullable
-	public ComplexZoom calculateZoomBySpeedToAnimate(@NonNull MapRendererView mapRenderer, @NonNull Location myLocation, @Nullable Float rotationToAnimate) {
+	public ComplexZoom calculateZoomBySpeedToAnimate(@NonNull MapRendererView mapRenderer,
+	                                                 @NonNull Location myLocation,
+	                                                 @Nullable Float rotationToAnimate,
+	                                                 float distanceToNextTurn) {
 		float speed = myLocation.getSpeed();
 		if (speed < MIN_AUTO_ZOOM_SPEED) {
 			return null;
@@ -114,7 +113,7 @@ public class AutoZoomBySpeedHelper {
 		float myLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, myLocation31);
 		PointI myLocationPixel = mapRenderer.getState().getFixedPixel();
 
-		float showDistanceToDrive = filteredSpeed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, filteredSpeed, distanceToNextTurn);
 		float rotation = rotationToAnimate != null ? rotationToAnimate : mapView.getRotate();
 		LatLon anotherLatLon = MapUtils.rhumbDestinationPoint(myLocationLatLon, showDistanceToDrive, rotation);
 
@@ -131,14 +130,14 @@ public class AutoZoomBySpeedHelper {
 		}
 
 		int minZoom = mapView.getMinZoom();
-		int maxZoom = Math.min(mapView.getMaxZoom(), autoZoomScale.maxZoom);
+		int maxZoom = mapView.getMaxZoom();
 		Zoom boundedZoom = Zoom.checkZoomBounds(expectedSurfaceZoom, minZoom, maxZoom);
 		return ComplexZoom.fromPreferredBase(boundedZoom.getBaseZoom() + boundedZoom.getZoomFloatPart(), mapView.getZoom());
 	}
 
 	@Nullable
-	public Pair<ComplexZoom, Long> getAnimatedZoomParamsForChart(@NonNull MapRendererView mapRenderer, float currentZoom,
-	                                                             double lat, double lon, float heading, float speed) {
+	public Pair<ComplexZoom, Float> getAnimatedZoomParamsForChart(@NonNull MapRendererView mapRenderer, float currentZoom,
+	                                                              double lat, double lon, float heading, float speed) {
 		if (speed < MIN_AUTO_ZOOM_SPEED) {
 			return null;
 		}
@@ -153,7 +152,7 @@ public class AutoZoomBySpeedHelper {
 			return null;
 		}
 
-		return getAutoZoomParams(currentZoom, autoZoom, false);
+		return getAutoZoomParams(currentZoom, autoZoom, -1);
 	}
 
 	@Nullable
@@ -169,7 +168,7 @@ public class AutoZoomBySpeedHelper {
 		float firstHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, firstLocation31);
 		PointI firstPixel = state.getFixedPixel();
 
-		float showDistanceToDrive = speed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, speed, -1);
 		LatLon secondLatLon = MapUtils.rhumbDestinationPoint(lat, lon, showDistanceToDrive, rotation);
 		PointI secondLocation31 = NativeUtilities.getPoint31FromLatLon(secondLatLon);
 		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31);
@@ -186,14 +185,14 @@ public class AutoZoomBySpeedHelper {
 		}
 
 		int minZoom = mapView.getMinZoom();
-		int maxZoom = Math.min(mapView.getMaxZoom(), autoZoomScale.maxZoom);
+		int maxZoom = mapView.getMaxZoom();
 		Zoom boundedZoom = Zoom.checkZoomBounds(expectedSurfaceZoom, minZoom, maxZoom);
 		return new ComplexZoom(boundedZoom.getBaseZoom(), boundedZoom.getZoomFloatPart());
 	}
 	@Nullable
-	public Pair<ComplexZoom, Long> getAutoZoomParams(float currentZoom, @NonNull ComplexZoom autoZoom, boolean fixedDuration) {
-		if (fixedDuration) {
-			return new Pair<>(autoZoom, FIXED_ZOOM_DURATION_MILLIS);
+	public Pair<ComplexZoom, Float> getAutoZoomParams(float currentZoom, @NonNull ComplexZoom autoZoom, float fixedDurationMillis) {
+		if (fixedDurationMillis > 0) {
+			return new Pair<>(autoZoom, fixedDurationMillis);
 		}
 
 		float zoomDelta = autoZoom.fullZoom() - currentZoom;
@@ -203,7 +202,14 @@ public class AutoZoomBySpeedHelper {
 			return null;
 		}
 
-		return new Pair<>(autoZoom, (long) zoomDuration);
+		return new Pair<>(autoZoom, zoomDuration);
+	}
+
+	private float getShowDistanceToDrive(@NonNull AutoZoomMap autoZoomScale, float speed, float distanceToNextTurn) {
+		float showDistanceToDrive = speed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
+		return distanceToNextTurn > 0
+				? Math.max(Math.min(distanceToNextTurn, showDistanceToDrive), autoZoomScale.minDistanceToDrive)
+				: Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
 	}
 
 	@Nullable
@@ -221,7 +227,7 @@ public class AutoZoomBySpeedHelper {
 			private float currentRawZoom = mapRenderer.getZoom();
 
 			float currentAnimatedZoom = mapRenderer.getZoom();
-			private Pair<ComplexZoom, Long> prevAnimatedZoomParams;
+			private Pair<ComplexZoom, Float> prevAnimatedZoomParams;
 
 			boolean firstPoint = true;
 
@@ -264,7 +270,7 @@ public class AutoZoomBySpeedHelper {
 					float zoomDelta = zoomDeltaSign * animationTime * ZOOM_PER_MILLIS;
 					currentAnimatedZoom += zoomDelta;
 
-					long leftDuration = prevAnimatedZoomParams.second - (long) animationTime;
+					float leftDuration = prevAnimatedZoomParams.second - animationTime;
 					prevAnimatedZoomParams = new Pair<>(prevAnimatedZoomParams.first, leftDuration);
 				}
 
@@ -273,7 +279,7 @@ public class AutoZoomBySpeedHelper {
 					analysis.setHasData(DEV_ANIMATED_ZOOM, true);
 				}
 
-				Pair<ComplexZoom, Long> zoomParams = autoZoomBySpeedHelper.getAnimatedZoomParamsForChart(
+				Pair<ComplexZoom, Float> zoomParams = autoZoomBySpeedHelper.getAnimatedZoomParamsForChart(
 						mapRenderer, currentAnimatedZoom, point.lat, point.lon, bearing, attributes.speed);
 				if (zoomParams != null) {
 					prevAnimatedZoomParams = zoomParams;
