@@ -365,13 +365,13 @@ public class CachedOsmandIndexes {
 	}
 	
 
-	public void readFromFile(File f, int version) throws IOException {
+	public void readFromFile(File f) throws IOException {
 		long time = System.currentTimeMillis();
 		FileInputStream is = new FileInputStream(f);
 		try {
 			storedIndex = OsmandIndex.OsmAndStoredIndex.newBuilder().mergeFrom(is).build();
 			hasChanged = false;
-			if (storedIndex.getVersion() != version) {
+			if (storedIndex.getVersion() != CachedOsmandIndexes.VERSION) {
 				storedIndex = null;
 			}
 		} finally {
