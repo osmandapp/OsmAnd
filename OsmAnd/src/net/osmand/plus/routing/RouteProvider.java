@@ -670,7 +670,9 @@ public class RouteProvider {
 	protected RoutingEnvironment calculateRoutingEnvironment(RouteCalculationParams params, boolean calcGPXRoute, boolean skipComplex) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
+
 		OsmandSettings settings = params.ctx.getSettings();
+		RoutePlannerFrontEnd.USE_HH_ROUTING = settings.USE_HH_ROUTING.get();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
 
@@ -983,10 +985,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
+							}
 							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					} 
+					}
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;
