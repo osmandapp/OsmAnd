@@ -242,7 +242,8 @@ final class FieldSet<FieldDescriptorType extends
 
       // Wrap the contents in a new list so that the caller cannot change
       // the list's contents after setting it.
-      final List newList = new ArrayList((List) value);
+      final List newList = new ArrayList();
+      newList.addAll((List) value);
       for (final Object element : newList) {
         verifyType(descriptor.getLiteType(), element);
       }

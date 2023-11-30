@@ -1,52 +1,6 @@
 package net.osmand.binary;
 
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.WireFormat;
-
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.Location;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
-import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
-import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
-import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
-import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
-import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
-import net.osmand.binary.OsmandOdb.MapDataBlock;
-import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
-import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
-import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
-import net.osmand.data.Amenity;
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.IncompleteTransportRoute;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.Street;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -73,12 +27,61 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.logging.Log;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.WireFormat;
+
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.Location;
+import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.binary.OsmandOdb.MapDataBlock;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
+import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.IncompleteTransportRoute;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.Street;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Way;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
+import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class BinaryMapIndexReader {
 
@@ -113,6 +116,7 @@ public class BinaryMapIndexReader {
 	/*private*/ List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
+	/*private*/ List<HHRouteRegion> hhIndexes = new ArrayList<HHRouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	TLongObjectHashMap<IncompleteTransportRoute> incompleteTransportRoutes = null;
 	
@@ -122,6 +126,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	private final BinaryMapRouteReaderAdapter routeAdapter;
+	private final BinaryHHRouteReaderAdapter hhAdapter;
 
 	private static final String BASEMAP_NAME = "basemap";
 
@@ -135,6 +140,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		init();
 	}
 
@@ -147,6 +153,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		if (init) {
 			init();
 		}
@@ -163,6 +170,7 @@ public class BinaryMapIndexReader {
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		mapIndexes = new ArrayList<BinaryMapIndexReader.MapIndex>(referenceToSameFile.mapIndexes);
 		poiIndexes = new ArrayList<PoiRegion>(referenceToSameFile.poiIndexes);
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
@@ -273,6 +281,19 @@ public class BinaryMapIndexReader {
 				}
 				codedIS.seek(poiInd.filePointer + poiInd.length);
 				break;
+			case OsmandOdb.OsmAndStructure.HHROUTINGINDEX_FIELD_NUMBER:
+				HHRouteRegion hhreg = new HHRouteRegion();
+				hhreg.length = readInt();
+				hhreg.filePointer = codedIS.getTotalBytesRead();
+				if (hhAdapter != null) {
+					oldLimit = codedIS.pushLimit(hhreg.length);
+					hhAdapter.readHHIndex(hhreg, false);
+					codedIS.popLimit(oldLimit);
+					indexes.add(hhreg);
+					hhIndexes.add(hhreg);
+				}
+				codedIS.seek(hhreg.filePointer + hhreg.length);
+				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
 				calculateCenterPointForRegions();
@@ -317,6 +338,10 @@ public class BinaryMapIndexReader {
 	
 	public List<RouteRegion> getRoutingIndexes() {
 		return routingIndexes;
+	}
+	
+	public List<HHRouteRegion> getHHRoutingIndexes() {
+		return hhIndexes;
 	}
 
 	public boolean isBasemap() {
@@ -417,7 +442,16 @@ public class BinaryMapIndexReader {
 		}
 		return "";
 	}
+	
+	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
+		return hhAdapter.initRegionAndLoadPoints(reg, mapId, cl);
+	}
 
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg,
+			T point, boolean reverse) throws IOException {
+		return hhAdapter.loadNetworkSegmentPoint(ctx, reg, point, reverse);
+	}
+	
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
@@ -651,6 +685,7 @@ public class BinaryMapIndexReader {
 			int cityType) throws IOException {
 		return getCities(region, resultMatcher, null, cityType);
 	}
+	
 	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, StringMatcher matcher,  
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
@@ -1887,8 +1922,6 @@ public class BinaryMapIndexReader {
 		// to speed up comparision
 		private MapIndex referenceMapIndex;
 
-		
-
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
 			if (m != null) {
@@ -2816,4 +2849,6 @@ public class BinaryMapIndexReader {
 			}
 		}
 	}
+
+	
 }

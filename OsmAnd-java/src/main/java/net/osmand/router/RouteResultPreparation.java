@@ -51,14 +51,6 @@ public class RouteResultPreparation {
 	public static final int SHIFT_ID = 6;
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
-	/**
-	 * Helper method to prepare final result 
-	 */
-	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment) throws IOException {
-		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
-		prepareResult(ctx, result, false);
-		return result;
-	}
 	
 	private static class CombineAreaRoutePoint {
 		int x31;
@@ -171,7 +163,7 @@ public class RouteResultPreparation {
 		return intersections % 2 == 1;
 	}
 
-	public List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
+	public List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			RouteDataObject road = result.get(i).getObject();
 			checkAndInitRouteRegion(ctx, road);
@@ -182,7 +174,7 @@ public class RouteResultPreparation {
 		}
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
-		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
+		splitRoadsAndAttachRoadSegments(ctx, result);
 		for (int i = 0; i < result.size(); i++) {
 			filterMinorStops(result.get(i));
 		}
@@ -309,7 +301,7 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
 			double distOnRoadToPass = 0;
-			double speed = ctx.getRouter().defineVehicleSpeed(road);
+			double speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
 			if (speed == 0) {
 				speed = ctx.getRouter().getDefaultSpeed();
 			} else {
@@ -392,7 +384,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
+	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			if (ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {
 				ctx.unloadUnusedTiles(ctx.config.memoryLimitation);
@@ -404,10 +396,10 @@ public class RouteResultPreparation {
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				if (j == rr.getStartPointIndex()) {
-					attachRoadSegments(ctx, result, i, j, plus, recalculation);
+					attachRoadSegments(ctx, result, i, j, plus);
 				}
 				if (next != rr.getEndPointIndex()) {
-					attachRoadSegments(ctx, result, i, next, plus, recalculation);
+					attachRoadSegments(ctx, result, i, next, plus);
 				}
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
 				boolean tryToSplit = next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null;
@@ -475,28 +467,33 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
+	public List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
+			float correctionTime = finalSegment.opposite == null ? 0 :
+				finalSegment.distanceFromStart - distanceFromStart(finalSegment.opposite) - distanceFromStart(finalSegment.parentRoute);
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
-			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite;
+			RouteSegment thisSegment =  finalSegment.opposite == null ? finalSegment : finalSegment.parentRoute; // for dijkstra
+			RouteSegment segment = finalSegment.reverseWaySearch ? thisSegment : finalSegment.opposite;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
 				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
-				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime + correctionTime);
+				correctionTime = 0;
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
 				
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
-			segment = finalSegment.reverseWaySearch ? finalSegment.opposite : finalSegment.parentRoute;
+			segment = finalSegment.reverseWaySearch ? finalSegment.opposite : thisSegment;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), segment.getSegmentEnd());
 				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
-				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime + correctionTime);
+				correctionTime = 0;
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
@@ -507,12 +504,16 @@ public class RouteResultPreparation {
 		return result;
 	}
 
+	private float distanceFromStart(RouteSegment s) {
+		return s == null ? 0 : s.distanceFromStart;
+	}
+
 	protected void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
 		float totalRoutingTime = 0;
 		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
 		}
-		if (Math.abs(totalRoutingTime - cmp) > 1) {
+		if (Math.abs(totalRoutingTime - cmp) > 0.1) {
 			println("Total sum routing time ! " + totalRoutingTime + " == " + cmp);
 		}
 	}
@@ -676,8 +677,7 @@ public class RouteResultPreparation {
 			if (res.getRoutingTime() > 0) {
 //					additional.append("rspeed = \"")
 //							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
-				additional.append("rtime = \"")
-					.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
+				additional.append(String.format("rtime = \"%.1f\" ", res.getRoutingTime()));
 			}
 			
 //				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
@@ -809,12 +809,12 @@ public class RouteResultPreparation {
 
 	private static void printAdditionalPointInfo(RouteSegmentResult res) {
 		boolean plus = res.getStartPointIndex() < res.getEndPointIndex();
-		for(int k = res.getStartPointIndex(); k != res.getEndPointIndex(); ) {
+		StringBuilder bld = new StringBuilder();
+		for (int k = res.getStartPointIndex(); k != res.getEndPointIndex();) {
 			int[] tp = res.getObject().getPointTypes(k);
 			String[] pointNames = res.getObject().getPointNames(k);
 			int[] pointNameTypes = res.getObject().getPointNameTypes(k);
 			if (tp != null || pointNameTypes != null) {
-				StringBuilder bld = new StringBuilder();
 				bld.append("<point " + (k));
 				if (tp != null) {
 					for (int t = 0; t < tp.length; t++) {
@@ -828,14 +828,16 @@ public class RouteResultPreparation {
 						bld.append(" " + rr.getTag() + "=\"" + pointNames[t] + "\"");
 					}
 				}
-				bld.append("/>");
-				println("\t"+bld.toString());
+				bld.append("/> ");
 			}
-			if(plus) {
+			if (plus) {
 				k++;
 			} else {
 				k--;
 			}
+		}
+		if (bld.length() > 0) {
+			println("\t" + bld.toString());
 		}
 	}
 
@@ -1406,9 +1408,7 @@ public class RouteResultPreparation {
 		List<int[]> rightLanesInfo = new ArrayList<int[]>();
 		int rightLanes = 0;
 		int roadsOnLeft = 0;
-		int addRoadsOnLeft = 0;
 		int roadsOnRight = 0;
-		int addRoadsOnRight = 0;
 		List<Double> attachedAngles;
 
 		public boolean allAreStraight() {
@@ -1666,12 +1666,6 @@ public class RouteResultPreparation {
 						}
 					}
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
-				} else {
-					if (attachedOnTheRight) {
-						rs.addRoadsOnRight++;
-					} else {
-						rs.addRoadsOnLeft++;
-					}
 				}
 			}
 			rs.attachedAngles.add(deviation);
@@ -1679,31 +1673,6 @@ public class RouteResultPreparation {
 		return rs;
 	}
 	
-	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
-		if (turnLanesPrevSegm != null) {
-			int[] turns = calculateRawTurnLanes(turnLanesPrevSegm, TurnType.C);
-			int lane = attachedOnTheRight ? turns[turns.length - 1] : turns[0];
-			List<Integer> turnList = new ArrayList<>();
-			turnList.add(TurnType.getPrimaryTurn(lane));
-			turnList.add(TurnType.getSecondaryTurn(lane));
-			turnList.add(TurnType.getTertiaryTurn(lane));
-			if (attachedOnTheRight) {
-				Collections.reverse(turnList);
-			}
-			return foundTUturn(turnList);
-		}
-		return false;
-	}
-	
-	private boolean foundTUturn(List<Integer> turnList) {
-		for (int t : turnList) {
-			if (t != 0) {
-				return t == TurnType.TU;
-			}
-		}
-		return false;
-	}
-
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,
 			RouteSegmentResult currentSegm, RoadSplitStructure rs) {
 		double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
@@ -2056,7 +2025,7 @@ public class RouteResultPreparation {
 	}
 
 	
-	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus, boolean recalculation) throws IOException {
+	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
 		long nextL = pointInd < road.getPointsLength() - 1 ? getPoint(road, pointInd + 1) : 0;
@@ -2101,7 +2070,7 @@ public class RouteResultPreparation {
 				public void remove() {
 				}
 			};	
-		} else if (recalculation || ctx.nativeLib == null) {
+		} else if (ctx.nativeLib == null) {
 			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
 			it = rt == null ? null : rt.getIterator();
 		} else {
