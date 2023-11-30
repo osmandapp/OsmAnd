@@ -6,6 +6,7 @@ import static net.osmand.plus.settings.enums.SimulationMode.CONSTANT;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.gpx.GPXFile;
@@ -41,9 +42,9 @@ public class LocationSimulationUtils {
 
 	@NonNull
 	private static Pair<SimulatedLocation, Float> useSimulationConstantSpeed(@NonNull SimulatedLocation current,
-	                                                                           @NonNull List<SimulatedLocation> directions,
-	                                                                           float speed, float meters,
-	                                                                           float intervalTime, float coeff) {
+	                                                                         @NonNull List<SimulatedLocation> directions,
+	                                                                         float speed, float meters,
+	                                                                         float intervalTime, float coeff) {
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
@@ -56,9 +57,9 @@ public class LocationSimulationUtils {
 
 	@NonNull
 	private static Pair<SimulatedLocation, Float> useDefaultSimulation(@NonNull SimulatedLocation current,
-	                                                                     @NonNull List<SimulatedLocation> directions,
-	                                                                     float meters, float intervalTime,
-	                                                                     float coeff, boolean realistic) {
+	                                                                   @NonNull List<SimulatedLocation> directions,
+	                                                                   float meters, float intervalTime,
+	                                                                   float coeff, boolean realistic) {
 		if (current.distanceTo(directions.get(0)) > meters) {
 			current = middleLocation(current, directions.get(0), meters);
 		} else {
@@ -157,21 +158,22 @@ public class LocationSimulationUtils {
 		return maxSpeed * intervalTime / coeff;
 	}
 
-	private static float getMaxSpeedForRoadType(@NonNull String roadType) {
-		switch (roadType) {
-			case "motorway":
-				return MOTORWAY_MAX_SPEED;
-			case "trunk":
-				return TRUNK_MAX_SPEED;
-			case "primary":
-				return PRIMARY_MAX_SPEED;
-			case "secondary":
-				return SECONDARY_MAX_SPEED;
-			case "living_street":
-			case "service":
-				return LIVING_STREET_MAX_SPEED;
-			default:
-				return DEFAULT_MAX_SPEED;
+	private static float getMaxSpeedForRoadType(@Nullable String roadType) {
+		if (roadType != null) {
+			switch (roadType) {
+				case "motorway":
+					return MOTORWAY_MAX_SPEED;
+				case "trunk":
+					return TRUNK_MAX_SPEED;
+				case "primary":
+					return PRIMARY_MAX_SPEED;
+				case "secondary":
+					return SECONDARY_MAX_SPEED;
+				case "living_street":
+				case "service":
+					return LIVING_STREET_MAX_SPEED;
+			}
 		}
+		return DEFAULT_MAX_SPEED;
 	}
 }
