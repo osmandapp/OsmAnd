@@ -41,7 +41,7 @@ public class RoutePlannerFrontEnd {
 	public boolean useNativeApproximation = true;
 
 	static boolean TRACE_ROUTING = false;
-	public static boolean USE_HH_ROUTING = true;
+	public static boolean USE_HH_ROUTING = false;
 
 	
 	public RoutePlannerFrontEnd() {
