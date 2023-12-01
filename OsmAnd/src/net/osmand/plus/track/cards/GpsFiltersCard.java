@@ -161,7 +161,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 						filter.updateValues((values.get(0)), values.get(1));
 						updateDisplayedFilterNumbers(container, filter);
 						if (gpxDataItem != null) {
-							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							boolean updated = updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
 							if (updated) {
 								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
 							}
@@ -182,7 +182,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 						filter.updateValue((slider.getValue()));
 						updateDisplayedFilterNumbers(container, filter);
 						if (gpxDataItem != null) {
-							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							boolean updated = updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
 							if (updated) {
 								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
 							}
@@ -192,6 +192,17 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 			}
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
 		}
+	}
+
+	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
+		double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
+		double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
+		double maxSpeed = selectedGpxFile.getSpeedFilter().getSelectedMaxValue();
+		double minAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMinValue();
+		double maxAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMaxValue();
+		double maxHdop = selectedGpxFile.getHdopFilter().getSelectedMaxValue();
+
+		return gpxDbHelper.updateGpsFiltersConfig(item, smoothingThreshold, minSpeed, maxSpeed, minAltitude, maxAltitude, maxHdop);
 	}
 
 	private void updateDisplayedFilterNumbers(@NonNull View container, @NonNull GpsFilter filter) {

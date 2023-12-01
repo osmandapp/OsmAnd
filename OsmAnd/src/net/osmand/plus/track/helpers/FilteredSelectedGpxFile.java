@@ -1,5 +1,12 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SMOOTHING_THRESHOLD;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -50,10 +57,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
 		if (gpxDataItem != null) {
 			GpxData gpxData = gpxDataItem.getGpxData();
-			smoothingFilter.updateValue(gpxData.getSmoothingThreshold());
-			speedFilter.updateValues(gpxData.getMinFilterSpeed(), gpxData.getMaxFilterSpeed());
-			altitudeFilter.updateValues(gpxData.getMinFilterAltitude(), gpxData.getMaxFilterAltitude());
-			hdopFilter.updateValue(gpxData.getMaxFilterHdop());
+			smoothingFilter.updateValue(gpxData.getValue(GPX_COL_SMOOTHING_THRESHOLD));
+			speedFilter.updateValues(gpxData.getValue(GPX_COL_MIN_FILTER_SPEED), gpxData.getValue(GPX_COL_MAX_FILTER_SPEED));
+			altitudeFilter.updateValues(gpxData.getValue(GPX_COL_MIN_FILTER_ALTITUDE), gpxData.getValue(GPX_COL_MAX_FILTER_ALTITUDE));
+			hdopFilter.updateValue(gpxData.getValue(GPX_COL_MAX_FILTER_HDOP));
 		}
 	}
 
@@ -109,11 +116,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		hdopFilter.reset();
 
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxDataItem gpxDataItem = gpxDbHelper.getItem(new File(gpxFile.path));
-		if (gpxDataItem != null) {
-			gpxDbHelper.resetGpsFilters(gpxDataItem);
+		GpxDataItem item = gpxDbHelper.getItem(new File(gpxFile.path));
+		if (item != null) {
+			gpxDbHelper.updateGpsFiltersConfig(item, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN);
 		}
-
 		app.getGpsFilterHelper().filterGpxFile(this, true);
 	}
 
@@ -160,9 +166,9 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem dataItem) {
 		GpxData data = dataItem.getGpxData();
-		double sum = data.getSmoothingThreshold() + data.getMinFilterSpeed()
-				+ data.getMaxFilterSpeed() + data.getMinFilterAltitude()
-				+ data.getMaxFilterAltitude() + data.getMaxFilterHdop();
+		double sum = data.getValue(GPX_COL_SMOOTHING_THRESHOLD) + data.getValue(GPX_COL_MIN_FILTER_SPEED)
+				+ data.getValue(GPX_COL_MAX_FILTER_SPEED) + data.getValue(GPX_COL_MIN_FILTER_ALTITUDE)
+				+ data.getValue(GPX_COL_MAX_FILTER_ALTITUDE) + data.getValue(GPX_COL_MAX_FILTER_HDOP);
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

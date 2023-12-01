@@ -11,6 +11,11 @@ import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_CREATION_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_NEAREST_CITY_NAME;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
 import android.text.SpannableStringBuilder;
@@ -153,7 +158,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		setupIcon(dataItem);
 		GpxData gpxData = dataItem.getGpxData();
 		GPXTrackAnalysis analysis = gpxData.getAnalysis();
-		String cityName = gpxData.getNearestCityName();
+		String cityName = gpxData.getValue(GPX_COL_NEAREST_CITY_NAME);
 		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
@@ -183,7 +188,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void setupIcon(@NonNull GpxDataItem item) {
 		GpxData gpxData = item.getGpxData();
-		setupIcon(gpxData.getColor(), gpxData.getWidth(), gpxData.isShowArrows());
+		setupIcon(gpxData.getValue(GPX_COL_COLOR), gpxData.getValue(GPX_COL_WIDTH), gpxData.getValue(GPX_COL_SHOW_ARROWS));
 	}
 
 	private void setupIcon(int color, String width, boolean showArrows) {
@@ -207,9 +212,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
 		GpxData gpxData = item.getDataItem().getGpxData();
-		if (item.getDataItem() != null && gpxData.getFileCreationTime() > 10) {
+		if (item.getDataItem() != null && gpxData.getValue(GPX_COL_FILE_CREATION_TIME) > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			builder.append(format.format(new Date(gpxData.getFileCreationTime())));
+			builder.append(format.format(new Date(gpxData.getValue(GPX_COL_FILE_CREATION_TIME))));
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}

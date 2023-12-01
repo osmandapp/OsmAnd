@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.COLOR
+import net.osmand.plus.track.helpers.GpxParameter
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.util.Algorithms
@@ -24,7 +25,7 @@ class ColorTrackFilter(app: OsmandApplication, filterChangedListener: FilterChan
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (color in selectedItems) {
-			val trackItemColor = trackItem.dataItem?.gpxData?.color
+			val trackItemColor = trackItem.dataItem?.gpxData?.getValue(GpxParameter.GPX_COL_COLOR)
 			if (trackItemColor == 0 && Algorithms.isEmpty(color) ||
 				!Algorithms.isEmpty(color) && trackItemColor == Color.parseColor(color)) {
 				return true

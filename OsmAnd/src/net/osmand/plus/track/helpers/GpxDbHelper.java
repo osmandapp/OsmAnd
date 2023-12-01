@@ -1,23 +1,24 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.track.helpers.GpxParameter.*;
 
 import android.os.AsyncTask;
 import android.util.Pair;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,7 +54,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public void loadGpxItems() {
 		List<GpxDataItem> items = getItems();
 		for (GpxDataItem item : items) {
-			putToCache(item);
+			File file = item.getFile();
+			if (file.exists()) {
+				putToCache(item);
+			} else {
+				remove(file);
+			}
 		}
 		loadNewGpxItems();
 	}
@@ -69,8 +75,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		}
 	}
 
-	private GpxDataItem putToCache(@NonNull GpxDataItem item) {
-		return dataItems.put(item.getFile(), item);
+	private void putToCache(@NonNull GpxDataItem item) {
+		dataItems.put(item.getFile(), item);
 	}
 
 	private void removeFromCache(@NonNull File file) {
@@ -91,87 +97,24 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return success;
 	}
 
-	public boolean updateColor(@NonNull GpxDataItem item, @ColorInt int color) {
-		boolean res = database.updateColor(item, color);
+	public boolean updateGpxParameter(@NonNull GpxDataItem item, @NonNull GpxParameter<?> parameter, @Nullable Object value) {
+		boolean res = database.updateGpxParameter(item, parameter, value);
 		putToCache(item);
 		return res;
 	}
 
-	public boolean updateLastUploadedTime(@NonNull GpxDataItem item, long fileLastUploadedTime) {
-		boolean res = database.updateLastUploadedTime(item, fileLastUploadedTime);
-		putToCache(item);
-		return res;
-	}
+	public boolean updateGpsFiltersConfig(@NonNull GpxDataItem item, double smoothingThreshold,
+	                                      double minSpeed, double maxSpeed, double minAltitude,
+	                                      double maxAltitude, double maxHdop) {
+		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
+		map.put(GPX_COL_SMOOTHING_THRESHOLD, smoothingThreshold);
+		map.put(GPX_COL_MIN_FILTER_SPEED, minSpeed);
+		map.put(GPX_COL_MAX_FILTER_SPEED, maxSpeed);
+		map.put(GPX_COL_MIN_FILTER_ALTITUDE, minAltitude);
+		map.put(GPX_COL_MAX_FILTER_ALTITUDE, maxAltitude);
+		map.put(GPX_COL_MAX_FILTER_HDOP, maxHdop);
 
-	public boolean updateColoringType(@NonNull GpxDataItem item, @Nullable String coloringType) {
-		boolean res = database.updateColoringType(item, coloringType);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateNearestCityName(@NonNull GpxDataItem item, @Nullable String nearestCityName) {
-		boolean res = database.updateNearestCityName(item, nearestCityName);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateShowAsMarkers(@NonNull GpxDataItem item, boolean showAsMarkers) {
-		boolean res = database.updateShowAsMarkers(item, showAsMarkers);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateImportedByApi(@NonNull GpxDataItem item, boolean importedByApi) {
-		boolean res = database.updateImportedByApi(item, importedByApi);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateShowArrows(@NonNull GpxDataItem item, boolean showArrows) {
-		boolean res = database.updateShowArrows(item, showArrows);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateShowStartFinish(@NonNull GpxDataItem item, boolean showStartFinish) {
-		boolean res = database.updateShowStartFinish(item, showStartFinish);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateWidth(@NonNull GpxDataItem item, @NonNull String width) {
-		boolean res = database.updateWidth(item, width);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateSplit(@NonNull GpxDataItem item, @NonNull GpxSplitType splitType, double splitInterval) {
-		boolean res = database.updateSplit(item, splitType.getType(), splitInterval);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
-		boolean res = database.updateJoinSegments(item, joinSegments);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
-		double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
-		double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
-		double maxSpeed = selectedGpxFile.getSpeedFilter().getSelectedMaxValue();
-		double minAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMinValue();
-		double maxAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMaxValue();
-		double maxHdop = selectedGpxFile.getHdopFilter().getSelectedMaxValue();
-
-		boolean res = database.updateGpsFiltersConfig(item, smoothingThreshold, minSpeed, maxSpeed, minAltitude, maxAltitude, maxHdop);
-		putToCache(item);
-		return res;
-	}
-
-	public boolean resetGpsFilters(@NonNull GpxDataItem item) {
-		boolean res = database.updateGpsFiltersConfig(item, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN);
+		boolean res = database.updateGpxParameters(item, map);
 		putToCache(item);
 		return res;
 	}
@@ -179,7 +122,16 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
 	                                boolean showArrows, boolean showStartFinish, int splitType,
 	                                double splitInterval, @Nullable String coloringType) {
-		boolean res = database.updateAppearance(item, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
+		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
+		map.put(GPX_COL_COLOR, color);
+		map.put(GPX_COL_WIDTH, width);
+		map.put(GPX_COL_SHOW_ARROWS, showArrows);
+		map.put(GPX_COL_SHOW_START_FINISH, showStartFinish);
+		map.put(GPX_COL_SPLIT_TYPE, splitType);
+		map.put(GPX_COL_SPLIT_INTERVAL, splitInterval);
+		map.put(GPX_COL_COLORING_TYPE, coloringType);
+
+		boolean res = database.updateGpxParameters(item, map);
 		putToCache(item);
 		return res;
 	}
@@ -252,7 +204,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = dataItems.get(file);
-		if ((isAnalyseNeeded(file, item) || GpxDbHelper.isCitySearchNeeded(item)) && !isGpxReading(file)) {
+		if ((GpxDbUtils.isAnalyseNeeded(file, item) || GpxDbUtils.isCitySearchNeeded(item)) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
@@ -264,7 +216,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public List<GpxDataItem> getSplitItems() {
-		return database.getSplitItems();
+		List<GpxDataItem> items = new ArrayList<>();
+		for (GpxDataItem item : getItems()) {
+			if (item.getGpxData().getValue(GPX_COL_SPLIT_TYPE) != 0) {
+				items.add(item);
+			}
+		}
+		return items;
 	}
 
 	public boolean isRead() {
@@ -345,25 +303,5 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		} else {
 			readerTask = null;
 		}
-	}
-
-	public static boolean isAnalyseNeeded(@NonNull File gpxFile, @Nullable GpxDataItem item) {
-		if (item != null) {
-			GpxData data = item.getGpxData();
-			return data.getFileLastModifiedTime() != gpxFile.lastModified()
-					|| data.getAnalysis() == null
-					|| data.getAnalysis().wptCategoryNames == null
-					|| data.getAnalysis().latLonStart == null && data.getAnalysis().points > 0
-					|| data.getFileCreationTime() <= 0;
-		}
-		return true;
-	}
-
-	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
-		if (item != null) {
-			GpxData data = item.getGpxData();
-			return data.getNearestCityName() == null && data.getAnalysis() != null && data.getAnalysis().latLonStart != null;
-		}
-		return true;
 	}
 }

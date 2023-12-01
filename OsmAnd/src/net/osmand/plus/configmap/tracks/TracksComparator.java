@@ -4,6 +4,7 @@ import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_CREATION_TIME;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -137,8 +138,8 @@ public class TracksComparator implements Comparator<Object> {
 			case DATE_ASCENDING:
 				long startTime1_asc = analysis1 == null ? 0 : analysis1.startTime;
 				long startTime2_asc = analysis2 == null ? 0 : analysis2.startTime;
-				long time1_asc = dataItem1 == null ? startTime1_asc : dataItem1.getGpxData().getFileCreationTime();
-				long time2_asc = dataItem2 == null ? startTime2_asc : dataItem2.getGpxData().getFileCreationTime();
+				long time1_asc = dataItem1 == null ? startTime1_asc : dataItem1.getGpxData().getValue(GPX_COL_FILE_CREATION_TIME);
+				long time2_asc = dataItem2 == null ? startTime2_asc : dataItem2.getGpxData().getValue(GPX_COL_FILE_CREATION_TIME);
 				if (time1_asc == time2_asc || time1_asc < 10 && time2_asc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}
@@ -151,8 +152,8 @@ public class TracksComparator implements Comparator<Object> {
 			case DATE_DESCENDING:
 				long startTime1_desc = analysis1 == null ? 0 : analysis1.startTime;
 				long startTime2_desc = analysis2 == null ? 0 : analysis2.startTime;
-				long time1_desc = dataItem1 == null ? startTime1_desc : dataItem1.getGpxData().getFileCreationTime();
-				long time2_desc = dataItem2 == null ? startTime2_desc : dataItem2.getGpxData().getFileCreationTime();
+				long time1_desc = dataItem1 == null ? startTime1_desc : dataItem1.getGpxData().getValue(GPX_COL_FILE_CREATION_TIME);
+				long time2_desc = dataItem2 == null ? startTime2_desc : dataItem2.getGpxData().getValue(GPX_COL_FILE_CREATION_TIME);
 				if (time1_desc == time2_desc || time1_desc < 10 && time2_desc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}

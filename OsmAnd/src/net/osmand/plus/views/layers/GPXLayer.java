@@ -3,6 +3,11 @@ package net.osmand.plus.views.layers;
 import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -1207,7 +1212,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				color = dataItem.getGpxData().getColor();
+				color = dataItem.getGpxData().getValue(GPX_COL_COLOR);
 			}
 		}
 		return color != 0 ? color : gpxFile.getColor(defaultColor);
@@ -1236,8 +1241,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
 				GpxData gpxData = dataItem.getGpxData();
-				coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getColoringType());
-				routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getColoringType());
+				coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getValue(GPX_COL_COLORING_TYPE));
+				routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getValue(GPX_COL_COLORING_TYPE));
 			}
 		}
 
@@ -1248,8 +1253,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);
 		} else {
-			if (!isCurrentTrack && dataItem != null) {
-				gpxDbHelper.updateColoringType(dataItem, defaultColoringType);
+			if (!isCurrentTrack) {
+				gpxDbHelper.updateGpxParameter(dataItem, GPX_COL_COLORING_TYPE, defaultColoringType);
 			}
 			return defaultColoringType;
 		}
@@ -1268,7 +1273,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				width = dataItem.getGpxData().getWidth();
+				width = dataItem.getGpxData().getValue(GPX_COL_WIDTH);
 			}
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
@@ -1284,7 +1289,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.getGpxData().isShowArrows();
+				return dataItem.getGpxData().getValue(GPX_COL_SHOW_ARROWS);
 			}
 			return gpxFile.isShowArrows();
 		}
@@ -1300,7 +1305,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.getGpxData().isShowStartFinish();
+				return dataItem.getGpxData().getValue(GPX_COL_SHOW_START_FINISH);
 			}
 			return gpxFile.isShowStartFinish();
 		}

@@ -1,6 +1,39 @@
 package net.osmand.plus.track.helpers;
 
-import androidx.annotation.ColorInt;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_AVG_ELEVATION;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_AVG_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_DIFF_ELEVATION_DOWN;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_DIFF_ELEVATION_UP;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_END_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_CREATION_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_ELEVATION;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_ELEVATION;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_POINTS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SMOOTHING_THRESHOLD;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_START_LAT;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_START_LON;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_START_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_TIME_MOVING;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_TIME_SPAN;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_TOTAL_DISTANCE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_TOTAL_DISTANCE_MOVING;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_TOTAL_TRACKS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WPT_CATEGORY_NAMES;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WPT_POINTS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,40 +48,37 @@ import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
 import net.osmand.util.Algorithms;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GpxData {
 
+	private final Map<GpxParameter<?>, Object> map = new HashMap<>();
+
 	@Nullable
 	private GPXTrackAnalysis analysis;
 
-	@ColorInt
-	private int color;
-	private String width;
-	private String coloringType;
-	private String nearestCityName;
-	private String containingFolder;
+	public boolean hasData() {
+		return !map.isEmpty();
+	}
 
-	private int splitType;
-	private double splitInterval;
+	public <T> T getValue(@NonNull GpxParameter<T> parameter) {
+		return map.containsKey(parameter) ? (T) map.get(parameter) : parameter.getDefaultValue();
+	}
 
-	private long fileCreationTime = -1;
-	private long fileLastModifiedTime;
-	private long fileLastUploadedTime;
+	public <T> boolean setValue(@NonNull GpxParameter<?> parameter, @Nullable T value) {
+		if (parameter.isValidValue(value)) {
+			map.put(parameter, value);
+			return true;
+		}
+		return false;
+	}
 
-	private boolean showArrows;
-	private boolean showStartFinish = true;
-	private boolean joinSegments;
-	private boolean showAsMarkers;
-	private boolean importedByApi;
-
-	private double maxFilterHdop = Double.NaN;
-	private double minFilterSpeed = Double.NaN;
-	private double maxFilterSpeed = Double.NaN;
-	private double minFilterAltitude = Double.NaN;
-	private double maxFilterAltitude = Double.NaN;
-	private double smoothingThreshold = Double.NaN;
-
+	public void copyData(@NonNull GpxData data) {
+		map.clear();
+		map.putAll(data.map);
+		setAnalysis(data.analysis);
+	}
 
 	@Nullable
 	public GPXTrackAnalysis getAnalysis() {
@@ -57,233 +87,59 @@ public class GpxData {
 
 	public void setAnalysis(@Nullable GPXTrackAnalysis analysis) {
 		this.analysis = analysis;
+		updateAnalysisParameters();
 	}
 
-	@ColorInt
-	public int getColor() {
-		return color;
-	}
-
-	public void setColor(@ColorInt int color) {
-		this.color = color;
-	}
-
-	@Nullable
-	public String getWidth() {
-		return width;
-	}
-
-	public void setWidth(@Nullable String width) {
-		this.width = width;
-	}
-
-	@Nullable
-	public String getColoringType() {
-		return coloringType;
-	}
-
-	public void setColoringType(@Nullable String coloringType) {
-		this.coloringType = coloringType;
-	}
-
-	@Nullable
-	public String getNearestCityName() {
-		return nearestCityName;
-	}
-
-	public void setNearestCityName(@Nullable String nearestCityName) {
-		this.nearestCityName = nearestCityName;
-	}
-
-	@Nullable
-	public String getContainingFolder() {
-		return containingFolder;
-	}
-
-	public void setContainingFolder(@Nullable String containingFolder) {
-		this.containingFolder = containingFolder;
-	}
-
-	public int getSplitType() {
-		return splitType;
-	}
-
-	public void setSplitType(int splitType) {
-		this.splitType = splitType;
-	}
-
-	public double getSplitInterval() {
-		return splitInterval;
-	}
-
-	public void setSplitInterval(double splitInterval) {
-		this.splitInterval = splitInterval;
-	}
-
-	public long getFileCreationTime() {
-		return fileCreationTime;
-	}
-
-	public void setFileCreationTime(long fileCreationTime) {
-		this.fileCreationTime = fileCreationTime;
-	}
-
-	public long getFileLastModifiedTime() {
-		return fileLastModifiedTime;
-	}
-
-	public void setFileLastModifiedTime(long fileLastModifiedTime) {
-		this.fileLastModifiedTime = fileLastModifiedTime;
-	}
-
-	public long getFileLastUploadedTime() {
-		return fileLastUploadedTime;
-	}
-
-	public void setFileLastUploadedTime(long fileLastUploadedTime) {
-		this.fileLastUploadedTime = fileLastUploadedTime;
-	}
-
-	public boolean isShowArrows() {
-		return showArrows;
-	}
-
-	public void setShowArrows(boolean showArrows) {
-		this.showArrows = showArrows;
-	}
-
-	public boolean isShowStartFinish() {
-		return showStartFinish;
-	}
-
-	public void setShowStartFinish(boolean showStartFinish) {
-		this.showStartFinish = showStartFinish;
-	}
-
-	public boolean isJoinSegments() {
-		return joinSegments;
-	}
-
-	public void setJoinSegments(boolean joinSegments) {
-		this.joinSegments = joinSegments;
-	}
-
-	public boolean isShowAsMarkers() {
-		return showAsMarkers;
-	}
-
-	public void setShowAsMarkers(boolean showAsMarkers) {
-		this.showAsMarkers = showAsMarkers;
-	}
-
-	public boolean isImportedByApi() {
-		return importedByApi;
-	}
-
-	public void setImportedByApi(boolean importedByApi) {
-		this.importedByApi = importedByApi;
-	}
-
-	public double getMaxFilterHdop() {
-		return maxFilterHdop;
-	}
-
-	public void setMaxFilterHdop(double maxFilterHdop) {
-		this.maxFilterHdop = maxFilterHdop;
-	}
-
-	public double getMinFilterSpeed() {
-		return minFilterSpeed;
-	}
-
-	public void setMinFilterSpeed(double minFilterSpeed) {
-		this.minFilterSpeed = minFilterSpeed;
-	}
-
-	public double getMaxFilterSpeed() {
-		return maxFilterSpeed;
-	}
-
-	public void setMaxFilterSpeed(double maxFilterSpeed) {
-		this.maxFilterSpeed = maxFilterSpeed;
-	}
-
-	public double getMinFilterAltitude() {
-		return minFilterAltitude;
-	}
-
-	public void setMinFilterAltitude(double minFilterAltitude) {
-		this.minFilterAltitude = minFilterAltitude;
-	}
-
-	public double getMaxFilterAltitude() {
-		return maxFilterAltitude;
-	}
-
-	public void setMaxFilterAltitude(double maxFilterAltitude) {
-		this.maxFilterAltitude = maxFilterAltitude;
-	}
-
-	public double getSmoothingThreshold() {
-		return smoothingThreshold;
-	}
-
-	public void setSmoothingThreshold(double smoothingThreshold) {
-		this.smoothingThreshold = smoothingThreshold;
+	private void updateAnalysisParameters() {
+		boolean hasAnalysis = analysis != null;
+		map.put(GPX_COL_TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
+		map.put(GPX_COL_TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
+		map.put(GPX_COL_START_TIME, hasAnalysis ? analysis.startTime : null);
+		map.put(GPX_COL_END_TIME, hasAnalysis ? analysis.endTime : null);
+		map.put(GPX_COL_TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
+		map.put(GPX_COL_TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
+		map.put(GPX_COL_TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
+		map.put(GPX_COL_DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
+		map.put(GPX_COL_DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
+		map.put(GPX_COL_AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
+		map.put(GPX_COL_MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
+		map.put(GPX_COL_MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
+		map.put(GPX_COL_MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
+		map.put(GPX_COL_AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
+		map.put(GPX_COL_POINTS, hasAnalysis ? analysis.points : null);
+		map.put(GPX_COL_WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
+		map.put(GPX_COL_WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
+		map.put(GPX_COL_START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
+		map.put(GPX_COL_START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 	}
 
 	public void readGpxParams(@NonNull GPXFile gpxFile) {
-		color = gpxFile.getColor(0);
-		width = gpxFile.getWidth(null);
-		showArrows = gpxFile.isShowArrows();
-		showStartFinish = gpxFile.isShowStartFinish();
+		setValue(GPX_COL_COLOR, gpxFile.getColor(0));
+		setValue(GPX_COL_WIDTH, gpxFile.getWidth(null));
+		setValue(GPX_COL_SHOW_ARROWS, gpxFile.isShowArrows());
+		setValue(GPX_COL_SHOW_START_FINISH, gpxFile.isShowStartFinish());
 
 		if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
-			GpxSplitType gpxSplitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
-			splitType = gpxSplitType.getType();
-			splitInterval = gpxFile.getSplitInterval();
+			GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
+			setValue(GPX_COL_SPLIT_TYPE, splitType.getType());
+			setValue(GPX_COL_SPLIT_INTERVAL, gpxFile.getSplitInterval());
 		}
 
 		if (!Algorithms.isEmpty(gpxFile.getColoringType())) {
-			coloringType = gpxFile.getColoringType();
+			setValue(GPX_COL_COLORING_TYPE, gpxFile.getColoringType());
 		} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
-			ColoringType type = ColoringType.fromGradientScaleType(scaleType);
-			coloringType = type == null ? null : type.getName(null);
+			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+			setValue(GPX_COL_COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 		}
 
 		Map<String, String> extensions = gpxFile.getExtensionsToRead();
-		smoothingThreshold = SmoothingFilter.getSmoothingThreshold(extensions);
-		minFilterSpeed = SpeedFilter.getMinFilterSpeed(extensions);
-		maxFilterSpeed = SpeedFilter.getMaxFilterSpeed(extensions);
-		minFilterAltitude = AltitudeFilter.getMinFilterAltitude(extensions);
-		maxFilterAltitude = AltitudeFilter.getMaxFilterAltitude(extensions);
-		maxFilterHdop = HdopFilter.getMaxFilterHdop(extensions);
-		fileCreationTime = gpxFile.metadata.time;
-	}
-
-	protected void copyData(@NonNull GpxData data) {
-		this.analysis = data.analysis;
-		this.color = data.color;
-		this.width = data.width;
-		this.coloringType = data.coloringType;
-		this.nearestCityName = data.nearestCityName;
-		this.containingFolder = data.containingFolder;
-		this.splitType = data.splitType;
-		this.splitInterval = data.splitInterval;
-		this.fileCreationTime = data.fileCreationTime;
-		this.fileLastModifiedTime = data.fileLastModifiedTime;
-		this.fileLastUploadedTime = data.fileLastUploadedTime;
-		this.showArrows = data.showArrows;
-		this.showStartFinish = data.showStartFinish;
-		this.joinSegments = data.joinSegments;
-		this.showAsMarkers = data.showAsMarkers;
-		this.importedByApi = data.importedByApi;
-		this.maxFilterHdop = data.maxFilterHdop;
-		this.minFilterSpeed = data.minFilterSpeed;
-		this.maxFilterSpeed = data.maxFilterSpeed;
-		this.minFilterAltitude = data.minFilterAltitude;
-		this.maxFilterAltitude = data.maxFilterAltitude;
-		this.smoothingThreshold = data.smoothingThreshold;
+		setValue(GPX_COL_SMOOTHING_THRESHOLD, SmoothingFilter.getSmoothingThreshold(extensions));
+		setValue(GPX_COL_MIN_FILTER_SPEED, SpeedFilter.getMinFilterSpeed(extensions));
+		setValue(GPX_COL_MAX_FILTER_SPEED, SpeedFilter.getMaxFilterSpeed(extensions));
+		setValue(GPX_COL_MIN_FILTER_ALTITUDE, AltitudeFilter.getMinFilterAltitude(extensions));
+		setValue(GPX_COL_MAX_FILTER_ALTITUDE, AltitudeFilter.getMaxFilterAltitude(extensions));
+		setValue(GPX_COL_MAX_FILTER_HDOP, HdopFilter.getMaxFilterHdop(extensions));
+		setValue(GPX_COL_FILE_CREATION_TIME, gpxFile.metadata.time);
 	}
 }

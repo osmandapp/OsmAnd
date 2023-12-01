@@ -19,6 +19,9 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_API_IMPORTED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_LAST_MODIFIED_TIME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -1257,14 +1260,14 @@ public class OsmandAidlApi {
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination);
 			GpxData gpxData = gpxDataItem.getGpxData();
-			gpxData.setColor(col);
-			gpxData.setImportedByApi(true);
+			gpxData.setValue(GPX_COL_COLOR, col);
+			gpxData.setValue(GPX_COL_API_IMPORTED, true);
 			app.getGpxDbHelper().add(gpxDataItem);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
-				item.getGpxData().setImportedByApi(true);
-				app.getGpxDbHelper().updateColor(item, col);
+				item.getGpxData().setValue(GPX_COL_API_IMPORTED, true);
+				app.getGpxDbHelper().updateGpxParameter(item, GPX_COL_COLOR, col);
 			}
 		}
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
@@ -1509,9 +1512,9 @@ public class OsmandAidlApi {
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-				long modifiedTime = gpxData.getFileLastModifiedTime();
+				long modifiedTime = gpxData.getValue(GPX_COL_FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
-				int color = gpxData.getColor();
+				int color = gpxData.getValue(GPX_COL_COLOR);
 				String colorName = "";
 				if (color != 0) {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
@@ -1538,7 +1541,7 @@ public class OsmandAidlApi {
 				GpxData gpxData = dataItem.getGpxData();
 				String fileName = file.getName();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-				long modifiedTime = gpxData.getFileLastModifiedTime();
+				long modifiedTime = gpxData.getValue(GPX_COL_FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
 				AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = gpxData.getAnalysis();
@@ -1557,7 +1560,7 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
-					int color = dataItem.getGpxData().getColor();
+					int color = dataItem.getGpxData().getValue(GPX_COL_COLOR);
 					if (color != 0) {
 						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
@@ -1577,7 +1580,7 @@ public class OsmandAidlApi {
 
 		if (file != null && file.exists()) {
 			GpxDataItem item = app.getGpxDbHelper().getItem(file);
-			if (item != null && item.getGpxData().isImportedByApi()) {
+			if (item != null && item.getGpxData().getValue(GPX_COL_API_IMPORTED)) {
 				return FileUtils.removeGpxFile(app, file);
 			}
 		}

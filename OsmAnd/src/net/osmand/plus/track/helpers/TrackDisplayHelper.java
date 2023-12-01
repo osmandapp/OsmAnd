@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_JOIN_SEGMENTS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -80,7 +82,7 @@ public class TrackDisplayHelper {
 
 	public boolean setJoinSegments(boolean joinSegments) {
 		if (gpxDataItem != null) {
-			boolean updated = app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+			boolean updated = app.getGpxDbHelper().updateGpxParameter(gpxDataItem, GPX_COL_JOIN_SEGMENTS, joinSegments);
 
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 			if (updated && selectedGpxFile != null) {
@@ -92,7 +94,7 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null && gpxDataItem.getGpxData().isJoinSegments();
+		return gpxDataItem != null && gpxDataItem.getGpxData().getValue(GPX_COL_JOIN_SEGMENTS);
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {

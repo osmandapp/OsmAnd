@@ -6,6 +6,13 @@ import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import static net.osmand.util.Algorithms.formatDuration;
 
@@ -662,18 +669,22 @@ public class GpxUiHelper {
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
 		GpxData gpxData = dataItem.getGpxData();
-		gpxFile.setShowArrows(gpxData.isShowArrows());
-		gpxFile.setShowStartFinish(gpxData.isShowStartFinish());
-		gpxFile.setSplitInterval(gpxData.getSplitInterval());
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(gpxData.getSplitType()).getTypeName());
-		if (gpxData.getColor() != 0) {
-			gpxFile.setColor(gpxData.getColor());
+		gpxFile.setShowArrows(gpxData.getValue(GPX_COL_SHOW_ARROWS));
+		gpxFile.setShowStartFinish(gpxData.getValue(GPX_COL_SHOW_START_FINISH));
+		gpxFile.setSplitInterval(gpxData.getValue(GPX_COL_SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(gpxData.getValue(GPX_COL_SPLIT_TYPE)).getTypeName());
+
+		int color = gpxData.getValue(GPX_COL_COLOR);
+		if (color != 0) {
+			gpxFile.setColor(color);
 		}
-		if (gpxData.getWidth() != null) {
-			gpxFile.setWidth(gpxData.getWidth());
+		String width = gpxData.getValue(GPX_COL_WIDTH);
+		if (width != null) {
+			gpxFile.setWidth(width);
 		}
-		if (gpxData.getColoringType() != null) {
-			gpxFile.setColoringType(gpxData.getColoringType());
+		String coloringType = gpxData.getValue(GPX_COL_COLORING_TYPE);
+		if (coloringType != null) {
+			gpxFile.setColoringType(coloringType);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}

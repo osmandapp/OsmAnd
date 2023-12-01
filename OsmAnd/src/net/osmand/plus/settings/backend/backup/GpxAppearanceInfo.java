@@ -6,6 +6,19 @@ import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FI
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SMOOTHING_THRESHOLD;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,13 +60,13 @@ public class GpxAppearanceInfo {
 
 	public GpxAppearanceInfo(@NonNull GpxDataItem dataItem) {
 		GpxData gpxData = dataItem.getGpxData();
-		color = gpxData.getColor();
-		width = gpxData.getWidth();
-		showArrows = gpxData.isShowArrows();
-		showStartFinish = gpxData.isShowStartFinish();
-		splitType = gpxData.getSplitType();
-		splitInterval = gpxData.getSplitInterval();
-		coloringType = gpxData.getColoringType();
+		color = gpxData.getValue(GPX_COL_COLOR);
+		width = gpxData.getValue(GPX_COL_WIDTH);
+		showArrows = gpxData.getValue(GPX_COL_SHOW_ARROWS);
+		showStartFinish = gpxData.getValue(GPX_COL_SHOW_START_FINISH);
+		splitType = gpxData.getValue(GPX_COL_SPLIT_TYPE);
+		splitInterval = gpxData.getValue(GPX_COL_SPLIT_INTERVAL);
+		coloringType = gpxData.getValue(GPX_COL_COLORING_TYPE);
 
 		GPXTrackAnalysis analysis = gpxData.getAnalysis();
 		if (analysis != null) {
@@ -62,12 +75,12 @@ public class GpxAppearanceInfo {
 			totalDistance = analysis.totalDistance;
 		}
 
-		smoothingThreshold = gpxData.getSmoothingThreshold();
-		minFilterSpeed = gpxData.getMinFilterSpeed();
-		maxFilterSpeed = gpxData.getMaxFilterSpeed();
-		minFilterAltitude = gpxData.getMinFilterAltitude();
-		maxFilterAltitude = gpxData.getMaxFilterAltitude();
-		maxFilterHdop = gpxData.getMaxFilterHdop();
+		smoothingThreshold = gpxData.getValue(GPX_COL_SMOOTHING_THRESHOLD);
+		minFilterSpeed = gpxData.getValue(GPX_COL_MIN_FILTER_SPEED);
+		maxFilterSpeed = gpxData.getValue(GPX_COL_MAX_FILTER_SPEED);
+		minFilterAltitude = gpxData.getValue(GPX_COL_MIN_FILTER_ALTITUDE);
+		maxFilterAltitude = gpxData.getValue(GPX_COL_MAX_FILTER_ALTITUDE);
+		maxFilterHdop = gpxData.getValue(GPX_COL_MAX_FILTER_HDOP);
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {

@@ -7,9 +7,9 @@ import java.io.File;
 public class GpxDataItem {
 
 	@NonNull
-	private File file;
+	private final File file;
 	@NonNull
-	private GpxData gpxData = new GpxData();
+	private final GpxData gpxData = new GpxData();
 
 	public GpxDataItem(@NonNull File file) {
 		this.file = file;

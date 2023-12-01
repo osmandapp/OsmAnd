@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_API_IMPORTED;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -73,7 +74,7 @@ public class NavigateGpxHelper {
 		GpxDataItem item = new GpxDataItem(new File(gpxFile.path));
 		GpxData gpxData = item.getGpxData();
 		gpxData.readGpxParams(gpxFile);
-		gpxData.setImportedByApi(navigationParams.isImportedByApi());
+		gpxData.setValue(GPX_COL_API_IMPORTED, navigationParams.isImportedByApi());
 		app.getGpxDbHelper().add(item);
 		step3_showGpxOnMap();
 	}
