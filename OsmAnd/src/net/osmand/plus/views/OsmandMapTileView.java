@@ -651,7 +651,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setTarget31(int x31, int y31, boolean notify) {
-		animatedDraggingThread.stopAnimating();
 		setTarget31Impl(x31, y31);
 		refreshMap();
 		if (notify) {
