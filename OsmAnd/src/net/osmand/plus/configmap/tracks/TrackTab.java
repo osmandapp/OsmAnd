@@ -57,6 +57,11 @@ public class TrackTab {
 	}
 
 	@NonNull
+	public String getName(@NonNull Context context) {
+		return getName(context, false);
+	}
+
+	@NonNull
 	public String getName(@NonNull Context context, boolean includeParentDir) {
 		if (type.titleId != -1) {
 			return context.getString(type.titleId);

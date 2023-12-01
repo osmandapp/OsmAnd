@@ -93,6 +93,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	public static final String OPEN_TRACKS_TAB = "open_tracks_tab";
 	public static final String IS_SMART_FOLDER = "is_smart_folder";
+	public static final String SELECT_ALL_ITEMS_ON_TAB = "select_all_items_on_tab";
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
@@ -109,10 +110,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private DialogButton applyButton;
 	private DialogButton selectionButton;
 
+
 	@Nullable
-	private String preselectedTabName;
+	private PreselectedTabParams preselectedTabParams;
 	private int tabSize;
-	private boolean isPreselectedSmartFolder;
 
 	@NonNull
 	public SelectedTracksHelper getSelectedTracksHelper() {
@@ -153,7 +154,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		Dialog dialog = new Dialog(activity, themeId) {
 			@Override
 			public void onBackPressed() {
-				if (preselectedTabName != null && activity instanceof MapActivity) {
+				if (preselectedTabParams != null && activity instanceof MapActivity) {
 					((MapActivity) activity).launchPrevActivityIntent();
 				}
 				dismiss();
@@ -255,7 +256,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				TextView textView = customView.findViewById(android.R.id.text1);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-				textView.setText(trackTab.getName(app, false));
+				textView.setText(trackTab.getName(app));
 				return customView;
 			}
 
@@ -430,22 +431,27 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		AndroidUiHelper.updateVisibility(progressBar, false);
+		applyPreselectedItems();
 		updateTrackTabs();
 		updateTabsContent();
 		updateButtonsState();
-		if (!Algorithms.isEmpty(preselectedTabName)) {
-			if (isPreselectedSmartFolder) {
-				for (TrackTab tab : getTrackTabs()) {
-					if (tab.type == TrackTabType.SMART_FOLDER &&
-							tab.getName(app, false).equals(preselectedTabName)) {
-						setSelectedTab(tab.getTypeName());
-						break;
-					}
-				}
-			} else {
-				setSelectedTab(preselectedTabName);
-			}
-			preselectedTabName = "";
+		applyPreselectedTab();
+		preselectedTabParams = null;
+	}
+
+	private void applyPreselectedItems() {
+		if (preselectedTabParams != null) {
+			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
+			TrackTab trackTab = getTab(tabName);
+			List<TrackItem> preselectedItems = preselectedTabParams.getPreselectedTrackItems(trackTab);
+			itemsSelectionHelper.onItemsSelected(preselectedItems, true);
+		}
+	}
+
+	private void applyPreselectedTab() {
+		if (preselectedTabParams != null) {
+			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
+			setSelectedTab(tabName);
 		}
 	}
 
@@ -727,14 +733,14 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		showInstance(manager, null, false);
+		showInstance(manager, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable String preselectedTabName, boolean isPreselectedSmartFolder) {
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable PreselectedTabParams preselectedTabParams) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksFragment fragment = new TracksFragment();
-			fragment.preselectedTabName = preselectedTabName;
-			fragment.isPreselectedSmartFolder = isPreselectedSmartFolder;
+			fragment.preselectedTabParams = preselectedTabParams;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

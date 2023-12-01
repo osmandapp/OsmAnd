@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.configmap.tracks.TracksFragment.IS_SMART_FOLDER;
 import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
+import static net.osmand.plus.configmap.tracks.TracksFragment.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
@@ -450,21 +451,23 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getDirName(), false);
+		showTracksVisibilityDialog(folder.getDirName(), false, true);
 	}
 
 	@Override
 	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
-		showTracksVisibilityDialog(smartFolder.getFolderName(), true);
+		showTracksVisibilityDialog(smartFolder.getFolderName(), true, true);
 	}
 
 
-	protected void showTracksVisibilityDialog(@NonNull String tabName, boolean isSmartFolder) {
+	protected void showTracksVisibilityDialog(@NonNull String tabName, boolean isSmartFolder,
+	                                          boolean selectAllItemsOnTab) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Bundle bundle = new Bundle();
 			bundle.putString(OPEN_TRACKS_TAB, tabName);
 			bundle.putBoolean(IS_SMART_FOLDER, isSmartFolder);
+			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAllItemsOnTab);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}

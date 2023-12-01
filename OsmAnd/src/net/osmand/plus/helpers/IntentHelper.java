@@ -36,6 +36,7 @@ import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -548,11 +549,18 @@ public class IntentHelper {
 			}
 			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
 				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
-				boolean isPreselectedSmartFolder = false;
+				boolean isSmartFolder = false;
 				if (intent.hasExtra(TracksFragment.IS_SMART_FOLDER)) {
-					isPreselectedSmartFolder = intent.getBooleanExtra(TracksFragment.IS_SMART_FOLDER, false);
+					isSmartFolder = intent.getBooleanExtra(TracksFragment.IS_SMART_FOLDER, false);
 				}
-				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName, isPreselectedSmartFolder);
+				boolean selectAllItemsOnTab = false;
+				if (intent.hasExtra(TracksFragment.SELECT_ALL_ITEMS_ON_TAB)) {
+					selectAllItemsOnTab = intent.getBooleanExtra(TracksFragment.SELECT_ALL_ITEMS_ON_TAB, false);
+				}
+				PreselectedTabParams preselectedTabParams = tabName != null
+						? new PreselectedTabParams(tabName, isSmartFolder, selectAllItemsOnTab)
+						: null;
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), preselectedTabParams);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {

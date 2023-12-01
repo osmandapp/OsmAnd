@@ -317,7 +317,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		} else if (group instanceof SmartFolder) {
 			openSmartFolder((SmartFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog(TrackTabType.ON_MAP.name(), false);
+			showTracksVisibilityDialog(TrackTabType.ON_MAP.name(), false, false);
 		}
 	}
 
