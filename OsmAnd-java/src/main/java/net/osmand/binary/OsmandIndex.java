@@ -816,6 +816,21 @@ public final class OsmandIndex {
      * <code>repeated .OsmAnd.OBF.RoutingPart routingIndex = 12;</code>
      */
     int getRoutingIndexCount();
+
+    // repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandIndex.HHRoutingPart> 
+        getHhRoutingIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    net.osmand.binary.OsmandIndex.HHRoutingPart getHhRoutingIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    int getHhRoutingIndexCount();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.FileIndex}
@@ -920,6 +935,14 @@ public final class OsmandIndex {
               routingIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.RoutingPart.PARSER, extensionRegistry));
               break;
             }
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                hhRoutingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.HHRoutingPart>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              hhRoutingIndex_.add(input.readMessage(net.osmand.binary.OsmandIndex.HHRoutingPart.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -942,6 +965,9 @@ public final class OsmandIndex {
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           routingIndex_ = java.util.Collections.unmodifiableList(routingIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          hhRoutingIndex_ = java.util.Collections.unmodifiableList(hhRoutingIndex_);
         }
         makeExtensionsImmutable();
       }
@@ -1233,6 +1259,42 @@ public final class OsmandIndex {
       return routingIndex_.get(index);
     }
 
+    // repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;
+    public static final int HHROUTINGINDEX_FIELD_NUMBER = 13;
+    private java.util.List<net.osmand.binary.OsmandIndex.HHRoutingPart> hhRoutingIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    public java.util.List<net.osmand.binary.OsmandIndex.HHRoutingPart> getHhRoutingIndexList() {
+      return hhRoutingIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandIndex.HHRoutingPartOrBuilder> 
+        getHhRoutingIndexOrBuilderList() {
+      return hhRoutingIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    public int getHhRoutingIndexCount() {
+      return hhRoutingIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    public net.osmand.binary.OsmandIndex.HHRoutingPart getHhRoutingIndex(int index) {
+      return hhRoutingIndex_.get(index);
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+     */
+    public net.osmand.binary.OsmandIndex.HHRoutingPartOrBuilder getHhRoutingIndexOrBuilder(
+        int index) {
+      return hhRoutingIndex_.get(index);
+    }
+
     private void initFields() {
       size_ = 0L;
       dateModified_ = 0L;
@@ -1243,6 +1305,7 @@ public final class OsmandIndex {
       poiIndex_ = java.util.Collections.emptyList();
       mapIndex_ = java.util.Collections.emptyList();
       routingIndex_ = java.util.Collections.emptyList();
+      hhRoutingIndex_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1295,6 +1358,12 @@ public final class OsmandIndex {
           return false;
         }
       }
+      for (int i = 0; i < getHhRoutingIndexCount(); i++) {
+        if (!getHhRoutingIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1328,6 +1397,9 @@ public final class OsmandIndex {
       }
       for (int i = 0; i < routingIndex_.size(); i++) {
         output.writeMessage(12, routingIndex_.get(i));
+      }
+      for (int i = 0; i < hhRoutingIndex_.size(); i++) {
+        output.writeMessage(13, hhRoutingIndex_.get(i));
       }
     }
 
@@ -1372,6 +1444,10 @@ public final class OsmandIndex {
       for (int i = 0; i < routingIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, routingIndex_.get(i));
+      }
+      for (int i = 0; i < hhRoutingIndex_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, hhRoutingIndex_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
@@ -1482,6 +1558,8 @@ public final class OsmandIndex {
         bitField0_ = (bitField0_ & ~0x00000080);
         routingIndex_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        hhRoutingIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -1546,6 +1624,11 @@ public final class OsmandIndex {
           bitField0_ = (bitField0_ & ~0x00000100);
         }
         result.routingIndex_ = routingIndex_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          hhRoutingIndex_ = java.util.Collections.unmodifiableList(hhRoutingIndex_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.hhRoutingIndex_ = hhRoutingIndex_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -1616,6 +1699,16 @@ public final class OsmandIndex {
           }
           
         }
+        if (!other.hhRoutingIndex_.isEmpty()) {
+          if (hhRoutingIndex_.isEmpty()) {
+            hhRoutingIndex_ = other.hhRoutingIndex_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+          } else {
+            ensureHhRoutingIndexIsMutable();
+            hhRoutingIndex_.addAll(other.hhRoutingIndex_);
+          }
+          
+        }
         return this;
       }
 
@@ -1662,6 +1755,12 @@ public final class OsmandIndex {
         }
         for (int i = 0; i < getRoutingIndexCount(); i++) {
           if (!getRoutingIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getHhRoutingIndexCount(); i++) {
+          if (!getHhRoutingIndex(i).isInitialized()) {
             
             return false;
           }
@@ -2482,6 +2581,131 @@ public final class OsmandIndex {
       public Builder removeRoutingIndex(int index) {
         ensureRoutingIndexIsMutable();
         routingIndex_.remove(index);
+
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;
+      private java.util.List<net.osmand.binary.OsmandIndex.HHRoutingPart> hhRoutingIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureHhRoutingIndexIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          hhRoutingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandIndex.HHRoutingPart>(hhRoutingIndex_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandIndex.HHRoutingPart> getHhRoutingIndexList() {
+        return java.util.Collections.unmodifiableList(hhRoutingIndex_);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public int getHhRoutingIndexCount() {
+        return hhRoutingIndex_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public net.osmand.binary.OsmandIndex.HHRoutingPart getHhRoutingIndex(int index) {
+        return hhRoutingIndex_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder setHhRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.HHRoutingPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder setHhRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.HHRoutingPart.Builder builderForValue) {
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder addHhRoutingIndex(net.osmand.binary.OsmandIndex.HHRoutingPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.add(value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder addHhRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.HHRoutingPart value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.add(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder addHhRoutingIndex(
+          net.osmand.binary.OsmandIndex.HHRoutingPart.Builder builderForValue) {
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder addHhRoutingIndex(
+          int index, net.osmand.binary.OsmandIndex.HHRoutingPart.Builder builderForValue) {
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder addAllHhRoutingIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandIndex.HHRoutingPart> values) {
+        ensureHhRoutingIndexIsMutable();
+        super.addAll(values, hhRoutingIndex_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder clearHhRoutingIndex() {
+        hhRoutingIndex_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
+
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.HHRoutingPart hhRoutingIndex = 13;</code>
+       */
+      public Builder removeHhRoutingIndex(int index) {
+        ensureHhRoutingIndexIsMutable();
+        hhRoutingIndex_.remove(index);
 
         return this;
       }
@@ -8712,6 +8936,1408 @@ public final class OsmandIndex {
     }
 
     // @@protoc_insertion_point(class_scope:OsmAnd.OBF.RoutingPart)
+  }
+
+  public interface HHRoutingPartOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required int64 size = 1;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    boolean hasSize();
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    long getSize();
+
+    // required int64 offset = 2;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    boolean hasOffset();
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    // required int64 edition = 3;
+    /**
+     * <code>required int64 edition = 3;</code>
+     */
+    boolean hasEdition();
+    /**
+     * <code>required int64 edition = 3;</code>
+     */
+    long getEdition();
+
+    // required string profile = 4;
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    boolean hasProfile();
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    java.lang.String getProfile();
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getProfileBytes();
+
+    // repeated string profileParams = 5;
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    java.util.List<java.lang.String>
+    getProfileParamsList();
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    int getProfileParamsCount();
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    java.lang.String getProfileParams(int index);
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getProfileParamsBytes(int index);
+
+    // required int32 pointsOffset = 7;
+    /**
+     * <code>required int32 pointsOffset = 7;</code>
+     */
+    boolean hasPointsOffset();
+    /**
+     * <code>required int32 pointsOffset = 7;</code>
+     */
+    int getPointsOffset();
+
+    // required int32 pointsLength = 8;
+    /**
+     * <code>required int32 pointsLength = 8;</code>
+     */
+    boolean hasPointsLength();
+    /**
+     * <code>required int32 pointsLength = 8;</code>
+     */
+    int getPointsLength();
+
+    // required int32 left = 9;
+    /**
+     * <code>required int32 left = 9;</code>
+     */
+    boolean hasLeft();
+    /**
+     * <code>required int32 left = 9;</code>
+     */
+    int getLeft();
+
+    // required int32 right = 10;
+    /**
+     * <code>required int32 right = 10;</code>
+     */
+    boolean hasRight();
+    /**
+     * <code>required int32 right = 10;</code>
+     */
+    int getRight();
+
+    // required int32 top = 11;
+    /**
+     * <code>required int32 top = 11;</code>
+     */
+    boolean hasTop();
+    /**
+     * <code>required int32 top = 11;</code>
+     */
+    int getTop();
+
+    // required int32 bottom = 12;
+    /**
+     * <code>required int32 bottom = 12;</code>
+     */
+    boolean hasBottom();
+    /**
+     * <code>required int32 bottom = 12;</code>
+     */
+    int getBottom();
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.HHRoutingPart}
+   */
+  public static final class HHRoutingPart extends
+      com.google.protobuf.GeneratedMessageLite
+      implements HHRoutingPartOrBuilder {
+    // Use HHRoutingPart.newBuilder() to construct.
+    private HHRoutingPart(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
+    }
+    private HHRoutingPart(boolean noInit) {}
+
+    private static final HHRoutingPart defaultInstance;
+    public static HHRoutingPart getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public HHRoutingPart getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private HHRoutingPart(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              size_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              edition_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              profile_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                profileParams_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              profileParams_.add(input.readBytes());
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              pointsOffset_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000020;
+              pointsLength_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              left_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              right_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000100;
+              top_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000200;
+              bottom_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(profileParams_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<HHRoutingPart> PARSER =
+        new com.google.protobuf.AbstractParser<HHRoutingPart>() {
+      public HHRoutingPart parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new HHRoutingPart(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<HHRoutingPart> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required int64 size = 1;
+    public static final int SIZE_FIELD_NUMBER = 1;
+    private long size_;
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public boolean hasSize() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 size = 1;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
+    // required int64 offset = 2;
+    public static final int OFFSET_FIELD_NUMBER = 2;
+    private long offset_;
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
+    // required int64 edition = 3;
+    public static final int EDITION_FIELD_NUMBER = 3;
+    private long edition_;
+    /**
+     * <code>required int64 edition = 3;</code>
+     */
+    public boolean hasEdition() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int64 edition = 3;</code>
+     */
+    public long getEdition() {
+      return edition_;
+    }
+
+    // required string profile = 4;
+    public static final int PROFILE_FIELD_NUMBER = 4;
+    private java.lang.Object profile_;
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    public boolean hasProfile() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    public java.lang.String getProfile() {
+      java.lang.Object ref = profile_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          profile_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string profile = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getProfileBytes() {
+      java.lang.Object ref = profile_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profile_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated string profileParams = 5;
+    public static final int PROFILEPARAMS_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList profileParams_;
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    public java.util.List<java.lang.String>
+        getProfileParamsList() {
+      return profileParams_;
+    }
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    public int getProfileParamsCount() {
+      return profileParams_.size();
+    }
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    public java.lang.String getProfileParams(int index) {
+      return profileParams_.get(index);
+    }
+    /**
+     * <code>repeated string profileParams = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getProfileParamsBytes(int index) {
+      return profileParams_.getByteString(index);
+    }
+
+    // required int32 pointsOffset = 7;
+    public static final int POINTSOFFSET_FIELD_NUMBER = 7;
+    private int pointsOffset_;
+    /**
+     * <code>required int32 pointsOffset = 7;</code>
+     */
+    public boolean hasPointsOffset() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 pointsOffset = 7;</code>
+     */
+    public int getPointsOffset() {
+      return pointsOffset_;
+    }
+
+    // required int32 pointsLength = 8;
+    public static final int POINTSLENGTH_FIELD_NUMBER = 8;
+    private int pointsLength_;
+    /**
+     * <code>required int32 pointsLength = 8;</code>
+     */
+    public boolean hasPointsLength() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 pointsLength = 8;</code>
+     */
+    public int getPointsLength() {
+      return pointsLength_;
+    }
+
+    // required int32 left = 9;
+    public static final int LEFT_FIELD_NUMBER = 9;
+    private int left_;
+    /**
+     * <code>required int32 left = 9;</code>
+     */
+    public boolean hasLeft() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required int32 left = 9;</code>
+     */
+    public int getLeft() {
+      return left_;
+    }
+
+    // required int32 right = 10;
+    public static final int RIGHT_FIELD_NUMBER = 10;
+    private int right_;
+    /**
+     * <code>required int32 right = 10;</code>
+     */
+    public boolean hasRight() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required int32 right = 10;</code>
+     */
+    public int getRight() {
+      return right_;
+    }
+
+    // required int32 top = 11;
+    public static final int TOP_FIELD_NUMBER = 11;
+    private int top_;
+    /**
+     * <code>required int32 top = 11;</code>
+     */
+    public boolean hasTop() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required int32 top = 11;</code>
+     */
+    public int getTop() {
+      return top_;
+    }
+
+    // required int32 bottom = 12;
+    public static final int BOTTOM_FIELD_NUMBER = 12;
+    private int bottom_;
+    /**
+     * <code>required int32 bottom = 12;</code>
+     */
+    public boolean hasBottom() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required int32 bottom = 12;</code>
+     */
+    public int getBottom() {
+      return bottom_;
+    }
+
+    private void initFields() {
+      size_ = 0L;
+      offset_ = 0L;
+      edition_ = 0L;
+      profile_ = "";
+      profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      pointsOffset_ = 0;
+      pointsLength_ = 0;
+      left_ = 0;
+      right_ = 0;
+      top_ = 0;
+      bottom_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEdition()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasProfile()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPointsOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPointsLength()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLeft()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRight()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTop()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBottom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, size_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, offset_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, edition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getProfileBytes());
+      }
+      for (int i = 0; i < profileParams_.size(); i++) {
+        output.writeBytes(5, profileParams_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, pointsOffset_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(8, pointsLength_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(9, left_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(10, right_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(11, top_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(12, bottom_);
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, size_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, offset_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, edition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getProfileBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < profileParams_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(profileParams_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getProfileParamsList().size();
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, pointsOffset_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, pointsLength_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, left_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, right_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, top_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, bottom_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandIndex.HHRoutingPart parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandIndex.HHRoutingPart prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code OsmAnd.OBF.HHRoutingPart}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.HHRoutingPart, Builder>
+        implements net.osmand.binary.OsmandIndex.HHRoutingPartOrBuilder {
+      // Construct using net.osmand.binary.OsmandIndex.HHRoutingPart.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        size_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        edition_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        profile_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        pointsOffset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        pointsLength_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        left_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        right_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        top_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        bottom_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public net.osmand.binary.OsmandIndex.HHRoutingPart getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandIndex.HHRoutingPart.getDefaultInstance();
+      }
+
+      public net.osmand.binary.OsmandIndex.HHRoutingPart build() {
+        net.osmand.binary.OsmandIndex.HHRoutingPart result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public net.osmand.binary.OsmandIndex.HHRoutingPart buildPartial() {
+        net.osmand.binary.OsmandIndex.HHRoutingPart result = new net.osmand.binary.OsmandIndex.HHRoutingPart(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.size_ = size_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.edition_ = edition_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.profile_ = profile_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              profileParams_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.profileParams_ = profileParams_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.pointsOffset_ = pointsOffset_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.pointsLength_ = pointsLength_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.left_ = left_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.right_ = right_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.top_ = top_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.bottom_ = bottom_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(net.osmand.binary.OsmandIndex.HHRoutingPart other) {
+        if (other == net.osmand.binary.OsmandIndex.HHRoutingPart.getDefaultInstance()) return this;
+        if (other.hasSize()) {
+          setSize(other.getSize());
+        }
+        if (other.hasOffset()) {
+          setOffset(other.getOffset());
+        }
+        if (other.hasEdition()) {
+          setEdition(other.getEdition());
+        }
+        if (other.hasProfile()) {
+          bitField0_ |= 0x00000008;
+          profile_ = other.profile_;
+          
+        }
+        if (!other.profileParams_.isEmpty()) {
+          if (profileParams_.isEmpty()) {
+            profileParams_ = other.profileParams_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureProfileParamsIsMutable();
+            profileParams_.addAll(other.profileParams_);
+          }
+          
+        }
+        if (other.hasPointsOffset()) {
+          setPointsOffset(other.getPointsOffset());
+        }
+        if (other.hasPointsLength()) {
+          setPointsLength(other.getPointsLength());
+        }
+        if (other.hasLeft()) {
+          setLeft(other.getLeft());
+        }
+        if (other.hasRight()) {
+          setRight(other.getRight());
+        }
+        if (other.hasTop()) {
+          setTop(other.getTop());
+        }
+        if (other.hasBottom()) {
+          setBottom(other.getBottom());
+        }
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasSize()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasEdition()) {
+          
+          return false;
+        }
+        if (!hasProfile()) {
+          
+          return false;
+        }
+        if (!hasPointsOffset()) {
+          
+          return false;
+        }
+        if (!hasPointsLength()) {
+          
+          return false;
+        }
+        if (!hasLeft()) {
+          
+          return false;
+        }
+        if (!hasRight()) {
+          
+          return false;
+        }
+        if (!hasTop()) {
+          
+          return false;
+        }
+        if (!hasBottom()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        net.osmand.binary.OsmandIndex.HHRoutingPart parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandIndex.HHRoutingPart) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int64 size = 1;
+      private long size_ ;
+      /**
+       * <code>required int64 size = 1;</code>
+       */
+      public boolean hasSize() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
+      public long getSize() {
+        return size_;
+      }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
+      public Builder setSize(long value) {
+        bitField0_ |= 0x00000001;
+        size_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int64 size = 1;</code>
+       */
+      public Builder clearSize() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        size_ = 0L;
+        
+        return this;
+      }
+
+      // required int64 offset = 2;
+      private long offset_ ;
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
+      public boolean hasOffset() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
+      public long getOffset() {
+        return offset_;
+      }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
+      public Builder setOffset(long value) {
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int64 offset = 2;</code>
+       */
+      public Builder clearOffset() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0L;
+        
+        return this;
+      }
+
+      // required int64 edition = 3;
+      private long edition_ ;
+      /**
+       * <code>required int64 edition = 3;</code>
+       */
+      public boolean hasEdition() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int64 edition = 3;</code>
+       */
+      public long getEdition() {
+        return edition_;
+      }
+      /**
+       * <code>required int64 edition = 3;</code>
+       */
+      public Builder setEdition(long value) {
+        bitField0_ |= 0x00000004;
+        edition_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int64 edition = 3;</code>
+       */
+      public Builder clearEdition() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        edition_ = 0L;
+        
+        return this;
+      }
+
+      // required string profile = 4;
+      private java.lang.Object profile_ = "";
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public boolean hasProfile() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public java.lang.String getProfile() {
+        java.lang.Object ref = profile_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          profile_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getProfileBytes() {
+        java.lang.Object ref = profile_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          profile_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public Builder setProfile(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        profile_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public Builder clearProfile() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        profile_ = getDefaultInstance().getProfile();
+        
+        return this;
+      }
+      /**
+       * <code>required string profile = 4;</code>
+       */
+      public Builder setProfileBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        profile_ = value;
+        
+        return this;
+      }
+
+      // repeated string profileParams = 5;
+      private com.google.protobuf.LazyStringList profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureProfileParamsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          profileParams_ = new com.google.protobuf.LazyStringArrayList(profileParams_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public java.util.List<java.lang.String>
+          getProfileParamsList() {
+        return java.util.Collections.unmodifiableList(profileParams_);
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public int getProfileParamsCount() {
+        return profileParams_.size();
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public java.lang.String getProfileParams(int index) {
+        return profileParams_.get(index);
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getProfileParamsBytes(int index) {
+        return profileParams_.getByteString(index);
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public Builder setProfileParams(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.set(index, value);
+        
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public Builder addProfileParams(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.add(value);
+        
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public Builder addAllProfileParams(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureProfileParamsIsMutable();
+        super.addAll(values, profileParams_);
+        
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public Builder clearProfileParams() {
+        profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 5;</code>
+       */
+      public Builder addProfileParamsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.add(value);
+        
+        return this;
+      }
+
+      // required int32 pointsOffset = 7;
+      private int pointsOffset_ ;
+      /**
+       * <code>required int32 pointsOffset = 7;</code>
+       */
+      public boolean hasPointsOffset() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required int32 pointsOffset = 7;</code>
+       */
+      public int getPointsOffset() {
+        return pointsOffset_;
+      }
+      /**
+       * <code>required int32 pointsOffset = 7;</code>
+       */
+      public Builder setPointsOffset(int value) {
+        bitField0_ |= 0x00000020;
+        pointsOffset_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 pointsOffset = 7;</code>
+       */
+      public Builder clearPointsOffset() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        pointsOffset_ = 0;
+        
+        return this;
+      }
+
+      // required int32 pointsLength = 8;
+      private int pointsLength_ ;
+      /**
+       * <code>required int32 pointsLength = 8;</code>
+       */
+      public boolean hasPointsLength() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required int32 pointsLength = 8;</code>
+       */
+      public int getPointsLength() {
+        return pointsLength_;
+      }
+      /**
+       * <code>required int32 pointsLength = 8;</code>
+       */
+      public Builder setPointsLength(int value) {
+        bitField0_ |= 0x00000040;
+        pointsLength_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 pointsLength = 8;</code>
+       */
+      public Builder clearPointsLength() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        pointsLength_ = 0;
+        
+        return this;
+      }
+
+      // required int32 left = 9;
+      private int left_ ;
+      /**
+       * <code>required int32 left = 9;</code>
+       */
+      public boolean hasLeft() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required int32 left = 9;</code>
+       */
+      public int getLeft() {
+        return left_;
+      }
+      /**
+       * <code>required int32 left = 9;</code>
+       */
+      public Builder setLeft(int value) {
+        bitField0_ |= 0x00000080;
+        left_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 left = 9;</code>
+       */
+      public Builder clearLeft() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        left_ = 0;
+        
+        return this;
+      }
+
+      // required int32 right = 10;
+      private int right_ ;
+      /**
+       * <code>required int32 right = 10;</code>
+       */
+      public boolean hasRight() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required int32 right = 10;</code>
+       */
+      public int getRight() {
+        return right_;
+      }
+      /**
+       * <code>required int32 right = 10;</code>
+       */
+      public Builder setRight(int value) {
+        bitField0_ |= 0x00000100;
+        right_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 right = 10;</code>
+       */
+      public Builder clearRight() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        right_ = 0;
+        
+        return this;
+      }
+
+      // required int32 top = 11;
+      private int top_ ;
+      /**
+       * <code>required int32 top = 11;</code>
+       */
+      public boolean hasTop() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required int32 top = 11;</code>
+       */
+      public int getTop() {
+        return top_;
+      }
+      /**
+       * <code>required int32 top = 11;</code>
+       */
+      public Builder setTop(int value) {
+        bitField0_ |= 0x00000200;
+        top_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 top = 11;</code>
+       */
+      public Builder clearTop() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        top_ = 0;
+        
+        return this;
+      }
+
+      // required int32 bottom = 12;
+      private int bottom_ ;
+      /**
+       * <code>required int32 bottom = 12;</code>
+       */
+      public boolean hasBottom() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required int32 bottom = 12;</code>
+       */
+      public int getBottom() {
+        return bottom_;
+      }
+      /**
+       * <code>required int32 bottom = 12;</code>
+       */
+      public Builder setBottom(int value) {
+        bitField0_ |= 0x00000400;
+        bottom_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required int32 bottom = 12;</code>
+       */
+      public Builder clearBottom() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        bottom_ = 0;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.HHRoutingPart)
+    }
+
+    static {
+      defaultInstance = new HHRoutingPart(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.HHRoutingPart)
   }
 
   public interface TransportPartOrBuilder

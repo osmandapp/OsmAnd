@@ -77,10 +77,7 @@ public class TransportRoutePlanner {
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segment.getId(), segment);
 			
-			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges + 1) {
-				continue;
-			}
-			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds || 
+			if (segment.distFromStart > finishTime + ctx.finishTimeSeconds ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
 			}
@@ -116,32 +113,37 @@ public class TransportRoutePlanner {
 					break;
 				}
 				sgms.clear();
-				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
-				ctx.visitedStops++;
-				for (TransportRouteSegment sgm : sgms) {
-					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
-						return null;
-					}
-					if (segment.wasVisited(sgm)) {
-						continue;
-					}
-					TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
-					nextSegment.parentRoute = segment;
-					nextSegment.parentStop = ind;
-					nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
-					nextSegment.parentTravelTime = travelTime;
-					nextSegment.parentTravelDist = travelDist;
-					double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
-							+ ctx.cfg.getChangeTime() + ctx.cfg.getBoardingTime();
-					nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
-					if(ctx.cfg.useSchedule) {
-						int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
-						if(tm >= nextSegment.distFromStart) {
-							nextSegment.distFromStart = tm;
+				if (segment.getDepth() < ctx.cfg.maxNumberOfChanges + 1) {
+					sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
+					ctx.visitedStops++;
+					for (TransportRouteSegment sgm : sgms) {
+						if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+							return null;
+						}
+						if (segment.wasVisited(sgm)) {
+							continue;
+						}
+						if (ctx.visitedSegments.containsKey(sgm.getId())) {
+							continue;
+						}
+						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
+						nextSegment.parentRoute = segment;
+						nextSegment.parentStop = ind;
+						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
+						nextSegment.parentTravelTime = travelTime;
+						nextSegment.parentTravelDist = travelDist;
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
+								+ ctx.cfg.getChangeTime() + ctx.cfg.getBoardingTime();
+						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
+						if (ctx.cfg.useSchedule) {
+							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
+							if (tm >= nextSegment.distFromStart) {
+								nextSegment.distFromStart = tm;
+								queue.add(nextSegment);
+							}
+						} else {
 							queue.add(nextSegment);
 						}
-					} else {
-						queue.add(nextSegment);
 					}
 				}
 				TransportRouteSegment finalSegment = endSegments.get(segmentId);

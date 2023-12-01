@@ -9,7 +9,6 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.RouterUtilTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -26,7 +25,6 @@ import net.osmand.NativeLibrary;
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 
 @RunWith(Parameterized.class)
-@Ignore
 public class RouteTestingTest {
 	private final TestEntry te;
 
@@ -66,6 +64,11 @@ public class RouteTestingTest {
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
+//		BinaryRoutePlanner.TRACE_ROUTING = true;
+//		BinaryRoutePlanner.DEBUG_BREAK_EACH_SEGMENT = true; 
+//		BinaryRoutePlanner.DEBUG_PRECISE_DIST_MEASUREMENT = true;
+//		float DEFAULT_HR = 0;
+		
 		boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
 		if (useNative) {
 			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
@@ -110,6 +113,7 @@ public class RouteTestingTest {
 			);
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					memoryLimits, params);
+//			config.heuristicCoefficient = DEFAULT_HR;
 
 			System.out.println("planRoadDirection: " + planRoadDirection);
 

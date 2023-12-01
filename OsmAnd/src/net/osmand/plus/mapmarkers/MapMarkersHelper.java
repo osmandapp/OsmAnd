@@ -20,7 +20,7 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -364,7 +364,7 @@ public class MapMarkersHelper {
 		GpxDataItem dataItem = ctx.getGpxDbHelper().getItem(file);
 		if (dataItem != null) {
 			ctx.getGpxDbHelper().updateShowAsMarkers(dataItem, true);
-			dataItem.setShowAsMarkers(true);
+			dataItem.getGpxData().setShowAsMarkers(true);
 		}
 	}
 

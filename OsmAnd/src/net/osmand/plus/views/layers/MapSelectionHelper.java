@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
@@ -21,7 +22,6 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -602,19 +602,8 @@ public class MapSelectionHelper {
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id, int radius) {
 		id = getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
-		SearchPoiTypeFilter filter = new SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return true;
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-		};
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
 
 		Amenity res = null;
 		for (Amenity amenity : amenities) {

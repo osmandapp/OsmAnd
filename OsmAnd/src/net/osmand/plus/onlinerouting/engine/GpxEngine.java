@@ -23,7 +23,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
-import net.osmand.router.network.NetworkRouteGpxApproximator;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -101,7 +100,6 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
 		params.add(EngineParameter.APPROXIMATION_DERIVED_PROFILE);
-		params.add(EngineParameter.NETWORK_APPROXIMATE_ROUTE);
 		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 		params.add(EngineParameter.USE_ROUTING_FALLBACK);
 	}
@@ -163,20 +161,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				gctx.ctx.calculationProgress = calculationProgress;
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
-				GpxRouteApproximation gpxApproximation;
-				if (shouldNetworkApproximateRoute()) {
-					BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
-					NetworkRouteGpxApproximator gpxApproximator = new NetworkRouteGpxApproximator(readers, true);
-					try {
-						gpxApproximator.approximate(gpxFile, env.getCtx());
-					} catch (IOException e) {
-						LOG.error(e.getMessage(), e);
-					}
-					gpxApproximation = prepareApproximationResult(gctx, gpxPoints, gpxApproximator);
-					points = Arrays.asList(points.get(0), points.get(points.size() - 1));
-				} else {
-					gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
-				}
+				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
 				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();
@@ -191,18 +176,6 @@ public class GpxEngine extends OnlineRoutingEngine {
 		return null;
 	}
 
-	private GpxRouteApproximation prepareApproximationResult(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
-	                                                         NetworkRouteGpxApproximator gpxApproximator) {
-		GpxPoint first = gpxPoints.get(0);
-		first.routeToTarget = gpxApproximator.result;
-		GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
-		last.ind = 1;
-		last.routeToTarget = new ArrayList<>();
-		gctx.finalPoints.addAll(Arrays.asList(first, last));
-		gpxPoints.addAll(gctx.finalPoints);
-		gctx.result = gpxApproximator.result;
-		return gctx;
-	}
 
 	@Override
 	public boolean isResultOk(@NonNull StringBuilder errorMessage,

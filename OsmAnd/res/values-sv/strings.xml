@@ -5304,4 +5304,5 @@
     <string name="backup_delete_types_descr">Radera alla data för föråldrade datatyper från OsmAnd Cloud\?</string>
     <string name="shared_string_hide_slope">Dölj lutningsgrad</string>
     <string name="provided_by">Tillhandahålls av %1$s</string>
+    <string name="topography_maps">Topografikartor</string>
 </resources>

@@ -34,6 +34,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
+import net.osmand.plus.simulation.DashSimulateFragment;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;

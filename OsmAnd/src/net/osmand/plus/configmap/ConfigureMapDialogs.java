@@ -63,7 +63,13 @@ public class ConfigureMapDialogs {
 		CustomAlert.showSingleSelection(dialogData, items, selectedIndex, v -> {
 			int which = (int) v.getTag();
 			settings.DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-			if (view.getMapRenderer() == null) {
+			if (view.hasMapRenderer()) {
+				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+				if (mapRendererContext != null) {
+					boolean updatedNightMode = app.getDaynightHelper().isNightMode();
+					mapRendererContext.setNightMode(updatedNightMode);
+				}
+			} else {
 				activity.refreshMapComplete();
 			}
 			activity.getDashboard().refreshContent(false);

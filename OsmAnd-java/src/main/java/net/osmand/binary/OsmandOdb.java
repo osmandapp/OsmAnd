@@ -293,6 +293,51 @@ public final class OsmandOdb {
     net.osmand.binary.OsmandOdb.OsmAndRoutingIndexOrBuilder getRoutingIndexOrBuilder(
         int index);
 
+    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> 
+        getHhRoutingIndexList();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex getHhRoutingIndex(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    int getHhRoutingIndexCount();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder> 
+        getHhRoutingIndexOrBuilderList();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder getHhRoutingIndexOrBuilder(
+        int index);
+
     // required uint32 versionConfirm = 32;
     /**
      * <code>required uint32 versionConfirm = 32;</code>
@@ -412,6 +457,14 @@ public final class OsmandOdb {
               routingIndex_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.PARSER, extensionRegistry));
               break;
             }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                hhRoutingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              hhRoutingIndex_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.PARSER, extensionRegistry));
+              break;
+            }
             case 144: {
               bitField0_ |= 0x00000002;
               dateCreated_ = input.readInt64();
@@ -457,6 +510,9 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           routingIndex_ = java.util.Collections.unmodifiableList(routingIndex_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          hhRoutingIndex_ = java.util.Collections.unmodifiableList(hhRoutingIndex_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -847,6 +903,62 @@ public final class OsmandOdb {
       return routingIndex_.get(index);
     }
 
+    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;
+    public static final int HHROUTINGINDEX_FIELD_NUMBER = 10;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> hhRoutingIndex_;
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> getHhRoutingIndexList() {
+      return hhRoutingIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder> 
+        getHhRoutingIndexOrBuilderList() {
+      return hhRoutingIndex_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    public int getHhRoutingIndexCount() {
+      return hhRoutingIndex_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex getHhRoutingIndex(int index) {
+      return hhRoutingIndex_.get(index);
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+     *
+     * <pre>
+     * encoded as fixed32 length delimited
+     * </pre>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder getHhRoutingIndexOrBuilder(
+        int index) {
+      return hhRoutingIndex_.get(index);
+    }
+
     // required uint32 versionConfirm = 32;
     public static final int VERSIONCONFIRM_FIELD_NUMBER = 32;
     private int versionConfirm_;
@@ -880,6 +992,7 @@ public final class OsmandOdb {
       poiIndex_ = java.util.Collections.emptyList();
       mapIndex_ = java.util.Collections.emptyList();
       routingIndex_ = java.util.Collections.emptyList();
+      hhRoutingIndex_ = java.util.Collections.emptyList();
       versionConfirm_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -935,6 +1048,12 @@ public final class OsmandOdb {
           return false;
         }
       }
+      for (int i = 0; i < getHhRoutingIndexCount(); i++) {
+        if (!getHhRoutingIndex(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -959,6 +1078,9 @@ public final class OsmandOdb {
       }
       for (int i = 0; i < routingIndex_.size(); i++) {
         output.writeMessage(9, routingIndex_.get(i));
+      }
+      for (int i = 0; i < hhRoutingIndex_.size(); i++) {
+        output.writeMessage(10, hhRoutingIndex_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(18, dateCreated_);
@@ -1001,6 +1123,10 @@ public final class OsmandOdb {
       for (int i = 0; i < routingIndex_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, routingIndex_.get(i));
+      }
+      for (int i = 0; i < hhRoutingIndex_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, hhRoutingIndex_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1133,6 +1259,7 @@ public final class OsmandOdb {
           getPoiIndexFieldBuilder();
           getMapIndexFieldBuilder();
           getRoutingIndexFieldBuilder();
+          getHhRoutingIndexFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1181,8 +1308,14 @@ public final class OsmandOdb {
         } else {
           routingIndexBuilder_.clear();
         }
+        if (hhRoutingIndexBuilder_ == null) {
+          hhRoutingIndex_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          hhRoutingIndexBuilder_.clear();
+        }
         versionConfirm_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -1272,7 +1405,16 @@ public final class OsmandOdb {
         } else {
           result.routingIndex_ = routingIndexBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (hhRoutingIndexBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            hhRoutingIndex_ = java.util.Collections.unmodifiableList(hhRoutingIndex_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.hhRoutingIndex_ = hhRoutingIndex_;
+        } else {
+          result.hhRoutingIndex_ = hhRoutingIndexBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000008;
         }
         result.versionConfirm_ = versionConfirm_;
@@ -1431,6 +1573,32 @@ public final class OsmandOdb {
             }
           }
         }
+        if (hhRoutingIndexBuilder_ == null) {
+          if (!other.hhRoutingIndex_.isEmpty()) {
+            if (hhRoutingIndex_.isEmpty()) {
+              hhRoutingIndex_ = other.hhRoutingIndex_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureHhRoutingIndexIsMutable();
+              hhRoutingIndex_.addAll(other.hhRoutingIndex_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.hhRoutingIndex_.isEmpty()) {
+            if (hhRoutingIndexBuilder_.isEmpty()) {
+              hhRoutingIndexBuilder_.dispose();
+              hhRoutingIndexBuilder_ = null;
+              hhRoutingIndex_ = other.hhRoutingIndex_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              hhRoutingIndexBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHhRoutingIndexFieldBuilder() : null;
+            } else {
+              hhRoutingIndexBuilder_.addAllMessages(other.hhRoutingIndex_);
+            }
+          }
+        }
         if (other.hasVersionConfirm()) {
           setVersionConfirm(other.getVersionConfirm());
         }
@@ -1483,6 +1651,12 @@ public final class OsmandOdb {
         }
         for (int i = 0; i < getRoutingIndexCount(); i++) {
           if (!getRoutingIndex(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getHhRoutingIndexCount(); i++) {
+          if (!getHhRoutingIndex(i).isInitialized()) {
             
             return false;
           }
@@ -3322,6 +3496,318 @@ public final class OsmandOdb {
         return routingIndexBuilder_;
       }
 
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> hhRoutingIndex_ =
+        java.util.Collections.emptyList();
+      private void ensureHhRoutingIndexIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          hhRoutingIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex>(hhRoutingIndex_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder> hhRoutingIndexBuilder_;
+
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> getHhRoutingIndexList() {
+        if (hhRoutingIndexBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(hhRoutingIndex_);
+        } else {
+          return hhRoutingIndexBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public int getHhRoutingIndexCount() {
+        if (hhRoutingIndexBuilder_ == null) {
+          return hhRoutingIndex_.size();
+        } else {
+          return hhRoutingIndexBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex getHhRoutingIndex(int index) {
+        if (hhRoutingIndexBuilder_ == null) {
+          return hhRoutingIndex_.get(index);
+        } else {
+          return hhRoutingIndexBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder setHhRoutingIndex(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex value) {
+        if (hhRoutingIndexBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.set(index, value);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder setHhRoutingIndex(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder builderForValue) {
+        if (hhRoutingIndexBuilder_ == null) {
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder addHhRoutingIndex(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex value) {
+        if (hhRoutingIndexBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.add(value);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder addHhRoutingIndex(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex value) {
+        if (hhRoutingIndexBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.add(index, value);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder addHhRoutingIndex(
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder builderForValue) {
+        if (hhRoutingIndexBuilder_ == null) {
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.add(builderForValue.build());
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder addHhRoutingIndex(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder builderForValue) {
+        if (hhRoutingIndexBuilder_ == null) {
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder addAllHhRoutingIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex> values) {
+        if (hhRoutingIndexBuilder_ == null) {
+          ensureHhRoutingIndexIsMutable();
+          super.addAll(values, hhRoutingIndex_);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder clearHhRoutingIndex() {
+        if (hhRoutingIndexBuilder_ == null) {
+          hhRoutingIndex_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public Builder removeHhRoutingIndex(int index) {
+        if (hhRoutingIndexBuilder_ == null) {
+          ensureHhRoutingIndexIsMutable();
+          hhRoutingIndex_.remove(index);
+          onChanged();
+        } else {
+          hhRoutingIndexBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder getHhRoutingIndexBuilder(
+          int index) {
+        return getHhRoutingIndexFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder getHhRoutingIndexOrBuilder(
+          int index) {
+        if (hhRoutingIndexBuilder_ == null) {
+          return hhRoutingIndex_.get(index);  } else {
+          return hhRoutingIndexBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder> 
+           getHhRoutingIndexOrBuilderList() {
+        if (hhRoutingIndexBuilder_ != null) {
+          return hhRoutingIndexBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(hhRoutingIndex_);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder addHhRoutingIndexBuilder() {
+        return getHhRoutingIndexFieldBuilder().addBuilder(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder addHhRoutingIndexBuilder(
+          int index) {
+        return getHhRoutingIndexFieldBuilder().addBuilder(
+            index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex hhRoutingIndex = 10;</code>
+       *
+       * <pre>
+       * encoded as fixed32 length delimited
+       * </pre>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder> 
+           getHhRoutingIndexBuilderList() {
+        return getHhRoutingIndexFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder> 
+          getHhRoutingIndexFieldBuilder() {
+        if (hhRoutingIndexBuilder_ == null) {
+          hhRoutingIndexBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder>(
+                  hhRoutingIndex_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          hhRoutingIndex_ = null;
+        }
+        return hhRoutingIndexBuilder_;
+      }
+
       // required uint32 versionConfirm = 32;
       private int versionConfirm_ ;
       /**
@@ -3332,7 +3818,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasVersionConfirm() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>required uint32 versionConfirm = 32;</code>
@@ -3352,7 +3838,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder setVersionConfirm(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         versionConfirm_ = value;
         onChanged();
         return this;
@@ -3365,7 +3851,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearVersionConfirm() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         versionConfirm_ = 0;
         onChanged();
         return this;
@@ -65323,6 +65809,6679 @@ public final class OsmandOdb {
     // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndRoutingIndex)
   }
 
+  public interface OsmAndHHRoutingIndexOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required int64 edition = 1;
+    /**
+     * <code>required int64 edition = 1;</code>
+     *
+     * <pre>
+     * usually timestamp creation checks consistency
+     * </pre>
+     */
+    boolean hasEdition();
+    /**
+     * <code>required int64 edition = 1;</code>
+     *
+     * <pre>
+     * usually timestamp creation checks consistency
+     * </pre>
+     */
+    long getEdition();
+
+    // required string profile = 2;
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    boolean hasProfile();
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    java.lang.String getProfile();
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getProfileBytes();
+
+    // repeated string profileParams = 3;
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    java.util.List<java.lang.String>
+    getProfileParamsList();
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    int getProfileParamsCount();
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    java.lang.String getProfileParams(int index);
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getProfileParamsBytes(int index);
+
+    // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    boolean hasPointBoxes();
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes();
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder();
+
+    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> 
+        getPointSegmentsList();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getPointSegments(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    int getPointSegmentsCount();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+        getPointSegmentsOrBuilderList();
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getPointSegmentsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex}
+   *
+   * <pre>
+   * HH Routing index need to be consistent with global file and include fully referenced clusters
+   * </pre>
+   */
+  public static final class OsmAndHHRoutingIndex extends
+      com.google.protobuf.GeneratedMessage
+      implements OsmAndHHRoutingIndexOrBuilder {
+    // Use OsmAndHHRoutingIndex.newBuilder() to construct.
+    private OsmAndHHRoutingIndex(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private OsmAndHHRoutingIndex(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final OsmAndHHRoutingIndex defaultInstance;
+    public static OsmAndHHRoutingIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public OsmAndHHRoutingIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OsmAndHHRoutingIndex(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              edition_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              profile_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                profileParams_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              profileParams_.add(input.readBytes());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = pointBoxes_.toBuilder();
+              }
+              pointBoxes_ = input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(pointBoxes_);
+                pointBoxes_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              pointSegments_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(profileParams_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<OsmAndHHRoutingIndex> PARSER =
+        new com.google.protobuf.AbstractParser<OsmAndHHRoutingIndex>() {
+      public OsmAndHHRoutingIndex parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OsmAndHHRoutingIndex(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OsmAndHHRoutingIndex> getParserForType() {
+      return PARSER;
+    }
+
+    public interface HHRoutePointsBoxOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required sint32 left = 2;
+      /**
+       * <code>required sint32 left = 2;</code>
+       *
+       * <pre>
+       * for root box is absolute coordinates same as RouteDataBox
+       * </pre>
+       */
+      boolean hasLeft();
+      /**
+       * <code>required sint32 left = 2;</code>
+       *
+       * <pre>
+       * for root box is absolute coordinates same as RouteDataBox
+       * </pre>
+       */
+      int getLeft();
+
+      // required sint32 right = 3;
+      /**
+       * <code>required sint32 right = 3;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      boolean hasRight();
+      /**
+       * <code>required sint32 right = 3;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      int getRight();
+
+      // required sint32 top = 4;
+      /**
+       * <code>required sint32 top = 4;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      boolean hasTop();
+      /**
+       * <code>required sint32 top = 4;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      int getTop();
+
+      // required sint32 bottom = 5;
+      /**
+       * <code>required sint32 bottom = 5;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      boolean hasBottom();
+      /**
+       * <code>required sint32 bottom = 5;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      int getBottom();
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> 
+          getBoxesList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getBoxes(int index);
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      int getBoxesCount();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
+          getBoxesOrBuilderList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getBoxesOrBuilder(
+          int index);
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> 
+          getPointsList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint getPoints(int index);
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      int getPointsCount();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder> 
+          getPointsOrBuilderList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder getPointsOrBuilder(
+          int index);
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox}
+     */
+    public static final class HHRoutePointsBox extends
+        com.google.protobuf.GeneratedMessage
+        implements HHRoutePointsBoxOrBuilder {
+      // Use HHRoutePointsBox.newBuilder() to construct.
+      private HHRoutePointsBox(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private HHRoutePointsBox(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final HHRoutePointsBox defaultInstance;
+      public static HHRoutePointsBox getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public HHRoutePointsBox getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private HHRoutePointsBox(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000001;
+                left_ = input.readSInt32();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000002;
+                right_ = input.readSInt32();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000004;
+                top_ = input.readSInt32();
+                break;
+              }
+              case 40: {
+                bitField0_ |= 0x00000008;
+                bottom_ = input.readSInt32();
+                break;
+              }
+              case 50: {
+                if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                  boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox>();
+                  mutable_bitField0_ |= 0x00000010;
+                }
+                boxes_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.PARSER, extensionRegistry));
+                break;
+              }
+              case 58: {
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                  points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                points_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.PARSER, extensionRegistry));
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+            boxes_ = java.util.Collections.unmodifiableList(boxes_);
+          }
+          if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            points_ = java.util.Collections.unmodifiableList(points_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<HHRoutePointsBox> PARSER =
+          new com.google.protobuf.AbstractParser<HHRoutePointsBox>() {
+        public HHRoutePointsBox parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new HHRoutePointsBox(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<HHRoutePointsBox> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // required sint32 left = 2;
+      public static final int LEFT_FIELD_NUMBER = 2;
+      private int left_;
+      /**
+       * <code>required sint32 left = 2;</code>
+       *
+       * <pre>
+       * for root box is absolute coordinates same as RouteDataBox
+       * </pre>
+       */
+      public boolean hasLeft() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required sint32 left = 2;</code>
+       *
+       * <pre>
+       * for root box is absolute coordinates same as RouteDataBox
+       * </pre>
+       */
+      public int getLeft() {
+        return left_;
+      }
+
+      // required sint32 right = 3;
+      public static final int RIGHT_FIELD_NUMBER = 3;
+      private int right_;
+      /**
+       * <code>required sint32 right = 3;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public boolean hasRight() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required sint32 right = 3;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public int getRight() {
+        return right_;
+      }
+
+      // required sint32 top = 4;
+      public static final int TOP_FIELD_NUMBER = 4;
+      private int top_;
+      /**
+       * <code>required sint32 top = 4;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public boolean hasTop() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required sint32 top = 4;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public int getTop() {
+        return top_;
+      }
+
+      // required sint32 bottom = 5;
+      public static final int BOTTOM_FIELD_NUMBER = 5;
+      private int bottom_;
+      /**
+       * <code>required sint32 bottom = 5;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public boolean hasBottom() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required sint32 bottom = 5;</code>
+       *
+       * <pre>
+       * delta encoded
+       * </pre>
+       */
+      public int getBottom() {
+        return bottom_;
+      }
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;
+      public static final int BOXES_FIELD_NUMBER = 6;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> boxes_;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> getBoxesList() {
+        return boxes_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
+          getBoxesOrBuilderList() {
+        return boxes_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      public int getBoxesCount() {
+        return boxes_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getBoxes(int index) {
+        return boxes_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getBoxesOrBuilder(
+          int index) {
+        return boxes_.get(index);
+      }
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;
+      public static final int POINTS_FIELD_NUMBER = 7;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> points_;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> getPointsList() {
+        return points_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder> 
+          getPointsOrBuilderList() {
+        return points_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      public int getPointsCount() {
+        return points_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint getPoints(int index) {
+        return points_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder getPointsOrBuilder(
+          int index) {
+        return points_.get(index);
+      }
+
+      private void initFields() {
+        left_ = 0;
+        right_ = 0;
+        top_ = 0;
+        bottom_ = 0;
+        boxes_ = java.util.Collections.emptyList();
+        points_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasLeft()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasRight()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasTop()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasBottom()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        for (int i = 0; i < getBoxesCount(); i++) {
+          if (!getBoxes(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        for (int i = 0; i < getPointsCount(); i++) {
+          if (!getPoints(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeSInt32(2, left_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeSInt32(3, right_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeSInt32(4, top_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeSInt32(5, bottom_);
+        }
+        for (int i = 0; i < boxes_.size(); i++) {
+          output.writeMessage(6, boxes_.get(i));
+        }
+        for (int i = 0; i < points_.size(); i++) {
+          output.writeMessage(7, points_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(2, left_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(3, right_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(4, top_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(5, bottom_);
+        }
+        for (int i = 0; i < boxes_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(6, boxes_.get(i));
+        }
+        for (int i = 0; i < points_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(7, points_.get(i));
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder.class);
+        }
+
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getBoxesFieldBuilder();
+            getPointsFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          left_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          right_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          top_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          bottom_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          if (boxesBuilder_ == null) {
+            boxes_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            boxesBuilder_.clear();
+          }
+          if (pointsBuilder_ == null) {
+            points_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            pointsBuilder_.clear();
+          }
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox build() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox buildPartial() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox result = new net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.left_ = left_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.right_ = right_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.top_ = top_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.bottom_ = bottom_;
+          if (boxesBuilder_ == null) {
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+              boxes_ = java.util.Collections.unmodifiableList(boxes_);
+              bitField0_ = (bitField0_ & ~0x00000010);
+            }
+            result.boxes_ = boxes_;
+          } else {
+            result.boxes_ = boxesBuilder_.build();
+          }
+          if (pointsBuilder_ == null) {
+            if (((bitField0_ & 0x00000020) == 0x00000020)) {
+              points_ = java.util.Collections.unmodifiableList(points_);
+              bitField0_ = (bitField0_ & ~0x00000020);
+            }
+            result.points_ = points_;
+          } else {
+            result.points_ = pointsBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance()) return this;
+          if (other.hasLeft()) {
+            setLeft(other.getLeft());
+          }
+          if (other.hasRight()) {
+            setRight(other.getRight());
+          }
+          if (other.hasTop()) {
+            setTop(other.getTop());
+          }
+          if (other.hasBottom()) {
+            setBottom(other.getBottom());
+          }
+          if (boxesBuilder_ == null) {
+            if (!other.boxes_.isEmpty()) {
+              if (boxes_.isEmpty()) {
+                boxes_ = other.boxes_;
+                bitField0_ = (bitField0_ & ~0x00000010);
+              } else {
+                ensureBoxesIsMutable();
+                boxes_.addAll(other.boxes_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.boxes_.isEmpty()) {
+              if (boxesBuilder_.isEmpty()) {
+                boxesBuilder_.dispose();
+                boxesBuilder_ = null;
+                boxes_ = other.boxes_;
+                bitField0_ = (bitField0_ & ~0x00000010);
+                boxesBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getBoxesFieldBuilder() : null;
+              } else {
+                boxesBuilder_.addAllMessages(other.boxes_);
+              }
+            }
+          }
+          if (pointsBuilder_ == null) {
+            if (!other.points_.isEmpty()) {
+              if (points_.isEmpty()) {
+                points_ = other.points_;
+                bitField0_ = (bitField0_ & ~0x00000020);
+              } else {
+                ensurePointsIsMutable();
+                points_.addAll(other.points_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.points_.isEmpty()) {
+              if (pointsBuilder_.isEmpty()) {
+                pointsBuilder_.dispose();
+                pointsBuilder_ = null;
+                points_ = other.points_;
+                bitField0_ = (bitField0_ & ~0x00000020);
+                pointsBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getPointsFieldBuilder() : null;
+              } else {
+                pointsBuilder_.addAllMessages(other.points_);
+              }
+            }
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasLeft()) {
+            
+            return false;
+          }
+          if (!hasRight()) {
+            
+            return false;
+          }
+          if (!hasTop()) {
+            
+            return false;
+          }
+          if (!hasBottom()) {
+            
+            return false;
+          }
+          for (int i = 0; i < getBoxesCount(); i++) {
+            if (!getBoxes(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          for (int i = 0; i < getPointsCount(); i++) {
+            if (!getPoints(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required sint32 left = 2;
+        private int left_ ;
+        /**
+         * <code>required sint32 left = 2;</code>
+         *
+         * <pre>
+         * for root box is absolute coordinates same as RouteDataBox
+         * </pre>
+         */
+        public boolean hasLeft() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required sint32 left = 2;</code>
+         *
+         * <pre>
+         * for root box is absolute coordinates same as RouteDataBox
+         * </pre>
+         */
+        public int getLeft() {
+          return left_;
+        }
+        /**
+         * <code>required sint32 left = 2;</code>
+         *
+         * <pre>
+         * for root box is absolute coordinates same as RouteDataBox
+         * </pre>
+         */
+        public Builder setLeft(int value) {
+          bitField0_ |= 0x00000001;
+          left_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 left = 2;</code>
+         *
+         * <pre>
+         * for root box is absolute coordinates same as RouteDataBox
+         * </pre>
+         */
+        public Builder clearLeft() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          left_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required sint32 right = 3;
+        private int right_ ;
+        /**
+         * <code>required sint32 right = 3;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public boolean hasRight() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required sint32 right = 3;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public int getRight() {
+          return right_;
+        }
+        /**
+         * <code>required sint32 right = 3;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder setRight(int value) {
+          bitField0_ |= 0x00000002;
+          right_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 right = 3;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder clearRight() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          right_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required sint32 top = 4;
+        private int top_ ;
+        /**
+         * <code>required sint32 top = 4;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public boolean hasTop() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required sint32 top = 4;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public int getTop() {
+          return top_;
+        }
+        /**
+         * <code>required sint32 top = 4;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder setTop(int value) {
+          bitField0_ |= 0x00000004;
+          top_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 top = 4;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder clearTop() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          top_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required sint32 bottom = 5;
+        private int bottom_ ;
+        /**
+         * <code>required sint32 bottom = 5;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public boolean hasBottom() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>required sint32 bottom = 5;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public int getBottom() {
+          return bottom_;
+        }
+        /**
+         * <code>required sint32 bottom = 5;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder setBottom(int value) {
+          bitField0_ |= 0x00000008;
+          bottom_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 bottom = 5;</code>
+         *
+         * <pre>
+         * delta encoded
+         * </pre>
+         */
+        public Builder clearBottom() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          bottom_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;
+        private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> boxes_ =
+          java.util.Collections.emptyList();
+        private void ensureBoxesIsMutable() {
+          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+            boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox>(boxes_);
+            bitField0_ |= 0x00000010;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> boxesBuilder_;
+
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> getBoxesList() {
+          if (boxesBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(boxes_);
+          } else {
+            return boxesBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public int getBoxesCount() {
+          if (boxesBuilder_ == null) {
+            return boxes_.size();
+          } else {
+            return boxesBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getBoxes(int index) {
+          if (boxesBuilder_ == null) {
+            return boxes_.get(index);
+          } else {
+            return boxesBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder setBoxes(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
+          if (boxesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureBoxesIsMutable();
+            boxes_.set(index, value);
+            onChanged();
+          } else {
+            boxesBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder setBoxes(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
+          if (boxesBuilder_ == null) {
+            ensureBoxesIsMutable();
+            boxes_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            boxesBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder addBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
+          if (boxesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureBoxesIsMutable();
+            boxes_.add(value);
+            onChanged();
+          } else {
+            boxesBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder addBoxes(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
+          if (boxesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureBoxesIsMutable();
+            boxes_.add(index, value);
+            onChanged();
+          } else {
+            boxesBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder addBoxes(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
+          if (boxesBuilder_ == null) {
+            ensureBoxesIsMutable();
+            boxes_.add(builderForValue.build());
+            onChanged();
+          } else {
+            boxesBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder addBoxes(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
+          if (boxesBuilder_ == null) {
+            ensureBoxesIsMutable();
+            boxes_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            boxesBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder addAllBoxes(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox> values) {
+          if (boxesBuilder_ == null) {
+            ensureBoxesIsMutable();
+            super.addAll(values, boxes_);
+            onChanged();
+          } else {
+            boxesBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder clearBoxes() {
+          if (boxesBuilder_ == null) {
+            boxes_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000010);
+            onChanged();
+          } else {
+            boxesBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public Builder removeBoxes(int index) {
+          if (boxesBuilder_ == null) {
+            ensureBoxesIsMutable();
+            boxes_.remove(index);
+            onChanged();
+          } else {
+            boxesBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder getBoxesBuilder(
+            int index) {
+          return getBoxesFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getBoxesOrBuilder(
+            int index) {
+          if (boxesBuilder_ == null) {
+            return boxes_.get(index);  } else {
+            return boxesBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
+             getBoxesOrBuilderList() {
+          if (boxesBuilder_ != null) {
+            return boxesBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(boxes_);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder addBoxesBuilder() {
+          return getBoxesFieldBuilder().addBuilder(
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder addBoxesBuilder(
+            int index) {
+          return getBoxesFieldBuilder().addBuilder(
+              index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox boxes = 6;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder> 
+             getBoxesBuilderList() {
+          return getBoxesFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
+            getBoxesFieldBuilder() {
+          if (boxesBuilder_ == null) {
+            boxesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder>(
+                    boxes_,
+                    ((bitField0_ & 0x00000010) == 0x00000010),
+                    getParentForChildren(),
+                    isClean());
+            boxes_ = null;
+          }
+          return boxesBuilder_;
+        }
+
+        // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;
+        private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> points_ =
+          java.util.Collections.emptyList();
+        private void ensurePointsIsMutable() {
+          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+            points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint>(points_);
+            bitField0_ |= 0x00000020;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder> pointsBuilder_;
+
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> getPointsList() {
+          if (pointsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(points_);
+          } else {
+            return pointsBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public int getPointsCount() {
+          if (pointsBuilder_ == null) {
+            return points_.size();
+          } else {
+            return pointsBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint getPoints(int index) {
+          if (pointsBuilder_ == null) {
+            return points_.get(index);
+          } else {
+            return pointsBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder setPoints(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint value) {
+          if (pointsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointsIsMutable();
+            points_.set(index, value);
+            onChanged();
+          } else {
+            pointsBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder setPoints(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder builderForValue) {
+          if (pointsBuilder_ == null) {
+            ensurePointsIsMutable();
+            points_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            pointsBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder addPoints(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint value) {
+          if (pointsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointsIsMutable();
+            points_.add(value);
+            onChanged();
+          } else {
+            pointsBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder addPoints(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint value) {
+          if (pointsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointsIsMutable();
+            points_.add(index, value);
+            onChanged();
+          } else {
+            pointsBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder addPoints(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder builderForValue) {
+          if (pointsBuilder_ == null) {
+            ensurePointsIsMutable();
+            points_.add(builderForValue.build());
+            onChanged();
+          } else {
+            pointsBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder addPoints(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder builderForValue) {
+          if (pointsBuilder_ == null) {
+            ensurePointsIsMutable();
+            points_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            pointsBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder addAllPoints(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint> values) {
+          if (pointsBuilder_ == null) {
+            ensurePointsIsMutable();
+            super.addAll(values, points_);
+            onChanged();
+          } else {
+            pointsBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder clearPoints() {
+          if (pointsBuilder_ == null) {
+            points_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000020);
+            onChanged();
+          } else {
+            pointsBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public Builder removePoints(int index) {
+          if (pointsBuilder_ == null) {
+            ensurePointsIsMutable();
+            points_.remove(index);
+            onChanged();
+          } else {
+            pointsBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder getPointsBuilder(
+            int index) {
+          return getPointsFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder getPointsOrBuilder(
+            int index) {
+          if (pointsBuilder_ == null) {
+            return points_.get(index);  } else {
+            return pointsBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder> 
+             getPointsOrBuilderList() {
+          if (pointsBuilder_ != null) {
+            return pointsBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(points_);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder addPointsBuilder() {
+          return getPointsFieldBuilder().addBuilder(
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder addPointsBuilder(
+            int index) {
+          return getPointsFieldBuilder().addBuilder(
+              index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint points = 7;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder> 
+             getPointsBuilderList() {
+          return getPointsFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder> 
+            getPointsFieldBuilder() {
+          if (pointsBuilder_ == null) {
+            pointsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder>(
+                    points_,
+                    ((bitField0_ & 0x00000020) == 0x00000020),
+                    getParentForChildren(),
+                    isClean());
+            points_ = null;
+          }
+          return pointsBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox)
+      }
+
+      static {
+        defaultInstance = new HHRoutePointsBox(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox)
+    }
+
+    public interface HHRouteNetworkPointOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required int32 id = 1;
+      /**
+       * <code>required int32 id = 1;</code>
+       *
+       * <pre>
+       * id in file to reference shortcuts
+       * </pre>
+       */
+      boolean hasId();
+      /**
+       * <code>required int32 id = 1;</code>
+       *
+       * <pre>
+       * id in file to reference shortcuts
+       * </pre>
+       */
+      int getId();
+
+      // required sint32 dx = 2;
+      /**
+       * <code>required sint32 dx = 2;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      boolean hasDx();
+      /**
+       * <code>required sint32 dx = 2;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      int getDx();
+
+      // required sint32 dy = 3;
+      /**
+       * <code>required sint32 dy = 3;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      boolean hasDy();
+      /**
+       * <code>required sint32 dy = 3;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      int getDy();
+
+      // required int32 globalId = 4;
+      /**
+       * <code>required int32 globalId = 4;</code>
+       */
+      boolean hasGlobalId();
+      /**
+       * <code>required int32 globalId = 4;</code>
+       */
+      int getGlobalId();
+
+      // required int64 roadId = 5;
+      /**
+       * <code>required int64 roadId = 5;</code>
+       */
+      boolean hasRoadId();
+      /**
+       * <code>required int64 roadId = 5;</code>
+       */
+      long getRoadId();
+
+      // required int32 roadStartEndIndex = 6;
+      /**
+       * <code>required int32 roadStartEndIndex = 6;</code>
+       *
+       * <pre>
+       * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+       * </pre>
+       */
+      boolean hasRoadStartEndIndex();
+      /**
+       * <code>required int32 roadStartEndIndex = 6;</code>
+       *
+       * <pre>
+       * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+       * </pre>
+       */
+      int getRoadStartEndIndex();
+
+      // optional int32 clusterId = 7;
+      /**
+       * <code>optional int32 clusterId = 7;</code>
+       */
+      boolean hasClusterId();
+      /**
+       * <code>optional int32 clusterId = 7;</code>
+       */
+      int getClusterId();
+
+      // optional int32 dualPointId = 8;
+      /**
+       * <code>optional int32 dualPointId = 8;</code>
+       */
+      boolean hasDualPointId();
+      /**
+       * <code>optional int32 dualPointId = 8;</code>
+       */
+      int getDualPointId();
+
+      // optional int32 dualClusterId = 9;
+      /**
+       * <code>optional int32 dualClusterId = 9;</code>
+       */
+      boolean hasDualClusterId();
+      /**
+       * <code>optional int32 dualClusterId = 9;</code>
+       */
+      int getDualClusterId();
+
+      // repeated int32 profileIds = 10;
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      java.util.List<java.lang.Integer> getProfileIdsList();
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      int getProfileIdsCount();
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      int getProfileIds(int index);
+
+      // optional int32 partialInd = 11;
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      boolean hasPartialInd();
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      int getPartialInd();
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint}
+     */
+    public static final class HHRouteNetworkPoint extends
+        com.google.protobuf.GeneratedMessage
+        implements HHRouteNetworkPointOrBuilder {
+      // Use HHRouteNetworkPoint.newBuilder() to construct.
+      private HHRouteNetworkPoint(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private HHRouteNetworkPoint(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final HHRouteNetworkPoint defaultInstance;
+      public static HHRouteNetworkPoint getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public HHRouteNetworkPoint getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private HHRouteNetworkPoint(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                id_ = input.readInt32();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                dx_ = input.readSInt32();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                dy_ = input.readSInt32();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                globalId_ = input.readInt32();
+                break;
+              }
+              case 40: {
+                bitField0_ |= 0x00000010;
+                roadId_ = input.readInt64();
+                break;
+              }
+              case 48: {
+                bitField0_ |= 0x00000020;
+                roadStartEndIndex_ = input.readInt32();
+                break;
+              }
+              case 56: {
+                bitField0_ |= 0x00000040;
+                clusterId_ = input.readInt32();
+                break;
+              }
+              case 64: {
+                bitField0_ |= 0x00000080;
+                dualPointId_ = input.readInt32();
+                break;
+              }
+              case 72: {
+                bitField0_ |= 0x00000100;
+                dualClusterId_ = input.readInt32();
+                break;
+              }
+              case 80: {
+                if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                  profileIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000200;
+                }
+                profileIds_.add(input.readInt32());
+                break;
+              }
+              case 82: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
+                  profileIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000200;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  profileIds_.add(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
+              case 88: {
+                bitField0_ |= 0x00000200;
+                partialInd_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+            profileIds_ = java.util.Collections.unmodifiableList(profileIds_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<HHRouteNetworkPoint> PARSER =
+          new com.google.protobuf.AbstractParser<HHRouteNetworkPoint>() {
+        public HHRouteNetworkPoint parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new HHRouteNetworkPoint(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<HHRouteNetworkPoint> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // required int32 id = 1;
+      public static final int ID_FIELD_NUMBER = 1;
+      private int id_;
+      /**
+       * <code>required int32 id = 1;</code>
+       *
+       * <pre>
+       * id in file to reference shortcuts
+       * </pre>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 id = 1;</code>
+       *
+       * <pre>
+       * id in file to reference shortcuts
+       * </pre>
+       */
+      public int getId() {
+        return id_;
+      }
+
+      // required sint32 dx = 2;
+      public static final int DX_FIELD_NUMBER = 2;
+      private int dx_;
+      /**
+       * <code>required sint32 dx = 2;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      public boolean hasDx() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required sint32 dx = 2;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      public int getDx() {
+        return dx_;
+      }
+
+      // required sint32 dy = 3;
+      public static final int DY_FIELD_NUMBER = 3;
+      private int dy_;
+      /**
+       * <code>required sint32 dy = 3;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      public boolean hasDy() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required sint32 dy = 3;</code>
+       *
+       * <pre>
+       * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+       * </pre>
+       */
+      public int getDy() {
+        return dy_;
+      }
+
+      // required int32 globalId = 4;
+      public static final int GLOBALID_FIELD_NUMBER = 4;
+      private int globalId_;
+      /**
+       * <code>required int32 globalId = 4;</code>
+       */
+      public boolean hasGlobalId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 globalId = 4;</code>
+       */
+      public int getGlobalId() {
+        return globalId_;
+      }
+
+      // required int64 roadId = 5;
+      public static final int ROADID_FIELD_NUMBER = 5;
+      private long roadId_;
+      /**
+       * <code>required int64 roadId = 5;</code>
+       */
+      public boolean hasRoadId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int64 roadId = 5;</code>
+       */
+      public long getRoadId() {
+        return roadId_;
+      }
+
+      // required int32 roadStartEndIndex = 6;
+      public static final int ROADSTARTENDINDEX_FIELD_NUMBER = 6;
+      private int roadStartEndIndex_;
+      /**
+       * <code>required int32 roadStartEndIndex = 6;</code>
+       *
+       * <pre>
+       * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+       * </pre>
+       */
+      public boolean hasRoadStartEndIndex() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required int32 roadStartEndIndex = 6;</code>
+       *
+       * <pre>
+       * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+       * </pre>
+       */
+      public int getRoadStartEndIndex() {
+        return roadStartEndIndex_;
+      }
+
+      // optional int32 clusterId = 7;
+      public static final int CLUSTERID_FIELD_NUMBER = 7;
+      private int clusterId_;
+      /**
+       * <code>optional int32 clusterId = 7;</code>
+       */
+      public boolean hasClusterId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 clusterId = 7;</code>
+       */
+      public int getClusterId() {
+        return clusterId_;
+      }
+
+      // optional int32 dualPointId = 8;
+      public static final int DUALPOINTID_FIELD_NUMBER = 8;
+      private int dualPointId_;
+      /**
+       * <code>optional int32 dualPointId = 8;</code>
+       */
+      public boolean hasDualPointId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 dualPointId = 8;</code>
+       */
+      public int getDualPointId() {
+        return dualPointId_;
+      }
+
+      // optional int32 dualClusterId = 9;
+      public static final int DUALCLUSTERID_FIELD_NUMBER = 9;
+      private int dualClusterId_;
+      /**
+       * <code>optional int32 dualClusterId = 9;</code>
+       */
+      public boolean hasDualClusterId() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int32 dualClusterId = 9;</code>
+       */
+      public int getDualClusterId() {
+        return dualClusterId_;
+      }
+
+      // repeated int32 profileIds = 10;
+      public static final int PROFILEIDS_FIELD_NUMBER = 10;
+      private java.util.List<java.lang.Integer> profileIds_;
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getProfileIdsList() {
+        return profileIds_;
+      }
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      public int getProfileIdsCount() {
+        return profileIds_.size();
+      }
+      /**
+       * <code>repeated int32 profileIds = 10;</code>
+       *
+       * <pre>
+       * applied to specific profiles (if empty then applied to all profiles)
+       * </pre>
+       */
+      public int getProfileIds(int index) {
+        return profileIds_.get(index);
+      }
+
+      // optional int32 partialInd = 11;
+      public static final int PARTIALIND_FIELD_NUMBER = 11;
+      private int partialInd_;
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      public boolean hasPartialInd() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 partialInd = 11;</code>
+       *
+       * <pre>
+       * partialInd &gt; 0, means that it's a partially written node without clusters
+       * </pre>
+       */
+      public int getPartialInd() {
+        return partialInd_;
+      }
+
+      private void initFields() {
+        id_ = 0;
+        dx_ = 0;
+        dy_ = 0;
+        globalId_ = 0;
+        roadId_ = 0L;
+        roadStartEndIndex_ = 0;
+        clusterId_ = 0;
+        dualPointId_ = 0;
+        dualClusterId_ = 0;
+        profileIds_ = java.util.Collections.emptyList();
+        partialInd_ = 0;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasDx()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasDy()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasGlobalId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasRoadId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasRoadStartEndIndex()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt32(1, id_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeSInt32(2, dx_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeSInt32(3, dy_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(4, globalId_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeInt64(5, roadId_);
+        }
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          output.writeInt32(6, roadStartEndIndex_);
+        }
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          output.writeInt32(7, clusterId_);
+        }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          output.writeInt32(8, dualPointId_);
+        }
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          output.writeInt32(9, dualClusterId_);
+        }
+        for (int i = 0; i < profileIds_.size(); i++) {
+          output.writeInt32(10, profileIds_.get(i));
+        }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          output.writeInt32(11, partialInd_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, id_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(2, dx_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(3, dy_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(4, globalId_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(5, roadId_);
+        }
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(6, roadStartEndIndex_);
+        }
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(7, clusterId_);
+        }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(8, dualPointId_);
+        }
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(9, dualClusterId_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < profileIds_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(profileIds_.get(i));
+          }
+          size += dataSize;
+          size += 1 * getProfileIdsList().size();
+        }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(11, partialInd_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPointOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.Builder.class);
+        }
+
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          id_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          dx_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          dy_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          globalId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          roadId_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000010);
+          roadStartEndIndex_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000020);
+          clusterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000040);
+          dualPointId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000080);
+          dualClusterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000100);
+          profileIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          partialInd_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000400);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.getDefaultInstance();
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint build() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint buildPartial() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint result = new net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.id_ = id_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.dx_ = dx_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.dy_ = dy_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.globalId_ = globalId_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.roadId_ = roadId_;
+          if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+            to_bitField0_ |= 0x00000020;
+          }
+          result.roadStartEndIndex_ = roadStartEndIndex_;
+          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+            to_bitField0_ |= 0x00000040;
+          }
+          result.clusterId_ = clusterId_;
+          if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+            to_bitField0_ |= 0x00000080;
+          }
+          result.dualPointId_ = dualPointId_;
+          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+            to_bitField0_ |= 0x00000100;
+          }
+          result.dualClusterId_ = dualClusterId_;
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            profileIds_ = java.util.Collections.unmodifiableList(profileIds_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.profileIds_ = profileIds_;
+          if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+            to_bitField0_ |= 0x00000200;
+          }
+          result.partialInd_ = partialInd_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint.getDefaultInstance()) return this;
+          if (other.hasId()) {
+            setId(other.getId());
+          }
+          if (other.hasDx()) {
+            setDx(other.getDx());
+          }
+          if (other.hasDy()) {
+            setDy(other.getDy());
+          }
+          if (other.hasGlobalId()) {
+            setGlobalId(other.getGlobalId());
+          }
+          if (other.hasRoadId()) {
+            setRoadId(other.getRoadId());
+          }
+          if (other.hasRoadStartEndIndex()) {
+            setRoadStartEndIndex(other.getRoadStartEndIndex());
+          }
+          if (other.hasClusterId()) {
+            setClusterId(other.getClusterId());
+          }
+          if (other.hasDualPointId()) {
+            setDualPointId(other.getDualPointId());
+          }
+          if (other.hasDualClusterId()) {
+            setDualClusterId(other.getDualClusterId());
+          }
+          if (!other.profileIds_.isEmpty()) {
+            if (profileIds_.isEmpty()) {
+              profileIds_ = other.profileIds_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureProfileIdsIsMutable();
+              profileIds_.addAll(other.profileIds_);
+            }
+            onChanged();
+          }
+          if (other.hasPartialInd()) {
+            setPartialInd(other.getPartialInd());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasId()) {
+            
+            return false;
+          }
+          if (!hasDx()) {
+            
+            return false;
+          }
+          if (!hasDy()) {
+            
+            return false;
+          }
+          if (!hasGlobalId()) {
+            
+            return false;
+          }
+          if (!hasRoadId()) {
+            
+            return false;
+          }
+          if (!hasRoadStartEndIndex()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteNetworkPoint) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required int32 id = 1;
+        private int id_ ;
+        /**
+         * <code>required int32 id = 1;</code>
+         *
+         * <pre>
+         * id in file to reference shortcuts
+         * </pre>
+         */
+        public boolean hasId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required int32 id = 1;</code>
+         *
+         * <pre>
+         * id in file to reference shortcuts
+         * </pre>
+         */
+        public int getId() {
+          return id_;
+        }
+        /**
+         * <code>required int32 id = 1;</code>
+         *
+         * <pre>
+         * id in file to reference shortcuts
+         * </pre>
+         */
+        public Builder setId(int value) {
+          bitField0_ |= 0x00000001;
+          id_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 id = 1;</code>
+         *
+         * <pre>
+         * id in file to reference shortcuts
+         * </pre>
+         */
+        public Builder clearId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          id_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required sint32 dx = 2;
+        private int dx_ ;
+        /**
+         * <code>required sint32 dx = 2;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public boolean hasDx() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required sint32 dx = 2;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public int getDx() {
+          return dx_;
+        }
+        /**
+         * <code>required sint32 dx = 2;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public Builder setDx(int value) {
+          bitField0_ |= 0x00000002;
+          dx_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 dx = 2;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public Builder clearDx() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          dx_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required sint32 dy = 3;
+        private int dy_ ;
+        /**
+         * <code>required sint32 dy = 3;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public boolean hasDy() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required sint32 dy = 3;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public int getDy() {
+          return dy_;
+        }
+        /**
+         * <code>required sint32 dy = 3;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public Builder setDy(int value) {
+          bitField0_ |= 0x00000004;
+          dy_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required sint32 dy = 3;</code>
+         *
+         * <pre>
+         * delta encoded to HHRoutePointsBox (start point 31 coordinates)
+         * </pre>
+         */
+        public Builder clearDy() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          dy_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required int32 globalId = 4;
+        private int globalId_ ;
+        /**
+         * <code>required int32 globalId = 4;</code>
+         */
+        public boolean hasGlobalId() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>required int32 globalId = 4;</code>
+         */
+        public int getGlobalId() {
+          return globalId_;
+        }
+        /**
+         * <code>required int32 globalId = 4;</code>
+         */
+        public Builder setGlobalId(int value) {
+          bitField0_ |= 0x00000008;
+          globalId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 globalId = 4;</code>
+         */
+        public Builder clearGlobalId() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          globalId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required int64 roadId = 5;
+        private long roadId_ ;
+        /**
+         * <code>required int64 roadId = 5;</code>
+         */
+        public boolean hasRoadId() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>required int64 roadId = 5;</code>
+         */
+        public long getRoadId() {
+          return roadId_;
+        }
+        /**
+         * <code>required int64 roadId = 5;</code>
+         */
+        public Builder setRoadId(long value) {
+          bitField0_ |= 0x00000010;
+          roadId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int64 roadId = 5;</code>
+         */
+        public Builder clearRoadId() {
+          bitField0_ = (bitField0_ & ~0x00000010);
+          roadId_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        // required int32 roadStartEndIndex = 6;
+        private int roadStartEndIndex_ ;
+        /**
+         * <code>required int32 roadStartEndIndex = 6;</code>
+         *
+         * <pre>
+         * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+         * </pre>
+         */
+        public boolean hasRoadStartEndIndex() {
+          return ((bitField0_ & 0x00000020) == 0x00000020);
+        }
+        /**
+         * <code>required int32 roadStartEndIndex = 6;</code>
+         *
+         * <pre>
+         * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+         * </pre>
+         */
+        public int getRoadStartEndIndex() {
+          return roadStartEndIndex_;
+        }
+        /**
+         * <code>required int32 roadStartEndIndex = 6;</code>
+         *
+         * <pre>
+         * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+         * </pre>
+         */
+        public Builder setRoadStartEndIndex(int value) {
+          bitField0_ |= 0x00000020;
+          roadStartEndIndex_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 roadStartEndIndex = 6;</code>
+         *
+         * <pre>
+         * (startIndex &lt;&lt; 1) + (endIndex &gt; startIndex ? 1 : 0)
+         * </pre>
+         */
+        public Builder clearRoadStartEndIndex() {
+          bitField0_ = (bitField0_ & ~0x00000020);
+          roadStartEndIndex_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 clusterId = 7;
+        private int clusterId_ ;
+        /**
+         * <code>optional int32 clusterId = 7;</code>
+         */
+        public boolean hasClusterId() {
+          return ((bitField0_ & 0x00000040) == 0x00000040);
+        }
+        /**
+         * <code>optional int32 clusterId = 7;</code>
+         */
+        public int getClusterId() {
+          return clusterId_;
+        }
+        /**
+         * <code>optional int32 clusterId = 7;</code>
+         */
+        public Builder setClusterId(int value) {
+          bitField0_ |= 0x00000040;
+          clusterId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 clusterId = 7;</code>
+         */
+        public Builder clearClusterId() {
+          bitField0_ = (bitField0_ & ~0x00000040);
+          clusterId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 dualPointId = 8;
+        private int dualPointId_ ;
+        /**
+         * <code>optional int32 dualPointId = 8;</code>
+         */
+        public boolean hasDualPointId() {
+          return ((bitField0_ & 0x00000080) == 0x00000080);
+        }
+        /**
+         * <code>optional int32 dualPointId = 8;</code>
+         */
+        public int getDualPointId() {
+          return dualPointId_;
+        }
+        /**
+         * <code>optional int32 dualPointId = 8;</code>
+         */
+        public Builder setDualPointId(int value) {
+          bitField0_ |= 0x00000080;
+          dualPointId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 dualPointId = 8;</code>
+         */
+        public Builder clearDualPointId() {
+          bitField0_ = (bitField0_ & ~0x00000080);
+          dualPointId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 dualClusterId = 9;
+        private int dualClusterId_ ;
+        /**
+         * <code>optional int32 dualClusterId = 9;</code>
+         */
+        public boolean hasDualClusterId() {
+          return ((bitField0_ & 0x00000100) == 0x00000100);
+        }
+        /**
+         * <code>optional int32 dualClusterId = 9;</code>
+         */
+        public int getDualClusterId() {
+          return dualClusterId_;
+        }
+        /**
+         * <code>optional int32 dualClusterId = 9;</code>
+         */
+        public Builder setDualClusterId(int value) {
+          bitField0_ |= 0x00000100;
+          dualClusterId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 dualClusterId = 9;</code>
+         */
+        public Builder clearDualClusterId() {
+          bitField0_ = (bitField0_ & ~0x00000100);
+          dualClusterId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // repeated int32 profileIds = 10;
+        private java.util.List<java.lang.Integer> profileIds_ = java.util.Collections.emptyList();
+        private void ensureProfileIdsIsMutable() {
+          if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+            profileIds_ = new java.util.ArrayList<java.lang.Integer>(profileIds_);
+            bitField0_ |= 0x00000200;
+           }
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public java.util.List<java.lang.Integer>
+            getProfileIdsList() {
+          return java.util.Collections.unmodifiableList(profileIds_);
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public int getProfileIdsCount() {
+          return profileIds_.size();
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public int getProfileIds(int index) {
+          return profileIds_.get(index);
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public Builder setProfileIds(
+            int index, int value) {
+          ensureProfileIdsIsMutable();
+          profileIds_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public Builder addProfileIds(int value) {
+          ensureProfileIdsIsMutable();
+          profileIds_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public Builder addAllProfileIds(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureProfileIdsIsMutable();
+          super.addAll(values, profileIds_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 profileIds = 10;</code>
+         *
+         * <pre>
+         * applied to specific profiles (if empty then applied to all profiles)
+         * </pre>
+         */
+        public Builder clearProfileIds() {
+          profileIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+          return this;
+        }
+
+        // optional int32 partialInd = 11;
+        private int partialInd_ ;
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public boolean hasPartialInd() {
+          return ((bitField0_ & 0x00000400) == 0x00000400);
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public int getPartialInd() {
+          return partialInd_;
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public Builder setPartialInd(int value) {
+          bitField0_ |= 0x00000400;
+          partialInd_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 partialInd = 11;</code>
+         *
+         * <pre>
+         * partialInd &gt; 0, means that it's a partially written node without clusters
+         * </pre>
+         */
+        public Builder clearPartialInd() {
+          bitField0_ = (bitField0_ & ~0x00000400);
+          partialInd_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint)
+      }
+
+      static {
+        defaultInstance = new HHRouteNetworkPoint(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint)
+    }
+
+    public interface HHRouteBlockSegmentsOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required int32 idRangeStart = 1;
+      /**
+       * <code>required int32 idRangeStart = 1;</code>
+       *
+       * <pre>
+       * range of point ids stored in block
+       * </pre>
+       */
+      boolean hasIdRangeStart();
+      /**
+       * <code>required int32 idRangeStart = 1;</code>
+       *
+       * <pre>
+       * range of point ids stored in block
+       * </pre>
+       */
+      int getIdRangeStart();
+
+      // required int32 idRangeLength = 2;
+      /**
+       * <code>required int32 idRangeLength = 2;</code>
+       *
+       * <pre>
+       * blocks are sorted by ids 
+       * </pre>
+       */
+      boolean hasIdRangeLength();
+      /**
+       * <code>required int32 idRangeLength = 2;</code>
+       *
+       * <pre>
+       * blocks are sorted by ids 
+       * </pre>
+       */
+      int getIdRangeLength();
+
+      // optional int32 profileId = 3;
+      /**
+       * <code>optional int32 profileId = 3;</code>
+       *
+       * <pre>
+       * profileParams specific segments (required on top level)
+       * </pre>
+       */
+      boolean hasProfileId();
+      /**
+       * <code>optional int32 profileId = 3;</code>
+       *
+       * <pre>
+       * profileParams specific segments (required on top level)
+       * </pre>
+       */
+      int getProfileId();
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> 
+          getInnerBlocksList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getInnerBlocks(int index);
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      int getInnerBlocksCount();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+          getInnerBlocksOrBuilderList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getInnerBlocksOrBuilder(
+          int index);
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> 
+          getPointSegmentsList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments getPointSegments(int index);
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      int getPointSegmentsCount();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder> 
+          getPointSegmentsOrBuilderList();
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder getPointSegmentsOrBuilder(
+          int index);
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments}
+     */
+    public static final class HHRouteBlockSegments extends
+        com.google.protobuf.GeneratedMessage
+        implements HHRouteBlockSegmentsOrBuilder {
+      // Use HHRouteBlockSegments.newBuilder() to construct.
+      private HHRouteBlockSegments(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private HHRouteBlockSegments(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final HHRouteBlockSegments defaultInstance;
+      public static HHRouteBlockSegments getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public HHRouteBlockSegments getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private HHRouteBlockSegments(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                idRangeStart_ = input.readInt32();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                idRangeLength_ = input.readInt32();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                profileId_ = input.readInt32();
+                break;
+              }
+              case 34: {
+                if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                  pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments>();
+                  mutable_bitField0_ |= 0x00000010;
+                }
+                pointSegments_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.PARSER, extensionRegistry));
+                break;
+              }
+              case 50: {
+                if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                  innerBlocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>();
+                  mutable_bitField0_ |= 0x00000008;
+                }
+                innerBlocks_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.PARSER, extensionRegistry));
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+            pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
+          }
+          if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            innerBlocks_ = java.util.Collections.unmodifiableList(innerBlocks_);
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<HHRouteBlockSegments> PARSER =
+          new com.google.protobuf.AbstractParser<HHRouteBlockSegments>() {
+        public HHRouteBlockSegments parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new HHRouteBlockSegments(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<HHRouteBlockSegments> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // required int32 idRangeStart = 1;
+      public static final int IDRANGESTART_FIELD_NUMBER = 1;
+      private int idRangeStart_;
+      /**
+       * <code>required int32 idRangeStart = 1;</code>
+       *
+       * <pre>
+       * range of point ids stored in block
+       * </pre>
+       */
+      public boolean hasIdRangeStart() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 idRangeStart = 1;</code>
+       *
+       * <pre>
+       * range of point ids stored in block
+       * </pre>
+       */
+      public int getIdRangeStart() {
+        return idRangeStart_;
+      }
+
+      // required int32 idRangeLength = 2;
+      public static final int IDRANGELENGTH_FIELD_NUMBER = 2;
+      private int idRangeLength_;
+      /**
+       * <code>required int32 idRangeLength = 2;</code>
+       *
+       * <pre>
+       * blocks are sorted by ids 
+       * </pre>
+       */
+      public boolean hasIdRangeLength() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 idRangeLength = 2;</code>
+       *
+       * <pre>
+       * blocks are sorted by ids 
+       * </pre>
+       */
+      public int getIdRangeLength() {
+        return idRangeLength_;
+      }
+
+      // optional int32 profileId = 3;
+      public static final int PROFILEID_FIELD_NUMBER = 3;
+      private int profileId_;
+      /**
+       * <code>optional int32 profileId = 3;</code>
+       *
+       * <pre>
+       * profileParams specific segments (required on top level)
+       * </pre>
+       */
+      public boolean hasProfileId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 profileId = 3;</code>
+       *
+       * <pre>
+       * profileParams specific segments (required on top level)
+       * </pre>
+       */
+      public int getProfileId() {
+        return profileId_;
+      }
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;
+      public static final int INNERBLOCKS_FIELD_NUMBER = 6;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> innerBlocks_;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> getInnerBlocksList() {
+        return innerBlocks_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+          getInnerBlocksOrBuilderList() {
+        return innerBlocks_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      public int getInnerBlocksCount() {
+        return innerBlocks_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getInnerBlocks(int index) {
+        return innerBlocks_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+       *
+       * <pre>
+       * potentially array to shifts could be used to speedup 
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getInnerBlocksOrBuilder(
+          int index) {
+        return innerBlocks_.get(index);
+      }
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;
+      public static final int POINTSEGMENTS_FIELD_NUMBER = 4;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> pointSegments_;
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> getPointSegmentsList() {
+        return pointSegments_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder> 
+          getPointSegmentsOrBuilderList() {
+        return pointSegments_;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      public int getPointSegmentsCount() {
+        return pointSegments_.size();
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments getPointSegments(int index) {
+        return pointSegments_.get(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder getPointSegmentsOrBuilder(
+          int index) {
+        return pointSegments_.get(index);
+      }
+
+      private void initFields() {
+        idRangeStart_ = 0;
+        idRangeLength_ = 0;
+        profileId_ = 0;
+        innerBlocks_ = java.util.Collections.emptyList();
+        pointSegments_ = java.util.Collections.emptyList();
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasIdRangeStart()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasIdRangeLength()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        for (int i = 0; i < getInnerBlocksCount(); i++) {
+          if (!getInnerBlocks(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        for (int i = 0; i < getPointSegmentsCount(); i++) {
+          if (!getPointSegments(i).isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt32(1, idRangeStart_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt32(2, idRangeLength_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, profileId_);
+        }
+        for (int i = 0; i < pointSegments_.size(); i++) {
+          output.writeMessage(4, pointSegments_.get(i));
+        }
+        for (int i = 0; i < innerBlocks_.size(); i++) {
+          output.writeMessage(6, innerBlocks_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, idRangeStart_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, idRangeLength_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, profileId_);
+        }
+        for (int i = 0; i < pointSegments_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(4, pointSegments_.get(i));
+        }
+        for (int i = 0; i < innerBlocks_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(6, innerBlocks_.get(i));
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder.class);
+        }
+
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getInnerBlocksFieldBuilder();
+            getPointSegmentsFieldBuilder();
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          idRangeStart_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          idRangeLength_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          profileId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          if (innerBlocksBuilder_ == null) {
+            innerBlocks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            innerBlocksBuilder_.clear();
+          }
+          if (pointSegmentsBuilder_ == null) {
+            pointSegments_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            pointSegmentsBuilder_.clear();
+          }
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance();
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments build() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments buildPartial() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments result = new net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.idRangeStart_ = idRangeStart_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.idRangeLength_ = idRangeLength_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.profileId_ = profileId_;
+          if (innerBlocksBuilder_ == null) {
+            if (((bitField0_ & 0x00000008) == 0x00000008)) {
+              innerBlocks_ = java.util.Collections.unmodifiableList(innerBlocks_);
+              bitField0_ = (bitField0_ & ~0x00000008);
+            }
+            result.innerBlocks_ = innerBlocks_;
+          } else {
+            result.innerBlocks_ = innerBlocksBuilder_.build();
+          }
+          if (pointSegmentsBuilder_ == null) {
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+              pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
+              bitField0_ = (bitField0_ & ~0x00000010);
+            }
+            result.pointSegments_ = pointSegments_;
+          } else {
+            result.pointSegments_ = pointSegmentsBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance()) return this;
+          if (other.hasIdRangeStart()) {
+            setIdRangeStart(other.getIdRangeStart());
+          }
+          if (other.hasIdRangeLength()) {
+            setIdRangeLength(other.getIdRangeLength());
+          }
+          if (other.hasProfileId()) {
+            setProfileId(other.getProfileId());
+          }
+          if (innerBlocksBuilder_ == null) {
+            if (!other.innerBlocks_.isEmpty()) {
+              if (innerBlocks_.isEmpty()) {
+                innerBlocks_ = other.innerBlocks_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+              } else {
+                ensureInnerBlocksIsMutable();
+                innerBlocks_.addAll(other.innerBlocks_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.innerBlocks_.isEmpty()) {
+              if (innerBlocksBuilder_.isEmpty()) {
+                innerBlocksBuilder_.dispose();
+                innerBlocksBuilder_ = null;
+                innerBlocks_ = other.innerBlocks_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+                innerBlocksBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getInnerBlocksFieldBuilder() : null;
+              } else {
+                innerBlocksBuilder_.addAllMessages(other.innerBlocks_);
+              }
+            }
+          }
+          if (pointSegmentsBuilder_ == null) {
+            if (!other.pointSegments_.isEmpty()) {
+              if (pointSegments_.isEmpty()) {
+                pointSegments_ = other.pointSegments_;
+                bitField0_ = (bitField0_ & ~0x00000010);
+              } else {
+                ensurePointSegmentsIsMutable();
+                pointSegments_.addAll(other.pointSegments_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.pointSegments_.isEmpty()) {
+              if (pointSegmentsBuilder_.isEmpty()) {
+                pointSegmentsBuilder_.dispose();
+                pointSegmentsBuilder_ = null;
+                pointSegments_ = other.pointSegments_;
+                bitField0_ = (bitField0_ & ~0x00000010);
+                pointSegmentsBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getPointSegmentsFieldBuilder() : null;
+              } else {
+                pointSegmentsBuilder_.addAllMessages(other.pointSegments_);
+              }
+            }
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasIdRangeStart()) {
+            
+            return false;
+          }
+          if (!hasIdRangeLength()) {
+            
+            return false;
+          }
+          for (int i = 0; i < getInnerBlocksCount(); i++) {
+            if (!getInnerBlocks(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          for (int i = 0; i < getPointSegmentsCount(); i++) {
+            if (!getPointSegments(i).isInitialized()) {
+              
+              return false;
+            }
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required int32 idRangeStart = 1;
+        private int idRangeStart_ ;
+        /**
+         * <code>required int32 idRangeStart = 1;</code>
+         *
+         * <pre>
+         * range of point ids stored in block
+         * </pre>
+         */
+        public boolean hasIdRangeStart() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required int32 idRangeStart = 1;</code>
+         *
+         * <pre>
+         * range of point ids stored in block
+         * </pre>
+         */
+        public int getIdRangeStart() {
+          return idRangeStart_;
+        }
+        /**
+         * <code>required int32 idRangeStart = 1;</code>
+         *
+         * <pre>
+         * range of point ids stored in block
+         * </pre>
+         */
+        public Builder setIdRangeStart(int value) {
+          bitField0_ |= 0x00000001;
+          idRangeStart_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 idRangeStart = 1;</code>
+         *
+         * <pre>
+         * range of point ids stored in block
+         * </pre>
+         */
+        public Builder clearIdRangeStart() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          idRangeStart_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // required int32 idRangeLength = 2;
+        private int idRangeLength_ ;
+        /**
+         * <code>required int32 idRangeLength = 2;</code>
+         *
+         * <pre>
+         * blocks are sorted by ids 
+         * </pre>
+         */
+        public boolean hasIdRangeLength() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required int32 idRangeLength = 2;</code>
+         *
+         * <pre>
+         * blocks are sorted by ids 
+         * </pre>
+         */
+        public int getIdRangeLength() {
+          return idRangeLength_;
+        }
+        /**
+         * <code>required int32 idRangeLength = 2;</code>
+         *
+         * <pre>
+         * blocks are sorted by ids 
+         * </pre>
+         */
+        public Builder setIdRangeLength(int value) {
+          bitField0_ |= 0x00000002;
+          idRangeLength_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 idRangeLength = 2;</code>
+         *
+         * <pre>
+         * blocks are sorted by ids 
+         * </pre>
+         */
+        public Builder clearIdRangeLength() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          idRangeLength_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // optional int32 profileId = 3;
+        private int profileId_ ;
+        /**
+         * <code>optional int32 profileId = 3;</code>
+         *
+         * <pre>
+         * profileParams specific segments (required on top level)
+         * </pre>
+         */
+        public boolean hasProfileId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional int32 profileId = 3;</code>
+         *
+         * <pre>
+         * profileParams specific segments (required on top level)
+         * </pre>
+         */
+        public int getProfileId() {
+          return profileId_;
+        }
+        /**
+         * <code>optional int32 profileId = 3;</code>
+         *
+         * <pre>
+         * profileParams specific segments (required on top level)
+         * </pre>
+         */
+        public Builder setProfileId(int value) {
+          bitField0_ |= 0x00000004;
+          profileId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 profileId = 3;</code>
+         *
+         * <pre>
+         * profileParams specific segments (required on top level)
+         * </pre>
+         */
+        public Builder clearProfileId() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          profileId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;
+        private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> innerBlocks_ =
+          java.util.Collections.emptyList();
+        private void ensureInnerBlocksIsMutable() {
+          if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+            innerBlocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>(innerBlocks_);
+            bitField0_ |= 0x00000008;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> innerBlocksBuilder_;
+
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> getInnerBlocksList() {
+          if (innerBlocksBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(innerBlocks_);
+          } else {
+            return innerBlocksBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public int getInnerBlocksCount() {
+          if (innerBlocksBuilder_ == null) {
+            return innerBlocks_.size();
+          } else {
+            return innerBlocksBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getInnerBlocks(int index) {
+          if (innerBlocksBuilder_ == null) {
+            return innerBlocks_.get(index);
+          } else {
+            return innerBlocksBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder setInnerBlocks(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+          if (innerBlocksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.set(index, value);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder setInnerBlocks(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+          if (innerBlocksBuilder_ == null) {
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            innerBlocksBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder addInnerBlocks(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+          if (innerBlocksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.add(value);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder addInnerBlocks(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+          if (innerBlocksBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.add(index, value);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder addInnerBlocks(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+          if (innerBlocksBuilder_ == null) {
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.add(builderForValue.build());
+            onChanged();
+          } else {
+            innerBlocksBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder addInnerBlocks(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+          if (innerBlocksBuilder_ == null) {
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            innerBlocksBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder addAllInnerBlocks(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> values) {
+          if (innerBlocksBuilder_ == null) {
+            ensureInnerBlocksIsMutable();
+            super.addAll(values, innerBlocks_);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder clearInnerBlocks() {
+          if (innerBlocksBuilder_ == null) {
+            innerBlocks_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000008);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public Builder removeInnerBlocks(int index) {
+          if (innerBlocksBuilder_ == null) {
+            ensureInnerBlocksIsMutable();
+            innerBlocks_.remove(index);
+            onChanged();
+          } else {
+            innerBlocksBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder getInnerBlocksBuilder(
+            int index) {
+          return getInnerBlocksFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getInnerBlocksOrBuilder(
+            int index) {
+          if (innerBlocksBuilder_ == null) {
+            return innerBlocks_.get(index);  } else {
+            return innerBlocksBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+             getInnerBlocksOrBuilderList() {
+          if (innerBlocksBuilder_ != null) {
+            return innerBlocksBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(innerBlocks_);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder addInnerBlocksBuilder() {
+          return getInnerBlocksFieldBuilder().addBuilder(
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder addInnerBlocksBuilder(
+            int index) {
+          return getInnerBlocksFieldBuilder().addBuilder(
+              index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments innerBlocks = 6;</code>
+         *
+         * <pre>
+         * potentially array to shifts could be used to speedup 
+         * </pre>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder> 
+             getInnerBlocksBuilderList() {
+          return getInnerBlocksFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+            getInnerBlocksFieldBuilder() {
+          if (innerBlocksBuilder_ == null) {
+            innerBlocksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder>(
+                    innerBlocks_,
+                    ((bitField0_ & 0x00000008) == 0x00000008),
+                    getParentForChildren(),
+                    isClean());
+            innerBlocks_ = null;
+          }
+          return innerBlocksBuilder_;
+        }
+
+        // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;
+        private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> pointSegments_ =
+          java.util.Collections.emptyList();
+        private void ensurePointSegmentsIsMutable() {
+          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+            pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments>(pointSegments_);
+            bitField0_ |= 0x00000010;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder> pointSegmentsBuilder_;
+
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> getPointSegmentsList() {
+          if (pointSegmentsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(pointSegments_);
+          } else {
+            return pointSegmentsBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public int getPointSegmentsCount() {
+          if (pointSegmentsBuilder_ == null) {
+            return pointSegments_.size();
+          } else {
+            return pointSegmentsBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments getPointSegments(int index) {
+          if (pointSegmentsBuilder_ == null) {
+            return pointSegments_.get(index);
+          } else {
+            return pointSegmentsBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder setPointSegments(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments value) {
+          if (pointSegmentsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointSegmentsIsMutable();
+            pointSegments_.set(index, value);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder setPointSegments(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder builderForValue) {
+          if (pointSegmentsBuilder_ == null) {
+            ensurePointSegmentsIsMutable();
+            pointSegments_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder addPointSegments(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments value) {
+          if (pointSegmentsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointSegmentsIsMutable();
+            pointSegments_.add(value);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder addPointSegments(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments value) {
+          if (pointSegmentsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensurePointSegmentsIsMutable();
+            pointSegments_.add(index, value);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder addPointSegments(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder builderForValue) {
+          if (pointSegmentsBuilder_ == null) {
+            ensurePointSegmentsIsMutable();
+            pointSegments_.add(builderForValue.build());
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder addPointSegments(
+            int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder builderForValue) {
+          if (pointSegmentsBuilder_ == null) {
+            ensurePointSegmentsIsMutable();
+            pointSegments_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder addAllPointSegments(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments> values) {
+          if (pointSegmentsBuilder_ == null) {
+            ensurePointSegmentsIsMutable();
+            super.addAll(values, pointSegments_);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder clearPointSegments() {
+          if (pointSegmentsBuilder_ == null) {
+            pointSegments_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000010);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public Builder removePointSegments(int index) {
+          if (pointSegmentsBuilder_ == null) {
+            ensurePointSegmentsIsMutable();
+            pointSegments_.remove(index);
+            onChanged();
+          } else {
+            pointSegmentsBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder getPointSegmentsBuilder(
+            int index) {
+          return getPointSegmentsFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder getPointSegmentsOrBuilder(
+            int index) {
+          if (pointSegmentsBuilder_ == null) {
+            return pointSegments_.get(index);  } else {
+            return pointSegmentsBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder> 
+             getPointSegmentsOrBuilderList() {
+          if (pointSegmentsBuilder_ != null) {
+            return pointSegmentsBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(pointSegments_);
+          }
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder addPointSegmentsBuilder() {
+          return getPointSegmentsFieldBuilder().addBuilder(
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder addPointSegmentsBuilder(
+            int index) {
+          return getPointSegmentsFieldBuilder().addBuilder(
+              index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments pointSegments = 4;</code>
+         */
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder> 
+             getPointSegmentsBuilderList() {
+          return getPointSegmentsFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder> 
+            getPointSegmentsFieldBuilder() {
+          if (pointSegmentsBuilder_ == null) {
+            pointSegmentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder>(
+                    pointSegments_,
+                    ((bitField0_ & 0x00000010) == 0x00000010),
+                    getParentForChildren(),
+                    isClean());
+            pointSegments_ = null;
+          }
+          return pointSegmentsBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments)
+      }
+
+      static {
+        defaultInstance = new HHRouteBlockSegments(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments)
+    }
+
+    public interface HHRoutePointSegmentsOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required bytes segmentsIn = 2;
+      /**
+       * <code>required bytes segmentsIn = 2;</code>
+       *
+       * <pre>
+       * required int32 pointId = 1;
+       * </pre>
+       */
+      boolean hasSegmentsIn();
+      /**
+       * <code>required bytes segmentsIn = 2;</code>
+       *
+       * <pre>
+       * required int32 pointId = 1;
+       * </pre>
+       */
+      com.google.protobuf.ByteString getSegmentsIn();
+
+      // required bytes segmentsOut = 3;
+      /**
+       * <code>required bytes segmentsOut = 3;</code>
+       *
+       * <pre>
+       * segments times encoded according to cluster out
+       * </pre>
+       */
+      boolean hasSegmentsOut();
+      /**
+       * <code>required bytes segmentsOut = 3;</code>
+       *
+       * <pre>
+       * segments times encoded according to cluster out
+       * </pre>
+       */
+      com.google.protobuf.ByteString getSegmentsOut();
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments}
+     */
+    public static final class HHRoutePointSegments extends
+        com.google.protobuf.GeneratedMessage
+        implements HHRoutePointSegmentsOrBuilder {
+      // Use HHRoutePointSegments.newBuilder() to construct.
+      private HHRoutePointSegments(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private HHRoutePointSegments(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final HHRoutePointSegments defaultInstance;
+      public static HHRoutePointSegments getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public HHRoutePointSegments getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private HHRoutePointSegments(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000001;
+                segmentsIn_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000002;
+                segmentsOut_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<HHRoutePointSegments> PARSER =
+          new com.google.protobuf.AbstractParser<HHRoutePointSegments>() {
+        public HHRoutePointSegments parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new HHRoutePointSegments(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<HHRoutePointSegments> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // required bytes segmentsIn = 2;
+      public static final int SEGMENTSIN_FIELD_NUMBER = 2;
+      private com.google.protobuf.ByteString segmentsIn_;
+      /**
+       * <code>required bytes segmentsIn = 2;</code>
+       *
+       * <pre>
+       * required int32 pointId = 1;
+       * </pre>
+       */
+      public boolean hasSegmentsIn() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes segmentsIn = 2;</code>
+       *
+       * <pre>
+       * required int32 pointId = 1;
+       * </pre>
+       */
+      public com.google.protobuf.ByteString getSegmentsIn() {
+        return segmentsIn_;
+      }
+
+      // required bytes segmentsOut = 3;
+      public static final int SEGMENTSOUT_FIELD_NUMBER = 3;
+      private com.google.protobuf.ByteString segmentsOut_;
+      /**
+       * <code>required bytes segmentsOut = 3;</code>
+       *
+       * <pre>
+       * segments times encoded according to cluster out
+       * </pre>
+       */
+      public boolean hasSegmentsOut() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes segmentsOut = 3;</code>
+       *
+       * <pre>
+       * segments times encoded according to cluster out
+       * </pre>
+       */
+      public com.google.protobuf.ByteString getSegmentsOut() {
+        return segmentsOut_;
+      }
+
+      private void initFields() {
+        segmentsIn_ = com.google.protobuf.ByteString.EMPTY;
+        segmentsOut_ = com.google.protobuf.ByteString.EMPTY;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasSegmentsIn()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasSegmentsOut()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(2, segmentsIn_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(3, segmentsOut_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, segmentsIn_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, segmentsOut_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegmentsOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder.class);
+        }
+
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          segmentsIn_ = com.google.protobuf.ByteString.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          segmentsOut_ = com.google.protobuf.ByteString.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.getDefaultInstance();
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments build() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments buildPartial() {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments result = new net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.segmentsIn_ = segmentsIn_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.segmentsOut_ = segmentsOut_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.getDefaultInstance()) return this;
+          if (other.hasSegmentsIn()) {
+            setSegmentsIn(other.getSegmentsIn());
+          }
+          if (other.hasSegmentsOut()) {
+            setSegmentsOut(other.getSegmentsOut());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasSegmentsIn()) {
+            
+            return false;
+          }
+          if (!hasSegmentsOut()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required bytes segmentsIn = 2;
+        private com.google.protobuf.ByteString segmentsIn_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>required bytes segmentsIn = 2;</code>
+         *
+         * <pre>
+         * required int32 pointId = 1;
+         * </pre>
+         */
+        public boolean hasSegmentsIn() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required bytes segmentsIn = 2;</code>
+         *
+         * <pre>
+         * required int32 pointId = 1;
+         * </pre>
+         */
+        public com.google.protobuf.ByteString getSegmentsIn() {
+          return segmentsIn_;
+        }
+        /**
+         * <code>required bytes segmentsIn = 2;</code>
+         *
+         * <pre>
+         * required int32 pointId = 1;
+         * </pre>
+         */
+        public Builder setSegmentsIn(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          segmentsIn_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required bytes segmentsIn = 2;</code>
+         *
+         * <pre>
+         * required int32 pointId = 1;
+         * </pre>
+         */
+        public Builder clearSegmentsIn() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          segmentsIn_ = getDefaultInstance().getSegmentsIn();
+          onChanged();
+          return this;
+        }
+
+        // required bytes segmentsOut = 3;
+        private com.google.protobuf.ByteString segmentsOut_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>required bytes segmentsOut = 3;</code>
+         *
+         * <pre>
+         * segments times encoded according to cluster out
+         * </pre>
+         */
+        public boolean hasSegmentsOut() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required bytes segmentsOut = 3;</code>
+         *
+         * <pre>
+         * segments times encoded according to cluster out
+         * </pre>
+         */
+        public com.google.protobuf.ByteString getSegmentsOut() {
+          return segmentsOut_;
+        }
+        /**
+         * <code>required bytes segmentsOut = 3;</code>
+         *
+         * <pre>
+         * segments times encoded according to cluster out
+         * </pre>
+         */
+        public Builder setSegmentsOut(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          segmentsOut_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required bytes segmentsOut = 3;</code>
+         *
+         * <pre>
+         * segments times encoded according to cluster out
+         * </pre>
+         */
+        public Builder clearSegmentsOut() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          segmentsOut_ = getDefaultInstance().getSegmentsOut();
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments)
+      }
+
+      static {
+        defaultInstance = new HHRoutePointSegments(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointSegments)
+    }
+
+    private int bitField0_;
+    // required int64 edition = 1;
+    public static final int EDITION_FIELD_NUMBER = 1;
+    private long edition_;
+    /**
+     * <code>required int64 edition = 1;</code>
+     *
+     * <pre>
+     * usually timestamp creation checks consistency
+     * </pre>
+     */
+    public boolean hasEdition() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int64 edition = 1;</code>
+     *
+     * <pre>
+     * usually timestamp creation checks consistency
+     * </pre>
+     */
+    public long getEdition() {
+      return edition_;
+    }
+
+    // required string profile = 2;
+    public static final int PROFILE_FIELD_NUMBER = 2;
+    private java.lang.Object profile_;
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    public boolean hasProfile() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    public java.lang.String getProfile() {
+      java.lang.Object ref = profile_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          profile_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string profile = 2;</code>
+     *
+     * <pre>
+     * main profile car, pedestrian ... 
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getProfileBytes() {
+      java.lang.Object ref = profile_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        profile_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated string profileParams = 3;
+    public static final int PROFILEPARAMS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList profileParams_;
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    public java.util.List<java.lang.String>
+        getProfileParamsList() {
+      return profileParams_;
+    }
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    public int getProfileParamsCount() {
+      return profileParams_.size();
+    }
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    public java.lang.String getProfileParams(int index) {
+      return profileParams_.get(index);
+    }
+    /**
+     * <code>repeated string profileParams = 3;</code>
+     *
+     * <pre>
+     * later encoded as profileIds in points / segments
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getProfileParamsBytes(int index) {
+      return profileParams_.getByteString(index);
+    }
+
+    // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+    public static final int POINTBOXES_FIELD_NUMBER = 5;
+    private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_;
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    public boolean hasPointBoxes() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes() {
+      return pointBoxes_;
+    }
+    /**
+     * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder() {
+      return pointBoxes_;
+    }
+
+    // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;
+    public static final int POINTSEGMENTS_FIELD_NUMBER = 6;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> pointSegments_;
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> getPointSegmentsList() {
+      return pointSegments_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+        getPointSegmentsOrBuilderList() {
+      return pointSegments_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    public int getPointSegmentsCount() {
+      return pointSegments_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getPointSegments(int index) {
+      return pointSegments_.get(index);
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+     */
+    public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getPointSegmentsOrBuilder(
+        int index) {
+      return pointSegments_.get(index);
+    }
+
+    private void initFields() {
+      edition_ = 0L;
+      profile_ = "";
+      profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+      pointSegments_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasEdition()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasProfile()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPointBoxes()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPointBoxes().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getPointSegmentsCount(); i++) {
+        if (!getPointSegments(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, edition_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getProfileBytes());
+      }
+      for (int i = 0; i < profileParams_.size(); i++) {
+        output.writeBytes(3, profileParams_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(5, pointBoxes_);
+      }
+      for (int i = 0; i < pointSegments_.size(); i++) {
+        output.writeMessage(6, pointSegments_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, edition_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getProfileBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < profileParams_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(profileParams_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getProfileParamsList().size();
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, pointBoxes_);
+      }
+      for (int i = 0; i < pointSegments_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, pointSegments_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex}
+     *
+     * <pre>
+     * HH Routing index need to be consistent with global file and include fully referenced clusters
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndexOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.class, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.Builder.class);
+      }
+
+      // Construct using net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPointBoxesFieldBuilder();
+          getPointSegmentsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        edition_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        profile_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (pointBoxesBuilder_ == null) {
+          pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+        } else {
+          pointBoxesBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (pointSegmentsBuilder_ == null) {
+          pointSegments_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          pointSegmentsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor;
+      }
+
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.getDefaultInstance();
+      }
+
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex build() {
+        net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex buildPartial() {
+        net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex result = new net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.edition_ = edition_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.profile_ = profile_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              profileParams_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.profileParams_ = profileParams_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (pointBoxesBuilder_ == null) {
+          result.pointBoxes_ = pointBoxes_;
+        } else {
+          result.pointBoxes_ = pointBoxesBuilder_.build();
+        }
+        if (pointSegmentsBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.pointSegments_ = pointSegments_;
+        } else {
+          result.pointSegments_ = pointSegmentsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.getDefaultInstance()) return this;
+        if (other.hasEdition()) {
+          setEdition(other.getEdition());
+        }
+        if (other.hasProfile()) {
+          bitField0_ |= 0x00000002;
+          profile_ = other.profile_;
+          onChanged();
+        }
+        if (!other.profileParams_.isEmpty()) {
+          if (profileParams_.isEmpty()) {
+            profileParams_ = other.profileParams_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureProfileParamsIsMutable();
+            profileParams_.addAll(other.profileParams_);
+          }
+          onChanged();
+        }
+        if (other.hasPointBoxes()) {
+          mergePointBoxes(other.getPointBoxes());
+        }
+        if (pointSegmentsBuilder_ == null) {
+          if (!other.pointSegments_.isEmpty()) {
+            if (pointSegments_.isEmpty()) {
+              pointSegments_ = other.pointSegments_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensurePointSegmentsIsMutable();
+              pointSegments_.addAll(other.pointSegments_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.pointSegments_.isEmpty()) {
+            if (pointSegmentsBuilder_.isEmpty()) {
+              pointSegmentsBuilder_.dispose();
+              pointSegmentsBuilder_ = null;
+              pointSegments_ = other.pointSegments_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              pointSegmentsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPointSegmentsFieldBuilder() : null;
+            } else {
+              pointSegmentsBuilder_.addAllMessages(other.pointSegments_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasEdition()) {
+          
+          return false;
+        }
+        if (!hasProfile()) {
+          
+          return false;
+        }
+        if (!hasPointBoxes()) {
+          
+          return false;
+        }
+        if (!getPointBoxes().isInitialized()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getPointSegmentsCount(); i++) {
+          if (!getPointSegments(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required int64 edition = 1;
+      private long edition_ ;
+      /**
+       * <code>required int64 edition = 1;</code>
+       *
+       * <pre>
+       * usually timestamp creation checks consistency
+       * </pre>
+       */
+      public boolean hasEdition() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int64 edition = 1;</code>
+       *
+       * <pre>
+       * usually timestamp creation checks consistency
+       * </pre>
+       */
+      public long getEdition() {
+        return edition_;
+      }
+      /**
+       * <code>required int64 edition = 1;</code>
+       *
+       * <pre>
+       * usually timestamp creation checks consistency
+       * </pre>
+       */
+      public Builder setEdition(long value) {
+        bitField0_ |= 0x00000001;
+        edition_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 edition = 1;</code>
+       *
+       * <pre>
+       * usually timestamp creation checks consistency
+       * </pre>
+       */
+      public Builder clearEdition() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        edition_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required string profile = 2;
+      private java.lang.Object profile_ = "";
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public boolean hasProfile() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public java.lang.String getProfile() {
+        java.lang.Object ref = profile_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          profile_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getProfileBytes() {
+        java.lang.Object ref = profile_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          profile_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public Builder setProfile(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        profile_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public Builder clearProfile() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        profile_ = getDefaultInstance().getProfile();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string profile = 2;</code>
+       *
+       * <pre>
+       * main profile car, pedestrian ... 
+       * </pre>
+       */
+      public Builder setProfileBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        profile_ = value;
+        onChanged();
+        return this;
+      }
+
+      // repeated string profileParams = 3;
+      private com.google.protobuf.LazyStringList profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureProfileParamsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          profileParams_ = new com.google.protobuf.LazyStringArrayList(profileParams_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public java.util.List<java.lang.String>
+          getProfileParamsList() {
+        return java.util.Collections.unmodifiableList(profileParams_);
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public int getProfileParamsCount() {
+        return profileParams_.size();
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public java.lang.String getProfileParams(int index) {
+        return profileParams_.get(index);
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getProfileParamsBytes(int index) {
+        return profileParams_.getByteString(index);
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public Builder setProfileParams(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public Builder addProfileParams(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public Builder addAllProfileParams(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureProfileParamsIsMutable();
+        super.addAll(values, profileParams_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public Builder clearProfileParams() {
+        profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string profileParams = 3;</code>
+       *
+       * <pre>
+       * later encoded as profileIds in points / segments
+       * </pre>
+       */
+      public Builder addProfileParamsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProfileParamsIsMutable();
+        profileParams_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
+      private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> pointBoxesBuilder_;
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public boolean hasPointBoxes() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox getPointBoxes() {
+        if (pointBoxesBuilder_ == null) {
+          return pointBoxes_;
+        } else {
+          return pointBoxesBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public Builder setPointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
+        if (pointBoxesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          pointBoxes_ = value;
+          onChanged();
+        } else {
+          pointBoxesBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public Builder setPointBoxes(
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder builderForValue) {
+        if (pointBoxesBuilder_ == null) {
+          pointBoxes_ = builderForValue.build();
+          onChanged();
+        } else {
+          pointBoxesBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public Builder mergePointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
+        if (pointBoxesBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              pointBoxes_ != net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance()) {
+            pointBoxes_ =
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.newBuilder(pointBoxes_).mergeFrom(value).buildPartial();
+          } else {
+            pointBoxes_ = value;
+          }
+          onChanged();
+        } else {
+          pointBoxesBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public Builder clearPointBoxes() {
+        if (pointBoxesBuilder_ == null) {
+          pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
+          onChanged();
+        } else {
+          pointBoxesBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder getPointBoxesBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPointBoxesFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder getPointBoxesOrBuilder() {
+        if (pointBoxesBuilder_ != null) {
+          return pointBoxesBuilder_.getMessageOrBuilder();
+        } else {
+          return pointBoxes_;
+        }
+      }
+      /**
+       * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder> 
+          getPointBoxesFieldBuilder() {
+        if (pointBoxesBuilder_ == null) {
+          pointBoxesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBoxOrBuilder>(
+                  pointBoxes_,
+                  getParentForChildren(),
+                  isClean());
+          pointBoxes_ = null;
+        }
+        return pointBoxesBuilder_;
+      }
+
+      // repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> pointSegments_ =
+        java.util.Collections.emptyList();
+      private void ensurePointSegmentsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>(pointSegments_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> pointSegmentsBuilder_;
+
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> getPointSegmentsList() {
+        if (pointSegmentsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(pointSegments_);
+        } else {
+          return pointSegmentsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public int getPointSegmentsCount() {
+        if (pointSegmentsBuilder_ == null) {
+          return pointSegments_.size();
+        } else {
+          return pointSegmentsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments getPointSegments(int index) {
+        if (pointSegmentsBuilder_ == null) {
+          return pointSegments_.get(index);
+        } else {
+          return pointSegmentsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder setPointSegments(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+        if (pointSegmentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePointSegmentsIsMutable();
+          pointSegments_.set(index, value);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder setPointSegments(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+        if (pointSegmentsBuilder_ == null) {
+          ensurePointSegmentsIsMutable();
+          pointSegments_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder addPointSegments(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+        if (pointSegmentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePointSegmentsIsMutable();
+          pointSegments_.add(value);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder addPointSegments(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments value) {
+        if (pointSegmentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePointSegmentsIsMutable();
+          pointSegments_.add(index, value);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder addPointSegments(
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+        if (pointSegmentsBuilder_ == null) {
+          ensurePointSegmentsIsMutable();
+          pointSegments_.add(builderForValue.build());
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder addPointSegments(
+          int index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder builderForValue) {
+        if (pointSegmentsBuilder_ == null) {
+          ensurePointSegmentsIsMutable();
+          pointSegments_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder addAllPointSegments(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> values) {
+        if (pointSegmentsBuilder_ == null) {
+          ensurePointSegmentsIsMutable();
+          super.addAll(values, pointSegments_);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder clearPointSegments() {
+        if (pointSegmentsBuilder_ == null) {
+          pointSegments_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public Builder removePointSegments(int index) {
+        if (pointSegmentsBuilder_ == null) {
+          ensurePointSegmentsIsMutable();
+          pointSegments_.remove(index);
+          onChanged();
+        } else {
+          pointSegmentsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder getPointSegmentsBuilder(
+          int index) {
+        return getPointSegmentsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder getPointSegmentsOrBuilder(
+          int index) {
+        if (pointSegmentsBuilder_ == null) {
+          return pointSegments_.get(index);  } else {
+          return pointSegmentsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+           getPointSegmentsOrBuilderList() {
+        if (pointSegmentsBuilder_ != null) {
+          return pointSegmentsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(pointSegments_);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder addPointSegmentsBuilder() {
+        return getPointSegmentsFieldBuilder().addBuilder(
+            net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder addPointSegmentsBuilder(
+          int index) {
+        return getPointSegmentsFieldBuilder().addBuilder(
+            index, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlockSegments pointSegments = 6;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder> 
+           getPointSegmentsBuilderList() {
+        return getPointSegmentsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder> 
+          getPointSegmentsFieldBuilder() {
+        if (pointSegmentsBuilder_ == null) {
+          pointSegmentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder>(
+                  pointSegments_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          pointSegments_ = null;
+        }
+        return pointSegmentsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.OsmAndHHRoutingIndex)
+    }
+
+    static {
+      defaultInstance = new OsmAndHHRoutingIndex(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndHHRoutingIndex)
+  }
+
   public interface OsmAndOwnerOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -66516,6 +73675,31 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAnd_OBF_OsmAndRoutingIndex_RouteDataBlock_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAnd_OBF_OsmAndOwner_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -66529,7 +73713,7 @@ public final class OsmandOdb {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tOBF.proto\022\nOsmAnd.OBF\"\371\002\n\017OsmAndStruct" +
+      "\n\tOBF.proto\022\nOsmAnd.OBF\"\263\003\n\017OsmAndStruct" +
       "ure\022\017\n\007version\030\001 \002(\r\022\023\n\013dateCreated\030\022 \002(" +
       "\003\022&\n\005owner\030! \001(\0132\027.OsmAnd.OBF.OsmAndOwne" +
       "r\0224\n\014addressIndex\030\007 \003(\0132\036.OsmAnd.OBF.Osm" +
@@ -66538,192 +73722,218 @@ public final class OsmandOdb {
       "Index\030\010 \003(\0132\032.OsmAnd.OBF.OsmAndPoiIndex\022" +
       ",\n\010mapIndex\030\006 \003(\0132\032.OsmAnd.OBF.OsmAndMap" +
       "Index\0224\n\014routingIndex\030\t \003(\0132\036.OsmAnd.OBF" +
-      ".OsmAndRoutingIndex\022\026\n\016versionConfirm\030  ",
-      "\002(\r\"I\n\rOsmAndTileBox\022\014\n\004left\030\001 \002(\r\022\r\n\005ri" +
-      "ght\030\002 \002(\r\022\013\n\003top\030\003 \002(\r\022\016\n\006bottom\030\004 \002(\r\"\030" +
-      "\n\013StringTable\022\t\n\001s\030\001 \003(\t\"q\n\022IndexedStrin" +
-      "gTable\022\016\n\006prefix\030\001 \001(\t\022\013\n\003key\030\003 \003(\t\022\013\n\003v" +
-      "al\030\004 \003(\007\0221\n\tsubtables\030\005 \003(\0132\036.OsmAnd.OBF" +
-      ".IndexedStringTable\"\337\004\n\016OsmAndMapIndex\022\014" +
-      "\n\004name\030\002 \002(\t\0229\n\005rules\030\004 \003(\0132*.OsmAnd.OBF" +
-      ".OsmAndMapIndex.MapEncodingRule\0227\n\006level" +
-      "s\030\005 \003(\0132\'.OsmAnd.OBF.OsmAndMapIndex.MapR" +
-      "ootLevel\032X\n\017MapEncodingRule\022\013\n\003tag\030\003 \002(\t",
-      "\022\r\n\005value\030\005 \001(\t\022\n\n\002id\030\007 \001(\r\022\017\n\007minZoom\030\t" +
-      " \001(\r\022\014\n\004type\030\n \001(\r\032\312\001\n\014MapRootLevel\022\017\n\007m" +
-      "axZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004left\030\003 " +
-      "\002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006botto" +
-      "m\030\006 \002(\005\0224\n\005boxes\030\007 \003(\0132%.OsmAnd.OBF.OsmA" +
-      "ndMapIndex.MapDataBox\022(\n\006blocks\030\017 \003(\0132\030." +
-      "OsmAnd.OBF.MapDataBlock\032\243\001\n\nMapDataBox\022\014" +
-      "\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021" +
-      "\022\016\n\006bottom\030\004 \002(\021\022\026\n\016shiftToMapData\030\005 \001(\007" +
-      "\022\r\n\005ocean\030\006 \001(\010\0224\n\005boxes\030\007 \003(\0132%.OsmAnd.",
-      "OBF.OsmAndMapIndex.MapDataBox\"v\n\014MapData" +
-      "Block\022\016\n\006baseId\030\n \001(\004\022(\n\013dataObjects\030\014 \003" +
-      "(\0132\023.OsmAnd.OBF.MapData\022,\n\013stringTable\030\017" +
-      " \001(\0132\027.OsmAnd.OBF.StringTable\"\320\001\n\007MapDat" +
-      "a\022\023\n\013coordinates\030\001 \001(\014\022\027\n\017areaCoordinate" +
-      "s\030\002 \001(\014\022\037\n\027polygonInnerCoordinates\030\004 \003(\014" +
-      "\022\027\n\017additionalTypes\030\006 \001(\014\022\r\n\005types\030\007 \002(\014" +
-      "\022\030\n\020labelcoordinates\030\010 \001(\014\022\023\n\013stringName" +
-      "s\030\n \001(\014\022\n\n\002id\030\014 \002(\022\022\023\n\013rasterBytes\030\017 \001(\014" +
-      "\"\364\003\n\022OsmAndAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n",
-      "\007name_en\030\002 \001(\t\022-\n\nboundaries\030\003 \001(\0132\031.Osm" +
-      "And.OBF.OsmAndTileBox\0223\n\022attributeTagsTa" +
-      "ble\030\004 \001(\0132\027.OsmAnd.OBF.StringTable\022:\n\006ci" +
-      "ties\030\006 \003(\0132*.OsmAnd.OBF.OsmAndAddressInd" +
-      "ex.CitiesIndex\0229\n\tnameIndex\030\007 \001(\0132&.OsmA" +
-      "nd.OBF.OsmAndAddressNameIndexData\032\343\001\n\013Ci" +
-      "tiesIndex\022C\n\004type\030\002 \002(\01625.OsmAnd.OBF.Osm" +
-      "AndAddressIndex.CitiesIndex.CitiesType\022%" +
-      "\n\006cities\030\005 \003(\0132\025.OsmAnd.OBF.CityIndex\022*\n" +
-      "\006blocks\030\007 \003(\0132\032.OsmAnd.OBF.CityBlockInde",
-      "x\"<\n\nCitiesType\022\021\n\rCitiesOrTowns\020\001\022\r\n\tPo" +
-      "stcodes\020\002\022\014\n\010Villages\020\003\"\342\001\n\032OsmAndAddres" +
-      "sNameIndexData\022-\n\005table\030\004 \002(\0132\036.OsmAnd.O" +
-      "BF.IndexedStringTable\022I\n\004atom\030\007 \003(\0132;.Os" +
-      "mAnd.OBF.OsmAndAddressNameIndexData.Addr" +
-      "essNameIndexData\032J\n\024AddressNameIndexData" +
-      "\0222\n\004atom\030\004 \003(\0132$.OsmAnd.OBF.AddressNameI" +
-      "ndexDataAtom\"\204\001\n\030AddressNameIndexDataAto" +
-      "m\022\014\n\004name\030\001 \001(\t\022\016\n\006nameEn\030\002 \001(\t\022\014\n\004type\030" +
-      "\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCi",
-      "tyIndex\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\260\001\n\tCityInde" +
-      "x\022\021\n\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007na" +
-      "me_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030" +
-      "\006 \002(\r\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attrib" +
-      "uteValues\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex" +
-      "\030\n \001(\007\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCity" +
-      "Index\030\004 \001(\007\022,\n\tbuildings\030\n \003(\0132\031.OsmAnd." +
-      "OBF.BuildingIndex\022(\n\007streets\030\014 \003(\0132\027.Osm" +
-      "And.OBF.StreetIndex\"\345\001\n\013StreetIndex\022\014\n\004n" +
-      "ame\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n",
-      "\001y\030\004 \002(\021\0225\n\rintersections\030\005 \003(\0132\036.OsmAnd" +
-      ".OBF.StreetIntersection\022\n\n\002id\030\006 \001(\004\022\027\n\017a" +
-      "ttributeTagIds\030\007 \003(\r\022\027\n\017attributeValues\030" +
-      "\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132\031.OsmAnd.OBF.Bu" +
-      "ildingIndex\"\221\001\n\022StreetIntersection\022\014\n\004na" +
-      "me\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014intersected" +
-      "X\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\022\027\n\017attribu" +
-      "teTagIds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\"" +
-      "\230\002\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_" +
-      "en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(",
-      "\t\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y" +
-      "\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001" +
-      "(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017attributeTagIds\030" +
-      "\017 \003(\r\022\027\n\017attributeValues\030\020 \003(\t\022\030\n\020attrib" +
-      "uteTagIds2\030\021 \003(\r\022\030\n\020attributeValues2\030\022 \003" +
-      "(\t\"=\n\017TransportRoutes\022*\n\006routes\030\006 \003(\0132\032." +
-      "OsmAnd.OBF.TransportRoute\"\371\002\n\016TransportR" +
-      "oute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operat" +
-      "or\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n\007n" +
-      "ame_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022\r\n\005color\030",
-      "\t \001(\r\0223\n\013directStops\030\017 \003(\0132\036.OsmAnd.OBF." +
-      "TransportRouteStop\0224\n\014reverseStops\030\020 \003(\013" +
-      "2\036.OsmAnd.OBF.TransportRouteStop\022\020\n\010geom" +
-      "etry\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAn" +
-      "d.OBF.TransportRouteSchedule\022\027\n\017attribut" +
-      "eTagIds\030\023 \003(\r\022\036\n\026attributeTextTagValues\030" +
-      "\024 \003(\014\"Q\n\031IncompleteTransportRoutes\0224\n\006ro" +
-      "utes\030\006 \003(\0132$.OsmAnd.OBF.IncompleteTransp" +
-      "ortRoute\"{\n\030IncompleteTransportRoute\022\n\n\002" +
-      "id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r",
-      "\022\013\n\003ref\030\005 \001(\r\022\020\n\010routeRef\030\007 \002(\r\022\024\n\014missi" +
-      "ngStops\030\010 \003(\r\"\244\001\n\026TransportRouteSchedule" +
-      "\022\030\n\020avgStopIntervals\030\001 \001(\014\022\030\n\020avgWaitInt" +
-      "ervals\030\002 \001(\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\ne" +
-      "xceptions\030\010 \003(\0132+.OsmAnd.OBF.TransportRo" +
-      "uteScheduleException\"\313\001\n\037TransportRouteS" +
-      "cheduleException\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n" +
-      "\013stopIndexes\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n" +
-      "\014delayArrival\030\005 \003(\r\022\031\n\021deltaWaitInterval" +
-      "\030\006 \003(\005\022\034\n\024dayOfWeekRestriction\030\007 \003(\r\022\034\n\024",
-      "dayOfYearRestriction\030\010 \003(\r\"W\n\022TransportR" +
-      "outeStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003" +
-      " \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\r" +
-      "TransportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n" +
-      "\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r" +
-      "\022\033\n\023additionalNamePairs\030\010 \001(\014\022,\n\005exits\030\t" +
-      " \003(\0132\035.OsmAnd.OBF.TransportStopExit\022\016\n\006r" +
-      "outes\030\020 \003(\r\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n" +
-      "\troutesIds\030\026 \003(\004\"8\n\021TransportStopExit\022\n\n" +
-      "\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022T",
-      "ransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right" +
-      "\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010s" +
-      "ubtrees\030\007 \003(\0132\036.OsmAnd.OBF.TransportStop" +
-      "sTree\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.Transp" +
-      "ortStop\022\016\n\006baseId\030\020 \001(\004\"\357\001\n\024OsmAndTransp" +
-      "ortIndex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033" +
-      ".OsmAnd.OBF.TransportRoutes\022-\n\005stops\030\006 \001" +
-      "(\0132\036.OsmAnd.OBF.TransportStopsTree\022?\n\020in" +
-      "completeRoutes\030\010 \001(\0132%.OsmAnd.OBF.Incomp" +
-      "leteTransportRoutes\022,\n\013stringTable\030\t \002(\013",
-      "2\027.OsmAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiI" +
-      "ndex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031" +
-      ".OsmAnd.OBF.OsmAndTileBox\0228\n\017categoriesT" +
-      "able\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTa" +
-      "ble\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmA" +
-      "ndPoiNameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037." +
-      "OsmAnd.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030" +
-      "\006 \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiDa" +
-      "ta\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331" +
-      "\001\n\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.O",
-      "smAnd.OBF.IndexedStringTable\022C\n\004data\030\005 \003" +
-      "(\01325.OsmAnd.OBF.OsmAndPoiNameIndex.OsmAn" +
-      "dPoiNameIndexData\032O\n\026OsmAndPoiNameIndexD" +
-      "ata\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPo" +
-      "iNameIndexDataAtom\"Q\n\032OsmAndPoiNameIndex" +
-      "DataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004" +
-      " \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryT" +
-      "able\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030" +
-      "\003 \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes" +
-      "\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n",
-      "\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagna" +
-      "me\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 " +
-      "\001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtyp" +
-      "eValue\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 " +
-      "\002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncatego" +
-      "ries\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategor" +
-      "ies\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAn" +
-      "dPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPo" +
-      "iCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubca" +
-      "tegories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zo",
-      "om\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiDat" +
-      "a\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAto" +
-      "m\"\205\002\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n" +
-      "\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcat" +
-      "egories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 " +
-      "\001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n" +
-      "\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t" +
-      "\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextValues\030\017" +
-      " \003(\t\022\023\n\013precisionXY\030\020 \001(\005\"\032\n\007IdTable\022\017\n\007" +
-      "routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004type",
-      "\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030" +
-      "\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npo" +
-      "intTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005ty" +
-      "pes\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringName" +
-      "s\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030\001" +
-      " \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAndR" +
-      "outingIndex.RouteEncodingRule\022>\n\trootBox" +
-      "es\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
-      ".RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.Os" +
-      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox",
-      "\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRout" +
-      "ingIndex.RouteDataBlock\032;\n\021RouteEncoding" +
-      "Rule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007" +
-      " \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005r" +
-      "ight\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022" +
-      "\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.Os" +
-      "mAnd.OBF.OsmAndRoutingIndex.RouteDataBox" +
-      "\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023.O" +
-      "smAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025" +
-      ".OsmAnd.OBF.RouteData\0221\n\014restrictions\030\007 ",
-      "\003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013stri" +
-      "ngTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTable\"T" +
-      "\n\013OsmAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030" +
-      "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid\030\004" +
-      " \001(\tB\036\n\021net.osmand.binaryB\tOsmandOdb"
+      ".OsmAndRoutingIndex\0228\n\016hhRoutingIndex\030\n ",
+      "\003(\0132 .OsmAnd.OBF.OsmAndHHRoutingIndex\022\026\n" +
+      "\016versionConfirm\030  \002(\r\"I\n\rOsmAndTileBox\022\014" +
+      "\n\004left\030\001 \002(\r\022\r\n\005right\030\002 \002(\r\022\013\n\003top\030\003 \002(\r" +
+      "\022\016\n\006bottom\030\004 \002(\r\"\030\n\013StringTable\022\t\n\001s\030\001 \003" +
+      "(\t\"q\n\022IndexedStringTable\022\016\n\006prefix\030\001 \001(\t" +
+      "\022\013\n\003key\030\003 \003(\t\022\013\n\003val\030\004 \003(\007\0221\n\tsubtables\030" +
+      "\005 \003(\0132\036.OsmAnd.OBF.IndexedStringTable\"\337\004" +
+      "\n\016OsmAndMapIndex\022\014\n\004name\030\002 \002(\t\0229\n\005rules\030" +
+      "\004 \003(\0132*.OsmAnd.OBF.OsmAndMapIndex.MapEnc" +
+      "odingRule\0227\n\006levels\030\005 \003(\0132\'.OsmAnd.OBF.O",
+      "smAndMapIndex.MapRootLevel\032X\n\017MapEncodin" +
+      "gRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \001(\t\022\n\n\002id\030" +
+      "\007 \001(\r\022\017\n\007minZoom\030\t \001(\r\022\014\n\004type\030\n \001(\r\032\312\001\n" +
+      "\014MapRootLevel\022\017\n\007maxZoom\030\001 \002(\005\022\017\n\007minZoo" +
+      "m\030\002 \002(\005\022\014\n\004left\030\003 \002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003" +
+      "top\030\005 \002(\005\022\016\n\006bottom\030\006 \002(\005\0224\n\005boxes\030\007 \003(\013" +
+      "2%.OsmAnd.OBF.OsmAndMapIndex.MapDataBox\022" +
+      "(\n\006blocks\030\017 \003(\0132\030.OsmAnd.OBF.MapDataBloc" +
+      "k\032\243\001\n\nMapDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030" +
+      "\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\026\n\016sh",
+      "iftToMapData\030\005 \001(\007\022\r\n\005ocean\030\006 \001(\010\0224\n\005box" +
+      "es\030\007 \003(\0132%.OsmAnd.OBF.OsmAndMapIndex.Map" +
+      "DataBox\"v\n\014MapDataBlock\022\016\n\006baseId\030\n \001(\004\022" +
+      "(\n\013dataObjects\030\014 \003(\0132\023.OsmAnd.OBF.MapDat" +
+      "a\022,\n\013stringTable\030\017 \001(\0132\027.OsmAnd.OBF.Stri" +
+      "ngTable\"\320\001\n\007MapData\022\023\n\013coordinates\030\001 \001(\014" +
+      "\022\027\n\017areaCoordinates\030\002 \001(\014\022\037\n\027polygonInne" +
+      "rCoordinates\030\004 \003(\014\022\027\n\017additionalTypes\030\006 " +
+      "\001(\014\022\r\n\005types\030\007 \002(\014\022\030\n\020labelcoordinates\030\010" +
+      " \001(\014\022\023\n\013stringNames\030\n \001(\014\022\n\n\002id\030\014 \002(\022\022\023\n",
+      "\013rasterBytes\030\017 \001(\014\"\364\003\n\022OsmAndAddressInde" +
+      "x\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022-\n\nboun" +
+      "daries\030\003 \001(\0132\031.OsmAnd.OBF.OsmAndTileBox\022" +
+      "3\n\022attributeTagsTable\030\004 \001(\0132\027.OsmAnd.OBF" +
+      ".StringTable\022:\n\006cities\030\006 \003(\0132*.OsmAnd.OB" +
+      "F.OsmAndAddressIndex.CitiesIndex\0229\n\tname" +
+      "Index\030\007 \001(\0132&.OsmAnd.OBF.OsmAndAddressNa" +
+      "meIndexData\032\343\001\n\013CitiesIndex\022C\n\004type\030\002 \002(" +
+      "\01625.OsmAnd.OBF.OsmAndAddressIndex.Cities" +
+      "Index.CitiesType\022%\n\006cities\030\005 \003(\0132\025.OsmAn",
+      "d.OBF.CityIndex\022*\n\006blocks\030\007 \003(\0132\032.OsmAnd" +
+      ".OBF.CityBlockIndex\"<\n\nCitiesType\022\021\n\rCit" +
+      "iesOrTowns\020\001\022\r\n\tPostcodes\020\002\022\014\n\010Villages\020" +
+      "\003\"\342\001\n\032OsmAndAddressNameIndexData\022-\n\005tabl" +
+      "e\030\004 \002(\0132\036.OsmAnd.OBF.IndexedStringTable\022" +
+      "I\n\004atom\030\007 \003(\0132;.OsmAnd.OBF.OsmAndAddress" +
+      "NameIndexData.AddressNameIndexData\032J\n\024Ad" +
+      "dressNameIndexData\0222\n\004atom\030\004 \003(\0132$.OsmAn" +
+      "d.OBF.AddressNameIndexDataAtom\"\204\001\n\030Addre" +
+      "ssNameIndexDataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006nam",
+      "eEn\030\002 \001(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030" +
+      "\005 \003(\005\022\030\n\020shiftToCityIndex\030\006 \003(\005\022\014\n\004xy16\030" +
+      "\007 \003(\r\"\260\001\n\tCityIndex\022\021\n\tcity_type\030\001 \001(\r\022\014" +
+      "\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(" +
+      "\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022\027\n\017attributeTagI" +
+      "ds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\022\035\n\025shi" +
+      "ftToCityBlockIndex\030\n \001(\007\"\202\001\n\016CityBlockIn" +
+      "dex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildin" +
+      "gs\030\n \003(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007s" +
+      "treets\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001",
+      "\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002" +
+      " \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersecti" +
+      "ons\030\005 \003(\0132\036.OsmAnd.OBF.StreetIntersectio" +
+      "n\022\n\n\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027" +
+      "\n\017attributeValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003" +
+      "(\0132\031.OsmAnd.OBF.BuildingIndex\"\221\001\n\022Street" +
+      "Intersection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 " +
+      "\001(\t\022\024\n\014intersectedX\030\004 \002(\021\022\024\n\014intersected" +
+      "Y\030\005 \002(\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attr" +
+      "ibuteValues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004n",
+      "ame\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(" +
+      "\t\022\020\n\010name_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001" +
+      "(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002" +
+      "y2\030\n \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027" +
+      "\n\017attributeTagIds\030\017 \003(\r\022\027\n\017attributeValu" +
+      "es\030\020 \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020at" +
+      "tributeValues2\030\022 \003(\t\"=\n\017TransportRoutes\022" +
+      "*\n\006routes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRo" +
+      "ute\"\371\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004ty" +
+      "pe\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022",
+      "\014\n\004name\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distan" +
+      "ce\030\010 \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017" +
+      " \003(\0132\036.OsmAnd.OBF.TransportRouteStop\0224\n\014" +
+      "reverseStops\030\020 \003(\0132\036.OsmAnd.OBF.Transpor" +
+      "tRouteStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014schedule" +
+      "Trip\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSc" +
+      "hedule\022\027\n\017attributeTagIds\030\023 \003(\r\022\036\n\026attri" +
+      "buteTextTagValues\030\024 \003(\014\"Q\n\031IncompleteTra" +
+      "nsportRoutes\0224\n\006routes\030\006 \003(\0132$.OsmAnd.OB" +
+      "F.IncompleteTransportRoute\"{\n\030Incomplete",
+      "TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r" +
+      "\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\r\022\020\n\010route" +
+      "Ref\030\007 \002(\r\022\024\n\014missingStops\030\010 \003(\r\"\244\001\n\026Tran" +
+      "sportRouteSchedule\022\030\n\020avgStopIntervals\030\001" +
+      " \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rtripIn" +
+      "tervals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+.OsmA" +
+      "nd.OBF.TransportRouteScheduleException\"\313" +
+      "\001\n\037TransportRouteScheduleException\022\023\n\013tr" +
+      "ipIndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(\r\022\021\n\t" +
+      "available\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003(\r\022\031\n",
+      "\021deltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWeekRes" +
+      "triction\030\007 \003(\r\022\034\n\024dayOfYearRestriction\030\010" +
+      " \003(\r\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n" +
+      "\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007" +
+      "name_en\030\007 \001(\r\"\332\001\n\rTransportStop\022\n\n\002dx\030\001 " +
+      "\002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(" +
+      "\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additionalNamePair" +
+      "s\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF.Tran" +
+      "sportStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020deleted" +
+      "RoutesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"8\n\021Tr",
+      "ansportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022" +
+      "\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree\022\014\n\004l" +
+      "eft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n" +
+      "\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd" +
+      ".OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132\031" +
+      ".OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001(" +
+      "\004\"\357\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t" +
+      "\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.TransportR" +
+      "outes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Transp" +
+      "ortStopsTree\022?\n\020incompleteRoutes\030\010 \001(\0132%",
+      ".OsmAnd.OBF.IncompleteTransportRoutes\022,\n" +
+      "\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.StringTa" +
+      "ble\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\n" +
+      "boundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTile" +
+      "Box\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmAnd.OB" +
+      "F.OsmAndCategoryTable\0221\n\tnameIndex\030\004 \001(\013" +
+      "2\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n\rsubt" +
+      "ypesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubty" +
+      "pesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.Osm" +
+      "AndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF.",
+      "OsmAndPoiBoxData\"\331\001\n\022OsmAndPoiNameIndex\022" +
+      "-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.IndexedStrin" +
+      "gTable\022C\n\004data\030\005 \003(\01325.OsmAnd.OBF.OsmAnd" +
+      "PoiNameIndex.OsmAndPoiNameIndexData\032O\n\026O" +
+      "smAndPoiNameIndexData\0225\n\005atoms\030\003 \003(\0132&.O" +
+      "smAnd.OBF.OsmAndPoiNameIndexDataAtom\"Q\n\032" +
+      "OsmAndPoiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r" +
+      "\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\"" +
+      ">\n\023OsmAndCategoryTable\022\020\n\010category\030\001 \002(\t" +
+      "\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023OsmAndSubtype",
+      "sTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd.OBF.Os" +
+      "mAndPoiSubtype\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004n" +
+      "ame\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isText\030\003 \002" +
+      "(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021subtypeValuesSi" +
+      "ze\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003(\t\"\255\001\n\014OsmAn" +
+      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003t" +
+      "op\030\003 \002(\021\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.OB" +
+      "F.OsmAndPoiCategories\022*\n\010subBoxes\030\n \003(\0132" +
+      "\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shiftToData" +
+      "\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\ncategor",
+      "ies\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020OsmA" +
+      "ndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n" +
+      "\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF.O" +
+      "smAndPoiBoxDataAtom\"\205\002\n\024OsmAndPoiBoxData" +
+      "Atom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategori" +
+      "es\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004name\030" +
+      "\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014ope" +
+      "ningHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014" +
+      " \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategories\030\016 \003" +
+      "(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionXY\030\020 ",
+      "\001(\005\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restr" +
+      "ictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n" +
+      "\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006" +
+      "points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npoin" +
+      "tNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014" +
+      " \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRout" +
+      "ingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320." +
+      "OsmAnd.OBF.OsmAndRoutingIndex.RouteEncod" +
+      "ingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF." +
+      "OsmAndRoutingIndex.RouteDataBox\022A\n\014basem",
+      "apBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRouting" +
+      "Index.RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.Osm" +
+      "And.OBF.OsmAndRoutingIndex.RouteDataBloc" +
+      "k\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005v" +
+      "alue\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022" +
+      "\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(" +
+      "\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:" +
+      "\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRouting" +
+      "Index.RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n" +
+      "\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013d",
+      "ataObjects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\022" +
+      "1\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.Restr" +
+      "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd" +
+      ".OBF.StringTable\"\317\007\n\024OsmAndHHRoutingInde" +
+      "x\022\017\n\007edition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rp" +
+      "rofileParams\030\003 \003(\t\022E\n\npointBoxes\030\005 \002(\01321" +
+      ".OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoute" +
+      "PointsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAn" +
+      "d.OBF.OsmAndHHRoutingIndex.HHRouteBlockS" +
+      "egments\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002",
+      "(\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom" +
+      "\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAn" +
+      "dHHRoutingIndex.HHRoutePointsBox\022D\n\006poin" +
+      "ts\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingInd" +
+      "ex.HHRouteNetworkPoint\032\335\001\n\023HHRouteNetwor" +
+      "kPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
+      "(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021" +
+      "roadStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001" +
+      "(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId" +
+      "\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd",
+      "\030\013 \001(\005\032\360\001\n\024HHRouteBlockSegments\022\024\n\014idRan" +
+      "geStart\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\t" +
+      "profileId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.O" +
+      "smAnd.OBF.OsmAndHHRoutingIndex.HHRouteBl" +
+      "ockSegments\022L\n\rpointSegments\030\004 \003(\01325.Osm" +
+      "And.OBF.OsmAndHHRoutingIndex.HHRoutePoin" +
+      "tSegments\032?\n\024HHRoutePointSegments\022\022\n\nseg" +
+      "mentsIn\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013Os" +
+      "mAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(" +
+      "\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\t",
+      "B\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -66735,7 +73945,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndStructure_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndStructure_descriptor,
-              new java.lang.String[] { "Version", "DateCreated", "Owner", "AddressIndex", "TransportIndex", "PoiIndex", "MapIndex", "RoutingIndex", "VersionConfirm", });
+              new java.lang.String[] { "Version", "DateCreated", "Owner", "AddressIndex", "TransportIndex", "PoiIndex", "MapIndex", "RoutingIndex", "HhRoutingIndex", "VersionConfirm", });
           internal_static_OsmAnd_OBF_OsmAndTileBox_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_OsmAnd_OBF_OsmAndTileBox_fieldAccessorTable = new
@@ -67024,8 +74234,38 @@ public final class OsmandOdb {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndRoutingIndex_RouteDataBlock_descriptor,
               new java.lang.String[] { "IdTable", "DataObjects", "Restrictions", "StringTable", });
-          internal_static_OsmAnd_OBF_OsmAndOwner_descriptor =
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor =
             getDescriptor().getMessageTypes().get(40);
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor,
+              new java.lang.String[] { "Edition", "Profile", "ProfileParams", "PointBoxes", "PointSegments", });
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor =
+            internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(0);
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor,
+              new java.lang.String[] { "Left", "Right", "Top", "Bottom", "Boxes", "Points", });
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor =
+            internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(1);
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor,
+              new java.lang.String[] { "Id", "Dx", "Dy", "GlobalId", "RoadId", "RoadStartEndIndex", "ClusterId", "DualPointId", "DualClusterId", "ProfileIds", "PartialInd", });
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor =
+            internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(2);
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor,
+              new java.lang.String[] { "IdRangeStart", "IdRangeLength", "ProfileId", "InnerBlocks", "PointSegments", });
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor =
+            internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(3);
+          internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor,
+              new java.lang.String[] { "SegmentsIn", "SegmentsOut", });
+          internal_static_OsmAnd_OBF_OsmAndOwner_descriptor =
+            getDescriptor().getMessageTypes().get(41);
           internal_static_OsmAnd_OBF_OsmAndOwner_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndOwner_descriptor,

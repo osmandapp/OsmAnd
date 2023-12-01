@@ -243,7 +243,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -2013,7 +2013,6 @@
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Búsqueda personalizada</string>
-    <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
@@ -4802,7 +4801,7 @@
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
-    <string name="external_sensor_widgets">Widgets de ANT+</string>
+    <string name="external_sensor_widgets">Sensores externos</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
 \nDebes instalar o actualizar el servicio para el complemento ANT+.
 \n¿Quieres abrir Play Store para hacer eso\?</string>
@@ -4812,7 +4811,7 @@
     <string name="ant_heart_rate_write_gpx_desc">Incluye la frecuencia cardíaca en la traza</string>
     <string name="ant_write_to_gpx">Escribir datos en la traza</string>
     <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
-    <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
+    <string name="map_widget_ant_heart_rate_desc">Muestra el ritmo cardíaco del usuario durante una determinada actividad en tiempo real</string>
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
     <string name="map_widget_ant_bicycle_cadence">Cadencia de la bicicleta</string>
@@ -5200,7 +5199,7 @@
     <string name="shared_string_hand">Mano</string>
     <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
     <string name="shared_string_foot">Pie</string>
-    <string name="running_scds_device_name">Dispositivo para «Correr»</string>
+    <string name="running_scds_device_name">Ejecutando dispositivo</string>
     <string name="rendering_attr_lightDetail_name">Detalles de alumbrado</string>
     <string name="rendering_attr_lightDetail_description">Predefinido: nombre de la baliza náutica (carácter de luz.grupo.período), elige información adicional sobre los sectores 1 al 3 o el carácter de luz del sector 1 al 5</string>
     <string name="rendering_value_sectors_name">Sectores</string>
@@ -5495,7 +5494,7 @@
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
-    <string name="edit_fiilter">Editar filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
@@ -5578,4 +5577,11 @@
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
     <string name="topography_maps">Mapas topográficos</string>
+    <string name="reset_key_assignments_desc">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
+    <string name="shared_string_reassign">Reasignar</string>
+    <string name="reset_key_assignments">Restablecer asignaciones de teclas</string>
+    <string name="rendering_attr_showToll_description">Muestra las restricciones de peajes en las carreteras</string>
+    <string name="target_elevation">Elevación del objetivo</string>
+    <string name="shared_string_eta">ETA</string>
 </resources>

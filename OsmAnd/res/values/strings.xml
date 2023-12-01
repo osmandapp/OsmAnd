@@ -13,6 +13,8 @@
 
     <string name="zoom_animated">Animated zoom</string>
     <string name="zoom_non_animated">Non-animated zoom</string>
+    <string name="rendering_attr_showToll_name">Show toll restrictions</string>
+    <string name="rendering_attr_showToll_description">Show toll restrictions on roads</string>
     <string name="reset_key_assignments_desc">All key assignments for the selected type will be removed.</string>
     <string name="reset_key_assignments">Reset key assignments</string>
     <string name="shared_string_reassign">Reassign</string>
@@ -96,7 +98,7 @@
     <string name="discard_filter_changes">Discard filter changes</string>
     <string name="discard_filter_changes_prompt">Are you sure you want to reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
-    <string name="edit_fiilter">Edit filter</string>
+    <string name="edit_filter">Edit filter</string>
     <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
@@ -3114,7 +3116,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_surfaceIntegrity_name">Road surface integrity</string>
     <string name="search_hint">Type city, address, POI name</string>
     <string name="translit_names">Transliterate names</string>
-    <string name="edit_filter">Edit categories</string>
     <string name="subcategories">Subcategories</string>
     <string name="selected_categories">Selected categories</string>
     <string name="create_custom_poi">Create custom filter</string>
@@ -3886,7 +3887,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
     <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access restrictions and toll</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
@@ -3949,6 +3950,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="sound_beep_simple">Beep: simple</string>
     <string name="sound_beep_simple_loud">Beep: simple loud</string>
     <string name="lang_zh">Chinese</string>
+    <string name="lang_zh_hans">Simplified Chinese</string>
+    <string name="lang_zh_hant">Traditional Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
     <string name="lang_en_gb">English (United Kingdom)</string>

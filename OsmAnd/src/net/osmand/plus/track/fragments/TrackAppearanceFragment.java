@@ -55,7 +55,8 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackColoringCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
@@ -687,13 +688,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void discardSplitChanges() {
-		if (gpxDataItem != null && (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType()
-				|| gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval())) {
-			int timeSplit = (int) gpxDataItem.getSplitInterval();
-			double distanceSplit = gpxDataItem.getSplitInterval();
+		if (gpxDataItem != null) {
+			GpxData gpxData = gpxDataItem.getGpxData();
+			if (gpxData.getSplitType() != trackDrawInfo.getSplitType()
+					|| gpxData.getSplitInterval() != trackDrawInfo.getSplitInterval()) {
+				int timeSplit = (int) gpxData.getSplitInterval();
+				double distanceSplit = gpxData.getSplitInterval();
 
-			GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(gpxDataItem.getSplitType());
-			applySplit(splitType, timeSplit, distanceSplit);
+				GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(gpxData.getSplitType());
+				applySplit(splitType, timeSplit, distanceSplit);
+			}
 		}
 	}
 

@@ -29,7 +29,7 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 		} else {
 			val newCollection = HashMap<String, Int>()
 			for (item in items!!) {
-				val folderName = item.dataItem?.containingFolder ?: ""
+				val folderName = item.dataItem?.gpxData?.containingFolder ?: ""
 				val count = newCollection[folderName] ?: 0
 				newCollection[folderName] = count + 1
 			}
@@ -44,7 +44,7 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 			if (!Algorithms.isEmpty(selectedItems)) {
 				for (folder in selectedItems) {
 					trackItem.dataItem?.let { gpxDataItem ->
-						if (Algorithms.stringsEqual(gpxDataItem.containingFolder, folder)) {
+						if (Algorithms.stringsEqual(gpxDataItem.gpxData.containingFolder, folder)) {
 							return true
 						}
 					}

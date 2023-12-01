@@ -9,6 +9,8 @@ import static net.osmand.IndexConstants.FONT_INDEX_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
+import static net.osmand.IndexConstants.HIDDEN_BACKUP_DIR;
+import static net.osmand.IndexConstants.HIDDEN_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
 import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
 import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
@@ -46,6 +48,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
@@ -155,12 +158,12 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	}
 
 	private boolean restoreItem(@NonNull LocalItem item) {
-		return move(item.getFile(), getFileToRestore(item));
+		return FileUtils.move(item.getFile(), getFileToRestore(item));
 	}
 
 	private boolean backupItem(@NonNull LocalItem item) {
 		File file = item.getFile();
-		boolean success = move(file, getFileToBackup(item));
+		boolean success = FileUtils.move(file, getFileToBackup(item));
 		if (success) {
 			app.getResourceManager().closeFile(file.getName());
 		}
@@ -176,19 +179,12 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 		return source != null;
 	}
 
-	private boolean move(@NonNull File from, @NonNull File to) {
-		File parent = to.getParentFile();
-		if (parent != null && !parent.exists()) {
-			parent.mkdirs();
-		}
-		return from.renameTo(to);
-	}
-
 	@NonNull
 	private File getFileToBackup(@NonNull LocalItem item) {
 		File file = item.getFile();
 		if (!item.isBackuped(app)) {
-			return new File(app.getAppPath(BACKUP_INDEX_DIR), file.getName());
+			File path = item.isHidden(app) ? app.getAppInternalPath(HIDDEN_BACKUP_DIR) : app.getAppPath(BACKUP_INDEX_DIR);
+			return new File(path, file.getName());
 		}
 		return file;
 	}
@@ -199,7 +195,9 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 		String fileName = file.getName();
 		if (item.isBackuped(app)) {
 			File parent = file.getParentFile();
-			if (item.getType() == MAP_DATA) {
+			if (item.isHidden(app)) {
+				parent = app.getAppInternalPath(HIDDEN_DIR);
+			} else if (item.getType() == MAP_DATA) {
 				if (fileName.endsWith(BINARY_ROAD_MAP_INDEX_EXT)) {
 					parent = app.getAppPath(ROADS_INDEX_DIR);
 				} else {

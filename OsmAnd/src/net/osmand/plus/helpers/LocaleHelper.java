@@ -3,14 +3,19 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -25,19 +30,41 @@ public class LocaleHelper {
 	private final OsmandApplication app;
 
 	private final Locale defaultLocale;
+	private final StateChangedListener<String> localeListener;
+
 	private Locale preferredLocale;
 	private Resources localizedResources;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.defaultLocale = Locale.getDefault();
+		localeListener = change -> preferredLocaleChanged();
+	}
+
+	private void preferredLocaleChanged() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
+			if (!Algorithms.isEmpty(preferredLocale)) {
+				Locale locale = new Locale(preferredLocale);
+				Locale.setDefault(locale);
+				app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
+			}
+		}
 	}
 
 	public void checkPreferredLocale() {
-		Configuration config = app.getBaseContext().getResources().getConfiguration();
+		OsmandSettings settings = app.getSettings();
+		String locale = settings.PREFERRED_LOCALE.get();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			String currentLocale = Locale.getDefault().toString();
+			if (!Algorithms.stringsEqual(currentLocale, locale)) {
+				locale = currentLocale;
+				settings.PREFERRED_LOCALE.set(locale);
+			}
+		}
+		settings.PREFERRED_LOCALE.addListener(localeListener);
 
-		String pl = app.getSettings().PREFERRED_LOCALE.get();
-		String[] splitScript = pl.split("\\+");
+		String[] splitScript = locale.split("\\+");
 		String script = (splitScript.length > 1) ? splitScript[1] : "";
 		String[] splitCountry = splitScript[0].split("_");
 		String lang = splitCountry[0];
@@ -47,9 +74,9 @@ public class LocaleHelper {
 			Locale.Builder builder = new Locale.Builder();
 			lang = backwardCompatibleNonIsoCodes(lang);
 			String langLowerCase = lang.toLowerCase();
-			for (String locale : Locale.getISOLanguages()) {
-				if (locale.toLowerCase().equals(langLowerCase)) {
-					builder.setLanguage(lang);
+			for (String isoLang : Locale.getISOLanguages()) {
+				if (isoLang.toLowerCase().equals(langLowerCase)) {
+					builder.setLanguage(isoLang);
 					break;
 				}
 			}
@@ -63,7 +90,7 @@ public class LocaleHelper {
 		}
 
 		Locale selectedLocale = null;
-
+		Configuration config = app.getBaseContext().getResources().getConfiguration();
 		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
 			selectedLocale = preferredLocale;
 		} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {

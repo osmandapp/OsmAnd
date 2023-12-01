@@ -24,7 +24,7 @@ class ColorTrackFilter(app: OsmandApplication, filterChangedListener: FilterChan
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (color in selectedItems) {
-			val trackItemColor = trackItem.dataItem?.color
+			val trackItemColor = trackItem.dataItem?.gpxData?.color
 			if (trackItemColor == 0 && Algorithms.isEmpty(color) ||
 				!Algorithms.isEmpty(color) && trackItemColor == Color.parseColor(color)) {
 				return true

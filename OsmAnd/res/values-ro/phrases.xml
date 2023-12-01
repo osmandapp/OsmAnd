@@ -178,7 +178,7 @@
     <string name="poi_communication">Comunicare</string>
     <string name="poi_power">Putere</string>
     <string name="poi_water_supply">Sursă apă</string>
-    <string name="poi_transport_construction">Construcție de transport</string>
+    <string name="poi_transport_construction">Construcție pentru transport</string>
     <string name="poi_man_made">Structură artificială</string>
     <string name="poi_traffic_enforcement">Control trafic</string>
     <string name="poi_hiking_routes">Trasee de drumeție</string>
@@ -479,7 +479,7 @@
     <string name="poi_driving_school">Școală de șoferi</string>
     <string name="poi_college">Colegiu</string>
     <string name="poi_storage_tank">Rezervor de stocare</string>
-    <string name="poi_bunker_silo">Siloz buncăr</string>
+    <string name="poi_bunker_silo">Siloz tip buncăr</string>
     <string name="poi_silo">Siloz</string>
     <string name="poi_gasometer">Gazometru</string>
     <string name="poi_cricket_nets">Plase de cricket</string>
@@ -497,7 +497,7 @@
     <string name="poi_crane">Macara</string>
     <string name="poi_radar">Radar</string>
     <string name="poi_monitoring_station">Stație de monitorizare</string>
-    <string name="poi_mast">Catarg (antenă)</string>
+    <string name="poi_mast">Catarg</string>
     <string name="poi_tower">Turn</string>
     <string name="poi_astronomical_observatory">Astronomic</string>
     <string name="poi_observatory">Observator</string>
@@ -511,7 +511,7 @@
     <string name="poi_orchard">Livadă</string>
     <string name="poi_vineyard">Podgorie</string>
     <string name="poi_quarry">Carieră</string>
-    <string name="poi_retail">Zonă comercială (vânzări)</string>
+    <string name="poi_retail">Zonă comercială (magazine)</string>
     <string name="poi_commercial">Zonă comercială (servicii)</string>
     <string name="poi_landuse_railway">Zonă de cale ferată</string>
     <string name="poi_industrial">Zonă industrială</string>
@@ -709,7 +709,7 @@
     <string name="poi_water_tower">Turn de apă</string>
     <string name="poi_wastewater_plant">Stație de epurare</string>
     <string name="poi_boatyard">Șantier naval</string>
-    <string name="poi_water_works">Stație tratare apă</string>
+    <string name="poi_water_works">Stație de tratare apă</string>
     <string name="poi_standpipe">Țeavă verticală</string>
     <string name="poi_water_well">Fântână</string>
     <string name="poi_escape_lane">Banda de urgență</string>
@@ -752,7 +752,7 @@
     <string name="poi_public_transport_station">Stație de transport public</string>
     <string name="poi_tram_stop">Stație de tramvai</string>
     <string name="poi_public_transport_platform_tram">Stație de tramvai</string>
-    <string name="poi_public_transport_stop_position">Punct de oprire transport public</string>
+    <string name="poi_public_transport_stop_position">Loc de oprire pentru transport public</string>
     <string name="poi_bus_stop">Stație de autobuz</string>
     <string name="poi_public_transport_platform_trolleybus">Stație de troleibuz</string>
     <string name="poi_public_transport_platform_bus">Stație de autobuz</string>
@@ -995,7 +995,7 @@
     <string name="poi_craft_optician">Optician</string>
     <string name="poi_craft_metal_construction">Fabricant obiecte din metal</string>
     <string name="poi_craft_key_cutter">Copii chei</string>
-    <string name="poi_craft_locksmith">Lăcătușerie</string>
+    <string name="poi_craft_locksmith">Lăcătuș</string>
     <string name="poi_craft_jeweller">Bijutier</string>
     <string name="poi_craft_insulation">Izolație</string>
     <string name="poi_craft_hvac">Încălzire, ventilație, aer condiționat</string>
@@ -1171,7 +1171,7 @@
     <string name="poi_highway_crossing">Trecere de pietoni</string>
     <string name="poi_entrance_exit">Ieșire</string>
     <string name="poi_entrance">Intrare</string>
-    <string name="poi_entrance_main">Intrarea principală</string>
+    <string name="poi_entrance_main">Intrare principală</string>
     <string name="poi_barrier_entrance">Trecere printr-un perete sau printr-un gard</string>
     <string name="poi_kent_carriage_gap">Kent decalaj de cărucior</string>
     <string name="poi_turnstile">Turnichet</string>
@@ -1345,7 +1345,7 @@
     <string name="poi_radar_transponder">Radar transponder, marcaj maritim</string>
     <string name="poi_pile">Grămadă</string>
     <string name="poi_notice">Aviz, marcaj maritim</string>
-    <string name="poi_lock_basin">Bazin de blocare</string>
+    <string name="poi_lock_basin">Bazin ecluză</string>
     <string name="poi_mooring">Baba</string>
     <string name="poi_seamark_light">Lumină, marcaj maritim</string>
     <string name="poi_seamark_light_major">Lumină puternică, marcaj maritim</string>
@@ -1543,7 +1543,7 @@
     <string name="poi_information_map">Hartă</string>
     <string name="poi_information_board">Bord</string>
     <string name="poi_information_guidepost">Stâlp indicator</string>
-    <string name="poi_water_point">Punct de apă</string>
+    <string name="poi_water_point">Loc de adăpare</string>
     <string name="poi_water_characteristic_sulfuric">Sulfuric</string>
     <string name="poi_water_characteristic_mud">Noroi</string>
     <string name="poi_water_characteristic_mineral">Minerale</string>
@@ -1877,10 +1877,10 @@
     <string name="poi_sculptor">Sculptorul</string>
     <string name="poi_artist_name">Artistul</string>
     <string name="poi_square">Piață</string>
-    <string name="poi_historic_railway">Calea ferată istorică</string>
+    <string name="poi_historic_railway">Cale ferată istorică</string>
     <string name="poi_historic_gallows">Spânzurătoarea istorică</string>
     <string name="poi_historic_threshing_floor">Etaj istoric de treierat</string>
-    <string name="poi_historic_railway_station">Gara istorică de cale ferată</string>
+    <string name="poi_historic_railway_station">Gară istorică</string>
     <string name="poi_historic_farm">Fermă istorică</string>
     <string name="poi_pa">Pa (așezare fortificată maori)</string>
     <string name="poi_fortification_type_ring_ditch">Tipul de fortificație: șanț inelar</string>
@@ -2148,7 +2148,7 @@
     <string name="poi_industrial_auto_wrecker">Tip: dezmembrări auto</string>
     <string name="poi_industrial_warehouse">Tip: depozit</string>
     <string name="poi_industrial_refinery">Tip: rafinărie</string>
-    <string name="poi_industrial_timber">Tip: lemn de construcție</string>
+    <string name="poi_industrial_timber">Tip: cherestea</string>
     <string name="poi_industrial_gas">Tip: industria gazelor</string>
     <string name="poi_industrial_factory">Tip: fabrică</string>
     <string name="poi_industrial_wellsite">Tip: sit de sonde</string>
@@ -2616,7 +2616,7 @@
     <string name="poi_depth">Adâncime</string>
     <string name="poi_bicycle_parking_streetpod">Streetpod</string>
     <string name="poi_bicycle_parking_tree">Suspendată</string>
-    <string name="poi_bicycle_parking_lockers">Dulăpioare</string>
+    <string name="poi_bicycle_parking_lockers">Dulapuri</string>
     <string name="poi_military_checkpoint">Punct de control militar</string>
     <string name="poi_street_cabinet_street_lighting">Tip cabinet: iluminat public</string>
     <string name="poi_street_cabinet_water_management">Tipul de cabinet: managementul apei</string>
@@ -3068,8 +3068,8 @@
     <string name="poi_direction_entrance">Direcția: intrare</string>
     <string name="poi_direction_down">Direcția: jos</string>
     <string name="poi_direction_up">Direcția: sus</string>
-    <string name="poi_direction_anticlockwise">Direcția: în sens invers acelor de ceasornic</string>
-    <string name="poi_direction_clockwise">Direcția: în sensul acelor de ceasornic</string>
+    <string name="poi_direction_anticlockwise">Direcție: în sens invers acelor de ceasornic</string>
+    <string name="poi_direction_clockwise">Direcție: în sensul acelor de ceasornic</string>
     <string name="poi_direction_backward">Direcția: înapoi</string>
     <string name="poi_direction_forward">Direcția: înainte</string>
     <string name="poi_direction_nnw">Direcția: nord-nord-vest</string>
@@ -3350,7 +3350,7 @@
     <string name="poi_railway_yard">Stație de marfă</string>
     <string name="poi_tower_construction_concealed">Construcție: ascunsă</string>
     <string name="poi_tower_construction_dome">Construcție: cupolă</string>
-    <string name="poi_tower_construction_dish">Construcție: antena</string>
+    <string name="poi_tower_construction_dish">Construcție: antenă parabolică</string>
     <string name="poi_tower_construction_freestanding">Construcție: autoportantă</string>
     <string name="poi_tower_construction_lattice">Construcție: grilaj</string>
     <string name="poi_animal_keeping_type_open_stable">Tip: grajd deschis</string>
@@ -3540,7 +3540,7 @@
     <string name="poi_checkpoint_type_stamp">Punct de ștampilare</string>
     <string name="poi_checkpoint_hiking">Punct de control pentru drumeții</string>
     <string name="poi_glacier_slope">Panta medie</string>
-    <string name="poi_glacier_ele_bottom">Punctul cel mai de jos</string>
+    <string name="poi_glacier_ele_bottom">Cel mai jos punct</string>
     <string name="poi_glacier_ele_top">Cel mai înalt punct</string>
     <string name="poi_glacier_type_ice_tongue">Limba de gheață</string>
     <string name="poi_glacier_type_remnant">Rămășiță</string>
@@ -3557,7 +3557,7 @@
     <string name="poi_glacier_type_icecap">Ghețar</string>
     <string name="poi_via_ferrata_scale">Dificultate</string>
     <string name="poi_cable_number">Numărul de cablu</string>
-    <string name="poi_via_ferrata">Cale ferată</string>
+    <string name="poi_via_ferrata">Via ferrata</string>
     <string name="poi_climbing_adventure">Aventură de cățărare</string>
     <string name="poi_aerialway_zip_line">Tiroliană</string>
     <string name="poi_service_vehicle_tyres_yes">Anvelope</string>
@@ -3584,7 +3584,7 @@
     <string name="poi_amusement_arcade">Distracție arcade</string>
     <string name="poi_water_utility">Birou de serviciu public de apă</string>
     <string name="poi_barbecue_grill">Grătar pentru grătar: da</string>
-    <string name="poi_outpost">Punctul de livrare al magazinului</string>
+    <string name="poi_outpost">Punct de livrare al magazinului</string>
     <string name="poi_whitewater_rapid_name">Nume repeziș</string>
     <string name="poi_pottery">Ceramică</string>
     <string name="poi_flooring">Magazin de pardoseli</string>
@@ -3799,7 +3799,7 @@
     <string name="poi_swimming_area">Zonă de înot</string>
     <string name="poi_lavoir">Lavoar</string>
     <string name="poi_waste_transfer_station">Stație de transfer a deșeurilor</string>
-    <string name="poi_weighbridge">Pod de greutate; Cântar pentru camioane</string>
+    <string name="poi_weighbridge">Pod de cântărire; Cântar pentru camioane</string>
     <string name="poi_ranger_station">Centru de vizitare</string>
     <string name="poi_water_source_lake">Lacul</string>
     <string name="poi_water_source_river">Râul</string>
@@ -3936,7 +3936,7 @@
     <string name="poi_craft_distillery">Distilerie</string>
     <string name="poi_craft_builder">Constructor</string>
     <string name="poi_health_food">Alimente sănătoase</string>
-    <string name="poi_cellar_entrance">Intrarea în pivniță</string>
+    <string name="poi_cellar_entrance">Intrare în pivniță</string>
     <string name="poi_disabled_designated">Acces desemnat;Acces desemnat pentru persoane cu handicap</string>
     <string name="poi_disabled_yes">Da;Dezactivat</string>
     <string name="poi_goods_designated">Desemnat;Acces desemnat pentru vehicule comerciale ușoare</string>
@@ -4003,10 +4003,10 @@
     <string name="poi_parking_layby">Spațiu de odihnă</string>
     <string name="poi_parking_sheds">Parcare acoperită</string>
     <string name="poi_parking_rooftop">Acoperiș</string>
-    <string name="poi_gpx_point">GPX punct</string>
+    <string name="poi_gpx_point">Punct GPX</string>
     <string name="poi_fuel_lng">Petrol lichid</string>
     <string name="poi_nuts">Magazin de nuci</string>
-    <string name="poi_beehive">Stupul de albine</string>
+    <string name="poi_beehive">Stup</string>
     <string name="poi_departures_board_timetable">Orar;Bord de plecare</string>
     <string name="poi_departures_board_realtime">În timp real;Bord de plecări</string>
     <string name="poi_departures_board_delay">Întârziere;Plecări bord</string>
@@ -4221,7 +4221,7 @@
     <string name="poi_post_office_type">Tip</string>
     <string name="poi_museum_art">Artă</string>
     <string name="poi_museum_transport">Transport</string>
-    <string name="poi_museum_railway">Calea ferată</string>
+    <string name="poi_museum_railway">Cale ferată</string>
     <string name="poi_museum_aviation">Aviație</string>
     <string name="poi_museum_aerospace">Industria aerospațială</string>
     <string name="poi_museum_maritime">Maritim</string>
@@ -4553,8 +4553,8 @@
     <string name="poi_lock_name">Nume ecluză</string>
     <string name="poi_draft">Adâncimea căii de rulare</string>
     <string name="poi_maxlength">Lungime maximă</string>
-    <string name="poi_lock_ref">Referința unui lacăt</string>
-    <string name="poi_lock_height">Înălțimea unui lacăt</string>
+    <string name="poi_lock_ref">Referință ecluză</string>
+    <string name="poi_lock_height">Înălțimea unei ecluze</string>
     <string name="poi_boat_private">Acces cu barca: privat</string>
     <string name="poi_boat_destination">Acces cu barca: destinație</string>
     <string name="poi_boat_permissive">Acces cu barca: permisiv</string>

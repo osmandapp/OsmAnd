@@ -179,6 +179,7 @@ public class CustomRegion extends WorldRegion {
 					long contentSize = itemJson.optLong("contentSize");
 					long containerSize = itemJson.optLong("containerSize");
 
+					boolean isHidden = itemJson.optBoolean("isHidden", false);
 					String indexType = itemJson.optString("type", type);
 					String fileName = itemJson.optString("filename");
 					String downloadUrl = itemJson.optString("downloadurl");
@@ -205,6 +206,7 @@ public class CustomRegion extends WorldRegion {
 								.setContentSize(contentSize)
 								.setContainerSize(containerSize)
 								.setType(type)
+								.setIsHidden(isHidden)
 								.create();
 
 						items.add(indexItem);

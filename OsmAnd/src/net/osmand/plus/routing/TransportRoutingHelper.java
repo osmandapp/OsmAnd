@@ -38,6 +38,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -440,11 +441,13 @@ public class TransportRoutingHelper {
 
 	private static class RouteRecalculationTask implements Runnable {
 
+		private final int MAX_WALKING_CNT = 4;
 		private final TransportRoutingHelper transportRoutingHelper;
 		private final RoutingHelper routingHelper;
 		private final TransportRouteCalculationParams params;
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
+		private List<WalkingRouteSegment> walkingSegmentsFromCacheOnly = new ArrayList<>();
 		private final Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private final Map<Pair<Location, LatLon>, RouteCalculationResult> walkingRouteSegmentsCache = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
@@ -532,16 +535,14 @@ public class TransportRoutingHelper {
 			do {
 				walkingRouteSegment = walkingSegmentsToCalculate.poll();
 				if (walkingRouteSegment == null) {
+					for (WalkingRouteSegment ws : walkingSegmentsFromCacheOnly) {
+						retrieveFromCache(ws);
+					}
+					walkingSegmentsFromCacheOnly.clear();
 					walkingSegmentsCalculated = true;
 					return null;
 				}
-				start.setLatitude(walkingRouteSegment.start.getLatitude());
-				start.setLongitude(walkingRouteSegment.start.getLongitude());
-				end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
-				cachedRoute = getRouteFromCache(start, end);
-				if (cachedRoute != null) {
-					walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), cachedRoute);
-				}
+				cachedRoute = retrieveFromCache(walkingRouteSegment);
 			} while (cachedRoute != null);
 
 			float currentDistanceFromBegin =
@@ -549,6 +550,9 @@ public class TransportRoutingHelper {
 							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.inPublicTransportMode = true;
+			start.setLatitude(walkingRouteSegment.start.getLatitude());
+			start.setLongitude(walkingRouteSegment.start.getLongitude());
+			end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 			params.start = start;
 			params.end = end;
 			params.startTransportStop = walkingRouteSegment.startTransportStop;
@@ -584,6 +588,10 @@ public class TransportRoutingHelper {
 				@Override
 				public void onCalculationFinish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
+						for (WalkingRouteSegment ws : walkingSegmentsFromCacheOnly) {
+							retrieveFromCache(ws);
+						}
+						walkingSegmentsFromCacheOnly.clear();
 						walkingSegmentsCalculated = true;
 					} else {
 						onUpdateCalculationProgress(0);
@@ -603,6 +611,18 @@ public class TransportRoutingHelper {
 			return params;
 		}
 
+		private RouteCalculationResult retrieveFromCache(WalkingRouteSegment ws) {
+			Location start = new Location("");
+			start.setLatitude(ws.start.getLatitude());
+			start.setLongitude(ws.start.getLongitude());
+			LatLon end = new LatLon(ws.end.getLatitude(), ws.end.getLongitude());
+			RouteCalculationResult cachedRoute = getRouteFromCache(start, end);
+			if (cachedRoute != null) {
+				walkingRouteSegments.put(new Pair<>(ws.s1, ws.s2), cachedRoute);
+			}
+			return cachedRoute;
+		}
+
 		private RouteCalculationResult getRouteFromCache(Location start, LatLon end) {
 			for (Map.Entry<Pair<Location, LatLon>, RouteCalculationResult> entry : walkingRouteSegmentsCache.entrySet()) {
 				Location startLocation = entry.getKey().first;
@@ -620,22 +640,34 @@ public class TransportRoutingHelper {
 			walkingRouteSegments.clear();
 			walkingRouteSegmentsCache.clear();
 			if (routes != null && routes.size() > 0) {
-				for (TransportRouteResult r : routes) {
+				for (int i = 0; i < routes.size(); i++) {
+					TransportRouteResult r = routes.get(i);
 					TransportRouteResultSegment prevSegment = null;
+					boolean cacheOnly = i >= MAX_WALKING_CNT;
 					for (TransportRouteResultSegment segment : r.getSegments()) {
 						LatLon start = prevSegment != null ? prevSegment.getEnd().getLocation() : params.start;
 						LatLon end = segment.getStart().getLocation();
 						if (start != null && end != null) {
 							if (prevSegment == null || MapUtils.getDistance(start, end) > 50) {
-								walkingSegmentsToCalculate.add(prevSegment == null
+								WalkingRouteSegment ws = prevSegment == null
 										? new WalkingRouteSegment(start, segment)
-										: new WalkingRouteSegment(prevSegment, segment));
+										: new WalkingRouteSegment(prevSegment, segment);
+								if (cacheOnly) {
+									walkingSegmentsFromCacheOnly.add(ws);
+								} else {
+									walkingSegmentsToCalculate.add(ws);
+								}
 							}
 						}
 						prevSegment = segment;
 					}
 					if (prevSegment != null) {
-						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prevSegment, params.end));
+						WalkingRouteSegment ws = new WalkingRouteSegment(prevSegment, params.end);
+						if (cacheOnly) {
+							walkingSegmentsFromCacheOnly.add(ws);
+						} else {
+							walkingSegmentsToCalculate.add(ws);
+						}
 					}
 				}
 				RouteCalculationParams walkingRouteParams = getOrProcessWalkingRouteParams();

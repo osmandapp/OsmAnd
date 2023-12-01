@@ -56,6 +56,7 @@ public class GeneralRouter implements VehicleRouter {
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters;
+	private final Map<String, String> parameterValues; 
 	private final Map<String, Integer> universalRules;
 	private final List<String> universalRulesById;
 	private final Map<String, BitSet> tagRuleMask;
@@ -86,7 +87,8 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private GeneralRouterProfile profile;
 	
-	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;	
+	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;
+		
 	
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
@@ -119,6 +121,9 @@ public class GeneralRouter implements VehicleRouter {
 		PEDESTRIAN,
 		BICYCLE,
 		BOAT,
+		SKI,
+		MOPED,
+		TRAIN,
 		PUBLIC_TRANSPORT,
 		HORSEBACKRIDING
 	}
@@ -140,9 +145,11 @@ public class GeneralRouter implements VehicleRouter {
 		// do not copy, keep linked
 		universalRules = parent.universalRules;
 		universalRulesById = parent.universalRulesById;
+		parameterValues = params;
 		tagRuleMask = parent.tagRuleMask;
 		ruleToValue = parent.ruleToValue;
 		parameters = parent.parameters;
+		profileName = parent.profileName;
 		
 		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
 		for (int i = 0; i < objectAttributes.length; i++) {
@@ -179,6 +186,7 @@ public class GeneralRouter implements VehicleRouter {
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
 		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
+		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
 		while(e.hasNext()){
 			Entry<String, String> next = e.next();
@@ -234,6 +242,24 @@ public class GeneralRouter implements VehicleRouter {
 
 	public Map<String, RoutingParameter> getParameters() {
 		return parameters;
+	}
+	
+	public Map<String, String> getParameterValues() {
+		return parameterValues;
+	}
+	
+	public List<String> serializeParameterValues(Map<String, String> vls) {
+		List<String> ls = new ArrayList<String>();
+		for (Entry<String, String> e : vls.entrySet()) {
+			if (parameters.containsKey(e.getKey())) {
+				if (parameters.get(e.getKey()).type == RoutingParameterType.BOOLEAN) {
+					ls.add(e.getKey());
+				} else {
+					ls.add(e.getKey() + "=" + e.getValue());
+				}
+			}
+		}
+		return ls;
 	}
 
 	public void addAttribute(String k, String v) {
@@ -382,7 +408,7 @@ public class GeneralRouter implements VehicleRouter {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, dir);
-			if(obst == null) {
+			if (obst == null) {
 				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
 				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
 				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, dir);
@@ -499,38 +525,42 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	@Override
-	public float defineRoutingSpeed(RouteDataObject road) {
-		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
+	public float defineRoutingSpeed(RouteDataObject road, boolean dir) {
+		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (definedSpd == null) {
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
-			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd);
+ 			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd, dir);
 		}
 		return definedSpd;
 	}
 	
 	@Override
-	public float defineVehicleSpeed(RouteDataObject road) {
+	public float defineVehicleSpeed(RouteDataObject road, boolean dir) {
 		// don't use cache cause max/min is different for routing speed
 		if (maxVehicleSpeed != maxSpeed) {
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			return Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
 		}
-		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road, dir);
 		if (sp == null) {
+			// not implemented direction usage
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			sp = Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
-			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp, dir);
 		}
 		return sp;
 	}
 	
 	@Override
-	public float defineSpeedPriority(RouteDataObject road) {
-		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road);
+	public float defineSpeedPriority(RouteDataObject road, boolean dir) {
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, dir);
 		if(sp == null) {
+			// not implemented direction usage
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
-			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
+			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, dir);
 		}
 		return sp;
 	}
@@ -601,6 +631,10 @@ public class GeneralRouter implements VehicleRouter {
 		return getCache(attr, road.region, road.types, false);
 	}
 	
+	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road, boolean extra) {
+		return getCache(attr, road.region, road.types, extra);
+	}
+	
 	private Float getCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, boolean extra) {
 		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 //		TIMER -= System.nanoTime();
@@ -646,7 +680,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
+	public double calculateTurnTime(RouteSegment segment, RouteSegment prev) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
 		float totalPenalty = 0;
@@ -674,9 +708,8 @@ public class GeneralRouter implements VehicleRouter {
 				totalPenalty += rt;
 			}
 		} else if (getLeftTurn() > 0 || getRightTurn() > 0) {
-			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(),
-					segment.getSegmentStart() < segmentEnd);
-			double a2 = prev.getRoad().directionRoute(prevSegmentEnd, prevSegmentEnd < prev.getSegmentStart());
+			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.isPositive());
+			double a2 = prev.getRoad().directionRoute(prev.getSegmentEnd(), !prev.isPositive());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {
@@ -831,7 +864,7 @@ public class GeneralRouter implements VehicleRouter {
 			return rules.get(rules.size() - 1);
 		}
 
-		private Object evaluate(BitSet types) {
+		private synchronized Object evaluate(BitSet types) {
 			for (int k = 0; k < rules.size(); k++) {
 				RouteAttributeEvalRule r = rules.get(k);
 				Object o = r.eval(types, paramContext);
@@ -1165,7 +1198,7 @@ public class GeneralRouter implements VehicleRouter {
 			parameters.add(param);
 		}
 
-		public synchronized Object eval(BitSet types, ParameterContext paramContext) {
+		public Object eval(BitSet types, ParameterContext paramContext) {
 			if (matches(types, paramContext)) {
 				return calcSelectValue(types, paramContext);
 			}

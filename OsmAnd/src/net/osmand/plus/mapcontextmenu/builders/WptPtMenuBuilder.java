@@ -111,10 +111,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int) wpt.hdop, 0,
 					false, null, false, 0, false, null, false);
 		}
-
-		if (!Algorithms.isEmpty(wpt.desc)) {
-			prepareDescription(wpt, view);
-		}
+		prepareDescription(wpt, view);
 		buildCommentRow(view, wpt.comment);
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {

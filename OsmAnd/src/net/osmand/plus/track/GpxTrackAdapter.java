@@ -16,7 +16,7 @@ import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -168,7 +168,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (dataItem != null) {
-			analysis = dataItem.getAnalysis();
+			analysis = dataItem.getGpxData().getAnalysis();
 		}
 		if (analysis == null) {
 			holder.readSection.setVisibility(View.GONE);

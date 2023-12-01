@@ -25,7 +25,6 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.util.Algorithms;
 
@@ -372,12 +371,13 @@ public class GpxSelectionHelper {
 				selectedFile = new SelectedGpxFile();
 			}
 			if (dataItem != null) {
-				selectedFile.setJoinSegments(dataItem.isJoinSegments());
+				GpxData gpxData = dataItem.getGpxData();
+				selectedFile.setJoinSegments(gpxData.isJoinSegments());
 
-				GPXTrackAnalysis analysis = dataItem.getAnalysis();
+				GPXTrackAnalysis analysis = gpxData.getAnalysis();
 				if (analysis != null) {
 					selectedFile.setTrackAnalysis(analysis);
-					selectedFile.modifiedTime = dataItem.getFileLastModifiedTime();
+					selectedFile.modifiedTime = gpxData.getFileLastModifiedTime();
 				}
 			}
 			selectedFile.setGpxFile(gpx, app);
@@ -398,7 +398,7 @@ public class GpxSelectionHelper {
 			}
 			selectedFile.splitProcessed = false;
 		}
-		if (params.isAddToMarkers() && dataItem != null && dataItem.isShowAsMarkers()) {
+		if (params.isAddToMarkers() && dataItem != null && dataItem.getGpxData().isShowAsMarkers()) {
 			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 			mapMarkersHelper.addOrEnableGroup(gpx);
 		}

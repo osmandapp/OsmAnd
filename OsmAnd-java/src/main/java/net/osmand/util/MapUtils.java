@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 
 /**
  * This utility class includes :
@@ -70,7 +72,7 @@ public class MapUtils {
 		// System.out.println(String.format("Bits: %d %s (%d)", Integer.toBinaryString(precisionNumber).length(), Integer.toBinaryString(precisionNumber), precisionNumber));
 		return precisionNumber;
 	}
-
+	
 	public static int[] calculateFinalXYFromBaseAndPrecisionXY(int bazeZoom, int finalZoom,
 			int precisionXY, int xBase, int yBase, boolean ignoreNotEnoughPrecision) {
 		// System.out.println(String.format("Base x, y at zoom %d: %d %d", zoomToStart, xBaseApproximation, yBaseApproximation));
@@ -346,6 +348,14 @@ public class MapUtils {
 		return getDistance(ll, ll2);
 	}
 
+	public static double getTileDistanceHeight(double lat, float zoom) {
+		// equals to getTileDistanceWidth (so no difference)
+		double y = MapUtils.getTileNumberY(zoom, lat);
+		LatLon ll = new LatLon(MapUtils.getLatitudeFromTile(zoom, Math.floor(y)), 0);
+		LatLon ll2 = new LatLon(MapUtils.getLatitudeFromTile(zoom, Math.floor(y) + 1), 0);
+		return getDistance(ll, ll2);
+	}
+
 	public static double getLongitudeFromTile(double zoom, double x) {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}
@@ -552,61 +562,15 @@ public class MapUtils {
 	}
 
 
-	private static double[] coefficientsY = new double[1024];
-	private static boolean initializeYArray = false;
 
-	public static double convert31YToMeters(int y1, int y2, int x) {
-		int power = 10;
-		int pw = 1 << power;
-		if (!initializeYArray) {
-			coefficientsY[0] = 0;
-			for (int i = 0; i < pw - 1; i++) {
-				coefficientsY[i + 1] = coefficientsY[i]
-						+ measuredDist31(0, i << (31 - power), 0, ((i + 1) << (31 - power)));
-			}
-			initializeYArray = true;
-		}
-		int div = 1 << (31 - power);
-		int div1 = y1 / div;
-		int mod1 = y1 % div;
-		int div2 = y2 / div;
-		int mod2 = y2 % div;
-		double h1 ;
-		if(div1 + 1 >= coefficientsY.length) {
-			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1] - coefficientsY[div1 - 1]);
-		} else {
-			h1 = coefficientsY[div1] + mod1 / (double) div * (coefficientsY[div1 + 1] - coefficientsY[div1]);
-		}
-		double h2 ;
-		if(div2 + 1 >= coefficientsY.length) {
-			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2] - coefficientsY[div2 - 1]);
-		} else {
-			h2 = coefficientsY[div2] + mod2 / (double) div * (coefficientsY[div2 + 1] - coefficientsY[div2]);
-		}
-		double res = h1 - h2;
-		return res;
-	}
-
-	private static double[] coefficientsX = new double[1024];
-	public static double convert31XToMeters(int x1, int x2, int y) {
-		int ind = y >> (31 - 10);
-		if(coefficientsX[ind] == 0) {
-			double md = MapUtils.measuredDist31(x1, y, x2, y);
-			if(md < 10) {
-				return md;
-			}
-			coefficientsX[ind] = md / Math.abs(x1 - x2);
-		}
-		// translate into meters 
-		return (x1 - x2) * coefficientsX[ind];
-	}
-
-
+	
 	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
-		double projection = calculateProjection31TileMetric(st31x, st31y, end31x,
-				end31y, px, py);
-		double mDist = measuredDist31(end31x, end31y, st31x,
-				st31y);
+		// st31x, st31y - A, end31x, end31y - B, px, py - C
+		double tWidth = getTileWidth(py);
+		// Scalar multiplication between (AB, AC)
+		double projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth
+				+ (end31y - st31y) * tWidth * (py - st31y) * tWidth;
+		double mDist = squareRootDist31(end31x, end31y, st31x, st31y);
 		int pry = end31y;
 		int prx = end31x;
 		if (projection < 0) {
@@ -616,38 +580,64 @@ public class MapUtils {
 			prx = end31x;
 			pry = end31y;
 		} else {
-			prx = (int) (st31x + (end31x - st31x)
-					* (projection / (mDist * mDist)));
-			pry = (int) (st31y + (end31y - st31y)
-					* (projection / (mDist * mDist)));
+			prx = (int) (st31x + (end31x - st31x) * (projection / (mDist * mDist)));
+			pry = (int) (st31y + (end31y - st31y) * (projection / (mDist * mDist)));
 		}
 		return new QuadPoint(prx, pry);
 	}
 
 
 	public static double squareRootDist31(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2, x1);
-		double dx = MapUtils.convert31XToMeters(x1, x2, y1);
-		return Math.sqrt(dx * dx + dy * dy);
+		return Math.sqrt(squareDist31TileMetric(x1, y1, x2, y2));
 	}
 
 	public static double measuredDist31(int x1, int y1, int x2, int y2) {
-		return getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
+		return getDistance(get31LatitudeY(y1), get31LongitudeX(x1), get31LatitudeY(y2), get31LongitudeX(x2));
 	}
 
+	public static final int EQUATOR = 1 << 30; 
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = convert31YToMeters(y1, y2, x1);
-		double dx = convert31XToMeters(x1, x2, y1);
+		boolean top1 = y1 > EQUATOR;
+		boolean top2 = y2 > EQUATOR;
+		if (top1 != top2 && y1 != EQUATOR && y2 != EQUATOR) {
+			int mx = x1 / 2 + x2 / 2;
+			double d1 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x2, y2));
+			double d2 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x1, y1));
+			return (d1 + d2) * (d1 + d2);
+		}
+		// translate into meters
+		int ymidx = y1 / 2 + y2 / 2;
+		double tw = getTileWidth(ymidx);
+		
+		double dy = (y1 - y2) * tw;
+		double dx = (x2 - x1) * tw;
 		return dx * dx + dy * dy;
 	}
 
-	public static double calculateProjection31TileMetric(int xA, int yA, int xB, int yB, int xC, int yC) {
-		// Scalar multiplication between (AB, AC)
-		double multiple = MapUtils.convert31XToMeters(xB, xA, yA) * MapUtils.convert31XToMeters(xC, xA, yA) +
-				MapUtils.convert31YToMeters(yB, yA, xA) * MapUtils.convert31YToMeters(yC, yA, xA);
-		return multiple;
+
+	// 14 precision, gives 10x speedup, 0.02% error
+	public static int PRECISION_ZOOM = 14; // 16 doesn't fit into tile int
+	private static final TIntObjectHashMap<Double> DIST_CACHE = new TIntObjectHashMap<>();
+	private static double getTileWidth(int y31) {
+		double y = y31 / 1.0 / (1 << (31 - PRECISION_ZOOM));
+		int tileY = (int) y; // width the same for all x
+		double ry = y - tileY;
+		Double d = DIST_CACHE.get(tileY);
+		if (d == null) {
+			synchronized (MapUtils.class) {
+				d = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
+				DIST_CACHE.put(tileY, d);
+			}
+		}
+		tileY = tileY + 1;
+		Double dp = DIST_CACHE.get(tileY);
+		if (dp == null) {
+			synchronized (MapUtils.class) {
+				dp = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
+				DIST_CACHE.put(tileY, dp);
+			}
+		}
+		return ry * dp + (1 - ry) * d;
 	}
 
 	public static boolean rightSide(double lat, double lon,

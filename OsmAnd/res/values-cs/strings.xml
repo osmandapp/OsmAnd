@@ -2031,7 +2031,6 @@
     <string name="rendering_attr_surfaceIntegrity_name">Celistvost povrchu cest</string>
     <string name="search_hint">Zadejte město, adresu, název POI</string>
     <string name="translit_names">Přepsat názvy</string>
-    <string name="edit_filter">Upravit kategorie</string>
     <string name="subcategories">Podkategorie</string>
     <string name="selected_categories">Vybrané kategorie</string>
     <string name="create_custom_poi">Vytvořit vlastní filtr</string>
@@ -5445,7 +5444,7 @@
     <string name="no_config_smart_folder_title">Není nastaveno</string>
     <string name="add_smart_folder">Přidat chytrou složku</string>
     <string name="empty_name">Prázdný název</string>
-    <string name="edit_fiilter">Upravit filtr</string>
+    <string name="edit_filter">Upravit filtr</string>
     <string name="discard_filter_changes">Zahodit změny filtru</string>
     <string name="save_as_smart_folder">Uložit jako chytrou složku</string>
     <string name="shared_string_show_icon">Zobrazit ikonu</string>

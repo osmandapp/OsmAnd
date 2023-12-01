@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
 
@@ -93,7 +92,7 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null && gpxDataItem.isJoinSegments();
+		return gpxDataItem != null && gpxDataItem.getGpxData().isJoinSegments();
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {

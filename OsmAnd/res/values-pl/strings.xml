@@ -2014,7 +2014,6 @@
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Tworzenie własnego filtra</string>
     <string name="custom_search">Własne wyszukiwanie</string>
-    <string name="edit_filter">Edytuj kategorie</string>
     <string name="subcategories">Podkategorie</string>
     <string name="translit_names">Transliteracja nazw</string>
     <string name="search_hint">Proszę wprowadzić miasto, adres, nazwę użytecznego miejsca</string>
@@ -5424,7 +5423,7 @@
     <string name="help_article_purchases_giveaway_name">Upominek</string>
     <string name="add_smart_folder">Dodaj mądry folder</string>
     <string name="empty_name">Pusta nazwa</string>
-    <string name="edit_fiilter">Edycja filtra</string>
+    <string name="edit_filter">Edycja filtra</string>
     <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
     <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
     <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX

@@ -43,7 +43,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -248,13 +248,13 @@ public class GPXAction extends QuickAction implements FileSelected {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
-				if (item.getAnalysis() != null) {
-					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
+				if (item.getGpxData().getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getGpxData().getAnalysis(), app);
 				}
 			});
 
-			if (gpxDataItem != null && gpxDataItem.getAnalysis() != null) {
-				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getAnalysis(), app);
+			if (gpxDataItem != null && gpxDataItem.getGpxData().getAnalysis() != null) {
+				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getGpxData().getAnalysis(), app);
 			}
 		}
 	}

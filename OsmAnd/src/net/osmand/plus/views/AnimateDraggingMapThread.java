@@ -606,6 +606,11 @@ public class AnimateDraggingMapThread {
 				break;
 			}
 		}
+		if (animateTarget && mapRenderer != null) {
+			resetMapTarget();
+			PointI target31 = mapRenderer.getTarget();
+			tileView.setTarget31(target31.getX(), target31.getY(), true);
+		}
 		if (animateZoom && mapRenderer != null) {
 			if (targetIntZoom > 0) {
 				mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);

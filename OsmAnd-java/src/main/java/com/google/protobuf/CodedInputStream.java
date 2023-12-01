@@ -416,7 +416,7 @@ public final class CodedInputStream {
    * then you would probably end up reading past the end of the varint since
    * CodedInputStream buffers its input.
    */
-  static int readRawVarint32(final InputStream input) throws IOException {
+  public static int readRawVarint32(final InputStream input) throws IOException {
     final int firstByte = input.read();
     if (firstByte == -1) {
       throw InvalidProtocolBufferException.truncatedMessage();
