@@ -1,13 +1,7 @@
 package net.osmand.plus.track;
 
 
-import static net.osmand.plus.track.helpers.GpxDisplayHelper.buildTrackSegmentName;
-
 import android.os.AsyncTask;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.IProgress;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -26,6 +20,12 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.track.helpers.GpxDisplayHelper.buildTrackSegmentName;
 
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -203,7 +203,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@NonNull
 	private static TrackPointsAnalyser getTrackPointsAnalyser() {
-		return PluginsHelper::onAnalysePoint;
+		return PluginsHelper.getTrackPointsAnalyser();
 	}
 
 	@NonNull

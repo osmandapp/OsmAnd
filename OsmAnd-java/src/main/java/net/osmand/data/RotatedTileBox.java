@@ -339,6 +339,10 @@ public class RotatedTileBox {
 		return rotateSin;
 	}
 
+	public double getFullZoom() {
+		return getZoom() + getZoomFloatPart() + getZoomAnimation();
+	}
+
 	public int getZoom() {
 		return zoom;
 	}
