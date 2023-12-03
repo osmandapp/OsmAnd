@@ -869,10 +869,8 @@ public class RouteResultPreparation {
 							streetName = "to " + to; 
 						}
 					}
-					// TODO delete test on server
 					turnInfo.setDescription(String.format("%s %s and go %.1f km", mute, turn, dist / 1000.0),
 							String.format("%s %s %s and go %.1f km", mute, turn, streetName, dist / 1000.0));
-					System.out.println(i + "" + turn);
 				}
 				prevSegment = i;
 				dist = 0;
