@@ -525,7 +525,7 @@ public class RoutePlannerFrontEnd {
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		for (RouteSegmentResult r : gctx.result) {
 			r.setTurnType(null);
-			r.setDescription("");
+			r.clearDescription();
 		}
 		if (!gctx.ctx.calculationProgress.isCancelled) {
 			preparation.prepareTurnResults(gctx.ctx, gctx.result);

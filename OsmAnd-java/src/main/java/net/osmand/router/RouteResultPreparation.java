@@ -699,7 +699,7 @@ public class RouteResultPreparation {
 			additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
 			additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
 			additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
-			additional.append("description = \"").append(res.getDescription()).append("\" ");
+			additional.append("description = \"").append(res.getDescription(false)).append("\" ");
 			println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
 					(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
 					res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
@@ -848,12 +848,18 @@ public class RouteResultPreparation {
 		for (int i = 0; i <= result.size(); i++) {
 			if (i == result.size() || result.get(i).getTurnType() != null) {
 				if (prevSegment >= 0) {
-					String turn = result.get(prevSegment).getTurnType().toString();
-					result.get(prevSegment).setDescription(
-							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
-					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("[MUTE] " + result.get(prevSegment).getDescription());
+					RouteSegmentResult turnInfo = result.get(prevSegment);
+					String turn = turnInfo.getTurnType().toString();
+					String mute = turnInfo.getTurnType().isSkipToSpeak() ? "[MUTE] " : "";
+					String streetName = "";
+					if (prevSegment < result.size()) {
+						String nm = result.get(prevSegment + 1).getStreetName("", false, result, prevSegment + 1);
+						String ref = result.get(prevSegment + 1).getRef("", false);
+						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
+						streetName = String.format("onto %s %s" , nm, ref, to);
 					}
+					turnInfo.setDescription(String.format("%s %s and go %.2f km", mute, turn, dist / 1000.0),
+							String.format("%s %s %s and go %.2f km", mute, turn, streetName, dist / 1000.0));
 				}
 				prevSegment = i;
 				dist = 0;

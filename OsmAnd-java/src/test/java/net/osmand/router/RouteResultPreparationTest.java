@@ -127,7 +127,7 @@ public class RouteResultPreparationTest {
                     String lanes = getLanesString(segment);
                     String turn = segment.getTurnType().toXmlString();
                     String turnLanes = turn + ":" + lanes;
-                    String name = segment.getDescription();
+                    String name = segment.getDescription(false);
                     boolean skipToSpeak = segment.getTurnType().isSkipToSpeak();
                     if (skipToSpeak) {
                         turnLanes = "[MUTE] " + turnLanes;

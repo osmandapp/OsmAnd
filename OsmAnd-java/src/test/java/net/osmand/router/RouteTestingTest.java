@@ -140,7 +140,7 @@ public class RouteTestingTest {
 			for (int i = 0; i <= routeSegments.size(); i++) {
 				if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 					if (prevSegment >= 0) {
-						String name = routeSegments.get(prevSegment).getDescription();
+						String name = routeSegments.get(prevSegment).getDescription(false);
 						long segmentId = routeSegments.get(prevSegment).getObject()
 								.getId() >> (RouteResultPreparation.SHIFT_ID);
 						System.out.println("segmentId: " + segmentId + " description: " + name);
