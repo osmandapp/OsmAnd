@@ -854,12 +854,25 @@ public class RouteResultPreparation {
 					String streetName = "";
 					if (prevSegment < result.size() - 1) {
 						String nm = result.get(prevSegment + 1).getStreetName("", false, result, prevSegment + 1);
+						if (nm == null) {
+							nm = "";
+						}
 						String ref = result.get(prevSegment + 1).getRef("", false);
+						if (ref == null) {
+							ref = "";
+						}
+						if (!Algorithms.isEmpty(nm) || !Algorithms.isEmpty(ref)) {
+							streetName = String.format("onto %s %s " , nm, ref);
+						}
 						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
-						streetName = String.format("onto %s %s" , nm, ref, to);
+						if(!Algorithms.isEmpty(to)) {
+							streetName = "to " + to; 
+						}
 					}
-					turnInfo.setDescription(String.format("%s %s and go %.2f km", mute, turn, dist / 1000.0),
-							String.format("%s %s %s and go %.2f km", mute, turn, streetName, dist / 1000.0));
+					// TODO delete test on server
+					turnInfo.setDescription(String.format("%s %s and go %.1f km", mute, turn, dist / 1000.0),
+							String.format("%s %s %s and go %.1f km", mute, turn, streetName, dist / 1000.0));
+					System.out.println(i + "" + turn);
 				}
 				prevSegment = i;
 				dist = 0;
