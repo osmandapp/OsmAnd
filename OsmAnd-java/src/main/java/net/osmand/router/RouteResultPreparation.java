@@ -852,7 +852,7 @@ public class RouteResultPreparation {
 					String turn = turnInfo.getTurnType().toString();
 					String mute = turnInfo.getTurnType().isSkipToSpeak() ? "[MUTE] " : "";
 					String streetName = "";
-					if (prevSegment < result.size()) {
+					if (prevSegment < result.size() - 1) {
 						String nm = result.get(prevSegment + 1).getStreetName("", false, result, prevSegment + 1);
 						String ref = result.get(prevSegment + 1).getRef("", false);
 						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
