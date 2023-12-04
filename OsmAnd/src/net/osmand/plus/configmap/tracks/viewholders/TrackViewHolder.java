@@ -11,11 +11,11 @@ import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_CREATION_TIME;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_NEAREST_CITY_NAME;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
 import android.text.SpannableStringBuilder;
@@ -39,7 +39,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -156,9 +155,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	public void bindInfoRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
 	                        @NonNull GpxDataItem dataItem, boolean shouldShowFolder) {
 		setupIcon(dataItem);
-		GpxData gpxData = dataItem.getGpxData();
-		GPXTrackAnalysis analysis = gpxData.getAnalysis();
-		String cityName = gpxData.getValue(GPX_COL_NEAREST_CITY_NAME);
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		String cityName = dataItem.getValue(NEAREST_CITY_NAME);
 		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
@@ -187,8 +185,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupIcon(@NonNull GpxDataItem item) {
-		GpxData gpxData = item.getGpxData();
-		setupIcon(gpxData.getValue(GPX_COL_COLOR), gpxData.getValue(GPX_COL_WIDTH), gpxData.getValue(GPX_COL_SHOW_ARROWS));
+		setupIcon(item.getValue(COLOR), item.getValue(WIDTH), item.getValue(SHOW_ARROWS));
 	}
 
 	private void setupIcon(int color, String width, boolean showArrows) {
@@ -211,10 +208,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
-		GpxData gpxData = item.getDataItem().getGpxData();
-		if (item.getDataItem() != null && gpxData.getValue(GPX_COL_FILE_CREATION_TIME) > 10) {
+		GpxDataItem dataItem = item.getDataItem();
+		if (dataItem != null && dataItem.getValue(FILE_CREATION_TIME) > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			builder.append(format.format(new Date(gpxData.getValue(GPX_COL_FILE_CREATION_TIME))));
+			builder.append(format.format(new Date(dataItem.getValue(FILE_CREATION_TIME))));
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}

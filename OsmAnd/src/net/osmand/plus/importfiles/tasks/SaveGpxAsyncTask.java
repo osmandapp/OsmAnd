@@ -121,7 +121,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			}
 		}
 		GpxDataItem item = new GpxDataItem(file);
-		item.getGpxData().readGpxParams(gpxFile);
+		item.readGpxParams(gpxFile);
 		app.getGpxDbHelper().add(item);
 		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(file));
 	}

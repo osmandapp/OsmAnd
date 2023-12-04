@@ -1,7 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_AS_MARKERS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_AS_MARKERS;
 
 import android.util.Pair;
 
@@ -366,7 +366,7 @@ public class MapMarkersHelper {
 		GpxDbHelper gpxDbHelper = ctx.getGpxDbHelper();
 		GpxDataItem dataItem = gpxDbHelper.getItem(file);
 		if (dataItem != null) {
-			gpxDbHelper.updateGpxParameter(dataItem, GPX_COL_SHOW_AS_MARKERS, true);
+			gpxDbHelper.updateGpxParameter(dataItem, SHOW_AS_MARKERS, true);
 		}
 	}
 

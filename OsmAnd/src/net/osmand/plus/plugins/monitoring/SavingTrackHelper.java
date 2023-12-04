@@ -1,11 +1,11 @@
 package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -273,7 +273,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 
 				GpxDataItem item = new GpxDataItem(fout);
-				item.getGpxData().setAnalysis(gpx.getAnalysis(fout.lastModified()));
+				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 				saveTrackAppearance(item);
@@ -288,11 +288,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		gpxDbHelper.updateGpxParameter(item, GPX_COL_COLOR, settings.CURRENT_TRACK_COLOR.get());
-		gpxDbHelper.updateGpxParameter(item, GPX_COL_WIDTH, settings.CURRENT_TRACK_WIDTH.get());
-		gpxDbHelper.updateGpxParameter(item, GPX_COL_SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
-		gpxDbHelper.updateGpxParameter(item, GPX_COL_SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
-		gpxDbHelper.updateGpxParameter(item, GPX_COL_COLORING_TYPE, coloringType.getName(routeInfoAttribute));
+		gpxDbHelper.updateGpxParameter(item, COLOR, settings.CURRENT_TRACK_COLOR.get());
+		gpxDbHelper.updateGpxParameter(item, WIDTH, settings.CURRENT_TRACK_WIDTH.get());
+		gpxDbHelper.updateGpxParameter(item, SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		gpxDbHelper.updateGpxParameter(item, SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
+		gpxDbHelper.updateGpxParameter(item, COLORING_TYPE, coloringType.getName(routeInfoAttribute));
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {

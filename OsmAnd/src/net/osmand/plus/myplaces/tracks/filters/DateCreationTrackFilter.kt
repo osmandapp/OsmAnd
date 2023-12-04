@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.DATE_CREATION
-import net.osmand.plus.track.helpers.GpxParameter.GPX_COL_FILE_CREATION_TIME
+import net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -44,7 +44,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			val result = trackItem.dataItem!!.gpxData.getValue(GPX_COL_FILE_CREATION_TIME) in valueFrom..valueTo
+			val result = trackItem.dataItem!!.getValue(FILE_CREATION_TIME) in valueFrom..valueTo
 			result
 		}
 	}

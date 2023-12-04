@@ -1,11 +1,11 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SMOOTHING_THRESHOLD;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.SMOOTHING_THRESHOLD;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -395,13 +395,12 @@ public class GpsFilterHelper {
 
 		public static void writeValidFilterValuesToExtensions(@NonNull Map<String, String> gpxExtensions,
 		                                                      @NonNull GpxDataItem dataItem) {
-			GpxData gpxData = dataItem.getGpxData();
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, gpxData.getValue(GPX_COL_SMOOTHING_THRESHOLD));
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, gpxData.getValue(GPX_COL_MIN_FILTER_SPEED));
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, gpxData.getValue(GPX_COL_MAX_FILTER_SPEED));
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, gpxData.getValue(GPX_COL_MIN_FILTER_ALTITUDE));
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, gpxData.getValue(GPX_COL_MAX_FILTER_ALTITUDE));
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, gpxData.getValue(GPX_COL_MAX_FILTER_HDOP));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, dataItem.getValue(SMOOTHING_THRESHOLD));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, dataItem.getValue(MIN_FILTER_SPEED));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, dataItem.getValue(MAX_FILTER_SPEED));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, dataItem.getValue(MIN_FILTER_ALTITUDE));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, dataItem.getValue(MAX_FILTER_ALTITUDE));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, dataItem.getValue(MAX_FILTER_HDOP));
 		}
 
 		private static void writeValueToExtensionsIfValid(@NonNull Map<String, String> gpxExtensions,

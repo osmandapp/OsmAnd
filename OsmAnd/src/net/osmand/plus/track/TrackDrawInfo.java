@@ -3,14 +3,14 @@ package net.osmand.plus.track;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLORING_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_JOIN_SEGMENTS;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SHOW_START_FINISH;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.os.Bundle;
 
@@ -24,7 +24,6 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -126,28 +125,27 @@ public class TrackDrawInfo {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		GpxData gpxData = dataItem.getGpxData();
-		width = gpxData.getValue(GPX_COL_WIDTH);
+		width = dataItem.getValue(WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = gpxData.getValue(GPX_COL_COLOR);
+		color = dataItem.getValue(COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getValue(GPX_COL_COLORING_TYPE));
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getValue(GPX_COL_COLORING_TYPE));
-		splitType = gpxData.getValue(GPX_COL_SPLIT_TYPE);
-		splitInterval = gpxData.getValue(GPX_COL_SPLIT_INTERVAL);
-		joinSegments = gpxData.getValue(GPX_COL_JOIN_SEGMENTS);
-		showArrows = gpxData.getValue(GPX_COL_SHOW_ARROWS);
-		showStartFinish = gpxData.getValue(GPX_COL_SHOW_START_FINISH);
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getValue(COLORING_TYPE));
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getValue(COLORING_TYPE));
+		splitType = dataItem.getValue(SPLIT_TYPE);
+		splitInterval = dataItem.getValue(SPLIT_INTERVAL);
+		joinSegments = dataItem.getValue(JOIN_SEGMENTS);
+		showArrows = dataItem.getValue(SHOW_ARROWS);
+		showStartFinish = dataItem.getValue(SHOW_START_FINISH);
 	}
 
 	@Nullable

@@ -57,7 +57,7 @@ public class GpxDbUtils {
 	@NonNull
 	public static String getIndexQuery() {
 		return "CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME
-				+ " (" + GPX_COL_NAME.getColumnName() + ", " + GPX_COL_DIR.getColumnName() + ");";
+				+ " (" + FILE_NAME.getColumnName() + ", " + FILE_DIR.getColumnName() + ");";
 	}
 
 	protected static void onCreate(@NonNull SQLiteConnection db) {
@@ -67,14 +67,14 @@ public class GpxDbUtils {
 
 	protected static void onUpgrade(@NonNull GPXDatabase database, @NonNull SQLiteConnection db, int oldVersion, int newVersion) {
 		if (oldVersion < 2) {
-			addTableColumn(db, GPX_COL_COLOR);
+			addTableColumn(db, COLOR);
 		}
 		if (oldVersion < 3) {
-			addTableColumn(db, GPX_COL_FILE_LAST_MODIFIED_TIME);
+			addTableColumn(db, FILE_LAST_MODIFIED_TIME);
 		}
 		if (oldVersion < 4) {
-			addTableColumn(db, GPX_COL_SPLIT_TYPE);
-			addTableColumn(db, GPX_COL_SPLIT_INTERVAL);
+			addTableColumn(db, SPLIT_TYPE);
+			addTableColumn(db, SPLIT_INTERVAL);
 		}
 		if (oldVersion < 5) {
 			boolean colorColumnExists = false;
@@ -85,89 +85,89 @@ public class GpxDbUtils {
 			if (cursor.moveToFirst()) {
 				do {
 					String columnName = cursor.getString(1);
-					if (!colorColumnExists && columnName.equals(GPX_COL_COLOR.getColumnName())) {
+					if (!colorColumnExists && columnName.equals(COLOR.getColumnName())) {
 						colorColumnExists = true;
-					} else if (!fileLastModifiedTimeColumnExists && columnName.equals(GPX_COL_FILE_LAST_MODIFIED_TIME.getColumnName())) {
+					} else if (!fileLastModifiedTimeColumnExists && columnName.equals(FILE_LAST_MODIFIED_TIME.getColumnName())) {
 						fileLastModifiedTimeColumnExists = true;
-					} else if (!splitTypeColumnExists && columnName.equals(GPX_COL_SPLIT_TYPE.getColumnName())) {
+					} else if (!splitTypeColumnExists && columnName.equals(SPLIT_TYPE.getColumnName())) {
 						splitTypeColumnExists = true;
-					} else if (!splitIntervalColumnExists && columnName.equals(GPX_COL_SPLIT_INTERVAL.getColumnName())) {
+					} else if (!splitIntervalColumnExists && columnName.equals(SPLIT_INTERVAL.getColumnName())) {
 						splitIntervalColumnExists = true;
 					}
 				} while (cursor.moveToNext());
 			}
 			cursor.close();
 			if (!colorColumnExists) {
-				addTableColumn(db, GPX_COL_COLOR);
+				addTableColumn(db, COLOR);
 			}
 			if (!fileLastModifiedTimeColumnExists) {
-				addTableColumn(db, GPX_COL_FILE_LAST_MODIFIED_TIME);
+				addTableColumn(db, FILE_LAST_MODIFIED_TIME);
 				for (GpxDataItem item : database.getItems()) {
-					database.updateGpxParameter(item, GPX_COL_FILE_LAST_MODIFIED_TIME, item.getFile().lastModified());
+					database.updateGpxParameter(item, FILE_LAST_MODIFIED_TIME, item.getFile().lastModified());
 				}
 			}
 			if (!splitTypeColumnExists) {
-				addTableColumn(db, GPX_COL_SPLIT_TYPE);
+				addTableColumn(db, SPLIT_TYPE);
 			}
 			if (!splitIntervalColumnExists) {
-				addTableColumn(db, GPX_COL_SPLIT_INTERVAL);
+				addTableColumn(db, SPLIT_INTERVAL);
 			}
 		}
 		if (oldVersion < 6) {
-			addTableColumn(db, GPX_COL_API_IMPORTED);
+			addTableColumn(db, API_IMPORTED);
 			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + GPX_COL_API_IMPORTED.getColumnName() + " = ? " +
-					"WHERE " + GPX_COL_API_IMPORTED.getColumnName() + " IS NULL", new Object[] {0});
+					" SET " + API_IMPORTED.getColumnName() + " = ? " +
+					"WHERE " + API_IMPORTED.getColumnName() + " IS NULL", new Object[] {0});
 		}
 		if (oldVersion < 7) {
-			addTableColumn(db, GPX_COL_WPT_CATEGORY_NAMES);
+			addTableColumn(db, WPT_CATEGORY_NAMES);
 		}
 		if (oldVersion < 8) {
-			addTableColumn(db, GPX_COL_SHOW_AS_MARKERS);
+			addTableColumn(db, SHOW_AS_MARKERS);
 			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + GPX_COL_SHOW_AS_MARKERS.getColumnName() + " = ? " +
-					"WHERE " + GPX_COL_SHOW_AS_MARKERS.getColumnName() + " IS NULL", new Object[] {0});
+					" SET " + SHOW_AS_MARKERS.getColumnName() + " = ? " +
+					"WHERE " + SHOW_AS_MARKERS.getColumnName() + " IS NULL", new Object[] {0});
 		}
 		if (oldVersion < 10) {
-			addTableColumn(db, GPX_COL_JOIN_SEGMENTS);
+			addTableColumn(db, JOIN_SEGMENTS);
 			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + GPX_COL_JOIN_SEGMENTS.getColumnName() + " = ? " +
-					"WHERE " + GPX_COL_JOIN_SEGMENTS.getColumnName() + " IS NULL", new Object[] {0});
+					" SET " + JOIN_SEGMENTS.getColumnName() + " = ? " +
+					"WHERE " + JOIN_SEGMENTS.getColumnName() + " IS NULL", new Object[] {0});
 		}
 		if (oldVersion < 11) {
-			addTableColumn(db, GPX_COL_SHOW_ARROWS);
-			addTableColumn(db, GPX_COL_SHOW_START_FINISH);
-			addTableColumn(db, GPX_COL_WIDTH);
+			addTableColumn(db, SHOW_ARROWS);
+			addTableColumn(db, SHOW_START_FINISH);
+			addTableColumn(db, WIDTH);
 			addTableColumn(db, "gradientSpeedColor", "TEXT");
 			addTableColumn(db, "gradientAltitudeColor", "TEXT");
 			addTableColumn(db, "gradientSlopeColor", "TEXT");
-			addTableColumn(db, GPX_COL_COLORING_TYPE);
+			addTableColumn(db, COLORING_TYPE);
 
-			db.execSQL(GPX_UPDATE_PARAMETERS_START + GPX_COL_SHOW_ARROWS.getColumnName() + " = ? " +
-					"WHERE " + GPX_COL_SHOW_ARROWS.getColumnName() + " IS NULL", new Object[] {0});
-			db.execSQL(GPX_UPDATE_PARAMETERS_START + GPX_COL_SHOW_START_FINISH.getColumnName() + " = ? " +
-					"WHERE " + GPX_COL_SHOW_START_FINISH.getColumnName() + " IS NULL", new Object[] {1});
+			db.execSQL(GPX_UPDATE_PARAMETERS_START + SHOW_ARROWS.getColumnName() + " = ? " +
+					"WHERE " + SHOW_ARROWS.getColumnName() + " IS NULL", new Object[] {0});
+			db.execSQL(GPX_UPDATE_PARAMETERS_START + SHOW_START_FINISH.getColumnName() + " = ? " +
+					"WHERE " + SHOW_START_FINISH.getColumnName() + " IS NULL", new Object[] {1});
 		}
 		if (oldVersion < 12) {
-			addTableColumn(db, GPX_COL_FILE_LAST_UPLOADED_TIME);
+			addTableColumn(db, FILE_LAST_UPLOADED_TIME);
 		}
 		if (oldVersion < 13) {
-			addTableColumn(db, GPX_COL_SMOOTHING_THRESHOLD);
-			addTableColumn(db, GPX_COL_MIN_FILTER_SPEED);
-			addTableColumn(db, GPX_COL_MAX_FILTER_SPEED);
-			addTableColumn(db, GPX_COL_MIN_FILTER_ALTITUDE);
-			addTableColumn(db, GPX_COL_MAX_FILTER_ALTITUDE);
-			addTableColumn(db, GPX_COL_MAX_FILTER_HDOP);
+			addTableColumn(db, SMOOTHING_THRESHOLD);
+			addTableColumn(db, MIN_FILTER_SPEED);
+			addTableColumn(db, MAX_FILTER_SPEED);
+			addTableColumn(db, MIN_FILTER_ALTITUDE);
+			addTableColumn(db, MAX_FILTER_ALTITUDE);
+			addTableColumn(db, MAX_FILTER_HDOP);
 		}
 		if (oldVersion < 14) {
-			addTableColumn(db, GPX_COL_START_LAT);
-			addTableColumn(db, GPX_COL_START_LON);
+			addTableColumn(db, START_LAT);
+			addTableColumn(db, START_LON);
 		}
 		if (oldVersion < 15) {
-			addTableColumn(db, GPX_COL_NEAREST_CITY_NAME);
+			addTableColumn(db, NEAREST_CITY_NAME);
 		}
 		if (oldVersion < 16) {
-			addTableColumn(db, GPX_COL_FILE_CREATION_TIME);
+			addTableColumn(db, FILE_CREATION_TIME);
 		}
 		db.execSQL(getIndexQuery());
 	}
@@ -182,22 +182,20 @@ public class GpxDbUtils {
 
 	public static boolean isAnalyseNeeded(@NonNull File file, @Nullable GpxDataItem item) {
 		if (item != null) {
-			GpxData data = item.getGpxData();
-			GPXTrackAnalysis analysis = data.getAnalysis();
-			return !data.hasData() || analysis == null
+			GPXTrackAnalysis analysis = item.getAnalysis();
+			return !item.hasData() || analysis == null
 					|| analysis.wptCategoryNames == null
 					|| analysis.latLonStart == null && analysis.points > 0
-					|| data.getValue(GPX_COL_FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| data.getValue(GPX_COL_FILE_CREATION_TIME) <= 0;
+					|| item.getValue(FILE_LAST_MODIFIED_TIME) != file.lastModified()
+					|| item.getValue(FILE_CREATION_TIME) <= 0;
 		}
 		return true;
 	}
 
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
 		if (item != null) {
-			GpxData data = item.getGpxData();
-			GPXTrackAnalysis analysis = data.getAnalysis();
-			return data.getValue(GPX_COL_NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
+			GPXTrackAnalysis analysis = item.getAnalysis();
+			return item.getValue(NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
 		}
 		return true;
 	}

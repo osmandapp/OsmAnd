@@ -4,8 +4,8 @@ import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -57,7 +57,6 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackColoringCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -691,9 +690,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void discardSplitChanges() {
 		if (gpxDataItem != null) {
-			GpxData gpxData = gpxDataItem.getGpxData();
-			int type = gpxData.getValue(GPX_COL_SPLIT_TYPE);
-			double interval = gpxData.getValue(GPX_COL_SPLIT_INTERVAL);
+			int type = gpxDataItem.getValue(SPLIT_TYPE);
+			double interval = gpxDataItem.getValue(SPLIT_INTERVAL);
 			if (type != trackDrawInfo.getSplitType() || interval != trackDrawInfo.getSplitInterval()) {
 				applySplit(GpxSplitType.getSplitTypeByTypeId(type), (int) interval, interval);
 			}

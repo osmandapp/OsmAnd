@@ -46,40 +46,40 @@ public class GPXDatabase {
 	public static final long UNKNOWN_TIME_THRESHOLD = 10;
 
 	protected static final String GPX_UPDATE_PARAMETERS_START = "UPDATE " + GPX_TABLE_NAME + " SET ";
-	private static final String GPX_FIND_BY_NAME_AND_DIR = " WHERE " + GPX_COL_NAME.getColumnName() + " = ? AND " + GPX_COL_DIR.getColumnName() + " = ?";
+	private static final String GPX_FIND_BY_NAME_AND_DIR = " WHERE " + FILE_NAME.getColumnName() + " = ? AND " + FILE_DIR.getColumnName() + " = ?";
 
 	private static final String GPX_MIN_CREATE_DATE = "SELECT " +
-			"MIN(" + GPX_COL_FILE_CREATION_TIME.getColumnName() + ") " +
-			" FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_FILE_CREATION_TIME.getColumnName() +
+			"MIN(" + FILE_CREATION_TIME.getColumnName() + ") " +
+			" FROM " + GPX_TABLE_NAME + " WHERE " + FILE_CREATION_TIME.getColumnName() +
 			" > " + UNKNOWN_TIME_THRESHOLD;
 
 	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
-			"MAX(" + GPX_COL_TOTAL_DISTANCE.getColumnName() + ") " +
+			"MAX(" + TOTAL_DISTANCE.getColumnName() + ") " +
 			" FROM " + GPX_TABLE_NAME;
 
 	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
-			GPX_COL_DIR.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			FILE_DIR.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" group by " + GPX_COL_DIR.getColumnName() +
-			" ORDER BY " + GPX_COL_DIR.getColumnName() + " ASC";
+			" group by " + FILE_DIR.getColumnName() +
+			" ORDER BY " + FILE_DIR.getColumnName() + " ASC";
 
 	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
-			GPX_COL_NEAREST_CITY_NAME.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
+			NEAREST_CITY_NAME.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" WHERE " + GPX_COL_NEAREST_CITY_NAME.getColumnName() + " NOT NULL" + " AND " +
-			GPX_COL_NEAREST_CITY_NAME.getColumnName() + " <> '' " +
-			" group by " + GPX_COL_NEAREST_CITY_NAME.getColumnName() +
+			" WHERE " + NEAREST_CITY_NAME.getColumnName() + " NOT NULL" + " AND " +
+			NEAREST_CITY_NAME.getColumnName() + " <> '' " +
+			" group by " + NEAREST_CITY_NAME.getColumnName() +
 			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
 	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT DISTINCT " +
-			"case when " + GPX_COL_COLOR.getColumnName() + " is null then '' else " + GPX_COL_COLOR.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"case when " + COLOR.getColumnName() + " is null then '' else " + COLOR.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
 			"count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
 			" group by " + TMP_NAME_COLUMN_NOT_NULL +
 			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
 
 	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT DISTINCT " +
-			"case when " + GPX_COL_WIDTH.getColumnName() + " is null then '' else " + GPX_COL_WIDTH.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+			"case when " + WIDTH.getColumnName() + " is null then '' else " + WIDTH.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
 			"count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
 			" group by " + TMP_NAME_COLUMN_NOT_NULL +
@@ -123,9 +123,8 @@ public class GPXDatabase {
 	public boolean updateGpxParameters(@NonNull GpxDataItem item, @NonNull Map<GpxParameter<?>, Object> rowsToUpdate) {
 		boolean success = updateGpxParameters(rowsToUpdate, getRowsToSearch(item.getFile()));
 		if (success) {
-			GpxData data = item.getGpxData();
 			for (Map.Entry<GpxParameter<?>, Object> entry : rowsToUpdate.entrySet()) {
-				data.setValue(entry.getKey(), entry.getValue());
+				item.setValue(entry.getKey(), entry.getValue());
 			}
 		}
 		return success;
@@ -136,7 +135,7 @@ public class GPXDatabase {
 			Map<GpxParameter<?>, Object> map = Collections.singletonMap(parameter, value);
 			boolean success = updateGpxParameters(map, getRowsToSearch(item.getFile()));
 			if (success) {
-				item.getGpxData().setValue(parameter, value);
+				item.setValue(parameter, value);
 			}
 			return success;
 		} else {
@@ -172,15 +171,15 @@ public class GPXDatabase {
 	@NonNull
 	private Map<String, Object> getRowsToSearch(@NonNull File file) {
 		Map<String, Object> map = new LinkedHashMap<>();
-		map.put(GPX_COL_NAME.getColumnName(), file.getName());
-		map.put(GPX_COL_DIR.getColumnName(), GpxDbUtils.getGpxFileDir(app, file));
+		map.put(FILE_NAME.getColumnName(), file.getName());
+		map.put(FILE_DIR.getColumnName(), GpxDbUtils.getGpxFileDir(app, file));
 		return map;
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
-		map.put(GPX_COL_NAME, newFile.getName());
-		map.put(GPX_COL_DIR, GpxDbUtils.getGpxFileDir(app, newFile));
+		map.put(FILE_NAME, newFile.getName());
+		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, newFile));
 
 		return updateGpxParameters(map, getRowsToSearch(currentFile));
 	}
@@ -216,55 +215,54 @@ public class GPXDatabase {
 
 	void insert(@NonNull GpxDataItem item, @NonNull SQLiteConnection db) {
 		File file = item.getFile();
-		GpxData data = item.getGpxData();
 		String fileName = file.getName();
 		String fileDir = GpxDbUtils.getGpxFileDir(app, file);
-		GPXTrackAnalysis analysis = data.getAnalysis();
+		GPXTrackAnalysis analysis = item.getAnalysis();
 
 		Map<String, Object> rowsMap = new LinkedHashMap<>();
-		rowsMap.put(GPX_COL_NAME.getColumnName(), fileName);
-		rowsMap.put(GPX_COL_DIR.getColumnName(), fileDir);
-		rowsMap.put(GPX_COL_COLOR.getColumnName(), data.getValue(GPX_COL_COLOR));
-		rowsMap.put(GPX_COL_FILE_LAST_MODIFIED_TIME.getColumnName(), file.lastModified());
-		rowsMap.put(GPX_COL_FILE_LAST_UPLOADED_TIME.getColumnName(), data.getValue(GPX_COL_FILE_LAST_UPLOADED_TIME));
-		rowsMap.put(GPX_COL_FILE_CREATION_TIME.getColumnName(), data.getValue(GPX_COL_FILE_CREATION_TIME));
-		rowsMap.put(GPX_COL_SPLIT_TYPE.getColumnName(), data.getValue(GPX_COL_SPLIT_TYPE));
-		rowsMap.put(GPX_COL_SPLIT_INTERVAL.getColumnName(), data.getValue(GPX_COL_SPLIT_INTERVAL));
-		rowsMap.put(GPX_COL_API_IMPORTED.getColumnName(), data.getValue(GPX_COL_API_IMPORTED));
-		rowsMap.put(GPX_COL_SHOW_AS_MARKERS.getColumnName(), data.getValue(GPX_COL_SHOW_AS_MARKERS));
-		rowsMap.put(GPX_COL_JOIN_SEGMENTS.getColumnName(), data.getValue(GPX_COL_JOIN_SEGMENTS));
-		rowsMap.put(GPX_COL_SHOW_ARROWS.getColumnName(), data.getValue(GPX_COL_SHOW_ARROWS));
-		rowsMap.put(GPX_COL_SHOW_START_FINISH.getColumnName(), data.getValue(GPX_COL_SHOW_START_FINISH));
-		rowsMap.put(GPX_COL_WIDTH.getColumnName(), data.getValue(GPX_COL_WIDTH));
-		rowsMap.put(GPX_COL_COLORING_TYPE.getColumnName(), data.getValue(GPX_COL_COLORING_TYPE));
-		rowsMap.put(GPX_COL_SMOOTHING_THRESHOLD.getColumnName(), data.getValue(GPX_COL_SMOOTHING_THRESHOLD));
-		rowsMap.put(GPX_COL_MIN_FILTER_SPEED.getColumnName(), data.getValue(GPX_COL_MIN_FILTER_SPEED));
-		rowsMap.put(GPX_COL_MAX_FILTER_SPEED.getColumnName(), data.getValue(GPX_COL_MAX_FILTER_SPEED));
-		rowsMap.put(GPX_COL_MIN_FILTER_ALTITUDE.getColumnName(), data.getValue(GPX_COL_MIN_FILTER_ALTITUDE));
-		rowsMap.put(GPX_COL_MAX_FILTER_ALTITUDE.getColumnName(), data.getValue(GPX_COL_MAX_FILTER_ALTITUDE));
-		rowsMap.put(GPX_COL_MAX_FILTER_HDOP.getColumnName(), data.getValue(GPX_COL_MAX_FILTER_HDOP));
-		rowsMap.put(GPX_COL_NEAREST_CITY_NAME.getColumnName(), data.getValue(GPX_COL_NEAREST_CITY_NAME));
+		rowsMap.put(FILE_NAME.getColumnName(), fileName);
+		rowsMap.put(FILE_DIR.getColumnName(), fileDir);
+		rowsMap.put(COLOR.getColumnName(), item.getValue(COLOR));
+		rowsMap.put(FILE_LAST_MODIFIED_TIME.getColumnName(), file.lastModified());
+		rowsMap.put(FILE_LAST_UPLOADED_TIME.getColumnName(), item.getValue(FILE_LAST_UPLOADED_TIME));
+		rowsMap.put(FILE_CREATION_TIME.getColumnName(), item.getValue(FILE_CREATION_TIME));
+		rowsMap.put(SPLIT_TYPE.getColumnName(), item.getValue(SPLIT_TYPE));
+		rowsMap.put(SPLIT_INTERVAL.getColumnName(), item.getValue(SPLIT_INTERVAL));
+		rowsMap.put(API_IMPORTED.getColumnName(), item.getValue(API_IMPORTED));
+		rowsMap.put(SHOW_AS_MARKERS.getColumnName(), item.getValue(SHOW_AS_MARKERS));
+		rowsMap.put(JOIN_SEGMENTS.getColumnName(), item.getValue(JOIN_SEGMENTS));
+		rowsMap.put(SHOW_ARROWS.getColumnName(), item.getValue(SHOW_ARROWS));
+		rowsMap.put(SHOW_START_FINISH.getColumnName(), item.getValue(SHOW_START_FINISH));
+		rowsMap.put(WIDTH.getColumnName(), item.getValue(WIDTH));
+		rowsMap.put(COLORING_TYPE.getColumnName(), item.getValue(COLORING_TYPE));
+		rowsMap.put(SMOOTHING_THRESHOLD.getColumnName(), item.getValue(SMOOTHING_THRESHOLD));
+		rowsMap.put(MIN_FILTER_SPEED.getColumnName(), item.getValue(MIN_FILTER_SPEED));
+		rowsMap.put(MAX_FILTER_SPEED.getColumnName(), item.getValue(MAX_FILTER_SPEED));
+		rowsMap.put(MIN_FILTER_ALTITUDE.getColumnName(), item.getValue(MIN_FILTER_ALTITUDE));
+		rowsMap.put(MAX_FILTER_ALTITUDE.getColumnName(), item.getValue(MAX_FILTER_ALTITUDE));
+		rowsMap.put(MAX_FILTER_HDOP.getColumnName(), item.getValue(MAX_FILTER_HDOP));
+		rowsMap.put(NEAREST_CITY_NAME.getColumnName(), item.getValue(NEAREST_CITY_NAME));
 
 		if (analysis != null) {
-			rowsMap.put(GPX_COL_TOTAL_DISTANCE.getColumnName(), analysis.totalDistance);
-			rowsMap.put(GPX_COL_TOTAL_TRACKS.getColumnName(), analysis.totalTracks);
-			rowsMap.put(GPX_COL_START_TIME.getColumnName(), analysis.startTime);
-			rowsMap.put(GPX_COL_END_TIME.getColumnName(), analysis.endTime);
-			rowsMap.put(GPX_COL_TIME_SPAN.getColumnName(), analysis.timeSpan);
-			rowsMap.put(GPX_COL_TIME_MOVING.getColumnName(), analysis.timeMoving);
-			rowsMap.put(GPX_COL_TOTAL_DISTANCE_MOVING.getColumnName(), analysis.totalDistanceMoving);
-			rowsMap.put(GPX_COL_DIFF_ELEVATION_UP.getColumnName(), analysis.diffElevationUp);
-			rowsMap.put(GPX_COL_DIFF_ELEVATION_DOWN.getColumnName(), analysis.diffElevationDown);
-			rowsMap.put(GPX_COL_AVG_ELEVATION.getColumnName(), analysis.avgElevation);
-			rowsMap.put(GPX_COL_MIN_ELEVATION.getColumnName(), analysis.minElevation);
-			rowsMap.put(GPX_COL_MAX_ELEVATION.getColumnName(), analysis.maxElevation);
-			rowsMap.put(GPX_COL_MAX_SPEED.getColumnName(), analysis.maxSpeed);
-			rowsMap.put(GPX_COL_AVG_SPEED.getColumnName(), analysis.avgSpeed);
-			rowsMap.put(GPX_COL_POINTS.getColumnName(), analysis.points);
-			rowsMap.put(GPX_COL_WPT_POINTS.getColumnName(), analysis.wptPoints);
-			rowsMap.put(GPX_COL_WPT_CATEGORY_NAMES.getColumnName(), Algorithms.encodeCollection(analysis.wptCategoryNames));
-			rowsMap.put(GPX_COL_START_LAT.getColumnName(), analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-			rowsMap.put(GPX_COL_START_LON.getColumnName(), analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+			rowsMap.put(TOTAL_DISTANCE.getColumnName(), analysis.totalDistance);
+			rowsMap.put(TOTAL_TRACKS.getColumnName(), analysis.totalTracks);
+			rowsMap.put(START_TIME.getColumnName(), analysis.startTime);
+			rowsMap.put(END_TIME.getColumnName(), analysis.endTime);
+			rowsMap.put(TIME_SPAN.getColumnName(), analysis.timeSpan);
+			rowsMap.put(TIME_MOVING.getColumnName(), analysis.timeMoving);
+			rowsMap.put(TOTAL_DISTANCE_MOVING.getColumnName(), analysis.totalDistanceMoving);
+			rowsMap.put(DIFF_ELEVATION_UP.getColumnName(), analysis.diffElevationUp);
+			rowsMap.put(DIFF_ELEVATION_DOWN.getColumnName(), analysis.diffElevationDown);
+			rowsMap.put(AVG_ELEVATION.getColumnName(), analysis.avgElevation);
+			rowsMap.put(MIN_ELEVATION.getColumnName(), analysis.minElevation);
+			rowsMap.put(MAX_ELEVATION.getColumnName(), analysis.maxElevation);
+			rowsMap.put(MAX_SPEED.getColumnName(), analysis.maxSpeed);
+			rowsMap.put(AVG_SPEED.getColumnName(), analysis.avgSpeed);
+			rowsMap.put(POINTS.getColumnName(), analysis.points);
+			rowsMap.put(WPT_POINTS.getColumnName(), analysis.wptPoints);
+			rowsMap.put(WPT_CATEGORY_NAMES.getColumnName(), Algorithms.encodeCollection(analysis.wptCategoryNames));
+			rowsMap.put(START_LAT.getColumnName(), analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
+			rowsMap.put(START_LON.getColumnName(), analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 		}
 		db.execSQL(AndroidDbUtils.createDbInsertQuery(GPX_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
@@ -286,102 +284,100 @@ public class GPXDatabase {
 		long fileLastModifiedTime = hasAnalysis ? item.getFile().lastModified() : 0;
 
 		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
-		map.put(GPX_COL_TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
-		map.put(GPX_COL_TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
-		map.put(GPX_COL_START_TIME, hasAnalysis ? analysis.startTime : null);
-		map.put(GPX_COL_END_TIME, hasAnalysis ? analysis.endTime : null);
-		map.put(GPX_COL_TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
-		map.put(GPX_COL_TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
-		map.put(GPX_COL_TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
-		map.put(GPX_COL_DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
-		map.put(GPX_COL_DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
-		map.put(GPX_COL_AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
-		map.put(GPX_COL_MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
-		map.put(GPX_COL_MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(GPX_COL_MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
-		map.put(GPX_COL_AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
-		map.put(GPX_COL_POINTS, hasAnalysis ? analysis.points : null);
-		map.put(GPX_COL_WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
-		map.put(GPX_COL_FILE_LAST_MODIFIED_TIME, fileLastModifiedTime);
-		map.put(GPX_COL_WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(GPX_COL_START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-		map.put(GPX_COL_START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
+		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
+		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
+		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
+		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
+		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
+		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
+		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
+		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
+		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
+		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
+		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
+		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
+		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
+		map.put(POINTS, hasAnalysis ? analysis.points : null);
+		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
+		map.put(FILE_LAST_MODIFIED_TIME, fileLastModifiedTime);
+		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
+		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
+		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 
 		boolean success = updateGpxParameters(db, map, getRowsToSearch(item.getFile()));
 		if (success) {
-			GpxData data = item.getGpxData();
-			data.setAnalysis(analysis);
-			data.setValue(GPX_COL_FILE_LAST_MODIFIED_TIME, fileLastModifiedTime);
+			item.setAnalysis(analysis);
+			item.setValue(FILE_LAST_MODIFIED_TIME, fileLastModifiedTime);
 		}
 		return success;
 	}
 
 	@NonNull
 	private GpxDataItem readItem(@NonNull SQLiteCursor query) {
-		String fileDir = query.getString(GPX_COL_DIR.getSelectColumnIndex());
-		String fileName = query.getString(GPX_COL_NAME.getSelectColumnIndex());
+		String fileDir = query.getString(FILE_DIR.getSelectColumnIndex());
+		String fileName = query.getString(FILE_NAME.getSelectColumnIndex());
 
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);
 
 		GpxDataItem item = new GpxDataItem(new File(dir, fileName));
-		GpxData data = item.getGpxData();
-
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
-		analysis.totalDistance = (float) query.getDouble(GPX_COL_TOTAL_DISTANCE.getSelectColumnIndex());
-		analysis.totalTracks = query.getInt(GPX_COL_TOTAL_TRACKS.getSelectColumnIndex());
-		analysis.startTime = query.getLong(GPX_COL_START_TIME.getSelectColumnIndex());
-		analysis.endTime = query.getLong(GPX_COL_END_TIME.getSelectColumnIndex());
-		analysis.timeSpan = query.getLong(GPX_COL_TIME_SPAN.getSelectColumnIndex());
-		analysis.timeMoving = query.getLong(GPX_COL_TIME_MOVING.getSelectColumnIndex());
-		analysis.totalDistanceMoving = (float) query.getDouble(GPX_COL_TOTAL_DISTANCE_MOVING.getSelectColumnIndex());
-		analysis.diffElevationUp = query.getDouble(GPX_COL_DIFF_ELEVATION_UP.getSelectColumnIndex());
-		analysis.diffElevationDown = query.getDouble(GPX_COL_DIFF_ELEVATION_DOWN.getSelectColumnIndex());
-		analysis.avgElevation = query.getDouble(GPX_COL_AVG_ELEVATION.getSelectColumnIndex());
-		analysis.minElevation = query.getDouble(GPX_COL_MIN_ELEVATION.getSelectColumnIndex());
-		analysis.maxElevation = query.getDouble(GPX_COL_MAX_ELEVATION.getSelectColumnIndex());
-		analysis.minSpeed = (float) query.getDouble(GPX_COL_MAX_SPEED.getSelectColumnIndex());
-		analysis.maxSpeed = (float) query.getDouble(GPX_COL_MAX_SPEED.getSelectColumnIndex());
-		analysis.avgSpeed = (float) query.getDouble(GPX_COL_AVG_SPEED.getSelectColumnIndex());
-		analysis.points = query.getInt(GPX_COL_POINTS.getSelectColumnIndex());
-		analysis.wptPoints = query.getInt(GPX_COL_WPT_POINTS.getSelectColumnIndex());
 
-		String names = query.getString(GPX_COL_WPT_CATEGORY_NAMES.getSelectColumnIndex());
+		analysis.totalDistance = (float) query.getDouble(TOTAL_DISTANCE.getSelectColumnIndex());
+		analysis.totalTracks = query.getInt(TOTAL_TRACKS.getSelectColumnIndex());
+		analysis.startTime = query.getLong(START_TIME.getSelectColumnIndex());
+		analysis.endTime = query.getLong(END_TIME.getSelectColumnIndex());
+		analysis.timeSpan = query.getLong(TIME_SPAN.getSelectColumnIndex());
+		analysis.timeMoving = query.getLong(TIME_MOVING.getSelectColumnIndex());
+		analysis.totalDistanceMoving = (float) query.getDouble(TOTAL_DISTANCE_MOVING.getSelectColumnIndex());
+		analysis.diffElevationUp = query.getDouble(DIFF_ELEVATION_UP.getSelectColumnIndex());
+		analysis.diffElevationDown = query.getDouble(DIFF_ELEVATION_DOWN.getSelectColumnIndex());
+		analysis.avgElevation = query.getDouble(AVG_ELEVATION.getSelectColumnIndex());
+		analysis.minElevation = query.getDouble(MIN_ELEVATION.getSelectColumnIndex());
+		analysis.maxElevation = query.getDouble(MAX_ELEVATION.getSelectColumnIndex());
+		analysis.minSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
+		analysis.maxSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
+		analysis.avgSpeed = (float) query.getDouble(AVG_SPEED.getSelectColumnIndex());
+		analysis.points = query.getInt(POINTS.getSelectColumnIndex());
+		analysis.wptPoints = query.getInt(WPT_POINTS.getSelectColumnIndex());
+
+		String names = query.getString(WPT_CATEGORY_NAMES.getSelectColumnIndex());
 		analysis.wptCategoryNames = names != null ? Algorithms.decodeStringSet(names) : null;
 
-		if (!query.isNull(GPX_COL_START_LAT.getSelectColumnIndex()) && !query.isNull(GPX_COL_START_LON.getSelectColumnIndex())) {
-			double lat = query.getDouble(GPX_COL_START_LAT.getSelectColumnIndex());
-			double lon = query.getDouble(GPX_COL_START_LON.getSelectColumnIndex());
+		if (!query.isNull(START_LAT.getSelectColumnIndex()) && !query.isNull(START_LON.getSelectColumnIndex())) {
+			double lat = query.getDouble(START_LAT.getSelectColumnIndex());
+			double lon = query.getDouble(START_LON.getSelectColumnIndex());
 			analysis.latLonStart = new LatLon(lat, lon);
 		}
-		data.setAnalysis(analysis);
-		data.setValue(GPX_COL_COLOR, GPXUtilities.parseColor(query.getString(GPX_COL_COLOR.getSelectColumnIndex()), 0));
-		data.setValue(GPX_COL_FILE_LAST_MODIFIED_TIME, query.getLong(GPX_COL_FILE_LAST_MODIFIED_TIME.getSelectColumnIndex()));
-		data.setValue(GPX_COL_FILE_LAST_UPLOADED_TIME, query.getLong(GPX_COL_FILE_LAST_UPLOADED_TIME.getSelectColumnIndex()));
-		data.setValue(GPX_COL_FILE_CREATION_TIME, query.isNull(GPX_COL_FILE_CREATION_TIME.getSelectColumnIndex()) ? -1 : query.getLong(GPX_COL_FILE_CREATION_TIME.getSelectColumnIndex()));
-		data.setValue(GPX_COL_SPLIT_TYPE, query.getInt(GPX_COL_SPLIT_TYPE.getSelectColumnIndex()));
-		data.setValue(GPX_COL_SPLIT_INTERVAL, query.getDouble(GPX_COL_SPLIT_INTERVAL.getSelectColumnIndex()));
-		data.setValue(GPX_COL_API_IMPORTED, query.getInt(GPX_COL_API_IMPORTED.getSelectColumnIndex()) == 1);
-		data.setValue(GPX_COL_SHOW_AS_MARKERS, query.getInt(GPX_COL_SHOW_AS_MARKERS.getSelectColumnIndex()) == 1);
-		data.setValue(GPX_COL_JOIN_SEGMENTS, query.getInt(GPX_COL_JOIN_SEGMENTS.getSelectColumnIndex()) == 1);
-		data.setValue(GPX_COL_SHOW_ARROWS, query.getInt(GPX_COL_SHOW_ARROWS.getSelectColumnIndex()) == 1);
-		data.setValue(GPX_COL_SHOW_START_FINISH, query.getInt(GPX_COL_SHOW_START_FINISH.getSelectColumnIndex()) == 1);
-		data.setValue(GPX_COL_WIDTH, query.getString(GPX_COL_WIDTH.getSelectColumnIndex()));
-		data.setValue(GPX_COL_NEAREST_CITY_NAME, query.getString(GPX_COL_NEAREST_CITY_NAME.getSelectColumnIndex()));
-		data.setValue(GPX_COL_SMOOTHING_THRESHOLD, query.getDouble(GPX_COL_SMOOTHING_THRESHOLD.getSelectColumnIndex()));
-		data.setValue(GPX_COL_MIN_FILTER_SPEED, query.getDouble(GPX_COL_MIN_FILTER_SPEED.getSelectColumnIndex()));
-		data.setValue(GPX_COL_MAX_FILTER_SPEED, query.getDouble(GPX_COL_MAX_FILTER_SPEED.getSelectColumnIndex()));
-		data.setValue(GPX_COL_MIN_FILTER_ALTITUDE, query.getDouble(GPX_COL_MIN_FILTER_ALTITUDE.getSelectColumnIndex()));
-		data.setValue(GPX_COL_MAX_FILTER_ALTITUDE, query.getDouble(GPX_COL_MAX_FILTER_ALTITUDE.getSelectColumnIndex()));
-		data.setValue(GPX_COL_MAX_FILTER_HDOP, query.getDouble(GPX_COL_MAX_FILTER_HDOP.getSelectColumnIndex()));
+		item.setAnalysis(analysis);
+		item.setValue(COLOR, GPXUtilities.parseColor(query.getString(COLOR.getSelectColumnIndex()), 0));
+		item.setValue(FILE_LAST_MODIFIED_TIME, query.getLong(FILE_LAST_MODIFIED_TIME.getSelectColumnIndex()));
+		item.setValue(FILE_LAST_UPLOADED_TIME, query.getLong(FILE_LAST_UPLOADED_TIME.getSelectColumnIndex()));
+		item.setValue(FILE_CREATION_TIME, query.isNull(FILE_CREATION_TIME.getSelectColumnIndex()) ? -1 : query.getLong(FILE_CREATION_TIME.getSelectColumnIndex()));
+		item.setValue(SPLIT_TYPE, query.getInt(SPLIT_TYPE.getSelectColumnIndex()));
+		item.setValue(SPLIT_INTERVAL, query.getDouble(SPLIT_INTERVAL.getSelectColumnIndex()));
+		item.setValue(API_IMPORTED, query.getInt(API_IMPORTED.getSelectColumnIndex()) == 1);
+		item.setValue(SHOW_AS_MARKERS, query.getInt(SHOW_AS_MARKERS.getSelectColumnIndex()) == 1);
+		item.setValue(JOIN_SEGMENTS, query.getInt(JOIN_SEGMENTS.getSelectColumnIndex()) == 1);
+		item.setValue(SHOW_ARROWS, query.getInt(SHOW_ARROWS.getSelectColumnIndex()) == 1);
+		item.setValue(SHOW_START_FINISH, query.getInt(SHOW_START_FINISH.getSelectColumnIndex()) == 1);
+		item.setValue(WIDTH, query.getString(WIDTH.getSelectColumnIndex()));
+		item.setValue(NEAREST_CITY_NAME, query.getString(NEAREST_CITY_NAME.getSelectColumnIndex()));
+		item.setValue(SMOOTHING_THRESHOLD, query.getDouble(SMOOTHING_THRESHOLD.getSelectColumnIndex()));
+		item.setValue(MIN_FILTER_SPEED, query.getDouble(MIN_FILTER_SPEED.getSelectColumnIndex()));
+		item.setValue(MAX_FILTER_SPEED, query.getDouble(MAX_FILTER_SPEED.getSelectColumnIndex()));
+		item.setValue(MIN_FILTER_ALTITUDE, query.getDouble(MIN_FILTER_ALTITUDE.getSelectColumnIndex()));
+		item.setValue(MAX_FILTER_ALTITUDE, query.getDouble(MAX_FILTER_ALTITUDE.getSelectColumnIndex()));
+		item.setValue(MAX_FILTER_HDOP, query.getDouble(MAX_FILTER_HDOP.getSelectColumnIndex()));
 
-		String coloringTypeName = query.getString(GPX_COL_COLORING_TYPE.getSelectColumnIndex());
+		String coloringTypeName = query.getString(COLORING_TYPE.getSelectColumnIndex());
 		if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) != null) {
-			data.setValue(GPX_COL_COLORING_TYPE, coloringTypeName);
+			item.setValue(COLORING_TYPE, coloringTypeName);
 		} else if (GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
 			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
-			data.setValue(GPX_COL_COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
+			item.setValue(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 		}
 		return item;
 	}

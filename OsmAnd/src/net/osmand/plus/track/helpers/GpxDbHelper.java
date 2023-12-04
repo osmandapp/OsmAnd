@@ -89,7 +89,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			GpxDataItem newItem = new GpxDataItem(newFile);
 			GpxDataItem oldItem = dataItems.get(currentFile);
 			if (oldItem != null) {
-				newItem.getGpxData().copyData(oldItem.getGpxData());
+				newItem.copyData(oldItem);
 			}
 			putToCache(newItem);
 			removeFromCache(currentFile);
@@ -107,12 +107,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	                                      double minSpeed, double maxSpeed, double minAltitude,
 	                                      double maxAltitude, double maxHdop) {
 		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
-		map.put(GPX_COL_SMOOTHING_THRESHOLD, smoothingThreshold);
-		map.put(GPX_COL_MIN_FILTER_SPEED, minSpeed);
-		map.put(GPX_COL_MAX_FILTER_SPEED, maxSpeed);
-		map.put(GPX_COL_MIN_FILTER_ALTITUDE, minAltitude);
-		map.put(GPX_COL_MAX_FILTER_ALTITUDE, maxAltitude);
-		map.put(GPX_COL_MAX_FILTER_HDOP, maxHdop);
+		map.put(SMOOTHING_THRESHOLD, smoothingThreshold);
+		map.put(MIN_FILTER_SPEED, minSpeed);
+		map.put(MAX_FILTER_SPEED, maxSpeed);
+		map.put(MIN_FILTER_ALTITUDE, minAltitude);
+		map.put(MAX_FILTER_ALTITUDE, maxAltitude);
+		map.put(MAX_FILTER_HDOP, maxHdop);
 
 		boolean res = database.updateGpxParameters(item, map);
 		putToCache(item);
@@ -123,13 +123,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	                                boolean showArrows, boolean showStartFinish, int splitType,
 	                                double splitInterval, @Nullable String coloringType) {
 		Map<GpxParameter<?>, Object> map = new LinkedHashMap<>();
-		map.put(GPX_COL_COLOR, color);
-		map.put(GPX_COL_WIDTH, width);
-		map.put(GPX_COL_SHOW_ARROWS, showArrows);
-		map.put(GPX_COL_SHOW_START_FINISH, showStartFinish);
-		map.put(GPX_COL_SPLIT_TYPE, splitType);
-		map.put(GPX_COL_SPLIT_INTERVAL, splitInterval);
-		map.put(GPX_COL_COLORING_TYPE, coloringType);
+		map.put(COLOR, color);
+		map.put(WIDTH, width);
+		map.put(SHOW_ARROWS, showArrows);
+		map.put(SHOW_START_FINISH, showStartFinish);
+		map.put(SPLIT_TYPE, splitType);
+		map.put(SPLIT_INTERVAL, splitInterval);
+		map.put(COLORING_TYPE, coloringType);
 
 		boolean res = database.updateGpxParameters(item, map);
 		putToCache(item);
@@ -218,7 +218,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public List<GpxDataItem> getSplitItems() {
 		List<GpxDataItem> items = new ArrayList<>();
 		for (GpxDataItem item : getItems()) {
-			if (item.getGpxData().getValue(GPX_COL_SPLIT_TYPE) != 0) {
+			if (item.getValue(SPLIT_TYPE) != 0) {
 				items.add(item);
 			}
 		}

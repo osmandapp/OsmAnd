@@ -507,7 +507,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String getTrackDescrForDataItem(@NonNull GpxDataItem dataItem) {
-		GPXTrackAnalysis analysis = dataItem.getGpxData().getAnalysis();
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
 			File parent = dataItem.getFile().getParentFile();
 			String folder = Algorithms.capitalizeFirstLetter(parent.getName());

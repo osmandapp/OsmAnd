@@ -1,6 +1,6 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -167,8 +167,8 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == dataItem.getGpxData().getValue(GPX_COL_COLOR)) {
-				gpxDbHelper.updateGpxParameter(dataItem, GPX_COL_COLOR, newColor);
+			if (prevColor == dataItem.getValue(COLOR)) {
+				gpxDbHelper.updateGpxParameter(dataItem, COLOR, newColor);
 			}
 		}
 		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();

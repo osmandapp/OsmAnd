@@ -15,7 +15,7 @@ class TimeInMotionTrackFilter(
 	app, R.string.moving_time, TIME_IN_MOTION, filterChangedListener) {
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val duration = trackItem.dataItem?.gpxData?.analysis?.timeMoving
+		val duration = trackItem.dataItem?.analysis?.timeMoving
 		if (duration == null || (duration == 0L)) {
 			return false
 		}

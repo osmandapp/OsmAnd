@@ -1,12 +1,11 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_JOIN_SEGMENTS;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_INTERVAL;
-import static net.osmand.plus.track.helpers.GpxParameter.GPX_COL_SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
@@ -23,10 +22,9 @@ public class GpxSplitParams {
 	}
 
 	public GpxSplitParams(@NonNull GpxDataItem dataItem) {
-		GpxData gpxData = dataItem.getGpxData();
-		splitType = GpxSplitType.getSplitTypeByTypeId(gpxData.getValue(GPX_COL_SPLIT_TYPE));
-		splitInterval = gpxData.getValue(GPX_COL_SPLIT_INTERVAL);
-		joinSegments = gpxData.getValue(GPX_COL_JOIN_SEGMENTS);
+		splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getValue(SPLIT_TYPE));
+		splitInterval = dataItem.getValue(SPLIT_INTERVAL);
+		joinSegments = dataItem.getValue(JOIN_SEGMENTS);
 	}
 
 	@Override

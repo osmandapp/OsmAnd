@@ -8,7 +8,7 @@ import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.WIDTH
 import net.osmand.plus.routing.cards.RouteLineWidthCard
 import net.osmand.plus.track.fragments.TrackAppearanceFragment
-import net.osmand.plus.track.helpers.GpxParameter.GPX_COL_WIDTH
+import net.osmand.plus.track.helpers.GpxParameter
 import net.osmand.util.Algorithms
 
 class WidthTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener?) :
@@ -23,7 +23,7 @@ class WidthTrackFilter(app: OsmandApplication, filterChangedListener: FilterChan
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (width in selectedItems) {
-			val trackItemWidth = trackItem.dataItem?.gpxData?.getValue(GPX_COL_WIDTH)
+			val trackItemWidth = trackItem.dataItem?.getValue(GpxParameter.WIDTH)
 			if (Algorithms.stringsEqual(trackItemWidth, width) ||
 				Algorithms.isEmpty(trackItemWidth) && Algorithms.isEmpty(width)) {
 				return true

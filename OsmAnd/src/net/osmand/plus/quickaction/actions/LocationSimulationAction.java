@@ -215,12 +215,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
-				if (item.getGpxData().getAnalysis() != null) {
-					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getGpxData().getAnalysis(), app);
+				if (item.getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
 			});
-			if (gpxDataItem != null && gpxDataItem.getGpxData().getAnalysis() != null) {
-				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getGpxData().getAnalysis(), app);
+			if (gpxDataItem != null && gpxDataItem.getAnalysis() != null) {
+				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getAnalysis(), app);
 			}
 		}
 	}
