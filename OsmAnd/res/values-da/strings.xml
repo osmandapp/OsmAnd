@@ -5573,4 +5573,8 @@
     <string name="clear_key_assignment_desc">Nøglebinding for den valgte handling vil blive ryddet og sat til Ingen.</string>
     <string name="rendering_attr_showToll_name">Vis vejafgiftsrestriktioner</string>
     <string name="rendering_attr_showToll_description">Vis vejafgiftsrestriktioner på veje</string>
+    <string name="lang_zh_hans">Forenklet kinesisk</string>
+    <string name="zoom_non_animated">Zoom uden animation</string>
+    <string name="lang_zh_hant">Traditionelt kinesisk</string>
+    <string name="zoom_animated">Animeret zoom</string>
 </resources>
