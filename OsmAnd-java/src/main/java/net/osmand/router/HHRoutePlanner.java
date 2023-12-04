@@ -135,9 +135,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
 		if (hctx == null) {
-			HHNetworkRouteRes res = new HHNetworkRouteRes();
-			res.error = "Files for hh routing were not initialized. Route couldn't be calculated.";
-			return res;
+			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			printGCInformation();
@@ -188,11 +186,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		time = System.nanoTime();
 		System.out.println(hctx.config.toString(start, end));
 		System.out.printf("Calculate turns...");
+		RouteResultPreparation resultPreparation = new RouteResultPreparation();
 		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
-			route.detailed = new RouteResultPreparation().prepareResult(hctx.rctx, route.detailed);
+			route.detailed = resultPreparation.prepareResult(hctx.rctx, route.detailed).detailed;
 		}
 		System.out.printf("%.2f ms\n", (System.nanoTime() - time) / 1e6);
-//			RouteResultPreparation.printResults(ctx, start, end, route.detailed);
+		RouteResultPreparation.printResults(hctx.rctx, start, end, route.detailed);
 		
 		System.out.printf("Routing finished all %.1f ms: last mile %.1f ms, load data %.1f ms (%,d edges), routing %.1f ms (queue  - %.1f add ms + %.1f poll ms), prep result %.1f ms\n",
 				(System.nanoTime() - startTime) / 1e6, hctx.stats.searchPointsTime,
@@ -956,7 +955,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
-		new RoutePlannerFrontEnd().makeStartEndPointsPrecise(route.detailed, start, end, new ArrayList<LatLon>()); 
 		return route;
 	}
 

@@ -121,9 +121,6 @@ public class HHRoutingDB {
 		}
 	}
 	
-
-	
-	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(short mapId, Class<T> cl) throws SQLException {
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");

@@ -1,28 +1,33 @@
 package net.osmand.router;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-
-import net.osmand.util.RouterUtilTest;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import net.osmand.NativeLibrary;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static net.osmand.util.RouterUtilTest.getNativeLibPath;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.osmand.NativeLibrary;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.RouterUtilTest;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -61,6 +66,7 @@ public class RouteTestingTest {
 
 	}
 
+//	@Ignore 
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;
@@ -133,14 +139,14 @@ public class RouteTestingTest {
 
 			ctx.leftSideNavigation = false;
 			List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(),
-					te.getTransitPoint());
+					te.getTransitPoint()).detailed;
 			Set<Long> reachedSegments = new TreeSet<Long>();
 			Assert.assertNotNull(routeSegments);
 			int prevSegment = -1;
 			for (int i = 0; i <= routeSegments.size(); i++) {
 				if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 					if (prevSegment >= 0) {
-						String name = routeSegments.get(prevSegment).getDescription();
+						String name = routeSegments.get(prevSegment).getDescription(false);
 						long segmentId = routeSegments.get(prevSegment).getObject()
 								.getId() >> (RouteResultPreparation.SHIFT_ID);
 						System.out.println("segmentId: " + segmentId + " description: " + name);

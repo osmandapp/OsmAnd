@@ -22,6 +22,7 @@ import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
 
 public class HHRouteDataStructure {
@@ -31,6 +32,7 @@ public class HHRouteDataStructure {
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
 		
 		Double INITIAL_DIRECTION = null;
+		public final static int CALCULATE_ALL_DETAILED = 3;
 		
 		
 		boolean ROUTE_LAST_MILE = false;
@@ -386,13 +388,21 @@ public class HHRouteDataStructure {
 		double prepTime = 0;
 	}
 	
-	public static class HHNetworkRouteRes {
+	public static class HHNetworkRouteRes extends RouteCalcResult {
+
 		public RoutingStats stats;
 		public List<HHNetworkSegmentRes> segments = new ArrayList<>();
-		public List<RouteSegmentResult> detailed = new ArrayList<>();
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
 		public TLongHashSet uniquePoints = new TLongHashSet();
-		public String error;
+		
+		public HHNetworkRouteRes() {
+			super(new ArrayList<RouteSegmentResult>());
+		}
+		
+		public HHNetworkRouteRes(String error) {
+			super(error);
+		}
+		
 		
 		public double getHHRoutingTime() {
 			double d = 0;

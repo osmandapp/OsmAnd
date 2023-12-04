@@ -1197,8 +1197,6 @@ public class BinaryRoutePlanner {
 	
 	static class MultiFinalRouteSegment extends FinalRouteSegment {
 
-		boolean reverseWaySearch;
-		RouteSegment opposite;
 		List<FinalRouteSegment> all = new ArrayList<>();
 
 		public MultiFinalRouteSegment(FinalRouteSegment f) {
