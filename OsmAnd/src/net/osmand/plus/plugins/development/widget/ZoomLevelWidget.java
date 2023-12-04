@@ -50,9 +50,8 @@ public class ZoomLevelWidget extends SimpleWidget {
 			float visualZoom = newZoomFloatPart >= 0.0f
 					? 1.0f + newZoomFloatPart
 					: 1.0f + 0.5f * newZoomFloatPart;
-			int deltaZoom = newZoom - baseZoom;
-			int targetPixelScale = 1 << Math.max(deltaZoom, 0);
-			float offsetFromLogicalZoom = getZoomDeltaFromMapScale((float) targetPixelScale * visualZoom * newMapDensity);
+			float targetPixelScale = (float) Math.pow(2.0, newZoom - baseZoom);
+			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(targetPixelScale * visualZoom * newMapDensity);
 			float preFormattedOffset = Math.round(Math.abs(offsetFromLogicalZoom) * 100) / 100.0f;
 			String formattedOffset = OsmAndFormatter
 					.formatValue(preFormattedOffset, "", true, 2, app)
