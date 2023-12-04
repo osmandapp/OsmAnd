@@ -1,5 +1,8 @@
 package net.osmand.plus.download.local.dialogs.viewholders;
 
+import static net.osmand.plus.download.local.LocalItemUtils.getFormattedDate;
+import static net.osmand.plus.download.local.dialogs.LocalItemsAdapter.*;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -15,18 +18,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
+import net.osmand.plus.download.local.dialogs.livegroup.LiveGroupItemsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class LocalItemHolder extends RecyclerView.ViewHolder {
+import java.util.Date;
 
-	private final OsmandApplication app;
+public class LiveGroupItemHolder extends RecyclerView.ViewHolder{
 	private final UiUtilities uiUtilities;
 	@Nullable
-	private final LocalItemListener listener;
+	private final LiveGroupItemListener listener;
 
 	private final TextView title;
 	private final TextView description;
@@ -36,9 +39,9 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	private final View bottomShadow;
 	private final View bottomDivider;
 
-	public LocalItemHolder(@NonNull View itemView, @Nullable LocalItemListener listener, boolean nightMode) {
+	public LiveGroupItemHolder(@NonNull View itemView, @Nullable LiveGroupItemListener listener, boolean nightMode) {
 		super(itemView);
-		app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 		this.listener = listener;
 
@@ -52,18 +55,19 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
-		UiUtilities.setupCompoundButton(nightMode, activeColor, compoundButton);
 		AndroidUtils.setBackground(itemView.findViewById(R.id.selectable_list_item), drawable);
 	}
 
-	public void bindView(@NonNull LocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
+	public void bindView(@NonNull LiveGroupItemsFragment.LiveGroupItem item, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
-		title.setText(item.getName(context));
-		description.setText(item.getDescription(context));
-		icon.setImageDrawable(getIcon(item));
+		title.setText(item.name);
 
-		boolean selected = listener != null && listener.isItemSelected(item);
-		compoundButton.setChecked(selected);
+		String formattedDate = getFormattedDate(new Date(item.getLocalItemCreated()));
+		String size = AndroidUtils.formatSize(context, item.getLocalItemSize());
+		description.setText(context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate));
+		icon.setImageDrawable(getIcon(item.localItems.get(0)));
+
+		AndroidUiHelper.updateVisibility(compoundButton, false);
 
 		options.setOnClickListener(v -> {
 			if (listener != null) {
@@ -75,8 +79,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 				listener.onItemSelected(item);
 			}
 		});
-		AndroidUiHelper.updateVisibility(options, !selectionMode);
-		AndroidUiHelper.updateVisibility(compoundButton, selectionMode);
+		AndroidUiHelper.updateVisibility(options, true);
 		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 		AndroidUiHelper.updateVisibility(bottomDivider, !lastItem && !hideDivider);
 	}
@@ -84,11 +87,6 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private Drawable getIcon(@NonNull LocalItem item) {
 		LocalItemType type = item.getType();
-		if (type.isDownloadType() && !item.isBackuped(app) && listener != null) {
-			boolean shouldUpdate = listener.itemUpdateAvailable(item);
-			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
-		} else {
 			return uiUtilities.getThemedIcon(type.getIconId());
-		}
 	}
 }

@@ -6,10 +6,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -20,9 +21,9 @@ import java.util.Locale;
 
 public class LocalItemInfoCard extends BaseCard {
 
-	private final LocalItem localItem;
+	private final LocalItemInterface localItem;
 
-	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull LocalItem localItem) {
+	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull LocalItemInterface localItem) {
 		super(activity, false);
 		this.localItem = localItem;
 	}
@@ -36,14 +37,14 @@ public class LocalItemInfoCard extends BaseCard {
 	protected void updateContent() {
 		ViewGroup container = view.findViewById(R.id.container);
 
-		String type = localItem.getType().toHumanString(app);
+		String type = app.getString(localItem.getLocalItemType().getTitleId());
 		setupRow(container.findViewById(R.id.type), getString(R.string.shared_string_type), type, false);
 
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
-		String date = format.format(localItem.getFile().lastModified());
+		String date = format.format(localItem.getLocalItemCreated());
 		setupRow(container.findViewById(R.id.data), getString(R.string.shared_string_created), date, false);
 
-		String size = AndroidUtils.formatSize(app, localItem.getSize());
+		String size = AndroidUtils.formatSize(app, localItem.getLocalItemSize());
 		setupRow(container.findViewById(R.id.size), getString(R.string.shared_string_size), size, true);
 	}
 
@@ -55,5 +56,14 @@ public class LocalItemInfoCard extends BaseCard {
 		tvDescription.setText(description);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !lastItem);
+	}
+
+	public interface LocalItemInterface {
+
+		LocalItemType getLocalItemType();
+
+		long getLocalItemCreated();
+
+		long getLocalItemSize();
 	}
 }

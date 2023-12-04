@@ -168,7 +168,7 @@ public class FileNameTranslationHelper {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
-	private static String getBasename(Context ctx, String fileName) {
+	public static String getBasename(Context ctx, String fileName) {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}

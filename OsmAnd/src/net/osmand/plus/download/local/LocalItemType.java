@@ -59,6 +59,11 @@ public enum LocalItemType {
 		return iconId;
 	}
 
+	@StringRes
+	public int getTitleId(){
+		return titleId;
+	}
+
 	@NonNull
 	public CategoryType getCategoryType() {
 		if (isSettingsCategory()) {
