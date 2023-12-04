@@ -57,6 +57,35 @@ public class RouteResultPreparation {
 		int y31;
 		int originalIndex;
 	}
+	
+	public static class RouteCalcResult {
+		List<RouteSegmentResult> detailed = new ArrayList<RouteSegmentResult>();
+		String error = null;
+		
+		public RouteCalcResult(List<RouteSegmentResult> list) {
+			if(list == null) {
+				error = "Result is empty";
+			} else {
+				this.detailed = list;
+			}
+		}
+		
+		public RouteCalcResult(String error) {
+			this.error = error;
+		}
+		
+		public List<RouteSegmentResult> getList() {
+			return detailed;
+		}
+		
+		public String getError() {
+			return error;
+		}
+
+		public boolean isCorrect() {
+			return error == null && !detailed.isEmpty();
+		}
+	}
 
 	private void combineWayPointsForAreaRouting(RoutingContext ctx, List<RouteSegmentResult> result) {
 		for(int i = 0; i < result.size(); i++) {
@@ -163,7 +192,7 @@ public class RouteResultPreparation {
 		return intersections % 2 == 1;
 	}
 
-	public List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	public RouteCalcResult prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			RouteDataObject road = result.get(i).getObject();
 			checkAndInitRouteRegion(ctx, road);
@@ -180,7 +209,8 @@ public class RouteResultPreparation {
 		}
 		calculateTimeSpeed(ctx, result);
 		prepareTurnResults(ctx, result);
-		return result;
+		RouteCalcResult res = new RouteCalcResult(result);
+		return res;
 	}
 	
 	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {

@@ -221,7 +221,7 @@ public class TestRouting {
 		double endLon = Double.parseDouble(parser.getAttributeValue("", "target_lon"));
 		LatLon start = new LatLon(startLat, startLon);
 		LatLon end = new LatLon(endLat, endLon);
-		List<RouteSegmentResult> route = router.searchRoute(ctx, start, end, null);
+		List<RouteSegmentResult> route = router.searchRoute(ctx, start, end, null).detailed;
 		final float calcRoutingTime = ctx.routingTime;
 		float completeTime = 0;
 		float completeDistance = 0;
@@ -324,7 +324,7 @@ public class TestRouting {
 		// Clear ctx
 		ctx = router.buildRoutingContext(rconfig, lib, rs);
 		List<RouteSegmentResult> route = router.searchRoute(ctx,
-				new LatLon(startLat, startLon), new LatLon(endLat, endLon), null);
+				new LatLon(startLat, startLon), new LatLon(endLat, endLon), null).detailed;
 		System.out.println("Route is " + route.size() + " segments " + (System.currentTimeMillis() - ts) + " ms ");
 	}
 

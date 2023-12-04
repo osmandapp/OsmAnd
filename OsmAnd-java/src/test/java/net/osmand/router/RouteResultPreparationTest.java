@@ -1,14 +1,24 @@
 package net.osmand.router;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import static net.osmand.util.RouterUtilTest.getExpectedIdSet;
+import static net.osmand.util.RouterUtilTest.getNativeLibPath;
+import static net.osmand.util.RouterUtilTest.getRoadId;
+import static net.osmand.util.RouterUtilTest.getRoadStartPoint;
 
-import net.osmand.NativeLibrary;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.LatLon;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-import net.osmand.util.Algorithms;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
@@ -17,15 +27,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.File;
-import java.util.Map.Entry;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Reader;
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import static net.osmand.util.RouterUtilTest.*;
+import net.osmand.NativeLibrary;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.Algorithms;
 
 /**
  * Created by yurkiss on 04.03.16.
@@ -116,7 +125,7 @@ public class RouteResultPreparationTest {
         }
         ctx.leftSideNavigation = false;
         
-        List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null);
+        List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null).detailed;
         Set<Long> reachedSegments = new TreeSet<Long>();
         Assert.assertNotNull(routeSegments);
         int prevSegment = -1;
