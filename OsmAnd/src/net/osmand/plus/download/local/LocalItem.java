@@ -26,6 +26,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.dialogs.LocalItemInfoCard;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.render.RendererRegistry;
@@ -40,7 +41,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.Date;
 
-public class LocalItem implements Comparable<LocalItem> {
+public class LocalItem implements Comparable<LocalItem>, LocalItemInfoCard.LocalItemInterface {
 
 	private final File file;
 	private final LocalItemType type;
@@ -197,5 +198,20 @@ public class LocalItem implements Comparable<LocalItem> {
 	@Override
 	public String toString() {
 		return fileName;
+	}
+
+	@Override
+	public LocalItemType getLocalItemType() {
+		return type;
+	}
+
+	@Override
+	public long getLocalItemCreated() {
+		return file.lastModified();
+	}
+
+	@Override
+	public long getLocalItemSize() {
+		return getSize();
 	}
 }

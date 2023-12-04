@@ -26,10 +26,12 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
+import net.osmand.plus.download.local.dialogs.livegroup.LiveGroupItemsFragment;
 import net.osmand.plus.importfiles.ImportTaskListener;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -192,6 +194,10 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 			if (itemsFragment != null) {
 				itemsFragment.updateContent();
 			}
+			LiveGroupItemsFragment liveGroupItemsFragment = activity.getFragment(LiveGroupItemsFragment.TAG);
+			if (liveGroupItemsFragment != null) {
+				liveGroupItemsFragment.updateContent();
+			}
 			LocalSearchFragment searchFragment = activity.getFragment(LocalSearchFragment.TAG);
 			if (searchFragment != null) {
 				searchFragment.updateContent();
@@ -215,7 +221,11 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onGroupSelected(@NonNull LocalGroup group) {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			LocalItemsFragment.showInstance(manager, group.getType(), this);
+			if (group.getType() == LocalItemType.LIVE_UPDATES) {
+				LiveGroupItemsFragment.showInstance(manager, group.getType(), this);
+			} else {
+				LocalItemsFragment.showInstance(manager, group.getType(), this);
+			}
 		}
 	}
 }
