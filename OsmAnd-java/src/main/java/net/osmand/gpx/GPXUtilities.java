@@ -61,6 +61,7 @@ public class GPXUtilities {
 	public static final String COLOR_NAME_EXTENSION = "color";
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
+	public static final String HIDDEN_EXTENSION = "hidden";
 
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
 	public static final String OSM_PREFIX = "osm_tag_";
@@ -402,6 +403,10 @@ public class GPXUtilities {
 				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 			}
 		}
+		
+		public void setHidden(String hidden) {
+			getExtensionsToWrite().put(HIDDEN_EXTENSION, hidden);
+		}
 
 		public void setProfileType(String profileType) {
 			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
@@ -519,6 +524,10 @@ public class GPXUtilities {
 			String address = pt.extensions.get(ADDRESS_EXTENSION);
 			if (address != null) {
 				setAddress(address);
+			}
+			String hidden = pt.extensions.get(HIDDEN_EXTENSION);
+			if (hidden != null) {
+				setHidden(hidden);
 			}
 		}
 	}
@@ -740,7 +749,7 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
-		public final String name;
+		public String name;
 		public String iconName;
 		public String backgroundType;
 		public List<WptPt> points = new ArrayList<>();
@@ -767,6 +776,10 @@ public class GPXUtilities {
 		@Override
 		public int hashCode() {
 			return Algorithms.hash(name, iconName, backgroundType, color, points);
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		@Override
