@@ -1409,7 +1409,7 @@
     <string name="shared_string_commit">Comite</string>
     <string name="context_menu_item_delete_waypoint">Ștergi punctul de referință GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editează punct intermediar GPX</string>
-    <string name="shared_string_location">Localizare</string>
+    <string name="shared_string_location">Locație</string>
     <string name="share_osm_edits_subject">Editări OSM distribuite prin OsmAnd</string>
     <string name="lang_nds">Germană redusă</string>
     <string name="lang_mk">Macedoneană</string>
@@ -1525,7 +1525,7 @@
     <string name="shared_string_message">Mesaj</string>
     <string name="agps_data_last_downloaded">Datele A-GPS descărcate: %1$s</string>
     <string name="confirm_usage_speed_cameras">În multe țări (Germania, Franța, Italia și altele), utilizarea avertismentelor de avertizare a radarelor de viteză este ilegală. OsmAnd nu își asumă nicio răspundere în cazul în care încălcați legea. Atingeți \'Da\' numai dacă sunteți eligibil pentru a utiliza această funcție.</string>
-    <string name="welmode_download_maps">Descărcarcare hărți</string>
+    <string name="welmode_download_maps">Descărcare hărți</string>
     <string name="welcome_select_region">Pentru a reflecta corect semnele si reglementările de trafic, alege regiunea în care conduci:</string>
     <string name="welcome_text">OsmAnd oferă vizualizarea și navigarea hărții globale fără internet.</string>
     <string name="welcome_header">Bun venit</string>
