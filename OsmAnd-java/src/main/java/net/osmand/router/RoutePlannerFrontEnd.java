@@ -803,7 +803,11 @@ public class RoutePlannerFrontEnd {
 				ctx.nativeLib = nativeLib;
 			}
 		}
-		
+
+		if (USE_ONLY_HH_ROUTING && !intermediatesEmpty) {
+			return new HHNetworkRouteRes("Intermediate points are not currently supported by HH");
+		}
+
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
