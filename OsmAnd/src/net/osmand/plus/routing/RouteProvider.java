@@ -823,7 +823,7 @@ public class RouteProvider {
 	                                                    RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 	                                                    List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
-			RouteCalcResult result = null;
+			RouteResultPreparation.RouteCalcResult result = null;
 			if (complexCtx != null) {
 				try {
 					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
