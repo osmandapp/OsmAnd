@@ -5571,4 +5571,6 @@
     <string name="rendering_attr_showToll_description">Mostrar los peajes en las carreteras</string>
     <string name="lang_zh_hans">Chino simplificado</string>
     <string name="lang_zh_hant">Chino tradicional</string>
+    <string name="zoom_non_animated">Zoom no animado</string>
+    <string name="zoom_animated">Zoom animado</string>
 </resources>
