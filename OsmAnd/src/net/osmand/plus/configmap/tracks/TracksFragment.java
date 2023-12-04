@@ -45,10 +45,10 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
-import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
+import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
@@ -91,10 +91,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
-	public static final String OPEN_TRACKS_TAB = "open_tracks_tab";
-	public static final String IS_SMART_FOLDER = "is_smart_folder";
-	public static final String SELECT_ALL_ITEMS_ON_TAB = "select_all_items_on_tab";
-
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
@@ -109,7 +105,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private DialogButton applyButton;
 	private DialogButton selectionButton;
-
 
 	@Nullable
 	private PreselectedTabParams preselectedTabParams;
@@ -431,27 +426,24 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		AndroidUiHelper.updateVisibility(progressBar, false);
-		applyPreselectedItems();
 		updateTrackTabs();
+		applyPreselectedParams();
 		updateTabsContent();
 		updateButtonsState();
-		applyPreselectedTab();
 		preselectedTabParams = null;
 	}
 
-	private void applyPreselectedItems() {
+	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
 			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
 			TrackTab trackTab = getTab(tabName);
-			List<TrackItem> preselectedItems = preselectedTabParams.getPreselectedTrackItems(trackTab);
-			itemsSelectionHelper.onItemsSelected(preselectedItems, true);
-		}
-	}
+			if (trackTab != null) {
+				setSelectedTab(tabName);
 
-	private void applyPreselectedTab() {
-		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
-			setSelectedTab(tabName);
+				if (preselectedTabParams.shouldSelectAll()) {
+					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);
+				}
+			}
 		}
 	}
 
@@ -736,11 +728,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		showInstance(manager, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @Nullable PreselectedTabParams preselectedTabParams) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable PreselectedTabParams params) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksFragment fragment = new TracksFragment();
-			fragment.preselectedTabParams = preselectedTabParams;
+			fragment.preselectedTabParams = params;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

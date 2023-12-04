@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -7,44 +9,42 @@ import androidx.annotation.Nullable;
 
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PreselectedTabParams {
 
-	@NonNull
-	private final String folderName;
-	private final boolean isSmartFolder;
-	private final boolean shouldSelectAllItems;
+	public static final String PRESELECTED_TRACKS_TAB_NAME = "preselected_tab_name";
+	public static final String PRESELECTED_TRACKS_TAB_TYPE = "preselected_tab_type";
+	public static final String SELECT_ALL_ITEMS_ON_TAB = "select_all_items_on_tab";
 
-	public PreselectedTabParams(@NonNull String folderName,
-	                            boolean isSmartFolder,
-	                            boolean shouldSelectAllItems) {
-		this.folderName = folderName;
-		this.isSmartFolder = isSmartFolder;
-		this.shouldSelectAllItems = shouldSelectAllItems;
+	@NonNull
+	private final String name;
+	@NonNull
+	private final TrackTabType type;
+	private final boolean selectAll;
+
+	public PreselectedTabParams(@NonNull String name, @NonNull TrackTabType type, boolean selectAll) {
+		this.name = name;
+		this.type = type;
+		this.selectAll = selectAll;
+	}
+
+	public boolean shouldSelectAll() {
+		return selectAll;
 	}
 
 	@NonNull
-	public String getPreselectedTabName(@NonNull Context context,
-	                                    @NonNull List<TrackTab> tabList) {
-		if (isSmartFolder) {
-			for (TrackTab tab : tabList) {
+	public String getPreselectedTabName(@NonNull Context context, @NonNull List<TrackTab> trackTabs) {
+		if (type == SMART_FOLDER) {
+			for (TrackTab tab : trackTabs) {
 				String tabName = tab.getName(context);
-				if (tab.type == TrackTabType.SMART_FOLDER && Algorithms.stringsEqual(tabName, folderName)) {
+				if (tab.type == SMART_FOLDER && Algorithms.stringsEqual(tabName, name)) {
 					return tab.getTypeName();
 				}
 			}
 			return "";
 		}
-		return folderName;
-	}
-
-	@NonNull
-	public List<TrackItem> getPreselectedTrackItems(@Nullable TrackTab trackTab) {
-		if (shouldSelectAllItems && trackTab != null) {
-			return trackTab.getTrackItems();
-		}
-		return new ArrayList<>();
+		return name;
 	}
 }
