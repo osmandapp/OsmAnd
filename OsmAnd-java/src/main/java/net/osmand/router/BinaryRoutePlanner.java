@@ -112,11 +112,18 @@ public class BinaryRoutePlanner {
 		while (!graphSegments.isEmpty()) {
 			RouteSegmentCost cst = graphSegments.poll();
 			RouteSegment segment = cst.segment;
+			int visitedCnt = (start != null ? visitedDirectSegments.size() : 0) + (end != null ? visitedOppositeSegments.size() : 0);
 			// use accumulative approach
-			ctx.memoryOverhead = (visitedDirectSegments.size() + visitedOppositeSegments.size()) * STANDARD_ROAD_VISITED_OVERHEAD +
+			ctx.memoryOverhead = visitedCnt * STANDARD_ROAD_VISITED_OVERHEAD +
 					(graphDirectSegments.size() + graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
 			if (TRACE_ROUTING) {
 				printRoad(">", segment, !forwardSearch);
+			}
+			if (ctx.config.MAX_VISITED > 0 && visitedCnt > ctx.config.MAX_VISITED) {
+				if (finalSegment != null) {
+					// we can mark incomplete
+				}
+				break;
 			}
 			boolean skipSegment = false;
 			if (segment instanceof FinalRouteSegment) {

@@ -46,6 +46,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	static final double MINIMAL_COST = 0.01;
 	private static final int PNT_SHORT_ROUTE_START_END = -1000;
+	public static final int MAX_POINTS_CLUSTER_ROUTING = 150000;
 	
 	HHRoutingContext<T> cacheHctx;
 	private final Class<T> pointClass;
@@ -575,6 +576,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			
 			return pnts;
 		}
+		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING;
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
@@ -582,6 +584,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
+		hctx.rctx.config.MAX_VISITED = -1;
 		System.out.println(hctx.rctx.calculationProgress.getInfo(null));		
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
@@ -867,8 +870,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = RoutingConfiguration.DEFAULT_PENALTY_FOR_REVERSE_DIRECTION * 4; 
 		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
 		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
-		
-		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null); // no diff at all: hctx.boundaries -> null 
+		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING;
+		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null); // no diff at all: hctx.boundaries -> null
+		hctx.rctx.config.MAX_VISITED = -1;
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, f);
 		res.rtTimeDetailed = f.distanceFromStart;
 		// clean up
