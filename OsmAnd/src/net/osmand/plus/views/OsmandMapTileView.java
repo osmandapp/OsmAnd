@@ -594,6 +594,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void setHeight(float height) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null)
+			mapRenderer.restoreFlatZoom(height);
+		else
+			currentViewport.setHeight(height);
+	}
+
 	public boolean isShowMapPosition() {
 		return showMapPosition;
 	}
@@ -922,6 +930,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
+			float height = currentViewport.getHeight();
+			if (height > 0.0f && mapRenderer != null) {
+				currentViewport.setHeight(0.0f);
+				mapRenderer.restoreFlatZoom(height);
+			}
 		}
 		if (view instanceof SurfaceView) {
 			SurfaceHolder holder = ((SurfaceView) view).getHolder();
