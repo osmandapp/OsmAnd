@@ -874,7 +874,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, null); // no diff at all: hctx.boundaries -> null
 		hctx.rctx.config.MAX_VISITED = -1;
 		res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, f);
-		res.rtTimeDetailed = f.distanceFromStart;
+		res.rtTimeDetailed = f == null ? 0 : f.distanceFromStart;
 		// clean up
 		hctx.rctx.config.initialDirection = null;
 		hctx.rctx.config.targetDirection = null;
