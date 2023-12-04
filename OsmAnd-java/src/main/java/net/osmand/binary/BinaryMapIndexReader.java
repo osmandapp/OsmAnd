@@ -176,6 +176,7 @@ public class BinaryMapIndexReader {
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
 		transportIndexes = new ArrayList<TransportIndex>(referenceToSameFile.transportIndexes);
 		routingIndexes = new ArrayList<RouteRegion>(referenceToSameFile.routingIndexes);
+		hhIndexes = new ArrayList<HHRouteRegion>(referenceToSameFile.hhIndexes);
 		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
 		basemap = referenceToSameFile.basemap;
 		calculateCenterPointForRegions();
