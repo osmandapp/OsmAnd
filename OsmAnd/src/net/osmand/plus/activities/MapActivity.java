@@ -42,6 +42,7 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -620,6 +621,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setHeight(settings.getLastKnownMapHeight());
 			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
 			mapView.initMapRotationByCompassMode();
 		}
@@ -1027,6 +1029,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					animatedThread.getTargetIntZoom());
 		}
 
+		MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (mapRenderer != null)
+			settings.setLastKnownMapHeight(mapRenderer.getMapTargetHeightInMeters());
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
