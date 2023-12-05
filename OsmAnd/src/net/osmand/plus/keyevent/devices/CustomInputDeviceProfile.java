@@ -22,7 +22,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	                                @NonNull InputDeviceProfile parentDevice) {
 		this.customId = customId;
 		this.customName = customName;
-		setAssignments(parentDevice.getAssignments());
+		setAssignments(parentDevice.getAssignmentsCopy());
 	}
 
 	public CustomInputDeviceProfile(@NonNull JSONObject object) throws JSONException {
