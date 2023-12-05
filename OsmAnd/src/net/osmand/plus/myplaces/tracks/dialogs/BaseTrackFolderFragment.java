@@ -107,6 +107,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	protected abstract int getLayoutId();
 
 	@NonNull

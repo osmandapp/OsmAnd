@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -114,6 +115,10 @@ public class VerticalWidgetPanel extends LinearLayout {
 		ViewCompat.setElevation(this, isAnyRowVisible() ? 5f : 0);
 	}
 
+	private void updateVisibility(){
+			AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
+	}
+
 	public void update(@Nullable DrawSettings drawSettings) {
 		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
 		Map<Integer, Row> newRows = new HashMap<>();
@@ -148,6 +153,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 				}
 				visibleRows = newRows;
 				applyShadow();
+				updateVisibility();
 			}
 
 			@Override
@@ -161,6 +167,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 				}
 				visibleRows = newRows;
 				applyShadow();
+				updateVisibility();
 			}
 
 			@Override
@@ -179,8 +186,10 @@ public class VerticalWidgetPanel extends LinearLayout {
 				}
 				visibleRows = newRows;
 				applyShadow();
+				updateVisibility();
 			}
 		});
+		updateVisibility();
 	}
 
 	public void updateRow(@NonNull MapWidget widget) {
@@ -194,6 +203,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 				}
 			}
 		}
+		updateVisibility();
 	}
 
 	private void updateDividerColors(boolean nightMode) {

@@ -716,6 +716,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		return ColorUtilities.getListBgColorId(deviceNightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	public void showSearchLocationWizard(boolean updateWizardView, boolean searchByIp) {
 		searchLocationByIp = searchByIp;
 		setWizardType(WizardType.SEARCH_LOCATION, updateWizardView);

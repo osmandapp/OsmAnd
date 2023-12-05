@@ -269,6 +269,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		return isNightMode() ? R.color.status_bar_main_dark : R.color.divider_color_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return isNightMode();
+	}
+
 	@Override
 	public float getToolbarAlpha(int y) {
 		return isPortrait() ? 1f : 0f;

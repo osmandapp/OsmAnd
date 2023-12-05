@@ -376,6 +376,10 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         return if (nightMode) R.color.status_bar_main_dark else R.color.activity_background_color_light
     }
 
+    override fun getContentStatusBarNightMode(): Boolean {
+        return nightMode
+    }
+
     override fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>) {
         plugin.unpairDevice(device)
         updateButtonState()
