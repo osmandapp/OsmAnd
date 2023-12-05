@@ -128,9 +128,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 //			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
-//		DEBUG_VERBOSE_LEVEL = 1;
-//		c.HEURISTIC_COEFFICIENT = 0;
-//		c.DIJKSTRA_DIRECTION = 0;
 		return c;
 	}
 
