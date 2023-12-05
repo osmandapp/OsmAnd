@@ -58,6 +58,13 @@ public class KeyAssignment {
 		}
 	}
 
+	public KeyAssignment(@NonNull KeyAssignment original) {
+		this.commandId = original.commandId;
+		this.customName = original.customName;
+		this.keyCodes = original.keyCodes;
+		this.cachedCommand = original.cachedCommand;
+	}
+
 	public void addKeyCode(int keyCode) {
 		if (!keyCodes.contains(keyCode)) {
 			keyCodes = Algorithms.addToList(keyCodes, keyCode);

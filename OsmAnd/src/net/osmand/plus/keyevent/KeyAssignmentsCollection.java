@@ -32,6 +32,15 @@ public class KeyAssignmentsCollection {
 	}
 
 	@NonNull
+	public List<KeyAssignment> getAssignmentsCopy() {
+		List<KeyAssignment> copy = new ArrayList<>();
+		for (KeyAssignment assignment : getAllAssignments()) {
+			copy.add(new KeyAssignment(assignment));
+		}
+		return copy;
+	}
+
+	@NonNull
 	public Map<KeyAssignmentCategory, List<KeyAssignment>> getCategorizedAssignments(@NonNull OsmandApplication app) {
 		Map<KeyAssignmentCategory, List<KeyAssignment>> result = new HashMap<>();
 		for (KeyAssignment assignment : getAllAssignments()) {

@@ -39,6 +39,11 @@ public abstract class InputDeviceProfile {
 		return assignmentsCollection.getAllAssignments();
 	}
 
+	@NonNull
+	public List<KeyAssignment> getAssignmentsCopy() {
+		return assignmentsCollection.getAssignmentsCopy();
+	}
+
 	public boolean hasAssignmentNameDuplicate(@NonNull OsmandApplication context, @NonNull String newName) {
 		return assignmentsCollection.hasNameDuplicate(context, newName);
 	}
