@@ -195,7 +195,7 @@
     <string name="poi_it">Technologies de l\'information et de la communication</string>
     <string name="poi_jewelry">Bijouterie</string>
     <string name="poi_craft_key_cutter">Service de reproduction de clefs</string>
-    <string name="poi_kindergarten">Crèche</string>
+    <string name="poi_kindergarten">Jardin d\'enfants</string>
     <string name="poi_kiosk">Kiosque</string>
     <string name="poi_korfbal">Korfball</string>
     <string name="poi_landfill">Décharge</string>
@@ -536,7 +536,7 @@
     <string name="poi_aerialway_platter">Remontée mécanique</string>
     <string name="poi_standpipe">Colonne d\'alimentation</string>
     <string name="poi_migration">Migration</string>
-    <string name="poi_nursing_home">Crèche</string>
+    <string name="poi_nursing_home">Établissement ou service social ou médico-social</string>
     <string name="poi_healthcare_alternative">Médecine alternative</string>
     <string name="poi_audiologist">Audiologiste</string>
     <string name="poi_optometrist">Optométriste</string>
@@ -1037,7 +1037,7 @@
     <string name="poi_parking_underground">Parking : souterrain</string>
     <string name="poi_trees_olive">Olivier</string>
     <string name="poi_trees_apple">Pommier</string>
-    <string name="poi_trees_oil">Palmier</string>
+    <string name="poi_trees_oil">Huile de palme</string>
     <string name="poi_trees_orange">Oranger</string>
     <string name="poi_trees_almond">Amandier</string>
     <string name="poi_trees_banana">Bananier</string>
