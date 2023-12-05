@@ -162,6 +162,11 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
+	@Override
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String deviceId,
