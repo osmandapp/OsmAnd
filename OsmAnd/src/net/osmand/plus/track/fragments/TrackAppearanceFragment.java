@@ -4,8 +4,13 @@ import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -676,22 +681,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 		} else if (gpxDataItem != null) {
-			int color = trackDrawInfo.getColor();
-			String width = trackDrawInfo.getWidth();
-			boolean showArrows = trackDrawInfo.isShowArrows();
-			boolean showStartFinish = trackDrawInfo.isShowStartFinish();
-			int splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType();
-			double splitInterval = trackDrawInfo.getSplitInterval();
-			String coloringType = trackDrawInfo.getColoringTypeName();
-
-			gpxDbHelper.updateAppearance(gpxDataItem, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
+			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
+			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
+			gpxDataItem.setParameter(SHOW_ARROWS, trackDrawInfo.isShowArrows());
+			gpxDataItem.setParameter(SHOW_START_FINISH, trackDrawInfo.isShowStartFinish());
+			gpxDataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType());
+			gpxDataItem.setParameter(SPLIT_INTERVAL, trackDrawInfo.getSplitInterval());
+			gpxDataItem.setParameter(COLORING_TYPE, trackDrawInfo.getColoringTypeName());
+			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}
 
 	private void discardSplitChanges() {
 		if (gpxDataItem != null) {
-			int type = gpxDataItem.getValue(SPLIT_TYPE);
-			double interval = gpxDataItem.getValue(SPLIT_INTERVAL);
+			int type = (int) gpxDataItem.getParameter(SPLIT_TYPE);
+			double interval = (double) gpxDataItem.getParameter(SPLIT_INTERVAL);
 			if (type != trackDrawInfo.getSplitType() || interval != trackDrawInfo.getSplitInterval()) {
 				applySplit(GpxSplitType.getSplitTypeByTypeId(type), (int) interval, interval);
 			}

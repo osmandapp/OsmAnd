@@ -1,5 +1,12 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.SMOOTHING_THRESHOLD;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -20,8 +27,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.ColorUtilities;
@@ -195,14 +202,14 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 	}
 
 	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
-		double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
-		double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
-		double maxSpeed = selectedGpxFile.getSpeedFilter().getSelectedMaxValue();
-		double minAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMinValue();
-		double maxAltitude = selectedGpxFile.getAltitudeFilter().getSelectedMaxValue();
-		double maxHdop = selectedGpxFile.getHdopFilter().getSelectedMaxValue();
+		item.setParameter(SMOOTHING_THRESHOLD, selectedGpxFile.getSmoothingFilter().getSelectedMaxValue());
+		item.setParameter(MIN_FILTER_SPEED, selectedGpxFile.getSpeedFilter().getSelectedMinValue());
+		item.setParameter(MAX_FILTER_SPEED, selectedGpxFile.getSpeedFilter().getSelectedMaxValue());
+		item.setParameter(MIN_FILTER_ALTITUDE, selectedGpxFile.getAltitudeFilter().getSelectedMinValue());
+		item.setParameter(MAX_FILTER_ALTITUDE, selectedGpxFile.getAltitudeFilter().getSelectedMaxValue());
+		item.setParameter(MAX_FILTER_HDOP, selectedGpxFile.getHdopFilter().getSelectedMaxValue());
 
-		return gpxDbHelper.updateGpsFiltersConfig(item, smoothingThreshold, minSpeed, maxSpeed, minAltitude, maxAltitude, maxHdop);
+		return gpxDbHelper.updateDataItem(item);
 	}
 
 	private void updateDisplayedFilterNumbers(@NonNull View container, @NonNull GpsFilter filter) {

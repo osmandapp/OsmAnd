@@ -12,9 +12,14 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
+
+import org.bouncycastle.util.Arrays;
 
 import java.io.File;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class GpxDbUtils {
 
@@ -23,9 +28,9 @@ public class GpxDbUtils {
 	@NonNull
 	public static String getCreateTableQuery() {
 		StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (");
-		Iterator<GpxParameter<?>> iterator = GpxParameter.parameters.iterator();
+		Iterator<GpxParameter> iterator = new Arrays.Iterator<>(GpxParameter.values());
 		while (iterator.hasNext()) {
-			GpxParameter<?> parameter = iterator.next();
+			GpxParameter parameter = iterator.next();
 			builder.append(" ").append(parameter.getColumnName()).append(" ").append(parameter.getColumnType());
 
 			if (iterator.hasNext()) {
@@ -40,9 +45,9 @@ public class GpxDbUtils {
 	@NonNull
 	public static String getSelectQuery() {
 		StringBuilder builder = new StringBuilder("SELECT ");
-		Iterator<GpxParameter<?>> iterator = GpxParameter.parameters.iterator();
+		Iterator<GpxParameter> iterator = new Arrays.Iterator<>(GpxParameter.values());
 		while (iterator.hasNext()) {
-			GpxParameter<?> parameter = iterator.next();
+			GpxParameter parameter = iterator.next();
 			builder.append(parameter.getColumnName());
 
 			if (iterator.hasNext()) {
@@ -103,7 +108,8 @@ public class GpxDbUtils {
 			if (!fileLastModifiedTimeColumnExists) {
 				addTableColumn(db, FILE_LAST_MODIFIED_TIME);
 				for (GpxDataItem item : database.getItems()) {
-					database.updateGpxParameter(item, FILE_LAST_MODIFIED_TIME, item.getFile().lastModified());
+					item.setParameter(FILE_LAST_MODIFIED_TIME, item.getFile().lastModified());
+					database.updateDataItem(item);
 				}
 			}
 			if (!splitTypeColumnExists) {
@@ -172,7 +178,7 @@ public class GpxDbUtils {
 		db.execSQL(getIndexQuery());
 	}
 
-	private static void addTableColumn(@NonNull SQLiteConnection db, @NonNull GpxParameter<?> parameter) {
+	private static void addTableColumn(@NonNull SQLiteConnection db, @NonNull GpxParameter parameter) {
 		addTableColumn(db, parameter.getColumnName(), parameter.getColumnType());
 	}
 
@@ -186,8 +192,8 @@ public class GpxDbUtils {
 			return !item.hasData() || analysis == null
 					|| analysis.wptCategoryNames == null
 					|| analysis.latLonStart == null && analysis.points > 0
-					|| item.getValue(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| item.getValue(FILE_CREATION_TIME) <= 0;
+					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
+					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
 		}
 		return true;
 	}
@@ -195,7 +201,7 @@ public class GpxDbUtils {
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
-			return item.getValue(NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
+			return item.getParameter(NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
 		}
 		return true;
 	}
@@ -208,5 +214,77 @@ public class GpxDbUtils {
 		File dir = app.getAppPath(GPX_INDEX_DIR);
 		String fileDir = new File(file.getPath().replace(dir.getPath() + "/", "")).getParent();
 		return fileDir != null ? fileDir : "";
+	}
+
+	@NonNull
+	public static Map<GpxParameter, Object> getItemParameters(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+		File file = item.getFile();
+
+		Map<GpxParameter, Object> map = new LinkedHashMap<>();
+		map.put(FILE_NAME, file.getName());
+		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
+		map.put(COLOR, item.getParameter(COLOR));
+		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
+		map.put(FILE_LAST_UPLOADED_TIME, item.getParameter(FILE_LAST_UPLOADED_TIME));
+		map.put(FILE_CREATION_TIME, item.getParameter(FILE_CREATION_TIME));
+		map.put(SPLIT_TYPE, item.getParameter(SPLIT_TYPE));
+		map.put(SPLIT_INTERVAL, item.getParameter(SPLIT_INTERVAL));
+		map.put(API_IMPORTED, item.getParameter(API_IMPORTED));
+		map.put(SHOW_AS_MARKERS, item.getParameter(SHOW_AS_MARKERS));
+		map.put(JOIN_SEGMENTS, item.getParameter(JOIN_SEGMENTS));
+		map.put(SHOW_ARROWS, item.getParameter(SHOW_ARROWS));
+		map.put(SHOW_START_FINISH, item.getParameter(SHOW_START_FINISH));
+		map.put(WIDTH, item.getParameter(WIDTH));
+		map.put(COLORING_TYPE, item.getParameter(COLORING_TYPE));
+		map.put(SMOOTHING_THRESHOLD, item.getParameter(SMOOTHING_THRESHOLD));
+		map.put(MIN_FILTER_SPEED, item.getParameter(MIN_FILTER_SPEED));
+		map.put(MAX_FILTER_SPEED, item.getParameter(MAX_FILTER_SPEED));
+		map.put(MIN_FILTER_ALTITUDE, item.getParameter(MIN_FILTER_ALTITUDE));
+		map.put(MAX_FILTER_ALTITUDE, item.getParameter(MAX_FILTER_ALTITUDE));
+		map.put(MAX_FILTER_HDOP, item.getParameter(MAX_FILTER_HDOP));
+		map.put(NEAREST_CITY_NAME, item.getParameter(NEAREST_CITY_NAME));
+
+		GPXTrackAnalysis analysis = item.getAnalysis();
+		boolean hasAnalysis = analysis != null;
+		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
+		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
+		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
+		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
+		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
+		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
+		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
+		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
+		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
+		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
+		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
+		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
+		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
+		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
+		map.put(POINTS, hasAnalysis ? analysis.points : null);
+		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
+		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
+		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
+		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+
+		return map;
+	}
+
+	@NonNull
+	public static Map<String, Object> convertGpxParameters(@NonNull Map<GpxParameter, Object> parameters) {
+		Map<String, Object> map = new LinkedHashMap<>();
+		for (Map.Entry<GpxParameter, Object> entry : parameters.entrySet()) {
+			GpxParameter parameter = entry.getKey();
+			Object value = parameter.convertToDbValue(entry.getValue());
+			map.put(parameter.getColumnName(), value);
+		}
+		return map;
+	}
+
+	@NonNull
+	public static Map<String, Object> getItemRowsToSearch(@NonNull OsmandApplication app, @NonNull File file) {
+		Map<String, Object> map = new LinkedHashMap<>();
+		map.put(FILE_NAME.getColumnName(), file.getName());
+		map.put(FILE_DIR.getColumnName(), GpxDbUtils.getGpxFileDir(app, file));
+		return map;
 	}
 }

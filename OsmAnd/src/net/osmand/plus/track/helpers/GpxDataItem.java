@@ -20,7 +20,7 @@ public class GpxDataItem {
 
 	@NonNull
 	private final File file;
-	private final Map<GpxParameter<?>, Object> map = new HashMap<>();
+	private final Map<GpxParameter, Object> map = new HashMap<>();
 
 	@Nullable
 	private GPXTrackAnalysis analysis;
@@ -48,11 +48,11 @@ public class GpxDataItem {
 		return !map.isEmpty();
 	}
 
-	public <T> T getValue(@NonNull GpxParameter<T> parameter) {
-		return map.containsKey(parameter) ? (T) map.get(parameter) : parameter.getDefaultValue();
+	public Object getParameter(@NonNull GpxParameter parameter) {
+		return map.containsKey(parameter) ? map.get(parameter) : parameter.getDefaultValue();
 	}
 
-	public <T> boolean setValue(@NonNull GpxParameter<?> parameter, @Nullable T value) {
+	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
 		if (parameter.isValidValue(value)) {
 			map.put(parameter, value);
 			return true;
@@ -90,33 +90,33 @@ public class GpxDataItem {
 	}
 
 	public void readGpxParams(@NonNull GPXFile gpxFile) {
-		setValue(COLOR, gpxFile.getColor(0));
-		setValue(WIDTH, gpxFile.getWidth(null));
-		setValue(SHOW_ARROWS, gpxFile.isShowArrows());
-		setValue(SHOW_START_FINISH, gpxFile.isShowStartFinish());
+		setParameter(COLOR, gpxFile.getColor(0));
+		setParameter(WIDTH, gpxFile.getWidth(null));
+		setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
+		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
 
 		if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 			GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
-			setValue(SPLIT_TYPE, splitType.getType());
-			setValue(SPLIT_INTERVAL, gpxFile.getSplitInterval());
+			setParameter(SPLIT_TYPE, splitType.getType());
+			setParameter(SPLIT_INTERVAL, gpxFile.getSplitInterval());
 		}
 
 		if (!Algorithms.isEmpty(gpxFile.getColoringType())) {
-			setValue(COLORING_TYPE, gpxFile.getColoringType());
+			setParameter(COLORING_TYPE, gpxFile.getColoringType());
 		} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
 			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
-			setValue(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
+			setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 		}
 
 		Map<String, String> extensions = gpxFile.getExtensionsToRead();
-		setValue(SMOOTHING_THRESHOLD, GpsFilterHelper.SmoothingFilter.getSmoothingThreshold(extensions));
-		setValue(MIN_FILTER_SPEED, GpsFilterHelper.SpeedFilter.getMinFilterSpeed(extensions));
-		setValue(MAX_FILTER_SPEED, GpsFilterHelper.SpeedFilter.getMaxFilterSpeed(extensions));
-		setValue(MIN_FILTER_ALTITUDE, GpsFilterHelper.AltitudeFilter.getMinFilterAltitude(extensions));
-		setValue(MAX_FILTER_ALTITUDE, GpsFilterHelper.AltitudeFilter.getMaxFilterAltitude(extensions));
-		setValue(MAX_FILTER_HDOP, GpsFilterHelper.HdopFilter.getMaxFilterHdop(extensions));
-		setValue(FILE_CREATION_TIME, gpxFile.metadata.time);
+		setParameter(SMOOTHING_THRESHOLD, GpsFilterHelper.SmoothingFilter.getSmoothingThreshold(extensions));
+		setParameter(MIN_FILTER_SPEED, GpsFilterHelper.SpeedFilter.getMinFilterSpeed(extensions));
+		setParameter(MAX_FILTER_SPEED, GpsFilterHelper.SpeedFilter.getMaxFilterSpeed(extensions));
+		setParameter(MIN_FILTER_ALTITUDE, GpsFilterHelper.AltitudeFilter.getMinFilterAltitude(extensions));
+		setParameter(MAX_FILTER_ALTITUDE, GpsFilterHelper.AltitudeFilter.getMaxFilterAltitude(extensions));
+		setParameter(MAX_FILTER_HDOP, GpsFilterHelper.HdopFilter.getMaxFilterHdop(extensions));
+		setParameter(FILE_CREATION_TIME, gpxFile.metadata.time);
 	}
 
 	@Override

@@ -156,7 +156,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	                        @NonNull GpxDataItem dataItem, boolean shouldShowFolder) {
 		setupIcon(dataItem);
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
-		String cityName = dataItem.getValue(NEAREST_CITY_NAME);
+		String cityName = (String) dataItem.getParameter(NEAREST_CITY_NAME);
 		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
@@ -185,7 +185,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupIcon(@NonNull GpxDataItem item) {
-		setupIcon(item.getValue(COLOR), item.getValue(WIDTH), item.getValue(SHOW_ARROWS));
+		setupIcon((int) item.getParameter(COLOR), (String) item.getParameter(WIDTH), (boolean) item.getParameter(SHOW_ARROWS));
 	}
 
 	private void setupIcon(int color, String width, boolean showArrows) {
@@ -209,9 +209,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
 		GpxDataItem dataItem = item.getDataItem();
-		if (dataItem != null && dataItem.getValue(FILE_CREATION_TIME) > 10) {
+		if (dataItem != null && (long) dataItem.getParameter(FILE_CREATION_TIME) > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			builder.append(format.format(new Date(dataItem.getValue(FILE_CREATION_TIME))));
+			builder.append(format.format(new Date((long) dataItem.getParameter(FILE_CREATION_TIME))));
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}

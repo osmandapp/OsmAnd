@@ -375,12 +375,12 @@ public class GpxSelectionHelper {
 				selectedFile = new SelectedGpxFile();
 			}
 			if (dataItem != null) {
-				selectedFile.setJoinSegments(dataItem.getValue(JOIN_SEGMENTS));
+				selectedFile.setJoinSegments((boolean) dataItem.getParameter(JOIN_SEGMENTS));
 
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					selectedFile.setTrackAnalysis(analysis);
-					selectedFile.modifiedTime = dataItem.getValue(FILE_LAST_MODIFIED_TIME);
+					selectedFile.modifiedTime = (long) dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				}
 			}
 			selectedFile.setGpxFile(gpx, app);
@@ -401,7 +401,7 @@ public class GpxSelectionHelper {
 			}
 			selectedFile.splitProcessed = false;
 		}
-		if (params.isAddToMarkers() && dataItem != null && dataItem.getValue(SHOW_AS_MARKERS)) {
+		if (params.isAddToMarkers() && dataItem != null && (boolean) dataItem.getParameter(SHOW_AS_MARKERS)) {
 			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 			mapMarkersHelper.addOrEnableGroup(gpx);
 		}

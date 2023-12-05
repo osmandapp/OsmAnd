@@ -668,20 +668,20 @@ public class GpxUiHelper {
 	}
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
-		gpxFile.setShowArrows(dataItem.getValue(SHOW_ARROWS));
-		gpxFile.setShowStartFinish(dataItem.getValue(SHOW_START_FINISH));
-		gpxFile.setSplitInterval(dataItem.getValue(SPLIT_INTERVAL));
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(dataItem.getValue(SPLIT_TYPE)).getTypeName());
+		gpxFile.setShowArrows((boolean) dataItem.getParameter(SHOW_ARROWS));
+		gpxFile.setShowStartFinish((boolean) dataItem.getParameter(SHOW_START_FINISH));
+		gpxFile.setSplitInterval((double) dataItem.getParameter(SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId((int) dataItem.getParameter(SPLIT_TYPE)).getTypeName());
 
-		int color = dataItem.getValue(COLOR);
+		int color = (int) dataItem.getParameter(COLOR);
 		if (color != 0) {
 			gpxFile.setColor(color);
 		}
-		String width = dataItem.getValue(WIDTH);
+		String width = (String) dataItem.getParameter(WIDTH);
 		if (width != null) {
 			gpxFile.setWidth(width);
 		}
-		String coloringType = dataItem.getValue(COLORING_TYPE);
+		String coloringType = (String) dataItem.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
 			gpxFile.setColoringType(coloringType);
 		}

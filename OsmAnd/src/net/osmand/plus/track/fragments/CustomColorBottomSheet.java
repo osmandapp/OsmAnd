@@ -167,8 +167,9 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == dataItem.getValue(COLOR)) {
-				gpxDbHelper.updateGpxParameter(dataItem, COLOR, newColor);
+			if (prevColor == (int) dataItem.getParameter(COLOR)) {
+				dataItem.setParameter(COLOR, newColor);
+				gpxDbHelper.updateDataItem(dataItem);
 			}
 		}
 		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();

@@ -74,9 +74,9 @@ import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -1211,7 +1211,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				color = dataItem.getValue(COLOR);
+				color = (int) dataItem.getParameter(COLOR);
 			}
 		}
 		return color != 0 ? color : gpxFile.getColor(defaultColor);
@@ -1239,8 +1239,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getValue(COLORING_TYPE));
-				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getValue(COLORING_TYPE));
+				coloringType = ColoringType.getNonNullTrackColoringTypeByName((String) dataItem.getParameter(COLORING_TYPE));
+				routeInfoAttribute = ColoringType.getRouteInfoAttribute((String) dataItem.getParameter(COLORING_TYPE));
 			}
 		}
 
@@ -1252,7 +1252,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return coloringType.getName(routeInfoAttribute);
 		} else {
 			if (!isCurrentTrack) {
-				gpxDbHelper.updateGpxParameter(dataItem, COLORING_TYPE, defaultColoringType);
+				dataItem.setParameter(COLORING_TYPE, defaultColoringType);
+				gpxDbHelper.updateDataItem(dataItem);
 			}
 			return defaultColoringType;
 		}
@@ -1271,7 +1272,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				width = dataItem.getValue(WIDTH);
+				width = (String) dataItem.getParameter(WIDTH);
 			}
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
@@ -1287,7 +1288,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.getValue(SHOW_ARROWS);
+				return (boolean) dataItem.getParameter(SHOW_ARROWS);
 			}
 			return gpxFile.isShowArrows();
 		}
@@ -1303,7 +1304,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return dataItem.getValue(SHOW_START_FINISH);
+				return (boolean) dataItem.getParameter(SHOW_START_FINISH);
 			}
 			return gpxFile.isShowStartFinish();
 		}

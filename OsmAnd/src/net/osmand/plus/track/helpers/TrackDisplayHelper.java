@@ -82,7 +82,8 @@ public class TrackDisplayHelper {
 
 	public boolean setJoinSegments(boolean joinSegments) {
 		if (gpxDataItem != null) {
-			boolean updated = app.getGpxDbHelper().updateGpxParameter(gpxDataItem, JOIN_SEGMENTS, joinSegments);
+			gpxDataItem.setParameter(JOIN_SEGMENTS, joinSegments);
+			boolean updated = app.getGpxDbHelper().updateDataItem(gpxDataItem);
 
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 			if (updated && selectedGpxFile != null) {
@@ -94,7 +95,7 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null && gpxDataItem.getValue(JOIN_SEGMENTS);
+		return gpxDataItem != null && (boolean) gpxDataItem.getParameter(JOIN_SEGMENTS);
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {

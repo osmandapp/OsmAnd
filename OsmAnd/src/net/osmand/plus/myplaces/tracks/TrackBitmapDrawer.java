@@ -206,7 +206,7 @@ public class TrackBitmapDrawer {
 						sf = new SelectedGpxFile();
 						GpxDataItem gpxDataItem = getGpxDataItem();
 						if (gpxDataItem != null) {
-							sf.setJoinSegments(gpxDataItem.getValue(JOIN_SEGMENTS));
+							sf.setJoinSegments((boolean) gpxDataItem.getParameter(JOIN_SEGMENTS));
 						}
 					}
 					sf.setGpxFile(gpxFile, app);
@@ -251,7 +251,7 @@ public class TrackBitmapDrawer {
 	}
 
 	private int getTrackColor(@NonNull SelectedGpxFile selectedGpxFile, @NonNull TrkSegment segment, @Nullable GpxDataItem dataItem) {
-		int color = dataItem != null ? dataItem.getValue(COLOR) : 0;
+		int color = dataItem != null ? (int) dataItem.getParameter(COLOR) : 0;
 		if (selectedGpxFile.isShowCurrentTrack()) {
 			color = currentTrackColor;
 		}

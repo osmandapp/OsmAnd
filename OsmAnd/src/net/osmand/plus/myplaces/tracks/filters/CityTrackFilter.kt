@@ -20,7 +20,7 @@ class CityTrackFilter(app: OsmandApplication, filterChangedListener: FilterChang
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (city in selectedItems) {
-			if (Algorithms.stringsEqual(trackItem.dataItem?.getValue(NEAREST_CITY_NAME), city)) {
+			if (Algorithms.stringsEqual(trackItem.dataItem?.getParameter(NEAREST_CITY_NAME).toString(), city)) {
 				return true
 			}
 		}

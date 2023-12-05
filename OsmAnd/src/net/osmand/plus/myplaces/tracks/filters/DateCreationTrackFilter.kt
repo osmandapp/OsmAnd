@@ -44,7 +44,7 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			val result = trackItem.dataItem!!.getValue(FILE_CREATION_TIME) in valueFrom..valueTo
+			val result = trackItem.dataItem!!.getParameter(FILE_CREATION_TIME) in valueFrom..valueTo
 			result
 		}
 	}

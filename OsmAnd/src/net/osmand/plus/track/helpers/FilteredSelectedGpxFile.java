@@ -56,10 +56,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		altitudeFilter = new AltitudeFilter(app, sourceSelectedGpxFile);
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
 		if (dataItem != null) {
-			smoothingFilter.updateValue(dataItem.getValue(SMOOTHING_THRESHOLD));
-			speedFilter.updateValues(dataItem.getValue(MIN_FILTER_SPEED), dataItem.getValue(MAX_FILTER_SPEED));
-			altitudeFilter.updateValues(dataItem.getValue(MIN_FILTER_ALTITUDE), dataItem.getValue(MAX_FILTER_ALTITUDE));
-			hdopFilter.updateValue(dataItem.getValue(MAX_FILTER_HDOP));
+			smoothingFilter.updateValue((double) dataItem.getParameter(SMOOTHING_THRESHOLD));
+			speedFilter.updateValues((double) dataItem.getParameter(MIN_FILTER_SPEED), (double) dataItem.getParameter(MAX_FILTER_SPEED));
+			altitudeFilter.updateValues((double) dataItem.getParameter(MIN_FILTER_ALTITUDE), (double) dataItem.getParameter(MAX_FILTER_ALTITUDE));
+			hdopFilter.updateValue((double) dataItem.getParameter(MAX_FILTER_HDOP));
 		}
 	}
 
@@ -117,7 +117,14 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		GpxDataItem item = gpxDbHelper.getItem(new File(gpxFile.path));
 		if (item != null) {
-			gpxDbHelper.updateGpsFiltersConfig(item, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN, Double.NaN);
+			item.setParameter(SMOOTHING_THRESHOLD, Double.NaN);
+			item.setParameter(MIN_FILTER_SPEED, Double.NaN);
+			item.setParameter(MAX_FILTER_SPEED, Double.NaN);
+			item.setParameter(MIN_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_HDOP, Double.NaN);
+
+			gpxDbHelper.updateDataItem(item);
 		}
 		app.getGpsFilterHelper().filterGpxFile(this, true);
 	}
@@ -164,9 +171,9 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem item) {
-		double sum = item.getValue(SMOOTHING_THRESHOLD) + item.getValue(MIN_FILTER_SPEED)
-				+ item.getValue(MAX_FILTER_SPEED) + item.getValue(MIN_FILTER_ALTITUDE)
-				+ item.getValue(MAX_FILTER_ALTITUDE) + item.getValue(MAX_FILTER_HDOP);
+		double sum = (double) item.getParameter(SMOOTHING_THRESHOLD) + (double) item.getParameter(MIN_FILTER_SPEED)
+				+ (double) item.getParameter(MAX_FILTER_SPEED) + (double) item.getParameter(MIN_FILTER_ALTITUDE)
+				+ (double) item.getParameter(MAX_FILTER_ALTITUDE) + (double) item.getParameter(MAX_FILTER_HDOP);
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

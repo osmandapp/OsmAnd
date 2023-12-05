@@ -35,7 +35,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
@@ -287,12 +286,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		gpxDbHelper.updateGpxParameter(item, COLOR, settings.CURRENT_TRACK_COLOR.get());
-		gpxDbHelper.updateGpxParameter(item, WIDTH, settings.CURRENT_TRACK_WIDTH.get());
-		gpxDbHelper.updateGpxParameter(item, SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
-		gpxDbHelper.updateGpxParameter(item, SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
-		gpxDbHelper.updateGpxParameter(item, COLORING_TYPE, coloringType.getName(routeInfoAttribute));
+		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
+		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
+		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
+		item.setParameter(COLORING_TYPE, coloringType.getName(routeInfoAttribute));
+
+		app.getGpxDbHelper().updateDataItem(item);
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {

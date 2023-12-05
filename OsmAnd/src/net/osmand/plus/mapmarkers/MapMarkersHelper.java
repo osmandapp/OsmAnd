@@ -366,7 +366,8 @@ public class MapMarkersHelper {
 		GpxDbHelper gpxDbHelper = ctx.getGpxDbHelper();
 		GpxDataItem dataItem = gpxDbHelper.getItem(file);
 		if (dataItem != null) {
-			gpxDbHelper.updateGpxParameter(dataItem, SHOW_AS_MARKERS, true);
+			dataItem.setParameter(SHOW_AS_MARKERS, true);
+			gpxDbHelper.updateDataItem(dataItem);
 		}
 	}
 

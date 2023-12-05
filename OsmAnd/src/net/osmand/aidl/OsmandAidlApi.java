@@ -1258,14 +1258,15 @@ public class OsmandAidlApi {
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem item = new GpxDataItem(destination);
-			item.setValue(COLOR, col);
-			item.setValue(API_IMPORTED, true);
+			item.setParameter(COLOR, col);
+			item.setParameter(API_IMPORTED, true);
 			app.getGpxDbHelper().add(item);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
-				item.setValue(API_IMPORTED, true);
-				app.getGpxDbHelper().updateGpxParameter(item, COLOR, col);
+				item.setParameter(COLOR, col);
+				item.setParameter(API_IMPORTED, true);
+				app.getGpxDbHelper().updateDataItem(item);
 			}
 		}
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
@@ -1509,9 +1510,9 @@ public class OsmandAidlApi {
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-				long modifiedTime = dataItem.getValue(FILE_LAST_MODIFIED_TIME);
+				long modifiedTime = (long) dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
-				int color = dataItem.getValue(COLOR);
+				int color = (int) dataItem.getParameter(COLOR);
 				String colorName = "";
 				if (color != 0) {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
@@ -1537,7 +1538,7 @@ public class OsmandAidlApi {
 			if (file.exists()) {
 				String fileName = file.getName();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-				long modifiedTime = dataItem.getValue(FILE_LAST_MODIFIED_TIME);
+				long modifiedTime = (long) dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
 				AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
@@ -1556,7 +1557,7 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
-					int color = dataItem.getValue(COLOR);
+					int color = (int) dataItem.getParameter(COLOR);
 					if (color != 0) {
 						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
@@ -1576,7 +1577,7 @@ public class OsmandAidlApi {
 
 		if (file != null && file.exists()) {
 			GpxDataItem item = app.getGpxDbHelper().getItem(file);
-			if (item != null && item.getValue(API_IMPORTED)) {
+			if (item != null && (boolean) item.getParameter(API_IMPORTED)) {
 				return FileUtils.removeGpxFile(app, file);
 			}
 		}
