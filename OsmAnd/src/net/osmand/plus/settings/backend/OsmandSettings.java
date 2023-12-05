@@ -2299,7 +2299,7 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon";
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom";
 	public static final String LAST_KNOWN_MAP_ZOOM_FLOAT_PART = "last_known_map_zoom_float_part";
-
+	public static final String LAST_KNOWN_MAP_HEIGHT = "last_known_map_height";
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show";
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show";
 	public static final String MAP_LON_TO_SHOW = "map_lon_to_show";
@@ -2417,6 +2417,14 @@ public class OsmandSettings {
 
 	public void setLastKnownMapZoomFloatPart(float zoomFloatPart) {
 		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_ZOOM_FLOAT_PART, zoomFloatPart).commit();
+	}
+
+	public float getLastKnownMapHeight() {
+		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_HEIGHT, 0.0f);
+	}
+
+	public void setLastKnownMapHeight(float height) {
+		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_HEIGHT, height).commit();
 	}
 
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();

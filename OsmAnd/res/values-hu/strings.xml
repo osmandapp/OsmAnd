@@ -5566,4 +5566,8 @@
     <string name="shared_string_eta">ETA</string>
     <string name="rendering_attr_showToll_name">Útdíjkorlátozások megjelenítése</string>
     <string name="rendering_attr_showToll_description">Útdíjkorlátozások megjelenítése az utakon</string>
+    <string name="lang_zh_hans">Egyszerűsített kínai</string>
+    <string name="zoom_non_animated">Animáció nélküli zoomolás</string>
+    <string name="lang_zh_hant">Hagyományos kínai</string>
+    <string name="zoom_animated">Animált zoomolás</string>
 </resources>

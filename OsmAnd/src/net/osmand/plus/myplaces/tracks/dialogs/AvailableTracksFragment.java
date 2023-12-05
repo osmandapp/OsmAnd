@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
@@ -317,7 +318,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		} else if (group instanceof SmartFolder) {
 			openSmartFolder((SmartFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog(TrackTabType.ON_MAP.name(), false);
+			showTracksVisibilityDialog(ON_MAP.name(), ON_MAP, false);
 		}
 	}
 

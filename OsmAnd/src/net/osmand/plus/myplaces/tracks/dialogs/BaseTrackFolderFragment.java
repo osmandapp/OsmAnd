@@ -1,7 +1,10 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.configmap.tracks.TracksFragment.IS_SMART_FOLDER;
-import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
+import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
+import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
@@ -34,13 +37,14 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
@@ -101,6 +105,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
 	}
 
 	protected abstract int getLayoutId();
@@ -424,7 +432,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (layoutManager != null) {
 			int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
 			int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
-			for (int i = firstVisiblePosition; i <= lastVisiblePosition ; i++) {
+			for (int i = firstVisiblePosition; i <= lastVisiblePosition; i++) {
 				Object item = adapter.getItemByPosition(firstVisiblePosition);
 				if (item instanceof TrackItem || item instanceof TracksGroup) {
 					ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(firstVisiblePosition);
@@ -450,21 +458,22 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getDirName(), false);
+		showTracksVisibilityDialog(folder.getDirName(), FOLDER, true);
 	}
 
 	@Override
 	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
-		showTracksVisibilityDialog(smartFolder.getFolderName(), true);
+		showTracksVisibilityDialog(smartFolder.getFolderName(), SMART_FOLDER, true);
 	}
 
 
-	protected void showTracksVisibilityDialog(@NonNull String tabName, boolean isSmartFolder) {
+	protected void showTracksVisibilityDialog(@NonNull String name, @NonNull TrackTabType type, boolean selectAll) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Bundle bundle = new Bundle();
-			bundle.putString(OPEN_TRACKS_TAB, tabName);
-			bundle.putBoolean(IS_SMART_FOLDER, isSmartFolder);
+			bundle.putString(PRESELECTED_TRACKS_TAB_NAME, name);
+			bundle.putSerializable(PRESELECTED_TRACKS_TAB_TYPE, type);
+			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}

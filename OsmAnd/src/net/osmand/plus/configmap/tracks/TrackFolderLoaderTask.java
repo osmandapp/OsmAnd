@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 
 public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
+
 	public static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
 
 	private final GpxDbHelper gpxDbHelper;

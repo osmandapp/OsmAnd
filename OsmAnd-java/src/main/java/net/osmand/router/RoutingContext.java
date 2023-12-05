@@ -49,9 +49,9 @@ public class RoutingContext {
 	// Final context variables
 	public final RoutingConfiguration config;
 	public final RouteCalculationMode calculationMode;
-	public final NativeLibrary nativeLib;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
+	public NativeLibrary nativeLib;
 	
 	// 0. Reference to native routingcontext for multiple routes
 	public long nativeRoutingContext;

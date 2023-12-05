@@ -94,7 +94,7 @@ class TracksFoldersScreen(
             if (itemsCount == contentLimit) {
                 break
             }
-            val title = trackTab.getName(app, false)
+            val title = trackTab.getName(app)
             val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(

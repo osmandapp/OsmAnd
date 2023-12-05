@@ -57,13 +57,16 @@ public class RoutingConfiguration {
 	public Double initialDirection;
 	public Double targetDirection;
 	public double PENALTY_FOR_REVERSE_DIRECTION = DEFAULT_PENALTY_FOR_REVERSE_DIRECTION; // -1 reverse is forbidden
-
+	
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
 
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
+	
+	// 1.7 Maximum visited segments
+	public int MAX_VISITED = -1;
 
 
 	// extra points to be inserted in ways (quad tree is based on 31 coords)

@@ -308,6 +308,10 @@ public class EditKeyBindingFragment extends BaseOsmAndFragment
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull KeyBinding keyBinding,

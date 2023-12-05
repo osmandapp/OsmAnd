@@ -57,6 +57,35 @@ public class RouteResultPreparation {
 		int y31;
 		int originalIndex;
 	}
+	
+	public static class RouteCalcResult {
+		List<RouteSegmentResult> detailed = new ArrayList<RouteSegmentResult>();
+		String error = null;
+		
+		public RouteCalcResult(List<RouteSegmentResult> list) {
+			if(list == null) {
+				error = "Result is empty";
+			} else {
+				this.detailed = list;
+			}
+		}
+		
+		public RouteCalcResult(String error) {
+			this.error = error;
+		}
+		
+		public List<RouteSegmentResult> getList() {
+			return detailed;
+		}
+		
+		public String getError() {
+			return error;
+		}
+
+		public boolean isCorrect() {
+			return error == null && !detailed.isEmpty();
+		}
+	}
 
 	private void combineWayPointsForAreaRouting(RoutingContext ctx, List<RouteSegmentResult> result) {
 		for(int i = 0; i < result.size(); i++) {
@@ -163,7 +192,7 @@ public class RouteResultPreparation {
 		return intersections % 2 == 1;
 	}
 
-	public List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	public RouteCalcResult prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			RouteDataObject road = result.get(i).getObject();
 			checkAndInitRouteRegion(ctx, road);
@@ -180,7 +209,8 @@ public class RouteResultPreparation {
 		}
 		calculateTimeSpeed(ctx, result);
 		prepareTurnResults(ctx, result);
-		return result;
+		RouteCalcResult res = new RouteCalcResult(result);
+		return res;
 	}
 	
 	public RouteSegmentResult filterMinorStops(RouteSegmentResult seg) {
@@ -699,7 +729,7 @@ public class RouteResultPreparation {
 			additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
 			additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
 			additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
-			additional.append("description = \"").append(res.getDescription()).append("\" ");
+			additional.append("description = \"").append(res.getDescription(false)).append("\" ");
 			println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
 					(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
 					res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
@@ -848,12 +878,29 @@ public class RouteResultPreparation {
 		for (int i = 0; i <= result.size(); i++) {
 			if (i == result.size() || result.get(i).getTurnType() != null) {
 				if (prevSegment >= 0) {
-					String turn = result.get(prevSegment).getTurnType().toString();
-					result.get(prevSegment).setDescription(
-							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
-					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("[MUTE] " + result.get(prevSegment).getDescription());
+					RouteSegmentResult turnInfo = result.get(prevSegment);
+					String turn = turnInfo.getTurnType().toString();
+					String mute = turnInfo.getTurnType().isSkipToSpeak() ? "[MUTE] " : "";
+					String streetName = "";
+					if (prevSegment < result.size() - 1) {
+						String nm = result.get(prevSegment + 1).getStreetName("", false, result, prevSegment + 1);
+						if (nm == null) {
+							nm = "";
+						}
+						String ref = result.get(prevSegment + 1).getRef("", false);
+						if (ref == null) {
+							ref = "";
+						}
+						if (!Algorithms.isEmpty(nm) || !Algorithms.isEmpty(ref)) {
+							streetName = String.format("onto %s %s " , nm, ref);
+						}
+						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
+						if(!Algorithms.isEmpty(to)) {
+							streetName = "to " + to; 
+						}
 					}
+					turnInfo.setDescription(String.format("%s %s and go %.1f km", mute, turn, dist / 1000.0),
+							String.format("%s %s %s and go %.1f km", mute, turn, streetName, dist / 1000.0));
 				}
 				prevSegment = i;
 				dist = 0;

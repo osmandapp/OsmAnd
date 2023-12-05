@@ -1,6 +1,9 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -36,6 +39,8 @@ import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.PreselectedTabParams;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -546,13 +551,14 @@ public class IntentHelper {
 				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
 				clearIntent(intent);
 			}
-			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
-				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
-				boolean isPreselectedSmartFolder = false;
-				if (intent.hasExtra(TracksFragment.IS_SMART_FOLDER)) {
-					isPreselectedSmartFolder = intent.getBooleanExtra(TracksFragment.IS_SMART_FOLDER, false);
-				}
-				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName, isPreselectedSmartFolder);
+			Bundle extras = intent.getExtras();
+			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_NAME) && intent.hasExtra(PRESELECTED_TRACKS_TAB_TYPE)) {
+				String name = extras.getString(PRESELECTED_TRACKS_TAB_NAME, TrackTabType.ALL.name());
+				TrackTabType type = AndroidUtils.getSerializable(extras, PRESELECTED_TRACKS_TAB_TYPE, TrackTabType.class);
+				boolean selectAllItems = intent.getBooleanExtra(SELECT_ALL_ITEMS_ON_TAB, false);
+
+				PreselectedTabParams params = new PreselectedTabParams(name, type != null ? type : TrackTabType.ALL, selectAllItems);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), params);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
@@ -568,7 +574,6 @@ public class IntentHelper {
 				clearIntent(intent);
 			}
 			if (intent.getExtras() != null) {
-				Bundle extras = intent.getExtras();
 				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
 					String featureValue = extras.getString(ChoosePlanFragment.CHOOSE_PLAN_FEATURE);
 					if (!Algorithms.isEmpty(featureValue)) {

@@ -18,6 +18,7 @@ public class ZoomLevelWidget extends SimpleWidget {
 	private final OsmandMap osmandMap;
 	private final OsmandMapTileView mapView;
 
+	private int cachedBaseZoom;
 	private int cachedZoom;
 	private float cachedZoomFloatPart;
 	private float cachedMapDensity;
@@ -32,13 +33,16 @@ public class ZoomLevelWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		int baseZoom = mapView.getBaseZoom();
 		int newZoom = mapView.getZoom();
 		float newZoomFloatPart = mapView.getZoomFloatPart() + mapView.getZoomAnimation();
 		float newMapDensity = osmandMap.getMapDensity();
 		if (isUpdateNeeded()
+				|| baseZoom != cachedBaseZoom
 				|| newZoom != cachedZoom
 				|| newZoomFloatPart != cachedZoomFloatPart
 				|| newMapDensity != cachedMapDensity) {
+			cachedBaseZoom = baseZoom;
 			cachedZoom = newZoom;
 			cachedZoomFloatPart = newZoomFloatPart;
 			cachedMapDensity = newMapDensity;
@@ -46,13 +50,14 @@ public class ZoomLevelWidget extends SimpleWidget {
 			float visualZoom = newZoomFloatPart >= 0.0f
 					? 1.0f + newZoomFloatPart
 					: 1.0f + 0.5f * newZoomFloatPart;
-			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(visualZoom * newMapDensity);
+			float targetPixelScale = (float) Math.pow(2.0, newZoom - baseZoom);
+			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(targetPixelScale * visualZoom * newMapDensity);
 			float preFormattedOffset = Math.round(Math.abs(offsetFromLogicalZoom) * 100) / 100.0f;
 			String formattedOffset = OsmAndFormatter
 					.formatValue(preFormattedOffset, "", true, 2, app)
 					.value;
 			String sign = offsetFromLogicalZoom < 0 ? "-" : "+";
-			setText(String.valueOf(cachedZoom), sign + formattedOffset);
+			setText(String.valueOf(baseZoom), sign + formattedOffset);
 		}
 	}
 
