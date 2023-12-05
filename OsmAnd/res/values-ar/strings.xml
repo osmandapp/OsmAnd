@@ -2020,7 +2020,7 @@
     <string name="selected_categories">الفئات المحددة</string>
     <string name="create_custom_poi">إنشاء تصفية مخصصة</string>
     <string name="custom_search">بحث مخصص</string>
-    <string name="edit_filter">تعديل الفئات</string>
+    <string name="edit_filter">تحرير الفلتر</string>
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
     <string name="search_hint">أدخل المدينة، العنوان أو نقاط الاهتمام</string>
@@ -5641,4 +5641,6 @@
     <string name="clear_key_assignment_desc">سيتم مسح ارتباطات المفتاح للإجراء المحدد وتعيينه بدون ارتباط.</string>
     <string name="lang_zh_hans">الصينية المبسطة</string>
     <string name="lang_zh_hant">الصينية التقليدية</string>
+    <string name="zoom_non_animated">تكبير دون حركة</string>
+    <string name="zoom_animated">تكبير متحرك</string>
 </resources>
