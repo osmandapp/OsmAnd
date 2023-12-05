@@ -120,7 +120,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c.calcDetailed(2);
 //			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 0;
+//			DEBUG_VERBOSE_LEVEL = 2;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -128,6 +128,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			routingProfile = (routingProfile + 1) % networkDB.getRoutingProfiles().size();
 //			HHRoutingContext.USE_GLOBAL_QUEUE = true;
 		}
+//		DEBUG_VERBOSE_LEVEL = 1;
+//		c.HEURISTIC_COEFFICIENT = 0;
+//		c.DIJKSTRA_DIRECTION = 0;
 		return c;
 	}
 
