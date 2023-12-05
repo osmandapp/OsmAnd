@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.MapScrollHelper;
 import net.osmand.plus.helpers.MapScrollHelper.ScrollDirection;
-import net.osmand.plus.keyevent.KeyEventCategory;
+import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 
 public class MapScrollCommand extends KeyEventCommand {
 
@@ -39,8 +39,8 @@ public class MapScrollCommand extends KeyEventCommand {
 
 	@NonNull
 	@Override
-	public KeyEventCategory getCategory() {
-		return KeyEventCategory.MAP_INTERACTIONS;
+	public KeyAssignmentCategory getCategory() {
+		return KeyAssignmentCategory.MAP_INTERACTIONS;
 	}
 
 	@NonNull

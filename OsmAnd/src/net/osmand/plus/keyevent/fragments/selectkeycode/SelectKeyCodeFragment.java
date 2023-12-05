@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.fragments;
+package net.osmand.plus.keyevent.fragments.selectkeycode;
 
 import static android.graphics.Typeface.BOLD;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
@@ -27,13 +27,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
+import net.osmand.plus.keyevent.KeyEventCommandsCache;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.keybinding.KeyBinding;
-import net.osmand.plus.keyevent.callbacks.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -47,38 +47,42 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public static final String TAG = SelectKeyCodeFragment.class.getSimpleName();
 
 	private static final String ATTR_KEY_CODE = "attr_key_code";
-	private static final String ATTR_COMMAND_ID = "attr_command_id";
 	private static final String ATTR_DEVICE_ID = "attr_input_device_id";
+	private static final String ATTR_ASSIGNMENT_ID = "attr_key_assignment_id";
+	private static final String ATTR_HAS_INPUT_FROM_USER = "attr_has_input_from_user";
 
 	private static final int PULSE_DELAY_MS = 1000;
 
-	private InputDeviceHelper deviceHelper;
 	private KeyEventHelper keyEventHelper;
 	private DialogButton applyButton;
 
 	private Integer keyCode = null;
 	private int initialKeyCode;
-	private String commandId;
+	private String assignmentId;
 	private InputDeviceProfile inputDevice;
+	private boolean hasInputFromUser = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		deviceHelper = app.getInputDeviceHelper();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
 		keyEventHelper = app.getKeyEventHelper();
 
 		Bundle arguments = requireArguments();
 		initialKeyCode = arguments.getInt(ATTR_KEY_CODE);
-		commandId = arguments.getString(ATTR_COMMAND_ID);
+		assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID);
 
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		inputDevice = deviceHelper.getDeviceById(appMode, arguments.getString(ATTR_DEVICE_ID));
+		String deviceId = Objects.requireNonNull(arguments.getString(ATTR_DEVICE_ID));
+		inputDevice = deviceHelper.getDeviceById(appMode, deviceId);
 
 		if (savedInstanceState != null) {
 			keyCode = savedInstanceState.containsKey(ATTR_KEY_CODE)
 					? savedInstanceState.getInt(ATTR_KEY_CODE)
 					: null;
+			hasInputFromUser = savedInstanceState.containsKey(ATTR_HAS_INPUT_FROM_USER)
+					&& savedInstanceState.getBoolean(ATTR_HAS_INPUT_FROM_USER);
 		} else {
 			keyCode = initialKeyCode;
 		}
@@ -88,7 +92,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_select_key_code, container, false);
+		View view = inflate(R.layout.fragment_select_key_code, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 		setupDescription(view);
@@ -116,7 +120,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void setupDescription(@NonNull View view) {
-		KeyEventCommand command = inputDevice.findCommand(initialKeyCode);
+		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, getCommandId());
 		if (command != null) {
 			String action = command.toHumanString(app);
 			String message = getString(R.string.press_button_to_link_with_action, action);
@@ -138,7 +142,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		applyButton.setOnClickListener(v -> {
 			Fragment target = getTargetFragment();
 			if (target instanceof OnKeyCodeSelectedCallback) {
-				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(keyCode);
+				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(initialKeyCode, keyCode);
 			}
 			dismiss();
 		});
@@ -152,7 +156,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		if (view != null) {
 			updateKeyLabel(view);
 			updateCursor(view);
-			updateErrorMessageState(view);
+			updateWarningMessageState(view);
 			updateApplyButtonState();
 		}
 	}
@@ -178,23 +182,30 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		}
 	}
 
-	private void updateErrorMessageState(@NonNull View view) {
+	private void updateWarningMessageState(@NonNull View view) {
 		View warning = view.findViewById(R.id.warning);
-		TextView errorMessage = view.findViewById(R.id.warning_message);
+		View warningIcon = view.findViewById(R.id.warning_icon);
+		TextView warningMessage = view.findViewById(R.id.warning_message);
 		KeyEventCommand commandDuplicate = getCommandDuplication(keyCode);
 		if (commandDuplicate != null) {
 			AndroidUiHelper.updateVisibility(warning, true);
+			AndroidUiHelper.updateVisibility(warningIcon, true);
 			String keyLabel = KeySymbolMapper.getKeySymbol(app, keyCode);
 			String actionName = commandDuplicate.toHumanString(app);
 			String message = getString(R.string.key_is_already_assigned_error, keyLabel, actionName);
-			errorMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
+			warningMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
+		} else if (isKeyCodeAlreadyAssignedToThisAction() && hasInputFromUser) {
+			AndroidUiHelper.updateVisibility(warning, true);
+			AndroidUiHelper.updateVisibility(warningIcon, false);
+			warningMessage.setText(R.string.button_already_assigned_to_this_action);
 		} else {
 			AndroidUiHelper.updateVisibility(warning, false);
 		}
 	}
 
 	private void updateApplyButtonState() {
-		applyButton.setEnabled(isKeyCodeChanged());
+		applyButton.setEnabled(isKeyCodeChanged() && !isKeyCodeAlreadyAssignedToThisAction());
+		applyButton.setButtonType(isKeyCodeFree() ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
 		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 
@@ -224,6 +235,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private boolean isKeyCodeSupported(int keyCode) {
+		hasInputFromUser = true;
 		return keyCode != KeyEvent.KEYCODE_BACK;
 	}
 
@@ -235,14 +247,30 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		return getCommandDuplication(keyCode) == null;
 	}
 
+	private boolean isKeyCodeAlreadyAssignedToThisAction() {
+		KeyAssignment keyAssignment = getKeyAssignment();
+		return keyAssignment != null && keyAssignment.hasKeyCode(keyCode);
+	}
+
 	private KeyEventCommand getCommandDuplication(int keyCode) {
 		if (inputDevice != null) {
 			KeyEventCommand command = inputDevice.findCommand(keyCode);
-			if (command != null && !Objects.equals(commandId, command.getId())) {
+			if (command != null && !Objects.equals(getCommandId(), command.getId())) {
 				return command;
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	private String getCommandId() {
+		KeyAssignment assignment = getKeyAssignment();
+		return assignment != null ? assignment.getCommandId() : "";
+	}
+
+	@Nullable
+	private KeyAssignment getKeyAssignment() {
+		return inputDevice.findAssignment(assignmentId);
 	}
 
 	@Override
@@ -269,6 +297,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(ATTR_KEY_CODE, keyCode);
+		outState.putBoolean(ATTR_HAS_INPUT_FROM_USER, hasInputFromUser);
 	}
 
 	@Nullable
@@ -296,14 +325,16 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	public static void showInstance(@NonNull FragmentManager manager,
 									@NonNull Fragment targetFragment,
 	                                @NonNull ApplicationMode appMode,
-	                                @NonNull String deviceId, @NonNull KeyBinding keyBinding) {
+	                                @NonNull String deviceId,
+									@NonNull String assignmentId,
+	                                @NonNull Integer keyCode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectKeyCodeFragment fragment = new SelectKeyCodeFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_COMMAND_ID, keyBinding.getCommandId());
-			arguments.putInt(ATTR_KEY_CODE, keyBinding.getKeyCode());
+			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);
+			arguments.putInt(ATTR_KEY_CODE, keyCode);
 			fragment.setArguments(arguments);
 			fragment.setTargetFragment(targetFragment, 0);
 			manager.beginTransaction()

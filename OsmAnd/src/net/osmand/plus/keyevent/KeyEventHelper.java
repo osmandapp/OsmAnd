@@ -9,19 +9,22 @@ import androidx.annotation.Nullable;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.keyevent.listener.EventType;
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.commands.MapZoomCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeyEventHelper implements KeyEvent.Callback {
+public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListener {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final InputDeviceHelper deviceHelper;
+	private final InputDevicesHelper deviceHelper;
 	private MapActivity mapActivity;
 
 	private final Map<Integer, KeyEventCommand> globalCommands = new HashMap<>();
@@ -33,6 +36,7 @@ public class KeyEventHelper implements KeyEvent.Callback {
 		this.app = app;
 		settings = app.getSettings();
 		deviceHelper = app.getInputDeviceHelper();
+		deviceHelper.addListener(this);
 
 		// Update commands when related preferences updated
 		volumeButtonsPrefListener = aBoolean -> updateGlobalCommands();
@@ -104,6 +108,15 @@ public class KeyEventHelper implements KeyEvent.Callback {
 		return command != null && command.onKeyMultiple(keyCode, count, event);
 	}
 
+	@Override
+	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
+		// If custom preference for current app mode was updated,
+		// We need to reload device from preferences to use it with actual customizations.
+		if (deviceHelper.getFunctionalityAppMode() == appMode && event.isCustomPreferenceRelated()) {
+			deviceHelper.reloadFunctionalityCollection(appMode);
+		}
+	}
+
 	private void showToastAboutPressedKey(@NonNull KeyEvent keyEvent) {
 		int keyCode = keyEvent.getKeyCode();
 		int deviceId = keyEvent.getDeviceId();
@@ -123,8 +136,9 @@ public class KeyEventHelper implements KeyEvent.Callback {
 			return globalCommand;
 		}
 		// Search command for current input device profile
-		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice();
-		return inputDevice != null ? inputDevice.findCommand(keyCode) : null;
+		ApplicationMode appMode = settings.getApplicationMode();
+		InputDeviceProfile device = deviceHelper.getFunctionalityDevice(appMode);
+		return device != null ? device.findCommand(keyCode) : null;
 	}
 
 	private void bindCommand(int keyCode, @NonNull String commandId) {

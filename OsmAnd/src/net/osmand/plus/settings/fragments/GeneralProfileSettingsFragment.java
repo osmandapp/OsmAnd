@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -267,14 +266,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private String getExternalInputDeviceSummary() {
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice(getSelectedAppMode());
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		InputDeviceProfile inputDevice = deviceHelper.getCustomizationDevice(appMode);
 		return inputDevice != null ? inputDevice.toHumanString(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		return deviceHelper.getCustomizationDevice(appMode) != null
 				? getActiveIcon(R.drawable.ic_action_keyboard)
 				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
@@ -335,9 +336,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
-						}
+						UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
 						return v;
 					}
 				};
@@ -428,6 +427,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
 			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (!requireActivity().isChangingConfigurations()) {
+			app.getInputDeviceHelper().releaseCustomizationCollection();
 		}
 	}
 

@@ -50,7 +50,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
@@ -358,7 +358,7 @@ public class AppInitializer implements IProgress {
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
-		app.inputDeviceHelper = startupInit(new InputDeviceHelper(app), InputDeviceHelper.class);
+		app.inputDeviceHelper = startupInit(new InputDevicesHelper(app), InputDevicesHelper.class);
 		app.keyEventHelper = startupInit(new KeyEventHelper(app), KeyEventHelper.class);
 		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
 		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);

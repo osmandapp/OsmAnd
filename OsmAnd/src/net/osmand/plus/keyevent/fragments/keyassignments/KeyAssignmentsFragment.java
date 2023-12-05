@@ -1,4 +1,4 @@
-package net.osmand.plus.keyevent.fragments.keybindings;
+package net.osmand.plus.keyevent.fragments.keyassignments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
@@ -23,22 +23,22 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
-import net.osmand.plus.keyevent.callbacks.EventType;
-import net.osmand.plus.keyevent.callbacks.InputDeviceHelperCallback;
+import net.osmand.plus.keyevent.InputDevicesHelper;
+import net.osmand.plus.keyevent.listener.EventType;
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDeviceHelperCallback {
+public class KeyAssignmentsFragment extends BaseOsmAndFragment implements InputDevicesEventListener {
 
-	public static final String TAG = KeyBindingsFragment.class.getSimpleName();
+	public static final String TAG = KeyAssignmentsFragment.class.getSimpleName();
 
-	private KeyBindingsAdapter adapter;
-	private KeyBindingsController controller;
+	private KeyAssignmentsAdapter adapter;
+	private KeyAssignmentsController controller;
 
 	private ApplicationMode appMode;
-	private InputDeviceHelper deviceHelper;
+	private InputDevicesHelper deviceHelper;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = new KeyBindingsController(app, appMode, isUsedOnMap());
+		controller = new KeyAssignmentsController(app, appMode, isUsedOnMap());
 		deviceHelper = app.getInputDeviceHelper();
 	}
 
@@ -59,7 +59,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new KeyBindingsAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new KeyAssignmentsAdapter(app, appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -84,24 +84,27 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);
-		ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
-		ivActionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_key_assignment_remove));
-		actionButton.setOnClickListener(v -> {
-			controller.askRemoveAllKeyAssignments();
-		});
+		if (controller.isDeviceTypeEditable()) {
+			ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
+			ivActionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_key_assignment_remove));
+			actionButton.setOnClickListener(v -> {
+				controller.askRemoveAllAssignments();
+			});
+		} else {
+			actionButton.setVisibility(View.GONE);
+		}
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	@Override
-	public void processInputDeviceHelperEvent(@NonNull EventType event) {
-		if (event == EventType.UPDATE_KEY_ASSIGNMENT
-				|| event == EventType.RESET_ALL_KEY_ASSIGNMENTS) {
+	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
+		if (event.isAssignmentRelated()) {
 			updateViewContent();
 		}
 	}
 
 	private void updateViewContent() {
-		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceEditable());
+		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceTypeEditable());
 	}
 
 	@Override
@@ -144,7 +147,7 @@ public class KeyBindingsFragment extends BaseOsmAndFragment implements InputDevi
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			KeyBindingsFragment fragment = new KeyBindingsFragment();
+			KeyAssignmentsFragment fragment = new KeyAssignmentsFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);
