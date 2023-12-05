@@ -5570,4 +5570,7 @@
     <string name="zoom_non_animated">Animáció nélküli zoomolás</string>
     <string name="lang_zh_hant">Hagyományos kínai</string>
     <string name="zoom_animated">Animált zoomolás</string>
+    <string name="button_already_assigned_to_this_action">Ez a gomb már hozzá van rendelve ehhez a művelethez.</string>
+    <string name="key_assignments_already_cleared_message">Minden billentyű-hozzárendelés már törölve van</string>
+    <string name="add_new_button">Új gomb hozzáadása</string>
 </resources>
