@@ -5562,4 +5562,6 @@
     <string name="clear_key_assignment_desc">Les associations de touches pour l\'action sélectionnée seront définies à \"Aucun\".</string>
     <string name="lang_zh_hans">Chinois simplifié</string>
     <string name="lang_zh_hant">Chinois traditionnel</string>
+    <string name="zoom_non_animated">Zoom non-animé</string>
+    <string name="zoom_animated">Zoom animé</string>
 </resources>
