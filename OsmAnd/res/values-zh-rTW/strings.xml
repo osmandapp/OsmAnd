@@ -5560,4 +5560,6 @@
     <string name="rendering_attr_showToll_description">顯示道路通行費限制</string>
     <string name="lang_zh_hans">簡體中文</string>
     <string name="lang_zh_hant">正體中文</string>
+    <string name="zoom_non_animated">非動畫縮放</string>
+    <string name="zoom_animated">動畫縮放</string>
 </resources>
