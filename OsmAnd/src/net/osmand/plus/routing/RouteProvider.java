@@ -670,7 +670,9 @@ public class RouteProvider {
 	protected RoutingEnvironment calculateRoutingEnvironment(RouteCalculationParams params, boolean calcGPXRoute, boolean skipComplex) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
+
 		OsmandSettings settings = params.ctx.getSettings();
+		RoutePlannerFrontEnd.USE_HH_ROUTING = settings.USE_HH_ROUTING.get();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
 
@@ -821,8 +823,8 @@ public class RouteProvider {
 	                                                    RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 	                                                    List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
-			List<RouteSegmentResult> result ;
-			if(complexCtx != null) {
+			RouteResultPreparation.RouteCalcResult result = null;
+			if (complexCtx != null) {
 				try {
 					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
@@ -832,32 +834,32 @@ public class RouteProvider {
 						log.error("Runtime error: " + e.getMessage(), e);
 						params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
 					});
-					result = router.searchRoute(ctx, st, en, inters);
 				}
-			} else {
+			}
+			if (result == null) {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
 			
-			if(result == null || result.isEmpty()) {
+			if(result == null || result.getList().isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
 				} else if(ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.ending_point_too_far));
 				} else if(ctx.calculationProgress.segmentNotFound > 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.intermediate_point_too_far, "'" + ctx.calculationProgress.segmentNotFound + "'"));
-				}
-				if(ctx.calculationProgress.directSegmentQueueSize == 0) {
-					return new RouteCalculationResult("Route can not be found from start point (" +ctx.calculationProgress.distanceFromBegin/1000f+" km)");
-				} else if(ctx.calculationProgress.reverseSegmentQueueSize == 0) {
-					return new RouteCalculationResult("Route can not be found from end point (" +ctx.calculationProgress.distanceFromEnd/1000f+" km)");
-				}
-				if(ctx.calculationProgress.isCancelled) {
+				} else if (ctx.calculationProgress.directSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from start point (" + ctx.calculationProgress.distanceFromBegin / 1000f + " km)");
+				} else if (ctx.calculationProgress.reverseSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from end point (" + ctx.calculationProgress.distanceFromEnd / 1000f + " km)");
+				} else if (ctx.calculationProgress.isCancelled) {
 					return interrupted();
+				} else if(result != null && !Algorithms.isEmpty(result.getError())) {
+					return new RouteCalculationResult(result.getError());
 				}
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
+				RouteCalculationResult res = new RouteCalculationResult(result.getList(), params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
 								params.mode, true, params.initialCalculation);
 				return res;
@@ -983,10 +985,10 @@ public class RouteProvider {
 							float currentDistanceToEnd = distanceToEnd[offset];
 							if (lasttime != 0) {
 								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
-							} 
+							}
 							last.distance = Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
-					} 
+					}
 					// save time as a speed because we don't know distance of the route segment
 					lasttime = time;
 					float avgSpeed = defSpeed;

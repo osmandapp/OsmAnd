@@ -594,6 +594,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void setHeight(float height) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null)
+			mapRenderer.restoreFlatZoom(height);
+		else
+			currentViewport.setHeight(height);
+	}
+
 	public boolean isShowMapPosition() {
 		return showMapPosition;
 	}
@@ -651,7 +659,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setTarget31(int x31, int y31, boolean notify) {
-		animatedDraggingThread.stopAnimating();
 		setTarget31Impl(x31, y31);
 		refreshMap();
 		if (notify) {
@@ -669,6 +676,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getZoom() {
 		return currentViewport.getZoom();
+	}
+
+	public int getBaseZoom() {
+		MapRendererView mapRenderer = getMapRenderer();
+		return mapRenderer != null ? mapRenderer.getState().getZoomLevel().ordinal() : currentViewport.getZoom();
 	}
 
 	public boolean isPinchZoomingOrRotating() {
@@ -923,6 +935,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
+			float height = currentViewport.getHeight();
+			if (height > 0.0f && mapRenderer != null) {
+				currentViewport.setHeight(0.0f);
+				mapRenderer.restoreFlatZoom(height);
+			}
 		}
 		if (view instanceof SurfaceView) {
 			SurfaceHolder holder = ((SurfaceView) view).getHolder();

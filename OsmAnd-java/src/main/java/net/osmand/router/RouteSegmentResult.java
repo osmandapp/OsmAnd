@@ -37,7 +37,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private float routingTime;
 	private float speed;
 	private float distance;
-	private String description = "";
+	private String[] description = null;
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
 	private boolean leftside = false;
@@ -436,7 +436,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		int capacity = Math.abs(endPointIndex - startPointIndex) + 1;
 		List<RouteSegmentResult>[] old = this.attachedRoutes;
 		this.attachedRoutes = new List[capacity];
-		if(old != null){
+		if (old != null) {
 			System.arraycopy(old, 0, this.attachedRoutes, 0, Math.min(old.length, this.attachedRoutes.length));
 		}
 	}
@@ -549,9 +549,25 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public int getStartPointIndex() {
 		return startPointIndex;
 	}
+	
+	public int getStartPointX() {
+		return object.getPoint31XTile(startPointIndex);
+	}
+	
+	public int getStartPointY() {
+		return object.getPoint31YTile(startPointIndex);
+	}
 
 	public int getEndPointIndex() {
 		return endPointIndex;
+	}
+	
+	public int getEndPointX() {
+		return object.getPoint31XTile(endPointIndex);
+	}
+	
+	public int getEndPointY() {
+		return object.getPoint31YTile(endPointIndex);
 	}
 
 	public LatLon getPoint(int i) {
@@ -602,12 +618,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		this.distance = distance;
 	}
 	
-	public String getDescription() {
-		return description;
+	public String getDescription(boolean full) {
+		if(description == null || description.length == 0) {
+			return "";
+		}
+		if(full && description.length > 1) {
+			return description[1];
+		}
+		return description[0];
 	}
 	
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String shortD, String full) {
+		this.description = new String[] {shortD, full};
+	}
+	
+	public void clearDescription() {
+		this.description = null;
 	}
 	
 	public void setObject(RouteDataObject r) {

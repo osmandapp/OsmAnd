@@ -49,9 +49,9 @@ public class RoutingContext {
 	// Final context variables
 	public final RoutingConfiguration config;
 	public final RouteCalculationMode calculationMode;
-	public final NativeLibrary nativeLib;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
+	public NativeLibrary nativeLib;
 	
 	// 0. Reference to native routingcontext for multiple routes
 	public long nativeRoutingContext;
@@ -68,7 +68,7 @@ public class RoutingContext {
 	public long targetRoadId;
 	public int targetSegmentInd;
 	public boolean targetTransportStop;
-	
+	public int dijkstraMode;
 	public boolean publicTransport;
 	
 	
@@ -117,9 +117,9 @@ public class RoutingContext {
 		this.calculationProgress = cp.calculationProgress;
 	}
 	
-	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
+	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
 		this.calculationMode = calcMode;
-		for (BinaryMapIndexReader mr : map) {
+		for (BinaryMapIndexReader mr : list) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
 			for (RouteRegion r : rr) {
@@ -180,12 +180,6 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 
-
-	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {
-		return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd,
-				config.heuristicCoefficient);
-	}
-	
 	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		initTargetPoint(end);
 		startX = start.preciseX;
@@ -210,7 +204,7 @@ public class RoutingContext {
 			if (tl.isLoaded()) {
 				if(except == null || except.searchSubregionTile(tl.subregion) < 0){
 					tl.unload();
-					if(calculationProgress != null) {
+					if (calculationProgress != null) {
 						calculationProgress.unloadedTiles ++;
 					}
 					global.size -= tl.tileStatistics.size;
@@ -483,7 +477,7 @@ public class RoutingContext {
 				log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB "
 						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb);
 				long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-				log.warn("Used memory before " + us1 / mb + "after " + us1 / mb );
+				log.warn("Used memory before " + us1 / mb + " after " + us1 / mb );
 			}
 		}
 		if (!indexedSubregions.containsKey(tileId)) {

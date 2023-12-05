@@ -209,6 +209,10 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();

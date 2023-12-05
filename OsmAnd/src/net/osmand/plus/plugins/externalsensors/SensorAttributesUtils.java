@@ -151,7 +151,7 @@ public class SensorAttributesUtils {
 		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis, axisType, divX, mulY, divY, calcWithoutGaps);
+		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulY, divY, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String format = null;

@@ -5199,7 +5199,7 @@
     <string name="shared_string_hand">Mano</string>
     <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
     <string name="shared_string_foot">Pie</string>
-    <string name="running_scds_device_name">Ejecutando dispositivo</string>
+    <string name="running_scds_device_name">Dispositivo para «Correr»</string>
     <string name="rendering_attr_lightDetail_name">Detalles de alumbrado</string>
     <string name="rendering_attr_lightDetail_description">Predefinido: nombre de la baliza náutica (carácter de luz.grupo.período), elige información adicional sobre los sectores 1 al 3 o el carácter de luz del sector 1 al 5</string>
     <string name="rendering_value_sectors_name">Sectores</string>
@@ -5584,4 +5584,8 @@
     <string name="rendering_attr_showToll_description">Muestra las restricciones de peajes en las carreteras</string>
     <string name="target_elevation">Elevación del objetivo</string>
     <string name="shared_string_eta">ETA</string>
+    <string name="lang_zh_hans">Chino simplificado</string>
+    <string name="zoom_non_animated">Zum no animado</string>
+    <string name="lang_zh_hant">Chino tradicional</string>
+    <string name="zoom_animated">Zum animado</string>
 </resources>

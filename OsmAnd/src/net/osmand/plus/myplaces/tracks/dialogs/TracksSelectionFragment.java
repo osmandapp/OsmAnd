@@ -68,6 +68,10 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		return ColorUtilities.getStatusBarActiveColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@NonNull
 	@Override
 	public String getFragmentTag() {

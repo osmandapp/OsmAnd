@@ -5558,4 +5558,6 @@
     <string name="shared_string_eta">預計到達時間</string>
     <string name="rendering_attr_showToll_name">顯示通行費限制</string>
     <string name="rendering_attr_showToll_description">顯示道路通行費限制</string>
+    <string name="lang_zh_hans">簡體中文</string>
+    <string name="lang_zh_hant">正體中文</string>
 </resources>

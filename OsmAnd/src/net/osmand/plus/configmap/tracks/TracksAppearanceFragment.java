@@ -82,6 +82,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

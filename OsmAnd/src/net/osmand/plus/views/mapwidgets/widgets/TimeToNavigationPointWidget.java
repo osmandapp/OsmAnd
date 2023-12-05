@@ -43,6 +43,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		updateIcons();
 		updateContentTitle();
 		setOnClickListener(getOnClickListener());
+		updateWidgetName();
 	}
 
 	private static WidgetType getWidgetType(boolean isIntermediate){
@@ -55,6 +56,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
+			updateWidgetName();
 		};
 	}
 

@@ -483,6 +483,10 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@NonNull
 	public MapActivity requireMapActivity() {
 		FragmentActivity activity = getActivity();

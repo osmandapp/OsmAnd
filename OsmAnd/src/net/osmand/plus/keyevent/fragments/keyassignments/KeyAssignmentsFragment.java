@@ -140,6 +140,10 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment implements InputD
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {

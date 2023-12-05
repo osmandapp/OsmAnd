@@ -21,6 +21,26 @@ public class QuadRect {
 	public QuadRect() {
 	}
 
+
+	public boolean invertedY() {
+		// for latitude bbox
+		return top > bottom;
+	}
+	
+	public void expand(double left, double top, double right, double bottom) {
+		if (hasInitialState()) {
+			this.left = left;
+			this.right = right;
+			this.top = top;
+			this.bottom = bottom;
+		} else {
+			this.left = left < right ? Math.min(left, this.left) : Math.max(left, this.left);
+			this.right = left < right ? Math.max(right, this.right) : Math.min(right, this.right);
+			this.top = top < bottom ? Math.min(top, this.top) : Math.max(top, this.top);
+			this.bottom = top < bottom ? Math.max(bottom, this.bottom) : Math.min(bottom, this.bottom);
+		}
+	}
+	
 	public double width() {
 		return Math.abs(right - left);
 	}
@@ -28,6 +48,7 @@ public class QuadRect {
 	public double height() {
 		return Math.abs(bottom - top);
 	}
+	
 
 	public boolean contains(double left, double top, double right, double bottom) {
 		return Math.min(this.left, this.right) <= Math.min(left, right)
@@ -66,7 +87,7 @@ public class QuadRect {
 		bottom += dy;
 	}
 
-	public void inset(double dx, double  dy) {
+	public void inset(double dx, double dy) {
 		left += dx;
 		top += dy;
 		right -= dx;

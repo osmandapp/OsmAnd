@@ -33,6 +33,10 @@ public abstract class BaseWidgetFragment extends BaseOsmAndFragment implements I
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@NonNull
 	public MapActivity requireMapActivity() {
 		FragmentActivity activity = getActivity();

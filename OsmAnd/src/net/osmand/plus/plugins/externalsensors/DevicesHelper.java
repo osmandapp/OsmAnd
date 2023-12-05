@@ -482,7 +482,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		} else {
 			if (settings == null) {
 				if (!Algorithms.isEmpty(deviceId)) {
-					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), true);
+					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 					updateDeviceProperties(device);
 					externalSensorsPlugin.onDevicePaired(device);
@@ -508,7 +508,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), enabled);
+				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, enabled);
 				devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 			}
 		} else {
@@ -530,7 +530,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), false);
+				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, false);
 			}
 		}
 		if (settings != null) {

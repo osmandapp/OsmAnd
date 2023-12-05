@@ -359,7 +359,7 @@ public enum WidgetType {
 	}
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
-		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), getComplexWidgetIds());
+		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
 	}
 
 	@NonNull

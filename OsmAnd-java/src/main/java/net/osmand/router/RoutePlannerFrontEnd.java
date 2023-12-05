@@ -1,6 +1,19 @@
 package net.osmand.router;
 
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -13,20 +26,11 @@ import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
+import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
+import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
 
 
 public class RoutePlannerFrontEnd {
@@ -37,7 +41,9 @@ public class RoutePlannerFrontEnd {
 	public boolean useSmartRouteRecalculation = true;
 	public boolean useNativeApproximation = true;
 
-	private static final boolean TRACE_ROUTING = false;
+	static boolean TRACE_ROUTING = false;
+	public static boolean USE_HH_ROUTING = false;
+	public static boolean USE_ONLY_HH_ROUTING = false;
 
 	
 	public RoutePlannerFrontEnd() {
@@ -48,6 +54,7 @@ public class RoutePlannerFrontEnd {
 		NORMAL,
 		COMPLEX
 	}
+	
 	
 	public static class GpxRouteApproximation {
 		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
@@ -130,10 +137,7 @@ public class RoutePlannerFrontEnd {
 
 
 	private static double squareDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2, x1);
-		double dx = MapUtils.convert31XToMeters(x1, x2, y1);
-		return dx * dx + dy * dy;
+		return MapUtils.squareDist31TileMetric(x1, y1, x2, y2);
 	}
 
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list) throws IOException {
@@ -167,10 +171,9 @@ public class RoutePlannerFrontEnd {
 					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
 							r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j));
 					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
-					if (road == null || currentsDistSquare < road.distSquare) {
+					if (road == null || currentsDistSquare < road.distToProj) {
 						RouteDataObject ro = new RouteDataObject(r);
-						
-						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
+						road = new RouteSegmentPoint(ro, j - 1, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
@@ -179,7 +182,7 @@ public class RoutePlannerFrontEnd {
 					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
-							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
+							road.distToProj = (road.distToProj + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);
 							list.add(road);
 						}
@@ -194,7 +197,7 @@ public class RoutePlannerFrontEnd {
 
 			@Override
 			public int compare(RouteSegmentPoint o1, RouteSegmentPoint o2) {
-				return Double.compare(o1.distSquare, o2.distSquare);
+				return Double.compare(o1.distToProj, o2.distToProj);
 			}
 		});
 		if (ctx.calculationProgress != null) {
@@ -204,7 +207,7 @@ public class RoutePlannerFrontEnd {
 			RouteSegmentPoint ps = null;
 			if (ctx.publicTransport) {
 				for (RouteSegmentPoint p : list) {
-					if (transportStop && p.distSquare > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
+					if (transportStop && p.distToProj > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
 						break;
 					}
 					boolean platform = p.road.platform();
@@ -227,7 +230,7 @@ public class RoutePlannerFrontEnd {
 		return null;
 	}
 
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
+	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
 		return searchRoute(ctx, start, end, intermediates, null);
 	}
 
@@ -405,7 +408,9 @@ public class RoutePlannerFrontEnd {
 			start.stepBackRoute.add(removed);
 		}
 		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
-		next.pnt = new RouteSegmentPoint(res.getObject(), res.getEndPointIndex(), 0);
+		boolean pos = res.getStartPointIndex() < res.getEndPointIndex();
+		int end = res.getEndPointIndex();
+		next.pnt = new RouteSegmentPoint(res.getObject(), end, end, 0);
 		return true;
 	}
 
@@ -523,7 +528,7 @@ public class RoutePlannerFrontEnd {
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		for (RouteSegmentResult r : gctx.result) {
 			r.setTurnType(null);
-			r.setDescription("");
+			r.clearDescription();
 		}
 		if (!gctx.ctx.calculationProgress.isCancelled) {
 			preparation.prepareTurnResults(gctx.ctx, gctx.result);
@@ -564,7 +569,7 @@ public class RoutePlannerFrontEnd {
 		strPnt.routeToTarget.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		try {
-			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget, false);
+			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget);
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -632,7 +637,7 @@ public class RoutePlannerFrontEnd {
 
 	private boolean findGpxRouteSegment(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
 			GpxPoint start, GpxPoint target, boolean prevRouteCalculated) throws IOException, InterruptedException {
-		List<RouteSegmentResult> res = null;
+		RouteCalcResult res = null;
 		boolean routeIsCorrect = false;
 		if (start.pnt != null && target.pnt != null) {
 			start.pnt = new RouteSegmentPoint(start.pnt);
@@ -642,7 +647,7 @@ public class RoutePlannerFrontEnd {
 			RoutingContext local = new RoutingContext(gctx.ctx);
 			res = searchRouteInternalPrepare(local, start.pnt, target.pnt, null);
 			//BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
-			routeIsCorrect = res != null && !res.isEmpty();
+			routeIsCorrect = res != null && res.isCorrect();
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
 				GpxPoint ipoint = gpxPoints.get(k);
 				if (!pointCloseEnough(gctx, ipoint, res)) {
@@ -650,30 +655,31 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 			if (routeIsCorrect) {
+				RouteSegmentResult firstSegement = res.detailed.get(0);
 				// correct start point though don't change end point
 				if (!prevRouteCalculated) {
 					// make first position precise
-					makeSegmentPointPrecise(res.get(0), start.loc, true);
+					makeSegmentPointPrecise(firstSegement, start.loc, true);
 				} else {
-					if (res.get(0).getObject().getId() == start.pnt.getRoad().getId()) {
+					if (firstSegement.getObject().getId() == start.pnt.getRoad().getId()) {
 						// start point could shift to +-1 due to direction
-						res.get(0).setStartPointIndex(start.pnt.getSegmentStart());
-						if (res.get(0).getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
-							res.get(0).setObject(start.pnt.road);
+						firstSegement.setStartPointIndex(start.pnt.getSegmentStart());
+						if (firstSegement.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
+							firstSegement.setObject(start.pnt.road);
 						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
 						// though it should not create any issue
 						System.out.println("??? not found " + start.pnt.getRoad().getId() + " instead "
-								+ res.get(0).getObject().getId());
+								+ firstSegement.getObject().getId());
 					}
 				}
-				start.routeToTarget = res;
+				start.routeToTarget = res.detailed;
 				start.targetInd = target.ind;
 			}
 			if (gctx.ctx.getVisitor() != null) {
-				gctx.ctx.getVisitor().visitApproximatedSegments(res, start, target);
+				gctx.ctx.getVisitor().visitApproximatedSegments(res.detailed, start, target);
 			}
 		}
 		return routeIsCorrect;
@@ -688,12 +694,12 @@ public class RoutePlannerFrontEnd {
 		return orthogonalDistance <= minPointApproximation;
 	}
 
-	private boolean pointCloseEnough(GpxRouteApproximation gctx, GpxPoint ipoint, List<RouteSegmentResult> res) {
+	private boolean pointCloseEnough(GpxRouteApproximation gctx, GpxPoint ipoint, RouteCalcResult res) {
 		int px = MapUtils.get31TileNumberX(ipoint.loc.getLongitude());
 		int py = MapUtils.get31TileNumberY(ipoint.loc.getLatitude());
 		double SQR = gctx.ctx.config.minPointApproximation;
 		SQR = SQR * SQR;
-		for (RouteSegmentResult sr : res) {
+		for (RouteSegmentResult sr : res.detailed) {
 			int start = sr.getStartPointIndex();
 			int end = sr.getEndPointIndex();
 			if (sr.getStartPointIndex() > sr.getEndPointIndex()) {
@@ -758,7 +764,7 @@ public class RoutePlannerFrontEnd {
 		return res;
 	}
 
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
+	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
 	                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		if (ctx.calculationProgress == null) {
@@ -773,6 +779,31 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
+		if ((USE_HH_ROUTING || USE_ONLY_HH_ROUTING) && intermediatesEmpty) {
+			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
+			NativeLibrary nativeLib = ctx.nativeLib;
+			ctx.nativeLib = null; // keep null to interfere with detailed 
+			try {
+				HHNetworkRouteRes res = routePlanner.runRouting(start, end, HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED));
+				if (res != null && res.error == null) {
+					makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
+					return res;
+				}
+				if (USE_ONLY_HH_ROUTING) {
+					return res;
+				}
+			} catch (SQLException e) {
+				throw new IOException(e.getMessage(), e);
+			} catch (IOException | RuntimeException e) {
+				e.printStackTrace();
+				if (USE_ONLY_HH_ROUTING) {
+					return new HHNetworkRouteRes("Error during routing calculation : " + e.getMessage());
+				}
+			} finally {
+				ctx.nativeLib = nativeLib;
+			}
+		}
+		
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
@@ -786,11 +817,11 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.totalIterations++;
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
-			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+			RouteCalcResult res = searchRoute(nctx, start, end, intermediates);
+			routeDirection = PrecalculatedRouteDirection.build(res.detailed, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
-		List<RouteSegmentResult> res ;
+		RouteCalcResult res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
@@ -811,31 +842,31 @@ public class RoutePlannerFrontEnd {
 			int indexNotFound = 0;
 			List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
 			if (!addSegment(start, ctx, indexNotFound++, points, ctx.startTransportStop)) {
-				return emptyList;
+				return new RouteCalcResult("Start point is not located");
 			}
 			if (intermediates != null) {
 				for (LatLon l : intermediates) {
 					if (!addSegment(l, ctx, indexNotFound++, points, false)) {
 						System.out.println(points.get(points.size() - 1).getRoad().toString());
-						return emptyList;
+						return new RouteCalcResult("Intermediate point is not located");
 					}
 				}
 			}
 			if (!addSegment(end, ctx, indexNotFound++, points, ctx.targetTransportStop)) {
-				return emptyList;
+				return new RouteCalcResult("End point is not located");
 			}
 			ctx.calculationProgress.nextIteration();
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
-		RouteResultPreparation.printResults(ctx, start, end, res);
+		RouteResultPreparation.printResults(ctx, start, end, res.detailed);
 		return res;
 	}
 
-	protected void makeStartEndPointsPrecise(List<RouteSegmentResult> res, LatLon start, LatLon end, List<LatLon> intermediates) {
-		if (res.size() > 0) {
-			makeSegmentPointPrecise(res.get(0), start, true);
-			makeSegmentPointPrecise(res.get(res.size() - 1), end, false);
+	protected void makeStartEndPointsPrecise(RouteCalcResult res, LatLon start, LatLon end, List<LatLon> intermediates) {
+		if (res.detailed.size() > 0) {
+			makeSegmentPointPrecise(res.detailed.get(0), start, true);
+			makeSegmentPointPrecise(res.detailed.get(res.detailed.size() - 1), end, false);
 		}
 	}
 
@@ -926,7 +957,7 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
+	private RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 	                                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
@@ -950,9 +981,12 @@ public class RoutePlannerFrontEnd {
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
-			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
+			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, recalculationEnd != null ? recalculationEnd : end, null);
+			RouteResultPreparation rrp = new RouteResultPreparation();
 			// 4. Route is found : collect all segments and prepare result
-			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
+			List<RouteSegmentResult> result  = rrp.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
+			addPrecalculatedToResult(recalculationEnd, result);
+			return rrp.prepareResult(ctx, result);
 		}
 	}
 
@@ -1009,7 +1043,7 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
+	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
 		refreshProgressDistance(ctx);
 		if (recalculationEnd != null) {
 			if (TRACE_ROUTING) {
@@ -1030,6 +1064,12 @@ public class RoutePlannerFrontEnd {
 		if (TRACE_ROUTING) {
 			log.info("RecalculationEnd result!");
 		}
+		addPrecalculatedToResult(recalculationEnd, result);
+		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
+		return new RouteResultPreparation().prepareResult(ctx, result);
+	}
+
+	private void addPrecalculatedToResult(RouteSegment recalculationEnd, List<RouteSegmentResult> result) {
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
@@ -1048,8 +1088,6 @@ public class RoutePlannerFrontEnd {
 				current = pr;
 			}
 		}
-		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
-		return new RouteResultPreparation().prepareResult(ctx, result, recalculationEnd != null);
 	}
 
 	private boolean hasSegment(List<RouteSegmentResult> result, RouteSegment current) {
@@ -1063,7 +1101,7 @@ public class RoutePlannerFrontEnd {
 		return false;
 	}
 
-	private List<RouteSegmentResult> searchRouteImpl(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection)
+	private RouteCalcResult searchRouteImpl(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection)
 			throws IOException, InterruptedException {
 		if (points.size() <= 2) {
 			// simple case 2 points only
@@ -1071,7 +1109,7 @@ public class RoutePlannerFrontEnd {
 				ctx.previouslyCalculatedRoute = null;
 			}
 			pringGC(ctx, true);
-			List<RouteSegmentResult> res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection);
+			RouteCalcResult res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection);
 			pringGC(ctx, false);
 			makeStartEndPointsPrecise(res, points.get(0).getPreciseLatLon(), points.get(1).getPreciseLatLon(), null);
 			return res;
@@ -1105,7 +1143,7 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
-		List<RouteSegmentResult> results = new ArrayList<RouteSegmentResult>();
+		RouteCalcResult results = new RouteCalcResult(new ArrayList<RouteSegmentResult>());
 		for (int i = 0; i < points.size() - 1; i++) {
 			RoutingContext local = new RoutingContext(ctx);
 			if (i == 0 && ctx.nativeLib == null) {
@@ -1113,14 +1151,13 @@ public class RoutePlannerFrontEnd {
 					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
 				}
 			}
-			
-			List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
+			RouteCalcResult res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
 			makeStartEndPointsPrecise(res, points.get(i).getPreciseLatLon(), points.get(i + 1).getPreciseLatLon(), null);
-			results.addAll(res);
+			results.detailed.addAll(res.detailed);
 			ctx.routingTime += local.routingTime;
 //			local.unloadAllData(ctx);
 			if (restPartRecalculatedRoute != null) {
-				results.addAll(restPartRecalculatedRoute);
+				results.detailed.addAll(restPartRecalculatedRoute);
 				break;
 			}
 		}

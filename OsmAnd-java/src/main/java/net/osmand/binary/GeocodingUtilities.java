@@ -102,7 +102,7 @@ public class GeocodingUtilities {
 			if (dist == -1 && searchPoint != null) {
 				if (building == null && point != null) {
 					// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
-					dist = Math.sqrt(point.distSquare);
+					dist = Math.sqrt(point.distToProj);
 				} else if (connectionPoint != null) {
 					dist = MapUtils.getDistance(connectionPoint, searchPoint);
 				}
@@ -149,8 +149,8 @@ public class GeocodingUtilities {
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
 			String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
 			if (allowEmptyNames || !Algorithms.isEmpty(name)) {
-				if (distSquare == 0 || distSquare > p.distSquare) {
-					distSquare = p.distSquare;
+				if (distSquare == 0 || distSquare > p.distToProj) {
+					distSquare = p.distToProj;
 				}
 				GeocodingResult sr = new GeocodingResult();
 				sr.searchPoint = new LatLon(lat, lon);
@@ -169,11 +169,11 @@ public class GeocodingUtilities {
 					lst.add(sr);
 				}
 			}
-			if (p.distSquare > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS &&
-					distSquare != 0 && p.distSquare > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * distSquare) {
+			if (p.distToProj > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS &&
+					distSquare != 0 && p.distToProj > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * distSquare) {
 				break;
 			}
-			if (p.distSquare > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
+			if (p.distToProj > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
 				break;
 			}
 		}

@@ -1,19 +1,13 @@
 package net.osmand.plus.base;
 
-import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
-import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -31,6 +25,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -39,10 +34,19 @@ import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
 import java.text.SimpleDateFormat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+
+import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
+import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -58,6 +62,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
 	private final MapDisplayPositionManager mapDisplayPositionManager;
+	private final AutoZoomBySpeedHelper autoZoomBySpeedHelper;
 
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
@@ -83,6 +88,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		mapDisplayPositionManager = new MapDisplayPositionManager(app);
+		autoZoomBySpeedHelper = new AutoZoomBySpeedHelper(app);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
@@ -218,20 +224,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		}
 		if (mapView != null) {
+			MapRendererView mapRenderer = mapView.getMapRenderer();
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
 			if (isMapLinkedToLocation() && location != null) {
-				Pair<Integer, Double> zoom = null;
 				Float rotation = null;
 				boolean pendingRotation = false;
-				if (settings.AUTO_ZOOM_MAP.get()) {
-					zoom = autozoom(tb, location);
-				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);
-				boolean smallSpeedForAnimation = isSmallSpeedForAnimation(location);
 
 				showViewAngle = (!location.hasBearing() || smallSpeedForCompass) && (tb != null &&
-						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
+						NativeUtilities.containsLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					// special case when bearing equals to zero (we don't change anything)
 					if (location.hasBearing() && location.getBearing() != 0f) {
@@ -253,35 +255,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					pendingRotation = true;
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
-				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation) {
-					mapView.getAnimatedDraggingThread().startMoving(
-							location.getLatitude(), location.getLongitude(), zoom,
-							pendingRotation, rotation, movingTime, false,
-							() -> movingToMyLocation = false);
+
+				if (mapRenderer != null) {
+					setMyLocationV2(mapView, mapRenderer, location, movingTime, rotation);
 				} else {
-					if (mapView.hasMapRenderer()) {
-						movingTime = movingToMyLocation
-								? (long) Math.min(movingTime * 0.7, MOVE_ANIMATION_TIME) : MOVE_ANIMATION_TIME;
-						if (mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-							movingTime = 0;
-						}
-						mapView.getAnimatedDraggingThread().startMoving(
-								location.getLatitude(), location.getLongitude(), zoom,
-								pendingRotation, rotation, movingTime, false,
-								() -> movingToMyLocation = false);
-					} else {
-						if (zoom != null && zoom.first != null && zoom.second != null) {
-							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, null, false);
-						}
-						if (rotation != null) {
-							mapView.setRotate(rotation, false);
-						}
-						mapView.setLatLon(location.getLatitude(), location.getLongitude());
-					}
+					setMyLocationV1(mapView, location, movingTime, rotation, pendingRotation);
 				}
 			} else if (location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null &&
-						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
+						NativeUtilities.containsLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude()));
 				registerUnregisterSensor(location, false);
 			}
 			this.showViewAngle = showViewAngle;
@@ -307,6 +289,76 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public static boolean isSmallSpeedForAnimation(Location location) {
 		return !location.hasSpeed() || Float.isNaN(location.getSpeed()) || location.getSpeed() < 1.5;
+	}
+
+	private void setMyLocationV2(@NonNull OsmandMapTileView mapView, @NonNull MapRendererView mapRenderer,
+	                             @NonNull Location location, long timeDiff, @Nullable Float rotation) {
+		boolean animateMyLocation = animateMyLocation(location);
+
+		ComplexZoom autoZoom = null;
+		if (shouldAutoZoom(location, 0)) {
+			if (animateMyLocation) {
+				mapView.getAnimatedDraggingThread().stopAnimatingSync();
+			}
+			float distanceToNextTurn = getDistanceToNextTurn();
+			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation, distanceToNextTurn);
+		}
+
+		long movingTime;
+		if (animateMyLocation) {
+			movingTime = timeDiff;
+		} else {
+			if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+				movingTime = 0;
+			} else {
+				movingTime = movingToMyLocation
+						? (long) Math.min(timeDiff * 0.7, MOVE_ANIMATION_TIME)
+						: MOVE_ANIMATION_TIME;
+			}
+		}
+
+		float fixedZoomDuration = animateMyLocation ? -1 : AnimateDraggingMapThread.NAV_ANIMATION_TIME;
+		Pair<ComplexZoom, Float> zoomParams = autoZoom != null
+				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, fixedZoomDuration)
+				: null;
+
+		mapView.getAnimatedDraggingThread().startMoving(
+				location.getLatitude(), location.getLongitude(), zoomParams,
+				false, rotation, movingTime, false,
+				() -> movingToMyLocation = false);
+	}
+
+	private void setMyLocationV1(@NonNull OsmandMapTileView mapView,
+	                             @NonNull Location location, long movingTime,
+	                             @Nullable Float rotation, boolean pendingRotation) {
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
+		ComplexZoom autoZoom = null;
+		if (shouldAutoZoom(location, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)) {
+			autoZoom = autoZoomBySpeedHelper.calculateAutoZoomBySpeedV1(tileBox, location.getSpeed());
+			lastTimeAutoZooming = System.currentTimeMillis();
+		}
+
+		if (animateMyLocation(location)) {
+			Pair<ComplexZoom, Float> zoomParams = autoZoom != null
+					? new Pair<>(autoZoom, AnimateDraggingMapThread.NAV_ANIMATION_TIME)
+					: null;
+			mapView.getAnimatedDraggingThread().startMoving(
+					location.getLatitude(), location.getLongitude(), zoomParams,
+					pendingRotation, rotation, movingTime, false,
+					() -> movingToMyLocation = false);
+		} else {
+			if (autoZoom != null) {
+				mapView.getAnimatedDraggingThread().startZooming(autoZoom.base, autoZoom.floatPart, null, false);
+			}
+			if (rotation != null) {
+				mapView.setRotate(rotation, false);
+			}
+			mapView.setLatLon(location.getLatitude(), location.getLongitude());
+		}
+	}
+
+	private boolean animateMyLocation(@NonNull Location location) {
+		return settings.ANIMATE_MY_LOCATION.get() && !isSmallSpeedForAnimation(location) && !movingToMyLocation;
 	}
 
 	public boolean isShowViewAngle() {
@@ -354,53 +406,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	private float defineZoomFromSpeed(RotatedTileBox tb, float speed) {
-		if (speed < 7f / 3.6) {
-			return 0;
+	private boolean shouldAutoZoom(@NonNull Location location, long autoZoomFrequency) {
+		if (!settings.AUTO_ZOOM_MAP.get() || !location.hasSpeed()) {
+			return false;
 		}
-		double visibleDist = tb.getDistance(tb.getCenterPixelX(), 0, tb.getCenterPixelX(), tb.getCenterPixelY());
-		float time = 75f; // > 83 km/h show 75 seconds 
-		if (speed < 83f / 3.6) {
-			time = 60f;
-		}
-		time /= settings.AUTO_ZOOM_MAP_SCALE.get().coefficient;
-		double distToSee = speed * time;
-		// check if 17, 18 is correct?
-		return (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
-	}
 
-	@Nullable
-	public Pair<Integer, Double> autozoom(RotatedTileBox tb, Location location) {
-		if (location.hasSpeed()) {
-			long now = System.currentTimeMillis();
-			float zdelta = defineZoomFromSpeed(tb, location.getSpeed());
-			if (Math.abs(zdelta) >= 0.5/*?Math.sqrt(0.5)*/) {
-				// prevent ui hysteresis (check time interval for autozoom)
-				if (zdelta >= 2) {
-					// decrease a bit
-					zdelta -= 1;
-				} else if (zdelta <= -2) {
-					// decrease a bit
-					zdelta += 1;
-				}
-				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
-				boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
-				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if ((now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM && !isUserZoomed)
-						|| (now - lastTimeManualZooming > Math.max(threshold, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM) && isUserZoomed)) {
-					lastTimeAutoZooming = now;
-//					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
-//					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
-//					double complexZoom = tb.getZoom() + zoomScale + zdelta;
-					// round to 0.33
-					targetZoom = Math.round(targetZoom * 3) / 3f;
-					int newIntegerZoom = (int) Math.round(targetZoom);
-					double zPart = targetZoom - newIntegerZoom;
-					return newIntegerZoom > 0 ? new Pair<>(newIntegerZoom, zPart) : null;
-				}
-			}
-		}
-		return null;
+		long now = System.currentTimeMillis();
+		boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
+		return isUserZoomed
+				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get(), AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
+				: now - lastTimeAutoZooming > autoZoomFrequency;
 	}
 
 	public void backToLocationImpl() {
@@ -593,5 +608,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public long getLastManualZoomTime() {
 		return lastTimeManualZooming;
+	}
+
+	private float getDistanceToNextTurn() {
+		NextDirectionInfo directionInfo = new NextDirectionInfo();
+		app.getRoutingHelper().getNextRouteDirectionInfo(directionInfo, true);
+		return directionInfo.directionInfo != null && directionInfo.distanceTo > 0
+				? directionInfo.distanceTo
+				: -1;
 	}
 }

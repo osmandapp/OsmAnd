@@ -5572,4 +5572,6 @@
     <string name="rendering_attr_showToll_description">Zeige Mautbeschränkungen auf Straßen</string>
     <string name="target_elevation">Zielhöhe</string>
     <string name="shared_string_eta">Voraussichtliche Ankunftszeit (ETA)</string>
+    <string name="zoom_non_animated">Nichtanimierter Zoom</string>
+    <string name="zoom_animated">Animierter Zoom</string>
 </resources>
