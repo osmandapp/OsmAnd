@@ -61,6 +61,13 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/special_routing_type" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_v1_auto_zoom"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_v1_auto_zoom" />
+
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"
