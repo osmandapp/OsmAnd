@@ -364,7 +364,7 @@
     <string name="local_index_items_uploaded">%1$d von %2$d Datei(en) hochgeladen.</string>
     <string name="local_index_mi_upload_gpx">An OSM senden</string>
     <string name="show_more_map_detail">Mehr Kartendetails anzeigen</string>
-    <string name="show_more_map_detail_descr">Einige Vektordaten (Straßen usw.) bereits bei kleineren Vergrößerungen zeigen.</string>
+    <string name="show_more_map_detail_descr">Einige Vektordaten (Straßen usw.) bereits bei kleineren Vergrößerungen anzeigen.</string>
     <string name="favourites_delete_multiple_succesful">Favorit(en) gelöscht.</string>
     <string name="favorite_delete_multiple">%1$d Favorit(en) und %2$d Favoritengruppe(n) löschen\?</string>
     <string name="favorite_home_category">Zuhause</string>
@@ -605,7 +605,7 @@
     <string name="background_service_provider">Standortbestimmung</string>
     <string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktivierte Standortdienste.</string>
     <string name="hide_poi_filter">Filter verstecken</string>
-    <string name="show_poi_filter">Filter zeigen</string>
+    <string name="show_poi_filter">Filter anzeigen</string>
     <string name="search_poi_filter">Filter</string>
     <string name="menu_mute_off">Sprache ist an</string>
     <string name="menu_mute_on">Sprache ist aus</string>
@@ -2673,7 +2673,7 @@
     <string name="images_cache">Bilder-Cache</string>
     <string name="download_images">Bilder herunterladen</string>
     <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, Aktualisierung möglich.</string>
-    <string name="travel_card_download_descr">Wikivoyage Reiseführer herunterladen, um ohne Internetverbindung Artikel über Orte auf der ganzen Welt zu lesen.</string>
+    <string name="travel_card_download_descr">Wikivoyage-Reiseführer herunterladen, um ohne Internetverbindung Artikel über Orte auf der ganzen Welt zu lesen.</string>
     <string name="update_is_available">Aktualisierung verfügbar</string>
     <string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
@@ -4177,7 +4177,7 @@
     <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
     <string name="purchases_feature_desc_terrain">Höhenlinien, graustufiges Relief und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="purchases_feature_desc_wikipedia">Stellt alle ortsbezogenen Wikipedia-Artikel offline bereit und hilft Ihnen, mehr über die Orte zu erfahren, die Sie auf Ihrer Reise besuchen, indem Sie einfach auf die Karte tippen. Vergessen Sie nicht, die Wikipedia-Kartendateien für die jeweiligen Regionen herunterzuladen.</string>
-    <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline-Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
+    <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia-Artikel auch unterwegs, ohne Internetverbindung. Offline-Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den regulären monatlichen Updates für Offline-Karten.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Erhalten Sie Zugang zu häufigeren Kartenaktualisierungen. Wählen Sie zwischen stündlichen, täglichen oder wöchentlichen Aktualisierungen. Updates erfolgen inkrementell, nur der geänderte Bereich wird heruntergeladen.</string>
@@ -4311,7 +4311,7 @@
     <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später.</string>
     <string name="travel_route_types">Routentypen</string>
     <string name="shared_string_files">Dateien</string>
-    <string name="sample_wikivoyage">Wikivoyage Beispiel</string>
+    <string name="sample_wikivoyage">Wikivoyage-Beispiel</string>
     <string name="shared_string_mini">mini</string>
     <string name="search_title">Suche: %1$s</string>
     <string name="upload_gpx_description_hint">Wenn leer, werden Tracknamen als Beschreibung verwendet. Eingegebene Beschreibungen werden auf alle Tracks angewendet.</string>
@@ -4568,8 +4568,8 @@
     <string name="add_page">Seite hinzufügen</string>
     <string name="apply_to_existing_points_descr">Änderungen auf die bestehenden Punkte der Gruppe anwenden oder nur auf neue\?</string>
     <string name="apply_to_existing_favorites_descr">Änderungen auf die bestehenden Favoritenpunkte der Gruppe anwenden oder nur auf neue\?</string>
-    <string name="apply_to_existing">Anwenden auf bestehende</string>
-    <string name="apply_only_to_new_points">Anwenden auf neue Punkte</string>
+    <string name="apply_to_existing">Auf bestehende Punkte anwenden</string>
+    <string name="apply_only_to_new_points">Nur auf neue Punkte anwenden</string>
     <string name="apply_only_to_new_favorites">Nur auf neue Favoriten anwenden</string>
     <string name="change_default_appearance">Standardaussehen ändern</string>
     <string name="on_with_params">%1$s auf %2$s</string>
@@ -4819,7 +4819,7 @@
     <string name="map_center_widget">Koordinaten: Kartenmitte</string>
     <string name="current_location_widget">Koordinaten: aktueller Standort</string>
     <string name="external_sensors_plugin_name">Externe Sensoren</string>
-    <string name="external_sensors_plugin_description">Zugriff auf externe Sensoren, um z.B. Ihre Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung oder Kadenz zu lesen. Erfordert, Ihr Gerät über das kabellose, persönliche ANT+ Netzwerkprotokoll mit entsprechenden Sensoren zu verbinden.</string>
+    <string name="external_sensors_plugin_description">Zugriff auf externe Sensoren, um z. B. Ihre Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung oder Trittfrequenz zu lesen. Dazu muss Ihr Gerät über das kabellose ANT+-Netzwerkprotokoll mit den entsprechenden Sensoren verbunden sein.</string>
     <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
     <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden, ausgedrückt in Bildern pro Sekunde (FPS).</string>
     <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
@@ -4942,7 +4942,7 @@
     <string name="switch_mode_by_tapping_on_widget">Wechseln Sie den Modus, indem Sie auf das Widget tippen.</string>
     <string name="shared_string_sunrise">Sonnenaufgang</string>
     <string name="shared_string_sunset">Sonnenuntergang</string>
-    <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenauf- und -untergang.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenauf- und -untergang an.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
     <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s %% abgeschlossen. Bei Abbruch funktioniert die App möglicherweise nicht richtig.</string>
@@ -5533,7 +5533,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüssel \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel „%1$s“ ist bereits der Aktion „%2$s“ zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5547,7 +5547,7 @@
     <string name="key_event_action_move_left">Nach links bewegen</string>
     <string name="key_event_action_move_right">Nach rechts bewegen</string>
     <string name="key_event_action_next_app_profile">Nächstes App-Profil</string>
-    <string name="key_event_action_activity_back_pressed">Aktivität zurück gedrückt</string>
+    <string name="key_event_action_activity_back_pressed">Aktivität zurückgedrückt</string>
     <string name="key_event_action_emit_navigation_hint">Navigationshinweis ausgeben</string>
     <string name="remove_type_q">Sind Sie sicher, dass Sie den Typ „%1$s“ entfernen wollen\?</string>
     <string name="key_event_action_move_up">Nach oben bewegen</string>
@@ -5564,14 +5564,19 @@
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
-    <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion wird gelöscht und auf \"Keine\" gesetzt.</string>
+    <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion wird gelöscht und auf „Keine“ gesetzt.</string>
     <string name="reset_key_assignments_desc">Alle Tastenzuweisungen für den ausgewählten Typ werden entfernt.</string>
-    <string name="rendering_attr_showToll_name">Zeige Mautbeschränkungen</string>
+    <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
     <string name="reset_key_assignments">Tastenzuweisungen zurücksetzen</string>
-    <string name="rendering_attr_showToll_description">Zeige Mautbeschränkungen auf Straßen</string>
+    <string name="rendering_attr_showToll_description">Mautbeschränkungen auf Straßen anzeigen</string>
     <string name="target_elevation">Zielhöhe</string>
     <string name="shared_string_eta">Voraussichtliche Ankunftszeit (ETA)</string>
-    <string name="zoom_non_animated">Nichtanimierter Zoom</string>
+    <string name="zoom_non_animated">Nicht animierter Zoom</string>
     <string name="zoom_animated">Animierter Zoom</string>
+    <string name="lang_zh_hans">Vereinfachtes Chinesisch</string>
+    <string name="button_already_assigned_to_this_action">Diese Schaltfläche ist bereits dieser Aktion zugewiesen.</string>
+    <string name="key_assignments_already_cleared_message">Alle Tastenzuweisungen sind bereits gelöscht</string>
+    <string name="lang_zh_hant">Traditionelles Chinesisch</string>
+    <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
 </resources>

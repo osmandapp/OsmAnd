@@ -5564,4 +5564,7 @@
     <string name="lang_zh_hant">Chinois traditionnel</string>
     <string name="zoom_non_animated">Zoom non-animé</string>
     <string name="zoom_animated">Zoom animé</string>
+    <string name="button_already_assigned_to_this_action">Ce bouton est déjà assigné à cette action.</string>
+    <string name="key_assignments_already_cleared_message">Toutes les assignations de touches ont déjà été effacées</string>
+    <string name="add_new_button">Ajouter un nouveau bouton</string>
 </resources>

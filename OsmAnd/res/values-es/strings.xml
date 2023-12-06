@@ -5573,4 +5573,7 @@
     <string name="lang_zh_hant">Chino tradicional</string>
     <string name="zoom_non_animated">Zoom no animado</string>
     <string name="zoom_animated">Zoom animado</string>
+    <string name="button_already_assigned_to_this_action">Este botón ya está asignado a esta acción.</string>
+    <string name="key_assignments_already_cleared_message">Todas las asignaciones de las teclas ya están borradas</string>
+    <string name="add_new_button">Añadir un nuevo botón</string>
 </resources>
