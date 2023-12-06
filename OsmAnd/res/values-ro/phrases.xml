@@ -2267,7 +2267,7 @@
     <string name="poi_nuclear_explosion_shot_name_en">Numele loviturii (en)</string>
     <string name="poi_nuclear_explosion_date_utc">Data exploziei (UTC)</string>
     <string name="poi_nuclear_explosion_type_underwater">Tip de explozie: subacvatică</string>
-    <string name="poi_nuclear_explosion_type_space">Tipul exploziei: spațiu (altitudine peste 80 km)</string>
+    <string name="poi_nuclear_explosion_type_space">Tip explozie: spațiu (altitudine peste 80 km)</string>
     <string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipul exploziei: atmosferică, rachetă sau rachetă ghidată</string>
     <string name="poi_nuclear_explosion_type_cratering_burst">Tip de explozie: prin craterizare (subterană de mică adâncime)</string>
     <string name="poi_nuclear_explosion_type_underground">Tip de explozie: subteran</string>
@@ -2445,10 +2445,10 @@
     <string name="poi_artwork_type_bust">Tip lucrare: bust</string>
     <string name="poi_artwork_type_stone">Tipul lucrării: piatră</string>
     <string name="poi_artwork_type_painting">Tipul lucrării: pictură</string>
-    <string name="poi_artwork_type_architecture">Tipul lucrării: arhitectură</string>
+    <string name="poi_artwork_type_architecture">Tip operă de artă: arhitectură</string>
     <string name="poi_artwork_type_mural">Tip lucrare: murală</string>
-    <string name="poi_artwork_type_statue">Tipul operei de artă: statuie</string>
-    <string name="poi_artwork_type_sculpture">Tipul lucrării: sculptură</string>
+    <string name="poi_artwork_type_statue">Tip operă de artă: statuie</string>
+    <string name="poi_artwork_type_sculpture">Tip operă de artă: sculptură</string>
     <string name="poi_faa">Codul FAA</string>
     <string name="poi_icao">Codul OACI</string>
     <string name="poi_iata">Cod IATA</string>
@@ -2460,8 +2460,8 @@
     <string name="poi_internet_access_type_wired">Cablat</string>
     <string name="poi_internet_access_type_terminal">Terminalul</string>
     <string name="poi_internet_access_type_wlan">WLAN</string>
-    <string name="poi_shelter_type_abandoned">Tipul adăpostului: abandonat</string>
-    <string name="poi_shelter_type_tent">Tipul adăpostului: cort</string>
+    <string name="poi_shelter_type_abandoned">Tip adăpost: abandonat</string>
+    <string name="poi_shelter_type_tent">Tip adăpost: cort</string>
     <string name="poi_shelter_type_field_shelter">Adăpost animale</string>
     <string name="poi_shelter_type_sun_shelter">Adăpost de soare</string>
     <string name="poi_shelter_type_rock_shelter">Adăpost de piatră</string>
@@ -2773,7 +2773,7 @@
     <string name="poi_medical_system_chinese_yes">Chinez, tradițional</string>
     <string name="poi_medical_system_western_yes">Vestic</string>
     <string name="poi_sanitary_dump_station">Stație de descărcare de gestiune sanitară</string>
-    <string name="poi_tanning_salon">Solariu</string>
+    <string name="poi_tanning_salon">Solar</string>
     <string name="poi_free_flying_guest_guidelines_no">Orientări pentru oaspeți: nu</string>
     <string name="poi_free_flying_guest_guidelines_yes">Orientări pentru oaspeți: da</string>
     <string name="poi_free_flying_no_flight_time">Fără timp de zbor (zbor liber)</string>
