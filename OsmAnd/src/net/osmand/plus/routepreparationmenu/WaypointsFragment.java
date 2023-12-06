@@ -494,7 +494,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			if (!openingRouteInfo) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {
-					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+					mapActivity.getMapPositionManager().setMapPositionShiftedX(!visible);
 				}
 			}
 			mapActivity.refreshMap();

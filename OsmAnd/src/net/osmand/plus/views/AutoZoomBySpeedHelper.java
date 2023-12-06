@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import android.graphics.PointF;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -19,6 +21,7 @@ import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
@@ -46,8 +49,8 @@ public class AutoZoomBySpeedHelper {
 	private static final int SHOW_DRIVING_SECONDS_V2 = 37;
 	private static final float MIN_AUTO_ZOOM_SPEED = 7 / 3.6f;
 
-	private static final int FOCUS_DIV_X = 2;
-	private static final int FOCUS_DIV_Y = 3;
+	private static final float FOCUS_PIXEL_RATIO_X = 0.5f;
+	private static final float FOCUS_PIXEL_RATIO_Y = 1 / 3f;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -120,7 +123,7 @@ public class AutoZoomBySpeedHelper {
 		PointI anotherLocation31 = NativeUtilities.getPoint31FromLatLon(anotherLatLon);
 		float anotherLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, anotherLocation31);
 		PointI windowSize = mapRenderer.getState().getWindowSize();
-		PointI anotherPixel = new PointI(windowSize.getX() / FOCUS_DIV_X, windowSize.getY() / FOCUS_DIV_Y);
+		PointI anotherPixel = getFocusPixel(windowSize.getX(), windowSize.getY());
 
 		float expectedSurfaceZoom = mapRenderer.getSurfaceZoomAfterPinch(
 				myLocation31, myLocationHeight, myLocationPixel,
@@ -173,7 +176,7 @@ public class AutoZoomBySpeedHelper {
 		PointI secondLocation31 = NativeUtilities.getPoint31FromLatLon(secondLatLon);
 		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31);
 		PointI windowSize = state.getWindowSize();
-		PointI secondPixel = new PointI(windowSize.getX() / FOCUS_DIV_X, windowSize.getY() / FOCUS_DIV_Y);
+		PointI secondPixel = getFocusPixel(windowSize.getX(), windowSize.getY());
 
 		float expectedSurfaceZoom = mapRenderer.getSurfaceZoomAfterPinchWithParams(
 				fixedLocation31, currentZoom, -rotation,
@@ -210,6 +213,19 @@ public class AutoZoomBySpeedHelper {
 		return distanceToNextTurn > 0
 				? Math.max(Math.min(distanceToNextTurn, showDistanceToDrive), autoZoomScale.minDistanceToDrive)
 				: Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
+	}
+
+	@NonNull
+	private PointI getFocusPixel(int pixWidth, int pixHeight) {
+		MapDisplayPositionManager displayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		PointF originalRatio = new PointF(FOCUS_PIXEL_RATIO_X, FOCUS_PIXEL_RATIO_Y);
+		PointF ratio = displayPositionManager.projectRatioToVisibleMapRect(originalRatio);
+		if (ratio == null) {
+			ratio = originalRatio;
+		}
+		int pixelX = (int) (ratio.x * pixWidth);
+		int pixelY = (int) (ratio.y * pixHeight);
+		return new PointI(pixelX, pixelY);
 	}
 
 	@Nullable

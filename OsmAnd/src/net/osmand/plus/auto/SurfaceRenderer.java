@@ -26,6 +26,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -97,6 +98,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				SurfaceRenderer.this.visibleArea = visibleArea;
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (!visibleArea.isEmpty() && mapView != null) {
+					MapDisplayPositionManager displayPositionManager = getDisplayPositionManager();
+
 					int visibleAreaWidth = visibleArea.width();
 					int visibleAreaHeight = visibleArea.height();
 					int containerWidth = surfaceContainer.getWidth();
@@ -109,11 +112,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					}
 					float ratioY = 0;
 					if ((float) containerHeight / visibleAreaHeight > VISIBLE_AREA_MIN_DETECTION_SIZE) {
-						float defaultRatioY = mapView.getDefaultRatioY();
+						float defaultRatioY = displayPositionManager.getNavigationMapPosition().getRatioY();
 						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
 						ratioY = centerY / containerHeight;
 					}
-					mapView.setCustomMapRatio(ratioX, ratioY);
+					displayPositionManager.setCustomMapRatio(ratioX, ratioY);
 				}
 				renderFrame();
 			}
@@ -139,7 +142,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				}
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
-					mapView.restoreMapRatio();
+					getDisplayPositionManager().restoreMapRatio();
 					mapView.setupRenderingView();
 				}
 			}
@@ -266,6 +269,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	public void updateLocation(@Nullable Location location) {
 		//renderFrame();
+	}
+
+	@NonNull
+	private MapDisplayPositionManager getDisplayPositionManager() {
+		return getApp().getMapViewTrackingUtilities().getMapDisplayPositionManager();
 	}
 
 	@NonNull

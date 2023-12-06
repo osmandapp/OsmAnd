@@ -1,15 +1,12 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.MAIN_BUTTONS_QUANTITY;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -42,16 +39,6 @@ import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -65,6 +52,10 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
@@ -72,8 +63,8 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -95,10 +86,25 @@ import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
-public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.MAIN_BUTTONS_QUANTITY;
+
+public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents,
+		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
 	public static final String TAG = "MapContextMenuFragment";
 
 	public static final float ZOOM_PADDING_TOP_DP = 4f;
@@ -129,7 +135,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
+	private BoundsChangeListener mainViewBoundsChangeListener;
 	private boolean forceUpdateLayout;
+
+	private boolean portrait;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowAllHeight;
@@ -154,6 +163,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int zoomPaddingTop;
 
 	private OsmandMapTileView map;
+	private MapDisplayPositionManager displayPositionManager;
 	private LatLon mapCenter;
 	private int origMarkerX;
 	private int origMarkerY;
@@ -176,7 +186,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		MapActivity mapActivity = requireMapActivity();
 
 		map = mapActivity.getMapView();
+		displayPositionManager = mapActivity.getMapPositionManager();
 		menu = mapActivity.getContextMenu();
+		mainViewBoundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		boolean enabled = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
 			public void handleOnBackPressed() {
@@ -906,7 +919,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void restoreCustomMapRatio() {
-		if (map != null && map.hasCustomMapRatio()) {
+		if (map != null && displayPositionManager.hasCustomMapRatio()) {
 			map.restoreScreenCenter();
 		}
 	}
@@ -917,7 +930,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), tb, latLon);
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
-		map.setCustomMapRatio(ratioX, ratioY);
+		app.getMapViewTrackingUtilities().getMapDisplayPositionManager().setCustomMapRatio(ratioX, ratioY);
 		map.setLatLon(latLon.getLatitude(), latLon.getLongitude(), ratioX, ratioY);
 	}
 
@@ -1314,6 +1327,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (parent != null && containerLayoutListener != null) {
 				((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 			}
+			updateMapDisplayPosition(true);
 			menu.updateControlsVisibility(true);
 			menu.onFragmentResume();
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -1323,6 +1337,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onPause() {
 		if (view != null) {
+			updateMapDisplayPosition(false);
 			restoreCustomMapRatio();
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
@@ -1673,7 +1688,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
-		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		cp.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
 		cp.setZoom(zoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
@@ -1996,7 +2011,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int zoom = getZoom() + dZoom;
 		LatLon latlon = getAdjustedMarkerLocation(y, menu.getLatLon(), center, zoom);
 
-		if (map.hasCustomMapRatio()
+		if (displayPositionManager.hasCustomMapRatio()
 				|| (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude() && dZoom == 0)) {
 			return;
 		}
@@ -2015,7 +2030,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
-		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		box.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
 		box.setZoom(zoom);
 		boolean hasMapCenter = mapCenter != null;
 		int markerMapCenterX = 0;
@@ -2232,5 +2247,35 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
 		runLayoutListener();
+	}
+
+	private void updateMapDisplayPosition(boolean newPosition) {
+		if (portrait) {
+			displayPositionManager.updateMapPositionProviders(this, newPosition);
+			displayPositionManager.updateMapDisplayPosition();
+		} else {
+			displayPositionManager.updateCoveredScreenRectProvider(this, newPosition);
+			if (newPosition) {
+				view.addOnLayoutChangeListener(mainViewBoundsChangeListener);
+			} else {
+				view.removeOnLayoutChangeListener(mainViewBoundsChangeListener);
+			}
+			if (view.getWidth() > 0 && view.getHeight() > 0) {
+				displayPositionManager.updateMapDisplayPosition();
+			}
+		}
+	}
+
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
+		return portrait ? MapPosition.CENTER : null;
+	}
+
+	@NonNull
+	@Override
+	public List<Rect> getCoveredScreenRects() {
+		Rect rect = portrait ? null : AndroidUtils.getViewBoundOnScreen(mainView);
+		return rect == null ? Collections.emptyList() : Collections.singletonList(rect);
 	}
 }
