@@ -1742,12 +1742,6 @@ public class OsmandSettings {
 		ROTATE_MAP.set(compassMode.getValue());
 	}
 
-	public static final int CENTER_CONSTANT = 0;
-	public static final int BOTTOM_CONSTANT = 1;
-	public static final int MIDDLE_BOTTOM_CONSTANT = 2;
-	public static final int MIDDLE_TOP_CONSTANT = 3;
-	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
-
 	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
 	public static final int POSITION_PLACEMENT_CENTER = 1;
 	public static final int POSITION_PLACEMENT_BOTTOM = 2;

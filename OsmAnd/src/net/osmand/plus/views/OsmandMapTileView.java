@@ -1,9 +1,6 @@
 package net.osmand.plus.views;
 
 
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -28,12 +25,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnLayoutChangeListener;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -89,6 +82,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -363,17 +362,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				view.setDefaultFocusHighlightEnabled(false);
 			}
 			refreshMap(true);
-			if (!isCarView()) {
-				OnLayoutChangeListener listener = new OnLayoutChangeListener() {
-					@Override
-					public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//						v.removeOnLayoutChangeListener(this);
-						android.util.Log.v("M_OsmandMapTileView", right > bottom ? "--" : "|");
-						mapViewTrackingUtilities.getMapDisplayPositionManager().updateMapDisplayPosition(true);
-					}
-				};
-				view.addOnLayoutChangeListener(listener);
-			}
 		}
 	}
 
