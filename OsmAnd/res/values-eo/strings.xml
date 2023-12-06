@@ -5543,4 +5543,11 @@
     <string name="searching_matching_tracks">Serĉi ĉiujn kongruajn spurojn</string>
     <string name="change_button">Ŝanĝi butonon</string>
     <string name="download_to_device">Elŝuti al aparato</string>
+    <string name="rendering_attr_showToll_name">Voj-impostejoj</string>
+    <string name="button_already_assigned_to_this_action">Tiu ĉi butono estas jam asignita al tiu ĉi ago.</string>
+    <string name="rendering_attr_showToll_description">Montri vojimpostajn pagejojn</string>
+    <string name="zoom_non_animated">Nemovbilda pligrandigo</string>
+    <string name="key_assignments_already_cleared_message">Ĉiuj klav-asignoj jam estas forviŝitaj</string>
+    <string name="zoom_animated">Movbilda pligrandigo</string>
+    <string name="add_new_button">Aldoni novan butonon</string>
 </resources>
