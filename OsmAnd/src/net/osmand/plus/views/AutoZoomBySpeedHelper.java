@@ -72,7 +72,7 @@ public class AutoZoomBySpeedHelper {
 		} else if (zoomDelta <= -2) {
 			zoomDelta += 1;
 		}
-		double targetZoom = tb.getZoom() + tb.getZoomFloatPart() + zoomDelta;
+		double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zoomDelta, autoZoomScale.maxZoom);
 		targetZoom = Math.round(targetZoom * 3) / 3f;
 		int newIntegerZoom = (int) Math.round(targetZoom);
 		float zPart = (float) (targetZoom - newIntegerZoom);
@@ -85,9 +85,9 @@ public class AutoZoomBySpeedHelper {
 		}
 		double visibleDist = tb.getDistance(tb.getCenterPixelX(), 0, tb.getCenterPixelX(), tb.getCenterPixelY());
 		float time = speed < 83f / 3.6 ? 60 : 75;
-		double distToSee = Math.max(speed * time / autoZoomScale.coefficient, autoZoomScale.minDistanceToDrive);
+		double distToSee = speed * time / autoZoomScale.coefficient;
 		float currentZoom = (float) (tb.getZoom() + tb.getZoomFloatPart() + tb.getZoomAnimation());
-		return Zoom.fromDistanceRatio(visibleDist, distToSee, currentZoom);
+		return Zoom.fromDistanceRatio(visibleDist, distToSee, currentZoom) - currentZoom;
 	}
 
 	@Nullable
