@@ -5557,4 +5557,13 @@
     <string name="key_assignments">Assegnazioni chiave</string>
     <string name="key_event_action_activity_back_pressed">Attività indietro premuta</string>
     <string name="shared_string_eta">ETA</string>
+    <string name="rendering_attr_showToll_name">Mostra restrizioni di pedaggio</string>
+    <string name="lang_zh_hans">Cinese semplificato</string>
+    <string name="button_already_assigned_to_this_action">Questo pulsante è già assegnato a questa azione.</string>
+    <string name="rendering_attr_showToll_description">Mostra le restrizioni di pedaggio sulle strade</string>
+    <string name="key_assignments_already_cleared_message">Tutte le associazioni dei tasti sono già cancellate</string>
+    <string name="lang_zh_hant">Cinese tradizionale</string>
+    <string name="zoom_animated">Zoom animato</string>
+    <string name="clear_key_assignment">Elimina l\'associazione dei tasti</string>
+    <string name="add_new_button">Aggiungi un nuovo pulsante</string>
 </resources>
