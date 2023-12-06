@@ -48,6 +48,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private static final int PNT_SHORT_ROUTE_START_END = -1000;
 	public static final int MAX_POINTS_CLUSTER_ROUTING = 150000;
 	
+	private static boolean ASSERT_COST_INCREASING = false;
+	private static boolean ASSERT_AND_CORRECT_DIST_SMALLER = true;
 	HHRoutingContext<T> cacheHctx;
 	private final Class<T> pointClass;
 	
@@ -793,10 +795,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (hctx.config.USE_MIDPOINT && Math.min(depth, hctx.config.MIDPOINT_MAX_DEPTH) > nextPoint.midPntDepth() + hctx.config.MIDPOINT_ERROR) {
 				continue;
 			}
-			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + distanceToEnd(hctx, reverse, nextPoint) ;
+			double segmentDist = connected.dist;
+			if (ASSERT_AND_CORRECT_DIST_SMALLER && hctx.config.HEURISTIC_COEFFICIENT > 0
+					&& smallestSegmentCost(hctx, point, nextPoint) - segmentDist >  1) {
+				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
+				// TODO lots of incorrect distance in db 
+				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, segmentDist, smallestSegmentCost);
+				segmentDist = smallestSegmentCost;
+			}
+			double cost = point.rt(reverse).rtDistanceFromStart  + segmentDist + distanceToEnd(hctx, reverse, nextPoint);
+			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
+				String msg = String.format("%s (cost %.2f) -> %s (cost %.2f) st=%.2f-> + %.2f, toend=%.2f->%.2f: ",
+						point, point.rt(reverse).rtCost, nextPoint, cost, point.rt(reverse).rtDistanceFromStart,
+						connected.dist, point.rt(reverse).rtDistanceToEnd, distanceToEnd(hctx, reverse, nextPoint));
+				throw new IllegalStateException(msg);
+			}
 			double exCost = nextPoint.rt(reverse).rtCost;
 			if ((exCost == 0 && !nextPoint.rt(reverse).rtVisited) || cost < exCost) {
-				addPointToQueue(hctx, queue, reverse, nextPoint, point, connected.dist, cost);
+				addPointToQueue(hctx, queue, reverse, nextPoint, point, segmentDist, cost);
 			}
 		}
 	}
@@ -817,6 +833,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		queue.add(new NetworkDBPointCost<T>(point, cost, reverse)); // we need to add new object to not  remove / rebalance priority queue
 		hctx.stats.addQueueTime += (System.nanoTime() - tm) / 1e6;
 		hctx.stats.addedVertices++;
+	}
+	
+	
+	private double smallestSegmentCost(HHRoutingContext<T> hctx, T st, T end) {
+		double dist = squareRootDist31(st.midX(), st.midY(), end.midX(), end.midY());
+		return dist / hctx.rctx.getRouter().getMaxSpeed();
 	}
 
 	private double distanceToEnd(HHRoutingContext<T> hctx, boolean reverse,  NetworkDBPoint nextPoint) {

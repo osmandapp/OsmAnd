@@ -44,9 +44,8 @@ public class RoutePlannerFrontEnd {
 	static boolean TRACE_ROUTING = false;
 	public static boolean USE_HH_ROUTING = false;
 	public static boolean USE_ONLY_HH_ROUTING = false;
-	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-	// TODO bug with astar for now
-//	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+//	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 
 	
 	public RoutePlannerFrontEnd() {
