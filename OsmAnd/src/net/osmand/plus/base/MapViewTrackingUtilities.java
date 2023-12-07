@@ -374,11 +374,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void updateSettings() {
+		updateSettings(true);
+	}
+
+	private void updateSettings(boolean updateRotationByCompass) {
 		if (isMapLinkedToLocation) {
 			mapDisplayPositionManager.updateMapDisplayPosition();
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
-		if (mapView != null) {
+		if (mapView != null && updateRotationByCompass) {
 			mapView.initMapRotationByCompassMode();
 		}
 	}
@@ -503,7 +507,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				backToLocationWithDelay(autoFollow);
 			}
 		} else {
-			updateSettings();
+			updateSettings(false);
 		}
 	}
 
