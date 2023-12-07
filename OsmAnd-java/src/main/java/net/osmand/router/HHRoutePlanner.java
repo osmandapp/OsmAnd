@@ -215,6 +215,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
 		List<RouteSegmentPoint> stOthers = startPnt.others, endOthers = endPnt.others;
 		while (!found) {
+			for (T p : stPoints.valueCollection()) {
+				p.clearRouting();
+			}
+			stPoints.clear();
+			for (T p : endPoints.valueCollection()) {
+				p.clearRouting();
+			}
+			endPoints.clear();
 			RouteSegmentPoint startP = startPnt;
 			if (startReiterate >= 0) {
 				if (stOthers != null && startReiterate < stOthers.size()) {
@@ -236,6 +244,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()), null);
 			initStart(hctx, startP, false, stPoints);
+			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
 				System.out.println("Reiterate with next start point: " + startP);
 				startReiterate++;
@@ -243,14 +252,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				continue;
 			}
 
-			hctx.rctx.config.initialDirection = prev;
 			hctx.boundaries.remove(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()));
 			hctx.boundaries.remove(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()));
 			if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {
 				endPoints.put(PNT_SHORT_ROUTE_START_END, stPoints.get(PNT_SHORT_ROUTE_START_END));
 			}
 			initStart(hctx, endP, true, endPoints);
-			if (stPoints.isEmpty()) {
+			if (endPoints.isEmpty()) {
 				System.out.println("Reiterate with next end point: " + endP);
 				endReiterate++;
 				found = false;
