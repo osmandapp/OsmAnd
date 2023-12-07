@@ -60,7 +60,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 			cachedMeters = distance;
 			if (cachedMeters <= DESTINATION_REACHED_THRESHOLD) {
 				cachedMeters = 0;
-				setText(null, null);
+				setText(isVerticalWidget() ? NO_VALUE : null, null);
 			} else {
 				FormattedValue formattedDistance = OsmAndFormatter
 						.getFormattedDistanceValue(cachedMeters, app, true, settings.METRIC_SYSTEM.get());
