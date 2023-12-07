@@ -151,6 +151,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 				updateRouteCalculationProgress(0);
 			}
 		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
+		}
 		menu.onResume();
 	}
 
@@ -159,6 +163,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		super.onPause();
 		if (menu != null) {
 			menu.onPause();
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getWidgetsVisibilityHelper().showWidgets();
 		}
 	}
 
