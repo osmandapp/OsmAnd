@@ -23,7 +23,7 @@ class WidthTrackFilter(app: OsmandApplication, filterChangedListener: FilterChan
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (width in selectedItems) {
-			val trackItemWidth = trackItem.dataItem?.getParameter(GpxParameter.WIDTH).toString()
+			val trackItemWidth: String? = trackItem.dataItem?.getParameter(GpxParameter.WIDTH)
 			if (Algorithms.stringsEqual(trackItemWidth, width) ||
 				Algorithms.isEmpty(trackItemWidth) && Algorithms.isEmpty(width)) {
 				return true

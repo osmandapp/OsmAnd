@@ -56,10 +56,10 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		altitudeFilter = new AltitudeFilter(app, sourceSelectedGpxFile);
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
 		if (dataItem != null) {
-			smoothingFilter.updateValue((double) dataItem.getParameter(SMOOTHING_THRESHOLD));
-			speedFilter.updateValues((double) dataItem.getParameter(MIN_FILTER_SPEED), (double) dataItem.getParameter(MAX_FILTER_SPEED));
-			altitudeFilter.updateValues((double) dataItem.getParameter(MIN_FILTER_ALTITUDE), (double) dataItem.getParameter(MAX_FILTER_ALTITUDE));
-			hdopFilter.updateValue((double) dataItem.getParameter(MAX_FILTER_HDOP));
+			smoothingFilter.updateValue(dataItem.getParameter(SMOOTHING_THRESHOLD));
+			speedFilter.updateValues(dataItem.getParameter(MIN_FILTER_SPEED), dataItem.getParameter(MAX_FILTER_SPEED));
+			altitudeFilter.updateValues(dataItem.getParameter(MIN_FILTER_ALTITUDE), dataItem.getParameter(MAX_FILTER_ALTITUDE));
+			hdopFilter.updateValue(dataItem.getParameter(MAX_FILTER_HDOP));
 		}
 	}
 
@@ -171,9 +171,14 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem item) {
-		double sum = (double) item.getParameter(SMOOTHING_THRESHOLD) + (double) item.getParameter(MIN_FILTER_SPEED)
-				+ (double) item.getParameter(MAX_FILTER_SPEED) + (double) item.getParameter(MIN_FILTER_ALTITUDE)
-				+ (double) item.getParameter(MAX_FILTER_ALTITUDE) + (double) item.getParameter(MAX_FILTER_HDOP);
+		double smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
+		double minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
+		double maxFilterSpeed = item.getParameter(MAX_FILTER_SPEED);
+		double minFilterAltitude = item.getParameter(MIN_FILTER_ALTITUDE);
+		double maxFilterAltitude = item.getParameter(MAX_FILTER_ALTITUDE);
+		double maxFilterHdop = item.getParameter(MAX_FILTER_HDOP);
+
+		double sum = smoothingThreshold + minFilterSpeed + maxFilterSpeed + minFilterAltitude + maxFilterAltitude + maxFilterHdop;
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

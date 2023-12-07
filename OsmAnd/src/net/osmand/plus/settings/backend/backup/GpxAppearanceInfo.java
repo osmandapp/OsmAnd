@@ -58,13 +58,13 @@ public class GpxAppearanceInfo {
 	}
 
 	public GpxAppearanceInfo(@NonNull GpxDataItem dataItem) {
-		color = (int) dataItem.getParameter(COLOR);
-		width = (String) dataItem.getParameter(WIDTH);
-		showArrows = (boolean) dataItem.getParameter(SHOW_ARROWS);
-		showStartFinish = (boolean) dataItem.getParameter(SHOW_START_FINISH);
-		splitType = (int) dataItem.getParameter(SPLIT_TYPE);
-		splitInterval = (double) dataItem.getParameter(SPLIT_INTERVAL);
-		coloringType = (String) dataItem.getParameter(COLORING_TYPE);
+		color = dataItem.getParameter(COLOR);
+		width = dataItem.getParameter(WIDTH);
+		showArrows = dataItem.getParameter(SHOW_ARROWS);
+		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
+		splitType = dataItem.getParameter(SPLIT_TYPE);
+		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
+		coloringType = dataItem.getParameter(COLORING_TYPE);
 
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
@@ -72,12 +72,12 @@ public class GpxAppearanceInfo {
 			wptPoints = analysis.wptPoints;
 			totalDistance = analysis.totalDistance;
 		}
-		smoothingThreshold = (double) dataItem.getParameter(SMOOTHING_THRESHOLD);
-		minFilterSpeed = (double) dataItem.getParameter(MIN_FILTER_SPEED);
-		maxFilterSpeed = (double) dataItem.getParameter(MAX_FILTER_SPEED);
-		minFilterAltitude = (double) dataItem.getParameter(MIN_FILTER_ALTITUDE);
-		maxFilterAltitude = (double) dataItem.getParameter(MAX_FILTER_ALTITUDE);
-		maxFilterHdop = (double) dataItem.getParameter(MAX_FILTER_HDOP);
+		smoothingThreshold = dataItem.getParameter(SMOOTHING_THRESHOLD);
+		minFilterSpeed = dataItem.getParameter(MIN_FILTER_SPEED);
+		maxFilterSpeed = dataItem.getParameter(MAX_FILTER_SPEED);
+		minFilterAltitude = dataItem.getParameter(MIN_FILTER_ALTITUDE);
+		maxFilterAltitude = dataItem.getParameter(MAX_FILTER_ALTITUDE);
+		maxFilterHdop = dataItem.getParameter(MAX_FILTER_HDOP);
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {

@@ -114,7 +114,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void setupRegion() {
-		String cityName = dataItem != null ? (String) dataItem.getParameter(NEAREST_CITY_NAME) : null;
+		String cityName = dataItem != null ? dataItem.getParameter(NEAREST_CITY_NAME) : null;
 		TextView regionText = view.findViewById(R.id.region);
 		regionText.setText(cityName);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.region_container), !Algorithms.isEmpty(cityName));

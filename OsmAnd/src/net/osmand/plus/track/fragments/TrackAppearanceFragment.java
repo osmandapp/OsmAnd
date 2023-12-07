@@ -694,8 +694,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void discardSplitChanges() {
 		if (gpxDataItem != null) {
-			int type = (int) gpxDataItem.getParameter(SPLIT_TYPE);
-			double interval = (double) gpxDataItem.getParameter(SPLIT_INTERVAL);
+			int type = gpxDataItem.getParameter(SPLIT_TYPE);
+			double interval = gpxDataItem.getParameter(SPLIT_INTERVAL);
 			if (type != trackDrawInfo.getSplitType() || interval != trackDrawInfo.getSplitInterval()) {
 				applySplit(GpxSplitType.getSplitTypeByTypeId(type), (int) interval, interval);
 			}

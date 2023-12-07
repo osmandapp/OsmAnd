@@ -1211,7 +1211,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				color = (int) dataItem.getParameter(COLOR);
+				color = dataItem.getParameter(COLOR);
 			}
 		}
 		return color != 0 ? color : gpxFile.getColor(defaultColor);
@@ -1239,8 +1239,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				coloringType = ColoringType.getNonNullTrackColoringTypeByName((String) dataItem.getParameter(COLORING_TYPE));
-				routeInfoAttribute = ColoringType.getRouteInfoAttribute((String) dataItem.getParameter(COLORING_TYPE));
+				coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getParameter(COLORING_TYPE));
+				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
 			}
 		}
 
@@ -1272,7 +1272,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				width = (String) dataItem.getParameter(WIDTH);
+				width = dataItem.getParameter(WIDTH);
 			}
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
@@ -1288,7 +1288,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return (boolean) dataItem.getParameter(SHOW_ARROWS);
+				return dataItem.getParameter(SHOW_ARROWS);
 			}
 			return gpxFile.isShowArrows();
 		}
@@ -1304,7 +1304,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				return (boolean) dataItem.getParameter(SHOW_START_FINISH);
+				return dataItem.getParameter(SHOW_START_FINISH);
 			}
 			return gpxFile.isShowStartFinish();
 		}

@@ -125,27 +125,27 @@ public class TrackDrawInfo {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		width = (String) dataItem.getParameter(WIDTH);
+		width = dataItem.getParameter(WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = (int) dataItem.getParameter(COLOR);
+		color = dataItem.getParameter(COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName((String) dataItem.getParameter(COLORING_TYPE));
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute((String) dataItem.getParameter(COLORING_TYPE));
-		splitType = (int) dataItem.getParameter(SPLIT_TYPE);
-		splitInterval = (double) dataItem.getParameter(SPLIT_INTERVAL);
-		joinSegments = (boolean) dataItem.getParameter(JOIN_SEGMENTS);
-		showArrows = (boolean) dataItem.getParameter(SHOW_ARROWS);
-		showStartFinish = (boolean) dataItem.getParameter(SHOW_START_FINISH);
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getParameter(COLORING_TYPE));
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
+		splitType = dataItem.getParameter(SPLIT_TYPE);
+		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
+		joinSegments = dataItem.getParameter(JOIN_SEGMENTS);
+		showArrows = dataItem.getParameter(SHOW_ARROWS);
+		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
 	}
 
 	@Nullable

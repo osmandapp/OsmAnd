@@ -48,8 +48,10 @@ public class GpxDataItem {
 		return !map.isEmpty();
 	}
 
-	public Object getParameter(@NonNull GpxParameter parameter) {
-		return map.containsKey(parameter) ? map.get(parameter) : parameter.getDefaultValue();
+	@SuppressWarnings("unchecked")
+	public <T> T getParameter(@NonNull GpxParameter parameter) {
+		Object value = map.containsKey(parameter) ? map.get(parameter) : parameter.getDefaultValue();
+		return ((Class<T>) parameter.getTypeClass()).cast(value);
 	}
 
 	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {

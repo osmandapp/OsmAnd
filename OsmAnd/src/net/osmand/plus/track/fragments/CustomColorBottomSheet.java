@@ -24,15 +24,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -167,7 +167,8 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == (int) dataItem.getParameter(COLOR)) {
+			int color = dataItem.getParameter(COLOR);
+			if (prevColor == color) {
 				dataItem.setParameter(COLOR, newColor);
 				gpxDbHelper.updateDataItem(dataItem);
 			}

@@ -1510,9 +1510,9 @@ public class OsmandAidlApi {
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-				long modifiedTime = (long) dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
+				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
-				int color = (int) dataItem.getParameter(COLOR);
+				int color = dataItem.getParameter(COLOR);
 				String colorName = "";
 				if (color != 0) {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
@@ -1538,7 +1538,7 @@ public class OsmandAidlApi {
 			if (file.exists()) {
 				String fileName = file.getName();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-				long modifiedTime = (long) dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
+				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
 				AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
@@ -1557,7 +1557,7 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
-					int color = (int) dataItem.getParameter(COLOR);
+					int color = dataItem.getParameter(COLOR);
 					if (color != 0) {
 						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
@@ -1577,7 +1577,8 @@ public class OsmandAidlApi {
 
 		if (file != null && file.exists()) {
 			GpxDataItem item = app.getGpxDbHelper().getItem(file);
-			if (item != null && (boolean) item.getParameter(API_IMPORTED)) {
+			boolean apiImported = item != null ? item.getParameter(API_IMPORTED) : false;
+			if (apiImported) {
 				return FileUtils.removeGpxFile(app, file);
 			}
 		}

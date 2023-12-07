@@ -22,9 +22,9 @@ public class GpxSplitParams {
 	}
 
 	public GpxSplitParams(@NonNull GpxDataItem dataItem) {
-		splitType = GpxSplitType.getSplitTypeByTypeId((int) dataItem.getParameter(SPLIT_TYPE));
-		splitInterval = (double) dataItem.getParameter(SPLIT_INTERVAL);
-		joinSegments = (boolean) dataItem.getParameter(JOIN_SEGMENTS);
+		splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getParameter(SPLIT_TYPE));
+		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
+		joinSegments = dataItem.getParameter(JOIN_SEGMENTS);
 	}
 
 	@Override

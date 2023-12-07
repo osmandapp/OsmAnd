@@ -149,7 +149,7 @@ class TracksScreen(
 			var description = ""
 			var dist = 0f
 			track.dataItem?.let { dataItem ->
-				description = (dataItem.getParameter(NEAREST_CITY_NAME) ?: "").toString()
+				description = dataItem.getParameter(NEAREST_CITY_NAME) ?: ""
 				dist = if (dataItem.analysis == null || dataItem.analysis?.latLonStart == null) {
 					0f
 				} else {

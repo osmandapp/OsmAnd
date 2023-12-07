@@ -5,10 +5,10 @@ import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class TrackDisplayHelper {
 	}
 
 	public boolean isJoinSegments() {
-		return gpxDataItem != null && (boolean) gpxDataItem.getParameter(JOIN_SEGMENTS);
+		return gpxDataItem != null ? gpxDataItem.getParameter(JOIN_SEGMENTS) : false;
 	}
 
 	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {

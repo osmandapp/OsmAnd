@@ -1,7 +1,7 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
 
 import android.os.AsyncTask;
 import android.util.Pair;
@@ -9,7 +9,6 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.data.GPXInfo;
@@ -18,7 +17,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -177,7 +175,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public List<GpxDataItem> getSplitItems() {
 		List<GpxDataItem> items = new ArrayList<>();
 		for (GpxDataItem item : getItems()) {
-			if ((int) item.getParameter(SPLIT_TYPE) != 0) {
+			int splitType = item.getParameter(SPLIT_TYPE);
+			if (splitType != 0) {
 				items.add(item);
 			}
 		}
