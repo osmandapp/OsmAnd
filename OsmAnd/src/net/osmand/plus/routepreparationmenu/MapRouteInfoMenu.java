@@ -2456,7 +2456,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 
 			MapRouteInfoMenuFragment.showInstance(mapActivity, initialMenuState);
-			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
 		}
 	}
 
@@ -2596,7 +2595,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						case ROUTE_INFO:
 							break;
 						case ROUTE_DETAILS:
-							mapActivity.getWidgetsVisibilityHelper().showWidgets();
 							if (!portraitMode) {
 								mapActivity.getMapPositionManager().setMapPositionShiftedX(false);
 							}
