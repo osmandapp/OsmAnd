@@ -1363,6 +1363,15 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static <T> boolean containsAny(Collection<T> collection, T ... objects) {
+		for (T object : objects) {
+			if (collection.contains(object)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@SafeVarargs
 	public static <T> List<T> asOneList(Collection<T> ... collections) {
 		List<T> result = new ArrayList<>();

@@ -184,6 +184,10 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<File> voiceFilesList = new ArrayList<>();
 		List<File> favoritesBackupFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
+		List<File> wikiFilesList = new ArrayList<>();
+		List<File> terrainFilesList = new ArrayList<>();
+		List<File> roadsOnlyFilesList = new ArrayList<>();
+		List<File> nauticalFilesList = new ArrayList<>();
 		List<MapMarker> mapMarkers = new ArrayList<>();
 		List<MapMarker> mapMarkersHistory = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
@@ -210,8 +214,18 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 					multimediaFilesList.add(file);
 				} else if (fileSubtype == FileSubtype.GPX) {
 					trackFilesList.add(file);
-				} else if (fileSubtype.isMap()) {
+				} else if (fileSubtype == FileSubtype.OBF_MAP) {
 					mapFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.WIKI_MAP || fileSubtype == FileSubtype.TRAVEL) {
+					wikiFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.SRTM_MAP || fileSubtype == FileSubtype.TERRAIN_DATA) {
+					terrainFilesList.add(file);
+//				} else if (fileSubtype == FileSubtype.TILES_MAP) { TODO it seems like we don't need this, because we already have: tileSources.add((ITileSource) object)
+//					return MAP_SOURCES;
+				} else if (fileSubtype == FileSubtype.ROAD_MAP) {
+					roadsOnlyFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.NAUTICAL_DEPTH) {
+					nauticalFilesList.add(file);
 				} else if (fileSubtype == FileSubtype.TTS_VOICE) {
 					ttsVoiceFilesList.add(file);
 				} else if (fileSubtype == FileSubtype.VOICE) {
@@ -293,6 +307,22 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!mapFilesList.isEmpty()) {
 			duplicates.add(getString(R.string.shared_string_maps));
 			duplicates.addAll(mapFilesList);
+		}
+		if (!wikiFilesList.isEmpty()) { // TODO may be we don't need such a detailed categorization here
+			duplicates.add(getString(R.string.wikipedia_and_travel_maps));
+			duplicates.addAll(wikiFilesList);
+		}
+		if (!terrainFilesList.isEmpty()) { // TODO may be we don't need such a detailed categorization here
+			duplicates.add(getString(R.string.terrain_maps));
+			duplicates.addAll(terrainFilesList);
+		}
+		if (!roadsOnlyFilesList.isEmpty()) { // TODO may be we don't need such a detailed categorization here
+			duplicates.add(getString(R.string.download_roads_only_maps));
+			duplicates.addAll(roadsOnlyFilesList);
+		}
+		if (!nauticalFilesList.isEmpty()) { // TODO may be we don't need such a detailed categorization here
+			duplicates.add(getString(R.string.nautical_maps));
+			duplicates.addAll(nauticalFilesList);
 		}
 		if (!ttsVoiceFilesList.isEmpty()) {
 			duplicates.add(getString(R.string.local_indexes_cat_tts));
