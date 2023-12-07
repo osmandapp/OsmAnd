@@ -844,6 +844,14 @@ public class AndroidUtils {
 		decorView.setSystemUiVisibility(uiOptions);
 	}
 
+	@NonNull
+	public static Rect getViewBoundOnScreen(@NonNull View view) {
+		int[] pixel = getLocationOnScreen(view);
+		int left = pixel[0];
+		int top = pixel[1];
+		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
+	}
+
 	public static int[] getCenterViewCoordinates(View view) {
 		int[] coordinates = new int[2];
 		view.getLocationOnScreen(coordinates);

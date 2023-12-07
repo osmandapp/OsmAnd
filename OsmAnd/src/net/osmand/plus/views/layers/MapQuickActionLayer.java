@@ -1,11 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
-import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
-import static net.osmand.plus.utils.AndroidUtils.getCenterViewCoordinates;
-import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
-import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -21,11 +15,6 @@ import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.util.Pair;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -48,6 +37,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListene
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -55,6 +45,17 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.util.Pair;
+
+import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
+import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
+import static net.osmand.plus.utils.AndroidUtils.getCenterViewCoordinates;
+import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
+import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 /**
  * Created by okorsun on 23.12.16.
@@ -71,7 +72,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private ImageButton quickActionButton;
     private QuickActionsWidget quickActionsWidget;
 
-    private int previousMapPosition;
+    private MapPosition previousMapPosition;
 
     private boolean inMovingMarkerMode;
     private boolean isLayerOn;
@@ -296,7 +297,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         if (mapActivity == null) {
             return;
         }
-        previousMapPosition = view.getMapPosition();
+        previousMapPosition = mapActivity.getMapPositionManager().getNavigationMapPosition();
         MapContextMenu menu = mapActivity.getContextMenu();
 
         LatLon ll = menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon())
@@ -307,7 +308,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         menu.close();
 
         RotatedTileBox rb = new RotatedTileBox(tileBox);
-        if (!isFollowPoint && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT)
+        if (!isFollowPoint && previousMapPosition != MapPosition.BOTTOM)
             rb.setCenterLocation(0.5f, 0.3f);
 
         rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
@@ -336,7 +337,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return;
         }
         RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-        if (!isFollowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT) {
+        if (!isFollowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != MapPosition.BOTTOM) {
             RotatedTileBox rb = tileBox.copy();
             rb.setCenterLocation(0.5f, 0.5f);
             LatLon ll = tileBox.getCenterLatLon();
@@ -366,14 +367,15 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
     private void updateMapDisplayPosition() {
         MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-        manager.updateProviders(this, inMovingMarkerMode);
+        manager.updateMapPositionProviders(this, inMovingMarkerMode);
         manager.updateMapDisplayPosition();
     }
 
-    @Nullable @Override
-    public Integer getMapDisplayPosition() {
+    @Nullable
+    @Override
+    public MapPosition getMapDisplayPosition() {
         if (inMovingMarkerMode) {
-            return OsmandSettings.MIDDLE_BOTTOM_CONSTANT;
+            return MapPosition.MIDDLE_BOTTOM;
         }
         return null;
     }

@@ -251,9 +251,7 @@ public class TrackDetailsMenu {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			if (!portrait) {
-				mapActivity.getMapView().setMapPositionX(1);
-			} else {
+			if (portrait) {
 				TrackDetailsToolbarController toolbarController = new TrackDetailsToolbarController();
 				this.toolbarController = toolbarController;
 				if (gpxItem.group != null) {
@@ -295,7 +293,6 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
-			mapActivity.getMapView().setMapPositionX(0);
 			mapActivity.refreshMap();
 		}
 		if (hidding) {

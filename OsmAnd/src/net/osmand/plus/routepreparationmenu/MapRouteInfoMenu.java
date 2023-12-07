@@ -2375,7 +2375,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (fragment instanceof MapRouteInfoMenuFragment) {
 				cancelButtonsAnimations();
-				mapActivity.getMapView().setMapPositionX(0);
+				mapActivity.getMapPositionManager().setMapPositionShiftedX(false);
 				mapActivity.refreshMap();
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {
@@ -2447,7 +2447,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
 				initialMenuState = MenuState.FULL_SCREEN;
-				mapActivity.getMapView().setMapPositionX(1);
+				mapActivity.getMapPositionManager().setMapPositionShiftedX(true);
 				refreshMap = true;
 			}
 
@@ -2598,7 +2598,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						case ROUTE_DETAILS:
 							mapActivity.getWidgetsVisibilityHelper().showWidgets();
 							if (!portraitMode) {
-								mapActivity.getMapView().setMapPositionX(0);
+								mapActivity.getMapPositionManager().setMapPositionShiftedX(false);
 							}
 							break;
 						default:

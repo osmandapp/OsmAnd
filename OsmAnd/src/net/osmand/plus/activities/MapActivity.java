@@ -74,6 +74,7 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.MapAppInitializeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.helpers.MapPermissionsResultCallback;
 import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
@@ -1162,6 +1163,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return app.getMapViewTrackingUtilities();
+	}
+
+	public MapDisplayPositionManager getMapPositionManager() {
+		return app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 	}
 
 	public MapActivityActions getMapActions() {
