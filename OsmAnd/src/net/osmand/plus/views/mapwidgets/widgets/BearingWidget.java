@@ -99,7 +99,7 @@ public class BearingWidget extends SimpleWidget {
 
 		if (destLatLon != null) {
 			Location destLocation = new Location("", destLatLon.getLatitude(), destLatLon.getLongitude());
-			destLocation.setBearing(fromLocation.bearingTo(destLocation));
+			destLocation.setBearing(fromLocation.bearingTo(destLocation), destLatLon.getLatitude(), destLatLon.getLongitude());
 			return destLocation;
 		}
 

@@ -116,7 +116,7 @@ public class RoutingHelperUtils {
 		double projectDist = helper.getMaxAllowedProjectDist(loc);
 		if ((!loc.hasBearing() || Math.abs(loc.getBearing() - bearingTo) < MAX_BEARING_DEVIATION) &&
 				loc.distanceTo(locationProjection) < projectDist) {
-			locationProjection.setBearing(bearingTo);
+			locationProjection.setBearing(bearingTo, to.getLatitude(), to.getLongitude());
 		}
 	}
 

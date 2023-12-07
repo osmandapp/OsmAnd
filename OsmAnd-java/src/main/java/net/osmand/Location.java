@@ -33,6 +33,9 @@ public class Location {
     private long mTime = 0;
     private double mLatitude = 0.0;
     private double mLongitude = 0.0;
+    private boolean mHasDestination = false;
+    private double mDestinationLatitude = 0.0;
+    private double mDestinationLongitude = 0.0;
     private boolean mHasAltitude = false;
     private double mAltitude = 0.0f;
     private boolean mHasSpeed = false;
@@ -89,6 +92,9 @@ public class Location {
         mTime = l.mTime;
         mLatitude = l.mLatitude;
         mLongitude = l.mLongitude;
+        mHasDestination = l.mHasDestination;
+        mDestinationLatitude = l.mDestinationLatitude;
+        mDestinationLongitude = l.mDestinationLongitude;
         mHasAltitude = l.mHasAltitude;
         mAltitude = l.mAltitude;
         mHasSpeed = l.mHasSpeed;
@@ -109,6 +115,9 @@ public class Location {
         mTime = 0;
         mLatitude = 0;
         mLongitude = 0;
+        mHasDestination = false;
+        mDestinationLatitude = 0;
+        mDestinationLongitude = 0;
         mHasAltitude = false;
         mAltitude = 0;
         mHasSpeed = false;
@@ -338,11 +347,19 @@ public class Location {
         return mLatitude;
     }
 
+    public double getSrcLatitude() {
+        return mLat1;
+    }
+
     /**
      * Sets the latitude of this fix.
      */
     public void setLatitude(double latitude) {
         mLatitude = latitude;
+    }
+
+    public void setSrcLatitude(double latitude) {
+        mLat1 = latitude;
     }
 
     /**
@@ -352,11 +369,49 @@ public class Location {
         return mLongitude;
     }
 
+    public double getSrcLongitude() {
+        return mLon1;
+    }
+
     /**
      * Sets the longitude of this fix.
      */
     public void setLongitude(double longitude) {
         mLongitude = longitude;
+    }
+
+    public void setSrcLongitude(double longitude) {
+        mLon1 = longitude;
+    }
+
+    /**
+     * Returns true if the destination which corresponds to the bearing is available.
+     */
+    public boolean hasDestination() {
+        return mHasDestination;
+    }
+
+    /**
+     * Returns the latitude of destination.
+     */
+    public double getDestinationLatitude() {
+        return mDestinationLatitude;
+    }
+
+    /**
+     * Returns the longitude of destination.
+     */
+    public double getDestinationLongitude() {
+        return mDestinationLongitude;
+    }
+
+    /**
+     * Sets the destination point.
+     */
+    public void setDestination(double latitude, double longitude) {
+        mDestinationLatitude = latitude;
+        mDestinationLongitude = longitude;
+        mHasDestination = true;
     }
 
     /**
@@ -456,6 +511,15 @@ public class Location {
         }
         mBearing = bearing;
         mHasBearing = true;
+        mHasDestination = false;
+    }
+
+    /**
+     * Sets the bearing and the corresponding destination.
+     */
+    public void setBearing(float bearing, double latitude, double longitude) {
+        setBearing(bearing);
+        setDestination(latitude, longitude);
     }
 
     /**
@@ -465,6 +529,7 @@ public class Location {
     public void removeBearing() {
         mBearing = 0.0f;
         mHasBearing = false;
+        mHasDestination = false;
     }
 
     /**
@@ -541,6 +606,9 @@ public class Location {
             ",mTime=" + mTime +
             ",mLatitude=" + mLatitude +
             ",mLongitude=" + mLongitude +
+            ",mHasDestination=" + mHasDestination +
+            ",mDestinationLatitude=" + mDestinationLatitude +
+            ",mDestinationLongitude=" + mDestinationLongitude +
             ",mHasAltitude=" + mHasAltitude +
             ",mAltitude=" + mAltitude +
             ",mHasSpeed=" + mHasSpeed +

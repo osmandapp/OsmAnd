@@ -147,7 +147,7 @@ class LocationSimulationThread extends Thread {
 		}
 		if (previous != null && triple.getFirst()
 				&& previous.distanceTo(current) > 3 && (!realistic || speed >= 1)) {
-			current.setBearing(previous.bearingTo(current));
+			current.setBearing(previous.bearingTo(current), current.getLatitude(), current.getLongitude());
 		}
 	}
 
