@@ -209,24 +209,55 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		long time = System.nanoTime();
 		System.out.println("Finding first / last segments...");
 		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
-		RouteSegmentPoint startP = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
-		RouteSegmentPoint endP = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
-		
-		Double prev = hctx.rctx.config.initialDirection;
-		hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
-		hctx.boundaries.put(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentEnd(), endP.getSegmentStart()), null);
-		hctx.boundaries.put(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentStart(), endP.getSegmentEnd()), null);
-//		BinaryRoutePlanner.TRACE_ROUTING = true;
-		initStart(hctx, startP, false, stPoints);
+		int startReiterate = -1, endReiterate = -1;
+		boolean found = false;
+		RouteSegmentPoint startPnt = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
+		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
+		List<RouteSegmentPoint> stOthers = startPnt.others, endOthers = endPnt.others;
+		while (!found) {
+			RouteSegmentPoint startP = startPnt;
+			if (startReiterate >= 0) {
+				if (stOthers != null && startReiterate < stOthers.size()) {
+					startP = stOthers.get(startReiterate);
+				} else {
+					break;
+				}
+			}
+			RouteSegmentPoint endP = endPnt;
+			if (endReiterate >= 0) {
+				if (endOthers != null && endReiterate < endOthers.size()) {
+					endP = endOthers.get(endReiterate);
+				} else {
+					break;
+				}
+			}
+			Double prev = hctx.rctx.config.initialDirection;
+			hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
+			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
+			hctx.boundaries.put(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()), null);
+			initStart(hctx, startP, false, stPoints);
+			if (stPoints.isEmpty()) {
+				System.out.println("Reiterate with next start point: " + startP);
+				startReiterate++;
+				found = false;
+				continue;
+			}
 
-//		BinaryRoutePlanner.TRACE_ROUTING = false;
-		hctx.rctx.config.initialDirection = prev;
-		hctx.boundaries.remove(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentEnd(), endP.getSegmentStart()));
-		hctx.boundaries.remove(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentStart(), endP.getSegmentEnd()));
-		if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {
-			endPoints.put(PNT_SHORT_ROUTE_START_END, stPoints.get(PNT_SHORT_ROUTE_START_END));
+			hctx.rctx.config.initialDirection = prev;
+			hctx.boundaries.remove(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()));
+			hctx.boundaries.remove(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()));
+			if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {
+				endPoints.put(PNT_SHORT_ROUTE_START_END, stPoints.get(PNT_SHORT_ROUTE_START_END));
+			}
+			initStart(hctx, endP, true, endPoints);
+			if (stPoints.isEmpty()) {
+				System.out.println("Reiterate with next end point: " + endP);
+				endReiterate++;
+				found = false;
+				continue;
+			}
+			found = true;
 		}
-		initStart(hctx, endP, true, endPoints);
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
 		System.out.printf("Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
@@ -1066,6 +1097,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	static long calculateRoutePointInternalId(long id, int pntId, int nextPntId) {
 		int positive = nextPntId - pntId;
 		return (id << ROUTE_POINTS) + (pntId << 1) + (positive > 0 ? 1 : 0);
+	}
+	
+	static long calcRPId(RouteSegmentPoint p, int pntId, int nextPntId) {
+		return calculateRoutePointInternalId(p.getRoad().getId(), pntId, nextPntId);
 	}
 
 	static long calcUniDirRoutePointInternalId(RouteSegment segm) {
