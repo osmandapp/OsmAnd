@@ -419,6 +419,17 @@ public class HHRouteDataStructure {
 			}
 			return d;
 		}
+
+		public void append(HHNetworkRouteRes res) {
+			if (res == null || res.error != null) {
+				this.error = "Can't build a route with intermediate point";
+			} else {
+				detailed.addAll(res.detailed);
+				segments.addAll(res.segments);
+				altRoutes.clear();
+				uniquePoints.clear();
+			}
+		}
 		
 	}
 	

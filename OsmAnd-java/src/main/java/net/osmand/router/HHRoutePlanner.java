@@ -110,7 +110,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return router.buildRoutingContext(config, null, new BinaryMapIndexReader[0], RouteCalculationMode.NORMAL);
 	}
 	
-	private HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
+	HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
@@ -212,6 +212,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteSegmentPoint startP = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
 		RouteSegmentPoint endP = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
 		
+		Double prev = hctx.rctx.config.initialDirection;
 		hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
 		hctx.boundaries.put(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentEnd(), endP.getSegmentStart()), null);
 		hctx.boundaries.put(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentStart(), endP.getSegmentEnd()), null);
@@ -219,7 +220,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		initStart(hctx, startP, false, stPoints);
 
 //		BinaryRoutePlanner.TRACE_ROUTING = false;
-		hctx.rctx.config.initialDirection = null;
+		hctx.rctx.config.initialDirection = prev;
 		hctx.boundaries.remove(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentEnd(), endP.getSegmentStart()));
 		hctx.boundaries.remove(calculateRoutePointInternalId(endP.getRoad().getId(), endP.getSegmentStart(), endP.getSegmentEnd()));
 		if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {

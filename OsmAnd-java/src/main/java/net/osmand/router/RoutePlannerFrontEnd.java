@@ -410,7 +410,6 @@ public class RoutePlannerFrontEnd {
 			start.stepBackRoute.add(removed);
 		}
 		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
-		boolean pos = res.getStartPointIndex() < res.getEndPointIndex();
 		int end = res.getEndPointIndex();
 		next.pnt = new RouteSegmentPoint(res.getObject(), end, end, 0);
 		return true;
@@ -774,35 +773,34 @@ public class RoutePlannerFrontEnd {
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
 		List<LatLon> targets = new ArrayList<>();
-		targets.add(end);
 		if (!intermediatesEmpty) {
 			targets.addAll(intermediates);
 		}
+		targets.add(end);
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if ((USE_HH_ROUTING || USE_ONLY_HH_ROUTING) && intermediatesEmpty) {
+		if (USE_HH_ROUTING || USE_ONLY_HH_ROUTING) {
 			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
-			NativeLibrary nativeLib = ctx.nativeLib;
-			ctx.nativeLib = null; // keep null to interfere with detailed 
-			try {
-				HHNetworkRouteRes res = routePlanner.runRouting(start, end, HH_ROUTING_CONFIG);
-				if (res != null && res.error == null) {
-					makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
-					return res;
+			HHNetworkRouteRes r = null;
+			Double dir = ctx.config.initialDirection ;
+			for (int i = 0; i < targets.size(); i++) {
+				HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
+						targets.get(i), dir);
+				if (r == null) {
+					r = res;
+				} else {
+					r.append(res);
 				}
-				if (USE_ONLY_HH_ROUTING) {
-					return res;
+				if (r == null || !r.isCorrect()) {
+					break;
 				}
-			} catch (SQLException e) {
-				throw new IOException(e.getMessage(), e);
-			} catch (IOException | RuntimeException e) {
-				e.printStackTrace();
-				if (USE_ONLY_HH_ROUTING) {
-					return new HHNetworkRouteRes("Error during routing calculation : " + e.getMessage());
+				if (r.detailed.size() > 0) {
+					dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 				}
-			} finally {
-				ctx.nativeLib = nativeLib;
+			}
+			if (r != null && r.isCorrect() || USE_ONLY_HH_ROUTING) {
+				return r;
 			}
 		}
 		
@@ -840,7 +838,6 @@ public class RoutePlannerFrontEnd {
 			res = runNativeRouting(ctx, recalculationEnd);
 			makeStartEndPointsPrecise(res, start, end, intermediates);
 		} else {
-			List<RouteSegmentResult> emptyList = new ArrayList<>();
 			int indexNotFound = 0;
 			List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
 			if (!addSegment(start, ctx, indexNotFound++, points, ctx.startTransportStop)) {
@@ -863,6 +860,31 @@ public class RoutePlannerFrontEnd {
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		RouteResultPreparation.printResults(ctx, start, end, res.detailed);
 		return res;
+	}
+
+	private HHNetworkRouteRes calculateHHRoute(HHRoutePlanner<NetworkDBPoint> routePlanner, RoutingContext ctx,
+			LatLon start, LatLon end, Double dir) throws InterruptedException, IOException {
+		NativeLibrary nativeLib = ctx.nativeLib;
+		ctx.nativeLib = null; // keep null to interfere with detailed 
+		try {
+			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(HH_ROUTING_CONFIG);
+			cfg.INITIAL_DIRECTION = dir;
+			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
+			if (res != null && res.error == null) {
+				makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
+				return res;
+			}
+		} catch (SQLException e) {
+			throw new IOException(e.getMessage(), e);
+		} catch (IOException | RuntimeException e) {
+			e.printStackTrace();
+			if (USE_ONLY_HH_ROUTING) {
+				return new HHNetworkRouteRes("Error during routing calculation : " + e.getMessage());
+			}
+		} finally {
+			ctx.nativeLib = nativeLib;
+		}
+		return null;
 	}
 
 	protected void makeStartEndPointsPrecise(RouteCalcResult res, LatLon start, LatLon end, List<LatLon> intermediates) {
