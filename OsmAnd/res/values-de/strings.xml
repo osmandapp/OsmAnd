@@ -704,7 +704,7 @@
     <string name="opening_hours">Öffnungszeiten</string>
     <string name="opening_changeset">Änderungssatz öffnen …</string>
     <string name="closing_changeset">Änderungssatz schließen …</string>
-    <string name="commiting_node">Übertrage Knoten …</string>
+    <string name="commiting_node">Knoten übertragen …</string>
     <string name="loading_poi_obj">Lade POI …</string>
     <string name="auth_failed">Autorisierung fehlgeschlagen</string>
     <string name="failed_op">fehlgeschlagen</string>
@@ -952,7 +952,7 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Topografie</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Relief-Schattierungen, und/oder Steilheitsfarben dargestellt werden.
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Höhenlinien, Reliefschattierungen, und/oder Steilheitsfarben dargestellt werden.
 \n
 \nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
 \n
@@ -1758,7 +1758,7 @@
     <string name="poi_dialog_poi_type">Art des POI</string>
     <string name="number_of_rows_in_dash">Anzahl der Zeilen in der Übersichtsseite %1$s</string>
     <string name="downloads_left_template">%1$s Downloads übrig</string>
-    <string name="downloading_number_of_files">Herunterladen von %1$d Datei…</string>
+    <string name="downloading_number_of_files">Herunterladen von %1$d Datei …</string>
     <string name="show_free_version_banner">Banner der kostenlosen Version anzeigen</string>
     <string name="activate_seamarks_plugin">Bitte die Erweiterung „Seekarte“ aktivieren</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung „Topografie“ aktivieren</string>
@@ -4078,7 +4078,7 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Umweltzonen vermeiden</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="search_more">Mehr suchen…</string>
+    <string name="search_more">Mehr suchen …</string>
     <string name="osmand_cloud_authorize_descr">Keine Daten mehr verlieren, problemlos alle Informationen sichern und wiederherstellen.</string>
     <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail-Adresse ein. Ein Bestätigungscode wird dorthin gesendet,
 \nund alle Ihre Daten werden damit verknüpft.</string>
@@ -4140,7 +4140,7 @@
     <string name="restore_from_osmand_cloud">Wiederherstellung aus der OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Wählen Sie aus, was wiederhergestellt werden soll.</string>
     <string name="restore_selected_data">Stelle ausgewählte Daten wieder her</string>
-    <string name="receiving_data_from_server">Empfange Daten vom Server…</string>
+    <string name="receiving_data_from_server">Daten vom Server werden empfangen …</string>
     <string name="restore_complete">Wiederhergestellt</string>
     <string name="backup_version_history">Versionsgeschichte</string>
     <string name="backup_storage_taken">Belegter Speicher</string>
@@ -4233,7 +4233,7 @@
     <string name="logout_from_osmand_cloud">Abmelden aus der OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Abmelden\?
 \nZum Sichern oder Wiederherstellen von Daten müssen Sie sich erneut anmelden.</string>
-    <string name="backup_deleting_all_data">Alle Daten werden gelöscht…</string>
+    <string name="backup_deleting_all_data">Alle Daten werden gelöscht …</string>
     <string name="backup_deleted_all_data">Alle Daten gelöscht.</string>
     <string name="backup_deleting_all_data_descr">Bitte warten Sie, bis OsmAnd alle Ihre Daten aus der Cloud gelöscht hat. Alle Daten auf dem Gerät bleiben unangetastet.</string>
     <string name="backup_deleted_all_data_descr">Alle Ihre Daten wurden erfolgreich aus der OsmAnd Cloud gelöscht.</string>
@@ -4256,7 +4256,7 @@
     <string name="option_available_only_in_osmand_pro">Verfügbar im Rahmen des OsmAnd Pro-Abonnements.</string>
     <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von OsmAnd Pro: Routeneinfärbung und mehr.</string>
     <string name="explore_osmnad_plans_to_find_suitable">OsmAnd-Angebote entdecken, um das Passende für Sie zu finden.</string>
-    <string name="routes_color_by_type">Routen einfärben nach…</string>
+    <string name="routes_color_by_type">Routen einfärben nach …</string>
     <string name="shared_string_relation">Relation</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Einfärbung von Routen nach ihrer individuellen lokalen Farbe (falls in OpenStreetMap vorhanden) und der Wandermarkierungen.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Einfärbung gemäß Routennetzwerk.</string>
@@ -4272,7 +4272,7 @@
     <string name="online_maps_required_descr">Leider konnte OsmAnd keine Route finden (berechnen), die zu Ihren Einstellungen passt.
 \n
 \nVielleicht sind einige Karten nicht geladen, Sie können eine Online-Überprüfung der erforderlichen Karten durchführen.</string>
-    <string name="online_maps_searching_descr">Online-Suche läuft…</string>
+    <string name="online_maps_searching_descr">Online-Suche läuft …</string>
     <string name="reset_to_original">Auf Original zurücksetzen</string>
     <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
     <string name="map_updates_for_mappers">Kartenaktualisierungen für Kartografen</string>
@@ -4357,7 +4357,7 @@
     <string name="location_access_request_result">Zugelassen: %1$s Abgelehnt: %2$s</string>
     <string name="is_disabled">%1$s ist deaktiviert</string>
     <string name="shortcut_start_recording">Aufzeichnung starten</string>
-    <string name="shortcut_navigate_to">Navigieren nach…</string>
+    <string name="shortcut_navigate_to">Navigieren nach …</string>
     <string name="shortcut_navigate_to_work">Zur „Arbeit“ navigieren</string>
     <string name="shortcut_navigate_to_home">„Nach Hause“ navigieren</string>
     <string name="android_auto_map_placeholder_title">Die Karte wird auf dem Bildschirm des Fahrzeugs angezeigt.</string>
@@ -4506,7 +4506,7 @@
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="select_suggested_points">Vorgeschlagene Punkte auswählen</string>
     <string name="selected_waypoints_descr">Ausgewählte Wegpunkte werden dem Track „%1$s“ hinzugefügt</string>
-    <string name="shared_string_reading_file">Datei wird gelesen…</string>
+    <string name="shared_string_reading_file">Datei wird gelesen …</string>
     <string name="all_groups">Alle Gruppen</string>
     <string name="list_of_groups">Gruppenliste</string>
     <string name="import_tracks">Tracks importieren</string>
@@ -4971,7 +4971,7 @@
     <string name="shared_string_expires">Abgelaufen</string>
     <string name="shared_string_purchased_on">Gekauft am</string>
     <string name="choose_what_to_sync">Wählen Sie, was synchronisiert werden soll</string>
-    <string name="cloud_sync_progress">Synchronisieren… %1$s</string>
+    <string name="cloud_sync_progress">Synchronisieren … %1$s</string>
     <string name="shared_string_unsynced">Unsynchronisiert</string>
     <string name="check_for_updates">Auf Aktualisierungen überprüfen</string>
     <string name="changes">Änderungen %1$s</string>
@@ -5001,7 +5001,7 @@
     <string name="export_to_file">In Datei exportieren</string>
     <string name="res_unknown">Unbekannt</string>
     <string name="shared_string_modified">Geändert</string>
-    <string name="checking_progress">Prüfung…</string>
+    <string name="checking_progress">Prüfung …</string>
     <string name="cloud_no_conflicts">Es gibt keine Konflikte.</string>
     <string name="cloud_all_changes_uploaded_descr">Alle auf diesem Gerät vorgenommenen Änderungen werden mit OsmAnd Cloud synchronisiert.</string>
     <string name="download_cloud_version">Cloud-Version herunterladen</string>
@@ -5256,7 +5256,7 @@
 \nBitte geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
-    <string name="terrain_category_description">Höhenlinien, graustufige Relief-Schattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
     <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
@@ -5311,7 +5311,7 @@
 \n • Höhenänderung und Neigungsauswertung überarbeitet
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Raster SQLiteDB für Relief / Hangneigung verwenden</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Raster-SQLiteDB für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gase</string>
@@ -5524,7 +5524,7 @@
     <string name="key_event_action_zoom_in">Hineinzoomen</string>
     <string name="key_event_action_change_map_orientation">Kartenorientierung ändern</string>
     <string name="press_button_to_link_with_action">Drücken Sie die Schaltfläche auf Ihrem Gerät, um sie der Aktion zuzuweisen: %1$s</string>
-    <string name="deletion_error">Löschungsfehler</string>
+    <string name="deletion_error">Löschfehler</string>
     <string name="shared_string_button">Schaltfläche</string>
     <string name="change_key_binding">Tastenbelegung ändern</string>
     <string name="key_event_action_take_media_note">Mediennotiz aufnehmen</string>
@@ -5565,10 +5565,10 @@
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
     <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion wird gelöscht und auf „Keine“ gesetzt.</string>
-    <string name="reset_key_assignments_desc">Alle Tastenzuweisungen für den ausgewählten Typ werden entfernt.</string>
+    <string name="reset_key_assignments_desc">Alle Tastenbelegungen für den ausgewählten Typ werden entfernt.</string>
     <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
-    <string name="reset_key_assignments">Tastenzuweisungen zurücksetzen</string>
+    <string name="reset_key_assignments">Tastenbelegungen zurücksetzen</string>
     <string name="rendering_attr_showToll_description">Mautbeschränkungen auf Straßen anzeigen</string>
     <string name="target_elevation">Zielhöhe</string>
     <string name="shared_string_eta">Voraussichtliche Ankunftszeit (ETA)</string>
@@ -5576,7 +5576,8 @@
     <string name="zoom_animated">Animierter Zoom</string>
     <string name="lang_zh_hans">Vereinfachtes Chinesisch</string>
     <string name="button_already_assigned_to_this_action">Diese Schaltfläche ist bereits dieser Aktion zugewiesen.</string>
-    <string name="key_assignments_already_cleared_message">Alle Tastenzuweisungen sind bereits gelöscht</string>
+    <string name="key_assignments_already_cleared_message">Alle Tastenbelegungen sind bereits gelöscht</string>
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
+    <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
 </resources>
