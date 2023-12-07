@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -38,8 +39,12 @@ public enum ExportSettingsType {
 	NAVIGATION_HISTORY(R.string.navigation_history, R.drawable.ic_action_gdirections_dark, SettingsItemType.NAVIGATION_HISTORY.name(), false),
 	CUSTOM_RENDER_STYLE(R.string.shared_string_rendering_style, R.drawable.ic_action_map_style, SettingsItemType.FILE.name(), false),
 	CUSTOM_ROUTING(R.string.shared_string_routing, R.drawable.ic_action_route_distance, SettingsItemType.FILE.name(), false),
-	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_map, SettingsItemType.MAP_SOURCES.name(), false),
-	OFFLINE_MAPS(R.string.shared_string_maps, R.drawable.ic_map, SettingsItemType.FILE.name(), false),
+	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_action_layers, SettingsItemType.MAP_SOURCES.name(), false),
+	OFFLINE_MAPS(R.string.standard_maps, R.drawable.ic_map, SettingsItemType.FILE.name(), false),
+	ROAD_MAPS(R.string.download_roads_only_maps, R.drawable.ic_map, SettingsItemType.FILE.name(), false),
+	WIKI_AND_TRAVEL(R.string.wikipedia_and_travel_maps, R.drawable.ic_action_wikipedia, SettingsItemType.FILE.name(), false),
+	TERRAIN_DATA(R.string.topography_maps, R.drawable.ic_action_terrain, SettingsItemType.FILE.name(), false),
+	DEPTH_DATA(R.string.nautical_maps, R.drawable.ic_action_anchor, SettingsItemType.FILE.name(), false),
 	TTS_VOICE(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, SettingsItemType.FILE.name(), false),
 	VOICE(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, SettingsItemType.FILE.name(), false),
 	ONLINE_ROUTING_ENGINES(R.string.online_routing_engines, R.drawable.ic_world_globe_dark, SettingsItemType.ONLINE_ROUTING_ENGINES.name(), false),
@@ -86,8 +91,28 @@ public enum ExportSettingsType {
 
 	public boolean isResourcesCategory() {
 		return this == CUSTOM_RENDER_STYLE || this == CUSTOM_ROUTING || this == MAP_SOURCES
-				|| this == OFFLINE_MAPS || this == VOICE || this == TTS_VOICE
+				|| this == OFFLINE_MAPS || this == ROAD_MAPS || this == WIKI_AND_TRAVEL
+				|| this == TERRAIN_DATA || this == DEPTH_DATA ||this == VOICE || this == TTS_VOICE
 				|| this == ONLINE_ROUTING_ENGINES || this == FAVORITES_BACKUP;
+	}
+
+	@Nullable
+	public static ExportSettingsType getExportSettingsTypeForRemoteFile(@NonNull RemoteFile remoteFile) {
+		if (remoteFile.item != null) {
+			return getExportSettingsTypeForItem(remoteFile.item);
+		}
+		for (ExportSettingsType exportType : values()) {
+			String type = remoteFile.getType();
+			if (exportType.getItemName().equals(type)) {
+				if (SettingsItemType.FILE.name().equals(type)) {
+					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
+					return getExportSettingsTypeFileSubtype(subtype);
+				} else {
+					return exportType;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -106,26 +131,6 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeForRemoteFile(@NonNull RemoteFile remoteFile) {
-		if (remoteFile.item != null) {
-			return getExportSettingsTypeForItem(remoteFile.item);
-		}
-		for (ExportSettingsType exportType : values()) {
-			String type = remoteFile.getType();
-			if (exportType.getItemName().equals(type)) {
-				if (SettingsItemType.FILE.name().equals(type)) {
-					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
-					if (subtype != null) {
-						return getExportSettingsTypeFileSubtype(subtype);
-					}
-				} else {
-					return exportType;
-				}
-			}
-		}
-		return null;
-	}
-
 	public static ExportSettingsType getExportSettingsTypeFileSubtype(@NonNull FileSubtype subtype) {
 		if (subtype == FileSubtype.RENDERING_STYLE) {
 			return CUSTOM_RENDER_STYLE;
@@ -135,8 +140,18 @@ public enum ExportSettingsType {
 			return MULTIMEDIA_NOTES;
 		} else if (subtype == FileSubtype.GPX) {
 			return TRACKS;
-		} else if (subtype.isMap()) {
+		} else if (subtype == FileSubtype.OBF_MAP) {
 			return OFFLINE_MAPS;
+		} else if (subtype == FileSubtype.WIKI_MAP || subtype == FileSubtype.TRAVEL) {
+			return WIKI_AND_TRAVEL;
+		} else if (subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TERRAIN_DATA) {
+			return TERRAIN_DATA;
+		} else if (subtype == FileSubtype.TILES_MAP) {
+			return MAP_SOURCES;
+		} else if (subtype == FileSubtype.ROAD_MAP) {
+			return ROAD_MAPS;
+		} else if (subtype == FileSubtype.NAUTICAL_DEPTH) {
+			return DEPTH_DATA;
 		} else if (subtype == FileSubtype.TTS_VOICE) {
 			return TTS_VOICE;
 		} else if (subtype == FileSubtype.VOICE) {
@@ -147,22 +162,41 @@ public enum ExportSettingsType {
 		return null;
 	}
 
-	public static List<ExportSettingsType> getEnabledTypes() {
-		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(values()));
-		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin == null) {
-			result.remove(OSM_EDITS);
-			result.remove(OSM_NOTES);
+	@Nullable
+	public static ExportSettingsType getExportSettingsTypeByLocalItemType(@NonNull LocalItemType localItemType) {
+		if (localItemType == LocalItemType.MAP_DATA) {
+			return OFFLINE_MAPS;
+		} else if (localItemType == LocalItemType.ROAD_DATA) {
+			return ROAD_MAPS;
+		} else if (localItemType == LocalItemType.WIKI_AND_TRAVEL_MAPS) {
+			return WIKI_AND_TRAVEL;
+		} else if (localItemType == LocalItemType.DEPTH_DATA) {
+			return DEPTH_DATA;
+		} else if (localItemType == LocalItemType.TERRAIN_DATA) {
+			return TERRAIN_DATA;
+		} else if (localItemType == LocalItemType.TTS_VOICE_DATA) {
+			return TTS_VOICE;
+		} else if (localItemType == LocalItemType.VOICE_DATA) {
+			return VOICE;
 		}
-		AudioVideoNotesPlugin avNotesPlugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
-		if (avNotesPlugin == null) {
-			result.remove(MULTIMEDIA_NOTES);
-		}
-		return result;
+		return null;
 	}
 
 	public static boolean isTypeEnabled(@NonNull ExportSettingsType type) {
 		return getEnabledTypes().contains(type);
+	}
+
+	@NonNull
+	public static List<ExportSettingsType> getEnabledTypes() {
+		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(values()));
+		if (!PluginsHelper.isActive(OsmEditingPlugin.class)) {
+			result.remove(OSM_EDITS);
+			result.remove(OSM_NOTES);
+		}
+		if (!PluginsHelper.isActive(AudioVideoNotesPlugin.class)) {
+			result.remove(MULTIMEDIA_NOTES);
+		}
+		return result;
 	}
 
 	public boolean isAllowedInFreeVersion() {

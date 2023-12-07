@@ -382,38 +382,22 @@ public abstract class SettingsHelper {
 		if (!iTileSources.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.MAP_SOURCES, iTileSources);
 		}
-		List<LocalItem> localItems;
-		List<LocalItemType> dataTypes = new ArrayList<>();
-		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.OFFLINE_MAPS)) {
-			dataTypes.add(LocalItemType.MAP_DATA);
-			dataTypes.add(LocalItemType.TILES_DATA);
-			dataTypes.add(LocalItemType.TERRAIN_DATA);
-			dataTypes.add(LocalItemType.WIKI_AND_TRAVEL_MAPS);
-			dataTypes.add(LocalItemType.DEPTH_DATA);
-		}
-		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.TTS_VOICE)) {
-			dataTypes.add(LocalItemType.TTS_VOICE_DATA);
-		}
-		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.VOICE)) {
-			dataTypes.add(LocalItemType.VOICE_DATA);
-		}
-		localItems = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new LocalItemType[0]));
-		List<File> files = getFilesByType(localItems, LocalItemType.MAP_DATA, LocalItemType.TILES_DATA,
-				LocalItemType.TERRAIN_DATA, LocalItemType.WIKI_AND_TRAVEL_MAPS, LocalItemType.DEPTH_DATA);
-		if (!files.isEmpty() || addEmptyItems) {
-			sortLocalFiles(files);
-			resourcesItems.put(ExportSettingsType.OFFLINE_MAPS, files);
-		}
-		files = getFilesByType(localItems, LocalItemType.TTS_VOICE_DATA);
-		if (!files.isEmpty() || addEmptyItems) {
-			resourcesItems.put(ExportSettingsType.TTS_VOICE, files);
-		}
-		files = getFilesByType(localItems, LocalItemType.VOICE_DATA);
-		if (!files.isEmpty() || addEmptyItems) {
-			resourcesItems.put(ExportSettingsType.VOICE, files);
-		}
+
+		// TODO in previous version we used only ExportSettingsType.OFFLINE_MAPS to manage
+		//  and store each type of map data, but in a new version we use individual
+		//  ExportSettingsType for each individual LocalItemType, so we should do something
+		//  to maintain AIDL settingsTypes filtering and Cloud backup in the right way.
+		collectResourcesForLocalTypes(resourcesItems, settingsTypes, addEmptyItems, Arrays.asList(
+				LocalItemType.MAP_DATA,
+				LocalItemType.WIKI_AND_TRAVEL_MAPS,
+				LocalItemType.DEPTH_DATA,
+				LocalItemType.ROAD_DATA,
+				LocalItemType.TERRAIN_DATA,
+				LocalItemType.TTS_VOICE_DATA,
+				LocalItemType.VOICE_DATA
+		));
 		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class) && offlineBackup) {
-			files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
+			List<File> files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
 			if (!files.isEmpty() || addEmptyItems) {
 				resourcesItems.put(ExportSettingsType.FAVORITES_BACKUP, files);
 			}
@@ -421,21 +405,67 @@ public abstract class SettingsHelper {
 		return resourcesItems;
 	}
 
-	@NonNull
-	private List<LocalItem> getLocalIndexData(@NonNull LocalItemType... types) {
-		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
-		List<LocalItem> items = indexHelper.getLocalIndexItems(true, false, null, types);
+	private void collectResourcesForLocalTypes(@NonNull Map<ExportSettingsType, List<?>> resources,
+	                                           @Nullable List<ExportSettingsType> settingsTypes,
+	                                           boolean addEmptyItems,
+	                                           @NonNull List<LocalItemType> localTypes) {
+		List<LocalItem> filteredLocalItems = getFilteredLocalItems(localTypes, settingsTypes);
+		for (LocalItemType localType : localTypes) {
+			List<File> files = getFilesByType(filteredLocalItems, localType);
+			if (!files.isEmpty() || addEmptyItems) {
+				if (!Algorithms.equalsToAny(localType, LocalItemType.TTS_VOICE_DATA, LocalItemType.VOICE_DATA)) {
+					sortLocalFiles(files);
+				}
+				resources.put(ExportSettingsType.getExportSettingsTypeByLocalItemType(localType), files);
+			}
+		}
+	}
 
-		String miniBaseMapName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
-		Iterator<LocalItem> iterator = items.iterator();
+	@NonNull
+	private List<LocalItem> getFilteredLocalItems(@NonNull List<LocalItemType> localTypes,
+	                                              @Nullable List<ExportSettingsType> settingsTypes) {
+		List<LocalItemType> filteredLocalTypes = getFilteredLocalTypes(localTypes, settingsTypes);
+		if (Algorithms.isEmpty(filteredLocalTypes)) {
+			return Collections.emptyList();
+		}
+		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
+		LocalItemType[] localItemTypes = localTypes.toArray(new LocalItemType[0]);
+		List<LocalItem> localIndexes = indexHelper.getLocalIndexItems(true, false, null, localItemTypes);
+		if (Algorithms.containsAny(localTypes, LocalItemType.MAP_DATA, LocalItemType.WIKI_AND_TRAVEL_MAPS)) {
+			filterDefaultLocalItems(localIndexes);
+		}
+		return localIndexes;
+	}
+
+	@NonNull
+	private List<LocalItemType> getFilteredLocalTypes(@NonNull List<LocalItemType> localTypes,
+	                                                  @Nullable List<ExportSettingsType> settingsTypes) {
+		List<LocalItemType> result = new ArrayList<>(localTypes);
+		if (settingsTypes != null) {
+			Iterator<LocalItemType> iterator = result.iterator();
+			while (iterator.hasNext()) {
+				LocalItemType type = iterator.next();
+				if (!settingsTypes.contains(ExportSettingsType.getExportSettingsTypeByLocalItemType(type))) {
+					iterator.remove();
+				}
+			}
+		}
+		return result;
+	}
+
+	private void filterDefaultLocalItems(@NonNull List<LocalItem> localIndexes) {
+		String baseMini = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
+		String defaultWikivoyage = "Default_wikivoyage" + IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
+
+		Iterator<LocalItem> iterator = localIndexes.iterator();
 		while (iterator.hasNext()) {
-			LocalItem indexInfo = iterator.next();
-			if (LocalItemType.MAP_DATA == indexInfo.getType() && miniBaseMapName.equalsIgnoreCase(indexInfo.getFileName())) {
+			LocalItem localIndex = iterator.next();
+			boolean isBaseMini = localIndex.getType() == LocalItemType.MAP_DATA && baseMini.equalsIgnoreCase(localIndex.getFileName());
+			boolean isDefaultWikivoyage = localIndex.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS && defaultWikivoyage.equalsIgnoreCase(localIndex.getFileName());
+			if (isBaseMini || isDefaultWikivoyage) {
 				iterator.remove();
 			}
 		}
-
-		return items;
 	}
 
 	@NonNull
@@ -694,6 +724,10 @@ public abstract class SettingsHelper {
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
+		List<FileSettingsItem> wikiFilesList = new ArrayList<>();
+		List<FileSettingsItem> terrainFilesList = new ArrayList<>();
+		List<FileSettingsItem> roadsOnlyFilesList = new ArrayList<>();
+		List<FileSettingsItem> nauticalFilesList = new ArrayList<>();
 		List<FileSettingsItem> tracksFilesList = new ArrayList<>();
 		List<FileSettingsItem> favouritesBackupFilesList = new ArrayList<>();
 		List<FileSettingsItem> multimediaFilesList = new ArrayList<>();
@@ -725,8 +759,18 @@ public abstract class SettingsHelper {
 						tracksFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_BACKUP) {
 						favouritesBackupFilesList.add(fileItem);
-					} else if (fileItem.getSubtype().isMap()) {
+					} else if (fileItem.getSubtype() == FileSubtype.OBF_MAP) {
 						mapFilesList.add(fileItem);
+					} else if (fileItem.getSubtype() == FileSubtype.WIKI_MAP || fileItem.getSubtype() == FileSubtype.TRAVEL) {
+						wikiFilesList.add(fileItem);
+					} else if (fileItem.getSubtype() == FileSubtype.SRTM_MAP || fileItem.getSubtype() == FileSubtype.TERRAIN_DATA) {
+						terrainFilesList.add(fileItem);
+//					} else if (subtype == FileSubtype.TILES_MAP) { // TODO seems like we don't need this, so may be we doesn't need to check TILES_MAP type in isMap method ?
+//						return MAP_SOURCES;
+					} else if (fileItem.getSubtype() == FileSubtype.ROAD_MAP) {
+						roadsOnlyFilesList.add(fileItem);
+					} else if (fileItem.getSubtype() == FileSubtype.NAUTICAL_DEPTH) {
+						nauticalFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
 						ttsVoiceFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
@@ -848,9 +892,25 @@ public abstract class SettingsHelper {
 						if (!favouritesBackupFilesList.isEmpty() || addEmptyItems) {
 							settingsToOperate.put(ExportSettingsType.FAVORITES_BACKUP, favouritesBackupFilesList);
 						}
-					} else if (fileItem.getSubtype().isMap()) {
+					} else if (fileItem.getSubtype() == FileSubtype.OBF_MAP) {
 						if (!mapFilesList.isEmpty() || addEmptyItems) {
 							settingsToOperate.put(ExportSettingsType.OFFLINE_MAPS, mapFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.WIKI_MAP || fileItem.getSubtype() == FileSubtype.TRAVEL) {
+						if (!wikiFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.WIKI_AND_TRAVEL, wikiFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.SRTM_MAP || fileItem.getSubtype() == FileSubtype.TERRAIN_DATA) {
+						if (!terrainFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.TERRAIN_DATA, terrainFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.ROAD_MAP) {
+						if (!roadsOnlyFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.ROAD_MAPS, roadsOnlyFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.NAUTICAL_DEPTH) {
+						if (!nauticalFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.DEPTH_DATA, nauticalFilesList);
 						}
 					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
 						if (!ttsVoiceFilesList.isEmpty() || addEmptyItems) {

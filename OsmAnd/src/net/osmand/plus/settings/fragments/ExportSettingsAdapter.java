@@ -106,19 +106,16 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
-		group.findViewById(R.id.check_box_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (!Algorithms.isEmpty(items.getNotEmptyTypes())) {
-					checkBox.performClick();
-					boolean selected = checkBox.getState() == CHECKED;
-					if (listener != null) {
-						listener.onCategorySelected(category, selected);
-					}
-					notifyDataSetChanged();
-				} else {
-					showNoItemsMessage();
+		group.findViewById(R.id.check_box_container).setOnClickListener(view -> {
+			if (!Algorithms.isEmpty(items.getNotEmptyTypes())) {
+				checkBox.performClick();
+				boolean selected = checkBox.getState() == CHECKED;
+				if (listener != null) {
+					listener.onCategorySelected(category, selected);
 				}
+				notifyDataSetChanged();
+			} else {
+				showNoItemsMessage();
 			}
 		});
 
@@ -168,33 +165,27 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			checkBox.setState(contains ? MISC : UNCHECKED);
 		}
-		child.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!Algorithms.isEmpty(items)) {
-					if (listener != null) {
-						listener.onTypeClicked(type);
-					}
-				} else {
-					showNoItemsMessage();
+		child.setOnClickListener(v -> {
+			if (!Algorithms.isEmpty(items)) {
+				if (listener != null) {
+					listener.onTypeClicked(type);
 				}
+			} else {
+				showNoItemsMessage();
 			}
 		});
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
-		child.findViewById(R.id.check_box_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (!Algorithms.isEmpty(items)) {
-					checkBox.performClick();
-					boolean selected = checkBox.getState() == CHECKED;
-					if (listener != null) {
-						listener.onItemsSelected(type, selected ? items : new ArrayList<>());
-					}
-					notifyDataSetChanged();
-				} else {
-					showNoItemsMessage();
+		child.findViewById(R.id.check_box_container).setOnClickListener(view -> {
+			if (!Algorithms.isEmpty(items)) {
+				checkBox.performClick();
+				boolean selected = checkBox.getState() == CHECKED;
+				if (listener != null) {
+					listener.onItemsSelected(type, selected ? items : new ArrayList<>());
 				}
+				notifyDataSetChanged();
+			} else {
+				showNoItemsMessage();
 			}
 		});
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
