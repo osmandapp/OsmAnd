@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="use_v1_auto_zoom">Discrete auto zoom (old version)</string>
     <string name="button_already_assigned_to_this_action">This button is already assigned to this action.</string>
     <string name="key_assignments_already_cleared_message">All key assignments are already cleared</string>
     <string name="add_new_button">Add a new button</string>

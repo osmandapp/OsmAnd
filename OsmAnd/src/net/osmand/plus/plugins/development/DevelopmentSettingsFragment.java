@@ -67,6 +67,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
+		setupUseV1AutoZoom();
 		setupUseHHRoutingPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
@@ -113,6 +114,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	private void setupUseHHRoutingPref() {
 		SwitchPreferenceEx preference = findPreference(settings.USE_HH_ROUTING.getId());
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupUseV1AutoZoom() {
+		SwitchPreferenceEx preference = findPreference(settings.USE_V1_AUTO_ZOOM.getId());
 		preference.setIconSpaceReserved(false);
 	}
 

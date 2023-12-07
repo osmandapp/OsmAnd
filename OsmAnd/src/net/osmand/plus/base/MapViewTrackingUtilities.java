@@ -256,7 +256,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
 
-				if (mapRenderer != null) {
+				if (mapRenderer != null && !settings.USE_V1_AUTO_ZOOM.get()) {
 					setMyLocationV2(mapView, mapRenderer, location, movingTime, rotation);
 				} else {
 					setMyLocationV1(mapView, location, movingTime, rotation, pendingRotation);
