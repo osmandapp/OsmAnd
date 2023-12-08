@@ -4047,7 +4047,7 @@
     <string name="save_as_new_track">Shrani kot novo sled</string>
     <string name="shared_string_night_map">Nočni zemljevid</string>
     <string name="details_dialog_decr">Prikaži ali skrij dodatne podrobnosti zemljevida</string>
-    <string name="shared_string_meters">metrov</string>
+    <string name="shared_string_meters">metri</string>
     <string name="speed_camera_pois">Hitrostne kamere</string>
     <string name="delete_all_actions_message_q">Nepreklicno izbrisati %d hitrih dejanj\?</string>
     <string name="shared_string_delete_all_q">Izbrisati vse\?</string>

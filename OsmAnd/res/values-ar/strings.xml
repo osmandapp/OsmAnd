@@ -48,7 +48,7 @@
     <string name="osmand_srtm_short_description_80_chars">ملحق أوسماند الإضافي لميزات توبو غير المتصلة بالإنترنت مثل خطوط الكنتور والتضاريس والانحدار</string>
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="map_widget_audionotes">الملاحظة صوتية</string>
-    <string name="srtm_plugin_name">طوبوغرافيا</string>
+    <string name="srtm_plugin_name">الخصائص الجغرافية</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
     <string name="download_srtm_maps">خرائط الخطوط الكنتورية</string>
@@ -1900,7 +1900,7 @@
     <string name="fast_route_mode_descr">تفعيل لحساب الطريق الأسرع أو تعطيل لحساب مسار أقل استهلاكا للوقود.</string>
     <string name="continuous_rendering">أداء مستمر</string>
     <string name="continuous_rendering_descr">عرض أداء مستمر بدلا من صورة في المرة الواحدة.</string>
-    <string name="rendering_exception">حدث خطأ أثناء تقديم المساحة المحددة.</string>
+    <string name="rendering_exception">لا يمكن رسم المنطقة المختارة.</string>
     <string name="renderer_load_sucess">تم تحميل العارض بنجاح</string>
     <string name="renderer_load_exception">حدث استثناء: لم يتم تحميل العارض.</string>
     <string name="renderers">عارض فيكتور</string>
@@ -5643,4 +5643,8 @@
     <string name="lang_zh_hant">الصينية التقليدية</string>
     <string name="zoom_non_animated">تكبير دون حركة</string>
     <string name="zoom_animated">تكبير متحرك</string>
+    <string name="button_already_assigned_to_this_action">لقد تم بالفعل تعيين هذا الزر لهذا الإجراء.</string>
+    <string name="key_assignments_already_cleared_message">تم مسح كافة التعيينات الرئيسية بالفعل</string>
+    <string name="use_v1_auto_zoom">التكبير التلقائي المنفصل (الإصدار القديم)</string>
+    <string name="add_new_button">أضف زر جديد</string>
 </resources>

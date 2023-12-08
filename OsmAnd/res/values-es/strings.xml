@@ -5124,7 +5124,7 @@
     <string name="external_device_characteristic_arterial_pressure">Presión arterial</string>
     <string name="external_device_characteristic_cuff_pressure">Presión del brazalete</string>
     <string name="external_device_characteristic_pulse_rate">Frecuencia cardíaca</string>
-    <string name="external_device_characteristic_stride_length">Longitud de los pasos</string>
+    <string name="external_device_characteristic_stride_length">Longitud del paso</string>
     <string name="external_device_characteristic_temperature">Temperatura</string>
     <string name="external_device_details_information">Información</string>
     <string name="external_device_details_received_data">Datos recibidos</string>
@@ -5214,7 +5214,7 @@
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
     <string name="delete_folder_question">¿Borrar la carpeta\?</string>
     <string name="there_are_no_connected_sensors_of_this_type">No hay ningún sensor conectado de este tipo</string>
-    <string name="write_data_from_sensor_to_track">Agrega los datos de los sensores externos a GPX mientras grabas un viaje.</string>
+    <string name="write_data_from_sensor_to_track">Escribe los datos de los sensores externos a GPX durante la grabación del viaje.</string>
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="external_sensors_not_found">No se encuentran los sensores</string>
     <string name="external_sensors_source_of_data">Origen de los datos</string>
@@ -5576,4 +5576,5 @@
     <string name="button_already_assigned_to_this_action">Este botón ya está asignado a esta acción.</string>
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de las teclas ya están borradas</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
+    <string name="use_v1_auto_zoom">Zoom automático discreto (versión antigua)</string>
 </resources>

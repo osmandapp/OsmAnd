@@ -5591,4 +5591,5 @@
     <string name="button_already_assigned_to_this_action">Este botón ya se encuentra asignado a esta acción.</string>
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
+    <string name="use_v1_auto_zoom">Zum automático discreto (versión antigua)</string>
 </resources>

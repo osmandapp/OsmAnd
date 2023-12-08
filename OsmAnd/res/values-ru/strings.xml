@@ -5551,4 +5551,11 @@
     </plurals>
     <string name="map_widget_glide_average_desc">Показывать средний коэффициент планирования для заданного интервала.</string>
     <string name="map_widget_glide_target_desc">Показывать средний коэффициент планирования для достижения целевой точки.</string>
+    <string name="lang_zh_hans">Китайский упрощённый</string>
+    <string name="button_already_assigned_to_this_action">Эта кнопка уже назначена на это действие.</string>
+    <string name="zoom_non_animated">Приближение без анимации</string>
+    <string name="key_assignments_already_cleared_message">Все назначения кнопок уже удалены</string>
+    <string name="lang_zh_hant">Китайский традиционный</string>
+    <string name="zoom_animated">Приближение с анимацией</string>
+    <string name="add_new_button">Добавить новую кнопку</string>
 </resources>
