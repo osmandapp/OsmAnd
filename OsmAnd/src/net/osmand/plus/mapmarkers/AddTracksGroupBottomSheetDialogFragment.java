@@ -94,7 +94,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	@Override
 	protected void onItemClick(int position) {
 		GpxDataItem dataItem = gpxList.get(position - 1);
-		GPXTrackAnalysis analysis = dataItem.getGpxData().getAnalysis();
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null && analysis.wptCategoryNames != null && analysis.wptCategoryNames.size() > 1) {
 			Bundle args = new Bundle();
 			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().getAbsolutePath());
@@ -123,7 +123,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 
 	private void populateList(GpxDataItem item) {
 		if (item != null) {
-			GPXTrackAnalysis analysis = item.getGpxData().getAnalysis();
+			GPXTrackAnalysis analysis = item.getAnalysis();
 			if (analysis != null && analysis.wptPoints > 0) {
 				int index = gpxList.indexOf(item);
 				if (index != -1) {

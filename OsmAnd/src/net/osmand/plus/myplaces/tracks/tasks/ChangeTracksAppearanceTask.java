@@ -1,5 +1,13 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -57,15 +65,14 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	}
 
 	private void updateTrackAppearance(@NonNull GpxDataItem item) {
-		int color = trackDrawInfo.getColor();
-		String width = trackDrawInfo.getWidth();
-		boolean showArrows = trackDrawInfo.isShowArrows();
-		boolean showStartFinish = trackDrawInfo.isShowStartFinish();
-		int splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType();
-		double splitInterval = trackDrawInfo.getSplitInterval();
-		String coloringType = trackDrawInfo.getColoringTypeName();
-
-		gpxDbHelper.updateAppearance(item, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
+		item.setParameter(COLOR, trackDrawInfo.getColor());
+		item.setParameter(WIDTH, trackDrawInfo.getWidth());
+		item.setParameter(SHOW_ARROWS, trackDrawInfo.isShowArrows());
+		item.setParameter(SHOW_START_FINISH, trackDrawInfo.isShowStartFinish());
+		item.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType());
+		item.setParameter(SPLIT_INTERVAL, trackDrawInfo.getSplitInterval());
+		item.setParameter(COLORING_TYPE, trackDrawInfo.getColoringTypeName());
+		app.getGpxDbHelper().updateDataItem(item);
 
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
 		if (selectedGpxFile != null) {

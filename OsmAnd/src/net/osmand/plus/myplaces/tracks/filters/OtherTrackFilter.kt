@@ -35,7 +35,7 @@ class OtherTrackFilter(val app: OsmandApplication, filterChangedListener: Filter
 			}
 		}
 		if (hasWaypoints) {
-			val wptPointsCount = trackItem.dataItem?.gpxData?.analysis?.wptPoints ?: 0
+			val wptPointsCount = trackItem.dataItem?.analysis?.wptPoints ?: 0
 			if (wptPointsCount == 0) {
 				return false
 			}

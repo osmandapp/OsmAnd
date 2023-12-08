@@ -15,7 +15,7 @@ class DurationTrackFilter(
 	override val unitResId = R.string.shared_string_minute_lowercase
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val duration = trackItem.dataItem?.gpxData?.analysis?.timeSpan
+		val duration = trackItem.dataItem?.analysis?.timeSpan
 		if (duration == null || (duration == 0L)) {
 			return false
 		}

@@ -69,7 +69,7 @@ public class TrackEditCard extends MapBaseCard {
 		if (file != null) {
 			GpxDataItem dataItem = getDataItem(gpxInfo);
 			if (dataItem != null) {
-				analysis = dataItem.getGpxData().getAnalysis();
+				analysis = dataItem.getAnalysis();
 			}
 		} else {
 			analysis = gpxFile.getAnalysis(0);

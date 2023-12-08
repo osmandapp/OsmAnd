@@ -3,6 +3,14 @@ package net.osmand.plus.track;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.os.Bundle;
 
@@ -16,7 +24,6 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -118,28 +125,27 @@ public class TrackDrawInfo {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		GpxData gpxData = dataItem.getGpxData();
-		width = gpxData.getWidth();
+		width = dataItem.getParameter(WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = gpxData.getColor();
+		color = dataItem.getParameter(COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getColoringType());
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getColoringType());
-		splitType = gpxData.getSplitType();
-		splitInterval = gpxData.getSplitInterval();
-		joinSegments = gpxData.isJoinSegments();
-		showArrows = gpxData.isShowArrows();
-		showStartFinish = gpxData.isShowStartFinish();
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getParameter(COLORING_TYPE));
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
+		splitType = dataItem.getParameter(SPLIT_TYPE);
+		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
+		joinSegments = dataItem.getParameter(JOIN_SEGMENTS);
+		showArrows = dataItem.getParameter(SHOW_ARROWS);
+		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
 	}
 
 	@Nullable

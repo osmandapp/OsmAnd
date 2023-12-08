@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.tracks;
 
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -203,7 +206,7 @@ public class TrackBitmapDrawer {
 						sf = new SelectedGpxFile();
 						GpxDataItem gpxDataItem = getGpxDataItem();
 						if (gpxDataItem != null) {
-							sf.setJoinSegments(gpxDataItem.getGpxData().isJoinSegments());
+							sf.setJoinSegments(gpxDataItem.getParameter(JOIN_SEGMENTS));
 						}
 					}
 					sf.setGpxFile(gpxFile, app);
@@ -248,7 +251,7 @@ public class TrackBitmapDrawer {
 	}
 
 	private int getTrackColor(@NonNull SelectedGpxFile selectedGpxFile, @NonNull TrkSegment segment, @Nullable GpxDataItem dataItem) {
-		int color = dataItem != null ? dataItem.getGpxData().getColor() : 0;
+		int color = dataItem != null ? dataItem.getParameter(COLOR) : 0;
 		if (selectedGpxFile.isShowCurrentTrack()) {
 			color = currentTrackColor;
 		}

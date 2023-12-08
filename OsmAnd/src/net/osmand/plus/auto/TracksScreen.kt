@@ -26,6 +26,7 @@ import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
 import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
+import net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
@@ -148,11 +149,11 @@ class TracksScreen(
 			var description = ""
 			var dist = 0f
 			track.dataItem?.let { dataItem ->
-				description = dataItem.gpxData.nearestCityName ?: ""
-				dist = if (dataItem.gpxData.analysis == null || dataItem.gpxData.analysis?.latLonStart == null) {
+				description = dataItem.getParameter(NEAREST_CITY_NAME) ?: ""
+				dist = if (dataItem.analysis == null || dataItem.analysis?.latLonStart == null) {
 					0f
 				} else {
-					MapUtils.getDistance(latLon, dataItem.gpxData.analysis?.latLonStart).toFloat()
+					MapUtils.getDistance(latLon, dataItem.analysis?.latLonStart).toFloat()
 				}
 			}
 			val address =

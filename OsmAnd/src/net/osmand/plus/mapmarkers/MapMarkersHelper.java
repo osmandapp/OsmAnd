@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_AS_MARKERS;
 
 import android.util.Pair;
 
@@ -8,22 +9,23 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -360,11 +362,12 @@ public class MapMarkersHelper {
 		saveGroups(false);
 	}
 
-	private void updateGpxShowAsMarkers(File file) {
-		GpxDataItem dataItem = ctx.getGpxDbHelper().getItem(file);
+	private void updateGpxShowAsMarkers(@NonNull File file) {
+		GpxDbHelper gpxDbHelper = ctx.getGpxDbHelper();
+		GpxDataItem dataItem = gpxDbHelper.getItem(file);
 		if (dataItem != null) {
-			ctx.getGpxDbHelper().updateShowAsMarkers(dataItem, true);
-			dataItem.getGpxData().setShowAsMarkers(true);
+			dataItem.setParameter(SHOW_AS_MARKERS, true);
+			gpxDbHelper.updateDataItem(dataItem);
 		}
 	}
 
@@ -787,16 +790,16 @@ public class MapMarkersHelper {
 	}
 
 	public void addMapMarker(@NonNull LatLon point,
-							 @Nullable PointDescription historyName,
-							 @Nullable String mapObjectName) {
+	                         @Nullable PointDescription historyName,
+	                         @Nullable String mapObjectName) {
 		addMapMarkers(Collections.singletonList(point),
 				Collections.singletonList(historyName),
 				Collections.singletonList(mapObjectName));
 	}
 
 	public void addMapMarkers(@NonNull List<LatLon> points,
-							  @NonNull List<PointDescription> historyNames,
-							  @Nullable List<String> mapObjNames) {
+	                          @NonNull List<PointDescription> historyNames,
+	                          @Nullable List<String> mapObjNames) {
 		if (points.size() > 0) {
 			ctx.getSettings().SHOW_MAP_MARKERS.set(true);
 			int colorIndex = -1;

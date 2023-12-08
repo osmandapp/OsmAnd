@@ -9,6 +9,7 @@ import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITU
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -198,8 +199,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			withoutGaps = !app.getSavingTrackHelper().getCurrentTrack().isJoinSegments() && gpxFile != null
 					&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
 		} else if (gpxItem != null) {
-			GpxDataItem gpxDataItem = displayHelper.getGpxDataItem();
-			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.getGpxData().isJoinSegments();
+			GpxDataItem item = displayHelper.getGpxDataItem();
+			boolean joinSegments = item != null ? item.getParameter(JOIN_SEGMENTS) : false;
+			withoutGaps = gpxItem.isGeneralTrack() && joinSegments;
 		}
 		if (chart != null && analysis != null) {
 			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);

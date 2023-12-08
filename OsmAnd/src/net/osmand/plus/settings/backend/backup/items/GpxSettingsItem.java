@@ -1,5 +1,13 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -113,10 +121,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
-		app.getGpxDbHelper().updateAppearance(dataItem, appearanceInfo.color, appearanceInfo.width,
-				appearanceInfo.showArrows, appearanceInfo.showStartFinish, splitType.getType(),
-				appearanceInfo.splitInterval, appearanceInfo.coloringType);
+		dataItem.setParameter(COLOR, appearanceInfo.color);
+		dataItem.setParameter(WIDTH, appearanceInfo.width);
+		dataItem.setParameter(SHOW_ARROWS, appearanceInfo.showArrows);
+		dataItem.setParameter(SHOW_START_FINISH, appearanceInfo.showStartFinish);
+		dataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType());
+		dataItem.setParameter(SPLIT_INTERVAL, appearanceInfo.splitInterval);
+		dataItem.setParameter(COLORING_TYPE, appearanceInfo.coloringType);
+		app.getGpxDbHelper().updateDataItem(dataItem);
 	}
 
 	private void createGpxAppearanceInfo() {

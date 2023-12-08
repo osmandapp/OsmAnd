@@ -16,7 +16,7 @@ class DownhillTrackFilter(
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		if (isEnabled()) {
-			val elevation = trackItem.dataItem?.gpxData?.analysis?.diffElevationDown
+			val elevation = trackItem.dataItem?.analysis?.diffElevationDown
 			return if (elevation == null)
 				false
 			else
