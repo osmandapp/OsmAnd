@@ -347,19 +347,11 @@ public class Location {
         return mLatitude;
     }
 
-    public double getSrcLatitude() {
-        return mLat1;
-    }
-
     /**
      * Sets the latitude of this fix.
      */
     public void setLatitude(double latitude) {
         mLatitude = latitude;
-    }
-
-    public void setSrcLatitude(double latitude) {
-        mLat1 = latitude;
     }
 
     /**
@@ -369,19 +361,11 @@ public class Location {
         return mLongitude;
     }
 
-    public double getSrcLongitude() {
-        return mLon1;
-    }
-
     /**
      * Sets the longitude of this fix.
      */
     public void setLongitude(double longitude) {
         mLongitude = longitude;
-    }
-
-    public void setSrcLongitude(double longitude) {
-        mLon1 = longitude;
     }
 
     /**
