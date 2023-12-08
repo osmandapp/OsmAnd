@@ -3790,8 +3790,8 @@
     <string name="poi_drinking_water_refill_yes">Sim;Reabastecemento de água potável;Reabestecer</string>
     <string name="poi_drinking_water_refill_no">Recarga de água potável: não</string>
     <string name="poi_drinking_water_refill_network">Rede de recarga de água potável</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Sucção</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurizado</string>
+    <string name="poi_fire_hydrant_pressure_suction">Sucção</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pressurizado</string>
     <string name="poi_water_source_groundwater">Água subterrânea</string>
     <string name="poi_fire_hydrant_type_pipe">Tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressão</string>
@@ -4391,8 +4391,8 @@
     <string name="poi_climbing_grade_aliens">Extraterrestre</string>
     <string name="poi_climbing_bolt_abseil">Rapel</string>
     <string name="poi_climbing_bolt_anchor">Âncora</string>
-    <string name="poi_osmand_climbing_bolts_yes">Sim</string>
-    <string name="poi_osmand_climbing_bolts_no">Não</string>
+    <string name="poi_climbing_bolts_yes">Sim</string>
+    <string name="poi_climbing_bolts_no">Não</string>
     <string name="poi_climbing_bolts">Parafusos de escalada</string>
     <string name="poi_climbing_quality_medium">Média</string>
     <string name="poi_climbing_grade_french_mean">Rota média (grau francês)</string>
@@ -4596,7 +4596,7 @@
     <string name="poi_foot_designated">Designado para pedestres</string>
     <string name="poi_vehicle_designated">Designado para veículos</string>
     <string name="poi_assembly_point">Ponto de encontro</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
+    <string name="poi_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
     <string name="poi_socket_typee_voltage_filter">Tensão do conector tipo E</string>
     <string name="poi_socket_typee_output_filter">Saída do conector tipo E</string>
     <string name="poi_socket_typee_output_medium">Médio</string>

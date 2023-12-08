@@ -3790,8 +3790,8 @@
     <string name="poi_drinking_water_refill_yes">是;飲用水填充;填充</string>
     <string name="poi_drinking_water_refill_no">飲用水填充：否</string>
     <string name="poi_drinking_water_refill_network">飲用水填充網路</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">吸力</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加壓</string>
+    <string name="poi_fire_hydrant_pressure_suction">吸力</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">加壓</string>
     <string name="poi_water_source_groundwater">地下水</string>
     <string name="poi_fire_hydrant_type_pipe">管線</string>
     <string name="poi_fire_hydrant_pressure_filter">壓力</string>
@@ -4390,8 +4390,8 @@
     <string name="poi_climbing_grade_aliens">外星人</string>
     <string name="poi_climbing_bolt_abseil">繩降</string>
     <string name="poi_climbing_bolt_anchor">錨</string>
-    <string name="poi_osmand_climbing_bolts_yes">是</string>
-    <string name="poi_osmand_climbing_bolts_no">否</string>
+    <string name="poi_climbing_bolts_yes">是</string>
+    <string name="poi_climbing_bolts_no">否</string>
     <string name="poi_climbing_bolts">攀岩耳片</string>
     <string name="poi_climbing_quality_medium">中等</string>
     <string name="poi_climbing_rock_basalt">攀岩：玄武岩</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_rubber">鋪面：橡膠</string>
     <string name="poi_surface_plastic">鋪面：塑膠</string>
     <string name="poi_assembly_point">集合點</string>
-    <string name="poi_osmand_not_pt_shelter_yes">除大眾運輸候車亭以外的所有區域</string>
+    <string name="poi_not_pt_shelter_yes">除大眾運輸候車亭以外的所有區域</string>
     <string name="poi_bicycle_designated">腳踏車專用</string>
     <string name="poi_horse_designated">馬匹專用</string>
     <string name="poi_foot_designated">行人專用</string>

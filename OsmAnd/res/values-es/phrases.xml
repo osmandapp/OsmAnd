@@ -3763,8 +3763,8 @@
     <string name="poi_video_telephone">Vídeo</string>
     <string name="poi_bowling_alley">Centro de bolos</string>
     <string name="poi_mountain_rescue">Rescate de montaña</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
+    <string name="poi_fire_hydrant_pressure_suction">Succión</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Presurizado</string>
     <string name="poi_water_source_groundwater">Agua subterránea</string>
     <string name="poi_fire_hydrant_type_pipe">Tubería</string>
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
@@ -4388,14 +4388,14 @@
     <string name="poi_climbing_grade_expert">Experto</string>
     <string name="poi_climbing_grade_elite">Élite</string>
     <string name="poi_climbing_bolt_anchor">Ancla</string>
-    <string name="poi_osmand_climbing_bolts_no">No</string>
+    <string name="poi_climbing_bolts_no">No</string>
     <string name="poi_climbing_bolts">Pernos de escalada</string>
     <string name="poi_climbing_speed_yes">Velocidad: si</string>
     <string name="poi_climbing_grade_filter">Nivel de la escalada</string>
     <string name="poi_climbing_rock_gritstone">Roca para escalar: arenisca</string>
     <string name="poi_climbing_rock_basalt">Roca para escalar: basalto</string>
     <string name="poi_climbing_grade_uiaa_max">Ruta más difícil (grado UIAA)</string>
-    <string name="poi_osmand_climbing_bolts_yes">Sí</string>
+    <string name="poi_climbing_bolts_yes">Sí</string>
     <string name="poi_climbing_quality_medium">Medio</string>
     <string name="poi_climbing_grade_french_max">Ruta más difícil (grado francés)</string>
     <string name="poi_climbing_bolt_abseil">Rápel</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Superficie: plástico</string>
     <string name="poi_surface_rubber">Superficie: caucho</string>
     <string name="poi_assembly_point">Punto de encuentro</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Todas excepto las marquesinas de transporte público</string>
+    <string name="poi_not_pt_shelter_yes">Todas excepto las marquesinas de transporte público</string>
     <string name="poi_horse_designated">Destinado a caballos</string>
     <string name="poi_foot_designated">Destinado a peatones</string>
     <string name="poi_motor_vehicle_designated">Destinado a vehículos a motor</string>

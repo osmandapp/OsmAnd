@@ -3781,7 +3781,7 @@
     <string name="poi_give_box">Adománygyűjtő doboz</string>
     <string name="poi_borough">Kerület</string>
     <string name="poi_city_block">Háztömb</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Nyomás alatti</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Nyomás alatti</string>
     <string name="poi_water_source_groundwater">Talajvíz</string>
     <string name="poi_fire_hydrant_type_pipe">Cső</string>
     <string name="poi_drinking_water_refill_network">Ivóvíz-utántöltő hálózat</string>
@@ -3807,7 +3807,7 @@
     <string name="poi_elevator">Lift</string>
     <string name="poi_traffic_signals_arrow_no">Nyíl nincs</string>
     <string name="poi_pump_status_missing_beam">Szivattyú állapota: hiányzik a kar</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Szívás</string>
+    <string name="poi_fire_hydrant_pressure_suction">Szívás</string>
     <string name="poi_recycling_small_electrical_appliances">Kis elektronikus készülékek</string>
     <string name="poi_departures_board">Indulásiidő-kijelző</string>
     <string name="poi_drinking_water_refill">Ivóvíz-utántöltés</string>
@@ -4390,8 +4390,8 @@
     <string name="poi_climbing_grade_novice">Újonc</string>
     <string name="poi_climbing_grade_beginner">Kezdő</string>
     <string name="poi_climbing_bolt_anchor">Horgony</string>
-    <string name="poi_osmand_climbing_bolts_yes">vannak</string>
-    <string name="poi_osmand_climbing_bolts_no">nincsenek</string>
+    <string name="poi_climbing_bolts_yes">vannak</string>
+    <string name="poi_climbing_bolts_no">nincsenek</string>
     <string name="poi_climbing_quality_medium">Közepes</string>
     <string name="poi_climbing_rock_basalt">Mászókőzet: bazalt</string>
     <string name="poi_climbing_grade_saxon_mean">Átlagos útvonal (szász fokozat)</string>

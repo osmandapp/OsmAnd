@@ -3601,8 +3601,8 @@
     <string name="poi_recycling_small_electrical_appliances">Malé elektrické spotrebiče</string>
     <string name="poi_departures_board">Tabuľa odjazdov/cestovný poriadok</string>
     <string name="poi_drinking_water_refill">Doplnenie pitnej vody</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Nasávanie</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod tlakom</string>
+    <string name="poi_fire_hydrant_pressure_suction">Nasávanie</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pod tlakom</string>
     <string name="poi_water_source_groundwater">Spodná voda</string>
     <string name="poi_fire_hydrant_type_pipe">Potrubie</string>
     <string name="poi_drinking_water_refill_network">Sieť doplnenia pitnej vody</string>
@@ -4137,7 +4137,7 @@
     <string name="poi_socket_cee_blue_voltage_filter">CEE blue napätie konektora</string>
     <string name="poi_socket_schuko_voltage_filter">Schuko napätie konektora</string>
     <string name="poi_hiking_filter">Vhodné pre turistiku</string>
-    <string name="poi_osmand_climbing_bolts_no">Nie</string>
+    <string name="poi_climbing_bolts_no">Nie</string>
     <string name="poi_climbing_quality_medium">Stredná</string>
     <string name="poi_climbing_grade_expert">Expert</string>
     <string name="poi_climbing_grade_super_expert">Super expert</string>
@@ -4153,7 +4153,7 @@
     <string name="poi_climbing_grade_novice">Nováčik</string>
     <string name="poi_climbing_grade_beginner">Začiatočník</string>
     <string name="poi_climbing_speed_yes">Rýchlosť: áno</string>
-    <string name="poi_osmand_climbing_bolts_yes">Áno</string>
+    <string name="poi_climbing_bolts_yes">Áno</string>
     <string name="poi_climbing_grade_intermediate">Mierne pokročilý</string>
     <string name="poi_climbing_grade_advanced">Pokročilý</string>
     <string name="poi_climbing_grade_aliens">Mimozemšťan</string>

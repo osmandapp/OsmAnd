@@ -3793,8 +3793,8 @@
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
     <string name="poi_drinking_water_refill_network">Trinkwasser-Nachfüllnetzwerk</string>
     <string name="poi_internet_access_fee_customers">Internetzugang: Kunden</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Ansaugung</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Unter Druck</string>
+    <string name="poi_fire_hydrant_pressure_suction">Ansaugung</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Unter Druck</string>
     <string name="poi_water_source_groundwater">Grundwasser</string>
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
@@ -4393,7 +4393,7 @@
     <string name="poi_climbing_grade_super_elite">Super-Elite</string>
     <string name="poi_climbing_grade_aliens">Ausländer</string>
     <string name="poi_climbing_bolt_abseil">Abseilen</string>
-    <string name="poi_osmand_climbing_bolts_yes">ja</string>
+    <string name="poi_climbing_bolts_yes">ja</string>
     <string name="poi_climbing_bolts">Kletterhaken</string>
     <string name="poi_climbing_quality_medium">Mittel</string>
     <string name="poi_climbing_bolts_filter">Kletterhaken</string>
@@ -4403,7 +4403,7 @@
     <string name="poi_climbing_grade_french_max">Schwierigste Route (französischer Grad)</string>
     <string name="poi_climbing_grade_novice">Anfänger</string>
     <string name="poi_climbing_grade_saxon">Sächsischer Klettergrad</string>
-    <string name="poi_osmand_climbing_bolts_no">nein</string>
+    <string name="poi_climbing_bolts_no">nein</string>
     <string name="poi_climbing_bolt_anchor">Anker</string>
     <string name="poi_climbing_rock_gritstone">Klettergestein: Sandstein</string>
     <string name="poi_climbing_rock_conglomerate">Klettergestein: Konglomerat</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Oberfläche: Plastik</string>
     <string name="poi_surface_rubber">Oberfläche: Gummi</string>
     <string name="poi_assembly_point">Sammelplatz</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Alle außer Wartehäuschen für öffentliche Verkehrsmittel</string>
+    <string name="poi_not_pt_shelter_yes">Alle außer Wartehäuschen für öffentliche Verkehrsmittel</string>
     <string name="poi_foot_designated">Ausgewiesen für Fußgänger</string>
     <string name="poi_horse_designated">Ausgewiesen für Pferde</string>
     <string name="poi_bicycle_designated">Ausgewiesen für Fahrräder</string>

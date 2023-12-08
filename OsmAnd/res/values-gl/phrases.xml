@@ -3795,8 +3795,8 @@
     <string name="poi_seamark_water_level_dry">Nivel da auga: seco</string>
     <string name="poi_seamark_water_level_submerged">Nivel da auga: somerxido</string>
     <string name="poi_seamark_water_level_part_submerged">Nivel da auga: parcialmente somerxido</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
+    <string name="poi_fire_hydrant_pressure_suction">Succión</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Presurizado</string>
     <string name="poi_water_source_groundwater">Augas subterráneas</string>
     <string name="poi_fire_hydrant_type_pipe">Tubaxe</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>

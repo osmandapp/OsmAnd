@@ -3456,8 +3456,8 @@
     <string name="poi_give_box">Ge låda</string>
     <string name="poi_traffic_signals_vibration_no">Vibration: nej</string>
     <string name="poi_pump_status_missing_beam">Pumpstatus: saknad stråle</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Sugning</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Trycksatt</string>
+    <string name="poi_fire_hydrant_pressure_suction">Sugning</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Trycksatt</string>
     <string name="poi_water_source_groundwater">Grundvatten</string>
     <string name="poi_fire_hydrant_type_pipe">Rör</string>
     <string name="poi_drinking_water_refill_network">Nätverk för påfyllning av dricksvatten</string>
@@ -4385,7 +4385,7 @@
     <string name="poi_healthcare_speciality_haematology">Hematologi</string>
     <string name="poi_lock_height">Höjdskillnad i slussen</string>
     <string name="poi_healthcare_speciality_geriatrics">Geriatrik</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Alla utom väderskydd i kollektivtrafiken</string>
+    <string name="poi_not_pt_shelter_yes">Alla utom väderskydd i kollektivtrafiken</string>
     <string name="poi_boat_private">Tillträde för båt: privat</string>
     <string name="poi_healthcare_speciality_paediatric_surgery">Barn- och ungdomskirurgi</string>
     <string name="poi_draft">Farbart djup</string>

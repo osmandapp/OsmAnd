@@ -33,8 +33,8 @@
     <string name="poi_traffic_signals_vibration_yes">نعم</string>
     <string name="poi_traffic_signals_vibration_no">الاهتزاز: لا</string>
     <string name="poi_pump_status_missing_beam">حالة المضخة: شعاع مفقود</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">شفط</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">مضغوط</string>
+    <string name="poi_fire_hydrant_pressure_suction">شفط</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">مضغوط</string>
     <string name="poi_water_source_groundwater">مياه جوفية</string>
     <string name="poi_fire_hydrant_type_pipe">أنابيب</string>
     <string name="poi_drinking_water_refill_network">شبكة تعبئة مياه الشرب</string>

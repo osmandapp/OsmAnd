@@ -3758,8 +3758,8 @@
     <string name="poi_traffic_signals_vibration_yes">Да; Вибрација саобраћајних сигнала</string>
     <string name="poi_traffic_signals_vibration_no">Вибрација: не</string>
     <string name="poi_pump_status_missing_beam">Статус пумпе: недостаје сноп</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Усисни</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Под притиском</string>
+    <string name="poi_fire_hydrant_pressure_suction">Усисни</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Под притиском</string>
     <string name="poi_water_source_groundwater">Подземна вода</string>
     <string name="poi_fire_hydrant_type_pipe">Цев</string>
     <string name="poi_drinking_water_refill_network">Мрежа за поновно доливање питке воде</string>

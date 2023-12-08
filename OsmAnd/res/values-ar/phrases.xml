@@ -3300,8 +3300,8 @@
     <string name="poi_traffic_signals_vibration_yes">نعم، اهتزاز إشارات المرور</string>
     <string name="poi_traffic_signals_vibration_no">الاهتزاز: لا</string>
     <string name="poi_pump_status_missing_beam">حالة المضخة: شعاع مفقود</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">شفط</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">مضغوط</string>
+    <string name="poi_fire_hydrant_pressure_suction">شفط</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">مضغوط</string>
     <string name="poi_water_source_groundwater">مياه جوفية</string>
     <string name="poi_fire_hydrant_type_pipe">أنابيب</string>
     <string name="poi_drinking_water_refill_network">شبكة تعبئة مياه الشرب</string>
@@ -4390,11 +4390,11 @@
     <string name="poi_climbing_grade_aliens">كائنات فضائية</string>
     <string name="poi_climbing_bolt_abseil">الهبوط من العلو (بالحبل)</string>
     <string name="poi_climbing_bolt_anchor">برغي التثبيت</string>
-    <string name="poi_osmand_climbing_bolts_yes">نعم</string>
+    <string name="poi_climbing_bolts_yes">نعم</string>
     <string name="poi_climbing_grade_advanced">متقدم</string>
     <string name="poi_climbing_grade_expert">خبير</string>
     <string name="poi_climbing_grade_super_expert">خبير فائق</string>
-    <string name="poi_osmand_climbing_bolts_no">ﻻ</string>
+    <string name="poi_climbing_bolts_no">ﻻ</string>
     <string name="poi_climbing_bolts">براغي التسلق</string>
     <string name="poi_climbing_quality_medium">متوسط</string>
     <string name="poi_climbing_grade_french_max">أصعب مسار (مستوى فرنسي)</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_rubber">السطح: مطاط</string>
     <string name="poi_second_hand_filter">بضائع مستعملة</string>
     <string name="poi_assembly_point">نقطة التجميع</string>
-    <string name="poi_osmand_not_pt_shelter_yes">الجميع باستثناء ملاجئ وسائل النقل العام</string>
+    <string name="poi_not_pt_shelter_yes">الجميع باستثناء ملاجئ وسائل النقل العام</string>
     <string name="poi_vehicle_designated">مخصصة للمركبات</string>
     <string name="poi_bicycle_designated">مخصصة للدراجات</string>
     <string name="poi_horse_designated">مصممة للخيول</string>

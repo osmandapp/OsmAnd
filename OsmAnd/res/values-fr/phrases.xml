@@ -3791,8 +3791,8 @@
     <string name="poi_traffic_signals_sound_locate">Uniquement pour trouver le poteau</string>
     <string name="poi_internet_access_fee_customers">Accès internet : clientèle</string>
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurisé</string>
+    <string name="poi_fire_hydrant_pressure_suction">Aspiration</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pressurisé</string>
     <string name="poi_water_source_groundwater">Eaux souterraines</string>
     <string name="poi_fire_hydrant_type_pipe">Tuyau</string>
     <string name="poi_traffic_signals_arrow_yes">Oui ; flèche de signalisation</string>
@@ -4386,8 +4386,8 @@
     <string name="poi_climbing_grade_elite">Elite</string>
     <string name="poi_climbing_grade_super_elite">Super élite</string>
     <string name="poi_climbing_grade_aliens">Extra-terrestre</string>
-    <string name="poi_osmand_climbing_bolts_yes">Oui</string>
-    <string name="poi_osmand_climbing_bolts_no">Non</string>
+    <string name="poi_climbing_bolts_yes">Oui</string>
+    <string name="poi_climbing_bolts_no">Non</string>
     <string name="poi_climbing_quality_medium">Médium</string>
     <string name="poi_hiking_filter">Adapté à la randonnée</string>
     <string name="poi_climbing_quality">Qualité de l\'escalade</string>
@@ -4589,7 +4589,7 @@
     <string name="poi_surface_plastic">Surface : plastique</string>
     <string name="poi_draft">Profondeur du chenal</string>
     <string name="poi_assembly_point">Point de rassemblement</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Tout sauf abris de transports en commun</string>
+    <string name="poi_not_pt_shelter_yes">Tout sauf abris de transports en commun</string>
     <string name="poi_motor_vehicle_designated">Désigné pour les véhicules motorisés</string>
     <string name="poi_motorcar_designated">Désigné pour les voitures</string>
     <string name="poi_bicycle_designated">Désigné pour les vélos</string>

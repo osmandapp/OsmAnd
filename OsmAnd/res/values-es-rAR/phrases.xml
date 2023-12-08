@@ -3790,8 +3790,8 @@
     <string name="poi_drinking_water_refill_yes">Sí;Recarga de agua potable;Recambio</string>
     <string name="poi_drinking_water_refill_no">Recarga de agua potable: no</string>
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Presurizado</string>
+    <string name="poi_fire_hydrant_pressure_suction">Succión</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Presurizado</string>
     <string name="poi_water_source_groundwater">Agua subterránea</string>
     <string name="poi_fire_hydrant_type_pipe">Tubería</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
@@ -4393,8 +4393,8 @@
     <string name="poi_climbing_grade_aliens">Extraterrestres</string>
     <string name="poi_climbing_bolt_abseil">Rápel</string>
     <string name="poi_climbing_bolt_anchor">Anclaje</string>
-    <string name="poi_osmand_climbing_bolts_yes">Sí</string>
-    <string name="poi_osmand_climbing_bolts_no">No</string>
+    <string name="poi_climbing_bolts_yes">Sí</string>
+    <string name="poi_climbing_bolts_no">No</string>
     <string name="poi_climbing_bolts">Pernos de escalada</string>
     <string name="poi_climbing_grade_filter">Nivel de escalada</string>
     <string name="poi_climbing_bolt">Tipo de perno para escalada</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_rubber">Superficie: goma, caucho</string>
     <string name="poi_second_hand_filter">Artículos usados</string>
     <string name="poi_assembly_point">Punto de encuentro;Punto de reunión</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Todo excepto refugios de transporte público</string>
+    <string name="poi_not_pt_shelter_yes">Todo excepto refugios de transporte público</string>
     <string name="poi_bicycle_designated">Designado para bicicletas</string>
     <string name="poi_horse_designated">Designado para caballos</string>
     <string name="poi_foot_designated">Designado para peatones</string>

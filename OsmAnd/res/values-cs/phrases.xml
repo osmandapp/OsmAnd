@@ -3795,8 +3795,8 @@
     <string name="poi_traffic_signals_vibration_yes">Ano;Vibrace semaforu</string>
     <string name="poi_traffic_signals_vibration_no">Vibrace: ne</string>
     <string name="poi_pump_status_missing_beam">Stav pumpy: chybí rukojeť</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Sání</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod tlakem</string>
+    <string name="poi_fire_hydrant_pressure_suction">Sání</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pod tlakem</string>
     <string name="poi_water_source_groundwater">Podzemní voda</string>
     <string name="poi_fire_hydrant_type_pipe">Roura</string>
     <string name="poi_internet_access_fee_customers">Internetový přístup: zákazníci</string>
@@ -4422,8 +4422,8 @@
     <string name="poi_climbing_grade_elite">Elita</string>
     <string name="poi_climbing_grade_super_elite">Super elita</string>
     <string name="poi_climbing_bolt_anchor">Kotva</string>
-    <string name="poi_osmand_climbing_bolts_yes">Ano</string>
-    <string name="poi_osmand_climbing_bolts_no">Ne</string>
+    <string name="poi_climbing_bolts_yes">Ano</string>
+    <string name="poi_climbing_bolts_no">Ne</string>
     <string name="poi_climbing_bolts">Lezecké úchyty</string>
     <string name="poi_trampoline_park">Trampolínový park</string>
     <string name="poi_socket_type3a_current">Zásuvka: Typ 3a: proud</string>
@@ -4599,7 +4599,7 @@
     <string name="poi_horse_designated">Určeno pro koně</string>
     <string name="poi_foot_designated">Určeno pro chodce</string>
     <string name="poi_assembly_point">Místo setkání</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Vše kromě přístřešků veřejné dopravy</string>
+    <string name="poi_not_pt_shelter_yes">Vše kromě přístřešků veřejné dopravy</string>
     <string name="poi_socket_typee_output_medium">Střední</string>
     <string name="poi_socket_typee_voltage_filter">Napětí konektoru typu E</string>
     <string name="poi_socket_typee_current">Zásuvka: Typ E: proud</string>

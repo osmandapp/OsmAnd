@@ -4018,8 +4018,8 @@
     <string name="poi_drinking_water_refill_no">Polnjenje s pitno vodo: ne</string>
     <string name="poi_drinking_water_refill_network">Omrežje za polnjenje s pitno vodo</string>
     <string name="poi_fire_hydrant_type_pipe">Cev</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod pritiskom</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Sesanje</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pod pritiskom</string>
+    <string name="poi_fire_hydrant_pressure_suction">Sesanje</string>
     <string name="poi_traffic_signals_vibration_no">Vibracije: ne</string>
     <string name="poi_traffic_signals_vibration_yes">Da;Prometni znak z vibracijo</string>
     <string name="poi_borough">Mestni okraj</string>
@@ -4403,8 +4403,8 @@
     <string name="poi_climbing_grade_aliens">Za nezemljane</string>
     <string name="poi_climbing_bolt_abseil">Spust po vrvi</string>
     <string name="poi_climbing_bolt_anchor">Sidrišče</string>
-    <string name="poi_osmand_climbing_bolts_yes">Da</string>
-    <string name="poi_osmand_climbing_bolts_no">Ne</string>
+    <string name="poi_climbing_bolts_yes">Da</string>
+    <string name="poi_climbing_bolts_no">Ne</string>
     <string name="poi_climbing_quality_medium">srednja</string>
     <string name="poi_climbing_bolts">Plezalni svedrovci</string>
     <string name="poi_climbing_quality">Kakovost podlage plezališča</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_cemt_iii">III</string>
     <string name="poi_cemt_iv">IV</string>
     <string name="poi_surface_chipseal">Chipseal</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Vse razen zavetišč za javni prevoz</string>
+    <string name="poi_not_pt_shelter_yes">Vse razen zavetišč za javni prevoz</string>
     <string name="poi_motorcar_designated">Namenjeno za avtomobile</string>
     <string name="poi_vehicle_designated">Namenjeno za vozila</string>
     <string name="poi_horse_designated">Namenjeno za konje</string>
