@@ -4328,7 +4328,7 @@
     <string name="poi_club_amateur_radio">Amateurfunkverein</string>
     <string name="poi_club_religion">Religionsgemeinschaft</string>
     <string name="poi_club_dog">Hundeverein</string>
-    <string name="poi_board_title">Kartentitel</string>
+    <string name="poi_board_title">Überschrift der Tafel</string>
     <string name="poi_short_name">Kurzname</string>
     <string name="poi_flow_rate">Durchflussmenge</string>
     <string name="poi_golf_pin">Golf-Pin</string>
