@@ -24,10 +24,10 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -360,9 +360,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-													double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
-		return app.getResourceManager().searchAmenities(this,
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
+	                                                double bottomLatitude, double leftLongitude,
+	                                                double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+		return app.getResourceManager().searchAmenities(this, topLatitude, leftLongitude,
+				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 
 	public AmenityNameFilter getNameFilter(String filter) {

@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.data.City.CityType.CITY;
 import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
 
@@ -31,6 +30,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
+
+	private static final int TOWN_SEARCH_RADIUS = 10 * 1000; //10 km
+	private static final int CITY_SEARCH_RADIUS = 20 * 1000; //20 km
 
 	private final OsmandApplication app;
 	private final GPXDatabase database;
@@ -131,7 +133,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	private void searchNearestCity(@NonNull GpxDataItem item, @NonNull LatLon latLon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), (int) CITY.getRadius());
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), CITY_SEARCH_RADIUS);
 		List<Amenity> cities = app.getResourceManager().searchAmenities(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
@@ -142,7 +144,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			public boolean isEmpty() {
 				return false;
 			}
-		}, rect);
+		}, rect, false);
 
 		if (!Algorithms.isEmpty(cities)) {
 			sortAmenities(cities, latLon);
@@ -158,7 +160,11 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		Collections.sort(amenities, (o1, o2) -> {
 			double distance1 = MapUtils.getDistance(latLon, o1.getLocation());
 			double distance2 = MapUtils.getDistance(latLon, o2.getLocation());
-			return Double.compare(distance1, distance2);
+
+			double d1 = distance1 / (Algorithms.stringsEqual("town", o1.getSubType()) ? TOWN_SEARCH_RADIUS : CITY_SEARCH_RADIUS);
+			double d2 = distance2 / (Algorithms.stringsEqual("town", o2.getSubType()) ? TOWN_SEARCH_RADIUS : CITY_SEARCH_RADIUS);
+
+			return Double.compare(d1, d2);
 		});
 	}
 
