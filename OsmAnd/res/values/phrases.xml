@@ -1675,6 +1675,12 @@
 	<string name="poi_capacity_parent_yes">Dedicated places for parents</string>
 	<string name="poi_capacity_parent_no">No dedicated places for parents</string>
 	<string name="poi_capacity_parent">Dedicated places for parents</string>
+	<string name="poi_capacity_charging_yes">Dedicated places for charging</string>
+	<string name="poi_capacity_charging_no">No dedicated places for charging</string>
+	<string name="poi_capacity_charging">Dedicated places for charging</string>
+	<string name="poi_capacity_cargo_bike_yes">Dedicated places for cargo bikes</string>
+	<string name="poi_capacity_cargo_bike_no">No dedicated places for cargo bikes</string>
+	<string name="poi_capacity_cargo_bike">Dedicated places for cargo bikes</string>
 
 	<string name="poi_aerialway_occupancy">Cabin/chair/car capacity</string>
 	<string name="poi_aerialway_capacity">Capacity per hour</string>
@@ -2247,6 +2253,8 @@
 	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
 	<string name="poi_service_bicycle_charging_yes">Charging: yes;Bicycle charging;Bike charging;Electric bicycle charging;Electric bike charging</string>
 	<string name="poi_service_bicycle_charging_no">Charging: no</string>
+	<string name="poi_service_bicycle_stand_yes">Repair stand: yes;Bicycle stand;Bike stand;Bicycle repair stand;Bike repair stand</string>
+	<string name="poi_service_bicycle_stand_no">Repair stand: no</string>
 	<string name="poi_bicycle_repair_station">Bicycle repair station;Bicycle self-repair station;Bike repair station;Bike self-repair station</string>
 
 	<string name="poi_wildlife_hide">Place to observe wildlife</string>
