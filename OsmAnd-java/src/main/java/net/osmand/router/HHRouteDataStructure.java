@@ -161,11 +161,14 @@ public class HHRouteDataStructure {
 			this.networkDB = networkDB;
 		}
 		
-		public HHRouteRegionPointsCtx(short id, HHRouteRegion fileRegion, BinaryMapIndexReader file) {
+		public HHRouteRegionPointsCtx(short id, HHRouteRegion fileRegion, BinaryMapIndexReader file, int routingProfile) {
 			this.id = id;
 			this.fileRegion = fileRegion;
 			this.file = file;
 			this.networkDB = null;
+			if (routingProfile >= 0) {
+				this.routingProfile = routingProfile;
+			}
 		}
 		
 		public int getRoutingProfile() {
@@ -253,12 +256,13 @@ public class HHRouteDataStructure {
 			Iterator<T> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
+				FinalRouteSegment rev = p.rt(false).rtDetailedRoute;
+				FinalRouteSegment pos = p.rt(true).rtDetailedRoute;
+				p.clearRouting();
 				if (stPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(false, p.rt(false).rtDetailedRoute);
+					p.setDetailedParentRt(false, rev);
 				} else if (endPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(true, p.rt(true).rtDetailedRoute);
-				} else {
-					p.clearRouting();
+					p.setDetailedParentRt(true, pos);
 				}
 				it.remove();
 			}
@@ -483,7 +487,7 @@ public class HHRouteDataStructure {
 		final NetworkDBPoint start;
 		final NetworkDBPoint end;
 		final boolean shortcut;
-		final double dist;
+		double dist;
 		List<LatLon> geom;
 		
 		public NetworkDBSegment(NetworkDBPoint start, NetworkDBPoint end, double dist, boolean direction, boolean shortcut) {
