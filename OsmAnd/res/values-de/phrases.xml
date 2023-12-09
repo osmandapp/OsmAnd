@@ -1357,6 +1357,12 @@
     <string name="poi_capacity_parent_yes">Elternplätze</string>
     <string name="poi_capacity_parent_no">Keine Elternplätze</string>
     <string name="poi_capacity_parent">Elternplätze</string>
+    <string name="poi_capacity_charging_yes">E-Ladeplätze</string>
+    <string name="poi_capacity_charging_no">Keine E-Ladeplätze</string>
+    <string name="poi_capacity_charging">E-Ladeplätze</string>
+    <string name="poi_capacity_cargo_bike_yes">Lastenradplätze</string>
+    <string name="poi_capacity_cargo_bike_no">Keine Lastenradplätze</string>
+    <string name="poi_capacity_cargo_bike">Lastenradplätze</string>
     <string name="poi_aerialway_occupancy">Kabinen-, Gondel-, Sesselkapazität</string>
     <string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
     <string name="poi_aerialway_duration">Durchschnittliche Fahrzeit, Minuten</string>
@@ -2000,6 +2006,8 @@
     <string name="poi_service_bicycle_chaintool_no">Fahrradkettenwerkzeug: nein</string>
     <string name="poi_service_bicycle_second_hand_yes">Verkauf von Gebrauchtfahrrädern;Gebrauchtfahrrad</string>
     <string name="poi_service_bicycle_second_hand_no">Verkauf von Gebrauchtfahrrädern: nein</string>
+    <string name="poi_service_bicycle_stand_yes">Reparaturständer;Fahrradständer;Fahrradreparaturständer</string>
+    <string name="poi_service_bicycle_stand_no">Reparaturständer: nein</string>
     <string name="poi_wildlife_hide">Wildbeobachtungsplatz</string>
     <string name="poi_training_language">Ausbildung: Sprache</string>
     <string name="poi_training_music">Ausbildung: Musik</string>
