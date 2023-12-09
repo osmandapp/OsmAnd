@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
@@ -121,6 +122,8 @@ public class MapViewWithLayers extends FrameLayout {
 			else
 				atlasMapRendererView.handleOnCreate(null);
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
+			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
+			atlasMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 			atlasMapRendererView.setAzimuth(0);
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
