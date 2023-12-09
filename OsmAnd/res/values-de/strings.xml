@@ -4391,7 +4391,7 @@
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
     <string name="quick_action_toggle_preference">Ein Umschalter zum Ändern der Präferenz.</string>
     <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
-    <string name="copying_file">Kopieren der Datei %1$s…</string>
+    <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>

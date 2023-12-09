@@ -720,7 +720,7 @@
     <string name="poi_bridge">Pod</string>
     <string name="poi_tunnel">Tunel</string>
     <string name="poi_aerialway_pylon">Pilon de ridicare aeriană</string>
-    <string name="poi_aerialway_magic_carpet">Lift pentru covoare</string>
+    <string name="poi_aerialway_magic_carpet">Lift covor</string>
     <string name="poi_aerialway_goods">Ascensor de mărfuri</string>
     <string name="poi_aerialway_rope_tow">Lift tractare cu sfoară</string>
     <string name="poi_aerialway_mixed_lift">Ascensor mixt</string>
@@ -1162,12 +1162,12 @@
     <string name="poi_route_hiking_iwn_poi">Traseu internațional de drumeție</string>
     <string name="poi_lwn_ref">Nod de rețea de drumeție locală</string>
     <string name="poi_rwn_ref">Nod al rețelei regionale de drumeții</string>
-    <string name="poi_nwn_ref">Nodul rețelei naționale de drumeții</string>
-    <string name="poi_iwn_ref">Nodul rețelei internaționale de drumeții</string>
-    <string name="poi_lcn_ref">Nodul rețelei locale de ciclism</string>
-    <string name="poi_rcn_ref">Nodul rețelei regionale de ciclism</string>
-    <string name="poi_ncn_ref">Nodul rețelei naționale de ciclism</string>
-    <string name="poi_icn_ref">Nodul rețelei internaționale de ciclism</string>
+    <string name="poi_nwn_ref">Nod al rețelei naționale de drumeții</string>
+    <string name="poi_iwn_ref">Nod al rețelei internaționale de drumeții</string>
+    <string name="poi_lcn_ref">Nod al rețelei locale de ciclism</string>
+    <string name="poi_rcn_ref">Nod al rețelei regionale de ciclism</string>
+    <string name="poi_ncn_ref">Nod al rețelei naționale de ciclism</string>
+    <string name="poi_icn_ref">Nod al rețelei internaționale de ciclism</string>
     <string name="poi_highway_crossing">Trecere de pietoni</string>
     <string name="poi_entrance_exit">Ieșire</string>
     <string name="poi_entrance">Intrare</string>
@@ -3283,7 +3283,7 @@
     <string name="poi_diplomatic_honorary_consulate">Consulat onorific</string>
     <string name="poi_diplomatic_consulate_general">Consulatul general</string>
     <string name="poi_diplomatic_consulate">Consulat</string>
-    <string name="poi_traffic_mirror">Oglinda de trafic</string>
+    <string name="poi_traffic_mirror">Oglindă de trafic</string>
     <string name="poi_organic_only">Doar;Numai organic</string>
     <string name="poi_organic_no">Nu</string>
     <string name="poi_organic_yes">Da;Organic</string>
