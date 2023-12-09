@@ -5208,7 +5208,7 @@
     <string name="save_track_external_sensors_data">Données</string>
     <string name="external_sensors_source_of_data">Source des données</string>
     <string name="external_sensors_not_found">Capteurs non trouvés</string>
-    <string name="write_data_from_sensor_to_track">Écrire des données des capteurs externes vers les GPX pendant l\'enregistrement de traces.</string>
+    <string name="write_data_from_sensor_to_track">Stocker les données des capteurs externes dans le fichier GPX lors de l\'enregistrement de traces.</string>
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte de terrain 3D. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
