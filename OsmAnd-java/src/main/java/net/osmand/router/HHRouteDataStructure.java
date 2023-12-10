@@ -31,6 +31,13 @@ public class HHRouteDataStructure {
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
 		
+		// tweaks for route recalculations
+		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
+		int MAX_START_END_REITERATIONS = 10;  
+		double MAX_INC_COST_CF = 1.25;
+		double MAX_TIME_REITERATION_MS = 60000;
+		
+		///////////
 		Double INITIAL_DIRECTION = null;
 		public final static int CALCULATE_ALL_DETAILED = 3;
 		

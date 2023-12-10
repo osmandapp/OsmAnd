@@ -49,10 +49,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private static final int PNT_SHORT_ROUTE_START_END = -1000;
 	public static final int MAX_POINTS_CLUSTER_ROUTING = 150000;
 	// if point is present without map with HH routing it will iterate each time with MAX_POINTS_CLUSTER_ROUTING
-	private static final int MAX_START_END_REITERATIONS = 10;  
-	public static final double MAX_INC_COST_CF = 1.25;
 	public static final double MAX_INC_COST_CORR = 10.0;
-	private static final double MAX_TIME_REITERATION_MS = 60000;
 	
 	private static boolean ASSERT_COST_INCREASING = false;
 	private static boolean ASSERT_AND_CORRECT_DIST_SMALLER = true;
@@ -128,7 +125,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			c.calcDetailed(2);
 			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 0;
+			DEBUG_VERBOSE_LEVEL = 1;
 //			DEBUG_ALT_ROUTE_SELECTION++;
 			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -161,16 +158,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
-			hctx.stats.routingTime += (System.nanoTime() - time) / 1e6;
-			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(),
-					hctx.stats.routingTime);
+			time = (System.nanoTime() - time) ;
+			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
+			hctx.stats.routingTime+= time/ 1e6;
 
 			System.out.printf("Parse detailed route segments...");
 			time = System.nanoTime();
 			boolean recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS);
-			hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
+			time = (System.nanoTime() - time);
+			System.out.printf("%.2f ms\n", time / 1e6);
+			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
-				if (hctx.stats.prepTime + hctx.stats.routingTime > MAX_TIME_REITERATION_MS) {
+				if (hctx.stats.prepTime + hctx.stats.routingTime > hctx.config.MAX_TIME_REITERATION_MS) {
 					return new HHNetworkRouteRes("Too many route recalculations (maps are outdated).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -240,7 +239,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
 		List<RouteSegmentPoint> stOthers = startPnt.others, endOthers = endPnt.others;
 		while (!found) {
-			if (startReiterate + endReiterate >= MAX_START_END_REITERATIONS) {
+			if (startReiterate + endReiterate >= hctx.config.MAX_START_END_REITERATIONS) {
 				break;
 			}
 			for (T p : stPoints.valueCollection()) {
@@ -1054,12 +1053,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (routeSegments) {
 				FinalRouteSegment f = runDetailedRouting(hctx, s.segment.start, s.segment.end, true);
 				if (f == null) {
-					// TODO 2.2 run DijkstrA
-					System.out.printf("Route between %s -> %s not found - recalculate route\n", s.segment.start, s.segment.end);
+					boolean full = hctx.config.FULL_DIJKSTRA_NETWORK_RECALC-- > 0;
+					System.out.printf("Route not found (%srecalc) %s -> %s\n", full ? "dijkstra+" : "",s.segment.start, s.segment.end);
+					if (full) {
+						recalculateNetworkCluster(hctx, s.segment.start);
+					}
 					s.segment.dist = -1;
 					return true;
 				}
-				if ((f.distanceFromStart + MAX_INC_COST_CORR) > (s.segment.dist + MAX_INC_COST_CORR) * MAX_INC_COST_CF) {
+				if ((f.distanceFromStart + MAX_INC_COST_CORR) > (s.segment.dist + MAX_INC_COST_CORR) * hctx.config.MAX_INC_COST_CF) {
 					System.out.printf("Route cost increased (%.2f > %.2f) between %s -> %s: recalculate route\n",
 							f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end);
 					s.segment.dist = f.distanceFromStart;
@@ -1079,6 +1081,61 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return false;
 	}
 	
+	private void recalculateNetworkCluster(HHRoutingContext<T> hctx, NetworkDBPoint start) throws InterruptedException, IOException {
+		BinaryRoutePlanner plan = new BinaryRoutePlanner();
+		hctx.rctx.config.planRoadDirection = 1; 
+		hctx.rctx.config.heuristicCoefficient = 0;
+		// SPEEDUP: Speed up by just clearing visited
+		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
+		RouteSegmentPoint s = loadPoint(hctx.rctx, start);
+		hctx.rctx.calculationProgress = new RouteCalculationProgress();
+		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
+		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());
+		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps);
+		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) plan.searchRouteInternal(hctx.rctx, s, null, bounds);
+		hctx.rctx.config.MAX_VISITED = -1;
+		TLongObjectHashMap<RouteSegment> resUnique = new TLongObjectHashMap<>();
+		for (FinalRouteSegment o : frs.all) {
+			long pntId = calculateRoutePointInternalId(o.getRoad().getId(), o.getSegmentStart(), o.getSegmentEnd());
+			if (resUnique.containsKey(pntId)) {
+				if (resUnique.get(pntId).getDistanceFromStart() > o.getDistanceFromStart()) {
+					System.err.println(resUnique.get(pntId) + " > " + o + " - " + s);
+				}
+			} else {
+				resUnique.put(pntId, o);
+				NetworkDBPoint p = hctx.pointsByGeo.get(calcRPId(o, o.getSegmentStart(), o.getSegmentEnd()));
+				if (p == null) {
+					System.err.println("Error calculations new final boundary not found");
+					continue;
+				}
+				float routeTime = o.getDistanceFromStart() + plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
+				NetworkDBSegment c = start.getSegment(p, true);
+				if (c != null) {
+//					System.out.printf("Correct dist %.2f -> %.2f\n", c.dist, routeTime);
+					c.dist = routeTime;
+				} else {
+					start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));
+				}
+				NetworkDBSegment co = p.getSegment(start, false);
+				if (co != null) {
+					co.dist = routeTime;
+				} else if (p.connectedReverse != null) {
+					p.connectedReverse.add(new NetworkDBSegment(start, p, routeTime, false, false));
+				}
+			}
+		}
+		for (NetworkDBSegment c : start.connected) {
+			if (!resUnique.containsKey(c.end.getGeoPntId())) {
+//				System.out.printf("Remove connection %s -> %s\n", start, c.end); // to debug later if all correct
+				c.dist = -1; // disable as not found
+				NetworkDBSegment co = c.end.getSegment(start, false);
+				if (co != null) {
+					co.dist = -1;
+				}
+			}
+		}
+	}
+
 	private HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end, 
 			RouteResultPreparation rrp) throws SQLException, InterruptedException, IOException {
 		hctx.rctx.routingTime = 0;
@@ -1217,7 +1274,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return (id << ROUTE_POINTS) + (pntId << 1) + (positive > 0 ? 1 : 0);
 	}
 	
-	static long calcRPId(RouteSegmentPoint p, int pntId, int nextPntId) {
+	static long calcRPId(RouteSegment p, int pntId, int nextPntId) {
 		return calculateRoutePointInternalId(p.getRoad().getId(), pntId, nextPntId);
 	}
 
