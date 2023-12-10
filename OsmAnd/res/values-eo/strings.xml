@@ -635,7 +635,7 @@
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
     <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
-    <string name="rendering_attr_showAccess_name">Aliraj baroj kaj pagendaj ejoj</string>
+    <string name="rendering_attr_showAccess_name">Aliraj baroj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
@@ -3347,9 +3347,9 @@
     <string name="reset_to_default_category_button_promo">Frapetu “Restarigi implicitajn” por ke la ordigo de elementoj revenu al la postinstalada stato.</string>
     <string name="accessibility_mode_disabled">Alirebleca reĝimo malaktivigita en Android.</string>
     <string name="use_system_screen_timeout">Malŝalti ekranon laŭ sistemaj agordoj</string>
-    <string name="use_system_screen_timeout_promo">Implicite neaktiva: se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate. 
-\n 
-\nAktivigu tion ĉi por ke OsmAnd uzu la sisteman agordon pri malŝalti ekranon.</string>
+    <string name="use_system_screen_timeout_promo">Implicite neaktiva: se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate.
+\n
+\nAktivigu tion ĉi por ke OsmAnd uzu la operaciuman agordon pri malŝalti ekranon.</string>
     <string name="clear_recorded_data">Forviŝi registritajn datumojn</string>
     <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn 
 \n 
@@ -5473,7 +5473,7 @@
     <string name="deletion_error">Eraro pri forigo</string>
     <string name="shared_string_button">Butono</string>
     <string name="shared_string_action">Ago</string>
-    <string name="key_is_already_assigned_error">La klavo “%1$s” estas jam agordita por alia ago: “%2$s”</string>
+    <string name="key_is_already_assigned_error">La klavo “%1$s” estas jam asignita al la ago: “%2$s”</string>
     <string name="cloud_trash_clear_confirmation">Ĉu vi certe volas por ĉiam forigi ĉiujn objektojn el la rubujo\? Tiu ĉi ago estas nemalfarebla.</string>
     <string name="key_event_action_zoom_in">Pligrandigi</string>
     <string name="empty_smart_folder_title">Neniu kongrua spuro</string>
@@ -5550,4 +5550,23 @@
     <string name="key_assignments_already_cleared_message">Ĉiuj klav-asignoj jam estas forviŝitaj</string>
     <string name="zoom_animated">Movbilda pligrandigo</string>
     <string name="add_new_button">Aldoni novan butonon</string>
+    <string name="key_assignments">Klav-asignoj</string>
+    <string name="reset_key_assignments_desc">Ĉiuj klav-asignoj de la elektita speco estos forigitaj.</string>
+    <string name="topography_maps">Topografiaj mapoj</string>
+    <string name="lang_zh_hans">Ĉina simpligita</string>
+    <string name="tripltek_promo">Promocio Tripltek por %1$s monato(j)</string>
+    <string name="tripltek_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="shared_string_reassign">Reatribui</string>
+    <string name="reset_key_assignments">Reagordi klav-asingojn</string>
+    <string name="target_elevation">Alcela altitudo</string>
+    <string name="remove_widget_first">Unue forigu la fenestraĵon</string>
+    <string name="lang_zh_hant">Ĉina tradicia</string>
+    <string name="add_row">Aldoni vicon</string>
+    <string name="discard_changes_prompt">Ĉu vi certe volas rezigni fari ŝanĝojn?</string>
+    <string name="use_v1_auto_zoom">Diskreta aŭtomata pligrandigo (malnova versio)</string>
+    <string name="shared_string_eta">Proksimuma alvena tempo</string>
+    <string name="row_number">Vico %1$s</string>
+    <string name="clear_key_assignment">Forviŝi klav-asignon</string>
+    <string name="see_all_plans">Montri ĉiujn planojn</string>
+    <string name="clear_key_assignment_desc">Klav-asigno por la elektita ago estos agordita al neniu klavo.</string>
 </resources>
