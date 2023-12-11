@@ -54,12 +54,12 @@ public class AutoZoomBySpeedHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final LocationsFilter locationsFilter;
+	private final SpeedFilter speedFilter;
 
 	public AutoZoomBySpeedHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.locationsFilter = new LocationsFilter();
+		this.speedFilter = new SpeedFilter();
 	}
 
 	@Nullable
@@ -103,7 +103,7 @@ public class AutoZoomBySpeedHelper {
 			return null;
 		}
 
-		float filteredSpeed = locationsFilter.getFilteredSpeed(speed);
+		float filteredSpeed = speedFilter.getFilteredSpeed(speed);
 		if (Float.isNaN(filteredSpeed)) {
 			return null;
 		}
@@ -145,7 +145,7 @@ public class AutoZoomBySpeedHelper {
 			return null;
 		}
 
-		float filteredSpeed = locationsFilter.getFilteredSpeed(speed);
+		float filteredSpeed = speedFilter.getFilteredSpeed(speed);
 		if (Float.isNaN(filteredSpeed)) {
 			return null;
 		}
@@ -413,7 +413,7 @@ public class AutoZoomBySpeedHelper {
 		return result;
 	}
 
-	private static class LocationsFilter {
+	private static class SpeedFilter {
 
 		private float speedToFilter = Float.NaN;
 		private float currentSpeed = Float.NaN;
