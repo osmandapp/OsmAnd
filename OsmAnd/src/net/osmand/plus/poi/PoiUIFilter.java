@@ -1,6 +1,7 @@
 package net.osmand.plus.poi;
 
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
@@ -14,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
@@ -24,6 +24,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -467,15 +468,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		if (nameFilter.length() == 0) {
 			return true;
 		}
+		CollatorStringMatcher matcher = new CollatorStringMatcher(nameFilter.trim(), CHECK_STARTS_FROM_SPACE);
+		OsmandSettings settings = app.getSettings();
+		List<String> names = OsmAndFormatter.getPoiStringsWithoutType(amenity,
+				settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
 
-		CollatorStringMatcher sm =
-				new CollatorStringMatcher(nameFilter.trim(), StringMatcherMode.CHECK_CONTAINS);
-
-		List<String> names = OsmAndFormatter.getPoiStringsWithoutType(
-				amenity, app.getSettings().MAP_PREFERRED_LOCALE.get(),
-				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		for (String name : names) {
-			if (sm.matches(name)) {
+			if (matcher.matches(name)) {
 				return true;
 			}
 		}
@@ -984,7 +983,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Override
 	public int compareTo(@NonNull PoiUIFilter another) {
 		if (this.order != INVALID_ORDER && another.order != INVALID_ORDER) {
-			return (this.order < another.order) ? -1 : ((this.order == another.order) ? 0 : 1);
+			return Integer.compare(this.order, another.order);
 		} else if (another.filterId.equals(this.filterId)) {
 			String thisFilterByName = this.filterByName == null ? "" : this.filterByName;
 			String anotherFilterByName = another.filterByName == null ? "" : another.filterByName;
