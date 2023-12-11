@@ -5558,4 +5558,8 @@
     <string name="lang_zh_hant">Китайский традиционный</string>
     <string name="zoom_animated">Приближение с анимацией</string>
     <string name="add_new_button">Добавить новую кнопку</string>
+    <string name="tripltek_promo">Tripltek Promo на %1$s месяца(ев)</string>
+    <string name="tripltek_promo_description">Бесплатный доступ к функциям, включая неограниченную загрузку карт, 3D-рельеф и прочим на %1$s месяца(ев)</string>
+    <string name="use_v1_auto_zoom">Дискретное автомасштабирование (старая версия)</string>
+    <string name="clear_key_assignment_desc">Привязка клавиши для выбранного действия будет удалена и ей будет присвоено значение «Нет».</string>
 </resources>
