@@ -8,6 +8,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -27,22 +28,24 @@ import java.util.Locale;
 
 public class NominatimPoiFilter extends PoiUIFilter {
 
-	private static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
 	private static final Log log = PlatformUtil.getLog(NominatimPoiFilter.class);
+
+	private static final String FILTER_ID = "name_finder";
+	private static final String NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 	private static final int MIN_SEARCH_DISTANCE_INDEX = 4;
 	private static final int LIMIT = 300;
 
-	private String lastError = ""; //$NON-NLS-1$
+	private String lastError = "";
 	private final boolean addressQuery;
 	
 	public NominatimPoiFilter(OsmandApplication application, boolean addressQuery) {
 		super(application);
 		this.addressQuery = addressQuery;
-		this.name = application.getString(R.string.poi_filter_nominatim);
+		this.name = app.getString(R.string.poi_filter_nominatim);
 		if (addressQuery) {
-			this.name += " - " + application.getString(R.string.shared_string_address); 
+			this.name += " - " + app.getString(R.string.shared_string_address);
 		} else {
-			this.name += " - " + application.getString(R.string.shared_string_places);
+			this.name += " - " + app.getString(R.string.shared_string_places);
 		}
 		if (addressQuery) {
 			this.distanceToSearchValues = new double[] {500, 10000};
@@ -64,25 +67,14 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	// do nothing test jackdaw lane, oxford"
 	@Override
 	public AmenityNameFilter getNameFilter(String filter) {
-		return new AmenityNameFilter() {
-
-			@Override
-			public boolean accept(Amenity a) {
-				return true;
-			}
-		};
+		return a -> true;
 	}
 	
 	@Override
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
-		int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String NOMINATIM_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
-		} else {
-			NOMINATIM_API = "http://nominatim.openstreetmap.org/search";
-		}
+	                                                double bottomLatitude, double leftLongitude,
+	                                                double rightLongitude, int zoom,
+	                                                ResultMatcher<Amenity> matcher) {
 		currentSearchResult = new ArrayList<>();
 		if (Algorithms.isEmpty(getFilterByName())) {
 			return currentSearchResult;
@@ -96,13 +88,14 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		leftLongitude = Math.min(leftLongitude, Math.max(lon - (distance / baseDistX), -180));
 		rightLongitude = Math.max(rightLongitude, Math.min(lon + (distance / baseDistX), 180));
 
-		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
+		String viewbox = "viewboxlbrt=" + ((float) leftLongitude) + "," + ((float) bottomLatitude)
+				+ "," + ((float) rightLongitude) + "," + ((float) topLatitude);
 		try {
 			lastError = "";
-			String urlq ;
-			if(addressQuery) {
-				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language="+ Locale.getDefault().getLanguage() 
-						+ "&q=" + URLEncoder.encode(getFilterByName());	
+			String urlq;
+			if (addressQuery) {
+				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language=" + Locale.getDefault().getLanguage()
+						+ "&q=" + URLEncoder.encode(getFilterByName());
 			} else {
 				urlq = NOMINATIM_API + "?format=xml&addressdetails=1&limit=" + LIMIT
 						+ "&bounded=1&" + viewbox + "&q=" + URLEncoder.encode(getFilterByName());
@@ -180,6 +173,4 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	public String getLastError() {
 		return lastError;
 	}
-	
-
 }
