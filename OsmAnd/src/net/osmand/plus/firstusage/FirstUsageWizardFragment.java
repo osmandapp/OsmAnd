@@ -822,7 +822,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static boolean showFragment(@Nullable FragmentActivity activity) {
 		if (!wizardClosed && activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (!fragmentManager.isStateSaved()) {
+			if (!fragmentManager.isStateSaved() && AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG, true)) {
 				FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();
 				fragment.showAppropriateWizard(activity, false);
 				activity.getSupportFragmentManager()
