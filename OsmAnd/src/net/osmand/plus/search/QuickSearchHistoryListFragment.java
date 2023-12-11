@@ -9,8 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.settings.fragments.SearchHistorySettingsFragment;
+import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 
 import java.util.List;
 
@@ -41,7 +42,11 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment {
 			QuickSearchDialogFragment dialogFragment = getDialogFragment();
 			FragmentManager fragmentManager = dialogFragment.getFragmentManager();
 			if (fragmentManager != null) {
-				SearchHistorySettingsFragment.showInstance(fragmentManager, dialogFragment);
+				QuickSearchListItem item = getListAdapter().getItem(position);
+				if (item != null && item.getSearchResult().object instanceof HistoryEntry) {
+					HistoryEntry entry = (HistoryEntry) item.getSearchResult().object;
+					HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
+				}
 			}
 			return true;
 		});
