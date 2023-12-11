@@ -1189,7 +1189,7 @@
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Tillfartsinskränkningar</string>
-    <string name="rendering_attr_showAccess_name">Visa åtkomstbegränsningar och vägtull</string>
+    <string name="rendering_attr_showAccess_name">Visa åtkomstbegränsningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelleder</string>
@@ -1936,7 +1936,7 @@
     <string name="show_something_on_map">Visa %1$s på kartan</string>
     <string name="dist_away_from_my_location">Sök %1$s bort</string>
     <string name="translit_names">Translitterera namn</string>
-    <string name="edit_filter">Redigera kategorier</string>
+    <string name="edit_filter">Redigera filter</string>
     <string name="subcategories">Underkategorier</string>
     <string name="selected_categories">Markerade kategorier</string>
     <string name="create_custom_poi">Skapa eget filter</string>
@@ -5176,7 +5176,7 @@
     <string name="multimedia_notes_view_descr">Dina OSM-anteckningar är i %1$s.</string>
     <string name="files_present">%1$d filer (%2$s) finns på den tidigare platsen \'%3$s\'.</string>
     <string name="profile_alert_duplicate_name_title">Duplicera namn</string>
-    <string name="press_button_to_link_with_action">Tryck på knappen på din enhet för att koppla den till vald åtgärd.</string>
+    <string name="press_button_to_link_with_action">Tryck på knappen på din enhet för att koppla den till åtgärden: %1$s</string>
     <string name="public_transport_ped_route_title">Vägen till fots är ca %1$s, och kan vara snabbare än kollektivtrafik</string>
     <string name="shared_string_button">Knapp</string>
     <string name="navigate_point_format_swiss_grid">Schweiz nationella rutnät (CH1903)</string>
@@ -5188,7 +5188,7 @@
     <string name="public_transport_type">Typ av kollektivtrafik</string>
     <string name="public_transport_no_route_title">Tyvärr, kunde inte hitta en rutt som passar dina inställningar.</string>
     <string name="dont_move_maps">Flytta inte</string>
-    <string name="key_is_already_assigned_error">\"%1$s\"-knappen har redan kopplats till en annan åtgärd: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">\"%1$s\"-knappen har redan kopplats till åtgärden: \"%2$s\"</string>
     <string name="snowmobile_render_descr">För snöskoter, med särskilt avsedda vägar och skoterleder.</string>
     <string name="osmand_default_routing">OsmAnds ruttberäkning</string>
     <string name="public_transport_calc_pedestrian">Beräkna rutt till fots</string>
@@ -5305,4 +5305,30 @@
     <string name="shared_string_hide_slope">Dölj lutningsgrad</string>
     <string name="provided_by">Tillhandahålls av %1$s</string>
     <string name="topography_maps">Topografikartor</string>
+    <string name="key_assignments">Knapp-kopplingar</string>
+    <string name="favorite_confirm_delete_group">Vill du radera gruppen \'%1$s\' och alla dess inkluderade punkter (%2$d)?</string>
+    <string name="waypoint_appearance">Ruttpunktens utseende</string>
+    <string name="reset_key_assignments_desc">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
+    <string name="rendering_attr_showToll_name">Visa betalvägsbegränsningar</string>
+    <string name="available_as_part_of_subscription_plan">Tillgänglig som en del av prenumerationen %1$s.</string>
+    <string name="predefined_waypoint_appearance_description">Tryck på snabbåtgärden för att autospara ruttpunkten med förinställda parametrar.</string>
+    <string name="track_file_description">Tryck på snabbåtgärden visar tillgängliga spår.</string>
+    <string name="included_in_your_current_plan">Inkluderad i din nuvarande \'%1$s\' prenumeration</string>
+    <string name="button_already_assigned_to_this_action">Den här knappen är redan kopplad till denna åtgärd.</string>
+    <string name="change_key_binding">Ändra knapp-koppling</string>
+    <string name="shared_string_reassign">Koppla om</string>
+    <string name="reset_key_assignments">Återställ knapp-kopplingar</string>
+    <string name="rendering_attr_showToll_description">Visa betalvägar, vägtullar och andra avgifter på vägarna</string>
+    <string name="zoom_non_animated">Zoom utan animering</string>
+    <string name="key_assignments_already_cleared_message">Alla knapp-kopplingar har redan rensats</string>
+    <string name="target_elevation">Målhöjd</string>
+    <string name="use_v1_auto_zoom">Diskret auto-zoom (äldre version)</string>
+    <string name="always_ask_waypoint_appearance_description">Tryck på snabbåtgärden öppnar vyn \"Lägg till ruttpunkt\" där du kan ändra namn och utseende.</string>
+    <string name="zoom_animated">Animerad zoom</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="key_bindings">Knapp-kopplingar</string>
+    <string name="clear_key_assignment">Rensa knapp-koppling</string>
+    <string name="duplacate_widget_added_snackbar">En duplicerad widget läggs till listan.</string>
+    <string name="add_new_button">Lägg till en ny knapp</string>
+    <string name="clear_key_assignment_desc">Knapp-kopplingen för vald åtgärd kommer rensas och sättas till Ingen.</string>
 </resources>
