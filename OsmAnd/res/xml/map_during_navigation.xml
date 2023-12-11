@@ -25,11 +25,4 @@
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/snap_to_road" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="calculate_bearing"
-		android:layout="@layout/preference_dialog_and_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/approximate_bearing" />
-
 </PreferenceScreen>
