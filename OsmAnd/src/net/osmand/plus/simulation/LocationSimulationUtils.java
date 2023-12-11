@@ -90,7 +90,7 @@ public class LocationSimulationUtils {
 		SimulatedLocation location = new SimulatedLocation(start);
 		location.setLatitude(toDegree(lat2));
 		location.setLongitude(toDegree(lon2));
-		location.setBearing(bearing);
+		location.setBearing(bearing, end.getLatitude(), end.getLongitude());
 		location.setTrafficLight(false);
 		return location;
 	}

@@ -57,6 +57,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 	private static final long MOVE_ANIMATION_TIME = 500;
 	public static final int AUTO_ZOOM_DEFAULT_CHANGE_ZOOM = 4500;
+	public static final float MAX_DELTA_SMOOTH_BEARING = 20.0f;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -236,8 +237,17 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						NativeUtilities.containsLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					// special case when bearing equals to zero (we don't change anything)
-					if (location.hasBearing() && location.getBearing() != 0f) {
-						rotation = -location.getBearing();
+					if (location.hasBearing()) {
+						float shortBearing = -location.getBearing();
+						if (prevLocation != null && location.hasDestination()) {
+							Location nextLocation = new Location(
+									locationProvider,
+									location.getDestinationLatitude(),
+									location.getDestinationLongitude());
+							float longBearing = -MapUtils.normalizeDegrees360(prevLocation.bearingTo(nextLocation));
+							rotation = Math.abs(longBearing - shortBearing) < MAX_DELTA_SMOOTH_BEARING ? longBearing : shortBearing;
+						} else
+							rotation = shortBearing;
 					}
 					if (rotation == null && prevLocation != null && tb != null) {
 						double distDp = (tb.getPixDensity() * MapUtils.getDistance(prevLocation, location)) / tb.getDensity();
