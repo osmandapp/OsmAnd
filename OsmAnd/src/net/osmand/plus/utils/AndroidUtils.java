@@ -303,9 +303,9 @@ public class AndroidUtils {
 		return isFragmentCanBeAdded(manager, tag, false);
 	}
 
-	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean useTag) {
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean preventFragmentDuplication) {
 		boolean isStateSaved = manager.isStateSaved();
-		return useTag ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
+		return preventFragmentDuplication ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

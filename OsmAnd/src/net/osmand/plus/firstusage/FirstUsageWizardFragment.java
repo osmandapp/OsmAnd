@@ -819,18 +819,16 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	public static boolean showFragment(@Nullable FragmentActivity activity) {
-		if (!wizardClosed && activity != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (!fragmentManager.isStateSaved()) {
-				FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();
-				fragment.showAppropriateWizard(activity, false);
-				activity.getSupportFragmentManager()
-						.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.commitAllowingStateLoss();
-				return true;
-			}
+	public static boolean showFragment(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!wizardClosed && AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
+			FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();
+			fragment.showAppropriateWizard(activity, false);
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.commitAllowingStateLoss();
+			return true;
 		}
 		return false;
 	}
