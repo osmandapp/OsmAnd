@@ -133,6 +133,19 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		return null;
 	}
 
+	@Nullable
+	protected String getWidgetName() {
+		if (widgetState != null) {
+			TimeToNavigationPointState state = getCurrentState();
+			if (state == TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME || state == TimeToNavigationPointState.INTERMEDIATE_TIME_TO_GO) {
+				return getString(R.string.rendering_attr_smoothness_intermediate_name);
+			} else {
+				return getString(R.string.route_descr_destination);
+			}
+		}
+		return super.getWidgetName();
+	}
+
 	@NonNull
 	private TimeToNavigationPointState getCurrentState() {
 		return TimeToNavigationPointState.getState(widgetState.isIntermediate(), arrivalTimeOtherwiseTimeToGoPref.get());
