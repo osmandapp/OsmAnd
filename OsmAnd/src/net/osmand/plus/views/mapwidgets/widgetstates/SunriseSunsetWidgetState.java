@@ -14,9 +14,9 @@ public class SunriseSunsetWidgetState extends WidgetState {
 	private final WidgetType widgetType;
 	private final OsmandPreference<Boolean> preference;
 
-	public SunriseSunsetWidgetState(@NonNull OsmandApplication app, @Nullable String customId, boolean sunriseMode) {
+	public SunriseSunsetWidgetState(@NonNull OsmandApplication app, @Nullable String customId, WidgetType widgetType) {
 		super(app);
-		this.widgetType = sunriseMode ? WidgetType.SUNRISE : WidgetType.SUNSET;
+		this.widgetType = widgetType;
 		this.preference = registerPreference(customId);
 	}
 
@@ -41,10 +41,6 @@ public class SunriseSunsetWidgetState extends WidgetState {
 		return widgetType.getIconId(nightMode);
 	}
 
-	public boolean isSunriseMode() {
-		return widgetType == WidgetType.SUNRISE;
-	}
-
 	@Override
 	public void changeToNextState() {
 		preference.set(!preference.get());
@@ -57,10 +53,22 @@ public class SunriseSunsetWidgetState extends WidgetState {
 
 	@NonNull
 	private OsmandPreference<Boolean> registerPreference(@Nullable String customId) {
-		String prefId = isSunriseMode() ? "show_sunrise_info" : "show_sunset_info";
+		String prefId = getPrefId();
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
 		return settings.registerBooleanPreference(prefId, true).makeProfile();
+	}
+
+	private String getPrefId(){
+		switch (widgetType){
+			case SUNSET:
+				return "show_sunset_info";
+			case SUNRISE:
+				return "show_sunrise_info";
+			case SUN_POSITION:
+			default:
+				return "show_sun_position_info";
+		}
 	}
 }

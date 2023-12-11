@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_next_event">Next event</string>
+    <string name="map_widget_sun_position_desc">This widget shows the time until sunrise or sunset, depending on the current time.</string>
+    <string name="map_widget_sun_position">Sun position</string>
     <string name="use_v1_auto_zoom">Discrete auto zoom (old version)</string>
     <string name="button_already_assigned_to_this_action">This button is already assigned to this action.</string>
     <string name="key_assignments_already_cleared_message">All key assignments are already cleared</string>
