@@ -12,6 +12,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -43,6 +44,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -830,7 +832,7 @@ public class SearchUICore {
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
-					for (String value : ((Amenity) object.object).getAdditionalInfoValues(true)) {
+					for (String value : getTranslatedAdditionalInfo((Amenity) object.object)) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
 							object.alternateName = value;
 							break;
@@ -852,7 +854,36 @@ public class SearchUICore {
 			}
 			return false;
 		}
-		
+
+		public List<String> getTranslatedAdditionalInfo(Amenity amenity) {
+			List<String> result = new ArrayList<>();
+			Map<String, String> additionalInfo = amenity.getInternalAdditionalInfoMap();
+			if (!Algorithms.isEmpty(additionalInfo)) {
+				MapPoiTypes poiTypes = MapPoiTypes.getDefault();
+				for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
+					String key = entry.getKey();
+					String value = entry.getValue();
+					AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+					if (pt == null && !Algorithms.isEmpty(value) && value.length() < 50) {
+						pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
+					}
+					PoiType pType = null;
+					if (pt != null) {
+						pType = (PoiType) pt;
+						if (pType.isFilterOnly()) {
+							continue;
+						}
+					}
+					if (pType != null && !pType.isText()) {
+						result.add(pType.getTranslation());
+					} else {
+						result.add(value);
+					}
+				}
+			}
+			return result;
+		}
+
 		@Override
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();
