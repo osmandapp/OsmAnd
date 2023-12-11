@@ -59,6 +59,8 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 
 	private static final Log LOG = PlatformUtil.getLog(MapFragmentsHelper.class);
 
+	public static final String CLOSE_ALL_FRAGMENTS = "close_all_fragments";
+
 	private final MapActivity activity;
 
 	public MapFragmentsHelper(@NonNull MapActivity activity) {
