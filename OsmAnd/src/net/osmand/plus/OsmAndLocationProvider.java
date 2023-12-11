@@ -453,12 +453,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
 					val = (float) Math.toDegrees(orientation[0]);
 				}
-
-				// Special case when compass value is always 0
-				if (val == 0) {
-					return;
-				}
-
 				val = calcScreenOrientationCorrection(val);
 				val = calcGeoMagneticCorrection(val);
 
