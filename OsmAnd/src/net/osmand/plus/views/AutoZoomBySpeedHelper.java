@@ -22,6 +22,8 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
@@ -55,6 +57,9 @@ public class AutoZoomBySpeedHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final SpeedFilter speedFilter;
+
+	@Nullable
+	private RouteDirectionInfo nextTurnInFocus;
 
 	public AutoZoomBySpeedHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -97,7 +102,7 @@ public class AutoZoomBySpeedHelper {
 	public ComplexZoom calculateZoomBySpeedToAnimate(@NonNull MapRendererView mapRenderer,
 	                                                 @NonNull Location myLocation,
 	                                                 @Nullable Float rotationToAnimate,
-	                                                 float distanceToNextTurn) {
+	                                                 @Nullable NextDirectionInfo nextTurn) {
 		float speed = myLocation.getSpeed();
 		if (speed < MIN_AUTO_ZOOM_SPEED) {
 			return null;
@@ -116,7 +121,7 @@ public class AutoZoomBySpeedHelper {
 		float myLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, myLocation31);
 		PointI myLocationPixel = mapRenderer.getState().getFixedPixel();
 
-		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, filteredSpeed, distanceToNextTurn);
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, nextTurn, filteredSpeed);
 		float rotation = rotationToAnimate != null ? rotationToAnimate : mapView.getRotate();
 		LatLon anotherLatLon = MapUtils.rhumbDestinationPoint(myLocationLatLon, showDistanceToDrive, rotation);
 
@@ -171,7 +176,7 @@ public class AutoZoomBySpeedHelper {
 		float firstHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, firstLocation31);
 		PointI firstPixel = state.getFixedPixel();
 
-		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, speed, -1);
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, null, speed);
 		LatLon secondLatLon = MapUtils.rhumbDestinationPoint(lat, lon, showDistanceToDrive, rotation);
 		PointI secondLocation31 = NativeUtilities.getPoint31FromLatLon(secondLatLon);
 		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31);
@@ -208,11 +213,20 @@ public class AutoZoomBySpeedHelper {
 		return new Pair<>(autoZoom, zoomDuration);
 	}
 
-	private float getShowDistanceToDrive(@NonNull AutoZoomMap autoZoomScale, float speed, float distanceToNextTurn) {
+	private float getShowDistanceToDrive(@NonNull AutoZoomMap autoZoomScale,
+	                                     @Nullable NextDirectionInfo nextTurn,
+	                                     float speed) {
 		float showDistanceToDrive = speed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
-		return distanceToNextTurn > 0
-				? Math.max(Math.min(distanceToNextTurn, showDistanceToDrive), autoZoomScale.minDistanceToDrive)
-				: Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
+		if (nextTurn != null) {
+			if (nextTurn.distanceTo < showDistanceToDrive) {
+				showDistanceToDrive = nextTurn.distanceTo;
+				nextTurnInFocus = nextTurn.directionInfo;
+			} else if (nextTurnInFocus != null && nextTurnInFocus.equals(nextTurn.directionInfo)) {
+				showDistanceToDrive = nextTurn.distanceTo;
+			}
+		}
+
+		return Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
 	}
 
 	@NonNull
