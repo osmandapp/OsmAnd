@@ -1184,7 +1184,7 @@
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
-    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso e pedaggi</string>
+    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Percorsi ciclabili</string>
@@ -5566,4 +5566,6 @@
     <string name="zoom_animated">Zoom animato</string>
     <string name="clear_key_assignment">Elimina l\'associazione dei tasti</string>
     <string name="add_new_button">Aggiungi un nuovo pulsante</string>
+    <string name="zoom_non_animated">Zoom senza animazione</string>
+    <string name="use_v1_auto_zoom">Zoom automatico discreto (vecchia versione)</string>
 </resources>
