@@ -3250,7 +3250,7 @@
     <string name="poi_disease_malaria_no">Malaria: no</string>
     <string name="poi_disease_autism_no">Autismo: no</string>
     <string name="poi_service_vehicle_alignment_yes">Allineamento</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurizzato</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pressurizzato</string>
     <string name="poi_gpx_point">Punto GPX</string>
     <string name="poi_departures_board_delay">Ritardo;Tabella partenze</string>
     <string name="poi_radar_tower">Torre radar</string>
@@ -3517,7 +3517,7 @@
     <string name="poi_healthcare_speciality_adult_psychiatry">Psichiatria adulta</string>
     <string name="poi_nuclear_explosion_series">Serie esplosioni</string>
     <string name="poi_seamark_obstruction">Ostruzione</string>
-    <string name="poi_osmand_climbing_bolts_no">No</string>
+    <string name="poi_climbing_bolts_no">No</string>
     <string name="poi_healthcare_speciality_manual_therapy">Terapia manuale</string>
     <string name="poi_healthcare_speciality_sports">Medicina sportiva</string>
     <string name="poi_healthcare_speciality_depth">Psichiatria profonda</string>
@@ -3547,7 +3547,7 @@
     <string name="poi_socket_type2_combo_voltage_medium">Media</string>
     <string name="poi_socket_type2_cable_voltage_high">Alta</string>
     <string name="poi_climbing_grade_elite">Elite</string>
-    <string name="poi_osmand_climbing_bolts_yes">Sì</string>
+    <string name="poi_climbing_bolts_yes">Sì</string>
     <string name="poi_climbing_grade_novice">Novizio</string>
     <string name="poi_climbing_grade_intermediate">Intermedio</string>
     <string name="poi_climbing_grade_expert">Esperto</string>

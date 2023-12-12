@@ -3772,8 +3772,8 @@
     <string name="poi_traffic_signals_vibration_yes">Ναι</string>
     <string name="poi_traffic_signals_vibration_no">Δόνηση: όχι</string>
     <string name="poi_pump_status_missing_beam">Κατάσταση αντλίας: ελλείπων βραχίονας</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Αναρρόφηση</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Πιεσμένο</string>
+    <string name="poi_fire_hydrant_pressure_suction">Αναρρόφηση</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Πιεσμένο</string>
     <string name="poi_water_source_groundwater">Υπόγεια ύδατα</string>
     <string name="poi_fire_hydrant_type_pipe">Σωλήνας</string>
     <string name="poi_drinking_water_refill_network">Δίκτυο ξαναγεμίσματος πόσιμου νερού</string>

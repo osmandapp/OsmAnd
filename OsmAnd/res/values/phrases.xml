@@ -4305,8 +4305,8 @@
 	<string name="poi_fire_hydrant_type_pipe">Pipe</string>
 	<string name="poi_water_source_groundwater">Groundwater</string>
 
-	<string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurized</string>
-	<string name="poi_osmand_fire_hydrant_pressure_suction">Suction</string>
+	<string name="poi_fire_hydrant_pressure_pressurized">Pressurized</string>
+	<string name="poi_fire_hydrant_pressure_suction">Suction</string>
 
 	<string name="poi_pump_status_missing_beam">Pump status: missing beam</string>
 	<string name="poi_traffic_signals_vibration_no">Vibration: no</string>
@@ -4977,8 +4977,8 @@
 	<string name="poi_climbing_bolt_abseil">Abseil</string>
 	<string name="poi_climbing_bolt_anchor">Anchor</string>
 
-	<string name="poi_osmand_climbing_bolts_yes">Yes</string>
-	<string name="poi_osmand_climbing_bolts_no">No</string>
+	<string name="poi_climbing_bolts_yes">Yes</string>
+	<string name="poi_climbing_bolts_no">No</string>
 	<string name="poi_climbing_bolts">Climbing bolts</string>
 	<string name="poi_climbing_quality_medium">Medium</string>
 
@@ -5175,7 +5175,7 @@
 	<string name="poi_surface_rubber">Surface: rubber</string>
 
 	<string name="poi_assembly_point">Assembly point</string>
-	<string name="poi_osmand_not_pt_shelter_yes">All except public transport shelters</string>
+	<string name="poi_not_pt_shelter_yes">All except public transport shelters</string>
 
 	<string name="poi_bicycle_designated">Designated for bicycles</string>
 	<string name="poi_horse_designated">Designated for horses</string>

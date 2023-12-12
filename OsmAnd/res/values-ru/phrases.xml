@@ -3755,8 +3755,8 @@
     <string name="poi_climbing_multipitch_yes">Многоуровневые маршруты: есть</string>
     <string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Взрывной залп: вторая или более поздняя детонация залпового теста</string>
     <string name="poi_water_source_groundwater">Подземные воды</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Сухой</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Мокрый</string>
+    <string name="poi_fire_hydrant_pressure_suction">Сухой</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Мокрый</string>
     <string name="poi_pile">Куча</string>
     <string name="poi_location_rooftop">Расположение: на крыше</string>
     <string name="poi_lock_basin">Место отстоя судов</string>

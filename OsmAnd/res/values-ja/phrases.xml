@@ -3800,8 +3800,8 @@
     <string name="poi_traffic_signals_vibration_yes">有り;信号機の振動</string>
     <string name="poi_traffic_signals_vibration_no">振動:無し</string>
     <string name="poi_pump_status_missing_beam">状態:釣瓶・管がない</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">吸引</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加圧</string>
+    <string name="poi_fire_hydrant_pressure_suction">吸引</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">加圧</string>
     <string name="poi_water_source_groundwater">地下水</string>
     <string name="poi_nuts">ナッツ専門店</string>
     <string name="poi_beehive">養蜂箱</string>
@@ -4371,8 +4371,8 @@
     <string name="poi_playground_activitypanel">パネル遊具</string>
     <string name="poi_playground_exercise">健康遊具</string>
     <string name="poi_climbing_grade_advanced">上級</string>
-    <string name="poi_osmand_climbing_bolts_yes">有り</string>
-    <string name="poi_osmand_climbing_bolts_no">無し</string>
+    <string name="poi_climbing_bolts_yes">有り</string>
+    <string name="poi_climbing_bolts_no">無し</string>
     <string name="poi_climbing_bolts">クライミングボルト</string>
     <string name="poi_climbing_bolt_anchor">アンカー</string>
     <string name="poi_climbing_quality">岩壁、氷壁品質</string>

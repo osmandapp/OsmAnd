@@ -3790,8 +3790,8 @@
     <string name="poi_drinking_water_refill_yes">jes;trinkebla akvo;akvo;krano</string>
     <string name="poi_drinking_water_refill_no">Plenigi per trinkebla akvo: ne</string>
     <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">senprema</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">prema</string>
+    <string name="poi_fire_hydrant_pressure_suction">senprema</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">prema</string>
     <string name="poi_water_source_groundwater">grundakvo</string>
     <string name="poi_fire_hydrant_type_pipe">tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Premo de hidranto</string>
@@ -4425,8 +4425,8 @@
     <string name="poi_hiking_filter">Taŭga por turisma marŝado</string>
     <string name="poi_climbing_bolt_abseil">malleviĝa</string>
     <string name="poi_climbing_bolt_anchor">fiksa</string>
-    <string name="poi_osmand_climbing_bolts_yes">jes</string>
-    <string name="poi_osmand_climbing_bolts_no">ne</string>
+    <string name="poi_climbing_bolts_yes">jes</string>
+    <string name="poi_climbing_bolts_no">ne</string>
     <string name="poi_socket_type2_cable_voltage_medium">meza</string>
     <string name="poi_socket_type3c_voltage_low">malalta</string>
     <string name="poi_socket_type2_cable_output_medium">meza</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Pavimo: plasto</string>
     <string name="poi_surface_rubber">Pavimo: gumo</string>
     <string name="poi_assembly_point">Renkontejo post evakuo</string>
-    <string name="poi_osmand_not_pt_shelter_yes">ĉio escepte de publik-transportaj ŝirmejoj</string>
+    <string name="poi_not_pt_shelter_yes">ĉio escepte de publik-transportaj ŝirmejoj</string>
     <string name="poi_bicycle_designated">Destinita por bicikloj</string>
     <string name="poi_horse_designated">Destinita por ĉevaloj</string>
     <string name="poi_foot_designated">Destinita por piedirantoj</string>
