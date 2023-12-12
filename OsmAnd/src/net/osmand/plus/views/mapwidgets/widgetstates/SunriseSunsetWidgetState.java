@@ -2,8 +2,10 @@ package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -13,11 +15,14 @@ public class SunriseSunsetWidgetState extends WidgetState {
 
 	private final WidgetType widgetType;
 	private final OsmandPreference<Boolean> preference;
+	private final OsmandPreference<SunPositionMode> sunPositionPreference;
+
 
 	public SunriseSunsetWidgetState(@NonNull OsmandApplication app, @Nullable String customId, WidgetType widgetType) {
 		super(app);
 		this.widgetType = widgetType;
 		this.preference = registerPreference(customId);
+		this.sunPositionPreference = registerSunPositionPreference(customId);
 	}
 
 	@NonNull
@@ -28,6 +33,10 @@ public class SunriseSunsetWidgetState extends WidgetState {
 	@NonNull
 	public OsmandPreference<Boolean> getPreference() {
 		return preference;
+	}
+
+	public OsmandPreference<SunPositionMode> getSunPositionPreference() {
+		return sunPositionPreference;
 	}
 
 	@NonNull
@@ -49,6 +58,7 @@ public class SunriseSunsetWidgetState extends WidgetState {
 	@Override
 	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		registerPreference(customId).setModeValue(appMode, preference.getModeValue(appMode));
+		registerSunPositionPreference(customId).setModeValue(appMode, sunPositionPreference.getModeValue(appMode));
 	}
 
 	@NonNull
@@ -69,6 +79,34 @@ public class SunriseSunsetWidgetState extends WidgetState {
 			case SUN_POSITION:
 			default:
 				return "show_sun_position_info";
+		}
+	}
+
+	@NonNull
+	private OsmandPreference<SunPositionMode> registerSunPositionPreference(@Nullable String customId) {
+		String prefId = "sun_position_widget_mode";
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += customId;
+		}
+		return settings.registerEnumStringPreference(prefId, SunPositionMode.SUN_POSITION_MODE, SunPositionMode.values(), SunPositionMode.class)
+				.makeProfile();
+	}
+
+	public enum SunPositionMode {
+		SUN_POSITION_MODE(R.string.shared_string_next_event),
+		SUNSET_MODE(R.string.shared_string_sunset),
+		SUNRISE_MODE(R.string.shared_string_sunrise);
+
+		@StringRes
+		final int prefId;
+
+		SunPositionMode(int prefId) {
+			this.prefId = prefId;
+		}
+
+		@StringRes
+		public int getPrefId() {
+			return prefId;
 		}
 	}
 }

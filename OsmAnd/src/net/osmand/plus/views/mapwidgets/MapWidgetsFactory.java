@@ -37,7 +37,6 @@ import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.SunPositionWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
@@ -116,14 +115,13 @@ public class MapWidgetsFactory {
 				return new RadiusRulerWidget(mapActivity);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNRISE);
-				return new SunriseSunsetWidget(mapActivity, sunriseState, null, customId, panel);
+				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);
 			case SUNSET:
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNSET);
-				return new SunriseSunsetWidget(mapActivity, sunsetState, null, customId, panel);
+				return new SunriseSunsetWidget(mapActivity, sunsetState, customId, panel);
 			case SUN_POSITION:
 				SunriseSunsetWidgetState sunriseSunsetWidgetState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUN_POSITION);
-				SunPositionWidgetState sunPositionState = new SunPositionWidgetState(app, customId);
-				return new SunriseSunsetWidget(mapActivity, sunriseSunsetWidgetState, sunPositionState, customId, panel);
+				return new SunriseSunsetWidget(mapActivity, sunriseSunsetWidgetState, customId, panel);
 			case GLIDE_TARGET:
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
 				return new GlideTargetWidget(mapActivity, glideWidgetState, customId, panel);

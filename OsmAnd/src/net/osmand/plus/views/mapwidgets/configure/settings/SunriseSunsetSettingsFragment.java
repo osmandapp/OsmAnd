@@ -2,7 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import static net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget.formatNextTime;
 import static net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget.formatTimeLeft;
-import static net.osmand.plus.views.mapwidgets.widgetstates.SunPositionWidgetState.*;
+import static net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState.*;
 
 import android.os.Bundle;
 import android.os.Handler;
