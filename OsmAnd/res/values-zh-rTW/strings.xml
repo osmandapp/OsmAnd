@@ -5565,4 +5565,5 @@
     <string name="button_already_assigned_to_this_action">此按鈕已分配給此動作。</string>
     <string name="key_assignments_already_cleared_message">所有按鍵分配都已清除</string>
     <string name="add_new_button">新增按鈕</string>
+    <string name="use_v1_auto_zoom">單獨自動縮放（舊版本）</string>
 </resources>

@@ -44,6 +44,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.render.TravelRendererHelper;
@@ -156,7 +157,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
-				PoiUIFilter.combineStandardPoiFilters(calculatedFilters, app);
+				PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
 					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {

@@ -689,6 +689,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode();
 	}
 
+	public boolean isAfterDoubleTap() {
+		return afterDoubleTap;
+	}
+
 	public float getElevationAngle() {
 		return elevationAngle;
 	}

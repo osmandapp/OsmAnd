@@ -303,9 +303,9 @@ public class AndroidUtils {
 		return isFragmentCanBeAdded(manager, tag, false);
 	}
 
-	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean useTag) {
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean preventFragmentDuplication) {
 		boolean isStateSaved = manager.isStateSaved();
-		return useTag ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
+		return preventFragmentDuplication ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -340,7 +340,7 @@ public class AndroidUtils {
 			s.removeSpan(span);
 			span = new URLSpan(span.getURL()) {
 				@Override
-				public void updateDrawState(TextPaint ds) {
+				public void updateDrawState(@NonNull TextPaint ds) {
 					super.updateDrawState(ds);
 					ds.setUnderlineText(false);
 				}
@@ -360,28 +360,14 @@ public class AndroidUtils {
 				" " + DateFormat.getTimeFormat(ctx).format(d);
 	}
 
-	public static String formatTime(Context ctx, long time) {
-		return DateFormat.getTimeFormat(ctx).format(new Date(time));
-	}
-
-	@NonNull
-	public static String formatRatioOfSizes(@NonNull Context ctx, long sizeBytes, long totalBytes, boolean round) {
-		FormattedSize size = formatSize(sizeBytes, round);
-		FormattedSize total = formatSize(totalBytes, round);
-		if (size != null && total != null) {
-			String firstPart = Objects.equals(size.numSuffix, total.numSuffix)
-					? size.num
-					: ctx.getString(R.string.ltr_or_rtl_combine_via_space, size.num, size.numSuffix);
-			String secondPart =
-					ctx.getString(R.string.ltr_or_rtl_combine_via_space, total.num, total.numSuffix);
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash, firstPart, secondPart);
-		}
-		return "";
-	}
-
 	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
-		FormattedSize formattedSize = formatSize(sizeBytes, false);
+		return formatSize(ctx, sizeBytes, false);
+	}
+
+	@NonNull
+	public static String formatSize(Context ctx, long sizeBytes, boolean round) {
+		FormattedSize formattedSize = formatSize(sizeBytes, round);
 		if (formattedSize != null) {
 			String size = formattedSize.num;
 			String numSuffix = formattedSize.numSuffix;

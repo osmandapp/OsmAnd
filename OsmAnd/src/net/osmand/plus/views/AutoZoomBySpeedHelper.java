@@ -46,7 +46,7 @@ public class AutoZoomBySpeedHelper {
 	public static final float ZOOM_PER_SECOND = 0.1f;
 	public static final float ZOOM_PER_MILLIS = ZOOM_PER_SECOND / 1000f;
 	public static final int MIN_ZOOM_DURATION_MILLIS = 1500;
-	private static final int SHOW_DRIVING_SECONDS_V2 = 37;
+	private static final int SHOW_DRIVING_SECONDS_V2 = 45;
 	private static final float MIN_AUTO_ZOOM_SPEED = 7 / 3.6f;
 
 	private static final float FOCUS_PIXEL_RATIO_X = 0.5f;

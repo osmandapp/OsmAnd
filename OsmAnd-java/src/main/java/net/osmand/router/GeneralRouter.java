@@ -27,6 +27,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
+	public static int IMPASSABLE_ROAD_SHIFT = 0; // 6 is better
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
 	public static final String AVOID_FERRIES = "avoid_ferries";
@@ -318,7 +319,7 @@ public class GeneralRouter implements VehicleRouter {
 			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
 			putCache(RouteDataObjectAttribute.ACCESS, way, res);
 		}
-		if (impassableRoads != null && impassableRoads.contains(way.id)) {
+		if (impassableRoads != null && impassableRoads.contains(way.id >> IMPASSABLE_ROAD_SHIFT)) {
 			return false;
 		}
 		return res >= 0;
@@ -329,7 +330,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	public long[] getImpassableRoadIds() {
-		if(impassableRoads == null) {
+		if (impassableRoads == null) {
 			return new long[0];
 		}
 		return impassableRoads.toArray();

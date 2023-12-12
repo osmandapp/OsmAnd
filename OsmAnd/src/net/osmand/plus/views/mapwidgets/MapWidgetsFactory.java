@@ -114,11 +114,14 @@ public class MapWidgetsFactory {
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
 			case SUNRISE:
-				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
+				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNRISE);
 				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);
 			case SUNSET:
-				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
+				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNSET);
 				return new SunriseSunsetWidget(mapActivity, sunsetState, customId, panel);
+			case SUN_POSITION:
+				SunriseSunsetWidgetState sunriseSunsetWidgetState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUN_POSITION);
+				return new SunriseSunsetWidget(mapActivity, sunriseSunsetWidgetState, customId, panel);
 			case GLIDE_TARGET:
 				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
 				return new GlideTargetWidget(mapActivity, glideWidgetState, customId, panel);

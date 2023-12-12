@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
-	public static final int MAX_BEARING_DEVIATION = 160;
+	public static final int MAX_BEARING_DEVIATION = 45;
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
@@ -110,13 +110,35 @@ public class RoutingHelperUtils {
 		return locationProjection;
 	}
 
-	public static void approximateBearingIfNeeded(@NonNull RoutingHelper helper, @NonNull Location locationProjection,
-	                                              @NonNull Location loc, @NonNull Location from, @NonNull Location to) {
-		float bearingTo = MapUtils.normalizeDegrees360(from.bearingTo(to));
-		double projectDist = helper.getMaxAllowedProjectDist(loc);
-		if ((!loc.hasBearing() || Math.abs(loc.getBearing() - bearingTo) < MAX_BEARING_DEVIATION) &&
-				loc.distanceTo(locationProjection) < projectDist) {
-			locationProjection.setBearing(bearingTo);
+	public static void approximateBearingIfNeeded(@NonNull RoutingHelper routingHelper,
+	                                              @NonNull Location projection,
+	                                              @NonNull Location location,
+	                                              @NonNull Location previousRouteLocation,
+	                                              @NonNull Location currentRouteLocation,
+	                                              @NonNull Location nextRouteLocation) {
+		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
+		if (location.distanceTo(projection) >= maxDist) {
+			return;
+		}
+
+		float projectionOffsetN = (float) MapUtils.getProjectionCoeff(
+				location.getLatitude(), location.getLongitude(),
+				previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
+				currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
+		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
+		float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
+		float approximatedBearing = currentSegmentBearing * (1.0f - projectionOffsetN)
+				+ nextSegmentBearing * projectionOffsetN;
+
+		boolean setApproximated;
+		if (location.hasBearing()) {
+			float rotationDiff = MapUtils.unifyRotationDiff(location.getBearing(), approximatedBearing);
+			setApproximated = Math.abs(rotationDiff) < MAX_BEARING_DEVIATION;
+		} else {
+			setApproximated = true;
+		}
+		if (setApproximated) {
+			projection.setBearing(approximatedBearing);
 		}
 	}
 

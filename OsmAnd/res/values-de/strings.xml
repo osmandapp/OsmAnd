@@ -405,7 +405,7 @@
     <string name="map_text_size">Karten-Textgröße</string>
     <string name="trace_rendering">Debug-Informationen zur Leistung</string>
     <string name="trace_rendering_descr">Anzeige der Rendering- und Navigationsleistung.</string>
-    <string name="installing_new_resources">Entpacke neue Daten …</string>
+    <string name="installing_new_resources">Neue Daten werden entpackt …</string>
     <string name="internet_connection_required_for_online_route">Die Online-Navigation funktioniert nicht offline.</string>
     <string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
     <string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android-TTS-Engine nicht unterstützt. Stattdessen wird die voreingestellte TTS-Sprache verwendet. Im Markt nach einer anderen TTS-Engine suchen\?</string>
@@ -484,10 +484,10 @@
     <string name="amenity_type_sustenance">Gastronomie</string>
     <string name="amenity_type_tourism">Touristik</string>
     <string name="amenity_type_transportation">ÖPNV</string>
-    <string name="indexing_address">Indiziere Adressen …</string>
-    <string name="indexing_map">Indiziere Karte …</string>
-    <string name="indexing_poi">Indiziere POI …</string>
-    <string name="indexing_transport">Indiziere ÖPNV …</string>
+    <string name="indexing_address">Adresse wird indiziert …</string>
+    <string name="indexing_map">Karte wird indiziert …</string>
+    <string name="indexing_poi">POI wird indiziert …</string>
+    <string name="indexing_transport">ÖPNV wird indiziert …</string>
     <string name="shared_string_io_error">I/O-Fehler</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
@@ -500,7 +500,7 @@
     <string name="poi_filter_for_tourists">Für Touristen</string>
     <string name="poi_filter_fuel">Tankstelle</string>
     <string name="poi_filter_namefinder">Online-Namensfinder</string>
-    <string name="reading_cached_tiles">Lese zwischengespeicherte Kacheln …</string>
+    <string name="reading_cached_tiles">Zwischengespeicherte Kacheln werden gelesen …</string>
     <string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
     <string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
     <string name="osmand_routing_experimental">Die Offline-Navigation von OsmAnd ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km. 
@@ -510,10 +510,10 @@
     <string name="application_dir">Datenordner</string>
     <string name="osmand_net_previously_installed">Alle Offline-Daten der älteren App werden in der neuen weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
     <string name="build_installed">Build {0} installiert ({1}).</string>
-    <string name="downloading_build">Lade Build herunter …</string>
+    <string name="downloading_build">Build wird heruntergeladen …</string>
     <string name="install_selected_build">OsmAnd ({0} von {1} {2} MB) installieren?</string>
     <string name="loading_builds_failed">Liste der OsmAnd-Builds konnte nicht abgerufen werden</string>
-    <string name="loading_builds">Lade OsmAnd-Builds …</string>
+    <string name="loading_builds">OsmAnd-Builds werden geladen …</string>
     <string name="select_build_to_install">Zu installierenden OsmAnd-Build auswählen</string>
     <string name="contribution_activity">Version installieren</string>
     <string name="gps_status_app_not_found">App \'GPS Status\' ist nicht installiert. Soll diese im Markt gesucht werden\?</string>
@@ -631,7 +631,7 @@
     <string name="first_time_continue">Weiter</string>
     <string name="first_time_download">Offline-Daten herunterladen</string>
     <string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über „Menü → Karten herunterladen“ herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
-    <string name="search_poi_location">Warte auf Signal …</string>
+    <string name="search_poi_location">Auf Signal warten …</string>
     <string name="search_near_map">Suche in der Nähe</string>
     <string name="search_nearby">Suche um Aufenthaltsort</string>
     <string name="map_orientation_default">Wie Standardeinstellung</string>
@@ -674,8 +674,8 @@
     <string name="uploading_data">Daten speichern …</string>
     <string name="uploading">Hochladen …</string>
     <string name="search_nothing_found">Kein Treffer</string>
-    <string name="searching">Suche…</string>
-    <string name="searching_address">Suche Adresse…</string>
+    <string name="searching">Suche …</string>
+    <string name="searching_address">Adresse wird gesucht …</string>
     <string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
     <string name="hint_search_online">Online-Suche: Hausnummer, Straße, Ort</string>
     <string name="search_offline_address">Offline-Suche</string>
@@ -705,14 +705,14 @@
     <string name="opening_changeset">Änderungssatz öffnen …</string>
     <string name="closing_changeset">Änderungssatz schließen …</string>
     <string name="commiting_node">Knoten übertragen …</string>
-    <string name="loading_poi_obj">Lade POI …</string>
+    <string name="loading_poi_obj">POI wird geladen …</string>
     <string name="auth_failed">Autorisierung fehlgeschlagen</string>
     <string name="failed_op">fehlgeschlagen</string>
     <string name="converting_names">Lokale/Englische Namen werden konvertiert …</string>
-    <string name="loading_streets_buildings">Lade Straßen und Hausnummern …</string>
-    <string name="loading_postcodes">Lade Postleitzahlen …</string>
-    <string name="loading_streets">Lade Straßen …</string>
-    <string name="loading_cities">Lade Orte …</string>
+    <string name="loading_streets_buildings">Straßen und Hausnummern werden geladen …</string>
+    <string name="loading_postcodes">Postleitzahlen werden geladen …</string>
+    <string name="loading_streets">Straßen werden geladen …</string>
+    <string name="loading_cities">Orte werden geladen …</string>
     <string name="poi">OVI</string>
     <string name="error_occurred_saving_gpx">GPX-Datei konnte nicht gespeichert werden.</string>
     <string name="error_calculating_route">Route konnte nicht berechnet werden.</string>
@@ -723,7 +723,7 @@
     <string name="go_back_to_osmand">Zurück zur Karte</string>
     <string name="shared_string_close">Schließen</string>
     <string name="loading_data">Daten werden geladen …</string>
-    <string name="reading_indexes">Lese lokale Daten …</string>
+    <string name="reading_indexes">Lokale Daten werden gelesen …</string>
     <string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
     <string name="saving_gpx_tracks">GPX-Datei wird gespeichert …</string>
     <string name="finished_task">Abgeschlossen</string>
@@ -3953,7 +3953,7 @@
     <string name="delete_waypoints">Wegpunkte löschen</string>
     <string name="copy_to_map_favorites">Zu den Favoriten kopieren</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
-    <string name="upload_photo">Lade hoch</string>
+    <string name="upload_photo">Hochladen</string>
     <string name="upload_photo_completed">Hochladen abgeschlossen</string>
     <string name="uploading_count">Lade %1$d von %2$d hoch</string>
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
@@ -4391,7 +4391,7 @@
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
     <string name="quick_action_toggle_preference">Ein Umschalter zum Ändern der Präferenz.</string>
     <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
-    <string name="copying_file">Kopieren der Datei %1$s…</string>
+    <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>
@@ -4432,7 +4432,7 @@
     <string name="memory_allocated_for_routing_ds">Eine höhere Speicherzuweisung beschleunigt die Berechnung langer Routen (über 500 km), kann aber die Leistung anderer Apps beeinträchtigen.
 \nKeine Auswirkung auf die Berechnungsgeschwindigkeit von kurzen Routen.</string>
     <string name="memory_allocated_for_routing">Für das Routing zugewiesener Speicher</string>
-    <string name="reading_files">Lese Dateien…</string>
+    <string name="reading_files">Dateien werden gelesen …</string>
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>

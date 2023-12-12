@@ -4157,7 +4157,7 @@
     <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
-    <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
+    <string name="offline_wikivoyage">Wikivoyage hors-ligne</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continuer avec %1$s</string>
     <string name="not_available_with">Non disponible avec %1$s</string>
@@ -5108,7 +5108,7 @@
     <string name="external_device_characteristic_diastolic">Diastolique</string>
     <string name="external_device_characteristic_cuff_pressure">Pression du brassard</string>
     <string name="external_device_characteristic_pulse_rate">Fréquence du pouls</string>
-    <string name="external_device_characteristic_stride_length">Longueur de foulée</string>
+    <string name="external_device_characteristic_stride_length">Longueur de la foulée</string>
     <string name="ant_plus_bluetooth_off_description">Activez le Bluetooth pour rechercher et appairer des capteurs.</string>
     <string name="external_device_characteristic_temperature">Température</string>
     <string name="external_device_details_information">Information</string>
@@ -5208,7 +5208,7 @@
     <string name="save_track_external_sensors_data">Données</string>
     <string name="external_sensors_source_of_data">Source des données</string>
     <string name="external_sensors_not_found">Capteurs non trouvés</string>
-    <string name="write_data_from_sensor_to_track">Ajouter les données des capteurs externes dans le fichier GPX lors de l\'enregistrement d\'un trajet.</string>
+    <string name="write_data_from_sensor_to_track">Stocker les données des capteurs externes dans le fichier GPX lors de l\'enregistrement de traces.</string>
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte de terrain 3D. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
@@ -5567,4 +5567,5 @@
     <string name="button_already_assigned_to_this_action">Ce bouton est déjà assigné à cette action.</string>
     <string name="key_assignments_already_cleared_message">Toutes les assignations de touches ont déjà été effacées</string>
     <string name="add_new_button">Ajouter un nouveau bouton</string>
+    <string name="use_v1_auto_zoom">Auto-zoom discret (ancienne version)</string>
 </resources>
