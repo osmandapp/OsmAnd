@@ -33,7 +33,7 @@ public class HHRouteDataStructure {
 		
 		// tweaks for route recalculations
 		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
-		int MAX_START_END_REITERATIONS = 10;  
+		int MAX_START_END_REITERATIONS = 50;  
 		double MAX_INC_COST_CF = 1.25;
 		double MAX_TIME_REITERATION_MS = 60000;
 		
@@ -49,7 +49,6 @@ public class HHRouteDataStructure {
 		
 		boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
-		// TODO 3.1 HHRoutePlanner Alternative routes - could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
