@@ -2684,8 +2684,8 @@
     <string name="poi_healthcare_speciality_pulmonology">pulm-scienco (pneŭmonologio)</string>
     <string name="poi_healthcare_speciality_dental_oral_maxillo_facial_surgery">makzelvizaĝa ĥirurgio</string>
     <string name="poi_healthcare_speciality_maternity">gravedec-medicino</string>
-    <string name="poi_healthcare_speciality_emergency">post-akcidenta kaj vivsava medicino</string>
-    <string name="poi_health_specialty_emergency_medicine_no">Neniu specialisto de post-akcidenta kaj vivsava medicino</string>
+    <string name="poi_healthcare_speciality_emergency">postakcidenta kaj vivsava medicino</string>
+    <string name="poi_health_specialty_emergency_medicine_no">Neniu specialisto pri postakcidenta kaj vivsava medicino</string>
     <string name="poi_healthcare_speciality_plastic_surgery">plastia ĥirurgio</string>
     <string name="poi_healthcare_speciality_orthodontics">dent-ĝustig-medicino (ortodencio)</string>
     <string name="poi_healthcare_speciality_physiotherapy">fizioterapio</string>
