@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.graphics.PointF;
+import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -29,6 +30,8 @@ import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.OsmandMapTileView.ManualZoomListener;
+import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
@@ -43,7 +46,7 @@ import static net.osmand.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
 import static net.osmand.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
 import static net.osmand.gpx.PointAttributes.DEV_RAW_ZOOM;
 
-public class AutoZoomBySpeedHelper {
+public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener {
 
 	public static final float ZOOM_PER_SECOND = 0.1f;
 	public static final float ZOOM_PER_MILLIS = ZOOM_PER_SECOND / 1000f;
@@ -59,12 +62,27 @@ public class AutoZoomBySpeedHelper {
 	private final SpeedFilter speedFilter;
 
 	@Nullable
+	private OsmandMapTileView tileView;
+
+	@Nullable
 	private RouteDirectionInfo nextTurnInFocus;
 
 	public AutoZoomBySpeedHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.speedFilter = new SpeedFilter();
+	}
+
+	public void setMapView(@Nullable OsmandMapTileView tileView) {
+		if (this.tileView != null) {
+			this.tileView.removeManualZoomListener(this);
+			this.tileView.removeTouchListener(this);
+		}
+		this.tileView = tileView;
+		if (tileView != null) {
+			tileView.addManualZoomChangeListener(this);
+			tileView.addTouchListener(this);
+		}
 	}
 
 	@Nullable
@@ -240,6 +258,18 @@ public class AutoZoomBySpeedHelper {
 		int pixelX = (int) (ratio.x * pixWidth);
 		int pixelY = (int) (ratio.y * pixHeight);
 		return new PointI(pixelX, pixelY);
+	}
+
+	@Override
+	public void onManualZoomChange() {
+		nextTurnInFocus = null;
+	}
+
+	@Override
+	public void onTouchEvent(@NonNull MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			nextTurnInFocus = null;
+		}
 	}
 
 	@Nullable

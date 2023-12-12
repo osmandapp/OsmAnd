@@ -693,14 +693,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			MapActivity mapActivity = getMapActivity();
 			if (object != null && mapActivity != null) {
 				if (object instanceof TransportStopRoute) {
+					OsmandMapTileView mapView = mapActivity.getMapView();
 					TransportStopRoute route = (TransportStopRoute) object;
 					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
 							route.getDescription(app, false));
 					menu.show(menu.getLatLon(), pd, route);
 					TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
 					stopsLayer.setRoute(route);
-					int cz = route.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-					app.getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
+					int zoom = route.calculateZoom(0, mapView.getCurrentRotatedTileBox());
+					mapView.setIntZoom(zoom);
 				} else if (object instanceof String) {
 					if (object.equals(TRANSPORT_BADGE_MORE_ITEM)) {
 						if (menu.isLandscapeLayout()) {
