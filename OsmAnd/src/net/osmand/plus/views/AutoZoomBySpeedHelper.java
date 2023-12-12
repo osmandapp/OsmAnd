@@ -236,12 +236,16 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	                                     float speed) {
 		float showDistanceToDrive = speed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
 		if (nextTurn != null) {
-			if (nextTurn.distanceTo < showDistanceToDrive) {
+			if (nextTurnInFocus != null && nextTurnInFocus.equals(nextTurn.directionInfo)) {
+				showDistanceToDrive = nextTurn.distanceTo;
+			} else if (nextTurn.distanceTo < showDistanceToDrive) {
 				showDistanceToDrive = nextTurn.distanceTo;
 				nextTurnInFocus = nextTurn.directionInfo;
-			} else if (nextTurnInFocus != null && nextTurnInFocus.equals(nextTurn.directionInfo)) {
-				showDistanceToDrive = nextTurn.distanceTo;
+			} else {
+				nextTurnInFocus = null;
 			}
+		} else {
+			nextTurnInFocus = null;
 		}
 
 		return Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
