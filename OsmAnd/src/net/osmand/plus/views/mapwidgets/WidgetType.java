@@ -120,6 +120,7 @@ public enum WidgetType {
 	WEATHER_CLOUDS_WIDGET("weather_cloud", R.string.map_settings_weather_cloud, R.string.clouds_widget_desc, R.drawable.widget_weather_clouds_day, R.drawable.widget_weather_clouds_night, 0, WEATHER, RIGHT),
 	WEATHER_AIR_PRESSURE_WIDGET("weather_pressure", R.string.map_settings_weather_air_pressure, R.string.air_pressure_widget_desc, R.drawable.widget_weather_air_pressure_day, R.drawable.widget_weather_air_pressure_night, 0, WEATHER, RIGHT),
 
+	SUN_POSITION("day_night_mode_sun_position", R.string.map_widget_sun_position, R.string.map_widget_sun_position_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 
@@ -309,7 +310,7 @@ public enum WidgetType {
 			return new MapMarkerSideWidgetSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
-		} else if (this == SUNRISE || this == SUNSET) {
+		} else if (this == SUNRISE || this == SUNSET || this == SUN_POSITION) {
 			return new SunriseSunsetSettingsFragment();
 		} else if (this == HEART_RATE ||
 				this == BICYCLE_POWER ||
