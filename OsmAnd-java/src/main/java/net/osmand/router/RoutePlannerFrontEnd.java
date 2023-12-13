@@ -822,7 +822,10 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
 		RouteCalcResult res ;
-		if (intermediatesEmpty && ctx.nativeLib != null) {
+
+		// TODO: remove this if() completely (Native !== Java)
+		// BUG: no addSegment() = no precise X/Y = Native broken
+		if (false && intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
