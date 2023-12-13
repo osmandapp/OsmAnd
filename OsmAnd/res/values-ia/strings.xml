@@ -5,4 +5,6 @@
     <string name="backup_version_history">Chronologia del versiones</string>
     <string name="days_2_4">Dies</string>
     <string name="day">Die</string>
+    <string name="shared_string_current">Actual</string>
+    <string name="start_point">Initiar</string>
 </resources>
