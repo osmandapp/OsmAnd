@@ -124,12 +124,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 
 	private void updateTimeToGo(int leftSeconds) {
 		String formattedLeftTime = OsmAndFormatter.getFormattedDurationShortMinutes(leftSeconds);
-		String units = getUnits(leftSeconds);
-		if (!Algorithms.isBlank(units)) {
-			setText(formattedLeftTime, units);
-		} else {
-			setText(formattedLeftTime, null);
-		}
+		setText(formattedLeftTime, getUnits(leftSeconds));
 	}
 
 	@Nullable
