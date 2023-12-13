@@ -2887,7 +2887,7 @@
     <string name="routing_attr_avoid_subway_description">Évite le métro et les transports ferrés</string>
     <string name="routing_attr_avoid_ferry_name">Éviter le ferry</string>
     <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
-    <string name="send_log">Envoyer le journal</string>
+    <string name="send_log">Envoyer les journaux</string>
     <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
     <string name="routing_attr_avoid_sett_name">Sans pavés</string>
     <string name="routing_attr_avoid_sett_description">Éviter les pavés</string>
@@ -4031,7 +4031,7 @@
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
     <string name="contact_support_description">Si vous avez des questions, veuillez nous contacter sur %1$s.</string>
     <string name="empty_purchases_description">Si vos achats n\'apparaissent pas ici, appuyez sur \"%1$s\" ou contactez notre équipe d\'assistance.</string>
-    <string name="troubleshooting">Résolution de problèmes</string>
+    <string name="troubleshooting">FAQ</string>
     <string name="troubleshooting_description">Veuillez suivre ce lien si vous rencontrez des problèmes avec vos achats.</string>
     <string name="in_grace_period">En période d\'essai</string>
     <string name="update_all_maps_added">Mettre à jour toutes les cartes ajoutées à %1$s \?</string>
@@ -5384,7 +5384,7 @@
     <string name="help_article_start_with_first_steps_name">Premiers pas</string>
     <string name="help_article_widgets_radius_ruler_name">Règle et règle-rayon</string>
     <string name="shared_string_setup">Configuration</string>
-    <string name="telegram_chats">Conversations Telegram</string>
+    <string name="telegram_chats">Chats Telegram</string>
     <string name="github_discussion">Discussions GitHub</string>
     <string name="free_versions_descr">Téléchargez et installez la version gratuite d\'OsmAnd</string>
     <string name="free_versions">Versions gratuites</string>
@@ -5400,7 +5400,7 @@
     <string name="help_article_widgets_markers_name">Gadgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Gadgets de guidage</string>
     <string name="telegram_chats_descr">Rejoignez l\'une de nos conversations Telegram locales.</string>
-    <string name="copy_build_version">Copier le numéro de build</string>
+    <string name="copy_build_version">Copier la version du build</string>
     <string name="help_article_purchases_giveaway_name">Concours</string>
     <string name="help_article_search_search_all_name">Rechercher tout</string>
     <string name="help_article_start_with_main_menu_name">Menu principal</string>
@@ -5410,7 +5410,7 @@
     <string name="open_issue_on_github">Ouvrir une issue sur GitHub</string>
     <string name="help_article_troubleshooting_general_name">Général</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Enregistrement de trace</string>
-    <string name="most_viewed">Les plus vus</string>
+    <string name="most_viewed">Les plus vu(e)s</string>
     <string name="help_article_widgets_name">Gadgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Gadgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
@@ -5568,4 +5568,7 @@
     <string name="key_assignments_already_cleared_message">Toutes les assignations de touches ont déjà été effacées</string>
     <string name="add_new_button">Ajouter un nouveau bouton</string>
     <string name="use_v1_auto_zoom">Auto-zoom discret (ancienne version)</string>
+    <string name="shared_string_next_event">Prochain évènement</string>
+    <string name="map_widget_sun_position">Position du soleil</string>
+    <string name="map_widget_sun_position_desc">Ce gadget indique le temps restant avant le lever ou le coucher du soleil, en fonction de l\'heure actuelle.</string>
 </resources>
