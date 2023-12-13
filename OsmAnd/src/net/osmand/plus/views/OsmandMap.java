@@ -33,21 +33,21 @@ public class OsmandMap {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private List<SetupRenderingViewListener> setupRenderingViewListeners = new ArrayList<>();
+	private List<RenderingViewSetupListener> renderingViewSetupListeners = new ArrayList<>();
 
-	public interface SetupRenderingViewListener {
+	public interface RenderingViewSetupListener {
 
 		void onSetupRenderingView();
 	}
 
-	public void addSetupRenderingViewListener(@NonNull SetupRenderingViewListener listener) {
-		if (!setupRenderingViewListeners.contains(listener)) {
-			setupRenderingViewListeners = Algorithms.addToList(setupRenderingViewListeners, listener);
+	public void addRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
+		if (!renderingViewSetupListeners.contains(listener)) {
+			renderingViewSetupListeners = Algorithms.addToList(renderingViewSetupListeners, listener);
 		}
 	}
 
-	public void removeSetupRenderingViewListener(@NonNull SetupRenderingViewListener listener) {
-		setupRenderingViewListeners = Algorithms.removeFromList(setupRenderingViewListeners, listener);
+	public void removeRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
+		renderingViewSetupListeners = Algorithms.removeFromList(renderingViewSetupListeners, listener);
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {
@@ -121,7 +121,7 @@ public class OsmandMap {
 
 	public void setupRenderingView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		for (SetupRenderingViewListener listener : setupRenderingViewListeners) {
+		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
 			listener.onSetupRenderingView();
 		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
