@@ -5574,4 +5574,7 @@
     <string name="key_assignments_already_cleared_message">Minden billentyű-hozzárendelés már törölve van</string>
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus zoom (régi verzió)</string>
+    <string name="shared_string_next_event">Következő esemény</string>
+    <string name="map_widget_sun_position">Nap helyzete</string>
+    <string name="map_widget_sun_position_desc">Ez a widget az aktuális időtől függően mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
 </resources>
