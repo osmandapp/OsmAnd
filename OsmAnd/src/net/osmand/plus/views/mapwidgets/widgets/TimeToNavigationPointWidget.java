@@ -16,10 +16,12 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState.TimeToNavigationPointState;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.util.Algorithms;
+
+import java.util.concurrent.TimeUnit;
 
 public class TimeToNavigationPointWidget extends SimpleWidget {
 
@@ -46,7 +48,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		updateWidgetName();
 	}
 
-	private static WidgetType getWidgetType(boolean isIntermediate){
+	private static WidgetType getWidgetType(boolean isIntermediate) {
 		return isIntermediate ? TIME_TO_INTERMEDIATE : TIME_TO_DESTINATION;
 	}
 
@@ -122,7 +124,18 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 
 	private void updateTimeToGo(int leftSeconds) {
 		String formattedLeftTime = OsmAndFormatter.getFormattedDurationShortMinutes(leftSeconds);
-		setText(formattedLeftTime, null);
+		setText(formattedLeftTime, getUnits(leftSeconds));
+	}
+
+	@Nullable
+	private String getUnits(long timeLeft) {
+		if (timeLeft >= 0) {
+			long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.SECONDS);
+			String hour = app.getString(R.string.int_hour);
+			String minute = app.getString(R.string.shared_string_minute_lowercase);
+			return diffInMinutes >= 60 ? hour : minute;
+		}
+		return null;
 	}
 
 	@Nullable
