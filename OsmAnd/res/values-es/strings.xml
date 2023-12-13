@@ -5410,7 +5410,7 @@
     <string name="shared_string_setup">Configurar</string>
     <string name="user_guide">Manual del usuario</string>
     <string name="telegram_chats_descr">Únete a uno de nuestros chats en telegram.</string>
-    <string name="telegram_chats">Chats en Telegram</string>
+    <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Debates en GitHub</string>
     <string name="free_versions_descr">Descargar e instalar la versión gratuita de OsmAnd</string>
     <string name="send_logcat_log_descr">Archivo de registro detallado</string>
