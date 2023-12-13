@@ -23,7 +23,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMap.OsmandMapListener;
+import net.osmand.plus.views.OsmandMap.RenderingViewSetupListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
@@ -34,7 +34,7 @@ public class MapViewWithLayers extends FrameLayout {
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapView;
 
-	private OsmandMapListener mapListener;
+	private RenderingViewSetupListener renderingViewSetupListener;
 	private AtlasMapRendererView atlasMapRendererView;
 
 	public MapViewWithLayers(@NonNull Context context) {
@@ -56,7 +56,7 @@ public class MapViewWithLayers extends FrameLayout {
 		settings = app.getSettings();
 
 		OsmandMap osmandMap = app.getOsmandMap();
-		osmandMap.addListener(getMapListener());
+		osmandMap.addRenderingViewSetupListener(getRenderingViewSetupListener());
 
 		mapView = osmandMap.getMapView();
 		mapView.setupTouchDetectors(getContext());
@@ -160,7 +160,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
-		app.getOsmandMap().removeListener(getMapListener());
+		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
 	}
 
 	@NonNull
@@ -169,29 +169,10 @@ public class MapViewWithLayers extends FrameLayout {
 	}
 
 	@NonNull
-	private OsmandMapListener getMapListener() {
-		if (mapListener == null) {
-			mapListener = new OsmandMapListener() {
-
-				@Override
-				public void onChangeZoom(int stp) {
-					mapView.showAndHideMapPosition();
-				}
-
-				@Override
-				public void onSetMapElevation(float angle) {
-					MapRendererView mapRenderer = mapView.getMapRenderer();
-					if (mapRenderer != null) {
-						mapRenderer.setElevationAngle(angle);
-					}
-				}
-
-				@Override
-				public void onSetupRenderingView() {
-					setupRenderingView();
-				}
-			};
+	private RenderingViewSetupListener getRenderingViewSetupListener() {
+		if (renderingViewSetupListener == null) {
+			renderingViewSetupListener = this::setupRenderingView;
 		}
-		return mapListener;
+		return renderingViewSetupListener;
 	}
 }

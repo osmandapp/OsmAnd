@@ -131,6 +131,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void setMapView(@Nullable OsmandMapTileView mapView) {
 		this.mapView = mapView;
 		mapDisplayPositionManager.setMapView(mapView);
+		autoZoomBySpeedHelper.setMapView(mapView);
 		if (mapView != null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 			int orientation = 0;
@@ -300,8 +301,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (animateMyLocation) {
 				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 			}
-			float distanceToNextTurn = getDistanceToNextTurn();
-			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation, distanceToNextTurn);
+			autoZoom = autoZoomBySpeedHelper.calculateZoomBySpeedToAnimate(mapRenderer, location, rotation, getNextTurn());
 		}
 
 		long movingTime;
@@ -614,11 +614,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return lastTimeManualZooming;
 	}
 
-	private float getDistanceToNextTurn() {
+	@Nullable
+	private NextDirectionInfo getNextTurn() {
 		NextDirectionInfo directionInfo = new NextDirectionInfo();
 		app.getRoutingHelper().getNextRouteDirectionInfo(directionInfo, true);
 		return directionInfo.directionInfo != null && directionInfo.distanceTo > 0
-				? directionInfo.distanceTo
-				: -1;
+				? directionInfo
+				: null;
 	}
 }

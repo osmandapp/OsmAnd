@@ -22,7 +22,7 @@ public class ZoomInButton extends MapButton {
 			if (mapActivity.getContextMenu().zoomInPressed()) {
 				return;
 			}
-			app.getOsmandMap().changeZoom(1, System.currentTimeMillis());
+			mapActivity.getMapView().zoomIn();
 		});
 		setOnLongClickListener(MapControlsLayer.getOnClickMagnifierListener(mapActivity.getMapView()));
 		updateIcon(app.getDaynightHelper().isNightModeForMapControls());

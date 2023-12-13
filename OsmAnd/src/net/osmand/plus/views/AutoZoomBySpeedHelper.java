@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.graphics.PointF;
+import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -22,11 +23,15 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.OsmandMapTileView.ManualZoomListener;
+import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
@@ -41,7 +46,7 @@ import static net.osmand.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
 import static net.osmand.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
 import static net.osmand.gpx.PointAttributes.DEV_RAW_ZOOM;
 
-public class AutoZoomBySpeedHelper {
+public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener {
 
 	public static final float ZOOM_PER_SECOND = 0.1f;
 	public static final float ZOOM_PER_MILLIS = ZOOM_PER_SECOND / 1000f;
@@ -54,12 +59,30 @@ public class AutoZoomBySpeedHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final LocationsFilter locationsFilter;
+	private final SpeedFilter speedFilter;
+
+	@Nullable
+	private OsmandMapTileView tileView;
+
+	@Nullable
+	private RouteDirectionInfo nextTurnInFocus;
 
 	public AutoZoomBySpeedHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.locationsFilter = new LocationsFilter();
+		this.speedFilter = new SpeedFilter();
+	}
+
+	public void setMapView(@Nullable OsmandMapTileView tileView) {
+		if (this.tileView != null) {
+			this.tileView.removeManualZoomListener(this);
+			this.tileView.removeTouchListener(this);
+		}
+		this.tileView = tileView;
+		if (tileView != null) {
+			tileView.addManualZoomChangeListener(this);
+			tileView.addTouchListener(this);
+		}
 	}
 
 	@Nullable
@@ -97,13 +120,13 @@ public class AutoZoomBySpeedHelper {
 	public ComplexZoom calculateZoomBySpeedToAnimate(@NonNull MapRendererView mapRenderer,
 	                                                 @NonNull Location myLocation,
 	                                                 @Nullable Float rotationToAnimate,
-	                                                 float distanceToNextTurn) {
+	                                                 @Nullable NextDirectionInfo nextTurn) {
 		float speed = myLocation.getSpeed();
 		if (speed < MIN_AUTO_ZOOM_SPEED) {
 			return null;
 		}
 
-		float filteredSpeed = locationsFilter.getFilteredSpeed(speed);
+		float filteredSpeed = speedFilter.getFilteredSpeed(speed);
 		if (Float.isNaN(filteredSpeed)) {
 			return null;
 		}
@@ -116,7 +139,7 @@ public class AutoZoomBySpeedHelper {
 		float myLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, myLocation31);
 		PointI myLocationPixel = mapRenderer.getState().getFixedPixel();
 
-		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, filteredSpeed, distanceToNextTurn);
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, nextTurn, filteredSpeed);
 		float rotation = rotationToAnimate != null ? rotationToAnimate : mapView.getRotate();
 		LatLon anotherLatLon = MapUtils.rhumbDestinationPoint(myLocationLatLon, showDistanceToDrive, rotation);
 
@@ -145,7 +168,7 @@ public class AutoZoomBySpeedHelper {
 			return null;
 		}
 
-		float filteredSpeed = locationsFilter.getFilteredSpeed(speed);
+		float filteredSpeed = speedFilter.getFilteredSpeed(speed);
 		if (Float.isNaN(filteredSpeed)) {
 			return null;
 		}
@@ -171,7 +194,7 @@ public class AutoZoomBySpeedHelper {
 		float firstHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, firstLocation31);
 		PointI firstPixel = state.getFixedPixel();
 
-		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, speed, -1);
+		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, null, speed);
 		LatLon secondLatLon = MapUtils.rhumbDestinationPoint(lat, lon, showDistanceToDrive, rotation);
 		PointI secondLocation31 = NativeUtilities.getPoint31FromLatLon(secondLatLon);
 		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31);
@@ -208,11 +231,24 @@ public class AutoZoomBySpeedHelper {
 		return new Pair<>(autoZoom, zoomDuration);
 	}
 
-	private float getShowDistanceToDrive(@NonNull AutoZoomMap autoZoomScale, float speed, float distanceToNextTurn) {
+	private float getShowDistanceToDrive(@NonNull AutoZoomMap autoZoomScale,
+	                                     @Nullable NextDirectionInfo nextTurn,
+	                                     float speed) {
 		float showDistanceToDrive = speed * SHOW_DRIVING_SECONDS_V2 / autoZoomScale.coefficient;
-		return distanceToNextTurn > 0
-				? Math.max(Math.min(distanceToNextTurn, showDistanceToDrive), autoZoomScale.minDistanceToDrive)
-				: Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
+		if (nextTurn != null) {
+			if (nextTurnInFocus != null && nextTurnInFocus.equals(nextTurn.directionInfo)) {
+				showDistanceToDrive = nextTurn.distanceTo;
+			} else if (nextTurn.distanceTo < showDistanceToDrive) {
+				showDistanceToDrive = nextTurn.distanceTo;
+				nextTurnInFocus = nextTurn.directionInfo;
+			} else {
+				nextTurnInFocus = null;
+			}
+		} else {
+			nextTurnInFocus = null;
+		}
+
+		return Math.max(showDistanceToDrive, autoZoomScale.minDistanceToDrive);
 	}
 
 	@NonNull
@@ -226,6 +262,18 @@ public class AutoZoomBySpeedHelper {
 		int pixelX = (int) (ratio.x * pixWidth);
 		int pixelY = (int) (ratio.y * pixHeight);
 		return new PointI(pixelX, pixelY);
+	}
+
+	@Override
+	public void onManualZoomChange() {
+		nextTurnInFocus = null;
+	}
+
+	@Override
+	public void onTouchEvent(@NonNull MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			nextTurnInFocus = null;
+		}
 	}
 
 	@Nullable
@@ -413,7 +461,7 @@ public class AutoZoomBySpeedHelper {
 		return result;
 	}
 
-	private static class LocationsFilter {
+	private static class SpeedFilter {
 
 		private float speedToFilter = Float.NaN;
 		private float currentSpeed = Float.NaN;
