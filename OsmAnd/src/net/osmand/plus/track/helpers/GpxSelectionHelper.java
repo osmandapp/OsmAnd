@@ -493,20 +493,18 @@ public class GpxSelectionHelper {
 		if (clearPrevious) {
 			clearAllGpxFilesToShow(true);
 		}
-
-		Map<String, Boolean> selectedFileNames = new HashMap<>();
-		for (TrackItem trackItem : trackItems) {
-			String path = trackItem.isShowCurrentTrack() ? CURRENT_TRACK : trackItem.getPath();
-			selectedFileNames.put(path, true);
+		List<String> selectedPaths = new ArrayList<>();
+		for (TrackItem item : trackItems) {
+			selectedPaths.add(item.isShowCurrentTrack() ? CURRENT_TRACK : item.getPath());
 		}
-		runSelection(selectedFileNames);
+		runSelection(selectedPaths);
 	}
 
-	private void runSelection(@NonNull Map<String, Boolean> selectedItems) {
+	private void runSelection(@NonNull List<String> selectedPaths) {
 		if (selectGpxTask != null && (selectGpxTask.getStatus() == Status.RUNNING)) {
 			selectGpxTask.cancel(false);
 		}
-		selectGpxTask = new SelectGpxTask(app, selectedItems, getGpxSelectionListener());
+		selectGpxTask = new SelectGpxTask(app, selectedPaths, getGpxSelectionListener());
 		selectGpxTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -525,12 +523,12 @@ public class GpxSelectionHelper {
 			}
 
 			@Override
-			public void onGpxSelectionInProgress() {
+			public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
 				List<WeakReference<SelectGpxTaskListener>> selectionListeners = listeners;
 				for (WeakReference<SelectGpxTaskListener> weakReference : selectionListeners) {
 					SelectGpxTaskListener listener = weakReference.get();
 					if (listener != null) {
-						listener.onGpxSelectionInProgress();
+						listener.onGpxSelectionInProgress(selectedGpxFile);
 					}
 				}
 			}

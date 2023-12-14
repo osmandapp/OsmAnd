@@ -65,6 +65,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -461,7 +462,29 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
+	public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
+		AndroidUiHelper.updateVisibility(progressBar, true);
+		TrackItem item = findTrackItem(selectedGpxFile);
+		if (item != null) {
+			itemsSelectionHelper.addItemToOriginalSelected(item);
+			itemsSelectionHelper.onItemsSelected(Collections.singleton(item), true);
+			updateItems(Collections.singleton(item));
+		}
+	}
+
+	@Nullable
+	private TrackItem findTrackItem(@NonNull SelectedGpxFile selectedGpxFile) {
+		for (TrackItem item : itemsSelectionHelper.getAllItems()) {
+			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().path, item.getPath())) {
+				return item;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public void onGpxSelectionFinished() {
+		AndroidUiHelper.updateVisibility(progressBar, isLoadingTracks());
 		trackTabsHelper.processVisibleTracks();
 		trackTabsHelper.processRecentlyVisibleTracks();
 		trackTabsHelper.updateTracksOnMap();
