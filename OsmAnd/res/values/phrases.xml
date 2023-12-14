@@ -5269,4 +5269,9 @@
 	<string name="poi_healthcare_speciality_microbiology">Microbiology</string>
 	<string name="poi_healthcare_speciality_venereology">Venereology</string>
 
+	<string name="poi_from">From</string>
+	<string name="poi_to">To</string>
+	<string name="poi_distance">Distance</string>
+	<string name="poi_cycle_network">Cycle network</string>
+
 </resources>
