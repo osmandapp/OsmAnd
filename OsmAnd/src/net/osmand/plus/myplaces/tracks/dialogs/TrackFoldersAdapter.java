@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,10 +87,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private boolean selectionMode;
 	private boolean shouldShowFolder;
 
-	public TrackFoldersAdapter(@NonNull OsmandApplication app, boolean nightMode) {
-		this.app = app;
+	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
-		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 	}

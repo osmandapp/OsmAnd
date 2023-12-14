@@ -53,7 +53,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		uiUtilities = app.getUIUtilities();
-		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 		markers = app.getMapMarkersHelper().getMapMarkers();
 		nightMode = !app.getSettings().isLightContent();
 		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);

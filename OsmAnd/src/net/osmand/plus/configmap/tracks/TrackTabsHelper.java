@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class SelectedTracksHelper {
+public class TrackTabsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -43,7 +43,7 @@ public class SelectedTracksHelper {
 	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 
 
-	public SelectedTracksHelper(@NonNull OsmandApplication app) {
+	public TrackTabsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();

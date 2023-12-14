@@ -65,6 +65,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -92,7 +93,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
 	private ImportHelper importHelper;
-	private SelectedTracksHelper selectedTracksHelper;
+	private TrackTabsHelper trackTabsHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 	private TrackFolderLoaderTask asyncLoader;
@@ -111,8 +112,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private int tabSize;
 
 	@NonNull
-	public SelectedTracksHelper getSelectedTracksHelper() {
-		return selectedTracksHelper;
+	public TrackTabsHelper getTrackTabsHelper() {
+		return trackTabsHelper;
 	}
 
 	@NonNull
@@ -135,9 +136,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = app.getImportHelper();
-		selectedTracksHelper = new SelectedTracksHelper(app);
+		trackTabsHelper = new TrackTabsHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
-		itemsSelectionHelper = selectedTracksHelper.getItemsSelectionHelper();
+		itemsSelectionHelper = trackTabsHelper.getItemsSelectionHelper();
 	}
 
 	@Override
@@ -311,17 +312,17 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void updateButtonsState() {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
-			if (TrackTabType.ON_MAP == trackTab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
+			if (TrackTabType.ON_MAP == trackTab.type && !Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks())) {
 				boolean anySelected = itemsSelectionHelper.hasSelectedItems();
 				selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
-				selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
+				selectionButton.setEnabled(!Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks()) || anySelected);
 			} else {
 				boolean notAllSelected = !itemsSelectionHelper.isItemsSelected(trackTab.getTrackItems());
 				selectionButton.setTitleId(notAllSelected ? R.string.shared_string_select_all : R.string.shared_string_deselect_all);
 				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
 			}
 			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-			TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			TrackTab allTracksTab = trackTabsHelper.getTrackTabs().get(TrackTabType.ALL.name());
 			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 		}
 	}
@@ -331,10 +332,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		return v -> {
 			TrackTab tab = getSelectedTab();
 			if (tab != null) {
-				if (TrackTabType.ON_MAP == tab.type && !Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks())) {
+				if (TrackTabType.ON_MAP == tab.type && !Algorithms.isEmpty(trackTabsHelper.getRecentlyVisibleTracks())) {
 					Set<TrackItem> selectedItems = itemsSelectionHelper.getSelectedItems();
 					boolean hasSelectedItems = !Algorithms.isEmpty(selectedItems);
-					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : selectedTracksHelper.getRecentlyVisibleTracks();
+					Set<TrackItem> selectTracks = hasSelectedItems ? selectedItems : trackTabsHelper.getRecentlyVisibleTracks();
 					onTrackItemsSelected(selectTracks, !hasSelectedItems);
 				} else {
 					Set<TrackItem> trackItems = new HashSet<>(tab.getTrackItems());
@@ -347,7 +348,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@NonNull
 	public List<TrackTab> getTrackTabs() {
-		return new ArrayList<>(selectedTracksHelper.getTrackTabs().values());
+		return new ArrayList<>(trackTabsHelper.getTrackTabs().values());
 	}
 
 	@Nullable
@@ -424,7 +425,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@Override
 	public void tracksLoaded(@NonNull TrackFolder folder) {
-		selectedTracksHelper.updateTrackItems(folder.getFlattenedTrackItems());
+		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems());
 	}
 
 	@Override
@@ -452,20 +453,41 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void updateTrackTabs() {
-		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
+		adapter.setTrackTabs(trackTabsHelper.getTrackTabs());
 	}
 
 	public void saveChanges() {
-		selectedTracksHelper.saveTabsSortModes();
-		selectedTracksHelper.saveTracksVisibility();
+		trackTabsHelper.saveTabsSortModes();
+		trackTabsHelper.saveTracksVisibility();
+	}
+
+	@Override
+	public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
+		AndroidUiHelper.updateVisibility(progressBar, true);
+		TrackItem item = findTrackItem(selectedGpxFile);
+		if (item != null) {
+			itemsSelectionHelper.addItemToOriginalSelected(item);
+			itemsSelectionHelper.onItemsSelected(Collections.singleton(item), true);
+			updateItems(Collections.singleton(item));
+		}
+	}
+
+	@Nullable
+	private TrackItem findTrackItem(@NonNull SelectedGpxFile selectedGpxFile) {
+		for (TrackItem item : itemsSelectionHelper.getAllItems()) {
+			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().path, item.getPath())) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void onGpxSelectionFinished() {
-		selectedTracksHelper.processVisibleTracks();
-		selectedTracksHelper.processRecentlyVisibleTracks();
-		selectedTracksHelper.updateTracksOnMap();
-		app.getOsmandMap().getMapView().refreshMap();
+		AndroidUiHelper.updateVisibility(progressBar, isLoadingTracks());
+		trackTabsHelper.processVisibleTracks();
+		trackTabsHelper.processRecentlyVisibleTracks();
+		trackTabsHelper.updateTracksOnMap();
 		updateTabsContent();
 	}
 
@@ -473,10 +495,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void onDestroy() {
 		super.onDestroy();
 
-		boolean loadingTracks = asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
-		if (loadingTracks && !requireActivity().isChangingConfigurations()) {
+		if (isLoadingTracks() && !requireActivity().isChangingConfigurations()) {
 			asyncLoader.cancel(false);
 		}
+	}
+
+	public boolean isLoadingTracks() {
+		return asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
 	}
 
 	public void changeAppearance() {
@@ -539,7 +564,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
-		selectedTracksHelper.addTrackItem(item);
+		trackTabsHelper.addTrackItem(item);
 		updateTrackTabs();
 		setSelectedTab("import");
 		updateTabsContent();
@@ -551,8 +576,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
-			selectedTracksHelper.sortTrackTab(trackTab);
-			selectedTracksHelper.saveTabsSortModes();
+			trackTabsHelper.sortTrackTab(trackTab);
+			trackTabsHelper.saveTabsSortModes();
 			updateTabsContent();
 		}
 	}
@@ -565,7 +590,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
 		itemsSelectionHelper.onItemsSelected(trackItems, selected);
-		onTrackItemsSelected(trackItems);
+		updateItems(trackItems);
 		updateButtonsState();
 	}
 
@@ -712,10 +737,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		reloadTracks();
 	}
 
-	private void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	private void updateItems(@NonNull Set<TrackItem> trackItems) {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof TrackItemsContainer) {
-				((TrackItemsContainer) fragment).onTrackItemsSelected(trackItems);
+				((TrackItemsContainer) fragment).updateItems(trackItems);
 			}
 		}
 	}

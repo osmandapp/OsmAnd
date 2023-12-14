@@ -372,7 +372,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private final UpdateLocationViewCache locationViewCache;
 
 		PointGPXAdapter() {
-			locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+			locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 		}
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {

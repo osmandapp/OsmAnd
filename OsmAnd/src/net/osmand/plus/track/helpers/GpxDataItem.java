@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -25,8 +26,15 @@ public class GpxDataItem {
 	@Nullable
 	private GPXTrackAnalysis analysis;
 
-	public GpxDataItem(@NonNull File file) {
+	public GpxDataItem(@NonNull OsmandApplication app, @NonNull File file) {
 		this.file = file;
+		initFileParameters(app);
+	}
+
+	private void initFileParameters(@NonNull OsmandApplication app) {
+		map.put(FILE_NAME, file.getName());
+		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
+		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
 	}
 
 	@NonNull
@@ -63,8 +71,12 @@ public class GpxDataItem {
 	}
 
 	public void copyData(@NonNull GpxDataItem item) {
-		map.clear();
-		map.putAll(item.map);
+		for (Map.Entry<GpxParameter, Object> entry : item.map.entrySet()) {
+			GpxParameter parameter = entry.getKey();
+			if (!Algorithms.equalsToAny(parameter, FILE_NAME, FILE_DIR, FILE_LAST_MODIFIED_TIME)) {
+				map.put(parameter, entry.getValue());
+			}
+		}
 		setAnalysis(item.analysis);
 	}
 

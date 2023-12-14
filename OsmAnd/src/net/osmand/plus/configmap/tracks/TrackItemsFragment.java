@@ -69,7 +69,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 	private void setupAdapter(@NonNull TrackTab trackTab) {
 		TracksFragment fragment = (TracksFragment) requireParentFragment();
-		adapter = new TracksAdapter(app, trackTab, fragment, nightMode);
+		adapter = new TracksAdapter(requireContext(), trackTab, fragment, nightMode);
 		recyclerView.setAdapter(adapter);
 	}
 
@@ -84,9 +84,9 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	}
 
 	@Override
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	public void updateItems(@NonNull Set<TrackItem> trackItems) {
 		if (adapter != null) {
-			adapter.onTrackItemsSelected(trackItems);
+			adapter.updateItems(trackItems);
 		}
 	}
 

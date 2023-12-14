@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -9,7 +10,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.annotation.ColorRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,7 +87,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 
 		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
-		adapter = createAdapter(trackItems);
+		adapter = createAdapter(view.getContext(), trackItems);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
@@ -119,8 +120,9 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@NonNull
-	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
-		return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
+		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
+		return new SearchTracksAdapter(context, trackItems, nightMode, selectionMode, filter);
 	}
 
 	protected abstract void setupFragment(View view);
@@ -174,7 +176,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 		setStatusBarBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light));
 	}
 
-	protected void setStatusBarBackgroundColor(@ColorRes int color) {
+	protected void setStatusBarBackgroundColor(@ColorInt int color) {
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
@@ -214,7 +216,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	public void updateItems(@NonNull Set<TrackItem> trackItems) {
 		adapter.notifyDataSetChanged();
 		updateButtonsState();
 	}

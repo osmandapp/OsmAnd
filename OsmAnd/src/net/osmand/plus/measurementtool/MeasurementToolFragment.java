@@ -1154,9 +1154,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity != null) {
 			GPXFile gpxFile = generateGpxFile();
 
-			GpxSelectionParams params = GpxSelectionParams.newInstance()
-					.showOnMap().syncGroup().selectedByUser()
-					.addToMarkers().addToHistory().saveSelection();
+			GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
 			hide();
@@ -1934,9 +1932,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	protected static void showGpxOnMap(@NonNull OsmandApplication app, @NonNull GPXFile gpx, boolean isNewGpx) {
-		GpxSelectionParams params = GpxSelectionParams.newInstance()
-				.showOnMap().selectedByUser().syncGroup().addToMarkers().addToHistory()
-				.saveSelection();
+		GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 		if (sf != null && !isNewGpx) {
 			sf.processPoints(app);

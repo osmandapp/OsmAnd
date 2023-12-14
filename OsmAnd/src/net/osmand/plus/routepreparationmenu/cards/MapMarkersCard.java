@@ -12,14 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class MapMarkersCard extends MapBaseCard {
 		super(mapActivity);
 		markers = mapMarkers;
 
-		screenOrientation = app.getUIUtilities().getScreenOrientation(mapActivity);
+		screenOrientation = AndroidUiHelper.getScreenOrientation(mapActivity);
 
 		MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 		if (trackingUtils != null) {
