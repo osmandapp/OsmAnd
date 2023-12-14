@@ -74,7 +74,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
 						if (item == null) {
-							item = new GpxDataItem(file);
+							item = new GpxDataItem(app, file);
 							item.setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {

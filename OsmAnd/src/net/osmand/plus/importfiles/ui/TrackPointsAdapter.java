@@ -2,6 +2,7 @@ package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.plus.track.cards.TrackPointsCard.setupLocationData;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,13 +51,13 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 
 	private final boolean nightMode;
 
-	TrackPointsAdapter(@NonNull OsmandApplication app, @Nullable Set<WptPt> selectedPoints, boolean nightMode) {
-		this.app = app;
+	TrackPointsAdapter(@NonNull Context context, @Nullable Set<WptPt> selectedPoints, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		this.selectedPoints = selectedPoints;
 		inflater = UiUtilities.getInflater(app, nightMode);
 		uiUtilities = app.getUIUtilities();
-		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}
 
 	public void setListener(@Nullable OnItemSelectedListener listener) {

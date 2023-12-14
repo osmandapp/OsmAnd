@@ -158,7 +158,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
 
-		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(view.getContext());
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 
 		if(currentFormat == -1)

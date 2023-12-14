@@ -193,7 +193,7 @@ public class GPXDatabase {
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);
 
-		GpxDataItem item = new GpxDataItem(new File(dir, fileName));
+		GpxDataItem item = new GpxDataItem(app, new File(dir, fileName));
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 
 		analysis.totalDistance = (float) query.getDouble(TOTAL_DISTANCE.getSelectColumnIndex());

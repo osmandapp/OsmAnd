@@ -643,9 +643,7 @@ public class GpxUiHelper {
 		SaveGpxHelper.saveGpx(file, gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				OsmandApplication app = mapActivity.getMyApplication();
-				GpxSelectionParams params = GpxSelectionParams.newInstance()
-						.showOnMap().syncGroup().selectedByUser().addToMarkers()
-						.addToHistory().saveSelection();
+				GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 				GPXTrackAnalysis trackAnalysis = analyses != null ? analyses : selectedGpxFile.getTrackAnalysis(app);
 				SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);

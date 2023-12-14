@@ -13,27 +13,26 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.GpxSelectionParams;
 
 import java.io.File;
-import java.util.Map;
+import java.util.List;
 
-public class SelectGpxTask extends AsyncTask<Void, Void, Void> {
+public class SelectGpxTask extends AsyncTask<Void, SelectedGpxFile, Void> {
 
 	private final OsmandApplication app;
 	private final GpxSelectionHelper selectionHelper;
-	private final Map<String, Boolean> selectedItems;
-	private final SelectGpxTaskListener gpxTaskListener;
+	private final List<String> selectedPaths;
+	private final SelectGpxTaskListener listener;
 
-	SelectGpxTask(@NonNull OsmandApplication app, @NonNull Map<String, Boolean> selectedItems,
-	              @Nullable SelectGpxTaskListener gpxTaskListener) {
+	SelectGpxTask(@NonNull OsmandApplication app, @NonNull List<String> selectedPaths, @Nullable SelectGpxTaskListener listener) {
 		this.app = app;
 		this.selectionHelper = app.getSelectedGpxHelper();
-		this.selectedItems = selectedItems;
-		this.gpxTaskListener = gpxTaskListener;
+		this.selectedPaths = selectedPaths;
+		this.listener = listener;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		if (gpxTaskListener != null) {
-			gpxTaskListener.onGpxSelectionStarted();
+		if (listener != null) {
+			listener.onGpxSelectionStarted();
 		}
 	}
 
@@ -44,44 +43,43 @@ public class SelectGpxTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	private void processSelectedItems() {
-		for (Map.Entry<String, Boolean> entry : selectedItems.entrySet()) {
+		GpxSelectionParams selectionParams = GpxSelectionParams.getDefaultSelectionParams();
+		for (String path : selectedPaths) {
 			if (isCancelled()) {
 				break;
 			}
-			String filePath = entry.getKey();
-			boolean visible = Boolean.TRUE.equals(selectedItems.get(filePath));
-
-			if (filePath.equals(CURRENT_TRACK)) {
-				selectionHelper.updateSelected(visible, app.getSavingTrackHelper().getCurrentTrack());
+			SelectedGpxFile selectedGpxFile;
+			if (path.equals(CURRENT_TRACK)) {
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+				selectionHelper.updateSelected(true, selectedGpxFile);
 			} else {
-				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(filePath);
+				selectedGpxFile = selectionHelper.getSelectedFileByPath(path);
 				if (selectedGpxFile == null) {
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(filePath));
-
-					GpxSelectionParams params = GpxSelectionParams.newInstance()
-							.showOnMap().selectedByUser().syncGroup()
-							.addToHistory().addToMarkers().saveSelection();
-
-					selectionHelper.selectGpxFile(gpxFile, params);
+					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(path));
+					selectedGpxFile = selectionHelper.selectGpxFile(gpxFile, selectionParams);
 				} else {
-					selectionHelper.updateSelected(visible, selectedGpxFile);
+					selectionHelper.updateSelected(true, selectedGpxFile);
 				}
 			}
-			publishProgress();
+			publishProgress(selectedGpxFile);
 		}
 	}
 
 	@Override
-	protected void onProgressUpdate(Void... values) {
-		if (gpxTaskListener != null) {
-			gpxTaskListener.onGpxSelectionInProgress();
+	protected void onProgressUpdate(SelectedGpxFile... selectedGpxFiles) {
+		if (listener != null) {
+			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+				listener.onGpxSelectionInProgress(selectedGpxFile);
+			}
 		}
 	}
 
 	@Override
 	protected void onPostExecute(Void v) {
-		if (gpxTaskListener != null) {
-			gpxTaskListener.onGpxSelectionFinished();
+		app.getOsmandMap().refreshMap();
+
+		if (listener != null) {
+			listener.onGpxSelectionFinished();
 		}
 	}
 
@@ -91,7 +89,7 @@ public class SelectGpxTask extends AsyncTask<Void, Void, Void> {
 
 		}
 
-		default void onGpxSelectionInProgress() {
+		default void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
 
 		}
 

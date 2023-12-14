@@ -333,9 +333,7 @@ public class GpxDialogs {
 					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
-							GpxSelectionParams params = GpxSelectionParams.newInstance()
-									.showOnMap().syncGroup().selectedByUser().addToMarkers()
-									.addToHistory().saveSelection();
+							GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
 						}
