@@ -1,5 +1,6 @@
 package net.osmand.plus.utils;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -9,12 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiContext;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -22,15 +25,15 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 public class UpdateLocationUtils {
 
 	@NonNull
-	public static UpdateLocationViewCache getUpdateLocationViewCache(@NonNull OsmandApplication app) {
-		return getUpdateLocationViewCache(app, true);
+	public static UpdateLocationViewCache getUpdateLocationViewCache(@NonNull @UiContext Context context) {
+		return getUpdateLocationViewCache(context, true);
 	}
 
 	@NonNull
-	public static UpdateLocationViewCache getUpdateLocationViewCache(@NonNull OsmandApplication app, boolean useScreenOrientation) {
+	public static UpdateLocationViewCache getUpdateLocationViewCache(@NonNull @UiContext Context context, boolean useScreenOrientation) {
 		UpdateLocationViewCache viewCache = new UpdateLocationViewCache();
 		if (useScreenOrientation) {
-			viewCache.screenOrientation = app.getUIUtilities().getScreenOrientation();
+			viewCache.screenRotation = AndroidUiHelper.getScreenRotation(context);
 		}
 		return viewCache;
 	}
@@ -104,7 +107,7 @@ public class UpdateLocationUtils {
 		if (info.heading == null || info.toLocation == null) {
 			drawable.setAngle(0);
 		} else {
-			float orientation = (cache == null ? 0 : cache.screenOrientation);
+			float orientation = (cache == null ? 0 : cache.screenRotation);
 			drawable.setAngle(info.mes[1] - info.heading + 180 + orientation);
 		}
 	}
@@ -166,7 +169,7 @@ public class UpdateLocationUtils {
 	}
 
 	public static class UpdateLocationViewCache {
-		public int screenOrientation;
+		public int screenRotation;
 		public boolean paintTxt = true;
 		public int arrowResId;
 		public int arrowColor;

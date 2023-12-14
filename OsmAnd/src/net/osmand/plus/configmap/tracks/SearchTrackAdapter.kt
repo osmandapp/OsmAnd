@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks
 
+import android.content.Context
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -28,7 +29,7 @@ import net.osmand.util.Algorithms
 import java.util.Collections
 
 class SearchTracksAdapter(
-    private val app: OsmandApplication,
+    context: Context,
     private var trackItems: List<TrackItem>,
     private val nightMode: Boolean,
     private var selectionMode: Boolean,
@@ -36,6 +37,7 @@ class SearchTracksAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
+    private val app: OsmandApplication
     private val locationViewCache: UpdateLocationViewCache
     private var items: MutableList<Any> = mutableListOf()
     private var filteredItems: List<TrackItem> = mutableListOf()
@@ -51,25 +53,11 @@ class SearchTracksAdapter(
         } else {
             updateFilteredItems(trackItems)
         }
-        locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
+        app = context.applicationContext as OsmandApplication
+        locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context)
         locationViewCache.arrowResId = R.drawable.ic_direction_arrow
         locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
     }
-
-    constructor(
-        app: OsmandApplication,
-        trackItems: List<TrackItem>,
-        nightMode: Boolean,
-        selectionMode: Boolean
-    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems))
-
-    constructor(
-        app: OsmandApplication,
-        trackItems: List<TrackItem>,
-        nightMode: Boolean,
-        selectionMode: Boolean,
-        currentFolder: TrackFolder?
-    ) : this(app, trackItems, nightMode, selectionMode, TracksSearchFilter(app, trackItems, currentFolder))
 
     fun getFilteredItems(): Set<TrackItem> {
         return HashSet(filteredItems)

@@ -119,7 +119,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		favouritesAdapter = new FavouritesAdapter();
+		favouritesAdapter = new FavouritesAdapter(requireActivity());
 		importHelper = app.getImportHelper();
 
 		helper = app.getFavoritesHelper();
@@ -714,8 +714,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		private Set<?> filter;
 		private final UpdateLocationViewCache cache;
 
-		FavouritesAdapter() {
-			cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		FavouritesAdapter(@NonNull FragmentActivity activity) {
+			cache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 		}
 
 		void synchronizeGroups() {

@@ -9,7 +9,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.SelectedTracksHelper
+import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
@@ -24,7 +24,7 @@ class TracksFoldersScreen(
     private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext),
     TrackFolderLoaderTask.LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
-    private val selectedTracksHelper: SelectedTracksHelper = SelectedTracksHelper(app)
+    private val trackTabsHelper: TrackTabsHelper = TrackTabsHelper(app)
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -75,10 +75,10 @@ class TracksFoldersScreen(
                 .setTitle(app.getString(R.string.sort_last_modified))
                 .setImage(iconLastModified)
                 .setBrowsable(true)
-                .setOnClickListener { onClickTabFolder(selectedTracksHelper.trackTabs[TrackTabType.ALL.name]!!) }
+                .setOnClickListener { onClickTabFolder(trackTabsHelper.trackTabs[TrackTabType.ALL.name]!!) }
                 .build())
 
-        if (selectedTracksHelper.trackTabs.isEmpty()) {
+        if (trackTabsHelper.trackTabs.isEmpty()) {
             if (asyncLoader == null) {
                 reloadTracks()
                 templateBuilder.setLoading(true)
@@ -87,7 +87,7 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in selectedTracksHelper.trackTabs.values) {
+        for (trackTab in trackTabsHelper.trackTabs.values) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }
@@ -114,7 +114,7 @@ class TracksFoldersScreen(
     private fun onClickTabFolder(trackTab: TrackTab) {
         if (trackTab.type == TrackTabType.ALL) {
             trackTab.sortMode = TracksSortMode.LAST_MODIFIED
-            selectedTracksHelper.sortTrackTab(trackTab)
+            trackTabsHelper.sortTrackTab(trackTab)
         }
         screenManager.pushForResult(
             TracksScreen(
@@ -124,7 +124,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        selectedTracksHelper.updateTrackItems(folder.flattenedTrackItems)
+        trackTabsHelper.updateTrackItems(folder.flattenedTrackItems)
         invalidate()
     }
 

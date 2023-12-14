@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.NoVisibleTracksViewHolder;
@@ -38,11 +38,11 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final TracksFragment fragment;
 	protected final boolean nightMode;
 
-	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
+	public TracksAdapter(@NonNull Context context, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
 		this.trackTab = trackTab;
 		this.fragment = fragment;
 		this.nightMode = nightMode;
-		this.locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		this.locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 	}
@@ -133,7 +133,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		}
 	}
 
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	public void updateItems(@NonNull Set<TrackItem> trackItems) {
 		for (TrackItem trackItem : trackItems) {
 			updateItem(trackItem);
 		}

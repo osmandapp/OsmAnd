@@ -104,7 +104,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
-		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 	}
 
 	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
