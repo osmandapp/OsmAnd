@@ -95,7 +95,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 				boolean readItem = gpxDbHelper.hasItem(savedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
-					dataItem = new GpxDataItem(savedFile);
+					dataItem = new GpxDataItem(app, savedFile);
 					readItem = !gpxDbHelper.add(dataItem);
 				}
 				if (readItem) {

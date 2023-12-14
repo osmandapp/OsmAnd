@@ -73,7 +73,7 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 		selectionButton.setOnClickListener(v -> {
 			Set<TrackItem> items = adapter.getFilteredItems();
 			selectionHelper.onItemsSelected(items, !areAllTracksSelected());
-			onTrackItemsSelected(items);
+			updateItems(items);
 		});
 		updateButtonsState();
 	}

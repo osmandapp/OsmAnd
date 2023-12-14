@@ -1257,7 +1257,7 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem item = new GpxDataItem(destination);
+			GpxDataItem item = new GpxDataItem(app, destination);
 			item.setParameter(COLOR, col);
 			item.setParameter(API_IMPORTED, true);
 			app.getGpxDbHelper().add(item);
@@ -1309,9 +1309,7 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						GpxSelectionParams params = GpxSelectionParams.newInstance()
-								.showOnMap().syncGroup().selectedByUser().addToMarkers()
-								.addToHistory().saveSelection();
+						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						helper.selectGpxFile(gpx, params);
 						refreshMap();
 					}
@@ -1429,9 +1427,7 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						GpxSelectionParams params = GpxSelectionParams.newInstance()
-								.showOnMap().syncGroup().selectedByUser().addToMarkers()
-								.addToHistory().saveSelection();
+						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
 					}
