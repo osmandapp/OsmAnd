@@ -5273,5 +5273,25 @@
 	<string name="poi_to">To</string>
 	<string name="poi_distance">Distance</string>
 	<string name="poi_cycle_network">Cycle network</string>
+	<string name="poi_state_proposed">State: proposed</string>
+	<string name="poi_state_alternate">State: alternate</string>
+	<string name="poi_state_connection">State: connection</string>
+	<string name="poi_state_inuse">State: in use</string>
+	<string name="poi_state_recommended">State: recommended</string>
+	<string name="poi_state_temporary">State: temporary</string>
+	<string name="poi_state_disused">State: disused</string>
+	<string name="poi_state_closed">State: closed</string>
+	<string name="poi_state_abandoned">State: abandoned</string>
+	<string name="poi_state_approved">State: approved</string>
+	<string name="poi_state_active">State: active</string>
+	<string name="poi_state_under_construction">State: under construction</string>
+	<string name="poi_state_main">State: main</string>
+	<string name="poi_state_suspended">State: suspended</string>
+	<string name="poi_state_detour">State: detour</string>
+	<string name="poi_ascent">Ascent</string>
+	<string name="poi_descent">Descent</string>
+	<string name="poi_direction">Direction</string>
+	<string name="poi_roundtrip_yes">Roundtrip: yes</string>
+	<string name="poi_roundtrip_no">Roundtrip: no</string>
 
 </resources>
