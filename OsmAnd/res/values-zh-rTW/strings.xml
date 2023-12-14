@@ -5566,4 +5566,7 @@
     <string name="key_assignments_already_cleared_message">所有按鍵分配都已清除</string>
     <string name="add_new_button">新增按鈕</string>
     <string name="use_v1_auto_zoom">單獨自動縮放（舊版本）</string>
+    <string name="shared_string_next_event">下次事件</string>
+    <string name="map_widget_sun_position">太陽位置</string>
+    <string name="map_widget_sun_position_desc">這個小工具會根據目前時間顯示到日出或日落之前的時間。</string>
 </resources>
