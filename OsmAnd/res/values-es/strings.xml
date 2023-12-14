@@ -2893,7 +2893,7 @@
     <string name="routing_attr_avoid_subway_description">Evitar metros y trenes ligeros</string>
     <string name="routing_attr_avoid_ferry_name">Sin ferris o transbordadores</string>
     <string name="routing_attr_avoid_ferry_description">Evitar ferris o transbordadores</string>
-    <string name="send_log">Enviar registro del problema</string>
+    <string name="send_log">Enviar el registro</string>
     <string name="files_moved">Se movieron %1$d archivos (%2$s).</string>
     <string name="files_copied">Se copiaron %1$d archivos (%2$s).</string>
     <string name="files_failed">Error al copiar %1$d archivo(s) (%2$s).</string>
@@ -4024,7 +4024,7 @@
     <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
-    <string name="troubleshooting">Solución de problemas</string>
+    <string name="troubleshooting">Resolución de problemas</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Suscripción anual</string>
     <string name="monthly_subscription">Suscripción mensual</string>
@@ -5577,4 +5577,7 @@
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de las teclas ya están borradas</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
     <string name="use_v1_auto_zoom">Zoom automático discreto (versión antigua)</string>
+    <string name="shared_string_next_event">Próximo evento</string>
+    <string name="map_widget_sun_position">Posición del sol</string>
+    <string name="map_widget_sun_position_desc">Este widget muestra el tiempo que falta para la salida o la puesta del sol, según la hora actual.</string>
 </resources>
