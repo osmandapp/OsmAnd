@@ -5581,4 +5581,7 @@
     <string name="key_assignments_already_cleared_message">Alle tastetildelinger er allerede ryddet</string>
     <string name="add_new_button">Tilføj en ny knap</string>
     <string name="use_v1_auto_zoom">Diskret automatisk zoom (gammel version)</string>
+    <string name="shared_string_next_event">Næste begivenhed</string>
+    <string name="map_widget_sun_position">Solposition</string>
+    <string name="map_widget_sun_position_desc">Dette modul viser, hvor lang tid der er til solopgang eller solnedgang, afhængigt af det aktuelle tidspunkt.</string>
 </resources>

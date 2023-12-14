@@ -5570,4 +5570,13 @@
     <string name="clear_key_assignment">Очистити прив\'язку клавіш</string>
     <string name="clear_key_assignment_desc">Прив\'язку клавіш для обраної дії буде очищено та встановлено як \"Ні\".</string>
     <string name="see_all_plans">Переглянути всі плани</string>
+    <string name="button_already_assigned_to_this_action">Ця кнопка вже призначена для цієї дії.</string>
+    <string name="zoom_non_animated">Неанімований зум</string>
+    <string name="key_assignments_already_cleared_message">Всі призначення кнопок вже очищено</string>
+    <string name="shared_string_next_event">Наступна подія</string>
+    <string name="use_v1_auto_zoom">Дискретний автозум (стара версія)</string>
+    <string name="zoom_animated">Анімований зум</string>
+    <string name="map_widget_sun_position">Розташування сонця</string>
+    <string name="add_new_button">Додати нову кнопку</string>
+    <string name="map_widget_sun_position_desc">Цей віджет показує час до сходу або заходу сонця, залежно від поточного часу.</string>
 </resources>

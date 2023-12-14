@@ -5568,4 +5568,7 @@
     <string name="add_new_button">Aggiungi un nuovo pulsante</string>
     <string name="zoom_non_animated">Zoom senza animazione</string>
     <string name="use_v1_auto_zoom">Zoom automatico discreto (vecchia versione)</string>
+    <string name="shared_string_next_event">Prossimo evento</string>
+    <string name="map_widget_sun_position">Posizione del sole</string>
+    <string name="map_widget_sun_position_desc">Questo widget mostra il tempo fino all\'alba o al tramonto, a seconda dell\'ora corrente.</string>
 </resources>
