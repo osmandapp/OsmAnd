@@ -52,7 +52,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		val newCollection = ArrayList<SmartFolder>()
 		val settingsJson = preference.get()
 		if (!Algorithms.isEmpty(settingsJson)) {
-			TrackFilterList.parseFilters(settingsJson, this)?.let { savedFilters ->
+			TrackFilterList.parseFilters(settingsJson)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
 					smartFolder.filters?.let {
 						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()

@@ -1465,6 +1465,9 @@ public class GPXUtilities {
 											if (t.equals("heartrate")) {
 												t = "hr";
 											}
+											if (t.equals("speed")) {
+												t = PointAttributes.SENSOR_TAG_SPEED;
+											}
 											parse.getExtensionsToWrite().put(t, value);
 
 											if (parse instanceof WptPt) {

@@ -806,6 +806,12 @@ public class PluginsHelper {
 				trackPointsAnalysers.add(analyser);
 			}
 		}
+		if(!isActive(ExternalSensorsPlugin.class)) {
+			OsmandPlugin plugin = getPlugin(ExternalSensorsPlugin.class);
+			if(plugin != null) {
+				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
+			}
+		}
 		return (gpxTrackAnalysis, wptPt, pointAttributes) -> {
 			for (TrackPointsAnalyser analyser : trackPointsAnalysers) {
 				analyser.onAnalysePoint(gpxTrackAnalysis, wptPt, pointAttributes);

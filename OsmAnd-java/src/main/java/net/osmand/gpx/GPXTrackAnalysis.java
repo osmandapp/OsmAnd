@@ -47,6 +47,21 @@ public class GPXTrackAnalysis {
 	public float maxSpeed = 0;
 	public float avgSpeed;
 
+	public float maxSensorSpeed = 0;
+	public float avgSensorSpeed;
+
+	public float maxSensorCadence = 0;
+	public float avgSensorCadence;
+
+	public int maxSensorPower = 0;
+	public float avgSensorPower;
+
+	public int maxSensorTemperature = 0;
+	public float avgSensorTemperature;
+
+	public int maxSensorHr = 0;
+	public float avgSensorHr;
+
 	public double minHdop = Double.NaN;
 	public double maxHdop = Double.NaN;
 
@@ -150,6 +165,18 @@ public class GPXTrackAnalysis {
 		long timeDiffMillis = 0;
 		int timeDiff = 0;
 		double totalSpeedSum = 0;
+
+		int sensorSpeedCount = 0;
+		double totalSensorSpeedSum = 0;
+		int sensorHrCount = 0;
+		long totalSensorHrSum = 0;
+		int sensorPowerCount = 0;
+		long totalSensorPowerSum = 0;
+		int sensorTemperatureCount = 0;
+		long totalSensorTemperatureSum = 0;
+		int sensorCadenceCount = 0;
+		double totalSensorCadenceSum = 0;
+
 		points = 0;
 
 		pointAttributes = new ArrayList<>();
@@ -283,12 +310,45 @@ public class GPXTrackAnalysis {
 				attribute.speed = speed;
 				attribute.elevation = elevation;
 				addWptAttribute(point, attribute, pointsAnalyser);
+				if (attribute.sensorSpeed > 0) {
+					maxSensorSpeed = Math.max(attribute.sensorSpeed, maxSensorSpeed);
+					sensorSpeedCount++;
+					totalSensorSpeedSum += attribute.sensorSpeed;
+				}
+
+				if (attribute.bikeCadence > 0) {
+					maxSensorCadence = Math.max(attribute.bikeCadence, maxSensorCadence);
+					sensorCadenceCount++;
+					totalSensorCadenceSum += attribute.bikeCadence;
+				}
+
+				if (attribute.heartRate > 0) {
+					maxSensorHr = Math.max((int) attribute.heartRate, maxSensorHr);
+					sensorHrCount++;
+					totalSensorHrSum += attribute.heartRate;
+				}
+
+				if (attribute.temperature > 0) {
+					maxSensorTemperature = Math.max((int) attribute.temperature, maxSensorTemperature);
+					sensorTemperatureCount++;
+					totalSensorTemperatureSum += attribute.temperature;
+				}
+
+				if (attribute.bikePower > 0) {
+					maxSensorPower = Math.max((int) attribute.bikePower, maxSensorPower);
+					sensorPowerCount++;
+					totalSensorPowerSum += attribute.bikePower;
+				}
 			}
 			processElevationDiff(s);
 		}
 		checkUnspecifiedValues(fileTimeStamp);
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount);
-
+		processAverageSensorSpeed(totalSensorSpeedSum, sensorSpeedCount);
+		processAverageSensorCadence(totalSensorCadenceSum, sensorCadenceCount);
+		processAverageSensorHearRate(totalSensorHrSum, sensorHrCount);
+		processAverageSensorPower(totalSensorPowerSum, sensorPowerCount);
+		processAverageSensorTemperature(totalSensorTemperatureSum, sensorTemperatureCount);
 		return this;
 	}
 
@@ -358,6 +418,46 @@ public class GPXTrackAnalysis {
 			}
 		} else {
 			avgSpeed = -1;
+		}
+	}
+
+	private void processAverageSensorSpeed(double totalSensorSpeedSum, int sensorSpeedCount) {
+		if (sensorSpeedCount > 0) {
+			avgSensorSpeed = (float) (totalSensorSpeedSum / sensorSpeedCount);
+		} else {
+			avgSensorSpeed = -1;
+		}
+	}
+
+	private void processAverageSensorCadence(double totalSensorCadenceSum, int sensorCadenceCount) {
+		if (sensorCadenceCount > 0) {
+			avgSensorCadence = (float) (totalSensorCadenceSum / sensorCadenceCount);
+		} else {
+			avgSensorCadence = -1;
+		}
+	}
+
+	private void processAverageSensorHearRate(long totalSensorHrSum, int sensorHrCount) {
+		if (sensorHrCount > 0) {
+			avgSensorHr = (int) (totalSensorHrSum / sensorHrCount);
+		} else {
+			avgSensorHr = -1;
+		}
+	}
+
+	private void processAverageSensorPower(long totalSensorPowerSum, int sensorPowerCount) {
+		if (sensorPowerCount > 0) {
+			avgSensorPower = (int) (totalSensorPowerSum / sensorPowerCount);
+		} else {
+			avgSensorPower = -1;
+		}
+	}
+
+	private void processAverageSensorTemperature(long totalSensorTemperatureSum, int sensorTemperatureCount) {
+		if (sensorTemperatureCount > 0) {
+			avgSensorTemperature = (int) (totalSensorTemperatureSum / sensorTemperatureCount);
+		} else {
+			avgSensorTemperature = -1;
 		}
 	}
 

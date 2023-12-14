@@ -1,6 +1,7 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,13 +83,23 @@ public class GpxDataItem {
 		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
 		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
 		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
-		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
+		map.put(MAX_SPEED, hasAnalysis ? (double) analysis.maxSpeed : null);
+		map.put(AVG_SPEED, hasAnalysis ? (double) analysis.avgSpeed : null);
 		map.put(POINTS, hasAnalysis ? analysis.points : null);
 		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
 		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
 		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
 		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.maxSensorTemperature : null);
+		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? (double) analysis.avgSensorTemperature : null);
+		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.maxSensorPower : null);
+		map.put(AVG_SENSOR_POWER, hasAnalysis ? (double) analysis.avgSensorPower : null);
+		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? (double) analysis.maxSensorCadence : null);
+		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? (double) analysis.avgSensorCadence : null);
+		map.put(MAX_SENSOR_SPEED, hasAnalysis ? (double) analysis.maxSensorSpeed : null);
+		map.put(AVG_SENSOR_SPEED, hasAnalysis ? (double) analysis.avgSensorSpeed : null);
+		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.maxSensorHr : null);
+		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? (double) analysis.avgSensorHr : null);
 	}
 
 	public void readGpxParams(@NonNull GPXFile gpxFile) {

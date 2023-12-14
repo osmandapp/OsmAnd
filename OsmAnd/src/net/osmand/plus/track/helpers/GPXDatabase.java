@@ -2,6 +2,9 @@ package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_HEART_RATE;
+import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_TEMPERATURE;
 
 import android.util.Pair;
 
@@ -34,7 +37,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	private static final int DB_VERSION = 16;
+	private static final int DB_VERSION = 19;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -190,6 +193,10 @@ public class GPXDatabase {
 		String fileDir = query.getString(FILE_DIR.getSelectColumnIndex());
 		String fileName = query.getString(FILE_NAME.getSelectColumnIndex());
 
+		if(fileName.contains("custom_")) {
+			LOG.debug("");
+		}
+
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);
 
@@ -211,6 +218,16 @@ public class GPXDatabase {
 		analysis.minSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
 		analysis.maxSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
 		analysis.avgSpeed = (float) query.getDouble(AVG_SPEED.getSelectColumnIndex());
+		analysis.maxSensorTemperature = query.getInt(MAX_SENSOR_TEMPERATURE.getSelectColumnIndex());
+		analysis.avgSensorTemperature = (float) query.getDouble(AVG_SENSOR_TEMPERATURE.getSelectColumnIndex());
+		analysis.maxSensorCadence = (float) query.getDouble(MAX_SENSOR_CADENCE.getSelectColumnIndex());
+		analysis.avgSensorCadence = (float) query.getDouble(AVG_SENSOR_CADENCE.getSelectColumnIndex());
+		analysis.maxSensorPower = query.getInt(MAX_SENSOR_POWER.getSelectColumnIndex());
+		analysis.avgSensorPower = (float) query.getDouble(AVG_SENSOR_POWER.getSelectColumnIndex());
+		analysis.maxSensorSpeed = (float) query.getDouble(MAX_SENSOR_SPEED.getSelectColumnIndex());
+		analysis.avgSensorSpeed = (float) query.getDouble(AVG_SENSOR_SPEED.getSelectColumnIndex());
+		analysis.maxSensorHr = query.getInt(MAX_SENSOR_HEART_RATE.getSelectColumnIndex());
+		analysis.avgSensorHr = (float)query.getDouble(AVG_SENSOR_HEART_RATE.getSelectColumnIndex());
 		analysis.points = query.getInt(POINTS.getSelectColumnIndex());
 		analysis.wptPoints = query.getInt(WPT_POINTS.getSelectColumnIndex());
 

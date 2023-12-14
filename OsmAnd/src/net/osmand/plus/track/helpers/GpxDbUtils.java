@@ -175,6 +175,18 @@ public class GpxDbUtils {
 		if (oldVersion < 16) {
 			addTableColumn(db, FILE_CREATION_TIME);
 		}
+		if (oldVersion < 17) {
+			addTableColumn(db, MAX_SENSOR_POWER);
+			addTableColumn(db, AVG_SENSOR_POWER);
+			addTableColumn(db, MAX_SENSOR_CADENCE);
+			addTableColumn(db, AVG_SENSOR_CADENCE);
+			addTableColumn(db, MAX_SENSOR_SPEED);
+			addTableColumn(db, AVG_SENSOR_SPEED);
+			addTableColumn(db, MAX_SENSOR_HEART_RATE);
+			addTableColumn(db, AVG_SENSOR_HEART_RATE);
+			addTableColumn(db, MAX_SENSOR_TEMPERATURE);
+			addTableColumn(db, AVG_SENSOR_TEMPERATURE);
+		}
 		db.execSQL(getIndexQuery());
 	}
 
@@ -260,6 +272,16 @@ public class GpxDbUtils {
 		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
 		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
 		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
+		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.maxSensorTemperature : null);
+		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? analysis.avgSensorTemperature : null);
+		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.maxSensorPower : null);
+		map.put(AVG_SENSOR_POWER, hasAnalysis ? analysis.avgSensorPower : null);
+		map.put(MAX_SENSOR_SPEED, hasAnalysis ? analysis.maxSensorSpeed : null);
+		map.put(AVG_SENSOR_SPEED, hasAnalysis ? analysis.avgSensorSpeed : null);
+		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? analysis.maxSensorCadence : null);
+		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? analysis.avgSensorCadence : null);
+		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.maxSensorHr : null);
+		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? analysis.avgSensorHr : null);
 		map.put(POINTS, hasAnalysis ? analysis.points : null);
 		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
 		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);

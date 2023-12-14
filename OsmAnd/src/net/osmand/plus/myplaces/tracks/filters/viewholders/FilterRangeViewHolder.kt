@@ -9,7 +9,10 @@ import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.myplaces.tracks.filters.MeasureUnitType
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter
+import net.osmand.plus.settings.enums.MetricsConstants
+import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
@@ -38,7 +41,7 @@ open class FilterRangeViewHolder(
 	private val minMaxContainer: View
 	private val explicitIndicator: ImageView
 	private val slider: RangeSlider
-	private lateinit var filter: RangeTrackFilter
+	private lateinit var filter: RangeTrackFilter<*>
 	private lateinit var valueFromInput: ExtendedEditText
 	private lateinit var valueToInput: ExtendedEditText
 	private val valueFromInputContainer: OsmandTextFieldBoxes
@@ -74,8 +77,8 @@ open class FilterRangeViewHolder(
 			override fun onStopTrackingTouch(slider: RangeSlider) {
 				isSliderDragging = false
 				val values = slider.values
-				filter.setValueFrom(Math.round(values[0]).toFloat())
-				filter.setValueTo(Math.round(values[1]).toFloat())
+				filter.setValueFrom(Math.round(values[0]).toString())
+				filter.setValueTo(Math.round(values[1]).toString())
 				updateValues()
 			}
 		}
@@ -108,9 +111,10 @@ open class FilterRangeViewHolder(
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (filter.getDisplayValueFrom() != newValue
-						&& newValue < filter.valueTo
+						&& filter.valueTo is Number
+						&& newValue < (filter.valueTo as Number).toInt()
 						&& !isSliderDragging) {
-						filter.setValueFrom(newValue.toFloat())
+						filter.setValueFrom(newValue.toString())
 						updateValues()
 					}
 				}
@@ -123,9 +127,10 @@ open class FilterRangeViewHolder(
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (filter.getDisplayValueTo() != newValue
-						&& newValue > filter.getDisplayValueFrom()
+						&& filter.valueFrom is Number
+						&& newValue > (filter.valueFrom as Number).toInt()
 						&& !isSliderDragging) {
-						filter.setValueTo(newValue.toFloat())
+						filter.setValueTo(newValue.toString())
 						updateValues()
 					}
 				}
@@ -135,13 +140,13 @@ open class FilterRangeViewHolder(
 		valueToInputContainer = itemView.findViewById(R.id.value_to)
 	}
 
-	fun bindView(filter: RangeTrackFilter) {
+	fun bindView(filter: RangeTrackFilter<*>) {
 		this.filter = filter
-		title.setText(filter.displayNameId)
+		title.setText(filter.filterType.nameResId)
 		valueFromInputContainer.labelText =
-			"${app.getString(R.string.shared_string_from)}, ${app.getString(filter.unitResId)}"
+			"${app.getString(R.string.shared_string_from)}, ${getFilterUnitText()}"
 		valueToInputContainer.labelText =
-			"${app.getString(R.string.shared_string_to)}, ${app.getString(filter.unitResId)}"
+			"${app.getString(R.string.shared_string_to)}, ${getFilterUnitText()}"
 		updateExpandState()
 		updateValues()
 	}
@@ -168,22 +173,110 @@ open class FilterRangeViewHolder(
 		valueToInput.setText(valueTo.toString())
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
-			"${decimalFormat.format(minValue)} ${app.getString(filter.unitResId)}"
+			"${decimalFormat.format(minValue.toFloat())} ${getFilterUnitText()}"
 		val maxValuePrompt =
-			"${decimalFormat.format(maxValue)} ${app.getString(filter.unitResId)}"
+			"${decimalFormat.format(maxValue.toFloat())} ${getFilterUnitText()}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
 		AndroidUiHelper.updateVisibility(selectedValue, filter.isEnabled())
-		updateSelectedValue(valueFrom, valueTo)
+		updateSelectedValue(valueFrom.toString(), valueTo.toString())
 	}
 
-	open fun updateSelectedValue(valueFrom: Int, valueTo: Int) {
-		val fromTxt = decimalFormat.format(valueFrom)
-		val toTxt = decimalFormat.format(valueTo)
-		selectedValue.text = String.format(
-			app.getString(R.string.track_filter_range_selected_format),
-			fromTxt,
-			toTxt,
-			app.getString(filter.unitResId))
+	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
+		if (filter.filterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
+			val fromTxt =
+				OsmAndFormatter.getFormattedDuration(valueFrom.toFloat().toLong() * 60L, app)
+			val toTxt = OsmAndFormatter.getFormattedDuration(valueTo.toFloat().toLong() * 60L, app)
+			selectedValue.text = String.format(
+				app.getString(R.string.track_filter_date_selected_format),
+				fromTxt,
+				toTxt)
+		} else {
+			val fromTxt = decimalFormat.format(valueFrom.toFloat().toLong())
+			val toTxt = decimalFormat.format(valueTo.toFloat().toLong())
+			selectedValue.text = String.format(
+				app.getString(R.string.track_filter_range_selected_format),
+				fromTxt,
+				toTxt,
+				getFilterUnitText())
+		}
+	}
+
+	private fun getFilterUnitText(): String {
+		val unitResId = getFilterUnit()
+		return if (unitResId > 0) app.getString(unitResId) else ""
+	}
+
+	private fun getFilterUnit(): Int {
+		return when (filter.filterType.measureUnitType) {
+			MeasureUnitType.TIME_DURATION -> R.string.shared_string_minute_lowercase
+			MeasureUnitType.DISTANCE -> getDistanceUnits()
+			MeasureUnitType.ALTITUDE -> getAltitudeUnits()
+			MeasureUnitType.SPEED -> getSpeedUnits()
+			MeasureUnitType.TEMPERATURE -> getTemperatureUnits()
+			MeasureUnitType.ROTATIONS -> getRotationUnits()
+			MeasureUnitType.BPM -> getBPMUnits()
+			MeasureUnitType.POWER -> getPowerUnits()
+			MeasureUnitType.DATE -> 0
+			else -> 0
+		}
+	}
+
+	private fun getDistanceUnits(): Int {
+		val settings = app.settings
+		val mc = settings.METRIC_SYSTEM.get()
+		return when (mc!!) {
+			MetricsConstants.MILES_AND_METERS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_YARDS -> R.string.mile
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> R.string.nm
+
+			MetricsConstants.KILOMETERS_AND_METERS -> R.string.km
+		}
+	}
+
+	private fun getPowerUnits(): Int {
+		return R.string.power_watts_unit
+	}
+
+	private fun getTemperatureUnits(): Int {
+		return R.string.degree_celsius
+	}
+
+	private fun getBPMUnits(): Int {
+		return R.string.beats_per_minute_short
+	}
+
+	private fun getRotationUnits(): Int {
+		return R.string.revolutions_per_minute_unit
+	}
+
+	private fun getSpeedUnits(): Int {
+		val settings = app.settings
+		val mc = settings.METRIC_SYSTEM.get()
+		return when (mc!!) {
+			MetricsConstants.MILES_AND_METERS,
+			MetricsConstants.MILES_AND_FEET,
+			MetricsConstants.MILES_AND_YARDS -> R.string.mile_per_hour
+
+			MetricsConstants.NAUTICAL_MILES_AND_FEET,
+			MetricsConstants.NAUTICAL_MILES_AND_METERS -> R.string.nm_h
+
+			MetricsConstants.KILOMETERS_AND_METERS -> R.string.km_h
+		}
+	}
+
+	private fun getAltitudeUnits(): Int {
+		val settings = app.settings
+		val mc = settings.METRIC_SYSTEM.get()
+		val useFeet =
+			mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET
+		return if (useFeet) {
+			R.string.foot
+		} else {
+			R.string.m
+		}
 	}
 }

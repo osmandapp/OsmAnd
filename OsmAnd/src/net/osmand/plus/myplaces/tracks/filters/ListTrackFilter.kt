@@ -4,13 +4,48 @@ import android.graphics.drawable.Drawable
 import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.plus.track.helpers.GpxParameter
 import net.osmand.util.Algorithms
+import java.lang.IllegalArgumentException
 
-abstract class ListTrackFilter(
+open class ListTrackFilter(
 	val app: OsmandApplication,
-	displayNameId: Int, filterType: FilterType,
+	filterType: FilterType,
 	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(displayNameId, filterType, filterChangedListener) {
+	BaseTrackFilter(filterType, filterChangedListener) {
+
+	var collectionFilterParams: SingleFieldTrackFilterParams
+
+	init {
+		val additionalData = filterType.additionalData
+		if(additionalData == null || additionalData !is SingleFieldTrackFilterParams) {
+			throw IllegalArgumentException("additionalData in $filterType filter should be valid instance of CollectionTrackFilterParams")
+		}
+		collectionFilterParams = additionalData
+	}
+
+	var firstItem: String? = null
+		set(value) {
+			field = value
+			value?.let {
+				setSelectedItems(arrayListOf(it))
+			}
+		}
+
+	fun updateFullCollection(items: List<TrackItem>?) {
+		if (Algorithms.isEmpty(items)) {
+			allItemsCollection = HashMap()
+		} else {
+			val newCollection = HashMap<String, Int>()
+			for (item in items!!) {
+				val folderName = item.dataItem?.getParameter(GpxParameter.FILE_DIR) ?: ""
+				val count = newCollection[folderName] ?: 0
+				newCollection[folderName] = count + 1
+			}
+			allItemsCollection = newCollection
+		}
+	}
 
 	override fun isEnabled(): Boolean {
 		return !Algorithms.isEmpty(selectedItems)
@@ -66,11 +101,12 @@ abstract class ListTrackFilter(
 
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is ListTrackFilter) {
-			selectedItems = if (value.selectedItems == null) {
-				ArrayList()
-			} else {
-				ArrayList(value.selectedItems)
-			}
+			setSelectedItems(
+				if (value.selectedItems == null) {
+					ArrayList()
+				} else {
+					ArrayList(value.selectedItems)
+				})
 			for (item in value.selectedItems) {
 				if (!allItems.contains(item)) {
 					allItems.add(item)
@@ -79,10 +115,6 @@ abstract class ListTrackFilter(
 			}
 			filterChangedListener?.onFilterChanged()
 		}
-	}
-
-	fun getSelectedItems(): List<String> {
-		return ArrayList(selectedItems)
 	}
 
 	fun areAllItemsSelected(items: List<String>): Boolean {
@@ -121,4 +153,34 @@ abstract class ListTrackFilter(
 	fun clearSelectedItems() {
 		selectedItems = ArrayList()
 	}
+
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
+		val trackItemPropertyValue = getTrackPropertyValue(trackItem)
+		for (item in selectedItems) {
+			if (Algorithms.stringsEqual(trackItemPropertyValue, item)) {
+				return true
+			}
+		}
+		return false
+	}
+
+	private fun getTrackPropertyValue(trackItem: TrackItem): String {
+		val value = trackItem.dataItem?.getParameter<Any>(filterType.propertyList[0])
+		return if(value != null) value as String else ""
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other) &&
+				other is ListTrackFilter &&
+				other.selectedItems.size == selectedItems.size &&
+				areAllItemsSelected(other.selectedItems)
+	}
+
+	override fun hashCode(): Int {
+		var result = selectedItems.hashCode()
+		result = 31 * result + allItems.hashCode()
+		result = 31 * result + isSelectAllItemsSelected.hashCode()
+		return result
+	}
+
 }

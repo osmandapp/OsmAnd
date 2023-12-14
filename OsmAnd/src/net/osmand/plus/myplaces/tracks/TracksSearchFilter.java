@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks;
 
+import android.os.AsyncTask;
 import android.widget.Filter;
 
 import androidx.annotation.NonNull;
@@ -10,16 +11,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.CityTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.ColorTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.DateCreationTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
 import net.osmand.plus.myplaces.tracks.filters.FilterType;
-import net.osmand.plus.myplaces.tracks.filters.LengthTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.TrackFolderFilter;
-import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
-import net.osmand.plus.myplaces.tracks.filters.WidthTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.utils.BackgroundThreadTask;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -55,39 +54,57 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		initFilters(app);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initFilters(@NonNull OsmandApplication app) {
 		recreateFilters();
-		DateCreationTrackFilter dateFilter = (DateCreationTrackFilter) getFilterByType(FilterType.DATE_CREATION);
-		if (dateFilter != null) {
-			long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
-			long now = (new Date()).getTime();
-			dateFilter.setInitialValueFrom(minDate);
-			dateFilter.setInitialValueTo(now);
-			dateFilter.setValueFrom(minDate);
-			dateFilter.setValueTo(now);
-		}
-		LengthTrackFilter lengthFilter = (LengthTrackFilter) getFilterByType(FilterType.LENGTH);
-		if (lengthFilter != null) {
-			lengthFilter.setMaxValue((float) app.getGpxDbHelper().getTracksMaxDuration());
-		}
-		CityTrackFilter cityFilter = (CityTrackFilter) getFilterByType(FilterType.CITY);
-		if (cityFilter != null) {
-			cityFilter.setFullItemsCollection(app.getGpxDbHelper().getNearestCityList());
-		}
-		ColorTrackFilter colorsFilter = (ColorTrackFilter) getFilterByType(FilterType.COLOR);
-		if (colorsFilter != null) {
-			colorsFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackColorsList());
-		}
-		WidthTrackFilter widthFilter = (WidthTrackFilter) getFilterByType(FilterType.WIDTH);
-		if (widthFilter != null) {
-			widthFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackWidthList());
-		}
-		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
-		if (folderFilter != null) {
-			folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
-			folderFilter.setCurrentFolder(currentFolder);
-		}
+		BackgroundThreadTask<Void> initFiltersTask = new BackgroundThreadTask<>(new BackgroundThreadTask.BackgroundThreadExecuteSource<Void>() {
+			@Nullable
+			@Override
+			public Void onBackground() {
+				DateTrackFilter dateFilter = (DateTrackFilter) getFilterByType(FilterType.DATE_CREATION);
+				if (dateFilter != null) {
+					long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
+					long now = (new Date()).getTime();
+					dateFilter.setInitialValueFrom(minDate);
+					dateFilter.setInitialValueTo(now);
+					dateFilter.setValueFrom(minDate);
+					dateFilter.setValueTo(now);
+				}
 
+				BaseTrackFilter lengthFilter = getFilterByType(FilterType.LENGTH);
+				if (lengthFilter instanceof RangeTrackFilter
+						&& lengthFilter.getFilterType().getPropertyList().get(0).getTypeClass() == Double.class) {
+					((RangeTrackFilter<Double>) lengthFilter).setMaxValue(app.getGpxDbHelper().getTracksMaxDuration());
+				}
+
+				ListTrackFilter cityFilter = (ListTrackFilter) getFilterByType(FilterType.CITY);
+				if (cityFilter != null) {
+					cityFilter.setFullItemsCollection(app.getGpxDbHelper().getNearestCityList());
+				}
+				ListTrackFilter colorsFilter = (ListTrackFilter) getFilterByType(FilterType.COLOR);
+				if (colorsFilter != null) {
+					colorsFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackColorsList());
+				}
+				ListTrackFilter widthFilter = (ListTrackFilter) getFilterByType(FilterType.WIDTH);
+				if (widthFilter != null) {
+					widthFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackWidthList());
+				}
+				ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(FilterType.FOLDER);
+				if (folderFilter != null) {
+					folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
+					if (currentFolder != null) {
+						folderFilter.setFirstItem(currentFolder.getDirName());
+					}
+				}
+				return BackgroundThreadTask.BackgroundThreadExecuteSource.super.onBackground();
+			}
+
+			@Override
+			public void onPostExecute(@Nullable Void result) {
+				onFilterChanged();
+			}
+		});
+		initFiltersTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void setCallback(@Nullable CallbackWithObject<List<TrackItem>> callback) {
@@ -130,7 +147,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			results.values = res;
 			results.count = res.size();
 		}
-		TrackFolderFilter folderFilter = (TrackFolderFilter) getFilterByType(FilterType.FOLDER);
+		ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(FilterType.FOLDER);
 		if (folderFilter != null) {
 			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
 				folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
@@ -171,8 +188,8 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	}
 
 
-	public TrackNameFilter getNameFilter() {
-		return (TrackNameFilter) getFilterByType(FilterType.NAME);
+	public TextTrackFilter getNameFilter() {
+		return (TextTrackFilter) getFilterByType(FilterType.NAME);
 	}
 
 	public void addFiltersChangedListener(FilterChangedListener listener) {
@@ -193,7 +210,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	}
 
 	public void filter() {
-		TrackNameFilter nameFilter = getNameFilter();
+		TextTrackFilter nameFilter = getNameFilter();
 		if (nameFilter != null) {
 			filter(nameFilter.getValue());
 		}
@@ -210,10 +227,11 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	}
 
 	void recreateFilters() {
-		currentFilters.clear();
+		List<BaseTrackFilter> newFiltersFilters = new ArrayList<>();
 		for (FilterType filterType : FilterType.values()) {
-			currentFilters.add(TrackFiltersHelper.createFilter(app, filterType, this));
+			newFiltersFilters.add(TrackFiltersHelper.createFilter(app, filterType, this));
 		}
+		currentFilters = newFiltersFilters;
 	}
 
 
