@@ -71,7 +71,8 @@ public class CategoryAnimator {
 		int startValue = (int) ((passedDistance / wholeDistance) * maxValue);
 
 		// Determine correct animation duration
-		int duration = (int) ((float) maxDuration / maxValue * (maxValue - startValue));
+		int calculatedDuration = (int) ((float) maxDuration / maxValue * (maxValue - startValue));
+		int duration = Math.max(calculatedDuration, 0);
 
 		// Create animation
 		ValueAnimator animation = ValueAnimator.ofInt(startValue, maxValue);
