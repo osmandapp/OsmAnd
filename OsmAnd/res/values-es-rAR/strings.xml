@@ -5592,4 +5592,7 @@
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
     <string name="use_v1_auto_zoom">Zum automático discreto (versión antigua)</string>
+    <string name="shared_string_next_event">Próximo evento</string>
+    <string name="map_widget_sun_position">Ubicación del Sol</string>
+    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
 </resources>
