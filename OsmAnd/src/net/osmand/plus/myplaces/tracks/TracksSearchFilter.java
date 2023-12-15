@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks;
 
-import android.os.AsyncTask;
 import android.widget.Filter;
 
 import androidx.annotation.NonNull;
@@ -18,7 +17,7 @@ import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.utils.BackgroundThreadTask;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,54 +56,47 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	@SuppressWarnings("unchecked")
 	private void initFilters(@NonNull OsmandApplication app) {
 		recreateFilters();
-		BackgroundThreadTask<Void> initFiltersTask = new BackgroundThreadTask<>(new BackgroundThreadTask.BackgroundThreadExecuteSource<Void>() {
-			@Nullable
-			@Override
-			public Void onBackground() {
-				DateTrackFilter dateFilter = (DateTrackFilter) getFilterByType(FilterType.DATE_CREATION);
-				if (dateFilter != null) {
-					long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
-					long now = (new Date()).getTime();
-					dateFilter.setInitialValueFrom(minDate);
-					dateFilter.setInitialValueTo(now);
-					dateFilter.setValueFrom(minDate);
-					dateFilter.setValueTo(now);
-				}
-
-				BaseTrackFilter lengthFilter = getFilterByType(FilterType.LENGTH);
-				if (lengthFilter instanceof RangeTrackFilter
-						&& lengthFilter.getFilterType().getPropertyList().get(0).getTypeClass() == Double.class) {
-					((RangeTrackFilter<Double>) lengthFilter).setMaxValue(app.getGpxDbHelper().getTracksMaxDuration());
-				}
-
-				ListTrackFilter cityFilter = (ListTrackFilter) getFilterByType(FilterType.CITY);
-				if (cityFilter != null) {
-					cityFilter.setFullItemsCollection(app.getGpxDbHelper().getNearestCityList());
-				}
-				ListTrackFilter colorsFilter = (ListTrackFilter) getFilterByType(FilterType.COLOR);
-				if (colorsFilter != null) {
-					colorsFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackColorsList());
-				}
-				ListTrackFilter widthFilter = (ListTrackFilter) getFilterByType(FilterType.WIDTH);
-				if (widthFilter != null) {
-					widthFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackWidthList());
-				}
-				ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(FilterType.FOLDER);
-				if (folderFilter != null) {
-					folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
-					if (currentFolder != null) {
-						folderFilter.setFirstItem(currentFolder.getDirName());
+		AndroidUtils.runInBackground(
+				() -> {
+					DateTrackFilter dateFilter = (DateTrackFilter) getFilterByType(FilterType.DATE_CREATION);
+					if (dateFilter != null) {
+						long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
+						long now = (new Date()).getTime();
+						dateFilter.setInitialValueFrom(minDate);
+						dateFilter.setInitialValueTo(now);
+						dateFilter.setValueFrom(minDate);
+						dateFilter.setValueTo(now);
 					}
-				}
-				return BackgroundThreadTask.BackgroundThreadExecuteSource.super.onBackground();
-			}
 
-			@Override
-			public void onPostExecute(@Nullable Void result) {
-				onFilterChanged();
-			}
-		});
-		initFiltersTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					BaseTrackFilter lengthFilter = getFilterByType(FilterType.LENGTH);
+					if (lengthFilter instanceof RangeTrackFilter
+							&& lengthFilter.getFilterType().getPropertyList().get(0).getTypeClass() == Double.class) {
+						((RangeTrackFilter<Double>) lengthFilter).setMaxValue(app.getGpxDbHelper().getTracksMaxDuration());
+					}
+
+					ListTrackFilter cityFilter = (ListTrackFilter) getFilterByType(FilterType.CITY);
+					if (cityFilter != null) {
+						cityFilter.setFullItemsCollection(app.getGpxDbHelper().getNearestCityList());
+					}
+					ListTrackFilter colorsFilter = (ListTrackFilter) getFilterByType(FilterType.COLOR);
+					if (colorsFilter != null) {
+						colorsFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackColorsList());
+					}
+					ListTrackFilter widthFilter = (ListTrackFilter) getFilterByType(FilterType.WIDTH);
+					if (widthFilter != null) {
+						widthFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackWidthList());
+					}
+					ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(FilterType.FOLDER);
+					if (folderFilter != null) {
+						folderFilter.setFullItemsCollection(app.getGpxDbHelper().getTrackFolders());
+						if (currentFolder != null) {
+							folderFilter.setFirstItem(currentFolder.getDirName());
+						}
+					}
+				},
+				this::onFilterChanged,
+				null
+		);
 	}
 
 	public void setCallback(@Nullable CallbackWithObject<List<TrackItem>> callback) {

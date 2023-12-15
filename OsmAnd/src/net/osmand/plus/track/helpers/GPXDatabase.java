@@ -37,7 +37,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	private static final int DB_VERSION = 19;
+	private static final int DB_VERSION = 17;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -192,10 +192,6 @@ public class GPXDatabase {
 	private GpxDataItem readItem(@NonNull SQLiteCursor query) {
 		String fileDir = query.getString(FILE_DIR.getSelectColumnIndex());
 		String fileName = query.getString(FILE_NAME.getSelectColumnIndex());
-
-		if(fileName.contains("custom_")) {
-			LOG.debug("");
-		}
 
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);

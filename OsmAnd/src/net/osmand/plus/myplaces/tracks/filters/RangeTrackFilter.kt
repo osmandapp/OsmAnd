@@ -115,8 +115,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		return comparableValue > valueFrom && comparableValue < valueTo
 				|| comparableValue < minValue && valueFrom == minValue
 				|| comparableValue > maxValue && valueTo == maxValue
-
-		return false
 	}
 
 	override fun initWithValue(value: BaseTrackFilter) {
@@ -189,11 +187,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		}
 	}
 
-	private fun getDisplayValue(value: T): Int {
-		val formattedValue = getFormattedValue(ceil(maxValue))
-		return formattedValue.valueSrc.toInt()
-	}
-
 	open fun getDisplayMaxValue(): Int {
 		val formattedValue = getFormattedValue(ceil(maxValue))
 		return formattedValue.valueSrc.toInt() + 1
@@ -209,7 +202,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		return formattedValue.valueSrc.toInt()
 	}
 
-	fun getBaseValueFromFormatted(value: String): Float {
+	private fun getBaseValueFromFormatted(value: String): Float {
 		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
 		val mode = app.settings.applicationMode
 		val speedConstant = app.settings.SPEED_SYSTEM.getModeValue(mode)
@@ -247,7 +240,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 				true,
 				metricsConstants)
 
-			else -> FormattedValue(value.toFloat(), value.toString(), "")
+			else -> FormattedValue(value.toFloat(), value, "")
 		}
 	}
 
@@ -257,16 +250,22 @@ open class RangeTrackFilter<T : Comparable<T>>(
 
 	private fun getComparableValue(value: Any): T {
 		if (value is Number) {
-			return if (getProperty().typeClass == java.lang.Integer::class.java) {
-				check(value.toInt()) as T
-			} else if (getProperty().typeClass == java.lang.Double::class.java) {
-				check(value.toDouble()) as T
-			} else if (getProperty().typeClass == java.lang.Long::class.java) {
-				check(value.toLong()) as T
-			} else if (getProperty().typeClass == java.lang.Float::class.java) {
-				check(value.toFloat()) as T
-			} else {
-				throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
+			return when (getProperty().typeClass) {
+				java.lang.Integer::class.java -> {
+					check(value.toInt()) as T
+				}
+				java.lang.Double::class.java -> {
+					check(value.toDouble()) as T
+				}
+				java.lang.Long::class.java -> {
+					check(value.toLong()) as T
+				}
+				java.lang.Float::class.java -> {
+					check(value.toFloat()) as T
+				}
+				else -> {
+					throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
+				}
 			}
 		}
 		throw IllegalArgumentException("$value is not a number")

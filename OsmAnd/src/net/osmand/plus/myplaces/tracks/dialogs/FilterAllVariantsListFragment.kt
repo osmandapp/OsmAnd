@@ -46,9 +46,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 					throw IllegalArgumentException("Filter should be subclass from ListTrackFilter")
 				}
 				initialFilter.initWithValue(filter)
-//				val initialFilter = filter.clone()
 				val nightMode = app.daynightHelper.isNightMode(true)
-//				val currentFilter = filter.clone()
 				val currentFilter =
 					TrackFiltersHelper.createFilter(app, filter.filterType, null) as ListTrackFilter
 				currentFilter.initWithValue(filter)

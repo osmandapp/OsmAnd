@@ -344,11 +344,12 @@ public class GPXTrackAnalysis {
 		}
 		checkUnspecifiedValues(fileTimeStamp);
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount);
-		processAverageSensorSpeed(totalSensorSpeedSum, sensorSpeedCount);
-		processAverageSensorCadence(totalSensorCadenceSum, sensorCadenceCount);
-		processAverageSensorHearRate(totalSensorHrSum, sensorHrCount);
-		processAverageSensorPower(totalSensorPowerSum, sensorPowerCount);
-		processAverageSensorTemperature(totalSensorTemperatureSum, sensorTemperatureCount);
+
+		avgSensorSpeed = processAverageValue(totalSensorSpeedSum, sensorSpeedCount);
+		avgSensorCadence = processAverageValue(totalSensorCadenceSum, sensorCadenceCount);
+		avgSensorHr = processAverageValue(totalSensorHrSum, sensorHrCount);
+		avgSensorPower = processAverageValue(totalSensorPowerSum, sensorPowerCount);
+		avgSensorTemperature = processAverageValue(totalSensorTemperatureSum, sensorTemperatureCount);
 		return this;
 	}
 
@@ -421,43 +422,11 @@ public class GPXTrackAnalysis {
 		}
 	}
 
-	private void processAverageSensorSpeed(double totalSensorSpeedSum, int sensorSpeedCount) {
-		if (sensorSpeedCount > 0) {
-			avgSensorSpeed = (float) (totalSensorSpeedSum / sensorSpeedCount);
+	private Float processAverageValue(Number totalSum, int valuesCount) {
+		if (valuesCount > 0) {
+			return (float) ((double) totalSum / valuesCount);
 		} else {
-			avgSensorSpeed = -1;
-		}
-	}
-
-	private void processAverageSensorCadence(double totalSensorCadenceSum, int sensorCadenceCount) {
-		if (sensorCadenceCount > 0) {
-			avgSensorCadence = (float) (totalSensorCadenceSum / sensorCadenceCount);
-		} else {
-			avgSensorCadence = -1;
-		}
-	}
-
-	private void processAverageSensorHearRate(long totalSensorHrSum, int sensorHrCount) {
-		if (sensorHrCount > 0) {
-			avgSensorHr = (int) (totalSensorHrSum / sensorHrCount);
-		} else {
-			avgSensorHr = -1;
-		}
-	}
-
-	private void processAverageSensorPower(long totalSensorPowerSum, int sensorPowerCount) {
-		if (sensorPowerCount > 0) {
-			avgSensorPower = (int) (totalSensorPowerSum / sensorPowerCount);
-		} else {
-			avgSensorPower = -1;
-		}
-	}
-
-	private void processAverageSensorTemperature(long totalSensorTemperatureSum, int sensorTemperatureCount) {
-		if (sensorTemperatureCount > 0) {
-			avgSensorTemperature = (int) (totalSensorTemperatureSum / sensorTemperatureCount);
-		} else {
-			avgSensorTemperature = -1;
+			return -1f;
 		}
 	}
 

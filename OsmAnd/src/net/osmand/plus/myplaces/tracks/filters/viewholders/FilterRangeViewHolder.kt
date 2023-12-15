@@ -185,15 +185,15 @@ open class FilterRangeViewHolder(
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
 		if (filter.filterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
 			val fromTxt =
-				OsmAndFormatter.getFormattedDuration(valueFrom.toFloat().toLong() * 60L, app)
-			val toTxt = OsmAndFormatter.getFormattedDuration(valueTo.toFloat().toLong() * 60L, app)
+				OsmAndFormatter.getFormattedDuration(valueFrom.toLong() * 60L, app)
+			val toTxt = OsmAndFormatter.getFormattedDuration(valueTo.toLong() * 60L, app)
 			selectedValue.text = String.format(
 				app.getString(R.string.track_filter_date_selected_format),
 				fromTxt,
 				toTxt)
 		} else {
-			val fromTxt = decimalFormat.format(valueFrom.toFloat().toLong())
-			val toTxt = decimalFormat.format(valueTo.toFloat().toLong())
+			val fromTxt = decimalFormat.format(valueFrom.toLong())
+			val toTxt = decimalFormat.format(valueTo.toLong())
 			selectedValue.text = String.format(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
