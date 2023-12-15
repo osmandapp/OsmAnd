@@ -6,6 +6,10 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.StateChangedListener;
+
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapRendererDebugSettings;
+
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -35,6 +39,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -65,7 +70,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
+	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
+	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -89,6 +97,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
+		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
+		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -97,6 +107,16 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		USE_RASTER_SQLITEDB.addListener(useRasterSQLiteDbListener);
+
+		symbolsDebugInfoListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapView.applyDebugSettings(mapRenderer);
+			}
+		};
+		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
+		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
 	}
 
 	@Override
