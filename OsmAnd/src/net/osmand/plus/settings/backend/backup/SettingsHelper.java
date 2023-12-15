@@ -406,25 +406,26 @@ public abstract class SettingsHelper {
 	}
 
 	private void collectResourcesForLocalTypes(@NonNull Map<ExportSettingsType, List<?>> resources,
-	                                           @Nullable List<ExportSettingsType> settingsTypes,
+	                                           @Nullable List<ExportSettingsType> acceptedTypes,
 	                                           boolean addEmptyItems,
 	                                           @NonNull List<LocalItemType> localTypes) {
-		List<LocalItem> filteredLocalItems = getFilteredLocalItems(localTypes, settingsTypes);
+		List<LocalItem> filteredLocalItems = getFilteredLocalItems(localTypes, acceptedTypes);
 		for (LocalItemType localType : localTypes) {
 			List<File> files = getFilesByType(filteredLocalItems, localType);
 			if (!files.isEmpty() || addEmptyItems) {
 				if (!Algorithms.equalsToAny(localType, LocalItemType.TTS_VOICE_DATA, LocalItemType.VOICE_DATA)) {
 					sortLocalFiles(files);
 				}
-				resources.put(ExportSettingsType.getExportSettingsTypeByLocalItemType(localType), files);
+				ExportSettingsType exportType = ExportSettingsType.findByLocalItemType(localType);
+				resources.put(exportType, files);
 			}
 		}
 	}
 
 	@NonNull
 	private List<LocalItem> getFilteredLocalItems(@NonNull List<LocalItemType> localTypes,
-	                                              @Nullable List<ExportSettingsType> settingsTypes) {
-		List<LocalItemType> filteredLocalTypes = getFilteredLocalTypes(localTypes, settingsTypes);
+	                                              @Nullable List<ExportSettingsType> acceptedTypes) {
+		List<LocalItemType> filteredLocalTypes = getFilteredLocalTypes(localTypes, acceptedTypes);
 		if (Algorithms.isEmpty(filteredLocalTypes)) {
 			return Collections.emptyList();
 		}
@@ -439,13 +440,12 @@ public abstract class SettingsHelper {
 
 	@NonNull
 	private List<LocalItemType> getFilteredLocalTypes(@NonNull List<LocalItemType> localTypes,
-	                                                  @Nullable List<ExportSettingsType> settingsTypes) {
+	                                                  @Nullable List<ExportSettingsType> acceptedTypes) {
 		List<LocalItemType> result = new ArrayList<>(localTypes);
-		if (settingsTypes != null) {
+		if (acceptedTypes != null) {
 			Iterator<LocalItemType> iterator = result.iterator();
 			while (iterator.hasNext()) {
-				LocalItemType type = iterator.next();
-				if (!settingsTypes.contains(ExportSettingsType.getExportSettingsTypeByLocalItemType(type))) {
+				if (!acceptedTypes.contains(ExportSettingsType.findByLocalItemType(iterator.next()))) {
 					iterator.remove();
 				}
 			}
@@ -453,15 +453,15 @@ public abstract class SettingsHelper {
 		return result;
 	}
 
-	private void filterDefaultLocalItems(@NonNull List<LocalItem> localIndexes) {
+	private void filterDefaultLocalItems(@NonNull List<LocalItem> localItems) {
 		String baseMini = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
 		String defaultWikivoyage = "Default_wikivoyage" + IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 
-		Iterator<LocalItem> iterator = localIndexes.iterator();
+		Iterator<LocalItem> iterator = localItems.iterator();
 		while (iterator.hasNext()) {
-			LocalItem localIndex = iterator.next();
-			boolean isBaseMini = localIndex.getType() == LocalItemType.MAP_DATA && baseMini.equalsIgnoreCase(localIndex.getFileName());
-			boolean isDefaultWikivoyage = localIndex.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS && defaultWikivoyage.equalsIgnoreCase(localIndex.getFileName());
+			LocalItem localItem = iterator.next();
+			boolean isBaseMini = localItem.getType() == LocalItemType.MAP_DATA && baseMini.equalsIgnoreCase(localItem.getFileName());
+			boolean isDefaultWikivoyage = localItem.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS && defaultWikivoyage.equalsIgnoreCase(localItem.getFileName());
 			if (isBaseMini || isDefaultWikivoyage) {
 				iterator.remove();
 			}

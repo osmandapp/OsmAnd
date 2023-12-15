@@ -57,7 +57,7 @@ public class BackupUiUtils {
 		if (item instanceof ProfileSettingsItem) {
 			return ((ProfileSettingsItem) item).getAppMode().getIconRes();
 		}
-		ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
+		ExportSettingsType type = ExportSettingsType.findBySettingsItem(item);
 		return type != null ? type.getIconRes() : -1;
 	}
 

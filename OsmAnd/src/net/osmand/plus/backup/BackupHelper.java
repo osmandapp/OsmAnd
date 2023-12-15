@@ -976,7 +976,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
-					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
+					ExportSettingsType exportType = ExportSettingsType.findByRemoteFile(remoteFile);
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
@@ -1009,7 +1009,7 @@ public class BackupHelper {
 				}
 				for (LocalFile localFile : localFiles.values()) {
 					ExportSettingsType exportType = localFile.item != null
-							? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
+							? ExportSettingsType.findBySettingsItem(localFile.item) : null;
 					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
 						continue;
 					}

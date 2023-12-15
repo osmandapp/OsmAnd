@@ -188,7 +188,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
 			for (RemoteFile remoteFile : remoteFiles.values()) {
-				if (ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile) == type) {
+				if (ExportSettingsType.findByRemoteFile(remoteFile) == type) {
 					filesByType.add(remoteFile);
 				}
 			}

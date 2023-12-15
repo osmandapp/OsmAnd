@@ -97,16 +97,16 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeForRemoteFile(@NonNull RemoteFile remoteFile) {
+	public static ExportSettingsType findByRemoteFile(@NonNull RemoteFile remoteFile) {
 		if (remoteFile.item != null) {
-			return getExportSettingsTypeForItem(remoteFile.item);
+			return findBySettingsItem(remoteFile.item);
 		}
 		for (ExportSettingsType exportType : values()) {
 			String type = remoteFile.getType();
 			if (exportType.getItemName().equals(type)) {
 				if (SettingsItemType.FILE.name().equals(type)) {
 					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
-					return getExportSettingsTypeFileSubtype(subtype);
+					return findByFileSubtype(subtype);
 				} else {
 					return exportType;
 				}
@@ -116,12 +116,12 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeForItem(@NonNull SettingsItem item) {
+	public static ExportSettingsType findBySettingsItem(@NonNull SettingsItem item) {
 		for (ExportSettingsType exportType : values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					return getExportSettingsTypeFileSubtype(fileItem.getSubtype());
+					return findByFileSubtype(fileItem.getSubtype());
 				} else {
 					return exportType;
 				}
@@ -131,7 +131,7 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeFileSubtype(@NonNull FileSubtype subtype) {
+	public static ExportSettingsType findByFileSubtype(@NonNull FileSubtype subtype) {
 		if (subtype == FileSubtype.RENDERING_STYLE) {
 			return CUSTOM_RENDER_STYLE;
 		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
@@ -163,7 +163,7 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType getExportSettingsTypeByLocalItemType(@NonNull LocalItemType localItemType) {
+	public static ExportSettingsType findByLocalItemType(@NonNull LocalItemType localItemType) {
 		if (localItemType == LocalItemType.MAP_DATA) {
 			return OFFLINE_MAPS;
 		} else if (localItemType == LocalItemType.ROAD_DATA) {
