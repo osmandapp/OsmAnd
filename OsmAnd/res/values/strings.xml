@@ -133,15 +133,17 @@
     <string name="max_altitude">Max altitude</string>
     <string name="app_mode_baby_transport">Baby transport</string>
     <string name="release_4_6">
-       • Added ability to change key bindings for external input devices\n\n
-       • Added \"Glide Ratio\" widget\n\n
-       • Added filters and smart folders for tracks\n\n
-       • Added rows for top and bottom widget panels with support for all widgets\n\n
-       • Added support fot ANT+ temperature widget\n\n
-       • Improved memory management for large GPX tracks\n\n
-       • Updated local resource management in Downloads\n\n
-       • Added widget \"Available RAM\"\n\n
-       • Fixed issues with transparent status bar\n\n
+        • Android Auto: Added 3D mode and enhanced search screen\n\n
+        • Tracks: Introduced filters and smart folders, optimized memory for larger files\n\n
+        • Enhanced top and bottom widget panels to accommodate all widgets\n\n
+        • Improved local resource management\n\n
+        • Customizable button mapping for external controllers\n\n
+        • New widgets: \"Glide Ratio\" and \"Sun Position\"\n\n
+        • OsmAnd Cloud: Now access deleted files\n\n
+        • Enhanced track coloring in Slope mode with new symmetric gradient\n\n
+        • Resolved issues with transparent status bar\n\n
+        • Added support for ANT+ temperature widget\n\n
+        • Introduced \"Available RAM\" widget\n\n
     </string>
     <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperature</string>
