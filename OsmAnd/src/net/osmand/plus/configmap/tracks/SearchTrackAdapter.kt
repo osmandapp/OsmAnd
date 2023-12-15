@@ -48,12 +48,12 @@ class SearchTracksAdapter(
     private var emptyTracksListener: EmptyTracksListener? = null
 
     init {
+        app = context.applicationContext as OsmandApplication
         if (filter.filteredTrackItems != null) {
             updateFilteredItems(filter.filteredTrackItems!!)
         } else {
             updateFilteredItems(trackItems)
         }
-        app = context.applicationContext as OsmandApplication
         locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context)
         locationViewCache.arrowResId = R.drawable.ic_direction_arrow
         locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
