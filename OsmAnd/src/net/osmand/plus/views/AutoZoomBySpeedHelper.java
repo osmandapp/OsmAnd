@@ -360,15 +360,9 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		}
 
 		if (analysis.hasSpeedData()) {
-			if (analysis.hasData(DEV_RAW_ZOOM)) {
-				availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ZOOM_NON_ANIMATED, GPXDataSetType.SPEED});
-			}
 			if (analysis.hasData(DEV_ANIMATED_ZOOM)) {
 				availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ZOOM_ANIMATED, GPXDataSetType.SPEED});
 			}
-		}
-		if (analysis.hasData(DEV_RAW_ZOOM) && analysis.hasData(DEV_ANIMATED_ZOOM)) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ZOOM_NON_ANIMATED, GPXDataSetType.ZOOM_ANIMATED});
 		}
 	}
 
