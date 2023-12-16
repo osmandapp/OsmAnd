@@ -5580,4 +5580,7 @@
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
     <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
+    <string name="shared_string_next_event">Nächstes Veranstaltung</string>
+    <string name="map_widget_sun_position">Sonnenposition</string>
+    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, je nach der aktuellen Uhrzeit.</string>
 </resources>
