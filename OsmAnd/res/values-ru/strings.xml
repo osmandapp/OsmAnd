@@ -5290,7 +5290,7 @@
 \nПри этом данные на устройстве сохранятся без изменений.</string>
     <string name="osmand_cloud_deleted_account_descr">Аккаунт и все его данные удалены с OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Все данные из OsmAnd Cloud будут %1$s. Данные на устройстве останутся нетронутыми.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Удалить аккаунта в OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Удалить аккаунта в OsmAnd Cloud?
 \n
 \nДействие нельзя будет отменить.</string>
     <string name="shared_string_deleting">Удаление</string>
@@ -5517,7 +5517,7 @@
     <string name="topography_maps">Карты ландшафта</string>
     <string name="cloud_trash_clear_confirmation">Вы точно хотите удалить все элементы в к корзине? Это действие нельзя отменить.</string>
     <string name="key_assignments">Назначения кнопок</string>
-    <string name="change_button">Изменить кнопку</string>
+    <string name="change_button">Изменить клавишу</string>
     <string name="root_folder">Корневая папка</string>
     <string name="reset_key_assignments_desc">Все назначения кнопок для выбранного типа будут удалены.</string>
     <string name="rendering_attr_showToll_name">Показывать ограничения платного проезда</string>
@@ -5538,7 +5538,7 @@
     <string name="cloud_item_restored">%1$s восстановлено в Облако.</string>
     <string name="row_number">Ряд %1$s</string>
     <string name="trash_is_empty">В корзине пусто</string>
-    <string name="clear_key_assignment">Очистить назначения кнопок</string>
+    <string name="clear_key_assignment">Очистить назначения клавиш</string>
     <string name="not_specified">Не указано</string>
     <string name="download_to_device">Скачать на устройство</string>
     <string name="shared_string_trash">Корзина</string>
@@ -5562,4 +5562,18 @@
     <string name="tripltek_promo_description">Бесплатный доступ к функциям, включая неограниченную загрузку карт, 3D-рельеф и прочим на %1$s месяца(ев)</string>
     <string name="use_v1_auto_zoom">Дискретное автомасштабирование (старая версия)</string>
     <string name="clear_key_assignment_desc">Привязка клавиши для выбранного действия будет удалена и ей будет присвоено значение «Нет».</string>
+    <string name="delete_all_items">Удалить все объекты</string>
+    <string name="key_event_action_take_media_note">Сделать медиазаметку</string>
+    <string name="key_event_action_emit_navigation_hint">Вызвать навигационную подсказку</string>
+    <string name="trash_is_empty_banner_desc">Файлы, удаленные из OsmAnd Cloud, будут доступны здесь в течение %1$s дней.</string>
+    <string name="delete_trash_item_confirmation_desc">«%1$s» будет удален навсегда. Вы уверены?
+\n
+\nЭто действие нельзя отменить.</string>
+    <string name="shared_string_next_event">Следующее событие</string>
+    <string name="shared_string_empty_trash">Очистить корзину</string>
+    <string name="trash_alert_card_desc">Объекты в корзине будут удалены через %1$s дней.</string>
+    <string name="map_widget_sun_position">Положение солнца</string>
+    <string name="see_all_plans">Показать все планы</string>
+    <string name="shared_string_delete_item">Удалить объект</string>
+    <string name="map_widget_sun_position_desc">Виджет показывает время до восхода или заката солнца в зависимости от текущего времени.</string>
 </resources>
