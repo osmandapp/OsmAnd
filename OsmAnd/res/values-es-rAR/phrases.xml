@@ -4698,7 +4698,7 @@
     <string name="poi_state_inuse">Estado: en uso</string>
     <string name="poi_roundtrip_yes">Circular: sí</string>
     <string name="poi_ascent">Ascenso</string>
-    <string name="poi_state_alternate">Estado: alternado</string>
+    <string name="poi_state_alternate">Estado: alternativo</string>
     <string name="poi_state_recommended">Estado: recomendado</string>
     <string name="poi_state_temporary">Estado: temporario</string>
     <string name="poi_state_detour">Estado: desvío</string>
