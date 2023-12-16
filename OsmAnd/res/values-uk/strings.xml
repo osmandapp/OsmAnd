@@ -5579,4 +5579,5 @@
     <string name="map_widget_sun_position">Розташування сонця</string>
     <string name="add_new_button">Додати нову кнопку</string>
     <string name="map_widget_sun_position_desc">Цей віджет показує час до сходу або заходу сонця, залежно від поточного часу.</string>
+    <string name="rendering_attr_showToll_name">Показати обмеження платні</string>
 </resources>
