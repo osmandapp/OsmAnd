@@ -55,8 +55,8 @@ public class GPXDatabase {
 			" FROM " + GPX_TABLE_NAME + " WHERE " + FILE_CREATION_TIME.getColumnName() +
 			" > " + UNKNOWN_TIME_THRESHOLD;
 
-	private static final String GPX_MAX_TRACK_DURATION = "SELECT " +
-			"MAX(" + TOTAL_DISTANCE.getColumnName() + ") " +
+	private static final String GPX_MAX_COLUMN_VALUE = "SELECT " +
+			"MAX(%s) " +
 			" FROM " + GPX_TABLE_NAME;
 
 	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
@@ -289,16 +289,17 @@ public class GPXDatabase {
 		return minDate;
 	}
 
-	public double getTracksMaxDuration() {
-		double maxLength = 0.0;
+	public String getColumnMaxValue(GpxParameter parameter) {
+		String maxValue = "";
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GPX_MAX_TRACK_DURATION, null);
+				String queryString = String.format(GPX_MAX_COLUMN_VALUE, parameter.getColumnName());
+				SQLiteCursor query = db.rawQuery(queryString, null);
 				if (query != null) {
 					try {
 						if (query.moveToFirst()) {
-							maxLength = query.getDouble(0);
+							maxValue = query.getString(0);
 						}
 					} finally {
 						query.close();
@@ -308,7 +309,7 @@ public class GPXDatabase {
 				db.close();
 			}
 		}
-		return maxLength;
+		return maxValue;
 	}
 
 	@NonNull

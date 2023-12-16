@@ -39,68 +39,62 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		this.valueTo = maxValue
 	}
 
-	open fun setValueFrom(from: Comparable<*>, updateListeners: Boolean = true) {
-		check(from)?.let {
-			valueFrom = maxOf(minValue, getComparableValue(it))
-			valueFrom = minOf(valueFrom, valueTo)
-			if (updateListeners) {
-				filterChangedListener?.onFilterChanged()
+	open fun setValueFrom(from: T, updateListeners: Boolean = true) {
+		valueFrom = maxOf(minValue, from)
+		valueFrom = minOf(valueFrom, valueTo)
+		if (updateListeners) {
+			filterChangedListener?.onFilterChanged()
+		}
+	}
+
+	private fun getValueFromString(value: String): T {
+		val convertedValue: T? = when (getProperty().typeClass) {
+			java.lang.Double::class.java -> {
+				check(value.toDouble() as java.lang.Double)
+			}
+
+			java.lang.Float::class.java -> {
+				check(value.toFloat() as java.lang.Float)
+			}
+
+			java.lang.Integer::class.java -> {
+				check(value.toInt() as java.lang.Integer)
+			}
+
+			java.lang.Long::class.java -> {
+				check(value.toLong() as java.lang.Long)
+			}
+
+			else -> {
+				null
 			}
 		}
+		if (convertedValue != null) {
+			return convertedValue
+		} else {
+			throw java.lang.IllegalArgumentException("value can not be cast to ${filterType.propertyList[0].typeClass}")
+		}
+
 	}
 
 	fun setValueTo(to: String, updateListeners: Boolean = true) {
-		val baseValue = getBaseValueFromFormatted(to)
-		when (filterType.propertyList[0].typeClass) {
-			java.lang.Double::class.java -> {
-				setValueTo(baseValue.toDouble() as java.lang.Double, updateListeners)
-			}
-
-			java.lang.Float::class.java -> {
-				setValueTo(baseValue as java.lang.Float, updateListeners)
-			}
-
-			java.lang.Integer::class.java -> {
-				setValueTo(baseValue.toInt() as java.lang.Integer, updateListeners)
-			}
-
-			java.lang.Long::class.java -> {
-				setValueTo(baseValue.toLong() as java.lang.Long, updateListeners)
-			}
-		}
+		val baseValue = getComparableValue(getBaseValueFromFormatted(to)).toString()
+		setValueTo(getValueFromString(baseValue), updateListeners)
 	}
 
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {
-		val baseValue = getBaseValueFromFormatted(from)
-		when (filterType.propertyList[0].typeClass) {
-			java.lang.Double::class.java -> {
-				setValueFrom(baseValue.toDouble() as java.lang.Double, updateListeners)
-			}
-
-			java.lang.Float::class.java -> {
-				setValueFrom(baseValue as java.lang.Float, updateListeners)
-			}
-
-			java.lang.Integer::class.java -> {
-				setValueFrom(baseValue.toInt() as java.lang.Integer, updateListeners)
-			}
-
-			java.lang.Long::class.java -> {
-				setValueFrom(baseValue.toLong() as java.lang.Long, updateListeners)
-			}
-		}
+		val baseValue = getComparableValue(getBaseValueFromFormatted(from)).toString()
+		setValueFrom(getValueFromString(baseValue), updateListeners)
 	}
 
-	private fun setValueTo(to: Comparable<*>, updateListeners: Boolean = true) {
-		check(to)?.let {
-			valueTo = it
-			if (valueTo > maxValue) {
-				maxValue = valueTo
-			}
-			valueTo = maxOf(valueFrom, valueTo)
-			if (updateListeners) {
-				filterChangedListener?.onFilterChanged()
-			}
+	private fun setValueTo(to: T, updateListeners: Boolean = true) {
+		valueTo = to
+		if (valueTo > maxValue) {
+			maxValue = valueTo
+		}
+		valueTo = maxOf(valueFrom, valueTo)
+		if (updateListeners) {
+			filterChangedListener?.onFilterChanged()
 		}
 	}
 
@@ -136,9 +130,13 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		}
 	}
 
-	fun setMaxValue(value: T) {
-		maxValue = value
-		valueTo = value
+	fun setMaxValue(value: Any) {
+		val displayValue = getFormattedValue(value.toString()).valueSrc
+		val normalizedValue = ceil(displayValue)
+		val baseValue = getBaseValueFromFormatted(normalizedValue.toString())
+		val convertedValue = getComparableValue(baseValue)
+		maxValue = convertedValue
+		valueTo = convertedValue
 	}
 
 	override fun equals(other: Any?): Boolean {
@@ -189,7 +187,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 
 	open fun getDisplayMaxValue(): Int {
 		val formattedValue = getFormattedValue(ceil(maxValue))
-		return formattedValue.valueSrc.toInt() + 1
+		return formattedValue.valueSrc.toInt()
 	}
 
 	open fun getDisplayValueFrom(): Int {
@@ -198,7 +196,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	open fun getDisplayValueTo(): Int {
-		val formattedValue = getFormattedValue(valueTo.toString())
+		val formattedValue = getFormattedValue(ceil(valueTo))
 		return formattedValue.valueSrc.toInt()
 	}
 
@@ -220,6 +218,8 @@ open class RangeTrackFilter<T : Comparable<T>>(
 				value.toFloat(),
 				metricsConstants)
 
+			MeasureUnitType.TIME_DURATION -> value.toFloat() * 1000 * 60
+
 			else -> value.toFloat()
 		}
 
@@ -240,6 +240,8 @@ open class RangeTrackFilter<T : Comparable<T>>(
 				true,
 				metricsConstants)
 
+			MeasureUnitType.TIME_DURATION -> FormattedValue(value.toFloat() / 1000 / 60, value, "")
+
 			else -> FormattedValue(value.toFloat(), value, "")
 		}
 	}
@@ -249,20 +251,26 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	private fun getComparableValue(value: Any): T {
-		if (value is Number) {
+		if(value is String) {
+			return getValueFromString(value)
+		} else if (value is Number) {
 			return when (getProperty().typeClass) {
 				java.lang.Integer::class.java -> {
 					check(value.toInt()) as T
 				}
+
 				java.lang.Double::class.java -> {
 					check(value.toDouble()) as T
 				}
+
 				java.lang.Long::class.java -> {
 					check(value.toLong()) as T
 				}
+
 				java.lang.Float::class.java -> {
 					check(value.toFloat()) as T
 				}
+
 				else -> {
 					throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
 				}

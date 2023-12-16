@@ -144,8 +144,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return database.getTracksMinCreateDate();
 	}
 
-	public double getTracksMaxDuration() {
-		return database.getTracksMaxDuration();
+	public String getMaxParameterValue(GpxParameter parameter) {
+		return database.getColumnMaxValue(parameter);
 	}
 
 	@NonNull

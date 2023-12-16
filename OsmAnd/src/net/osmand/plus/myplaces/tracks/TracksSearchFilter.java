@@ -68,11 +68,25 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 						dateFilter.setValueTo(now);
 					}
 
-					BaseTrackFilter lengthFilter = getFilterByType(FilterType.LENGTH);
-					if (lengthFilter instanceof RangeTrackFilter
-							&& lengthFilter.getFilterType().getPropertyList().get(0).getTypeClass() == Double.class) {
-						((RangeTrackFilter<Double>) lengthFilter).setMaxValue(app.getGpxDbHelper().getTracksMaxDuration());
-					}
+					updateRangeFilterMaxValue(FilterType.DURATION);
+					updateRangeFilterMaxValue(FilterType.TIME_IN_MOTION);
+					updateRangeFilterMaxValue(FilterType.LENGTH);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SPEED);
+					updateRangeFilterMaxValue(FilterType.MAX_SPEED);
+					updateRangeFilterMaxValue(FilterType.UPHILL);
+					updateRangeFilterMaxValue(FilterType.DOWNHILL);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_ALTITUDE);
+					updateRangeFilterMaxValue(FilterType.MAX_ALTITUDE);
+					updateRangeFilterMaxValue(FilterType.MAX_SENSOR_TEMPERATURE);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SENSOR_TEMPERATURE);
+					updateRangeFilterMaxValue(FilterType.MAX_SENSOR_HEART_RATE);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SENSOR_HEART_RATE);
+					updateRangeFilterMaxValue(FilterType.MAX_SENSOR_SPEED);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SENSOR_SPEED);
+					updateRangeFilterMaxValue(FilterType.MAX_SENSOR_BICYCLE_POWER);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SENSOR_BICYCLE_POWER);
+					updateRangeFilterMaxValue(FilterType.MAX_SENSOR_CADENCE);
+					updateRangeFilterMaxValue(FilterType.AVERAGE_SENSOR_CADENCE);
 
 					ListTrackFilter cityFilter = (ListTrackFilter) getFilterByType(FilterType.CITY);
 					if (cityFilter != null) {
@@ -97,6 +111,17 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 				this::onFilterChanged,
 				null
 		);
+	}
+
+	private void updateRangeFilterMaxValue(FilterType filterType) {
+		BaseTrackFilter filter = getFilterByType(filterType);
+		if (filter instanceof RangeTrackFilter) {
+			try {
+				((RangeTrackFilter) filter).setMaxValue(app.getGpxDbHelper().getMaxParameterValue(filterType.getPropertyList().get(0)));
+			} catch (NumberFormatException error) {
+				LOG.error("Can not parse max value for filter " + filterType, error);
+			}
+		}
 	}
 
 	public void setCallback(@Nullable CallbackWithObject<List<TrackItem>> callback) {
