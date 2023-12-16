@@ -24,43 +24,47 @@
     <string name="osmand_short_description_80_chars">Προβολή φορητού παγκόσμιου χάρτη &amp; πλοήγηση για χάρτες OSM χωρίς και με διαδίκτυο</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 \n
-\n Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα με πρόσβαση σε μεγάλη ποικιλία από παγκόσμια δεδομένα του OSM. Όλα τα δεδομένα χάρτη (διανυσματικά ή πλακίδια χάρτη) μπορούν να αποθηκευτούν στην κάρτα μνήμης του τηλεφώνου για χρήση χωρίς σύνδεση. Προσφέρεται επίσης λειτουργία δρομολόγησης με και χωρίς διαδικτυακή σύνδεση συμπεριλαμβανομένων φωνητικών οδηγιών βήμα προς βήμα. 
+\n Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα με πρόσβαση σε μεγάλη ποικιλία από παγκόσμια δεδομένα του OSM. Όλα τα δεδομένα χάρτη (διανυσματικά ή πλακίδια χάρτη) μπορούν να αποθηκευτούν στην κάρτα μνήμης του τηλεφώνου για χρήση χωρίς σύνδεση. Προσφέρεται επίσης λειτουργία δρομολόγησης με και χωρίς διαδικτυακή σύνδεση συμπεριλαμβανομένων φωνητικών οδηγιών βήμα προς βήμα.
 \n
-\n Μερικά από τα βασικά χαρακτηριστικά: 
-\n - Πλήρης λειτουργικότητα εκτός σύνδεσης (αποθήκευση των λαμβανόμενων διανυσμάτων ή πλακιδίων χάρτη στον αποθηκευτικό χώρο της συσκευής) 
-\n - Συμπαγείς διανυσματικοί χάρτες χωρίς σύνδεση για όλον τον κόσμο 
-\n - Λήψη χαρτών χωρών ή περιοχών κατευθείαν από την εφαρμογή 
-\n - Δυνατότητα επίστρωσης από αρκετές στρώσεις χάρτη, όπως GPX ή ίχνη πλοήγησης, Σημεία Ενδιαφέροντος, αγαπημένα, ισοϋψείς γραμμές, στάσεις Μ.Μ. Μεταφοράς, πρόσθετους χάρτες με προσαρμόσιμη διαφάνεια 
-\n - Εκτός σύνδεσης αναζήτηση για διευθύνσεις και μέρη (ΣΕ) 
-\n - Εκτός σύνδεσης δρομολόγηση για μέσες αποστάσεις 
-\n - Κατάσταση αυτοκινήτου, ποδηλάτου και πεζού με: 
-\n - προαιρετική αυτόματη εναλλαγή όψης ημέρας/νύχτας - προαιρετική εστίαση χάρτη βάσει ταχύτητας 
-\n - προαιρετικός προσανατολισμός χάρτη βάσει της πυξίδας ή της κατεύθυνσης κίνησης 
-\n - προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, καταγεγραμμένες και φωνές κειμένου σε λόγο. 
+\n Μερικά από τα βασικά χαρακτηριστικά:
+\n - Πλήρης λειτουργικότητα εκτός σύνδεσης (αποθήκευση των λαμβανόμενων διανυσμάτων ή πλακιδίων χάρτη στον αποθηκευτικό χώρο της συσκευής)
+\n - Συμπαγείς διανυσματικοί χάρτες χωρίς σύνδεση για όλον τον κόσμο
+\n - Λήψη χαρτών χωρών ή περιοχών κατευθείαν από την εφαρμογή
+\n - Δυνατότητα επίστρωσης από αρκετές στρώσεις χάρτη, όπως GPX ή ίχνη πλοήγησης, Σημεία Ενδιαφέροντος, αγαπημένα, στάσεις Μ.Μ.Μ., πρόσθετους χάρτες με προσαρμόσιμη διαφάνεια, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες/σκιαγράφιση λόφου/κλίση
+\n - Εκτός σύνδεσης αναζήτηση για διευθύνσεις και μέρη (ΣΕ)
+\n - Εκτός σύνδεσης δρομολόγηση για μέσες αποστάσεις
+\n - Λειτουργίες αυτοκινήτου, ποδηλάτου και πεζού με:
+\n - προαιρετική αυτόματη εναλλαγή όψης ημέρας/νύχτας
+\n - προαιρετική εστίαση χάρτη βάσει ταχύτητας
+\n - προαιρετικός προσανατολισμός χάρτη βάσει της πυξίδας ή της κατεύθυνσης κίνησης
+\n - προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, ηχογραφημένες και κειμένου σε ομιλία φωνές
 \n
-\n Περιορισμοί αυτής της ελεύθερης έκδοσης του OsmAnd: 
-\n - Περιορισμένος αριθμός λήψης χαρτών 
-\n - Όχι πρόσβαση στα εκτός σύνδεσης ΣΕ της βικιπαίδειας. 
+\n Περιορισμοί αυτής της ελεύθερης έκδοσης του OsmAnd:
+\n - Περιορισμένος αριθμός λήψης χαρτών
+\n - Όχι πρόσβαση στα εκτός σύνδεσης ΣΕ της βικιπαίδειας
 \n
 \n Το OsmAnd είναι ενεργά στο στάδιο της ανάπτυξης και το εγχείρημά μας και η περαιτέρω ανάπτυξή του επαφίεται στις οικονομικές προσφορές για την χρηματοδότηση της ανάπτυξης και τις δοκιμές νέων λειτουργιών. Παρακαλούμε σκεφτείτε την αγορά του OsmAnd+, ή χρηματοδοτήστε συγκεκριμένες νέες λειτουργίες ή κάντε μια γενική δωρεά στο https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Προβολή παγκόσμιου χάρτη &amp; πλοήγηση για χάρτες OSM χωρίς και με σύνδεση</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης) 
-\n 
-\n Το OsmAnd+ είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα με πρόσβαση σε μεγάλη ποικιλία από παγκόσμια δεδομένα OSM. Όλα τα δεδομένα χάρτη (διανυσματικά ή πλακίδια χάρτη) μπορούν να αποθηκευτούν στην κάρτα μνήμης του τηλεφώνου για χρήση χωρίς σύνδεση. Προσφέρεται επίσης λειτουργία δρομολόγησης χωρίς και με διαδίκτυο, συμπεριλαμβανομένων φωνητικών οδηγιών βήμα προς βήμα. 
-\n 
-\n Ο OsmAnd+ είναι η πληρωτέα έκδοση της εφαρμογής, με την αγορά της υποστηρίζετε το εγχείρημα, χρηματοδοτείτε την ανάπτυξη νέων λειτουργιών και λαμβάνετε τις τελευταίες ενημερώσεις. 
-\n 
-\n Μερικά από τα βασικά χαρακτηριστικά: 
-\n - Πλήρης λειτουργικότητα εκτός σύνδεσης (αποθήκευση των λαμβανόμενων χαρτών με διανύσματα ή πλακίδια στον αποθηκευτικό χώρο της συσκευής) 
-\n - Διαθέσιμοι διανυσματικοί χάρτες για όλο τον κόσμο 
-\n - Απεριόριστη λήψη χαρτών χωρών ή περιοχών κατευθείαν από την εφαρμογή 
-\n - Χαρακτηριστικό της Wikipedia εκτός σύνδεσης (λήψη Σημ Ενδ Wikipedia), υπέροχο για αξιοθέατα, 
-\n - Δυνατότητα επίστρωσης από αρκετές στρώσεις χάρτη, όπως GPX ή ίχνη πλοήγησης, Σημεία Ενδιαφέροντος, αγαπημένα, ισοϋψείς γραμμές, στάσεις Μ.Μ. Μεταφοράς, πρόσθετους χάρτες με προσαρμόσιμη διαφάνεια 
-\n - Εκτός σύνδεσης αναζήτηση για διευθύνσεις και μέρη (ΣΕ) 
-\n - Εκτός σύνδεσης δρομολόγηση για μεσαίες αποστάσεις 
-\n - Καταστάσεις αυτοκινήτου, ποδηλάτου και πεζού με: - προαιρετική αυτόματη εναλλαγή όψης ημέρας/νύχτας 
-\n - προαιρετική εστίαση χάρτη βάσει ταχύτητας - προαιρετικός αυτόματος προσανατολισμός χάρτη βάσει της πυξίδας ή της κατεύθυνσης κίνησης 
-\n - προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, καταγεγραμμένες και φωνές κειμένου σε λόγο
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
+\n
+\n Το OsmAnd+ είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα με πρόσβαση σε μεγάλη ποικιλία από παγκόσμια δεδομένα OSM. Όλα τα δεδομένα χάρτη (διανυσματικά ή πλακίδια χάρτη) μπορούν να αποθηκευτούν στην κάρτα μνήμης του τηλεφώνου για χρήση χωρίς σύνδεση. Προσφέρεται επίσης λειτουργία δρομολόγησης χωρίς και με διαδίκτυο, συμπεριλαμβανομένων φωνητικών οδηγιών βήμα προς βήμα.
+\n
+\n Ο OsmAnd+ είναι η πληρωτέα έκδοση της εφαρμογής, με την αγορά της υποστηρίζετε το εγχείρημα, χρηματοδοτείτε την ανάπτυξη νέων λειτουργιών και λαμβάνετε τις τελευταίες ενημερώσεις.
+\n
+\n Μερικά από τα βασικά χαρακτηριστικά:
+\n - Πλήρης λειτουργικότητα εκτός σύνδεσης (αποθήκευση των λαμβανόμενων χαρτών με διανύσματα ή πλακίδια στον αποθηκευτικό χώρο της συσκευής)
+\n - Διαθέσιμοι συμπαγείς διανυσματικοί χάρτες για όλο τον κόσμο
+\n - Απεριόριστη λήψη χαρτών χωρών ή περιοχών κατευθείαν από την εφαρμογή
+\n - Χαρακτηριστικό της Wikipedia εκτός σύνδεσης (λήψη Σημ Ενδ Wikipedia), υπέροχο για αξιοθέατα
+\n - Δυνατότητα επίστρωσης από αρκετές στρώσεις χάρτη, όπως GPX ή ίχνη πλοήγησης, Σημεία Ενδιαφέροντος, αγαπημένα, στάσεις Μ.Μ.Μ., πρόσθετους χάρτες με προσαρμόσιμη διαφάνεια, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες/σκιαγράφιση λόφου/κλίση
+\n
+\n - Εκτός σύνδεσης αναζήτηση για διευθύνσεις και μέρη (ΣΕ)
+\n - Εκτός σύνδεσης δρομολόγηση για μέσες αποστάσεις
+\n - Λειτουργίες αυτοκινήτου, ποδηλάτου και πεζού με:
+\n - προαιρετική αυτόματη εναλλαγή όψης ημέρας/νύχτας
+\n - προαιρετική εστίαση χάρτη βάσει ταχύτητας
+\n - προαιρετικός προσανατολισμός χάρτη βάσει της πυξίδας ή της κατεύθυνσης κίνησης
+\n - προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, ηχογραφημένες και κειμένου σε ομιλία φωνές
 \n</string>
     <string name="filterpoi_activity">Δημιουργία φίλτρου ΣΕ</string>
     <string name="recalculate_route_to_your_location">Τρόπος μετακίνησης:</string>
@@ -753,7 +757,7 @@
     <string name="app_mode_default">Επισκόπηση χάρτη</string>
     <string name="app_mode_car">Οδήγηση</string>
     <string name="app_mode_bicycle">Ποδηλασία</string>
-    <string name="app_mode_pedestrian">Πεζοπορία</string>
+    <string name="app_mode_pedestrian">Περίπατος</string>
     <string name="position_on_map_center">Κέντρο</string>
     <string name="position_on_map_bottom">Κάτω μέρος</string>
     <string name="navigate_point_top_text">Εισαγωγή γ. πλάτους και γ. μήκους στην επιλεγμένη μορφή (D - μοίρες, M - λεπτά, S - δεύτερα)</string>
@@ -1147,7 +1151,7 @@
     <string name="routing_attr_avoid_ferries_description">Απέφυγε πορθμεία</string>
     <string name="routing_attr_avoid_motorway_name">Χωρίς αυτοκινητόδρομους</string>
     <string name="routing_attr_avoid_motorway_description">Απέφυγε αυτοκινητόδρομους</string>
-    <string name="routing_attr_weight_name">Όριο βάρους</string>
+    <string name="routing_attr_weight_name">Βάρος</string>
     <string name="routing_attr_weight_description">Καθορίσετε το επιτρεπόμενο όριο βάρους του οχήματος στις διαδρομές.</string>
     <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό…</string>
     <string name="copying_osmand_files_descr">Αντιγραφή αρχείων δεδομένων OsmAnd στο νέο προορισμό (%s)…</string>
@@ -1823,12 +1827,12 @@
     <string name="osmand_extended_description_part1">Το OsmAnd (OSM Automated Navigation Directions) είναι χάρτης και εφαρμογή πλοήγησης με πρόσβαση στα ελεύθερα, παγκόσμια και υψηλής ποιότητας δεδομένα του OSM. 
 \n 
 \nΑπολαύστε φωνητική και οπτική πλοήγηση, προβολή ΣΕ (σημείων ενδιαφέροντος), δημιουργία και διαχείριση ιχνών GPX, χρήση οπτικοποίησης ισοϋψών γραμμών και πληροφοριών υψομέτρου (μέσω προσθέτου), επιλογή μεταξύ λειτουργιών οδήγησης, ποδηλάτου και πεζοπορίας, επεξεργασίας OSM και πολλών άλλων.</string>
-    <string name="osmand_extended_description_part5">Ποδηλασία 
-\n • Βρείτε ποδηλατικές διαδρομές στον χάρτη 
-\n • Πλοήγηση GPS σε κατάσταση ποδηλασίας δημιουργεί τη διαδρομή σας χρησιμοποιώντας ποδηλατικά μονοπάτια 
-\n • Δείτε την ταχύτητά σας και το υψόμετρό σας 
-\n • Η επιλογή καταγραφής GPX σας επιτρέπει να καταγράψετε το ταξίδι σας και να το μοιραστείτε 
-\n • Μέσω ενός επιπλέον προσθέτου μπορείτε να ενεργοποιήσετε ισοϋψείς γραμμές και σκίαση λόφων</string>
+    <string name="osmand_extended_description_part5">Ποδηλασία
+\n • Βρείτε ποδηλατικές διαδρομές στον χάρτη
+\n • Πλοήγηση GPS σε κατάσταση ποδηλασίας δημιουργεί τη διαδρομή σας χρησιμοποιώντας ποδηλατικά μονοπάτια
+\n • Δείτε την ταχύτητά σας και το υψόμετρό σας
+\n • Η επιλογή καταγραφής GPX σας επιτρέπει να καταγράψετε το ταξίδι σας και να το μοιραστείτε
+\n • Μέσω ενός επιπλέον προσθέτου μπορείτε να ενεργοποιήσετε ισοϋψείς γραμμές και σκίαση αναγλύφου</string>
     <string name="images_cache">Κρυφή μνήμη εικόνας</string>
     <string name="delete_search_history">Διαγραφή ιστορικού αναζήτησης</string>
     <string name="show_images">Εμφάνιση εικόνων</string>
@@ -2310,7 +2314,7 @@
     <string name="routing_attr_avoid_stairs_description">Απέφυγε σκαλιά</string>
     <string name="routing_attr_avoid_borders_name">Χωρίς πέρασμα συνόρων</string>
     <string name="routing_attr_avoid_borders_description">Απέφυγε πέρασμα συνόρων</string>
-    <string name="routing_attr_height_name">Όριο ύψους</string>
+    <string name="routing_attr_height_name">Ύψος</string>
     <string name="routing_attr_height_description">Καθορισμός ύψους οχήματος που επιτρέπεται σε διαδρομές.</string>
     <string name="android_19_location_disabled">Στο Android version 4.4 (KitKat) και μετά, δεν μπορείτε να κατεβάσετε και να ενημερώσετε χάρτες στον παλιό φάκελο αποθήκευσης (%s). Να αντιγραφούν όλα τα αρχεία OsmAnd στη νέα θέση αποθήκευσης; 
 \n Σημείωση 1: Τα παλιά σας αρχεία θα παραμείνουν άθικτα (αλλά μπορούν να διαγραφούν χειροκίνητα). 
@@ -2790,10 +2794,10 @@
     <string name="routing_attr_avoid_ferry_description">Απέφυγε πορθμεία</string>
     <string name="shared_string_degrees">Μοίρες</string>
     <string name="shared_string_milliradians">Χιλιοστά ακτινίων</string>
-    <string name="angular_measeurement">Γωνιακή μονάδα</string>
-    <string name="angular_measeurement_descr">Αλλαγή τρόπου μέτρησης αζιμουθίου.</string>
+    <string name="angular_measeurement">Γωνιώδης μονάδα</string>
+    <string name="angular_measeurement_descr">Αλλάξτε τι αζιμούθιο θα μετριέται.</string>
     <string name="avoid_pt_types_descr">Αποφυγή ειδών δημοσίων ΜΜΜ στην πλοήγηση:</string>
-    <string name="quick_action_day_night_mode">%s κατάστασης</string>
+    <string name="quick_action_day_night_mode">%s λειτουργία</string>
     <string name="avoid_pt_types">Αποφυγή ειδών Μ.Μ.Μ…</string>
     <string name="shared_string_walk">Περπάτημα</string>
     <string name="save_poi_value_exceed_length">Συντομεύστε το μήκος της ετικέτας \"%s\" σε λιγότερους από 255χαρακτήρες.</string>
@@ -3175,7 +3179,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ακραία</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ακαθόριστη</string>
     <string name="routeInfo_piste_difficulty_name">Δυσκολία πίστας</string>
-    <string name="routing_attr_width_name">Όριο πλάτους</string>
+    <string name="routing_attr_width_name">Πλάτος</string>
     <string name="routing_attr_width_description">Καθορίστε το επιτρεπόμενο όριο πλάτους οχήματος στους δρόμους.</string>
     <string name="avoid_in_routing_descr_">Αποφυγή συγκεκριμένων διαδρομών και τύπων δρόμων</string>
     <string name="app_mode_utv">Δίπλα-δίπλα</string>
@@ -3412,9 +3416,9 @@
 \nΜία εβδομάδα είναι 10 080 λεπτά.
 \nΈνας μήνας είναι 43 829 λεπτά.</string>
     <string name="tiles_storage_descr">Επιλέξτε πώς θα αποθηκεύσετε τα μεταφορτωνόμενα πλακίδια.</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Μπορείτε να εξάγετε ή να εισάγετε γρήγορες ενέργειες με κατατομές (προφίλ) εφαρμογών.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Εξάγετε ή εισάγετε γρήγορες ενέργειες με κατατομές (προφίλ) εφαρμογής.</string>
     <string name="shared_string_delete_all_q">Να διαγραφούν όλα;</string>
-    <string name="delete_all_actions_message_q">Είσαστε σίγουροι ότι θέλετε να διαγράψετε οριστικά %d γρήγορες ενέργειες;</string>
+    <string name="delete_all_actions_message_q">Οριστική διαγραφή %d γρήγορων ενεργειών;</string>
     <string name="screen_timeout">Χρόνος καθυστέρησης οθόνης</string>
     <string name="uninstall_speed_cameras">Απεγκατάσταση καμερών ταχύτητας</string>
     <string name="shared_string_legal">Νομικά</string>
@@ -3443,7 +3447,7 @@
     <string name="vessel_width_limit_description">Ορίστε πλάτος σκάφους για αποφυγή στενών γεφυρών</string>
     <string name="quick_action_showhide_mapillary_descr">Εναλλαγή εμφάνισης ή απόκρυψης της στρώσης Mapillary του χάρτη.</string>
     <string name="routing_attr_length_description">Καθορίστε μήκος οχήματος που επιτρέπεται στους δρόμους.</string>
-    <string name="routing_attr_length_name">Όριο μήκους</string>
+    <string name="routing_attr_length_name">Μήκος</string>
     <string name="shared_string_bearing">Κατεύθυνση</string>
     <string name="item_deleted">%1$s διαγράφτηκε</string>
     <string name="speed_cameras_restart_descr">Επανεκκινήστε την εφαρμογή για να διαγραφούν όλα δεδομένα καμερών ταχύτητας.</string>
@@ -3468,7 +3472,7 @@
     <string name="route_between_points">Διαδρομή μεταξύ σημείων</string>
     <string name="plan_a_route">Σχεδιασμός διαδρομής</string>
     <string name="add_to_a_track">Προσθήκη σε ίχνος</string>
-    <string name="track_show_start_finish_icons">Να εμφανίζονται εικονίδια αρχής τέλους</string>
+    <string name="track_show_start_finish_icons">Εμφάνιση εικονιδίων αρχής και τέλους</string>
     <string name="select_track_width">Επιλέξτε πλάτος</string>
     <string name="gpx_split_interval_descr">Επιλέξτε το διάστημα στο οποίο θα εμφανίζονται σημάδια με απόσταση ή χρόνο στο ίχνος.</string>
     <string name="gpx_split_interval_none_descr">Επιλέξτε την επιθυμητή επιλογή διαίρεσης: κατά χρόνο ή απόσταση.</string>
@@ -3505,9 +3509,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Η πληρωμή θα χρεωθεί στον λογαριασμό σας Google Play με την επιβεβαίωση αγοράς.
 \n
-\nΗ συνδρομή ανανεώνεται αυτόματα, εκτός και ακυρωθεί πριν την ημερομηνία ανανέωσης. Ο λογαριασμός σας θα χρεωθεί για την περίοδο ανανέωσης (μήνας/τρίμηνο/έτος) μόνο την ημερομηνία ανανέωσης.
+\nΗ συνδρομή ανανεώνεται αυτόματα, εκτός αν ακυρωθεί πριν την ημερομηνία ανανέωσης. Ο λογαριασμός σας θα χρεωθεί για την περίοδο ανανέωσης (μήνας/τρίμηνο/έτος) μόνο την ημερομηνία ανανέωσης.
 \n
-\nΜπορείτε να διαχειριστείτε και να ακυρώσετε τις συνδρομές σας πηγαίνοντας στις ρυθμίσεις σας στο Google Play.</string>
+\nΔιαχειριστείτε ή ακυρώστε τις συνδρομές σας πηγαίνοντας στις ρυθμίσεις σας στο Google Play οποιαδήποτε στιγμή.</string>
     <string name="search_poi_types">Αναζήτηση τύπων ΣΕ</string>
     <string name="search_poi_types_descr">Συνδυάστε τύπους ΣΕ από διαφορετικές κατηγορίες. Πατήστε τον διακόπτη για να τα επιλέξετε όλα, πατήστε στην αριστερή πλευρά για επιλογή κατηγορίας.</string>
     <string name="extra_maps_menu_group">Πρόσθετοι χάρτες</string>
@@ -3543,9 +3547,9 @@
 \n
 \n</string>
     <string name="quick_action_transport_descr">Πλήκτρο εμφάνισης ή απόκρυψης δημόσιων συγκοινωνιών στον χάρτη.</string>
-    <string name="create_edit_poi">Δημιουργία / Επεξεργασία ΣΕ</string>
+    <string name="create_edit_poi">Δημιουργία ή επεξεργασία ΣΕ</string>
     <string name="parking_positions">Θέσεις στάθμευσης</string>
-    <string name="add_edit_favorite">Προσθήκη / Επεξεργασία αγαπημένου</string>
+    <string name="add_edit_favorite">Προσθήκη ή επεξεργασία αγαπημένου</string>
     <string name="reset_deafult_order">Επαναφορά της προεπιλεγμένης σειράς στοιχείων</string>
     <string name="back_to_editing">Πίσω στην επεξεργασία</string>
     <string name="quick_action_switch_profile_descr">Το πλήκτρο ενέργειας εναλλάσσει μεταξύ των επιλεγμένων κατατομών (προφίλ).</string>
@@ -3646,7 +3650,7 @@
     <string name="saving_new_profile">Αποθήκευση νέας κατατομής (προφίλ)</string>
     <string name="restore_all_profile_settings">Να επαναφερθούν όλες οι ρυθμίσεις κατατομών (προφίλ);</string>
     <string name="restore_all_profile_settings_descr">Όλες οι ρυθμίσεις κατατομής (προφίλ) θα επαναφερθούν στην αρχική τους κατάσταση μετά τη δημιουργία/εισαγωγή αυτής της κατατομής.</string>
-    <string name="clear_recorded_data_warning">Είσαστε σίγουρος ότι θέλετε να καθαρίσετε τα καταγεγραμμένα δεδομένα;</string>
+    <string name="clear_recorded_data_warning">Καθαρισμός καταγεγραμμένων δεδομένων;</string>
     <string name="recalculate_route_in_deviation">Επανυπολογισμός διαδρομής σε περίπτωση απόκλισης</string>
     <string name="select_distance_route_will_recalc">Επιλέξτε την απόσταση μετά την οποία η διαδρομή θα επανυπολογιστεί.</string>
     <string name="recalculate_route_distance_promo">Η διαδρομή θα επανυπολογιστεί εάν η απόσταση από τη διαδρομή στην τρέχουσα θέση είναι μεγαλύτερη από την επιλεγμένη τιμή.</string>
@@ -3676,8 +3680,8 @@
     <string name="reset_items_descr">Η απόκρυψη ρυθμίσεων τις επαναφέρει στην αρχική τους κατάσταση.</string>
     <string name="main_actions_descr">Έχει μόνο τέσσερα πλήκτρα.</string>
     <string name="main_actions">Κύριες ενέργειες</string>
-    <string name="additional_actions_descr">Μπορείτε να προσπελάσετε αυτές τις ενέργειες πατώντας το πλήκτρο “%1$s”.</string>
-    <string name="move_inside_category">Μπορείτε να μετακινήσετε στοιχεία μόνο μέσα σε αυτήν τη κατηγορία.</string>
+    <string name="additional_actions_descr">Προσπελάστε αυτές τις ενέργειες πατώντας το πλήκτρο “%1$s”.</string>
+    <string name="move_inside_category">Τα αντικείμενα μπορούν να μετακινηθούν μόνο εντός αυτής της κατηγορίας.</string>
     <string name="developer_plugin">Πρόσθετο ανάπτυξης</string>
     <string name="replace_point_descr">Αντικατάσταση σημείου με αυτό.</string>
     <string name="app_mode_ski_touring">Χιονοδρομικές βόλτες</string>
@@ -4247,4 +4251,69 @@
     <string name="shared_string_nearest">Κοντινότερο</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Σχετικά με τη δρομολόγηση του OsmAnd</string>
     <string name="routing_attr_avoid_tunnels_name">Αποφυγή σηράγγων</string>
+    <string name="key_assignments">Αναθέσεις κουμπιού</string>
+    <string name="activity_type_riding_name">Ιππασία</string>
+    <string name="activity_type_offroad_name">Εκτός δρόμου</string>
+    <string name="routing_attr_motor_type_description">Επιλέξτε τον τύπο καυσίμου του κινητήρα σας, αυτό είναι απαραίτητο για την εκτίμηση των εκπομπών CO2.</string>
+    <string name="enable_to_use_external_input_device">Ενεργοποιήστε για χρήση εξωτερικής συσκευής εισόδου με το OsmAnd</string>
+    <string name="key_event_action_change_map_orientation">Αλλαγή προσανατολισμού Χάρτη</string>
+    <string name="activity_type_snowmobile_name">Snowmobile</string>
+    <string name="add_page">Προσθήκη σελίδας</string>
+    <string name="reset_key_assignments_desc">Όλες οι αναθέσεις κουμπιών για τον συγκεκριμένο τύπο θα αφαιρεθούν.</string>
+    <string name="key_event_action_previous_app_profile">Προηγούμενο προφίλ εφαρμογής</string>
+    <string name="activity_type_winter_name">Χειμώνας</string>
+    <string name="shared_string_switch_mode">Εναλλαγή λειτουργίας</string>
+    <string name="rendering_attr_showToll_name">Εμφάνιση περιορισμών διοδίων</string>
+    <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
+    <string name="key_event_action_move_left">Μετακίνηση αριστερά</string>
+    <string name="internal_app_storage_description">Εσωτερική αποθήκευση, κρυφή από όλους τους χρήστες και άλλες εφαρμογές, ώστε μόνο το OsmAnd να έχει πρόσβαση στα δεδομένα σας.</string>
+    <string name="weather_widgets_secondary_desc">Οι μονάδες μέτρησης μπορού να αλλαχθούν στις ρυθμίσεις του πρόσθετου Καιρός.</string>
+    <string name="routing_attr_motor_type_hybrid_name">Υβριδικό</string>
+    <string name="press_button_to_link_with_action">Πατήστε το κουμπί στην συσκευή σας για να το αναθέσετε στην ενέργεια: %1$s</string>
+    <string name="button_already_assigned_to_this_action">Αυτό το κουμπί είναι ανατεθειμένο σε αυτή την ενέργεια.</string>
+    <string name="snap_to_road_descr">Το εικονίδιο της τρέχουσας τοποθεσίας θα κλειδώσει στην τρέχουσα διαδρομή πλοήγησης</string>
+    <string name="key_event_action_move_right">Μετακίνηση δεξιά</string>
+    <string name="activity_type_hiking_name">Πεζοπορία</string>
+    <string name="key_event_action_next_app_profile">Επόμενο προφίλ εφαρμογής</string>
+    <string name="import_as_one_track">Εισαγωγή ως ένα ίχνος</string>
+    <string name="activity_type_mountainbike_name">Ορεινή ποδηλασία</string>
+    <string name="change_key_binding">Αλλαγή ανάθεσης κουμπιού</string>
+    <string name="shared_string_reassign">Ανάθεση ξανά</string>
+    <string name="activity_type_racing_name">Αγώνες</string>
+    <string name="reset_key_assignments">Επαναφορά αναθέσεων κουμπιών</string>
+    <string name="activity_type_motorbike_name">Μοτοσικλέτα</string>
+    <string name="activity_type_cycling_name">Ποδηλασία</string>
+    <string name="rendering_attr_showToll_description">Εμφάνιση περιορισμών διοδίων στους δρόμους</string>
+    <string name="empty_state_my_tracks_desc">Εισαγωγή ή καταγραφή αρχείων ιχνών</string>
+    <string name="zoom_non_animated">Μη-κινούμενο ζουμ</string>
+    <string name="key_event_action_move_up">Μετακίνηση πάνω</string>
+    <string name="key_assignments_already_cleared_message">Όλες οι αναθέσεις κουμπιών είναι ήδη καθαρές</string>
+    <string name="activity_type_car_name">Αυτοκίνητο</string>
+    <string name="key_event_action_open_search_view">Άνοιγμα όψης Αναζήτησης</string>
+    <string name="target_elevation">Υψόμετρο στόχου</string>
+    <string name="key_event_action_toggle_drower">Εμφάνιση/απόκρυψη πλαϊνού μενού</string>
+    <string name="key_is_already_assigned_error">Το κουμπί \"%1$s\" είναι ήδη ανατεθειμένο στην ενέργεια: \"%2$s\"</string>
+    <string name="key_event_action_open_navigation_view">Άνοιγμα όψης Πλοήγησης</string>
+    <string name="shared_string_next_event">Επόμενο συμβάν</string>
+    <string name="use_v1_auto_zoom">Διακριτό αυτόματο ζουμ (παλιά έκδοση)</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Εμφάνιση MTB μονοπατιών της IMBA</string>
+    <string name="zoom_animated">Κινούμενο ζουμ</string>
+    <string name="shared_string_eta">Αναμενόμενος χρόνος άφιξης</string>
+    <string name="external_input_device_title">Εξωτερική συσκευή εισόδου</string>
+    <string name="key_bindings">Αναθέσεις κουμπιών</string>
+    <string name="clear_key_assignment">Καθαρισμός ανάθεσης κουμπιού</string>
+    <string name="not_specified">Δεν προσδιορίζεται</string>
+    <string name="select_nav_profile_dialog_message">Ο \'τύπος πλοήγησης\' καθορίζει πως υπολογίζονται οι διαδρομές, με διαθέσιμές μηχανές δρομολόγησης με και χωρίς σύνδεση.</string>
+    <string name="map_widget_sun_position">Θέση ήλιου</string>
+    <string name="compass_on_circles">Πυξίδα σε κύκλους</string>
+    <string name="key_event_category_map_interactions">Αλληλεπιδράσεις χάρτη</string>
+    <string name="activity_type_running_name">Τρέξιμο</string>
+    <string name="add_new_button">Προσθήκη νέου κουμπιού</string>
+    <string name="save_global_track_interval_descr">Ορίστε τα χρονικά διαστήματα καταγραφής για τη γενική εγγραφή ιχνών (ενεργό μέσω του γραφικού στοιχείου \'Καταγραφή ταξιδιού\' στον χάρτη).</string>
+    <string name="key_event_action_move_down">Μετακίνηση κάτω</string>
+    <string name="save_track_to_gpx_descrp">Η καταγραφή ίχνους θα ξεκινά αυτόματα κατά την πλόηγηση και θα αποθηκεύεται μετά αυτόματα.</string>
+    <string name="rendering_attr_showMtbScale_name">Εμφάνιση κλίμακας MTB</string>
+    <string name="activity_type_walking_name">Περίπατος</string>
+    <string name="clear_key_assignment_desc">Η ανάθεση κουμπιού για την επιλεγμένη ενέργεια θα καθαριστεί και θα τεθεί σε Καμία.</string>
+    <string name="map_widget_sun_position_desc">Αυτό το γραφικό στοιχείο δείχνει την ώρα μέχρι την ανατολή ή τη δύση του ηλίου, ανάλογα με την τρέχουσα ώρα.</string>
 </resources>
