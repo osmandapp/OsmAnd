@@ -556,7 +556,6 @@ public class RoutingContext {
 					}
 				}
 
-
 				x = nx;
 				y = ny;
 			}

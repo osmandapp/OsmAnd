@@ -411,7 +411,9 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
 		int end = res.getEndPointIndex();
-		next.pnt = new RouteSegmentPoint(res.getObject(), end, end, 0);
+		int beforeEnd = res.isForwardDirection() ? end - 1 : end + 1;
+//		res.setEndPointIndex(beforeEnd);
+		next.pnt = new RouteSegmentPoint(res.getObject(), beforeEnd, end, 0);
 		return true;
 	}
 
