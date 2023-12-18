@@ -22,7 +22,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
@@ -95,9 +94,9 @@ public class RoutePlannerFrontEnd {
 					routeCalculations, routeDistCalculations, routePointsSearched, routeDistance, routeDistanceUnmatched);
 		}
 
-		public double distFromLastPoint(LatLon startPoint) {
+		public double distFromLastPoint(LatLon pnt) {
 			if (result.size() > 0) {
-				return MapUtils.getDistance(getLastPoint(), startPoint);
+				return MapUtils.getDistance(getLastPoint(), pnt);
 			}
 			return 0;
 		}
@@ -123,6 +122,20 @@ public class RoutePlannerFrontEnd {
 		public GpxPoint() {
 		}
 
+		public RouteSegmentResult getFirstRouteRes() {
+			if (routeToTarget == null || routeToTarget.isEmpty()) {
+				return null;
+			}
+			return routeToTarget.get(0);
+		}
+		
+		public RouteSegmentResult getLastRouteRes() {
+			if (routeToTarget == null || routeToTarget.isEmpty()) {
+				return null;
+			}
+			return routeToTarget.get(routeToTarget.size() - 1);
+		}
+		
 		public GpxPoint(GpxPoint point) {
 			this.ind = point.ind;
 			this.loc = point.loc;
@@ -277,11 +290,7 @@ public class RoutePlannerFrontEnd {
 									start.routeToTarget = null;
 								}
 							}
-							if (routeFound && next.ind == gpxPoints.size() - 1) {
-								// last point - last route found
-								makeSegmentPointPrecise(start.routeToTarget.get(start.routeToTarget.size() - 1),
-										next.loc, false);
-							} else if (routeFound) {
+							if (routeFound && next.ind < gpxPoints.size() - 1) {
 								// route is found - cut the end of the route and move to next iteration
 								// start.stepBackRoute = new ArrayList<RouteSegmentResult>();
 								// boolean stepBack = true;
@@ -319,7 +328,7 @@ public class RoutePlannerFrontEnd {
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.ctx.config.minStepApproximation);
 					if (prev != null) {
 						prev.routeToTarget.addAll(prev.stepBackRoute);
-						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
+//						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
 						if (next != null) {
 							log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
 						}
@@ -417,6 +426,9 @@ public class RoutePlannerFrontEnd {
 //		res.setEndPointIndex(beforeEnd);
 		next.pnt = new RouteSegmentPoint(res.getObject(), beforeEnd, end, 0);
 		// use start point as it overlaps
+		// as we step back we can't use precise coordinates
+//		next.pnt.preciseX = MapUtils.get31TileNumberX(next.loc.getLongitude());
+//		next.pnt.preciseY = MapUtils.get31TileNumberY(next.loc.getLatitude());
 		next.pnt.preciseX = next.pnt.getEndPointX();
 		next.pnt.preciseY = next.pnt.getEndPointY();
 		return true;
@@ -430,7 +442,8 @@ public class RoutePlannerFrontEnd {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
-				LatLon startPoint = pnt.routeToTarget.get(0).getStartPoint();
+				makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
+				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					lastStraightLine.add(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
@@ -438,21 +451,24 @@ public class RoutePlannerFrontEnd {
 				}
 				if (gctx.distFromLastPoint(startPoint) > 1) {
 					gctx.routeGapDistance += gctx.distFromLastPoint(startPoint);
-					System.out.println(String.format("????? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
+					System.out.println(String.format("?? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
 							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc), pnt.loc));
 				}
 				gctx.finalPoints.add(pnt);
 				gctx.result.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
+				makeSegmentPointPrecise(pnt.getLastRouteRes(), gpxPoints.get(i).loc, false);
 			} else {
-				// add straight line from i -> i+1 
+				// add straight line from i -> i+1
+				LatLon lastPoint = null;
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					straightPointStart = pnt;
 					// make smooth connection
-					if (gctx.distFromLastPoint(pnt.loc) > 1) {
-						lastStraightLine.add(gctx.getLastPoint());
-					}
+					lastPoint = gctx.getLastPoint();
+				}
+				if (lastPoint == null) {
+					lastPoint = pnt.loc;
 				}
 				lastStraightLine.add(pnt.loc);
 				i++;
@@ -665,13 +681,10 @@ public class RoutePlannerFrontEnd {
 			if (routeIsCorrect) {
 				RouteSegmentResult firstSegment = res.detailed.get(0);
 				// correct start point though don't change end point
-				if (!prevRouteCalculated) {
-					// make first position precise
-					makeSegmentPointPrecise(firstSegment, start.loc, true);
-				} else {
+				if (prevRouteCalculated) {
 					if (firstSegment.getObject().getId() == start.pnt.getRoad().getId()) {
 						// start point is end point of prev route
-						firstSegment.setStartPointIndex(start.pnt.getSegmentEnd()); // TODO fix unmatched roads
+						firstSegment.setStartPointIndex(start.pnt.getSegmentEnd());
 						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
 							firstSegment.setObject(start.pnt.road);
 						}
