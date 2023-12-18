@@ -22,7 +22,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -170,7 +170,7 @@ public class RoutePlannerFrontEnd {
 			if (r.getPointsLength() > 1) {
 				RouteSegmentPoint road = null;
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
+					QuadPointDouble pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
 							r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j));
 					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
 					if (road == null || currentsDistSquare < road.distToProj) {
@@ -709,7 +709,7 @@ public class RoutePlannerFrontEnd {
 			}
 			for (int i = start; i < end; i++) {
 				RouteDataObject r = sr.getObject();
-				QuadPoint pp = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(i), r.getPoint31YTile(i),
+				QuadPointDouble pp = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(i), r.getPoint31YTile(i),
 						r.getPoint31XTile(i + 1), r.getPoint31YTile(i + 1));
 				double currentsDist = squareDist((int) pp.x, (int) pp.y, px, py);
 				if (currentsDist <= SQR) {
@@ -897,7 +897,7 @@ public class RoutePlannerFrontEnd {
 	protected double projectDistance(List<RouteSegmentResult> res, int k, int px, int py) {
 		RouteSegmentResult sr = res.get(k);
 		RouteDataObject r = sr.getObject();
-		QuadPoint pp = MapUtils.getProjectionPoint31(px, py,
+		QuadPointDouble pp = MapUtils.getProjectionPoint31(px, py,
 				r.getPoint31XTile(sr.getStartPointIndex()), r.getPoint31YTile(sr.getStartPointIndex()),
 				r.getPoint31XTile(sr.getEndPointIndex()), r.getPoint31YTile(sr.getEndPointIndex()));
 		double currentsDist = squareDist((int) pp.x, (int) pp.y, px, py);
@@ -911,8 +911,8 @@ public class RoutePlannerFrontEnd {
 
 		RouteDataObject r = new RouteDataObject(routeSegmentResult.getObject());
 		routeSegmentResult.setObject(r);
-		QuadPoint before = null;
-		QuadPoint after = null;
+		QuadPointDouble before = null;
+		QuadPointDouble after = null;
 		if (pind > 0) {
 			before = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(pind - 1),
 					r.getPoint31YTile(pind - 1), r.getPoint31XTile(pind), r.getPoint31YTile(pind));
@@ -926,7 +926,7 @@ public class RoutePlannerFrontEnd {
 				MapUtils.get31LongitudeX(r.getPoint31XTile(pind)));
 		double ddBefore = Double.POSITIVE_INFINITY;
 		double ddAfter = Double.POSITIVE_INFINITY;
-		QuadPoint i = null;
+		QuadPointDouble i = null;
 		if (before != null) {
 			ddBefore = MapUtils.getDistance(point, MapUtils.get31LatitudeY((int) before.y),
 					MapUtils.get31LongitudeX((int) before.x));
