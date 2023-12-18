@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
@@ -25,14 +26,15 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
-	private static final int TOWN_SEARCH_RADIUS = 10 * 1000; //10 km
-	private static final int CITY_SEARCH_RADIUS = 20 * 1000; //20 km
+	private static final int CITY_SEARCH_RADIUS = 50 * 1000;
 
 	private final OsmandApplication app;
 	private final GPXDatabase database;
@@ -133,11 +135,15 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	private void searchNearestCity(@NonNull GpxDataItem item, @NonNull LatLon latLon) {
+		Map<String, City.CityType> cityTypes = new LinkedHashMap<>();
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), CITY_SEARCH_RADIUS);
+		for (City.CityType t : City.CityType.values()) {
+			cityTypes.put(t.name().toLowerCase(Locale.ROOT), t);
+		}
 		List<Amenity> cities = app.getResourceManager().searchAmenities(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				return Algorithms.equalsToAny(subcategory, "city", "town");
+				return cityTypes.containsKey(subcategory);
 			}
 
 			@Override
@@ -147,7 +153,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		}, rect, false);
 
 		if (!Algorithms.isEmpty(cities)) {
-			sortAmenities(cities, latLon);
+			sortAmenities(cities, cityTypes, latLon);
 			Amenity city = cities.get(0);
 			item.setParameter(NEAREST_CITY_NAME, city.getName());
 			gpxDbHelper.updateDataItem(item);
@@ -156,15 +162,18 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		}
 	}
 
-	private void sortAmenities(@NonNull List<Amenity> amenities, @NonNull LatLon latLon) {
+	private void sortAmenities(@NonNull List<Amenity> amenities, Map<String, City.CityType> cityTypes, @NonNull LatLon latLon) {
 		Collections.sort(amenities, (o1, o2) -> {
-			double distance1 = MapUtils.getDistance(latLon, o1.getLocation());
-			double distance2 = MapUtils.getDistance(latLon, o2.getLocation());
-
-			double d1 = distance1 / (Algorithms.stringsEqual("town", o1.getSubType()) ? TOWN_SEARCH_RADIUS : CITY_SEARCH_RADIUS);
-			double d2 = distance2 / (Algorithms.stringsEqual("town", o2.getSubType()) ? TOWN_SEARCH_RADIUS : CITY_SEARCH_RADIUS);
-
-			return Double.compare(d1, d2);
+			double rad1 = 1000, rad2 = 1000;
+			if (cityTypes.containsKey(o1.getSubType())) {
+				rad1 = cityTypes.get(o1.getSubType()).getRadius();
+			}
+			if (cityTypes.containsKey(o2.getSubType())) {
+				rad2 = cityTypes.get(o2.getSubType()).getRadius();
+			}
+			double distance1 = MapUtils.getDistance(latLon, o1.getLocation()) / rad1;
+			double distance2 = MapUtils.getDistance(latLon, o2.getLocation()) / rad2;
+			return Double.compare(distance1, distance2);
 		});
 	}
 
