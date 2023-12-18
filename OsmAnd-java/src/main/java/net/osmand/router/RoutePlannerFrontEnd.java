@@ -227,6 +227,7 @@ public class RoutePlannerFrontEnd {
 			if (ps == null) {
 				ps = list.get(0);
 			}
+			list.remove(ps); // list should not have cyclic link to itself to avoid memory leaks (backport from C++)
 			ps.others = list;
 			return ps;
 		}
