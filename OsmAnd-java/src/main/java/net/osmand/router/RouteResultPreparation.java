@@ -259,6 +259,7 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
+		removeMuteGoAhead(result);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -1477,7 +1478,7 @@ public class RouteResultPreparation {
 		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
 		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
-		if(rs.roadsOnLeft  + rs.roadsOnRight == 0) {
+		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
 			return null;
 		}
 
@@ -1702,13 +1703,13 @@ public class RouteResultPreparation {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
@@ -2181,6 +2182,24 @@ public class RouteResultPreparation {
 						turnType.isSkipToSpeak(), turnType.getLanes(),
 						turnType.isPossibleLeftTurn(), turnType.isPossibleRightTurn());
 				curr.setTurnType(newTurnType);
+			}
+		}
+	}
+	
+	private void removeMuteGoAhead(List<RouteSegmentResult> result) {
+		for (int i = 1; i < result.size(); i++) {
+			RouteSegmentResult curr = result.get(i);
+			TurnType turnType = curr.getTurnType();
+			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak()) {
+				continue;
+			}
+			if (!turnType.keepLeft() && !turnType.keepRight()) {
+				continue;
+			}
+			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
+			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
+			if(cnt > 0 && cnt == cntAll && cnt > 2) {
+				curr.setTurnType(null);
 			}
 		}
 	}
