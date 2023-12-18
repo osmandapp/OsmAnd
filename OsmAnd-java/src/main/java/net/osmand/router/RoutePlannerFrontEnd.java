@@ -357,7 +357,8 @@ public class RoutePlannerFrontEnd {
 			while (st != end) {
 				LatLon point = r.getPoint(st);
 				boolean pointIsClosed = false;
-				for (int k = start.ind; !pointIsClosed && k < next.ind; k++) {
+				int delta = 0, startInd = Math.max(0, start.ind - delta), nextInd = Math.min(gpxPoints.size(), next.ind + delta);
+				for (int k = startInd; !pointIsClosed && k < nextInd; k++) {
 					pointIsClosed = pointCloseEnough(minPointApproximation, point, gpxPoints.get(k), gpxPoints.get(k + 1));
 				}
 				if (!pointIsClosed) {
@@ -414,6 +415,9 @@ public class RoutePlannerFrontEnd {
 		int beforeEnd = res.isForwardDirection() ? end - 1 : end + 1;
 //		res.setEndPointIndex(beforeEnd);
 		next.pnt = new RouteSegmentPoint(res.getObject(), beforeEnd, end, 0);
+		// use start point as it overlaps
+		next.pnt.preciseX = next.pnt.getEndPointX();
+		next.pnt.preciseY = next.pnt.getEndPointY();
 		return true;
 	}
 
@@ -658,24 +662,24 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 			if (routeIsCorrect) {
-				RouteSegmentResult firstSegement = res.detailed.get(0);
+				RouteSegmentResult firstSegment = res.detailed.get(0);
 				// correct start point though don't change end point
 				if (!prevRouteCalculated) {
 					// make first position precise
-					makeSegmentPointPrecise(firstSegement, start.loc, true);
+					makeSegmentPointPrecise(firstSegment, start.loc, true);
 				} else {
-					if (firstSegement.getObject().getId() == start.pnt.getRoad().getId()) {
-						// start point could shift to +-1 due to direction
-						firstSegement.setStartPointIndex(start.pnt.getSegmentStart());
-						if (firstSegement.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
-							firstSegement.setObject(start.pnt.road);
+					if (firstSegment.getObject().getId() == start.pnt.getRoad().getId()) {
+						// start point is end point of prev route
+						firstSegment.setStartPointIndex(start.pnt.getSegmentStart()); // TODO fix unmatched roads
+						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
+							firstSegment.setObject(start.pnt.road);
 						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
 						// though it should not create any issue
 						System.out.println("??? not found " + start.pnt.getRoad().getId() + " instead "
-								+ firstSegement.getObject().getId());
+								+ firstSegment.getObject().getId());
 					}
 				}
 				start.routeToTarget = res.detailed;
