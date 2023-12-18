@@ -2193,9 +2193,6 @@ public class RouteResultPreparation {
 			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak()) {
 				continue;
 			}
-			if (!turnType.keepLeft() && !turnType.keepRight()) {
-				continue;
-			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll && cnt >= 2) {
