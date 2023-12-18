@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
 import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
+import static net.osmand.plus.views.mapwidgets.WidgetType.isComplexWidget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -53,6 +54,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	private final OsmandApplication app;
 	private final ReorderWidgetsAdapterHelper reorderHelper;
 	private final List<ListItem> items = new ArrayList<>();
+	private List<ListItem> itemsBeforeMove = new ArrayList<>();
 	private final WidgetsPanel panel;
 
 	private WidgetAdapterDragListener dragListener;
@@ -198,9 +200,25 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		OnClickListener deletePageListener;
 		Drawable deleteIcon;
 		boolean firstPage = pageIndex == 0;
+
 		if (firstPage) {
 			deletePageListener = null;
 			deleteIcon = getDeleteIcon(true);
+		} else if (panel.isPanelVertical()) {
+			boolean rowHasComplexWidget = rowHasComplexWidget(position);
+			boolean previousRowHasComplexWidget = rowHasComplexWidget(getPreviousRowPosition(position));
+			boolean isRowEmpty = getRowWidgetIds(position).isEmpty();
+
+			if (rowHasComplexWidget && !isRowEmpty) {
+				deletePageListener = v -> app.showToastMessage(app.getString(R.string.remove_widget_first));
+				deleteIcon = getDeleteIcon(true);
+			} else if (previousRowHasComplexWidget && !isRowEmpty) {
+				deletePageListener = v -> app.showToastMessage(app.getString(R.string.previous_row_has_complex_widget));
+				deleteIcon = getDeleteIcon(true);
+			} else{
+				deletePageListener = v -> deletePage(viewHolder.getAdapterPosition(), pageIndex);
+				deleteIcon = getDeleteIcon(false);
+			}
 		} else {
 			deletePageListener = v -> deletePage(viewHolder.getAdapterPosition(), pageIndex);
 			deleteIcon = getDeleteIcon(false);
@@ -211,14 +229,63 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		AndroidUiHelper.updateVisibility(viewHolder.topDivider, !firstPage);
 		viewHolder.pageText.setText(app.getString(panel.isPanelVertical() ? R.string.row_number : R.string.page_number, String.valueOf(pageIndex + 1)));
 
-		boolean showMoveIcon = !panel.isPanelVertical() && !firstPage;
-		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, showMoveIcon);
+		boolean hideMoveIcon = firstPage || (panel.isPanelVertical() && rowHasComplexWidget(position));
+		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, !hideMoveIcon);
 		viewHolder.moveIcon.setOnTouchListener((v, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				if (panel.isPanelVertical()) {
+					itemsBeforeMove.addAll(items);
+				}
 				dragListener.onDragStarted(viewHolder);
 			}
 			return false;
 		});
+	}
+
+	private ArrayList<AddedWidgetUiInfo> getRowWidgetIds(int rowPosition) {
+		ArrayList<AddedWidgetUiInfo> rowWidgetIds = new ArrayList<>();
+		ListItem item = items.get(++rowPosition);
+
+		while (rowPosition < items.size() && item.type == ItemType.ADDED_WIDGET) {
+			item = items.get(rowPosition);
+			if (item.type == ItemType.ADDED_WIDGET) {
+				rowWidgetIds.add((AddedWidgetUiInfo) item.value);
+			}
+			rowPosition++;
+		}
+		return rowWidgetIds;
+	}
+
+	private int getPreviousRowPosition(int currentRowPosition) {
+		currentRowPosition--;
+		while (currentRowPosition >= 0) {
+			if (items.get(currentRowPosition).type == ItemType.PAGE) {
+				return currentRowPosition;
+			}
+			currentRowPosition--;
+		}
+		return -1;
+	}
+
+	private boolean rowHasComplexWidget(int rowPosition) {
+		ArrayList<AddedWidgetUiInfo> rowWidgetIds = getRowWidgetIds(rowPosition);
+		for (AddedWidgetUiInfo widgetUiInfo : rowWidgetIds) {
+			if (isComplexWidget(widgetUiInfo.key)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private String getComplexWidgetName(int rowPosition){
+		ArrayList<AddedWidgetUiInfo> rowWidgetIds = getRowWidgetIds(rowPosition);
+		for (AddedWidgetUiInfo widgetUiInfo : rowWidgetIds) {
+			if (isComplexWidget(widgetUiInfo.key)) {
+				return widgetUiInfo.title;
+			}
+		}
+		return null;
 	}
 
 	private void deletePage(int position, int pageToDelete) {
@@ -241,6 +308,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.title.setText(widgetInfo.title);
 		viewHolder.moveIcon.setOnTouchListener((view, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				if (panel.isPanelVertical()) {
+					itemsBeforeMove.addAll(items);
+				}
 				dragListener.onDragStarted(viewHolder);
 			}
 			return false;
@@ -328,6 +398,17 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 
 	@Override
 	public void onItemDismiss(@NonNull ViewHolder holder) {
+		if (panel.isPanelVertical()) {
+			for (int index = 0; index < items.size(); index++) {
+				ListItem item = items.get(index);
+				if (item.type == ItemType.PAGE && rowHasComplexWidget(index) && getRowWidgetIds(index).size() > 1) {
+					items.clear();
+					items.addAll(itemsBeforeMove);
+					app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(index)));
+					break;
+				}
+			}
+		}
 		dragListener.onDragOrSwipeEnded(holder);
 	}
 
