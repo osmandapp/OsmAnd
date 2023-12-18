@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.PointInt31;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
@@ -23,7 +23,7 @@ public class SimulationProvider {
 
 	private int currentRoad;
 	private int currentSegment;
-	private QuadPoint currentPoint;
+	private PointInt31 currentPoint;
 
 	public SimulationProvider(@NonNull Location location, @NonNull List<RouteSegmentResult> roads) {
 		this.startLocation = new Location(location);
@@ -60,8 +60,8 @@ public class SimulationProvider {
 				boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
 				boolean first = firstRoad && j == currentSegment;
 				if (first) {
-					st31x = (int) currentPoint.x;
-					st31y = (int) currentPoint.y;
+					st31x = currentPoint.x;
+					st31y = currentPoint.y;
 				}
 				double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
 				if (meters > dd && !last) {

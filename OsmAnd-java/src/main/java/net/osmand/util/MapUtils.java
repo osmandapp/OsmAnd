@@ -5,7 +5,7 @@ import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.PointInt31;
 import net.osmand.data.QuadRect;
 
 import java.util.Collections;
@@ -368,7 +368,6 @@ public class MapUtils {
 		}
 	}
 
-
 	public static float calcDiffPixelX(float rotateSin, float rotateCos, float dTileX, float dTileY, float tileSize) {
 		return (rotateCos * dTileX - rotateSin * dTileY) * tileSize;
 	}
@@ -564,7 +563,7 @@ public class MapUtils {
 
 
 	
-	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
+	public static PointInt31 getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
 		// st31x, st31y - A, end31x, end31y - B, px, py - C
 		double tWidth = getTileWidth(py);
 		// Scalar multiplication between (AB, AC)
@@ -583,7 +582,7 @@ public class MapUtils {
 			prx = (int) (st31x + (end31x - st31x) * (projection / (mDist * mDist)));
 			pry = (int) (st31y + (end31y - st31y) * (projection / (mDist * mDist)));
 		}
-		return new QuadPoint(prx, pry);
+		return new PointInt31(prx, pry);
 	}
 
 

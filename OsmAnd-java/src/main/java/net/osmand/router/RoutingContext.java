@@ -27,8 +27,8 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
+import net.osmand.data.PointInt31;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
@@ -544,9 +544,9 @@ public class RoutingContext {
 					checkPreciseProjection = dist < config.directionPointsRadius;
 				}
 				if (checkPreciseProjection) {
-					QuadPoint pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
-					int projx = (int) pnt.x;
-					int projy = (int) pnt.y;
+					PointInt31 pnt = MapUtils.getProjectionPoint31(wptX, wptY, x, y, nx, ny);
+					int projx = pnt.x;
+					int projy = pnt.y;
 					double dist = MapUtils.squareRootDist31(wptX, wptY, projx, projy);
 					if (dist < mindist) {
 						indexToInsert = i;
