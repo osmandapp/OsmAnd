@@ -1168,13 +1168,16 @@ public class ResourceManager {
 		return res;
 	}
 
-	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect) {
-		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel) {
+		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
 	}
 
-	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude,
-	                                     double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double topLatitude,
+	                                     double leftLongitude, double bottomLatitude,
+	                                     double rightLongitude, int zoom, boolean includeTravel,
+	                                     ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
@@ -1183,7 +1186,7 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : getAmenityRepositories()) {
+				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
