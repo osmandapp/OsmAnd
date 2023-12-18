@@ -2198,7 +2198,7 @@ public class RouteResultPreparation {
 			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
-			if(cnt > 0 && cnt == cntAll && cnt > 2) {
+			if(cnt > 0 && cnt == cntAll && cnt >= 2) {
 				curr.setTurnType(null);
 			}
 		}
