@@ -1,11 +1,16 @@
 package net.osmand.plus.charts;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.ChartData;
@@ -22,11 +27,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.MapUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 
 @SuppressLint("ViewConstructor")
 public class GpxMarkerView extends MarkerView {
@@ -77,7 +77,7 @@ public class GpxMarkerView extends MarkerView {
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_container), showIcon);
 		}
 		int dataSetCount = chartData.getDataSetCount();
-		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet)chartData.getDataSetByIndex(dataSetCount - 1) : null;
+		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet) chartData.getDataSetByIndex(dataSetCount - 1) : null;
 		if (lastDataSet != null && lastDataSet.getDataSetType() == GPXDataSetType.ALTITUDE_EXTRM) {
 			dataSetCount--;
 		}
@@ -128,10 +128,11 @@ public class GpxMarkerView extends MarkerView {
 			if (upIndex > 0) {
 				downEntry = dataSet.getEntryForIndex(upIndex - 1);
 			}
-			return MapUtils.getInterpolatedY(downEntry.getX(), downEntry.getY(), upEntry.getX(), upEntry.getY(), entry.getX());
-		} else {
-			return entry.getY();
+			if (downEntry != null && upEntry != null) {
+				return MapUtils.getInterpolatedY(downEntry.getX(), downEntry.getY(), upEntry.getX(), upEntry.getY(), entry.getX());
+			}
 		}
+		return entry.getY();
 	}
 
 	private void updateXAxisValue(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
@@ -187,7 +188,7 @@ public class GpxMarkerView extends MarkerView {
 	public MPPointF getOffset() {
 		ChartData<?> chartData = getChartView().getData();
 		int dataSetCount = chartData.getDataSetCount();
-		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet)chartData.getDataSetByIndex(dataSetCount - 1) : null;
+		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet) chartData.getDataSetByIndex(dataSetCount - 1) : null;
 		if (lastDataSet != null && lastDataSet.getDataSetType() == GPXDataSetType.ALTITUDE_EXTRM) {
 			dataSetCount--;
 		}
