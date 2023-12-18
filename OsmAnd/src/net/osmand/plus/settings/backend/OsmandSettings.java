@@ -1913,7 +1913,7 @@ public class OsmandSettings {
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext()) {
+			if (iterator.hasNext() && !builder.toString().endsWith(PAGE_SEPARATOR)) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}
