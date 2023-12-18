@@ -34,6 +34,7 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -1053,40 +1054,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			return null;
 		}
 		String str = additionalInfo.get(key);
-		str = unzipContent(str);
+		str = MapObject.unzipContent(str);
 		return str;
-	}
-
-	String unzipContent(String str) {
-		if (isContentZipped(str)) {
-			try {
-				int ind = 4;
-				byte[] bytes = new byte[str.length() - ind];
-				for (int i = ind; i < str.length(); i++) {
-					char ch = str.charAt(i);
-					bytes[i - ind] = (byte) ((int) ch - 128 - 32);
-				}
-				GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
-				BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
-				StringBuilder bld = new StringBuilder();
-				String s;
-				while ((s = br.readLine()) != null) {
-					bld.append(s);
-				}
-				br.close();
-				str = bld.toString();
-				// ugly fix of temporary problem of map generation
-				if (isContentZipped(str)) {
-					str = unzipContent(str);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return str;
-	}
-
-	boolean isContentZipped(String str) {
-		return str != null && str.startsWith(" gz ");
 	}
 }

@@ -4,10 +4,12 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
+import static net.osmand.osm.OsmRouteType.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import static net.osmand.router.network.NetworkRouteSelector.RouteType;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -52,18 +54,22 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -72,7 +78,9 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -217,7 +225,7 @@ public class MapSelectionHelper {
 				String filter = routeID != null ? routeID : fileName;
 
 				boolean isTravelGpx = !Algorithms.isEmpty(filter);
-				boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(renderedObject));
+				boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(renderedObject.getTags()));
 				if (!isTravelGpx && !isRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
 					continue;
@@ -325,7 +333,7 @@ public class MapSelectionHelper {
 						}
 						if (obfMapObject != null) {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
-							boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
+							boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							if (isRoute) {
 								addRoute(result, tileBox, point);
 							}
@@ -457,14 +465,35 @@ public class MapSelectionHelper {
 				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-
-		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect);
+		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
+		Set<OsmRouteType> filter = new HashSet<>();
+		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
+				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
+		for (RenderingRuleProperty property : customRules) {
+			String attrName = property.getAttrName();
+			OsmRouteType osmRouteType = OsmRouteType.getByRenderingProperty(attrName);
+			if (osmRouteType != null) {
+				boolean enabled;
+				if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
+					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(attrName);
+					enabled = Arrays.asList(property.getPossibleValues()).contains(pref.get());
+				} else {
+					CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(attrName);
+					enabled = pref.get();
+				}
+				if (enabled) {
+					filter.add(osmRouteType);
+				}
+			}
+		}
+		selectorFilter.typeFilter = filter;
+		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
 	}
 
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-	                                   @NonNull IContextMenuProvider provider, @NonNull QuadRect rect) {
+	                                   @NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
+	                                   @NonNull NetworkRouteSelectorFilter selectorFilter) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
-		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		Map<RouteKey, GPXFile> routes = new LinkedHashMap<>();
 		try {

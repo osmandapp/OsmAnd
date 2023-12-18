@@ -61,7 +61,7 @@ public class RouteInfoCard extends MapBaseCard {
 		container.removeAllViews();
 
 		RouteKey routeKey = this.routeKey;
-		String tag = routeKey.type.getTag();
+		String tag = routeKey.type.getName();
 
 		String networkTag = routeKey.getNetwork();
 		if (!Algorithms.isEmpty(networkTag)) {

@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_ATTR;
+import static net.osmand.osm.OsmRouteType.ALPINE_HIKING_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
 
 import android.graphics.drawable.Drawable;

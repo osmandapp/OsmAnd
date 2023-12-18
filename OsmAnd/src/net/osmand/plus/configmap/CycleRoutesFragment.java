@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.osm.OsmRouteType.SHOW_CYCLE_ROUTES_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -22,6 +22,15 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ITEMS_ID_SC
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.osm.OsmRouteType.ALPINE_HIKING_ATTR;
+import static net.osmand.osm.OsmRouteType.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.osm.OsmRouteType.SHOW_CYCLE_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.SHOW_MTB_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.HORSE_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.PISTE_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.WHITE_WATER_SPORTS_ATTR;
+import static net.osmand.osm.OsmRouteType.SHOW_RUNNING_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.SHOW_FITNESS_TRAILS_ATTR;
 import static net.osmand.plus.configmap.DifficultyClassificationFragment.getDifficultyClassificationDescription;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
@@ -98,18 +107,8 @@ public class ConfigureMapMenu {
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
-	public static final String HORSE_ROUTES_ATTR = "horseRoutes";
-	public static final String PISTE_ROUTES_ATTR = "pisteRoutes";
-	public static final String ALPINE_HIKING_ATTR = "alpineHiking";
 	public static final String ALPINE_HIKING_SCALE_SCHEME_ATTR = "alpineHikingScaleScheme";
-	public static final String SHOW_MTB_ROUTES_ATTR = "showMtbRoutes";
-	public static final String SHOW_CYCLE_ROUTES_ATTR = "showCycleRoutes";
-	public static final String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
-	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CYCLE_NODE_NETWORK_ROUTES_ATTR = "showCycleNodeNetworkRoutes";
-	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
-	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
-	public static final String SHOW_MTB_ROUTES = "showMtbRoutes";
 	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
 	public static final String SHOW_MTB_SCALE = "showMtbScale";
 	public static final String SHOW_MTB_SCALE_UPHILL = "showMtbScaleUphill";
@@ -262,7 +261,7 @@ public class ConfigureMapMenu {
 				adapter.addItem(createCycleRoutesItem(activity, attrName, property, nightMode));
 			} else if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
 				adapter.addItem(createHikingRoutesItem(activity, attrName, property, nightMode));
-			} else if (SHOW_MTB_ROUTES.equals(attrName)) {
+			} else if (SHOW_MTB_ROUTES_ATTR.equals(attrName)) {
 				adapter.addItem(createMtbRoutesItem(activity, attrName, property, nightMode));
 			} else if (ALPINE_HIKING_ATTR.equals(attrName)) {
 				adapter.addItem(createAlpineHikingItem(activity, attrName, nightMode));

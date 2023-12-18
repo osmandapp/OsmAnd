@@ -1,6 +1,6 @@
 package net.osmand.plus.dialogs;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.PISTE_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.PISTE_ROUTES_ATTR;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 import android.app.Activity;
