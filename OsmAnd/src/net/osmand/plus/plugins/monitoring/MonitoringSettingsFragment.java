@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
@@ -31,8 +32,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -302,10 +305,21 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
 				CommonPreference<String> deviceIdPref = sensorsPlugin.getWriteToTrackDeviceIdPref(dataType);
 				String deviceId = deviceIdPref.getModeValue(selectedAppMode);
-				if (!Algorithms.isEmpty(deviceId) &&
-						!ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId) &&
-						sensorsPlugin.getDevice(deviceId) != null) {
-					res.add(app.getString(dataType.getTitleId()));
+				SensorWidgetDataFieldType widgetDataField = dataType.getSensorType();
+				if (!Algorithms.isEmpty(deviceId)) {
+					boolean sensorLinked = false;
+					if (!ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
+						if (sensorsPlugin.getDevice(deviceId) != null) {
+							sensorLinked = true;
+						}
+					} else {
+						if (sensorsPlugin.getDevice(widgetDataField) != null) {
+							sensorLinked = true;
+						}
+					}
+					if (sensorLinked) {
+						res.add(app.getString(dataType.getTitleId()));
+					}
 				}
 			}
 		}

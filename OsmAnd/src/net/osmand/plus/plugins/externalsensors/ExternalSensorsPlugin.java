@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -72,7 +73,8 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
-	public final static String DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY = "deny_write_sensor_data";
+	public final static String ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY = "any_connected_device_write_sensor_data_to_track_key";
+	List<DeviceStateListener> deviceStateListeners = Collections.emptyList();
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -170,13 +172,26 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 
 	@Nullable
-	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
+	public AbstractDevice<?> getPairedDeviceById(@NonNull String deviceId) {
 		return devicesHelper.getPairedDeviceById(deviceId);
 	}
 
 	@NonNull
 	public List<AbstractDevice<?>> getUnpairedDevices() {
 		return devicesHelper.getUnpairedDevices();
+	}
+
+	@Nullable
+	public AbstractDevice<?> getDevice(SensorWidgetDataFieldType widgetDataFieldType) {
+		for (AbstractDevice<?> device : getPairedDevices()) {
+			for (AbstractSensor sensor : device.getSensors()) {
+				List<SensorWidgetDataFieldType> supportedDataFieldTypes = sensor.getSupportedWidgetDataFieldTypes();
+				if (supportedDataFieldTypes.contains(widgetDataFieldType)) {
+					return device;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -194,10 +209,15 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	private void attachDeviceSensorInfoToRecordedTrack(ExternalSensorTrackDataType externalSensorTrackDataType, JSONObject json) {
 		ApplicationMode selectedAppMode = settings.getApplicationMode();
 		CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(externalSensorTrackDataType);
-		String speedDeviceId = deviceIdPref.getModeValue(selectedAppMode);
-		if (!Algorithms.isEmpty(speedDeviceId) && !DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(speedDeviceId)) {
-			AbstractDevice<?> device = devicesHelper.getDevice(speedDeviceId);
-			if (device != null) {
+		String selectedDeviceId = deviceIdPref.getModeValue(selectedAppMode);
+		if (!Algorithms.isEmpty(selectedDeviceId)) {
+			List<AbstractDevice<?>> devicesToWriteData;
+			if (ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId)) {
+				devicesToWriteData = devicesHelper.getDevices();
+			} else {
+				devicesToWriteData = Collections.singletonList(devicesHelper.getDevice(selectedDeviceId));
+			}
+			for (AbstractDevice<?> device : devicesToWriteData) {
 				try {
 					device.writeSensorDataToJson(json, externalSensorTrackDataType.getSensorType());
 				} catch (JSONException e) {
@@ -416,6 +436,18 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		}
 	}
 
+	public void onDeviceConnected(String deviceId) {
+		for (DeviceStateListener listener : deviceStateListeners) {
+			listener.onDeviceConnected(deviceId);
+		}
+	}
+
+	public void onDeviceDisconnected(String deviceId) {
+		for (DeviceStateListener listener : deviceStateListeners) {
+			listener.onDeviceDisconnected(deviceId);
+		}
+	}
+
 	@NonNull
 	@Override
 	protected TrackPointsAnalyser getTrackPointsAnalyser() {
@@ -443,5 +475,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	public String getFormattedDevicePropertyValue(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property) {
 		return devicesHelper.getFormattedDevicePropertyValue(device, property);
+	}
+
+	public void addDeviceStateListener(DeviceStateListener listener) {
+		deviceStateListeners.add(listener);
+	}
+
+	public void removeDeviceStateListener(DeviceStateListener listener) {
+		deviceStateListeners = Algorithms.removeFromList(deviceStateListeners, listener);
 	}
 }
