@@ -932,4 +932,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			return this.name.compareToIgnoreCase(another.name);
 		}
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getFilterId();
+	}
 }
