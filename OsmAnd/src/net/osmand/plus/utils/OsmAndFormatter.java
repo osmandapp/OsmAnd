@@ -389,7 +389,7 @@ public class OsmAndFormatter {
 		if (pms == null) {
 			pms = OsmAndFormatterParams.DEFAULT;
 		}
-		if (pms.isUseLowerBound() && !ctx.getSettings().PRECISE_DISTANCE_NUMBERS.get()) {
+		if (pms.isUseLowerBound() && ctx.getSettings().PRECISE_DISTANCE_NUMBERS.get()) {
 			pms = OsmAndFormatterParams.DEFAULT;
 		}
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
