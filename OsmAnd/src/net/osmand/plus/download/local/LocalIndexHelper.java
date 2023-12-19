@@ -28,6 +28,7 @@ import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
+import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.OTHER;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
@@ -37,11 +38,14 @@ import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
 import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
 import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.getBasename;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -121,9 +125,31 @@ public class LocalIndexHelper {
 				category = new LocalCategory(categoryType);
 				categories.put(categoryType, category);
 			}
-			LocalItem item = new LocalItem(file, itemType);
-			LocalItemUtils.updateItem(app, item);
-			category.addLocalItem(item);
+
+			if (itemType == LIVE_UPDATES) {
+				LocalItem item = new LocalItem(file, itemType);
+				LocalItemUtils.updateItem(app, item);
+				String basename = getBasename(app, item.getFileName());
+
+				String withoutNumber = basename.replaceAll("(_\\d*)*$", "");
+				String liveGroupName = getNameToDisplay(withoutNumber, app);
+
+				LocalGroup liveUpdatesGroup = category.getGroups().get(LIVE_UPDATES);
+				if (liveUpdatesGroup == null) {
+					liveUpdatesGroup = new LocalGroup(LIVE_UPDATES);
+					category.getGroups().put(LIVE_UPDATES, liveUpdatesGroup);
+				}
+				BaseLocalItem liveGroupItem = liveUpdatesGroup.getItem(liveGroupName);
+				if (liveGroupItem == null) {
+					liveGroupItem = new LiveGroupItem(liveGroupName);
+					liveUpdatesGroup.addItem(liveGroupItem, liveGroupName);
+				}
+				((LiveGroupItem) liveGroupItem).addLocalItem(item);
+			} else {
+				LocalItem item = new LocalItem(file, itemType);
+				LocalItemUtils.updateItem(app, item);
+				category.addLocalItem(item);
+			}
 		}
 	}
 

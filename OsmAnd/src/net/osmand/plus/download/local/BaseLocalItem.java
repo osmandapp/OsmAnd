@@ -26,4 +26,6 @@ public abstract class BaseLocalItem {
 	public abstract CharSequence getName(@NonNull Context context);
 
 	public abstract String getDescription(Context context);
+
+	public abstract long getLastModified();
 }
