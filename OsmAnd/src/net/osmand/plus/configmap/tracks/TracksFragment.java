@@ -414,7 +414,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, this);
+		TrackFolder folder = new TrackFolder(gpxDir, null);
+		asyncLoader = new TrackFolderLoaderTask(app, folder, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

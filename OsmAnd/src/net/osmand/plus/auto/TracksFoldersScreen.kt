@@ -7,12 +7,12 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import net.osmand.IndexConstants
+import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
+import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
@@ -55,8 +55,8 @@ class TracksFoldersScreen(
     }
 
     private fun reloadTracks() {
-        val gpxDir = FileUtils.getExistingDir(app, IndexConstants.GPX_INDEX_DIR)
-        asyncLoader = TrackFolderLoaderTask(app, gpxDir, this)
+        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR), null)
+        asyncLoader = TrackFolderLoaderTask(app, folder, this)
         asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
     }
 

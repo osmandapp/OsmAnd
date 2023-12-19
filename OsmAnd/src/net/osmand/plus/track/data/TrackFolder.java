@@ -77,6 +77,10 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 		trackItems.add(trackItem);
 	}
 
+	public boolean isEmpty() {
+		return Algorithms.isEmpty(trackItems) && Algorithms.isEmpty(subFolders);
+	}
+
 	@ColorInt
 	public int getColor() {
 		return Algorithms.parseColor("#727272");
@@ -127,6 +131,12 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 			}
 		}
 		return lastModified;
+	}
+
+	public void clearData() {
+		resetCashedData();
+		trackItems.clear();
+		subFolders.clear();
 	}
 
 	public void resetCashedData() {
