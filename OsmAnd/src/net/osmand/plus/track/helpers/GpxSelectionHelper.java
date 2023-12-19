@@ -1,5 +1,9 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxParameter.FILE_LAST_MODIFIED_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_AS_MARKERS;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -371,13 +375,12 @@ public class GpxSelectionHelper {
 				selectedFile = new SelectedGpxFile();
 			}
 			if (dataItem != null) {
-				GpxData gpxData = dataItem.getGpxData();
-				selectedFile.setJoinSegments(gpxData.isJoinSegments());
+				selectedFile.setJoinSegments(dataItem.getParameter(JOIN_SEGMENTS));
 
-				GPXTrackAnalysis analysis = gpxData.getAnalysis();
+				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					selectedFile.setTrackAnalysis(analysis);
-					selectedFile.modifiedTime = gpxData.getFileLastModifiedTime();
+					selectedFile.modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				}
 			}
 			selectedFile.setGpxFile(gpx, app);
@@ -398,9 +401,9 @@ public class GpxSelectionHelper {
 			}
 			selectedFile.splitProcessed = false;
 		}
-		if (params.isAddToMarkers() && dataItem != null && dataItem.getGpxData().isShowAsMarkers()) {
-			MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-			mapMarkersHelper.addOrEnableGroup(gpx);
+		boolean showAsMarkers = dataItem != null ? dataItem.getParameter(SHOW_AS_MARKERS) : false;
+		if (params.isAddToMarkers() && showAsMarkers) {
+			app.getMapMarkersHelper().addOrEnableGroup(gpx);
 		}
 		if (params.isSyncGroup()) {
 			syncGpxWithMarkers(gpx);

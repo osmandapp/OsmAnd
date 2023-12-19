@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,19 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
+
+import java.util.Collections;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,20 +30,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.util.Algorithms;
-
-public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
+public class ContextMenuCardDialogFragment extends BaseOsmAndFragment implements ICoveredScreenRectProvider {
 
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
+	private MapDisplayPositionManager displayPositionManager;
 	private ContextMenuCardDialog dialog;
 	private LinearLayout contentLayout;
 	private View contentView;
+	private BoundsChangeListener boundsChangeListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,8 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (savedInstanceState != null && getActivity() instanceof MapActivity) {
 			dialog = ContextMenuCardDialog.restoreMenu(savedInstanceState, (MapActivity) getActivity());
 		}
+		displayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		boundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 	}
 
 	@Nullable
@@ -84,6 +95,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		super.onResume();
 		if (dialog != null) {
 			dialog.onResume();
+			updateBoundsChangeListener(true);
 		} else {
 			dismiss();
 		}
@@ -95,6 +107,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (dialog != null) {
 			dialog.onPause();
 		}
+		updateBoundsChangeListener(false);
 	}
 
 	@Override
@@ -135,6 +148,21 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void updateBoundsChangeListener(boolean add) {
+		displayPositionManager.updateCoveredScreenRectProvider(this, add);
+		View view = getView();
+		if (view != null) {
+			if (add) {
+				view.addOnLayoutChangeListener(boundsChangeListener);
+			} else {
+				view.removeOnLayoutChangeListener(boundsChangeListener);
+			}
+			if (view.getWidth() > 0 && view.getHeight() > 0) {
+				displayPositionManager.updateMapDisplayPosition();
+			}
+		}
+	}
+
 	public void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -143,5 +171,14 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 				fragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			}
 		}
+	}
+
+	@NonNull
+	@Override
+	public List<Rect> getCoveredScreenRects() {
+		View view = getView();
+		return view == null
+				? Collections.emptyList()
+				: Collections.singletonList(AndroidUtils.getViewBoundOnScreen(view));
 	}
 }

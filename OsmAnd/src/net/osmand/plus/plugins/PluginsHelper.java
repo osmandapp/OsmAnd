@@ -5,12 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.IProgress;
@@ -20,8 +14,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttributes;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -38,7 +31,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -85,6 +78,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class PluginsHelper {
 
@@ -740,9 +739,9 @@ public class PluginsHelper {
 		return installed;
 	}
 
-	public static void bindCommonKeyEventCommands(@NonNull InputDeviceProfile deviceProfile) {
+	public static void addCommonKeyEventAssignments(@NonNull List<KeyAssignment> assignments) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.bindCommonKeyEventCommands(deviceProfile);
+			plugin.addCommonKeyEventAssignments(assignments);
 		}
 	}
 
@@ -799,10 +798,19 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.onAnalysePoint(analysis, point, attribute);
+	public static TrackPointsAnalyser getTrackPointsAnalyser() {
+		List<TrackPointsAnalyser> trackPointsAnalysers = new ArrayList<>();
+		for (OsmandPlugin plugin : getActivePlugins()) {
+			TrackPointsAnalyser analyser = plugin.getTrackPointsAnalyser();
+			if (analyser != null) {
+				trackPointsAnalysers.add(analyser);
+			}
 		}
+		return (gpxTrackAnalysis, wptPt, pointAttributes) -> {
+			for (TrackPointsAnalyser analyser : trackPointsAnalysers) {
+				analyser.onAnalysePoint(gpxTrackAnalysis, wptPt, pointAttributes);
+			}
+		};
 	}
 
 	@Nullable

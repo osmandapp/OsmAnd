@@ -1,6 +1,11 @@
 package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,7 +26,6 @@ import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -29,8 +33,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.util.Algorithms;
@@ -87,6 +91,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_BACKGROUND = "background";
 
 	private static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final long LOCATION_TIME_INTERVAL_MS = 28L * 1000L * 60L * 60L * 24L; // 4 weeks
 
 
 	private final OsmandApplication app;
@@ -268,7 +273,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 
 				GpxDataItem item = new GpxDataItem(fout);
-				item.getGpxData().setAnalysis(gpx.getAnalysis(fout.lastModified()));
+				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 				saveTrackAppearance(item);
@@ -279,24 +284,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	private void saveTrackAppearance(@NonNull GpxDataItem item) {
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		gpxDbHelper.updateColor(item, settings.CURRENT_TRACK_COLOR.get());
-		gpxDbHelper.updateWidth(item, settings.CURRENT_TRACK_WIDTH.get());
-		gpxDbHelper.updateShowArrows(item, settings.CURRENT_TRACK_SHOW_ARROWS.get());
-		gpxDbHelper.updateShowStartFinish(item, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
-		gpxDbHelper.updateColoringType(item, coloringType.getName(routeInfoAttribute));
+
+		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
+		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
+		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
+		item.setParameter(COLORING_TYPE, coloringType.getName(routeInfoAttribute));
+
+		app.getGpxDbHelper().updateDataItem(item);
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
-		long currentTimeMillis = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 		if (isWarningEmpty) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				try {
 					if (db.isOpen()) {
-						long time = currentTimeMillis;
 						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] {time});
 						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] {time});
 					}
@@ -313,8 +319,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.clearSegmentsToDisplay();
-		currentTrack.getModifiableGpxFile().modifiedTime = currentTimeMillis;
-		currentTrack.getModifiableGpxFile().pointsModifiedTime = currentTimeMillis;
+		currentTrack.getModifiableGpxFile().modifiedTime = time;
+		currentTrack.getModifiableGpxFile().pointsModifiedTime = time;
 		prepareCurrentTrackForRecording();
 	}
 
@@ -502,16 +508,24 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void updateLocation(@Nullable Location location, @Nullable Float heading) {
+		// use because there is a bug on some devices with location.getTime() see #18642
+		long time = System.currentTimeMillis();
+		if (location != null) {
+			long locationTime = location.getTime();
+			if (Math.abs(time - locationTime) < LOCATION_TIME_INTERVAL_MS) {
+				time = locationTime;
+			}
+		}
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
 			lastRoutingApplicationMode = null;
 		}
-		boolean record = shouldRecordLocation(location);
+		boolean record = shouldRecordLocation(location, time);
 		if (record) {
 			heading = getAdjustedHeading(heading);
 
-			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
+			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), time,
 					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
 
 			String pluginsInfo = getPluginsInfo(location);
@@ -525,11 +539,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
-	private boolean shouldRecordLocation(@Nullable Location location) {
+	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			long locationTime = location.getTime();
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()

@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -11,12 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
@@ -24,19 +19,30 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
-import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
+import java.util.Collections;
+import java.util.List;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment
-		implements OsmAndLocationListener, IMapDisplayPositionProvider {
+		implements OsmAndLocationListener, ICoveredScreenRectProvider {
 
 	public static final String TAG = "TrackDetailsMenuFragment";
 
 	private TrackDetailsMenu menu;
+	private MapDisplayPositionManager displayPositionManager;
 	private View mainView;
+	private BoundsChangeListener boundsChangeListener;
 
 	private boolean locationUpdateStarted;
 
@@ -60,6 +66,8 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
+		displayPositionManager = mapActivity.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		boundsChangeListener = new BoundsChangeListener(displayPositionManager, false);
 
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
@@ -150,29 +158,28 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 			menu.onShow();
 		}
 		startLocationUpdate();
-		updateMapDisplayPosition(true);
+		updateBoundsChangeListener(true);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
-		updateMapDisplayPosition(false);
+		updateBoundsChangeListener(false);
 	}
 
-	private void updateMapDisplayPosition(boolean registerProvider) {
-		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-		manager.updateProviders(this, registerProvider);
-		manager.updateMapDisplayPosition();
+	private void updateBoundsChangeListener(boolean listen) {
+		displayPositionManager.updateCoveredScreenRectProvider(this, listen);
+		mainView.addOnLayoutChangeListener(boundsChangeListener);
+		displayPositionManager.updateMapDisplayPosition();
 	}
 
+	@NonNull
 	@Override
-	@Nullable
-	public Integer getMapDisplayPosition() {
-		if (isVisible()) {
-			return OsmandSettings.CENTER_CONSTANT;
-		}
-		return null;
+	public List<Rect> getCoveredScreenRects() {
+		View view = getView();
+		Rect rect = view == null ? null : AndroidUtils.getViewBoundOnScreen(view);
+		return rect != null ? Collections.singletonList(rect) : Collections.emptyList();
 	}
 
 	private void startLocationUpdate() {

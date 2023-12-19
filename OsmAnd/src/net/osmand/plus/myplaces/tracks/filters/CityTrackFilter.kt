@@ -5,6 +5,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.CITY
+import net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.util.Algorithms
 
 class CityTrackFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener?) :
@@ -19,7 +20,7 @@ class CityTrackFilter(app: OsmandApplication, filterChangedListener: FilterChang
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		for (city in selectedItems) {
-			if (Algorithms.stringsEqual(trackItem.dataItem?.gpxData?.nearestCityName, city)) {
+			if (Algorithms.stringsEqual(trackItem.dataItem?.getParameter(NEAREST_CITY_NAME), city)) {
 				return true
 			}
 		}

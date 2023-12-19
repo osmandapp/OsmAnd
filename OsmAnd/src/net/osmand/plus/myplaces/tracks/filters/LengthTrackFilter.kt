@@ -36,7 +36,7 @@ class LengthTrackFilter(
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val length = trackItem.dataItem?.gpxData?.analysis?.totalDistance
+		val length = trackItem.dataItem?.analysis?.totalDistance
 		if (length == null || (length == 0f)) {
 			return false
 		}

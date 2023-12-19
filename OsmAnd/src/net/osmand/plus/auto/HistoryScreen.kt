@@ -120,7 +120,7 @@ class HistoryScreen(
 	}
 
 	private fun updateSearchResult(searchResult: SearchResult, dataItem: GpxDataItem) {
-		searchResult.location = dataItem.gpxData.analysis?.latLonStart
+		searchResult.location = dataItem.analysis?.latLonStart
 	}
 
 	private fun prepareList(templateBuilder: ListTemplate.Builder) {

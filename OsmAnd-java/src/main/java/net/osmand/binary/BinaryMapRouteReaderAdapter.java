@@ -272,21 +272,22 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
 			} else if (t.startsWith("maxspeed") && v != null) {
+				String tg = t;
 				if (t.endsWith(":forward")) {
-					t = t.substring(0, t.length() - ":forward".length());
+					tg = t.substring(0, t.length() - ":forward".length());
 					forward = 1;
 				} else if (t.endsWith(":backward")) {
-					t = t.substring(0, t.length() - ":backward".length());
+					tg = t.substring(0, t.length() - ":backward".length());
 					forward = -1;
 				} else {
 					forward = 0;
 				}
 				floatValue = RouteDataObject.parseSpeed(v, 0);
-				if (t.equalsIgnoreCase("maxspeed")) {
+				if (tg.equalsIgnoreCase("maxspeed")) {
 					type = MAXSPEED;
-				} else if (t.equalsIgnoreCase("maxspeed:hgv")) {
+				} else if (tg.equalsIgnoreCase("maxspeed:hgv")) {
 					type = MAXSPEED + PROFILE_TRUCK;
-				} else if (t.equalsIgnoreCase("maxspeed:motorcar")) {
+				} else if (tg.equalsIgnoreCase("maxspeed:motorcar")) {
 					type = MAXSPEED + PROFILE_CAR;
 				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
@@ -398,6 +399,7 @@ public class BinaryMapRouteReaderAdapter {
 				} else if (val.equals("backward")) {
 					directionBackward = id;
 				}
+				/// Could be generic 
 			} else if (tags.equals("maxheight:forward") && val != null) {
 				maxheightForward = id;
 			} else if (tags.equals("maxheight:backward") && val != null) {
@@ -407,16 +409,16 @@ public class BinaryMapRouteReaderAdapter {
 		
 		
 		public void completeRouteEncodingRules() {
-			for(int i = 0; i < routeEncodingRules.size(); i++) {
+			for (int i = 0; i < routeEncodingRules.size(); i++) {
 				RouteTypeRule rtr = routeEncodingRules.get(i);
-				if(rtr != null && rtr.conditional()) {
+				if (rtr != null && rtr.conditional()) {
 					String tag = rtr.getNonConditionalTag();
-					for(RouteTypeCondition c : rtr.conditions ) {
-						if(tag != null && c.value != null) {
+					for (RouteTypeCondition c : rtr.conditions) {
+						if (tag != null && c.value != null) {
 							c.ruleid = findOrCreateRouteType(tag, c.value);
 						}
 					}
-					
+
 				}
 			}
 		}
@@ -431,7 +433,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getLeftLongitude() {
 			double l = 180;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.min(l, MapUtils.get31LongitudeX(s.left));
 			}
 			return l;
@@ -439,7 +441,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getRightLongitude() {
 			double l = -180;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.max(l, MapUtils.get31LongitudeX(s.right));
 			}
 			return l;
@@ -447,7 +449,7 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getBottomLatitude() {
 			double l = 90;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.min(l, MapUtils.get31LatitudeY(s.bottom));
 			}
 			return l;
@@ -455,15 +457,15 @@ public class BinaryMapRouteReaderAdapter {
 
 		public double getTopLatitude() {
 			double l = -90;
-			for(RouteSubregion s : subregions) {
+			for (RouteSubregion s : subregions) {
 				l = Math.max(l, MapUtils.get31LatitudeY(s.top));
 			}
 			return l;
 		}
 
 		public boolean contains(int x31, int y31) {
-			for(RouteSubregion s : subregions) {
-				if(s.left <= x31 && s.right >= x31 && s.top <= y31 && s.bottom >= y31) {
+			for (RouteSubregion s : subregions) {
+				if (s.left <= x31 && s.right >= x31 && s.top <= y31 && s.bottom >= y31) {
 					return true;
 				}
 			}
@@ -472,13 +474,13 @@ public class BinaryMapRouteReaderAdapter {
 
 
 		public RouteDataObject adopt(RouteDataObject o) {
-			if(o.region == this || o.region == referenceRouteRegion) {
+			if (o.region == this || o.region == referenceRouteRegion) {
 				return o;
 			}
-			
-			if(routeEncodingRules.isEmpty()) {
+
+			if (routeEncodingRules.isEmpty()) {
 				routeEncodingRules.addAll(o.region.routeEncodingRules);
-				referenceRouteRegion= o.region;
+				referenceRouteRegion = o.region;
 				return o;
 			}
 			RouteDataObject rdo = new RouteDataObject(this);
@@ -1117,9 +1119,15 @@ public class BinaryMapRouteReaderAdapter {
 				if (ro != null) {
 					matcher.publish(ro);
 				}
+				if (matcher.isCancelled()) {
+					break;
+				}
 			}
 			// free objects
 			rs.dataObjects = null;
+			if (matcher.isCancelled()) {
+				break;
+			}
 		}
 	}
 
@@ -1155,7 +1163,6 @@ public class BinaryMapRouteReaderAdapter {
 					codedIS.popLimit(old);
 				}
 				searchRouteRegionTree(req, rs.subregions, toLoad);
-
 				if (rs.shiftToData != 0) {
 					toLoad.add(rs);
 				}

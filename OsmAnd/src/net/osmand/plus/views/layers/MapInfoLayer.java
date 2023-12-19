@@ -3,11 +3,8 @@ package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -15,8 +12,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.charts.TrackChartPoints;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
@@ -36,11 +37,16 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapInfoLayer extends OsmandMapLayer {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
+	private final MapDisplayPositionManager mapDisplayPositionManager;
 
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
@@ -59,6 +65,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TopToolbarView topToolbarView;
 
+	private final BoundsChangeListener topPanelBoundsChangeListener;
+	private final BoundsChangeListener bottomPanelBoundsChangeListener;
+
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
 		this.routeLayer = layer;
@@ -67,6 +76,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		settings = app.getSettings();
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
+		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		topPanelBoundsChangeListener = new BoundsChangeListener(mapDisplayPositionManager, true);
+		bottomPanelBoundsChangeListener = new BoundsChangeListener(mapDisplayPositionManager, true);
 	}
 
 	@Override
@@ -82,7 +94,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			registerAllControls(mapActivity);
 			recreateControls();
+
+			mapDisplayPositionManager.registerCoveredScreenRectProvider(this);
+			topWidgetsPanel.addOnLayoutChangeListener(topPanelBoundsChangeListener);
+			bottomWidgetsPanel.addOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			mapDisplayPositionManager.updateMapDisplayPosition(true);
 		} else {
+			topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
+			bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
+			mapDisplayPositionManager.updateMapDisplayPosition(true);
+
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
 
@@ -366,5 +388,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	@NonNull
+	@Override
+	public List<Rect> getCoveredScreenRects() {
+		List<Rect> rects = new ArrayList<>();
+		rects.add(AndroidUtils.getViewBoundOnScreen(topWidgetsPanel));
+		rects.add(AndroidUtils.getViewBoundOnScreen(bottomWidgetsPanel));
+		return rects;
 	}
 }

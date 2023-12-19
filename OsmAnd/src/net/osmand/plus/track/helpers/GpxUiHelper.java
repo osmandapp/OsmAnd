@@ -6,6 +6,13 @@ import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
+import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import static net.osmand.util.Algorithms.formatDuration;
 
@@ -258,7 +265,7 @@ public class GpxUiHelper {
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(view, itemTitle, info, dataItem.getGpxData().getAnalysis(), app);
+		updateGpxInfoView(view, itemTitle, info, dataItem.getAnalysis(), app);
 		if (iconDrawable != null) {
 			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
@@ -661,19 +668,22 @@ public class GpxUiHelper {
 	}
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
-		GpxData gpxData = dataItem.getGpxData();
-		gpxFile.setShowArrows(gpxData.isShowArrows());
-		gpxFile.setShowStartFinish(gpxData.isShowStartFinish());
-		gpxFile.setSplitInterval(gpxData.getSplitInterval());
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(gpxData.getSplitType()).getTypeName());
-		if (gpxData.getColor() != 0) {
-			gpxFile.setColor(gpxData.getColor());
+		gpxFile.setShowArrows(dataItem.getParameter(SHOW_ARROWS));
+		gpxFile.setShowStartFinish(dataItem.getParameter(SHOW_START_FINISH));
+		gpxFile.setSplitInterval(dataItem.getParameter(SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(dataItem.getParameter(SPLIT_TYPE)).getTypeName());
+
+		int color = dataItem.getParameter(COLOR);
+		if (color != 0) {
+			gpxFile.setColor(color);
 		}
-		if (gpxData.getWidth() != null) {
-			gpxFile.setWidth(gpxData.getWidth());
+		String width = dataItem.getParameter(WIDTH);
+		if (width != null) {
+			gpxFile.setWidth(width);
 		}
-		if (gpxData.getColoringType() != null) {
-			gpxFile.setColoringType(gpxData.getColoringType());
+		String coloringType = dataItem.getParameter(COLORING_TYPE);
+		if (coloringType != null) {
+			gpxFile.setColoringType(coloringType);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
 	}
@@ -791,7 +801,7 @@ public class GpxUiHelper {
 		} else if (trackItem.getFile() != null) {
 			GpxDataItem dataItem = app.getGpxDbHelper().getItem(trackItem.getFile(), callback);
 			if (dataItem != null) {
-				analysis = dataItem.getGpxData().getAnalysis();
+				analysis = dataItem.getAnalysis();
 			}
 		}
 		return analysis;

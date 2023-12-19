@@ -1409,7 +1409,7 @@
     <string name="shared_string_commit">Comite</string>
     <string name="context_menu_item_delete_waypoint">Ștergi punctul de referință GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editează punct intermediar GPX</string>
-    <string name="shared_string_location">Localizare</string>
+    <string name="shared_string_location">Locație</string>
     <string name="share_osm_edits_subject">Editări OSM distribuite prin OsmAnd</string>
     <string name="lang_nds">Germană redusă</string>
     <string name="lang_mk">Macedoneană</string>
@@ -1525,7 +1525,7 @@
     <string name="shared_string_message">Mesaj</string>
     <string name="agps_data_last_downloaded">Datele A-GPS descărcate: %1$s</string>
     <string name="confirm_usage_speed_cameras">În multe țări (Germania, Franța, Italia și altele), utilizarea avertismentelor de avertizare a radarelor de viteză este ilegală. OsmAnd nu își asumă nicio răspundere în cazul în care încălcați legea. Atingeți \'Da\' numai dacă sunteți eligibil pentru a utiliza această funcție.</string>
-    <string name="welmode_download_maps">Descărcarcare hărți</string>
+    <string name="welmode_download_maps">Descărcare hărți</string>
     <string name="welcome_select_region">Pentru a reflecta corect semnele si reglementările de trafic, alege regiunea în care conduci:</string>
     <string name="welcome_text">OsmAnd oferă vizualizarea și navigarea hărții globale fără internet.</string>
     <string name="welcome_header">Bun venit</string>
@@ -5555,4 +5555,14 @@
     <string name="enable_to_use_external_input_device">Activați utilizarea dispozitivului de intrare extern cu OsmAnd</string>
     <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"\?</string>
     <string name="add_new_type">Adăugă tip nou</string>
+    <string name="reset_key_assignments_desc">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
+    <string name="rendering_attr_showToll_name">Arată restricțiile de taxare</string>
+    <string name="button_already_assigned_to_this_action">Butonul este deja asignat acestei acțiuni.</string>
+    <string name="reset_key_assignments">Reinițializați alocările de taste</string>
+    <string name="rendering_attr_showToll_description">Arată restricțiile de taxare pe drumuri</string>
+    <string name="zoom_non_animated">Zoom neanimat</string>
+    <string name="key_assignments_already_cleared_message">Toate asignările de taste sunt deja șterse</string>
+    <string name="use_v1_auto_zoom">Zoom automat discret (versiunea veche)</string>
+    <string name="zoom_animated">Zoom animat</string>
+    <string name="add_new_button">Adaugă buton nou</string>
 </resources>

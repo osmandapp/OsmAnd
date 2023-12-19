@@ -42,6 +42,10 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

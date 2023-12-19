@@ -12,6 +12,10 @@ public class PointAttributes {
 	public static final String SENSOR_TAG_TEMPERATURE = "temp";
 	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
 
+	public static final String DEV_RAW_ZOOM = "raw_zoom";
+	public static final String DEV_ANIMATED_ZOOM = "animated_zoom";
+	public static final String DEV_INTERPOLATION_OFFSET_N = "offset";
+
 	public float distance;
 	public final float timeDiff;
 	public final boolean firstPoint;
@@ -24,6 +28,10 @@ public class PointAttributes {
 	public float bikeCadence;
 	public float bikePower;
 	public float temperature;
+
+	public float rawZoom;
+	public float animatedZoom;
+	public float interpolationOffsetN;
 
 	public PointAttributes(float distance, float timeDiff, boolean firstPoint, boolean lastPoint) {
 		this.distance = distance;
@@ -48,6 +56,12 @@ public class PointAttributes {
 				return bikePower;
 			case SENSOR_TAG_TEMPERATURE:
 				return temperature;
+			case DEV_RAW_ZOOM:
+				return rawZoom;
+			case DEV_ANIMATED_ZOOM:
+				return animatedZoom;
+			case DEV_INTERPOLATION_OFFSET_N:
+				return interpolationOffsetN;
 		}
 		return null;
 	}
@@ -74,6 +88,15 @@ public class PointAttributes {
 				break;
 			case SENSOR_TAG_TEMPERATURE:
 				temperature = value;
+				break;
+			case DEV_RAW_ZOOM:
+				rawZoom = value;
+				break;
+			case DEV_ANIMATED_ZOOM:
+				animatedZoom = value;
+				break;
+			case DEV_INTERPOLATION_OFFSET_N:
+				interpolationOffsetN = value;
 				break;
 		}
 	}

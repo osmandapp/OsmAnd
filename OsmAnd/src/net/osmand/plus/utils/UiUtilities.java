@@ -720,6 +720,7 @@ public class UiUtilities {
 
 	public static void updateStatusBarColor(@NonNull MapActivity activity) {
 		int colorId = -1;
+		boolean nightModeForContent = true;
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		MapLayers mapLayers = activity.getMapLayers();
@@ -730,18 +731,23 @@ public class UiUtilities {
 		BaseOsmAndFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseOsmAndFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 		if (fragmentAboveDashboard != null) {
 			colorId = fragmentAboveDashboard.getStatusBarColorId();
+			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (settingsFragmentAboveDashboard != null) {
 			colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
+			nightModeForContent = settingsFragmentAboveDashboard.getContentStatusBarNightMode();
+
 		} else if (activity.getDashboard().isVisible()) {
 			colorId = activity.getDashboard().getStatusBarColor();
 		} else if (fragmentBelowDashboard != null) {
 			colorId = fragmentBelowDashboard.getStatusBarColorId();
+			nightModeForContent = fragmentBelowDashboard.getContentStatusBarNightMode();
 		} else if (mapLayers.getMapQuickActionLayer() != null
 				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
 			colorId = R.color.status_bar_transparent_gradient;
 		}
 		if (colorId != -1) {
 			activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 			return;
 		}
 
@@ -759,9 +765,15 @@ public class UiUtilities {
 			MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 			int defaultColorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
 			int colorIdForTopWidget = widgetRegistry.getStatusBarColor(appMode, night);
+			if (colorIdForTopWidget != -1) {
+				nightModeForContent = widgetRegistry.getStatusBarContentNightMode(appMode, night);
+			}
+
 			colorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
 			color = ContextCompat.getColor(activity, colorId);
 		}
 		activity.getWindow().setStatusBarColor(color);
+
+		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
 }

@@ -209,7 +209,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.deletePageButton.setImageDrawable(deleteIcon);
 
 		AndroidUiHelper.updateVisibility(viewHolder.topDivider, !firstPage);
-		viewHolder.pageText.setText(app.getString(R.string.page_number, String.valueOf(pageIndex + 1)));
+		viewHolder.pageText.setText(app.getString(panel.isPanelVertical() ? R.string.row_number : R.string.page_number, String.valueOf(pageIndex + 1)));
 
 		boolean showMoveIcon = !panel.isPanelVertical() && !firstPage;
 		AndroidUiHelper.updateVisibility(viewHolder.moveIcon, showMoveIcon);

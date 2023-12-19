@@ -50,7 +50,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
-import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
@@ -111,12 +111,12 @@ public class AddPOIAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		PoiType poiType = getPoiType(context);
-		String iconName = PoiUIFilter.getPoiTypeIconName(poiType);
+		String iconName = PoiFilterUtils.getPoiTypeIconName(poiType);
 		if (!Algorithms.isEmpty(iconName)) {
 			return RenderingIcons.getBigIconResourceId(iconName);
 		}
 		PoiCategory poiCategory = getCategory(context);
-		String categoryIconName = PoiUIFilter.getPoiTypeIconName(poiCategory);
+		String categoryIconName = PoiFilterUtils.getPoiTypeIconName(poiCategory);
 		return Algorithms.isEmpty(categoryIconName)
 				? getIconRes()
 				: RenderingIcons.getBigIconResourceId(categoryIconName);

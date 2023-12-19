@@ -40,7 +40,7 @@ public class CurrentSpeedWidget extends SimpleWidget {
 			}
 		} else if (cachedSpeed != 0) {
 			cachedSpeed = 0;
-			setText(null, null);
+			setText(isVerticalWidget() ? NO_VALUE : null, null);
 		}
 	}
 

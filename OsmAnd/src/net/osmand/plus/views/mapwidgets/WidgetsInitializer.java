@@ -28,6 +28,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SUN_POSITION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
@@ -119,6 +120,7 @@ public class WidgetsInitializer {
 		addWidgetInfo(SIDE_MARKER_2);
 		addWidgetInfo(SUNRISE);
 		addWidgetInfo(SUNSET);
+		addWidgetInfo(SUN_POSITION);
 		addWidgetInfo(GLIDE_TARGET);
 		addWidgetInfo(GLIDE_AVERAGE);
 	}

@@ -1,6 +1,8 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.data.City.CityType.CITY;
+import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
 
 import android.os.AsyncTask;
 
@@ -68,21 +70,24 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbHelper.isAnalyseNeeded(file, item)) {
+					if (GpxDbUtils.isAnalyseNeeded(file, item)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
 						if (item == null) {
 							item = new GpxDataItem(file);
-							item.getGpxData().setAnalysis(analysis);
+							item.setAnalysis(analysis);
 							database.insert(item, conn);
 						} else {
-							database.updateAnalysis(conn, item, analysis);
+							item.setAnalysis(analysis);
+							database.updateDataItem(item);
 						}
-						if (item.getGpxData().getFileCreationTime() <= 0) {
-							database.updateCreateTime(item, GPXUtilities.getCreationTime(gpxFile));
+						long creationTime = item.getParameter(FILE_CREATION_TIME);
+						if (creationTime <= 0) {
+							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
+							gpxDbHelper.updateDataItem(item);
 						}
 					}
-					if (GpxDbHelper.isCitySearchNeeded(item)) {
+					if (GpxDbUtils.isCitySearchNeeded(item)) {
 						setupNearestCityName(item);
 					}
 					if (listener != null) {
@@ -116,11 +121,10 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 	}
 
 	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
-		GpxData data = item.getGpxData();
-		GPXTrackAnalysis analysis = data.getAnalysis();
+		GPXTrackAnalysis analysis = item.getAnalysis();
 		LatLon latLon = analysis != null ? analysis.latLonStart : null;
 		if (latLon == null) {
-			data.setNearestCityName("");
+			item.setParameter(NEAREST_CITY_NAME, "");
 		} else {
 			searchNearestCity(item, latLon);
 		}
@@ -143,9 +147,10 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		if (!Algorithms.isEmpty(cities)) {
 			sortAmenities(cities, latLon);
 			Amenity city = cities.get(0);
-			gpxDbHelper.updateNearestCityName(item, city.getName());
+			item.setParameter(NEAREST_CITY_NAME, city.getName());
+			gpxDbHelper.updateDataItem(item);
 		} else {
-			item.getGpxData().setNearestCityName("");
+			item.setParameter(NEAREST_CITY_NAME, "");
 		}
 	}
 

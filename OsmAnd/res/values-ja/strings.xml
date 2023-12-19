@@ -1971,7 +1971,7 @@ POIの更新は利用できません</string>
     <string name="share_history_subject">OsmAnd経由で共有</string>
     <string name="search_categories">カテゴリー</string>
     <string name="postcode">郵便番号</string>
-    <string name="shared_string_from">から</string>
+    <string name="shared_string_from">コピー元</string>
     <string name="city_type_district">地区</string>
     <string name="city_type_neighbourhood">小字・丁目</string>
     <string name="map_widget_search">検索</string>
@@ -4516,7 +4516,7 @@ POIの更新は利用できません</string>
 \nすべてのデータを新しいフォルダーにコピーします。</string>
     <string name="folder_access_denied">選択したフォルダにアクセスするには権限が必要です。</string>
     <string name="copying_completed">コピー済み</string>
-    <string name="shared_string_copy_to">以下へコピーする</string>
+    <string name="shared_string_copy_to">コピー先</string>
     <string name="start_copying">コピーを開始</string>
     <string name="skip_confirmation">はい、スキップします</string>
     <string name="shared_storage">共有ストレージ</string>

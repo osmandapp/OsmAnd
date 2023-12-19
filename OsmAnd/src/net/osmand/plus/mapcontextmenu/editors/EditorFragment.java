@@ -366,6 +366,10 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	protected void showKeyboard() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {

@@ -270,6 +270,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		boolean nightMode = isNightMode();
+		if (isProfileDependent()) {
+			return nightMode;
+		} else {
+			return true;
+		}
+	}
+
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		return onConfirmPreferenceChange(preference.getKey(), newValue, getApplyQueryType());

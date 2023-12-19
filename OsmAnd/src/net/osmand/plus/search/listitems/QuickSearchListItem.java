@@ -32,6 +32,7 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -326,7 +327,7 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_intersection);
 			case POI_TYPE:
 				if (searchResult.object instanceof AbstractPoiType) {
-					String iconName = PoiUIFilter.getPoiTypeIconName((AbstractPoiType) searchResult.object);
+					String iconName = PoiFilterUtils.getPoiTypeIconName((AbstractPoiType) searchResult.object);
 					if (Algorithms.isEmpty(iconName) && searchResult.object instanceof PoiType) {
 						iconName = RenderingIcons.getIconNameForPoiType((PoiType) searchResult.object);
 					}
@@ -525,7 +526,7 @@ public class QuickSearchListItem {
 	@DrawableRes
 	public static int getCustomFilterIconRes(@Nullable PoiUIFilter filter) {
 		int iconId = 0;
-		String iconName = PoiUIFilter.getCustomFilterIconName(filter);
+		String iconName = PoiFilterUtils.getCustomFilterIconName(filter);
 		if (iconName != null && RenderingIcons.containsBigIcon(iconName)) {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
 		}

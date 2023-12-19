@@ -61,6 +61,7 @@ public class GPXUtilities {
 	public static final String COLOR_NAME_EXTENSION = "color";
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
+	public static final String HIDDEN_EXTENSION = "hidden";
 
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
 	public static final String OSM_PREFIX = "osm_tag_";
@@ -73,6 +74,7 @@ public class GPXUtilities {
 
 	public static final String POINT_ELEVATION = "ele";
 	public static final String POINT_SPEED = "speed";
+	public static final String POINT_BEARING = "bearing";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -241,6 +243,7 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public float heading = Float.NaN;
+		public float bearing = Float.NaN;
 		public boolean deleted = false;
 		public int speedColor = 0;
 		public int altitudeColor = 0;
@@ -400,6 +403,10 @@ public class GPXUtilities {
 				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 			}
 		}
+		
+		public void setHidden(String hidden) {
+			getExtensionsToWrite().put(HIDDEN_EXTENSION, hidden);
+		}
 
 		public void setProfileType(String profileType) {
 			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
@@ -517,6 +524,10 @@ public class GPXUtilities {
 			String address = pt.extensions.get(ADDRESS_EXTENSION);
 			if (address != null) {
 				setAddress(address);
+			}
+			String hidden = pt.extensions.get(HIDDEN_EXTENSION);
+			if (hidden != null) {
+				setHidden(hidden);
 			}
 		}
 	}
@@ -738,7 +749,7 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
-		public final String name;
+		public String name;
 		public String iconName;
 		public String backgroundType;
 		public List<WptPt> points = new ArrayList<>();
@@ -765,6 +776,10 @@ public class GPXUtilities {
 		@Override
 		public int hashCode() {
 			return Algorithms.hash(name, iconName, backgroundType, color, points);
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		@Override
@@ -1452,11 +1467,19 @@ public class GPXUtilities {
 											}
 											parse.getExtensionsToWrite().put(t, value);
 
-											if (tag.equals(POINT_SPEED) && parse instanceof WptPt) {
-												try {
-													((WptPt) parse).speed = Float.parseFloat(value);
-												} catch (NumberFormatException e) {
-													log.debug(e.getMessage(), e);
+											if (parse instanceof WptPt) {
+												WptPt wptPt = (WptPt) parse;
+												if (POINT_SPEED.equals(tag)) {
+													try {
+														wptPt.speed = Float.parseFloat(value);
+													} catch (NumberFormatException e) {
+														log.debug(e.getMessage(), e);
+													}
+												} else if (POINT_BEARING.equals(tag)) {
+													try {
+														wptPt.bearing = Float.parseFloat(value);
+													} catch (NumberFormatException ignored) {
+													}
 												}
 											}
 										}

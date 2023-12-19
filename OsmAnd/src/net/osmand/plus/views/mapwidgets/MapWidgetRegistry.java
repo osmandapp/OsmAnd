@@ -17,6 +17,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
@@ -314,18 +315,36 @@ public class MapWidgetRegistry {
 			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode)) {
 				continue;
 			}
-			if (widget instanceof CoordinatesBaseWidget) {
-				return R.color.status_bar_main_dark;
-			} else if (widget instanceof StreetNameWidget) {
+			if (widget instanceof StreetNameWidget) {
 				return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 			} else if (widget instanceof MapMarkersBarWidget) {
 				return R.color.status_bar_main_dark;
-			} else {
+			} else if(widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget){
+				return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
+			}
+			else {
 				return -1;
 			}
 		}
 
 		return -1;
+	}
+
+	public boolean getStatusBarContentNightMode(@NonNull ApplicationMode appMode, boolean nightMode) {
+		Set<MapWidgetInfo> topWidgetsInfo = getWidgetsForPanel(WidgetsPanel.TOP);
+		for (MapWidgetInfo widgetInfo : topWidgetsInfo) {
+			MapWidget widget = widgetInfo.widget;
+			if (!widget.isViewVisible() || !widgetInfo.isEnabledForAppMode(appMode)) {
+				continue;
+			}
+			if (widget instanceof SimpleWidget || widget instanceof CoordinatesBaseWidget) {
+				return nightMode;
+			}
+			else {
+				return true;
+			}
+		}
+		return true;
 	}
 
 	public void registerWidget(@NonNull MapWidgetInfo widgetInfo) {

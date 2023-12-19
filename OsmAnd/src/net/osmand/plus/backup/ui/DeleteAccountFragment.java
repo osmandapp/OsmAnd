@@ -77,6 +77,10 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

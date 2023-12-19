@@ -472,6 +472,11 @@ public class NativeUtilities {
 		return new PointI(x31, y31);
 	}
 
+	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31) {
+		float height = mapRenderer.getLocationHeightInMeters(location31);
+		return height > MIN_ALTITUDE_VALUE ? height : 0.0f;
+	}
+
 	@Nullable
 	public static Pair<PointF, PointF> clipLineInVisibleRect(@NonNull MapRendererView mapRenderer,
 	                                                         @NonNull RotatedTileBox tileBox,

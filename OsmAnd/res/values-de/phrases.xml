@@ -1602,7 +1602,7 @@
     <string name="poi_toll_hgv_yes">Lkw-Maut</string>
     <string name="poi_tactile_paving_yes">ja;Blindenleitsystem</string>
     <string name="poi_tactile_paving_no">Ohne Blindenleitsystem</string>
-    <string name="poi_traffic_signals_sound_walk">Nur, wenn Gehen erlaubt ist</string>
+    <string name="poi_traffic_signals_sound_walk">Nur Freigabeton</string>
     <string name="poi_services">Raststätte</string>
     <string name="poi_railway_level_crossing">Bahnübergang</string>
     <string name="poi_horse_riding">Reiten</string>
@@ -3773,7 +3773,7 @@
     <string name="poi_sms_no">nein</string>
     <string name="poi_video_yes">ja;Video</string>
     <string name="poi_video_no">nein</string>
-    <string name="poi_traffic_signals_sound_locate">Nur um die Stange zu finden</string>
+    <string name="poi_traffic_signals_sound_locate">Nur Pilotton</string>
     <string name="poi_tactile_paving_contrasted">Farblich abgesetzt</string>
     <string name="poi_tactile_paving_incorrect">Fehlerhaft</string>
     <string name="poi_covered_booth">Unterstand</string>
@@ -3799,10 +3799,10 @@
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
     <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
-    <string name="poi_traffic_signals_arrow_yes">ja;Ampelpfeil</string>
+    <string name="poi_traffic_signals_arrow_yes">ja;Pfeil in Gangrichtung</string>
     <string name="poi_traffic_signals_vibration_yes">ja;Ampelvibration</string>
     <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
-    <string name="poi_traffic_signals_arrow">Pfeil</string>
+    <string name="poi_traffic_signals_arrow">Pfeil in Gangrichtung</string>
     <string name="poi_traffic_signals_vibration">Vibrieren</string>
     <string name="poi_give_box">Tauschbox</string>
     <string name="poi_city_block">Stadtteil</string>
@@ -3813,7 +3813,7 @@
     <string name="poi_departures_board_delay">Verspätung;Abflugtafel</string>
     <string name="poi_departures_board_yes">ja;Abflugtafel</string>
     <string name="poi_departures_board_no">Anzeige der Abreisezeiten: nein</string>
-    <string name="poi_traffic_signals_arrow_no">Abbiegepfeil: nein</string>
+    <string name="poi_traffic_signals_arrow_no">Pfeil in Gangrichtung: nein</string>
     <string name="poi_departures_board">Anzeige der Abreisezeiten</string>
     <string name="poi_drinking_water_refill">Nachfüllen von Trinkwasser</string>
     <string name="poi_beehive">Bienenstock</string>
@@ -4328,7 +4328,7 @@
     <string name="poi_club_amateur_radio">Amateurfunkverein</string>
     <string name="poi_club_religion">Religionsgemeinschaft</string>
     <string name="poi_club_dog">Hundeverein</string>
-    <string name="poi_board_title">Kartentitel</string>
+    <string name="poi_board_title">Überschrift der Tafel</string>
     <string name="poi_short_name">Kurzname</string>
     <string name="poi_flow_rate">Durchflussmenge</string>
     <string name="poi_golf_pin">Golf-Pin</string>

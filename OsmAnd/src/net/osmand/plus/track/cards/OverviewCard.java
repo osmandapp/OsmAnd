@@ -5,6 +5,7 @@ import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;
@@ -113,7 +114,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void setupRegion() {
-		String cityName = dataItem != null ? dataItem.getGpxData().getNearestCityName() : null;
+		String cityName = dataItem != null ? dataItem.getParameter(NEAREST_CITY_NAME) : null;
 		TextView regionText = view.findViewById(R.id.region);
 		regionText.setText(cityName);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.region_container), !Algorithms.isEmpty(cityName));

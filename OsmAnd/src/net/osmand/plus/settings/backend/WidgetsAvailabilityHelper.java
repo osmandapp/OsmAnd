@@ -37,6 +37,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SUN_POSITION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
@@ -113,6 +114,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(ALTITUDE_MAP_CENTER, all);
 		regWidgetAvailability(SUNRISE, all);
 		regWidgetAvailability(SUNSET, all);
+		regWidgetAvailability(SUN_POSITION, all);
 		regWidgetAvailability(GLIDE_TARGET, all);
 		regWidgetAvailability(GLIDE_AVERAGE, all);
 

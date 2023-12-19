@@ -5573,4 +5573,12 @@
     <string name="clear_key_assignment_desc">Nøglebinding for den valgte handling vil blive ryddet og sat til Ingen.</string>
     <string name="rendering_attr_showToll_name">Vis vejafgiftsrestriktioner</string>
     <string name="rendering_attr_showToll_description">Vis vejafgiftsrestriktioner på veje</string>
+    <string name="lang_zh_hans">Forenklet kinesisk</string>
+    <string name="zoom_non_animated">Zoom uden animation</string>
+    <string name="lang_zh_hant">Traditionelt kinesisk</string>
+    <string name="zoom_animated">Animeret zoom</string>
+    <string name="button_already_assigned_to_this_action">Denne knap er allerede tildelt denne handling.</string>
+    <string name="key_assignments_already_cleared_message">Alle tastetildelinger er allerede ryddet</string>
+    <string name="add_new_button">Tilføj en ny knap</string>
+    <string name="use_v1_auto_zoom">Diskret automatisk zoom (gammel version)</string>
 </resources>

@@ -23,11 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -102,8 +104,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater,
+	                         @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 
@@ -260,18 +263,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		applyFilterButton.setText(app.getString(R.string.apply_filters));
 		applyFilterButton.setOnClickListener(v -> {
 			applyFilterFields();
-			if (!filter.isStandardFilter()) {
-				filter.setSavedFilterByName(filter.getFilterByName());
-				if (app.getPoiFilters().editPoiFilter(filter)) {
-					app.getSearchUICore().refreshCustomPoiFilters();
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, "");
-					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
-					dismiss();
-				}
-			} else {
-				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, nameFilterText.trim());
-				dismiss();
+			QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) getParentFragment();
+			if (fragment != null) {
+				fragment.replaceQueryWithUiFilter(filter, nameFilterText.trim());
 			}
+			dismiss();
 		});
 		updateApplyButton();
 
@@ -343,8 +339,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					       getContext().getString(R.string.edit_filter_create_message, filterName),
 					       Toast.LENGTH_SHORT).show();
 				app.getSearchUICore().refreshCustomPoiFilters();
-				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
-				((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
+				QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) getParentFragment();
+				if (fragment != null) {
+					fragment.replaceQueryWithUiFilter(nFilter, "");
+					fragment.reloadCategories();
+				}
 				dismiss();
 			}
 		});
@@ -352,7 +351,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(QUICK_SEARCH_POI_FILTER_ID_KEY, filterId);
 		outState.putString(QUICK_SEARCH_POI_FILTER_BY_NAME_KEY, nameFilterText);
@@ -362,14 +361,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		hideKeyboard();
 		super.onDismiss(dialog);
 	}
 
 	private void hideKeyboard() {
-		if (editText.hasFocus()) {
-			AndroidUtils.hideSoftKeyboard(getActivity(), editText);
+		FragmentActivity activity = getActivity();
+		if (activity != null && editText.hasFocus()) {
+			AndroidUtils.hideSoftKeyboard(activity, editText);
 		}
 	}
 

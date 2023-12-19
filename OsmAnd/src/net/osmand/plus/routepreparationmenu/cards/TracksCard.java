@@ -98,7 +98,7 @@ public class TracksCard extends MapBaseCard {
 			GpxDataItem dataItem = getDataItem(item.info);
 			GPXTrackAnalysis analysis = null;
 			if (dataItem != null) {
-				analysis = dataItem.getGpxData().getAnalysis();
+				analysis = dataItem.getAnalysis();
 			}
 			GpxUiHelper.updateGpxInfoView(v, item.title, item.info, analysis, app);
 

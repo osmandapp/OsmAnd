@@ -28,6 +28,7 @@ public class RouteCalculationProgress {
 	public int visitedOppositeSegments = 0;
 	public int directQueueSize = 0;
 	public int oppositeQueueSize = 0;
+	public int finalSegmentsFound = 0;
 
 	public int totalIterations = 1;
 	public int iteration = -1;
@@ -49,6 +50,7 @@ public class RouteCalculationProgress {
 
 	public long routeCalculationStartTime;
 	public List<WorldRegion> missingMaps;
+	
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
@@ -68,11 +70,13 @@ public class RouteCalculationProgress {
 		p.reverseSegmentQueueSize = cp.reverseSegmentQueueSize;
 		p.visitedDirectSegments = cp.visitedDirectSegments;
 		p.visitedOppositeSegments = cp.visitedOppositeSegments;
+		p.finalSegmentsFound = cp.finalSegmentsFound;
 		
 		p.loadedTiles = cp.loadedTiles;
 		p.distinctLoadedTiles = cp.distinctLoadedTiles;
 		p.maxLoadedTiles = cp.maxLoadedTiles;
 		p.loadedPrevUnloadedTiles = cp.loadedPrevUnloadedTiles;
+		
 		cp.maxLoadedTiles = 0;
 		return p;
 	}
@@ -95,7 +99,8 @@ public class RouteCalculationProgress {
 		segms.put("queueDirectSize", this.directQueueSize - firstPhase.directQueueSize);
 		segms.put("queueOppositeSize", this.reverseSegmentQueueSize  - firstPhase.reverseSegmentQueueSize);
 		segms.put("visitedDirectPoints", this.visitedDirectSegments - firstPhase.visitedDirectSegments);
-		segms.put("visitedOppositePoints", this.visitedOppositeSegments - - firstPhase.visitedOppositeSegments);
+		segms.put("visitedOppositePoints", this.visitedOppositeSegments - firstPhase.visitedOppositeSegments);
+		segms.put("finalSegmentsFound", this.finalSegmentsFound -  firstPhase.finalSegmentsFound);
 		Map<String, Object> time = new LinkedHashMap<String, Object>();
 		map.put("time", time);
 		float timeToCalc = (float) ((this.timeToCalculate - firstPhase.timeToCalculate) / 1.0e9);

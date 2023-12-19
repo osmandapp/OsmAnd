@@ -16,43 +16,46 @@ import net.osmand.plus.keyevent.commands.OpenQuickSearchDialogCommand;
 import net.osmand.plus.keyevent.commands.SwitchAppModeCommand;
 import net.osmand.plus.keyevent.commands.SwitchCompassCommand;
 import net.osmand.plus.keyevent.commands.ToggleDrawerCommand;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.plugins.PluginsHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class KeyboardDeviceProfile extends PredefinedInputDeviceProfile {
 
 	public static final String ID = "keyboard";
 
-	/**
-	 * Collects default bindings, which are common for device sub-profiles.
-	 * Some types of devices may not support some of the keycodes.
-	 */
 	@Override
-	protected void collectCommands() {
+	@NonNull
+	protected List<KeyAssignment> collectAssignments() {
+		List<KeyAssignment> list = new ArrayList<>();
+		
 		// Default letter keycodes
-		bindCommand(KeyEvent.KEYCODE_C, BackToLocationCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_D, SwitchCompassCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_N, OpenNavigationDialogCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_S, OpenQuickSearchDialogCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_P, SwitchAppModeCommand.SWITCH_TO_NEXT_ID);
-		bindCommand(KeyEvent.KEYCODE_O, SwitchAppModeCommand.SWITCH_TO_PREVIOUS_ID);
+		addAssignment(list, BackToLocationCommand.ID, KeyEvent.KEYCODE_C);
+		addAssignment(list, SwitchCompassCommand.ID, KeyEvent.KEYCODE_D);
+		addAssignment(list, OpenNavigationDialogCommand.ID, KeyEvent.KEYCODE_N);
+		addAssignment(list, OpenQuickSearchDialogCommand.ID, KeyEvent.KEYCODE_S);
+		addAssignment(list, SwitchAppModeCommand.SWITCH_TO_NEXT_ID, KeyEvent.KEYCODE_P);
+		addAssignment(list, SwitchAppModeCommand.SWITCH_TO_PREVIOUS_ID, KeyEvent.KEYCODE_O);
 
 		// Default map scroll keycodes
-		bindCommand(KeyEvent.KEYCODE_DPAD_UP, MapScrollCommand.SCROLL_UP_ID);
-		bindCommand(KeyEvent.KEYCODE_DPAD_DOWN, MapScrollCommand.SCROLL_DOWN_ID);
-		bindCommand(KeyEvent.KEYCODE_DPAD_LEFT, MapScrollCommand.SCROLL_LEFT_ID);
-		bindCommand(KeyEvent.KEYCODE_DPAD_RIGHT, MapScrollCommand.SCROLL_RIGHT_ID);
+		addAssignment(list, MapScrollCommand.SCROLL_UP_ID, KeyEvent.KEYCODE_DPAD_UP);
+		addAssignment(list, MapScrollCommand.SCROLL_DOWN_ID, KeyEvent.KEYCODE_DPAD_DOWN);
+		addAssignment(list, MapScrollCommand.SCROLL_LEFT_ID, KeyEvent.KEYCODE_DPAD_LEFT);
+		addAssignment(list, MapScrollCommand.SCROLL_RIGHT_ID, KeyEvent.KEYCODE_DPAD_RIGHT);
 
 		// Default map zoom keycodes
-		bindCommand(KeyEvent.KEYCODE_PLUS, MapZoomCommand.ZOOM_IN_ID);
-		bindCommand(KeyEvent.KEYCODE_EQUALS, MapZoomCommand.ZOOM_IN_ID);
-		bindCommand(KeyEvent.KEYCODE_MINUS, MapZoomCommand.ZOOM_OUT_ID);
+		addAssignment(list, MapZoomCommand.ZOOM_IN_ID, KeyEvent.KEYCODE_PLUS, KeyEvent.KEYCODE_EQUALS);
+		addAssignment(list, MapZoomCommand.ZOOM_OUT_ID, KeyEvent.KEYCODE_MINUS);
 
 		// Other default keycodes
-		bindCommand(KeyEvent.KEYCODE_DPAD_CENTER, EmitNavigationHintCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_MENU, ToggleDrawerCommand.ID);
-		bindCommand(KeyEvent.KEYCODE_BACK, ActivityBackPressedCommand.ID);
+		addAssignment(list, EmitNavigationHintCommand.ID, KeyEvent.KEYCODE_DPAD_CENTER);
+		addAssignment(list, ToggleDrawerCommand.ID, KeyEvent.KEYCODE_MENU);
+		addAssignment(list, ActivityBackPressedCommand.ID, KeyEvent.KEYCODE_BACK);
 
-		PluginsHelper.bindCommonKeyEventCommands(this);
+		PluginsHelper.addCommonKeyEventAssignments(list);
+		return list;
 	}
 
 	@NonNull

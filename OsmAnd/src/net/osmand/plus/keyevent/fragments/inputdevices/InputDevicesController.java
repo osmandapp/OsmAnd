@@ -14,7 +14,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -26,12 +26,13 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class InputDevicesController {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private final InputDeviceHelper deviceHelper;
+	private final InputDevicesHelper deviceHelper;
 	private final boolean usedOnMap;
 
 	public InputDevicesController(@NonNull OsmandApplication app,
@@ -46,7 +47,7 @@ class InputDevicesController {
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
 		screenItems.add(new ScreenItem(CARD_DIVIDER));
-		for (InputDeviceProfile device : deviceHelper.getAvailableDevices()) {
+		for (InputDeviceProfile device : deviceHelper.getAllDevices(appMode)) {
 			screenItems.add(new ScreenItem(DEVICE_ITEM, device));
 		}
 		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
@@ -70,7 +71,7 @@ class InputDevicesController {
 		String title = app.getString(R.string.shared_string_rename);
 		showEnterNameDialog(title, device.toHumanString(app), newName -> {
 			if (device instanceof CustomInputDeviceProfile) {
-				deviceHelper.renameCustomDevice(appMode, (CustomInputDeviceProfile) device, newName);
+				deviceHelper.renameCustomDevice(appMode, device.getId(), newName);
 			}
 			return true;
 		});
@@ -92,9 +93,9 @@ class InputDevicesController {
 				EditText editText = (EditText) extra;
 				String newName = editText.getText().toString();
 				if (Algorithms.isBlank(newName)) {
-					app.showToastMessage(R.string.empty_filename);
+					app.showToastMessage(R.string.empty_name);
 				} else {
-					if (deviceHelper.hasNameDuplicate(appMode, newName)) {
+					if (deviceHelper.hasDeviceNameDuplicate(app, appMode, newName)) {
 						app.showToastMessage(R.string.message_name_is_already_exists);
 					} else {
 						callback.processResult(newName.trim());
@@ -127,11 +128,8 @@ class InputDevicesController {
 	}
 
 	public boolean isSelected(@NonNull InputDeviceProfile device) {
-		return deviceHelper.isSelectedDevice(appMode, device.getId());
-	}
-
-	public boolean isCustom(@NonNull InputDeviceProfile device) {
-		return deviceHelper.isCustomDevice(device);
+		InputDeviceProfile selectedDevice = deviceHelper.getSelectedDevice(appMode);
+		return Objects.equals(selectedDevice.getId(), device.getId());
 	}
 
 	private boolean isNightMode() {

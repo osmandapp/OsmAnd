@@ -169,11 +169,10 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	private void adjustMapPosition(boolean shiftMapIfSessionRunning) {
 		OsmandApplication app = getApp();
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		NavigationSession session = app.getCarNavigationSession();
 		boolean sessionStarted = session != null && session.hasStarted();
 		boolean shiftMap = shiftMapIfSessionRunning && sessionStarted;
-		mapView.setMapPositionX(shiftMap ? 1 : 0);
+		app.getMapViewTrackingUtilities().getMapDisplayPositionManager().setMapPositionShiftedX(shiftMap);
 	}
 
 	@NonNull

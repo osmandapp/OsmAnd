@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -21,9 +20,11 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -66,6 +67,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
+		setupUseV1AutoZoom();
+		setupUseHHRoutingPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
@@ -107,6 +110,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
 		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
 		safeMode.setIconSpaceReserved(false);
+	}
+
+	private void setupUseHHRoutingPref() {
+		SwitchPreferenceEx preference = findPreference(settings.USE_HH_ROUTING.getId());
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupUseV1AutoZoom() {
+		SwitchPreferenceEx preference = findPreference(settings.USE_V1_AUTO_ZOOM.getId());
+		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupHeightmapRelatedPrefs() {
@@ -247,7 +260,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
 			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {

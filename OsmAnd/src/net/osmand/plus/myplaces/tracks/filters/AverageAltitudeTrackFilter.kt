@@ -16,7 +16,7 @@ class AverageAltitudeTrackFilter(
 	override val unitResId = R.string.m
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val elevation = trackItem.dataItem?.gpxData?.analysis?.avgElevation
+		val elevation = trackItem.dataItem?.analysis?.avgElevation
 		if (elevation == null || (elevation == 0.0)) {
 			return false
 		}

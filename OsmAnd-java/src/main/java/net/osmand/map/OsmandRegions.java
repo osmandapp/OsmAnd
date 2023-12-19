@@ -278,7 +278,7 @@ public class OsmandRegions {
 		return reader != null;
 	}
 
-	public boolean contain(BinaryMapDataObject bo, int tx, int ty) {
+	public static boolean contain(BinaryMapDataObject bo, int tx, int ty) {
 		int t = 0;
 		for (int i = 1; i < bo.getPointsLength(); i++) {
 			int fx = MapAlgorithms.ray_intersect_x(bo.getPoint31XTile(i - 1),
@@ -292,7 +292,7 @@ public class OsmandRegions {
 		return t % 2 == 1;
 	}
 
-	public boolean intersect(BinaryMapDataObject bo, int lx, int ty, int rx, int by) {
+	public static boolean intersect(BinaryMapDataObject bo, int lx, int ty, int rx, int by) {
 		// 1. polygon in object 
 		if (contain(bo, lx, ty)) {
 			return true;

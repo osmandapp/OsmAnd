@@ -251,9 +251,7 @@ public class TrackDetailsMenu {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			if (!portrait) {
-				mapActivity.getMapView().setMapPositionX(1);
-			} else {
+			if (portrait) {
 				TrackDetailsToolbarController toolbarController = new TrackDetailsToolbarController();
 				this.toolbarController = toolbarController;
 				if (gpxItem.group != null) {
@@ -295,7 +293,6 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
-			mapActivity.getMapView().setMapPositionX(0);
 			mapActivity.refreshMap();
 		}
 		if (hidding) {
@@ -675,21 +672,32 @@ public class TrackDetailsMenu {
 				OrderedLineDataSet dataSet = null;
 				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
 				switch (dataSetType) {
-					case ALTITUDE:
+					case ALTITUDE: {
 						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 								dataSetType, gpxItem.chartAxisType, false, true, withoutGaps);
 						break;
-					case SPEED:
+					}
+					case SPEED: {
+						boolean setYAxisMinimum = true;
+						for (GPXDataSetType type : gpxItem.chartTypes) {
+							if (type == GPXDataSetType.ZOOM_ANIMATED || type == GPXDataSetType.ZOOM_NON_ANIMATED) {
+								setYAxisMinimum = false;
+								break;
+							}
+						}
 						dataSet = ChartUtils.createGPXSpeedDataSet(app, chart, analysis,
-								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
+								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, setYAxisMinimum, true, withoutGaps);
 						break;
-					case SLOPE:
+					}
+					case SLOPE: {
 						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
 						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 								dataSetType, gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
+					}
 					default: {
-						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, false);
+						boolean useRightAxis = !dataSets.isEmpty();
+						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, useRightAxis);
 					}
 				}
 				if (dataSet != null) {

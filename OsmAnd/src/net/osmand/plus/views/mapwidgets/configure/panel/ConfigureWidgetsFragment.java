@@ -241,6 +241,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@NonNull
 	public MapActivity requireMapActivity() {
 		FragmentActivity activity = getActivity();

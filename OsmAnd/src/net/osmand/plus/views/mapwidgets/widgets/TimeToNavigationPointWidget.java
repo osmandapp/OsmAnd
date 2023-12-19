@@ -43,6 +43,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 		updateIcons();
 		updateContentTitle();
 		setOnClickListener(getOnClickListener());
+		updateWidgetName();
 	}
 
 	private static WidgetType getWidgetType(boolean isIntermediate){
@@ -55,6 +56,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 			widgetState.changeToNextState();
 			updateInfo(null);
 			mapActivity.refreshMap();
+			updateWidgetName();
 		};
 	}
 
@@ -129,6 +131,19 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 			return getString(getCurrentState().titleId);
 		}
 		return null;
+	}
+
+	@Nullable
+	protected String getWidgetName() {
+		if (widgetState != null) {
+			TimeToNavigationPointState state = getCurrentState();
+			if (state == TimeToNavigationPointState.INTERMEDIATE_ARRIVAL_TIME || state == TimeToNavigationPointState.INTERMEDIATE_TIME_TO_GO) {
+				return getString(R.string.rendering_attr_smoothness_intermediate_name);
+			} else {
+				return getString(R.string.route_descr_destination);
+			}
+		}
+		return super.getWidgetName();
 	}
 
 	@NonNull

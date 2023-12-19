@@ -1,7 +1,6 @@
 package net.osmand.plus.onlinerouting.ui;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
-import static net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet.NETWORK_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
@@ -273,9 +272,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		setApproximateCardTitle();
 		approximateCard.onClickCheckBox(getString(R.string.attach_roads_descr), result -> {
 			if (getActivity() != null) {
-				boolean networkApproximateRoute = engine.shouldNetworkApproximateRoute();
 				SelectOnlineApproxProfileBottomSheet.showInstance(getActivity(), this,
-						appMode, approxRouteProfile, approxDerivedProfile, networkApproximateRoute, false);
+						appMode, approxRouteProfile, approxDerivedProfile,  false);
 			}
 			return false;
 		});
@@ -291,10 +289,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			appModeName = approxDerivedProfile != null ? approxDerivedProfile : approxRouteProfile;
 			appModeName = " (" + appModeName + ")";
 		}
-		appModeName = engine.shouldNetworkApproximateRoute() ? " (" + getString(R.string.network_provider) + ")" : appModeName;
 		String title = getString(R.string.attach_to_the_roads) + appModeName;
 		approximateCard.setHeaderTitle(title);
-		approximateCard.setCheckBox(approxRouteProfile != null || engine.shouldNetworkApproximateRoute());
+		approximateCard.setCheckBox(approxRouteProfile != null);
 	}
 
 	private void setupExternalTimestampsCard() {
@@ -797,8 +794,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onProfileSelected(Bundle args) {
-		boolean isNetwork = args.getBoolean(NETWORK_KEY);
-		engine.put(EngineParameter.NETWORK_APPROXIMATE_ROUTE, String.valueOf(isNetwork));
 		engine.put(EngineParameter.APPROXIMATION_ROUTING_PROFILE, args.getString(PROFILE_KEY_ARG));
 		engine.put(EngineParameter.APPROXIMATION_DERIVED_PROFILE, args.getString(DERIVED_PROFILE_ARG));
 		setApproximateCardTitle();

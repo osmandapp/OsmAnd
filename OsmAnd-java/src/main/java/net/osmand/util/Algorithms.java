@@ -1363,6 +1363,15 @@ public class Algorithms {
 		return copy;
 	}
 
+	@SafeVarargs
+	public static <T> List<T> asOneList(Collection<T> ... collections) {
+		List<T> result = new ArrayList<>();
+		for (Collection<T> collection : collections) {
+			result.addAll(collection);
+		}
+		return result;
+	}
+
 	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
 		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
 		mapRect.right = Math.max(mapRect.right, longitude);
@@ -1375,6 +1384,10 @@ public class Algorithms {
 		mapRect.right = Math.max(mapRect.right, gpxRect.right);
 		mapRect.top = Math.max(mapRect.top, gpxRect.top);
 		mapRect.bottom = mapRect.bottom == 0.0 ? gpxRect.bottom : Math.min(mapRect.bottom, gpxRect.bottom);
+	}
+	
+	public static long combine2Points(int x, int y) {
+		return (((long) x) << 32) | ((long) y);
 	}
 
 	public static String makeUniqueName(String oldName, CallbackWithObject<String> checkNameCallback) {

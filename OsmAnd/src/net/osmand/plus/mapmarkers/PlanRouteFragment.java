@@ -42,6 +42,7 @@ import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapT
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -65,9 +66,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends BaseOsmAndFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
@@ -900,14 +898,15 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 	private void updateMapDisplayPosition() {
 		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-		manager.updateProviders(this, isInPlanRouteMode);
+		manager.updateMapPositionProviders(this, isInPlanRouteMode);
 		manager.updateMapDisplayPosition();
 	}
 
-	@Nullable @Override
-	public Integer getMapDisplayPosition() {
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
 		}
 		return null;
 	}

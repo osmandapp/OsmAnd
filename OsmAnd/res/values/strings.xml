@@ -10,6 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_next_event">Next event</string>
+    <string name="map_widget_sun_position_desc">This widget shows the time until sunrise or sunset, depending on the current time.</string>
+    <string name="map_widget_sun_position">Sun position</string>
+    <string name="use_v1_auto_zoom">Discrete auto zoom (old version)</string>
+    <string name="button_already_assigned_to_this_action">This button is already assigned to this action.</string>
+    <string name="key_assignments_already_cleared_message">All key assignments are already cleared</string>
+    <string name="add_new_button">Add a new button</string>
+    <string name="zoom_animated">Animated zoom</string>
+    <string name="zoom_non_animated">Non-animated zoom</string>
     <string name="rendering_attr_showToll_name">Show toll restrictions</string>
     <string name="rendering_attr_showToll_description">Show toll restrictions on roads</string>
     <string name="reset_key_assignments_desc">All key assignments for the selected type will be removed.</string>
@@ -3947,6 +3956,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="sound_beep_simple">Beep: simple</string>
     <string name="sound_beep_simple_loud">Beep: simple loud</string>
     <string name="lang_zh">Chinese</string>
+    <string name="lang_zh_hans">Simplified Chinese</string>
+    <string name="lang_zh_hant">Traditional Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
     <string name="lang_en_gb">English (United Kingdom)</string>

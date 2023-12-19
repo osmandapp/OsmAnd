@@ -4653,12 +4653,12 @@
     <string name="poi_healthcare_speciality_pediatric">Pediatría</string>
     <string name="poi_healthcare_speciality_pedorthist">Pedortista</string>
     <string name="poi_healthcare_speciality_laboratory">Especialidad médica: laboratorio</string>
-    <string name="poi_healthcare_speciality_body">Psicoterapia orientada al cuerpo</string>
+    <string name="poi_healthcare_speciality_body">Psicoterapia corporal</string>
     <string name="poi_healthcare_speciality_obstetrics">Obstetricia</string>
     <string name="poi_healthcare_speciality_kinesitherapy">Kinesiterapia</string>
     <string name="poi_healthcare_speciality_rehabilitation">Rehabilitación</string>
     <string name="poi_healthcare_speciality_systemic">Terapia sistémica</string>
-    <string name="poi_healthcare_speciality_physical_therapy">Terapia física</string>
+    <string name="poi_healthcare_speciality_physical_therapy">Fisioterapia;Terapia física</string>
     <string name="poi_healthcare_speciality_humanistic">Psicología humanística</string>
     <string name="poi_healthcare_speciality_primary_care">Atención primaria</string>
     <string name="poi_healthcare_speciality_tuina">Tuina</string>

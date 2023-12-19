@@ -34,7 +34,7 @@ class AverageSpeedTrackFilter(
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val avgSpeed = trackItem.dataItem?.gpxData?.analysis?.avgSpeed
+		val avgSpeed = trackItem.dataItem?.analysis?.avgSpeed
 		if (avgSpeed == null || (avgSpeed == 0f)) {
 			return false
 		}

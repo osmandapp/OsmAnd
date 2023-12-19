@@ -64,7 +64,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -99,6 +99,7 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -187,7 +188,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	KeyEventHelper keyEventHelper;
-	InputDeviceHelper inputDeviceHelper;
+	InputDevicesHelper inputDeviceHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
@@ -432,7 +433,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return keyEventHelper;
 	}
 
-	public InputDeviceHelper getInputDeviceHelper() {
+	public InputDevicesHelper getInputDeviceHelper() {
 		return inputDeviceHelper;
 	}
 
