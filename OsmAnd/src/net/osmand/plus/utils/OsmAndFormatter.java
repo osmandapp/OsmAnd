@@ -66,6 +66,8 @@ public class OsmAndFormatter {
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
+	private static final int[] ROUNDING_DISTANCE_BOUNDS = Algorithms.generate10BaseRoundingBounds(100, 5);
+
 	private static boolean twelveHoursFormat;
 	private static TimeFormatter fullTimeFormatter;
 	private static TimeFormatter shortTimeFormatter;
@@ -391,6 +393,19 @@ public class OsmAndFormatter {
 				return formatValue(yards, R.string.yard, forceTrailingZeros, 0, ctx);
 			}
 			return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
+		}
+	}
+
+	@NonNull
+	public static String getFormattedRoundedDistance(@NonNull OsmandApplication app, int distance) {
+		MetricsConstants constants = app.getSettings().METRIC_SYSTEM.get();
+		FormattedValue value = getFormattedDistanceValue(distance, app, true, constants);
+
+		if (!Algorithms.stringsEqual(value.unit, app.getString(constants.getBigUnit()))) {
+			int roundedValue = Algorithms.lowerTo10BaseRoundingBounds((int) value.valueSrc, ROUNDING_DISTANCE_BOUNDS);
+			return FormattedValue.format(app, String.valueOf(roundedValue), value.unit, value.separateWithSpace);
+		} else {
+			return value.format(app);
 		}
 	}
 
@@ -857,6 +872,12 @@ public class OsmAndFormatter {
 
 		@NonNull
 		public String format(@NonNull Context context) {
+			return format(context, value, unit, separateWithSpace);
+		}
+
+		@NonNull
+		public static String format(@NonNull Context context, @NonNull String value,
+		                            @NonNull String unit, boolean separateWithSpace) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
 					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});

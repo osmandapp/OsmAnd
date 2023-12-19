@@ -2,6 +2,8 @@ package net.osmand.plus.settings.enums;
 
 import android.content.Context;
 
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.R;
 
 public enum MetricsConstants {
@@ -30,5 +32,28 @@ public enum MetricsConstants {
 
 	public boolean shouldUseFeet() {
 		return this == MILES_AND_FEET || this == MILES_AND_YARDS || this == NAUTICAL_MILES_AND_FEET;
+	}
+
+	@StringRes
+	public int getBaseUnit() {
+		if (this == KILOMETERS_AND_METERS || this == MILES_AND_METERS) {
+			return R.string.m;
+		} else if (this == MILES_AND_FEET || this == NAUTICAL_MILES_AND_FEET) {
+			return R.string.foot;
+		} else if (this == MILES_AND_YARDS) {
+			return R.string.yard;
+		}
+		return R.string.m;
+	}
+
+	@StringRes
+	public int getBigUnit() {
+		if (this == KILOMETERS_AND_METERS) {
+			return R.string.km;
+		} else if (this == NAUTICAL_MILES_AND_METERS || this == NAUTICAL_MILES_AND_FEET) {
+			return R.string.nm;
+		} else {
+			return R.string.mile;
+		}
 	}
 }
