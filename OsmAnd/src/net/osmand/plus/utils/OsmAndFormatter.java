@@ -398,10 +398,12 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static String getFormattedRoundedDistance(@NonNull OsmandApplication app, int distance) {
-		MetricsConstants constants = app.getSettings().METRIC_SYSTEM.get();
+		OsmandSettings settings = app.getSettings();
+		MetricsConstants constants = settings.METRIC_SYSTEM.get();
+		boolean useRoundedDistance = !settings.PRECISE_DISTANCE_NUMBERS.get();
 		FormattedValue value = getFormattedDistanceValue(distance, app, true, constants);
 
-		if (!Algorithms.stringsEqual(value.unit, app.getString(constants.getBigUnit()))) {
+		if (useRoundedDistance && !Algorithms.stringsEqual(value.unit, app.getString(constants.getBigUnit()))) {
 			int roundedValue = Algorithms.lowerTo10BaseRoundingBounds((int) value.valueSrc, ROUNDING_DISTANCE_BOUNDS);
 			return FormattedValue.format(app, String.valueOf(roundedValue), value.unit, value.separateWithSpace);
 		} else {
