@@ -1,10 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
-import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
-
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +7,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -30,10 +26,21 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
+import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
+import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class RouteInfoCard extends MapBaseCard {
 
@@ -61,57 +68,68 @@ public class RouteInfoCard extends MapBaseCard {
 		container.removeAllViews();
 
 		RouteKey routeKey = this.routeKey;
-		String tag = routeKey.type.getTag();
+		String routeTypeName = routeKey.type.getTag();
 
-		String networkTag = routeKey.getNetwork();
-		if (!Algorithms.isEmpty(networkTag)) {
-			String network = getStringByProperty(app, "poi_route_" + tag + "_" + networkTag + "_poi");
-			addInfoRow(container, network != null ? network : networkTag, app.getString(R.string.poi_network));
-		}
-		String routeType = getActivityTypeStringPropertyName(app, tag, capitalizeFirstLetterAndLowercase(tag));
-		addInfoRow(container, routeType, app.getString(R.string.layer_route));
-		addInfoRow(container, routeKey.getOperator(), app.getString(R.string.poi_operator));
-		addInfoRow(container, routeKey.getSymbol(), app.getString(R.string.shared_string_symbol));
-		addInfoRow(container, routeKey.getWebsite(), app.getString(R.string.website), true);
-		addWikiInfoRow(container, routeKey.getWikipedia());
-	}
+		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
+		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
+		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false);
 
-	private void addWikiInfoRow(@NonNull ViewGroup container, @NonNull String text) {
-		if (Algorithms.isEmpty(text)) {
-			return;
-		}
-		String url = WikiAlgorithms.getWikiUrl(text);
-		String description = app.getString(R.string.shared_string_wikipedia);
-		View view = addInfoRow(container, url, description);
+		for (RouteTag tag : getTagsToDisplay()) {
+			String formattedKey = tag.getFormattedKey(app);
+			String formattedValue = tag.getFormattedValue(app, routeKey.type);
+			boolean linkify = "website".equals(tag.key);
 
-		OsmAndAppCustomization customization = app.getAppCustomization();
-		if (Algorithms.isUrl(url) && view != null && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-			TextView tvContent = view.findViewById(R.id.title);
-			tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
-			view.setOnClickListener(v -> {
-				WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), url);
-			});
+			View view = addInfoRow(container, formattedKey, formattedValue, linkify);
+
+			OsmAndAppCustomization customization = app.getAppCustomization();
+			if ("wikipedia".equals(tag.key)) {
+				if (Algorithms.isUrl(formattedValue) && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					TextView tvContent = view.findViewById(R.id.title);
+					tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+					view.setOnClickListener(v -> {
+						WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), formattedValue);
+					});
+				}
+			}
 		}
 	}
 
-	@Nullable
-	private View addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description) {
-		return addInfoRow(container, text, description, false);
+	@NonNull
+	private List<RouteTag> getTagsToDisplay() {
+		List<RouteTag> tags = new ArrayList<>();
+
+		for (String tag : routeKey.tags) {
+			String key = routeKey.getKeyFromTag(tag);
+			String value = routeKey.getValue(key);
+
+			if (key.equals("name") || key.contains("osmc")) {
+				continue;
+			}
+
+			tags.add(new RouteTag(key, value));
+		}
+
+		Collections.sort(tags, (o1, o2) -> {
+			if (o1.getOrder() != o2.getOrder()) {
+				return o1.getOrder() - o2.getOrder();
+			}
+
+			return o1.getFormattedKey(app).compareTo(o2.getFormattedKey(app));
+		});
+
+		return tags;
 	}
 
-	@Nullable
-	private View addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description, boolean needLinks) {
-		if (Algorithms.isEmpty(text)) {
-			return null;
-		}
+	@NonNull
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks) {
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
 
 		TextView tvLabel = view.findViewById(R.id.description);
 		TextView tvContent = view.findViewById(R.id.title);
 
-		tvContent.setText(text);
-		tvLabel.setText(description);
+		tvContent.setText(value);
+		tvLabel.setText(key);
 
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(tvContent, Linkify.ALL)) {
@@ -133,5 +151,55 @@ public class RouteInfoCard extends MapBaseCard {
 			}
 		}
 		return points;
+	}
+
+	private static class RouteTag {
+
+		@NonNull
+		private final String key;
+		@NonNull
+		private final String value;
+
+		@Nullable
+		private final PoiType poiType;
+
+		public RouteTag(@NonNull String key, @NonNull String value) {
+			this.key = key;
+			this.value = value;
+
+			AbstractPoiType abstractPoiType = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key);
+			poiType = abstractPoiType instanceof PoiType
+					? ((PoiType) abstractPoiType)
+					: null;
+		}
+
+		@NonNull
+		public String getFormattedKey(@NonNull OsmandApplication app) {
+			if (key.startsWith("name:")) {
+				String nameStr = app.getString(R.string.shared_string_name);
+				String langId = key.substring("name:".length());
+				String displayLanguage = new Locale(langId).getDisplayLanguage();
+				return app.getString(R.string.ltr_or_rtl_combine_via_colon, nameStr, displayLanguage);
+			}
+
+			return poiType != null ? poiType.getTranslation() : capitalizeFirstLetterAndLowercase(key);
+		}
+
+		@NonNull
+		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull RouteType routeType) {
+			switch (key) {
+				case "network":
+					String network = getStringByProperty(app, "poi_route_" + routeType.getTag() + "_" + value + "_poi");
+					return Algorithms.isEmpty(network) ? value : network;
+				case "wikipedia":
+					return WikiAlgorithms.getWikiUrl(value);
+				default:
+					return value;
+			}
+		}
+
+		public int getOrder() {
+			return poiType != null ? poiType.getOrder() : PoiType.DEFAULT_ORDER;
+		}
 	}
 }
