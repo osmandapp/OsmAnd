@@ -3,14 +3,17 @@ package net.osmand.plus.download.local;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LocalGroup {
 
 	private final LocalItemType type;
-	private final List<LocalItem> items = new ArrayList<>();
+	private final Map<String, BaseLocalItem> items = new HashMap<>();
 
 	public LocalGroup(@NonNull LocalItemType type) {
 		this.type = type;
@@ -21,9 +24,14 @@ public class LocalGroup {
 		return type;
 	}
 
+	@Nullable
+	public BaseLocalItem getItem(@NonNull String key){
+		return items.get(key);
+	}
+
 	@NonNull
-	public List<LocalItem> getItems() {
-		return items;
+	public List<BaseLocalItem> getItems() {
+		return new ArrayList<>(items.values());
 	}
 
 	@NonNull
@@ -32,17 +40,21 @@ public class LocalGroup {
 	}
 
 	public void addItem(@NonNull LocalItem localItem) {
-		items.add(localItem);
+		items.put(localItem.getFileName(), localItem);
+	}
+
+	public void addItem(@NonNull BaseLocalItem localItem, @NonNull String key) {
+		items.put(key, localItem);
 	}
 
 	public void removeItem(@NonNull LocalItem localItem) {
-		items.remove(localItem);
+		items.remove(localItem.getFileName());
 	}
 
 	public long getSize() {
 		long size = 0;
-		for (LocalItem item : items) {
-			size += item.getSize();
+		for (BaseLocalItem item : items.values()) {
+			size += item.getLocalItemSize();
 		}
 		return size;
 	}

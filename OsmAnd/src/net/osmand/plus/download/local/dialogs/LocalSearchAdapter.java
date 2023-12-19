@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.viewholders.LocalItemHolder;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> implements Filterable {
 
-	private final List<LocalItem> items = new ArrayList<>();
+	private final List<BaseLocalItem> items = new ArrayList<>();
 
 	private final LocalSearchFilter filter;
 	private final LocalItemListener listener;
@@ -44,7 +45,7 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 		themedInflater = UiUtilities.getInflater(app, nightMode);
 	}
 
-	public void setItems(@NonNull List<LocalItem> items) {
+	public void setItems(@NonNull List<BaseLocalItem> items) {
 		this.items.clear();
 		this.items.addAll(items);
 		filter.setItems(items);
@@ -67,7 +68,7 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof LocalItemHolder) {
-			LocalItem item = items.get(position);
+			BaseLocalItem item = items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
 
 			LocalItemHolder viewHolder = (LocalItemHolder) holder;

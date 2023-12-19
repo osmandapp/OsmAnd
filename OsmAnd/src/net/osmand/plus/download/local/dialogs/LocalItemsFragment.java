@@ -187,42 +187,19 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		if (!selectionMode) {
 			addMemoryInfo(items);
 		}
-		if (type == LocalItemType.LIVE_UPDATES) {
-			Map<String, LiveGroupItem> liveGroupItemMap = new HashMap<>();
-			List<Object> itemsToDelete = new ArrayList<>();
-
-			for (Object item : items) {
-				if (item instanceof LocalItem) {
-					LocalItem localItem = (LocalItem) item;
-					String basename = getBasename(app, localItem.getFileName());
-
-					String withoutNumber = basename.replaceAll("(_\\d*)*$", "");
-					String groupName = getNameToDisplay(withoutNumber, app);
-					LiveGroupItem groupItem = liveGroupItemMap.get(groupName);
-					if (groupItem == null) {
-						groupItem = new LiveGroupItem(groupName);
-						liveGroupItemMap.put(groupName, groupItem);
-					}
-					groupItem.addLocalItem(localItem);
-					itemsToDelete.add(item);
-				}
-			}
-			items.removeAll(itemsToDelete);
-			items.addAll(liveGroupItemMap.values());
-		}
 		adapter.setSelectionMode(selectionMode);
 		adapter.setItems(items);
 	}
 
 	@NonNull
 	private List<Object> getSortedItems() {
-		List<LocalItem> activeItems = new ArrayList<>();
-		List<LocalItem> backupedItems = new ArrayList<>();
+		List<BaseLocalItem> activeItems = new ArrayList<>();
+		List<BaseLocalItem> backupedItems = new ArrayList<>();
 
 		LocalGroup group = getGroup();
 		if (group != null) {
-			for (LocalItem item : group.getItems()) {
-				if (item.isBackuped(app)) {
+			for (BaseLocalItem item : group.getItems()) {
+				if (item instanceof LocalItem && ((LocalItem)item).isBackuped(app)) {
 					backupedItems.add(item);
 				} else {
 					activeItems.add(item);
@@ -240,7 +217,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		return items;
 	}
 
-	private void sortItems(@NonNull List<LocalItem> items) {
+	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(app, sortMode));

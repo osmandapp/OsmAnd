@@ -19,14 +19,14 @@ import java.util.List;
 public class LiveGroupItem extends BaseLocalItem {
 
 	public String name;
-	public List<LocalItem> localItems = new ArrayList<>();
+	private final List<LocalItem> localItems = new ArrayList<>();
 
-	public LiveGroupItem(String name){
+	public LiveGroupItem(String name) {
 		super(LocalItemType.LIVE_UPDATES);
 		this.name = name;
 	}
 
-	public void addLocalItem(LocalItem localItem){
+	public void addLocalItem(LocalItem localItem) {
 		localItems.add(localItem);
 	}
 
@@ -43,7 +43,7 @@ public class LiveGroupItem extends BaseLocalItem {
 	@Override
 	public long getLocalItemSize() {
 		long totalSize = 0;
-		for(LocalItem item : localItems){
+		for (LocalItem item : localItems) {
 			totalSize += item.getSize();
 		}
 		return totalSize;
@@ -59,5 +59,15 @@ public class LiveGroupItem extends BaseLocalItem {
 		String formattedDate = getFormattedDate(new Date(getLocalItemCreated()));
 		String size = AndroidUtils.formatSize(context, getLocalItemSize());
 		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
+	}
+
+	public long getLastModified() {
+		long lastModified = 0;
+		for (LocalItem item : localItems) {
+			if (item.getLastModified() > lastModified) {
+				lastModified = item.getLastModified();
+			}
+		}
+		return lastModified;
 	}
 }

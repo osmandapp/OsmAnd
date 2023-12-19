@@ -169,8 +169,8 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	@NonNull
-	private List<LocalItem> getSortedItems() {
-		List<LocalItem> items = new ArrayList<>();
+	private List<BaseLocalItem> getSortedItems() {
+		List<BaseLocalItem> items = new ArrayList<>();
 
 		Map<CategoryType, LocalCategory> categories = getCategories();
 		if (!Algorithms.isEmpty(categories)) {
@@ -192,7 +192,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		return items;
 	}
 
-	private void sortItems(@NonNull List<LocalItem> items) {
+	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type == MAP_DATA) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(app, sortMode));
