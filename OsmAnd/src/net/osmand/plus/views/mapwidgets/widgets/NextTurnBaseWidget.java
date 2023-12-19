@@ -120,7 +120,7 @@ public class NextTurnBaseWidget extends TextInfoWidget {
 
 	private void updateDistance() {
 		int deviatePath = turnDrawable.isDeviatedFromRoute() ? deviatedPath : nextTurnDistance;
-		String distance = OsmAndFormatter.getFormattedRoundedDistance(app, deviatePath);
+		String distance = OsmAndFormatter.getFormattedDistance(deviatePath, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
 
 		TurnType turnType = getTurnType();
 		if (turnType != null) {

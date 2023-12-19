@@ -198,7 +198,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		double roundedDist = OsmAndFormatter.calculateRoundedDist(value, app);
-		String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, false);
+		String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		distanceSplitOptions.put(formattedDist, roundedDist);
 
 		if (displayGroups.size() > 0) {

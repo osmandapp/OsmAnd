@@ -136,7 +136,8 @@ public class LanesWidget extends MapWidget {
 				lanesShadowText.setText("");
 				lanesText.setText("");
 			} else {
-				String formattedDistance = OsmAndFormatter.getFormattedRoundedDistance(app, distance);
+				String formattedDistance = OsmAndFormatter.getFormattedDistance(distance, app,
+						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				lanesText.setText(formattedDistance);
 				lanesShadowText.setText(formattedDistance);
 			}

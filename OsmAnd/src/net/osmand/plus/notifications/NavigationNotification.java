@@ -138,7 +138,8 @@ public class NavigationNotification extends OsmandNotification {
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
 			color = app.getColor(R.color.osmand_orange);
 
-			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app);
+			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app,
+					OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000L));
@@ -184,12 +185,13 @@ public class NavigationNotification extends OsmandNotification {
 					turnBitmap = drawableToBitmap(drawable);
 				}
 
-				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app)
+				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS)
 						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app, true) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
 					if (nextNextTurnDistance > 0) {
-						notificationText.append(" ").append(OsmAndFormatter.getFormattedDistance(nextNextTurnDistance, app));
+						notificationText.append(" ").append(OsmAndFormatter.getFormattedDistance(nextNextTurnDistance, app,
+								OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
 					}
 					notificationText.append("\n");
 				}
@@ -200,7 +202,8 @@ public class NavigationNotification extends OsmandNotification {
 					List<TargetPoint> intermediatePoints = app.getTargetPointsHelper().getIntermediatePoints();
 					if (nextIntermediateIndex < intermediatePoints.size()) {
 						TargetPoint nextIntermediate = intermediatePoints.get(nextIntermediateIndex);
-						notificationText.append(OsmAndFormatter.getFormattedDistance(distanceToNextIntermediate, app))
+						notificationText.append(OsmAndFormatter.getFormattedDistance(distanceToNextIntermediate, app,
+										OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS))
 								.append(" • ")
 								.append(nextIntermediate.getOnlyName());
 						notificationText.append("\n");

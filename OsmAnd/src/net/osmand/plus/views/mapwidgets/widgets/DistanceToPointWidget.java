@@ -63,7 +63,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 				setText(isVerticalWidget() ? NO_VALUE : null, null);
 			} else {
 				FormattedValue formattedDistance = OsmAndFormatter
-						.getFormattedDistanceValue(cachedMeters, app, true, settings.METRIC_SYSTEM.get());
+						.getFormattedDistanceValue(cachedMeters, app);
 				setText(formattedDistance.value, formattedDistance.unit);
 			}
 		}
