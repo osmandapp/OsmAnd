@@ -83,6 +83,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1150,10 +1151,10 @@ public class ResourceManager {
 		return getAmenityRepositories(true);
 	}
 
-	public List<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
-		List<String> fileNames = new ArrayList<>(amenityRepositories.keySet());
+	public LinkedList<AmenityIndexRepository> getAmenityRepositories(boolean includeTravel) {
+		LinkedList<String> fileNames = new LinkedList<>(amenityRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		List<AmenityIndexRepository> res = new ArrayList<>();
+		LinkedList<AmenityIndexRepository> res = new LinkedList<>();
 		for (String fileName : fileNames) {
 			if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 				if (!includeTravel || !context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
@@ -1178,7 +1179,7 @@ public class ResourceManager {
 	                                     double leftLongitude, double bottomLatitude,
 	                                     double rightLongitude, int zoom, boolean includeTravel,
 	                                     ResultMatcher<Amenity> matcher) {
-		List<Amenity> amenities = new ArrayList<>();
+		HashMap<Integer, List<Amenity>> sortedResult = new HashMap<>();
 		searchAmenitiesInProgress = true;
 		try {
 			if (!filter.isEmpty()) {
@@ -1186,6 +1187,7 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
+				int cnt = 0;
 				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
@@ -1194,16 +1196,31 @@ public class ResourceManager {
 					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
 						List<Amenity> r = index.searchAmenities(top31,
 								left31, bottom31, right31, zoom, filter, matcher);
-						if (r != null) {
-							amenities.addAll(r);
-						}
+						sortedResult.put(cnt, r);
+						cnt++;
 					}
 				}
 			}
 		} finally {
 			searchAmenitiesInProgress = false;
 		}
-		return amenities;
+
+		// filter amenities for live-updates map
+		HashSet<Long> amenitiesHash = new HashSet<>();
+		List<Amenity> res = new ArrayList<>();
+		for (Map.Entry<Integer, List<Amenity>> entry : sortedResult.entrySet()) {
+			for (Amenity a : entry.getValue()) {
+				if (!amenitiesHash.contains(a.getId())) {
+					res.add(a);
+				} else {
+					log.info("Repeated amenity " + a.getId() + " " + a.toString());
+				}
+			}
+			for (Amenity a : entry.getValue()) {
+				amenitiesHash.add(a.getId());
+			}
+		}
+		return res;
 	}
 
 	@NonNull
