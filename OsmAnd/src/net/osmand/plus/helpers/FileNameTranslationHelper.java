@@ -164,11 +164,11 @@ public class FileNameTranslationHelper {
 		return null;
 	}
 
-	public static String getFontName(String basename) {
+	public static String getFontName(@NonNull String basename) {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
-	private static String getBasename(Context ctx, String fileName) {
+	public static String getBasename(@NonNull Context ctx, @NonNull String fileName) {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
