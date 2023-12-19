@@ -5417,23 +5417,27 @@
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Ajout de la possibilité de changer les assignements de touches pour les périphériques externes
+    <string name="release_4_6">• Android Auto : ajout du mode 3D et amélioration de l\'écran de recherche
 \n
-\n• Ajout du gadget \"finesse de l\'aile\"
+\n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux
 \n
-\n• Ajout de filtres et de dossiers intelligents pour les traces
+\n• Amélioration des panneaux de gadgets supérieur et inférieur pour accueillir tous les widgets
 \n
-\n• Ajout des lignes pour les gadgets en haut et en bas avec support de tous les gadgets
+\n• Amélioration de la gestion des ressources locales
 \n
-\n• Ajout du support pour le gadget de température ANT+
+\n• Assignation des boutons personnalisable pour les contrôleurs externes
 \n
-\n• Gestion de la mémoire améliorée pour les grandes traces GPX
+\n• Nouveaux gadgets : \"Rapport de glisse\" et \"Position du soleil\"
 \n
-\n• Mise à jour de la gestion des ressources locales dans \"Téléchargements\"
+\n• OsmAnd Cloud : Accès aux fichiers supprimés
 \n
-\n• Ajout du gadget \"RAM disponible\"
+\n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique
 \n
-\n• Correction de bug avec la barre d\'état transparente
+\n• Résolution des problèmes concernant la barre d\'état transparente
+\n
+\n• Ajout de la prise en charge du widget de température ANT+
+\n
+\n• Introduction du widget \"RAM disponible\"
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transport de bébés</string>
