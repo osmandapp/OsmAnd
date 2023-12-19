@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
@@ -25,7 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
-import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
@@ -39,6 +39,7 @@ import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -84,7 +85,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity());
+		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
+		TrackFolder folder = new TrackFolder(gpxDir, null);
+		setRootFolder(folder);
+		setSelectedFolder(folder);
+
+		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity(), folder);
 		trackFoldersHelper.setLoadTracksListener(getLoadTracksListener());
 
 		visibleTracksGroup = new VisibleTracksGroup(app);
@@ -126,7 +132,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.onResume();
 		smartFolderHelper.addUpdateListener(this);
 		if (!trackFoldersHelper.isImporting()) {
-			if (rootFolder == null && !trackFoldersHelper.isLoadingTracks()) {
+			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
 				reloadTracks();
 			} else {
 				updateContent();
@@ -322,7 +328,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
-	public void showSmartFolderDetails(SmartFolder folder) {
+	public void showSmartFolderDetails(@NonNull SmartFolder folder) {
 		openSmartFolder(folder);
 	}
 
@@ -450,6 +456,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			@Override
 			public void loadTracksStarted() {
 				updateProgressVisibility(true);
+			}
+
+			@Override
+			public void loadTracksProgress(@NonNull TrackItem[] items) {
+				updateContent();
+				updateFragmentsFolders();
 			}
 
 			@Override

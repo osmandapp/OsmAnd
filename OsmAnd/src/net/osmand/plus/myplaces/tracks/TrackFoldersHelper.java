@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
@@ -30,8 +29,8 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet.SaveExistingFileListener;
@@ -72,6 +71,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
@@ -80,6 +81,8 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private final ImportHelper importHelper;
 	private final GpxSelectionHelper gpxSelectionHelper;
 	private final MyPlacesActivity activity;
+	private final TrackFolder rootFolder;
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -88,8 +91,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 	private boolean importing;
 
-	public TrackFoldersHelper(@NonNull MyPlacesActivity activity) {
+	public TrackFoldersHelper(@NonNull MyPlacesActivity activity, @NonNull TrackFolder rootFolder) {
 		this.activity = activity;
+		this.rootFolder = rootFolder;
 		this.app = activity.getMyApplication();
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
@@ -115,9 +119,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void reloadTracks() {
-		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, loadTracksListener);
-		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		rootFolder.clearData();
+		asyncLoader = new TrackFolderLoaderTask(app, rootFolder, loadTracksListener);
+		asyncLoader.executeOnExecutor(singleThreadExecutor);
 	}
 
 	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
@@ -156,7 +160,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_import)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_import))
 				.setOnClickListener(v -> importTracks(fragment))
-						.showTopDivider(true)
+				.showTopDivider(true)
 				.create());
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
