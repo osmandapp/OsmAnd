@@ -6,12 +6,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.BaseLocalItem;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -38,14 +36,14 @@ public class LocalItemInfoCard extends BaseCard {
 	protected void updateContent() {
 		ViewGroup container = view.findViewById(R.id.container);
 
-		String type = app.getString(localItem.getLocalItemType().getTitleId());
+		String type = localItem.getType().toHumanString(app);
 		setupRow(container.findViewById(R.id.type), getString(R.string.shared_string_type), type, false);
 
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
-		String date = format.format(localItem.getLocalItemCreated());
+		String date = format.format(localItem.getLastModified());
 		setupRow(container.findViewById(R.id.data), getString(R.string.shared_string_created), date, false);
 
-		String size = AndroidUtils.formatSize(app, localItem.getLocalItemSize());
+		String size = AndroidUtils.formatSize(app, localItem.getSize());
 		setupRow(container.findViewById(R.id.size), getString(R.string.shared_string_size), size, true);
 	}
 

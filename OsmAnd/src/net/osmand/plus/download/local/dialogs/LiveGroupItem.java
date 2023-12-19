@@ -1,5 +1,6 @@
 package net.osmand.plus.download.local.dialogs;
 
+import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
 import static net.osmand.plus.download.local.LocalItemUtils.getFormattedDate;
 
 import android.content.Context;
@@ -18,56 +19,65 @@ import java.util.List;
 
 public class LiveGroupItem extends BaseLocalItem {
 
-	public String name;
-	private final List<LocalItem> localItems = new ArrayList<>();
+	private final String name;
+	private final List<LocalItem> items = new ArrayList<>();
 
-	public LiveGroupItem(String name) {
-		super(LocalItemType.LIVE_UPDATES);
+	public LiveGroupItem(@NonNull String name) {
+		super(LIVE_UPDATES);
 		this.name = name;
 	}
 
-	public void addLocalItem(LocalItem localItem) {
-		localItems.add(localItem);
+	@NonNull
+	public List<LocalItem> getItems() {
+		return items;
 	}
 
+	public void addLocalItem(@NonNull LocalItem item) {
+		items.add(item);
+	}
+
+	@NonNull
 	@Override
-	public LocalItemType getLocalItemType() {
-		return LocalItemType.LIVE_UPDATES;
+	public LocalItemType getType() {
+		return LIVE_UPDATES;
 	}
 
-	@Override
-	public long getLocalItemCreated() {
-		return localItems.isEmpty() ? 0 : localItems.get(0).getLastModified();
-	}
-
-	@Override
-	public long getLocalItemSize() {
-		long totalSize = 0;
-		for (LocalItem item : localItems) {
-			totalSize += item.getSize();
-		}
-		return totalSize;
-	}
-
+	@NonNull
 	@Override
 	public CharSequence getName(@NonNull Context context) {
 		return name;
 	}
 
+	@NonNull
 	@Override
-	public String getDescription(Context context) {
-		String formattedDate = getFormattedDate(new Date(getLocalItemCreated()));
-		String size = AndroidUtils.formatSize(context, getLocalItemSize());
+	public String getDescription(@NonNull Context context) {
+		String formattedDate = getFormattedDate(new Date(getLastModified()));
+		String size = AndroidUtils.formatSize(context, getSize());
 		return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
+	}
+
+	@Override
+	public long getSize() {
+		long totalSize = 0;
+		for (LocalItem item : items) {
+			totalSize += item.getSize();
+		}
+		return totalSize;
 	}
 
 	public long getLastModified() {
 		long lastModified = 0;
-		for (LocalItem item : localItems) {
+		for (LocalItem item : items) {
 			if (item.getLastModified() > lastModified) {
 				lastModified = item.getLastModified();
 			}
 		}
 		return lastModified;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return name;
 	}
 }

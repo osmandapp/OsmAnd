@@ -59,7 +59,7 @@ public class ItemMenuProvider implements MenuProvider {
 	private final LocalBaseFragment fragment;
 	private final boolean nightMode;
 
-	private BaseLocalItem baseLocalItem;
+	private BaseLocalItem item;
 
 	@ColorRes
 	private int colorId;
@@ -77,8 +77,8 @@ public class ItemMenuProvider implements MenuProvider {
 		this.colorId = colorId;
 	}
 
-	public void setLocalItem(@NonNull BaseLocalItem baselocalItem) {
-		this.baseLocalItem = baselocalItem;
+	public void setItem(@NonNull BaseLocalItem item) {
+		this.item = item;
 	}
 
 	public void setShowInfoItem(boolean showInfoItem) {
@@ -99,26 +99,26 @@ public class ItemMenuProvider implements MenuProvider {
 
 	@Override
 	public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		MenuItem menuItem = null;
+		MenuItem menuItem;
 		if (showInfoItem) {
 			menuItem = menu.add(0, 0, Menu.NONE, R.string.info_button);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_info_outlined, colorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
+			menuItem.setOnMenuItemClickListener(i -> {
 				FragmentManager manager = fragment.getFragmentManager();
 				if (manager != null) {
-					LocalItemFragment.showInstance(manager, baseLocalItem, fragment);
+					LocalItemFragment.showInstance(manager, item, fragment);
 				}
 				return true;
 			});
 		}
-		if (baseLocalItem instanceof LocalItem) {
-			LocalItem localItem = (LocalItem) baseLocalItem;
-			LocalItemType type = localItem.getType();
+		LocalItemType type = item.getType();
+		if (item instanceof LocalItem) {
+			LocalItem localItem = (LocalItem) item;
 
 			boolean backuped = localItem.isBackuped(app);
 			if (type.isBackupSupported() || backuped) {
-				addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
+				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
 			}
 			if (type.isUpdateSupported()) {
 				menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
@@ -166,43 +166,41 @@ public class ItemMenuProvider implements MenuProvider {
 				menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
 				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				menuItem.setOnMenuItemClickListener(item -> {
-					exportItem(exportType, localItem);
-					return true;
-				});
-			}
-			if (type.isDeletionSupported()) {
-				menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
-				menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
-				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-				menuItem.setOnMenuItemClickListener(item -> {
-					FragmentManager manager = fragment.getFragmentManager();
-					if (manager != null) {
-						DeleteConfirmationBottomSheet.showInstance(manager, fragment, localItem);
-					}
+					exportItem(localItem, exportType);
 					return true;
 				});
 			}
 		}
+		if (type.isDeletionSupported()) {
+			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
+			menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
+			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem.setOnMenuItemClickListener(i -> {
+				FragmentManager manager = fragment.getFragmentManager();
+				if (manager != null) {
+					DeleteConfirmationBottomSheet.showInstance(manager, fragment, item);
+				}
+				return true;
+			});
+		}
 	}
 
-	private void addOperationItem(@NonNull Menu menu, @NonNull OperationType type) {
+	private void addOperationItem(@NonNull Menu menu, @NonNull LocalItem localItem, @NonNull OperationType type) {
 		MenuItem menuItem = menu.add(0, type.getTitleId(), Menu.NONE, type.getTitleId());
 		menuItem.setIcon(getIcon(type.getIconId(), colorId));
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		menuItem.setOnMenuItemClickListener(item -> {
-			performOperation(type);
+			performOperation(localItem, type);
 			return true;
 		});
 	}
 
-	public void performOperation(@NonNull OperationType type) {
-		if (baseLocalItem instanceof LocalItem) {
-			LocalOperationTask task = new LocalOperationTask(app, type, fragment);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (LocalItem) baseLocalItem);
-		}
+	public void performOperation(@NonNull LocalItem localItem, @NonNull OperationType type) {
+		LocalOperationTask task = new LocalOperationTask(app, type, fragment);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 	}
 
-	private void exportItem(@NonNull ExportSettingsType settingsType, LocalItem localItem) {
+	private void exportItem(@NonNull LocalItem localItem, @NonNull ExportSettingsType settingsType) {
 		List<File> selectedFiles = new ArrayList<>();
 		selectedFiles.add(localItem.getFile());
 
@@ -214,7 +212,7 @@ public class ItemMenuProvider implements MenuProvider {
 		MapActivity.launchMapActivityMoveToTop(activity, null, null, bundle);
 	}
 
-	private void clearTiles(LocalItem localItem) {
+	private void clearTiles(@NonNull LocalItem localItem) {
 		Context context = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
@@ -222,11 +220,11 @@ public class ItemMenuProvider implements MenuProvider {
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setMessage(app.getString(R.string.clear_confirmation_msg, baseLocalItem.getName(context)));
+		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));
 		builder.show();
 	}
 
-	private void updateItem(LocalItem localItem) {
+	private void updateItem(@NonNull LocalItem localItem) {
 		File file = localItem.getFile();
 		IndexItem indexItem = fragment.getItemsToUpdate().get(file.getName());
 		if (indexItem != null) {

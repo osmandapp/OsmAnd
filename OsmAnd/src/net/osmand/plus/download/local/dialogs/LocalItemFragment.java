@@ -62,7 +62,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 
 		menuProvider = new ItemMenuProvider(requireDownloadActivity(), this);
 		menuProvider.setShowInfoItem(false);
-		menuProvider.setLocalItem(localItem);
+		menuProvider.setItem(localItem);
 		menuProvider.setColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
 	}
 
@@ -96,7 +96,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	private void updateToolbar() {
-		menuProvider.setLocalItem(localItem);
+		menuProvider.setItem(localItem);
 		toolbarLayout.setTitle(localItem.getName(app).toString());
 	}
 

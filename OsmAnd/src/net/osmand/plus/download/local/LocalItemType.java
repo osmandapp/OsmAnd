@@ -49,9 +49,9 @@ public enum LocalItemType {
 		this.iconId = iconId;
 	}
 
-	@NonNull
-	public String toHumanString(@NonNull Context ctx) {
-		return ctx.getString(titleId);
+	@StringRes
+	public int getTitleId() {
+		return titleId;
 	}
 
 	@DrawableRes
@@ -59,9 +59,9 @@ public enum LocalItemType {
 		return iconId;
 	}
 
-	@StringRes
-	public int getTitleId(){
-		return titleId;
+	@NonNull
+	public String toHumanString(@NonNull Context ctx) {
+		return ctx.getString(titleId);
 	}
 
 	@NonNull
@@ -101,7 +101,7 @@ public enum LocalItemType {
 	}
 
 	public boolean isDeletionSupported() {
-		return isDownloadType();
+		return isDownloadType() || Algorithms.equalsToAny(this, LIVE_UPDATES);
 	}
 
 	public boolean isBackupSupported() {

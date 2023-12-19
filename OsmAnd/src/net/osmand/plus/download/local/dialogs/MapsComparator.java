@@ -6,7 +6,6 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.BaseLocalItem;
-import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.settings.enums.MapsSortMode;
 
 import java.util.Comparator;
@@ -36,9 +35,9 @@ public class MapsComparator implements Comparator<BaseLocalItem> {
 			case DATE_DESCENDING:
 				return Long.compare(item1.getLastModified(), item2.getLastModified());
 			case SIZE_DESCENDING:
-				return -Long.compare(item1.getLocalItemSize(), item2.getLocalItemSize());
+				return -Long.compare(item1.getSize(), item2.getSize());
 			case SIZE_ASCENDING:
-				return Long.compare(item1.getLocalItemSize(), item2.getLocalItemSize());
+				return Long.compare(item1.getSize(), item2.getSize());
 		}
 		return 0;
 	}

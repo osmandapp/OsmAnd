@@ -42,7 +42,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -167,18 +166,12 @@ public class GroupMenuProvider implements MenuProvider {
 	private void showConfirmation(@NonNull OperationType type) {
 		String action = app.getString(type.getTitleId());
 		ItemsSelectionHelper<BaseLocalItem> helper = fragment.getSelectionHelper();
-		Set<BaseLocalItem> selectedBaseItems = helper.getSelectedItems();
-		Set<LocalItem> selectedItems = new HashSet<>();
+		Set<BaseLocalItem> selectedItems = helper.getSelectedItems();
 
-		for (BaseLocalItem item : selectedBaseItems) {
-			if (item instanceof LocalItem) {
-				selectedItems.add((LocalItem) item);
-			}
-		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setMessage(app.getString(R.string.local_index_action_do, action.toLowerCase(), String.valueOf(helper.getSelectedItemsSize())));
 		builder.setPositiveButton(action, (dialog, which) -> {
-			fragment.performOperation(type, selectedItems.toArray(new LocalItem[0]));
+			fragment.performOperation(type, selectedItems.toArray(new BaseLocalItem[0]));
 			fragment.setSelectionMode(false);
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);

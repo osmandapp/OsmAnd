@@ -263,7 +263,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			ItemMenuProvider menuProvider = new ItemMenuProvider(activity, this);
-			menuProvider.setLocalItem(item);
+			menuProvider.setItem(item);
 			menuProvider.setColorId(ColorUtilities.getDefaultIconColorId(nightMode));
 			menuProvider.showMenu(view);
 		}

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -24,20 +23,17 @@ import java.util.List;
 public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	protected static final int LIST_ITEM_TYPE = 0;
-	public static final int LIST_HEADER_TYPE = 1;
-	public static final int MEMORY_USAGE_TYPE = 2;
+	private static final int LIST_HEADER_TYPE = 1;
+	private static final int MEMORY_USAGE_TYPE = 2;
 
 	private final List<Object> items = new ArrayList<>();
 
-	@Nullable
 	private final LocalItemListener listener;
-	@Nullable
-
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 	private boolean selectionMode;
 
-	public LocalItemsAdapter(@NonNull Context context, @Nullable LocalItemListener listener, boolean nightMode) {
+	public LocalItemsAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
 		this.listener = listener;
 		this.nightMode = nightMode;
 		themedInflater = UiUtilities.getInflater(context, nightMode);
@@ -100,7 +96,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
-		if (object instanceof LocalItem || object instanceof LiveGroupItem) {
+		if (object instanceof BaseLocalItem) {
 			return LIST_ITEM_TYPE;
 		} else if (object instanceof HeaderGroup) {
 			return LIST_HEADER_TYPE;

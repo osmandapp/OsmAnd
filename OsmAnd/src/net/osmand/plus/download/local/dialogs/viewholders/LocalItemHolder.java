@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
@@ -26,7 +25,6 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
-	@Nullable
 	private final LocalItemListener listener;
 
 	private final TextView title;
@@ -37,7 +35,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	private final View bottomShadow;
 	private final View bottomDivider;
 
-	public LocalItemHolder(@NonNull View itemView, @Nullable LocalItemListener listener, boolean nightMode) {
+	public LocalItemHolder(@NonNull View itemView, @NonNull LocalItemListener listener, boolean nightMode) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
@@ -85,11 +83,13 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private Drawable getIcon(@NonNull BaseLocalItem item) {
 		LocalItemType type = item.getType();
-		if (item instanceof LocalItem && type.isDownloadType() && !((LocalItem) item).isBackuped(app) && listener != null) {
-			boolean shouldUpdate = listener.itemUpdateAvailable((LocalItem) item);
-			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
-		} else {
-			return uiUtilities.getThemedIcon(type.getIconId());
+		if (item instanceof LocalItem) {
+			LocalItem localItem = (LocalItem) item;
+			if (type.isDownloadType() && !localItem.isBackuped(app)) {
+				boolean shouldUpdate = listener.itemUpdateAvailable(localItem);
+				return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
+			}
 		}
+		return uiUtilities.getThemedIcon(type.getIconId());
 	}
 }

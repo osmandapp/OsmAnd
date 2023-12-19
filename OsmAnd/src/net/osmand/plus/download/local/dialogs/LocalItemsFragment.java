@@ -2,9 +2,7 @@ package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
-import static net.osmand.plus.helpers.FileNameTranslationHelper.getBasename;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.utils.ColorUtilities.getAppBarColorId;
 import static net.osmand.plus.utils.ColorUtilities.getToolbarActiveColorId;
 
@@ -53,7 +51,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -199,7 +196,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		LocalGroup group = getGroup();
 		if (group != null) {
 			for (BaseLocalItem item : group.getItems()) {
-				if (item instanceof LocalItem && ((LocalItem)item).isBackuped(app)) {
+				if (item instanceof LocalItem && ((LocalItem) item).isBackuped(app)) {
 					backupedItems.add(item);
 				} else {
 					activeItems.add(item);
@@ -323,7 +320,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@Override
 	public void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
-		itemMenuProvider.setLocalItem(item);
+		itemMenuProvider.setItem(item);
 		itemMenuProvider.showMenu(view);
 	}
 
@@ -350,11 +347,11 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onOperationProgress(@NonNull OperationType type, @NonNull LocalItem... values) {
+	public void onOperationProgress(@NonNull OperationType type, @NonNull BaseLocalItem... values) {
 		LocalGroup group = getGroup();
 		if (type == DELETE_OPERATION && group != null) {
-			for (LocalItem item : values) {
-				group.removeItem(item);
+			for (BaseLocalItem item : values) {
+				group.removeItem(app, item);
 			}
 		}
 		if (isAdded()) {

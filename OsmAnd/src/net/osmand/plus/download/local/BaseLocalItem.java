@@ -8,7 +8,7 @@ public abstract class BaseLocalItem {
 
 	protected final LocalItemType type;
 
-	protected BaseLocalItem(LocalItemType type) {
+	protected BaseLocalItem(@NonNull LocalItemType type) {
 		this.type = type;
 	}
 
@@ -17,15 +17,13 @@ public abstract class BaseLocalItem {
 		return type;
 	}
 
-	public abstract LocalItemType getLocalItemType();
-
-	public abstract long getLocalItemCreated();
-
-	public abstract long getLocalItemSize();
-
+	@NonNull
 	public abstract CharSequence getName(@NonNull Context context);
 
-	public abstract String getDescription(Context context);
+	@NonNull
+	public abstract String getDescription(@NonNull Context context);
+
+	public abstract long getSize();
 
 	public abstract long getLastModified();
 }
