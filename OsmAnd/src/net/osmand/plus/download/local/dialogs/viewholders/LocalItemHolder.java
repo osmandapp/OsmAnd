@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
@@ -56,7 +57,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setBackground(itemView.findViewById(R.id.selectable_list_item), drawable);
 	}
 
-	public void bindView(@NonNull LocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
+	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
 		title.setText(item.getName(context));
 		description.setText(item.getDescription(context));
@@ -82,10 +83,10 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	}
 
 	@NonNull
-	private Drawable getIcon(@NonNull LocalItem item) {
+	private Drawable getIcon(@NonNull BaseLocalItem item) {
 		LocalItemType type = item.getType();
-		if (type.isDownloadType() && !item.isBackuped(app) && listener != null) {
-			boolean shouldUpdate = listener.itemUpdateAvailable(item);
+		if (item instanceof LocalItem && type.isDownloadType() && !((LocalItem) item).isBackuped(app) && listener != null) {
+			boolean shouldUpdate = listener.itemUpdateAvailable((LocalItem) item);
 			return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
 		} else {
 			return uiUtilities.getThemedIcon(type.getIconId());

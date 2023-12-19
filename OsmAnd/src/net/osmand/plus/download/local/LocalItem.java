@@ -41,10 +41,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.Date;
 
-public class LocalItem implements Comparable<LocalItem>, LocalItemInfoCard.LocalItemInterface {
+public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 
 	private final File file;
-	private final LocalItemType type;
 	private final String path;
 	private final String fileName;
 	private final long size;
@@ -55,8 +54,8 @@ public class LocalItem implements Comparable<LocalItem>, LocalItemInfoCard.Local
 
 
 	public LocalItem(@NonNull File file, @NonNull LocalItemType type) {
+		super(type);
 		this.file = file;
-		this.type = type;
 		this.fileName = file.getName();
 		this.path = file.getAbsolutePath();
 		this.size = file.length();
@@ -66,11 +65,6 @@ public class LocalItem implements Comparable<LocalItem>, LocalItemInfoCard.Local
 	@NonNull
 	public File getFile() {
 		return file;
-	}
-
-	@NonNull
-	public LocalItemType getType() {
-		return type;
 	}
 
 	@NonNull

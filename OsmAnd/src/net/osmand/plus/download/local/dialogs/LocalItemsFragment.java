@@ -2,7 +2,9 @@ package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.DownloadActivity.LOCAL_TAB_NUMBER;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.getBasename;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.utils.ColorUtilities.getAppBarColorId;
 import static net.osmand.plus.utils.ColorUtilities.getToolbarActiveColorId;
 
@@ -31,6 +33,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
@@ -50,6 +53,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +67,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private ImportHelper importHelper;
 	private ItemMenuProvider itemMenuProvider;
 	private GroupMenuProvider groupMenuProvider;
-	private final ItemsSelectionHelper<LocalItem> selectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<BaseLocalItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
@@ -89,7 +93,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@NonNull
-	public ItemsSelectionHelper<LocalItem> getSelectionHelper() {
+	public ItemsSelectionHelper<BaseLocalItem> getSelectionHelper() {
 		return selectionHelper;
 	}
 
@@ -166,7 +170,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new LocalItemsAdapter(view.getContext(), this, null, nightMode);
+		adapter = new LocalItemsAdapter(view.getContext(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -182,6 +186,29 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		List<Object> items = new ArrayList<>(getSortedItems());
 		if (!selectionMode) {
 			addMemoryInfo(items);
+		}
+		if (type == LocalItemType.LIVE_UPDATES) {
+			Map<String, LiveGroupItem> liveGroupItemMap = new HashMap<>();
+			List<Object> itemsToDelete = new ArrayList<>();
+
+			for (Object item : items) {
+				if (item instanceof LocalItem) {
+					LocalItem localItem = (LocalItem) item;
+					String basename = getBasename(app, localItem.getFileName());
+
+					String withoutNumber = basename.replaceAll("(_\\d*)*$", "");
+					String groupName = getNameToDisplay(withoutNumber, app);
+					LiveGroupItem groupItem = liveGroupItemMap.get(groupName);
+					if (groupItem == null) {
+						groupItem = new LiveGroupItem(groupName);
+						liveGroupItemMap.put(groupName, groupItem);
+					}
+					groupItem.addLocalItem(localItem);
+					itemsToDelete.add(item);
+				}
+			}
+			items.removeAll(itemsToDelete);
+			items.addAll(liveGroupItemMap.values());
 		}
 		adapter.setSelectionMode(selectionMode);
 		adapter.setItems(items);
@@ -294,7 +321,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public boolean isItemSelected(@NonNull LocalItem item) {
+	public boolean isItemSelected(@NonNull BaseLocalItem item) {
 		return selectionHelper.isItemSelected(item);
 	}
 
@@ -304,7 +331,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onItemSelected(@NonNull LocalItem item) {
+	public void onItemSelected(@NonNull BaseLocalItem item) {
 		if (selectionMode) {
 			boolean selected = !isItemSelected(item);
 			selectionHelper.onItemsSelected(Collections.singleton(item), selected);
@@ -318,7 +345,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
+	public void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
 		itemMenuProvider.setLocalItem(item);
 		itemMenuProvider.showMenu(view);
 	}
