@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -41,6 +42,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -152,7 +154,7 @@ public class GroupMenuProvider implements MenuProvider {
 				.setTitleId(type.getTitleId())
 				.setIcon(getContentIcon(type.getIconId()))
 				.setOnClickListener(v -> {
-					ItemsSelectionHelper<LocalItem> helper = fragment.getSelectionHelper();
+					ItemsSelectionHelper<BaseLocalItem> helper = fragment.getSelectionHelper();
 					if (helper.hasSelectedItems()) {
 						showConfirmation(type);
 					} else {
@@ -164,9 +166,15 @@ public class GroupMenuProvider implements MenuProvider {
 
 	private void showConfirmation(@NonNull OperationType type) {
 		String action = app.getString(type.getTitleId());
-		ItemsSelectionHelper<LocalItem> helper = fragment.getSelectionHelper();
-		Set<LocalItem> selectedItems = helper.getSelectedItems();
+		ItemsSelectionHelper<BaseLocalItem> helper = fragment.getSelectionHelper();
+		Set<BaseLocalItem> selectedBaseItems = helper.getSelectedItems();
+		Set<LocalItem> selectedItems = new HashSet<>();
 
+		for (BaseLocalItem item : selectedBaseItems) {
+			if (item instanceof LocalItem) {
+				selectedItems.add((LocalItem) item);
+			}
+		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		builder.setMessage(app.getString(R.string.local_index_action_do, action.toLowerCase(), String.valueOf(helper.getSelectedItemsSize())));
 		builder.setPositiveButton(action, (dialog, which) -> {

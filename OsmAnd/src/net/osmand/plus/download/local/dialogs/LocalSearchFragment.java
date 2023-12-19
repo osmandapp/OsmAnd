@@ -26,6 +26,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
@@ -250,7 +251,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	@Override
-	public void onItemSelected(@NonNull LocalItem item) {
+	public void onItemSelected(@NonNull BaseLocalItem item) {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
 			LocalItemFragment.showInstance(manager, item, this);
@@ -258,7 +259,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	@Override
-	public void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
+	public void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			ItemMenuProvider menuProvider = new ItemMenuProvider(activity, this);

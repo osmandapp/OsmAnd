@@ -35,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
@@ -58,7 +59,7 @@ public class ItemMenuProvider implements MenuProvider {
 	private final LocalBaseFragment fragment;
 	private final boolean nightMode;
 
-	private LocalItem localItem;
+	private BaseLocalItem baseLocalItem;
 
 	@ColorRes
 	private int colorId;
@@ -76,8 +77,8 @@ public class ItemMenuProvider implements MenuProvider {
 		this.colorId = colorId;
 	}
 
-	public void setLocalItem(@NonNull LocalItem localItem) {
-		this.localItem = localItem;
+	public void setLocalItem(@NonNull BaseLocalItem baselocalItem) {
+		this.baseLocalItem = baselocalItem;
 	}
 
 	public void setShowInfoItem(boolean showInfoItem) {
@@ -106,78 +107,81 @@ public class ItemMenuProvider implements MenuProvider {
 			menuItem.setOnMenuItemClickListener(item -> {
 				FragmentManager manager = fragment.getFragmentManager();
 				if (manager != null) {
-					LocalItemFragment.showInstance(manager, localItem, fragment);
+					LocalItemFragment.showInstance(manager, baseLocalItem, fragment);
 				}
 				return true;
 			});
 		}
-		LocalItemType type = localItem.getType();
+		if (baseLocalItem instanceof LocalItem) {
+			LocalItem localItem = (LocalItem) baseLocalItem;
+			LocalItemType type = localItem.getType();
 
-		boolean backuped = localItem.isBackuped(app);
-		if (type.isBackupSupported() || backuped) {
-			addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
-		}
-		if (type.isUpdateSupported()) {
-			menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				updateItem();
-				return true;
-			});
-		}
-		if (type == TILES_DATA) {
-			Object object = localItem.getAttachedObject();
-			if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
-					&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {
-				menuItem = menu.add(0, R.string.shared_string_edit, Menu.NONE, R.string.shared_string_edit);
-				menuItem.setIcon(getIcon(R.drawable.ic_action_edit_outlined, colorId));
+			boolean backuped = localItem.isBackuped(app);
+			if (type.isBackupSupported() || backuped) {
+				addOperationItem(menu, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
+			}
+			if (type.isUpdateSupported()) {
+				menuItem = menu.add(0, R.string.shared_string_update, Menu.NONE, R.string.shared_string_update);
+				menuItem.setIcon(getIcon(R.drawable.ic_action_update, colorId));
 				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 				menuItem.setOnMenuItemClickListener(item -> {
-					OsmandRasterMapsPlugin.defineNewEditLayer(activity, fragment, localItem.getFile().getName());
+					updateItem(localItem);
 					return true;
 				});
 			}
-			if ((object instanceof ITileSource) && ((ITileSource) object).couldBeDownloadedFromInternet()) {
-				menuItem = menu.add(0, R.string.clear_tile_data, Menu.NONE, R.string.clear_tile_data);
-				menuItem.setIcon(getIcon(R.drawable.ic_action_clear_all, colorId));
-				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-				menuItem.setOnMenuItemClickListener(item -> {
-					clearTiles();
-					return true;
-				});
-			}
-		}
-		if (type.isRenamingSupported()) {
-			menuItem = menu.add(0, R.string.shared_string_rename, Menu.NONE, R.string.shared_string_rename);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_edit_dark, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				FileUtils.renameFile(activity, localItem.getFile(), fragment, false);
-				return true;
-			});
-		}
-		ExportSettingsType exportType = type.getExportSettingsType();
-		if (!localItem.isHidden(app) && exportType != null) {
-			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				exportItem(exportType);
-				return true;
-			});
-		}
-		if (type.isDeletionSupported()) {
-			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
-			menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
-			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem.setOnMenuItemClickListener(item -> {
-				FragmentManager manager = fragment.getFragmentManager();
-				if (manager != null) {
-					DeleteConfirmationBottomSheet.showInstance(manager, fragment, localItem);
+			if (type == TILES_DATA) {
+				Object object = localItem.getAttachedObject();
+				if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
+						&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {
+					menuItem = menu.add(0, R.string.shared_string_edit, Menu.NONE, R.string.shared_string_edit);
+					menuItem.setIcon(getIcon(R.drawable.ic_action_edit_outlined, colorId));
+					menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					menuItem.setOnMenuItemClickListener(item -> {
+						OsmandRasterMapsPlugin.defineNewEditLayer(activity, fragment, localItem.getFile().getName());
+						return true;
+					});
 				}
-				return true;
-			});
+				if ((object instanceof ITileSource) && ((ITileSource) object).couldBeDownloadedFromInternet()) {
+					menuItem = menu.add(0, R.string.clear_tile_data, Menu.NONE, R.string.clear_tile_data);
+					menuItem.setIcon(getIcon(R.drawable.ic_action_clear_all, colorId));
+					menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+					menuItem.setOnMenuItemClickListener(item -> {
+						clearTiles(localItem);
+						return true;
+					});
+				}
+			}
+			if (type.isRenamingSupported()) {
+				menuItem = menu.add(0, R.string.shared_string_rename, Menu.NONE, R.string.shared_string_rename);
+				menuItem.setIcon(getIcon(R.drawable.ic_action_edit_dark, colorId));
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				menuItem.setOnMenuItemClickListener(item -> {
+					FileUtils.renameFile(activity, localItem.getFile(), fragment, false);
+					return true;
+				});
+			}
+			ExportSettingsType exportType = type.getExportSettingsType();
+			if (!localItem.isHidden(app) && exportType != null) {
+				menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
+				menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				menuItem.setOnMenuItemClickListener(item -> {
+					exportItem(exportType, localItem);
+					return true;
+				});
+			}
+			if (type.isDeletionSupported()) {
+				menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
+				menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, colorId));
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				menuItem.setOnMenuItemClickListener(item -> {
+					FragmentManager manager = fragment.getFragmentManager();
+					if (manager != null) {
+						DeleteConfirmationBottomSheet.showInstance(manager, fragment, localItem);
+					}
+					return true;
+				});
+			}
 		}
 	}
 
@@ -192,11 +196,13 @@ public class ItemMenuProvider implements MenuProvider {
 	}
 
 	public void performOperation(@NonNull OperationType type) {
-		LocalOperationTask task = new LocalOperationTask(app, type, fragment);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
+		if (baseLocalItem instanceof LocalItem) {
+			LocalOperationTask task = new LocalOperationTask(app, type, fragment);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (LocalItem) baseLocalItem);
+		}
 	}
 
-	private void exportItem(@NonNull ExportSettingsType settingsType) {
+	private void exportItem(@NonNull ExportSettingsType settingsType, LocalItem localItem) {
 		List<File> selectedFiles = new ArrayList<>();
 		selectedFiles.add(localItem.getFile());
 
@@ -206,10 +212,9 @@ public class ItemMenuProvider implements MenuProvider {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(SELECTED_TYPES, selectedTypes);
 		MapActivity.launchMapActivityMoveToTop(activity, null, null, bundle);
-
 	}
 
-	private void clearTiles() {
+	private void clearTiles(LocalItem localItem) {
 		Context context = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
@@ -217,11 +222,11 @@ public class ItemMenuProvider implements MenuProvider {
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setMessage(app.getString(R.string.clear_confirmation_msg, localItem.getName(context)));
+		builder.setMessage(app.getString(R.string.clear_confirmation_msg, baseLocalItem.getName(context)));
 		builder.show();
 	}
 
-	private void updateItem() {
+	private void updateItem(LocalItem localItem) {
 		File file = localItem.getFile();
 		IndexItem indexItem = fragment.getItemsToUpdate().get(file.getName());
 		if (indexItem != null) {

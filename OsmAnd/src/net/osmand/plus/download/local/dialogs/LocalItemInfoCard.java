@@ -10,6 +10,7 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -21,9 +22,9 @@ import java.util.Locale;
 
 public class LocalItemInfoCard extends BaseCard {
 
-	private final LocalItemInterface localItem;
+	private final BaseLocalItem localItem;
 
-	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull LocalItemInterface localItem) {
+	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull BaseLocalItem localItem) {
 		super(activity, false);
 		this.localItem = localItem;
 	}
@@ -56,14 +57,5 @@ public class LocalItemInfoCard extends BaseCard {
 		tvDescription.setText(description);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !lastItem);
-	}
-
-	public interface LocalItemInterface {
-
-		LocalItemType getLocalItemType();
-
-		long getLocalItemCreated();
-
-		long getLocalItemSize();
 	}
 }
