@@ -55,7 +55,17 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		String deviceId = deviceIdPref.getModeValue(getSelectedAppMode());
 		String deviceName = app.getString(R.string.shared_string_none);
 		boolean deviceFound = false;
-		if (!Algorithms.isEmpty(deviceId) && !ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
+		if (Algorithms.isEmpty(deviceId)) {
+			deviceName = app.getString(R.string.shared_string_none);
+		} else if (ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
+			AbstractDevice<?> connectedDevice = plugin.getDevice(dataType.getSensorType());
+			StringBuilder deviceNameBuilder = new StringBuilder(app.getString(R.string.any_connected));
+			if (connectedDevice != null) {
+				deviceNameBuilder.append(": ").append(connectedDevice.getName());
+				deviceName = deviceNameBuilder.toString();
+				deviceFound = true;
+			}
+		} else {
 			AbstractDevice<?> device = plugin.getDevice(deviceId);
 			if (device != null) {
 				deviceName = device.getName();
@@ -64,9 +74,9 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		}
 		pref.setSummary(deviceName);
 		if (deviceFound) {
-			pref.setIcon(getActiveIcon(dataType.getIcon()));
+			pref.setIcon(getActiveIcon(dataType.getSensorType().getIconId()));
 		} else {
-			pref.setIcon(getIcon(dataType.getIcon()));
+			pref.setIcon(getIcon(dataType.getSensorType().getIconId()));
 		}
 	}
 
@@ -79,18 +89,14 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 				ApplicationMode appMode = getSelectedAppMode();
 				SensorWidgetDataFieldType sensorType = dataType.getSensorType();
 				String deviceId = plugin.getWriteToTrackDeviceIdPref(dataType).getModeValue(appMode);
-				SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorType, deviceId);
+				SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorType, deviceId, true);
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public void selectNewDevice(@Nullable AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType) {
-		String deviceId = ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY;
-		if (device != null) {
-			deviceId = device.getDeviceId();
-		}
+	public void selectNewDevice(@Nullable String deviceId, @NonNull SensorWidgetDataFieldType requestedWidgetDataFieldType) {
 		ApplicationMode appMode = getSelectedAppMode();
 		switch (requestedWidgetDataFieldType) {
 			case BIKE_SPEED:

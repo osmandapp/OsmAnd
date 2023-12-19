@@ -429,6 +429,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 						app.showShortToastMessage(R.string.device_connected, getFormattedDevicePropertyValue(device, NAME));
 					}
 				}
+				externalSensorsPlugin.onDeviceConnected(device.getDeviceId());
 				break;
 			case DEPENDENCY_NOT_INSTALLED:
 				if (isAntDevice(device)) {
@@ -455,6 +456,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
+		externalSensorsPlugin.onDeviceDisconnected(device.getDeviceId());
 	}
 
 	@Override
