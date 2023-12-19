@@ -228,7 +228,7 @@ public class SearchHelper {
 					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
 						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
-								+ OsmAndFormatter.getFormattedDistance((float) rd, app, false));
+								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
 					}
 					builder.setOnClickListener(this::onClickSearchMore);
 					builder.setBrowsable(true);

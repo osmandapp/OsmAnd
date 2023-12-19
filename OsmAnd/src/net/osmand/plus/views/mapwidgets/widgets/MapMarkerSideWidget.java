@@ -140,9 +140,8 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 	private void updateDistance(int distance) {
 		cachedMeters = distance;
-		MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
 		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(distance,
-				app, false, metricsConstants);
+				app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		setText(formattedDistance.value, formattedDistance.unit);
 	}
 

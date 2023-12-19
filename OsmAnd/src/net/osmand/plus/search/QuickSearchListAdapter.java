@@ -265,7 +265,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -359,7 +359,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -667,7 +667,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			float rd = (float) OsmAndFormatter.calculateRoundedDist(
 					searchUICore.getNextSearchRadius(searchPhrase), app);
 			return app.getString(R.string.increase_search_radius_to,
-					OsmAndFormatter.getFormattedDistance(rd, app, false));
+					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		} else {
 			return app.getString(R.string.increase_search_radius);
 		}
