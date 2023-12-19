@@ -34,8 +34,6 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
-import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -56,8 +54,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment
-		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -297,33 +294,32 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		}
 	}
 
+	@NonNull
 	private List<String> getLinkedSensorNames() {
-		ApplicationMode selectedAppMode = getSelectedAppMode();
-		List<String> res = new ArrayList<>();
-		ExternalSensorsPlugin sensorsPlugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
-		if (sensorsPlugin != null) {
+		List<String> names = new ArrayList<>();
+		ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
+		if (plugin != null) {
+			ApplicationMode appMode = getSelectedAppMode();
 			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
-				CommonPreference<String> deviceIdPref = sensorsPlugin.getWriteToTrackDeviceIdPref(dataType);
-				String deviceId = deviceIdPref.getModeValue(selectedAppMode);
-				SensorWidgetDataFieldType widgetDataField = dataType.getSensorType();
+				CommonPreference<String> pref = plugin.getWriteToTrackDeviceIdPref(dataType);
+
+				String deviceId = pref.getModeValue(appMode);
 				if (!Algorithms.isEmpty(deviceId)) {
 					boolean sensorLinked = false;
 					if (!ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
-						if (sensorsPlugin.getDevice(deviceId) != null) {
+						if (plugin.getDevice(deviceId) != null) {
 							sensorLinked = true;
 						}
-					} else {
-						if (sensorsPlugin.getDevice(widgetDataField) != null) {
-							sensorLinked = true;
-						}
+					} else if (plugin.getDevice(dataType.getSensorType()) != null) {
+						sensorLinked = true;
 					}
 					if (sensorLinked) {
-						res.add(app.getString(dataType.getTitleId()));
+						names.add(getString(dataType.getTitleId()));
 					}
 				}
 			}
 		}
-		return res;
+		return names;
 	}
 
 	private void setupLiveMonitoringPref() {

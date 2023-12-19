@@ -19,6 +19,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.externalsensors.adapters.DevicesForWidgetAdapter;
+import net.osmand.plus.plugins.externalsensors.adapters.DevicesForWidgetAdapter.SelectDeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
@@ -31,21 +32,22 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.List;
 
-public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements DevicesForWidgetAdapter.SelectDeviceListener,
-		DeviceListener {
+public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements SelectDeviceListener, DeviceListener {
 
-	public static final String TAG = SelectExternalDeviceFragment.class.getSimpleName();
-	public static final String WIDGET_TYPE_KEY = "WIDGET_TYPE_KEY";
-	public static final String SELECTED_DEVICE_ID_KEY = "SELECTED_DEVICE_ID_KEY";
-	public static final String WITH_NONE_VARIANT_KEY = "WITH_NONE_VARIANT_KEY";
-	protected View contentView;
-	protected RecyclerView devicesList;
+	private static final String TAG = SelectExternalDeviceFragment.class.getSimpleName();
+	private static final String WIDGET_TYPE_KEY = "WIDGET_TYPE_KEY";
+	private static final String SELECTED_DEVICE_ID_KEY = "SELECTED_DEVICE_ID_KEY";
+	private static final String WITH_NONE_VARIANT_KEY = "WITH_NONE_VARIANT_KEY";
+
+	private View contentView;
+	private RecyclerView devicesList;
 	private DevicesForWidgetAdapter devicesListAdapter;
 	private AppBarLayout appBar;
 	private View noBluetoothCard;
+	private View stateNoBluetoothView;
+
 	private String selectedDeviceId;
 	private SensorWidgetDataFieldType widgetDataFieldType;
-	private View stateNoBluetoothView;
 	private boolean withNoneVariant;
 	private States currentState = States.CONTENT;
 

@@ -6,26 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment;
+import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment.SelectDeviceListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.CustomObjectPreference;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
-public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
+public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFragment implements SelectDeviceListener {
 
 	public static final String TAG = ExternalSettingsWriteToTrackSettingsFragment.class.getSimpleName();
-	private static final Log LOG = PlatformUtil.getLog(ExternalSettingsWriteToTrackSettingsFragment.class);
 
-	protected ExternalSensorsPlugin plugin;
+	private ExternalSensorsPlugin plugin;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +37,6 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		}
 	}
 
-
 	private void setupSensorSettings(@NonNull ExternalSensorTrackDataType dataType) {
 		CustomObjectPreference pref = findPreference(dataType.getPreferenceId());
 		if (pref == null) {
@@ -53,16 +49,17 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 		}
 		CommonPreference<String> deviceIdPref = plugin.getWriteToTrackDeviceIdPref(dataType);
 		String deviceId = deviceIdPref.getModeValue(getSelectedAppMode());
-		String deviceName = app.getString(R.string.shared_string_none);
+		String deviceName = getString(R.string.shared_string_none);
 		boolean deviceFound = false;
+
 		if (Algorithms.isEmpty(deviceId)) {
-			deviceName = app.getString(R.string.shared_string_none);
+			deviceName = getString(R.string.shared_string_none);
 		} else if (ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
 			AbstractDevice<?> connectedDevice = plugin.getDevice(dataType.getSensorType());
-			StringBuilder deviceNameBuilder = new StringBuilder(app.getString(R.string.any_connected));
+			StringBuilder builder = new StringBuilder(getString(R.string.any_connected));
 			if (connectedDevice != null) {
-				deviceNameBuilder.append(": ").append(connectedDevice.getName());
-				deviceName = deviceNameBuilder.toString();
+				builder.append(": ").append(connectedDevice.getName());
+				deviceName = builder.toString();
 				deviceFound = true;
 			}
 		} else {

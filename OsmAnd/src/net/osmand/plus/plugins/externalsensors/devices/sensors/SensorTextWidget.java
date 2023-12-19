@@ -25,16 +25,21 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public class SensorTextWidget extends SimpleWidget implements DeviceStateListener {
-	private AbstractSensor sensor;
+
+	private final ExternalSensorsPlugin plugin;
 	private final SensorWidgetDataFieldType fieldType;
-	private Number cachedNumber;
 	private final CommonPreference<String> deviceIdPref;
+
+	private AbstractSensor sensor;
 	private String externalDeviceId;
 	private AbstractDevice<?> currentDevice;
-	protected ExternalSensorsPlugin plugin;
+
+	private Number cachedNumber;
+
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId,
+	                        @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);

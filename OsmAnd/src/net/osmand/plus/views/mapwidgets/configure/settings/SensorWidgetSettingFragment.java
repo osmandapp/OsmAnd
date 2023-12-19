@@ -73,9 +73,9 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.sensor_widget_settings_fragment, container);
 		deviceIcon = view.findViewById(R.id.device_icon);
-		view.findViewById(R.id.widget_source_card).setOnClickListener((v) -> {
-			SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(), this, sensorWidget.getFieldType(), getSourceDeviceId(), false);
-		});
+		view.findViewById(R.id.widget_source_card).setOnClickListener((v) ->
+				SelectExternalDeviceFragment.showInstance(requireActivity().getSupportFragmentManager(),
+						this, sensorWidget.getFieldType(), getSourceDeviceId(), false));
 		themedInflater.inflate(R.layout.divider, container);
 		updateSourceDeviceUI();
 		super.setupContent(themedInflater, container);
@@ -104,12 +104,11 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 					connectedDevice = plugin.getDevice(sensorWidget.getFieldType());
 				}
 			}
-			StringBuilder anyConnectedTitle = new StringBuilder();
-			anyConnectedTitle.append(app.getString(R.string.any_connected));
+			StringBuilder builder = new StringBuilder(getString(R.string.any_connected));
 			if (connectedDevice != null) {
-				anyConnectedTitle.append(": ").append(connectedDevice.getName());
+				builder.append(": ").append(connectedDevice.getName());
 			}
-			((TextView) view.findViewById(R.id.device_name)).setText(anyConnectedTitle);
+			((TextView) view.findViewById(R.id.device_name)).setText(builder);
 		} else {
 			((TextView) view.findViewById(R.id.device_name)).setText(sourceDevice.getName());
 			DeviceType deviceType = sourceDevice.getDeviceType();

@@ -16,14 +16,16 @@ import net.osmand.util.Algorithms;
 
 public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 
+	private static final int NONE_ITEM_TYPE = 0;
+	private static final int ANY_CONNECTED_ITEM_TYPE = 1;
+	private static final int DEVICE_ITEM_TYPE = 2;
+
 	private final SelectDeviceListener deviceClickListener;
-	private String selectedDeviceId;
-	private int selectedPosition = -1;
 	private final SensorWidgetDataFieldType widgetDataFieldType;
 	private final boolean withNoneVariant;
-	private final int NONE_ITEM_TYPE = 0;
-	private final int ANY_CONNECTED_ITEM_TYPE = 1;
-	private final int DEVICE_ITEM_TYPE = 2;
+
+	private String selectedDeviceId;
+	private int selectedPosition = -1;
 
 	public DevicesForWidgetAdapter(@NonNull OsmandApplication app, boolean nightMode,
 	                               @NonNull SelectDeviceListener deviceClickListener,
@@ -42,19 +44,21 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		int itemType = getItemViewType(position);
+		boolean anyConnected = ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId);
 		if (itemType == NONE_ITEM_TYPE) {
-			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId) || !ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId) && plugin.getDevice(selectedDeviceId) == null);
+			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId)
+					|| !anyConnected && plugin.getDevice(selectedDeviceId) == null);
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);
 			holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_track_disabled, nightMode));
 		} else if (itemType == ANY_CONNECTED_ITEM_TYPE) {
-			holder.selectionMark.setChecked(ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId));
+			holder.selectionMark.setChecked(anyConnected);
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.any_connected);
 			holder.icon.setImageDrawable(uiUtils.getIcon(widgetDataFieldType.getIconId(), nightMode));
-		} else {
+		} else if (itemType == DEVICE_ITEM_TYPE) {
 			super.onBindViewHolder(holder, position - getNonDeviceItemsCount());
 			holder.description.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.GONE);
@@ -99,10 +103,6 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	}
 
 	private int getNonDeviceItemsCount() {
-		if (withNoneVariant) {
-			return 2;
-		} else {
-			return 1;
-		}
+		return withNoneVariant ? 2 : 1;
 	}
 }
