@@ -564,7 +564,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private int getPointIndexToReplace(@NonNull List<WptPt> points, @NonNull WptPt point) {
 		for (int i = 0; i < points.size(); i++) {
 			WptPt pt = points.get(i);
-			if (Algorithms.objectEquals(point, pt) && Algorithms.objectEquals(point.extensions, pt.extensions)) {
+			if (point == pt) {
 				return i;
 			}
 		}
