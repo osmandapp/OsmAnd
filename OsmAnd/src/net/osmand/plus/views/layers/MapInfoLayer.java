@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,10 +40,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
@@ -100,8 +100,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			bottomWidgetsPanel.addOnLayoutChangeListener(bottomPanelBoundsChangeListener);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 		} else {
-			topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
-			bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			if (topWidgetsPanel != null) {
+				topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
+			}
+			if (bottomWidgetsPanel != null) {
+				bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			}
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 
@@ -219,7 +223,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void updateRow(MapWidget widget){
+	public void updateRow(MapWidget widget) {
 		topWidgetsPanel.updateRow(widget);
 		bottomWidgetsPanel.updateRow(widget);
 	}
