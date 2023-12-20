@@ -5417,7 +5417,7 @@
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Android Auto : ajout du mode 3D et amélioration de l\'écran de recherche
+    <string name="release_4_6">• Android Auto : ajout du mode 3D
 \n
 \n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux
 \n
@@ -5575,4 +5575,7 @@
     <string name="shared_string_next_event">Prochain évènement</string>
     <string name="map_widget_sun_position">Position du soleil</string>
     <string name="map_widget_sun_position_desc">Ce gadget indique le temps restant avant le lever ou le coucher du soleil, en fonction de l\'heure actuelle.</string>
+    <string name="previous_row_has_complex_widget">La ligne précédente possède un gadget complexe</string>
+    <string name="complex_widget_alert">Le gadget %1$s ne peut être placé que sur sa propre ligne.</string>
+    <string name="precise_distance_numbers">Distances précises</string>
 </resources>
