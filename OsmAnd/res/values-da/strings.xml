@@ -5430,23 +5430,27 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Tilføjet mulighed for at ændre tildeling af taster for eksterne input-enheder
+    <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand og forbedret søgeskærm
 \n
-\n • Tilføjet \"Glidetal\"-modul
+\n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer
 \n
-\n • Tilføjet filtre og smarte mapper til spor
+\n • Forbedrede modulpaneler i top og bund til at rumme alle moduler
 \n
-\n • Tilføjet rækker til øverste og nederste modulpaneler med understøttelse af alle moduler
+\n • Forbedret lokal ressourceforvaltning
+\n
+\n • Brugerdefinerbar knaptilknytning til eksterne controllere
+\n
+\n • Nye moduler: \"Glidetal\" og \"Solens position\"
+\n
+\n • OsmAnd Cloud: Nu med adgang til slettede filer
+\n
+\n • Forbedret sporfarvning i hældningstilstand med ny symmetrisk gradient
+\n
+\n • Løst problemer med gennemsigtig statuslinje
 \n
 \n • Tilføjet understøttelse af ANT+ temperatur-modul
 \n
-\n • Bedre hukommelseshåndtering for store GPX-spor
-\n
-\n • Opdateret lokal ressourcehåndtering i Downloads
-\n
-\n • Tilføjet modul \"Tilgængelig RAM\"
-\n
-\n • Løst problemer med gennemsigtig statuslinje
+\n • Introduceret \"Tilgængelig RAM\"-modul
 \n
 \n</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
