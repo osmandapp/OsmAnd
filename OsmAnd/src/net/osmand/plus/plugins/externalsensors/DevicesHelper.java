@@ -35,12 +35,12 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DevicePreferencesListener;
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
-import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
@@ -429,6 +429,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 						app.showShortToastMessage(R.string.device_connected, getFormattedDevicePropertyValue(device, NAME));
 					}
 				}
+				externalSensorsPlugin.onDeviceConnected(device.getDeviceId());
 				break;
 			case DEPENDENCY_NOT_INSTALLED:
 				if (isAntDevice(device)) {
@@ -455,6 +456,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
+		externalSensorsPlugin.onDeviceDisconnected(device.getDeviceId());
 	}
 
 	@Override
