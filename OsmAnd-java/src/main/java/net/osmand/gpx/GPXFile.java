@@ -225,20 +225,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 	
 	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
-		int index = points.indexOf(existingPoint);
-		if (index == -1) {
-			return;
-		}
-		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
-		existingPoint.updatePoint(newWpt);
-		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
-				|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {
-			removePointFromGroup(existingPoint, prevGroupName);
-			GPXUtilities.PointsGroup pointsGroup = getOrCreateGroup(existingPoint);
-			pointsGroup.points.add(existingPoint);
-		}
-		modifiedTime = System.currentTimeMillis();
-		pointsModifiedTime = modifiedTime;
+		updateWptPt(existingPoint, newWpt, false);
 	}
 
 	public void updatePointsGroup(String prevGroupName, GPXUtilities.PointsGroup pointsGroup) {
