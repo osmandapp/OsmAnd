@@ -63,6 +63,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		long time = System.currentTimeMillis();
 		LOG.info("Start loading tracks in " + folder.getDirName());
 
+		folder.clearData();
 		List<TrackItem> progress = new ArrayList<>();
 		loadGPXFolder(folder, null, progress, true);
 		if (!progress.isEmpty()) {

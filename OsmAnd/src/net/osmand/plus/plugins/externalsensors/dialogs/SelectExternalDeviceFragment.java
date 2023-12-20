@@ -19,6 +19,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.externalsensors.adapters.DevicesForWidgetAdapter;
+import net.osmand.plus.plugins.externalsensors.adapters.DevicesForWidgetAdapter.SelectDeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
@@ -26,27 +27,29 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.List;
 
-public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements DevicesForWidgetAdapter.SelectDeviceListener,
-		DeviceListener {
+public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements SelectDeviceListener, DeviceListener {
 
-	public static final String TAG = SelectExternalDeviceFragment.class.getSimpleName();
-	public static final String WIDGET_TYPE_KEY = "WIDGET_TYPE_KEY";
-	public static final String SELECTED_DEVICE_ID_KEY = "SELECTED_DEVICE_ID_KEY";
-	protected View emptyView;
-	protected View contentView;
-	protected RecyclerView devicesList;
+	private static final String TAG = SelectExternalDeviceFragment.class.getSimpleName();
+	private static final String WIDGET_TYPE_KEY = "WIDGET_TYPE_KEY";
+	private static final String SELECTED_DEVICE_ID_KEY = "SELECTED_DEVICE_ID_KEY";
+	private static final String WITH_NONE_VARIANT_KEY = "WITH_NONE_VARIANT_KEY";
+
+	private View contentView;
+	private RecyclerView devicesList;
 	private DevicesForWidgetAdapter devicesListAdapter;
 	private AppBarLayout appBar;
 	private View noBluetoothCard;
+	private View stateNoBluetoothView;
+
 	private String selectedDeviceId;
 	private SensorWidgetDataFieldType widgetDataFieldType;
-	private View stateNoBluetoothView;
-	private States currentState = States.NOTHING_FOUND;
+	private boolean withNoneVariant;
+	private States currentState = States.CONTENT;
 
 	@Override
 	protected int getLayoutId() {
@@ -61,6 +64,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			int widgetFieldTypeOrdinal = arguments.getInt(WIDGET_TYPE_KEY);
 			widgetDataFieldType = SensorWidgetDataFieldType.values()[widgetFieldTypeOrdinal];
 			selectedDeviceId = arguments.getString(SELECTED_DEVICE_ID_KEY);
+			withNoneVariant = arguments.getBoolean(WITH_NONE_VARIANT_KEY);
 		}
 	}
 
@@ -75,17 +79,15 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	@Override
 	protected void setupUI(@NonNull View view) {
 		super.setupUI(view);
-		emptyView = view.findViewById(R.id.empty_view);
 		contentView = view.findViewById(R.id.devices_content);
 		devicesList = view.findViewById(R.id.connected_devices_list);
 		appBar = view.findViewById(R.id.appbar);
 		noBluetoothCard = view.findViewById(R.id.no_bluetooth_card);
 
-		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty));
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional));
 		setupOpenBtSettingsButton(view.findViewById(R.id.bt_settings_button_container));
 		setupNoBluetoothView(view);
-		devicesListAdapter = new DevicesForWidgetAdapter(app, nightMode, this);
+		devicesListAdapter = new DevicesForWidgetAdapter(app, nightMode, this, widgetDataFieldType, withNoneVariant);
 		devicesListAdapter.setDeviceId(selectedDeviceId);
 		devicesList.setAdapter(devicesListAdapter);
 	}
@@ -138,10 +140,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 				currentState == States.NO_BLUETOOTH
 		);
 		AndroidUiHelper.updateVisibility(
-				emptyView,
-				currentState == States.NOTHING_FOUND
-		);
-		AndroidUiHelper.updateVisibility(
 				contentView,
 				currentState == States.CONTENT
 		);
@@ -167,7 +165,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public void onDestroyView() {
 		super.onDestroyView();
 		contentView = null;
-		emptyView = null;
 		devicesList = null;
 		appBar = null;
 		noBluetoothCard = null;
@@ -204,7 +201,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
 		if (filteredDevices.isEmpty()) {
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
-				currentState = States.NOTHING_FOUND;
+				currentState = States.CONTENT;
 			} else {
 				currentState = States.NO_BLUETOOTH;
 			}
@@ -222,7 +219,8 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull Fragment targetFragment,
 	                                @NonNull SensorWidgetDataFieldType fieldType,
-	                                @Nullable String selectedDeviceId) {
+	                                @Nullable String selectedDeviceId,
+	                                boolean withNoneVariant) {
 		if (!(targetFragment instanceof SelectDeviceListener)) {
 			throw new IllegalArgumentException("targetFragment should implement SelectDeviceListener interface");
 		}
@@ -231,6 +229,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			Bundle arguments = new Bundle();
 			arguments.putInt(WIDGET_TYPE_KEY, fieldType.ordinal());
 			arguments.putString(SELECTED_DEVICE_ID_KEY, selectedDeviceId);
+			arguments.putBoolean(WITH_NONE_VARIANT_KEY, withNoneVariant);
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setArguments(arguments);
 			fragment.setRetainInstance(true);
@@ -259,18 +258,18 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
 	}
 
-	public void onDeviceSelected(@Nullable AbstractDevice<?> device) {
+	public void onDeviceSelected(@Nullable String deviceId) {
 		if (getTargetFragment() instanceof SelectDeviceListener) {
-			((SelectDeviceListener) getTargetFragment()).selectNewDevice(device, widgetDataFieldType);
+			((SelectDeviceListener) getTargetFragment()).selectNewDevice(deviceId, widgetDataFieldType);
 			requireActivity().onBackPressed();
 		}
 	}
 
 	enum States {
-		NO_BLUETOOTH, NOTHING_FOUND, CONTENT
+		NO_BLUETOOTH, CONTENT
 	}
 
 	public interface SelectDeviceListener {
-		void selectNewDevice(AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType);
+		void selectNewDevice(@Nullable String deviceId, @NonNull SensorWidgetDataFieldType requestedWidgetDataFieldType);
 	}
 }

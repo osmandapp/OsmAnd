@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="any_connected">Any connected</string>
     <string name="precise_distance_numbers">Precise distance numbers</string>
     <string name="complex_widget_alert">%1$s widget can only be placed on its own row.</string>
     <string name="previous_row_has_complex_widget">Previous row has complex widget</string>
