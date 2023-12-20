@@ -5412,23 +5412,27 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Aggiunta la possibilità di modificare le associazioni dei tasti per i dispositivi di input esterni
+    <string name="release_4_6">• Android Auto: aggiunta la vista 3D
 \n
-\n• Aggiunto widget \"Rapporto di planata\".
+\n• Tracce: Introdotti filtri e cartelle intelligenti, memoria ottimizzata per file più grandi
 \n
-\n• Aggiunti filtri e cartelle intelligenti per le tracce
+\n• Pannelli widget superiore e inferiore migliorati per accogliere tutti i widget
 \n
-\n• Aggiunte righe per i pannelli widget superiore e inferiore con supporto per tutti i widget
+\n• Migliorata la gestione delle risorse locali
+\n
+\n• Mappatura dei pulsanti personalizzabile per controller esterni
+\n
+\n• Nuovi widget: \"Rapporto di planata\" e \"Posizione del sole\"
+\n
+\n• OsmAnd Cloud: ora accedi ai file eliminati
+\n
+\n• Colorazione migliorata dei tracciati in modalità Slope con un nuovo gradiente simmetrico
+\n
+\n• Risolti problemi con la barra di stato trasparente
 \n
 \n• Aggiunto supporto per widget temperatura ANT+
 \n
-\n• Gestione migliorata della memoria per tracce GPX di grandi dimensioni
-\n
-\n• Aggiornata la gestione delle risorse locali nei download
-\n
 \n• Aggiunto widget \"RAM disponibile\"
-\n
-\n• Risolti problemi con la barra di stato trasparente
 \n
 \n</string>
     <string name="shared_string_temperature">Tempertura</string>
@@ -5571,4 +5575,6 @@
     <string name="shared_string_next_event">Prossimo evento</string>
     <string name="map_widget_sun_position">Posizione del sole</string>
     <string name="map_widget_sun_position_desc">Questo widget mostra il tempo fino all\'alba o al tramonto, a seconda dell\'ora corrente.</string>
+    <string name="previous_row_has_complex_widget">La riga precedente ha un widget complesso</string>
+    <string name="complex_widget_alert">Il widget %1$s può essere posizionato solo sulla propria riga.</string>
 </resources>
