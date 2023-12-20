@@ -3,8 +3,11 @@ package net.osmand.plus.track.cards;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
@@ -17,6 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,8 +35,10 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +49,15 @@ import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
 import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class RouteInfoCard extends MapBaseCard {
+
+	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
+
+	static {
+		TRANSLATABLE_KEYS.put("name", R.string.shared_string_name);
+		TRANSLATABLE_KEYS.put("alt_name", R.string.shared_string_alt_name);
+		TRANSLATABLE_KEYS.put("symbol", R.string.shared_string_symbol);
+	}
+
 
 	private final RouteKey routeKey;
 	private final GPXFile gpxFile;
@@ -72,56 +87,100 @@ public class RouteInfoCard extends MapBaseCard {
 
 		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
 		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
-		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false);
+		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
 
-		for (RouteTag tag : getTagsToDisplay()) {
-			String formattedKey = tag.getFormattedKey(app);
-			String formattedValue = tag.getFormattedValue(app, routeKey.type);
-			boolean linkify = "website".equals(tag.key);
+		for (TagsRow row : getRows()) {
 
-			View view = addInfoRow(container, formattedKey, formattedValue, linkify);
+			LinearLayout expandableView = null;
+			int tagsCount = row.tags.size();
 
-			OsmAndAppCustomization customization = app.getAppCustomization();
-			if ("wikipedia".equals(tag.key)) {
-				if (Algorithms.isUrl(formattedValue) && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					TextView tvContent = view.findViewById(R.id.title);
-					tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
-					view.setOnClickListener(v -> {
-						WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), formattedValue);
-					});
+			for (int tagIndex = 0; tagIndex < tagsCount; tagIndex++) {
+				RouteTag tag = row.tags.get(tagIndex);
+
+				ViewGroup tagContainer = tagIndex == 0 ? container : expandableView;
+				View view = addInfoRow(tagContainer, tag);
+
+				if (tagIndex == 0 && tagsCount > 1) {
+					expandableView = createExpandableView();
+					container.addView(expandableView);
+					setupViewExpand(view, expandableView);
 				}
 			}
 		}
 	}
 
 	@NonNull
-	private List<RouteTag> getTagsToDisplay() {
-		List<RouteTag> tags = new ArrayList<>();
+	private List<TagsRow> getRows() {
+		List<TagsRow> rows = new ArrayList<>();
+		Map<String, TagsRow> rowsByKey = new HashMap<>();
 
 		for (String tag : routeKey.tags) {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
 
-			if (key.equals("name") || key.contains("osmc")) {
+			if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
 				continue;
 			}
 
-			tags.add(new RouteTag(key, value));
+			RouteTag routeTag = new RouteTag(key, value);
+
+			String keyBase = key.split(":")[0];
+			if (TRANSLATABLE_KEYS.containsKey(keyBase)) {
+				TagsRow row = rowsByKey.get(keyBase);
+				if (row == null) {
+					row = new TagsRow();
+					rowsByKey.put(keyBase, row);
+					rows.add(row);
+				}
+				row.tags.add(routeTag);
+			} else {
+				TagsRow row = new TagsRow();
+				row.tags.add(routeTag);
+				rows.add(row);
+			}
 		}
 
-		Collections.sort(tags, (o1, o2) -> {
+		for (TagsRow row : rowsByKey.values()) {
+			row.sort(app);
+		}
+
+		Collections.sort(rows, (o1, o2) -> {
 			if (o1.getOrder() != o2.getOrder()) {
 				return o1.getOrder() - o2.getOrder();
 			}
 
-			return o1.getFormattedKey(app).compareTo(o2.getFormattedKey(app));
+			String formattedKey1 = o1.tags.get(0).getFormattedKey(app);
+			String formattedKey2 = o2.tags.get(0).getFormattedKey(app);
+			return formattedKey1.compareTo(formattedKey2);
 		});
 
-		return tags;
+		return rows;
 	}
 
 	@NonNull
-	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks) {
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull RouteTag tag) {
+		String formattedKey = tag.getFormattedKey(app);
+		String formattedValue = tag.getFormattedValue(app, routeKey.type);
+		boolean linkify = "website".equals(tag.key);
+
+		View view = addInfoRow(container, formattedKey, formattedValue, linkify, true);
+
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if ("wikipedia".equals(tag.key)) {
+			if (Algorithms.isUrl(formattedValue) && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+				TextView tvContent = view.findViewById(R.id.title);
+				tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+				view.setOnClickListener(v -> {
+					WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), formattedValue);
+				});
+			}
+		}
+
+		return view;
+	}
+
+	@NonNull
+	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks, boolean showDivider) {
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
 
@@ -138,9 +197,40 @@ public class RouteInfoCard extends MapBaseCard {
 			tvContent.setOnTouchListener(new ClickableSpanTouchListener());
 			AndroidUtils.removeLinkUnderline(tvContent);
 		}
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), container.getChildCount() > 0);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), showDivider);
 		container.addView(view);
 		return view;
+	}
+
+	@NonNull
+	private LinearLayout createExpandableView() {
+		LinearLayout view = new LinearLayout(this.view.getContext());
+		view.setOrientation(LinearLayout.VERTICAL);
+		view.setVisibility(View.GONE);
+		LinearLayout.LayoutParams layoutParams = new LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+		);
+		view.setLayoutParams(layoutParams);
+		return view;
+	}
+
+	private void setupViewExpand(@NonNull View viewToClick, @NonNull View expandableView) {
+		ImageView expandIcon = viewToClick.findViewById(R.id.expand_button);
+		expandIcon.setVisibility(View.VISIBLE);
+		viewToClick.setOnClickListener(new OnClickListener() {
+
+			private boolean expanded = false;
+
+			@Override
+			public void onClick(View v) {
+				expanded = !expanded;
+
+				int iconId = expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+				expandIcon.setImageDrawable(getIcon(iconId));
+
+				AndroidUiHelper.updateVisibility(expandableView, expanded);
+			}
+		});
 	}
 
 	private List<LatLon> collectTrackPoints() {
@@ -175,11 +265,14 @@ public class RouteInfoCard extends MapBaseCard {
 
 		@NonNull
 		public String getFormattedKey(@NonNull OsmandApplication app) {
-			if (key.startsWith("name:")) {
-				String nameStr = app.getString(R.string.shared_string_name);
-				String langId = key.substring("name:".length());
-				String displayLanguage = new Locale(langId).getDisplayLanguage();
-				return app.getString(R.string.ltr_or_rtl_combine_via_colon, nameStr, displayLanguage);
+			for (Map.Entry<String, Integer> translatableKey : TRANSLATABLE_KEYS.entrySet()) {
+				String keyStart = translatableKey.getKey() + ":";
+				if (key.startsWith(keyStart)) {
+					String nameStr = app.getString(translatableKey.getValue());
+					String langId = key.substring(keyStart.length());
+					String displayLanguage = new Locale(langId).getDisplayLanguage();
+					return app.getString(R.string.ltr_or_rtl_combine_via_colon, nameStr, displayLanguage);
+				}
 			}
 
 			return poiType != null ? poiType.getTranslation() : capitalizeFirstLetterAndLowercase(key);
@@ -200,6 +293,50 @@ public class RouteInfoCard extends MapBaseCard {
 
 		public int getOrder() {
 			return poiType != null ? poiType.getOrder() : PoiType.DEFAULT_ORDER;
+		}
+	}
+
+	private static class TagsRow {
+
+		private final List<RouteTag> tags = new ArrayList<>();
+
+		public void sort(@NonNull OsmandApplication app) {
+			List<String> localeIds = new ArrayList<>();
+			boolean hasNativeName = false;
+			for (RouteTag tag : tags) {
+				String[] keySplit = tag.key.split(":");
+				if (keySplit.length == 1) {
+					hasNativeName = true;
+				} else {
+					localeIds.add(keySplit[1]);
+				}
+			}
+
+			Locale preferredLocale = AmenityMenuBuilder.getPreferredNameLocale(app, localeIds);
+			String preferredLocaleId = preferredLocale != null ? preferredLocale.getLanguage() : null;
+			boolean finalHasNativeName = hasNativeName;
+
+			Collections.sort(tags, (o1, o2) -> {
+				if (preferredLocaleId != null) {
+					if (o1.key.contains(preferredLocaleId)) {
+						return -1;
+					} else if (o2.key.contains(preferredLocaleId)) {
+						return 1;
+					}
+				} else if (finalHasNativeName) {
+					if (!o1.key.contains(":")) {
+						return -1;
+					} else if (!o2.key.contains(":")) {
+						return 1;
+					}
+				}
+
+				return o1.getFormattedKey(app).compareTo(o2.getFormattedKey(app));
+			});
+		}
+
+		public int getOrder() {
+			return tags.get(0).getOrder();
 		}
 	}
 }
