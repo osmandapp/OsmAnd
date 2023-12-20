@@ -1,5 +1,7 @@
 package net.osmand.plus.download.local.dialogs.viewholders;
 
+import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -7,11 +9,13 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -82,14 +86,27 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 
 	@NonNull
 	private Drawable getIcon(@NonNull BaseLocalItem item) {
+		int iconId = getIconId(item);
 		LocalItemType type = item.getType();
 		if (item instanceof LocalItem) {
 			LocalItem localItem = (LocalItem) item;
 			if (type.isDownloadType() && !localItem.isBackuped(app)) {
 				boolean shouldUpdate = listener.itemUpdateAvailable(localItem);
-				return uiUtilities.getIcon(type.getIconId(), shouldUpdate ? R.color.color_distance : R.color.color_ok);
+				return uiUtilities.getIcon(iconId, shouldUpdate ? R.color.color_distance : R.color.color_ok);
 			}
 		}
-		return uiUtilities.getThemedIcon(type.getIconId());
+		return uiUtilities.getThemedIcon(iconId);
+	}
+
+	@DrawableRes
+	private int getIconId(@NonNull BaseLocalItem item) {
+		LocalItemType type = item.getType();
+		if (item instanceof LocalItem) {
+			LocalItem localItem = (LocalItem) item;
+			if (type == TERRAIN_DATA && SrtmDownloadItem.isSrtmFile(localItem.getFileName())) {
+				return R.drawable.ic_plugin_srtm;
+			}
+		}
+		return type.getIconId();
 	}
 }

@@ -13,6 +13,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TrackFolder implements TracksGroup, ComparableTracksGroup {
@@ -60,13 +61,13 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackFolder> getSubFolders() {
-		return subFolders;
+		return Collections.unmodifiableList(subFolders);
 	}
 
 	@NonNull
 	@Override
 	public List<TrackItem> getTrackItems() {
-		return trackItems;
+		return Collections.unmodifiableList(trackItems);
 	}
 
 	public void addSubFolder(@NonNull TrackFolder folder) {
@@ -78,7 +79,7 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	}
 
 	public boolean isEmpty() {
-		return Algorithms.isEmpty(trackItems) && Algorithms.isEmpty(subFolders);
+		return Algorithms.isEmpty(getTrackItems()) && Algorithms.isEmpty(getSubFolders());
 	}
 
 	@ColorInt
@@ -93,8 +94,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
 		if (flattenedTrackItems == null) {
-			flattenedTrackItems = new ArrayList<>(trackItems);
-			for (TrackFolder folder : subFolders) {
+			flattenedTrackItems = new ArrayList<>(getTrackItems());
+			for (TrackFolder folder : getSubFolders()) {
 				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
 			}
 		}
@@ -104,8 +105,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackFolder> getFlattenedSubFolders() {
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = new ArrayList<>(subFolders);
-			for (TrackFolder folder : subFolders) {
+			flattenedSubFolders = new ArrayList<>(getSubFolders());
+			for (TrackFolder folder : getSubFolders()) {
 				flattenedSubFolders.addAll(folder.getFlattenedSubFolders());
 			}
 		}
@@ -123,10 +124,10 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	public long getLastModified() {
 		if (lastModified < 0) {
 			lastModified = dirFile.lastModified();
-			for (TrackFolder folder : subFolders) {
+			for (TrackFolder folder : getSubFolders()) {
 				lastModified = Math.max(lastModified, folder.getLastModified());
 			}
-			for (TrackItem item : trackItems) {
+			for (TrackItem item : getTrackItems()) {
 				lastModified = Math.max(lastModified, item.getLastModified());
 			}
 		}

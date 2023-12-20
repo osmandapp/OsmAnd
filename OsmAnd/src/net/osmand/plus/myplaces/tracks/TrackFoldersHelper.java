@@ -119,7 +119,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void reloadTracks() {
-		rootFolder.clearData();
 		asyncLoader = new TrackFolderLoaderTask(app, rootFolder, loadTracksListener);
 		asyncLoader.executeOnExecutor(singleThreadExecutor);
 	}
