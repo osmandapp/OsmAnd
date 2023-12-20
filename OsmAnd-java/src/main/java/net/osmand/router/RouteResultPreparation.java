@@ -2187,7 +2187,7 @@ public class RouteResultPreparation {
 	}
 	
 	private void removeMuteGoAhead(List<RouteSegmentResult> result) {
-		for (int i = 1; i < result.size(); i++) {
+		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
 			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak()) {
