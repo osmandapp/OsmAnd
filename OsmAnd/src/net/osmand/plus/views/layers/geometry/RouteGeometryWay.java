@@ -156,7 +156,10 @@ public class RouteGeometryWay extends
 
 	@Nullable
 	@Override
-	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tb, int startLocationIndex, boolean previousVisible) {
+	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
+	                                                          @NonNull RotatedTileBox tb,
+	                                                          int startLocationIndex,
+	                                                          boolean previousVisible) {
 		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
 		if (croppedPathData31 == null) {
 			return null;

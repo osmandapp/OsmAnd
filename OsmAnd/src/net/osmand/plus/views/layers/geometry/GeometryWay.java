@@ -392,9 +392,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	@Nullable
 	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
-	                                    @NonNull RotatedTileBox tb,
-	                                    int startLocationIndex,
-	                                    boolean previousVisible) {
+	                                                          @NonNull RotatedTileBox tb,
+	                                                          int startLocationIndex,
+	                                                          boolean previousVisible) {
 		List<List<DrawPathData31>> croppedPathsData31 = new ArrayList<>();
 		boolean drawNext = false;
 		for (List<DrawPathData31> pathsDataList : pathsData31Cache) {
