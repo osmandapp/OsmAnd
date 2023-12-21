@@ -113,7 +113,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return router.buildRoutingContext(config, null, new BinaryMapIndexReader[0], RouteCalculationMode.NORMAL);
 	}
 	
-	HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
+	public static HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
