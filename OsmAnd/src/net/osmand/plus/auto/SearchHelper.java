@@ -1,7 +1,6 @@
 package net.osmand.plus.auto;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
-import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -19,18 +18,13 @@ import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.SearchUICore;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -70,11 +64,11 @@ public class SearchHelper {
 		void onClickSearchMore();
 
 		void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
-						  @Nullable ItemList itemList, int resultsCount);
+		                  @Nullable ItemList itemList, int resultsCount);
 	}
 
-	SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit,
-	             int minSearchRadiusLevel, int maxSearchRadiusLevel, boolean silentRadiusSearchIncrement) {
+	public SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit,
+	                    int minSearchRadiusLevel, int maxSearchRadiusLevel, boolean silentRadiusSearchIncrement) {
 		this.app = app;
 		this.searchUICore = app.getSearchUICore().getCore();
 		this.showDescription = showDescription;
@@ -125,6 +119,7 @@ public class SearchHelper {
 		this.listener = listener;
 	}
 
+	@NonNull
 	public SearchSettings setupSearchSettings(boolean resetPhrase) {
 		Location location = app.getLocationProvider().getLastKnownLocation();
 		SearchUICore core = app.getSearchUICore().getCore();
@@ -247,33 +242,9 @@ public class SearchHelper {
 		searchUICore.search(searchQuery, true, null, searchSettings);
 	}
 
-	public void completeQueryWithObject(@NonNull SearchResult sr) {
-		if (sr.object instanceof AbstractPoiType) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object, HistorySource.SEARCH);
-		} else if (sr.object instanceof PoiUIFilter) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object, HistorySource.SEARCH);
-		}
-		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
-			PoiType additional = (PoiType) sr.object;
-			AbstractPoiType parent = additional.getParentType();
-			if (parent != null) {
-				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
-				if (custom != null) {
-					custom.clearFilter();
-					custom.updateTypesToAccept(parent);
-					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase());
+	public void completeQueryWithObject(@NonNull SearchResult result) {
+		SearchUtils.selectSearchResult(app, result);
 
-					SearchPhrase phrase = searchUICore.getPhrase();
-					sr = new SearchResult(phrase);
-					sr.localeName = custom.getName();
-					sr.object = custom;
-					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-					sr.priorityDistance = 0;
-					sr.objectType = ObjectType.POI_TYPE;
-				}
-			}
-		}
-		searchUICore.selectSearchResult(sr);
 		String searchQuery = searchUICore.getPhrase().getText(true);
 		if (searchRadiusLevel != 1) {
 			searchRadiusLevel = minSearchRadiusLevel;
@@ -283,7 +254,7 @@ public class SearchHelper {
 
 	@Nullable
 	public Row.Builder buildSearchRow(@Nullable LatLon searchLocation, @Nullable LatLon placeLocation,
-									  @NonNull String name, @Nullable Drawable icon, @Nullable String typeName) {
+	                                  @NonNull String name, @Nullable Drawable icon, @Nullable String typeName) {
 		Row.Builder builder = new Row.Builder();
 		if (icon != null) {
 			builder.setImage(new CarIcon.Builder(IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(icon))).build());

@@ -327,7 +327,7 @@ public class TripHelper {
 		return bitmap;
 	}
 
-	static Distance getDistance(@NonNull OsmandApplication app, double meters) {
+	public static Distance getDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		int displayUnit;
 		float mainUnitInMeters;
