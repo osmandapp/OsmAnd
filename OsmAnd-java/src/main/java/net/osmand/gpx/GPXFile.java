@@ -203,7 +203,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return currentWpt;
 	}
 
-	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt, boolean hiddenWasChanged) {
+	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		int index = points.indexOf(existingPoint);
 		if (index == -1) {
 			return;
@@ -211,7 +211,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
 		long prevTime = existingPoint.time;
 		existingPoint.updatePoint(newWpt);
-		if (hiddenWasChanged) {
+		if (!updateTimestamp) {
 			existingPoint.time = prevTime;
 		}
 		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
@@ -225,7 +225,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 	
 	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
-		updateWptPt(existingPoint, newWpt, false);
+		updateWptPt(existingPoint, newWpt, true);
 	}
 
 	public void updatePointsGroup(String prevGroupName, GPXUtilities.PointsGroup pointsGroup) {
