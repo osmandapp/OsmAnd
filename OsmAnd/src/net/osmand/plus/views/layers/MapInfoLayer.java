@@ -14,7 +14,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
+import net.osmand.plus.auto.views.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
