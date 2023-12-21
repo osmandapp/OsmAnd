@@ -234,7 +234,7 @@ public class WaypointHelper {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
 		}
 		AlarmInfo mostImportant = speedAlarm;
-		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
+		int mostPriority = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
 		float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 		AnnounceTimeDistances atd = getVoiceRouter().getAnnounceTimeDistances();
 		if (ALARMS < pointsProgress.size()) {
@@ -253,20 +253,25 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
+					int distance = route.getDistanceToPoint(inf.getLocationIndex());
 					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
-					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
-					if (inf.getLocationIndex() == currentRoute && d > 10) {
+					boolean lastSegmentBeforeAlarm = inf.getLocationIndex() - currentRoute == 1;
+					if (lastSegmentBeforeAlarm && lastKnownLocation != null) {
+						distance = (int) Math.max(0.0, MapUtils.getDistance(
+								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+								inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
+					}
+					if (inf.getLocationIndex() == currentRoute && distance > 10) {
 						return null;
 					}
-					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
+					if (!atd.isTurnStateActive(0, distance, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
-					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-					int vl = inf.updateDistanceAndGetPriority(time, d);
-					if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
+					float time = speed > 0 ? distance / speed : Integer.MAX_VALUE;
+					int priority = inf.updateDistanceAndGetPriority(time, distance);
+					if (priority < mostPriority && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
 						mostImportant = inf;
-						value = vl;
+						mostPriority = priority;
 					}
 				}
 				kIterator++;
