@@ -20,7 +20,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
@@ -41,7 +41,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	private final UiUtilities uiUtilities;
 
 	private List<ExportSettingsCategory> itemsTypes;
-	private Map<ExportSettingsType, List<?>> selectedItemsMap;
+	private Map<ExportType, List<?>> selectedItemsMap;
 	private Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap;
 
 	private final OnItemSelectedListener listener;
@@ -78,7 +78,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		description.setText(getCategoryDescr(category));
 
 		int selectedTypes = 0;
-		for (ExportSettingsType type : items.getTypes()) {
+		for (ExportType type : items.getTypes()) {
 			if (selectedItemsMap.get(type) != null) {
 				selectedTypes++;
 			}
@@ -117,7 +117,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
-		ExportSettingsType type = categoryItems.getTypes().get(childPosition);
+		ExportType type = categoryItems.getTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(type);
 		List<?> selectedItems = selectedItemsMap.get(type);
 
@@ -173,7 +173,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public void updateSettingsItems(Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
-									Map<ExportSettingsType, List<?>> selectedItemsMap) {
+									Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		this.selectedItemsMap = selectedItemsMap;
@@ -185,7 +185,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
-		for (ExportSettingsType type : items.getTypes()) {
+		for (ExportType type : items.getTypes()) {
 			if (selectedItemsMap.get(type) != null) {
 				selectedTypes++;
 				itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(type));
@@ -203,8 +203,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
 	}
 
-	public static String getSelectedTypeDescr(OsmandApplication app, Map<ExportSettingsType, List<?>> selectedItemsMap,
-											  ExportSettingsType type, List<?> items) {
+	public static String getSelectedTypeDescr(OsmandApplication app, Map<ExportType, List<?>> selectedItemsMap,
+	                                          ExportType type, List<?> items) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 
@@ -222,8 +222,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((RemoteFile) object).getZipSize();
 					} else if (object instanceof MapMarkersGroup) {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
-								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
+						if (Algorithms.stringsEqual(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name())
+								|| Algorithms.stringsEqual(markersGroup.getId(), ExportType.HISTORY_MARKERS.name())) {
 							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
 						}
 					}
@@ -267,7 +267,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		SettingsCategoryItems categoryItems = itemsMap.get(itemsTypes.get(groupPosition));
-		ExportSettingsType type = categoryItems.getTypes().get(groupPosition);
+		ExportType type = categoryItems.getTypes().get(groupPosition);
 		return categoryItems.getItemsForType(type).get(childPosition);
 	}
 
@@ -293,7 +293,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 	public interface OnItemSelectedListener {
 
-		void onTypeSelected(ExportSettingsType type, boolean selected);
+		void onTypeSelected(ExportType type, boolean selected);
 
 		void onCategorySelected(ExportSettingsCategory type, boolean selected);
 

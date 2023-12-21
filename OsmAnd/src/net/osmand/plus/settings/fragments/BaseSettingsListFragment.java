@@ -26,7 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -44,7 +44,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 
 	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
-	protected Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 	protected View header;
@@ -249,7 +249,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public void onCategorySelected(@NonNull ExportSettingsCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getNotEmptyTypes()) {
+		for (ExportType type : categoryItems.getNotEmptyTypes()) {
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
 			selectedItemsMap.put(type, selectedItems);
 		}
@@ -257,13 +257,13 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	@Override
-	public void onItemsSelected(@NonNull ExportSettingsType type, List<?> selectedItems) {
+	public void onItemsSelected(@NonNull ExportType type, List<?> selectedItems) {
 		selectedItemsMap.put(type, selectedItems);
 		adapter.notifyDataSetChanged();
 		updateAvailableSpace();
 	}
 
-	protected List<Object> getItemsForType(@NonNull ExportSettingsType type) {
+	protected List<Object> getItemsForType(@NonNull ExportType type) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
 			if (categoryItems.getTypes().contains(type)) {
 				return (List<Object>) categoryItems.getItemsForType(type);
@@ -272,14 +272,14 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		return null;
 	}
 
-	protected List<Object> getSelectedItemsForType(@NonNull ExportSettingsType type) {
+	protected List<Object> getSelectedItemsForType(@NonNull ExportType type) {
 		return (List<Object>) selectedItemsMap.get(type);
 	}
 
 	@Override
-	public void onTypeClicked(@NonNull ExportSettingsType type) {
+	public void onTypeClicked(@NonNull ExportType type) {
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null && type != ExportSettingsType.GLOBAL && type != ExportSettingsType.SEARCH_HISTORY && type != ExportSettingsType.NAVIGATION_HISTORY) {
+		if (fragmentManager != null && type != ExportType.GLOBAL && type != ExportType.SEARCH_HISTORY && type != ExportType.NAVIGATION_HISTORY) {
 			ExportItemsBottomSheet.showInstance(fragmentManager, type, this, exportMode);
 		}
 	}

@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -48,7 +48,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final boolean exportMode;
 
 	private List<ExportSettingsCategory> itemsTypes;
-	private Map<ExportSettingsType, List<?>> selectedItemsMap;
+	private Map<ExportType, List<?>> selectedItemsMap;
 	private Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap;
 
 	private final OnItemSelectedListener listener;
@@ -92,7 +92,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		subTextTv.setText(getCategoryDescr(category, exportMode));
 
 		int selectedTypes = 0;
-		for (ExportSettingsType type : items.getTypes()) {
+		for (ExportType type : items.getTypes()) {
 			if (!Algorithms.isEmpty(selectedItemsMap.get(type))) {
 				selectedTypes++;
 			}
@@ -137,7 +137,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		ExportSettingsCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
-		ExportSettingsType type = categoryItems.getTypes().get(childPosition);
+		ExportType type = categoryItems.getTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(type);
 		List<?> selectedItems = selectedItemsMap.get(type);
 
@@ -211,7 +211,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		SettingsCategoryItems categoryItems = itemsMap.get(itemsTypes.get(groupPosition));
-		ExportSettingsType type = categoryItems.getTypes().get(groupPosition);
+		ExportType type = categoryItems.getTypes().get(groupPosition);
 		return categoryItems.getItemsForType(type).get(childPosition);
 	}
 
@@ -249,7 +249,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public void updateSettingsItems(Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
-									Map<ExportSettingsType, List<?>> selectedItemsMap) {
+									Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		this.selectedItemsMap = selectedItemsMap;
@@ -276,7 +276,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
-		for (ExportSettingsType type : items.getTypes()) {
+		for (ExportType type : items.getTypes()) {
 			if (!Algorithms.isEmpty(selectedItemsMap.get(type))) {
 				selectedTypes++;
 				itemsSize += calculateItemsSize(items.getItemsForType(type));
@@ -308,7 +308,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return itemsSize;
 	}
 
-	private String getSelectedTypeDescr(ExportSettingsType type, List<?> items) {
+	private String getSelectedTypeDescr(ExportType type, List<?> items) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 
@@ -324,14 +324,14 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((File) object).length();
 					} else if (object instanceof MapMarkersGroup) {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-						if (Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.ACTIVE_MARKERS.name())
-								|| Algorithms.stringsEqual(markersGroup.getId(), ExportSettingsType.HISTORY_MARKERS.name())) {
+						if (Algorithms.stringsEqual(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name())
+								|| Algorithms.stringsEqual(markersGroup.getId(), ExportType.HISTORY_MARKERS.name())) {
 							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
 						}
 					}
 				}
 			}
-			if (itemsSize > 0 && type == ExportSettingsType.ACTIVE_MARKERS) {
+			if (itemsSize > 0 && type == ExportType.ACTIVE_MARKERS) {
 				String itemsDescr = app.getString(R.string.shared_string_items);
 				return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(itemsSize));
 			}
@@ -354,11 +354,11 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	interface OnItemSelectedListener {
 
-		void onItemsSelected(@NonNull ExportSettingsType type, List<?> selectedItems);
+		void onItemsSelected(@NonNull ExportType type, List<?> selectedItems);
 
 		void onCategorySelected(@NonNull ExportSettingsCategory type, boolean selected);
 
-		void onTypeClicked(@NonNull ExportSettingsType type);
+		void onTypeClicked(@NonNull ExportType type);
 
 	}
 }

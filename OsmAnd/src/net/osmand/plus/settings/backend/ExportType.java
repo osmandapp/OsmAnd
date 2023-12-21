@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum ExportSettingsType {
+public enum ExportType {
 
 	PROFILE(R.string.shared_string_profiles, R.drawable.ic_action_manage_profiles, SettingsItemType.PROFILE.name(), true),
 	GLOBAL(R.string.osmand_settings, R.drawable.ic_action_settings, SettingsItemType.GLOBAL.name(), true),
@@ -57,7 +57,7 @@ public enum ExportSettingsType {
 	private final String itemName;
 	private final boolean allowedInFreeVersion;
 
-	ExportSettingsType(@StringRes int titleId, @DrawableRes int drawableRes, String itemName, boolean allowedInFreeVersion) {
+	ExportType(@StringRes int titleId, @DrawableRes int drawableRes, String itemName, boolean allowedInFreeVersion) {
 		this.titleId = titleId;
 		this.drawableRes = drawableRes;
 		this.itemName = itemName;
@@ -97,11 +97,11 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType findByRemoteFile(@NonNull RemoteFile remoteFile) {
+	public static ExportType findByRemoteFile(@NonNull RemoteFile remoteFile) {
 		if (remoteFile.item != null) {
 			return findBySettingsItem(remoteFile.item);
 		}
-		for (ExportSettingsType exportType : values()) {
+		for (ExportType exportType : values()) {
 			String type = remoteFile.getType();
 			if (exportType.getItemName().equals(type)) {
 				if (SettingsItemType.FILE.name().equals(type)) {
@@ -116,8 +116,8 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType findBySettingsItem(@NonNull SettingsItem item) {
-		for (ExportSettingsType exportType : values()) {
+	public static ExportType findBySettingsItem(@NonNull SettingsItem item) {
+		for (ExportType exportType : values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
@@ -131,7 +131,7 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType findByFileSubtype(@NonNull FileSubtype subtype) {
+	public static ExportType findByFileSubtype(@NonNull FileSubtype subtype) {
 		if (subtype == FileSubtype.RENDERING_STYLE) {
 			return CUSTOM_RENDER_STYLE;
 		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
@@ -163,7 +163,7 @@ public enum ExportSettingsType {
 	}
 
 	@Nullable
-	public static ExportSettingsType findByLocalItemType(@NonNull LocalItemType localItemType) {
+	public static ExportType findByLocalItemType(@NonNull LocalItemType localItemType) {
 		if (localItemType == LocalItemType.MAP_DATA) {
 			return OFFLINE_MAPS;
 		} else if (localItemType == LocalItemType.ROAD_DATA) {
@@ -182,13 +182,13 @@ public enum ExportSettingsType {
 		return null;
 	}
 
-	public static boolean isTypeEnabled(@NonNull ExportSettingsType type) {
+	public static boolean isTypeEnabled(@NonNull ExportType type) {
 		return getEnabledTypes().contains(type);
 	}
 
 	@NonNull
-	public static List<ExportSettingsType> getEnabledTypes() {
-		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(values()));
+	public static List<ExportType> getEnabledTypes() {
+		List<ExportType> result = new ArrayList<>(Arrays.asList(values()));
 		if (!PluginsHelper.isActive(OsmEditingPlugin.class)) {
 			result.remove(OSM_EDITS);
 			result.remove(OSM_NOTES);

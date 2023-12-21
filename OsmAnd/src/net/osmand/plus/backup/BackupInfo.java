@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class BackupInfo {
 		List<RemoteFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDownload) {
-			ExportSettingsType exportType = ExportSettingsType.findByRemoteFile(remoteFile);
+			ExportType exportType = ExportType.findByRemoteFile(remoteFile);
 			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 				files.add(remoteFile);
 			}
@@ -91,8 +91,8 @@ public class BackupInfo {
 		BackupHelper helper = app.getBackupHelper();
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
-			ExportSettingsType type = localFile.item != null ?
-					ExportSettingsType.findBySettingsItem(localFile.item) : null;
+			ExportType type = localFile.item != null ?
+					ExportType.findBySettingsItem(localFile.item) : null;
 			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
 				files.add(localFile);
 			}
@@ -104,7 +104,7 @@ public class BackupInfo {
 		List<RemoteFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDelete) {
-			ExportSettingsType exportType = ExportSettingsType.findByRemoteFile(remoteFile);
+			ExportType exportType = ExportType.findByRemoteFile(remoteFile);
 			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 				files.add(remoteFile);
 			}
@@ -115,9 +115,9 @@ public class BackupInfo {
 	private void createFilteredLocalFilesToDelete(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
 		for (LocalFile localFile : localFilesToDelete) {
-			ExportSettingsType exportType = localFile.item != null
-					? ExportSettingsType.findBySettingsItem(localFile.item) : null;
-			if (exportType != null && ExportSettingsType.isTypeEnabled(exportType)) {
+			ExportType exportType = localFile.item != null
+					? ExportType.findBySettingsItem(localFile.item) : null;
+			if (exportType != null && ExportType.isTypeEnabled(exportType)) {
 				files.add(localFile);
 			}
 		}
@@ -131,7 +131,7 @@ public class BackupInfo {
 		for (Pair<LocalFile, RemoteFile> pair : filesToMerge) {
 			SettingsItem item = pair.first.item;
 			if (!items.contains(item)) {
-				ExportSettingsType exportType = ExportSettingsType.findByRemoteFile(pair.second);
+				ExportType exportType = ExportType.findByRemoteFile(pair.second);
 				if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 					files.add(pair);
 					items.add(item);

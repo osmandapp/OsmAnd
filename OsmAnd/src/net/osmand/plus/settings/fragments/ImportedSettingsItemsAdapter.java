@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +25,14 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private final Map<ExportSettingsType, List<?>> itemsMap;
-	private final List<ExportSettingsType> itemsTypes;
+	private final Map<ExportType, List<?>> itemsMap;
+	private final List<ExportType> itemsTypes;
 	private final UiUtilities uiUtils;
 	private final OsmandApplication app;
 	private final boolean nightMode;
 	private final OnItemClickListener listener;
 
-	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
+	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportType, List<?>> itemsMap,
 								 boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
 		this.itemsMap = itemsMap;
@@ -53,7 +53,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		ExportSettingsType currentItemType = itemsTypes.get(position);
+		ExportType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
@@ -192,6 +192,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(ExportSettingsType type);
+		void onItemClick(ExportType type);
 	}
 }

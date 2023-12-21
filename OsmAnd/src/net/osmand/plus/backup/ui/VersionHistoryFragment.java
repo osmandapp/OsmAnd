@@ -9,7 +9,7 @@ import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
 import org.apache.commons.logging.Log;
@@ -39,9 +39,9 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	@Override
-	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
-		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
-		for (ExportSettingsType type : ExportSettingsType.values()) {
+	protected Map<ExportType, List<?>> getSelectedItems() {
+		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
+		for (ExportType type : ExportType.values()) {
 			if (backupHelper.getVersionHistoryTypePref(type).get()) {
 				selectedItemsMap.put(type, getItemsForType(type));
 			}
@@ -54,19 +54,19 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 		super.onCategorySelected(category, selected);
 
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
+		for (ExportType type : categoryItems.getTypes()) {
 			backupHelper.getVersionHistoryTypePref(type).set(selected);
 		}
 	}
 
 	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
+	public void onTypeSelected(ExportType type, boolean selected) {
 		super.onTypeSelected(type, selected);
 		backupHelper.getVersionHistoryTypePref(type).set(selected);
 	}
 
 	@Override
-	public void onClearTypesConfirmed(@NonNull List<ExportSettingsType> types) {
+	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
 		try {
 			updateProgressVisibility(true);
 			backupHelper.deleteOldFiles(types);

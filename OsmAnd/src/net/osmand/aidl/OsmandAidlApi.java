@@ -111,7 +111,7 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -2390,11 +2390,11 @@ public class OsmandAidlApi {
 	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportSettingsType> settingsTypes = new ArrayList<>();
+			List<ExportType> settingsTypes = new ArrayList<>();
 			for (String key : settingsTypesKeys) {
-				settingsTypes.add(ExportSettingsType.valueOf(key));
+				settingsTypes.add(ExportType.valueOf(key));
 			}
-			settingsTypes.remove(ExportSettingsType.PROFILE);
+			settingsTypes.remove(ExportType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();

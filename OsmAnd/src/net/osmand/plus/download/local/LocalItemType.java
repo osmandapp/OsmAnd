@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.util.Algorithms;
 
 public enum LocalItemType {
@@ -112,11 +112,11 @@ public enum LocalItemType {
 	}
 
 	@Nullable
-	public ExportSettingsType getExportSettingsType() {
+	public ExportType getExportSettingsType() {
 		if (this == TILES_DATA) {
-			return ExportSettingsType.MAP_SOURCES;
+			return ExportType.MAP_SOURCES;
 		} else if (this == RENDERING_STYLES) {
-			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+			return ExportType.CUSTOM_RENDER_STYLE;
 		}
 		return null;
 	}

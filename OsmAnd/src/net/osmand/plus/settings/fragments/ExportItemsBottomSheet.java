@@ -52,7 +52,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
@@ -85,7 +85,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 
-	private ExportSettingsType type;
+	private ExportType type;
 	private final List<Object> allItems = new ArrayList<>();
 	private final List<Object> selectedItems = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			exportMode = savedInstanceState.getBoolean(EXPORT_MODE_KEY);
-			type = ExportSettingsType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
+			type = ExportType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
 		}
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseSettingsListFragment) {
@@ -204,7 +204,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		String description;
-		if (type == ExportSettingsType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
+		if (type == ExportType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
 			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
 			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);
@@ -259,7 +259,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportSettingsType type,
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportType type,
 	                                @NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
@@ -276,7 +276,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private String setupDescription(View view) {
 		TextView description = view.findViewById(R.id.title_description);
-		if (type == ExportSettingsType.FAVORITES) {
+		if (type == ExportType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
 			description.setText(R.string.select_items_for_import);
@@ -377,10 +377,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, getItemIconColor(object)));
 		} else if (object instanceof MapMarkersGroup) {
 			MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
+			if (ExportType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.map_markers));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
-			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
+			} else if (ExportType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.markers_history));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
 			} else {

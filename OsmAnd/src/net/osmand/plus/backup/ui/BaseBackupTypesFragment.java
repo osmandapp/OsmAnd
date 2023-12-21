@@ -29,7 +29,7 @@ import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
@@ -50,7 +50,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected BackupHelper backupHelper;
 
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
-	protected Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 
 	protected ProgressBar progressBar;
 	protected BackupClearType clearType;
@@ -77,7 +77,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	protected abstract RemoteFilesType getRemoteFilesType();
 
-	protected abstract Map<ExportSettingsType, List<?>> getSelectedItems();
+	protected abstract Map<ExportType, List<?>> getSelectedItems();
 
 	@Nullable
 	@Override
@@ -143,9 +143,9 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		List<ExportSettingsType> types = categoryItems.getTypes();
+		List<ExportType> types = categoryItems.getTypes();
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		for (ExportSettingsType type : types) {
+		for (ExportType type : types) {
 			if (type.isAllowedInFreeVersion() || available) {
 				List<Object> items = getItemsForType(type);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
@@ -158,7 +158,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
+	public void onTypeSelected(ExportType type, boolean selected) {
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		if (type.isAllowedInFreeVersion() || available) {
 			List<Object> items = getItemsForType(type);
@@ -171,7 +171,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		}
 	}
 
-	protected void showClearTypesBottomSheet(List<ExportSettingsType> types) {
+	protected void showClearTypesBottomSheet(List<ExportType> types) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			ClearTypesBottomSheet.showInstance(activity.getSupportFragmentManager(), types, clearType, this);
@@ -184,11 +184,11 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 			remoteFiles = Collections.emptyMap();
 		}
 
-		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
-		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
+		Map<ExportType, List<?>> settingsToOperate = new EnumMap<>(ExportType.class);
+		for (ExportType type : ExportType.getEnabledTypes()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
 			for (RemoteFile remoteFile : remoteFiles.values()) {
-				if (ExportSettingsType.findByRemoteFile(remoteFile) == type) {
+				if (ExportType.findByRemoteFile(remoteFile) == type) {
 					filesByType.add(remoteFile);
 				}
 			}
@@ -197,7 +197,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		return SettingsHelper.getSettingsToOperateByCategory(settingsToOperate, true);
 	}
 
-	protected List<Object> getItemsForType(ExportSettingsType type) {
+	protected List<Object> getItemsForType(ExportType type) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
 			if (categoryItems.getTypes().contains(type)) {
 				return (List<Object>) categoryItems.getItemsForType(type);

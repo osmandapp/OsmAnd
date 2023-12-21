@@ -41,7 +41,7 @@ import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -157,7 +157,7 @@ public class ItemMenuProvider implements MenuProvider {
 				return true;
 			});
 		}
-		ExportSettingsType exportType = type.getExportSettingsType();
+		ExportType exportType = type.getExportSettingsType();
 		if (!localItem.isHidden(app) && exportType != null) {
 			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));
@@ -196,11 +196,11 @@ public class ItemMenuProvider implements MenuProvider {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, localItem);
 	}
 
-	private void exportItem(@NonNull ExportSettingsType settingsType) {
+	private void exportItem(@NonNull ExportType settingsType) {
 		List<File> selectedFiles = new ArrayList<>();
 		selectedFiles.add(localItem.getFile());
 
-		HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
+		HashMap<ExportType, List<?>> selectedTypes = new HashMap<>();
 		selectedTypes.put(settingsType, selectedFiles);
 
 		Bundle bundle = new Bundle();

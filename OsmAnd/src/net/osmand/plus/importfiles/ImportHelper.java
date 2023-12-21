@@ -68,7 +68,7 @@ import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -324,11 +324,11 @@ public class ImportHelper {
 			boolean replace = extras.getBoolean(REPLACE_KEY);
 			boolean silentImport = extras.getBoolean(SILENT_IMPORT_KEY);
 			ArrayList<String> settingsTypeKeys = extras.getStringArrayList(SETTINGS_TYPE_LIST_KEY);
-			List<ExportSettingsType> settingsTypes = null;
+			List<ExportType> settingsTypes = null;
 			if (settingsTypeKeys != null) {
 				settingsTypes = new ArrayList<>();
 				for (String key : settingsTypeKeys) {
-					settingsTypes.add(ExportSettingsType.valueOf(key));
+					settingsTypes.add(ExportType.valueOf(key));
 				}
 			}
 			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, silentImport, latestChanges, version);
@@ -337,7 +337,7 @@ public class ImportHelper {
 		}
 	}
 
-	public void handleOsmAndSettingsImport(Uri uri, String name, List<ExportSettingsType> settingsTypes,
+	public void handleOsmAndSettingsImport(Uri uri, String name, List<ExportType> settingsTypes,
 	                                       boolean replace, boolean silentImport, String latestChanges, int version) {
 		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, silentImport, latestChanges, version));
 	}

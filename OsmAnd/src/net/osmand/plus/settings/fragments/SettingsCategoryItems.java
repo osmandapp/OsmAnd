@@ -2,7 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -11,19 +11,19 @@ import java.util.Map;
 
 public class SettingsCategoryItems {
 
-	private final Map<ExportSettingsType, List<?>> itemsMap;
+	private final Map<ExportType, List<?>> itemsMap;
 
-	public SettingsCategoryItems(@NonNull Map<ExportSettingsType, List<?>> itemsMap) {
+	public SettingsCategoryItems(@NonNull Map<ExportType, List<?>> itemsMap) {
 		this.itemsMap = itemsMap;
 	}
 
-	public List<ExportSettingsType> getTypes() {
+	public List<ExportType> getTypes() {
 		return new ArrayList<>(itemsMap.keySet());
 	}
 
-	public List<ExportSettingsType> getNotEmptyTypes() {
-		List<ExportSettingsType> notEmptyTypes = new ArrayList<>();
-		for (ExportSettingsType type : getTypes()) {
+	public List<ExportType> getNotEmptyTypes() {
+		List<ExportType> notEmptyTypes = new ArrayList<>();
+		for (ExportType type : getTypes()) {
 			if (!Algorithms.isEmpty(itemsMap.get(type))) {
 				notEmptyTypes.add(type);
 			}
@@ -31,11 +31,11 @@ public class SettingsCategoryItems {
 		return notEmptyTypes;
 	}
 
-	public List<?> getItemsForType(ExportSettingsType type) {
+	public List<?> getItemsForType(ExportType type) {
 		return itemsMap.get(type);
 	}
 
-	public Map<ExportSettingsType, List<?>> getItemsMap() {
+	public Map<ExportType, List<?>> getItemsMap() {
 		return itemsMap;
 	}
 }

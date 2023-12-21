@@ -35,7 +35,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -152,7 +152,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		outState.putBoolean(KEY_NEED_RESTART, needRestart);
 	}
 
-	private void navigateTo(ExportSettingsType type) {
+	private void navigateTo(ExportType type) {
 		FragmentManager fm = getFragmentManager();
 		FragmentActivity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {
@@ -231,7 +231,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		startActivity(intent);
 	}
 
-	private int getFavoritesTabId(ExportSettingsType type) {
+	private int getFavoritesTabId(ExportType type) {
 		switch (type) {
 			case OSM_NOTES:
 			case OSM_EDITS:
