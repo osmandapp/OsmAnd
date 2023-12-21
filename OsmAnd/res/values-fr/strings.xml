@@ -5578,4 +5578,5 @@
     <string name="previous_row_has_complex_widget">La ligne précédente possède un gadget complexe</string>
     <string name="complex_widget_alert">Le gadget %1$s ne peut être placé que sur sa propre ligne.</string>
     <string name="precise_distance_numbers">Distances précises</string>
+    <string name="any_connected">N\'importe quel appareil connecté</string>
 </resources>
