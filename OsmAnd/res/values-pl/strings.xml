@@ -5281,7 +5281,7 @@
     <string name="free_settings_backup">Bezpłatna kopia zapasowa ustawień</string>
     <string name="action_cannot_be_undone">Tego działania nie można cofnąć.</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Użyj rastra sqlitedb dla cieniowania / nachylenia wzgórza</string>
-    <string name="free_ride">Bezpłatny przejazd</string>
+    <string name="free_ride">Jazda dowolna</string>
     <string name="routing_attr_allow_via_ferrata_name">Trasa górska (Via ferrata)</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Urządzenia dodatkowe zostaną wylogowane z OsmAnd Cloud i utracą dostęp do płatnych funkcji.</string>
     <string name="osmand_cloud_deletion_account_warning">Twoje konto i wszystkie dane konta będą %1$s</string>
