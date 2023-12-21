@@ -5586,4 +5586,6 @@
     <string name="map_widget_sun_position_desc">Este widget muestra el tiempo que falta para la salida o la puesta del sol, según la hora actual.</string>
     <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
     <string name="complex_widget_alert">El widget %1$s solo puede colocarse en su propia fila.</string>
+    <string name="precise_distance_numbers">Números exactos de distancia</string>
+    <string name="any_connected">Cualquiera conectado</string>
 </resources>
