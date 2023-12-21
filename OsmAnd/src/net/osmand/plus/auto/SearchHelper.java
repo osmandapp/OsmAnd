@@ -70,11 +70,11 @@ public class SearchHelper {
 		void onClickSearchMore();
 
 		void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
-						  @Nullable ItemList itemList, int resultsCount);
+		                  @Nullable ItemList itemList, int resultsCount);
 	}
 
-	SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit,
-	             int minSearchRadiusLevel, int maxSearchRadiusLevel, boolean silentRadiusSearchIncrement) {
+	public SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit,
+	                    int minSearchRadiusLevel, int maxSearchRadiusLevel, boolean silentRadiusSearchIncrement) {
 		this.app = app;
 		this.searchUICore = app.getSearchUICore().getCore();
 		this.showDescription = showDescription;
@@ -125,6 +125,7 @@ public class SearchHelper {
 		this.listener = listener;
 	}
 
+	@NonNull
 	public SearchSettings setupSearchSettings(boolean resetPhrase) {
 		Location location = app.getLocationProvider().getLastKnownLocation();
 		SearchUICore core = app.getSearchUICore().getCore();
@@ -283,7 +284,7 @@ public class SearchHelper {
 
 	@Nullable
 	public Row.Builder buildSearchRow(@Nullable LatLon searchLocation, @Nullable LatLon placeLocation,
-									  @NonNull String name, @Nullable Drawable icon, @Nullable String typeName) {
+	                                  @NonNull String name, @Nullable Drawable icon, @Nullable String typeName) {
 		Row.Builder builder = new Row.Builder();
 		if (icon != null) {
 			builder.setImage(new CarIcon.Builder(IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(icon))).build());

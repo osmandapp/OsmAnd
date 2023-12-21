@@ -20,7 +20,7 @@ import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.auto.NavigationScreen;
+import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
