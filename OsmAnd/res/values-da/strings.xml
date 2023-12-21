@@ -5430,7 +5430,7 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand og forbedret søgeskærm
+    <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand
 \n
 \n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer
 \n
@@ -5588,4 +5588,8 @@
     <string name="shared_string_next_event">Næste begivenhed</string>
     <string name="map_widget_sun_position">Solposition</string>
     <string name="map_widget_sun_position_desc">Dette modul viser, hvor lang tid der er til solopgang eller solnedgang, afhængigt af det aktuelle tidspunkt.</string>
+    <string name="previous_row_has_complex_widget">Forrige række har komplekst modul</string>
+    <string name="complex_widget_alert">%1$s modul kan kun placeres på sin egen række.</string>
+    <string name="precise_distance_numbers">Præcise afstandstal</string>
+    <string name="any_connected">Alle forbundne</string>
 </resources>
