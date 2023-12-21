@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import static net.osmand.plus.poi.PoiUIFilter.STD_PREFIX;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.search.core.ObjectType.CITY;
 import static net.osmand.search.core.ObjectType.HOUSE;
@@ -34,12 +35,13 @@ public class SearchUtils {
 		} else if (result.object instanceof PoiUIFilter) {
 			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
+
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {
 			PoiType additional = (PoiType) result.object;
 			AbstractPoiType parent = additional.getParentType();
 			if (parent != null) {
-				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
+				PoiUIFilter custom = app.getPoiFilters().getFilterById(STD_PREFIX + parent.getKeyName());
 				if (custom != null) {
 					custom.clearFilter();
 					custom.updateTypesToAccept(parent);

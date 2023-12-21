@@ -174,9 +174,12 @@ public class SearchHelper {
 	}
 
 	public void runSearch(@NonNull String query) {
+		runSearch(query, setupSearchSettings(false));
+	}
+
+	public void runSearch(@NonNull String query, @NonNull SearchSettings searchSettings) {
 		searching = true;
 		searchQuery = query;
-		SearchSettings searchSettings = setupSearchSettings(false);
 		searchUICore.setOnResultsComplete(() -> {
 			ItemList.Builder itemList = new ItemList.Builder();
 			SearchUICore.SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
@@ -225,7 +228,7 @@ public class SearchHelper {
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
 								+ OsmAndFormatter.getFormattedDistance((float) rd, app, false));
 					}
-					builder.setOnClickListener(this::onClickSearchMore);
+					builder.setOnClickListener(() -> onClickSearchMore(searchSettings));
 					builder.setBrowsable(true);
 					itemList.addItem(builder.build());
 				}
@@ -243,13 +246,17 @@ public class SearchHelper {
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
+		completeQueryWithObject(result, setupSearchSettings(false));
+	}
+
+	public void completeQueryWithObject(@NonNull SearchResult result, @NonNull SearchSettings searchSettings) {
 		SearchUtils.selectSearchResult(app, result);
 
 		String searchQuery = searchUICore.getPhrase().getText(true);
 		if (searchRadiusLevel != 1) {
 			searchRadiusLevel = minSearchRadiusLevel;
 		}
-		runSearch(searchQuery);
+		runSearch(searchQuery, searchSettings);
 	}
 
 	@Nullable
@@ -281,10 +288,10 @@ public class SearchHelper {
 		return builder;
 	}
 
-	private void onClickSearchMore() {
+	private void onClickSearchMore(@NonNull SearchSettings searchSettings) {
 		searchRadiusLevel++;
 		if (!Algorithms.isEmpty(searchQuery)) {
-			runSearch(searchQuery);
+			runSearch(searchQuery, searchSettings);
 		}
 		if (listener != null) {
 			listener.onClickSearchMore();

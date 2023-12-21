@@ -1,16 +1,25 @@
 package net.osmand.plus.auto.screens;
 
+import static net.osmand.plus.auto.screens.SearchScreen.SearchType.ADDRESS;
+import static net.osmand.plus.auto.screens.SearchScreen.SearchType.CATEGORY;
+import static net.osmand.plus.auto.screens.SearchScreen.SearchType.HISTORY;
+import static net.osmand.plus.auto.screens.SearchScreen.SearchType.MAIN;
+
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.car.app.CarContext;
 import androidx.car.app.model.Action;
+import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.ItemList;
 import androidx.car.app.model.Row;
 import androidx.car.app.model.SearchTemplate;
 import androidx.car.app.model.SearchTemplate.SearchCallback;
 import androidx.car.app.model.Template;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -22,6 +31,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SearchHelper;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -30,14 +40,18 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 
@@ -49,12 +63,18 @@ import java.util.List;
 public final class SearchScreen extends BaseSearchScreen implements DefaultLifecycleObserver,
 		AppInitializeListener, SearchHelperListener {
 
+	public enum SearchType {
+		MAIN, HISTORY, ADDRESS, CATEGORY
+	}
+
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
 
 
 	@NonNull
 	private final Action settingsAction;
+	@NonNull
+	private final SearchType searchType;
 
 	private ItemList itemList = withNoResults(new ItemList.Builder()).build();
 
@@ -65,14 +85,31 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	private boolean showResult;
 
 	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction) {
+		this(carContext, settingsAction, MAIN);
+	}
+
+	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction, @NonNull SearchType searchType) {
 		super(carContext);
+		this.searchType = searchType;
 		this.settingsAction = settingsAction;
 
 		getLifecycle().addObserver(this);
 		getApp().getAppInitializer().addListener(this);
-		reloadHistory();
+
+		reloadItems();
 	}
 
+	private void reloadItems() {
+		if (searchType == MAIN) {
+			reloadMain();
+		} else if (searchType == HISTORY) {
+			reloadHistory();
+		} else if (searchType == ADDRESS) {
+			startCitySearch();
+		} else if (searchType == CATEGORY) {
+			reloadHistory();
+		}
+	}
 
 	@NonNull
 	public SearchUICore getSearchUICore() {
@@ -133,7 +170,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 			if (searchText.isEmpty()) {
 				showRecents();
 			} else {
-				getSearchHelper().runSearch(searchText);
+				getSearchHelper().runSearch(searchText, getSearchSettings());
 			}
 		}
 		invalidate();
@@ -156,12 +193,21 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 			if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
 				showResult = true;
 			}
-			getSearchHelper().completeQueryWithObject(sr);
+			getSearchHelper().completeQueryWithObject(sr, getSearchSettings());
 			if (sr.object instanceof AbstractPoiType || sr.object instanceof PoiUIFilter) {
 				reloadHistory();
 			}
 			invalidate();
 		}
+	}
+
+	@NonNull
+	private SearchSettings getSearchSettings() {
+		SearchSettings settings = getSearchHelper().setupSearchSettings(false);
+		if (searchType == ADDRESS) {
+			settings = SearchUtils.setupAddressSearchSettings(settings);
+		}
+		return settings;
 	}
 
 	private void showResult(SearchResult sr) {
@@ -184,6 +230,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 			if (resultsCount > 0) {
 				showResult = false;
 			}
+			loading = false;
 			this.itemList = itemList;
 			invalidate();
 		}
@@ -309,6 +356,47 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		return name;
 	}
 
+	private void reloadMain() {
+		ItemList.Builder itemList = new ItemList.Builder();
+		itemList.addItem(createRowItem(R.drawable.ic_action_history, R.string.shared_string_history, HISTORY));
+		itemList.addItem(createRowItem(R.drawable.ic_action_building2, R.string.shared_string_address, ADDRESS));
+		this.itemList = itemList.build();
+	}
+
+	@NonNull
+	private Row createRowItem(@DrawableRes Integer iconId, @StringRes int titleRes, @NonNull SearchType nextStep) {
+		Row.Builder builder = new Row.Builder();
+		UiUtilities uiUtilities = getApp().getUIUtilities();
+		Drawable icon = uiUtilities.getActiveIcon(iconId, !getCarContext().isDarkMode());
+		builder.setImage(new CarIcon.Builder(IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(icon))).build());
+		builder.setTitle(getApp().getString(titleRes));
+		builder.setBrowsable(true);
+		builder.setOnClickListener(() -> showSearch(nextStep));
+		return builder.build();
+	}
+
+	private void showSearch(@NonNull SearchType searchType) {
+		Action settingsAction = getSettingsAction();
+		if (settingsAction != null) {
+			showSearchStep(new SearchScreen(getCarContext(), settingsAction, searchType));
+		}
+	}
+
+	@Nullable
+	private Action getSettingsAction() {
+		NavigationSession session = getApp().getCarNavigationSession();
+		return session != null ? session.getSettingsAction() : null;
+	}
+
+	private void showSearchStep(@NonNull SearchScreen searchScreen) {
+		getScreenManager().push(searchScreen);
+	}
+
+	private void startCitySearch() {
+		SearchSettings searchSettings = getSearchHelper().setupSearchSettings(true);
+		getSearchHelper().runSearch("", SearchUtils.setupCitySearchSettings(searchSettings));
+	}
+
 	private void showRecents() {
 		OsmandApplication app = getApp();
 		ItemList.Builder itemList = withNoResults(new ItemList.Builder());
@@ -343,11 +431,13 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	public void onFinish(@NonNull AppInitializer init) {
 		loading = false;
 		if (!destroyed) {
-			reloadHistoryInternal();
-			if (!Algorithms.isEmpty(searchText)) {
-				getSearchHelper().runSearch(searchText);
+			if (searchType == MAIN) {
+				reloadHistoryInternal();
+				if (!Algorithms.isEmpty(searchText)) {
+					getSearchHelper().runSearch(searchText);
+				}
+				invalidate();
 			}
-			invalidate();
 		}
 	}
 
