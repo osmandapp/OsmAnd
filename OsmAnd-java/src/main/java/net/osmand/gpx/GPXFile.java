@@ -183,10 +183,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 	}
 
-	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt, boolean hiddenWasChanged) {
+	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		GPXUtilities.WptPt currentWpt = getWptPt(wptName, wptIndex);
 		if (currentWpt != null) {
-			updateWptPt(currentWpt, newWpt, hiddenWasChanged);
+			updateWptPt(currentWpt, newWpt, updateTimestamp);
 		} else {
 			addPoint(newWpt);
 		}
