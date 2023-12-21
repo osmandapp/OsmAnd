@@ -370,7 +370,7 @@
     <string name="poi_craft_plasterer">Stuckateur</string>
     <string name="poi_playground">Spielplatz</string>
     <string name="poi_craft_plumber">Installateur</string>
-    <string name="poi_podiatrist">Fußpfleger</string>
+    <string name="poi_podiatrist">Podologe</string>
     <string name="poi_police">Polizei</string>
     <string name="poi_post_box">Briefkasten</string>
     <string name="poi_post_office">Post</string>
@@ -4649,9 +4649,9 @@
     <string name="poi_osmand_motorcar_private">PKW-Zufahrt: privat</string>
     <string name="poi_osmand_motorcycle_no">Motorradzufahrt: nein</string>
     <string name="poi_osmand_motorcycle_private">Motorradzufahrt: privat</string>
-    <string name="poi_healthcare_speciality_denturist">Denturist</string>
+    <string name="poi_healthcare_speciality_denturist">Zahntechniker</string>
     <string name="poi_healthcare_speciality_pediatric">Pädiatrie</string>
-    <string name="poi_healthcare_speciality_pedorthist">Pedorthist</string>
+    <string name="poi_healthcare_speciality_pedorthist">Fußpfleger</string>
     <string name="poi_healthcare_speciality_laboratory">Gesundheitsspezialisierung: Labor</string>
     <string name="poi_healthcare_speciality_body">Körperorientierte Psychotherapie</string>
     <string name="poi_healthcare_speciality_obstetrics">Geburtshilfe</string>
@@ -4718,5 +4718,5 @@
     <string name="poi_state_active">Status: aktiv</string>
     <string name="poi_state_approved">Status: genehmigt</string>
     <string name="poi_state_proposed">Status: vorgeschlagen</string>
-    <string name="poi_state_main">Status: Haupt</string>
+    <string name="poi_state_main">Status: hauptsächlich</string>
 </resources>
