@@ -5416,23 +5416,27 @@
     <string name="help_article_navigation_routing_train_routing_name">火車路線</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• 新增變更外部輸入裝置按鍵綁定的功能
+    <string name="release_4_6">• Android Auto：新增 3D 模式
 \n
-\n • 新增「滑翔比」小工具
+\n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量
 \n
-\n • 新增軌跡的篩選條件與智慧型資料夾
+\n • 強化的頂部與底部小工具面板以容納所有小工具
 \n
-\n • 新增頂部與底部小工具面板的列，並支援所有小工具
+\n • 改善的本機資源管理
 \n
-\n • 新增對 ANT+ 溫度小工具的支援
+\n • 外部控制器的可自訂按鈕對應
 \n
-\n • 改善大型 GPX 軌跡的記憶體管理
+\n • 新的小工具：「滑翔比」與「太陽位置」
 \n
-\n • 更新了「下載」資料夾中的本機資源管理
+\n • OsmAnd Cloud：現在可以存取已刪除的檔案
 \n
-\n • 新增小工具「可用記憶體」
+\n • 使用新的對稱漸層強化坡度模式下的軌跡著色
 \n
-\n • 修復透明狀態列的問題
+\n • 解決了透明狀態列的問題
+\n
+\n • 新增了對 ANT+ 溫度小工具的支援
+\n
+\n • 引入了「可用記憶體」小工具
 \n
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
@@ -5569,4 +5573,8 @@
     <string name="shared_string_next_event">下次事件</string>
     <string name="map_widget_sun_position">太陽位置</string>
     <string name="map_widget_sun_position_desc">這個小工具會根據目前時間顯示到日出或日落之前的時間。</string>
+    <string name="previous_row_has_complex_widget">上一列有複雜的小工具</string>
+    <string name="complex_widget_alert">%1$s 小工具只能放在自己的列上。</string>
+    <string name="precise_distance_numbers">精確的距離數字</string>
+    <string name="any_connected">任何已連線</string>
 </resources>
