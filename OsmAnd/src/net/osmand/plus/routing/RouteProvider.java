@@ -82,6 +82,7 @@ public class RouteProvider {
 	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
 	private static final int MIN_INTERMEDIATE_DIST = 10;
+	private static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
 
 	public static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
@@ -181,7 +182,7 @@ public class RouteProvider {
 			int[] startI = {0};
 			int[] endI = {locs.size()};
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
-			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
+			List<RouteDirectionInfo> directions = calcDirections(startI[0], endI[0], rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
 			res = new RouteCalculationResult(locs, directions, params, null, true);
 		} catch (RuntimeException e) {
@@ -325,10 +326,18 @@ public class RouteProvider {
 					routeParams.start, routeParams.end, startI, endI);
 		}
 		List<RouteDirectionInfo> inputDirections = gpxParams.directions;
-		List<RouteDirectionInfo> gpxDirections = calcDirections(startI, endI, inputDirections);
+		List<RouteDirectionInfo> gpxDirections = calcDirections(startI[0], endI[0], inputDirections);
 		insertIntermediateSegments(routeParams, gpxRoute, gpxDirections, gpxParams.segmentEndpoints, calculateOsmAndRouteParts);
 		insertInitialSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
 		insertFinalSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
+
+		if (routeParams.previousToRecalculate != null && routeParams.onlyStartPointChanged && routeParams.start != null) {
+			int index = findNearestPointIndexOnRecalculate(routeParams.previousToRecalculate, gpxRoute, routeParams.start);
+			if (index > 0) {
+				gpxRoute = gpxRoute.subList(index, gpxRoute.size());
+				gpxDirections = calcDirections(index, gpxRoute.size(), gpxDirections);
+			}
+		}
 
 		for (RouteDirectionInfo info : gpxDirections) {
 			// recalculate
@@ -400,16 +409,16 @@ public class RouteProvider {
 		return closest;
 	}
 
-	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
+	private List<RouteDirectionInfo> calcDirections(int startIndex, int endIndex,
 			List<RouteDirectionInfo> inputDirections) {
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		if (inputDirections != null) {
 			for (RouteDirectionInfo info : inputDirections) {
-				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
+				if (info.routePointOffset >= startIndex && info.routePointOffset < endIndex) {
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
-					ch.routePointOffset = info.routePointOffset - startI[0];
+					ch.routePointOffset = info.routePointOffset - startIndex;
 					if(info.routeEndPointOffset != 0) {
-						ch.routeEndPointOffset = info.routeEndPointOffset - startI[0];
+						ch.routeEndPointOffset = info.routeEndPointOffset - startIndex;
 					}
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
 					ch.setRouteDataObject(info.getRouteDataObject());
@@ -648,6 +657,30 @@ public class RouteProvider {
 			}
 		}
 		return nearestPointIndex;
+	}
+
+	private int findNearestPointIndexOnRecalculate(@NonNull RouteCalculationResult previousRoute,
+	                                               @NonNull List<Location> routeLocations,
+	                                               @NonNull Location startLocation) {
+		float prevDistanceToFinish = previousRoute.getRouteDistanceToFinish(0);
+		float searchDistance = prevDistanceToFinish + NEAREST_POINT_EXTRA_SEARCH_DISTANCE;
+		float checkedDistance = 0;
+		int newStartIndex = 0;
+		float minDistance = Integer.MAX_VALUE;
+
+		for (int i = routeLocations.size() - 2; i >= 0 && checkedDistance < searchDistance; i--) {
+			Location routeLocation = routeLocations.get(i);
+			float distance = startLocation.distanceTo(routeLocation);
+
+			if (distance < Math.min(minDistance, MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT)) {
+				minDistance = distance;
+				newStartIndex = i;
+			}
+
+			checkedDistance += routeLocation.distanceTo(routeLocations.get(i + 1));
+		}
+
+		return newStartIndex;
 	}
 
 	public RoutingEnvironment getRoutingEnvironment(OsmandApplication ctx, ApplicationMode mode, LatLon start, LatLon end) throws IOException {
