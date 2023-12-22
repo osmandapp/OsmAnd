@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -63,12 +64,7 @@ public class ImportedSettingsItemsAdapter extends
 			holder.title.setTypeface(typeface);
 		}
 		holder.divider.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(currentItemType);
-			}
-		});
+		holder.itemView.setOnClickListener(view -> listener.onItemClick(currentItemType));
 		holder.subTitle.setText(String.format(
 				app.getString(R.string.ltr_or_rtl_combine_via_colon),
 				app.getString(R.string.items_added),
@@ -124,9 +120,25 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_favorite, activeColorRes));
 				holder.title.setText(R.string.shared_string_favorites);
 				break;
-			case OFFLINE_MAPS:
+			case STANDARD_MAPS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
-				holder.title.setText(R.string.shared_string_maps);
+				holder.title.setText(R.string.standard_maps);
+				break;
+			case ROAD_MAPS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
+				holder.title.setText(R.string.download_roads_only_maps);
+				break;
+			case WIKI_AND_TRAVEL:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_wikipedia, activeColorRes));
+				holder.title.setText(R.string.wikipedia_and_travel_maps);
+				break;
+			case TERRAIN_DATA:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_terrain, activeColorRes));
+				holder.title.setText(R.string.topography_maps);
+				break;
+			case DEPTH_DATA:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_anchor, activeColorRes));
+				holder.title.setText(R.string.nautical_maps);
 				break;
 			case TTS_VOICE:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));

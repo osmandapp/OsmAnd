@@ -2325,7 +2325,7 @@ public class OsmandAidlApi {
 	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
-			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
+			bundle.putStringArrayList(SettingsHelper.EXPORT_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
 			bundle.putBoolean(REPLACE_KEY, replace);
 			bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
@@ -2387,20 +2387,16 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
+	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypesKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportType> settingsTypes = new ArrayList<>();
-			for (String key : settingsTypesKeys) {
-				settingsTypes.add(ExportType.valueOf(key));
-			}
-			settingsTypes.remove(ExportType.PROFILE);
+			List<ExportType> acceptedExportTypes = ExportType.valuesForKeys(acceptedExportTypesKeys, ExportType.PROFILE.name());
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false, true));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(acceptedExportTypes, true, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

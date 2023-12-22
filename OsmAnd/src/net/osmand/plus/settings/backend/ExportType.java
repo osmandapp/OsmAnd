@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public enum ExportType {
 
@@ -40,8 +43,8 @@ public enum ExportType {
 	CUSTOM_RENDER_STYLE(R.string.shared_string_rendering_style, R.drawable.ic_action_map_style, SettingsItemType.FILE),
 	CUSTOM_ROUTING(R.string.shared_string_routing, R.drawable.ic_action_route_distance, SettingsItemType.FILE),
 	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_action_layers, SettingsItemType.MAP_SOURCES),
-	OFFLINE_MAPS(R.string.standard_maps, R.drawable.ic_map, SettingsItemType.FILE),
-	ROAD_MAPS(R.string.download_roads_only_maps, R.drawable.ic_map, SettingsItemType.FILE),
+	STANDARD_MAPS(R.string.standard_maps, R.drawable.ic_map, SettingsItemType.FILE),
+	ROAD_MAPS(R.string.shared_string_road_maps, R.drawable.ic_map, SettingsItemType.FILE),
 	WIKI_AND_TRAVEL(R.string.wikipedia_and_travel_maps, R.drawable.ic_action_wikipedia, SettingsItemType.FILE),
 	TERRAIN_DATA(R.string.topography_maps, R.drawable.ic_action_terrain, SettingsItemType.FILE),
 	DEPTH_DATA(R.string.nautical_maps, R.drawable.ic_action_anchor, SettingsItemType.FILE),
@@ -96,9 +99,13 @@ public enum ExportType {
 
 	public boolean isResourcesCategory() {
 		return this == CUSTOM_RENDER_STYLE || this == CUSTOM_ROUTING || this == MAP_SOURCES
-				|| this == OFFLINE_MAPS || this == ROAD_MAPS || this == WIKI_AND_TRAVEL
+				|| this == STANDARD_MAPS || this == ROAD_MAPS || this == WIKI_AND_TRAVEL
 				|| this == TERRAIN_DATA || this == DEPTH_DATA ||this == VOICE || this == TTS_VOICE
 				|| this == ONLINE_ROUTING_ENGINES || this == FAVORITES_BACKUP;
+	}
+
+	public boolean isMap() {
+		return mapTypes().contains(this);
 	}
 
 	@Nullable
@@ -121,7 +128,9 @@ public enum ExportType {
 	}
 
 	@Nullable
-	public static ExportType findBySettingsItem(@NonNull SettingsItem item) {
+	public static ExportType findBySettingsItem(@Nullable SettingsItem item) {
+		if (item == null) return null;
+
 		for (ExportType exportType : values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
@@ -146,7 +155,7 @@ public enum ExportType {
 		} else if (subtype == FileSubtype.GPX) {
 			return TRACKS;
 		} else if (subtype == FileSubtype.OBF_MAP) {
-			return OFFLINE_MAPS;
+			return STANDARD_MAPS;
 		} else if (subtype == FileSubtype.WIKI_MAP || subtype == FileSubtype.TRAVEL) {
 			return WIKI_AND_TRAVEL;
 		} else if (subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TERRAIN_DATA) {
@@ -170,7 +179,7 @@ public enum ExportType {
 	@Nullable
 	public static ExportType findByLocalItemType(@NonNull LocalItemType localItemType) {
 		if (localItemType == LocalItemType.MAP_DATA) {
-			return OFFLINE_MAPS;
+			return STANDARD_MAPS;
 		} else if (localItemType == LocalItemType.ROAD_DATA) {
 			return ROAD_MAPS;
 		} else if (localItemType == LocalItemType.WIKI_AND_TRAVEL_MAPS) {
@@ -183,6 +192,10 @@ public enum ExportType {
 			return TTS_VOICE;
 		} else if (localItemType == LocalItemType.VOICE_DATA) {
 			return VOICE;
+		} else if (localItemType == LocalItemType.TILES_DATA) {
+			return MAP_SOURCES;
+		} else if (localItemType == LocalItemType.RENDERING_STYLES) {
+			return CUSTOM_RENDER_STYLE;
 		}
 		return null;
 	}
@@ -191,12 +204,57 @@ public enum ExportType {
 		return allowedInFreeVersion;
 	}
 
-	public static boolean isTypeEnabled(@NonNull ExportType type) {
-		return getEnabledTypes().contains(type);
+	public boolean isNotEnabled() {
+		return !isEnabled();
+	}
+
+	public boolean isEnabled() {
+		return enabledValues().contains(this);
 	}
 
 	@NonNull
-	public static List<ExportType> getEnabledTypes() {
+	public static List<ExportType> mapTypes() {
+		return Arrays.asList(STANDARD_MAPS, ROAD_MAPS, WIKI_AND_TRAVEL, TERRAIN_DATA, DEPTH_DATA);
+	}
+
+	@NonNull
+	public static List<ExportType> valuesForKeys(@NonNull List<String> typeKeys,
+	                                             @Nullable String ... keysToExclude) {
+		List<ExportType> result = new ArrayList<>();
+		for (String key : typeKeys) {
+			if (shouldExclude(key, keysToExclude)) {
+				continue;
+			}
+			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
+				for (ExportType type : ExportType.mapTypes()) {
+					addExportTypeIfNeeded(result, type);
+				}
+			} else {
+				addExportTypeIfNeeded(result, ExportType.valueOf(key));
+			}
+		}
+		return result;
+	}
+
+	private static boolean shouldExclude(@NonNull String key, @Nullable String ... keysToExclude) {
+		if (keysToExclude != null) {
+			for (String keyToExclude : keysToExclude) {
+				if (Objects.equals(key, keyToExclude)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static void addExportTypeIfNeeded(@NonNull List<ExportType> list, @NonNull ExportType type) {
+		if (!list.contains(type)) {
+			list.add(type);
+		}
+	}
+
+	@NonNull
+	public static List<ExportType> enabledValues() {
 		List<ExportType> result = new ArrayList<>(Arrays.asList(values()));
 		if (!PluginsHelper.isActive(OsmEditingPlugin.class)) {
 			result.remove(OSM_EDITS);

@@ -222,8 +222,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((RemoteFile) object).getZipSize();
 					} else if (object instanceof MapMarkersGroup) {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-						if (Algorithms.stringsEqual(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name())
-								|| Algorithms.stringsEqual(markersGroup.getId(), ExportType.HISTORY_MARKERS.name())) {
+						if (Algorithms.equalsToAny(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name(), ExportType.HISTORY_MARKERS.name())) {
 							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
 						}
 					}

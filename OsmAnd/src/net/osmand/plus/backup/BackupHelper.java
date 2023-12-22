@@ -309,12 +309,31 @@ public class BackupHelper {
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
 	}
 
-	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType type) {
+	@NonNull
+	private List<ExportType> getEnabledExportTypes() {
+		List<ExportType> result = new ArrayList<>();
+		for (ExportType exportType : ExportType.enabledValues()) {
+			if (getBackupTypePref(exportType).get()) {
+				result.add(exportType);
+			}
+		}
+		return result;
+	}
+
+	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {
+		return getBackupTypePref(app, exportType);
+	}
+
+	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportType exportType) {
+		return getVersionHistoryTypePref(app, exportType);
+	}
+
+	public static CommonPreference<Boolean> getBackupTypePref(@NonNull OsmandApplication app, @NonNull ExportType type) {
 		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
-	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportType type) {
-		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
+	public static CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull OsmandApplication app, @NonNull ExportType exportType) {
+		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + exportType.name(), true).makeGlobal().makeShared();
 	}
 
 	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
@@ -909,14 +928,7 @@ public class BackupHelper {
 			}
 
 			private List<SettingsItem> getLocalItems() {
-				List<ExportType> types = ExportType.getEnabledTypes();
-				Iterator<ExportType> it = types.iterator();
-				while (it.hasNext()) {
-					ExportType type = it.next();
-					if (!getBackupTypePref(type).get()) {
-						it.remove();
-					}
-				}
+				List<ExportType> types = getEnabledExportTypes();
 				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, false);
 			}
 
@@ -977,7 +989,7 @@ public class BackupHelper {
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportType exportType = ExportType.findByRemoteFile(remoteFile);
-					if (exportType == null || !ExportType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
+					if (exportType == null || exportType.isNotEnabled() || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
@@ -1008,9 +1020,8 @@ public class BackupHelper {
 					}
 				}
 				for (LocalFile localFile : localFiles.values()) {
-					ExportType exportType = localFile.item != null
-							? ExportType.findBySettingsItem(localFile.item) : null;
-					if (exportType == null || !ExportType.isTypeEnabled(exportType)) {
+					ExportType exportType = ExportType.findBySettingsItem(localFile.item);
+					if (exportType == null || exportType.isNotEnabled()) {
 						continue;
 					}
 					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());

@@ -79,7 +79,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ExportItemsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ExportItemsBottomSheet.class);
 
-	private static final String SETTINGS_TYPE_KEY = "settings_type_key";
+	private static final String EXPORT_TYPE_KEY = "export_type_key";
 	private static final String EXPORT_MODE_KEY = "export_mode_key";
 
 	private OsmandApplication app;
@@ -101,7 +101,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			exportMode = savedInstanceState.getBoolean(EXPORT_MODE_KEY);
-			type = ExportType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
+			type = ExportType.valueOf(savedInstanceState.getString(EXPORT_TYPE_KEY));
 		}
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseSettingsListFragment) {
@@ -163,7 +163,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(EXPORT_MODE_KEY, exportMode);
-		outState.putString(SETTINGS_TYPE_KEY, type.name());
+		outState.putString(EXPORT_TYPE_KEY, type.name());
 	}
 
 	private BaseBottomSheetItem createTitleItem() {
@@ -204,7 +204,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		String description;
-		if (type == ExportType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
+		if (type != null && type.isMap() && !selectedItems.isEmpty()) {
 			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
 			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);

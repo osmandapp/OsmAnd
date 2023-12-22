@@ -41,9 +41,9 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	@Override
 	protected Map<ExportType, List<?>> getSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
-		for (ExportType type : ExportType.values()) {
-			if (backupHelper.getVersionHistoryTypePref(type).get()) {
-				selectedItemsMap.put(type, getItemsForType(type));
+		for (ExportType exportType : ExportType.values()) {
+			if (backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}
 		}
 		return selectedItemsMap;

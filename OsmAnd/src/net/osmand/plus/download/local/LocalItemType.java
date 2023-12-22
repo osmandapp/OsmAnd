@@ -110,14 +110,4 @@ public enum LocalItemType {
 	public boolean isMapsSortingSupported() {
 		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA);
 	}
-
-	@Nullable
-	public ExportType getExportSettingsType() {
-		if (this == TILES_DATA) {
-			return ExportType.MAP_SOURCES;
-		} else if (this == RENDERING_STYLES) {
-			return ExportType.CUSTOM_RENDER_STYLE;
-		}
-		return null;
-	}
 }

@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_road_maps">Road maps</string>
     <string name="shared_string_next_event">Next event</string>
     <string name="map_widget_sun_position_desc">This widget shows the time until sunrise or sunset, depending on the current time.</string>
     <string name="map_widget_sun_position">Sun position</string>

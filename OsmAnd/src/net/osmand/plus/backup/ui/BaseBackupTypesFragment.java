@@ -143,17 +143,17 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		List<ExportType> types = categoryItems.getTypes();
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		for (ExportType type : types) {
-			if (type.isAllowedInFreeVersion() || available) {
-				List<Object> items = getItemsForType(type);
+		List<ExportType> exportTypes = categoryItems.getTypes();
+		boolean backupFeaturePurchased = InAppPurchaseUtils.isBackupAvailable(app);
+		for (ExportType type : exportTypes) {
+			if (type.isAllowedInFreeVersion() || backupFeaturePurchased) {
+				List<?> items = getItemsForType(type);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(type, selected ? items : null);
 			}
 		}
 		if (!selected && hasItemsToDelete) {
-			showClearTypesBottomSheet(types);
+			showClearTypesBottomSheet(exportTypes);
 		}
 	}
 
@@ -161,7 +161,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	public void onTypeSelected(ExportType type, boolean selected) {
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		if (type.isAllowedInFreeVersion() || available) {
-			List<Object> items = getItemsForType(type);
+			List<?> items = getItemsForType(type);
 			selectedItemsMap.put(type, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
 				showClearTypesBottomSheet(Collections.singletonList(type));
@@ -178,29 +178,30 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		}
 	}
 
+	@NonNull
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
 		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
 		if (remoteFiles == null) {
 			remoteFiles = Collections.emptyMap();
 		}
-
-		Map<ExportType, List<?>> settingsToOperate = new EnumMap<>(ExportType.class);
-		for (ExportType type : ExportType.getEnabledTypes()) {
+		Map<ExportType, List<?>> dataToOperate = new EnumMap<>(ExportType.class);
+		for (ExportType exportType : ExportType.enabledValues()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
 			for (RemoteFile remoteFile : remoteFiles.values()) {
-				if (ExportType.findByRemoteFile(remoteFile) == type) {
+				if (ExportType.findByRemoteFile(remoteFile) == exportType) {
 					filesByType.add(remoteFile);
 				}
 			}
-			settingsToOperate.put(type, filesByType);
+			dataToOperate.put(exportType, filesByType);
 		}
-		return SettingsHelper.getSettingsToOperateByCategory(settingsToOperate, true);
+		return SettingsHelper.getSettingsToOperateByCategory(dataToOperate, true);
 	}
 
-	protected List<Object> getItemsForType(ExportType type) {
+	@NonNull
+	protected List<?> getItemsForType(ExportType type) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
 			if (categoryItems.getTypes().contains(type)) {
-				return (List<Object>) categoryItems.getItemsForType(type);
+				return categoryItems.getItemsForType(type);
 			}
 		}
 		return Collections.emptyList();

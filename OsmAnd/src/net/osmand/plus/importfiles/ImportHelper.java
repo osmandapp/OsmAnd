@@ -16,7 +16,9 @@ import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.EXPORT_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_LATEST_CHANGES_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_VERSION_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 import android.content.ActivityNotFoundException;
@@ -316,22 +318,17 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		if (extras != null
-				&& extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY)
-				&& extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
-			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
-			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
+		if (Algorithms.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
+			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
+			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);
 			boolean silentImport = extras.getBoolean(SILENT_IMPORT_KEY);
-			ArrayList<String> settingsTypeKeys = extras.getStringArrayList(SETTINGS_TYPE_LIST_KEY);
-			List<ExportType> settingsTypes = null;
-			if (settingsTypeKeys != null) {
-				settingsTypes = new ArrayList<>();
-				for (String key : settingsTypeKeys) {
-					settingsTypes.add(ExportType.valueOf(key));
-				}
+			ArrayList<String> exportTypeKeys = extras.getStringArrayList(EXPORT_TYPE_LIST_KEY);
+			List<ExportType> exportTypes = null;
+			if (exportTypeKeys != null) {
+				exportTypes = ExportType.valuesForKeys(exportTypeKeys);
 			}
-			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, silentImport, latestChanges, version);
+			handleOsmAndSettingsImport(intentUri, fileName, exportTypes, replace, silentImport, latestChanges, version);
 		} else {
 			handleOsmAndSettingsImport(intentUri, fileName, null, false, false, null, -1);
 		}

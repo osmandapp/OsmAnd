@@ -157,7 +157,7 @@ public class ItemMenuProvider implements MenuProvider {
 				return true;
 			});
 		}
-		ExportType exportType = type.getExportSettingsType();
+		ExportType exportType = ExportType.findByLocalItemType(type);
 		if (!localItem.isHidden(app) && exportType != null) {
 			menuItem = menu.add(0, R.string.shared_string_export, Menu.NONE, R.string.shared_string_export);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_upload, colorId));

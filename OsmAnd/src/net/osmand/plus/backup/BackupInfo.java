@@ -37,7 +37,7 @@ public class BackupInfo {
 		createFilteredFilesToDelete(app);
 		createItemsToDelete();
 		createFilteredFilesToMerge(app);
-		createFilteredLocalFilesToDelete(app);
+		createFilteredLocalFilesToDelete();
 		createLocalItemsToDelete();
 	}
 
@@ -91,8 +91,7 @@ public class BackupInfo {
 		BackupHelper helper = app.getBackupHelper();
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
-			ExportType type = localFile.item != null ?
-					ExportType.findBySettingsItem(localFile.item) : null;
+			ExportType type = ExportType.findBySettingsItem(localFile.item);
 			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
 				files.add(localFile);
 			}
@@ -112,12 +111,11 @@ public class BackupInfo {
 		filteredFilesToDelete = files;
 	}
 
-	private void createFilteredLocalFilesToDelete(@NonNull OsmandApplication app) {
+	private void createFilteredLocalFilesToDelete() {
 		List<LocalFile> files = new ArrayList<>();
 		for (LocalFile localFile : localFilesToDelete) {
-			ExportType exportType = localFile.item != null
-					? ExportType.findBySettingsItem(localFile.item) : null;
-			if (exportType != null && ExportType.isTypeEnabled(exportType)) {
+			ExportType exportType = ExportType.findBySettingsItem(localFile.item);
+			if (exportType != null && exportType.isEnabled()) {
 				files.add(localFile);
 			}
 		}
