@@ -5423,23 +5423,27 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Külső beviteli eszközök billentyű hozzárendelés megváltoztatásának lehetősége hozzáadva
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva
 \n
-\n • Siklási arány widget hozzáadva
+\n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára
 \n
-\n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
+\n • Továbbfejlesztett felső és alsó widgetpanel az összes widget fogadásához
 \n
-\n • Sorok hozzáadva a felső és alsó widget panelekhez, az összes widget támogatásával
+\n • Továbbfejlesztett helyi erőforrás-kezelés
 \n
-\n • ANT+ hőmérséklet widget támogatás hozzáadva
+\n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n • Új widgetek: „Siklási arány” és „Nap állása”
 \n
-\n • Frissítve a helyi erőforrás-kezelés a Letöltésekben
+\n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
-\n • \"Elérhető memória\" widget hozzáadva
+\n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel
 \n
-\n • Átlátszó állapotsor problémái javítva
+\n • Az átlátszó állapotsorral kapcsolatos probléma javítva
+\n
+\n • Hozzáadott támogatás az ANT+ hőmérséklet widgethez
+\n
+\n • Bemutatjuk az \"Elérhető RAM\" widgetet
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
@@ -5575,6 +5579,9 @@
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus zoom (régi verzió)</string>
     <string name="shared_string_next_event">Következő esemény</string>
-    <string name="map_widget_sun_position">Nap helyzete</string>
+    <string name="map_widget_sun_position">Nap állása</string>
     <string name="map_widget_sun_position_desc">Ez a widget az aktuális időtől függően mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
+    <string name="previous_row_has_complex_widget">Az előző sorban összetett widget van</string>
+    <string name="complex_widget_alert">%1$s widget csak a saját sorában helyezhető el.</string>
+    <string name="precise_distance_numbers">Pontos távolságadatok</string>
 </resources>

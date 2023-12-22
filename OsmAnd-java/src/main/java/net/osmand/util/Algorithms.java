@@ -1413,4 +1413,46 @@ public class Algorithms {
 		while (!checkNameCallback.processResult(newName));
 		return newName;
 	}
+	
+
+	public static int lowerTo10BaseRoundingBounds(int num, int[] roundRange) {
+		int k = 1;
+		while (k < roundRange.length && (roundRange[k] > num || roundRange[k - 1] > num) ) {
+			k += 2;
+		}
+		if (k < roundRange.length) {
+			return (num / roundRange[k - 1]) * roundRange[k - 1];
+		}
+		return num;
+	}
+	
+	public static int[] generate10BaseRoundingBounds(int max, int multCoef) {
+		int basenum = 1, mult = 1, num = basenum * mult, ind = 0;
+		List<Integer> bounds = new ArrayList<>();
+		while (num < max) {
+			ind++;
+			if (ind % 3 == 1) {
+				mult = 2;
+			} else if (ind % 3 == 2) {
+				mult = 5;
+			} else {
+				basenum *= 10;
+				mult = 1;
+			}
+			if (ind > 1) {
+				int bound = num * multCoef;
+				while (bound % (basenum * mult) != 0 && bound > basenum * mult ) {
+					bound += num;
+				}
+				bounds.add(bound);
+			}
+			num = basenum * mult;
+			bounds.add(num);
+		}
+		int[] ret = new int[bounds.size()];
+		for(int j = 0; j < ret.length; j++) {
+			ret[j] = bounds.get(bounds.size() - j - 1);
+		}
+		return ret;
+	}
 }

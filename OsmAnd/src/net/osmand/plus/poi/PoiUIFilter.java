@@ -367,7 +367,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this, topLatitude, leftLongitude,
-				bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
+				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter(String filter) {
@@ -931,5 +931,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		} else {
 			return this.name.compareToIgnoreCase(another.name);
 		}
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getFilterId();
 	}
 }

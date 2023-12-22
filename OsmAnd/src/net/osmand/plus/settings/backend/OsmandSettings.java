@@ -89,21 +89,7 @@ import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.AutoZoomMap;
-import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.settings.enums.DistanceByTapTextSize;
-import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.enums.Map3DModeVisibility;
-import net.osmand.plus.settings.enums.MapsSortMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SimulationMode;
-import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -1279,6 +1265,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference(this, "use_kalman_filter_compass", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> USE_VOLUME_BUTTONS_AS_ZOOM = new BooleanPreference(this, "use_volume_buttons_as_zoom", false).makeProfile().cache();
 
+	public final CommonPreference<Boolean> PRECISE_DISTANCE_NUMBERS = new BooleanPreference(this, "precise_distance_numbers", true).makeProfile().cache();
+
+	{
+		PRECISE_DISTANCE_NUMBERS.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
+
 	public final OsmandPreference<Boolean> DO_NOT_SHOW_STARTUP_MESSAGES = new BooleanPreference(this, "do_not_show_startup_messages", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOW_DOWNLOAD_MAP_DIALOG = new BooleanPreference(this, "show_download_map_dialog", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference(this, "do_not_use_animations", false).makeProfile().cache();
@@ -1913,7 +1905,7 @@ public class OsmandSettings {
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext()) {
+			if (iterator.hasNext() && !builder.toString().endsWith(PAGE_SEPARATOR)) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}

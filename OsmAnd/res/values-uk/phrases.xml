@@ -4670,4 +4670,20 @@
     <string name="poi_osmand_motorcycle_private">Доступ на мотоциклах: приватний</string>
     <string name="poi_healthcare_speciality_neonatology">Неонатологія</string>
     <string name="poi_healthcare_speciality_psychology">Психологія</string>
+    <string name="poi_healthcare_speciality_pediatric">Педіатрія</string>
+    <string name="poi_healthcare_speciality_body">Тілесно-орієнтована психотерапія</string>
+    <string name="poi_healthcare_speciality_obstetrics">Акушерство</string>
+    <string name="poi_healthcare_speciality_systemic">Системне лікування</string>
+    <string name="poi_healthcare_speciality_humanistic">Психологія особистості</string>
+    <string name="poi_distance">Відстань</string>
+    <string name="poi_healthcare_speciality_venereology">Венерологія</string>
+    <string name="poi_to">До</string>
+    <string name="poi_healthcare_speciality_microbiology">Мікробіологія</string>
+    <string name="poi_healthcare_speciality_nutrition">Харчування</string>
+    <string name="poi_healthcare_speciality_pharmacology">Фармакологія</string>
+    <string name="poi_healthcare_speciality_abortion">Аборти</string>
+    <string name="poi_healthcare_speciality_first_aid_training">Навчання надання першої домедичної допомоги</string>
+    <string name="poi_healthcare_speciality_sophrologist">Софрологія</string>
+    <string name="poi_from">З</string>
+    <string name="poi_healthcare_speciality_travel_clinic">Туристична клініка</string>
 </resources>

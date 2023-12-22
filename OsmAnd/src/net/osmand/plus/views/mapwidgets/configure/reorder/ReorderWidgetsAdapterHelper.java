@@ -149,13 +149,8 @@ public class ReorderWidgetsAdapterHelper {
 			return;
 		}
 
-		if (verticalPanel) {
-			deletePageWithWidgets(pageToDelete);
-			dataHolder.deletePageWithoutShift(pageToDelete);
-		} else {
-			moveWidgetsToPreviousPage(pageToDelete);
-			dataHolder.deletePage(pageToDelete);
-		}
+		moveWidgetsToPreviousPage(pageToDelete);
+		dataHolder.deletePage(pageToDelete);
 		items.remove(position);
 
 		List<Integer> changedPageItems = new ArrayList<>();
@@ -218,20 +213,21 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	public void addPage() {
-		int pagesCount = 0;
+		int maxPage = 0;
 		int addPageButtonIndex = -1;
 		for (int i = 0; i < items.size() && addPageButtonIndex == -1; i++) {
 			ItemType type = items.get(i).type;
 			if (type == ItemType.PAGE) {
-				pagesCount++;
+				int itemIndex = ((PageUiInfo) items.get(i).value).index;
+				maxPage = Math.max(maxPage, itemIndex);
 			} else if (type == ItemType.ADD_PAGE_BUTTON) {
 				addPageButtonIndex = i;
 			}
 		}
-
 		if (addPageButtonIndex != -1) {
-			dataHolder.addEmptyPage(pagesCount);
-			ListItem newPageListItem = new ListItem(ItemType.PAGE, new PageUiInfo(pagesCount));
+			maxPage++;
+			dataHolder.addEmptyPage(maxPage);
+			ListItem newPageListItem = new ListItem(ItemType.PAGE, new PageUiInfo(maxPage));
 			items.add(addPageButtonIndex, newPageListItem);
 			adapter.notifyItemInserted(addPageButtonIndex);
 		}
@@ -360,7 +356,7 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	public boolean swapItemsIfAllowed(int from, int to) {
-		return verticalPanel ? swapVerticalWidgets(from, to) : swapHorizontalWidgets(from, to);
+		return swapHorizontalWidgets(from, to);
 	}
 
 	private void addVerticalWidgetsToRow(int from, int to, int pageId, PageUiInfo pageUiInfo) {

@@ -186,8 +186,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupDistance(@NonNull SpannableStringBuilder builder) {
 		int distance = routingHelper.getLeftDistance();
-		MetricsConstants constants = app.getSettings().METRIC_SYSTEM.get();
-		FormattedValue value = getFormattedDistanceValue(distance, app, true, constants);
+		FormattedValue value = getFormattedDistanceValue(distance, app);
 
 		int index = builder.length();
 		builder.append(value.value);

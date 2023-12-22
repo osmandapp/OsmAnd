@@ -22,7 +22,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
@@ -39,16 +38,16 @@ public class RoutePlannerFrontEnd {
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
-	public boolean useSmartRouteRecalculation = true;
-	public boolean useNativeApproximation = true;
-
 	static boolean TRACE_ROUTING = false;
-	public static boolean USE_HH_ROUTING = false;
-	public static boolean USE_ONLY_HH_ROUTING = false;
-//	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-
 	
+	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+//	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+	private boolean useSmartRouteRecalculation = true;
+	private boolean useNativeApproximation = true;
+	private boolean useOnlyHHRouting = false;
+	private HHRoutingConfig hhRoutingConfig = null;
+	
+
 	public RoutePlannerFrontEnd() {
 	}
 	
@@ -91,13 +90,13 @@ public class RoutePlannerFrontEnd {
 
 		@Override
 		public String toString() {
-			return String.format(">> GPX approximation (%d of %d m route calcs, %d route points searched) for %d m: %d m umatched",
+			return String.format(">> GPX approximation (%d of %d m route calcs, %d route points searched) for %d m: %d m unmatched",
 					routeCalculations, routeDistCalculations, routePointsSearched, routeDistance, routeDistanceUnmatched);
 		}
 
-		public double distFromLastPoint(LatLon startPoint) {
+		public double distFromLastPoint(LatLon pnt) {
 			if (result.size() > 0) {
-				return MapUtils.getDistance(getLastPoint(), startPoint);
+				return MapUtils.getDistance(getLastPoint(), pnt);
 			}
 			return 0;
 		}
@@ -123,6 +122,20 @@ public class RoutePlannerFrontEnd {
 		public GpxPoint() {
 		}
 
+		public RouteSegmentResult getFirstRouteRes() {
+			if (routeToTarget == null || routeToTarget.isEmpty()) {
+				return null;
+			}
+			return routeToTarget.get(0);
+		}
+		
+		public RouteSegmentResult getLastRouteRes() {
+			if (routeToTarget == null || routeToTarget.isEmpty()) {
+				return null;
+			}
+			return routeToTarget.get(routeToTarget.size() - 1);
+		}
+		
 		public GpxPoint(GpxPoint point) {
 			this.ind = point.ind;
 			this.loc = point.loc;
@@ -227,6 +240,7 @@ public class RoutePlannerFrontEnd {
 			if (ps == null) {
 				ps = list.get(0);
 			}
+			list.remove(ps); // remove cyclic link to itself to avoid memory leaks (C++ backport)
 			ps.others = list;
 			return ps;
 		}
@@ -237,12 +251,36 @@ public class RoutePlannerFrontEnd {
 		return searchRoute(ctx, start, end, intermediates, null);
 	}
 
-	public void setUseFastRecalculation(boolean use) {
+	public RoutePlannerFrontEnd setUseFastRecalculation(boolean use) {
 		useSmartRouteRecalculation = use;
+		return this;
+	}
+	
+	public RoutePlannerFrontEnd setHHRoutingConfig(HHRoutingConfig hhRoutingConfig) {
+		// null means don't use hh 
+		this.hhRoutingConfig = hhRoutingConfig;
+		return this;
+	}
+	
+	public void setDefaultHHRoutingConfig() {
+		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+	}
+	
+	public RoutePlannerFrontEnd setUseOnlyHHRouting(boolean useOnlyHHRouting) {
+		this.useOnlyHHRouting = useOnlyHHRouting;
+		if (useOnlyHHRouting && hhRoutingConfig == null) {
+			this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+		}
+		return this;
 	}
 
-	public void setUseNativeApproximation(boolean useNativeApproximation) {
+	public RoutePlannerFrontEnd setUseNativeApproximation(boolean useNativeApproximation) {
 		this.useNativeApproximation = useNativeApproximation;
+		return this;
+	}
+	
+	public boolean isUseNativeApproximation() {
+		return useNativeApproximation;
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -277,11 +315,7 @@ public class RoutePlannerFrontEnd {
 									start.routeToTarget = null;
 								}
 							}
-							if (routeFound && next.ind == gpxPoints.size() - 1) {
-								// last point - last route found
-								makeSegmentPointPrecise(start.routeToTarget.get(start.routeToTarget.size() - 1),
-										next.loc, false);
-							} else if (routeFound) {
+							if (routeFound && next.ind < gpxPoints.size() - 1) {
 								// route is found - cut the end of the route and move to next iteration
 								// start.stepBackRoute = new ArrayList<RouteSegmentResult>();
 								// boolean stepBack = true;
@@ -319,7 +353,7 @@ public class RoutePlannerFrontEnd {
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.ctx.config.minStepApproximation);
 					if (prev != null) {
 						prev.routeToTarget.addAll(prev.stepBackRoute);
-						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
+//						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
 						if (next != null) {
 							log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
 						}
@@ -417,6 +451,9 @@ public class RoutePlannerFrontEnd {
 //		res.setEndPointIndex(beforeEnd);
 		next.pnt = new RouteSegmentPoint(res.getObject(), beforeEnd, end, 0);
 		// use start point as it overlaps
+		// as we step back we can't use precise coordinates
+//		next.pnt.preciseX = MapUtils.get31TileNumberX(next.loc.getLongitude());
+//		next.pnt.preciseY = MapUtils.get31TileNumberY(next.loc.getLatitude());
 		next.pnt.preciseX = next.pnt.getEndPointX();
 		next.pnt.preciseY = next.pnt.getEndPointY();
 		return true;
@@ -430,29 +467,34 @@ public class RoutePlannerFrontEnd {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
-				LatLon startPoint = pnt.routeToTarget.get(0).getStartPoint();
+				makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
+				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					lastStraightLine.add(startPoint);
+					System.out.println(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
 				}
 				if (gctx.distFromLastPoint(startPoint) > 1) {
 					gctx.routeGapDistance += gctx.distFromLastPoint(startPoint);
-					System.out.println(String.format("????? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
+					System.out.println(String.format("?? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
 							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc), pnt.loc));
 				}
 				gctx.finalPoints.add(pnt);
 				gctx.result.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
+				makeSegmentPointPrecise(pnt.getLastRouteRes(), gpxPoints.get(i).loc, false);
 			} else {
-				// add straight line from i -> i+1 
+				// add straight line from i -> i+1
+				LatLon lastPoint = null;
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					straightPointStart = pnt;
 					// make smooth connection
-					if (gctx.distFromLastPoint(pnt.loc) > 1) {
-						lastStraightLine.add(gctx.getLastPoint());
-					}
+					lastPoint = gctx.getLastPoint();
+				}
+				if (lastPoint == null) {
+					lastPoint = pnt.loc;
 				}
 				lastStraightLine.add(pnt.loc);
 				i++;
@@ -665,13 +707,10 @@ public class RoutePlannerFrontEnd {
 			if (routeIsCorrect) {
 				RouteSegmentResult firstSegment = res.detailed.get(0);
 				// correct start point though don't change end point
-				if (!prevRouteCalculated) {
-					// make first position precise
-					makeSegmentPointPrecise(firstSegment, start.loc, true);
-				} else {
+				if (prevRouteCalculated) {
 					if (firstSegment.getObject().getId() == start.pnt.getRoad().getId()) {
 						// start point is end point of prev route
-						firstSegment.setStartPointIndex(start.pnt.getSegmentEnd()); // TODO fix unmatched roads
+						firstSegment.setStartPointIndex(start.pnt.getSegmentEnd());
 						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
 							firstSegment.setObject(start.pnt.road);
 						}
@@ -787,7 +826,7 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if (USE_HH_ROUTING || USE_ONLY_HH_ROUTING) {
+		if (hhRoutingConfig != null) {
 			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
@@ -806,7 +845,7 @@ public class RoutePlannerFrontEnd {
 					dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 				}
 			}
-			if (r != null && r.isCorrect() || USE_ONLY_HH_ROUTING) {
+			if (r != null && r.isCorrect() || useOnlyHHRouting) {
 				return r;
 			}
 		}
@@ -874,7 +913,7 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed 
 		try {
-			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(HH_ROUTING_CONFIG);
+			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
 			if (res != null && res.error == null) {
@@ -885,7 +924,7 @@ public class RoutePlannerFrontEnd {
 			throw new IOException(e.getMessage(), e);
 		} catch (IOException | RuntimeException e) {
 			e.printStackTrace();
-			if (USE_ONLY_HH_ROUTING) {
+			if (useOnlyHHRouting) {
 				return new HHNetworkRouteRes("Error during routing calculation : " + e.getMessage());
 			}
 		} finally {

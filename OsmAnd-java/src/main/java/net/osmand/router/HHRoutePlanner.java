@@ -113,7 +113,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return router.buildRoutingContext(config, null, new BinaryMapIndexReader[0], RouteCalculationMode.NORMAL);
 	}
 	
-	HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
+	public static HHRoutingConfig prepareDefaultRoutingConfig(HHRoutingConfig c) {
 		if (c == null) {
 			c = new HHRoutingConfig();
 			// test data for debug swap
@@ -1095,32 +1095,35 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) plan.searchRouteInternal(hctx.rctx, s, null, bounds);
 		hctx.rctx.config.MAX_VISITED = -1;
 		TLongObjectHashMap<RouteSegment> resUnique = new TLongObjectHashMap<>();
-		for (FinalRouteSegment o : frs.all) {
-			long pntId = calculateRoutePointInternalId(o.getRoad().getId(), o.getSegmentStart(), o.getSegmentEnd());
-			if (resUnique.containsKey(pntId)) {
-				if (resUnique.get(pntId).getDistanceFromStart() > o.getDistanceFromStart()) {
-					System.err.println(resUnique.get(pntId) + " > " + o + " - " + s);
-				}
-			} else {
-				resUnique.put(pntId, o);
-				NetworkDBPoint p = hctx.pointsByGeo.get(calcRPId(o, o.getSegmentStart(), o.getSegmentEnd()));
-				if (p == null) {
-					System.err.println("Error calculations new final boundary not found");
-					continue;
-				}
-				float routeTime = o.getDistanceFromStart() + plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
-				NetworkDBSegment c = start.getSegment(p, true);
-				if (c != null) {
-//					System.out.printf("Correct dist %.2f -> %.2f\n", c.dist, routeTime);
-					c.dist = routeTime;
+		if (frs != null) {
+			for (FinalRouteSegment o : frs.all) {
+				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), o.getSegmentStart(), o.getSegmentEnd());
+				if (resUnique.containsKey(pntId)) {
+					if (resUnique.get(pntId).getDistanceFromStart() > o.getDistanceFromStart()) {
+						System.err.println(resUnique.get(pntId) + " > " + o + " - " + s);
+					}
 				} else {
-					start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));
-				}
-				NetworkDBSegment co = p.getSegment(start, false);
-				if (co != null) {
-					co.dist = routeTime;
-				} else if (p.connectedReverse != null) {
-					p.connectedReverse.add(new NetworkDBSegment(start, p, routeTime, false, false));
+					resUnique.put(pntId, o);
+					NetworkDBPoint p = hctx.pointsByGeo.get(calcRPId(o, o.getSegmentStart(), o.getSegmentEnd()));
+					if (p == null) {
+						System.err.println("Error calculations new final boundary not found");
+						continue;
+					}
+					float routeTime = o.getDistanceFromStart()
+							+ plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
+					NetworkDBSegment c = start.getSegment(p, true);
+					if (c != null) {
+//					System.out.printf("Correct dist %.2f -> %.2f\n", c.dist, routeTime);
+						c.dist = routeTime;
+					} else {
+						start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));
+					}
+					NetworkDBSegment co = p.getSegment(start, false);
+					if (co != null) {
+						co.dist = routeTime;
+					} else if (p.connectedReverse != null) {
+						p.connectedReverse.add(new NetworkDBSegment(start, p, routeTime, false, false));
+					}
 				}
 			}
 		}

@@ -2041,7 +2041,7 @@
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
@@ -5439,23 +5439,27 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.
+    <string name="release_4_6">• Android Auto: Se ha añadido el modo 3D
 \n
-\n• Se ha añadido el widget «Relación de planeo».
-\n
-\n• Se añadieron filtros y carpetas inteligentes para las trazas
+\n• Trazas: Se añadieron filtros y carpetas inteligentes para las trazas y se ha optimizado la memoria para archivos grandes
 \n
 \n• Se añadieron filas para los paneles de widget superior e inferior, con admisión a todos los widgets
 \n
-\n• Se ha añadido el widget de temperatura en ANT+
+\n• Se ha mejorado la gestión local de recursos
 \n
-\n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.
 \n
-\n• Se ha mejorado la gestión de archivos locales en el menú «Descargas»
+\n• Se ha añadido el widget «Relación de planeo» y «Ubicacion del Sol»
 \n
-\n• Se ha añadido el widget «RAM disponible»
+\n• OsmAnd Cloud: Ahora puedes acceder a archivos eliminados
+\n
+\n• Mejora en la coloración de trazas en modo pendiente con nuevo gradiente simétrico
 \n
 \n• Se han corregido los problemas de transparencia en la barra de estado
+\n
+\n• Se ha añadido el widget de temperatura en ANT+
+\n
+\n• Se ha añadido el widget «RAM disponible»
 \n
 \n</string>
     <string name="shared_string_temperature">Temperatura</string>
@@ -5595,4 +5599,7 @@
     <string name="shared_string_next_event">Próximo evento</string>
     <string name="map_widget_sun_position">Ubicación del Sol</string>
     <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
+    <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
+    <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
+    <string name="precise_distance_numbers">Números de distancia precisos</string>
 </resources>

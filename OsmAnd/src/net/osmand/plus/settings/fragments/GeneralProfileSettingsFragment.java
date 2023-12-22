@@ -61,6 +61,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
@@ -223,6 +224,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupPreciseDistanceNumbersPref() {
+		SwitchPreferenceEx preference = findPreference(settings.PRECISE_DISTANCE_NUMBERS.getId());
+		preference.setTitle(getString(R.string.precise_distance_numbers));
 	}
 
 	private void setupVolumeButtonsAsZoom() {
