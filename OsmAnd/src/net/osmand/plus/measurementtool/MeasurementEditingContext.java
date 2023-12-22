@@ -995,7 +995,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 						modifiedSegments.add(seg);
 						pendingSegments.add(seg);
 					}
-					if (includeEndPoint) {
+					if (lastGpxPoint && k == segments.size() - 1) {
 						WptPt prevAddedPoint = addedPoint;
 						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
 						if (prevAddedPoint != null) {
@@ -1015,6 +1015,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 								}
 							}
 						}
+					}
+					if (duplicatePoint && k == segments.size() - 1) {
+						MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
 					}
 				}
 			}
