@@ -317,7 +317,7 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		if (Algorithms.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
+		if (extras != null && Algorithms.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);

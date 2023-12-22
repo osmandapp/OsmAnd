@@ -1375,12 +1375,10 @@ public class Algorithms {
 		}
 	}
 
-	public static <T> boolean containsAny(Collection<T> collection, T ... objects) {
-		if (collection != null) {
-			for (T object : objects) {
-				if (collection.contains(object)) {
-					return true;
-				}
+	public static <T> boolean containsAny(Collection<T> collection, T... objects) {
+		for (T object : objects) {
+			if (collection.contains(object)) {
+				return true;
 			}
 		}
 		return false;
