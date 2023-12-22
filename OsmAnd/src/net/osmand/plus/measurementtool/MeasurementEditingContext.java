@@ -9,14 +9,14 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
@@ -542,8 +542,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public void replacePoints(List<WptPt> originalPoints, List<WptPt> points) {
 		if (originalPoints.size() > 1) {
-			int firstPointIndex = before.points.indexOf(originalPoints.get(0));
-			int lastPointIndex = before.points.lastIndexOf(originalPoints.get(originalPoints.size() - 1));
+			int firstPointIndex = getPointIndexToReplace(before.points, originalPoints.get(0));
+			int lastPointIndex = getPointIndexToReplace(before.points, originalPoints.get(originalPoints.size() - 1));
 			List<WptPt> newPoints = new ArrayList<>();
 			if (firstPointIndex != -1 && lastPointIndex != -1) {
 				newPoints.addAll(before.points.subList(0, firstPointIndex));
@@ -559,6 +559,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			before.points = points;
 		}
 		updateSegmentsForSnap(false);
+	}
+
+	private int getPointIndexToReplace(@NonNull List<WptPt> points, @NonNull WptPt point) {
+		for (int i = 0; i < points.size(); i++) {
+			WptPt pt = points.get(i);
+			if (point == pt) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public WptPt removePoint(int position, boolean updateSnapToRoad) {

@@ -13,7 +13,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TrackFolder implements TracksGroup, ComparableTracksGroup {
@@ -61,13 +60,13 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackFolder> getSubFolders() {
-		return Collections.unmodifiableList(subFolders);
+		return new ArrayList<>(subFolders);
 	}
 
 	@NonNull
 	@Override
 	public List<TrackItem> getTrackItems() {
-		return Collections.unmodifiableList(trackItems);
+		return new ArrayList<>(trackItems);
 	}
 
 	public void addSubFolder(@NonNull TrackFolder folder) {
@@ -94,7 +93,7 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
 		if (flattenedTrackItems == null) {
-			flattenedTrackItems = new ArrayList<>(getTrackItems());
+			flattenedTrackItems = getTrackItems();
 			for (TrackFolder folder : getSubFolders()) {
 				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
 			}
@@ -105,7 +104,7 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackFolder> getFlattenedSubFolders() {
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = new ArrayList<>(getSubFolders());
+			flattenedSubFolders = getSubFolders();
 			for (TrackFolder folder : getSubFolders()) {
 				flattenedSubFolders.addAll(folder.getFlattenedSubFolders());
 			}

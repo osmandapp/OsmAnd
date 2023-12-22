@@ -2953,7 +2953,7 @@ public class OsmandSettings {
 			Map<String, IndexItem> supportedTTS = getSupportedTtsByLanguages(ctx);
 			IndexItem index = supportedTTS.get(language);
 			if (index != null) {
-				if (!index.isDownloaded() && !index.isDownloading(ctx)) {
+				if (!index.isDownloaded() && (ctx.isApplicationInitializing() || !index.isDownloading(ctx))) {
 					downloadTtsWithoutInternet(ctx, index);
 				}
 				return language + IndexConstants.VOICE_PROVIDER_SUFFIX;
