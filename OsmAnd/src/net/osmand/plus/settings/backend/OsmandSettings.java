@@ -89,21 +89,7 @@ import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.AutoZoomMap;
-import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.settings.enums.DistanceByTapTextSize;
-import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.enums.Map3DModeVisibility;
-import net.osmand.plus.settings.enums.MapsSortMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SimulationMode;
-import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -2961,7 +2947,7 @@ public class OsmandSettings {
 			Map<String, IndexItem> supportedTTS = getSupportedTtsByLanguages(ctx);
 			IndexItem index = supportedTTS.get(language);
 			if (index != null) {
-				if (!index.isDownloaded() && !index.isDownloading(ctx)) {
+				if (!index.isDownloaded() && (ctx.isApplicationInitializing() || !index.isDownloading(ctx))) {
 					downloadTtsWithoutInternet(ctx, index);
 				}
 				return language + IndexConstants.VOICE_PROVIDER_SUFFIX;
