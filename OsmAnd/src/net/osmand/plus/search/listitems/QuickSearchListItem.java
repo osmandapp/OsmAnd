@@ -23,7 +23,6 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -44,7 +43,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 public class QuickSearchListItem {
 
@@ -121,39 +119,11 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		if(searchResult.object instanceof Amenity) {
-			searchResult.alternateName = getTranslatedAdditionalInfo();
+		String alternateName = searchResult.alternateName;
+		if (searchResult.object instanceof Amenity) {
+			alternateName = ((Amenity) searchResult.object).getTranslatedAdditionalInfo(alternateName);
 		}
-		return (searchResult.alternateName != null ? searchResult.alternateName + " • " : "") + typeName;
-	}
-
-	public String getTranslatedAdditionalInfo() {
-		Map<String, String> additionalInfo = ((Amenity) searchResult.object).getInternalAdditionalInfoMap();
-		if (!Algorithms.isEmpty(additionalInfo)) {
-			MapPoiTypes poiTypes = MapPoiTypes.getDefault();
-			for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
-				String key = entry.getKey();
-				String value = entry.getValue();
-				if(Amenity.isContentZipped(value)) {
-					continue;
-				}
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt == null) {
-					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
-				}
-				PoiType pType = null;
-				if (pt != null) {
-					pType = (PoiType) pt;
-					if (pType.isFilterOnly()) {
-						continue;
-					}
-				}
-				if (pType != null && !pType.isText() && value.equals(searchResult.alternateName)) {
-					 return pType.getTranslation();
-				}
-			}
-		}
-		return searchResult.alternateName;
+		return (alternateName != null ? alternateName + " • " : "") + typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {

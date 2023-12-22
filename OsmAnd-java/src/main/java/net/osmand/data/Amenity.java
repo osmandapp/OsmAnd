@@ -1,8 +1,10 @@
 package net.osmand.data;
 
 import net.osmand.Location;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONObject;
@@ -130,6 +132,35 @@ public class Amenity extends MapObject {
 			return Collections.emptyMap();
 		}
 		return additionalInfo;
+	}
+
+	public String getTranslatedAdditionalInfo(String alternateName) {
+		Map<String, String> additionalInfo = getInternalAdditionalInfoMap();
+		if (!Algorithms.isEmpty(additionalInfo)) {
+			MapPoiTypes poiTypes = MapPoiTypes.getDefault();
+			for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				if (Amenity.isContentZipped(value)) {
+					continue;
+				}
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+				if (pt == null) {
+					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
+				}
+				PoiType pType = null;
+				if (pt != null) {
+					pType = (PoiType) pt;
+					if (pType.isFilterOnly()) {
+						continue;
+					}
+				}
+				if (pType != null && !pType.isText() && value.equals(alternateName)) {
+					return pType.getTranslation();
+				}
+			}
+		}
+		return alternateName;
 	}
 
 	public Collection<String> getAdditionalInfoValues(boolean excludeZipped) {
