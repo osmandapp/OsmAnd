@@ -5584,9 +5584,9 @@
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
     <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
-    <string name="shared_string_next_event">Nächstes Veranstaltung</string>
+    <string name="shared_string_next_event">Nächste Veranstaltung</string>
     <string name="map_widget_sun_position">Sonnenposition</string>
-    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, je nach der aktuellen Uhrzeit.</string>
+    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, abhängig von der aktuellen Uhrzeit.</string>
     <string name="previous_row_has_complex_widget">Vorherige Zeile hat komplexes Widget</string>
     <string name="complex_widget_alert">Das Widget %1$s kann nur in seiner eigenen Zeile platziert werden.</string>
     <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
