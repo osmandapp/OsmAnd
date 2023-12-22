@@ -1,5 +1,7 @@
 package net.osmand.osm;
 
+import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.*;
+
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
@@ -17,15 +19,6 @@ public class OsmRouteType {
 	public static final String DEFAULT_ICON = "special_marker";
 	public static final String DEFAULT_COLOR = "orange";
 
-	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
-	public static final String SHOW_CYCLE_ROUTES_ATTR = "showCycleRoutes";
-	public static final String SHOW_MTB_ROUTES_ATTR = "showMtbRoutes";
-	public static final String ALPINE_HIKING_ATTR = "alpineHiking";
-	public static final String HORSE_ROUTES_ATTR = "horseRoutes";
-	public static final String PISTE_ROUTES_ATTR = "pisteRoutes";
-	public static final String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
-	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
-	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
 	public static final OsmRouteType WATER = createType("water").color("yellow").icon("special_kayak")
 			.renderingProperty(WHITE_WATER_SPORTS_ATTR).reg();
 	public static final OsmRouteType WINTER = createType("winter").color("yellow").icon("special_skiing").reg();
@@ -426,5 +419,15 @@ public class OsmRouteType {
 		}
 	}
 
-
+	public interface RenderingPropertyConstants {
+		String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
+		String SHOW_CYCLE_ROUTES_ATTR = "showCycleRoutes";
+		String SHOW_MTB_ROUTES_ATTR = "showMtbRoutes";
+		String ALPINE_HIKING_ATTR = "alpineHiking";
+		String HORSE_ROUTES_ATTR = "horseRoutes";
+		String PISTE_ROUTES_ATTR = "pisteRoutes";
+		String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
+		String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
+		String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
+	}
 }

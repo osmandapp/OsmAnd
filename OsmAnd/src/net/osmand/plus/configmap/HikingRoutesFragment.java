@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.osm.OsmRouteType.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.HIKING_ROUTES_OSMC_ATTR;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -22,15 +22,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ITEMS_ID_SC
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.osm.OsmRouteType.ALPINE_HIKING_ATTR;
-import static net.osmand.osm.OsmRouteType.HIKING_ROUTES_OSMC_ATTR;
-import static net.osmand.osm.OsmRouteType.SHOW_CYCLE_ROUTES_ATTR;
-import static net.osmand.osm.OsmRouteType.SHOW_MTB_ROUTES_ATTR;
-import static net.osmand.osm.OsmRouteType.HORSE_ROUTES_ATTR;
-import static net.osmand.osm.OsmRouteType.PISTE_ROUTES_ATTR;
-import static net.osmand.osm.OsmRouteType.WHITE_WATER_SPORTS_ATTR;
-import static net.osmand.osm.OsmRouteType.SHOW_RUNNING_ROUTES_ATTR;
-import static net.osmand.osm.OsmRouteType.SHOW_FITNESS_TRAILS_ATTR;
+import static net.osmand.osm.OsmRouteType. RenderingPropertyConstants.*;
 import static net.osmand.plus.configmap.DifficultyClassificationFragment.getDifficultyClassificationDescription;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;

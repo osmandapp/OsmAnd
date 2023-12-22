@@ -1,10 +1,9 @@
 package net.osmand.plus.views.layers;
-
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
-import static net.osmand.osm.OsmRouteType.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.HIKING_ROUTES_OSMC_ATTR;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
