@@ -1363,6 +1363,18 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static <T> void addAllIfNotContains(Collection<T> collection, Collection<T> elements) {
+		for (T element : elements) {
+			addIfNotContains(collection, element);
+		}
+	}
+
+	public static <T> void addIfNotContains(Collection<T> collection, T element) {
+		if (!collection.contains(element)) {
+			collection.add(element);
+		}
+	}
+
 	public static <T> boolean containsAny(Collection<T> collection, T ... objects) {
 		if (collection != null) {
 			for (T object : objects) {

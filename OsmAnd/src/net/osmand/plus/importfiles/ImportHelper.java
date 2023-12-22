@@ -71,7 +71,6 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportType;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -326,7 +325,7 @@ public class ImportHelper {
 			ArrayList<String> exportTypeKeys = extras.getStringArrayList(EXPORT_TYPE_LIST_KEY);
 			List<ExportType> exportTypes = null;
 			if (exportTypeKeys != null) {
-				exportTypes = ExportType.valuesForKeys(exportTypeKeys);
+				exportTypes = ExportType.valuesOfKeys(exportTypeKeys);
 			}
 			handleOsmAndSettingsImport(intentUri, fileName, exportTypes, replace, silentImport, latestChanges, version);
 		} else {

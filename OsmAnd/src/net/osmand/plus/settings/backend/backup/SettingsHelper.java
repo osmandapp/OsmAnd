@@ -414,7 +414,7 @@ public abstract class SettingsHelper {
 				if (!Algorithms.equalsToAny(localType, LocalItemType.TTS_VOICE_DATA, LocalItemType.VOICE_DATA)) {
 					sortLocalFiles(files);
 				}
-				resources.put(ExportType.findByLocalItemType(localType), files);
+				resources.put(ExportType.findBy(localType), files);
 			}
 		}
 	}
@@ -442,7 +442,7 @@ public abstract class SettingsHelper {
 		if (acceptedTypes != null) {
 			Iterator<LocalItemType> iterator = result.iterator();
 			while (iterator.hasNext()) {
-				if (!acceptedTypes.contains(ExportType.findByLocalItemType(iterator.next()))) {
+				if (!acceptedTypes.contains(ExportType.findBy(iterator.next()))) {
 					iterator.remove();
 				}
 			}

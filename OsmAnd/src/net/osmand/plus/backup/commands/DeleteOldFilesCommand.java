@@ -105,7 +105,7 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 				List<RemoteFile> filesToDelete = new ArrayList<>();
 				if (types != null) {
 					for (RemoteFile file : remoteFiles) {
-						ExportType exportType = ExportType.findByRemoteFile(file);
+						ExportType exportType = ExportType.findBy(file);
 						if (types.contains(exportType)) {
 							filesToDelete.add(file);
 						}

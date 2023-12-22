@@ -153,7 +153,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (info != null) {
 			List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 			for (SettingsItem item : info.itemsToUpload) {
-				ExportType exportType = ExportType.findBySettingsItem(item);
+				ExportType exportType = ExportType.findBy(item);
 				if (exportType != null && backupHelper.getVersionHistoryTypePref(exportType).get()) {
 					oldItemsToDelete.add(item);
 				}

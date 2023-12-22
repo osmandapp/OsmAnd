@@ -17,6 +17,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,21 +105,33 @@ public enum ExportType {
 				|| this == ONLINE_ROUTING_ENGINES || this == FAVORITES_BACKUP;
 	}
 
+	public boolean isAllowedInFreeVersion() {
+		return allowedInFreeVersion;
+	}
+
+	public boolean isEnabled() {
+		return enabledValues().contains(this);
+	}
+
+	public boolean isNotEnabled() {
+		return !isEnabled();
+	}
+
 	public boolean isMap() {
 		return mapTypes().contains(this);
 	}
 
 	@Nullable
-	public static ExportType findByRemoteFile(@NonNull RemoteFile remoteFile) {
+	public static ExportType findBy(@NonNull RemoteFile remoteFile) {
 		if (remoteFile.item != null) {
-			return findBySettingsItem(remoteFile.item);
+			return findBy(remoteFile.item);
 		}
 		for (ExportType exportType : values()) {
 			String type = remoteFile.getType();
 			if (exportType.getItemName().equals(type)) {
 				if (SettingsItemType.FILE.name().equals(type)) {
 					FileSubtype subtype = FileSubtype.getSubtypeByFileName(remoteFile.getName());
-					return findByFileSubtype(subtype);
+					return findBy(subtype);
 				} else {
 					return exportType;
 				}
@@ -128,14 +141,14 @@ public enum ExportType {
 	}
 
 	@Nullable
-	public static ExportType findBySettingsItem(@Nullable SettingsItem item) {
+	public static ExportType findBy(@Nullable SettingsItem item) {
 		if (item == null) return null;
 
 		for (ExportType exportType : values()) {
 			if (exportType.getItemName().equals(item.getType().name())) {
 				if (item.getType() == SettingsItemType.FILE) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					return findByFileSubtype(fileItem.getSubtype());
+					return findBy(fileItem.getSubtype());
 				} else {
 					return exportType;
 				}
@@ -145,7 +158,7 @@ public enum ExportType {
 	}
 
 	@Nullable
-	public static ExportType findByFileSubtype(@NonNull FileSubtype subtype) {
+	public static ExportType findBy(@NonNull FileSubtype subtype) {
 		if (subtype == FileSubtype.RENDERING_STYLE) {
 			return CUSTOM_RENDER_STYLE;
 		} else if (subtype == FileSubtype.ROUTING_CONFIG) {
@@ -177,7 +190,7 @@ public enum ExportType {
 	}
 
 	@Nullable
-	public static ExportType findByLocalItemType(@NonNull LocalItemType localItemType) {
+	public static ExportType findBy(@NonNull LocalItemType localItemType) {
 		if (localItemType == LocalItemType.MAP_DATA) {
 			return STANDARD_MAPS;
 		} else if (localItemType == LocalItemType.ROAD_DATA) {
@@ -200,57 +213,9 @@ public enum ExportType {
 		return null;
 	}
 
-	public boolean isAllowedInFreeVersion() {
-		return allowedInFreeVersion;
-	}
-
-	public boolean isNotEnabled() {
-		return !isEnabled();
-	}
-
-	public boolean isEnabled() {
-		return enabledValues().contains(this);
-	}
-
 	@NonNull
 	public static List<ExportType> mapTypes() {
 		return Arrays.asList(STANDARD_MAPS, ROAD_MAPS, WIKI_AND_TRAVEL, TERRAIN_DATA, DEPTH_DATA);
-	}
-
-	@NonNull
-	public static List<ExportType> valuesForKeys(@NonNull List<String> typeKeys,
-	                                             @Nullable String ... keysToExclude) {
-		List<ExportType> result = new ArrayList<>();
-		for (String key : typeKeys) {
-			if (shouldExclude(key, keysToExclude)) {
-				continue;
-			}
-			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
-				for (ExportType type : ExportType.mapTypes()) {
-					addExportTypeIfNeeded(result, type);
-				}
-			} else {
-				addExportTypeIfNeeded(result, ExportType.valueOf(key));
-			}
-		}
-		return result;
-	}
-
-	private static boolean shouldExclude(@NonNull String key, @Nullable String ... keysToExclude) {
-		if (keysToExclude != null) {
-			for (String keyToExclude : keysToExclude) {
-				if (Objects.equals(key, keyToExclude)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private static void addExportTypeIfNeeded(@NonNull List<ExportType> list, @NonNull ExportType type) {
-		if (!list.contains(type)) {
-			list.add(type);
-		}
 	}
 
 	@NonNull
@@ -262,6 +227,19 @@ public enum ExportType {
 		}
 		if (!PluginsHelper.isActive(AudioVideoNotesPlugin.class)) {
 			result.remove(MULTIMEDIA_NOTES);
+		}
+		return result;
+	}
+
+	@NonNull
+	public static List<ExportType> valuesOfKeys(@NonNull List<String> typeKeys) {
+		List<ExportType> result = new ArrayList<>();
+		for (String key : typeKeys) {
+			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
+				Algorithms.addAllIfNotContains(result, ExportType.mapTypes());
+			} else {
+				Algorithms.addIfNotContains(result, ExportType.valueOf(key));
+			}
 		}
 		return result;
 	}

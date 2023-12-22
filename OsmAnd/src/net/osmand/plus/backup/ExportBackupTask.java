@@ -47,7 +47,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
 
-			ExportType exportType = ExportType.findBySettingsItem(item);
+			ExportType exportType = ExportType.findBy(item);
 			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 				exporter.addOldItemToDelete(item);
 			}

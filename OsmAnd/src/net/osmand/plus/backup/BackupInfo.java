@@ -78,7 +78,7 @@ public class BackupInfo {
 		List<RemoteFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDownload) {
-			ExportType exportType = ExportType.findByRemoteFile(remoteFile);
+			ExportType exportType = ExportType.findBy(remoteFile);
 			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 				files.add(remoteFile);
 			}
@@ -91,7 +91,7 @@ public class BackupInfo {
 		BackupHelper helper = app.getBackupHelper();
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
-			ExportType type = ExportType.findBySettingsItem(localFile.item);
+			ExportType type = ExportType.findBy(localFile.item);
 			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
 				files.add(localFile);
 			}
@@ -103,7 +103,7 @@ public class BackupInfo {
 		List<RemoteFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDelete) {
-			ExportType exportType = ExportType.findByRemoteFile(remoteFile);
+			ExportType exportType = ExportType.findBy(remoteFile);
 			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 				files.add(remoteFile);
 			}
@@ -114,7 +114,7 @@ public class BackupInfo {
 	private void createFilteredLocalFilesToDelete() {
 		List<LocalFile> files = new ArrayList<>();
 		for (LocalFile localFile : localFilesToDelete) {
-			ExportType exportType = ExportType.findBySettingsItem(localFile.item);
+			ExportType exportType = ExportType.findBy(localFile.item);
 			if (exportType != null && exportType.isEnabled()) {
 				files.add(localFile);
 			}
@@ -129,7 +129,7 @@ public class BackupInfo {
 		for (Pair<LocalFile, RemoteFile> pair : filesToMerge) {
 			SettingsItem item = pair.first.item;
 			if (!items.contains(item)) {
-				ExportType exportType = ExportType.findByRemoteFile(pair.second);
+				ExportType exportType = ExportType.findBy(pair.second);
 				if (exportType != null && helper.getBackupTypePref(exportType).get()) {
 					files.add(pair);
 					items.add(item);

@@ -2387,10 +2387,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypesKeys) {
+	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypeKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportType> acceptedExportTypes = ExportType.valuesForKeys(acceptedExportTypesKeys, ExportType.PROFILE.name());
+			List<ExportType> acceptedExportTypes = ExportType.valuesOfKeys(acceptedExportTypeKeys);
+			acceptedExportTypes.remove(ExportType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();

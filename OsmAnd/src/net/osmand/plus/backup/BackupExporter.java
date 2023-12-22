@@ -274,7 +274,7 @@ public class BackupExporter extends Exporter {
 
 	private void markOldFileForDeletion(@NonNull SettingsItem item, @NonNull String fileName) {
 		String type = item.getType().name();
-		ExportType exportType = ExportType.findBySettingsItem(item);
+		ExportType exportType = ExportType.findBy(item);
 		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
 			if (remoteFile != null) {

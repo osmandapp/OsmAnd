@@ -70,7 +70,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -988,7 +987,7 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
-					ExportType exportType = ExportType.findByRemoteFile(remoteFile);
+					ExportType exportType = ExportType.findBy(remoteFile);
 					if (exportType == null || exportType.isNotEnabled() || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
@@ -1020,7 +1019,7 @@ public class BackupHelper {
 					}
 				}
 				for (LocalFile localFile : localFiles.values()) {
-					ExportType exportType = ExportType.findBySettingsItem(localFile.item);
+					ExportType exportType = ExportType.findBy(localFile.item);
 					if (exportType == null || exportType.isNotEnabled()) {
 						continue;
 					}
