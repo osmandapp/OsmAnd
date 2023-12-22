@@ -74,8 +74,6 @@ public class RouteCalculationResult {
 	protected int currentDirectionInfo;
 	protected int currentRoute;
 	protected int nextIntermediate;
-	protected int currentWaypointGPX;
-	protected int lastWaypointGPX;
 	protected int currentStraightAngleRoute = -1;
 	protected Location currentStraightAnglePoint;
 
