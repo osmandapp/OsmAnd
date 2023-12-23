@@ -246,13 +246,17 @@ public class SearchHelper {
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
-		completeQueryWithObject(result, setupSearchSettings(false));
+		completeQueryWithObject(result, setupSearchSettings(false), null);
 	}
 
-	public void completeQueryWithObject(@NonNull SearchResult result, @NonNull SearchSettings searchSettings) {
+	public void completeQueryWithObject(@NonNull SearchResult result, @NonNull SearchSettings searchSettings, @Nullable String additionalQuery) {
+		searchUICore.resetPhrase();
 		SearchUtils.selectSearchResult(app, result);
 
 		String searchQuery = searchUICore.getPhrase().getText(true);
+		if(additionalQuery != null) {
+			searchQuery += additionalQuery;
+		}
 		if (searchRadiusLevel != 1) {
 			searchRadiusLevel = minSearchRadiusLevel;
 		}
