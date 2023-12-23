@@ -5584,4 +5584,5 @@
     <string name="previous_row_has_complex_widget">Az előző sorban összetett widget van</string>
     <string name="complex_widget_alert">%1$s widget csak a saját sorában helyezhető el.</string>
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
+    <string name="any_connected">Bármelyik csatlakoztatott</string>
 </resources>

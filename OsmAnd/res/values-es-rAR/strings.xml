@@ -5601,5 +5601,6 @@
     <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
     <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
     <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
-    <string name="precise_distance_numbers">Números de distancia precisos</string>
+    <string name="precise_distance_numbers">Números precisos de distancia</string>
+    <string name="any_connected">Cualquiera conectado</string>
 </resources>

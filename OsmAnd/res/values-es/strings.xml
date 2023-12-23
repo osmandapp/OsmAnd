@@ -5426,7 +5426,7 @@
     <string name="live_monitoring_adress_descr">Especifica la dirección web con la sintaxis de los parámetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
-    <string name="release_4_6">- Android Auto: se ha añadido el modo 3D y se ha mejorado la pantalla de búsqueda
+    <string name="release_4_6">- Android Auto: Añadido el modo 3D
 \n
 \n - Pistas: Introducidos filtros y carpetas inteligentes, optimizada la memoria para archivos más grandes
 \n
@@ -5436,7 +5436,7 @@
 \n
 \n - Asignación de botones personalizable para controladores externos
 \n
-\n - Nuevos widgets: \"Glide Ratio\" y \"Sun Position\".
+\n - Nuevos widgets: \"Relación de planeo\" y \"Posición del sol\".
 \n
 \n - OsmAnd Cloud: Ahora accede a los archivos borrados
 \n
@@ -5584,4 +5584,8 @@
     <string name="shared_string_next_event">Próximo evento</string>
     <string name="map_widget_sun_position">Posición del sol</string>
     <string name="map_widget_sun_position_desc">Este widget muestra el tiempo que falta para la salida o la puesta del sol, según la hora actual.</string>
+    <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
+    <string name="complex_widget_alert">El widget %1$s solo puede colocarse en su propia fila.</string>
+    <string name="precise_distance_numbers">Números exactos de distancia</string>
+    <string name="any_connected">Cualquiera conectado</string>
 </resources>
