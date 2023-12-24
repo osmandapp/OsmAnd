@@ -5509,4 +5509,13 @@
     <string name="key_event_category_actions">Ekintzak</string>
     <string name="clear_key_assignment_desc">Hautatutako ekintzarako laster-tekla garbituko da eta Bat ere ez bezala ezarriko da.</string>
     <string name="map_widget_sun_position_desc">Trepeta honek eguzkia atera edo ilunabarrera arte falta den denbora erakusten du, uneko orduaren arabera.</string>
+    <string name="cloud_trash_clear_confirmation">Ziur betiko ezabatu nahi dituzula Zaborrontziko elementu guztiak? Ekintza hau ezin da desegin.</string>
+    <string name="restore_from_trash">Leheneratu zaborrontzitik</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" betiko ezabatuko da. Ziur zaude?
+\n
+\nEkintza hau ezin da desegin.</string>
+    <string name="shared_string_delete_immediately">Ezabatu berehala</string>
+    <string name="shared_string_is_deleted">%1$s ezabatu da.</string>
+    <string name="cloud_item_restored">%1$s hodeitik leheneratu da.</string>
+    <string name="shared_string_delete_item">Ezabatu elementua</string>
 </resources>
