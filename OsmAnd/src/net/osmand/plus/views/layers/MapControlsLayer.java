@@ -115,7 +115,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static CommonPreference<Float> parameterValueSetting;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
-	private TextView zoomText;
 	private long touchEvent;
 	private LatLon requestedLatLon;
 	private final Set<String> themeInfoProviderTags = new HashSet<>();
@@ -158,7 +157,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			parameterBarLayout = null;
 			mapRouteInfoMenu = null;
 			compassButton = null;
-			zoomText = null;
 			if (map3DButton != null) {
 				map3DButton.onDestroyButton();
 			}
@@ -251,7 +249,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButtons.add(new NavigationMenuButton(mapActivity));
 		mapButtons.add(new MyLocationButton(mapActivity, backToLocation, BACK_TO_LOC_HUD_ID, true));
 
-		zoomText = mapActivity.findViewById(R.id.map_app_mode_text);
 	}
 
 	public void doRoute() {
@@ -656,18 +653,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& (shouldShowRouteCalculationControls || !isRouteFollowingMode || androidAutoAttached);
 
 		updateTransparencySliderUi();
-
-		long lastZoomTime = mapView.isZooming()
-				? System.currentTimeMillis()
-				: app.getMapViewTrackingUtilities().getLastManualZoomTime();
-		if ((System.currentTimeMillis() - lastZoomTime > 1000) || !PluginsHelper.isDevelopment()) {
-			zoomText.setVisibility(View.GONE);
-		} else {
-			int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
-			zoomText.setVisibility(View.VISIBLE);
-			zoomText.setTextColor(textColor);
-			zoomText.setText(getZoomInfo(tileBox));
-		}
 
 		mapRouteInfoMenu.setVisible(shouldShowRouteCalculationControls);
 
