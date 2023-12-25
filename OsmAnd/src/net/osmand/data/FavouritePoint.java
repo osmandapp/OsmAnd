@@ -38,6 +38,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private String description;
 	private String address;
 	private String comment;
+	private String link;
 
 	private double latitude;
 	private double longitude;
@@ -84,6 +85,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.name = point.name;
 		this.color = point.color;
 		this.description = point.description;
+		this.link = point.link;
 		this.visible = point.visible;
 		this.amenityOriginName = point.amenityOriginName;
 		this.address = point.address;
@@ -311,6 +313,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = description;
 	}
 
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	public BackgroundType getBackgroundType() {
 		return backgroundType == null ? DEFAULT_BACKGROUND_TYPE : backgroundType;
 	}
@@ -347,6 +357,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (!Algorithms.stringsEqual(description, point.description)) {
 			return false;
 		}
+		if (!Algorithms.stringsEqual(link, point.link)) {
+			return false;
+		}
 		if (!Algorithms.stringsEqual(amenityOriginName, point.amenityOriginName)) {
 			return false;
 		}
@@ -376,6 +389,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((link == null) ? 0 : link.hashCode());
 		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
 		return result;
 	}
@@ -391,6 +405,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, category, wptPt.ele, wptPt.time);
 		point.setDescription(wptPt.desc);
+		point.setLink(wptPt.link);
 		point.setComment(wptPt.comment);
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
 		point.setAmenityExtensions(wptPt.getExtensionsToRead());

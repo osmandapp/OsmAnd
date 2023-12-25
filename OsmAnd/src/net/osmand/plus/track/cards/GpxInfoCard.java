@@ -1,10 +1,16 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
@@ -47,6 +53,8 @@ public class GpxInfoCard extends MapBaseCard {
 		String trackSize = AndroidUtils.formatSize(app, file.length());
 		String trackDate = DATE_FORMAT.format(gpxFile.metadata.time);
 		String trackLocation = "";
+		String link = gpxFile.metadata.link;
+		String description = gpxFile.metadata.desc;
 
 		File dir = file.getParentFile();
 		if (dir != null) {
@@ -59,6 +67,29 @@ public class GpxInfoCard extends MapBaseCard {
 		fillCardItems(R.id.size_container, R.drawable.ic_sdcard, R.string.shared_string_size, trackSize);
 		fillCardItems(R.id.created_on_container, R.drawable.ic_action_data, R.string.created_on, trackDate);
 		fillCardItems(R.id.location_container, R.drawable.ic_action_folder, R.string.shared_string_location, trackLocation);
+
+		if (!Algorithms.isEmpty(link)) {
+			View linkContainer = view.findViewById(R.id.link_container);
+			TextView linkTextView = linkContainer.findViewById(R.id.description);
+			int linkTextColor = ContextCompat.getColor(view.getContext(), !nightMode ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+			linkTextView.setTextColor(linkTextColor);
+
+			fillCardItems(R.id.link_container, R.drawable.ic_world_globe_dark, R.string.shared_string_link, link);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.link_container), true);
+			linkContainer.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+
+			linkContainer.setOnClickListener(v -> {
+				if (app.getAppCustomization().isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(link));
+					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				}
+			});
+		}
+		if (!Algorithms.isEmpty(description)) {
+			fillCardItems(R.id.description_container, R.drawable.ic_action_description, R.string.shared_string_description, description);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description_container), true);
+		}
 	}
 
 	private void fillCardItems(int containerId, int iconId, int titleId, String descriptionText) {

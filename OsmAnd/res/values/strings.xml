@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_extensions">Extensions</string>
+    <string name="shared_string_license">License</string>
+    <string name="shared_string_link">Link</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_author">Author</string>
     <string name="precise_distance_numbers">Precise distance numbers</string>
     <string name="complex_widget_alert">%1$s widget can only be placed on its own row.</string>
     <string name="previous_row_has_complex_widget">Previous row has complex widget</string>

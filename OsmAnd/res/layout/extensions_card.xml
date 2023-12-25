@@ -15,6 +15,7 @@
 	</FrameLayout>
 
 	<LinearLayout
+		android:id="@+id/extensions_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"
@@ -31,34 +32,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/list_header_settings_top_margin"
-				android:text="@string/info_button"
+				android:text="@string/shared_string_extensions"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
 				app:typeface="@string/font_roboto_medium" />
 
 		</LinearLayout>
-
-		<include
-			android:id="@+id/size_container"
-			layout="@layout/item_with_title_desc" />
-
-		<include
-			android:id="@+id/created_on_container"
-			layout="@layout/item_with_title_desc" />
-
-		<include
-			android:id="@+id/location_container"
-			layout="@layout/item_with_title_desc" />
-
-		<include
-			android:id="@+id/link_container"
-			layout="@layout/item_with_title_desc"
-			android:visibility="gone" />
-
-		<include
-			android:id="@+id/description_container"
-			layout="@layout/item_with_title_desc"
-			android:visibility="gone" />
 
 	</LinearLayout>
 
