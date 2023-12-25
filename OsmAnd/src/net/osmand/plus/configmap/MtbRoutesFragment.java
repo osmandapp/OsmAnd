@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.SHOW_MTB_ROUTES_ATTR;
+import static net.osmand.osm.OsmRouteType.MTB;
 import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_MTB_SCALE_IMBA_TRAILS;
 
 import android.graphics.drawable.Drawable;
@@ -44,7 +44,7 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		showMtbRoutesPref = settings.getCustomRenderBooleanProperty(SHOW_MTB_ROUTES_ATTR);
+		showMtbRoutesPref = settings.getCustomRenderBooleanProperty(MTB.getRenderingPropertyAttr());
 	}
 
 	@Override

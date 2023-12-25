@@ -3,7 +3,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
-import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
@@ -217,7 +217,7 @@ public class MapSelectionHelper {
 		if (renderedObjects != null) {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-
+			NetworkRouteSelectorFilter routeSelectorFilter = null;
 			for (RenderedObject renderedObject : renderedObjects) {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
@@ -258,7 +258,10 @@ public class MapSelectionHelper {
 					addTravelGpx(result, renderedObject, filter);
 				} else {
 					if (isRoute) {
-						addRoute(result, tileBox, point);
+						if (routeSelectorFilter == null) {
+							routeSelectorFilter = createRouteFilter();
+						}
+						addRoute(result, tileBox, point, routeSelectorFilter);
 					}
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded && !isRoute) {
@@ -276,6 +279,7 @@ public class MapSelectionHelper {
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
+			NetworkRouteSelectorFilter routeSelectorFilter = null;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
@@ -334,7 +338,10 @@ public class MapSelectionHelper {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
 							boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							if (isRoute) {
-								addRoute(result, tileBox, point);
+								if (routeSelectorFilter == null) {
+									routeSelectorFilter = createRouteFilter();
+								}
+								addRoute(result, tileBox, point, routeSelectorFilter);
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
@@ -456,7 +463,8 @@ public class MapSelectionHelper {
 		return true;
 	}
 
-	private void addRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point) {
+	private void addRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point,
+	                      @NonNull NetworkRouteSelectorFilter selectorFilter) {
 		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * 1.5f);
 		LatLon minLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox,
 				point.x - searchRadius, point.y - searchRadius);
@@ -464,8 +472,12 @@ public class MapSelectionHelper {
 				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
-		Set<OsmRouteType> filter = new HashSet<>();
+		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
+	}
+
+	private NetworkRouteSelectorFilter createRouteFilter() {
+		NetworkRouteSelectorFilter routeSelectorFilter = new NetworkRouteSelectorFilter();
+		Set<OsmRouteType> filteredOsmRouteTypes = new HashSet<>();
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		for (RenderingRuleProperty property : customRules) {
@@ -473,7 +485,7 @@ public class MapSelectionHelper {
 			OsmRouteType osmRouteType = OsmRouteType.getByRenderingProperty(attrName);
 			if (osmRouteType != null) {
 				boolean enabled;
-				if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
+				if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
 					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(attrName);
 					enabled = Arrays.asList(property.getPossibleValues()).contains(pref.get());
 				} else {
@@ -481,12 +493,14 @@ public class MapSelectionHelper {
 					enabled = pref.get();
 				}
 				if (enabled) {
-					filter.add(osmRouteType);
+					filteredOsmRouteTypes.add(osmRouteType);
 				}
 			}
 		}
-		selectorFilter.typeFilter = filter;
-		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
+		if (!Algorithms.isEmpty(filteredOsmRouteTypes)) {
+			routeSelectorFilter.typeFilter = filteredOsmRouteTypes;
+		}
+		return routeSelectorFilter;
 	}
 
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,

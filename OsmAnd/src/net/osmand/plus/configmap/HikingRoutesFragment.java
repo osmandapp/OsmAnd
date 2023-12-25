@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.osm.OsmRouteType.RenderingPropertyConstants.HIKING_ROUTES_OSMC_ATTR;
+import static net.osmand.osm.OsmRouteType.HIKING;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,8 +47,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
-		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
+		pref = settings.getCustomRenderProperty(HIKING.getRenderingPropertyAttr());
+		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING.getRenderingPropertyAttr());
 		if (property == null) {
 			previousValue = pref.get();
 		} else {
