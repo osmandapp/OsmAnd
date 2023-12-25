@@ -12,35 +12,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static net.osmand.osm.OsmRouteType.RenderingPropertyAttr.*;
-
 public class OsmRouteType {
 	private static final List<OsmRouteType> values = new ArrayList<>();
 	public static final String DEFAULT_ICON = "special_marker";
 	public static final String DEFAULT_COLOR = "orange";
 
 	public static final OsmRouteType WATER = createType("water").color("yellow").icon("special_kayak")
-			.renderingPropertyAttr(WHITE_WATER_SPORTS).reg();
+			.renderingPropertyAttr(RenderingPropertyAttr.WHITE_WATER_SPORTS).reg();
 	public static final OsmRouteType WINTER = createType("winter").color("yellow").icon("special_skiing").reg();
 	public static final OsmRouteType SNOWMOBILE = createType("snowmobile").color("yellow").icon("special_snowmobile").reg();
 	public static final OsmRouteType RIDING = createType("riding").color("yellow").icon("special_horse").reg();
 	public static final OsmRouteType RACING = createType("racing").color("yellow").icon("raceway").reg();
 	public static final OsmRouteType MOUNTAINBIKE = createType("mountainbike").color("blue").icon("sport_cycling").reg();
 	public static final OsmRouteType BICYCLE = createType("bicycle")
-			.renderingPropertyAttr(CYCLE_ROUTES).reg();
+			.renderingPropertyAttr(RenderingPropertyAttr.CYCLE_ROUTES).reg();
 	public static final OsmRouteType MTB = createType("mtb")
-			.renderingPropertyAttr(MTB_ROUTES).reg();
+			.renderingPropertyAttr(RenderingPropertyAttr.MTB_ROUTES).reg();
 	public static final OsmRouteType CYCLING = createType("cycling").color("blue").icon("special_bicycle").reg();
 	public static final OsmRouteType HIKING = createType("hiking").color("orange").icon("special_trekking")
-			.renderingPropertyAttr(HIKING_ROUTES).reg();
+			.renderingPropertyAttr(RenderingPropertyAttr.HIKING_ROUTES).reg();
 	public static final OsmRouteType RUNNING = createType("running").color("orange").icon("running")
-			.renderingPropertyAttr(RUNNING_ROUTES).reg();
+			.renderingPropertyAttr(RenderingPropertyAttr.RUNNING_ROUTES).reg();
 	public static final OsmRouteType WALKING = createType("walking").color("orange").icon("special_walking").reg();
 	public static final OsmRouteType OFFROAD = createType("offroad").color("yellow").icon("special_offroad").reg();
 	public static final OsmRouteType MOTORBIKE = createType("motorbike").color("green").icon("special_motorcycle").reg();
 	public static final OsmRouteType CAR = createType("car").color("green").icon("shop_car").reg();
 
-	public static final OsmRouteType HORSE = createType("horse").renderingPropertyAttr(HORSE_ROUTES).reg();
+	public static final OsmRouteType HORSE = createType("horse").renderingPropertyAttr(RenderingPropertyAttr.HORSE_ROUTES).reg();
 
 	public static final OsmRouteType ROAD = createType("road").reg();
 	public static final OsmRouteType DETOUR = createType("detour").reg();
@@ -51,9 +49,9 @@ public class OsmRouteType {
 	public static final OsmRouteType LIGHT_RAIL = createType("light_rail").reg();
 	public static final OsmRouteType PISTE = createType("piste").reg();
 	public static final OsmRouteType RAILWAY = createType("railway").reg();
-	public static final OsmRouteType SKI = createType("ski").renderingPropertyAttr(PISTE_ROUTES).reg();
-	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(ALPINE_HIKING).reg();
-	public static final OsmRouteType FITNESS = createType("fitness").renderingPropertyAttr(FITNESS_TRAILS).reg();
+	public static final OsmRouteType SKI = createType("ski").renderingPropertyAttr(RenderingPropertyAttr.PISTE_ROUTES).reg();
+	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(RenderingPropertyAttr.ALPINE_HIKING).reg();
+	public static final OsmRouteType FITNESS = createType("fitness").renderingPropertyAttr(RenderingPropertyAttr.FITNESS_TRAILS).reg();
 	public static final OsmRouteType INLINE_SKATES = createType("inline_skates").reg();
 	public static final OsmRouteType SUBWAY = createType("subway").reg();
 	public static final OsmRouteType TRAIN = createType("train").reg();
@@ -425,15 +423,15 @@ public class OsmRouteType {
 		}
 	}
 
-	interface RenderingPropertyAttr {
-		String HIKING_ROUTES = "hikingRoutesOSMC";
-		String CYCLE_ROUTES = "showCycleRoutes";
-		String MTB_ROUTES = "showMtbRoutes";
-		String ALPINE_HIKING = "alpineHiking";
-		String HORSE_ROUTES = "horseRoutes";
-		String PISTE_ROUTES = "pisteRoutes";
-		String WHITE_WATER_SPORTS = "whiteWaterSports";
-		String RUNNING_ROUTES = "showRunningRoutes";
-		String FITNESS_TRAILS = "showFitnessTrails";
+	private static class RenderingPropertyAttr {
+		private static final String HIKING_ROUTES = "hikingRoutesOSMC";
+		private static final String CYCLE_ROUTES = "showCycleRoutes";
+		private static final String MTB_ROUTES = "showMtbRoutes";
+		private static final String ALPINE_HIKING = "alpineHiking";
+		private static final String HORSE_ROUTES = "horseRoutes";
+		private static final String PISTE_ROUTES = "pisteRoutes";
+		private static final String WHITE_WATER_SPORTS = "whiteWaterSports";
+		private static final String RUNNING_ROUTES = "showRunningRoutes";
+		private static final String FITNESS_TRAILS = "showFitnessTrails";
 	}
 }
