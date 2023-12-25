@@ -1,10 +1,15 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors;
 
+import static net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY;
+
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.externalsensors.DeviceStateListener;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
@@ -13,21 +18,28 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SensorTextWidget extends SimpleWidget {
-	private AbstractSensor sensor;
+public class SensorTextWidget extends SimpleWidget implements DeviceStateListener {
+
+	private final ExternalSensorsPlugin plugin;
 	private final SensorWidgetDataFieldType fieldType;
-	private Number cachedNumber;
 	private final CommonPreference<String> deviceIdPref;
+
+	private AbstractSensor sensor;
 	private String externalDeviceId;
-	protected ExternalSensorsPlugin plugin;
+	private AbstractDevice<?> currentDevice;
+
+	private Number cachedNumber;
+
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-							@NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId,
+	                        @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
 		deviceIdPref = registerSensorDevicePref(customId);
@@ -39,26 +51,19 @@ public class SensorTextWidget extends SimpleWidget {
 	}
 
 	private void applyDeviceId() {
-		AbstractDevice<?> device = null;
-		if (externalDeviceId == null) {
+		if (externalDeviceId == null || ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(externalDeviceId)) {
 			List<AbstractDevice<?>> deviceList = plugin.getPairedDevicesByWidgetType(fieldType);
-			if (Algorithms.isEmpty(deviceList)) {
-				externalDeviceId = "";
-			} else {
-				device = deviceList.get(0);
-				externalDeviceId = device.getDeviceId();
+			if (!Algorithms.isEmpty(deviceList)) {
+				currentDevice = deviceList.get(0);
 			}
-			saveDeviceId(externalDeviceId);
-
+		} else {
+			currentDevice = plugin.getPairedDeviceById(externalDeviceId);
 		}
-		if (externalDeviceId != null && plugin != null) {
-			device = plugin.getPairedDeviceById(externalDeviceId);
-		}
-		setSensor(getSensor(device));
+		setSensor(getSensor(currentDevice));
 	}
 
 	public SensorTextWidget(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-							@NonNull SensorWidgetDataFieldType fieldType) {
+	                        @NonNull SensorWidgetDataFieldType fieldType) {
 		this(mapActivity, appMode, fieldType, null, null);
 	}
 
@@ -183,4 +188,38 @@ public class SensorTextWidget extends SimpleWidget {
 		return fieldType;
 	}
 
+	@Override
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidget> followingWidgets) {
+		super.attachView(container, widgetsPanel, followingWidgets);
+		plugin.addDeviceStateListener(this);
+	}
+
+	@Override
+	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+		super.detachView(widgetsPanel);
+		plugin.removeDeviceStateListener(this);
+	}
+
+	@Override
+	public void onDeviceConnected(@NonNull String deviceId) {
+		if (ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(externalDeviceId) &&
+				(currentDevice == null || (!currentDevice.isConnected() && !currentDevice.isConnecting()))) {
+			AbstractDevice<?> device = plugin.getDevice(deviceId);
+			if (device != null) {
+				AbstractSensor sensor = getSensor(device);
+				if (sensor != null) {
+					if (currentDevice != null) {
+						currentDevice.removeListener(deviceListener);
+					}
+					currentDevice = device;
+					setSensor(sensor);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onDeviceDisconnected(@NonNull String deviceId) {
+
+	}
 }

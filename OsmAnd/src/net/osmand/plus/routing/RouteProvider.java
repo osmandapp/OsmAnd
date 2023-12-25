@@ -672,7 +672,11 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 
 		OsmandSettings settings = params.ctx.getSettings();
-		RoutePlannerFrontEnd.USE_HH_ROUTING = settings.USE_HH_ROUTING.get();
+		if (settings.USE_HH_ROUTING.get()) {
+			router.setDefaultHHRoutingConfig();
+		} else {
+			router.setHHRoutingConfig(null);
+		}
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
 

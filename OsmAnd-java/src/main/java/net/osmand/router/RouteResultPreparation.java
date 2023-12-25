@@ -2190,12 +2190,14 @@ public class RouteResultPreparation {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
-			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak()) {
+			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak() || 
+					turnType.getLanes()  == null) {
 				continue;
 			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
-			if(cnt > 0 && cnt == cntAll && cnt >= 2) {
+			int lanesCnt = turnType.getLanes().length; 
+			if (cnt > 0 && cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
 				curr.setTurnType(null);
 			}
 		}

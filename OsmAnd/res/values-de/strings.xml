@@ -5451,23 +5451,27 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Möglichkeit zum Ändern der Tastenbelegung für externe Eingabegeräte hinzugefügt
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt
 \n
-\n• Widget „Gleitzahl“ hinzugefügt
+\n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien
 \n
-\n• Filter und intelligente Ordner für Tracks hinzugefügt
+\n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen
 \n
-\n• Reihen für obere und untere Widget-Panels mit Unterstützung für alle Widgets hinzugefügt
+\n• Verbessertes lokales Ressourcenmanagement
+\n
+\n• Anpassbare Tastenbelegung für externe Controller
+\n
+\n• Neue Widgets: \"Gleitverhältnis\" und \"Sonnenposition\"
+\n
+\n• OsmAnd Cloud: Jetzt Zugriff auf gelöschte Dateien
+\n
+\n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischem Gradienten
+\n
+\n• Probleme mit transparenter Statusleiste behoben
 \n
 \n• Unterstützung für ANT+ Temperatur-Widget hinzugefügt
 \n
-\n• Speicherverwaltung für große GPX-Tracks verbessert
-\n
-\n• Verwaltung der lokalen Ressourcen in Downloads aktualisiert
-\n
-\n• Widget „Verfügbarer RAM“ hinzugefügt
-\n
-\n• Probleme mit der transparenten Statusleiste behoben
+\n• Widget \"Verfügbarer RAM\" eingeführt
 \n
 \n</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
@@ -5580,7 +5584,11 @@
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
     <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
-    <string name="shared_string_next_event">Nächstes Veranstaltung</string>
+    <string name="shared_string_next_event">Nächste Veranstaltung</string>
     <string name="map_widget_sun_position">Sonnenposition</string>
-    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, je nach der aktuellen Uhrzeit.</string>
+    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, abhängig von der aktuellen Uhrzeit.</string>
+    <string name="previous_row_has_complex_widget">Vorherige Zeile hat komplexes Widget</string>
+    <string name="complex_widget_alert">Das Widget %1$s kann nur in seiner eigenen Zeile platziert werden.</string>
+    <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
+    <string name="any_connected">Alle verbundenen</string>
 </resources>

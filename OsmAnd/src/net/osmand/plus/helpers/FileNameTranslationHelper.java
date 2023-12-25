@@ -15,6 +15,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -65,11 +66,13 @@ public class FileNameTranslationHelper {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
 		} else if (fileName.startsWith(HEIGHTMAP)) {
-			basename = basename.replace(HEIGHTMAP + " ", "").replace(" ", "_");
-			return regions.getLocaleName(basename.trim(), true);
+			basename = basename.replace(HEIGHTMAP + " ", "");
+			return getTerrainName(ctx, regions, basename, R.string.terrain_map);
 		} else if (fileName.startsWith(SLOPE)) {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
+		} else if (SrtmDownloadItem.isSrtmFile(fileName)) {
+			return getTerrainName(ctx, regions, basename, R.string.download_srtm_maps);
 		} else if (fileName.length() == 2) { //voice recorded files
 			String name = getStringFromResName(ctx, "lang_" + fileName);
 			if (name != null) {

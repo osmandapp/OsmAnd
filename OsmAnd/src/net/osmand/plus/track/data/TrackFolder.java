@@ -60,13 +60,13 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackFolder> getSubFolders() {
-		return subFolders;
+		return new ArrayList<>(subFolders);
 	}
 
 	@NonNull
 	@Override
 	public List<TrackItem> getTrackItems() {
-		return trackItems;
+		return new ArrayList<>(trackItems);
 	}
 
 	public void addSubFolder(@NonNull TrackFolder folder) {
@@ -78,7 +78,7 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	}
 
 	public boolean isEmpty() {
-		return Algorithms.isEmpty(trackItems) && Algorithms.isEmpty(subFolders);
+		return Algorithms.isEmpty(getTrackItems()) && Algorithms.isEmpty(getSubFolders());
 	}
 
 	@ColorInt
@@ -93,8 +93,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
 		if (flattenedTrackItems == null) {
-			flattenedTrackItems = new ArrayList<>(trackItems);
-			for (TrackFolder folder : subFolders) {
+			flattenedTrackItems = getTrackItems();
+			for (TrackFolder folder : getSubFolders()) {
 				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
 			}
 		}
@@ -104,8 +104,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackFolder> getFlattenedSubFolders() {
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = new ArrayList<>(subFolders);
-			for (TrackFolder folder : subFolders) {
+			flattenedSubFolders = getSubFolders();
+			for (TrackFolder folder : getSubFolders()) {
 				flattenedSubFolders.addAll(folder.getFlattenedSubFolders());
 			}
 		}
@@ -123,10 +123,10 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	public long getLastModified() {
 		if (lastModified < 0) {
 			lastModified = dirFile.lastModified();
-			for (TrackFolder folder : subFolders) {
+			for (TrackFolder folder : getSubFolders()) {
 				lastModified = Math.max(lastModified, folder.getLastModified());
 			}
-			for (TrackItem item : trackItems) {
+			for (TrackItem item : getTrackItems()) {
 				lastModified = Math.max(lastModified, item.getLastModified());
 			}
 		}

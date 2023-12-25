@@ -27,6 +27,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -67,7 +68,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		this.callback = callback;
 	}
 
-	interface SurfaceRendererCallback {
+	public interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
 	}
 

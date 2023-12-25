@@ -38,16 +38,16 @@ public class RoutePlannerFrontEnd {
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
-	public boolean useSmartRouteRecalculation = true;
-	public boolean useNativeApproximation = true;
-
 	static boolean TRACE_ROUTING = false;
-	public static boolean USE_HH_ROUTING = false;
-	public static boolean USE_ONLY_HH_ROUTING = false;
-//	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-	public static HHRoutingConfig HH_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-
 	
+	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+//	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
+	private boolean useSmartRouteRecalculation = true;
+	private boolean useNativeApproximation = true;
+	private boolean useOnlyHHRouting = false;
+	private HHRoutingConfig hhRoutingConfig = null;
+	
+
 	public RoutePlannerFrontEnd() {
 	}
 	
@@ -240,6 +240,7 @@ public class RoutePlannerFrontEnd {
 			if (ps == null) {
 				ps = list.get(0);
 			}
+			list.remove(ps); // remove cyclic link to itself to avoid memory leaks (C++ backport)
 			ps.others = list;
 			return ps;
 		}
@@ -250,12 +251,36 @@ public class RoutePlannerFrontEnd {
 		return searchRoute(ctx, start, end, intermediates, null);
 	}
 
-	public void setUseFastRecalculation(boolean use) {
+	public RoutePlannerFrontEnd setUseFastRecalculation(boolean use) {
 		useSmartRouteRecalculation = use;
+		return this;
+	}
+	
+	public RoutePlannerFrontEnd setHHRoutingConfig(HHRoutingConfig hhRoutingConfig) {
+		// null means don't use hh 
+		this.hhRoutingConfig = hhRoutingConfig;
+		return this;
+	}
+	
+	public void setDefaultHHRoutingConfig() {
+		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+	}
+	
+	public RoutePlannerFrontEnd setUseOnlyHHRouting(boolean useOnlyHHRouting) {
+		this.useOnlyHHRouting = useOnlyHHRouting;
+		if (useOnlyHHRouting && hhRoutingConfig == null) {
+			this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+		}
+		return this;
 	}
 
-	public void setUseNativeApproximation(boolean useNativeApproximation) {
+	public RoutePlannerFrontEnd setUseNativeApproximation(boolean useNativeApproximation) {
 		this.useNativeApproximation = useNativeApproximation;
+		return this;
+	}
+	
+	public boolean isUseNativeApproximation() {
+		return useNativeApproximation;
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -801,7 +826,7 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if (USE_HH_ROUTING || USE_ONLY_HH_ROUTING) {
+		if (hhRoutingConfig != null) {
 			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
@@ -820,7 +845,7 @@ public class RoutePlannerFrontEnd {
 					dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 				}
 			}
-			if (r != null && r.isCorrect() || USE_ONLY_HH_ROUTING) {
+			if (r != null && r.isCorrect() || useOnlyHHRouting) {
 				return r;
 			}
 		}
@@ -888,7 +913,7 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed 
 		try {
-			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(HH_ROUTING_CONFIG);
+			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
 			if (res != null && res.error == null) {
@@ -899,7 +924,7 @@ public class RoutePlannerFrontEnd {
 			throw new IOException(e.getMessage(), e);
 		} catch (IOException | RuntimeException e) {
 			e.printStackTrace();
-			if (USE_ONLY_HH_ROUTING) {
+			if (useOnlyHHRouting) {
 				return new HHNetworkRouteRes("Error during routing calculation : " + e.getMessage());
 			}
 		} finally {
