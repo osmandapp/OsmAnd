@@ -348,6 +348,20 @@ public class RotatedTileBox {
 		return zoom;
 	}
 
+	public int getDefaultRadiusPoi() {
+		int radius;
+		double zoom = getZoom();
+		if (zoom <= 15) {
+			radius = 10;
+		} else if (zoom <= 16) {
+			radius = 14;
+		} else if (zoom <= 17) {
+			radius = 16;
+		} else {
+			radius = 18;
+		}
+		return (int) (radius * getDensity());
+	}
 
 	// Change lat/lon center
 	public void setLatLonCenter(double lat, double lon) {
