@@ -56,6 +56,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
@@ -832,6 +833,15 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeProfile().makeShared().cache();
+
+	// If enabled, map should be rendered with elevation data (in 3D)
+	public boolean is3DMapsEnabled() {
+		return is3DMapsAllowed() && ENABLE_3D_MAPS.get();
+	}
+
+	public boolean is3DMapsAllowed() {
+		return ctx.useOpenGlRenderer() && InAppPurchaseUtils.is3dMapsAvailable(ctx);
+	}
 
 	public final CommonPreference<CompassVisibility> COMPASS_VISIBILITY = new EnumStringPreference<CompassVisibility>(this, "compass_visibility", CompassVisibility.VISIBLE_IF_MAP_ROTATED, CompassVisibility.values()) {
 

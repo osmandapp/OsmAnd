@@ -87,7 +87,7 @@ public class WidgetDataHolder {
 	}
 
 	public int getWidgetsCount() {
-		return widgetGroup != null ? widgetGroup.getWidgets().size() : 1;
+		return widgetGroup != null ? widgetGroup.getWidgets(app).size() : 1;
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class WidgetDataHolder {
 	@Nullable
 	public List<WidgetType> getWidgetsList() {
 		if (widgetGroup != null) {
-			return widgetGroup.getWidgets();
+			return widgetGroup.getWidgets(app);
 		} else if (widgetType != null) {
 			return Collections.singletonList(widgetType);
 		}
@@ -131,7 +131,7 @@ public class WidgetDataHolder {
 	@Nullable
 	public WidgetType getMainWidget() {
 		if (widgetGroup != null) {
-			for (WidgetType widget : widgetGroup.getWidgets()) {
+			for (WidgetType widget : widgetGroup.getWidgets(app)) {
 				if (widget.isMainWidgetOfGroup()) {
 					return widget;
 				}

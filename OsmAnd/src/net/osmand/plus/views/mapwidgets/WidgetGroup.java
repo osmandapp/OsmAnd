@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -59,10 +60,10 @@ public enum WidgetGroup {
 	}
 
 	@NonNull
-	public List<WidgetType> getWidgets() {
+	public List<WidgetType> getWidgets(@NonNull OsmandApplication app) {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.getGroup()) {
+			if (this == widget.getGroup(app)) {
 				widgets.add(widget);
 			}
 		}
@@ -70,9 +71,9 @@ public enum WidgetGroup {
 	}
 
 	@NonNull
-	public List<String> getWidgetsIds() {
+	public List<String> getWidgetsIds(@NonNull OsmandApplication app) {
 		List<String> widgetsIds = new ArrayList<>();
-		for (WidgetType widget : getWidgets()) {
+		for (WidgetType widget : getWidgets(app)) {
 			widgetsIds.add(widget.id);
 		}
 		return widgetsIds;
@@ -135,8 +136,8 @@ public enum WidgetGroup {
 		return 0;
 	}
 
-	public int getOrder() {
-		return getWidgets().get(0).ordinal();
+	public int getOrder(@NonNull OsmandApplication app) {
+		return getWidgets(app).get(0).ordinal();
 	}
 
 	@Nullable

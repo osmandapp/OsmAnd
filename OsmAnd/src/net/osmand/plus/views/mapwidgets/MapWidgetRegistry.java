@@ -287,7 +287,7 @@ public class MapWidgetRegistry {
 				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getWidgetPanel());
-				boolean passTypeAllowed = widget.getWidgetType() == null || widget.getWidgetType().isAllowed();
+				boolean passTypeAllowed = widget.getWidgetType() == null || widget.getWidgetType().isAllowed(app);
 
 				if (passDisabled && passEnabled && passAvailable && defaultAvailable && passMatchedPanels && passTypeAllowed) {
 					filteredWidgets.add(widget);

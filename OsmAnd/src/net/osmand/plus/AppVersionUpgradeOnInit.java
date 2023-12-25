@@ -518,8 +518,8 @@ public class AppVersionUpgradeOnInit {
 		List<String> newWidgetsIds = new ArrayList<>();
 		newWidgetsIds.addAll(Arrays.asList(INTERMEDIATE_ARRIVAL_TIME_LEGACY, INTERMEDIATE_TIME_TO_GO_LEGACY,
 				ARRIVAL_TIME_LEGACY, TIME_TO_GO_LEGACY));
-		newWidgetsIds.addAll(WidgetGroup.BEARING.getWidgetsIds());
-		newWidgetsIds.addAll(WidgetGroup.AUDIO_VIDEO_NOTES.getWidgetsIds());
+		newWidgetsIds.addAll(WidgetGroup.BEARING.getWidgetsIds(app));
+		newWidgetsIds.addAll(WidgetGroup.AUDIO_VIDEO_NOTES.getWidgetsIds(app));
 
 		for (String widgetId : newWidgetsIds) {
 			boolean visibilityDefined = widgetsVisibility.contains(widgetId)

@@ -187,7 +187,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
 		boolean shouldHideTopWidgets = (verticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
 		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
-		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
+		boolean typeAllowed = widgetType != null && widgetType.isAllowed(app);
 		boolean visible = typeAllowed && !(shouldHideTopWidgets || emptyValueTextView);
 
 		updateVisibility(visible);

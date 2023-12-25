@@ -127,7 +127,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private void setupHeightmapRelatedPrefs() {
 		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
 		preference.setIconSpaceReserved(false);
-		preference.setEnabled(plugin.isRelief3dAllowed());
+		preference.setEnabled(settings.is3DMapsAllowed());
 	}
 
 	private void setupSimulateYourLocationPref() {

@@ -60,7 +60,7 @@ public class ReorderWidgetsAdapterHelper {
 
 	private void updateAvailableWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
 		WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
-		WidgetGroup widgetGroup = widgetType != null ? widgetType.getGroup() : null;
+		WidgetGroup widgetGroup = widgetType != null ? widgetType.getGroup(app) : null;
 		if (widgetGroup != null) {
 			boolean addGroupItem = areAllGroupWidgetsAdded(widgetGroup);
 			if (addGroupItem) {
@@ -72,7 +72,7 @@ public class ReorderWidgetsAdapterHelper {
 	}
 
 	private void addGroupToAvailableList(@NonNull WidgetGroup widgetGroup) {
-		int order = widgetGroup.getOrder();
+		int order = widgetGroup.getOrder(app);
 		int insertIndex = getInsertIndexForAvailableItem(order);
 		if (insertIndex != -1) {
 			ListItem groupItem = new ListItem(ItemType.AVAILABLE_GROUP, widgetGroup);
@@ -105,7 +105,7 @@ public class ReorderWidgetsAdapterHelper {
 				}
 			} else if (value instanceof WidgetGroup || value instanceof AvailableWidgetUiInfo) {
 				int availableItemOrder = item.value instanceof WidgetGroup
-						? ((WidgetGroup) item.value).getOrder()
+						? ((WidgetGroup) item.value).getOrder(app)
 						: ((AvailableWidgetUiInfo) item.value).order;
 				if (availableItemOrder > order) {
 					return i;
@@ -504,7 +504,7 @@ public class ReorderWidgetsAdapterHelper {
 
 	private void removeAddedItemFromAvailable(@NonNull String widgetId) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
-		WidgetGroup group = widgetType != null ? widgetType.getGroup() : null;
+		WidgetGroup group = widgetType != null ? widgetType.getGroup(app) : null;
 		if (group != null) {
 			if (areAllGroupWidgetsAdded(group)) {
 				int indexToRemove = getIndexOfAvailableGroup(group);
@@ -538,13 +538,13 @@ public class ReorderWidgetsAdapterHelper {
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
 				WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
-				if (widgetType != null && group == widgetType.getGroup()) {
+				if (widgetType != null && group == widgetType.getGroup(app)) {
 					addedGroupWidgetsCount++;
 				}
 			}
 		}
 
-		return addedGroupWidgetsCount == group.getWidgets().size();
+		return addedGroupWidgetsCount == group.getWidgets(app).size();
 	}
 
 	private int getIndexOfAvailableGroup(@NonNull WidgetGroup group) {

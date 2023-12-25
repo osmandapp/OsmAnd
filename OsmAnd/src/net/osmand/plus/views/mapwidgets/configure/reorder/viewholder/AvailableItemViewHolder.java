@@ -46,7 +46,7 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 	@NonNull
 	public static Spannable getGroupTitle(@NonNull WidgetGroup group, @NonNull OsmandApplication app, boolean nightMode) {
 		String groupName = app.getString(group.titleId);
-		int widgetsCount = group.getWidgets().size();
+		int widgetsCount = group.getWidgets(app).size();
 		String title = app.getString(R.string.ltr_or_rtl_combine_via_dash, groupName, String.valueOf(widgetsCount));
 		SpannableString spannableTitle = new SpannableString(title);
 		int spanFlag = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;

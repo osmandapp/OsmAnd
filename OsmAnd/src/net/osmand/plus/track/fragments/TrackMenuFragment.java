@@ -97,7 +97,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -1142,8 +1141,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						? this.analysis
 						: selectedGpxFile.getTrackAnalysis(app);
 				if (analysis.hasElevationData()) {
-					OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-					if (plugin != null && plugin.isRelief3dAllowed()) {
+					if (settings.is3DMapsAllowed()) {
 						calculateOfflineSelected(-1);
 					} else {
 						calculateOnlineSelected(-1);

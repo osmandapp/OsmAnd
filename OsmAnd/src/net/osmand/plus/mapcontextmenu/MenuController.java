@@ -490,16 +490,18 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public String getFormattedAltitude() {
-		Double altitude = null;
-		OsmandApplication app = null;
 		MapActivity activity = getMapActivity();
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (activity != null && devPlugin != null && devPlugin.is3DMapsEnabled()) {
-			app = activity.getMyApplication();
-			OsmandMapTileView mapView = activity.getMapView();
-			MapRendererView mapRenderer = mapView.getMapRenderer();
+		if (activity == null) {
+			return null;
+		}
+
+		OsmandApplication app = activity.getMyApplication();
+		Double altitude = null;
+		if (app.getSettings().is3DMapsEnabled()) {
+			MapRendererView mapRenderer = activity.getMapView().getMapRenderer();
 			altitude = NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon());
 		}
+
 		return altitude != null ? OsmAndFormatter.getFormattedAlt(altitude, app) : null;
 	}
 

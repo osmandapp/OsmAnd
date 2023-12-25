@@ -179,17 +179,16 @@ public enum WidgetType {
 		return night ? nightIconId : dayIconId;
 	}
 
-	public WidgetGroup getGroup() {
-		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed()) {
+	public WidgetGroup getGroup(@NonNull OsmandApplication app) {
+		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed(app)) {
 			return null;
 		}
 		return group;
 	}
 
-	public boolean isAllowed() {
+	public boolean isAllowed(@NonNull OsmandApplication app) {
 		if (this == ALTITUDE_MAP_CENTER) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			return plugin != null && plugin.is3DMapsEnabled();
+			return app.getSettings().is3DMapsEnabled();
 		}
 		return true;
 	}

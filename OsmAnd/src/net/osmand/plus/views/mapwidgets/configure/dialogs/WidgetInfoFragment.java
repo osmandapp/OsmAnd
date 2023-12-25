@@ -114,7 +114,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			throw new IllegalStateException("Failed to find widget by id: " + widgetId);
 		}
 		widgetType = widgetInfo.getWidgetType();
-		widgetGroup = widgetType == null ? null : widgetType.getGroup();
+		widgetGroup = widgetType == null ? null : widgetType.getGroup(app);
 		panel = widgetInfo.getWidgetPanel();
 	}
 
