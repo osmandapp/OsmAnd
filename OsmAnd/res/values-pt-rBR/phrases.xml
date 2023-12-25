@@ -4637,7 +4637,7 @@
     <string name="poi_osmand_vehicle_no">Acesso de veículos: não</string>
     <string name="poi_osmand_access_no">Acesso: não</string>
     <string name="poi_osmand_access_private">Acesso: privado</string>
-    <string name="poi_osmand_foot_private">Acesso de pedestre: privada</string>
+    <string name="poi_osmand_foot_private">Acesso de pedestre: privado</string>
     <string name="poi_osmand_bicycle_private">Acesso de bicicleta: privado</string>
     <string name="poi_osmand_motor_vehicle_private">Acesso de veículos motorizados: privado</string>
     <string name="poi_osmand_foot_no">Acesso de pedestre: não</string>
