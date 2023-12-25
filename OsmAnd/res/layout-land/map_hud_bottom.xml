@@ -58,19 +58,7 @@
                     tools:text="1.2 km"
                     tools:textColor="@color/activity_background_color_dark"/>
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/map_app_mode_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="130dp"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginStart="@dimen/map_button_margin"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/map_button_text_size"
-                tools:text="13.88"/>
-
+            
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
