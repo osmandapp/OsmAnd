@@ -80,16 +80,17 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	                           @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
 		File folderFile = trackFolder.getDirFile();
 		File[] files = GPXFolderUtils.listFilesSorted(sortByMode, folderFile);
+		List<TrackFolder> subFolders = new ArrayList<>();
+		List<TrackItem> trackItems = new ArrayList<>();
 		for (File file : files) {
 			if (file.isDirectory()) {
-				TrackFolder folder = new TrackFolder(file, trackFolder);
-				trackFolder.addSubFolder(folder);
-				loadGPXFolder(folder, GPXFolderUtils.getSubfolderTitle(file, subfolder), progress, updateSmartFolder);
+				TrackFolder subFold = new TrackFolder(file, trackFolder);
+				subFolders.add(subFold);
+				loadGPXFolder(subFold, GPXFolderUtils.getSubfolderTitle(file, subfolder), progress, updateSmartFolder);
 			} else if (GpxUiHelper.isGpxFile(file)) {
 				TrackItem item = new TrackItem(file);
 				item.setDataItem(getDataItem(item));
-				trackFolder.addTrackItem(item);
-
+				trackItems.add(item);
 				if (updateSmartFolder) {
 					smartFolderHelper.addTrackItemToSmartFolder(item);
 				}
@@ -100,6 +101,8 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				}
 			}
 		}
+		trackFolder.setSubFolders(subFolders);
+		trackFolder.setTrackItems(trackItems);
 		trackFolder.resetCashedData();
 	}
 

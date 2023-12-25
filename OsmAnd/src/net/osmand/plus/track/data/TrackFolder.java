@@ -19,8 +19,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	private File dirFile;
 	private final TrackFolder parentFolder;
-	private final List<TrackItem> trackItems = new ArrayList<>();
-	private final List<TrackFolder> subFolders = new ArrayList<>();
+	private List<TrackItem> trackItems = new ArrayList<>();
+	private List<TrackFolder> subFolders = new ArrayList<>();
 
 	private List<TrackItem> flattenedTrackItems;
 	private List<TrackFolder> flattenedSubFolders;
@@ -60,21 +60,21 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackFolder> getSubFolders() {
-		return new ArrayList<>(subFolders);
+		return subFolders;
 	}
 
 	@NonNull
 	@Override
 	public List<TrackItem> getTrackItems() {
-		return new ArrayList<>(trackItems);
+		return trackItems;
 	}
 
-	public void addSubFolder(@NonNull TrackFolder folder) {
-		subFolders.add(folder);
+	public void setSubFolders(List<TrackFolder> subFolders) {
+		this.subFolders = subFolders;
 	}
 
-	public void addTrackItem(@NonNull TrackItem trackItem) {
-		trackItems.add(trackItem);
+	public void setTrackItems(List<TrackItem> trackItems) {
+		this.trackItems = trackItems;
 	}
 
 	public boolean isEmpty() {
