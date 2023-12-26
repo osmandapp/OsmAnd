@@ -41,7 +41,7 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
@@ -171,21 +171,21 @@ public abstract class SettingsHelper {
 		return filteredSettingsItems;
 	}
 
-	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems, boolean offlineBackup) {
-		Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
+	public Map<ExportCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems, boolean offlineBackup) {
+		Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 		Map<ExportType, List<?>> settingsItems = getSettingsItems(null, addEmptyItems);
 		Map<ExportType, List<?>> myPlacesItems = getMyPlacesItems(null, addEmptyItems);
 		Map<ExportType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems, offlineBackup);
 
 		if (!settingsItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportSettingsCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
+			dataList.put(ExportCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
 		}
 		if (!myPlacesItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportSettingsCategory.MY_PLACES, new SettingsCategoryItems(myPlacesItems));
+			dataList.put(ExportCategory.MY_PLACES, new SettingsCategoryItems(myPlacesItems));
 		}
 		if (!resourcesItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportSettingsCategory.RESOURCES, new SettingsCategoryItems(resourcesItems));
+			dataList.put(ExportCategory.RESOURCES, new SettingsCategoryItems(resourcesItems));
 		}
 
 		return dataList;
@@ -674,12 +674,12 @@ public abstract class SettingsHelper {
 		return null;
 	}
 
-	public static Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete, boolean addEmptyItems) {
+	public static Map<ExportCategory, SettingsCategoryItems> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete, boolean addEmptyItems) {
 		Map<ExportType, List<?>> settingsToOperate = getSettingsToOperate(items, importComplete, addEmptyItems);
 		return getSettingsToOperateByCategory(settingsToOperate, addEmptyItems);
 	}
 
-	public static Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsToOperateByCategory(Map<ExportType, List<?>> settingsToOperate, boolean addEmptyItems) {
+	public static Map<ExportCategory, SettingsCategoryItems> getSettingsToOperateByCategory(Map<ExportType, List<?>> settingsToOperate, boolean addEmptyItems) {
 		Map<ExportType, List<?>> settingsItems = new LinkedHashMap<>();
 		Map<ExportType, List<?>> myPlacesItems = new LinkedHashMap<>();
 		Map<ExportType, List<?>> resourcesItems = new LinkedHashMap<>();
@@ -694,15 +694,15 @@ public abstract class SettingsHelper {
 				resourcesItems.put(type, entry.getValue());
 			}
 		}
-		Map<ExportSettingsCategory, SettingsCategoryItems> exportMap = new LinkedHashMap<>();
+		Map<ExportCategory, SettingsCategoryItems> exportMap = new LinkedHashMap<>();
 		if (!settingsItems.isEmpty() || addEmptyItems) {
-			exportMap.put(ExportSettingsCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
+			exportMap.put(ExportCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
 		}
 		if (!myPlacesItems.isEmpty() || addEmptyItems) {
-			exportMap.put(ExportSettingsCategory.MY_PLACES, new SettingsCategoryItems(myPlacesItems));
+			exportMap.put(ExportCategory.MY_PLACES, new SettingsCategoryItems(myPlacesItems));
 		}
 		if (!resourcesItems.isEmpty() || addEmptyItems) {
-			exportMap.put(ExportSettingsCategory.RESOURCES, new SettingsCategoryItems(resourcesItems));
+			exportMap.put(ExportCategory.RESOURCES, new SettingsCategoryItems(resourcesItems));
 		}
 
 		return exportMap;

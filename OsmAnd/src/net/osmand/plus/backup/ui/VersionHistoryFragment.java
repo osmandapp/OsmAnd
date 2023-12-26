@@ -8,7 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
@@ -50,7 +50,7 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	@Override
-	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
+	public void onCategorySelected(ExportCategory category, boolean selected) {
 		super.onCategorySelected(category, selected);
 
 		SettingsCategoryItems categoryItems = dataList.get(category);

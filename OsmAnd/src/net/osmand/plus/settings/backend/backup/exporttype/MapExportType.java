@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 
 public abstract class MapExportType extends AbstractExportType {
@@ -18,8 +18,8 @@ public abstract class MapExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public ExportSettingsCategory relatedExportCategory() {
-		return ExportSettingsCategory.RESOURCES;
+	public ExportCategory relatedExportCategory() {
+		return ExportCategory.RESOURCES;
 	}
 
 	@NonNull

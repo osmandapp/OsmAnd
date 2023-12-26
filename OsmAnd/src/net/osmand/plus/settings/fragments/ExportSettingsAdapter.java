@@ -23,7 +23,7 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -47,9 +47,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final UiUtilities uiUtilities;
 	private final boolean exportMode;
 
-	private List<ExportSettingsCategory> itemsTypes;
+	private List<ExportCategory> itemsTypes;
 	private Map<ExportType, List<?>> selectedItemsMap;
-	private Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap;
+	private Map<ExportCategory, SettingsCategoryItems> itemsMap;
 
 	private final OnItemSelectedListener listener;
 
@@ -81,7 +81,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			group = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
 			group.findViewById(R.id.item_container).setMinimumHeight(groupViewHeight);
 		}
-		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems items = itemsMap.get(category);
 
 		String title = app.getString(category.getTitleId());
@@ -135,7 +135,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			child = themedInflater.inflate(R.layout.profile_data_list_item_group, parent, false);
 			child.findViewById(R.id.item_container).setMinimumHeight(childViewHeight);
 		}
-		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
 		ExportType type = categoryItems.getTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(type);
@@ -248,7 +248,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		app.showShortToastMessage(R.string.no_items_of_type_message);
 	}
 
-	public void updateSettingsItems(Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
+	public void updateSettingsItems(Map<ExportCategory, SettingsCategoryItems> itemsMap,
 									Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
@@ -272,7 +272,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		return selectedItems;
 	}
 
-	private String getCategoryDescr(ExportSettingsCategory category, boolean exportMode) {
+	private String getCategoryDescr(ExportCategory category, boolean exportMode) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
@@ -356,7 +356,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		void onItemsSelected(@NonNull ExportType type, List<?> selectedItems);
 
-		void onCategorySelected(@NonNull ExportSettingsCategory type, boolean selected);
+		void onCategorySelected(@NonNull ExportCategory type, boolean selected);
 
 		void onTypeClicked(@NonNull ExportType type);
 

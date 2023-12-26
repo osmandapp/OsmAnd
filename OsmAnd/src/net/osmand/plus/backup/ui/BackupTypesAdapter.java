@@ -19,7 +19,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
@@ -40,9 +40,9 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 
-	private List<ExportSettingsCategory> itemsTypes;
+	private List<ExportCategory> itemsTypes;
 	private Map<ExportType, List<?>> selectedItemsMap;
-	private Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap;
+	private Map<ExportCategory, SettingsCategoryItems> itemsMap;
 
 	private final OnItemSelectedListener listener;
 
@@ -66,7 +66,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		if (view == null) {
 			view = themedInflater.inflate(R.layout.backup_type_item, parent, false);
 		}
-		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems items = itemsMap.get(category);
 
 		String name = app.getString(category.getTitleId());
@@ -115,7 +115,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		if (view == null) {
 			view = themedInflater.inflate(R.layout.backup_type_item, parent, false);
 		}
-		ExportSettingsCategory category = itemsTypes.get(groupPosition);
+		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
 		ExportType type = categoryItems.getTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(type);
@@ -172,7 +172,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		icon.setImageDrawable(uiUtilities.getIcon(iconRes, colorRes));
 	}
 
-	public void updateSettingsItems(Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
+	public void updateSettingsItems(Map<ExportCategory, SettingsCategoryItems> itemsMap,
 									Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
@@ -181,7 +181,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		notifyDataSetChanged();
 	}
 
-	private String getCategoryDescr(ExportSettingsCategory category) {
+	private String getCategoryDescr(ExportCategory category) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
@@ -294,7 +294,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 		void onTypeSelected(ExportType type, boolean selected);
 
-		void onCategorySelected(ExportSettingsCategory type, boolean selected);
+		void onCategorySelected(ExportCategory type, boolean selected);
 
 	}
 }

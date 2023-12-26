@@ -25,7 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -45,7 +45,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
 	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
+	protected Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 	protected View header;
 	protected View continueBtn;
@@ -247,7 +247,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	@Override
-	public void onCategorySelected(@NonNull ExportSettingsCategory category, boolean selected) {
+	public void onCategorySelected(@NonNull ExportCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		for (ExportType type : categoryItems.getNotEmptyTypes()) {
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();

@@ -28,7 +28,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
@@ -49,7 +49,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	protected BackupHelper backupHelper;
 
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
+	protected Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 
 	protected ProgressBar progressBar;
@@ -140,7 +140,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
+	public void onCategorySelected(ExportCategory category, boolean selected) {
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportType> exportTypes = categoryItems.getTypes();
@@ -179,7 +179,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@NonNull
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
+	protected Map<ExportCategory, SettingsCategoryItems> getDataList() {
 		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
 		if (remoteFiles == null) {
 			remoteFiles = Collections.emptyMap();

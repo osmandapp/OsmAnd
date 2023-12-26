@@ -4,7 +4,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum ExportSettingsCategory {
+public enum ExportCategory {
 
 	SETTINGS(R.string.shared_string_settings),
 	MY_PLACES(R.string.shared_string_my_places),
@@ -13,7 +13,7 @@ public enum ExportSettingsCategory {
 	@StringRes
 	private final int titleId;
 
-	ExportSettingsCategory(@StringRes int titleId) {
+	ExportCategory(@StringRes int titleId) {
 		this.titleId = titleId;
 	}
 

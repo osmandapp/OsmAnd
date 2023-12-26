@@ -7,7 +7,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
@@ -25,10 +25,10 @@ interface IExportType {
 
 	boolean isAllowedInFreeVersion();
 
-	boolean isRelatedToCategory(@NonNull ExportSettingsCategory exportCategory);
+	boolean isRelatedToCategory(@NonNull ExportCategory exportCategory);
 
 	@NonNull
-	ExportSettingsCategory relatedExportCategory();
+	ExportCategory relatedExportCategory();
 
 	@NonNull
 	SettingsItemType relatedSettingsItemType();

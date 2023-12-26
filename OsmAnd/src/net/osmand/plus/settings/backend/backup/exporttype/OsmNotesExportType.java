@@ -7,7 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
@@ -33,8 +33,8 @@ class OsmNotesExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public ExportSettingsCategory relatedExportCategory() {
-		return ExportSettingsCategory.MY_PLACES;
+	public ExportCategory relatedExportCategory() {
+		return ExportCategory.MY_PLACES;
 	}
 
 	@NonNull
