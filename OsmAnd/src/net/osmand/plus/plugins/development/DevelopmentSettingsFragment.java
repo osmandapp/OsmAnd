@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
@@ -127,7 +128,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private void setupHeightmapRelatedPrefs() {
 		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
 		preference.setIconSpaceReserved(false);
-		preference.setEnabled(plugin.isRelief3dAllowed());
+		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+		boolean enabled = srtmPlugin != null && srtmPlugin.is3DReliefAllowed();
+		preference.setEnabled(enabled);
 	}
 
 	private void setupSimulateYourLocationPref() {

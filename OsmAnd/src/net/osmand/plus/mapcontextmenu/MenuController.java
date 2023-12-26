@@ -79,6 +79,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.menu.EditPOIMenuController;
 import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.SearchOsmandRegionTask;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -493,8 +494,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		Double altitude = null;
 		OsmandApplication app = null;
 		MapActivity activity = getMapActivity();
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (activity != null && devPlugin != null && devPlugin.is3DMapsEnabled()) {
+		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+		if (activity != null && srtmPlugin != null && srtmPlugin.is3DMapsEnabled()) {
 			app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();

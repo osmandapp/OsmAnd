@@ -6,10 +6,7 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.StateChangedListener;
-
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapRendererDebugSettings;
-
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -20,7 +17,6 @@ import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
@@ -37,8 +33,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
@@ -239,21 +235,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return quickActionTypes;
 	}
 
-	// If enabled, map should be rendered with elevation data (in 3D)
-	public boolean is3DMapsEnabled() {
-		return isRelief3dAllowed() && settings.ENABLE_3D_MAPS.get();
-	}
-
 	public boolean generateTerrainFrom3DMaps() {
 		return app.useOpenGlRenderer() && !USE_RASTER_SQLITEDB.get();
-	}
-
-	public boolean isRelief3dAllowed() {
-		return app.useOpenGlRenderer() && isRelief3dPurchased();
-	}
-
-	public boolean isRelief3dPurchased() {
-		return InAppPurchaseUtils.is3dMapsAvailable(app);
 	}
 
 	@Nullable
