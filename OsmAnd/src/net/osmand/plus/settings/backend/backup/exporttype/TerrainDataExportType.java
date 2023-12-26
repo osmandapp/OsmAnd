@@ -1,19 +1,36 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-class TerrainDataExportType extends ExportType {
+import java.util.Arrays;
+import java.util.List;
 
-	public TerrainDataExportType() {
-		super(R.string.topography_maps, R.drawable.ic_action_terrain, SettingsItemType.FILE);
+class TerrainDataExportType extends MapExportType {
+
+	@Override
+	public int getTitleId() {
+		return R.string.topography_maps;
+	}
+
+	@Override
+	public int getIconId() {
+		return R.drawable.ic_action_terrain;
 	}
 
 	@NonNull
 	@Override
-	public String getId() {
-		return "TERRAIN_DATA";
+	public List<FileSubtype> relatedFileSubtypes() {
+		return Arrays.asList(FileSubtype.SRTM_MAP, FileSubtype.TERRAIN_DATA);
+	}
+
+	@Nullable
+	@Override
+	public LocalItemType relatedLocalItemType() {
+		return LocalItemType.TERRAIN_DATA;
 	}
 }

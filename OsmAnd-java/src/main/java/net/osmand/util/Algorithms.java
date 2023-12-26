@@ -1393,6 +1393,25 @@ public class Algorithms {
 		return result;
 	}
 
+	public static <T> T searchElementWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
+		for (T element : collection) {
+			if (condition.processResult(element)) {
+				return element;
+			}
+		}
+		return null;
+	}
+
+	public static <T> List<T> filterElementsWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
+		List<T> result = new ArrayList<>();
+		for (T element : collection) {
+			if (condition.processResult(element)) {
+				result.add(element);
+			}
+		}
+		return result;
+	}
+
 	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
 		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
 		mapRect.right = Math.max(mapRect.right, longitude);

@@ -1,19 +1,62 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-class GlobalExportType extends ExportType {
+import java.util.Collections;
+import java.util.List;
 
-	public GlobalExportType() {
-		super(R.string.osmand_settings, R.drawable.ic_action_settings, SettingsItemType.GLOBAL);
+class GlobalExportType extends AbstractExportType {
+
+	@Override
+	public int getTitleId() {
+		return R.string.osmand_settings;
+	}
+
+	@Override
+	public int getIconId() {
+		return R.drawable.ic_action_settings;
 	}
 
 	@NonNull
 	@Override
-	public String getId() {
-		return "GLOBAL";
+	public ExportSettingsCategory relatedExportCategory() {
+		return ExportSettingsCategory.SETTINGS;
+	}
+
+	@NonNull
+	@Override
+	public SettingsItemType relatedSettingsItemType() {
+		return SettingsItemType.GLOBAL;
+	}
+
+	@NonNull
+	@Override
+	public List<FileSubtype> relatedFileSubtypes() {
+		return Collections.emptyList();
+	}
+
+	@Nullable
+	@Override
+	public LocalItemType relatedLocalItemType() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Class<? extends OsmandPlugin> relatedPluginClass() {
+		return null;
+	}
+
+	@Override
+	public boolean isAllowedInFreeVersion() {
+		return true;
 	}
 }

@@ -1,19 +1,36 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-class RoadMapsExportType extends ExportType {
+import java.util.Collections;
+import java.util.List;
 
-	public RoadMapsExportType() {
-		super(R.string.shared_string_road_maps, R.drawable.ic_map, SettingsItemType.FILE);
+class RoadMapsExportType extends MapExportType {
+
+	@Override
+	public int getTitleId() {
+		return R.string.shared_string_road_maps;
+	}
+
+	@Override
+	public int getIconId() {
+		return R.drawable.ic_map;
 	}
 
 	@NonNull
 	@Override
-	public String getId() {
-		return "ROAD_MAPS";
+	public List<FileSubtype> relatedFileSubtypes() {
+		return Collections.singletonList(FileSubtype.ROAD_MAP);
+	}
+
+	@Nullable
+	@Override
+	public LocalItemType relatedLocalItemType() {
+		return LocalItemType.ROAD_DATA;
 	}
 }

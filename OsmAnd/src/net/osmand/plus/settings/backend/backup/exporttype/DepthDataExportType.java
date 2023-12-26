@@ -1,19 +1,36 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-class DepthDataExportType extends ExportType {
+import java.util.Collections;
+import java.util.List;
 
-	public DepthDataExportType() {
-		super(R.string.nautical_maps, R.drawable.ic_action_anchor, SettingsItemType.FILE);
+class DepthDataExportType extends MapExportType {
+
+	@Override
+	public int getTitleId() {
+		return R.string.nautical_maps;
+	}
+
+	@Override
+	public int getIconId() {
+		return R.drawable.ic_action_anchor;
 	}
 
 	@NonNull
 	@Override
-	public String getId() {
-		return "DEPTH_DATA";
+	public List<FileSubtype> relatedFileSubtypes() {
+		return Collections.singletonList(FileSubtype.NAUTICAL_DEPTH);
+	}
+
+	@Nullable
+	@Override
+	public LocalItemType relatedLocalItemType() {
+		return LocalItemType.DEPTH_DATA;
 	}
 }

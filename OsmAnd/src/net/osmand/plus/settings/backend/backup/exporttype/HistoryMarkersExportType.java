@@ -1,19 +1,57 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-class HistoryMarkersExportType extends ExportType {
+import java.util.Collections;
+import java.util.List;
 
-	public HistoryMarkersExportType() {
-		super(R.string.markers_history, R.drawable.ic_action_flag, SettingsItemType.HISTORY_MARKERS);
+class HistoryMarkersExportType extends AbstractExportType {
+
+	@Override
+	public int getTitleId() {
+		return R.string.markers_history;
+	}
+
+	@Override
+	public int getIconId() {
+		return R.drawable.ic_action_flag;
 	}
 
 	@NonNull
 	@Override
-	public String getId() {
-		return "HISTORY_MARKERS";
+	public ExportSettingsCategory relatedExportCategory() {
+		return ExportSettingsCategory.MY_PLACES;
+	}
+
+	@NonNull
+	@Override
+	public SettingsItemType relatedSettingsItemType() {
+		return SettingsItemType.HISTORY_MARKERS;
+	}
+
+	@NonNull
+	@Override
+	public List<FileSubtype> relatedFileSubtypes() {
+		return Collections.emptyList();
+	}
+
+	@Nullable
+	@Override
+	public LocalItemType relatedLocalItemType() {
+		return LocalItemType.HISTORY_MARKERS;
+	}
+
+	@Nullable
+	@Override
+	public Class<? extends OsmandPlugin> relatedPluginClass() {
+		return null;
 	}
 }

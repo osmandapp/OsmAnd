@@ -3,26 +3,17 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
-import java.util.Collections;
-import java.util.List;
+public abstract class MapExportType extends AbstractExportType {
 
-class VoiceExportType extends AbstractExportType {
+	public static final String OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY = "OFFLINE_MAPS";
 
 	@Override
-	public int getTitleId() {
-		return R.string.local_indexes_cat_voice;
-	}
-
-	@Override
-	public int getIconId() {
-		return R.drawable.ic_action_volume_up;
+	public boolean isMap() {
+		return true;
 	}
 
 	@NonNull
@@ -35,18 +26,6 @@ class VoiceExportType extends AbstractExportType {
 	@Override
 	public SettingsItemType relatedSettingsItemType() {
 		return SettingsItemType.FILE;
-	}
-
-	@NonNull
-	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
-		return Collections.singletonList(FileSubtype.VOICE);
-	}
-
-	@Nullable
-	@Override
-	public LocalItemType relatedLocalItemType() {
-		return LocalItemType.VOICE_DATA;
 	}
 
 	@Nullable

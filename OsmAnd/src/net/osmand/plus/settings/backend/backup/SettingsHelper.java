@@ -85,8 +85,6 @@ public abstract class SettingsHelper {
 
 	public static final int VERSION = 1;
 
-	public static final String OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY = "OFFLINE_MAPS";
-
 	public static final String EXPORT_TYPE_LIST_KEY = "export_type_list_key";
 	public static final String REPLACE_KEY = "replace";
 	public static final String SILENT_IMPORT_KEY = "silent_import";
