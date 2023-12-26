@@ -1967,7 +1967,7 @@
     <string name="rendering_value_dark_brown_name">მუქი ყავისფერი</string>
     <string name="rendering_value_light_brown_name">ღია ყავისფერი</string>
     <string name="translit_names">სახელების ტრანსლიტერაცია</string>
-    <string name="edit_filter">კატეგორიების ჩასწორება</string>
+    <string name="edit_filter">ფილტრის შეცვლა</string>
     <string name="selected_categories">არჩეული კატეგორიები</string>
     <string name="new_filter">ახალი ფილტრი</string>
     <string name="delete_filter">ფილტრის წაშლა</string>
@@ -2896,4 +2896,17 @@
     <string name="save_track_to_gpx_descrp"/>
     <string name="av_def_action_choose">მოთხოვნისას</string>
     <string name="contact_us">დაგვიკავშირდით</string>
+    <string name="rendering_attr_horse_scale_impossible_name">შეუძლებელი</string>
+    <string name="rendering_attr_horse_scale_common_name">საერთო</string>
+    <string name="shared_string_item">ელემენტი</string>
+    <string name="exit_import">გავიდე?</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">დამწყები</string>
+    <string name="rendering_attr_horse_scale_critical_name">კრიტიკული</string>
+    <string name="shared_string_symbol">სიმბოლო</string>
+    <string name="shared_string_buttons">ღილაკები</string>
+    <string name="shared_string_complete">დასრულებულია</string>
+    <string name="rendering_attr_horse_scale_difficult_name">რთული</string>
+    <string name="routing_attr_freeride_policy_allow_name">დაშვება</string>
+    <string name="shared_string_shape">მოხაზულობა</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">საშიში</string>
 </resources>
