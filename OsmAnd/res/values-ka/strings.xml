@@ -1324,7 +1324,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">ექსტრემალური</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">დაგორება</string>
     <string name="rendering_attr_piste_difficulty_expert_name">ექსპერტი</string>
-    <string name="rendering_attr_piste_difficulty_advanced_name">რთული</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">დამატებით</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">საშუალო</string>
     <string name="rendering_attr_piste_difficulty_easy_name">ადვილი</string>
     <string name="rendering_attr_piste_difficulty_novice_name">ახალბედა</string>
@@ -1393,7 +1393,7 @@
     <string name="rendering_attr_highway_class_street_name">ქუჩა</string>
     <string name="rendering_attr_highway_class_road_name">გზა</string>
     <string name="rendering_attr_highway_class_motorway_name">საავტომობილო გზა</string>
-    <string name="rendering_attr_smoothness_impassable_name">შეუძლებელი</string>
+    <string name="rendering_attr_smoothness_impassable_name">გაუვალი</string>
     <string name="rendering_attr_smoothness_horrible_name">საშინელი</string>
     <string name="rendering_attr_smoothness_bad_name">ცუდი</string>
     <string name="rendering_attr_smoothness_intermediate_name">საშუალო</string>
@@ -2109,7 +2109,7 @@
     <string name="shared_string_paused">დაპაუზებული</string>
     <string name="shared_string_visible">ხილვადი</string>
     <string name="shared_string_notifications">გაფრთხილებები</string>
-    <string name="shared_string_widgets">ღილაკები</string>
+    <string name="shared_string_widgets">ვიჯეტები</string>
     <string name="shared_string_toolbar">მართვის პანელი</string>
     <string name="plugins_menu_group">დამატებები</string>
     <string name="show_gpx">გზები</string>
