@@ -546,7 +546,7 @@
     <string name="app_mode_aircraft">طائرة</string>
     <string name="app_modes_choose_descr">اختيار أوضاع الملاحة المتوفرة.</string>
     <string name="app_modes_choose">تطبيق الوضع</string>
-    <string name="map_widget_map_rendering">إعدادت الخريطة</string>
+    <string name="map_widget_map_rendering">إعدادات الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
     <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ،وقابلية الملاحة ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الجغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح.
@@ -1770,7 +1770,7 @@
     <string name="delete_change">مسع التعديل</string>
     <string name="successfully_uploaded_pattern">تم الرفع بنجاح{0}/{1}</string>
     <string name="error_message_pattern">خطأ : {0}</string>
-    <string name="dahboard_options_dialog_title">إعدادت سطح المكتب</string>
+    <string name="dahboard_options_dialog_title">إعدادات سطح المكتب</string>
     <string name="shared_string_card_was_hidden">تم إخفاء البطاقة</string>
     <string name="tab_title_basic">أساسي</string>
     <string name="next_proceed">التالي</string>
@@ -2893,7 +2893,7 @@
     <string name="save_poi_value_exceed_length">اختصر طول الوسم\"%s\" إلى أقل من 255 حرف.</string>
     <string name="shared_string_degrees">درجات</string>
     <string name="shared_string_milliradians">مللي راديان</string>
-    <string name="angular_measeurement">وحدات قياس الزاويا</string>
+    <string name="angular_measeurement">وحدات قياس الزوايا</string>
     <string name="angular_measeurement_descr">تغيير قياس زاوية السمت.</string>
     <string name="save_poi_value_exceed_length_title">طول \"%s\" قيمة</string>
     <string name="public_transport_warning_descr_blog">اقرأ المزيد حول ملاحة OsmAnd على مدونتنا.</string>

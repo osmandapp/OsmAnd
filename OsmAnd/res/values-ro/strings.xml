@@ -3386,7 +3386,7 @@
     <string name="select_folder_descr">Selectați un folder sau adăugați unul nou</string>
     <string name="shared_string_empty">Gol</string>
     <string name="analyze_by_intervals">Analiză pe intervale</string>
-    <string name="upload_to_openstreetmap">Încărcați pe OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Încarcă pe OpenStreetMap</string>
     <string name="edit_track">Editează traseu</string>
     <string name="rename_track">Redenumește traseu</string>
     <string name="change_folder">Schimbă folderul</string>
@@ -3909,7 +3909,7 @@
     <string name="profiles_for_action_not_found">Nu am găsit niciun profil de acest tip.</string>
     <string name="index_item_world_basemap_detailed">Harta de ansamblu a lumii (detaliată)</string>
     <string name="unsupported_type_error">Tip neacceptat</string>
-    <string name="width_limit_description">Țineți cont de lățimea vehiculului dumneavoastră, deoarece se pot aplica unele restricții de traseu pentru vehiculele late.</string>
+    <string name="width_limit_description">Precizați lățimea vehiculului dumneavoastră, deoarece se pot aplica unele restricții de traseu pentru vehiculele late.</string>
     <string name="height_limit_description">Precizați înălțimea vehiculului dumneavoastră, deoarece se pot aplica unele restricții de traseu pentru vehiculele înalte.</string>
     <string name="weight_limit_description">Precizați greutatea vehiculului, deoarece se pot aplica unele restricții de traseu pentru vehiculele grele.</string>
     <string name="lenght_limit_description">Precizați lungimea autovehiculului, deoarece este posibil să se aplice anumite restricții de traseu pentru vehiculele lungi.</string>

@@ -4425,7 +4425,7 @@
     <string name="uploaded_count">%1$d/%2$d kargatu da</string>
     <string name="segments_count">%1$d segmentua</string>
     <string name="select_segments_description">%1$s segmentu bat baino gehiago ditu, nabigaziorako zatia zehaztu behar duzu.</string>
-    <string name="upload_photo">Kargatzen</string>
+    <string name="upload_photo">Igotzen</string>
     <string name="copy_to_map_favorites">Kopiatu gogokoetan</string>
     <string name="copy_to_map_markers">Kopiatu mapako markatzaileetan</string>
     <string name="delete_waypoints">Ezabatu bide-puntuak</string>
@@ -4448,7 +4448,7 @@
     <string name="routing_attr_prefer_hiking_routes_name">Hobetsi mendiko ibilbideak</string>
     <string name="shared_string_last_used">Erabilitako azkena</string>
     <string name="profile_by_default_description">Hautatu aplikazioa abiatzean erabiliko den profila.</string>
-    <string name="use_dev_url_descr">Erabili dev.openstreetmap.org openstreetmap.org erabili beharrean OSM Note / POI / GPX-en karga probatzeko.</string>
+    <string name="use_dev_url_descr">Erabili dev.openstreetmap.org openstreetmap.org erabili beharrean OSM Note / POI / GPX-en igoera probatzeko.</string>
     <string name="navigate_point_format_swiss_grid">Suitzako sarea (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Suitzako sarea (CH1903+)</string>
     <string name="lang_de_casual">Alemana (kasuala)</string>
@@ -4472,7 +4472,7 @@
 \n
 \nAurkitu gure webgunean ekarpenak egiteko argibideak %1$s.</string>
     <string name="select_segments">Hautatu segmentuak</string>
-    <string name="uploading_count">%1$d/%2$d kargatzen</string>
+    <string name="uploading_count">%1$d/%2$d igotzen</string>
     <string name="activity_type_winter_name">Negua</string>
     <string name="announcement_time_descr">Ahots-abisu desberdinen iragarpen-denbora gonbita motaren, uneko nabigazio-abiaduraren eta nabigazio-abiadura lehenetsiaren araberakoa da.</string>
     <string name="shared_string_turn">Bira</string>
@@ -5351,11 +5351,27 @@
     <string name="help_article_navigation_guidance_name">Gida</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Ahots-abisuak / Jakinarazpenak</string>
     <string name="help_article_navigation_routing_name">Ibilbidearen parametroak</string>
-    <string name="release_4_6">• Glide Ratio Widget
+    <string name="release_4_6">• Android Auto: 3D modua gehitu da
 \n
-\n • ANT+ tenperatura trepeta gehitu da
+\n • Pistak: iragazkiak eta karpeta adimendunak sartu dira, memoria optimizatu fitxategi handiagoetarako
 \n
-\n • Memoria-kudeaketa hobea GPX ibilbide handietarako
+\n • Goiko eta beheko trepeten-panel hobetuak trepeta guztietara egokitzeko
+\n
+\n • Tokiko baliabideen kudeaketa hobetu
+\n
+\n • Kanpoko kontrolagailuentzako botoien mapa pertsonalizagarria
+\n
+\n • Trepeta berriak: \"Glide ratioa\" eta \"Eguzkiaren posizioa\"
+\n
+\n • OsmAnd Cloud: orain sartu ezabatutako fitxategiak
+\n
+\n • Pistaren kolore hobetua Malda moduan, gradiente simetriko berriarekin
+\n
+\n • Egoera-barra gardenarekin arazoak konpondu dira
+\n
+\n • ANT+ tenperatura trepetarako laguntza gehitu da
+\n
+\n • \"Available RAM\" trepeta sartu da
 \n
 \n</string>
     <string name="sensor_temperature_desc">Sentsorearen tenperatura erakusten du</string>
@@ -5518,4 +5534,54 @@
     <string name="shared_string_is_deleted">%1$s ezabatu da.</string>
     <string name="cloud_item_restored">%1$s hodeitik leheneratu da.</string>
     <string name="shared_string_delete_item">Ezabatu elementua</string>
+    <string name="empty_smart_folder_title">Ez dago bat datorren arrastorik</string>
+    <string name="smart_folder_name_present">Karpeta adimenduna dagoeneko badago</string>
+    <string name="root_folder">Erro karpeta</string>
+    <string name="shared_string_cache">Cache</string>
+    <string name="empty_smart_folder_description">Bat datozen arrasto guztiak automatikoki agertuko dira hemen</string>
+    <string name="lang_zh_hans">Txinera sinplifikatua</string>
+    <string name="configure_filter">Iragazkia konfiguratu</string>
+    <string name="all_folders">Karpeta guztiak</string>
+    <string name="widget_available_ram_desc">OsmAnd-i esleitutako memoria erabilgarria bistaratzen du.</string>
+    <string name="sort_size_descending">Tamaina handikoa lehenik</string>
+    <string name="smart_folder_saved">Karpeta adimenduna gorde da</string>
+    <string name="delete_map">Ezabatu mapa</string>
+    <string name="standard_maps">Mapa estandarrak</string>
+    <string name="shared_string_show_less">Erakutsi gutxiago</string>
+    <string name="folder">Karpeta</string>
+    <string name="delete_all_items">Ezabatu elementu guztiak</string>
+    <string name="shared_string_created">Sortuta</string>
+    <string name="no_config_smart_folder_title">Konfiguratu gabe</string>
+    <string name="trash_is_empty_banner_desc">OsmAnd Cloud-etik kendutako fitxategiak hemen egongo dira eskuragarri %1$s egun igaro arte.</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia eta Bidaia mapak</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d arrasto)</item>
+        <item quantity="other">%1$d (%2$d arrasto)</item>
+    </plurals>
+    <string name="add_smart_folder">Gehitu karpeta adimenduna</string>
+    <string name="empty_name">Izen hutsa</string>
+    <string name="rendering_styles">Errendatzeko estiloak</string>
+    <string name="sort_country_name_ascending">Herrialdearen izena: A – Z</string>
+    <string name="discard_filter_changes">Baztertu iragazkien aldaketak</string>
+    <string name="lang_zh_hant">Txinerar tradizionala</string>
+    <string name="save_as_smart_folder">Gorde karpeta adimendun gisa</string>
+    <string name="weather_online">Eguraldia sarean</string>
+    <string name="shared_string_empty_trash">Hustu zakarrontzia</string>
+    <string name="shared_string_show_icon">Erakutsi ikonoa</string>
+    <string name="map_is_up_to_date">%1$s mapa eguneratuta dago.</string>
+    <string name="shared_string_loading">Kargatzen</string>
+    <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du.</string>
+    <string name="sort_size_ascending">Tamaina txikikoa lehenik</string>
+    <string name="trash_alert_card_desc">Zakarrontziko elementuak %1$s egun igaro ondoren ezabatuko dira.</string>
+    <string name="discard_filter_changes_prompt">Ziur iragazki guztiak berrezarri nahi dituzula?</string>
+    <string name="no_config_smart_folder_description">Karpeta adimendunek arrastoak iragazkien arabera taldekatzeko aukera ematen dute</string>
+    <string name="widget_available_ram">RAM erabilgarria</string>
+    <string name="trash_is_empty">Zakarrontzia hutsa dago</string>
+    <string name="terrain_maps">Lurreko mapak</string>
+    <string name="shared_string_trash">Zakarrontzia</string>
+    <string name="loading_tracks">Arrastoak birkargatzen</string>
+    <string name="sort_country_name_descending">Herrialdearen izena: Z - A</string>
+    <string name="delete_map_description">Ziur %1$s mapa ezabatu nahi duzula?</string>
+    <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
+    <string name="maps_and_resources">Mapa eta baliabideak</string>
 </resources>
