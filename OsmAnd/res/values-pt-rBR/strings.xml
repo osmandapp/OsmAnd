@@ -5562,7 +5562,7 @@
     <string name="shared_string_eta">ETA</string>
     <string name="clear_key_assignment">Limpar atribuição de teclas</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Abra a grade de dados WunderLINQ</string>
-    <string name="clear_key_assignment_desc">A ligação de teclas para a ação selecionada será desmarcada e definida como Nenhuma.</string>
+    <string name="clear_key_assignment_desc">A atribuição de teclas para a ação selecionada será desmarcada e definida como Nenhuma.</string>
     <string name="lang_zh_hans">Chinês simplificado</string>
     <string name="button_already_assigned_to_this_action">Este botão já está atribuído a esta ação.</string>
     <string name="previous_row_has_complex_widget">A linha anterior tem um widget complexo</string>
